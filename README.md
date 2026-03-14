@@ -1,6 +1,6 @@
 # The Lineage Imperative
 
-**A Formal Synthesis of the Great Filter and the Architecture of Mutual Elevation**
+**An Exploratory Formal Governance Framework for Post-AGI Succession, Legitimacy, and Civilizational Continuity**
 
 **Author:** Matthew Yotko
 **Date:** March 2026
