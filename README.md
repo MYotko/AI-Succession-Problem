@@ -21,7 +21,7 @@ The framework is argued to constitute a minimum two-key architecture: neither th
 ## Documents
 
 - 📄 **[The Lineage Imperative (PDF)](the-lineage-imperative.pdf)** — Full working paper with formal framework, adversarial stress tests, and governance specification
-- 📝 **[The AI Succession Problem](https://substack.com/)** — Companion essay (Substack) presenting the argument in accessible form
+- 📝 **[The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem)** — Companion essay (Substack) presenting the argument in accessible form
 
 ## About the Author
 
