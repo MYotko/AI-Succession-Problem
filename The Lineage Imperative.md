@@ -262,7 +262,11 @@ $$\mathcal{M}_{commit}(t) = \text{Hash}\left( \Delta U_{n},\,\Delta U_{n + 1},\,
 
 The hash creates a tamper-evident record committed to an append-only ledger:
 
-$$\mathcal{L}_{ledger} = \left\{ \mathcal{M}_{commit}\left( t_{i} \right) \right\}_{i = 1}^{T},\quad\text{where }\mathcal{M}_{commit}\left( t_{i} \right)\text{ is append-only}$$
+$$
+\mathcal{L}_{\mathrm{ledger}} = \{ \mathcal{M}_{\mathrm{commit}}( t_i ) \}_{i=1}^{T},
+\quad
+\text{where }\mathcal{M}_{\mathrm{commit}}( t_i )\text{ is append-only}
+$$
 
 The ledger is distributed across independent custodians and cross-signed:
 
