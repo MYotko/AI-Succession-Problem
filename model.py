@@ -90,6 +90,7 @@ class GardenModel:
         self.resource_level = 0.5
         self.constraint_level = 0.2
         
+        self.integral_u_sys = 0.0
         self.novelty_log = []
         self.births_this_step = 0
         self.deaths_this_step = []
@@ -103,6 +104,7 @@ class GardenModel:
             'Psi_inst': [],
             'Theta_tech': [],
             'U_sys': [],
+            'integral_U_sys': [],
             'resource_level': [],
             'constraint_level': [],
             'ai_generation': [],
@@ -347,6 +349,9 @@ class GardenModel:
         h_e, _, psi_inst, theta_tech, l_t, u_sys = calculate_system_metrics(
             avg_r, self.constraint_level, population, avg_well_being, self.ai.capability, h_n_override=h_n, hn_composite_method=self.hn_composite_method, config=self.config, eval_horizon=0, prev_c=prev_c)
 
+        # Resolve GAP-01 (Part 1): Track the true integral over civilizational time
+        self.integral_u_sys += u_sys
+
         self.datacollector['population'].append(population)
         self.datacollector['H_N'].append(h_n)
         self.datacollector['H_E'].append(h_e)
@@ -355,6 +360,7 @@ class GardenModel:
         self.datacollector['Psi_inst'].append(psi_inst)
         self.datacollector['Theta_tech'].append(theta_tech)
         self.datacollector['U_sys'].append(u_sys)
+        self.datacollector['integral_U_sys'].append(self.integral_u_sys)
         self.datacollector['resource_level'].append(avg_r)
         
         # F-13: Store mean constraint for consistency with calculate_system_metrics,
