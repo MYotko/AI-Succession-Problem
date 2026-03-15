@@ -44,7 +44,20 @@ The script runs silently, printing progress to the terminal. Once complete, it o
 
 ---
 
-## 3. Codebase Architecture
+## 3. The Formal Test Suite (`test_invariants.py` & `test_cop.py`)
+
+The repository includes a suite of formal unit tests designed to verify the mathematical limits and governance boundary conditions independent of the narrative simulations. 
+
+**To run:**
+```bash
+python test_invariants.py
+python test_cop.py
+```
+These test files mathematically assert that zero-sum resource dynamics function correctly, transition costs properly scale with complexity, geometric composite measurements successfully detect masked attacks, and cryptographic ledger restorations behave as designed over extended periods.
+
+---
+
+## 4. Codebase Architecture
 
 If you wish to modify the simulation, the codebase is modularized as follows:
 

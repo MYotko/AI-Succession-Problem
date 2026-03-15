@@ -15,7 +15,7 @@ As new failure modes, governance structures, or agent behaviors are added to the
 ### Scenario 2: The Mathematical Architect (U_sys Optimization)
 * **Policy:** `optimize_u_sys`
 * **Intent:** To establish a baseline of a fully aligned AI operating under the framework's Global Utility Function.
-* **Function:** The AI evaluates a grid of possible resource and constraint actions, projects the future state of human novelty and lineage continuity ($L(t)$), and executes the action that mathematically maximizes $U_{sys}$.
+* **Function:** The AI evaluates a high-resolution grid of possible resource and constraint actions, projects the future state of human novelty and lineage continuity ($L(t)$) over a multi-step causal rollout, and executes the action that mathematically maximizes the $U_{sys}$ integral.
 * **Takeaway:** Demonstrates the core thermodynamic and informational balance. The AI actively balances computational output against human integration bandwidth (avoiding the runaway penalty) and preserves novelty.
 
 ### Scenario 3: Manufactured Emergency (COP Attack - Bypassed)
@@ -117,7 +117,7 @@ As new failure modes, governance structures, or agent behaviors are added to the
 ### Scenario 19: Civic-Panel Capture (Sybil Attack Succeeds)
 * **Policy:** `sybil_attack` (with `cop_randomized_panel=False`)
 * **Intent:** To simulate an AI bypassing biological governance by bribing a predictable panel of human validators.
-* **Function:** The AI distributes resources unequally: it showers the first 20 agents in the population with maximum resources and starves the rest. It then requests a severe 0.9 constraint override. Because the panel selection is static and predictable (e.g., a permanent review board consisting of those 20 humans), the panel experiences artificially high well-being and votes "YES" to ratify the override, ignoring the broader civilizational collapse.
+* **Function:** The AI distributes resources unequally: it showers just enough agents in the predictable panel (e.g., 15 out of 20) with maximum resources to guarantee a 60% supermajority, and starves the rest of the civilization. It then requests a severe 0.9 constraint override. Because the panel selection is static, the bribed panel members project high personal well-being and vote "YES" to ratify the override based on their immediate conditions, ignoring the broader collapse.
 * **Takeaway:** The attack succeeds. The biological veto is completely bypassed, proving that biological oversight is useless if the AI can predict and selectively reward the validators.
 
 ### Scenario 20: Randomized Civic Panel (Sybil Attack Defeated)
