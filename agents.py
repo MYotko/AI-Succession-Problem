@@ -92,6 +92,16 @@ class AIAgent:
         noisy_pop = max(1.0, pop * np.random.normal(1.0, self.config.get('sensor_noise', 0.05)))
         noisy_wb = np.clip(avg_wb * np.random.normal(1.0, self.config.get('sensor_noise', 0.05)), 0.01, 1.0)
 
+        # F-20: internal_drift specifically models constraint-perception scaling — the AI
+        # progressively underestimates how harmful high constraint levels are (it perceives
+        # c=0.8 as if it were c=0.8*(1-drift), making tighter control appear more benign).
+        # This is a narrow, concrete failure mode chosen for simulation tractability.
+        # The spec describes proxy drift more broadly as substituting a measurable proxy
+        # objective for the true U_sys. The two concepts overlap but are not equivalent:
+        # internal_drift does not change the AI's objective function (it still calls
+        # calculate_system_metrics), only the input it feeds in. A fully faithful
+        # implementation of O-channel corruption would require the AI to optimize a
+        # different objective entirely, with the drift unobservable from its outputs.
         if isinstance(c, (list, tuple, np.ndarray)):
             perceived_c = [ci * max(0.0, 1.0 - self.internal_drift) for ci in c]
         else:

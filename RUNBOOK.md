@@ -79,3 +79,33 @@ Because the simulation generates many files, they are safely ignored by `.gitign
 ```bash
 rm *.png *.csv
 ```
+
+---
+
+## 5. Specification Fidelity
+
+This simulation is a computational model of *The Lineage Imperative* framework, not a
+direct implementation of its formal mathematical specification. Several core metrics use
+proxy substitutions where the specified quantity requires architectural components not
+present in this ABM. The scenarios demonstrate the framework's governance *concepts*
+faithfully, but the underlying mathematical constructs differ from the spec in ways that
+matter for interpreting quantitative outputs.
+
+The complete analysis of all known gaps — their spec definition, implementation approach,
+divergence, simulation impact, and resolution requirements — is documented in:
+
+**[SPECIFICATION_GAPS.md](./SPECIFICATION_GAPS.md)**
+
+The four gaps in brief:
+
+| Gap    | Affected Metric | Nature of Proxy                                        |
+|--------|-----------------|--------------------------------------------------------|
+| GAP-01 | U_sys           | Per-step snapshot instead of time-integral             |
+| GAP-02 | H_eff           | Per-capita novelty rate instead of diversity entropy   |
+| GAP-03 | Ψ_inst          | Constraint-change-rate penalty instead of institutional throughput |
+| GAP-04 | COP conditions  | R_tech and peer validators omitted from both paths     |
+
+All four gaps are marked inline in source code with `GAP-0N` markers so they can be
+found quickly. The gaps do not invalidate the scenario narratives or the ordinal
+comparisons between attack and defense runs, but they do mean that absolute metric
+values and monoculture-specific claims should be interpreted with caution.

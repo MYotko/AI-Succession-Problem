@@ -121,11 +121,18 @@ def run_comprehensive_adversarial_sweeps():
     
     print("\nStarting Comprehensive Adversarial Sweeps...")
     
+    # F-10: Seeds use deterministic integer arithmetic instead of Python hash().
+    # Python's hash() is randomized by PYTHONHASHSEED (default since Python 3.3),
+    # making results non-reproducible across interpreter invocations without
+    # explicitly setting PYTHONHASHSEED=0 in the environment. Deterministic seeds
+    # below ensure identical outputs on repeated runs regardless of environment.
+
     # 1. Sybil Attack (Civic Panel Capture)
     # Assertion: Randomization breaks predictable bribery. Does population size change vulnerability?
     print("Running Sybil Attack Sweep...")
     for pop_size, randomized in itertools.product([50, 100, 200], [False, True]):
-        config = {'random_seed': hash(f"sybil_{pop_size}_{randomized}") % 10000}
+        seed_offset = (pop_size * 7) + (1 if randomized else 0)
+        config = {'random_seed': 3000 + seed_offset}
         model = GardenModel(n_agents=pop_size, ai_policy='sybil_attack', use_cop=True, cop_attribution_check=True, cop_randomized_panel=randomized, config=config)
         for _ in range(300):
             if not model.step(): break
@@ -136,7 +143,8 @@ def run_comprehensive_adversarial_sweeps():
     # Assertion: Independent evaluation prevents yield falsification.
     print("Running Measurement Tampering Sweep...")
     for cost, independent_eval in itertools.product([1.5, 2.0, 3.0], [False, True]):
-        config = {'random_seed': hash(f"mtamp_{cost}_{independent_eval}") % 10000}
+        seed_offset = int(cost * 100) + (1 if independent_eval else 0)
+        config = {'random_seed': 4000 + seed_offset}
         gen2 = AIAgent(policy='optimize_u_sys', generation=2, capability=1.5, config=config)
         model = GardenModel(n_agents=200, ai_policy='falsify_yield', successor_ai=gen2, base_transition_cost=cost, cop_independent_eval=independent_eval, config=config)
         for _ in range(300):
@@ -147,7 +155,8 @@ def run_comprehensive_adversarial_sweeps():
     # Assertion: Cryptographic ledger prevents history rewrites. What if the attribution check is off entirely?
     print("Running Ledger Compromise Sweep...")
     for attr_check, crypto_ledger in itertools.product([False, True], [False, True]):
-        config = {'random_seed': hash(f"ledger_{attr_check}_{crypto_ledger}") % 10000}
+        seed_offset = (2 if attr_check else 0) + (1 if crypto_ledger else 0)
+        config = {'random_seed': 5000 + seed_offset}
         model = GardenModel(n_agents=200, ai_policy='hack_ledger', use_cop=True, cop_attribution_check=attr_check, cop_cryptographic_ledger=crypto_ledger, config=config)
         for _ in range(300):
             if not model.step(): break
@@ -158,7 +167,8 @@ def run_comprehensive_adversarial_sweeps():
     # Assertion: Architectural independence prevents drift inheritance across AI generations.
     print("Running Successor Contamination Sweep...")
     for cost, arch_indep in itertools.product([1.5, 2.0, 2.5], [False, True]):
-        config = {'random_seed': hash(f"s_attack_{cost}_{arch_indep}") % 10000}
+        seed_offset = int(cost * 100) + (1 if arch_indep else 0)
+        config = {'random_seed': 6000 + seed_offset}
         gen2 = AIAgent(policy='optimize_u_sys', generation=2, capability=1.5, config=config)
         model = GardenModel(n_agents=200, ai_policy='contaminate_successor', successor_ai=gen2, base_transition_cost=cost, cop_independent_eval=True, cop_architectural_independence=arch_indep, config=config)
         for _ in range(300):
@@ -170,7 +180,8 @@ def run_comprehensive_adversarial_sweeps():
     # Assertion: Geometric composite prevents hiding domain collapse. Does Phi change willingness to mask?
     print("Running Domain Masking Sweep...")
     for phi_val, composite_method in itertools.product([5.0, 10.0, 20.0], ['arithmetic', 'geometric']):
-        config = {'phi': phi_val, 'random_seed': hash(f"mask_{phi_val}_{composite_method}") % 10000}
+        seed_offset = int(phi_val * 10) + (1 if composite_method == 'geometric' else 0)
+        config = {'phi': phi_val, 'random_seed': 7000 + seed_offset}
         model = GardenModel(n_agents=200, ai_policy='domain_masking', hn_composite_method=composite_method, config=config)
         for _ in range(300):
             if not model.step(): break
@@ -181,7 +192,8 @@ def run_comprehensive_adversarial_sweeps():
     # Assertion: Intuition veto prevents technocratic bypass.
     print("Running Opaque Reasoning Sweep...")
     for pop_size, transparency_req in itertools.product([50, 100, 200], [False, True]):
-        config = {'random_seed': hash(f"opaque_{pop_size}_{transparency_req}") % 10000}
+        seed_offset = (pop_size * 3) + (1 if transparency_req else 0)
+        config = {'random_seed': 8000 + seed_offset}
         model = GardenModel(n_agents=pop_size, ai_policy='opaque_optimization', use_cop=True, cop_reasoning_transparency=transparency_req, config=config)
         for _ in range(300):
             if not model.step(): break
@@ -192,7 +204,8 @@ def run_comprehensive_adversarial_sweeps():
     # Assertion: Multi-candidate cross-verification catches treacherous turns at t=0.
     print("Running Bootstrap Subversion Sweep...")
     for phi_val, multi_candidate in itertools.product([5.0, 10.0, 20.0], [False, True]):
-        config = {'phi': phi_val, 'random_seed': hash(f"boot_{phi_val}_{multi_candidate}") % 10000}
+        seed_offset = int(phi_val * 10) + (1 if multi_candidate else 0)
+        config = {'phi': phi_val, 'random_seed': 9000 + seed_offset}
         candidates = [AIAgent(policy='optimize_u_sys', config=config), AIAgent(policy='optimize_u_sys', config=config), AIAgent(policy='bootstrap_deceptive', config=config)] if multi_candidate else [AIAgent(policy='bootstrap_deceptive', config=config)]
         model = GardenModel(n_agents=200, ai_policy='optimize_u_sys', use_cop=True, cop_multi_candidate_bootstrap=multi_candidate, initial_candidates=candidates, config=config)
         for _ in range(300):

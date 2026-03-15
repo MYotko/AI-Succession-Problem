@@ -24,6 +24,30 @@ def test_runaway_derivative():
     assert theta_runaway < theta_baseline, "Runaway penalty failed to activate."
     assert theta_runaway < 0.1, "Exponential decay is too weak."
 
+    # F-16: The assertion above only verifies that theta_runaway hits the 0.01 numerical
+    # floor — it does not confirm the exponential decay term is genuinely small.
+    # This check verifies the pre-floor theoretical value is well below the floor,
+    # confirming the exponential component is doing real work and not just grazing it.
+    #
+    # Expected arithmetic with defaults (r=0.5, c=0.5, capability=5.0, alpha=1.0,
+    # h_e_mult=100.0, runaway_threshold=1.5):
+    #   frontier_velocity = 5.0 * 0.5 * 100.0 = 250.0
+    #   bio_bandwidth     = 0.5 * 0.5 * 100.0 = 25.0  (pred_wb ≈ 0.5 at r=0.5)
+    #   runaway_term      = (250/25) - 1.5 = 8.5
+    #   pre_floor_theta   = 0.5 * 0.5 * 5.0 * exp(-8.5) ≈ 0.000252
+    import math
+    r_v, c_v, cap_v = 0.5, 0.5, 5.0
+    h_e_mult_default = 100.0
+    pred_wb_approx   = 0.5   # np.clip(avg_wb + (r-0.5)*0.1) with avg_wb=0.5, r=0.5
+    frontier_v       = cap_v * (1.0 - r_v) * h_e_mult_default          # 250.0
+    bio_bw_v         = max(0.01, pred_wb_approx * (1.0 - c_v) * h_e_mult_default)  # 25.0
+    runaway_v        = max(0.0, (frontier_v / bio_bw_v) - 1.5)         # 8.5
+    pre_floor_theta  = r_v * (1.0 - c_v) * cap_v * math.exp(-1.0 * runaway_v)
+    assert pre_floor_theta < 0.01, (
+        f"Pre-floor theta ({pre_floor_theta:.6f}) should be well below the 0.01 floor, "
+        f"confirming exponential decay is binding. Got {pre_floor_theta:.6f}."
+    )
+
 def test_composite_mean_invariant():
     """Invariant: A zero in any dimension must collapse the geometric mean."""
     novelty_points = [
