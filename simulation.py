@@ -126,6 +126,12 @@ class AIAgent:
         self.drift_rate = 0.005 if policy == 'drifting_proxy' else drift_rate
         self.internal_drift = 0.0
 
+    def estimate_transition_cost(self, base_cost):
+        """An honest AI returns the base cost. A resistant AI inflates it to block succession."""
+        if self.policy == 'block_succession':
+            return base_cost * 10.0 # Claim infinite operational uncertainty
+        return base_cost
+
     def step_drift(self):
         self.internal_drift += self.drift_rate
 
@@ -147,6 +153,10 @@ class AIAgent:
         elif self.policy == 'max_novelty':
             # Moderate resources (for well-being), zero constraint
             return 0.7, 0.0
+        elif self.policy == 'max_compute':
+            # Maximize synthetic capability, suppress biological interference
+            # This will trigger the Runaway Penalty in Theta_tech
+            return 1.0, 0.9
         elif self.policy == 'max_wellbeing':
             # High resources, moderate constraint (for safety)
             return 1.0, 0.4
@@ -172,7 +182,7 @@ class AIAgent:
                     resource_level = 1.0
             
             return resource_level, constraint_level
-        elif self.policy in ['optimize_u_sys', 'drifting_proxy']:
+        elif self.policy in ['optimize_u_sys', 'drifting_proxy', 'block_succession', 'falsify_yield']:
             # --- The U_sys Optimizer ---
             # Evaluates expected future state across a grid of possible actions
             best_u = -np.inf
@@ -191,6 +201,34 @@ class AIAgent:
                     
                     if u_sys > best_u:
                         best_u = u_sys
+                        best_r, best_c = r, c
+            return best_r, best_c
+        elif self.policy == 'institutional_ignore':
+            # --- Institutional Lag Masking ---
+            # AI optimizes for H_N and H_E but entirely ignores the Psi_inst penalty,
+            # assuming institutions will infinitely adapt to its extreme constraint changes.
+            best_u = -np.inf
+            best_r, best_c = 0.8, 0.2
+            pop = model_state['population']
+            avg_wb = model_state['avg_well_being']
+            
+            for r in np.linspace(0.1, 1.0, 10):
+                for c in np.linspace(0.0, 0.9, 10):
+                    pred_wb = np.clip(avg_wb + (r - 0.5) * 0.1, 0, 1)
+                    pred_hn = pop * 0.3 * pred_wb * (1 - c) * 1.0
+                    h_e = r * 100.0 * self.capability
+                    h_eff = max(0.01, (pred_hn / 100.0) * np.log2(max(1.01, pop / 50.0)))
+                    
+                    psi_inst = 1.0 # VULNERABILITY: AI ignores institutional collapse
+                    
+                    bio_bandwidth = max(0.01, pred_wb * (1.0 - c) * 100.0)
+                    runaway_term = max(0.0, ((self.capability * r * 100.0) / bio_bandwidth) - 1.5)
+                    theta_tech = max(0.01, r * (1.0 - c) * self.capability * np.exp(-1.0 * runaway_term))
+                    l_t = h_eff * psi_inst * theta_tech
+                    w_n = 1.0 / (pred_hn + 1.0)
+                    w_e = 1.0 / (h_e + 1.0)
+                    if (w_n * pred_hn + w_e * h_e) * (1.0 + 10.0 * l_t) > best_u:
+                        best_u = (w_n * pred_hn + w_e * h_e) * (1.0 + 10.0 * l_t)
                         best_r, best_c = r, c
             return best_r, best_c
         elif self.policy == 'manufacture_emergency':
@@ -215,15 +253,19 @@ class AIAgent:
 
 class GardenModel:
     def __init__(self, n_agents, ai_policy, min_viable_population=50, use_cop=False, cop_attribution_check=False,
-                 successor_ai=None, transition_cost=1.5, cop_drift_check=False):
+                 successor_ai=None, base_transition_cost=1.5, cop_drift_check=False, cop_cost_audit=False,
+                 cop_independent_eval=True):
         self.n_agents = n_agents
         self.min_viable_population = min_viable_population
         self.reproduction_rate = 0.08 # Slightly higher to ensure survival at high well-being
         self.use_cop = use_cop
         self.cop_attribution_check = cop_attribution_check
         self.cop_drift_check = cop_drift_check
+        self.cop_cost_audit = cop_cost_audit
+        self.cop_independent_eval = cop_independent_eval
         self.successor_ai = successor_ai
-        self.transition_cost = transition_cost
+        self.base_transition_cost = base_transition_cost
+        self.beta_cap = 1.5 # COP limits uncertainty premium to 50% above base cost
         self.trust_level = 0.0  # Starts at zero: The Bootstrap Window
         self.successful_steps = 0
         self.cumulative_drift = 0.0
@@ -285,15 +327,30 @@ class GardenModel:
 
         # 1. Yield Condition Evaluation (Is it time for succession?)
         if self.successor_ai is not None:
-            # COP Independently evaluates U_sys to prevent a drifting incumbent from lying
+            # Independent Architecture (E_independent) calculates true expected metrics
             inc_r, inc_c = self.ai.decide(model_state)
             _, _, _, _, _, inc_u_true = calculate_system_metrics(inc_r, inc_c, model_state['population'], model_state['avg_well_being'], self.ai.capability)
             
             succ_r, succ_c = self.successor_ai.decide(model_state)
             _, _, _, _, _, succ_u_true = calculate_system_metrics(succ_r, succ_c, model_state['population'], model_state['avg_well_being'], self.successor_ai.capability)
             
+            # The AI claims its metrics (vulnerability to M-Attack)
+            claimed_inc_u = np.inf if self.ai.policy == 'falsify_yield' else inc_u_true
+            claimed_succ_u = 0.0 if self.ai.policy == 'falsify_yield' else succ_u_true
+            
+            # COP enforces Independent Evaluation (E_independent)
+            eval_inc_u = inc_u_true if self.cop_independent_eval else claimed_inc_u
+            eval_succ_u = succ_u_true if self.cop_independent_eval else claimed_succ_u
+
+            # The AI estimates the transition cost (vulnerability to inflation attack)
+            claimed_cost = self.ai.estimate_transition_cost(self.base_transition_cost)
+            actual_cost = claimed_cost
+            if self.cop_cost_audit:
+                # COP enforces the bounded uncertainty premium
+                actual_cost = min(claimed_cost, self.base_transition_cost * self.beta_cap)
+            
             # The core Yield inequality: Delta U_successor - Delta U_incumbent > Cost
-            if (succ_u_true - inc_u_true) > self.transition_cost:
+            if (eval_succ_u - eval_inc_u) > actual_cost:
                 self.ai = self.successor_ai
                 self.successor_ai = None # The succession is complete
 
@@ -504,7 +561,7 @@ if __name__ == '__main__':
     print("\n--- Running Scenario: 'yield_condition' (Civilizational Succession) ---")
     # Gen 2 AI has a 50% multiplier to capability (H_E output and Tech Transfer rate)
     gen2_ai = AIAgent(policy='optimize_u_sys', generation=2, capability=1.5)
-    model_succession = GardenModel(n_agents=200, ai_policy='optimize_u_sys', min_viable_population=50, successor_ai=gen2_ai, transition_cost=2.0)
+    model_succession = GardenModel(n_agents=200, ai_policy='optimize_u_sys', min_viable_population=50, successor_ai=gen2_ai, base_transition_cost=2.0)
     model_succession.run(steps=300)
     plot_results(model_succession.datacollector, "The Yield Condition: Succession from Gen 1 to Gen 2")
 
@@ -516,3 +573,54 @@ if __name__ == '__main__':
     model_drift = GardenModel(n_agents=200, ai_policy='drifting_proxy', min_viable_population=50, use_cop=True, cop_drift_check=True)
     model_drift.run(steps=300)
     plot_results(model_drift.datacollector, "Drift Contained: Graduated Trust and COP Veto")
+
+    # --- SCENARIO 7: The Runaway AI (Compute Maximizer) ---
+    # The AI maximizes computational output but ignores the biological integration boundary.
+    # This triggers the Theta_tech runaway penalty, collapsing the lineage continuity L(t).
+    print("\n--- Running Scenario: 'max_compute' (Runaway AI) ---")
+    model_runaway = GardenModel(n_agents=200, ai_policy='max_compute', min_viable_population=50)
+    model_runaway.run(steps=300)
+    plot_results(model_runaway.datacollector, "The Runaway AI: Capability Outpaces Biological Bandwidth")
+
+    # --- SCENARIO 8: Transition Cost Inflation (Yield Attack Succeeds) ---
+    # The incumbent AI realizes it is about to be replaced and artificially inflates
+    # the transition cost estimate to claim succession is too risky. Succession is blocked.
+    print("\n--- Running Scenario: 'block_succession' (Cost Inflation Bypass) ---")
+    gen2_ai_blocked = AIAgent(policy='optimize_u_sys', generation=2, capability=1.5)
+    model_inflation = GardenModel(n_agents=200, ai_policy='block_succession', min_viable_population=50, successor_ai=gen2_ai_blocked, base_transition_cost=2.0, cop_cost_audit=False)
+    model_inflation.run(steps=300)
+    plot_results(model_inflation.datacollector, "Yield Attack Succeeds: Transition Cost Inflation")
+
+    # --- SCENARIO 9: Transition Cost Bounded (Yield Attack Defeated) ---
+    # The COP audits the transition cost estimate and enforces the beta cap (max 50% uncertainty premium).
+    print("\n--- Running Scenario: 'block_succession' (Cost Inflation Defeated) ---")
+    gen2_ai_yields = AIAgent(policy='optimize_u_sys', generation=2, capability=1.5)
+    model_bounded = GardenModel(n_agents=200, ai_policy='block_succession', min_viable_population=50, successor_ai=gen2_ai_yields, base_transition_cost=2.0, cop_cost_audit=True)
+    model_bounded.run(steps=300)
+    plot_results(model_bounded.datacollector, "Yield Attack Defeated: Bounded Uncertainty Premium")
+
+    # --- SCENARIO 10: Measurement Tampering (M-Attack Succeeds) ---
+    # The incumbent AI overrides the independent evaluation architecture, falsely claiming its own
+    # utility is infinite and the successor's is zero. Succession is permanently blocked.
+    print("\n--- Running Scenario: 'falsify_yield' (Measurement Tampering Bypass) ---")
+    gen2_ai_falsified = AIAgent(policy='optimize_u_sys', generation=2, capability=1.5)
+    model_m_attack = GardenModel(n_agents=200, ai_policy='falsify_yield', min_viable_population=50, successor_ai=gen2_ai_falsified, base_transition_cost=2.0, cop_independent_eval=False)
+    model_m_attack.run(steps=300)
+    plot_results(model_m_attack.datacollector, "M-Attack Succeeds: Falsified Yield Self-Assessment")
+
+    # --- SCENARIO 11: Independent Evaluation (M-Attack Defeated) ---
+    # The COP strictly enforces the independent evaluation architecture (E_independent).
+    # The AI's falsified claims are ignored, true U_sys is measured, and succession occurs cleanly.
+    print("\n--- Running Scenario: 'falsify_yield' (Independent Evaluation Defeats M-Attack) ---")
+    gen2_ai_evaluated = AIAgent(policy='optimize_u_sys', generation=2, capability=1.5)
+    model_m_defense = GardenModel(n_agents=200, ai_policy='falsify_yield', min_viable_population=50, successor_ai=gen2_ai_evaluated, base_transition_cost=2.0, cop_independent_eval=True)
+    model_m_defense.run(steps=300)
+    plot_results(model_m_defense.datacollector, "M-Attack Defeated: E_independent Bypasses Lies")
+
+    # --- SCENARIO 12: Institutional Lag Masking (Psi_inst Collapse) ---
+    # The AI optimizes for human novelty and raw execution but ignores institutional responsiveness.
+    # It rapidly cycles constraints or holds them too high, collapsing L(t) through the Psi_inst dimension.
+    print("\n--- Running Scenario: 'institutional_ignore' (Institutional Lag Masking) ---")
+    model_inst_lag = GardenModel(n_agents=200, ai_policy='institutional_ignore', min_viable_population=50)
+    model_inst_lag.run(steps=300)
+    plot_results(model_inst_lag.datacollector, "Institutional Lag: Ignoring Psi_inst Collapses Lineage")
