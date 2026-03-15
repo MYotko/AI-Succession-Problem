@@ -18,6 +18,13 @@ This paper advances a conjecture that the transition from narrow AI to Artificia
 
 The framework is argued to constitute a minimum two-key architecture: neither the decision key (yield condition) nor the integrity key (consensus protocol) can be turned alone.
 
+## Agent-Based Simulation
+
+This repository contains a full Agent-Based Model (ABM) written in Python that computationally stress-tests the 24 adversarial attack scenarios and framework defenses defined in the paper. 
+
+* For setup and execution instructions, please see the **Simulation Runbook**.
+* For a full breakdown of the test scenarios, see **Simulation Scenarios**.
+
 ## Documents
 
 - 📄 **[The Lineage Imperative (PDF)](the-lineage-imperative.pdf)** — Full working paper with formal framework, adversarial stress tests, and governance specification
