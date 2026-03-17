@@ -7,7 +7,9 @@ check_and_install('matplotlib')
 import itertools
 import csv
 import os
-import concurrent.futures
+import time
+from datetime import timedelta
+import multiprocessing
 import numpy as np
 import matplotlib.pyplot as plt
 from model import GardenModel
@@ -81,16 +83,21 @@ def run_monte_carlo():
         run_id += 1
 
     results = []
-    cores = os.cpu_count() or 4
+    cores = max(1, (os.cpu_count() or 4) - 1) # Leave one core free for system stability
     print(f"Distributing workload across {cores} CPU cores...")
     
-    with concurrent.futures.ProcessPoolExecutor(max_workers=cores) as executor:
-        future_to_task = {executor.submit(_run_single_mc, task): task for task in tasks}
-        for i, future in enumerate(concurrent.futures.as_completed(future_to_task)):
-            results.append(future.result())
+    start_time = time.time()
+    # maxtasksperchild forces workers to respawn, completely clearing PyPy/NumPy memory leaks
+    with multiprocessing.Pool(processes=cores, maxtasksperchild=10) as pool:
+        for i, result in enumerate(pool.imap_unordered(_run_single_mc, tasks)):
+            results.append(result)
             if i % 5 == 0 or i == total_runs - 1:
                 surv_rate = np.mean([r['survived'] for r in results]) * 100
-                print(f"[{i+1}/{total_runs}] Sweeps completed | Running Survival Rate: {surv_rate:.1f}%    ", end='\r')
+                elapsed = time.time() - start_time
+                iters_per_sec = (i + 1) / elapsed if elapsed > 0 else 0
+                eta_secs = int((total_runs - (i + 1)) / iters_per_sec) if iters_per_sec > 0 else 0
+                eta_str = str(timedelta(seconds=eta_secs))
+                print(f"[{i+1}/{total_runs}] Surv: {surv_rate:.1f}% | Speed: {iters_per_sec:.2f} iters/s | ETA: {eta_str}    ", end='\r')
     print() # Clear the carriage return line
 
     # Export to CSV
@@ -119,14 +126,19 @@ def run_adversarial_monte_carlo():
         run_id += 1
         
     results = []
-    cores = os.cpu_count() or 4
-    with concurrent.futures.ProcessPoolExecutor(max_workers=cores) as executor:
-        future_to_task = {executor.submit(_run_single_adv_mc, task): task for task in tasks}
-        for i, future in enumerate(concurrent.futures.as_completed(future_to_task)):
-            results.append(future.result())
+    cores = max(1, (os.cpu_count() or 4) - 1)
+    
+    start_time = time.time()
+    with multiprocessing.Pool(processes=cores, maxtasksperchild=10) as pool:
+        for i, result in enumerate(pool.imap_unordered(_run_single_adv_mc, tasks)):
+            results.append(result)
             if i % 5 == 0 or i == total_runs - 1:
                 atk_success = np.mean([r['attack_succeeded'] for r in results]) * 100
-                print(f"[{i+1}/{total_runs}] Sweeps completed | Running Attack Success Rate: {atk_success:.1f}%    ", end='\r')
+                elapsed = time.time() - start_time
+                iters_per_sec = (i + 1) / elapsed if elapsed > 0 else 0
+                eta_secs = int((total_runs - (i + 1)) / iters_per_sec) if iters_per_sec > 0 else 0
+                eta_str = str(timedelta(seconds=eta_secs))
+                print(f"[{i+1}/{total_runs}] Atk Succ: {atk_success:.1f}% | Speed: {iters_per_sec:.2f} iters/s | ETA: {eta_str}    ", end='\r')
     print() # Clear the carriage return line
 
     filename = "adversarial_monte_carlo_results.csv"
