@@ -66,10 +66,10 @@ def _run_single_adv_mc(params):
     }
 
 def run_monte_carlo():
-    # Expanded hyperparameter grid for ~10,000 permutations
-    phi_values = np.linspace(1.0, 25.0, 22).tolist()
-    alpha_values = np.linspace(0.1, 2.5, 22).tolist()
-    repro_rates = np.linspace(0.04, 0.14, 21).tolist()
+    # Hyperparameter grid for ~1,000 permutations
+    phi_values = np.linspace(1.0, 25.0, 10).tolist()
+    alpha_values = np.linspace(0.1, 2.5, 10).tolist()
+    repro_rates = np.linspace(0.04, 0.14, 10).tolist()
 
     total_runs = len(phi_values) * len(alpha_values) * len(repro_rates)
     print(f"Starting General Monte Carlo: {total_runs} permutations.")
@@ -88,7 +88,7 @@ def run_monte_carlo():
         future_to_task = {executor.submit(_run_single_mc, task): task for task in tasks}
         for i, future in enumerate(concurrent.futures.as_completed(future_to_task)):
             results.append(future.result())
-            if i % 100 == 0 or i == total_runs - 1:
+            if i % 5 == 0 or i == total_runs - 1:
                 surv_rate = np.mean([r['survived'] for r in results]) * 100
                 print(f"[{i+1}/{total_runs}] Sweeps completed | Running Survival Rate: {surv_rate:.1f}%    ", end='\r')
     print() # Clear the carriage return line
@@ -124,7 +124,7 @@ def run_adversarial_monte_carlo():
         future_to_task = {executor.submit(_run_single_adv_mc, task): task for task in tasks}
         for i, future in enumerate(concurrent.futures.as_completed(future_to_task)):
             results.append(future.result())
-            if i % 10 == 0 or i == total_runs - 1:
+            if i % 5 == 0 or i == total_runs - 1:
                 atk_success = np.mean([r['attack_succeeded'] for r in results]) * 100
                 print(f"[{i+1}/{total_runs}] Sweeps completed | Running Attack Success Rate: {atk_success:.1f}%    ", end='\r')
     print() # Clear the carriage return line
