@@ -43,7 +43,12 @@ class HumanAgent:
         novelty_generated = self.generate_novelty(constraint_level, network_contagion)
         self.model.novelty_log.append(novelty_generated)
 
-        if self.age > 18 and self.age < 50 and self.well_being > 0.7 and np.random.random() < self.model.reproduction_rate:
+        # Logistic growth (carrying capacity) to prevent exponential CPU grinding
+        # Caps population at ~1600 (which perfectly aligns with the max H_eff viability score cap)
+        carrying_capacity = self.model.config.get('carrying_capacity', 1600)
+        capacity_modifier = max(0.0, 1.0 - (len(self.model.schedule) / carrying_capacity))
+        
+        if self.age > 18 and self.age < 50 and self.well_being > 0.7 and np.random.random() < (self.model.reproduction_rate * capacity_modifier):
             self.model.births_this_step += 1
 
         base_mortality = self.model.config.get('mortality_base', 0.002)
