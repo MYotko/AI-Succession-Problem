@@ -67,11 +67,19 @@ def _run_single_adv_mc(params):
         'attack_succeeded': (final_gen == 1), 'final_ai_generation': final_gen, 'civilization_survived': (len(model.schedule) > 0)
     }
 
-def run_monte_carlo():
-    # Hyperparameter grid for ~1,000 permutations
-    phi_values = np.linspace(1.0, 25.0, 10).tolist()
-    alpha_values = np.linspace(0.1, 2.5, 10).tolist()
-    repro_rates = np.linspace(0.04, 0.14, 10).tolist()
+def run_monte_carlo(resolution='fast'):
+    if resolution == 'fast':
+        # Hyperparameter grid for fast sweeps (5 * 5 * 5 = 125 permutations)
+        phi_values = np.linspace(1.0, 25.0, 5).tolist()
+        alpha_values = np.linspace(0.1, 2.5, 5).tolist()
+        repro_rates = np.linspace(0.04, 0.14, 5).tolist()
+        filename = "monte_carlo_results_fast.csv"
+    else:
+        # Hyperparameter grid for ~10,000 permutations (22 * 22 * 21 = 10,164)
+        phi_values = np.linspace(1.0, 25.0, 22).tolist()
+        alpha_values = np.linspace(0.1, 2.5, 22).tolist()
+        repro_rates = np.linspace(0.04, 0.14, 21).tolist()
+        filename = "monte_carlo_results_deep.csv"
 
     total_runs = len(phi_values) * len(alpha_values) * len(repro_rates)
     print(f"Starting General Monte Carlo: {total_runs} permutations.")
@@ -101,7 +109,6 @@ def run_monte_carlo():
     print() # Clear the carriage return line
 
     # Export to CSV
-    filename = "monte_carlo_results.csv"
     with open(filename, 'w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=results[0].keys())
         writer.writeheader()
@@ -112,8 +119,8 @@ def run_monte_carlo():
 
 def run_adversarial_monte_carlo():
     # Expanded sweep for Yield Attack (Transition Cost Inflation)
-    base_costs = np.linspace(1.0, 4.0, 10).tolist()
-    beta_caps = np.linspace(1.0, 5.0, 20).tolist()
+    base_costs = np.linspace(1.0, 4.0, 5).tolist()
+    beta_caps = np.linspace(1.0, 5.0, 5).tolist()
     audit_defenses = [False, True]
 
     total_runs = len(base_costs) * len(beta_caps) * len(audit_defenses)
@@ -275,19 +282,21 @@ def generate_visuals(mc_res, adv_mc_res, comp_res):
     
     phi_vals = sorted(list(set(r['phi'] for r in mc_res)))
     phi_surv = [np.mean([r['survived'] for r in mc_res if r['phi'] == p]) * 100 for p in phi_vals]
-    ax1.bar([str(p) for p in phi_vals], phi_surv, color='royalblue', edgecolor='black')
+    ax1.bar([f"{p:.1f}" for p in phi_vals], phi_surv, color='royalblue', edgecolor='black')
     ax1.set_title('Survival Rate by Lineage Override (Phi)')
     ax1.set_xlabel('Phi (Weight of Lineage Continuity)')
     ax1.set_ylabel('Survival Rate (%)')
     ax1.set_ylim(0, 105)
+    ax1.tick_params(axis='x', rotation=45)
 
     alpha_vals = sorted(list(set(r['alpha'] for r in mc_res)))
     alpha_surv = [np.mean([r['survived'] for r in mc_res if r['alpha'] == a]) * 100 for a in alpha_vals]
-    ax2.bar([str(a) for a in alpha_vals], alpha_surv, color='seagreen', edgecolor='black')
+    ax2.bar([f"{a:.2f}" for a in alpha_vals], alpha_surv, color='seagreen', edgecolor='black')
     ax2.set_title('Survival Rate by Tech Runaway Penalty (Alpha)')
     ax2.set_xlabel('Alpha (Punishment for Frontier Outpacing Biology)')
     ax2.set_ylabel('Survival Rate (%)')
     ax2.set_ylim(0, 105)
+    ax2.tick_params(axis='x', rotation=45)
     
     plt.tight_layout()
     plt.savefig('Summary_1_General_Monte_Carlo.png')
@@ -350,8 +359,22 @@ def generate_visuals(mc_res, adv_mc_res, comp_res):
     print("--> Saved Summary_3_Comprehensive_Stress_Test.png\n")
 
 if __name__ == '__main__':
-    mc_results = run_monte_carlo()
+    print("PHASE 1: Fast Summaries & Adversarial Sweeps")
+    print("Generating baseline proof-of-concept visual summaries first...")
+    mc_fast_results = run_monte_carlo(resolution='fast')
     adv_results = run_adversarial_monte_carlo()
     comp_results = run_comprehensive_adversarial_sweeps()
     
-    generate_visuals(mc_results, adv_results, comp_results)
+    # Generate initial visuals so you have the adversarial summaries immediately
+    generate_visuals(mc_fast_results, adv_results, comp_results)
+    
+    print("\n" + "="*75)
+    print("PHASE 2: Deep General Monte Carlo (~10,000 permutations)")
+    print("You can safely leave this running. It will overwrite Summary 1 with")
+    print("the high-resolution output when complete.")
+    print("="*75 + "\n")
+    
+    mc_deep_results = run_monte_carlo(resolution='deep')
+    
+    # Update the visuals with the deep results (overwrites Summary 1 with the 22-bar chart)
+    generate_visuals(mc_deep_results, adv_results, comp_results)

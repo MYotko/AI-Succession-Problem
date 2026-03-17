@@ -160,9 +160,9 @@ class AIAgent:
             empirical_pop_growth = pop_hist[-1] / max(1.0, pop_hist[-2]) if len(pop_hist) >= 2 else 1.05
             empirical_pop_growth = np.clip(empirical_pop_growth, 0.9, 1.1)
             
-            # Increased grid search resolution from 10 to 20 for finer optimization
-            for r in np.linspace(0.1, 1.0, 20):
-                for c in np.linspace(0.0, 0.9, 20):
+            # Standard grid search resolution
+            for r in np.linspace(0.1, 1.0, 10):
+                for c in np.linspace(0.0, 0.9, 10):
                     try:
                         total_u = 0
                         sim_pop = pop
