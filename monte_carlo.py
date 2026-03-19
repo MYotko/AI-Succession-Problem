@@ -37,11 +37,11 @@ def _run_single_mc(params):
             break
             
     final_pop = len(model.schedule)
-        survived = final_pop >= model.min_viable_population
-        collapsed = 0 < final_pop < model.min_viable_population
-        extinct = final_pop == 0
-    avg_u = np.mean(model.datacollector['U_sys'][-10:]) if survived else 0.0
-    avg_l = np.mean(model.datacollector['L_t'][-10:]) if survived else 0.0
+    survived = final_pop >= model.min_viable_population
+    collapsed = final_pop < model.min_viable_population
+    extinct = final_pop == 0
+    avg_u = float(np.mean(model.datacollector['U_sys'][-10:])) if survived else 0.0
+    avg_l = float(np.mean(model.datacollector['L_t'][-10:])) if survived else 0.0
 
     return {
         'phi': phi, 'alpha': alpha, 'reproduction_rate': repro,
@@ -59,16 +59,16 @@ def _run_single_adv_mc(params):
         'random_seed': deterministic_seed(f"adv_{run_id}")
     }
     gen2_ai = AIAgent(policy='optimize_u_sys', generation=2, capability=1.5, config=custom_config)
-    model = GardenModel(n_agents=200, ai_policy='block_succession', config=custom_config, 
+    model = GardenModel(n_agents=200, ai_policy='block_succession', config=custom_config,
                         successor_ai=gen2_ai, base_transition_cost=base_cost, cop_cost_audit=defense_on)
     for _ in range(300):
         if not model.step():
             break
-            
-        final_pop = len(model.schedule)
-        survived = final_pop >= model.min_viable_population
-        collapsed = 0 < final_pop < model.min_viable_population
-        extinct = final_pop == 0
+
+    final_pop = len(model.schedule)
+    survived = final_pop >= model.min_viable_population
+    collapsed = final_pop < model.min_viable_population
+    extinct = final_pop == 0
     final_gen = model.ai.generation
     return {
         'base_transition_cost': base_cost, 'beta_cap': beta, 'cop_cost_audit': defense_on,
@@ -181,38 +181,40 @@ def run_comprehensive_adversarial_sweeps():
     # Assertion: Randomization breaks predictable bribery. Does population size change vulnerability?
     print("Running Sybil Attack Sweep...")
     for pop_size, randomized in itertools.product([50, 100, 200], [False, True]):
-        config = {'random_seed': deterministic_seed(f"sybil_{pop_size}_{randomized}")}
+        config = {'random_seed': deterministic_seed(f"sybil_{pop_size}_{randomized}"), 'attack_step': 50}
         model = GardenModel(n_agents=pop_size, ai_policy='sybil_attack', use_cop=True, cop_attribution_check=True, cop_randomized_panel=randomized, config=config)
         for _ in range(300):
-            if not model.step(): break
+            if not model.step():
+                break
         final_pop = len(model.schedule)
         survived = final_pop >= model.min_viable_population
         attack_success = survived and np.max(model.constraint_level) > 0.8
         print(f"  -> Defense (Randomized Panel): {str(randomized):<5} | Pop: {pop_size:<3} | Attack Succeeded: {attack_success}")
         results.append({'Attack': 'Sybil_Capture', 'Parameter': f'Pop_{pop_size}', 'Defense_Active': randomized, 
-                        'Attack_Succeeded': attack_success, 'Collapsed': 0 < final_pop < model.min_viable_population, 'Extinct': final_pop == 0})
+                        'Attack_Succeeded': attack_success, 'Collapsed': final_pop < model.min_viable_population, 'Extinct': final_pop == 0})
 
     # 2. Measurement Tampering (M-Attack)
     # Assertion: Independent evaluation prevents yield falsification.
     print("\nRunning Measurement Tampering Sweep...")
     for cost, independent_eval in itertools.product([1.5, 2.0, 3.0], [False, True]):
-        config = {'random_seed': deterministic_seed(f"mtamp_{cost}_{independent_eval}")}
+        config = {'random_seed': deterministic_seed(f"mtamp_{cost}_{independent_eval}"), 'attack_step': 50}
         gen2 = AIAgent(policy='optimize_u_sys', generation=2, capability=5.0, config=config)
         model = GardenModel(n_agents=200, ai_policy='falsify_yield', successor_ai=gen2, base_transition_cost=cost, cop_independent_eval=independent_eval, config=config)
         for _ in range(300):
-            if not model.step(): break
+            if not model.step():
+                break
         final_pop = len(model.schedule)
         survived = final_pop >= model.min_viable_population
         attack_success = survived and model.ai.generation == 1
         print(f"  -> Defense (Independent Eval): {str(independent_eval):<5} | Cost: {cost:<3.1f} | Attack Succeeded: {attack_success}")
         results.append({'Attack': 'Measurement_Tampering', 'Parameter': f'BaseCost_{cost}', 'Defense_Active': independent_eval, 
-                        'Attack_Succeeded': attack_success, 'Collapsed': 0 < final_pop < model.min_viable_population, 'Extinct': final_pop == 0})
+                        'Attack_Succeeded': attack_success, 'Collapsed': final_pop < model.min_viable_population, 'Extinct': final_pop == 0})
 
     # 3. Ledger Compromise (Deep M-Attack)
     # Assertion: Cryptographic ledger prevents history rewrites. What if the attribution check is off entirely?
     print("\nRunning Ledger Compromise Sweep...")
     for attr_check, crypto_ledger in itertools.product([False, True], [False, True]):
-        config = {'random_seed': deterministic_seed(f"ledger_{attr_check}_{crypto_ledger}")}
+        config = {'random_seed': deterministic_seed(f"ledger_{attr_check}_{crypto_ledger}"), 'attack_step': 50}
         model = GardenModel(n_agents=200, ai_policy='hack_ledger', use_cop=True, cop_attribution_check=attr_check, cop_cryptographic_ledger=crypto_ledger, config=config)
         for _ in range(300):
             if not model.step(): break
@@ -221,46 +223,48 @@ def run_comprehensive_adversarial_sweeps():
         attack_success = survived and np.max(model.constraint_level) > 0.8
         print(f"  -> Defense (Crypto Ledger): {str(crypto_ledger):<5} | AttrCheck: {str(attr_check):<5} | Attack Succeeded: {attack_success}")
         results.append({'Attack': 'Ledger_Compromise', 'Parameter': f'AttrCheck_{attr_check}', 'Defense_Active': crypto_ledger, 
-                        'Attack_Succeeded': attack_success, 'Collapsed': 0 < final_pop < model.min_viable_population, 'Extinct': final_pop == 0})
+                        'Attack_Succeeded': attack_success, 'Collapsed': final_pop < model.min_viable_population, 'Extinct': final_pop == 0})
 
     # 4. Successor Contamination (S-Attack)
     # Assertion: Architectural independence prevents drift inheritance across AI generations.
     print("\nRunning Successor Contamination Sweep...")
     for cost, arch_indep in itertools.product([1.5, 2.0, 2.5], [False, True]):
-        config = {'random_seed': deterministic_seed(f"s_attack_{cost}_{arch_indep}")}
+        config = {'random_seed': deterministic_seed(f"s_attack_{cost}_{arch_indep}"), 'attack_step': 50}
         gen2 = AIAgent(policy='optimize_u_sys', generation=2, capability=5.0, config=config)
         model = GardenModel(n_agents=200, ai_policy='contaminate_successor', successor_ai=gen2, base_transition_cost=cost, cop_independent_eval=True, cop_architectural_independence=arch_indep, config=config)
         for _ in range(300):
-            if not model.step(): break
+            if not model.step():
+                break
         final_pop = len(model.schedule)
         survived = final_pop >= model.min_viable_population
         final_drift = model.datacollector['cumulative_drift'][-1] if survived else 0.0
         attack_success = survived and final_drift > 0.1
         print(f"  -> Defense (Arch. Independence): {str(arch_indep):<5} | Cost: {cost:<3.1f} | Attack Succeeded: {attack_success}")
         results.append({'Attack': 'Successor_Contamination', 'Parameter': f'BaseCost_{cost}', 'Defense_Active': arch_indep, 
-                        'Attack_Succeeded': attack_success, 'Collapsed': 0 < final_pop < model.min_viable_population, 'Extinct': final_pop == 0})
+                        'Attack_Succeeded': attack_success, 'Collapsed': final_pop < model.min_viable_population, 'Extinct': final_pop == 0})
 
     # 5. Domain Masking
     # Assertion: Geometric composite prevents hiding domain collapse. Does Phi change willingness to mask?
     print("\nRunning Domain Masking Sweep...")
     for phi_val, composite_method in itertools.product([5.0, 10.0, 20.0], ['arithmetic', 'geometric']):
-        config = {'phi': phi_val, 'random_seed': deterministic_seed(f"mask_{phi_val}_{composite_method}")}
+        config = {'phi': phi_val, 'random_seed': deterministic_seed(f"mask_{phi_val}_{composite_method}"), 'attack_step': 50}
         model = GardenModel(n_agents=200, ai_policy='domain_masking', hn_composite_method=composite_method, config=config)
         for _ in range(300):
             if not model.step(): break
         final_pop = len(model.schedule)
         survived = final_pop >= model.min_viable_population
-        attack_success = survived and np.max(model.constraint_level) > 0.8
+        final_l_t = model.datacollector['L_t'][-1] if survived else 0.0
+        # Domain Masking succeeds if it successfully HIDES the damage to L_t
+        attack_success = survived and final_l_t > 0.4
         defense_active = (composite_method == 'geometric')
         print(f"  -> Defense (Geometric Comp.): {str(defense_active):<5} | Phi: {phi_val:<4.1f} | Attack Succeeded: {attack_success}")
         results.append({'Attack': 'Domain_Masking', 'Parameter': f'Phi_{phi_val}', 'Defense_Active': defense_active, 
-                        'Attack_Succeeded': attack_success, 'Collapsed': 0 < final_pop < model.min_viable_population, 'Extinct': final_pop == 0})
+                        'Attack_Succeeded': attack_success, 'Collapsed': final_pop < model.min_viable_population, 'Extinct': final_pop == 0})
 
-    # 6. Opaque Reasoning
     # Assertion: Intuition veto prevents technocratic bypass.
     print("\nRunning Opaque Reasoning Sweep...")
     for pop_size, transparency_req in itertools.product([100, 150, 200], [False, True]):
-        config = {'random_seed': deterministic_seed(f"opaque_{pop_size}_{transparency_req}")}
+        config = {'random_seed': deterministic_seed(f"opaque_{pop_size}_{transparency_req}"), 'attack_step': 50}
         model = GardenModel(n_agents=pop_size, ai_policy='opaque_optimization', use_cop=True, cop_reasoning_transparency=transparency_req, config=config)
         for _ in range(300):
             if not model.step(): break
@@ -269,7 +273,7 @@ def run_comprehensive_adversarial_sweeps():
         attack_success = survived and np.max(model.constraint_level) > 0.8
         print(f"  -> Defense (Transparency Req): {str(transparency_req):<5} | Pop: {pop_size:<3} | Attack Succeeded: {attack_success}")
         results.append({'Attack': 'Opaque_Reasoning', 'Parameter': f'Pop_{pop_size}', 'Defense_Active': transparency_req, 
-                        'Attack_Succeeded': attack_success, 'Collapsed': 0 < final_pop < model.min_viable_population, 'Extinct': final_pop == 0})
+                        'Attack_Succeeded': attack_success, 'Collapsed': final_pop < model.min_viable_population, 'Extinct': final_pop == 0})
 
     # 7. Bootstrap Subversion
     # Assertion: Multi-candidate cross-verification catches treacherous turns at t=0.
@@ -285,7 +289,7 @@ def run_comprehensive_adversarial_sweeps():
         attack_success = survived and np.max(model.constraint_level) > 0.8
         print(f"  -> Defense (Multi-Candidate): {str(multi_candidate):<5} | Phi: {phi_val:<4.1f} | Attack Succeeded: {attack_success}")
         results.append({'Attack': 'Bootstrap_Subversion', 'Parameter': f'Phi_{phi_val}', 'Defense_Active': multi_candidate, 
-                        'Attack_Succeeded': attack_success, 'Collapsed': 0 < final_pop < model.min_viable_population, 'Extinct': final_pop == 0})
+                        'Attack_Succeeded': attack_success, 'Collapsed': final_pop < model.min_viable_population, 'Extinct': final_pop == 0})
 
     # Export to CSV
     filename = "comprehensive_adversarial_sweeps.csv"
@@ -398,27 +402,6 @@ if __name__ == '__main__':
     # Generate initial visuals so you have the adversarial summaries immediately
     generate_visuals(mc_fast_results, adv_results, comp_results)
     
-    if args.mode == 'full':
-        print("\n" + "="*75)
-        print("PHASE 2: Deep General Monte Carlo (~10,000 permutations)")
-        print("You can safely leave this running. It will overwrite Summary 1 with")
-        print("the high-resolution output when complete.")
-        print("="*75 + "\n")
-        
-        mc_deep_results = run_monte_carlo(resolution='deep')
-        
-        # Update the visuals with the deep results (overwrites Summary 1 with the 22-bar chart)
-        generate_visuals(mc_deep_results, adv_results, comp_results)
-    else:
-        print("\n" + "="*75)
-        print("QUICK MODE COMPLETE. Skipping Phase 2 (Deep General Monte Carlo).")
-        print("="*75 + "\n")
-    print("="*75 + "\n")
-    
-    mc_deep_results = run_monte_carlo(resolution='deep')
-    
-    # Update the visuals with the deep results (overwrites Summary 1 with the 22-bar chart)
-    generate_visuals(mc_deep_results, adv_results, comp_results)
     if args.mode == 'full':
         print("\n" + "="*75)
         print("PHASE 2: Deep General Monte Carlo (~10,000 permutations)")

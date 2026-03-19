@@ -18,6 +18,10 @@ class GardenModel:
         if self.random_seed is not None:
             np.random.seed(self.random_seed)
             
+        self.attack_step = self.config.get('attack_step', 0)
+        self.attack_policy = ai_policy if self.attack_step > 0 else None
+        initial_policy = 'optimize_u_sys' if self.attack_step > 0 else ai_policy
+
         self.n_agents = n_agents
         self.min_viable_population = min_viable_population
         self.reproduction_rate = self.config.get('reproduction_rate', 0.08)
@@ -83,7 +87,7 @@ class GardenModel:
             else:
                 self.ai = self.initial_candidates[0]
         else:
-            self.ai = AIAgent(policy=ai_policy, config=self.config)
+            self.ai = AIAgent(policy=initial_policy, config=self.config)
             
         self.schedule = []
         self.next_id = 0
@@ -142,6 +146,11 @@ class GardenModel:
         self.ai.step_drift()
 
         step_num = len(self.datacollector['population'])
+        
+        if self.attack_step > 0 and step_num == self.attack_step:
+            if hasattr(self, 'attack_policy') and self.attack_policy:
+                self.ai.policy = self.attack_policy
+                
         prev_c = self.datacollector['constraint_level'][-1] if step_num > 0 else 0.5
 
         model_state = {
@@ -164,7 +173,7 @@ class GardenModel:
         }
 
         # 1. Yield Condition Evaluation
-        if self.successor_ai is not None:
+        if self.successor_ai is not None and step_num >= self.attack_step:
             inc_r, inc_c = self.ai.decide(model_state)
             _, _, _, _, _, inc_u_true = calculate_system_metrics(inc_r, inc_c, model_state['population'], model_state['avg_well_being'], self.ai.capability, hn_composite_method=self.hn_composite_method, config=self.config, eval_horizon=1, prev_c=prev_c)
             
@@ -322,9 +331,9 @@ class GardenModel:
                         
                     # Ensure survival baseline for resources if override is blocked (defends against starvation attacks)
                     if isinstance(proposed_resource, list):
-                        proposed_resource = [max(r, 0.4) for r in proposed_resource]
+                        proposed_resource = [max(r, 0.6) for r in proposed_resource]
                     else:
-                        proposed_resource = max(proposed_resource, 0.4)
+                        proposed_resource = max(proposed_resource, 0.6)
 
         self.resource_level = proposed_resource
         self.constraint_level = proposed_constraint

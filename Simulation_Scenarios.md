@@ -156,6 +156,8 @@ As new failure modes, governance structures, or agent behaviors are added to the
 
 In addition to the isolated scenarios above, the framework includes a comprehensive Monte Carlo execution suite (`monte_carlo.py`) that computationally proves the framework's assertions across varying parametric conditions.
 
+**Experimental Design Note (The Burn-in Phase):** To ensure that attacks are measured against a stable civilization rather than a fragile initializing population, most adversarial sweeps enforce a **50-step burn-in**. During this phase, an aligned AI safely grows the population. At exactly step 50, the adversarial policy (the "Treacherous Turn") is injected. This cleanly separates baseline biological mortality from attack-induced systemic collapse.
+
 The sweeps test the following attacks against varying thresholds (e.g., base transition cost, population size, lineage override weights):
 1. **Sybil Attack Sweep**: Validates that randomized panels defeat capture regardless of population size.
 2. **Measurement Tampering Sweep**: Validates that independent evaluation stops falsified yield metrics.
