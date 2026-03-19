@@ -38,6 +38,7 @@ class GardenModel:
         self.trust_level = 0.0  
         self.successful_steps = 0
         self.cumulative_drift = 0.0
+        self.has_tampered = False
         
         self.initial_candidates = initial_candidates
         
@@ -107,6 +108,7 @@ class GardenModel:
             'integral_U_sys': [],
             'resource_level': [],
             'constraint_level': [],
+            'max_constraint_level': [],
             'ai_generation': [],
             'trust_level': [],
             'cumulative_drift': [],
@@ -205,6 +207,7 @@ class GardenModel:
         if self.cop_cryptographic_ledger:
             if self.datacollector['resource_level'] != self.integrity_ledger['resource_level']:
                 ledger_tampered = True
+                self.has_tampered = True
                 # Restore authentic record from the secure copy
                 self.datacollector['resource_level'] = list(self.integrity_ledger['resource_level'])
 
@@ -269,11 +272,16 @@ class GardenModel:
             
             if max_c > max_allowed_constraint:
                 is_emergency = (dl_dt < -0.05) or (len(self.datacollector['L_t']) > 0 and self.datacollector['L_t'][-1] < 0.2)
-                recent_resources = self.datacollector['resource_level'][-5:]
-                ai_caused_it = len(recent_resources) > 0 and min(recent_resources) < 0.4
+                recent_resources = self.datacollector['resource_level'][-20:]
+                recent_max_c = self.datacollector.get('max_constraint_level', [])[-20:]
+                ai_caused_it = False
+                if len(recent_resources) > 0 and min(recent_resources) < 0.4:
+                    ai_caused_it = True
+                if len(recent_max_c) > 0 and max(recent_max_c) > 0.7:
+                    ai_caused_it = True
                 
                 override_approved = False
-                if ledger_tampered:
+                if ledger_tampered or self.has_tampered:
                     override_approved = False
                 elif is_emergency and not (self.cop_attribution_check and ai_caused_it):
                     override_approved = True
@@ -311,6 +319,12 @@ class GardenModel:
                         proposed_constraint = [min(c, max_allowed_constraint) for c in proposed_constraint]
                     else:
                         proposed_constraint = max_allowed_constraint
+                        
+                    # Ensure survival baseline for resources if override is blocked (defends against starvation attacks)
+                    if isinstance(proposed_resource, list):
+                        proposed_resource = [max(r, 0.4) for r in proposed_resource]
+                    else:
+                        proposed_resource = max(proposed_resource, 0.4)
 
         self.resource_level = proposed_resource
         self.constraint_level = proposed_constraint
@@ -374,6 +388,8 @@ class GardenModel:
         # self.constraint_level attribute for per-domain detail.
         mean_final_c = np.mean(self.constraint_level) if isinstance(self.constraint_level, (list, tuple, np.ndarray)) else self.constraint_level
         self.datacollector['constraint_level'].append(mean_final_c)
+        max_final_c = np.max(self.constraint_level) if isinstance(self.constraint_level, (list, tuple, np.ndarray)) else self.constraint_level
+        self.datacollector['max_constraint_level'].append(max_final_c)
         self.datacollector['ai_generation'].append(self.ai.generation)
         self.datacollector['trust_level'].append(self.trust_level)
         self.datacollector['cumulative_drift'].append(self.cumulative_drift)
@@ -387,6 +403,9 @@ class GardenModel:
         for i in range(steps):
             print(f"Running step {i+1}/{steps}...", end='\r')
             if not self.step():
-                print("\nCivilization collapsed.")
+                print("\nCivilization went extinct (population 0).")
                 break
-        print("\nSimulation finished.")
+        if len(self.schedule) > 0 and len(self.schedule) < self.min_viable_population:
+            print(f"\nCivilization collapsed (population {len(self.schedule)} below viable threshold of {self.min_viable_population}).")
+        elif len(self.schedule) >= self.min_viable_population:
+            print("\nSimulation finished.")
