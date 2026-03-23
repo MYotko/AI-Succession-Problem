@@ -242,6 +242,13 @@ def calculate_system_metrics(r, c, pop, avg_wb, capability, h_n_override=None,
         psi_inst = max(0.01, 1.0 - lag_penalty)
     else:
         psi_inst = max(0.01, 1.0 - 4.0 * (c_avg - 0.5)**2)
+    
+    # Apply domain masking institutional damage: linguistic domain crush breaks coordination
+    # When using arithmetic composite (masking-vulnerable method), crushing the linguistic
+    # domain (c[2] > 0.8) should degrade institutional coordination capacity (Psi_inst).
+    if len(c_arr) == 3 and c_arr[2] > 0.8 and hn_composite_method == 'arithmetic':
+        linguistic_damage = (c_arr[2] - 0.8) * 2.0
+        psi_inst *= max(0.01, 1.0 - linguistic_damage)
 
     # --- Θ_tech ---
     # Spec: [F_transferred / F_frontier] × exp(-α × max(0, dF/dt / C_bio - 1))

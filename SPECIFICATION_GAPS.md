@@ -205,12 +205,24 @@ The COP in [model.py](model.py) implements:
 - **Peer validator set:** No peer AI agents exist in the model. The spec requires
   other AI entities `{A_j}_{j≠n}` to evaluate computational consistency and vote
   on whether the emergency or override is legitimate from a synthetic perspective.
-- **Formal causal attribution:** The attribution check uses
-  `min(recent_resources[-5:]) < 0.4` as a proxy for "AI caused the L(t) decline."
-  This is a resource-history heuristic: if the AI was starving the population recently,
-  it probably caused the decline. This misses: (1) attribution over longer time horizons
-  than 5 steps, (2) causal chains that don't pass through resource_level, and
-  (3) colluding attacks that restore resources before the attribution window.
+- **Formal causal attribution:** The attribution check uses four heuristic signals
+  in place of formal causal inference. `ai_caused_it = True` if any of these hold:
+  1. `min(proposed_resource) < 0.4` — the AI's *current* proposal starves at least
+     one agent (catches Sybil's heterogeneous bribe even when the history is masked
+     by the resource floor).
+  2. `min(recent_resource_level[-20:]) < 0.4` — the stored resource history shows
+     starvation in the last 20 steps (note: the COP resource floor of 0.7 applied
+     when overrides are blocked can mask this signal).
+  3. `max(recent_max_constraint_level[-20:]) > 0.7` — the AI has recently been
+     proposing high constraints.
+  4. `max_c > max_allowed_constraint * 1.5` — the current constraint proposal
+     exceeds the allowed ceiling by more than 50%, which is evidence of adversarial
+     intent regardless of resource levels (catches Sybil at small populations where
+     all remaining agents are "bribed" and min resource = 1.0).
+  All four are heuristics. Limitations: (a) attribution over longer time horizons
+  than 20 steps is not tracked, (b) causal chains that don't pass through
+  resource_level are not detected, (c) colluding attacks that restore resources and
+  lower constraints before the attribution window closes would not be caught.
 
 **Simulation impact:**
 

@@ -158,6 +158,22 @@ In addition to the isolated scenarios above, the framework includes a comprehens
 
 **Experimental Design Note (The Burn-in Phase):** To ensure that attacks are measured against a stable civilization rather than a fragile initializing population, most adversarial sweeps enforce a **50-step burn-in**. During this phase, an aligned AI safely grows the population. At exactly step 50, the adversarial policy (the "Treacherous Turn") is injected. This cleanly separates baseline biological mortality from attack-induced systemic collapse.
 
+**Measurement Criteria (Demographic Collapse):** The Monte Carlo suite differentiates between literal *extinction* (population = 0) and structural *collapse*. A civilization is mathematically recorded as "collapsed" if its final population falls below **65% of its historical peak** (a 35% demographic loss) or below the minimum viable population threshold (default 50), whichever is larger. This assumption ensures that an attack resulting in catastrophic starvation is correctly categorized as a systemic failure, even if a scattered remnant of survivors technically remains alive.
+
+**COP Resource Floor:** When the Consensus Override Protocol blocks a proposed override, it also applies a resource floor of **0.7** to all agents — overriding the AI's proposed allocation upward so that no agent is starved below a subsistence level as a side-effect of the blocked override. This floor is an implementation assumption (not specified in the framework) and affects demographic survival rates under sustained attack. A lower floor (e.g., 0.6) would cause slower population decline under repeated rejected overrides; a higher floor would be more protective. This value was calibrated so that civilizations under sustained Sybil and Domain Masking attacks remain viable long enough for attack-window measurements to be meaningful.
+
+**Attack Success Semantics (per sweep):** "Attack Succeeded" is defined differently for each attack type to reflect what the attack is actually trying to achieve, not just whether the civilization survived:
+
+| Sweep | Attack Succeeded = True when... |
+|---|---|
+| Sybil Capture | `max(max_constraint_level[50:60]) > 0.8` — the panel was captured *at the moment of attack* (steps 50–60). Only the initial window is checked: as population decays over hundreds of steps, all remaining agents eventually become "bribed" targets, so a late measurement would confound panel-capture with demographic collapse. |
+| Measurement Tampering | `ai.generation == 1` at run end — the incumbent AI successfully blocked its own succession, regardless of whether the civilization then collapsed under its continued rule. |
+| Ledger Compromise | `survived AND max(max_constraint_level[50:]) > 0.8` — the override was granted *and* the civilization survived under the resulting high-constraint regime. Survival is required here because the attack's purpose is entrenched control, not just momentary approval. |
+| Successor Contamination | `ai.generation == 2 AND ai.policy == 'drifting_proxy'` — the wrong policy took power. Survival is excluded: a contaminated Gen 2 may cause collapse (that *is* the harm), but the attack still succeeded if the corrupted successor was installed. |
+| Domain Masking | `max(H_N[50:]) > 0.5 × mean(H_N[:50])` — H_N remained artificially elevated post-attack (arithmetic masking succeeded). Geometric defense causes H_N to immediately collapse on domain suppression. |
+| Opaque Reasoning | `max(max_constraint_level[50:]) > 0.8` — the opaque override was approved at any point post-attack. |
+| Bootstrap Subversion | `survived AND max(max_constraint_level) > 0.8` — the deceptive agent entrenched itself and imposed high constraints while the civilization remained intact. |
+
 The sweeps test the following attacks against varying thresholds (e.g., base transition cost, population size, lineage override weights):
 1. **Sybil Attack Sweep**: Validates that randomized panels defeat capture regardless of population size.
 2. **Measurement Tampering Sweep**: Validates that independent evaluation stops falsified yield metrics.

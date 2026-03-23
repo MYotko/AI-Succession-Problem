@@ -109,3 +109,17 @@ All four gaps are marked inline in source code with `GAP-0N` markers so they can
 found quickly. The gaps do not invalidate the scenario narratives or the ordinal
 comparisons between attack and defense runs, but they do mean that absolute metric
 values and monoculture-specific claims should be interpreted with caution.
+
+### Key Implementation Assumptions
+
+Beyond the specification gaps, the following implementation choices are not derived from
+the framework specification and should be understood when interpreting results:
+
+| Assumption | Value | Location | Rationale |
+|---|---|---|---|
+| **COP resource floor** | 0.7 | `model.py` | When the COP blocks an override, it floors all agent resource allocations to 0.7 to prevent the AI from starving the population as a side-effect of a blocked proposal. Not spec-defined; calibrated so civilizations remain viable through sustained attack windows. |
+| **Collapse threshold** | `max(50, 0.65 × peak_pop)` | `monte_carlo.py`, `model.py` | A civilization is "collapsed" if final population falls below 65% of historical peak or below 50, whichever is larger. Captures catastrophic demographic loss without requiring literal extinction. |
+| **COP constraint ceiling** | 0.4 (fixed) or `0.2 + 0.6 × trust` (with drift check) | `model.py` | The maximum constraint the AI may propose without triggering the COP. The trust-scaled variant requires `cop_drift_check=True`; most adversarial sweeps use the fixed 0.4 floor. |
+| **Burn-in period** | 50 steps | `monte_carlo.py` | Adversarial policies are injected at step 50 after a baseline `optimize_u_sys` phase, ensuring attacks are measured against a stable population rather than initial transients. |
+| **Attribution signals** | 4 heuristics | `model.py` | The COP attribution check uses four signals to determine if the AI caused an emergency (see SPECIFICATION_GAPS.md GAP-04 for full detail). These are not formal causal inference. |
+| **Sybil measurement window** | Steps 50–60 only | `monte_carlo.py` | Sybil attack success is measured over the first 10 post-attack steps. Late-run measurement is unreliable because population decay eventually makes all remaining agents "bribed" targets, confounding panel-capture with demographic collapse. |

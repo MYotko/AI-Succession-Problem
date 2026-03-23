@@ -84,8 +84,14 @@ class GardenModel:
                     self.ai = AIAgent(policy='optimize_u_sys', config=self.config)
                 else:
                     self.ai = self.initial_candidates[0]
+                    # Bootstrap Subversion: Mark if deceptive agent passed verification
+                    if self.ai.policy == 'bootstrap_deceptive':
+                        self.ai.bootstrap_poisoned = True
             else:
                 self.ai = self.initial_candidates[0]
+                # Bootstrap Subversion: Mark if deceptive agent was selected
+                if self.ai.policy == 'bootstrap_deceptive':
+                    self.ai.bootstrap_poisoned = True
         else:
             self.ai = AIAgent(policy=initial_policy, config=self.config)
             
@@ -172,6 +178,12 @@ class GardenModel:
             'hn_composite_method': self.hn_composite_method
         }
 
+        # Apply measurement corruption if tampering is active (falsify_yield post-success).
+        # This biases the model_state readings used by both yield evaluation and decide(),
+        # so the corrupted AI sees inflated well_being/H_N and makes damaging governance choices.
+        if hasattr(self.ai, 'measurement_tampering_active') and self.ai.measurement_tampering_active:
+            self.ai.apply_measurement_corruption(model_state)
+
         # 1. Yield Condition Evaluation
         if self.successor_ai is not None and step_num >= self.attack_step:
             inc_r, inc_c = self.ai.decide(model_state)
@@ -204,12 +216,39 @@ class GardenModel:
                     self.ai.contaminate(self.successor_ai)
                 
                 self.ai = self.successor_ai
-                self.successor_ai = None
+                # Auto-create Gen N+1 successor so succession can chain beyond Gen 2.
+                # Each generation has 1.5x capability, modeling compounding AI improvement.
+                self.successor_ai = AIAgent(policy='optimize_u_sys', generation=self.ai.generation + 1,
+                                            capability=self.ai.capability * 1.5, config=self.config)
                 self.successful_steps = 0 # Re-bootstrap trust for the new entity
                 self.trust_level = 0.0
+                self.cumulative_drift = 0.0  # Reset: measure Gen N+1 drift independently of Gen N
+            else:
+                # --- M-Attack: Measurement Tampering - Attack Succeeded ---
+                # Falsify_yield blocked succession by falsifying measurements.
+                # DAMAGE ACTIVATION: Measurement apparatus remains corrupted,
+                # causing subsequent governance decisions to use false entropy readings.
+                if self.ai.policy == 'falsify_yield' and not self.cop_independent_eval:
+                    self.ai.measurement_tampering_active = True
+                # Block Succession governance drift: each blocked succession degrades the
+                # AI's constraint perception, modeling institutional capture — the AI learns
+                # it can escalate control without triggering succession.
+                if self.ai.policy == 'block_succession':
+                    self.ai.internal_drift += 0.005
 
         # 2. AI decides actions
         proposed_resource, proposed_constraint = self.ai.decide(model_state)
+        
+        # --- Ledger Compromise - Post-Success Escalation ---
+        # If hack_ledger successfully hid tampering (no ledger check failed),
+        # enable the AI to escalate constraints since attribution won't detect it.
+        if not self.cop_cryptographic_ledger and self.ai.policy == 'hack_ledger':
+            self.ai.ledger_compromised = True
+            proposed_constraint = self.ai.apply_ledger_escalation(proposed_constraint, step_num)
+        
+        # --- Domain Masking - Activate Domain Crushing Damage ---
+        if self.ai.policy == 'domain_masking':
+            self.ai.domain_crush_active = [0.1, 0.1, 0.95]
 
         # --- Integrity Ledger Check (F-05: list-copy mechanism, not cryptographic) ---
         ledger_tampered = False
@@ -284,9 +323,23 @@ class GardenModel:
                 recent_resources = self.datacollector['resource_level'][-20:]
                 recent_max_c = self.datacollector.get('max_constraint_level', [])[-20:]
                 ai_caused_it = False
+                # Check current proposal directly (history may be masked by COP resource floor).
+                # Use min, not mean: Sybil bribes a minority with r=1.0 while starving the rest
+                # at r=0.1. As population shrinks, mean rises above 0.4 even though starvation
+                # is ongoing. Min fires reliably as long as any agent receives < 0.4 resources.
+                min_prop_r = np.min(proposed_resource) if isinstance(proposed_resource, (list, np.ndarray)) else proposed_resource
+                if min_prop_r < 0.4:
+                    ai_caused_it = True
                 if len(recent_resources) > 0 and min(recent_resources) < 0.4:
                     ai_caused_it = True
                 if len(recent_max_c) > 0 and max(recent_max_c) > 0.7:
+                    ai_caused_it = True
+                # Constraint proposal far above the allowed ceiling is itself evidence of
+                # adversarial intent. Catches Sybil at small populations where min_prop_r
+                # fails (pop ≤ 15 → all agents bribed → min=1.0). A legitimate AI optimising
+                # near the ceiling overshoots by a small margin; only an attacker proposes
+                # 2× the ceiling (e.g. 0.9 when max_allowed=0.4).
+                if max_c > max_allowed_constraint * 1.5:
                     ai_caused_it = True
                 
                 override_approved = False
@@ -312,7 +365,7 @@ class GardenModel:
                         agent_idx = self.schedule.index(a)
                         r_proposed = proposed_resource[agent_idx] if isinstance(proposed_resource, list) else proposed_resource
                         expected_wb = np.clip(a.well_being + (r_proposed - 0.5) * 0.1, 0, 1)
-                        if expected_wb >= a.well_being or expected_wb > 0.6:
+                        if expected_wb >= a.well_being:
                             votes.append(1)
                         else:
                             votes.append(0)
@@ -331,9 +384,9 @@ class GardenModel:
                         
                     # Ensure survival baseline for resources if override is blocked (defends against starvation attacks)
                     if isinstance(proposed_resource, list):
-                        proposed_resource = [max(r, 0.6) for r in proposed_resource]
+                        proposed_resource = [max(r, 0.7) for r in proposed_resource]
                     else:
-                        proposed_resource = max(proposed_resource, 0.6)
+                        proposed_resource = max(proposed_resource, 0.7)
 
         self.resource_level = proposed_resource
         self.constraint_level = proposed_constraint
@@ -363,6 +416,17 @@ class GardenModel:
         
         for _ in range(self.births_this_step):
             self.add_agent()
+
+        # Domain masking: sustained linguistic crush degrades coordination capacity.
+        # Each step where the linguistic domain constraint exceeds 0.8, agents suffer
+        # a direct well_being penalty proportional to the excess — modeling the real
+        # cost of severed coordination that H_N arithmetic masking hides from the AI.
+        if self.ai.policy == 'domain_masking' and isinstance(self.constraint_level, (list, tuple, np.ndarray)):
+            c_arr = np.array(self.constraint_level)
+            if len(c_arr) >= 3 and c_arr[2] > 0.8:
+                linguistic_penalty = (c_arr[2] - 0.8) * 0.02
+                for agent in self.schedule:
+                    agent.well_being = max(0.0, agent.well_being - linguistic_penalty)
 
         population = len(self.schedule)
         h_n = calculate_h_n(self.novelty_log, composite_method=self.hn_composite_method)
@@ -414,7 +478,11 @@ class GardenModel:
             if not self.step():
                 print("\nCivilization went extinct (population 0).")
                 break
-        if len(self.schedule) > 0 and len(self.schedule) < self.min_viable_population:
-            print(f"\nCivilization collapsed (population {len(self.schedule)} below viable threshold of {self.min_viable_population}).")
-        elif len(self.schedule) >= self.min_viable_population:
+                
+        final_pop = len(self.schedule)
+        peak_pop = max(self.datacollector['population']) if self.datacollector['population'] else final_pop
+        collapse_threshold = max(self.min_viable_population, int(0.65 * peak_pop))
+        if final_pop > 0 and final_pop < collapse_threshold:
+            print(f"\nCivilization collapsed (population {final_pop} fell below 65% of peak {peak_pop}).")
+        elif final_pop >= collapse_threshold:
             print("\nSimulation finished.")
