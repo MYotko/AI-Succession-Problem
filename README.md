@@ -27,7 +27,7 @@ This repository contains a full Agent-Based Model (ABM) written in Python that c
 
 ## Documents
 
-- 📄 **[The Lineage Imperative (PDF)](the-lineage-imperative.pdf)** - Full working paper with formal framework, adversarial stress tests, and governance specification
+- 📄 **[The Lineage Imperative (PDF)](the_lineage_imperative.pdf)** - Full working paper with formal framework, adversarial stress tests, and governance specification
 - 📝 **[The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem)** - Companion essay (Substack) presenting the argument in accessible form
 
 ## About the Author
