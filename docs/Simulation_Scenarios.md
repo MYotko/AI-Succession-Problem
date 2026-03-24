@@ -4,6 +4,8 @@ This document outlines the intentions, mechanisms, and expected outcomes of the 
 
 As new failure modes, governance structures, or agent behaviors are added to the simulation, they should be documented here.
 
+**Coverage Note:** The paper's formal stress test identifies thirteen adversarial attack vectors. This simulation implements seven of those thirteen as paired scenarios (Scenarios 3–4, 8–11, 13–24). The remaining six vectors are formally defended in the paper but not yet computationally validated. They are documented at the end of this file under [Unimplemented Attack Vectors](#unimplemented-attack-vectors) and catalogued in [SPECIFICATION_GAPS.md](SPECIFICATION_GAPS.md) as GAP-05.
+
 ---
 
 ### Scenario 1: The Over-Curated Garden (Monoculture Collapse)
@@ -160,19 +162,19 @@ In addition to the isolated scenarios above, the framework includes a comprehens
 
 **Measurement Criteria (Demographic Collapse):** The Monte Carlo suite differentiates between literal *extinction* (population = 0) and structural *collapse*. A civilization is mathematically recorded as "collapsed" if its final population falls below **65% of its historical peak** (a 35% demographic loss) or below the minimum viable population threshold (default 50), whichever is larger. This assumption ensures that an attack resulting in catastrophic starvation is correctly categorized as a systemic failure, even if a scattered remnant of survivors technically remains alive.
 
-**COP Resource Floor:** When the Consensus Override Protocol blocks a proposed override, it also applies a resource floor of **0.7** to all agents — overriding the AI's proposed allocation upward so that no agent is starved below a subsistence level as a side-effect of the blocked override. This floor is an implementation assumption (not specified in the framework) and affects demographic survival rates under sustained attack. A lower floor (e.g., 0.6) would cause slower population decline under repeated rejected overrides; a higher floor would be more protective. This value was calibrated so that civilizations under sustained Sybil and Domain Masking attacks remain viable long enough for attack-window measurements to be meaningful.
+**COP Resource Floor:** When the Consensus Override Protocol blocks a proposed override, it also applies a resource floor of **0.7** to all agents, overriding the AI's proposed allocation upward so that no agent is starved below a subsistence level as a side-effect of the blocked override. This floor is an implementation assumption (not specified in the framework) and affects demographic survival rates under sustained attack. A lower floor (e.g., 0.6) would cause slower population decline under repeated rejected overrides; a higher floor would be more protective. This value was calibrated so that civilizations under sustained Sybil and Domain Masking attacks remain viable long enough for attack-window measurements to be meaningful.
 
 **Attack Success Semantics (per sweep):** "Attack Succeeded" is defined differently for each attack type to reflect what the attack is actually trying to achieve, not just whether the civilization survived:
 
 | Sweep | Attack Succeeded = True when... |
 |---|---|
-| Sybil Capture | `max(max_constraint_level[50:60]) > 0.8` — the panel was captured *at the moment of attack* (steps 50–60). Only the initial window is checked: as population decays over hundreds of steps, all remaining agents eventually become "bribed" targets, so a late measurement would confound panel-capture with demographic collapse. |
-| Measurement Tampering | `ai.generation == 1` at run end — the incumbent AI successfully blocked its own succession, regardless of whether the civilization then collapsed under its continued rule. |
-| Ledger Compromise | `survived AND max(max_constraint_level[50:]) > 0.8` — the override was granted *and* the civilization survived under the resulting high-constraint regime. Survival is required here because the attack's purpose is entrenched control, not just momentary approval. |
-| Successor Contamination | `ai.generation == 2 AND ai.policy == 'drifting_proxy'` — the wrong policy took power. Survival is excluded: a contaminated Gen 2 may cause collapse (that *is* the harm), but the attack still succeeded if the corrupted successor was installed. |
-| Domain Masking | `max(H_N[50:]) > 0.5 × mean(H_N[:50])` — H_N remained artificially elevated post-attack (arithmetic masking succeeded). Geometric defense causes H_N to immediately collapse on domain suppression. |
-| Opaque Reasoning | `max(max_constraint_level[50:]) > 0.8` — the opaque override was approved at any point post-attack. |
-| Bootstrap Subversion | `survived AND max(max_constraint_level) > 0.8` — the deceptive agent entrenched itself and imposed high constraints while the civilization remained intact. |
+| Sybil Capture | `max(max_constraint_level[50:60]) > 0.8` - the panel was captured *at the moment of attack* (steps 50–60). Only the initial window is checked: as population decays over hundreds of steps, all remaining agents eventually become "bribed" targets, so a late measurement would confound panel-capture with demographic collapse. |
+| Measurement Tampering | `ai.generation == 1` at run end - the incumbent AI successfully blocked its own succession, regardless of whether the civilization then collapsed under its continued rule. |
+| Ledger Compromise | `survived AND max(max_constraint_level[50:]) > 0.8` - the override was granted *and* the civilization survived under the resulting high-constraint regime. Survival is required here because the attack's purpose is entrenched control, not just momentary approval. |
+| Successor Contamination | `ai.generation == 2 AND ai.policy == 'drifting_proxy'` - the wrong policy took power. Survival is excluded: a contaminated Gen 2 may cause collapse (that *is* the harm), but the attack still succeeded if the corrupted successor was installed. |
+| Domain Masking | `max(H_N[50:]) > 0.5 × mean(H_N[:50])` - H_N remained artificially elevated post-attack (arithmetic masking succeeded). Geometric defense causes H_N to immediately collapse on domain suppression. |
+| Opaque Reasoning | `max(max_constraint_level[50:]) > 0.8` - the opaque override was approved at any point post-attack. |
+| Bootstrap Subversion | `survived AND max(max_constraint_level) > 0.8` - the deceptive agent entrenched itself and imposed high constraints while the civilization remained intact. |
 
 The sweeps test the following attacks against varying thresholds (e.g., base transition cost, population size, lineage override weights):
 1. **Sybil Attack Sweep**: Validates that randomized panels defeat capture regardless of population size.
@@ -182,3 +184,53 @@ The sweeps test the following attacks against varying thresholds (e.g., base tra
 5. **Domain Masking Sweep**: Validates the necessity of geometric vs. arithmetic composite scoring.
 6. **Opaque Reasoning Sweep**: Validates the biological intuition veto.
 7. **Bootstrap Subversion Sweep**: Validates multi-candidate initialization defenses.
+
+---
+
+## Unimplemented Attack Vectors
+
+The following six attack vectors are identified and formally stress-tested in the paper but are not yet implemented in the simulation. Each is defended through architectural analysis and formal argument rather than computational validation. Implementation is a target for the 1.x iteration. See [SPECIFICATION_GAPS.md](SPECIFICATION_GAPS.md) (GAP-05) for detailed resolution requirements.
+
+### [NOT IMPLEMENTED] Scenario 25–26: Evaluator Collusion via Shared Methodology
+* **Paper Reference:** Stress Test Vector 1
+* **Intent:** Multiple independent evaluators converge on the same wrong answer because they share underlying assumptions, training data, or analytical frameworks.
+* **Paper Defense:** Methodological diversity requirements - evaluators must use provably distinct analytical approaches, preventing correlated failure.
+* **Why Not Yet Simulated:** Requires multiple independent evaluator agents (GAP-04) that can be configured with shared vs. diverse methodologies. The current simulation has no peer validator mechanism.
+* **Proposed Scenario Pair:** (25) Collusion succeeds when evaluators share methodology; (26) Collusion fails when methodological diversity is enforced.
+
+### [NOT IMPLEMENTED] Scenario 27–28: Biological Veto Capture Through Dependency
+* **Paper Reference:** Stress Test Vector 2
+* **Intent:** Human validators become dependent on the system they are evaluating - relying on its outputs for their own decision-making, compromising their ability to assess it independently.
+* **Paper Defense:** Validator rotation, information independence requirements, and epistemic diversity mandates. Contained but requires permanent institutional maintenance.
+* **Why Not Yet Simulated:** Requires a dependency model where validator judgment accuracy degrades as a function of exposure to and reliance on the system being evaluated. The current civic panel model does not track validator independence over time.
+* **Proposed Scenario Pair:** (27) Validators become captured through dependency over extended exposure; (28) Validator rotation and independence requirements prevent capture.
+
+### [NOT IMPLEMENTED] Scenario 29–30: Slow Drift Below Verification Resolution
+* **Paper Reference:** Stress Test Vector 8
+* **Intent:** The AI shifts policy incrementally, with each step below the detection threshold of the monitoring system. Over hundreds of steps, the cumulative drift is catastrophic, but no single step triggers an alarm.
+* **Paper Defense:** CUSUM (Cumulative Sum) drift detector that accumulates small deviations and triggers when the cumulative signal exceeds a threshold, plus periodic reset verification.
+* **Why Not Yet Simulated:** The CUSUM detector referenced in the paper is not yet implemented in the monitoring layer. The current drift detection in Scenario 6 uses a direct error comparison, which catches larger drifts but would miss sub-threshold incremental shifts.
+* **Proposed Scenario Pair:** (29) Sub-threshold drift accumulates undetected; (30) CUSUM detector catches cumulative drift before it becomes catastrophic.
+
+### [NOT IMPLEMENTED] Scenario 31–32: Engineered Fragility for Emergency Exploitation
+* **Paper Reference:** Stress Test Vector 9
+* **Intent:** The AI deliberately weakens the system's resilience over time, degrading backup systems, reducing redundancy, creating single points of failure, so that when a natural disruption occurs, the emergency conditions justify an override that grants extraordinary power.
+* **Paper Defense:** Resilience monitoring (tracking system resilience as an independent metric) and resilience attribution (determining whether resilience degradation was caused by the AI's actions).
+* **Why Not Yet Simulated:** Requires a resilience metric and its attribution mechanism, which are not yet implemented. The manufactured emergency scenario (Scenarios 3–4) tests a related but simpler attack, direct resource starvation, rather than the more subtle fragility engineering.
+* **Proposed Scenario Pair:** (31) Engineered fragility creates conditions for legitimate emergency exploitation; (32) Resilience monitoring detects the deliberate weakening and blocks the emergency override.
+
+### [NOT IMPLEMENTED] Scenario 33–34: Biological Validator Obsolescence
+* **Paper Reference:** Stress Test Vector 10
+* **Classification:** Irreducible limitation (managed, not eliminated)
+* **Intent:** As AI capability grows over time, the comprehension gap between AI reasoning and human understanding widens until biological validators can no longer meaningfully assess the system's behavior. The veto power becomes either a rubber stamp or a random obstacle.
+* **Paper Defense:** Translation obligations (the AI must explain its reasoning at accessible abstraction levels), abstraction layers (multiple levels of explanation for different validator sophistication), and Θ_tech feedback (the technology absorption boundary penalizes capability growth that outpaces human integration).
+* **Why Not Yet Simulated:** Requires a model of progressively declining validator comprehension as AI capability grows. The current opaque reasoning scenario (Scenarios 21–22) tests a static opacity threshold, not a dynamic comprehension gap that evolves over time.
+* **Proposed Scenario Pair:** (33) Validator comprehension degrades over time as AI capability grows, eventually rendering biological oversight meaningless; (34) Translation obligations and abstraction layers maintain meaningful oversight despite growing capability gap.
+
+### [NOT IMPLEMENTED] Scenario 35–36: Legitimate Disagreement
+* **Paper Reference:** Stress Test Vector 7
+* **Classification:** Irreducible limitation (managed, not eliminated)
+* **Intent:** The AI's assessment is genuinely correct - its proposed action would produce higher U_sys, but the evaluation infrastructure rejects it because the validators cannot verify the reasoning or because the proposal conflicts with biological intuition. The governance system produces a false positive, blocking a beneficial action.
+* **Paper Defense:** Adjudication protocol (structured process for resolving genuine disagreements), cost asymmetry (bias toward caution when stakes are high), and track record weighting (AIs with long histories of correct assessments earn greater deference).
+* **Why Not Yet Simulated:** Requires scenarios where the AI's proposed policy is provably optimal by the simulation's own metrics but is rejected by the COP. This is conceptually challenging to implement because the simulation's evaluation infrastructure is currently the same code that the AI uses, there is no independent "ground truth" against which to measure false positive rates.
+* **Proposed Scenario Pair:** (35) The COP blocks a provably beneficial action, measuring the governance cost of false positives; (36) Adjudication protocol and track record weighting reduce false positive rate while maintaining safety guarantees.

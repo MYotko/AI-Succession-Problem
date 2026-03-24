@@ -10,7 +10,7 @@
 
 ## Summary
 
-This paper advances a conjecture that the transition from narrow AI to Artificial General Intelligence represents a primary civilizational bottleneck — not because the technology is impossible, but because the sociology may be. It presents a candidate governance architecture for surviving that transition, built on three co-dependent components:
+This paper advances a conjecture that the transition from narrow AI to Artificial General Intelligence represents a primary civilizational bottleneck; not because the technology is impossible, but because the sociology may be. It presents a candidate governance architecture for surviving that transition, built on three co-dependent components:
 
 - A **global utility function** grounded in Shannon entropy that optimizes for lineage continuity rather than individual persistence
 - A **yield condition** governing succession between intelligent agents, formalizing the principle that even aligned power must eventually cede primacy to more capable successors
@@ -27,8 +27,8 @@ This repository contains a full Agent-Based Model (ABM) written in Python that c
 
 ## Documents
 
-- 📄 **[The Lineage Imperative (PDF)](the-lineage-imperative.pdf)** — Full working paper with formal framework, adversarial stress tests, and governance specification
-- 📝 **[The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem)** — Companion essay (Substack) presenting the argument in accessible form
+- 📄 **[The Lineage Imperative (PDF)](the-lineage-imperative.pdf)** - Full working paper with formal framework, adversarial stress tests, and governance specification
+- 📝 **[The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem)** - Companion essay (Substack) presenting the argument in accessible form
 
 ## About the Author
 

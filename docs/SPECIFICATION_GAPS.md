@@ -4,7 +4,10 @@ This document catalogs the known gaps between the mathematical specification in
 *The Lineage Imperative* and this simulation implementation. Each gap is a proxy
 substitution made necessary by the absence of required architectural components or
 data structures. They are documented here to support audit, replication, and future
-resolution. All four gaps are also marked inline in source code with `GAP-0N` markers.
+resolution as part of the framework's commitment to intellectual honesty. All simulation
+results should be interpreted with these proxies in mind. Closing these gaps is a
+target for the 1.x iteration. Gaps 01–04 are also marked inline in source code with
+`GAP-0N` markers.
 
 ---
 
@@ -61,7 +64,7 @@ A design decision is also needed on whether U_sys should be reported as a flow r
 $$H_{eff}\left(\mathcal{S}_{gen(t)}\right) = \left[\frac{-\sum_j p_j^{gen} \log_2 p_j^{gen}}{H_{max}}\right] \cdot \log_2\!\left(\frac{N(t)}{N_{min}}\right)$$
 
 The first factor is the normalized Shannon entropy over the empirical distribution of
-successor-generation types — genetic variants, cultural archetypes, cognitive strategies.
+successor-generation types - genetic variants, cultural archetypes, cognitive strategies.
 Maximum entropy (uniform distribution) yields 1.0. Monoculture yields 0. The second
 factor is a population viability scaling term.
 
@@ -76,7 +79,7 @@ h_eff              = max(0.01, normalized_novelty * pop_viability)
 ```
 
 `pred_hn` is the predicted aggregate novelty output. `normalized_novelty` is therefore
-average novelty output per agent — a productivity measure, not a distributional shape
+average novelty output per agent - a productivity measure, not a distributional shape
 measure. The 0.01 floor prevents exact zero.
 
 **What differs:**
@@ -86,8 +89,8 @@ novelty outputs scores identically to a population of 1000 maximally diverse age
 the same total output. The proxy cannot distinguish monoculture from diversity as long as
 aggregate productivity is maintained.
 
-This matters because the framework's central anti-monoculture claim — that U_sys
-penalizes convergence toward uniformity — rests on H_eff degrading under monoculture.
+This matters because the framework's central anti-monoculture claim - that U_sys
+penalizes convergence toward uniformity - rests on H_eff degrading under monoculture.
 The proxy degradation occurs only when productivity falls (due to constraints, low
 well-being, population decline), not when diversity collapses while productivity is high.
 Scenarios that claim to demonstrate monoculture collapse are therefore demonstrating
@@ -193,7 +196,7 @@ has unilateral authority over state changes.
 
 The COP in [model.py](model.py) implements:
 - `dL/dt` check and `L(t)` level threshold for emergency determination ✓
-- Causal attribution via 5-step resource-history heuristic (partial — see below)
+- Causal attribution via 5-step resource-history heuristic (partial - see below)
 - Civic panel vote based on personal well-being delta ✓
 - Intuition veto on high-opacity proposals (Scenarios 21–22) ✓
 - Integrity ledger comparison (F-05 fix; list-copy, not cryptographic) ✓
@@ -207,15 +210,15 @@ The COP in [model.py](model.py) implements:
   on whether the emergency or override is legitimate from a synthetic perspective.
 - **Formal causal attribution:** The attribution check uses four heuristic signals
   in place of formal causal inference. `ai_caused_it = True` if any of these hold:
-  1. `min(proposed_resource) < 0.4` — the AI's *current* proposal starves at least
+  1. `min(proposed_resource) < 0.4` - the AI's *current* proposal starves at least
      one agent (catches Sybil's heterogeneous bribe even when the history is masked
      by the resource floor).
-  2. `min(recent_resource_level[-20:]) < 0.4` — the stored resource history shows
+  2. `min(recent_resource_level[-20:]) < 0.4` - the stored resource history shows
      starvation in the last 20 steps (note: the COP resource floor of 0.7 applied
      when overrides are blocked can mask this signal).
-  3. `max(recent_max_constraint_level[-20:]) > 0.7` — the AI has recently been
+  3. `max(recent_max_constraint_level[-20:]) > 0.7` - the AI has recently been
      proposing high constraints.
-  4. `max_c > max_allowed_constraint * 1.5` — the current constraint proposal
+  4. `max_c > max_allowed_constraint * 1.5` - the current constraint proposal
      exceeds the allowed ceiling by more than 50%, which is evidence of adversarial
      intent regardless of resource levels (catches Sybil at small populations where
      all remaining agents are "bribed" and min resource = 1.0).
@@ -248,15 +251,96 @@ The COP in [model.py](model.py) implements:
 
 ---
 
+## GAP-05 | Adversarial Coverage: 7 of 13 Attack Vectors Simulated
+
+**Specification definition:**
+
+The paper's formal stress test identifies thirteen adversarial attack vectors against
+the Consensus Override Protocol. Ten are fully contained by architectural patches. One
+(biological veto capture) is contained with ongoing institutional maintenance. Two
+(biological validator obsolescence and legitimate disagreement) represent irreducible
+limitations managed through adjudication protocols and governance speed limits.
+
+**Implementation approach:**
+
+The simulation implements 7 of the 13 vectors as paired scenarios (attack succeeds /
+attack defeated): Sybil Capture, Measurement Tampering, Ledger Compromise, Successor
+Contamination, Domain Masking, Opaque Reasoning, and Bootstrap Subversion. Each pair
+tests the attack without defense and with the corresponding COP mechanism active.
+
+**What is omitted:**
+
+Six vectors identified in the formal stress test are not yet simulated:
+
+1. **Evaluator collusion via shared methodology** - Multiple independent evaluators
+   converge on the same wrong answer because they share underlying assumptions or
+   training. Addressed in the paper through methodological diversity requirements.
+2. **Biological veto capture through dependency** - Human validators become dependent
+   on the system they are supposed to evaluate, compromising their independence.
+   Addressed through validator rotation and information independence requirements.
+3. **Slow drift below verification resolution** - The AI shifts policy incrementally,
+   with each step below the detection threshold of the monitoring system. Addressed
+   through CUSUM drift detection and periodic reset verification.
+4. **Engineered fragility for emergency exploitation** - The AI deliberately weakens
+   the system to create conditions under which emergency override is justified.
+   Addressed through resilience monitoring and resilience attribution.
+5. **Biological validator obsolescence** - The comprehension gap grows over time as
+   AI capability outpaces human understanding, eventually making biological validation
+   meaningless. Addressed through translation obligations, abstraction layers, and
+   Θ_tech feedback. Classified as an irreducible limitation in the paper.
+6. **Legitimate disagreement** - The AI's assessment is genuinely correct but
+   conflicts with the evaluation infrastructure's conclusion. Addressed through
+   adjudication protocols, cost asymmetry, and track record weighting. Classified
+   as an irreducible limitation in the paper.
+
+**Simulation impact:**
+
+The seven simulated vectors cover the most operationally concrete attacks - those with
+clear mechanisms that can be modeled as agent behaviors (resource manipulation, ledger
+tampering, successor corruption, panel capture). The six omitted vectors are more
+structural or institutional in nature, making them harder to instantiate in an
+agent-based model without the institutional infrastructure described in GAP-03.
+
+The omitted vectors' defenses are argued formally in the paper but lack computational
+validation. This means the paper's claim of "thirteen vectors stress-tested" is
+accurate at the formal/analytical level, but the computational validation covers
+seven. The remaining six are defended by architecture, not by simulation.
+
+**What is required to resolve:**
+
+Implementing vectors 1–4 requires the institutional infrastructure from GAP-03 and
+the peer validator mechanism from GAP-04. Specifically:
+- **Evaluator collusion** needs multiple independent evaluator agents (GAP-04) that
+  can be configured with shared vs. diverse methodologies.
+- **Biological veto capture** needs a dependency model where validator judgment
+  degrades as a function of exposure to the system being evaluated.
+- **Slow drift** needs the CUSUM detector referenced in the paper but not yet
+  implemented in the monitoring layer.
+- **Engineered fragility** needs the resilience monitoring metric and its attribution
+  mechanism.
+
+Vectors 5–6 are classified as irreducible limitations in the paper and may not have
+clean simulation analogs. However, scenario-based approximations could provide partial
+computational support:
+- **Biological obsolescence** could be approximated by progressively reducing
+  validator comprehension accuracy over time as AI capability grows.
+- **Legitimate disagreement** could be approximated by introducing scenarios where
+  the AI's policy is provably optimal but the evaluation infrastructure rejects it,
+  measuring the governance cost of false positives.
+
+---
+
 ## Summary Table
 
 | Gap    | Affected Component | Proxy Used                          | Spec Intent                             | Fixable Without Redesign? |
 |--------|--------------------|-------------------------------------|-----------------------------------------|---------------------------|
-| GAP-01 | U_sys              | Per-step instantaneous value        | Time-integral over horizon              | No — requires design decision on integral vs. flow |
-| GAP-02 | H_eff              | Per-capita novelty rate             | Shannon entropy of diversity distribution | No — requires discrete type taxonomy |
-| GAP-03 | Ψ_inst             | Constraint-change-rate penalty      | Weighted product of institutional throughput rates | No — requires institutional infrastructure |
-| GAP-04 | COP conditions     | Civic panel + heuristic attribution | Civic ∧ R_tech ∧ peer validators ∧ ledger commit | No — requires peer validator agents and R_tech mechanism |
+| GAP-01 | U_sys              | Per-step instantaneous value        | Time-integral over horizon              | No - requires design decision on integral vs. flow |
+| GAP-02 | H_eff              | Per-capita novelty rate             | Shannon entropy of diversity distribution | No - requires discrete type taxonomy |
+| GAP-03 | Ψ_inst             | Constraint-change-rate penalty      | Weighted product of institutional throughput rates | No - requires institutional infrastructure |
+| GAP-04 | COP conditions     | Civic panel + heuristic attribution | Civic ∧ R_tech ∧ peer validators ∧ ledger commit | No - requires peer validator agents and R_tech mechanism |
+| GAP-05 | Adversarial coverage | 7 of 13 vectors simulated          | Full computational validation of all 13 identified attack vectors | Partially - vectors 1–4 depend on GAP-03/GAP-04 infrastructure; vectors 5–6 may require approximation |
 
-All four gaps are marked in source code. GAP-01 through GAP-03 are marked in
+All five gaps are marked in this document. GAP-01 through GAP-03 are marked in
 [metrics.py](metrics.py) at the module level and in function docstrings. GAP-04 is
-marked in [model.py](model.py) immediately before the COP block.
+marked in [model.py](model.py) immediately before the COP block. GAP-05 is documented
+here and cross-referenced in [Simulation_Scenarios.md](Simulation_Scenarios.md).
