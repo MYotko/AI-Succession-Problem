@@ -4,7 +4,7 @@
 
 **Author:** Matthew Yotko
 **Date:** March 2026
-**Status:** Working paper
+**Status:** Version 1
 
 ---
 
