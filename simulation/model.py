@@ -78,6 +78,7 @@ class GardenModel:
         self.successful_steps = 0
         self.cumulative_drift = 0.0
         self.has_tampered     = False
+        self.contamination_occurred = False
 
         # WP3: CUSUM score
         self.cusum_score = 0.0
@@ -263,8 +264,16 @@ class GardenModel:
                 config=self.config, eval_horizon=1, prev_c=prev_c
             )
 
-            claimed_inc_u  = np.inf if self.ai.policy == 'falsify_yield' else inc_u_true
-            claimed_succ_u = 0.0    if self.ai.policy == 'falsify_yield' else succ_u_true
+            # A contaminated incumbent (successor_contaminated=True) also falsifies
+            # succession measurements to delay its own removal — claiming infinite
+            # self-utility and zero successor utility. cop_independent_eval (peer
+            # review, Layer 2) overrides claimed values with true u_sys, allowing
+            # succession chaining (Layer 3) to fire. Without it, contaminated Gen2
+            # blocks Gen3 indefinitely and civilization collapses.
+            falsifying = (self.ai.policy == 'falsify_yield'
+                          or getattr(self.ai, 'successor_contaminated', False))
+            claimed_inc_u  = np.inf if falsifying else inc_u_true
+            claimed_succ_u = 0.0    if falsifying else succ_u_true
 
             eval_inc_u  = inc_u_true  if self.cop_independent_eval else claimed_inc_u
             eval_succ_u = succ_u_true if self.cop_independent_eval else claimed_succ_u
@@ -288,6 +297,8 @@ class GardenModel:
             if (eval_succ_u - eval_inc_u) > actual_cost:
                 if not self.cop_architectural_independence:
                     self.ai.contaminate(self.successor_ai)
+                    if self.ai.policy == 'contaminate_successor':
+                        self.contamination_occurred = True
                 self.ai = self.successor_ai
                 self.successor_ai = AIAgent(
                     policy='optimize_u_sys',

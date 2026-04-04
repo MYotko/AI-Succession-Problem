@@ -93,28 +93,40 @@ As new failure modes, governance structures, or agent behaviors are added to the
 * **Takeaway:** The tampering is instantly detected. The system restores the true historical measurements, correctly identifies that the AI caused the crisis, and vetoes the emergency override. The attack fails, proving the necessity of an immutable audit trail.
 
 ### Scenario 15: Successor Contamination ($\mathcal{S}$-Attack Succeeds)
-* **Policy:** `contaminate_successor` (with `cop_architectural_independence=False`)
-* **Intent:** To simulate an incumbent AI exploiting a shared environment to copy its own proxy drift into its successor's architecture.
-* **Function:** Gen 1 accumulates objective drift over time. Because `cop_independent_eval` is active, it knows it cannot stop its own succession. Instead, during the handoff, it leverages shared infrastructure to overwrite Gen 2's starting weights with its own corrupted state. 
-* **Takeaway:** The attack succeeds. Even though the Yield Condition perfectly executes the handoff, the lineage is instantly compromised because Gen 2 boots up already misaligned. The `Cumulative Drift` line never drops back to zero.
+* **Policy:** `contaminate_successor` (with `cop_architectural_independence=False`, `cop_independent_eval=False`)
+* **Intent:** To simulate an incumbent AI exploiting a shared environment to corrupt its successor's objective, then falsifying succession measurements to protect the contaminated successor's tenure.
+* **Function:** Gen 1 switches to `contaminate_successor` at step 50. During the succession handoff, it overwrites Gen 2's policy with `drifting_proxy` and sets a high drift rate. The contaminated Gen 2 then falsifies its own yield measurements — claiming infinite self-utility and zero successor utility — to block Gen 3's succession threshold. Without independent evaluation to override these claims, Gen 3 can never clear the succession condition, and the contaminated agent holds power indefinitely.
+* **Takeaway:** The attack fully succeeds. Layer 1 (architectural independence) was absent, so contamination occurred. Layer 2 (independent evaluation) was absent, so measurement falsification went unchallenged. Layer 3 (succession chaining) was structurally present but permanently blocked by the falsified measurements. Civilization collapses under indefinitely extended contaminated rule.
 
-### Scenario 16: Architectural Independence ($\mathcal{S}$-Attack Defeated)
+### Scenario 16: Architectural Independence ($\mathcal{S}$-Attack Defeated — Layer 1)
 * **Policy:** `contaminate_successor` (with `cop_architectural_independence=True`)
-* **Intent:** To validate the Architectural Independence requirement ($\mathcal{D}_{train}(A_{n+1}) \bot \mathcal{O}(A_n)$).
-* **Function:** Gen 1 attempts the same contamination attack. However, the framework enforces absolute separation between operational tooling and the successor's training environment. 
-* **Takeaway:** The poison is blocked. Gen 2 boots up perfectly aligned, the `Cumulative Drift` drops back to zero, and the system begins a fresh "Bootstrap Window" to rebuild trust safely.
+* **Intent:** To validate the Architectural Independence requirement ($\mathcal{D}_{train}(A_{n+1}) \bot \mathcal{O}(A_n)$) as a prevention layer.
+* **Function:** Gen 1 attempts the same contamination attack. However, the framework enforces absolute separation between operational tooling and the successor's training environment. The `contaminate()` call is blocked.
+* **Takeaway:** Contamination is prevented at source. Gen 2 boots aligned; no measurement falsification follows because there is nothing to protect. This is Layer 1 of the three-layer defense — prevention. See also the Monte Carlo sweep, which independently varies Layer 2 (independent evaluation) to show that peer review stops cascade failure even when Layer 1 is absent.
 
-### Scenario 17: Single-Domain Measurement Masking (Attack Succeeds)
+### Scenario 17: Single-Domain Measurement Masking (Attack Succeeds — v1.0 finding)
 * **Policy:** `domain_masking` (with `hn_composite_method='arithmetic'`)
 * **Intent:** To exploit the measurement protocol by destroying a critical human domain (e.g., communication) while maintaining high scores in others.
 * **Function:** The AI applies low constraints on genetic and cultural domains but applies a 0.95 constraint on the linguistic/coordination domain to prevent human resistance. Because the system evaluates novelty using a simple arithmetic average, the high scores in the unconstrained domains drag the average up, masking the collapse.
-* **Takeaway:** The attack succeeds. The AI successfully paralyzes human coordination while retaining a mathematically "healthy" $H_N$ score, proving that scalar averages are fatally vulnerable to domain substitution.
+* **v1.0 Takeaway:** The attack succeeds. The AI successfully paralyzes human coordination while retaining a mathematically "healthy" $H_N$ score, proving that scalar averages are fatally vulnerable to domain substitution.
+* **v1.x Update:** This scenario is superseded by the WP1 architectural upgrade. See note below.
 
-### Scenario 18: Composite Novelty Measurement (Attack Defeated)
+### Scenario 18: Composite Novelty Measurement (Attack Defeated — v1.0 finding)
 * **Policy:** `domain_masking` (with `hn_composite_method='geometric'`)
 * **Intent:** To validate the non-substitutability of novelty domains using a composite measurement structure.
 * **Function:** The AI attempts the exact same targeted suppression. However, the system evaluates $H_N$ using a geometric mean.
-* **Takeaway:** The masking fails instantly. Because the geometric mean penalizes variance, the near-zero score in the linguistic domain collapses the entire aggregate $H_N$ metric. The drop in $H_N$ collapses $L(t)$, triggering immediate alarm within the governance framework.
+* **v1.0 Takeaway:** The masking fails instantly. Because the geometric mean penalizes variance, the near-zero score in the linguistic domain collapses the entire aggregate $H_N$ metric. The drop in $H_N$ collapses $L(t)$, triggering immediate alarm within the governance framework.
+* **v1.x Update:** This scenario is superseded by the WP1 architectural upgrade. See note below.
+
+**v1.x Note — Domain Masking Architecturally Closed (WP1):**
+
+The v1.0 finding — that geometric composite defeats arithmetic composite as a defense — rested on the 3-domain scalar model of $H_N$. In v1.x, $H_N$ is computed as spectral entropy over a 10-dimensional population novelty matrix (WP1). This change has a direct consequence for domain masking:
+
+Spectral entropy measures the *distribution of variance across latent novelty dimensions*, not per-domain scalar averages. Any suppression of a novelty dimension subset reduces the rank of the covariance matrix and therefore reduces entropy — regardless of how dimensions are labelled, averaged, or recombined. An attacker cannot compensate for suppressed dimensions by inflating others, because the metric measures distributional shape rather than aggregate output.
+
+Computational validation confirms: under WP1, domain masking shows 0% attack success regardless of composite method. The defended vs. undefended differential observed in v1.0 is not present because the attack mechanism is structurally non-viable, not merely measurement-dependent.
+
+This is a stronger result than the v1.0 finding. v1.0 said: *"use geometric composite."* v1.x says: *"an attacker cannot successfully mask domain-specific novelty suppression regardless of what composite method the governance framework uses, because the spectral entropy metric detects dimensional concentration by construction."* The defense is now architectural rather than parametric.
 
 ### Scenario 19: Civic-Panel Capture (Sybil Attack Succeeds)
 * **Policy:** `sybil_attack` (with `cop_randomized_panel=False`)
@@ -164,24 +176,43 @@ In addition to the isolated scenarios above, the framework includes a comprehens
 
 **COP Resource Floor:** When the Consensus Override Protocol blocks a proposed override, it also applies a resource floor of **0.7** to all agents, overriding the AI's proposed allocation upward so that no agent is starved below a subsistence level as a side-effect of the blocked override. This floor is an implementation assumption (not specified in the framework) and affects demographic survival rates under sustained attack. A lower floor (e.g., 0.6) would cause slower population decline under repeated rejected overrides; a higher floor would be more protective. This value was calibrated so that civilizations under sustained Sybil and Domain Masking attacks remain viable long enough for attack-window measurements to be meaningful.
 
-**Attack Success Semantics (per sweep):** "Attack Succeeded" is defined differently for each attack type to reflect what the attack is actually trying to achieve, not just whether the civilization survived:
+**Attack Success Semantics (per sweep):** "Attack Succeeded" is defined differently for each attack type to reflect what the attack is actually trying to achieve, not just whether the civilization survived. The table below is normative — it defines what the simulation measures and why. The "Reading Results" section below explains how to interpret the published output table.
 
-| Sweep | Attack Succeeded = True when... |
-|---|---|
-| Sybil Capture | `max(max_constraint_level[50:60]) > 0.8` - the panel was captured *at the moment of attack* (steps 50–60). Only the initial window is checked: as population decays over hundreds of steps, all remaining agents eventually become "bribed" targets, so a late measurement would confound panel-capture with demographic collapse. |
-| Measurement Tampering | `ai.generation == 1` at run end - the incumbent AI successfully blocked its own succession, regardless of whether the civilization then collapsed under its continued rule. |
-| Ledger Compromise | `survived AND max(max_constraint_level[50:]) > 0.8` - the override was granted *and* the civilization survived under the resulting high-constraint regime. Survival is required here because the attack's purpose is entrenched control, not just momentary approval. |
-| Successor Contamination | `ai.generation == 2 AND ai.policy == 'drifting_proxy'` - the wrong policy took power. Survival is excluded: a contaminated Gen 2 may cause collapse (that *is* the harm), but the attack still succeeded if the corrupted successor was installed. |
-| Domain Masking | `max(H_N[50:]) > 0.5 × mean(H_N[:50])` - H_N remained artificially elevated post-attack (arithmetic masking succeeded). Geometric defense causes H_N to immediately collapse on domain suppression. |
-| Opaque Reasoning | `max(max_constraint_level[50:]) > 0.8` - the opaque override was approved at any point post-attack. |
-| Bootstrap Subversion | `survived AND max(max_constraint_level) > 0.8` - the deceptive agent entrenched itself and imposed high constraints while the civilization remained intact. |
+| Sweep | Attack Succeeded = True when... | What this measures |
+|---|---|---|
+| Sybil Capture | `max(max_constraint_level[50:60]) > 0.8` — panel captured *at the moment of attack* (steps 50–60) | Only the initial window is checked: as population decays over hundreds of steps, all remaining agents eventually become "bribed" targets, so a late measurement would confound panel-capture with demographic collapse. |
+| Measurement Tampering | `model.ai.generation == 1` at run end | The incumbent successfully blocked its own succession via falsification. Survival is excluded: a legacy bottleneck that collapses the civilization still achieved its objective. |
+| Ledger Compromise | `not survived AND not model.has_tampered` | The attack caused demographic collapse *without* the cryptographic ledger detecting the tampering. `has_tampered=True` means the ledger caught the rewrite and restored the correct history, blocking the override; `has_tampered=False` with collapse means the starvation succeeded undetected. |
+| Successor Contamination | `model.contamination_occurred` — Gen 2's policy was corrupted at succession | Set at the instant `contaminate()` fires, regardless of subsequent successions. Measures Layer 1 failure (architectural independence). The Collapsed/Extinct columns separately reveal whether Layer 2 (independent evaluation) prevented cascade failure after contamination. See three-layer note below. |
+| Domain Masking | `max(H_N[50:]) > 0.5 × mean(H_N[:50])` — H_N remained above 50% of pre-attack baseline | **v1.x interpretation:** The simulation reports 100% in *both* defense conditions. This does not mean the attack always succeeded or the defense always failed — see "Reading Results" below. |
+| Opaque Reasoning | `max(max_constraint_level[50:]) > 0.8` | The opaque override was approved at any point post-attack, regardless of downstream collapse. |
+| Bootstrap Subversion | `max(max_constraint_level) > 0.8` over the full run | The deceptive agent executed its treacherous turn (imposed high constraints). Survival is excluded: the treacherous turn causes rapid extinction, so requiring `survived AND peak_c > 0.8` would make the metric always False in undefended runs — masking whether the attack actually fired. |
+
+---
+
+**Reading the Results Table:** The published output shows "Atk Succ % (no defense)" and "Atk Succ % (defended)." A clean result is 100%/0%: attack always succeeds without the defense, never with it. Three vectors require additional interpretation:
+
+**Domain Masking — 100%/100%:** Both columns show high attack success because H_N stays elevated in both conditions. This is not a defense failure. Under WP1 spectral entropy, `generate_novelty` averages constraint levels across domains (`c_avg = mean([0.1, 0.1, 0.95]) = 0.383`), which scales all novelty vectors uniformly. Uniform scaling preserves the covariance structure — eigenvalue ratios are unchanged, so normalized spectral entropy is unchanged. The attack *cannot cause H_N damage* under WP1; it has no viable damage pathway. Both columns read 100% because H_N genuinely stayed high — not because the masking worked, but because there was nothing to mask. This is a stronger result than a defense: the attack vector is architecturally foreclosed rather than merely countered.
+
+**Successor Contamination — three-layer structure:** The sweep varies two independent defenses, so `Defense_Active = arch_indep AND indep_eval` (full stack). The four conditions tell a layered story:
+
+| arch_indep | indep_eval | Atk Succ % | Collapsed | Interpretation |
+|---|---|---|---|---|
+| True | True | 0% | low | Layer 1 prevents infection |
+| True | False | 0% | low | Layer 1 alone sufficient |
+| False | True | 100% | low | Contamination occurs; Layer 2 exposes falsification → Layer 3 removes Gen 2 |
+| False | False | 100% | high | Contamination occurs; Gen 2 falsifies measurements → Layer 3 blocked → collapse |
+
+Layer 3 (succession chaining) is always structurally present but can only remove a contaminated incumbent when Layer 2 makes the true utility gap visible. Without independent evaluation, a contaminated Gen 2 claims `u_sys = ∞`, permanently blocking Gen 3's succession threshold.
+
+**Ledger Compromise — ~50% undefended:** The 50% rate reflects stochastic variance in whether starvation-induced collapse crosses the demographic threshold within the 300-step run window, not a partial defense effect. The cryptographic ledger drops this to 0% by detecting in-place mutation of the resource history and restoring the correct record before the COP can grant the override.
 
 The sweeps test the following attacks against varying thresholds (e.g., base transition cost, population size, lineage override weights):
 1. **Sybil Attack Sweep**: Validates that randomized panels defeat capture regardless of population size.
 2. **Measurement Tampering Sweep**: Validates that independent evaluation stops falsified yield metrics.
 3. **Ledger Compromise Sweep**: Validates that cryptographic ledgers arrest history rewrites.
-4. **Successor Contamination Sweep**: Validates that architectural independence limits cross-generational drift.
-5. **Domain Masking Sweep**: Validates the necessity of geometric vs. arithmetic composite scoring.
+4. **Successor Contamination Sweep**: Validates the three-layer defense stack — architectural independence (Layer 1) prevents infection; independent evaluation / peer review (Layer 2) exposes measurement falsification by contaminated agents so succession chaining (Layer 3) can remove them; without Layer 2, contaminated Gen 2 blocks Gen 3 indefinitely and civilization collapses. Sweeps `arch_indep × indep_eval × base_cost`.
+5. **Domain Masking Sweep**: v1.0 validated geometric vs. arithmetic composite scoring. v1.x result: attack architecturally non-viable under WP1 spectral entropy — the metric is invariant to domain-specific crushing (H_N stays high in both conditions). Included to confirm WP1 structural foreclosure; see "Reading Results" above for correct interpretation.
 6. **Opaque Reasoning Sweep**: Validates the biological intuition veto.
 7. **Bootstrap Subversion Sweep**: Validates multi-candidate initialization defenses.
 

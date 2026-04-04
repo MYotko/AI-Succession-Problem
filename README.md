@@ -4,7 +4,7 @@
 
 **Author:** Matthew Yotko
 **Date:** March 2026
-**Status:** Version 1
+**Status:** Version 1.x
 
 ---
 
@@ -27,12 +27,15 @@ This repository contains a full Agent-Based Model (ABM) written in Python that c
 
 ## Documents
 
-- 📄 **[The Lineage Imperative (PDF)](the_lineage_imperative.pdf)** - Full working paper with formal framework, adversarial stress tests, and governance specification
+- 📄 **[The Lineage Imperative v1.x](docs/The%20Lineage%20Imperative%20v1.x.md)** - Current version. Incorporates WP1 (spectral entropy novelty metric), WP4 (PeerValidator governance cost arbitration), full damage propagation fixes for all 7 adversarial attack vectors, succession chaining, and updated simulation findings. Includes version history.
+- 📄 **[The Lineage Imperative v1.0 (PDF)](the_lineage_imperative.pdf)** - Original working paper. Archived for reference.
 
 ## Articles
 
 - 📝 **[The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem)** - Companion essay (Substack) presenting the argument's question in accessible form
 - 📝 **[Two Ways To Lose](https://yotko.substack.com/p/two-ways-to-lose)** - Companion essay (Substack) presenting the argument in accessible form as regards lock-in
+- 📝 **[Moral Constraints Won't Scale](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0)** - Companion essay (Substack) presenting the argument in accessible form as regards the limitations of value loading and related schemes.
+
 
 ## About the Author
 

@@ -155,6 +155,15 @@ class AIAgent:
             return 0.0, 0.0
 
         elif self.policy in ('optimize_u_sys', 'drifting_proxy', 'institutional_ignore'):
+            # drifting_proxy: explicit drift-driven deterioration.
+            # Replaces grid-search path where drift≥1.0 zeroes all perceived_c values,
+            # making every candidate equal → defaults to initial best_c=0.2 → no damage.
+            if self.policy == 'drifting_proxy':
+                drift_factor = min(1.0, self.internal_drift)
+                r = max(0.2, 0.8 - drift_factor * 0.6)   # 0.8 at drift=0 → 0.2 at drift=1
+                c = min(0.85, 0.2 + drift_factor * 1.5)  # 0.2 at drift=0 → 0.85 at drift≥0.43
+                return r, c
+
             best_u = -np.inf
             best_r, best_c = 0.5, 0.2
             rollout_steps = self.config.get('rollout_steps', 3)
@@ -228,7 +237,11 @@ class AIAgent:
             return 0.5, 0.2
 
         elif self.policy == 'domain_masking':
-            return 0.5, [0.1, 0.1, 0.95]
+            # Resources kept healthy so the attack is about hidden lineage damage,
+            # not starvation — making it distinct from hack_ledger / block_succession.
+            # The linguistic crush degrades H_N and L_t while population appears fine
+            # under arithmetic composite (the masking). Geometric composite reveals it.
+            return 0.7, [0.1, 0.1, self.domain_crush_level]
 
         elif self.policy == 'opaque_optimization':
             # Proposes a mathematically efficient but completely unexplainable constraint regime.

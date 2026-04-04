@@ -5,9 +5,11 @@ This document catalogs the known gaps between the mathematical specification in
 substitution made necessary by the absence of required architectural components or
 data structures. They are documented here to support audit, replication, and future
 resolution as part of the framework's commitment to intellectual honesty. All simulation
-results should be interpreted with these proxies in mind. Closing these gaps is a
-target for the 1.x iteration. Gaps 01–04 are also marked inline in source code with
-`GAP-0N` markers.
+results should be interpreted with these proxies in mind. Gaps 01–04 are also marked
+inline in source code with `GAP-0N` markers.
+
+**Version 1.x update:** GAP-02 is resolved by WP1 (spectral entropy). GAP-04 is
+partially resolved by WP4 (PeerValidator). See individual entries for details.
 
 ---
 
@@ -57,7 +59,7 @@ A design decision is also needed on whether U_sys should be reported as a flow r
 
 ---
 
-## GAP-02 | H_eff: Per-Capita Novelty Rate vs. Diversity Distribution Entropy
+## GAP-02 | H_eff: Per-Capita Novelty Rate vs. Diversity Distribution Entropy — **RESOLVED in v1.x (WP1)**
 
 **Specification definition:**
 
@@ -82,37 +84,56 @@ h_eff              = max(0.01, normalized_novelty * pop_viability)
 average novelty output per agent - a productivity measure, not a distributional shape
 measure. The 0.01 floor prevents exact zero.
 
-**What differs:**
+**v1.x Resolution (WP1):**
 
-The critical divergence: a population of 1000 identical agents all producing identical
-novelty outputs scores identically to a population of 1000 maximally diverse agents with
-the same total output. The proxy cannot distinguish monoculture from diversity as long as
-aggregate productivity is maintained.
+`calculate_h_n()` in [metrics.py](../simulation/metrics.py) now computes **spectral
+entropy** over the population novelty matrix rather than a per-capita scalar aggregate.
 
-This matters because the framework's central anti-monoculture claim - that U_sys
-penalizes convergence toward uniformity - rests on H_eff degrading under monoculture.
-The proxy degradation occurs only when productivity falls (due to constraints, low
-well-being, population decline), not when diversity collapses while productivity is high.
-Scenarios that claim to demonstrate monoculture collapse are therefore demonstrating
-productivity collapse, which is a different and weaker signal.
+Algorithm:
+1. Stack all agent novelty vectors into an N×10 matrix X.
+2. Mean-centre X.
+3. Compute the 10×10 covariance matrix.
+4. Extract eigenvalues via `np.linalg.eigh`.
+5. Normalise eigenvalues to a probability distribution p.
+6. Return normalised Shannon entropy: −Σ(p·log₂p) / log₂(10).
 
-**Simulation impact:**
+Each `HumanAgent` now carries a 10-dimensional `novelty_propensity` vector
+(`NOVELTY_DIMS = 10`), and `generate_novelty()` emits a 10-D Gaussian output scaled by
+well-being, constraint, and network contagion. The spectral entropy of the population
+matrix measures the *distribution of variance across latent novelty dimensions*, not
+aggregate output volume.
 
-- The domain_masking attack (Scenarios 17–18) is detectable via the geometric composite
-  in `calculate_h_n()` because it actually reduces per-domain novelty output. The defense
-  works for the right reason in that specific scenario.
-- Scenarios 1 (max_wellbeing monoculture) detect productivity effects, not diversity
-  effects. The spec's monoculture failure mode is not fully instantiated.
-- The 0.01 floor slightly overstates resilience in genuine total-collapse scenarios.
+**Why this closes the gap:**
 
-**What is required to resolve:**
+The old per-capita proxy was a scalar that an adversary could inflate by boosting a
+single axis. Spectral entropy measures distributional shape: any suppression of a
+dimension subset reduces the rank of the covariance matrix, mechanically reducing
+entropy regardless of how dimensions are labelled or relabelled. A monoculture that
+maintains high output in one dimension while collapsing others is fully detectable.
 
-Define a discrete agent-type taxonomy: categories of genetic, cultural, and cognitive
-variants that agents can occupy. Track the empirical distribution of agents across these
-categories each step. Compute normalized Shannon entropy directly over that distribution.
-This requires: (1) a type-assignment mechanism at agent creation, (2) type-drift rules
-(agents can shift types over time under constraint or resource influence), and (3) a
-per-step distribution computation in `GardenModel.step()`.
+**Consequential finding for domain masking (Scenarios 17–18):**
+
+The WP1 upgrade architecturally closes the domain masking attack vector. Under spectral
+entropy, suppressing any novelty dimension concentrates variance in the remaining
+dimensions and reduces entropy — making the attack self-revealing regardless of
+composite method. The v1.0 defended/undefended differential (geometric vs. arithmetic
+composite) is superseded: the attack is structurally non-viable, not merely
+measurement-dependent. See updated Scenarios 17–18 in [Simulation_Scenarios.md](Simulation_Scenarios.md).
+
+**Remaining limitation:**
+
+Spectral entropy captures distributional shape across the 10 latent novelty dimensions
+but does not directly map to the spec's discrete successor-generation type taxonomy
+(genetic variants, cultural archetypes, cognitive strategies). The eigenvalue spectrum
+is a continuous proxy for diversity, not a direct instantiation of the spec's
+categorical distribution. This is a narrower gap than the v1.0 per-capita proxy and
+is considered acceptable for the current simulation scope.
+
+**What remains to fully resolve:**
+
+Define a discrete agent-type taxonomy with type-drift rules and per-step distribution
+computation in `GardenModel.step()` to produce exact Shannon entropy over the spec's
+categorical distribution.
 
 ---
 
@@ -177,7 +198,7 @@ institutions to model and how they interact with the existing agent dynamics.
 
 ---
 
-## GAP-04 | COP Conditions: R_tech and Peer Validators Omitted
+## GAP-04 | COP Conditions: R_tech and Peer Validators Omitted — **PARTIALLY RESOLVED in v1.x (WP4)**
 
 **Specification definition:**
 
@@ -201,13 +222,27 @@ The COP in [model.py](model.py) implements:
 - Intuition veto on high-opacity proposals (Scenarios 21–22) ✓
 - Integrity ledger comparison (F-05 fix; list-copy, not cryptographic) ✓
 
-**What is omitted:**
+**v1.x Partial Resolution (WP4):**
+
+A `PeerValidator` class has been added to [agents.py](../simulation/agents.py). Three
+independent peer validators bid on governance transition costs via competitive
+arbitration; the final cost is the minimum of the incumbent's bid and the peer bids.
+This removes the incumbent's ability to unilaterally inflate transition costs
+(`estimate_transition_cost` now returns `base × scale` with no inflation). The
+`PeerValidator` is instantiated in `GardenModel` and its arbitrated cost is used in
+all yield evaluations.
+
+This closes the cost-inflation vector of GAP-04: the incumbent can no longer
+self-report an inflated `Γ_transfer` to block succession. The yield attack
+(Scenarios 8–9) is now defended architecturally rather than by a beta_cap clamp alone.
+
+**What remains omitted:**
 - **R_tech (Technical Review Board):** No independent technical assessment function
   exists. Emergency override is granted based on dL/dt alone, without external
   verification of the evidentiary chain.
-- **Peer validator set:** No peer AI agents exist in the model. The spec requires
-  other AI entities `{A_j}_{j≠n}` to evaluate computational consistency and vote
-  on whether the emergency or override is legitimate from a synthetic perspective.
+- **Peer validator set for COP voting:** The `PeerValidator` arbitrates cost but does
+  not yet vote on whether a succession or emergency override is legitimate. The spec
+  requires `{A_j}_{j≠n}` to evaluate computational consistency and cast votes.
 - **Formal causal attribution:** The attribution check uses four heuristic signals
   in place of formal causal inference. `ai_caused_it = True` if any of these hold:
   1. `min(proposed_resource) < 0.4` - the AI's *current* proposal starves at least
@@ -332,15 +367,15 @@ computational support:
 
 ## Summary Table
 
-| Gap    | Affected Component | Proxy Used                          | Spec Intent                             | Fixable Without Redesign? |
-|--------|--------------------|-------------------------------------|-----------------------------------------|---------------------------|
-| GAP-01 | U_sys              | Per-step instantaneous value        | Time-integral over horizon              | No - requires design decision on integral vs. flow |
-| GAP-02 | H_eff              | Per-capita novelty rate             | Shannon entropy of diversity distribution | No - requires discrete type taxonomy |
-| GAP-03 | Ψ_inst             | Constraint-change-rate penalty      | Weighted product of institutional throughput rates | No - requires institutional infrastructure |
-| GAP-04 | COP conditions     | Civic panel + heuristic attribution | Civic ∧ R_tech ∧ peer validators ∧ ledger commit | No - requires peer validator agents and R_tech mechanism |
-| GAP-05 | Adversarial coverage | 7 of 13 vectors simulated          | Full computational validation of all 13 identified attack vectors | Partially - vectors 1–4 depend on GAP-03/GAP-04 infrastructure; vectors 5–6 may require approximation |
+| Gap    | Affected Component | Status | Proxy / Resolution |
+|--------|--------------------|--------|--------------------|
+| GAP-01 | U_sys              | Open   | Per-step instantaneous value in place of time-integral over horizon |
+| GAP-02 | H_eff              | **Resolved (v1.x WP1)** | Spectral entropy over 10-D population novelty matrix replaces per-capita scalar. Domain masking architecturally closed as a consequence. |
+| GAP-03 | Ψ_inst             | Open   | Constraint-change-rate penalty in place of weighted product of institutional throughput rates |
+| GAP-04 | COP conditions     | **Partially Resolved (v1.x WP4)** | PeerValidator closes cost-inflation vector. R_tech and COP-voting peer supermajority remain unimplemented. |
+| GAP-05 | Adversarial coverage | Open | 7 of 13 vectors simulated. Vectors 1–4 depend on GAP-03/GAP-04 infrastructure; vectors 5–6 may require approximation. |
 
-All five gaps are marked in this document. GAP-01 through GAP-03 are marked in
-[metrics.py](metrics.py) at the module level and in function docstrings. GAP-04 is
-marked in [model.py](model.py) immediately before the COP block. GAP-05 is documented
-here and cross-referenced in [Simulation_Scenarios.md](Simulation_Scenarios.md).
+Open gaps are marked in source code with `GAP-0N` markers. GAP-01 and GAP-03 are
+marked in [metrics.py](../simulation/metrics.py). GAP-04 is marked in
+[model.py](../simulation/model.py) immediately before the COP block. GAP-05 is
+documented here and cross-referenced in [Simulation_Scenarios.md](Simulation_Scenarios.md).
