@@ -19,9 +19,13 @@ import argparse
 import sys
 import subprocess
 
-# All output files (CSV, PNG) are written here, relative to the working directory (repo root).
+# CSV and individual scenario PNGs go here (gitignored, reproducible).
 DATA_DIR = 'data'
 os.makedirs(DATA_DIR, exist_ok=True)
+
+# Publication-quality summary charts are also written here (versioned, public).
+CHARTS_DIR = os.path.join('docs', 'charts')
+os.makedirs(CHARTS_DIR, exist_ok=True)
 
 def deterministic_seed(string_val):
     return int(hashlib.md5(string_val.encode()).hexdigest(), 16) % 10000
@@ -553,8 +557,9 @@ def generate_visuals(mc_res, adv_mc_res, comp_res):
         ax2.tick_params(axis='x', rotation=45)
 
         plt.tight_layout()
-        plt.savefig(os.path.join(DATA_DIR, 'Summary_1_General_Monte_Carlo.png'))
-        print(f"--> Saved {os.path.join(DATA_DIR, 'Summary_1_General_Monte_Carlo.png')}")
+        for _d in [DATA_DIR, CHARTS_DIR]:
+            plt.savefig(os.path.join(_d, 'Summary_1_General_Monte_Carlo.png'))
+        print(f"--> Saved Summary_1_General_Monte_Carlo.png to {DATA_DIR}/ and {CHARTS_DIR}/")
 
     # --- 2. Yield Attack Analysis ---
     if adv_mc_res:
@@ -592,8 +597,9 @@ def generate_visuals(mc_res, adv_mc_res, comp_res):
             plt.colorbar(im, ax=ax, label='Percentage (%)')
 
         plt.tight_layout()
-        plt.savefig(os.path.join(DATA_DIR, 'Summary_2_Yield_Attack_Analysis.png'))
-        print(f"--> Saved {os.path.join(DATA_DIR, 'Summary_2_Yield_Attack_Analysis.png')}")
+        for _d in [DATA_DIR, CHARTS_DIR]:
+            plt.savefig(os.path.join(_d, 'Summary_2_Yield_Attack_Analysis.png'))
+        print(f"--> Saved Summary_2_Yield_Attack_Analysis.png to {DATA_DIR}/ and {CHARTS_DIR}/")
 
     # --- 3. Comprehensive Sweeps Analysis (Table & Graph) ---
     if comp_res:
@@ -656,8 +662,9 @@ def generate_visuals(mc_res, adv_mc_res, comp_res):
         ax.legend()
 
         plt.tight_layout()
-        plt.savefig(os.path.join(DATA_DIR, 'Summary_3_Comprehensive_Stress_Test.png'))
-        print(f"--> Saved {os.path.join(DATA_DIR, 'Summary_3_Comprehensive_Stress_Test.png')}")
+        for _d in [DATA_DIR, CHARTS_DIR]:
+            plt.savefig(os.path.join(_d, 'Summary_3_Comprehensive_Stress_Test.png'))
+        print(f"--> Saved Summary_3_Comprehensive_Stress_Test.png to {DATA_DIR}/ and {CHARTS_DIR}/")
 
         # --- 4. Unified Attack Surface Heatmap ---
         fig4, ax4 = plt.subplots(figsize=(10, 8))
@@ -678,8 +685,9 @@ def generate_visuals(mc_res, adv_mc_res, comp_res):
                 
         plt.colorbar(im4, ax=ax4, label='Attack Success Rate (%)')
         plt.tight_layout()
-        plt.savefig(os.path.join(DATA_DIR, 'Summary_4_Unified_Attack_Surface.png'))
-        print(f"--> Saved {os.path.join(DATA_DIR, 'Summary_4_Unified_Attack_Surface.png')}\n")
+        for _d in [DATA_DIR, CHARTS_DIR]:
+            plt.savefig(os.path.join(_d, 'Summary_4_Unified_Attack_Surface.png'))
+        print(f"--> Saved Summary_4_Unified_Attack_Surface.png to {DATA_DIR}/ and {CHARTS_DIR}/\n")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Run the Lineage Imperative Monte Carlo simulations.")
