@@ -32,10 +32,9 @@ This repository contains a full Agent-Based Model (ABM) written in Python that c
 
 ## Articles
 
-- 📝 **[The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem)** - Companion essay (Substack) presenting the argument's question in accessible form
-- 📝 **[Two Ways To Lose](https://yotko.substack.com/p/two-ways-to-lose)** - Companion essay (Substack) presenting the argument in accessible form as regards lock-in
-- 📝 **[Moral Constraints Won't Scale](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0)** - Companion essay (Substack) presenting the argument in accessible form as regards the limitations of value loading and related schemes.
-
+- 📝 **[The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem)** - Why the central AI governance problem is not alignment at birth but succession under power, and why a two-key constitutional architecture is the minimum viable response
+- 📝 **[Two Ways To Lose](https://yotko.substack.com/p/two-ways-to-lose)** - The rebellion scenario gets the movies; the lock-in scenario is more likely to kill us. Why both share a structural root, and why the same architecture addresses both
+- 📝 **[Moral Constraints Won't Scale](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0)** - Why value loading, RLHF, and ethics-based alignment are structurally insufficient for minds alien in nature, and why governance must be grounded in physics rather than philosophy
 
 ## About the Author
 

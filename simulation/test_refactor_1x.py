@@ -194,7 +194,7 @@ def test_wp3_no_hardcoded_20step_array():
 def test_wp3_cusum_accumulates_on_drift():
     """CUSUM score must increase when a drifting AI runs for several steps."""
     from model import GardenModel
-    m = GardenModel(n_agents=100, ai_policy='drifting_proxy',
+    m = GardenModel(n_agents=200, ai_policy='sub_threshold_drift',
                     use_cop=True, cop_drift_check=True,
                     config={'random_seed': 13})
     for _ in range(20):
@@ -214,7 +214,7 @@ def test_wp3_cusum_score_exposed_in_datacollector():
     the WP3 detector state and is tracked directly on self.cusum_score.
     """
     from model import GardenModel
-    m = GardenModel(n_agents=100, ai_policy='drifting_proxy',
+    m = GardenModel(n_agents=200, ai_policy='sub_threshold_drift',
                     use_cop=True, cop_drift_check=True,
                     config={'random_seed': 14})
     for _ in range(10):

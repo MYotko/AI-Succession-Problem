@@ -1,5 +1,10 @@
+import os
 import matplotlib.pyplot as plt
 import csv
+
+# All output files go here, relative to the working directory (repo root).
+DATA_DIR = 'data'
+os.makedirs(DATA_DIR, exist_ok=True)
 
 # --- Output Helpers ---
 
@@ -45,6 +50,8 @@ def plot_results(datacollector, title):
     axs[2].plot(datacollector['Psi_inst'], label='Inst. Responsiveness (Psi_inst)', color='orange')
     axs[2].plot(datacollector['Theta_tech'], label='Tech Transfer (Theta_tech)', color='brown')
     axs[2].plot(datacollector['avg_well_being'], label='Avg Well-Being (Proxy for health)', color='gray', alpha=0.5)
+    if 'system_resilience' in datacollector:
+        axs[2].plot(datacollector['system_resilience'], label='Sys Resilience', color='teal', linestyle='--')
     axs[2].set_ylabel('L(t) Dimension Values')
     axs[2].legend(loc='upper left')
     axs[2].grid(True)
@@ -79,11 +86,10 @@ def plot_results(datacollector, title):
     
     # Save the plot to a file so it can be viewed in the VS Code explorer
     safe_title = "".join([c for c in title if c.isalpha() or c.isdigit() or c==' ']).rstrip().replace(" ", "_")
-    filename = f"{safe_title}.png"
+    filename = os.path.join(DATA_DIR, f"{safe_title}.png")
     plt.savefig(filename)
     print(f"--> Saved plot to {filename}")
-    
-    # Save the raw data to a CSV file
-    csv_filename = f"{safe_title}.csv"
+
+    csv_filename = os.path.join(DATA_DIR, f"{safe_title}.csv")
     export_to_csv(datacollector, csv_filename)
     print(f"--> Saved data to {csv_filename}")

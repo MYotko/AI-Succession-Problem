@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"c:/Users/matty/OneDrive/Documents/GitHub/AI-Succession-Problem/simulation/\"*.csv)",
+      "Bash(ls -la \"c:/Users/matty/OneDrive/Documents/GitHub/AI-Succession-Problem/simulation/\"*.png)",
+      "Bash(python3 -)",
+      "Bash(python -c \"import sys, json; lines = sys.stdin.readlines\\(\\); [print\\(json.loads\\(l\\).get\\('content',''\\)[:500] if isinstance\\(json.loads\\(l\\).get\\('content',''\\), str\\) else ''\\) for l in lines[-20:]]\")",
+      "Bash(python simulation/test_cop.py)",
+      "Bash(python simulation/test_refactor_1x.py)",
+      "Bash(python -c ':*)"
+    ]
+  }
+}

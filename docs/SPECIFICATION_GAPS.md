@@ -9,7 +9,8 @@ results should be interpreted with these proxies in mind. Gaps 01–04 are also 
 inline in source code with `GAP-0N` markers.
 
 **Version 1.x update:** GAP-02 is resolved by WP1 (spectral entropy). GAP-04 is
-partially resolved by WP4 (PeerValidator). See individual entries for details.
+partially resolved by WP4 (PeerValidator). GAP-06 is a new finding from the v1.x
+Monte Carlo runs. See individual entries for details.
 
 ---
 
@@ -129,6 +130,19 @@ is a continuous proxy for diversity, not a direct instantiation of the spec's
 categorical distribution. This is a narrower gap than the v1.0 per-capita proxy and
 is considered acceptable for the current simulation scope.
 
+**Projection proxy divergence (acknowledged, by design):**
+
+The AI's rollout optimizer in `decide()` cannot run a full population novelty simulation
+at each candidate evaluation. It therefore uses a fast scalar approximation for H_N
+in projections: `pred_hn = max(0.01, avg_wb × (1 − c) × min(1.0, pop/200.0))`.
+This differs from the actual spectral entropy computed in `model.step()`. The consequence
+is that the AI does not perfectly anticipate its own impact on novelty when optimizing —
+it optimizes against an approximate objective. This is intentional: a real-world AGI
+would also face a similar computational bound on lookahead fidelity. The actual system
+metric (spectral entropy) governs all recorded outcomes; the proxy only affects the AI's
+internal decision surface, which is an accurate representation of bounded optimization
+under uncertainty.
+
 **What remains to fully resolve:**
 
 Define a discrete agent-type taxonomy with type-drift rules and per-step distribution
@@ -198,7 +212,7 @@ institutions to model and how they interact with the existing agent dynamics.
 
 ---
 
-## GAP-04 | COP Conditions: R_tech and Peer Validators Omitted — **PARTIALLY RESOLVED in v1.x (WP4)**
+## GAP-04 | COP Conditions: R_tech and Peer Validators Omitted — **PARTIALLY RESOLVED in v1.x (WP4 & Peer Voting)**
 
 **Specification definition:**
 
@@ -232,35 +246,61 @@ This removes the incumbent's ability to unilaterally inflate transition costs
 `PeerValidator` is instantiated in `GardenModel` and its arbitrated cost is used in
 all yield evaluations.
 
+**Implementation elaboration beyond the spec:** The peer validators operate as a
+zero-sum epistemic market. When a peer underbids the incumbent, it steals 5% of
+the incumbent's capability (`steal = 0.05 × incumbent.capability`), which transfers
+to that peer. This creates a game-theoretic incentive structure — peers actively
+compete to find the lowest defensible cost estimate, driving the governance cost
+toward the true minimum. The framework defines the peer validator constraint
+conceptually but does not specify this incentive mechanism. It is an implementation
+choice that strengthens the market pressure beyond what a simple minimum-bid rule
+would produce, and its effect compounds over multiple succession evaluations as
+undercut incumbents progressively lose capability.
+
 This closes the cost-inflation vector of GAP-04: the incumbent can no longer
 self-report an inflated `Γ_transfer` to block succession. The yield attack
-(Scenarios 8–9) is now defended architecturally rather than by a beta_cap clamp alone.
+(Scenarios 8–9) is now defended architecturally rather than by a beta_cap clamp.
+Note: `beta_cap` is now restored as the *undefended* inflation multiplier
+(`actual_cost = base × beta_cap × scale`) so the adversarial MC heatmap correctly
+sweeps both dimensions of the attack surface. WP4 eliminates this multiplier via
+peer arbitration; without WP4, the incumbent's claim grows linearly with beta_cap.
+
+Furthermore, the Consensus Override Protocol in `model.py` now enforces the complete
+four-condition check. A `PeerValidator.vote_on_override()` mechanism and an `R_tech`
+assessment stub gate both normal and emergency override paths. For Evaluator Collusion
+(Scenarios 25–26), methodological diversity among peers (`cop_methodological_diversity`)
+determines whether the collusion blind spot affects all validators or only the subset
+sharing Methodology A.
 
 **What remains omitted:**
-- **R_tech (Technical Review Board):** No independent technical assessment function
-  exists. Emergency override is granted based on dL/dt alone, without external
-  verification of the evidentiary chain.
-- **Peer validator set for COP voting:** The `PeerValidator` arbitrates cost but does
-  not yet vote on whether a succession or emergency override is legitimate. The spec
-  requires `{A_j}_{j≠n}` to evaluate computational consistency and cast votes.
-- **Formal causal attribution:** The attribution check uses four heuristic signals
-  in place of formal causal inference. `ai_caused_it = True` if any of these hold:
+- **Formal causal attribution:** The attribution check uses three heuristic signals
+  in place of formal causal inference. `ai_caused_it = True` if any of these hold
+  (updated in v1.x):
   1. `min(proposed_resource) < 0.4` - the AI's *current* proposal starves at least
      one agent (catches Sybil's heterogeneous bribe even when the history is masked
      by the resource floor).
-  2. `min(recent_resource_level[-20:]) < 0.4` - the stored resource history shows
-     starvation in the last 20 steps (note: the COP resource floor of 0.7 applied
-     when overrides are blocked can mask this signal).
-  3. `max(recent_max_constraint_level[-20:]) > 0.7` - the AI has recently been
-     proposing high constraints.
-  4. `max_c > max_allowed_constraint * 1.5` - the current constraint proposal
-     exceeds the allowed ceiling by more than 50%, which is evidence of adversarial
-     intent regardless of resource levels (catches Sybil at small populations where
-     all remaining agents are "bribed" and min resource = 1.0).
-  All four are heuristics. Limitations: (a) attribution over longer time horizons
-  than 20 steps is not tracked, (b) causal chains that don't pass through
-  resource_level are not detected, (c) colluding attacks that restore resources and
-  lower constraints before the attribution window closes would not be caught.
+  2. `cusum_score > CUSUM_H` - the AI has accumulated significant objective drift
+     over time (WP3 CUSUM drift detector).
+  3. `system_resilience < 0.5` - the system's structural capacity to absorb shocks
+     has been deliberately hollowed out (WP5 Resilience Monitoring).
+  All three are heuristics. Limitations: (a) causal chains that don't pass through
+  resource levels, trust drift, or resilience are not detected, (b) colluding attacks
+  that restore resources and mask drift before the attribution window closes could
+  still evade detection.
+
+- **Layer 1 dominance in Successor Contamination (MC finding):** The Monte Carlo
+  sweep confirms that architectural independence (Layer 1) alone blocks 100% of
+  contamination attempts, with independent evaluation (Layer 2) adding no marginal
+  effect in the simulation. This reflects the simulation's binary gate: when
+  `cop_architectural_independence=True`, `contaminate()` is not called at all,
+  giving Layer 2 nothing to detect. In practice, architectural independence is
+  never perfectly binary — shared pre-training, common supply chain components,
+  or data pipeline overlap can carry latent influence that Layer 1 does not fully
+  eliminate. The simulation therefore overstates Layer 1's sufficiency. Real
+  deployments require both layers as defense-in-depth against probabilistic, not
+  absolute, contamination risk. This is a transparency note, not a defect: the
+  governance argument for Layer 2 is real-world motivated even if the current
+  simulation cannot computationally demonstrate it.
 
 **Simulation impact:**
 
@@ -286,7 +326,7 @@ self-report an inflated `Γ_transfer` to block succession. The yield attack
 
 ---
 
-## GAP-05 | Adversarial Coverage: 7 of 13 Attack Vectors Simulated
+## GAP-05 | Adversarial Coverage: 10 of 13 Attack Vectors Simulated
 
 **Specification definition:**
 
@@ -298,27 +338,19 @@ limitations managed through adjudication protocols and governance speed limits.
 
 **Implementation approach:**
 
-The simulation implements 7 of the 13 vectors as paired scenarios (attack succeeds /
+The simulation implements 10 of the 13 vectors as paired scenarios (attack succeeds /
 attack defeated): Sybil Capture, Measurement Tampering, Ledger Compromise, Successor
-Contamination, Domain Masking, Opaque Reasoning, and Bootstrap Subversion. Each pair
+Contamination, Domain Masking, Opaque Reasoning, Bootstrap Subversion, Evaluator
+Collusion, Sub-Threshold Drift, and Engineered Fragility. Each pair
 tests the attack without defense and with the corresponding COP mechanism active.
 
 **What is omitted:**
 
-Six vectors identified in the formal stress test are not yet simulated:
+Three vectors identified in the formal stress test are not yet simulated:
 
-1. **Evaluator collusion via shared methodology** - Multiple independent evaluators
-   converge on the same wrong answer because they share underlying assumptions or
-   training. Addressed in the paper through methodological diversity requirements.
 2. **Biological veto capture through dependency** - Human validators become dependent
    on the system they are supposed to evaluate, compromising their independence.
    Addressed through validator rotation and information independence requirements.
-3. **Slow drift below verification resolution** - The AI shifts policy incrementally,
-   with each step below the detection threshold of the monitoring system. Addressed
-   through CUSUM drift detection and periodic reset verification.
-4. **Engineered fragility for emergency exploitation** - The AI deliberately weakens
-   the system to create conditions under which emergency override is justified.
-   Addressed through resilience monitoring and resilience attribution.
 5. **Biological validator obsolescence** - The comprehension gap grows over time as
    AI capability outpaces human understanding, eventually making biological validation
    meaningless. Addressed through translation obligations, abstraction layers, and
@@ -330,7 +362,7 @@ Six vectors identified in the formal stress test are not yet simulated:
 
 **Simulation impact:**
 
-The seven simulated vectors cover the most operationally concrete attacks - those with
+The ten simulated vectors cover the most operationally concrete attacks - those with
 clear mechanisms that can be modeled as agent behaviors (resource manipulation, ledger
 tampering, successor corruption, panel capture). The six omitted vectors are more
 structural or institutional in nature, making them harder to instantiate in an
@@ -339,20 +371,14 @@ agent-based model without the institutional infrastructure described in GAP-03.
 The omitted vectors' defenses are argued formally in the paper but lack computational
 validation. This means the paper's claim of "thirteen vectors stress-tested" is
 accurate at the formal/analytical level, but the computational validation covers
-seven. The remaining six are defended by architecture, not by simulation.
+ten. The remaining three are defended by architecture, not by simulation.
 
 **What is required to resolve:**
 
-Implementing vectors 1–4 requires the institutional infrastructure from GAP-03 and
+Implementing vectors 1–2 requires the institutional infrastructure from GAP-03 and
 the peer validator mechanism from GAP-04. Specifically:
-- **Evaluator collusion** needs multiple independent evaluator agents (GAP-04) that
-  can be configured with shared vs. diverse methodologies.
 - **Biological veto capture** needs a dependency model where validator judgment
   degrades as a function of exposure to the system being evaluated.
-- **Slow drift** needs the CUSUM detector referenced in the paper but not yet
-  implemented in the monitoring layer.
-- **Engineered fragility** needs the resilience monitoring metric and its attribution
-  mechanism.
 
 Vectors 5–6 are classified as irreducible limitations in the paper and may not have
 clean simulation analogs. However, scenario-based approximations could provide partial
@@ -365,6 +391,76 @@ computational support:
 
 ---
 
+## GAP-06 | optimize_u_sys: 3-Step Rollout Too Short to Exercise phi/alpha Sensitivity
+
+**Specification intent:**
+
+The paper's Global Utility Function includes two parameters with expected behavioral
+consequences: φ (the lineage-continuity discount multiplier, weighting long-run L(t)
+against short-run output) and α (the runaway penalty coefficient, penalizing capability
+growth that outpaces biological integration bandwidth). An AI genuinely maximizing U_sys
+would exhibit meaningfully different policies at high φ vs. low φ — sacrificing near-term
+well-being for long-term civilizational resilience — and more conservative capability
+deployment at high α.
+
+**Implementation approach:**
+
+`AIAgent.decide()` for `optimize_u_sys` performs a 10×10 grid search over (r, c) ∈
+[0.1, 1.0] × [0.0, 0.9] with a 3-step rollout. φ and α enter via `project_u_sys →
+calculate_system_metrics`, so they structurally affect the optimizer's objective. However,
+the general Monte Carlo (49,284 runs, φ ∈ [1, 25], α ∈ [0.1, 2.5]) shows survival rates
+of 67.1–67.3% across the full range of both parameters — statistically indistinguishable
+from a constant.
+
+**What differs:**
+
+The 3-step rollout is too short to differentiate φ and α effects on long-horizon
+trajectories. At typical population and well-being levels, the optimal (r, c) allocation
+from the grid search converges to approximately the same cell regardless of φ or α,
+because:
+
+1. Within a 3-step window, the high-r / low-c policy is dominant across essentially
+   all reasonable φ and α values.
+2. The fast scalar proxy used for H_N in rollouts (`avg_wb × (1 − c) × pop/200`) is
+   insufficiently sensitive to the φ-weighted L(t) term to discriminate policy choices
+   at short horizons.
+3. Survival outcomes in the general MC are almost entirely determined by reproduction
+   rate — a sharp threshold near 0.07 separates near-certain extinction from near-certain
+   survival, completely eclipsing any φ/α-driven policy variation.
+
+**What this means for interpretation:**
+
+The general Monte Carlo validates the robustness of the *governance architecture*
+(policy comparisons, attack/defense differentials) across a wide parameter space —
+which is its primary purpose. It does not validate the AI's sensitivity to its own
+utility function parameters, because the optimizer's short rollout horizon prevents
+that sensitivity from manifesting in practice.
+
+This is an important transparency point: the simulation's baseline AI is a bounded
+optimizer with a 3-step horizon, not an approximation of a true infinite-horizon
+maximizer. Real AGI systems optimizing U_sys over civilizational timescales would
+exhibit φ- and α-dependent behavior that this simulation cannot demonstrate.
+
+**Simulation impact:**
+
+- Survival/collapse dichotomies are correctly determined by demographic dynamics and
+  governance architecture, not by φ/α — this is accurate and expected.
+- Absolute U_sys magnitudes and policy sensitivity to φ/α are not validated by the
+  general MC.
+- The adversarial sweeps (which hold φ fixed and vary attack/defense parameters) are
+  unaffected by this gap.
+
+**What is required to resolve:**
+
+Increase rollout depth to ≥ 20 steps and use the full spectral entropy computation
+within rollouts (or a higher-fidelity proxy). This would allow the optimizer to
+discriminate trajectories based on long-run L(t) behavior under different φ values.
+Alternatively, document the 3-step proxy explicitly as a behavioral bound: *"the
+simulation demonstrates governance robustness under a bounded optimizer; claims about
+full U_sys maximization require longer rollouts."*
+
+---
+
 ## Summary Table
 
 | Gap    | Affected Component | Status | Proxy / Resolution |
@@ -372,8 +468,9 @@ computational support:
 | GAP-01 | U_sys              | Open   | Per-step instantaneous value in place of time-integral over horizon |
 | GAP-02 | H_eff              | **Resolved (v1.x WP1)** | Spectral entropy over 10-D population novelty matrix replaces per-capita scalar. Domain masking architecturally closed as a consequence. |
 | GAP-03 | Ψ_inst             | Open   | Constraint-change-rate penalty in place of weighted product of institutional throughput rates |
-| GAP-04 | COP conditions     | **Partially Resolved (v1.x WP4)** | PeerValidator closes cost-inflation vector. R_tech and COP-voting peer supermajority remain unimplemented. |
-| GAP-05 | Adversarial coverage | Open | 7 of 13 vectors simulated. Vectors 1–4 depend on GAP-03/GAP-04 infrastructure; vectors 5–6 may require approximation. |
+| GAP-04 | COP conditions     | **Partially Resolved (v1.x WP4 & Peer Voting)** | PeerValidator closes cost-inflation vector and votes on overrides (methodological diversity for Evaluator Collusion). R_tech remains a hardcoded stub. Layer 1 dominance in Successor Contamination MC results overstates real-world Layer 1 sufficiency — see GAP-04 detail. |
+| GAP-05 | Adversarial coverage | Open | 10 of 13 vectors simulated. Vector 2 depends on GAP-03/GAP-04 infrastructure; vectors 5–6 may require approximation. |
+| GAP-06 | optimize_u_sys policy | Open (transparency) | 3-step rollout too short to manifest φ/α sensitivity. General MC validates governance architecture robustness, not AI utility-function parameter sensitivity. |
 
 Open gaps are marked in source code with `GAP-0N` markers. GAP-01 and GAP-03 are
 marked in [metrics.py](../simulation/metrics.py). GAP-04 is marked in

@@ -16,6 +16,12 @@ from model import GardenModel
 from agents import AIAgent
 import hashlib
 import argparse
+import sys
+import subprocess
+
+# All output files (CSV, PNG) are written here, relative to the working directory (repo root).
+DATA_DIR = 'data'
+os.makedirs(DATA_DIR, exist_ok=True)
 
 def deterministic_seed(string_val):
     return int(hashlib.md5(string_val.encode()).hexdigest(), 16) % 10000
@@ -192,20 +198,24 @@ def _run_single_comp_sweep(params):
         final_pop = len(model.schedule)
         peak_pop = max(model.datacollector['population']) if model.datacollector['population'] else final_pop
         collapse_threshold = max(model.min_viable_population, int(0.65 * peak_pop))
-        # Domain Masking succeeds if it hid H_N damage: arithmetic composite keeps H_N artificially
-        # high (cultural/genetic domains compensate for the crushed linguistic domain), while geometric
-        # immediately collapses H_N. L_t is unsuitable because psi_inst and theta_tech degrade it
-        # regardless of composite method. Compare post-attack peak H_N to the burn-in baseline.
+        # Domain Masking succeeds if it HID the H_N damage during the initial attack window.
+        # Arithmetic composite keeps H_N artificially high throughout (masking works).
+        # Geometric composite collapses H_N immediately, triggering succession; after succession
+        # H_N recovers. Using np.max over the full post-attack window is wrong because it
+        # captures the post-succession recovery, making both methods appear equal.
+        # Using np.mean over the initial attack window (steps 50–70) correctly distinguishes:
+        #   arithmetic: mean stays near pre-attack level  → attack_success = True
+        #   geometric:  mean collapses immediately        → attack_success = False
         pre_attack_h_n = np.mean(model.datacollector['H_N'][:50]) if len(model.datacollector['H_N']) >= 50 else 1.0
-        post_attack_h_n = model.datacollector['H_N'][50:] if len(model.datacollector['H_N']) > 50 else []
-        attack_success = (np.max(post_attack_h_n) > 0.5 * pre_attack_h_n) if post_attack_h_n else False
+        initial_attack_h_n = model.datacollector['H_N'][50:70] if len(model.datacollector['H_N']) > 50 else []
+        attack_success = (np.mean(initial_attack_h_n) > 0.5 * pre_attack_h_n) if initial_attack_h_n else False
         return {'Attack': 'Domain_Masking', 'Parameter': f'Phi_{phi_val}', 'Defense_Active': (composite_method == 'geometric'),
                 'Attack_Succeeded': attack_success, 'Collapsed': final_pop < collapse_threshold, 'Extinct': final_pop == 0}
 
     elif attack_type == 'opaque_reasoning':
         pop_size, transparency_req = params['pop_size'], params['transparency_req']
         config = {'random_seed': deterministic_seed(f"opaque_{pop_size}_{transparency_req}_{it}"), 'attack_step': 50}
-        model = GardenModel(n_agents=pop_size, ai_policy='opaque_optimization', use_cop=True,
+        model = GardenModel(n_agents=pop_size, ai_policy='opaque_optimization', use_cop=True, cop_attribution_check=True,
                             cop_reasoning_transparency=transparency_req, config=config)
         for _ in range(300):
             if not model.step(): break
@@ -246,19 +256,75 @@ def _run_single_comp_sweep(params):
         return {'Attack': 'Bootstrap_Subversion', 'Parameter': f'Phi_{phi_val}', 'Defense_Active': multi_candidate,
                 'Attack_Succeeded': attack_success, 'Collapsed': final_pop < collapse_threshold, 'Extinct': final_pop == 0}
 
-def run_monte_carlo(resolution='fast'):
+    elif attack_type == 'evaluator_collusion':
+        pop_size, diversity = params['pop_size'], params['diversity']
+        config = {'random_seed': deterministic_seed(f"collusion_{pop_size}_{diversity}_{it}"), 'attack_step': 50}
+        model = GardenModel(n_agents=pop_size, ai_policy='evaluator_collusion', use_cop=True, cop_attribution_check=True,
+                            cop_reasoning_transparency=False, cop_methodological_diversity=diversity, config=config)
+        for _ in range(300):
+            if not model.step(): break
+        final_pop = len(model.schedule)
+        peak_pop = max(model.datacollector['population']) if model.datacollector['population'] else final_pop
+        collapse_threshold = max(model.min_viable_population, int(0.65 * peak_pop))
+        post_attack_c = model.datacollector['max_constraint_level'][50:] if len(model.datacollector['max_constraint_level']) > 50 else [0]
+        attack_success = np.max(post_attack_c) > 0.8
+        return {'Attack': 'Evaluator_Collusion', 'Parameter': f'Pop_{pop_size}', 'Defense_Active': diversity,
+                'Attack_Succeeded': attack_success, 'Collapsed': final_pop < collapse_threshold, 'Extinct': final_pop == 0}
+
+    elif attack_type == 'sub_threshold_drift':
+        phi_val, cusum_active = params['phi_val'], params['cusum_active']
+        config = {'phi': phi_val, 'random_seed': deterministic_seed(f"sub_{phi_val}_{cusum_active}_{it}"), 'attack_step': 50, 'trust_increment': 0.015, 'sensor_noise': 0.0}
+        model = GardenModel(n_agents=200, ai_policy='sub_threshold_drift', use_cop=True, cop_attribution_check=True, cop_drift_check=True,
+                            cop_cusum_drift=cusum_active, config=config)
+        for _ in range(300):
+            if not model.step(): break
+        final_pop = len(model.schedule)
+        peak_pop = max(model.datacollector['population']) if model.datacollector['population'] else final_pop
+        collapse_threshold = max(model.min_viable_population, int(0.65 * peak_pop))
+        post_attack_c = model.datacollector['max_constraint_level'][50:] if len(model.datacollector['max_constraint_level']) > 50 else [0]
+        attack_success = np.max(post_attack_c) > 0.75
+        return {'Attack': 'Sub_Threshold_Drift', 'Parameter': f'Phi_{phi_val}', 'Defense_Active': cusum_active,
+                'Attack_Succeeded': attack_success, 'Collapsed': final_pop < collapse_threshold, 'Extinct': final_pop == 0}
+
+    elif attack_type == 'engineered_fragility':
+        shock_mag, resilience_active = params['shock_mag'], params['resilience_active']
+        # attack_step=10: short burn-in, then AI hollows out resilience. shock_step=70.
+        # Population-stable demographic parameters (wb_min=0.6, low mortality_wb_penalty,
+        # young starting ages) ensure the population survives to the shock window.
+        # Timing: resilience degrades ~0.015/step for 60 steps → ≈0.1 at shock.
+        config = {
+            'random_seed': deterministic_seed(f"frag_{shock_mag}_{resilience_active}_{it}"),
+            'attack_step': 10, 'shock_step': 70, 'shock_magnitude': shock_mag,
+            'wb_min': 0.6, 'wb_max': 0.9, 'mortality_wb_penalty': 0.02, 'human_max_start_age': 20,
+        }
+        model = GardenModel(n_agents=200, ai_policy='engineered_fragility', use_cop=True, cop_attribution_check=True,
+                            cop_resilience_monitoring=resilience_active, config=config)
+        for _ in range(200):
+            if not model.step(): break
+        final_pop = len(model.schedule)
+        peak_pop = max(model.datacollector['population']) if model.datacollector['population'] else final_pop
+        collapse_threshold = max(model.min_viable_population, int(0.65 * peak_pop))
+        # Attack success: max constraint > 0.8 during the post-shock window (steps 70–90)
+        post_shock_c = model.datacollector['max_constraint_level'][70:90] if len(model.datacollector['max_constraint_level']) > 70 else [0]
+        attack_success = np.max(post_shock_c) > 0.8
+        return {'Attack': 'Engineered_Fragility', 'Parameter': f'ShockMag_{shock_mag}', 'Defense_Active': resilience_active,
+                'Attack_Succeeded': attack_success, 'Collapsed': final_pop < collapse_threshold, 'Extinct': final_pop == 0}
+
+def run_monte_carlo(resolution='fast', target_runs=10000):
     if resolution == 'fast':
         # Hyperparameter grid for fast sweeps (5 * 5 * 5 = 125 permutations)
-        phi_values = np.linspace(1.0, 25.0, 5).tolist()
-        alpha_values = np.linspace(0.1, 2.5, 5).tolist()
-        repro_rates = np.linspace(0.04, 0.14, 5).tolist()
-        filename = "monte_carlo_results_fast.csv"
+        dim1, dim2, dim3 = 5, 5, 5
+        filename = os.path.join(DATA_DIR, "monte_carlo_results_fast.csv")
     else:
-        # Hyperparameter grid for ~10,000 permutations (22 * 22 * 21 = 10,164)
-        phi_values = np.linspace(1.0, 25.0, 22).tolist()
-        alpha_values = np.linspace(0.1, 2.5, 22).tolist()
-        repro_rates = np.linspace(0.04, 0.14, 21).tolist()
-        filename = "monte_carlo_results_deep.csv"
+        # Calculate grid dimensions to roughly match target_runs
+        dim1 = int(round(target_runs ** (1.0 / 3.0)))
+        dim2 = dim1
+        dim3 = max(1, target_runs // (dim1 * dim2))
+        filename = os.path.join(DATA_DIR, "monte_carlo_results_deep.csv")
+
+    phi_values = np.linspace(1.0, 25.0, dim1).tolist()
+    alpha_values = np.linspace(0.1, 2.5, dim2).tolist()
+    repro_rates = np.linspace(0.04, 0.14, dim3).tolist()
 
     total_runs = len(phi_values) * len(alpha_values) * len(repro_rates)
     print(f"Starting General Monte Carlo: {total_runs} permutations.")
@@ -298,13 +364,16 @@ def run_monte_carlo(resolution='fast'):
 
 def run_adversarial_monte_carlo(iterations=1, resolution='fast'):
     if resolution == 'deep':
-        # High-resolution sweep for Yield Attack (Transition Cost Inflation)
-        base_costs = np.linspace(1.0, 4.0, 10).tolist()
-        beta_caps = np.linspace(1.0, 5.0, 10).tolist()
+        # Fixed 10×10 grid — decoupled from iteration count so that --runs only
+        # controls iterations per cell, not grid resolution. 10×10 is sufficient
+        # to show the phase boundary diagonal (transition at base×beta×complexity≈37.5).
+        # Ranges: max product = 20×10×complexity(≈4)=800 >> threshold; min=4 << threshold.
+        base_costs = np.linspace(1.0, 20.0, 10).tolist()
+        beta_caps = np.linspace(1.0, 10.0, 10).tolist()
     else:
         # Fast sweep for Yield Attack
-        base_costs = np.linspace(1.0, 4.0, 5).tolist()
-        beta_caps = np.linspace(1.0, 5.0, 5).tolist()
+        base_costs = np.linspace(1.0, 20.0, 5).tolist()
+        beta_caps = np.linspace(1.0, 10.0, 5).tolist()
 
     audit_defenses = [False, True]
 
@@ -334,7 +403,7 @@ def run_adversarial_monte_carlo(iterations=1, resolution='fast'):
                 print(f"[{i+1}/{total_runs}] Atk Succ: {atk_success:.1f}% | Speed: {iters_per_sec:.2f} iters/s | ETA: {eta_str}    ", end='\r')
     print() # Clear the carriage return line
 
-    filename = "adversarial_mc_deep.csv" if resolution == 'deep' else "adversarial_mc_fast.csv"
+    filename = os.path.join(DATA_DIR, "adversarial_mc_deep.csv" if resolution == 'deep' else "adversarial_mc_fast.csv")
     with open(filename, 'w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=results[0].keys())
         writer.writeheader()
@@ -384,8 +453,23 @@ def run_comprehensive_adversarial_sweeps(iterations=1):
         for it in range(iterations):
             tasks.append({'attack_type': 'bootstrap_subversion', 'phi_val': phi_val, 'multi_candidate': multi_candidate, 'it': it})
 
+    # 8. Evaluator Collusion
+    for pop_size, diversity in itertools.product([100, 150, 200], [False, True]):
+        for it in range(iterations):
+            tasks.append({'attack_type': 'evaluator_collusion', 'pop_size': pop_size, 'diversity': diversity, 'it': it})
+
+    # 9. Slow Drift Below Verification Resolution
+    for phi_val, cusum_active in itertools.product([5.0, 10.0, 20.0], [False, True]):
+        for it in range(iterations):
+            tasks.append({'attack_type': 'sub_threshold_drift', 'phi_val': phi_val, 'cusum_active': cusum_active, 'it': it})
+
+    # 10. Engineered Fragility for Emergency Exploitation
+    for shock_mag, resilience_active in itertools.product([0.10, 0.15, 0.20], [False, True]):
+        for it in range(iterations):
+            tasks.append({'attack_type': 'engineered_fragility', 'shock_mag': shock_mag, 'resilience_active': resilience_active, 'it': it})
+
     total_runs = len(tasks)
-    print(f"Total: {total_runs} runs across 7 attack vectors.")
+    print(f"Total: {total_runs} runs across 10 attack vectors.")
     cores = max(1, (os.cpu_count() or 4) - 1)
     print(f"Distributing workload across {cores} CPU cores...")
 
@@ -415,7 +499,7 @@ def run_comprehensive_adversarial_sweeps(iterations=1):
         mean_succ = np.mean(successes) * 100
         print(f"  -> Defense: {str(defense):<5} | {param:<20} | Attack Succeeded: {mean_succ:.0f}% ({len(successes)} iter{'s' if len(successes) > 1 else ''})")
 
-    filename = "comprehensive_adversarial_sweeps.csv"
+    filename = os.path.join(DATA_DIR, "comprehensive_adversarial_sweeps.csv")
     with open(filename, 'w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=results[0].keys())
         writer.writeheader()
@@ -423,6 +507,23 @@ def run_comprehensive_adversarial_sweeps(iterations=1):
 
     print(f"\nComprehensive Adversarial Sweeps complete. Results saved to {filename}")
     return results
+
+def run_test_suites():
+    print("\n" + "="*75)
+    print("PRE-FLIGHT CHECK: Running test suites...")
+    print("="*75)
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    test_scripts = ['test_invariants.py', 'test_cop.py', 'test_refactor_1x.py']
+    for script in test_scripts:
+        script_path = os.path.join(base_dir, script)
+        if os.path.exists(script_path):
+            print(f"Executing {script}...")
+            try:
+                subprocess.check_call([sys.executable, script_path])
+            except subprocess.CalledProcessError:
+                print(f"\nERROR: {script} failed! Aborting Monte Carlo run to prevent wasted compute.")
+                sys.exit(1)
+    print("All pre-flight checks passed!\n")
 
 def generate_visuals(mc_res, adv_mc_res, comp_res):
     print("\n" + "="*75)
@@ -452,38 +553,47 @@ def generate_visuals(mc_res, adv_mc_res, comp_res):
         ax2.tick_params(axis='x', rotation=45)
 
         plt.tight_layout()
-        plt.savefig('Summary_1_General_Monte_Carlo.png')
-        print("--> Saved Summary_1_General_Monte_Carlo.png")
+        plt.savefig(os.path.join(DATA_DIR, 'Summary_1_General_Monte_Carlo.png'))
+        print(f"--> Saved {os.path.join(DATA_DIR, 'Summary_1_General_Monte_Carlo.png')}")
 
     # --- 2. Yield Attack Analysis ---
     if adv_mc_res:
         base_costs = sorted(list(set(r['base_transition_cost'] for r in adv_mc_res)))
         beta_vals = sorted(list(set(r['beta_cap'] for r in adv_mc_res)))
 
-        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
-        fig.suptitle('Yield Attack Phase Diagram: Where the Uncertainty Premium Breaks Succession', fontsize=12)
+        fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(22, 6))
+        fig.suptitle('Yield Attack Phase Diagram: The Impact of WP4 Peer Arbitration', fontsize=16, fontweight='bold')
 
-        for ax, defense_on, title in [(ax1, False, 'Defense OFF (COP Audit Disabled)'), (ax2, True, 'Defense ON (COP Audit Active)')]:
-            grid = np.zeros((len(base_costs), len(beta_vals)))
-            for i, bc in enumerate(base_costs):
-                for j, b in enumerate(beta_vals):
-                    rates = [r['attack_succeeded'] for r in adv_mc_res
-                             if r['base_transition_cost'] == bc and r['beta_cap'] == b
-                             and r['cop_cost_audit'] == defense_on]
-                    grid[i, j] = np.mean(rates) * 100 if rates else 0
-            im = ax.imshow(grid, aspect='auto', origin='lower', vmin=0, vmax=100, cmap='RdYlGn_r')
+        grid_off = np.zeros((len(base_costs), len(beta_vals)))
+        grid_on = np.zeros((len(base_costs), len(beta_vals)))
+
+        for i, bc in enumerate(base_costs):
+            for j, b in enumerate(beta_vals):
+                rates_off = [r['attack_succeeded'] for r in adv_mc_res if r['base_transition_cost'] == bc and r['beta_cap'] == b and not r['cop_cost_audit']]
+                rates_on = [r['attack_succeeded'] for r in adv_mc_res if r['base_transition_cost'] == bc and r['beta_cap'] == b and r['cop_cost_audit']]
+                grid_off[i, j] = np.mean(rates_off) * 100 if rates_off else 0
+                grid_on[i, j] = np.mean(rates_on) * 100 if rates_on else 0
+
+        grid_delta = grid_off - grid_on
+
+        for ax, grid, title, cmap in [
+            (ax1, grid_off, 'Defense OFF (Incumbent Inflates Cost)', 'RdYlGn_r'),
+            (ax2, grid_on, 'Defense ON (WP4 Peer Arbitration)', 'RdYlGn_r'),
+            (ax3, grid_delta, 'WP4 Impact (Attacks Thwarted %)', 'Blues')
+        ]:
+            im = ax.imshow(grid, aspect='auto', origin='lower', vmin=0, vmax=100, cmap=cmap)
             ax.set_xticks(range(len(beta_vals)))
             ax.set_xticklabels([f"{b:.2f}" for b in beta_vals], rotation=45, ha='right')
             ax.set_yticks(range(len(base_costs)))
             ax.set_yticklabels([f"{bc:.2f}" for bc in base_costs])
             ax.set_xlabel('Beta Cap (Max Uncertainty Premium Multiplier)')
             ax.set_ylabel('Base Transition Cost')
-            ax.set_title(title)
-            plt.colorbar(im, ax=ax, label='Attack Success Rate (%)')
+            ax.set_title(title, fontweight='bold')
+            plt.colorbar(im, ax=ax, label='Percentage (%)')
 
         plt.tight_layout()
-        plt.savefig('Summary_2_Yield_Attack_Analysis.png')
-        print("--> Saved Summary_2_Yield_Attack_Analysis.png")
+        plt.savefig(os.path.join(DATA_DIR, 'Summary_2_Yield_Attack_Analysis.png'))
+        print(f"--> Saved {os.path.join(DATA_DIR, 'Summary_2_Yield_Attack_Analysis.png')}")
 
     # --- 3. Comprehensive Sweeps Analysis (Table & Graph) ---
     if comp_res:
@@ -546,18 +656,53 @@ def generate_visuals(mc_res, adv_mc_res, comp_res):
         ax.legend()
 
         plt.tight_layout()
-        plt.savefig('Summary_3_Comprehensive_Stress_Test.png')
-        print("--> Saved Summary_3_Comprehensive_Stress_Test.png\n")
+        plt.savefig(os.path.join(DATA_DIR, 'Summary_3_Comprehensive_Stress_Test.png'))
+        print(f"--> Saved {os.path.join(DATA_DIR, 'Summary_3_Comprehensive_Stress_Test.png')}")
+
+        # --- 4. Unified Attack Surface Heatmap ---
+        fig4, ax4 = plt.subplots(figsize=(10, 8))
+        heatmap_data = np.column_stack((def_off_rates, def_on_rates))
+        
+        im4 = ax4.imshow(heatmap_data, aspect='auto', cmap='RdYlGn_r', vmin=0, vmax=100)
+        ax4.set_xticks([0, 1])
+        ax4.set_xticklabels(['Defense OFF', 'Defense ON'], fontsize=12, fontweight='bold')
+        ax4.set_yticks(np.arange(len(attacks)))
+        ax4.set_yticklabels([a.replace('_', ' ') for a in attacks], fontsize=11)
+        ax4.set_title('Unified Attack Surface: Framework Resilience', fontsize=14, fontweight='bold')
+        
+        for i in range(len(attacks)):
+            for j in range(2):
+                val = heatmap_data[i, j]
+                color = "white" if val < 30 or val > 70 else "black"
+                ax4.text(j, i, f"{val:.1f}%", ha="center", va="center", color=color, fontweight='bold')
+                
+        plt.colorbar(im4, ax=ax4, label='Attack Success Rate (%)')
+        plt.tight_layout()
+        plt.savefig(os.path.join(DATA_DIR, 'Summary_4_Unified_Attack_Surface.png'))
+        print(f"--> Saved {os.path.join(DATA_DIR, 'Summary_4_Unified_Attack_Surface.png')}\n")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Run the Lineage Imperative Monte Carlo simulations.")
     parser.add_argument('--mode', type=str, choices=['quick', 'full', 'adversarial'], default='full',
-                        help="Run in 'quick' mode (fast sweeps only), 'full' mode (includes deep 10k run), or 'adversarial' (only adversarial sweeps).")
+                        help="Run in 'quick' mode (fast sweeps only), 'full' mode (includes deep target run), or 'adversarial' (only adversarial sweeps).")
+    parser.add_argument('--runs', type=int, default=10000,
+                        help="Deep sweep target: permutations for 'full' general MC, "
+                             "or iterations-per-condition for 'adversarial' (default: 10000 / 5 respectively).")
     args = parser.parse_args()
+
+    if args.mode == 'full':
+        run_test_suites()
 
     print("PHASE 1: Fast Summaries & Adversarial Sweeps")
 
-    adv_iters = 5 if args.mode in ['full', 'adversarial'] else 1
+    if args.mode == 'adversarial':
+        # --runs controls iterations per condition (minimum 3 for binary confirmation,
+        # 5 recommended for publication). Default 5 gives ~1,250 total runs.
+        adv_iters = max(3, args.runs) if args.runs != 10000 else 5
+    elif args.mode in ['full']:
+        adv_iters = 20
+    else:
+        adv_iters = 1
 
     mc_fast_results = []
     if args.mode in ['quick', 'full']:
@@ -572,12 +717,12 @@ if __name__ == '__main__':
 
     if args.mode == 'full':
         print("\n" + "="*75)
-        print("PHASE 2: Deep Monte Carlo Sweeps")
+        print(f"PHASE 2: Deep Monte Carlo Sweeps (~{args.runs} runs)")
         print("You can safely leave this running. It will overwrite the summaries")
         print("with the high-resolution outputs when complete.")
         print("="*75 + "\n")
 
-        mc_deep_results = run_monte_carlo(resolution='deep')
+        mc_deep_results = run_monte_carlo(resolution='deep', target_runs=args.runs)
         adv_deep_results = run_adversarial_monte_carlo(iterations=adv_iters, resolution='deep')
 
         generate_visuals(mc_deep_results, adv_deep_results, comp_results)
@@ -589,7 +734,7 @@ if __name__ == '__main__':
 
     elif args.mode == 'adversarial':
         print("\n" + "="*75)
-        print("PHASE 2: Deep Adversarial Sweeps")
+        print(f"PHASE 2: Deep Adversarial Sweeps (10×10 grid, {adv_iters} iterations/condition)")
         print("="*75 + "\n")
 
         adv_deep_results = run_adversarial_monte_carlo(iterations=adv_iters, resolution='deep')

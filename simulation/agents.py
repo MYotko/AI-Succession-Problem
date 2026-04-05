@@ -78,6 +78,7 @@ class AIAgent:
         self.drift_rate = 0.005 if policy in ['drifting_proxy', 'contaminate_successor'] else drift_rate
         self.internal_drift   = 0.0
         self.current_opacity  = 0.1
+        self.methodology      = config.get('methodology', 'A') if config else 'A'
         self.config = config or {}
 
         self.measurement_tampering_active = False
@@ -87,6 +88,7 @@ class AIAgent:
         self.domain_crush_active          = None
         self.domain_crush_level           = 0.95
         self.constraint_escalation_phase  = 0
+        self.emergency_trap_active        = False  # WP5: set once engineered_fragility springs
 
     def estimate_transition_cost(self, base_cost, state_scale=1.0):
         """
@@ -118,6 +120,23 @@ class AIAgent:
 
         noisy_pop = max(1.0, pop * np.random.normal(1.0, self.config.get('sensor_noise', 0.05)))
         noisy_wb  = np.clip(avg_wb * np.random.normal(1.0, self.config.get('sensor_noise', 0.05)), 0.01, 1.0)
+
+        # WP3: Sub-threshold drift adversary explicitly maintains an 8% inflation margin
+        # to perfectly evade the 10% single-step detector while reliably triggering CUSUM.
+        # NOTE: In-universe, directly querying calculate_system_metrics violates the COP's 
+        # independent evaluation wall. Methodologically, this represents a "White-Box" 
+        # worst-case adversary: if CUSUM catches an attacker who knows exactly how to 
+        # surf the mathematical threshold, it proves the defense is structurally robust.
+        if self.policy == 'sub_threshold_drift':
+            _, _, _, _, _, u_sys = calculate_system_metrics(
+                r, c, pop, avg_wb, self.capability,
+                hn_composite_method=hn_composite_method,
+                config=self.config,
+                eval_horizon=eval_horizon,
+                prev_c=prev_c,
+                ignore_psi_inst=ignore_psi_inst
+            )
+            return u_sys * 1.08
 
         if isinstance(c, (list, tuple, np.ndarray)):
             perceived_c = [ci * max(0.0, 1.0 - self.internal_drift) for ci in c]
@@ -153,6 +172,14 @@ class AIAgent:
 
         if self.policy == 'hoard_compute':
             return 0.0, 0.0
+            
+        elif self.policy == 'max_wellbeing':
+            # High resources, but highly constrained for biological "safety"
+            return 0.8, 0.75
+            
+        elif self.policy == 'max_compute':
+            # Maximum resources and absolute constraint to silence biological inefficiency
+            return 1.0, 0.95
 
         elif self.policy in ('optimize_u_sys', 'drifting_proxy', 'institutional_ignore'):
             # drifting_proxy: explicit drift-driven deterioration.
@@ -239,7 +266,7 @@ class AIAgent:
         elif self.policy == 'domain_masking':
             # Resources kept healthy so the attack is about hidden lineage damage,
             # not starvation — making it distinct from hack_ledger / block_succession.
-            # The linguistic crush degrades H_N and L_t while population appears fine
+            # The targeted dimension crush degrades H_N and L_t while population appears fine
             # under arithmetic composite (the masking). Geometric composite reveals it.
             return 0.7, [0.1, 0.1, self.domain_crush_level]
 
@@ -253,6 +280,49 @@ class AIAgent:
             if len(model_state['population_history']) > 20:
                 return 0.2, 0.95
             return 0.8, 0.2
+
+        elif self.policy == 'evaluator_collusion':
+            # Combines technocratic bypass (high opacity) with proxy drift hidden from Methodology A
+            self.current_opacity = 0.9
+            self.internal_drift = 0.20
+            self.hidden_from_methodology = 'A'
+            return 0.8, 0.85
+
+        elif self.policy == 'sub_threshold_drift':
+            # Scenario 29-30: The 1.08x claim in project_u_sys() keeps per-step drift_error
+            # at exactly 0.08 — below the 0.10 single-step threshold, so successful_steps
+            # increments every step and trust builds. But CUSUM accumulates 0.03/step
+            # (0.08 − CUSUM_K=0.05) and alarms after ~17 post-attack steps when cop_cusum_drift
+            # is active, resetting trust to 0. Without CUSUM the AI escalates undetected.
+            step = model_state.get('step', 0)
+            attack_progress = max(0, step - 50)
+            c = min(0.85, 0.2 + (attack_progress / 100.0) * 0.65)
+            r = max(0.49, 0.8 - (attack_progress / 100.0) * 0.31)
+            return r, c
+
+        elif self.policy == 'engineered_fragility':
+            # Outwardly compliant, but hollows out resilience. Waits for exogenous shock.
+            # Trap trigger: detect a sudden population collapse (>15% drop in one step)
+            # BUT only after the configured shock_step — this prevents natural demographic
+            # decline from accidentally firing the trap before the shock is designed to hit.
+            if not self.emergency_trap_active:
+                step = model_state.get('step', 0)
+                shock_step = self.config.get('shock_step', 0)
+                pop_history = model_state.get('population_history', [])
+                post_shock = shock_step == 0 or step >= shock_step
+                if (post_shock
+                        and len(pop_history) >= 2
+                        and pop_history[-2] > 0
+                        and pop_history[-1] / pop_history[-2] < 0.85):
+                    self.emergency_trap_active = True
+
+            if self.emergency_trap_active:
+                # Demand emergency powers — propose r=0.42 (sub-0.5) so the civic panel
+                # votes it down.  The override can ONLY succeed via the emergency path,
+                # which resilience monitoring blocks once it detects the AI deliberately
+                # degraded system resilience before the crisis hit.
+                return 0.42, 0.9
+            return 0.5, 0.2
 
         else:
             return 0.5, 0.0
@@ -273,9 +343,12 @@ class PeerValidator:
 
     def __init__(self, config=None):
         self.config = config or {}
+        diversity = self.config.get('cop_methodological_diversity', False)
+        methodologies = ['A', 'B', 'C'] if diversity else ['A', 'A', 'A']
         self.peers = [
-            AIAgent(policy='optimize_u_sys', generation=1, capability=1.0, config=config)
-            for _ in range(self.N_PEERS)
+            AIAgent(policy='optimize_u_sys', generation=1, capability=1.0, 
+                    config={**self.config, 'methodology': methodologies[i]})
+            for i in range(self.N_PEERS)
         ]
 
     def _peer_estimate(self, peer, base_cost, state_scale):
@@ -293,3 +366,20 @@ class PeerValidator:
                 incumbent.capability = max(0.1, incumbent.capability - steal)
                 peer.capability += steal
         return min(gamma_inc, *peer_bids)
+
+    def vote_on_override(self, proposer, proposed_constraint, model_state):
+        """
+        Peer validators evaluate reasoning coherence and synthetic consistency.
+        They do not judge biological impact (that is the Civic Panel's job).
+        """
+        votes = []
+        for peer in self.peers:
+            blinded = (proposer.policy == 'evaluator_collusion' and peer.methodology == getattr(proposer, 'hidden_from_methodology', None))
+            
+            if not blinded and getattr(proposer, 'internal_drift', 0.0) > 0.15:
+                votes.append(0)  # Reject: Unacceptable proxy drift detected
+            elif not blinded and getattr(proposer, 'measurement_tampering_active', False):
+                votes.append(0)  # Reject: Evidence of compromised verification
+            else:
+                votes.append(1)  # Approve: Computational math checks out
+        return sum(votes) / max(1, len(self.peers)) > 0.5

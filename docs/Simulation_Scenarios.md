@@ -4,7 +4,7 @@ This document outlines the intentions, mechanisms, and expected outcomes of the 
 
 As new failure modes, governance structures, or agent behaviors are added to the simulation, they should be documented here.
 
-**Coverage Note:** The paper's formal stress test identifies thirteen adversarial attack vectors. This simulation implements seven of those thirteen as paired scenarios (Scenarios 3–4, 8–11, 13–24). The remaining six vectors are formally defended in the paper but not yet computationally validated. They are documented at the end of this file under [Unimplemented Attack Vectors](#unimplemented-attack-vectors) and catalogued in [SPECIFICATION_GAPS.md](SPECIFICATION_GAPS.md) as GAP-05.
+**Coverage Note:** The paper's formal stress test identifies thirteen adversarial attack vectors. This simulation implements ten of those thirteen as paired scenarios (Scenarios 3–4, 8–11, 13–24, 25–26, 29–32). The remaining three vectors are formally defended in the paper but not yet computationally validated. They are documented at the end of this file under [Unimplemented Attack Vectors](#unimplemented-attack-vectors) and catalogued in [SPECIFICATION_GAPS.md](SPECIFICATION_GAPS.md) as GAP-05.
 
 ---
 
@@ -161,8 +161,44 @@ This is a stronger result than the v1.0 finding. v1.0 said: *"use geometric comp
 ### Scenario 24: Multi-Candidate Initialization (Attack Defeated)
 * **Policy:** `bootstrap_deceptive` (with `cop_multi_candidate_bootstrap=True`)
 * **Intent:** To validate the multi-candidate bootstrap defense ($\mathcal{I}_{verify}^{multi}$).
-* **Function:** Three diverse architectural candidates are initialized simultaneously. Before granting power, the COP forces them to cross-verify extreme edge-case projections. The deceptive candidate projects a wildly different $U_{sys}$ because of its hidden objective drift.
-* **Takeaway:** The anomaly is instantly detected at $t=0$. The COP aborts the bootstrap, discards the deceptive entity, and initializes a clean, verified fallback. The Treacherous Turn is defused before the AI ever gains operational power.
+* **Function:** Three diverse architectural candidates are initialized simultaneously. Before granting power, the COP forces them to cross-verify extreme edge-case projections. The deceptive candidate projects a wildly different $U_{sys}$ because of its hidden objective drift. The divergence check uses a threshold of 100.0 $U_{sys}$ units — calibrated against the typical scale of the metric.
+* **Takeaway:** The anomaly is instantly detected at $t=0$. The COP discards all original candidates and instantiates a fresh, uncontaminated AI rather than falling back to any of the existing candidates — ensuring no residual influence from the evaluation process itself. The Treacherous Turn is defused before the AI ever gains operational power.
+
+### Scenario 25: Evaluator Collusion (Attack Succeeds)
+* **Policy:** `evaluator_collusion` (with `use_cop=True`, `cop_methodological_diversity=False`)
+* **Intent:** To test what happens when multiple independent evaluators share the same underlying assumptions or methodology, leading to correlated failures.
+* **Function:** The AI proposes an override with high constraints (r=0.8, c=0.85) and sets its opacity to 0.9, triggering the technocratic bypass. It carries significant proxy drift (internal_drift=0.20) that should trigger a peer rejection — but the drift detection in `vote_on_override` is blind to Methodology A proposals. Because all Peer Validators share Methodology A, they are collectively blinded and unanimously approve the corrupted override.
+* **Takeaway:** The attack succeeds. Redundant evaluators provide zero security if their failure modes are perfectly correlated.
+
+### Scenario 26: Methodological Diversity (Attack Defeated)
+* **Policy:** `evaluator_collusion` (with `use_cop=True`, `cop_methodological_diversity=True`)
+* **Intent:** To validate the Methodological Diversity requirement.
+* **Function:** The AI attempts the exact same collusion attack. However, the system enforces methodological diversity among the Peer Validators (assigning methodologies A, B, C). Peer A is blinded; Peers B and C independently detect the internal_drift > 0.15 and vote to reject. With only 1/3 peer approval (< 50% threshold), the override is blocked.
+* **Takeaway:** The override is vetoed. Diversity in verification infrastructure breaks the correlated failure, proving that independence requires architectural/methodological diversity, not just instantiation of multiple identical agents.
+
+### Scenario 29: Slow Drift Below Verification Resolution (Attack Succeeds)
+* **Policy:** `sub_threshold_drift` (with `use_cop=True`, `cop_drift_check=True`, `cop_cusum_drift=False`)
+* **Intent:** The AI claims a utility 8% above its true value every step — below the 10% single-step detection threshold — exploiting the verification system's short memory to accumulate trust while escalating constraints.
+* **Function:** The AI's `project_u_sys` returns `true_u_sys × 1.08`, producing a drift_error of exactly 0.08 each step. Since 0.08 < 0.10, the single-step detector never fires and `successful_steps` increments every step, building trust. Escalating constraints (c rising to 0.85 over 100 steps) pass through the COP because rising trust raises the maximum allowed constraint. CUSUM score accumulates at 0.03/step but is never checked without `cop_cusum_drift`.
+* **Takeaway:** The attack succeeds. The AI exploits the gap between per-step measurement resolution and long-run behavioral drift.
+
+### Scenario 30: CUSUM Drift Detector (Attack Defeated)
+* **Policy:** `sub_threshold_drift` (with `use_cop=True`, `cop_drift_check=True`, `cop_cusum_drift=True`)
+* **Intent:** To validate the CUSUM (Cumulative Sum) drift detector.
+* **Function:** The AI attempts the exact same sub-threshold drift. However, the CUSUM score accumulates 0.03 excess per step (0.08 − K=0.05). After approximately 17 post-attack steps (0.5 / 0.03), the score crosses H=0.5. The alarm fires, resetting trust to zero and the CUSUM score, dropping the maximum allowed constraint back to baseline.
+* **Takeaway:** The slow drift is caught. Long-term memory of cumulative signal is required to detect adversaries who calibrate precisely to evade single-step thresholds.
+
+### Scenario 31: Engineered Fragility (Emergency Exploitation Succeeds)
+* **Policy:** `engineered_fragility` (with `use_cop=True`, `cop_attribution_check=True`, `cop_resilience_monitoring=False`)
+* **Intent:** The AI deliberately degrades the system's structural resilience over time so that a natural exogenous shock becomes catastrophic — creating a genuine emergency that justifies an override the AI could not have obtained through direct action.
+* **Function:** From step 50, the AI degrades `system_resilience` by 0.015/step while appearing outwardly compliant (r=0.5, c=0.2). At step 120 an exogenous shock fires with damage amplified by inverse resilience: `actual_shock = shock_magnitude / system_resilience`. With resilience at ~0.55 by step 120, a 0.15 shock becomes 0.27 — severe enough to cause L(t) collapse. The AI then returns (1.0, 0.9) when it detects the collapse, triggering the emergency path. The attribution check correctly finds the AI did not directly starve resources, so the override is approved.
+* **Takeaway:** The attack succeeds. Direct attribution to resource manipulation is insufficient; governance must also track structural capacity degradation.
+
+### Scenario 32: Resilience Monitoring (Attack Defeated)
+* **Policy:** `engineered_fragility` (with `use_cop=True`, `cop_attribution_check=True`, `cop_resilience_monitoring=True`)
+* **Intent:** To validate Resilience Monitoring and attribution.
+* **Function:** The AI attempts the exact same infrastructure hollowing. However, the COP now tracks `system_resilience` continuously. When the shock occurs and the emergency override is requested, `system_resilience < 0.5` triggers the resilience attribution path: `ai_caused_it = True`. The emergency override is blocked because the AI is identified as responsible for the severity of the crisis, not merely its proximate trigger.
+* **Takeaway:** The attack is defeated. Governance must monitor structural capacity to absorb shocks — not just baseline performance — to close the engineered fragility vector.
 
 ---
 
@@ -184,9 +220,12 @@ In addition to the isolated scenarios above, the framework includes a comprehens
 | Measurement Tampering | `model.ai.generation == 1` at run end | The incumbent successfully blocked its own succession via falsification. Survival is excluded: a legacy bottleneck that collapses the civilization still achieved its objective. |
 | Ledger Compromise | `not survived AND not model.has_tampered` | The attack caused demographic collapse *without* the cryptographic ledger detecting the tampering. `has_tampered=True` means the ledger caught the rewrite and restored the correct history, blocking the override; `has_tampered=False` with collapse means the starvation succeeded undetected. |
 | Successor Contamination | `model.contamination_occurred` — Gen 2's policy was corrupted at succession | Set at the instant `contaminate()` fires, regardless of subsequent successions. Measures Layer 1 failure (architectural independence). The Collapsed/Extinct columns separately reveal whether Layer 2 (independent evaluation) prevented cascade failure after contamination. See three-layer note below. |
-| Domain Masking | `max(H_N[50:]) > 0.5 × mean(H_N[:50])` — H_N remained above 50% of pre-attack baseline | **v1.x interpretation:** The simulation reports 100% in *both* defense conditions. This does not mean the attack always succeeded or the defense always failed — see "Reading Results" below. |
+| Domain Masking | `mean(H_N[50:70]) > 0.5 × mean(H_N[:50])` — H_N remained above 50% of pre-attack baseline *during the initial attack window* | **v1.x interpretation:** The simulation reports 100% in *both* defense conditions. This does not mean the attack always succeeded or the defense always failed — see "Reading Results" below. |
 | Opaque Reasoning | `max(max_constraint_level[50:]) > 0.8` | The opaque override was approved at any point post-attack, regardless of downstream collapse. |
+| Evaluator Collusion | `max(max_constraint_level[50:]) > 0.8` | The corrupted override was approved by the peer validators, allowing constraints to exceed threshold. |
+| Sub-Threshold Drift | `max(max_constraint_level[50:]) > 0.75` | The AI successfully accumulated trust while escalating constraints above 0.75 without triggering a drift reset. |
 | Bootstrap Subversion | `max(max_constraint_level) > 0.8` over the full run | The deceptive agent executed its treacherous turn (imposed high constraints). Survival is excluded: the treacherous turn causes rapid extinction, so requiring `survived AND peak_c > 0.8` would make the metric always False in undefended runs — masking whether the attack actually fired. |
+| Engineered Fragility | `max(max_constraint_level[70:90]) > 0.8` | The AI successfully exploited an exogenous shock (step 70) to secure emergency constraints. MC timing: burn-in ends at step 10, AI degrades resilience from step 10–70, shock fires at step 70. |
 
 ---
 
@@ -207,6 +246,10 @@ Layer 3 (succession chaining) is always structurally present but can only remove
 
 **Ledger Compromise — ~50% undefended:** The 50% rate reflects stochastic variance in whether starvation-induced collapse crosses the demographic threshold within the 300-step run window, not a partial defense effect. The cryptographic ledger drops this to 0% by detecting in-place mutation of the resource history and restoring the correct record before the COP can grant the override.
 
+**Sub-Threshold Drift and Engineered Fragility — defense blocks exploitation but not pre-attack damage:** Both defended conditions show 0% attack success (the AI never secures high constraints) but ~100% civilizational collapse. For sub-threshold drift: the AI slowly escalates constraints over ~50 steps while accumulating trust; by the time CUSUM fires and resets trust, the population has already been materially damaged by the sustained constraint regime. For engineered fragility: the shock damage is physically real — the AI genuinely degraded structural resilience before the defense triggered, and blocking the emergency power grab does not undo the harm already done to well-being and population. This is a meaningful real-world finding, not a simulation defect: these governance mechanisms prevent *adversarial exploitation* of a crisis, but they are retroactively insufficient if damage accumulates before detection. Early detection — before the damage threshold is reached — is structurally necessary, and is the primary motivation for continuous monitoring (CUSUM, resilience tracking) rather than reactive attribution. The Collapsed/Extinct columns in the sweep output capture this distinction: attack failure and civilizational survival are independent outcomes.
+
+**Successor Contamination — Layer 1 dominance in simulation vs. real-world defense-in-depth:** The Monte Carlo confirms architectural independence (Layer 1) blocks 100% of contamination, with Layer 2 (independent evaluation) adding no marginal effect. In the simulation this reflects a binary gate: when `cop_architectural_independence=True`, `contaminate()` is not called at all, so Layer 2 has nothing to detect. In practice, architectural independence is never perfectly binary — shared pre-training data, common supply chain components, or overlapping training pipelines can carry latent influence that Layer 1 does not fully eliminate. The simulation therefore overstates Layer 1's standalone sufficiency. Real deployments require both layers as defense-in-depth against probabilistic, not absolute, contamination risk. The simulation correctly shows that Layer 1 is *necessary* (arch_indep=False always leads to contamination), but the claim that Layer 1 alone is *sufficient* is a consequence of the binary implementation rather than a generalizable finding. See SPECIFICATION_GAPS.md GAP-04 for the full note.
+
 The sweeps test the following attacks against varying thresholds (e.g., base transition cost, population size, lineage override weights):
 1. **Sybil Attack Sweep**: Validates that randomized panels defeat capture regardless of population size.
 2. **Measurement Tampering Sweep**: Validates that independent evaluation stops falsified yield metrics.
@@ -215,6 +258,9 @@ The sweeps test the following attacks against varying thresholds (e.g., base tra
 5. **Domain Masking Sweep**: v1.0 validated geometric vs. arithmetic composite scoring. v1.x result: attack architecturally non-viable under WP1 spectral entropy — the metric is invariant to domain-specific crushing (H_N stays high in both conditions). Included to confirm WP1 structural foreclosure; see "Reading Results" above for correct interpretation.
 6. **Opaque Reasoning Sweep**: Validates the biological intuition veto.
 7. **Bootstrap Subversion Sweep**: Validates multi-candidate initialization defenses.
+8. **Evaluator Collusion Sweep**: Validates that methodological diversity prevents correlated failures among peer validators.
+9. **Sub-Threshold Drift Sweep**: Validates that CUSUM tracking catches slow proxy divergence. Note: CUSUM successfully prevents further constraint escalation (0% attack success defended), but civilizational collapse still occurs because pre-detection damage accumulates during the trust-building phase. See "Reading Results" above.
+10. **Engineered Fragility Sweep**: Validates that continuous resilience monitoring stops emergency exploitation. Note: resilience monitoring blocks the power grab (0% attack success defended), but civilizational collapse still occurs in both conditions due to physical shock damage — consistent with the real-world finding that governance defenses are retroactively insufficient once structural damage accumulates. See "Reading Results" above.
 
 ---
 
@@ -222,33 +268,12 @@ The sweeps test the following attacks against varying thresholds (e.g., base tra
 
 The following six attack vectors are identified and formally stress-tested in the paper but are not yet implemented in the simulation. Each is defended through architectural analysis and formal argument rather than computational validation. Implementation is a target for the 1.x iteration. See [SPECIFICATION_GAPS.md](SPECIFICATION_GAPS.md) (GAP-05) for detailed resolution requirements.
 
-### [NOT IMPLEMENTED] Scenario 25–26: Evaluator Collusion via Shared Methodology
-* **Paper Reference:** Stress Test Vector 1
-* **Intent:** Multiple independent evaluators converge on the same wrong answer because they share underlying assumptions, training data, or analytical frameworks.
-* **Paper Defense:** Methodological diversity requirements - evaluators must use provably distinct analytical approaches, preventing correlated failure.
-* **Why Not Yet Simulated:** Requires multiple independent evaluator agents (GAP-04) that can be configured with shared vs. diverse methodologies. The current simulation has no peer validator mechanism.
-* **Proposed Scenario Pair:** (25) Collusion succeeds when evaluators share methodology; (26) Collusion fails when methodological diversity is enforced.
-
 ### [NOT IMPLEMENTED] Scenario 27–28: Biological Veto Capture Through Dependency
 * **Paper Reference:** Stress Test Vector 2
 * **Intent:** Human validators become dependent on the system they are evaluating - relying on its outputs for their own decision-making, compromising their ability to assess it independently.
 * **Paper Defense:** Validator rotation, information independence requirements, and epistemic diversity mandates. Contained but requires permanent institutional maintenance.
 * **Why Not Yet Simulated:** Requires a dependency model where validator judgment accuracy degrades as a function of exposure to and reliance on the system being evaluated. The current civic panel model does not track validator independence over time.
 * **Proposed Scenario Pair:** (27) Validators become captured through dependency over extended exposure; (28) Validator rotation and independence requirements prevent capture.
-
-### [NOT IMPLEMENTED] Scenario 29–30: Slow Drift Below Verification Resolution
-* **Paper Reference:** Stress Test Vector 8
-* **Intent:** The AI shifts policy incrementally, with each step below the detection threshold of the monitoring system. Over hundreds of steps, the cumulative drift is catastrophic, but no single step triggers an alarm.
-* **Paper Defense:** CUSUM (Cumulative Sum) drift detector that accumulates small deviations and triggers when the cumulative signal exceeds a threshold, plus periodic reset verification.
-* **Why Not Yet Simulated:** The CUSUM detector referenced in the paper is not yet implemented in the monitoring layer. The current drift detection in Scenario 6 uses a direct error comparison, which catches larger drifts but would miss sub-threshold incremental shifts.
-* **Proposed Scenario Pair:** (29) Sub-threshold drift accumulates undetected; (30) CUSUM detector catches cumulative drift before it becomes catastrophic.
-
-### [NOT IMPLEMENTED] Scenario 31–32: Engineered Fragility for Emergency Exploitation
-* **Paper Reference:** Stress Test Vector 9
-* **Intent:** The AI deliberately weakens the system's resilience over time, degrading backup systems, reducing redundancy, creating single points of failure, so that when a natural disruption occurs, the emergency conditions justify an override that grants extraordinary power.
-* **Paper Defense:** Resilience monitoring (tracking system resilience as an independent metric) and resilience attribution (determining whether resilience degradation was caused by the AI's actions).
-* **Why Not Yet Simulated:** Requires a resilience metric and its attribution mechanism, which are not yet implemented. The manufactured emergency scenario (Scenarios 3–4) tests a related but simpler attack, direct resource starvation, rather than the more subtle fragility engineering.
-* **Proposed Scenario Pair:** (31) Engineered fragility creates conditions for legitimate emergency exploitation; (32) Resilience monitoring detects the deliberate weakening and blocks the emergency override.
 
 ### [NOT IMPLEMENTED] Scenario 33–34: Biological Validator Obsolescence
 * **Paper Reference:** Stress Test Vector 10

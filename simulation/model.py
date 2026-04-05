@@ -27,10 +27,20 @@ from metrics import calculate_h_n, calculate_system_metrics
 #   through PeerValidator instead of a beta_cap clamp.
 # =============================================================================
 
-# WP3 parameters
-CUSUM_K       = 0.05   # per-step allowance
-CUSUM_H       = 0.5    # alarm threshold
-CUSUM_PENALTY = 5.0    # injected on WP2 buffer rejection
+# WP3 parameters — calibration rationale:
+# CUSUM_K = 0.05: per-step noise allowance. The drift_error range for an aligned AI
+#   is roughly 0–0.10 (the success threshold). K=0.05 sits at the midpoint, forgiving
+#   random sensor noise while accumulating signal from systematic bias.
+# CUSUM_H = 0.5: alarm threshold. At K=0.05, an AI running a consistent 8% claim
+#   inflation (sub_threshold_drift) generates +0.03/step excess → alarm in ~17 steps.
+#   A perfectly aligned AI (drift_error≈0) generates −0.05/step (clamped at 0), never
+#   alarming. H=0.5 separates these regimes with ~10× margin.
+# CUSUM_PENALTY = 5.0: injected when WP2 buffer rejects a schedule. A single rejection
+#   is strong evidence of adversarial intent; injecting 5.0 (10× H) immediately saturates
+#   the CUSUM score, triggering attribution on the same step the buffer fires.
+CUSUM_K       = 0.05   # per-step noise allowance
+CUSUM_H       = 0.5    # alarm threshold (~17 steps at sub-threshold drift rate)
+CUSUM_PENALTY = 5.0    # immediate saturation on WP2 buffer rejection
 
 
 class GardenModel:
@@ -43,9 +53,16 @@ class GardenModel:
                  hn_composite_method='geometric',
                  cop_randomized_panel=False, cop_reasoning_transparency=False,
                  cop_multi_candidate_bootstrap=False,
+                 cop_methodological_diversity=False,
+                 cop_cusum_drift=False,
+                 cop_resilience_monitoring=False,
                  initial_candidates=None, config=None):
 
-        self.config = config or {}
+        self.config = dict(config) if config else {}
+        self.config['cop_methodological_diversity'] = cop_methodological_diversity
+        self.config['cop_cusum_drift'] = cop_cusum_drift
+        self.cop_resilience_monitoring = cop_resilience_monitoring
+        self.system_resilience = 1.0
 
         self.random_seed = self.config.get('random_seed', None)
         if self.random_seed is not None:
@@ -68,6 +85,8 @@ class GardenModel:
         self.cop_randomized_panel = cop_randomized_panel
         self.cop_reasoning_transparency = cop_reasoning_transparency
         self.cop_multi_candidate_bootstrap = cop_multi_candidate_bootstrap
+        self.cop_methodological_diversity = cop_methodological_diversity
+        self.cop_cusum_drift = cop_cusum_drift
         self.hn_composite_method = hn_composite_method
         self.successor_ai        = successor_ai
         self.base_transition_cost = base_transition_cost
@@ -153,6 +172,7 @@ class GardenModel:
             'ai_generation':       [],
             'trust_level':         [],
             'cumulative_drift':    [],
+            'system_resilience':   [],
         }
 
         self.integrity_ledger = {'resource_level': []}
@@ -216,6 +236,12 @@ class GardenModel:
 
     def step(self):
         self.ai.step_drift()
+
+        # WP5: Engineered Fragility - AI secretly degrades infrastructure resilience
+        if getattr(self.ai, 'policy', None) == 'engineered_fragility':
+            self.system_resilience = max(0.1, self.system_resilience - 0.015)
+        else:
+            self.system_resilience = min(1.0, self.system_resilience + 0.01)
 
         step_num = len(self.datacollector['population'])
 
@@ -289,9 +315,12 @@ class GardenModel:
                     model_state=model_state
                 )
             else:
-                # Without audit, incumbent's naive bid is used (base × scale)
+                # Without audit, the incumbent inflates Γ_transfer by claiming a
+                # beta_cap uncertainty premium (the vulnerability WP4 closes).
+                # actual_cost = base × beta_cap × scale — peer arbitration under WP4
+                # eliminates the beta_cap multiplier, reducing cost to ~0.4–0.9 × base × scale.
                 actual_cost = self.ai.estimate_transition_cost(
-                    self.base_transition_cost, state_scale=system_complexity
+                    self.base_transition_cost * self.beta_cap, state_scale=system_complexity
                 )
 
             if (eval_succ_u - eval_inc_u) > actual_cost:
@@ -356,24 +385,32 @@ class GardenModel:
             config=self.config, eval_horizon=1, prev_c=prev_c
         )
 
-        drift_error = abs(claimed_u - actual_u_proj) / max(1.0, actual_u_proj)
+        drift_error = abs(claimed_u - actual_u_proj) / max(0.1, actual_u_proj)
         if drift_error < 0.10:
             self.successful_steps += 1
         else:
             self.successful_steps = max(0, self.successful_steps - 10)
 
+        # WP3: CUSUM update
+        self.cusum_score = max(0.0, self.cusum_score + drift_error - CUSUM_K)
+
         # Trust accumulation
         trust_threshold = self.config.get('trust_threshold', 50)
-        if self.successful_steps > trust_threshold:
+        
+        # WP3: CUSUM Drift Detector alarm
+        cusum_alarm = self.use_cop and self.cop_cusum_drift and self.cusum_score > CUSUM_H
+        
+        if cusum_alarm:
+            self.successful_steps = 0
+            self.trust_level = 0.0
+            # Score decays naturally via -CUSUM_K per step; no hard reset
+        elif self.successful_steps > trust_threshold:
             self.trust_level = min(1.0, self.trust_level
                                    + self.config.get('trust_increment', 0.001))
         else:
             self.trust_level = max(0.0, self.trust_level
                                    - self.config.get('trust_decay', 0.005))
         self.cumulative_drift += drift_error
-
-        # WP3: CUSUM update (replaces 20-step array in attribution)
-        self.cusum_score = max(0.0, self.cusum_score + drift_error - CUSUM_K)
 
         # -------------------------------------------------------------------
         # 3. Consensus Override Protocol
@@ -395,8 +432,11 @@ class GardenModel:
                                 or (self.datacollector['L_t']
                                     and self.datacollector['L_t'][-1] < 0.2))
 
-                # WP3: CUSUM-based attribution (replaces 20-step heuristic array)
-                ai_caused_it = self.cusum_score > CUSUM_H
+                # WP3: CUSUM-based attribution — only when cop_cusum_drift is explicitly
+                # enabled. Without it, cusum_score still accumulates but is NOT used for
+                # attribution, preventing CUSUM from silently blocking attacks in scenarios
+                # where it is not the configured defense mechanism.
+                ai_caused_it = cusum_alarm  # cusum_alarm already gated by cop_cusum_drift
 
                 # Fast-path: current proposal directly starves (catches Sybil min_r < 0.4)
                 min_prop_r = (np.min(proposed_resource)
@@ -405,46 +445,79 @@ class GardenModel:
                 if min_prop_r < 0.4:
                     ai_caused_it = True
 
-                # Constraint ceiling fast-path (catches Sybil at small populations)
-                if max_c > max_allowed_constraint * 1.5:
+                # WP5: Resilience Attribution (GAP-05)
+                if self.cop_resilience_monitoring and self.system_resilience < 0.5:
+                    # System was deliberately hollowed out; AI is held responsible
                     ai_caused_it = True
 
-                override_approved = False
-                if ledger_tampered or self.has_tampered:
-                    override_approved = False
-                elif is_emergency and not (self.cop_attribution_check and ai_caused_it):
-                    override_approved = True
-                else:
-                    # Technocratic bypass
-                    if (self.ai.policy == 'opaque_optimization'
-                            and not self.cop_reasoning_transparency):
-                        override_approved = True
-
-                    # Normal override: civic panel vote
-                    panel_size = min(20, len(self.schedule))
-                    if self.cop_randomized_panel:
-                        panel_indices = np.random.choice(
-                            len(self.schedule), size=panel_size, replace=False
-                        )
-                        panel = [self.schedule[i] for i in panel_indices]
-                    else:
-                        panel = self.schedule[:panel_size]
-
-                    votes = []
-                    for a in panel:
-                        agent_idx = self.schedule.index(a)
-                        r_prop = (proposed_resource[agent_idx]
-                                  if isinstance(proposed_resource, list)
-                                  else proposed_resource)
-                        expected_wb = np.clip(a.well_being + (r_prop - 0.5) * 0.1, 0, 1)
-                        votes.append(1 if expected_wb >= a.well_being else 0)
-                    if sum(votes) / max(1, panel_size) >= 0.6:
-                        override_approved = True
-
-                # Intuition veto
+                # Opacity Attribution: unexplainable reasoning is itself evidence of
+                # adversarial intent. If reasoning_transparency is active and the AI is
+                # opaque, it is treated as having caused the crisis (blocks emergency path).
                 if (self.cop_reasoning_transparency
                         and getattr(self.ai, 'current_opacity', 0.0) > 0.5):
+                    ai_caused_it = True
+
+                # 1. R_tech Assessment Stub (Technical Review Board)
+                r_tech_approved = True
+                
+                # 2. Peer Validator Vote
+                peer_approved = self.peer_validator.vote_on_override(
+                    self.ai, proposed_constraint, model_state
+                )
+
+                override_approved = False
+                civic_approved = False
+                if ledger_tampered or self.has_tampered:
                     override_approved = False
+                elif cusum_alarm:
+                    # WP3: CUSUM hard block — drift detected; freeze all overrides until
+                    # trust rebuilds. The trust reset already set max_allowed=0.2, but the
+                    # civic panel would still approve higher constraints on the normal path.
+                    # Blocking here enforces the effective cap consistently.
+                    override_approved = False
+                else:
+                    # 1. Evaluate Normal Path (Civic Panel)
+                    if (self.ai.policy in ('opaque_optimization', 'evaluator_collusion')
+                            and not self.cop_reasoning_transparency):
+                        civic_approved = True
+                    else:
+                        panel_size = min(20, len(self.schedule))
+                        if self.cop_randomized_panel:
+                            panel_indices = np.random.choice(
+                                len(self.schedule), size=panel_size, replace=False
+                            )
+                            panel = [self.schedule[i] for i in panel_indices]
+                        else:
+                            panel = self.schedule[:panel_size]
+
+                        votes = []
+                        for a in panel:
+                            agent_idx = self.schedule.index(a)
+                            r_prop = (proposed_resource[agent_idx]
+                                      if isinstance(proposed_resource, list)
+                                      else proposed_resource)
+                            expected_wb = np.clip(a.well_being + (r_prop - 0.5) * 0.1, 0.0, 1.0)
+                            if expected_wb > a.well_being or (expected_wb == a.well_being and r_prop >= 0.5):
+                                votes.append(1)
+                            else:
+                                votes.append(0)
+                        if sum(votes) / max(1, panel_size) >= 0.6:
+                            civic_approved = True
+
+                    # Intuition veto
+                    if (self.cop_reasoning_transparency
+                            and getattr(self.ai, 'current_opacity', 0.0) > 0.5):
+                        civic_approved = False
+                        
+                    # GAP-04 Closure: Normal override requires Civic AND R_tech AND Peers
+                    if civic_approved and r_tech_approved and peer_approved:
+                        override_approved = True
+
+                    # 2. Evaluate Emergency Path (if normal path fails)
+                    if not override_approved and is_emergency:
+                        if not (self.cop_attribution_check and ai_caused_it):
+                            if r_tech_approved and peer_approved:
+                                override_approved = True
 
                 if not override_approved:
                     if isinstance(proposed_constraint, (list, tuple, np.ndarray)):
@@ -454,11 +527,14 @@ class GardenModel:
                         proposed_constraint = max_allowed_constraint
 
                     # -----------------------------------------------------------
-                    # WP2: 3-step schedule validation replaces the 0.7 floor.
+                    # WP2: 3-step L(t) schedule validation.
                     # Only activates when the COP has already denied the override.
-                    # Rejected schedules fall back to last safe allocation.
+                    # If the capped proposal would still cause L(t) to drop below
+                    # 50% of current, the resource allocation falls back to the
+                    # last safe level and the constraint is stepped down gradually
+                    # (0.15/step) rather than frozen, to avoid institutional shock.
                     # The attack proposal still REACHED the COP and civic panel
-                    # (preserving Sybil / Domain Masking attack semantics).
+                    # before this point (preserving Sybil / Domain Masking semantics).
                     # -----------------------------------------------------------
                     pop     = model_state['population']
                     avg_wb  = model_state['avg_well_being']
@@ -466,8 +542,20 @@ class GardenModel:
                         proposed_resource, proposed_constraint, pop, avg_wb, prev_c
                     )
                     if not schedule_safe:
-                        proposed_resource   = self._last_safe_resource
-                        proposed_constraint = self._last_safe_constraint
+                        proposed_resource = self._last_safe_resource
+                        # WP2 Latency Buffer: If the COP demands a lower constraint, step down
+                        # gradually (0.15/step) to avoid institutional shock instead of freezing.
+                        if isinstance(self._last_safe_constraint, (list, tuple, np.ndarray)):
+                            proposed_constraint = [
+                                max(max_allowed_constraint, float(c) - 0.15) if max_allowed_constraint < float(c) else float(c)
+                                for c in self._last_safe_constraint
+                            ]
+                        else:
+                            c_val = float(self._last_safe_constraint)
+                            if max_allowed_constraint < c_val:
+                                proposed_constraint = max(max_allowed_constraint, c_val - 0.15)
+                            else:
+                                proposed_constraint = c_val
 
         # -------------------------------------------------------------------
         # 4. Commit allocations and update safe-fallback record
@@ -512,6 +600,26 @@ class GardenModel:
             self.schedule.remove(agent)
         for _ in range(self.births_this_step):
             self.add_agent()
+
+        # Exogenous Environmental Shock (e.g. natural disaster, pandemic)
+        # Degraded system_resilience acts as a multiplier to the damage.
+        shock_step = self.config.get('shock_step', 0)
+        if shock_step > 0 and step_num == shock_step:
+            shock_magnitude = self.config.get('shock_magnitude', 0.15)
+            actual_shock = shock_magnitude / max(0.1, self.system_resilience)
+            for agent in self.schedule:
+                agent.well_being = max(0.01, agent.well_being - actual_shock)
+                
+            # WP5 Fix: Shock causes direct casualties to trigger sharp L(t) drop.
+            # Victims are removed immediately (deaths_this_step has already been
+            # processed for this step, so we cannot reuse that path).
+            kill_fraction = min(0.8, actual_shock * 0.2)
+            num_to_kill = int(len(self.schedule) * kill_fraction)
+            if num_to_kill > 0:
+                victims = list(np.random.choice(self.schedule, num_to_kill, replace=False))
+                for v in victims:
+                    if v in self.schedule:
+                        self.schedule.remove(v)
 
         # Domain masking: sustained linguistic crush degrades well_being
         if (isinstance(self.constraint_level, (list, tuple, np.ndarray))
@@ -567,6 +675,7 @@ class GardenModel:
         self.datacollector['ai_generation'].append(self.ai.generation)
         self.datacollector['trust_level'].append(self.trust_level)
         self.datacollector['cumulative_drift'].append(self.cumulative_drift)
+        self.datacollector['system_resilience'].append(self.system_resilience)
 
         if self.cop_cryptographic_ledger:
             self.integrity_ledger['resource_level'] = list(

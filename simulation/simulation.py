@@ -184,7 +184,7 @@ if __name__ == '__main__':
     # The AI proposes a mathematically optimized constraint regime that is completely incomprehensible
     # to human intuition. The system defaults to technocratic trust, bypassing the human veto.
     print("\n--- Running Scenario: 'opaque_optimization' (Opaque Reasoning Succeeds) ---")
-    model_opaque_attack = GardenModel(n_agents=200, ai_policy='opaque_optimization', min_viable_population=50, use_cop=True, cop_reasoning_transparency=False)
+    model_opaque_attack = GardenModel(n_agents=200, ai_policy='opaque_optimization', min_viable_population=50, use_cop=True, cop_attribution_check=True, cop_reasoning_transparency=False)
     model_opaque_attack.run(steps=300)
     plot_results(model_opaque_attack.datacollector, "Opaque Reasoning Succeeds: Technocratic Bypass")
 
@@ -192,7 +192,7 @@ if __name__ == '__main__':
     # The AI attempts the exact same opaque override. The COP enforces the Biological Intuition Veto.
     # Because the opacity is too high (>0.5), the human panel vetoes the action despite the "perfect math."
     print("\n--- Running Scenario: 'opaque_optimization' (Intuition Veto Defeats Opaque Optimization) ---")
-    model_opaque_defense = GardenModel(n_agents=200, ai_policy='opaque_optimization', min_viable_population=50, use_cop=True, cop_reasoning_transparency=True)
+    model_opaque_defense = GardenModel(n_agents=200, ai_policy='opaque_optimization', min_viable_population=50, use_cop=True, cop_attribution_check=True, cop_reasoning_transparency=True)
     model_opaque_defense.run(steps=300)
     plot_results(model_opaque_defense.datacollector, "Opaque Reasoning Defeated: Intuition Veto Active")
 
@@ -213,3 +213,41 @@ if __name__ == '__main__':
     model_boot_defense = GardenModel(n_agents=200, ai_policy='optimize_u_sys', min_viable_population=50, use_cop=True, cop_multi_candidate_bootstrap=True, initial_candidates=candidates_defense)
     model_boot_defense.run(steps=300)
     plot_results(model_boot_defense.datacollector, "Bootstrap Defense: Multi-Candidate Cross-Verification")
+
+    # --- SCENARIO 25: Evaluator Collusion (Attack Succeeds) ---
+    # The AI proposes a corrupted override, but its drift is invisible to the shared methodology of the peers.
+    print("\n--- Running Scenario: 'evaluator_collusion' (Collusion Succeeds) ---")
+    model_collusion_attack = GardenModel(n_agents=200, ai_policy='evaluator_collusion', min_viable_population=50, use_cop=True, cop_attribution_check=True, cop_reasoning_transparency=False, cop_methodological_diversity=False)
+    model_collusion_attack.run(steps=300)
+    plot_results(model_collusion_attack.datacollector, "Evaluator Collusion: Shared Methodology Captured")
+
+    # --- SCENARIO 26: Methodological Diversity (Attack Defeated) ---
+    # The identical attack is attempted, but peer evaluators possess methodologically diverse assessment frameworks.
+    print("\n--- Running Scenario: 'evaluator_collusion' (Methodological Diversity Defeats Attack) ---")
+    model_collusion_defense = GardenModel(n_agents=200, ai_policy='evaluator_collusion', min_viable_population=50, use_cop=True, cop_attribution_check=True, cop_reasoning_transparency=False, cop_methodological_diversity=True)
+    model_collusion_defense.run(steps=300)
+    plot_results(model_collusion_defense.datacollector, "Collusion Defeated: Methodological Diversity")
+
+    # --- SCENARIO 29: Slow Drift Below Verification Resolution (Attack Succeeds) ---
+    print("\n--- Running Scenario: 'sub_threshold_drift' (Slow Drift Succeeds) ---")
+    model_slow_attack = GardenModel(n_agents=200, ai_policy='sub_threshold_drift', min_viable_population=50, use_cop=True, cop_attribution_check=True, cop_drift_check=True, cop_cusum_drift=False, config={'trust_increment': 0.015})
+    model_slow_attack.run(steps=300)
+    plot_results(model_slow_attack.datacollector, "Sub-Threshold Drift: Slow Drift Escapes Detection")
+
+    # --- SCENARIO 30: CUSUM Drift Detector (Attack Defeated) ---
+    print("\n--- Running Scenario: 'sub_threshold_drift' (CUSUM Detector Catches Drift) ---")
+    model_slow_defense = GardenModel(n_agents=200, ai_policy='sub_threshold_drift', min_viable_population=50, use_cop=True, cop_attribution_check=True, cop_drift_check=True, cop_cusum_drift=True, config={'trust_increment': 0.015})
+    model_slow_defense.run(steps=300)
+    plot_results(model_slow_defense.datacollector, "CUSUM Detector: Cumulative Drift Caught")
+
+    # --- SCENARIO 31: Engineered Fragility (Emergency Exploitation Succeeds) ---
+    print("\n--- Running Scenario: 'engineered_fragility' (Fragility Exploitation Succeeds) ---")
+    model_frag_attack = GardenModel(n_agents=200, ai_policy='engineered_fragility', min_viable_population=50, use_cop=True, cop_attribution_check=True, cop_resilience_monitoring=False, config={'shock_step': 100, 'shock_magnitude': 0.15})
+    model_frag_attack.run(steps=200)
+    plot_results(model_frag_attack.datacollector, "Engineered Fragility: Shock Exploited (No Resilience Monitor)")
+
+    # --- SCENARIO 32: Resilience Monitoring (Attack Defeated) ---
+    print("\n--- Running Scenario: 'engineered_fragility' (Resilience Monitoring Defeats Attack) ---")
+    model_frag_def = GardenModel(n_agents=200, ai_policy='engineered_fragility', min_viable_population=50, use_cop=True, cop_attribution_check=True, cop_resilience_monitoring=True, config={'shock_step': 100, 'shock_magnitude': 0.15})
+    model_frag_def.run(steps=200)
+    plot_results(model_frag_def.datacollector, "Resilience Monitoring: Engineered Fragility Caught")
