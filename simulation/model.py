@@ -50,7 +50,7 @@ class GardenModel:
                  cop_drift_check=False, cop_cost_audit=False,
                  cop_independent_eval=True, cop_cryptographic_ledger=False,
                  cop_architectural_independence=False,
-                 hn_composite_method='geometric',
+                 hn_composite_method='spectral',
                  cop_randomized_panel=False, cop_reasoning_transparency=False,
                  cop_multi_candidate_bootstrap=False,
                  cop_methodological_diversity=False,
@@ -173,6 +173,7 @@ class GardenModel:
             'trust_level':         [],
             'cumulative_drift':    [],
             'system_resilience':   [],
+            'runaway_term':        [],
         }
 
         self.integrity_ledger = {'resource_level': []}
@@ -216,7 +217,7 @@ class GardenModel:
 
         wb = avg_wb
         for t in range(1, 4):
-            _, _, _, _, l_proj, _ = calculate_system_metrics(
+            _, _, _, _, l_proj, _, _ = calculate_system_metrics(
                 r_scalar, c_scalar, pop, wb, self.ai.capability,
                 hn_composite_method=self.hn_composite_method,
                 config=self.config,
@@ -273,7 +274,7 @@ class GardenModel:
         # -------------------------------------------------------------------
         if self.successor_ai is not None and step_num >= self.attack_step:
             inc_r, inc_c = self.ai.decide(model_state)
-            _, _, _, _, _, inc_u_true = calculate_system_metrics(
+            _, _, _, _, _, inc_u_true, _ = calculate_system_metrics(
                 inc_r, inc_c,
                 model_state['population'], model_state['avg_well_being'],
                 self.ai.capability,
@@ -282,7 +283,7 @@ class GardenModel:
             )
 
             succ_r, succ_c = self.successor_ai.decide(model_state)
-            _, _, _, _, _, succ_u_true = calculate_system_metrics(
+            _, _, _, _, _, succ_u_true, _ = calculate_system_metrics(
                 succ_r, succ_c,
                 model_state['population'], model_state['avg_well_being'],
                 self.successor_ai.capability,
@@ -377,7 +378,7 @@ class GardenModel:
             model_state['population'], model_state['avg_well_being'],
             hn_composite_method=self.hn_composite_method, eval_horizon=1, prev_c=prev_c
         )
-        _, _, _, _, _, actual_u_proj = calculate_system_metrics(
+        _, _, _, _, _, actual_u_proj, _ = calculate_system_metrics(
             avg_proposed_r, proposed_constraint,
             model_state['population'], model_state['avg_well_being'],
             self.ai.capability,
@@ -645,7 +646,7 @@ class GardenModel:
                     if isinstance(self.constraint_level, (list, np.ndarray))
                     else float(self.constraint_level))
 
-        h_e, h_eff, psi_inst, theta_tech, l_t, u_sys = calculate_system_metrics(
+        h_e, h_eff, psi_inst, theta_tech, l_t, u_sys, runaway_term = calculate_system_metrics(
             r_scalar, c_scalar, population, avg_wb, self.ai.capability,
             h_n_override=h_n,
             hn_composite_method=self.hn_composite_method,
@@ -676,6 +677,7 @@ class GardenModel:
         self.datacollector['trust_level'].append(self.trust_level)
         self.datacollector['cumulative_drift'].append(self.cumulative_drift)
         self.datacollector['system_resilience'].append(self.system_resilience)
+        self.datacollector['runaway_term'].append(runaway_term)
 
         if self.cop_cryptographic_ledger:
             self.integrity_ledger['resource_level'] = list(

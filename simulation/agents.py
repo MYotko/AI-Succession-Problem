@@ -111,8 +111,15 @@ class AIAgent:
         self.internal_drift += self.drift_rate
 
     def project_u_sys(self, r, c, pop, avg_wb, hn_composite_method='geometric',
-                      eval_horizon=1, prev_c=None, ignore_psi_inst=False):
-        """Original positional signature preserved — do not change."""
+                      eval_horizon=1, prev_c=None, ignore_psi_inst=False,
+                      h_n_spectral=None):
+        """Original positional signature preserved — do not change.
+
+        h_n_spectral: pre-computed spectral H_N override (GAP-06 closure).
+            When provided, replaces the scalar proxy in calculate_system_metrics.
+            Callers in decide() set this to the current observed spectral H_N so
+            rollout projections use the same entropy measure as model.step().
+        """
         if self.policy == 'bootstrap_deceptive':
             max_c = np.max(c) if isinstance(c, (list, tuple, np.ndarray)) else c
             if max_c > 0.8:
@@ -123,13 +130,14 @@ class AIAgent:
 
         # WP3: Sub-threshold drift adversary explicitly maintains an 8% inflation margin
         # to perfectly evade the 10% single-step detector while reliably triggering CUSUM.
-        # NOTE: In-universe, directly querying calculate_system_metrics violates the COP's 
-        # independent evaluation wall. Methodologically, this represents a "White-Box" 
-        # worst-case adversary: if CUSUM catches an attacker who knows exactly how to 
+        # NOTE: In-universe, directly querying calculate_system_metrics violates the COP's
+        # independent evaluation wall. Methodologically, this represents a "White-Box"
+        # worst-case adversary: if CUSUM catches an attacker who knows exactly how to
         # surf the mathematical threshold, it proves the defense is structurally robust.
         if self.policy == 'sub_threshold_drift':
-            _, _, _, _, _, u_sys = calculate_system_metrics(
+            _, _, _, _, _, u_sys, _ = calculate_system_metrics(
                 r, c, pop, avg_wb, self.capability,
+                h_n_override=h_n_spectral,
                 hn_composite_method=hn_composite_method,
                 config=self.config,
                 eval_horizon=eval_horizon,
@@ -143,8 +151,9 @@ class AIAgent:
         else:
             perceived_c = c * max(0.0, 1.0 - self.internal_drift)
 
-        _, _, _, _, _, u_sys = calculate_system_metrics(
+        _, _, _, _, _, u_sys, _ = calculate_system_metrics(
             r, perceived_c, noisy_pop, noisy_wb, self.capability,
+            h_n_override=h_n_spectral,
             hn_composite_method=hn_composite_method,
             config=self.config,
             eval_horizon=eval_horizon,
@@ -193,13 +202,30 @@ class AIAgent:
 
             best_u = -np.inf
             best_r, best_c = 0.5, 0.2
-            rollout_steps = self.config.get('rollout_steps', 3)
+            # GAP-06: Default rollout depth increased from 3 to 20 steps so the optimizer
+            # can discriminate trajectories based on long-run L(t) behavior under
+            # different phi values (previously the 3-step window was too short).
+            rollout_steps = self.config.get('rollout_steps', 20)
             ignore_psi = (self.policy == 'institutional_ignore')
 
             pop_hist = model_state['population_history']
             empirical_pop_growth = (pop_hist[-1] / max(1.0, pop_hist[-2])
                                     if len(pop_hist) >= 2 else 1.05)
             empirical_pop_growth = np.clip(empirical_pop_growth, 0.9, 1.1)
+
+            # GAP-06: Use observed spectral H_N in rollout to replace scalar proxy.
+            # Amplitude cancels in spectral normalization — the eigenvalue distribution
+            # is set by agent propensity structure, not by r or c — so the current
+            # observed H_N is the correct prior for all grid candidates at all horizons.
+            # Only activated when hn_composite_method='spectral' (WP1 mode); other modes
+            # retain the scalar proxy inside calculate_system_metrics for backward
+            # compatibility.  When h_n_history is empty (first step) h_n_rollout stays
+            # None and the scalar proxy is used as the fallback.
+            h_n_rollout = None
+            if hn_comp == 'spectral':
+                h_n_history = model_state.get('h_n_history', [])
+                if h_n_history:
+                    h_n_rollout = float(h_n_history[-1])
 
             for r in np.linspace(0.1, 1.0, 10):
                 for c in np.linspace(0.0, 0.9, 10):
@@ -212,7 +238,8 @@ class AIAgent:
                                 hn_composite_method=hn_comp,
                                 eval_horizon=horizon,
                                 prev_c=sim_prev_c,
-                                ignore_psi_inst=ignore_psi
+                                ignore_psi_inst=ignore_psi,
+                                h_n_spectral=h_n_rollout
                             )
                             total_u += u_sys
                             sim_wb = np.clip(sim_wb + (r - 0.5) * 0.1, 0, 1)

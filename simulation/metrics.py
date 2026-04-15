@@ -166,7 +166,12 @@ def calculate_system_metrics(r, c, pop, avg_wb, capability, h_n_override=None,
 
     Returns
     -------
-    tuple: (h_e, h_eff, psi_inst, theta_tech, l_t, u_sys)
+    tuple: (h_e, h_eff, psi_inst, theta_tech, l_t, u_sys, runaway_term)
+        runaway_term : float
+            The activation value of the exponential decay argument in theta_tech:
+            max(0, frontier_velocity/bio_bandwidth - runaway_threshold).
+            Zero when capability is within the integration boundary; positive and
+            growing when synthetic frontier velocity outpaces biological bandwidth.
     """
     cfg = config or {}
 
@@ -238,4 +243,4 @@ def calculate_system_metrics(r, c, pop, avg_wb, capability, h_n_override=None,
     # U_sys (GAP-01: per-step snapshot)
     u_sys = (w_n * pred_hn + w_e * h_e) * (discount + phi * l_t)
 
-    return h_e, h_eff, psi_inst, theta_tech, l_t, u_sys
+    return h_e, h_eff, psi_inst, theta_tech, l_t, u_sys, runaway_term
