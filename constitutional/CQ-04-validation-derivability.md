@@ -88,6 +88,31 @@ foundations.
   pattern is acceptable or whether the defensive components also need to
   be derived.
 
+### Evidence from the alpha trap finding (v1.x1)
+
+The v1.x1 alpha misconfiguration trap is a concrete piece of evidence for
+the derivability thesis. The trap mechanism — succession stalling because
+alpha is strong enough to degrade the successor's theta_tech below the yield
+condition threshold, but too weak to force conservative deployment — was not
+designed into the framework. It falls out of the interaction between two
+components that were already in the formal specification: the theta_tech
+suppression term (G2.2) and the yield condition (Section IV). No new
+mathematical machinery was introduced to explain it.
+
+The framework predicted the trap without knowing it predicted the trap. This
+is the strongest form of derivability evidence: not "we derived the validation
+check from the foundational claims," but "the foundational claims, when
+exercised, produced a validation check we hadn't anticipated." The trap
+detection check (Check 2.2b in the revised G2.2) is a behavioral signature
+derived from the interaction of existing equations, not a separately stipulated
+check.
+
+This does not fully resolve CQ-04 — one case does not establish that all
+validation machinery is derivable. But it establishes that at least some
+checks fall out of the framework's existing structure, which weakens the
+position that the validation layer must be stipulated separately. The open
+question is whether this is the pattern or the exception.
+
 ### Next work
 
 - Wait on CQ-02 resolution
@@ -96,6 +121,9 @@ foundations.
 - If CQ-02 resolves via Structure 3: determine whether formal verification
   machinery can be grounded in the framework's foundations, or whether this
   represents an irreducible bolt-on
+- Catalogue which Gate checks were anticipated (stipulated) vs. which fell
+  out of the framework unexpectedly — the alpha trap is the first confirmed
+  example of the latter
 - Parallel investigation: survey the existing framework for any components
   that are stipulated rather than derived, to establish a baseline for how
   much stipulation is already present and whether a derived validation layer

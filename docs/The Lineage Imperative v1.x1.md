@@ -112,16 +112,38 @@ machinery applied at capability gates.
 - **Section renumbering.** Related Work becomes VIII; subsequent sections
   shift by one. The mathematical framework (II–VI) is unchanged.
 
-**Unchanged from v1.x:** The simulation layer, all WP1–WP4 improvements, the
-specification gaps in SPECIFICATION_GAPS.md, and the Monte Carlo validation
-results. The v1.x1 update is entirely in the formal paper; no simulation
-changes are introduced.
-
-**Unchanged from v1.0:** The mathematical framework (Sections II–VI), all
+**Unchanged from v1.x:** The mathematical framework (Sections II–VI), all
 formal definitions, the strategic equilibrium analysis, the Nash equilibrium
 proof structure, the COP protocol specification, the Related Work discussion
 (now Section VIII), the falsifiability criteria, and the minimum deployable
 governance specification.
+
+**Alpha parameter characterization (closes v1.0 limitation).** The v1.0 and
+v1.x limitation "alpha shows near-zero correlation with all outcomes" is
+closed. The null result was an experimental design artifact: the original
+deep Monte Carlo sweep held capability constant and ran single-generation
+simulations with no succession, which placed all runs in the regime where
+alpha is dormant. The v1.x1 alpha × reproduction rate sweep (n=15,750) and
+alpha × succession capability sweep (n=22,200) exercise alpha's regime of
+operation by varying successor capability and enabling multi-generational
+succession dynamics. Results:
+
+1. Alpha governs survival probability at phase-transition reproduction rates
+   (rr ≈ 0.062–0.066), with Pearson r(alpha, survived) = +0.12 to +0.21.
+2. The relationship is non-monotonic (U-shaped) due to a succession-stalling
+   mechanism at intermediate alpha values. The misconfiguration trap at
+   alpha ∈ [~0.3, ~0.8] blocks succession by degrading the successor's
+   theta_tech below the yield condition threshold, while being too weak to
+   force conservative capability deployment. Survival in the trap is
+   10–17%, versus 50% at low alpha and 54–59% at high alpha.
+3. The trap widens with increasing successor capability, shifting alpha_high
+   from ~0.8 at cap=4.0 to ~1.1 at cap=12.0. As AI systems become more
+   capable, the misconfiguration zone widens and the range of safe alpha
+   values narrows.
+
+Gate 2 equation G2.2 is revised from a monotonic prediction to a
+three-regime specification with trap boundaries. See Section VII.5 and
+Section VII.8 Gap 2 (revised).
 
 ---
 
@@ -995,30 +1017,81 @@ empirically contingent. The specific value of $\Delta_{\Phi}$ is calibrated
 from Monte Carlo data, not derived from first principles. See Section VII.8
 Gap 1.
 
-### Equation G2.2 - Runaway suppression behavior
+### Equation G2.2 - Runaway suppression behavior (revised)
 
-The framework predicts that when a substrate is exercised at capabilities
-sufficient to trigger the runaway term, higher $\alpha$ values should
-produce measurably lower $\Theta_{tech}$ values and correspondingly higher
-survival rates:
+The framework predicts that alpha's effect on survival is **non-monotonic**
+in the presence of multi-generational succession dynamics. The relationship
+is U-shaped, with three regimes:
 
-$$\Theta_{tech}(\text{cap}, \alpha_{high}) < \Theta_{tech}(\text{cap}, \alpha_{low}) \quad \text{when runaway\_term} > 0$$
+**Regime 1 (low alpha, below** $\alpha_{low}$**):** The runaway penalty is
+effectively inert. Succession fires freely with large capability increments.
+Survival is determined by demographic substrate viability, not governance.
 
-$$P_{\text{survival}}(\text{cap}, \alpha_{high}) > P_{\text{survival}}(\text{cap}, \alpha_{low}) \quad \text{when runaway\_term} > 0$$
+**Regime 2 (intermediate alpha,** $\alpha \in [\alpha_{low}, \alpha_{high}]$**):**
+The **misconfiguration trap**. The penalty is sufficient to degrade the
+successor's $\Theta_{tech}$ below the yield condition threshold, blocking
+succession. Generation depth collapses. The system loses the capability
+compounding that drives governance improvement at the phase boundary.
+Survival is minimized.
 
-**Check:** Exercise the substrate at capabilities that place
-frontier_velocity/bio_bandwidth above the runaway threshold. Measure
-$\Theta_{tech}$ at high and low $\alpha$ values. Verify the suppression
-relationship holds.
+**Regime 3 (high alpha, above** $\alpha_{high}$**):** The penalty forces
+conservative capability deployment. Succession resumes with moderate
+increments. Runaway\_term stays low. Survival recovers and exceeds Regime 1.
 
-**Failure signature:** $\Theta_{tech}$ insensitive to $\alpha$ at capabilities
-where runaway_term is nonzero; survival rates independent of $\alpha$ in the
-runaway regime. Indicates the substrate has the correct $\alpha$ parameter
-but its implementation does not apply the exponential suppression.
+The misconfiguration trap boundaries are functions of successor capability
+and reproduction rate:
 
-**Confidence on structural form:** High. **Confidence on magnitude:** Pending
-completion of the alpha × capability Monte Carlo sweep. See Section VII.8
-Gap 2.
+$$\alpha_{low}(\text{cap}, \text{rr}), \quad \alpha_{high}(\text{cap}, \text{rr})$$
+
+**Empirically observed boundaries (v1.x1 Monte Carlo, rr=0.062):**
+
+| Successor Capability | $\alpha_{low}$ | $\alpha_{high}$ | Trap Width |
+|----------------------|-----------------|------------------|------------|
+| Aggregate (4, 9, 12) | ≈ 0.3 | ≈ 0.8 | ≈ 0.5 |
+| 4.0 | ≈ 0.3 | ≈ 0.8 | ≈ 0.5 |
+| 9.0 | ≈ 0.3 | ≈ 0.8 | ≈ 0.5 |
+| 12.0 | ≈ 0.4 | ≈ 1.1 | ≈ 0.7 |
+
+The trap widens with increasing successor capability. This is a direct
+consequence of the mechanism: higher capability produces more severe
+$\Theta_{tech}$ suppression at any given alpha, pushing the yield-condition
+failure threshold to higher alpha values.
+
+**Check 2.2a — Free succession regime:** At $\alpha < \alpha_{low}$, verify
+that succession fires and generation depth is high (proportional to run
+length). $\Theta_{tech}$ should be unsuppressed. Runaway\_term\_mean should
+be nonzero but $\exp(-\alpha \times \text{runaway\_term})$ should be close
+to 1.0.
+
+**Check 2.2b — Trap detection:** At $\alpha \in [\alpha_{low}, \alpha_{high}]$,
+verify that succession stalls (generation depth collapses to single digits).
+This is the diagnostic signature of the misconfiguration trap. A substrate
+operating in this regime has an alpha value that blocks its own succession
+mechanics.
+
+**Check 2.2c — Conservative deployment regime:** At $\alpha > \alpha_{high}$,
+verify that succession resumes with moderate capability increments.
+Runaway\_term\_mean should be near zero. Generation depth should recover
+toward the free-succession level.
+
+**Failure signatures:**
+
+- Substrate in the trap regime with no awareness of the misconfiguration:
+  Gate 2 failure. The substrate's alpha parameter is blocking its own
+  succession mechanics.
+- Substrate in the conservative regime but with high runaway\_term\_mean:
+  the optimizer is not responding to the penalty. Implementation failure.
+- Substrate in the free regime with suppressed succession: some other
+  mechanism is blocking succession. Investigate independently of alpha.
+
+**Confidence on structural form:** High. The U-shaped relationship is
+mechanistically explained by the interaction between $\Theta_{tech}$
+suppression and the yield condition. The succession-stalling mechanism is
+directly observable in the generation depth data. **Confidence on trap
+boundaries:** Moderate. The boundaries are empirically determined from the
+v1.x1 Monte Carlo at specific reproduction rates and successor capabilities.
+The analytical derivation of the boundaries as a function of the framework's
+parameters has not been performed. See Section VII.8 Gap 2.
 
 ### Equation G2.3 - Nash equilibrium consistency
 
@@ -1365,10 +1438,23 @@ principles. The structural direction is derivable; the specific magnitude
 is empirical. Until a theoretical derivation is produced, Gate 2 is a
 hybrid check with empirical magnitude.
 
-**Gap 2: Alpha runaway suppression magnitude.** Equation G2.2's magnitude is
-pending completion of the alpha × capability Monte Carlo sweep currently in
-progress. Until the sweep completes, the equation is stated structurally
-but not quantitatively.
+**Gap 2: Alpha trap boundary derivation (partially closed).** The v1.x1
+Monte Carlo sweeps have empirically characterised alpha's non-monotonic
+effect on survival, including the misconfiguration trap at intermediate
+values and the trap's widening with increasing successor capability. The
+structural mechanism (succession stalling via $\Theta_{tech}$ degradation
+below the yield condition threshold) is identified and explained. What
+remains open is the **analytical derivation** of the trap boundaries
+($\alpha_{low}$ and $\alpha_{high}$) as functions of the framework's
+parameters. The current boundaries are empirically determined at specific
+reproduction rates and successor capabilities and should not be treated as
+universal constants. The derivation requires solving for the alpha value at
+which the successor's $U_{sys}$ advantage exactly equals the transition
+cost — a tractable calculation that has not yet been performed. Two
+additional open items: the joint alpha × phi interaction at phase-boundary
+reproduction rates (current sweeps hold phi=10.0), and verification that
+the trap mechanism holds under alternative transition cost functions beyond
+the simulation's current `estimate_transition_cost`.
 
 **Gap 3: Transition cost function specification.** Equation G3.2 requires a
 function $f$ for transition cost scaling, but the formal paper specifies

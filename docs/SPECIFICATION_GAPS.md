@@ -462,6 +462,35 @@ of the general MC) is unaffected.
 
 ---
 
+## Alpha Parameter Characterisation — **Closed in v1.x1**
+
+**Source data:** `rr_alpha_sweep_full.csv` (n=15,750), `alpha_succession_sweep_full.csv` (n=22,200)
+
+**Alpha parameter (CLOSED in v1.x1).** The v1.0/v1.x finding "alpha shows
+near-zero correlation with all outcomes" was an experimental design artifact,
+not a null result about the parameter's efficacy. The original deep Monte
+Carlo sweep held capability constant and used single-generation runs without
+succession, which placed all runs in the regime where alpha's exponential
+suppression term is dormant. The v1.x1 sweeps (rr × alpha and alpha ×
+successor_capability) exercise alpha's regime of operation and reveal a
+non-monotonic, succession-mediated effect: alpha governs survival at
+phase-transition reproduction rates through a U-shaped relationship with a
+misconfiguration trap at intermediate values. The trap is caused by alpha
+being strong enough to degrade the successor's theta_tech below the yield
+condition threshold (blocking succession) but too weak to force the optimizer
+into conservative capability deployment. See Section VII.5, Equation G2.2
+(revised) for the full specification.
+
+**Remaining open items on alpha:**
+- Analytical derivation of the trap boundaries as a function of framework
+  parameters (currently empirical at rr=0.062 and specific capability values)
+- Verification that the trap mechanism holds under alternative transition cost
+  functions (currently validated only against `estimate_transition_cost`)
+- Extension to joint alpha × phi interaction at phase-boundary reproduction
+  rates (current sweeps hold phi=10.0; the interaction is unexplored)
+
+---
+
 ## Summary Table
 
 | Gap    | Affected Component | Status | Proxy / Resolution |
@@ -472,6 +501,7 @@ of the general MC) is unaffected.
 | GAP-04 | COP conditions     | **Partially Resolved (v1.x WP4 & Peer Voting)** | PeerValidator closes cost-inflation vector and votes on overrides (methodological diversity for Evaluator Collusion). R_tech remains a hardcoded stub. Layer 1 dominance in Successor Contamination MC results overstates real-world Layer 1 sufficiency — see GAP-04 detail. |
 | GAP-05 | Adversarial coverage | Open | 10 of 13 vectors simulated. Vector 2 depends on GAP-03/GAP-04 infrastructure; vectors 5–6 may require approximation. |
 | GAP-06 | optimize_u_sys policy | **Resolved (v1.x)** | Rollout increased to 20 steps; scalar H_N proxy replaced by observed spectral H_N. φ/α flatness in general MC is structural (correct equilibrium behavior), not a proxy artifact. |
+| Alpha  | Alpha parameter behaviour | **Characterised (v1.x1)** | Non-monotonic U-shaped effect confirmed. Misconfiguration trap at intermediate alpha empirically bounded. Analytical trap-boundary derivation remains open. |
 
 Open gaps are marked in source code with `GAP-0N` markers. GAP-01 and GAP-03 are
 marked in [metrics.py](../simulation/metrics.py). GAP-04 is marked in

@@ -142,10 +142,37 @@ one dimension produce detectable inconsistencies in the other.
   The two are not mutually exclusive — precision-weighted accuracy checks and
   invariant ratio checks can run in parallel.
 
+### Worked example: trap detection as qualitative binding (v1.x1)
+
+The v1.x1 alpha × reproduction rate sweep (n=15,750) provides a concrete
+instance of a binding condition that is qualitative rather than quantitative.
+The misconfiguration trap at intermediate alpha values produces a diagnostic
+signature — succession stalling (generation depth collapses to single digits)
+— that does not require numerical tolerance bands. The check is binary:
+succession either fires or it doesn't.
+
+This is an example of the precision/accuracy problem being solvable in one
+dimension through behavioral rather than numerical agreement. A substrate
+can verify whether its alpha value falls in the trap by measuring its own
+generation depth under succession. If generation depth collapses, the
+substrate is in the trap. The check is accurate (it detects the specific
+misconfiguration state the framework predicts) and requires no precision
+agreement on the exact value of alpha — only agreement on whether the
+behavioral signature is present.
+
+This suggests the binding structures in CQ-02 may not all need to be
+numerical. Some binding conditions may take the form of qualitative
+behavioral signatures (succession fires vs. stalls; phase transition
+crossed vs. not) that either match the framework's prediction or don't.
+The trap detection check is a worked example. Whether this generalises
+to other parameters beyond alpha is an open question.
+
 ### Next work
 
 - Work out the phi/alpha sensitivity ratio symbolically
 - Verify it behaves as claimed under perturbation
 - Check whether it's state-invariant or state-dependent in predictable ways
 - Determine whether the result generalizes to the full parameter set
+- Investigate which other framework checks have qualitative binding signatures
+  analogous to the trap detection case
 - If structure 2 fails on inspection, try structure 1 as fallback
