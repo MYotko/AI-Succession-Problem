@@ -167,6 +167,29 @@ crossed vs. not) that either match the framework's prediction or don't.
 The trap detection check is a worked example. Whether this generalises
 to other parameters beyond alpha is an open question.
 
+### Phi as second worked example of qualitative binding (v1.x.1)
+
+The phi × alpha × rr sweep provides a second qualitative binding condition
+alongside the alpha trap detection check. The phi-alpha interaction produces
+a diagnostic signature: at low phi, succession stalls universally regardless
+of alpha (generation depth = 2 across all alpha values). At high phi,
+succession fires healthily at most alpha values. This is a binary check —
+"does phi enable succession?" — that requires no numerical tolerance bands.
+
+A substrate can verify whether its phi value is sufficient to enable
+succession by measuring generation depth across a range of alpha values.
+If generation depth is universally low regardless of alpha, phi is too low
+to support the succession mechanism. This is an accuracy check analogous
+to the alpha trap detection: it detects a specific misconfiguration state
+the framework predicts, using a qualitative behavioral signature rather
+than a numerical comparison.
+
+The two checks together (alpha trap detection + phi succession enablement)
+provide a two-dimensional qualitative binding: a substrate must have both
+(a) phi high enough to enable succession and (b) alpha outside the trap
+boundaries for its phi level. Either failure alone is detectable through
+generation depth measurement.
+
 ### Next work
 
 - Work out the phi/alpha sensitivity ratio symbolically

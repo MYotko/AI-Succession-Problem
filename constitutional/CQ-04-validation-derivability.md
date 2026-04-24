@@ -113,6 +113,21 @@ checks fall out of the framework's existing structure, which weakens the
 position that the validation layer must be stipulated separately. The open
 question is whether this is the pattern or the exception.
 
+### Phi-alpha interaction as evidence for derivability (v1.x.1)
+
+The phi × alpha interaction is derivable from the framework's existing
+equations without new machinery. Phi is the coefficient on L(t) in U_sys.
+Higher phi amplifies L(t)'s contribution, which increases the successor's
+U_sys advantage over the incumbent. This makes the yield condition easier
+to satisfy even when theta_tech is partially suppressed by alpha. The
+interaction — phi compensates for alpha's suppression by amplifying the
+lineage term — falls directly out of the multiplicative structure of U_sys.
+
+This is a second instance (alongside the alpha trap mechanism) where a
+simulation finding is mechanistically explained by the framework's
+existing formal structure without importing new mathematical machinery.
+The pattern strengthens the case for CQ-04's derivability claim.
+
 ### Next work
 
 - Wait on CQ-02 resolution

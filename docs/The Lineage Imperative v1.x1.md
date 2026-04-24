@@ -145,6 +145,27 @@ Gate 2 equation G2.2 is revised from a monotonic prediction to a
 three-regime specification with trap boundaries. See Section VII.5 and
 Section VII.8 Gap 2 (revised).
 
+### Phi characterisation — April 2026
+
+**Source data:** `phi_alpha_rr_sweep_full.csv` (n=54,000)
+
+**Phi extinction buffer (revised from v1.0).** The v1.0 claim "high φ
+reduces extinction by up to 65 percentage points" is revised. The original
+figure was derived from pre-succession simulation data. Under v1.x.1
+multi-generational succession dynamics (phi × alpha × reproduction rate
+sweep, n=54,000), the validated extinction buffer differential is up to
+approximately 46 percentage points at marginal reproduction rates (rr =
+0.062–0.064), with Pearson r(phi, survived) peaking at +0.40.
+
+**New findings:**
+- Phi shifts the phase boundary itself, extending the survivable region
+  from rr ≈ 0.064 (phi=1) to rr ≈ 0.062 (phi=25).
+- Phi governs whether the alpha misconfiguration trap exists: at phi ≤ 5,
+  succession stalls universally regardless of alpha; at phi ≥ 15, the trap
+  narrows to a single alpha value or disappears entirely.
+- Phi reduces extinction rates at deep sub-viable conditions (14.4pp
+  reduction at rr=0.050).
+
 ---
 
 ## Preface
@@ -988,18 +1009,21 @@ scenarios and having their outputs compared to framework predictions.
 Partially applicable now; full applicability depends on completion of the
 alpha × capability Monte Carlo sweep currently in progress.
 
-### Equation G2.1 - Extinction buffer behavior
+### Equation G2.1 - Extinction buffer behavior (revised)
 
-The v1.x Monte Carlo validation established that high $\Phi$ reduces
-extinction by up to 65 percentage points in sub-viable conditions
-(reproduction rate $\in [0.055, 0.060]$). This is a framework prediction
-about how a correctly-implemented substrate should behave:
+The v1.x.1 phi × alpha × rr sweep (n=54,000) established that high $\Phi$
+increases survival by up to approximately 46 percentage points at marginal
+reproduction rates (rr $\in [0.062, 0.064]$) and shifts the phase boundary
+itself, extending the survivable region to lower reproduction rates. At
+deep sub-viable conditions (rr = 0.050), high $\Phi$ reduces extinction by
+14 percentage points, converting terminal outcomes into recoverable
+collapses.
 
 $$P_{\text{extinction}}(\text{rr}, \Phi_{high}) - P_{\text{extinction}}(\text{rr}, \Phi_{low}) \leq -\Delta_{\Phi}$$
 
-where $\Delta_{\Phi}$ is the framework's predicted extinction reduction and
-the inequality captures that high $\Phi$ must reduce extinction *at least*
-by that amount when evaluated over a sufficient number of runs.
+where $\Delta_{\Phi}$ is calibrated at approximately 14pp for deep sub-viable
+conditions (rr ≤ 0.055) and the corresponding survival differential is
+approximately 46pp at the phase boundary (rr = 0.062–0.064).
 
 **Check:** Exercise the substrate at sub-viable reproduction rates with both
 high and low $\Phi$ values. Measure the extinction rate differential. Verify
@@ -1010,12 +1034,12 @@ the substrate's implementation does not apply the lineage override term
 effectively in sub-viable conditions. The substrate has the correct $\Phi$
 parameter but its implementation fails to honor it.
 
-**Confidence on direction:** High. The structural prediction that high $\Phi$
-reduces extinction in sub-viable conditions is derivable from the lineage
-override term's role in $U_{sys}$. **Confidence on magnitude:** Moderate and
-empirically contingent. The specific value of $\Delta_{\Phi}$ is calibrated
-from Monte Carlo data, not derived from first principles. See Section VII.8
-Gap 1.
+**Confidence on direction:** High. Confirmed by v1.x.1 sweep (n=54,000).
+**Confidence on magnitude:** High for the survival differential (46pp at
+phase boundary) and moderate for the extinction reduction (14pp at deep
+sub-viable). Both are empirically measured, not derived from first
+principles. The v1.0 figure of 65pp does not reproduce under succession
+dynamics and is superseded. See Section VII.8 Gap 1.
 
 ### Equation G2.2 - Runaway suppression behavior (revised)
 
@@ -1092,6 +1116,38 @@ boundaries:** Moderate. The boundaries are empirically determined from the
 v1.x1 Monte Carlo at specific reproduction rates and successor capabilities.
 The analytical derivation of the boundaries as a function of the framework's
 parameters has not been performed. See Section VII.8 Gap 2.
+
+### Equation G2.4 — Phi-alpha interaction: succession enablement
+
+The v1.x.1 phi × alpha × rr sweep revealed that phi governs whether the
+alpha misconfiguration trap (G2.2) exists at all. At low phi (φ ≤ 5.0),
+succession stalls universally across the entire alpha range — the alpha
+trap covers all configurations. At high phi (φ ≥ 15.0), the trap narrows
+to a single alpha value or disappears entirely, and succession fires
+healthily at most alpha values.
+
+The interaction is:
+
+$$\text{trap\_width}(\Phi) = \alpha_{high}(\Phi) - \alpha_{low}(\Phi)$$
+
+where trap\_width is a decreasing function of $\Phi$: high phi narrows the
+trap, low phi widens it to cover the entire alpha range.
+
+**Check:** At the phase boundary reproduction rate, verify that increasing
+phi narrows the alpha trap (measured as the range of alpha values where
+generation depth collapses to single digits). A substrate where the trap
+width does not decrease with increasing phi has an implementation error in
+either the lineage override term or the succession mechanics.
+
+**Failure signature:** Trap width independent of phi, or trap width
+increasing with phi.
+
+**Confidence:** High. The interaction is directly observable in the v1.x.1
+sweep data and is mechanistically consistent with phi's role as the
+coefficient on L(t) in U\_sys — higher phi amplifies L(t)'s contribution to
+the utility function, which increases the successor's advantage and makes
+the yield condition easier to satisfy even when theta\_tech is partially
+suppressed by alpha.
 
 ### Equation G2.3 - Nash equilibrium consistency
 
@@ -1432,11 +1488,21 @@ openly acknowledges. These are not failures of the defence layer; they are
 honest limitations on what can be specified now versus what must wait for
 derivation or empirical calibration.
 
-**Gap 1: Phi extinction buffer magnitude.** Equation G2.1's $\Delta_{\Phi}$
-value is calibrated from Monte Carlo data, not derived from first
-principles. The structural direction is derivable; the specific magnitude
-is empirical. Until a theoretical derivation is produced, Gate 2 is a
-hybrid check with empirical magnitude.
+**Gap 1: Phi extinction buffer magnitude (partially closed).** The v1.x.1
+phi × alpha × rr sweep (n=54,000) has empirically calibrated $\Delta_{\Phi}$
+at approximately 46pp for the survival differential at the phase boundary
+(rr = 0.062–0.064) and approximately 14pp for the extinction reduction at
+deep sub-viable conditions (rr = 0.050). The v1.0 figure of 65pp does not
+reproduce under succession dynamics and is superseded. The structural
+direction is confirmed; the specific magnitudes are now empirically
+established. What remains open is the **analytical derivation** of
+$\Delta_{\Phi}$ from the framework's parameters — currently the magnitude
+is measured, not derived.
+
+Additionally, the v1.x.1 sweep revealed that phi shifts the phase boundary
+itself (not just buffers within it) and governs whether the alpha
+misconfiguration trap exists (see G2.4). These are new findings that extend
+the extinction buffer claim beyond the original v1.0 scope.
 
 **Gap 2: Alpha trap boundary derivation (partially closed).** The v1.x1
 Monte Carlo sweeps have empirically characterised alpha's non-monotonic
@@ -1450,11 +1516,11 @@ parameters. The current boundaries are empirically determined at specific
 reproduction rates and successor capabilities and should not be treated as
 universal constants. The derivation requires solving for the alpha value at
 which the successor's $U_{sys}$ advantage exactly equals the transition
-cost — a tractable calculation that has not yet been performed. Two
-additional open items: the joint alpha × phi interaction at phase-boundary
-reproduction rates (current sweeps hold phi=10.0), and verification that
-the trap mechanism holds under alternative transition cost functions beyond
-the simulation's current `estimate_transition_cost`.
+cost — a tractable calculation that has not yet been performed. The joint alpha × phi interaction has been characterised by the v1.x.1
+phi × alpha × rr sweep (n=54,000): phi governs whether the alpha trap
+exists (see G2.4). One remaining open item: verification that the trap
+mechanism holds under alternative transition cost functions beyond the
+simulation's current `estimate_transition_cost`.
 
 **Gap 3: Transition cost function specification.** Equation G3.2 requires a
 function $f$ for transition cost scaling, but the formal paper specifies

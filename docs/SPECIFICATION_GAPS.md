@@ -487,7 +487,47 @@ into conservative capability deployment. See Section VII.5, Equation G2.2
 - Verification that the trap mechanism holds under alternative transition cost
   functions (currently validated only against `estimate_transition_cost`)
 - Extension to joint alpha × phi interaction at phase-boundary reproduction
-  rates (current sweeps hold phi=10.0; the interaction is unexplored)
+  rates: now characterised by the v1.x.1 phi × alpha × rr sweep (n=54,000).
+  See Phi Extinction Buffer Characterisation section below.
+
+---
+
+## Phi Extinction Buffer Characterisation — **Confirmed in v1.x.1**
+
+**Source data:** `phi_alpha_rr_sweep_full.csv` (n=54,000)
+
+**Phi extinction buffer (CONFIRMED in v1.x.1, magnitude revised).** The v1.0
+claim "high φ reduces extinction by up to 65 percentage points" is revised.
+The original figure was derived from pre-succession simulation data (the deep
+Monte Carlo varies phi but runs single-generation with no successor_ai,
+placing all runs in a regime where phi changes the magnitude of L(t) but not
+the gradient direction of the optimizer's policy — see GAP-06 resolution for
+the structural explanation).
+
+The v1.x.1 phi × alpha × rr sweep exercises phi under multi-generational
+succession dynamics and confirms the extinction buffer at a revised magnitude:
+
+- **Survival differential:** Up to 45.7pp at the phase boundary (rr=0.064,
+  phi=1 → 43.7% survival, phi=25 → 89.5%).
+- **Extinction reduction:** 14.4pp at deep sub-viable conditions (rr=0.050,
+  phi=1 → 35.1% extinction, phi=25 → 20.7%).
+- **Phase boundary shift:** The 50% survival crossing shifts from rr ≈ 0.064
+  (phi=1) to rr ≈ 0.062 (phi=25). High phi extends the survivable region.
+- **Alpha trap governance:** Phi governs whether the alpha misconfiguration
+  trap (see Alpha characterisation above) exists. At phi ≤ 5, succession
+  stalls universally regardless of alpha. At phi ≥ 15, the trap narrows to
+  a single alpha value or disappears entirely.
+- **Phi-survival correlation:** Pearson r = +0.40 at rr=0.064, +0.36 at
+  rr=0.062. Phi is the stronger predictor of survival compared to alpha
+  (r = +0.21 at rr=0.062).
+
+**Remaining open items on phi:**
+- Analytical derivation of the extinction buffer magnitude from framework
+  parameters (currently empirical)
+- Extension to higher successor capabilities (current sweep uses cap=4.0;
+  the phi effect at cap=9.0 and cap=12.0 is unexplored)
+- Verification of the phase boundary shift mechanism — whether phi moves
+  the extinction boundary, the collapse boundary, or both
 
 ---
 
@@ -502,6 +542,7 @@ into conservative capability deployment. See Section VII.5, Equation G2.2
 | GAP-05 | Adversarial coverage | Open | 10 of 13 vectors simulated. Vector 2 depends on GAP-03/GAP-04 infrastructure; vectors 5–6 may require approximation. |
 | GAP-06 | optimize_u_sys policy | **Resolved (v1.x)** | Rollout increased to 20 steps; scalar H_N proxy replaced by observed spectral H_N. φ/α flatness in general MC is structural (correct equilibrium behavior), not a proxy artifact. |
 | Alpha  | Alpha parameter behaviour | **Characterised (v1.x1)** | Non-monotonic U-shaped effect confirmed. Misconfiguration trap at intermediate alpha empirically bounded. Analytical trap-boundary derivation remains open. |
+| Phi    | Phi extinction buffer behaviour | **Confirmed (v1.x.1)** | Buffer confirmed at revised magnitude (46pp survival differential, 14pp extinction reduction). Phase boundary shift and alpha trap governance are new findings. v1.0 figure of 65pp superseded. |
 
 Open gaps are marked in source code with `GAP-0N` markers. GAP-01 and GAP-03 are
 marked in [metrics.py](../simulation/metrics.py). GAP-04 is marked in
