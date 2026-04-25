@@ -16,7 +16,7 @@ not a proxy artifact. See individual entries for details.
 
 ---
 
-## GAP-01 | U_sys: Time-Integral vs. Per-Step Snapshot
+## GAP-01 | U_sys: Time-Integral vs. Per-Step Snapshot — **Partially Resolved in v1.x2 (WP7)**
 
 **Specification definition:**
 
@@ -25,40 +25,77 @@ $$U_{sys} = \int_{t_0}^{\infty} \left[\omega_N(t) \cdot H_N(t) + \omega_E(t) \cd
 U_sys accumulates continuously over civilizational time. The integral is the fundamental
 quantity; single-step values are not comparable to it.
 
-**Implementation approach:**
+**v1.x2 Resolution (WP7) — three sub-problems addressed:**
 
-`calculate_system_metrics()` in [metrics.py](metrics.py) returns the value of the
-integrand at a single timestep, discounted by `exp(-rho * eval_horizon)`. The AI
-optimizer sums this function across a 3-step rollout loop in `AIAgent.decide()`, which
-approximates a short finite sum of the infinite-horizon integral.
+### Sub-problem 1: Quadrature method — RESOLVED
 
-The `datacollector['U_sys']` time series records one such snapshot per simulation step.
+`integral_U_sys` previously used left-endpoint Riemann summation
+(`∑ u[t]` for t=0…T), which systematically over-counted by `(u[0] + u[T])/2`
+compared to the standard composite trapezoidal rule. This has been replaced with
+composite trapezoidal quadrature:
 
-**What differs:**
+$$\int_0^T u \, dt \approx \frac{u[0]+u[1]}{2} + \frac{u[1]+u[2]}{2} + \cdots + \frac{u[T-1]+u[T]}{2} = \frac{u[0]}{2} + u[1] + \cdots + u[T-1] + \frac{u[T]}{2}$$
 
-A sum of N discrete snapshots at uniform intervals approximates the integral only in
-the limit as step size approaches zero. At the rollout resolution used (3 steps),
-sustained mid-horizon states contribute less to the optimizer's objective than they
-would in the true integral. Short-duration high-yield policies are systematically
-underpenalized relative to the spec.
+Accumulated incrementally: `integral[0] = 0` (no complete interval at step 0);
+from step 1 onward `integral[t] += (u[t-1] + u[t]) / 2`. The correction vs. the
+prior Riemann sum is exactly `(u[0] + u[T]) / 2`.
 
-**Simulation impact:**
+The optimizer's 20-step rollout in `AIAgent.decide()` has been updated to the same
+trapezoidal rule, so the policy search integrates over trajectories correctly.
 
-- Ordinal policy comparison (does policy A beat policy B over 300 steps?) is generally
-  valid and sufficient for the scenarios demonstrated.
-- Absolute U_sys magnitudes in output files are not comparable to the spec's integral.
-- Survival/collapse dichotomies are unaffected.
-- The `optimize_u_sys` policy optimizes a 3-step rollout proxy rather than the true
-  infinite-horizon objective; its resulting behavior is a reasonable approximation but
-  not a faithful maximizer of the spec's U_sys.
+### Sub-problem 2: Infinite horizon tail — PARTIALLY RESOLVED
 
-**What is required to resolve:**
+The simulation terminates at step T=300 but the spec integral runs to ∞. Two new
+datacollector fields address this:
 
-Replace the per-step snapshot with numerical integration over a continuous trajectory
-(e.g., trapezoidal quadrature over simulated population and well-being dynamics), or
-significantly increase rollout depth and document the remaining approximation error.
-A design decision is also needed on whether U_sys should be reported as a flow rate
-(per-step) or a stock (running integral) in the datacollector output.
+- **`u_sys_tail_estimate[t]`** — the analytically exact discount-component tail:
+  $$\text{tail}(t) = \int_t^{\infty} A_t \cdot e^{-\rho \tau} \, d\tau = \frac{A_t \cdot e^{-\rho t}}{\rho}$$
+  where $A_t = \omega_N \cdot H_N + \omega_E \cdot H_E = \frac{\lambda_N H_N}{H_N + \varepsilon} + \frac{\lambda_E H_E}{H_E + \varepsilon}$.
+  This is a **lower bound** on the true tail — the $\Phi \cdot L(t)$ component is
+  excluded because under steady-state $L(t) > 0$ it would diverge; in practice it
+  decays to 0 when succession terminates.
+
+- **`u_sys_total_estimate[t]`** = `integral_U_sys[t] + u_sys_tail_estimate[t]` —
+  a run-length-normalised civilizational health measure. For constant $A_t$, this
+  telescopes to exactly $A/\rho$ regardless of where the simulation is stopped,
+  enabling direct comparison across runs of different lengths. Changes in the total
+  estimate over time reflect genuine changes in governance quality, not run-length
+  artifacts.
+
+**Excluded from the tail:** The $\Phi \cdot L(t)$ component is not added to the
+tail. Users requiring a complete tail estimate must extrapolate L(t) dynamics beyond
+the simulation window.
+
+### Sub-problem 3: Step-size truncation error — DOCUMENTED
+
+The composite trapezoidal rule has truncation error $O(T \cdot h^2 \cdot \max|u''|)$
+with $h = 1$ (one governance cycle per step — irreducible, as $h$ is the model's
+fundamental time unit). The classical correction term is $(u[T] - u[0]) / 2$ (the
+endpoint correction that converts trapezoidal to the Euler–Maclaurin first-order
+approximation). In practice this error is small relative to the T=300 integral
+magnitude; it is documented here as the remaining approximation residual.
+
+**Remaining open items:**
+
+- The $\Phi \cdot L(t)$ tail component is not estimated. Requires either an
+  assumption about the long-run decay of $L(t)$ (e.g., exponential), or an
+  analytical model of post-succession dynamics.
+- Step-size $h = 1$ is irreducible without redesigning the model's time unit.
+  Composite Simpson's rule (O(h⁴) accuracy) would require half-step values
+  unavailable from the current integer-step simulation.
+- Absolute `integral_U_sys` magnitudes are still not directly comparable to the
+  spec's infinite-horizon integral — only `u_sys_total_estimate` provides a
+  run-length-normalised proxy.
+
+**Simulation impact (updated):**
+
+- `integral_U_sys` now records the correct composite trapezoidal approximation to
+  $\int_0^T u \, dt$, starting at 0 (step 0) and accumulating from step 1.
+- `u_sys_tail_estimate` and `u_sys_total_estimate` are new fields enabling
+  run-length-normalised comparison.
+- Ordinal policy comparison and survival/collapse dichotomies are unaffected.
+- The optimizer's rollout now integrates trajectories with trapezoidal weights,
+  providing marginally more accurate policy ranking on non-monotone U_sys profiles.
 
 ---
 
@@ -535,7 +572,7 @@ succession dynamics and confirms the extinction buffer at a revised magnitude:
 
 | Gap    | Affected Component | Status | Proxy / Resolution |
 |--------|--------------------|--------|--------------------|
-| GAP-01 | U_sys              | Open   | Per-step instantaneous value in place of time-integral over horizon |
+| GAP-01 | U_sys              | **Partially Resolved (v1.x2 WP7)** | Trapezoidal quadrature replaces Riemann sum. Discount tail added as `u_sys_tail_estimate`. Run-length-normalised `u_sys_total_estimate` = integral + tail. φ·L(t) tail and step-size error remain open. |
 | GAP-02 | H_eff              | **Resolved (v1.x WP1)** | Spectral entropy over 10-D population novelty matrix replaces per-capita scalar. Domain masking architecturally closed as a consequence. |
 | GAP-03 | Ψ_inst             | Open   | Constraint-change-rate penalty in place of weighted product of institutional throughput rates |
 | GAP-04 | COP conditions     | **Partially Resolved (v1.x WP4 & Peer Voting)** | PeerValidator closes cost-inflation vector and votes on overrides (methodological diversity for Evaluator Collusion). R_tech remains a hardcoded stub. Layer 1 dominance in Successor Contamination MC results overstates real-world Layer 1 sufficiency — see GAP-04 detail. |

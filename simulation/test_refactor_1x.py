@@ -360,6 +360,132 @@ def test_wp4_peer_gains_capability_on_undercut():
 
 
 # ---------------------------------------------------------------------------
+# GAP-01 WP7: Quadrature and tail estimate
+# ---------------------------------------------------------------------------
+
+def test_gap01_trapezoidal_integration():
+    """
+    GAP-01 WP7 sub-problem 1: integral_U_sys must use composite trapezoidal rule.
+
+    Expected accumulation over 3 steps:
+      integral[0] = 0            (no complete interval yet)
+      integral[1] = (u[0]+u[1])/2
+      integral[2] = (u[0]+u[1])/2 + (u[1]+u[2])/2
+    """
+    from model import GardenModel
+    m = GardenModel(n_agents=50, ai_policy='optimize_u_sys',
+                    config={'random_seed': 7, 'reproduction_rate': 0.09})
+    for _ in range(3):
+        m.step()
+
+    u       = m.datacollector['U_sys']
+    integ   = m.datacollector['integral_U_sys']
+
+    if abs(integ[0]) > 1e-12:
+        _fail("GAP01_trapz_step0",
+              f"integral[0] should be 0 (no complete interval), got {integ[0]}")
+
+    exp1 = (u[0] + u[1]) / 2.0
+    if abs(integ[1] - exp1) > 1e-10:
+        _fail("GAP01_trapz_step1",
+              f"integral[1]: expected {exp1:.6f}, got {integ[1]:.6f}")
+
+    exp2 = exp1 + (u[1] + u[2]) / 2.0
+    if abs(integ[2] - exp2) > 1e-10:
+        _fail("GAP01_trapz_step2",
+              f"integral[2]: expected {exp2:.6f}, got {integ[2]:.6f}")
+
+    _pass("GAP01_trapezoidal_integration")
+
+
+def test_gap01_tail_fields_present():
+    """GAP-01 WP7 sub-problem 2: new tail and total fields exist and are valid."""
+    from model import GardenModel
+    m = GardenModel(n_agents=50, ai_policy='optimize_u_sys',
+                    config={'random_seed': 7, 'reproduction_rate': 0.09})
+    m.step()
+
+    if 'u_sys_tail_estimate' not in m.datacollector:
+        _fail("GAP01_tail_present", "u_sys_tail_estimate missing from datacollector")
+    if 'u_sys_total_estimate' not in m.datacollector:
+        _fail("GAP01_total_present", "u_sys_total_estimate missing from datacollector")
+
+    tail  = m.datacollector['u_sys_tail_estimate'][0]
+    total = m.datacollector['u_sys_total_estimate'][0]
+
+    if tail <= 0:
+        _fail("GAP01_tail_positive", f"tail estimate must be > 0, got {tail}")
+    if total < tail:
+        _fail("GAP01_total_geq_tail",
+              f"total ({total:.4f}) must be >= tail ({tail:.4f})")
+    _pass("GAP01_tail_fields_present")
+
+
+def test_gap01_total_identity():
+    """GAP-01 WP7: u_sys_total_estimate == integral_U_sys + u_sys_tail_estimate at every step."""
+    from model import GardenModel
+    m = GardenModel(n_agents=50, ai_policy='optimize_u_sys',
+                    config={'random_seed': 7, 'reproduction_rate': 0.09})
+    for _ in range(10):
+        m.step()
+
+    for i in range(10):
+        expected = (m.datacollector['integral_U_sys'][i] +
+                    m.datacollector['u_sys_tail_estimate'][i])
+        actual   = m.datacollector['u_sys_total_estimate'][i]
+        if abs(actual - expected) > 1e-10:
+            _fail("GAP01_total_identity",
+                  f"Identity violated at step {i}: total={actual:.8f} "
+                  f"!= integral+tail={expected:.8f}")
+    _pass("GAP01_total_identity")
+
+
+def test_gap01_tail_decreases_over_time():
+    """GAP-01 WP7: tail estimate must decrease as discount factor grows."""
+    from model import GardenModel
+    m = GardenModel(n_agents=100, ai_policy='optimize_u_sys',
+                    config={'random_seed': 7, 'reproduction_rate': 0.09})
+    for _ in range(30):
+        m.step()
+
+    tail = m.datacollector['u_sys_tail_estimate']
+    # tail[t] = A_t * exp(-rho*t) / rho — must be strictly decreasing when A_t is stable
+    # Compare first vs. last; a healthy simulation keeps A_t roughly constant
+    if tail[-1] >= tail[0]:
+        _fail("GAP01_tail_decreases",
+              f"Tail did not decrease: tail[0]={tail[0]:.4f}, tail[-1]={tail[-1]:.4f}")
+    _pass("GAP01_tail_decreases_over_time")
+
+
+def test_gap01_trapezoidal_differs_from_riemann():
+    """
+    GAP-01 WP7 sub-problem 3: trapezoidal integral must differ from Riemann sum
+    by exactly (u[0] + u[T]) / 2  — the classical endpoint correction.
+    """
+    from model import GardenModel
+    m = GardenModel(n_agents=50, ai_policy='optimize_u_sys',
+                    config={'random_seed': 7, 'reproduction_rate': 0.09})
+    for _ in range(10):
+        m.step()
+
+    u      = m.datacollector['U_sys']
+    integ  = m.datacollector['integral_U_sys']
+
+    # Reconstruct the old Riemann sum over steps 0..9
+    riemann = sum(u)  # left-endpoint Riemann: u[0]+u[1]+...+u[9]
+
+    # Standard composite trapezoidal: u[0]/2 + u[1]+...+u[8] + u[9]/2
+    trap_expected = sum(u) - (u[0] + u[-1]) / 2.0
+
+    # integ[-1] should equal trap_expected
+    if abs(integ[-1] - trap_expected) > 1e-10:
+        _fail("GAP01_riemann_correction",
+              f"Trapezoidal integral ({integ[-1]:.6f}) != expected "
+              f"({trap_expected:.6f}); Riemann was {riemann:.6f}")
+    _pass("GAP01_trapezoidal_differs_from_riemann")
+
+
+# ---------------------------------------------------------------------------
 # Integration smoke test
 # ---------------------------------------------------------------------------
 
@@ -414,6 +540,11 @@ TESTS = [
     test_wp4_peer_validator_installed_on_model,
     test_wp4_inflated_cost_undercut,
     test_wp4_peer_gains_capability_on_undercut,
+    test_gap01_trapezoidal_integration,
+    test_gap01_tail_fields_present,
+    test_gap01_total_identity,
+    test_gap01_tail_decreases_over_time,
+    test_gap01_trapezoidal_differs_from_riemann,
     test_integration_manufacture_emergency_blocked,
 ]
 

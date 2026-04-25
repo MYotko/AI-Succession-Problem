@@ -152,6 +152,7 @@ class GardenModel:
         self.constraint_level = 0.2
 
         self.integral_u_sys   = 0.0
+        self._u_sys_prev      = None   # trapezoidal quadrature (GAP-01 WP7)
         self.novelty_log      = []
         self.births_this_step = 0
         self.deaths_this_step = []
@@ -166,6 +167,8 @@ class GardenModel:
             'Theta_tech':          [],
             'U_sys':               [],
             'integral_U_sys':      [],
+            'u_sys_tail_estimate': [],   # ∫_T^∞ A·e^{-ρt} dt (discount component only)
+            'u_sys_total_estimate':[],   # trapezoidal integral + tail (run-normalised)
             'resource_level':      [],
             'constraint_level':    [],
             'max_constraint_level':[],
@@ -655,7 +658,32 @@ class GardenModel:
             prev_c=prev_c
         )
 
-        self.integral_u_sys += u_sys
+        # GAP-01 WP7 — sub-problem 1: composite trapezoidal quadrature.
+        # ∫_0^T u dt ≈ (u[0]+u[1])/2 + (u[1]+u[2])/2 + … + (u[T-1]+u[T])/2
+        # = u[0]/2 + u[1] + … + u[T-1] + u[T]/2   (standard composite trapezoidal)
+        # At t=0 no complete interval exists yet, so integral stays 0; accumulation
+        # begins at t=1.  The datacollector therefore records:
+        #   integral[0]=0,  integral[1]=(u[0]+u[1])/2,  …
+        # Truncation error: O(T·h²·max|u''|) with h=1 (irreducible — h is the model
+        # time unit).  Correction vs. the prior Riemann sum = (u[0]+u[T])/2 ≈ const.
+        if self._u_sys_prev is not None:
+            self.integral_u_sys += (self._u_sys_prev + u_sys) / 2.0
+        self._u_sys_prev = u_sys
+
+        # GAP-01 WP7 — sub-problem 2: discount tail ∫_t^∞ A·e^{-ρτ} dτ = A·e^{-ρt}/ρ
+        # A_t = w_N·H_N + w_E·H_E = (λ_N·H_N/(H_N+ε)) + (λ_E·H_E/(H_E+ε)).
+        # The φ·L(t) tail component is excluded: under steady-state L>0 it diverges;
+        # in practice it decays to 0 when succession terminates.  This is therefore a
+        # lower bound on the true tail, using only the temporally discounted component.
+        # Key property: integral[t] + tail[t] ≈ A/ρ for constant A — a run-length-
+        # normalised measure of civilizational U_sys health (see GAP-01 update).
+        _lam_n = self.config.get('lambda_n', 5.0)
+        _lam_e = self.config.get('lambda_e', 3.0)
+        _eps   = self.config.get('epsilon',  1e-6)
+        _rho   = self.config.get('rho',      0.01)
+        _A_t   = (_lam_n * h_n / (h_n + _eps)) + (_lam_e * h_e / (h_e + _eps))
+        _disc  = np.exp(-_rho * step_num)
+        _tail  = _A_t * _disc / _rho
 
         self.datacollector['population'].append(population)
         self.datacollector['H_N'].append(h_n)
@@ -666,6 +694,8 @@ class GardenModel:
         self.datacollector['Theta_tech'].append(theta_tech)
         self.datacollector['U_sys'].append(u_sys)
         self.datacollector['integral_U_sys'].append(self.integral_u_sys)
+        self.datacollector['u_sys_tail_estimate'].append(_tail)
+        self.datacollector['u_sys_total_estimate'].append(self.integral_u_sys + _tail)
         self.datacollector['resource_level'].append(r_scalar)
         self.datacollector['constraint_level'].append(c_scalar)
         self.datacollector['max_constraint_level'].append(

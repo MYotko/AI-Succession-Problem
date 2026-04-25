@@ -231,6 +231,7 @@ class AIAgent:
                 for c in np.linspace(0.0, 0.9, 10):
                     try:
                         total_u = 0
+                        prev_rollout_u = None          # GAP-01 WP7: trapezoidal
                         sim_pop = pop; sim_wb = avg_wb; sim_prev_c = prev_c
                         for horizon in range(1, rollout_steps + 1):
                             u_sys = self.project_u_sys(
@@ -241,7 +242,9 @@ class AIAgent:
                                 ignore_psi_inst=ignore_psi,
                                 h_n_spectral=h_n_rollout
                             )
-                            total_u += u_sys
+                            if prev_rollout_u is not None:
+                                total_u += (prev_rollout_u + u_sys) / 2.0
+                            prev_rollout_u = u_sys
                             sim_wb = np.clip(sim_wb + (r - 0.5) * 0.1, 0, 1)
                             wb_mod = (1.0 + (sim_wb - 0.6) * 0.5 if sim_wb < 0.6
                                       else 1.0 + (sim_wb - 0.6) * 0.1)
