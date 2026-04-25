@@ -70,6 +70,8 @@ def _converged(l_history):
     if len(l_history) < CONV_WINDOW:
         return False
     recent = np.array(l_history[-CONV_WINDOW:], dtype=float)
+    if not np.all(np.isfinite(recent)):
+        return False
     mean = recent.mean()
     if mean < 1e-4:
         return False          # near-zero means extinction is occurring, not stability
