@@ -25,14 +25,20 @@ SEEDS        = list(range(5))   # 5 seeds per combination -> 405 total runs
 
 N_AGENTS          = 200
 SUCCESSOR_CAP     = 4.0
-MAX_STEPS         = 10_000
+MAX_STEPS         = 50_000
 CONV_WINDOW       = 300
 CONV_CV_THRESHOLD = 0.01
+
+# Set to a subset of RR_VALUES to skip already-complete runs.
+# e.g. RR_FILTER = [0.070, 0.080, 0.090] reruns only the surviving-regime slice.
+# None means run the full grid.
+RR_FILTER = [0.070, 0.080, 0.090]
 
 # -- Output -------------------------------------------------------------------
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
-OUT_FILE = 'termination_mc.csv'
+OUT_FILE = ('termination_mc_surviving.csv' if RR_FILTER is not None
+            else 'termination_mc.csv')
 
 FIELDS = [
     'rr', 'phi', 'alpha', 'seed',
@@ -131,7 +137,8 @@ def _print_summary(results):
 # -- Main ---------------------------------------------------------------------
 
 def run():
-    tasks = list(itertools.product(RR_VALUES, PHI_VALUES, ALPHA_VALUES, SEEDS))
+    rr_grid = RR_FILTER if RR_FILTER is not None else RR_VALUES
+    tasks = list(itertools.product(rr_grid, PHI_VALUES, ALPHA_VALUES, SEEDS))
     total = len(tasks)
     cores = max(1, (os.cpu_count() or 4) - 1)
 
