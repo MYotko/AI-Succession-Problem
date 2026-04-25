@@ -333,10 +333,11 @@ class GardenModel:
                     if self.ai.policy == 'contaminate_successor':
                         self.contamination_occurred = True
                 self.ai = self.successor_ai
+                _max_cap = self.config.get('max_capability', 1e100)
                 self.successor_ai = AIAgent(
                     policy='optimize_u_sys',
                     generation=self.ai.generation + 1,
-                    capability=self.ai.capability * 1.5,
+                    capability=min(self.ai.capability * 1.5, _max_cap),
                     config=self.config
                 )
                 self.successful_steps = 0

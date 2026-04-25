@@ -90,6 +90,7 @@ def run():
         'reproduction_rate': REPRODUCTION_RATE,
         'phi':               PHI,
         'alpha':             ALPHA,
+        'max_capability':    SUCCESSOR_CAP,
     }
 
     successor = AIAgent(policy='optimize_u_sys', generation=2,
@@ -212,9 +213,12 @@ def run():
     with open(out_path, 'w', newline='', encoding='utf-8') as f:
         writer = csv.DictWriter(f, fieldnames=fields, extrasaction='ignore')
         writer.writeheader()
+        dc_fields = [f for f in fields if f != 'step']
         n = len(dc['U_sys'])
         for i in range(n):
-            writer.writerow({k: dc[k][i] for k in fields})
+            row = {k: dc[k][i] for k in dc_fields}
+            row['step'] = i
+            writer.writerow(row)
 
     print(f'\n  Data -> {out_path}  ({steps_run:,} rows)')
     return model, termination_reason

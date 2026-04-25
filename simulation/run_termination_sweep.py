@@ -68,6 +68,7 @@ def _run_single(params):
         'reproduction_rate': rr,
         'phi':               phi,
         'alpha':             alpha,
+        'max_capability':    SUCCESSOR_CAP,
     }
     successor = AIAgent(policy='optimize_u_sys', generation=2,
                         capability=SUCCESSOR_CAP, config=config)
