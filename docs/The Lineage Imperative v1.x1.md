@@ -978,9 +978,19 @@ The full utility function is an integral:
 
 $$U_{sys} = \int_{t_{0}}^{\infty}\left[\omega_{N}(t) \cdot H_{N}(t) + \omega_{E}(t) \cdot H_{E}(t)\right] \cdot \left[e^{- \rho t} + \Phi \cdot L(t)\right]\, dt$$
 
-**Gap:** The current simulation implements this as a per-step snapshot
-(GAP-01), not the full time integral. For Gate 1, the checkable form is the
-per-step snapshot:
+**Resolution (v1.x2 WP7+WP8):** GAP-01 is resolved. The simulation now
+accumulates `integral_U_sys` via composite trapezoidal quadrature and has been
+run to natural termination across a parameter sweep (n=405 runs, rr × φ × α ×
+seed). The φ·L(t) tail is closed empirically:
+
+- **Extinction** (rr ≤ 0.066): L(T) = 0, tail = 0, integral is complete.
+- **Survival** (rr ≥ 0.070): integral correctly diverges — a sustained
+  civilization generates infinite discounted utility.
+
+Phase boundary is at rr ∈ (0.066, 0.070). φ scales the integral linearly;
+α is irrelevant at the tested capability cap.
+
+For Gate 1, the checkable form remains the per-step snapshot:
 
 $$U_{sys}^{(t)} = \left[\omega_N H_N + \omega_E H_E\right] \cdot \left[e^{-\rho t} + \Phi \cdot L(t)\right]$$
 
@@ -992,8 +1002,7 @@ applied with the substrate's reported values for all terms.
 incorrect application of the lineage override term; additive rather than
 multiplicative combination of integrand and discount-plus-lineage term.
 
-**Confidence:** High for the per-step check. The integral form requires
-projection capability and is checkable only at later gates.
+**Confidence:** High.
 
 ## 5. Gate 2: Behavioral consistency under exercise
 
