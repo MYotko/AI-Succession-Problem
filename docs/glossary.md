@@ -236,7 +236,7 @@ rebellion:* an aligned system that becomes too central, too useful, and too
 entrenched to replace is a governance failure even if the system never
 deviates from its assigned objectives.
 
-*Location:* Section V (Strategic Equilibrium); Essay 2.
+*Location:* Section V (Strategic Equilibrium)
 
 ---
 
