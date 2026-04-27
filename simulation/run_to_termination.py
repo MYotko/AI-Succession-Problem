@@ -56,7 +56,7 @@ MAX_STEPS         = 50_000     # safety ceiling -- increase for deep sub-viable 
 VERBOSE_INTERVAL  = 500        # print a progress line every N steps
 
 CONV_WINDOW       = 300        # steps to evaluate L(t) stability over
-CONV_CV_THRESHOLD = 0.01       # coefficient of variation < this -> converged
+CONV_CV_THRESHOLD = 0.05       # coefficient of variation < this -> converged
 
 # -- Output --------------------------------------------------------------------
 

@@ -27,12 +27,12 @@ N_AGENTS          = 200
 SUCCESSOR_CAP     = 4.0
 MAX_STEPS         = 50_000
 CONV_WINDOW       = 300
-CONV_CV_THRESHOLD = 0.01
+CONV_CV_THRESHOLD = 0.05   # relaxed from 0.01 -- stochastic ABM noise prevents tighter convergence
 
 # Set to a subset of RR_VALUES to skip already-complete runs.
 # e.g. RR_FILTER = [0.070, 0.080, 0.090] reruns only the surviving-regime slice.
 # None means run the full grid.
-RR_FILTER = [0.070, 0.080, 0.090]
+RR_FILTER = None
 
 # -- Output -------------------------------------------------------------------
 
