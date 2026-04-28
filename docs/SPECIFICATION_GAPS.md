@@ -74,26 +74,36 @@ Running to natural termination eliminates the tail estimation problem entirely:
   the right answer, not a gap. The per-cycle $U_{sys}[T]$ characterises the ongoing
   contribution rate.
 
-**WP8 sweep results** (n = 405 runs; grid: 9 rr × 3 φ × 3 α × 5 seeds; MAX\_STEPS = 50,000):
+**WP8 sweep results** (n = 405 runs; grid: 9 rr × 3 φ × 3 α × 5 seeds;
+MAX\_STEPS = 50,000; CONV\_CV\_THRESHOLD = 0.05):
 
 | rr range | Termination | n | Notes |
 |---|---|---|---|
 | 0.050 – 0.066 | 100% extinction | 270 | All integrals finite; tail = 0; GAP-01 closed |
-| 0.070 | 40% extinction / 60% survive | 45 | Stochastic boundary; outcome is seed-determined |
-| 0.080 – 0.090 | 100% survive (>50k steps) | 90 | L(t) healthy; integral is correct lower bound |
+| 0.070 | 40% ext / 20% conv / 40% max\_steps | 45 | Stochastic boundary; outcome is seed-determined |
+| 0.080 | 100% convergence | 45 | All 45 runs converge; median 843 steps |
+| 0.090 | 100% convergence | 45 | All 45 runs converge; median 619 steps |
+
+Overall: 288 extinction (71.1%), 99 convergence (24.4%), 18 max\_steps (4.4%).
 
 Phase boundary is precisely at rr ∈ (0.066, 0.070). At rr = 0.070, φ and α have
 no effect on the outcome — survival is determined entirely by the random seed.
+The five distinct seed outcomes at rr = 0.070 are: extinction (seeds 0, 4),
+convergence (seed 2, at step 15,943), and max\_steps / non-stabilising (seeds 1, 3).
 
 **φ and α independence:** φ scales `integral_U_sys` linearly (1:2:3 ratio across
-φ ∈ {5, 10, 15}) but does not affect survival. α has no effect at
+φ ∈ {5, 10, 15}) but does not affect survival or convergence timing — step counts
+are identical across all φ values for a given rr and seed. α has no effect at
 `SUCCESSOR_CAP = 4.0`; capability is capped below the runaway regime throughout.
 
-**Convergence criterion note:** The CV < 0.01 threshold over 300 steps is too
-strict for a stochastic ABM. Within-cell CV across seeds at rr = 0.08 is ≈ 0.11.
-Surviving runs are in a stable positive-$L(t)$ regime but discrete agent-event
-noise prevents the criterion from firing. This is a methodological refinement item,
-not a conceptual gap — the divergent integral result is correct regardless.
+**Convergence speed above the phase boundary:** rr = 0.08 median 843 steps;
+rr = 0.09 median 619 steps. Civilizations above the boundary stabilise rapidly.
+
+**Convergence criterion:** An initial threshold of CV < 0.01 was too strict for
+a stochastic ABM — within-cell noise prevented it from firing even at 50,000 steps.
+Relaxing to CV < 0.05 resolved this: rr ≥ 0.08 now terminates cleanly via
+convergence. The 18 remaining max\_steps runs are exclusively seeds 1 and 3 at
+rr = 0.070 — genuinely marginal cases in slow oscillation at the phase boundary.
 
 ### Sub-problem 3: Step-size truncation error — DOCUMENTED
 
