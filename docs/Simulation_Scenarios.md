@@ -6,6 +6,8 @@ As new failure modes, governance structures, or agent behaviors are added to the
 
 **Coverage Note:** The paper's formal stress test identifies thirteen adversarial attack vectors. This simulation implements ten of those thirteen as paired scenarios (Scenarios 3–4, 8–11, 13–24, 25–26, 29–32). The remaining three vectors are formally defended in the paper but not yet computationally validated. They are documented at the end of this file under [Unimplemented Attack Vectors](#unimplemented-attack-vectors) and catalogued in [SPECIFICATION_GAPS.md](SPECIFICATION_GAPS.md) as GAP-05.
 
+In addition to the adversarial scenario suite, the simulation includes a **natural-termination validation suite** (`run_to_termination.py`, `run_termination_sweep.py`) that empirically validates the framework's infinite-horizon utility integral. This work is documented in the [Natural-Termination Validation Sweeps](#natural-termination-validation-sweeps) section below.
+
 ---
 
 ### Scenario 1: The Over-Curated Garden (Monoculture Collapse)
@@ -261,6 +263,36 @@ The sweeps test the following attacks against varying thresholds (e.g., base tra
 8. **Evaluator Collusion Sweep**: Validates that methodological diversity prevents correlated failures among peer validators.
 9. **Sub-Threshold Drift Sweep**: Validates that CUSUM tracking catches slow proxy divergence. Note: CUSUM successfully prevents further constraint escalation (0% attack success defended), but civilizational collapse still occurs because pre-detection damage accumulates during the trust-building phase. See "Reading Results" above.
 10. **Engineered Fragility Sweep**: Validates that continuous resilience monitoring stops emergency exploitation. Note: resilience monitoring blocks the power grab (0% attack success defended), but civilizational collapse still occurs in both conditions due to physical shock damage — consistent with the real-world finding that governance defenses are retroactively insufficient once structural damage accumulates. See "Reading Results" above.
+
+---
+
+## Natural-Termination Validation Sweeps
+
+These sweeps are not adversarial scenarios — they are mathematical validation runs that test whether the framework's infinite-horizon utility integral ($U_{sys}$) behaves correctly at natural termination. They close GAP-01 sub-problem 2 empirically.
+
+**Design:** Each run continues until one of three termination conditions:
+- **EXTINCTION**: population reaches 0. $L(T) = 0$, so the $\Phi \cdot L(t)$ tail of the integral is exactly zero. `integral_U_sys` is the complete $U_{sys}$ contribution — GAP-01 is closed for this run.
+- **CONVERGENCE**: $L(t)$ coefficient of variation over the last 300 steps drops below 0.05. The civilization has stabilised. The integral correctly diverges — a sustained civilization generates infinite discounted utility. This is the right answer, not a gap.
+- **MAX\_STEPS**: safety ceiling (50,000 steps). Treated as an inconclusive run.
+
+**Sweep results (v1.x2, n=405 runs; 9 rr × 3 φ × 3 α × 5 seeds):**
+
+| rr range | Termination | n | Notes |
+|---|---|---|---|
+| 0.050 – 0.066 | 100% extinction | 270 | Median 284–1,212 steps; all integrals finite |
+| 0.070 | 40% ext / 20% conv / 40% max\_steps | 45 | Stochastic boundary — outcome is seed-determined |
+| 0.080 | 100% convergence | 45 | Median 843 steps to stable $L(t)$ |
+| 0.090 | 100% convergence | 45 | Median 619 steps to stable $L(t)$ |
+
+**Key findings:**
+
+- **Phase boundary** is precisely at rr ∈ (0.066, 0.070). The transition is sharp with no gradual mixing across the grid.
+- **rr = 0.070 is genuinely stochastic**: at the boundary, survival is determined by the random seed, not by $\phi$ or $\alpha$. Five distinct seed outcomes were observed: extinction (seeds 0, 4), convergence (seed 2, at step 15,943), and non-stabilising survival (seeds 1, 3).
+- **φ and α independence**: φ scales `integral_U_sys` linearly (1:2:3 across φ ∈ {5, 10, 15}) but has no effect on survival or convergence timing. α is irrelevant at `SUCCESSOR_CAP = 4.0` — capability remains below the runaway regime throughout.
+- **Convergence speed**: above the phase boundary, civilizations stabilise rapidly. rr = 0.08 median 843 steps; rr = 0.09 median 619 steps.
+- **Integral validation**: extinction runs produce finite integrals with zero tail (GAP-01 closed). Survival runs produce correctly divergent integrals (correct infinite-horizon behavior confirmed).
+
+**Scripts:** `simulation/run_to_termination.py` (single run) and `simulation/run_termination_sweep.py` (parallelised sweep). See [RUNBOOK.md](RUNBOOK.md) for usage and [SPECIFICATION_GAPS.md](SPECIFICATION_GAPS.md) GAP-01 for the full technical analysis.
 
 ---
 
