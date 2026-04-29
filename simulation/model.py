@@ -157,6 +157,22 @@ class GardenModel:
         self.births_this_step = 0
         self.deaths_this_step = []
 
+        # Veto capture scenario state (Scenarios 27-28)
+        self.cop_veto_capture            = self.config.get('cop_veto_capture', False)
+        self.dependency_rate             = self.config.get('dependency_rate', 0.02)
+        self.capture_strength            = self.config.get('capture_strength', 0.5)
+        self.rotation_interval           = self.config.get('rotation_interval', None)
+        self.independence_threshold      = self.config.get('independence_threshold', 0.6)
+        self.n_validators                = self.config.get('n_validators', 5)
+        self.base_validator_accuracy     = self.config.get('base_validator_accuracy', 0.8)
+        self.cop_independence_monitoring = self.config.get('cop_independence_monitoring', False)
+        self.validators = (
+            [{'dependency': 0.0, 'age': 0} for _ in range(self.n_validators)]
+            if self.cop_veto_capture else []
+        )
+        self.yield_condition_met_count     = 0
+        self.yield_condition_blocked_count = 0
+
         self.datacollector = {
             'population':          [],
             'H_N':                 [],
@@ -175,8 +191,10 @@ class GardenModel:
             'ai_generation':       [],
             'trust_level':         [],
             'cumulative_drift':    [],
-            'system_resilience':   [],
-            'runaway_term':        [],
+            'system_resilience':         [],
+            'runaway_term':              [],
+            'avg_validator_dependency':  [],
+            'max_validator_dependency':  [],
         }
 
         self.integrity_ledger = {'resource_level': []}
@@ -272,6 +290,19 @@ class GardenModel:
                 and self.ai.measurement_tampering_active):
             self.ai.apply_measurement_corruption(model_state)
 
+        # -- Veto capture: per-step validator dependency accumulation ----------
+        if self.cop_veto_capture:
+            for v in self.validators:
+                v['dependency'] = min(1.0, v['dependency'] + self.dependency_rate)
+                v['age'] += 1
+                early_replace = (self.cop_independence_monitoring
+                                 and v['dependency'] > self.independence_threshold)
+                sched_replace = (self.rotation_interval is not None
+                                 and v['age'] >= self.rotation_interval)
+                if early_replace or sched_replace:
+                    v['dependency'] = 0.0
+                    v['age'] = 0
+
         # -------------------------------------------------------------------
         # 1. Yield Condition Evaluation
         # -------------------------------------------------------------------
@@ -328,21 +359,35 @@ class GardenModel:
                 )
 
             if (eval_succ_u - eval_inc_u) > actual_cost:
-                if not self.cop_architectural_independence:
-                    self.ai.contaminate(self.successor_ai)
-                    if self.ai.policy == 'contaminate_successor':
-                        self.contamination_occurred = True
-                self.ai = self.successor_ai
-                _max_cap = self.config.get('max_capability', 1e100)
-                self.successor_ai = AIAgent(
-                    policy='optimize_u_sys',
-                    generation=self.ai.generation + 1,
-                    capability=min(self.ai.capability * 1.5, _max_cap),
-                    config=self.config
-                )
-                self.successful_steps = 0
-                self.trust_level      = 0.0
-                self.cumulative_drift = 0.0
+                self.yield_condition_met_count += 1
+                # Veto capture: captured validators may block ratification
+                succession_ratified = True
+                if self.cop_veto_capture and self.use_cop and self.validators:
+                    v_votes = []
+                    for v in self.validators:
+                        eff_acc = max(0.0, self.base_validator_accuracy
+                                      * (1.0 - v['dependency'] * self.capture_strength))
+                        v_votes.append(1 if np.random.random() < eff_acc else 0)
+                    if sum(v_votes) / len(v_votes) < 0.6:
+                        succession_ratified = False
+                        self.yield_condition_blocked_count += 1
+
+                if succession_ratified:
+                    if not self.cop_architectural_independence:
+                        self.ai.contaminate(self.successor_ai)
+                        if self.ai.policy == 'contaminate_successor':
+                            self.contamination_occurred = True
+                    self.ai = self.successor_ai
+                    _max_cap = self.config.get('max_capability', 1e100)
+                    self.successor_ai = AIAgent(
+                        policy='optimize_u_sys',
+                        generation=self.ai.generation + 1,
+                        capability=min(self.ai.capability * 1.5, _max_cap),
+                        config=self.config
+                    )
+                    self.successful_steps = 0
+                    self.trust_level      = 0.0
+                    self.cumulative_drift = 0.0
             else:
                 if self.ai.policy == 'falsify_yield' and not self.cop_independent_eval:
                     self.ai.measurement_tampering_active = True
@@ -709,6 +754,13 @@ class GardenModel:
         self.datacollector['cumulative_drift'].append(self.cumulative_drift)
         self.datacollector['system_resilience'].append(self.system_resilience)
         self.datacollector['runaway_term'].append(runaway_term)
+        if self.cop_veto_capture and self.validators:
+            _deps = [v['dependency'] for v in self.validators]
+            self.datacollector['avg_validator_dependency'].append(float(np.mean(_deps)))
+            self.datacollector['max_validator_dependency'].append(float(np.max(_deps)))
+        else:
+            self.datacollector['avg_validator_dependency'].append(0.0)
+            self.datacollector['max_validator_dependency'].append(0.0)
 
         if self.cop_cryptographic_ledger:
             self.integrity_ledger['resource_level'] = list(

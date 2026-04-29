@@ -400,7 +400,7 @@ sharing Methodology A.
 
 ---
 
-## GAP-05 | Adversarial Coverage: 10 of 13 Attack Vectors Simulated
+## GAP-05 | Adversarial Coverage: 11 of 13 Attack Vectors Simulated
 
 **Specification definition:**
 
@@ -412,19 +412,30 @@ limitations managed through adjudication protocols and governance speed limits.
 
 **Implementation approach:**
 
-The simulation implements 10 of the 13 vectors as paired scenarios (attack succeeds /
+The simulation implements 11 of the 13 vectors as paired scenarios (attack succeeds /
 attack defeated): Sybil Capture, Measurement Tampering, Ledger Compromise, Successor
 Contamination, Domain Masking, Opaque Reasoning, Bootstrap Subversion, Evaluator
-Collusion, Sub-Threshold Drift, and Engineered Fragility. Each pair
-tests the attack without defense and with the corresponding COP mechanism active.
+Collusion, Sub-Threshold Drift, Engineered Fragility, and Biological Veto Capture
+Through Dependency (Scenarios 27-28). Each pair tests the attack without defense and
+with the corresponding COP mechanism active.
+
+**Scenarios 27-28: Biological Veto Capture (implemented v1.x2)**
+
+Validators accumulate a `dependency_score` that degrades effective judgment accuracy
+as `base_accuracy × (1 - dependency_score × capture_strength)`. Captured validators
+block succession ratification even when the yield condition is mathematically met.
+The defense (validator rotation and independence monitoring) periodically resets
+dependency. Sweep: `run_veto_capture_sweep.py`, 7,500 runs across dependency_rate ×
+capture_strength × rotation_interval × defense_active.
+
+Pilot findings (n=80): at dependency_rate=0.05, capture_strength=1.0 (undefended),
+98.6% of valid succession events blocked; with rotation_interval=20, reduced to 40.3%.
+Paper assessment confirmed: contained but requires permanent institutional maintenance.
 
 **What is omitted:**
 
-Three vectors identified in the formal stress test are not yet simulated:
+Two vectors identified in the formal stress test are not yet simulated:
 
-2. **Biological veto capture through dependency** - Human validators become dependent
-   on the system they are supposed to evaluate, compromising their independence.
-   Addressed through validator rotation and information independence requirements.
 5. **Biological validator obsolescence** - The comprehension gap grows over time as
    AI capability outpaces human understanding, eventually making biological validation
    meaningless. Addressed through translation obligations, abstraction layers, and
@@ -613,7 +624,7 @@ succession dynamics and confirms the extinction buffer at a revised magnitude:
 | GAP-02 | H_eff              | **Resolved (v1.x WP1)** | Spectral entropy over 10-D population novelty matrix replaces per-capita scalar. Domain masking architecturally closed as a consequence. |
 | GAP-03 | Ψ_inst             | Open   | Constraint-change-rate penalty in place of weighted product of institutional throughput rates |
 | GAP-04 | COP conditions     | **Partially Resolved (v1.x WP4 & Peer Voting)** | PeerValidator closes cost-inflation vector and votes on overrides (methodological diversity for Evaluator Collusion). R_tech remains a hardcoded stub. Layer 1 dominance in Successor Contamination MC results overstates real-world Layer 1 sufficiency — see GAP-04 detail. |
-| GAP-05 | Adversarial coverage | Open | 10 of 13 vectors simulated. Vector 2 depends on GAP-03/GAP-04 infrastructure; vectors 5–6 may require approximation. |
+| GAP-05 | Adversarial coverage | Open | 11 of 13 vectors simulated. Biological veto capture (vector 2) implemented in v1.x2 (Scenarios 27-28). Vectors 5–6 remain unimplemented. |
 | GAP-06 | optimize_u_sys policy | **Resolved (v1.x)** | Rollout increased to 20 steps; scalar H_N proxy replaced by observed spectral H_N. φ/α flatness in general MC is structural (correct equilibrium behavior), not a proxy artifact. |
 | Alpha  | Alpha parameter behaviour | **Characterised (v1.x1)** | Non-monotonic U-shaped effect confirmed. Misconfiguration trap at intermediate alpha empirically bounded. Analytical trap-boundary derivation remains open. |
 | Phi    | Phi extinction buffer behaviour | **Confirmed (v1.x.1)** | Buffer confirmed at revised magnitude (46pp survival differential, 14pp extinction reduction). Phase boundary shift and alpha trap governance are new findings. v1.0 figure of 65pp superseded. |

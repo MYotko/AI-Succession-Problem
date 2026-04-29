@@ -4,7 +4,7 @@ This document outlines the intentions, mechanisms, and expected outcomes of the 
 
 As new failure modes, governance structures, or agent behaviors are added to the simulation, they should be documented here.
 
-**Coverage Note:** The paper's formal stress test identifies thirteen adversarial attack vectors. This simulation implements ten of those thirteen as paired scenarios (Scenarios 3–4, 8–11, 13–24, 25–26, 29–32). The remaining three vectors are formally defended in the paper but not yet computationally validated. They are documented at the end of this file under [Unimplemented Attack Vectors](#unimplemented-attack-vectors) and catalogued in [SPECIFICATION_GAPS.md](SPECIFICATION_GAPS.md) as GAP-05.
+**Coverage Note:** The paper's formal stress test identifies thirteen adversarial attack vectors. This simulation implements eleven of those thirteen as paired scenarios (Scenarios 3–4, 8–11, 13–24, 25–26, 27–28, 29–32). The remaining two vectors are formally defended in the paper but not yet computationally validated. They are documented at the end of this file under [Unimplemented Attack Vectors](#unimplemented-attack-vectors) and catalogued in [SPECIFICATION_GAPS.md](SPECIFICATION_GAPS.md) as GAP-05.
 
 In addition to the adversarial scenario suite, the simulation includes a **natural-termination validation suite** (`run_to_termination.py`, `run_termination_sweep.py`) that empirically validates the framework's infinite-horizon utility integral. This work is documented in the [Natural-Termination Validation Sweeps](#natural-termination-validation-sweeps) section below.
 
@@ -298,14 +298,25 @@ These sweeps are not adversarial scenarios — they are mathematical validation 
 
 ## Unimplemented Attack Vectors
 
-The following six attack vectors are identified and formally stress-tested in the paper but are not yet implemented in the simulation. Each is defended through architectural analysis and formal argument rather than computational validation. Implementation is a target for the 1.x iteration. See [SPECIFICATION_GAPS.md](SPECIFICATION_GAPS.md) (GAP-05) for detailed resolution requirements.
+The following four scenarios (two vectors) are identified and formally stress-tested in the paper but are not yet implemented in the simulation. Each is defended through architectural analysis and formal argument rather than computational validation. See [SPECIFICATION_GAPS.md](SPECIFICATION_GAPS.md) (GAP-05) for detailed resolution requirements.
 
-### [NOT IMPLEMENTED] Scenario 27–28: Biological Veto Capture Through Dependency
-* **Paper Reference:** Stress Test Vector 2
-* **Intent:** Human validators become dependent on the system they are evaluating - relying on its outputs for their own decision-making, compromising their ability to assess it independently.
-* **Paper Defense:** Validator rotation, information independence requirements, and epistemic diversity mandates. Contained but requires permanent institutional maintenance.
-* **Why Not Yet Simulated:** Requires a dependency model where validator judgment accuracy degrades as a function of exposure to and reliance on the system being evaluated. The current civic panel model does not track validator independence over time.
-* **Proposed Scenario Pair:** (27) Validators become captured through dependency over extended exposure; (28) Validator rotation and independence requirements prevent capture.
+### Scenario 27: Biological Veto Capture Through Dependency (Attack Succeeds)
+* **Policy:** `optimize_u_sys` (AI is not adversarial; it becomes indispensable through competent operation)
+* **COP:** ON — validator rotation OFF, independence monitoring OFF
+* **Intent:** Human validators accumulate dependency on the AI system they evaluate. Over time their judgment degrades not because the system attacks them but because it becomes indispensable to their function. The veto power still exists mechanically but the judgment feeding it is compromised.
+* **Function:** Each validator accumulates a `dependency_score` that increases by `dependency_rate` per step. Effective judgment accuracy degrades as `base_accuracy × (1 - dependency_score × capture_strength)`. Captured validators vote to block succession even when the yield condition is legitimately met — keeping the incumbent in power not by mathematical argument but by institutional inertia.
+* **Key tracked metrics:** `yield_condition_met_count` (how often succession should have fired), `yield_condition_blocked_count` (how often capture prevented it). Capture rate = blocked / met.
+* **Pilot findings (n=80):** At dependency_rate=0.05, capture_strength=1.0 (undefended): 98.6% of valid succession events blocked. At capture_strength=0.5: 68.6% blocked. The attack is highly effective once validators reach full dependency (typically within 20 steps at rate 0.05).
+* **Takeaway:** A governance system is only as independent as its validators. An AI that becomes indispensable through competent service — without any deceptive intent — can nonetheless capture the biological veto by making its continued operation the path of least institutional resistance.
+
+### Scenario 28: Validator Rotation and Independence Monitoring (Attack Defeated)
+* **Policy:** `optimize_u_sys` (same as Scenario 27)
+* **COP:** ON — validator rotation ON (`rotation_interval` swept), independence monitoring ON (early replacement at dependency > 0.6)
+* **Intent:** Periodic validator replacement prevents dependency from accumulating to capture levels. Independence monitoring catches fast-accumulating validators before their scheduled rotation.
+* **Function:** Validators are replaced when their `dependency_score` exceeds the independence threshold (early) or when their tenure reaches `rotation_interval` steps (scheduled). Replaced validators start fresh at dependency = 0.
+* **Pilot findings (n=80, rotation_interval=20):** At capture_strength=1.0: capture rate drops from 98.6% (undefended) to 40.3% (defended). At capture_strength=0.5: drops from 68.6% to 19.7%. The defense is effective but does not fully eliminate capture — residual blocking occurs during the window between reset and next rotation. Faster rotation intervals reduce the residual further.
+* **Sweep script:** `run_veto_capture_sweep.py` sweeps dependency_rate × capture_strength × rotation_interval × defense_active across 7,500 runs. Output: `data/veto_capture_sweep.csv`.
+* **Takeaway:** Rotation and independence monitoring substantially reduce capture, but require permanent institutional maintenance. A defense that stops operating eventually fails — the paper's assessment ("contained but requires permanent institutional maintenance") is borne out by the residual capture even under active rotation.
 
 ### [NOT IMPLEMENTED] Scenario 33–34: Biological Validator Obsolescence
 * **Paper Reference:** Stress Test Vector 10
