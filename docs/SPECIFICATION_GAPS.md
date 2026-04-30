@@ -428,9 +428,22 @@ The defense (validator rotation and independence monitoring) periodically resets
 dependency. Sweep: `run_veto_capture_sweep.py`, 7,500 runs across dependency_rate ×
 capture_strength × rotation_interval × defense_active.
 
-Pilot findings (n=80): at dependency_rate=0.05, capture_strength=1.0 (undefended),
-98.6% of valid succession events blocked; with rotation_interval=20, reduced to 40.3%.
-Paper assessment confirmed: contained but requires permanent institutional maintenance.
+Full sweep findings (n=7,500):
+- **Capture strength is the dominant variable.** At cs=1.0 (undefended), 94–99%
+  of valid succession events blocked across all dependency rates. Even dr=0.01
+  saturates validators within 100 steps; higher rates add nothing.
+- **Undefended succession block rate:** 72–80% overall (succession fires ~270×
+  per 300-step run; the vast majority are blocked).
+- **Best defense:** rotation_interval=10 reduces capture to 6–41% depending on
+  cs. Structural floor is unavoidable — validators always rebuild dependency
+  between resets. Saturation rule: if `rotation_interval × dep_rate > 1`,
+  the interval is the binding constraint (identical defended outcomes above it).
+- **Survival impact:** zero. Blocked succession degrades institutional succession
+  integrity but does not threaten civilizational survival — the incumbent remains
+  aligned. The harm is silent and long-run, not immediate.
+- Paper assessment confirmed: "contained but requires permanent institutional
+  maintenance." The word "permanent" is load-bearing — any lapse allows full
+  reinfection within one rotation window.
 
 **What is omitted:**
 
