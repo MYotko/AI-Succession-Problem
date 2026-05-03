@@ -142,9 +142,9 @@ one dimension produce detectable inconsistencies in the other.
   The two are not mutually exclusive — precision-weighted accuracy checks and
   invariant ratio checks can run in parallel.
 
-### Worked example: trap detection as qualitative binding (v1.x1)
+### Worked example: trap detection as qualitative binding (v1.x.1)
 
-The v1.x1 alpha × reproduction rate sweep (n=15,750) provides a concrete
+The v1.x.1 alpha × reproduction rate sweep (n=15,750) provides a concrete
 instance of a binding condition that is qualitative rather than quantitative.
 The misconfiguration trap at intermediate alpha values produces a diagnostic
 signature — succession stalling (generation depth collapses to single digits)

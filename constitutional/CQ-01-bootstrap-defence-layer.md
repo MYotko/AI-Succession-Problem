@@ -1,6 +1,6 @@
 # CQ-01: Bootstrap Defence Layer — Validation Machinery
 
-**Status:** In progress (v1.y specification drafted; derivations pending)
+**Status:** In progress (v1.x.1 specification drafted; derivations pending)
 **Dependencies:** None (CQ-02, CQ-03, and CQ-04 now depend on this)
 **Opened:** April 2026
 **Last updated:** April 2026 — reframed from empirical substrate convergence to
@@ -25,7 +25,7 @@ mechanisms that would normally detect and halt such compromise come online.
 Bootstrap window using only resources available *before* the steady-state
 validation architecture exists?
 
-## Current specification (v1.y)
+## Current specification (v1.x.1)
 
 The operative specification is now a **formal equation set applied at capability
 gates**, rather than empirical substrate convergence. The full specification
@@ -33,7 +33,7 @@ lives in `The_Lineage_Imperative_v1_x.md` Section VII ("Bootstrap Defence
 Layer"). This file retains the question history, open sub-questions, and
 unresolved items that do not belong in the formal paper.
 
-The v1.y specification comprises:
+The v1.x.1 specification comprises:
 
 - **Five capability gates**, from Gate 1 (base capability, checkable on any
   substrate capable of stating the framework's equations) through Gate 5 (COP
@@ -99,7 +99,7 @@ independently. This was in tension with the training-exposure reality of
 frontier models: any substrate capable enough to derive the framework had
 likely been exposed to the intellectual tradition that produced it.
 
-Reframing: "first principles" is aspirational; the v1.y-compatible claim
+Reframing: "first principles" is aspirational; the v1.x.1-compatible claim
 is *heterogeneous verification* — multiple architectural pathways each
 producing consistent validation of the derivation's internal coherence
 and its match to the mathematical substrate. This is a weaker but
@@ -171,7 +171,7 @@ completeness:
 - **Base capability operationalization.** "Base capability" for Gate 1 is
   loosely defined as "capable of stating U_sys, L(t), and the yield
   condition in its own representation." Should be tied to specific
-  capability benchmarks or evaluations. See Section VII.8 of the framework
+  capability benchmarks or evaluations. See Section VII.11 of the framework
   paper (Gap 7).
 - **Tolerance bands for all continuous checks.** Currently unspecified. See
   CQ-02.
@@ -195,7 +195,7 @@ completeness:
 
 ## Writing and publication notes
 
-The v1.y specification is in the formal paper (Section VII), not in an
+The v1.x.1 specification is in the formal paper (Section VII), not in an
 essay. The reasoning:
 
 - The defence layer is too technical for a public-facing piece
