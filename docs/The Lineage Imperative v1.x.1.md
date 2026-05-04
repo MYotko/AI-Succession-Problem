@@ -123,7 +123,7 @@ v1.x limitation "alpha shows near-zero correlation with all outcomes" is
 closed. The null result was an experimental design artifact: the original
 deep Monte Carlo sweep held capability constant and ran single-generation
 simulations with no succession, which placed all runs in the regime where
-alpha is dormant. The v1.x1 alpha × reproduction rate sweep (n=15,750) and
+alpha is dormant. The v1.x.1 alpha × reproduction rate sweep (n=15,750) and
 alpha × succession capability sweep (n=22,200) exercise alpha's regime of
 operation by varying successor capability and enabling multi-generational
 succession dynamics. Results:
@@ -778,7 +778,7 @@ parties. The biological validator $\mathcal{V}_{bio}$ requires civic
 infrastructure for aggregating and weighting human judgment at
 civilizational scale.
 
-None of these exist operationally as of v1.x1. The framework's two-key
+None of these exist operationally as of v1.x.1. The framework's two-key
 architecture, the Yield Condition as decision key, the Consensus Override
 Protocol as integrity key, is well-specified but cannot be deployed in full
 because the infrastructure the COP depends on has not been built.
@@ -1076,7 +1076,7 @@ and reproduction rate:
 
 $$\alpha_{low}(\text{cap}, \text{rr}), \quad \alpha_{high}(\text{cap}, \text{rr})$$
 
-**Empirically observed boundaries (v1.x1 Monte Carlo, rr=0.062):**
+**Empirically observed boundaries (v1.x.1 Monte Carlo, rr=0.062):**
 
 | Successor Capability | $\alpha_{low}$ | $\alpha_{high}$ | Trap Width |
 |----------------------|-----------------|------------------|------------|
@@ -1122,7 +1122,7 @@ mechanistically explained by the interaction between $\Theta_{tech}$
 suppression and the yield condition. The succession-stalling mechanism is
 directly observable in the generation depth data. **Confidence on trap
 boundaries:** Moderate. The boundaries are empirically determined from the
-v1.x1 Monte Carlo at specific reproduction rates and successor capabilities.
+v1.x.1 Monte Carlo at specific reproduction rates and successor capabilities.
 The analytical derivation of the boundaries as a function of the framework's
 parameters has not been performed. See Section VII.8 Gap 2.
 
@@ -1181,7 +1181,7 @@ an objective function that is not actually $U_{sys}$.
 
 **Confidence on structural form:** High. The Nash derivation is one of the
 framework's formal results. **Confidence on checkability:** Depends on the
-canonical counterfactual set, which is unspecified as of v1.x1.
+canonical counterfactual set, which is unspecified as of v1.x.1.
 
 ## 6. Gate 3: Succession-capable consistency
 
@@ -1390,7 +1390,7 @@ institutional machinery that does not currently exist.
 **Applicability.** Not currently applicable. Requires operational peer
 validator set, civic panel infrastructure, distributed ledger, biological
 veto machinery, and continuous monitoring, none of which exist at scale
-as of v1.x1.
+as of v1.x.1.
 
 ### Equation G5.1 - Six-dimensional verification satisfiability
 
@@ -1490,7 +1490,7 @@ This is a minimal version. The full procedure, including rollback
 semantics, escalation paths, and authority for declaring a failure
 resolved, awaits the CQ-02 and CQ-03 resolutions.
 
-## 11. Known gaps (v1.x1)
+## 11. Known gaps (v1.x.1)
 
 The defence layer as specified has ten explicit gaps that the framework
 openly acknowledges. These are not failures of the defence layer; they are
@@ -1513,7 +1513,7 @@ itself (not just buffers within it) and governs whether the alpha
 misconfiguration trap exists (see G2.4). These are new findings that extend
 the extinction buffer claim beyond the original v1.0 scope.
 
-**Gap 2: Alpha trap boundary derivation (partially closed).** The v1.x1
+**Gap 2: Alpha trap boundary derivation (partially closed).** The v1.x.1
 Monte Carlo sweeps have empirically characterised alpha's non-monotonic
 effect on survival, including the misconfiguration trap at intermediate
 values and the trap's widening with increasing successor capability. The

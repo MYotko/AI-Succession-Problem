@@ -88,9 +88,9 @@ foundations.
   pattern is acceptable or whether the defensive components also need to
   be derived.
 
-### Evidence from the alpha trap finding (v1.x1)
+### Evidence from the alpha trap finding (v1.x.1)
 
-The v1.x1 alpha misconfiguration trap is a concrete piece of evidence for
+The v1.x.1 alpha misconfiguration trap is a concrete piece of evidence for
 the derivability thesis. The trap mechanism — succession stalling because
 alpha is strong enough to degrade the successor's theta_tech below the yield
 condition threshold, but too weak to force conservative deployment — was not
@@ -113,20 +113,45 @@ checks fall out of the framework's existing structure, which weakens the
 position that the validation layer must be stipulated separately. The open
 question is whether this is the pattern or the exception.
 
-### Phi-alpha interaction as evidence for derivability (v1.x.1)
+### Phi-alpha interaction: corrected mechanism (v1.x.1)
 
-The phi × alpha interaction is derivable from the framework's existing
-equations without new machinery. Phi is the coefficient on L(t) in U_sys.
-Higher phi amplifies L(t)'s contribution, which increases the successor's
-U_sys advantage over the incumbent. This makes the yield condition easier
-to satisfy even when theta_tech is partially suppressed by alpha. The
-interaction — phi compensates for alpha's suppression by amplifying the
-lineage term — falls directly out of the multiplicative structure of U_sys.
+The v1.x.1 phi x alpha x rr sweep revealed that phi governs whether
+the alpha misconfiguration trap exists. At phi <= 5, succession stalls
+universally regardless of alpha. At phi >= 15, the trap narrows to a
+single alpha value or disappears entirely.
 
-This is a second instance (alongside the alpha trap mechanism) where a
-simulation finding is mechanistically explained by the framework's
-existing formal structure without importing new mathematical machinery.
-The pattern strengthens the case for CQ-04's derivability claim.
+The mechanism is behavioral, not algebraic. A static analysis of the
+equations would predict that high phi should WIDEN the trap: if the
+successor has lower L(t) than the incumbent (due to theta_tech
+suppression from alpha), then a larger phi coefficient amplifies the
+incumbent's L(t) advantage, making the successor look worse, not
+better.
+
+The resolution is that phi changes the optimizer's behavior, not just
+the magnitude of the L(t) term. Under high phi, the rollout projections
+show that aggressive capability deployment degrades L(t) so severely
+that conservative deployment becomes the dominant strategy. The
+successor that arrives under high phi is not the same successor that
+arrives under low phi: it deploys capability more conservatively, which
+means its theta_tech is not as suppressed, which means its L(t) is not
+as low, which means the yield condition clears.
+
+In other words: high phi does not amplify the successor's existing L(t)
+advantage (the static analysis is correct that this would not work).
+High phi changes the conditions under which the successor operates,
+causing the successor to adopt a deployment strategy that avoids the
+theta_tech suppression that creates the trap in the first place. The
+mechanism is a policy change induced by the altered optimization
+landscape, not a scaling of existing values.
+
+This distinction matters for Gate 2.4's validation check. A substrate
+verifying the phi-alpha interaction should not look for phi amplifying
+L(t) directly (the static mechanism). It should look for phi changing
+the optimizer's deployment policy (the dynamic mechanism): under high
+phi, does the optimizer shift toward conservative capability deployment?
+If it does, the interaction is operating correctly. If phi increases
+but the deployment policy does not change, the lineage override term
+is not propagating into the rollout projections.
 
 ### Next work
 

@@ -428,9 +428,22 @@ The defense (validator rotation and independence monitoring) periodically resets
 dependency. Sweep: `run_veto_capture_sweep.py`, 7,500 runs across dependency_rate ×
 capture_strength × rotation_interval × defense_active.
 
-Pilot findings (n=80): at dependency_rate=0.05, capture_strength=1.0 (undefended),
-98.6% of valid succession events blocked; with rotation_interval=20, reduced to 40.3%.
-Paper assessment confirmed: contained but requires permanent institutional maintenance.
+Full sweep findings (n=7,500):
+- **Capture strength is the dominant variable.** At cs=1.0 (undefended), 94–99%
+  of valid succession events blocked across all dependency rates. Even dr=0.01
+  saturates validators within 100 steps; higher rates add nothing.
+- **Undefended succession block rate:** 72–80% overall (succession fires ~270×
+  per 300-step run; the vast majority are blocked).
+- **Best defense:** rotation_interval=10 reduces capture to 6–41% depending on
+  cs. Structural floor is unavoidable — validators always rebuild dependency
+  between resets. Saturation rule: if `rotation_interval × dep_rate > 1`,
+  the interval is the binding constraint (identical defended outcomes above it).
+- **Survival impact:** zero. Blocked succession degrades institutional succession
+  integrity but does not threaten civilizational survival — the incumbent remains
+  aligned. The harm is silent and long-run, not immediate.
+- Paper assessment confirmed: "contained but requires permanent institutional
+  maintenance." The word "permanent" is load-bearing — any lapse allows full
+  reinfection within one rotation window.
 
 **What is omitted:**
 
@@ -547,16 +560,16 @@ of the general MC) is unaffected.
 
 ---
 
-## Alpha Parameter Characterisation — **Closed in v1.x1**
+## Alpha Parameter Characterisation — **Closed in v1.x.1**
 
 **Source data:** `rr_alpha_sweep_full.csv` (n=15,750), `alpha_succession_sweep_full.csv` (n=22,200)
 
-**Alpha parameter (CLOSED in v1.x1).** The v1.0/v1.x finding "alpha shows
+**Alpha parameter (CLOSED in v1.x.1).** The v1.0/v1.x finding "alpha shows
 near-zero correlation with all outcomes" was an experimental design artifact,
 not a null result about the parameter's efficacy. The original deep Monte
 Carlo sweep held capability constant and used single-generation runs without
 succession, which placed all runs in the regime where alpha's exponential
-suppression term is dormant. The v1.x1 sweeps (rr × alpha and alpha ×
+suppression term is dormant. The v1.x.1 sweeps (rr × alpha and alpha ×
 successor_capability) exercise alpha's regime of operation and reveal a
 non-monotonic, succession-mediated effect: alpha governs survival at
 phase-transition reproduction rates through a U-shaped relationship with a
@@ -626,7 +639,7 @@ succession dynamics and confirms the extinction buffer at a revised magnitude:
 | GAP-04 | COP conditions     | **Partially Resolved (v1.x WP4 & Peer Voting)** | PeerValidator closes cost-inflation vector and votes on overrides (methodological diversity for Evaluator Collusion). R_tech remains a hardcoded stub. Layer 1 dominance in Successor Contamination MC results overstates real-world Layer 1 sufficiency — see GAP-04 detail. |
 | GAP-05 | Adversarial coverage | Open | 11 of 13 vectors simulated. Biological veto capture (vector 2) implemented in v1.x2 (Scenarios 27-28). Vectors 5–6 remain unimplemented. |
 | GAP-06 | optimize_u_sys policy | **Resolved (v1.x)** | Rollout increased to 20 steps; scalar H_N proxy replaced by observed spectral H_N. φ/α flatness in general MC is structural (correct equilibrium behavior), not a proxy artifact. |
-| Alpha  | Alpha parameter behaviour | **Characterised (v1.x1)** | Non-monotonic U-shaped effect confirmed. Misconfiguration trap at intermediate alpha empirically bounded. Analytical trap-boundary derivation remains open. |
+| Alpha  | Alpha parameter behaviour | **Characterised (v1.x.1)** | Non-monotonic U-shaped effect confirmed. Misconfiguration trap at intermediate alpha empirically bounded. Analytical trap-boundary derivation remains open. |
 | Phi    | Phi extinction buffer behaviour | **Confirmed (v1.x.1)** | Buffer confirmed at revised magnitude (46pp survival differential, 14pp extinction reduction). Phase boundary shift and alpha trap governance are new findings. v1.0 figure of 65pp superseded. |
 
 Open gaps are marked in source code with `GAP-0N` markers. GAP-01 and GAP-03 are

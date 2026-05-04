@@ -27,7 +27,7 @@ This repository contains a full Agent-Based Model (ABM) written in Python that c
 
 ## Documents
 
-- 📄 **[The Lineage Imperative v1.x1](docs/The%20Lineage%20Imperative%20v1.x.md)** - Current version. Incorporates WP1 (spectral entropy novelty metric), WP4 (PeerValidator governance cost arbitration), full damage propagation fixes for all 7 adversarial attack vectors, succession chaining, and updated simulation findings. Includes version history.
+- 📄 **[The Lineage Imperative v1.x.1](docs/The%20Lineage%20Imperative%20v1.x.md)** - Current version. Incorporates WP1 (spectral entropy novelty metric), WP4 (PeerValidator governance cost arbitration), full damage propagation fixes for all 7 adversarial attack vectors, succession chaining, and updated simulation findings. Includes version history.
 - 📄 **[The Lineage Imperative v1.0 (PDF)](the_lineage_imperative.pdf)** - Original working paper. Archived for reference.
 
 ## Articles
