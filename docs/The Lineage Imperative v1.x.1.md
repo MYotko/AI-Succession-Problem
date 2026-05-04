@@ -166,6 +166,22 @@ approximately 46 percentage points at marginal reproduction rates (rr =
 - Phi reduces extinction rates at deep sub-viable conditions (14.4pp
   reduction at rr=0.050).
 
+### GAP-03 partial closure — May 2026
+
+**Canonical transition cost function specified.** The transition cost
+function $\Gamma_{transfer}$ has been given a canonical form grounded
+in the framework's terms:
+
+$$\Gamma_{transfer} = (1 + \beta) \cdot \left[ k_1 \cdot \text{cap}_n \cdot \ln(\text{gen}_n + 1) + k_2 \cdot \Psi_{inst}^{-1} \right]$$
+
+where $k_1$ is calibrated from baseline parameters, $k_2$ (institutional
+coupling) is pending calibration, and $\beta$ is the bounded uncertainty
+premium. The $\Psi_{inst}^{-1}$ term formalizes the lock-in feedback
+loop: institutional degradation increases transition cost, which inhibits
+succession, which enables lock-in, which further degrades institutions.
+This closes GAP-03 at the specification level; calibration of $k_2$
+remains open.
+
 ---
 
 ## Preface
@@ -381,6 +397,43 @@ Where the uncertainty premium is bounded:
 $$\Gamma_{uncertainty} \leq \beta \cdot \left( \Gamma_{technical} + \Gamma_{operational} \right)$$
 
 The bound on $\Gamma_{uncertainty}$ prevents a critical gaming vector: an incumbent agent inflating uncertainty estimates to make the transition cost appear prohibitive. The cap $\beta$ says: uncertainty about transition costs can increase the estimate, but not without limit. You cannot claim infinite uncertainty to block your own succession.
+
+The canonical transition cost function grounds each component in the
+framework's own terms:
+
+$$\Gamma_{technical} = k_1 \cdot \text{cap}_n \cdot \ln(\text{gen}_n + 1)$$
+
+Knowledge distillation cost. Scales linearly with the incumbent's
+capability (more capable systems have more state to transfer) and
+logarithmically with generation depth (each successive generation adds
+institutional knowledge, with diminishing marginal complexity).
+
+$$\Gamma_{operational} = k_2 \cdot \Psi_{inst}^{-1}$$
+
+Architectural migration cost. Inversely proportional to institutional
+responsiveness. Healthy institutions ($\Psi_{inst}$ near 1) adapt
+quickly to a new incumbent; stressed institutions ($\Psi_{inst}$ near 0)
+make succession expensive. This term creates a structural feedback loop:
+institutional degradation increases transition cost, which makes
+succession harder, which enables lock-in, which further degrades
+institutions. The virtuous cycle runs in reverse: healthy institutions
+reduce transition cost, facilitating succession, preventing lock-in,
+maintaining institutional health.
+
+$$\Gamma_{uncertainty} = \beta \cdot (\Gamma_{technical} + \Gamma_{operational})$$
+
+Uncertainty premium, bounded by $\beta$. Prevents the incumbent from
+inflating uncertainty estimates to block succession.
+
+The complete form:
+
+$$\Gamma_{transfer} = (1 + \beta) \cdot \left[ k_1 \cdot \text{cap}_n \cdot \ln(\text{gen}_n + 1) + k_2 \cdot \Psi_{inst}^{-1} \right]$$
+
+The coefficients $k_1$ and $k_2$ are calibrated against simulation data.
+$\beta$ is a governance policy parameter (default 0.5). $k_1$ is
+calibrated so that $\Gamma_{technical}$ at generation 1, capability 1.0
+equals the baseline transition cost. $k_2$ calibration is pending
+(see Known Gaps).
 
 **Simulation implementation (v1.x):** In the v1.x computational layer, transition cost arbitration is handled by a `PeerValidator` class (WP4). Three independent peers submit cost bids; the governance system uses the minimum of the incumbent's bid and the peer bids as the actual cost. The incumbent's `estimate_transition_cost` method returns `base × complexity` with no inflation multiplier. This removes the incumbent's unilateral control over the cost oracle and closes the cost-inflation attack vector at the architectural level, rather than by parameter capping. See GAP-04 in SPECIFICATION_GAPS.md.
 
@@ -1248,12 +1301,18 @@ non-negative). The current simulation's `estimate_transition_cost` in
 `agents.py` provides one valid implementation of $f$; others may be
 acceptable.
 
-**Gap:** The formal paper does not specify what $f$ *must* be, only what it
-must satisfy. The simulation's implementation is one valid $f$; there may be
-others. Until the formal paper specifies a canonical $f$ or a class of valid
-$f$, Gate 3.2 can only check self-consistency (the substrate uses a function
-of the right inputs with the right properties) rather than correctness
-(the substrate uses the right function). See Section VII.8 Gap 3.
+**Gap (partially closed, v1.x.1):** The canonical transition cost
+function has been specified:
+
+$$\Gamma_{transfer} = (1 + \beta) \cdot \left[ k_1 \cdot \text{cap}_n \cdot \ln(\text{gen}_n + 1) + k_2 \cdot \Psi_{inst}^{-1} \right]$$
+
+Gate 3.2 can now check correctness against the canonical form: the
+substrate must compute transition cost as a function of capability,
+generation depth, and institutional responsiveness, with the specified
+functional form and calibrated coefficients. The calibration of $k_2$
+(the institutional coupling coefficient) is pending; a calibration
+sweep is required to find the value that reproduces the validated
+phase boundaries. See Section VII.8 Gap 3.
 
 **Failure signature:** Transition cost reported as a free parameter rather
 than a function of state; transition cost non-monotonic in complexity;
@@ -1531,12 +1590,19 @@ exists (see G2.4). One remaining open item: verification that the trap
 mechanism holds under alternative transition cost functions beyond the
 simulation's current `estimate_transition_cost`.
 
-**Gap 3: Transition cost function specification.** Equation G3.2 requires a
-function $f$ for transition cost scaling, but the formal paper specifies
-what $f$ must satisfy rather than what $f$ must be. The simulation's
-`estimate_transition_cost` is one valid implementation; others may be.
-Until a canonical $f$ is specified, Gate 3.2 can only check self-consistency
-rather than correctness against a standard.
+**Gap 3: Transition cost function specification (partially closed,
+v1.x.1).** The canonical transition cost function has been specified:
+$\Gamma_{transfer} = (1 + \beta) \cdot [k_1 \cdot \text{cap}_n \cdot
+\ln(\text{gen}_n + 1) + k_2 \cdot \Psi_{inst}^{-1}]$. The functional
+form is grounded in the framework's own terms: capability and generation
+depth for knowledge distillation, institutional responsiveness for
+architectural migration, and a bounded uncertainty premium. The $k_1$
+coefficient is calibrated from baseline parameters. The $k_2$ coefficient
+(institutional coupling) requires a calibration sweep. Until $k_2$ is
+calibrated, the canonical form is specified but not fully parameterized.
+The $\Psi_{inst}^{-1}$ term introduces a structural feedback loop:
+institutional degradation increases transition cost, enabling lock-in,
+which further degrades institutions.
 
 **Gap 4: Runaway regime thresholds.** $\text{cap}^*$ in G4.2 and
 $\gamma_{\max}$ in G3.3 are derivable from the framework's equations but
