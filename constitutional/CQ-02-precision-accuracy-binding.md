@@ -190,6 +190,18 @@ provide a two-dimensional qualitative binding: a substrate must have both
 boundaries for its phi level. Either failure alone is detectable through
 generation depth measurement.
 
+### Transition cost as third worked example of qualitative binding (v1.x.1)
+
+The canonical transition cost function provides a third qualitative
+binding condition. The $\Psi_{inst}^{-1}$ term creates a testable
+prediction: transition cost should increase as institutional health
+degrades. A substrate can verify this by measuring transition cost
+under varying institutional conditions. If transition cost does not
+increase as $\Psi_{inst}$ decreases, the institutional coupling is
+not implemented correctly. This is a qualitative check (does the
+relationship have the right direction?) that requires no numerical
+tolerance bands.
+
 ### Next work
 
 - Work out the phi/alpha sensitivity ratio symbolically

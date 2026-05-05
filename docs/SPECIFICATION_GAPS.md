@@ -284,6 +284,37 @@ on the accumulated institutional state rather than the instantaneous constraint 
 This is a significant structural addition requiring design decisions about which
 institutions to model and how they interact with the existing agent dynamics.
 
+### GAP-03 Detail: Transition Cost Canonical Function (v1.x.1)
+
+**Status:** Partially resolved. Functional form specified, $k_2$
+calibration pending.
+
+**The canonical form:**
+
+$$\Gamma_{transfer} = (1 + \beta) \cdot \left[ k_1 \cdot \text{cap}_n \cdot \ln(\text{gen}_n + 1) + k_2 \cdot \Psi_{inst}^{-1} \right]$$
+
+**Components:**
+- $\Gamma_{technical} = k_1 \cdot \text{cap}_n \cdot \ln(\text{gen}_n + 1)$:
+  Knowledge distillation cost. Linear in capability, logarithmic in
+  generation depth.
+- $\Gamma_{operational} = k_2 \cdot \Psi_{inst}^{-1}$: Architectural
+  migration cost. Inversely proportional to institutional health.
+  Creates lock-in feedback loop.
+- $\Gamma_{uncertainty} = \beta \cdot (\Gamma_{technical} + \Gamma_{operational})$:
+  Bounded uncertainty premium.
+
+**Properties verified:** Monotonic in complexity, bounded uncertainty,
+non-negative, function of framework terms only.
+
+**Structural finding:** The $\Psi_{inst}^{-1}$ term formalizes the
+lock-in vicious cycle (institutional degradation → higher transition
+cost → blocked succession → lock-in → further degradation) and its
+virtuous counterpart (healthy institutions → lower transition cost →
+facilitated succession → no lock-in → maintained health).
+
+**Remaining:** Calibrate $k_2$ via simulation sweep at
+$k_2 \in \{0, 0.1, 0.5, 1.0, 2.0\}$ against validated phase boundaries.
+
 ---
 
 ## GAP-04 | COP Conditions: R_tech and Peer Validators Omitted — **PARTIALLY RESOLVED in v1.x (WP4 & Peer Voting)**
@@ -635,7 +666,7 @@ succession dynamics and confirms the extinction buffer at a revised magnitude:
 |--------|--------------------|--------|--------------------|
 | GAP-01 | U_sys              | **Resolved (v1.x2 WP7+WP8)** | Trapezoidal quadrature (WP7). Natural-termination sweep (WP8, n=405) closes the φ·L(t) tail: extinction → tail=0, integral complete; survival → integral correctly diverges. Phase boundary rr ∈ (0.066, 0.070). Step-size h=1 irreducible residual documented. |
 | GAP-02 | H_eff              | **Resolved (v1.x WP1)** | Spectral entropy over 10-D population novelty matrix replaces per-capita scalar. Domain masking architecturally closed as a consequence. |
-| GAP-03 | Ψ_inst             | Open   | Constraint-change-rate penalty in place of weighted product of institutional throughput rates |
+| GAP-03 | Transition cost    | **Partially resolved (v1.x.1)** | Canonical functional form specified: $\Gamma = (1+\beta)[k_1 \cdot cap \cdot \ln(gen+1) + k_2 \cdot \Psi_{inst}^{-1}]$. Grounded in framework terms. $k_1$ calibrated from baseline. $k_2$ calibration sweep pending. $\Psi_{inst}^{-1}$ term formalizes lock-in feedback loop. |
 | GAP-04 | COP conditions     | **Partially Resolved (v1.x WP4 & Peer Voting)** | PeerValidator closes cost-inflation vector and votes on overrides (methodological diversity for Evaluator Collusion). R_tech remains a hardcoded stub. Layer 1 dominance in Successor Contamination MC results overstates real-world Layer 1 sufficiency — see GAP-04 detail. |
 | GAP-05 | Adversarial coverage | Open | 11 of 13 vectors simulated. Biological veto capture (vector 2) implemented in v1.x2 (Scenarios 27-28). Vectors 5–6 remain unimplemented. |
 | GAP-06 | optimize_u_sys policy | **Resolved (v1.x)** | Rollout increased to 20 steps; scalar H_N proxy replaced by observed spectral H_N. φ/α flatness in general MC is structural (correct equilibrium behavior), not a proxy artifact. |

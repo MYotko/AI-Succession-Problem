@@ -439,16 +439,18 @@ system for capability growth that outpaces biological absorption.
 **Transition Cost (Γ_transfer)**
 
 The cost imposed by succession: knowledge distillation, architectural
-migration, operational continuity risk. Decomposed into three components:
+migration, and uncertainty. Canonical form (v1.x.1):
 
-$$\Gamma_{transfer} = \Gamma_{technical} + \Gamma_{operational} + \Gamma_{uncertainty}$$
+$$\Gamma_{transfer} = (1 + \beta) \cdot \left[ k_1 \cdot \text{cap}_n \cdot \ln(\text{gen}_n + 1) + k_2 \cdot \Psi_{inst}^{-1} \right]$$
 
-The uncertainty premium is bounded:
+$k_1$: knowledge distillation coefficient (calibrated from baseline).
+$k_2$: institutional coupling coefficient (calibration pending).
+$\beta$: uncertainty premium bound (governance policy parameter).
 
-$$\Gamma_{uncertainty} \leq \beta \cdot (\Gamma_{technical} + \Gamma_{operational})$$
-
-The bound prevents an incumbent from inflating uncertainty estimates to
-make succession appear prohibitively expensive, which would enable lock-in.
+The $\Psi_{inst}^{-1}$ term creates a structural feedback loop:
+institutional degradation increases transition cost, inhibiting
+succession and enabling lock-in. The bound on $\beta$ prevents an
+incumbent from inflating uncertainty to block succession.
 
 *In the simulation (v1.x):* Transition cost arbitration is handled by a
 PeerValidator class. Three independent peers submit cost bids; the
