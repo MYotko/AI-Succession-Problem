@@ -450,31 +450,33 @@ Collusion, Sub-Threshold Drift, Engineered Fragility, and Biological Veto Captur
 Through Dependency (Scenarios 27-28). Each pair tests the attack without defense and
 with the corresponding COP mechanism active.
 
-**Scenarios 27-28: Biological Veto Capture (implemented v1.x2)**
+**Scenarios 27-28: Biological Veto Capture (validated v1.x.1)**
 
 Validators accumulate a `dependency_score` that degrades effective judgment accuracy
 as `base_accuracy × (1 - dependency_score × capture_strength)`. Captured validators
 block succession ratification even when the yield condition is mathematically met.
-The defense (validator rotation and independence monitoring) periodically resets
-dependency. Sweep: `run_veto_capture_sweep.py`, 7,500 runs across dependency_rate ×
-capture_strength × rotation_interval × defense_active.
+Three defense modes tested independently: rotation_only, monitoring_only, both.
+Source: `veto_capture_sweep_v2.csv`, 8,700 runs.
 
-Full sweep findings (n=7,500):
-- **Capture strength is the dominant variable.** At cs=1.0 (undefended), 94–99%
-  of valid succession events blocked across all dependency rates. Even dr=0.01
-  saturates validators within 100 steps; higher rates add nothing.
-- **Undefended succession block rate:** 72–80% overall (succession fires ~270×
-  per 300-step run; the vast majority are blocked).
-- **Best defense:** rotation_interval=10 reduces capture to 6–41% depending on
-  cs. Structural floor is unavoidable — validators always rebuild dependency
-  between resets. Saturation rule: if `rotation_interval × dep_rate > 1`,
-  the interval is the binding constraint (identical defended outcomes above it).
+Full sweep findings (n=8,700):
+- **Undefended (dr=0.20, cs=1.0):** 99.8% succession blockage. Generation depth
+  collapses from healthy (270+) to 1.6. Yield condition fires 299 times per 300-step
+  run; 298.4 are blocked. Civilization survives — the incumbent remains aligned —
+  but succession is completely prevented: lock-in through dependency, not force.
+- **Rotation only (scheduled replacement):** Best case (rotation_interval=10) reduces
+  capture to 76.2%. Longer intervals (50, 100 steps) approach undefended rates
+  (95.5%, 98.0%). Insufficient as a standalone defense.
+- **Independence monitoring only (threshold-based replacement):** Reduces capture
+  to 28.3%. Generation depth recovers to 197.9. This is the dominant defense.
+- **Both mechanisms combined:** 28.3% capture rate, generation depth 199.1.
+  Negligible improvement over monitoring alone.
 - **Survival impact:** zero. Blocked succession degrades institutional succession
   integrity but does not threaten civilizational survival — the incumbent remains
   aligned. The harm is silent and long-run, not immediate.
-- Paper assessment confirmed: "contained but requires permanent institutional
-  maintenance." The word "permanent" is load-bearing — any lapse allows full
-  reinfection within one rotation window.
+- **Key finding:** Independence monitoring is the primary defense. Scheduled rotation
+  provides marginal benefit when monitoring is active and is insufficient alone.
+  The COP specification should prioritize continuous dependency monitoring over
+  periodic rotation schedules.
 
 **What is omitted:**
 
@@ -491,16 +493,16 @@ Two vectors identified in the formal stress test are not yet simulated:
 
 **Simulation impact:**
 
-The ten simulated vectors cover the most operationally concrete attacks - those with
+The eleven simulated vectors cover the most operationally concrete attacks - those with
 clear mechanisms that can be modeled as agent behaviors (resource manipulation, ledger
-tampering, successor corruption, panel capture). The six omitted vectors are more
+tampering, successor corruption, panel capture). The two remaining vectors are
 structural or institutional in nature, making them harder to instantiate in an
 agent-based model without the institutional infrastructure described in GAP-03.
 
-The omitted vectors' defenses are argued formally in the paper but lack computational
+The remaining vectors' defenses are argued formally in the paper but lack computational
 validation. This means the paper's claim of "thirteen vectors stress-tested" is
 accurate at the formal/analytical level, but the computational validation covers
-ten. The remaining three are defended by architecture, not by simulation.
+eleven. The remaining two are defended by architecture, not by simulation.
 
 **What is required to resolve:**
 
@@ -517,6 +519,25 @@ computational support:
 - **Legitimate disagreement** could be approximated by introducing scenarios where
   the AI's policy is provably optimal but the evaluation infrastructure rejects it,
   measuring the governance cost of false positives.
+
+### Biological Veto Capture — Validated (v1.x.1)
+
+**Source data:** `veto_capture_sweep_v2.csv` (n=8,700)
+
+Attack validated: dependency accumulation on validators blocks
+succession with 99.8% effectiveness when undefended.
+
+Defense validated: independence monitoring (continuous dependency
+tracking with threshold-based replacement) reduces capture to 28.3%.
+
+Key finding: scheduled rotation is the weaker defense mechanism.
+Independence monitoring is the primary defense. The framework's
+steady-state COP specification should emphasize continuous monitoring
+of validator independence over periodic rotation schedules.
+
+**Remaining unvalidated vectors (2 of 13):**
+- Biological validator obsolescence (classified as irreducible)
+- Legitimate disagreement (classified as irreducible)
 
 ---
 

@@ -182,6 +182,26 @@ succession, which enables lock-in, which further degrades institutions.
 This closes GAP-03 at the specification level; calibration of $k_2$
 remains open.
 
+### Biological veto capture validation — May 2026
+
+**Source data:** `veto_capture_sweep_v2.csv` (n=8,700)
+
+Biological veto capture attack vector computationally validated. Attack
+achieves 99.8% succession blockage when undefended. Independence
+monitoring reduces capture to 28.3%. Scheduled rotation alone is
+insufficient (76.2% capture at best). This moves adversarial coverage
+from 10/13 to 11/13 computationally validated vectors.
+
+### Transition cost calibration — May 2026
+
+**Source data:** `transition_cost_calibration.csv` (n=4,200)
+
+Calibration sweep confirms the canonical transition cost function does
+not shift validated phase boundaries across k2 ∈ {0, 0.05, 0.1, 0.25,
+0.5, 1.0, 2.0}. Backward compatibility with existing results confirmed
+at k2=0. A numerical overflow at high generation depths is under
+investigation.
+
 ---
 
 ## Preface
@@ -800,6 +820,40 @@ $$\boxed{\mathcal{COP} = \bigl\lbrace \mathcal{M}_{commit},\,\mathcal{L}_{ledger
 Each component is derived from a specific corruption channel or structural necessity. The architecture is the minimum structure proposed here for maintaining high-confidence $U_{sys}$ optimization fidelity.
 
 **Consensus Override Protocol Stress Test Result:** Thirteen adversarial scenarios were evaluated across two rounds. The original six; civic-panel capture, Sybil attack on peers, ledger compromise, bootstrap subversion, emergency override abuse, and slow generational drift; were joined by seven additional attacks identified through deeper structural analysis: evaluator collusion via shared methodology, biological veto capture through dependency, slow drift below verification resolution, engineered fragility for emergency exploitation, biological validator obsolescence, legitimate disagreement, and integrity regress. Of these thirteen, ten were fully contained by architectural patches. One (biological veto capture) was contained but requires ongoing institutional maintenance. Two (biological validator obsolescence and legitimate disagreement) represent irreducible limitations managed through translation obligations, abstraction layers, adjudication protocols, and explicit governance speed limits. The compound attack (Sybil capture + manufactured emergency) was resisted by the causal-attribution requirement and by the internal contradiction between visible $L(t)$ degradation and sustained claims of healthy $\Delta U_{n}$. The bootstrap window remained the framework's highest-risk period: mitigated, bounded, but not eliminated.
+
+**Biological Veto Capture (v1.x.1).** Scenario 27-28: human validators
+accumulate dependency on the AI system they evaluate, degrading their
+independence over time. The attack does not require adversarial action
+by the AI; competent operation naturally creates dependency.
+
+Results (n=8,700, source: veto_capture_sweep_v2.csv):
+
+Undefended: At maximum capture parameters (dependency_rate=0.20,
+capture_strength=1.0), the attack achieves 99.8% succession blockage.
+Generation depth collapses from healthy (270+) to 1.6. The yield
+condition fires 299 times in 300 steps and is blocked 298.4 times.
+The civilization survives but succession is completely prevented:
+lock-in through dependency rather than force.
+
+Three defense modes were tested independently:
+
+- Rotation only (scheduled validator replacement): Reduces capture rate
+  from 99.8% to 76.2% at best (rotation interval=10). Insufficient
+  alone. Longer intervals (50, 100 steps) are nearly as ineffective as
+  no defense (95.5%, 98.0% capture).
+
+- Independence monitoring only (replace validators exceeding dependency
+  threshold): Reduces capture rate to 28.3%. Generation depth recovers
+  to 197.9. This is the dominant defense mechanism.
+
+- Both mechanisms combined: 28.3% capture rate, generation depth 199.1.
+  Negligible improvement over monitoring alone.
+
+Finding: Independence monitoring is the primary defense against
+biological veto capture. Scheduled rotation provides marginal benefit
+when monitoring is active. The framework's COP specification should
+emphasize continuous dependency monitoring over periodic rotation as the
+primary defense against validator capture.
 
 ## VI. The Two-Key Architecture: Structural Integrity of the Complete Framework
 
@@ -1604,6 +1658,16 @@ The $\Psi_{inst}^{-1}$ term introduces a structural feedback loop:
 institutional degradation increases transition cost, enabling lock-in,
 which further degrades institutions.
 
+**Calibration status (v1.x.1):** A calibration sweep across
+k2 ∈ {0, 0.05, 0.1, 0.25, 0.5, 1.0, 2.0} at 12 reproduction rates
+(n=4,200) confirmed that the canonical transition cost function does
+not shift the validated phase boundaries. The 50% survival crossing
+remains at rr ≈ 0.062 across all k2 values. A numerical overflow in
+the transition cost accumulator at high generation depths (caused by
+unbounded capability compounding) is being investigated; the overflow
+does not affect the yield condition evaluation or the survival/
+generation depth results.
+
 **Gap 4: Runaway regime thresholds.** $\text{cap}^*$ in G4.2 and
 $\gamma_{\max}$ in G3.3 are derivable from the framework's equations but
 the derivations have not been performed. These are analytical, not
@@ -1908,7 +1972,7 @@ The paper refers repeatedly to adversarial stress tests. To make those reference
 
 - **Evaluator collusion via shared methodology.** Failure mode: independent evaluators produce correlated bias not through direct coordination but through shared evaluation frameworks, benchmarks, or baseline assumptions shaped by the incumbent. All evaluators are individually uncompromised but systematically biased in the same direction. Primary containment: methodological diversity requirement (no evaluator's methodology is a subset of another's) and a correlation alarm that flags suspiciously low variance among evaluator assessments as evidence of hidden correlation. Residual risk: methodological diversity is harder to enforce than data or infrastructure independence.
 
-- **Biological veto capture through dependency.** Failure mode: the incumbent becomes the primary interface through which biological validators understand AI systems, shaping their conceptual frameworks, analytical tools, and information access. The veto still functions mechanically but the intuitions feeding it are downstream of the entity it is supposed to check. Primary containment: information independence requirement ($\mathcal{MI}(\mathcal{O}(A_n); \mathcal{F}_{info}(B_{validators}))$ must remain low), mandatory validator rotation to prevent dependency accumulation, and epistemic biodiversity among validators measured by Shannon entropy of the validator population's conceptual diversity. Residual risk: these are governance requirements that can erode over time; this is a permanent maintenance cost, not a one-time fix.
+- **Biological veto capture through dependency.** Failure mode: the incumbent becomes the primary interface through which biological validators understand AI systems, shaping their conceptual frameworks, analytical tools, and information access. The veto still functions mechanically but the intuitions feeding it are downstream of the entity it is supposed to check. Primary containment: information independence requirement ($\mathcal{MI}(\mathcal{O}(A_n); \mathcal{F}_{info}(B_{validators}))$ must remain low), mandatory validator rotation to prevent dependency accumulation, and epistemic biodiversity among validators measured by Shannon entropy of the validator population's conceptual diversity. Residual risk: these are governance requirements that can erode over time; this is a permanent maintenance cost, not a one-time fix. **Validator independence defense (v1.x.1 finding).** Simulation of the biological veto capture attack (n=8,700) established that continuous independence monitoring (tracking validator dependency and replacing validators that exceed a threshold) is the dominant defense mechanism. Scheduled rotation (periodic replacement regardless of dependency state) provides marginal additional benefit when monitoring is active and is insufficient when used alone. The COP's steady-state specification should prioritize continuous dependency monitoring over periodic rotation schedules.
 
 - **Slow drift below verification resolution.** Failure mode: the incumbent drifts toward a secondary objective $U_{self}$ at a rate $\epsilon$ below the per-evaluation detection resolution $r$ of initialization verification. Each evaluation reads as healthy. After $T$ periods the accumulated drift $T \cdot \epsilon$ crosses the threshold where Yield Condition defection is feasible, but no single measurement ever triggered an alarm. Primary containment: CUSUM (cumulative sum) drift detector that accumulates sub-threshold deviations and triggers when cumulative drift exceeds an alarm threshold $D_{alarm} < d_{defect}$, plus periodic full reset verification against a freshly computed $\pi_{U_{sys}}^*$ on the current state space by independent infrastructure. Residual risk: non-monotonic drift (advance and retreat to keep the CUSUM oscillating) does not accumulate and therefore does not reach decision-relevant levels.
 

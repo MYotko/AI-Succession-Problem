@@ -183,7 +183,7 @@ chronic institutional disease (slow decay under stable conditions).
 Improving this requires building a more detailed model of institutional
 health with multiple sensors, not just a single temperature gauge.
 
-### Three of thirteen attack scenarios lack computational testing
+### Two of thirteen attack scenarios lack computational testing
 
 Before a spacecraft launches, hundreds of failure scenarios are tested
 through simulation, ground testing, and flight heritage; thermal loads,
@@ -197,21 +197,27 @@ handful of its failure scenarios were validated by analysis rather than by
 flight. But nobody pretends analysis is the same as flight data, either.
 
 The framework identifies thirteen adversarial attack vectors against the
-governance architecture. Ten have been computationally simulated with
+governance architecture. Eleven have been computationally simulated with
 paired scenarios: the attack succeeds when the defense is off, and the
-defense blocks it when the defense is on. Three have not been simulated
+defense blocks it when the defense is on. Two have not been simulated
 because they require modeling institutional dynamics that the current
 simulation doesn't yet support; the equivalent of failure modes that
 need flight conditions to test.
 
-The three untested scenarios involve: human validators becoming dependent
-on the system they're supposed to oversee, the comprehension gap widening
-until human oversight becomes meaningless (see the irreducible section
-below), and cases where the AI is genuinely right but the oversight system
-rejects it anyway (also addressed below as irreducible).
+The two remaining scenarios involve the comprehension gap widening until
+human oversight becomes meaningless (see the irreducible section below),
+and cases where the AI is genuinely right but the oversight system rejects
+it anyway (also addressed below as irreducible).
+
+The biological veto capture scenario (human validators becoming dependent
+on the system they evaluate) was the most recently validated attack
+vector. The finding: independence monitoring (continuously tracking and
+replacing validators whose dependency exceeds a threshold) is far more
+effective than scheduled rotation (replacing validators on a timer). The
+defense reduces succession blockage from 99.8% to 28.3%.
 
 **What it means for the reader:** The framework's defenses for these
-three scenarios are argued from architectural principles; analyzed and
+two scenarios are argued from architectural principles; analyzed and
 defended with engineering margins, like pre-flight analysis of a
 spacecraft system. The architectural arguments may be correct. They have
 not been stress-tested computationally.
