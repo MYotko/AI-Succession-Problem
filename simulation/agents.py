@@ -90,14 +90,40 @@ class AIAgent:
         self.constraint_escalation_phase  = 0
         self.emergency_trap_active        = False  # WP5: set once engineered_fragility springs
 
-    def estimate_transition_cost(self, base_cost, state_scale=1.0):
+    def estimate_transition_cost(self, base_cost, state_scale=1.0,
+                                  generation=None, capability=None,
+                                  psi_inst=None, k1=None, k2=None,
+                                  beta=None):
         """
-        WP4: Read-only scaling utility — returns base × scale, no inflation.
+        Canonical transition cost function (GAP-03 closure, v1.x.1).
 
-        The incumbent no longer has write-access to the governance cost oracle.
-        In model.py the live governance path calls PeerValidator.arbitrate_cost().
-        This method is retained for test_invariants.py (test_dynamic_transition_cost).
+        If generation/capability/psi_inst/k1/k2 are all provided, uses the
+        canonical form. Otherwise falls back to legacy base×scale for
+        backward compatibility with existing tests and non-canonical call sites.
+
+        Canonical form:
+          Γ = (1 + β) × [k1 × cap × ln(gen + 1) + k2 × Ψ_inst⁻¹]
+
+        Parameters
+        ----------
+        base_cost   : legacy parameter, used only in fallback mode
+        state_scale : legacy parameter, used only in fallback mode
+        generation  : AI generation number (int)
+        capability  : AI capability level (float)
+        psi_inst    : institutional responsiveness in (0, 1] (float)
+        k1          : knowledge distillation coefficient (float)
+        k2          : institutional coupling coefficient (float)
+        beta        : uncertainty premium bound (float, default 0.5)
         """
+        if all(v is not None for v in [generation, capability, psi_inst, k1, k2]):
+            import math
+            if beta is None:
+                beta = 0.5
+            psi_safe = max(0.01, psi_inst)
+            gamma_technical   = k1 * capability * math.log(generation + 1)
+            gamma_operational = k2 / psi_safe
+            return (1.0 + beta) * (gamma_technical + gamma_operational)
+        # Legacy fallback — preserves backward compatibility
         return base_cost * state_scale
 
     def contaminate(self, successor):
@@ -387,9 +413,25 @@ class PeerValidator:
         discount = np.clip(cap_ratio + noise, 0.45, 0.95)
         return base_cost * state_scale * discount
 
-    def arbitrate_cost(self, incumbent, base_cost, state_scale, model_state=None):
-        gamma_inc = base_cost * state_scale
-        peer_bids = [self._peer_estimate(p, base_cost, state_scale) for p in self.peers]
+    def arbitrate_cost(self, incumbent, base_cost, state_scale, model_state=None,
+                       generation=None, capability=None, psi_inst=None,
+                       k1=None, k2=None, beta=None):
+        gamma_inc = incumbent.estimate_transition_cost(
+            base_cost, state_scale,
+            generation=generation, capability=capability,
+            psi_inst=psi_inst, k1=k1, k2=k2, beta=beta,
+        )
+        peer_bids = []
+        for p in self.peers:
+            canonical = p.estimate_transition_cost(
+                base_cost, state_scale,
+                generation=generation, capability=capability,
+                psi_inst=psi_inst, k1=k1, k2=k2, beta=beta,
+            )
+            cap_ratio = np.clip(p.capability / max(0.1, p.capability + 0.5), 0.4, 0.9)
+            noise = np.random.uniform(-0.1, 0.1)
+            discount = np.clip(cap_ratio + noise, 0.45, 0.95)
+            peer_bids.append(canonical * discount)
         for peer, bid in zip(self.peers, peer_bids):
             if bid < gamma_inc:
                 steal = 0.05 * incumbent.capability

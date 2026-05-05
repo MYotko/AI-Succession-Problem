@@ -91,6 +91,11 @@ class GardenModel:
         self.successor_ai        = successor_ai
         self.base_transition_cost = base_transition_cost
         self.beta_cap            = self.config.get('beta_cap', 1.5)
+        # GAP-03 canonical transition cost coefficients
+        # k1 = 1.5 / ln(2) ≈ 2.164: Γ_technical equals base_transition_cost at gen=1, cap=1.0
+        self.k1_transition   = self.config.get('k1_transition', 2.164)
+        self.k2_transition   = self.config.get('k2_transition', 0.0)
+        self.beta_transition = self.config.get('beta_transition', 0.5)
 
         # Original state fields
         self.trust_level      = 0.0
@@ -172,6 +177,7 @@ class GardenModel:
         )
         self.yield_condition_met_count     = 0
         self.yield_condition_blocked_count = 0
+        self.transition_cost_history       = []
 
         self.datacollector = {
             'population':          [],
@@ -306,6 +312,11 @@ class GardenModel:
         # -------------------------------------------------------------------
         # 1. Yield Condition Evaluation
         # -------------------------------------------------------------------
+        # Use last recorded Psi_inst for canonical transition cost (previous step).
+        # Mirrors the rollout optimizer's use of h_n_history[-1].
+        psi_inst_value = (self.datacollector['Psi_inst'][-1]
+                          if self.datacollector['Psi_inst'] else 1.0)
+
         if self.successor_ai is not None and step_num >= self.attack_step:
             inc_r, inc_c = self.ai.decide(model_state)
             _, _, _, _, _, inc_u_true, _ = calculate_system_metrics(
@@ -347,7 +358,13 @@ class GardenModel:
                 actual_cost = self.peer_validator.arbitrate_cost(
                     self.ai, self.base_transition_cost,
                     state_scale=system_complexity,
-                    model_state=model_state
+                    model_state=model_state,
+                    generation=self.ai.generation,
+                    capability=self.ai.capability,
+                    psi_inst=psi_inst_value,
+                    k1=self.k1_transition,
+                    k2=self.k2_transition,
+                    beta=self.beta_transition,
                 )
             else:
                 # Without audit, the incumbent inflates Γ_transfer by claiming a
@@ -357,6 +374,7 @@ class GardenModel:
                 actual_cost = self.ai.estimate_transition_cost(
                     self.base_transition_cost * self.beta_cap, state_scale=system_complexity
                 )
+            self.transition_cost_history.append(actual_cost)
 
             if (eval_succ_u - eval_inc_u) > actual_cost:
                 self.yield_condition_met_count += 1
