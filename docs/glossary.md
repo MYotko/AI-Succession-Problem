@@ -436,6 +436,49 @@ system for capability growth that outpaces biological absorption.
 
 ---
 
+**frontier_velocity**
+
+The rate at which the synthetic frontier advances relative to the biological
+substrate's comprehension bandwidth. Determines whether the runaway penalty
+in Θ_tech activates.
+
+$$\text{frontier\_velocity} = \text{capability} \cdot \max(\text{frontier\_floor},\ r_{synth} \cdot h_{e\_mult})$$
+
+The $\max$ ensures a minimum velocity floor regardless of resource allocation:
+even when no computational resources are allocated to synthetic output
+($r_{synth} = 0$), a high-capability system still creates an inherent
+comprehension gap proportional to its capability.
+
+*v1.x.2 note:* The original formula was $\text{capability} \cdot r_{synth} \cdot h_{e\_mult}$,
+which allowed the optimizer to zero out frontier_velocity by setting $r \to 1.0$,
+eliminating the runaway penalty entirely and causing succession to fire every step.
+The floor closes this gaming vector.
+
+*See also:* frontier_floor, runaway_term, Theta_tech.
+
+---
+
+**frontier_floor**
+
+A governance parameter (default 0.1) specifying the minimum fraction of AI
+capability that constitutes comprehension gap, regardless of resource
+allocation. Even with $r_{synth} = 0$, an AI at capability $C$ produces
+frontier velocity of at least $C \cdot \text{frontier\_floor}$.
+
+The floor represents the information-theoretic fact that a high-capability
+system's internal state complexity constitutes an irreducible comprehension
+burden on the biological substrate, independent of how computational
+resources are split in a given timestep.
+
+*Calibration:* The value 0.1 is the default pending calibration via
+`run_frontier_floor_calibration.py`. The calibration target is the value
+that preserves the validated phase boundary at rr ≈ 0.062–0.066 while
+producing a realistic succession cadence (final AI generation << run steps).
+
+*Implementation:* `metrics.py`, `cfg.get('frontier_floor', 0.1)`.
+
+---
+
 **Transition Cost (Γ_transfer)**
 
 The cost imposed by succession: knowledge distillation, architectural

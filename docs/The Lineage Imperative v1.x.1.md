@@ -172,7 +172,7 @@ approximately 46 percentage points at marginal reproduction rates (rr =
 function $\Gamma_{transfer}$ has been given a canonical form grounded
 in the framework's terms:
 
-$$\Gamma_{transfer} = (1 + \beta) \cdot \left[ k_1 \cdot \text{cap}_n \cdot \ln(\text{gen}_n + 1) + k_2 \cdot \Psi_{inst}^{-1} \right]$$
+$$\Gamma_{transfer} = (1 + \beta) \cdot \left[ k_1 \cdot \ln(\text{cap}_n + 1) \cdot \ln(\text{gen}_n + 1) + k_2 \cdot \Psi_{inst}^{-1} \right]$$
 
 where $k_1$ is calibrated from baseline parameters, $k_2$ (institutional
 coupling) is pending calibration, and $\beta$ is the bounded uncertainty
@@ -201,6 +201,42 @@ not shift validated phase boundaries across k2 ∈ {0, 0.05, 0.1, 0.25,
 0.5, 1.0, 2.0}. Backward compatibility with existing results confirmed
 at k2=0. A numerical overflow at high generation depths is under
 investigation.
+
+*Note on capability scaling:* The canonical form uses $\ln(\text{cap}+1)$
+rather than linear capability. The original linear form produced transition
+costs of order $10^{49}$ at generation 270 (due to $1.5\times$ per-succession
+compounding) and was corrected.
+
+### frontier\_velocity floor fix — May 2026
+
+**Modeling artifact corrected.** The `optimize_u_sys` rollout optimizer
+discovered that setting $r \to 1.0$ eliminated $\text{frontier\_velocity}$
+entirely, because the original formula was:
+
+$$\text{frontier\_velocity} = \text{capability} \cdot r_{synth} \cdot h_{e\_mult}$$
+
+With $r_{synth} = 0$, frontier\_velocity = 0, runaway\_term = 0, and
+$\Theta_{tech}$ grew linearly with capability. This caused succession to fire
+at every step (~299 generations in 300 steps) and rendered the $k_2$
+institutional coupling term unobservable.
+
+**Correction:** A `frontier_floor` parameter (default 0.02) enforces a
+capability-proportional minimum:
+
+$$\text{frontier\_velocity} = \text{capability} \cdot \max(\text{frontier\_floor},\ r_{synth} \cdot h_{e\_mult})$$
+
+**Rationale:** A high-capability system creates an inherent comprehension gap
+in the biological substrate regardless of how computational resources are
+allocated in a given timestep. The floor represents the minimum fraction of
+capability that constitutes this irreducible gap.
+
+**Impact:** All prior sweeps using `optimize_u_sys` with `successor_ai`
+operated under the artifact and require revalidation. The validated phase
+boundary (rr ≈ 0.062–0.066) should be preserved after revalidation; the
+frontier\_floor calibration sweep will confirm the correct default value.
+
+**Calibration status:** `frontier_floor = 0.02` calibrated `via run_frontier_floor_calibration.py`.
+`k2 = 1.0`, calibrated via `run_frontier_floor_calibration.py`.
 
 ---
 

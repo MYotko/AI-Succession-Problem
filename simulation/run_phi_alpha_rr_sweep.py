@@ -116,6 +116,10 @@ def _run_single_phi_alpha_rr(params):
         'mortality_base':    0.002,
         'carrying_capacity': 10000,
         'random_seed':       deterministic_seed(f"phi_alpha_rr_{run_id}"),
+        'frontier_floor':    0.02,
+        'k1_transition':     2.164,
+        'k2_transition':     1.0,
+        'beta_transition':   0.5,
     }
     successor = AIAgent(
         policy='optimize_u_sys',
@@ -128,6 +132,7 @@ def _run_single_phi_alpha_rr(params):
         ai_policy='optimize_u_sys',
         config=custom_config,
         successor_ai=successor,
+        cop_cost_audit=True,
     )
     for _ in range(300):
         if not model.step():

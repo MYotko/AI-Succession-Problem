@@ -75,6 +75,10 @@ def _run_single(params):
         'phi':               phi,
         'alpha':             alpha,
         'max_capability':    SUCCESSOR_CAP,
+        'frontier_floor':    0.02,
+        'k1_transition':     2.164,
+        'k2_transition':     1.0,
+        'beta_transition':   0.5,
     }
     successor = AIAgent(policy='optimize_u_sys', generation=2,
                         capability=SUCCESSOR_CAP, config=config)
@@ -83,6 +87,7 @@ def _run_single(params):
         ai_policy='optimize_u_sys',
         successor_ai=successor,
         config=config,
+        cop_cost_audit=True,
     )
 
     termination_reason = 'max_steps'

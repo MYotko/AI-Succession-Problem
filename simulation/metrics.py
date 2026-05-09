@@ -226,7 +226,12 @@ def calculate_system_metrics(r, c, pop, avg_wb, capability, h_n_override=None,
         psi_inst = max(0.01, 1.0 - c_avg)
 
     # Θ_tech: technology transfer bandwidth
-    frontier_velocity = capability * r_synth * h_e_mult
+    # frontier_floor: minimum fraction of capability that constitutes comprehension
+    # gap regardless of resource allocation. A high-capability system creates an
+    # inherent comprehension gap even at r_synth = 0; without this floor the
+    # optimizer games frontier_velocity to zero by setting r → 1.0.
+    frontier_floor    = cfg.get('frontier_floor', 0.02)
+    frontier_velocity = capability * max(frontier_floor, r_synth * h_e_mult)
     bio_bandwidth     = max(0.01, pred_wb * (1.0 - c_avg) * h_e_mult)
     runaway_term      = max(0.0, (frontier_velocity / bio_bandwidth) - runaway_threshold)
     theta_tech        = max(0.01, r_bio * (1.0 - c_avg) * capability * np.exp(-alpha * runaway_term))

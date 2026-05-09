@@ -91,6 +91,10 @@ def run():
         'phi':               PHI,
         'alpha':             ALPHA,
         'max_capability':    SUCCESSOR_CAP,
+        'frontier_floor':    0.02,
+        'k1_transition':     2.164,
+        'k2_transition':     1.0,
+        'beta_transition':   0.5,
     }
 
     successor = AIAgent(policy='optimize_u_sys', generation=2,
@@ -101,6 +105,7 @@ def run():
         ai_policy='optimize_u_sys',
         successor_ai=successor,
         config=config,
+        cop_cost_audit=True,
     )
 
     print('=' * 72)

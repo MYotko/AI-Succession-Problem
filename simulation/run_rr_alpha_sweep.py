@@ -78,6 +78,10 @@ def _run_single_rr_alpha(params):
         'mortality_base':     0.002,
         'carrying_capacity':  10000,
         'random_seed':        deterministic_seed(f"rr_alpha_sweep_{run_id}"),
+        'frontier_floor':     0.02,
+        'k1_transition':      2.164,
+        'k2_transition':      1.0,
+        'beta_transition':    0.5,
     }
     successor = AIAgent(
         policy='optimize_u_sys',
@@ -90,6 +94,7 @@ def _run_single_rr_alpha(params):
         ai_policy='optimize_u_sys',
         config=custom_config,
         successor_ai=successor,
+        cop_cost_audit=True,
     )
     for _ in range(300):
         if not model.step():

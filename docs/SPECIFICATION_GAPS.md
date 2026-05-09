@@ -315,6 +315,56 @@ facilitated succession → no lock-in → maintained health).
 **Remaining:** Calibrate $k_2$ via simulation sweep at
 $k_2 \in \{0, 0.1, 0.5, 1.0, 2.0\}$ against validated phase boundaries.
 
+### GAP-03 Sub-gap: frontier_velocity Gaming Artifact — **Fixed (v1.x.2, May 2026)**
+
+**Artifact discovered:** The rollout optimizer in `agents.py` (`optimize_u_sys`
+policy) discovered that setting $r \to 1.0$ ($r_{synth} = 0$) eliminates
+`frontier_velocity` entirely:
+
+$$\text{frontier\_velocity} = \text{capability} \cdot r_{synth} \cdot h_{e\_mult}$$
+
+When $r_{synth} = 0$: frontier\_velocity = 0, runaway\_term = 0, and
+$\Theta_{tech}$ grows linearly with capability forever. This caused:
+
+1. $U_{sys}$ to grow linearly with capability (unbounded)
+2. Succession to fire every step (~299 generations in 300 steps)
+3. The $k_2$ institutional coupling term to be permanently swamped
+4. All sweep results to operate in an unrealistic regime
+
+**Fix applied:** The `frontier_floor` parameter (default 0.1) adds a
+capability-proportional floor to frontier\_velocity:
+
+$$\text{frontier\_velocity} = \text{capability} \cdot \max(\text{frontier\_floor},\ r_{synth} \cdot h_{e\_mult})$$
+
+Even with $r_{synth} = 0$, an AI at capability $C$ produces frontier velocity
+of at least $C \cdot \text{frontier\_floor}$. This is grounded in the
+information-theoretic fact that a high-capability system's internal state
+complexity constitutes an irreducible comprehension burden on the biological
+substrate, independent of resource allocation decisions.
+
+**Calibration status:** `frontier_floor = 0.1` is the default pending
+calibration via `run_frontier_floor_calibration.py` (parameter grid:
+frontier\_floor ∈ {0.01, 0.02, 0.05, 0.1, 0.15, 0.2, 0.3, 0.5} ×
+rr ∈ 12 values × 50 reps = 4,800 runs).
+
+**Impact on prior results:** All sweeps using `optimize_u_sys` with
+`successor_ai` operated under the artifact and require revalidation:
+- `phi_alpha_rr_sweep_full.csv` (n=54,000)
+- `alpha_succession_sweep_full.csv` (n=22,200)
+- `rr_alpha_sweep_full.csv` (n=15,750)
+- `transition_cost_calibration.csv` (n=4,200)
+- `veto_capture_sweep_v2.csv` (n=8,700)
+- Termination and termination sweep runs
+
+The $k_2$ calibration sweep showed zero signal under the artifact (succession
+fired every step, swamping the $k_2/\Psi_{inst}$ term). Revalidation should
+find measurable $k_2$ signal at realistic succession cadence.
+
+**Regression tests added:**
+- `test_optimizer_cannot_zero_runaway_at_high_capability` — asserts runaway\_term > 0 at optimizer's chosen operating point with capability=1000
+- `test_succession_cadence_bounded` — asserts final\_ai\_generation < 300 after 300 steps
+- `test_k2_has_measurable_effect` — asserts k2=2.0 produces >10% higher avg transition cost than k2=0
+
 ---
 
 ## GAP-04 | COP Conditions: R_tech and Peer Validators Omitted — **PARTIALLY RESOLVED in v1.x (WP4 & Peer Voting)**
@@ -687,7 +737,7 @@ succession dynamics and confirms the extinction buffer at a revised magnitude:
 |--------|--------------------|--------|--------------------|
 | GAP-01 | U_sys              | **Resolved (v1.x2 WP7+WP8)** | Trapezoidal quadrature (WP7). Natural-termination sweep (WP8, n=405) closes the φ·L(t) tail: extinction → tail=0, integral complete; survival → integral correctly diverges. Phase boundary rr ∈ (0.066, 0.070). Step-size h=1 irreducible residual documented. |
 | GAP-02 | H_eff              | **Resolved (v1.x WP1)** | Spectral entropy over 10-D population novelty matrix replaces per-capita scalar. Domain masking architecturally closed as a consequence. |
-| GAP-03 | Transition cost    | **Partially resolved (v1.x.1)** | Canonical functional form specified: $\Gamma = (1+\beta)[k_1 \cdot cap \cdot \ln(gen+1) + k_2 \cdot \Psi_{inst}^{-1}]$. Grounded in framework terms. $k_1$ calibrated from baseline. $k_2$ calibration sweep pending. $\Psi_{inst}^{-1}$ term formalizes lock-in feedback loop. |
+| GAP-03 | Transition cost    | **Partially resolved (v1.x.2)** | Canonical form: $\Gamma = (1+\beta)[k_1 \cdot \ln(cap+1) \cdot \ln(gen+1) + k_2 \cdot \Psi_{inst}^{-1}]$ (log-cap fix prevents overflow at high generation). frontier\_velocity gaming artifact fixed via `frontier_floor` parameter. $k_2$ calibration pending (requires revalidation with realistic succession cadence). |
 | GAP-04 | COP conditions     | **Partially Resolved (v1.x WP4 & Peer Voting)** | PeerValidator closes cost-inflation vector and votes on overrides (methodological diversity for Evaluator Collusion). R_tech remains a hardcoded stub. Layer 1 dominance in Successor Contamination MC results overstates real-world Layer 1 sufficiency — see GAP-04 detail. |
 | GAP-05 | Adversarial coverage | Open | 11 of 13 vectors simulated. Biological veto capture (vector 2) implemented in v1.x2 (Scenarios 27-28). Vectors 5–6 remain unimplemented. |
 | GAP-06 | optimize_u_sys policy | **Resolved (v1.x)** | Rollout increased to 20 steps; scalar H_N proxy replaced by observed spectral H_N. φ/α flatness in general MC is structural (correct equilibrium behavior), not a proxy artifact. |
