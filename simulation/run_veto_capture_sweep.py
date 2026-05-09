@@ -22,6 +22,11 @@ Attack success metric: yield_condition_blocked_count / yield_condition_met_count
 Outputs: data/veto_capture_sweep_v2.csv
 """
 
+import os
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+
 import hashlib
 import itertools
 import multiprocessing

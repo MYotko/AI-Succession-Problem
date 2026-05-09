@@ -39,6 +39,11 @@ Usage
     python run_rr_alpha_sweep.py --pilot    # 180-run pilot
 """
 
+import os
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+
 from deps import check_and_install
 check_and_install('numpy')
 check_and_install('matplotlib')

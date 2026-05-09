@@ -8,6 +8,11 @@ Output: data/termination_mc.csv -- one row per run.
 """
 
 import os
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+
+import os
 import sys
 import csv
 import time

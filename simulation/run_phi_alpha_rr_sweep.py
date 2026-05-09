@@ -50,6 +50,11 @@ Usage
     python run_phi_alpha_rr_sweep.py --pilot    # 360-run pilot
 """
 
+import os
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+
 from deps import check_and_install
 check_and_install('numpy')
 

@@ -40,6 +40,11 @@ Usage
     python run_frontier_floor_calibration.py
 """
 
+import os
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+
 from deps import check_and_install
 check_and_install('numpy')
 
