@@ -6,7 +6,7 @@ Purpose
 Calibrates k2 (institutional coupling coefficient) in the canonical
 transition cost function:
 
-  Γ_transfer = (1 + β) × [k1 × cap × ln(gen + 1) + k2 × Ψ_inst⁻¹]
+  Γ_transfer = (1 + β) × [k1 × ln(cap + 1) × ln(gen + 1) + k2 × Ψ_inst⁻¹]
 
 k1 is fixed at 2.164 (= 1.5 / ln(2), calibrated from baseline parameters).
 k2 is swept to identify the value that produces measurable institutional

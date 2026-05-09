@@ -102,7 +102,14 @@ class AIAgent:
         backward compatibility with existing tests and non-canonical call sites.
 
         Canonical form:
-          Γ = (1 + β) × [k1 × cap × ln(gen + 1) + k2 × Ψ_inst⁻¹]
+          Γ = (1 + β) × [k1 × ln(cap + 1) × ln(gen + 1) + k2 × Ψ_inst⁻¹]
+
+        Note: capability enters as ln(cap + 1) rather than cap.  The linear
+        form (k1 × cap × ln(gen + 1)) overflows when capability compounds at
+        1.5× per succession — by generation 270 cap ≈ 10^47, producing costs
+        ≈ 10^49.  The log form is information-theoretically grounded: knowledge
+        distillation cost scales with the information content of the system
+        state, which scales logarithmically with raw capability.
 
         Parameters
         ----------
@@ -120,7 +127,7 @@ class AIAgent:
             if beta is None:
                 beta = 0.5
             psi_safe = max(0.01, psi_inst)
-            gamma_technical   = k1 * capability * math.log(generation + 1)
+            gamma_technical   = k1 * math.log(capability + 1) * math.log(generation + 1)
             gamma_operational = k2 / psi_safe
             return (1.0 + beta) * (gamma_technical + gamma_operational)
         # Legacy fallback — preserves backward compatibility
