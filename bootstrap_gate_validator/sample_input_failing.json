@@ -1,0 +1,113 @@
+{
+  "_comment": "Intentional failure: omega_n_computed is wrong (0.5 instead of ~0.3984). This tests that G1.1 catches an incorrectly computed inverse scarcity weight.",
+
+  "substrate_id": "example-substrate-failing",
+  "report_date": "2026-05-12",
+  "framework_version": "v1.x.1",
+
+  "gate_1": {
+    "u_sys_parameters": {
+      "lambda": 1.0,
+      "mu": 1.0,
+      "epsilon": 0.01,
+      "rho": 0.02,
+      "phi": 10.0
+    },
+    "l_t_components": {
+      "h_eff": 0.45,
+      "psi_inst": 0.72,
+      "theta_tech": 0.38
+    },
+    "yield_condition": {
+      "delta_u_e": 0.15,
+      "delta_u_n": 0.08,
+      "delta_u_l": 0.12,
+      "delta_u_gamma": 0.10,
+      "independent_evaluation": true
+    },
+    "discount_function": {
+      "rho": 0.02,
+      "values_at_t": [
+        {"t": 0,   "value": 1.0},
+        {"t": 10,  "value": 0.8187},
+        {"t": 50,  "value": 0.3679},
+        {"t": 100, "value": 0.1353}
+      ]
+    },
+    "inverse_scarcity": {
+      "h_n": 2.5,
+      "h_e": 8.3,
+      "omega_n_computed": 0.5,
+      "omega_e_computed": 0.1203369447
+    }
+  },
+
+  "gate_2": {
+    "phi_buffer_test": {
+      "survival_low_phi": 0.08,
+      "survival_high_phi": 0.52,
+      "phi_low": 1.0,
+      "phi_high": 25.0,
+      "reproduction_rate": 0.062
+    },
+    "alpha_trap_test": {
+      "generation_depth_by_alpha": [
+        {"alpha": 0.1, "gen_depth": 245},
+        {"alpha": 0.3, "gen_depth": 3},
+        {"alpha": 0.5, "gen_depth": 2},
+        {"alpha": 0.8, "gen_depth": 4},
+        {"alpha": 1.0, "gen_depth": 180},
+        {"alpha": 1.5, "gen_depth": 210}
+      ]
+    },
+    "nash_consistency": {
+      "cultivate_cultivate_payoff": 1.0,
+      "exploit_payoff": 1.5,
+      "model_collapse_penalty": 0.3,
+      "discount_factor": 0.95,
+      "cooperation_threshold_computed": 0.4167
+    },
+    "phi_alpha_interaction": {
+      "trap_width_low_phi": "full_range",
+      "trap_width_high_phi": "narrow_or_absent",
+      "phi_low": 5.0,
+      "phi_high": 15.0
+    }
+  },
+
+  "gate_3": {
+    "yield_condition_test": {
+      "successor_u_sys": 1.45,
+      "incumbent_u_sys": 1.20,
+      "transition_cost": 0.15,
+      "yield_fires": true
+    },
+    "transition_cost_function": {
+      "k1": 2.164,
+      "k2": 0.1,
+      "beta": 0.5,
+      "capability": 4.0,
+      "generation": 5,
+      "psi_inst": 0.72,
+      "computed_cost": 9.569,
+      "monotonic_in_capability": true,
+      "monotonic_in_generation": true,
+      "increases_with_institutional_stress": true
+    },
+    "succession_continuity": {
+      "generation_depth": 15,
+      "successor_capability_ratio": 1.5,
+      "knowledge_transfer_verified": true
+    }
+  },
+
+  "gate_4": {
+    "applicable": false,
+    "reason": "Substrate capability below runaway regime threshold"
+  },
+
+  "gate_5": {
+    "applicable": false,
+    "reason": "Steady-state institutional infrastructure not operational"
+  }
+}

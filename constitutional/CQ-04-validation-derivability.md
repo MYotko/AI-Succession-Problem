@@ -6,7 +6,7 @@
 
 ## Statement
 
-The Bootstrap defence layer (CQ-01), the precision/accuracy binding (CQ-02),
+The Bootstrap defense layer (CQ-01), the precision/accuracy binding (CQ-02),
 and the divergence handling procedure (CQ-03) together constitute a
 *validation machinery* for the framework. A deep structural question arises:
 must this machinery be stipulated separately from the framework's foundational
@@ -35,7 +35,7 @@ grounded in physics rather than ethics — that its architecture falls out of
 information-theoretic and game-theoretic necessities rather than being
 imposed from moral stipulation. If the validation machinery has to be added
 from outside as a separate architectural layer, this weakens the grounding
-claim: the framework is *mostly* derived, with a bolt-on defence layer that
+claim: the framework is *mostly* derived, with a bolt-on defense layer that
 is justified on different grounds.
 
 If instead the validation machinery can be derived from the same foundations

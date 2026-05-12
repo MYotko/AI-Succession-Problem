@@ -37,7 +37,7 @@ formal paper.
 
 ---
 
-**Bootstrap Defence Layer**
+**Bootstrap Defense Layer**
 
 A formal validation machinery specified in Section VII of the framework
 paper (v1.x.1), comprising five capability gates with equation sets derived

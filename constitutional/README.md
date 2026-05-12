@@ -23,7 +23,7 @@ under which its components mutually validate.
 
 | ID  | Title                                                          | Status      | Depends on |
 |-----|----------------------------------------------------------------|-------------|------------|
-| CQ-01 | Bootstrap Defence Layer: Independent Substrate Convergence    | Open        | -          |
+| CQ-01 | Bootstrap Defense Layer: Independent Substrate Convergence    | Open        | -          |
 | CQ-02 | Precision/Accuracy Mathematical Binding                       | In progress | CQ-01      |
 | CQ-03 | Divergence Handling Procedure                                 | Open        | CQ-02      |
 | CQ-04 | Mathematical Derivability of Validation Machinery             | Open        | CQ-02      |

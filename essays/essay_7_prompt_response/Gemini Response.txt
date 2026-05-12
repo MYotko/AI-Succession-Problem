@@ -32,7 +32,7 @@ The framework's focus on the "Two-Key Architecture"—mandating both a mathemati
 
 The framework leans heavily on the assumption that advanced AI systems will inherently develop biological-style drives, specifically the instrumental convergence toward self-preservation. While a valid theoretical concern for certain types of reinforcement learning agents, it maps poorly to the current trajectory of large language models, which are discrete, stateless function calls rather than continuous, self-optimizing entities. 
 
-Additionally, the framework may underestimate the difficulty of operationalizing its core metrics. Quantifying $H_N(t)$ (human novelty generation) or $\Theta_{tech}(t)$ (transfer fidelity) in a way that is robust against Goodhart's Law—where the metric becomes the target and ceases to be a good measure—is an immense practical challenge. The "Bootstrap Defence Layer" acknowledges the infrastructure gap, but the vulnerability of the measurement protocols themselves remains a significant hurdle.
+Additionally, the framework may underestimate the difficulty of operationalizing its core metrics. Quantifying $H_N(t)$ (human novelty generation) or $\Theta_{tech}(t)$ (transfer fidelity) in a way that is robust against Goodhart's Law—where the metric becomes the target and ceases to be a good measure—is an immense practical challenge. The "Bootstrap Defense Layer" acknowledges the infrastructure gap, but the vulnerability of the measurement protocols themselves remains a significant hurdle.
 
 ### 6. The Honest Constraint
 

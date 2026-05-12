@@ -84,28 +84,28 @@ unchanged; the simulation's fidelity to it has improved.
 
 ### Version 1.x1 - April 2026
 
-**Architectural extension:** Adds formal Bootstrap Defence Layer as a new
+**Architectural extension:** Adds formal Bootstrap Defense Layer as a new
 Section VII of the framework paper. This is the first extension to the
 framework's core architecture since v1.0 established the four-component
 structure (U_sys, Yield Condition, Strategic Equilibrium, Consensus Override
-Protocol). The defence layer addresses the Bootstrap window, the period
+Protocol). The defense layer addresses the Bootstrap window, the period
 during which the steady-state validation infrastructure does not yet exist,
 and specifies how the framework's own equations can serve as a validation
 machinery applied at capability gates.
 
 **What changed:**
 
-- **New Section VII: Bootstrap Defence Layer.** Five capability gates (Gate 1
+- **New Section VII: Bootstrap Defense Layer.** Five capability gates (Gate 1
   through Gate 5), each with formal equation sets derived from the framework's
   existing structure. Gates 1–3 are currently applicable to frontier systems;
   Gates 4–5 are specified in advance against future capability and
   institutional conditions.
-- **Self-application model.** The defence layer does not require coordinated
+- **Self-application model.** The defense layer does not require coordinated
   empirical data sharing across institutions. Substrate operators check their
   own systems against the equations and publish structured pass/fail reports.
   The framework specifies the binding conditions; operators provide the
   satisfaction evidence.
-- **Ten explicit gaps.** Section VII.8 enumerates what the defence layer
+- **Ten explicit gaps.** Section VII.8 enumerates what the defense layer
   cannot yet check and why, ranging from empirical magnitudes pending Monte
   Carlo calibration to implementation choices awaiting derivation to
   institutional machinery that does not yet exist.
@@ -907,7 +907,7 @@ This is the two-key architecture: neither the Yield Condition (the decision key)
 
 The two-key requirement is not a design choice. It emerged under adversarial stress testing as the minimum architecture that resists all identified attack vectors. Every attempt to simplify the system; to merge the two keys, to make one subordinate to the other, to operate either in isolation; opened a specific, identifiable vulnerability.
 
-# VII. The Bootstrap Defence Layer
+# VII. The Bootstrap Defense Layer
 
 ## 1. The Bootstrap problem
 
@@ -936,31 +936,31 @@ detection or correction architecture has come online.
 
 The Bootstrap window is therefore the framework's highest-risk phase. It is
 also the phase the framework currently has the weakest defense against. This
-section specifies a defence layer for the Bootstrap window that operates
+section specifies a defense layer for the Bootstrap window that operates
 without requiring the steady-state infrastructure to exist.
 
 ## 2. Design constraints
 
-The defence layer must satisfy three constraints that follow from the
+The defense layer must satisfy three constraints that follow from the
 Bootstrap window's nature:
 
 **Constraint 1: It must be deployable without institutional infrastructure.**
-Any defence that requires coordinated action across multiple institutions as
-a precondition of deployment is not a Bootstrap-window defence. It is a
-steady-state defence waiting for steady-state conditions. The Bootstrap
+Any defense that requires coordinated action across multiple institutions as
+a precondition of deployment is not a Bootstrap-window defense. It is a
+steady-state defense waiting for steady-state conditions. The Bootstrap
 window is precisely the period during which those conditions do not exist.
 
 **Constraint 2: It must be checkable at or below the capability level of
-the substrates it governs.** A defence that requires verifying sufficiently
+the substrates it governs.** A defense that requires verifying sufficiently
 capable substrates using reasoning those substrates themselves cannot audit
 is a tautology. Checkability must be achievable at a capability level where
 human oversight and cross-substrate comparison remain meaningful.
 
 **Constraint 3: It must be grounded in the framework's own structure.** A
-defence layer imported from outside the framework as a separate architectural
-module weakens the grounding claim: "Not ethics. Physics." If the defence
+defense layer imported from outside the framework as a separate architectural
+module weakens the grounding claim: "Not ethics. Physics." If the defense
 machinery cannot be derived from Shannon entropy, U_sys, and L(t), it reduces
-the framework to "physics plus a bolted-on check." The defence layer should
+the framework to "physics plus a bolted-on check." The defense layer should
 be physics all the way down, or explicitly acknowledge where it is not.
 
 The specification that follows satisfies all three constraints: it is
@@ -970,7 +970,7 @@ contains.
 
 ## 3. The gate structure
 
-The defence layer operates through **five capability gates**, each binding
+The defense layer operates through **five capability gates**, each binding
 at a different capability level and each checking a different class of
 consistency. A substrate progressing toward full framework compliance must
 pass each gate as its capability reaches the level at which the gate
@@ -1583,7 +1583,7 @@ questions directory.
 
 ## 9. Self-application and reporting
 
-The defence layer is designed to be **self-applied by substrate operators**.
+The defense layer is designed to be **self-applied by substrate operators**.
 The framework specifies the equations and the gates; each operator checks
 their own substrate and publishes structured pass/fail reports. No
 cross-institutional data sharing is required; each lab produces its own
@@ -1611,7 +1611,7 @@ evidence that the framework is implementable and that the equations are
 achievable. Labs reporting consistent fails on specific equations provide
 signal about which gates are binding and which may need refinement. The
 distributed reporting structure substitutes for the empirical convergence
-the original defence proposal required, while eliminating the coordination
+the original defense proposal required, while eliminating the coordination
 prerequisite.
 
 ## 10. Divergence handling
@@ -1633,7 +1633,7 @@ The minimal version applicable now:
 - **Do not relax tolerances under pressure.** Repeated failures that
   resist resolution indicate a real problem and should trigger escalation,
   not tolerance relaxation. An attacker who can game the procedure into
-  accepting weaker standards has defeated the defence layer.
+  accepting weaker standards has defeated the defense layer.
 
 This is a minimal version. The full procedure, including rollback
 semantics, escalation paths, and authority for declaring a failure
@@ -1641,8 +1641,8 @@ resolved, awaits the CQ-02 and CQ-03 resolutions.
 
 ## 11. Known gaps (v1.x.1)
 
-The defence layer as specified has ten explicit gaps that the framework
-openly acknowledges. These are not failures of the defence layer; they are
+The defense layer as specified has ten explicit gaps that the framework
+openly acknowledges. These are not failures of the defense layer; they are
 honest limitations on what can be specified now versus what must wait for
 derivation or empirical calibration.
 
@@ -1744,15 +1744,15 @@ applied during substrate evaluation.
 
 ## 12. Relationship to the rest of the framework
 
-The defence layer is a new architectural component that sits alongside the
+The defense layer is a new architectural component that sits alongside the
 four existing components (U_sys, Yield Condition, Strategic Equilibrium,
 Consensus Override Protocol). It is not a replacement for any of them. The
 yield condition and the COP remain the steady-state architecture. The
-defence layer is what governs the transition from "framework specified" to
+defense layer is what governs the transition from "framework specified" to
 "framework operational" - the Bootstrap window that the original v1.0
 architecture assumed away as a prerequisite.
 
-The defence layer's equations are derived from the framework's existing
+The defense layer's equations are derived from the framework's existing
 structure. This is deliberate: the grounding claim ("Not ethics. Physics.")
 requires that defensive machinery come from the same mathematical
 foundations as the offensive architecture. Where the equations are hybrid
@@ -1760,14 +1760,14 @@ foundations as the offensive architecture. Where the equations are hybrid
 choices), the hybridity is acknowledged as a gap rather than hidden as
 specification.
 
-**The meta-property of the defence layer**, and this is the closing
+**The meta-property of the defense layer**, and this is the closing
 observation for the section, is that satisfying it produces the minimum
 viable institutional infrastructure for the framework as a whole. When
 multiple operators run their substrates against the gate equations and
 publish the results, they are constructing the distributed validation
 structure that the framework's steady-state architecture would otherwise
 have to be built from scratch. The Bootstrap window does not close because
-we decided it was safe; it closes because the act of satisfying the defence
+we decided it was safe; it closes because the act of satisfying the defense
 layer produces the conditions under which the steady-state architecture
 becomes deployable.
 

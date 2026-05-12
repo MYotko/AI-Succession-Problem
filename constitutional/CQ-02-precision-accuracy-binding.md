@@ -6,7 +6,7 @@
 
 ## Statement
 
-The Bootstrap defence layer (CQ-01) uses substrate convergence as its
+The Bootstrap defense layer (CQ-01) uses substrate convergence as its
 validation mechanism. Convergence is a precision question: do the substrates
 agree tightly enough that their agreement is meaningful? But precision alone
 does not validate accuracy. High precision with low accuracy — multiple
@@ -25,7 +25,7 @@ A resolution would need to provide:
 - A checkable coupling condition whose satisfaction requires both precision
   and accuracy simultaneously
 - A diagnostic signature: what the four quadrants (high/low precision ×
-  high/low accuracy) look like and how the defence layer distinguishes them
+  high/low accuracy) look like and how the defense layer distinguishes them
 - Adversarial robustness: an adversary who spoofs one dimension must also
   spoof the other in internally consistent ways, raising the computational or
   epistemic cost of attack
@@ -48,7 +48,7 @@ approximately the right region with wide spread. Recoverable as measurement
 uncertainty if acceptable, but not strong validation.
 
 **Both failures simultaneously** (low precision, low accuracy): framework
-error or incoherent specification. This is the quadrant where the defence
+error or incoherent specification. This is the quadrant where the defense
 layer earns its keep — a single-substrate approach cannot distinguish this
 from noisy-but-correct derivation, but heterogeneous verification can.
 

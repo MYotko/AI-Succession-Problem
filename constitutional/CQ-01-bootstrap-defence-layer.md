@@ -1,4 +1,4 @@
-# CQ-01: Bootstrap Defence Layer — Validation Machinery
+# CQ-01: Bootstrap Defense Layer — Validation Machinery
 
 **Status:** In progress (v1.x.1 specification drafted; derivations pending)
 **Dependencies:** None (CQ-02, CQ-03, and CQ-04 now depend on this)
@@ -29,7 +29,7 @@ validation architecture exists?
 
 The operative specification is now a **formal equation set applied at capability
 gates**, rather than empirical substrate convergence. The full specification
-lives in `The_Lineage_Imperative_v1_x.md` Section VII ("Bootstrap Defence
+lives in `The_Lineage_Imperative_v1_x.md` Section VII ("Bootstrap Defense
 Layer"). This file retains the question history, open sub-questions, and
 unresolved items that do not belong in the formal paper.
 
@@ -107,10 +107,10 @@ defensible claim and still catches the failure modes that matter.
 
 **Institutional diversity requirement.** Initially flagged as an assumption
 the proposal couldn't satisfy. Corrected: the institutional diversity
-required for the Bootstrap defence is the same institutional coordination
+required for the Bootstrap defense is the same institutional coordination
 the entire framework requires (for peer validators, distributed ledger,
 civic panel, etc.). If the coordination problem is solvable, the Bootstrap
-defence is deployable. If it isn't, the entire framework is inert. This is
+defense is deployable. If it isn't, the entire framework is inert. This is
 not a new demand; it is one instance of the standing coordination
 prerequisite.
 
@@ -165,7 +165,7 @@ rather than assuming them.
 
 ## Open sub-questions
 
-These remain unresolved and continue to affect the defence layer's
+These remain unresolved and continue to affect the defense layer's
 completeness:
 
 - **Base capability operationalization.** "Base capability" for Gate 1 is
@@ -198,11 +198,11 @@ completeness:
 The v1.x.1 specification is in the formal paper (Section VII), not in an
 essay. The reasoning:
 
-- The defence layer is too technical for a public-facing piece
+- The defense layer is too technical for a public-facing piece
 - It is too consequential to hide in an appendix
 - The formal paper is the right register for equation specifications
 - The Bootstrap Window essay (when written) can describe the problem and
-  point at the defence layer as one of the responses; the paper carries
+  point at the defense layer as one of the responses; the paper carries
   the formal weight
 
 The current Bootstrap Window essay in the planned sequence should

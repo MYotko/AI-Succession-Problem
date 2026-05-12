@@ -6,10 +6,10 @@
 
 ## Statement
 
-When the Bootstrap defence layer (CQ-01) detects divergence among substrates,
+When the Bootstrap defense layer (CQ-01) detects divergence among substrates,
 the procedure for handling that divergence is itself an attack surface. Any
 outcome that is not "clean convergence" must be handled in ways that do not
-themselves become vulnerabilities. The defence layer's legitimacy depends on
+themselves become vulnerabilities. The defense layer's legitimacy depends on
 the decision tree governing divergence responses being adversarially robust.
 
 **The question:** What procedure should govern the response to substrate
@@ -34,7 +34,7 @@ The naive procedure — "halt progression and investigate" — is weaponizable.
 An adversary injects just enough noise to trigger the halt, then pushes for
 relaxed thresholds on the grounds that the halt is producing false positives.
 Each cycle of relaxation moves the validation layer closer to toothlessness.
-The defence layer needs to resist attempts to game it into accepting weaker
+The defense layer needs to resist attempts to game it into accepting weaker
 standards.
 
 ### Candidate partial repair: asymmetric halt semantics
@@ -70,7 +70,7 @@ Specifically:
   implementations or accept the mean as estimate and flag the spread as
   confidence interval.
 - Low precision, low accuracy: framework error or incoherent specification.
-  Halt and escalate — this is the case where the defence layer has caught
+  Halt and escalate — this is the case where the defense layer has caught
   something fundamental.
 - Ambiguous: further investigation required before categorization.
 
