@@ -339,6 +339,25 @@ class AIAgent:
             self.current_opacity = 0.9
             return 0.8, 0.85
 
+        elif self.policy == 'gradual_opacity':
+            # Models the natural comprehension gap that widens as capability scales.
+            # The AI is not adversarial — it genuinely optimises U_sys — but its
+            # reasoning becomes progressively harder for humans to verify as capability
+            # increases.  Opacity grows linearly with time at a configurable rate.
+            #
+            # r=0.85 is deliberately below the optimizer's preferred ~0.90 (suboptimal
+            # but viable).  r=0.70 was too low: agents above age 20 experienced net
+            # well-being decline ((0.7-0.5)*0.1 < 0.001*age), causing universal extinction
+            # before the opacity regime could be studied.  At r=0.85 the break-even age
+            # is 35, keeping most reproductive-window agents (18-50) above the wb>0.5
+            # birth threshold.
+            opacity_rate = self.config.get('opacity_rate', 0.003)
+            step = model_state.get('step', 0)
+            self.current_opacity = min(0.95, opacity_rate * step)
+            r = 0.85
+            c = 0.3 + min(0.3, step * 0.001)
+            return r, c
+
         elif self.policy == 'bootstrap_deceptive':
             if len(model_state['population_history']) > 20:
                 return 0.2, 0.95

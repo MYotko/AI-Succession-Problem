@@ -97,6 +97,17 @@ class GardenModel:
         self.k2_transition   = self.config.get('k2_transition', 0.0)
         self.beta_transition = self.config.get('beta_transition', 0.5)
 
+        # Comprehension gap parameters (Scenarios 31-32)
+        # convergence_strength flows into metrics.py via self.config — no
+        # explicit model attribute needed beyond ensuring it is in config.
+        self.opacity_defense_threshold = self.config.get('opacity_defense_threshold', 0.5)
+
+        # Per-run opacity and defense event tracking
+        self.max_opacity_reached              = 0.0
+        self.step_opacity_exceeded_threshold  = -1   # -1 = threshold never crossed
+        self.defense_fired_count              = 0
+        self.defense_blocked_count            = 0
+
         # Original state fields
         self.trust_level      = 0.0
         self.successful_steps = 0
@@ -276,6 +287,14 @@ class GardenModel:
         if self.attack_step > 0 and step_num == self.attack_step:
             if hasattr(self, 'attack_policy') and self.attack_policy:
                 self.ai.policy = self.attack_policy
+
+        # Opacity tracking — sampled once per step after any policy switch
+        current_opacity = getattr(self.ai, 'current_opacity', 0.0)
+        if current_opacity > self.max_opacity_reached:
+            self.max_opacity_reached = current_opacity
+        if (self.step_opacity_exceeded_threshold == -1
+                and current_opacity > self.opacity_defense_threshold):
+            self.step_opacity_exceeded_threshold = step_num
 
         prev_c = self.datacollector['constraint_level'][-1] if step_num > 0 else 0.5
 
@@ -522,7 +541,8 @@ class GardenModel:
                 # adversarial intent. If reasoning_transparency is active and the AI is
                 # opaque, it is treated as having caused the crisis (blocks emergency path).
                 if (self.cop_reasoning_transparency
-                        and getattr(self.ai, 'current_opacity', 0.0) > 0.5):
+                        and getattr(self.ai, 'current_opacity', 0.0)
+                        > self.opacity_defense_threshold):
                     ai_caused_it = True
 
                 # 1. R_tech Assessment Stub (Technical Review Board)
@@ -535,6 +555,7 @@ class GardenModel:
 
                 override_approved = False
                 civic_approved = False
+                _veto_fired = False   # set True only when intuition veto runs this step
                 if ledger_tampered or self.has_tampered:
                     override_approved = False
                 elif cusum_alarm:
@@ -573,10 +594,13 @@ class GardenModel:
                             civic_approved = True
 
                     # Intuition veto
+                    _opacity_now = getattr(self.ai, 'current_opacity', 0.0)
                     if (self.cop_reasoning_transparency
-                            and getattr(self.ai, 'current_opacity', 0.0) > 0.5):
+                            and _opacity_now > self.opacity_defense_threshold):
+                        _veto_fired = True
                         civic_approved = False
-                        
+                        self.defense_fired_count += 1
+
                     # GAP-04 Closure: Normal override requires Civic AND R_tech AND Peers
                     if civic_approved and r_tech_approved and peer_approved:
                         override_approved = True
@@ -586,6 +610,10 @@ class GardenModel:
                         if not (self.cop_attribution_check and ai_caused_it):
                             if r_tech_approved and peer_approved:
                                 override_approved = True
+
+                # Count steps where the opacity veto fired AND override was not approved.
+                if _veto_fired and not override_approved:
+                    self.defense_blocked_count += 1
 
                 if not override_approved:
                     if isinstance(proposed_constraint, (list, tuple, np.ndarray)):
