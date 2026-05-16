@@ -45,7 +45,7 @@ The series is published on Substack at https://yotko.substack.com. Use the serie
   year         = {2026},
   howpublished = {Essay series, Substack,
                   \url{https://yotko.substack.com}},
-  note         = {Eight essays published March--May 2026},
+  note         = {Ten essays published March--May 2026},
 }
 ```
 
@@ -73,6 +73,8 @@ Verify publication dates against the Substack posts directly, as file-export tim
 | 6 | The Extinction Buffer | 2026-04-21 | https://yotko.substack.com/p/the-extinction-buffer |
 | 7 | The View from Inside | 2026-04-27 | https://yotko.substack.com/p/the-view-from-inside |
 | 8 | The Signal | 2026-05-03 | https://yotko.substack.com/p/60bab8c1-9f99-43ea-a731-758767688572 |
+| 9 | The Fine Print | 2026-05-10 | https://yotko.substack.com/p/the-fine-print |
+| 10 | What Comes Next | 2026-05-18 | https://yotko.substack.com/p/what-comes-next |
 
 **BibTeX template (individual essay):**
 
