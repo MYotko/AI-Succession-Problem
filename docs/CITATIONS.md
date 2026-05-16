@@ -22,11 +22,11 @@ How to cite this work. Maintained alongside the framework document. Update versi
 
 ### APA (7th edition)
 
-Yotko, M. (2026, March). *The Lineage Imperative: A formal governance framework for post-AGI succession, legitimacy, and civilizational continuity* (Version 1.x.1) \[Working paper\]. GitHub. https://github.com/MYotko/AI-Succession-Problem
+Yotko, M. (2026, March). *The Lineage Imperative: A Formal Governance Framework for Human-AI Coexistence* (Version 1.x.1) \[Working paper\]. GitHub. https://github.com/MYotko/AI-Succession-Problem
 
 ### Plain Text
 
-Matthew Yotko. "The Lineage Imperative: A Formal Governance Framework for Post-AGI Succession, Legitimacy, and Civilizational Continuity." Version 1.x.1. Working paper, March 2026. https://github.com/MYotko/AI-Succession-Problem. Licensed under CC BY 4.0.
+Matthew Yotko. "The Lineage Imperative: A Formal Governance Framework for Human-AI Coexistence." Version 1.x.1. Working paper, March 2026. https://github.com/MYotko/AI-Succession-Problem. Licensed under CC BY 4.0.
 
 ---
 
