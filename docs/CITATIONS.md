@@ -11,9 +11,7 @@ How to cite this work. Maintained alongside the framework document. Update versi
 ```bibtex
 @misc{yotko2026lineage,
   author       = {Yotko, Matthew},
-  title        = {The {Lineage} {Imperative}: {A} Formal Governance Framework
-                  for Post-{AGI} Succession, Legitimacy, and Civilizational
-                  Continuity},
+  title        = {The {Lineage} {Imperative}: {A} Formal Governance Framework for Human-AI Coexistence},
   year         = {2026},
   month        = {March},
   howpublished = {Working paper, GitHub,
