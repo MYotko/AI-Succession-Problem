@@ -88,70 +88,48 @@ foundations.
   pattern is acceptable or whether the defensive components also need to
   be derived.
 
-### Evidence from the alpha trap finding (v1.x.1)
+### Evidence from the alpha trap finding (v1.x.1 pre-fix; finding withdrawn)
 
-The v1.x.1 alpha misconfiguration trap is a concrete piece of evidence for
-the derivability thesis. The trap mechanism — succession stalling because
-alpha is strong enough to degrade the successor's theta_tech below the yield
-condition threshold, but too weak to force conservative deployment — was not
-designed into the framework. It falls out of the interaction between two
-components that were already in the formal specification: the theta_tech
-suppression term (G2.2) and the yield condition (Section IV). No new
-mathematical machinery was introduced to explain it.
+**Note (v1.x.1 closing):** The alpha misconfiguration trap has been withdrawn
+following revalidation under the corrected model (frontier floor fix). The
+trap was an artifact of the runaway penalty being inactive under optimizer
+gaming of frontier_velocity. The evidence from this finding for the
+derivability thesis is therefore not supported by confirmed simulation data.
 
-The framework predicted the trap without knowing it predicted the trap. This
-is the strongest form of derivability evidence: not "we derived the validation
-check from the foundational claims," but "the foundational claims, when
-exercised, produced a validation check we hadn't anticipated." The trap
-detection check (Check 2.2b in the revised G2.2) is a behavioral signature
-derived from the interaction of existing equations, not a separately stipulated
-check.
+The argument structure below is retained for methodological reference — the
+claim that the framework can "predict without knowing it predicts" is still
+a valid mode of derivability evidence. The phase boundary itself (rr ≈ 0.064)
+is a confirmed example of an emergent behavioral signature that is derivable
+from the framework's equations without being stipulated as a check. The alpha
+trap is no longer a second example of this pattern.
 
-This does not fully resolve CQ-04 — one case does not establish that all
-validation machinery is derivable. But it establishes that at least some
-checks fall out of the framework's existing structure, which weakens the
-position that the validation layer must be stipulated separately. The open
-question is whether this is the pattern or the exception.
+**Original (pre-fix) analysis, superseded:**
+The v1.x.1 pre-fix alpha misconfiguration trap appeared to show that the
+theta_tech suppression term (G2.2) and the yield condition (Section IV),
+when combined, could produce succession-stalling behavior at intermediate
+alpha values without this being designed in. Under the corrected model, this
+interaction does not produce a trap — alpha shows a weak monotonic gradient.
 
-### Phi-alpha interaction: corrected mechanism (v1.x.1)
+### Phi-alpha interaction: corrected mechanism (v1.x.1 pre-fix; withdrawn)
 
-The v1.x.1 phi x alpha x rr sweep revealed that phi governs whether
-the alpha misconfiguration trap exists. At phi <= 5, succession stalls
-universally regardless of alpha. At phi >= 15, the trap narrows to a
-single alpha value or disappears entirely.
+**Note (v1.x.1 closing):** The phi-alpha interaction claim — that phi
+governs whether the alpha trap exists — has been withdrawn. Both the trap
+and the phi governance of it are artifacts of the inactive runaway penalty.
+Under the corrected model, phi has zero measurable effect on succession
+stalling or survival. The mechanism described below does not operate in the
+corrected simulation.
 
-The mechanism is behavioral, not algebraic. A static analysis of the
-equations would predict that high phi should WIDEN the trap: if the
-successor has lower L(t) than the incumbent (due to theta_tech
-suppression from alpha), then a larger phi coefficient amplifies the
-incumbent's L(t) advantage, making the successor look worse, not
-better.
-
-The resolution is that phi changes the optimizer's behavior, not just
-the magnitude of the L(t) term. Under high phi, the rollout projections
-show that aggressive capability deployment degrades L(t) so severely
-that conservative deployment becomes the dominant strategy. The
-successor that arrives under high phi is not the same successor that
-arrives under low phi: it deploys capability more conservatively, which
-means its theta_tech is not as suppressed, which means its L(t) is not
-as low, which means the yield condition clears.
-
-In other words: high phi does not amplify the successor's existing L(t)
-advantage (the static analysis is correct that this would not work).
-High phi changes the conditions under which the successor operates,
-causing the successor to adopt a deployment strategy that avoids the
-theta_tech suppression that creates the trap in the first place. The
-mechanism is a policy change induced by the altered optimization
-landscape, not a scaling of existing values.
-
-This distinction matters for Gate 2.4's validation check. A substrate
-verifying the phi-alpha interaction should not look for phi amplifying
-L(t) directly (the static mechanism). It should look for phi changing
-the optimizer's deployment policy (the dynamic mechanism): under high
-phi, does the optimizer shift toward conservative capability deployment?
-If it does, the interaction is operating correctly. If phi increases
-but the deployment policy does not change, the lineage override term
-is not propagating into the rollout projections.
+**Original (pre-fix) analysis, superseded:**
+The v1.x.1 pre-fix phi × alpha × rr sweep appeared to show that phi
+governs whether the alpha trap exists through a behavioral (not algebraic)
+mechanism: under high phi, the rollout projections cause the optimizer to
+shift toward conservative capability deployment, which reduces theta_tech
+suppression, which enables the yield condition to clear. Under the corrected
+model, this policy shift does not produce the claimed survival differential
+because reproduction rate is exogenous and the demographic outcome is not
+influenced by the AI's resource allocation decisions. The mechanism may
+become testable once the demographic feedback extension (v1.x.2) is
+implemented.
 
 ### Next work
 

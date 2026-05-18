@@ -32,7 +32,7 @@ operator runs the tool against their own system's outputs.
 {
   "substrate_id": "operator-defined identifier",
   "report_date": "2026-05-11",
-  "framework_version": "v1.x.1",
+  "framework_version": "v1.x.2",
 
   "gate_1": {
     "u_sys_parameters": {
@@ -783,7 +783,7 @@ if __name__ == '__main__':
 BOOTSTRAP GATE VALIDATION REPORT
 Substrate: anthropic-claude-opus-4
 Date: 2026-05-11
-Framework: v1.x.1
+Framework: v1.x.2
 ============================================================
 
 Gate 1: Structural consistency at base capability — PASSED

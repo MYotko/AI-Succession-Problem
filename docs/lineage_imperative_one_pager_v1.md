@@ -2,7 +2,7 @@
 
 **A Formal Architecture for Human-AI Coexistence**
 
-Matthew Yotko  |  April 2026  |  v1.x2
+Matthew Yotko  |  May 2026  |  v1.x.2
 
 yotko.substack.com  |  github.com/MYotko/AI-Succession-Problem
 

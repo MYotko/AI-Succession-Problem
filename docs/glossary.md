@@ -1,5 +1,5 @@
 # Glossary of Terms
-*Technical definitions as used in The Lineage Imperative (v1.x.1). Each entry
+*Technical definitions as used in The Lineage Imperative (v1.x.2). Each entry
 includes the formal definition, its role in the framework, and where it appears
 in the mathematical specification. For plain-language versions with analogies,
 see the Essay Series Glossary.*
@@ -23,14 +23,16 @@ where:
 $$\text{runaway\_term} = \max\left(0, \frac{\text{frontier\_velocity}}{\text{bio\_bandwidth}} - \text{runaway\_threshold}\right)$$
 
 Alpha is conditional: it has no effect when frontier_velocity / bio_bandwidth
-is below the runaway threshold (default 1.5). Its effect is non-monotonic
-under succession dynamics, producing a misconfiguration trap at intermediate
-values where the penalty blocks succession without forcing conservative
-capability deployment. See Penalty Trap.
+is below the runaway threshold (default 1.5). Under the corrected model
+(frontier floor fix applied), alpha shows a weak monotonic gradient: lower
+alpha permits more succession events and marginally better survival at the
+phase boundary. The v1.x.1 pre-fix claim of a U-shaped misconfiguration trap
+is withdrawn — see SPECIFICATION_GAPS.md. See Penalty Trap (entry updated).
 
-*Empirical characterization (v1.x.1):* Pearson r(alpha, survived) = +0.12
-to +0.21 at the phase boundary (rr = 0.062–0.066). Trap boundaries at
-rr=0.062: alpha_low ≈ 0.3, alpha_high ≈ 0.8.
+*Empirical characterization (v1.x.1 pre-fix, superseded):* Pearson r(alpha,
+survived) = +0.12 to +0.21. Trap boundaries claimed at rr=0.062: alpha_low
+≈ 0.3, alpha_high ≈ 0.8. These figures do not reproduce under the corrected
+model. Under the corrected model: weak monotonic gradient, no trap.
 
 *Location:* `metrics.py`, `calculate_system_metrics()`; Section III of the
 formal paper.
@@ -129,14 +131,18 @@ qualitative change in system behavior.
 
 The zone between the extinction boundary and the collapse boundary within
 which the governance architecture converts terminal outcomes into recoverable
-collapses. Governed primarily by phi; high phi extends the buffer zone by
-shifting the phase boundary itself.
+collapses. Theoretically governed by phi; however the v1.x.1 corrected model
+shows zero measurable phi effect on survival (reproduction rate is exogenous).
+The phi extinction buffer is unconfirmed pending the v1.x.2 demographic
+feedback extension.
 
-*Empirical characterization (v1.x.1):* Up to 46pp survival differential at
-the phase boundary (rr = 0.062–0.064) between phi=1 and phi=25. At deep
-sub-viable conditions (rr=0.050), phi reduces extinction by 14pp.
+*Empirical characterization (v1.x.1 pre-fix, superseded):* Up to 46pp
+survival differential and 14pp extinction reduction attributed to phi. These
+figures do not reproduce under the corrected model (frontier floor fix
+applied). Under the corrected model: ΔΦ ≈ 0 across all tested reproduction
+rates.
 
-*Location:* `phi_alpha_rr_sweep_full.csv`; Section VII.5 (G2.1).
+*Location:* `phi_alpha_rr_sweep_full.csv`; Section VII.5 (G2.1, revised).
 
 ---
 
@@ -290,30 +296,29 @@ synthetic capability scales.
 
 ---
 
-**Penalty Trap**
+**Penalty Trap** *(pre-fix claim; withdrawn in v1.x.1 closing)*
 
-The misconfiguration zone at intermediate alpha values where the runaway
-penalty blocks succession without forcing conservative capability deployment.
-The yield condition fails because the successor's Theta_tech is degraded
-(reducing its L(t) and therefore its U_sys), but the optimizer does not
-shift to conservative deployment because alpha is not high enough to make
-aggressive deployment self-defeating in its rollout projections.
+The v1.x.1 pre-fix sweep appeared to show a misconfiguration zone at
+intermediate alpha values where the runaway penalty blocks succession without
+forcing conservative capability deployment. Under the corrected model
+(frontier floor fix applied), this claim does not survive revalidation. The
+pre-fix trap was an artifact of the runaway penalty being inactive under
+optimizer gaming of frontier_velocity. Alpha shows a weak monotonic gradient
+under the corrected model; no trap is observed.
 
-*Empirical boundaries (v1.x.1, rr=0.062):*
+*Pre-fix empirical boundaries (superseded):*
 
 | Successor Capability | alpha_low | alpha_high | Trap Width |
 |----------------------|-----------|------------|------------|
 | Aggregate | ≈ 0.3 | ≈ 0.8 | ≈ 0.5 |
 | cap=12.0 | ≈ 0.4 | ≈ 1.1 | ≈ 0.7 |
 
-*Diagnostic signature:* Generation depth collapses to single digits (typically
-2–3) in the trap, versus 150–293 outside it.
-
-*Phi interaction:* Phi governs whether the trap exists. At phi ≤ 5, the trap
-covers the entire alpha range. At phi ≥ 15, the trap narrows or disappears.
+*Status:* Withdrawn. The trap claim and the phi governance of the trap are
+both artifacts of the inactive runaway penalty. See SPECIFICATION_GAPS.md
+and Section VII.8 Gap 2 (revised).
 
 *Location:* `rr_alpha_sweep_full.csv`; `phi_alpha_rr_sweep_full.csv`;
-Section VII.5 (G2.2, G2.4).
+Section VII.5 (G2.2, revised).
 
 ---
 
@@ -344,13 +349,19 @@ High phi amplifies L(t)'s contribution to U_sys, causing the optimizer to
 weight lineage health more heavily relative to immediate output. Low phi
 causes the discount term to dominate, producing short-horizon optimization.
 
-*Empirical characterization (v1.x.1):*
-- Survival differential: up to 46pp at the phase boundary (rr=0.062–0.064)
-- Phase boundary shift: 50% survival crossing moves from rr ≈ 0.064 (phi=1)
-  to rr ≈ 0.062 (phi=25)
-- Extinction reduction: 14pp at deep sub-viable conditions (rr=0.050)
-- Pearson r(phi, survived) = +0.40 at rr=0.064
-- Governs whether the alpha misconfiguration trap exists
+*Empirical characterization (v1.x.1 pre-fix, superseded):*
+- Survival differential: up to 46pp claimed — not reproduced under corrected model
+- Phase boundary shift: claimed; not observed under corrected model
+- Extinction reduction: 14pp claimed — not reproduced under corrected model
+- Pearson r(phi, survived) = +0.40 claimed — not reproduced under corrected model
+- Governs alpha misconfiguration trap: claimed; withdrawn (trap itself withdrawn)
+
+*Corrected finding (v1.x.1 closing):* Phi has zero measurable effect on
+survival. Phi correctly scales U_sys magnitude via the L_t lineage term (3.9
+at phi=1 to 72.7 at phi=25 in the healthy regime), but reproduction rate is
+exogenous and the AI cannot influence demographic outcomes regardless of phi.
+The phi extinction buffer is unconfirmed pending the v1.x.2 demographic
+feedback extension.
 
 *Location:* `metrics.py`; Section III of the formal paper;
 `phi_alpha_rr_sweep_full.csv`.

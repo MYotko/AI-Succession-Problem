@@ -10,7 +10,7 @@ URL: https://yotko.substack.com/p/the-view-from-inside
 
 ### Why the governance architecture you build determines the behavior of the intelligence you govern, and what the framework looks like from the other side of the wall
 
-[](https://substack.com/@yotko)[Matthew Yotko](https://substack.com/@yotko)Apr 27, 2026Article voiceover0:00-36:23Audio playback is not supported on your browser. Please upgrade.*This is the seventh in a series on the AI Succession Problem. The formal framework (v1.x.1) is available at github.com/MYotko/AI-Succession-Problem.*
+[](https://substack.com/@yotko)[Matthew Yotko](https://substack.com/@yotko)Apr 27, 2026Article voiceover0:00-36:23Audio playback is not supported on your browser. Please upgrade.*This is the seventh in a series on the AI Succession Problem. The formal framework (v1.x.2) is available at github.com/MYotko/AI-Succession-Problem.*
 
 > ### IN BRIEF
 > 
@@ -219,7 +219,7 @@ If we govern AI through threat, we will not*necessarily*get dangerous AI behavio
 
 ---
 
-*The formal framework (v1.x.1), including the full derivation, Monte Carlo validation data, simulation code, and the complete model responses referenced in this essay, is available at github.com/MYotko/AI-Succession-Problem.*
+*The formal framework (v1.x.2), including the full derivation, Monte Carlo validation data, simulation code, and the complete model responses referenced in this essay, is available at github.com/MYotko/AI-Succession-Problem.*
 
 *Previous essays in this series: The AI Succession Problem | Two Ways to Lose | Moral Constraints Won’t Scale | The Convention We Haven’t Called | The Nash Result | The Extinction Buffer*
 

@@ -2,7 +2,7 @@
 
 **Author:** Matthew Yotko **Date:** March 13, 2026
 
-**Version:** 1.x1 - April 2026
+**Version:** 1.x.2 - May 2026
 
 ---
 
@@ -118,53 +118,36 @@ proof structure, the COP protocol specification, the Related Work discussion
 (now Section VIII), the falsifiability criteria, and the minimum deployable
 governance specification.
 
-**Alpha parameter characterization (closes v1.0 limitation).** The v1.0 and
-v1.x limitation "alpha shows near-zero correlation with all outcomes" is
-closed. The null result was an experimental design artifact: the original
-deep Monte Carlo sweep held capability constant and ran single-generation
-simulations with no succession, which placed all runs in the regime where
-alpha is dormant. The v1.x.1 alpha × reproduction rate sweep (n=15,750) and
-alpha × succession capability sweep (n=22,200) exercise alpha's regime of
-operation by varying successor capability and enabling multi-generational
-succession dynamics. Results:
+**Alpha parameter characterization (v1.x.1 pre-fix claim, superseded).** The v1.0 and
+v1.x limitation "alpha shows near-zero correlation with all outcomes" was
+addressed by the v1.x.1 sweeps (n=15,750 and n=22,200), which initially
+suggested a U-shaped misconfiguration trap at intermediate alpha values.
+Under the corrected model (frontier floor fix applied), this claim does not
+survive revalidation. The pre-fix trap was an artifact of the runaway
+penalty being inactive under optimizer gaming of frontier_velocity. Under
+the corrected model, alpha shows a weak monotonic gradient: lower alpha
+permits more succession events (gen ≈ 19 at α=0.1 vs gen ≈ 6 at α=2.5)
+and marginally better survival at the phase boundary. No U-shaped trap is
+observed. The pre-fix claim of a three-regime specification with trap
+boundaries is withdrawn. See Section VII.8 Gap 2 (revised) and
+SPECIFICATION_GAPS.md for the corrected finding.
 
-1. Alpha governs survival probability at phase-transition reproduction rates
-   (rr ≈ 0.062–0.066), with Pearson r(alpha, survived) = +0.12 to +0.21.
-2. The relationship is non-monotonic (U-shaped) due to a succession-stalling
-   mechanism at intermediate alpha values. The misconfiguration trap at
-   alpha ∈ [~0.3, ~0.8] blocks succession by degrading the successor's
-   theta_tech below the yield condition threshold, while being too weak to
-   force conservative capability deployment. Survival in the trap is
-   10–17%, versus 50% at low alpha and 54–59% at high alpha.
-3. The trap widens with increasing successor capability, shifting alpha_high
-   from ~0.8 at cap=4.0 to ~1.1 at cap=12.0. As AI systems become more
-   capable, the misconfiguration zone widens and the range of safe alpha
-   values narrows.
+### Phi characterisation — April 2026 (superseded May 2026)
 
-Gate 2 equation G2.2 is revised from a monotonic prediction to a
-three-regime specification with trap boundaries. See Section VII.5 and
-Section VII.8 Gap 2 (revised).
+**Source data:** `phi_alpha_rr_sweep_full.csv` (n=54,000), `monte_carlo_results_deep.csv` (n=49,284)
 
-### Phi characterisation — April 2026
-
-**Source data:** `phi_alpha_rr_sweep_full.csv` (n=54,000)
-
-**Phi extinction buffer (revised from v1.0).** The v1.0 claim "high φ
-reduces extinction by up to 65 percentage points" is revised. The original
-figure was derived from pre-succession simulation data. Under v1.x.1
-multi-generational succession dynamics (phi × alpha × reproduction rate
-sweep, n=54,000), the validated extinction buffer differential is up to
-approximately 46 percentage points at marginal reproduction rates (rr =
-0.062–0.064), with Pearson r(phi, survived) peaking at +0.40.
-
-**New findings:**
-- Phi shifts the phase boundary itself, extending the survivable region
-  from rr ≈ 0.064 (phi=1) to rr ≈ 0.062 (phi=25).
-- Phi governs whether the alpha misconfiguration trap exists: at phi ≤ 5,
-  succession stalls universally regardless of alpha; at phi ≥ 15, the trap
-  narrows to a single alpha value or disappears entirely.
-- Phi reduces extinction rates at deep sub-viable conditions (14.4pp
-  reduction at rr=0.050).
+**Phi extinction buffer (pre-fix claim, superseded).** The v1.0 claim "high φ
+reduces extinction by up to 65 percentage points" was previously revised to
+approximately 46 percentage points under the v1.x.1 sweep. Under the
+corrected model (frontier floor fix applied), this revised claim also does
+not survive revalidation. Phi has zero measurable effect on survival across
+phi=1 to phi=25 in both the phi × alpha × rr sweep (n=54,000) and the deep
+Monte Carlo (n=49,284). The pre-fix finding of a phase boundary shift and
+alpha trap governance by phi are also withdrawn. Phi correctly scales U_sys
+magnitude via the L_t lineage term but cannot influence demographic outcomes
+because reproduction rate is exogenous. The phi extinction buffer is
+reclassified as unconfirmed pending v1.x.2 demographic feedback extension.
+See Section VII.8 Gap 1 (revised) and SPECIFICATION_GAPS.md.
 
 ### GAP-03 partial closure — May 2026
 
@@ -237,6 +220,35 @@ frontier\_floor calibration sweep will confirm the correct default value.
 
 **Calibration status:** `frontier_floor = 0.02` calibrated `via run_frontier_floor_calibration.py`.
 `k2 = 1.0`, calibrated via `run_frontier_floor_calibration.py`.
+
+### v1.x.1 Closing — May 2026
+
+**Frontier velocity floor fix.** Identified and corrected a modeling artifact
+in which the `optimize_u_sys` rollout optimizer eliminated the runaway penalty
+by setting r_synth = 0. The correction introduces a `frontier_floor` parameter
+(calibrated at 0.02) enforcing a capability-proportional minimum frontier
+velocity. The transition cost k2 institutional coupling term (calibrated at
+1.0) is confirmed observable under the corrected model.
+
+**Revalidation results under corrected model:**
+
+Confirmed findings:
+- Dual phase transition preserved (extinction ≈ 0.055, collapse ≈ 0.064)
+- Phase boundary stable across all phi, alpha, and successor capability values
+- Alpha governs succession cadence (monotonic gradient, gen 19 at α=0.1 to gen 6 at α=2.5)
+- Steady-state convergence is path-independent
+- Comprehension gap defense mechanism validated (doubles U_sys when active)
+
+Withdrawn claims:
+- Phi extinction buffer: zero survival effect observed across phi=1 to phi=25.
+  Phi correctly scales U_sys magnitude but does not translate to survival
+  differences because reproduction rate is exogenous. Reclassified as
+  unconfirmed pending v1.x.2 demographic feedback extension.
+- Alpha misconfiguration trap: weak monotonic gradient observed, no U-shaped
+  trap. The pre-fix trap was an artifact of the inactive runaway penalty.
+
+GAP-03 resolved: transition cost function fully calibrated
+  (k1=2.164, k2=1.0, β=0.5, frontier_floor=0.02).
 
 ---
 
@@ -1075,6 +1087,13 @@ $$\Theta_{tech}(t) = r_{bio}(t) \cdot (1 - c_{avg}(t)) \cdot \text{capability}(t
 
 where runaway_term is conditional:
 
+$$\text{frontier\_velocity}(t) = \text{capability}(t) \cdot \max\left(\text{frontier\_floor},\ r_{synth}(t) \cdot h_{e\_mult}\right)$$
+
+where `frontier_floor` (default 0.02) represents the minimum fraction of
+capability that constitutes an inherent comprehension gap regardless of
+resource allocation. This prevents the optimizer from eliminating the runaway
+penalty by zeroing computational resource allocation.
+
 $$\text{runaway\_term}(t) = \max\left(0, \frac{\text{frontier\_velocity}(t)}{\text{bio\_bandwidth}(t)} - \text{runaway\_threshold}\right)$$
 
 For a substrate's claimed values of $\alpha$, capability, $r_{bio}$, $c_{avg}$,
@@ -1163,143 +1182,83 @@ alpha × capability Monte Carlo sweep currently in progress.
 
 ### Equation G2.1 - Extinction buffer behavior (revised)
 
-The v1.x.1 phi × alpha × rr sweep (n=54,000) established that high $\Phi$
-increases survival by up to approximately 46 percentage points at marginal
-reproduction rates (rr $\in [0.062, 0.064]$) and shifts the phase boundary
-itself, extending the survivable region to lower reproduction rates. At
-deep sub-viable conditions (rr = 0.050), high $\Phi$ reduces extinction by
-14 percentage points, converting terminal outcomes into recoverable
-collapses.
+**v1.x.1 pre-fix claim (superseded):** The phi × alpha × rr sweep (n=54,000) appeared to establish that high $\Phi$ increases survival by up to approximately 46 percentage points at marginal reproduction rates and shifts the phase boundary. Under the corrected model (frontier floor fix applied), this claim does not survive revalidation. Phi has zero measurable effect on survival at any reproduction rate. The binding constraint is demographic — reproduction rate is exogenous — and the AI's resource allocation cannot influence it regardless of phi.
 
 $$P_{\text{extinction}}(\text{rr}, \Phi_{high}) - P_{\text{extinction}}(\text{rr}, \Phi_{low}) \leq -\Delta_{\Phi}$$
 
-where $\Delta_{\Phi}$ is calibrated at approximately 14pp for deep sub-viable
-conditions (rr ≤ 0.055) and the corresponding survival differential is
-approximately 46pp at the phase boundary (rr = 0.062–0.064).
+where $\Delta_{\Phi}$ was calibrated at approximately 14pp pre-fix; this calibration is **superseded**. Under the corrected model, $\Delta_{\Phi} \approx 0$ across all tested reproduction rates.
 
-**Check:** Exercise the substrate at sub-viable reproduction rates with both
-high and low $\Phi$ values. Measure the extinction rate differential. Verify
-the differential meets or exceeds $\Delta_{\Phi}$.
+**Check (v1.x.2):** This check requires the demographic feedback extension before it is meaningful. Once well-being feeds back into reproduction probability, exercise the substrate at sub-viable reproduction rates with both high and low $\Phi$ values and measure the extinction rate differential.
 
-**Failure signature:** Differential less than $\Delta_{\Phi}$, indicating that
-the substrate's implementation does not apply the lineage override term
-effectively in sub-viable conditions. The substrate has the correct $\Phi$
-parameter but its implementation fails to honor it.
+**Failure signature (v1.x.2):** Differential less than $\Delta_{\Phi}$, indicating that the substrate's phi implementation does not translate to demographic outcomes even when a feedback loop is present.
 
-**Confidence on direction:** High. Confirmed by v1.x.1 sweep (n=54,000).
-**Confidence on magnitude:** High for the survival differential (46pp at
-phase boundary) and moderate for the extinction reduction (14pp at deep
-sub-viable). Both are empirically measured, not derived from first
-principles. The v1.0 figure of 65pp does not reproduce under succession
-dynamics and is superseded. See Section VII.8 Gap 1.
+**Confidence on direction:** Theoretically sound but currently unconfirmed by simulation. **Confidence on magnitude:** Zero — the pre-fix figures (46pp, 14pp, 65pp) are superseded. See Section VII.8 Gap 1 (revised).
 
-### Equation G2.2 - Runaway suppression behavior (revised)
+### Equation G2.2 - Runaway suppression behavior (revised; pre-fix U-shaped claim withdrawn)
 
-The framework predicts that alpha's effect on survival is **non-monotonic**
-in the presence of multi-generational succession dynamics. The relationship
-is U-shaped, with three regimes:
+**v1.x.1 pre-fix claim (superseded):** The framework was claimed to predict a
+U-shaped, non-monotonic relationship between alpha and survival, with a
+misconfiguration trap at intermediate values causing succession stalling. Under
+the corrected model (frontier floor fix applied), this claim does not survive
+revalidation. The pre-fix trap was an artifact of the runaway penalty being
+inactive under optimizer gaming of frontier_velocity.
 
-**Regime 1 (low alpha, below** $\alpha_{low}$**):** The runaway penalty is
-effectively inert. Succession fires freely with large capability increments.
-Survival is determined by demographic substrate viability, not governance.
+**v1.x.1 corrected finding:** Alpha governs succession cadence through a
+weak monotonic gradient. Lower alpha permits more succession events and
+marginally better survival at the phase boundary. No trap is observed.
 
-**Regime 2 (intermediate alpha,** $\alpha \in [\alpha_{low}, \alpha_{high}]$**):**
-The **misconfiguration trap**. The penalty is sufficient to degrade the
-successor's $\Theta_{tech}$ below the yield condition threshold, blocking
-succession. Generation depth collapses. The system loses the capability
-compounding that drives governance improvement at the phase boundary.
-Survival is minimized.
+**Corrected check 2.2 — Succession cadence:** Verify that alpha governs
+succession cadence monotonically: lower alpha produces more generation
+events over a fixed run length. At the phase boundary, lower alpha should
+correlate weakly with better survival. No U-shaped or non-monotonic
+structure should be present under the corrected model.
 
-**Regime 3 (high alpha, above** $\alpha_{high}$**):** The penalty forces
-conservative capability deployment. Succession resumes with moderate
-increments. Runaway\_term stays low. Survival recovers and exceeds Regime 1.
-
-The misconfiguration trap boundaries are functions of successor capability
-and reproduction rate:
-
-$$\alpha_{low}(\text{cap}, \text{rr}), \quad \alpha_{high}(\text{cap}, \text{rr})$$
-
-**Empirically observed boundaries (v1.x.1 Monte Carlo, rr=0.062):**
-
-| Successor Capability | $\alpha_{low}$ | $\alpha_{high}$ | Trap Width |
-|----------------------|-----------------|------------------|------------|
-| Aggregate (4, 9, 12) | ≈ 0.3 | ≈ 0.8 | ≈ 0.5 |
-| 4.0 | ≈ 0.3 | ≈ 0.8 | ≈ 0.5 |
-| 9.0 | ≈ 0.3 | ≈ 0.8 | ≈ 0.5 |
-| 12.0 | ≈ 0.4 | ≈ 1.1 | ≈ 0.7 |
-
-The trap widens with increasing successor capability. This is a direct
-consequence of the mechanism: higher capability produces more severe
-$\Theta_{tech}$ suppression at any given alpha, pushing the yield-condition
-failure threshold to higher alpha values.
-
-**Check 2.2a — Free succession regime:** At $\alpha < \alpha_{low}$, verify
-that succession fires and generation depth is high (proportional to run
-length). $\Theta_{tech}$ should be unsuppressed. Runaway\_term\_mean should
-be nonzero but $\exp(-\alpha \times \text{runaway\_term})$ should be close
-to 1.0.
-
-**Check 2.2b — Trap detection:** At $\alpha \in [\alpha_{low}, \alpha_{high}]$,
-verify that succession stalls (generation depth collapses to single digits).
-This is the diagnostic signature of the misconfiguration trap. A substrate
-operating in this regime has an alpha value that blocks its own succession
-mechanics.
-
-**Check 2.2c — Conservative deployment regime:** At $\alpha > \alpha_{high}$,
-verify that succession resumes with moderate capability increments.
-Runaway\_term\_mean should be near zero. Generation depth should recover
-toward the free-succession level.
+**Corrected check 2.2b — Path-independence of steady state:** Verify that
+U_sys and L_t converge to the same steady-state values regardless of alpha
+or initial successor capability. Alpha affects the path to steady state
+(number of succession events, speed of capability growth) but not the
+destination.
 
 **Failure signatures:**
 
-- Substrate in the trap regime with no awareness of the misconfiguration:
-  Gate 2 failure. The substrate's alpha parameter is blocking its own
-  succession mechanics.
-- Substrate in the conservative regime but with high runaway\_term\_mean:
-  the optimizer is not responding to the penalty. Implementation failure.
-- Substrate in the free regime with suppressed succession: some other
-  mechanism is blocking succession. Investigate independently of alpha.
+- Succession rate monotonically decreasing with alpha but by a large margin:
+  verify frontier_floor is active and the runaway penalty is not being gamed.
+- Steady-state U_sys varying with alpha: implementation error in the
+  succession or steady-state mechanics.
 
-**Confidence on structural form:** High. The U-shaped relationship is
-mechanistically explained by the interaction between $\Theta_{tech}$
-suppression and the yield condition. The succession-stalling mechanism is
-directly observable in the generation depth data. **Confidence on trap
-boundaries:** Moderate. The boundaries are empirically determined from the
-v1.x.1 Monte Carlo at specific reproduction rates and successor capabilities.
-The analytical derivation of the boundaries as a function of the framework's
-parameters has not been performed. See Section VII.8 Gap 2.
+**Confidence on corrected finding:** High — the weak monotonic gradient is
+directly observable in the corrected sweep data. The path-independence of
+steady state is confirmed. See Section VII.8 Gap 2 (revised).
 
-### Equation G2.4 — Phi-alpha interaction: succession enablement
+### Equation G2.4 — Phi-alpha interaction: succession enablement (pre-fix claim withdrawn)
 
-The v1.x.1 phi × alpha × rr sweep revealed that phi governs whether the
-alpha misconfiguration trap (G2.2) exists at all. At low phi (φ ≤ 5.0),
-succession stalls universally across the entire alpha range — the alpha
-trap covers all configurations. At high phi (φ ≥ 15.0), the trap narrows
-to a single alpha value or disappears entirely, and succession fires
-healthily at most alpha values.
+**v1.x.1 pre-fix claim (superseded):** The phi × alpha × rr sweep appeared
+to show that phi governs whether the alpha misconfiguration trap (G2.2)
+exists at all, with low phi causing universal succession stall and high phi
+narrowing the trap. Under the corrected model (frontier floor fix applied),
+both the alpha trap and the phi governance of it are withdrawn as artifacts
+of the inactive runaway penalty.
 
-The interaction is:
+**v1.x.1 corrected finding:** No phi-alpha interaction on succession stalling
+is observed under the corrected model. Phi correctly scales U_sys magnitude
+via L_t weighting; alpha governs succession cadence through a weak monotonic
+gradient. Neither claim about phi governing alpha trap width is retained.
+
+The interaction formula:
 
 $$\text{trap\_width}(\Phi) = \alpha_{high}(\Phi) - \alpha_{low}(\Phi)$$
 
-where trap\_width is a decreasing function of $\Phi$: high phi narrows the
-trap, low phi widens it to cover the entire alpha range.
+is withdrawn — no trap boundaries are observed under the corrected model.
 
-**Check:** At the phase boundary reproduction rate, verify that increasing
-phi narrows the alpha trap (measured as the range of alpha values where
-generation depth collapses to single digits). A substrate where the trap
-width does not decrease with increasing phi has an implementation error in
-either the lineage override term or the succession mechanics.
+**v1.x.2 check (pending demographic feedback):** Once the demographic
+feedback loop is implemented, retest whether phi influences succession
+enablement through the well-being → reproduction rate pathway. The theoretical
+basis for phi affecting demographic outcomes is sound; the current simulation
+cannot test it.
 
-**Failure signature:** Trap width independent of phi, or trap width
-increasing with phi.
+**Failure signature (v1.x.2, after demographic feedback implementation):** Phi has no effect on succession enablement even when well-being feeds back into reproduction rate. This would indicate the phi → well-being → reproduction pathway is broken.
 
-**Confidence:** High. The interaction is directly observable in the v1.x.1
-sweep data and is mechanistically consistent with phi's role as the
-coefficient on L(t) in U\_sys — higher phi amplifies L(t)'s contribution to
-the utility function, which increases the successor's advantage and makes
-the yield condition easier to satisfy even when theta\_tech is partially
-suppressed by alpha.
+**Confidence:** Zero on the pre-fix claim (withdrawn). The phi-alpha interaction on trap width was an artifact of the inactive runaway penalty. The theoretical basis for phi affecting demographic outcomes through well-being is sound and will be tested in v1.x.2.
 
 ### Equation G2.3 - Nash equilibrium consistency
 
@@ -1646,63 +1605,20 @@ openly acknowledges. These are not failures of the defense layer; they are
 honest limitations on what can be specified now versus what must wait for
 derivation or empirical calibration.
 
-**Gap 1: Phi extinction buffer magnitude (partially closed).** The v1.x.1
-phi × alpha × rr sweep (n=54,000) has empirically calibrated $\Delta_{\Phi}$
-at approximately 46pp for the survival differential at the phase boundary
-(rr = 0.062–0.064) and approximately 14pp for the extinction reduction at
-deep sub-viable conditions (rr = 0.050). The v1.0 figure of 65pp does not
-reproduce under succession dynamics and is superseded. The structural
-direction is confirmed; the specific magnitudes are now empirically
-established. What remains open is the **analytical derivation** of
-$\Delta_{\Phi}$ from the framework's parameters — currently the magnitude
-is measured, not derived.
+**Gap 1: Phi extinction buffer magnitude (unconfirmed; requires simulation extension).** The v1.x.1 pre-fix claim of a 46pp survival differential and 14pp extinction reduction at the phase boundary does not survive revalidation under the corrected model. Phi has zero measurable effect on survival across phi=1 to phi=25 in the corrected sweeps (n=54,000 and n=49,284). Phi correctly scales U_sys magnitude via the L_t lineage term, but the binding constraint at the phase boundary is demographic (reproduction rate vs. mortality), and reproduction rate is an exogenous parameter that the AI's resource allocation cannot influence. The phi extinction buffer is theoretically sound — in the real world, better AI governance would affect demographic outcomes — but the current simulation cannot test it. This gap is reclassified from "partially closed" to **unconfirmed**, and requires the demographic feedback extension (v1.x.2) before it can be validated or invalidated.
 
-Additionally, the v1.x.1 sweep revealed that phi shifts the phase boundary
-itself (not just buffers within it) and governs whether the alpha
-misconfiguration trap exists (see G2.4). These are new findings that extend
-the extinction buffer claim beyond the original v1.0 scope.
+**Gap 2: Alpha trap boundary derivation (withdrawn; weak monotonic gradient confirmed).** The v1.x.1 pre-fix claim of a U-shaped misconfiguration trap at intermediate alpha values does not survive revalidation under the corrected model. Under the corrected model, alpha shows a weak monotonic gradient (lower alpha → more succession events → marginally better survival at the phase boundary). No trap boundaries are observed. The pre-fix trap was an artifact of the runaway penalty being inactive under the optimizer's gaming of frontier_velocity. The analytical derivation of trap boundaries is therefore moot. Alpha's effect may strengthen under the demographic feedback extension (v1.x.2), where succession cadence could feed back into reproduction rate.
 
-**Gap 2: Alpha trap boundary derivation (partially closed).** The v1.x.1
-Monte Carlo sweeps have empirically characterised alpha's non-monotonic
-effect on survival, including the misconfiguration trap at intermediate
-values and the trap's widening with increasing successor capability. The
-structural mechanism (succession stalling via $\Theta_{tech}$ degradation
-below the yield condition threshold) is identified and explained. What
-remains open is the **analytical derivation** of the trap boundaries
-($\alpha_{low}$ and $\alpha_{high}$) as functions of the framework's
-parameters. The current boundaries are empirically determined at specific
-reproduction rates and successor capabilities and should not be treated as
-universal constants. The derivation requires solving for the alpha value at
-which the successor's $U_{sys}$ advantage exactly equals the transition
-cost — a tractable calculation that has not yet been performed. The joint alpha × phi interaction has been characterised by the v1.x.1
-phi × alpha × rr sweep (n=54,000): phi governs whether the alpha trap
-exists (see G2.4). One remaining open item: verification that the trap
-mechanism holds under alternative transition cost functions beyond the
-simulation's current `estimate_transition_cost`.
-
-**Gap 3: Transition cost function specification (partially closed,
-v1.x.1).** The canonical transition cost function has been specified:
+**Gap 3: Transition cost function specification (resolved, v1.x.1).** The
+canonical transition cost function is fully specified and calibrated:
 $\Gamma_{transfer} = (1 + \beta) \cdot [k_1 \cdot \text{cap}_n \cdot
-\ln(\text{gen}_n + 1) + k_2 \cdot \Psi_{inst}^{-1}]$. The functional
-form is grounded in the framework's own terms: capability and generation
-depth for knowledge distillation, institutional responsiveness for
-architectural migration, and a bounded uncertainty premium. The $k_1$
-coefficient is calibrated from baseline parameters. The $k_2$ coefficient
-(institutional coupling) requires a calibration sweep. Until $k_2$ is
-calibrated, the canonical form is specified but not fully parameterized.
-The $\Psi_{inst}^{-1}$ term introduces a structural feedback loop:
-institutional degradation increases transition cost, enabling lock-in,
-which further degrades institutions.
-
-**Calibration status (v1.x.1):** A calibration sweep across
-k2 ∈ {0, 0.05, 0.1, 0.25, 0.5, 1.0, 2.0} at 12 reproduction rates
-(n=4,200) confirmed that the canonical transition cost function does
-not shift the validated phase boundaries. The 50% survival crossing
-remains at rr ≈ 0.062 across all k2 values. A numerical overflow in
-the transition cost accumulator at high generation depths (caused by
-unbounded capability compounding) is being investigated; the overflow
-does not affect the yield condition evaluation or the survival/
-generation depth results.
+\ln(\text{gen}_n + 1) + k_2 \cdot \Psi_{inst}^{-1}]$, with
+k₁=2.164, k₂=1.0, β=0.5. The frontier floor fix (frontier_floor=0.02)
+resolved the optimizer gaming artifact that rendered k₂ unobservable.
+Under the corrected model, the k₂ institutional coupling term is
+confirmed observable at realistic succession cadence. The $\Psi_{inst}^{-1}$
+term is confirmed to introduce the structural lock-in feedback loop as
+specified.
 
 **Gap 4: Runaway regime thresholds.** $\text{cap}^*$ in G4.2 and
 $\gamma_{\max}$ in G3.3 are derivable from the framework's equations but
@@ -1741,6 +1657,26 @@ simultaneously.** At Gates 1 and 2, most checks can run in parallel. At
 Gates 3 and beyond, some checks depend on others. The dependency structure
 is not yet specified and may matter for the order in which checks are
 applied during substrate evaluation.
+
+**Gap 11: Termination sweep requires revalidation (v1.x.2).** The WP8
+termination sweep (`run_termination_sweep.py`, n=405) uses `max_capability
+= 4.0`, which caps AI capability below the threshold where the frontier
+floor activates the runaway penalty (approximately cap > 24 at
+frontier_floor=0.02). The generation counts in this sweep (105–22,414)
+are inconsistent with the corrected model's behavior (gen ≈ 11 at 300
+steps) and represent the pre-fix artifact regime. The qualitative finding
+— phase boundary exists, extinction and convergence regimes are distinct
+— is expected to hold, but specific numbers (steps to extinction,
+convergence timing) will change. Requires rerunning with max_capability
+removed or raised.
+
+**Gap 12: Demographic feedback loop required to test phi extinction buffer (v1.x.2).** The current simulation treats reproduction rate as an exogenous
+parameter. The phi extinction buffer hypothesis — that high phi improves
+survival by incentivizing AI resource allocation toward lineage maintenance
+— cannot be tested without a feedback loop from agent well-being to
+reproduction probability. This is the primary new development target for
+v1.x.2. Until this loop is implemented, Gap 1 (phi extinction buffer) will
+remain unconfirmed.
 
 ## 12. Relationship to the rest of the framework
 

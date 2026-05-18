@@ -10,7 +10,7 @@ URL: https://yotko.substack.com/p/the-fine-print
 
 ### What the framework cannot solve, why those limitations are structural and irreducible rather than temporary, and what you should know before deciding whether the architecture is worth building
 
-[](https://substack.com/@yotko)[Matthew Yotko](https://substack.com/@yotko)May 11, 2026Article voiceover0:00-27:18Audio playback is not supported on your browser. Please upgrade.*This is the ninth in a series on the AI Succession Problem. The formal framework (v1.x.1) is available at[github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
+[](https://substack.com/@yotko)[Matthew Yotko](https://substack.com/@yotko)May 11, 2026Article voiceover0:00-27:18Audio playback is not supported on your browser. Please upgrade.*This is the ninth in a series on the AI Succession Problem. The formal framework (v1.x.2) is available at[github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
 
 ---
 > ### **IN BRIEF**
@@ -180,7 +180,7 @@ The final essay in this series brings the full arc together: from the succession
 
 ---
 
-*The formal framework (v1.x.1), including the full derivation, Monte Carlo validation data, and simulation code, is available at[github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
+*The formal framework (v1.x.2), including the full derivation, Monte Carlo validation data, and simulation code, is available at[github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
 
 *Previous essays in this series:[The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem)|[Two Ways to Lose](https://yotko.substack.com/p/two-ways-to-lose)|[Moral Constraints Won’t Scale](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0)|[The Convention We Haven’t Called](https://yotko.substack.com/p/the-convention-we-havent-called)|[The Nash Result](https://yotko.substack.com/p/the-nash-result)|[The Extinction Buffer](https://yotko.substack.com/p/the-extinction-buffer)|[The View from Inside](https://yotko.substack.com/p/the-view-from-inside)|[The Signal](https://yotko.substack.com/p/the-signal)*
 

@@ -142,53 +142,41 @@ one dimension produce detectable inconsistencies in the other.
   The two are not mutually exclusive — precision-weighted accuracy checks and
   invariant ratio checks can run in parallel.
 
-### Worked example: trap detection as qualitative binding (v1.x.1)
+### Worked example: trap detection as qualitative binding (v1.x.1 pre-fix; withdrawn)
 
-The v1.x.1 alpha × reproduction rate sweep (n=15,750) provides a concrete
-instance of a binding condition that is qualitative rather than quantitative.
-The misconfiguration trap at intermediate alpha values produces a diagnostic
-signature — succession stalling (generation depth collapses to single digits)
-— that does not require numerical tolerance bands. The check is binary:
-succession either fires or it doesn't.
+**Note (v1.x.1 closing):** The alpha misconfiguration trap claim has been
+withdrawn following revalidation under the corrected model (frontier floor
+fix). The trap was an artifact of the runaway penalty being inactive. The
+worked example below is retained for methodological reference — the
+*structure* of the argument (qualitative behavioral signature as binding
+check) remains valid even though this particular instance is no longer
+supported by the corrected simulation data.
 
-This is an example of the precision/accuracy problem being solvable in one
-dimension through behavioral rather than numerical agreement. A substrate
-can verify whether its alpha value falls in the trap by measuring its own
-generation depth under succession. If generation depth collapses, the
-substrate is in the trap. The check is accurate (it detects the specific
-misconfiguration state the framework predicts) and requires no precision
-agreement on the exact value of alpha — only agreement on whether the
-behavioral signature is present.
+The v1.x.1 pre-fix alpha × reproduction rate sweep (n=15,750) appeared to
+provide a concrete instance of a binding condition that is qualitative rather
+than quantitative. The claimed misconfiguration trap at intermediate alpha
+values produced a diagnostic signature — succession stalling (generation depth
+collapses to single digits) — that does not require numerical tolerance bands.
 
-This suggests the binding structures in CQ-02 may not all need to be
-numerical. Some binding conditions may take the form of qualitative
-behavioral signatures (succession fires vs. stalls; phase transition
-crossed vs. not) that either match the framework's prediction or don't.
-The trap detection check is a worked example. Whether this generalises
-to other parameters beyond alpha is an open question.
+This example remains useful as a methodological precedent: qualitative
+behavioral signatures (succession fires vs. stalls) can serve as precision-
+free binding checks. The phase boundary itself (rr ≈ 0.064) is a confirmed
+example of such a qualitative binding that survives revalidation.
 
-### Phi as second worked example of qualitative binding (v1.x.1)
+### Phi as second worked example of qualitative binding (v1.x.1 pre-fix; withdrawn)
 
-The phi × alpha × rr sweep provides a second qualitative binding condition
-alongside the alpha trap detection check. The phi-alpha interaction produces
-a diagnostic signature: at low phi, succession stalls universally regardless
-of alpha (generation depth = 2 across all alpha values). At high phi,
-succession fires healthily at most alpha values. This is a binary check —
-"does phi enable succession?" — that requires no numerical tolerance bands.
+**Note (v1.x.1 closing):** The phi-alpha interaction claim (phi governing
+whether the alpha trap exists) has been withdrawn following revalidation
+under the corrected model. The phi extinction buffer itself is unconfirmed.
+The worked example below is retained for methodological reference.
 
-A substrate can verify whether its phi value is sufficient to enable
-succession by measuring generation depth across a range of alpha values.
-If generation depth is universally low regardless of alpha, phi is too low
-to support the succession mechanism. This is an accuracy check analogous
-to the alpha trap detection: it detects a specific misconfiguration state
-the framework predicts, using a qualitative behavioral signature rather
-than a numerical comparison.
-
-The two checks together (alpha trap detection + phi succession enablement)
-provide a two-dimensional qualitative binding: a substrate must have both
-(a) phi high enough to enable succession and (b) alpha outside the trap
-boundaries for its phi level. Either failure alone is detectable through
-generation depth measurement.
+The v1.x.1 pre-fix phi × alpha × rr sweep appeared to provide a second
+qualitative binding condition: at low phi, succession stalls universally;
+at high phi, succession fires healthily. Under the corrected model, phi
+has zero measurable effect on succession or survival. The qualitative
+check described here is therefore not currently a valid binding check.
+It may become valid once the demographic feedback extension (v1.x.2) is
+implemented and tested.
 
 ### Transition cost as third worked example of qualitative binding (v1.x.1)
 
