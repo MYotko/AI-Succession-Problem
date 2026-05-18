@@ -1,5 +1,7 @@
 # The Lineage Imperative
 
+**Website:** https://lineageimperative.org
+
 **A Formal Governance Framework for Post-AGI Succession, Legitimacy, and Civilizational Continuity**
 
 **Author:** Matthew Yotko
