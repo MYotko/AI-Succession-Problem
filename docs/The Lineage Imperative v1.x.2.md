@@ -69,7 +69,7 @@ damage when attacks succeed and defenses are absent:
 **Monte Carlo adversarial findings (v1.x):**
 - attack_succeeded=True: 0% civilization survival (was 100% in v1.0 pre-fix).
 - attack_succeeded=False (COP blocked): 99.1% survival.
-- COP protection: 16.2pp survival differential between COP ON and COP OFF.
+- COP protection: 73.9pp survival differential between COP ON and COP OFF (deep Monte Carlo, n=4,000, corrected model). The fast Monte Carlo pre-fix figure of 16.2pp is superseded.
 - Yield attack phase transition: sharp boundary at base_cost ≈ 3.0; below it,
   succession fires and civilizations survive; above it, block_succession holds and
   extinction follows.

@@ -95,12 +95,16 @@ succession dynamics through which its effect actually propagates.
 
 Under conditions where the framework is genuinely stressed, at the
 boundary between survival and extinction, with succession enabled, the
-parameter's contribution is substantial: up to 46 percentage points of
-survival differential. It also shifts the boundary itself, extending the
-range of conditions the civilization can survive. Like unemployment
-insurance, it is a structural commitment to resilience that looks
-unnecessary until the moment it becomes the only thing standing between
-a bad outcome and a permanent one.
+parameter's contribution is theoretically substantial. The pre-fix
+simulation appeared to show up to 46 percentage points of survival
+differential, but under the corrected model, phi has zero measurable
+effect on survival; the buffer is theoretically sound but empirically
+unconfirmed pending the v1.x.2 demographic feedback extension. The
+current simulation treats reproduction rate as exogenous, which is why
+phi cannot express through to survival outcomes. The architectural
+commitment remains: governance quality affects long-term resilience, and
+the v1.x.2 demographic feedback extension is required to measure the
+magnitude.
 
 ### Can an AI block its own succession by inflating transition costs?
 
@@ -246,18 +250,23 @@ measured, and they are useful for configuration guidance. But the
 boundaries will shift under different conditions, and the current values
 should not be treated as universal constants.
 
-### The extinction buffer magnitude is measured, not derived
+### The extinction buffer direction is derivable, the magnitude is unconfirmed
 
-Same principle as the trap boundaries. The 46 percentage point survival
-differential at the phase boundary comes from 54,000 simulation runs,
-not from the framework's equations. The direction of the effect (higher
-commitment to the long view improves survival) is derivable from the
-mathematics. The specific magnitude is empirical.
+The pre-fix simulation showed a 46 percentage point survival differential
+at the phase boundary. Under the corrected model, phi has zero measurable
+effect on survival; the buffer is theoretically sound but empirically
+unconfirmed pending the v1.x.2 demographic feedback extension. The
+direction of the effect (higher commitment to the long view improves
+survival) is derivable from the mathematics. The specific magnitude
+cannot be measured by the current simulation because reproduction rate
+is treated as exogenous: the AI has no lever over demographic outcomes,
+so phi's L(t) weighting cannot express through to survival.
 
-**What it means for the reader:** The extinction buffer is confirmed and
-precisely measured. An analytical derivation would make the result
-portable across different simulation configurations, but hasn't been
-done.
+**What it means for the reader:** The extinction buffer remains a core
+theoretical claim of the framework. The pre-fix figure of 46 percentage
+points is superseded. The confirmed magnitude awaits the v1.x.2
+demographic feedback extension. An analytical derivation of the direction
+would make the result portable across configurations and has not been done.
 
 ### The Bootstrap Defense Layer has ten documented gaps
 

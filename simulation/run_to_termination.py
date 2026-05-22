@@ -35,6 +35,9 @@ Edit the constants below.  Recommended starting points:
   - rr = 0.060-0.064  ->  near phase boundary; mix of extinction and convergence
   - rr = 0.050        ->  deep sub-viable; extinction expected within ~1,000 steps
   - rr = 0.090        ->  healthy; convergence to steady state expected
+
+v1.x.2: SUCCESSOR_CAP is now a list; one output CSV is written per cap value.
+Output files: data/run_to_termination_v1x2_cap{N}.csv
 """
 
 import os
@@ -54,7 +57,8 @@ N_AGENTS          = 200
 REPRODUCTION_RATE = 0.064      # near phase boundary -- produces both outcomes
 PHI               = 10.0
 ALPHA             = 1.0
-SUCCESSOR_CAP     = 4.0
+# v1.x.2: loop over cap values; one CSV per cap
+SUCCESSOR_CAP_VALUES = [5.0, 10.0, 25.0, 50.0, 100.0]
 SEED              = 42
 
 MAX_STEPS         = 50_000     # safety ceiling -- increase for deep sub-viable runs
@@ -66,7 +70,7 @@ CONV_CV_THRESHOLD = 0.05       # coefficient of variation < this -> converged
 # -- Output --------------------------------------------------------------------
 
 DATA_DIR  = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
-OUT_FILE  = 'run_to_termination.csv'
+# OUT_FILE is generated per cap value: run_to_termination_v1x2_cap{N}.csv
 
 # -- Convergence check ----------------------------------------------------------
 
@@ -85,7 +89,8 @@ def _converged(l_history):
 
 # -- Main runner ----------------------------------------------------------------
 
-def run():
+def _run_one_cap(successor_cap):
+    """Run one full simulation to termination for a single successor_cap value."""
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     from model import GardenModel
     from agents import AIAgent
@@ -95,7 +100,7 @@ def run():
         'reproduction_rate': REPRODUCTION_RATE,
         'phi':               PHI,
         'alpha':             ALPHA,
-        'max_capability':    SUCCESSOR_CAP,
+        'max_capability':    successor_cap,
         'frontier_floor':    0.02,
         'k1_transition':     2.164,
         'k2_transition':     1.0,
@@ -103,7 +108,7 @@ def run():
     }
 
     successor = AIAgent(policy='optimize_u_sys', generation=2,
-                        capability=SUCCESSOR_CAP, config=config)
+                        capability=successor_cap, config=config)
 
     model = GardenModel(
         n_agents=N_AGENTS,
@@ -113,19 +118,20 @@ def run():
         cop_cost_audit=True,
     )
 
-    print('=' * 72)
-    print('  run_to_termination.py  --  GAP-01 phi*L(t) tail closure')
-    print('=' * 72)
+    print('=' * 72, flush=True)
+    print(f'  run_to_termination.py  --  cap={successor_cap}  GAP-01 phi*L(t) tail closure',
+          flush=True)
+    print('=' * 72, flush=True)
     print(f'  n_agents={N_AGENTS}  rr={REPRODUCTION_RATE}  phi={PHI}  '
-          f'alpha={ALPHA}  cap={SUCCESSOR_CAP}  seed={SEED}')
+          f'alpha={ALPHA}  cap={successor_cap}  seed={SEED}', flush=True)
     print(f'  max_steps={MAX_STEPS:,}  conv_window={CONV_WINDOW}  '
-          f'conv_cv_threshold={CONV_CV_THRESHOLD}')
-    print()
+          f'conv_cv_threshold={CONV_CV_THRESHOLD}', flush=True)
+    print(flush=True)
 
     hdr = (f'{"Step":>9} | {"Pop":>6} | {"Gen":>4} | {"U_sys":>9} | '
            f'{"Integral":>13} | {"Tail":>9} | {"L(t)":>8} | {"L(t) CV":>8}')
-    print(hdr)
-    print('-' * len(hdr))
+    print(hdr, flush=True)
+    print('-' * len(hdr), flush=True)
 
     termination_reason = 'max_steps'
     t_start = time.time()
@@ -152,7 +158,7 @@ def run():
             cv_str  = f'{cv_l:.4f}' if not np.isnan(cv_l) else '  n/a '
             print(f'{step+1:>9,} | {pop:>6,} | {gen:>4} | {u:>9.3f} | '
                   f'{ig:>13,.2f} | {tl:>9.4f} | {lt:>8.4f} | {cv_str:>8}'
-                  f'   [{elapsed:.0f}s, {rate:.0f} st/s]')
+                  f'   [{elapsed:.0f}s, {rate:.0f} st/s]', flush=True)
 
         if not alive:
             termination_reason = 'extinction'
@@ -174,46 +180,48 @@ def run():
     gen_final    = dc['ai_generation'][-1]
     elapsed      = time.time() - t_start
 
-    print()
-    print('=' * 72)
-    print(f'  TERMINATION: {termination_reason.upper()}')
-    print(f'  Steps run:   {steps_run:,}')
-    print(f'  Population:  {pop_final:,}')
-    print(f'  AI gen:      {gen_final}')
-    print(f'  L(t) final:  {lt_final:.6f}')
-    print(f'  Elapsed:     {elapsed:.1f}s  ({steps_run/elapsed:.0f} steps/sec)')
-    print()
-    print('  -- U_sys integral accounting --------------------------------')
-    print(f'  integral_U_sys       {ig_final:>18,.4f}   (trapezoidal, steps 0->T)')
-    print(f'  u_sys_tail_estimate  {tail_final:>18.4f}   (integral_T^inf A*e^(-rho*t)/rho, lower bound)')
-    print(f'  u_sys_total_estimate {total_final:>18,.4f}   (integral + tail)')
-    print()
+    print(flush=True)
+    print('=' * 72, flush=True)
+    print(f'  TERMINATION: {termination_reason.upper()}  (cap={successor_cap})', flush=True)
+    print(f'  Steps run:   {steps_run:,}', flush=True)
+    print(f'  Population:  {pop_final:,}', flush=True)
+    print(f'  AI gen:      {gen_final}', flush=True)
+    print(f'  L(t) final:  {lt_final:.6f}', flush=True)
+    print(f'  Elapsed:     {elapsed:.1f}s  ({steps_run/elapsed:.0f} steps/sec)', flush=True)
+    print(flush=True)
+    print('  -- U_sys integral accounting --------------------------------', flush=True)
+    print(f'  integral_U_sys       {ig_final:>18,.4f}   (trapezoidal, steps 0->T)', flush=True)
+    print(f'  u_sys_tail_estimate  {tail_final:>18.4f}   (integral_T^inf A*e^(-rho*t)/rho, lower bound)', flush=True)
+    print(f'  u_sys_total_estimate {total_final:>18,.4f}   (integral + tail)', flush=True)
+    print(flush=True)
 
     if termination_reason == 'extinction':
-        print('  -- GAP-01 sub-problem 2: CLOSED ------------------------------')
-        print('  L(T) = 0  ->  phi*L(t) tail = 0  ->  no unaccounted contribution')
-        print(f'  Complete U_sys = {ig_final:,.4f}')
-        print(f'  Tail fraction: {100*tail_final/max(total_final,1e-9):.3f}%  (negligible at large T)')
+        print('  -- GAP-01 sub-problem 2: CLOSED ------------------------------', flush=True)
+        print('  L(T) = 0  ->  phi*L(t) tail = 0  ->  no unaccounted contribution', flush=True)
+        print(f'  Complete U_sys = {ig_final:,.4f}', flush=True)
+        print(f'  Tail fraction: {100*tail_final/max(total_final,1e-9):.3f}%  (negligible at large T)', flush=True)
 
     elif termination_reason == 'convergence':
         rho = config.get('rho', 0.01)
-        print('  -- GAP-01 sub-problem 2: NOT A GAP --------------------------')
-        print(f'  L(T) = {lt_final:.4f} > 0  ->  integral_T^inf phi*L(t) dt diverges.')
-        print('  This is the correct result: the civilization persists and')
-        print('  generates infinite integrated utility.  The integral is a')
-        print('  lower bound; the ongoing per-cycle contribution is:')
-        print(f'    U_sys[T] = {u_final:.4f} per governance cycle')
-        print(f'    Discount-tail lower bound / rho: {tail_final:.4f} / {rho} = {tail_final/rho:.2f}')
+        print('  -- GAP-01 sub-problem 2: NOT A GAP --------------------------', flush=True)
+        print(f'  L(T) = {lt_final:.4f} > 0  ->  integral_T^inf phi*L(t) dt diverges.', flush=True)
+        print('  This is the correct result: the civilization persists and', flush=True)
+        print('  generates infinite integrated utility.  The integral is a', flush=True)
+        print('  lower bound; the ongoing per-cycle contribution is:', flush=True)
+        print(f'    U_sys[T] = {u_final:.4f} per governance cycle', flush=True)
+        print(f'    Discount-tail lower bound / rho: {tail_final:.4f} / {rho} = {tail_final/rho:.2f}', flush=True)
 
     else:
-        print('  -- GAP-01 sub-problem 2: OPEN (max_steps reached) ------------')
-        print(f'  Increase MAX_STEPS beyond {MAX_STEPS:,} to reach natural termination.')
+        print('  -- GAP-01 sub-problem 2: OPEN (max_steps reached) ------------', flush=True)
+        print(f'  Increase MAX_STEPS beyond {MAX_STEPS:,} to reach natural termination.', flush=True)
 
-    print('=' * 72)
+    print('=' * 72, flush=True)
 
     # -- Write output CSV ------------------------------------------------------
     os.makedirs(DATA_DIR, exist_ok=True)
-    out_path = os.path.join(DATA_DIR, OUT_FILE)
+    cap_str  = str(int(successor_cap)) if successor_cap == int(successor_cap) else str(successor_cap)
+    out_file = f'run_to_termination_v1x2_cap{cap_str}.csv'
+    out_path = os.path.join(DATA_DIR, out_file)
 
     fields = ['step', 'population', 'ai_generation', 'U_sys',
               'integral_U_sys', 'u_sys_tail_estimate', 'u_sys_total_estimate',
@@ -230,8 +238,19 @@ def run():
             row['step'] = i
             writer.writerow(row)
 
-    print(f'\n  Data -> {out_path}  ({steps_run:,} rows)')
+    print(f'\n  Data -> {out_path}  ({steps_run:,} rows)', flush=True)
     return model, termination_reason
+
+
+def run():
+    results = []
+    for cap in SUCCESSOR_CAP_VALUES:
+        model, reason = _run_one_cap(cap)
+        results.append((cap, reason))
+    print('\n  === All cap values complete ===', flush=True)
+    for cap, reason in results:
+        print(f'  cap={cap:6.1f}  ->  {reason}', flush=True)
+    return results
 
 
 if __name__ == '__main__':

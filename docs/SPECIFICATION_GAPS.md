@@ -822,11 +822,34 @@ test whether phi's L_t weighting translates to measurable survival
 differences. This is the prerequisite for confirming or invalidating the
 phi extinction buffer.
 
-### Termination sweep revalidation
-Rerun `run_termination_sweep.py` and `run_to_termination.py` with
-max_capability removed or raised to be consistent with the main sweeps.
-Debug the anomalous same-capability succession firing observed in the
-current termination data.
+### Termination sweep revalidation (v1.x.2 in progress)
+
+**Original CSVs (`termination_mc.csv`, `termination_mc_surviving.csv`,
+`run_to_termination.csv`) are preserved as historical artifacts but should
+not be cited as v1.x.2 results.** They were generated at `SUCCESSOR_CAP = 4.0`,
+below the runaway activation threshold of approximately cap = 24 at
+frontier_floor=0.02. In this regime, persistent peer-validator capability
+transfer in `PeerValidator.arbitrate_cost` manufactures artifact post-succession
+differentials at every yield condition evaluation, firing succession every step or
+two. The generation counts in those CSVs (up to 22,414) are driven by this
+artifact, not by genuine capability advancement.
+
+The v1.x.2 sweep (`termination_mc_v1x2.csv`, `run_to_termination_v1x2_cap{N}.csv`)
+parameterizes SUCCESSOR_CAP over `[5.0, 10.0, 25.0, 50.0, 100.0]`, spanning both
+the inactive-runaway regime (cap < 24) and the active-runaway regime (cap >= 24).
+These are the corrected reference data for v1.x.2.
+
+### v1.x.2 model design question: PeerValidator cost oracle refactor
+
+The `PeerValidator.arbitrate_cost` method (`agents.py:442`) permanently reduces
+incumbent AI capability via competitive bid theft on every call. This is appropriate
+at succession time but creates a compounding artifact when called every step as a
+yield-condition cost oracle. The question of whether `arbitrate_cost` should be
+refactored to a pure cost oracle (returning the bid result without persistent
+capability transfer, with steal events deferred to actual succession ratification) is
+logged here for v1.x.2 development work. Resolving this would require revalidating
+all cadence-sensitive findings, in particular the alpha succession sweep
+(`alpha_succession_sweep_full.csv`), which is out of scope for v1.x.2 stabilization.
 
 ### Phi and alpha revalidation under endogenous demographics
 Once the demographic feedback loop is implemented, rerun the phi x alpha x rr

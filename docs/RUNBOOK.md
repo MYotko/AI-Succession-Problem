@@ -96,8 +96,8 @@ Several targeted sweep scripts are available for specific research questions:
 
 | Script | Purpose |
 |---|---|
-| `run_phi_alpha_rr_sweep.py` | φ × α × rr grid — the v1.x.1 extinction buffer characterisation (n=54,000) |
-| `run_rr_alpha_sweep.py` | rr × α grid for alpha trap boundary mapping |
+| `run_phi_alpha_rr_sweep.py` | φ × α × rr parameter sweep (n=54,000); phi survival effect zero under corrected model, pending v1.x.2 demographic feedback extension |
+| `run_rr_alpha_sweep.py` | rr × α parameter sweep; alpha exhibits monotonic gradient on succession cadence, no U-shaped trap |
 | `run_alpha_succession_sweep.py` | Alpha effect on succession dynamics |
 
 All sweep scripts are parallelised and write to `data/`.
