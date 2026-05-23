@@ -226,29 +226,28 @@ defended with engineering margins, like pre-flight analysis of a
 spacecraft system. The architectural arguments may be correct. They have
 not been stress-tested computationally.
 
-### The penalty trap boundaries are measured, not derived
+### The penalty trap finding has been withdrawn
 
-A doctor can tell you that your blood pressure is 140/90 and that this
-is in the hypertensive range, based on clinical experience with
-thousands of patients. But if you ask why the boundary is at 140 and not
-at 135 or 145, the honest answer is that the boundary is empirical. It
-comes from population data, not from a first-principles derivation of
-how arterial walls respond to pressure. The boundary is real and useful,
-but its precise location reflects measurement, not theory.
+The v1.x.1 pre-fix simulation appeared to show a misconfiguration zone at
+intermediate alpha values, approximately 0.3 to 0.8, where the runaway
+penalty was strong enough to block succession but too weak to force
+conservative capability deployment. The framework was claimed to predict a
+U-shaped, non-monotonic relationship between alpha and survival.
 
-The framework's penalty trap, the misconfiguration zone where moderate
-settings produce worse outcomes than extreme ones, has been precisely
-measured through simulation. The boundaries sit at approximately 0.3 to
-0.8 on the relevant scale, widening to 0.4 to 1.1 at higher capability
-levels. But these numbers come from running tens of thousands of
-simulations and observing where outcomes change, not from solving the
-framework's equations analytically. The analytical derivation is
-tractable but hasn't been performed.
+Under the corrected model with the frontier velocity floor fix applied,
+this finding does not survive revalidation. The runaway penalty was
+inactive in the pre-fix simulation because the optimize_u_sys rollout
+optimizer was setting r_synth to zero, which zeroed out frontier_velocity,
+which zeroed out the runaway penalty. With the floor in place at
+frontier_floor = 0.02, the runaway penalty is active and the alpha
+gradient is monotonic: lower alpha produces more generations and
+marginally better survival at the phase boundary, with no U-shaped trap
+and no misconfiguration zone.
 
-**What it means for the reader:** The trap is real, the boundaries are
-measured, and they are useful for configuration guidance. But the
-boundaries will shift under different conditions, and the current values
-should not be treated as universal constants.
+**What it means for the reader:** The trap is not a finding of the
+framework. The pre-fix boundaries of 0.3 to 0.8 are superseded. Alpha is
+better understood as governing succession cadence through a weak
+monotonic gradient than as defining a configuration trap.
 
 ### The extinction buffer direction is derivable, the magnitude is unconfirmed
 

@@ -140,8 +140,8 @@ implemented.
   machinery can be grounded in the framework's foundations, or whether this
   represents an irreducible bolt-on
 - Catalogue which Gate checks were anticipated (stipulated) vs. which fell
-  out of the framework unexpectedly — the alpha trap is the first confirmed
-  example of the latter
+  out of the framework unexpectedly. The phase boundary at rr ≈ 0.064 is
+  the single confirmed example of the latter under the corrected model.
 - Parallel investigation: survey the existing framework for any components
   that are stipulated rather than derived, to establish a baseline for how
   much stipulation is already present and whether a derived validation layer

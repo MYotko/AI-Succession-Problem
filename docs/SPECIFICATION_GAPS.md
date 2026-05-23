@@ -343,7 +343,7 @@ $\Theta_{tech}$ grows linearly with capability forever. This caused:
 3. The $k_2$ institutional coupling term to be permanently swamped
 4. All sweep results to operate in an unrealistic regime
 
-**Fix applied:** The `frontier_floor` parameter (default 0.1) adds a
+**Fix applied:** The `frontier_floor` parameter (calibrated at 0.02) adds a
 capability-proportional floor to frontier\_velocity:
 
 $$\text{frontier\_velocity} = \text{capability} \cdot \max(\text{frontier\_floor},\ r_{synth} \cdot h_{e\_mult})$$
@@ -354,23 +354,32 @@ information-theoretic fact that a high-capability system's internal state
 complexity constitutes an irreducible comprehension burden on the biological
 substrate, independent of resource allocation decisions.
 
-**Calibration status:** `frontier_floor = 0.1` is the default pending
-calibration via `run_frontier_floor_calibration.py` (parameter grid:
+**Calibration status:** `frontier_floor = 0.02`, calibrated via
+`run_frontier_floor_calibration.py` (parameter grid:
 frontier\_floor ∈ {0.01, 0.02, 0.05, 0.1, 0.15, 0.2, 0.3, 0.5} ×
-rr ∈ 12 values × 50 reps = 4,800 runs).
+rr ∈ 12 values × 50 reps = 4,800 runs). The 0.02 value preserves the dual
+phase transition structure (extinction boundary at rr ≈ 0.055, collapse
+boundary at rr ≈ 0.064) and produces realistic succession cadence with
+generation counts bounded near gen 11.
 
-**Impact on prior results:** All sweeps using `optimize_u_sys` with
-`successor_ai` operated under the artifact and require revalidation:
+**Impact on prior results (revalidation completed for non-termination sweeps):**
+The following sweeps were regenerated under the corrected model and now
+contain post-fix data at their original filenames:
 - `phi_alpha_rr_sweep_full.csv` (n=54,000)
 - `alpha_succession_sweep_full.csv` (n=22,200)
 - `rr_alpha_sweep_full.csv` (n=15,750)
 - `transition_cost_calibration.csv` (n=4,200)
 - `veto_capture_sweep_v2.csv` (n=8,700)
-- Termination and termination sweep runs
 
-The $k_2$ calibration sweep showed zero signal under the artifact (succession
-fired every step, swamping the $k_2/\Psi_{inst}$ term). Revalidation should
-find measurable $k_2$ signal at realistic succession cadence.
+The termination sweep is regenerated as `termination_mc_v1x2.csv` with
+`successor_cap` parameterized across {5.0, 10.0, 25.0, 50.0, 100.0}, n=2,025.
+The original `termination_mc.csv` (n=405, single successor_cap=4.0) is
+preserved as a v1.x.1 artifact.
+
+Under the artifact, the $k_2$ calibration sweep showed zero signal because
+succession fired every step, swamping the $k_2/\Psi_{inst}$ term. Under the
+corrected model, $k_2$ exhibits the expected institutional coupling signal
+at realistic succession cadence and is calibrated at 1.0 (see GAP-03).
 
 **Regression tests added:**
 - `test_optimizer_cannot_zero_runaway_at_high_capability` — asserts runaway\_term > 0 at optimizer's chosen operating point with capability=1000

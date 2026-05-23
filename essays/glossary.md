@@ -119,14 +119,16 @@ because doing so maximizes their own utility under the framework's objective
 function. Cooperation is not assumed or imposed, it is the mathematically
 derived dominant strategy. *Essay 5: The Nash Result.*
 
-**Penalty Trap** - The misconfiguration zone at intermediate alpha values
-(approximately 0.3–0.8) where the runaway penalty is strong enough to block
+**Penalty Trap (withdrawn)** - A v1.x.1 pre-fix finding that appeared to
+show a misconfiguration zone at intermediate alpha values, approximately
+0.3 to 0.8, where the runaway penalty was strong enough to block
 succession but too weak to force conservative capability deployment. The
-system gets stuck with a leader it cannot replace. In levee terms: a flood
-gate jammed at a setting that blocks the relief channels. Worse than having
-no gate at all, because no gate would at least leave the succession channel
-open. The trap widens as capability increases. *Essay 6: The Extinction
-Buffer.*
+finding was withdrawn under the corrected model with the frontier
+velocity floor fix applied: with the runaway penalty active, alpha
+exhibits a weak monotonic gradient on succession cadence rather than a
+U-shaped trap. Retained here as a withdrawn-finding annotation because
+*Essay 6: The Extinction Buffer* cites the pre-fix numbers; an essay
+correction is pending separately.
 
 **Phase Boundary** - The narrow band of conditions where the governance
 architecture's protective effects are most visible and most important. Above

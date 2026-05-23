@@ -5,8 +5,8 @@
 **A Formal Governance Framework for Post-AGI Succession, Legitimacy, and Civilizational Continuity**
 
 **Author:** Matthew Yotko
-**Date:** March 2026
-**Status:** Version 1.x
+**Date:** May 2026
+**Status:** Version 1.x.2
 
 ---
 
@@ -30,7 +30,6 @@ This repository contains a full Agent-Based Model (ABM) written in Python that c
 ## Documents
 
 - 📄 **[The Lineage Imperative v1.x.2](docs/The%20Lineage%20Imperative%20v1.x.2.md)** - Current version. Incorporates the frontier velocity floor fix (corrects optimizer gaming of the runaway penalty), the canonical transition cost function with calibrated k1=2.164 and k2=1.0, biological veto capture validation (11/13 attack vectors), and revised phi and alpha findings under the corrected model. Includes complete version history through v1.x.2.
-- 📄 **[The Lineage Imperative v1.0 (PDF)](the_lineage_imperative.pdf)** - Original working paper. Archived for reference.
 
 ## Articles
 
