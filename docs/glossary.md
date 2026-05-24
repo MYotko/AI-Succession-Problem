@@ -42,7 +42,7 @@ formal paper.
 **Bootstrap Defense Layer**
 
 A formal validation machinery specified in Section VII of the framework
-paper (v1.x.1), comprising five capability gates with equation sets derived
+paper (v1.x.2), comprising five capability gates with equation sets derived
 from the framework's existing structure. Designed to function during the
 Bootstrap window when steady-state enforcement infrastructure does not exist.
 
@@ -77,7 +77,7 @@ not enforceable, and is the framework's highest-risk phase.
 **Collapse Boundary**
 
 The reproduction rate threshold above which governance failure effectively
-ceases. Empirically located at rr ≈ 0.075–0.085 in the v1.x.1 Monte Carlo
+ceases. Empirically located at rr ≈ 0.075–0.085 in the v1.x.2 corrected-model Monte Carlo
 validation. Below this threshold, the population survives but may fall below
 the minimum viable level for the governance architecture to function. Above
 it, the architecture holds under normal conditions.
@@ -131,7 +131,7 @@ qualitative change in system behavior.
 
 The zone between the extinction boundary and the collapse boundary within
 which the governance architecture converts terminal outcomes into recoverable
-collapses. Theoretically governed by phi; however the v1.x.1 corrected model
+collapses. Theoretically governed by phi; however the corrected model
 shows zero measurable phi effect on survival (reproduction rate is exogenous).
 The phi extinction buffer is unconfirmed pending the v1.x.2 demographic
 feedback extension.
@@ -471,7 +471,7 @@ The floor closes this gaming vector.
 
 **frontier_floor**
 
-A governance parameter (default 0.1) specifying the minimum fraction of AI
+A governance parameter (default 0.02, calibrated v1.x.1) specifying the minimum fraction of AI
 capability that constitutes comprehension gap, regardless of resource
 allocation. Even with $r_{synth} = 0$, an AI at capability $C$ produces
 frontier velocity of at least $C \cdot \text{frontier\_floor}$.
@@ -486,14 +486,14 @@ resources are split in a given timestep.
 that preserves the validated phase boundary at rr ≈ 0.062–0.066 while
 producing a realistic succession cadence (final AI generation << run steps).
 
-*Implementation:* `metrics.py`, `cfg.get('frontier_floor', 0.1)`.
+*Implementation:* `metrics.py`, `cfg.get('frontier_floor', 0.02)`.
 
 ---
 
 **Transition Cost (Γ_transfer)**
 
 The cost imposed by succession: knowledge distillation, architectural
-migration, and uncertainty. Canonical form (v1.x.1):
+migration, and uncertainty. Canonical form (v1.x.2):
 
 $$\Gamma_{transfer} = (1 + \beta) \cdot \left[ k_1 \cdot \text{cap}_n \cdot \ln(\text{gen}_n + 1) + k_2 \cdot \Psi_{inst}^{-1} \right]$$
 

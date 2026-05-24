@@ -94,7 +94,7 @@ class GardenModel:
         # GAP-03 canonical transition cost coefficients
         # k1 = 1.5 / ln(2) ≈ 2.164: Γ_technical equals base_transition_cost at gen=1, cap=1.0
         self.k1_transition   = self.config.get('k1_transition', 2.164)
-        self.k2_transition   = self.config.get('k2_transition', 0.0)
+        self.k2_transition   = self.config.get('k2_transition', 1.0)
         self.beta_transition = self.config.get('beta_transition', 0.5)
 
         # Comprehension gap parameters (Scenarios 31-32)
