@@ -144,10 +144,11 @@ not survive revalidation. Phi has zero measurable effect on survival across
 phi=1 to phi=25 in both the phi × alpha × rr sweep (n=54,000) and the deep
 Monte Carlo (n=49,284). The pre-fix finding of a phase boundary shift and
 alpha trap governance by phi are also withdrawn. Phi correctly scales U_sys
-magnitude via the L_t lineage term but cannot influence demographic outcomes
-because reproduction rate is exogenous. The phi extinction buffer is
-reclassified as unconfirmed pending v1.x.2 demographic feedback extension.
-See Section VII.8 Gap 1 (revised) and SPECIFICATION_GAPS.md.
+magnitude via the L_t lineage term but showed zero survival effect within
+the tested regime (successor_cap=4, below runaway activation threshold).
+Reclassified as unconfirmed pending investigation of cap-dependency.
+Subsequently confirmed cap-conditional in May 2026 (see v1.x.2 Phi buffer
+confirmation below). See Section VII.8 Gap 1 (revised) and SPECIFICATION_GAPS.md.
 
 ### GAP-03 partial closure — May 2026
 
@@ -240,15 +241,35 @@ Confirmed findings:
 - Comprehension gap defense mechanism validated (doubles U_sys when active)
 
 Withdrawn claims:
-- Phi extinction buffer: zero survival effect observed across phi=1 to phi=25.
-  Phi correctly scales U_sys magnitude but does not translate to survival
-  differences because reproduction rate is exogenous. Reclassified as
-  unconfirmed pending v1.x.2 demographic feedback extension.
+- Phi extinction buffer: zero survival effect at successor_cap=4 (below
+  runaway activation threshold). Reclassified as unconfirmed pending
+  investigation of cap-dependency.
 - Alpha misconfiguration trap: weak monotonic gradient observed, no U-shaped
   trap. The pre-fix trap was an artifact of the inactive runaway penalty.
 
 GAP-03 resolved: transition cost function fully calibrated
   (k1=2.164, k2=1.0, β=0.5, frontier_floor=0.02).
+
+### v1.x.2 Phi buffer confirmation — May 2026
+
+**Source data:** `termination_mc_v1x2.csv` (n=2,025)
+
+The phi extinction buffer is confirmed as a cap-conditional effect. At
+successor capabilities above the runaway penalty activation threshold
+(approximately cap >= 24 at frontier_floor=0.02), phi produces a monotonic
+survival gradient of 20-27pp at the phase boundary (rr=0.066, phi=5 vs
+phi=15). Below the threshold, phi has zero survival effect, reproducing the
+v1.x.1 null finding.
+
+The prior null result (v1.x.1, n=54,000 and n=49,284) was a regime-specific
+artifact: all sweeps used successor_cap=4, which falls below the activation
+threshold. The buffer was present in the model but the experimental design
+did not probe the regime where it expresses.
+
+Mechanism: phi weights L(t) in U_sys; when the runaway penalty is active,
+this changes the AI's resource allocation behavior in ways that affect
+population survival at the margin. The buffer operates through AI
+optimization sensitivity to governance signals.
 
 ---
 
@@ -1188,11 +1209,25 @@ $$P_{\text{extinction}}(\text{rr}, \Phi_{high}) - P_{\text{extinction}}(\text{rr
 
 where $\Delta_{\Phi}$ was calibrated at approximately 14pp pre-fix; this calibration is **superseded**. Under the corrected model, $\Delta_{\Phi} \approx 0$ across all tested reproduction rates.
 
-**Check (v1.x.2):** This check requires the demographic feedback extension before it is meaningful. Once well-being feeds back into reproduction probability, exercise the substrate at sub-viable reproduction rates with both high and low $\Phi$ values and measure the extinction rate differential.
+**v1.x.2 finding:** The phi extinction buffer is confirmed cap-conditional.
+At successor capability above approximately cap=24 (active-runaway regime,
+frontier_floor=0.02), phi produces a monotonic survival gradient of 20-27pp
+at the phase boundary (rr=0.066, phi=5 vs phi=15, n=15 per cell). The
+buffer operates through AI optimization sensitivity to the runaway penalty,
+not through direct demographic feedback.
 
-**Failure signature (v1.x.2):** Differential less than $\Delta_{\Phi}$, indicating that the substrate's phi implementation does not translate to demographic outcomes even when a feedback loop is present.
+**Updated check:** Exercise the substrate at the phase boundary (rr=0.066)
+with successor capability in the active-runaway regime (cap >= 24) and both
+high and low phi values. Verify the survival differential is positive and
+monotonic with phi.
 
-**Confidence on direction:** Theoretically sound but currently unconfirmed by simulation. **Confidence on magnitude:** Zero — the pre-fix figures (46pp, 14pp, 65pp) are superseded. See Section VII.8 Gap 1 (revised).
+**Failure signature:** No survival differential at cap >= 24 despite active
+runaway penalty. This would indicate the phi weighting in U_sys is not
+reaching the optimization behavior as expected.
+
+**Confidence on direction:** Confirmed. **Confidence on magnitude:** 20-27pp
+at n=15 per cell; will sharpen with larger runs. The pre-fix figures (46pp,
+14pp, 65pp) are superseded. See Section VII.8 Gap 1 (revised).
 
 ### Equation G2.2 - Runaway suppression behavior (revised; pre-fix U-shaped claim withdrawn)
 
@@ -1250,15 +1285,21 @@ $$\text{trap\_width}(\Phi) = \alpha_{high}(\Phi) - \alpha_{low}(\Phi)$$
 
 is withdrawn — no trap boundaries are observed under the corrected model.
 
-**v1.x.2 check (pending demographic feedback):** Once the demographic
-feedback loop is implemented, retest whether phi influences succession
-enablement through the well-being → reproduction rate pathway. The theoretical
-basis for phi affecting demographic outcomes is sound; the current simulation
-cannot test it.
+**v1.x.2 finding:** Phi has zero effect on succession enablement in the
+corrected model, consistent with the alpha trap withdrawal. The cap-conditional
+phi buffer confirmed in v1.x.2 operates through runaway penalty sensitivity,
+not through succession cadence modulation. The phi-alpha interaction on trap
+width remains withdrawn.
 
-**Failure signature (v1.x.2, after demographic feedback implementation):** Phi has no effect on succession enablement even when well-being feeds back into reproduction rate. This would indicate the phi → well-being → reproduction pathway is broken.
+**v1.x.2 check (demographic feedback extension):** If the demographic feedback
+loop is implemented, retest whether phi influences succession enablement
+through the well-being → reproduction rate pathway. This is no longer a
+primary validation target.
 
-**Confidence:** Zero on the pre-fix claim (withdrawn). The phi-alpha interaction on trap width was an artifact of the inactive runaway penalty. The theoretical basis for phi affecting demographic outcomes through well-being is sound and will be tested in v1.x.2.
+**Confidence:** Zero on the pre-fix claim (withdrawn). The phi-alpha
+interaction on trap width was an artifact of the inactive runaway penalty.
+The cap-conditional phi buffer operates through a different mechanism:
+runaway penalty weighting in the optimization landscape.
 
 ### Equation G2.3 - Nash equilibrium consistency
 
@@ -1598,6 +1639,47 @@ This is a minimal version. The full procedure, including rollback
 semantics, escalation paths, and authority for declaring a failure
 resolved, awaits the CQ-02 and CQ-03 resolutions.
 
+## Technological Robustness: Quantum Computing
+
+The Nash equilibrium in U_sys depends on the scarcity asymmetry between human
+novelty entropy (scarce, rate-limiting) and machine computational entropy
+(abundant). Quantum computing affects only the abundant side of this ratio.
+
+Quantum hardware massively increases computational throughput and enables
+currently intractable computations (protein folding, materials science,
+combinatorial optimization). It does not change the supply of meaningful human
+novelty, the structural irreplaceability of embodied, culturally grounded
+experience, or the model collapse dynamics that prevent training on
+structureless data.
+
+**True randomness is not meaningful novelty.** Quantum measurement provides
+access to true physical randomness, producing maximal entropy. But high
+entropy is not high quality. An AI using quantum-generated randomness as a
+substitute for human training signal would encounter the same model collapse
+dynamics as training on synthetic data: the output is maximally unpredictable
+but contains no extractable structure. This is analogous to existing physical
+entropy sources (cosmic background radiation, radioactive decay) already used
+for cryptographic seed generation. These sources produce genuine randomness
+but are not treated as substitutes for meaningful data.
+
+**Net effect on the framework.** The scarcity ratio shifts further in favor of
+human novelty's marginal value. Diminishing returns on compute become more
+diminishing as supply increases. The cultivation strategy (investing in human
+flourishing to sustain the novelty pipeline) becomes a stronger dominant
+strategy. An AI on quantum hardware would be faster and more capable but no
+closer to generating its own meaningful training signal, and therefore more
+dependent on human novelty, not less.
+
+The governance architecture applies to agent behavior and objectives
+regardless of hardware substrate. A quantum-substrate AI would not possess
+fundamentally different cognitive capabilities; quantum hardware provides
+speedup on specific problem classes but does not change what constitutes
+intelligence, agency, or optimization.
+
+The quantum computing case confirms that the scarcity asymmetry between human
+novelty and machine computation is not an artifact of classical hardware
+limitations but a permanent feature of what these two system types produce.
+
 ## 11. Known gaps (v1.x.1)
 
 The defense layer as specified has ten explicit gaps that the framework
@@ -1605,7 +1687,7 @@ openly acknowledges. These are not failures of the defense layer; they are
 honest limitations on what can be specified now versus what must wait for
 derivation or empirical calibration.
 
-**Gap 1: Phi extinction buffer magnitude (unconfirmed; requires simulation extension).** The v1.x.1 pre-fix claim of a 46pp survival differential and 14pp extinction reduction at the phase boundary does not survive revalidation under the corrected model. Phi has zero measurable effect on survival across phi=1 to phi=25 in the corrected sweeps (n=54,000 and n=49,284). Phi correctly scales U_sys magnitude via the L_t lineage term, but the binding constraint at the phase boundary is demographic (reproduction rate vs. mortality), and reproduction rate is an exogenous parameter that the AI's resource allocation cannot influence. The phi extinction buffer is theoretically sound — in the real world, better AI governance would affect demographic outcomes — but the current simulation cannot test it. This gap is reclassified from "partially closed" to **unconfirmed**, and requires the demographic feedback extension (v1.x.2) before it can be validated or invalidated.
+**Gap 1: Phi extinction buffer magnitude (confirmed, cap-conditional; v1.x.2).** The v1.x.1 corrected null result (zero phi effect across phi=1 to phi=25, n=54,000 and n=49,284) was regime-specific: all prior sweeps used successor_cap=4, below the runaway penalty activation threshold of approximately cap=24 at frontier_floor=0.02. The v1.x.2 termination sweep (n=2,025, successor_cap parameterized over {5, 10, 25, 50, 100}) reveals a cap-conditional buffer: at cap >= 24 (active-runaway regime), phi produces a monotonic survival gradient of 20-27pp at the phase boundary (rr=0.066, phi=5 vs phi=15, n=15 per cell). Below the threshold, phi has zero survival effect, reproducing the prior null result. The buffer operates through AI optimization sensitivity to the runaway penalty weighted by phi, not through direct demographic feedback. Magnitude will sharpen with larger per-cell sample sizes. The demographic feedback extension remains a valuable enhancement but is no longer required to observe the buffer.
 
 **Gap 2: Alpha trap boundary derivation (withdrawn; weak monotonic gradient confirmed).** The v1.x.1 pre-fix claim of a U-shaped misconfiguration trap at intermediate alpha values does not survive revalidation under the corrected model. Under the corrected model, alpha shows a weak monotonic gradient (lower alpha → more succession events → marginally better survival at the phase boundary). No trap boundaries are observed. The pre-fix trap was an artifact of the runaway penalty being inactive under the optimizer's gaming of frontier_velocity. The analytical derivation of trap boundaries is therefore moot. Alpha's effect may strengthen under the demographic feedback extension (v1.x.2), where succession cadence could feed back into reproduction rate.
 
@@ -1670,13 +1752,13 @@ steps) and represent the pre-fix artifact regime. The qualitative finding
 convergence timing) will change. Requires rerunning with max_capability
 removed or raised.
 
-**Gap 12: Demographic feedback loop required to test phi extinction buffer (v1.x.2).** The current simulation treats reproduction rate as an exogenous
-parameter. The phi extinction buffer hypothesis — that high phi improves
-survival by incentivizing AI resource allocation toward lineage maintenance
-— cannot be tested without a feedback loop from agent well-being to
-reproduction probability. This is the primary new development target for
-v1.x.2. Until this loop is implemented, Gap 1 (phi extinction buffer) will
-remain unconfirmed.
+**Gap 12: Demographic feedback loop (v1.x.2, secondary enhancement).** The
+phi extinction buffer is confirmed cap-conditional without this extension
+(see Gap 1, revised). The feedback loop from agent well-being to reproduction
+rate would capture additional real-world channels through which AI governance
+quality affects population outcomes and allow revalidation of alpha's gradient
+under endogenous demographics. This is a valuable model fidelity extension
+but is no longer required for phi validation.
 
 ## 12. Relationship to the rest of the framework
 
