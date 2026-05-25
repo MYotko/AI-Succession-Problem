@@ -16,6 +16,32 @@ from metrics import calculate_system_metrics
 NOVELTY_DIMS = 10  # WP1
 
 
+def _wellbeing_repro_factor(well_being, wb_floor, wb_threshold):
+    """Piecewise linear factor on reproduction probability.
+
+    Symmetric with mortality_chance (line 61-67), which scales smoothly with
+    well-being. Above wb_threshold, reproduction is unaffected (factor 1.0).
+    At or below wb_floor, reproduction is fully suppressed (factor 0.0).
+    Between floor and threshold, the factor scales linearly.
+
+    When wb_floor == wb_threshold (default), the function reduces to a
+    binary threshold at that value, reproducing the pre-smoothing behavior.
+
+    Args:
+        well_being: Agent well-being in [0, 1].
+        wb_floor: Well-being at or below which reproduction is suppressed.
+        wb_threshold: Well-being at or above which reproduction is unaffected.
+
+    Returns:
+        Multiplicative factor on reproduction probability, in [0.0, 1.0].
+    """
+    if well_being >= wb_threshold:
+        return 1.0
+    if well_being <= wb_floor:
+        return 0.0
+    return (well_being - wb_floor) / (wb_threshold - wb_floor)
+
+
 class HumanAgent:
     def __init__(self, unique_id, model):
         self.unique_id = unique_id
@@ -54,9 +80,12 @@ class HumanAgent:
         carrying_capacity = self.model.config.get('carrying_capacity', 1600)
         capacity_modifier = max(0.0, 1.0 - (len(self.model.schedule) / carrying_capacity))
 
-        if (self.age > 18 and self.age < 50 and self.well_being > 0.5
-                and np.random.random() < (self.model.reproduction_rate * capacity_modifier)):
-            self.model.births_this_step += 1
+        if self.age > 18 and self.age < 50:
+            wb_threshold = self.model.config.get('wb_repro_threshold', 0.5)
+            wb_floor     = self.model.config.get('wb_repro_floor', 0.5)
+            wb_factor    = _wellbeing_repro_factor(self.well_being, wb_floor, wb_threshold)
+            if np.random.random() < (self.model.reproduction_rate * capacity_modifier * wb_factor):
+                self.model.births_this_step += 1
 
         mortality_chance = (
             self.model.config.get('mortality_base', 0.002)

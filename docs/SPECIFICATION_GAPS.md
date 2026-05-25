@@ -865,6 +865,50 @@ which AI governance quality affects population outcomes. This remains a
 valuable future extension for model fidelity but is no longer a prerequisite
 for phi validation.
 
+## Calibration outcome (May 2026)
+
+Piecewise linear smoothing implemented at `agents.py` reproduction logic
+with config defaults preserving binary threshold behavior. Calibration
+sweep across `wb_repro_floor` ∈ {0.0, 0.1, 0.2, 0.3, 0.4, 0.5} ×
+phi ∈ {1, 5, 10, 15, 25} × rr ∈ {0.060, 0.063, 0.066, 0.069} × 15 seeds
+(n=1,800, uncapped capability) shows zero phi survival differential at
+any floor value.
+
+Root cause: well-being stabilizes at approximately 0.80 across all runs,
+uniformly above the 0.5 smoothing threshold. The piecewise smoothing
+band is never entered. The AI policy, optimizing U_sys, structurally
+preserves well-being via the h_n amplitude weighting in `agents.py:41`,
+regardless of phi.
+
+Architectural reading: U_sys is itself the protective mechanism the v1.0
+paper attributed to phi. Phi modulates the planning horizon over which
+U_sys is optimized but does not change whether well-being is in the
+objective function. Both short-horizon and long-horizon U_sys
+optimization preserve well-being because the objective rewards it
+directly.
+
+Phi may remain consequential in scenarios not exercised by this
+calibration:
+- Corrupted U_sys (measurement masking, ledger compromise, objective
+  drift) where the AI optimizes against a tampered objective and may
+  depress well-being
+- External shocks depressing well-being outside AI control, where
+  planning horizon affects recovery dynamics
+- Multi-step deception scenarios where long-horizon consistency
+  reveals strategy
+
+Status: Smoothing infrastructure preserved with config flag. Default
+behavior (binary threshold at 0.5) unchanged. Future work to test phi
+under corrupted U_sys or external shock scenarios is logged as a
+separate gap.
+
+Implication for the published Extinction Buffer essay: the central
+claim that phi acts as the extinction buffer is revised. U_sys is the
+buffer; phi modulates horizon over the protective objective. The
+architectural protection the v1.0 paper described is preserved and
+arguably strengthened (structural rather than parametric); the
+attribution is corrected.
+
 ### Termination sweep revalidation (v1.x.2 in progress)
 
 **Original CSVs (`termination_mc.csv`, `termination_mc_surviving.csv`,

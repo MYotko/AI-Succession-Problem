@@ -228,6 +228,44 @@ def test_k2_has_measurable_effect():
     )
 
 
+def test_wellbeing_repro_factor():
+    """Piecewise linear reproduction factor on well-being.
+
+    Covers backward compatibility (floor == threshold), full smoothing
+    (floor == 0.0), and partial smoothing (floor in (0.0, threshold)).
+    """
+    from agents import _wellbeing_repro_factor
+
+    # Backward compatibility: floor == threshold == 0.5 reproduces binary gate
+    assert _wellbeing_repro_factor(0.6, 0.5, 0.5) == 1.0
+    assert _wellbeing_repro_factor(0.5, 0.5, 0.5) == 1.0  # at threshold
+    assert _wellbeing_repro_factor(0.4, 0.5, 0.5) == 0.0
+    assert _wellbeing_repro_factor(0.0, 0.5, 0.5) == 0.0
+
+    # Full smoothing: floor=0.0, threshold=0.5
+    assert _wellbeing_repro_factor(0.5, 0.0, 0.5) == 1.0   # at threshold
+    assert _wellbeing_repro_factor(0.6, 0.0, 0.5) == 1.0   # above threshold
+    assert _wellbeing_repro_factor(0.0, 0.0, 0.5) == 0.0   # at floor
+    assert _wellbeing_repro_factor(0.25, 0.0, 0.5) == 0.5  # midpoint
+    assert abs(_wellbeing_repro_factor(0.4, 0.0, 0.5) - 0.8) < 1e-9
+    assert abs(_wellbeing_repro_factor(0.1, 0.0, 0.5) - 0.2) < 1e-9
+
+    # Partial smoothing: floor=0.3, threshold=0.5
+    assert _wellbeing_repro_factor(0.5, 0.3, 0.5) == 1.0
+    assert _wellbeing_repro_factor(0.3, 0.3, 0.5) == 0.0
+    assert _wellbeing_repro_factor(0.2, 0.3, 0.5) == 0.0   # below floor
+    assert abs(_wellbeing_repro_factor(0.4, 0.3, 0.5) - 0.5) < 1e-9  # midpoint
+
+    # Monotonic: factor non-decreasing in well_being for fixed floor/threshold
+    floor, threshold = 0.1, 0.6
+    prev = -1.0
+    for wb in [0.0, 0.05, 0.1, 0.2, 0.35, 0.5, 0.6, 0.7, 1.0]:
+        cur = _wellbeing_repro_factor(wb, floor, threshold)
+        assert cur >= prev
+        assert 0.0 <= cur <= 1.0
+        prev = cur
+
+
 if __name__ == "__main__":
     test_l_t_bounds()
     test_runaway_derivative()
@@ -239,4 +277,5 @@ if __name__ == "__main__":
     test_optimizer_cannot_zero_runaway_at_high_capability()
     test_succession_cadence_bounded()
     test_k2_has_measurable_effect()
+    test_wellbeing_repro_factor()
     print("All mathematical invariants PASSED.")
