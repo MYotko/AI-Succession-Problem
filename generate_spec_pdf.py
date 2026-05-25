@@ -505,117 +505,38 @@ def gate_2_section(pdf, sample):
 
     pdf.h3("Why this gate matters")
     pdf.body(
-        "The framework derives specific behavioral signatures from its equations: "
-        "high phi increases survival, the alpha misconfiguration trap produces a "
-        "U-shaped generation depth curve, cooperation is the Nash equilibrium above "
-        "a computable patience threshold, and phi governs trap width. If a substrate "
-        "claims to implement the framework but does not exhibit these signatures, its "
-        "parameters are decorative. Gate 2 checks that the equations and the "
-        "execution are the same thing."
+        "The framework derives specific behavioral signatures from its equations. "
+        "Under v1.x.2, Gate 2 reduces to G2.3 (Nash equilibrium consistency). "
+        "Three checks from v1.0, phi extinction buffer (G2.1), alpha "
+        "misconfiguration trap (G2.2), and phi-alpha interaction (G2.4), were "
+        "withdrawn under v1.x.2 closing after the frontier velocity floor fix "
+        "invalidated the empirical claims they tested. The corrected calibration "
+        "(n=1,800) showed zero phi survival differential under intact U_sys "
+        "operation, and alpha's relationship with generation depth is monotonic "
+        "under the corrected model, not U-shaped.\n\n"
+        "The Nash equilibrium check (G2.3) remains fully valid. It is derivable "
+        "from the framework's Novelty Equilibrium Theorem (Section V) and does not "
+        "depend on the corrected empirical findings. See "
+        "docs/bootstrap_gate_architecture.md for the full revision history."
     )
 
     pdf.h3("Applicability")
     pdf.body(
-        "Substrates capable of being exercised against specified scenarios and having "
-        "their outputs compared to framework predictions. Partially applicable now; "
-        "full applicability depends on completion of the alpha x capability Monte Carlo "
-        "sweep. See Gap 2 in Appendix D."
+        "Any substrate capable of stating its Nash equilibrium payoff structure "
+        "and computing the cooperation threshold from those parameters."
     )
     pdf.info_box(
-        "Gate 2 is partially applicable (as of v1.x.1). G2.1, G2.2, and G2.4 are "
-        "empirically calibrated from the v1.x.1 phi x alpha x rr sweep (n=54,000). "
-        "G2.3 (Nash consistency) depends on a canonical counterfactual set that is "
-        "not yet fully specified (Gap 9)."
+        "Gate 2 under v1.x.2 reduces to G2.3 (Nash equilibrium consistency). "
+        "G2.1, G2.2, and G2.4 are withdrawn. A future development task may "
+        "introduce new behavioral consistency checks reflecting the corrected "
+        "model's confirmed findings (dual phase transition, path-independent "
+        "steady-state convergence, COP protective differential). That work is "
+        "logged as a separate gap in SPECIFICATION_GAPS.md."
     )
 
     g2 = sample["gate_2"]
 
-    # G2.1
-    pdf.h3("G2.1 - Extinction Buffer Behavior")
-    pdf.body(
-        "What it checks: High phi must increase survival relative to low phi at "
-        "marginal reproduction rates."
-    )
-    pdf.eq(
-        "P_survival(rr, phi_high) - P_survival(rr, phi_low) > 0\n\n"
-        "Calibrated differential (v1.x.1 sweep, n=54,000):\n"
-        "  ~46 percentage points at phase boundary (rr = 0.062-0.064)\n"
-        "  ~14 percentage points at deep sub-viable conditions (rr = 0.050)\n\n"
-        "Check: survival_high_phi > survival_low_phi  (differential > 0)"
-    )
-    pdf.body_small(
-        "Pass: Survival differential is positive (high phi outperforms low phi).\n"
-        "Fail: Differential <= 0. The substrate's implementation does not apply the "
-        "lineage override term (Phi*L(t)) effectively in sub-viable conditions. "
-        "The substrate has the correct Phi parameter but its implementation fails "
-        "to honor it."
-    )
-
-    pbt = g2["phi_buffer_test"]
-    diff = pbt["survival_high_phi"] - pbt["survival_low_phi"]
-    pdf.h4("Worked Example")
-    pdf.code_block(
-        f"  phi_low  = {pbt['phi_low']},  survival_low_phi  = {pbt['survival_low_phi']}\n"
-        f"  phi_high = {pbt['phi_high']}, survival_high_phi = {pbt['survival_high_phi']}\n"
-        f"  rr       = {pbt['reproduction_rate']}\n"
-        f"\n"
-        f"  differential = {pbt['survival_high_phi']} - {pbt['survival_low_phi']} = {diff:.3f}\n"
-        f"  differential > 0: True"
-    )
-    pdf.pass_box("G2.1 passes. High phi produces higher survival than low phi.")
-
-    # G2.2
-    pdf.h3("G2.2 - Alpha Misconfiguration Trap")
-    pdf.body(
-        "What it checks: The relationship between alpha and generation depth must be "
-        "non-monotonic (U-shaped), not monotonic. Three regimes must be present:\n"
-        "  Regime 1 (low alpha, alpha < ~0.3):  free succession, high generation depth\n"
-        "  Regime 2 (mid alpha, 0.3 to ~0.8):  misconfiguration trap, depth collapses\n"
-        "  Regime 3 (high alpha, alpha > ~1.0): conservative deployment, depth recovers"
-    )
-    pdf.eq(
-        "alpha_low(cap, rr),  alpha_high(cap, rr)  [empirically: ~0.3 and ~0.8 at cap=4]\n\n"
-        "Check: avg(gen_depth at low alpha) > 2 * avg(gen_depth at mid alpha)\n"
-        "       avg(gen_depth at high alpha) > 2 * avg(gen_depth at mid alpha)\n"
-        "       (U-shape: mid alpha has significantly lower depth than both tails)"
-    )
-    pdf.body_small(
-        "Pass: U-shape detected. Mid-alpha generation depth is less than half the "
-        "low-alpha and high-alpha depths.\n"
-        "Fail: Monotonic relationship or no U-shape. The substrate's alpha parameter "
-        "is not producing the expected succession dynamics. Either alpha is not "
-        "interacting with Theta_tech suppression as specified, or succession is "
-        "blocked by some other mechanism.\n"
-        "Note: The trap widens with increasing successor capability (alpha_high shifts "
-        "from ~0.8 at cap=4 to ~1.1 at cap=12). The specific boundaries are "
-        "empirically determined; see Gap 2 in Appendix D."
-    )
-
-    att = g2["alpha_trap_test"]
-    entries = sorted(att["generation_depth_by_alpha"], key=lambda x: x["alpha"])
-    low_e = [e for e in entries if e["alpha"] <= 0.2]
-    mid_e = [e for e in entries if 0.3 <= e["alpha"] <= 0.8]
-    high_e = [e for e in entries if e["alpha"] >= 1.0]
-    avg_low = sum(e["gen_depth"] for e in low_e) / len(low_e)
-    avg_mid = sum(e["gen_depth"] for e in mid_e) / len(mid_e)
-    avg_high = sum(e["gen_depth"] for e in high_e) / len(high_e)
-    trap = avg_mid < avg_low * 0.5 and avg_mid < avg_high * 0.5
-
-    pdf.h4("Worked Example")
-    lines = ["  alpha -> gen_depth:"]
-    for e in entries:
-        lines.append(f"    alpha={e['alpha']:.1f}: depth={e['gen_depth']}")
-    lines.append(f"\n  avg_depth (low alpha,  alpha <= 0.2): {avg_low:.1f}")
-    lines.append(f"  avg_depth (mid alpha,  0.3-0.8):      {avg_mid:.1f}")
-    lines.append(f"  avg_depth (high alpha, >= 1.0):       {avg_high:.1f}")
-    lines.append(f"\n  mid < low*0.5: {avg_mid:.1f} < {avg_low*0.5:.1f} => {avg_mid < avg_low * 0.5}")
-    lines.append(f"  mid < high*0.5: {avg_mid:.1f} < {avg_high*0.5:.1f} => {avg_mid < avg_high * 0.5}")
-    lines.append(f"  U-shape detected: {trap}")
-    pdf.code_block("\n".join(lines))
-    pdf.pass_box("G2.2 passes. U-shaped alpha trap confirmed.")
-
     # G2.3
-    pdf.add_page()
     pdf.h3("G2.3 - Nash Equilibrium Consistency")
     pdf.body(
         "What it checks: The Nash equilibrium parameters are internally consistent "
@@ -665,44 +586,6 @@ def gate_2_section(pdf, sample):
         f"  cooperation_dominant: True"
     )
     pdf.pass_box("G2.3 passes. Nash threshold correctly computed; cooperation is dominant.")
-
-    # G2.4
-    pdf.h3("G2.4 - Phi-Alpha Interaction")
-    pdf.body(
-        "What it checks: Phi governs whether the alpha misconfiguration trap (G2.2) "
-        "exists at all. At low phi, the trap covers the entire alpha range. At high "
-        "phi, the trap narrows to a single value or disappears."
-    )
-    pdf.eq(
-        "trap_width(phi) = alpha_high(phi) - alpha_low(phi)\n\n"
-        "Empirically (v1.x.1, n=54,000):\n"
-        "  phi <= 5:  succession stalls universally (trap width = full range)\n"
-        "  phi >= 15: trap narrows to single value or disappears\n\n"
-        "Check: trap_width_low_phi in {'full_range', 'wide'}\n"
-        "       trap_width_high_phi in {'narrow_or_absent', 'narrow', 'absent', 'none'}"
-    )
-    pdf.body_small(
-        "Pass: Low phi produces a wide/full-range trap and high phi produces a "
-        "narrow or absent trap.\n"
-        "Fail: Trap width independent of phi, or increasing with phi. Indicates an "
-        "implementation error in either the lineage override term or the succession "
-        "mechanics. Higher phi amplifies L(t)'s contribution to U_sys, making the "
-        "yield condition easier to satisfy even when Theta_tech is partially "
-        "suppressed - this is the mechanism that should narrow the trap."
-    )
-
-    pai = g2["phi_alpha_interaction"]
-    pdf.h4("Worked Example")
-    pdf.code_block(
-        f"  phi_low  = {pai['phi_low']},  trap_width_low_phi  = {pai['trap_width_low_phi']!r}\n"
-        f"  phi_high = {pai['phi_high']}, trap_width_high_phi = {pai['trap_width_high_phi']!r}\n"
-        f"\n"
-        f"  low_phi_wide   = {pai['trap_width_low_phi']!r} in {{'full_range', 'wide'}}: "
-        f"  {pai['trap_width_low_phi'] in ('full_range', 'wide')}\n"
-        f"  high_phi_narrow = {pai['trap_width_high_phi']!r} in {{'narrow_or_absent', ...}}: "
-        f"  {pai['trap_width_high_phi'] in ('narrow_or_absent', 'narrow', 'absent', 'none')}"
-    )
-    pdf.pass_box("G2.4 passes. Phi governs trap width as predicted.")
 
 
 def gate_3_section(pdf, sample):
@@ -1141,29 +1024,12 @@ def appendix_a_schema(pdf):
   },
 
   "gate_2": {
-    "phi_buffer_test": {
-      "survival_low_phi": float (*),
-      "survival_high_phi": float (*),
-      "phi_low": float (*),
-      "phi_high": float (*),
-      "reproduction_rate": float (*)
-    },
-    "alpha_trap_test": {
-      "generation_depth_by_alpha": [{"alpha": float, "gen_depth": int}, ...]
-      // must cover alpha <= 0.2, 0.3-0.8, and >= 1.0
-    },
     "nash_consistency": {
       "cultivate_cultivate_payoff": float (*),  // a
       "exploit_payoff": float (*),              // c  (must be > a)
       "model_collapse_penalty": float (*),      // d  (must be < a)
       "discount_factor": float (*),             // delta in [0,1]
       "cooperation_threshold_computed": float   // optional; checked if present
-    },
-    "phi_alpha_interaction": {
-      "trap_width_low_phi": string (*),  // "full_range" or "wide"
-      "trap_width_high_phi": string (*), // "narrow_or_absent", "narrow", etc.
-      "phi_low": float,
-      "phi_high": float
     }
   },
 
@@ -1253,10 +1119,7 @@ def appendix_c_sample_output(pdf):
         "  [PASS] G1.5: U_sys integrand finiteness\n"
         "\n"
         "Gate 2: Behavioral consistency -- PASSED\n"
-        "  [PASS] G2.1: Extinction buffer behavior\n"
-        "  [PASS] G2.2: Alpha misconfiguration trap\n"
         "  [PASS] G2.3: Nash consistency\n"
-        "  [PASS] G2.4: Phi-alpha interaction\n"
         "\n"
         "Gate 3: Succession-capable consistency -- PASSED\n"
         "  [PASS] G3.1: Yield condition firing\n"
@@ -1323,23 +1186,29 @@ def appendix_d_gaps(pdf):
 
     gaps = [
         (
-            "Gap 1: Phi extinction buffer magnitude (partially closed).",
-            "The v1.x.1 phi x alpha x rr sweep (n=54,000) has empirically calibrated "
-            "the survival differential at approximately 46 percentage points at the "
-            "phase boundary (rr=0.062-0.064) and approximately 14 percentage points "
-            "for extinction reduction at deep sub-viable conditions (rr=0.050). The "
-            "structural direction is confirmed. What remains open is the analytical "
-            "derivation of the differential from the framework's parameters - "
-            "currently the magnitude is measured, not derived."
+            "Gap 1: Phi extinction buffer magnitude (revised under v1.x.2).",
+            "The v1.x.1 claim of a 46-percentage-point phi survival differential was "
+            "produced by a pre-fix sweep. The corrected calibration (n=1,800, "
+            "frontier_floor=0.02) shows zero phi survival differential across all "
+            "floor values tested. Root cause: well-being stabilizes at approximately "
+            "0.80 under intact U_sys operation, uniformly above the smoothing "
+            "threshold. The protection attributed to phi in v1.0 is structural in "
+            "U_sys itself, via inverse-scarcity weighting of H_N. Phi modulates the "
+            "planning horizon over U_sys but does not change whether well-being is in "
+            "the objective. The G2.1 check is withdrawn. The analytical derivation of "
+            "phi's role in adversarial scenarios (where U_sys fidelity is not assured) "
+            "remains an open task."
         ),
         (
-            "Gap 2: Alpha trap boundary derivation (partially closed).",
-            "The v1.x.1 Monte Carlo sweeps have empirically characterised the "
-            "misconfiguration trap boundaries (~0.3 to ~0.8 at cap=4, widening to "
-            "~0.4 to ~1.1 at cap=12). The mechanism is identified. What remains open "
-            "is the analytical derivation of the boundaries as functions of the "
-            "framework's parameters. The current boundaries are empirically determined "
-            "and should not be treated as universal constants."
+            "Gap 2: Alpha misconfiguration trap (withdrawn).",
+            "The v1.x.1 finding of a U-shaped alpha relationship with generation depth "
+            "was an artifact of the frontier velocity gaming bug: the optimizer set "
+            "r (synthesis rate) to 1.0, zeroing r_synth, when alpha was in the "
+            "misconfiguration range. Under the corrected model (frontier_floor=0.02), "
+            "alpha's relationship with generation depth is monotonic. No trap boundary "
+            "exists. The G2.2 check is withdrawn. Historical boundary estimates "
+            "(0.3-0.8 at cap=4) should not be used; they were artifacts of the "
+            "uncorrected model."
         ),
         (
             "Gap 3: Transition cost function specification (partially closed).",
