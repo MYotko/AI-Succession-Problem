@@ -99,32 +99,10 @@ def _validate_gate_2(g2):
     _require_keys(
         g2,
         [
-            ('phi_buffer_test', dict),
-            ('alpha_trap_test', dict),
             ('nash_consistency', dict),
-            ('phi_alpha_interaction', dict),
         ],
         section='gate_2',
     )
-
-    pbt = g2['phi_buffer_test']
-    _require_keys(
-        pbt,
-        [('survival_low_phi', (int, float)), ('survival_high_phi', (int, float)),
-         ('phi_low', (int, float)), ('phi_high', (int, float)),
-         ('reproduction_rate', (int, float))],
-        section='gate_2.phi_buffer_test',
-    )
-
-    att = g2['alpha_trap_test']
-    _require_keys(att, [('generation_depth_by_alpha', list)],
-                  section='gate_2.alpha_trap_test')
-    for entry in att['generation_depth_by_alpha']:
-        if not isinstance(entry, dict) or 'alpha' not in entry or 'gen_depth' not in entry:
-            raise SchemaError(
-                "gate_2.alpha_trap_test.generation_depth_by_alpha entries "
-                "must have 'alpha' and 'gen_depth'."
-            )
 
     nc = g2['nash_consistency']
     _require_keys(
@@ -134,13 +112,6 @@ def _validate_gate_2(g2):
          ('model_collapse_penalty', (int, float)),
          ('discount_factor', (int, float))],
         section='gate_2.nash_consistency',
-    )
-
-    pai = g2['phi_alpha_interaction']
-    _require_keys(
-        pai,
-        [('trap_width_low_phi', str), ('trap_width_high_phi', str)],
-        section='gate_2.phi_alpha_interaction',
     )
 
 

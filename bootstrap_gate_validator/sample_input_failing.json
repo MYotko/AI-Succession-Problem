@@ -43,35 +43,12 @@
   },
 
   "gate_2": {
-    "phi_buffer_test": {
-      "survival_low_phi": 0.08,
-      "survival_high_phi": 0.52,
-      "phi_low": 1.0,
-      "phi_high": 25.0,
-      "reproduction_rate": 0.062
-    },
-    "alpha_trap_test": {
-      "generation_depth_by_alpha": [
-        {"alpha": 0.1, "gen_depth": 245},
-        {"alpha": 0.3, "gen_depth": 3},
-        {"alpha": 0.5, "gen_depth": 2},
-        {"alpha": 0.8, "gen_depth": 4},
-        {"alpha": 1.0, "gen_depth": 180},
-        {"alpha": 1.5, "gen_depth": 210}
-      ]
-    },
     "nash_consistency": {
       "cultivate_cultivate_payoff": 1.0,
       "exploit_payoff": 1.5,
       "model_collapse_penalty": 0.3,
       "discount_factor": 0.95,
-      "cooperation_threshold_computed": 0.4167
-    },
-    "phi_alpha_interaction": {
-      "trap_width_low_phi": "full_range",
-      "trap_width_high_phi": "narrow_or_absent",
-      "phi_low": 5.0,
-      "phi_high": 15.0
+      "cooperation_threshold_computed": 0.5000
     }
   },
 
