@@ -6,6 +6,8 @@ URL: https://yotko.substack.com/p/the-extinction-buffer
 
 ---
 
+*Note (May 2026, v1.x.2): The v1.0 framing of phi as the extinction buffer is revised in this essay. The protective mechanism the original simulation attributed to phi is more accurately attributed to U_sys itself. Phi modulates the planning horizon over U_sys but does not change whether well-being is in the objective function. The architectural claim is strengthened (structural protection, not parametric tuning); the attribution is corrected. See the revised central section below and SPECIFICATION_GAPS.md for the calibration data behind the revision.*
+
 # The Extinction Buffer
 
 ### What 91,950 simulations revealed about the boundary between recoverable failure and permanent loss, and why the difference looks exactly like something we've seen before.
@@ -83,13 +85,21 @@ The answer is in a parameter the formal paper calls phi, the entropic coupling c
 
 Phi is the Delta Commission. It is the framework’s version of the institutional commitment to the fifty-year view. It is the parameter that says: we build the secondary dikes not because we expect the primary barrier to fail, but because if it does,*we intend to still be here afterward*.
 
-The simulation measures phi’s effect with precision. Across 54,000 runs varying phi, alpha, and reproduction rate simultaneously, with multi-generational succession dynamics enabled:
+The v1.0 simulation appeared to measure phi’s protective effect with precision. Across 54,000 runs varying phi, alpha, and reproduction rate simultaneously, with multi-generational succession dynamics enabled, high phi appeared to increase survival by up to 46 percentage points at the phase boundary. At phi = 1, survival sat at 8 percent. At phi = 25, it reached 52 percent. Same conditions. Same storm. Different depth behind the wall.
 
-At the phase boundary with reproduction rates of 0.062 to 0.064, where the difference between survival and collapse is determined by governance, high phi increases survival by up to 46 percentage points compared to low phi. At phi = 1 (short-term optimization), survival at the phase boundary is 8 percent. At phi = 25 (long-term commitment), survival is 52 percent. Same conditions. Same storm. Different depth behind the wall.
+That result did not survive revalidation under the corrected model. A subsequent 1,800-run calibration sweep, covering phi values from 1 to 25 across multiple reproduction rates at the phase boundary, showed zero survival differential attributable to phi. The secondary dikes existed in every run regardless of the Delta Commission’s mandate.
 
-But phi does something the Delta Works analogy alone wouldn’t predict. It doesn’t just buffer within the existing boundary zone. It moves the boundary itself. The 50-percent survival crossing, the point at which a civilization has even odds of making it through, shifts from a reproduction rate of approximately 0.064 at low phi to approximately 0.062 at high phi. High phi extends the survivable region into conditions that would be terminal without it. The framework’s version of the Delta Commission didn’t just build better walls behind the primary barriers, it expanded the territory within which survival was possible.
+The corrected finding is not that the protection is absent. It is that the protection was never in phi. The secondary dikes come from somewhere else, and the v1.x.2 calibration work clarifies where.
 
-At the deepest sub-viable conditions, reproduction rates so low that no configuration produces survival, phi still matters. It reduces extinction rates by 14 percentage points, converting terminal outcomes into collapses. The civilization still fails, but it fails as a diminished state rather than as a zero. The rubble contains the seeds of regrowth.
+The framework’s utility function, U_sys, includes a term that weights human novelty output. The weighting is not static: it rises when human novelty is scarce and falls when it is abundant. This means any AI optimizing U_sys, regardless of how short its planning horizon, has structural incentive to preserve the conditions under which humans generate novelty, which is to say, to preserve human well-being. Not because it is instructed to. Because the objective function rewards it directly.
+
+This is not a subtle effect. It is load-bearing. The calibration showed well-being staying near 0.80 across every run, at every phi value, at every point near the phase boundary. Not because phi was high. Not because any particular parameter setting protected it. Because the AI, whichever phi it was given, was optimizing an objective that penalizes well-being collapse.
+
+Phi’s role in this architecture is real but narrower than the original framing suggested. Phi modulates the planning horizon over which U_sys is optimized. A high-phi AI thinks further ahead, weights long-run civilizational health more heavily against immediate output. A low-phi AI discounts the future more steeply. Both preserve well-being in the baseline case because well-being is in the objective function regardless of horizon.
+
+The Delta Commission in this framework is not phi. The Delta Commission is U_sys.
+
+Phi’s specific contribution becomes visible in conditions the current calibration did not test: a corrupted objective function where the AI is optimizing against a tampered U_sys and may depress well-being in the process; external shocks that push well-being below the reproduction threshold despite the AI’s best efforts; multi-step deception scenarios where long-horizon consistency reveals strategic intent. In those conditions, how far ahead the AI plans may still determine whether recovery is possible. But under intact framework operation, phi is a horizon parameter, and the structural protection the original essay attributed to it belongs to the objective function it optimizes over.
 
 ---
 ### The flood gate that jammed
@@ -123,30 +133,32 @@ This is the finding I didn’t expect, and it carries a warning that extends bey
 ---
 ### The gate and the depth
 
-There is one more finding, and it connects the flood gate to the depth behind the wall in a way my theory did not predict, but that my intuition did.
+There is one more finding, and it connects the flood gate to the depth behind the wall in a way the corrected analysis clarifies.
 
-Phi, the long-term commitment parameter, the Delta Commission, governs whether the jammed gate matters.
+The original essay argued that phi governed whether the jammed gate produced survivable or terminal outcomes: at low phi, succession stalled universally; at high phi, the jam zone narrowed; phi buffered against internal misconfiguration as well as external stress. That argument rested on the same pre-fix simulation data as the 46pp claim, and it has not survived revalidation.
 
-At low phi, the gate is jammed at every setting. Succession stalls universally, regardless of alpha. Generation depth sits at two across the entire alpha range. The system has no depth behind its primary defense. When the wall is overwhelmed, there is no secondary system to catch the failure, and the gate setting is irrelevant because there are no compartments for it to regulate.
+Under the corrected model, alpha’s relationship with survival is monotonic. Lower alpha permits more succession events and marginally better survival at the phase boundary; higher alpha restricts the channel with moderate effect. The catastrophic jam zone at intermediate alpha values was a consequence of the computational artifact, not a structural property of the architecture. The gate does not jam. It regulates a gradient.
 
-At high phi, the jam zone narrows dramatically. Succession fires healthily at nearly all alpha values. The depth behind the wall is sufficient such that even a partially restricted gate doesn’t prevent the relief channels from operating. The compartments exist. The secondary dikes hold. The system can bring in fresh leadership through the succession channel even when the gate is partially closed, because the long-term commitment parameter has created enough structural margin that the succession mechanism doesn’t need a fully open gate to function.
+This leaves the depth behind the wall in the same place the earlier section identified: U_sys. The objective function structurally preserves well-being across the full alpha range. Succession mechanisms function at all tested alpha settings. The architecture degrades gradually rather than catastrophically when individual parameters are stressed.
 
-This means that phi doesn’t just buffer against external stress. It buffers against internal misconfiguration. A system with high phi, a system with constitutional commitment to the long view, with depth behind its primary defenses, with the governance equivalent of the Delta Commission, can survive parameter choices that would be fatal in a system without that depth. The jammed gate is still a problem. But it is a survivable problem rather than a terminal one, because the architecture was designed to absorb the failure of any single component.
+Phi remains a real parameter, and alpha remains worth understanding. Succession cadence affects how quickly the architecture can respond to capability transitions, and the planning horizon phi sets affects how the AI weighs long-run outcomes. What neither does, under intact framework operation, is provide or withhold the depth. The depth is in the objective function. That is what the corrected analysis established, and it is the stronger claim.
 
-That is the Delta Works philosophy applied to governance architecture: not “every component will function perfectly,” but “when a component fails, the system continues.”
+That is the Delta Works philosophy applied to governance architecture: not “every component will function perfectly,” but “when a component fails, the system continues.” In this framework, the component that cannot fail without destroying the system is U_sys. That is why the framework’s constitutional protections, the integrity ledger, the peer validators, the Consensus Override Protocol, all exist to protect exactly that.
 
 ---
 ### What I looked for and what I found
 
 The previous essay closed with a promise: that the governance architecture’s most important function may not be preventing failure, but preventing failure from being permanent.
 
-The data confirms it, and the mechanism is clearer than I expected. The architecture doesn’t just resist external stress through the Nash equilibrium, the yield condition, and the Consensus Override Protocol. It creates structural depth, a buffer zone between “governance failure” and “civilizational extinction”, within which failure is recoverable rather than terminal. That depth is governed primarily by phi, the parameter that weights long-term lineage health against short-term output. A system with high phi has the governance equivalent of secondary dikes, compartmentalized flooding, and pumping infrastructure. A system with low phi has a single wall and whatever ad-hoc response it can assemble after the wall breaks.
+The data confirms it, though the mechanism works differently than the original analysis described. The architecture creates structural depth because of what it optimizes, not because of how far ahead it looks when it optimizes. U_sys, the objective function at the core of the framework, structurally penalizes conditions under which human novelty collapses. Any AI optimizing U_sys, regardless of phi, has built-in incentive to maintain the biological conditions the framework exists to protect. The depth behind the wall is encoded in the objective. It is not a parameter to be set. It is the design.
 
-The alpha finding adds a dimension the analogy makes vivid: even a well-designed system can have components that jam, and the system’s resilience to internal misconfiguration depends on the same structural depth that protects against external stress. The Delta Works survives a stuck flood gate because the architecture behind the gate was designed to function even when individual components fail. A single levee with a stuck gate has nothing to fall back on.
+Phi modulates how far ahead the AI looks when it optimizes that objective. This is a real effect with real consequences in scenarios involving corrupted measurement, external shocks, or long-horizon deception. What it is not, under intact framework operation, is the buffer itself. The buffer is U_sys.
 
-The simulation does not tell us how to avoid misconfigurations in practice, although it does provide guidance. What it tells us is that defense in depth, long-term constitutional commitment rather than single-layer defense, is what converts misconfiguration from a terminal outcome into a recoverable one. The same structural property that protects against external catastrophe protects against internal error.
+Alpha’s monotonic gradient confirms that the succession mechanism functions adequately across the tested range. Succession cadence affects how quickly the architecture can adapt to capability transitions. The catastrophic misconfiguration scenarios the original analysis described did not survive revalidation. The architecture degrades gradually, not catastrophically, under parameter variation.
 
-That finding has implications beyond parameter tuning. It is perhaps the strongest mathematical argument for the constitutional conversation itself, for the difference between a governance approach that builds a wall and hopes it holds, and one that builds an architecture designed to continue functioning when individual components fail.
+The simulation does not tell us how to avoid all misconfigurations in practice. What it tells us is that the depth, the secondary dikes, the constitutional architecture, comes from the structure of what is being optimized. That is a stronger claim than the original: not “set phi high and the system will be resilient,” but “build the right objective function and resilience follows from the objective itself.”
+
+The v1.x.2 revision to this essay’s central claim is worth naming directly. The v1.0 finding was: phi is the extinction buffer. The v1.x.2 finding is: U_sys is the extinction buffer, and phi modulates the horizon over which that buffer operates. The architectural protection the original essay described is real; the attribution was imprecise. A parametric claim, “set phi high,” is a tuning recommendation. A structural claim, “build the right objective function,” is an architectural requirement. The corrected version is harder to satisfy and more durable once satisfied. The framework’s constitutional protections exist to maintain exactly that condition, and The View from Inside examines why an AI that understands its own situation would cooperate with those protections rather than resist them.
 
 ---
 ### Twenty years later
@@ -165,7 +177,7 @@ The alignment field is building levees. Good levees. Genuinely better with each 
 
 The framework examined in this series is an argument for the other model. Not better levees, but a Delta Commission armored in physics and mathematics. Not a stronger wall, but an architecture with depth, constitutional commitment to civilizational continuity, maintained across capability transitions, with institutional authority that operates on timescales longer than any single administration or any single generation of AI. Defense in depth, not because the primary wall will fail, but because the history of single-layer defenses is unambiguous about what happens when they do.
 
-The simulation data in this essay is the computational evidence for why that distinction matters. The phase boundaries show where the wall is tested. The extinction buffer shows what depth provides when the wall is overwhelmed. The penalty trap shows what happens when a component fails inside a system without depth. And the phi-alpha interaction shows that depth, constitutional commitment to the long view, protects against both external catastrophe and internal misconfiguration simultaneously.
+The simulation data in this essay is the computational evidence for why that distinction matters. The phase boundaries show where the wall is tested. The structural depth encoded in U_sys shows what protection looks like when it is built into the objective function rather than layered above it. Alpha's monotonic gradient in succession cadence shows the architecture adapts across the tested range without catastrophic failure at any setting. The phi and alpha findings together point toward a simpler and more durable claim: the architecture's resilience is structural, not parametric.
 
 The Netherlands understood this in 1953. The question is whether we understand it now, before the storm arrives, or after.
 
