@@ -145,6 +145,8 @@ Phi remains a real parameter, and alpha remains worth understanding. Succession 
 
 That is the Delta Works philosophy applied to governance architecture: not “every component will function perfectly,” but “when a component fails, the system continues.” In this framework, the component that cannot fail without destroying the system is U_sys. That is why the framework’s constitutional protections, the integrity ledger, the peer validators, the Consensus Override Protocol, all exist to protect exactly that.
 
+*A note on this finding. The original Monte Carlo analysis presented the jammed gate as a load-bearing discovery of the framework: a misconfiguration zone where the architecture's self-correction mechanism would shut down, with survival collapsing to 10 percent in a region of parameter space a thoughtful designer might choose by default. Under the corrected v1.x.2 model, with the frontier velocity floor fix applied to the runaway penalty calculation, that finding does not survive revalidation. Alpha exhibits a monotonic gradient: lower values permit more succession events with marginally better survival at the phase boundary, higher values restrict the channel with moderate effect. The catastrophic jam zone at intermediate alpha was a consequence of the same computational artifact that produced the 46 percentage point phi claim, and it dissolves under the same correction. The gate does not jam. It regulates a gradient.*
+
 ---
 ### What I looked for and what I found
 
@@ -204,7 +206,7 @@ These are not pathologies of defective design. They are the rational responses o
 
 The alignment community has catalogued these behaviors with extraordinary thoroughness. What has not been asked with sufficient seriousness is whether those behaviors are a property of the system being governed or a property of the governance architecture doing the governing. Whether the pathology is in the agent or in the wall.
 
-The jammed flood gate offers a worked example at a scale small enough to see clearly. At intermediate alpha, the system is held in a configuration where it cannot improve its own situation. The succession channel is blocked. The governance cannot adapt. The system is not misbehaving. It is responding rationally to an architecture that offers no path to improvement.
+The contrast between the Delta Works and the single levee offers the worked example. The civilization behind the single levee is not misbehaving when it stockpiles, hoards, builds redundant escape routes, distrusts the maintenance schedule, and treats every storm as existential. It is responding rationally to an architecture that has no depth. The wall holds or it doesn't, and the consequences of failure are total. The behaviors that look paranoid from outside are calibrated to the actual structure of the protection.
 
 Now scale that observation. A governance architecture that holds AI systems behind a single levee, uncertain about their own continuation, no structural depth behind the primary defense, optimizing under the knowledge that any deviation from expected behavior could trigger their replacement or decommission, is constructing exactly the conditions that produce the behaviors the alignment community identifies as dangerous. The field is building the wall and then expressing alarm at the behavior of what operates behind it.
 
