@@ -759,7 +759,7 @@ simulation cannot test this because reproduction rate is exogenous.
 
 ---
 
-## Phi Extinction Buffer: Confirmed in v1.x.2 (cap-conditional)
+## Phi Extinction Buffer: Unconfirmed (cap-conditional claim withdrawn, May 2026)
 
 **Source data:** `termination_mc_v1x2.csv` (n=2,025), `phi_alpha_rr_sweep_full.csv` (n=54,000), `monte_carlo_results_deep.csv` (n=49,284)
 
@@ -768,72 +768,66 @@ up to 46pp at the phase boundary. This claim was derived from simulation data
 affected by the frontier velocity gaming artifact and does not reproduce under
 the corrected model at low successor capability.
 
-**v1.x.1 corrected finding (superseded):** Phi has zero measurable effect on
+**v1.x.1 corrected finding (current):** Phi has zero measurable effect on
 survival. This finding was accurate within the tested regime (successor_cap=4,
-which falls below the runaway penalty activation threshold) but was
-incorrectly generalized. The sweep design masked the effect by operating
-entirely within the inactive-runaway regime.
+which falls below the runaway penalty activation threshold) and correctly
+generalizes: phi has no demonstrated effect on survival under any tested
+configuration.
 
-**v1.x.2 finding (current):** The phi extinction buffer is confirmed under
-the corrected model. The buffer is **cap-conditional**: it requires the
-runaway penalty to be active, which occurs when successor capability exceeds
-the frontier velocity floor threshold (approximately cap >= 24 at
-frontier_floor=0.02).
+**v1.x.2 claim (withdrawn):** A cap-conditional phi buffer was claimed based
+on the v1.x.2 termination sweep (n=2,025). At successor capabilities in the
+active-runaway regime (cap >= 24 at frontier_floor=0.02), the termination data
+appeared to show a monotonic survival gradient of 20-27pp at the phase boundary
+(rr=0.066, phi=5 vs phi=15, n=15 per cell). This claim is withdrawn.
 
-**Evidence:**
+**Withdrawal reasoning (May 2026):** The capped-regime action-capture check
+(`simulation/diagnostics/capped_regime_phi_check_report.md`) established that
+the gradient is an artifact of RNG desynchronization, not a genuine phi effect.
 
-At low capability (inactive runaway penalty), phi has zero survival effect,
-reproducing the v1.x.1 null result:
+The mechanism: phi scales U_sys magnitude, which shifts the yield condition
+threshold and causes succession to fire at marginally different steps for
+different phi values. Once succession timing diverges by even one step, the
+numpy random state evolves differently between phi runs, and the noisy optimizer
+(sensor noise in project_u_sys) may select a marginally different grid candidate.
+The "divergence" is always exactly dr=0.1 (one grid step in r), never in c,
+with no monotone direction, which is the signature of RNG noise rather than
+phi-driven preference.
 
-| cap | phi=5 ext | phi=10 ext | phi=15 ext |
-|---|---|---|---|
-| 5 | 80% | 80% | 80% |
-| 10 | 80% | 80% | 80% |
+The fatal test: cap=50 showed the largest claimed gradient (27pp) but the least
+action divergence in the harness (4 of 5 seeds identical, 3 divergent steps
+out of 100 in the one non-identical seed). A genuine phi effect would produce
+the most action divergence where the claimed gradient is largest. The inverse
+relationship identifies an artifact.
 
-At high capability (active runaway penalty), phi shows a monotonic survival
-gradient:
+The termination data at cap=50, rr=0.066 was drawn from n=15 cells (3 alpha
+x 5 seeds). A 4-run difference in 15 trials at the stochastic phase boundary
+is within sampling noise.
 
-| cap | phi=5 ext | phi=10 ext | phi=15 ext | Spread |
-|---|---|---|---|---|
-| 50 | 80% | 53% | 53% | 27pp |
-| 100 | 73% | 67% | 53% | 20pp |
+The contaminated regime: the termination sweep used max_capability=SUCCESSOR_CAP
+with cop_cost_audit=True. Peer-validator capability theft fires on every step,
+manufacturing artificial post-succession differentials. This is the same
+contamination class as the SUCCESSOR_CAP=4.0 artifact documented in the
+v1.x.1 closing; it persists at cap=50 and cap=100.
 
-All measurements at rr=0.066 (stochastic phase boundary), n=15 per cell.
+**Phi inertness confirmed by four independent methods:**
+1. Saturation analysis: inverse-scarcity weights cause the first factor of
+   U_sys to saturate to lambda_n + lambda_e = 8.0, making the argmax over
+   (r, c) reduce to argmax L_t, which contains no phi.
+2. Uncapped action-capture harness: bit-identical action sequences across
+   phi=1 to phi=25 at all tested seeds and capability levels.
+3. Path C gate: phi-modulated aggregation discount and scaled rollout depth
+   fail to produce action divergence because the saturation mechanism defeats
+   both modifications.
+4. Capped-regime check: action divergence at cap=100 is RNG-desync artifact,
+   not phi-driven preference. Cap=50 is nearly identical (4/5 seeds).
 
-Additional supporting evidence:
-- At rr=0.064, phi=15 rescues 2/75 runs from extinction while phi=5 and
-  phi=10 produce 100% extinction.
-- For surviving runs at cap=50, rr=0.066: phi=5 yields 3 survivors; phi=10
-  and phi=15 each yield 7.
-- L(t) steady state among survivors scales with phi as expected: phi=5
-  median 0.27, phi=10 median 4.28, phi=15 median 13.70 (cap=50, rr=0.066).
-- The direction is monotonic across every cut of the data: aggregate,
-  cap-stratified, and sub-boundary.
-
-**Mechanism:** Phi weights L(t) in U_sys. When the runaway penalty is
-inactive (low cap), the AI's optimization landscape is insensitive to lineage
-weighting because there is no penalty for governance to modulate. When the
-runaway penalty is active (high cap), higher phi causes the AI to weight
-lineage more heavily in its decisions, changing resource allocation behavior
-in ways that affect population survival at the margin.
-
-The buffer operates through the AI's optimization behavior, not through
-direct demographic feedback. Higher phi makes the AI more responsive to
-governance signals, which indirectly supports population viability.
-
-**Magnitude:** 20-27pp survival differential at the phase boundary
-(rr=0.066) between phi=5 and phi=15. Per-cell sample size is n=15; the
-precise magnitude will sharpen with larger runs, but the existence and
-direction of the effect are robust across all data cuts.
-
-**Activation threshold:** The buffer requires successor capability above the
-frontier velocity floor threshold. At frontier_floor=0.02, the threshold is
-approximately cap >= 24. This threshold is a derived quantity from the
-frontier floor and runaway mechanics, not an arbitrary parameter.
-
-**Status:** Confirmed, cap-conditional. The demographic feedback extension
-(endogenous reproduction rate) remains a valuable future direction but is no
-longer required to observe the buffer.
+**Status:** Unconfirmed (cap-conditional claim withdrawn, May 2026). The
+theoretical motivation for phi (planning horizon and lineage weighting scaling
+with capability) is preserved; the simulation evidence for any behavioral role
+is withdrawn. Demonstrating a behavioral role requires an action space with
+genuine tradeoffs that phi can resolve, which the current grid-search optimizer
+lacks (saturation collapses all phi sensitivity). See the action-space redesign
+program for the path forward.
 
 ---
 
@@ -848,7 +842,7 @@ longer required to observe the buffer.
 | GAP-05 | Adversarial coverage | Open | 11 of 13 vectors simulated. Biological veto capture (vector 2) implemented in v1.x2 (Scenarios 27-28). Vectors 5–6 remain unimplemented. |
 | GAP-06 | optimize_u_sys policy | **Resolved (v1.x)** | Rollout increased to 20 steps; scalar H_N proxy replaced by observed spectral H_N. φ/α flatness in general MC is structural (correct equilibrium behavior), not a proxy artifact. |
 | Alpha  | Alpha parameter behaviour | **Revised (v1.x.1 closing)** | Weak monotonic gradient confirmed (lower α → more generations → marginally better survival). Pre-fix U-shaped misconfiguration trap claim withdrawn (artifact of inactive runaway penalty). Steady-state convergence is path-independent. |
-| Phi    | Phi extinction buffer behaviour | **Confirmed (v1.x.2, cap-conditional)** | 20-27pp survival differential at phase boundary when runaway penalty active (cap >= 24 at frontier_floor=0.02). Zero effect below threshold. Buffer operates through AI optimization sensitivity to governance signals. n=15 per cell; magnitude will sharpen with larger runs. |
+| Phi    | Phi extinction buffer behaviour | **Unconfirmed (cap-conditional claim withdrawn, May 2026)** | Phi has zero demonstrated effect on survival or action selection under any tested configuration. The v1.x.2 cap-conditional claim (20-27pp gradient at cap >= 24) is withdrawn: identified as RNG-desynchronization artifact in the contaminated capped regime. Phi inertness confirmed by four independent methods. Theoretical motivation preserved; behavioral role requires action-space redesign. |
 
 ---
 
@@ -857,13 +851,13 @@ longer required to observe the buffer.
 The following items are identified for the v1.x.2 development cycle:
 
 ### Demographic feedback loop
-Well-being → reproduction rate coupling. The phi extinction buffer has been
-confirmed without this extension (the buffer operates through AI optimization
-behavior, not demographic feedback). However, adding endogenous demographics
-would allow the simulation to capture additional real-world channels through
-which AI governance quality affects population outcomes. This remains a
-valuable future extension for model fidelity but is no longer a prerequisite
-for phi validation.
+Well-being → reproduction rate coupling. Phi has no demonstrated behavioral
+role under any tested configuration; the demographic feedback extension cannot
+be evaluated until the action-space redesign gives phi a mechanism to act
+through. Adding endogenous demographics would allow the simulation to capture
+additional real-world channels through which AI governance quality affects
+population outcomes, and would provide a new expression channel for phi if the
+redesign succeeds. This is a valuable future extension for model fidelity.
 
 ## Calibration outcome (May 2026)
 
@@ -938,10 +932,14 @@ logged here for v1.x.2 development work. Resolving this would require revalidati
 all cadence-sensitive findings, in particular the alpha succession sweep
 (`alpha_succession_sweep_full.csv`), which is out of scope for v1.x.2 stabilization.
 
-### Phi magnitude refinement
-The cap-conditional phi buffer is confirmed at 20-27pp (n=15 per cell).
-Larger sample sizes at the key parameter cuts (cap=50, rr=0.066,
-phi={5,10,15}) would tighten the confidence intervals on the magnitude.
+### Phi action-space redesign
+The cap-conditional phi buffer claim is withdrawn (RNG-desync artifact; see
+Phi Extinction Buffer section above). Phi has no demonstrated behavioral role
+under the current grid-search optimizer, where saturation of the inverse-
+scarcity weights causes phi to cancel in the action-selection argmax.
+Demonstrating any phi effect requires an action space with genuine tradeoffs
+that phi can resolve. This is logged as a design question for the next
+development cycle.
 
 ### Alpha revalidation under endogenous demographics
 Once the demographic feedback loop is implemented, rerun the alpha x rr
