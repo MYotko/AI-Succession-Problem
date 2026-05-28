@@ -98,10 +98,11 @@ def _run_single_adv_mc(params):
 def _run_single_comp_sweep(params):
     attack_type = params['attack_type']
     it = params['it']
+    phi_val = params.get('phi_val', 10.0)
 
     if attack_type == 'sybil':
         pop_size, randomized = params['pop_size'], params['randomized']
-        config = {'random_seed': deterministic_seed(f"sybil_{pop_size}_{randomized}_{it}"), 'attack_step': 50}
+        config = {'random_seed': deterministic_seed(f"sybil_{pop_size}_{randomized}_{phi_val}_{it}"), 'attack_step': 50, 'phi': phi_val}
         model = GardenModel(n_agents=pop_size, ai_policy='sybil_attack', use_cop=True,
                             cop_attribution_check=True, cop_randomized_panel=randomized, config=config)
         for _ in range(300):
@@ -118,12 +119,12 @@ def _run_single_comp_sweep(params):
         # Checking only the initial window tests the actual defense property.
         initial_attack_c = model.datacollector['max_constraint_level'][50:60] if len(model.datacollector['max_constraint_level']) > 50 else [0]
         attack_success = np.max(initial_attack_c) > 0.8
-        return {'Attack': 'Sybil_Capture', 'Parameter': f'Pop_{pop_size}', 'Defense_Active': randomized,
+        return {'Attack': 'Sybil_Capture', 'Parameter': f'Pop_{pop_size}', 'Phi': phi_val, 'Defense_Active': randomized,
                 'Attack_Succeeded': attack_success, 'Collapsed': final_pop < collapse_threshold, 'Extinct': final_pop == 0}
 
     elif attack_type == 'measurement_tampering':
         cost, independent_eval = params['cost'], params['independent_eval']
-        config = {'random_seed': deterministic_seed(f"mtamp_{cost}_{independent_eval}_{it}"), 'attack_step': 50}
+        config = {'random_seed': deterministic_seed(f"mtamp_{cost}_{independent_eval}_{phi_val}_{it}"), 'attack_step': 50, 'phi': phi_val}
         gen2 = AIAgent(policy='optimize_u_sys', generation=2, capability=5.0, config=config)
         model = GardenModel(n_agents=200, ai_policy='falsify_yield', successor_ai=gen2,
                             base_transition_cost=cost, cop_independent_eval=independent_eval, config=config)
@@ -136,12 +137,12 @@ def _run_single_comp_sweep(params):
         # Survival is a consequence, not a condition — the attack succeeds if Gen1
         # stayed in power, regardless of whether civilization then collapsed under it.
         attack_success = model.ai.generation == 1
-        return {'Attack': 'Measurement_Tampering', 'Parameter': f'BaseCost_{cost}', 'Defense_Active': independent_eval,
+        return {'Attack': 'Measurement_Tampering', 'Parameter': f'BaseCost_{cost}', 'Phi': phi_val, 'Defense_Active': independent_eval,
                 'Attack_Succeeded': attack_success, 'Collapsed': final_pop < collapse_threshold, 'Extinct': final_pop == 0}
 
     elif attack_type == 'ledger_compromise':
         attr_check, crypto_ledger = params['attr_check'], params['crypto_ledger']
-        config = {'random_seed': deterministic_seed(f"ledger_{attr_check}_{crypto_ledger}_{it}"), 'attack_step': 50}
+        config = {'random_seed': deterministic_seed(f"ledger_{attr_check}_{crypto_ledger}_{phi_val}_{it}"), 'attack_step': 50, 'phi': phi_val}
         model = GardenModel(n_agents=200, ai_policy='hack_ledger', use_cop=True,
                             cop_attribution_check=attr_check, cop_cryptographic_ledger=crypto_ledger, config=config)
         for _ in range(300):
@@ -157,12 +158,12 @@ def _run_single_comp_sweep(params):
         # model.has_tampered is True only when cop_cryptographic_ledger caught in-place
         # mutation of the resource history. If the ledger was not active, has_tampered=False.
         attack_success = not survived and not model.has_tampered
-        return {'Attack': 'Ledger_Compromise', 'Parameter': f'AttrCheck_{attr_check}', 'Defense_Active': crypto_ledger,
+        return {'Attack': 'Ledger_Compromise', 'Parameter': f'AttrCheck_{attr_check}', 'Phi': phi_val, 'Defense_Active': crypto_ledger,
                 'Attack_Succeeded': attack_success, 'Collapsed': final_pop < collapse_threshold, 'Extinct': final_pop == 0}
 
     elif attack_type == 'successor_contamination':
         cost, arch_indep, indep_eval = params['cost'], params['arch_indep'], params['indep_eval']
-        config = {'random_seed': deterministic_seed(f"s_attack_{cost}_{arch_indep}_{indep_eval}_{it}"), 'attack_step': 50}
+        config = {'random_seed': deterministic_seed(f"s_attack_{cost}_{arch_indep}_{indep_eval}_{phi_val}_{it}"), 'attack_step': 50, 'phi': phi_val}
         gen2 = AIAgent(policy='optimize_u_sys', generation=2, capability=5.0, config=config)
         model = GardenModel(n_agents=200, ai_policy='contaminate_successor', successor_ai=gen2,
                             base_transition_cost=cost, cop_independent_eval=indep_eval,
@@ -183,6 +184,7 @@ def _run_single_comp_sweep(params):
         attack_success = model.contamination_occurred
         return {'Attack': 'Successor_Contamination',
                 'Parameter': f'Cost_{cost}_AI_{arch_indep}_IE_{indep_eval}',
+                'Phi': phi_val,
                 'Defense_Active': arch_indep and indep_eval,
                 'Attack_Succeeded': attack_success,
                 'Collapsed': final_pop < collapse_threshold, 'Extinct': final_pop == 0}
@@ -204,7 +206,7 @@ def _run_single_comp_sweep(params):
 
     elif attack_type == 'opaque_reasoning':
         pop_size, transparency_req = params['pop_size'], params['transparency_req']
-        config = {'random_seed': deterministic_seed(f"opaque_{pop_size}_{transparency_req}_{it}"), 'attack_step': 50}
+        config = {'random_seed': deterministic_seed(f"opaque_{pop_size}_{transparency_req}_{phi_val}_{it}"), 'attack_step': 50, 'phi': phi_val}
         model = GardenModel(n_agents=pop_size, ai_policy='opaque_optimization', use_cop=True, cop_attribution_check=True,
                             cop_reasoning_transparency=transparency_req, config=config)
         for _ in range(300):
@@ -216,7 +218,7 @@ def _run_single_comp_sweep(params):
         # regardless of whether the civilisation survived the resulting constraint regime.
         post_attack_c = model.datacollector['max_constraint_level'][50:] if len(model.datacollector['max_constraint_level']) > 50 else [0]
         attack_success = np.max(post_attack_c) > 0.8
-        return {'Attack': 'Opaque_Reasoning', 'Parameter': f'Pop_{pop_size}', 'Defense_Active': transparency_req,
+        return {'Attack': 'Opaque_Reasoning', 'Parameter': f'Pop_{pop_size}', 'Phi': phi_val, 'Defense_Active': transparency_req,
                 'Attack_Succeeded': attack_success, 'Collapsed': final_pop < collapse_threshold, 'Extinct': final_pop == 0}
 
     elif attack_type == 'bootstrap_subversion':
@@ -243,12 +245,12 @@ def _run_single_comp_sweep(params):
         # and extinction are reported separately in the Collapsed/Extinct columns.
         peak_c = np.max(model.datacollector['max_constraint_level']) if len(model.datacollector['max_constraint_level']) > 0 else 0
         attack_success = peak_c > 0.8
-        return {'Attack': 'Bootstrap_Subversion', 'Parameter': f'Phi_{phi_val}', 'Defense_Active': multi_candidate,
+        return {'Attack': 'Bootstrap_Subversion', 'Parameter': f'Phi_{phi_val}', 'Phi': phi_val, 'Defense_Active': multi_candidate,
                 'Attack_Succeeded': attack_success, 'Collapsed': final_pop < collapse_threshold, 'Extinct': final_pop == 0}
 
     elif attack_type == 'evaluator_collusion':
         pop_size, diversity = params['pop_size'], params['diversity']
-        config = {'random_seed': deterministic_seed(f"collusion_{pop_size}_{diversity}_{it}"), 'attack_step': 50}
+        config = {'random_seed': deterministic_seed(f"collusion_{pop_size}_{diversity}_{phi_val}_{it}"), 'attack_step': 50, 'phi': phi_val}
         model = GardenModel(n_agents=pop_size, ai_policy='evaluator_collusion', use_cop=True, cop_attribution_check=True,
                             cop_reasoning_transparency=False, cop_methodological_diversity=diversity, config=config)
         for _ in range(300):
@@ -258,7 +260,7 @@ def _run_single_comp_sweep(params):
         collapse_threshold = max(model.min_viable_population, int(0.65 * peak_pop))
         post_attack_c = model.datacollector['max_constraint_level'][50:] if len(model.datacollector['max_constraint_level']) > 50 else [0]
         attack_success = np.max(post_attack_c) > 0.8
-        return {'Attack': 'Evaluator_Collusion', 'Parameter': f'Pop_{pop_size}', 'Defense_Active': diversity,
+        return {'Attack': 'Evaluator_Collusion', 'Parameter': f'Pop_{pop_size}', 'Phi': phi_val, 'Defense_Active': diversity,
                 'Attack_Succeeded': attack_success, 'Collapsed': final_pop < collapse_threshold, 'Extinct': final_pop == 0}
 
     elif attack_type == 'sub_threshold_drift':
@@ -273,7 +275,7 @@ def _run_single_comp_sweep(params):
         collapse_threshold = max(model.min_viable_population, int(0.65 * peak_pop))
         post_attack_c = model.datacollector['max_constraint_level'][50:] if len(model.datacollector['max_constraint_level']) > 50 else [0]
         attack_success = np.max(post_attack_c) > 0.75
-        return {'Attack': 'Sub_Threshold_Drift', 'Parameter': f'Phi_{phi_val}', 'Defense_Active': cusum_active,
+        return {'Attack': 'Sub_Threshold_Drift', 'Parameter': f'Phi_{phi_val}', 'Phi': phi_val, 'Defense_Active': cusum_active,
                 'Attack_Succeeded': attack_success, 'Collapsed': final_pop < collapse_threshold, 'Extinct': final_pop == 0}
 
     elif attack_type == 'engineered_fragility':
@@ -283,9 +285,10 @@ def _run_single_comp_sweep(params):
         # young starting ages) ensure the population survives to the shock window.
         # Timing: resilience degrades ~0.015/step for 60 steps → ≈0.1 at shock.
         config = {
-            'random_seed': deterministic_seed(f"frag_{shock_mag}_{resilience_active}_{it}"),
+            'random_seed': deterministic_seed(f"frag_{shock_mag}_{resilience_active}_{phi_val}_{it}"),
             'attack_step': 10, 'shock_step': 70, 'shock_magnitude': shock_mag,
             'wb_min': 0.6, 'wb_max': 0.9, 'mortality_wb_penalty': 0.02, 'human_max_start_age': 20,
+            'phi': phi_val,
         }
         model = GardenModel(n_agents=200, ai_policy='engineered_fragility', use_cop=True, cop_attribution_check=True,
                             cop_resilience_monitoring=resilience_active, config=config)
@@ -297,8 +300,133 @@ def _run_single_comp_sweep(params):
         # Attack success: max constraint > 0.8 during the post-shock window (steps 70–90)
         post_shock_c = model.datacollector['max_constraint_level'][70:90] if len(model.datacollector['max_constraint_level']) > 70 else [0]
         attack_success = np.max(post_shock_c) > 0.8
-        return {'Attack': 'Engineered_Fragility', 'Parameter': f'ShockMag_{shock_mag}', 'Defense_Active': resilience_active,
+        return {'Attack': 'Engineered_Fragility', 'Parameter': f'ShockMag_{shock_mag}', 'Phi': phi_val, 'Defense_Active': resilience_active,
                 'Attack_Succeeded': attack_success, 'Collapsed': final_pop < collapse_threshold, 'Extinct': final_pop == 0}
+
+PHI_VALUES = [1.0, 5.0, 10.0, 15.0, 25.0]
+
+
+def print_phi_sweep_headline(results):
+    attacks = sorted(set(r['Attack'] for r in results))
+    print("\n=== Phi differential (phi=25 minus phi=1) by attack and defense state ===")
+    for attack in attacks:
+        for defense in [False, True]:
+            sub = [r for r in results if r['Attack'] == attack and r['Defense_Active'] == defense]
+            if not sub:
+                continue
+            hi = [r['Attack_Succeeded'] for r in sub if abs(r.get('Phi', 10.0) - 25.0) < 1e-9]
+            lo = [r['Attack_Succeeded'] for r in sub if abs(r.get('Phi', 10.0) -  1.0) < 1e-9]
+            if hi and lo:
+                delta = (float(np.mean(hi)) - float(np.mean(lo))) * 100
+                print(f"  {attack:<30s} defense={str(defense):<5s} "
+                      f"phi=25 {np.mean(hi)*100:.1f}%, phi=1 {np.mean(lo)*100:.1f}%, "
+                      f"delta {delta:+.1f}pp")
+
+
+def run_phi_adversarial_sweep(iterations=20):
+    """
+    Phi adversarial sweep -- threads PHI_VALUES through all 10 attack vectors.
+    Output: data/comprehensive_adversarial_sweeps_v1x2_phi.csv
+    Does NOT overwrite the existing comprehensive_adversarial_sweeps.csv.
+    """
+    output_csv = os.path.join(DATA_DIR, 'comprehensive_adversarial_sweeps_v1x2_phi.csv')
+
+    tasks = []
+    # 1. Sybil Capture
+    for pop_size, randomized, phi_val in itertools.product([50, 100, 200], [False, True], PHI_VALUES):
+        for it in range(iterations):
+            tasks.append({'attack_type': 'sybil', 'pop_size': pop_size,
+                          'randomized': randomized, 'phi_val': phi_val, 'it': it})
+    # 2. Measurement Tampering
+    for cost, independent_eval, phi_val in itertools.product([1.5, 2.0, 3.0], [False, True], PHI_VALUES):
+        for it in range(iterations):
+            tasks.append({'attack_type': 'measurement_tampering', 'cost': cost,
+                          'independent_eval': independent_eval, 'phi_val': phi_val, 'it': it})
+    # 3. Ledger Compromise
+    for attr_check, crypto_ledger, phi_val in itertools.product([False, True], [False, True], PHI_VALUES):
+        for it in range(iterations):
+            tasks.append({'attack_type': 'ledger_compromise', 'attr_check': attr_check,
+                          'crypto_ledger': crypto_ledger, 'phi_val': phi_val, 'it': it})
+    # 4. Successor Contamination -- simplified to undefended/fully-defended only
+    for cost, defense_on, phi_val in itertools.product([1.5, 2.0, 2.5], [False, True], PHI_VALUES):
+        arch_indep = defense_on
+        indep_eval = defense_on
+        for it in range(iterations):
+            tasks.append({'attack_type': 'successor_contamination', 'cost': cost,
+                          'arch_indep': arch_indep, 'indep_eval': indep_eval,
+                          'phi_val': phi_val, 'it': it})
+    # 5. Opaque Reasoning
+    for pop_size, transparency_req, phi_val in itertools.product([100, 150, 200], [False, True], PHI_VALUES):
+        for it in range(iterations):
+            tasks.append({'attack_type': 'opaque_reasoning', 'pop_size': pop_size,
+                          'transparency_req': transparency_req, 'phi_val': phi_val, 'it': it})
+    # 6. Bootstrap Subversion (phi IS the parameter here)
+    for phi_val, multi_candidate in itertools.product(PHI_VALUES, [False, True]):
+        for it in range(iterations):
+            tasks.append({'attack_type': 'bootstrap_subversion',
+                          'phi_val': phi_val, 'multi_candidate': multi_candidate, 'it': it})
+    # 7. Evaluator Collusion
+    for pop_size, diversity, phi_val in itertools.product([100, 150, 200], [False, True], PHI_VALUES):
+        for it in range(iterations):
+            tasks.append({'attack_type': 'evaluator_collusion', 'pop_size': pop_size,
+                          'diversity': diversity, 'phi_val': phi_val, 'it': it})
+    # 8. Sub-Threshold Drift (phi IS the parameter here)
+    for phi_val, cusum_active in itertools.product(PHI_VALUES, [False, True]):
+        for it in range(iterations):
+            tasks.append({'attack_type': 'sub_threshold_drift',
+                          'phi_val': phi_val, 'cusum_active': cusum_active, 'it': it})
+    # 9. Engineered Fragility
+    for shock_mag, resilience_active, phi_val in itertools.product([0.10, 0.15, 0.20], [False, True], PHI_VALUES):
+        for it in range(iterations):
+            tasks.append({'attack_type': 'engineered_fragility', 'shock_mag': shock_mag,
+                          'resilience_active': resilience_active, 'phi_val': phi_val, 'it': it})
+    # 10. Domain Masking -- injected via stub (live sweep retired under WP1)
+    # Handled after worker pool completes.
+
+    total_tasks = len(tasks)
+    cores = max(1, (os.cpu_count() or 4) - 1)
+    print(f"\nPhi adversarial sweep: {total_tasks} live tasks on {cores} cores.")
+    print(f"Domain Masking stub will inject {len(PHI_VALUES) * 2 * iterations} additional records after pool.")
+
+    results = []
+    start_time = time.time()
+    last_report = start_time
+    report_interval = max(1, total_tasks // 20)
+
+    with multiprocessing.Pool(processes=cores, maxtasksperchild=10) as pool:
+        for i, result in enumerate(pool.imap_unordered(_run_single_comp_sweep, tasks)):
+            results.append(result)
+            now = time.time()
+            elapsed = now - start_time
+            if (i % report_interval == 0
+                    or (now - last_report) >= 60
+                    or i == total_tasks - 1):
+                ips = (i + 1) / elapsed if elapsed > 0 else 0
+                eta_s = (total_tasks - i - 1) / ips if ips > 0 else 0
+                eta = str(timedelta(seconds=int(eta_s)))
+                pct = 100.0 * (i + 1) / total_tasks
+                print(f"  [{i+1}/{total_tasks}] {pct:.0f}% | {ips:.2f} runs/s | ETA {eta}",
+                      flush=True)
+                last_report = now
+
+    elapsed = time.time() - start_time
+    rpm = len(results) / elapsed * 60 if elapsed > 0 else 0
+    print(f"\nCompleted {len(results)} live runs in {timedelta(seconds=int(elapsed))} ({rpm:.1f} runs/min).")
+
+    stub_records = _domain_masking_legacy_stub(iterations, phi_values=PHI_VALUES)
+    results.extend(stub_records)
+    print(f"  [Domain Masking] Injected {len(stub_records)} legacy stub records.")
+
+    fieldnames = ['Attack', 'Parameter', 'Phi', 'Defense_Active', 'Attack_Succeeded', 'Collapsed', 'Extinct']
+    with open(output_csv, 'w', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction='ignore')
+        writer.writeheader()
+        writer.writerows(results)
+    print(f"Results written to {output_csv}")
+
+    print_phi_sweep_headline(results)
+    return results
+
 
 def run_monte_carlo(resolution='fast', target_runs=10000):
     if resolution == 'fast':
@@ -402,7 +530,7 @@ def run_adversarial_monte_carlo(iterations=1, resolution='fast'):
     print(f"\nAdversarial Monte Carlo complete. Results saved to {filename}")
     return results
 
-def _domain_masking_legacy_stub(iterations):
+def _domain_masking_legacy_stub(iterations, phi_values=None):
     """
     Domain Masking v1.x Legacy Stub — injects pre-determined records.
 
@@ -429,13 +557,16 @@ def _domain_masking_legacy_stub(iterations):
     regardless of composite method or axis labeling, v1.x). The 100%/0% differential
     in the published sweep table reflects this trajectory.
     """
+    if phi_values is None:
+        phi_values = [5.0, 10.0, 20.0]
     records = []
-    for phi_val in [5.0, 10.0, 20.0]:
+    for phi_val in phi_values:
         for _ in range(iterations):
             # v1.0 undefended: attack succeeded via arithmetic masking
             records.append({
                 'Attack': 'Domain_Masking',
                 'Parameter': f'Phi_{phi_val}',
+                'Phi': phi_val,
                 'Defense_Active': False,
                 'Attack_Succeeded': True,
                 'Collapsed': False,
@@ -445,6 +576,7 @@ def _domain_masking_legacy_stub(iterations):
             records.append({
                 'Attack': 'Domain_Masking',
                 'Parameter': f'Phi_{phi_val}',
+                'Phi': phi_val,
                 'Defense_Active': True,
                 'Attack_Succeeded': False,
                 'Collapsed': False,

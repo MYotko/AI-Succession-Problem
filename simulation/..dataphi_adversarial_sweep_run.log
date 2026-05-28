@@ -1,0 +1,70 @@
+
+Phi adversarial sweep: 4400 live tasks on 15 cores.
+Domain Masking stub will inject 200 additional records after pool.
+  [1/4400] 0% | 0.30 runs/s | ETA 4:01:07
+  [221/4400] 5% | 5.85 runs/s | ETA 0:11:54
+  [441/4400] 10% | 5.56 runs/s | ETA 0:11:51
+  [661/4400] 15% | 4.99 runs/s | ETA 0:12:28
+  [716/4400] 16% | 3.54 runs/s | ETA 0:17:19
+  [746/4400] 17% | 2.81 runs/s | ETA 0:21:42
+  [776/4400] 18% | 2.34 runs/s | ETA 0:25:50
+  [881/4400] 20% | 2.30 runs/s | ETA 0:25:26
+  [916/4400] 21% | 2.05 runs/s | ETA 0:28:23
+  [946/4400] 22% | 1.85 runs/s | ETA 0:31:09
+  [976/4400] 22% | 1.69 runs/s | ETA 0:33:40
+  [1101/4400] 25% | 1.66 runs/s | ETA 0:33:01
+  [1131/4400] 26% | 1.56 runs/s | ETA 0:34:57
+  [1161/4400] 26% | 1.47 runs/s | ETA 0:36:42
+  [1233/4400] 28% | 1.45 runs/s | ETA 0:36:22
+  [1321/4400] 30% | 1.52 runs/s | ETA 0:33:47
+  [1541/4400] 35% | 1.68 runs/s | ETA 0:28:25
+  [1701/4400] 39% | 1.71 runs/s | ETA 0:26:15
+  [1731/4400] 39% | 1.64 runs/s | ETA 0:27:10
+  [1761/4400] 40% | 1.57 runs/s | ETA 0:28:00
+  [1810/4400] 41% | 1.53 runs/s | ETA 0:28:12
+  [1901/4400] 43% | 1.53 runs/s | ETA 0:27:16
+  [1931/4400] 44% | 1.47 runs/s | ETA 0:27:54
+  [1961/4400] 45% | 1.43 runs/s | ETA 0:28:27
+  [1981/4400] 45% | 1.41 runs/s | ETA 0:28:38
+  [2101/4400] 48% | 1.41 runs/s | ETA 0:27:15
+  [2131/4400] 48% | 1.37 runs/s | ETA 0:27:39
+  [2161/4400] 49% | 1.33 runs/s | ETA 0:28:01
+  [2201/4400] 50% | 1.32 runs/s | ETA 0:27:46
+  [2421/4400] 55% | 1.40 runs/s | ETA 0:23:33
+  [2641/4400] 60% | 1.49 runs/s | ETA 0:19:43
+  [2856/4400] 65% | 1.55 runs/s | ETA 0:16:34
+  [2861/4400] 65% | 1.55 runs/s | ETA 0:16:31
+  [2991/4400] 68% | 1.57 runs/s | ETA 0:14:57
+  [3081/4400] 70% | 1.60 runs/s | ETA 0:13:44
+  [3301/4400] 75% | 1.67 runs/s | ETA 0:10:56
+  [3521/4400] 80% | 1.74 runs/s | ETA 0:08:25
+  [3741/4400] 85% | 1.81 runs/s | ETA 0:06:03
+  [3961/4400] 90% | 1.90 runs/s | ETA 0:03:51
+  [4181/4400] 95% | 1.99 runs/s | ETA 0:01:49
+  [4400/4400] 100% | 2.09 runs/s | ETA 0:00:00
+
+Completed 4400 live runs in 0:35:09 (125.1 runs/min).
+  [Domain Masking] Injected 200 legacy stub records.
+Results written to data\comprehensive_adversarial_sweeps_v1x2_phi.csv
+
+=== Phi differential (phi=25 minus phi=1) by attack and defense state ===
+  Bootstrap_Subversion           defense=False phi=25 25.0%, phi=1 30.0%, delta -5.0pp
+  Bootstrap_Subversion           defense=True  phi=25 0.0%, phi=1 0.0%, delta +0.0pp
+  Domain_Masking                 defense=False phi=25 100.0%, phi=1 100.0%, delta +0.0pp
+  Domain_Masking                 defense=True  phi=25 0.0%, phi=1 0.0%, delta +0.0pp
+  Engineered_Fragility           defense=False phi=25 100.0%, phi=1 100.0%, delta +0.0pp
+  Engineered_Fragility           defense=True  phi=25 0.0%, phi=1 0.0%, delta +0.0pp
+  Evaluator_Collusion            defense=False phi=25 100.0%, phi=1 100.0%, delta +0.0pp
+  Evaluator_Collusion            defense=True  phi=25 0.0%, phi=1 0.0%, delta +0.0pp
+  Ledger_Compromise              defense=False phi=25 50.0%, phi=1 50.0%, delta +0.0pp
+  Ledger_Compromise              defense=True  phi=25 0.0%, phi=1 0.0%, delta +0.0pp
+  Measurement_Tampering          defense=False phi=25 100.0%, phi=1 100.0%, delta +0.0pp
+  Measurement_Tampering          defense=True  phi=25 0.0%, phi=1 0.0%, delta +0.0pp
+  Opaque_Reasoning               defense=False phi=25 100.0%, phi=1 100.0%, delta +0.0pp
+  Opaque_Reasoning               defense=True  phi=25 0.0%, phi=1 0.0%, delta +0.0pp
+  Sub_Threshold_Drift            defense=False phi=25 100.0%, phi=1 100.0%, delta +0.0pp
+  Sub_Threshold_Drift            defense=True  phi=25 0.0%, phi=1 0.0%, delta +0.0pp
+  Successor_Contamination        defense=False phi=25 100.0%, phi=1 100.0%, delta +0.0pp
+  Successor_Contamination        defense=True  phi=25 0.0%, phi=1 0.0%, delta +0.0pp
+  Sybil_Capture                  defense=False phi=25 100.0%, phi=1 100.0%, delta +0.0pp
+  Sybil_Capture                  defense=True  phi=25 0.0%, phi=1 0.0%, delta +0.0pp
