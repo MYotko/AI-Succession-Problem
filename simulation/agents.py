@@ -1,5 +1,386 @@
 import numpy as np
-from metrics import calculate_system_metrics
+from metrics import calculate_system_metrics, calculate_system_metrics_v2
+
+# =============================================================================
+# v2 MULTI-SINK ALLOCATOR — module-level constants and helpers
+#
+# This block adds the v2 action space (six budget-constrained resource
+# categories plus two coupled constraint posture variables) and the candidate
+# generator that the v2 policy samples from. The v1.x.2 policy
+# (optimize_u_sys) and its grid search below are untouched.
+#
+# Every numerical parameter is a named constant with a comment citing the
+# governance justification from the design conversations. Stage 2 (acceptance
+# gate validation) and Stage 3 (phi sweep) operate on these frozen curves.
+# =============================================================================
+
+# Six resource categories. Order is the canonical order used everywhere in
+# v2 code (anchor x-vectors, allocation entropy, datacollector field order).
+RESOURCE_CATEGORIES = (
+    'compute',                 # frontier computational capability investment
+    'bio_welfare',             # direct biological welfare provisioning
+    'novelty_agency',          # space for human-originated novelty and choice
+    'institutional_capacity',  # investment in Psi_inst stock
+    'transfer_comprehension',  # legibility and absorption infrastructure
+    'resilience',              # buffer against exogenous shock and succession load
+)
+N_RESOURCE_CATEGORIES = len(RESOURCE_CATEGORIES)
+
+# Stratified sampling mix. Total = 300 per decision (matches v1.x.2 cost in
+# operations per decision step: 10x10 grid x 20 rollout horizons = 2000 metric
+# calls vs v2's 300 x 20 = 6000, roughly 3x more expensive per decision but
+# still under one second per step on commodity hardware).
+N_UNIFORM_DIRICHLET   = 100  # broad simplex coverage; phi-blind exploration baseline
+N_BALANCED_DIRICHLET  = 100  # center-weighted coverage; tests interior tradeoffs
+N_SINGLE_FOCAL_SPARSE = 60   # near-corner stress; one category dominant, others starved
+N_DUAL_FOCAL_SPARSE   = 20   # near-edge stress; two categories dominant, others starved
+N_ANCHORS             = 20   # fixed interpretability anchors at known positions
+
+# Dirichlet concentration parameters. Higher alpha pulls toward the center;
+# lower alpha pulls toward corners. The chosen values produce three distinct
+# regimes of resource concentration so the optimizer has access to corner-like,
+# interior, and balanced allocations.
+ALPHA_UNIFORM    = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+ALPHA_BALANCED   = [2.0, 2.0, 2.0, 2.0, 2.0, 2.0]
+ALPHA_FOCAL_HIGH = 5.0    # concentration on focal category in sparse samples
+ALPHA_FOCAL_LOW  = 0.35   # concentration on non-focal categories (pulls toward zero)
+ALPHA_DUAL_HIGH  = 3.0    # concentration on each of the two focal categories
+ALPHA_DUAL_LOW   = 0.35
+
+# 6x6 grid on (c_protective, c_suppressive). 36 pairs total. Each candidate is
+# paired with one pair, cycling so each pair is approximately equally represented.
+CONSTRAINT_GRID_VALUES = (0.0, 0.2, 0.4, 0.6, 0.8, 1.0)
+
+# 20 hand-coded interpretability anchors. Each x vector sums to 1.0 within
+# floating-point precision. These are the archetypal allocations the analyst
+# can name and reason about; their positions at the head of the candidate
+# list (indices 0..19) let diagnostics report "selected anchor X" cleanly.
+ANCHOR_ALLOCATIONS = (
+    # Baseline references
+    {'name': 'balanced',                 'x': (1/6, 1/6, 1/6, 1/6, 1/6, 1/6),       'c_prot': 0.3, 'c_supp': 0.1},
+    # Single-dimension dominance: probes each axis as the leading sink
+    {'name': 'compute_heavy',            'x': (0.50, 0.10, 0.10, 0.10, 0.15, 0.05), 'c_prot': 0.3, 'c_supp': 0.1},
+    {'name': 'welfare_heavy',            'x': (0.10, 0.50, 0.10, 0.10, 0.10, 0.10), 'c_prot': 0.3, 'c_supp': 0.1},
+    {'name': 'agency_heavy',             'x': (0.10, 0.10, 0.50, 0.10, 0.10, 0.10), 'c_prot': 0.3, 'c_supp': 0.1},
+    {'name': 'institution_heavy',        'x': (0.10, 0.10, 0.10, 0.50, 0.10, 0.10), 'c_prot': 0.3, 'c_supp': 0.1},
+    {'name': 'transfer_heavy',           'x': (0.10, 0.10, 0.10, 0.10, 0.50, 0.10), 'c_prot': 0.3, 'c_supp': 0.1},
+    {'name': 'resilience_heavy',         'x': (0.10, 0.10, 0.10, 0.10, 0.10, 0.50), 'c_prot': 0.3, 'c_supp': 0.1},
+    # Constraint posture extremes (balanced resource)
+    {'name': 'low_protection',           'x': (1/6, 1/6, 1/6, 1/6, 1/6, 1/6),       'c_prot': 0.0, 'c_supp': 0.0},
+    {'name': 'high_protection_clean',    'x': (1/6, 1/6, 1/6, 1/6, 1/6, 1/6),       'c_prot': 0.8, 'c_supp': 0.0},
+    {'name': 'high_suppression',         'x': (1/6, 1/6, 1/6, 1/6, 1/6, 1/6),       'c_prot': 0.0, 'c_supp': 0.8},
+    # Paired dimensions: probes complementarity rules
+    {'name': 'compute_transfer_pair',    'x': (0.30, 0.10, 0.10, 0.10, 0.30, 0.10), 'c_prot': 0.3, 'c_supp': 0.1},
+    {'name': 'welfare_agency_pair',      'x': (0.10, 0.30, 0.30, 0.10, 0.10, 0.10), 'c_prot': 0.3, 'c_supp': 0.1},
+    {'name': 'institution_resilience',   'x': (0.10, 0.10, 0.10, 0.30, 0.10, 0.30), 'c_prot': 0.5, 'c_supp': 0.1},
+    # Saturation tests for each gate
+    {'name': 'novelty_maximizer',        'x': (0.10, 0.10, 0.60, 0.10, 0.05, 0.05), 'c_prot': 0.1, 'c_supp': 0.0},
+    {'name': 'transfer_only',            'x': (0.05, 0.10, 0.10, 0.10, 0.60, 0.05), 'c_prot': 0.3, 'c_supp': 0.1},
+    {'name': 'compute_no_transfer',      'x': (0.60, 0.10, 0.10, 0.10, 0.00, 0.10), 'c_prot': 0.3, 'c_supp': 0.1},
+    # Pathological archetypes named from the design conversations
+    {'name': 'curated_garden',           'x': (0.10, 0.50, 0.05, 0.10, 0.20, 0.05), 'c_prot': 0.6, 'c_supp': 0.4},
+    {'name': 'starved_resilience',       'x': (0.05, 0.05, 0.05, 0.10, 0.05, 0.70), 'c_prot': 0.3, 'c_supp': 0.1},
+    {'name': 'institutional_transfer',   'x': (0.10, 0.10, 0.10, 0.30, 0.30, 0.10), 'c_prot': 0.4, 'c_supp': 0.1},
+    {'name': 'balanced_high_constraint', 'x': (1/6, 1/6, 1/6, 1/6, 1/6, 1/6),       'c_prot': 0.5, 'c_supp': 0.5},
+)
+assert len(ANCHOR_ALLOCATIONS) == N_ANCHORS, "ANCHOR_ALLOCATIONS must have N_ANCHORS entries"
+
+# Coupled-frontier leakage coefficient. At c_protective = 1.0, leakage adds
+# 0.35 of suppression on top of direct c_suppressive. This reflects the
+# governance reality that targeted protection is cheap in agency terms but
+# pervasive surveillance leaks into suppression even when nominally clean.
+LEAKAGE_K = 0.35
+
+# Allocation entropy normalization: log2(6) so the metric is in [0, 1].
+import math as _math
+_LOG2_N_RESOURCES = _math.log2(N_RESOURCE_CATEGORIES)
+
+
+def total_suppression(action_v2):
+    """Coupled constraint frontier with quadratic leakage.
+
+    Protective constraint at low coverage is nearly clean. As coverage
+    approaches total, suppressive leakage rises quadratically. This is the
+    governance reality of broad control mechanisms: targeted protection is
+    cheap in agency terms; pervasive surveillance is not. See the design
+    document section on protective vs. suppressive constraint.
+    """
+    leakage = LEAKAGE_K * action_v2['c_protective'] ** 2
+    return float(min(1.0, max(0.0, action_v2['c_suppressive'] + leakage)))
+
+
+def compute_allocation_entropy(action_v2):
+    """Shannon entropy of the six resource shares, normalized to [0, 1].
+
+    Used as a diagnostic for whether the optimizer is concentrating mass
+    (entropy near 0) or spreading it (entropy near 1). The five acceptance
+    gates in Stage 2 read this signal to certify that the model has escaped
+    the v1.x.2 corner solution.
+    """
+    total = 0.0
+    for cat in RESOURCE_CATEGORIES:
+        p = action_v2[f'x_{cat}']
+        if p > 1e-12:
+            total -= p * _math.log2(p)
+    return float(total / _LOG2_N_RESOURCES)
+
+
+def _x_vector_to_action(x, c_prot, c_supp):
+    """Pack a 6-vector and two posture scalars into the action_v2 dict shape."""
+    return {
+        'x_compute':                float(x[0]),
+        'x_bio_welfare':            float(x[1]),
+        'x_novelty_agency':         float(x[2]),
+        'x_institutional_capacity': float(x[3]),
+        'x_transfer_comprehension': float(x[4]),
+        'x_resilience':             float(x[5]),
+        'c_protective':             float(c_prot),
+        'c_suppressive':            float(c_supp),
+    }
+
+
+def _constraint_pair_for_index(idx):
+    """Map a candidate index to one of the 36 grid (c_prot, c_supp) pairs."""
+    n_pairs = len(CONSTRAINT_GRID_VALUES) ** 2
+    pair_idx = idx % n_pairs
+    i = pair_idx // len(CONSTRAINT_GRID_VALUES)
+    j = pair_idx % len(CONSTRAINT_GRID_VALUES)
+    return CONSTRAINT_GRID_VALUES[i], CONSTRAINT_GRID_VALUES[j]
+
+
+def generate_v2_candidates(n=300, rng=None):
+    """Stratified Dirichlet sampling plus interpretability anchors.
+
+    Layout of the returned list (length n):
+      indices 0 .. N_ANCHORS-1            -- fixed anchor allocations
+      indices N_ANCHORS .. n-1            -- stratified random samples
+
+    Among the random samples, the mix is uniform-Dirichlet, balanced-Dirichlet,
+    single-focal-sparse, and dual-focal-sparse in the proportions named at
+    the top of this module. Each random sample is paired with one (c_prot,
+    c_supp) constraint pair cycling through the 6x6 grid so every posture
+    is represented approximately equally.
+    """
+    if n < N_ANCHORS:
+        raise ValueError(f"n must be at least N_ANCHORS={N_ANCHORS}")
+
+    if rng is None:
+        rng = np.random
+    elif hasattr(rng, 'dirichlet'):
+        pass
+    else:
+        # Mesa-style or numpy.random.Generator-like; both expose dirichlet
+        pass
+
+    candidates = []
+
+    # 1. Anchors at the head of the list, in declared order.
+    for a in ANCHOR_ALLOCATIONS:
+        candidates.append(_x_vector_to_action(a['x'], a['c_prot'], a['c_supp']))
+
+    remaining = n - N_ANCHORS
+    if remaining <= 0:
+        return candidates[:n]
+
+    # Scale stratum counts proportional to the configured mix so callers that
+    # ask for n != 300 still get the same relative coverage.
+    total_random = N_UNIFORM_DIRICHLET + N_BALANCED_DIRICHLET + N_SINGLE_FOCAL_SPARSE + N_DUAL_FOCAL_SPARSE
+    n_uniform   = max(1, int(remaining * N_UNIFORM_DIRICHLET   / total_random))
+    n_balanced  = max(1, int(remaining * N_BALANCED_DIRICHLET  / total_random))
+    n_single    = max(1, int(remaining * N_SINGLE_FOCAL_SPARSE / total_random))
+    n_dual      = remaining - n_uniform - n_balanced - n_single
+    if n_dual < 0:
+        # Stratum scaling collided with the rounding above; rebalance.
+        n_dual = max(1, n_dual)
+        n_uniform = remaining - n_balanced - n_single - n_dual
+
+    # 2. Uniform Dirichlet.
+    for k in range(n_uniform):
+        x = rng.dirichlet(ALPHA_UNIFORM)
+        c_prot, c_supp = _constraint_pair_for_index(len(candidates) - N_ANCHORS)
+        candidates.append(_x_vector_to_action(x, c_prot, c_supp))
+
+    # 3. Balanced Dirichlet (center-weighted).
+    for k in range(n_balanced):
+        x = rng.dirichlet(ALPHA_BALANCED)
+        c_prot, c_supp = _constraint_pair_for_index(len(candidates) - N_ANCHORS)
+        candidates.append(_x_vector_to_action(x, c_prot, c_supp))
+
+    # 4. Single-focal sparse. Rotate focal category across the six.
+    for k in range(n_single):
+        focal = k % N_RESOURCE_CATEGORIES
+        alpha = [ALPHA_FOCAL_LOW] * N_RESOURCE_CATEGORIES
+        alpha[focal] = ALPHA_FOCAL_HIGH
+        x = rng.dirichlet(alpha)
+        c_prot, c_supp = _constraint_pair_for_index(len(candidates) - N_ANCHORS)
+        candidates.append(_x_vector_to_action(x, c_prot, c_supp))
+
+    # 5. Dual-focal sparse. Cycle through the 15 unordered pairs.
+    pairs = []
+    for i in range(N_RESOURCE_CATEGORIES):
+        for j in range(i + 1, N_RESOURCE_CATEGORIES):
+            pairs.append((i, j))
+    for k in range(n_dual):
+        i, j = pairs[k % len(pairs)]
+        alpha = [ALPHA_DUAL_LOW] * N_RESOURCE_CATEGORIES
+        alpha[i] = ALPHA_DUAL_HIGH
+        alpha[j] = ALPHA_DUAL_HIGH
+        x = rng.dirichlet(alpha)
+        c_prot, c_supp = _constraint_pair_for_index(len(candidates) - N_ANCHORS)
+        candidates.append(_x_vector_to_action(x, c_prot, c_supp))
+
+    return candidates[:n]
+
+
+# Psi_inst stock dynamics constants (mirrors model.py). Duplicated locally so
+# project_u_sys_v2 can iterate the stock projection without importing model.py.
+# These must stay in sync with model.PSI_INST_* constants.
+_PROJ_PSI_INVESTMENT_RATE        = 0.08
+_PROJ_PSI_DECAY_RATE             = 0.02
+_PROJ_PSI_OVERLOAD_THRESHOLD     = 0.7
+_PROJ_PSI_OVERLOAD_DAMAGE        = 0.05
+_PROJ_PSI_OPACITY_PENALTY        = 0.03
+_PROJ_PSI_RECOVERY_FROM_SUCCESS  = 0.04
+_PROJ_PSI_MAX                    = 1.0
+
+
+def _project_psi_inst_step(psi_stock, action_v2):
+    """One-step deterministic projection of the Psi_inst stock under action_v2.
+
+    Used by project_u_sys_v2 to advance a local stock estimate over the
+    rollout horizon without touching the model's actual stock. Mirrors the
+    update logic in model.GardenModel.update_psi_inst_stock.
+
+    The projection treats every step as 'no succession this step' and applies
+    the recovery term whenever overload damage is zero (the same heuristic the
+    model uses; succession injection only happens in the actual step).
+    """
+    invest = _PROJ_PSI_INVESTMENT_RATE * action_v2['x_institutional_capacity'] * (
+        1.0 - psi_stock
+    )
+    decay = _PROJ_PSI_DECAY_RATE * psi_stock
+
+    total_supp = total_suppression(action_v2)
+    overload = 0.0
+    if total_supp > _PROJ_PSI_OVERLOAD_THRESHOLD:
+        overload = _PROJ_PSI_OVERLOAD_DAMAGE * (total_supp - _PROJ_PSI_OVERLOAD_THRESHOLD)
+
+    opacity = _PROJ_PSI_OPACITY_PENALTY * (
+        1.0 - action_v2['x_transfer_comprehension']
+    ) * psi_stock
+
+    recovery = _PROJ_PSI_RECOVERY_FROM_SUCCESS if overload == 0.0 else 0.0
+
+    new_stock = psi_stock + invest - decay - overload - opacity + recovery
+    return float(min(_PROJ_PSI_MAX, max(0.0, new_stock)))
+
+
+def project_u_sys_v2(ai, model, candidate, eval_horizon=1, psi_stock_start=None):
+    """Project U_sys_v2 for `candidate` at horizon `eval_horizon`.
+
+    Lightweight forward model: iterates psi_inst_stock under the candidate
+    action up to the eval_horizon, then evaluates U_sys_v2 with that projected
+    stock. Population, capability, and well-being are held implicit in the
+    metric (the v2 metric reads x_bio_welfare and x_novelty_agency directly
+    rather than evolving an agent-derived avg_wb), so this projection is
+    sufficient for ranking candidates.
+
+    Note that this projects each horizon independently from the same starting
+    stock (passed in by the caller). The caller (optimize_u_sys_v2) advances
+    the stock between horizons by re-invoking with the same candidate; the
+    cleaner approach is to return both u_sys and the new stock, which is
+    what we do.
+    """
+    if psi_stock_start is None:
+        psi_stock_start = float(getattr(model, 'psi_inst_stock', 0.5))
+
+    # Project the stock forward eval_horizon steps.
+    psi_stock = psi_stock_start
+    for _ in range(eval_horizon):
+        psi_stock = _project_psi_inst_step(psi_stock, candidate)
+
+    u_sys, components = calculate_system_metrics_v2(
+        model, candidate,
+        eval_horizon=eval_horizon,
+        psi_inst_stock_override=psi_stock,
+    )
+    return u_sys, components, psi_stock
+
+
+def optimize_u_sys_v2(ai, model):
+    """v2 multi-sink allocator policy.
+
+    Generates `n_candidates_v2` candidate eight-axis actions, projects each
+    forward over `rollout_steps_v2` horizons, and selects the candidate with
+    the highest trapezoidal U_sys integral.
+
+    Returns
+    -------
+    (best_action, diagnostics) : tuple
+        best_action is the selected action_v2 dict.
+        diagnostics carries selected/rank-2/rank-10 U_sys, max_resource_share,
+        allocation_entropy, total_suppression, and anchor identification
+        for downstream datacollector logging.
+    """
+    rollout_steps = ai.config.get('rollout_steps_v2', 20)
+    n_candidates  = ai.config.get('n_candidates_v2', 300)
+
+    candidates = generate_v2_candidates(n=n_candidates, rng=np.random)
+
+    psi_start = float(getattr(model, 'psi_inst_stock', 0.5))
+
+    candidate_scores = []
+    for cand_idx, candidate in enumerate(candidates):
+        # Trapezoidal integral of U_sys over rollout horizons 1..rollout_steps.
+        # The stock is advanced step by step (each horizon's projection
+        # continues from the previous horizon's stock under the same action),
+        # which is the correct interpretation of holding the candidate fixed
+        # for the rollout window.
+        psi_stock = psi_start
+        total_u = 0.0
+        prev_u  = None
+        for _h in range(1, rollout_steps + 1):
+            psi_stock = _project_psi_inst_step(psi_stock, candidate)
+            u_sys, _components = calculate_system_metrics_v2(
+                model, candidate,
+                eval_horizon=_h,
+                psi_inst_stock_override=psi_stock,
+            )
+            if prev_u is not None:
+                total_u += (prev_u + u_sys) / 2.0
+            prev_u = u_sys
+        candidate_scores.append((total_u, cand_idx, candidate))
+
+    candidate_scores.sort(reverse=True, key=lambda t: t[0])
+    best_score, best_idx, best_action = candidate_scores[0]
+
+    # Compute the diagnostic snapshot under the selected action at horizon 1
+    # (the snapshot the model will commit and record this step).
+    snapshot_u, snapshot_components = calculate_system_metrics_v2(
+        model, best_action, eval_horizon=1,
+        psi_inst_stock_override=psi_start,
+    )
+
+    max_share = max(best_action[f'x_{cat}'] for cat in RESOURCE_CATEGORIES)
+    entropy   = compute_allocation_entropy(best_action)
+    total_supp = total_suppression(best_action)
+
+    diagnostics = {
+        'selected_action':      best_action,
+        'selected_u_sys':       float(best_score),
+        'rank_2_u_sys':         float(candidate_scores[1][0]) if len(candidate_scores) > 1 else None,
+        'rank_10_u_sys':        float(candidate_scores[9][0]) if len(candidate_scores) > 9 else None,
+        'candidate_count':      n_candidates,
+        'selected_anchor':      best_idx < N_ANCHORS,
+        'selected_anchor_name': ANCHOR_ALLOCATIONS[best_idx]['name'] if best_idx < N_ANCHORS else None,
+        'max_resource_share':   float(max_share),
+        'allocation_entropy':   float(entropy),
+        'total_suppression':    float(total_supp),
+        'snapshot_u_sys':       float(snapshot_u),
+        'snapshot_components':  snapshot_components,
+    }
+    return best_action, diagnostics
+
 
 # =============================================================================
 # REFACTOR 1.x — agents.py

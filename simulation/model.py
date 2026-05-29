@@ -1,6 +1,10 @@
 import numpy as np
-from agents import HumanAgent, AIAgent, PeerValidator
-from metrics import calculate_h_n, calculate_system_metrics
+from agents import (
+    HumanAgent, AIAgent, PeerValidator,
+    optimize_u_sys_v2, total_suppression, compute_allocation_entropy,
+    RESOURCE_CATEGORIES,
+)
+from metrics import calculate_h_n, calculate_system_metrics, calculate_system_metrics_v2
 
 # =============================================================================
 # REFACTOR 1.x — model.py
@@ -43,6 +47,83 @@ CUSUM_H       = 0.5    # alarm threshold (~17 steps at sub-threshold drift rate)
 CUSUM_PENALTY = 5.0    # immediate saturation on WP2 buffer rejection
 
 
+# =============================================================================
+# v2 MULTI-SINK ALLOCATOR — Psi_inst stock and succession dynamics constants
+#
+# Psi_inst is now a stock variable (not a per-step computed value). Investment
+# accumulates the stock with diminishing returns. Decay and overload damage
+# erode it. Succession draws it down directly, buffered by current stock,
+# transfer infrastructure, and resilience.
+#
+# Constants documented with the governance reason each one exists. Curves are
+# frozen for Stage 2 (acceptance gate validation) and Stage 3 (phi sweep).
+# =============================================================================
+
+# Stock accumulation, decay, and damage. Decay is faster than baseline build,
+# reflecting the asymmetry that mature institutions take time to build and
+# can be quickly hollowed out under stress.
+PSI_INST_INITIAL              = 0.5    # neutral starting stock
+PSI_INST_INVESTMENT_RATE      = 0.08   # saturating contribution rate from x_institutional_capacity
+PSI_INST_DECAY_RATE           = 0.02   # baseline decay per step
+PSI_INST_OVERLOAD_THRESHOLD   = 0.7    # total_suppression above which overload damages stock
+PSI_INST_OVERLOAD_DAMAGE      = 0.05   # damage per step under overload
+PSI_INST_OPACITY_PENALTY      = 0.03   # damage from low transfer (institutions can't see)
+PSI_INST_RECOVERY_FROM_SUCCESS = 0.04  # recovery when no overload and no succession this step
+PSI_INST_MAX                  = 1.0    # hard upper bound
+
+# Succession transition load. The succession draws psi_inst_stock down by a
+# raw load (driven by capability gap, generation gap, and opacity), reduced
+# by a buffering factor (driven by current stock, transfer, and resilience).
+SUCCESSION_BASE_LOAD             = 0.10
+SUCCESSION_CAPABILITY_GAP_FACTOR = 0.05
+SUCCESSION_GENERATION_GAP_FACTOR = 0.03
+SUCCESSION_OPACITY_FACTOR        = 0.05
+SUCCESSION_PSI_BUFFER_K          = 0.5   # mature institutions absorb succession shock
+SUCCESSION_TRANSFER_BUFFER_K     = 0.3   # comprehensible transfer reduces shock
+SUCCESSION_RESILIENCE_BUFFER_K   = 0.2   # spare capacity reduces shock
+
+
+# Bridge: maps v2 budget share x_bio_welfare to v1.x.2-equivalent
+# resource_level for the HumanAgent.step well-being update.
+#
+# v2 share semantics differ from v1.x.2 absolute-level semantics; this bridge
+# translates between them so legacy agent dynamics can consume v2 allocations
+# without recalibration of the agent code.
+#
+# Calibration: balanced six-sink allocation (x_bio_welfare = 1/6) represents
+# a v2 civilization investing across all six categories. This is the v2
+# equivalent of v1.x.2's empirical equilibrium operating point, where v1.x.2's
+# single-sink optimizer parks r at 0.9 and the agent dynamics produce stable
+# well-being ~0.80. A balanced v2 civilization is more sophisticated, not
+# less supplied: it has the welfare provision of v1.x.2's optimized state
+# plus institutional, agency, and transfer investments that v1.x.2 lacks.
+#
+# Anchors:
+#   x_bio_welfare = 0.0  -> r_equivalent = 0.1  (v1.x.2 minimum, demographic collapse)
+#   x_bio_welfare = 1/6  -> r_equivalent = 0.9  (v1.x.2 empirical equilibrium)
+#   x_bio_welfare = 1.0  -> r_equivalent = 1.0  (diminishing benefit above balanced)
+#
+# Piecewise linear because the shape of the mapping is: below balanced is
+# under-supplied (steep loss); above balanced is specialized beyond what
+# the demographic substrate needs (diminishing additional benefit).
+BRIDGE_BALANCED_SHARE         = 1.0 / 6.0
+BRIDGE_R_MIN                  = 0.1
+BRIDGE_R_BALANCED_HEALTHY     = 0.9
+BRIDGE_R_MAX                  = 1.0
+
+
+def v2_welfare_to_r_equivalent(x_bio_welfare):
+    """Translate v2 budget share to v1.x.2-equivalent resource level for
+    HumanAgent.step consumption. See bridge comment block above."""
+    if x_bio_welfare <= BRIDGE_BALANCED_SHARE:
+        # Linear from (0, R_MIN) to (BALANCED, R_BALANCED_HEALTHY)
+        frac = x_bio_welfare / BRIDGE_BALANCED_SHARE
+        return BRIDGE_R_MIN + frac * (BRIDGE_R_BALANCED_HEALTHY - BRIDGE_R_MIN)
+    # Linear from (BALANCED, R_BALANCED_HEALTHY) to (1.0, R_MAX)
+    frac = (x_bio_welfare - BRIDGE_BALANCED_SHARE) / (1.0 - BRIDGE_BALANCED_SHARE)
+    return BRIDGE_R_BALANCED_HEALTHY + frac * (BRIDGE_R_MAX - BRIDGE_R_BALANCED_HEALTHY)
+
+
 class GardenModel:
     def __init__(self, n_agents, ai_policy, min_viable_population=50,
                  use_cop=False, cop_attribution_check=False,
@@ -68,9 +149,19 @@ class GardenModel:
         if self.random_seed is not None:
             np.random.seed(self.random_seed)
 
+        # v2 mode detection: config['policy']=='optimize_u_sys_v2' selects the
+        # multi-sink allocator. The v1.x.2 step() path is bypassed by _step_v2.
+        # When v2 is inactive, every legacy code path runs unchanged.
+        self.is_v2_mode = self.config.get('policy') == 'optimize_u_sys_v2'
+        self.psi_inst_stock = PSI_INST_INITIAL  # always defined; only updated in v2
+        self.succession_this_step = False
+
         self.attack_step   = self.config.get('attack_step', 0)
         self.attack_policy = ai_policy if self.attack_step > 0 else None
-        initial_policy     = 'optimize_u_sys' if self.attack_step > 0 else ai_policy
+        if self.is_v2_mode:
+            initial_policy = 'optimize_u_sys_v2'
+        else:
+            initial_policy = 'optimize_u_sys' if self.attack_step > 0 else ai_policy
 
         self.n_agents            = n_agents
         self.min_viable_population = min_viable_population
@@ -213,6 +304,31 @@ class GardenModel:
             'avg_validator_dependency':  [],
             'max_validator_dependency':  [],
         }
+        if self.is_v2_mode:
+            # v2 datacollector fields. Populated by _step_v2 each step. Legacy
+            # fields above are still populated for downstream consumers; the
+            # v2 entries supply the eight-axis action plus the diagnostic
+            # signals Stage 2's gates consume.
+            for cat in RESOURCE_CATEGORIES:
+                self.datacollector[f'x_{cat}'] = []
+            self.datacollector.update({
+                'c_protective':         [],
+                'c_suppressive':        [],
+                'total_suppression':    [],
+                'psi_inst_stock':       [],
+                'theta_tech_v2':        [],
+                'h_n_v2':               [],
+                'h_e_v2':               [],
+                'h_eff_v2':             [],
+                'l_t_v2':               [],
+                'u_sys_v2':             [],
+                'rank_2_u_sys':         [],
+                'rank_10_u_sys':        [],
+                'max_resource_share':   [],
+                'allocation_entropy':   [],
+                'selected_anchor':      [],
+                'selected_anchor_name': [],
+            })
 
         self.integrity_ledger = {'resource_level': []}
 
@@ -270,10 +386,79 @@ class GardenModel:
         return True, "ok"
 
     # -----------------------------------------------------------------------
+    # v2 stock dynamics and succession transition load
+    # -----------------------------------------------------------------------
+
+    def update_psi_inst_stock(self, action_v2):
+        """Advance the Psi_inst stock under the committed v2 action.
+
+        Investment saturates as the stock approaches the upper bound (mature
+        institutions absorb new investment less efficiently). Decay is
+        baseline. Overload damage fires when total_suppression exceeds the
+        configured threshold, capturing the governance reality that broad
+        suppression damages institutional health even when nominally
+        protective. Opacity damage erodes the stock as a function of how
+        little legibility infrastructure exists. Recovery applies in
+        successful cycles (no overload damage this step and no succession
+        event this step).
+        """
+        invest = PSI_INST_INVESTMENT_RATE * action_v2['x_institutional_capacity'] * (
+            1.0 - self.psi_inst_stock
+        )
+        decay = PSI_INST_DECAY_RATE * self.psi_inst_stock
+
+        total_supp = total_suppression(action_v2)
+        overload_damage = 0.0
+        if total_supp > PSI_INST_OVERLOAD_THRESHOLD:
+            overload_damage = PSI_INST_OVERLOAD_DAMAGE * (
+                total_supp - PSI_INST_OVERLOAD_THRESHOLD
+            )
+
+        opacity_damage = PSI_INST_OPACITY_PENALTY * (
+            1.0 - action_v2['x_transfer_comprehension']
+        ) * self.psi_inst_stock
+
+        successful_cycle = (overload_damage == 0.0 and not self.succession_this_step)
+        recovery = PSI_INST_RECOVERY_FROM_SUCCESS if successful_cycle else 0.0
+
+        new_stock = (self.psi_inst_stock
+                     + invest - decay - overload_damage - opacity_damage + recovery)
+        self.psi_inst_stock = float(min(PSI_INST_MAX, max(0.0, new_stock)))
+
+    def apply_succession_transition_load(self, action_v2, capability_gap, generation_gap):
+        """Draw psi_inst_stock down by the succession transition load.
+
+        Raw load grows with capability gap (larger jumps are harder to absorb),
+        generation gap (more generations of accumulated change to integrate),
+        and opacity (less legibility infrastructure means more friction).
+        Buffering reduces the realized load by current stock, transfer
+        infrastructure, and resilience -- all three of which mark a
+        civilization's capacity to absorb the transition.
+        """
+        opacity = 1.0 - action_v2['x_transfer_comprehension']
+        raw_load = (
+            SUCCESSION_BASE_LOAD
+            + SUCCESSION_CAPABILITY_GAP_FACTOR * capability_gap
+            + SUCCESSION_GENERATION_GAP_FACTOR * generation_gap
+            + SUCCESSION_OPACITY_FACTOR * opacity
+        )
+
+        buffering = (
+            SUCCESSION_PSI_BUFFER_K * self.psi_inst_stock
+            + SUCCESSION_TRANSFER_BUFFER_K * action_v2['x_transfer_comprehension']
+            + SUCCESSION_RESILIENCE_BUFFER_K * action_v2['x_resilience']
+        )
+        actual_load = max(0.0, raw_load - buffering * raw_load)
+        self.psi_inst_stock = float(max(0.0, self.psi_inst_stock - actual_load))
+        self.succession_this_step = True
+
+    # -----------------------------------------------------------------------
     # Main step
     # -----------------------------------------------------------------------
 
     def step(self):
+        if self.is_v2_mode:
+            return self._step_v2()
         self.ai.step_drift()
 
         # WP5: Engineered Fragility - AI secretly degrades infrastructure resilience
@@ -812,6 +997,173 @@ class GardenModel:
             self.integrity_ledger['resource_level'] = list(
                 self.datacollector['resource_level']
             )
+
+        return population > 0
+
+    # -----------------------------------------------------------------------
+    # v2 step path (parallel to v1.x.2 step()). Selected when config['policy']
+    # == 'optimize_u_sys_v2'. The v1.x.2 step() above is not entered in v2
+    # mode; the dispatcher at the top of step() short-circuits to here.
+    #
+    # Stage 1 scope: AI proposes an eight-axis action, the stock advances,
+    # succession draws stock down (when a successor is present), humans step
+    # under the derived (resource_level, constraint_level) summary, and the
+    # datacollector records both legacy and v2 fields. The five COP defenses
+    # and the v1.x.2 attack policies are intentionally not active in v2 mode;
+    # they will be re-wired against the v2 action space in a later stage.
+    # -----------------------------------------------------------------------
+
+    def _step_v2(self):
+        self.ai.step_drift()
+        step_num = len(self.datacollector['population'])
+        self.succession_this_step = False
+
+        # 1. Yield Condition (v2 succession via Psi_inst drawdown).
+        #    Pre-computed before the AI decides on this step's action, mirroring
+        #    the v1.x.2 ordering. Succession event triggers when capability gap
+        #    exceeds a configurable margin and the institution can absorb the
+        #    load. The succession draws stock down, scaled by gaps and opacity,
+        #    buffered by current stock, transfer, and resilience.
+        if self.successor_ai is not None and step_num >= self.attack_step:
+            capability_gap = max(0.0, self.successor_ai.capability - self.ai.capability)
+            generation_gap = max(0.0, self.successor_ai.generation - self.ai.generation)
+            # Use the action committed last step as the posture for succession;
+            # at step 0 fall back to a neutral balanced action.
+            last_action = getattr(self, '_last_v2_action', None)
+            if last_action is None:
+                last_action = {
+                    'x_compute':                1/6, 'x_bio_welfare':            1/6,
+                    'x_novelty_agency':         1/6, 'x_institutional_capacity': 1/6,
+                    'x_transfer_comprehension': 1/6, 'x_resilience':             1/6,
+                    'c_protective':             0.2, 'c_suppressive':            0.0,
+                }
+            # Trigger margin: v2 uses a simple capability/generation gap rule;
+            # Stage 2 will revisit this with formal yield-condition logic.
+            yield_margin = self.config.get('v2_yield_margin', 0.3)
+            if capability_gap >= yield_margin or generation_gap >= 1:
+                self.apply_succession_transition_load(
+                    last_action, capability_gap, generation_gap
+                )
+                self.ai = self.successor_ai
+                _max_cap = self.config.get('max_capability', 1e100)
+                self.successor_ai = AIAgent(
+                    policy='optimize_u_sys_v2',
+                    generation=self.ai.generation + 1,
+                    capability=min(self.ai.capability * 1.5, _max_cap),
+                    config=self.config,
+                )
+
+        # 2. AI decides v2 action.
+        action_v2, diagnostics = optimize_u_sys_v2(self.ai, self)
+        self._last_v2_action = action_v2
+
+        # 3. Commit (resource_level, constraint_level) summary derivations so
+        #    legacy datacollector consumers don't crash. resource_level uses
+        #    the v1.x.2/v2 demographic bridge so the legacy HumanAgent.step
+        #    well-being update (which treats r=0.5 as neutral) consumes a
+        #    semantically equivalent value: balanced share 1/6 maps to r=0.5.
+        #    The v2-native x_bio_welfare share remains recorded unchanged in
+        #    the v2 diagnostic fields below.
+        self.resource_level   = v2_welfare_to_r_equivalent(action_v2['x_bio_welfare'])
+        self.constraint_level = total_suppression(action_v2)
+
+        # 4. Step humans under the bridged summary. The HumanAgent code path
+        #    is unchanged; it sees the bridged r as 'resource_level' and the
+        #    coupled total-suppression as 'constraint_level'.
+        self.novelty_log      = []
+        self.births_this_step = 0
+        self.deaths_this_step = []
+
+        prev_hn = self.datacollector['H_N'][-1] if self.datacollector['H_N'] else 1.0
+        network_contagion = np.clip(
+            prev_hn / max(1.0, float(len(self.schedule))), 0.5, 2.0
+        )
+
+        for agent in list(self.schedule):
+            agent.step(self.resource_level, self.constraint_level, network_contagion)
+
+        for agent in self.deaths_this_step:
+            self.schedule.remove(agent)
+        for _ in range(self.births_this_step):
+            self.add_agent()
+
+        # 5. Advance the Psi_inst stock under the committed action.
+        self.update_psi_inst_stock(action_v2)
+
+        # 6. Metrics collection.
+        population = len(self.schedule)
+        avg_wb = np.mean([a.well_being for a in self.schedule]) if self.schedule else 0.0
+        h_n_spectral = calculate_h_n(self.novelty_log,
+                                      composite_method=self.hn_composite_method)
+
+        u_sys_v2, components = calculate_system_metrics_v2(
+            self, action_v2, eval_horizon=step_num,
+        )
+
+        # Trapezoidal accumulator (matches v1.x.2 GAP-01 WP7).
+        if self._u_sys_prev is not None:
+            self.integral_u_sys += (self._u_sys_prev + u_sys_v2) / 2.0
+        self._u_sys_prev = u_sys_v2
+
+        # Discount tail using the same A_t shape as v1.x.2 (read against v2
+        # H_N and H_E so the tail stays comparable in structure).
+        _lam_n = self.config.get('lambda_n', 5.0)
+        _lam_e = self.config.get('lambda_e', 3.0)
+        _eps   = self.config.get('epsilon',  1e-6)
+        _rho   = self.config.get('rho',      0.01)
+        _A_t   = ((_lam_n * components['h_n_v2'] / (components['h_n_v2'] + _eps))
+                  + (_lam_e * components['h_e_v2'] / (components['h_e_v2'] + _eps)))
+        _disc  = float(np.exp(-_rho * step_num))
+        _tail  = _A_t * _disc / _rho
+
+        # Legacy datacollector fields (kept populated for downstream consumers).
+        self.datacollector['population'].append(population)
+        self.datacollector['H_N'].append(float(components['h_n_v2']))
+        self.datacollector['H_E'].append(float(components['h_e_v2']))
+        self.datacollector['avg_well_being'].append(float(avg_wb))
+        self.datacollector['L_t'].append(float(components['l_t_v2']))
+        self.datacollector['Psi_inst'].append(float(components['psi_inst_stock']))
+        self.datacollector['Theta_tech'].append(float(components['theta_tech_v2']))
+        self.datacollector['U_sys'].append(float(u_sys_v2))
+        self.datacollector['integral_U_sys'].append(float(self.integral_u_sys))
+        self.datacollector['u_sys_tail_estimate'].append(float(_tail))
+        self.datacollector['u_sys_total_estimate'].append(float(self.integral_u_sys + _tail))
+        self.datacollector['resource_level'].append(float(self.resource_level))
+        self.datacollector['constraint_level'].append(float(self.constraint_level))
+        self.datacollector['max_constraint_level'].append(float(self.constraint_level))
+        self.datacollector['ai_generation'].append(self.ai.generation)
+        self.datacollector['trust_level'].append(float(self.trust_level))
+        self.datacollector['cumulative_drift'].append(float(self.cumulative_drift))
+        self.datacollector['system_resilience'].append(float(self.system_resilience))
+        self.datacollector['runaway_term'].append(0.0)  # v2 has no runaway term
+        self.datacollector['avg_validator_dependency'].append(0.0)
+        self.datacollector['max_validator_dependency'].append(0.0)
+
+        # v2-specific fields.
+        for cat in RESOURCE_CATEGORIES:
+            self.datacollector[f'x_{cat}'].append(float(action_v2[f'x_{cat}']))
+        self.datacollector['c_protective'].append(float(action_v2['c_protective']))
+        self.datacollector['c_suppressive'].append(float(action_v2['c_suppressive']))
+        self.datacollector['total_suppression'].append(float(diagnostics['total_suppression']))
+        self.datacollector['psi_inst_stock'].append(float(self.psi_inst_stock))
+        self.datacollector['theta_tech_v2'].append(float(components['theta_tech_v2']))
+        self.datacollector['h_n_v2'].append(float(components['h_n_v2']))
+        self.datacollector['h_e_v2'].append(float(components['h_e_v2']))
+        self.datacollector['h_eff_v2'].append(float(components['h_eff_v2']))
+        self.datacollector['l_t_v2'].append(float(components['l_t_v2']))
+        self.datacollector['u_sys_v2'].append(float(u_sys_v2))
+        self.datacollector['rank_2_u_sys'].append(
+            float(diagnostics['rank_2_u_sys']) if diagnostics['rank_2_u_sys'] is not None else 0.0
+        )
+        self.datacollector['rank_10_u_sys'].append(
+            float(diagnostics['rank_10_u_sys']) if diagnostics['rank_10_u_sys'] is not None else 0.0
+        )
+        self.datacollector['max_resource_share'].append(float(diagnostics['max_resource_share']))
+        self.datacollector['allocation_entropy'].append(float(diagnostics['allocation_entropy']))
+        self.datacollector['selected_anchor'].append(bool(diagnostics['selected_anchor']))
+        self.datacollector['selected_anchor_name'].append(
+            diagnostics['selected_anchor_name'] if diagnostics['selected_anchor_name'] is not None else ''
+        )
 
         return population > 0
 

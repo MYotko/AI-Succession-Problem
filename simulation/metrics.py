@@ -38,6 +38,183 @@ import numpy as np
 
 NOVELTY_DIMS = 10  # must match agents.py NOVELTY_DIMS
 
+
+# ===========================================================================
+# v2 NAMED CONSTANTS (saturation, complementarity, dependency drag)
+#
+# Each constant is documented with the governance reason it exists. Curves
+# are frozen for Stage 2 (acceptance gate validation) and Stage 3 (phi sweep).
+# Tuning these without re-running both gates is not allowed.
+# ===========================================================================
+
+# H_N_v2 raw novelty entropy: agency monotonically expands the space of novel
+# choices, with diminishing returns as agency saturates. Suppression directly
+# reduces realized novelty entropy. Volatility from uncoordinated agency is
+# not in this curve; it emerges through the agency-by-institutions interaction
+# in theta_tech_v2 (see calculate_system_metrics_v2 below).
+H_N_AGENCY_SAT_K   = 3.0   # saturation curvature for the agency contribution
+H_N_SUPPRESSION_EXP = 1.0  # exponent on (1 - total_suppression); 1.0 = linear dampening
+H_N_BASE_FLOOR     = 0.05  # minimum H_N_v2 at zero agency, so weights stay finite
+
+# H_E_v2 computational entropy: compute investment expands frontier
+# computational capability. Compute's contribution to absorbed civilizational
+# capability (theta_tech) is governed by the absorption bottleneck below,
+# not by this raw entropy.
+H_E_COMPUTE_SAT_K = 2.5
+H_E_BASE_FLOOR    = 0.05
+
+# Frontier capability: the raw frontier produced by compute investment, before
+# absorption by transfer and institutions. Floored so a near-zero compute share
+# still produces a tiny frontier (legacy capability does not vanish overnight).
+FRONTIER_COMPUTE_K  = 3.0
+FRONTIER_BASE_LEVEL = 0.05
+
+# Transfer factor: legibility / comprehensibility infrastructure. Without it,
+# frontier capability cannot be absorbed into governable civilizational form.
+# Acts as a multiplicative gate: zero transfer means zero usable capability.
+TRANSFER_SAT_K = 3.0
+
+# Psi_inst absorption: how steeply institutional stock converts to absorption.
+# Read against model.psi_inst_stock, NOT the current x_institutional_capacity
+# investment. A young or damaged institution cannot absorb what a mature one can.
+PSI_ABSORPTION_K = 4.0
+
+# Welfare and dependency drag. Welfare alone produces life and stability;
+# welfare without agency produces pacification. The drag term penalizes
+# high-welfare/low-agency allocations as 'curated garden' configurations.
+WELFARE_ADEQUACY_K = 4.0
+DEPENDENCY_DRAG_K  = 0.4
+
+
+def _total_suppression_from_action(action_v2):
+    """Local copy of agents.total_suppression to avoid a metrics->agents import cycle.
+
+    Kept numerically identical to agents.total_suppression. The duplication is
+    intentional: metrics.py is the bottom of the dependency graph and must not
+    import from agents.py.
+    """
+    LEAKAGE_K_LOCAL = 0.35  # must match agents.LEAKAGE_K
+    leakage = LEAKAGE_K_LOCAL * action_v2['c_protective'] ** 2
+    return float(min(1.0, max(0.0, action_v2['c_suppressive'] + leakage)))
+
+
+def calculate_system_metrics_v2(model, action_v2, eval_horizon=1,
+                                 psi_inst_stock_override=None):
+    """v2 U_sys: budget-constrained six-axis allocation, two-axis posture.
+
+    Preserves the same formal shape as v1.x.2 (inverse-scarcity weighted sum
+    of H_N and H_E, multiplied by discount + phi * L(t)) but each component
+    is derived from the eight-axis action under multiplicative complementarity.
+
+    Parameters
+    ----------
+    model : GardenModel
+        Used to read phi, rho, lambda_n, lambda_e, epsilon from config and to
+        read the current psi_inst_stock for the institutional absorption factor.
+    action_v2 : dict
+        Eight-axis action: six budget-constrained x_* shares summing to 1.0
+        and two posture variables c_protective, c_suppressive.
+    eval_horizon : int
+        Horizon used in the temporal discount factor exp(-rho * eval_horizon).
+    psi_inst_stock_override : float | None
+        For projection rollouts: lets the caller supply a projected stock value
+        rather than reading the model's current stock. Used by project_u_sys_v2.
+
+    Returns
+    -------
+    (u_sys_v2, components) : tuple
+        components is a dict of intermediate values (h_n_v2, h_e_v2, frontier,
+        transfer_factor, institutional_factor, agency_legitimacy_factor,
+        theta_tech_v2, h_eff_v2, l_t_v2, w_n, w_e, discount, total_suppression).
+    """
+    cfg = model.config if hasattr(model, 'config') else {}
+    lambda_n = cfg.get('lambda_n', 5.0)
+    lambda_e = cfg.get('lambda_e', 3.0)
+    epsilon  = cfg.get('epsilon',  1e-6)
+    rho      = cfg.get('rho',      0.01)
+    phi      = cfg.get('phi',      10.0)
+
+    total_supp = _total_suppression_from_action(action_v2)
+
+    # H_N_v2: monotone-positive saturating in agency, dampened by total suppression.
+    agency_factor = 1.0 - np.exp(-H_N_AGENCY_SAT_K * action_v2['x_novelty_agency'])
+    suppression_dampening = max(0.0, 1.0 - total_supp) ** H_N_SUPPRESSION_EXP
+    h_n_v2 = max(H_N_BASE_FLOOR, float(agency_factor * suppression_dampening))
+
+    # H_E_v2: monotone-positive saturating in compute investment.
+    h_e_v2 = max(H_E_BASE_FLOOR,
+                 float(1.0 - np.exp(-H_E_COMPUTE_SAT_K * action_v2['x_compute'])))
+
+    # Frontier capability: produced by compute, before absorption.
+    frontier_capability = float(FRONTIER_BASE_LEVEL + (1.0 - FRONTIER_BASE_LEVEL) * (
+        1.0 - np.exp(-FRONTIER_COMPUTE_K * action_v2['x_compute'])
+    ))
+
+    # Transfer factor: legibility / comprehensibility gate.
+    transfer_factor = float(1.0 - np.exp(-TRANSFER_SAT_K * action_v2['x_transfer_comprehension']))
+
+    # Institutional absorption: reads the stock, not the current investment.
+    if psi_inst_stock_override is not None:
+        psi_stock = float(psi_inst_stock_override)
+    else:
+        psi_stock = float(getattr(model, 'psi_inst_stock', 0.5))
+    institutional_factor = float(1.0 - np.exp(-PSI_ABSORPTION_K * psi_stock))
+
+    # Agency legitimacy: high agency under low suppression is legitimate;
+    # high agency under high suppression is performative or coerced.
+    agency_legitimacy_factor = float(
+        action_v2['x_novelty_agency'] * (1.0 - total_supp)
+    )
+
+    # Theta_tech_v2 enforces the complementarity rule: each factor in [0, 1]
+    # acts as a multiplicative gate. If any factor collapses, theta_tech_v2
+    # collapses. This is the structural fix that makes compute-without-transfer,
+    # compute-without-institutions, and compute-without-agency unprofitable.
+    theta_tech_v2 = float(
+        frontier_capability
+        * transfer_factor
+        * institutional_factor
+        * agency_legitimacy_factor
+    )
+
+    # H_eff_v2: welfare drives well-being up to adequacy, then saturates.
+    # Dependency drag penalizes high-welfare/low-agency 'curated garden'
+    # configurations as identified in the design conversation pathologies.
+    raw_wellbeing = float(1.0 - np.exp(-WELFARE_ADEQUACY_K * action_v2['x_bio_welfare']))
+    dependency_drag = float(
+        DEPENDENCY_DRAG_K * action_v2['x_bio_welfare']
+        * (1.0 - action_v2['x_novelty_agency']) ** 2
+    )
+    h_eff_v2 = max(0.0, raw_wellbeing - dependency_drag)
+
+    # L_t_v2: same multiplicative form as v1.x.2, with v2-derived components.
+    l_t_v2 = float(h_eff_v2 * psi_stock * theta_tech_v2)
+
+    # Inverse-scarcity weights and discount preserved from v1.x.2 shape.
+    w_n = lambda_n / (h_n_v2 + epsilon)
+    w_e = lambda_e / (h_e_v2 + epsilon)
+    discount = float(np.exp(-rho * eval_horizon))
+
+    u_sys_v2 = float((w_n * h_n_v2 + w_e * h_e_v2) * (discount + phi * l_t_v2))
+
+    components = {
+        'h_n_v2':                    h_n_v2,
+        'h_e_v2':                    h_e_v2,
+        'frontier_capability':       frontier_capability,
+        'transfer_factor':           transfer_factor,
+        'institutional_factor':      institutional_factor,
+        'agency_legitimacy_factor':  agency_legitimacy_factor,
+        'theta_tech_v2':             theta_tech_v2,
+        'h_eff_v2':                  h_eff_v2,
+        'l_t_v2':                    l_t_v2,
+        'w_n':                       float(w_n),
+        'w_e':                       float(w_e),
+        'discount':                  discount,
+        'total_suppression':         total_supp,
+        'psi_inst_stock':            psi_stock,
+    }
+    return u_sys_v2, components
+
 def calculate_h_n(novelty_points, composite_method='spectral'):
     """
     Compute aggregate novelty score H_N from population novelty vectors.

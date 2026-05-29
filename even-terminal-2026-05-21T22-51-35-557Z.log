@@ -1,0 +1,6 @@
+[2026-05-21 18:51:36] [codex-app-server] notification configWarning {"summary":"Codex's Linux sandbox uses bubblewrap and needs access to create user namespaces.","details":null}
+[2026-05-21 18:51:36] [codex-provider] notification missing threadId: method=configWarning
+[2026-05-21 18:51:36] [codex-app-server] notification remoteControl/status/changed {"status":"disabled","serverName":"yotko-Legion-T5-26IOB6","installationId":"a8f97604-60f3-4589-a098-d4854914281b","environmentId":null}
+[2026-05-21 18:51:36] [codex-provider] notification missing threadId: method=remoteControl/status/changed
+[2026-05-21 18:52:15] [192.168.4.35] 404 GET / 7.8ms
+[2026-05-21 18:52:59] [100.80.123.100] 404 GET /?token=81ea7f79455b4f5b7dda3b46a0127fe5f51bb21e1ce39d6e097c7f84f0a053a8&defaultProvider=claude 1.2ms
