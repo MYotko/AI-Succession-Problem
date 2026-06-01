@@ -1,0 +1,201 @@
+{
+  "phi": 10.0,
+  "n_seeds": 5,
+  "n_steps": 100,
+  "mean_final_pop": 125.8,
+  "min_final_pop": 90,
+  "max_final_pop": 160,
+  "per_seed": [
+    {
+      "seed": 0,
+      "n_steps": 100,
+      "final_pop": 160,
+      "final_state": {
+        "avg_well_being": 0.7140469903973687,
+        "population": 160.0,
+        "psi_inst_stock": 0.9317385457040165,
+        "resilience_stock": 0.26471790786374055,
+        "avg_wb_trend": -0.0013679196360986733,
+        "population_trend": -0.015004394299011164,
+        "psi_inst_trend": -0.0005662889685217427,
+        "resilience_trend": -0.0016402276944478718
+      },
+      "mean_state": {
+        "avg_well_being": 0.7492211746323144,
+        "population": 209.7,
+        "psi_inst_stock": 0.8430350897739183,
+        "resilience_stock": 0.27084543411992545,
+        "avg_wb_trend": 0.0006110729290041011,
+        "population_trend": -0.0016521274132987023,
+        "psi_inst_trend": 0.004330598866305671,
+        "resilience_trend": -0.00031454894182547736
+      },
+      "mean_alloc": {
+        "x_compute": 0.18757281479127358,
+        "x_bio_welfare": 0.19836088108365962,
+        "x_novelty_agency": 0.27144455782984694,
+        "x_institutional_capacity": 0.05011206501495594,
+        "x_transfer_comprehension": 0.22306157909074717,
+        "x_resilience": 0.0694481021895167,
+        "c_protective": 0.23600000000000002,
+        "c_suppressive": 0.054000000000000006
+      },
+      "final_u_sys": 3.8369769406652527,
+      "mean_u_sys": 5.895834120865062,
+      "wall_clock": 7.160513162612915
+    },
+    {
+      "seed": 1,
+      "n_steps": 100,
+      "final_pop": 120,
+      "final_state": {
+        "avg_well_being": 0.7035869883623654,
+        "population": 120.0,
+        "psi_inst_stock": 0.9242242962579152,
+        "resilience_stock": 0.2761038386036263,
+        "avg_wb_trend": -0.009417540844285527,
+        "population_trend": -0.011739532684945297,
+        "psi_inst_trend": 0.00046244050203108364,
+        "resilience_trend": 0.002221974334605657
+      },
+      "mean_state": {
+        "avg_well_being": 0.7437891647264466,
+        "population": 172.39,
+        "psi_inst_stock": 0.8456294672701219,
+        "resilience_stock": 0.27047977771045323,
+        "avg_wb_trend": 0.0005825090747901331,
+        "population_trend": -0.004588396048488233,
+        "psi_inst_trend": 0.0042314526841984255,
+        "resilience_trend": -0.00029080768177120207
+      },
+      "mean_alloc": {
+        "x_compute": 0.18743176201418732,
+        "x_bio_welfare": 0.18863306115341832,
+        "x_novelty_agency": 0.2770870256221183,
+        "x_institutional_capacity": 0.05235262288374459,
+        "x_transfer_comprehension": 0.22364918372184156,
+        "x_resilience": 0.07084634460468991,
+        "c_protective": 0.318,
+        "c_suppressive": 0.042
+      },
+      "final_u_sys": 3.6427224236199023,
+      "mean_u_sys": 5.904586212330453,
+      "wall_clock": 7.188825845718384
+    },
+    {
+      "seed": 2,
+      "n_steps": 100,
+      "final_pop": 90,
+      "final_state": {
+        "avg_well_being": 0.7159862720279405,
+        "population": 90.0,
+        "psi_inst_stock": 0.9251808776755527,
+        "resilience_stock": 0.2880000087236373,
+        "avg_wb_trend": 0.006575352187490574,
+        "population_trend": -0.01466449119493955,
+        "psi_inst_trend": -0.0016521076808669313,
+        "resilience_trend": 0.0010781288273827416
+      },
+      "mean_state": {
+        "avg_well_being": 0.7254339096345145,
+        "population": 151.34,
+        "psi_inst_stock": 0.8484342136465134,
+        "resilience_stock": 0.2914851871314485,
+        "avg_wb_trend": 0.0005251892139071,
+        "population_trend": -0.007330231001990231,
+        "psi_inst_trend": 0.004290357955975754,
+        "resilience_trend": -0.00014515625206922426
+      },
+      "mean_alloc": {
+        "x_compute": 0.17415256531542894,
+        "x_bio_welfare": 0.19308324131276267,
+        "x_novelty_agency": 0.26988198056293733,
+        "x_institutional_capacity": 0.05119793449885518,
+        "x_transfer_comprehension": 0.23117249580769111,
+        "x_resilience": 0.08051178250232471,
+        "c_protective": 0.28400000000000003,
+        "c_suppressive": 0.046000000000000006
+      },
+      "final_u_sys": 3.880375977291833,
+      "mean_u_sys": 5.902596115461273,
+      "wall_clock": 7.266896963119507
+    },
+    {
+      "seed": 3,
+      "n_steps": 100,
+      "final_pop": 143,
+      "final_state": {
+        "avg_well_being": 0.7443336916547888,
+        "population": 143.0,
+        "psi_inst_stock": 0.9269550651288708,
+        "resilience_stock": 0.2586936983086611,
+        "avg_wb_trend": 0.0005596789058017844,
+        "population_trend": 0.005612922095670949,
+        "psi_inst_trend": 0.0006013497448668841,
+        "resilience_trend": -0.0012122116465745239
+      },
+      "mean_state": {
+        "avg_well_being": 0.7423691047248921,
+        "population": 172.4,
+        "psi_inst_stock": 0.8477441812808696,
+        "resilience_stock": 0.27603610776844834,
+        "avg_wb_trend": 0.0009964523750595781,
+        "population_trend": -0.003216934397832746,
+        "psi_inst_trend": 0.004255519157241813,
+        "resilience_trend": -0.0003847780784933163
+      },
+      "mean_alloc": {
+        "x_compute": 0.1953242653851699,
+        "x_bio_welfare": 0.17837242808342624,
+        "x_novelty_agency": 0.2745065196702777,
+        "x_institutional_capacity": 0.05279606259507422,
+        "x_transfer_comprehension": 0.22838843869909753,
+        "x_resilience": 0.07061228556695442,
+        "c_protective": 0.28400000000000003,
+        "c_suppressive": 0.05
+      },
+      "final_u_sys": 4.105784225481046,
+      "mean_u_sys": 5.889573586411752,
+      "wall_clock": 7.504957437515259
+    },
+    {
+      "seed": 4,
+      "n_steps": 100,
+      "final_pop": 116,
+      "final_state": {
+        "avg_well_being": 0.6818547079072083,
+        "population": 116.0,
+        "psi_inst_stock": 0.9243444767025505,
+        "resilience_stock": 0.28017729878611697,
+        "avg_wb_trend": -0.00532004583674527,
+        "population_trend": -0.012026131406399304,
+        "psi_inst_trend": -0.0010804302896906303,
+        "resilience_trend": 0.0013660173810399652
+      },
+      "mean_state": {
+        "avg_well_being": 0.7365679838825524,
+        "population": 157.43,
+        "psi_inst_stock": 0.8458730534217116,
+        "resilience_stock": 0.2728460480992231,
+        "avg_wb_trend": 0.00040863733649895885,
+        "population_trend": -0.004927975475356434,
+        "psi_inst_trend": 0.004268654807118285,
+        "resilience_trend": -0.00023010075102976267
+      },
+      "mean_alloc": {
+        "x_compute": 0.1906957706148738,
+        "x_bio_welfare": 0.1862853680117485,
+        "x_novelty_agency": 0.2764993909031173,
+        "x_institutional_capacity": 0.050053827443870276,
+        "x_transfer_comprehension": 0.22422294124694,
+        "x_resilience": 0.07224270177945023,
+        "c_protective": 0.29600000000000004,
+        "c_suppressive": 0.046
+      },
+      "final_u_sys": 3.849115233324976,
+      "mean_u_sys": 5.889747493122614,
+      "wall_clock": 7.366108179092407
+    }
+  ],
+  "total_wall_clock_sec": 36.48738169670105
+}

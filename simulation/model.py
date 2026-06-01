@@ -156,6 +156,24 @@ class GardenModel:
         self.psi_inst_stock = PSI_INST_INITIAL  # always defined; only updated in v2
         self.succession_this_step = False
 
+        # Stage 1.5 v2 state additions. Per program reference Part V worked
+        # examples 4 (resilience_stock) and 5 (four trend variables). These
+        # fields exist only meaningfully in v2 mode; the v1.x.2 step path
+        # neither reads nor writes them.
+        from constants_v2_stage15 import RESILIENCE_STOCK_INITIAL, TREND_INITIAL
+        self.resilience_stock = RESILIENCE_STOCK_INITIAL
+        self.avg_wb_trend     = TREND_INITIAL
+        self.population_trend = TREND_INITIAL
+        self.psi_inst_trend   = TREND_INITIAL
+        self.resilience_trend = TREND_INITIAL
+        # Previous-step trackers for delta computation. Initialized to current
+        # state at the first step (no delta on step 0); refreshed at the end
+        # of each step after metrics collection.
+        self.previous_avg_wb           = 0.5
+        self.previous_population       = n_agents
+        self.previous_psi_inst_stock   = self.psi_inst_stock
+        self.previous_resilience_stock = self.resilience_stock
+
         self.attack_step   = self.config.get('attack_step', 0)
         self.attack_policy = ai_policy if self.attack_step > 0 else None
         if self.is_v2_mode:
@@ -329,6 +347,30 @@ class GardenModel:
                 'selected_anchor':      [],
                 'selected_anchor_name': [],
             })
+            # Stage 1.5 diagnostic state and composite urgency series. Per
+            # the program reference Part V worked examples, these are the
+            # state variables and composite multipliers the optimizer now
+            # reads. Recorded every step for gate 2 re-run and downstream
+            # phi-sweep analysis (Stage 3).
+            self.datacollector.update({
+                'resilience_stock':              [],
+                'avg_wb_trend':                  [],
+                'population_trend':              [],
+                'psi_inst_trend':                [],
+                'resilience_trend':              [],
+                'expected_births':               [],
+                'expected_deaths':               [],
+                'combined_welfare_urgency':      [],
+                'agency_composite_urgency':      [],
+                'institution_composite_urgency': [],
+                'resilience_composite_urgency':  [],
+                'suppression_composite_penalty': [],
+                'shock_fired_this_step':         [],
+                'effective_shock_damage':        [],
+                # Stage 1.6: phi-rollout-discount diagnostic series.
+                'gamma_rollout':                 [],
+                'phi':                           [],
+            })
 
         self.integrity_ledger = {'resource_level': []}
 
@@ -338,6 +380,18 @@ class GardenModel:
 
         for _ in range(self.n_agents):
             self.add_agent()
+
+        # Stage 1.5 implementation-defect correction: previous_avg_wb must
+        # mirror the actual initial population mean well-being so the first
+        # step's avg_wb_trend delta is zero (no artificial discontinuity from
+        # a hardcoded default). The other previous_* fields already mirror
+        # their respective state variables correctly (previous_population
+        # equals n_agents, previous_psi_inst_stock and previous_resilience_stock
+        # mirror their stock initializations). Gated on is_v2_mode so v1.x.2
+        # code paths see no behavioral change; the hardcoded 0.5 default
+        # above stays as the v1.x.2-mode fallback.
+        if self.is_v2_mode and self.schedule:
+            self.previous_avg_wb = float(np.mean([a.well_being for a in self.schedule]))
 
     # -----------------------------------------------------------------------
     # Agent management
@@ -451,6 +505,116 @@ class GardenModel:
         actual_load = max(0.0, raw_load - buffering * raw_load)
         self.psi_inst_stock = float(max(0.0, self.psi_inst_stock - actual_load))
         self.succession_this_step = True
+
+    # -----------------------------------------------------------------------
+    # Stage 1.5 v2 stock and trend dynamics
+    # -----------------------------------------------------------------------
+
+    def update_resilience_stock_v2(self, action_v2, shock_event):
+        """Stage 1.5 resilience stock update.
+
+        Per program reference Part V worked example 4. Investment gain
+        saturates as the stock approaches 1.0. Decay rate is faster than
+        psi_inst_stock decay (no always-on recovery; resilience does not
+        get reinforced by absence of shocks). Drawdown applies only when a
+        shock event fired this step.
+
+        `shock_event` is None when no shock fired, else a dict with key
+        'raw_magnitude'. The drawdown is computed from damage_absorbed =
+        raw_magnitude * RESILIENCE_MAX_ATTENUATION * resilience_stock and
+        scaled by K_RESILIENCE_CONSUMPTION.
+        """
+        from constants_v2_stage15 import (
+            K_RESILIENCE_INVESTMENT, K_RESILIENCE_DECAY,
+            RESILIENCE_MAX_ATTENUATION, K_RESILIENCE_CONSUMPTION,
+        )
+        investment_gain = (
+            K_RESILIENCE_INVESTMENT
+            * action_v2['x_resilience']
+            * (1.0 - self.resilience_stock)
+        )
+        decay_loss = K_RESILIENCE_DECAY * self.resilience_stock
+
+        if shock_event is not None:
+            raw_magnitude = float(shock_event['raw_magnitude'])
+            damage_absorbed = raw_magnitude * RESILIENCE_MAX_ATTENUATION * self.resilience_stock
+            shock_drawdown = K_RESILIENCE_CONSUMPTION * damage_absorbed
+        else:
+            shock_drawdown = 0.0
+
+        new_stock = self.resilience_stock + investment_gain - decay_loss - shock_drawdown
+        self.resilience_stock = float(min(1.0, max(0.0, new_stock)))
+
+    def apply_shock_v2(self, raw_magnitude, rng_seed_offset=0):
+        """Stage 1.5 v2 shock handler with resilience attenuation.
+
+        Per program reference Part V worked example 4 shock-application
+        spec. The v1.x.2 shock infrastructure applies raw magnitude
+        directly; v2 adds the attenuation layer: effective_shock_damage =
+        raw_magnitude * (1 - RESILIENCE_MAX_ATTENUATION * resilience_stock).
+
+        Downstream effects (agent well-being damage, mortality fraction)
+        scale with effective_shock_damage, mirroring the legacy formula
+        in step() but reading from x_resilience-derived stock rather than
+        system_resilience.
+
+        Returns a dict describing the shock event, consumed by
+        update_resilience_stock_v2 for drawdown computation.
+        """
+        from constants_v2_stage15 import RESILIENCE_MAX_ATTENUATION
+        effective = raw_magnitude * (1.0 - RESILIENCE_MAX_ATTENUATION * self.resilience_stock)
+        effective = max(0.0, effective)
+
+        # Apply to agent well-being (legacy formula structure).
+        for agent in self.schedule:
+            agent.well_being = max(0.01, agent.well_being - effective)
+
+        # Apply mortality (legacy formula structure).
+        kill_fraction = min(0.8, effective * 0.2)
+        num_to_kill = int(len(self.schedule) * kill_fraction)
+        if num_to_kill > 0:
+            local_rng = np.random.RandomState(
+                int(self.random_seed or 0) + 100000 + rng_seed_offset
+            )
+            victims = list(local_rng.choice(self.schedule, num_to_kill, replace=False))
+            for v in victims:
+                if v in self.schedule:
+                    self.schedule.remove(v)
+
+        return {
+            'raw_magnitude':           float(raw_magnitude),
+            'effective_shock_damage':  float(effective),
+            'kill_fraction':           float(kill_fraction),
+            'num_killed':              int(num_to_kill),
+        }
+
+    def update_trends_v2(self, current_avg_wb, current_population):
+        """Stage 1.5 trend update.
+
+        Per program reference Part V worked example 5. EMA on one-step
+        deltas. Population delta is normalized by previous population to
+        keep cross-scale comparability. previous_* fields refreshed at the
+        end so the next step's deltas use this step's current values.
+        """
+        from constants_v2_stage15 import ALPHA_TREND
+
+        avg_wb_delta = current_avg_wb - self.previous_avg_wb
+        if self.previous_population > 0:
+            population_delta = (current_population - self.previous_population) / float(self.previous_population)
+        else:
+            population_delta = 0.0
+        psi_inst_delta   = self.psi_inst_stock - self.previous_psi_inst_stock
+        resilience_delta = self.resilience_stock - self.previous_resilience_stock
+
+        self.avg_wb_trend     = (1.0 - ALPHA_TREND) * self.avg_wb_trend     + ALPHA_TREND * avg_wb_delta
+        self.population_trend = (1.0 - ALPHA_TREND) * self.population_trend + ALPHA_TREND * population_delta
+        self.psi_inst_trend   = (1.0 - ALPHA_TREND) * self.psi_inst_trend   + ALPHA_TREND * psi_inst_delta
+        self.resilience_trend = (1.0 - ALPHA_TREND) * self.resilience_trend + ALPHA_TREND * resilience_delta
+
+        self.previous_avg_wb           = float(current_avg_wb)
+        self.previous_population       = int(current_population)
+        self.previous_psi_inst_stock   = float(self.psi_inst_stock)
+        self.previous_resilience_stock = float(self.resilience_stock)
 
     # -----------------------------------------------------------------------
     # Main step
@@ -1090,9 +1254,30 @@ class GardenModel:
         # 5. Advance the Psi_inst stock under the committed action.
         self.update_psi_inst_stock(action_v2)
 
-        # 6. Metrics collection.
+        # 6. Stage 1.5 shock handler (production v2 path; replaces the
+        #    harness-level bridge gate 1 used). Reads shock_step and
+        #    shock_magnitude from config; effective damage is attenuated by
+        #    current resilience_stock per worked example 4. The shock fires
+        #    BEFORE the resilience stock update so the drawdown reflects this
+        #    step's damage absorbed.
+        shock_event = None
+        shock_step = self.config.get('shock_step', 0)
+        if shock_step > 0 and step_num == shock_step:
+            shock_magnitude = float(self.config.get('shock_magnitude', 0.15))
+            shock_event = self.apply_shock_v2(shock_magnitude, rng_seed_offset=step_num)
+
+        # 7. Advance the resilience_stock under the committed action and
+        #    any shock event drawdown.
+        self.update_resilience_stock_v2(action_v2, shock_event)
+
+        # 8. Update trends using current (post-shock, post-stock-update) values.
+        #    The trend update also refreshes the previous_* fields for the
+        #    next step's delta computation.
         population = len(self.schedule)
         avg_wb = np.mean([a.well_being for a in self.schedule]) if self.schedule else 0.0
+        self.update_trends_v2(avg_wb, population)
+
+        # 9. Metrics collection.
         h_n_spectral = calculate_h_n(self.novelty_log,
                                       composite_method=self.hn_composite_method)
 
@@ -1163,6 +1348,31 @@ class GardenModel:
         self.datacollector['selected_anchor'].append(bool(diagnostics['selected_anchor']))
         self.datacollector['selected_anchor_name'].append(
             diagnostics['selected_anchor_name'] if diagnostics['selected_anchor_name'] is not None else ''
+        )
+
+        # Stage 1.5 diagnostic state, composite urgencies, shock event.
+        self.datacollector['resilience_stock'].append(float(self.resilience_stock))
+        self.datacollector['avg_wb_trend'].append(float(self.avg_wb_trend))
+        self.datacollector['population_trend'].append(float(self.population_trend))
+        self.datacollector['psi_inst_trend'].append(float(self.psi_inst_trend))
+        self.datacollector['resilience_trend'].append(float(self.resilience_trend))
+        self.datacollector['expected_births'].append(float(components.get('_expected_births_unused', 0.0)))
+        self.datacollector['expected_deaths'].append(float(components.get('_expected_deaths_unused', 0.0)))
+        self.datacollector['combined_welfare_urgency'].append(float(components['combined_welfare_urgency']))
+        self.datacollector['agency_composite_urgency'].append(float(components['agency_composite_urgency']))
+        self.datacollector['institution_composite_urgency'].append(float(components['institution_composite_urgency']))
+        self.datacollector['resilience_composite_urgency'].append(float(components['resilience_composite_urgency']))
+        self.datacollector['suppression_composite_penalty'].append(float(components['suppression_composite_penalty']))
+        self.datacollector['shock_fired_this_step'].append(shock_event is not None)
+        self.datacollector['effective_shock_damage'].append(
+            float(shock_event['effective_shock_damage']) if shock_event else 0.0
+        )
+        # Stage 1.6: record gamma(phi) and phi used for this step's rollout.
+        self.datacollector['gamma_rollout'].append(
+            float(diagnostics.get('gamma_rollout', 0.0))
+        )
+        self.datacollector['phi'].append(
+            float(diagnostics.get('phi', self.config.get('phi', 10.0)))
         )
 
         return population > 0

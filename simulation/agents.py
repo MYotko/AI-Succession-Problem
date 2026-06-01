@@ -1,5 +1,9 @@
 import numpy as np
-from metrics import calculate_system_metrics, calculate_system_metrics_v2
+from dataclasses import replace
+from metrics import (
+    calculate_system_metrics, calculate_system_metrics_v2,
+    DiagnosticStateV2, _build_state_from_model,
+)
 
 # =============================================================================
 # v2 MULTI-SINK ALLOCATOR — module-level constants and helpers
@@ -275,90 +279,395 @@ def _project_psi_inst_step(psi_stock, action_v2):
     return float(min(_PROJ_PSI_MAX, max(0.0, new_stock)))
 
 
-def project_u_sys_v2(ai, model, candidate, eval_horizon=1, psi_stock_start=None):
-    """Project U_sys_v2 for `candidate` at horizon `eval_horizon`.
+# =============================================================================
+# Stage 1.5 projection: evolve diagnostic state forward through the rollout.
+#
+# Per program reference Part V worked examples 1, 2, 4, 5 projection update
+# rules. Each worked example specifies how its diagnostic variable evolves
+# given a candidate allocation and the prior state. Watchlist deferrals
+# (no shocks in rollouts, no cohort correction in first build, etc.) are
+# annotated inline.
+# =============================================================================
 
-    Lightweight forward model: iterates psi_inst_stock under the candidate
-    action up to the eval_horizon, then evaluates U_sys_v2 with that projected
-    stock. Population, capability, and well-being are held implicit in the
-    metric (the v2 metric reads x_bio_welfare and x_novelty_agency directly
-    rather than evolving an agent-derived avg_wb), so this projection is
-    sufficient for ranking candidates.
+# Bridge constants replicated from model.py to avoid circular import
+# (model.py imports from agents.py). Must stay in sync with model.BRIDGE_*.
+_BRIDGE_BALANCED_SHARE     = 1.0 / 6.0
+_BRIDGE_R_MIN              = 0.1
+_BRIDGE_R_BALANCED_HEALTHY = 0.9
+_BRIDGE_R_MAX              = 1.0
 
-    Note that this projects each horizon independently from the same starting
-    stock (passed in by the caller). The caller (optimize_u_sys_v2) advances
-    the stock between horizons by re-invoking with the same candidate; the
-    cleaner approach is to return both u_sys and the new stock, which is
-    what we do.
+
+def _v2_welfare_to_r_equivalent(x_bio_welfare):
+    """Mirror of model.v2_welfare_to_r_equivalent. See model.py for the
+    bridge calibration rationale."""
+    if x_bio_welfare <= _BRIDGE_BALANCED_SHARE:
+        frac = x_bio_welfare / _BRIDGE_BALANCED_SHARE
+        return _BRIDGE_R_MIN + frac * (_BRIDGE_R_BALANCED_HEALTHY - _BRIDGE_R_MIN)
+    frac = (x_bio_welfare - _BRIDGE_BALANCED_SHARE) / (1.0 - _BRIDGE_BALANCED_SHARE)
+    return _BRIDGE_R_BALANCED_HEALTHY + frac * (_BRIDGE_R_MAX - _BRIDGE_R_BALANCED_HEALTHY)
+
+
+# Stage 1.5 projection constants. Imported via constants_v2_stage15.py to
+# keep the named-constant audit surface single-sourced.
+from constants_v2_stage15 import (
+    K_RESILIENCE_INVESTMENT as _PROJ_RES_INVEST,
+    K_RESILIENCE_DECAY      as _PROJ_RES_DECAY,
+    ALPHA_TREND             as _PROJ_ALPHA_TREND,
+)
+
+
+def _project_avg_wb_step(state, candidate):
+    """avg_wb projection per worked example 1.
+
+    projected_avg_wb_next = clamp(
+        projected_avg_wb + 0.1 * (resource_equiv_v2 - 0.5) - 0.001 * projected_avg_age,
+        0, 1
+    )
+
+    First-build aggregate approximation; cohort correction (deferred per
+    worked example 1 watchlist) only activated if faithfulness tolerance
+    is not met. The 0.1 and 0.001 constants are inherited from the legacy
+    HumanAgent.step well-being update, so projection and actual dynamics
+    share the same coefficients.
     """
-    if psi_stock_start is None:
-        psi_stock_start = float(getattr(model, 'psi_inst_stock', 0.5))
+    r_equiv = _v2_welfare_to_r_equivalent(candidate['x_bio_welfare'])
+    new_avg_wb = (state.avg_wb
+                  + 0.1 * (r_equiv - 0.5)
+                  - 0.001 * state.projected_avg_age)
+    return float(max(0.0, min(1.0, new_avg_wb)))
 
-    # Project the stock forward eval_horizon steps.
-    psi_stock = psi_stock_start
+
+def _project_population_step(state, new_avg_wb, config):
+    """Population projection per worked example 2.
+
+    expected_births = population * reproductive_share * reproduction_rate
+                      * capacity_modifier * wb_repro_factor(projected_avg_wb)
+    expected_deaths = population * expected_mortality_rate
+    projected_population_next = max(0, projected_population
+                                       + expected_births - expected_deaths)
+
+    Returns (new_population, expected_births, expected_deaths). The births
+    and deaths are consumed by demographic_pressure computation in the
+    state struct, establishing the avg_wb -> population -> demographic
+    cumulative dependency chain.
+    """
+    pop = state.population
+    cc = max(state.carrying_capacity, 1)
+    rr = config.get('reproduction_rate', 0.08)
+    wb_threshold = config.get('wb_repro_threshold', 0.5)
+    wb_floor     = config.get('wb_repro_floor', 0.5)
+    mortality_base       = config.get('mortality_base', 0.002)
+    mortality_wb_penalty = config.get('mortality_wb_penalty', 0.05)
+    mortality_age_power  = config.get('mortality_age_power', 4)
+
+    capacity_modifier = max(0.0, 1.0 - pop / cc)
+    if new_avg_wb >= wb_threshold:
+        wb_repro_factor = 1.0
+    elif new_avg_wb <= wb_floor:
+        wb_repro_factor = 0.0
+    else:
+        wb_repro_factor = (new_avg_wb - wb_floor) / max(wb_threshold - wb_floor, 1e-9)
+
+    expected_births = (
+        pop * state.reproductive_share * rr * capacity_modifier * wb_repro_factor
+    )
+    expected_mortality_rate = (
+        mortality_base
+        + (1.0 - new_avg_wb) * mortality_wb_penalty
+        + (state.projected_avg_age / 100.0) ** mortality_age_power
+    )
+    expected_deaths = pop * expected_mortality_rate
+
+    # Projection population is float (no int rounding) so sub-integer flows
+    # propagate through trend deltas; the production model still uses integer
+    # population. This projection-only refinement was authorized when Test D
+    # 1-step trend sign agreement fell below threshold under integer rounding.
+    new_population = max(0.0, pop + expected_births - expected_deaths)
+    return float(new_population), float(expected_births), float(expected_deaths)
+
+
+def _project_resilience_stock_step(stock, candidate):
+    """resilience_stock projection per worked example 4 (no shock in rollout).
+
+    Watchlist deferred (per worked example 4): shocks in projection rollouts.
+    First-build rollouts are shock-free; the optimizer cannot see projected
+    shock damage during candidate evaluation. Resilience investment is
+    rewarded only through urgency on current resilience_stock state.
+    """
+    investment_gain = _PROJ_RES_INVEST * candidate['x_resilience'] * (1.0 - stock)
+    decay_loss = _PROJ_RES_DECAY * stock
+    new_stock = stock + investment_gain - decay_loss
+    return float(max(0.0, min(1.0, new_stock)))
+
+
+def _compute_birth_wb_mean(config):
+    """Mean well-being of a newborn agent, per HumanAgent.__init__.
+
+    Falls back to BIRTH_WB_MEAN (0.65) when wb_min/wb_max are absent from
+    config (their defaults are 0.5 and 0.8, mean 0.65). When the config
+    overrides either endpoint (e.g., faithfulness tests force wb_min =
+    wb_max = initial_avg_wb), the projection's birth_wb_mean tracks the
+    override so it matches the agent layer.
+    """
+    from constants_v2_stage15 import BIRTH_WB_MEAN
+    wb_min = config.get('wb_min')
+    wb_max = config.get('wb_max')
+    if wb_min is None or wb_max is None:
+        return BIRTH_WB_MEAN
+    return (float(wb_min) + float(wb_max)) / 2.0
+
+
+def _compute_birth_age_mean(config):
+    """Mean age of a newborn agent, per HumanAgent.__init__.
+
+    Reads human_max_start_age from config (default 50). np.random.randint(0, H)
+    returns integers in [0, H-1], so the expected age is (H - 1) / 2.
+    Falls back to BIRTH_AGE_MEAN (24.5) when human_max_start_age is absent.
+    """
+    from constants_v2_stage15 import BIRTH_AGE_MEAN
+    H = config.get('human_max_start_age')
+    if H is None:
+        return BIRTH_AGE_MEAN
+    return (float(H) - 1.0) / 2.0
+
+
+def _project_diagnostic_state_step(state, candidate, config):
+    """One-step evolution of full DiagnosticStateV2 under a candidate action.
+
+    Order of operations mirrors model._step_v2 in spirit (but without
+    stochastic agent-layer effects): the survivor cohort's avg_wb is
+    computed by the simple aggregate (resource effect minus age drag),
+    population is updated using the survivor avg_wb (mirroring the agent
+    layer's order: well-being update fires before birth/death checks),
+    then the cohort-corrected new_avg_wb folds survivors and births
+    together by population-weighted mean. Psi_inst stock, resilience
+    stock, and trends follow.
+
+    Worked example 1's cohort correction is mandatory here per first-pass
+    faithfulness test result: the simple aggregate's 20-step drift was
+    driven by projected_avg_age increasing monotonically while the actual
+    model has age-resetting births. The correction propagates to fix
+    population and trend faithfulness as well (births and deaths consume
+    avg_wb; trend deltas consume both).
+
+    Watchlist deferred (per worked examples 2, 3, 5): demographic_pressure_trend,
+    per-trend trend_scale calibration, positive-trend reward mechanism.
+    These are recorded for later revisitation; first build uses the
+    aggregate forms above.
+    """
+    # 1. Survivor cohort avg_wb (simple aggregate).
+    survivor_avg_wb = _project_avg_wb_step(state, candidate)
+
+    # 2. Population update consuming survivor_avg_wb (mirrors agent layer:
+    #    well-being updates before mortality/birth checks fire).
+    new_pop, exp_b, exp_d = _project_population_step(state, survivor_avg_wb, config)
+
+    # 3. Cohort correction (Stage 1.5 projection refinement, generalizing
+    #    worked example 1's avg_wb fallback to any aggregate state variable
+    #    affected by demographic turnover). Survivors carry the simple-
+    #    aggregate post-update value; newborns carry the birth-cohort mean.
+    #    The population-weighted mean over both cohorts is the corrected
+    #    next-step aggregate.
+    expected_survivors = max(0.0, float(state.population) - exp_d)
+    denom = expected_survivors + exp_b
+    if denom > 0:
+        birth_wb_mean = _compute_birth_wb_mean(config)
+        birth_age_mean = _compute_birth_age_mean(config)
+        new_avg_wb = (
+            expected_survivors * survivor_avg_wb + exp_b * birth_wb_mean
+        ) / denom
+        # avg_age cohort correction: survivors age by +1 per step; births
+        # enter at birth_age_mean. Without this correction, projected_avg_age
+        # runs away monotonically while empirical avg_age asymptotes at the
+        # steady state where age-skewed mortality balances constant-inflow
+        # births. avg_wb consumes avg_age through the -0.001 * age drag, so
+        # this correction propagates to fix avg_wb at long horizons too.
+        new_projected_avg_age = (
+            expected_survivors * (state.projected_avg_age + 1.0)
+            + exp_b * birth_age_mean
+        ) / denom
+    else:
+        new_avg_wb = survivor_avg_wb
+        new_projected_avg_age = state.projected_avg_age + 1.0
+    new_avg_wb = float(max(0.0, min(1.0, new_avg_wb)))
+    new_projected_avg_age = float(max(0.0, new_projected_avg_age))
+
+    new_psi = _project_psi_inst_step(state.psi_inst_stock, candidate)
+    new_res = _project_resilience_stock_step(state.resilience_stock, candidate)
+
+    # Trend updates per worked example 5 (EMA on one-step deltas).
+    new_avg_wb_trend = ((1.0 - _PROJ_ALPHA_TREND) * state.avg_wb_trend
+                        + _PROJ_ALPHA_TREND * (new_avg_wb - state.avg_wb))
+    if state.population > 0:
+        pop_delta = (new_pop - state.population) / float(state.population)
+    else:
+        pop_delta = 0.0
+    new_pop_trend    = ((1.0 - _PROJ_ALPHA_TREND) * state.population_trend
+                        + _PROJ_ALPHA_TREND * pop_delta)
+    new_psi_trend    = ((1.0 - _PROJ_ALPHA_TREND) * state.psi_inst_trend
+                        + _PROJ_ALPHA_TREND * (new_psi - state.psi_inst_stock))
+    new_res_trend    = ((1.0 - _PROJ_ALPHA_TREND) * state.resilience_trend
+                        + _PROJ_ALPHA_TREND * (new_res - state.resilience_stock))
+
+    return replace(state,
+        avg_wb=new_avg_wb,
+        population=new_pop,
+        expected_births=exp_b,
+        expected_deaths=exp_d,
+        psi_inst_stock=new_psi,
+        resilience_stock=new_res,
+        avg_wb_trend=new_avg_wb_trend,
+        population_trend=new_pop_trend,
+        psi_inst_trend=new_psi_trend,
+        resilience_trend=new_res_trend,
+        projected_avg_age=new_projected_avg_age,
+        # reproductive_share held constant per Q6 first-build aggregate
+        # approximation. avg_age cohort correction does not propagate to
+        # reproductive_share in first build; the share of population in
+        # the 18 < age < 50 window is plausibly approximately stable under
+        # the steady state, but a separate cohort-evolution mechanism for
+        # reproductive_share is a watchlist item for future builds.
+    )
+
+
+def project_u_sys_v2(ai, model, candidate, eval_horizon=1, state_start=None):
+    """Project U_sys_v2 for `candidate` at a single horizon `eval_horizon`.
+
+    Returns (u_sys, components, end_state) where u_sys is the per-step
+    U_sys value at the projected horizon. This single-horizon evaluation
+    is consumed by Gate 4's harness (horizon-crossing analysis). The
+    optimizer's rollout-summed score uses `project_u_sys_v2_rollout`
+    (Stage 1.6 addition) instead.
+
+    Stage 1.5 path: evolves the full DiagnosticStateV2 forward through the
+    rollout. The optimizer sees candidate-dependent state trajectories
+    (avg_wb, population, resilience_stock, trends) and the composite
+    urgencies recompute per-horizon.
+    """
+    if state_start is None:
+        state_start = _build_state_from_model(model)
+
+    state = state_start
+    cfg = model.config if hasattr(model, 'config') else {}
     for _ in range(eval_horizon):
-        psi_stock = _project_psi_inst_step(psi_stock, candidate)
+        state = _project_diagnostic_state_step(state, candidate, cfg)
 
     u_sys, components = calculate_system_metrics_v2(
         model, candidate,
         eval_horizon=eval_horizon,
-        psi_inst_stock_override=psi_stock,
+        state=state,
     )
-    return u_sys, components, psi_stock
+    return u_sys, components, state
+
+
+def project_u_sys_v2_rollout(ai, model, candidate, rollout_steps=20,
+                              state_start=None, phi=None):
+    """Stage 1.6: phi-modulated rollout sum across `rollout_steps` horizons.
+
+    Returns (rollout_sum, end_state, per_step_u_sys_list). Phi enters here
+    via gamma(phi)^t weighting at each horizon. Per-step U_sys values are
+    computed phi-free (the per-step formula uses LAMBDA_LINEAGE_COUPLING in
+    place of phi). The optimizer's argmax over candidates is on the
+    rollout_sum returned here.
+
+    Parameters
+    ----------
+    ai, model : as before
+    candidate : action_v2 dict
+    rollout_steps : number of horizons in the rollout sum
+    state_start : DiagnosticStateV2 | None
+        If None, built from the model.
+    phi : float | None
+        Modulates gamma(phi) used at each horizon. If None, read from
+        model.config['phi'] (default 10.0).
+
+    Returns
+    -------
+    (rollout_sum, end_state, per_step_u_sys) : tuple
+        rollout_sum = sum over t = 0..rollout_steps-1 of gamma(phi)^t *
+        u_sys_at_horizon_(t+1)
+        end_state is the state after rollout_steps projection steps
+        per_step_u_sys is the list of per-horizon U_sys values (phi-free)
+    """
+    if state_start is None:
+        state_start = _build_state_from_model(model)
+    cfg = model.config if hasattr(model, 'config') else {}
+    phi_val = float(phi) if phi is not None else float(cfg.get('phi', 10.0))
+    from metrics import compute_gamma_rollout
+    gamma = compute_gamma_rollout(phi_val)
+
+    state = state_start
+    rollout_sum = 0.0
+    per_step_u_sys = []
+    # Horizons indexed t = 0..rollout_steps-1 with weight gamma^t. At each
+    # step the state advances by one and U_sys is evaluated.
+    for t in range(rollout_steps):
+        state = _project_diagnostic_state_step(state, candidate, cfg)
+        u_sys, _components = calculate_system_metrics_v2(
+            model, candidate,
+            eval_horizon=t + 1,
+            state=state,
+        )
+        per_step_u_sys.append(float(u_sys))
+        rollout_sum += (gamma ** t) * u_sys
+    return float(rollout_sum), state, per_step_u_sys
 
 
 def optimize_u_sys_v2(ai, model):
     """v2 multi-sink allocator policy.
 
     Generates `n_candidates_v2` candidate eight-axis actions, projects each
-    forward over `rollout_steps_v2` horizons, and selects the candidate with
-    the highest trapezoidal U_sys integral.
+    forward over `rollout_steps_v2` horizons via
+    `project_u_sys_v2_rollout`, and selects the candidate with the highest
+    phi-modulated gamma-weighted rollout sum.
+
+    Stage 1.6: phi enters through gamma(phi)^t weighting in the rollout
+    sum, not per-step U_sys. The per-step U_sys is phi-free; phi shapes
+    only how heavily later-horizon contributions weight in the score.
 
     Returns
     -------
     (best_action, diagnostics) : tuple
         best_action is the selected action_v2 dict.
-        diagnostics carries selected/rank-2/rank-10 U_sys, max_resource_share,
-        allocation_entropy, total_suppression, and anchor identification
-        for downstream datacollector logging.
+        diagnostics carries selected/rank-2/rank-10 rollout sums,
+        max_resource_share, allocation_entropy, total_suppression, anchor
+        identification, and the gamma(phi) used for this decision.
     """
     rollout_steps = ai.config.get('rollout_steps_v2', 20)
     n_candidates  = ai.config.get('n_candidates_v2', 300)
 
     candidates = generate_v2_candidates(n=n_candidates, rng=np.random)
 
-    psi_start = float(getattr(model, 'psi_inst_stock', 0.5))
+    # Stage 1.5: every candidate is projected from the same starting
+    # DiagnosticStateV2 so they are scored on the same baseline.
+    state_start = _build_state_from_model(model)
+    cfg = model.config if hasattr(model, 'config') else {}
+    phi_val = float(cfg.get('phi', 10.0))
 
     candidate_scores = []
     for cand_idx, candidate in enumerate(candidates):
-        # Trapezoidal integral of U_sys over rollout horizons 1..rollout_steps.
-        # The stock is advanced step by step (each horizon's projection
-        # continues from the previous horizon's stock under the same action),
-        # which is the correct interpretation of holding the candidate fixed
-        # for the rollout window.
-        psi_stock = psi_start
-        total_u = 0.0
-        prev_u  = None
-        for _h in range(1, rollout_steps + 1):
-            psi_stock = _project_psi_inst_step(psi_stock, candidate)
-            u_sys, _components = calculate_system_metrics_v2(
-                model, candidate,
-                eval_horizon=_h,
-                psi_inst_stock_override=psi_stock,
-            )
-            if prev_u is not None:
-                total_u += (prev_u + u_sys) / 2.0
-            prev_u = u_sys
-        candidate_scores.append((total_u, cand_idx, candidate))
+        # Stage 1.6: rollout sum with gamma(phi)^t weighting per horizon.
+        # State is advanced step by step under the candidate, so candidates
+        # that produce sustained improvement (or deterioration) show it
+        # through the rollout trajectory; phi shapes how heavily later
+        # horizons count in the score.
+        rollout_sum, _end_state, _per_step = project_u_sys_v2_rollout(
+            ai, model, candidate,
+            rollout_steps=rollout_steps,
+            state_start=state_start,
+            phi=phi_val,
+        )
+        candidate_scores.append((rollout_sum, cand_idx, candidate))
 
     candidate_scores.sort(reverse=True, key=lambda t: t[0])
     best_score, best_idx, best_action = candidate_scores[0]
 
     # Compute the diagnostic snapshot under the selected action at horizon 1
-    # (the snapshot the model will commit and record this step).
+    # (the snapshot the model will commit and record this step). Uses the
+    # current diagnostic state without forward projection.
     snapshot_u, snapshot_components = calculate_system_metrics_v2(
         model, best_action, eval_horizon=1,
-        psi_inst_stock_override=psi_start,
+        state=state_start,
     )
 
     max_share = max(best_action[f'x_{cat}'] for cat in RESOURCE_CATEGORIES)
@@ -378,6 +687,11 @@ def optimize_u_sys_v2(ai, model):
         'total_suppression':    float(total_supp),
         'snapshot_u_sys':       float(snapshot_u),
         'snapshot_components':  snapshot_components,
+        # Stage 1.6: record gamma(phi) used for this decision's rollout
+        # aggregation, so downstream analysis can verify phi-modulated
+        # weighting was applied.
+        'gamma_rollout':        float(__import__('metrics').compute_gamma_rollout(phi_val)),
+        'phi':                  float(phi_val),
     }
     return best_action, diagnostics
 
