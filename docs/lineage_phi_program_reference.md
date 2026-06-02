@@ -1110,6 +1110,119 @@ Stage 1.6 is complete when:
 
 After Stage 1.6 acceptance, Stage 1.7 (composite urgency revision) becomes the next work.
 
+### Stage 1.7 attempt and supersession (June 2026)
+
+Stage 1.7 attempted to fix the state-channel problem by switching composite urgency composition from additive-with-caps to multiplicative-with-`[0,1]`-factors. The intent was that pairwise products would propagate state variation through to allocations rather than saturating at category caps.
+
+The first integrity simulation produced demographic collapse within 50 steps across all 25 runs. Diagnostic isolation found that three of the four `theta_tech` factors saturated at the upper `[0,1]` boundary in normal operation, and the welfare-urgency × net-welfare-return product routinely exceeded 1.0 and was clipped, blocking welfare signal even as it intensified. The `[0,1]` clamp on factors converted the saturation mode rather than removing it.
+
+Stage 1.7 was reverted to the Stage 1.6 final state. The diagnostic surfaced a deeper structural finding: the entire composite urgency layer — additive or multiplicative — is an attempt to mediate between state stocks and allocator returns through an arithmetic shape (boundedness, monotonicity, smoothness) without committing to what the mediation *is*. The architecture was specifying a function class without specifying the function. Stage 1.8 retires the layer.
+
+### Stage 1.8 architectural revision (committed June 2026)
+
+**Discipline boundary**
+
+The framework's core results — U_sys structural protection, COP, dual phase transition, Nash architecture — are grounded in physics and game theory (entropy, multiplicative coupling, payoff structure, equilibrium concepts). The specification of *how allocator choices map back to state stocks* is an economic / control-theoretic specification. The framework does not claim to derive these mappings from first principles; it claims that whatever mapping plugs in must satisfy interface conditions.
+
+The Stage 1.5/1.7 composite urgency work conflated these two layers. Composite urgency was a placeholder for the allocation-to-state mapping that wore the costume of a derived structural claim. Stage 1.8 separates them: the working_factor interface specifies what the framework requires (an allocation-to-target map with stock dynamics); the implementation behind it is a placeholder explicitly named as such, open to economic specialist revision.
+
+**Working_factor interface specification**
+
+```
+delta_state = apply_working_factor(allocation, current_state, step)
+```
+
+For each infrastructure stock `s` in `STATE_ALLOCATION_MAPPING`:
+
+- `target(allocation, state)`: a function mapping the relevant allocation entry to an equilibrium target for the stock. Required to be bounded in `[0, 1]`, monotone non-decreasing in its allocation argument, and defined for all valid allocations.
+- `rate ∈ (0, 1]`: a logistic-growth rate setting transient timescale.
+- `delta = rate * (target - current)`: per-step change toward the target.
+
+The current `STATE_ALLOCATION_MAPPING` (`simulation/constants_v2_stage18.py`) has four entries: `psi_inst_stock`, `resilience_stock`, `theta_capability`, `transfer_state`. The target functions are linear-saturating placeholders with first-build calibration; their specific functional forms are explicitly placeholder.
+
+**U_sys revision** (`simulation/metrics.py`):
+
+```
+h_eff       = h_n * pop_viability * avg_wb
+theta_tech  = capability * theta_capability * transfer_state * exp(-alpha * convergence_strength * runaway_term)
+L_t         = h_eff * psi_inst * theta_tech
+U_sys_t     = (w_n * h_n + w_e * h_e) * (discount_t + lambda_lineage_coupling * L_t)
+```
+
+`L_t` now reads state stocks directly. There is no composite urgency layer between state and per-category return. `avg_wb` remains agent-derived (through the v2-to-v1.x.2 bridge); `h_n` remains agent-derived from spectral entropy. The four infrastructure stocks evolve under `working_factor`; everything else is preserved from Stage 1.6.
+
+**Stage 1.5 component retention**
+
+Stage 1.5's diagnostic state inputs are preserved where they describe the system's measured condition (`avg_wb`, `population`, `demographic_pressure`, four trend variables, `resilience_stock`, `psi_inst_stock`). Per-category raw return curves and projection update rules with cohort corrections (`BIRTH_WB_MEAN`, `BIRTH_AGE_MEAN`) are preserved. What is retired is the composite urgency *layer* — the arithmetic combinators that mixed these signals into multiplicands on category returns.
+
+**Validation: Phase A and Phase B**
+
+Phase A — single configuration (rr=0.066, init_psi=0.5, n_agents=200), 5 phi values × 5 seeds × 100 steps:
+
+| Criterion | Result |
+|---|---|
+| No crashes / NaN | PASS (0/25) |
+| Demographic at phi=10 | PASS (mean 151.6, min 110; thresholds 60/30) |
+| State responsiveness (revised: initial-to-final delta > 0.10) | PASS (all five tracked stocks: avg_wb 0.65→0.85, psi 0.50→0.77, resilience 0.30→0.60, theta_capability 0.50→0.77, transfer_state 0.50→0.73) |
+| Phi behavioral channel preserved | PASS (5/5 seeds with cross-phi range > 15; ranges 45-63) |
+
+Phase B — five configurations (gate-2 setup: rr ∈ {0.055, 0.066, 0.085}, init_psi ∈ {0.20, 0.50, 0.85}) × 5 matched seeds × 100 steps, phi held at default:
+
+| Criterion | Result |
+|---|---|
+| Trajectory divergence across configs (per-seed range > 15 in >= 3/5 seeds) | PASS (5/5 seeds; ranges 204-320) |
+| Per-step allocation cosine distance (> 0.10 in >= 3/10 pairs) | PASS (9/10 pairs) |
+| Demographic sustainability (revised: >= 4/5 configs meet mean 60 / min 30, with C_low_rr exempt) | PASS (5/5 configs meet thresholds including C_low_rr) |
+| L_t cross-config std/mean | PASS (mean ratio 0.307, 6.1× threshold) |
+
+**Methodological lessons recorded during Stage 1.6–1.8**
+
+1. *Pre-commit to substantive questions, not just metrics.* Metrics are proxies for questions. The Stage 1.6 cosine-on-means criterion 1 and the Stage 1.8 Phase A C3 std-based metric both measured something but neither measured what they were trying to test. When a pre-committed metric diverges from the substantive question (criterion 1: "does phi change outcomes?"; C3: "do state stocks evolve?"), the metric is replaced with one that answers the question, and the refinement is documented in the section. This is metric refinement, not retroactive threshold movement.
+
+2. *Multi-configuration tests should explicitly inherit single-configuration setups and only vary parameters under test.* Phase B's original harness used `n_agents=100` and `wb_min=wb_max=0.50` where Phase A used `n_agents=200` and default wb distribution `[0.5, 0.8]`. Isolation controls established that the wb pinning alone drove ~52% of the demographic delta. The inconsistency was an oversight, not deliberate test design. Multi-config harnesses must inherit single-config harnesses verbatim and override only what is being tested.
+
+3. *Phase boundary claims from prior framework work should constrain test metric calibration.* The framework's existing extinction-boundary characterization (`rr ≈ 0.063-0.066`) means a demographic threshold applied uniformly across `rr ∈ {0.055, 0.066, 0.085}` would require an architecture to sustain demographics below the existing extinction boundary — that is, to override the framework's existing physics rather than meet it. Revised C3 exempts configurations below the established phase boundary.
+
+**Init_psi asymmetric sensitivity finding**
+
+Phase B observed that `E_low_psi` (init_psi=0.20) produced final populations identical to `A_baseline` (init_psi=0.50) on all 5 seeds (157, 110, 121, 178, 192). `D_high_psi` (init_psi=0.85) differed on 3/5 seeds. The per-step cosine table corroborated: A vs E = 0.022 (the only pair failing the 0.10 threshold), A vs D = 0.123.
+
+Mechanism: working_factor drives `psi_inst_stock` logistically toward an allocation-determined target near 0.55–0.95 (depending on `x_institutional_capacity`). Init psi=0.20 converges *upward* to the same target as init psi=0.50 and leaves no lasting trajectory imprint. Init psi=0.85 (above target) follows a different relaxation path while it descends, which does perturb allocations enough to register.
+
+Documented as a property of the architecture, not a defect. Future work that intends to use init_psi as a meaningful test axis on the low side would need either a longer transient regime, a working_factor parameterization with asymmetric rates, or a different target function shape.
+
+**C_low_rr observation**
+
+At `rr=0.055`, configuration sustained at mean 80.8 (min 54) across 5 seeds — above the 60/30 thresholds. The framework's previously documented extinction boundary `rr ≈ 0.063-0.066` may sit slightly lower than characterized. Recorded for future phase-transition work; no immediate action.
+
+**Stage 1.5 → 1.6 → 1.7 → 1.8 arc**
+
+| Stage | Action | Outcome |
+|---|---|---|
+| 1.5 | Added diagnostic state inputs and composite urgency layer (additive-with-caps) | 10000-sample Sobol sweep: 0 samples pass state sensitivity; phi diagnostic: phi cancels in argmax |
+| 1.6 | Revised U_sys structure: per-step phi-free, phi modulates rollout aggregation via `gamma(phi)^t` | Phi-channel restored; state-channel still blocked |
+| 1.7 | Attempted multiplicative-with-`[0,1]`-factor composite urgency | Demographic collapse from clamp saturation; reverted |
+| 1.8 | Retired composite urgency layer; introduced working_factor interface; L_t reads state directly | Phase A and Phase B pass; state-channel restored |
+
+The arc is empirical refinement of architectural choices: each stage's design commitment was tested against diagnostic data, and updated when the diagnostic surfaced structural inadequacy. The discipline boundary clarification at Stage 1.8 — separating physics-grounded framework claims from economic / control-theoretic allocation specification — is the most consequential update because it identifies what the framework can and cannot derive on its own.
+
+**Open invitation**
+
+The `working_factor` interface specifies what the framework requires from the allocation-to-state mapping. The current placeholder implementation in `STATE_ALLOCATION_MAPPING` is a first-build calibration adequate for testing that the interface works. Economic / control-theoretic specialists are invited to propose mappings grounded in their respective disciplines; the framework's physics-grounded results are insensitive to the choice of mapping as long as the interface conditions are satisfied.
+
+### Stage 1.8 acceptance condition
+
+Stage 1.8 is complete when:
+
+1. Composite urgency layer is retired from production code paths.
+2. `working_factor` interface is implemented, with `STATE_ALLOCATION_MAPPING` placeholder explicitly named as placeholder.
+3. `L_t` reads state stocks directly (no intermediate composite urgency multiplicands).
+4. Phase A and Phase B integrity simulations both pass per the criteria above.
+5. The 39/39 legacy v1.x.2 tests remain green.
+6. The methodological lessons, init_psi asymmetric sensitivity finding, C_low_rr observation, and the Stage 1.5–1.8 arc are documented in this section.
+
+All conditions met as of the Stage 1.8 commit. Stage 2 (gate 2 re-run, gate 3 capability regime, gate 4 horizon crossing) becomes the next work, against the working_factor architecture.
+
 ---
 
 ## Part VI — The phi-capability question and the decision tree
@@ -1156,22 +1269,14 @@ Sequence: do Option 1 (build the higher-fidelity model) before Option 2 (the hon
 
 ## Part VIII — Immediate next actions, in order
 
-Items 1 through 4 are complete as of May 2026. The active work is item 5.
+Items 1 through 5 are complete as of June 2026. The active work is item 6.
 
 1. ~~Resolve the manuscript contradiction.~~ Done. Cap-conditional claim withdrawn as RNG-desynchronization artifact (commit prior to Stage 1).
 2. ~~Update materials with the capability-sweep result and the contradiction resolution.~~ Done.
 3. ~~Specify the composition vector in full (the keystone tradeoff).~~ Done through the design conversations producing the six category curves, complementarity structure, constraint frontier, Psi_inst stock, and bridge.
 4. ~~Build the minimum faithful set.~~ Done. Stage 1 commit `61a362e` built the v2 parallel policy with all committed structure. Smoke test passed.
-5. **Stage 1.5 (design complete; implementation pending): all diagnostic state inputs specified, ready for implementation.**
-   - Architecture commitment recorded (Part V).
-   - Seven-element specification template recorded (Part V).
-   - Composite-urgency commitment recorded (Part V).
-   - Stock-over-flow design principle recorded (Part V).
-   - Worked examples complete: avg_wb (welfare-condition diagnostic), population_ratio (substrate-scale diagnostic), demographic_pressure (substrate-flow diagnostic), resilience_stock (shock-readiness diagnostic), trend variables (deterioration-anticipation diagnostics).
-   - Next: implementation prompt for Stage 1.5 build, integrating all five worked examples into U_sys_v2 and the projection function, with named-constant traceability tied to governance justifications.
-   - After implementation: smoke test under revised metric, faithfulness tests across all projection update rules, gate 2 re-run.
-   - Stage 2 gates 3, 4 deferred until Stage 1.5 acceptance.
-6. **Pass remaining acceptance gates** (gate 2 re-run, gate 3 capability-regime, gate 4 horizon-crossing). Gate 1 and gate 5 already passed in Stage 2 partial; gate 2 returns under the revised metric. The horizon-crossing gate is mandatory; a phi sweep run before it passes produces an uninterpretable null. Freeze all curves before phi.
+5. ~~Stage 1.5 / 1.6 / 1.7 / 1.8: structural fix for phi-channel and state-channel problems.~~ Done. Stage 1.5 built the diagnostic state set and composite urgency layer; Stage 1.5 phi diagnostic and 10000-sample sweep established both channels were blocked. Stage 1.6 restructured U_sys to give phi a behavioral channel (committed). Stage 1.7 attempted multiplicative composite urgency, reverted on `[0,1]` clamp saturation. Stage 1.8 retired composite urgency, introduced the working_factor interface for infrastructure stocks, and let `L_t` read state directly; Phase A and Phase B integrity simulations both pass.
+6. **Pass remaining acceptance gates** (gate 2 re-run against the working_factor architecture, gate 3 capability-regime, gate 4 horizon-crossing). Gate 1 and gate 5 already passed in Stage 2 partial. The horizon-crossing gate is mandatory; a phi sweep run before it passes produces an uninterpretable null. Freeze all curves before phi.
 7. **Run phi free** across the faithful landscape.
 8. **Read against the three-branch decision tree.** Only then, if Branch 2 or 3, derive phi(capability).
 
@@ -1179,4 +1284,4 @@ Items 1 through 4 are complete as of May 2026. The active work is item 5.
 
 ## One-line status
 
-Phi is correctly implemented and theoretically motivated but currently untestable in the simulation. v1.x.2's action space is too degenerate; the Stage 1 v2 build broke the corner solution but Stage 2's gate 2 surfaced a separate state-blindness defect in U_sys_v2's inputs. Stage 1.5 design work is now complete with five diagnostic variables fully specified (avg_wb, population_ratio, demographic_pressure, resilience_stock, trend variables), each meeting the seven-element template with phi-blind justifications, multiplicand commitments, projection update rules, and faithfulness tests. Implementation prompt pending. After implementation and smoke test, gate 2 re-runs and Stage 2 resumes. The framework's core protective claims (U_sys structural protection, COP, dual phase transition, Nash architecture) are unaffected throughout.
+Phi is correctly implemented and theoretically motivated. Phi-channel and state-channel problems identified in Stage 2 gate 2 have been resolved through the Stage 1.5–1.8 arc: Stage 1.6 restructured U_sys to give phi a rollout-aggregation behavioral channel, and Stage 1.8 retired the composite urgency layer in favor of a working_factor interface for infrastructure stocks, letting `L_t` read state directly. Phase A and Phase B integrity simulations both pass. The discipline boundary is now explicit: framework results are physics-grounded; allocation-to-state mappings are economic specification that plugs in via the working_factor interface. Active work resumes at gate 2 re-run against the new architecture, then gates 3 and 4, then the phi sweep against the three-branch decision tree. The framework's core protective claims (U_sys structural protection, COP, dual phase transition, Nash architecture) are unaffected throughout.

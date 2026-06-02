@@ -166,6 +166,19 @@ class GardenModel:
         self.population_trend = TREND_INITIAL
         self.psi_inst_trend   = TREND_INITIAL
         self.resilience_trend = TREND_INITIAL
+        # Stage 1.8: two new infrastructure stocks driven by working_factor.
+        # theta_capability and transfer_state were action-derived in
+        # Stage 1.5/1.6 (as frontier_capability and transfer_factor); under
+        # Stage 1.8 they are stocks that evolve via STATE_ALLOCATION_MAPPING.
+        from constants_v2_stage18 import (
+            THETA_CAPABILITY_INITIAL, TRANSFER_STATE_INITIAL,
+        )
+        self.theta_capability = THETA_CAPABILITY_INITIAL
+        self.transfer_state   = TRANSFER_STATE_INITIAL
+        # Stage 1.8: latest h_n (spectral entropy) cached so _build_state_from_model
+        # sees the same value used by per-step metric computation. Updated in
+        # _step_v2 after agents step, before the metric call.
+        self.h_n_latest = None
         # Previous-step trackers for delta computation. Initialized to current
         # state at the first step (no delta on step 0); refreshed at the end
         # of each step after metrics collection.
@@ -370,6 +383,11 @@ class GardenModel:
                 # Stage 1.6: phi-rollout-discount diagnostic series.
                 'gamma_rollout':                 [],
                 'phi':                           [],
+                # Stage 1.8: two new infrastructure stocks driven by
+                # working_factor (alongside psi_inst_stock and
+                # resilience_stock which are already recorded above).
+                'theta_capability':              [],
+                'transfer_state':                [],
             })
 
         self.integrity_ledger = {'resource_level': []}
@@ -1251,35 +1269,61 @@ class GardenModel:
         for _ in range(self.births_this_step):
             self.add_agent()
 
-        # 5. Advance the Psi_inst stock under the committed action.
-        self.update_psi_inst_stock(action_v2)
+        # 5. Stage 1.8: working_factor evolves all four infrastructure
+        #    stocks (psi_inst_stock, resilience_stock, theta_capability,
+        #    transfer_state) via the STATE_ALLOCATION_MAPPING placeholder.
+        #    The Stage 1.5 update_psi_inst_stock / update_resilience_stock_v2
+        #    dynamics (investment + decay + overload + opacity + recovery)
+        #    are retired along with the composite urgency layer; the
+        #    logistic-growth toward target form subsumes both growth and
+        #    decay. The methods are preserved on the class for git history
+        #    but are no longer called from the v2 step path.
+        from working_factor import apply_working_factor, apply_delta_state
+        current_state_dict = {
+            'psi_inst_stock':   self.psi_inst_stock,
+            'resilience_stock': self.resilience_stock,
+            'theta_capability': self.theta_capability,
+            'transfer_state':   self.transfer_state,
+        }
+        delta_state = apply_working_factor(action_v2, current_state_dict, step_num)
+        apply_delta_state(current_state_dict, delta_state, clamp_to_unit_interval=True)
+        self.psi_inst_stock   = float(current_state_dict['psi_inst_stock'])
+        self.resilience_stock = float(current_state_dict['resilience_stock'])
+        self.theta_capability = float(current_state_dict['theta_capability'])
+        self.transfer_state   = float(current_state_dict['transfer_state'])
 
-        # 6. Stage 1.5 shock handler (production v2 path; replaces the
-        #    harness-level bridge gate 1 used). Reads shock_step and
-        #    shock_magnitude from config; effective damage is attenuated by
-        #    current resilience_stock per worked example 4. The shock fires
-        #    BEFORE the resilience stock update so the drawdown reflects this
-        #    step's damage absorbed.
+        # 6. Stage 1.5 shock handler preserved: shock event still fires at
+        #    the configured step and draws down resilience_stock via the
+        #    attenuation formula. Working_factor will refill resilience_stock
+        #    toward target on subsequent steps.
         shock_event = None
         shock_step = self.config.get('shock_step', 0)
         if shock_step > 0 and step_num == shock_step:
             shock_magnitude = float(self.config.get('shock_magnitude', 0.15))
             shock_event = self.apply_shock_v2(shock_magnitude, rng_seed_offset=step_num)
+            # Shock drawdown on resilience_stock (preserved from Stage 1.5).
+            from constants_v2_stage15 import (
+                RESILIENCE_MAX_ATTENUATION, K_RESILIENCE_CONSUMPTION,
+            )
+            damage_absorbed = (shock_magnitude * RESILIENCE_MAX_ATTENUATION
+                                * self.resilience_stock)
+            shock_drawdown = K_RESILIENCE_CONSUMPTION * damage_absorbed
+            self.resilience_stock = float(max(0.0, self.resilience_stock - shock_drawdown))
 
-        # 7. Advance the resilience_stock under the committed action and
-        #    any shock event drawdown.
-        self.update_resilience_stock_v2(action_v2, shock_event)
-
-        # 8. Update trends using current (post-shock, post-stock-update) values.
-        #    The trend update also refreshes the previous_* fields for the
-        #    next step's delta computation.
+        # 8. Update trends using current values. The trend update also
+        #    refreshes the previous_* fields for the next step's delta
+        #    computation.
         population = len(self.schedule)
         avg_wb = np.mean([a.well_being for a in self.schedule]) if self.schedule else 0.0
         self.update_trends_v2(avg_wb, population)
 
         # 9. Metrics collection.
+        # Stage 1.8: compute spectral H_N once and cache on the model so
+        # both per-step metric call and _build_state_from_model see the
+        # same value.
         h_n_spectral = calculate_h_n(self.novelty_log,
                                       composite_method=self.hn_composite_method)
+        self.h_n_latest = float(h_n_spectral)
 
         u_sys_v2, components = calculate_system_metrics_v2(
             self, action_v2, eval_horizon=step_num,
@@ -1374,6 +1418,9 @@ class GardenModel:
         self.datacollector['phi'].append(
             float(diagnostics.get('phi', self.config.get('phi', 10.0)))
         )
+        # Stage 1.8: record the two new infrastructure stocks each step.
+        self.datacollector['theta_capability'].append(float(self.theta_capability))
+        self.datacollector['transfer_state'].append(float(self.transfer_state))
 
         return population > 0
 

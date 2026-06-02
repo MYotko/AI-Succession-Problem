@@ -492,8 +492,25 @@ def _project_diagnostic_state_step(state, candidate, config):
     new_avg_wb = float(max(0.0, min(1.0, new_avg_wb)))
     new_projected_avg_age = float(max(0.0, new_projected_avg_age))
 
-    new_psi = _project_psi_inst_step(state.psi_inst_stock, candidate)
-    new_res = _project_resilience_stock_step(state.resilience_stock, candidate)
+    # Stage 1.8: infrastructure stock projection via working_factor.
+    # Replaces the Stage 1.5 _project_psi_inst_step and
+    # _project_resilience_stock_step helpers; same logic as the live
+    # _step_v2 path uses. Cohort correction for avg_wb (above) is preserved
+    # because avg_wb is agent-derived, not driven by working_factor.
+    from working_factor import apply_working_factor, apply_delta_state
+    stocks_in = {
+        'psi_inst_stock':   state.psi_inst_stock,
+        'resilience_stock': state.resilience_stock,
+        'theta_capability': state.theta_capability,
+        'transfer_state':   state.transfer_state,
+    }
+    delta_state = apply_working_factor(candidate, stocks_in, 0)
+    stocks_out = dict(stocks_in)
+    apply_delta_state(stocks_out, delta_state, clamp_to_unit_interval=True)
+    new_psi   = stocks_out['psi_inst_stock']
+    new_res   = stocks_out['resilience_stock']
+    new_theta = stocks_out['theta_capability']
+    new_xfer  = stocks_out['transfer_state']
 
     # Trend updates per worked example 5 (EMA on one-step deltas).
     new_avg_wb_trend = ((1.0 - _PROJ_ALPHA_TREND) * state.avg_wb_trend
@@ -516,11 +533,18 @@ def _project_diagnostic_state_step(state, candidate, config):
         expected_deaths=exp_d,
         psi_inst_stock=new_psi,
         resilience_stock=new_res,
+        # Stage 1.8: two new infrastructure stocks projected via working_factor
+        theta_capability=new_theta,
+        transfer_state=new_xfer,
         avg_wb_trend=new_avg_wb_trend,
         population_trend=new_pop_trend,
         psi_inst_trend=new_psi_trend,
         resilience_trend=new_res_trend,
         projected_avg_age=new_projected_avg_age,
+        # h_n held constant during projection: spectral entropy is agent-
+        # derived and the rollout has no agent novelty layer. The optimizer
+        # sees the current model's h_n applied to all rollout horizons.
+        h_n=state.h_n,
         # reproductive_share held constant per Q6 first-build aggregate
         # approximation. avg_age cohort correction does not propagate to
         # reproductive_share in first build; the share of population in

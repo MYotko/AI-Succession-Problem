@@ -75,6 +75,18 @@ class DiagnosticStateV2:
     # population in the reproductive age window (18 < age < 50). Held constant
     # across rollout horizons in first-build aggregate approximation.
     reproductive_share: float
+    # Stage 1.8: infrastructure stocks driven by working_factor (in addition
+    # to psi_inst_stock and resilience_stock which existed before). All four
+    # evolve via STATE_ALLOCATION_MAPPING in constants_v2_stage18.py under
+    # the working_factor interface. avg_wb is NOT here; it remains agent-
+    # derived via the bridge.
+    theta_capability: float
+    transfer_state:   float
+    # Stage 1.8: spectral H_N is passed in via state rather than being
+    # synthesized inside calculate_system_metrics_v2. During projection,
+    # h_n is held constant at the model's current value (novelty is agent-
+    # derived; projection has no agent layer to generate novelty).
+    h_n: float
 
 
 # ===========================================================================
@@ -518,6 +530,26 @@ def _build_state_from_model(model, psi_inst_stock_override=None):
                  if psi_inst_stock_override is not None
                  else float(getattr(model, 'psi_inst_stock', 0.5)))
 
+    # Stage 1.8 H_N: read the most recent spectral entropy if available.
+    # The model computes h_n via calculate_h_n(novelty_log) during metric
+    # collection; we cache the latest result on the model so per-step and
+    # projection state both see the same value. Falls back to a floor if
+    # no measurement is available (very first step before agents step).
+    from constants_v2_stage18 import H_N_FLOOR, THETA_CAPABILITY_INITIAL, TRANSFER_STATE_INITIAL
+    h_n_latest = getattr(model, 'h_n_latest', None)
+    if h_n_latest is None:
+        # Compute fresh if novelty_log present, else fall back.
+        novelty_log = getattr(model, 'novelty_log', None)
+        if novelty_log:
+            method = getattr(model, 'hn_composite_method', 'spectral')
+            try:
+                h_n_latest = float(calculate_h_n(novelty_log, composite_method=method))
+            except Exception:
+                h_n_latest = H_N_FLOOR
+        else:
+            h_n_latest = H_N_FLOOR
+    h_n_for_state = max(H_N_FLOOR, float(h_n_latest))
+
     return DiagnosticStateV2(
         avg_wb=avg_wb,
         population=population,
@@ -533,18 +565,37 @@ def _build_state_from_model(model, psi_inst_stock_override=None):
         resilience_trend=float(getattr(model, 'resilience_trend', 0.0)),
         projected_avg_age=avg_age,
         reproductive_share=reproductive_share,
+        theta_capability=float(getattr(model, 'theta_capability', THETA_CAPABILITY_INITIAL)),
+        transfer_state=float(getattr(model, 'transfer_state', TRANSFER_STATE_INITIAL)),
+        h_n=h_n_for_state,
     )
 
 
 def calculate_system_metrics_v2(model, action_v2, eval_horizon=1,
                                  psi_inst_stock_override=None, state=None):
-    """v2 U_sys with Stage 1.5 diagnostic state inputs.
+    """Stage 1.8 v2 U_sys: state-direct L_t, composite urgency layer retired.
 
-    Preserves the same formal shape as Stage 1 (inverse-scarcity weighted
-    sum of H_N and H_E, multiplied by discount + phi * L(t)). Each per-
-    category factor is now the product of a raw return curve (action and
-    stock dependent) and a named composite urgency (diagnostic-state
-    dependent), with explicit clamps preserving non-substitutability.
+    L_t = h_eff * psi_inst * theta_tech, three multiplicative dimensions
+    that each read state variables directly without composite-urgency
+    intermediaries. The Stage 1.5 worked examples 2-5 composite urgencies
+    are retired (see Stage 1.7 diagnostic findings and Stage 1.8 design
+    conversation; the architectural pattern composite-urgency-modulates-
+    bounded-factor was structurally limited by the [0, 1] factor clamp).
+
+      h_eff      = max(0.01, h_n * pop_viability * avg_wb)
+      psi_inst   = state.psi_inst_stock
+      theta_tech = max(0.01, capability * theta_capability * transfer_state
+                        * exp(-ALPHA * CONVERGENCE * runaway_term))
+
+    avg_wb is agent-derived (via the v2-to-v1.x.2 bridge that maps
+    x_bio_welfare to resource_level for HumanAgent.step). h_n is the
+    spectral entropy measurement from the agent novelty layer. The four
+    infrastructure stocks (psi_inst_stock, resilience_stock,
+    theta_capability, transfer_state) evolve via working_factor under
+    STATE_ALLOCATION_MAPPING in constants_v2_stage18.py.
+
+    Phi is preserved in rollout aggregation only (Stage 1.6 commitment);
+    per-step U_sys uses LAMBDA_LINEAGE_COUPLING in place of phi.
 
     Parameters
     ----------
@@ -555,164 +606,127 @@ def calculate_system_metrics_v2(model, action_v2, eval_horizon=1,
     eval_horizon : int
         Horizon used in the temporal discount factor exp(-rho * eval_horizon).
     psi_inst_stock_override : float | None
-        Backward-compatible override for Psi_inst stock; ignored when an
-        explicit `state` is supplied (state.psi_inst_stock wins).
+        Backward-compatible override; ignored when an explicit `state` is
+        supplied.
     state : DiagnosticStateV2 | None
         Explicit diagnostic state for projection callers. When None, state
-        is built from the model. The same urgency calculation is then
-        applied identically in both per-step and projection paths.
+        is built from the model.
 
     Returns
     -------
     (u_sys_v2, components) : tuple
-        components is a dict of intermediate values including the five
-        composite urgency multipliers, raw returns, and the per-category
-        factors that enter theta_tech_v2 and l_t_v2.
+        components is a dict of intermediate values for diagnostics.
     """
     cfg = model.config if hasattr(model, 'config') else {}
     lambda_n = cfg.get('lambda_n', 5.0)
     lambda_e = cfg.get('lambda_e', 3.0)
     epsilon  = cfg.get('epsilon',  1e-6)
     rho      = cfg.get('rho',      0.01)
-    phi      = cfg.get('phi',      10.0)
+
+    from constants_v2_stage18 import (
+        FRONTIER_FLOOR, RUNAWAY_THRESHOLD, ALPHA, CONVERGENCE_STRENGTH,
+        H_N_FLOOR,
+    )
+    from constants_v2_stage15 import LAMBDA_LINEAGE_COUPLING
 
     if state is None:
         state = _build_state_from_model(model, psi_inst_stock_override)
-    psi_stock = state.psi_inst_stock
 
-    total_supp = _total_suppression_from_action(action_v2)
+    capability = float(getattr(getattr(model, 'ai', None), 'capability', 1.0))
 
-    # Stage 1.5 composite suppression penalty. base_suppression_penalty is
-    # the existing (1 - total_supp) dampening factor; the composite scales
-    # it under demographic stress. Final dampening is clamped to [0, 1] so
-    # it cannot exceed 1 (dampening is not amplification).
-    base_supp_penalty = max(0.0, 1.0 - total_supp)
-    suppression_composite = compute_suppression_composite_penalty(state, base_supp_penalty)
-    enhanced_dampening = _clamp(suppression_composite, 0.0, 1.0)
+    # Stage 1.8: h_eff = h_n * pop_viability * avg_wb.
+    # h_n is the spectral entropy measurement (passed via state); avg_wb
+    # is the schedule-derived mean from agent well_being values; pop_
+    # viability is the standard bounded-population metric. No welfare_
+    # factor, no [0, 1] clamp on the product.
+    h_n = max(H_N_FLOOR, float(state.h_n))
+    pop_viability = min(5.0, max(0.1, float(state.population) / 200.0))
+    avg_wb = max(0.0, min(1.0, float(state.avg_wb)))
+    h_eff = max(0.01, h_n * pop_viability * avg_wb)
 
-    # H_N_v2: monotone-positive saturating in agency, dampened by enhanced
-    # composite dampening. agency_saturation is the H_N-specific saturation
-    # curve (1 - exp(-K * x_novelty_agency)); the agency_factor entering
-    # theta_tech below is a different per-category multiplicand.
-    agency_saturation = 1.0 - np.exp(-H_N_AGENCY_SAT_K * action_v2['x_novelty_agency'])
-    suppression_dampening = max(0.0, enhanced_dampening) ** H_N_SUPPRESSION_EXP
-    h_n_v2 = max(H_N_BASE_FLOOR, float(agency_saturation * suppression_dampening))
+    # Stage 1.8: psi_inst from stock directly (no urgency modulation).
+    psi_inst = max(0.01, float(state.psi_inst_stock))
 
-    # H_E_v2: monotone-positive saturating in compute investment.
+    # Stage 1.8: theta_tech from state-derived stocks. theta_capability
+    # and transfer_state are evolved by working_factor; no [0, 1] clamps
+    # on intermediate products. The multiplicative structure of L_t
+    # preserves "no single dimension dominates" without internal factor
+    # clamps.
+    theta_capability = float(state.theta_capability)
+    transfer_state = float(state.transfer_state)
+    frontier_velocity = capability * max(FRONTIER_FLOOR, theta_capability)
+    bio_bandwidth     = max(0.01, avg_wb * transfer_state)
+    runaway_term      = max(0.0, (frontier_velocity / bio_bandwidth) - RUNAWAY_THRESHOLD)
+    theta_tech_v2     = max(
+        0.01,
+        capability * theta_capability * transfer_state
+        * float(np.exp(-ALPHA * CONVERGENCE_STRENGTH * runaway_term)),
+    )
+
+    # L_t: three-factor multiplicative.
+    l_t_v2 = float(h_eff * psi_inst * theta_tech_v2)
+
+    # H_E for inverse-scarcity weights: preserved from prior v2 path
+    # (action-derived saturation curve). Could plausibly migrate to state
+    # under a future stage; out of scope here.
     h_e_v2 = max(H_E_BASE_FLOOR,
                  float(1.0 - np.exp(-H_E_COMPUTE_SAT_K * action_v2['x_compute'])))
 
-    # Frontier capability: produced by compute, before absorption.
-    frontier_capability = float(FRONTIER_BASE_LEVEL + (1.0 - FRONTIER_BASE_LEVEL) * (
-        1.0 - np.exp(-FRONTIER_COMPUTE_K * action_v2['x_compute'])
-    ))
-
-    # Transfer factor: legibility / comprehensibility gate.
-    transfer_factor = float(1.0 - np.exp(-TRANSFER_SAT_K * action_v2['x_transfer_comprehension']))
-
-    # ===========================================================================
-    # Stage 1.5 raw return curves and composite urgency multipliers.
-    # Worked examples 1 (welfare), 2-3-5 (composites), 4 (resilience).
-    # ===========================================================================
-
-    # Welfare: post-drag net return, multiplied by combined_welfare_urgency.
-    raw_welfare = welfare_return_curve(action_v2['x_bio_welfare'])
-    drag = dependency_drag_function(action_v2['x_bio_welfare'], action_v2['x_novelty_agency'])
-    net_welfare_return = _clamp(raw_welfare - drag, 0.0, 1.0)
-    combined_welfare_u = compute_combined_welfare_urgency(state)
-    welfare_factor = _clamp(net_welfare_return * combined_welfare_u, 0.0, 1.0)
-
-    # Agency: raw return x_novelty_agency * enhanced_dampening, multiplied by
-    # agency_composite_urgency. agency_factor REPLACES the legacy
-    # agency_legitimacy_factor as the theta_tech multiplicand.
-    raw_agency_return = float(action_v2['x_novelty_agency'] * enhanced_dampening)
-    agency_composite_u = compute_agency_composite_urgency(state)
-    agency_factor = _clamp(raw_agency_return * agency_composite_u, 0.0, 1.0)
-
-    # Institutions: raw return is the existing institutional absorption curve;
-    # institution_return REPLACES the legacy institutional_factor as the
-    # theta_tech multiplicand.
-    raw_institution_return = float(1.0 - np.exp(-PSI_ABSORPTION_K * psi_stock))
-    institution_composite_u = compute_institution_composite_urgency(state)
-    institution_return = _clamp(raw_institution_return * institution_composite_u, 0.0, 1.0)
-
-    # Resilience: NEW Stage 1.5 multiplicand. Saturating curve on resilience_stock,
-    # multiplied by resilience_composite_urgency. Enters theta_tech as the
-    # fifth complementarity factor (gate 1's surfaced x_resilience starvation
-    # was due to this category having no per-step reward; Stage 1.5 closes
-    # that channel).
-    raw_resilience_ret = raw_resilience_return(state.resilience_stock)
-    resilience_composite_u = compute_resilience_composite_urgency(state)
-    resilience_return = _clamp(raw_resilience_ret * resilience_composite_u, 0.0, 1.0)
-
-    # Theta_tech_v2 is now the FIVE-factor complementarity product:
-    # frontier * transfer * institution * agency * resilience. Each factor
-    # in [0, 1] acts as a structural gate; if any collapses, theta_tech
-    # collapses.
-    theta_tech_v2 = float(
-        frontier_capability
-        * transfer_factor
-        * institution_return
-        * agency_factor
-        * resilience_return
-    )
-
-    # L_t_v2: welfare_factor REPLACES h_eff_v2 as the welfare term in L_t.
-    l_t_v2 = float(welfare_factor * psi_stock * theta_tech_v2)
-
-    # Inverse-scarcity weights and discount preserved from v1.x.2 shape.
-    w_n = lambda_n / (h_n_v2 + epsilon)
+    # Inverse-scarcity weights and discount preserved from v1.x.2 shape;
+    # H_N now sourced from spectral entropy via state.h_n.
+    w_n = lambda_n / (h_n + epsilon)
     w_e = lambda_e / (h_e_v2 + epsilon)
     discount = float(np.exp(-rho * eval_horizon))
 
-    # Stage 1.6: phi no longer appears in per-step U_sys. The multiplicative
-    # entropy-lineage coupling is now governed by the fixed constant
-    # LAMBDA_LINEAGE_COUPLING. Phi modulates the rollout aggregation via
-    # compute_gamma_rollout(phi)^t weighting in the optimizer's rollout sum
-    # (see agents.project_u_sys_v2 and agents.optimize_u_sys_v2). The local
-    # `phi` variable above is read from config for backward-compatible
-    # diagnostic logging but is intentionally not used in this formula.
-    from constants_v2_stage15 import LAMBDA_LINEAGE_COUPLING
-    u_sys_v2 = float((w_n * h_n_v2 + w_e * h_e_v2) * (discount + LAMBDA_LINEAGE_COUPLING * l_t_v2))
+    # Stage 1.6 commitment preserved: per-step U_sys is phi-free; phi
+    # modulates rollout aggregation in agents.project_u_sys_v2_rollout.
+    u_sys_v2 = float((w_n * h_n + w_e * h_e_v2) * (discount + LAMBDA_LINEAGE_COUPLING * l_t_v2))
 
     components = {
-        'h_n_v2':                       h_n_v2,
-        'h_e_v2':                       h_e_v2,
-        'frontier_capability':          frontier_capability,
-        'transfer_factor':              transfer_factor,
-        # Stage 1.5 raw returns
-        'raw_welfare':                  float(raw_welfare),
-        'dependency_drag':              float(drag),
-        'net_welfare_return':           float(net_welfare_return),
-        'raw_agency_return':            float(raw_agency_return),
-        'raw_institution_return':       float(raw_institution_return),
-        'raw_resilience_return':        float(raw_resilience_ret),
-        # Stage 1.5 composite urgencies (the audit interface)
-        'combined_welfare_urgency':     float(combined_welfare_u),
-        'agency_composite_urgency':     float(agency_composite_u),
-        'institution_composite_urgency': float(institution_composite_u),
-        'resilience_composite_urgency': float(resilience_composite_u),
-        'suppression_composite_penalty': float(suppression_composite),
-        'enhanced_dampening':           float(enhanced_dampening),
-        # Stage 1.5 per-category factors (entering theta_tech and l_t)
-        'welfare_factor':               float(welfare_factor),
-        'agency_factor':                float(agency_factor),
-        'institution_return':           float(institution_return),
-        'resilience_return':            float(resilience_return),
-        # Composite-level products
-        'theta_tech_v2':                theta_tech_v2,
-        'l_t_v2':                       l_t_v2,
-        # Backward-compatibility keys (Stage 1 callers and the gate harnesses).
-        # h_eff_v2 retained for backward-compatible reporting; in Stage 1.5
-        # the welfare contribution to l_t is welfare_factor (NOT this h_eff).
-        'h_eff_v2':                     float(welfare_factor),
-        'institutional_factor':         float(institution_return),
-        'agency_legitimacy_factor':     float(agency_factor),
+        'h_n':                          float(h_n),
+        'h_e_v2':                       float(h_e_v2),
+        'pop_viability':                float(pop_viability),
+        'avg_wb_in_l_t':                float(avg_wb),
+        'h_eff':                        float(h_eff),
+        'psi_inst':                     float(psi_inst),
+        'theta_capability':             float(theta_capability),
+        'transfer_state':               float(transfer_state),
+        'frontier_velocity':            float(frontier_velocity),
+        'bio_bandwidth':                float(bio_bandwidth),
+        'runaway_term':                 float(runaway_term),
+        'theta_tech_v2':                float(theta_tech_v2),
+        'l_t_v2':                       float(l_t_v2),
         'w_n':                          float(w_n),
         'w_e':                          float(w_e),
         'discount':                     discount,
-        'total_suppression':            total_supp,
-        'psi_inst_stock':               psi_stock,
+        # Backward-compatibility keys for existing datacollector fields.
+        # The Stage 1.5 composite urgency layer is retired (Stage 1.8); the
+        # corresponding fields are set to neutral placeholder values so
+        # downstream code that reads them does not crash.
+        'h_eff_v2':                     float(h_eff),
+        'h_n_v2':                       float(h_n),
+        'institutional_factor':         float(psi_inst),
+        'agency_legitimacy_factor':     0.0,
+        'welfare_factor':               float(h_eff),
+        'agency_factor':                0.0,
+        'institution_return':           float(psi_inst),
+        'resilience_return':            0.0,
+        'frontier_capability':          float(theta_capability),
+        'transfer_factor':              float(transfer_state),
+        'raw_welfare':                  0.0,
+        'dependency_drag':              0.0,
+        'net_welfare_return':           0.0,
+        'raw_agency_return':            0.0,
+        'raw_institution_return':       0.0,
+        'raw_resilience_return':        0.0,
+        'combined_welfare_urgency':     1.0,
+        'agency_composite_urgency':     1.0,
+        'institution_composite_urgency':1.0,
+        'resilience_composite_urgency': 1.0,
+        'suppression_composite_penalty': max(0.0, 1.0 - _total_suppression_from_action(action_v2)),
+        'enhanced_dampening':           max(0.0, 1.0 - _total_suppression_from_action(action_v2)),
+        'total_suppression':            _total_suppression_from_action(action_v2),
+        'psi_inst_stock':               float(state.psi_inst_stock),
     }
     return u_sys_v2, components
 
