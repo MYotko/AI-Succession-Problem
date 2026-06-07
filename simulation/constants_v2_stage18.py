@@ -52,8 +52,11 @@ FRONTIER_FLOOR = 0.02
 RUNAWAY_THRESHOLD = 1.5
 
 # Runaway exponent rate. Higher alpha = faster decay of theta_tech beyond
-# the threshold. Preserved at v1.x.2 default.
-ALPHA = 1.0
+# the threshold. Preserved at v1.x.2 default. Per-run override available
+# via cfg['alpha']; calculate_system_metrics_v2 reads the config value with
+# this constant as fallback. Gate 2 v2.0 G2.2 / G2.4 validation sweeps alpha
+# across a parameter range; routine operation uses the default.
+ALPHA_DEFAULT = 1.0
 
 # Convergence strength multiplier on the runaway exponent. Combined with
 # alpha, controls how strongly the runaway term suppresses theta_tech.
