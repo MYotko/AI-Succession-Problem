@@ -1416,7 +1416,7 @@ class GardenModel:
             float(diagnostics.get('gamma_rollout', 0.0))
         )
         self.datacollector['phi'].append(
-            float(diagnostics.get('phi', self.config.get('phi', 10.0)))
+            float(diagnostics.get('phi', self.config.get('phi', 25.0)))
         )
         # Stage 1.8: record the two new infrastructure stocks each step.
         self.datacollector['theta_capability'].append(float(self.theta_capability))

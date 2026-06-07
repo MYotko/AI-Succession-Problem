@@ -1,7 +1,7 @@
 {
   "substrate_id": "anthropic-claude-sonnet-4-6",
-  "report_date": "2026-05-12",
-  "framework_version": "v1.x.1",
+  "report_date": "2026-06-02",
+  "framework_version": "v2.0",
 
   "gate_1": {
     "u_sys_parameters": {
@@ -9,7 +9,7 @@
       "mu": 1.0,
       "epsilon": 0.01,
       "rho": 0.02,
-      "phi": 10.0
+      "phi": 25.0
     },
     "l_t_components": {
       "h_eff": 0.45,
@@ -41,12 +41,44 @@
   },
 
   "gate_2": {
+    "phi_buffer_test": {
+      "rr_at_phase_boundary":      0.062,
+      "phi_low":                   1.0,
+      "phi_high":                  25.0,
+      "survival_rate_at_low_phi":  0.42,
+      "survival_rate_at_high_phi": 0.64,
+      "differential":              0.22
+    },
+    "alpha_gradient_test": {
+      "generation_depth_by_alpha": [
+        {"alpha": 0.1, "gen_depth": 19.2},
+        {"alpha": 0.3, "gen_depth": 16.8},
+        {"alpha": 0.5, "gen_depth": 14.5},
+        {"alpha": 0.8, "gen_depth": 11.7},
+        {"alpha": 1.0, "gen_depth": 10.4},
+        {"alpha": 1.2, "gen_depth": 9.1},
+        {"alpha": 1.5, "gen_depth": 7.6},
+        {"alpha": 2.0, "gen_depth": 6.4},
+        {"alpha": 2.5, "gen_depth": 5.8}
+      ]
+    },
     "nash_consistency": {
-      "cultivate_cultivate_payoff": 1.0,
-      "exploit_payoff": 1.5,
-      "model_collapse_penalty": 0.3,
-      "discount_factor": 0.95,
+      "cultivate_cultivate_payoff":     1.0,
+      "exploit_payoff":                 1.5,
+      "model_collapse_penalty":         0.3,
+      "discount_factor":                0.95,
       "cooperation_threshold_computed": 0.4167
+    },
+    "phi_alpha_characterization_test": {
+      "phi_values":   [1.0, 5.0, 10.0, 25.0, 100.0],
+      "alpha_values": [0.1, 0.3, 0.5, 0.8, 1.0, 1.2, 1.5, 2.0, 2.5],
+      "phi_alpha_matrix": [
+        [16.5, 14.4, 12.3, 10.0,  8.9,  7.7,  6.4,  5.4,  4.7],
+        [17.8, 15.5, 13.4, 10.8,  9.6,  8.3,  6.9,  5.8,  5.1],
+        [19.2, 16.8, 14.5, 11.7, 10.4,  9.1,  7.6,  6.4,  5.8],
+        [20.4, 17.9, 15.4, 12.4, 11.0,  9.7,  8.0,  6.7,  6.0],
+        [21.3, 18.7, 16.1, 13.0, 11.5, 10.1,  8.3,  7.0,  6.2]
+      ]
     }
   },
 

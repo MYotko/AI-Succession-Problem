@@ -48,7 +48,7 @@ from metrics import (
     _build_state_from_model,
 )
 
-PHI_DEFAULT = 10.0
+PHI_DEFAULT = 25.0
 N_SEEDS  = 5
 N_STEPS  = 100
 N_AGENTS = 100

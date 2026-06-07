@@ -137,7 +137,7 @@ Pass a `config` dictionary to `GardenModel` on initialization to override any th
 
 | Key | Default | Effect |
 |---|---|---|
-| `phi` | 10.0 | Lineage override weight (φ) |
+| `phi` | 25.0 | Lineage override weight (φ); v2.0 default per Part IX.5 of `docs/lineage_phi_program_reference.md`. Was 10.0 prior to the v2.0 revision. |
 | `alpha` | 1.0 | Tech runaway penalty (α) |
 | `reproduction_rate` | 0.08 | Per-step birth probability |
 | `max_capability` | 1e100 | Cap on successor AI capability growth (prevents float64 overflow at high generation counts) |

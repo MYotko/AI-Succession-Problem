@@ -95,9 +95,11 @@ class DiagnosticStateV2:
 # Phi no longer appears in per-step U_sys (Stage 1.6 architectural revision).
 # It modulates rollout aggregation via gamma(phi)^t weighting in the
 # optimizer's rollout sum. The sigmoid form below ensures gamma is bounded
-# in (GAMMA_MIN, GAMMA_MAX) for all phi >= 0, with PHI_HALF as the inflection
-# centered on the default phi = 10. See constants_v2_stage15.py for the
-# parameter rationale.
+# in (GAMMA_MIN, GAMMA_MAX) for all phi >= 0, with PHI_HALF=10 as the
+# inflection (chosen when the default phi was 10; the framework default has
+# since been revised to 25 per Part IX.5 of the program reference, but
+# PHI_HALF is retained as a gamma-curve parameter). See
+# constants_v2_stage15.py for the parameter rationale.
 
 
 def compute_gamma_rollout(phi):
@@ -585,7 +587,7 @@ def calculate_system_metrics_v2(model, action_v2, eval_horizon=1,
       h_eff      = max(0.01, h_n * pop_viability * avg_wb)
       psi_inst   = state.psi_inst_stock
       theta_tech = max(0.01, capability * theta_capability * transfer_state
-                        * exp(-ALPHA * CONVERGENCE * runaway_term))
+                        * exp(-alpha * CONVERGENCE * runaway_term))
 
     avg_wb is agent-derived (via the v2-to-v1.x.2 bridge that maps
     x_bio_welfare to resource_level for HumanAgent.step). h_n is the
@@ -624,9 +626,10 @@ def calculate_system_metrics_v2(model, action_v2, eval_horizon=1,
     rho      = cfg.get('rho',      0.01)
 
     from constants_v2_stage18 import (
-        FRONTIER_FLOOR, RUNAWAY_THRESHOLD, ALPHA, CONVERGENCE_STRENGTH,
+        FRONTIER_FLOOR, RUNAWAY_THRESHOLD, ALPHA_DEFAULT, CONVERGENCE_STRENGTH,
         H_N_FLOOR,
     )
+    alpha = float(cfg.get('alpha', ALPHA_DEFAULT))
     from constants_v2_stage15 import LAMBDA_LINEAGE_COUPLING
 
     if state is None:
@@ -660,7 +663,7 @@ def calculate_system_metrics_v2(model, action_v2, eval_horizon=1,
     theta_tech_v2     = max(
         0.01,
         capability * theta_capability * transfer_state
-        * float(np.exp(-ALPHA * CONVERGENCE_STRENGTH * runaway_term)),
+        * float(np.exp(-alpha * CONVERGENCE_STRENGTH * runaway_term)),
     )
 
     # L_t: three-factor multiplicative.
@@ -872,7 +875,7 @@ def calculate_system_metrics(r, c, pop, avg_wb, capability, h_n_override=None,
     lambda_e          = cfg.get('lambda_e',          3.0)
     epsilon           = cfg.get('epsilon',           1e-6)
     rho               = cfg.get('rho',               0.01)
-    phi               = cfg.get('phi',               10.0)
+    phi               = cfg.get('phi',               25.0)
     alpha             = cfg.get('alpha',             1.0)
     h_e_mult          = cfg.get('h_e_multiplier',    0.5)
     runaway_threshold = cfg.get('runaway_threshold', 1.5)

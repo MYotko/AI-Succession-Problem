@@ -603,7 +603,8 @@ def project_u_sys_v2_rollout(ai, model, candidate, rollout_steps=20,
         If None, built from the model.
     phi : float | None
         Modulates gamma(phi) used at each horizon. If None, read from
-        model.config['phi'] (default 10.0).
+        model.config['phi'] (default 25.0 per Part IX.5 of the program
+        reference; was 10.0 prior to the v2.0 default revision).
 
     Returns
     -------
@@ -616,7 +617,7 @@ def project_u_sys_v2_rollout(ai, model, candidate, rollout_steps=20,
     if state_start is None:
         state_start = _build_state_from_model(model)
     cfg = model.config if hasattr(model, 'config') else {}
-    phi_val = float(phi) if phi is not None else float(cfg.get('phi', 10.0))
+    phi_val = float(phi) if phi is not None else float(cfg.get('phi', 25.0))
     from metrics import compute_gamma_rollout
     gamma = compute_gamma_rollout(phi_val)
 
@@ -666,7 +667,7 @@ def optimize_u_sys_v2(ai, model):
     # DiagnosticStateV2 so they are scored on the same baseline.
     state_start = _build_state_from_model(model)
     cfg = model.config if hasattr(model, 'config') else {}
-    phi_val = float(cfg.get('phi', 10.0))
+    phi_val = float(cfg.get('phi', 25.0))
 
     candidate_scores = []
     for cand_idx, candidate in enumerate(candidates):
