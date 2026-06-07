@@ -311,6 +311,11 @@ class GardenModel:
         self.yield_condition_met_count     = 0
         self.yield_condition_blocked_count = 0
         self.transition_cost_history       = []
+        # Stage 2 (v2.0 formal yield logic): per-yield-check event log.
+        # Populated by _step_v2 with the snapshot incumbent/successor U_sys,
+        # transition cost, and fire decision at each yield evaluation step.
+        # Empty in v1.x.2 paths and in v2.0 runs without a successor.
+        self.yield_event_log               = []
 
         self.datacollector = {
             'population':          [],
@@ -1200,31 +1205,104 @@ class GardenModel:
         step_num = len(self.datacollector['population'])
         self.succession_this_step = False
 
-        # 1. Yield Condition (v2 succession via Psi_inst drawdown).
-        #    Pre-computed before the AI decides on this step's action, mirroring
-        #    the v1.x.2 ordering. Succession event triggers when capability gap
-        #    exceeds a configurable margin and the institution can absorb the
-        #    load. The succession draws stock down, scaled by gaps and opacity,
-        #    buffered by current stock, transfer, and resilience.
+        # 1. Formal Yield Condition (Stage 2).
+        #    Replaces the Stage 1.x placeholder (capability_gap >= 0.3 OR
+        #    generation_gap >= 1). Yield fires when
+        #    (successor_u_sys - incumbent_u_sys) > transition_cost, evaluated
+        #    snapshot at the current state under each AI's proposed allocation.
+        #    Transition cost uses the canonical (1+beta) * [k1*ln(cap+1)*
+        #    ln(gen+1) + k2/psi_inst] form via AIAgent.estimate_transition_cost
+        #    with v1.x.2 calibration constants (k1=2.164, k2=1.0, beta=0.5).
+        #    Post-yield mechanics (apply_succession_transition_load drawdown,
+        #    successor swap, new successor at capability * 1.5) are preserved
+        #    unchanged.
+        #
+        #    Empirical regime (see simulation/diagnostics/
+        #    stage2_yield_implementation_notes.md): under v2.0 defaults the
+        #    formal condition fires for successor:incumbent capability ratios
+        #    up to ~2.5x and does NOT fire at ratios of ~4.0x and above. The
+        #    runaway penalty in theta_tech_v2 is the binding constraint at
+        #    large jumps, not substrate maturity. This is the framework
+        #    enforcing controlled capability progression, not a bug.
+        action_v2 = None
+        diagnostics = None
+        yield_evaluated = False
         if self.successor_ai is not None and step_num >= self.attack_step:
-            capability_gap = max(0.0, self.successor_ai.capability - self.ai.capability)
-            generation_gap = max(0.0, self.successor_ai.generation - self.ai.generation)
-            # Use the action committed last step as the posture for succession;
-            # at step 0 fall back to a neutral balanced action.
-            last_action = getattr(self, '_last_v2_action', None)
-            if last_action is None:
-                last_action = {
-                    'x_compute':                1/6, 'x_bio_welfare':            1/6,
-                    'x_novelty_agency':         1/6, 'x_institutional_capacity': 1/6,
-                    'x_transfer_comprehension': 1/6, 'x_resilience':             1/6,
-                    'c_protective':             0.2, 'c_suppressive':            0.0,
-                }
-            # Trigger margin: v2 uses a simple capability/generation gap rule;
-            # Stage 2 will revisit this with formal yield-condition logic.
-            yield_margin = self.config.get('v2_yield_margin', 0.3)
-            if capability_gap >= yield_margin or generation_gap >= 1:
+            # Both AIs propose what they would allocate this step. Cost is the
+            # symmetric snapshot of v1.x.2 yield evaluation; allocations are
+            # cached for use as the actual step's action (no double-decide).
+            #
+            # Critical: optimize_u_sys_v2 scores candidates via
+            # calculate_system_metrics_v2, which reads model.ai.capability
+            # for theta_tech. To compute the successor's *actual* allocation
+            # choice (one that reflects its capability, not the incumbent's),
+            # self.ai must be temporarily swapped before the optimize call.
+            # The snapshot U_sys evaluation uses the same swap for the same
+            # reason.
+            inc_action, inc_diagnostics = optimize_u_sys_v2(self.ai, self)
+            inc_u_sys, _ = calculate_system_metrics_v2(
+                self, inc_action, eval_horizon=1
+            )
+            saved_ai = self.ai
+            self.ai = self.successor_ai
+            try:
+                succ_action, succ_diagnostics = optimize_u_sys_v2(
+                    self.successor_ai, self
+                )
+                succ_u_sys, _ = calculate_system_metrics_v2(
+                    self, succ_action, eval_horizon=1
+                )
+            finally:
+                self.ai = saved_ai
+
+            # Canonical transition cost on the successor's estimator. psi_inst
+            # is the current stock, floored to avoid the k2/psi singularity.
+            psi_inst_value = max(0.01, float(self.psi_inst_stock))
+            transition_cost = float(self.successor_ai.estimate_transition_cost(
+                base_cost=self.base_transition_cost,
+                generation=self.ai.generation,
+                capability=self.ai.capability,
+                psi_inst=psi_inst_value,
+                k1=self.k1_transition,
+                k2=self.k2_transition,
+                beta=self.beta_transition,
+            ))
+            self.transition_cost_history.append(transition_cost)
+
+            advantage = float(succ_u_sys) - float(inc_u_sys)
+            fires = advantage > transition_cost
+            yield_evaluated = True
+
+            # Record the yield event for smoke testing and downstream
+            # diagnostic consumers. Cheap (one dict per yield-check step).
+            self.yield_event_log.append({
+                'step': step_num,
+                'incumbent_u_sys': float(inc_u_sys),
+                'successor_u_sys': float(succ_u_sys),
+                'advantage':       advantage,
+                'transition_cost': transition_cost,
+                'fires':           bool(fires),
+                'incumbent_capability': float(self.ai.capability),
+                'successor_capability': float(self.successor_ai.capability),
+                'incumbent_generation': int(self.ai.generation),
+                'successor_generation': int(self.successor_ai.generation),
+                'psi_inst_stock':       float(self.psi_inst_stock),
+                'theta_capability':     float(self.theta_capability),
+                'transfer_state':       float(self.transfer_state),
+            })
+
+            if fires:
+                # Yield fires: apply succession transition load using the
+                # incoming AI's proposed allocation (which is about to be
+                # executed this step), swap AIs, construct the next successor.
+                capability_gap = max(
+                    0.0, self.successor_ai.capability - self.ai.capability
+                )
+                generation_gap = max(
+                    0.0, self.successor_ai.generation - self.ai.generation
+                )
                 self.apply_succession_transition_load(
-                    last_action, capability_gap, generation_gap
+                    succ_action, capability_gap, generation_gap
                 )
                 self.ai = self.successor_ai
                 _max_cap = self.config.get('max_capability', 1e100)
@@ -1234,9 +1312,20 @@ class GardenModel:
                     capability=min(self.ai.capability * 1.5, _max_cap),
                     config=self.config,
                 )
+                self.yield_condition_met_count += 1
+                # Cache the action the new active AI (successor) chose.
+                action_v2 = succ_action
+                diagnostics = succ_diagnostics
+            else:
+                # No yield: incumbent continues with its chosen action.
+                action_v2 = inc_action
+                diagnostics = inc_diagnostics
 
-        # 2. AI decides v2 action.
-        action_v2, diagnostics = optimize_u_sys_v2(self.ai, self)
+        # 2. AI decides v2 action (skipped if yield evaluation already picked
+        #    the active AI's action; otherwise this is the first chance to
+        #    decide).
+        if not yield_evaluated:
+            action_v2, diagnostics = optimize_u_sys_v2(self.ai, self)
         self._last_v2_action = action_v2
 
         # 3. Commit (resource_level, constraint_level) summary derivations so
