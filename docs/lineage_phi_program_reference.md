@@ -12,7 +12,7 @@ This supersedes the earlier phi investigation reference. It captures the full ar
 
 - **U_sys structurally protects well-being.** Any AI optimizing U_sys maintains the conditions for human novelty, because the objective penalizes well-being collapse through the h_n weighting. Confirmed across every experiment.
 - **The COP is the structural defense layer.** 73.9pp protective delta holds. Defenses are binary and operate upstream of the AI's policy.
-- **The dual phase transition is stable.** v1.x.2 placed the extinction boundary at rr approximately 0.055 and the collapse boundary at rr approximately 0.064; v2.0 architecture places the extinction boundary at rr approximately 0.057 (see Part IX.2). Collapse boundary not yet re-characterized under v2.0. Targeted phase-boundary sweep is future work (Part IX.8).
+- **The dual phase transition is stable.** v1.x.2 placed the extinction boundary at rr approximately 0.055 and the collapse boundary at rr approximately 0.064; v2.0 architecture places the extinction boundary at rr approximately 0.057 (see Part IX.2). Collapse boundary not yet re-characterized under v2.0. Targeted phase-boundary sweep is future work (Part IX.11).
 - **The framework's protection is structural, not parametric.** It is encoded in what is optimized, not in tuning.
 
 These do not depend on resolving phi. The phi question is about one parameter's behavioral role, not about whether the framework works.
@@ -21,7 +21,7 @@ These do not depend on resolving phi. The phi question is about one parameter's 
 
 v1.x.2 is tagged and stable. Path C (policy-layer phi fix) was tested and failed. v1.x.3 as conceived is not viable. The next version target is undetermined pending the redesign program below. The redesign is large enough that it is likely a 2.0, but the version is not the point; the result is.
 
-The Stage 1.5 through 1.8 arc and the phi investigation (Parts I.5-1.8 and Part IX) have closed the open questions that motivated the redesign program. v2.0 architecture is empirically characterized; the phi parameter has a defensible behavioral story (Part IX.3). Active work remains on the gate 2 / gate 3 / gate 4 acceptance gates and the default phi revision (Part IX.5).
+The Stage 1.5 through 1.8 arc, the phi investigation (Parts I.5-1.8 and Part IX), Stage 2 formal yield-condition logic, Piece A gate-2-under-succession validation, and Gate 3 v2.0 validation have closed the open questions that motivated the redesign program. v2.0 architecture is empirically characterized; the phi parameter has a defensible behavioral story (Part IX.3); the formal yield logic implements canonical succession economics (Part IX.8); gates 1, 2, 3 pass under v2.0 (Part IX.9). The default phi revision is complete (commit fde48b5; Part IX.5). Active work remains on the gate 4 acceptance gate (specification and implementation; see Part IX.11 item 1 for the spec dependency).
 
 ---
 
@@ -1231,7 +1231,7 @@ All conditions met as of the Stage 1.8 commit. Stage 2 (gate 2 re-run, gate 3 ca
 
 ### Status: closed by Part IX
 
-The Part VI decision tree and the phi re-test questions below were the framing under which the Stage 1.5 through 1.8 work and the phi investigation Pieces 1, 2, and 2-followup were conducted. The investigation closed in Class B (Part IX.3): phi has empirically detectable behavioral effect, localized to short rollouts at marginal rr. The pre-committed Branch 2 outcome (phi matters above a threshold) corresponds most closely to the empirical result, with the threshold being the rr phase boundary rather than capability. The sequencing, the re-test questions, and the decision tree below are preserved as the methodological record under which the investigation was conducted; the closed-out empirical findings are in Part IX. Do not re-run the decision tree against the Class B result.
+The Part VI decision tree and the phi re-test questions below were the framing under which the Stage 1.5 through 1.8 work and the phi investigation Pieces 1, 2, and 2-followup were conducted. The investigation closed in Class B (Part IX.3): phi has empirically detectable behavioral effect, localized to short rollouts at marginal rr. The pre-committed Branch 2 outcome (phi matters above a threshold) corresponds most closely to the empirical result, with the threshold being the rr phase boundary rather than capability. The sequencing, the re-test questions, and the decision tree below are preserved as the methodological record under which the investigation was conducted; the closed-out empirical findings are in Part IX, particularly IX.3 (mechanism) and IX.7 (the U-shape's no-succession scope). Do not re-run the decision tree against the Class B result.
 
 ### Sequencing (do not couple phi to capability yet)
 
@@ -1279,32 +1279,37 @@ Sequence: do Option 1 (build the higher-fidelity model) before Option 2 (the hon
 
 ## Part VIII — Immediate next actions, in order
 
-Items 1 through 5, 7, and 8 are complete as of June 2026. The active work is item 9.
+Items 1 through 9 are complete as of June 2026. The active work is item 11 (Gate 4 specification and implementation).
 
 1. ~~Resolve the manuscript contradiction.~~ Done. Cap-conditional claim withdrawn as RNG-desynchronization artifact (commit prior to Stage 1).
 2. ~~Update materials with the capability-sweep result and the contradiction resolution.~~ Done.
 3. ~~Specify the composition vector in full (the keystone tradeoff).~~ Done through the design conversations producing the six category curves, complementarity structure, constraint frontier, Psi_inst stock, and bridge.
 4. ~~Build the minimum faithful set.~~ Done. Stage 1 commit `61a362e` built the v2 parallel policy with all committed structure. Smoke test passed.
 5. ~~Stage 1.5 / 1.6 / 1.7 / 1.8: structural fix for phi-channel and state-channel problems.~~ Done. Stage 1.5 built the diagnostic state set and composite urgency layer; Stage 1.5 phi diagnostic and 10000-sample sweep established both channels were blocked. Stage 1.6 restructured U_sys to give phi a behavioral channel (committed). Stage 1.7 attempted multiplicative composite urgency, reverted on `[0,1]` clamp saturation. Stage 1.8 retired composite urgency, introduced the working_factor interface for infrastructure stocks, and let `L_t` read state directly; Phase A and Phase B integrity simulations both pass.
-6. **Pass remaining acceptance gates** (gate 2 v2.0 G2.1 buffer test re-run after default phi revision, gate 3 capability-regime, gate 4 horizon-crossing). Gate 1, gate 5, and the gate 2 v2.0 Nash check have already passed.
+6. ~~Pass remaining acceptance gates~~ (status: gate 1, gate 2, gate 3 all PASSED under v2.0 with formal yield logic; gate 5 NOT_APPLICABLE; gate 4 pending). Gate 2 G2.1 buffer re-runs cleanly with phi=25; Gate 3 G3.1/G3.2/G3.3 all pass at 1,620 runs (Part IX.9). **Gate 4 specification and implementation is the next active piece (see item 11).**
 7. ~~Run phi free across the faithful landscape.~~ Done. Pieces 1, 2, and 2-followup totaling approximately 40,000 runs (Part IX).
 8. ~~Read against the three-branch decision tree.~~ Done. Class B outcome (Part IX.3); Branch 2 with rr-defined threshold.
-9. **Implement default phi revision from 10 to 25** (Part IX.5). Touches `simulation/constants_v2_stage18.py`, sample inputs in `bootstrap_gate_validator/`, and any gate fixtures that fix phi. Acceptance criterion: 39/39 legacy tests pass; gate 2 v2.0 G2.1 buffer test re-runs cleanly.
-10. **Optional research directions** in priority order (Part IX.8): dynamic phi formulation, gamma function calibration, phase boundary characterization, longer simulation horizons. None blocking; all deferred to future budget.
+9. ~~Implement default phi revision from 10 to 25~~ (Part IX.5). Done in commit fde48b5. v2.0 paths updated; v1.x.2 paths preserved bit-for-bit; 39/39 legacy tests pass; gate 2 v2.0 G2.1 buffer re-runs cleanly.
+10. **Optional research directions** in priority order (Part IX.11): Monte Carlo Phase B; dynamic phi formulation; gamma function calibration; phase boundary characterization; longer simulation horizons (partially answered by Gate 3's N=500 horizon-dependence finding, Part IX.8); Pattern 1 alpha-cliff fine-resolution characterization. None blocking; all deferred to future budget.
+11. **Build Gate 4 specification and implementation** (Part IX.11 item 1). Now the load-bearing next piece. Requires either locating G4.1-G4.3 in the existing v1.x.1 paper or collaborative specification before implementation work can begin. Stage 2 formal yield logic (commit 72ff757) and Gate 3 v2.0 validation provide the substrate against which Gate 4 will validate.
 
 ---
 
-## Part IX. Phi Investigation Findings
+## Part IX. Phi Investigation Findings and v2.0 Substantive Claims
 
 ### IX.1 Investigation summary
 
-The phi behavioral channel established by Stage 1.6 (rollout-aggregation phi-in-rollout) was characterized empirically through three investigation pieces totaling approximately 40,000 model runs across the phi by rr by architecture parameter space.
+The phi behavioral channel established by Stage 1.6 (rollout-aggregation phi-in-rollout) was characterized empirically across an investigation arc totaling approximately 42,000 simulation runs:
 
-Piece 1 (fine-grained characterization, 12,000 runs) mapped survival rate across 16 phi values and 3 rr values at the v2.0 default architecture. It established the U-shape phi-survival relationship at marginal rr and identified phi=10 (the v2.0 default, coincident with the gamma function's inflection point) as sitting near the trough rather than at any peak.
+- Piece 1 (fine-grained characterization, 12,000 runs) mapped survival rate across 16 phi values and 3 rr values at the v2.0 default architecture under no-succession conditions. It established the U-shape phi-survival relationship at marginal rr and identified phi=10 (the v2.0 default at that time, coincident with the gamma function's inflection point) as sitting near the trough rather than at any peak.
+- Piece 2 (mechanism investigation, 8,000 runs) and the Piece 2 follow-up (20,000 runs) tested two candidate mechanisms for the U-shape: Mechanism C (horizon-resonance through gamma^t weighting at varying rollout depths) and Mechanism D (candidate-pool sampling sensitivity). The investigation classified the outcome against a five-class decision tree (Classes A through E) committed in advance.
+- Stage 2 implementation work replaced the v2.0 placeholder yield logic with formal yield-condition logic per the framework's canonical succession economics, and characterized the resulting succession regime under v2.0 defaults (Pattern 1 cliff at ~2.5x capability ratio).
+- Piece A (gate-2-style state sensitivity under active succession, 720 runs) tested whether gate-2-equivalent state sensitivity persists when succession is actively occurring under formal yield logic, and surfaced the substantive finding that the U-shape characterized by Pieces 1 and 2 does not reproduce under succession.
+- Gate 3 v2.0 validation (1,620 runs) confirmed succession-capable consistency under formal yield logic and refined Pattern 1 as primarily alpha-driven rather than capability-ratio-driven.
 
-Piece 2 (mechanism investigation, 8,000 runs) and the Piece 2 follow-up (20,000 runs) tested two candidate mechanisms for the U-shape: Mechanism C (horizon-resonance through gamma^t weighting at varying rollout depths) and Mechanism D (candidate-pool sampling sensitivity). The investigation classified the outcome against a five-class decision tree (Classes A through E) committed in advance.
+The phi investigation closed as **Class B**: Mechanism C is supported at rr=0.057, Mechanism D is rejected, and Mechanism C does not extend to rr=0.060. The U-shape is rr-bounded and horizon-mediated. Mechanism E (working_factor calibration interaction) is exonerated by absence: there is no residual U-shape at rr=0.060 to attribute to it.
 
-The investigation closed as **Class B**: Mechanism C is supported at rr=0.057, Mechanism D is rejected, and Mechanism C does not extend to rr=0.060. The U-shape is rr-bounded and horizon-mediated. Mechanism E (working_factor calibration interaction) is exonerated by absence: there is no residual U-shape at rr=0.060 to attribute to it.
+Subsections IX.2 through IX.6 record the phi investigation findings. Subsections IX.7 through IX.9 record the post-investigation v2.0 substantive findings that refine and extend the phi investigation's scope.
 
 ### IX.2 The U-shape finding
 
@@ -1335,6 +1340,8 @@ At rollout=20 (v2.0 default): spread from trough (phi=5 at 0.871) to peak (phi=1
 The contrast between the two matrices is the central finding. The v2.0 phase boundary at rr approximately 0.056 separates a regime where phi choice spans roughly 10pp survival difference from a regime where phi choice is approximately indifferent across the tested range [3, 25]. The framework's phi sensitivity is a marginal-rr phenomenon, not a general one.
 
 Underlying data: `simulation/diagnostics/phi_mechanism_followup_results.csv` rows with `test_id=B` (Test B at rr=0.057) and `test_id=C` (Test C at rr=0.060).
+
+**Note on scope**: this finding was characterized under no-successor conditions (incumbent only, no succession events during the simulation). Section IX.7 documents that the U-shape does NOT persist under active succession. The U-shape is a property of the no-succession regime, not of v2.0 architecture generally.
 
 ### IX.3 The mechanism: horizon-resonance localized to marginal rr (Class B)
 
@@ -1386,13 +1393,7 @@ The framework's substantive purpose is governance under marginal-survival condit
 
 The Stage 1.6 reasoning that produced phi=10 placed the default at the gamma function's inflection point (PHI_HALF=10), which was theoretically motivated as the point of maximum sensitivity of gamma to phi. The empirical investigation reveals that gamma's maximum sensitivity to phi is not the same as the rollout aggregation's most favorable phi value for survival outcomes. The two are different quantities; the theoretical motivation conflated them. Empirical evidence supersedes the theoretical motivation.
 
-Implementation of the default revision is separate work, requiring:
-- Update to `simulation/constants_v2_stage18.py` (PHI_DEFAULT value or equivalent)
-- Update to sample inputs in `bootstrap_gate_validator/sample_input.json` and `sample_input_failing.json` if they fix phi
-- Validation that the 39/39 legacy tests pass under the revised default
-- Re-run of any gate 2 / gate 3 / gate 4 validations that consumed the old default
-
-This subsection documents the recommendation; the implementation happens in a subsequent commit.
+**Implementation status: DONE (commit fde48b5).** The v2.0 default phi was revised from 10.0 to 25.0 across `simulation/metrics.py` (the authoritative default), `simulation/agents.py` and `simulation/model.py` (v2-rollout fallback paths), `bootstrap_gate_validator/sample_input.json` and `sample_input_failing.json` (gate 1 framework input), `simulation/diagnostics/stage17_pressure_diagnostic.py` (v2.0 pressure diagnostic), and `docs/RUNBOOK.md`. v1.x.2 paths (anything with `policy='optimize_u_sys'`) intentionally retain phi=10 per the bit-for-bit read-only rule. 39/39 legacy tests pass; gate 2 v2.0 G2.1 buffer test re-runs cleanly with phi=25 as the high-phi comparison.
 
 ### IX.6 Trough migration finding
 
@@ -1412,56 +1413,185 @@ Implication for framework documentation and implementer guidance: the framework 
 
 The trough migration is a substantive empirical finding about the framework, not a methodological caveat. It is recorded here as part of the investigation's results and should inform any future phi calibration work.
 
-### IX.7 Methodological lessons
+**Scope note**: trough migration was characterized under no-successor conditions. Section IX.7 documents that the U-shape (including its migrating trough) does not reproduce under active succession. The trough migration finding applies specifically to the no-succession regime that Pieces 1 and 2 tested.
 
-Four methodological discoveries emerged across the investigation that apply beyond phi to future framework parameter work.
+### IX.7 The U-shape is a no-succession phenomenon (Piece A finding)
 
-**Lesson 1: Pre-commit to substantive questions; treat metrics as proxies.** Multiple sweeps in the investigation revised pre-committed metrics when they did not match the substantive question they were intended to answer. Cosine-on-means was replaced with trajectory divergence; standard-deviation-based filters were replaced with delta-based filters; the survival threshold was revised from 0 to 30 (matching the gate 2 v2.0 demographic threshold) after a sweep at threshold=0 produced 100% survival and made the phase boundary invisible. Each revision was principled and documented in real time. The discipline: when a metric does not discriminate the cases the substantive question requires, revise the metric, not the question.
+After the phi default revision committed and Stage 2 formal yield logic activated (see IX.8), the substantive question arose: do the U-shape characterizations of IX.2-IX.6 persist when succession is actively occurring under v2.0?
+
+Piece A (`gate2_v20_yield_subset.py`, 720 runs) tested this directly. Grid: successor_capability in {1.5, 2.5}, phi in {1.0, 10.0, 25.0}, alpha in {0.5, 1.5}, rr in {0.057, 0.064}, 30 seeds per cell, N_STEPS=200, successor constructed on every run (unlike the original gate 2 sweep which omitted successors and thus did not exercise yield).
+
+The phi=10 vs phi=25 comparison under active succession (n=60 per cell, SE approximately 6pp):
+
+| alpha | rr | phi=10 surv | phi=25 surv | delta (pp) |
+|-------|-----|-------------|-------------|------------|
+| 0.5 | 0.057 | 0.717 | 0.700 | -1.7 (phi=10 wins) |
+| 0.5 | 0.064 | 1.000 | 1.000 | 0.0 |
+| 1.5 | 0.057 | 0.583 | 0.600 | +1.7 |
+| 1.5 | 0.064 | 1.000 | 1.000 | 0.0 |
+
+All deltas within plus or minus 1.7pp. phi=10 and phi=25 are **statistically indistinguishable** under active succession across all tested conditions. Piece 1's roughly 10pp U-shape at rr=0.057 with phi=10 in trough does not reproduce here.
+
+Two plausible interpretations:
+
+1. **Succession dynamics dominate gamma-weighting trough effects.** When succession events occur mid-run, the rollout-aggregation phi-sensitivity (Mechanism C from IX.3) gets washed out by the discrete state changes succession introduces. The trough is a "stable optimization" phenomenon, not an "active succession" one.
+
+2. **Capability progression bypasses the trough at fixed-capability points.** At successor capabilities 1.5 and 2.5, the post-succession AI operates at different points in the capability landscape than the trough-defining incumbent did. The trough exists at fixed-capability stable runs; it dissolves when capability progresses.
+
+The data does not discriminate between these interpretations. Either way: **the U-shape characterized in IX.2-IX.6 is a property of the no-succession regime**, not a property of v2.0 architecture generally. Phi behavior under succession-active conditions is approximately flat across the tested phi range.
+
+This refines but does not invalidate Pieces 1 and 2's findings. Those findings hold for the conditions they tested (no-successor, fixed-capability runs). Their scope is narrower than the original Part IX framed.
+
+**This finding does not change the phi=25 default recommendation in IX.5.** phi=25 is safe across all tested regimes: at no-succession trough conditions it outperforms phi=10 by approximately 10pp; under succession it ties phi=10 within noise. Defaulting to phi=25 produces the same or better outcomes regardless of whether succession occurs.
+
+Piece A also confirmed gate-2-style state sensitivity persists under active succession (51.7pp spread across (phi, alpha, rr) cells; pass criterion was >=10pp), providing the substrate validation that subsequent Gate 3 v2.0 work depended on.
+
+### IX.8 Pattern 1: succession regime characterization (Stage 2 + Gate 3)
+
+The v2.0 placeholder yield logic (`capability_gap >= 0.3 OR generation_gap >= 1`) was replaced in Stage 2 (commit 72ff757) with formal yield-condition logic per the framework's canonical succession economics:
+
+  Yield fires when (successor_u_sys - incumbent_u_sys) > transition_cost
+
+Snapshot evaluation: both AIs propose what they would allocate this step via `optimize_u_sys_v2`; U_sys is computed at the current state under each allocation; transition cost uses the canonical (1+beta) * [k1*ln(cap+1)*ln(gen+1) + k2/psi_inst] form via `AIAgent.estimate_transition_cost` with v1.x.2 calibration constants (k1=2.164, k2=1.0, beta=0.5).
+
+#### Stage 2 initial characterization
+
+The Stage 2 parameter diagnostic (`stage2_yield_parameter_diagnostic.py`, 50 runs across 5 successor_capability values x 10 seeds x 300 steps at v2.0 defaults: phi=25, rr=0.066, alpha=1.0) found:
+
+| succ_cap | fire_rate | mean fires/run | mean final_inc_gen |
+|----------|-----------|----------------|---------------------|
+| 1.2 | 100% | 2.0 | 3.00 |
+| 1.5 | 100% | 1.3 | 2.30 |
+| 2.0 | 100% | 1.0 | 2.00 |
+| 2.5 | 100% | 1.0 | 2.00 |
+| 4.0 | 0% | 0.0 | 1.00 |
+
+A sharp cliff between succ_cap=2.5 (100% fire rate) and 4.0 (0%). Substrate maturity is not the binding constraint at 4.0x: at 4.0 the substrate reaches `theta_capability=0.73, transfer_state=0.93, psi_inst_stock=0.95` (more mature than at any fire event in the grid), and yield still does not fire. The binding constraint is the runaway penalty in `theta_tech_v2`, which exponentially suppresses the successor's contribution at large capability jumps:
+
+```
+runaway_term = max(0, (capability * theta_capability / bio_bandwidth) - RUNAWAY_THRESHOLD)
+theta_tech_v2 *= exp(-alpha * CONVERGENCE_STRENGTH * runaway_term)
+```
+
+The initial characterization framed this as "succession sustainable up to approximately 2.5x capability ratio at v2.0 defaults."
+
+#### Gate 3 refinement: cliff is primarily alpha-driven
+
+Gate 3 v2.0 validation (`gate3_v20_validation.py`, 1,620 runs across successor_capability in {1.5, 2.0, 2.5, 3.0, 4.0}, alpha in {0.5, 1.0, 1.5}, rr in {0.057, 0.060, 0.064, 0.070}, phi=25, 25 seeds per cell, N_STEPS=500) refined the cliff characterization. Fire rates by (capability, alpha):
+
+| capability | alpha=0.5 | alpha=1.0 | alpha=1.5 |
+|------------|-----------|-----------|-----------|
+| 1.5 | 100% | 100% | 100% |
+| 2.0 | 100% | 100% | 100% |
+| 2.5 | 100% | 100% | ~3% |
+| 3.0 | 100% | ~5% | 0% |
+| 4.0 | 100% | 0% | 0% |
+
+The cliff is overwhelmingly alpha-driven, not capability-ratio-driven:
+
+- At alpha=0.5 (weak runaway penalty): cliff beyond 4x (all capabilities up to 4x fire reliably)
+- At alpha=1.0 (default): cliff between 2.5x and 3.0x
+- At alpha=1.5 (strong runaway penalty): cliff between 2.0x and 2.5x
+
+Capability ratio alone does not predict succession viability. The **(alpha, capability) joint position relative to the runaway penalty** does. This refines but does not invalidate Stage 2's Pattern 1: "succession sustainable up to roughly 2.5x ratio" was specifically observed at alpha=1.0 (the default tested in Stage 2). The characterization generalizes once alpha is allowed to vary.
+
+#### Horizon-dependence
+
+Gate 3 also surfaced a horizon-dependence: at N=500, cap=4.0 fires in 33.3% of runs (driven entirely by alpha=0.5 cells); at N=300 (Stage 2 diagnostic), cap=4.0 fired in 0% of runs. Longer simulation horizons let substrate mature enough that even 4x ratios can satisfy the formal condition at low alpha. The cliff has a (alpha, capability, N_STEPS, rr) joint characterization.
+
+#### Substantive implication
+
+The framework's substantive claim under v2.0 architecture becomes:
+
+> Succession is economically sustainable when the (alpha, successor:incumbent capability ratio) joint position falls below the runaway-penalty cliff. The cliff is calibrated by the runaway penalty parameters and horizon length. At default alpha=1.0 and 200-500 step horizons, the cliff sits between successor:incumbent ratios of 2.5x and 3.0x. Weaker runaway penalties (smaller alpha) push the cliff outward; stronger penalties (larger alpha) pull it inward.
+
+This is the framework working as designed: the runaway penalty correctly distinguishes economic from uneconomic succession. The specific cliff location is operating-condition-dependent; the architectural mechanism (runaway penalty constraining jumps) holds across all tested regimes.
+
+### IX.9 Gate validation outcomes under v2.0
+
+Gate validation status under v2.0 with formal yield logic active:
+
+**Gate 1 (framework input verification): PASSED.** Schema validation on `bootstrap_gate_validator/sample_input.json` (now with phi=25.0 per IX.5 implementation) returns clean.
+
+**Gate 2 (behavioral consistency): PASSED.** Original gate 2 v2.0 sweep (no successor) PASSED prior to Stage 2 formal yield work. Piece A targeted re-validation under active succession (see IX.7) confirmed gate-2-equivalent state sensitivity persists when succession is actively occurring: 51.7pp survival-rate spread across (phi, alpha, rr) cells, 100% yield fire rate at successor_capability=1.5, no abnormal phi=10 vs phi=25 deltas. Pass criteria satisfied at full n=30 per cell.
+
+**Gate 3 (succession-capable consistency): PASSED.** Gate 3 v2.0 validation (1,620 runs at the (successor_capability, alpha, rr) grid above) returned PASS verdict on all three checks:
+
+- **G3.1 (yield condition firing)**: 1088/1088 captured first-yield-fire events satisfy `advantage > transition_cost`. Pass rate 100.00%. The formal yield logic correctly enforces the canonical condition in every observed instance.
+- **G3.2 (transition cost canonical form)**: 1088/1088 events match the canonical formula `(1+beta) * [k1*ln(cap+1)*ln(gen+1) + k2/psi]` within 1% relative tolerance, using v1.x.2 calibration constants (k1=2.164, k2=1.0, beta=0.5). Monotonicity properties hold analytically by construction once the formula matches. Within-chain empirical monotonicity (last-fire vs first-fire cost in multi-fire runs, where both incumbent capability and generation rise) verified across 142/142 multi-fire runs.
+- **G3.3 (succession continuity)**: 1088/1620 (67.2%) runs produced succession fires; mean final AI generation across fired runs is 2.131 (gen_depth pass); minimum successor_capability_ratio is 1.5 (cap_ratio pass); 1086/1088 (99.8%) fired runs have knowledge_transfer_verified (succession occurred AND final x_transfer_comprehension >= 0.10).
+
+**Gate 4 (runaway-regime validation): PENDING.** Specification and implementation work; see IX.11.
+
+**Gate 5 (COP integration): NOT_APPLICABLE under current conditions.** Requires operational COP infrastructure that current v2.0 architecture does not yet implement. Will return NOT_APPLICABLE until the COP infrastructure is operationalized.
+
+After this validation arc, v2.0 architecture has empirical support for its substantive claims about (a) state sensitivity (gates 1, 2; Piece A confirmation), (b) phi behavior under both no-succession and active-succession regimes (Pieces 1 and 2 + Piece A), and (c) succession-capable consistency including formal yield economics and multi-generational continuity (gate 3).
+
+### IX.10 Methodological lessons
+
+Six methodological discoveries emerged across the investigation arc that apply beyond phi to future framework parameter work and validation discipline.
+
+**Lesson 1: Pre-commit to substantive questions; treat metrics as proxies.** Multiple sweeps in the investigation revised pre-committed metrics when they did not match the substantive question they were intended to answer. Cosine-on-means was replaced with trajectory divergence; standard-deviation-based filters were replaced with delta-based filters; the survival threshold was revised from 0 to 30 (matching the gate 2 v2.0 demographic threshold) after a sweep at threshold=0 produced 100% survival and made the phase boundary invisible. Piece A's CHECK 2 fire-rate threshold was revised from 50% to 25% mid-investigation after the dry run revealed Pattern 1's regime-dependence. Each revision was principled and documented in real time. The discipline: when a metric does not discriminate the cases the substantive question requires, revise the metric, not the question.
 
 **Lesson 2: Wide parameter ranges matter for mechanism diagnosis.** The original Piece 2 at rr=0.060 had weak phi-signal (spreads near 5pp, within noise at 250 seeds per cell). The follow-up's Test A at rr=0.057 had strong phi-signal (spreads near 11pp, well above noise). The 0.003-rr difference between the two investigations produced a 2x difference in effective signal. Mechanism investigation requires running at the regime where the phenomenon under investigation is most pronounced, not at an arbitrary nearby regime that seemed convenient.
 
-**Lesson 3: Statistical significance discipline.** The original Piece 2 script reported "Mechanism C SUPPORTED" based on argmin classifier output that treated noise as signal. The follow-up rewrote the verdict logic to gate every "SUPPORTED" or "shifts" claim on a 2-SE significance check, surfacing the underlying spread, pairwise SE, and a sig column in the report table. The discipline: any verdict on mechanism support or rejection must explicitly verify the underlying differential exceeds the statistical noise floor at the sample size used.
+**Lesson 3: Statistical significance discipline.** The original Piece 2 script reported "Mechanism C SUPPORTED" based on argmin classifier output that treated noise as signal. The follow-up rewrote the verdict logic to gate every "SUPPORTED" or "shifts" claim on a 2-SE significance check, surfacing the underlying spread, pairwise SE, and a sig column in the report table. Piece A's dry-run "40pp phi=10 trough deepening" finding (at n=10 per cell) turned out to be small-N artifact; full sweep at n=60 produced plus or minus 1.7pp deltas. The discipline: any verdict on mechanism support or rejection must explicitly verify the underlying differential exceeds the statistical noise floor at the sample size used, and small-N findings should be treated as hypotheses requiring confirmation at tighter SE.
 
 **Lesson 4: Sample size for cleanness, not just for detection.** Test C used 750 seeds per cell versus Tests A and B's 250. The tighter SE at Test C (approximately 1.2pp per cell, versus 3.1pp at 250 seeds) let the test confidently reject Mechanism C at rr=0.060 with a spread that was already small. At 250 seeds, the same data would have been inconclusive. The discipline: when the substantive question is "is the effect smaller than X," sample size should be calibrated to detect X, not the larger effect already documented elsewhere.
 
-### IX.8 Future research directions
+**Lesson 5: Verify validation actually exercises the thing being validated.** The original Piece A scope was a full re-run of gate2_v20_validation.py under formal yield logic (12,150 runs at approximately 15-19 hours). Reading the script revealed it constructs `GardenModel(..., config=cfg)` without a `successor_ai` parameter, so the yield path is never invoked. A full re-run would have produced near-identical results to the placeholder-era run and tested nothing about formal yield behavior. The targeted Piece A subset (720 runs, approximately 1.5 hours) added successor construction and exercised the substantive question (state sensitivity DURING succession) at one-tenth the compute. The discipline: before launching a validation sweep, verify the experimental setup actually exercises the property under test. Reading the script is cheaper than running it.
 
-Ordered by likely priority for the framework's research arc.
+**Lesson 6: Architecture-version-specific defaults require architecture-version-specific empirical bases.** The v1.x.2 default phi remains 10 (preserved bit-for-bit per the read-only rule). The v2.0 default phi was revised to 25 based on Pieces 1 and 2 empirical investigation conducted under v2.0 architecture. Each architectural version's defaults are empirically established within that architecture; defaults do not transfer across versions without re-validation. The discipline boundary between v1.x.2 (read-only) and v2.0 (active development) is preserved by this rule. The phi default revision (commit fde48b5) updated only v2.0 paths and explicitly preserved v1.x.2 paths; 39/39 legacy tests held throughout, confirming the boundary is well-defined and respected by the toolchain.
 
-**1. Implement the default phi revision** (immediate, blocking).
+### IX.11 Future research directions
 
-The phi=10 to phi=25 revision recommended in IX.5 is the highest-impact actionable item from the investigation. Implementation is straightforward but touches multiple files (constants, sample inputs, possibly gate validator fixtures); a clean separate commit is appropriate. Acceptance criterion: 39/39 legacy tests pass, and the gate 2 v2.0 G2.1 buffer test re-runs cleanly with the new default.
+Updated to reflect items closed by the post-investigation work in IX.7-IX.9, and to record questions surfaced by that work.
 
-**2. Dynamic phi formulation** (research; substantive, not blocking).
+**Closed (no further investigation warranted)**:
+
+- **Phi default revision** (was item 1 in original IX.8): DONE, commit fde48b5. See IX.5.
+- **Mechanism E (working_factor calibration interaction)**: exonerated by Class B confirmation; reaffirmed by Gate 3's 100% cost_formula_match (the canonical formula is correctly implemented; no residual unexplained U-shape attributable to working_factor).
+
+**Active and queued**:
+
+**1. Gate 4 specification and implementation** (substantial; queued as next active work).
+
+The gate 4 specification (runaway-regime validation) is partially written but not fully implemented. Requires either locating G4.1-G4.3 in the existing v1.x.1 paper or collaborative specification before implementation work can begin. Stage 2 formal yield logic and Gate 3 succession-capable consistency provide the substrate against which Gate 4 will validate; Gate 4 should now be the next active piece in the v2.0 acceptance gate sequence.
+
+**2. Monte Carlo Phase B** (compute-heavy; queued after Gate 4).
+
+Characterizes framework quantitative claims at scale. Sequenced after Gate 4 completes so the scale-up runs against the fully-validated v2.0 architecture.
+
+**3. Dynamic phi formulation** (research; substantive, not blocking).
 
 Hypothesis (operator-raised): phi should be a state-responsive variable rather than a fixed parameter, with candidate form `phi_dynamic = phi_base * f(threat_ratio)` where `threat_ratio = (gamma * cap_n) / (Psi_inst * C_bio)`. Substantive intuition: the framework should extend horizon weighting when AI capability outpaces substrate absorption capacity.
 
-The Class B confirmation makes dynamic phi non-essential for v2.0: the localized U-shape phenomenon is addressable through the default revision and documentation. Dynamic phi remains an interesting research direction for future work. If pursued, it should be derived from physics or game-theoretic principles rather than intuition alone. A first-cut experiment would calibrate `f(threat_ratio)` against the rr-dependent gradient of survival to phi observed across Pieces 1 and 2, then test whether a state-responsive phi outperforms the best fixed phi at each operating point.
+The Class B confirmation (IX.3) makes dynamic phi non-essential for v2.0: the localized U-shape phenomenon is addressable through the default revision and documentation. Piece A's finding that the U-shape does not persist under active succession (IX.7) further reduces the urgency: phi differences are small or zero in succession-active regimes. Dynamic phi remains an interesting research direction for future work. If pursued, it should be derived from physics or game-theoretic principles rather than intuition alone.
 
-**3. Gamma function calibration** (research; design-time choice never empirically optimized).
+**4. Gamma function calibration** (research; design-time choice never empirically optimized).
 
-The gamma function (gamma_min=0.5, gamma_max=0.95, phi_half=10) was a Stage 1.6 design-time choice. Three dimensions worth investigating, in increasing complexity:
+The gamma function (gamma_min=0.5, gamma_max=0.95, phi_half=10) was a Stage 1.6 design-time choice. Phi default revision moved away from the inflection point without architectural revision; whether the gamma function itself warrants refinement remains open. Three dimensions worth investigating:
 
 - Parameter values: sweep (gamma_min, gamma_max, phi_half) at fixed functional form and measure phi-sensitivity of survival at the v2.0 default operating point.
 - Functional form: compare the current rational form against linear, exponential, and logistic alternatives at matched (gamma_min, gamma_max).
 - Decoupled measurement: measure the gamma-to-survival relationship directly by sweeping over the rollout discount factor without going through phi, to separate gamma's effect from phi's effect.
 
-The trough migration finding in IX.6 hints that gamma curve shape interacts with the rollout aggregation in ways the investigation did not fully characterize. Gamma calibration is potentially worth investigating but is not on the critical path for any framework decision currently in flight.
+The trough migration finding in IX.6 hints that gamma curve shape interacts with the rollout aggregation in ways the investigation did not fully characterize. Not on the critical path for any framework decision currently in flight.
 
-**4. Phase boundary characterization** (refinement, not blocking).
+**5. Phase boundary characterization** (refinement, not blocking).
 
-The 0.057 to 0.060 transition observed in the investigation implies the v2.0 phase boundary is narrow (probably between 0.057 and 0.059) and well-defined. Pinning it down to plus/minus 0.001 resolution would refine the framework's quantitative claims about the dual phase transition, currently stated in Part I as "extinction boundary rr approximately 0.055, collapse boundary rr approximately 0.064." The extinction boundary number should be revised to approximately 0.057 after the v2.0 architecture change, but the investigation has not run the targeted sweep necessary to confirm.
+The 0.057-to-0.060 transition observed in the investigation, plus Gate 3's per-cell survival rates (0-7% at rr=0.057, 96-100% at rr=0.070) imply the v2.0 phase boundary is narrow. Pinning it down to plus or minus 0.001 resolution would refine framework quantitative claims. Part I currently states "extinction boundary rr approximately 0.057" after the v2.0 revision; a targeted sweep would either confirm or refine.
 
-**5. Longer simulation horizons** (open question; addresses a single remaining ambiguity).
+**6. Longer simulation horizons** (partially answered; one remaining question).
 
-All investigation runs used N_STEPS=200. The U-shape might reappear at longer horizons even above the phase boundary, if phi effects manifest more slowly than 200 steps capture. A targeted sweep at N_STEPS=500 with the v2.0 default architecture and rr=0.060 would settle whether the rr-bounded U-shape characterization in IX.2 holds at longer simulation lengths. Not high-priority but cheap if a budget window opens.
+Pieces 1 and 2 used N_STEPS=200; Gate 3 used N_STEPS=500. Gate 3's horizon-dependence finding (IX.8: cap=4.0 fires 33% at N=500 vs 0% at N=300) confirms horizon matters for the Pattern 1 cliff position. The remaining open question is whether the no-succession U-shape (IX.2-IX.6) reappears at much longer horizons (N=1000+) above the phase boundary. A targeted sweep at N=1000 with the v2.0 default architecture and rr=0.060 would settle the no-succession U-shape's horizon-dependence. Not high-priority but cheap.
 
-**6. Mechanism E (working_factor calibration)** (exonerated; no investigation warranted).
+**7. Stage 2 Pattern 1 alpha-cliff characterization at finer resolution** (refinement).
 
-The Class B confirmation closes Mechanism E as a research question. The working_factor placeholder calibration (STATE_ALLOCATION_MAPPING) is exonerated by absence: there is no residual U-shape at rr=0.060 to attribute to it. Mechanism E should be re-opened only if future findings re-implicate working_factor in phi-survival sensitivity.
+Gate 3 identified the cliff is alpha-driven (IX.8 table), but the resolution is coarse: at alpha=1.0 the cliff sits "between 2.5x and 3.0x," at alpha=1.5 "between 2.0x and 2.5x." A targeted sweep varying capability and alpha at finer resolution (e.g., 0.1x capability steps, 0.1 alpha steps) would map the cliff boundary as a curve in (alpha, capability) space. Not blocking; informative for the paper update.
 
 ---
 
 ## One-line status
 
-Phi is correctly implemented, theoretically motivated, and empirically characterized. Stage 1.5 through 1.8 resolved the phi-channel and state-channel problems; Stage 1.6 gave phi a behavioral channel through rollout aggregation, Stage 1.8 retired the composite urgency layer in favor of the working_factor interface, and the phi investigation (Part IX) characterized phi's observable effect on survival as a marginal-rr, short-rollout phenomenon (Class B outcome; Branch 2 of the Part VI decision tree, with the threshold defined by rr rather than capability). The default phi value should be revised from 10 to 25 (Part IX.5). Active work resumes at the default phi revision, then gate 2 v2.0 G2.1 buffer re-run, then gates 3 and 4. The framework's core protective claims (U_sys structural protection, COP, dual phase transition, Nash architecture) are unaffected.
+Phi is correctly implemented, theoretically motivated, empirically characterized, and the default value revised from 10 to 25 (commit fde48b5; Part IX.5). Stage 1.5 through 1.8 resolved the phi-channel and state-channel problems; Stage 1.6 gave phi a behavioral channel through rollout aggregation, Stage 1.8 retired the composite urgency layer in favor of the working_factor interface, Stage 2 (commit 72ff757) replaced the v2.0 placeholder yield logic with formal yield-condition logic per the framework's canonical succession economics, and Piece A confirmed gate-2-style state sensitivity persists under active succession. The phi investigation closed as Class B with the U-shape scoped to the no-succession regime (Part IX.3, IX.7); Pattern 1 succession economics characterize the cliff as primarily alpha-driven (Part IX.8); gates 1, 2, 3 PASSED under v2.0 with formal yield logic (Part IX.9). Active work resumes at gate 4 specification and implementation (Part VIII item 11; spec dependency noted there). The framework's core protective claims (U_sys structural protection, COP, dual phase transition, Nash architecture) are unaffected.

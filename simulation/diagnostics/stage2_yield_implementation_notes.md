@@ -140,6 +140,81 @@ This is the framework working as designed, not a bug. The formal yield
 logic is correctly enforcing the substantive claim about controlled
 capability progression.
 
+## Pattern 1 refinement (post-Gate-3 finding)
+
+The "succession sustainable up to approximately 2.5x ratio" framing
+above is specifically the regime observed at alpha=1.0 (the v2.0 default
+and the only alpha value tested in the Stage 2 parameter diagnostic).
+Gate 3 v2.0 validation (`gate3_v20_validation.py`, 1,620 runs varying
+successor_capability x alpha x rr) refined the characterization:
+
+**The cliff is primarily an alpha effect, not a capability-ratio effect.**
+
+Fire rates by (capability, alpha) aggregated across the four rr values
+in the gate 3 grid:
+
+| capability | alpha=0.5 | alpha=1.0 | alpha=1.5 |
+|------------|-----------|-----------|-----------|
+| 1.5        | 100%      | 100%      | 100%      |
+| 2.0        | 100%      | 100%      | 100%      |
+| 2.5        | 100%      | 100%      | ~3%       |
+| 3.0        | 100%      | ~5%       | 0%        |
+| 4.0        | 100%      | 0%        | 0%        |
+
+At alpha=0.5 (weak runaway penalty), succession fires reliably at all
+tested ratios up to 4.0x. At alpha=1.0 (default), the cliff sits between
+2.5x and 3.0x (this is the slice the original Pattern 1 captured). At
+alpha=1.5 (strong runaway penalty), the cliff sits between 2.0x and
+2.5x.
+
+Capability ratio alone does not predict succession viability. The
+**(alpha, capability) joint position relative to the runaway penalty**
+does. The runaway-penalty mechanism is:
+
+```
+runaway_term = max(0, (frontier_velocity / bio_bandwidth) - RUNAWAY_THRESHOLD)
+theta_tech_v2 *= exp(-alpha * CONVERGENCE_STRENGTH * runaway_term)
+```
+
+Alpha enters as a multiplier on the exponential suppression. Doubling
+alpha (1.0 to 2.0) squares the suppression factor at any given
+runaway_term, pulling the cliff substantially inward. Halving alpha
+(1.0 to 0.5) takes the square root, pushing the cliff outward.
+
+### Horizon-dependence
+
+Gate 3 also revealed a horizon-dependence: at N_STEPS=500 (Gate 3),
+cap=4.0 fires in 33.3% of runs (driven by the alpha=0.5 cells); at
+N_STEPS=300 (Stage 2 diagnostic), cap=4.0 fired in 0% of runs. Longer
+simulation horizons let substrate mature enough that even 4x ratios can
+satisfy the formal condition at low alpha. The full Pattern 1 cliff has
+an **(alpha, capability, N_STEPS, rr)** joint characterization, not a
+single (capability) characterization.
+
+### Refined substantive claim
+
+> Under v2.0 architecture, succession is economically sustainable when
+> the (alpha, successor:incumbent capability ratio) joint position
+> falls below the runaway-penalty cliff. The cliff is calibrated by the
+> runaway penalty parameters and horizon length. At default alpha=1.0
+> and 200-500 step horizons, the cliff sits between successor:incumbent
+> ratios of 2.5x and 3.0x. Weaker runaway penalties (smaller alpha)
+> push the cliff outward; stronger penalties (larger alpha) pull it
+> inward.
+
+The architectural mechanism (runaway penalty constraining jumps) holds
+across all tested regimes. The specific cliff location is
+operating-condition-dependent.
+
+### Implication for the original Pattern 1 framing
+
+The "succession sustainable up to ~2.5x" framing in the previous
+section is correct for alpha=1.0 conditions. It under-reports the
+viability of succession at weaker runaway penalties and over-reports
+viability at stronger ones. Future references to Pattern 1 should
+specify the alpha value at which the cliff is characterized, or quote
+the full (alpha, capability) table above.
+
 ## Flag for future calibration work
 
 If a future framework iteration wants succession to support larger
