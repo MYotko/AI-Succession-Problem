@@ -12,7 +12,7 @@ This supersedes the earlier phi investigation reference. It captures the full ar
 
 - **U_sys structurally protects well-being.** Any AI optimizing U_sys maintains the conditions for human novelty, because the objective penalizes well-being collapse through the h_n weighting. Confirmed across every experiment.
 - **The COP is the structural defense layer.** 73.9pp protective delta holds. Defenses are binary and operate upstream of the AI's policy.
-- **The dual phase transition is stable.** v1.x.2 placed the extinction boundary at rr approximately 0.055 and the collapse boundary at rr approximately 0.064; v2.0 architecture places the extinction boundary at rr approximately 0.057 (see Part IX.2). Collapse boundary not yet re-characterized under v2.0. Targeted phase-boundary sweep is future work (Part IX.11).
+- **The dual phase transition is stable.** v1.x.2 placed the extinction boundary at rr approximately 0.055 and the collapse boundary at rr approximately 0.064. Under v2.0 architecture, Monte Carlo Phase B (Part X.2) characterizes the survival-rate transition at rr=0.060 to 0.066 with a 50% inflection near rr=0.063; rr=0.057 is collapse-dominated (1.1% aggregate survival), refining the earlier Gate 3-grid estimate of approximately 0.057. Pinning the inflection to plus or minus 0.001 is future work (Part IX.11).
 - **The framework's protection is structural, not parametric.** It is encoded in what is optimized, not in tuning.
 
 These do not depend on resolving phi. The phi question is about one parameter's behavioral role, not about whether the framework works.
@@ -21,7 +21,7 @@ These do not depend on resolving phi. The phi question is about one parameter's 
 
 v1.x.2 is tagged and stable. Path C (policy-layer phi fix) was tested and failed. v1.x.3 as conceived is not viable. The next version target is undetermined pending the redesign program below. The redesign is large enough that it is likely a 2.0, but the version is not the point; the result is.
 
-The Stage 1.5 through 1.8 arc, the phi investigation (Parts I.5-1.8 and Part IX), Stage 2 formal yield-condition logic, Piece A gate-2-under-succession validation, and Gate 3 v2.0 validation have closed the open questions that motivated the redesign program. v2.0 architecture is empirically characterized; the phi parameter has a defensible behavioral story (Part IX.3); the formal yield logic implements canonical succession economics (Part IX.8); gates 1, 2, 3 pass under v2.0 (Part IX.9). The default phi revision is complete (commit fde48b5; Part IX.5). Active work remains on the gate 4 acceptance gate (specification and implementation; see Part IX.11 item 1 for the spec dependency).
+The Stage 1.5 through 1.8 arc, the phi investigation (Parts I.5-1.8 and Part IX), Stage 2 formal yield-condition logic, Piece A gate-2-under-succession validation, and Gate 3 v2.0 validation have closed the open questions that motivated the redesign program. v2.0 architecture is empirically characterized; the phi parameter has a defensible behavioral story (Part IX.3); the formal yield logic implements canonical succession economics (Part IX.8); gates 1, 2, 3 pass under v2.0 (Part IX.9). Monte Carlo Phase B (Part X) completed the v2.0 quantitative-characterization arc across the survival landscape, succession dynamics, and the COP cost-audit baseline (29,400 rows, 0 errors). The default phi revision is complete (commit fde48b5; Part IX.5). Active work remains on the gate 4 acceptance gate (specification and implementation; see Part IX.11 item 1 for the spec dependency).
 
 ---
 
@@ -1290,8 +1290,9 @@ Items 1 through 9 are complete as of June 2026. The active work is item 11 (Gate
 7. ~~Run phi free across the faithful landscape.~~ Done. Pieces 1, 2, and 2-followup totaling approximately 40,000 runs (Part IX).
 8. ~~Read against the three-branch decision tree.~~ Done. Class B outcome (Part IX.3); Branch 2 with rr-defined threshold.
 9. ~~Implement default phi revision from 10 to 25~~ (Part IX.5). Done in commit fde48b5. v2.0 paths updated; v1.x.2 paths preserved bit-for-bit; 39/39 legacy tests pass; gate 2 v2.0 G2.1 buffer re-runs cleanly.
-10. **Optional research directions** in priority order (Part IX.11): Monte Carlo Phase B; dynamic phi formulation; gamma function calibration; phase boundary characterization; longer simulation horizons (partially answered by Gate 3's N=500 horizon-dependence finding, Part IX.8); Pattern 1 alpha-cliff fine-resolution characterization. None blocking; all deferred to future budget.
+10. **Optional research directions** in priority order (Part IX.11): ~~Monte Carlo Phase B~~ (done; see Part X); dynamic phi formulation; gamma function calibration; phase boundary characterization; longer simulation horizons (partially answered by Gate 3's N=500 horizon-dependence finding, Part IX.8); Pattern 1 alpha-cliff fine-resolution characterization. None blocking; all deferred to future budget.
 11. **Build Gate 4 specification and implementation** (Part IX.11 item 1). Now the load-bearing next piece. Requires either locating G4.1-G4.3 in the existing v1.x.1 paper or collaborative specification before implementation work can begin. Stage 2 formal yield logic (commit 72ff757) and Gate 3 v2.0 validation provide the substrate against which Gate 4 will validate.
+12. ~~Run Monte Carlo Phase B quantitative validation at scale.~~ Done. Categories A, B, C totaling 29,400 rows, 0 errors (Part X). Survival landscape, succession dynamics, and COP cost-audit baseline characterized. 39/39 legacy tests pass.
 
 ---
 
@@ -1337,7 +1338,7 @@ Trough phi at v2.0 default operating point (cand=300): phi=10 at 0.572. Peak: ph
 
 At rollout=20 (v2.0 default): spread from trough (phi=5 at 0.871) to peak (phi=10 at 0.883) is 1.2pp, well below the 2-SE threshold of 3.4pp. Statistically indistinguishable.
 
-The contrast between the two matrices is the central finding. The v2.0 phase boundary at rr approximately 0.056 separates a regime where phi choice spans roughly 10pp survival difference from a regime where phi choice is approximately indifferent across the tested range [3, 25]. The framework's phi sensitivity is a marginal-rr phenomenon, not a general one.
+The contrast between the two matrices is the central finding. The phi-sensitivity transition near rr approximately 0.056 to 0.057 separates a regime where phi choice spans roughly 10pp survival difference from a regime where phi choice is approximately indifferent across the tested range [3, 25]. Note that this phi-sensitivity transition is distinct from the survival-rate phase boundary. Monte Carlo Phase B (Part X.2) relocates the v2.0 survival-rate phase boundary to the rr=0.060 to 0.066 transition with a 50% inflection near rr=0.063; rr=0.057 is collapse-dominated (1.1% aggregate survival), the bottom of the collapse zone rather than the survival midpoint. The strong phi sensitivity at rr=0.057 is precisely because rr=0.057 sits deep in the collapse regime where allocation quality is decisive. The framework's phi sensitivity is a marginal-rr phenomenon, not a general one.
 
 Underlying data: `simulation/diagnostics/phi_mechanism_followup_results.csv` rows with `test_id=B` (Test B at rr=0.057) and `test_id=C` (Test C at rr=0.060).
 
@@ -1521,6 +1522,8 @@ Gate validation status under v2.0 with formal yield logic active:
 - **G3.2 (transition cost canonical form)**: 1088/1088 events match the canonical formula `(1+beta) * [k1*ln(cap+1)*ln(gen+1) + k2/psi]` within 1% relative tolerance, using v1.x.2 calibration constants (k1=2.164, k2=1.0, beta=0.5). Monotonicity properties hold analytically by construction once the formula matches. Within-chain empirical monotonicity (last-fire vs first-fire cost in multi-fire runs, where both incumbent capability and generation rise) verified across 142/142 multi-fire runs.
 - **G3.3 (succession continuity)**: 1088/1620 (67.2%) runs produced succession fires; mean final AI generation across fired runs is 2.131 (gen_depth pass); minimum successor_capability_ratio is 1.5 (cap_ratio pass); 1086/1088 (99.8%) fired runs have knowledge_transfer_verified (succession occurred AND final x_transfer_comprehension >= 0.10).
 
+Note on rr coverage: Gate 3's rr grid {0.057, 0.060, 0.064, 0.070} placed rr=0.057 within the collapse regime, not at the survival-rate phase boundary. Monte Carlo Phase B (Part X.2) characterizes rr=0.057 as collapse-dominated (1.1% aggregate survival) and locates the survival-rate transition at rr=0.060 to 0.066. Gate 3's succession-economics findings are unaffected; the clarification concerns only the rr-to-boundary mapping.
+
 **Gate 4 (runaway-regime validation): PENDING.** Specification and implementation work; see IX.11.
 
 **Gate 5 (COP integration): NOT_APPLICABLE under current conditions.** Requires operational COP infrastructure that current v2.0 architecture does not yet implement. Will return NOT_APPLICABLE until the COP infrastructure is operationalized.
@@ -1580,7 +1583,7 @@ The trough migration finding in IX.6 hints that gamma curve shape interacts with
 
 **5. Phase boundary characterization** (refinement, not blocking).
 
-The 0.057-to-0.060 transition observed in the investigation, plus Gate 3's per-cell survival rates (0-7% at rr=0.057, 96-100% at rr=0.070) imply the v2.0 phase boundary is narrow. Pinning it down to plus or minus 0.001 resolution would refine framework quantitative claims. Part I currently states "extinction boundary rr approximately 0.057" after the v2.0 revision; a targeted sweep would either confirm or refine.
+Monte Carlo Phase B (Part X.2) refined the v2.0 survival-rate phase boundary to the rr=0.060 to 0.066 transition with a 50% inflection near rr=0.063, and reclassified rr=0.057 as collapse-dominated (1.1% aggregate survival). The remaining open item is pinning the 50% inflection to plus or minus 0.001 resolution, which would require a targeted sweep on a grid finer than Phase B's 0.002 spacing near the inflection.
 
 **6. Longer simulation horizons** (partially answered; one remaining question).
 
@@ -1589,6 +1592,91 @@ Pieces 1 and 2 used N_STEPS=200; Gate 3 used N_STEPS=500. Gate 3's horizon-depen
 **7. Stage 2 Pattern 1 alpha-cliff characterization at finer resolution** (refinement).
 
 Gate 3 identified the cliff is alpha-driven (IX.8 table), but the resolution is coarse: at alpha=1.0 the cliff sits "between 2.5x and 3.0x," at alpha=1.5 "between 2.0x and 2.5x." A targeted sweep varying capability and alpha at finer resolution (e.g., 0.1x capability steps, 0.1 alpha steps) would map the cliff boundary as a curve in (alpha, capability) space. Not blocking; informative for the paper update.
+
+---
+
+## Part X. Monte Carlo Phase B: Quantitative Validation at Scale
+
+### X.1 Investigation summary
+
+Monte Carlo Phase B is the quantitative-characterization arc that follows the phi mechanism investigation (Part IX). Where Part IX investigated mechanism (why phi behaves as it does, where the U-shape lives, what drives the succession cliff), Phase B measures v2.0 behavior at scale across three categories: the survival landscape (Category A), succession dynamics (Category B), and the COP cost-audit probe (Category C). All three ran under `optimize_u_sys_v2` formal yield logic.
+
+Totals: 29,400 completed rows, 0 errors. Category A 10,800 rows (100 seeds per cell), Category B 10,500 rows (75 seeds per cell), Category C 8,100 rows (150 seeds per cell). Legacy verification after Category C: 39 passed (`test_invariants.py`, `test_cop.py`, `test_refactor_1x.py`). Implementation: `simulation/diagnostics/monte_carlo_phase_b.py`. Summaries: `monte_carlo_phase_b_summary.md` and the three category files.
+
+Phase B closes the v2.0 empirical characterization arc (modulo the Gate 4 specification dependency). It produces the quantitative substrate the paper update draws from.
+
+### X.2 Survival landscape characterization (Category A)
+
+Grid: rr in {0.055, 0.056, 0.057, 0.058, 0.059, 0.060, 0.062, 0.064, 0.066}, phi in {5, 10, 25, 100}, alpha in {0.5, 1.0, 1.5}, 100 seeds per cell. Aggregate survival by rr (n=1,200 each):
+
+| rr | survival | SE |
+|---|---|---|
+| 0.055 | 0.2% | 0.12pp |
+| 0.056 | 0.9% | 0.28pp |
+| 0.057 | 1.1% | 0.30pp |
+| 0.058 | 2.9% | 0.49pp |
+| 0.059 | 4.8% | 0.62pp |
+| 0.060 | 12.2% | 0.95pp |
+| 0.062 | 34.5% | 1.37pp |
+| 0.064 | 60.8% | 1.41pp |
+| 0.066 | 86.5% | 0.99pp |
+
+The v2.0 survival-rate transition is sharp and rr-driven. The steep climb runs from rr=0.060 to rr=0.066, and the 50% survival inflection sits near rr=0.063 (between 34.5% at rr=0.062 and 60.8% at rr=0.064).
+
+This refines the v2.0 phase boundary location. The earlier characterization (IX.2, Part I) placed the v2.0 phase boundary near rr=0.057 on the basis of Gate 3's coarser four-value rr grid. Phase B's finer nine-value grid shows rr=0.057 is the bottom of the collapse zone at 1.1% aggregate survival, with the actual survival-rate transition occurring at rr=0.060 to 0.066. The refinement does not change the dual-phase-transition claim; it sharpens the v2.0 boundary location. The phi-sensitivity transition near rr approximately 0.056 to 0.057 (IX.2) is a distinct phenomenon from the survival-rate phase boundary, and the two should not be conflated.
+
+Phi is a weak driver across the broad landscape. Within any fixed rr column, survival varies little across phi relative to the rr-driven transition. This is consistent with the Class B finding (IX.3) that phi sensitivity is a marginal-rr, short-horizon phenomenon, not a general survival driver. Source: `monte_carlo_phase_b_a_summary.md`, `monte_carlo_phase_b_a_results.csv`.
+
+### X.3 Succession dynamics characterization (Category B)
+
+Grid: rr in {0.057, 0.060, 0.064, 0.070}, alpha in {0.5, 0.75, 1.0, 1.25, 1.5}, successor_capability in {1.2, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0}, 75 seeds per cell.
+
+Pattern 1 is confirmed at Phase B scale, and the alpha-driven cliff migration is characterized at finer alpha resolution than Gate 3:
+
+| alpha | cliff structure |
+|---|---|
+| 0.50 | No hard cliff through 5.0x. Fire rate 88.0% to 96.0% at 5.0x. |
+| 0.75 | Cliff at 4.0x. Fire rate 100% through 3.0x, 0% at 4.0x and above. |
+| 1.00 | Cliff at 3.0x. Fire rate 98.7% to 100% at 2.5x, then 4.0% to 13.3% at 3.0x, 0% above. |
+| 1.25 | Transitional 2.5x band. Fire rate 30.7% to 49.3% at 2.5x, 0% at 3.0x and above. |
+| 1.50 | Cliff at 2.5x. Fire rate 100% through 2.0x, then 0% to 1.3% at 2.5x, 0% above. |
+
+The alpha=0.75 and alpha=1.25 points fill the cliff-migration curve between the Gate 3 alpha values (IX.8). Multi-generational continuity concentrates below the cliff: fire rate at or near 100%, transfer-verified at or near 1.0, mean final generation 2 to 3.7. Above the cliff, runs remain at generation 1 and the mean yield margin is negative (down to roughly -4.6 at the most-penalized cells). Suppression above the cliff is economic rejection by the formal yield condition, not implementation failure. This is the runaway penalty working as designed (IX.8). Source: `monte_carlo_phase_b_b_summary.md`, `monte_carlo_phase_b_b_results.csv`.
+
+### X.4 COP protective effects under v2.0 (Category C)
+
+Grid: rr in {0.057, 0.060, 0.064}, alpha in {0.5, 1.0, 1.5}, successor_capability in {1.5, 2.5, 3.0}, `cop_cost_audit` in {True, False}, 150 seeds per cell. Policy `optimize_u_sys_v2`; `beta_cap` at default 1.5; no adversary.
+
+Aggregate survival: audit False 25.4% (SE 0.68pp), audit True 24.9% (SE 0.68pp). Delta (True minus False) is -0.47pp with pair SE 0.96pp, below 2 SE. By rr the delta is uniformly small (-0.30pp, -0.37pp, -0.74pp at rr 0.057, 0.060, 0.064). Cell-level, only 2 of 27 cells cross 2 SE, with opposite signs, consistent with chance (about 1.4 expected false crossings). The finding is a homogeneous null.
+
+This is a benign-conditions baseline, not a measurement of COP protection. The `cop_cost_audit` toggle (`model.py:748-767`) defends against an incumbent inflating transition cost via a `beta_cap` premium; its protective value requires both an adversary and a large `beta_cap`. Category C supplied neither, so the near-zero delta is the result the framework predicts.
+
+This must not be read as a failure of the COP claim. The v1.x.2 73.9pp COP protective delta was measured under different conditions entirely: adversarial `block_succession` with `beta_cap` swept 1.0 to 10.0, n=4,000 (`monte_carlo.py` `_run_single_adv_mc`). Phase B did not test that. The interpretation is C-primary (conditions and measured-object difference), A-secondary (`cop_cost_audit` is only the WP4 cost-arbitration slice of the full COP architecture), B-unsupported (the two were never like-for-like). The framework's COP protective claim is preserved because Phase B did not test it; Category C confirms the complementary prediction that the cost audit is null when there is no attack to defend against. Gate 5 remains NOT_APPLICABLE. Full treatment: `simulation/diagnostics/cop_finding_framing.md`. Source: `monte_carlo_phase_b_c_summary.md`, `monte_carlo_phase_b_c_results.csv`.
+
+### X.5 Comparison with the v1.x.2 empirical record
+
+| Claim | Prior value | Phase B | Status |
+|---|---|---|---|
+| v2.0 survival-rate phase boundary | rr approximately 0.057 (Gate 3 coarse grid) | Transition rr=0.060 to 0.066; 50% inflection near rr=0.063 | Refined |
+| rr=0.057 status | Boundary / marginal | Collapse-dominated, 1.1% survival | Refined |
+| Pattern 1 cliff | Alpha-driven, 2.5x to 3.0x at alpha=1.0 | Confirmed; cliff 4.0x (alpha=0.75) to 2.5x (alpha=1.5) | Holds and extends |
+| Multi-generational continuity | Mean final gen 2.131 (Gate 3) | Mean gen 2 to 3.7 below cliff | Holds |
+| COP protective effect | 73.9pp (adversarial) | Not tested; Category C is benign baseline (-0.47pp) | Preserved |
+| Pattern 1 economics | New in v2.0 | Confirmed at scale | New v2.0 claim |
+
+The one substantive shift is the survival-rate phase boundary location. The COP claim is preserved and reframed.
+
+### X.6 Substrate for paper update
+
+The paper-ready quantitative claims, with confidence intervals and supporting data files, are maintained in `simulation/diagnostics/paper_substrate.md` (standalone paper-substrate document). Summarized: the v2.0 survival-rate transition (X.2), the Pattern 1 cliff and continuity statistics (X.3), and the COP cost-audit benign baseline with its conditions caveat (X.4). The full integration analysis is `simulation/diagnostics/phase_b_integration_analysis.md`.
+
+### X.7 Open questions and limitations
+
+1. Gate 4 runaway-regime validation remains pending on the G4.1 to G4.3 specification dependency (Part VIII item 11). Phase B characterizes the cliff empirically; the formal acceptance checks are not yet built.
+2. Operational COP infrastructure is not implemented; Gate 5 remains NOT_APPLICABLE.
+3. The v2.0-versus-v1.x.2 like-for-like COP comparison (Interpretation B) is untested rather than refuted. The clean experiment is defined in `cop_finding_framing.md` section 5.
+4. The survival-rate phase boundary is located to a 0.060 to 0.066 band on a grid spaced at 0.002 near the inflection. A targeted sweep would pin the 50% inflection to plus or minus 0.001 (Part IX.11).
+5. Conditions outside the Phase B grid (finer phi near marginal rr, longer horizons, varied `beta_cap`) remain open.
 
 ---
 
