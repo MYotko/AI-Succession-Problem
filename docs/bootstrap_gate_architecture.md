@@ -30,11 +30,15 @@ outcomes (program reference Part IX.9):
 - **Gate 3 PASSED** (1088/1088 G3.1 yield-fire events, 1088/1088 G3.2 canonical
   cost-formula match, 99.8% G3.3 knowledge-transfer verification; mean final
   generation 2.13).
-- **Gate 4 PENDING.** Implementation is blocked on resolving the G4.1 to G4.3
-  specification dependency (locating it in the v1.x.1 paper or specifying it
-  collaboratively). Monte Carlo Phase B characterized the runaway-penalty cliff
-  empirically (program reference Part X.3), which provides the substrate Gate 4
-  will validate against.
+- **Gate 4 PASSED.** Implemented against the v1.x.2 Section 7 specifications
+  (G4.1-G4.3) and validated by a dedicated runaway-regime sweep (1,050 runs).
+  G4.1 (penalty binding): 426/426 active-runaway observations match the v2.0
+  theta_tech formula within 1% relative tolerance. G4.2 (succession
+  self-blocking): below-cap-star fire rate 1.00, above-cap-star at most 0.12,
+  with cap-star alpha-dependent (3.0 at alpha=1.0, 2.5 at alpha=1.5), closing
+  the cap-star gap and formalizing Pattern 1. G4.3 (floor preservation): minimum
+  theta_tech = 0.01 across 3,769 extreme-runaway observations, 0 below floor. See
+  program reference Part IX.9.
 - **Gate 5 NOT_APPLICABLE.** Requires operational COP infrastructure (peer
   validator set, civic panel, distributed ledger, continuous monitoring) that
   the v2.0 ABM does not implement. See
@@ -815,14 +819,16 @@ The PDF should mirror the tool's structure but in human-readable form:
 - What failing means
 - Worked example
 
-### Section 5: Gate 4, Runaway-regime validation (pending)
-- Status: PENDING. Implementation is blocked on the G4.1 to G4.3 specification
-  dependency (locate in the v1.x.1 paper or specify collaboratively).
-- What it will check when applicable
-- The empirical substrate it will validate against: the alpha-driven
-  runaway-penalty cliff characterized in Monte Carlo Phase B (program reference
-  Part X.3 and Part IX.8)
-- Equations G4.1 through G4.3 (to be specified)
+### Section 5: Gate 4, Runaway-regime validation (passed)
+- Status: PASSED. Implemented against v1.x.2 Section 7 (G4.1-G4.3) and validated
+  by a dedicated runaway-regime sweep (1,050 runs); verdict PASS on all three
+  checks. See program reference Part IX.9.
+- G4.1 verifies the runaway exponent is applied faithfully (426/426 active-runaway
+  observations within 1% tolerance); G4.2 verifies succession self-blocks above
+  the alpha-dependent cap-star (3.0 at alpha=1.0, 2.5 at alpha=1.5); G4.3 verifies
+  theta_tech respects the 0.01 floor under extreme runaway.
+- The empirical substrate: the alpha-driven runaway-penalty cliff characterized
+  in Monte Carlo Phase B (program reference Part X.3 and Part IX.8).
 
 ### Section 6: Gate 5, COP integration (not applicable)
 - Status: NOT_APPLICABLE. Requires operational COP infrastructure (peer

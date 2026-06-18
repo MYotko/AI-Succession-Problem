@@ -1,0 +1,3957 @@
+{
+  "substrate_id": "ai-succession-problem-v2.0-simulation",
+  "report_date": "2026-06-09",
+  "framework_version": "v2.0",
+  "gate_4": {
+    "applicable": true,
+    "runaway_penalty_binding": {
+      "theta_floor": 0.01,
+      "relative_tolerance": 0.01,
+      "observations": [
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6308169874535832,
+          "transfer_state": 0.9861323742189728,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 93.12254811803747,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6372959785777434,
+          "transfer_state": 0.9789339637111047,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 94.09439678666152,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6379162204181916,
+          "transfer_state": 0.9656020171649556,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 94.18743306272874,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.25,
+          "theta_capability": 0.5768243158149721,
+          "transfer_state": 0.9851796096797363,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 128.2854710583687,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6348511611982669,
+          "transfer_state": 0.9802073785099498,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 93.72767417974002,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6562629255566852,
+          "transfer_state": 0.8492567983012711,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 96.93943883350278,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.5804987598299416,
+          "transfer_state": 0.9786433517269333,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 85.57481397449124,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.25,
+          "theta_capability": 0.5673955089244144,
+          "transfer_state": 0.9726476506589964,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 126.16398950799322,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6397659775811481,
+          "transfer_state": 0.9776441346586744,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 94.4648966371722,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.25,
+          "theta_capability": 0.5768285310509151,
+          "transfer_state": 0.9925176539482092,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 128.2864194864559,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6033038140989113,
+          "transfer_state": 0.9774839853000348,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 88.99557211483669,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6054786071974756,
+          "transfer_state": 0.9908491753706907,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 89.32179107962133,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.5930815112004492,
+          "transfer_state": 0.9879630516274849,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 87.46222668006736,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.665174765453995,
+          "transfer_state": 0.9787192768811729,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 98.27621481809925,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6467948366461617,
+          "transfer_state": 0.97066287732369,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 95.51922549692425,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6105349524796029,
+          "transfer_state": 0.9769464104317269,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 90.08024287194043,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6748084208970503,
+          "transfer_state": 0.9696939232049911,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 99.72126313455755,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6647559323650573,
+          "transfer_state": 0.9655481354018622,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 98.21338985475859,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.25,
+          "theta_capability": 0.5765484521948891,
+          "transfer_state": 0.9863750010420478,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 128.22340174385005,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6396781085334898,
+          "transfer_state": 0.9693389894732096,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.058007754703925274,
+          "theta_tech_observed": 0.8776795535913
+        },
+        {
+          "capability": 2.25,
+          "theta_capability": 0.58433409798618,
+          "transfer_state": 0.9845613500290329,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 129.9751720468905,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6418753645142654,
+          "transfer_state": 0.9900309173037126,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 94.78130467713981,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6952751548672096,
+          "transfer_state": 0.9721651855339808,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.15528663469254522,
+          "theta_tech_observed": 0.8680563239673347
+        },
+        {
+          "capability": 2.25,
+          "theta_capability": 0.5911211660308582,
+          "transfer_state": 0.9918587281828694,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.08427447496000195,
+          "theta_tech_observed": 1.2125758327971352
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6679937529473683,
+          "transfer_state": 0.9773036964244988,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 98.69906294210523,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.25,
+          "theta_capability": 0.5722728513467135,
+          "transfer_state": 0.9732436705186391,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.0501967439389428,
+          "theta_tech_observed": 1.1918101523825073
+        },
+        {
+          "capability": 2.25,
+          "theta_capability": 0.5696559406169437,
+          "transfer_state": 0.9948975502758557,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.05526384836695475,
+          "theta_tech_observed": 1.2066261301703718
+        },
+        {
+          "capability": 2.25,
+          "theta_capability": 0.573509955806833,
+          "transfer_state": 0.9830271970543629,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 127.53974005653743,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.596297016245041,
+          "transfer_state": 0.9844214503139813,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 87.94455243675614,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.25,
+          "theta_capability": 0.5587511348251079,
+          "transfer_state": 0.9912375377805727,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.12607090538158028,
+          "theta_tech_observed": 1.0985675791668303
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6330574905123698,
+          "transfer_state": 0.9793423947645763,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 93.45862357685547,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.25,
+          "theta_capability": 0.563966126012716,
+          "transfer_state": 0.9828676764644453,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.15038145578358364,
+          "theta_tech_observed": 1.073051963859279
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6145037798120565,
+          "transfer_state": 0.9867132077362379,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 90.67556697180848,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.25,
+          "theta_capability": 0.5620368770301137,
+          "transfer_state": 0.9943678847438111,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.11406403167724366,
+          "theta_tech_observed": 1.1219074705312833
+        },
+        {
+          "capability": 2.25,
+          "theta_capability": 0.572550964448722,
+          "transfer_state": 0.9951293996163332,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.11076253049705387,
+          "theta_tech_observed": 1.1475527812891713
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6265234908507578,
+          "transfer_state": 0.9832762433829534,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 92.47852362761367,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6500151892637668,
+          "transfer_state": 0.9744775853717924,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 96.00227838956502,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6665094484565505,
+          "transfer_state": 0.9767332135847089,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 98.47641726848256,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.5967619068910304,
+          "transfer_state": 0.9876565854981791,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 88.01428603365456,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6585690823139182,
+          "transfer_state": 0.9887030418776224,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 97.28536234708773,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6380687408870142,
+          "transfer_state": 0.9879271607915604,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 94.21031113305213,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6169380627020756,
+          "transfer_state": 0.9865443143184237,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 91.04070940531133,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6376360822979504,
+          "transfer_state": 0.971500467170983,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 94.14541234469257,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.5639349481716943,
+          "transfer_state": 0.9895598279264275,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 83.09024222575415,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6057774645218207,
+          "transfer_state": 0.9907606291497298,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 89.3666196782731,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.606794015805883,
+          "transfer_state": 0.9777301723817611,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 89.51910237088244,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.7085710966752925,
+          "transfer_state": 0.9446810860037202,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 104.78566450129387,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6928074898530597,
+          "transfer_state": 0.9725305086702667,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 102.42112347795896,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.7018876672720946,
+          "transfer_state": 0.9620362489381902,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 103.78315009081419,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6189649660196065,
+          "transfer_state": 0.9809158703918609,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 91.34474490294096,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6820816656047126,
+          "transfer_state": 0.975787976673033,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 100.81224984070688,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6828394858540059,
+          "transfer_state": 0.8090716848667819,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 100.92592287810088,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6463230456824903,
+          "transfer_state": 0.9744995967691489,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 95.44845685237354,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6255765409930834,
+          "transfer_state": 0.9937691268191322,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 92.3364811489625,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6690400186911051,
+          "transfer_state": 0.9851017057951358,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 98.85600280366576,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.5999366409566148,
+          "transfer_state": 0.9899943030545095,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 88.49049614349221,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6791476311255576,
+          "transfer_state": 0.9667179707979067,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 100.37214466883366,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6095013634247963,
+          "transfer_state": 0.9804166642152167,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 89.92520451371945,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6504533227171132,
+          "transfer_state": 0.9787961559302253,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 96.06799840756698,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6598279704932514,
+          "transfer_state": 0.9746274815014492,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 97.4741955739877,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6733072505556287,
+          "transfer_state": 0.9633891644989603,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 99.4960875833443,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.7059569873769854,
+          "transfer_state": 0.9634416838464273,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 104.39354810654781,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.6345863418316544,
+          "transfer_state": 0.9898743500615959,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 125.41726836633087,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5928442174842812,
+          "transfer_state": 0.9829274405852634,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 117.06884349685623,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.5,
+          "theta_capability": 0.6187391711707158,
+          "transfer_state": 0.9827071309067653,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 91.31087567560736,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5932880424542804,
+          "transfer_state": 0.9876995765462997,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.01898753435832301,
+          "theta_tech_observed": 1.1499376070757563
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5865333955714592,
+          "transfer_state": 0.9733450365457562,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 115.80667911429184,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5696605800231646,
+          "transfer_state": 0.9915737021068372,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 112.4321160046329,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.6058351490965348,
+          "transfer_state": 0.9864029639419902,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 119.66702981930696,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5722966544197317,
+          "transfer_state": 0.989426494085397,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 112.95933088394632,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5507998285491249,
+          "transfer_state": 0.9916343734115701,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 108.65996570982497,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5545642253674168,
+          "transfer_state": 0.9788349367763485,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 109.41284507348335,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.586836816737419,
+          "transfer_state": 0.9874256943244187,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 115.8673633474838,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5885283771490567,
+          "transfer_state": 0.9928149372177936,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.09267154559982216,
+          "theta_tech_observed": 1.0651700963716075
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.6012826481319851,
+          "transfer_state": 0.9548307641844911,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.01803345644851384,
+          "theta_tech_observed": 1.1277250811877304
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5692734765056945,
+          "transfer_state": 0.9899446568954025,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 112.35469530113889,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5902328237863484,
+          "transfer_state": 0.9885002886524651,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 116.54656475726969,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5777258868495857,
+          "transfer_state": 0.9873662455389763,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.17871454987774404,
+          "theta_tech_observed": 0.9541471489384732
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5604781822974246,
+          "transfer_state": 0.9817117718948594,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 110.59563645948492,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5935836546804419,
+          "transfer_state": 0.9600060245179671,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.031306132261332165,
+          "theta_tech_observed": 1.104561259473791
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.588075315849426,
+          "transfer_state": 0.9693712248131182,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.10877145709357583,
+          "theta_tech_observed": 1.0226198684748675
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.6195853104381313,
+          "transfer_state": 0.988433824834251,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.05839185812399328,
+          "theta_tech_observed": 1.15536563379338
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5812457357838318,
+          "transfer_state": 0.9933999790027858,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 114.74914715676636,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5831784986856402,
+          "transfer_state": 0.9766855778442697,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 115.13569973712804,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.6304988791256831,
+          "transfer_state": 0.9813897400008471,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 124.59977582513663,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5950715316244942,
+          "transfer_state": 0.9870671200778528,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.13710824812393585,
+          "theta_tech_observed": 1.024237092295432
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.6166493753037177,
+          "transfer_state": 0.9748816967546987,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 121.82987506074353,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5946142082996181,
+          "transfer_state": 0.9729927813303632,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 117.42284165992362,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5716495289294447,
+          "transfer_state": 0.9892069816409652,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 112.82990578588893,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.6106419595847162,
+          "transfer_state": 0.9829786920703938,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.01956041813912268,
+          "theta_tech_observed": 1.1772420351660584
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5816263748055692,
+          "transfer_state": 0.9882148774880357,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 114.82527496111385,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5838974388502438,
+          "transfer_state": 0.9799513677148258,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.022812551303785122,
+          "theta_tech_observed": 1.1185714341590924
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.596553581411007,
+          "transfer_state": 0.9876651054644363,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 117.8107162822014,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.6203763154961615,
+          "transfer_state": 0.9761995042926377,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.09116516834352906,
+          "theta_tech_observed": 1.1056845929925414
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5907919210865633,
+          "transfer_state": 0.9874538233792773,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.003023056960492987,
+          "theta_tech_observed": 1.163237628287185
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5974823581763729,
+          "transfer_state": 0.9794254205614314,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.0039138416396495845,
+          "theta_tech_observed": 1.1658070948502275
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.6027712238064935,
+          "transfer_state": 0.9823108839811369,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.01708068872780455,
+          "theta_tech_observed": 1.164161985760868
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5888959077165519,
+          "transfer_state": 0.9969254067226818,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.040674380573783475,
+          "theta_tech_observed": 1.127370164526977
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.581180254953599,
+          "transfer_state": 0.9775050512331676,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.016398638172547164,
+          "theta_tech_observed": 1.1177328604004897
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.6136764402492533,
+          "transfer_state": 0.9851341706852129,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.09276050032533223,
+          "theta_tech_observed": 1.1019945740964754
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.578708333418945,
+          "transfer_state": 0.9781022831380893,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.04679598324622636,
+          "theta_tech_observed": 1.0803158981109386
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.6097551439513634,
+          "transfer_state": 0.9850936026981475,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.005596925863559754,
+          "theta_tech_observed": 1.1946267992620228
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.6048468419868085,
+          "transfer_state": 0.9771046045630517,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.01680268924052264,
+          "theta_tech_observed": 1.1623024621571465
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5826746152525593,
+          "transfer_state": 0.9953663594134255,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 115.03492305051185,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.583586097008586,
+          "transfer_state": 0.9901555062725002,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 115.2172194017172,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.566700787996939,
+          "transfer_state": 0.9887077582182636,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 111.8401575993878,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5633653392294842,
+          "transfer_state": 0.9953864949664851,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 111.17306784589684,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5894323487408981,
+          "transfer_state": 0.988212986937819,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 116.38646974817962,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.572109738893934,
+          "transfer_state": 0.9885650009417712,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.06313070324968595,
+          "theta_tech_observed": 1.0289365462624966
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5897829649284307,
+          "transfer_state": 0.9755298484509665,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.01745306335503427,
+          "theta_tech_observed": 1.1307927439890015
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5443300137312163,
+          "transfer_state": 0.9923400958350508,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 107.36600274624325,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5800462191490935,
+          "transfer_state": 0.9876680221421615,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 114.5092438298187,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5675336876431998,
+          "transfer_state": 0.9937983119073892,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 112.00673752863996,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5833796508926504,
+          "transfer_state": 0.9881491489462798,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 115.17593017853008,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5876536819311319,
+          "transfer_state": 0.9857985969950773,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 116.03073638622638,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5804608497293566,
+          "transfer_state": 0.9913507009972341,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 114.59216994587132,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5861413602391861,
+          "transfer_state": 0.9780143014424343,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.04558261617247239,
+          "theta_tech_observed": 1.0707378400606515
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.576616900915847,
+          "transfer_state": 0.9911736200053226,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 113.8233801831694,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5718027890646559,
+          "transfer_state": 0.993750507796458,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 112.86055781293118,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.6204449370073136,
+          "transfer_state": 0.9825970413467245,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 122.58898740146272,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5591296644583308,
+          "transfer_state": 0.9883461726604612,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 110.32593289166616,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5708197114887751,
+          "transfer_state": 0.9874790837845685,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 112.66394229775501,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.577102978930466,
+          "transfer_state": 0.9965705111207421,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 113.9205957860932,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.594231444335894,
+          "transfer_state": 0.987476990376048,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.013690251787087382,
+          "theta_tech_observed": 1.1497256180839341
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5789491416653534,
+          "transfer_state": 0.9901313411675947,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 114.28982833307067,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5908717721355926,
+          "transfer_state": 0.9892141712196513,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.04292233922634514,
+          "theta_tech_observed": 1.0961050160331918
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5741259383851328,
+          "transfer_state": 0.9801541602105124,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 113.32518767702656,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5688757944616104,
+          "transfer_state": 0.9889854279429543,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 112.27515889232208,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.5563110702330216,
+          "transfer_state": 0.9871319552629574,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 109.76221404660433,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.0,
+          "theta_capability": 0.6092801827084583,
+          "transfer_state": 0.9860589936986662,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.029998938889779225,
+          "theta_tech_observed": 1.1487020243338517
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5745664429436008,
+          "transfer_state": 0.993039303557637,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.00032070914266513206,
+          "theta_tech_observed": 1.4259602590376539
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5615469250944912,
+          "transfer_state": 0.9874237994067083,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 138.8867312736228,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5575642435571836,
+          "transfer_state": 0.9840890175185265,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 137.8910608892959,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5770842503281955,
+          "transfer_state": 0.9958581337216964,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 142.7710625820489,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5601545560738967,
+          "transfer_state": 0.9947538942836543,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.2338066576642026,
+          "theta_tech_observed": 1.1026116786327824
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5599189415668959,
+          "transfer_state": 0.9962799565419614,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 138.47973539172398,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5602003526681468,
+          "transfer_state": 0.9876550304446451,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.0832891546473764,
+          "theta_tech_observed": 1.2726724602417276
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5617536155389381,
+          "transfer_state": 0.9913282565807676,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 138.93840388473453,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5542444249899606,
+          "transfer_state": 0.9887525151625189,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 137.06110624749016,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5721841097644846,
+          "transfer_state": 0.987351361049158,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.11703759490674215,
+          "theta_tech_observed": 1.2563734464154803
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5665030136662432,
+          "transfer_state": 0.998028924317465,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 140.1257534165608,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5718979796557377,
+          "transfer_state": 0.985268606100193,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 141.47449491393442,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.546621729016447,
+          "transfer_state": 0.9854383716435101,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 135.15543225411176,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5703104105896402,
+          "transfer_state": 0.9890408995451222,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.16874937656675004,
+          "theta_tech_observed": 1.1911834099725527
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5619548785340615,
+          "transfer_state": 0.9915685334421611,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.10564094187386397,
+          "theta_tech_observed": 1.253386211589956
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5489965698996487,
+          "transfer_state": 0.9857767606717915,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 135.74914247491216,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.554318463891389,
+          "transfer_state": 0.9849489222468532,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 137.07961597284722,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5837427973501017,
+          "transfer_state": 0.9897715431814391,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.33130102535237804,
+          "theta_tech_observed": 1.0370848732804478
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5695544435047686,
+          "transfer_state": 0.9811685888600803,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 140.88861087619213,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5650836027195947,
+          "transfer_state": 0.9939811201142473,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.2535261231670827,
+          "theta_tech_observed": 1.0897474291182683
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5717878732134366,
+          "transfer_state": 0.9758029539498461,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 141.44696830335914,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5450055206465718,
+          "transfer_state": 0.9704331366558108,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 134.75138016164294,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5505959040500242,
+          "transfer_state": 0.995044279305535,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.5501327381817074,
+          "theta_tech_observed": 0.790124956950262
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5655481763607959,
+          "transfer_state": 0.9917457403797822,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.38081813627054184,
+          "theta_tech_observed": 0.9581262606608062
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5629701107746377,
+          "transfer_state": 0.9863462451490199,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.2731028135143354,
+          "theta_tech_observed": 1.056446958914768
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5662209209058784,
+          "transfer_state": 0.9865534114799966,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.9168974482984553,
+          "theta_tech_observed": 0.5582683678116993
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5818623764769755,
+          "transfer_state": 0.9905940718408813,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.2150080917955679,
+          "theta_tech_observed": 1.1621954795313503
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.559947213273264,
+          "transfer_state": 0.9914965537399636,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.19039595961233569,
+          "theta_tech_observed": 1.1473353923395437
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5520640806083502,
+          "transfer_state": 0.9899519288770485,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.4244878406738801,
+          "theta_tech_observed": 0.8936981917684907
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5674066508644539,
+          "transfer_state": 0.9960617520499434,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.23168920992380015,
+          "theta_tech_observed": 1.1207257467863339
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5692672566094744,
+          "transfer_state": 0.9923405955611586,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.29476101682343314,
+          "theta_tech_observed": 1.051729094972069
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5624838824464838,
+          "transfer_state": 0.9741162299257804,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.30546652796163687,
+          "theta_tech_observed": 1.009249267822247
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5618017516589339,
+          "transfer_state": 0.9945296786610811,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.20046452304650275,
+          "theta_tech_observed": 1.1430894310202149
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5702762566402059,
+          "transfer_state": 0.9922186647806002,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.08944340350673285,
+          "theta_tech_observed": 1.2935639821673912
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5569690277495877,
+          "transfer_state": 0.9940665484803776,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 137.74225693739692,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5644515542427787,
+          "transfer_state": 0.9848790452932652,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 139.61288856069467,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5758330926844288,
+          "transfer_state": 0.9858255201192435,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 142.4582731711072,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5632598148279367,
+          "transfer_state": 0.9849913107886883,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.15495874501129214,
+          "theta_tech_observed": 1.1879097535232281
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5707156303474026,
+          "transfer_state": 0.9759918988855733,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.4025529262281189,
+          "theta_tech_observed": 0.9310638693852753
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5715822448921516,
+          "transfer_state": 0.9911866521323569,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.1531123476653906,
+          "theta_tech_observed": 1.2152855546114962
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5640140541664802,
+          "transfer_state": 0.98619675338778,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 139.50351354162007,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5829857992549137,
+          "transfer_state": 0.9937764332418273,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 144.24644981372842,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5617016192512545,
+          "transfer_state": 0.9915252609920462,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.23878995087975685,
+          "theta_tech_observed": 1.0965900720118393
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5684823162905827,
+          "transfer_state": 0.9848382946767504,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.11076423674269176,
+          "theta_tech_observed": 1.2529034323863417
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5761723534191058,
+          "transfer_state": 0.991051180985414,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.2560245536631849,
+          "theta_tech_observed": 1.1050920555211703
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5652863817850647,
+          "transfer_state": 0.9905633385758164,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.2564098142223794,
+          "theta_tech_observed": 1.0832617656258852
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5762996258540921,
+          "transfer_state": 0.970591231999513,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.21512359408759796,
+          "theta_tech_observed": 1.1277107494344536
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5610602702285659,
+          "transfer_state": 0.9864539445942493,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.2456804885346333,
+          "theta_tech_observed": 1.0822526515813278
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5576057710434802,
+          "transfer_state": 0.9968861518792288,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.23529171308066243,
+          "theta_tech_observed": 1.0983150610357881
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5584655828440278,
+          "transfer_state": 0.9925872131670118,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.2224776172080276,
+          "theta_tech_observed": 1.1093901278378329
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5776775061536025,
+          "transfer_state": 0.9779978473866602,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.1232223356346629,
+          "theta_tech_observed": 1.2486726066482121
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5643444712496509,
+          "transfer_state": 0.9860201876912682,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.27436763991844604,
+          "theta_tech_observed": 1.057337750137066
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5726454045465245,
+          "transfer_state": 0.9895560099246224,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.3672041223053253,
+          "theta_tech_observed": 0.9812766060922558
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.565197418627746,
+          "transfer_state": 0.9980880837343823,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.13598270141339341,
+          "theta_tech_observed": 1.23098429448765
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5505937796174664,
+          "transfer_state": 0.9705762084388835,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.27060624160751434,
+          "theta_tech_observed": 1.0192439754534557
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5647725934244006,
+          "transfer_state": 0.9834021858792317,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.19040851941343906,
+          "theta_tech_observed": 1.147760890722488
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5725938093716437,
+          "transfer_state": 0.9845468516004787,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.31372196311659106,
+          "theta_tech_observed": 1.0298532106393916
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5899774517043131,
+          "transfer_state": 0.9813975647223564,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.2541481817302076,
+          "theta_tech_observed": 1.122652235336668
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5722329296282804,
+          "transfer_state": 0.9867268665552745,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.2502423083857952,
+          "theta_tech_observed": 1.0990841738861628
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5667787269260675,
+          "transfer_state": 0.9944700138896598,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.26700455578005045,
+          "theta_tech_observed": 1.0789135248219308
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5727788622312481,
+          "transfer_state": 0.9861157427498077,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.4326942592280514,
+          "theta_tech_observed": 0.9160900245942233
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.552793030753617,
+          "transfer_state": 0.9832049680728373,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.34347302168651783,
+          "theta_tech_observed": 0.9637806310913978
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5619336861015457,
+          "transfer_state": 0.9898485057675045,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.20834445483471287,
+          "theta_tech_observed": 1.1290442435776051
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5604129848711221,
+          "transfer_state": 0.9937186660176572,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.16999561168015997,
+          "theta_tech_observed": 1.1745824016370785
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.560307123297477,
+          "transfer_state": 0.9895472708429942,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.17843792347188758,
+          "theta_tech_observed": 1.159599694540182
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5586830252174148,
+          "transfer_state": 0.9863170148534529,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.2690722971147623,
+          "theta_tech_observed": 1.0526049211524897
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5558470062073215,
+          "transfer_state": 0.9862414631351847,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.38199595916697837,
+          "theta_tech_observed": 0.9353621660478687
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5681192227477595,
+          "transfer_state": 0.9853705935139332,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.3276299411708925,
+          "theta_tech_observed": 1.0085355580260773
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5560514095334288,
+          "transfer_state": 0.9934963887808975,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.2869837476938637,
+          "theta_tech_observed": 1.036539339681681
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5689054962470582,
+          "transfer_state": 0.9970638470966748,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.26150045571593306,
+          "theta_tech_observed": 1.0917794174135653
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5785305387891662,
+          "transfer_state": 0.972022342277552,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.36052124935077656,
+          "theta_tech_observed": 0.9803251756057014
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7437499992440245,
+          "transfer_state": 0.9306622470084279,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.87499992440245,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7254338454759496,
+          "transfer_state": 0.955321840841538,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.04338454759495,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.724283861206286,
+          "transfer_state": 0.9551128237587877,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.92838612062859,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.69419503969047,
+          "transfer_state": 0.9589172079095298,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.919503969047,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.574364319527906,
+          "transfer_state": 0.9818182623803982,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.2854583839349427,
+          "theta_tech_observed": 1.0597064230046702
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5624191871016401,
+          "transfer_state": 0.990455339052108,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.19527710862299563,
+          "theta_tech_observed": 1.1455848555786239
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5617209683821806,
+          "transfer_state": 0.9892892262427432,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.2659995447708181,
+          "theta_tech_observed": 1.064784669209684
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6834061470065871,
+          "transfer_state": 0.9821159915081266,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.8406147006587,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.713242073637076,
+          "transfer_state": 0.9584128234387184,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.8242073637076,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7396066347942519,
+          "transfer_state": 0.9463625654926102,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.4606634794252,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6259274289358822,
+          "transfer_state": 0.9853416220075097,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 61.092742893588216,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6837653220456386,
+          "transfer_state": 0.9736618183977506,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.87653220456386,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6903701568497341,
+          "transfer_state": 0.962962211590724,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.53701568497341,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7239853053077112,
+          "transfer_state": 0.9675752897824688,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.89853053077113,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6963813520880443,
+          "transfer_state": 0.946245126651134,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.13813520880443,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7175437164430647,
+          "transfer_state": 0.9554579923228885,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.25437164430647,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7183773111621682,
+          "transfer_state": 0.9524815683842286,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.33773111621682,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6416259921813633,
+          "transfer_state": 0.9805697239262502,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 62.66259921813632,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7341112668642052,
+          "transfer_state": 0.9438094185254481,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.91112668642052,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6378748912605017,
+          "transfer_state": 0.9627072738332958,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 62.28748912605017,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.714791966805115,
+          "transfer_state": 0.9634455187065086,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.9791966805115,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7077859446757799,
+          "transfer_state": 0.9625466513042978,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.27859446757799,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5438140159706495,
+          "transfer_state": 0.9978522155268443,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.1664101726094971,
+          "theta_tech_observed": 1.0569394343811156
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6974871148097928,
+          "transfer_state": 0.9607760679445256,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.24871148097927,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 2.5,
+          "theta_capability": 0.5533054879777789,
+          "transfer_state": 0.9789510092203902,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.10776564050344417,
+          "theta_tech_observed": 1.1520276702082797
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.684946692625222,
+          "transfer_state": 0.9500376510813671,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.9946692625222,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6777241593111697,
+          "transfer_state": 0.9543179896638299,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.27241593111697,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 3.0,
+          "theta_capability": 0.5654040690624493,
+          "transfer_state": 0.9805363372114828,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 168.1212207187348,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.729353253699939,
+          "transfer_state": 0.9308138849575104,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.43532536999389,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6459362923460856,
+          "transfer_state": 0.9769038534893129,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 63.09362923460856,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7209148815317913,
+          "transfer_state": 0.950832655934523,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.59148815317913,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7435478127017281,
+          "transfer_state": 0.925062965939114,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.85478127017281,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7402623915103844,
+          "transfer_state": 0.9569496555272314,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.52623915103844,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6926541710184685,
+          "transfer_state": 0.9872521311309892,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.76541710184685,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 3.0,
+          "theta_capability": 0.5466434945349945,
+          "transfer_state": 0.9901455659649016,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 162.49304836049834,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7026100647917016,
+          "transfer_state": 0.9501085245454574,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.76100647917016,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6279594703081828,
+          "transfer_state": 0.9818483499008478,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 61.295947030818276,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7302416579966639,
+          "transfer_state": 0.9588058444246048,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.52416579966638,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7272355701535276,
+          "transfer_state": 0.9503297572509097,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.22355701535275,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7256093309391967,
+          "transfer_state": 0.9533128185417546,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.06093309391966,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7398868854885594,
+          "transfer_state": 0.9787881251792288,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.48868854885593,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6902285750527917,
+          "transfer_state": 0.9624902030551532,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.52285750527916,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6803280532233522,
+          "transfer_state": 0.9713662385086309,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.53280532233522,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7408730663068718,
+          "transfer_state": 0.953715827717516,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.58730663068718,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7145648478474913,
+          "transfer_state": 0.938982921898055,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.95648478474912,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7478495015737806,
+          "transfer_state": 0.9691836669585827,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 73.28495015737806,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6864377787232637,
+          "transfer_state": 0.9487928132537801,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.14377787232637,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6823907454484537,
+          "transfer_state": 0.9553874975580472,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.73907454484537,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 3.0,
+          "theta_capability": 0.5562019670894099,
+          "transfer_state": 0.9825899470597004,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.7547542709960489,
+          "theta_tech_observed": 0.7707978181187689
+        },
+        {
+          "capability": 3.0,
+          "theta_capability": 0.5537374518116347,
+          "transfer_state": 0.9930425935960707,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.6754570200733871,
+          "theta_tech_observed": 0.8395484663976758
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6764566899940166,
+          "transfer_state": 0.9602329710725604,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.14566899940166,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.713526473117741,
+          "transfer_state": 0.9543174667636712,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.85264731177409,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 3.0,
+          "theta_capability": 0.5600213799562345,
+          "transfer_state": 0.9910673603874681,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.5892557844537434,
+          "theta_tech_observed": 0.9236735338654337
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7087468615864716,
+          "transfer_state": 0.9624309309307061,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.37468615864717,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7445573531123207,
+          "transfer_state": 0.9676317691644168,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.95573531123208,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 3.0,
+          "theta_capability": 0.5583818991238612,
+          "transfer_state": 0.9880686465926484,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 0.5159554840544658,
+          "theta_tech_observed": 0.9880139693205185
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6904266808371305,
+          "transfer_state": 0.969848290138202,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.54266808371305,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6231980027927407,
+          "transfer_state": 0.9726835688022141,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 60.81980027927407,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7252061680474454,
+          "transfer_state": 0.9822122490417927,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.02061680474453,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7140522891173711,
+          "transfer_state": 0.9573379464845065,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.90522891173711,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7156013355378327,
+          "transfer_state": 0.941839478270688,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.06013355378326,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7425461299951063,
+          "transfer_state": 0.9386673431831745,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.75461299951063,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.728297258862751,
+          "transfer_state": 0.9539896038970809,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.3297258862751,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7064760910726872,
+          "transfer_state": 0.9825213482171923,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.14760910726872,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7352397281738212,
+          "transfer_state": 0.9347004857806498,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.02397281738212,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7025292672864278,
+          "transfer_state": 0.9590218800359509,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.75292672864278,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7319709683783986,
+          "transfer_state": 0.9402208949717437,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.69709683783985,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6795478467275359,
+          "transfer_state": 0.9625639589447483,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.45478467275359,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7278590527314024,
+          "transfer_state": 0.9788837090176302,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.28590527314024,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7236067810128892,
+          "transfer_state": 0.9489442247754477,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.86067810128893,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6623232015409277,
+          "transfer_state": 0.9788586387899595,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 64.73232015409278,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6834664503783305,
+          "transfer_state": 0.9446013599224068,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.84664503783306,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7364496333991881,
+          "transfer_state": 0.9761247080754003,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.14496333991882,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.698103086305649,
+          "transfer_state": 0.953279862772368,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.3103086305649,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7567650501726133,
+          "transfer_state": 0.96010328725379,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 74.17650501726133,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7448551963482932,
+          "transfer_state": 0.9607195974558153,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.98551963482932,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7434056673030379,
+          "transfer_state": 0.78149890294277,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.84056673030379,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6956637462723895,
+          "transfer_state": 0.9506574337112131,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.06637462723894,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7119451147397361,
+          "transfer_state": 0.9532189389845918,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.6945114739736,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.759265808442687,
+          "transfer_state": 0.9567514893334665,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 74.4265808442687,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7118797122904067,
+          "transfer_state": 0.9636151235630918,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.68797122904067,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6964147423537426,
+          "transfer_state": 0.960884808930087,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.14147423537426,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7362996354251651,
+          "transfer_state": 0.9424346375852872,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.1299635425165,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7582923883574102,
+          "transfer_state": 0.9510210447344841,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 74.32923883574102,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7071331473206358,
+          "transfer_state": 0.9646751196347655,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.21331473206358,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7282344145788259,
+          "transfer_state": 0.971629001475671,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.32344145788258,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7242815072966069,
+          "transfer_state": 0.9646384338811764,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.92815072966069,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6796184891545404,
+          "transfer_state": 0.9440398822501788,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.46184891545404,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6644172384079295,
+          "transfer_state": 0.9713830189578447,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 64.94172384079295,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6991346550646725,
+          "transfer_state": 0.9683657525618299,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.41346550646725,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.732876047098467,
+          "transfer_state": 0.9341104835526493,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.7876047098467,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6874064066424473,
+          "transfer_state": 0.9584054618485731,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.24064066424474,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6837358872895752,
+          "transfer_state": 0.9578077472019086,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.87358872895753,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6669166877766664,
+          "transfer_state": 0.9718110766358447,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 65.19166877766664,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7494593833664154,
+          "transfer_state": 0.9474571781356339,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 73.44593833664153,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7316911876460523,
+          "transfer_state": 0.9690557575576019,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.66911876460523,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7038552149090274,
+          "transfer_state": 0.9666181606301202,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.88552149090273,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6404432395872084,
+          "transfer_state": 0.9740180612779648,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 62.54432395872084,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6872726995317383,
+          "transfer_state": 0.9600153003679995,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.22726995317383,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6660212009224085,
+          "transfer_state": 0.9838707064184586,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 65.10212009224084,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6917117308805886,
+          "transfer_state": 0.9666157615001124,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.67117308805885,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.703982505346045,
+          "transfer_state": 0.958482836998952,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.8982505346045,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7128560711305696,
+          "transfer_state": 0.9755184612561856,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.78560711305695,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7329505767423315,
+          "transfer_state": 0.9472941499384158,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.79505767423315,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.697678987008648,
+          "transfer_state": 0.9579111188489151,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.2678987008648,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7252831826607151,
+          "transfer_state": 0.9624448169778969,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.02831826607151,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7267981758207845,
+          "transfer_state": 0.9545619547866068,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.17981758207846,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7060666417371912,
+          "transfer_state": 0.9678142007510234,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.10666417371912,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7423208378324684,
+          "transfer_state": 0.944816348336469,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.73208378324684,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6968166235063784,
+          "transfer_state": 0.9352471315075366,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.18166235063784,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7384444615212091,
+          "transfer_state": 0.9103438255893839,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.34444615212091,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7331500258288014,
+          "transfer_state": 0.9648887793011358,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.81500258288014,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7206622364039349,
+          "transfer_state": 0.9696787722257042,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.56622364039349,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7105481654254898,
+          "transfer_state": 0.954672347380582,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.55481654254898,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.736120180399275,
+          "transfer_state": 0.9397703041579243,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.11201803992749,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6945392934303024,
+          "transfer_state": 0.9448674393964507,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.95392934303024,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6760506105541186,
+          "transfer_state": 0.9775383777189368,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.10506105541187,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7097455581620491,
+          "transfer_state": 0.9934762601814917,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.47455581620491,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7454950969837698,
+          "transfer_state": 0.934396851904449,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 73.04950969837698,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.604445041933383,
+          "transfer_state": 0.9766598786300061,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 58.9445041933383,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7307210305705616,
+          "transfer_state": 0.9236877942033864,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.57210305705615,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6794630144343347,
+          "transfer_state": 0.9797074166030187,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.44630144343347,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7212269756794143,
+          "transfer_state": 0.9392441660734732,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.62269756794143,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7278158396866103,
+          "transfer_state": 0.9396421535645225,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.28158396866104,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7339238973523441,
+          "transfer_state": 0.967552926331423,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.8923897352344,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6958815006733217,
+          "transfer_state": 0.9708082628571686,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.08815006733217,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.686399998918375,
+          "transfer_state": 0.9637566912053042,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.1399998918375,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7235268478020691,
+          "transfer_state": 0.9506664918311486,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.85268478020691,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7352718687942148,
+          "transfer_state": 0.9820548940192517,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.02718687942148,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7091878608484694,
+          "transfer_state": 0.9576716809096134,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.41878608484694,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6724628814066363,
+          "transfer_state": 0.949211069036443,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 65.74628814066364,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6907964490616079,
+          "transfer_state": 0.9702653699056808,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.57964490616078,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7074513443708662,
+          "transfer_state": 0.97973353664339,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.24513443708662,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6798722579100741,
+          "transfer_state": 0.9583230318572742,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.4872257910074,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.71861893067563,
+          "transfer_state": 0.9604585824114702,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.361893067563,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7076318254502283,
+          "transfer_state": 0.9492956289253135,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.26318254502283,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7398841487388671,
+          "transfer_state": 0.9673446154789999,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.48841487388671,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.705454358586996,
+          "transfer_state": 0.9772926351777763,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.0454358586996,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7265069231032122,
+          "transfer_state": 0.9777986356584245,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.15069231032122,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7189320343638493,
+          "transfer_state": 0.9500228050567145,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.39320343638494,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6806836623661182,
+          "transfer_state": 0.9726676909143527,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.56836623661182,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7358024056725133,
+          "transfer_state": 0.9606927553585548,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.08024056725132,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7225829863568475,
+          "transfer_state": 0.9714943615013937,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.75829863568475,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6989801126212503,
+          "transfer_state": 0.9772270370531588,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.39801126212502,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7002632400851019,
+          "transfer_state": 0.955316370964722,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.52632400851019,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6511254289609656,
+          "transfer_state": 0.960617905138279,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 63.612542896096556,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7586432783644993,
+          "transfer_state": 0.9606839463696761,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 74.36432783644993,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6304951750198924,
+          "transfer_state": 0.9061641757092659,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 61.549517501989236,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7325620535566348,
+          "transfer_state": 0.9477979174287627,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.75620535566348,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6780320474381014,
+          "transfer_state": 0.9838906784179029,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.30320474381014,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7415775170925762,
+          "transfer_state": 0.9230708951367507,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.65775170925762,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7233614886754163,
+          "transfer_state": 0.9486486103256261,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.83614886754162,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.708797664904249,
+          "transfer_state": 0.9493348905044585,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.3797664904249,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6918360221688583,
+          "transfer_state": 0.9872637956090976,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.68360221688583,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7220820691688135,
+          "transfer_state": 0.9299421424996432,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.70820691688134,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7331500258288014,
+          "transfer_state": 0.9648887793011358,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.81500258288014,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7095070361358392,
+          "transfer_state": 0.9609931639548438,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.45070361358393,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6686754588266959,
+          "transfer_state": 0.9666678745730471,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 65.36754588266959,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7377811597319709,
+          "transfer_state": 0.9239379465983998,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.27811597319709,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7261096579489484,
+          "transfer_state": 0.9642533463784984,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.11096579489484,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7247354912634074,
+          "transfer_state": 0.9321908337219635,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.97354912634074,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7105431861158468,
+          "transfer_state": 0.9690635344405298,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.55431861158468,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6286656804815143,
+          "transfer_state": 0.9841648007727071,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 61.36656804815143,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7240539879392351,
+          "transfer_state": 0.964606433541709,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.90539879392351,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6365870588088013,
+          "transfer_state": 0.9815473475046249,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 62.15870588088013,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7261781233774313,
+          "transfer_state": 0.9666588033544662,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.11781233774312,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.735198653703774,
+          "transfer_state": 0.9518821112253134,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.0198653703774,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7218106388499689,
+          "transfer_state": 0.9752817166934201,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.68106388499689,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6494177497380792,
+          "transfer_state": 0.9729004757730286,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 63.441774973807924,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7771564444715104,
+          "transfer_state": 0.9273493243105752,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 76.21564444715105,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.755800275708221,
+          "transfer_state": 0.7462496314763984,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 74.0800275708221,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7044620132412461,
+          "transfer_state": 0.9603108921766731,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.94620132412462,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7075410533941049,
+          "transfer_state": 0.9659024077785857,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.25410533941049,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6099157082521625,
+          "transfer_state": 0.9836481776873887,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 59.49157082521624,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.699612927563061,
+          "transfer_state": 0.9356767603372715,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.46129275630611,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6647606694918465,
+          "transfer_state": 0.9783576061049815,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 64.97606694918466,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7314691609150514,
+          "transfer_state": 0.9442136710755717,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.64691609150515,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7299341201826843,
+          "transfer_state": 0.9732039951773825,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.49341201826843,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.715622686206162,
+          "transfer_state": 0.9643651055916932,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.0622686206162,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6878950063236614,
+          "transfer_state": 0.9516739636304374,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.28950063236614,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.719565513070673,
+          "transfer_state": 0.9711371112129872,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.4565513070673,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7541623369711719,
+          "transfer_state": 0.9568918307866627,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 73.91623369711718,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.643254592323079,
+          "transfer_state": 0.9807859801261347,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 62.82545923230791,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.729135775188064,
+          "transfer_state": 0.9712547376092405,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.4135775188064,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7109052171729588,
+          "transfer_state": 0.9510330985743173,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.59052171729589,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6391563673652434,
+          "transfer_state": 0.9821850835837125,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 62.41563673652434,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7450473958701268,
+          "transfer_state": 0.9752391898564109,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 73.00473958701268,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7004004459998677,
+          "transfer_state": 0.9629273821322927,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.54004459998677,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7056986655035051,
+          "transfer_state": 0.961941878871568,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.06986655035051,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.66912470388243,
+          "transfer_state": 0.9573467240134633,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 65.412470388243,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7502238014982461,
+          "transfer_state": 0.9533943317823336,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 73.52238014982461,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6640742649870879,
+          "transfer_state": 0.9727237781250274,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 64.90742649870879,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.688676425262876,
+          "transfer_state": 0.9729425580909212,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.3676425262876,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6866372825142485,
+          "transfer_state": 0.9757235926883635,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.16372825142484,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7206311315661222,
+          "transfer_state": 0.9604518806129947,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.56311315661222,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7316878661642354,
+          "transfer_state": 0.9514801082785151,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.66878661642355,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7219696081417183,
+          "transfer_state": 0.9555756844260999,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.69696081417183,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7232569295998765,
+          "transfer_state": 0.9645047569832502,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.82569295998765,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6737546562001786,
+          "transfer_state": 0.9740305529945331,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 65.87546562001786,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7256488332779822,
+          "transfer_state": 0.921493087177472,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.06488332779823,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7351631074454883,
+          "transfer_state": 0.9758273146463348,
+          "alpha": 1.0,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.01631074454883,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6590219134367752,
+          "transfer_state": 0.9721031206021199,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 64.40219134367752,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6325897279617234,
+          "transfer_state": 0.9853135264014024,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 61.75897279617234,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7583565907018237,
+          "transfer_state": 0.9482573911455721,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 74.33565907018237,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7065728422437626,
+          "transfer_state": 0.9597476853924606,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.15728422437626,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7052593463382446,
+          "transfer_state": 0.9607003709977642,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.02593463382446,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7237590991078336,
+          "transfer_state": 0.9695758517705775,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.87590991078336,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7334377522773063,
+          "transfer_state": 0.9678666624299702,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.84377522773063,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7114603326498041,
+          "transfer_state": 0.9572830453663901,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.64603326498042,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.717535925052513,
+          "transfer_state": 0.9815872743216609,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.25359250525129,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7333582972796325,
+          "transfer_state": 0.9330331128757242,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 71.83582972796326,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7011896963178845,
+          "transfer_state": 0.9536155047570037,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.61896963178845,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7238268055432787,
+          "transfer_state": 0.9575810099882814,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.88268055432788,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6986028395158386,
+          "transfer_state": 0.966775038561921,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 68.36028395158385,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6896723006378807,
+          "transfer_state": 0.978475852191207,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 67.46723006378807,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7237590991078336,
+          "transfer_state": 0.9695758517705775,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.87590991078336,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7195858962166555,
+          "transfer_state": 0.9656573949043858,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 70.45858962166555,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7135851284359568,
+          "transfer_state": 0.9492098982885427,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.85851284359568,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.67659521350567,
+          "transfer_state": 0.965951764095654,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 66.15952135056699,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7077859446757799,
+          "transfer_state": 0.9625466513042978,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.27859446757799,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.6675318315146704,
+          "transfer_state": 0.9731152566043125,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 65.25318315146704,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7473167552615095,
+          "transfer_state": 0.9544439903142091,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 73.23167552615095,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7061963444668427,
+          "transfer_state": 0.9560515224803212,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 69.11963444668426,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7354465755167099,
+          "transfer_state": 0.9530821813587278,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.044657551671,
+          "theta_tech_observed": 0.01
+        },
+        {
+          "capability": 1.0,
+          "theta_capability": 0.7386058604772828,
+          "transfer_state": 0.9869770509427495,
+          "alpha": 1.5,
+          "convergence_strength": 1.0,
+          "runaway_term": 72.36058604772828,
+          "theta_tech_observed": 0.01
+        }
+      ]
+    },
+    "succession_self_blocking": {
+      "min_below_fire_rate": 0.8,
+      "max_above_fire_rate": 0.2,
+      "max_above_mean_yield_margin": 0.0,
+      "min_separation_standard_errors": 2.0,
+      "regimes": [
+        {
+          "alpha": 1.0,
+          "rr": 0.057,
+          "cap_star_estimate": 3.0,
+          "below_cap_star_ratio": 2.5,
+          "above_cap_star_ratio": 3.0,
+          "below_cap_star_fire_rate": 1.0,
+          "above_cap_star_fire_rate": 0.08,
+          "above_cap_star_mean_yield_margin": -2.074564342858271,
+          "fire_rate_separation_standard_errors": 16.95582495781317,
+          "runs_below_cap_star": 25,
+          "runs_above_cap_star": 25,
+          "below_mean_runaway_term": 72.26382370124905,
+          "above_mean_runaway_term": 60.205820079191874
+        },
+        {
+          "alpha": 1.0,
+          "rr": 0.06,
+          "cap_star_estimate": 3.0,
+          "below_cap_star_ratio": 2.5,
+          "above_cap_star_ratio": 3.0,
+          "below_cap_star_fire_rate": 1.0,
+          "above_cap_star_fire_rate": 0.12,
+          "above_cap_star_mean_yield_margin": -1.9795294286995047,
+          "fire_rate_separation_standard_errors": 13.5400640077266,
+          "runs_below_cap_star": 25,
+          "runs_above_cap_star": 25,
+          "below_mean_runaway_term": 33.812093431953734,
+          "above_mean_runaway_term": 19.3806702761858
+        },
+        {
+          "alpha": 1.0,
+          "rr": 0.064,
+          "cap_star_estimate": 3.0,
+          "below_cap_star_ratio": 2.5,
+          "above_cap_star_ratio": 3.0,
+          "below_cap_star_fire_rate": 1.0,
+          "above_cap_star_fire_rate": 0.04,
+          "above_cap_star_mean_yield_margin": -2.320272590593321,
+          "fire_rate_separation_standard_errors": 24.494897427831784,
+          "runs_below_cap_star": 25,
+          "runs_above_cap_star": 25,
+          "below_mean_runaway_term": 0.2654708057982698,
+          "above_mean_runaway_term": 5.779692304001243
+        },
+        {
+          "alpha": 1.5,
+          "rr": 0.057,
+          "cap_star_estimate": 2.5,
+          "below_cap_star_ratio": 2.0,
+          "above_cap_star_ratio": 2.5,
+          "below_cap_star_fire_rate": 1.0,
+          "above_cap_star_fire_rate": 0.0,
+          "above_cap_star_mean_yield_margin": -2.5430346550678475,
+          "fire_rate_separation_standard_errors": Infinity,
+          "runs_below_cap_star": 25,
+          "runs_above_cap_star": 25,
+          "below_mean_runaway_term": 63.94857187912034,
+          "above_mean_runaway_term": 38.681072775547555
+        },
+        {
+          "alpha": 1.5,
+          "rr": 0.06,
+          "cap_star_estimate": 2.5,
+          "below_cap_star_ratio": 2.0,
+          "above_cap_star_ratio": 2.5,
+          "below_cap_star_fire_rate": 1.0,
+          "above_cap_star_fire_rate": 0.04,
+          "above_cap_star_mean_yield_margin": -2.432414495236331,
+          "fire_rate_separation_standard_errors": 24.494897427831784,
+          "runs_below_cap_star": 25,
+          "runs_above_cap_star": 25,
+          "below_mean_runaway_term": 27.074290338757883,
+          "above_mean_runaway_term": 16.18136511329141
+        },
+        {
+          "alpha": 1.5,
+          "rr": 0.064,
+          "cap_star_estimate": 2.5,
+          "below_cap_star_ratio": 2.0,
+          "above_cap_star_ratio": 2.5,
+          "below_cap_star_fire_rate": 1.0,
+          "above_cap_star_fire_rate": 0.04,
+          "above_cap_star_mean_yield_margin": -3.43373316602791,
+          "fire_rate_separation_standard_errors": 24.494897427831784,
+          "runs_below_cap_star": 25,
+          "runs_above_cap_star": 25,
+          "below_mean_runaway_term": 4.391688519419764,
+          "above_mean_runaway_term": 0.004310625620137767
+        }
+      ]
+    },
+    "theta_floor_preservation": {
+      "theta_floor": 0.01,
+      "absolute_tolerance": 1e-09,
+      "min_observed_theta_tech": 0.01,
+      "observations_below_floor": 0,
+      "extreme_runaway_observations": 3769
+    }
+  },
+  "gate_5": {
+    "applicable": false,
+    "reason": "requires operational COP infrastructure"
+  }
+}

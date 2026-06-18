@@ -1286,12 +1286,12 @@ Items 1 through 9 are complete as of June 2026. The active work is item 11 (Gate
 3. ~~Specify the composition vector in full (the keystone tradeoff).~~ Done through the design conversations producing the six category curves, complementarity structure, constraint frontier, Psi_inst stock, and bridge.
 4. ~~Build the minimum faithful set.~~ Done. Stage 1 commit `61a362e` built the v2 parallel policy with all committed structure. Smoke test passed.
 5. ~~Stage 1.5 / 1.6 / 1.7 / 1.8: structural fix for phi-channel and state-channel problems.~~ Done. Stage 1.5 built the diagnostic state set and composite urgency layer; Stage 1.5 phi diagnostic and 10000-sample sweep established both channels were blocked. Stage 1.6 restructured U_sys to give phi a behavioral channel (committed). Stage 1.7 attempted multiplicative composite urgency, reverted on `[0,1]` clamp saturation. Stage 1.8 retired composite urgency, introduced the working_factor interface for infrastructure stocks, and let `L_t` read state directly; Phase A and Phase B integrity simulations both pass.
-6. ~~Pass remaining acceptance gates~~ (status: gate 1, gate 2, gate 3 all PASSED under v2.0 with formal yield logic; gate 5 NOT_APPLICABLE; gate 4 pending). Gate 2 G2.1 buffer re-runs cleanly with phi=25; Gate 3 G3.1/G3.2/G3.3 all pass at 1,620 runs (Part IX.9). **Gate 4 specification and implementation is the next active piece (see item 11).**
+6. ~~Pass remaining acceptance gates~~ (status: gate 1, gate 2, gate 3, gate 4 all PASSED under v2.0 with formal yield logic; gate 5 NOT_APPLICABLE). Gate 2 G2.1 buffer re-runs cleanly with phi=25; Gate 3 G3.1/G3.2/G3.3 all pass at 1,620 runs; Gate 4 G4.1/G4.2/G4.3 all pass at 1,050 runs (Part IX.9). The bootstrap gate validation arc is complete except for Gate 5 (NOT_APPLICABLE pending operational COP infrastructure).
 7. ~~Run phi free across the faithful landscape.~~ Done. Pieces 1, 2, and 2-followup totaling approximately 40,000 runs (Part IX).
 8. ~~Read against the three-branch decision tree.~~ Done. Class B outcome (Part IX.3); Branch 2 with rr-defined threshold.
 9. ~~Implement default phi revision from 10 to 25~~ (Part IX.5). Done in commit fde48b5. v2.0 paths updated; v1.x.2 paths preserved bit-for-bit; 39/39 legacy tests pass; gate 2 v2.0 G2.1 buffer re-runs cleanly.
 10. **Optional research directions** in priority order (Part IX.11): ~~Monte Carlo Phase B~~ (done; see Part X); dynamic phi formulation; gamma function calibration; phase boundary characterization; longer simulation horizons (partially answered by Gate 3's N=500 horizon-dependence finding, Part IX.8); Pattern 1 alpha-cliff fine-resolution characterization. None blocking; all deferred to future budget.
-11. **Build Gate 4 specification and implementation** (Part IX.11 item 1). Now the load-bearing next piece. Requires either locating G4.1-G4.3 in the existing v1.x.1 paper or collaborative specification before implementation work can begin. Stage 2 formal yield logic (commit 72ff757) and Gate 3 v2.0 validation provide the substrate against which Gate 4 will validate.
+11. ~~Build Gate 4 specification and implementation~~ (Part IX.11 item 1). Done. G4.1-G4.3 were located in the v1.x.2 paper Section 7; the validator is implemented and validated PASS at 1,050 runs (Part IX.9). cap-star is empirically characterized as alpha-dependent (3.0 at alpha=1.0, 2.5 at alpha=1.5).
 12. ~~Run Monte Carlo Phase B quantitative validation at scale.~~ Done. Categories A, B, C totaling 29,400 rows, 0 errors (Part X). Survival landscape, succession dynamics, and COP cost-audit baseline characterized. 39/39 legacy tests pass.
 
 ---
@@ -1524,7 +1524,13 @@ Gate validation status under v2.0 with formal yield logic active:
 
 Note on rr coverage: Gate 3's rr grid {0.057, 0.060, 0.064, 0.070} placed rr=0.057 within the collapse regime, not at the survival-rate phase boundary. Monte Carlo Phase B (Part X.2) characterizes rr=0.057 as collapse-dominated (1.1% aggregate survival) and locates the survival-rate transition at rr=0.060 to 0.066. Gate 3's succession-economics findings are unaffected; the clarification concerns only the rr-to-boundary mapping.
 
-**Gate 4 (runaway-regime validation): PENDING.** Specification and implementation work; see IX.11.
+**Gate 4 (runaway-regime validation): PASSED.** Implemented (`bootstrap_gate_validator/gates/gate_4.py`) against the v1.x.2 Section 7 specifications (G4.1-G4.3) and validated by a dedicated runaway-regime sweep (`gate4_v20_validation.py`, 1,050 rows, 25 seeds). Verdict PASS on all three checks:
+
+- **G4.1 (runaway penalty binding)**: 426/426 active-runaway observations (runaway_term > 0) match the v2.0 `theta_tech_v2` form `capability * theta_capability * transfer_state * exp(-alpha * CONVERGENCE_STRENGTH * runaway_term)` within 1% relative tolerance; 0 failures.
+- **G4.2 (succession self-blocking at runaway capability)**: across 6 (alpha, rr) regimes, below-cap-star fire rate is 1.00 and above-cap-star fire rate is at most 0.12, with negative mean yield margin and fire-rate separation of 13.5 SE or more. The empirical cap-star is alpha-dependent (3.0 at alpha=1.0, 2.5 at alpha=1.5), closing the cap-star gap the v1.x.2 paper flagged (Section 7 G4.2) and formalizing Pattern 1 (IX.8, Part X.3).
+- **G4.3 (theta_tech floor preservation)**: minimum observed theta_tech = 0.01 across 3,769 extreme-runaway observations; 0 observations below the 0.01 floor.
+
+Source: `simulation/diagnostics/gate4_v20_validation_summary.md`, `gate4_v20_results.csv`, `gate4_v20_input.json`.
 
 **Gate 5 (COP integration): NOT_APPLICABLE under current conditions.** Requires operational COP infrastructure that current v2.0 architecture does not yet implement. Will return NOT_APPLICABLE until the COP infrastructure is operationalized.
 
@@ -1557,9 +1563,9 @@ Updated to reflect items closed by the post-investigation work in IX.7-IX.9, and
 
 **Active and queued**:
 
-**1. Gate 4 specification and implementation** (substantial; queued as next active work).
+**1. Gate 4 specification and implementation** (CLOSED).
 
-The gate 4 specification (runaway-regime validation) is partially written but not fully implemented. Requires either locating G4.1-G4.3 in the existing v1.x.1 paper or collaborative specification before implementation work can begin. Stage 2 formal yield logic and Gate 3 succession-capable consistency provide the substrate against which Gate 4 will validate; Gate 4 should now be the next active piece in the v2.0 acceptance gate sequence.
+Gate 4 (runaway-regime validation) is implemented and validated PASS (Part IX.9). G4.1-G4.3 were located in the v1.x.2 paper Section 7; the validator (`bootstrap_gate_validator/gates/gate_4.py`) checks them against a dedicated runaway-regime sweep (1,050 runs). cap-star is empirically characterized as alpha-dependent (3.0 at alpha=1.0, 2.5 at alpha=1.5), closing the cap-star gap. The bootstrap gate validation arc is now complete except for Gate 5 (NOT_APPLICABLE).
 
 **2. Monte Carlo Phase B** (compute-heavy; queued after Gate 4).
 
@@ -1672,7 +1678,7 @@ The paper-ready quantitative claims, with confidence intervals and supporting da
 
 ### X.7 Open questions and limitations
 
-1. Gate 4 runaway-regime validation remains pending on the G4.1 to G4.3 specification dependency (Part VIII item 11). Phase B characterizes the cliff empirically; the formal acceptance checks are not yet built.
+1. Gate 4 runaway-regime validation: RESOLVED since this section was written. Gate 4 is implemented and PASSED (Part IX.9; G4.1-G4.3 validated at 1,050 runs). The bootstrap gate validation arc is complete except for Gate 5 (NOT_APPLICABLE).
 2. Operational COP infrastructure is not implemented; Gate 5 remains NOT_APPLICABLE.
 3. The v2.0-versus-v1.x.2 like-for-like COP comparison (Interpretation B) is untested rather than refuted. The clean experiment is defined in `cop_finding_framing.md` section 5.
 4. The survival-rate phase boundary is located to a 0.060 to 0.066 band on a grid spaced at 0.002 near the inflection. A targeted sweep would pin the 50% inflection to plus or minus 0.001 (Part IX.11).

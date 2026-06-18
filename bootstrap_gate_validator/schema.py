@@ -25,9 +25,10 @@ def validate_config(config):
     if 'gate_3' in config:
         _validate_gate_3(config['gate_3'])
 
-    for gate_n in ('gate_4', 'gate_5'):
-        if gate_n in config:
-            _require_keys(config[gate_n], [('applicable', bool)], section=gate_n)
+    if 'gate_4' in config:
+        _validate_gate_4(config['gate_4'])
+    if 'gate_5' in config:
+        _require_keys(config['gate_5'], [('applicable', bool)], section='gate_5')
 
 
 # ──────────────────────────────────────────────
@@ -151,6 +152,75 @@ def _validate_gate_3(g3):
          ('successor_capability_ratio', (int, float)),
          ('knowledge_transfer_verified', bool)],
         section='gate_3.succession_continuity',
+    )
+
+
+def _validate_gate_4(g4):
+    _require_dict(g4, 'gate_4')
+    _require_keys(g4, [('applicable', bool)], section='gate_4')
+    if not g4['applicable']:
+        return
+
+    _require_keys(
+        g4,
+        [
+            ('runaway_penalty_binding', dict),
+            ('succession_self_blocking', dict),
+            ('theta_floor_preservation', dict),
+        ],
+        section='gate_4',
+    )
+
+    rpb = g4['runaway_penalty_binding']
+    _require_keys(
+        rpb,
+        [('observations', list)],
+        section='gate_4.runaway_penalty_binding',
+    )
+    for obs in rpb['observations']:
+        if not isinstance(obs, dict):
+            raise SchemaError(
+                'gate_4.runaway_penalty_binding observations must be objects.'
+            )
+        _require_keys(
+            obs,
+            [('capability', (int, float)),
+             ('theta_capability', (int, float)),
+             ('transfer_state', (int, float)),
+             ('alpha', (int, float)),
+             ('runaway_term', (int, float)),
+             ('theta_tech_observed', (int, float))],
+            section='gate_4.runaway_penalty_binding.observation',
+        )
+
+    ssb = g4['succession_self_blocking']
+    _require_keys(
+        ssb,
+        [('regimes', list)],
+        section='gate_4.succession_self_blocking',
+    )
+    for regime in ssb['regimes']:
+        if not isinstance(regime, dict):
+            raise SchemaError(
+                'gate_4.succession_self_blocking regimes must be objects.'
+            )
+        _require_keys(
+            regime,
+            [('cap_star_estimate', (int, float)),
+             ('below_cap_star_fire_rate', (int, float)),
+             ('above_cap_star_fire_rate', (int, float)),
+             ('above_cap_star_mean_yield_margin', (int, float))],
+            section='gate_4.succession_self_blocking.regime',
+        )
+
+    tfp = g4['theta_floor_preservation']
+    _require_keys(
+        tfp,
+        [('theta_floor', (int, float)),
+         ('min_observed_theta_tech', (int, float)),
+         ('observations_below_floor', int),
+         ('extreme_runaway_observations', int)],
+        section='gate_4.theta_floor_preservation',
     )
 
 

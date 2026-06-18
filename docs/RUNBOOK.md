@@ -22,7 +22,7 @@ The framework paper is v1.x.2; the simulation has advanced to a v2.0 architectur
 - Multi-generational continuity confirmed: 99.8% knowledge-transfer verification, mean final generation 2.13.
 
 **Gate validation status**
-- Gate 1 PASSED, Gate 2 PASSED, Gate 3 PASSED, Gate 4 PENDING (specification dependency), Gate 5 NOT_APPLICABLE (requires operational COP infrastructure).
+- Gate 1 PASSED, Gate 2 PASSED, Gate 3 PASSED, Gate 4 PASSED (G4.1-G4.3 validated at 1,050 runs), Gate 5 NOT_APPLICABLE (requires operational COP infrastructure).
 
 **Notes**
 - These are v2.0 simulation defaults. v1.x.2 production scripts (for example `run_to_termination.py`) retain their own documented constants and are read-only.
