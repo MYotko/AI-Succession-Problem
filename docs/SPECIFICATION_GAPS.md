@@ -14,6 +14,16 @@ to 20 steps and the scalar H_N proxy replaced by observed spectral entropy. The
 residual φ/α flatness in the general MC is structural (correct equilibrium behavior),
 not a proxy artifact. See individual entries for details.
 
+**v2.0 update:** The v2.0 architecture (Stage 1.8 working_factor, formal yield logic)
+and its empirical arc refine several entries below, most notably the phi behavioral
+role (now a bounded Class B effect rather than inert) and the phase-boundary
+characterization. Two distinct transitions should not be conflated: the phi-sensitivity
+transition near rr approximately 0.057, and the survival-rate phase boundary at the
+rr=0.060 to 0.066 transition (50% inflection near rr=0.063). The natural-termination
+GAP-01 records below report rr ∈ (0.066, 0.070) for a different measurement (extinction
+vs convergence of the U_sys integral) and are accurate for that purpose. Full current
+state is in program reference Parts IX and X.
+
 ---
 
 ## GAP-01 | U_sys: Time-Integral vs. Per-Step Snapshot — **Resolved in v1.x2 (WP7 + WP8)**
@@ -829,6 +839,18 @@ genuine tradeoffs that phi can resolve, which the current grid-search optimizer
 lacks (saturation collapses all phi sensitivity). See the action-space redesign
 program for the path forward.
 
+**v2.0 update (Class B, per current evidence):** The action-space redesign this
+section anticipated was carried out under the v2.0 architecture. Stage 1.6 gave
+phi a behavioral channel through rollout aggregation, and Stage 1.8 introduced
+the working_factor interface. Under v2.0, phi has a real but bounded behavioral
+effect: a U-shaped survival relationship of roughly 10pp localized to short
+rollouts at marginal reproduction rate (rr approximately 0.057), flat above the
+survival-rate phase boundary and under active succession. The investigation
+closed as Class B, and the default was revised from 10 to 25 on this basis. The
+phi inertness conclusion above holds for the v1.x.2 grid-search optimizer; it is
+superseded by the v2.0 rollout-aggregation channel. See program reference
+Parts IX.2 through IX.7, and Part X for the Monte Carlo Phase B characterization.
+
 ---
 
 ## Summary Table
@@ -842,7 +864,7 @@ program for the path forward.
 | GAP-05 | Adversarial coverage | Open | 11 of 13 vectors simulated. Biological veto capture (vector 2) implemented in v1.x2 (Scenarios 27-28). Vectors 5–6 remain unimplemented. |
 | GAP-06 | optimize_u_sys policy | **Resolved (v1.x)** | Rollout increased to 20 steps; scalar H_N proxy replaced by observed spectral H_N. φ/α flatness in general MC is structural (correct equilibrium behavior), not a proxy artifact. |
 | Alpha  | Alpha parameter behaviour | **Revised (v1.x.1 closing)** | Weak monotonic gradient confirmed (lower α → more generations → marginally better survival). Pre-fix U-shaped misconfiguration trap claim withdrawn (artifact of inactive runaway penalty). Steady-state convergence is path-independent. |
-| Phi    | Phi extinction buffer behaviour | **Unconfirmed (cap-conditional claim withdrawn, May 2026)** | Phi has zero demonstrated effect on survival or action selection under any tested configuration. The v1.x.2 cap-conditional claim (20-27pp gradient at cap >= 24) is withdrawn: identified as RNG-desynchronization artifact in the contaminated capped regime. Phi inertness confirmed by four independent methods. Theoretical motivation preserved; behavioral role requires action-space redesign. |
+| Phi    | Phi extinction buffer behaviour | **Refined under v2.0 (Class B, per current evidence)** | The v1.x.2 grid-search optimizer showed zero phi effect (saturation), and the cap-conditional claim was withdrawn as an RNG-desync artifact. The action-space redesign was then implemented (Stage 1.6 rollout-aggregation channel, Stage 1.8 working_factor); under v2.0, phi has a bounded behavioral effect (roughly 10pp U-shape localized to short rollouts at marginal rr, flat elsewhere), the investigation closed as Class B, and the default was revised from 10 to 25. The demographic-survival magnitude remains unmeasurable while reproduction rate is exogenous. See program reference Parts IX and X. |
 
 ---
 
@@ -851,13 +873,15 @@ program for the path forward.
 The following items are identified for the v1.x.2 development cycle:
 
 ### Demographic feedback loop
-Well-being → reproduction rate coupling. Phi has no demonstrated behavioral
-role under any tested configuration; the demographic feedback extension cannot
-be evaluated until the action-space redesign gives phi a mechanism to act
-through. Adding endogenous demographics would allow the simulation to capture
-additional real-world channels through which AI governance quality affects
-population outcomes, and would provide a new expression channel for phi if the
-redesign succeeds. This is a valuable future extension for model fidelity.
+Well-being → reproduction rate coupling. Under v2.0, the action-space redesign
+(Stage 1.6 rollout aggregation, Stage 1.8 working_factor) gave phi a behavioral
+channel, and phi now shows a bounded effect at marginal rr (Class B; program
+reference Part IX.3). The remaining gap is demographic: reproduction rate is
+exogenous, so phi's L(t) weighting cannot express through to raw survival.
+Adding endogenous demographics would allow the simulation to capture additional
+real-world channels through which AI governance quality affects population
+outcomes, and would let phi's effect express through to demographic survival.
+This is a valuable future extension for model fidelity.
 
 ## Calibration outcome (May 2026)
 

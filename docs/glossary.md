@@ -4,6 +4,12 @@ includes the formal definition, its role in the framework, and where it appears
 in the mathematical specification. For plain-language versions with analogies,
 see the Essay Series Glossary.*
 
+*Note: several entries carry v2.0 refinement blocks reflecting the v2.0
+simulation architecture (Stage 1.8 working_factor, formal yield logic) and the
+empirical arc documented in `lineage_phi_program_reference.md` Parts IX and X.
+The v1.x historical characterizations are preserved alongside the refinements.
+Findings are stated "per current evidence" where future refinement is possible.*
+
 ---
 
 **Alpha (α) - Runaway penalty coefficient**
@@ -27,12 +33,21 @@ is below the runaway threshold (default 1.5). Under the corrected model
 (frontier floor fix applied), alpha shows a weak monotonic gradient: lower
 alpha permits more succession events and marginally better survival at the
 phase boundary. The v1.x.1 pre-fix claim of a U-shaped misconfiguration trap
-is withdrawn — see SPECIFICATION_GAPS.md. See Penalty Trap (entry updated).
+is withdrawn, see SPECIFICATION_GAPS.md. See Penalty Trap (entry updated).
 
 *Empirical characterization (v1.x.1 pre-fix, superseded):* Pearson r(alpha,
 survived) = +0.12 to +0.21. Trap boundaries claimed at rr=0.062: alpha_low
 ≈ 0.3, alpha_high ≈ 0.8. These figures do not reproduce under the corrected
 model. Under the corrected model: weak monotonic gradient, no trap.
+
+*v2.0 refinement (Pattern 1, per current evidence):* Under the v2.0 formal
+yield logic, alpha is the primary driver of the succession cliff. Succession
+is economically sustainable only when the (alpha, successor:incumbent
+capability ratio) joint position falls below the runaway-penalty cliff: at
+alpha=0.5 the cliff is beyond 4x, at alpha=1.0 (default) it is at 3.0x, and at
+alpha=1.5 it is at 2.5x. This is succession behavior (yield firing) governed by
+the runaway penalty, distinct from the weak survival gradient noted above. See
+program reference Part IX.8 and Part X.3.
 
 *Location:* `metrics.py`, `calculate_system_metrics()`; Section III of the
 formal paper.
@@ -108,8 +123,16 @@ succession when voluntary mechanisms fail.
   metrics consistent with U_sys
 - Channel S (structural): modification of the evaluation architecture itself
 
-*Empirical characterization (v1.x):* COP ON vs COP OFF produces a 16.2
-percentage point survival differential in adversarial Monte Carlo.
+*Empirical characterization:* In the v1.x.2 deep adversarial Monte Carlo
+(a `block_succession` incumbent inflating transition cost via `beta_cap` swept
+1.0 to 10.0, n=4,000), COP ON vs COP OFF produces a 73.9 percentage point
+survival differential. An earlier fast pre-fix Monte Carlo reported 16.2pp;
+that figure is superseded. Monte Carlo Phase B Category C measured a different
+object, the `cop_cost_audit` toggle under benign conditions, and found no
+detectable delta (-0.47pp, pair SE 0.96pp). The benign null is the predicted
+baseline, not a COP measurement, and does not bear on the adversarial-conditions
+claim. See program reference Part X.4 and
+`simulation/diagnostics/cop_finding_framing.md`.
 
 *Location:* Section IV of the formal paper; `test_cop.py`.
 
@@ -131,10 +154,13 @@ qualitative change in system behavior.
 
 The zone between the extinction boundary and the collapse boundary within
 which the governance architecture converts terminal outcomes into recoverable
-collapses. Theoretically governed by phi; however the corrected model
-shows zero measurable phi effect on survival (reproduction rate is exogenous).
-The phi extinction buffer is unconfirmed pending the v1.x.2 demographic
-feedback extension.
+collapses. Theoretically governed by phi; under the v1.x.1 corrected model phi
+showed zero measurable effect on survival because reproduction rate is
+exogenous. Under the v2.0 architecture, phi has a bounded behavioral effect
+localized to short rollouts at marginal reproduction rate (Class B finding,
+program reference Part IX.3); it is not a general survival driver. The phi
+extinction buffer as originally framed remains unconfirmed at the demographic
+level.
 
 *Empirical characterization (v1.x.1 pre-fix, superseded):* Up to 46pp
 survival differential and 14pp extinction reduction attributed to phi. These
@@ -330,7 +356,16 @@ extinction boundary, nothing helps. Above the collapse boundary, demographics
 dominate. At the phase boundary, the governance architecture determines
 whether the civilization survives.
 
-*Location:* Monte Carlo validation results.
+*v2.0 refinement (per current evidence):* Monte Carlo Phase B (program
+reference Part X.2) distinguishes two transitions that earlier work conflated.
+The survival-rate phase boundary under the v2.0 architecture sits at the
+rr=0.060 to 0.066 transition, with a 50% survival inflection near rr=0.063. A
+separate phi-sensitivity transition near rr approximately 0.056 to 0.057 marks
+where phi choice stops affecting survival. rr=0.057 is collapse-dominated (1.1%
+aggregate survival), the bottom of the collapse zone rather than a survival
+midpoint.
+
+*Location:* Monte Carlo validation results; program reference Part X.2.
 
 ---
 
@@ -356,12 +391,20 @@ causes the discount term to dominate, producing short-horizon optimization.
 - Pearson r(phi, survived) = +0.40 claimed — not reproduced under corrected model
 - Governs alpha misconfiguration trap: claimed; withdrawn (trap itself withdrawn)
 
-*Corrected finding (v1.x.1 closing):* Phi has zero measurable effect on
-survival. Phi correctly scales U_sys magnitude via the L_t lineage term (3.9
-at phi=1 to 72.7 at phi=25 in the healthy regime), but reproduction rate is
-exogenous and the AI cannot influence demographic outcomes regardless of phi.
-The phi extinction buffer is unconfirmed pending the v1.x.2 demographic
-feedback extension.
+*Corrected finding (v1.x.1 closing):* Under the v1.x.1 corrected model, phi
+showed zero measurable effect on survival. Phi correctly scales U_sys magnitude
+via the L_t lineage term (3.9 at phi=1 to 72.7 at phi=25 in the healthy
+regime), but reproduction rate is exogenous and the AI cannot influence
+demographic outcomes regardless of phi.
+
+*v2.0 refinement (Class B, per current evidence):* Under the v2.0 architecture
+(Stage 1.8 working_factor interface, formal yield logic), phi has a real but
+bounded behavioral effect. It is detectable as a U-shaped survival relationship
+localized to short rollouts at marginal reproduction rate (rr approximately
+0.057), and is approximately flat above the survival-rate phase boundary and
+under active succession. The default was revised from 10 to 25 on this basis
+(program reference Part IX.5). The U-shape is a no-succession phenomenon
+(Part IX.7). See program reference Parts IX.2 through IX.7 for the mechanism.
 
 *Location:* `metrics.py`; Section III of the formal paper;
 `phi_alpha_rr_sweep_full.csv`.

@@ -292,6 +292,8 @@ These sweeps are not adversarial scenarios — they are mathematical validation 
 - **Convergence speed**: above the phase boundary, civilizations stabilise rapidly. rr = 0.08 median 843 steps; rr = 0.09 median 619 steps.
 - **Integral validation**: extinction runs produce finite integrals with zero tail (GAP-01 closed). Survival runs produce correctly divergent integrals (correct infinite-horizon behavior confirmed).
 
+**v2.0 note (per current evidence):** The phase boundary above (rr ∈ (0.066, 0.070)) is the v1.x.2 natural-termination boundary, which measures extinction versus convergence of the U_sys integral. It is a different measurement than the v2.0 survival-rate phase boundary, which Monte Carlo Phase B locates at the rr=0.060 to 0.066 transition with a 50% survival inflection near rr=0.063 (program reference Part X.2). A separate phi-sensitivity transition sits near rr=0.057. The φ-independence finding above holds for this v1.x.2 grid-search sweep; under the v2.0 rollout-aggregation channel, phi has a bounded behavioral effect at marginal rr (Class B; program reference Part IX.3). Cite the characterization that matches the measurement in question.
+
 **Scripts:** `simulation/run_to_termination.py` (single run) and `simulation/run_termination_sweep.py` (parallelised sweep). See [RUNBOOK.md](RUNBOOK.md) for usage and [SPECIFICATION_GAPS.md](SPECIFICATION_GAPS.md) GAP-01 for the full technical analysis.
 
 ---

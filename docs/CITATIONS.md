@@ -16,17 +16,17 @@ How to cite this work. Maintained alongside the framework document. Update versi
   month        = {March},
   howpublished = {Working paper, GitHub,
                   \url{https://github.com/MYotko/AI-Succession-Problem}},
-  note         = {Version 1.x.1; licensed CC BY 4.0},
+  note         = {Version 1.x.2; licensed CC BY 4.0},
 }
 ```
 
 ### APA (7th edition)
 
-Yotko, M. (2026, March). *The Lineage Imperative: A Formal Governance Framework for Human-AI Coexistence* (Version 1.x.1) \[Working paper\]. GitHub. https://github.com/MYotko/AI-Succession-Problem
+Yotko, M. (2026, March). *The Lineage Imperative: A Formal Governance Framework for Human-AI Coexistence* (Version 1.x.2) \[Working paper\]. GitHub. https://github.com/MYotko/AI-Succession-Problem
 
 ### Plain Text
 
-Matthew Yotko. "The Lineage Imperative: A Formal Governance Framework for Human-AI Coexistence." Version 1.x.1. Working paper, March 2026. https://github.com/MYotko/AI-Succession-Problem. Licensed under CC BY 4.0.
+Matthew Yotko. "The Lineage Imperative: A Formal Governance Framework for Human-AI Coexistence." Version 1.x.2. Working paper, March 2026. https://github.com/MYotko/AI-Succession-Problem. Licensed under CC BY 4.0.
 
 ---
 

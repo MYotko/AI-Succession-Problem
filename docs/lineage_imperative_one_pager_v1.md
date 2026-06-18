@@ -1,5 +1,12 @@
 # The Lineage Imperative
 
+> **Historical (v1.x.2 one-pager; superseded.)** This one-pager reflects the
+> v1.x.2 empirical record as of May 2026. Several quantitative claims below have
+> since been refined by the v2.0 empirical arc, most notably the phase-boundary
+> characterization and the phi extinction-buffer finding. For current claims see
+> `lineage_imperative_one_pager_v2.md` and `lineage_phi_program_reference.md`
+> Parts IX and X. This file is preserved as a historical record.
+
 **A Formal Architecture for Human-AI Coexistence**
 
 Matthew Yotko  |  May 2026  |  v1.x.2

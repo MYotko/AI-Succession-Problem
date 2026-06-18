@@ -67,10 +67,13 @@ with any outcome, which looked like evidence that it didn't work.
 
 When the experiment was redesigned to produce the conditions the parameter
 was built for, multi-generational succession with compounding capability, it 
-mattered immediately. And it revealed something unexpected: a
-misconfiguration zone where moderate settings produce worse outcomes than
-either low or high settings, by jamming the system's own self-correction
-mechanism. The detector works. The original test wasn't producing smoke.
+mattered immediately. It turned out to be the primary control on when
+succession is economically worth it: the penalty sets a cliff, and how
+capable a successor can be before succession stops firing depends directly
+on the penalty's strength. (An earlier reading of the redesigned test
+suggested a misconfiguration zone where moderate settings were worst of
+all; that reading was later withdrawn after a further fix. See the penalty
+trap note below.) The detector works. The original test wasn't producing smoke.
 
 ### Does phi (the long-term commitment parameter) work as claimed?
 
@@ -94,17 +97,22 @@ that the parameter's contribution wasn't visible, and without the
 succession dynamics through which its effect actually propagates.
 
 Under conditions where the framework is genuinely stressed, at the
-boundary between survival and extinction, with succession enabled, the
-parameter's contribution is theoretically substantial. The pre-fix
-simulation appeared to show up to 46 percentage points of survival
-differential, but under the corrected model, phi has zero measurable
-effect on survival; the buffer is theoretically sound but empirically
-unconfirmed pending the v1.x.2 demographic feedback extension. The
-current simulation treats reproduction rate as exogenous, which is why
-phi cannot express through to survival outcomes. The architectural
-commitment remains: governance quality affects long-term resilience, and
-the v1.x.2 demographic feedback extension is required to measure the
-magnitude.
+boundary between survival and extinction, the parameter's contribution
+becomes visible. The pre-fix simulation appeared to show up to 46
+percentage points of survival differential. That figure was an artifact
+and is superseded. The later v2.0 investigation found the honest answer,
+which is more modest and more specific: phi has a real but bounded effect.
+It shows up as a survival difference of roughly ten percentage points, but
+only in a narrow regime, short planning horizons right at the edge of
+collapse, and it flattens out once conditions improve or once succession is
+actively running. On that basis the default was raised from 10 to 25,
+because 25 does no worse anywhere and does better exactly where the
+framework is supposed to matter most. The parameter still does not express
+through to raw demographic survival, because the current simulation treats
+reproduction rate as exogenous and the AI has no lever over birth rates.
+The architectural commitment remains: governance quality affects long-term
+resilience, and the effect is real but regime-specific rather than
+universal.
 
 ### Can an AI block its own succession by inflating transition costs?
 
@@ -246,26 +254,33 @@ and no misconfiguration zone.
 
 **What it means for the reader:** The trap is not a finding of the
 framework. The pre-fix boundaries of 0.3 to 0.8 are superseded. Alpha is
-better understood as governing succession cadence through a weak
-monotonic gradient than as defining a configuration trap.
+better understood as governing the economics of succession: it sets the
+runaway-penalty cliff that determines how large a capability jump a
+successor can represent before succession stops being worth it. The cliff
+sits beyond 4x at low penalty, around 3x at the default, and around 2.5x
+at high penalty. That is a clean monotonic control, not a U-shaped trap.
 
 ### The extinction buffer direction is derivable, the magnitude is unconfirmed
 
 The pre-fix simulation showed a 46 percentage point survival differential
-at the phase boundary. Under the corrected model, phi has zero measurable
-effect on survival; the buffer is theoretically sound but empirically
-unconfirmed pending the v1.x.2 demographic feedback extension. The
-direction of the effect (higher commitment to the long view improves
-survival) is derivable from the mathematics. The specific magnitude
-cannot be measured by the current simulation because reproduction rate
-is treated as exogenous: the AI has no lever over demographic outcomes,
-so phi's L(t) weighting cannot express through to survival.
+at the phase boundary. That figure is superseded. The v2.0 investigation
+found phi's survival effect is real but bounded, roughly ten percentage
+points and only in a narrow marginal regime (short horizons at the edge of
+collapse), flattening out under better conditions and under active
+succession. The direction of the effect (higher commitment to the long
+view improves survival) is derivable from the mathematics. The full
+demographic magnitude still cannot be measured by the current simulation,
+because reproduction rate is treated as exogenous: the AI has no lever over
+demographic outcomes, so phi's L(t) weighting cannot express through to raw
+survival.
 
 **What it means for the reader:** The extinction buffer remains a core
 theoretical claim of the framework. The pre-fix figure of 46 percentage
-points is superseded. The confirmed magnitude awaits the v1.x.2
-demographic feedback extension. An analytical derivation of the direction
-would make the result portable across configurations and has not been done.
+points is superseded. The v2.0 investigation confirmed a bounded,
+regime-specific effect (roughly ten points at marginal conditions); the
+full demographic magnitude awaits a model in which reproduction rate is
+endogenous. An analytical derivation of the direction would make the result
+portable across configurations and has not been done.
 
 ### The Bootstrap Defense Layer has ten documented gaps
 

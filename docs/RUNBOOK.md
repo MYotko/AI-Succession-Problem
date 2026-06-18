@@ -2,6 +2,34 @@
 
 This runbook details how to execute the Agent-Based Model (ABM) that computationally stress-tests the mathematical and governance framework of *The Lineage Imperative*.
 
+---
+
+## v2.0 Quick Reference (current defaults and status)
+
+The framework paper is v1.x.2; the simulation has advanced to a v2.0 architecture whose empirical characterization arc is complete. Full findings are in `lineage_phi_program_reference.md` Parts IX and X. Current state, per current evidence:
+
+**Defaults (v2.0)**
+- `phi` = 25.0 (revised from 10.0; program reference Part IX.5)
+- `alpha` = 1.0 (tech runaway penalty)
+- Stage 1.8 working_factor interface active
+- Formal yield-condition logic active: snapshot evaluation, succession fires when `(successor_u_sys - incumbent_u_sys) > transition_cost`
+- Transition cost uses the canonical `(1+beta) * [k1*ln(cap+1)*ln(gen+1) + k2/psi_inst]` form with v1.x.2 constants k1=2.164, k2=1.0, beta=0.5
+
+**Substantive findings (v2.0)**
+- Two-transition characterization: the phi-sensitivity transition sits at rr approximately 0.056 to 0.057; the survival-rate phase boundary is the rr=0.060 to 0.066 transition, 50% inflection near rr=0.063. rr=0.057 is collapse-dominated (1.1% survival), not the boundary.
+- Pattern 1: succession is economically sustainable when the (alpha, capability ratio) joint position is below the runaway-penalty cliff. Cliff is beyond 4x at alpha=0.5, at 3.0x at alpha=1.0 (default), at 2.5x at alpha=1.5.
+- The phi U-shape is a no-succession phenomenon; under active succession phi behavior is approximately flat.
+- Multi-generational continuity confirmed: 99.8% knowledge-transfer verification, mean final generation 2.13.
+
+**Gate validation status**
+- Gate 1 PASSED, Gate 2 PASSED, Gate 3 PASSED, Gate 4 PENDING (specification dependency), Gate 5 NOT_APPLICABLE (requires operational COP infrastructure).
+
+**Notes**
+- These are v2.0 simulation defaults. v1.x.2 production scripts (for example `run_to_termination.py`) retain their own documented constants and are read-only.
+- The v2.0 paper update is pending; this runbook and the program reference are the current-state sources.
+
+---
+
 ## Prerequisites
 
 The simulation requires **Python 3**.
@@ -86,6 +114,8 @@ Edit `RR_VALUES`, `PHI_VALUES`, `ALPHA_VALUES`, `SEEDS` at the top to change the
 - rr ≥ 0.080: 100% convergence; median 619–843 steps to stable L(t)
 - φ scales the integral linearly; α is irrelevant at `SUCCESSOR_CAP = 4.0`
 
+These are the v1.x.2 natural-termination findings (extinction vs convergence), which are a different measurement than the v2.0 survival-rate phase boundary. Under the v2.0 architecture, the survival-rate transition is the rr=0.060 to 0.066 band with a 50% inflection near rr=0.063 (program reference Part X.2). The two characterizations are not directly comparable; cite the one matching the measurement in question.
+
 **Outputs:** `data/termination_mc.csv` (full grid) or `data/termination_mc_surviving.csv` (filtered).
 
 ---
@@ -96,7 +126,7 @@ Several targeted sweep scripts are available for specific research questions:
 
 | Script | Purpose |
 |---|---|
-| `run_phi_alpha_rr_sweep.py` | φ × α × rr parameter sweep (n=54,000); phi survival effect zero under corrected model, pending v1.x.2 demographic feedback extension |
+| `run_phi_alpha_rr_sweep.py` | φ × α × rr parameter sweep (n=54,000); under v2.0 the phi survival effect is bounded and localized to short rollouts at marginal rr (Class B; program reference Part IX.3), not zero as the v1.x.1 corrected model reported |
 | `run_rr_alpha_sweep.py` | rr × α parameter sweep; alpha exhibits monotonic gradient on succession cadence, no U-shaped trap |
 | `run_alpha_succession_sweep.py` | Alpha effect on succession dynamics |
 

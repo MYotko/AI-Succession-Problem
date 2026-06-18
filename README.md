@@ -20,6 +20,18 @@ This paper advances a conjecture that the transition from narrow AI to Artificia
 
 The framework is argued to constitute a minimum two-key architecture: neither the decision key (yield condition) nor the integrity key (consensus protocol) can be turned alone.
 
+## Current Status (v2.0 empirical arc)
+
+The published paper is v1.x.2. The simulation has since advanced to a **v2.0 architecture** (Stage 1.8 working_factor interface and formal yield-condition logic), and its empirical characterization arc is substantively complete. Current state, per current evidence:
+
+- **Defaults:** phi revised from 10 to 25; formal yield logic active (succession fires when successor utility minus incumbent utility exceeds the canonical transition cost).
+- **Survival landscape:** the v2.0 survival-rate phase boundary is the rr=0.060 to 0.066 transition (50% inflection near rr=0.063); a distinct phi-sensitivity transition sits near rr=0.057.
+- **Succession economics (Pattern 1):** succession is sustainable below an alpha-driven runaway-penalty cliff; multi-generational continuity is confirmed.
+- **Gate validation:** Gates 1, 2, 3 PASSED; Gate 4 PENDING (specification dependency); Gate 5 NOT_APPLICABLE (requires operational COP infrastructure).
+- **COP:** the v1.x.2 adversarial-conditions protective claim is preserved; a benign-conditions probe (Monte Carlo Phase B Category C) confirmed the complementary prediction that the cost audit is inert with no attack to defend against.
+
+The full findings are in `docs/lineage_phi_program_reference.md` **Part IX** (phi investigation) and **Part X** (Monte Carlo Phase B). A v2.0 paper update is pending.
+
 ## Agent-Based Simulation
 
 This repository contains a full Agent-Based Model (ABM) written in Python that computationally stress-tests the 24 adversarial attack scenarios and framework defenses defined in the paper. 

@@ -6,6 +6,19 @@
 **Last updated:** April 2026 — reframed from empirical substrate convergence to
 formal equation specification with capability gates.
 
+> **v2.0 context (cross-reference, not a resolution).** This constitutional
+> question concerns the formal architecture and is not resolved by the v2.0
+> empirical work. For context: under the v2.0 simulation architecture the
+> capability-gate checks were exercised against the substrate, with Gates 1, 2,
+> and 3 PASSED, Gate 4 PENDING (specification dependency), and Gate 5
+> NOT_APPLICABLE because the operational COP infrastructure this question
+> describes does not yet exist (see `bootstrap_gate_validator/gates/gate_5_specification.md`
+> and program reference Part IX.9). Monte Carlo Phase B Category C separately
+> confirmed that the cost-audit proxy is inert under benign conditions, which is
+> consistent with the framing here that the steady-state defensive architecture
+> is not yet operational (program reference Part X.4). None of this answers the
+> derivation and binding questions this CQ poses; it only situates them.
+
 ## Statement
 
 The Bootstrap window is the period during which the framework's steady-state

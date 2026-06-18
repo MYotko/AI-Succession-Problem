@@ -18,6 +18,28 @@ Both are derived from Section VII of The Lineage Imperative v1.x.1.
 The Python tool is the executable version of the specification. The PDF
 is the readable version. They check the same things.
 
+### Current validation status (v2.0)
+
+Under the v2.0 simulation architecture (formal yield logic active), the gates
+have been exercised against the simulation substrate with the following
+outcomes (program reference Part IX.9):
+
+- **Gate 1 PASSED** (structural consistency).
+- **Gate 2 PASSED** (behavioral consistency; original sweep plus Piece A
+  targeted re-validation under active succession).
+- **Gate 3 PASSED** (1088/1088 G3.1 yield-fire events, 1088/1088 G3.2 canonical
+  cost-formula match, 99.8% G3.3 knowledge-transfer verification; mean final
+  generation 2.13).
+- **Gate 4 PENDING.** Implementation is blocked on resolving the G4.1 to G4.3
+  specification dependency (locating it in the v1.x.1 paper or specifying it
+  collaboratively). Monte Carlo Phase B characterized the runaway-penalty cliff
+  empirically (program reference Part X.3), which provides the substrate Gate 4
+  will validate against.
+- **Gate 5 NOT_APPLICABLE.** Requires operational COP infrastructure (peer
+  validator set, civic panel, distributed ledger, continuous monitoring) that
+  the v2.0 ABM does not implement. See
+  `bootstrap_gate_validator/gates/gate_5_specification.md`.
+
 ---
 
 ## Tool Architecture
@@ -40,7 +62,7 @@ operator runs the tool against their own system's outputs.
       "mu": 1.0,
       "epsilon": 0.01,
       "rho": 0.02,
-      "phi": 10.0
+      "phi": 25.0
     },
     "l_t_components": {
       "h_eff": 0.45,
@@ -793,14 +815,21 @@ The PDF should mirror the tool's structure but in human-readable form:
 - What failing means
 - Worked example
 
-### Section 5: Gate 4 — Runaway-regime validation (future)
+### Section 5: Gate 4, Runaway-regime validation (pending)
+- Status: PENDING. Implementation is blocked on the G4.1 to G4.3 specification
+  dependency (locate in the v1.x.1 paper or specify collaboratively).
 - What it will check when applicable
-- Why it's not applicable now
-- Equations G4.1 through G4.3 (specified in advance)
+- The empirical substrate it will validate against: the alpha-driven
+  runaway-penalty cliff characterized in Monte Carlo Phase B (program reference
+  Part X.3 and Part IX.8)
+- Equations G4.1 through G4.3 (to be specified)
 
-### Section 6: Gate 5 — COP integration (future)
+### Section 6: Gate 5, COP integration (not applicable)
+- Status: NOT_APPLICABLE. Requires operational COP infrastructure (peer
+  validator set, civic panel, distributed ledger, continuous monitoring) that
+  the current v2.0 ABM does not implement. See
+  `bootstrap_gate_validator/gates/gate_5_specification.md`.
 - What it will check when applicable
-- Why it's not applicable now
 - Equations G5.1 through G5.2 (specified in advance)
 
 ### Section 7: Reporting
