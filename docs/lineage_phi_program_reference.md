@@ -1532,7 +1532,7 @@ Note on rr coverage: Gate 3's rr grid {0.057, 0.060, 0.064, 0.070} placed rr=0.0
 
 Source: `simulation/diagnostics/gate4_v20_validation_summary.md`, `gate4_v20_results.csv`, `gate4_v20_input.json`.
 
-**Gate 5 (COP integration): NOT_APPLICABLE under current conditions.** Requires operational COP infrastructure that current v2.0 architecture does not yet implement. Will return NOT_APPLICABLE until the COP infrastructure is operationalized.
+**Gate 5 (COP integration): NOT_APPLICABLE (verified).** The validator returns NOT_APPLICABLE end-to-end with reason `requires operational COP infrastructure`. The G5.1 (six-dimensional verification) and G5.2 (continuous monitoring; `eps_drift` unspecified) specifications and the applicability criteria are documented in `bootstrap_gate_validator/gates/gate_5_specification.md`. Gate 5 requires operational COP infrastructure (peer validator set, civic panel, distributed ledger, biological veto, continuous monitoring) that the current v2.0 ABM does not implement, and stays NOT_APPLICABLE until that infrastructure is operationalized. The bootstrap gate validation arc is now closed: gates 1-4 PASSED, gate 5 verified NOT_APPLICABLE.
 
 After this validation arc, v2.0 architecture has empirical support for its substantive claims about (a) state sensitivity (gates 1, 2; Piece A confirmation), (b) phi behavior under both no-succession and active-succession regimes (Pieces 1 and 2 + Piece A), and (c) succession-capable consistency including formal yield economics and multi-generational continuity (gate 3).
 

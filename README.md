@@ -27,7 +27,7 @@ The published paper is v1.x.2. The simulation has since advanced to a **v2.0 arc
 - **Defaults:** phi revised from 10 to 25; formal yield logic active (succession fires when successor utility minus incumbent utility exceeds the canonical transition cost).
 - **Survival landscape:** the v2.0 survival-rate phase boundary is the rr=0.060 to 0.066 transition (50% inflection near rr=0.063); a distinct phi-sensitivity transition sits near rr=0.057.
 - **Succession economics (Pattern 1):** succession is sustainable below an alpha-driven runaway-penalty cliff; multi-generational continuity is confirmed.
-- **Gate validation:** Gates 1, 2, 3, and 4 PASSED; Gate 5 NOT_APPLICABLE (requires operational COP infrastructure). The bootstrap gate validation arc is complete except for Gate 5.
+- **Gate validation:** Gates 1, 2, 3, and 4 PASSED; Gate 5 verified NOT_APPLICABLE (requires operational COP infrastructure). The bootstrap gate validation arc is closed.
 - **COP:** the v1.x.2 adversarial-conditions protective claim is preserved; a benign-conditions probe (Monte Carlo Phase B Category C) confirmed the complementary prediction that the cost audit is inert with no attack to defend against.
 
 The full findings are in `docs/lineage_phi_program_reference.md` **Part IX** (phi investigation) and **Part X** (Monte Carlo Phase B). A v2.0 paper update is pending.

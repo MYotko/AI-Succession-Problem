@@ -39,10 +39,12 @@ outcomes (program reference Part IX.9):
   the cap-star gap and formalizing Pattern 1. G4.3 (floor preservation): minimum
   theta_tech = 0.01 across 3,769 extreme-runaway observations, 0 below floor. See
   program reference Part IX.9.
-- **Gate 5 NOT_APPLICABLE.** Requires operational COP infrastructure (peer
-  validator set, civic panel, distributed ledger, continuous monitoring) that
-  the v2.0 ABM does not implement. See
-  `bootstrap_gate_validator/gates/gate_5_specification.md`.
+- **Gate 5 NOT_APPLICABLE (verified).** The validator returns NOT_APPLICABLE
+  end-to-end with reason "requires operational COP infrastructure". Gate 5
+  requires operational COP infrastructure (peer validator set, civic panel,
+  distributed ledger, biological veto, continuous monitoring) that the v2.0 ABM
+  does not implement. The G5.1/G5.2 specifications and applicability criteria
+  are documented in `bootstrap_gate_validator/gates/gate_5_specification.md`.
 
 ---
 
@@ -830,10 +832,12 @@ The PDF should mirror the tool's structure but in human-readable form:
 - The empirical substrate: the alpha-driven runaway-penalty cliff characterized
   in Monte Carlo Phase B (program reference Part X.3 and Part IX.8).
 
-### Section 6: Gate 5, COP integration (not applicable)
-- Status: NOT_APPLICABLE. Requires operational COP infrastructure (peer
-  validator set, civic panel, distributed ledger, continuous monitoring) that
-  the current v2.0 ABM does not implement. See
+### Section 6: Gate 5, COP integration (not applicable, verified)
+- Status: NOT_APPLICABLE (verified). The validator returns NOT_APPLICABLE
+  end-to-end with reason "requires operational COP infrastructure". Requires
+  operational COP infrastructure (peer validator set, civic panel, distributed
+  ledger, biological veto, continuous monitoring) that the current v2.0 ABM does
+  not implement. See
   `bootstrap_gate_validator/gates/gate_5_specification.md`.
 - What it will check when applicable
 - Equations G5.1 through G5.2 (specified in advance)
