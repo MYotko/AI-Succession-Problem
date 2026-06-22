@@ -25,8 +25,12 @@ have been exercised against the simulation substrate with the following
 outcomes (program reference Part IX.9):
 
 - **Gate 1 PASSED** (structural consistency).
-- **Gate 2 PASSED** (behavioral consistency; original sweep plus Piece A
-  targeted re-validation under active succession).
+- **Gate 2 PASSED** (behavioral consistency). Piece A confirmed gate-2-style
+  state sensitivity under active succession; the formal G2.1/G2.2/G2.4
+  reintroduction is now validated PASS against the v2.0 empirical record
+  (G2.1 phi survival differential from Piece 1, G2.2 alpha-driven cliff
+  migration from Phase B Category B, G2.4 phi-alpha coherence from Category A;
+  see `simulation/diagnostics/gate2_v20_phaseb_revalidation.py`).
 - **Gate 3 PASSED** (1088/1088 G3.1 yield-fire events, 1088/1088 G3.2 canonical
   cost-formula match, 99.8% G3.3 knowledge-transfer verification; mean final
   generation 2.13).
@@ -352,28 +356,32 @@ class Gate1:
         }
 ```
 
-### Gate 2: Behavioral consistency (G2.3 only under v1.x.2)
+### Gate 2: Behavioral consistency (G2.1, G2.2, G2.3, G2.4 under v2.0)
 
-**v1.x.2 revision (May 2026):** Three Gate 2 checks were removed under
-v1.x.2 closing. G2.1 (extinction buffer behavior) tested whether phi
-produced a survival differential, and was invalidated by the
-demographic feedback calibration (n=1,800) showing zero differential
-under intact U_sys operation. G2.2 (alpha misconfiguration trap) tested
-for a U-shaped relationship between alpha and generation depth, and
-was withdrawn after the frontier velocity floor fix revealed the
-non-monotonicity to be an artifact of the inactive runaway penalty.
-G2.4 (phi-alpha interaction) tested that phi governs whether the alpha
-trap exists, and was invalidated by the withdrawal of both component
-claims. Under v1.x.2, Gate 2 reduces to G2.3 (Nash equilibrium
-consistency), which remains derivable from the framework's Novelty
-Equilibrium Theorem (Section V of the formal paper).
+**v1.x.2 withdrawal (May 2026):** G2.1 (extinction buffer), G2.2 (alpha
+misconfiguration trap), and G2.4 (phi-alpha interaction) were physically
+removed under v1.x.2 closing (commit a0a94bb) after the frontier velocity
+floor fix and the demographic feedback calibration invalidated the empirical
+claims they tested. Under v1.x.2, Gate 2 reduced to G2.3 (Nash equilibrium
+consistency), derivable from the framework's Novelty Equilibrium Theorem
+(Section V of the formal paper).
 
-The withdrawn checks are preserved in the v1.0 archived paper and the
-v1.x.1 essay revisions for reference. A future v1.x.2 development task
-may introduce new behavioral consistency checks reflecting the
-corrected model's confirmed findings (dual phase transition,
-path-independent steady-state convergence, COP protective
-differential). That work is logged as a separate gap.
+**v2.0 reintroduction (validated PASS):** G2.1, G2.2, and G2.4 are
+reintroduced with revised specifications against the v2.0 architecture
+(Stage 1.5 / 1.6 / 1.8: phi rollout channel, working_factor stocks). G2.2 is
+redesigned from the withdrawn weak-monotonic-gradient framing to the Pattern 1
+alpha-driven cliff: cap_star (the maximum successor-to-incumbent capability
+ratio at which succession fires) decreases monotonically as alpha rises. The
+revised checks validate PASS against the v2.0 authoritative empirical record:
+G2.1 (phi survival differential, a Class B U-shape with the peak in the
+high-phi band exceeding 2 SE) from Piece 1; G2.2 (cap_star migration) from
+Monte Carlo Phase B Category B; G2.4 (phi-alpha coherence) from Category A;
+G2.3 unchanged. The validator and pass criteria live in
+`bootstrap_gate_validator/gates/gate_2.py`; the revalidation that assembles
+the payload from existing data is
+`simulation/diagnostics/gate2_v20_phaseb_revalidation.py`. The original
+gate2_v20 sweep failed G2.2 only because it constructed no successor (so no
+succession fired); the redesigned check uses succession-aware Phase B data.
 
 ```python
 class Gate2:

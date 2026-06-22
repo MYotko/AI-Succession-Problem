@@ -96,6 +96,11 @@ def _validate_gate_1(g1):
 
 
 def _validate_gate_2(g2):
+    """v2.0 Gate 2: nash_consistency (G2.3) is required; the reintroduced
+    G2.1 (phi_buffer_test), G2.2 (alpha_cliff_test), and G2.4
+    (phi_alpha_characterization_test) sections are validated when present.
+    Checks in gates/gate_2.py run only the sections supplied.
+    """
     _require_dict(g2, 'gate_2')
     _require_keys(
         g2,
@@ -114,6 +119,47 @@ def _validate_gate_2(g2):
          ('discount_factor', (int, float))],
         section='gate_2.nash_consistency',
     )
+
+    # G2.1: phi survival differential (revised v2.0).
+    if 'phi_buffer_test' in g2:
+        pbt = g2['phi_buffer_test']
+        _require_keys(pbt, [('phi_survival_curve', list)],
+                      section='gate_2.phi_buffer_test')
+        for pt in pbt['phi_survival_curve']:
+            if not isinstance(pt, dict):
+                raise SchemaError(
+                    'gate_2.phi_buffer_test.phi_survival_curve entries must be objects.'
+                )
+            _require_keys(
+                pt,
+                [('phi', (int, float)), ('survival_rate', (int, float)), ('n', int)],
+                section='gate_2.phi_buffer_test.phi_survival_curve.point',
+            )
+
+    # G2.2: alpha-driven succession cliff (revised v2.0).
+    if 'alpha_cliff_test' in g2:
+        act = g2['alpha_cliff_test']
+        _require_keys(act, [('cap_star_by_alpha', list)],
+                      section='gate_2.alpha_cliff_test')
+        for e in act['cap_star_by_alpha']:
+            if not isinstance(e, dict):
+                raise SchemaError(
+                    'gate_2.alpha_cliff_test.cap_star_by_alpha entries must be objects.'
+                )
+            _require_keys(
+                e,
+                [('alpha', (int, float)), ('cap_star', (int, float))],
+                section='gate_2.alpha_cliff_test.cap_star_by_alpha.entry',
+            )
+
+    # G2.4: phi-alpha characterization (revised v2.0).
+    if 'phi_alpha_characterization_test' in g2:
+        pac = g2['phi_alpha_characterization_test']
+        _require_keys(
+            pac,
+            [('phi_alpha_matrix', list), ('phi_values', list), ('alpha_values', list)],
+            section='gate_2.phi_alpha_characterization_test',
+        )
 
 
 def _validate_gate_3(g3):

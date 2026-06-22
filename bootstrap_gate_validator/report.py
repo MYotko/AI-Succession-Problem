@@ -7,6 +7,11 @@ import json
 # substantive measurements the operator wants visible without inspecting the
 # JSON output. Failed checks still dump full details.
 _PASS_HIGHLIGHT_KEYS = {
+    'G2.1': ('peak_phi', 'differential', 'two_se_threshold', 'peak_in_range'),
+    'G2.2': ('alphas', 'cap_stars', 'monotonic_non_increasing',
+             'net_decrease_low_to_high'),
+    'G2.4': ('interaction_type', 'phi_effect_at_low_alpha',
+             'phi_effect_at_high_alpha'),
     'G4.1': ('active_runaway_observations', 'relative_tolerance',
              'failure_count'),
     'G4.2': ('regime_count', 'min_below_fire_rate',
