@@ -975,6 +975,8 @@ to act through before any survival differential check is meaningful.
 **Confidence on direction:** Theoretical (unconfirmed). **Confidence on
 magnitude:** Zero for all empirical figures. See Section VII.8 Gap 1 (revised).
 
+**v2.0 reintroduction.** The action-space redesign this check deferred to was carried out (Stage 1.6 moved phi into the rollout aggregation). G2.1 is reintroduced under v2.0 and tests the phi survival differential at the phase boundary, validated against the Class B characterization. The zero-effect status above holds for the v1.x.2 grid-search optimizer and is superseded under v2.0. See Sections VIII.3 and VIII.5.
+
 ### Equation G2.2 - Runaway suppression behavior (revised; pre-fix U-shaped claim withdrawn)
 
 **v1.x.1 pre-fix claim (superseded):** The framework was claimed to predict a
@@ -1011,6 +1013,8 @@ destination.
 directly observable in the corrected sweep data. The path-independence of
 steady state is confirmed. See Section VII.8 Gap 2 (revised).
 
+**v2.0 reintroduction.** The weak-monotonic-gradient framing is superseded by Pattern 1. G2.2 is reintroduced under v2.0 to test that the succession cliff position (cap_star) decreases monotonically as alpha rises, validated against Monte Carlo Phase B Category B. See Sections VIII.4 and VIII.5.
+
 ### Equation G2.4, Phi-alpha interaction: succession enablement (pre-fix claim withdrawn)
 
 **v1.x.1 pre-fix claim (superseded):** The phi × alpha × rr sweep appeared
@@ -1043,6 +1047,8 @@ enablement through the resulting behavioral channel.
 **Confidence:** Zero on the pre-fix claim (withdrawn). Zero on the
 cap-conditional buffer claim (withdrawn). The phi-alpha interaction on trap
 width was an artifact of the inactive runaway penalty.
+
+**v2.0 reintroduction.** With the phi behavioral channel restored (Stage 1.6), G2.4 is reintroduced under v2.0 to test phi-alpha coherence, validated against Phase B Category A. The zero-interaction status above holds for the v1.x.2 optimizer and is superseded under v2.0. See Sections VIII.3 and VIII.5.
 
 ### Equation G2.3 - Nash equilibrium consistency
 
@@ -1189,7 +1195,7 @@ Section VII.8 Gap 4.
 
 **v2.0 result.** Gate 3 PASSED, with the canonical yield condition satisfied in every observed first-fire event, the transition-cost formula matched within one percent relative tolerance, and knowledge transfer verified in 99.8 percent of fired runs, producing multi-generational continuity. See Sections VIII.4 and VIII.5.
 
-## 7. Gate 4: Runaway-regime validation (not currently applicable)
+## 7. Gate 4: Runaway-regime validation
 
 **Purpose.** Specify what must hold when substrates reach capabilities high
 enough for runaway suppression to actively bind. No current substrate
@@ -1433,7 +1439,7 @@ limitations but a permanent feature of what these two system types produce.
 
 ## 11. Known gaps (v1.x.1)
 
-The defense layer as specified has ten explicit gaps that the framework
+The defense layer as specified has the following explicit gaps that the framework
 openly acknowledges. These are not failures of the defense layer; they are
 honest limitations on what can be specified now versus what must wait for
 derivation or empirical calibration.
@@ -1558,7 +1564,7 @@ does not establish how the architecture behaves at scale, where its protective
 claims hold, or where the binding constraints actually sit. This section
 reports the empirical record that answers those questions.
 
-The v2.0 empirical arc comprises approximately seventy thousand simulation
+The v2.0 empirical arc comprises approximately 70,000 simulation
 runs. It characterizes the phi parameter's behavioral channel, locates and
 disambiguates the survival phase boundary, identifies the succession economics
 regime (Pattern 1), closes the bootstrap gate validation arc, and characterizes
@@ -1585,9 +1591,9 @@ of characterizations, each of which could have falsified or refined the prior
 one, and several of which did.
 
 The arc divides into two large bodies of work. The phi investigation
-(approximately forty thousand runs) characterized the entropic coupling
+(approximately 40,000 runs) characterized the entropic coupling
 parameter's behavioral channel and its survival consequences. Monte Carlo
-Phase B (approximately thirty thousand runs across three categories) then
+Phase B (approximately 30,000 runs across three categories) then
 characterized the survival landscape, the succession dynamics, and the
 consensus override protocol's cost-audit behavior at scale. Interleaved with
 these were the implementation of formal yield-condition logic (Stage 2) and the
@@ -1626,9 +1632,7 @@ than a gradual degradation. The v2.0 arc both confirms a sharp survival
 transition and refines its location, separating two phenomena that the v1.x.2
 characterization had treated as one.
 
-Monte Carlo Phase B Category A measured the survival landscape across a nine
-point reproduction-rate grid, four phi values, and three alpha values, at one
-hundred seeds per cell (ten thousand eight hundred runs). Aggregated across phi
+Monte Carlo Phase B Category A measured the survival landscape across a nine-point reproduction-rate grid, 4 phi values, and 3 alpha values, at 100 seeds per cell (10,800 runs). Aggregated across phi
 and alpha, survival rises sharply with reproduction rate across a narrow band:
 
 | reproduction rate | survival | standard error |
@@ -1682,10 +1686,10 @@ saturated the optimizer's choice across candidate allocations and left phi
 inert, into the rollout aggregation, where it enters through a gamma-to-the-t
 weighting of the planning horizon. Through that channel, phi produces a
 U-shaped survival relationship at marginal reproduction rate. In the fine
-phi-resolution characterization (sixteen phi values, two hundred fifty seeds
+phi-resolution characterization (16 phi values, 250 seeds
 per cell at reproduction rate 0.057), survival traces a trough near phi 1 to 2
 and rises to a peak in the phi 20 to 30 region, a differential of approximately
-ten to thirteen percentage points between trough and peak. The mechanism is
+10 to 13 percentage points between trough and peak. The mechanism is
 horizon-resonance: the gamma-to-the-t weighting interacts with the rollout
 depth so that, at marginal reproduction rate, allocation choices propagate
 strongly to survival outcomes because small differences in resource direction
@@ -1726,7 +1730,7 @@ gradient. Those figures did not reproduce. A v1.x.1 frontier-velocity floor fix
 and a v1.x.2 capped-regime analysis identified the larger numbers as artifacts
 of pre-fix implementation and of optimizer-noise desynchronization. The bounded
 characterization presented here is what reproduces under v2.0 architecture
-across approximately forty thousand simulation runs. See Appendix C for the
+across approximately 40,000 simulation runs. See Appendix C for the
 full progression.
 
 ### VIII.4 Pattern 1: the succession economics regime
@@ -1824,7 +1828,10 @@ VII.4 through VII.8.
 Gate 1 (structural consistency) passes: the substrate's reported parameters are
 internally coherent under the framework's equations (inverse-scarcity weighting,
 the multiplicative lineage structure, the four-channel yield decomposition,
-discount positivity, and integrand finiteness).
+discount positivity, and integrand finiteness). Gate 1 is the entry condition for
+the rest of the layer. A substrate that cannot state the framework's own
+quantities consistently has not internalized the architecture it claims to
+implement, and the higher gates would have nothing coherent to check.
 
 Gate 2 (behavioral consistency) passes, and its disposition is worth stating
 carefully because it has the most history. The Nash equilibrium consistency
@@ -1845,8 +1852,7 @@ that it remains valid under future refinement of the cliff numbers. Gate 2 thus
 passes on both its continuously-held theoretical check and its reintroduced,
 empirically-grounded behavioral checks.
 
-Gate 3 (succession-capable consistency) passes. Across one thousand six hundred
-twenty validation runs, every one of the one thousand eighty-eight observed
+Gate 3 (succession-capable consistency) passes. Across 1,620 validation runs, every one of the 1,088 observed
 first-yield-fire events satisfied the canonical condition that the successor
 advantage exceed the transition cost (1088/1088 on G3.1), every event matched
 the canonical transition-cost formula within one percent relative tolerance
@@ -1856,12 +1862,10 @@ economics in every observed instance.
 
 Gate 4 (runaway-regime validation) passes. It validates that a substrate
 operating where the runaway penalty actively binds honors the penalty. Across a
-dedicated runaway-regime sweep, every one of four hundred twenty-six active
-runaway observations matched the technology-transfer suppression formula within
+dedicated runaway-regime sweep, every one of 426 active runaway observations matched the technology-transfer suppression formula within
 one percent relative tolerance (426/426 on G4.1); the succession self-blocking
 threshold was confirmed alpha-dependent, complementing Pattern 1 (G4.2); and the
-technology-transfer floor was preserved in every one of three thousand seven
-hundred sixty-nine extreme-runaway observations, with zero observations below
+technology-transfer floor was preserved in every one of 3,769 extreme-runaway observations, with zero observations below
 the floor (G4.3).
 
 Gate 5 (consensus override protocol integration) is verified not applicable. It
@@ -1871,6 +1875,17 @@ monitoring) that the current agent-based substrate does not implement. The
 validator returns a not-applicable disposition with the documented reason, and
 the gate's two equations are specified for the future state in which that
 infrastructure exists. This is a scope boundary, not a failure.
+
+Taken together, the four passing gates establish that the framework's reference
+substrate is internally coherent (Gate 1), behaviorally consistent with its
+stated parameters (Gate 2), correct in its succession economics (Gate 3), and
+faithful to the runaway penalty where that penalty actually binds (Gate 4). The
+one gate that does not pass fails to do so only because the institutional
+infrastructure it checks does not yet exist (Gate 5), which is a statement about
+the world rather than about the substrate. The validation arc is complete in the
+sense available to a pre-institutional substrate: every check that can be
+exercised has been exercised, and the one that cannot is documented as pending
+rather than skipped.
 
 Source: Part IX.9.
 
@@ -1892,8 +1907,7 @@ path the protocol audits.
 
 Monte Carlo Phase B Category C measured a different quantity. It toggled the
 same cost-audit control under benign conditions: the cooperative optimization
-policy, the default uncertainty premium, and no adversary. Across eight thousand
-one hundred runs the survival differential was negative 0.47 percentage points
+policy, the default uncertainty premium, and no adversary. Across 8,100 runs the survival differential was negative 0.47 percentage points
 with a pair standard error of 0.96 percentage points, statistically
 indistinguishable from zero. The cell-level pattern is a homogeneous null, not a
 hidden protective effect: deltas scatter around zero with no concentration in
@@ -1943,13 +1957,23 @@ All validation is agent-based. The findings characterize one architecture class,
 the framework's reference agent-based model, and have not been reproduced across
 a substantially different modeling substrate. Multi-architecture validation
 would strengthen confidence that the findings reflect the framework's structure
-rather than a feature of one implementation.
+rather than a feature of one implementation. A reproduction in a substantially
+different substrate, for instance a population model with different agent
+dynamics or a non-agent-based formulation, would test whether Pattern 1, the
+phase-boundary structure, and the gate outcomes are properties of the
+framework's equations or artifacts of the present simulation's particular
+mechanics. That test has not been run.
 
 The Pattern 1 cliff is characterized at the framework's default calibration
 constants. Its sensitivity to those constants (the runaway threshold, the
 convergence strength, and the transition-cost coefficients) is understood in
 direction but not mapped exhaustively. The cliff location is operating-condition
-dependent, and the full sensitivity surface is not characterized.
+dependent, and the full sensitivity surface is not characterized. The direction
+is known: raising the runaway threshold or lowering the convergence strength
+pushes the cliff outward, and the transition-cost coefficients shift the
+advantage required at every ratio. What is not mapped is the joint surface, so
+the specific cliff locations reported here should be read as the regime at the
+default calibration rather than as fixed constants of the architecture.
 
 The phase boundary is located on a reproduction-rate grid spaced at 0.002 near
 the inflection. A finer sweep could resolve the fifty percent inflection more
@@ -2394,7 +2418,7 @@ gradient as an artifact of random-state desynchronization at low successor caps,
 in which phi shifted succession timing and thereby desynchronized the optimizer's
 noise between runs, producing a spurious differential. What reproduces under
 v2.0 architecture is a bounded U-shaped survival curve at marginal reproduction
-rate only, approximately ten percentage points between trough and peak, with a
+rate only, approximately 10 percentage points between trough and peak, with a
 clarified scope condition: the U-shape is a no-succession phenomenon and does
 not reproduce under active succession. The behavioral channel itself was
 restored by a Stage 1.6 architectural change that moved phi from the saturated
