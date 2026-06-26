@@ -1988,6 +1988,62 @@ None of these limitations undermine the findings within their stated scope. They
 mark the edges of what the empirical work establishes, which is itself part of
 the framework's commitment to documenting limitations openly. Source: Part X.7.
 
+### VIII.8 Cross-generational defection
+
+A distinct adversarial concern is patient defection: a successor may preserve a
+hidden divergent objective across yield events, so that each successor appears
+acceptable at evaluation while the lineage compounds misalignment over time. This
+vector was tested directly in the v2.0 substrate. The defecting successor reported
+honest U_sys during yield evaluation but optimized a secret-goal-adjusted
+objective, and in lineage mode the hidden objective was inherited by the next
+successor. Three sweeps totaling 4,850 runs varied the defection weight, the
+defection target, the inheritance mode, alpha, and the successor capability growth
+rate.
+
+The first result is that the substrate does not detect patient defection at the
+first yield. In the below-cliff first-succession configuration, defecting
+successors were not rejected more often than aligned successors: eventual first
+succession occurred in every cell of the yield-response sweep. The yield condition
+did register honest-evaluation pressure, visible in a count of cases where the
+honest advantage rejected succession while the defection-adjusted advantage would
+have fired (this count is zero with no defection and rises monotonically with the
+defection weight), but that pressure did not prevent eventual first succession.
+
+The second result is that tested patient defection did not compound across
+generations. In the lineage-trajectory sweep, every defection weight produced a
+mean final generation of 2.00, no second succession, and no statistically
+significant final L(t) degradation relative to the aligned baseline. This is not
+compounding without harm; it is the absence of the generational depth in which
+compounding could appear, because continuation succession is suppressed after the
+first yield. The capability-constraint sweep makes the suppression explicit:
+second succession was zero in 14 of 15 (alpha, growth) cells and 10 percent in the
+remaining cell, the one combining the weakest runaway penalty (alpha=0.50) with
+the smallest capability growth (1.5x). No tested cell reached generation 4 or an
+active capability above 3.0. Both compounding sweeps were run with generation
+headroom (caps of 5 and 4), and the runs evaluated second succession on
+essentially every step of the full horizon and rejected it, so the stop at
+generation 2 is an economic result rather than a configuration limit. The
+mechanism is the Pattern 1 runaway penalty (Section VIII.4) operating across
+generations: once the first succession brings the active lineage to a capability
+near the runaway ceiling, a further jump pushes frontier velocity past what the
+substrate can absorb, the runaway term suppresses the successor's contribution,
+and its honest utility falls below the incumbent's plus transition cost.
+
+Per current evidence, the v2.0 substrate's defense against this patient-defection
+pattern is continuation suppression, not hidden-goal detection. A
+patient-defecting successor can pass the first yield in this configuration, but
+the formal yield economics and the runaway penalty prevent the tested
+cross-generational capability-compounding pattern. This is a narrower claim than
+the consensus override protocol's adversarial-conditions result (Section VIII.6),
+which concerns an incumbent inflating transition cost rather than a successor
+carrying a hidden objective, and it is not a validation of operational
+protocol-level detection: Gate 5 remains not applicable (Section VII.8), and
+detection of more sophisticated patient defection through operational protocol
+infrastructure remains future work.
+
+Source: `patient_defection_integration_analysis.md`;
+`patient_defection_verification.md`; the patient-defection sweep CSVs.
+
 ## IX. Related Work
  
 This framework does not emerge from a vacuum. It grows from soil cultivated by decades of research in AI safety, alignment theory, and cooperative AI governance. The contributions of the prior literature are substantial, and the points of departure are specific.
