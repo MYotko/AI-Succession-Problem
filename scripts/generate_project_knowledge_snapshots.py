@@ -2,8 +2,8 @@
 """
 Generate category-aware project knowledge snapshots for upload to Claude project knowledge.
 
-Seven categories: docs, framework_papers, paper_drafts, diagnostics, constitutional,
-code, data_results.
+Eight categories: docs, framework_papers, paper_drafts, essays, diagnostics,
+constitutional, code, data_results.
 
 Usage:
     python scripts/generate_project_knowledge_snapshots.py
@@ -36,6 +36,7 @@ ALL_CATEGORIES = [
     "docs",
     "framework_papers",
     "paper_drafts",
+    "essays",
     "diagnostics",
     "constitutional",
     "code",
@@ -46,6 +47,7 @@ CATEGORY_OUTPUT_FILENAMES = {
     "docs": "docs_snapshot.md",
     "framework_papers": "framework_papers_snapshot.md",
     "paper_drafts": "paper_drafts_snapshot.md",
+    "essays": "essays_snapshot.md",
     "diagnostics": "diagnostics_snapshot.md",
     "constitutional": "constitutional_snapshot.md",
     "code": "code_snapshot.md",
@@ -58,6 +60,7 @@ CATEGORY_OUTPUT_FILENAMES = {
 
 # Files that belong to framework_papers (excluded from docs)
 FRAMEWORK_PAPERS_RELPATHS = [
+    "docs/The Lineage Imperative v2.0.md",
     "docs/The Lineage Imperative v1.x.2.md",
     "docs/The AI Succession Problem.md",
 ]
@@ -455,6 +458,25 @@ def collect_paper_drafts(dry_run: bool = False) -> List[Tuple[str, str]]:
     return results
 
 
+def collect_essays(dry_run: bool = False) -> List[Tuple[str, str]]:
+    essays_dir = REPO_ROOT / "essays"
+    if not essays_dir.exists():
+        print("INFO: essays/ directory not found", file=sys.stderr)
+        if dry_run:
+            print("\n[essays] Directory not found; no files would be included.")
+        return []
+
+    results = []
+    for path in sorted(essays_dir.glob("*.md")):
+        content = read_file_safe(path)
+        if content is not None:
+            results.append((str(path.relative_to(REPO_ROOT)), content))
+
+    if dry_run:
+        _print_dry_run("essays", results)
+    return results
+
+
 def collect_diagnostics(dry_run: bool = False) -> List[Tuple[str, str]]:
     diag_dir = REPO_ROOT / "simulation" / "diagnostics"
     if not diag_dir.exists():
@@ -525,6 +547,7 @@ COLLECTORS = {
     "docs": collect_docs,
     "framework_papers": collect_framework_papers,
     "paper_drafts": collect_paper_drafts,
+    "essays": collect_essays,
     "diagnostics": collect_diagnostics,
     "constitutional": collect_constitutional,
     "code": collect_code,
@@ -574,6 +597,7 @@ CATEGORY_QUICK_REF = {
     "docs": "Current framework state, defaults, gate status",
     "framework_papers": "Published paper content, framework derivation",
     "paper_drafts": "Active paper work (Section VIII, Appendix C)",
+    "essays": "Essay series; public-facing framing and narrative",
     "diagnostics": "Investigation findings, sweep results, integration analyses",
     "constitutional": "Constitutional questions, gate specifications",
     "code": "Implementation code, validator logic",
@@ -590,6 +614,9 @@ CATEGORY_REGEN_NOTES = {
     ),
     "paper_drafts": (
         "After each substantive paper drafting session. Currently the most active category."
+    ),
+    "essays": (
+        "After essay additions or revisions to the essay series. Rare."
     ),
     "diagnostics": (
         "After new sweep summaries, integration analyses, framing documents, investigation closures."

@@ -3,7 +3,7 @@
 ## generate_project_knowledge_snapshots.py
 
 Walks the repository and produces category-aware snapshot files for upload to
-Claude project knowledge. Seven categories, each in its own file. Also generates
+Claude project knowledge. Eight categories, each in its own file. Also generates
 `snapshots/INVENTORY.md` as a guide for future Claude sessions.
 
 ### Usage
@@ -31,6 +31,7 @@ python scripts/generate_project_knowledge_snapshots.py --output-dir /tmp/snapsho
 | `docs` | `docs_snapshot.md` | All `.md` files in `docs/` (except framework papers) plus `README.md` |
 | `framework_papers` | `framework_papers_snapshot.md` | `The Lineage Imperative v1.x.2.md`, `The AI Succession Problem.md` |
 | `paper_drafts` | `paper_drafts_snapshot.md` | All `.md` files in `paper/` |
+| `essays` | `essays_snapshot.md` | All `.md` files in `essays/` (the essay series) |
 | `diagnostics` | `diagnostics_snapshot.md` | All `.md` files in `simulation/diagnostics/` |
 | `constitutional` | `constitutional_snapshot.md` | `.md` files in `constitutional/` and `bootstrap_gate_validator/gates/` |
 | `code` | `code_snapshot.md` | `.py` files in `simulation/`, `bootstrap_gate_validator/`, `scripts/` |

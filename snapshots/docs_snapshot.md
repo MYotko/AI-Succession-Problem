@@ -1,8 +1,8 @@
 # Docs Snapshot
 
-Generated: 2026-06-23T18:08:53Z
+Generated: 2026-06-28T17:05:40Z
 Repository: /home/yotko/Documents/Github/ai-succession-problem
-Commit: ce3956a
+Commit: 365f724
 Branch: main
 Category: docs
 
@@ -19,11 +19,11 @@ Category: docs
 | docs/glossary.md | 633 | 26043 |
 | docs/lineage_imperative_one_pager_v1.md | 80 | 10128 |
 | docs/lineage_imperative_one_pager_v2.md | 80 | 9428 |
-| docs/lineage_phi_program_reference.md | 1691 | 146484 |
+| docs/lineage_phi_program_reference.md | 1707 | 149983 |
 | docs/paper_v2_outline.md | 337 | 17204 |
 | README.md | 58 | 5161 |
 
-Total: 12 files, 5479 lines, 372228 bytes
+Total: 12 files, 5495 lines, 375727 bytes
 
 ---
 ==========================================
@@ -5161,6 +5161,22 @@ The paper-ready quantitative claims, with confidence intervals and supporting da
 3. The v2.0-versus-v1.x.2 like-for-like COP comparison (Interpretation B) is untested rather than refuted. The clean experiment is defined in `cop_finding_framing.md` section 5.
 4. The survival-rate phase boundary is located to a 0.060 to 0.066 band on a grid spaced at 0.002 near the inflection. A targeted sweep would pin the 50% inflection to plus or minus 0.001 (Part IX.11).
 5. Conditions outside the Phase B grid (finer phi near marginal rr, longer horizons, varied `beta_cap`) remain open.
+
+### X.8 Patient defection under v2.0 substrate
+
+A targeted patient-defection investigation tested cross-generational hidden-goal persistence under v2.0 formal yield logic. The defecting successor reported honest U_sys for yield evaluation but optimized an agent-local secret-goal-adjusted objective; in lineage mode the hidden objective was inherited by the next successor. Three sweeps totaling 4,850 rows completed with 0 errors (Sweep 1 yield response to single-generation defection, Sweep 2 lineage L(t) trajectory, Sweep 3 capability accumulation under lineage defection). The substrate extension (`simulation/defection.py` plus hooks in `agents.py` and `model.py`) is verified inert when defection is disabled: the optimizer scores on the adjusted objective, which equals honest U_sys at defection weight 0; successor capability growth defaults to the original 1.5; and 39/39 legacy tests pass.
+
+The result refines the adversarial-robustness claim in three parts:
+
+1. No first-yield detection. First-generation defecting successors were not rejected more often than aligned successors in the below-cliff configuration: eventual yield-fire rate was 100 percent in every Sweep 1 cell. The yield condition did create honest-evaluation pressure, visible in the count of cases where the honest advantage rejected succession while the defection-adjusted advantage would have fired (0 at defection weight 0, rising monotonically to 1.50 for H_N inflation at weight 2.0), but that pressure did not prevent eventual first succession.
+
+2. No observed L(t) compounding. Sweep 2 produced mean final generation 2.00 at all tested defection weights, with zero second-fire rate and no statistically significant final L(t) degradation versus the aligned baseline. The reason is the absence of generational depth in which compounding could appear, not compounding without harm.
+
+3. Continuation suppression. Sweep 3 showed second-fire rate 0 percent in 14 of 15 (alpha, growth) cells and 10 percent only at alpha=0.50 with 1.5x capability growth; no tested cell reached generation 4 or active capability above 3.0. Both compounding sweeps ran with generation headroom (caps of 5 and 4) and evaluated and rejected second succession across the full horizon, so the stop at generation 2 is economic rather than a configuration limit. The mechanism is the Pattern 1 runaway penalty (X.3, IX.8) acting as an absolute-capability ceiling across generations.
+
+Substantive interpretation: current v2.0 substrate defense against this patient-defection pattern is continuation suppression, not first-yield detection and not operational COP detection. The substrate permits a first hidden-goal successor in this below-cliff configuration, then prevents the tested cross-generational capability-compounding pattern. Gate 5 remains NOT_APPLICABLE for operational patient-defection detection (peer validators, civic panel input, distributed ledger, and continuous public monitoring are outside the current simulation substrate). The independent verification (`simulation/diagnostics/patient_defection_verification.md`) confirmed the findings and flagged that the `mean_actual_minus_honest_objective` diagnostic column is mislabeled and should not be cited.
+
+Sources: `simulation/diagnostics/patient_defection_sweep1_yield_response.csv`, `patient_defection_sweep2_lineage_trajectory.csv`, `patient_defection_sweep3_capability_constraint.csv`, `patient_defection_integration_analysis.md`, `patient_defection_verification.md`.
 
 ---
 

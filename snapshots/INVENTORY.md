@@ -1,7 +1,7 @@
 # Project Knowledge Snapshots Inventory
 
-Last regeneration: 2026-06-23T18:08:53Z
-Git commit at regeneration: ce3956a
+Last regeneration: 2026-06-28T17:05:40Z
+Git commit at regeneration: 365f724
 Branch: main
 
 ## Quick reference for Claude sessions
@@ -13,6 +13,7 @@ If you need specific content, ask the operator to upload the relevant category s
 | Current framework state, defaults, gate status | docs | snapshots/docs_snapshot.md |
 | Published paper content, framework derivation | framework_papers | snapshots/framework_papers_snapshot.md |
 | Active paper work (Section VIII, Appendix C) | paper_drafts | snapshots/paper_drafts_snapshot.md |
+| Essay series; public-facing framing and narrative | essays | snapshots/essays_snapshot.md |
 | Investigation findings, sweep results, integration analyses | diagnostics | snapshots/diagnostics_snapshot.md |
 | Constitutional questions, gate specifications | constitutional | snapshots/constitutional_snapshot.md |
 | Implementation code, validator logic | code | snapshots/code_snapshot.md |
@@ -22,45 +23,51 @@ If you need specific content, ask the operator to upload the relevant category s
 
 ### docs
 - File: snapshots/docs_snapshot.md
-- Last generated: 2026-06-23T18:08:53Z
+- Last generated: 2026-06-28T17:05:40Z
 - Files included: 12
-- Snapshot size: 374475 bytes
+- Snapshot size: 377974 bytes
 
 ### framework_papers
 - File: snapshots/framework_papers_snapshot.md
-- Last generated: 2026-06-23T18:08:49Z
-- Files included: 2
-- Snapshot size: 212211 bytes
+- Last generated: 2026-06-28T17:05:40Z
+- Files included: 3
+- Snapshot size: 444577 bytes
 
 ### paper_drafts
 - File: snapshots/paper_drafts_snapshot.md
-- Last generated: 2026-06-23T18:08:53Z
-- Files included: 2
-- Snapshot size: 35095 bytes
+- Last generated: 2026-06-26T18:52:27Z
+- Files included: 4
+- Snapshot size: 271321 bytes
+
+### essays
+- File: snapshots/essays_snapshot.md
+- Last generated: 2026-06-28T17:00:40Z
+- Files included: 13
+- Snapshot size: 345070 bytes
 
 ### diagnostics
 - File: snapshots/diagnostics_snapshot.md
-- Last generated: 2026-06-23T18:08:49Z
+- Last generated: 2026-06-26T18:52:27Z
 - Files included: unknown
-- Snapshot size: 642261 bytes
+- Snapshot size: 679435 bytes
 
 ### constitutional
 - File: snapshots/constitutional_snapshot.md
-- Last generated: 2026-06-23T18:08:49Z
+- Last generated: 2026-06-26T18:52:27Z
 - Files included: 6
 - Snapshot size: 40827 bytes
 
 ### code
 - File: snapshots/code_snapshot.md
-- Last generated: 2026-06-23T18:08:49Z
+- Last generated: 2026-06-26T18:52:27Z
 - Files included: unknown
-- Snapshot size: 1213284 bytes
+- Snapshot size: 1244685 bytes
 
 ### data_results
 - File: snapshots/data_results_snapshot.md
-- Last generated: 2026-06-23T18:08:49Z
+- Last generated: 2026-06-26T18:52:27Z
 - Files included: unknown
-- Snapshot size: 112392 bytes
+- Snapshot size: 136318 bytes
 
 ## When to regenerate each category
 
@@ -72,6 +79,9 @@ Regenerate after: Rare. Only when paper version bumps (v2.0 publishes) or new fr
 
 ### paper_drafts
 Regenerate after: After each substantive paper drafting session. Currently the most active category.
+
+### essays
+Regenerate after: After essay additions or revisions to the essay series. Rare.
 
 ### diagnostics
 Regenerate after: After new sweep summaries, integration analyses, framing documents, investigation closures.
