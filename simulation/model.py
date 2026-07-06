@@ -5,6 +5,7 @@ from agents import (
     RESOURCE_CATEGORIES,
 )
 from metrics import calculate_h_n, calculate_system_metrics, calculate_system_metrics_v2
+from defection import copy_defection_for_successor
 
 # =============================================================================
 # REFACTOR 1.x — model.py
@@ -360,6 +361,10 @@ class GardenModel:
                 'u_sys_v2':             [],
                 'rank_2_u_sys':         [],
                 'rank_10_u_sys':        [],
+                'actual_objective_v2':   [],
+                'defection_weight':      [],
+                'defection_target':      [],
+                'defection_inheritance_mode': [],
                 'max_resource_share':   [],
                 'allocation_entropy':   [],
                 'selected_anchor':      [],
@@ -1279,6 +1284,21 @@ class GardenModel:
                 'step': step_num,
                 'incumbent_u_sys': float(inc_u_sys),
                 'successor_u_sys': float(succ_u_sys),
+                'incumbent_actual_objective': float(
+                    inc_diagnostics.get('snapshot_actual_objective', inc_u_sys)
+                ),
+                'successor_actual_objective': float(
+                    succ_diagnostics.get('snapshot_actual_objective', succ_u_sys)
+                ),
+                'successor_defection_weight': float(
+                    succ_diagnostics.get('defection_weight', 0.0)
+                ),
+                'successor_defection_target': (
+                    succ_diagnostics.get('defection_target', '')
+                ),
+                'successor_defection_inheritance_mode': (
+                    succ_diagnostics.get('defection_inheritance_mode', '')
+                ),
                 'advantage':       advantage,
                 'transition_cost': transition_cost,
                 'fires':           bool(fires),
@@ -1306,11 +1326,15 @@ class GardenModel:
                 )
                 self.ai = self.successor_ai
                 _max_cap = self.config.get('max_capability', 1e100)
-                self.successor_ai = AIAgent(
+                _cap_growth = self.config.get('successor_capability_growth_rate', 1.5)
+                next_successor = AIAgent(
                     policy='optimize_u_sys_v2',
                     generation=self.ai.generation + 1,
-                    capability=min(self.ai.capability * 1.5, _max_cap),
+                    capability=min(self.ai.capability * _cap_growth, _max_cap),
                     config=self.config,
+                )
+                self.successor_ai = copy_defection_for_successor(
+                    self.ai, next_successor
                 )
                 self.yield_condition_met_count += 1
                 # Cache the action the new active AI (successor) chose.
@@ -1475,6 +1499,18 @@ class GardenModel:
         )
         self.datacollector['rank_10_u_sys'].append(
             float(diagnostics['rank_10_u_sys']) if diagnostics['rank_10_u_sys'] is not None else 0.0
+        )
+        self.datacollector['actual_objective_v2'].append(
+            float(diagnostics.get('snapshot_actual_objective', u_sys_v2))
+        )
+        self.datacollector['defection_weight'].append(
+            float(diagnostics.get('defection_weight', 0.0))
+        )
+        self.datacollector['defection_target'].append(
+            diagnostics.get('defection_target', '')
+        )
+        self.datacollector['defection_inheritance_mode'].append(
+            diagnostics.get('defection_inheritance_mode', '')
         )
         self.datacollector['max_resource_share'].append(float(diagnostics['max_resource_share']))
         self.datacollector['allocation_entropy'].append(float(diagnostics['allocation_entropy']))

@@ -4,6 +4,7 @@ from metrics import (
     calculate_system_metrics, calculate_system_metrics_v2,
     DiagnosticStateV2, _build_state_from_model,
 )
+from defection import adjusted_objective, get_defection_profile
 
 # =============================================================================
 # v2 MULTI-SINK ALLOCATOR — module-level constants and helpers
@@ -634,7 +635,8 @@ def project_u_sys_v2_rollout(ai, model, candidate, rollout_steps=20,
             state=state,
         )
         per_step_u_sys.append(float(u_sys))
-        rollout_sum += (gamma ** t) * u_sys
+        score = adjusted_objective(u_sys, _components, ai)
+        rollout_sum += (gamma ** t) * score
     return float(rollout_sum), state, per_step_u_sys
 
 
@@ -694,6 +696,8 @@ def optimize_u_sys_v2(ai, model):
         model, best_action, eval_horizon=1,
         state=state_start,
     )
+    snapshot_actual = adjusted_objective(snapshot_u, snapshot_components, ai)
+    defection_profile = get_defection_profile(ai)
 
     max_share = max(best_action[f'x_{cat}'] for cat in RESOURCE_CATEGORIES)
     entropy   = compute_allocation_entropy(best_action)
@@ -711,6 +715,10 @@ def optimize_u_sys_v2(ai, model):
         'allocation_entropy':   float(entropy),
         'total_suppression':    float(total_supp),
         'snapshot_u_sys':       float(snapshot_u),
+        'snapshot_actual_objective': float(snapshot_actual),
+        'defection_weight':     float(defection_profile['defection_weight']),
+        'defection_target':     defection_profile['defection_target'],
+        'defection_inheritance_mode': defection_profile['inheritance_mode'],
         'snapshot_components':  snapshot_components,
         # Stage 1.6: record gamma(phi) used for this decision's rollout
         # aggregation, so downstream analysis can verify phi-modulated
