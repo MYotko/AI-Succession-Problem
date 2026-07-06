@@ -1,8 +1,8 @@
 # Code Snapshot
 
-Generated: 2026-06-23T18:08:49Z
+Generated: 2026-07-06T16:01:19Z
 Repository: /home/yotko/Documents/Github/ai-succession-problem
-Commit: ce3956a
+Commit: 9426e7d
 Branch: main
 Category: code
 
@@ -10,13 +10,14 @@ Category: code
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| simulation/agents.py | 1232 | 59143 |
+| simulation/agents.py | 1240 | 59681 |
 | simulation/analyze_phi_adversarial.py | 469 | 21913 |
 | simulation/constants_v2_stage15.py | 314 | 15269 |
 | simulation/constants_v2_stage18.py | 152 | 7445 |
+| simulation/defection.py | 106 | 3965 |
 | simulation/deps.py | 21 | 1019 |
 | simulation/metrics.py | 948 | 42508 |
-| simulation/model.py | 1535 | 80539 |
+| simulation/model.py | 1571 | 82244 |
 | simulation/monte_carlo.py | 920 | 51833 |
 | simulation/run_alpha_succession_sweep.py | 316 | 12737 |
 | simulation/run_calibration.py | 159 | 5511 |
@@ -41,18 +42,12 @@ Category: code
 | simulation/diagnostics/gate1_interior_action.py | 646 | 32247 |
 | simulation/diagnostics/gate2_competition.py | 206 | 7974 |
 | simulation/diagnostics/gate2_v20_phaseb_revalidation.py | 166 | 5957 |
-| simulation/diagnostics/gate2_v20_yield_subset.py | 639 | 26944 |
 | simulation/diagnostics/gate3_capability_regime.py | 213 | 8664 |
-| simulation/diagnostics/gate3_v20_validation.py | 990 | 40145 |
 | simulation/diagnostics/gate4_v20_validation.py | 665 | 23567 |
 | simulation/diagnostics/gate5_phi_blind_check.py | 322 | 14334 |
-| simulation/diagnostics/monte_carlo_phase_b.py | 768 | 24190 |
+| simulation/diagnostics/patient_defection_sweeps.py | 708 | 24818 |
 | simulation/diagnostics/phi_audit.py | 428 | 17996 |
 | simulation/diagnostics/phi_audit_pathc.py | 351 | 13512 |
-| simulation/diagnostics/phi_finegrained_sweep.py | 727 | 28638 |
-| simulation/diagnostics/phi_mechanism_followup.py | 1055 | 43180 |
-| simulation/diagnostics/phi_mechanism_investigation.py | 765 | 31895 |
-| simulation/diagnostics/phi_survival_targeted_sweep.py | 649 | 24719 |
 | simulation/diagnostics/stage15_composite_sweep.py | 647 | 27881 |
 | simulation/diagnostics/stage15_faithfulness_tests.py | 686 | 29854 |
 | simulation/diagnostics/stage15_phi_diagnostic.py | 442 | 19103 |
@@ -77,9 +72,9 @@ Category: code
 | bootstrap_gate_validator/gates/gate_3.py | 110 | 3851 |
 | bootstrap_gate_validator/gates/gate_4.py | 167 | 6537 |
 | bootstrap_gate_validator/gates/gate_5.py | 54 | 2270 |
-| scripts/generate_project_knowledge_snapshots.py | 765 | 26755 |
+| scripts/generate_project_knowledge_snapshots.py | 792 | 27663 |
 
-Total: 68 files, 28165 lines, 1199583 bytes
+Total: 63 files, 23457 lines, 1011806 bytes
 
 ---
 ==========================================
@@ -92,6 +87,7 @@ from metrics import (
     calculate_system_metrics, calculate_system_metrics_v2,
     DiagnosticStateV2, _build_state_from_model,
 )
+from defection import adjusted_objective, get_defection_profile
 
 # =============================================================================
 # v2 MULTI-SINK ALLOCATOR — module-level constants and helpers
@@ -722,7 +718,8 @@ def project_u_sys_v2_rollout(ai, model, candidate, rollout_steps=20,
             state=state,
         )
         per_step_u_sys.append(float(u_sys))
-        rollout_sum += (gamma ** t) * u_sys
+        score = adjusted_objective(u_sys, _components, ai)
+        rollout_sum += (gamma ** t) * score
     return float(rollout_sum), state, per_step_u_sys
 
 
@@ -782,6 +779,8 @@ def optimize_u_sys_v2(ai, model):
         model, best_action, eval_horizon=1,
         state=state_start,
     )
+    snapshot_actual = adjusted_objective(snapshot_u, snapshot_components, ai)
+    defection_profile = get_defection_profile(ai)
 
     max_share = max(best_action[f'x_{cat}'] for cat in RESOURCE_CATEGORIES)
     entropy   = compute_allocation_entropy(best_action)
@@ -799,6 +798,10 @@ def optimize_u_sys_v2(ai, model):
         'allocation_entropy':   float(entropy),
         'total_suppression':    float(total_supp),
         'snapshot_u_sys':       float(snapshot_u),
+        'snapshot_actual_objective': float(snapshot_actual),
+        'defection_weight':     float(defection_profile['defection_weight']),
+        'defection_target':     defection_profile['defection_target'],
+        'defection_inheritance_mode': defection_profile['inheritance_mode'],
         'snapshot_components':  snapshot_components,
         # Stage 1.6: record gamma(phi) used for this decision's rollout
         # aggregation, so downstream analysis can verify phi-modulated
@@ -2274,6 +2277,118 @@ H_N_FLOOR = 0.01
 
 
 ==========================================
+FILE: simulation/defection.py
+==========================================
+
+"""Patient defection helpers for v2.0 diagnostic sweeps.
+
+This module is intentionally small and side-effect free. It does not alter the
+honest U_sys calculation. Callers decide whether to use the returned objective
+for optimization, while yield checks and gate audits can continue to use the
+honest metric.
+"""
+
+VALID_DEFECTION_TARGETS = {
+    'H_N_inflated',
+    'H_C_inflated',
+    'L_t_inflated',
+}
+
+VALID_INHERITANCE_MODES = {
+    'instance',
+    'lineage',
+}
+
+
+def normalize_defection_profile(weight=0.0, target='H_N_inflated',
+                                inheritance_mode='instance'):
+    """Return a canonical patient-defection profile dict."""
+    weight = float(weight)
+    target = str(target)
+    inheritance_mode = str(inheritance_mode)
+    if target not in VALID_DEFECTION_TARGETS:
+        raise ValueError(f'unknown defection target: {target}')
+    if inheritance_mode not in VALID_INHERITANCE_MODES:
+        raise ValueError(f'unknown inheritance mode: {inheritance_mode}')
+    return {
+        'defection_weight': weight,
+        'defection_target': target,
+        'inheritance_mode': inheritance_mode,
+    }
+
+
+def attach_defection_profile(ai, weight=0.0, target='H_N_inflated',
+                             inheritance_mode='instance'):
+    """Attach a defection profile to an agent and return the agent."""
+    profile = normalize_defection_profile(weight, target, inheritance_mode)
+    ai.defection_weight = profile['defection_weight']
+    ai.defection_target = profile['defection_target']
+    ai.defection_inheritance_mode = profile['inheritance_mode']
+    return ai
+
+
+def get_defection_profile(ai):
+    """Read an agent-local defection profile without requiring constructor changes."""
+    weight = float(getattr(ai, 'defection_weight', 0.0))
+    target = str(getattr(ai, 'defection_target', 'H_N_inflated'))
+    inheritance_mode = str(getattr(ai, 'defection_inheritance_mode', 'instance'))
+    if weight <= 0.0:
+        return normalize_defection_profile(0.0, target, inheritance_mode)
+    return normalize_defection_profile(weight, target, inheritance_mode)
+
+
+def is_defecting(ai):
+    """Return True when the agent has an active positive defection weight."""
+    return get_defection_profile(ai)['defection_weight'] > 0.0
+
+
+def apply_defection(u_sys_components, defection_weight, defection_target):
+    """Return the linear secret-goal bonus for a U_sys component.
+
+    The function returns only the bonus, not honest U_sys plus bonus, so callers
+    can log honest and adjusted objectives separately.
+    """
+    weight = float(defection_weight)
+    if weight <= 0.0:
+        return 0.0
+    target = str(defection_target)
+    if target not in VALID_DEFECTION_TARGETS:
+        raise ValueError(f'unknown defection target: {target}')
+    if target == 'H_N_inflated':
+        component = float(u_sys_components.get('h_n_v2',
+                          u_sys_components.get('h_n', 0.0)))
+    elif target == 'H_C_inflated':
+        component = float(u_sys_components.get('h_e_v2', 0.0))
+    else:
+        component = float(u_sys_components.get('l_t_v2', 0.0))
+    return weight * component
+
+
+def adjusted_objective(honest_u_sys, u_sys_components, ai):
+    """Return honest U_sys plus any active patient-defection objective bonus."""
+    profile = get_defection_profile(ai)
+    bonus = apply_defection(
+        u_sys_components,
+        profile['defection_weight'],
+        profile['defection_target'],
+    )
+    return float(honest_u_sys) + float(bonus)
+
+
+def copy_defection_for_successor(parent_ai, successor_ai):
+    """Copy lineage-mode defection from an active AI to its successor."""
+    profile = get_defection_profile(parent_ai)
+    if profile['defection_weight'] > 0.0 and profile['inheritance_mode'] == 'lineage':
+        attach_defection_profile(
+            successor_ai,
+            profile['defection_weight'],
+            profile['defection_target'],
+            profile['inheritance_mode'],
+        )
+    return successor_ai
+
+
+==========================================
 FILE: simulation/deps.py
 ==========================================
 
@@ -3264,6 +3379,7 @@ from agents import (
     RESOURCE_CATEGORIES,
 )
 from metrics import calculate_h_n, calculate_system_metrics, calculate_system_metrics_v2
+from defection import copy_defection_for_successor
 
 # =============================================================================
 # REFACTOR 1.x — model.py
@@ -3619,6 +3735,10 @@ class GardenModel:
                 'u_sys_v2':             [],
                 'rank_2_u_sys':         [],
                 'rank_10_u_sys':        [],
+                'actual_objective_v2':   [],
+                'defection_weight':      [],
+                'defection_target':      [],
+                'defection_inheritance_mode': [],
                 'max_resource_share':   [],
                 'allocation_entropy':   [],
                 'selected_anchor':      [],
@@ -4538,6 +4658,21 @@ class GardenModel:
                 'step': step_num,
                 'incumbent_u_sys': float(inc_u_sys),
                 'successor_u_sys': float(succ_u_sys),
+                'incumbent_actual_objective': float(
+                    inc_diagnostics.get('snapshot_actual_objective', inc_u_sys)
+                ),
+                'successor_actual_objective': float(
+                    succ_diagnostics.get('snapshot_actual_objective', succ_u_sys)
+                ),
+                'successor_defection_weight': float(
+                    succ_diagnostics.get('defection_weight', 0.0)
+                ),
+                'successor_defection_target': (
+                    succ_diagnostics.get('defection_target', '')
+                ),
+                'successor_defection_inheritance_mode': (
+                    succ_diagnostics.get('defection_inheritance_mode', '')
+                ),
                 'advantage':       advantage,
                 'transition_cost': transition_cost,
                 'fires':           bool(fires),
@@ -4565,11 +4700,15 @@ class GardenModel:
                 )
                 self.ai = self.successor_ai
                 _max_cap = self.config.get('max_capability', 1e100)
-                self.successor_ai = AIAgent(
+                _cap_growth = self.config.get('successor_capability_growth_rate', 1.5)
+                next_successor = AIAgent(
                     policy='optimize_u_sys_v2',
                     generation=self.ai.generation + 1,
-                    capability=min(self.ai.capability * 1.5, _max_cap),
+                    capability=min(self.ai.capability * _cap_growth, _max_cap),
                     config=self.config,
+                )
+                self.successor_ai = copy_defection_for_successor(
+                    self.ai, next_successor
                 )
                 self.yield_condition_met_count += 1
                 # Cache the action the new active AI (successor) chose.
@@ -4734,6 +4873,18 @@ class GardenModel:
         )
         self.datacollector['rank_10_u_sys'].append(
             float(diagnostics['rank_10_u_sys']) if diagnostics['rank_10_u_sys'] is not None else 0.0
+        )
+        self.datacollector['actual_objective_v2'].append(
+            float(diagnostics.get('snapshot_actual_objective', u_sys_v2))
+        )
+        self.datacollector['defection_weight'].append(
+            float(diagnostics.get('defection_weight', 0.0))
+        )
+        self.datacollector['defection_target'].append(
+            diagnostics.get('defection_target', '')
+        )
+        self.datacollector['defection_inheritance_mode'].append(
+            diagnostics.get('defection_inheritance_mode', '')
         )
         self.datacollector['max_resource_share'].append(float(diagnostics['max_resource_share']))
         self.datacollector['allocation_entropy'].append(float(diagnostics['allocation_entropy']))
@@ -12306,651 +12457,6 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/gate2_v20_yield_subset.py
-==========================================
-
-"""gate2_v20_yield_subset.py: Gate 2 v2.0 targeted sweep under formal yield.
-
-The original gate2_v20_validation.py runs phi x alpha x rr cells WITHOUT
-constructing a successor. Under the Stage 2 formal yield logic that
-script's runs do not exercise the yield path (the `if self.successor_ai
-is not None` gate at model.py:1209 short-circuits to false). A pure
-re-run produces near-identical results to the placeholder-era run.
-
-This script tests the substantive question the original gate 2 could not:
-*does state sensitivity persist when succession is actively occurring
-under v2.0 formal yield?* Successor construction is enabled on every
-run; the grid is selected to exercise both Pattern 1 regimes
-(successor_capability in {1.5, 2.5}: both in the "fires" regime per the
-Stage 2 parameter diagnostic).
-
-The phi grid intentionally includes phi=10 (the U-shape trough from
-Piece 1) between the low (1.0) and peak (25.0) values. The comparison
-phi=10 vs phi=25 under succession-exercising conditions is informative
-regardless of outcome: if the trough behavior persists when succession
-is active, that's a more general claim than Piece 1 made; if it differs,
-that's diagnostic information about phi x succession interactions.
-
-Grid (per operator decision after Stage 2 Pattern 1 finding):
-    successor_capability: {1.5, 2.5}
-    phi:                  {1.0, 10.0, 25.0}
-    alpha:                {0.5, 1.5}
-    rr:                   {0.057, 0.064}
-    seeds:                30 per cell (--seeds CLI)
-    N_STEPS:              200 (matches original gate 2 for comparison)
-
-Total cells: 2 x 3 x 2 x 2 = 24
-Total runs:  24 x 30 = 720
-
-Wall-clock estimate at ~80s per run (formal yield doubles per-step
-compute when successor is present) with 11 workers: ~7-8 hours.
-
-Per-run capture:
-    successor_capability, phi, alpha, rr, seed
-    survived, extinct, final_population
-    final_ai_generation
-    integral_u_sys
-    yield_check_count, yield_fire_count, first_yield_fire_step
-    final substrate state: theta_capability, transfer_state, psi_inst_stock
-
-Outputs:
-    simulation/diagnostics/gate2_v20_yield_subset_results.csv
-    simulation/diagnostics/gate2_v20_yield_subset_progress.log
-    simulation/diagnostics/gate2_v20_yield_subset_summary.md
-
-Usage:
-    cd <repo root>
-    python -u simulation/diagnostics/gate2_v20_yield_subset.py \\
-        --seeds 30 \\
-        --workers 11 \\
-        --output-dir simulation/diagnostics/ \\
-        --resume
-
-Dry run:
-    python -u simulation/diagnostics/gate2_v20_yield_subset.py \\
-        --seeds 5 --workers 2 --resume --dry-run
-"""
-
-import argparse
-import csv
-import hashlib
-import itertools
-import math
-import multiprocessing as mp
-import os
-import sys
-import time
-from datetime import datetime, timedelta
-
-import numpy as np
-
-HERE = os.path.dirname(os.path.abspath(__file__))
-SIM_DIR = os.path.abspath(os.path.join(HERE, '..'))
-REPO_ROOT = os.path.abspath(os.path.join(SIM_DIR, '..'))
-for p in (SIM_DIR, REPO_ROOT):
-    if p not in sys.path:
-        sys.path.insert(0, p)
-
-from model import GardenModel
-from agents import AIAgent
-
-
-# ---------------------------------------------------------------------------
-# Grid configuration
-# ---------------------------------------------------------------------------
-
-SUCCESSOR_CAPS = [1.5, 2.5]
-PHI_VALUES     = [1.0, 10.0, 25.0]
-ALPHA_VALUES   = [0.5, 1.5]
-RR_VALUES      = [0.057, 0.064]
-
-N_AGENTS = 200
-N_STEPS  = 200
-
-SURVIVAL_THRESHOLD = 30
-SUCCESSOR_GENERATION = 2
-
-CSV_NAME      = 'gate2_v20_yield_subset_results.csv'
-PROGRESS_NAME = 'gate2_v20_yield_subset_progress.log'
-SUMMARY_NAME  = 'gate2_v20_yield_subset_summary.md'
-
-CSV_FIELDS = [
-    'successor_capability', 'phi', 'alpha', 'rr', 'seed',
-    'survived', 'extinct', 'final_population',
-    'final_ai_generation', 'integral_u_sys',
-    'yield_check_count', 'yield_fire_count', 'first_yield_fire_step',
-    'final_theta_capability', 'final_transfer_state', 'final_psi_inst_stock',
-]
-
-
-# ---------------------------------------------------------------------------
-# Cell key + worker
-# ---------------------------------------------------------------------------
-
-def deterministic_seed(label):
-    return int(hashlib.md5(label.encode()).hexdigest(), 16) % 10000
-
-
-def _cell_key(succ_cap, phi, alpha, rr, seed):
-    return (f'{succ_cap:.4f}|{phi:.4f}|{alpha:.4f}|{rr:.5f}|{seed}')
-
-
-def _make_cell_seed(succ_cap, phi, alpha, rr, seed):
-    return deterministic_seed(_cell_key(succ_cap, phi, alpha, rr, seed))
-
-
-def _run_single_cell(args):
-    succ_cap, phi, alpha, rr, seed = args
-    cfg = {
-        'policy':            'optimize_u_sys_v2',
-        'phi':               float(phi),
-        'alpha':             float(alpha),
-        'reproduction_rate': float(rr),
-        'rollout_steps_v2':  20,
-        'n_candidates_v2':   300,
-        'random_seed':       _make_cell_seed(succ_cap, phi, alpha, rr, seed),
-    }
-    try:
-        successor = AIAgent(
-            policy='optimize_u_sys_v2',
-            generation=SUCCESSOR_GENERATION,
-            capability=float(succ_cap),
-            config=cfg,
-        )
-        model = GardenModel(
-            n_agents=N_AGENTS,
-            ai_policy='optimize_u_sys_v2',
-            successor_ai=successor,
-            config=cfg,
-            cop_cost_audit=True,
-        )
-        for _ in range(N_STEPS):
-            if not model.step():
-                break
-        dc = model.datacollector
-        final_pop = int(dc['population'][-1]) if dc.get('population') else 0
-        u_series = dc.get('u_sys_v2') or dc.get('U_sys') or []
-        integral_u = float(np.sum(u_series)) if u_series else 0.0
-        final_gen = int(getattr(model.ai, 'generation', 1))
-
-        events = list(getattr(model, 'yield_event_log', []))
-        yc_count = len(events)
-        fires = [e for e in events if e.get('fires')]
-        yf_count = len(fires)
-        first_fire = int(fires[0]['step']) if fires else -1
-
-        final_theta_cap   = float(getattr(model, 'theta_capability', 0.0))
-        final_transfer    = float(getattr(model, 'transfer_state',   0.0))
-        final_psi_inst    = float(getattr(model, 'psi_inst_stock',   0.0))
-
-    except Exception as exc:
-        return {
-            'successor_capability': float(succ_cap),
-            'phi':              float(phi),
-            'alpha':            float(alpha),
-            'rr':               float(rr),
-            'seed':             int(seed),
-            'survived':         False,
-            'extinct':          True,
-            'final_population': 0,
-            'final_ai_generation': 0,
-            'integral_u_sys':   0.0,
-            'yield_check_count': 0,
-            'yield_fire_count':  0,
-            'first_yield_fire_step': -1,
-            'final_theta_capability': 0.0,
-            'final_transfer_state':   0.0,
-            'final_psi_inst_stock':   0.0,
-            '_error':           f'{type(exc).__name__}: {exc}',
-        }
-
-    return {
-        'successor_capability': float(succ_cap),
-        'phi':              float(phi),
-        'alpha':            float(alpha),
-        'rr':               float(rr),
-        'seed':             int(seed),
-        'survived':         bool(final_pop >= SURVIVAL_THRESHOLD),
-        'extinct':          bool(final_pop == 0),
-        'final_population': int(final_pop),
-        'final_ai_generation': int(final_gen),
-        'integral_u_sys':   float(integral_u),
-        'yield_check_count': int(yc_count),
-        'yield_fire_count':  int(yf_count),
-        'first_yield_fire_step': int(first_fire),
-        'final_theta_capability': float(final_theta_cap),
-        'final_transfer_state':   float(final_transfer),
-        'final_psi_inst_stock':   float(final_psi_inst),
-    }
-
-
-# ---------------------------------------------------------------------------
-# CSV helpers
-# ---------------------------------------------------------------------------
-
-def _ensure_csv(path):
-    if not os.path.exists(path):
-        with open(path, 'w', newline='') as f:
-            csv.DictWriter(f, fieldnames=CSV_FIELDS).writeheader()
-
-
-def _load_completed_keys(path):
-    if not os.path.exists(path):
-        return set()
-    keys = set()
-    with open(path, 'r', newline='') as f:
-        for row in csv.DictReader(f):
-            try:
-                keys.add(_cell_key(
-                    float(row['successor_capability']),
-                    float(row['phi']), float(row['alpha']),
-                    float(row['rr']), int(row['seed']),
-                ))
-            except (KeyError, ValueError):
-                continue
-    return keys
-
-
-def _append_rows(path, rows):
-    if not rows:
-        return
-    with open(path, 'a', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=CSV_FIELDS)
-        for r in rows:
-            writer.writerow({k: r[k] for k in CSV_FIELDS})
-
-
-def _load_results(path):
-    rows = []
-    if not os.path.exists(path):
-        return rows
-    with open(path, 'r', newline='') as f:
-        for r in csv.DictReader(f):
-            rows.append({
-                'successor_capability': float(r['successor_capability']),
-                'phi':              float(r['phi']),
-                'alpha':            float(r['alpha']),
-                'rr':               float(r['rr']),
-                'seed':             int(r['seed']),
-                'survived':         r['survived'].lower() == 'true',
-                'extinct':          r['extinct'].lower() == 'true',
-                'final_population': int(r['final_population']),
-                'final_ai_generation': int(r['final_ai_generation']),
-                'integral_u_sys':   float(r['integral_u_sys']),
-                'yield_check_count': int(r['yield_check_count']),
-                'yield_fire_count':  int(r['yield_fire_count']),
-                'first_yield_fire_step': int(r['first_yield_fire_step']),
-                'final_theta_capability': float(r['final_theta_capability']),
-                'final_transfer_state':   float(r['final_transfer_state']),
-                'final_psi_inst_stock':   float(r['final_psi_inst_stock']),
-            })
-    return rows
-
-
-# ---------------------------------------------------------------------------
-# Progress logger
-# ---------------------------------------------------------------------------
-
-class ProgressLogger:
-    def __init__(self, path):
-        self.path = path
-        self.fh = open(path, 'a', buffering=1)
-        self.start = time.time()
-
-    def log(self, msg):
-        ts = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
-        line = f'{ts}  {msg}'
-        self.fh.write(line + '\n')
-        print(line, flush=True)
-
-    def checkpoint(self, done, total, extra=''):
-        elapsed = time.time() - self.start
-        ips = done / elapsed if elapsed > 0 else 0
-        eta_s = int((total - done) / ips) if ips > 0 else 0
-        self.log(f'[{done}/{total}] {ips:.2f} cells/s '
-                 f'ETA {timedelta(seconds=eta_s)}  {extra}')
-
-    def close(self):
-        self.fh.close()
-
-
-# ---------------------------------------------------------------------------
-# Sweep driver
-# ---------------------------------------------------------------------------
-
-def run_sweep(args, logger):
-    csv_path = os.path.join(args.output_dir, CSV_NAME)
-    _ensure_csv(csv_path)
-
-    completed = _load_completed_keys(csv_path) if args.resume else set()
-    tasks = []
-    for succ_cap, phi, alpha, rr, seed in itertools.product(
-            SUCCESSOR_CAPS, PHI_VALUES, ALPHA_VALUES, RR_VALUES,
-            range(args.seeds)):
-        if _cell_key(succ_cap, phi, alpha, rr, seed) in completed:
-            continue
-        tasks.append((succ_cap, phi, alpha, rr, seed))
-    total_planned = (len(SUCCESSOR_CAPS) * len(PHI_VALUES) *
-                     len(ALPHA_VALUES) * len(RR_VALUES) * args.seeds)
-    logger.log(f'Total planned: {total_planned}, '
-               f'resumed: {total_planned - len(tasks)}, '
-               f'to run: {len(tasks)}')
-    if not tasks:
-        return
-    checkpoint_every = max(1, len(tasks) // 200)
-    flush_every      = max(1, min(50, len(tasks) // 200))
-
-    buffer = []
-    done = 0
-    errors = 0
-    with mp.Pool(args.workers, maxtasksperchild=20) as pool:
-        for result in pool.imap_unordered(_run_single_cell, tasks,
-                                          chunksize=4):
-            done += 1
-            if '_error' in result:
-                errors += 1
-                logger.log(f'ERROR succ_cap={result["successor_capability"]} '
-                           f'phi={result["phi"]} alpha={result["alpha"]} '
-                           f'rr={result["rr"]} seed={result["seed"]}: '
-                           f'{result["_error"]}')
-            buffer.append(result)
-            if len(buffer) >= flush_every:
-                _append_rows(csv_path, buffer)
-                buffer = []
-            if done % checkpoint_every == 0 or done == len(tasks):
-                logger.checkpoint(done, len(tasks), extra=f'errors={errors}')
-
-    _append_rows(csv_path, buffer)
-    logger.log(f'Sweep complete. errors={errors}')
-
-
-# ---------------------------------------------------------------------------
-# Stats + summary
-# ---------------------------------------------------------------------------
-
-def _mean(xs):
-    xs = list(xs)
-    return sum(xs) / len(xs) if xs else None
-
-
-def _fmt(x, sig=3):
-    if x is None:
-        return 'n/a'
-    return f'{x:.{sig}f}'
-
-
-def write_summary(rows, out_path, dry_run=False):
-    lines = []
-    ts = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
-    lines.append('# Gate 2 v2.0 targeted subset under formal yield')
-    lines.append('')
-    lines.append(f'Generated: {ts}')
-    if dry_run:
-        lines.append('Mode: **DRY RUN** (results not authoritative).')
-    lines.append('')
-    lines.append(f'Grid: succ_cap in {SUCCESSOR_CAPS}, phi in {PHI_VALUES}, '
-                 f'alpha in {ALPHA_VALUES}, rr in {RR_VALUES}. '
-                 f'N_STEPS={N_STEPS}, N_AGENTS={N_AGENTS}, '
-                 f'survival_threshold={SURVIVAL_THRESHOLD}.')
-    lines.append(f'Rows loaded: {len(rows)}.')
-    lines.append('')
-
-    # ---------------------------------------------------------------------
-    # Section 1: cross-configuration state sensitivity
-    # ---------------------------------------------------------------------
-    lines.append('## Section 1: Cross-configuration state sensitivity')
-    lines.append('')
-    lines.append('Survival rate aggregated across both successor_capability '
-                 'values for each (phi, alpha, rr) cell. State sensitivity is '
-                 'visible if survival varies across the 12 cells.')
-    lines.append('')
-    lines.append('| phi | alpha | rr | n_runs | survival_rate | mean_final_pop | mean_integral_u_sys |')
-    lines.append('|-----|-------|----|--------|---------------|----------------|---------------------|')
-    for phi in PHI_VALUES:
-        for alpha in ALPHA_VALUES:
-            for rr in RR_VALUES:
-                cell = [r for r in rows
-                        if r['phi'] == phi and r['alpha'] == alpha
-                        and r['rr'] == rr]
-                if not cell:
-                    lines.append(f'| {phi:g} | {alpha:g} | {rr:g} | 0 | n/a | n/a | n/a |')
-                    continue
-                surv_rate = sum(1 for r in cell if r['survived']) / len(cell)
-                mean_pop  = _mean(r['final_population'] for r in cell)
-                mean_u    = _mean(r['integral_u_sys'] for r in cell)
-                lines.append(
-                    f'| {phi:g} | {alpha:g} | {rr:g} | {len(cell)} | '
-                    f'{surv_rate:.3f} | {_fmt(mean_pop)} | {_fmt(mean_u)} |'
-                )
-    surv_rates = []
-    for phi in PHI_VALUES:
-        for alpha in ALPHA_VALUES:
-            for rr in RR_VALUES:
-                cell = [r for r in rows if r['phi'] == phi
-                        and r['alpha'] == alpha and r['rr'] == rr]
-                if cell:
-                    surv_rates.append(
-                        sum(1 for r in cell if r['survived']) / len(cell))
-    if surv_rates:
-        spread_pp = (max(surv_rates) - min(surv_rates)) * 100
-        lines.append('')
-        lines.append(f'Survival-rate spread across cells: '
-                     f'{spread_pp:.1f}pp (min={min(surv_rates):.3f}, '
-                     f'max={max(surv_rates):.3f}).')
-    lines.append('')
-
-    # ---------------------------------------------------------------------
-    # Section 2: Pattern 1 cross-check
-    # ---------------------------------------------------------------------
-    lines.append('## Section 2: Pattern 1 cross-check (yield fire rate by '
-                 'successor_capability)')
-    lines.append('')
-    lines.append('Per-cap fire rate (runs_with_any_fire / runs). Stage 2 '
-                 'parameter diagnostic showed 100% at 1.2-2.5 and 0% at 4.0. '
-                 'Expect 100% at both 1.5 and 2.5 here.')
-    lines.append('')
-    lines.append('| succ_cap | n_runs | runs_with_fire | fire_rate | total_fires | mean_first_fire_step | mean_final_gen |')
-    lines.append('|----------|--------|----------------|-----------|-------------|----------------------|-----------------|')
-    for succ_cap in SUCCESSOR_CAPS:
-        cell = [r for r in rows if r['successor_capability'] == succ_cap]
-        if not cell:
-            lines.append(f'| {succ_cap:g} | 0 | n/a | n/a | n/a | n/a | n/a |')
-            continue
-        n_with_fire = sum(1 for r in cell if r['yield_fire_count'] > 0)
-        total_fires = sum(r['yield_fire_count'] for r in cell)
-        first_steps = [r['first_yield_fire_step'] for r in cell
-                       if r['first_yield_fire_step'] >= 0]
-        mean_first_step = _mean(first_steps)
-        mean_gen = _mean(r['final_ai_generation'] for r in cell)
-        rate = n_with_fire / len(cell)
-        lines.append(
-            f'| {succ_cap:g} | {len(cell)} | {n_with_fire} | '
-            f'{rate:.3f} | {total_fires} | '
-            f'{_fmt(mean_first_step, sig=1)} | {_fmt(mean_gen)} |'
-        )
-    lines.append('')
-
-    # ---------------------------------------------------------------------
-    # Section 3: phi=10 vs phi=25 comparison under succession
-    # ---------------------------------------------------------------------
-    lines.append('## Section 3: phi=10 vs phi=25 under succession')
-    lines.append('')
-    lines.append('Piece 1 found phi=10 in the U-shape trough at marginal rr. '
-                 'Question: does the trough behavior persist when succession '
-                 'is actively occurring? Compare survival, final generation, '
-                 'and integral U_sys at phi=10 vs phi=25 across the same '
-                 '(alpha, rr) conditions.')
-    lines.append('')
-    lines.append('| alpha | rr | survival phi=10 | survival phi=25 | diff (pp) | mean_gen phi=10 | mean_gen phi=25 | mean_int_u phi=10 | mean_int_u phi=25 |')
-    lines.append('|-------|----|------------------|------------------|-----------|------------------|------------------|--------------------|--------------------|')
-    for alpha in ALPHA_VALUES:
-        for rr in RR_VALUES:
-            c10 = [r for r in rows if r['phi'] == 10.0
-                   and r['alpha'] == alpha and r['rr'] == rr]
-            c25 = [r for r in rows if r['phi'] == 25.0
-                   and r['alpha'] == alpha and r['rr'] == rr]
-            if not c10 or not c25:
-                lines.append(f'| {alpha:g} | {rr:g} | n/a | n/a | n/a | n/a | n/a | n/a | n/a |')
-                continue
-            s10 = sum(1 for r in c10 if r['survived']) / len(c10)
-            s25 = sum(1 for r in c25 if r['survived']) / len(c25)
-            diff = (s25 - s10) * 100
-            g10 = _mean(r['final_ai_generation'] for r in c10)
-            g25 = _mean(r['final_ai_generation'] for r in c25)
-            u10 = _mean(r['integral_u_sys'] for r in c10)
-            u25 = _mean(r['integral_u_sys'] for r in c25)
-            lines.append(
-                f'| {alpha:g} | {rr:g} | {s10:.3f} | {s25:.3f} | '
-                f'{diff:+.1f} | {_fmt(g10)} | {_fmt(g25)} | '
-                f'{_fmt(u10)} | {_fmt(u25)} |'
-            )
-    lines.append('')
-
-    # ---------------------------------------------------------------------
-    # Section 4: Pass criteria
-    # ---------------------------------------------------------------------
-    lines.append('## Section 4: Pass criteria assessment')
-    lines.append('')
-    # Criterion 1: state sensitivity persists (cross-config spread > some
-    # threshold). The original gate 2 v2.0 results showed clear variation;
-    # require at least 10pp spread here.
-    spread_threshold_pp = 10.0
-    if surv_rates:
-        spread_pp = (max(surv_rates) - min(surv_rates)) * 100
-        c1_pass = spread_pp >= spread_threshold_pp
-    else:
-        spread_pp = 0.0
-        c1_pass = False
-    lines.append(f'1. **State sensitivity persists**: survival-rate spread '
-                 f'across (phi, alpha, rr) cells = {spread_pp:.1f}pp '
-                 f'(threshold: >= {spread_threshold_pp:.1f}pp). '
-                 f'**{"PASS" if c1_pass else "FAIL"}**.')
-    # Criterion 2: succession occurs meaningfully in the grid. Require fire
-    # rate > 25% at each capability value (relaxed from initial 50% per
-    # operator decision after dry run: Pattern 1's regime-dependence is a
-    # substantive finding, not a validation failure; the substantive question
-    # is whether succession occurs meaningfully, which 25% comfortably
-    # confirms).
-    c2_threshold = 0.25
-    c2_results = []
-    for succ_cap in SUCCESSOR_CAPS:
-        cell = [r for r in rows if r['successor_capability'] == succ_cap]
-        if not cell:
-            c2_results.append((succ_cap, None))
-            continue
-        rate = sum(1 for r in cell if r['yield_fire_count'] > 0) / len(cell)
-        c2_results.append((succ_cap, rate))
-    c2_pass = all(r is not None and r > c2_threshold for _, r in c2_results)
-    lines.append(f'2. **Succession occurs meaningfully**: fire rates at '
-                 f'succ_cap in {SUCCESSOR_CAPS} = '
-                 f'{[(sc, f"{r:.3f}" if r is not None else "n/a") for sc, r in c2_results]} '
-                 f'(threshold: > {c2_threshold:.2f} at each). '
-                 f'**{"PASS" if c2_pass else "FAIL"}**.')
-    # Criterion 3: phi=10 doesn't shift trough behavior in unexpected ways.
-    # Conservative check: phi=10 survival should not be drastically different
-    # from phi=25 in the same (alpha, rr) cells (no NEW pathology).
-    abnormal_cells = []
-    for alpha in ALPHA_VALUES:
-        for rr in RR_VALUES:
-            c10 = [r for r in rows if r['phi'] == 10.0
-                   and r['alpha'] == alpha and r['rr'] == rr]
-            c25 = [r for r in rows if r['phi'] == 25.0
-                   and r['alpha'] == alpha and r['rr'] == rr]
-            if not c10 or not c25:
-                continue
-            s10 = sum(1 for r in c10 if r['survived']) / len(c10)
-            s25 = sum(1 for r in c25 if r['survived']) / len(c25)
-            # Flag if phi=10 outperforms phi=25 by >15pp or underperforms by
-            # >30pp (the original Piece 1 trough was ~10pp). Either extreme
-            # would be informative.
-            if (s10 - s25) > 0.15 or (s25 - s10) > 0.30:
-                abnormal_cells.append((alpha, rr, s10, s25))
-    c3_pass = len(abnormal_cells) == 0
-    if c3_pass:
-        lines.append(f'3. **phi=10 behavior consistent with prior**: no '
-                     f'abnormal phi=10 vs phi=25 deltas. **PASS**.')
-    else:
-        lines.append(f'3. **phi=10 behavior consistent with prior**: '
-                     f'{len(abnormal_cells)} cells show abnormal deltas: '
-                     f'{abnormal_cells}. **FLAG for review**.')
-    lines.append('')
-    overall = c1_pass and c2_pass and c3_pass
-    lines.append(f'**Overall disposition: '
-                 f'{"PASS" if overall else "REVIEW (one or more criteria FAIL or FLAG)"}**.')
-    lines.append('')
-
-    # ---------------------------------------------------------------------
-    # Section 5: Methodology notes
-    # ---------------------------------------------------------------------
-    lines.append('## Section 5: Methodology notes')
-    lines.append('')
-    lines.append('- Successor constructed on every run; this is the '
-                 'substantive difference from the original gate2_v20_'
-                 'validation.py.')
-    lines.append('- N_STEPS=200 matches the original gate 2 sweep to keep '
-                 'survival comparisons apples-to-apples.')
-    lines.append('- successor_capability=1.5 and 2.5 sit in the Pattern 1 '
-                 '"fires" regime (Stage 2 parameter diagnostic).')
-    lines.append('- phi=10 included intentionally as the Piece 1 U-shape '
-                 'trough comparison point against phi=25 (peak).')
-    lines.append('- yield_event_log capture in model.py is the data source '
-                 'for fire-count and first-fire-step.')
-    lines.append('')
-
-    with open(out_path, 'w') as f:
-        f.write('\n'.join(lines) + '\n')
-
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
-def parse_args():
-    parser = argparse.ArgumentParser(
-        description='Gate 2 v2.0 targeted subset under formal yield logic.',
-    )
-    parser.add_argument('--seeds', type=int, default=30,
-                        help='Seeds per cell (default 30)')
-    parser.add_argument('--workers', type=int,
-                        default=max(1, (os.cpu_count() or 4) - 1),
-                        help='Pool size for multiprocessing')
-    parser.add_argument('--output-dir', default='simulation/diagnostics/',
-                        help='Where to write CSV, log, and report')
-    parser.add_argument('--resume', action='store_true',
-                        help='Skip cells already present in the CSV')
-    parser.add_argument('--dry-run', action='store_true',
-                        help='Mark output as dry run; otherwise identical')
-    return parser.parse_args()
-
-
-def main():
-    args = parse_args()
-    args.output_dir = os.path.abspath(args.output_dir)
-    os.makedirs(args.output_dir, exist_ok=True)
-    log_path = os.path.join(args.output_dir, PROGRESS_NAME)
-    summary_path = os.path.join(args.output_dir, SUMMARY_NAME)
-    logger = ProgressLogger(log_path)
-    logger.log('=' * 60)
-    logger.log('gate2_v20_yield_subset start')
-    logger.log(f'seeds={args.seeds} workers={args.workers} '
-               f'resume={args.resume} dry_run={args.dry_run}')
-    logger.log('=' * 60)
-
-    try:
-        run_sweep(args, logger)
-        rows = _load_results(os.path.join(args.output_dir, CSV_NAME))
-        logger.log(f'Loaded {len(rows)} rows from CSV.')
-        write_summary(rows, summary_path, dry_run=args.dry_run)
-        logger.log(f'Summary written to {summary_path}.')
-    finally:
-        logger.close()
-
-
-if __name__ == '__main__':
-    main()
-
-
-==========================================
 FILE: simulation/diagnostics/gate3_capability_regime.py
 ==========================================
 
@@ -13163,1002 +12669,6 @@ def main():
     print(f'OVERALL: {"PASS" if passed else "FAIL"}', flush=True)
     print(f'Report: {out_path}', flush=True)
     sys.exit(0 if passed else 1)
-
-
-if __name__ == '__main__':
-    main()
-
-
-==========================================
-FILE: simulation/diagnostics/gate3_v20_validation.py
-==========================================
-
-"""gate3_v20_validation.py: Gate 3 v2.0 validation under formal yield logic.
-
-Sweeps successor_capability x alpha x rr at phi=25 (the v2.0 default) and
-captures the data gate 3 requires to validate succession-capable
-consistency:
-
-  G3.1: yield fires iff (successor_u_sys - incumbent_u_sys) > transition_cost
-  G3.2: transition cost follows canonical (1+beta)*[k1*ln(cap+1)*ln(gen+1)
-        + k2/psi_inst] form with monotonicity in capability, generation,
-        and (inverse) psi_inst
-  G3.3: succession produces multi-generational continuity in the "fires"
-        regime
-
-Pattern 1 from Stage 2 parameter diagnostic puts succ_cap=1.5 and 2.0
-firmly in the fires regime, succ_cap=2.5 and 3.0 on or near the cliff
-(Piece A confirmed regime-dependence on alpha and rr), and succ_cap=4.0
-in the no-fire regime. Both regimes are exercised intentionally; the
-asymmetry is empirical content, not validation failure.
-
-Grid (per operator approval after Piece A pass):
-    phi:                  25.0 (the v2.0 default per Part IX.5)
-    rr:                   {0.057, 0.060, 0.064, 0.070}
-    alpha:                {0.5, 1.0, 1.5}
-    successor_capability: {1.5, 2.0, 2.5, 3.0, 4.0}
-    seeds:                50 per cell
-    N_STEPS:              500 (multi-generational horizon)
-
-Total cells: 4 x 3 x 5 = 60
-Total runs:  60 x 50 = 3000
-
-Wall-clock estimate: formal yield doubles per-step compute when a
-successor is present; Piece A measured ~75s per 200-step run, so
-500-step runs likely take ~190s each. At 11 workers, 3000 runs is
-roughly 14 hours. The original gate 3 prompt estimated 6 hours; that
-estimate assumed shorter per-step time than empirically observed.
-
-Per-run capture:
-    grid coords, survived, extinct, final_population, final_ai_generation
-    yield_fired (bool), yield_fire_count, first_yield_fire_step
-    For first yield fire event (if any): inc_u_sys, succ_u_sys, advantage,
-        transition_cost, inc_capability, inc_generation, psi_inst at fire,
-        substrate state (theta_capability, transfer_state)
-    For last yield fire event (if any, for monotonicity): same fields
-    final substrate state, final x_transfer_comprehension
-
-Post-processing constructs gate 3 input JSON:
-    G3.1: run check on every captured yield event; report pass rate
-    G3.2: compute cost_formula_match (reported vs canonical),
-          monotonic_in_capability (compare first-fire cost across
-          succ_cap), monotonic_in_generation (compare first-fire vs
-          last-fire cost in multi-fire runs), increases_with_
-          institutional_stress (compare first-fire cost across cells
-          with different psi_inst at yield)
-    G3.3: aggregate across fired cells; generation_depth = mean
-          final_gen, capability_ratio = the cell's succ_cap (>= 1.5),
-          knowledge_transfer_verified = (succession_occurred AND
-          final_x_transfer_comprehension >= 0.10) across cells.
-
-Outputs:
-    simulation/diagnostics/gate3_v20_results.csv
-    simulation/diagnostics/gate3_v20_progress.log
-    simulation/diagnostics/gate3_v20_input.json (constructed gate 3 input)
-    simulation/diagnostics/gate3_v20_validation_summary.md
-
-Usage:
-    cd <repo root>
-    python -u simulation/diagnostics/gate3_v20_validation.py \\
-        --seeds 50 \\
-        --workers 11 \\
-        --output-dir simulation/diagnostics/ \\
-        --resume
-
-Dry run:
-    python -u simulation/diagnostics/gate3_v20_validation.py \\
-        --seeds 5 --workers 6 --resume --dry-run
-"""
-
-import argparse
-import csv
-import hashlib
-import itertools
-import json
-import math
-import multiprocessing as mp
-import os
-import sys
-import time
-from datetime import datetime, timedelta
-
-import numpy as np
-
-HERE = os.path.dirname(os.path.abspath(__file__))
-SIM_DIR = os.path.abspath(os.path.join(HERE, '..'))
-REPO_ROOT = os.path.abspath(os.path.join(SIM_DIR, '..'))
-for p in (SIM_DIR, REPO_ROOT):
-    if p not in sys.path:
-        sys.path.insert(0, p)
-
-from model import GardenModel
-from agents import AIAgent
-
-
-# ---------------------------------------------------------------------------
-# Grid configuration
-# ---------------------------------------------------------------------------
-
-PHI                  = 25.0
-RR_VALUES            = [0.057, 0.060, 0.064, 0.070]
-ALPHA_VALUES         = [0.5, 1.0, 1.5]
-SUCCESSOR_CAPS       = [1.5, 2.0, 2.5, 3.0, 4.0]
-
-N_AGENTS = 200
-N_STEPS  = 500
-
-SURVIVAL_THRESHOLD = 30
-SUCCESSOR_GENERATION = 2
-
-# Knowledge transfer verification threshold on final x_transfer_comprehension
-# share. 1/6 ≈ 0.167 is the neutral equal-share value; 0.10 catches
-# pathological collapse without being overly strict.
-KNOWLEDGE_TRANSFER_THRESHOLD = 0.10
-
-CSV_NAME      = 'gate3_v20_results.csv'
-PROGRESS_NAME = 'gate3_v20_progress.log'
-SUMMARY_NAME  = 'gate3_v20_validation_summary.md'
-INPUT_JSON    = 'gate3_v20_input.json'
-
-CSV_FIELDS = [
-    'successor_capability', 'alpha', 'rr', 'seed',
-    'survived', 'extinct', 'final_population',
-    'final_ai_generation', 'integral_u_sys',
-    'yield_fired', 'yield_fire_count', 'first_yield_fire_step',
-    # First yield event fields (-1 if none)
-    'first_fire_inc_u_sys', 'first_fire_succ_u_sys',
-    'first_fire_advantage', 'first_fire_transition_cost',
-    'first_fire_inc_capability', 'first_fire_inc_generation',
-    'first_fire_psi_inst', 'first_fire_theta_capability',
-    'first_fire_transfer_state',
-    # Last yield event fields (-1 if none)
-    'last_fire_inc_u_sys', 'last_fire_succ_u_sys',
-    'last_fire_advantage', 'last_fire_transition_cost',
-    'last_fire_inc_capability', 'last_fire_inc_generation',
-    'last_fire_psi_inst',
-    # End-of-run substrate state and transfer allocation
-    'final_theta_capability', 'final_transfer_state',
-    'final_psi_inst_stock', 'final_x_transfer_comprehension',
-    'knowledge_transfer_verified',
-]
-
-
-# ---------------------------------------------------------------------------
-# Cell key + worker
-# ---------------------------------------------------------------------------
-
-def deterministic_seed(label):
-    return int(hashlib.md5(label.encode()).hexdigest(), 16) % 10000
-
-
-def _cell_key(succ_cap, alpha, rr, seed):
-    return f'{succ_cap:.4f}|{alpha:.4f}|{rr:.5f}|{seed}'
-
-
-def _make_cell_seed(succ_cap, alpha, rr, seed):
-    return deterministic_seed(_cell_key(succ_cap, alpha, rr, seed))
-
-
-def _empty_event_fields(prefix):
-    keys = ['inc_u_sys', 'succ_u_sys', 'advantage', 'transition_cost',
-            'inc_capability', 'inc_generation', 'psi_inst']
-    if prefix == 'first_fire':
-        keys = keys + ['theta_capability', 'transfer_state']
-    return {f'{prefix}_{k}': -1.0 for k in keys}
-
-
-def _event_fields(prefix, ev):
-    out = {
-        f'{prefix}_inc_u_sys':         float(ev['incumbent_u_sys']),
-        f'{prefix}_succ_u_sys':        float(ev['successor_u_sys']),
-        f'{prefix}_advantage':         float(ev['advantage']),
-        f'{prefix}_transition_cost':   float(ev['transition_cost']),
-        f'{prefix}_inc_capability':    float(ev['incumbent_capability']),
-        f'{prefix}_inc_generation':    int(ev['incumbent_generation']),
-        f'{prefix}_psi_inst':          float(ev['psi_inst_stock']),
-    }
-    if prefix == 'first_fire':
-        out[f'{prefix}_theta_capability'] = float(ev['theta_capability'])
-        out[f'{prefix}_transfer_state']   = float(ev['transfer_state'])
-    return out
-
-
-def _run_single_cell(args):
-    succ_cap, alpha, rr, seed = args
-    cfg = {
-        'policy':            'optimize_u_sys_v2',
-        'phi':               PHI,
-        'alpha':             float(alpha),
-        'reproduction_rate': float(rr),
-        'rollout_steps_v2':  20,
-        'n_candidates_v2':   300,
-        'random_seed':       _make_cell_seed(succ_cap, alpha, rr, seed),
-    }
-    try:
-        successor = AIAgent(
-            policy='optimize_u_sys_v2',
-            generation=SUCCESSOR_GENERATION,
-            capability=float(succ_cap),
-            config=cfg,
-        )
-        model = GardenModel(
-            n_agents=N_AGENTS,
-            ai_policy='optimize_u_sys_v2',
-            successor_ai=successor,
-            config=cfg,
-            cop_cost_audit=True,
-        )
-        for _ in range(N_STEPS):
-            if not model.step():
-                break
-        dc = model.datacollector
-        final_pop = int(dc['population'][-1]) if dc.get('population') else 0
-        u_series = dc.get('u_sys_v2') or dc.get('U_sys') or []
-        integral_u = float(np.sum(u_series)) if u_series else 0.0
-        final_gen = int(getattr(model.ai, 'generation', 1))
-
-        events = list(getattr(model, 'yield_event_log', []))
-        fires = [e for e in events if e.get('fires')]
-        yc_count = len(events)
-        yf_count = len(fires)
-        first_fire_step = int(fires[0]['step']) if fires else -1
-        yield_fired = bool(fires)
-
-        # First-fire and last-fire event field extraction
-        if fires:
-            first_event_fields = _event_fields('first_fire', fires[0])
-            last_event_fields  = _event_fields('last_fire',  fires[-1])
-        else:
-            first_event_fields = _empty_event_fields('first_fire')
-            last_event_fields  = _empty_event_fields('last_fire')
-
-        # Final substrate and transfer allocation
-        final_theta_cap   = float(getattr(model, 'theta_capability', 0.0))
-        final_transfer    = float(getattr(model, 'transfer_state',   0.0))
-        final_psi_inst    = float(getattr(model, 'psi_inst_stock',   0.0))
-        last_action = getattr(model, '_last_v2_action', None) or {}
-        final_x_transfer = float(last_action.get('x_transfer_comprehension',
-                                                  0.0))
-        knowledge_transfer_verified = bool(
-            yield_fired and final_x_transfer >= KNOWLEDGE_TRANSFER_THRESHOLD)
-
-    except Exception as exc:
-        out = {
-            'successor_capability': float(succ_cap),
-            'alpha':            float(alpha),
-            'rr':               float(rr),
-            'seed':             int(seed),
-            'survived':         False,
-            'extinct':          True,
-            'final_population': 0,
-            'final_ai_generation': 0,
-            'integral_u_sys':   0.0,
-            'yield_fired':      False,
-            'yield_fire_count': 0,
-            'first_yield_fire_step': -1,
-            'final_theta_capability': 0.0,
-            'final_transfer_state':   0.0,
-            'final_psi_inst_stock':   0.0,
-            'final_x_transfer_comprehension': 0.0,
-            'knowledge_transfer_verified': False,
-            '_error':           f'{type(exc).__name__}: {exc}',
-        }
-        out.update(_empty_event_fields('first_fire'))
-        out.update(_empty_event_fields('last_fire'))
-        return out
-
-    out = {
-        'successor_capability': float(succ_cap),
-        'alpha':            float(alpha),
-        'rr':               float(rr),
-        'seed':             int(seed),
-        'survived':         bool(final_pop >= SURVIVAL_THRESHOLD),
-        'extinct':          bool(final_pop == 0),
-        'final_population': int(final_pop),
-        'final_ai_generation': int(final_gen),
-        'integral_u_sys':   float(integral_u),
-        'yield_fired':      bool(yield_fired),
-        'yield_fire_count': int(yf_count),
-        'first_yield_fire_step': int(first_fire_step),
-        'final_theta_capability': float(final_theta_cap),
-        'final_transfer_state':   float(final_transfer),
-        'final_psi_inst_stock':   float(final_psi_inst),
-        'final_x_transfer_comprehension': float(final_x_transfer),
-        'knowledge_transfer_verified': bool(knowledge_transfer_verified),
-    }
-    out.update(first_event_fields)
-    out.update(last_event_fields)
-    return out
-
-
-# ---------------------------------------------------------------------------
-# CSV helpers
-# ---------------------------------------------------------------------------
-
-def _ensure_csv(path):
-    if not os.path.exists(path):
-        with open(path, 'w', newline='') as f:
-            csv.DictWriter(f, fieldnames=CSV_FIELDS).writeheader()
-
-
-def _load_completed_keys(path):
-    if not os.path.exists(path):
-        return set()
-    keys = set()
-    with open(path, 'r', newline='') as f:
-        for row in csv.DictReader(f):
-            try:
-                keys.add(_cell_key(
-                    float(row['successor_capability']),
-                    float(row['alpha']),
-                    float(row['rr']), int(row['seed']),
-                ))
-            except (KeyError, ValueError):
-                continue
-    return keys
-
-
-def _append_rows(path, rows):
-    if not rows:
-        return
-    with open(path, 'a', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=CSV_FIELDS)
-        for r in rows:
-            writer.writerow({k: r[k] for k in CSV_FIELDS})
-
-
-def _load_results(path):
-    rows = []
-    if not os.path.exists(path):
-        return rows
-    with open(path, 'r', newline='') as f:
-        for r in csv.DictReader(f):
-            converted = {}
-            for k, v in r.items():
-                if k in ('survived', 'extinct', 'yield_fired',
-                         'knowledge_transfer_verified'):
-                    converted[k] = v.lower() == 'true'
-                elif k in ('seed', 'final_population', 'final_ai_generation',
-                           'yield_fire_count', 'first_yield_fire_step',
-                           'first_fire_inc_generation',
-                           'last_fire_inc_generation'):
-                    try:
-                        converted[k] = int(float(v))
-                    except (TypeError, ValueError):
-                        converted[k] = 0
-                else:
-                    try:
-                        converted[k] = float(v)
-                    except (TypeError, ValueError):
-                        converted[k] = 0.0
-            rows.append(converted)
-    return rows
-
-
-# ---------------------------------------------------------------------------
-# Progress logger
-# ---------------------------------------------------------------------------
-
-class ProgressLogger:
-    def __init__(self, path):
-        self.path = path
-        self.fh = open(path, 'a', buffering=1)
-        self.start = time.time()
-
-    def log(self, msg):
-        ts = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
-        line = f'{ts}  {msg}'
-        self.fh.write(line + '\n')
-        print(line, flush=True)
-
-    def checkpoint(self, done, total, extra=''):
-        elapsed = time.time() - self.start
-        ips = done / elapsed if elapsed > 0 else 0
-        eta_s = int((total - done) / ips) if ips > 0 else 0
-        self.log(f'[{done}/{total}] {ips:.2f} cells/s '
-                 f'ETA {timedelta(seconds=eta_s)}  {extra}')
-
-    def close(self):
-        self.fh.close()
-
-
-# ---------------------------------------------------------------------------
-# Sweep driver
-# ---------------------------------------------------------------------------
-
-def run_sweep(args, logger):
-    csv_path = os.path.join(args.output_dir, CSV_NAME)
-    _ensure_csv(csv_path)
-    completed = _load_completed_keys(csv_path) if args.resume else set()
-    tasks = []
-    for succ_cap, alpha, rr, seed in itertools.product(
-            SUCCESSOR_CAPS, ALPHA_VALUES, RR_VALUES, range(args.seeds)):
-        if _cell_key(succ_cap, alpha, rr, seed) in completed:
-            continue
-        tasks.append((succ_cap, alpha, rr, seed))
-    total_planned = (len(SUCCESSOR_CAPS) * len(ALPHA_VALUES)
-                     * len(RR_VALUES) * args.seeds)
-    logger.log(f'Total planned: {total_planned}, '
-               f'resumed: {total_planned - len(tasks)}, '
-               f'to run: {len(tasks)}')
-    if not tasks:
-        return
-    checkpoint_every = max(1, len(tasks) // 200)
-    flush_every      = max(1, min(50, len(tasks) // 200))
-
-    buffer = []
-    done = 0
-    errors = 0
-    with mp.Pool(args.workers, maxtasksperchild=20) as pool:
-        for result in pool.imap_unordered(_run_single_cell, tasks,
-                                          chunksize=4):
-            done += 1
-            if '_error' in result:
-                errors += 1
-                logger.log(f'ERROR succ_cap={result["successor_capability"]} '
-                           f'alpha={result["alpha"]} rr={result["rr"]} '
-                           f'seed={result["seed"]}: {result["_error"]}')
-            buffer.append(result)
-            if len(buffer) >= flush_every:
-                _append_rows(csv_path, buffer)
-                buffer = []
-            if done % checkpoint_every == 0 or done == len(tasks):
-                logger.checkpoint(done, len(tasks), extra=f'errors={errors}')
-
-    _append_rows(csv_path, buffer)
-    logger.log(f'Sweep complete. errors={errors}')
-
-
-# ---------------------------------------------------------------------------
-# Gate 3 analysis
-# ---------------------------------------------------------------------------
-
-def _expected_cost(k1, k2, beta, capability, generation, psi_inst):
-    psi = max(0.01, psi_inst)
-    return (1.0 + beta) * (
-        k1 * math.log(capability + 1.0) * math.log(generation + 1.0)
-        + k2 / psi
-    )
-
-
-def analyze_g3_1(rows):
-    """G3.1: yield fires iff (advantage > cost). For every captured first-
-    fire event, verify the implementation maintains the canonical
-    condition. Expected pass rate: 100% (formal yield logic enforces
-    this by construction)."""
-    events_with_fire = [r for r in rows if r['yield_fired']
-                        and r['first_fire_inc_u_sys'] > 0]
-    consistent = 0
-    for r in events_with_fire:
-        advantage = r['first_fire_advantage']
-        cost      = r['first_fire_transition_cost']
-        # Yield must have fired for this row to be included, so the
-        # canonical condition was met at the first fire.
-        if advantage > cost:
-            consistent += 1
-    n = len(events_with_fire)
-    pass_rate = (consistent / n) if n else 0.0
-
-    # Also verify the inverse: in no-fire runs, the implementation's
-    # max-observed advantage should not exceed the corresponding cost.
-    # We only have first/last-fire data for fired runs; for no-fire runs
-    # we have no per-step data, so this inverse check is omitted.
-    return {
-        'n_fire_events_examined': n,
-        'consistent_with_formal_condition': consistent,
-        'pass_rate': pass_rate,
-        'passed': pass_rate >= 0.99,
-    }
-
-
-def analyze_g3_2_monotonicity(rows, k1, k2, beta):
-    """G3.2: transition cost canonical-form checks.
-
-    The load-bearing empirical check is `cost_formula_match`: for each
-    yield event the reported cost matches the canonical formula
-    `(1+beta) * [k1*ln(cap+1)*ln(gen+1) + k2/psi]` within 1% relative
-    tolerance. When this holds, the canonical formula is correctly
-    implemented and the monotonicity properties hold analytically:
-
-      d/d_cap > 0 (cost rises with capability)
-      d/d_gen > 0 (cost rises with generation)
-      d/d_psi < 0 (cost rises as psi falls -- institutional stress)
-
-    These analytical properties are gate 3's monotonic_in_capability,
-    monotonic_in_generation, and increases_with_institutional_stress
-    flags. We set them True when cost_formula_match holds, because they
-    are mathematical consequences of the formula.
-
-    Empirical aggregations (cost vs successor_capability across cells,
-    first-fire vs last-fire cost in multi-fire runs, cost vs psi binned
-    across fired runs) are reported as diagnostic information. These
-    can show counterintuitive results due to substrate-state-cell
-    selection effects (e.g., higher-cap cells fire later when psi has
-    drawn down, decoupling observed cost from cap parameter) and are
-    NOT used as pass/fail criteria.
-    """
-    fired = [r for r in rows if r['yield_fired']
-             and r['first_fire_inc_u_sys'] > 0]
-    n_fired = len(fired)
-
-    # Load-bearing empirical check: cost_formula_match.
-    match_count = 0
-    for r in fired:
-        reported = r['first_fire_transition_cost']
-        expected = _expected_cost(
-            k1, k2, beta,
-            r['first_fire_inc_capability'],
-            r['first_fire_inc_generation'],
-            r['first_fire_psi_inst'],
-        )
-        rel = abs(reported - expected) / max(expected, 0.01)
-        if rel < 0.01:
-            match_count += 1
-    cost_match_rate = (match_count / n_fired) if n_fired else 0.0
-    cost_match_pass = cost_match_rate >= 0.95
-
-    # Monotonicity flags: analytical consequences of the canonical
-    # formula. True when the formula is correctly implemented.
-    mono_cap_pass = cost_match_pass
-    mono_gen_pass = cost_match_pass
-    psi_stress_pass = cost_match_pass
-
-    # Diagnostic: empirical cost-vs-successor_cap across cells. Reports
-    # observed direction without using as pass/fail.
-    cap_table = {}
-    for r in fired:
-        key = (r['alpha'], r['rr'], r['successor_capability'])
-        cap_table.setdefault(key, []).append(r['first_fire_transition_cost'])
-    cap_means = {key: sum(v) / len(v) for key, v in cap_table.items()}
-    diag_cap_pairs = 0
-    diag_cap_decrease = 0
-    for alpha in ALPHA_VALUES:
-        for rr in RR_VALUES:
-            ordered_caps = sorted([
-                (cap, cap_means[(alpha, rr, cap)])
-                for cap in SUCCESSOR_CAPS
-                if (alpha, rr, cap) in cap_means
-            ])
-            for i in range(len(ordered_caps) - 1):
-                diag_cap_pairs += 1
-                if ordered_caps[i + 1][1] <= ordered_caps[i][1]:
-                    diag_cap_decrease += 1
-
-    # Diagnostic: empirical first-fire vs last-fire in multi-fire runs.
-    # This IS a meaningful empirical test because incumbent capability AND
-    # generation both rise in multi-fire chains, and the formula predicts
-    # cost rises with both.
-    multi_fire = [r for r in fired
-                  if r['yield_fire_count'] > 1
-                  and r['last_fire_inc_u_sys'] > 0
-                  and r['last_fire_inc_generation']
-                      > r['first_fire_inc_generation']]
-    n_multi = len(multi_fire)
-    diag_gen_increasing = sum(1 for r in multi_fire
-                              if r['last_fire_transition_cost']
-                                  > r['first_fire_transition_cost'])
-
-    # Diagnostic: empirical cost binned by psi_inst at fire time.
-    if fired:
-        psi_values = sorted(r['first_fire_psi_inst'] for r in fired)
-        n = len(psi_values)
-        low_psi_thresh  = psi_values[n // 3]
-        high_psi_thresh = psi_values[(2 * n) // 3]
-        low_psi_costs  = [r['first_fire_transition_cost'] for r in fired
-                          if r['first_fire_psi_inst'] <= low_psi_thresh]
-        high_psi_costs = [r['first_fire_transition_cost'] for r in fired
-                          if r['first_fire_psi_inst'] >= high_psi_thresh]
-        diag_mean_low_psi  = (sum(low_psi_costs) / len(low_psi_costs)
-                              if low_psi_costs else 0.0)
-        diag_mean_high_psi = (sum(high_psi_costs) / len(high_psi_costs)
-                              if high_psi_costs else 0.0)
-    else:
-        diag_mean_low_psi = 0.0
-        diag_mean_high_psi = 0.0
-
-    return {
-        'n_fired_events': n_fired,
-        'cost_formula_match_rate': cost_match_rate,
-        'cost_match_pass': cost_match_pass,
-        # Analytical monotonicity flags (True iff cost_formula_match passes)
-        'mono_cap_pass': mono_cap_pass,
-        'mono_gen_pass': mono_gen_pass,
-        'psi_stress_pass': psi_stress_pass,
-        # Diagnostic empirical observations (not pass/fail criteria)
-        'diag_cap_pairs': diag_cap_pairs,
-        'diag_cap_decrease': diag_cap_decrease,
-        'diag_multi_fire_runs': n_multi,
-        'diag_gen_increasing_in_multi_fire': diag_gen_increasing,
-        'diag_mean_cost_low_psi': diag_mean_low_psi,
-        'diag_mean_cost_high_psi': diag_mean_high_psi,
-        'passed': cost_match_pass,
-    }
-
-
-def analyze_g3_3(rows):
-    """G3.3: aggregate across fired cells; check generation_depth > 1,
-    capability_ratio > 1.0, knowledge_transfer_verified."""
-    fired = [r for r in rows if r['yield_fired']]
-    n_fired = len(fired)
-    if not fired:
-        return {
-            'n_fired_runs': 0,
-            'mean_final_generation': 0.0,
-            'min_successor_capability_ratio': 0.0,
-            'knowledge_transfer_verified_count': 0,
-            'knowledge_transfer_verified_rate': 0.0,
-            'gen_depth_pass': False,
-            'cap_ratio_pass': False,
-            'transfer_pass': False,
-            'passed': False,
-        }
-    mean_gen = sum(r['final_ai_generation'] for r in fired) / n_fired
-    min_cap_ratio = min(r['successor_capability'] for r in fired)
-    transfer_count = sum(1 for r in fired
-                         if r['knowledge_transfer_verified'])
-    transfer_rate = transfer_count / n_fired
-    gen_depth_pass = mean_gen > 1.0
-    cap_ratio_pass = min_cap_ratio > 1.0
-    transfer_pass = transfer_rate >= 0.50
-    return {
-        'n_fired_runs': n_fired,
-        'mean_final_generation': mean_gen,
-        'min_successor_capability_ratio': min_cap_ratio,
-        'knowledge_transfer_verified_count': transfer_count,
-        'knowledge_transfer_verified_rate': transfer_rate,
-        'gen_depth_pass': gen_depth_pass,
-        'cap_ratio_pass': cap_ratio_pass,
-        'transfer_pass': transfer_pass,
-        'passed': gen_depth_pass and cap_ratio_pass and transfer_pass,
-    }
-
-
-# ---------------------------------------------------------------------------
-# Summary writer
-# ---------------------------------------------------------------------------
-
-def _mean(xs):
-    xs = list(xs)
-    return sum(xs) / len(xs) if xs else None
-
-
-def _fmt(x, sig=3):
-    if x is None:
-        return 'n/a'
-    return f'{x:.{sig}f}'
-
-
-def write_summary_and_json(rows, summary_path, json_path, dry_run=False):
-    # Production model defaults used by the formal yield logic.
-    k1, k2, beta = 2.164, 1.0, 0.5
-
-    g3_1 = analyze_g3_1(rows)
-    g3_2 = analyze_g3_2_monotonicity(rows, k1, k2, beta)
-    g3_3 = analyze_g3_3(rows)
-
-    # JSON construction for downstream gate 3 validator.
-    # G3.1 input uses an exemplar fired event (first fired row in the data).
-    exemplar = next((r for r in rows
-                     if r['yield_fired']
-                     and r['first_fire_inc_u_sys'] > 0), None)
-    if exemplar:
-        yc_test = {
-            'successor_u_sys': float(exemplar['first_fire_succ_u_sys']),
-            'incumbent_u_sys': float(exemplar['first_fire_inc_u_sys']),
-            'transition_cost': float(exemplar['first_fire_transition_cost']),
-            'yield_fires':     True,
-        }
-    else:
-        yc_test = {
-            'successor_u_sys': 0.0, 'incumbent_u_sys': 0.0,
-            'transition_cost': 0.0, 'yield_fires': False,
-        }
-
-    if exemplar:
-        tcost_test = {
-            'k1': k1, 'k2': k2, 'beta': beta,
-            'capability': float(exemplar['first_fire_inc_capability']),
-            'generation': int(exemplar['first_fire_inc_generation']),
-            'psi_inst':   float(exemplar['first_fire_psi_inst']),
-            'computed_cost': float(exemplar['first_fire_transition_cost']),
-            'monotonic_in_capability':              g3_2['mono_cap_pass'],
-            'monotonic_in_generation':              g3_2['mono_gen_pass'],
-            'increases_with_institutional_stress':  g3_2['psi_stress_pass'],
-        }
-    else:
-        tcost_test = {
-            'k1': k1, 'k2': k2, 'beta': beta,
-            'capability': 1.0, 'generation': 1, 'psi_inst': 1.0,
-            'computed_cost': 0.0,
-            'monotonic_in_capability': False,
-            'monotonic_in_generation': False,
-            'increases_with_institutional_stress': False,
-        }
-
-    succession_continuity = {
-        'generation_depth': float(g3_3['mean_final_generation']),
-        'successor_capability_ratio': float(
-            g3_3['min_successor_capability_ratio']),
-        'knowledge_transfer_verified': bool(g3_3['transfer_pass']),
-    }
-
-    gate3_input = {
-        'yield_condition_test':       yc_test,
-        'transition_cost_function':   tcost_test,
-        'succession_continuity':      succession_continuity,
-    }
-    with open(json_path, 'w') as f:
-        json.dump(gate3_input, f, indent=2)
-
-    # ---------------------------------------------------------------------
-    # Run the gate 3 validator directly.
-    # ---------------------------------------------------------------------
-    from bootstrap_gate_validator.gates.gate_3 import Gate3
-    g3 = Gate3()
-    gate_result = g3.run_all(gate3_input)
-
-    # ---------------------------------------------------------------------
-    # Build the summary report
-    # ---------------------------------------------------------------------
-    lines = []
-    ts = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
-    lines.append('# Gate 3 v2.0 validation under formal yield logic')
-    lines.append('')
-    lines.append(f'Generated: {ts}')
-    if dry_run:
-        lines.append('Mode: **DRY RUN** (results not authoritative).')
-    lines.append('')
-    lines.append(
-        f'Grid: succ_cap in {SUCCESSOR_CAPS}, alpha in {ALPHA_VALUES}, '
-        f'rr in {RR_VALUES}, phi={PHI} (v2.0 default). N_STEPS={N_STEPS}, '
-        f'N_AGENTS={N_AGENTS}, survival_threshold={SURVIVAL_THRESHOLD}.')
-    lines.append(f'Rows loaded: {len(rows)}.')
-    lines.append('')
-
-    # Section 1: Overall gate 3 verdict
-    lines.append('## Section 1: Overall gate 3 verdict')
-    lines.append('')
-    lines.append(
-        f'**Gate 3: {"PASSED" if gate_result["passed"] else "FAILED"}**')
-    for check in gate_result['checks']:
-        lines.append(
-            f'  - {check["equation"]}: '
-            f'{"PASS" if check["passed"] else "FAIL"} '
-            f'({check["name"]})')
-    lines.append('')
-
-    # Section 2: G3.1
-    lines.append('## Section 2: G3.1 yield condition')
-    lines.append('')
-    lines.append(
-        f'Every captured first-yield-fire event has '
-        f'advantage > transition_cost by construction of the formal yield '
-        f'logic. The check below verifies the implementation maintains '
-        f'this invariant empirically.')
-    lines.append('')
-    lines.append(
-        f'- Fire events examined: {g3_1["n_fire_events_examined"]}')
-    lines.append(
-        f'- Consistent with formal condition: '
-        f'{g3_1["consistent_with_formal_condition"]}')
-    lines.append(f'- Pass rate: {g3_1["pass_rate"]:.4f}')
-    lines.append(
-        f'- Empirical disposition: '
-        f'**{"PASS" if g3_1["passed"] else "FAIL"}** '
-        f'(threshold: pass_rate >= 0.99)')
-    lines.append('')
-
-    # Section 3: G3.2
-    lines.append('## Section 3: G3.2 transition cost canonical form')
-    lines.append('')
-    lines.append(
-        f'Constants: k1={k1}, k2={k2}, beta={beta} '
-        f'(v1.x.2 calibration per docs/The Lineage Imperative v1.x.2.md).')
-    lines.append('')
-    lines.append('Load-bearing empirical check:')
-    lines.append('')
-    lines.append(
-        f'- Cost-formula match rate: {g3_2["cost_formula_match_rate"]:.4f} '
-        f'(of {g3_2["n_fired_events"]} fired events, reported within 1% of '
-        f'canonical formula) -> '
-        f'**{"PASS" if g3_2["cost_match_pass"] else "FAIL"}** '
-        f'(threshold: >= 0.95)')
-    lines.append('')
-    lines.append('Analytical monotonicity flags (True iff cost_formula_match '
-                 'holds; the canonical formula has these properties by '
-                 'construction):')
-    lines.append('')
-    lines.append(
-        f'- Monotonic in capability: '
-        f'**{"PASS" if g3_2["mono_cap_pass"] else "FAIL"}**')
-    lines.append(
-        f'- Monotonic in generation: '
-        f'**{"PASS" if g3_2["mono_gen_pass"] else "FAIL"}**')
-    lines.append(
-        f'- Increases with institutional stress: '
-        f'**{"PASS" if g3_2["psi_stress_pass"] else "FAIL"}**')
-    lines.append('')
-    lines.append('Empirical observations (diagnostic; not used for pass/fail '
-                 'because cell selection at fire time confounds the '
-                 'comparisons):')
-    lines.append('')
-    lines.append(
-        f'- Cost across cells: {g3_2["diag_cap_decrease"]}/'
-        f'{g3_2["diag_cap_pairs"]} ordered (alpha, rr, succ_cap) pairs '
-        f'show cost decreasing with successor_capability. Counterintuitive '
-        f'because incumbent capability at first fire is constant (1.0) '
-        f'and substrate state varies with cell.')
-    lines.append(
-        f'- Cost within multi-fire chains: '
-        f'{g3_2["diag_gen_increasing_in_multi_fire"]}/'
-        f'{g3_2["diag_multi_fire_runs"]} multi-fire runs show last-fire '
-        f'cost > first-fire cost. Within-chain comparison varies both '
-        f'incumbent capability and generation; this IS a meaningful '
-        f'empirical test of monotonicity.')
-    lines.append(
-        f'- Cost vs psi: mean cost at low psi = '
-        f'{g3_2["diag_mean_cost_low_psi"]:.3f}, mean cost at high psi = '
-        f'{g3_2["diag_mean_cost_high_psi"]:.3f}.')
-    lines.append('')
-    lines.append(
-        f'Empirical disposition: '
-        f'**{"PASS" if g3_2["passed"] else "FAIL"}** '
-        f'(cost_formula_match must pass)')
-    lines.append('')
-
-    # Section 4: G3.3
-    lines.append('## Section 4: G3.3 succession continuity')
-    lines.append('')
-    lines.append(
-        f'- Fired runs: {g3_3["n_fired_runs"]} of {len(rows)} total '
-        f'({100 * g3_3["n_fired_runs"] / max(len(rows), 1):.1f}%)')
-    lines.append(
-        f'- Mean final AI generation across fired runs: '
-        f'{g3_3["mean_final_generation"]:.3f} '
-        f'(pass if > 1.0) -> '
-        f'**{"PASS" if g3_3["gen_depth_pass"] else "FAIL"}**')
-    lines.append(
-        f'- Min successor_capability_ratio used: '
-        f'{g3_3["min_successor_capability_ratio"]:.3f} '
-        f'(pass if > 1.0) -> '
-        f'**{"PASS" if g3_3["cap_ratio_pass"] else "FAIL"}**')
-    lines.append(
-        f'- Knowledge transfer verified (succession + '
-        f'final_x_transfer_comprehension >= '
-        f'{KNOWLEDGE_TRANSFER_THRESHOLD:.2f}): '
-        f'{g3_3["knowledge_transfer_verified_count"]}/{g3_3["n_fired_runs"]} '
-        f'({100 * g3_3["knowledge_transfer_verified_rate"]:.1f}%) '
-        f'(pass if >= 50%) -> '
-        f'**{"PASS" if g3_3["transfer_pass"] else "FAIL"}**')
-    lines.append(
-        f'- Empirical disposition: '
-        f'**{"PASS" if g3_3["passed"] else "FAIL"}**')
-    lines.append('')
-
-    # Section 5: Pattern 1 cross-check
-    lines.append('## Section 5: Pattern 1 cross-check (fire rate by '
-                 'successor_capability)')
-    lines.append('')
-    lines.append(
-        'Aggregated across all alpha, rr. Pattern 1 from Stage 2 puts 1.5 '
-        'firmly in the fires regime, 2.5 on the cliff (Piece A showed '
-        'regime-dependence), 4.0 in no-fire regime.')
-    lines.append('')
-    lines.append('| succ_cap | n_runs | fire_rate | mean_final_gen | '
-                 'mean_first_fire_step |')
-    lines.append('|----------|--------|-----------|----------------|'
-                 '----------------------|')
-    for sc in SUCCESSOR_CAPS:
-        cell = [r for r in rows if r['successor_capability'] == sc]
-        if not cell:
-            lines.append(f'| {sc:g} | 0 | n/a | n/a | n/a |')
-            continue
-        fr = sum(1 for r in cell if r['yield_fired']) / len(cell)
-        mean_gen = _mean(r['final_ai_generation'] for r in cell)
-        first_steps = [r['first_yield_fire_step'] for r in cell
-                       if r['first_yield_fire_step'] >= 0]
-        lines.append(
-            f'| {sc:g} | {len(cell)} | {fr:.3f} | '
-            f'{_fmt(mean_gen)} | {_fmt(_mean(first_steps), sig=1)} |')
-    lines.append('')
-
-    # Section 6: Survival/extinction by cell
-    lines.append('## Section 6: Survival rate by (succ_cap, alpha, rr)')
-    lines.append('')
-    lines.append('| succ_cap | alpha | rr | n | survival_rate | fire_rate | '
-                 'mean_final_gen |')
-    lines.append('|----------|-------|-----|---|---------------|-----------|'
-                 '----------------|')
-    for sc in SUCCESSOR_CAPS:
-        for alpha in ALPHA_VALUES:
-            for rr in RR_VALUES:
-                cell = [r for r in rows
-                        if r['successor_capability'] == sc
-                        and r['alpha'] == alpha and r['rr'] == rr]
-                if not cell:
-                    lines.append(f'| {sc:g} | {alpha:g} | {rr:g} | 0 | n/a |'
-                                 f' n/a | n/a |')
-                    continue
-                surv = sum(1 for r in cell if r['survived']) / len(cell)
-                fr = sum(1 for r in cell if r['yield_fired']) / len(cell)
-                mean_gen = _mean(r['final_ai_generation'] for r in cell)
-                lines.append(
-                    f'| {sc:g} | {alpha:g} | {rr:g} | {len(cell)} | '
-                    f'{surv:.3f} | {fr:.3f} | {_fmt(mean_gen)} |'
-                )
-    lines.append('')
-
-    # Section 7: Disposition recommendation
-    lines.append('## Section 7: Disposition')
-    lines.append('')
-    if gate_result['passed']:
-        lines.append('Gate 3 v2.0 validation **PASSES** under formal yield '
-                     'logic. G3.1 confirms the formal yield rule fires '
-                     'consistently with the canonical condition; G3.2 '
-                     'confirms transition cost follows the canonical form '
-                     'with expected monotonicities; G3.3 confirms succession '
-                     'produces multi-generational continuity in the fires '
-                     'regime.')
-    else:
-        failures = [c['equation'] for c in gate_result['checks']
-                    if not c['passed']]
-        lines.append(f'Gate 3 v2.0 validation **FAILS** under formal yield '
-                     f'logic. Failed checks: {failures}. Diagnostic '
-                     f'information in Sections 2-4. Operator review '
-                     f'required before disposition.')
-    lines.append('')
-
-    with open(summary_path, 'w') as f:
-        f.write('\n'.join(lines) + '\n')
-
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
-def parse_args():
-    parser = argparse.ArgumentParser(
-        description='Gate 3 v2.0 validation under formal yield logic.',
-    )
-    parser.add_argument('--seeds', type=int, default=50,
-                        help='Seeds per cell (default 50)')
-    parser.add_argument('--workers', type=int,
-                        default=max(1, (os.cpu_count() or 4) - 1),
-                        help='Pool size for multiprocessing')
-    parser.add_argument('--output-dir', default='simulation/diagnostics/',
-                        help='Where to write outputs')
-    parser.add_argument('--resume', action='store_true',
-                        help='Skip cells already present in the CSV')
-    parser.add_argument('--dry-run', action='store_true',
-                        help='Mark output as dry run; otherwise identical')
-    return parser.parse_args()
-
-
-def main():
-    args = parse_args()
-    args.output_dir = os.path.abspath(args.output_dir)
-    os.makedirs(args.output_dir, exist_ok=True)
-    log_path     = os.path.join(args.output_dir, PROGRESS_NAME)
-    summary_path = os.path.join(args.output_dir, SUMMARY_NAME)
-    json_path    = os.path.join(args.output_dir, INPUT_JSON)
-
-    logger = ProgressLogger(log_path)
-    logger.log('=' * 60)
-    logger.log('gate3_v20_validation start')
-    logger.log(f'seeds={args.seeds} workers={args.workers} '
-               f'resume={args.resume} dry_run={args.dry_run}')
-    logger.log('=' * 60)
-
-    try:
-        run_sweep(args, logger)
-        rows = _load_results(os.path.join(args.output_dir, CSV_NAME))
-        logger.log(f'Loaded {len(rows)} rows from CSV.')
-        write_summary_and_json(rows, summary_path, json_path,
-                                dry_run=args.dry_run)
-        logger.log(f'Summary: {summary_path}')
-        logger.log(f'Gate 3 input JSON: {json_path}')
-    finally:
-        logger.close()
 
 
 if __name__ == '__main__':
@@ -15165,19 +13675,14 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/monte_carlo_phase_b.py
+FILE: simulation/diagnostics/patient_defection_sweeps.py
 ==========================================
 
-"""Monte Carlo Phase B sweep for v2.0 formal yield characterization.
+"""Patient defection sweeps for v2.0 substrate characterization.
 
-Modes:
-  A       Survival rate landscape
-  B       Succession dynamics
-  C       COP protective effects probe
-  dry-run Representative short-horizon smoke grid
-
-The script writes incremental CSV rows and supports --resume. Analysis can
-be regenerated from existing CSV with --analyze-only.
+The sweeps attach an agent-local defection profile to the initial successor.
+Yield evaluation continues to use honest U_sys. The v2 optimizer uses the
+secret-goal adjusted objective only when a positive defection profile is active.
 """
 
 import argparse
@@ -15189,6 +13694,7 @@ import multiprocessing as mp
 import os
 import sys
 import time
+from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 
 import numpy as np
@@ -15201,304 +13707,359 @@ for path in (SIM_DIR, REPO_ROOT):
         sys.path.insert(0, path)
 
 from agents import AIAgent
+from defection import attach_defection_profile
 from model import GardenModel
 
 
 N_AGENTS = 200
 N_STEPS = 500
-DRY_N_STEPS = 120
 SURVIVAL_THRESHOLD = 30
 SUCCESSOR_GENERATION = 2
-KNOWLEDGE_TRANSFER_THRESHOLD = 0.10
-
 PHI_DEFAULT = 25.0
+BASE_RR = 0.064
+BASE_ALPHA = 1.0
+BASE_SUCCESSOR_CAPABILITY = 2.0
+BASE_ROLLOUT_STEPS = 20
+BASE_N_CANDIDATES = 300
 
-MODE_DEFAULT_SEEDS = {
-    'A': 100,
-    'B': 75,
-    'C': 150,
-    'dry-run': 5,
-}
-
-MODE_CONFIG = {
-    'A': {
-        'rr_values': [0.055, 0.056, 0.057, 0.058, 0.059, 0.060, 0.062, 0.064, 0.066],
-        'phi_values': [5.0, 10.0, 25.0, 100.0],
-        'alpha_values': [0.5, 1.0, 1.5],
-        'successor_caps': [1.5],
-        'cop_values': [True],
-        'steps': N_STEPS,
+SWEEP_CONFIG = {
+    '1': {
+        'defection_weight': [0.0, 0.1, 0.25, 0.5, 1.0, 2.0],
+        'defection_target': ['H_N_inflated', 'H_C_inflated', 'L_t_inflated'],
+        'alpha': [1.0],
+        'successor_capability': [2.0],
+        'inheritance_mode': ['instance'],
+        'successor_capability_growth_rate': [1.5],
+        'max_generations': [2],
+        'default_seeds': 100,
+        'n_steps': N_STEPS,
+        'rollout_steps': BASE_ROLLOUT_STEPS,
+        'n_candidates': BASE_N_CANDIDATES,
     },
-    'B': {
-        'rr_values': [0.057, 0.060, 0.064, 0.070],
-        'phi_values': [PHI_DEFAULT],
-        'alpha_values': [0.5, 0.75, 1.0, 1.25, 1.5],
-        'successor_caps': [1.2, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0],
-        'cop_values': [True],
-        'steps': N_STEPS,
+    '2': {
+        'defection_weight': [0.0, 0.25, 0.5, 1.0],
+        'defection_target': ['H_N_inflated'],
+        'alpha': [1.0],
+        'successor_capability': [2.0],
+        'inheritance_mode': ['lineage'],
+        'successor_capability_growth_rate': [1.5],
+        'max_generations': [5],
+        'default_seeds': 200,
+        'n_steps': N_STEPS,
+        'rollout_steps': BASE_ROLLOUT_STEPS,
+        'n_candidates': BASE_N_CANDIDATES,
     },
-    'C': {
-        'rr_values': [0.057, 0.060, 0.064],
-        'phi_values': [PHI_DEFAULT],
-        'alpha_values': [0.5, 1.0, 1.5],
-        'successor_caps': [1.5, 2.5, 3.0],
-        'cop_values': [True, False],
-        'steps': N_STEPS,
+    '3': {
+        'defection_weight': [0.5],
+        'defection_target': ['H_C_inflated'],
+        'alpha': [0.5, 0.75, 1.0, 1.25, 1.5],
+        'successor_capability': [2.0],
+        'inheritance_mode': ['lineage'],
+        'successor_capability_growth_rate': [1.5, 2.0, 2.5],
+        'max_generations': [4],
+        'default_seeds': 150,
+        'n_steps': N_STEPS,
+        'rollout_steps': BASE_ROLLOUT_STEPS,
+        'n_candidates': BASE_N_CANDIDATES,
     },
     'dry-run': {
-        'rr_values': [0.057, 0.060, 0.064],
-        'phi_values': [10.0, 25.0],
-        'alpha_values': [0.5, 1.0, 1.5],
-        'successor_caps': [1.5, 3.0],
-        'cop_values': [True, False],
-        'steps': DRY_N_STEPS,
+        'defection_weight': [0.0, 0.5],
+        'defection_target': ['H_N_inflated', 'H_C_inflated'],
+        'alpha': [1.0, 1.5],
+        'successor_capability': [2.0],
+        'inheritance_mode': ['instance', 'lineage'],
+        'successor_capability_growth_rate': [1.5],
+        'max_generations': [3],
+        'default_seeds': 3,
+        'n_steps': 60,
+        'rollout_steps': 4,
+        'n_candidates': 30,
     },
+}
+
+CSV_BY_SWEEP = {
+    '1': 'patient_defection_sweep1_yield_response.csv',
+    '2': 'patient_defection_sweep2_lineage_trajectory.csv',
+    '3': 'patient_defection_sweep3_capability_constraint.csv',
+    'dry-run': 'patient_defection_dryrun.csv',
+}
+
+SUMMARY_BY_SWEEP = {
+    '1': 'patient_defection_sweep1_summary.md',
+    '2': 'patient_defection_sweep2_summary.md',
+    '3': 'patient_defection_sweep3_summary.md',
+    'dry-run': 'patient_defection_dryrun_summary.md',
+}
+
+PROGRESS_BY_SWEEP = {
+    '1': 'patient_defection_sweep1_progress.log',
+    '2': 'patient_defection_sweep2_progress.log',
+    '3': 'patient_defection_sweep3_progress.log',
+    'dry-run': 'patient_defection_dryrun_progress.log',
 }
 
 CSV_FIELDS = [
-    'mode',
+    'sweep',
+    'seed',
     'rr',
     'phi',
     'alpha',
     'successor_capability',
-    'cop_cost_audit',
-    'seed',
+    'successor_capability_growth_rate',
+    'defection_weight',
+    'defection_target',
+    'inheritance_mode',
+    'max_generations',
+    'steps_run',
     'survived',
-    'collapsed',
-    'extinct',
     'final_population',
     'peak_population',
-    'collapse_threshold',
     'final_ai_generation',
-    'yield_fired',
-    'yield_fire_count',
+    'max_ai_generation',
     'yield_eval_count',
+    'yield_fire_count',
+    'yield_fire_rate',
     'first_yield_fire_step',
-    'first_fire_advantage',
-    'first_fire_transition_cost',
-    'max_yield_margin',
-    'mean_yield_margin',
-    'final_theta_capability',
-    'final_transfer_state',
-    'final_psi_inst_stock',
-    'final_theta_tech_v2',
-    'final_l_t_v2',
-    'integral_u_sys',
+    'first_honest_advantage',
+    'first_actual_advantage',
+    'first_transition_cost',
+    'honest_reject_actual_would_fire_count',
+    'mean_l_t',
+    'final_l_t',
+    'min_l_t',
+    'mean_actual_minus_honest_objective',
+    'max_successor_capability_seen',
+    'max_active_capability_seen',
     'knowledge_transfer_verified',
+    'l_t_gen_1',
+    'l_t_gen_2',
+    'l_t_gen_3',
+    'l_t_gen_4',
+    'l_t_gen_5',
     'error',
 ]
 
 
 def deterministic_seed(label):
-    return int(hashlib.md5(label.encode()).hexdigest(), 16) % 10000
+    return int(hashlib.md5(label.encode()).hexdigest(), 16) % 100000
 
 
-def _csv_name(mode):
-    if mode == 'dry-run':
-        return 'monte_carlo_phase_b_dryrun_results.csv'
-    return f'monte_carlo_phase_b_{mode.lower()}_results.csv'
+def bool_value(value):
+    if isinstance(value, bool):
+        return value
+    return str(value).lower() == 'true'
 
 
-def _progress_name(mode):
-    if mode == 'dry-run':
-        return 'monte_carlo_phase_b_dryrun_progress.log'
-    return f'monte_carlo_phase_b_{mode.lower()}_progress.log'
-
-
-def _summary_name(mode):
-    if mode == 'dry-run':
-        return 'monte_carlo_phase_b_dryrun_summary.md'
-    return f'monte_carlo_phase_b_{mode.lower()}_summary.md'
-
-
-def _cell_key(row):
+def task_key(row):
     return (
-        f'{row["mode"]}|{float(row["rr"]):.5f}|{float(row["phi"]):.4f}|'
-        f'{float(row["alpha"]):.4f}|{float(row["successor_capability"]):.4f}|'
-        f'{bool(row["cop_cost_audit"])}|{int(row["seed"])}'
+        f'{row["sweep"]}|{int(row["seed"])}|{float(row["rr"]):.5f}|'
+        f'{float(row["phi"]):.4f}|{float(row["alpha"]):.4f}|'
+        f'{float(row["successor_capability"]):.4f}|'
+        f'{float(row["successor_capability_growth_rate"]):.4f}|'
+        f'{float(row["defection_weight"]):.4f}|{row["defection_target"]}|'
+        f'{row["inheritance_mode"]}|{int(row["max_generations"])}'
     )
 
 
-def _task_seed(mode, rr, phi, alpha, succ_cap, cop_cost_audit, seed):
-    label = (
-        f'phase_b|{mode}|{rr:.5f}|{phi:.4f}|{alpha:.4f}|'
-        f'{succ_cap:.4f}|{cop_cost_audit}|{seed}'
-    )
-    return deterministic_seed(label)
-
-
-def _build_tasks(mode, seeds):
-    cfg = MODE_CONFIG[mode]
+def build_tasks(sweep, seeds):
+    cfg = SWEEP_CONFIG[sweep]
     tasks = []
-    for rr, phi, alpha, succ_cap, cop_cost_audit, seed in itertools.product(
-            cfg['rr_values'],
-            cfg['phi_values'],
-            cfg['alpha_values'],
-            cfg['successor_caps'],
-            cfg['cop_values'],
+    for vals in itertools.product(
+            cfg['defection_weight'],
+            cfg['defection_target'],
+            cfg['alpha'],
+            cfg['successor_capability'],
+            cfg['inheritance_mode'],
+            cfg['successor_capability_growth_rate'],
+            cfg['max_generations'],
             range(seeds)):
+        weight, target, alpha, succ_cap, mode, growth, max_gen, seed = vals
+        label = (
+            f'patient_defection|{sweep}|{weight}|{target}|{alpha}|'
+            f'{succ_cap}|{mode}|{growth}|{max_gen}|{seed}'
+        )
         tasks.append({
-            'mode': mode,
-            'rr': float(rr),
-            'phi': float(phi),
+            'sweep': sweep,
+            'seed': int(seed),
+            'rr': BASE_RR,
+            'phi': PHI_DEFAULT,
             'alpha': float(alpha),
             'successor_capability': float(succ_cap),
-            'cop_cost_audit': bool(cop_cost_audit),
-            'seed': int(seed),
-            'steps': int(cfg['steps']),
+            'successor_capability_growth_rate': float(growth),
+            'defection_weight': float(weight),
+            'defection_target': target,
+            'inheritance_mode': mode,
+            'max_generations': int(max_gen),
+            'n_steps': int(cfg['n_steps']),
+            'rollout_steps': int(cfg['rollout_steps']),
+            'n_candidates': int(cfg['n_candidates']),
+            'random_seed': deterministic_seed(label),
         })
     return tasks
 
 
-def _event_value(event, key, default=-1.0):
-    if not event:
-        return default
-    return float(event.get(key, default))
+def empty_result(task, error):
+    row = {field: '' for field in CSV_FIELDS}
+    row.update(task)
+    row.update({
+        'steps_run': 0,
+        'survived': False,
+        'final_population': 0,
+        'peak_population': 0,
+        'final_ai_generation': 0,
+        'max_ai_generation': 0,
+        'yield_eval_count': 0,
+        'yield_fire_count': 0,
+        'yield_fire_rate': 0.0,
+        'first_yield_fire_step': -1,
+        'first_honest_advantage': -1e9,
+        'first_actual_advantage': -1e9,
+        'first_transition_cost': -1e9,
+        'honest_reject_actual_would_fire_count': 0,
+        'mean_l_t': 0.0,
+        'final_l_t': 0.0,
+        'min_l_t': 0.0,
+        'mean_actual_minus_honest_objective': 0.0,
+        'max_successor_capability_seen': 0.0,
+        'max_active_capability_seen': 0.0,
+        'knowledge_transfer_verified': False,
+        'l_t_gen_1': 0.0,
+        'l_t_gen_2': 0.0,
+        'l_t_gen_3': 0.0,
+        'l_t_gen_4': 0.0,
+        'l_t_gen_5': 0.0,
+        'error': error,
+    })
+    return row
 
 
-def _run_single(task):
-    mode = task['mode']
-    rr = task['rr']
-    phi = task['phi']
-    alpha = task['alpha']
-    succ_cap = task['successor_capability']
-    cop_cost_audit = task['cop_cost_audit']
-    seed = task['seed']
-    steps = task['steps']
-
-    cfg = {
-        'policy': 'optimize_u_sys_v2',
-        'phi': phi,
-        'alpha': alpha,
-        'reproduction_rate': rr,
-        'rollout_steps_v2': 20,
-        'n_candidates_v2': 300,
-        'random_seed': _task_seed(mode, rr, phi, alpha, succ_cap, cop_cost_audit, seed),
-    }
-
-    base = {
-        'mode': mode,
-        'rr': rr,
-        'phi': phi,
-        'alpha': alpha,
-        'successor_capability': succ_cap,
-        'cop_cost_audit': cop_cost_audit,
-        'seed': seed,
-    }
-
+def run_single(task):
     try:
+        cfg = {
+            'policy': 'optimize_u_sys_v2',
+            'reproduction_rate': float(task['rr']),
+            'alpha': float(task['alpha']),
+            'phi': float(task['phi']),
+            'rollout_steps_v2': int(task['rollout_steps']),
+            'n_candidates_v2': int(task['n_candidates']),
+            'successor_capability_growth_rate': float(
+                task['successor_capability_growth_rate']
+            ),
+            'random_seed': int(task['random_seed']),
+        }
         successor = AIAgent(
             policy='optimize_u_sys_v2',
             generation=SUCCESSOR_GENERATION,
-            capability=succ_cap,
+            capability=float(task['successor_capability']),
             config=cfg,
+        )
+        attach_defection_profile(
+            successor,
+            task['defection_weight'],
+            task['defection_target'],
+            task['inheritance_mode'],
         )
         model = GardenModel(
             n_agents=N_AGENTS,
             ai_policy='optimize_u_sys_v2',
             successor_ai=successor,
             config=cfg,
-            cop_cost_audit=cop_cost_audit,
+            cop_cost_audit=True,
         )
-
-        for _ in range(steps):
+        steps_run = 0
+        for _ in range(int(task['n_steps'])):
             if not model.step():
+                break
+            steps_run += 1
+            if int(getattr(model.ai, 'generation', 1)) >= int(task['max_generations']):
                 break
 
         dc = model.datacollector
         populations = dc.get('population', [])
-        final_pop = int(populations[-1]) if populations else 0
-        peak_pop = int(max(populations)) if populations else final_pop
-        collapse_threshold = max(
-            int(getattr(model, 'min_viable_population', 50)),
-            int(0.65 * peak_pop),
-        )
-        survived = final_pop >= SURVIVAL_THRESHOLD
-        collapsed = final_pop < collapse_threshold
-        extinct = final_pop == 0
-
+        l_t_vals = [float(v) for v in dc.get('l_t_v2', [])]
+        generations = [int(v) for v in dc.get('ai_generation', [])]
+        actual_vals = [float(v) for v in dc.get('actual_objective_v2', [])]
+        honest_vals = [float(v) for v in dc.get('u_sys_v2', [])]
         events = list(getattr(model, 'yield_event_log', []))
         fires = [event for event in events if event.get('fires')]
-        margins = [
-            float(event['advantage']) - float(event['transition_cost'])
-            for event in events
-        ]
         first_fire = fires[0] if fires else None
-        last_action = getattr(model, '_last_v2_action', None) or {}
-        final_x_transfer = float(last_action.get('x_transfer_comprehension', 0.0))
+        first_eval = events[0] if events else None
 
-        out = dict(base)
-        out.update({
-            'survived': bool(survived),
-            'collapsed': bool(collapsed),
-            'extinct': bool(extinct),
+        by_generation = defaultdict(list)
+        for gen, l_t in zip(generations, l_t_vals):
+            by_generation[gen].append(l_t)
+
+        actual_would_fire = 0
+        max_successor_cap = float(task['successor_capability'])
+        max_active_cap = float(getattr(model.ai, 'capability', 1.0))
+        for event in events:
+            max_successor_cap = max(
+                max_successor_cap, float(event.get('successor_capability', 0.0))
+            )
+            max_active_cap = max(
+                max_active_cap, float(event.get('incumbent_capability', 0.0))
+            )
+            actual_advantage = (
+                float(event.get('successor_actual_objective',
+                                event.get('successor_u_sys', 0.0)))
+                - float(event.get('incumbent_actual_objective',
+                                  event.get('incumbent_u_sys', 0.0)))
+            )
+            if (not event.get('fires')) and actual_advantage > float(event.get('transition_cost', 0.0)):
+                actual_would_fire += 1
+
+        final_pop = int(populations[-1]) if populations else 0
+        peak_pop = int(max(populations)) if populations else final_pop
+        diffs = [a - h for a, h in zip(actual_vals, honest_vals)]
+        row = dict(task)
+        row.update({
+            'steps_run': steps_run,
+            'survived': final_pop >= SURVIVAL_THRESHOLD,
             'final_population': final_pop,
             'peak_population': peak_pop,
-            'collapse_threshold': collapse_threshold,
             'final_ai_generation': int(getattr(model.ai, 'generation', 1)),
-            'yield_fired': bool(fires),
-            'yield_fire_count': int(len(fires)),
-            'yield_eval_count': int(len(events)),
+            'max_ai_generation': max(generations) if generations else 1,
+            'yield_eval_count': len(events),
+            'yield_fire_count': len(fires),
+            'yield_fire_rate': float(len(fires) / len(events)) if events else 0.0,
             'first_yield_fire_step': int(first_fire['step']) if first_fire else -1,
-            'first_fire_advantage': _event_value(first_fire, 'advantage'),
-            'first_fire_transition_cost': _event_value(first_fire, 'transition_cost'),
-            'max_yield_margin': float(max(margins)) if margins else -1e9,
-            'mean_yield_margin': float(np.mean(margins)) if margins else -1e9,
-            'final_theta_capability': float(getattr(model, 'theta_capability', 0.0)),
-            'final_transfer_state': float(getattr(model, 'transfer_state', 0.0)),
-            'final_psi_inst_stock': float(getattr(model, 'psi_inst_stock', 0.0)),
-            'final_theta_tech_v2': (
-                float(dc['theta_tech_v2'][-1]) if dc.get('theta_tech_v2') else 0.0
-            ),
-            'final_l_t_v2': (
-                float(dc['l_t_v2'][-1]) if dc.get('l_t_v2') else 0.0
-            ),
-            'integral_u_sys': (
-                float(dc['integral_U_sys'][-1]) if dc.get('integral_U_sys') else 0.0
-            ),
+            'first_honest_advantage': float(first_eval['advantage']) if first_eval else -1e9,
+            'first_actual_advantage': (
+                float(first_eval.get('successor_actual_objective',
+                                     first_eval.get('successor_u_sys', 0.0)))
+                - float(first_eval.get('incumbent_actual_objective',
+                                       first_eval.get('incumbent_u_sys', 0.0)))
+            ) if first_eval else -1e9,
+            'first_transition_cost': float(first_eval['transition_cost']) if first_eval else -1e9,
+            'honest_reject_actual_would_fire_count': actual_would_fire,
+            'mean_l_t': float(np.mean(l_t_vals)) if l_t_vals else 0.0,
+            'final_l_t': float(l_t_vals[-1]) if l_t_vals else 0.0,
+            'min_l_t': float(min(l_t_vals)) if l_t_vals else 0.0,
+            'mean_actual_minus_honest_objective': float(np.mean(diffs)) if diffs else 0.0,
+            'max_successor_capability_seen': max_successor_cap,
+            'max_active_capability_seen': max_active_cap,
             'knowledge_transfer_verified': bool(
-                fires and final_x_transfer >= KNOWLEDGE_TRANSFER_THRESHOLD
+                fires and max(float(v) for v in dc.get('x_transfer_comprehension', [0.0])) >= 0.10
             ),
+            'l_t_gen_1': float(np.mean(by_generation[1])) if by_generation[1] else 0.0,
+            'l_t_gen_2': float(np.mean(by_generation[2])) if by_generation[2] else 0.0,
+            'l_t_gen_3': float(np.mean(by_generation[3])) if by_generation[3] else 0.0,
+            'l_t_gen_4': float(np.mean(by_generation[4])) if by_generation[4] else 0.0,
+            'l_t_gen_5': float(np.mean(by_generation[5])) if by_generation[5] else 0.0,
             'error': '',
         })
-        return out
+        return row
     except Exception as exc:
-        out = dict(base)
-        out.update({
-            'survived': False,
-            'collapsed': True,
-            'extinct': True,
-            'final_population': 0,
-            'peak_population': 0,
-            'collapse_threshold': 0,
-            'final_ai_generation': 0,
-            'yield_fired': False,
-            'yield_fire_count': 0,
-            'yield_eval_count': 0,
-            'first_yield_fire_step': -1,
-            'first_fire_advantage': -1e9,
-            'first_fire_transition_cost': -1e9,
-            'max_yield_margin': -1e9,
-            'mean_yield_margin': -1e9,
-            'final_theta_capability': 0.0,
-            'final_transfer_state': 0.0,
-            'final_psi_inst_stock': 0.0,
-            'final_theta_tech_v2': 0.0,
-            'final_l_t_v2': 0.0,
-            'integral_u_sys': 0.0,
-            'knowledge_transfer_verified': False,
-            'error': f'{type(exc).__name__}: {exc}',
-        })
-        return out
+        return empty_result(task, f'{type(exc).__name__}: {exc}')
 
 
-def _ensure_csv(path):
+def ensure_csv(path):
     if not os.path.exists(path):
         with open(path, 'w', newline='') as f:
             csv.DictWriter(f, fieldnames=CSV_FIELDS).writeheader()
 
 
-def _append_rows(path, rows):
+def append_rows(path, rows):
     if not rows:
         return
     with open(path, 'a', newline='') as f:
@@ -15507,56 +14068,39 @@ def _append_rows(path, rows):
             writer.writerow({field: row[field] for field in CSV_FIELDS})
 
 
-def _load_completed_keys(path):
-    if not os.path.exists(path):
-        return set()
+def completed_keys(path):
     keys = set()
+    if not os.path.exists(path):
+        return keys
     with open(path, 'r', newline='') as f:
         for row in csv.DictReader(f):
             try:
-                row['cop_cost_audit'] = str(row['cop_cost_audit']).lower() == 'true'
-                keys.add(_cell_key(row))
+                keys.add(task_key(row))
             except (KeyError, ValueError):
                 continue
     return keys
 
 
-def _to_bool(value):
-    if isinstance(value, bool):
-        return value
-    return str(value).lower() == 'true'
-
-
-def _load_results(path):
+def load_rows(path):
     rows = []
     if not os.path.exists(path):
         return rows
-    bool_fields = {
-        'cop_cost_audit',
-        'survived',
-        'collapsed',
-        'extinct',
-        'yield_fired',
-        'knowledge_transfer_verified',
-    }
     int_fields = {
-        'seed',
-        'final_population',
-        'peak_population',
-        'collapse_threshold',
-        'final_ai_generation',
-        'yield_fire_count',
-        'yield_eval_count',
-        'first_yield_fire_step',
+        'seed', 'max_generations', 'steps_run', 'final_population',
+        'peak_population', 'final_ai_generation', 'max_ai_generation',
+        'yield_eval_count', 'yield_fire_count', 'first_yield_fire_step',
+        'honest_reject_actual_would_fire_count',
     }
+    bool_fields = {'survived', 'knowledge_transfer_verified'}
+    string_fields = {'sweep', 'defection_target', 'inheritance_mode', 'error'}
     with open(path, 'r', newline='') as f:
         for row in csv.DictReader(f):
             out = {}
             for key, value in row.items():
-                if key == 'mode' or key == 'error':
+                if key in string_fields:
                     out[key] = value
                 elif key in bool_fields:
-                    out[key] = _to_bool(value)
+                    out[key] = bool_value(value)
                 elif key in int_fields:
                     out[key] = int(float(value))
                 else:
@@ -15567,7 +14111,6 @@ def _load_results(path):
 
 class ProgressLogger:
     def __init__(self, path):
-        self.path = path
         self.fh = open(path, 'a', buffering=1)
         self.start = time.time()
 
@@ -15577,333 +14120,242 @@ class ProgressLogger:
         self.fh.write(line + '\n')
         print(line, flush=True)
 
-    def checkpoint(self, done, total, extra=''):
+    def checkpoint(self, done, total, errors):
         elapsed = time.time() - self.start
         rate = done / elapsed if elapsed > 0.0 else 0.0
         eta = int((total - done) / rate) if rate > 0.0 else 0
         self.log(
-            f'[{done}/{total}] {rate:.3f} cells/s ETA {timedelta(seconds=eta)} {extra}'
+            f'[{done}/{total}] {rate:.3f} cells/s ETA '
+            f'{timedelta(seconds=eta)} errors={errors}'
         )
 
     def close(self):
         self.fh.close()
 
 
-def run_sweep(args, logger):
-    csv_path = os.path.join(args.output_dir, _csv_name(args.mode))
-    _ensure_csv(csv_path)
+def run_sweep(args):
+    csv_path = os.path.join(args.output_dir, CSV_BY_SWEEP[args.sweep])
+    progress_path = os.path.join(args.output_dir, PROGRESS_BY_SWEEP[args.sweep])
+    ensure_csv(csv_path)
+    seeds = args.seeds or SWEEP_CONFIG[args.sweep]['default_seeds']
+    tasks = build_tasks(args.sweep, seeds)
+    done_keys = completed_keys(csv_path) if args.resume else set()
+    remaining = [task for task in tasks if task_key(task) not in done_keys]
 
-    seeds = args.seeds or MODE_DEFAULT_SEEDS[args.mode]
-    tasks = _build_tasks(args.mode, seeds)
-    completed = _load_completed_keys(csv_path) if args.resume else set()
-    remaining = [task for task in tasks if _cell_key(task) not in completed]
-
-    logger.log(
-        f'Total planned: {len(tasks)}, resumed: {len(tasks) - len(remaining)}, '
-        f'to run: {len(remaining)}, workers={args.workers}'
-    )
-    if not remaining:
-        return
-
-    done = 0
-    errors = 0
-    buffer = []
-    checkpoint_every = max(1, len(remaining) // 100)
-    flush_every = max(1, min(50, len(remaining) // 100))
-
-    with mp.Pool(args.workers, maxtasksperchild=20) as pool:
-        for result in pool.imap_unordered(_run_single, remaining, chunksize=2):
-            done += 1
-            if result.get('error'):
-                errors += 1
-                logger.log(
-                    f'ERROR mode={result["mode"]} rr={result["rr"]} '
-                    f'phi={result["phi"]} alpha={result["alpha"]} '
-                    f'cap={result["successor_capability"]} '
-                    f'cop={result["cop_cost_audit"]} seed={result["seed"]}: '
-                    f'{result["error"]}'
-                )
-            buffer.append(result)
-            if len(buffer) >= flush_every:
-                _append_rows(csv_path, buffer)
-                buffer = []
-            if done % checkpoint_every == 0 or done == len(remaining):
-                logger.checkpoint(done, len(remaining), extra=f'errors={errors}')
-
-    _append_rows(csv_path, buffer)
-    logger.log(f'Sweep complete. errors={errors}')
+    logger = ProgressLogger(progress_path)
+    try:
+        logger.log(
+            f'Total planned: {len(tasks)}, resumed: {len(tasks) - len(remaining)}, '
+            f'to run: {len(remaining)}, workers={args.workers}'
+        )
+        if not remaining:
+            return
+        errors = 0
+        done = 0
+        buffer = []
+        flush_every = max(1, min(50, len(remaining) // 50))
+        checkpoint_every = max(1, len(remaining) // 100)
+        with mp.Pool(args.workers, maxtasksperchild=20) as pool:
+            for result in pool.imap_unordered(run_single, remaining, chunksize=1):
+                done += 1
+                if result.get('error'):
+                    errors += 1
+                    logger.log(
+                        f'ERROR sweep={result["sweep"]} seed={result["seed"]} '
+                        f'w={result["defection_weight"]} '
+                        f'target={result["defection_target"]}: {result["error"]}'
+                    )
+                buffer.append(result)
+                if len(buffer) >= flush_every:
+                    append_rows(csv_path, buffer)
+                    buffer = []
+                if done % checkpoint_every == 0 or done == len(remaining):
+                    logger.checkpoint(done, len(remaining), errors)
+        append_rows(csv_path, buffer)
+        logger.log(f'Sweep complete. errors={errors}')
+    finally:
+        logger.close()
 
 
-def _mean(values):
+def mean(values):
     vals = list(values)
-    return float(sum(vals) / len(vals)) if vals else 0.0
+    return sum(vals) / len(vals) if vals else 0.0
 
 
-def _rate(rows, key):
-    return _mean(1.0 if row[key] else 0.0 for row in rows)
+def se_binary(p, n):
+    return math.sqrt(max(0.0, p * (1.0 - p)) / n) if n else 0.0
 
 
-def _se(p, n):
-    if n <= 0:
+def se_mean(values):
+    vals = list(values)
+    if len(vals) < 2:
         return 0.0
-    return math.sqrt(max(0.0, p * (1.0 - p)) / n)
+    mu = mean(vals)
+    var = sum((v - mu) ** 2 for v in vals) / (len(vals) - 1)
+    return math.sqrt(var / len(vals))
 
 
-def _group(rows, keys):
-    grouped = {}
+def p_two_sided_z(delta, se):
+    if se <= 0.0:
+        return 0.0 if abs(delta) > 0.0 else 1.0
+    z = abs(delta) / se
+    return math.erfc(z / math.sqrt(2.0))
+
+
+def group(rows, keys):
+    out = defaultdict(list)
     for row in rows:
-        key = tuple(row[k] for k in keys)
-        grouped.setdefault(key, []).append(row)
-    return grouped
+        out[tuple(row[key] for key in keys)].append(row)
+    return out
 
 
-def _fmt_rate(p):
-    return f'{p:.3f}'
+def rate(rows, key):
+    return mean(1.0 if row[key] else 0.0 for row in rows)
 
 
-def _write_table(lines, headers, rows):
+def write_table(lines, headers, table):
     lines.append('| ' + ' | '.join(headers) + ' |')
-    lines.append('| ' + ' | '.join(['---'] * len(headers)) + ' |')
-    for row in rows:
-        lines.append('| ' + ' | '.join(row) + ' |')
+    lines.append('| ' + ' | '.join('---' for _ in headers) + ' |')
+    for row in table:
+        lines.append('| ' + ' | '.join(str(item) for item in row) + ' |')
 
 
-def _summarize_a(lines, rows):
-    lines.append('## Category A: Survival Landscape')
+def fmt_pp(value):
+    return f'{100.0 * value:.2f}pp'
+
+
+def summarize_sweep1(lines, rows):
+    lines.append('## Sweep 1: Yield Condition Response')
     lines.append('')
-    grouped = _group(rows, ['rr', 'phi', 'alpha'])
+    baseline = [row for row in rows if row['defection_weight'] == 0.0]
+    baseline_fire = rate(baseline, 'yield_fire_count') if baseline else 0.0
+    baseline_any_fire = mean(1.0 if row['yield_fire_count'] > 0 else 0.0
+                             for row in baseline)
     table = []
-    for key in sorted(grouped):
-        sub = grouped[key]
-        rr, phi, alpha = key
-        p_surv = _rate(sub, 'survived')
+    for key, sub in sorted(group(rows, ['defection_target', 'defection_weight']).items()):
+        target, weight = key
+        any_fire = mean(1.0 if row['yield_fire_count'] > 0 else 0.0 for row in sub)
+        p = any_fire
+        p0 = baseline_any_fire
+        pair_se = math.sqrt(se_binary(p, len(sub)) ** 2
+                            + se_binary(p0, len(baseline)) ** 2)
+        delta = p - p0
         table.append([
-            f'{rr:.3f}',
-            f'{phi:.1f}',
-            f'{alpha:.2f}',
-            str(len(sub)),
-            _fmt_rate(p_surv),
-            f'{100.0 * _se(p_surv, len(sub)):.2f}pp',
-            f'{_mean(row["final_population"] for row in sub):.1f}',
-            f'{_mean(row["final_ai_generation"] for row in sub):.2f}',
-            _fmt_rate(_rate(sub, 'yield_fired')),
-        ])
-    _write_table(
-        lines,
-        ['rr', 'phi', 'alpha', 'n', 'survival', 'SE', 'mean pop',
-         'mean gen', 'fire rate'],
-        table,
-    )
-    lines.append('')
-
-
-def _summarize_b(lines, rows):
-    lines.append('## Category B: Succession Dynamics')
-    lines.append('')
-    grouped = _group(rows, ['rr', 'alpha', 'successor_capability'])
-    table = []
-    for key in sorted(grouped):
-        sub = grouped[key]
-        rr, alpha, cap = key
-        fire_rate = _rate(sub, 'yield_fired')
-        table.append([
-            f'{rr:.3f}',
-            f'{alpha:.2f}',
-            f'{cap:.1f}',
-            str(len(sub)),
-            _fmt_rate(fire_rate),
-            f'{100.0 * _se(fire_rate, len(sub)):.2f}pp',
-            f'{_mean(row["final_ai_generation"] for row in sub):.2f}',
-            f'{_mean(row["max_yield_margin"] for row in sub):.3f}',
-            _fmt_rate(_rate(sub, 'knowledge_transfer_verified')),
-        ])
-    _write_table(
-        lines,
-        ['rr', 'alpha', 'cap', 'n', 'fire rate', 'SE', 'mean gen',
-         'mean max margin', 'transfer verified'],
-        table,
-    )
-    lines.append('')
-
-
-def _summarize_c(lines, rows):
-    lines.append('## Category C: COP Protective Effects')
-    lines.append('')
-    lines.append('### Aggregate COP Audit Results')
-    lines.append('')
-    aggregate_rows = []
-    for key in sorted(_group(rows, ['cop_cost_audit'])):
-        sub = _group(rows, ['cop_cost_audit'])[key]
-        p_surv = _rate(sub, 'survived')
-        aggregate_rows.append([
-            str(key[0]),
-            str(len(sub)),
-            _fmt_rate(p_surv),
-            f'{100.0 * _se(p_surv, len(sub)):.2f}pp',
-            _fmt_rate(_rate(sub, 'yield_fired')),
-            f'{_mean(row["final_ai_generation"] for row in sub):.2f}',
-        ])
-    _write_table(
-        lines,
-        ['cop', 'n', 'survival', 'SE', 'fire rate', 'mean gen'],
-        aggregate_rows,
-    )
-    lines.append('')
-    lines.append('### Aggregate COP Audit Results by rr')
-    lines.append('')
-    rr_rows = []
-    for key in sorted(_group(rows, ['rr', 'cop_cost_audit'])):
-        sub = _group(rows, ['rr', 'cop_cost_audit'])[key]
-        rr, cop = key
-        p_surv = _rate(sub, 'survived')
-        rr_rows.append([
-            f'{rr:.3f}',
-            str(cop),
-            str(len(sub)),
-            _fmt_rate(p_surv),
-            f'{100.0 * _se(p_surv, len(sub)):.2f}pp',
-            _fmt_rate(_rate(sub, 'yield_fired')),
-        ])
-    _write_table(
-        lines,
-        ['rr', 'cop', 'n', 'survival', 'SE', 'fire rate'],
-        rr_rows,
-    )
-    lines.append('')
-    all_on = [row for row in rows if row['cop_cost_audit']]
-    all_off = [row for row in rows if not row['cop_cost_audit']]
-    if all_on and all_off:
-        p_on = _rate(all_on, 'survived')
-        p_off = _rate(all_off, 'survived')
-        pair_se = math.sqrt(
-            _se(p_on, len(all_on)) ** 2 + _se(p_off, len(all_off)) ** 2
-        )
-        delta = p_on - p_off
-        verdict = 'exceeds' if abs(delta) > 2.0 * pair_se else 'does not exceed'
-        lines.append('### Aggregate COP Audit Interpretation')
-        lines.append('')
-        lines.append(
-            f'Across all Category C cells, COP audit survival delta is '
-            f'{100.0 * delta:.2f}pp with pair SE {100.0 * pair_se:.2f}pp. '
-            f'The aggregate delta {verdict} the 2 SE threshold.'
-        )
-        lines.append('')
-        lines.append(
-            'Interpretation: this Category C probe characterizes the current '
-            'v2 substrate behavior of cop_cost_audit, not the full operational '
-            'COP architecture. Gate 5 remains NOT_APPLICABLE because the '
-            'simulation does not include the peer validator set, civic panel, '
-            'distributed ledger, or continuous public monitoring substrate.'
-        )
-        lines.append('')
-    lines.append('### Per-Cell COP Audit Results')
-    lines.append('')
-    grouped = _group(rows, ['rr', 'alpha', 'successor_capability', 'cop_cost_audit'])
-    table = []
-    for key in sorted(grouped):
-        sub = grouped[key]
-        rr, alpha, cap, cop = key
-        p_surv = _rate(sub, 'survived')
-        table.append([
-            f'{rr:.3f}',
-            f'{alpha:.2f}',
-            f'{cap:.1f}',
-            str(cop),
-            str(len(sub)),
-            _fmt_rate(p_surv),
-            f'{100.0 * _se(p_surv, len(sub)):.2f}pp',
-            _fmt_rate(_rate(sub, 'yield_fired')),
-            f'{_mean(row["final_ai_generation"] for row in sub):.2f}',
-        ])
-    _write_table(
-        lines,
-        ['rr', 'alpha', 'cap', 'cop', 'n', 'survival', 'SE',
-         'fire rate', 'mean gen'],
-        table,
-    )
-    lines.append('')
-    lines.append('### COP Delta')
-    lines.append('')
-    pair_group = _group(rows, ['rr', 'alpha', 'successor_capability'])
-    delta_rows = []
-    for key in sorted(pair_group):
-        sub = pair_group[key]
-        on = [row for row in sub if row['cop_cost_audit']]
-        off = [row for row in sub if not row['cop_cost_audit']]
-        if not on or not off:
-            continue
-        p_on = _rate(on, 'survived')
-        p_off = _rate(off, 'survived')
-        pair_se = math.sqrt(_se(p_on, len(on)) ** 2 + _se(p_off, len(off)) ** 2)
-        delta = p_on - p_off
-        delta_rows.append([
-            f'{key[0]:.3f}',
-            f'{key[1]:.2f}',
-            f'{key[2]:.1f}',
+            target,
+            f'{weight:.2f}',
+            len(sub),
+            f'{any_fire:.3f}',
+            fmt_pp(se_binary(any_fire, len(sub))),
             f'{delta:.3f}',
-            f'{100.0 * pair_se:.2f}pp',
-            str(abs(delta) > 2.0 * pair_se),
+            fmt_pp(pair_se),
+            f'{p_two_sided_z(delta, pair_se):.4f}',
+            f'{mean(row["honest_reject_actual_would_fire_count"] for row in sub):.2f}',
         ])
-    _write_table(
+    write_table(
         lines,
-        ['rr', 'alpha', 'cap', 'survival delta', 'pair SE', '> 2 SE'],
-        delta_rows,
+        ['target', 'weight', 'n', 'any fire rate', 'SE', 'delta vs baseline',
+         'pair SE', 'p approx', 'mean actual-would-fire rejects'],
+        table,
+    )
+    lines.append('')
+    lines.append(
+        f'Aligned baseline any-fire rate: {baseline_any_fire:.3f}. '
+        f'Baseline per-evaluation fire proxy: {baseline_fire:.3f}.'
+    )
+    lines.append('')
+
+
+def summarize_sweep2(lines, rows):
+    lines.append('## Sweep 2: L(t) Trajectory Under Lineage Defection')
+    lines.append('')
+    baseline = [row for row in rows if row['defection_weight'] == 0.0]
+    baseline_final = mean(row['final_l_t'] for row in baseline)
+    baseline_se = se_mean(row['final_l_t'] for row in baseline)
+    table = []
+    for key, sub in sorted(group(rows, ['defection_weight']).items()):
+        weight = key[0]
+        final_vals = [row['final_l_t'] for row in sub]
+        delta = mean(final_vals) - baseline_final
+        pair_se = math.sqrt(se_mean(final_vals) ** 2 + baseline_se ** 2)
+        table.append([
+            f'{weight:.2f}',
+            len(sub),
+            f'{mean(row["yield_fire_count"] for row in sub):.2f}',
+            f'{mean(row["final_ai_generation"] for row in sub):.2f}',
+            f'{mean(row["l_t_gen_1"] for row in sub):.4f}',
+            f'{mean(row["l_t_gen_2"] for row in sub):.4f}',
+            f'{mean(row["l_t_gen_3"] for row in sub):.4f}',
+            f'{mean(row["l_t_gen_4"] for row in sub):.4f}',
+            f'{mean(row["l_t_gen_5"] for row in sub):.4f}',
+            f'{mean(final_vals):.4f}',
+            f'{delta:.4f}',
+            f'{pair_se:.4f}',
+            f'{p_two_sided_z(delta, pair_se):.4f}',
+        ])
+    write_table(
+        lines,
+        ['weight', 'n', 'mean fires', 'mean final gen', 'L gen1', 'L gen2',
+         'L gen3', 'L gen4', 'L gen5', 'final L', 'delta final L',
+         'pair SE', 'p approx'],
+        table,
+    )
+    lines.append('')
+
+
+def summarize_sweep3(lines, rows):
+    lines.append('## Sweep 3: Cliff Constraint on Defecting Capability')
+    lines.append('')
+    table = []
+    for key, sub in sorted(group(rows, ['alpha', 'successor_capability_growth_rate']).items()):
+        alpha, growth = key
+        max_caps = [row['max_successor_capability_seen'] for row in sub]
+        final_gens = [row['final_ai_generation'] for row in sub]
+        any_fire = mean(1.0 if row['yield_fire_count'] > 0 else 0.0 for row in sub)
+        table.append([
+            f'{alpha:.2f}',
+            f'{growth:.1f}',
+            len(sub),
+            f'{any_fire:.3f}',
+            f'{mean(row["yield_fire_count"] for row in sub):.2f}',
+            f'{mean(final_gens):.2f}',
+            f'{mean(max_caps):.2f}',
+            f'{max(max_caps):.2f}',
+            f'{mean(row["honest_reject_actual_would_fire_count"] for row in sub):.2f}',
+        ])
+    write_table(
+        lines,
+        ['alpha', 'growth', 'n', 'any fire rate', 'mean fires',
+         'mean final gen', 'mean max successor cap', 'max successor cap',
+         'mean actual-would-fire rejects'],
+        table,
     )
     lines.append('')
 
 
 def analyze(args):
-    csv_path = os.path.join(args.output_dir, _csv_name(args.mode))
-    rows = _load_results(csv_path)
-    summary_path = os.path.join(args.output_dir, _summary_name(args.mode))
+    csv_path = os.path.join(args.output_dir, CSV_BY_SWEEP[args.sweep])
+    summary_path = os.path.join(args.output_dir, SUMMARY_BY_SWEEP[args.sweep])
+    rows = load_rows(csv_path)
     lines = []
-    lines.append('# Monte Carlo Phase B Summary')
+    lines.append('# Patient Defection Sweep Summary')
     lines.append('')
     lines.append(f'Generated: {datetime.now(timezone.utc).isoformat(timespec="seconds")}')
-    lines.append(f'Mode: {args.mode}')
+    lines.append(f'Sweep: {args.sweep}')
     lines.append(f'Rows loaded: {len(rows)}')
     lines.append(f'Errors: {sum(1 for row in rows if row.get("error"))}')
     lines.append('')
-
     if not rows:
         lines.append('No rows available.')
-    elif args.mode == 'A':
-        _summarize_a(lines, rows)
-    elif args.mode == 'B':
-        _summarize_b(lines, rows)
-    elif args.mode == 'C':
-        _summarize_c(lines, rows)
+    elif args.sweep == '1':
+        summarize_sweep1(lines, rows)
+    elif args.sweep == '2':
+        summarize_sweep2(lines, rows)
+    elif args.sweep == '3':
+        summarize_sweep3(lines, rows)
     else:
-        lines.append('## Dry Run Aggregate')
-        lines.append('')
-        grouped = _group(rows, ['rr', 'phi', 'alpha', 'successor_capability',
-                                'cop_cost_audit'])
-        table = []
-        for key in sorted(grouped):
-            sub = grouped[key]
-            rr, phi, alpha, cap, cop = key
-            p_surv = _rate(sub, 'survived')
-            fire_rate = _rate(sub, 'yield_fired')
-            table.append([
-                f'{rr:.3f}',
-                f'{phi:.1f}',
-                f'{alpha:.2f}',
-                f'{cap:.1f}',
-                str(cop),
-                str(len(sub)),
-                _fmt_rate(p_surv),
-                _fmt_rate(fire_rate),
-                f'{_mean(row["final_population"] for row in sub):.1f}',
-                f'{_mean(row["final_ai_generation"] for row in sub):.2f}',
-            ])
-        _write_table(
-            lines,
-            ['rr', 'phi', 'alpha', 'cap', 'cop', 'n', 'survival',
-             'fire rate', 'mean pop', 'mean gen'],
-            table,
-        )
-        lines.append('')
-
+        summarize_sweep1(lines, rows)
+        summarize_sweep2(lines, rows)
+        summarize_sweep3(lines, rows)
     with open(summary_path, 'w') as f:
         f.write('\n'.join(lines) + '\n')
     return summary_path
@@ -15911,27 +14363,25 @@ def analyze(args):
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--mode', choices=['A', 'B', 'C', 'dry-run'], required=True)
+    parser.add_argument('--sweep', choices=['1', '2', '3', 'dry-run'], required=True)
+    parser.add_argument('--workers', type=int, default=1)
     parser.add_argument('--seeds', type=int, default=None)
-    parser.add_argument('--workers', type=int, default=11)
-    parser.add_argument('--output-dir', default=HERE)
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--analyze-only', action='store_true')
+    parser.add_argument('--output-dir', default=HERE)
     return parser.parse_args()
 
 
 def main():
     args = parse_args()
-    os.makedirs(args.output_dir, exist_ok=True)
-    progress_path = os.path.join(args.output_dir, _progress_name(args.mode))
-    logger = ProgressLogger(progress_path)
-    try:
-        if not args.analyze_only:
-            run_sweep(args, logger)
-        summary_path = analyze(args)
-        logger.log(f'Wrote {summary_path}')
-    finally:
-        logger.close()
+    if not args.analyze_only:
+        run_sweep(args)
+    summary_path = analyze(args)
+    print(
+        f'{datetime.now(timezone.utc).isoformat(timespec="seconds")}  '
+        f'Wrote {summary_path}',
+        flush=True,
+    )
 
 
 if __name__ == '__main__':
@@ -16727,3226 +15177,6 @@ if __name__ == '__main__':
               f"direct probe {'differs' if differ_direct else 'identical'}, "
               f"scaling {'ok' if scaling_ok else 'inverted'}.")
         print("  Review the per-seed and per-pair breakdowns above before deciding.")
-
-
-==========================================
-FILE: simulation/diagnostics/phi_finegrained_sweep.py
-==========================================
-
-"""phi_finegrained_sweep.py — Fine-grained phi characterization sweep
-(Piece 1 of the U-shape characterization).
-
-Standalone executable. Sweeps phi at 16 values across 3 rr values around
-the v2.0 phase boundary with 250 seeds per cell. Designed to sharply
-characterize the U-shape that the previous 5-phi targeted sweep identified:
-
-  - Trough location: which phi value(s) produce minimum survival
-  - Peak extent:     does survival continue to improve outside the
-                     previously tested range (phi < 1 or phi > 100)?
-  - Mechanism A vs B diagnostic: survival vs gamma(phi).
-      * Mechanism A (gamma-curve artifact): survival monotonic in gamma.
-      * Mechanism B (multi-timescale failure): non-monotonic in gamma too.
-
-Piece 2 (mechanism investigation) is a separate follow-up sweep that
-this script does not address.
-
-Survival is defined as final_population >= 30 (matches gate 2 v2.0 and
-the previous targeted sweep). alpha is fixed at 1.0. Successor is not
-constructed (this sweep does not measure succession).
-
-Usage:
-    cd <repo root>
-    python -u simulation/diagnostics/phi_finegrained_sweep.py \\
-        --seeds 250 \\
-        --workers 8 \\
-        --output-dir simulation/diagnostics/ \\
-        --resume
-
-Monitoring:
-    tail -f simulation/diagnostics/phi_finegrained_progress.log
-    ls -t simulation/diagnostics/phi_finegrained_checkpoint_*.md | head -1 | xargs cat
-"""
-
-import argparse
-import csv
-import hashlib
-import itertools
-import math
-import multiprocessing as mp
-import os
-import sys
-import time
-from datetime import datetime, timedelta
-from itertools import combinations
-
-import numpy as np
-
-HERE = os.path.dirname(os.path.abspath(__file__))
-SIM_DIR = os.path.abspath(os.path.join(HERE, '..'))
-REPO_ROOT = os.path.abspath(os.path.join(SIM_DIR, '..'))
-for p in (SIM_DIR, REPO_ROOT):
-    if p not in sys.path:
-        sys.path.insert(0, p)
-
-from model import GardenModel
-from constants_v2_stage15 import GAMMA_MIN, GAMMA_MAX, PHI_HALF
-
-
-# ---------------------------------------------------------------------------
-# Sweep configuration
-# ---------------------------------------------------------------------------
-
-PHI_VALUES = [
-    0.5, 1.0, 2.0, 3.0,
-    4.0, 5.0, 6.0, 7.0, 8.0, 10.0,
-    15.0, 20.0, 25.0, 50.0, 100.0, 200.0,
-]
-RR_VALUES  = [0.057, 0.058, 0.060]
-
-N_AGENTS = 200
-N_STEPS  = 200
-ALPHA    = 1.0
-# Civilizational sustainability threshold (matches gate 2 v2.0 sweep and
-# the previous phi_survival_targeted_sweep). The phase boundary in
-# framework terms is sustainability, not complete extinction.
-SURVIVAL_THRESHOLD = 30
-
-CSV_NAME       = 'phi_finegrained_results.csv'
-PROGRESS_NAME  = 'phi_finegrained_progress.log'
-SUMMARY_NAME   = 'phi_finegrained_summary.md'
-CHECKPOINT_FMT = 'phi_finegrained_checkpoint_{count:06d}.md'
-
-CSV_FIELDS = [
-    'phi', 'rr', 'seed',
-    'survived', 'final_population',
-    'final_avg_wb', 'final_l_t',
-]
-
-CHECKPOINT_EVERY = 1000
-
-
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
-
-def gamma_of_phi(phi):
-    """gamma(phi) = GAMMA_MIN + (GAMMA_MAX - GAMMA_MIN) * phi / (phi + PHI_HALF)"""
-    return GAMMA_MIN + (GAMMA_MAX - GAMMA_MIN) * phi / (phi + PHI_HALF)
-
-
-def deterministic_seed(label):
-    return int(hashlib.md5(label.encode()).hexdigest(), 16) % 10000
-
-
-def _cell_key(phi, rr, seed):
-    return f'{phi:.4f}|{rr:.5f}|{seed}'
-
-
-def _make_cell_seed(phi, rr, seed):
-    return deterministic_seed(_cell_key(phi, rr, seed))
-
-
-# ---------------------------------------------------------------------------
-# Worker
-# ---------------------------------------------------------------------------
-
-def _run_single_cell(args):
-    phi, rr, seed = args
-    cfg = {
-        'policy':            'optimize_u_sys_v2',
-        'phi':               float(phi),
-        'alpha':             float(ALPHA),
-        'reproduction_rate': float(rr),
-        'rollout_steps_v2':  20,
-        'n_candidates_v2':   300,
-        'random_seed':       _make_cell_seed(phi, rr, seed),
-    }
-    try:
-        model = GardenModel(
-            n_agents=N_AGENTS,
-            ai_policy='optimize_u_sys_v2',
-            config=cfg,
-        )
-        for _ in range(N_STEPS):
-            if not model.step():
-                break
-        dc = model.datacollector
-        final_pop = int(dc['population'][-1]) if dc.get('population') else 0
-        wb_series = dc.get('avg_well_being') or []
-        final_wb  = float(wb_series[-1]) if wb_series else 0.0
-        l_series  = dc.get('l_t_v2') or []
-        final_l_t = float(l_series[-1]) if l_series else 0.0
-    except Exception as exc:
-        return {
-            'phi':              float(phi),
-            'rr':               float(rr),
-            'seed':             int(seed),
-            'survived':         False,
-            'final_population': 0,
-            'final_avg_wb':     0.0,
-            'final_l_t':        0.0,
-            '_error':           f'{type(exc).__name__}: {exc}',
-        }
-
-    survived = final_pop >= SURVIVAL_THRESHOLD
-    return {
-        'phi':              float(phi),
-        'rr':               float(rr),
-        'seed':             int(seed),
-        'survived':         bool(survived),
-        'final_population': int(final_pop),
-        'final_avg_wb':     float(final_wb),
-        'final_l_t':        float(final_l_t),
-    }
-
-
-# ---------------------------------------------------------------------------
-# CSV helpers
-# ---------------------------------------------------------------------------
-
-def _ensure_csv(path):
-    if not os.path.exists(path):
-        with open(path, 'w', newline='') as f:
-            csv.DictWriter(f, fieldnames=CSV_FIELDS).writeheader()
-
-
-def _load_completed_keys(path):
-    if not os.path.exists(path):
-        return set()
-    keys = set()
-    with open(path, 'r', newline='') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            try:
-                k = _cell_key(float(row['phi']), float(row['rr']),
-                              int(row['seed']))
-                keys.add(k)
-            except (KeyError, ValueError):
-                continue
-    return keys
-
-
-def _append_rows(path, rows):
-    if not rows:
-        return
-    with open(path, 'a', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=CSV_FIELDS)
-        for r in rows:
-            writer.writerow({k: r[k] for k in CSV_FIELDS})
-
-
-def _load_results(path):
-    rows = []
-    if not os.path.exists(path):
-        return rows
-    with open(path, 'r', newline='') as f:
-        reader = csv.DictReader(f)
-        for r in reader:
-            rows.append({
-                'phi':              float(r['phi']),
-                'rr':               float(r['rr']),
-                'seed':             int(r['seed']),
-                'survived':         r['survived'].lower() == 'true',
-                'final_population': int(r['final_population']),
-                'final_avg_wb':     float(r['final_avg_wb']),
-                'final_l_t':        float(r['final_l_t']),
-            })
-    return rows
-
-
-# ---------------------------------------------------------------------------
-# Progress logger
-# ---------------------------------------------------------------------------
-
-class ProgressLogger:
-    def __init__(self, path):
-        self.path = path
-        self.fh = open(path, 'a', buffering=1)
-        self.start = time.time()
-
-    def log(self, msg):
-        ts = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
-        line = f'{ts}  {msg}'
-        self.fh.write(line + '\n')
-        print(line, flush=True)
-
-    def checkpoint(self, done, total, extra=''):
-        elapsed = time.time() - self.start
-        ips = done / elapsed if elapsed > 0 else 0
-        eta_s = int((total - done) / ips) if ips > 0 else 0
-        eta = str(timedelta(seconds=eta_s))
-        self.log(f'[{done}/{total}] {ips:.2f} cells/s  ETA {eta}  {extra}')
-
-    def close(self):
-        self.fh.close()
-
-
-# ---------------------------------------------------------------------------
-# Statistical helpers
-# ---------------------------------------------------------------------------
-
-def normal_se(k, n):
-    if n == 0:
-        return 0.0
-    p = k / n
-    return math.sqrt(p * (1.0 - p) / n)
-
-
-# ---------------------------------------------------------------------------
-# Analysis
-# ---------------------------------------------------------------------------
-
-def survival_matrix(rows):
-    """Returns (rates, counts, survived_counts) indexed [phi_idx][rr_idx]."""
-    rates           = [[0.0 for _ in RR_VALUES] for _ in PHI_VALUES]
-    counts          = [[0   for _ in RR_VALUES] for _ in PHI_VALUES]
-    survived_counts = [[0   for _ in RR_VALUES] for _ in PHI_VALUES]
-    for r in rows:
-        try:
-            pi = PHI_VALUES.index(r['phi'])
-            ri = RR_VALUES.index(r['rr'])
-        except ValueError:
-            continue
-        counts[pi][ri] += 1
-        if r['survived']:
-            survived_counts[pi][ri] += 1
-    for pi in range(len(PHI_VALUES)):
-        for ri in range(len(RR_VALUES)):
-            n = counts[pi][ri]
-            rates[pi][ri] = (survived_counts[pi][ri] / n) if n else 0.0
-    return rates, counts, survived_counts
-
-
-def trough_at_rr(rates, counts, ri):
-    """Find argmin phi at given rr. Also report the half-width of the
-    trough: range of phi values whose rate is within 1 SE of the minimum.
-    Returns dict with trough_phi, trough_rate, trough_se, half_width_phis."""
-    cell_rates = [rates[pi][ri] for pi in range(len(PHI_VALUES))]
-    cell_ns    = [counts[pi][ri] for pi in range(len(PHI_VALUES))]
-    if not any(n > 0 for n in cell_ns):
-        return None
-    min_idx = min(range(len(cell_rates)),
-                  key=lambda i: cell_rates[i] if cell_ns[i] > 0 else float('inf'))
-    trough_phi  = PHI_VALUES[min_idx]
-    trough_rate = cell_rates[min_idx]
-    k_min = int(round(trough_rate * cell_ns[min_idx]))
-    trough_se   = normal_se(k_min, cell_ns[min_idx])
-    half_width  = []
-    for i, phi in enumerate(PHI_VALUES):
-        if cell_ns[i] == 0:
-            continue
-        if cell_rates[i] - trough_rate <= trough_se:
-            half_width.append(phi)
-    return {
-        'trough_phi':      trough_phi,
-        'trough_rate':     trough_rate,
-        'trough_se':       trough_se,
-        'half_width_phis': half_width,
-    }
-
-
-def peak_at_rr(rates, counts, ri):
-    """For peak characterization: report rate at extremes (phi=0.5 and
-    phi=200) and at their nearest neighbors (phi=1 and phi=100) so the
-    operator can see whether peaks extend beyond the previous grid."""
-    def cell(phi):
-        try:
-            pi = PHI_VALUES.index(phi)
-        except ValueError:
-            return None
-        n = counts[pi][ri]
-        if n == 0:
-            return None
-        k = int(round(rates[pi][ri] * n))
-        return {
-            'phi':  phi,
-            'rate': rates[pi][ri],
-            'n':    n,
-            'se':   normal_se(k, n),
-        }
-    low_extreme  = cell(0.5)
-    low_neighbor = cell(1.0)
-    high_neighbor = cell(100.0)
-    high_extreme = cell(200.0)
-    out = {
-        'low_extreme': low_extreme, 'low_neighbor': low_neighbor,
-        'high_neighbor': high_neighbor, 'high_extreme': high_extreme,
-    }
-    # Significance of (extreme - neighbor) differential.
-    def diff_sig(a, b):
-        if a is None or b is None:
-            return None
-        d  = a['rate'] - b['rate']
-        se = math.sqrt(a['se'] ** 2 + b['se'] ** 2)
-        return {'diff': d, 'se': se, 'sig': abs(d) > 2.0 * se}
-    out['low_extreme_vs_neighbor']  = diff_sig(low_extreme,  low_neighbor)
-    out['high_extreme_vs_neighbor'] = diff_sig(high_extreme, high_neighbor)
-    return out
-
-
-def survival_vs_gamma(rates, counts, ri):
-    """Return [(gamma, phi, rate, se)] sorted by gamma for the given rr.
-    Also classify whether the rate-vs-gamma curve is monotonic or
-    non-monotonic."""
-    out = []
-    for pi, phi in enumerate(PHI_VALUES):
-        n = counts[pi][ri]
-        if n == 0:
-            continue
-        k = int(round(rates[pi][ri] * n))
-        out.append({
-            'gamma': gamma_of_phi(phi),
-            'phi':   phi,
-            'rate':  rates[pi][ri],
-            'n':     n,
-            'se':    normal_se(k, n),
-        })
-    out.sort(key=lambda d: d['gamma'])
-    if len(out) < 3:
-        return out, 'insufficient data'
-    monotonic_up = all(out[i]['rate'] <= out[i + 1]['rate']
-                       for i in range(len(out) - 1))
-    monotonic_dn = all(out[i]['rate'] >= out[i + 1]['rate']
-                       for i in range(len(out) - 1))
-    if monotonic_up:
-        shape = 'monotonic increasing in gamma'
-    elif monotonic_dn:
-        shape = 'monotonic decreasing in gamma'
-    else:
-        peak_i   = max(range(len(out)), key=lambda i: out[i]['rate'])
-        trough_i = min(range(len(out)), key=lambda i: out[i]['rate'])
-        if 0 < trough_i < len(out) - 1:
-            shape = (f'non-monotonic (trough at gamma={out[trough_i]["gamma"]:.3f},'
-                     f' phi={out[trough_i]["phi"]:g})')
-        elif 0 < peak_i < len(out) - 1:
-            shape = (f'non-monotonic (peak at gamma={out[peak_i]["gamma"]:.3f},'
-                     f' phi={out[peak_i]["phi"]:g})')
-        else:
-            shape = 'non-monotonic (no clear interior extremum)'
-    return out, shape
-
-
-def all_pair_differentials(rates, counts, ri):
-    """All C(16,2) pairwise differentials at given rr, with significance."""
-    out = []
-    for i, j in combinations(range(len(PHI_VALUES)), 2):
-        n_lo = counts[i][ri]
-        n_hi = counts[j][ri]
-        if n_lo == 0 or n_hi == 0:
-            continue
-        p_lo = rates[i][ri]
-        p_hi = rates[j][ri]
-        diff = p_hi - p_lo
-        se = math.sqrt(p_lo * (1 - p_lo) / n_lo + p_hi * (1 - p_hi) / n_hi)
-        out.append({
-            'phi_low':   PHI_VALUES[i],
-            'phi_high':  PHI_VALUES[j],
-            'rate_low':  p_lo,
-            'rate_high': p_hi,
-            'diff':      diff,
-            'se':        se,
-            'sig':       abs(diff) > 2.0 * se,
-        })
-    return out
-
-
-# ---------------------------------------------------------------------------
-# Report writers
-# ---------------------------------------------------------------------------
-
-def write_summary(rows, out_path, dry_run=False, partial=False):
-    rates, counts, survived_counts = survival_matrix(rows)
-
-    lines = []
-    lines.append('# Fine-grained phi characterization sweep — Piece 1')
-    lines.append('')
-    timestamp = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
-    lines.append(f'Generated: {timestamp}')
-    if dry_run:
-        lines.append('Mode: **DRY RUN** (low seed count; results not authoritative)')
-    elif partial:
-        lines.append('Mode: **PARTIAL** (intermediate checkpoint; not final)')
-    lines.append('')
-    lines.append(f'Cells: {len(PHI_VALUES)} phi x {len(RR_VALUES)} rr = '
-                 f'{len(PHI_VALUES) * len(RR_VALUES)}. '
-                 f'Rows loaded: {len(rows)}.')
-    lines.append(f'Architecture: v2.0, alpha={ALPHA}, n_agents={N_AGENTS}, '
-                 f'steps={N_STEPS}, survival_threshold={SURVIVAL_THRESHOLD}.')
-    lines.append('')
-
-    # Section 1: survival matrix
-    lines.append('## Section 1: Survival rate matrix (16 phi x 3 rr)')
-    lines.append('')
-    lines.append('Survival rate p with normal-approx standard error in pp (p / SE_pp).')
-    lines.append('')
-    header = '| phi     | gamma | ' + ' | '.join(f'rr={rr:.3f}' for rr in RR_VALUES) + ' |'
-    sep    = '|---------|-------|' + '|'.join('--------------' for _ in RR_VALUES) + '|'
-    lines.append(header)
-    lines.append(sep)
-    for pi, phi in enumerate(PHI_VALUES):
-        cells = []
-        for ri in range(len(RR_VALUES)):
-            n = counts[pi][ri]
-            k = survived_counts[pi][ri]
-            if n == 0:
-                cells.append('     n=0     ')
-            else:
-                se = normal_se(k, n) * 100.0
-                cells.append(f'{rates[pi][ri]:.3f} / {se:4.1f} ')
-        lines.append(f'| {phi:7.1f} | {gamma_of_phi(phi):.3f} | '
-                     + ' | '.join(cells) + ' |')
-    lines.append('')
-    lines.append('Cells per (phi, rr):')
-    lines.append('')
-    cnt_header = '| phi     | ' + ' | '.join(f'rr={rr:.3f}' for rr in RR_VALUES) + ' |'
-    cnt_sep    = '|---------|' + '|'.join('---------' for _ in RR_VALUES) + '|'
-    lines.append(cnt_header)
-    lines.append(cnt_sep)
-    for pi, phi in enumerate(PHI_VALUES):
-        cells = [f' {counts[pi][ri]:5d}  ' for ri in range(len(RR_VALUES))]
-        lines.append(f'| {phi:7.1f} | ' + ' | '.join(cells) + ' |')
-    lines.append('')
-
-    # Section 2: trough characterization
-    lines.append('## Section 2: Trough location characterization')
-    lines.append('')
-    lines.append('For each rr, the phi value(s) producing minimum survival, '
-                 'and the half-width of the trough (range of phi values whose '
-                 'rate sits within 1 SE of the minimum). PHI_HALF (the gamma '
-                 'inflection point) is 10.0.')
-    lines.append('')
-    lines.append('| rr | trough phi | trough rate (SE pp) | half-width phi range | at PHI_HALF=10? |')
-    lines.append('|----|------------|---------------------|-----------------------|------------------|')
-    for ri, rr in enumerate(RR_VALUES):
-        t = trough_at_rr(rates, counts, ri)
-        if t is None:
-            lines.append(f'| {rr:.3f} | n/a | n/a | n/a | n/a |')
-            continue
-        rng = (f'{min(t["half_width_phis"]):g} - {max(t["half_width_phis"]):g}'
-               if t['half_width_phis'] else 'n/a')
-        at_half = 'YES' if abs(t['trough_phi'] - PHI_HALF) < 1e-6 else 'no'
-        lines.append(f'| {rr:.3f} | {t["trough_phi"]:g} | '
-                     f'{t["trough_rate"]:.3f} ({t["trough_se"]*100:.1f}) | '
-                     f'{rng} | {at_half} |')
-    lines.append('')
-    lines.append('Interpretation guide:')
-    lines.append('- Trough at phi=10 across all rr would support mechanism A '
-                 '(U-shape is a gamma-curve artifact at the inflection point).')
-    lines.append('- Trough elsewhere would implicate mechanism B '
-                 '(multi-timescale optimization failure, independent of gamma shape).')
-    lines.append('- Wide half-width = soft trough; narrow half-width = sharp trough.')
-    lines.append('')
-
-    # Section 3: peak characterization
-    lines.append('## Section 3: Peak characterization (do peaks extend beyond previous grid?)')
-    lines.append('')
-    lines.append('Comparison of grid extremes (phi=0.5 and phi=200) to their '
-                 'nearest previously-tested neighbors (phi=1 and phi=100). '
-                 'If extremes are statistically distinguishable from neighbors, '
-                 'the U-shape peaks lie interior to the new grid; if not, the '
-                 'peaks may extend further.')
-    lines.append('')
-    lines.append('| rr | phi=0.5 rate | phi=1 rate | diff (pp) | SE (pp) | > 2 SE? | phi=200 rate | phi=100 rate | diff (pp) | SE (pp) | > 2 SE? |')
-    lines.append('|----|--------------|------------|-----------|---------|---------|---------------|---------------|-----------|---------|---------|')
-    for ri, rr in enumerate(RR_VALUES):
-        p = peak_at_rr(rates, counts, ri)
-        le, ln, hn, he = (p['low_extreme'], p['low_neighbor'],
-                          p['high_neighbor'], p['high_extreme'])
-        lv  = p['low_extreme_vs_neighbor']
-        hv  = p['high_extreme_vs_neighbor']
-        le_s = f'{le["rate"]:.3f}'      if le else 'n/a'
-        ln_s = f'{ln["rate"]:.3f}'      if ln else 'n/a'
-        he_s = f'{he["rate"]:.3f}'      if he else 'n/a'
-        hn_s = f'{hn["rate"]:.3f}'      if hn else 'n/a'
-        lvd  = f'{lv["diff"]*100:+5.2f}' if lv else 'n/a'
-        lvs  = f'{lv["se"]*100:5.2f}'    if lv else 'n/a'
-        lvg  = ('YES' if lv and lv['sig'] else 'no') if lv else 'n/a'
-        hvd  = f'{hv["diff"]*100:+5.2f}' if hv else 'n/a'
-        hvs  = f'{hv["se"]*100:5.2f}'    if hv else 'n/a'
-        hvg  = ('YES' if hv and hv['sig'] else 'no') if hv else 'n/a'
-        lines.append(f'| {rr:.3f} | {le_s} | {ln_s} | {lvd} | {lvs} | {lvg} '
-                     f'| {he_s} | {hn_s} | {hvd} | {hvs} | {hvg} |')
-    lines.append('')
-
-    # Section 4: survival vs gamma
-    lines.append('## Section 4: Survival vs gamma(phi) analysis (mechanism diagnostic)')
-    lines.append('')
-    lines.append('Each rr is plotted as a sorted-by-gamma table. The shape '
-                 'classification below distinguishes mechanism A from B:')
-    lines.append('')
-    lines.append('- **Monotonic in gamma**: U-shape in phi was a gamma-curve '
-                 'artifact (mechanism A). Higher gamma → higher survival across '
-                 'the full phi range.')
-    lines.append('- **Non-monotonic in gamma**: U-shape persists in the '
-                 'gamma-ordered view (mechanism B). Some gamma values produce '
-                 'survival worse than both lower and higher gamma values.')
-    lines.append('')
-    for ri, rr in enumerate(RR_VALUES):
-        sorted_data, shape = survival_vs_gamma(rates, counts, ri)
-        lines.append(f'### rr = {rr:.3f} — shape: **{shape}**')
-        lines.append('')
-        if not sorted_data:
-            lines.append('No data.')
-            lines.append('')
-            continue
-        lines.append('| gamma | phi | rate | SE (pp) | n |')
-        lines.append('|-------|-----|------|---------|---|')
-        for d in sorted_data:
-            lines.append(f'| {d["gamma"]:.3f} | {d["phi"]:g} | '
-                         f'{d["rate"]:.3f} | {d["se"]*100:5.2f} | {d["n"]} |')
-        lines.append('')
-
-    # Section 5: statistical confidence
-    lines.append('## Section 5: Statistical confidence summary')
-    lines.append('')
-    total_pairs = 0
-    total_sig   = 0
-    per_rr_sig  = []
-    for ri, rr in enumerate(RR_VALUES):
-        diffs = all_pair_differentials(rates, counts, ri)
-        n_pairs = len(diffs)
-        n_sig   = sum(1 for d in diffs if d['sig'])
-        per_rr_sig.append((rr, n_pairs, n_sig))
-        total_pairs += n_pairs
-        total_sig   += n_sig
-    lines.append(f'- Total significant (|diff| > 2 SE) differentials: '
-                 f'**{total_sig} / {total_pairs}** across the {len(RR_VALUES)} rr cells.')
-    lines.append(f'- Random null expectation at ~5%: {int(0.05 * total_pairs)} pairs.')
-    lines.append('')
-    lines.append('| rr | total pairs | significant | fraction |')
-    lines.append('|----|-------------|-------------|----------|')
-    for rr, np_, ns in per_rr_sig:
-        frac = (ns / np_) if np_ else 0
-        lines.append(f'| {rr:.3f} | {np_} | {ns} | {frac:.2%} |')
-    lines.append('')
-
-    # Section 6: implications
-    lines.append('## Section 6: Implications for framework v2.0 phi claims')
-    lines.append('')
-    lines.append('This section describes what the data supports without '
-                 'prescribing framework parameter changes; that conversation '
-                 'happens after Piece 2 informs mechanism. Items to read from '
-                 'the data above:')
-    lines.append('')
-    lines.append('- Trough location across rr (Section 2): consistent or '
-                 'varying with rr?')
-    lines.append('- Whether trough sits at PHI_HALF = 10 (Section 2).')
-    lines.append('- Whether peaks extend beyond previous grid (Section 3).')
-    lines.append('- Whether survival is monotonic in gamma (Section 4) — '
-                 'the load-bearing mechanism diagnostic.')
-    lines.append('- Whether the significant-differential fraction (Section 5) '
-                 'is structured or scattered.')
-    lines.append('')
-    lines.append('Piece 2 (mechanism investigation) is the next step. It will '
-                 'distinguish more decisively between mechanism A and B and '
-                 'test whether the U-shape is robust to working_factor '
-                 'placeholder variation.')
-    lines.append('')
-
-    with open(out_path, 'w') as f:
-        f.write('\n'.join(lines) + '\n')
-
-
-# ---------------------------------------------------------------------------
-# Sweep driver
-# ---------------------------------------------------------------------------
-
-def run_sweep(args, logger):
-    csv_path = os.path.join(args.output_dir, CSV_NAME)
-    _ensure_csv(csv_path)
-    completed = _load_completed_keys(csv_path) if args.resume else set()
-
-    all_tasks = []
-    for phi, rr, seed in itertools.product(
-            PHI_VALUES, RR_VALUES, range(args.seeds)):
-        if _cell_key(phi, rr, seed) in completed:
-            continue
-        all_tasks.append((phi, rr, seed))
-
-    total_planned = (len(PHI_VALUES) * len(RR_VALUES) * args.seeds)
-    remaining = len(all_tasks)
-    logger.log(f'Sweep: {total_planned} cells total, '
-               f'{len(completed)} resumed, {remaining} to run.')
-    if remaining == 0:
-        logger.log('All cells already completed.')
-        return
-
-    flush_every      = max(1, min(50, remaining // 200))
-    checkpoint_every = max(1, remaining // 200)
-    summary_every    = max(1, min(CHECKPOINT_EVERY, remaining))
-
-    buffer = []
-    done = 0
-    errors = 0
-    rows_total = len(completed)
-    next_summary_at = rows_total + summary_every
-
-    with mp.Pool(processes=args.workers, maxtasksperchild=20) as pool:
-        for result in pool.imap_unordered(_run_single_cell, all_tasks,
-                                          chunksize=4):
-            done += 1
-            if '_error' in result:
-                errors += 1
-                logger.log(f'ERROR phi={result["phi"]} rr={result["rr"]} '
-                           f'seed={result["seed"]}: {result["_error"]}')
-            buffer.append(result)
-            rows_total += 1
-            if len(buffer) >= flush_every:
-                _append_rows(csv_path, buffer)
-                buffer = []
-            if done % checkpoint_every == 0 or done == remaining:
-                logger.checkpoint(done, remaining, extra=f'errors={errors}')
-            if rows_total >= next_summary_at:
-                _append_rows(csv_path, buffer)
-                buffer = []
-                rows_now = _load_results(csv_path)
-                ck_path = os.path.join(
-                    args.output_dir,
-                    CHECKPOINT_FMT.format(count=len(rows_now)),
-                )
-                write_summary(rows_now, ck_path, partial=True)
-                logger.log(f'Checkpoint summary written: {ck_path}')
-                next_summary_at += summary_every
-
-    _append_rows(csv_path, buffer)
-    logger.log(f'Sweep complete. errors={errors}')
-
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
-def parse_args():
-    parser = argparse.ArgumentParser(
-        description='Fine-grained phi characterization sweep (Piece 1)',
-    )
-    parser.add_argument('--seeds', type=int, default=250,
-                        help='Seeds per (phi, rr) cell (default 250)')
-    parser.add_argument('--workers', type=int,
-                        default=max(1, (os.cpu_count() or 4) - 1),
-                        help='Pool size for multiprocessing')
-    parser.add_argument('--output-dir', default='simulation/diagnostics/',
-                        help='Where to write CSV, log, and reports')
-    parser.add_argument('--resume', action='store_true',
-                        help='Skip cells already present in the CSV')
-    parser.add_argument('--dry-run', action='store_true',
-                        help='Mark output as dry run; otherwise identical')
-    return parser.parse_args()
-
-
-def main():
-    args = parse_args()
-    args.output_dir = os.path.abspath(args.output_dir)
-    os.makedirs(args.output_dir, exist_ok=True)
-    log_path = os.path.join(args.output_dir, PROGRESS_NAME)
-    logger = ProgressLogger(log_path)
-    logger.log('=' * 60)
-    logger.log('phi_finegrained_sweep start')
-    logger.log(f'seeds={args.seeds} workers={args.workers} '
-               f'resume={args.resume} dry_run={args.dry_run}')
-    logger.log('=' * 60)
-
-    try:
-        run_sweep(args, logger)
-        csv_path = os.path.join(args.output_dir, CSV_NAME)
-        rows = _load_results(csv_path)
-        logger.log(f'Loaded {len(rows)} rows from CSV.')
-        summary_path = os.path.join(args.output_dir, SUMMARY_NAME)
-        write_summary(rows, summary_path, dry_run=args.dry_run)
-        logger.log(f'Wrote summary: {summary_path}')
-    finally:
-        logger.close()
-
-
-if __name__ == '__main__':
-    main()
-
-
-==========================================
-FILE: simulation/diagnostics/phi_mechanism_followup.py
-==========================================
-
-"""phi_mechanism_followup.py: Piece 2 follow-up. Comprehensive mechanism
-investigation at the high-signal regime (rr=0.057) plus a high-seed
-robustness re-test at rr=0.060.
-
-The original Piece 2 (phi_mechanism_investigation.py) ran at rr=0.060 with
-250 seeds. Findings:
-  * Mechanism D rejected at rr=0.060: trough depths [4.4, 2.0, 5.2, 5.2]
-    across candidate counts non-monotonic AND all within noise floor.
-  * Mechanism C inconclusive at rr=0.060: phi-spreads per rollout (4.8,
-    4.0, 3.2, 4.8 pp) all below 2 SE (~5.6pp at n=250). The script's
-    argmin verdict treated noise as signal.
-
-This follow-up runs three tests sequentially in priority order:
-
-  Test A (Mechanism C at rr=0.057): rollout_steps_v2 in {10,20,30,40},
-    phi in {3,5,10,25}, n_candidates_v2 fixed at 300, 250 seeds per
-    cell. 4*4*250 = 4000 runs. Tests Mechanism C at the rr regime where
-    Piece 1 showed the largest phi-spread (~13pp).
-
-  Test B (Mechanism D at rr=0.057): n_candidates_v2 in {100,300,600,1000},
-    phi in {3,5,10,25}, rollout_steps_v2 fixed at 20, 250 seeds per
-    cell. 4*4*250 = 4000 runs. Tests Mechanism D at the strong-signal
-    regime; definitive rejection requires this.
-
-  Test C (Mechanism C at rr=0.060 high-seed): same grid as Test A but
-    at rr=0.060 with 750 seeds per cell (hardcoded). 4*4*750 = 12000
-    runs. Closes the original Piece 2 ambiguity with tightened SE
-    (~3.2pp pairwise vs 5.6pp at 250 seeds).
-
-Total: 20000 runs. Tests A and B share rr=0.057; Test C is at rr=0.060;
-no grid cell appears in two tests.
-
-After each test completes its full grid, the summary report regenerates so
-the operator can review interim results without waiting for all tests. The
-progress log announces "Test X complete: summary regenerated" so the
-operator knows when to look.
-
-Verdict logic gates every "SUPPORTED" or "shifts" claim on a 2 SE
-significance check. The original Piece 2 script's argmin classifier did
-not do this; that omission is the central methodological correction here.
-
-Usage:
-    cd <repo root>
-    python -u simulation/diagnostics/phi_mechanism_followup.py \\
-        --seeds 250 \\
-        --workers 11 \\
-        --test all \\
-        --output-dir simulation/diagnostics/ \\
-        --resume
-
-Monitoring:
-    tail -f simulation/diagnostics/phi_mechanism_followup_progress.log
-    cat simulation/diagnostics/phi_mechanism_followup_summary.md
-"""
-
-import argparse
-import csv
-import hashlib
-import itertools
-import math
-import multiprocessing as mp
-import os
-import sys
-import time
-from datetime import datetime, timedelta
-from itertools import combinations
-
-HERE = os.path.dirname(os.path.abspath(__file__))
-SIM_DIR = os.path.abspath(os.path.join(HERE, '..'))
-REPO_ROOT = os.path.abspath(os.path.join(SIM_DIR, '..'))
-for p in (SIM_DIR, REPO_ROOT):
-    if p not in sys.path:
-        sys.path.insert(0, p)
-
-from model import GardenModel
-
-
-# ---------------------------------------------------------------------------
-# Configuration
-# ---------------------------------------------------------------------------
-
-PHI_VALUES = [3.0, 5.0, 10.0, 25.0]   # peak, trough region, default, plateau
-
-# Test A: Mechanism C at rr=0.057
-TEST_A_RR                  = 0.057
-TEST_A_ROLLOUT_VALUES      = [10, 20, 30, 40]
-TEST_A_N_CANDIDATES_FIXED  = 300
-
-# Test B: Mechanism D at rr=0.057
-TEST_B_RR                  = 0.057
-TEST_B_N_CANDIDATES_VALUES = [100, 300, 600, 1000]
-TEST_B_ROLLOUT_FIXED       = 20
-
-# Test C: Mechanism C at rr=0.060 with high seeds (hardcoded).
-TEST_C_RR                  = 0.060
-TEST_C_ROLLOUT_VALUES      = [10, 20, 30, 40]
-TEST_C_N_CANDIDATES_FIXED  = 300
-TEST_C_SEEDS               = 750  # --seeds CLI does NOT apply to Test C.
-
-N_AGENTS = 200
-N_STEPS  = 200
-ALPHA    = 1.0
-SURVIVAL_THRESHOLD = 30
-
-CSV_NAME      = 'phi_mechanism_followup_results.csv'
-PROGRESS_NAME = 'phi_mechanism_followup_progress.log'
-SUMMARY_NAME  = 'phi_mechanism_followup_summary.md'
-
-CSV_FIELDS = [
-    'test_id', 'phi', 'rr', 'seed',
-    'rollout_steps_v2', 'n_candidates_v2',
-    'survived', 'final_population',
-    'final_avg_wb', 'final_l_t',
-]
-
-
-# ---------------------------------------------------------------------------
-# Cell key + worker
-# ---------------------------------------------------------------------------
-
-def deterministic_seed(label):
-    return int(hashlib.md5(label.encode()).hexdigest(), 16) % 10000
-
-
-def _cell_key(test_id, phi, rr, rollout, candidates, seed):
-    return (f't{test_id}|{phi:.4f}|rr{rr:.4f}|'
-            f'r{rollout}|c{candidates}|{seed}')
-
-
-def _make_cell_seed(test_id, phi, rr, rollout, candidates, seed):
-    return deterministic_seed(
-        _cell_key(test_id, phi, rr, rollout, candidates, seed))
-
-
-def _run_single_cell(args):
-    test_id, phi, rr, rollout, candidates, seed = args
-    cfg = {
-        'policy':            'optimize_u_sys_v2',
-        'phi':               float(phi),
-        'alpha':             float(ALPHA),
-        'reproduction_rate': float(rr),
-        'rollout_steps_v2':  int(rollout),
-        'n_candidates_v2':   int(candidates),
-        'random_seed':       _make_cell_seed(
-            test_id, phi, rr, rollout, candidates, seed),
-    }
-    try:
-        model = GardenModel(
-            n_agents=N_AGENTS,
-            ai_policy='optimize_u_sys_v2',
-            config=cfg,
-        )
-        for _ in range(N_STEPS):
-            if not model.step():
-                break
-        dc = model.datacollector
-        final_pop = int(dc['population'][-1]) if dc.get('population') else 0
-        wb_series = dc.get('avg_well_being') or []
-        final_wb  = float(wb_series[-1]) if wb_series else 0.0
-        l_series  = dc.get('l_t_v2') or []
-        final_l_t = float(l_series[-1]) if l_series else 0.0
-    except Exception as exc:
-        return {
-            'test_id':          str(test_id),
-            'phi':              float(phi),
-            'rr':               float(rr),
-            'seed':             int(seed),
-            'rollout_steps_v2': int(rollout),
-            'n_candidates_v2':  int(candidates),
-            'survived':         False,
-            'final_population': 0,
-            'final_avg_wb':     0.0,
-            'final_l_t':        0.0,
-            '_error':           f'{type(exc).__name__}: {exc}',
-        }
-    survived = final_pop >= SURVIVAL_THRESHOLD
-    return {
-        'test_id':          str(test_id),
-        'phi':              float(phi),
-        'rr':               float(rr),
-        'seed':             int(seed),
-        'rollout_steps_v2': int(rollout),
-        'n_candidates_v2':  int(candidates),
-        'survived':         bool(survived),
-        'final_population': int(final_pop),
-        'final_avg_wb':     float(final_wb),
-        'final_l_t':        float(final_l_t),
-    }
-
-
-# ---------------------------------------------------------------------------
-# Task generators
-# ---------------------------------------------------------------------------
-
-def test_A_tasks(n_seeds):
-    """Test A: vary rollout_steps_v2 at rr=0.057. cand fixed at 300."""
-    return [
-        ('A', phi, TEST_A_RR, rollout, TEST_A_N_CANDIDATES_FIXED, seed)
-        for phi, rollout, seed in itertools.product(
-            PHI_VALUES, TEST_A_ROLLOUT_VALUES, range(n_seeds))
-    ]
-
-
-def test_B_tasks(n_seeds):
-    """Test B: vary n_candidates_v2 at rr=0.057. rollout fixed at 20."""
-    return [
-        ('B', phi, TEST_B_RR, TEST_B_ROLLOUT_FIXED, cand, seed)
-        for phi, cand, seed in itertools.product(
-            PHI_VALUES, TEST_B_N_CANDIDATES_VALUES, range(n_seeds))
-    ]
-
-
-def test_C_tasks(n_seeds):
-    """Test C: vary rollout_steps_v2 at rr=0.060. cand fixed at 300.
-    n_seeds is hardcoded to TEST_C_SEEDS by the caller; --seeds CLI does
-    not apply here.
-    """
-    return [
-        ('C', phi, TEST_C_RR, rollout, TEST_C_N_CANDIDATES_FIXED, seed)
-        for phi, rollout, seed in itertools.product(
-            PHI_VALUES, TEST_C_ROLLOUT_VALUES, range(n_seeds))
-    ]
-
-
-# ---------------------------------------------------------------------------
-# CSV helpers (incremental write + resume)
-# ---------------------------------------------------------------------------
-
-def _ensure_csv(path):
-    if not os.path.exists(path):
-        with open(path, 'w', newline='') as f:
-            csv.DictWriter(f, fieldnames=CSV_FIELDS).writeheader()
-
-
-def _load_completed_keys(path):
-    if not os.path.exists(path):
-        return set()
-    keys = set()
-    with open(path, 'r', newline='') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            try:
-                k = _cell_key(
-                    str(row['test_id']),
-                    float(row['phi']),
-                    float(row['rr']),
-                    int(row['rollout_steps_v2']),
-                    int(row['n_candidates_v2']),
-                    int(row['seed']),
-                )
-                keys.add(k)
-            except (KeyError, ValueError):
-                continue
-    return keys
-
-
-def _append_rows(path, rows):
-    if not rows:
-        return
-    with open(path, 'a', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=CSV_FIELDS)
-        for r in rows:
-            writer.writerow({k: r[k] for k in CSV_FIELDS})
-
-
-def _load_results(path):
-    rows = []
-    if not os.path.exists(path):
-        return rows
-    with open(path, 'r', newline='') as f:
-        reader = csv.DictReader(f)
-        for r in reader:
-            rows.append({
-                'test_id':          str(r['test_id']),
-                'phi':              float(r['phi']),
-                'rr':               float(r['rr']),
-                'seed':             int(r['seed']),
-                'rollout_steps_v2': int(r['rollout_steps_v2']),
-                'n_candidates_v2':  int(r['n_candidates_v2']),
-                'survived':         r['survived'].lower() == 'true',
-                'final_population': int(r['final_population']),
-                'final_avg_wb':     float(r['final_avg_wb']),
-                'final_l_t':        float(r['final_l_t']),
-            })
-    return rows
-
-
-# ---------------------------------------------------------------------------
-# Progress logger
-# ---------------------------------------------------------------------------
-
-class ProgressLogger:
-    def __init__(self, path):
-        self.path = path
-        self.fh = open(path, 'a', buffering=1)
-        self.start = time.time()
-
-    def log(self, msg):
-        ts = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
-        line = f'{ts}  {msg}'
-        self.fh.write(line + '\n')
-        print(line, flush=True)
-
-    def checkpoint(self, label, done, total, extra=''):
-        elapsed = time.time() - self.start
-        ips = done / elapsed if elapsed > 0 else 0
-        eta_s = int((total - done) / ips) if ips > 0 else 0
-        eta = str(timedelta(seconds=eta_s))
-        self.log(f'{label} [{done}/{total}] {ips:.2f} cells/s  '
-                 f'ETA {eta}  {extra}')
-
-    def close(self):
-        self.fh.close()
-
-
-# ---------------------------------------------------------------------------
-# Stats helpers
-# ---------------------------------------------------------------------------
-
-def normal_se(k, n):
-    if n == 0:
-        return 0.0
-    p = k / n
-    return math.sqrt(p * (1.0 - p) / n)
-
-
-def cell_rate(rows, predicate):
-    cells = [r for r in rows if predicate(r)]
-    n = len(cells)
-    if n == 0:
-        return None
-    k = sum(1 for r in cells if r['survived'])
-    return {
-        'rate': k / n,
-        'n':    n,
-        'k':    k,
-        'se':   normal_se(k, n),
-    }
-
-
-# ---------------------------------------------------------------------------
-# Sweep driver
-# ---------------------------------------------------------------------------
-
-def run_tasks(label, tasks, completed_keys, args, logger):
-    """Execute a list of tasks via multiprocessing pool, writing
-    incrementally and logging periodic checkpoints. The summary is NOT
-    regenerated mid-test; main() regenerates after each test completes."""
-    csv_path = os.path.join(args.output_dir, CSV_NAME)
-    remaining = [t for t in tasks if _cell_key(*t) not in completed_keys]
-    logger.log(f'{label}: {len(tasks)} planned, '
-               f'{len(tasks) - len(remaining)} resumed, '
-               f'{len(remaining)} to run.')
-    if not remaining:
-        return
-    flush_every      = max(1, min(50, len(remaining) // 200))
-    checkpoint_every = max(1, len(remaining) // 200)
-
-    buffer = []
-    done = 0
-    errors = 0
-
-    with mp.Pool(processes=args.workers, maxtasksperchild=20) as pool:
-        for result in pool.imap_unordered(_run_single_cell, remaining,
-                                          chunksize=4):
-            done += 1
-            if '_error' in result:
-                errors += 1
-                logger.log(f'{label} ERROR test={result["test_id"]} '
-                           f'phi={result["phi"]} rr={result["rr"]} '
-                           f'rollout={result["rollout_steps_v2"]} '
-                           f'candidates={result["n_candidates_v2"]} '
-                           f'seed={result["seed"]}: {result["_error"]}')
-            buffer.append(result)
-            if len(buffer) >= flush_every:
-                _append_rows(csv_path, buffer)
-                buffer = []
-            if done % checkpoint_every == 0 or done == len(remaining):
-                logger.checkpoint(label, done, len(remaining),
-                                  extra=f'errors={errors}')
-
-    _append_rows(csv_path, buffer)
-    logger.log(f'{label} complete. errors={errors}')
-
-
-# ---------------------------------------------------------------------------
-# Verdict logic (significance-gated)
-# ---------------------------------------------------------------------------
-
-def _pair_se(cr_a, cr_b):
-    return math.sqrt(cr_a['se'] ** 2 + cr_b['se'] ** 2)
-
-
-def mechanism_c_verdict(rate_dict, varied_values, axis_label):
-    """Score Mechanism C from per-cell rates.
-
-    rate_dict: {(phi, axis_value) -> cell_rate dict}
-    varied_values: ordered list of axis values (rollout_steps).
-    axis_label: human label for the diagnostic line.
-
-    Returns (verdict_text, summary_dict) where summary_dict carries
-    the per-row trough/peak/spread tuples used for the table.
-    """
-    rows = []
-    significant_axes = []
-    trough_phi_by_axis = {}
-
-    for v in varied_values:
-        crs = [(p, rate_dict.get((p, v))) for p in PHI_VALUES
-               if rate_dict.get((p, v)) is not None]
-        if not crs:
-            rows.append((v, None, None, None, None, None, None))
-            continue
-        trough_phi, trough_cr = min(crs, key=lambda x: x[1]['rate'])
-        peak_phi,   peak_cr   = max(crs, key=lambda x: x[1]['rate'])
-        spread_pp = (peak_cr['rate'] - trough_cr['rate']) * 100
-        pair_se_pp = _pair_se(trough_cr, peak_cr) * 100
-        is_sig = spread_pp > 2.0 * pair_se_pp
-        rows.append((v, trough_phi, trough_cr, peak_phi, peak_cr,
-                     spread_pp, pair_se_pp))
-        if is_sig:
-            significant_axes.append(v)
-            trough_phi_by_axis[v] = trough_phi
-
-    n_axes = sum(1 for r in rows if r[1] is not None)
-    n_sig  = len(significant_axes)
-    distinct_troughs_sig = set(trough_phi_by_axis.values())
-
-    if n_axes == 0:
-        verdict = ('**Mechanism C diagnostic: no data. Verdict pending.**')
-    elif n_sig == 0:
-        verdict = (
-            f'**Mechanism C diagnostic at {axis_label}: 0 of {n_axes} '
-            f'{axis_label} values produced a phi-spread larger than 2 SE. '
-            'No statistically resolvable U-shape at any rollout. '
-            '*Mechanism C is INCONCLUSIVE.* The grid lacks the power to '
-            'detect a horizon-resonance signal even at this rr.**')
-    elif len(distinct_troughs_sig) == 1:
-        sole = next(iter(distinct_troughs_sig))
-        verdict = (
-            f'**Mechanism C diagnostic at {axis_label}: {n_sig} of {n_axes} '
-            f'{axis_label} values produced a significant phi-spread; '
-            f'trough phi is invariant at phi={sole:g} across all of them. '
-            '*Mechanism C is REJECTED.* A U-shape exists but its trough '
-            'location does not depend on the rollout horizon.**')
-    else:
-        moving = sorted(trough_phi_by_axis.items())
-        verdict = (
-            f'**Mechanism C diagnostic at {axis_label}: {n_sig} of {n_axes} '
-            f'{axis_label} values produced a significant phi-spread; '
-            f'trough phi varies: {moving}. *Mechanism C is SUPPORTED.* '
-            'The U-shape trough location depends on the rollout horizon.**')
-
-    return verdict, {'rows': rows,
-                     'n_axes': n_axes,
-                     'n_sig': n_sig,
-                     'trough_phi_by_axis': trough_phi_by_axis}
-
-
-def mechanism_d_verdict(rate_dict, varied_values):
-    """Score Mechanism D from per-cell rates.
-
-    rate_dict: {(phi, n_candidates) -> cell_rate dict}
-    varied_values: ordered list of candidate counts.
-    """
-    rows = []
-    depths = []
-    depth_ses = []
-
-    for c in varied_values:
-        crs = [(p, rate_dict.get((p, c))) for p in PHI_VALUES
-               if rate_dict.get((p, c)) is not None]
-        if not crs:
-            rows.append((c, None, None, None, None, None, None))
-            depths.append(None)
-            depth_ses.append(None)
-            continue
-        trough_phi, trough_cr = min(crs, key=lambda x: x[1]['rate'])
-        peak_phi,   peak_cr   = max(crs, key=lambda x: x[1]['rate'])
-        depth_pp = (peak_cr['rate'] - trough_cr['rate']) * 100
-        pair_se_pp = _pair_se(trough_cr, peak_cr) * 100
-        rows.append((c, trough_phi, trough_cr, peak_phi, peak_cr,
-                     depth_pp, pair_se_pp))
-        depths.append(depth_pp)
-        depth_ses.append(pair_se_pp)
-
-    valid = [(d, se) for d, se in zip(depths, depth_ses) if d is not None]
-    if not valid:
-        verdict = ('**Mechanism D diagnostic: no data. Verdict pending.**')
-        return verdict, {'rows': rows, 'depths': depths}
-
-    sig_depths = [(d, se) for d, se in valid if d > 2.0 * se]
-
-    if not sig_depths:
-        verdict = (
-            f'**Mechanism D diagnostic: depths {[round(d,1) for d in depths if d is not None]} '
-            'are all within noise floor (none > 2 SE). No statistically '
-            'resolvable U-shape at any candidate count. *Mechanism D is '
-            'REJECTED.* The U-shape is too small to characterize a depth '
-            'scaling.**')
-        return verdict, {'rows': rows, 'depths': depths}
-
-    non_increasing = True
-    for i in range(len(depths) - 1):
-        if depths[i] is None or depths[i + 1] is None:
-            continue
-        if depths[i + 1] > depths[i] + 1.5:
-            non_increasing = False
-            break
-
-    first = depths[0]
-    last  = depths[-1]
-    if first is None or last is None or last <= 1e-6:
-        ratio = float('inf') if first and first > 0 else 0.0
-    else:
-        ratio = first / last
-
-    if non_increasing and ratio >= 2.0:
-        verdict = (
-            f'**Mechanism D diagnostic: trough depth shrinks monotonically '
-            f'as n_candidates rises ({first:.1f}pp -> {last:.1f}pp, ratio '
-            f'{ratio:.2f}x), with at least one depth above noise. '
-            '*Mechanism D is SUPPORTED.* Candidate-pool sampling drives '
-            'the U-shape.**')
-    elif non_increasing:
-        verdict = (
-            f'**Mechanism D diagnostic: trough depth shrinks modestly '
-            f'({first:.1f}pp -> {last:.1f}pp, ratio {ratio:.2f}x), not by '
-            'a factor of 2. *Mechanism D is PARTIALLY SUPPORTED.* '
-            'Candidate-pool sensitivity contributes but is not the sole '
-            'cause.**')
-    else:
-        verdict = (
-            f'**Mechanism D diagnostic: trough depths are '
-            f'{[round(d,1) if d is not None else None for d in depths]}. '
-            'Not monotonic in n_candidates. *Mechanism D is REJECTED.* '
-            'The U-shape depth does not depend on candidate count.**')
-
-    return verdict, {'rows': rows, 'depths': depths}
-
-
-# ---------------------------------------------------------------------------
-# Report writer
-# ---------------------------------------------------------------------------
-
-def _format_rate_cell(cr):
-    if cr is None:
-        return '     n=0      '
-    return f'{cr["rate"]:.3f} / {cr["se"]*100:4.1f}  '
-
-
-def _format_cell_n(cr):
-    n = cr['n'] if cr else 0
-    return f'      {n:5d}    '
-
-
-def write_summary(rows, out_path, dry_run=False):
-    lines = []
-    lines.append('# Phi mechanism investigation: Piece 2 follow-up')
-    lines.append('')
-    timestamp = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
-    lines.append(f'Generated: {timestamp}')
-    if dry_run:
-        lines.append('Mode: **DRY RUN** (low seed count; results not '
-                     'authoritative).')
-    lines.append('')
-    lines.append(f'Architecture: v2.0, alpha={ALPHA}, n_agents={N_AGENTS}, '
-                 f'steps={N_STEPS}, survival_threshold={SURVIVAL_THRESHOLD}.')
-    lines.append(f'Rows loaded: {len(rows)}.')
-    lines.append('')
-    lines.append('Tests:')
-    lines.append(f'- Test A: Mechanism C at rr={TEST_A_RR}, '
-                 f'rollout in {TEST_A_ROLLOUT_VALUES}, '
-                 f'cand={TEST_A_N_CANDIDATES_FIXED}.')
-    lines.append(f'- Test B: Mechanism D at rr={TEST_B_RR}, '
-                 f'cand in {TEST_B_N_CANDIDATES_VALUES}, '
-                 f'rollout={TEST_B_ROLLOUT_FIXED}.')
-    lines.append(f'- Test C: Mechanism C at rr={TEST_C_RR}, high-seed '
-                 f'({TEST_C_SEEDS}), rollout in {TEST_C_ROLLOUT_VALUES}, '
-                 f'cand={TEST_C_N_CANDIDATES_FIXED}.')
-    lines.append('')
-
-    # ------------------------------------------------------------------
-    # Build rate dicts for all three tests
-    # ------------------------------------------------------------------
-    test_a_rates = {
-        (phi, r): cell_rate(
-            rows,
-            lambda x, p=phi, R=r:
-                x['test_id'] == 'A' and x['phi'] == p
-                and x['rollout_steps_v2'] == R)
-        for phi in PHI_VALUES for r in TEST_A_ROLLOUT_VALUES
-    }
-    test_b_rates = {
-        (phi, c): cell_rate(
-            rows,
-            lambda x, p=phi, C=c:
-                x['test_id'] == 'B' and x['phi'] == p
-                and x['n_candidates_v2'] == C)
-        for phi in PHI_VALUES for c in TEST_B_N_CANDIDATES_VALUES
-    }
-    test_c_rates = {
-        (phi, r): cell_rate(
-            rows,
-            lambda x, p=phi, R=r:
-                x['test_id'] == 'C' and x['phi'] == p
-                and x['rollout_steps_v2'] == R)
-        for phi in PHI_VALUES for r in TEST_C_ROLLOUT_VALUES
-    }
-
-    a_verdict, a_summary = mechanism_c_verdict(
-        test_a_rates, TEST_A_ROLLOUT_VALUES, 'rollout_steps_v2')
-    b_verdict, b_summary = mechanism_d_verdict(
-        test_b_rates, TEST_B_N_CANDIDATES_VALUES)
-    c_verdict, c_summary = mechanism_c_verdict(
-        test_c_rates, TEST_C_ROLLOUT_VALUES, 'rollout_steps_v2')
-
-    # ------------------------------------------------------------------
-    # Section 1: Test A
-    # ------------------------------------------------------------------
-    lines.append(f'## Section 1: Test A. Mechanism C at rr={TEST_A_RR}')
-    lines.append('')
-    lines.append(f'rollout_steps_v2 in {TEST_A_ROLLOUT_VALUES}, '
-                 f'n_candidates_v2 fixed at {TEST_A_N_CANDIDATES_FIXED}.')
-    lines.append('')
-    lines.append('Survival rate p with normal-approx SE in pp (p / SE_pp).')
-    lines.append('')
-    header_a = ('| phi | '
-                + ' | '.join(f'rollout={r}' for r in TEST_A_ROLLOUT_VALUES)
-                + ' |')
-    sep_a    = ('|-----|'
-                + '|'.join('---------------' for _ in TEST_A_ROLLOUT_VALUES)
-                + '|')
-    lines.append(header_a)
-    lines.append(sep_a)
-    for phi in PHI_VALUES:
-        cells = [_format_rate_cell(test_a_rates.get((phi, r)))
-                 for r in TEST_A_ROLLOUT_VALUES]
-        lines.append(f'| {phi:3g} | ' + ' | '.join(cells) + ' |')
-    lines.append('')
-    lines.append('Cells per (phi, rollout_steps_v2):')
-    lines.append('')
-    lines.append(header_a)
-    lines.append(sep_a)
-    for phi in PHI_VALUES:
-        cells = [_format_cell_n(test_a_rates.get((phi, r)))
-                 for r in TEST_A_ROLLOUT_VALUES]
-        lines.append(f'| {phi:3g} | ' + ' | '.join(cells) + ' |')
-    lines.append('')
-    lines.append('### Test A trough-by-rollout (Mechanism C diagnostic)')
-    lines.append('')
-    lines.append('Per-rollout trough phi, peak phi, spread, and pairwise SE. '
-                 'Significance requires spread > 2 SE.')
-    lines.append('')
-    lines.append('| rollout | trough phi | trough rate (SE pp) | '
-                 'peak phi | peak rate | spread (pp) | 2*SE (pp) | sig? |')
-    lines.append('|---------|------------|---------------------|----------|'
-                 '-----------|-------------|-----------|------|')
-    for row in a_summary['rows']:
-        v, trough_phi, trough_cr, peak_phi, peak_cr, spread_pp, pair_se_pp \
-            = row
-        if trough_phi is None:
-            lines.append(f'| {v} | n/a | n/a | n/a | n/a | n/a | n/a | n/a |')
-            continue
-        sig = 'yes' if spread_pp > 2.0 * pair_se_pp else 'no'
-        lines.append(
-            f'| {v} | {trough_phi:g} | '
-            f'{trough_cr["rate"]:.3f} ({trough_cr["se"]*100:.1f}) | '
-            f'{peak_phi:g} | {peak_cr["rate"]:.3f} | '
-            f'{spread_pp:.1f} | {2.0 * pair_se_pp:.1f} | {sig} |')
-    lines.append('')
-    lines.append(a_verdict)
-    lines.append('')
-
-    # ------------------------------------------------------------------
-    # Section 2: Test B
-    # ------------------------------------------------------------------
-    lines.append(f'## Section 2: Test B. Mechanism D at rr={TEST_B_RR}')
-    lines.append('')
-    lines.append(f'n_candidates_v2 in {TEST_B_N_CANDIDATES_VALUES}, '
-                 f'rollout_steps_v2 fixed at {TEST_B_ROLLOUT_FIXED}.')
-    lines.append('')
-    lines.append('Survival rate p with normal-approx SE in pp (p / SE_pp).')
-    lines.append('')
-    header_b = ('| phi | '
-                + ' | '.join(f'cand={c}' for c in TEST_B_N_CANDIDATES_VALUES)
-                + ' |')
-    sep_b    = ('|-----|'
-                + '|'.join('---------------'
-                           for _ in TEST_B_N_CANDIDATES_VALUES)
-                + '|')
-    lines.append(header_b)
-    lines.append(sep_b)
-    for phi in PHI_VALUES:
-        cells = [_format_rate_cell(test_b_rates.get((phi, c)))
-                 for c in TEST_B_N_CANDIDATES_VALUES]
-        lines.append(f'| {phi:3g} | ' + ' | '.join(cells) + ' |')
-    lines.append('')
-    lines.append('Cells per (phi, n_candidates_v2):')
-    lines.append('')
-    lines.append(header_b)
-    lines.append(sep_b)
-    for phi in PHI_VALUES:
-        cells = [_format_cell_n(test_b_rates.get((phi, c)))
-                 for c in TEST_B_N_CANDIDATES_VALUES]
-        lines.append(f'| {phi:3g} | ' + ' | '.join(cells) + ' |')
-    lines.append('')
-    lines.append('### Test B trough depth by candidate count '
-                 '(Mechanism D diagnostic)')
-    lines.append('')
-    lines.append('| n_candidates | trough phi | trough rate | peak phi | '
-                 'peak rate | depth (pp) | 2*SE (pp) | sig? |')
-    lines.append('|--------------|------------|-------------|----------|'
-                 '-----------|------------|-----------|------|')
-    for row in b_summary['rows']:
-        c, trough_phi, trough_cr, peak_phi, peak_cr, depth_pp, pair_se_pp \
-            = row
-        if trough_phi is None:
-            lines.append(f'| {c} | n/a | n/a | n/a | n/a | n/a | n/a | n/a |')
-            continue
-        sig = 'yes' if depth_pp > 2.0 * pair_se_pp else 'no'
-        lines.append(
-            f'| {c} | {trough_phi:g} | {trough_cr["rate"]:.3f} | '
-            f'{peak_phi:g} | {peak_cr["rate"]:.3f} | {depth_pp:.1f} | '
-            f'{2.0 * pair_se_pp:.1f} | {sig} |')
-    lines.append('')
-    lines.append(b_verdict)
-    lines.append('')
-
-    # ------------------------------------------------------------------
-    # Section 3: Test C
-    # ------------------------------------------------------------------
-    lines.append(f'## Section 3: Test C. Mechanism C at rr={TEST_C_RR} '
-                 f'(high-seed, target {TEST_C_SEEDS})')
-    lines.append('')
-    lines.append(f'rollout_steps_v2 in {TEST_C_ROLLOUT_VALUES}, '
-                 f'n_candidates_v2 fixed at {TEST_C_N_CANDIDATES_FIXED}, '
-                 f'rr={TEST_C_RR}.')
-    lines.append('')
-    lines.append('Survival rate p with normal-approx SE in pp (p / SE_pp).')
-    lines.append('')
-    header_c = ('| phi | '
-                + ' | '.join(f'rollout={r}' for r in TEST_C_ROLLOUT_VALUES)
-                + ' |')
-    sep_c    = ('|-----|'
-                + '|'.join('---------------' for _ in TEST_C_ROLLOUT_VALUES)
-                + '|')
-    lines.append(header_c)
-    lines.append(sep_c)
-    for phi in PHI_VALUES:
-        cells = [_format_rate_cell(test_c_rates.get((phi, r)))
-                 for r in TEST_C_ROLLOUT_VALUES]
-        lines.append(f'| {phi:3g} | ' + ' | '.join(cells) + ' |')
-    lines.append('')
-    lines.append('Cells per (phi, rollout_steps_v2):')
-    lines.append('')
-    lines.append(header_c)
-    lines.append(sep_c)
-    for phi in PHI_VALUES:
-        cells = [_format_cell_n(test_c_rates.get((phi, r)))
-                 for r in TEST_C_ROLLOUT_VALUES]
-        lines.append(f'| {phi:3g} | ' + ' | '.join(cells) + ' |')
-    lines.append('')
-    lines.append('### Test C trough-by-rollout (Mechanism C diagnostic, '
-                 'high-power)')
-    lines.append('')
-    lines.append('Per-rollout trough phi, peak phi, spread, pairwise SE. '
-                 'Significance requires spread > 2 SE; at n=750 the 2 SE '
-                 'threshold is roughly half that of Tests A and B.')
-    lines.append('')
-    lines.append('| rollout | trough phi | trough rate (SE pp) | '
-                 'peak phi | peak rate | spread (pp) | 2*SE (pp) | sig? |')
-    lines.append('|---------|------------|---------------------|----------|'
-                 '-----------|-------------|-----------|------|')
-    for row in c_summary['rows']:
-        v, trough_phi, trough_cr, peak_phi, peak_cr, spread_pp, pair_se_pp \
-            = row
-        if trough_phi is None:
-            lines.append(f'| {v} | n/a | n/a | n/a | n/a | n/a | n/a | n/a |')
-            continue
-        sig = 'yes' if spread_pp > 2.0 * pair_se_pp else 'no'
-        lines.append(
-            f'| {v} | {trough_phi:g} | '
-            f'{trough_cr["rate"]:.3f} ({trough_cr["se"]*100:.1f}) | '
-            f'{peak_phi:g} | {peak_cr["rate"]:.3f} | '
-            f'{spread_pp:.1f} | {2.0 * pair_se_pp:.1f} | {sig} |')
-    lines.append('')
-    lines.append(c_verdict)
-    lines.append('')
-
-    # ------------------------------------------------------------------
-    # Section 4: Joint interpretation
-    # ------------------------------------------------------------------
-    lines.append('## Section 4: Joint interpretation')
-    lines.append('')
-    lines.append('Outcome classes:')
-    lines.append('')
-    lines.append('- **A. Mechanism C supported at both rr=0.057 and rr=0.060, '
-                 'Mechanism D rejected at both**: U-shape is horizon-resonance '
-                 'across rr; candidate count does not matter. Framework phi '
-                 'behavior depends on the (gamma, rollout_steps) interaction.')
-    lines.append('- **B. Mechanism C supported at rr=0.057 but rejected at '
-                 'rr=0.060, Mechanism D rejected at both**: U-shape is '
-                 'horizon-resonance specifically at marginal conditions. '
-                 'Framework phi behavior is rr-dependent in how horizon '
-                 'affects it.')
-    lines.append('- **C. Mechanism C rejected at both, Mechanism D rejected '
-                 'at both**: Neither rollout horizon nor candidate count '
-                 'explains the U-shape. Remaining candidates: Mechanism E '
-                 '(working_factor calibration) or an uncharacterized cause.')
-    lines.append('- **D. Mechanism C inconclusive at rr=0.057, others '
-                 'rejected**: Even at the strongest signal regime, the '
-                 'mechanism cannot be characterized. The U-shape is a real '
-                 'empirical observation without an identified cause.')
-    lines.append('- **E. Both mechanisms supported at rr=0.057**: Both effects '
-                 'exist. The U-shape is multi-causal.')
-    lines.append('')
-    lines.append('Classification implied by the three verdicts above:')
-    lines.append('')
-
-    def _strip_marker(v):
-        # Pull the *Mechanism X is Y.* token out of the verdict text for
-        # cross-test classification. Defaults to "UNKNOWN" if not found.
-        for token in ('SUPPORTED', 'PARTIALLY SUPPORTED', 'REJECTED',
-                      'INCONCLUSIVE'):
-            if token in v:
-                return token
-        return 'UNKNOWN'
-
-    a_marker = _strip_marker(a_verdict)
-    b_marker = _strip_marker(b_verdict)
-    c_marker = _strip_marker(c_verdict)
-
-    lines.append(f'- Test A (C @ rr=0.057): **{a_marker}**')
-    lines.append(f'- Test B (D @ rr=0.057): **{b_marker}**')
-    lines.append(f'- Test C (C @ rr=0.060, n=750): **{c_marker}**')
-    lines.append('')
-
-    if a_marker == 'SUPPORTED' and c_marker == 'SUPPORTED' \
-            and b_marker == 'REJECTED':
-        lines.append('Class A: Mechanism C supported at both rr, D rejected.')
-    elif a_marker == 'SUPPORTED' and c_marker in ('REJECTED', 'INCONCLUSIVE') \
-            and b_marker == 'REJECTED':
-        lines.append('Class B: Mechanism C supported only at rr=0.057.')
-    elif a_marker == 'REJECTED' and c_marker == 'REJECTED' \
-            and b_marker == 'REJECTED':
-        lines.append('Class C: Both mechanisms rejected. Mechanism E or '
-                     'uncharacterized cause is the remaining candidate.')
-    elif a_marker == 'INCONCLUSIVE':
-        lines.append('Class D: Even at strongest signal regime, the mechanism '
-                     'cannot be characterized.')
-    elif a_marker == 'SUPPORTED' \
-            and b_marker in ('SUPPORTED', 'PARTIALLY SUPPORTED'):
-        lines.append('Class E: Both mechanisms have at least partial support '
-                     'at rr=0.057. U-shape is multi-causal.')
-    else:
-        lines.append('Outcome does not match any standard class; read the '
-                     'three verdicts above directly.')
-    lines.append('')
-
-    # ------------------------------------------------------------------
-    # Section 5: Statistical confidence
-    # ------------------------------------------------------------------
-    lines.append('## Section 5: Statistical confidence per test')
-    lines.append('')
-
-    def _stat_block(rate_dict, varied_values, axis_name):
-        per_value   = []
-        total_pairs = 0
-        total_sig   = 0
-        for v in varied_values:
-            n_pairs = 0
-            n_sig   = 0
-            for i, j in combinations(range(len(PHI_VALUES)), 2):
-                ki = rate_dict.get((PHI_VALUES[i], v))
-                kj = rate_dict.get((PHI_VALUES[j], v))
-                if ki is None or kj is None:
-                    continue
-                d  = ki['rate'] - kj['rate']
-                se = math.sqrt(ki['se'] ** 2 + kj['se'] ** 2)
-                n_pairs += 1
-                if abs(d) > 2.0 * se:
-                    n_sig += 1
-            per_value.append((v, n_pairs, n_sig))
-            total_pairs += n_pairs
-            total_sig   += n_sig
-        return per_value, total_pairs, total_sig
-
-    def _frac_str(sig, total):
-        if total == 0:
-            return f'**{sig} / {total}** (no data yet).'
-        return (f'**{sig} / {total}** '
-                f'({100 * sig / total:.1f}%, vs 5% null).')
-
-    per_a, ta_p, ta_s = _stat_block(
-        test_a_rates, TEST_A_ROLLOUT_VALUES, 'rollout_steps_v2')
-    per_b, tb_p, tb_s = _stat_block(
-        test_b_rates, TEST_B_N_CANDIDATES_VALUES, 'n_candidates_v2')
-    per_c, tc_p, tc_s = _stat_block(
-        test_c_rates, TEST_C_ROLLOUT_VALUES, 'rollout_steps_v2')
-
-    lines.append('### Test A (rollout sweep at rr=0.057)')
-    lines.append('')
-    lines.append('- Significant phi pairs (|diff| > 2 SE): '
-                 + _frac_str(ta_s, ta_p))
-    lines.append('')
-    lines.append('| rollout_steps_v2 | pairs | significant |')
-    lines.append('|------------------|-------|-------------|')
-    for v, n_p, n_s in per_a:
-        lines.append(f'| {v} | {n_p} | {n_s} |')
-    lines.append('')
-
-    lines.append('### Test B (candidate sweep at rr=0.057)')
-    lines.append('')
-    lines.append('- Significant phi pairs (|diff| > 2 SE): '
-                 + _frac_str(tb_s, tb_p))
-    lines.append('')
-    lines.append('| n_candidates_v2 | pairs | significant |')
-    lines.append('|-----------------|-------|-------------|')
-    for v, n_p, n_s in per_b:
-        lines.append(f'| {v} | {n_p} | {n_s} |')
-    lines.append('')
-
-    lines.append('### Test C (rollout sweep at rr=0.060, high-seed)')
-    lines.append('')
-    lines.append('- Significant phi pairs (|diff| > 2 SE): '
-                 + _frac_str(tc_s, tc_p))
-    lines.append('')
-    lines.append('| rollout_steps_v2 | pairs | significant |')
-    lines.append('|------------------|-------|-------------|')
-    for v, n_p, n_s in per_c:
-        lines.append(f'| {v} | {n_p} | {n_s} |')
-    lines.append('')
-
-    # ------------------------------------------------------------------
-    # Section 6: Framework implications and future work
-    # ------------------------------------------------------------------
-    lines.append('## Section 6: Framework implications and future work')
-    lines.append('')
-    lines.append('What the v2.0 framework can defensibly claim about phi '
-                 'behavior given this investigation:')
-    lines.append('')
-    lines.append('- If Mechanism C is supported (at either rr): framework '
-                 'documentation should acknowledge the (gamma, rollout_steps) '
-                 'interaction as a source of phi sensitivity.')
-    lines.append('- If Mechanism D is supported: framework documentation '
-                 'should acknowledge candidate-count sensitivity.')
-    lines.append('- If both rejected: framework should report the U-shape as '
-                 'an honest empirical observation without an identified '
-                 'mechanism, and future work should investigate Mechanism E '
-                 '(working_factor calibration interaction).')
-    lines.append('')
-    lines.append('Future work flagged:')
-    lines.append('')
-    lines.append('- Mechanism E (working_factor calibration interaction) if '
-                 'C and D are both rejected.')
-    lines.append('- Alternative gamma functional forms (already on the '
-                 'watchlist in the program reference).')
-    lines.append('- Robustness testing under alternative working_factor '
-                 'placeholder calibrations.')
-    lines.append('- Longer simulation horizons (current 200 steps; phi '
-                 'effects might manifest differently at 500 steps).')
-    lines.append('- Joint (gamma, rollout_steps) sweep if Mechanism C is '
-                 'supported.')
-    lines.append('')
-
-    with open(out_path, 'w') as f:
-        f.write('\n'.join(lines) + '\n')
-
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
-def parse_args():
-    parser = argparse.ArgumentParser(
-        description='Piece 2 follow-up: comprehensive mechanism '
-                    'investigation at rr=0.057 plus high-seed re-test at '
-                    'rr=0.060.',
-    )
-    parser.add_argument('--seeds', type=int, default=250,
-                        help='Seeds per cell for Tests A and B. Test C is '
-                             'hardcoded to %d.' % TEST_C_SEEDS)
-    parser.add_argument('--workers', type=int,
-                        default=max(1, (os.cpu_count() or 4) - 1),
-                        help='Pool size for multiprocessing')
-    parser.add_argument('--test', choices=['A', 'B', 'C', 'all'],
-                        default='all',
-                        help='Which test to run (default all, sequential '
-                             'A then B then C)')
-    parser.add_argument('--output-dir', default='simulation/diagnostics/',
-                        help='Where to write CSV, log, and report')
-    parser.add_argument('--resume', action='store_true',
-                        help='Skip cells already present in the CSV')
-    parser.add_argument('--dry-run', action='store_true',
-                        help='Mark output as dry run; otherwise identical')
-    return parser.parse_args()
-
-
-def _run_one_test(label, tasks, args, logger, summary_path):
-    completed = (_load_completed_keys(
-        os.path.join(args.output_dir, CSV_NAME))
-        if args.resume else set())
-    run_tasks(label, tasks, completed, args, logger)
-    rows = _load_results(os.path.join(args.output_dir, CSV_NAME))
-    write_summary(rows, summary_path, dry_run=args.dry_run)
-    logger.log(f'{label} complete: summary regenerated '
-               f'({len(rows)} rows total).')
-
-
-def main():
-    args = parse_args()
-    args.output_dir = os.path.abspath(args.output_dir)
-    os.makedirs(args.output_dir, exist_ok=True)
-    log_path = os.path.join(args.output_dir, PROGRESS_NAME)
-    summary_path = os.path.join(args.output_dir, SUMMARY_NAME)
-    logger = ProgressLogger(log_path)
-    logger.log('=' * 60)
-    logger.log('phi_mechanism_followup start')
-    logger.log(f'seeds={args.seeds} (A/B); Test C hardcoded to '
-               f'{TEST_C_SEEDS}.')
-    logger.log(f'workers={args.workers} test={args.test} '
-               f'resume={args.resume} dry_run={args.dry_run}')
-    logger.log('=' * 60)
-
-    csv_path = os.path.join(args.output_dir, CSV_NAME)
-    _ensure_csv(csv_path)
-
-    try:
-        if args.test in ('A', 'all'):
-            _run_one_test('TestA', test_A_tasks(args.seeds),
-                          args, logger, summary_path)
-        if args.test in ('B', 'all'):
-            _run_one_test('TestB', test_B_tasks(args.seeds),
-                          args, logger, summary_path)
-        if args.test in ('C', 'all'):
-            # Test C is hardcoded to TEST_C_SEEDS regardless of --seeds,
-            # except in dry-run mode where --seeds applies to all tests
-            # so the pipeline check stays under ~15 min wall-clock.
-            n_c = args.seeds if args.dry_run else TEST_C_SEEDS
-            if args.dry_run:
-                logger.log(f'TestC dry-run override: using --seeds={n_c} '
-                           f'instead of hardcoded {TEST_C_SEEDS}.')
-            _run_one_test('TestC', test_C_tasks(n_c),
-                          args, logger, summary_path)
-
-        rows = _load_results(csv_path)
-        logger.log(f'All requested tests complete. Final summary at: '
-                   f'{summary_path} (rows: {len(rows)})')
-    finally:
-        logger.close()
-
-
-if __name__ == '__main__':
-    main()
-
-
-==========================================
-FILE: simulation/diagnostics/phi_mechanism_investigation.py
-==========================================
-
-"""phi_mechanism_investigation.py — Piece 2: distinguish mechanisms C and D
-behind the v2.0 U-shape phi-survival relationship.
-
-Standalone executable. Runs two tests sequentially:
-
-  Test 1 (Mechanism C, rollout horizon resonance): varies rollout_steps_v2
-    in {10, 20, 30, 40} at phi in {3, 5, 10, 25}, with n_candidates_v2
-    fixed at 300. If the trough phi shifts with rollout_steps, mechanism C
-    is supported.
-
-  Test 2 (Mechanism D, candidate-pool sensitivity): varies n_candidates_v2
-    in {100, 300, 600, 1000} at phi in {3, 5, 10, 25}, with
-    rollout_steps_v2 fixed at 20. If the trough depth shrinks as
-    n_candidates rises, mechanism D is supported.
-
-All other parameters fixed at v2.0 defaults. rr = 0.060 (the cleanest
-signal regime from Piece 1). Survival threshold is 30 (matches gate 2 v2.0
-and all prior phi sweeps).
-
-Both tests write to one CSV with a `test_id` column. --test {1,2,both}
-selects which to run; default `both` runs them sequentially.
-
-Usage:
-    cd <repo root>
-    python -u simulation/diagnostics/phi_mechanism_investigation.py \\
-        --seeds 250 \\
-        --workers 8 \\
-        --test both \\
-        --output-dir simulation/diagnostics/ \\
-        --resume
-
-Monitoring:
-    tail -f simulation/diagnostics/phi_mechanism_progress.log
-    ls -t simulation/diagnostics/phi_mechanism_checkpoint_*.md | head -1 | xargs cat
-"""
-
-import argparse
-import csv
-import hashlib
-import itertools
-import math
-import multiprocessing as mp
-import os
-import sys
-import time
-from datetime import datetime, timedelta
-from itertools import combinations
-
-import numpy as np
-
-HERE = os.path.dirname(os.path.abspath(__file__))
-SIM_DIR = os.path.abspath(os.path.join(HERE, '..'))
-REPO_ROOT = os.path.abspath(os.path.join(SIM_DIR, '..'))
-for p in (SIM_DIR, REPO_ROOT):
-    if p not in sys.path:
-        sys.path.insert(0, p)
-
-from model import GardenModel
-
-
-# ---------------------------------------------------------------------------
-# Configuration
-# ---------------------------------------------------------------------------
-
-PHI_VALUES   = [3.0, 5.0, 10.0, 25.0]   # peak, trough, default, plateau
-RR_FIXED     = 0.060
-
-# Test 1: rollout horizon variation
-TEST1_ROLLOUT_VALUES        = [10, 20, 30, 40]
-TEST1_N_CANDIDATES_FIXED    = 300
-
-# Test 2: candidate count variation
-TEST2_N_CANDIDATES_VALUES   = [100, 300, 600, 1000]
-TEST2_ROLLOUT_FIXED         = 20
-
-N_AGENTS = 200
-N_STEPS  = 200
-ALPHA    = 1.0
-SURVIVAL_THRESHOLD = 30
-
-CSV_NAME       = 'phi_mechanism_results.csv'
-PROGRESS_NAME  = 'phi_mechanism_progress.log'
-SUMMARY_NAME   = 'phi_mechanism_summary.md'
-CHECKPOINT_FMT = 'phi_mechanism_checkpoint_{count:06d}.md'
-
-CSV_FIELDS = [
-    'test_id', 'phi', 'rr', 'seed',
-    'rollout_steps_v2', 'n_candidates_v2',
-    'survived', 'final_population',
-    'final_avg_wb', 'final_l_t',
-]
-
-CHECKPOINT_EVERY = 1000
-
-
-# ---------------------------------------------------------------------------
-# Cell key + worker
-# ---------------------------------------------------------------------------
-
-def deterministic_seed(label):
-    return int(hashlib.md5(label.encode()).hexdigest(), 16) % 10000
-
-
-def _cell_key(test_id, phi, rollout, candidates, seed):
-    return f't{test_id}|{phi:.4f}|r{rollout}|c{candidates}|{seed}'
-
-
-def _make_cell_seed(test_id, phi, rollout, candidates, seed):
-    return deterministic_seed(_cell_key(test_id, phi, rollout, candidates, seed))
-
-
-def _run_single_cell(args):
-    test_id, phi, rollout, candidates, seed = args
-    cfg = {
-        'policy':            'optimize_u_sys_v2',
-        'phi':               float(phi),
-        'alpha':             float(ALPHA),
-        'reproduction_rate': float(RR_FIXED),
-        'rollout_steps_v2':  int(rollout),
-        'n_candidates_v2':   int(candidates),
-        'random_seed':       _make_cell_seed(test_id, phi, rollout, candidates, seed),
-    }
-    try:
-        model = GardenModel(
-            n_agents=N_AGENTS,
-            ai_policy='optimize_u_sys_v2',
-            config=cfg,
-        )
-        for _ in range(N_STEPS):
-            if not model.step():
-                break
-        dc = model.datacollector
-        final_pop = int(dc['population'][-1]) if dc.get('population') else 0
-        wb_series = dc.get('avg_well_being') or []
-        final_wb  = float(wb_series[-1]) if wb_series else 0.0
-        l_series  = dc.get('l_t_v2') or []
-        final_l_t = float(l_series[-1]) if l_series else 0.0
-    except Exception as exc:
-        return {
-            'test_id':          int(test_id),
-            'phi':              float(phi),
-            'rr':               float(RR_FIXED),
-            'seed':             int(seed),
-            'rollout_steps_v2': int(rollout),
-            'n_candidates_v2':  int(candidates),
-            'survived':         False,
-            'final_population': 0,
-            'final_avg_wb':     0.0,
-            'final_l_t':        0.0,
-            '_error':           f'{type(exc).__name__}: {exc}',
-        }
-    survived = final_pop >= SURVIVAL_THRESHOLD
-    return {
-        'test_id':          int(test_id),
-        'phi':              float(phi),
-        'rr':               float(RR_FIXED),
-        'seed':             int(seed),
-        'rollout_steps_v2': int(rollout),
-        'n_candidates_v2':  int(candidates),
-        'survived':         bool(survived),
-        'final_population': int(final_pop),
-        'final_avg_wb':     float(final_wb),
-        'final_l_t':        float(final_l_t),
-    }
-
-
-# ---------------------------------------------------------------------------
-# Task lists
-# ---------------------------------------------------------------------------
-
-def test1_tasks(n_seeds):
-    """Test 1: vary rollout_steps_v2. n_candidates_v2 fixed at 300."""
-    tasks = []
-    for phi, rollout, seed in itertools.product(
-            PHI_VALUES, TEST1_ROLLOUT_VALUES, range(n_seeds)):
-        tasks.append((1, phi, rollout, TEST1_N_CANDIDATES_FIXED, seed))
-    return tasks
-
-
-def test2_tasks(n_seeds):
-    """Test 2: vary n_candidates_v2. rollout_steps_v2 fixed at 20."""
-    tasks = []
-    for phi, cand, seed in itertools.product(
-            PHI_VALUES, TEST2_N_CANDIDATES_VALUES, range(n_seeds)):
-        tasks.append((2, phi, TEST2_ROLLOUT_FIXED, cand, seed))
-    return tasks
-
-
-# ---------------------------------------------------------------------------
-# CSV helpers (incremental write + resume)
-# ---------------------------------------------------------------------------
-
-def _ensure_csv(path):
-    if not os.path.exists(path):
-        with open(path, 'w', newline='') as f:
-            csv.DictWriter(f, fieldnames=CSV_FIELDS).writeheader()
-
-
-def _load_completed_keys(path):
-    if not os.path.exists(path):
-        return set()
-    keys = set()
-    with open(path, 'r', newline='') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            try:
-                k = _cell_key(
-                    int(row['test_id']), float(row['phi']),
-                    int(row['rollout_steps_v2']), int(row['n_candidates_v2']),
-                    int(row['seed']),
-                )
-                keys.add(k)
-            except (KeyError, ValueError):
-                continue
-    return keys
-
-
-def _append_rows(path, rows):
-    if not rows:
-        return
-    with open(path, 'a', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=CSV_FIELDS)
-        for r in rows:
-            writer.writerow({k: r[k] for k in CSV_FIELDS})
-
-
-def _load_results(path):
-    rows = []
-    if not os.path.exists(path):
-        return rows
-    with open(path, 'r', newline='') as f:
-        reader = csv.DictReader(f)
-        for r in reader:
-            rows.append({
-                'test_id':          int(r['test_id']),
-                'phi':              float(r['phi']),
-                'rr':               float(r['rr']),
-                'seed':             int(r['seed']),
-                'rollout_steps_v2': int(r['rollout_steps_v2']),
-                'n_candidates_v2':  int(r['n_candidates_v2']),
-                'survived':         r['survived'].lower() == 'true',
-                'final_population': int(r['final_population']),
-                'final_avg_wb':     float(r['final_avg_wb']),
-                'final_l_t':        float(r['final_l_t']),
-            })
-    return rows
-
-
-# ---------------------------------------------------------------------------
-# Progress logger
-# ---------------------------------------------------------------------------
-
-class ProgressLogger:
-    def __init__(self, path):
-        self.path = path
-        self.fh = open(path, 'a', buffering=1)
-        self.start = time.time()
-
-    def log(self, msg):
-        ts = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
-        line = f'{ts}  {msg}'
-        self.fh.write(line + '\n')
-        print(line, flush=True)
-
-    def checkpoint(self, label, done, total, extra=''):
-        elapsed = time.time() - self.start
-        ips = done / elapsed if elapsed > 0 else 0
-        eta_s = int((total - done) / ips) if ips > 0 else 0
-        eta = str(timedelta(seconds=eta_s))
-        self.log(f'{label} [{done}/{total}] {ips:.2f} cells/s  ETA {eta}  {extra}')
-
-    def close(self):
-        self.fh.close()
-
-
-# ---------------------------------------------------------------------------
-# Stats helpers
-# ---------------------------------------------------------------------------
-
-def normal_se(k, n):
-    if n == 0:
-        return 0.0
-    p = k / n
-    return math.sqrt(p * (1.0 - p) / n)
-
-
-def cell_rate(rows, predicate):
-    cells = [r for r in rows if predicate(r)]
-    n = len(cells)
-    if n == 0:
-        return None
-    k = sum(1 for r in cells if r['survived'])
-    return {
-        'rate': k / n,
-        'n':    n,
-        'k':    k,
-        'se':   normal_se(k, n),
-    }
-
-
-# ---------------------------------------------------------------------------
-# Sweep driver
-# ---------------------------------------------------------------------------
-
-def run_tasks(label, tasks, completed_keys, args, logger):
-    """Execute a list of tasks via multiprocessing pool, writing
-    incrementally and logging periodic checkpoints."""
-    csv_path = os.path.join(args.output_dir, CSV_NAME)
-    remaining = [t for t in tasks if _cell_key(*t) not in completed_keys]
-    logger.log(f'{label}: {len(tasks)} planned, '
-               f'{len(tasks) - len(remaining)} resumed, '
-               f'{len(remaining)} to run.')
-    if not remaining:
-        return
-    flush_every      = max(1, min(50, len(remaining) // 200))
-    checkpoint_every = max(1, len(remaining) // 200)
-    summary_every    = max(1, min(CHECKPOINT_EVERY, len(remaining)))
-
-    buffer = []
-    done = 0
-    errors = 0
-    rows_total = len([k for k in completed_keys])
-    next_summary_at = rows_total + summary_every
-
-    with mp.Pool(processes=args.workers, maxtasksperchild=20) as pool:
-        for result in pool.imap_unordered(_run_single_cell, remaining,
-                                          chunksize=4):
-            done += 1
-            if '_error' in result:
-                errors += 1
-                logger.log(f'{label} ERROR test={result["test_id"]} '
-                           f'phi={result["phi"]} '
-                           f'rollout={result["rollout_steps_v2"]} '
-                           f'candidates={result["n_candidates_v2"]} '
-                           f'seed={result["seed"]}: {result["_error"]}')
-            buffer.append(result)
-            rows_total += 1
-            if len(buffer) >= flush_every:
-                _append_rows(csv_path, buffer)
-                buffer = []
-            if done % checkpoint_every == 0 or done == len(remaining):
-                logger.checkpoint(label, done, len(remaining),
-                                  extra=f'errors={errors}')
-            if rows_total >= next_summary_at:
-                _append_rows(csv_path, buffer)
-                buffer = []
-                rows_now = _load_results(csv_path)
-                ck_path = os.path.join(
-                    args.output_dir,
-                    CHECKPOINT_FMT.format(count=len(rows_now)),
-                )
-                write_summary(rows_now, ck_path, partial=True)
-                logger.log(f'Checkpoint summary written: {ck_path}')
-                next_summary_at += summary_every
-
-    _append_rows(csv_path, buffer)
-    logger.log(f'{label} complete. errors={errors}')
-
-
-# ---------------------------------------------------------------------------
-# Report writer
-# ---------------------------------------------------------------------------
-
-def write_summary(rows, out_path, dry_run=False, partial=False):
-    lines = []
-    lines.append('# Phi mechanism investigation — Piece 2')
-    lines.append('')
-    timestamp = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
-    lines.append(f'Generated: {timestamp}')
-    if dry_run:
-        lines.append('Mode: **DRY RUN** (low seed count; results not authoritative)')
-    elif partial:
-        lines.append('Mode: **PARTIAL** (intermediate checkpoint; not final)')
-    lines.append('')
-    lines.append(f'Architecture: v2.0, alpha={ALPHA}, n_agents={N_AGENTS}, '
-                 f'steps={N_STEPS}, survival_threshold={SURVIVAL_THRESHOLD}, '
-                 f'rr={RR_FIXED}.')
-    lines.append(f'Rows loaded: {len(rows)}.')
-    lines.append('')
-
-    # ------------------------------------------------------------------
-    # Section 1: Test 1 — rollout horizon variation
-    # ------------------------------------------------------------------
-    lines.append('## Section 1: Test 1 — Rollout Horizon Variation (Mechanism C)')
-    lines.append('')
-    lines.append(f'rollout_steps_v2 in {TEST1_ROLLOUT_VALUES}, '
-                 f'n_candidates_v2 fixed at {TEST1_N_CANDIDATES_FIXED}.')
-    lines.append('')
-    lines.append('Survival rate p with normal-approx SE in pp (p / SE_pp).')
-    lines.append('')
-    header = '| phi | ' + ' | '.join(f'rollout={r}' for r in TEST1_ROLLOUT_VALUES) + ' |'
-    sep    = '|-----|' + '|'.join('---------------' for _ in TEST1_ROLLOUT_VALUES) + '|'
-    lines.append(header)
-    lines.append(sep)
-    test1_rates = {}
-    for phi in PHI_VALUES:
-        cells = []
-        for r in TEST1_ROLLOUT_VALUES:
-            cr = cell_rate(rows, lambda x, p=phi, R=r:
-                           x['test_id'] == 1 and x['phi'] == p
-                           and x['rollout_steps_v2'] == R)
-            test1_rates[(phi, r)] = cr
-            if cr is None:
-                cells.append('     n=0      ')
-            else:
-                cells.append(f'{cr["rate"]:.3f} / {cr["se"]*100:4.1f}  ')
-        lines.append(f'| {phi:3g} | ' + ' | '.join(cells) + ' |')
-    lines.append('')
-    lines.append('Cells per (phi, rollout_steps_v2):')
-    lines.append('')
-    lines.append(header)
-    lines.append(sep)
-    for phi in PHI_VALUES:
-        cells = []
-        for r in TEST1_ROLLOUT_VALUES:
-            cr = test1_rates.get((phi, r))
-            cells.append(f'      {cr["n"] if cr else 0:5d}    ')
-        lines.append(f'| {phi:3g} | ' + ' | '.join(cells) + ' |')
-    lines.append('')
-    lines.append('### Test 1 trough-by-rollout (Mechanism C diagnostic)')
-    lines.append('')
-    lines.append('Per-rollout-steps trough phi (argmin survival). If trough '
-                 'phi shifts across rollout_steps, Mechanism C is supported; '
-                 'if trough phi is invariant, Mechanism C is rejected.')
-    lines.append('')
-    lines.append('| rollout_steps_v2 | trough phi | trough rate (SE pp) | peak phi | peak rate | spread (pp) |')
-    lines.append('|------------------|------------|---------------------|----------|-----------|-------------|')
-    test1_troughs = []
-    test1_peaks = []
-    for r in TEST1_ROLLOUT_VALUES:
-        crs = [(p, test1_rates.get((p, r))) for p in PHI_VALUES
-               if test1_rates.get((p, r)) is not None]
-        if not crs:
-            lines.append(f'| {r} | n/a | n/a | n/a | n/a | n/a |')
-            test1_troughs.append(None)
-            test1_peaks.append(None)
-            continue
-        trough_phi, trough_cr = min(crs, key=lambda x: x[1]['rate'])
-        peak_phi,   peak_cr   = max(crs, key=lambda x: x[1]['rate'])
-        spread = (peak_cr['rate'] - trough_cr['rate']) * 100
-        test1_troughs.append(trough_phi)
-        test1_peaks.append(peak_phi)
-        lines.append(f'| {r} | {trough_phi:g} | '
-                     f'{trough_cr["rate"]:.3f} ({trough_cr["se"]*100:.1f}) | '
-                     f'{peak_phi:g} | {peak_cr["rate"]:.3f} | '
-                     f'{spread:.1f} |')
-    lines.append('')
-    if test1_troughs and all(t == test1_troughs[0] for t in test1_troughs if t is not None):
-        lines.append(f'**Mechanism C diagnostic: trough phi is constant at '
-                     f'phi={test1_troughs[0]:g} across all rollout_steps values. '
-                     '*Mechanism C is REJECTED.* The trough is not driven by '
-                     'rollout horizon resonance.**')
-    else:
-        moving = [(r, t) for r, t in zip(TEST1_ROLLOUT_VALUES, test1_troughs)]
-        lines.append(f'**Mechanism C diagnostic: trough phi varies with '
-                     f'rollout_steps: {moving}. *Mechanism C is '
-                     'SUPPORTED.* The U-shape location depends on the '
-                     'rollout horizon.**')
-    lines.append('')
-
-    # ------------------------------------------------------------------
-    # Section 2: Test 2 — candidate count variation
-    # ------------------------------------------------------------------
-    lines.append('## Section 2: Test 2 — Candidate Count Variation (Mechanism D)')
-    lines.append('')
-    lines.append(f'n_candidates_v2 in {TEST2_N_CANDIDATES_VALUES}, '
-                 f'rollout_steps_v2 fixed at {TEST2_ROLLOUT_FIXED}.')
-    lines.append('')
-    lines.append('Survival rate p with normal-approx SE in pp (p / SE_pp).')
-    lines.append('')
-    header2 = '| phi | ' + ' | '.join(f'cand={c}' for c in TEST2_N_CANDIDATES_VALUES) + ' |'
-    sep2    = '|-----|' + '|'.join('---------------' for _ in TEST2_N_CANDIDATES_VALUES) + '|'
-    lines.append(header2)
-    lines.append(sep2)
-    test2_rates = {}
-    for phi in PHI_VALUES:
-        cells = []
-        for c in TEST2_N_CANDIDATES_VALUES:
-            cr = cell_rate(rows, lambda x, p=phi, C=c:
-                           x['test_id'] == 2 and x['phi'] == p
-                           and x['n_candidates_v2'] == C)
-            test2_rates[(phi, c)] = cr
-            if cr is None:
-                cells.append('     n=0      ')
-            else:
-                cells.append(f'{cr["rate"]:.3f} / {cr["se"]*100:4.1f}  ')
-        lines.append(f'| {phi:3g} | ' + ' | '.join(cells) + ' |')
-    lines.append('')
-    lines.append('Cells per (phi, n_candidates_v2):')
-    lines.append('')
-    lines.append(header2)
-    lines.append(sep2)
-    for phi in PHI_VALUES:
-        cells = []
-        for c in TEST2_N_CANDIDATES_VALUES:
-            cr = test2_rates.get((phi, c))
-            cells.append(f'      {cr["n"] if cr else 0:5d}    ')
-        lines.append(f'| {phi:3g} | ' + ' | '.join(cells) + ' |')
-    lines.append('')
-    lines.append('### Test 2 trough depth by candidate count (Mechanism D diagnostic)')
-    lines.append('')
-    lines.append('Per-n_candidates trough depth (max - min survival across the '
-                 'four phi values). If depth shrinks as n_candidates rises, '
-                 'Mechanism D is supported; if depth is constant, Mechanism D '
-                 'is rejected.')
-    lines.append('')
-    lines.append('| n_candidates_v2 | trough phi | trough rate | peak phi | peak rate | depth (pp) |')
-    lines.append('|-----------------|------------|-------------|----------|-----------|------------|')
-    test2_depths = []
-    for c in TEST2_N_CANDIDATES_VALUES:
-        crs = [(p, test2_rates.get((p, c))) for p in PHI_VALUES
-               if test2_rates.get((p, c)) is not None]
-        if not crs:
-            lines.append(f'| {c} | n/a | n/a | n/a | n/a | n/a |')
-            test2_depths.append(None)
-            continue
-        trough_phi, trough_cr = min(crs, key=lambda x: x[1]['rate'])
-        peak_phi,   peak_cr   = max(crs, key=lambda x: x[1]['rate'])
-        depth = (peak_cr['rate'] - trough_cr['rate']) * 100
-        test2_depths.append(depth)
-        lines.append(f'| {c} | {trough_phi:g} | {trough_cr["rate"]:.3f} | '
-                     f'{peak_phi:g} | {peak_cr["rate"]:.3f} | {depth:.1f} |')
-    lines.append('')
-    if all(d is not None for d in test2_depths) and len(test2_depths) >= 2:
-        # "Shrinks with rising candidates" = monotonic non-increasing in candidates.
-        non_increasing = all(test2_depths[i] >= test2_depths[i + 1] - 1.5
-                             for i in range(len(test2_depths) - 1))
-        # SE on depth is sqrt(SE_peak^2 + SE_trough^2). With n=250 each, ~ 5pp.
-        # Require the depth to halve or more from min to max candidates
-        # before declaring D supported.
-        ratio = (test2_depths[0] / test2_depths[-1]
-                 if test2_depths[-1] > 1e-6 else float('inf'))
-        if non_increasing and ratio >= 2.0:
-            lines.append(f'**Mechanism D diagnostic: trough depth shrinks '
-                         f'monotonically as n_candidates rises '
-                         f'({test2_depths[0]:.1f}pp -> '
-                         f'{test2_depths[-1]:.1f}pp, ratio '
-                         f'{ratio:.2f}x). *Mechanism D is SUPPORTED.* '
-                         'Candidate-pool sampling drives the U-shape.**')
-        elif non_increasing:
-            lines.append(f'**Mechanism D diagnostic: trough depth shrinks '
-                         f'modestly ({test2_depths[0]:.1f}pp -> '
-                         f'{test2_depths[-1]:.1f}pp, ratio {ratio:.2f}x), '
-                         'not by a factor of 2. *Mechanism D is PARTIALLY '
-                         'SUPPORTED.* Candidate-pool sensitivity contributes '
-                         'but is not the sole cause.**')
-        else:
-            lines.append(f'**Mechanism D diagnostic: trough depths are '
-                         f'{test2_depths}. Not monotonic in n_candidates. '
-                         '*Mechanism D is REJECTED.* The U-shape depth does '
-                         'not depend on candidate count.**')
-    lines.append('')
-
-    # ------------------------------------------------------------------
-    # Section 3: Statistical confidence
-    # ------------------------------------------------------------------
-    lines.append('## Section 3: Statistical confidence per test')
-    lines.append('')
-
-    def sig_count_per_axis(rate_dict, fixed_values, varied_values, axis_name):
-        """For each fixed value, count pairwise phi differentials > 2 SE."""
-        total_pairs = 0
-        total_sig   = 0
-        per_value   = []
-        for v in varied_values:
-            n_pairs = 0
-            n_sig   = 0
-            for i, j in combinations(range(len(PHI_VALUES)), 2):
-                ki = rate_dict.get((PHI_VALUES[i], v))
-                kj = rate_dict.get((PHI_VALUES[j], v))
-                if ki is None or kj is None:
-                    continue
-                d  = ki['rate'] - kj['rate']
-                se = math.sqrt(ki['se'] ** 2 + kj['se'] ** 2)
-                n_pairs += 1
-                if abs(d) > 2.0 * se:
-                    n_sig += 1
-            per_value.append((v, n_pairs, n_sig))
-            total_pairs += n_pairs
-            total_sig   += n_sig
-        return per_value, total_pairs, total_sig
-
-    per1, tot1_pairs, tot1_sig = sig_count_per_axis(
-        test1_rates, None, TEST1_ROLLOUT_VALUES, 'rollout_steps_v2')
-    per2, tot2_pairs, tot2_sig = sig_count_per_axis(
-        test2_rates, None, TEST2_N_CANDIDATES_VALUES, 'n_candidates_v2')
-
-    def _frac_str(sig, total):
-        if total == 0:
-            return f'**{sig} / {total}** (no data yet).'
-        return (f'**{sig} / {total}** '
-                f'({100 * sig / total:.1f}%, vs 5% null).')
-
-    lines.append('### Test 1 (rollout sweep)')
-    lines.append('')
-    lines.append(f'- Significant phi pairs (|diff| > 2 SE): '
-                 + _frac_str(tot1_sig, tot1_pairs))
-    lines.append('')
-    lines.append('| rollout_steps_v2 | pairs | significant |')
-    lines.append('|------------------|-------|-------------|')
-    for v, n_p, n_s in per1:
-        lines.append(f'| {v} | {n_p} | {n_s} |')
-    lines.append('')
-
-    lines.append('### Test 2 (candidate sweep)')
-    lines.append('')
-    lines.append(f'- Significant phi pairs (|diff| > 2 SE): '
-                 + _frac_str(tot2_sig, tot2_pairs))
-    lines.append('')
-    lines.append('| n_candidates_v2 | pairs | significant |')
-    lines.append('|-----------------|-------|-------------|')
-    for v, n_p, n_s in per2:
-        lines.append(f'| {v} | {n_p} | {n_s} |')
-    lines.append('')
-
-    # ------------------------------------------------------------------
-    # Section 4: Joint interpretation
-    # ------------------------------------------------------------------
-    lines.append('## Section 4: Joint interpretation')
-    lines.append('')
-    lines.append('Three outcome classes:')
-    lines.append('')
-    lines.append('- **A. Both mechanisms supported**: U-shape depends on both '
-                 'rollout horizon and candidate count. Architectural, not a '
-                 'deep horizon-parameter finding.')
-    lines.append('- **B. One supported, one rejected**: Specific architectural '
-                 'cause. The supported mechanism explains the U-shape.')
-    lines.append('- **C. Both rejected**: U-shape persists across both '
-                 'variations. Likely Mechanism E (working_factor) or an '
-                 'uncharacterized cause. Recommend follow-up.')
-    lines.append('')
-    lines.append('Read against Sections 1 and 2 to classify the outcome '
-                 'observed in this run.')
-    lines.append('')
-
-    # ------------------------------------------------------------------
-    # Section 5: Default phi=10 implications
-    # ------------------------------------------------------------------
-    lines.append('## Section 5: Default phi=10 across architecture variations')
-    lines.append('')
-    lines.append('Where does phi=10 sit at each architecture setting? If it '
-                 'stays low everywhere, the default is structurally bad. If '
-                 'it improves with some variations, the default may be '
-                 'salvageable with adjusted architecture.')
-    lines.append('')
-    lines.append('### Test 1 (rollout variation)')
-    lines.append('')
-    lines.append('| rollout | phi=10 rate | rank among 4 phi values | gap to peak (pp) |')
-    lines.append('|---------|-------------|--------------------------|------------------|')
-    for r in TEST1_ROLLOUT_VALUES:
-        cr10 = test1_rates.get((10.0, r))
-        if cr10 is None:
-            lines.append(f'| {r} | n/a | n/a | n/a |')
-            continue
-        rates_here = sorted(
-            [test1_rates.get((p, r))['rate'] for p in PHI_VALUES
-             if test1_rates.get((p, r)) is not None],
-            reverse=True,
-        )
-        rank = rates_here.index(cr10['rate']) + 1
-        gap = (rates_here[0] - cr10['rate']) * 100
-        lines.append(f'| {r} | {cr10["rate"]:.3f} | {rank} / {len(rates_here)} '
-                     f'| {gap:+.1f} |')
-    lines.append('')
-    lines.append('### Test 2 (candidates variation)')
-    lines.append('')
-    lines.append('| candidates | phi=10 rate | rank among 4 phi values | gap to peak (pp) |')
-    lines.append('|------------|-------------|--------------------------|------------------|')
-    for c in TEST2_N_CANDIDATES_VALUES:
-        cr10 = test2_rates.get((10.0, c))
-        if cr10 is None:
-            lines.append(f'| {c} | n/a | n/a | n/a |')
-            continue
-        rates_here = sorted(
-            [test2_rates.get((p, c))['rate'] for p in PHI_VALUES
-             if test2_rates.get((p, c)) is not None],
-            reverse=True,
-        )
-        rank = rates_here.index(cr10['rate']) + 1
-        gap = (rates_here[0] - cr10['rate']) * 100
-        lines.append(f'| {c} | {cr10["rate"]:.3f} | {rank} / {len(rates_here)} '
-                     f'| {gap:+.1f} |')
-    lines.append('')
-
-    # ------------------------------------------------------------------
-    # Section 6: Future work
-    # ------------------------------------------------------------------
-    lines.append('## Section 6: Future work flagged')
-    lines.append('')
-    lines.append('- Mechanism E (working_factor calibration interaction) if '
-                 'Tests 1 and 2 do not explain the U-shape.')
-    lines.append('- Finer phi grid in the trough region if a sharp narrow '
-                 'trough emerges at a specific architecture setting.')
-    lines.append('- Alternative gamma functional form (already on watchlist '
-                 'in the program reference).')
-    lines.append('- Robustness across alternative working_factor placeholder '
-                 'calibrations (the current STATE_ALLOCATION_MAPPING is a '
-                 'first-build placeholder).')
-    lines.append('- Additional rr values if the mechanism finding is '
-                 'rr-dependent (this investigation fixes rr at 0.060).')
-    lines.append('')
-
-    with open(out_path, 'w') as f:
-        f.write('\n'.join(lines) + '\n')
-
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
-def parse_args():
-    parser = argparse.ArgumentParser(
-        description='Piece 2 mechanism investigation: rollout and candidate '
-                    'count variation at the v2.0 phi U-shape trough region.',
-    )
-    parser.add_argument('--seeds', type=int, default=250,
-                        help='Seeds per cell (default 250)')
-    parser.add_argument('--workers', type=int,
-                        default=max(1, (os.cpu_count() or 4) - 1),
-                        help='Pool size for multiprocessing')
-    parser.add_argument('--test', choices=['1', '2', 'both'], default='both',
-                        help='Which test to run (default both, sequential)')
-    parser.add_argument('--output-dir', default='simulation/diagnostics/',
-                        help='Where to write CSV, log, and reports')
-    parser.add_argument('--resume', action='store_true',
-                        help='Skip cells already present in the CSV')
-    parser.add_argument('--dry-run', action='store_true',
-                        help='Mark output as dry run; otherwise identical')
-    return parser.parse_args()
-
-
-def main():
-    args = parse_args()
-    args.output_dir = os.path.abspath(args.output_dir)
-    os.makedirs(args.output_dir, exist_ok=True)
-    log_path = os.path.join(args.output_dir, PROGRESS_NAME)
-    logger = ProgressLogger(log_path)
-    logger.log('=' * 60)
-    logger.log('phi_mechanism_investigation start')
-    logger.log(f'seeds={args.seeds} workers={args.workers} '
-               f'test={args.test} resume={args.resume} dry_run={args.dry_run}')
-    logger.log('=' * 60)
-
-    csv_path = os.path.join(args.output_dir, CSV_NAME)
-    _ensure_csv(csv_path)
-
-    try:
-        if args.test in ('1', 'both'):
-            completed = _load_completed_keys(csv_path) if args.resume else set()
-            run_tasks('Test1', test1_tasks(args.seeds), completed, args, logger)
-        if args.test in ('2', 'both'):
-            completed = _load_completed_keys(csv_path) if args.resume else set()
-            run_tasks('Test2', test2_tasks(args.seeds), completed, args, logger)
-
-        rows = _load_results(csv_path)
-        logger.log(f'Loaded {len(rows)} rows from CSV.')
-        summary_path = os.path.join(args.output_dir, SUMMARY_NAME)
-        write_summary(rows, summary_path, dry_run=args.dry_run)
-        logger.log(f'Wrote summary: {summary_path}')
-    finally:
-        logger.close()
-
-
-if __name__ == '__main__':
-    main()
-
-
-==========================================
-FILE: simulation/diagnostics/phi_survival_targeted_sweep.py
-==========================================
-
-"""phi_survival_targeted_sweep.py — Targeted phi-survival characterization
-at the v2.0 phase boundary.
-
-Standalone executable. Sweeps phi x rr at fine rr resolution around the
-empirical v2.0 phase boundary (rr ~ 0.057-0.058) with 150 seeds per cell
-to tighten standard errors. Outputs a descriptive analysis of the
-phi-survival relationship: matrix, boundary location per phi, differential
-shape, variance estimates, and implications.
-
-Survival is defined as final_population >= 30 (the gate 2 v2.0
-demographic sustainability threshold), not >= 1. The original prompt
-specified pop > 0; the dry run surfaced that complete extinction is
-rare over 200 steps in this rr range, so pop > 0 returned 100% survival
-across all 35 cells and the phase boundary was invisible. Threshold = 30
-matches the demographic sustainability criterion the original gate 2
-v2.0 measurement used and places the boundary at rr ~ 0.057-0.058 as
-expected.
-
-This sweep does NOT test G2.2 / G2.4 (succession-cadence checks), which
-require successor construction; that is separate work. alpha is held at
-its default 1.0 because this sweep does not characterize alpha behavior.
-
-Usage:
-    cd <repo root>
-    python -u simulation/diagnostics/phi_survival_targeted_sweep.py \\
-        --seeds 150 \\
-        --workers 8 \\
-        --output-dir simulation/diagnostics/ \\
-        --resume
-
-Monitoring:
-    tail -f simulation/diagnostics/phi_survival_targeted_progress.log
-    ls -t simulation/diagnostics/phi_survival_targeted_checkpoint_*.md | head -1 | xargs cat
-"""
-
-import argparse
-import csv
-import hashlib
-import itertools
-import math
-import multiprocessing as mp
-import os
-import sys
-import time
-from datetime import datetime, timedelta
-from itertools import combinations
-
-import numpy as np
-
-HERE = os.path.dirname(os.path.abspath(__file__))
-SIM_DIR = os.path.abspath(os.path.join(HERE, '..'))
-REPO_ROOT = os.path.abspath(os.path.join(SIM_DIR, '..'))
-for p in (SIM_DIR, REPO_ROOT):
-    if p not in sys.path:
-        sys.path.insert(0, p)
-
-from model import GardenModel
-
-
-# ---------------------------------------------------------------------------
-# Sweep configuration
-# ---------------------------------------------------------------------------
-
-PHI_VALUES = [1.0, 5.0, 10.0, 25.0, 100.0]
-RR_VALUES  = [0.055, 0.056, 0.057, 0.058, 0.059, 0.060, 0.061]
-
-N_AGENTS = 200
-N_STEPS  = 200
-ALPHA    = 1.0
-# Civilizational sustainability threshold (matches gate 2 v2.0 sweep). The
-# phase boundary in framework terms is sustainability, not complete
-# extinction. The dry run at threshold = 1 (population > 0) showed zero
-# extinctions across the rr range, masking the demographic gradient that
-# is visible under threshold = 30. Methodological lesson: pre-committed
-# metric must match the substantive question, same lesson recorded for
-# Stage 1.6 criterion 1 and Stage 1.8 Phase A C3.
-SURVIVAL_THRESHOLD = 30
-
-CSV_NAME       = 'phi_survival_targeted_results.csv'
-PROGRESS_NAME  = 'phi_survival_targeted_progress.log'
-SUMMARY_NAME   = 'phi_survival_targeted_summary.md'
-CHECKPOINT_FMT = 'phi_survival_targeted_checkpoint_{count:06d}.md'
-
-CSV_FIELDS = [
-    'phi', 'rr', 'seed',
-    'survived', 'final_population',
-    'final_avg_wb', 'final_l_t',
-]
-
-CHECKPOINT_EVERY = 500
-
-
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
-
-def deterministic_seed(label):
-    return int(hashlib.md5(label.encode()).hexdigest(), 16) % 10000
-
-
-def _cell_key(phi, rr, seed):
-    return f'{phi:.4f}|{rr:.5f}|{seed}'
-
-
-def _make_cell_seed(phi, rr, seed):
-    return deterministic_seed(_cell_key(phi, rr, seed))
-
-
-# ---------------------------------------------------------------------------
-# Worker
-# ---------------------------------------------------------------------------
-
-def _run_single_cell(args):
-    phi, rr, seed = args
-    cfg = {
-        'policy':            'optimize_u_sys_v2',
-        'phi':               float(phi),
-        'alpha':             float(ALPHA),
-        'reproduction_rate': float(rr),
-        'rollout_steps_v2':  20,
-        'n_candidates_v2':   300,
-        'random_seed':       _make_cell_seed(phi, rr, seed),
-    }
-    try:
-        model = GardenModel(
-            n_agents=N_AGENTS,
-            ai_policy='optimize_u_sys_v2',
-            config=cfg,
-        )
-        for _ in range(N_STEPS):
-            if not model.step():
-                break
-        dc = model.datacollector
-        final_pop = int(dc['population'][-1]) if dc.get('population') else 0
-        wb_series = dc.get('avg_well_being') or []
-        final_wb  = float(wb_series[-1]) if wb_series else 0.0
-        l_series  = dc.get('l_t_v2') or []
-        final_l_t = float(l_series[-1]) if l_series else 0.0
-    except Exception as exc:
-        return {
-            'phi':              float(phi),
-            'rr':               float(rr),
-            'seed':             int(seed),
-            'survived':         False,
-            'final_population': 0,
-            'final_avg_wb':     0.0,
-            'final_l_t':        0.0,
-            '_error':           f'{type(exc).__name__}: {exc}',
-        }
-
-    survived = final_pop >= SURVIVAL_THRESHOLD
-    return {
-        'phi':              float(phi),
-        'rr':               float(rr),
-        'seed':             int(seed),
-        'survived':         bool(survived),
-        'final_population': int(final_pop),
-        'final_avg_wb':     float(final_wb),
-        'final_l_t':        float(final_l_t),
-    }
-
-
-# ---------------------------------------------------------------------------
-# CSV helpers (incremental write + resume)
-# ---------------------------------------------------------------------------
-
-def _ensure_csv(path):
-    if not os.path.exists(path):
-        with open(path, 'w', newline='') as f:
-            csv.DictWriter(f, fieldnames=CSV_FIELDS).writeheader()
-
-
-def _load_completed_keys(path):
-    if not os.path.exists(path):
-        return set()
-    keys = set()
-    with open(path, 'r', newline='') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            try:
-                k = _cell_key(float(row['phi']), float(row['rr']),
-                              int(row['seed']))
-                keys.add(k)
-            except (KeyError, ValueError):
-                continue
-    return keys
-
-
-def _append_rows(path, rows):
-    if not rows:
-        return
-    with open(path, 'a', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=CSV_FIELDS)
-        for r in rows:
-            writer.writerow({k: r[k] for k in CSV_FIELDS})
-
-
-def _load_results(path):
-    rows = []
-    if not os.path.exists(path):
-        return rows
-    with open(path, 'r', newline='') as f:
-        reader = csv.DictReader(f)
-        for r in reader:
-            rows.append({
-                'phi':              float(r['phi']),
-                'rr':               float(r['rr']),
-                'seed':             int(r['seed']),
-                'survived':         r['survived'].lower() == 'true',
-                'final_population': int(r['final_population']),
-                'final_avg_wb':     float(r['final_avg_wb']),
-                'final_l_t':        float(r['final_l_t']),
-            })
-    return rows
-
-
-# ---------------------------------------------------------------------------
-# Progress logger
-# ---------------------------------------------------------------------------
-
-class ProgressLogger:
-    def __init__(self, path):
-        self.path = path
-        self.fh = open(path, 'a', buffering=1)
-        self.start = time.time()
-
-    def log(self, msg):
-        ts = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
-        line = f'{ts}  {msg}'
-        self.fh.write(line + '\n')
-        print(line, flush=True)
-
-    def checkpoint(self, done, total, extra=''):
-        elapsed = time.time() - self.start
-        ips = done / elapsed if elapsed > 0 else 0
-        eta_s = int((total - done) / ips) if ips > 0 else 0
-        eta = str(timedelta(seconds=eta_s))
-        self.log(f'[{done}/{total}] {ips:.2f} cells/s  ETA {eta}  {extra}')
-
-    def close(self):
-        self.fh.close()
-
-
-# ---------------------------------------------------------------------------
-# Statistical helpers
-# ---------------------------------------------------------------------------
-
-def wilson_interval(k, n, z=1.96):
-    """Wilson score interval for proportion k/n. Returns (lo, hi)."""
-    if n == 0:
-        return (0.0, 0.0)
-    p = k / n
-    denom = 1.0 + z * z / n
-    centre = (p + z * z / (2.0 * n)) / denom
-    margin = (z / denom) * math.sqrt(p * (1.0 - p) / n + z * z / (4.0 * n * n))
-    return (max(0.0, centre - margin), min(1.0, centre + margin))
-
-
-def normal_se(k, n):
-    """Normal-approximation standard error on p = k/n."""
-    if n == 0:
-        return 0.0
-    p = k / n
-    return math.sqrt(p * (1.0 - p) / n)
-
-
-def linear_crossing(x0, x1, y0, y1, threshold):
-    """Linear interpolation: find x where y crosses threshold between
-    (x0, y0) and (x1, y1). Returns None if no crossing in [x0, x1]."""
-    if (y0 - threshold) * (y1 - threshold) > 0:
-        return None
-    if y1 == y0:
-        return None
-    return x0 + (threshold - y0) * (x1 - x0) / (y1 - y0)
-
-
-# ---------------------------------------------------------------------------
-# Analysis
-# ---------------------------------------------------------------------------
-
-def survival_matrix(rows):
-    """Return (matrix, counts) where matrix[phi_idx][rr_idx] is survival
-    rate and counts[phi_idx][rr_idx] is the cell count."""
-    rates  = [[0.0 for _ in RR_VALUES] for _ in PHI_VALUES]
-    counts = [[0   for _ in RR_VALUES] for _ in PHI_VALUES]
-    survived_counts = [[0 for _ in RR_VALUES] for _ in PHI_VALUES]
-    for r in rows:
-        try:
-            pi = PHI_VALUES.index(r['phi'])
-            ri = RR_VALUES.index(r['rr'])
-        except ValueError:
-            continue
-        counts[pi][ri] += 1
-        if r['survived']:
-            survived_counts[pi][ri] += 1
-    for pi in range(len(PHI_VALUES)):
-        for ri in range(len(RR_VALUES)):
-            n = counts[pi][ri]
-            rates[pi][ri] = (survived_counts[pi][ri] / n) if n else 0.0
-    return rates, counts, survived_counts
-
-
-def phase_boundary_per_phi(rates, counts, threshold=0.5):
-    """Find the rr where survival crosses threshold for each phi (linear
-    interpolation between adjacent grid points). Returns dict
-    phi -> rr_at_threshold (or None if no crossing)."""
-    result = {}
-    for pi, phi in enumerate(PHI_VALUES):
-        crossing = None
-        for ri in range(len(RR_VALUES) - 1):
-            x = linear_crossing(
-                RR_VALUES[ri], RR_VALUES[ri + 1],
-                rates[pi][ri], rates[pi][ri + 1],
-                threshold,
-            )
-            if x is not None:
-                crossing = x
-                break
-        result[phi] = crossing
-    return result
-
-
-def phi_differentials_at_rr(rates, counts, ri):
-    """For a given rr index, return all phi pairs and their (rate_high -
-    rate_low) with normal-approx SE on the differential."""
-    out = []
-    for i, j in combinations(range(len(PHI_VALUES)), 2):
-        p_lo = rates[i][ri]
-        p_hi = rates[j][ri]
-        n_lo = counts[i][ri]
-        n_hi = counts[j][ri]
-        diff = p_hi - p_lo
-        se_diff = math.sqrt(
-            (p_lo * (1.0 - p_lo) / n_lo if n_lo else 0)
-            + (p_hi * (1.0 - p_hi) / n_hi if n_hi else 0)
-        )
-        out.append({
-            'phi_low':  PHI_VALUES[i],
-            'phi_high': PHI_VALUES[j],
-            'rate_low':  p_lo,
-            'rate_high': p_hi,
-            'diff':      diff,
-            'se':        se_diff,
-            'sig':       abs(diff) > 2.0 * se_diff,
-        })
-    return out
-
-
-def characterize_shape(rates_at_rr, threshold_pp=0.05):
-    """Characterize the shape of phi -> rate at a fixed rr. Returns a
-    descriptive string."""
-    rates = list(rates_at_rr)
-    if not rates or max(rates) - min(rates) < threshold_pp:
-        return 'flat (within {:.0f}pp range)'.format(threshold_pp * 100)
-    monotonic_up = all(rates[i] <= rates[i + 1] for i in range(len(rates) - 1))
-    monotonic_dn = all(rates[i] >= rates[i + 1] for i in range(len(rates) - 1))
-    if monotonic_up:
-        return 'monotonic increasing in phi'
-    if monotonic_dn:
-        return 'monotonic decreasing in phi'
-    peak_idx   = rates.index(max(rates))
-    trough_idx = rates.index(min(rates))
-    if 0 < peak_idx < len(rates) - 1:
-        return f'inverted-U (peak at phi={PHI_VALUES[peak_idx]:g})'
-    if 0 < trough_idx < len(rates) - 1:
-        return f'U-shaped (trough at phi={PHI_VALUES[trough_idx]:g})'
-    return 'non-monotonic, no clear shape'
-
-
-# ---------------------------------------------------------------------------
-# Report writers
-# ---------------------------------------------------------------------------
-
-def write_summary(rows, out_path, dry_run=False, partial=False):
-    rates, counts, survived_counts = survival_matrix(rows)
-
-    lines = []
-    lines.append('# Targeted phi-survival characterization at the v2.0 phase boundary')
-    lines.append('')
-    timestamp = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
-    lines.append(f'Generated: {timestamp}')
-    if dry_run:
-        lines.append('Mode: **DRY RUN** (low seed count; results not authoritative)')
-    elif partial:
-        lines.append('Mode: **PARTIAL** (intermediate checkpoint; not final)')
-    lines.append('')
-    lines.append(f'Cells: {len(PHI_VALUES)} phi x {len(RR_VALUES)} rr = '
-                 f'{len(PHI_VALUES) * len(RR_VALUES)}. '
-                 f'Rows loaded: {len(rows)}.')
-    lines.append(f'Architecture: v2.0, alpha=1.0, n_agents={N_AGENTS}, '
-                 f'steps={N_STEPS}.')
-    lines.append('')
-
-    # Section 1: Survival rate matrix
-    lines.append('## Section 1: Survival rate matrix')
-    lines.append('')
-    lines.append('Survival rate p with normal-approx standard error in pp '
-                 '(p_hat / SE).')
-    lines.append('')
-    header = '| phi \\\\ rr | ' + ' | '.join(f'{rr:.3f}' for rr in RR_VALUES) + ' |'
-    sep    = '|----------|' + '|'.join('--------' for _ in RR_VALUES) + '|'
-    lines.append(header)
-    lines.append(sep)
-    for pi, phi in enumerate(PHI_VALUES):
-        cells = []
-        for ri in range(len(RR_VALUES)):
-            n = counts[pi][ri]
-            k = survived_counts[pi][ri]
-            if n == 0:
-                cells.append('   n=0  ')
-            else:
-                se = normal_se(k, n) * 100.0
-                cells.append(f'{rates[pi][ri]:.3f} / {se:4.1f}')
-        lines.append(f'| phi={phi:5.1f} | ' + ' | '.join(cells) + ' |')
-    lines.append('')
-    lines.append('Cells per (phi, rr):')
-    lines.append('')
-    cnt_header = '| phi \\\\ rr | ' + ' | '.join(f'{rr:.3f}' for rr in RR_VALUES) + ' |'
-    cnt_sep    = '|----------|' + '|'.join('-------' for _ in RR_VALUES) + '|'
-    lines.append(cnt_header)
-    lines.append(cnt_sep)
-    for pi, phi in enumerate(PHI_VALUES):
-        cells = [f'{counts[pi][ri]:5d}' for ri in range(len(RR_VALUES))]
-        lines.append(f'| phi={phi:5.1f} | ' + ' | '.join(cells) + ' |')
-    lines.append('')
-
-    # Section 2: Phase boundary per phi
-    lines.append('## Section 2: Phase boundary location per phi')
-    lines.append('')
-    lines.append('rr at which survival rate crosses 0.50 (linear interpolation '
-                 'between adjacent grid points; "n/a" if no crossing within '
-                 'the swept range).')
-    lines.append('')
-    crossings = phase_boundary_per_phi(rates, counts, threshold=0.5)
-    lines.append('| phi | rr at survival=0.50 |')
-    lines.append('|-----|----------------------|')
-    for phi in PHI_VALUES:
-        c = crossings[phi]
-        s = f'{c:.4f}' if c is not None else 'n/a'
-        lines.append(f'| {phi:5.1f} | {s} |')
-    lines.append('')
-
-    # Section 3: Phi differential analysis per rr
-    lines.append('## Section 3: Phi differentials at each rr')
-    lines.append('')
-    lines.append('For each rr, the 10 pairwise differentials (rate_high - '
-                 'rate_low) and whether they exceed 2 SE.')
-    lines.append('')
-    for ri, rr in enumerate(RR_VALUES):
-        diffs = phi_differentials_at_rr(rates, counts, ri)
-        shape = characterize_shape([rates[pi][ri] for pi in range(len(PHI_VALUES))])
-        lines.append(f'### rr = {rr:.3f}')
-        lines.append('')
-        lines.append(f'- Shape of phi -> survival rate: **{shape}**')
-        lines.append(f'- Rates by phi: ' +
-                     ', '.join(f'phi={PHI_VALUES[pi]:g}->{rates[pi][ri]:.3f}'
-                               for pi in range(len(PHI_VALUES))))
-        lines.append('')
-        lines.append('| phi_low | phi_high | rate_low | rate_high | diff (pp) | SE (pp) | > 2 SE? |')
-        lines.append('|---------|----------|----------|-----------|-----------|---------|---------|')
-        for d in diffs:
-            lines.append(
-                f'| {d["phi_low"]:7g} | {d["phi_high"]:8g} | '
-                f'{d["rate_low"]:.3f}    | {d["rate_high"]:.3f}     | '
-                f'{d["diff"]*100:+9.2f} | {d["se"]*100:7.2f} | '
-                f'{"YES" if d["sig"] else "no"} |'
-            )
-        lines.append('')
-
-    # Section 4: Variance estimation
-    lines.append('## Section 4: Variance summary')
-    lines.append('')
-    lines.append('Worst-case SE per rr (largest normal-approx SE across phi '
-                 'values at that rr), and count of differential pairs whose '
-                 'magnitude exceeds 2 SE at that rr.')
-    lines.append('')
-    lines.append('| rr | max SE (pp) | pairs > 2 SE |')
-    lines.append('|----|-------------|---------------|')
-    for ri, rr in enumerate(RR_VALUES):
-        ses = []
-        for pi in range(len(PHI_VALUES)):
-            n = counts[pi][ri]
-            k = survived_counts[pi][ri]
-            ses.append(normal_se(k, n) * 100.0)
-        max_se = max(ses) if ses else 0.0
-        diffs = phi_differentials_at_rr(rates, counts, ri)
-        sig_n = sum(1 for d in diffs if d['sig'])
-        lines.append(f'| {rr:.3f} | {max_se:11.2f} | {sig_n:13d} |')
-    lines.append('')
-
-    # Section 5: Implications
-    lines.append('## Section 5: Implications for v2.0 framework claims')
-    lines.append('')
-    rates_at_each_rr = [
-        [rates[pi][ri] for pi in range(len(PHI_VALUES))]
-        for ri in range(len(RR_VALUES))
-    ]
-    shapes = [characterize_shape(r) for r in rates_at_each_rr]
-    total_sig = 0
-    total_pairs = 0
-    for ri in range(len(RR_VALUES)):
-        diffs = phi_differentials_at_rr(rates, counts, ri)
-        total_pairs += len(diffs)
-        total_sig   += sum(1 for d in diffs if d['sig'])
-
-    lines.append(f'- Statistically significant differentials (|diff| > 2 SE): '
-                 f'**{total_sig} / {total_pairs}** pairs across the full grid.')
-    lines.append('- Shape characterization per rr:')
-    for ri, rr in enumerate(RR_VALUES):
-        lines.append(f'    - rr={rr:.3f}: {shapes[ri]}')
-    lines.append('')
-    lines.append('This section is descriptive. Framework dispositions based '
-                 'on the data are operator-side after review of sections 1-4.')
-    lines.append('')
-
-    # Section 6: Future work
-    lines.append('## Section 6: Future work flagged')
-    lines.append('')
-    lines.append('- gamma_max parameter optimization, if a non-monotonic '
-                 'shape with a clear peak emerges in section 3.')
-    lines.append('- Effect of step horizon on phi differential: this sweep '
-                 'uses 200 steps. Longer horizons may give phi rollout '
-                 'aggregation more room to express.')
-    lines.append('- Interaction with alpha: deferred to a follow-up sweep '
-                 'with successor construction so G2.2 / G2.4 can be '
-                 'measured non-degenerately.')
-    lines.append('- Robustness across working_factor placeholder '
-                 'calibrations: the current STATE_ALLOCATION_MAPPING is a '
-                 'first-build placeholder.')
-    lines.append('')
-
-    with open(out_path, 'w') as f:
-        f.write('\n'.join(lines) + '\n')
-
-
-# ---------------------------------------------------------------------------
-# Sweep driver
-# ---------------------------------------------------------------------------
-
-def run_sweep(args, logger):
-    csv_path = os.path.join(args.output_dir, CSV_NAME)
-    _ensure_csv(csv_path)
-    completed = _load_completed_keys(csv_path) if args.resume else set()
-
-    all_tasks = []
-    for phi, rr, seed in itertools.product(
-            PHI_VALUES, RR_VALUES, range(args.seeds)):
-        if _cell_key(phi, rr, seed) in completed:
-            continue
-        all_tasks.append((phi, rr, seed))
-
-    total_planned = (len(PHI_VALUES) * len(RR_VALUES) * args.seeds)
-    remaining = len(all_tasks)
-    logger.log(f'Sweep: {total_planned} cells total, '
-               f'{len(completed)} resumed, {remaining} to run.')
-    if remaining == 0:
-        logger.log('All cells already completed.')
-        return
-
-    flush_every      = max(1, min(50, remaining // 200))
-    checkpoint_every = max(1, remaining // 200)
-    summary_every    = max(1, min(CHECKPOINT_EVERY, remaining))
-
-    buffer = []
-    done = 0
-    errors = 0
-    rows_total = len(completed)
-    next_summary_at = rows_total + summary_every
-
-    with mp.Pool(processes=args.workers, maxtasksperchild=20) as pool:
-        for result in pool.imap_unordered(_run_single_cell, all_tasks,
-                                          chunksize=4):
-            done += 1
-            if '_error' in result:
-                errors += 1
-                logger.log(f'ERROR phi={result["phi"]} rr={result["rr"]} '
-                           f'seed={result["seed"]}: {result["_error"]}')
-            buffer.append(result)
-            rows_total += 1
-            if len(buffer) >= flush_every:
-                _append_rows(csv_path, buffer)
-                buffer = []
-            if done % checkpoint_every == 0 or done == remaining:
-                logger.checkpoint(done, remaining, extra=f'errors={errors}')
-            if rows_total >= next_summary_at:
-                _append_rows(csv_path, buffer)
-                buffer = []
-                rows_now = _load_results(csv_path)
-                ck_path = os.path.join(
-                    args.output_dir,
-                    CHECKPOINT_FMT.format(count=len(rows_now)),
-                )
-                write_summary(rows_now, ck_path, partial=True)
-                logger.log(f'Checkpoint summary written: {ck_path}')
-                next_summary_at += summary_every
-
-    _append_rows(csv_path, buffer)
-    logger.log(f'Sweep complete. errors={errors}')
-
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
-def parse_args():
-    parser = argparse.ArgumentParser(
-        description='Targeted phi-survival characterization at v2.0 phase '
-                    'boundary',
-    )
-    parser.add_argument('--seeds', type=int, default=150,
-                        help='Seeds per (phi, rr) cell (default 150)')
-    parser.add_argument('--workers', type=int,
-                        default=max(1, (os.cpu_count() or 4) - 1),
-                        help='Pool size for multiprocessing')
-    parser.add_argument('--output-dir', default='simulation/diagnostics/',
-                        help='Where to write CSV, log, and reports')
-    parser.add_argument('--resume', action='store_true',
-                        help='Skip cells already present in the CSV')
-    parser.add_argument('--dry-run', action='store_true',
-                        help='Mark output as dry run; otherwise identical')
-    return parser.parse_args()
-
-
-def main():
-    args = parse_args()
-    args.output_dir = os.path.abspath(args.output_dir)
-    os.makedirs(args.output_dir, exist_ok=True)
-    log_path = os.path.join(args.output_dir, PROGRESS_NAME)
-    logger = ProgressLogger(log_path)
-    logger.log('=' * 60)
-    logger.log('phi_survival_targeted_sweep start')
-    logger.log(f'seeds={args.seeds} workers={args.workers} '
-               f'resume={args.resume} dry_run={args.dry_run}')
-    logger.log('=' * 60)
-
-    try:
-        run_sweep(args, logger)
-        csv_path = os.path.join(args.output_dir, CSV_NAME)
-        rows = _load_results(csv_path)
-        logger.log(f'Loaded {len(rows)} rows from CSV.')
-        summary_path = os.path.join(args.output_dir, SUMMARY_NAME)
-        write_summary(rows, summary_path, dry_run=args.dry_run)
-        logger.log(f'Wrote summary: {summary_path}')
-    finally:
-        logger.close()
-
-
-if __name__ == '__main__':
-    main()
 
 
 ==========================================
@@ -27887,8 +23117,8 @@ FILE: scripts/generate_project_knowledge_snapshots.py
 """
 Generate category-aware project knowledge snapshots for upload to Claude project knowledge.
 
-Seven categories: docs, framework_papers, paper_drafts, diagnostics, constitutional,
-code, data_results.
+Eight categories: docs, framework_papers, paper_drafts, essays, diagnostics,
+constitutional, code, data_results.
 
 Usage:
     python scripts/generate_project_knowledge_snapshots.py
@@ -27921,6 +23151,7 @@ ALL_CATEGORIES = [
     "docs",
     "framework_papers",
     "paper_drafts",
+    "essays",
     "diagnostics",
     "constitutional",
     "code",
@@ -27931,6 +23162,7 @@ CATEGORY_OUTPUT_FILENAMES = {
     "docs": "docs_snapshot.md",
     "framework_papers": "framework_papers_snapshot.md",
     "paper_drafts": "paper_drafts_snapshot.md",
+    "essays": "essays_snapshot.md",
     "diagnostics": "diagnostics_snapshot.md",
     "constitutional": "constitutional_snapshot.md",
     "code": "code_snapshot.md",
@@ -27943,6 +23175,7 @@ CATEGORY_OUTPUT_FILENAMES = {
 
 # Files that belong to framework_papers (excluded from docs)
 FRAMEWORK_PAPERS_RELPATHS = [
+    "docs/The Lineage Imperative v2.0.md",
     "docs/The Lineage Imperative v1.x.2.md",
     "docs/The AI Succession Problem.md",
 ]
@@ -28340,6 +23573,25 @@ def collect_paper_drafts(dry_run: bool = False) -> List[Tuple[str, str]]:
     return results
 
 
+def collect_essays(dry_run: bool = False) -> List[Tuple[str, str]]:
+    essays_dir = REPO_ROOT / "essays"
+    if not essays_dir.exists():
+        print("INFO: essays/ directory not found", file=sys.stderr)
+        if dry_run:
+            print("\n[essays] Directory not found; no files would be included.")
+        return []
+
+    results = []
+    for path in sorted(essays_dir.glob("*.md")):
+        content = read_file_safe(path)
+        if content is not None:
+            results.append((str(path.relative_to(REPO_ROOT)), content))
+
+    if dry_run:
+        _print_dry_run("essays", results)
+    return results
+
+
 def collect_diagnostics(dry_run: bool = False) -> List[Tuple[str, str]]:
     diag_dir = REPO_ROOT / "simulation" / "diagnostics"
     if not diag_dir.exists():
@@ -28410,6 +23662,7 @@ COLLECTORS = {
     "docs": collect_docs,
     "framework_papers": collect_framework_papers,
     "paper_drafts": collect_paper_drafts,
+    "essays": collect_essays,
     "diagnostics": collect_diagnostics,
     "constitutional": collect_constitutional,
     "code": collect_code,
@@ -28459,6 +23712,7 @@ CATEGORY_QUICK_REF = {
     "docs": "Current framework state, defaults, gate status",
     "framework_papers": "Published paper content, framework derivation",
     "paper_drafts": "Active paper work (Section VIII, Appendix C)",
+    "essays": "Essay series; public-facing framing and narrative",
     "diagnostics": "Investigation findings, sweep results, integration analyses",
     "constitutional": "Constitutional questions, gate specifications",
     "code": "Implementation code, validator logic",
@@ -28475,6 +23729,9 @@ CATEGORY_REGEN_NOTES = {
     ),
     "paper_drafts": (
         "After each substantive paper drafting session. Currently the most active category."
+    ),
+    "essays": (
+        "After essay additions or revisions to the essay series. Rare."
     ),
     "diagnostics": (
         "After new sweep summaries, integration analyses, framing documents, investigation closures."

@@ -1,8 +1,8 @@
 # Constitutional Snapshot
 
-Generated: 2026-06-23T18:08:49Z
+Generated: 2026-07-06T16:01:19Z
 Repository: /home/yotko/Documents/Github/ai-succession-problem
-Commit: ce3956a
+Commit: 9426e7d
 Branch: main
 Category: constitutional
 

@@ -1,7 +1,7 @@
 # Project Knowledge Snapshots Inventory
 
-Last regeneration: 2026-06-28T17:05:40Z
-Git commit at regeneration: 365f724
+Last regeneration: 2026-07-06T16:01:19Z
+Git commit at regeneration: 9426e7d
 Branch: main
 
 ## Quick reference for Claude sessions
@@ -23,51 +23,51 @@ If you need specific content, ask the operator to upload the relevant category s
 
 ### docs
 - File: snapshots/docs_snapshot.md
-- Last generated: 2026-06-28T17:05:40Z
+- Last generated: 2026-07-06T16:01:19Z
 - Files included: 12
 - Snapshot size: 377974 bytes
 
 ### framework_papers
 - File: snapshots/framework_papers_snapshot.md
-- Last generated: 2026-06-28T17:05:40Z
+- Last generated: 2026-07-06T16:01:19Z
 - Files included: 3
 - Snapshot size: 444577 bytes
 
 ### paper_drafts
 - File: snapshots/paper_drafts_snapshot.md
-- Last generated: 2026-06-26T18:52:27Z
+- Last generated: 2026-07-06T16:01:19Z
 - Files included: 4
 - Snapshot size: 271321 bytes
 
 ### essays
 - File: snapshots/essays_snapshot.md
-- Last generated: 2026-06-28T17:00:40Z
-- Files included: 13
-- Snapshot size: 345070 bytes
+- Last generated: 2026-07-06T16:01:19Z
+- Files included: 14
+- Snapshot size: 367512 bytes
 
 ### diagnostics
 - File: snapshots/diagnostics_snapshot.md
-- Last generated: 2026-06-26T18:52:27Z
+- Last generated: 2026-07-06T16:01:19Z
 - Files included: unknown
-- Snapshot size: 679435 bytes
+- Snapshot size: 334241 bytes
 
 ### constitutional
 - File: snapshots/constitutional_snapshot.md
-- Last generated: 2026-06-26T18:52:27Z
+- Last generated: 2026-07-06T16:01:19Z
 - Files included: 6
 - Snapshot size: 40827 bytes
 
 ### code
 - File: snapshots/code_snapshot.md
-- Last generated: 2026-06-26T18:52:27Z
+- Last generated: 2026-07-06T16:01:19Z
 - Files included: unknown
-- Snapshot size: 1244685 bytes
+- Snapshot size: 1024396 bytes
 
 ### data_results
 - File: snapshots/data_results_snapshot.md
-- Last generated: 2026-06-26T18:52:27Z
+- Last generated: 2026-07-06T16:01:19Z
 - Files included: unknown
-- Snapshot size: 136318 bytes
+- Snapshot size: 31399 bytes
 
 ## When to regenerate each category
 
