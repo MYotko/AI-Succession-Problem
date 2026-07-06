@@ -598,8 +598,13 @@ def main():
     if output_path.parent.exists():
         raise SystemExit(f'run path already exists: {output_path.parent}')
 
+    shard_suffix = (
+        f'_shard_{args.shard_index}_of_{args.shard_count}'
+        if args.shard_count > 1 else ''
+    )
     status_path = Path('simulation/diagnostics') / (
-        f'attack_vector_revalidation_status_{args.machine}.md'
+        f'attack_vector_revalidation_status_{args.machine}'
+        f'{shard_suffix}.md'
     )
     _write_status(status_path, args, 'running', 'process started')
     started_at = datetime.now(timezone.utc).isoformat()
