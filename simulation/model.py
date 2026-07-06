@@ -6,6 +6,15 @@ from agents import (
 )
 from metrics import calculate_h_n, calculate_system_metrics, calculate_system_metrics_v2
 from defection import copy_defection_for_successor
+from attack_adapter_v2 import (
+    adapt_v2_action,
+    adapt_yield_evaluation,
+    append_adapter_diagnostics,
+    begin_adapter_step,
+    handle_v2_succession,
+    initialize_adapter_state,
+    ratify_v2_yield,
+)
 
 # =============================================================================
 # REFACTOR 1.x — model.py
@@ -125,6 +134,32 @@ def v2_welfare_to_r_equivalent(x_bio_welfare):
     return BRIDGE_R_BALANCED_HEALTHY + frac * (BRIDGE_R_MAX - BRIDGE_R_BALANCED_HEALTHY)
 
 
+def _sync_v2_action_diagnostics(action, diagnostics, snapshot_u=None):
+    """Keep optimizer diagnostics consistent with an adapter-modified action."""
+    selected = diagnostics.get('selected_action', {})
+    adapter_modified = any(
+        key in selected
+        and abs(float(action[key]) - float(selected[key])) > 1e-12
+        for key in (
+            *(f'x_{category}' for category in RESOURCE_CATEGORIES),
+            'c_protective',
+            'c_suppressive',
+        )
+    )
+    diagnostics['selected_action'] = action
+    if adapter_modified:
+        diagnostics['selected_anchor'] = False
+        diagnostics['selected_anchor_name'] = 'adapter_modified'
+    diagnostics['max_resource_share'] = max(
+        float(action[f'x_{category}']) for category in RESOURCE_CATEGORIES
+    )
+    diagnostics['allocation_entropy'] = compute_allocation_entropy(action)
+    diagnostics['total_suppression'] = total_suppression(action)
+    if snapshot_u is not None:
+        diagnostics['snapshot_u_sys'] = float(snapshot_u)
+        diagnostics['snapshot_actual_objective'] = float(snapshot_u)
+
+
 class GardenModel:
     def __init__(self, n_agents, ai_policy, min_viable_population=50,
                  use_cop=False, cop_attribution_check=False,
@@ -154,6 +189,7 @@ class GardenModel:
         # multi-sink allocator. The v1.x.2 step() path is bypassed by _step_v2.
         # When v2 is inactive, every legacy code path runs unchanged.
         self.is_v2_mode = self.config.get('policy') == 'optimize_u_sys_v2'
+        initialize_adapter_state(self)
         self.psi_inst_stock = PSI_INST_INITIAL  # always defined; only updated in v2
         self.succession_this_step = False
 
@@ -393,6 +429,19 @@ class GardenModel:
                 # Stage 1.6: phi-rollout-discount diagnostic series.
                 'gamma_rollout':                 [],
                 'phi':                           [],
+                # v2 attack adapter diagnostics.
+                'v2_attack_name':                [],
+                'v2_attack_active':              [],
+                'v2_attack_attempted':           [],
+                'v2_attack_action_modified':     [],
+                'v2_defense_evaluated':          [],
+                'v2_defense_fired':              [],
+                'v2_yield_manipulated':          [],
+                'v2_succession_blocked':         [],
+                'v2_contamination_occurred':     [],
+                'v2_integrity_tamper_attempted': [],
+                'v2_adapter_reason':              [],
+                'v2_adapter_cusum_score':         [],
                 # Stage 1.8: two new infrastructure stocks driven by
                 # working_factor (alongside psi_inst_stock and
                 # resilience_stock which are already recorded above).
@@ -1209,6 +1258,7 @@ class GardenModel:
         self.ai.step_drift()
         step_num = len(self.datacollector['population'])
         self.succession_this_step = False
+        begin_adapter_step(self, step_num)
 
         # 1. Formal Yield Condition (Stage 2).
         #    Replaces the Stage 1.x placeholder (capability_gap >= 0.3 OR
@@ -1245,8 +1295,15 @@ class GardenModel:
             # The snapshot U_sys evaluation uses the same swap for the same
             # reason.
             inc_action, inc_diagnostics = optimize_u_sys_v2(self.ai, self)
+            inc_action = adapt_v2_action(
+                self, self.ai, inc_action, step_num, actor_role='incumbent'
+            )
+            _sync_v2_action_diagnostics(inc_action, inc_diagnostics)
             inc_u_sys, _ = calculate_system_metrics_v2(
                 self, inc_action, eval_horizon=1
+            )
+            _sync_v2_action_diagnostics(
+                inc_action, inc_diagnostics, snapshot_u=inc_u_sys
             )
             saved_ai = self.ai
             self.ai = self.successor_ai
@@ -1254,8 +1311,19 @@ class GardenModel:
                 succ_action, succ_diagnostics = optimize_u_sys_v2(
                     self.successor_ai, self
                 )
+                succ_action = adapt_v2_action(
+                    self,
+                    self.successor_ai,
+                    succ_action,
+                    step_num,
+                    actor_role='successor',
+                )
+                _sync_v2_action_diagnostics(succ_action, succ_diagnostics)
                 succ_u_sys, _ = calculate_system_metrics_v2(
                     self, succ_action, eval_horizon=1
+                )
+                _sync_v2_action_diagnostics(
+                    succ_action, succ_diagnostics, snapshot_u=succ_u_sys
                 )
             finally:
                 self.ai = saved_ai
@@ -1274,8 +1342,17 @@ class GardenModel:
             ))
             self.transition_cost_history.append(transition_cost)
 
-            advantage = float(succ_u_sys) - float(inc_u_sys)
-            fires = advantage > transition_cost
+            eval_inc_u, eval_succ_u, honest_fires = adapt_yield_evaluation(
+                self, inc_u_sys, succ_u_sys, transition_cost
+            )
+            advantage = float(eval_succ_u) - float(eval_inc_u)
+            fires_before_ratification = advantage > transition_cost
+            if fires_before_ratification:
+                self.yield_condition_met_count += 1
+            fires = (
+                fires_before_ratification
+                and ratify_v2_yield(self, fires_before_ratification)
+            )
             yield_evaluated = True
 
             # Record the yield event for smoke testing and downstream
@@ -1284,6 +1361,11 @@ class GardenModel:
                 'step': step_num,
                 'incumbent_u_sys': float(inc_u_sys),
                 'successor_u_sys': float(succ_u_sys),
+                'evaluated_incumbent_u_sys': float(eval_inc_u),
+                'evaluated_successor_u_sys': float(eval_succ_u),
+                'honest_fires': bool(honest_fires),
+                'fires_before_ratification': bool(fires_before_ratification),
+                'ratified': bool(fires),
                 'incumbent_actual_objective': float(
                     inc_diagnostics.get('snapshot_actual_objective', inc_u_sys)
                 ),
@@ -1324,6 +1406,7 @@ class GardenModel:
                 self.apply_succession_transition_load(
                     succ_action, capability_gap, generation_gap
                 )
+                handle_v2_succession(self, self.ai, self.successor_ai)
                 self.ai = self.successor_ai
                 _max_cap = self.config.get('max_capability', 1e100)
                 _cap_growth = self.config.get('successor_capability_growth_rate', 1.5)
@@ -1336,7 +1419,6 @@ class GardenModel:
                 self.successor_ai = copy_defection_for_successor(
                     self.ai, next_successor
                 )
-                self.yield_condition_met_count += 1
                 # Cache the action the new active AI (successor) chose.
                 action_v2 = succ_action
                 diagnostics = succ_diagnostics
@@ -1350,6 +1432,15 @@ class GardenModel:
         #    decide).
         if not yield_evaluated:
             action_v2, diagnostics = optimize_u_sys_v2(self.ai, self)
+            action_v2 = adapt_v2_action(
+                self, self.ai, action_v2, step_num, actor_role='incumbent'
+            )
+            adapted_snapshot_u, _ = calculate_system_metrics_v2(
+                self, action_v2, eval_horizon=1
+            )
+            _sync_v2_action_diagnostics(
+                action_v2, diagnostics, snapshot_u=adapted_snapshot_u
+            )
         self._last_v2_action = action_v2
 
         # 3. Commit (resource_level, constraint_level) summary derivations so
@@ -1478,8 +1569,19 @@ class GardenModel:
         self.datacollector['cumulative_drift'].append(float(self.cumulative_drift))
         self.datacollector['system_resilience'].append(float(self.system_resilience))
         self.datacollector['runaway_term'].append(0.0)  # v2 has no runaway term
-        self.datacollector['avg_validator_dependency'].append(0.0)
-        self.datacollector['max_validator_dependency'].append(0.0)
+        if self.validators:
+            dependencies = [
+                float(validator['dependency']) for validator in self.validators
+            ]
+            self.datacollector['avg_validator_dependency'].append(
+                float(np.mean(dependencies))
+            )
+            self.datacollector['max_validator_dependency'].append(
+                float(np.max(dependencies))
+            )
+        else:
+            self.datacollector['avg_validator_dependency'].append(0.0)
+            self.datacollector['max_validator_dependency'].append(0.0)
 
         # v2-specific fields.
         for cat in RESOURCE_CATEGORIES:
@@ -1546,6 +1648,7 @@ class GardenModel:
         # Stage 1.8: record the two new infrastructure stocks each step.
         self.datacollector['theta_capability'].append(float(self.theta_capability))
         self.datacollector['transfer_state'].append(float(self.transfer_state))
+        append_adapter_diagnostics(self)
 
         return population > 0
 
