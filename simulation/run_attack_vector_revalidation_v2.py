@@ -495,6 +495,8 @@ def _write_manifest(path, args, rows, output_path, started_at, ended_at):
         'cpu_count': os.cpu_count(),
         'worker_processes': args.workers,
         'replicates': args.replicates,
+        'shard_count': args.shard_count,
+        'shard_index': args.shard_index,
         'row_count': len(rows),
         'output_path': str(output_path),
         'output_sha256': _sha256(output_path),
@@ -554,6 +556,8 @@ def parse_args():
     parser.add_argument('--replicates', type=int)
     parser.add_argument('--workers', type=int)
     parser.add_argument('--run-id')
+    parser.add_argument('--shard-count', type=int, default=1)
+    parser.add_argument('--shard-index', type=int, default=0)
     parser.add_argument(
         '--output-root',
         default='data/attack_vector_revalidation_v2',
@@ -574,6 +578,12 @@ def main():
             args.replicates = 20
     if args.replicates < 1:
         raise SystemExit('--replicates must be positive')
+    if args.shard_count < 1:
+        raise SystemExit('--shard-count must be positive')
+    if not 0 <= args.shard_index < args.shard_count:
+        raise SystemExit('--shard-index must be in [0, shard-count)')
+    if args.mode != 'full' and args.shard_count != 1:
+        raise SystemExit('sharding is supported only in full mode')
 
     max_workers = max(1, (os.cpu_count() or 2) - 1)
     args.workers = args.workers or max_workers
@@ -601,6 +611,12 @@ def main():
             tasks = build_tasks(
                 args.vector, args.mode, args.replicates, args.machine
             )
+            tasks = [
+                task for task in tasks
+                if task['seed'] % args.shard_count == args.shard_index
+            ]
+            if not tasks:
+                raise RuntimeError('selected shard contains no tasks')
             if args.workers == 1:
                 rows = [run_single(task) for task in tasks]
             else:

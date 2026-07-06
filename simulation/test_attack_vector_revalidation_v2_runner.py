@@ -59,3 +59,20 @@ def test_smoke_task_count_is_two_defense_states_times_replicates():
 def test_domain_masking_is_listed_but_not_live():
     assert 'domain_masking' in ALL_VECTORS
     assert 'domain_masking' not in LIVE_VECTORS
+
+
+def test_seed_sharding_is_disjoint_complete_and_keeps_pairs_together():
+    tasks = build_tasks(
+        'biological_veto_capture', 'full', 2, 'laptop'
+    )
+    shards = [
+        [task for task in tasks if task['seed'] % 4 == shard]
+        for shard in range(4)
+    ]
+    assert sum(len(shard) for shard in shards) == len(tasks)
+
+    seed_to_shards = {}
+    for shard_index, shard in enumerate(shards):
+        for task in shard:
+            seed_to_shards.setdefault(task['seed'], set()).add(shard_index)
+    assert all(len(indices) == 1 for indices in seed_to_shards.values())
