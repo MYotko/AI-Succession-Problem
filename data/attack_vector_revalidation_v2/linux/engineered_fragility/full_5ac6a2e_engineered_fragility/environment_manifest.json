@@ -1,0 +1,23 @@
+{
+  "branch": "attack-v2-linux",
+  "commit": "56fa9bd6e0ba77564ee2b400cfc1a0d81cacd54b",
+  "cpu_count": 12,
+  "ended_at_utc": "2026-07-07T05:17:27.455434+00:00",
+  "machine": "linux",
+  "mode": "full",
+  "numpy": "2.5.1",
+  "output_path": "data/attack_vector_revalidation_v2/linux/engineered_fragility/full_5ac6a2e_engineered_fragility/results.csv",
+  "output_sha256": "be0fc774e385c810886bcb569b36a51fb751e3ff9f07ce7478027795c13e558e",
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "replicates": 20,
+  "row_count": 120,
+  "run_id": "full_5ac6a2e_engineered_fragility",
+  "schema_version": "attack-v2-manifest-v1",
+  "seed_schema": "attack-v2-seed-v1",
+  "shard_count": 1,
+  "shard_index": 0,
+  "started_at_utc": "2026-07-07T05:04:23.117677+00:00",
+  "vector": "engineered_fragility",
+  "worker_processes": 11
+}
