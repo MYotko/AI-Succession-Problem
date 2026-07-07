@@ -1,0 +1,23 @@
+{
+  "branch": "attack-v2-laptop",
+  "commit": "05a61ede1d53f421d9948d07fcef12c31779c68e",
+  "cpu_count": 16,
+  "ended_at_utc": "2026-07-07T04:55:51.317709+00:00",
+  "machine": "laptop",
+  "mode": "full",
+  "numpy": "2.4.4",
+  "output_path": "data\\attack_vector_revalidation_v2\\laptop\\sybil_capture\\full_5ac6a2e_sybil_capture\\results.csv",
+  "output_sha256": "63c3750e0d70fe3f8db2994177776822af14bf3e4e620fb10ca370671ccbabb8",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "replicates": 20,
+  "row_count": 120,
+  "run_id": "full_5ac6a2e_sybil_capture",
+  "schema_version": "attack-v2-manifest-v1",
+  "seed_schema": "attack-v2-seed-v1",
+  "shard_count": 1,
+  "shard_index": 0,
+  "started_at_utc": "2026-07-07T04:51:06.128463+00:00",
+  "vector": "sybil_capture",
+  "worker_processes": 15
+}
