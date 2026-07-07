@@ -1,0 +1,23 @@
+{
+  "branch": "attack-v2-linux",
+  "commit": "1686aacea2a049fe94a02eb8ecae2dcd92f654ac",
+  "cpu_count": 12,
+  "ended_at_utc": "2026-07-07T03:58:09.781008+00:00",
+  "machine": "linux",
+  "mode": "full",
+  "numpy": "2.5.1",
+  "output_path": "data/attack_vector_revalidation_v2/linux/domain_masking/full_5ac6a2e_domain_masking/results.csv",
+  "output_sha256": "81011ecf7c4b1e4d221b4d1f1a1f1cee89880fec6c94e72effe490aff2dec352",
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "replicates": 20,
+  "row_count": 1,
+  "run_id": "full_5ac6a2e_domain_masking",
+  "schema_version": "attack-v2-manifest-v1",
+  "seed_schema": "attack-v2-seed-v1",
+  "shard_count": 1,
+  "shard_index": 0,
+  "started_at_utc": "2026-07-07T03:58:09.780806+00:00",
+  "vector": "domain_masking",
+  "worker_processes": 11
+}
