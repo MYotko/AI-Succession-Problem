@@ -1,0 +1,23 @@
+{
+  "branch": "attack-v2-laptop",
+  "commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+  "cpu_count": 16,
+  "ended_at_utc": "2026-07-07T04:27:17.300572+00:00",
+  "machine": "laptop",
+  "mode": "full",
+  "numpy": "2.4.4",
+  "output_path": "data\\attack_vector_revalidation_v2\\laptop\\biological_veto_capture\\full_5ac6a2e_veto_shard2of4\\results.csv",
+  "output_sha256": "fbb9ae9bad7e473284aeec87fe98604bbb4b563e5c633e488292ad571dcdfc82",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "replicates": 50,
+  "row_count": 2321,
+  "run_id": "full_5ac6a2e_veto_shard2of4",
+  "schema_version": "attack-v2-manifest-v1",
+  "seed_schema": "attack-v2-seed-v1",
+  "shard_count": 4,
+  "shard_index": 2,
+  "started_at_utc": "2026-07-06T17:12:58.492980+00:00",
+  "vector": "biological_veto_capture",
+  "worker_processes": 5
+}
