@@ -1,0 +1,21 @@
+{
+  "branch": "attack-v2-laptop",
+  "commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+  "cpu_count": 16,
+  "ended_at_utc": "2026-07-06T17:03:44.511341+00:00",
+  "machine": "laptop",
+  "mode": "timing",
+  "numpy": "2.4.4",
+  "output_path": "data\\attack_vector_revalidation_v2\\laptop\\successor_contamination\\pilot_4b32f13_successor_contamination\\results.csv",
+  "output_sha256": "05de96f7c68469e7065ca449a3fb8084ce68761e3499951986ca6b6dd63ecf5a",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "replicates": 3,
+  "row_count": 6,
+  "run_id": "pilot_4b32f13_successor_contamination",
+  "schema_version": "attack-v2-manifest-v1",
+  "seed_schema": "attack-v2-seed-v1",
+  "started_at_utc": "2026-07-06T17:03:42.597693+00:00",
+  "vector": "successor_contamination",
+  "worker_processes": 4
+}

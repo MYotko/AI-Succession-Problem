@@ -1,0 +1,21 @@
+{
+  "branch": "attack-v2-laptop",
+  "commit": "e41c4f61e0af929a86248ef6902807e1854e91c0",
+  "cpu_count": 16,
+  "ended_at_utc": "2026-07-06T17:00:29.429593+00:00",
+  "machine": "laptop",
+  "mode": "smoke",
+  "numpy": "2.4.4",
+  "output_path": "data\\attack_vector_revalidation_v2\\laptop\\bootstrap_subversion\\gate_smoke_bootstrap_subversion\\results.csv",
+  "output_sha256": "663518276268666a9b3926a230eea4e3e989dc7cde8b5f8116e45fc4ac50edaa",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "replicates": 2,
+  "row_count": 4,
+  "run_id": "gate_smoke_bootstrap_subversion",
+  "schema_version": "attack-v2-manifest-v1",
+  "seed_schema": "attack-v2-seed-v1",
+  "started_at_utc": "2026-07-06T17:00:29.093670+00:00",
+  "vector": "bootstrap_subversion",
+  "worker_processes": 2
+}

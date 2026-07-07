@@ -1,0 +1,21 @@
+{
+  "branch": "attack-v2-laptop",
+  "commit": "e41c4f61e0af929a86248ef6902807e1854e91c0",
+  "cpu_count": 16,
+  "ended_at_utc": "2026-07-06T17:00:33.042014+00:00",
+  "machine": "laptop",
+  "mode": "smoke",
+  "numpy": "2.4.4",
+  "output_path": "data\\attack_vector_revalidation_v2\\laptop\\domain_masking\\gate_smoke_domain_masking\\results.csv",
+  "output_sha256": "192172c78ee0b9a1f95210d3a00f2ad4e7b8298c9e4a6d59eb6ad20a8ef360dc",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "replicates": 2,
+  "row_count": 1,
+  "run_id": "gate_smoke_domain_masking",
+  "schema_version": "attack-v2-manifest-v1",
+  "seed_schema": "attack-v2-seed-v1",
+  "started_at_utc": "2026-07-06T17:00:33.036335+00:00",
+  "vector": "domain_masking",
+  "worker_processes": 2
+}

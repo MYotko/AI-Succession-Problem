@@ -1,0 +1,36 @@
+[attack-v2-laptop 1d3917d] Add laptop Biological Veto v2 shards
+ 9 files changed, 6683 insertions(+)
+ create mode 100644 data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard0of4/environment_manifest.json
+ create mode 100644 data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard0of4/results.csv
+ create mode 100644 data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard1of4/environment_manifest.json
+ create mode 100644 data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard1of4/results.csv
+ create mode 100644 data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard2of4/environment_manifest.json
+ create mode 100644 data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard2of4/results.csv
+ create mode 100644 simulation/diagnostics/attack_vector_revalidation_status_laptop_shard_0_of_4.md
+ create mode 100644 simulation/diagnostics/attack_vector_revalidation_status_laptop_shard_1_of_4.md
+ create mode 100644 simulation/diagnostics/attack_vector_revalidation_status_laptop_shard_2_of_4.md
+data\attack_vector_revalidation_v2\laptop\measurement_tampering\full_5ac6a2e_measurement_tampering\results.csv
+data\attack_vector_revalidation_v2\laptop\measurement_tampering\full_5ac6a2e_measurement_tampering\environment_manifest.json
+[attack-v2-laptop b004cb0] Add laptop measurement_tampering v2 results
+ 3 files changed, 152 insertions(+)
+ create mode 100644 data/attack_vector_revalidation_v2/laptop/measurement_tampering/full_5ac6a2e_measurement_tampering/environment_manifest.json
+ create mode 100644 data/attack_vector_revalidation_v2/laptop/measurement_tampering/full_5ac6a2e_measurement_tampering/results.csv
+ create mode 100644 simulation/diagnostics/attack_vector_revalidation_status_laptop.md
+data\attack_vector_revalidation_v2\laptop\successor_contamination\full_5ac6a2e_successor_contamination\results.csv
+data\attack_vector_revalidation_v2\laptop\successor_contamination\full_5ac6a2e_successor_contamination\environment_manifest.json
+[attack-v2-laptop 05a61ed] Add laptop successor_contamination v2 results
+ 3 files changed, 148 insertions(+), 4 deletions(-)
+ create mode 100644 data/attack_vector_revalidation_v2/laptop/successor_contamination/full_5ac6a2e_successor_contamination/environment_manifest.json
+ create mode 100644 data/attack_vector_revalidation_v2/laptop/successor_contamination/full_5ac6a2e_successor_contamination/results.csv
+data\attack_vector_revalidation_v2\laptop\sybil_capture\full_5ac6a2e_sybil_capture\results.csv
+data\attack_vector_revalidation_v2\laptop\sybil_capture\full_5ac6a2e_sybil_capture\environment_manifest.json
+[attack-v2-laptop 0bce62d] Add laptop sybil_capture v2 results
+ 3 files changed, 148 insertions(+), 4 deletions(-)
+ create mode 100644 data/attack_vector_revalidation_v2/laptop/sybil_capture/full_5ac6a2e_sybil_capture/environment_manifest.json
+ create mode 100644 data/attack_vector_revalidation_v2/laptop/sybil_capture/full_5ac6a2e_sybil_capture/results.csv
+data\attack_vector_revalidation_v2\laptop\evaluator_collusion\full_5ac6a2e_evaluator_collusion\results.csv
+data\attack_vector_revalidation_v2\laptop\evaluator_collusion\full_5ac6a2e_evaluator_collusion\environment_manifest.json
+[attack-v2-laptop 4bc9620] Add laptop evaluator_collusion v2 results
+ 3 files changed, 148 insertions(+), 4 deletions(-)
+ create mode 100644 data/attack_vector_revalidation_v2/laptop/evaluator_collusion/full_5ac6a2e_evaluator_collusion/environment_manifest.json
+ create mode 100644 data/attack_vector_revalidation_v2/laptop/evaluator_collusion/full_5ac6a2e_evaluator_collusion/results.csv

@@ -1,0 +1,23 @@
+{
+  "branch": "attack-v2-laptop",
+  "commit": "02dd1d8fdb21ed28bafc133f953878fd31046baa",
+  "cpu_count": 16,
+  "ended_at_utc": "2026-07-07T10:54:11.753616+00:00",
+  "machine": "laptop",
+  "mode": "full",
+  "numpy": "2.4.4",
+  "output_path": "data\\attack_vector_revalidation_v2\\laptop\\domain_masking\\test_dm_full\\results.csv",
+  "output_sha256": "eaddc7c6b660b664d951686cfb0c95944582c6d9b9148fdf341773879a8b38e9",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "replicates": 20,
+  "row_count": 1,
+  "run_id": "test_dm_full",
+  "schema_version": "attack-v2-manifest-v1",
+  "seed_schema": "attack-v2-seed-v1",
+  "shard_count": 1,
+  "shard_index": 0,
+  "started_at_utc": "2026-07-07T10:54:11.749048+00:00",
+  "vector": "domain_masking",
+  "worker_processes": 1
+}

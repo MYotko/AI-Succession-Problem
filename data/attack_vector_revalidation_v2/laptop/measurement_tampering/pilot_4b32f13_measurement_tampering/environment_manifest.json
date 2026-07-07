@@ -1,0 +1,21 @@
+{
+  "branch": "attack-v2-laptop",
+  "commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+  "cpu_count": 16,
+  "ended_at_utc": "2026-07-06T17:03:40.486904+00:00",
+  "machine": "laptop",
+  "mode": "timing",
+  "numpy": "2.4.4",
+  "output_path": "data\\attack_vector_revalidation_v2\\laptop\\measurement_tampering\\pilot_4b32f13_measurement_tampering\\results.csv",
+  "output_sha256": "b1ace8ef417bbe9fcba3c37a4c4f94262169a05c161204dc656d03420c202c52",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "replicates": 3,
+  "row_count": 6,
+  "run_id": "pilot_4b32f13_measurement_tampering",
+  "schema_version": "attack-v2-manifest-v1",
+  "seed_schema": "attack-v2-seed-v1",
+  "started_at_utc": "2026-07-06T17:03:38.563841+00:00",
+  "vector": "measurement_tampering",
+  "worker_processes": 4
+}
