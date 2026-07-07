@@ -1,0 +1,23 @@
+{
+  "branch": "attack-v2-linux",
+  "commit": "ee19f3ea7db31a3f0172ceb43119e092e4d31039",
+  "cpu_count": 12,
+  "ended_at_utc": "2026-07-07T04:33:49.853011+00:00",
+  "machine": "linux",
+  "mode": "full",
+  "numpy": "2.5.1",
+  "output_path": "data/attack_vector_revalidation_v2/linux/bootstrap_subversion/full_5ac6a2e_bootstrap_subversion/results.csv",
+  "output_sha256": "51b33acca53c3a959aca6c66b9ccf487767dd72044a45c2070ce7cf1fa412aab",
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "replicates": 20,
+  "row_count": 200,
+  "run_id": "full_5ac6a2e_bootstrap_subversion",
+  "schema_version": "attack-v2-manifest-v1",
+  "seed_schema": "attack-v2-seed-v1",
+  "shard_count": 1,
+  "shard_index": 0,
+  "started_at_utc": "2026-07-07T04:11:33.094875+00:00",
+  "vector": "bootstrap_subversion",
+  "worker_processes": 11
+}
