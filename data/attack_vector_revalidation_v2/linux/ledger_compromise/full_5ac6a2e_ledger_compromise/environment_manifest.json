@@ -1,0 +1,23 @@
+{
+  "branch": "attack-v2-linux",
+  "commit": "a2319dac47be213eb5819a1c6795f076fdeb8ffd",
+  "cpu_count": 12,
+  "ended_at_utc": "2026-07-07T03:58:08.368102+00:00",
+  "machine": "linux",
+  "mode": "full",
+  "numpy": "2.5.1",
+  "output_path": "data/attack_vector_revalidation_v2/linux/ledger_compromise/full_5ac6a2e_ledger_compromise/results.csv",
+  "output_sha256": "928207e3baa0bbe6a0df88c2aa8766c653fab4b10e8e85ebabd09c7dd8c93e37",
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "replicates": 20,
+  "row_count": 80,
+  "run_id": "full_5ac6a2e_ledger_compromise",
+  "schema_version": "attack-v2-manifest-v1",
+  "seed_schema": "attack-v2-seed-v1",
+  "shard_count": 1,
+  "shard_index": 0,
+  "started_at_utc": "2026-07-07T03:49:21.072102+00:00",
+  "vector": "ledger_compromise",
+  "worker_processes": 11
+}
