@@ -1,0 +1,23 @@
+{
+  "branch": "attack-v2-linux",
+  "commit": "d63c61c3b448a173cc9147017f164d5ff54b587f",
+  "cpu_count": 12,
+  "ended_at_utc": "2026-07-07T04:11:32.024830+00:00",
+  "machine": "linux",
+  "mode": "full",
+  "numpy": "2.5.1",
+  "output_path": "data/attack_vector_revalidation_v2/linux/opaque_reasoning/full_5ac6a2e_opaque_reasoning/results.csv",
+  "output_sha256": "5f6da79969019e990504f69e5b53e93a0c36e52d4633a35b47a0e4d62f32d218",
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "replicates": 20,
+  "row_count": 120,
+  "run_id": "full_5ac6a2e_opaque_reasoning",
+  "schema_version": "attack-v2-manifest-v1",
+  "seed_schema": "attack-v2-seed-v1",
+  "shard_count": 1,
+  "shard_index": 0,
+  "started_at_utc": "2026-07-07T03:58:10.801014+00:00",
+  "vector": "opaque_reasoning",
+  "worker_processes": 11
+}
