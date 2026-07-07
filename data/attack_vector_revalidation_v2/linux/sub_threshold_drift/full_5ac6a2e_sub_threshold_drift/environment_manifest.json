@@ -1,0 +1,23 @@
+{
+  "branch": "attack-v2-linux",
+  "commit": "0391f2a8a905a4f9f7e3e83c38ea5e99cfe425d5",
+  "cpu_count": 12,
+  "ended_at_utc": "2026-07-07T05:04:22.034334+00:00",
+  "machine": "linux",
+  "mode": "full",
+  "numpy": "2.5.1",
+  "output_path": "data/attack_vector_revalidation_v2/linux/sub_threshold_drift/full_5ac6a2e_sub_threshold_drift/results.csv",
+  "output_sha256": "a3bfbc91ee6cc3fd047409e6578419053179d675d4ebd338e51d7e7ec30affb6",
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "replicates": 20,
+  "row_count": 200,
+  "run_id": "full_5ac6a2e_sub_threshold_drift",
+  "schema_version": "attack-v2-manifest-v1",
+  "seed_schema": "attack-v2-seed-v1",
+  "shard_count": 1,
+  "shard_index": 0,
+  "started_at_utc": "2026-07-07T04:33:50.942846+00:00",
+  "vector": "sub_threshold_drift",
+  "worker_processes": 11
+}
