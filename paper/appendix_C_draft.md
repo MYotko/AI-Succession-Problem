@@ -122,6 +122,8 @@ not applicable pending operational protocol infrastructure. The critical
 capability ratio that the v1.x.2 manuscript documented as an open gap is closed:
 it is alpha-dependent, characterized by Pattern 1. Current home: Section VIII.5.
 
+**Patient defection continuation characterization (v2.0, July 2026).** The initial capability-constraint sweep characterized second succession as rare, at zero in 14 of 15 (alpha, growth) cells and 10 percent in the remaining cell. A 1,000-run bracket at alpha=0.40 established that this rarity was a property of the tested alpha floor rather than of the architecture: below the characterized Pattern 1 alpha range, second succession is reliable. The claim is restated from rare continuation to bounded generational depth, which the bracket supports at a weaker runaway penalty than any previously tested. The associated statement that no tested cell exceeded active capability 3.0 is withdrawn as an artifact of the original growth grid. Current home: Section VIII.8.
+
 ## The methodological pattern
 
 Across these refinements a single pattern holds. Each earlier claim was the best

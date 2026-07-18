@@ -2,6 +2,8 @@
 
 Generated: 2026-06-26T09:15:00+00:00
 
+> **2026-07-17 pointer.** The rarity characterization below (second succession zero in 14 of 15 cells, 10 percent in the remaining cell) is grid-dependent: it describes the alpha range this document's Sweep 3 tested, not the architecture. A subsequent 1,000-run bracket at alpha=0.40 shows second succession firing in 68 to 100 percent of runs below that range. See `patient_defection_corner_density_integration_analysis.md` for the bracket record. This document remains accurate as the record of the three-sweep investigation as it stood at the time.
+
 ## 1. Substantive Findings
 
 Patient defection was tested across three v2.0 substrate sweeps:
