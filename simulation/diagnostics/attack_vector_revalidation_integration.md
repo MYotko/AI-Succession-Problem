@@ -24,6 +24,8 @@ This differs from the v1.x characterization in two ways. First, the advisor-leve
 
 The substantive substrate change is structural. The adapter replaces v1 attack tuples and v1 COP paths with explicit eight-axis v2 action modifications inside the v2 step path. This means the result is not a parameter shift within the old evidence base. It is a re-expression of attack pressure in the v2 action substrate, with formal Stage 2 yield logic active where relevant.
 
+Two vectors also show materially higher undefended attack rates in v2.0 than in their v1.x baselines: Ledger Compromise rises from 52.5 percent to 100 percent, and Bootstrap Subversion rises from 31.7 percent to 100 percent. This is consistent with deterministic action modification applying stronger attack pressure than the probabilistic v1.x policy attacks. The comparison strengthens the defense-effectiveness finding, because the defended v2.0 attack rate is 0.0 percent for both vectors, but the change in undefended attack pressure must be stated explicitly before this analysis is used as a citation source.
+
 ## 3. Reconciliation with prior claims
 
 The broad claim that layered defenses are load-bearing is preserved per current evidence, but the exact prior claim that identified v1.x attack vectors are fully contained should be qualified. Eight standard binary vectors are fully blocked under the defended v2 adapter state, Biological Veto Capture is materially reduced but not eliminated, and Sub-Threshold Drift is not blocked in the v2 adapter data. Domain Masking remains structurally closed, but only as an analytic architectural result.

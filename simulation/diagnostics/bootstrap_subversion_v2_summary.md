@@ -40,6 +40,8 @@
 
 - Paired-seed check in v2.0: matched pairs present = `True`, n_pairs = 100, within-seed mean difference defense true minus false = -1.0000, paired SE = 0.0000.
 
+The ordinary artifact uses phi values 5, 10, 20 while the v2 sweep uses phi 1, 5, 10, 15, 25; the phi artifact would be the closer grid match but the ordinary artifact is used here for a consistent baseline reference. The direction and magnitude of the defense finding are robust to baseline choice.
+
 ## 5. Categorization
 
 - Category: D.
@@ -48,6 +50,8 @@
 ## 6. Known limitations
 
 - Inventory limitation: v1.x bootstrap verification uses the scalar `project_u_sys` interface and success does not require survival. New v2 limitation: the adapter emulates bootstrap attack pressure through v2 action construction, not through a full multi-candidate bootstrap institution.
+
+Outcome note (2026-07-20): undefended rows show a 100.0 percent extinction rate; defended rows 0.0 percent.
 
 ## 7. Summary sentence
 

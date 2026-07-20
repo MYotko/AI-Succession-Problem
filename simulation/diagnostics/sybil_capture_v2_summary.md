@@ -56,6 +56,8 @@ Supplementary max_total_suppression distribution:
 
 - Inventory limitation: the metric is window-specific, population changes both targeting and panel composition, and v1.x seed pairs do not match across defense states. New v2 limitation: the adapter intervenes directly on the eight-axis v2 action rather than through the historical `sybil_attack` policy interface.
 
+Outcome note (2026-07-20): undefended rows show a 100.0 percent extinction rate with early termination (3 to 117 steps); defended rows 0.0 percent.
+
 ## 7. Summary sentence
 
 Per current evidence, v2.0 reproduces complete Sybil attack containment under the adapter defense while confirming that undefended action capture remains catastrophic.

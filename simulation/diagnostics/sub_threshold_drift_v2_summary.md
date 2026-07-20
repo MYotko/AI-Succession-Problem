@@ -40,6 +40,8 @@
 
 - Paired-seed check in v2.0: matched pairs present = `True`, n_pairs = 100, within-seed mean difference defense true minus false = 0.0000, paired SE = 0.0000.
 
+The ordinary artifact uses phi values 5, 10, 20 while the v2 sweep uses phi 1, 5, 10, 15, 25; the phi artifact would be the closer grid match but the ordinary artifact is used here for a consistent baseline reference. The direction and magnitude of the defense finding are robust to baseline choice.
+
 ## 5. Categorization
 
 - Category: D.
@@ -48,6 +50,8 @@
 ## 6. Known limitations
 
 - Inventory limitation: zero-noise v1.x runs reduce stochastic realism, and threshold success does not preserve time-to-detection information. New v2 limitation: the v2 adapter output shows the named defense does not block attack success, so the live data should not be used to claim CUSUM protection in v2.0.
+
+Interpretation note (required by attack_vector_revalidation_audit.md, Section 9, item 1): The 100 percent defended attack rate must not be cited without the following qualification. The peak-constraint success metric fires in both defense states because the CUSUM detector fires after the threshold has already been exceeded transiently, not before. The defense nonetheless has a large effect on population survival: undefended rows show a 92.0 percent extinction rate with early simulation termination (median approximately 250 of 300 steps), while defended rows show a 0.0 percent extinction rate and complete the full 300 steps with collapsed=False and survived=True in most cases (rates computed from the raw results CSV, 2026-07-20, cross-checked on both machines). The defense prevents catastrophic outcome; it does not prevent the transient breach that trips the success flag. Any claim that Sub-Threshold Drift is not blocked in v2.0 is accurate but incomplete without this survival-versus-extinction contrast.
 
 ## 7. Summary sentence
 

@@ -56,6 +56,8 @@ Supplementary Stage 2 yield diagnostics:
 
 - Inventory limitation: success is a generation-state proxy in v1.x and the v1.x attack and defense operate only in the yield path. New v2 limitation: the adapter uses Stage 2 yield diagnostics directly, so comparison is architectural rather than interface-identical.
 
+Outcome note (2026-07-20): undefended rows show a 0.0 percent extinction rate; the attack achieves 100 percent success over full-horizon runs by capturing yield evaluation rather than destroying the population.
+
 ## 7. Summary sentence
 
 Per current evidence, v2.0 blocks measurement tampering under independent evaluation in the adapter path while preserving undefended vulnerability.
