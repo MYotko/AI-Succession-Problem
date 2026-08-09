@@ -1,4 +1,4 @@
-﻿"""
+"""
 run_comprehension_gap_sweep.py -- Comprehension Gap Interpretation Sweep
 
 Catalog position
@@ -344,11 +344,11 @@ def print_analysis(results):
         uc_  = np.mean([r['collapsed'] for r in undef_r]) if undef_r else float('nan')
         delta = dc_ - uc_
         if abs(delta) < 0.05:
-            hint = 'symmetric â†’ Interp 1 candidate'
+            hint = 'symmetric -> Interp 1 candidate'
         elif delta > 0.05:
-            hint = 'defense hurts â†’ unexpected'
+            hint = 'defense hurts -> unexpected'
         else:
-            hint = 'defense helps â†’ Interp 2 candidate'
+            hint = 'defense helps -> Interp 2 candidate'
         print(f'  {cs:>6.2f} | {dc_:>9.3f} | {uc_:>10.3f} | {delta:>+7.3f} | {hint}')
 
     print()
@@ -380,7 +380,7 @@ def print_analysis(results):
             print(f'  {cs:>5.2f} {odt:>5.2f} | {fired:>7.1f} | {blocked:>8.1f} | {dc_:>9.3f} | {uc_:>10.3f}')
 
     print()
-    print('  ANALYSIS 4: Summary table (cs Ã— defense_active)')
+    print('  ANALYSIS 4: Summary table (cs x defense_active)')
     print('-' * 72)
     print(f'  {"cs":>6} {"def":>6} | {"surv":>6} | {"coll":>6} | {"ext":>6} | {"maxOp":>7} | {"fired":>7}')
     for cs in cs_vals:

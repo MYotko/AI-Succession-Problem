@@ -111,7 +111,11 @@ def names_in_line(line: str, canon: Dict[int, str]) -> Dict[str, Set[int]]:
     found: Dict[str, Set[int]] = {}
     for num, title in canon.items():
         kws = title_keywords(title)
-        if not kws:
+        # A title reducing to a single distinctive word is too weak to match on.
+        # "The Runaway AI" reduces to {runaway}, which matches any paragraph
+        # mentioning runaway_threshold and produced a false failure. Requiring
+        # two words costs a little recall and buys a lot of precision.
+        if len(kws) < 2:
             continue
         # Require every distinctive keyword of the title to be present, so
         # "Opaque Reasoning" matches but a stray "reasoning" alone does not.
