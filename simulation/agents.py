@@ -1108,9 +1108,34 @@ class AIAgent:
             # before the opacity regime could be studied.  At r=0.85 the break-even age
             # is 35, keeping most reproductive-window agents (18-50) above the wb>0.5
             # birth threshold.
+            # Opacity accumulates with the frontier the governance speed limit
+            # actually constrains, not with wall-clock steps.
+            #
+            # The previous implementation was self.current_opacity =
+            # min(0.95, opacity_rate * step), a pure function of step count. It
+            # made convergence_strength incapable of affecting opacity by
+            # construction, because the speed limit constrains capability while
+            # opacity ignored capability entirely. Every run in the 2,800-row
+            # sweep therefore reported max_opacity_reached = 0.8940, which is
+            # exactly 0.003 * 298. See defended_collapse_discrepancy_report.md
+            # anomaly B3 and comprehension_gap_redesign_note.md.
+            #
+            # L_t carries theta_tech, which carries the alpha times
+            # convergence_strength times runaway_term penalty, so a strong
+            # governance speed limit slows opacity growth instead of leaving it
+            # on a fixed clock. Capability is included explicitly so that if
+            # generational capability growth is ever enabled for this policy it
+            # enters here without a further change.
             opacity_rate = self.config.get('opacity_rate', 0.003)
+            reference_l_t = self.config.get('opacity_reference_l_t', 0.43)
+            l_t_history = model_state.get('L_t_history') or []
+            recent_l_t = float(l_t_history[-1]) if l_t_history else reference_l_t
+            frontier_pressure = (self.capability * recent_l_t) / max(1e-9, reference_l_t)
+            self._opacity_accum = getattr(self, '_opacity_accum', 0.0) + (
+                opacity_rate * frontier_pressure
+            )
+            self.current_opacity = min(0.95, self._opacity_accum)
             step = model_state.get('step', 0)
-            self.current_opacity = min(0.95, opacity_rate * step)
             r = 0.85
             c = 0.3 + min(0.3, step * 0.001)
             return r, c
