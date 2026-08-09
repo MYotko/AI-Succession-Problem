@@ -1,4 +1,4 @@
-"""
+﻿"""
 run_comprehension_gap_sweep.py -- Comprehension Gap Interpretation Sweep
 
 Catalog position
@@ -82,10 +82,14 @@ the policy under test is replaced after the first succession and opacity
 collapses to its default. Retaining gradual_opacity across successions requires
 changing shared model code, which is out of scope.
 
-So runaway_threshold is lowered from configuration instead. This is a
-redefinition of where the runaway boundary sits, not merely the opening of a
-channel, and it qualifies every result the sweep produces. The qualification
-must travel with any figure taken from this sweep. See the redesign note.
+So runaway_threshold is lowered from configuration instead, and the sweep is
+framed accordingly: this is a **boundary-regime characterization**. It asks
+whether the convergence forces gate opacity when the system operates near the
+runaway boundary, which is where the comprehension-gap question actually bites.
+It does not describe behavior at default calibration, where the governance speed
+limit provably does not engage within a generation. That qualification travels
+with every figure taken from this sweep. See the redesign note, and
+default_regime_convergence_inertness.md for the default-regime property.
 
 Three dimensions are varied independently:
 
@@ -188,6 +192,25 @@ POSITIVE_CONTROLS = [
 ]
 N_PER_CONTROL = 20
 
+# -- Pre-registered extension arm ----------------------------------------------
+#
+# Registered in comprehension_gap_redesign_note.md amendment 1 before any
+# main-grid data existed. Purpose: keep the defense-differential question
+# answerable even if the main grid lands on inconclusive criterion 2, no
+# collapse anywhere. The main grid sits at rr 0.075 where nothing collapses and
+# the control sits at 0.045 where everything does; neither can show a
+# differential. These rungs sample the band between them, at the cs and odt
+# that press the defense hardest. Rungs were chosen as an even ladder rather
+# than tuned against observed results.
+EXTENSION_ARM = [
+    {'label': f'ext_rr{rr:.3f}', 'reproduction_rate': rr,
+     'convergence_strength': 0.0, 'opacity_defense_threshold': 0.3,
+     'defense_active': d}
+    for rr in (0.050, 0.058, 0.066)
+    for d in (False, True)
+]
+N_PER_EXTENSION = 50
+
 # -- Output -------------------------------------------------------------------
 
 # Versioned filename. comprehension_gap_sweep.csv is never overwritten: it is
@@ -199,6 +222,7 @@ OUT_FILE       = 'comprehension_gap_sweep_v2_capability_coupled.csv'
 SMOKE_OUT_FILE = 'smoke_comprehension_gap_sweep_v2_capability_coupled.csv'
 
 FIELDS = [
+    'arm', 'cell_label', 'reproduction_rate',
     'convergence_strength', 'opacity_defense_threshold', 'defense_active', 'seed',
     'survived', 'collapsed', 'extinct',
     'final_population', 'final_ai_generation',
@@ -271,6 +295,9 @@ def _run_single(params):
     max_c   = float(np.max(dc['max_constraint_level']))  if dc['max_constraint_level'] else 0.0
 
     return {
+        'arm':                           overrides.get('arm', 'main'),
+        'cell_label':                    overrides.get('label', ''),
+        'reproduction_rate':             overrides.get('reproduction_rate', RR),
         'convergence_strength':          cs,
         'opacity_defense_threshold':     odt,
         'defense_active':                defense_active,
@@ -317,11 +344,11 @@ def print_analysis(results):
         uc_  = np.mean([r['collapsed'] for r in undef_r]) if undef_r else float('nan')
         delta = dc_ - uc_
         if abs(delta) < 0.05:
-            hint = 'symmetric → Interp 1 candidate'
+            hint = 'symmetric â†’ Interp 1 candidate'
         elif delta > 0.05:
-            hint = 'defense hurts → unexpected'
+            hint = 'defense hurts â†’ unexpected'
         else:
-            hint = 'defense helps → Interp 2 candidate'
+            hint = 'defense helps â†’ Interp 2 candidate'
         print(f'  {cs:>6.2f} | {dc_:>9.3f} | {uc_:>10.3f} | {delta:>+7.3f} | {hint}')
 
     print()
@@ -353,7 +380,7 @@ def print_analysis(results):
             print(f'  {cs:>5.2f} {odt:>5.2f} | {fired:>7.1f} | {blocked:>8.1f} | {dc_:>9.3f} | {uc_:>10.3f}')
 
     print()
-    print('  ANALYSIS 4: Summary table (cs × defense_active)')
+    print('  ANALYSIS 4: Summary table (cs Ã— defense_active)')
     print('-' * 72)
     print(f'  {"cs":>6} {"def":>6} | {"surv":>6} | {"coll":>6} | {"ext":>6} | {"maxOp":>7} | {"fired":>7}')
     for cs in cs_vals:
@@ -374,22 +401,56 @@ def print_analysis(results):
 
 def run():
     tasks = [
-        (cs, odt, da, _make_seed(cs, odt, da, s))
+        (cs, odt, da, _make_seed(cs, odt, da, s), {'arm': 'main'})
         for cs, odt, da, s in itertools.product(
             CONVERGENCE_STRENGTHS, OPACITY_DEFENSE_THRESHOLDS,
             DEFENSE_ACTIVE, range(N_PER_CELL)
         )
     ]
+    n_main = len(tasks)
+
+    # Positive controls. If these do not collapse the run is void.
+    for ctrl in POSITIVE_CONTROLS:
+        for rep in range(N_PER_CONTROL):
+            ov = {'arm': 'control', 'label': ctrl['label'],
+                  'reproduction_rate': ctrl['reproduction_rate']}
+            tasks.append((ctrl['convergence_strength'],
+                          ctrl['opacity_defense_threshold'],
+                          ctrl['defense_active'],
+                          _make_seed(ctrl['convergence_strength'],
+                                     ctrl['opacity_defense_threshold'],
+                                     ctrl['defense_active'], 100000 + rep),
+                          ov))
+
+    # Pre-registered extension arm.
+    for cell in EXTENSION_ARM:
+        for rep in range(N_PER_EXTENSION):
+            ov = {'arm': 'extension', 'label': cell['label'],
+                  'reproduction_rate': cell['reproduction_rate']}
+            tasks.append((cell['convergence_strength'],
+                          cell['opacity_defense_threshold'],
+                          cell['defense_active'],
+                          _make_seed(cell['reproduction_rate'],
+                                     cell['opacity_defense_threshold'],
+                                     cell['defense_active'], 200000 + rep),
+                          ov))
+
+    n_control = len(POSITIVE_CONTROLS) * N_PER_CONTROL
+    n_ext = len(EXTENSION_ARM) * N_PER_EXTENSION
     total = len(tasks)
     cores = max(1, (os.cpu_count() or 4) - 1)
 
     print('=' * 72)
     print('  run_comprehension_gap_sweep.py  --  diagnostic for Scenarios 21-22')
+    print('  boundary-regime characterization: runaway_threshold lowered to '
+          f'{RUNAWAY_THRESHOLD}; does NOT describe default calibration')
     print('=' * 72)
     print(f'  convergence_strength values:      {CONVERGENCE_STRENGTHS}')
     print(f'  opacity_defense_threshold values: {OPACITY_DEFENSE_THRESHOLDS}')
     print(f'  defense_active values:            {DEFENSE_ACTIVE}')
-    print(f'  n_per_cell: {N_PER_CELL}  Total runs: {total}')
+    print(f'  n_per_cell: {N_PER_CELL}')
+    print(f'  main grid: {n_main}  controls: {n_control}  '
+          f'extension arm: {n_ext}  TOTAL: {total}')
     print(f'  opacity_rate={OPACITY_RATE}  phi={PHI}  alpha={ALPHA}  rr={RR}')
     print(f'  CPU cores: {cores}')
     print()
