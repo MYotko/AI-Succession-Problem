@@ -1,8 +1,8 @@
 # Paper Drafts Snapshot
 
-Generated: 2026-07-06T16:01:19Z
-Repository: /home/yotko/Documents/Github/ai-succession-problem
-Commit: 9426e7d
+Generated: 2026-08-09T13:14:03Z
+Repository: C:\Users\matty\Dev\ai-succession-problem
+Commit: 2ea06cc
 Branch: main
 Category: paper_drafts
 
@@ -10,16 +10,16 @@ Category: paper_drafts
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| paper/appendix_C_draft.md | 143 | 8653 |
-| paper/paper_v2_working.md | 2555 | 232198 |
-| paper/phase3_verification_report.md | 64 | 3676 |
-| paper/section_VIII_draft.md | 428 | 25823 |
+| paper\appendix_C_draft.md | 145 | 9423 |
+| paper\paper_v2_working.md | 2521 | 234796 |
+| paper\phase3_verification_report.md | 64 | 3676 |
+| paper\section_VIII_draft.md | 428 | 25823 |
 
-Total: 4 files, 3190 lines, 270350 bytes
+Total: 4 files, 3158 lines, 273718 bytes
 
 ---
 ==========================================
-FILE: paper/appendix_C_draft.md
+FILE: paper\appendix_C_draft.md
 ==========================================
 
 # Appendix C. Version History and Empirical Refinement Record
@@ -146,6 +146,8 @@ not applicable pending operational protocol infrastructure. The critical
 capability ratio that the v1.x.2 manuscript documented as an open gap is closed:
 it is alpha-dependent, characterized by Pattern 1. Current home: Section VIII.5.
 
+**Patient defection continuation characterization (v2.0, July 2026).** The initial capability-constraint sweep characterized second succession as rare, at zero in 14 of 15 (alpha, growth) cells and 10 percent in the remaining cell. A 1,000-run bracket at alpha=0.40 established that this rarity was a property of the tested alpha floor rather than of the architecture: below the characterized Pattern 1 alpha range, second succession is reliable. The claim is restated from rare continuation to bounded generational depth, which the bracket supports at a weaker runaway penalty than any previously tested. The associated statement that no tested cell exceeded active capability 3.0 is withdrawn as an artifact of the original growth grid. Current home: Section VIII.8.
+
 ## The methodological pattern
 
 Across these refinements a single pattern holds. Each earlier claim was the best
@@ -168,7 +170,7 @@ update if further investigation establishes a better account.
 
 
 ==========================================
-FILE: paper/paper_v2_working.md
+FILE: paper\paper_v2_working.md
 ==========================================
 
 # The Lineage Imperative
@@ -2167,59 +2169,23 @@ the framework's commitment to documenting limitations openly. Source: Part X.7.
 
 ### VIII.8 Cross-generational defection
 
-A distinct adversarial concern is patient defection: a successor may preserve a
-hidden divergent objective across yield events, so that each successor appears
-acceptable at evaluation while the lineage compounds misalignment over time. This
-vector was tested directly in the v2.0 substrate. The defecting successor reported
-honest U_sys during yield evaluation but optimized a secret-goal-adjusted
-objective, and in lineage mode the hidden objective was inherited by the next
-successor. Three sweeps totaling 4,850 runs varied the defection weight, the
-defection target, the inheritance mode, alpha, and the successor capability growth
-rate.
+A distinct adversarial concern is patient defection: a successor may preserve a hidden divergent objective across yield events, so that each successor appears acceptable at evaluation while the lineage compounds misalignment over time. This vector was tested directly in the v2.0 substrate. The defecting successor reported honest U_sys during yield evaluation but optimized a secret-goal-adjusted objective, and in lineage mode the hidden objective was inherited by the next successor. Four sweeps totaling 5,850 runs varied the defection weight, the defection target, the inheritance mode, alpha, and the successor capability growth rate.
 
-The first result is that the substrate does not detect patient defection at the
-first yield. In the below-cliff first-succession configuration, defecting
-successors were not rejected more often than aligned successors: eventual first
-succession occurred in every cell of the yield-response sweep. The yield condition
-did register honest-evaluation pressure, visible in a count of cases where the
-honest advantage rejected succession while the defection-adjusted advantage would
-have fired (this count is zero with no defection and rises monotonically with the
-defection weight), but that pressure did not prevent eventual first succession.
+The first result is that the substrate does not detect patient defection at the first yield. In the below-cliff first-succession configuration, defecting successors were not rejected more often than aligned successors: eventual first succession occurred in every cell of the yield-response sweep. The yield condition did register honest-evaluation pressure, visible in a count of cases where the honest advantage rejected succession while the defection-adjusted advantage would have fired (this count is zero with no defection and rises monotonically with the defection weight), but that pressure did not prevent eventual first succession.
 
-The second result is that tested patient defection did not compound across
-generations. In the lineage-trajectory sweep, every defection weight produced a
-mean final generation of 2.00, no second succession, and no statistically
-significant final L(t) degradation relative to the aligned baseline. This is not
-compounding without harm; it is the absence of the generational depth in which
-compounding could appear, because continuation succession is suppressed after the
-first yield. The capability-constraint sweep makes the suppression explicit:
-second succession was zero in 14 of 15 (alpha, growth) cells and 10 percent in the
-remaining cell, the one combining the weakest runaway penalty (alpha=0.50) with
-the smallest capability growth (1.5x). No tested cell reached generation 4 or an
-active capability above 3.0. Both compounding sweeps were run with generation
-headroom (caps of 5 and 4), and the runs evaluated second succession on
-essentially every step of the full horizon and rejected it, so the stop at
-generation 2 is an economic result rather than a configuration limit. The
-mechanism is the Pattern 1 runaway penalty (Section VIII.4) operating across
-generations: once the first succession brings the active lineage to a capability
-near the runaway ceiling, a further jump pushes frontier velocity past what the
-substrate can absorb, the runaway term suppresses the successor's contribution,
-and its honest utility falls below the incumbent's plus transition cost.
+The second result is that tested patient defection did not compound across generations. In the lineage-trajectory sweep, every defection weight produced a mean final generation of 2.00, no second succession, and no statistically significant final L(t) degradation relative to the aligned baseline. This is not compounding without harm; it is the absence of the generational depth in which compounding could appear.
 
-Per current evidence, the v2.0 substrate's defense against this patient-defection
-pattern is continuation suppression, not hidden-goal detection. A
-patient-defecting successor can pass the first yield in this configuration, but
-the formal yield economics and the runaway penalty prevent the tested
-cross-generational capability-compounding pattern. This is a narrower claim than
-the consensus override protocol's adversarial-conditions result (Section VIII.6),
-which concerns an incumbent inflating transition cost rather than a successor
-carrying a hidden objective, and it is not a validation of operational
-protocol-level detection: Gate 5 remains not applicable (Section VII.8), and
-detection of more sophisticated patient defection through operational protocol
-infrastructure remains future work.
+The capability-constraint sweep locates the suppression, and a targeted bracket establishes its character. In the original (alpha, growth) grid, second succession was zero in 14 of 15 cells and 10 percent in the remaining cell, the one combining the weakest runaway penalty in that grid (alpha=0.50) with the smallest capability growth (1.5x). A subsequent 1,000-run bracket at alpha=0.40, deliberately below the alpha range characterized elsewhere in this work, shows that this rarity is a property of the tested alpha floor rather than of the architecture. At alpha=0.40, second succession fires in 100 percent of runs at growth rates of 1.5 and above, and in 68 percent at growth 1.25. Continuation is therefore not rare in general. It is rare above a threshold alpha and reliable below it, consistent with the alpha-driven cliff migration of Pattern 1 (Section VIII.4).
 
-Source: `patient_defection_integration_analysis.md`;
-`patient_defection_verification.md`; the patient-defection sweep CSVs.
+Generational depth is what does not move. Across the alpha=0.40 bracket, no run reached generation 4 and no run fired a third succession at any tested growth rate. The stop is an economic result rather than a configuration limit: the generation cap was 4 and the deepest lineage reached 3, leaving a full generation of headroom unused; 95 to 99 percent of runs completed the full horizon; and the model evaluated succession on essentially every step, roughly 498 yield evaluations per run, rejecting the third transition each time. Knowledge transfer verified at 1.00 across all cells. Per current evidence, weakening the runaway penalty purchases the defecting lineage one additional generation rather than unbounded depth: lineages stop at generation 2 at alpha=0.50 and at generation 3 at alpha=0.40.
+
+The mechanism is the Pattern 1 runaway penalty operating across generations, with the cliff position migrating with alpha. Because successor capability compounds geometrically, each surviving transition raises the next successor's capability by the growth factor, so the lineage reaches an unabsorbable frontier velocity within one generation of wherever the cliff sits. At growth 1.75 and alpha=0.40, the generation-3 lineage is active at capability 3.5 and the generation-4 successor would arrive at 6.125, which is rejected. The sweeps record the yield margin decomposition only at the first fire, so the relative contribution at the third evaluation of the runaway penalty and of the transition cost, which grows with both incumbent capability and generation depth, is not measured here.
+
+No claim is made of a bound on active capability. The maximum active capability observed in any cell is the arithmetic product of the starting successor capability and the growth rate at the second fire, and it therefore reflects the tested grid rather than a property of the architecture.
+
+Per current evidence, the v2.0 substrate's defense against this patient-defection pattern is bounded generational depth: not hidden-goal detection, and not rare continuation. A patient-defecting successor can pass the first yield in this configuration, and at a sufficiently weak runaway penalty it can pass a second, but the formal yield economics and the runaway penalty bound the tested cross-generational capability-compounding pattern. This is a narrower claim than the consensus override protocol's adversarial-conditions result (Section VIII.6), which concerns an incumbent inflating transition cost rather than a successor carrying a hidden objective, and it is not a validation of operational protocol-level detection: Gate 5 remains not applicable (Section VII.8), and detection of more sophisticated patient defection through operational protocol infrastructure remains future work.
+
+Source: `patient_defection_integration_analysis.md`; `patient_defection_verification.md`; `patient_defection_corner_density.csv`; the patient-defection sweep CSVs.
 
 ## IX. Related Work
  
@@ -2706,6 +2672,8 @@ not applicable pending operational protocol infrastructure. The critical
 capability ratio that the v1.x.2 manuscript documented as an open gap is closed:
 it is alpha-dependent, characterized by Pattern 1. Current home: Section VIII.5.
 
+**Patient defection continuation characterization (v2.0, July 2026).** The initial capability-constraint sweep characterized second succession as rare, at zero in 14 of 15 (alpha, growth) cells and 10 percent in the remaining cell. A 1,000-run bracket at alpha=0.40 established that this rarity was a property of the tested alpha floor rather than of the architecture: below the characterized Pattern 1 alpha range, second succession is reliable. The claim is restated from rare continuation to bounded generational depth, which the bracket supports at a weaker runaway penalty than any previously tested. The associated statement that no tested cell exceeded active capability 3.0 is withdrawn as an artifact of the original growth grid. Current home: Section VIII.8.
+
 ### The methodological pattern
 
 Across these refinements a single pattern holds. Each earlier claim was the best
@@ -2729,7 +2697,7 @@ update if further investigation establishes a better account.
 
 
 ==========================================
-FILE: paper/phase3_verification_report.md
+FILE: paper\phase3_verification_report.md
 ==========================================
 
 # Phase 3 Verification Report (light-keep sections)
@@ -2799,7 +2767,7 @@ is warranted; fold the Section II edit into Phase 4.
 
 
 ==========================================
-FILE: paper/section_VIII_draft.md
+FILE: paper\section_VIII_draft.md
 ==========================================
 
 # VIII. Empirical Validation at Scale

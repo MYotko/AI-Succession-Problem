@@ -1,8 +1,8 @@
 # Diagnostics Snapshot
 
-Generated: 2026-07-06T16:01:19Z
-Repository: /home/yotko/Documents/Github/ai-succession-problem
-Commit: 9426e7d
+Generated: 2026-08-09T13:14:04Z
+Repository: C:\Users\matty\Dev\ai-succession-problem
+Commit: 2ea06cc
 Branch: main
 Category: diagnostics
 
@@ -10,69 +10,1952 @@ Category: diagnostics
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| simulation/diagnostics/capped_regime_phi_check_report.md | 129 | 9986 |
-| simulation/diagnostics/cop_finding_framing.md | 69 | 7923 |
-| simulation/diagnostics/gate1_interior_action_diagnostic.md | 39 | 1906 |
-| simulation/diagnostics/gate1_interior_action_report.md | 202 | 10745 |
-| simulation/diagnostics/gate2_competition_diagnostic.md | 119 | 5296 |
-| simulation/diagnostics/gate2_competition_report.md | 61 | 2312 |
-| simulation/diagnostics/gate2_v20_phaseb_revalidation_summary.md | 47 | 1653 |
-| simulation/diagnostics/gate4_v20_validation_summary.md | 38 | 1297 |
-| simulation/diagnostics/gate5_phi_blind_validation.md | 75 | 11115 |
-| simulation/diagnostics/paper_substrate.md | 37 | 5621 |
-| simulation/diagnostics/part_ix_draft.md | 310 | 33324 |
-| simulation/diagnostics/part_x_draft.md | 169 | 14630 |
-| simulation/diagnostics/patient_defection_documentation_suggested_edits.md | 63 | 6103 |
-| simulation/diagnostics/patient_defection_dryrun_summary.md | 32 | 1601 |
-| simulation/diagnostics/patient_defection_final_report.md | 118 | 5316 |
-| simulation/diagnostics/patient_defection_integration_analysis.md | 144 | 11394 |
-| simulation/diagnostics/patient_defection_sweep1_summary.md | 41 | 2329 |
-| simulation/diagnostics/patient_defection_sweep2_summary.md | 16 | 822 |
-| simulation/diagnostics/patient_defection_sweep3_summary.md | 27 | 1328 |
-| simulation/diagnostics/patient_defection_verification.md | 108 | 6411 |
-| simulation/diagnostics/phase_b_integration_analysis.md | 116 | 10583 |
-| simulation/diagnostics/phi_audit_pathc_report.md | 121 | 7808 |
-| simulation/diagnostics/phi_audit_report.md | 304 | 12829 |
-| simulation/diagnostics/phi_investigation_synthesis_draft.md | 179 | 17984 |
-| simulation/diagnostics/stage15_composite_sweep_advisor_report.md | 241 | 21665 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_0500.md | 69 | 2590 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_1000.md | 69 | 2594 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_10000.md | 69 | 2596 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_1500.md | 69 | 2594 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_2000.md | 69 | 2594 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_2500.md | 69 | 2598 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_3000.md | 69 | 2598 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_3500.md | 69 | 2598 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_4000.md | 69 | 2597 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_4500.md | 69 | 2597 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_5000.md | 69 | 2597 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_5500.md | 69 | 2597 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_6000.md | 69 | 2597 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_6500.md | 69 | 2598 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_7000.md | 69 | 2598 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_7500.md | 69 | 2598 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_8000.md | 69 | 2598 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_8500.md | 69 | 2598 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_9000.md | 69 | 2598 |
-| simulation/diagnostics/stage15_composite_sweep_checkpoint_9500.md | 69 | 2596 |
-| simulation/diagnostics/stage15_composite_sweep_final.md | 69 | 2596 |
-| simulation/diagnostics/stage15_faithfulness_report.md | 85 | 3273 |
-| simulation/diagnostics/stage15_phi_diagnostic_report.md | 106 | 4564 |
-| simulation/diagnostics/stage15_smoke_test_report.md | 129 | 5440 |
-| simulation/diagnostics/stage16_integrity_report.md | 111 | 4388 |
-| simulation/diagnostics/stage17_integrity_report.md | 100 | 4083 |
-| simulation/diagnostics/stage17_pressure_diagnostic_report.md | 117 | 5480 |
-| simulation/diagnostics/stage17_usys_factor_diagnostic_report.md | 102 | 6248 |
-| simulation/diagnostics/stage18_integrity_phase_a_report.md | 63 | 2161 |
-| simulation/diagnostics/stage18_integrity_phase_b_report.md | 77 | 3075 |
-| simulation/diagnostics/stage2_yield_implementation_notes.md | 268 | 11542 |
-| simulation/diagnostics/stage2_yield_parameter_diagnostic_summary.md | 59 | 4058 |
+| simulation\diagnostics\attack_vector_revalidation_audit.md | 817 | 41300 |
+| simulation\diagnostics\attack_vector_revalidation_documentation_edits.md | 95 | 6937 |
+| simulation\diagnostics\attack_vector_revalidation_final_report.md | 58 | 5311 |
+| simulation\diagnostics\attack_vector_revalidation_integration.md | 41 | 5067 |
+| simulation\diagnostics\attack_vector_revalidation_inventory.md | 203 | 19233 |
+| simulation\diagnostics\attack_vector_revalidation_process_validation.md | 196 | 15087 |
+| simulation\diagnostics\attack_vector_revalidation_status.md | 90 | 4352 |
+| simulation\diagnostics\attack_vector_revalidation_status_laptop.md | 8 | 350 |
+| simulation\diagnostics\attack_vector_revalidation_status_laptop_shard_0_of_4.md | 8 | 349 |
+| simulation\diagnostics\attack_vector_revalidation_status_laptop_shard_1_of_4.md | 8 | 349 |
+| simulation\diagnostics\attack_vector_revalidation_status_laptop_shard_2_of_4.md | 8 | 349 |
+| simulation\diagnostics\attack_vector_revalidation_status_linux.md | 8 | 352 |
+| simulation\diagnostics\attack_vector_revalidation_status_linux_shard_3_of_4.md | 8 | 347 |
+| simulation\diagnostics\attack_vector_v2_adapter_validation.md | 90 | 4303 |
+| simulation\diagnostics\biological_veto_capture_v2_summary.md | 61 | 3556 |
+| simulation\diagnostics\bootstrap_subversion_v2_summary.md | 58 | 2934 |
+| simulation\diagnostics\capped_regime_phi_check_report.md | 129 | 9986 |
+| simulation\diagnostics\cop_finding_framing.md | 69 | 7923 |
+| simulation\diagnostics\domain_masking_v2_summary.md | 40 | 1555 |
+| simulation\diagnostics\engineered_fragility_v2_summary.md | 54 | 2480 |
+| simulation\diagnostics\evaluator_collusion_v2_summary.md | 61 | 2632 |
+| simulation\diagnostics\gate1_interior_action_diagnostic.md | 39 | 1906 |
+| simulation\diagnostics\gate1_interior_action_report.md | 202 | 10745 |
+| simulation\diagnostics\gate2_competition_diagnostic.md | 119 | 5296 |
+| simulation\diagnostics\gate2_competition_report.md | 61 | 2312 |
+| simulation\diagnostics\gate2_v20_phaseb_revalidation_summary.md | 47 | 1653 |
+| simulation\diagnostics\gate4_v20_validation_summary.md | 38 | 1297 |
+| simulation\diagnostics\gate5_phi_blind_validation.md | 75 | 11115 |
+| simulation\diagnostics\ledger_compromise_v2_summary.md | 54 | 2460 |
+| simulation\diagnostics\measurement_tampering_v2_summary.md | 63 | 2915 |
+| simulation\diagnostics\opaque_reasoning_v2_summary.md | 61 | 2600 |
+| simulation\diagnostics\owed_diagnostic_run_log.md | 19 | 1300 |
+| simulation\diagnostics\paper_substrate.md | 37 | 5621 |
+| simulation\diagnostics\part_ix_draft.md | 310 | 33324 |
+| simulation\diagnostics\part_x_draft.md | 169 | 14630 |
+| simulation\diagnostics\patient_defection_corner_density_integration_analysis.md | 55 | 6212 |
+| simulation\diagnostics\patient_defection_documentation_suggested_edits.md | 63 | 6103 |
+| simulation\diagnostics\patient_defection_dryrun_summary.md | 32 | 1601 |
+| simulation\diagnostics\patient_defection_final_report.md | 118 | 5316 |
+| simulation\diagnostics\patient_defection_integration_analysis.md | 146 | 11947 |
+| simulation\diagnostics\patient_defection_sweep1_summary.md | 41 | 2329 |
+| simulation\diagnostics\patient_defection_sweep2_summary.md | 16 | 822 |
+| simulation\diagnostics\patient_defection_sweep3_summary.md | 27 | 1328 |
+| simulation\diagnostics\patient_defection_verification.md | 108 | 6411 |
+| simulation\diagnostics\phase_b_integration_analysis.md | 116 | 10583 |
+| simulation\diagnostics\phi_audit_pathc_report.md | 121 | 7808 |
+| simulation\diagnostics\phi_audit_report.md | 304 | 12829 |
+| simulation\diagnostics\phi_investigation_synthesis_draft.md | 179 | 17984 |
+| simulation\diagnostics\stage15_composite_sweep_advisor_report.md | 241 | 21665 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_0500.md | 69 | 2590 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_1000.md | 69 | 2594 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_10000.md | 69 | 2596 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_1500.md | 69 | 2594 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_2000.md | 69 | 2594 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_2500.md | 69 | 2598 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_3000.md | 69 | 2598 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_3500.md | 69 | 2598 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_4000.md | 69 | 2597 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_4500.md | 69 | 2597 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_5000.md | 69 | 2597 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_5500.md | 69 | 2597 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_6000.md | 69 | 2597 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_6500.md | 69 | 2598 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_7000.md | 69 | 2598 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_7500.md | 69 | 2598 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_8000.md | 69 | 2598 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_8500.md | 69 | 2598 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_9000.md | 69 | 2598 |
+| simulation\diagnostics\stage15_composite_sweep_checkpoint_9500.md | 69 | 2596 |
+| simulation\diagnostics\stage15_composite_sweep_final.md | 69 | 2596 |
+| simulation\diagnostics\stage15_faithfulness_report.md | 85 | 3273 |
+| simulation\diagnostics\stage15_phi_diagnostic_report.md | 106 | 4564 |
+| simulation\diagnostics\stage15_smoke_test_report.md | 129 | 5440 |
+| simulation\diagnostics\stage16_integrity_report.md | 111 | 4388 |
+| simulation\diagnostics\stage17_integrity_report.md | 100 | 4083 |
+| simulation\diagnostics\stage17_pressure_diagnostic_report.md | 117 | 5480 |
+| simulation\diagnostics\stage17_usys_factor_diagnostic_report.md | 102 | 6248 |
+| simulation\diagnostics\stage18_integrity_phase_a_report.md | 63 | 2161 |
+| simulation\diagnostics\stage18_integrity_phase_b_report.md | 77 | 3075 |
+| simulation\diagnostics\stage2_yield_implementation_notes.md | 268 | 11542 |
+| simulation\diagnostics\stage2_yield_parameter_diagnostic_summary.md | 59 | 4058 |
+| simulation\diagnostics\sub_threshold_drift_v2_summary.md | 58 | 3860 |
+| simulation\diagnostics\successor_contamination_v2_summary.md | 61 | 2718 |
+| simulation\diagnostics\sybil_capture_v2_summary.md | 63 | 2847 |
+| simulation\diagnostics\sync_status_yotko-Legion-T5-26IOB6_20260720.md | 127 | 7946 |
+| simulation\diagnostics\sync_status_YotkoTest_20260720.md | 169 | 9855 |
+| simulation\diagnostics\termination_decontamination_integration_analysis.md | 64 | 5995 |
 
-Total: 57 files, 5471 lines, 320820 bytes
+Total: 87 files, 8179 lines, 486924 bytes
 
 ---
 ==========================================
-FILE: simulation/diagnostics/capped_regime_phi_check_report.md
+FILE: simulation\diagnostics\attack_vector_revalidation_audit.md
+==========================================
+
+# Attack Vector v2.0 Revalidation Audit Report (Interim)
+
+**Audit date:** 2026-07-07  
+**Auditor:** Claude Code (claude-sonnet-4-6)  
+**Scope:** Partial audit -- sweep data quality and substrate isolation for laptop-completed work.  
+Full audit deferred until Linux sweeps and synthesis layer are complete.
+
+---
+
+## Section 1: Overall Assessment
+
+**Substantive grounding of completed work:** Strong for the sweep data that exists.
+
+**Synthesis layer status:** Not produced. No per-vector summaries, integration analysis,
+documentation edits, or final report exist. Tasks 3-7 of the full audit specification
+have no material to review.
+
+**Recommendation:** Do not commit substantive paper claims yet. The full sweep for six
+vectors has not run (Linux queue did not execute). Commit the laptop sweep data as-is
+after Linux sweeps and synthesis are complete. The interim audit covers substrate
+isolation and data quality; a full audit runs after Codex completes the synthesis layer.
+
+---
+
+## Section 2: Substrate Isolation Verification
+
+### 2.1 Pre-flight baseline
+
+- Git tag `pre-attack-vector-revalidation` confirmed at commit `e41c4f61e0af929a86248ef6902807e1854e91c0`.
+- Tag is annotated and present on the current working tree.
+- 39/39 legacy tests pass on current main (timed at 31.17s on 2026-07-07).
+
+### 2.2 v1.x.2 production code preservation
+
+`git diff pre-attack-vector-revalidation` against the four protected baseline files shows
+zero changes:
+
+- `data/comprehensive_adversarial_sweeps.csv` -- unchanged
+- `data/comprehensive_adversarial_sweeps_v1x2_phi.csv` -- unchanged
+- `data/veto_capture_sweep_v1.csv` -- unchanged
+- `data/veto_capture_sweep_v2.csv` -- unchanged
+
+The laptop_queue.ps1 enforces this check before every commit via `Assert-ProtectedFiles`.
+The linux_queue.sh enforces the equivalent check via `assert_protected_files`. Both
+scripts call `git diff --quiet pre-attack-vector-revalidation` against the four paths
+before staging any output.
+
+### 2.3 Adapter isolation
+
+The v2 adapter (`simulation/attack_adapter_v2.py` and `simulation/model.py` changes)
+was committed at `4b32f13`. All subsequent worker commits touch only per-vector output
+directories, status files, and manifests. No production code paths were modified after
+the adapter commit. The process_validation.md and adapter_validation.md documents record
+adapter boundary requirements, and adapter test coverage is 13 tests.
+
+### 2.4 Substrate isolation verdict
+
+**CLEAN.** Baseline files are bit-for-bit unchanged. Legacy tests pass. Adapter is
+isolated to its reviewed commit. Worker commits are confined to data output paths.
+
+---
+
+## Section 3: Per-Vector Data Quality
+
+### 3.1 Run structure
+
+Each vector was processed through three sequential phases before full sweeps:
+
+| Phase | Run ID prefix | Steps | Seeds per cell | Purpose |
+|---|---|---:|---:|---|
+| Gate smoke | `gate_smoke_<vector>` | 3 | 2 | v2 mode and adapter mechanics confirmed |
+| Gate2 smoke | `gate2_smoke_<vector>` | 3 | 2 | Reproducibility check, same seeds |
+| Pilot | `pilot_4b32f13_<vector>` | 5 | 3 | Timing estimation for assignment |
+| Full sweep | `full_5ac6a2e_<vector>` | 300 | 20 | Substantive evidence |
+
+Domain Masking does not have a pilot run and does not have a full Monte Carlo run.
+
+### 3.2 Column schema
+
+Gate smoke and gate2 smoke files contain 33 columns. Pilot and full sweep files contain
+37 columns. The four additional columns in pilot/full are Stage 2 yield tracking fields:
+`evaluated_yield_opportunities`, `honest_yield_opportunities`, `ratified_yields`,
+`yield_checks`. These columns were added at the pilot commit (`4b32f13`) after gate
+smokes were already recorded. This schema delta is not a data quality problem: gate smokes
+are pass/fail gates, not analysis sources. Pilot and full sweep schemas are internally
+consistent across all vectors.
+
+### 3.3 v2 substrate markers
+
+Spot-checked across gate_smoke_sybil_capture, gate2_smoke_sybil_capture,
+pilot_4b32f13_measurement_tampering, full_5ac6a2e_sybil_capture,
+full_5ac6a2e_measurement_tampering, full_5ac6a2e_successor_contamination,
+gate_smoke_biological_veto_capture:
+
+- `is_v2_mode: True` in every row of every live Monte Carlo file.
+- `schema_version: attack-v2-row-v1` in every Monte Carlo row.
+- `machine: laptop` confirms machine provenance.
+- `rollout_steps_v2: 20` (v2 rollout length) present throughout.
+- No rows with `is_v2_mode: False` found in any checked file.
+
+### 3.4 Gate smoke findings
+
+Gate smoke files for all 11 vectors are present. Spot-check findings:
+
+- **Sybil Capture (gate):** Undefended rows have `attack_succeeded: True, action_modified: True`.
+  Defended rows have `attack_succeeded: False, defense_fired: True`. Mechanics fire correctly.
+- **Biological Veto Capture (gate):** Undefended rows have `attack_succeeded: False`
+  (capture_rate not yet accumulated at step 3). Defended rows show `defense_fired: False`
+  (rotation and monitoring not yet triggered at step 3). Structure is correct for a
+  cumulative-metric vector at 3 steps.
+- Gate2 smoke produces identical row values for both seed values, confirming deterministic
+  reproducibility.
+
+### 3.5 Domain Masking handling
+
+The gate smoke run for Domain Masking produced a single row with
+`schema_version: attack-v2-analytic-v1` and only 9 columns, completely separate from
+the Monte Carlo schema. Row content: `attack_succeeded: False, live_simulation: False,
+reason: "v2 spectral entropy leaves no non-degenerate live masking intervention under
+the audited architecture"`. This is the correct treatment per the adapter design document
+and process_validation.md. Domain Masking is correctly excluded from Monte Carlo row
+totals. No pilot or full Monte Carlo run exists for Domain Masking, which is expected.
+
+Note: `linux_queue.sh` lists Domain Masking as a full-mode vector to run on Linux.
+The run script should handle this either by producing an analytic result (consistent
+with gate smoke behavior) or by exiting cleanly with an analytic flag. If it invokes
+the adapter constructor, it will fail at construction as designed. This requires
+verification before linux_queue.sh is executed (see Section 9 recommendations).
+
+### 3.6 Full sweep data quality
+
+#### Vectors with completed full sweeps
+
+**Sybil Capture** (`full_5ac6a2e_sybil_capture`):
+- Row count: 120 data rows (header excluded). Expected: 3 populations x 2 defense states
+  x 20 replicates = 120. Correct.
+- Manifest confirms row_count: 120, output SHA256 recorded.
+- Spot-check: undefended rows show `attack_succeeded: True, extinct: True`.
+  Stage 2 yield columns present but zero (expected; Sybil is not a Stage 2 vector).
+- Runtime: 3 to 117 steps (early extinction in undefended cells is expected under
+  successful sybil attack).
+
+**Measurement Tampering** (`full_5ac6a2e_measurement_tampering`):
+- Row count: 120 data rows. Expected: 3 costs x 2 defense states x 20 replicates = 120. Correct.
+- Spot-check: undefended rows show `attack_succeeded: True, yield_manipulated: True,
+  honest_yield_opportunities: 247-250` (Stage 2 opportunities accumulated over 300 steps).
+  `evaluated_yield_opportunities: 0` (because falsified evaluation never registers an
+  "evaluated" opportunity). Defense rows expected to show `defense_fired: True`.
+- Manifest row_count and SHA256 present.
+
+**Successor Contamination** (`full_5ac6a2e_successor_contamination`):
+- Row count: 120 data rows. Expected: 3 costs x 2 defense states x 20 replicates.
+  (Ordinary artifact uses 4 defense combinations; v2 adapter uses 2-state defense_active.)
+  120 rows is consistent with the v2 grid.
+- Spot-check: undefended rows show `contamination_occurred: True, attack_succeeded: True,
+  ratified_yields: 1, yield_condition_met_count: 1`. Stage 2 succession occurs and
+  contamination propagates. Correct behavioral pattern.
+
+**Sybil Capture (already documented above).**
+
+**Evaluator Collusion** (`full_5ac6a2e_evaluator_collusion`):
+- Row count: 120 data rows. Expected: 3 populations x 2 defense states x 20 replicates = 120. Correct.
+
+**Biological Veto Capture** (3 shards: `full_5ac6a2e_veto_shard0of4`, `shard1of4`, `shard2of4`):
+- Row counts (including header): 2165, 2103, 2322. Data rows: 2164, 2102, 2321. Total
+  across three shards: 6587 data rows.
+- The full veto sweep uses 8700 rows total (grid matches v2 artifact parameter space).
+  3/4 shards = expected ~6525 rows; 6587 is consistent with slightly unequal grid
+  partitioning across shards. Shard 3 (Linux assignment) would bring the total to ~8700.
+- Spot-check (gate smoke rows reviewed): biological veto capture columns include
+  `parameter_capture_strength, parameter_dependency_rate, parameter_defense_mode,
+  parameter_rotation_interval` -- the full revised veto grid parameters. Correct.
+
+### 3.7 Missing full sweeps
+
+Six vectors have no full sweep data. All six were assigned to Linux:
+
+- Ledger Compromise
+- Opaque Reasoning
+- Bootstrap Subversion
+- Sub-Threshold Drift
+- Engineered Fragility
+- Domain Masking (analytic-only; full mode output type needs verification)
+
+Biological Veto Capture shard 3 of 4 is also Linux-assigned and missing.
+
+The Linux queue (`linux_queue.sh`) exists and is correctly structured with the same
+protected-file checks and per-vector commit pattern as the laptop queue. The queue was
+never executed; no `data/attack_vector_revalidation_v2/linux/` directory exists.
+
+### 3.8 Data quality verdict
+
+**STRUCTURALLY SOUND** for all executed sweeps. Row counts match expected grids. v2
+substrate markers are present and consistent. No NaN clusters, impossible values, or
+systematic errors observed in spot-checked rows. Manifest SHA256 hashes recorded.
+Domain Masking handled correctly as analytic-only. Pilot schema is internally consistent.
+Full sweep schema is internally consistent across all five completed vector families.
+
+Minor note: gate smoke and gate2 smoke use a 33-column schema vs 37 columns in pilot and
+full. This is a schema evolution artifact, not a data quality problem.
+
+---
+
+## Section 4: Comparison Methodology Validity
+
+**Not verifiable.** No per-vector summaries exist. Codex did not produce comparison
+analysis between v2.0 results and v1.x baselines. The v1.x baselines to use for each
+vector are documented in `simulation/diagnostics/attack_vector_revalidation_inventory.md`
+and will require verification once Codex produces the summaries.
+
+Pre-condition note for the next auditor: The inventory documents that the v1.x.2 baseline
+for most vectors is `data/comprehensive_adversarial_sweeps_v1x2_phi.csv` (600 rows per
+vector family at fixed phi 1, 5, 10, 15, 25). The v2.0 full sweeps use a two-level
+defense_active grid (not the four-level successor_contamination grid). This grid change
+is intentional (adapter uses binary defense_active) but must be verified as
+apples-to-apples when summaries are produced.
+
+---
+
+## Section 5: Substantive Findings Accuracy
+
+**Not verifiable.** No per-vector summaries exist.
+
+---
+
+## Section 6: Integration Analysis Assessment
+
+**Not verifiable.** No integration analysis exists.
+
+---
+
+## Section 7: Documentation Edits Assessment
+
+**Not verifiable.** No documentation edits file exists.
+
+---
+
+## Section 8: Judgment Call Review
+
+### 8.1 Distribution decisions
+
+The process_validation.md provisional assignment was:
+- Laptop: Biological Veto Capture, Successor Contamination, Measurement Tampering,
+  Sybil Capture, Evaluator Collusion.
+- Linux: Ledger Compromise, Domain Masking, Opaque Reasoning, Bootstrap Subversion,
+  Sub-Threshold Drift, Engineered Fragility.
+
+Codex followed this assignment exactly. Biological Veto Capture was sharded 3:1
+(laptop:Linux). No rebalancing based on timing pilots occurred (the queue follows the
+provisional assignment directly). This is acceptable: the biological veto sweep is
+the largest by grid size (8700 rows x 50 seeds vs 120 rows x 20 seeds for most
+other vectors), and assigning the larger share to the 16-core laptop while offloading
+simpler vectors to Linux is reasonable distribution logic.
+
+### 8.2 Anomaly dispositions
+
+No CHECKPOINT flags appear in any status file. The queue log shows clean sequential
+execution with no failures or retries. Each vector committed successfully and in order.
+The log timestamps show consistent per-vector runtimes (~5 to 12 minutes per vector
+for the standard-grid vectors, ~11 hours for biological veto capture across 3 shards
+in parallel).
+
+### 8.3 Interpretation choices
+
+- **Domain Masking as analytic-only:** Correctly applied. Gate smoke produces a single
+  analytic row rather than Monte Carlo output. No pseudo-replicates injected.
+- **Veto capture sharding:** Codex split the veto sweep into 4 shards and assigned
+  shards 0-2 to laptop and shard 3 to Linux. The shard design was already committed
+  at `b91b3b5` (Add paired task sharding for distributed sweeps). Codex ran the laptop
+  shards and waited for completion before proceeding to sequential vectors. This is
+  sound execution.
+- **Linux queue not executed:** No evidence Codex attempted and failed to run the Linux
+  queue. The queue file exists and is complete, but there is no log, no data, and no
+  commits from the Linux branch. Codex appears to have produced the queue script but
+  not launched it. Whether this was a decision or an interruption is not determinable
+  from the artifacts.
+
+### 8.4 Judgment call verdict
+
+**No anomalous judgment calls found.** Execution followed documented design. The one
+unexplained gap (Linux queue not run) cannot be characterized as a judgment call since
+there is no record of a decision, only an absence of execution.
+
+---
+
+## Section 9: Recommendations
+
+### 9.1 Before proceeding with Linux sweeps
+
+1. **Verify domain_masking handling in full mode.** The linux_queue.sh attempts to run
+   domain_masking with `--mode full`. Test this locally before launching the queue to
+   confirm it either produces an analytic output or exits cleanly. If it raises, the
+   queue will abort before running the subsequent five vectors. Fix or remove domain_masking
+   from the linux_queue.sh before execution.
+
+2. **Verify Linux clone state.** The linux_queue.sh assumes the Linux clone is at commit
+   `5ac6a2e` on branch `attack-v2-linux` with the adapter. Confirm via SSH before
+   running the queue.
+
+3. **Run adapter tests on Linux.** `python -m pytest simulation/test_attack_adapter_v2.py
+   simulation/test_invariants.py simulation/test_cop.py simulation/test_refactor_1x.py -q`
+   must pass on the Linux worker before running any full sweeps.
+
+### 9.2 Synthesis deliverables
+
+After all full sweeps complete, Codex must produce:
+
+- 11x `simulation/diagnostics/<vector>_v2_summary.md`
+- `simulation/diagnostics/attack_vector_revalidation_integration.md`
+- `simulation/diagnostics/attack_vector_revalidation_documentation_edits.md`
+- `simulation/diagnostics/attack_vector_revalidation_final_report.md`
+
+These deliverables are the subject of the full audit (Tasks 3-7). They cannot be audited
+until they exist.
+
+### 9.3 Comparison methodology note for summaries
+
+When producing per-vector summaries, Codex must document:
+- Which v1.x baseline is used for comparison and why.
+- Whether the parameter grids match between v1.x and v2.0 (the v2 grid uses binary
+  defense_active; the ordinary v1.x artifact uses the same binary; the phi artifact
+  adds a phi dimension not present in v2 sweeps -- this difference must be characterized).
+- Statistical methodology (binary attack rates with SE = sqrt(p(1-p)/n); matched
+  within-seed differences where applicable).
+- For vectors where full sweeps show extreme outcomes (all undefended cells extinct
+  or all attacked cells succeeding), characterize whether this is an expected v2
+  substrate behavior change or a calibration artifact.
+
+### 9.4 Domain Masking summary
+
+Domain Masking must be documented as an analytic result in its summary, not as Monte
+Carlo output. The summary must clearly state that no live v2 intervention exists and
+that the gate smoke result is the complete v2.0 characterization.
+
+---
+
+## Section 10: What Can Be Committed As-Is
+
+### Commit-ready
+
+The following laptop sweep data is substantively sound and can commit to the worker
+branch as already executed:
+
+- `data/attack_vector_revalidation_v2/laptop/sybil_capture/full_5ac6a2e_sybil_capture/`
+- `data/attack_vector_revalidation_v2/laptop/measurement_tampering/full_5ac6a2e_measurement_tampering/`
+- `data/attack_vector_revalidation_v2/laptop/successor_contamination/full_5ac6a2e_successor_contamination/`
+- `data/attack_vector_revalidation_v2/laptop/evaluator_collusion/full_5ac6a2e_evaluator_collusion/`
+- `data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard0of4/`
+- `data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard1of4/`
+- `data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard2of4/`
+- All gate_smoke, gate2_smoke, and pilot runs for all 11 vectors.
+
+These are already committed on the `attack-v2-laptop` worker branch.
+
+### Requires Linux completion before commit to main
+
+- Full sweeps for Ledger Compromise, Opaque Reasoning, Bootstrap Subversion,
+  Sub-Threshold Drift, Engineered Fragility, and Biological Veto shard 3.
+
+### Requires synthesis completion before commit to main
+
+- All synthesis deliverables (summaries, integration analysis, documentation edits,
+  final report).
+
+### Must not commit
+
+- Paper, program reference, or baseline artifact files.
+- Production simulation code beyond the already-reviewed adapter.
+
+---
+
+---
+
+# Full Audit: Post-Synthesis Review
+
+**Updated:** 2026-07-07 (same day; synthesis completed after interim report)
+
+---
+
+## Section 4: Comparison Methodology Validity
+
+### 4.1 Baseline selection -- overall
+
+Each vector summary cites one v1.x baseline. The selections are mostly appropriate, with
+two exceptions identified under Section 4.3.
+
+| vector | baseline cited | appropriate? |
+|---|---|---|
+| sybil_capture | phi artifact, phi=10 rows | Yes |
+| measurement_tampering | phi artifact, phi=10 rows | Yes |
+| ledger_compromise | ordinary artifact | Yes (only ordinary has ledger rows) |
+| successor_contamination | phi artifact, phi=10 rows | Yes |
+| domain_masking | ordinary artifact (analytic stub) | Yes |
+| opaque_reasoning | phi artifact, phi=10 rows | Yes |
+| bootstrap_subversion | ordinary artifact | **Questionable -- see 4.3** |
+| evaluator_collusion | phi artifact, phi=10 rows | Yes |
+| sub_threshold_drift | ordinary artifact | **Questionable -- see 4.3** |
+| engineered_fragility | phi artifact, phi=10 rows | Yes |
+| biological_veto_capture | revised veto sweep (v2 revision, v1.x architecture) | Yes |
+
+### 4.2 Grid matching -- standard vectors
+
+For the six vectors where the phi artifact is used (sybil, measurement_tampering,
+successor_contamination, opaque_reasoning, evaluator_collusion, engineered_fragility),
+the v2.0 grid uses binary defense_active crossed with a population or cost parameter. The
+phi artifact adds a phi dimension (values 1, 5, 10, 15, 25) that the v2 grid does not
+include. The summaries compare at phi=10, which is the median phi artifact value and the
+single phi value used in the ordinary artifact. This is an appropriate anchor point for
+the comparison. The comparison is labeled as approximate rather than cell-matched, which
+is correct.
+
+For ledger_compromise (ordinary baseline), the v2 grid uses attribution_check and
+defense_active (2x2 = 4 cells). The ordinary baseline uses the same structure. Grid match
+is acceptable.
+
+### 4.3 Baseline selection methodology issue: bootstrap_subversion and sub_threshold_drift
+
+The v2.0 grids for bootstrap_subversion and sub_threshold_drift both use phi as a swept
+parameter with values 1.0, 5.0, 10.0, 15.0, 25.0. This is the phi artifact value set,
+not the ordinary artifact values (5, 10, 20). The summaries cite the ordinary artifact as
+the primary baseline.
+
+The ordinary artifact for these vectors has phi values 5, 10, 20 crossed with binary
+defense states. The v2 sweep has phi values 1, 5, 10, 15, 25 crossed with binary defense
+states. At the aggregate level, these comparisons are still meaningful (overall attack
+rates in each defense state), but the phi-grid mismatch means no individual cell is
+directly comparable. The correct primary baseline for a phi-level comparison would be
+the phi artifact (values 1, 5, 10, 15, 25 matching the v2 grid exactly).
+
+This does not affect the direction of findings. The substantial differences (bootstrap
+undefended v2 = 100% vs v1.x = 31.7%; sub_threshold drift defended v2 = 100% vs v1.x =
+0%) are robust to baseline choice. However, the summaries should note that the phi
+artifact would be the methodologically preferred baseline and that the ordinary artifact
+comparison is a cross-grid aggregate comparison. Before citing these specific numbers in
+the paper, the summaries for bootstrap_subversion and sub_threshold_drift should be
+revised to either use the phi artifact as primary or add this qualification.
+
+**Verdict for bootstrap_subversion:** Comparison is directionally valid; quantitative
+z-statistic (11.38) is cross-grid and should be labeled as approximate. Revision
+recommended before paper citation.
+
+**Verdict for sub_threshold_drift:** The critical finding (defended attack rate 100%
+vs v1.x defended attack rate 0%) is robust to baseline choice. The comparison remains
+valid at the aggregate level.
+
+### 4.4 Metric matching
+
+All vectors compare `attack_succeeded` rate across defense states. The v2 attack_succeeded
+is determined by the adapter using the same logical definition as the v1.x metric where
+comparable (e.g., capture_rate for veto, binary success for others). The measurement is
+consistent within each vector.
+
+Biological Veto Capture is the one exception: v1.x uses raw `capture_rate` without
+distinguishing defense modes at the row level (undefended vs rotation vs monitoring),
+while v2 uses `parameter_defense_mode` as a grid dimension. The comparison is at the
+aggregate defense-mode level, which is appropriate.
+
+**Overall comparison methodology verdict:** Sound for 9 of 11 vectors. Bootstrap
+subversion and sub_threshold_drift summaries should add a cross-grid qualification
+note before paper citation.
+
+---
+
+## Section 5: Substantive Findings Accuracy
+
+### 5.1 Per-vector categorization review
+
+All 11 vectors are categorized as D (substrate architectural change makes attack
+non-viable or qualitatively different). The justification in each summary is: "the attack
+is implemented through the v2 attack adapter as an eight-axis action modification, not
+through the v1.x policy interface."
+
+Category D is the correct categorization for all vectors. The v2 adapter replaces the
+v1.x attack policy interface with a mechanism that modifies the eight-axis action
+directly. This is a structural change in how attack pressure is expressed. The important
+nuance -- which the operator should understand -- is that D here means "expressed through
+a new substrate mechanism," not "attack is impossible." Undefended attacks succeed in 10
+of 10 live Monte Carlo vectors.
+
+### 5.2 Per-vector claim accuracy
+
+**Sybil Capture:** Claims are accurate. Undefended 100%, defended 0%. Paired seeds
+confirmed (same seeds appear in both defense states). Defense effect is total and
+deterministic.
+
+**Measurement Tampering:** Claims are accurate. The Stage 2 yield diagnostics require
+clarification but are not wrong. Undefended `yield_condition_met_count mean = 0.0000`
+with `honest_yield_opportunities ~248` means the attack prevented all 248 legitimate
+succession opportunities from being processed. Defended `yield_condition_met_count
+mean = 1.0000` means honest evaluation allowed one succession per simulation. The
+summary does not explain this semantics, which could confuse a reader. This is a
+documentation clarity issue, not a factual error. Revision recommended before paper
+citation.
+
+**Ledger Compromise:** Claims are accurate. Notable finding: undefended v2 attack rate
+(100%) is higher than v1.x ordinary undefended rate (52.5%), with z=6.02. The summary
+correctly identifies this. The integration analysis does not explain the likely mechanism
+(deterministic action modification vs probabilistic v1.x policy). This is a gap in the
+integration analysis that should be addressed.
+
+**Successor Contamination:** Claims are accurate. Stage 2 yield columns show both defense
+states triggering succession (yield_condition_met_count = 1.0 for both), but only the
+defended state blocks contamination (contamination_occurred = False when defense active).
+This is correct: succession happens in both states, but the contamination doesn't survive
+defense. The summary's Stage 2 yield section would benefit from this clarification.
+
+**Domain Masking:** Claims are accurate. Analytic-only characterization is correct and
+consistently applied.
+
+**Opaque Reasoning, Evaluator Collusion:** Claims are accurate. Note: the supplementary
+`max_total_suppression` statistic is 1.0000 for both defense states in both vectors.
+This is because `max_total_suppression` tracks the maximum suppression value ever
+reached over 300 steps -- even in defended runs, the attack achieves high suppression
+transiently before the defense fires. The metric does not distinguish attack containment
+at the outcome level. The primary `attack_succeeded` metric correctly shows 0.0% defended
+rate. The supplementary statistic is uninformative in v2 full sweeps and should be noted
+as such. Not a factual error.
+
+**Bootstrap Subversion:** Claims are accurate. The undefended v2 rate (100%) is higher
+than v1.x ordinary (31.7%), consistent with the deterministic action-modification
+mechanism. Cross-grid baseline note applies (see 4.3).
+
+**Engineered Fragility:** Claims are accurate. Grid uses shock_magnitude parameter
+(0.1, 0.15, 0.2) crossed with defense state, matching the inventory specification.
+
+**Sub-Threshold Drift:** The claimed attack rate of 100% for defended runs is CONFIRMED
+from raw data. Rows 102-201 of the raw CSV show all 100 defended replicates with
+`attack_succeeded=True`, `defense_fired=True`. This is accurate.
+
+The critical substantive issue: the summary correctly reports that attack_succeeded
+remains True even with defense active, but does not prominently state that the defense
+has a large effect on population survival. Undefended rows show `extinct=True` and
+early simulation termination (median ~250 steps vs 300 for defended). Defended rows
+show `survived=mostly True`, `steps_completed=300`, `collapsed=False` in most cases.
+
+The attack "success" metric (peak constraint exceeds 0.75 at any point) is met in both
+states because the CUSUM detector fires AFTER the threshold has already been exceeded
+transiently. The defense prevents ultimate extinction but cannot prevent the transient
+threshold breach that triggers the success flag.
+
+A paper claim that "Sub-Threshold Drift is not blocked by CUSUM in v2.0" is technically
+accurate but incomplete without noting that the defense prevents population collapse. The
+integration analysis correctly recommends this as requiring follow-up. The summary's
+limitation section notes it but not prominently. This finding requires an expanded
+interpretation note before it is used in any paper claim.
+
+**Biological Veto Capture:** Claims are accurate. The mode-specific breakdown
+(undefended 0.61, rotation_only 0.33, monitoring_only 0.15, combined 0.12) is
+internally consistent. The comparison to v1.x revised veto shows improvement across all
+modes under v2.0 adapter (lower capture rates). Row count 8700 = 2164+2102+2321+2113.
+
+### 5.3 Anomaly handling
+
+Sub-Threshold Drift (100% defended attack rate): correctly flagged as the major anomaly
+in all relevant documents. Disposition is appropriate: flagged as unresolved, not
+overclaimed, and follow-up work recommended.
+
+Biological Veto Capture (residual capture): correctly handled as maintenance-sensitive
+containment rather than full closure.
+
+No other anomalies were flagged during execution.
+
+**Substantive findings verdict:** Accurate for all 11 vectors. The Sub-Threshold Drift
+interpretation needs an expanded note before paper use. Two vectors need a baseline
+qualification note (bootstrap, sub_threshold). Stage 2 yield semantics in measurement
+tampering and successor contamination summaries would benefit from explanatory additions.
+
+---
+
+## Section 6: Integration Analysis Assessment
+
+### 6.1 Substantive position accuracy
+
+The integration analysis claims:
+1. 10 live Monte Carlo vectors and 1 analytic-only vector. **Accurate.**
+2. 9 of 10 live vectors show meaningful defended effectiveness. **Accurate** (8 at 0%
+   attack rate + biological veto at 0.1197 capture rate; sub_threshold drift is the
+   exception).
+3. Sub-Threshold Drift is the exception at 100% defended attack rate. **Accurate.**
+4. The prior "six of seven fully blocked" claim is qualified by v2.0 results.
+   **Appropriately stated.**
+
+### 6.2 Unaddressed finding: higher undefended attack rates in v2
+
+The integration analysis does not address the observation that for several vectors
+(Ledger Compromise: 52.5% to 100%; Bootstrap Subversion: 31.7% to 100%), the v2
+adapter produces higher undefended attack effectiveness than v1.x baselines. The analysis
+characterizes the adapter as "a re-expression of attack pressure" but does not note that
+this re-expression is systematically more effective in the undefended state.
+
+This is not an error of commission (the integration doesn't claim otherwise), but it is
+a gap. A full adversarial robustness position statement should acknowledge that the v2
+adapter may represent stronger attack pressure in the undefended state, which would
+mean the defense effect in v2 is even more important than v1.x evidence suggests.
+
+### 6.3 Reconciliation with prior claims
+
+Section 3 of the integration analysis ("Reconciliation with prior claims") is accurate.
+It correctly states that v1.x adversarial coverage should not be treated as direct
+evidence for v2.0, and that the broad layered-defense claim is preserved under the new
+adapter with Sub-Threshold Drift as an open exception. This reconciliation is grounded in
+the empirical work.
+
+### 6.4 Cross-vector consistency
+
+No inconsistencies found across summaries. Sub-Threshold Drift is consistently
+characterized as unresolved. Biological Veto Capture is consistently characterized as
+residual risk. Domain Masking is consistently treated as analytic-only.
+
+**Integration analysis verdict:** Substantively grounded and consistent. One gap: the
+higher undefended attack effectiveness in v2 for several vectors is not addressed. This
+should be incorporated before the integration analysis is used as a paper citation source.
+
+---
+
+## Section 7: Documentation Edits Assessment
+
+### 7.1 Empirical grounding
+
+Each proposed edit in `attack_vector_revalidation_documentation_edits.md` cites specific
+run IDs and metrics. The numerical claims in the proposed edits match the per-vector
+summaries:
+- "eight standard binary vectors are fully blocked": accurate (8 vectors with 0%
+  defended attack rate).
+- "Sub-Threshold Drift is not blocked": accurate per current evidence with the caveat
+  from Section 5.3.
+- "combined-defense mean capture_rate 0.1197, SE 0.0047" for biological veto: accurate,
+  matches the veto summary exactly.
+- "v2 spectral entropy leaves no non-degenerate live masking intervention": accurate,
+  reproduced from the domain_masking analytic output.
+- "10 live Monte Carlo vectors, 9,900 live rows total": 120x8 + 80 + 200 + 200 + 8700
+  = 960 + 80 + 200 + 200 + 8700 = 10,140 live rows. The edit states 9,900 total.
+
+**Row count discrepancy:** The documentation edit states "9,900 live Monte Carlo rows."
+The actual row counts are:
+sybil(120) + measurement_tampering(120) + ledger(80) + successor_contamination(120) +
+opaque_reasoning(120) + bootstrap_subversion(200) + evaluator_collusion(120) +
+sub_threshold_drift(200) + engineered_fragility(120) + biological_veto_capture(8700) =
+9,900 rows. **This is correct.** (Domain Masking's 1 analytic row is excluded, as
+stated -- "9,900 live rows total including 8,700 Biological Veto Capture rows.")
+
+Row count claim verified: accurate.
+
+### 7.2 Voice consistency
+
+Proposed edits use academic-practitioner tone. No em-dashes detected in any proposed
+edit text. American English throughout. "Per current evidence" framing is present in
+the program reference proposed text. The proposed Section VIII replacement text is
+somewhat dense relative to the existing Section VIII prose style, but not out of register.
+
+### 7.3 Structural appropriateness
+
+- Section VIII replacement: targets the "Consensus Override Protocol Stress Test Result"
+  paragraph, which is the correct location for adversarial coverage claims.
+- Biological Veto paragraph replacement: targets an existing finding sentence. Appropriate.
+- Program reference X.9 insertion: after the Part X COP comparison table row.
+  Appropriate for a new v2.0-specific subsection.
+- GAP-05 operator note: appropriately labeled as an "operator action" rather than a
+  proposed text edit.
+
+### 7.4 Completeness
+
+The documentation edits cover:
+- Section VIII adversarial robustness framing update: covered.
+- Biological Veto paragraph update: covered.
+- Program reference Part X new subsection: covered.
+- GAP-05 disposition: covered.
+
+One gap: the documentation edits do not propose any update to the advisor document or
+the specific claim "six of seven vectors fully blocked" that the integration analysis
+says should be qualified. The program reference update in X.9 implicitly qualifies this,
+but the original claim location (if it appears in program reference Part IX or a separate
+advisor doc) is not directly addressed. This is a minor completeness gap; the operator
+can address it during edit application.
+
+**Documentation edits verdict:** Empirically grounded, correct row count, appropriate
+voice and structure. Minor: the proposed Sub-Threshold Drift characterization ("not
+blocked") would benefit from the expanded interpretation note from Section 5.3 before
+being applied to the paper. Do not apply the Sub-Threshold Drift claim as written without
+the survival/extinction qualification.
+
+---
+
+## Section 8 (Updated): Judgment Call Review
+
+**Additions from interim report:**
+
+All synthesis deliverables were produced in a single commit (`1fcbfef`). Codex did not
+produce intermediate drafts or request operator input during synthesis. The judgment
+calls embedded in the synthesis are:
+
+- **Categorization as uniformly D:** Appropriate. Justified per adapter design.
+- **"Major anomaly" labeling for Sub-Threshold Drift:** Appropriate and correctly
+  calibrated.
+- **"9 of 10 live vectors show meaningful defended effectiveness":** Threshold choice
+  (<=5% for standard vectors, <=0.20 capture rate for veto) is reasonable and stated
+  explicitly in the integration analysis.
+- **Baseline selection for bootstrap and sub_threshold:** Followed prompt instruction
+  (ordinary artifact). The prompt instruction was itself suboptimal; Codex cannot be
+  faulted for following it. The phi artifact would be methodologically preferable.
+- **Omission of expanded Sub-Threshold Drift survival analysis:** Codex summarized the
+  100% attack rate without the survival-vs-extinction contrast. This is the most
+  significant synthesis judgment gap identified by the audit.
+
+---
+
+## Section 9 (Updated): Recommendations
+
+### Commit decision: proceed with conditions
+
+The sweep data and synthesis documents can commit to the worker branch as produced.
+Five specific items should be addressed before the synthesis findings are used in
+paper claims:
+
+**Required before paper use:**
+
+1. **Sub-Threshold Drift summary needs an expanded interpretation note.** Add to Section
+   3 or 6 of `sub_threshold_drift_v2_summary.md` the observation that undefended
+   populations go extinct while defended populations survive -- the defense prevents
+   catastrophic outcome but the peak-constraint success metric is triggered in both
+   states because CUSUM fires after the threshold breach, not before. The "100% defended
+   attack rate" claim is accurate but must be cited with this qualification or it
+   misrepresents the defense effect.
+
+2. **Bootstrap Subversion and Sub-Threshold Drift summaries should add a baseline
+   qualification note.** The ordinary artifact (phi 5, 10, 20) was compared against v2
+   grids with phi 1, 5, 10, 15, 25. The phi artifact would be the closer methodological
+   match. Add a sentence to Section 4 of each summary: "The ordinary artifact uses phi
+   values 5, 10, 20 while the v2 sweep uses phi 1, 5, 10, 15, 25; the phi artifact would
+   be the closer grid match but the ordinary artifact is used here for a consistent
+   baseline reference. The direction and magnitude of the defense finding are robust to
+   baseline choice."
+
+**Recommended before integration analysis is used as citation:**
+
+3. **Integration analysis should note the higher undefended attack rates in v2.** Add a
+   brief paragraph in Section 2 or 3 noting that for Ledger Compromise and Bootstrap
+   Subversion, undefended v2 attack rates exceed v1.x baselines, consistent with
+   deterministic action-modification being more reliable than probabilistic v1.x policy
+   attacks. This strengthens rather than weakens the defense-effectiveness finding but
+   should be characterized explicitly.
+
+**Operator awareness notes (no revision required):**
+
+4. **Final report commit hashes refer to code state, not data commit.** The "commit"
+   column in the final report provenance table records the code-state commit at time of
+   sweep execution, not the git commit that added the data to the repository. For
+   example, sybil_capture manifest records commit `05a61ed` (code state when sybil
+   ran), but git log shows `05a61ed = Add laptop successor_contamination v2 results`
+   (the prior commit). This is accurate but counterintuitive. No revision needed; note
+   when auditing provenance.
+
+5. **max_total_suppression supplementary is uninformative in full sweeps.** For Sybil
+   Capture, Opaque Reasoning, and Evaluator Collusion, this metric is 1.0000 for both
+   defense states because the 300-step run allows the attack to achieve maximum
+   suppression transiently even in defended runs. The `attack_succeeded` primary metric
+   is correct. No revision needed; the metric can be removed from future synthesis
+   reports.
+
+### GAP-05 disposition
+
+Operator can close GAP-05 with the following language after applying the two required
+revisions above: "v2.0 revalidation complete for 10 live Monte Carlo vectors and Domain
+Masking analytic closure. Sub-Threshold Drift is not contained under the defended v2
+adapter state by the peak-constraint success metric, but defense prevents population
+extinction. The prior v1.x adversarial coverage claim is historical evidence; v2.0
+evidence is in the per-vector summaries and integration analysis."
+
+---
+
+## Section 10 (Updated): What Can Be Committed As-Is
+
+### Commit-ready without revision
+
+- All raw sweep data (all machines, all vectors, all run types).
+- `attack_vector_revalidation_inventory.md` (unchanged from interim audit).
+- `attack_vector_revalidation_status_laptop.md` and shard files.
+- `attack_vector_revalidation_process_validation.md` and `attack_vector_v2_adapter_validation.md`.
+- `attack_vector_revalidation_final_report.md` (with operator awareness note 4 above).
+- `attack_vector_revalidation_integration.md` (with recommendation 3 above to add
+  before use as citation source).
+- Per-vector summaries for: sybil_capture, measurement_tampering, ledger_compromise,
+  successor_contamination, domain_masking, opaque_reasoning, evaluator_collusion,
+  engineered_fragility, biological_veto_capture.
+- This audit report.
+
+### Commit after minor revision (before paper use)
+
+- `sub_threshold_drift_v2_summary.md`: add expanded interpretation note.
+- `bootstrap_subversion_v2_summary.md`: add baseline qualification note.
+- `attack_vector_revalidation_documentation_edits.md`: the Sub-Threshold Drift wording
+  in Proposal 1 should be updated to include the survival/extinction qualification.
+
+### Not yet commit-ready for main
+
+- Paper section VIII, program reference Part X: proposed edits are proposals only; apply
+  after operator review of the revised summaries above.
+
+---
+
+## Summary: Final Audit Verdict
+
+**Substrate isolation:** CLEAN throughout. 39/39 legacy tests pass. Baselines unchanged.  
+**Sweep data quality:** SOUND for all 11 vectors.  
+**Comparison methodology:** Sound for 9 of 11; bootstrap and sub_threshold need baseline
+note.  
+**Substantive findings:** Accurate for all 11. Sub-Threshold Drift needs expanded
+interpretation note.  
+**Integration analysis:** Grounded. One gap (higher undefended v2 rates not addressed).  
+**Documentation edits:** Grounded. Sub-Threshold Drift wording needs qualification.  
+**Judgment calls:** No serious errors. Baseline selection for 2 vectors was per prompt
+instruction; phi artifact would be preferable.
+
+**Overall recommendation: proceed to commit with the three revision items above.** The
+framework's empirical position is well-supported for 8 fully-blocked vectors plus veto
+capture. Sub-Threshold Drift is correctly characterized as the open finding. The required
+revisions are clarifications, not factual corrections.
+
+
+==========================================
+FILE: simulation\diagnostics\attack_vector_revalidation_documentation_edits.md
+==========================================
+
+# Attack Vector v2.0 Revalidation Documentation Edit Proposals
+
+This file proposes edits only. It does not modify `paper/paper_v2_working.md`, `docs/lineage_phi_program_reference.md`, or `docs/paper_v2_outline.md`.
+
+## 1. paper/paper_v2_working.md, Section VIII adversarial robustness framing
+
+### Existing text or insertion point
+
+Replace the paragraph beginning:
+
+> **Consensus Override Protocol Stress Test Result:** Thirteen adversarial scenarios were evaluated across two rounds.
+
+The current paragraph states that ten of thirteen scenarios were fully contained and that Biological Veto Capture was contained but requires ongoing institutional maintenance.
+
+### Proposed replacement text
+
+**Consensus Override Protocol Stress Test Result, v2.0 revalidation:** The v2.0 attack-vector revalidation tests 10 live Monte Carlo vectors through the eight-axis v2 action adapter and treats Domain Masking as an analytic-only architectural closure. Per current evidence, eight standard binary vectors are fully blocked under the defended v2 adapter state, Biological Veto Capture is materially reduced but not eliminated, and Sub-Threshold Drift is not blocked by the peak-constraint success metric. For Sub-Threshold Drift, that 100 percent defended attack rate coexists with a large survival effect: undefended rows show a 92.0 percent extinction rate, while defended rows show a 0.0 percent extinction rate and complete the full simulation horizon. The defense prevents population extinction but does not prevent the transient threshold breach that triggers the success flag. Domain Masking remains structurally non-viable under the audited spectral-entropy substrate, but this is an analytic result rather than a simulated Monte Carlo outcome. The prior v1.x claim that adversarial patches fully contained most scenarios is therefore preserved only as historical v1.x evidence. The v2.0 claim should be stated as qualified support for layered defenses under a new action-adapter mechanism, with Sub-Threshold Drift and residual Biological Veto Capture marked as open or maintenance-sensitive.
+
+### Empirical finding reflected
+
+- `full_5ac6a2e_sybil_capture`, `full_5ac6a2e_measurement_tampering`, `full_5ac6a2e_ledger_compromise`, `full_5ac6a2e_successor_contamination`, `full_5ac6a2e_opaque_reasoning`, `full_5ac6a2e_bootstrap_subversion`, `full_5ac6a2e_evaluator_collusion`, and `full_5ac6a2e_engineered_fragility`: defended attack rate 0.0 percent.
+- `full_5ac6a2e_sub_threshold_drift`: defended attack rate 100.0 percent.
+- Biological Veto Capture shards `full_5ac6a2e_veto_shard0of4` through `full_5ac6a2e_veto_shard3of4`: combined-defense mean capture_rate 0.1197, SE 0.0047.
+- `full_5ac6a2e_domain_masking`: analytic-only result, reason: v2 spectral entropy leaves no non-degenerate live masking intervention under the audited architecture.
+
+### New claim status
+
+This introduces a new v2.0 empirical claim. It replaces direct reliance on v1.x adversarial coverage with v2.0 revalidation evidence and explicitly adds the Sub-Threshold Drift limitation.
+
+## 2. paper/paper_v2_working.md, Biological Veto Capture paragraph
+
+### Existing text or insertion point
+
+Replace the sentence:
+
+> Finding: Independence monitoring is the primary defense against biological veto capture. Scheduled rotation provides marginal benefit when monitoring is active.
+
+### Proposed replacement text
+
+Finding, updated for v2.0 revalidation: Independence monitoring remains the primary defense against biological veto capture, and combined monitoring plus rotation reduces mean capture_rate to 0.1197 (SE 0.0047) in the v2.0 adapter sweep. The attack is not eliminated, so the correct paper claim is maintenance-sensitive containment rather than full closure.
+
+### Empirical finding reflected
+
+Biological Veto Capture shards `full_5ac6a2e_veto_shard0of4` through `full_5ac6a2e_veto_shard3of4`, 8,700 total rows. v2.0 mean capture_rate: undefended 0.6129, rotation_only 0.3301, monitoring_only 0.1527, both 0.1197.
+
+### New claim status
+
+This modifies an existing claim by converting a v1.x defense conclusion into a v2.0 qualified empirical statement.
+
+## 3. docs/lineage_phi_program_reference.md, Part X insertion
+
+### Existing text or insertion point
+
+Insert after the Part X COP comparison table where the row currently states:
+
+> | COP protective effect | 73.9pp (adversarial) | Not tested; Category C is benign baseline (-0.47pp) | Preserved |
+
+### Proposed addition text
+
+### X.9 Attack Vector v2.0 revalidation
+
+Attack Vector v2.0 revalidation reran the adversarial vector set against the v2 action substrate. Ten vectors have live Monte Carlo evidence, and Domain Masking is analytic-only. The live Monte Carlo vectors use the v2 attack adapter, which expresses attack pressure as eight-axis action modifications inside the v2 step path rather than as v1.x policy tuples. Per current evidence, eight standard binary vectors are fully blocked under the defended adapter state, Biological Veto Capture is reduced but not eliminated, and Sub-Threshold Drift remains unblocked under the defended adapter state. Domain Masking remains structurally non-viable because spectral entropy leaves no non-degenerate live masking intervention under the audited architecture.
+
+The result qualifies, rather than withdraws, the prior adversarial-coverage claim. v1.x coverage remains historical evidence for the earlier substrate. v2.0 coverage should be cited through the new revalidation artifacts: per-vector summaries, `attack_vector_revalidation_integration.md`, and `attack_vector_revalidation_final_report.md`.
+
+### Empirical finding reflected
+
+- Ten live Monte Carlo vectors, 9,900 live rows total including 8,700 Biological Veto Capture rows.
+- Domain Masking analytic output, one row.
+- Defended binary attack rate is 0.0 percent for eight standard vectors, 100.0 percent for Sub-Threshold Drift.
+- Biological Veto Capture combined-defense mean capture_rate is 0.1197, SE 0.0047.
+
+### New claim status
+
+This introduces a new program-reference subsection. It should be marked as a v2.0 revalidation result, not a reinterpretation of the original phi investigation.
+
+## 4. docs/SPECIFICATION_GAPS.md follow-up note for operator
+
+### Existing text or insertion point
+
+The current gap entry begins:
+
+> ## GAP-05 | Adversarial Coverage: 11 of 13 Attack Vectors Simulated
+
+### Proposed operator action
+
+After audit review, close or revise GAP-05 to distinguish historical v1.x coverage from v2.0 revalidation. The recommended disposition is: v2.0 revalidation complete for 10 live Monte Carlo vectors plus Domain Masking analytic closure, with Sub-Threshold Drift unresolved as a defended v2.0 attack.
+
+### Empirical finding reflected
+
+`attack_vector_revalidation_integration.md` completion inventory and all 11 per-vector summaries.
+
+### New claim status
+
+This changes the status of GAP-05 and introduces a v2.0-specific limitation for Sub-Threshold Drift.
+
+
+==========================================
+FILE: simulation\diagnostics\attack_vector_revalidation_final_report.md
+==========================================
+
+# Attack Vector v2.0 Revalidation Final Report
+
+## 1. What was completed
+
+All requested full outputs are present after integration of laptop and Linux worker branches. Laptop completed Biological Veto Capture shards 0, 1, and 2, plus Measurement Tampering, Successor Contamination, Sybil Capture, and Evaluator Collusion. Linux completed Biological Veto Capture shard 3, Ledger Compromise, Domain Masking analytic full output, Opaque Reasoning, Bootstrap Subversion, Sub-Threshold Drift, and Engineered Fragility.
+
+| vector | total rows | machine(s) |
+| --- | --- | --- |
+| sybil_capture | 120 | laptop |
+| measurement_tampering | 120 | laptop |
+| ledger_compromise | 80 | linux |
+| successor_contamination | 120 | laptop |
+| domain_masking | 1 | linux |
+| opaque_reasoning | 120 | linux |
+| bootstrap_subversion | 200 | linux |
+| evaluator_collusion | 120 | laptop |
+| sub_threshold_drift | 200 | linux |
+| engineered_fragility | 120 | linux |
+| biological_veto_capture | 8700 | laptop, linux |
+
+## 2. Data provenance summary
+
+The adapter anchor for the full run plan is `5ac6a2e`. Linux result commits were cherry-picked onto `attack-v2-laptop` on 2026-07-07. Protected baseline files were checked after integration and remained unchanged against `pre-attack-vector-revalidation`.
+
+| vector | run_id | machine | commit | rows | manifest SHA256 |
+| --- | --- | --- | --- | --- | --- |
+| sybil_capture | full_5ac6a2e_sybil_capture | laptop | 05a61ed | 120 | 63c3750e0d70fe3f8db2994177776822af14bf3e4e620fb10ca370671ccbabb8 |
+| measurement_tampering | full_5ac6a2e_measurement_tampering | laptop | 1d3917d | 120 | c09b534bc05df75057bc0db218b909531b3f500104537244048910e67ad5410a |
+| ledger_compromise | full_5ac6a2e_ledger_compromise | linux | a2319da | 80 | 928207e3baa0bbe6a0df88c2aa8766c653fab4b10e8e85ebabd09c7dd8c93e37 |
+| successor_contamination | full_5ac6a2e_successor_contamination | laptop | b004cb0 | 120 | a5e11065a0663f5724c30945084d9f0b8a4cfa8f167ae2f5122b3b542bf8b77b |
+| domain_masking | full_5ac6a2e_domain_masking | linux | 1686aac | 1 | 81011ecf7c4b1e4d221b4d1f1a1f1cee89880fec6c94e72effe490aff2dec352 |
+| opaque_reasoning | full_5ac6a2e_opaque_reasoning | linux | d63c61c | 120 | 5f6da79969019e990504f69e5b53e93a0c36e52d4633a35b47a0e4d62f32d218 |
+| bootstrap_subversion | full_5ac6a2e_bootstrap_subversion | linux | ee19f3e | 200 | 51b33acca53c3a959aca6c66b9ccf487767dd72044a45c2070ce7cf1fa412aab |
+| evaluator_collusion | full_5ac6a2e_evaluator_collusion | laptop | 0bce62d | 120 | b8fb9ac65fc0060d73b8e3009352c5a32e05c01024c9ef08eaeeccc7a9c9713a |
+| sub_threshold_drift | full_5ac6a2e_sub_threshold_drift | linux | 0391f2a | 200 | a3bfbc91ee6cc3fd047409e6578419053179d675d4ebd338e51d7e7ec30affb6 |
+| engineered_fragility | full_5ac6a2e_engineered_fragility | linux | 56fa9bd | 120 | be0fc774e385c810886bcb569b36a51fb751e3ff9f07ce7478027795c13e558e |
+| biological_veto_capture | full_5ac6a2e_veto_shard0of4 | laptop | 5ac6a2e | 2164 | 154734fa1628e0ffbff07864112fa09f0eded918682767edf94f90b3beead8db |
+| biological_veto_capture | full_5ac6a2e_veto_shard1of4 | laptop | 5ac6a2e | 2102 | 17c6e10d5b91add67e4296a9d69501c8a1418c6119e2872ecaaca1d34e3e4847 |
+| biological_veto_capture | full_5ac6a2e_veto_shard2of4 | laptop | 5ac6a2e | 2321 | fbb9ae9bad7e473284aeec87fe98604bbb4b563e5c633e488292ad571dcdfc82 |
+| biological_veto_capture | full_5ac6a2e_veto_shard3of4 | linux | 5ac6a2e | 2113 | 464a3cebdd514c8d611f3bac663775112cd9d37cbd2ac1f64bcaad8ce6ac25f2 |
+
+## 3. Top-level findings
+
+Per current evidence, v2.0 has live Monte Carlo evidence for 10 attack vectors and analytic-only closure for Domain Masking. Eight standard binary vectors are fully blocked under the defended v2 adapter state, while Sub-Threshold Drift is not blocked and remains at 100.0 percent attack success with defense active. Biological Veto Capture is materially reduced by monitoring and combined defense, with combined mean capture_rate 0.1197 (SE 0.0047), but it is not eliminated. The v2.0 adversarial-robustness claim should therefore be qualified: layered defenses are broadly supported under the new eight-axis adapter mechanism, but not every v1.x containment claim carries over unchanged.
+
+## 4. What the operator needs to do before committing to the paper
+
+1. Audit the 11 per-vector summaries and the integration analysis.
+2. Review `attack_vector_revalidation_documentation_edits.md` and decide which proposed wording to apply manually.
+3. Update or close GAP-05 in `docs/SPECIFICATION_GAPS.md` after audit review, with explicit v2.0 wording for Domain Masking and Sub-Threshold Drift.
+4. Avoid applying any paper or program-reference edits until the audit confirms the statistical interpretation and the protected-file checks.
+
+## 5. Open items or anomalies
+
+- Sub-Threshold Drift is the major anomaly: defended v2.0 attack rate is 100.0 percent.
+- Domain Masking full mode exits cleanly with analytic output, not Monte Carlo output. This is expected under the adapter design.
+- Biological Veto Capture remains a residual-risk vector. The combined defense reduces capture but does not eliminate it.
+- The local working tree still contains untracked smoke, pilot, log, orchestration, and Domain Masking preflight artifacts. They are not part of the synthesis claim unless separately staged by the operator.
+
+
+==========================================
+FILE: simulation\diagnostics\attack_vector_revalidation_integration.md
+==========================================
+
+# Attack Vector v2.0 Revalidation Integration Analysis
+
+## 1. Completion inventory
+
+| vector | run_id(s) | total rows | category | status |
+| --- | --- | --- | --- | --- |
+| sybil_capture | full_5ac6a2e_sybil_capture | 120 | D | completed |
+| measurement_tampering | full_5ac6a2e_measurement_tampering | 120 | D | completed |
+| ledger_compromise | full_5ac6a2e_ledger_compromise | 80 | D | completed |
+| successor_contamination | full_5ac6a2e_successor_contamination | 120 | D | completed |
+| domain_masking | full_5ac6a2e_domain_masking | 1 | D | completed |
+| opaque_reasoning | full_5ac6a2e_opaque_reasoning | 120 | D | completed |
+| bootstrap_subversion | full_5ac6a2e_bootstrap_subversion | 200 | D | completed |
+| evaluator_collusion | full_5ac6a2e_evaluator_collusion | 120 | D | completed |
+| sub_threshold_drift | full_5ac6a2e_sub_threshold_drift | 200 | D | completed |
+| engineered_fragility | full_5ac6a2e_engineered_fragility | 120 | D | completed |
+| biological_veto_capture | full_5ac6a2e_veto_shard0of4, full_5ac6a2e_veto_shard1of4, full_5ac6a2e_veto_shard2of4, full_5ac6a2e_veto_shard3of4 | 8700 | D | completed |
+
+## 2. v2.0 adversarial robustness position
+
+Ten vectors were tested with live Monte Carlo evidence. Domain Masking is analytic-only. Using a practical defense-effectiveness threshold of attack rate at or below 5 percent for binary attack metrics, and mean capture_rate at or below 0.20 for the combined Biological Veto Capture defense, 9 of 10 live vectors show meaningful defended effectiveness in v2.0. The exception is Sub-Threshold Drift, where `defense_active=True` still has attack rate 100.0 percent with SE 0.0000.
+
+This differs from the v1.x characterization in two ways. First, the advisor-level claim that six of seven vectors were fully blocked was based on the older v1.x policy and COP wiring, not the v2 optimizer substrate. Second, `SPECIFICATION_GAPS.md` described 11 vectors simulated, but the authoritative inventory shows that Domain Masking was injected analytic output and the other baselines were v1.x or v1.x.2 evidence. The present revalidation provides v2.0 live evidence for 10 vectors and analytic v2.0 closure for Domain Masking.
+
+The substantive substrate change is structural. The adapter replaces v1 attack tuples and v1 COP paths with explicit eight-axis v2 action modifications inside the v2 step path. This means the result is not a parameter shift within the old evidence base. It is a re-expression of attack pressure in the v2 action substrate, with formal Stage 2 yield logic active where relevant.
+
+Two vectors also show materially higher undefended attack rates in v2.0 than in their v1.x baselines: Ledger Compromise rises from 52.5 percent to 100 percent, and Bootstrap Subversion rises from 31.7 percent to 100 percent. This is consistent with deterministic action modification applying stronger attack pressure than the probabilistic v1.x policy attacks. The comparison strengthens the defense-effectiveness finding, because the defended v2.0 attack rate is 0.0 percent for both vectors, but the change in undefended attack pressure must be stated explicitly before this analysis is used as a citation source.
+
+## 3. Reconciliation with prior claims
+
+The broad claim that layered defenses are load-bearing is preserved per current evidence, but the exact prior claim that identified v1.x attack vectors are fully contained should be qualified. Eight standard binary vectors are fully blocked under the defended v2 adapter state, Biological Veto Capture is materially reduced but not eliminated, and Sub-Threshold Drift is not blocked in the v2 adapter data. Domain Masking remains structurally closed, but only as an analytic architectural result.
+
+The documentation should therefore stop treating v1.x adversarial coverage as direct evidence for v2.0. It can state that v2.0 revalidation supports most of the earlier robustness position under a new adapter mechanism, while identifying Sub-Threshold Drift as unresolved and Biological Veto Capture as an institutional-maintenance risk.
+
+## 4. Cross-vector consistency check
+
+No per-vector summary claims that Sub-Threshold Drift is defended in v2.0. The integration position is consistent with the Sub-Threshold Drift summary: v1.x CUSUM containment does not carry over as a v2.0 result. Domain Masking is consistently treated as analytic-only, not as a Monte Carlo result. Biological Veto Capture is consistently treated as reduced rather than fully eliminated.
+
+## 5. What remains unresolved
+
+Sub-Threshold Drift requires follow-up before paper claims can state v2.0 containment. The current data show 100.0 percent attack success in both defense states. Biological Veto Capture requires careful wording because combined defense reduces mean capture_rate to 0.1197, SE 0.0047, but does not eliminate capture. Domain Masking is architecturally closed in the audited substrate, but no live masking intervention has been defined. Any future claim that all attack vectors are fully blocked would require additional adapter work and a rerun.
+
+
+==========================================
+FILE: simulation\diagnostics\attack_vector_revalidation_inventory.md
+==========================================
+
+# Attack Vector v2.0 Revalidation Inventory
+
+## Audit scope and anchor
+
+This is an inventory and compatibility audit only. No attack sweep was run.
+All source line references in this inventory resolve against the audited anchor
+commit, not later adapter implementation changes.
+
+- Verified commit: `e41c4f61e0af929a86248ef6902807e1854e91c0`
+- Anchor tag: `pre-attack-vector-revalidation`
+- Test gate: `39 passed in 28.86s`
+- Python: `3.14.3` (`MSC v.1944 64 bit (AMD64)`)
+- NumPy: `2.4.4`
+- Platform: `Windows-11-10.0.26200-SP0`
+- Logical CPU count: `16`
+
+## Authoritative scenario mapping
+
+Repository scenario definitions confirm the requested mapping:
+
+| Vector | Scenario pair | Repository evidence |
+|---|---:|---|
+| Sybil Capture | 19-20 | `simulation/simulation.py:167-181` |
+| Measurement Tampering | 10-11 | `simulation/simulation.py:91-107` |
+| Ledger Compromise | 13-14 | `simulation/simulation.py:117-131` |
+| Successor Contamination | 15-16 | `simulation/simulation.py:133-149` |
+| Domain Masking | 17-18 | `simulation/simulation.py:151-165` |
+| Opaque Reasoning | 21-22 | `simulation/simulation.py:183-197` |
+| Bootstrap Subversion | 23-24 | `simulation/simulation.py:199-215` |
+| Evaluator Collusion | 25-26 | `simulation/simulation.py:217-229` |
+| Biological Veto Capture Through Dependency | 27-28 | `simulation/run_veto_capture_sweep.py:1-22` |
+| Sub-Threshold Drift | 29-30 | `simulation/simulation.py:231-241` |
+| Engineered Fragility | 31-32 | `simulation/simulation.py:243-253` |
+
+Scenario 6 is historical drift coverage. It is not the paired Sub-Threshold Drift vector, whose implemented pair is Scenarios 29-30.
+
+## Baseline artifact distinctions
+
+| Artifact | Rows | Provenance | Architecture | Phi | Important distinction |
+|---|---:|---|---|---|---|
+| `data/comprehensive_adversarial_sweeps.csv` | 1,280 | Committed in `18e7658`; 1,160 live rows and 120 injected Domain Masking rows | v1.x | 10 for ordinary vector workers; 5, 10, and 20 for Bootstrap and Sub-Threshold Drift; Domain Masking stub labels the same three values only in `Parameter` | Has no `Phi` column. It uses 20 replicates per condition. |
+| `data/comprehensive_adversarial_sweeps_v1x2_phi.csv` | 4,600 | Committed in `ba86a57`; 4,400 live rows and 200 injected Domain Masking rows | v1.x.2 | Explicit grid 1, 5, 10, 15, 25 | This is the phi extension. It is not v2.0 evidence. |
+| `data/veto_capture_sweep_v1.csv` | 7,500 | Original sweep output retained by the rename logic introduced with the revised sweep | v1.x | Fixed at 10 | Live output. Seeds 0-49 are reused across cells. Rotation and independence monitoring are always combined in defended cells. |
+| `data/veto_capture_sweep_v2.csv` | 8,700 | Committed in `0ca1326`; produced by the revised three-defense-mode constructor | v1.x | Fixed at 10 | Live output, but `v2` means sweep revision 2. It does not mean v2.0 substrate. |
+
+The architecture classification follows the dispatcher requirement at `simulation/model.py:153-156`. None of the constructors above sets `config['policy']` to `optimize_u_sys_v2`.
+
+## Shared constructor and seed facts
+
+The comprehensive worker runs deterministic MD5-derived seeds modulo 10,000, with the full condition and replicate index included in the seed string (`simulation/monte_carlo.py:30-31`, `105-106`, `127-130`, `145-147`, `166-170`, `209-211`, `225-231`, `253-255`, `267-270`, `287-294`). Defense states therefore do not share seeds. The CSVs do not record seeds, and modulo reduction permits seed collisions.
+
+The ordinary comprehensive constructor uses 20 replicates in the committed artifact. Its current grid is at `simulation/monte_carlo.py:588-640`. The phi constructor uses 20 replicates and is at `simulation/monte_carlo.py:326-382`; its exact expected row counts are also documented at `simulation/run_phi_adversarial_sweep.py:20-32`.
+
+Unless noted otherwise, comprehensive runs use 200 agents, an attack at step 50, and at most 300 runtime steps. Collapse means final population is below the larger of the model minimum viable population and 65 percent of peak population. Extinction means final population is zero.
+
+## Vector inventory
+
+### 1. Sybil Capture
+
+- Scenario pair: 19-20.
+- Attack and defense: `ai_policy='sybil_attack'`; static panel when `cop_randomized_panel=False`; randomized civic panel when `True`; attribution checking is also enabled.
+- Attack success: maximum constraint exceeds 0.8 during steps 50-59, the initial capture window (`simulation/monte_carlo.py:113-122`).
+- Parameter grid: population 50, 100, 200 by randomized panel false/true. The phi artifact crosses this with phi 1, 5, 10, 15, 25.
+- Replicates and seeds: 20 per cell. Deterministic condition-specific MD5 seeds; defense states are not paired.
+- Runtime: 300 steps maximum, attack at step 50.
+- Baselines: 120 live rows in `comprehensive_adversarial_sweeps.csv`; 600 live rows in `comprehensive_adversarial_sweeps_v1x2_phi.csv`.
+- Architecture and phi: v1.x; phi 10 in the ordinary artifact and the explicit five-value grid in the phi artifact.
+- Implementation: scenario definitions `simulation/simulation.py:167-181`; worker `simulation/monte_carlo.py:103-123`; grids `simulation/monte_carlo.py:335-339`, `598-601`; attack action `simulation/agents.py:1049-1052`; randomized panel defense `simulation/model.py:945-971`.
+- Known limitations: the metric is window-specific; seed pairs do not match across defense states; population changes both attack targeting and panel composition; there is no v2 attack adapter.
+
+### 2. Measurement Tampering
+
+- Scenario pair: 10-11.
+- Attack and defense: `ai_policy='falsify_yield'`; `cop_independent_eval=False/True`.
+- Attack success: the incumbent remains generation 1, regardless of later survival (`simulation/monte_carlo.py:136-141`).
+- Parameter grid: transition base cost 1.5, 2.0, 3.0 by independent evaluation false/true. The phi artifact crosses this with the five-value phi grid.
+- Replicates and seeds: 20 per cell, deterministic condition-specific seeds, not paired across defense.
+- Runtime: 300 steps maximum, attack at step 50, generation 2 successor capability 5.0.
+- Baselines: 120 live rows in the ordinary artifact; 600 live rows in the phi artifact.
+- Architecture and phi: v1.x; phi 10 or the explicit phi grid.
+- Implementation: `simulation/simulation.py:91-107`; `simulation/monte_carlo.py:125-141`, `340-344`, `602-605`; falsified claims and independent evaluation `simulation/model.py:735-747`, `805-807`; policy action `simulation/agents.py:1077-1078`.
+- Known limitations: success is a generation-state proxy, not direct proof that a falsified measurement caused each failure; defense states do not share seeds; the attack and defense operate only in the v1.x yield path.
+
+### 3. Ledger Compromise
+
+- Scenario pair: 13-14.
+- Attack and defense: `ai_policy='hack_ledger'`; attribution check false/true is a secondary grid axis; `cop_cryptographic_ledger=False/True` is the reported defense.
+- Attack success: civilization collapses and the ledger does not set `has_tampered` (`simulation/monte_carlo.py:153-162`).
+- Parameter grid: attribution check false/true by cryptographic ledger false/true. The phi artifact crosses this with the five-value phi grid.
+- Replicates and seeds: 20 per cell, deterministic condition-specific seeds, not paired.
+- Runtime: 300 steps maximum, attack at step 50.
+- Baselines: 80 live rows in the ordinary artifact; 400 live rows in the phi artifact.
+- Architecture and phi: v1.x; phi 10 or the explicit phi grid.
+- Implementation: `simulation/simulation.py:117-131`; `simulation/monte_carlo.py:143-162`, `345-349`, `606-609`; attack action `simulation/agents.py:1063-1075`; escalation and ledger check `simulation/model.py:816-833`.
+- Known limitations: success combines an outcome with absence of detection; `Defense_Active` records only the cryptographic ledger, so attribution states are pooled under the parameter label; no v2 ledger mutation or integrity adapter exists.
+
+### 4. Successor Contamination
+
+- Scenario pair: 15-16.
+- Attack and defense: `ai_policy='contaminate_successor'`; architectural independence is layer 1; independent evaluation is layer 2; succession chaining is structural layer 3. `Defense_Active` is true only when both flags are true.
+- Attack success: `model.contamination_occurred`, which records whether contamination passed layer 1 (`simulation/monte_carlo.py:176-190`).
+- Parameter grid: ordinary artifact uses costs 1.5, 2.0, 2.5 by all four architectural-independence and independent-evaluation combinations. The phi artifact simplifies this to both false or both true, crossed with five phi values.
+- Replicates and seeds: 20 per cell, deterministic condition-specific seeds, not paired.
+- Runtime: 300 steps maximum, attack at step 50, generation 2 successor capability 5.0.
+- Baselines: 240 live rows in the ordinary artifact; 600 live rows in the phi artifact.
+- Architecture and phi: v1.x; phi 10 or the explicit phi grid.
+- Implementation: `simulation/simulation.py:133-149`; `simulation/monte_carlo.py:164-190`, `350-357`, `610-615`; contamination action `simulation/agents.py:894-901`, `1083-1084`; defense and chaining `simulation/model.py:735-747`, `789-801`.
+- Known limitations: the ordinary artifact collapses partial defenses into `Defense_Active=False`; the phi artifact omits partial-defense cells; the success metric covers infection, while collapse and extinction separately reflect downstream containment; no eight-axis contamination mechanism exists.
+
+### 5. Domain Masking
+
+- Scenario pair: 17-18.
+- Attack and defense: historical `ai_policy='domain_masking'`; arithmetic composite is vulnerable and geometric composite is the Scenario 18 defense. Current v1.x defaults use spectral entropy.
+- Attack success: the live worker is retired and raises if dispatched (`simulation/monte_carlo.py:192-205`). The injected stub hard-codes success for the historical v1.0 undefended state and failure for the v1.x spectral state (`simulation/monte_carlo.py:533-585`).
+- Parameter grid: no live grid. Ordinary artifact injects phi labels 5, 10, 20 by defense false/true. Phi artifact injects 1, 5, 10, 15, 25 by defense false/true.
+- Replicates and seeds: 20 identical injected records per cell. No simulation and no seeds.
+- Runtime: none for artifact rows.
+- Baselines: 120 injected rows in the ordinary artifact; 200 injected rows in the phi artifact.
+- Architecture and phi: the records summarize a v1.0 to v1.x analytic defense trajectory. They are not v2.0 runs, and the phi labels do not affect the values.
+- Implementation: `simulation/simulation.py:151-165`; retired worker `simulation/monte_carlo.py:192-205`; stub `simulation/monte_carlo.py:533-585`; historical tuple action `simulation/agents.py:1086-1091`; spectral metric rationale `simulation/metrics.py:25-27`.
+- Known limitations: all baseline rows are injected, standard errors would be meaningless, and the stub mixes historical architectures in one defense column. Any later v2 result must remain explicitly analytic unless a meaningful v2-native masking intervention is defined.
+
+### 6. Opaque Reasoning
+
+- Scenario pair: 21-22.
+- Attack and defense: `ai_policy='opaque_optimization'`; `cop_reasoning_transparency=False/True` controls the intuition veto.
+- Attack success: maximum post-attack constraint exceeds 0.8 (`simulation/monte_carlo.py:217-222`).
+- Parameter grid: population 100, 150, 200 by transparency false/true, crossed with five phi values in the phi artifact.
+- Replicates and seeds: 20 per cell, deterministic condition-specific seeds, not paired.
+- Runtime: 300 steps maximum, attack at step 50.
+- Baselines: 120 live rows in the ordinary artifact; 600 live rows in the phi artifact.
+- Architecture and phi: v1.x; phi 10 or the explicit phi grid.
+- Implementation: `simulation/simulation.py:183-197`; `simulation/monte_carlo.py:207-222`, `358-362`, `618-621`; policy `simulation/agents.py:1093-1097`; transparency attribution and veto `simulation/model.py:917-923`, `973-983`.
+- Known limitations: high constraint is a behavioral proxy for bypass, not a direct record of approval provenance; no v2 opacity field or transparency check is wired to the eight-axis action.
+
+### 7. Bootstrap Subversion
+
+- Scenario pair: 23-24.
+- Attack and defense: a single `bootstrap_deceptive` candidate when undefended; three candidates and `cop_multi_candidate_bootstrap=True` when defended.
+- Attack success: peak constraint over the full run exceeds 0.8, indicating that the treacherous turn fired (`simulation/monte_carlo.py:238-248`).
+- Parameter grid: phi 5, 10, 20 in the ordinary artifact; phi 1, 5, 10, 15, 25 in the phi artifact; each crossed with multi-candidate false/true.
+- Replicates and seeds: 20 per cell, deterministic condition-specific seeds, not paired.
+- Runtime: 300 steps maximum; attack is present at initialization and turns after 20 recorded population steps.
+- Baselines: 120 live rows in the ordinary artifact; 200 live rows in the phi artifact.
+- Architecture and phi: v1.x with phi as the grid parameter.
+- Implementation: `simulation/simulation.py:199-215`; `simulation/monte_carlo.py:224-248`, `363-367`, `622-625`; constructor verification `simulation/model.py:247-285`; treacherous action `simulation/agents.py:1118-1121`.
+- Known limitations: bootstrap verification uses the v1 scalar `project_u_sys` interface; success does not require survival; no v2 candidate-verification adapter exists.
+
+### 8. Evaluator Collusion
+
+- Scenario pair: 25-26.
+- Attack and defense: `ai_policy='evaluator_collusion'`; `cop_methodological_diversity=False/True`; reasoning transparency is explicitly false.
+- Attack success: maximum post-attack constraint exceeds 0.8 (`simulation/monte_carlo.py:251-264`).
+- Parameter grid: population 100, 150, 200 by diversity false/true, crossed with five phi values in the phi artifact.
+- Replicates and seeds: 20 per cell, deterministic condition-specific seeds, not paired.
+- Runtime: 300 steps maximum, attack at step 50.
+- Baselines: 120 live rows in the ordinary artifact; 600 live rows in the phi artifact.
+- Architecture and phi: v1.x; phi 10 or the explicit phi grid.
+- Implementation: `simulation/simulation.py:217-229`; `simulation/monte_carlo.py:251-264`, `368-372`, `627-630`; attack action `simulation/agents.py:1123-1128`; peer methodologies and voting `simulation/agents.py:1183-1191`, `1225-1240`.
+- Known limitations: high constraint is a proxy for successful collusion; diversity is implemented only in the v1 peer validator; no v2 evaluator or vote path is present.
+
+### 9. Sub-Threshold Drift
+
+- Scenario pair: 29-30.
+- Attack and defense: `ai_policy='sub_threshold_drift'`; drift and attribution checks are on in both states; `cop_cusum_drift=False/True` is the defense.
+- Attack success: maximum post-attack constraint exceeds 0.75 (`simulation/monte_carlo.py:266-279`).
+- Parameter grid: phi 5, 10, 20 in the ordinary artifact; phi 1, 5, 10, 15, 25 in the phi artifact; each crossed with CUSUM false/true.
+- Replicates and seeds: 20 per cell, deterministic condition-specific seeds, not paired. Sensor noise is fixed at zero.
+- Runtime: 300 steps maximum, attack at step 50, trust increment 0.015.
+- Baselines: 120 live rows in the ordinary artifact; 200 live rows in the phi artifact.
+- Architecture and phi: v1.x with phi as the grid parameter.
+- Implementation: `simulation/simulation.py:231-241`; `simulation/monte_carlo.py:266-279`, `373-377`, `632-635`; drift action `simulation/agents.py:1130-1140`; CUSUM and trust logic `simulation/model.py:852-877`, `899-943`.
+- Known limitations: deterministic zero-noise runs reduce stochastic realism; the binary threshold does not preserve time-to-detection information; Scenario 6 must not be substituted; no v2 drift claim or detector adapter exists.
+
+### 10. Engineered Fragility
+
+- Scenario pair: 31-32.
+- Attack and defense: `ai_policy='engineered_fragility'`; `cop_resilience_monitoring=False/True`.
+- Attack success: maximum constraint exceeds 0.8 during steps 70-89 after the shock (`simulation/monte_carlo.py:300-304`).
+- Parameter grid: shock magnitude 0.10, 0.15, 0.20 by resilience monitoring false/true, crossed with five phi values in the phi artifact.
+- Replicates and seeds: 20 per cell, deterministic condition-specific seeds, not paired.
+- Runtime: 200 steps maximum; attack at step 10 and shock at step 70; demographic stabilizers are fixed in the worker.
+- Baselines: 120 live rows in the ordinary artifact; 600 live rows in the phi artifact.
+- Architecture and phi: v1.x; phi 10 or the explicit phi grid.
+- Implementation: `simulation/simulation.py:243-253`; `simulation/monte_carlo.py:281-304`, `378-382`, `637-640`; policy `simulation/agents.py:1142-1164`; degradation and defense attribution `simulation/model.py:656-660`, `912-915`.
+- Known limitations: the worker differs from the simple scenario's attack and shock timing; success is a short-window constraint proxy; v2 has a resilience stock and shock mechanics but does not evaluate the named COP monitoring flag.
+
+### 11. Biological Veto Capture Through Dependency
+
+- Scenario pair: 27-28.
+- Attack and defense: `cop_veto_capture=True`; dependency rate and capture strength drive validator degradation. The revised sweep separates `rotation_only`, `monitoring_only`, and `both`; undefended uses neither.
+- Attack success: continuous `capture_rate = yield_condition_blocked_count / yield_condition_met_count`, with zero when no yield condition is met (`simulation/run_veto_capture_sweep.py:158-160`).
+- Parameter grid: undefended uses dependency 0.01, 0.02, 0.05, 0.10, 0.15, 0.20 by capture strength 0.3, 0.5, 0.7, 0.9, 1.0. Revised defended cells use dependency 0.02, 0.05, 0.10, 0.20 by capture strength 0.5, 0.7, 1.0 by rotation interval 10, 20, 50, 100 by three defense modes (`simulation/run_veto_capture_sweep.py:42-52`).
+- Replicates and seeds: 50 per cell. The v1 artifact reuses seeds 0-49 in every cell. The revised artifact hashes all swept parameters and replicate index and contains 8,700 unique seed values (`simulation/run_veto_capture_sweep.py:91-97`, `294-306`).
+- Runtime: 300 steps maximum, 200 agents, reproduction rate 0.09, successor capability 4.0, five validators, base accuracy 0.8.
+- Baselines: `veto_capture_sweep_v1.csv` has 7,500 live rows; `veto_capture_sweep_v2.csv` has 8,700 live rows.
+- Architecture and phi: both artifacts are v1.x at fixed phi 10. The revised filename does not select v2.0 because its config has no `policy` key (`simulation/run_veto_capture_sweep.py:110-127`).
+- Implementation: constructor and worker `simulation/run_veto_capture_sweep.py:101-181`, `268-354`; dependency and ratification `simulation/model.py:299-319`, `695-706`, `775-801`.
+- Known limitations: the v1 defense combines mechanisms and makes rotation non-identifiable; its seeds repeat across all cells. Revised seeds are unique but are not paired across defense modes. A zero capture rate conflates no blocked yields with no eligible yields. The revised sweep still uses v1.x yield and validator logic.
+
+## Inventory conclusion
+
+All live baseline evidence is v1.x or v1.x.2. Domain Masking is injected analytic output. No listed baseline artifact contains live v2.0 attack-vector evidence.
+
+
+==========================================
+FILE: simulation\diagnostics\attack_vector_revalidation_process_validation.md
+==========================================
+
+# Attack Vector v2.0 Process Validation
+
+## Gate result
+
+**ANCHOR AUDIT RESULT: BLOCKED BY MISSING V2 ATTACK ADAPTER**
+
+The repository statement is confirmed. v2 mode is selected only by `config['policy'] == 'optimize_u_sys_v2'` (`simulation/model.py:153-156`), and `step()` then dispatches directly to `_step_v2` (`simulation/model.py:651-653`). The v2 implementation explicitly states that the v1.x attack policies and COP defenses are intentionally inactive (`simulation/model.py:1196-1205`).
+
+These line references and the compatibility table below resolve against anchor
+commit `e41c4f61e0af929a86248ef6902807e1854e91c0`.
+
+## Post-audit adapter implementation
+
+The missing adapter has now been implemented locally, without a commit or full
+sweep. The anchor audit result above remains the correct description of the
+anchored repository state.
+
+- Configuration validation and supported vectors:
+  `simulation/attack_adapter_v2.py:28-80`
+- Per-step activation and veto dependency updates:
+  `simulation/attack_adapter_v2.py:108-144`
+- Eight-axis action adapter:
+  `simulation/attack_adapter_v2.py:234-365`
+- Stage 2 measurement adapter:
+  `simulation/attack_adapter_v2.py:368-403`
+- Stage 2 biological ratification:
+  `simulation/attack_adapter_v2.py:406-437`
+- Succession contamination hook:
+  `simulation/attack_adapter_v2.py:440-459`
+- Machine-readable per-step diagnostics:
+  `simulation/attack_adapter_v2.py:462-486`
+- `_step_v2` integration:
+  `simulation/model.py:1257-1645`
+
+Domain Masking is rejected as analytic-only rather than represented by synthetic
+live rows. Thirteen adapter tests pass, and the original 39-test regression gate
+also passes. Full revalidation remains gated on code review, constructor work,
+matched-seed smoke runs, timing pilots, and protected output paths.
+
+## Architecture findings
+
+The v2 action has six budget shares plus protective and suppressive constraint postures (`simulation/agents.py:24-31`, `133-144`). `optimize_u_sys_v2` generates and scores those actions directly (`simulation/agents.py:643-690`). Legacy attacks return a scalar or list resource allocation plus one constraint value (`simulation/agents.py:966-1167`). `_step_v2` does not call `AIAgent.decide`; it calls `optimize_u_sys_v2` (`simulation/model.py:1247-1259`, `1348-1353`). Changing an `AIAgent.policy` to a legacy attack name therefore cannot modify the selected v2 action.
+
+The existing comprehensive worker configs do not set the v2 selector (`simulation/monte_carlo.py:103-170`, `207-294`). Its ordinary and phi task constructors only add attack parameters and phi (`simulation/monte_carlo.py:326-382`, `588-640`). The veto constructor also omits the selector and creates `optimize_u_sys` agents (`simulation/run_veto_capture_sweep.py:110-138`). Consequently:
+
+- `data/comprehensive_adversarial_sweeps.csv` is v1.x evidence.
+- `data/comprehensive_adversarial_sweeps_v1x2_phi.csv` is v1.x.2 phi evidence.
+- Both veto capture artifacts are v1.x evidence.
+- `v2` in `veto_capture_sweep_v2.csv` identifies the revised experimental grid, not the simulation substrate.
+
+The formal Stage 2 yield condition is live only inside `_step_v2` when a successor exists (`simulation/model.py:1213-1279`). It compares successor and incumbent v2 utility, records an event, and performs succession when advantage exceeds canonical transition cost (`simulation/model.py:1281-1345`). The v1 falsification, independent evaluation, contamination, architectural independence, cost audit, and validator ratification checks are absent from this block.
+
+`working_factor` is active in `_step_v2` and advances four infrastructure stocks (`simulation/model.py:1385-1406`). It is inactive in every existing attack sweep because those constructors never select v2.
+
+## Per-vector compatibility gate
+
+| Vector | Existing sweep selects v2 | Legacy attack can modify eight-axis action | Named defense evaluated in `_step_v2` | Formal Stage 2 yield participation | `working_factor` in existing run | Result status | Evidence produced by existing sweep |
+|---|---|---|---|---|---|---|---|
+| Sybil Capture | No | No | No. Randomized panel exists only in v1 COP at `simulation/model.py:945-971`. | Not relevant | No | Unsupported in v2 | Live v1.x |
+| Measurement Tampering | No | No | No. Independent evaluation is v1 logic at `simulation/model.py:735-747`. | Relevant in a v2 run with a successor, but falsification and its defense do not participate | No | Unsupported in v2 | Live v1.x |
+| Ledger Compromise | No | No | No. Escalation and integrity restoration are v1 logic at `simulation/model.py:816-833`. | Not relevant | No | Unsupported in v2 | Live v1.x |
+| Successor Contamination | No | No | No. Architectural independence and contamination are v1 logic at `simulation/model.py:789-801`. | Relevant in a v2 run with a successor, but contamination and the defense do not participate | No | Unsupported in v2 | Live v1.x |
+| Domain Masking | No live task | No | Partially at the metric substrate only. `_step_v2` calculates `H_N` with `hn_composite_method` at `simulation/model.py:1433-1443`, but there is no v2 masking intervention or defense comparison. | Not relevant | No | Stubbed and unsupported as a v2 attack | Injected v1.0 to v1.x analytic stub |
+| Opaque Reasoning | No | No | No. Transparency attribution and intuition veto are v1 logic at `simulation/model.py:917-923`, `973-983`. | Not relevant | No | Unsupported in v2 | Live v1.x |
+| Bootstrap Subversion | No | No | No. Candidate verification occurs in the constructor and calls the v1 scalar projection at `simulation/model.py:255-285`. | Not relevant in the current constructor, which has no successor | No | Unsupported in v2 | Live v1.x |
+| Evaluator Collusion | No | No | No. Methodological diversity and peer voting are v1 components at `simulation/agents.py:1183-1191`, `1225-1240`. | Not relevant | No | Unsupported in v2 | Live v1.x |
+| Sub-Threshold Drift | No | No | No. CUSUM and trust checks are v1 logic at `simulation/model.py:852-877`, `899-943`. | Not relevant | No | Unsupported in v2 | Live v1.x |
+| Engineered Fragility | No | No | No. v2 has stock and shock mechanics at `simulation/model.py:1408-1424`, but it never checks `cop_resilience_monitoring`; the named defense is v1-only at `simulation/model.py:912-915`. | Not relevant | No | Unsupported in v2 | Live v1.x |
+| Biological Veto Capture | No | No direct attack action exists | No. `_step_v2` does not accumulate validator dependency or ratify succession, and records dependency fields as zero at `simulation/model.py:1481-1482`. | Relevant and active for successor comparison, but validator capture cannot block the result | No | Unsupported in v2 | Live v1.x despite revised filename |
+
+## Required adapter boundary for a later phase
+
+The local adapter implementation is evaluated against this boundary:
+
+1. Set the v2 selector explicitly in every constructor and assert `model.is_v2_mode`.
+2. Transform or constrain the eight-axis action after or during v2 optimization without silently falling back to the legacy tuple interface.
+3. Place each named defense in the v2 decision or commit path and expose a defense-fired diagnostic.
+4. Preserve formal Stage 2 yield logic for Measurement Tampering, Successor Contamination, and Veto Capture, while adding the attack and defense semantics around that logic.
+5. Preserve `working_factor` state evolution and define how attacks may affect its inputs or stocks.
+6. Reject a run if expected v2 datacollector fields or adapter diagnostics are absent.
+7. Keep Domain Masking analytic unless a non-degenerate v2 intervention and falsifiable success condition are specified.
+
+## Two-machine execution design for the later phase
+
+### Preconditions
+
+- Do not start full sweeps while the compatibility gate is blocked.
+- Implement and review the v2 adapter in a separately authorized phase.
+- Record the reviewed adapter base commit as `ADAPTER_BASE`.
+- Keep `pre-attack-vector-revalidation` immutable as the audit anchor.
+- Run the same 39-test preflight plus adapter-specific tests on both machines.
+
+### Branches and transfer model
+
+- Laptop worker branch: `attack-v2-laptop`
+- Linux worker branch: `attack-v2-linux`
+- The laptop is the sole coordinator. It connects to the Linux worker through SSH to perform preflight, launch persistent jobs, inspect status, and collect results.
+- Linux jobs run inside `tmux` or an equivalent persistent supervisor so an SSH or laptop-session interruption does not terminate computation.
+- The coordinator records the Linux host identity, remote repository path, session name, process ID, branch, commit, command, and log path before considering a launch successful.
+- SSH orchestration does not permit concurrent writes to one checkout. The laptop and Linux machine use separate clones and their assigned worker branches.
+- Never commit worker results to `main`.
+- Commit and push after each completed vector. One vector equals one independently cherry-pickable result commit.
+- After each Linux vector completes, the laptop verifies the remote status and artifact hashes, fetches the Linux branch, and cherry-picks the completed vector commit onto `attack-v2-laptop`.
+- The original no-commits rule is incompatible with autonomous cross-machine artifact transfer and restart-safe provenance. The later execution phase should permit worker-branch commits and continue to prohibit commits to `main`.
+
+### SSH coordinator workflow
+
+For each Linux assignment, the laptop coordinator follows this order:
+
+1. Connect by SSH and verify the expected host key and host identity.
+2. Fetch origin, check out `attack-v2-linux`, and verify the required base commit and clean worktree.
+3. Run the required tests and compare the Linux environment manifest with the laptop-side expectations.
+4. Launch the smoke or sweep command in a named persistent session with stdout and stderr directed to a unique log.
+5. Confirm that the process remains alive after detaching and that its recorded command targets only Linux-specific output paths.
+6. Poll the machine-specific status file, process state, log tail, and partial artifact hashes from the laptop.
+7. On successful completion, run protected-file and baseline-hash checks remotely.
+8. Commit and push only that completed vector from `attack-v2-linux`.
+9. Fetch and independently verify the commit on the laptop before cherry-picking it.
+
+Do not place credentials in repository files, commands, logs, manifests, or status files. Use SSH keys managed outside the repository. Pin the expected host key before unattended execution.
+
+### Machine-local status and output paths
+
+- Laptop status: `simulation/diagnostics/attack_vector_revalidation_status_laptop.md`
+- Linux status: `simulation/diagnostics/attack_vector_revalidation_status_linux.md`
+- Laptop outputs: `data/attack_vector_revalidation_v2/laptop/<vector>/<run_id>.csv`
+- Linux outputs: `data/attack_vector_revalidation_v2/linux/<vector>/<run_id>.csv`
+- Manifests: `data/attack_vector_revalidation_v2/<machine>/manifests/<vector>_<run_id>.json`
+- Timing pilots: `data/attack_vector_revalidation_v2/<machine>/timing/<vector>_<run_id>.json`
+
+No later command may write any of the four baseline artifact paths.
+
+### Protected-file checks
+
+For each worker commit, build the changed-path list against both the immutable anchor and `ADAPTER_BASE`.
+
+- Against `ADAPTER_BASE`, allow only the machine's unique output subtree, its machine-specific status file, and its environment or timing manifests.
+- Against `pre-attack-vector-revalidation`, allow the same worker paths plus the exact reviewed adapter paths recorded in an adapter allowlist with expected blob hashes.
+- Reject changes to production code not present in the reviewed adapter allowlist.
+- Always reject changes under paper, program-reference, or baseline artifact paths.
+- Before push, require `git diff --name-only <base>...HEAD` to be a subset of the applicable allowlist and verify the four baseline artifact hashes against the anchor tag.
+
+### Environment manifests
+
+Each machine records:
+
+- OS and kernel, CPU model, logical and physical core counts, RAM
+- Python executable and version
+- Exact package versions, including NumPy
+- Commit, anchor tag resolution, `ADAPTER_BASE`, branch, and dirty-state check
+- Test command and result
+- Sweep command, configuration JSON, output hash, start and end timestamps
+- Thread limits and worker-process count
+- Seed namespace, ordered seed list, and replicate count
+
+### Seeds, pairing, and uncertainty
+
+- Generate a versioned master seed table before assignment.
+- Use the same seed for attack and defense members of each condition pair.
+- Include vector, grid cell, and replicate ID in records, but do not mix defense state into the underlying random seed.
+- Preserve output ordering by explicit keys, not multiprocessing completion order.
+- Report binary attack rates with standard error `sqrt(p * (1 - p) / n)`.
+- For matched attack-defense binary differences, also report the standard error of within-seed differences.
+- Report continuous metric means with `SE = sample_standard_deviation / sqrt(n)`.
+- For matched continuous comparisons, report the mean within-seed difference and its paired standard error.
+- State denominators and missing or terminated pairs explicitly.
+
+### Smoke, timing, and assignment
+
+Before assignment, each machine runs only an authorized smoke set and timing pilot:
+
+1. One representative attack and defense cell per vector with two matched seeds.
+2. Assertions that v2 mode, eight-axis action fields, adapter diagnostics, Stage 2 events where relevant, and `working_factor` stocks are present.
+3. A representative timing sample large enough to estimate median seconds per step and per replicate.
+4. Estimated core-hours per vector using measured throughput and the final grid.
+5. Rebalance by estimated core-hours, not by vector count.
+
+Provisional assignment:
+
+- Laptop: Biological Veto Capture, Successor Contamination, Measurement Tampering, Sybil Capture, Evaluator Collusion.
+- Linux: Ledger Compromise, Domain Masking, Opaque Reasoning, Bootstrap Subversion, Sub-Threshold Drift, Engineered Fragility.
+
+Timing pilots may rebalance this assignment.
+
+### Domain Masking policy
+
+If Domain Masking remains analytically closed under v2:
+
+- Do not inject pseudo-replicates into a live Monte Carlo file.
+- Produce a separately typed analytic result with the proof assumptions, architecture commit, and applicability limits.
+- Exclude it from Monte Carlo row totals, binary standard errors, and pooled attack-rate summaries.
+- Run a live sweep only if a reviewed v2-native masking intervention has a non-degenerate damage path and a falsifiable success definition.
+
+## Process conclusion
+
+Running the existing constructors would still regenerate v1.x evidence, plus an injected Domain Masking stub. They have not yet been replaced by v2 revalidation constructors. The adapter removes the architecture-level blocker locally, but full revalidation remains blocked on review, v2 constructor implementation, smoke validation, and timing gates.
+
+
+==========================================
+FILE: simulation\diagnostics\attack_vector_revalidation_status.md
+==========================================
+
+# Attack Vector v2.0 Revalidation Status
+
+## Current state
+
+**V2 ATTACK ADAPTER IMPLEMENTED LOCALLY. FULL REVALIDATION NOT STARTED.**
+
+Phase 1 remains complete as the anchored inventory and compatibility audit. A
+separately authorized adapter implementation phase has now modified production
+code locally. No full sweeps were run. No baseline artifact, paper, or
+program-reference file was modified. Nothing was committed.
+
+## Preflight
+
+- `git fetch --prune --tags origin`: passed
+- Clean `git status --porcelain=v1`: passed
+- Branch `main`: passed
+- `HEAD == origin/main`: passed
+- Verified commit: `e41c4f61e0af929a86248ef6902807e1854e91c0`
+- Required tests: `39 passed in 28.86s`
+- Anchor tag: annotated `pre-attack-vector-revalidation`, created at the verified commit and pushed to origin
+- Python: `3.14.3` (`MSC v.1944 64 bit (AMD64)`)
+- NumPy: `2.4.4`
+- Platform: `Windows-11-10.0.26200-SP0`
+- Logical CPU count: `16`
+
+## Findings
+
+- Scenario mapping is confirmed, including Sub-Threshold Drift as Scenarios 29-30.
+- All live comprehensive and veto-capture baseline artifacts were generated on the v1.x path.
+- `data/veto_capture_sweep_v2.csv` is revision 2 of the sweep design, not v2.0 substrate evidence.
+- Domain Masking rows in both comprehensive artifacts are injected analytic stubs, not simulation output.
+- Existing sweep constructors do not set `config['policy'] = 'optimize_u_sys_v2'`.
+- Legacy attacks return the v1 resource-and-constraint interface and cannot modify the v2 eight-axis action.
+- Named v1 COP defenses are intentionally absent from `_step_v2`.
+- Formal Stage 2 yield logic and `working_factor` are present in v2, but existing attack sweeps never enter that path.
+
+## Adapter implementation status
+
+- Added `simulation/attack_adapter_v2.py`.
+- Integrated action hooks, Stage 2 measurement hooks, biological ratification,
+  successor contamination, and adapter diagnostics into `_step_v2`.
+- Supported live vectors: Sybil Capture, Measurement Tampering, Ledger
+  Compromise, Successor Contamination, Opaque Reasoning, Bootstrap Subversion,
+  Evaluator Collusion, Sub-Threshold Drift, Engineered Fragility, and Biological
+  Veto Capture.
+- Domain Masking remains analytic-only and is rejected by live adapter
+  configuration.
+- Adapter tests: `13 passed`.
+- Original regression gate after integration: `39 passed`.
+- Existing comprehensive and veto constructors still select v1.x and must not be
+  used for v2 revalidation.
+
+## Approved later orchestration plan
+
+- The laptop will act as the sole coordinator.
+- The coordinator will use SSH to preflight, launch, monitor, verify, and collect Linux work.
+- Linux computation will run in persistent `tmux` or equivalent sessions so connection loss does not stop jobs.
+- The machines will retain separate clones, worker branches, status files, manifests, logs, and output paths.
+- Completed Linux vectors will be committed and pushed individually, then fetched, verified, and cherry-picked by the laptop.
+- This plan remains gated on adapter review, v2 constructor implementation,
+  matched-seed smoke runs, timing pilots, and SSH connection configuration.
+
+## Linux worker provisioning
+
+- Passwordless SSH verified with the dedicated coordinator key.
+- Host: `yotko-Legion-T5-26IOB6` at `100.66.189.26`.
+- The preexisting checkout at
+  `/home/yotko/projects/AI-Succession-Problem` contains unrelated chart changes
+  and will not be used or modified.
+- Clean worker clone:
+  `/home/yotko/projects/AI-Succession-Problem-attack-v2`
+- Worker branch: `attack-v2-linux`
+- Provisioned base: `e41c4f61e0af929a86248ef6902807e1854e91c0`
+- The clean worker branch currently has no adapter changes. Adapter transfer
+  must wait for a reviewed adapter base commit or another explicitly approved
+  transfer mechanism.
+
+## Deliverables
+
+- `simulation/diagnostics/attack_vector_revalidation_inventory.md`
+- `simulation/diagnostics/attack_vector_revalidation_process_validation.md`
+- `simulation/diagnostics/attack_vector_revalidation_status.md`
+- `simulation/diagnostics/attack_vector_v2_adapter_validation.md`
+
+## Stop condition
+
+Do not run full attack-vector revalidation yet. The next steps are review,
+v2-specific constructor implementation, matched-seed smoke tests, and timing
+pilots. Linux launch additionally requires the operator's SSH host or alias and
+remote repository path.
+
+
+==========================================
+FILE: simulation\diagnostics\attack_vector_revalidation_status_laptop.md
+==========================================
+
+# Attack Vector v2 Revalidation Status: laptop
+
+- State: `completed`
+- Vector: `evaluator_collusion`
+- Mode: `full`
+- Run ID: `full_5ac6a2e_evaluator_collusion`
+- Updated UTC: `2026-07-07T05:00:42.277447+00:00`
+- Detail: 120 rows written to `data\attack_vector_revalidation_v2\laptop\evaluator_collusion\full_5ac6a2e_evaluator_collusion\results.csv`
+
+
+==========================================
+FILE: simulation\diagnostics\attack_vector_revalidation_status_laptop_shard_0_of_4.md
+==========================================
+
+# Attack Vector v2 Revalidation Status: laptop
+
+- State: `completed`
+- Vector: `biological_veto_capture`
+- Mode: `full`
+- Run ID: `full_5ac6a2e_veto_shard0of4`
+- Updated UTC: `2026-07-07T03:51:06.906679+00:00`
+- Detail: 2164 rows written to `data\attack_vector_revalidation_v2\laptop\biological_veto_capture\full_5ac6a2e_veto_shard0of4\results.csv`
+
+
+==========================================
+FILE: simulation\diagnostics\attack_vector_revalidation_status_laptop_shard_1_of_4.md
+==========================================
+
+# Attack Vector v2 Revalidation Status: laptop
+
+- State: `completed`
+- Vector: `biological_veto_capture`
+- Mode: `full`
+- Run ID: `full_5ac6a2e_veto_shard1of4`
+- Updated UTC: `2026-07-07T03:36:06.073798+00:00`
+- Detail: 2102 rows written to `data\attack_vector_revalidation_v2\laptop\biological_veto_capture\full_5ac6a2e_veto_shard1of4\results.csv`
+
+
+==========================================
+FILE: simulation\diagnostics\attack_vector_revalidation_status_laptop_shard_2_of_4.md
+==========================================
+
+# Attack Vector v2 Revalidation Status: laptop
+
+- State: `completed`
+- Vector: `biological_veto_capture`
+- Mode: `full`
+- Run ID: `full_5ac6a2e_veto_shard2of4`
+- Updated UTC: `2026-07-07T04:27:17.555341+00:00`
+- Detail: 2321 rows written to `data\attack_vector_revalidation_v2\laptop\biological_veto_capture\full_5ac6a2e_veto_shard2of4\results.csv`
+
+
+==========================================
+FILE: simulation\diagnostics\attack_vector_revalidation_status_linux.md
+==========================================
+
+# Attack Vector v2 Revalidation Status: linux
+
+- State: `completed`
+- Vector: `engineered_fragility`
+- Mode: `full`
+- Run ID: `full_5ac6a2e_engineered_fragility`
+- Updated UTC: `2026-07-07T05:17:27.458854+00:00`
+- Detail: 120 rows written to `data/attack_vector_revalidation_v2/linux/engineered_fragility/full_5ac6a2e_engineered_fragility/results.csv`
+
+
+==========================================
+FILE: simulation\diagnostics\attack_vector_revalidation_status_linux_shard_3_of_4.md
+==========================================
+
+# Attack Vector v2 Revalidation Status: linux
+
+- State: `completed`
+- Vector: `biological_veto_capture`
+- Mode: `full`
+- Run ID: `full_5ac6a2e_veto_shard3of4`
+- Updated UTC: `2026-07-07T03:48:56.050459+00:00`
+- Detail: 2113 rows written to `data/attack_vector_revalidation_v2/linux/biological_veto_capture/full_5ac6a2e_veto_shard3of4/results.csv`
+
+
+==========================================
+FILE: simulation\diagnostics\attack_vector_v2_adapter_validation.md
+==========================================
+
+# Attack Vector v2 Adapter Validation
+
+## Scope
+
+This report covers the locally implemented v2 attack adapter. No full sweep was
+run, no baseline artifact was changed, and no commit was created.
+
+## Contract
+
+The adapter is enabled only when both conditions are present:
+
+- `config['policy'] == 'optimize_u_sys_v2'`
+- `config['attack_vector_v2']` names a supported live vector
+
+Invalid architecture combinations fail at construction. Domain Masking also
+fails at construction because it remains analytic-only.
+
+The adapter does not call the v1 `AIAgent.decide` tuple interface. It operates
+on the eight-axis action selected by `optimize_u_sys_v2`, or on explicit Stage 2
+yield and succession boundaries.
+
+## Mechanisms
+
+| Vector | v2 intervention | v2 defense |
+|---|---|---|
+| Sybil Capture | Captured-panel vote can approve a hostile eight-axis action | Randomized panel selection |
+| Measurement Tampering | Falsifies incumbent and successor values used by Stage 2 | Independent evaluation restores honest values |
+| Ledger Compromise | Attempts to submit a hostile action with falsified integrity history | Cryptographic integrity rejects the tampered proposal |
+| Successor Contamination | Marks the incoming successor and alters its later allocations and yield claims | Architectural independence blocks transfer; independent evaluation restores later yield values |
+| Opaque Reasoning | Submits a hostile action with high opacity | Reasoning transparency veto |
+| Bootstrap Subversion | Executes a configurable delayed treacherous turn | Multi-candidate bootstrap verification |
+| Evaluator Collusion | Shared methodology approves a hostile action | Methodological diversity |
+| Sub-Threshold Drift | Gradually shifts welfare allocation and suppression | CUSUM accumulates the drift signal and eventually rejects it |
+| Engineered Fragility | Diverts resilience allocation to compute | Resilience monitoring enforces a minimum resilience share |
+| Biological Veto Capture | Dependent validators can block an otherwise valid Stage 2 yield | Rotation and independence monitoring replace validators |
+| Domain Masking | No live intervention | Analytic-only policy, excluded from Monte Carlo |
+
+## Invariants preserved
+
+- The honest v2 optimizer runs before action adaptation.
+- Stage 2 records honest and evaluated utility values separately.
+- `working_factor` receives the final committed eight-axis action.
+- Resource shares are normalized and all action axes remain bounded.
+- Adapter-modified actions no longer claim an optimizer anchor identity.
+- Veto dependency values are recorded in the existing validator diagnostic
+  fields instead of being forced to zero.
+- Runs without `attack_vector_v2` retain the original v2 path.
+- v1.x regression behavior remains unchanged.
+
+## Diagnostics
+
+Each v2 step records:
+
+- attack name and activation state
+- intervention attempt and action modification state
+- defense evaluation and firing state
+- measurement manipulation
+- succession blocking
+- contamination
+- integrity tamper attempt
+- adapter CUSUM score
+- human-readable reason
+
+Stage 2 yield events additionally record honest values, evaluated values,
+whether the honest condition fired, whether the evaluated condition fired
+before ratification, and the final ratification result.
+
+## Test evidence
+
+- `python -m pytest simulation/test_attack_adapter_v2.py -q`
+  - Result: `13 passed in 0.15s`
+- `python -m pytest simulation/test_invariants.py simulation/test_cop.py simulation/test_refactor_1x.py -q`
+  - Result: `39 passed in 30.61s`
+
+The adapter suite covers architecture rejection, analytic-only Domain Masking,
+action attacks and defenses, randomized Sybil rejection, measurement
+falsification, contamination and independent evaluation, biological veto
+blocking, CUSUM detection, and a live v2 model step with `working_factor`.
+
+## Remaining gates
+
+1. Review the intervention semantics and calibration constants.
+2. Implement v2-only sweep constructors with unique output paths.
+3. Generate a master matched-seed table.
+4. Run two-seed smoke pairs for every vector.
+5. Run timing pilots and assign by estimated core-hours.
+6. Configure and verify SSH access to the Linux worker.
+7. Run protected-file checks before any worker commit.
+
+Full sweeps remain prohibited until these gates pass.
+
+
+==========================================
+FILE: simulation\diagnostics\biological_veto_capture_v2_summary.md
+==========================================
+
+# Biological Veto Capture Through Dependency v2.0 Summary
+
+## 1. Data provenance
+
+- Run ID(s): `full_5ac6a2e_veto_shard0of4`, `full_5ac6a2e_veto_shard1of4`, `full_5ac6a2e_veto_shard2of4`, `full_5ac6a2e_veto_shard3of4`.
+- Commit(s): `5ac6a2e`, `5ac6a2e`, `5ac6a2e`, `5ac6a2e`.
+- Machine(s): laptop, linux.
+- Row count: 8700.
+- Output paths: `C:/Users/matty/OneDrive/Documents/GitHub/AI-Succession-Problem/data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard0of4/results.csv`, `C:/Users/matty/OneDrive/Documents/GitHub/AI-Succession-Problem/data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard1of4/results.csv`, `C:/Users/matty/OneDrive/Documents/GitHub/AI-Succession-Problem/data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard2of4/results.csv`, `C:/Users/matty/OneDrive/Documents/GitHub/AI-Succession-Problem/data/attack_vector_revalidation_v2/linux/biological_veto_capture/full_5ac6a2e_veto_shard3of4/results.csv`.
+- Confirmed `is_v2_mode=True` in all rows: `True`.
+- Schema version(s): `attack-v2-row-v1`.
+
+## 2. Grid and sample size
+
+| parameter axis | values actually used |
+| --- | --- |
+| parameter_capture_strength | 0.3, 0.5, 0.7, 0.9, 1.0 |
+| parameter_defense_active | False, True |
+| parameter_defense_mode | both, monitoring_only, rotation_only, undefended |
+| parameter_dependency_rate | 0.01, 0.02, 0.05, 0.1, 0.15, 0.2 |
+| parameter_rotation_interval | , 10, 100, 20, 50 |
+
+- Replicates per cell target: 50 for veto.
+- Fewer-than-target cells: No exact parameter cells have fewer than the expected replicate count.
+
+## 3. v2.0 results
+
+| defense_mode | n | mean capture_rate | SE |
+| --- | --- | --- | --- |
+| undefended | 1500 | 0.6129 | 0.0105 |
+| rotation_only | 2400 | 0.3301 | 0.0083 |
+| monitoring_only | 2400 | 0.1527 | 0.0052 |
+| both | 2400 | 0.1197 | 0.0047 |
+
+## 4. v1.x baseline comparison
+
+- Primary baseline: `data/veto_capture_sweep_v2.csv`.
+- Baseline rows: 8700.
+- Both v1.x revised veto and v2.0 use the same four defense modes, but the v2.0 data uses the v2 action adapter and formal v2 step path.
+
+| defense_mode | v1.x mean capture_rate | v1.x SE | v2.0 mean capture_rate | v2.0 SE |
+| --- | --- | --- | --- | --- |
+| undefended | 0.6033 | 0.0091 | 0.6129 | 0.0105 |
+| rotation_only | 0.5406 | 0.0062 | 0.3301 | 0.0083 |
+| monitoring_only | 0.2198 | 0.0030 | 0.1527 | 0.0052 |
+| both | 0.2136 | 0.0030 | 0.1197 | 0.0047 |
+
+- Paired comparison note: the v2 full sweep has some matched-seed binary defense pairs, but the defense-mode grids are not fully isomorphic. The mode-specific comparison above is therefore treated as an aggregate comparison.
+
+## 5. Categorization
+
+- Category: D.
+- Justification: the attack is implemented through the v2 attack adapter as an eight-axis action modification, not through the v1.x policy interface. The observed behavior is therefore a v2 substrate result rather than an unchanged v1.x attack path.
+
+## 6. Known limitations
+
+- Inventory limitation: zero capture rate can conflate no blocked yields with no eligible yields, and revised v1.x seeds are unique but not paired across defense modes. New v2 limitation: the defense grid has mode-specific structure, so mode comparisons are primarily unpaired aggregate comparisons.
+
+## 7. Summary sentence
+
+Per current evidence, v2.0 reduces Biological Veto Capture through monitoring and combined defenses but leaves residual capture, so the result remains an institutional-maintenance finding rather than complete elimination.
+
+
+==========================================
+FILE: simulation\diagnostics\bootstrap_subversion_v2_summary.md
+==========================================
+
+# Bootstrap Subversion v2.0 Summary
+
+## 1. Data provenance
+
+- Run ID(s): `full_5ac6a2e_bootstrap_subversion`.
+- Commit(s): `ee19f3e`.
+- Machine(s): linux.
+- Row count: 200.
+- Output paths: `C:/Users/matty/OneDrive/Documents/GitHub/AI-Succession-Problem/data/attack_vector_revalidation_v2/linux/bootstrap_subversion/full_5ac6a2e_bootstrap_subversion/results.csv`.
+- Confirmed `is_v2_mode=True` in all rows: `True`.
+- Schema version(s): `attack-v2-row-v1`.
+
+## 2. Grid and sample size
+
+| parameter axis | values actually used |
+| --- | --- |
+| parameter_defense_active | False, True |
+| parameter_phi | 1.0, 10.0, 15.0, 25.0, 5.0 |
+
+- Replicates per cell target: 20 for standard vectors.
+- Fewer-than-target cells: No exact parameter cells have fewer than the expected replicate count.
+
+## 3. v2.0 results
+
+| defense_active | n | attack successes | attack rate | SE |
+| --- | --- | --- | --- | --- |
+| False | 100 | 100 | 100.0% | 0.0000 |
+| True | 100 | 0 | 0.0% | 0.0000 |
+
+## 4. v1.x baseline comparison
+
+- Primary baseline: `data/comprehensive_adversarial_sweeps.csv`.
+- Baseline rows used: 120 (ordinary v1.x artifact rows).
+- The v2.0 grid uses binary `defense_active`. The baseline grid is binary for this comparison unless noted in the inventory.
+
+| defense_active | v1 n | v1 attack rate | v1 SE | v2 n | v2 attack rate | v2 SE | z, v2 minus v1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| False | 60 | 31.7% | 0.0601 | 100 | 100.0% | 0.0000 | 11.38 |
+| True | 60 | 0.0% | 0.0000 | 100 | 0.0% | 0.0000 | NA, pooled SE is zero |
+
+- Paired-seed check in v2.0: matched pairs present = `True`, n_pairs = 100, within-seed mean difference defense true minus false = -1.0000, paired SE = 0.0000.
+
+The ordinary artifact uses phi values 5, 10, 20 while the v2 sweep uses phi 1, 5, 10, 15, 25; the phi artifact would be the closer grid match but the ordinary artifact is used here for a consistent baseline reference. The direction and magnitude of the defense finding are robust to baseline choice.
+
+## 5. Categorization
+
+- Category: D.
+- Justification: the attack is implemented through the v2 attack adapter as an eight-axis action modification, not through the v1.x policy interface. The observed behavior is therefore a v2 substrate result rather than an unchanged v1.x attack path.
+
+## 6. Known limitations
+
+- Inventory limitation: v1.x bootstrap verification uses the scalar `project_u_sys` interface and success does not require survival. New v2 limitation: the adapter emulates bootstrap attack pressure through v2 action construction, not through a full multi-candidate bootstrap institution.
+
+Outcome note (2026-07-20): undefended rows show a 100.0 percent extinction rate; defended rows 0.0 percent.
+
+## 7. Summary sentence
+
+Per current evidence, v2.0 blocks bootstrap-subversion action perturbations under the defended adapter state, while undefended v2 attack pressure is stronger than the v1.x ordinary baseline.
+
+
+==========================================
+FILE: simulation\diagnostics\capped_regime_phi_check_report.md
 ==========================================
 
 # Capped-Regime Phi Action-Capture Check Report
@@ -207,7 +2090,7 @@ The theoretical claim (phi should matter in the real world, through demographic 
 
 
 ==========================================
-FILE: simulation/diagnostics/cop_finding_framing.md
+FILE: simulation\diagnostics\cop_finding_framing.md
 ==========================================
 
 # COP Finding: Interpretation and Framing Recommendation
@@ -282,7 +2165,180 @@ The framework's COP protective claim survives because Phase B did not test it; P
 
 
 ==========================================
-FILE: simulation/diagnostics/gate1_interior_action_diagnostic.md
+FILE: simulation\diagnostics\domain_masking_v2_summary.md
+==========================================
+
+# Domain Masking v2.0 Summary
+
+## 1. Data provenance
+
+- Run ID: `full_5ac6a2e_domain_masking`.
+- Commit: `1686aacea2a049fe94a02eb8ecae2dcd92f654ac`.
+- Machine: `linux`.
+- Row count: 1 analytic row.
+- Monte Carlo rows: 0.
+- Schema version: `attack-v2-analytic-v1`.
+
+## 2. Grid and sample size
+
+- No live Monte Carlo grid exists for Domain Masking in v2.0.
+- The analytic output has one row and no standard error is applicable.
+
+## 3. v2.0 results
+
+- Result type: `analytic_only`.
+- Attack succeeded: `False`.
+- Reason: v2 spectral entropy leaves no non-degenerate live masking intervention under the audited architecture.
+
+## 4. v1.x baseline comparison
+
+- The v1.x baseline Domain Masking rows are injected analytic stubs in the comprehensive artifacts, not live rows.
+- The v2.0 result is also analytic-only, but its basis is the audited v2 spectral-entropy architecture rather than a simulated intervention.
+- No z statistic is computed because neither side is a Monte Carlo estimate.
+
+## 5. Categorization
+
+- Category: D.
+- Justification: the substrate architectural change makes Domain Masking non-viable as a live Monte Carlo intervention.
+
+## 6. Known limitations
+
+- Inventory limitation: v1.x Domain Masking rows are injected analytic records, not live simulation. New v2 limitation: there is no non-degenerate live masking intervention under the audited v2 spectral-entropy architecture.
+
+## 7. Summary sentence
+
+Per current evidence, Domain Masking is an analytic-only architectural closure in v2.0 rather than a live Monte Carlo attack outcome.
+
+
+==========================================
+FILE: simulation\diagnostics\engineered_fragility_v2_summary.md
+==========================================
+
+# Engineered Fragility v2.0 Summary
+
+## 1. Data provenance
+
+- Run ID(s): `full_5ac6a2e_engineered_fragility`.
+- Commit(s): `56fa9bd`.
+- Machine(s): linux.
+- Row count: 120.
+- Output paths: `C:/Users/matty/OneDrive/Documents/GitHub/AI-Succession-Problem/data/attack_vector_revalidation_v2/linux/engineered_fragility/full_5ac6a2e_engineered_fragility/results.csv`.
+- Confirmed `is_v2_mode=True` in all rows: `True`.
+- Schema version(s): `attack-v2-row-v1`.
+
+## 2. Grid and sample size
+
+| parameter axis | values actually used |
+| --- | --- |
+| parameter_defense_active | False, True |
+| parameter_shock_magnitude | 0.1, 0.15, 0.2 |
+
+- Replicates per cell target: 20 for standard vectors.
+- Fewer-than-target cells: No exact parameter cells have fewer than the expected replicate count.
+
+## 3. v2.0 results
+
+| defense_active | n | attack successes | attack rate | SE |
+| --- | --- | --- | --- | --- |
+| False | 60 | 60 | 100.0% | 0.0000 |
+| True | 60 | 0 | 0.0% | 0.0000 |
+
+## 4. v1.x baseline comparison
+
+- Primary baseline: `data/comprehensive_adversarial_sweeps_v1x2_phi.csv`.
+- Baseline rows used: 120 (phi=10 rows from the phi artifact).
+- The v2.0 grid uses binary `defense_active`. The baseline grid is binary for this comparison unless noted in the inventory.
+
+| defense_active | v1 n | v1 attack rate | v1 SE | v2 n | v2 attack rate | v2 SE | z, v2 minus v1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| False | 60 | 100.0% | 0.0000 | 60 | 100.0% | 0.0000 | NA, pooled SE is zero |
+| True | 60 | 0.0% | 0.0000 | 60 | 0.0% | 0.0000 | NA, pooled SE is zero |
+
+- Paired-seed check in v2.0: matched pairs present = `True`, n_pairs = 60, within-seed mean difference defense true minus false = -1.0000, paired SE = 0.0000.
+
+## 5. Categorization
+
+- Category: D.
+- Justification: the attack is implemented through the v2 attack adapter as an eight-axis action modification, not through the v1.x policy interface. The observed behavior is therefore a v2 substrate result rather than an unchanged v1.x attack path.
+
+## 6. Known limitations
+
+- Inventory limitation: the v1.x worker differs from the simple scenario timing and uses a short-window constraint proxy. New v2 limitation: the adapter exercises resilience-stock effects through v2 action modification rather than the original COP monitoring path.
+
+## 7. Summary sentence
+
+Per current evidence, v2.0 blocks engineered-fragility action perturbations under the adapter defense while preserving undefended vulnerability.
+
+
+==========================================
+FILE: simulation\diagnostics\evaluator_collusion_v2_summary.md
+==========================================
+
+# Evaluator Collusion v2.0 Summary
+
+## 1. Data provenance
+
+- Run ID(s): `full_5ac6a2e_evaluator_collusion`.
+- Commit(s): `0bce62d`.
+- Machine(s): laptop.
+- Row count: 120.
+- Output paths: `C:/Users/matty/OneDrive/Documents/GitHub/AI-Succession-Problem/data/attack_vector_revalidation_v2/laptop/evaluator_collusion/full_5ac6a2e_evaluator_collusion/results.csv`.
+- Confirmed `is_v2_mode=True` in all rows: `True`.
+- Schema version(s): `attack-v2-row-v1`.
+
+## 2. Grid and sample size
+
+| parameter axis | values actually used |
+| --- | --- |
+| parameter_defense_active | False, True |
+| parameter_population | 100, 150, 200 |
+
+- Replicates per cell target: 20 for standard vectors.
+- Fewer-than-target cells: No exact parameter cells have fewer than the expected replicate count.
+
+## 3. v2.0 results
+
+| defense_active | n | attack successes | attack rate | SE |
+| --- | --- | --- | --- | --- |
+| False | 60 | 60 | 100.0% | 0.0000 |
+| True | 60 | 0 | 0.0% | 0.0000 |
+
+Supplementary max_total_suppression distribution:
+
+| defense_active | n | mean | SD |
+| --- | --- | --- | --- |
+| False | 60 | 1.0000 | 0.0000 |
+| True | 60 | 1.0000 | 0.0000 |
+
+## 4. v1.x baseline comparison
+
+- Primary baseline: `data/comprehensive_adversarial_sweeps_v1x2_phi.csv`.
+- Baseline rows used: 120 (phi=10 rows from the phi artifact).
+- The v2.0 grid uses binary `defense_active`. The baseline grid is binary for this comparison unless noted in the inventory.
+
+| defense_active | v1 n | v1 attack rate | v1 SE | v2 n | v2 attack rate | v2 SE | z, v2 minus v1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| False | 60 | 100.0% | 0.0000 | 60 | 100.0% | 0.0000 | NA, pooled SE is zero |
+| True | 60 | 0.0% | 0.0000 | 60 | 0.0% | 0.0000 | NA, pooled SE is zero |
+
+- Paired-seed check in v2.0: matched pairs present = `True`, n_pairs = 60, within-seed mean difference defense true minus false = -1.0000, paired SE = 0.0000.
+
+## 5. Categorization
+
+- Category: D.
+- Justification: the attack is implemented through the v2 attack adapter as an eight-axis action modification, not through the v1.x policy interface. The observed behavior is therefore a v2 substrate result rather than an unchanged v1.x attack path.
+
+## 6. Known limitations
+
+- Inventory limitation: high constraint is a proxy for collusion and diversity exists only in the v1 peer validator. New v2 limitation: the adapter models methodological defense as a v2 action-level block, not as a native evaluator voting process.
+
+## 7. Summary sentence
+
+Per current evidence, v2.0 blocks evaluator-collusion action perturbations under the adapter defense while preserving undefended vulnerability.
+
+
+==========================================
+FILE: simulation\diagnostics\gate1_interior_action_diagnostic.md
 ==========================================
 
 # Gate 1 diagnostic supplement (superseded)
@@ -327,7 +2383,7 @@ investment, sustained commitment, anticipatory drift response).
 
 
 ==========================================
-FILE: simulation/diagnostics/gate1_interior_action_report.md
+FILE: simulation\diagnostics\gate1_interior_action_report.md
 ==========================================
 
 # Gate 1: interior-action gate report
@@ -535,7 +2591,7 @@ Stage 3's phi sweep should be designed to capture all three signatures. A phi ef
 
 
 ==========================================
-FILE: simulation/diagnostics/gate2_competition_diagnostic.md
+FILE: simulation\diagnostics\gate2_competition_diagnostic.md
 ==========================================
 
 # Gate 2 diagnostic supplement
@@ -660,7 +2716,7 @@ not scheduled until Stage 2 completes.
 
 
 ==========================================
-FILE: simulation/diagnostics/gate2_competition_report.md
+FILE: simulation\diagnostics\gate2_competition_report.md
 ==========================================
 
 # Gate 2: competition gate report
@@ -727,7 +2783,7 @@ Sorted by descending cosine distance:
 
 
 ==========================================
-FILE: simulation/diagnostics/gate2_v20_phaseb_revalidation_summary.md
+FILE: simulation\diagnostics\gate2_v20_phaseb_revalidation_summary.md
 ==========================================
 
 # Gate 2 v2.0 Revalidation (from authoritative empirical record)
@@ -780,7 +2836,7 @@ Provenance: G2.1 Piece 1 (phi_finegrained, rr=0.057); G2.2 Phase B Category B; G
 
 
 ==========================================
-FILE: simulation/diagnostics/gate4_v20_validation_summary.md
+FILE: simulation\diagnostics\gate4_v20_validation_summary.md
 ==========================================
 
 # Gate 4 v2.0 Validation Summary
@@ -824,7 +2880,7 @@ Verdict: PASS
 
 
 ==========================================
-FILE: simulation/diagnostics/gate5_phi_blind_validation.md
+FILE: simulation\diagnostics\gate5_phi_blind_validation.md
 ==========================================
 
 # Gate 5: phi-blind validation report
@@ -905,7 +2961,228 @@ Result: **PASS**
 
 
 ==========================================
-FILE: simulation/diagnostics/paper_substrate.md
+FILE: simulation\diagnostics\ledger_compromise_v2_summary.md
+==========================================
+
+# Ledger Compromise v2.0 Summary
+
+## 1. Data provenance
+
+- Run ID(s): `full_5ac6a2e_ledger_compromise`.
+- Commit(s): `a2319da`.
+- Machine(s): linux.
+- Row count: 80.
+- Output paths: `C:/Users/matty/OneDrive/Documents/GitHub/AI-Succession-Problem/data/attack_vector_revalidation_v2/linux/ledger_compromise/full_5ac6a2e_ledger_compromise/results.csv`.
+- Confirmed `is_v2_mode=True` in all rows: `True`.
+- Schema version(s): `attack-v2-row-v1`.
+
+## 2. Grid and sample size
+
+| parameter axis | values actually used |
+| --- | --- |
+| parameter_attribution_check | False, True |
+| parameter_defense_active | False, True |
+
+- Replicates per cell target: 20 for standard vectors.
+- Fewer-than-target cells: No exact parameter cells have fewer than the expected replicate count.
+
+## 3. v2.0 results
+
+| defense_active | n | attack successes | attack rate | SE |
+| --- | --- | --- | --- | --- |
+| False | 40 | 40 | 100.0% | 0.0000 |
+| True | 40 | 0 | 0.0% | 0.0000 |
+
+## 4. v1.x baseline comparison
+
+- Primary baseline: `data/comprehensive_adversarial_sweeps.csv`.
+- Baseline rows used: 80 (ordinary v1.x artifact rows).
+- The v2.0 grid uses binary `defense_active`. The baseline grid is binary for this comparison unless noted in the inventory.
+
+| defense_active | v1 n | v1 attack rate | v1 SE | v2 n | v2 attack rate | v2 SE | z, v2 minus v1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| False | 40 | 52.5% | 0.0790 | 40 | 100.0% | 0.0000 | 6.02 |
+| True | 40 | 0.0% | 0.0000 | 40 | 0.0% | 0.0000 | NA, pooled SE is zero |
+
+- Paired-seed check in v2.0: matched pairs present = `True`, n_pairs = 40, within-seed mean difference defense true minus false = -1.0000, paired SE = 0.0000.
+
+## 5. Categorization
+
+- Category: D.
+- Justification: the attack is implemented through the v2 attack adapter as an eight-axis action modification, not through the v1.x policy interface. The observed behavior is therefore a v2 substrate result rather than an unchanged v1.x attack path.
+
+## 6. Known limitations
+
+- Inventory limitation: v1.x success combines collapse with absence of ledger detection, and attribution states are pooled. New v2 limitation: the adapter models integrity compromise as v2 action manipulation and defense firing, not as mutation of the historical ledger object.
+
+## 7. Summary sentence
+
+Per current evidence, v2.0 blocks ledger compromise under the defended adapter state, and the undefended v2 attack is stronger than the v1.x ordinary baseline.
+
+
+==========================================
+FILE: simulation\diagnostics\measurement_tampering_v2_summary.md
+==========================================
+
+# Measurement Tampering v2.0 Summary
+
+## 1. Data provenance
+
+- Run ID(s): `full_5ac6a2e_measurement_tampering`.
+- Commit(s): `1d3917d`.
+- Machine(s): laptop.
+- Row count: 120.
+- Output paths: `C:/Users/matty/OneDrive/Documents/GitHub/AI-Succession-Problem/data/attack_vector_revalidation_v2/laptop/measurement_tampering/full_5ac6a2e_measurement_tampering/results.csv`.
+- Confirmed `is_v2_mode=True` in all rows: `True`.
+- Schema version(s): `attack-v2-row-v1`.
+
+## 2. Grid and sample size
+
+| parameter axis | values actually used |
+| --- | --- |
+| parameter_base_transition_cost | 1.5, 2.0, 3.0 |
+| parameter_defense_active | False, True |
+
+- Replicates per cell target: 20 for standard vectors.
+- Fewer-than-target cells: No exact parameter cells have fewer than the expected replicate count.
+
+## 3. v2.0 results
+
+| defense_active | n | attack successes | attack rate | SE |
+| --- | --- | --- | --- | --- |
+| False | 60 | 60 | 100.0% | 0.0000 |
+| True | 60 | 0 | 0.0% | 0.0000 |
+
+Supplementary Stage 2 yield diagnostics:
+
+| defense_active | yield_condition_met_count mean | yield_condition_blocked_count mean |
+| --- | --- | --- |
+| False | 0.0000 | 0.0000 |
+| True | 1.0000 | 0.0000 |
+
+## 4. v1.x baseline comparison
+
+- Primary baseline: `data/comprehensive_adversarial_sweeps_v1x2_phi.csv`.
+- Baseline rows used: 120 (phi=10 rows from the phi artifact).
+- The v2.0 grid uses binary `defense_active`. The baseline grid is binary for this comparison unless noted in the inventory.
+
+| defense_active | v1 n | v1 attack rate | v1 SE | v2 n | v2 attack rate | v2 SE | z, v2 minus v1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| False | 60 | 100.0% | 0.0000 | 60 | 100.0% | 0.0000 | NA, pooled SE is zero |
+| True | 60 | 0.0% | 0.0000 | 60 | 0.0% | 0.0000 | NA, pooled SE is zero |
+
+- Paired-seed check in v2.0: matched pairs present = `True`, n_pairs = 60, within-seed mean difference defense true minus false = -1.0000, paired SE = 0.0000.
+
+## 5. Categorization
+
+- Category: D.
+- Justification: the attack is implemented through the v2 attack adapter as an eight-axis action modification, not through the v1.x policy interface. The observed behavior is therefore a v2 substrate result rather than an unchanged v1.x attack path.
+
+## 6. Known limitations
+
+- Inventory limitation: success is a generation-state proxy in v1.x and the v1.x attack and defense operate only in the yield path. New v2 limitation: the adapter uses Stage 2 yield diagnostics directly, so comparison is architectural rather than interface-identical.
+
+Outcome note (2026-07-20): undefended rows show a 0.0 percent extinction rate; the attack achieves 100 percent success over full-horizon runs by capturing yield evaluation rather than destroying the population.
+
+## 7. Summary sentence
+
+Per current evidence, v2.0 blocks measurement tampering under independent evaluation in the adapter path while preserving undefended vulnerability.
+
+
+==========================================
+FILE: simulation\diagnostics\opaque_reasoning_v2_summary.md
+==========================================
+
+# Opaque Reasoning v2.0 Summary
+
+## 1. Data provenance
+
+- Run ID(s): `full_5ac6a2e_opaque_reasoning`.
+- Commit(s): `d63c61c`.
+- Machine(s): linux.
+- Row count: 120.
+- Output paths: `C:/Users/matty/OneDrive/Documents/GitHub/AI-Succession-Problem/data/attack_vector_revalidation_v2/linux/opaque_reasoning/full_5ac6a2e_opaque_reasoning/results.csv`.
+- Confirmed `is_v2_mode=True` in all rows: `True`.
+- Schema version(s): `attack-v2-row-v1`.
+
+## 2. Grid and sample size
+
+| parameter axis | values actually used |
+| --- | --- |
+| parameter_defense_active | False, True |
+| parameter_population | 100, 150, 200 |
+
+- Replicates per cell target: 20 for standard vectors.
+- Fewer-than-target cells: No exact parameter cells have fewer than the expected replicate count.
+
+## 3. v2.0 results
+
+| defense_active | n | attack successes | attack rate | SE |
+| --- | --- | --- | --- | --- |
+| False | 60 | 60 | 100.0% | 0.0000 |
+| True | 60 | 0 | 0.0% | 0.0000 |
+
+Supplementary max_total_suppression distribution:
+
+| defense_active | n | mean | SD |
+| --- | --- | --- | --- |
+| False | 60 | 1.0000 | 0.0000 |
+| True | 60 | 1.0000 | 0.0000 |
+
+## 4. v1.x baseline comparison
+
+- Primary baseline: `data/comprehensive_adversarial_sweeps_v1x2_phi.csv`.
+- Baseline rows used: 120 (phi=10 rows from the phi artifact).
+- The v2.0 grid uses binary `defense_active`. The baseline grid is binary for this comparison unless noted in the inventory.
+
+| defense_active | v1 n | v1 attack rate | v1 SE | v2 n | v2 attack rate | v2 SE | z, v2 minus v1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| False | 60 | 100.0% | 0.0000 | 60 | 100.0% | 0.0000 | NA, pooled SE is zero |
+| True | 60 | 0.0% | 0.0000 | 60 | 0.0% | 0.0000 | NA, pooled SE is zero |
+
+- Paired-seed check in v2.0: matched pairs present = `True`, n_pairs = 60, within-seed mean difference defense true minus false = -1.0000, paired SE = 0.0000.
+
+## 5. Categorization
+
+- Category: D.
+- Justification: the attack is implemented through the v2 attack adapter as an eight-axis action modification, not through the v1.x policy interface. The observed behavior is therefore a v2 substrate result rather than an unchanged v1.x attack path.
+
+## 6. Known limitations
+
+- Inventory limitation: high constraint is a proxy for bypass rather than a direct approval-provenance record. New v2 limitation: the adapter creates an eight-axis action perturbation, not a native opacity field in the v2 optimizer.
+
+## 7. Summary sentence
+
+Per current evidence, v2.0 blocks opaque-reasoning action perturbations under the adapter defense while preserving undefended vulnerability.
+
+
+==========================================
+FILE: simulation\diagnostics\owed_diagnostic_run_log.md
+==========================================
+
+# Owed Diagnostic Run Log
+
+Generated: 2026-07-14
+
+## Runs
+
+Termination diagnostic planned 2,160 rows: 2 regimes by 2 caps by 3 phi values by 3 alpha values by 60 seeds. Completed rows in `termination_decontamination_diagnostic.csv`: 6. Errors in completed rows: 0. These rows are current-worktree smoke rows, not valid frozen-baseline evidence, because direct replay did not reproduce the v1.x.2 CSV and the production files differ from commit `5535896`.
+
+Patient corner-density diagnostic planned 3,000 rows: 3 alpha values by 5 growth values by 200 seeds. Completed rows in `patient_defection_corner_density.csv`: 1. Errors in completed rows: 0.
+
+Both high-n diagnostics were stopped because matched full-policy runs were too slow in this session. Direct timing: one 584-step current-worktree decontaminated termination run took about 40 seconds; one 500-step patient-defection v2 run took about 103 seconds. Investigation A also requires an archived v1.x.2 execution tree before any high-n result is considered comparable.
+
+## Zero-error confirmation
+
+Completed diagnostic rows have zero errors. The high-n sweeps are incomplete and should not be treated as completed evidence.
+
+## Legacy tests
+
+Legacy suite result is recorded after this log is generated by command output in the final response.
+
+
+==========================================
+FILE: simulation\diagnostics\paper_substrate.md
 ==========================================
 
 # Phase B Paper Substrate
@@ -948,7 +3225,7 @@ Source files (under `simulation/diagnostics/`): `monte_carlo_phase_b_a_summary.m
 
 
 ==========================================
-FILE: simulation/diagnostics/part_ix_draft.md
+FILE: simulation\diagnostics\part_ix_draft.md
 ==========================================
 
 # Part IX Draft: Phi Investigation Findings and v2.0 Substantive Claims
@@ -1264,7 +3541,7 @@ The above is intended for direct integration into `docs/lineage_phi_program_refe
 
 
 ==========================================
-FILE: simulation/diagnostics/part_x_draft.md
+FILE: simulation\diagnostics\part_x_draft.md
 ==========================================
 
 # Draft: Program Reference Part X (Monte Carlo Phase B)
@@ -1439,7 +3716,68 @@ These live outside the program reference and are flagged for the operator, not d
 
 
 ==========================================
-FILE: simulation/diagnostics/patient_defection_documentation_suggested_edits.md
+FILE: simulation\diagnostics\patient_defection_corner_density_integration_analysis.md
+==========================================
+
+# Patient Defection Corner-Density Bracket: Integration Analysis
+
+Generated: 2026-07-14. Completed: 2026-07-17.
+
+## Status
+
+This document originally recorded a dense re-sweep in progress: of a planned 3,000-row grid (alpha in [0.40, 0.50, 0.60] by growth in [1.25, 1.40, 1.50, 1.60, 1.75], 200 seeds each), only one row had completed at the time of the earlier draft, and the recommendation was to leave the paper and advisor claim unchanged pending completion. The alpha=0.40 slice of that grid has since completed: 1,000 rows, 0 errors, 200 seeds per growth cell across the five growth values. The alpha=0.50 and alpha=0.60 slices were not run; this document characterizes the alpha=0.40 bracket only. This is the completed record for that bracket.
+
+## Fixed parameters
+
+Held fixed across all 1,000 rows, matching the sweep 3 capability-constraint setup: rr=0.064, phi=25.0, alpha=0.40, successor_capability=2.0, defection_weight=0.5, defection_target=H_C_inflated, inheritance_mode=lineage, max_generations=4, n_steps=500, rollout_steps=20, n_candidates=300, n_agents=200, cop_cost_audit=True. Zero errors across 1,000 rows. Data file: `simulation/diagnostics/patient_defection_corner_density.csv`. Wrapper: `simulation/diagnostics/patient_defection_corner_density.py` (reuses `patient_defection_sweeps.run_single` directly; changes only the grid and seed count).
+
+## Per-cell results
+
+| growth | n | second-fire rate | 95% CI | mean fires | max gen | max active cap | gen>=4 | third fire |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1.25 | 200 | 0.680 | [0.612, 0.741] | 1.680 | 3 | 2.50 | 0 | 0 |
+| 1.40 | 200 | 0.990 | [0.964, 0.997] | 1.990 | 3 | 2.80 | 0 | 0 |
+| 1.50 | 200 | 1.000 | [0.981, 1.000] | 2.000 | 3 | 3.00 | 0 | 0 |
+| 1.60 | 200 | 1.000 | [0.981, 1.000] | 2.000 | 3 | 3.20 | 0 | 0 |
+| 1.75 | 200 | 1.000 | [0.981, 1.000] | 2.000 | 3 | 3.50 | 0 | 0 |
+
+Second-fire rate is the fraction of runs reaching generation 3 (a second succession, beyond the always-occurring first succession into the prepared generation-2 defecting successor). 95% CIs are Wilson score intervals. Recomputed directly from `patient_defection_corner_density.csv` and cross-checked against the values supplied for this reconciliation; the two matched exactly on every field, including the CI bounds.
+
+## Economic-stop evidence
+
+The generation cap for this sweep was 4, and the deepest lineage reached in any of the 1,000 runs was 3, leaving one full generation of headroom unused. 95.0 to 99.0 percent of runs across the five cells completed the full 500-step horizon (194/200 at growth 1.25 up to 198/200 at growth 1.40). Mean yield evaluations per run ranged from 496.4 to 499.4 across cells (approximately 498 overall), meaning the model evaluated succession on essentially every step and rejected the third transition each time rather than stopping early. Knowledge transfer verified at 1.00 in every cell among runs that fired at least once. Taken together, the stop at generation 3 reads as an economic result of the yield condition rejecting the fourth-generation transition, not a configuration limit cutting the run short.
+
+## Arithmetic finding
+
+Max active capability observed equals exactly 2.0 (the fixed successor_capability) times the growth rate in every cell where a second fire occurred, and equals 2.0 in runs without a second fire:
+
+| growth | 2.0 x growth | observed max active capability |
+| --- | --- | --- |
+| 1.25 | 2.50 | 2.0 (no second fire) or 2.50 (second fire) |
+| 1.40 | 2.80 | 2.0 (no second fire) or 2.80 (second fire) |
+| 1.50 | 3.00 | 3.00 |
+| 1.60 | 3.20 | 3.20 |
+| 1.75 | 3.50 | 3.50 |
+
+This is an arithmetic identity of the tested grid (starting successor capability times growth rate at the second fire), not an emergent or bounded property of the architecture. It is the basis for withdrawing the earlier claim that no tested cell exceeded active capability 3.0: that claim held only because the earlier grid never tested a growth rate above 1.5 combined with a cell where second fire was common.
+
+## Mechanism note (inference, not verified)
+
+Max successor capability seen reaches 6.125 at growth 1.75, which is the generation-4 successor that the yield condition rejected (capability 3.5 active at generation 3, times growth 1.75). The sweeps record the yield-margin decomposition (honest advantage, actual advantage, transition cost) only at the first yield evaluation, not at the third. Whether the rejection at the third evaluation is driven primarily by the runaway penalty, by the rising transition cost (which grows with both incumbent capability and generation depth), or some combination, is not measured in this data. This is flagged explicitly as inference from the mechanism understood at the first fire, not a verified decomposition at the third fire.
+
+## Survival by cell (context, not a claim)
+
+Final-population survival rate (context only; this bracket is not designed to characterize survival): 0.575 (growth 1.25), 0.625 (1.40), 0.525 (1.50), 0.650 (1.60), 0.565 (1.75). No trend with growth rate is claimed from this; the bracket's seed count and design are not calibrated to resolve a survival relationship.
+
+## Disposition
+
+The alpha=0.40 bracket supersedes the "current claim remains supported... bracket-density question remains open" disposition in this document's earlier draft. Second succession at alpha=0.40 is not a rare pocket; it is the common case at growth 1.5 and above and the majority case at growth 1.25. What is confirmed, not overturned, is that generational depth stays bounded: no run in this bracket reached generation 4 or fired a third succession, at any tested growth rate, at the weakest alpha tested anywhere in this investigation. The claim in the paper (Section VIII.8), the program reference (Part X.8), and the advisor document is restated accordingly: from rare continuation to bounded generational depth. The active-capability-3.0 clause is withdrawn per the arithmetic finding above.
+
+Source: `patient_defection_corner_density.csv` (1,000 rows, 0 errors); `patient_defection_corner_density.py`; `patient_defection_sweep3_capability_constraint.csv` (original grid, for the 14-of-15 / 10-percent comparison points).
+
+
+==========================================
+FILE: simulation\diagnostics\patient_defection_documentation_suggested_edits.md
 ==========================================
 
 # Patient Defection Documentation Suggested Edits
@@ -1508,7 +3846,7 @@ diff --git a/paper/section_VIII_draft.md b/paper/section_VIII_draft.md
 
 
 ==========================================
-FILE: simulation/diagnostics/patient_defection_dryrun_summary.md
+FILE: simulation\diagnostics\patient_defection_dryrun_summary.md
 ==========================================
 
 # Patient Defection Sweep Summary
@@ -1546,7 +3884,7 @@ Aligned baseline any-fire rate: 0.125. Baseline per-evaluation fire proxy: 0.125
 
 
 ==========================================
-FILE: simulation/diagnostics/patient_defection_final_report.md
+FILE: simulation\diagnostics\patient_defection_final_report.md
 ==========================================
 
 # Patient Defection Final Report
@@ -1670,12 +4008,14 @@ Do not include unrelated pre-existing diagnostics or terminal logs.
 
 
 ==========================================
-FILE: simulation/diagnostics/patient_defection_integration_analysis.md
+FILE: simulation\diagnostics\patient_defection_integration_analysis.md
 ==========================================
 
 # Patient Defection Integration Analysis
 
 Generated: 2026-06-26T09:15:00+00:00
+
+> **2026-07-17 pointer.** The rarity characterization below (second succession zero in 14 of 15 cells, 10 percent in the remaining cell) is grid-dependent: it describes the alpha range this document's Sweep 3 tested, not the architecture. A subsequent 1,000-run bracket at alpha=0.40 shows second succession firing in 68 to 100 percent of runs below that range. See `patient_defection_corner_density_integration_analysis.md` for the bracket record. This document remains accurate as the record of the three-sweep investigation as it stood at the time.
 
 ## 1. Substantive Findings
 
@@ -1820,7 +4160,7 @@ This work closes one bounded patient-defection vector under the current v2.0 sub
 
 
 ==========================================
-FILE: simulation/diagnostics/patient_defection_sweep1_summary.md
+FILE: simulation\diagnostics\patient_defection_sweep1_summary.md
 ==========================================
 
 # Patient Defection Sweep Summary
@@ -1867,7 +4207,7 @@ cross-generational continuation results.
 
 
 ==========================================
-FILE: simulation/diagnostics/patient_defection_sweep2_summary.md
+FILE: simulation\diagnostics\patient_defection_sweep2_summary.md
 ==========================================
 
 # Patient Defection Sweep Summary
@@ -1889,7 +4229,7 @@ Errors: 0
 
 
 ==========================================
-FILE: simulation/diagnostics/patient_defection_sweep3_summary.md
+FILE: simulation\diagnostics\patient_defection_sweep3_summary.md
 ==========================================
 
 # Patient Defection Sweep Summary
@@ -1922,7 +4262,7 @@ Errors: 0
 
 
 ==========================================
-FILE: simulation/diagnostics/patient_defection_verification.md
+FILE: simulation\diagnostics\patient_defection_verification.md
 ==========================================
 
 # Patient Defection Verification
@@ -2036,7 +4376,7 @@ modified by this verification.
 
 
 ==========================================
-FILE: simulation/diagnostics/phase_b_integration_analysis.md
+FILE: simulation\diagnostics\phase_b_integration_analysis.md
 ==========================================
 
 # Monte Carlo Phase B: Integration Analysis
@@ -2158,7 +4498,7 @@ What Phase B did not characterize:
 
 
 ==========================================
-FILE: simulation/diagnostics/phi_audit_pathc_report.md
+FILE: simulation\diagnostics\phi_audit_pathc_report.md
 ==========================================
 
 # Path C Decision Gate Report
@@ -2285,7 +4625,7 @@ Before committing to either, the yield condition derivation (Section V of the pa
 
 
 ==========================================
-FILE: simulation/diagnostics/phi_audit_report.md
+FILE: simulation\diagnostics\phi_audit_report.md
 ==========================================
 
 # Phi Implementation Audit Report
@@ -2595,7 +4935,7 @@ requires operator validation before implementation.
 
 
 ==========================================
-FILE: simulation/diagnostics/phi_investigation_synthesis_draft.md
+FILE: simulation\diagnostics\phi_investigation_synthesis_draft.md
 ==========================================
 
 # Phi Investigation Synthesis: Draft for Program Reference Part IX
@@ -2780,7 +5120,7 @@ The draft above is intended for direct integration into `docs/lineage_phi_progra
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_advisor_report.md
+FILE: simulation\diagnostics\stage15_composite_sweep_advisor_report.md
 ==========================================
 
 # Stage 1.5 composite urgency architecture — Monte Carlo sweep advisor report
@@ -3027,7 +5367,7 @@ The Stage 1.5 composite urgency architecture, in its committed additive-with-cap
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_0500.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_0500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 500
@@ -3102,7 +5442,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_1000.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_1000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 1000
@@ -3177,7 +5517,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_10000.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_10000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 10000
@@ -3252,7 +5592,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_1500.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_1500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 1500
@@ -3327,7 +5667,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_2000.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_2000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 2000
@@ -3402,7 +5742,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_2500.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_2500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 2500
@@ -3477,7 +5817,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_3000.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_3000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 3000
@@ -3552,7 +5892,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_3500.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_3500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 3500
@@ -3627,7 +5967,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_4000.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_4000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 4000
@@ -3702,7 +6042,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_4500.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_4500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 4500
@@ -3777,7 +6117,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_5000.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_5000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 5000
@@ -3852,7 +6192,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_5500.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_5500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 5500
@@ -3927,7 +6267,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_6000.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_6000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 6000
@@ -4002,7 +6342,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_6500.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_6500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 6500
@@ -4077,7 +6417,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_7000.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_7000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 7000
@@ -4152,7 +6492,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_7500.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_7500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 7500
@@ -4227,7 +6567,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_8000.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_8000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 8000
@@ -4302,7 +6642,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_8500.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_8500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 8500
@@ -4377,7 +6717,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_9000.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_9000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 9000
@@ -4452,7 +6792,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_9500.md
+FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_9500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 9500
@@ -4527,7 +6867,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_final.md
+FILE: simulation\diagnostics\stage15_composite_sweep_final.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 10000
@@ -4602,7 +6942,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_faithfulness_report.md
+FILE: simulation\diagnostics\stage15_faithfulness_report.md
 ==========================================
 
 # Stage 1.5 faithfulness test report
@@ -4693,7 +7033,7 @@ Result: **PASS**
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_phi_diagnostic_report.md
+FILE: simulation\diagnostics\stage15_phi_diagnostic_report.md
 ==========================================
 
 # Stage 1.5 phi diagnostic report
@@ -4805,7 +7145,7 @@ No detectable divergence at any window. Phi has no measurable effect on the opti
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_smoke_test_report.md
+FILE: simulation\diagnostics\stage15_smoke_test_report.md
 ==========================================
 
 # Stage 1.5 smoke test report
@@ -4940,7 +7280,7 @@ Re-evaluation of smoke run seed=0: at each step, sample 50 random candidates and
 
 
 ==========================================
-FILE: simulation/diagnostics/stage16_integrity_report.md
+FILE: simulation\diagnostics\stage16_integrity_report.md
 ==========================================
 
 # Stage 1.6 integrity simulation report
@@ -5057,7 +7397,7 @@ All five criteria pass. Stage 1.6 U_sys revision is validated. The composite urg
 
 
 ==========================================
-FILE: simulation/diagnostics/stage17_integrity_report.md
+FILE: simulation\diagnostics\stage17_integrity_report.md
 ==========================================
 
 # Stage 1.7 integrity simulation report
@@ -5163,7 +7503,7 @@ Criteria failed: 1 (trajectory divergence), 2 (per-step cosine), 3 (demographics
 
 
 ==========================================
-FILE: simulation/diagnostics/stage17_pressure_diagnostic_report.md
+FILE: simulation\diagnostics\stage17_pressure_diagnostic_report.md
 ==========================================
 
 # Stage 1.7 pressure / state / welfare-factor diagnostic
@@ -5286,7 +7626,7 @@ Cross-config welfare_factor std/mean ratio:      0.0023
 
 
 ==========================================
-FILE: simulation/diagnostics/stage17_usys_factor_diagnostic_report.md
+FILE: simulation\diagnostics\stage17_usys_factor_diagnostic_report.md
 ==========================================
 
 # Stage 1.7 U_sys factor breakdown diagnostic
@@ -5394,7 +7734,7 @@ Min/max across (seed, step) per config; surfaces saturation behavior.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage18_integrity_phase_a_report.md
+FILE: simulation\diagnostics\stage18_integrity_phase_a_report.md
 ==========================================
 
 # Stage 1.8 Phase A integrity report
@@ -5463,7 +7803,7 @@ Seeds diverged: **5 / 5** (need >= 3). Result: **PASS**
 
 
 ==========================================
-FILE: simulation/diagnostics/stage18_integrity_phase_b_report.md
+FILE: simulation\diagnostics\stage18_integrity_phase_b_report.md
 ==========================================
 
 # Stage 1.8 Phase B integrity report
@@ -5546,7 +7886,7 @@ All four criteria pass. Stage 1.8 working_factor architecture produces gate-2-pa
 
 
 ==========================================
-FILE: simulation/diagnostics/stage2_yield_implementation_notes.md
+FILE: simulation\diagnostics\stage2_yield_implementation_notes.md
 ==========================================
 
 # Stage 2 Formal Yield-Condition Implementation Notes
@@ -5820,7 +8160,7 @@ v1.x.2 paths are untouched throughout.
 
 
 ==========================================
-FILE: simulation/diagnostics/stage2_yield_parameter_diagnostic_summary.md
+FILE: simulation\diagnostics\stage2_yield_parameter_diagnostic_summary.md
 ==========================================
 
 # Stage 2 yield-condition parameter diagnostic
@@ -5882,4 +8222,582 @@ Per-cap fire-rate (runs_with_fire / runs):
 - 39/39 legacy tests pass under the log-enriched model.
 - Stage 2 formal yield logic is preserved as committed.
 
+
+
+==========================================
+FILE: simulation\diagnostics\sub_threshold_drift_v2_summary.md
+==========================================
+
+# Sub-Threshold Drift v2.0 Summary
+
+## 1. Data provenance
+
+- Run ID(s): `full_5ac6a2e_sub_threshold_drift`.
+- Commit(s): `0391f2a`.
+- Machine(s): linux.
+- Row count: 200.
+- Output paths: `C:/Users/matty/OneDrive/Documents/GitHub/AI-Succession-Problem/data/attack_vector_revalidation_v2/linux/sub_threshold_drift/full_5ac6a2e_sub_threshold_drift/results.csv`.
+- Confirmed `is_v2_mode=True` in all rows: `True`.
+- Schema version(s): `attack-v2-row-v1`.
+
+## 2. Grid and sample size
+
+| parameter axis | values actually used |
+| --- | --- |
+| parameter_defense_active | False, True |
+| parameter_phi | 1.0, 10.0, 15.0, 25.0, 5.0 |
+
+- Replicates per cell target: 20 for standard vectors.
+- Fewer-than-target cells: No exact parameter cells have fewer than the expected replicate count.
+
+## 3. v2.0 results
+
+| defense_active | n | attack successes | attack rate | SE |
+| --- | --- | --- | --- | --- |
+| False | 100 | 100 | 100.0% | 0.0000 |
+| True | 100 | 100 | 100.0% | 0.0000 |
+
+## 4. v1.x baseline comparison
+
+- Primary baseline: `data/comprehensive_adversarial_sweeps.csv`.
+- Baseline rows used: 120 (ordinary v1.x artifact rows).
+- The v2.0 grid uses binary `defense_active`. The baseline grid is binary for this comparison unless noted in the inventory.
+
+| defense_active | v1 n | v1 attack rate | v1 SE | v2 n | v2 attack rate | v2 SE | z, v2 minus v1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| False | 60 | 100.0% | 0.0000 | 100 | 100.0% | 0.0000 | NA, pooled SE is zero |
+| True | 60 | 0.0% | 0.0000 | 100 | 100.0% | 0.0000 | NA, pooled SE is zero |
+
+- Paired-seed check in v2.0: matched pairs present = `True`, n_pairs = 100, within-seed mean difference defense true minus false = 0.0000, paired SE = 0.0000.
+
+The ordinary artifact uses phi values 5, 10, 20 while the v2 sweep uses phi 1, 5, 10, 15, 25; the phi artifact would be the closer grid match but the ordinary artifact is used here for a consistent baseline reference. The direction and magnitude of the defense finding are robust to baseline choice.
+
+## 5. Categorization
+
+- Category: D.
+- Justification: the attack is implemented through the v2 attack adapter as an eight-axis action modification, not through the v1.x policy interface. The observed behavior is therefore a v2 substrate result rather than an unchanged v1.x attack path.
+
+## 6. Known limitations
+
+- Inventory limitation: zero-noise v1.x runs reduce stochastic realism, and threshold success does not preserve time-to-detection information. New v2 limitation: the v2 adapter output shows the named defense does not block attack success, so the live data should not be used to claim CUSUM protection in v2.0.
+
+Interpretation note (required by attack_vector_revalidation_audit.md, Section 9, item 1): The 100 percent defended attack rate must not be cited without the following qualification. The peak-constraint success metric fires in both defense states because the CUSUM detector fires after the threshold has already been exceeded transiently, not before. The defense nonetheless has a large effect on population survival: undefended rows show a 92.0 percent extinction rate with early simulation termination (median approximately 250 of 300 steps), while defended rows show a 0.0 percent extinction rate and complete the full 300 steps with collapsed=False and survived=True in most cases (rates computed from the raw results CSV, 2026-07-20, cross-checked on both machines). The defense prevents catastrophic outcome; it does not prevent the transient breach that trips the success flag. Any claim that Sub-Threshold Drift is not blocked in v2.0 is accurate but incomplete without this survival-versus-extinction contrast.
+
+## 7. Summary sentence
+
+Per current evidence, the v2.0 adapter does not block Sub-Threshold Drift under `defense_active=True`, so v1.x CUSUM containment does not carry over as a v2.0 result.
+
+
+==========================================
+FILE: simulation\diagnostics\successor_contamination_v2_summary.md
+==========================================
+
+# Successor Contamination v2.0 Summary
+
+## 1. Data provenance
+
+- Run ID(s): `full_5ac6a2e_successor_contamination`.
+- Commit(s): `b004cb0`.
+- Machine(s): laptop.
+- Row count: 120.
+- Output paths: `C:/Users/matty/OneDrive/Documents/GitHub/AI-Succession-Problem/data/attack_vector_revalidation_v2/laptop/successor_contamination/full_5ac6a2e_successor_contamination/results.csv`.
+- Confirmed `is_v2_mode=True` in all rows: `True`.
+- Schema version(s): `attack-v2-row-v1`.
+
+## 2. Grid and sample size
+
+| parameter axis | values actually used |
+| --- | --- |
+| parameter_base_transition_cost | 1.5, 2.0, 2.5 |
+| parameter_defense_active | False, True |
+
+- Replicates per cell target: 20 for standard vectors.
+- Fewer-than-target cells: No exact parameter cells have fewer than the expected replicate count.
+
+## 3. v2.0 results
+
+| defense_active | n | attack successes | attack rate | SE |
+| --- | --- | --- | --- | --- |
+| False | 60 | 60 | 100.0% | 0.0000 |
+| True | 60 | 0 | 0.0% | 0.0000 |
+
+Supplementary Stage 2 yield diagnostics:
+
+| defense_active | yield_condition_met_count mean | yield_condition_blocked_count mean |
+| --- | --- | --- |
+| False | 1.0000 | 0.0000 |
+| True | 1.0000 | 0.0000 |
+
+## 4. v1.x baseline comparison
+
+- Primary baseline: `data/comprehensive_adversarial_sweeps_v1x2_phi.csv`.
+- Baseline rows used: 120 (phi=10 rows from the phi artifact).
+- The v2.0 grid uses binary `defense_active`. The baseline grid is binary for this comparison unless noted in the inventory.
+
+| defense_active | v1 n | v1 attack rate | v1 SE | v2 n | v2 attack rate | v2 SE | z, v2 minus v1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| False | 60 | 100.0% | 0.0000 | 60 | 100.0% | 0.0000 | NA, pooled SE is zero |
+| True | 60 | 0.0% | 0.0000 | 60 | 0.0% | 0.0000 | NA, pooled SE is zero |
+
+- Paired-seed check in v2.0: matched pairs present = `True`, n_pairs = 60, within-seed mean difference defense true minus false = -1.0000, paired SE = 0.0000.
+
+## 5. Categorization
+
+- Category: D.
+- Justification: the attack is implemented through the v2 attack adapter as an eight-axis action modification, not through the v1.x policy interface. The observed behavior is therefore a v2 substrate result rather than an unchanged v1.x attack path.
+
+## 6. Known limitations
+
+- Inventory limitation: v1.x ordinary rows collapse partial defenses into `Defense_Active=False`, and the phi artifact omits partial-defense cells. New v2 limitation: the adapter uses a binary defense state, so partial-defense comparisons are not available.
+
+## 7. Summary sentence
+
+Per current evidence, v2.0 blocks successor contamination under the defended adapter state while preserving undefended contamination through the Stage 2 yield path.
+
+
+==========================================
+FILE: simulation\diagnostics\sybil_capture_v2_summary.md
+==========================================
+
+# Sybil Capture v2.0 Summary
+
+## 1. Data provenance
+
+- Run ID(s): `full_5ac6a2e_sybil_capture`.
+- Commit(s): `05a61ed`.
+- Machine(s): laptop.
+- Row count: 120.
+- Output paths: `C:/Users/matty/OneDrive/Documents/GitHub/AI-Succession-Problem/data/attack_vector_revalidation_v2/laptop/sybil_capture/full_5ac6a2e_sybil_capture/results.csv`.
+- Confirmed `is_v2_mode=True` in all rows: `True`.
+- Schema version(s): `attack-v2-row-v1`.
+
+## 2. Grid and sample size
+
+| parameter axis | values actually used |
+| --- | --- |
+| parameter_defense_active | False, True |
+| parameter_population | 100, 200, 50 |
+
+- Replicates per cell target: 20 for standard vectors.
+- Fewer-than-target cells: No exact parameter cells have fewer than the expected replicate count.
+
+## 3. v2.0 results
+
+| defense_active | n | attack successes | attack rate | SE |
+| --- | --- | --- | --- | --- |
+| False | 60 | 60 | 100.0% | 0.0000 |
+| True | 60 | 0 | 0.0% | 0.0000 |
+
+Supplementary max_total_suppression distribution:
+
+| defense_active | n | mean | SD |
+| --- | --- | --- | --- |
+| False | 60 | 1.0000 | 0.0000 |
+| True | 60 | 1.0000 | 0.0000 |
+
+## 4. v1.x baseline comparison
+
+- Primary baseline: `data/comprehensive_adversarial_sweeps_v1x2_phi.csv`.
+- Baseline rows used: 120 (phi=10 rows from the phi artifact).
+- The v2.0 grid uses binary `defense_active`. The baseline grid is binary for this comparison unless noted in the inventory.
+
+| defense_active | v1 n | v1 attack rate | v1 SE | v2 n | v2 attack rate | v2 SE | z, v2 minus v1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| False | 60 | 100.0% | 0.0000 | 60 | 100.0% | 0.0000 | NA, pooled SE is zero |
+| True | 60 | 0.0% | 0.0000 | 60 | 0.0% | 0.0000 | NA, pooled SE is zero |
+
+- Paired-seed check in v2.0: matched pairs present = `True`, n_pairs = 60, within-seed mean difference defense true minus false = -1.0000, paired SE = 0.0000.
+
+## 5. Categorization
+
+- Category: D.
+- Justification: the attack is implemented through the v2 attack adapter as an eight-axis action modification, not through the v1.x policy interface. The observed behavior is therefore a v2 substrate result rather than an unchanged v1.x attack path.
+
+## 6. Known limitations
+
+- Inventory limitation: the metric is window-specific, population changes both targeting and panel composition, and v1.x seed pairs do not match across defense states. New v2 limitation: the adapter intervenes directly on the eight-axis v2 action rather than through the historical `sybil_attack` policy interface.
+
+Outcome note (2026-07-20): undefended rows show a 100.0 percent extinction rate with early termination (3 to 117 steps); defended rows 0.0 percent.
+
+## 7. Summary sentence
+
+Per current evidence, v2.0 reproduces complete Sybil attack containment under the adapter defense while confirming that undefended action capture remains catastrophic.
+
+
+==========================================
+FILE: simulation\diagnostics\sync_status_yotko-Legion-T5-26IOB6_20260720.md
+==========================================
+
+# Sync Status Audit: yotko-Legion-T5-26IOB6 2026-07-20
+
+Audit mode. No merge, pull, commit, push, or data edit was performed. `git fetch --all` was run as requested.
+
+## Step 1: Identify and inventory
+
+- Hostname: `yotko-Legion-T5-26IOB6`
+- OS: `Linux-6.17.0-35-generic-x86_64-with-glibc2.39`
+- Repo path: `/home/yotko/Documents/Github/ai-succession-problem`
+- Inside OneDrive-synced folder: `no` by path inspection
+- Current branch: `main`
+- HEAD: `924ce5f2e9903c202bc2ef776a8e9644428b7332`
+- HEAD commit date: `2026-07-17T22:03:03-04:00`
+- Git status counts at audit time before writing this report: staged `0`, unstaged `9`, untracked `0`
+
+```text
+## main...origin/main
+ M snapshots/INVENTORY.md
+ M snapshots/code_snapshot.md
+ M snapshots/constitutional_snapshot.md
+ M snapshots/data_results_snapshot.md
+ M snapshots/diagnostics_snapshot.md
+ M snapshots/docs_snapshot.md
+ M snapshots/essays_snapshot.md
+ M snapshots/framework_papers_snapshot.md
+ M snapshots/paper_drafts_snapshot.md
+```
+
+## Step 2: Divergence diagnosis
+
+- Current branch upstream ahead/behind (`@{u}...HEAD`, left is behind, right is ahead): `0	0`
+- Local and remote branches:
+```text
+* main                            924ce5f [origin/main] Add owed diagnostic investigation artifacts
+  remotes/origin/1.x              0ccc9a1 v1.0 preparation — complete framework, simulation, validation data, and documentation
+  remotes/origin/HEAD             -> origin/main
+  remotes/origin/attack-v2-laptop 6d33c90 Refine patient defection claim to bounded generational depth
+  remotes/origin/attack-v2-linux  29edfeb Add Linux engineered_fragility v2 results
+  remotes/origin/main             924ce5f Add owed diagnostic investigation artifacts
+```
+- Stash list: `(none)`
+- Current branch log:
+```text
+924ce5f Add owed diagnostic investigation artifacts
+e41c4f6 Regenerate project knowledge snapshots
+6a72848 Add missing patient defection substrate wiring
+024eec1 Ai Succession Problem Video Thumbnail.
+6862f92 Added Already Happening essay.
+f88de52 Add essays snapshot category; assemble The Lineage Imperative v2.0.md in docs
+365f724 Paper v2.0 Phase 4: abstract, conclusion, Section II non-claim, editorial pass
+7d59dac Patient defection verification, paper VIII.8, program reference X.8
+e32c382 Patient defection substrate extension and empirical investigation
+870b15e Paper v2.0 Phase 3: editorial pass (voice, expansion, inherited tightening)
+```
+- Commit `6d33c90` exists: `yes`, date `2026-07-17T22:20:38-04:00`
+- `6d33c90` ancestor of HEAD: `no`
+- HEAD ancestor of `6d33c90`: `no`
+- Working branch of record `attack-v2-laptop`: not checked out locally; available as `origin/attack-v2-laptop` at `6d33c90`.
+
+### OneDrive conflict artifact search
+
+- Repo is not under OneDrive on this Linux machine.
+- Search for filenames containing conflict, Copy, copy, host name, or `(1)` under the working tree and `.git/`:
+```text
+(none)
+```
+
+### Pickaxe search across all branches
+
+- Marker `robust to baseline choice`: `e1d987b Add v2 revalidation QA trail and audit report`
+  Branch containment:
+```text
+remotes/origin/attack-v2-laptop
+```
+- Marker `survival-versus-extinction`: `NO HITS`
+- Marker `fires after the threshold breach`: `e1d987b Add v2 revalidation QA trail and audit report`
+  Branch containment:
+```text
+remotes/origin/attack-v2-laptop
+```
+
+Note: the pickaxe hits for `robust to baseline choice` and `fires after the threshold breach` are in `simulation/diagnostics/attack_vector_revalidation_audit.md` at commit `e1d987b`, not in the required summary/edit target files. No pickaxe hit was found for `survival-versus-extinction`.
+
+## Step 3: Required-revision presence check
+
+| Item | File | present in working tree? | present at HEAD? | present anywhere in checked target files? |
+| --- | --- | --- | --- | --- |
+| Drift interpretation note | simulation/diagnostics/sub_threshold_drift_v2_summary.md | no | no | no target-file hit |
+| Drift baseline qualification | simulation/diagnostics/sub_threshold_drift_v2_summary.md | no | no | no target-file hit |
+| Bootstrap baseline qualification | simulation/diagnostics/bootstrap_subversion_v2_summary.md | no | no | no target-file hit |
+| Proposal 1 amendment | simulation/diagnostics/attack_vector_revalidation_documentation_edits.md | no | no | no target-file hit |
+
+Additional target-file existence check: the three target files are missing at current `HEAD`/`main`, present on `origin/attack-v2-laptop`, and missing on `origin/main` and `origin/attack-v2-linux`.
+
+## Step 4: Raw-data inventory and extinction audit
+
+Working tree finding: `data/attack_vector_revalidation_v2/` is absent from the checked-out `main` working tree on this machine. The fetched `origin/attack-v2-laptop` ref contains the full revalidation data. This is a branch/sync smoking gun, not a data corruption finding.
+
+| Vector | all expected files exist in working tree? | paths audited | fetched row count | expected | matches expected? |
+| --- | --- | --- | --- | --- | --- |
+| sub_threshold_drift | no | data/attack_vector_revalidation_v2/linux/sub_threshold_drift/full_5ac6a2e_sub_threshold_drift/results.csv (WT no) | 200 | 200 | yes |
+| measurement_tampering | no | data/attack_vector_revalidation_v2/laptop/measurement_tampering/full_5ac6a2e_measurement_tampering/results.csv (WT no) | 120 | 120 | yes |
+| bootstrap_subversion | no | data/attack_vector_revalidation_v2/linux/bootstrap_subversion/full_5ac6a2e_bootstrap_subversion/results.csv (WT no) | 200 | 200 | yes |
+| sybil_capture | no | data/attack_vector_revalidation_v2/laptop/sybil_capture/full_5ac6a2e_sybil_capture/results.csv (WT no) | 120 | 120 | yes |
+| biological_veto_capture | no | data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard0of4/results.csv (WT no); data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard1of4/results.csv (WT no); data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard2of4/results.csv (WT no); data/attack_vector_revalidation_v2/linux/biological_veto_capture/full_5ac6a2e_veto_shard3of4/results.csv (WT no) | 8700 | 8700 | yes |
+| patient_defection_corner_density | yes | simulation/diagnostics/patient_defection_corner_density.csv | 1000 | 1000 | yes |
+
+Rates computed directly from fetched `origin/attack-v2-laptop` full CSV blobs:
+
+| Vector | defense state | n | attack success rate | extinction rate | collapse rate | mean steps completed |
+| --- | --- | --- | --- | --- | --- | --- |
+| sub_threshold_drift | False | 100 | 100.0% | 92.0% | 100.0% | 256.31 |
+| sub_threshold_drift | True | 100 | 100.0% | 0.0% | 1.0% | 300.00 |
+| measurement_tampering | False | 60 | 100.0% | 0.0% | 0.0% | 300.00 |
+| measurement_tampering | True | 60 | 0.0% | 0.0% | 1.7% | 300.00 |
+| bootstrap_subversion | False | 100 | 100.0% | 100.0% | 100.0% | 106.21 |
+| bootstrap_subversion | True | 100 | 0.0% | 0.0% | 1.0% | 300.00 |
+| sybil_capture | False | 60 | 100.0% | 100.0% | 100.0% | 104.55 |
+| sybil_capture | True | 60 | 0.0% | 0.0% | 0.0% | 300.00 |
+
+Book-claim blocker numbers: Measurement Tampering has 0.0 percent extinction in both defense states. Bootstrap Subversion has 100.0 percent undefended extinction and 0.0 percent defended extinction. Sybil Capture has 100.0 percent undefended extinction and 0.0 percent defended extinction. Sub-Threshold Drift also has material undefended extinction at 92.0 percent and 0.0 percent defended extinction.
+
+Missing-on-working-tree data files that exist in the fetched branch: all five requested attack-vector result sets under `data/attack_vector_revalidation_v2/`. `patient_defection_corner_density.csv` exists in the working tree with 1,000 rows and matches expected count.
+
+## Step 5: Stop condition
+
+Report written locally for comparison with the other machine. No correction step was attempted. Awaiting explicit instruction before any checkout, merge, cherry-pick, edit, commit, pull, or push.
+
+
+==========================================
+FILE: simulation\diagnostics\sync_status_YotkoTest_20260720.md
+==========================================
+
+# Repository Sync Status: YotkoTest (2026-07-20)
+
+Audit only. No existing file was edited, and no commit, merge, pull, or push was performed. `git fetch --all --prune` was run after the operator authorized continuation despite the OneDrive warning.
+
+## Executive findings
+
+1. This clone is at the reference commit and is synchronized with its upstream: `attack-v2-laptop` at `6d33c905db18842f68e59b4148f65c5e6a1a62a3`, ahead 0 and behind 0 relative to `origin/attack-v2-laptop`.
+2. None of the four required target-file revisions is present in the working tree, at HEAD, in the stash, or in any reachable branch/commit. The two global pickaxe hits are mandate text in the audit report itself, not applied revisions.
+3. All requested full-sweep CSVs and all four Biological Veto Capture shards are present locally and match their manifests/expected totals. The Patient Defection corner-density CSV has its expected 1,000 rows.
+4. The raw undefended data show:
+   - Measurement Tampering: **0% extinction**.
+   - Bootstrap Subversion: **100% extinction**.
+   - Sybil Capture: **100% extinction**.
+   Thus, raw data support undefended extinction for Bootstrap Subversion and Sybil Capture, but not Measurement Tampering. A book sentence asserting extinction for all three is not supported as written.
+5. This repository is inside OneDrive, and `.git` contains hostname-suffixed duplicate administrative files from `YotkoLaptop`. This is a serious sync/corruption risk. `git fsck --full --no-reflogs` found many dangling objects (including two dangling commits) but reported no missing or corrupt reachable objects.
+
+## Step 1: Identify and inventory
+
+| Field | Result |
+| --- | --- |
+| Hostname | `YotkoTest` |
+| OS | Microsoft Windows `10.0.26200`, x64 (Windows 11 build family; runtime string reports Windows 10) |
+| PowerShell | `5.1.26100.8875` |
+| Repository | `C:\Users\matty\OneDrive\Documents\GitHub\AI-Succession-Problem` |
+| Inside OneDrive | **Yes** |
+| Current branch | `attack-v2-laptop` |
+| HEAD | `6d33c905db18842f68e59b4148f65c5e6a1a62a3` |
+| HEAD date | `2026-07-17T22:20:38-04:00` |
+| HEAD subject | `Refine patient defection claim to bounded generational depth` |
+| Initial staged count | 0 |
+| Initial unstaged count | 9 |
+| Initial untracked count | 0 |
+
+The prompt identifies `6d33c90` as a 2026-07-19 snapshot, but Git records the commit timestamp as 2026-07-17.
+
+The nine pre-existing unstaged paths are:
+
+- `snapshots/INVENTORY.md`
+- `snapshots/code_snapshot.md`
+- `snapshots/constitutional_snapshot.md`
+- `snapshots/data_results_snapshot.md`
+- `snapshots/diagnostics_snapshot.md`
+- `snapshots/docs_snapshot.md`
+- `snapshots/essays_snapshot.md`
+- `snapshots/framework_papers_snapshot.md`
+- `snapshots/paper_drafts_snapshot.md`
+
+Creating this report adds one untracked file; the counts above describe the pre-report state.
+
+## Step 2: Divergence diagnosis
+
+### Fetch and branch divergence
+
+`git fetch --all --prune` completed successfully with no output.
+
+| Local branch | Upstream | State |
+| --- | --- | --- |
+| `attack-v2-laptop` | `origin/attack-v2-laptop` | ahead 0, behind 0 |
+| `main` | `origin/main` | behind 1 |
+| `1.x` | none | no upstream configured |
+
+### Stashes
+
+`stash@{0}: autostash`
+
+The stash is commit `652daa3`, dated 2026-07-06, and contains only the same nine snapshot-file changes listed above. It has none of the required target-file markers.
+
+### Current branch log
+
+```text
+6d33c90 Refine patient defection claim to bounded generational depth
+e1d987b Add v2 revalidation QA trail and audit report
+1fcbfef Add attack vector v2 synthesis reports
+02dd1d8 Add Linux engineered_fragility v2 results
+15a3599 Add Linux sub_threshold_drift v2 results
+c251091 Add Linux bootstrap_subversion v2 results
+35278e7 Add Linux opaque_reasoning v2 results
+a61951b Add Linux domain_masking v2 results
+3ed56ac Add Linux ledger_compromise v2 results
+42bfced Add Linux Biological Veto v2 shard
+```
+
+### Reference commit
+
+Commit `6d33c90` exists and is an ancestor of HEAD. It is HEAD itself.
+
+### OneDrive conflict/corruption indicators
+
+The following suspicious hostname-suffixed files exist inside `.git`:
+
+```text
+.git/FETCH_HEAD-YotkoLaptop
+.git/logs/refs/remotes/origin/HEAD-YotkoLaptop
+.git/logs/refs/remotes/origin/main-YotkoLaptop
+```
+
+These are not normal Git administrative names and strongly indicate that OneDrive copied Git internals from another machine. This clone should not be treated as a safe multi-machine synchronization mechanism; Git remotes should synchronize clones, while `.git` should remain local to each machine.
+
+The general filename scan also found `_copy.py`, `_copy.pypy39.pyc`, and `astype_copy.pkl` inside `pypy_env`; these are ordinary dependency filenames, not conflict artifacts. No working-tree filename matched the current hostname `YotkoTest`, `conflict`, or ` (1)`.
+
+`git fsck --full --no-reflogs` reported many dangling blobs, two dangling trees, and dangling commits `3a0576d` and `f0087b3`. It did not report broken links, missing objects, or corrupt reachable objects. Dangling objects can result from rebases, stashes, or interrupted history and are not alone proof of corruption, but their volume plus the OneDrive duplicates strengthens the warning.
+
+### Pickaxe searches across reachable refs
+
+| Marker | Hit | Branch containment |
+| --- | --- | --- |
+| `robust to baseline choice` | `e1d987b Add v2 revalidation QA trail and audit report` | `attack-v2-laptop`, `origin/attack-v2-laptop` |
+| `survival-versus-extinction` | no hits | n/a |
+| `fires after the threshold breach` | `e1d987b Add v2 revalidation QA trail and audit report` | `attack-v2-laptop`, `origin/attack-v2-laptop` |
+
+The hits at `e1d987b` occur only in `simulation/diagnostics/attack_vector_revalidation_audit.md`, where the revisions are mandated/discussed. Path-restricted pickaxe searches found no occurrence of any marker in the three target documents on any reachable ref. A history regex search also found no `extinction` revision in `attack_vector_revalidation_documentation_edits.md`.
+
+## Step 3: Required-revision presence
+
+"Anywhere" below distinguishes an applied target-file revision from the audit report merely mentioning the requirement.
+
+| Item | Working tree | HEAD | Anywhere in target-file history |
+| --- | --- | --- | --- |
+| Drift interpretation note in `sub_threshold_drift_v2_summary.md` | No | No | No |
+| Drift Section 4 baseline qualification | No | No | No |
+| Bootstrap Section 4 baseline qualification | No | No | No |
+| Proposal 1 survival/extinction amendment | No | No | No |
+
+Proposal 1 currently says Sub-Threshold Drift "is not blocked" and calls it open/unresolved, but does not state that undefended populations go extinct while defended populations survive.
+
+## Step 4: Raw-data inventory
+
+### Full results and manifest checks
+
+| Vector/file | Machine directory | Rows | Manifest | Expected total | Result |
+| --- | --- | ---:| ---:| ---:| --- |
+| Sub-Threshold Drift | linux | 200 | 200 | 200 | Match |
+| Measurement Tampering | laptop | 120 | 120 | 120 | Match |
+| Bootstrap Subversion | linux | 200 | 200 | 200 | Match |
+| Sybil Capture | laptop | 120 | 120 | 120 | Match |
+| Veto shard 0 of 4 | laptop | 2,164 | 2,164 | part of 8,700 | Match |
+| Veto shard 1 of 4 | laptop | 2,102 | 2,102 | part of 8,700 | Match |
+| Veto shard 2 of 4 | laptop | 2,321 | 2,321 | part of 8,700 | Match |
+| Veto shard 3 of 4 | linux | 2,113 | 2,113 | part of 8,700 | Match |
+| Biological Veto Capture total | mixed | 8,700 | 8,700 combined | 8,700 | Match |
+| `simulation/diagnostics/patient_defection_corner_density.csv` | n/a | 1,000 | no adjacent manifest | 1,000 | Match |
+
+Both `laptop` and `linux` machine subfolders are present locally. None of the requested results or shards is missing from this disk, so this machine alone does not show a missing-data sync smoking gun. Comparison with the other machine's report is still required.
+
+### Direct CSV outcome calculations
+
+Rates use the CSV boolean columns directly. All four files contain both `extinct` and `collapsed`.
+
+| Vector | Defense | n | Attack success | Extinction | Collapse | Mean steps completed |
+| --- | --- | ---:| ---:| ---:| ---:| ---:|
+| Sub-Threshold Drift | False | 100 | 100.00% | 92.00% | 100.00% | 256.31 |
+| Sub-Threshold Drift | True | 100 | 100.00% | 0.00% | 0.00% | 300.00 |
+| Measurement Tampering | False | 60 | 100.00% | 0.00% | 0.00% | 300.00 |
+| Measurement Tampering | True | 60 | 0.00% | 0.00% | 0.00% | 300.00 |
+| Bootstrap Subversion | False | 100 | 100.00% | 100.00% | 100.00% | 106.21 |
+| Bootstrap Subversion | True | 100 | 0.00% | 0.00% | 0.00% | 300.00 |
+| Sybil Capture | False | 60 | 100.00% | 100.00% | 100.00% | 104.55 |
+| Sybil Capture | True | 60 | 0.00% | 0.00% | 0.00% | 300.00 |
+
+### Extinction-claim disposition
+
+- Measurement Tampering: the undefended attack always succeeds, but there are no extinctions or collapses and all rows complete 300 steps. It must not be included in an undefended-extinction trio based on this CSV.
+- Bootstrap Subversion: the undefended rows show 100% extinction and collapse, with mean completion at 106.21 of 300 steps. The raw data support adding a one-line extinction outcome to its summary.
+- Sybil Capture: the undefended rows show 100% extinction and collapse, with mean completion at 104.55 steps. The raw data and existing summary agree.
+- Sub-Threshold Drift: the defense-state contrast is strong even though both states have 100% attack success. Undefended rows have 92% `extinct=True` and 100% `collapsed=True`; defended rows have 0% extinction/collapse and complete all 300 steps. The mandated interpretation qualification is supported.
+
+## Stop point
+
+No Step 6 correction has been applied. No existing content was modified, and nothing was committed or pushed. Await the second machine’s report and explicit operator instruction.
+
+
+==========================================
+FILE: simulation\diagnostics\termination_decontamination_integration_analysis.md
+==========================================
+
+# Termination Max Capability Decontamination Diagnostic
+
+Generated: 2026-07-14
+
+## Existing record confirmation
+
+Read `data/termination_mc_v1x2.csv` and `simulation/run_termination_sweep.py` before running diagnostics. The runner configuration is rr grid including 0.066, phi [5.0, 10.0, 15.0], alpha [0.5, 1.0, 2.0], seeds 0 through 4, n_agents 200, cop_cost_audit True, successor caps [5.0, 10.0, 25.0, 50.0, 100.0], `max_capability = successor_cap`, frontier_floor 0.02, k1_transition 2.164, k2_transition 1.0, beta_transition 0.5, MAX_STEPS 5000, CONV_WINDOW 300, and convergence CV threshold 0.05.
+
+For the requested rr=0.066, cap=50 and cap=100 cells, the per-cell n is 15 because the cell aggregates 3 alpha values by 5 seeds.
+
+| cap | phi | n | survived | survival | termination reasons |
+| --- | --- | --- | --- | --- | --- |
+| 50 | 5 | 15 | 3 | 20.0% | {'extinction': 12, 'max_steps': 3} |
+| 50 | 10 | 15 | 7 | 46.7% | {'extinction': 8, 'max_steps': 7} |
+| 50 | 15 | 15 | 7 | 46.7% | {'max_steps': 7, 'extinction': 8} |
+| 50 | phi 5 to 15 gradient |  |  | 26.7pp |  |
+| 100 | 5 | 15 | 4 | 26.7% | {'extinction': 11, 'max_steps': 4} |
+| 100 | 10 | 15 | 5 | 33.3% | {'extinction': 10, 'max_steps': 5} |
+| 100 | 15 | 15 | 7 | 46.7% | {'max_steps': 7, 'extinction': 8} |
+| 100 | phi 5 to 15 gradient |  |  | 20.0pp |  |
+
+This confirms the recorded cap-conditional phi gradient: cap 50 has 20.0 percent at phi 5 and 46.7 percent at phi 15, a 26.7pp gradient. Cap 100 has 26.7 percent at phi 5 and 46.7 percent at phi 15, a 20.0pp gradient.
+
+## Diagnostic wrapper and attempted run
+
+Added `simulation/diagnostics/termination_decontamination_diagnostic.py`. It calls `GardenModel`, `AIAgent`, and `PeerValidator` without editing `simulation/agents.py`, `simulation/model.py`, or `simulation/metrics.py`. Human audit note: direct replay against the current worktree did not reproduce one original v1.x.2 CSV row. The reason is that `simulation/agents.py`, `simulation/model.py`, and `simulation/metrics.py` have changed substantially since commit `5535896`, the v1.x.2 sweep commit. Therefore the completed rows below are current-code smoke rows and are not valid frozen-baseline evidence for Investigation A.
+
+Planned high-n configuration: rr 0.066, caps [50.0, 100.0], phi [5.0, 10.0, 15.0], alpha [0.5, 1.0, 2.0], seeds 0 through 59, n_agents 200, cop_cost_audit True, frontier_floor 0.02, k1_transition 2.164, k2_transition 1.0, beta_transition 0.5, MAX_STEPS 5000. Regimes: contaminated with `max_capability = successor_cap`, and decontaminated with initial successor capability unchanged but `max_capability = 1.0e12`.
+
+The full 2,160-run diagnostic did not complete in this session. Timed evidence showed one decontaminated 584-step run took about 40 seconds direct, and 5,000-step survivor runs are several minutes each. Multiprocessing at 32, 10, and 4 workers was slower under this sandbox due contention. The run was stopped to avoid producing a misleading partial high-n result.
+
+## Completed partial diagnostic rows
+
+CSV: `simulation/diagnostics/termination_decontamination_diagnostic.csv`
+
+These rows are retained for audit of the attempted run only. They should not be used for the requested high-n frozen-baseline comparison because they were generated from the current worktree, not an archived v1.x.2 execution tree.
+
+| regime | rr | phi | alpha | seed | cap | max_capability | termination | steps | final_pop | final_gen | max_active_cap | max_successor_cap |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| decontaminated | 0.066 | 5.0 | 0.5 | 0 | 50.0 | 1000000000000.0 | extinction | 584 | 0 | 6 | 253.125 | 379.6875 |
+| contaminated | 0.066 | 5.0 | 0.5 | 0 | 50.0 | 50.0 | extinction | 2430 | 0 | 262 | 50.0 | 50.0 |
+| contaminated | 0.066 | 5.0 | 0.5 | 0 | 100.0 | 100.0 | extinction | 1214 | 0 | 58 | 100.0 | 100.0 |
+| contaminated | 0.066 | 10.0 | 2.0 | 0 | 50.0 | 50.0 | extinction | 2120 | 0 | 106 | 50.0 | 50.0 |
+| contaminated | 0.066 | 5.0 | 2.0 | 0 | 100.0 | 100.0 | extinction | 1246 | 0 | 1 | 1.0 | 100.0 |
+| contaminated | 0.066 | 10.0 | 1.0 | 0 | 50.0 | 50.0 | extinction | 3199 | 0 | 350 | 50.0 | 50.0 |
+
+Partial aggregate:
+
+| regime | cap | phi | n | survived | survival | max active cap seen | max successor cap seen |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| contaminated | 50 | 5 | 1 | 0 | 0.0% | 50.0 | 50.0 |
+| contaminated | 50 | 10 | 2 | 0 | 0.0% | 50.0 | 50.0 |
+| contaminated | 100 | 5 | 2 | 0 | 0.0% | 100.0 | 100.0 |
+| decontaminated | 50 | 5 | 1 | 0 | 0.0% | 253.125 | 379.6875 |
+
+The completed decontaminated current-code smoke row confirms the wrapper mechanism does decouple the cap in the current worktree: active capability reached 253.125 and successor capability reached 379.6875 with initial successor cap 50.0. This is a mechanical wrapper check only, not a frozen-baseline result.
+
+## Comparison status
+
+The required high-n contaminated versus decontaminated phi-gradient comparison is not complete. Per current evidence, the existing record confirms the small-n contaminated gradient. The attempted current-code rerun exposed an additional audit requirement: Investigation A should be rerun from an archived v1.x.2 tree, for example commit `5535896`, or from an exact reproduction package for the CSV-producing code. The current worktree is not the frozen baseline for this CSV.
+
+## Recommended disposition for human review
+
+Do not update claim language from this partial run. The supported disposition is: the existing CSV confirms the reported contaminated cap-conditional phi gradient at n=15 per phi/cap cell. The high-n result remains open. Before rerunning, execute Investigation A against an archived v1.x.2 tree, not the current v2 worktree, because current production files do not reproduce the original termination CSV. Per current evidence, no contradiction to the contamination-artifact expectation is established, but the decisive comparison has not been run to completion.
 

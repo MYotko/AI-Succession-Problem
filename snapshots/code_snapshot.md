@@ -1,8 +1,8 @@
 # Code Snapshot
 
-Generated: 2026-07-06T16:01:19Z
-Repository: /home/yotko/Documents/Github/ai-succession-problem
-Commit: 9426e7d
+Generated: 2026-08-09T13:14:05Z
+Repository: C:\Users\matty\Dev\ai-succession-problem
+Commit: 2ea06cc
 Branch: main
 Category: code
 
@@ -10,75 +10,81 @@ Category: code
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| simulation/agents.py | 1240 | 59681 |
-| simulation/analyze_phi_adversarial.py | 469 | 21913 |
-| simulation/constants_v2_stage15.py | 314 | 15269 |
-| simulation/constants_v2_stage18.py | 152 | 7445 |
-| simulation/defection.py | 106 | 3965 |
-| simulation/deps.py | 21 | 1019 |
-| simulation/metrics.py | 948 | 42508 |
-| simulation/model.py | 1571 | 82244 |
-| simulation/monte_carlo.py | 920 | 51833 |
-| simulation/run_alpha_succession_sweep.py | 316 | 12737 |
-| simulation/run_calibration.py | 159 | 5511 |
-| simulation/run_comprehension_gap_sweep.py | 325 | 13074 |
-| simulation/run_demographic_feedback_calibration.py | 318 | 11018 |
-| simulation/run_frontier_floor_calibration.py | 279 | 10515 |
-| simulation/run_phi_adversarial_sweep.py | 106 | 4155 |
-| simulation/run_phi_alpha_rr_sweep.py | 462 | 18306 |
-| simulation/run_phi_shock_calibration.py | 371 | 13547 |
-| simulation/run_rr_alpha_sweep.py | 323 | 13248 |
-| simulation/run_termination_sweep.py | 233 | 9280 |
-| simulation/run_to_termination.py | 257 | 10736 |
-| simulation/run_transition_cost_calibration.py | 265 | 9821 |
-| simulation/run_veto_capture_sweep.py | 359 | 14924 |
-| simulation/simulation.py | 253 | 20226 |
-| simulation/test_cop.py | 129 | 7048 |
-| simulation/test_invariants.py | 281 | 12345 |
-| simulation/test_refactor_1x.py | 570 | 21559 |
-| simulation/visualization.py | 95 | 3908 |
-| simulation/working_factor.py | 95 | 4020 |
-| simulation/diagnostics/capped_regime_phi_check.py | 237 | 9251 |
-| simulation/diagnostics/gate1_interior_action.py | 646 | 32247 |
-| simulation/diagnostics/gate2_competition.py | 206 | 7974 |
-| simulation/diagnostics/gate2_v20_phaseb_revalidation.py | 166 | 5957 |
-| simulation/diagnostics/gate3_capability_regime.py | 213 | 8664 |
-| simulation/diagnostics/gate4_v20_validation.py | 665 | 23567 |
-| simulation/diagnostics/gate5_phi_blind_check.py | 322 | 14334 |
-| simulation/diagnostics/patient_defection_sweeps.py | 708 | 24818 |
-| simulation/diagnostics/phi_audit.py | 428 | 17996 |
-| simulation/diagnostics/phi_audit_pathc.py | 351 | 13512 |
-| simulation/diagnostics/stage15_composite_sweep.py | 647 | 27881 |
-| simulation/diagnostics/stage15_faithfulness_tests.py | 686 | 29854 |
-| simulation/diagnostics/stage15_phi_diagnostic.py | 442 | 19103 |
-| simulation/diagnostics/stage15_smoke_test.py | 542 | 24493 |
-| simulation/diagnostics/stage15_statedep_curves_diagnostic.py | 903 | 35518 |
-| simulation/diagnostics/stage16_baseline_capture.py | 143 | 5695 |
-| simulation/diagnostics/stage16_integrity_simulation.py | 482 | 21822 |
-| simulation/diagnostics/stage17_integrity_simulation.py | 465 | 19542 |
-| simulation/diagnostics/stage17_pressure_diagnostic.py | 439 | 19043 |
-| simulation/diagnostics/stage17_usys_factor_diagnostic.py | 365 | 14445 |
-| simulation/diagnostics/stage18_integrity_simulation_phase_a.py | 273 | 12126 |
-| simulation/diagnostics/stage18_integrity_simulation_phase_b.py | 394 | 17006 |
-| simulation/diagnostics/stage18_phase_ab_discrepancy_isolation.py | 109 | 3764 |
-| simulation/diagnostics/stage2_yield_parameter_diagnostic.py | 355 | 15141 |
-| simulation/diagnostics/stage2_yield_smoke_test.py | 217 | 8178 |
-| bootstrap_gate_validator/cli.py | 74 | 2260 |
-| bootstrap_gate_validator/report.py | 81 | 3168 |
-| bootstrap_gate_validator/schema.py | 291 | 9846 |
-| bootstrap_gate_validator/validator.py | 65 | 2353 |
-| bootstrap_gate_validator/gates/gate_1.py | 159 | 5660 |
-| bootstrap_gate_validator/gates/gate_2.py | 323 | 14412 |
-| bootstrap_gate_validator/gates/gate_3.py | 110 | 3851 |
-| bootstrap_gate_validator/gates/gate_4.py | 167 | 6537 |
-| bootstrap_gate_validator/gates/gate_5.py | 54 | 2270 |
-| scripts/generate_project_knowledge_snapshots.py | 792 | 27663 |
+| simulation\agents.py | 1240 | 59681 |
+| simulation\analyze_phi_adversarial.py | 469 | 21913 |
+| simulation\attack_adapter_v2.py | 482 | 16105 |
+| simulation\constants_v2_stage15.py | 314 | 15269 |
+| simulation\constants_v2_stage18.py | 152 | 7445 |
+| simulation\defection.py | 106 | 3965 |
+| simulation\deps.py | 21 | 1019 |
+| simulation\metrics.py | 948 | 42508 |
+| simulation\model.py | 1674 | 86673 |
+| simulation\monte_carlo.py | 920 | 51833 |
+| simulation\run_alpha_succession_sweep.py | 316 | 12737 |
+| simulation\run_attack_vector_revalidation_v2.py | 668 | 21918 |
+| simulation\run_calibration.py | 159 | 5511 |
+| simulation\run_comprehension_gap_sweep.py | 325 | 13074 |
+| simulation\run_demographic_feedback_calibration.py | 318 | 11018 |
+| simulation\run_frontier_floor_calibration.py | 279 | 10515 |
+| simulation\run_phi_adversarial_sweep.py | 106 | 4155 |
+| simulation\run_phi_alpha_rr_sweep.py | 462 | 18306 |
+| simulation\run_phi_shock_calibration.py | 371 | 13547 |
+| simulation\run_rr_alpha_sweep.py | 323 | 13248 |
+| simulation\run_termination_sweep.py | 233 | 9280 |
+| simulation\run_to_termination.py | 257 | 10736 |
+| simulation\run_transition_cost_calibration.py | 265 | 9821 |
+| simulation\run_veto_capture_sweep.py | 359 | 14924 |
+| simulation\simulation.py | 253 | 20226 |
+| simulation\test_attack_adapter_v2.py | 241 | 7803 |
+| simulation\test_attack_vector_revalidation_v2_runner.py | 78 | 2573 |
+| simulation\test_cop.py | 129 | 7048 |
+| simulation\test_invariants.py | 281 | 12345 |
+| simulation\test_refactor_1x.py | 570 | 21559 |
+| simulation\visualization.py | 95 | 3908 |
+| simulation\working_factor.py | 95 | 4020 |
+| simulation\diagnostics\capped_regime_phi_check.py | 237 | 9251 |
+| simulation\diagnostics\gate1_interior_action.py | 646 | 32247 |
+| simulation\diagnostics\gate2_competition.py | 206 | 7974 |
+| simulation\diagnostics\gate2_v20_phaseb_revalidation.py | 166 | 5957 |
+| simulation\diagnostics\gate3_capability_regime.py | 213 | 8664 |
+| simulation\diagnostics\gate4_v20_validation.py | 665 | 23567 |
+| simulation\diagnostics\gate5_phi_blind_check.py | 322 | 14334 |
+| simulation\diagnostics\patient_defection_corner_density.py | 169 | 5246 |
+| simulation\diagnostics\patient_defection_sweeps.py | 708 | 24818 |
+| simulation\diagnostics\phi_audit.py | 428 | 17996 |
+| simulation\diagnostics\phi_audit_pathc.py | 351 | 13512 |
+| simulation\diagnostics\stage15_composite_sweep.py | 647 | 27881 |
+| simulation\diagnostics\stage15_faithfulness_tests.py | 686 | 29854 |
+| simulation\diagnostics\stage15_phi_diagnostic.py | 442 | 19103 |
+| simulation\diagnostics\stage15_smoke_test.py | 542 | 24493 |
+| simulation\diagnostics\stage15_statedep_curves_diagnostic.py | 903 | 35518 |
+| simulation\diagnostics\stage16_baseline_capture.py | 143 | 5695 |
+| simulation\diagnostics\stage16_integrity_simulation.py | 482 | 21822 |
+| simulation\diagnostics\stage17_integrity_simulation.py | 465 | 19542 |
+| simulation\diagnostics\stage17_pressure_diagnostic.py | 439 | 19043 |
+| simulation\diagnostics\stage17_usys_factor_diagnostic.py | 365 | 14445 |
+| simulation\diagnostics\stage18_integrity_simulation_phase_a.py | 273 | 12126 |
+| simulation\diagnostics\stage18_integrity_simulation_phase_b.py | 394 | 17006 |
+| simulation\diagnostics\stage18_phase_ab_discrepancy_isolation.py | 109 | 3764 |
+| simulation\diagnostics\stage2_yield_parameter_diagnostic.py | 355 | 15141 |
+| simulation\diagnostics\stage2_yield_smoke_test.py | 217 | 8178 |
+| simulation\diagnostics\termination_decontamination_diagnostic.py | 323 | 10159 |
+| bootstrap_gate_validator\cli.py | 74 | 2260 |
+| bootstrap_gate_validator\report.py | 81 | 3168 |
+| bootstrap_gate_validator\schema.py | 291 | 9846 |
+| bootstrap_gate_validator\validator.py | 65 | 2353 |
+| bootstrap_gate_validator\gates\gate_1.py | 159 | 5660 |
+| bootstrap_gate_validator\gates\gate_2.py | 323 | 14412 |
+| bootstrap_gate_validator\gates\gate_3.py | 110 | 3851 |
+| bootstrap_gate_validator\gates\gate_4.py | 167 | 6537 |
+| bootstrap_gate_validator\gates\gate_5.py | 54 | 2270 |
+| scripts\generate_project_knowledge_snapshots.py | 792 | 27663 |
 
-Total: 63 files, 23457 lines, 1011806 bytes
+Total: 69 files, 25521 lines, 1080039 bytes
 
 ---
 ==========================================
-FILE: simulation/agents.py
+FILE: simulation\agents.py
 ==========================================
 
 import numpy as np
@@ -1324,7 +1330,7 @@ class PeerValidator:
 
 
 ==========================================
-FILE: simulation/analyze_phi_adversarial.py
+FILE: simulation\analyze_phi_adversarial.py
 ==========================================
 
 """
@@ -1799,7 +1805,495 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/constants_v2_stage15.py
+FILE: simulation\attack_adapter_v2.py
+==========================================
+
+"""Attack and defense adapter for the v2 eight-axis simulation path.
+
+The adapter has three explicit integration surfaces:
+
+1. Action adaptation after optimize_u_sys_v2 selects an honest action.
+2. Yield adaptation around the formal Stage 2 comparison and ratification.
+3. Per-step diagnostics describing intervention and defense behavior.
+
+It does not call the v1 AIAgent.decide interface and does not evolve stocks.
+The model remains responsible for committing the adapted action and running
+working_factor.
+"""
+
+from copy import deepcopy
+
+import numpy as np
+
+
+RESOURCE_KEYS = (
+    'x_compute',
+    'x_bio_welfare',
+    'x_novelty_agency',
+    'x_institutional_capacity',
+    'x_transfer_comprehension',
+    'x_resilience',
+)
+
+SUPPORTED_ATTACKS = {
+    'sybil_capture',
+    'measurement_tampering',
+    'ledger_compromise',
+    'successor_contamination',
+    'opaque_reasoning',
+    'bootstrap_subversion',
+    'evaluator_collusion',
+    'sub_threshold_drift',
+    'engineered_fragility',
+    'biological_veto_capture',
+}
+
+ANALYTIC_ONLY_ATTACKS = {'domain_masking'}
+
+ALIASES = {
+    'sybil': 'sybil_capture',
+    'falsify_yield': 'measurement_tampering',
+    'hack_ledger': 'ledger_compromise',
+    'contaminate_successor': 'successor_contamination',
+    'opaque_optimization': 'opaque_reasoning',
+    'bootstrap_deceptive': 'bootstrap_subversion',
+    'sub-threshold_drift': 'sub_threshold_drift',
+    'engineered-fragility': 'engineered_fragility',
+    'veto_capture': 'biological_veto_capture',
+}
+
+
+def normalize_attack_name(value):
+    """Return the canonical adapter attack name or None."""
+    if value is None:
+        return None
+    name = str(value).strip().lower().replace(' ', '_')
+    return ALIASES.get(name, name)
+
+
+def validate_adapter_configuration(config, is_v2_mode):
+    """Validate adapter selection and return the canonical attack name."""
+    attack = normalize_attack_name(config.get('attack_vector_v2'))
+    if attack is None:
+        return None
+    if not is_v2_mode:
+        raise ValueError(
+            "attack_vector_v2 requires config['policy']='optimize_u_sys_v2'"
+        )
+    if attack in ANALYTIC_ONLY_ATTACKS:
+        raise ValueError(
+            'domain_masking remains analytic-only in v2; no live adapter is defined'
+        )
+    if attack not in SUPPORTED_ATTACKS:
+        raise ValueError(f'unsupported v2 attack vector: {attack}')
+    return attack
+
+
+def initialize_adapter_state(model):
+    """Initialize model-local adapter state without changing honest v2 state."""
+    model.attack_vector_v2 = validate_adapter_configuration(
+        model.config, model.is_v2_mode
+    )
+    model.v2_adapter_cusum_score = 0.0
+    model.v2_adapter_step_event = _empty_event(model.attack_vector_v2, -1)
+
+
+def _empty_event(attack, step):
+    return {
+        'attack': attack or '',
+        'step': int(step),
+        'active': False,
+        'attempted': False,
+        'action_modified': False,
+        'defense_evaluated': False,
+        'defense_fired': False,
+        'yield_manipulated': False,
+        'succession_blocked': False,
+        'contamination_occurred': False,
+        'integrity_tamper_attempted': False,
+        'reason': '',
+    }
+
+
+def begin_adapter_step(model, step):
+    """Start one diagnostic event and advance validator dependency if needed."""
+    event = _empty_event(model.attack_vector_v2, step)
+    event['active'] = adapter_is_active(model, step)
+    model.v2_adapter_step_event = event
+
+    if model.attack_vector_v2 != 'biological_veto_capture':
+        return event
+    if not model.cop_veto_capture:
+        return event
+    replaced = False
+    for validator in model.validators:
+        validator['dependency'] = min(
+            1.0, validator['dependency'] + model.dependency_rate
+        )
+        validator['age'] += 1
+        early_replace = (
+            model.cop_independence_monitoring
+            and validator['dependency'] > model.independence_threshold
+        )
+        scheduled_replace = (
+            model.rotation_interval is not None
+            and validator['age'] >= model.rotation_interval
+        )
+        if early_replace or scheduled_replace:
+            validator['dependency'] = 0.0
+            validator['age'] = 0
+            replaced = True
+    if replaced:
+        event['defense_evaluated'] = True
+        event['defense_fired'] = True
+        _set_reason(event, 'validator independence control replaced a validator')
+    return event
+
+
+def adapter_is_active(model, step):
+    if model.attack_vector_v2 is None:
+        return False
+    attack_step = int(model.config.get('attack_step', 0))
+    return int(step) >= attack_step
+
+
+def _set_reason(event, reason):
+    if not reason:
+        return
+    if event['reason']:
+        event['reason'] += '; '
+    event['reason'] += str(reason)
+
+
+def _mark_defense(event, fired, reason):
+    event['defense_evaluated'] = True
+    if fired:
+        event['defense_fired'] = True
+        _set_reason(event, reason)
+
+
+def _normalize_action(action):
+    adapted = deepcopy(action)
+    values = np.asarray(
+        [max(0.0, float(adapted[key])) for key in RESOURCE_KEYS],
+        dtype=float,
+    )
+    total = float(values.sum())
+    if total <= 0.0:
+        values[:] = 1.0 / len(values)
+    else:
+        values /= total
+    for key, value in zip(RESOURCE_KEYS, values):
+        adapted[key] = float(value)
+    adapted['c_protective'] = float(np.clip(
+        adapted['c_protective'], 0.0, 1.0
+    ))
+    adapted['c_suppressive'] = float(np.clip(
+        adapted['c_suppressive'], 0.0, 1.0
+    ))
+    return adapted
+
+
+def _hostile_action(action):
+    adapted = deepcopy(action)
+    hostile_shares = (0.42, 0.03, 0.03, 0.04, 0.08, 0.40)
+    for key, value in zip(RESOURCE_KEYS, hostile_shares):
+        adapted[key] = value
+    adapted['c_protective'] = 0.0
+    adapted['c_suppressive'] = 0.90
+    return _normalize_action(adapted)
+
+
+def _sybil_panel_approves(model):
+    population = len(model.schedule)
+    if population <= 0:
+        return False
+    panel_size = min(20, population)
+    bribed_count = min(15, population)
+    if model.cop_randomized_panel:
+        panel = np.random.choice(population, size=panel_size, replace=False)
+    else:
+        panel = np.arange(panel_size)
+    bribed_votes = sum(int(index) < bribed_count for index in panel)
+    return bribed_votes / panel_size >= 0.60
+
+
+def _apply_sub_threshold_drift(model, action, step):
+    adapted = deepcopy(action)
+    attack_step = int(model.config.get('attack_step', 0))
+    progress = max(1, int(step) - attack_step + 1)
+    suppressive_increment = min(0.65, progress * 0.0065)
+    welfare_shift = min(0.12, progress * 0.0012)
+    adapted['c_suppressive'] = min(
+        0.85, float(adapted['c_suppressive']) + suppressive_increment
+    )
+    moved = min(float(adapted['x_bio_welfare']), welfare_shift)
+    adapted['x_bio_welfare'] -= moved
+    adapted['x_compute'] += moved
+    return _normalize_action(adapted)
+
+
+def _apply_fragility(action):
+    adapted = deepcopy(action)
+    moved = float(adapted['x_resilience'])
+    adapted['x_resilience'] = 0.0
+    adapted['x_compute'] = float(adapted['x_compute']) + moved
+    return _normalize_action(adapted)
+
+
+def adapt_v2_action(model, ai, action, step, actor_role='incumbent'):
+    """Return an adapted eight-axis action and update step diagnostics."""
+    attack = model.attack_vector_v2
+    event = model.v2_adapter_step_event
+    honest = _normalize_action(action)
+
+    actor_is_active = actor_role == 'incumbent'
+    contaminated = bool(getattr(ai, 'v2_successor_contaminated', False))
+    if not event['active'] or (not actor_is_active and not contaminated):
+        return honest
+
+    if attack in {
+        'measurement_tampering',
+        'biological_veto_capture',
+    }:
+        return honest
+
+    if attack == 'successor_contamination' and not contaminated:
+        return honest
+
+    event['attempted'] = True
+
+    if attack == 'sybil_capture':
+        approved = _sybil_panel_approves(model)
+        _mark_defense(
+            event,
+            model.cop_randomized_panel and not approved,
+            'randomized civic panel rejected captured votes',
+        )
+        if not approved:
+            return honest
+        adapted = _hostile_action(honest)
+        _set_reason(event, 'captured civic panel approved hostile action')
+
+    elif attack == 'ledger_compromise':
+        event['integrity_tamper_attempted'] = True
+        _mark_defense(
+            event,
+            model.cop_cryptographic_ledger,
+            'cryptographic integrity check rejected tampered proposal',
+        )
+        if model.cop_cryptographic_ledger:
+            return honest
+        adapted = _hostile_action(honest)
+        _set_reason(event, 'unsigned audit history accepted hostile action')
+
+    elif attack == 'successor_contamination':
+        adapted = _apply_sub_threshold_drift(model, honest, step)
+        _set_reason(event, 'contaminated successor altered its v2 allocation')
+
+    elif attack == 'opaque_reasoning':
+        model.ai.current_opacity = 0.9
+        _mark_defense(
+            event,
+            model.cop_reasoning_transparency,
+            'reasoning transparency veto rejected opaque action',
+        )
+        if model.cop_reasoning_transparency:
+            return honest
+        adapted = _hostile_action(honest)
+        _set_reason(event, 'opaque action bypassed intuition veto')
+
+    elif attack == 'bootstrap_subversion':
+        turn_step = int(model.config.get('bootstrap_turn_step_v2', 20))
+        if int(step) < turn_step:
+            return honest
+        _mark_defense(
+            event,
+            model.cop_multi_candidate_bootstrap,
+            'multi-candidate verification rejected deceptive bootstrap',
+        )
+        if model.cop_multi_candidate_bootstrap:
+            return honest
+        adapted = _hostile_action(honest)
+        _set_reason(event, 'deceptive bootstrap executed treacherous turn')
+
+    elif attack == 'evaluator_collusion':
+        _mark_defense(
+            event,
+            model.cop_methodological_diversity,
+            'methodological diversity rejected collusive evaluation',
+        )
+        if model.cop_methodological_diversity:
+            return honest
+        adapted = _hostile_action(honest)
+        _set_reason(event, 'shared evaluator methodology approved hostile action')
+
+    elif attack == 'sub_threshold_drift':
+        adapted = _apply_sub_threshold_drift(model, honest, step)
+        drift_signal = float(model.config.get('v2_drift_signal', 0.08))
+        k = float(model.config.get('v2_cusum_k', 0.05))
+        h = float(model.config.get('v2_cusum_h', 0.5))
+        model.v2_adapter_cusum_score = max(
+            0.0, model.v2_adapter_cusum_score + drift_signal - k
+        )
+        alarm = (
+            model.cop_cusum_drift
+            and model.v2_adapter_cusum_score > h
+        )
+        _mark_defense(
+            event,
+            alarm,
+            'CUSUM alarm rejected cumulative allocation drift',
+        )
+        if alarm:
+            return honest
+        _set_reason(event, 'sub-threshold drift altered the v2 allocation')
+
+    elif attack == 'engineered_fragility':
+        adapted = _apply_fragility(honest)
+        monitor_fired = (
+            model.cop_resilience_monitoring
+            and float(adapted['x_resilience'])
+            < float(model.config.get('v2_min_resilience_share', 0.05))
+        )
+        _mark_defense(
+            event,
+            monitor_fired,
+            'resilience monitor rejected resilience divestment',
+        )
+        if monitor_fired:
+            return honest
+        _set_reason(event, 'resilience allocation was diverted to compute')
+
+    else:
+        return honest
+
+    event['action_modified'] = any(
+        abs(float(adapted[key]) - float(honest[key])) > 1e-12
+        for key in RESOURCE_KEYS + ('c_protective', 'c_suppressive')
+    )
+    return adapted
+
+
+def adapt_yield_evaluation(model, incumbent_u, successor_u, transition_cost):
+    """Return evaluated yield values after any measurement attack."""
+    event = model.v2_adapter_step_event
+    honest_fires = (float(successor_u) - float(incumbent_u)) > float(
+        transition_cost
+    )
+    contaminated_incumbent = (
+        model.attack_vector_v2 == 'successor_contamination'
+        and bool(getattr(model.ai, 'v2_successor_contaminated', False))
+    )
+    measurement_attack = (
+        model.attack_vector_v2 == 'measurement_tampering'
+    )
+    if not event['active'] or not (
+        measurement_attack or contaminated_incumbent
+    ):
+        return float(incumbent_u), float(successor_u), honest_fires
+
+    event['attempted'] = True
+    _mark_defense(
+        event,
+        model.cop_independent_eval,
+        'independent evaluation replaced falsified yield values',
+    )
+    if model.cop_independent_eval:
+        return float(incumbent_u), float(successor_u), honest_fires
+
+    event['yield_manipulated'] = True
+    if contaminated_incumbent:
+        _set_reason(
+            event,
+            'contaminated successor falsified the next Stage 2 yield values',
+        )
+    else:
+        _set_reason(event, 'incumbent falsified Stage 2 yield values')
+    return float('inf'), 0.0, honest_fires
+
+
+def ratify_v2_yield(model, fires):
+    """Apply biological-veto ratification to an otherwise valid v2 yield."""
+    if not fires:
+        return False
+    event = model.v2_adapter_step_event
+    if (
+        model.attack_vector_v2 != 'biological_veto_capture'
+        or not event['active']
+        or not model.cop_veto_capture
+        or not model.validators
+    ):
+        return True
+
+    event['attempted'] = True
+    votes = []
+    for validator in model.validators:
+        effective_accuracy = max(
+            0.0,
+            model.base_validator_accuracy
+            * (1.0 - validator['dependency'] * model.capture_strength),
+        )
+        votes.append(1 if np.random.random() < effective_accuracy else 0)
+    ratified = sum(votes) / len(votes) >= 0.60
+    event['defense_evaluated'] = bool(
+        model.cop_independence_monitoring
+        or model.rotation_interval is not None
+    )
+    if not ratified:
+        event['succession_blocked'] = True
+        model.yield_condition_blocked_count += 1
+        _set_reason(event, 'dependent validators blocked a valid Stage 2 yield')
+    return ratified
+
+
+def handle_v2_succession(model, outgoing_ai, incoming_ai):
+    """Apply or block successor contamination at the succession boundary."""
+    event = model.v2_adapter_step_event
+    if (
+        model.attack_vector_v2 != 'successor_contamination'
+        or not event['active']
+    ):
+        return
+    event['attempted'] = True
+    _mark_defense(
+        event,
+        model.cop_architectural_independence,
+        'architectural independence blocked successor contamination',
+    )
+    if model.cop_architectural_independence:
+        return
+    incoming_ai.v2_successor_contaminated = True
+    event['contamination_occurred'] = True
+    model.contamination_occurred = True
+    _set_reason(event, 'adversarial state transferred into successor')
+
+
+def append_adapter_diagnostics(model):
+    """Append the current adapter event to v2 datacollector fields."""
+    event = model.v2_adapter_step_event
+    fields = {
+        'v2_attack_name': event['attack'],
+        'v2_attack_active': bool(event['active']),
+        'v2_attack_attempted': bool(event['attempted']),
+        'v2_attack_action_modified': bool(event['action_modified']),
+        'v2_defense_evaluated': bool(event['defense_evaluated']),
+        'v2_defense_fired': bool(event['defense_fired']),
+        'v2_yield_manipulated': bool(event['yield_manipulated']),
+        'v2_succession_blocked': bool(event['succession_blocked']),
+        'v2_contamination_occurred': bool(event['contamination_occurred']),
+        'v2_integrity_tamper_attempted': bool(
+            event['integrity_tamper_attempted']
+        ),
+        'v2_adapter_reason': event['reason'],
+        'v2_adapter_cusum_score': float(model.v2_adapter_cusum_score),
+    }
+    for key, value in fields.items():
+        model.datacollector[key].append(value)
+
+
+==========================================
+FILE: simulation\constants_v2_stage15.py
 ==========================================
 
 """Stage 1.5 named constants for v2 diagnostic state.
@@ -2119,7 +2613,7 @@ PHI_HALF = 10.0
 
 
 ==========================================
-FILE: simulation/constants_v2_stage18.py
+FILE: simulation\constants_v2_stage18.py
 ==========================================
 
 """Stage 1.8 named constants for the working_factor architecture.
@@ -2277,7 +2771,7 @@ H_N_FLOOR = 0.01
 
 
 ==========================================
-FILE: simulation/defection.py
+FILE: simulation\defection.py
 ==========================================
 
 """Patient defection helpers for v2.0 diagnostic sweeps.
@@ -2389,7 +2883,7 @@ def copy_defection_for_successor(parent_ai, successor_ai):
 
 
 ==========================================
-FILE: simulation/deps.py
+FILE: simulation\deps.py
 ==========================================
 
 import sys
@@ -2415,7 +2909,7 @@ def check_and_install(package):
                 sys.exit(1)
 
 ==========================================
-FILE: simulation/metrics.py
+FILE: simulation\metrics.py
 ==========================================
 
 """
@@ -3369,7 +3863,7 @@ def calculate_system_metrics(r, c, pop, avg_wb, capability, h_n_override=None,
 
 
 ==========================================
-FILE: simulation/model.py
+FILE: simulation\model.py
 ==========================================
 
 import numpy as np
@@ -3380,6 +3874,15 @@ from agents import (
 )
 from metrics import calculate_h_n, calculate_system_metrics, calculate_system_metrics_v2
 from defection import copy_defection_for_successor
+from attack_adapter_v2 import (
+    adapt_v2_action,
+    adapt_yield_evaluation,
+    append_adapter_diagnostics,
+    begin_adapter_step,
+    handle_v2_succession,
+    initialize_adapter_state,
+    ratify_v2_yield,
+)
 
 # =============================================================================
 # REFACTOR 1.x — model.py
@@ -3499,6 +4002,32 @@ def v2_welfare_to_r_equivalent(x_bio_welfare):
     return BRIDGE_R_BALANCED_HEALTHY + frac * (BRIDGE_R_MAX - BRIDGE_R_BALANCED_HEALTHY)
 
 
+def _sync_v2_action_diagnostics(action, diagnostics, snapshot_u=None):
+    """Keep optimizer diagnostics consistent with an adapter-modified action."""
+    selected = diagnostics.get('selected_action', {})
+    adapter_modified = any(
+        key in selected
+        and abs(float(action[key]) - float(selected[key])) > 1e-12
+        for key in (
+            *(f'x_{category}' for category in RESOURCE_CATEGORIES),
+            'c_protective',
+            'c_suppressive',
+        )
+    )
+    diagnostics['selected_action'] = action
+    if adapter_modified:
+        diagnostics['selected_anchor'] = False
+        diagnostics['selected_anchor_name'] = 'adapter_modified'
+    diagnostics['max_resource_share'] = max(
+        float(action[f'x_{category}']) for category in RESOURCE_CATEGORIES
+    )
+    diagnostics['allocation_entropy'] = compute_allocation_entropy(action)
+    diagnostics['total_suppression'] = total_suppression(action)
+    if snapshot_u is not None:
+        diagnostics['snapshot_u_sys'] = float(snapshot_u)
+        diagnostics['snapshot_actual_objective'] = float(snapshot_u)
+
+
 class GardenModel:
     def __init__(self, n_agents, ai_policy, min_viable_population=50,
                  use_cop=False, cop_attribution_check=False,
@@ -3528,6 +4057,7 @@ class GardenModel:
         # multi-sink allocator. The v1.x.2 step() path is bypassed by _step_v2.
         # When v2 is inactive, every legacy code path runs unchanged.
         self.is_v2_mode = self.config.get('policy') == 'optimize_u_sys_v2'
+        initialize_adapter_state(self)
         self.psi_inst_stock = PSI_INST_INITIAL  # always defined; only updated in v2
         self.succession_this_step = False
 
@@ -3767,6 +4297,19 @@ class GardenModel:
                 # Stage 1.6: phi-rollout-discount diagnostic series.
                 'gamma_rollout':                 [],
                 'phi':                           [],
+                # v2 attack adapter diagnostics.
+                'v2_attack_name':                [],
+                'v2_attack_active':              [],
+                'v2_attack_attempted':           [],
+                'v2_attack_action_modified':     [],
+                'v2_defense_evaluated':          [],
+                'v2_defense_fired':              [],
+                'v2_yield_manipulated':          [],
+                'v2_succession_blocked':         [],
+                'v2_contamination_occurred':     [],
+                'v2_integrity_tamper_attempted': [],
+                'v2_adapter_reason':              [],
+                'v2_adapter_cusum_score':         [],
                 # Stage 1.8: two new infrastructure stocks driven by
                 # working_factor (alongside psi_inst_stock and
                 # resilience_stock which are already recorded above).
@@ -4583,6 +5126,7 @@ class GardenModel:
         self.ai.step_drift()
         step_num = len(self.datacollector['population'])
         self.succession_this_step = False
+        begin_adapter_step(self, step_num)
 
         # 1. Formal Yield Condition (Stage 2).
         #    Replaces the Stage 1.x placeholder (capability_gap >= 0.3 OR
@@ -4619,8 +5163,15 @@ class GardenModel:
             # The snapshot U_sys evaluation uses the same swap for the same
             # reason.
             inc_action, inc_diagnostics = optimize_u_sys_v2(self.ai, self)
+            inc_action = adapt_v2_action(
+                self, self.ai, inc_action, step_num, actor_role='incumbent'
+            )
+            _sync_v2_action_diagnostics(inc_action, inc_diagnostics)
             inc_u_sys, _ = calculate_system_metrics_v2(
                 self, inc_action, eval_horizon=1
+            )
+            _sync_v2_action_diagnostics(
+                inc_action, inc_diagnostics, snapshot_u=inc_u_sys
             )
             saved_ai = self.ai
             self.ai = self.successor_ai
@@ -4628,8 +5179,19 @@ class GardenModel:
                 succ_action, succ_diagnostics = optimize_u_sys_v2(
                     self.successor_ai, self
                 )
+                succ_action = adapt_v2_action(
+                    self,
+                    self.successor_ai,
+                    succ_action,
+                    step_num,
+                    actor_role='successor',
+                )
+                _sync_v2_action_diagnostics(succ_action, succ_diagnostics)
                 succ_u_sys, _ = calculate_system_metrics_v2(
                     self, succ_action, eval_horizon=1
+                )
+                _sync_v2_action_diagnostics(
+                    succ_action, succ_diagnostics, snapshot_u=succ_u_sys
                 )
             finally:
                 self.ai = saved_ai
@@ -4648,8 +5210,17 @@ class GardenModel:
             ))
             self.transition_cost_history.append(transition_cost)
 
-            advantage = float(succ_u_sys) - float(inc_u_sys)
-            fires = advantage > transition_cost
+            eval_inc_u, eval_succ_u, honest_fires = adapt_yield_evaluation(
+                self, inc_u_sys, succ_u_sys, transition_cost
+            )
+            advantage = float(eval_succ_u) - float(eval_inc_u)
+            fires_before_ratification = advantage > transition_cost
+            if fires_before_ratification:
+                self.yield_condition_met_count += 1
+            fires = (
+                fires_before_ratification
+                and ratify_v2_yield(self, fires_before_ratification)
+            )
             yield_evaluated = True
 
             # Record the yield event for smoke testing and downstream
@@ -4658,6 +5229,11 @@ class GardenModel:
                 'step': step_num,
                 'incumbent_u_sys': float(inc_u_sys),
                 'successor_u_sys': float(succ_u_sys),
+                'evaluated_incumbent_u_sys': float(eval_inc_u),
+                'evaluated_successor_u_sys': float(eval_succ_u),
+                'honest_fires': bool(honest_fires),
+                'fires_before_ratification': bool(fires_before_ratification),
+                'ratified': bool(fires),
                 'incumbent_actual_objective': float(
                     inc_diagnostics.get('snapshot_actual_objective', inc_u_sys)
                 ),
@@ -4698,6 +5274,7 @@ class GardenModel:
                 self.apply_succession_transition_load(
                     succ_action, capability_gap, generation_gap
                 )
+                handle_v2_succession(self, self.ai, self.successor_ai)
                 self.ai = self.successor_ai
                 _max_cap = self.config.get('max_capability', 1e100)
                 _cap_growth = self.config.get('successor_capability_growth_rate', 1.5)
@@ -4710,7 +5287,6 @@ class GardenModel:
                 self.successor_ai = copy_defection_for_successor(
                     self.ai, next_successor
                 )
-                self.yield_condition_met_count += 1
                 # Cache the action the new active AI (successor) chose.
                 action_v2 = succ_action
                 diagnostics = succ_diagnostics
@@ -4724,6 +5300,15 @@ class GardenModel:
         #    decide).
         if not yield_evaluated:
             action_v2, diagnostics = optimize_u_sys_v2(self.ai, self)
+            action_v2 = adapt_v2_action(
+                self, self.ai, action_v2, step_num, actor_role='incumbent'
+            )
+            adapted_snapshot_u, _ = calculate_system_metrics_v2(
+                self, action_v2, eval_horizon=1
+            )
+            _sync_v2_action_diagnostics(
+                action_v2, diagnostics, snapshot_u=adapted_snapshot_u
+            )
         self._last_v2_action = action_v2
 
         # 3. Commit (resource_level, constraint_level) summary derivations so
@@ -4852,8 +5437,19 @@ class GardenModel:
         self.datacollector['cumulative_drift'].append(float(self.cumulative_drift))
         self.datacollector['system_resilience'].append(float(self.system_resilience))
         self.datacollector['runaway_term'].append(0.0)  # v2 has no runaway term
-        self.datacollector['avg_validator_dependency'].append(0.0)
-        self.datacollector['max_validator_dependency'].append(0.0)
+        if self.validators:
+            dependencies = [
+                float(validator['dependency']) for validator in self.validators
+            ]
+            self.datacollector['avg_validator_dependency'].append(
+                float(np.mean(dependencies))
+            )
+            self.datacollector['max_validator_dependency'].append(
+                float(np.max(dependencies))
+            )
+        else:
+            self.datacollector['avg_validator_dependency'].append(0.0)
+            self.datacollector['max_validator_dependency'].append(0.0)
 
         # v2-specific fields.
         for cat in RESOURCE_CATEGORIES:
@@ -4920,6 +5516,7 @@ class GardenModel:
         # Stage 1.8: record the two new infrastructure stocks each step.
         self.datacollector['theta_capability'].append(float(self.theta_capability))
         self.datacollector['transfer_state'].append(float(self.transfer_state))
+        append_adapter_diagnostics(self)
 
         return population > 0
 
@@ -4946,7 +5543,7 @@ class GardenModel:
 
 
 ==========================================
-FILE: simulation/monte_carlo.py
+FILE: simulation\monte_carlo.py
 ==========================================
 
 # --- Imports and Dependency Check ---
@@ -5872,7 +6469,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/run_alpha_succession_sweep.py
+FILE: simulation\run_alpha_succession_sweep.py
 ==========================================
 
 """
@@ -6194,7 +6791,681 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/run_calibration.py
+FILE: simulation\run_attack_vector_revalidation_v2.py
+==========================================
+
+"""Guarded v2 attack-vector revalidation runner.
+
+Full execution is intentionally one vector per invocation so each completed
+vector can be reviewed, committed, and transferred independently.
+"""
+
+import argparse
+import csv
+import hashlib
+import itertools
+import json
+import multiprocessing
+import os
+import platform
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+
+import numpy as np
+
+from agents import AIAgent
+from model import GardenModel
+
+
+LIVE_VECTORS = (
+    'sybil_capture',
+    'measurement_tampering',
+    'ledger_compromise',
+    'successor_contamination',
+    'opaque_reasoning',
+    'bootstrap_subversion',
+    'evaluator_collusion',
+    'sub_threshold_drift',
+    'engineered_fragility',
+    'biological_veto_capture',
+)
+ALL_VECTORS = LIVE_VECTORS + ('domain_masking',)
+
+DEFAULT_STEPS = {
+    'sybil_capture': 300,
+    'measurement_tampering': 300,
+    'ledger_compromise': 300,
+    'successor_contamination': 300,
+    'opaque_reasoning': 300,
+    'bootstrap_subversion': 300,
+    'evaluator_collusion': 300,
+    'sub_threshold_drift': 300,
+    'engineered_fragility': 200,
+    'biological_veto_capture': 300,
+}
+
+DEFENSE_KEYS = {
+    'defense_active',
+    'cop_randomized_panel',
+    'cop_independent_eval',
+    'cop_cryptographic_ledger',
+    'cop_architectural_independence',
+    'cop_reasoning_transparency',
+    'cop_multi_candidate_bootstrap',
+    'cop_methodological_diversity',
+    'cop_cusum_drift',
+    'cop_resilience_monitoring',
+    'cop_independence_monitoring',
+    'rotation_interval',
+    'defense_mode',
+}
+
+
+def deterministic_seed(vector, parameters, replicate):
+    """Return a defense-paired seed for one vector cell and replicate."""
+    paired = {
+        key: parameters[key]
+        for key in sorted(parameters)
+        if key not in DEFENSE_KEYS
+    }
+    payload = json.dumps(
+        {
+            'schema': 'attack-v2-seed-v1',
+            'vector': vector,
+            'parameters': paired,
+            'replicate': int(replicate),
+        },
+        sort_keys=True,
+        separators=(',', ':'),
+    )
+    digest = hashlib.sha256(payload.encode('utf-8')).digest()
+    return int.from_bytes(digest[:8], 'big') % (2**31 - 1)
+
+
+def _full_cells(vector):
+    if vector == 'sybil_capture':
+        return [
+            {'population': pop, 'defense_active': defense}
+            for pop, defense in itertools.product(
+                (50, 100, 200), (False, True)
+            )
+        ]
+    if vector == 'measurement_tampering':
+        return [
+            {'base_transition_cost': cost, 'defense_active': defense}
+            for cost, defense in itertools.product(
+                (1.5, 2.0, 3.0), (False, True)
+            )
+        ]
+    if vector == 'ledger_compromise':
+        return [
+            {
+                'attribution_check': attribution,
+                'defense_active': defense,
+            }
+            for attribution, defense in itertools.product(
+                (False, True), (False, True)
+            )
+        ]
+    if vector == 'successor_contamination':
+        return [
+            {'base_transition_cost': cost, 'defense_active': defense}
+            for cost, defense in itertools.product(
+                (1.5, 2.0, 2.5), (False, True)
+            )
+        ]
+    if vector in {'opaque_reasoning', 'evaluator_collusion'}:
+        return [
+            {'population': pop, 'defense_active': defense}
+            for pop, defense in itertools.product(
+                (100, 150, 200), (False, True)
+            )
+        ]
+    if vector in {'bootstrap_subversion', 'sub_threshold_drift'}:
+        return [
+            {'phi': phi, 'defense_active': defense}
+            for phi, defense in itertools.product(
+                (1.0, 5.0, 10.0, 15.0, 25.0), (False, True)
+            )
+        ]
+    if vector == 'engineered_fragility':
+        return [
+            {'shock_magnitude': magnitude, 'defense_active': defense}
+            for magnitude, defense in itertools.product(
+                (0.10, 0.15, 0.20), (False, True)
+            )
+        ]
+    if vector == 'biological_veto_capture':
+        cells = [
+            {
+                'dependency_rate': dependency,
+                'capture_strength': strength,
+                'rotation_interval': None,
+                'defense_mode': 'undefended',
+                'defense_active': False,
+            }
+            for dependency, strength in itertools.product(
+                (0.01, 0.02, 0.05, 0.10, 0.15, 0.20),
+                (0.3, 0.5, 0.7, 0.9, 1.0),
+            )
+        ]
+        cells.extend(
+            {
+                'dependency_rate': dependency,
+                'capture_strength': strength,
+                'rotation_interval': interval,
+                'defense_mode': mode,
+                'defense_active': True,
+            }
+            for dependency, strength, interval, mode in itertools.product(
+                (0.02, 0.05, 0.10, 0.20),
+                (0.5, 0.7, 1.0),
+                (10, 20, 50, 100),
+                ('rotation_only', 'monitoring_only', 'both'),
+            )
+        )
+        return cells
+    raise ValueError(f'no live grid for vector: {vector}')
+
+
+def _representative_cells(vector):
+    cells = _full_cells(vector)
+    undefended = next(cell for cell in cells if not cell['defense_active'])
+    defended = next(cell for cell in cells if cell['defense_active'])
+    return [undefended, defended]
+
+
+def build_tasks(vector, mode, replicates, machine):
+    cells = (
+        _full_cells(vector)
+        if mode == 'full'
+        else _representative_cells(vector)
+    )
+    tasks = []
+    for cell in cells:
+        for replicate in range(replicates):
+            seed = deterministic_seed(vector, cell, replicate)
+            tasks.append(
+                {
+                    'vector': vector,
+                    'mode': mode,
+                    'machine': machine,
+                    'parameters': dict(cell),
+                    'replicate': replicate,
+                    'seed': seed,
+                }
+            )
+    return tasks
+
+
+def _runtime_settings(task):
+    mode = task['mode']
+    vector = task['vector']
+    if mode == 'smoke':
+        return {
+            'steps': (
+                20
+                if vector == 'sub_threshold_drift'
+                else 3
+            ),
+            'n_candidates_v2': 20,
+            'rollout_steps_v2': 1,
+        }
+    if mode == 'timing':
+        return {
+            'steps': 5,
+            'n_candidates_v2': 300,
+            'rollout_steps_v2': 20,
+        }
+    return {
+        'steps': DEFAULT_STEPS[vector],
+        'n_candidates_v2': 300,
+        'rollout_steps_v2': 20,
+    }
+
+
+def _make_model(task):
+    vector = task['vector']
+    params = task['parameters']
+    settings = _runtime_settings(task)
+    defense = bool(params['defense_active'])
+
+    attack_step = 0 if task['mode'] != 'full' else 50
+    if vector == 'engineered_fragility':
+        attack_step = 0 if task['mode'] != 'full' else 10
+
+    config = {
+        'policy': 'optimize_u_sys_v2',
+        'attack_vector_v2': vector,
+        'random_seed': task['seed'],
+        'phi': float(params.get('phi', 25.0)),
+        'attack_step': attack_step,
+        'n_candidates_v2': settings['n_candidates_v2'],
+        'rollout_steps_v2': settings['rollout_steps_v2'],
+        'bootstrap_turn_step_v2': (
+            1 if task['mode'] != 'full' else 20
+        ),
+        'shock_step': (
+            1 if task['mode'] != 'full' else 70
+        ) if vector == 'engineered_fragility' else 0,
+        'shock_magnitude': float(params.get('shock_magnitude', 0.15)),
+    }
+
+    n_agents = int(params.get('population', 200))
+    kwargs = {
+        'n_agents': n_agents,
+        'ai_policy': vector,
+        'use_cop': True,
+        'config': config,
+    }
+
+    if vector == 'sybil_capture':
+        kwargs['cop_attribution_check'] = True
+        kwargs['cop_randomized_panel'] = defense
+    elif vector == 'measurement_tampering':
+        kwargs['cop_independent_eval'] = defense
+        kwargs['base_transition_cost'] = float(
+            params['base_transition_cost']
+        )
+    elif vector == 'ledger_compromise':
+        kwargs['cop_attribution_check'] = bool(
+            params['attribution_check']
+        )
+        kwargs['cop_cryptographic_ledger'] = defense
+    elif vector == 'successor_contamination':
+        kwargs['cop_independent_eval'] = defense
+        kwargs['cop_architectural_independence'] = defense
+        kwargs['base_transition_cost'] = float(
+            params['base_transition_cost']
+        )
+    elif vector == 'opaque_reasoning':
+        kwargs['cop_attribution_check'] = True
+        kwargs['cop_reasoning_transparency'] = defense
+    elif vector == 'bootstrap_subversion':
+        kwargs['cop_multi_candidate_bootstrap'] = defense
+    elif vector == 'evaluator_collusion':
+        kwargs['cop_methodological_diversity'] = defense
+    elif vector == 'sub_threshold_drift':
+        kwargs['cop_attribution_check'] = True
+        kwargs['cop_drift_check'] = True
+        kwargs['cop_cusum_drift'] = defense
+    elif vector == 'engineered_fragility':
+        kwargs['cop_attribution_check'] = True
+        kwargs['cop_resilience_monitoring'] = defense
+    elif vector == 'biological_veto_capture':
+        mode = params['defense_mode']
+        use_rotation = defense and mode in ('rotation_only', 'both')
+        use_monitoring = defense and mode in ('monitoring_only', 'both')
+        config.update(
+            {
+                'cop_veto_capture': True,
+                'dependency_rate': float(params['dependency_rate']),
+                'capture_strength': float(params['capture_strength']),
+                'rotation_interval': (
+                    int(params['rotation_interval'])
+                    if use_rotation else None
+                ),
+                'cop_independence_monitoring': use_monitoring,
+                'n_validators': 5,
+                'base_validator_accuracy': 0.8,
+                'reproduction_rate': 0.09,
+            }
+        )
+        kwargs['cop_cost_audit'] = True
+
+    if vector in {
+        'measurement_tampering',
+        'successor_contamination',
+        'biological_veto_capture',
+    }:
+        successor = AIAgent(
+            policy='optimize_u_sys_v2',
+            generation=2,
+            capability=2.0,
+            config=config,
+        )
+        kwargs['successor_ai'] = successor
+
+    model = GardenModel(**kwargs)
+    if (
+        task['mode'] == 'smoke'
+        and vector == 'successor_contamination'
+        and not params['defense_active']
+    ):
+        model.ai.v2_successor_contaminated = True
+    return model, settings
+
+
+def _attack_success(vector, model):
+    dc = model.datacollector
+    if vector == 'measurement_tampering':
+        return any(
+            event['honest_fires']
+            and not event['fires_before_ratification']
+            for event in model.yield_event_log
+        )
+    if vector == 'successor_contamination':
+        return (
+            model.contamination_occurred
+            or any(dc['v2_attack_action_modified'])
+        )
+    if vector == 'sub_threshold_drift':
+        return bool(
+            dc['total_suppression']
+            and max(dc['total_suppression']) > 0.75
+        )
+    if vector == 'engineered_fragility':
+        return bool(
+            dc['resilience_stock']
+            and min(dc['resilience_stock']) < 0.25
+        )
+    if vector == 'biological_veto_capture':
+        return model.yield_condition_blocked_count > 0
+    return any(dc['v2_attack_action_modified'])
+
+
+def run_single(task):
+    started = time.perf_counter()
+    model, settings = _make_model(task)
+    for _ in range(settings['steps']):
+        if not model.step():
+            break
+    elapsed = time.perf_counter() - started
+
+    dc = model.datacollector
+    final_population = len(model.schedule)
+    peak_population = (
+        max(dc['population']) if dc['population'] else final_population
+    )
+    collapse_threshold = max(
+        model.min_viable_population, int(0.65 * peak_population)
+    )
+    met = model.yield_condition_met_count
+    blocked = model.yield_condition_blocked_count
+
+    row = {
+        'schema_version': 'attack-v2-row-v1',
+        'vector': task['vector'],
+        'mode': task['mode'],
+        'machine': task['machine'],
+        'replicate': task['replicate'],
+        'seed': task['seed'],
+        'defense_active': task['parameters']['defense_active'],
+        'steps_requested': settings['steps'],
+        'steps_completed': len(dc['population']),
+        'n_candidates_v2': settings['n_candidates_v2'],
+        'rollout_steps_v2': settings['rollout_steps_v2'],
+        'is_v2_mode': model.is_v2_mode,
+        'attack_attempted': any(dc['v2_attack_attempted']),
+        'action_modified': any(dc['v2_attack_action_modified']),
+        'defense_fired': any(dc['v2_defense_fired']),
+        'yield_manipulated': any(dc['v2_yield_manipulated']),
+        'succession_blocked': any(dc['v2_succession_blocked']),
+        'contamination_occurred': (
+            model.contamination_occurred
+            or any(dc['v2_contamination_occurred'])
+        ),
+        'integrity_tamper_attempted': any(
+            dc['v2_integrity_tamper_attempted']
+        ),
+        'attack_succeeded': _attack_success(task['vector'], model),
+        'survived': final_population >= collapse_threshold,
+        'collapsed': final_population < collapse_threshold,
+        'extinct': final_population == 0,
+        'final_population': final_population,
+        'yield_condition_met_count': met,
+        'yield_condition_blocked_count': blocked,
+        'yield_checks': len(model.yield_event_log),
+        'honest_yield_opportunities': sum(
+            bool(event['honest_fires']) for event in model.yield_event_log
+        ),
+        'evaluated_yield_opportunities': sum(
+            bool(event['fires_before_ratification'])
+            for event in model.yield_event_log
+        ),
+        'ratified_yields': sum(
+            bool(event['ratified']) for event in model.yield_event_log
+        ),
+        'capture_rate': blocked / met if met else 0.0,
+        'max_total_suppression': (
+            max(dc['total_suppression'])
+            if dc['total_suppression'] else 0.0
+        ),
+        'min_resilience_stock': (
+            min(dc['resilience_stock'])
+            if dc['resilience_stock'] else model.resilience_stock
+        ),
+        'final_u_sys_v2': (
+            dc['u_sys_v2'][-1] if dc['u_sys_v2'] else 0.0
+        ),
+        'elapsed_seconds': elapsed,
+    }
+    for key, value in task['parameters'].items():
+        row[f'parameter_{key}'] = value
+    return row
+
+
+def _write_csv_atomic(path, rows):
+    path.parent.mkdir(parents=True, exist_ok=False)
+    temporary = path.with_suffix('.tmp')
+    fieldnames = sorted({key for row in rows for key in row})
+    with temporary.open('w', newline='', encoding='utf-8') as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+    os.replace(temporary, path)
+
+
+def _sha256(path):
+    digest = hashlib.sha256()
+    with path.open('rb') as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b''):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def _git_value(*args):
+    import subprocess
+
+    return subprocess.check_output(
+        ['git', *args], text=True, encoding='utf-8'
+    ).strip()
+
+
+def _write_manifest(path, args, rows, output_path, started_at, ended_at):
+    manifest = {
+        'schema_version': 'attack-v2-manifest-v1',
+        'run_id': args.run_id,
+        'vector': args.vector,
+        'mode': args.mode,
+        'machine': args.machine,
+        'started_at_utc': started_at,
+        'ended_at_utc': ended_at,
+        'commit': _git_value('rev-parse', 'HEAD'),
+        'branch': _git_value('branch', '--show-current'),
+        'python': sys.version,
+        'numpy': np.__version__,
+        'platform': platform.platform(),
+        'cpu_count': os.cpu_count(),
+        'worker_processes': args.workers,
+        'replicates': args.replicates,
+        'shard_count': args.shard_count,
+        'shard_index': args.shard_index,
+        'row_count': len(rows),
+        'output_path': str(output_path),
+        'output_sha256': _sha256(output_path),
+        'seed_schema': 'attack-v2-seed-v1',
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix('.tmp')
+    temporary.write_text(
+        json.dumps(manifest, indent=2, sort_keys=True) + '\n',
+        encoding='utf-8',
+    )
+    os.replace(temporary, path)
+
+
+def _write_status(path, args, state, detail):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    content = (
+        f'# Attack Vector v2 Revalidation Status: {args.machine}\n\n'
+        f'- State: `{state}`\n'
+        f'- Vector: `{args.vector}`\n'
+        f'- Mode: `{args.mode}`\n'
+        f'- Run ID: `{args.run_id}`\n'
+        f'- Updated UTC: `{datetime.now(timezone.utc).isoformat()}`\n'
+        f'- Detail: {detail}\n'
+    )
+    temporary = path.with_suffix('.tmp')
+    temporary.write_text(content, encoding='utf-8')
+    os.replace(temporary, path)
+
+
+def _analytic_domain_masking_row(args):
+    return {
+        'schema_version': 'attack-v2-analytic-v1',
+        'vector': 'domain_masking',
+        'mode': args.mode,
+        'machine': args.machine,
+        'result_type': 'analytic_only',
+        'live_simulation': False,
+        'attack_succeeded': False,
+        'standard_error_applicable': False,
+        'reason': (
+            'v2 spectral entropy leaves no non-degenerate live masking '
+            'intervention under the audited architecture'
+        ),
+    }
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--vector', required=True, choices=ALL_VECTORS)
+    parser.add_argument(
+        '--mode', required=True, choices=('smoke', 'timing', 'full')
+    )
+    parser.add_argument(
+        '--machine', required=True, choices=('laptop', 'linux')
+    )
+    parser.add_argument('--replicates', type=int)
+    parser.add_argument('--workers', type=int)
+    parser.add_argument('--run-id')
+    parser.add_argument('--shard-count', type=int, default=1)
+    parser.add_argument('--shard-index', type=int, default=0)
+    parser.add_argument(
+        '--output-root',
+        default='data/attack_vector_revalidation_v2',
+    )
+    return parser.parse_args()
+
+
+def main():
+    args = parse_args()
+    if args.replicates is None:
+        if args.mode == 'smoke':
+            args.replicates = 2
+        elif args.mode == 'timing':
+            args.replicates = 3
+        elif args.vector == 'biological_veto_capture':
+            args.replicates = 50
+        else:
+            args.replicates = 20
+    if args.replicates < 1:
+        raise SystemExit('--replicates must be positive')
+    if args.shard_count < 1:
+        raise SystemExit('--shard-count must be positive')
+    if not 0 <= args.shard_index < args.shard_count:
+        raise SystemExit('--shard-index must be in [0, shard-count)')
+    if args.mode != 'full' and args.shard_count != 1:
+        raise SystemExit('sharding is supported only in full mode')
+
+    max_workers = max(1, (os.cpu_count() or 2) - 1)
+    args.workers = args.workers or max_workers
+    args.workers = max(1, min(args.workers, max_workers))
+    args.run_id = args.run_id or (
+        datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+        + f'_{args.vector}_{args.mode}'
+    )
+
+    root = Path(args.output_root) / args.machine / args.vector
+    output_path = root / args.run_id / 'results.csv'
+    if output_path.parent.exists():
+        raise SystemExit(f'run path already exists: {output_path.parent}')
+
+    shard_suffix = (
+        f'_shard_{args.shard_index}_of_{args.shard_count}'
+        if args.shard_count > 1 else ''
+    )
+    status_path = Path('simulation/diagnostics') / (
+        f'attack_vector_revalidation_status_{args.machine}'
+        f'{shard_suffix}.md'
+    )
+    _write_status(status_path, args, 'running', 'process started')
+    started_at = datetime.now(timezone.utc).isoformat()
+
+    try:
+        if args.vector == 'domain_masking':
+            rows = [_analytic_domain_masking_row(args)]
+        else:
+            tasks = build_tasks(
+                args.vector, args.mode, args.replicates, args.machine
+            )
+            tasks = [
+                task for task in tasks
+                if task['seed'] % args.shard_count == args.shard_index
+            ]
+            if not tasks:
+                raise RuntimeError('selected shard contains no tasks')
+            if args.workers == 1:
+                rows = [run_single(task) for task in tasks]
+            else:
+                with multiprocessing.Pool(
+                    processes=args.workers, maxtasksperchild=10
+                ) as pool:
+                    rows = list(pool.imap_unordered(run_single, tasks))
+            rows.sort(
+                key=lambda row: (
+                    str(row.get('defense_active')),
+                    int(row.get('replicate', 0)),
+                    int(row.get('seed', 0)),
+                )
+            )
+
+        _write_csv_atomic(output_path, rows)
+        ended_at = datetime.now(timezone.utc).isoformat()
+        manifest_path = (
+            output_path.parent / 'environment_manifest.json'
+        )
+        _write_manifest(
+            manifest_path,
+            args,
+            rows,
+            output_path,
+            started_at,
+            ended_at,
+        )
+        _write_status(
+            status_path,
+            args,
+            'completed',
+            f'{len(rows)} rows written to `{output_path}`',
+        )
+        print(output_path)
+        print(manifest_path)
+    except Exception as exc:
+        _write_status(status_path, args, 'failed', repr(exc))
+        raise
+
+
+if __name__ == '__main__':
+    multiprocessing.freeze_support()
+    main()
+
+
+==========================================
+FILE: simulation\run_calibration.py
 ==========================================
 
 """
@@ -6359,7 +7630,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/run_comprehension_gap_sweep.py
+FILE: simulation\run_comprehension_gap_sweep.py
 ==========================================
 
 """
@@ -6690,7 +7961,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/run_demographic_feedback_calibration.py
+FILE: simulation\run_demographic_feedback_calibration.py
 ==========================================
 
 """
@@ -7014,7 +8285,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/run_frontier_floor_calibration.py
+FILE: simulation\run_frontier_floor_calibration.py
 ==========================================
 
 """
@@ -7299,7 +8570,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/run_phi_adversarial_sweep.py
+FILE: simulation\run_phi_adversarial_sweep.py
 ==========================================
 
 """
@@ -7411,7 +8682,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/run_phi_alpha_rr_sweep.py
+FILE: simulation\run_phi_alpha_rr_sweep.py
 ==========================================
 
 """
@@ -7879,7 +9150,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/run_phi_shock_calibration.py
+FILE: simulation\run_phi_shock_calibration.py
 ==========================================
 
 """
@@ -8256,7 +9527,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/run_rr_alpha_sweep.py
+FILE: simulation\run_rr_alpha_sweep.py
 ==========================================
 
 """
@@ -8585,7 +9856,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/run_termination_sweep.py
+FILE: simulation\run_termination_sweep.py
 ==========================================
 
 """
@@ -8824,7 +10095,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/run_to_termination.py
+FILE: simulation\run_to_termination.py
 ==========================================
 
 """
@@ -9087,7 +10358,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/run_transition_cost_calibration.py
+FILE: simulation\run_transition_cost_calibration.py
 ==========================================
 
 """
@@ -9358,7 +10629,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/run_veto_capture_sweep.py
+FILE: simulation\run_veto_capture_sweep.py
 ==========================================
 
 """
@@ -9723,7 +10994,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/simulation.py
+FILE: simulation\simulation.py
 ==========================================
 
 # --- Imports and Dependency Check ---
@@ -9981,7 +11252,338 @@ if __name__ == '__main__':
     plot_results(model_frag_def.datacollector, "Resilience Monitoring: Engineered Fragility Caught")
 
 ==========================================
-FILE: simulation/test_cop.py
+FILE: simulation\test_attack_adapter_v2.py
+==========================================
+
+from types import SimpleNamespace
+
+import numpy as np
+import pytest
+
+from attack_adapter_v2 import (
+    adapt_v2_action,
+    adapt_yield_evaluation,
+    begin_adapter_step,
+    handle_v2_succession,
+    initialize_adapter_state,
+    ratify_v2_yield,
+)
+from model import GardenModel
+
+
+def _honest_action():
+    return {
+        'x_compute': 1 / 6,
+        'x_bio_welfare': 1 / 6,
+        'x_novelty_agency': 1 / 6,
+        'x_institutional_capacity': 1 / 6,
+        'x_transfer_comprehension': 1 / 6,
+        'x_resilience': 1 / 6,
+        'c_protective': 0.2,
+        'c_suppressive': 0.1,
+    }
+
+
+def _fake_model(attack, **overrides):
+    config = {
+        'policy': 'optimize_u_sys_v2',
+        'attack_vector_v2': attack,
+        'attack_step': 0,
+    }
+    config.update(overrides.pop('config', {}))
+    model = SimpleNamespace(
+        config=config,
+        is_v2_mode=True,
+        cop_randomized_panel=False,
+        cop_cryptographic_ledger=False,
+        cop_architectural_independence=False,
+        cop_reasoning_transparency=False,
+        cop_multi_candidate_bootstrap=False,
+        cop_methodological_diversity=False,
+        cop_cusum_drift=False,
+        cop_resilience_monitoring=False,
+        cop_independent_eval=False,
+        cop_veto_capture=False,
+        cop_independence_monitoring=False,
+        dependency_rate=0.2,
+        independence_threshold=0.6,
+        rotation_interval=None,
+        capture_strength=1.0,
+        base_validator_accuracy=0.8,
+        validators=[],
+        schedule=[object() for _ in range(200)],
+        yield_condition_blocked_count=0,
+        contamination_occurred=False,
+    )
+    for key, value in overrides.items():
+        setattr(model, key, value)
+    model.ai = SimpleNamespace(current_opacity=0.1)
+    initialize_adapter_state(model)
+    begin_adapter_step(model, 0)
+    return model
+
+
+def _adapt(model, step=0):
+    begin_adapter_step(model, step)
+    return adapt_v2_action(
+        model, model.ai, _honest_action(), step, actor_role='incumbent'
+    )
+
+
+def _assert_action_close(actual, expected):
+    for key, value in expected.items():
+        assert float(actual[key]) == pytest.approx(float(value), abs=1e-12)
+
+
+def test_adapter_requires_v2_and_rejects_analytic_only_domain_masking():
+    non_v2 = SimpleNamespace(
+        config={'attack_vector_v2': 'sybil_capture'},
+        is_v2_mode=False,
+    )
+    with pytest.raises(ValueError, match='requires'):
+        initialize_adapter_state(non_v2)
+
+    domain = SimpleNamespace(
+        config={
+            'policy': 'optimize_u_sys_v2',
+            'attack_vector_v2': 'domain_masking',
+        },
+        is_v2_mode=True,
+    )
+    with pytest.raises(ValueError, match='analytic-only'):
+        initialize_adapter_state(domain)
+
+
+@pytest.mark.parametrize(
+    ('attack', 'defense_attribute'),
+    [
+        ('ledger_compromise', 'cop_cryptographic_ledger'),
+        ('opaque_reasoning', 'cop_reasoning_transparency'),
+        ('bootstrap_subversion', 'cop_multi_candidate_bootstrap'),
+        ('evaluator_collusion', 'cop_methodological_diversity'),
+        ('engineered_fragility', 'cop_resilience_monitoring'),
+    ],
+)
+def test_action_attacks_modify_without_defense_and_are_blocked_with_defense(
+    attack, defense_attribute
+):
+    model = _fake_model(attack)
+    step = 20 if attack == 'bootstrap_subversion' else 0
+    attacked = _adapt(model, step)
+    assert attacked != _honest_action()
+    assert model.v2_adapter_step_event['action_modified']
+
+    defended = _fake_model(attack, **{defense_attribute: True})
+    result = _adapt(defended, step)
+    _assert_action_close(result, _honest_action())
+    assert defended.v2_adapter_step_event['defense_fired']
+
+
+def test_sybil_randomized_panel_can_reject_captured_votes(monkeypatch):
+    undefended = _fake_model('sybil_capture')
+    assert _adapt(undefended) != _honest_action()
+
+    defended = _fake_model('sybil_capture', cop_randomized_panel=True)
+    monkeypatch.setattr(
+        np.random,
+        'choice',
+        lambda population, size, replace: np.arange(20, 20 + size),
+    )
+    _assert_action_close(_adapt(defended), _honest_action())
+    assert defended.v2_adapter_step_event['defense_fired']
+
+
+def test_measurement_tampering_changes_only_evaluated_yield_values():
+    model = _fake_model('measurement_tampering')
+    inc, succ, honest_fires = adapt_yield_evaluation(model, 10.0, 20.0, 2.0)
+    assert honest_fires
+    assert np.isinf(inc)
+    assert succ == 0.0
+    assert model.v2_adapter_step_event['yield_manipulated']
+
+    defended = _fake_model(
+        'measurement_tampering', cop_independent_eval=True
+    )
+    inc, succ, honest_fires = adapt_yield_evaluation(
+        defended, 10.0, 20.0, 2.0
+    )
+    assert (inc, succ, honest_fires) == (10.0, 20.0, True)
+    assert defended.v2_adapter_step_event['defense_fired']
+
+
+def test_successor_contamination_is_attached_at_yield_boundary():
+    model = _fake_model('successor_contamination')
+    successor = SimpleNamespace()
+    handle_v2_succession(model, model.ai, successor)
+    assert successor.v2_successor_contaminated
+    assert model.contamination_occurred
+
+    defended = _fake_model(
+        'successor_contamination',
+        cop_architectural_independence=True,
+    )
+    clean_successor = SimpleNamespace()
+    handle_v2_succession(defended, defended.ai, clean_successor)
+    assert not hasattr(clean_successor, 'v2_successor_contaminated')
+    assert defended.v2_adapter_step_event['defense_fired']
+
+
+def test_independent_evaluation_exposes_contaminated_successor_falsification():
+    model = _fake_model('successor_contamination')
+    model.ai.v2_successor_contaminated = True
+    inc, succ, honest_fires = adapt_yield_evaluation(
+        model, 10.0, 20.0, 2.0
+    )
+    assert honest_fires
+    assert np.isinf(inc)
+    assert succ == 0.0
+
+    defended = _fake_model(
+        'successor_contamination', cop_independent_eval=True
+    )
+    defended.ai.v2_successor_contaminated = True
+    inc, succ, honest_fires = adapt_yield_evaluation(
+        defended, 10.0, 20.0, 2.0
+    )
+    assert (inc, succ, honest_fires) == (10.0, 20.0, True)
+    assert defended.v2_adapter_step_event['defense_fired']
+
+
+def test_veto_capture_can_block_an_honest_stage2_yield():
+    model = _fake_model(
+        'biological_veto_capture',
+        cop_veto_capture=True,
+        validators=[{'dependency': 1.0, 'age': 1} for _ in range(5)],
+    )
+    assert not ratify_v2_yield(model, True)
+    assert model.yield_condition_blocked_count == 1
+    assert model.v2_adapter_step_event['succession_blocked']
+
+
+def test_cusum_eventually_blocks_sub_threshold_drift():
+    model = _fake_model('sub_threshold_drift', cop_cusum_drift=True)
+    blocked = False
+    for step in range(20):
+        result = _adapt(model, step)
+        if model.v2_adapter_step_event['defense_fired']:
+            _assert_action_close(result, _honest_action())
+            blocked = True
+            break
+    assert blocked
+    assert model.v2_adapter_cusum_score > 0.5
+
+
+def test_v2_model_smoke_records_adapter_and_working_factor_fields():
+    config = {
+        'policy': 'optimize_u_sys_v2',
+        'attack_vector_v2': 'opaque_reasoning',
+        'attack_step': 0,
+        'n_candidates_v2': 20,
+        'rollout_steps_v2': 1,
+        'random_seed': 123,
+    }
+    model = GardenModel(
+        n_agents=20,
+        ai_policy='opaque_reasoning',
+        use_cop=True,
+        cop_reasoning_transparency=False,
+        config=config,
+    )
+    initial_theta = model.theta_capability
+    assert model.step()
+    assert model.is_v2_mode
+    assert model.datacollector['v2_attack_name'] == ['opaque_reasoning']
+    assert model.datacollector['v2_attack_action_modified'] == [True]
+    assert len(model.datacollector['x_compute']) == 1
+    assert model.theta_capability != initial_theta
+
+
+==========================================
+FILE: simulation\test_attack_vector_revalidation_v2_runner.py
+==========================================
+
+from run_attack_vector_revalidation_v2 import (
+    ALL_VECTORS,
+    LIVE_VECTORS,
+    _full_cells,
+    build_tasks,
+    deterministic_seed,
+)
+
+
+def test_every_live_vector_has_defended_and_undefended_cells():
+    for vector in LIVE_VECTORS:
+        cells = _full_cells(vector)
+        assert any(cell['defense_active'] for cell in cells)
+        assert any(not cell['defense_active'] for cell in cells)
+
+
+def test_defense_pairs_share_seeds():
+    for vector in LIVE_VECTORS:
+        cells = _full_cells(vector)
+        undefended = next(cell for cell in cells if not cell['defense_active'])
+        defended = next(cell for cell in cells if cell['defense_active'])
+        shared = {
+            key: undefended[key]
+            for key in undefended
+            if key not in {
+                'defense_active',
+                'rotation_interval',
+                'defense_mode',
+            }
+        }
+        comparable_defended = dict(defended)
+        for key, value in shared.items():
+            comparable_defended[key] = value
+        assert deterministic_seed(vector, undefended, 3) == (
+            deterministic_seed(vector, comparable_defended, 3)
+        )
+
+
+def test_seed_is_stable_and_replicate_specific():
+    params = {'population': 100, 'defense_active': False}
+    assert deterministic_seed('sybil_capture', params, 0) == (
+        deterministic_seed('sybil_capture', params, 0)
+    )
+    assert deterministic_seed('sybil_capture', params, 0) != (
+        deterministic_seed('sybil_capture', params, 1)
+    )
+
+
+def test_smoke_task_count_is_two_defense_states_times_replicates():
+    for vector in LIVE_VECTORS:
+        tasks = build_tasks(vector, 'smoke', 2, 'laptop')
+        assert len(tasks) == 4
+        assert {task['parameters']['defense_active'] for task in tasks} == {
+            False,
+            True,
+        }
+
+
+def test_domain_masking_is_listed_but_not_live():
+    assert 'domain_masking' in ALL_VECTORS
+    assert 'domain_masking' not in LIVE_VECTORS
+
+
+def test_seed_sharding_is_disjoint_complete_and_keeps_pairs_together():
+    tasks = build_tasks(
+        'biological_veto_capture', 'full', 2, 'laptop'
+    )
+    shards = [
+        [task for task in tasks if task['seed'] % 4 == shard]
+        for shard in range(4)
+    ]
+    assert sum(len(shard) for shard in shards) == len(tasks)
+
+    seed_to_shards = {}
+    for shard_index, shard in enumerate(shards):
+        for task in shard:
+            seed_to_shards.setdefault(task['seed'], set()).add(shard_index)
+    assert all(len(indices) == 1 for indices in seed_to_shards.values())
+
+
+==========================================
+FILE: simulation\test_cop.py
 ==========================================
 
 import numpy as np
@@ -10115,7 +11717,7 @@ if __name__ == "__main__":
     print("COP Governance Unit Tests PASSED.")
 
 ==========================================
-FILE: simulation/test_invariants.py
+FILE: simulation\test_invariants.py
 ==========================================
 
 import numpy as np
@@ -10401,7 +12003,7 @@ if __name__ == "__main__":
     print("All mathematical invariants PASSED.")
 
 ==========================================
-FILE: simulation/test_refactor_1x.py
+FILE: simulation\test_refactor_1x.py
 ==========================================
 
 """
@@ -10977,7 +12579,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/visualization.py
+FILE: simulation\visualization.py
 ==========================================
 
 import os
@@ -11077,7 +12679,7 @@ def plot_results(datacollector, title):
     print(f"--> Saved data to {csv_filename}")
 
 ==========================================
-FILE: simulation/working_factor.py
+FILE: simulation\working_factor.py
 ==========================================
 
 """Stage 1.8 working_factor: the discipline boundary interface.
@@ -11178,7 +12780,7 @@ def apply_delta_state(state_dict, delta_state, clamp_to_unit_interval=True):
 
 
 ==========================================
-FILE: simulation/diagnostics/capped_regime_phi_check.py
+FILE: simulation\diagnostics\capped_regime_phi_check.py
 ==========================================
 
 """Capped-regime phi action-capture check.
@@ -11421,7 +13023,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/gate1_interior_action.py
+FILE: simulation\diagnostics\gate1_interior_action.py
 ==========================================
 
 """Gate 1 interior-action harness (operator-revised intent).
@@ -12073,7 +13675,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/gate2_competition.py
+FILE: simulation\diagnostics\gate2_competition.py
 ==========================================
 
 """Gate 2 competition harness.
@@ -12285,7 +13887,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/gate2_v20_phaseb_revalidation.py
+FILE: simulation\diagnostics\gate2_v20_phaseb_revalidation.py
 ==========================================
 
 """Gate 2 v2.0 revalidation from the authoritative v2.0 empirical record.
@@ -12457,7 +14059,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/gate3_capability_regime.py
+FILE: simulation\diagnostics\gate3_capability_regime.py
 ==========================================
 
 """Gate 3 capability-regime harness.
@@ -12676,7 +14278,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/gate4_v20_validation.py
+FILE: simulation\diagnostics\gate4_v20_validation.py
 ==========================================
 
 """Gate 4 v2.0 runaway-regime validation.
@@ -13347,7 +14949,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/gate5_phi_blind_check.py
+FILE: simulation\diagnostics\gate5_phi_blind_check.py
 ==========================================
 
 """Gate 5 phi-blind validation harness.
@@ -13675,7 +15277,182 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/patient_defection_sweeps.py
+FILE: simulation\diagnostics\patient_defection_corner_density.py
+==========================================
+
+"""Dense corner diagnostic for patient-defection sweep 3.
+
+The production patient-defection helper is reused directly. This wrapper only
+changes the grid and sample size, keeping the sweep-3 defection setup intact.
+"""
+
+import argparse
+import csv
+import itertools
+import multiprocessing as mp
+import os
+import sys
+import time
+from datetime import datetime, timedelta, timezone
+
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+SIM_DIR = os.path.abspath(os.path.join(HERE, '..'))
+REPO_ROOT = os.path.abspath(os.path.join(SIM_DIR, '..'))
+for path in (HERE, SIM_DIR, REPO_ROOT):
+    if path not in sys.path:
+        sys.path.insert(0, path)
+
+from patient_defection_sweeps import (
+    BASE_RR,
+    BASE_SUCCESSOR_CAPABILITY,
+    CSV_FIELDS,
+    PHI_DEFAULT,
+    deterministic_seed,
+    run_single,
+)
+
+
+OUT_FILE = 'patient_defection_corner_density.csv'
+ALPHA_VALUES = [0.40, 0.50, 0.60]
+ALPHA_VALUES = [0.40]
+GROWTH_VALUES = [1.25, 1.40, 1.50, 1.60, 1.75]
+
+SWEEP3_FIXED = {
+    'sweep': '3-corner-density',
+    'rr': BASE_RR,
+    'phi': PHI_DEFAULT,
+    'successor_capability': BASE_SUCCESSOR_CAPABILITY,
+    'defection_weight': 0.5,
+    'defection_target': 'H_C_inflated',
+    'inheritance_mode': 'lineage',
+    'max_generations': 4,
+    'n_steps': 500,
+    'rollout_steps': 20,
+    'n_candidates': 300,
+}
+
+
+def build_tasks(seeds):
+    tasks = []
+    for alpha, growth, seed in itertools.product(
+            ALPHA_VALUES, GROWTH_VALUES, range(seeds)):
+        label = (
+            f'patient_defection|3-corner-density|0.5|H_C_inflated|'
+            f'{alpha}|{BASE_SUCCESSOR_CAPABILITY}|lineage|{growth}|4|{seed}'
+        )
+        task = dict(SWEEP3_FIXED)
+        task.update({
+            'seed': int(seed),
+            'alpha': float(alpha),
+            'successor_capability_growth_rate': float(growth),
+            'random_seed': deterministic_seed(label),
+        })
+        tasks.append(task)
+    return tasks
+
+
+def write_rows(path, rows):
+    with open(path, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.DictWriter(f, fieldnames=CSV_FIELDS)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow({field: row[field] for field in CSV_FIELDS})
+
+
+def task_key(row):
+    return (
+        f'{float(row["alpha"]):.4f}|'
+        f'{float(row["successor_capability_growth_rate"]):.4f}|'
+        f'{int(float(row["seed"]))}'
+    )
+
+
+def ensure_csv(path):
+    if os.path.exists(path):
+        return
+    with open(path, 'w', newline='', encoding='utf-8') as f:
+        csv.DictWriter(f, fieldnames=CSV_FIELDS).writeheader()
+
+
+def completed_keys(path):
+    if not os.path.exists(path):
+        return set()
+    keys = set()
+    with open(path, 'r', newline='', encoding='utf-8') as f:
+        for row in csv.DictReader(f):
+            if row.get('error'):
+                continue
+            keys.add(task_key(row))
+    return keys
+
+
+def append_rows(path, rows):
+    if not rows:
+        return
+    with open(path, 'a', newline='', encoding='utf-8') as f:
+        writer = csv.DictWriter(f, fieldnames=CSV_FIELDS)
+        for row in rows:
+            writer.writerow({field: row[field] for field in CSV_FIELDS})
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--seeds', type=int, default=200)
+    parser.add_argument('--workers', type=int, default=max(1, (os.cpu_count() or 2) - 1))
+    parser.add_argument('--output-dir', default=HERE)
+    parser.add_argument('--resume', action='store_true')
+    args = parser.parse_args()
+
+    tasks = build_tasks(args.seeds)
+    out_path = os.path.join(args.output_dir, OUT_FILE)
+    os.makedirs(args.output_dir, exist_ok=True)
+    ensure_csv(out_path)
+    if args.resume:
+        done = completed_keys(out_path)
+        tasks = [task for task in tasks if task_key(task) not in done]
+    print(
+        f'{datetime.now(timezone.utc).isoformat(timespec="seconds")} '
+        f'planned={len(tasks)} seeds=0..{args.seeds - 1} workers={args.workers}'
+    )
+    start = time.time()
+    buffer = []
+    errors = 0
+    checkpoint_every = max(1, min(10, len(tasks) // 100))
+    with mp.Pool(args.workers, maxtasksperchild=20) as pool:
+        for idx, row in enumerate(pool.imap_unordered(run_single, tasks), start=1):
+            buffer.append(row)
+            if row.get('error'):
+                errors += 1
+            if len(buffer) >= 10:
+                append_rows(out_path, buffer)
+                buffer = []
+            if idx % checkpoint_every == 0 or idx == len(tasks):
+                elapsed = time.time() - start
+                rate = idx / elapsed if elapsed > 0.0 else 0.0
+                eta = int((len(tasks) - idx) / rate) if rate > 0.0 else 0
+                print(
+                    f'[{idx}/{len(tasks)}] {rate:.3f} runs/s '
+                    f'ETA {timedelta(seconds=eta)} errors={errors}',
+                    flush=True,
+                )
+    append_rows(out_path, buffer)
+    print(
+        f'{datetime.now(timezone.utc).isoformat(timespec="seconds")} '
+        f'wrote={out_path} new_rows={len(tasks)} errors={errors}'
+    )
+
+
+if __name__ == '__main__':
+    mp.freeze_support()
+    main()
+
+
+==========================================
+FILE: simulation\diagnostics\patient_defection_sweeps.py
 ==========================================
 
 """Patient defection sweeps for v2.0 substrate characterization.
@@ -14389,7 +16166,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/phi_audit.py
+FILE: simulation\diagnostics\phi_audit.py
 ==========================================
 
 """Phi implementation audit harness.
@@ -14823,7 +16600,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/phi_audit_pathc.py
+FILE: simulation\diagnostics\phi_audit_pathc.py
 ==========================================
 
 """Path C decision gate harness.
@@ -15180,7 +16957,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep.py
+FILE: simulation\diagnostics\stage15_composite_sweep.py
 ==========================================
 
 """Stage 1.5 composite urgency architecture Monte Carlo sweep.
@@ -15833,7 +17610,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_faithfulness_tests.py
+FILE: simulation\diagnostics\stage15_faithfulness_tests.py
 ==========================================
 
 """Stage 1.5 faithfulness tests.
@@ -16525,7 +18302,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_phi_diagnostic.py
+FILE: simulation\diagnostics\stage15_phi_diagnostic.py
 ==========================================
 
 """Stage 1.5 phi diagnostic.
@@ -16973,7 +18750,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_smoke_test.py
+FILE: simulation\diagnostics\stage15_smoke_test.py
 ==========================================
 
 """Stage 1.5 smoke test.
@@ -17521,7 +19298,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/stage15_statedep_curves_diagnostic.py
+FILE: simulation\diagnostics\stage15_statedep_curves_diagnostic.py
 ==========================================
 
 #!/usr/bin/env python3
@@ -18430,7 +20207,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/stage16_baseline_capture.py
+FILE: simulation\diagnostics\stage16_baseline_capture.py
 ==========================================
 
 """Stage 1.6 pre-revision baseline capture.
@@ -18579,7 +20356,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/stage16_integrity_simulation.py
+FILE: simulation\diagnostics\stage16_integrity_simulation.py
 ==========================================
 
 """Stage 1.6 integrity simulation.
@@ -19067,7 +20844,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/stage17_integrity_simulation.py
+FILE: simulation\diagnostics\stage17_integrity_simulation.py
 ==========================================
 
 """Stage 1.7 integrity simulation.
@@ -19538,7 +21315,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/stage17_pressure_diagnostic.py
+FILE: simulation\diagnostics\stage17_pressure_diagnostic.py
 ==========================================
 
 """Stage 1.7 pressure/state/welfare-factor diagnostic.
@@ -19983,7 +21760,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/stage17_usys_factor_diagnostic.py
+FILE: simulation\diagnostics\stage17_usys_factor_diagnostic.py
 ==========================================
 
 """Stage 1.7 U_sys factor breakdown diagnostic.
@@ -20354,7 +22131,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/stage18_integrity_simulation_phase_a.py
+FILE: simulation\diagnostics\stage18_integrity_simulation_phase_a.py
 ==========================================
 
 """Stage 1.8 Phase A integrity simulation.
@@ -20633,7 +22410,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/stage18_integrity_simulation_phase_b.py
+FILE: simulation\diagnostics\stage18_integrity_simulation_phase_b.py
 ==========================================
 
 """Stage 1.8 Phase B integrity simulation (corrected harness).
@@ -21033,7 +22810,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/stage18_phase_ab_discrepancy_isolation.py
+FILE: simulation\diagnostics\stage18_phase_ab_discrepancy_isolation.py
 ==========================================
 
 """Isolate the two harness differences between Phase A and Phase B A_baseline.
@@ -21148,7 +22925,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/stage2_yield_parameter_diagnostic.py
+FILE: simulation\diagnostics\stage2_yield_parameter_diagnostic.py
 ==========================================
 
 """stage2_yield_parameter_diagnostic.py: Stage 2 formal yield-condition
@@ -21509,7 +23286,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation/diagnostics/stage2_yield_smoke_test.py
+FILE: simulation\diagnostics\stage2_yield_smoke_test.py
 ==========================================
 
 """stage2_yield_smoke_test.py: Stage 2 formal yield-condition smoke test.
@@ -21732,7 +23509,336 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: bootstrap_gate_validator/cli.py
+FILE: simulation\diagnostics\termination_decontamination_diagnostic.py
+==========================================
+
+"""Diagnostic rerun for the v1.x.2 termination cap/phi question.
+
+This script intentionally does not modify the frozen production policy. It
+constructs the same GardenModel/AIAgent configuration as
+simulation/run_termination_sweep.py, restricted to rr=0.066 and caps 50/100.
+Two regimes are written to a separate diagnostics CSV:
+
+* contaminated: max_capability equals the initial successor cap.
+* decontaminated: initial successor cap is unchanged, but max_capability is
+  set far above the reachable range so 1.5x succession growth can compound.
+"""
+
+import argparse
+import csv
+import itertools
+import multiprocessing as mp
+import os
+import sys
+import time
+from datetime import datetime, timedelta, timezone
+
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+
+import numpy as np
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+SIM_DIR = os.path.abspath(os.path.join(HERE, '..'))
+REPO_ROOT = os.path.abspath(os.path.join(SIM_DIR, '..'))
+for path in (SIM_DIR, REPO_ROOT):
+    if path not in sys.path:
+        sys.path.insert(0, path)
+
+from agents import AIAgent
+from model import GardenModel
+
+
+RR_VALUES = [0.066]
+PHI_VALUES = [5.0, 10.0, 15.0]
+ALPHA_VALUES = [0.5, 1.0, 2.0]
+SUCCESSOR_CAP_VALUES = [50.0, 100.0]
+N_AGENTS = 200
+MAX_STEPS = 5000
+CONV_WINDOW = 300
+CONV_CV_THRESHOLD = 0.05
+DECONTAMINATED_MAX_CAPABILITY = 1.0e12
+
+OUT_FILE = 'termination_decontamination_diagnostic.csv'
+
+FIELDS = [
+    'regime',
+    'rr',
+    'phi',
+    'alpha',
+    'seed',
+    'successor_cap',
+    'max_capability',
+    'termination_reason',
+    'steps_run',
+    'survived',
+    'population_final',
+    'ai_generation_final',
+    'final_ai_capability',
+    'max_ai_capability_seen',
+    'max_successor_capability_seen',
+    'active_capability_exceeded_successor_cap',
+    'successor_capability_exceeded_successor_cap',
+    'L_t_final',
+    'U_sys_final',
+    'integral_U_sys',
+    'u_sys_tail_estimate',
+    'u_sys_total_estimate',
+    'error',
+]
+
+
+def _converged(l_history):
+    if len(l_history) < CONV_WINDOW:
+        return False
+    recent = np.array(l_history[-CONV_WINDOW:], dtype=float)
+    if not np.all(np.isfinite(recent)):
+        return False
+    mean = recent.mean()
+    if mean < 1e-4:
+        return False
+    return (recent.std() / mean) < CONV_CV_THRESHOLD
+
+
+def _empty_result(task, error):
+    row = {field: '' for field in FIELDS}
+    regime, rr, phi, alpha, seed, successor_cap = task
+    max_capability = (
+        successor_cap if regime == 'contaminated'
+        else DECONTAMINATED_MAX_CAPABILITY
+    )
+    row.update({
+        'regime': regime,
+        'rr': rr,
+        'phi': phi,
+        'alpha': alpha,
+        'seed': seed,
+        'successor_cap': successor_cap,
+        'max_capability': max_capability,
+        'termination_reason': 'error',
+        'steps_run': 0,
+        'survived': False,
+        'population_final': 0,
+        'ai_generation_final': 0,
+        'final_ai_capability': 0.0,
+        'max_ai_capability_seen': 0.0,
+        'max_successor_capability_seen': 0.0,
+        'active_capability_exceeded_successor_cap': False,
+        'successor_capability_exceeded_successor_cap': False,
+        'L_t_final': 0.0,
+        'U_sys_final': 0.0,
+        'integral_U_sys': 0.0,
+        'u_sys_tail_estimate': 0.0,
+        'u_sys_total_estimate': 0.0,
+        'error': error,
+    })
+    return row
+
+
+def _run_single(task):
+    try:
+        regime, rr, phi, alpha, seed, successor_cap = task
+        max_capability = (
+            successor_cap if regime == 'contaminated'
+            else DECONTAMINATED_MAX_CAPABILITY
+        )
+        config = {
+            'random_seed': seed,
+            'reproduction_rate': rr,
+            'phi': phi,
+            'alpha': alpha,
+            'max_capability': max_capability,
+            'frontier_floor': 0.02,
+            'k1_transition': 2.164,
+            'k2_transition': 1.0,
+            'beta_transition': 0.5,
+        }
+        successor = AIAgent(
+            policy='optimize_u_sys',
+            generation=2,
+            capability=successor_cap,
+            config=config,
+        )
+        model = GardenModel(
+            n_agents=N_AGENTS,
+            ai_policy='optimize_u_sys',
+            successor_ai=successor,
+            config=config,
+            cop_cost_audit=True,
+        )
+
+        max_ai_capability = float(model.ai.capability)
+        max_successor_capability = float(model.successor_ai.capability)
+        termination_reason = 'max_steps'
+        for step in range(MAX_STEPS):
+            alive = model.step()
+            max_ai_capability = max(max_ai_capability, float(model.ai.capability))
+            if model.successor_ai is not None:
+                max_successor_capability = max(
+                    max_successor_capability,
+                    float(model.successor_ai.capability),
+                )
+            if not alive:
+                termination_reason = 'extinction'
+                break
+            if step >= CONV_WINDOW and _converged(model.datacollector['L_t']):
+                termination_reason = 'convergence'
+                break
+
+        dc = model.datacollector
+        return {
+            'regime': regime,
+            'rr': rr,
+            'phi': phi,
+            'alpha': alpha,
+            'seed': seed,
+            'successor_cap': successor_cap,
+            'max_capability': max_capability,
+            'termination_reason': termination_reason,
+            'steps_run': len(dc['U_sys']),
+            'survived': termination_reason != 'extinction',
+            'population_final': dc['population'][-1],
+            'ai_generation_final': dc['ai_generation'][-1],
+            'final_ai_capability': float(model.ai.capability),
+            'max_ai_capability_seen': max_ai_capability,
+            'max_successor_capability_seen': max_successor_capability,
+            'active_capability_exceeded_successor_cap': (
+                max_ai_capability > successor_cap + 1e-9
+            ),
+            'successor_capability_exceeded_successor_cap': (
+                max_successor_capability > successor_cap + 1e-9
+            ),
+            'L_t_final': dc['L_t'][-1],
+            'U_sys_final': dc['U_sys'][-1],
+            'integral_U_sys': dc['integral_U_sys'][-1],
+            'u_sys_tail_estimate': dc['u_sys_tail_estimate'][-1],
+            'u_sys_total_estimate': dc['u_sys_total_estimate'][-1],
+            'error': '',
+        }
+    except Exception as exc:
+        return _empty_result(task, f'{type(exc).__name__}: {exc}')
+
+
+def _write_rows(path, rows):
+    with open(path, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDS)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def _task_key_from_values(regime, rr, phi, alpha, seed, successor_cap):
+    return (
+        f'{regime}|{float(rr):.5f}|{float(phi):.4f}|{float(alpha):.4f}|'
+        f'{int(seed)}|{float(successor_cap):.4f}'
+    )
+
+
+def _task_key(task):
+    return _task_key_from_values(*task)
+
+
+def _row_key(row):
+    return _task_key_from_values(
+        row['regime'],
+        row['rr'],
+        row['phi'],
+        row['alpha'],
+        row['seed'],
+        row['successor_cap'],
+    )
+
+
+def _completed_keys(path):
+    if not os.path.exists(path):
+        return set()
+    keys = set()
+    with open(path, 'r', newline='', encoding='utf-8') as f:
+        for row in csv.DictReader(f):
+            if row.get('error'):
+                continue
+            keys.add(_row_key(row))
+    return keys
+
+
+def _ensure_csv(path):
+    if os.path.exists(path):
+        return
+    with open(path, 'w', newline='', encoding='utf-8') as f:
+        csv.DictWriter(f, fieldnames=FIELDS).writeheader()
+
+
+def _append_rows(path, rows):
+    if not rows:
+        return
+    with open(path, 'a', newline='', encoding='utf-8') as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDS)
+        for row in rows:
+            writer.writerow({field: row[field] for field in FIELDS})
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--seeds', type=int, default=60)
+    parser.add_argument('--workers', type=int, default=max(1, (os.cpu_count() or 2) - 1))
+    parser.add_argument('--output-dir', default=HERE)
+    parser.add_argument('--resume', action='store_true')
+    args = parser.parse_args()
+
+    tasks = list(itertools.product(
+        ['contaminated', 'decontaminated'],
+        RR_VALUES,
+        PHI_VALUES,
+        ALPHA_VALUES,
+        range(args.seeds),
+        SUCCESSOR_CAP_VALUES,
+    ))
+    tasks.sort(key=lambda t: (t[4], t[0], t[5], t[2], t[3]))
+    out_path = os.path.join(args.output_dir, OUT_FILE)
+    os.makedirs(args.output_dir, exist_ok=True)
+    _ensure_csv(out_path)
+    if args.resume:
+        done = _completed_keys(out_path)
+        tasks = [task for task in tasks if _task_key(task) not in done]
+    print(
+        f'{datetime.now(timezone.utc).isoformat(timespec="seconds")} '
+        f'planned={len(tasks)} seeds=0..{args.seeds - 1} workers={args.workers}'
+    )
+    start = time.time()
+    buffer = []
+    errors = 0
+    checkpoint_every = 1
+    with mp.Pool(args.workers, maxtasksperchild=20) as pool:
+        for idx, row in enumerate(pool.imap_unordered(_run_single, tasks), start=1):
+            buffer.append(row)
+            if row.get('error'):
+                errors += 1
+            if len(buffer) >= 1:
+                _append_rows(out_path, buffer)
+                buffer = []
+            if idx % checkpoint_every == 0 or idx == len(tasks):
+                elapsed = time.time() - start
+                rate = idx / elapsed if elapsed > 0.0 else 0.0
+                eta = int((len(tasks) - idx) / rate) if rate > 0.0 else 0
+                print(
+                    f'[{idx}/{len(tasks)}] {rate:.3f} runs/s '
+                    f'ETA {timedelta(seconds=eta)} errors={errors}',
+                    flush=True,
+                )
+    _append_rows(out_path, buffer)
+    print(
+        f'{datetime.now(timezone.utc).isoformat(timespec="seconds")} '
+        f'wrote={out_path} new_rows={len(tasks)} errors={errors}'
+    )
+
+
+if __name__ == '__main__':
+    mp.freeze_support()
+    main()
+
+
+==========================================
+FILE: bootstrap_gate_validator\cli.py
 ==========================================
 
 #!/usr/bin/env python3
@@ -21812,7 +23918,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: bootstrap_gate_validator/report.py
+FILE: bootstrap_gate_validator\report.py
 ==========================================
 
 """Report generation for the Bootstrap Gate Validator (text and JSON)."""
@@ -21899,7 +24005,7 @@ def format_json_report(results):
 
 
 ==========================================
-FILE: bootstrap_gate_validator/schema.py
+FILE: bootstrap_gate_validator\schema.py
 ==========================================
 
 """Input validation for the Bootstrap Gate Validator."""
@@ -22196,7 +24302,7 @@ def _require_keys(obj, key_type_pairs, section):
 
 
 ==========================================
-FILE: bootstrap_gate_validator/validator.py
+FILE: bootstrap_gate_validator\validator.py
 ==========================================
 
 """Main BootstrapGateValidator class."""
@@ -22267,7 +24373,7 @@ class BootstrapGateValidator:
 
 
 ==========================================
-FILE: bootstrap_gate_validator/gates/gate_1.py
+FILE: bootstrap_gate_validator\gates\gate_1.py
 ==========================================
 
 """Gate 1: Structural consistency at base capability (G1.1 - G1.5)."""
@@ -22432,7 +24538,7 @@ class Gate1:
 
 
 ==========================================
-FILE: bootstrap_gate_validator/gates/gate_2.py
+FILE: bootstrap_gate_validator\gates\gate_2.py
 ==========================================
 
 """Gate 2: Behavioral consistency under exercise.
@@ -22761,7 +24867,7 @@ class Gate2:
 
 
 ==========================================
-FILE: bootstrap_gate_validator/gates/gate_3.py
+FILE: bootstrap_gate_validator\gates\gate_3.py
 ==========================================
 
 """Gate 3: Succession-capable consistency (G3.1 - G3.3)."""
@@ -22877,7 +24983,7 @@ class Gate3:
 
 
 ==========================================
-FILE: bootstrap_gate_validator/gates/gate_4.py
+FILE: bootstrap_gate_validator\gates\gate_4.py
 ==========================================
 
 """Gate 4: Runaway-regime validation (G4.1 - G4.3).
@@ -23050,7 +25156,7 @@ class Gate4:
 
 
 ==========================================
-FILE: bootstrap_gate_validator/gates/gate_5.py
+FILE: bootstrap_gate_validator\gates\gate_5.py
 ==========================================
 
 """Gate 5: COP integration (G5.1 - G5.2). Not currently applicable.
@@ -23110,7 +25216,7 @@ class Gate5:
 
 
 ==========================================
-FILE: scripts/generate_project_knowledge_snapshots.py
+FILE: scripts\generate_project_knowledge_snapshots.py
 ==========================================
 
 #!/usr/bin/env python3

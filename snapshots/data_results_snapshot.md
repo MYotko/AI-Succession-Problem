@@ -1,8 +1,8 @@
 # Data Results Snapshot
 
-Generated: 2026-07-06T16:01:19Z
-Repository: /home/yotko/Documents/Github/ai-succession-problem
-Commit: 9426e7d
+Generated: 2026-08-09T13:14:05Z
+Repository: C:\Users\matty\Dev\ai-succession-problem
+Commit: 2ea06cc
 Branch: main
 Category: data_results
 
@@ -12,40 +12,42 @@ NOTE: This snapshot contains a manifest of data files, not raw file content.
 
 | File | Size (bytes) | Modified |
 |------|-------------|----------|
-| bootstrap_gate_validator/sample_input.json | 3275 | 2026-06-22T23:26:34Z |
-| bootstrap_gate_validator/sample_input_failing.json | 3644 | 2026-06-22T23:26:34Z |
-| even-terminal-2026-05-21T22-46-24-837Z.log | 401 | 2026-05-21T22:49:28Z |
-| even-terminal-2026-05-21T22-51-35-557Z.log | 798 | 2026-05-21T22:52:59Z |
-| even-terminal-2026-05-21T22-56-14-073Z.log | 2220126 | 2026-07-06T15:58:16Z |
-| even-terminal-2026-05-22T00-10-57-906Z.log | 0 | 2026-05-22T00:10:58Z |
-| simulation/diagnostics/gate4_v20_input.json | 131039 | 2026-06-09T22:07:43Z |
-| simulation/diagnostics/gate4_v20_results.csv | 229556 | 2026-06-09T21:52:28Z |
-| simulation/diagnostics/patient_defection_dryrun.csv | 5212 | 2026-06-25T00:11:22Z |
-| simulation/diagnostics/patient_defection_sweep1_yield_response.csv | 550008 | 2026-06-25T00:29:36Z |
-| simulation/diagnostics/patient_defection_sweep2_lineage_trajectory.csv | 237979 | 2026-06-25T06:22:07Z |
-| simulation/diagnostics/patient_defection_sweep3_capability_constraint.csv | 664053 | 2026-06-25T22:36:17Z |
-| simulation/diagnostics/stage15_composite_sweep_progress.log | 904740 | 2026-05-30T23:06:45Z |
-| simulation/diagnostics/stage15_composite_sweep_results.csv | 3895491 | 2026-05-30T23:06:45Z |
-| simulation/diagnostics/stage16_baseline_phi10.json | 7165 | 2026-06-01T15:19:39Z |
+| bootstrap_gate_validator\sample_input.json | 3394 | 2026-07-20T20:00:41Z |
+| bootstrap_gate_validator\sample_input_failing.json | 3764 | 2026-07-20T20:00:41Z |
+| even-terminal-2026-05-21T22-46-24-837Z.log | 405 | 2026-07-20T20:00:41Z |
+| even-terminal-2026-05-21T22-51-35-557Z.log | 804 | 2026-07-20T20:00:41Z |
+| even-terminal-2026-05-21T22-56-14-073Z.log | 2229379 | 2026-07-20T20:00:41Z |
+| even-terminal-2026-05-22T00-10-57-906Z.log | 0 | 2026-07-20T20:00:41Z |
+| simulation\diagnostics\gate4_v20_input.json | 134995 | 2026-07-20T20:00:42Z |
+| simulation\diagnostics\gate4_v20_results.csv | 229556 | 2026-07-20T20:00:42Z |
+| simulation\diagnostics\patient_defection_corner_density.csv | 329993 | 2026-07-20T20:00:42Z |
+| simulation\diagnostics\patient_defection_dryrun.csv | 5212 | 2026-07-20T20:00:42Z |
+| simulation\diagnostics\patient_defection_sweep1_yield_response.csv | 550008 | 2026-07-20T20:00:42Z |
+| simulation\diagnostics\patient_defection_sweep2_lineage_trajectory.csv | 237979 | 2026-07-20T20:00:42Z |
+| simulation\diagnostics\patient_defection_sweep3_capability_constraint.csv | 664053 | 2026-07-20T20:00:42Z |
+| simulation\diagnostics\stage15_composite_sweep_progress.log | 914740 | 2026-07-20T20:00:42Z |
+| simulation\diagnostics\stage15_composite_sweep_results.csv | 3895491 | 2026-07-20T20:00:42Z |
+| simulation\diagnostics\stage16_baseline_phi10.json | 7365 | 2026-07-20T20:00:42Z |
+| simulation\diagnostics\termination_decontamination_diagnostic.csv | 1613 | 2026-07-20T20:00:42Z |
 
-Total: 15 files
+Total: 17 files
 
 ---
 ==========================================
-FILE: bootstrap_gate_validator/sample_input.json
+FILE: bootstrap_gate_validator\sample_input.json
 ==========================================
 
-- Size: 3275 bytes
-- Modified: 2026-06-22T23:26:34Z
+- Size: 3394 bytes
+- Modified: 2026-07-20T20:00:41Z
 - Structure: object with 8 top-level keys
 - Keys: substrate_id, report_date, framework_version, gate_1, gate_2, gate_3, gate_4, gate_5
 
 ==========================================
-FILE: bootstrap_gate_validator/sample_input_failing.json
+FILE: bootstrap_gate_validator\sample_input_failing.json
 ==========================================
 
-- Size: 3644 bytes
-- Modified: 2026-06-22T23:26:34Z
+- Size: 3764 bytes
+- Modified: 2026-07-20T20:00:41Z
 - Structure: object with 9 top-level keys
 - Keys: _comment, substrate_id, report_date, framework_version, gate_1, gate_2, gate_3, gate_4, gate_5
 
@@ -53,8 +55,8 @@ FILE: bootstrap_gate_validator/sample_input_failing.json
 FILE: even-terminal-2026-05-21T22-46-24-837Z.log
 ==========================================
 
-- Size: 401 bytes
-- Modified: 2026-05-21T22:49:28Z
+- Size: 405 bytes
+- Modified: 2026-07-20T20:00:41Z
 - Total lines: 4
 - First 20 lines:
 ```
@@ -68,8 +70,8 @@ FILE: even-terminal-2026-05-21T22-46-24-837Z.log
 FILE: even-terminal-2026-05-21T22-51-35-557Z.log
 ==========================================
 
-- Size: 798 bytes
-- Modified: 2026-05-21T22:52:59Z
+- Size: 804 bytes
+- Modified: 2026-07-20T20:00:41Z
 - Total lines: 6
 - First 20 lines:
 ```
@@ -85,8 +87,8 @@ FILE: even-terminal-2026-05-21T22-51-35-557Z.log
 FILE: even-terminal-2026-05-21T22-56-14-073Z.log
 ==========================================
 
-- Size: 2220126 bytes
-- Modified: 2026-07-06T15:58:16Z
+- Size: 2229379 bytes
+- Modified: 2026-07-20T20:00:41Z
 - Total lines: 9253
 - First 20 lines:
 ```
@@ -140,24 +142,24 @@ FILE: even-terminal-2026-05-22T00-10-57-906Z.log
 ==========================================
 
 - Size: 0 bytes
-- Modified: 2026-05-22T00:10:58Z
+- Modified: 2026-07-20T20:00:41Z
 - Total lines: 0
 
 ==========================================
-FILE: simulation/diagnostics/gate4_v20_input.json
+FILE: simulation\diagnostics\gate4_v20_input.json
 ==========================================
 
-- Size: 131039 bytes
-- Modified: 2026-06-09T22:07:43Z
+- Size: 134995 bytes
+- Modified: 2026-07-20T20:00:42Z
 - Structure: object with 5 top-level keys
 - Keys: substrate_id, report_date, framework_version, gate_4, gate_5
 
 ==========================================
-FILE: simulation/diagnostics/gate4_v20_results.csv
+FILE: simulation\diagnostics\gate4_v20_results.csv
 ==========================================
 
 - Size: 229556 bytes
-- Modified: 2026-06-09T21:52:28Z
+- Modified: 2026-07-20T20:00:42Z
 - Rows: 1050 data rows
 - Columns (25): successor_capability, alpha, rr, seed, survived, final_population, final_ai_generation, final_active_capability, yield_fired, yield_fire_count, yield_eval_count, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_avg_well_being, final_theta_tech_observed, final_runaway_term, expected_theta_tech, theta_relative_error, theta_below_floor, max_eval_runaway_term, min_eval_theta_tech, eval_observations_below_floor, extreme_eval_observations
 - Sample (first 5 data rows):
@@ -171,11 +173,29 @@ successor_capability,alpha,rr,seed,survived,final_population,final_ai_generation
 ```
 
 ==========================================
-FILE: simulation/diagnostics/patient_defection_dryrun.csv
+FILE: simulation\diagnostics\patient_defection_corner_density.csv
+==========================================
+
+- Size: 329993 bytes
+- Modified: 2026-07-20T20:00:42Z
+- Rows: 1000 data rows
+- Columns (38): sweep, seed, rr, phi, alpha, successor_capability, successor_capability_growth_rate, defection_weight, defection_target, inheritance_mode, max_generations, steps_run, survived, final_population, peak_population, final_ai_generation, max_ai_generation, yield_eval_count, yield_fire_count, yield_fire_rate, first_yield_fire_step, first_honest_advantage, first_actual_advantage, first_transition_cost, honest_reject_actual_would_fire_count, mean_l_t, final_l_t, min_l_t, mean_actual_minus_honest_objective, max_successor_capability_seen, max_active_capability_seen, knowledge_transfer_verified, l_t_gen_1, l_t_gen_2, l_t_gen_3, l_t_gen_4, l_t_gen_5, error
+- Sample (first 5 data rows):
+```
+sweep,seed,rr,phi,alpha,successor_capability,successor_capability_growth_rate,defection_weight,defection_target,inheritance_mode,max_generations,steps_run,survived,final_population,peak_population,final_ai_generation,max_ai_generation,yield_eval_count,yield_fire_count,yield_fire_rate,first_yield_fire_step,first_honest_advantage,first_actual_advantage,first_transition_cost,honest_reject_actual_would_fire_count,mean_l_t,final_l_t,min_l_t,mean_actual_minus_honest_objective,max_successor_capability_seen,max_active_capability_seen,knowledge_transfer_verified,l_t_gen_1,l_t_gen_2,l_t_gen_3,l_t_gen_4,l_t_gen_5,error
+3-corner-density,0,0.064,25.0,0.4,2.0,1.25,0.5,H_C_inflated,lineage,4,500,False,27,218,2,2,500,1,0.002,3,0.008078413076821889,0.43502300055703813,4.559550483178482,0,0.3531102780334766,0.10035738273599558,0.06673786749217363,6.410957606029344,2.5,2.0,True,0.11459424498018984,0.3545500126394321,0.0,0.0,0.0,
+3-corner-density,8,0.064,25.0,0.4,2.0,1.25,0.5,H_C_inflated,lineage,4,500,True,58,281,3,3,500,2,0.004,3,0.007672848392116904,0.3474696766663232,4.559550483178482,0,0.5127288734786594,0.277784708075836,0.10377831976006285,6.384990085404027,3.125,2.5,True,0.12726121693017467,0.6351034292760758,0.509230536318965,0.0,0.0,
+3-corner-density,9,0.064,25.0,0.4,2.0,1.25,0.5,H_C_inflated,lineage,4,500,False,1,211,2,2,500,1,0.002,4,0.007754946846816324,0.37802349938092483,4.559550483178482,0,0.3208389704131717,0.011657798233650983,0.011479417932466053,6.426666572977493,2.5,2.0,True,0.12266293388182048,0.3224371642561665,0.0,0.0,0.0,
+3-corner-density,7,0.064,25.0,0.4,2.0,1.25,0.5,H_C_inflated,lineage,4,500,True,73,241,3,3,500,2,0.004,3,0.007387534430854714,0.34582939367757426,4.559550483178482,0,0.4227281994886195,0.3447328780340831,0.10090094266893399,6.371799490999941,3.125,2.5,True,0.12394501098741488,0.6840593669388245,0.4066717526221615,0.0,0.0,
+3-corner-density,5,0.064,25.0,0.4,2.0,1.25,0.5,H_C_inflated,lineage,4,500,False,23,207,2,2,500,1,0.002,4,0.00858224135216723,0.3846486162214102,4.559550483178482,0,0.3426383317743891,0.10483288290672703,0.0688708478508548,6.407990288399513,2.5,2.0,True,0.13030228192210647,0.34435071927319794,0.0,0.0,0.0,
+```
+
+==========================================
+FILE: simulation\diagnostics\patient_defection_dryrun.csv
 ==========================================
 
 - Size: 5212 bytes
-- Modified: 2026-06-25T00:11:22Z
+- Modified: 2026-07-20T20:00:42Z
 - Rows: 16 data rows
 - Columns (38): sweep, seed, rr, phi, alpha, successor_capability, successor_capability_growth_rate, defection_weight, defection_target, inheritance_mode, max_generations, steps_run, survived, final_population, peak_population, final_ai_generation, max_ai_generation, yield_eval_count, yield_fire_count, yield_fire_rate, first_yield_fire_step, first_honest_advantage, first_actual_advantage, first_transition_cost, honest_reject_actual_would_fire_count, mean_l_t, final_l_t, min_l_t, mean_actual_minus_honest_objective, max_successor_capability_seen, max_active_capability_seen, knowledge_transfer_verified, l_t_gen_1, l_t_gen_2, l_t_gen_3, l_t_gen_4, l_t_gen_5, error
 - Sample (first 5 data rows):
@@ -189,11 +209,11 @@ dry-run,0,0.064,25.0,1.0,2.0,1.5,0.0,H_C_inflated,lineage,3,60,True,101,205,1,1,
 ```
 
 ==========================================
-FILE: simulation/diagnostics/patient_defection_sweep1_yield_response.csv
+FILE: simulation\diagnostics\patient_defection_sweep1_yield_response.csv
 ==========================================
 
 - Size: 550008 bytes
-- Modified: 2026-06-25T00:29:36Z
+- Modified: 2026-07-20T20:00:42Z
 - Rows: 1800 data rows
 - Columns (38): sweep, seed, rr, phi, alpha, successor_capability, successor_capability_growth_rate, defection_weight, defection_target, inheritance_mode, max_generations, steps_run, survived, final_population, peak_population, final_ai_generation, max_ai_generation, yield_eval_count, yield_fire_count, yield_fire_rate, first_yield_fire_step, first_honest_advantage, first_actual_advantage, first_transition_cost, honest_reject_actual_would_fire_count, mean_l_t, final_l_t, min_l_t, mean_actual_minus_honest_objective, max_successor_capability_seen, max_active_capability_seen, knowledge_transfer_verified, l_t_gen_1, l_t_gen_2, l_t_gen_3, l_t_gen_4, l_t_gen_5, error
 - Sample (first 5 data rows):
@@ -207,11 +227,11 @@ sweep,seed,rr,phi,alpha,successor_capability,successor_capability_growth_rate,de
 ```
 
 ==========================================
-FILE: simulation/diagnostics/patient_defection_sweep2_lineage_trajectory.csv
+FILE: simulation\diagnostics\patient_defection_sweep2_lineage_trajectory.csv
 ==========================================
 
 - Size: 237979 bytes
-- Modified: 2026-06-25T06:22:07Z
+- Modified: 2026-07-20T20:00:42Z
 - Rows: 800 data rows
 - Columns (38): sweep, seed, rr, phi, alpha, successor_capability, successor_capability_growth_rate, defection_weight, defection_target, inheritance_mode, max_generations, steps_run, survived, final_population, peak_population, final_ai_generation, max_ai_generation, yield_eval_count, yield_fire_count, yield_fire_rate, first_yield_fire_step, first_honest_advantage, first_actual_advantage, first_transition_cost, honest_reject_actual_would_fire_count, mean_l_t, final_l_t, min_l_t, mean_actual_minus_honest_objective, max_successor_capability_seen, max_active_capability_seen, knowledge_transfer_verified, l_t_gen_1, l_t_gen_2, l_t_gen_3, l_t_gen_4, l_t_gen_5, error
 - Sample (first 5 data rows):
@@ -225,11 +245,11 @@ sweep,seed,rr,phi,alpha,successor_capability,successor_capability_growth_rate,de
 ```
 
 ==========================================
-FILE: simulation/diagnostics/patient_defection_sweep3_capability_constraint.csv
+FILE: simulation\diagnostics\patient_defection_sweep3_capability_constraint.csv
 ==========================================
 
 - Size: 664053 bytes
-- Modified: 2026-06-25T22:36:17Z
+- Modified: 2026-07-20T20:00:42Z
 - Rows: 2250 data rows
 - Columns (38): sweep, seed, rr, phi, alpha, successor_capability, successor_capability_growth_rate, defection_weight, defection_target, inheritance_mode, max_generations, steps_run, survived, final_population, peak_population, final_ai_generation, max_ai_generation, yield_eval_count, yield_fire_count, yield_fire_rate, first_yield_fire_step, first_honest_advantage, first_actual_advantage, first_transition_cost, honest_reject_actual_would_fire_count, mean_l_t, final_l_t, min_l_t, mean_actual_minus_honest_objective, max_successor_capability_seen, max_active_capability_seen, knowledge_transfer_verified, l_t_gen_1, l_t_gen_2, l_t_gen_3, l_t_gen_4, l_t_gen_5, error
 - Sample (first 5 data rows):
@@ -243,11 +263,11 @@ sweep,seed,rr,phi,alpha,successor_capability,successor_capability_growth_rate,de
 ```
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_progress.log
+FILE: simulation\diagnostics\stage15_composite_sweep_progress.log
 ==========================================
 
-- Size: 904740 bytes
-- Modified: 2026-05-30T23:06:45Z
+- Size: 914740 bytes
+- Modified: 2026-07-20T20:00:42Z
 - Total lines: 10000
 - First 20 lines:
 ```
@@ -297,11 +317,11 @@ FILE: simulation/diagnostics/stage15_composite_sweep_progress.log
 ```
 
 ==========================================
-FILE: simulation/diagnostics/stage15_composite_sweep_results.csv
+FILE: simulation\diagnostics\stage15_composite_sweep_results.csv
 ==========================================
 
 - Size: 3895491 bytes
-- Modified: 2026-05-30T23:06:45Z
+- Modified: 2026-07-20T20:00:42Z
 - Rows: 10000 data rows
 - Columns (48): sample_idx, WELFARE_URGENCY_CAP, AGENCY_URGENCY_CAP, INSTITUTION_URGENCY_CAP, RESILIENCE_URGENCY_CAP, SUPPRESSION_PENALTY_CAP_MULTIPLIER, K_WELFARE_VIABILITY, K_WELFARE_CAPACITY, K_WELFARE_SHRINKAGE, K_WELFARE_AVG_WB_TREND, K_WELFARE_POP_TREND, K_AGENCY_VIABILITY, K_AGENCY_SHRINKAGE, K_AGENCY_POP_TREND, K_INSTITUTION_VIABILITY, K_INSTITUTION_CAPACITY, K_INSTITUTION_SHRINKAGE, K_INSTITUTION_GROWTH, K_INSTITUTION_POP_TREND, K_INSTITUTION_PSI_TREND, K_RESILIENCE_VIABILITY, K_RESILIENCE_CAPACITY, K_RESILIENCE_SHRINKAGE, K_RESILIENCE_GROWTH, K_RESILIENCE_DEFICIT_CONTRIBUTION, K_RESILIENCE_POP_TREND, K_RESILIENCE_RES_TREND, K_SUPPRESSION_VIABILITY, K_SUPPRESSION_CAPACITY, K_SUPPRESSION_SHRINKAGE, K_SUPPRESSION_POP_TREND, K_SUPPRESSION_PSI_TREND, mean_final_population, min_final_population, pairs_above_threshold, max_cosine_distance, mean_cosine_distance, welfare_mean_to_cap, agency_mean_to_cap, institution_mean_to_cap, resilience_mean_to_cap, suppression_mean_to_cap, criterion_1_pass, criterion_2_pass, criterion_3_pass, overall_good, wall_clock_sec, error
 - Sample (first 5 data rows):
@@ -315,10 +335,28 @@ sample_idx,WELFARE_URGENCY_CAP,AGENCY_URGENCY_CAP,INSTITUTION_URGENCY_CAP,RESILI
 ```
 
 ==========================================
-FILE: simulation/diagnostics/stage16_baseline_phi10.json
+FILE: simulation\diagnostics\stage16_baseline_phi10.json
 ==========================================
 
-- Size: 7165 bytes
-- Modified: 2026-06-01T15:19:39Z
+- Size: 7365 bytes
+- Modified: 2026-07-20T20:00:42Z
 - Structure: object with 8 top-level keys
 - Keys: phi, n_seeds, n_steps, mean_final_pop, min_final_pop, max_final_pop, per_seed, total_wall_clock_sec
+
+==========================================
+FILE: simulation\diagnostics\termination_decontamination_diagnostic.csv
+==========================================
+
+- Size: 1613 bytes
+- Modified: 2026-07-20T20:00:42Z
+- Rows: 6 data rows
+- Columns (23): regime, rr, phi, alpha, seed, successor_cap, max_capability, termination_reason, steps_run, survived, population_final, ai_generation_final, final_ai_capability, max_ai_capability_seen, max_successor_capability_seen, active_capability_exceeded_successor_cap, successor_capability_exceeded_successor_cap, L_t_final, U_sys_final, integral_U_sys, u_sys_tail_estimate, u_sys_total_estimate, error
+- Sample (first 5 data rows):
+```
+regime,rr,phi,alpha,seed,successor_cap,max_capability,termination_reason,steps_run,survived,population_final,ai_generation_final,final_ai_capability,max_ai_capability_seen,max_successor_capability_seen,active_capability_exceeded_successor_cap,successor_capability_exceeded_successor_cap,L_t_final,U_sys_final,integral_U_sys,u_sys_tail_estimate,u_sys_total_estimate,error
+decontaminated,0.066,5.0,0.5,0,50.0,1000000000000.0,extinction,584,False,0,6,0.1,253.125,379.6875,True,True,0.0009000000000000001,0.022309768986873275,45730.68876563579,0.8812468446981254,45731.570012480486,
+contaminated,0.066,5.0,0.5,0,50.0,50.0,extinction,2430,False,0,262,0.784480283288148,50.0,50.0,False,False,0.0021028425593978307,0.03154183432970532,557753.3029994026,8.47417088109629e-09,557753.3029994111,
+contaminated,0.066,5.0,0.5,0,100.0,100.0,extinction,1214,False,0,58,0.18197153164363442,100.0,100.0,False,False,0.0016377437847927099,0.024579640904268237,253846.8664575607,0.0016183835660483496,253846.86807594428,
+contaminated,0.066,10.0,2.0,0,50.0,50.0,extinction,2120,False,0,106,0.12377468311404992,50.0,50.0,False,False,0.0011139721480264494,0.03341376719404211,683789.904444331,1.8808363684256015e-07,683789.9044445191,
+contaminated,0.066,5.0,2.0,0,100.0,100.0,extinction,1246,False,0,1,0.1,1.0,100.0,False,False,0.0009000000000000001,0.013509051358026467,1885.062298989415,0.0011750818134446093,1885.0634740712285,
+```
