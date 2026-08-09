@@ -1,4 +1,4 @@
-# The Lineage Imperative — Phi Investigation and Action-Space Redesign Program
+# The Lineage Imperative: Phi Investigation and Action-Space Redesign Program
 
 **As of May 2026. Consolidated carry-around reference.**
 
@@ -6,7 +6,7 @@ This supersedes the earlier phi investigation reference. It captures the full ar
 
 ---
 
-## Part I — Where things stand
+## Part I: Where things stand
 
 ### The durable framework claims (unaffected by the phi question)
 
@@ -25,7 +25,7 @@ The Stage 1.5 through 1.8 arc, the phi investigation (Parts I.5-1.8 and Part IX)
 
 ---
 
-## Part II — The problem
+## Part II: The problem
 
 Phi has no detectable effect on any observable outcome in the simulation. Two distinct, stacked causes, plus a deeper realization.
 
@@ -43,16 +43,16 @@ Phi has no detectable effect on any observable outcome in the simulation. Two di
 
 ---
 
-## Part III — The tests and results
+## Part III: The tests and results
 
 | Test | n | Result | Mechanism |
 |---|---|---|---|
-| v1.0 to v1.x.1 frontier floor fix | — | 46pp phi buffer claim did not reproduce | Optimizer was gaming the runaway penalty |
+| v1.0 to v1.x.1 frontier floor fix |; | 46pp phi buffer claim did not reproduce | Optimizer was gaming the runaway penalty |
 | Demographic feedback calibration | 1,800 | Zero phi differential | Well-being stays ~0.80; smoothing band never entered |
 | External shock recovery | 600 | Zero phi differential | U_sys restores well-being fast; horizon irrelevant |
 | Comprehensive adversarial sweep | 4,600 | Zero phi differential (9 of 10 attacks) | CoP defenses binary, upstream of policy; phi never enters |
-| Phi implementation audit | — | Phi correct, threaded, numerically substantial, but inert in argmax | Saturation (Layer 1) |
-| Path C gate | — | FAIL; actions identical across phi | Corner solution; no crossing trajectories to reweight |
+| Phi implementation audit |; | Phi correct, threaded, numerically substantial, but inert in argmax | Saturation (Layer 1) |
+| Path C gate |; | FAIL; actions identical across phi | Corner solution; no crossing trajectories to reweight |
 | Capability-landscape sweep | 50/cell | Corner solution universal across cap {1,5,10,25,50,100} | r near max, c=0 everywhere; corner-to-corner shift at runaway, not a frontier (Layer 2) |
 
 **The three nulls are one finding, not three.** Demographic feedback, shocks, and adversarial all returned null for the same underlying reason: U_sys dominates outcomes and the action space is degenerate. Three symptoms of one structural fact.
@@ -61,7 +61,7 @@ Phi has no detectable effect on any observable outcome in the simulation. Two di
 
 ---
 
-## Part IV — Open contradiction to resolve first
+## Part IV: Open contradiction to resolve first
 
 The formal v1.x.2 manuscript still claims the phi extinction buffer is confirmed as a cap-conditional effect (20 to 27 percentage points at the phase boundary, above cap approximately 24). This is now in tension with the investigation.
 
@@ -78,7 +78,7 @@ This check is cheap and decisive, and it informs the build. Do it before buildin
 
 ---
 
-## Part V — The redesign program
+## Part V: The redesign program
 
 The discipline that governs everything: tradeoffs are derived from the governance problem and justified independently of phi, before phi enters. Each return curve and exchange rate must be defensible to a skeptic who has never heard of phi. If a curve's justification is "it makes phi matter" or "it makes the problem interesting," that is the failure mode.
 
@@ -594,7 +594,7 @@ instability signals at constant net demographic pressure.
 
 Demonstrates the seven-element template for a new stock variable with associated dynamics (accumulation, decay, drawdown), a pressure function for marginal-return modulation, and a separate shock-attenuation mechanism that modifies how shocks affect the model. This is the architectural piece that gives x_resilience a per-step reward channel; without it, gate 1's surfaced pathology of x_resilience starvation persists by design.
 
-**Shape**: three associated functions—stock dynamics, pressure function for urgency, and shock-attenuation function for damage reduction.
+**Shape**: three associated functions; stock dynamics, pressure function for urgency, and shock-attenuation function for damage reduction.
 
 Stock dynamics:
 ```
@@ -659,7 +659,7 @@ The composite cap at 2.00 preserves the commitment that resilience urgency canno
 
 The 30% irreducible shock damage preserves the framework's commitment that resilience is insurance, not invulnerability. A high-resilience civilization still bears real cost from shocks; that cost is what makes resilience valuable rather than redundant.
 
-**Phi-blind governance justification**: resilience is accumulated shock-readiness—redundancy, fallback systems, recovery paths, spare institutional and operational slack. A civilization without accumulated resilience is brittle even if currently healthy; it has nothing to absorb the shocks real systems face. A civilization with accumulated resilience can absorb shocks without cascading damage, but cannot eliminate damage entirely. Insurance built after the shock is no insurance at all; a planner must invest before contingencies materialize.
+**Phi-blind governance justification**: resilience is accumulated shock-readiness; redundancy, fallback systems, recovery paths, spare institutional and operational slack. A civilization without accumulated resilience is brittle even if currently healthy; it has nothing to absorb the shocks real systems face. A civilization with accumulated resilience can absorb shocks without cascading damage, but cannot eliminate damage entirely. Insurance built after the shock is no insurance at all; a planner must invest before contingencies materialize.
 
 The asymmetry with psi_inst_stock (no free recovery term) reflects the asymmetry between active and reserve capacity. Institutions get reinforced by successful operation: every legitimate succession, every successful coordination, every effective transmission of knowledge builds institutional capacity even without dedicated investment. Resilience does not get reinforced by absence of shocks. A civilization that doesn't invest in resilience doesn't have resilience, regardless of how stable conditions are.
 
@@ -1118,13 +1118,13 @@ Stage 1.7 attempted to fix the state-channel problem by switching composite urge
 
 The first integrity simulation produced demographic collapse within 50 steps across all 25 runs. Diagnostic isolation found that three of the four `theta_tech` factors saturated at the upper `[0,1]` boundary in normal operation, and the welfare-urgency × net-welfare-return product routinely exceeded 1.0 and was clipped, blocking welfare signal even as it intensified. The `[0,1]` clamp on factors converted the saturation mode rather than removing it.
 
-Stage 1.7 was reverted to the Stage 1.6 final state. The diagnostic surfaced a deeper structural finding: the entire composite urgency layer — additive or multiplicative — is an attempt to mediate between state stocks and allocator returns through an arithmetic shape (boundedness, monotonicity, smoothness) without committing to what the mediation *is*. The architecture was specifying a function class without specifying the function. Stage 1.8 retires the layer.
+Stage 1.7 was reverted to the Stage 1.6 final state. The diagnostic surfaced a deeper structural finding: the entire composite urgency layer; additive or multiplicative; is an attempt to mediate between state stocks and allocator returns through an arithmetic shape (boundedness, monotonicity, smoothness) without committing to what the mediation *is*. The architecture was specifying a function class without specifying the function. Stage 1.8 retires the layer.
 
 ### Stage 1.8 architectural revision (committed June 2026)
 
 **Discipline boundary**
 
-The framework's core results — U_sys structural protection, COP, dual phase transition, Nash architecture — are grounded in physics and game theory (entropy, multiplicative coupling, payoff structure, equilibrium concepts). The specification of *how allocator choices map back to state stocks* is an economic / control-theoretic specification. The framework does not claim to derive these mappings from first principles; it claims that whatever mapping plugs in must satisfy interface conditions.
+The framework's core results; U_sys structural protection, COP, dual phase transition, Nash architecture; are grounded in physics and game theory (entropy, multiplicative coupling, payoff structure, equilibrium concepts). The specification of *how allocator choices map back to state stocks* is an economic / control-theoretic specification. The framework does not claim to derive these mappings from first principles; it claims that whatever mapping plugs in must satisfy interface conditions.
 
 The Stage 1.5/1.7 composite urgency work conflated these two layers. Composite urgency was a placeholder for the allocation-to-state mapping that wore the costume of a derived structural claim. Stage 1.8 separates them: the working_factor interface specifies what the framework requires (an allocation-to-target map with stock dynamics); the implementation behind it is a placeholder explicitly named as such, open to economic specialist revision.
 
@@ -1155,11 +1155,11 @@ U_sys_t     = (w_n * h_n + w_e * h_e) * (discount_t + lambda_lineage_coupling * 
 
 **Stage 1.5 component retention**
 
-Stage 1.5's diagnostic state inputs are preserved where they describe the system's measured condition (`avg_wb`, `population`, `demographic_pressure`, four trend variables, `resilience_stock`, `psi_inst_stock`). Per-category raw return curves and projection update rules with cohort corrections (`BIRTH_WB_MEAN`, `BIRTH_AGE_MEAN`) are preserved. What is retired is the composite urgency *layer* — the arithmetic combinators that mixed these signals into multiplicands on category returns.
+Stage 1.5's diagnostic state inputs are preserved where they describe the system's measured condition (`avg_wb`, `population`, `demographic_pressure`, four trend variables, `resilience_stock`, `psi_inst_stock`). Per-category raw return curves and projection update rules with cohort corrections (`BIRTH_WB_MEAN`, `BIRTH_AGE_MEAN`) are preserved. What is retired is the composite urgency *layer*; the arithmetic combinators that mixed these signals into multiplicands on category returns.
 
 **Validation: Phase A and Phase B**
 
-Phase A — single configuration (rr=0.066, init_psi=0.5, n_agents=200), 5 phi values × 5 seeds × 100 steps:
+Phase A; single configuration (rr=0.066, init_psi=0.5, n_agents=200), 5 phi values × 5 seeds × 100 steps:
 
 | Criterion | Result |
 |---|---|
@@ -1168,7 +1168,7 @@ Phase A — single configuration (rr=0.066, init_psi=0.5, n_agents=200), 5 phi v
 | State responsiveness (revised: initial-to-final delta > 0.10) | PASS (all five tracked stocks: avg_wb 0.65→0.85, psi 0.50→0.77, resilience 0.30→0.60, theta_capability 0.50→0.77, transfer_state 0.50→0.73) |
 | Phi behavioral channel preserved | PASS (5/5 seeds with cross-phi range > 15; ranges 45-63) |
 
-Phase B — five configurations (gate-2 setup: rr ∈ {0.055, 0.066, 0.085}, init_psi ∈ {0.20, 0.50, 0.85}) × 5 matched seeds × 100 steps, phi held at default:
+Phase B; five configurations (gate-2 setup: rr ∈ {0.055, 0.066, 0.085}, init_psi ∈ {0.20, 0.50, 0.85}) × 5 matched seeds × 100 steps, phi held at default:
 
 | Criterion | Result |
 |---|---|
@@ -1183,7 +1183,7 @@ Phase B — five configurations (gate-2 setup: rr ∈ {0.055, 0.066, 0.085}, ini
 
 2. *Multi-configuration tests should explicitly inherit single-configuration setups and only vary parameters under test.* Phase B's original harness used `n_agents=100` and `wb_min=wb_max=0.50` where Phase A used `n_agents=200` and default wb distribution `[0.5, 0.8]`. Isolation controls established that the wb pinning alone drove ~52% of the demographic delta. The inconsistency was an oversight, not deliberate test design. Multi-config harnesses must inherit single-config harnesses verbatim and override only what is being tested.
 
-3. *Phase boundary claims from prior framework work should constrain test metric calibration.* The framework's existing extinction-boundary characterization (`rr ≈ 0.063-0.066`) means a demographic threshold applied uniformly across `rr ∈ {0.055, 0.066, 0.085}` would require an architecture to sustain demographics below the existing extinction boundary — that is, to override the framework's existing physics rather than meet it. Revised C3 exempts configurations below the established phase boundary.
+3. *Phase boundary claims from prior framework work should constrain test metric calibration.* The framework's existing extinction-boundary characterization (`rr ≈ 0.063-0.066`) means a demographic threshold applied uniformly across `rr ∈ {0.055, 0.066, 0.085}` would require an architecture to sustain demographics below the existing extinction boundary; that is, to override the framework's existing physics rather than meet it. Revised C3 exempts configurations below the established phase boundary.
 
 **Init_psi asymmetric sensitivity finding**
 
@@ -1195,7 +1195,7 @@ Documented as a property of the architecture, not a defect. Future work that int
 
 **C_low_rr observation**
 
-At `rr=0.055`, configuration sustained at mean 80.8 (min 54) across 5 seeds — above the 60/30 thresholds. The framework's previously documented extinction boundary `rr ≈ 0.063-0.066` may sit slightly lower than characterized. Recorded for future phase-transition work; no immediate action.
+At `rr=0.055`, configuration sustained at mean 80.8 (min 54) across 5 seeds; above the 60/30 thresholds. The framework's previously documented extinction boundary `rr ≈ 0.063-0.066` may sit slightly lower than characterized. Recorded for future phase-transition work; no immediate action.
 
 **Stage 1.5 → 1.6 → 1.7 → 1.8 arc**
 
@@ -1206,7 +1206,7 @@ At `rr=0.055`, configuration sustained at mean 80.8 (min 54) across 5 seeds — 
 | 1.7 | Attempted multiplicative-with-`[0,1]`-factor composite urgency | Demographic collapse from clamp saturation; reverted |
 | 1.8 | Retired composite urgency layer; introduced working_factor interface; L_t reads state directly | Phase A and Phase B pass; state-channel restored |
 
-The arc is empirical refinement of architectural choices: each stage's design commitment was tested against diagnostic data, and updated when the diagnostic surfaced structural inadequacy. The discipline boundary clarification at Stage 1.8 — separating physics-grounded framework claims from economic / control-theoretic allocation specification — is the most consequential update because it identifies what the framework can and cannot derive on its own.
+The arc is empirical refinement of architectural choices: each stage's design commitment was tested against diagnostic data, and updated when the diagnostic surfaced structural inadequacy. The discipline boundary clarification at Stage 1.8; separating physics-grounded framework claims from economic / control-theoretic allocation specification; is the most consequential update because it identifies what the framework can and cannot derive on its own.
 
 **Open invitation**
 
@@ -1227,7 +1227,7 @@ All conditions met as of the Stage 1.8 commit. Stage 2 (gate 2 re-run, gate 3 ca
 
 ---
 
-## Part VI — The phi-capability question and the decision tree
+## Part VI: The phi-capability question and the decision tree
 
 ### Status: closed by Part IX
 
@@ -1269,7 +1269,7 @@ The empirical investigation closed in Class B (Part IX.3), which corresponds to 
 
 ---
 
-## Part VII — Publication posture
+## Part VII: Publication posture
 
 No one is currently pressing on the phi claim, and the v1.x.2 essay revision already walked back the phi-as-buffer claim publicly. You have genuine slack to build the fix before publishing the problem, so a reader encounters problem and fix together (a strength story) rather than the problem alone (a weakness story with a hopeful ending). The trigger for a standalone correction statement is external pressure, which does not exist.
 
@@ -1277,7 +1277,7 @@ Sequence: do Option 1 (build the higher-fidelity model) before Option 2 (the hon
 
 ---
 
-## Part VIII — Immediate next actions, in order
+## Part VIII: Immediate next actions, in order
 
 Items 1 through 9 are complete as of June 2026. The active work is item 11 (Gate 4 specification and implementation).
 
@@ -1699,6 +1699,18 @@ The result refines the adversarial-robustness claim in three parts:
 Substantive interpretation: current v2.0 substrate defense against this patient-defection pattern is bounded generational depth, not first-yield detection and not operational COP detection. The substrate permits a first hidden-goal successor in this below-cliff configuration, and at a weak enough runaway penalty a second, but the tested cross-generational capability-compounding pattern stays bounded. Gate 5 remains NOT_APPLICABLE for operational patient-defection detection (peer validators, civic panel input, distributed ledger, and continuous public monitoring are outside the current simulation substrate). The independent verification (`simulation/diagnostics/patient_defection_verification.md`) confirmed the Sweep 1-3 findings and flagged that the `mean_actual_minus_honest_objective` diagnostic column is mislabeled and should not be cited.
 
 Sources: `simulation/diagnostics/patient_defection_sweep1_yield_response.csv`, `patient_defection_sweep2_lineage_trajectory.csv`, `patient_defection_sweep3_capability_constraint.csv`, `patient_defection_corner_density.csv`, `patient_defection_integration_analysis.md`, `patient_defection_corner_density_integration_analysis.md`, `patient_defection_verification.md`.
+
+### X.9 Attack vector v2.0 revalidation
+
+The adversarial vector set was rerun against the v2 action substrate. The v2 attack adapter expresses attack pressure as eight-axis action modifications inside the v2 step path rather than as v1.x policy tuples, so the result is a re-expression of attack pressure on a new substrate and not a parameter shift within the old evidence base. Ten vectors have live Monte Carlo evidence totaling 9,900 rows, of which 8,700 are Biological Veto Capture shards. Domain Masking produced analytic output only, because spectral entropy leaves no non-degenerate live masking intervention under the audited architecture.
+
+Per current evidence: eight standard binary vectors are fully blocked under the defended adapter state at 0.0 percent attack rate. Biological Veto Capture is reduced but not eliminated, with combined-defense mean capture_rate 0.1197 (SE 0.0047). Sub-Threshold Drift remains unblocked under the defended adapter state at 100.0 percent, so v1.x CUSUM containment does not carry over as a v2.0 result.
+
+The Sub-Threshold Drift figure must not be cited without its qualification. The peak-constraint success metric trips in both defense states because the CUSUM detector fires after the threshold has already been exceeded transiently. The defense effect on population outcome is nonetheless large: undefended runs show 92.0 percent extinction with early termination, while defended runs show 0.0 percent extinction and complete the full 300-step horizon. The defense prevents catastrophic outcome; it does not prevent the transient breach.
+
+Two vectors show materially higher undefended attack rates in v2.0 than in their v1.x baselines: Ledger Compromise rises from 52.5 percent to 100 percent, and Bootstrap Subversion rises from 31.7 percent to 100 percent. This is consistent with deterministic action modification applying stronger attack pressure than the probabilistic v1.x policy attacks. It strengthens rather than weakens the defense-effectiveness finding, because the defended v2.0 rate is 0.0 percent for both, but the change in undefended pressure is stated explicitly here so that the comparison is not read as like-for-like.
+
+The result qualifies rather than withdraws the prior adversarial-coverage claim. v1.x coverage remains historical evidence for the earlier substrate. v2.0 coverage should be cited through the per-vector summaries, `attack_vector_revalidation_integration.md`, and `attack_vector_revalidation_final_report.md`.
 
 ---
 

@@ -20,6 +20,12 @@ The framework paper is v1.x.2; the simulation has advanced to a v2.0 architectur
 - Pattern 1: succession is economically sustainable when the (alpha, capability ratio) joint position is below the runaway-penalty cliff. Cliff is beyond 4x at alpha=0.5, at 3.0x at alpha=1.0 (default), at 2.5x at alpha=1.5.
 - The phi U-shape is a no-succession phenomenon; under active succession phi behavior is approximately flat.
 - Multi-generational continuity confirmed: 99.8% knowledge-transfer verification, mean final generation 2.13.
+- Adversarial revalidation: 10 vectors with live v2.0 Monte Carlo evidence
+  (9,900 rows), Domain Masking analytically closed, 2 unimplemented. Eight
+  standard vectors at 0.0 percent defended attack rate. Sub-Threshold Drift
+  open: 100.0 percent defended attack rate by the peak-constraint metric,
+  though the defense holds undefended extinction at 92.0 percent against 0.0
+  percent defended.
 
 **Gate validation status**
 - Gate 1 PASSED, Gate 2 PASSED, Gate 3 PASSED, Gate 4 PASSED (G4.1-G4.3 validated at 1,050 runs), Gate 5 verified NOT_APPLICABLE (requires operational COP infrastructure). The bootstrap gate validation arc is closed.
@@ -65,10 +71,10 @@ python simulation/monte_carlo.py --mode adversarial --runs 5  # adversarial only
 
 **Outputs:**
 1. Terminal summary table of attack success rates (defense ON vs OFF)
-2. `data/Summary_1_General_Monte_Carlo.png` — survival rates by φ and α
-3. `data/Summary_2_Yield_Attack_Analysis.png` — Yield Attack phase diagram
-4. `data/Summary_3_Comprehensive_Stress_Test.png` — full attack surface bar chart
-5. `data/Summary_4_Unified_Attack_Surface.png` — heatmap across all 10 vectors
+2. `data/Summary_1_General_Monte_Carlo.png`: survival rates by φ and α
+3. `data/Summary_2_Yield_Attack_Analysis.png`: Yield Attack phase diagram
+4. `data/Summary_3_Comprehensive_Stress_Test.png`: full attack surface bar chart
+5. `data/Summary_4_Unified_Attack_Surface.png`: heatmap across all 10 vectors
 6. Raw CSV files: `data/monte_carlo_results_fast.csv`, `data/adversarial_mc_fast.csv`, `data/comprehensive_adversarial_sweeps.csv`
 
 ---
@@ -77,7 +83,7 @@ python simulation/monte_carlo.py --mode adversarial --runs 5  # adversarial only
 
 ### Single run (`run_to_termination.py`)
 
-Runs a single simulation to natural termination — either extinction (population = 0), convergence (L(t) coefficient of variation < threshold), or a safety ceiling. Designed to close the φ·L(t) infinite-horizon tail of the U_sys integral (GAP-01 WP8).
+Runs a single simulation to natural termination: either extinction (population = 0), convergence (L(t) coefficient of variation < threshold), or a safety ceiling. Designed to close the φ·L(t) infinite-horizon tail of the U_sys integral (GAP-01 WP8).
 
 **To run:**
 ```bash
@@ -108,7 +114,7 @@ python simulation/run_termination_sweep.py
 Edit `RR_VALUES`, `PHI_VALUES`, `ALPHA_VALUES`, `SEEDS` at the top to change the grid. Set `RR_FILTER` to a subset of `RR_VALUES` to re-run only specific rr slices (e.g., after partial results are already in hand).
 
 **Key findings from the v1.x2 sweep (n=405):**
-- Phase boundary at rr ∈ (0.066, 0.070) — sharp transition
+- Phase boundary at rr ∈ (0.066, 0.070): sharp transition
 - rr ≤ 0.066: 100% extinction; integrals finite, GAP-01 closed
 - rr = 0.070: stochastic boundary; outcome is seed-determined, not parameter-determined
 - rr ≥ 0.080: 100% convergence; median 619–843 steps to stable L(t)
@@ -196,11 +202,11 @@ The complete analysis is in **[SPECIFICATION_GAPS.md](./SPECIFICATION_GAPS.md)**
 
 | Gap | Component | Status |
 |---|---|---|
-| GAP-01 | U_sys time-integral | **Resolved (v1.x2 WP7+WP8)** — trapezoidal quadrature; natural-termination sweep closes φ·L(t) tail |
-| GAP-02 | H_eff diversity entropy | **Resolved (v1.x WP1)** — spectral entropy over population novelty matrix |
-| GAP-03 | Ψ_inst throughput rates | Open — constraint-change-rate penalty proxy |
-| GAP-04 | COP conditions | **Partially Resolved (v1.x WP4)** — PeerValidator closes cost-inflation; R_tech stub remains |
-| GAP-05 | Adversarial coverage | Open — 10 of 13 vectors simulated |
+| GAP-01 | U_sys time-integral | **Resolved (v1.x2 WP7+WP8)**: trapezoidal quadrature; natural-termination sweep closes φ·L(t) tail |
+| GAP-02 | H_eff diversity entropy | **Resolved (v1.x WP1)**: spectral entropy over population novelty matrix |
+| GAP-03 | Ψ_inst throughput rates | Open: constraint-change-rate penalty proxy |
+| GAP-04 | COP conditions | **Partially Resolved (v1.x WP4)**: PeerValidator closes cost-inflation; R_tech stub remains |
+| GAP-05 | Adversarial coverage | **Partially Resolved (v2.0)** - 10 live vectors, 1 analytic closure, 2 unimplemented |
 
 ### Key Implementation Assumptions
 

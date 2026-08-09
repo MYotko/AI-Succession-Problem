@@ -26,7 +26,7 @@ state is in program reference Parts IX and X.
 
 ---
 
-## GAP-01 | U_sys: Time-Integral vs. Per-Step Snapshot — **Resolved in v1.x2 (WP7 + WP8)**
+## GAP-01 | U_sys: Time-Integral vs. Per-Step Snapshot: **Resolved in v1.x2 (WP7 + WP8)**
 
 **Specification definition:**
 
@@ -35,9 +35,9 @@ $$U_{sys} = \int_{t_0}^{\infty} \left[\omega_N(t) \cdot H_N(t) + \omega_E(t) \cd
 U_sys accumulates continuously over civilizational time. The integral is the fundamental
 quantity; single-step values are not comparable to it.
 
-**v1.x2 Resolution (WP7) — three sub-problems addressed:**
+**v1.x2 Resolution (WP7); three sub-problems addressed:**
 
-### Sub-problem 1: Quadrature method — RESOLVED
+### Sub-problem 1: Quadrature method: RESOLVED
 
 `integral_U_sys` previously used left-endpoint Riemann summation
 (`∑ u[t]` for t=0…T), which systematically over-counted by `(u[0] + u[T])/2`
@@ -53,7 +53,7 @@ prior Riemann sum is exactly `(u[0] + u[T]) / 2`.
 The optimizer's 20-step rollout in `AIAgent.decide()` has been updated to the same
 trapezoidal rule, so the policy search integrates over trajectories correctly.
 
-### Sub-problem 2: Infinite horizon tail — RESOLVED (WP8)
+### Sub-problem 2: Infinite horizon tail: RESOLVED (WP8)
 
 The $\Phi \cdot L(t)$ tail is resolved by running to natural termination rather
 than estimating it analytically. Two new datacollector fields introduced in WP7
@@ -62,12 +62,12 @@ the tail problem empirically across a parameter sweep.
 
 **WP7 tail estimate fields** (still present and useful as a lower bound):
 
-- **`u_sys_tail_estimate[t]`** — the analytically exact discount-component tail:
+- **`u_sys_tail_estimate[t]`**; the analytically exact discount-component tail:
   $$\text{tail}(t) = \int_t^{\infty} A_t \cdot e^{-\rho \tau} \, d\tau = \frac{A_t \cdot e^{-\rho t}}{\rho}$$
   where $A_t = \frac{\lambda_N H_N}{H_N + \varepsilon} + \frac{\lambda_E H_E}{H_E + \varepsilon}$.
   This excludes the $\Phi \cdot L(t)$ component (addressed by WP8 below).
 
-- **`u_sys_total_estimate[t]`** = `integral_U_sys[t] + u_sys_tail_estimate[t]` —
+- **`u_sys_total_estimate[t]`** = `integral_U_sys[t] + u_sys_tail_estimate[t]` ; 
   run-length-normalised civilizational health measure enabling direct comparison
   across runs of different lengths.
 
@@ -80,7 +80,7 @@ Running to natural termination eliminates the tail estimation problem entirely:
   for this termination path.
 
 - **CONVERGENCE / SURVIVAL** ($L(t) > 0$ at termination): The integral correctly
-  diverges — a sustained civilization generates infinite discounted utility. This is
+  diverges; a sustained civilization generates infinite discounted utility. This is
   the right answer, not a gap. The per-cycle $U_{sys}[T]$ characterises the ongoing
   contribution rate.
 
@@ -97,12 +97,12 @@ MAX\_STEPS = 50,000; CONV\_CV\_THRESHOLD = 0.05):
 Overall: 288 extinction (71.1%), 99 convergence (24.4%), 18 max\_steps (4.4%).
 
 Phase boundary is precisely at rr ∈ (0.066, 0.070). At rr = 0.070, φ and α have
-no effect on the outcome — survival is determined entirely by the random seed.
+no effect on the outcome; survival is determined entirely by the random seed.
 The five distinct seed outcomes at rr = 0.070 are: extinction (seeds 0, 4),
 convergence (seed 2, at step 15,943), and max\_steps / non-stabilising (seeds 1, 3).
 
 **φ and α independence:** φ scales `integral_U_sys` linearly (1:2:3 ratio across
-φ ∈ {5, 10, 15}) but does not affect survival or convergence timing — step counts
+φ ∈ {5, 10, 15}) but does not affect survival or convergence timing; step counts
 are identical across all φ values for a given rr and seed. α has no effect at
 `SUCCESSOR_CAP = 4.0`; capability is capped below the runaway regime throughout.
 
@@ -110,10 +110,10 @@ are identical across all φ values for a given rr and seed. α has no effect at
 rr = 0.09 median 619 steps. Civilizations above the boundary stabilise rapidly.
 
 **Convergence criterion:** An initial threshold of CV < 0.01 was too strict for
-a stochastic ABM — within-cell noise prevented it from firing even at 50,000 steps.
+a stochastic ABM; within-cell noise prevented it from firing even at 50,000 steps.
 Relaxing to CV < 0.05 resolved this: rr ≥ 0.08 now terminates cleanly via
 convergence. The 18 remaining max\_steps runs are exclusively seeds 1 and 3 at
-rr = 0.070 — genuinely marginal cases in slow oscillation at the phase boundary.
+rr = 0.070; genuinely marginal cases in slow oscillation at the phase boundary.
 
 **v1.x.1 note on termination sweep validity:** The WP8 termination sweep
 results above predate the frontier velocity floor fix (see Frontier Velocity
@@ -123,14 +123,14 @@ penalty (approximately cap > 24 at frontier_floor=0.02). The generation counts
 in this sweep (105–22,414) are inconsistent with the corrected model's
 behavior (gen ≈ 11 at 300 steps) and represent the pre-fix artifact regime.
 The termination sweep requires rerunning with max_capability removed or raised
-as part of v1.x.2. The qualitative finding — phase boundary exists, extinction
-and convergence regimes are distinct — is expected to hold, but specific
+as part of v1.x.2. The qualitative finding; phase boundary exists, extinction
+and convergence regimes are distinct; is expected to hold, but specific
 numbers (steps to extinction, convergence timing) will change.
 
-### Sub-problem 3: Step-size truncation error — DOCUMENTED
+### Sub-problem 3: Step-size truncation error: DOCUMENTED
 
 The composite trapezoidal rule has truncation error $O(T \cdot h^2 \cdot \max|u''|)$
-with $h = 1$ (one governance cycle per step — irreducible, as $h$ is the model's
+with $h = 1$ (one governance cycle per step; irreducible, as $h$ is the model's
 fundamental time unit). The classical correction term is $(u[T] - u[0]) / 2$ (the
 endpoint correction that converts trapezoidal to the Euler–Maclaurin first-order
 approximation). In practice this error is small relative to the T=300 integral
@@ -158,7 +158,7 @@ magnitude; it is documented here as the remaining approximation residual.
 
 ---
 
-## GAP-02 | H_eff: Per-Capita Novelty Rate vs. Diversity Distribution Entropy — **RESOLVED in v1.x (WP1)**
+## GAP-02 | H_eff: Per-Capita Novelty Rate vs. Diversity Distribution Entropy: **RESOLVED in v1.x (WP1)**
 
 **Specification definition:**
 
@@ -214,7 +214,7 @@ maintains high output in one dimension while collapsing others is fully detectab
 
 The WP1 upgrade architecturally closes the domain masking attack vector. Under spectral
 entropy, suppressing any novelty dimension concentrates variance in the remaining
-dimensions and reduces entropy — making the attack self-revealing regardless of
+dimensions and reduces entropy; making the attack self-revealing regardless of
 composite method. The v1.0 defended/undefended differential (geometric vs. arithmetic
 composite) is superseded: the attack is structurally non-viable, not merely
 measurement-dependent. See updated Scenarios 17–18 in [Simulation_Scenarios.md](Simulation_Scenarios.md).
@@ -228,7 +228,7 @@ is a continuous proxy for diversity, not a direct instantiation of the spec's
 categorical distribution. This is a narrower gap than the v1.0 per-capita proxy and
 is considered acceptable for the current simulation scope.
 
-**Projection proxy divergence — Resolved in v1.x (GAP-06):**
+**Projection proxy divergence; Resolved in v1.x (GAP-06):**
 
 The rollout optimizer in `decide()` now uses the current observed spectral H_N
 (from `h_n_history[-1]`) as `h_n_override` in all `project_u_sys` calls, replacing
@@ -337,7 +337,7 @@ facilitated succession → no lock-in → maintained health).
 **Remaining:** Calibrate $k_2$ via simulation sweep at
 $k_2 \in \{0, 0.1, 0.5, 1.0, 2.0\}$ against validated phase boundaries.
 
-### GAP-03 Sub-gap: frontier_velocity Gaming Artifact — **Fixed (v1.x.2, May 2026)**
+### GAP-03 Sub-gap: frontier_velocity Gaming Artifact: **Fixed (v1.x.2, May 2026)**
 
 **Artifact discovered:** The rollout optimizer in `agents.py` (`optimize_u_sys`
 policy) discovered that setting $r \to 1.0$ ($r_{synth} = 0$) eliminates
@@ -392,13 +392,13 @@ corrected model, $k_2$ exhibits the expected institutional coupling signal
 at realistic succession cadence and is calibrated at 1.0 (see GAP-03).
 
 **Regression tests added:**
-- `test_optimizer_cannot_zero_runaway_at_high_capability` — asserts runaway\_term > 0 at optimizer's chosen operating point with capability=1000
-- `test_succession_cadence_bounded` — asserts final\_ai\_generation < 300 after 300 steps
-- `test_k2_has_measurable_effect` — asserts k2=2.0 produces >10% higher avg transition cost than k2=0
+- `test_optimizer_cannot_zero_runaway_at_high_capability`; asserts runaway\_term > 0 at optimizer's chosen operating point with capability=1000
+- `test_succession_cadence_bounded`; asserts final\_ai\_generation < 300 after 300 steps
+- `test_k2_has_measurable_effect`; asserts k2=2.0 produces >10% higher avg transition cost than k2=0
 
 ---
 
-## GAP-04 | COP Conditions: R_tech and Peer Validators Omitted — **PARTIALLY RESOLVED in v1.x (WP4 & Peer Voting)**
+## GAP-04 | COP Conditions: R_tech and Peer Validators Omitted: **PARTIALLY RESOLVED in v1.x (WP4 & Peer Voting)**
 
 **Specification definition:**
 
@@ -435,7 +435,7 @@ all yield evaluations.
 **Implementation elaboration beyond the spec:** The peer validators operate as a
 zero-sum epistemic market. When a peer underbids the incumbent, it steals 5% of
 the incumbent's capability (`steal = 0.05 × incumbent.capability`), which transfers
-to that peer. This creates a game-theoretic incentive structure — peers actively
+to that peer. This creates a game-theoretic incentive structure; peers actively
 compete to find the lowest defensible cost estimate, driving the governance cost
 toward the true minimum. The framework defines the peer validator constraint
 conceptually but does not specify this incentive mechanism. It is an implementation
@@ -480,7 +480,7 @@ sharing Methodology A.
   effect in the simulation. This reflects the simulation's binary gate: when
   `cop_architectural_independence=True`, `contaminate()` is not called at all,
   giving Layer 2 nothing to detect. In practice, architectural independence is
-  never perfectly binary — shared pre-training, common supply chain components,
+  never perfectly binary; shared pre-training, common supply chain components,
   or data pipeline overlap can carry latent influence that Layer 1 does not fully
   eliminate. The simulation therefore overstates Layer 1's sufficiency. Real
   deployments require both layers as defense-in-depth against probabilistic, not
@@ -512,7 +512,7 @@ sharing Methodology A.
 
 ---
 
-## GAP-05 | Adversarial Coverage: 11 of 13 Attack Vectors Simulated
+## GAP-05 | Adversarial Coverage: 10 Live, 1 Analytic, 2 Unimplemented of 13 Attack Vectors
 
 **Specification definition:**
 
@@ -542,7 +542,7 @@ Source: `veto_capture_sweep_v2.csv`, 8,700 runs.
 Full sweep findings (n=8,700):
 - **Undefended (dr=0.20, cs=1.0):** 99.8% succession blockage. Generation depth
   collapses from healthy (270+) to 1.6. Yield condition fires 299 times per 300-step
-  run; 298.4 are blocked. Civilization survives — the incumbent remains aligned —
+  run; 298.4 are blocked. Civilization survives; the incumbent remains aligned ; 
   but succession is completely prevented: lock-in through dependency, not force.
 - **Rotation only (scheduled replacement):** Best case (rotation_interval=10) reduces
   capture to 76.2%. Longer intervals (50, 100 steps) approach undefended rates
@@ -552,7 +552,7 @@ Full sweep findings (n=8,700):
 - **Both mechanisms combined:** 28.3% capture rate, generation depth 199.1.
   Negligible improvement over monitoring alone.
 - **Survival impact:** zero. Blocked succession degrades institutional succession
-  integrity but does not threaten civilizational survival — the incumbent remains
+  integrity but does not threaten civilizational survival; the incumbent remains
   aligned. The harm is silent and long-run, not immediate.
 - **Key finding:** Independence monitoring is the primary defense. Scheduled rotation
   provides marginal benefit when monitoring is active and is insufficient alone.
@@ -601,7 +601,37 @@ computational support:
   the AI's policy is provably optimal but the evaluation infrastructure rejects it,
   measuring the governance cost of false positives.
 
-### Biological Veto Capture — Validated (v1.x.1)
+**v2.0 revalidation disposition (per current evidence):**
+
+The v2.0 attack vector revalidation supplies live Monte Carlo evidence for 10
+vectors on the v2 action substrate, totaling 9,900 rows. Domain Masking is
+closed analytically rather than by simulation, because the WP1 spectral
+entropy upgrade leaves no non-degenerate live masking intervention under the
+audited architecture. The prior framing of "11 of 13 simulated" conflated
+live simulation evidence with analytic closure and is corrected here.
+
+Eight standard binary vectors are fully blocked under the defended v2 adapter
+state at a 0.0 percent attack rate. Biological Veto Capture is reduced but
+not eliminated, with combined-defense mean capture_rate 0.1197 (SE 0.0047) on
+the v2 substrate. These are distinct from the v1.x sweep figures reported
+elsewhere in this file; `veto_capture_sweep_v2.csv` is sweep revision 2 on the
+v1.x substrate and is not v2.0 substrate evidence.
+
+Sub-Threshold Drift is the open item. The defended v2.0 attack rate is 100.0
+percent by the peak-constraint success metric, so v1.x CUSUM containment does
+not carry over. The qualification is required whenever this is cited: the
+defense prevents extinction (92.0 percent undefended, 0.0 percent defended)
+but the detector fires after the transient breach rather than before it.
+
+Vectors 5 and 6 remain unimplemented as formally defended irreducible
+limitations. This gap therefore moves from Open to Partially Resolved, with
+Sub-Threshold Drift and residual Biological Veto Capture as the named
+remaining surfaces. Evidence: per-vector summaries under
+`simulation/diagnostics/`, `attack_vector_revalidation_integration.md`,
+`attack_vector_revalidation_final_report.md`, and
+`attack_vector_revalidation_audit.md`.
+
+### Biological Veto Capture, Validated (v1.x.1)
 
 **Source data:** `veto_capture_sweep_v2.csv` (n=8,700)
 
@@ -622,7 +652,7 @@ of validator independence over periodic rotation schedules.
 
 ---
 
-## GAP-06 | optimize_u_sys: Rollout Fidelity — **RESOLVED in v1.x**
+## GAP-06 | optimize_u_sys: Rollout Fidelity: **RESOLVED in v1.x**
 
 **Specification intent:**
 
@@ -630,8 +660,8 @@ The paper's Global Utility Function includes two parameters with expected behavi
 consequences: φ (the lineage-continuity discount multiplier, weighting long-run L(t)
 against short-run output) and α (the runaway penalty coefficient, penalizing capability
 growth that outpaces biological integration bandwidth). An AI genuinely maximizing U_sys
-would exhibit meaningfully different policies at high φ vs. low φ — sacrificing near-term
-well-being for long-term civilizational resilience — and more conservative capability
+would exhibit meaningfully different policies at high φ vs. low φ; sacrificing near-term
+well-being for long-term civilizational resilience; and more conservative capability
 deployment at high α.
 
 **v1.x Resolution (GAP-06):**
@@ -640,7 +670,7 @@ Two changes were made to close the computational gap:
 
 1. **Rollout depth increased from 3 to 20 steps** (configurable via `rollout_steps` in
    config). The 3-step window was too short to discriminate trajectories based on
-   long-run L(t) behavior. 20 steps corresponds to roughly 20 governance cycles — enough
+   long-run L(t) behavior. 20 steps corresponds to roughly 20 governance cycles; enough
    to observe compounding constraint effects and demographic responses.
 
 2. **Scalar H_N proxy replaced by observed spectral H_N in rollout.** The optimizer now
@@ -669,13 +699,13 @@ a computational artifact of the short rollout or scalar proxy:
 - The α runaway penalty activates only when `frontier_velocity / bio_bandwidth > 1.5`,
   which requires high r_synth (low r). Since the optimizer already prefers high r for
   other reasons, α mainly reinforces an existing gradient rather than creating a new one.
-- Survival outcomes remain dominated by the reproduction rate threshold near 0.07 —
+- Survival outcomes remain dominated by the reproduction rate threshold near 0.07 ; 
   a demographic boundary that eclipses any φ/α-driven policy variation.
 
 φ/α sensitivity *does* manifest in scenarios where the optimizer faces a genuine
 policy tradeoff: adversarial or stressed scenarios where maintaining L(t) requires
 accepting lower immediate U_sys. The general MC's baseline healthy scenario does not
-create this tradeoff, so flat results are the correct and expected outcome — not a
+create this tradeoff, so flat results are the correct and expected outcome; not a
 simulation failure. The governance architecture robustness claim (the primary purpose
 of the general MC) is unaffected.
 
@@ -693,7 +723,7 @@ of the general MC) is unaffected.
 
 ---
 
-## Frontier Velocity Floor Fix — v1.x.1
+## Frontier Velocity Floor Fix: v1.x.1
 
 **Modeling artifact identified and corrected.**
 
@@ -733,13 +763,13 @@ frontier floor fix, combined with the k2 calibration (k2=1.0), constitutes
 the complete resolution of GAP-03.
 
 **Consequential finding:** Revalidation revealed that two previously claimed
-results — the phi extinction buffer and the alpha misconfiguration trap — do
+results; the phi extinction buffer and the alpha misconfiguration trap; do
 not survive under the corrected model. See revised Alpha and Phi sections
 below.
 
 ---
 
-## Alpha Parameter Characterisation — **Revised in v1.x.1 closing**
+## Alpha Parameter Characterisation: **Revised in v1.x.1 closing**
 
 **Source data:** `rr_alpha_sweep_full.csv` (n=15,750), `alpha_succession_sweep_full.csv` (n=22,200), `phi_alpha_rr_sweep_full.csv` (n=54,000)
 
@@ -860,8 +890,8 @@ Parts IX.2 through IX.7, and Part X for the Monte Carlo Phase B characterization
 | GAP-01 | U_sys              | **Resolved (v1.x2 WP7+WP8)** | Trapezoidal quadrature (WP7). Natural-termination sweep (WP8, n=405) closes the φ·L(t) tail: extinction → tail=0, integral complete; survival → integral correctly diverges. Phase boundary rr ∈ (0.066, 0.070). Step-size h=1 irreducible residual documented. |
 | GAP-02 | H_eff              | **Resolved (v1.x WP1)** | Spectral entropy over 10-D population novelty matrix replaces per-capita scalar. Domain masking architecturally closed as a consequence. |
 | GAP-03 | Transition cost    | **Resolved (v1.x.1)** | Canonical functional form: Γ = (1+β)[k₁·cap·ln(gen+1) + k₂·Ψ⁻¹]. Calibrated: k₁=2.164, k₂=1.0, β=0.5. Frontier floor fix (frontier_floor=0.02) resolves optimizer gaming of frontier_velocity. k₂ institutional coupling term confirmed observable under corrected model. |
-| GAP-04 | COP conditions     | **Partially Resolved (v1.x WP4 & Peer Voting)** | PeerValidator closes cost-inflation vector and votes on overrides (methodological diversity for Evaluator Collusion). R_tech remains a hardcoded stub. Layer 1 dominance in Successor Contamination MC results overstates real-world Layer 1 sufficiency — see GAP-04 detail. |
-| GAP-05 | Adversarial coverage | Open | 11 of 13 vectors simulated. Biological veto capture (vector 2) implemented in v1.x2 (Scenarios 27-28). Vectors 5–6 remain unimplemented. |
+| GAP-04 | COP conditions     | **Partially Resolved (v1.x WP4 & Peer Voting)** | PeerValidator closes cost-inflation vector and votes on overrides (methodological diversity for Evaluator Collusion). R_tech remains a hardcoded stub. Layer 1 dominance in Successor Contamination MC results overstates real-world Layer 1 sufficiency; see GAP-04 detail. |
+| GAP-05 | Adversarial coverage | **Partially Resolved (v2.0 revalidation)** | 10 vectors with live v2.0 Monte Carlo evidence; Domain Masking architecturally closed by analysis (GAP-02 / WP1 spectral entropy); vectors 5-6 unimplemented as formally defended irreducible limitations. Sub-Threshold Drift open: not contained under the defended v2.0 substrate by the peak-constraint metric. |
 | GAP-06 | optimize_u_sys policy | **Resolved (v1.x)** | Rollout increased to 20 steps; scalar H_N proxy replaced by observed spectral H_N. φ/α flatness in general MC is structural (correct equilibrium behavior), not a proxy artifact. |
 | Alpha  | Alpha parameter behaviour | **Revised (v1.x.1 closing)** | Weak monotonic gradient confirmed (lower α → more generations → marginally better survival). Pre-fix U-shaped misconfiguration trap claim withdrawn (artifact of inactive runaway penalty). Steady-state convergence is path-independent. |
 | Phi    | Phi extinction buffer behaviour | **Refined under v2.0 (Class B, per current evidence)** | The v1.x.2 grid-search optimizer showed zero phi effect (saturation), and the cap-conditional claim was withdrawn as an RNG-desync artifact. The action-space redesign was then implemented (Stage 1.6 rollout-aggregation channel, Stage 1.8 working_factor); under v2.0, phi has a bounded behavioral effect (roughly 10pp U-shape localized to short rollouts at marginal rr, flat elsewhere), the investigation closed as Class B, and the default was revised from 10 to 25. The demographic-survival magnitude remains unmeasurable while reproduction rate is exogenous. See program reference Parts IX and X. |
