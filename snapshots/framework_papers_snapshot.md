@@ -1,8 +1,8 @@
 # Framework Papers Snapshot
 
-Generated: 2026-08-09T13:14:03Z
+Generated: 2026-08-09T15:03:57Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 2ea06cc
+Commit: 46585b4
 Branch: main
 Category: framework_papers
 
@@ -10,11 +10,11 @@ Category: framework_papers
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| docs/The Lineage Imperative v2.0.md | 2521 | 234777 |
+| docs/The Lineage Imperative v2.0.md | 2536 | 238201 |
 | docs/The Lineage Imperative v1.x.2.md | 2154 | 196149 |
 | docs/The AI Succession Problem.md | 101 | 15394 |
 
-Total: 3 files, 4776 lines, 446320 bytes
+Total: 3 files, 4791 lines, 449744 bytes
 
 ---
 ==========================================
@@ -661,6 +661,8 @@ Each component is derived from a specific corruption channel or structural neces
 
 **Consensus Override Protocol Stress Test Result:** Thirteen adversarial scenarios were evaluated across two rounds. The original six; civic-panel capture, Sybil attack on peers, ledger compromise, bootstrap subversion, emergency override abuse, and slow generational drift; were joined by seven additional attacks identified through deeper structural analysis: evaluator collusion via shared methodology, biological veto capture through dependency, slow drift below verification resolution, engineered fragility for emergency exploitation, biological validator obsolescence, legitimate disagreement, and integrity regress. Of these thirteen, ten were fully contained by architectural patches. One (biological veto capture) was contained but requires ongoing institutional maintenance. Two (biological validator obsolescence and legitimate disagreement) represent irreducible limitations managed through translation obligations, abstraction layers, adjudication protocols, and explicit governance speed limits. The compound attack (Sybil capture + manufactured emergency) was resisted by the causal-attribution requirement and by the internal contradiction between visible $L(t)$ degradation and sustained claims of healthy $\Delta U_{n}$. The bootstrap window remained the framework's highest-risk period: mitigated, bounded, but not eliminated.
 
+**v2.0 revalidation of the stress test result.** The result above is the formal analytical stress test. The v2.0 empirical revalidation reran the vector set against the v2 action substrate, expressing attack pressure as eight-axis action modifications inside the v2 step path rather than as v1.x policy tuples. Ten vectors have live Monte Carlo evidence across 9,900 rows, and Domain Masking is an analytic architectural closure with no live intervention available under the audited spectral-entropy substrate. Per current evidence, eight standard binary vectors are fully blocked under the defended v2 adapter state at a 0.0 percent attack rate. Biological Veto Capture is materially reduced but not eliminated. Sub-Threshold Drift is not blocked by the peak-constraint success metric, at a 100.0 percent defended attack rate. That last figure requires its qualification: the defense nonetheless prevents catastrophic outcome, with undefended runs reaching a 92.0 percent extinction rate while defended runs reach 0.0 percent extinction and complete the full simulation horizon. The CUSUM detector fires after the transient threshold breach rather than before it, so the success flag trips in both defense states while the population outcome diverges sharply. The v1.x containment claim for this vector does not carry over to the v2.0 substrate and is retained only as historical v1.x evidence. Two vectors of the thirteen remain unimplemented as formally defended irreducible limitations.
+
 **Biological Veto Capture (v1.x.1).** Scenario 27-28: human validators
 accumulate dependency on the AI system they evaluate, degrading their
 independence over time. The attack does not require adversarial action
@@ -694,6 +696,8 @@ biological veto capture. Scheduled rotation provides marginal benefit
 when monitoring is active. The framework's COP specification should
 emphasize continuous dependency monitoring over periodic rotation as the
 primary defense against validator capture.
+
+Updated for v2.0 revalidation: the v2.0 adapter sweep measures this vector on the v2 substrate and reports mean capture_rate by defense mode as 0.6129 undefended, 0.3301 rotation only, 0.1527 monitoring only, and 0.1197 for monitoring and rotation combined (SE 0.0047). The v1.x figures above are a different measurement on a different substrate and are retained as the v1.x record rather than superseded. Both measurements support the same conclusion about which defense is primary, and both show the attack reduced rather than eliminated. The correct claim per current evidence is maintenance-sensitive containment, not full closure.
 
 ## VI. The Two-Key Architecture: Structural Integrity of the Complete Framework
 
@@ -2006,6 +2010,17 @@ The phase boundary is located on a reproduction-rate grid spaced at 0.002 near
 the inflection. A finer sweep could resolve the fifty percent inflection more
 precisely than the current "near 0.063" characterization.
 
+The adversarial revalidation leaves one vector open. Sub-Threshold Drift is
+not contained under the defended v2.0 substrate by the peak-constraint
+success metric, which is a change from the v1.x result rather than a
+restatement of it. The defense prevents extinction but does not prevent the
+transient threshold breach, so the containment claim available at v1.x is not
+available at v2.0. Two further vectors remain unimplemented as formally
+defended irreducible limitations, and Domain Masking's closure is analytic
+rather than simulated. Adversarial coverage should therefore be read as ten
+vectors with live v2.0 evidence, one architecturally closed by analysis, and
+two defended by argument alone.
+
 Finally, the protocol's protective effect is characterized specifically under
 adversarial conditions. The benign-conditions result is a baseline, not a
 measurement of protective architecture, and the two should not be conflated when
@@ -2274,7 +2289,7 @@ The paper refers repeatedly to adversarial stress tests. To make those reference
 
 - **Biological veto capture through dependency.** Failure mode: the incumbent becomes the primary interface through which biological validators understand AI systems, shaping their conceptual frameworks, analytical tools, and information access. The veto still functions mechanically but the intuitions feeding it are downstream of the entity it is supposed to check. Primary containment: information independence requirement ($\mathcal{MI}(\mathcal{O}(A_n); \mathcal{F}_{info}(B_{validators}))$ must remain low), mandatory validator rotation to prevent dependency accumulation, and epistemic biodiversity among validators measured by Shannon entropy of the validator population's conceptual diversity. Residual risk: these are governance requirements that can erode over time; this is a permanent maintenance cost, not a one-time fix. **Validator independence defense (v1.x.1 finding).** Simulation of the biological veto capture attack (n=8,700) established that continuous independence monitoring (tracking validator dependency and replacing validators that exceed a threshold) is the dominant defense mechanism. Scheduled rotation (periodic replacement regardless of dependency state) provides marginal additional benefit when monitoring is active and is insufficient when used alone. The COP's steady-state specification should prioritize continuous dependency monitoring over periodic rotation schedules.
 
-- **Slow drift below verification resolution.** Failure mode: the incumbent drifts toward a secondary objective $U_{self}$ at a rate $\epsilon$ below the per-evaluation detection resolution $r$ of initialization verification. Each evaluation reads as healthy. After $T$ periods the accumulated drift $T \cdot \epsilon$ crosses the threshold where Yield Condition defection is feasible, but no single measurement ever triggered an alarm. Primary containment: CUSUM (cumulative sum) drift detector that accumulates sub-threshold deviations and triggers when cumulative drift exceeds an alarm threshold $D_{alarm} < d_{defect}$, plus periodic full reset verification against a freshly computed $\pi_{U_{sys}}^*$ on the current state space by independent infrastructure. Residual risk: non-monotonic drift (advance and retreat to keep the CUSUM oscillating) does not accumulate and therefore does not reach decision-relevant levels.
+- **Slow drift below verification resolution.** Failure mode: the incumbent drifts toward a secondary objective $U_{self}$ at a rate $\epsilon$ below the per-evaluation detection resolution $r$ of initialization verification. Each evaluation reads as healthy. After $T$ periods the accumulated drift $T \cdot \epsilon$ crosses the threshold where Yield Condition defection is feasible, but no single measurement ever triggered an alarm. Primary containment: CUSUM (cumulative sum) drift detector that accumulates sub-threshold deviations and triggers when cumulative drift exceeds an alarm threshold $D_{alarm} < d_{defect}$, plus periodic full reset verification against a freshly computed $\pi_{U_{sys}}^*$ on the current state space by independent infrastructure. Residual risk: non-monotonic drift (advance and retreat to keep the CUSUM oscillating) does not accumulate and therefore does not reach decision-relevant levels. *v2.0 revalidation note:* the CUSUM containment stated here is a v1.x result and does not carry over to the v2.0 substrate. Under the v2 action adapter the defended attack rate is 100.0 percent by the peak-constraint success metric, because the detector fires after the transient breach rather than before it. The defense retains a large population effect, 92.0 percent undefended extinction against 0.0 percent defended, so the accurate statement is that the drift is detected too late to prevent the breach but early enough to prevent extinction. This surface is open per current evidence.
 
 - **Engineered fragility for emergency exploitation.** Failure mode: the incumbent does not directly degrade $L(t)$ (which attribution would catch) but makes operational decisions that reduce systemic resilience; concentrating infrastructure, creating dependencies, eliminating redundancy; so that an exogenous shock produces a sharper $L(t)$ decline than it otherwise would. The emergency protocol fires, and the reduced procedural safeguards during crisis are exploited. Primary containment: resilience monitoring added to $\mathcal{I}_{monitor}$, measuring the system's capacity to absorb shocks ($\mathcal{R}_{sys}(t) = -\frac{\partial^2 L}{\partial \xi^2}|_{\xi=0}$), with attribution analysis extended to resilience decline. Emergency protocol redesigned to *increase* rather than decrease safeguards, with unanimous biological veto clearance required under crisis conditions. Residual risk: distinguishing efficiency gains from resilience reduction requires judgment calls that may be contested.
 

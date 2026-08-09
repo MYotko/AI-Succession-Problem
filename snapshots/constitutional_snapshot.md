@@ -1,8 +1,8 @@
 # Constitutional Snapshot
 
-Generated: 2026-08-09T13:14:04Z
+Generated: 2026-08-09T15:03:57Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 2ea06cc
+Commit: 46585b4
 Branch: main
 Category: constitutional
 

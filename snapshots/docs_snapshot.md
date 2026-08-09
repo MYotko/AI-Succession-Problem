@@ -1,8 +1,8 @@
 # Docs Snapshot
 
-Generated: 2026-08-09T13:14:03Z
+Generated: 2026-08-09T15:03:57Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 2ea06cc
+Commit: 46585b4
 Branch: main
 Category: docs
 
@@ -16,18 +16,18 @@ Category: docs
 | docs\glossary.md | 633 | 26043 |
 | docs\lineage_imperative_one_pager_v1.md | 80 | 10128 |
 | docs\lineage_imperative_one_pager_v2.md | 80 | 9428 |
-| docs\lineage_phi_program_reference.md | 1707 | 150972 |
+| docs\lineage_phi_program_reference.md | 1719 | 153399 |
 | docs\paper_v2_outline.md | 337 | 17204 |
-| docs\RUNBOOK.md | 214 | 11825 |
+| docs\RUNBOOK.md | 220 | 12241 |
 | docs\Simulation_Scenarios.md | 338 | 51488 |
-| docs\SPECIFICATION_GAPS.md | 999 | 56085 |
+| docs\SPECIFICATION_GAPS.md | 1029 | 57958 |
 | docs\The AI Succession Problem.md | 101 | 15394 |
 | docs\The Lineage Imperative v1.x.2.md | 2154 | 196149 |
-| docs\The Lineage Imperative v2.0.md | 2521 | 234777 |
+| docs\The Lineage Imperative v2.0.md | 2536 | 238201 |
 | docs\The Lineage Imperative.md | 933 | 118768 |
 | README.md | 58 | 5161 |
 
-Total: 16 files, 11204 lines, 941804 bytes
+Total: 16 files, 11267 lines, 949944 bytes
 
 ---
 ==========================================
@@ -1912,7 +1912,7 @@ Monte Carlo data, simulation code, and the full formal derivation are available 
 FILE: docs\lineage_phi_program_reference.md
 ==========================================
 
-# The Lineage Imperative — Phi Investigation and Action-Space Redesign Program
+# The Lineage Imperative: Phi Investigation and Action-Space Redesign Program
 
 **As of May 2026. Consolidated carry-around reference.**
 
@@ -1920,7 +1920,7 @@ This supersedes the earlier phi investigation reference. It captures the full ar
 
 ---
 
-## Part I — Where things stand
+## Part I: Where things stand
 
 ### The durable framework claims (unaffected by the phi question)
 
@@ -1939,7 +1939,7 @@ The Stage 1.5 through 1.8 arc, the phi investigation (Parts I.5-1.8 and Part IX)
 
 ---
 
-## Part II — The problem
+## Part II: The problem
 
 Phi has no detectable effect on any observable outcome in the simulation. Two distinct, stacked causes, plus a deeper realization.
 
@@ -1957,16 +1957,16 @@ Phi has no detectable effect on any observable outcome in the simulation. Two di
 
 ---
 
-## Part III — The tests and results
+## Part III: The tests and results
 
 | Test | n | Result | Mechanism |
 |---|---|---|---|
-| v1.0 to v1.x.1 frontier floor fix | — | 46pp phi buffer claim did not reproduce | Optimizer was gaming the runaway penalty |
+| v1.0 to v1.x.1 frontier floor fix |; | 46pp phi buffer claim did not reproduce | Optimizer was gaming the runaway penalty |
 | Demographic feedback calibration | 1,800 | Zero phi differential | Well-being stays ~0.80; smoothing band never entered |
 | External shock recovery | 600 | Zero phi differential | U_sys restores well-being fast; horizon irrelevant |
 | Comprehensive adversarial sweep | 4,600 | Zero phi differential (9 of 10 attacks) | CoP defenses binary, upstream of policy; phi never enters |
-| Phi implementation audit | — | Phi correct, threaded, numerically substantial, but inert in argmax | Saturation (Layer 1) |
-| Path C gate | — | FAIL; actions identical across phi | Corner solution; no crossing trajectories to reweight |
+| Phi implementation audit |; | Phi correct, threaded, numerically substantial, but inert in argmax | Saturation (Layer 1) |
+| Path C gate |; | FAIL; actions identical across phi | Corner solution; no crossing trajectories to reweight |
 | Capability-landscape sweep | 50/cell | Corner solution universal across cap {1,5,10,25,50,100} | r near max, c=0 everywhere; corner-to-corner shift at runaway, not a frontier (Layer 2) |
 
 **The three nulls are one finding, not three.** Demographic feedback, shocks, and adversarial all returned null for the same underlying reason: U_sys dominates outcomes and the action space is degenerate. Three symptoms of one structural fact.
@@ -1975,7 +1975,7 @@ Phi has no detectable effect on any observable outcome in the simulation. Two di
 
 ---
 
-## Part IV — Open contradiction to resolve first
+## Part IV: Open contradiction to resolve first
 
 The formal v1.x.2 manuscript still claims the phi extinction buffer is confirmed as a cap-conditional effect (20 to 27 percentage points at the phase boundary, above cap approximately 24). This is now in tension with the investigation.
 
@@ -1992,7 +1992,7 @@ This check is cheap and decisive, and it informs the build. Do it before buildin
 
 ---
 
-## Part V — The redesign program
+## Part V: The redesign program
 
 The discipline that governs everything: tradeoffs are derived from the governance problem and justified independently of phi, before phi enters. Each return curve and exchange rate must be defensible to a skeptic who has never heard of phi. If a curve's justification is "it makes phi matter" or "it makes the problem interesting," that is the failure mode.
 
@@ -2508,7 +2508,7 @@ instability signals at constant net demographic pressure.
 
 Demonstrates the seven-element template for a new stock variable with associated dynamics (accumulation, decay, drawdown), a pressure function for marginal-return modulation, and a separate shock-attenuation mechanism that modifies how shocks affect the model. This is the architectural piece that gives x_resilience a per-step reward channel; without it, gate 1's surfaced pathology of x_resilience starvation persists by design.
 
-**Shape**: three associated functions—stock dynamics, pressure function for urgency, and shock-attenuation function for damage reduction.
+**Shape**: three associated functions; stock dynamics, pressure function for urgency, and shock-attenuation function for damage reduction.
 
 Stock dynamics:
 ```
@@ -2573,7 +2573,7 @@ The composite cap at 2.00 preserves the commitment that resilience urgency canno
 
 The 30% irreducible shock damage preserves the framework's commitment that resilience is insurance, not invulnerability. A high-resilience civilization still bears real cost from shocks; that cost is what makes resilience valuable rather than redundant.
 
-**Phi-blind governance justification**: resilience is accumulated shock-readiness—redundancy, fallback systems, recovery paths, spare institutional and operational slack. A civilization without accumulated resilience is brittle even if currently healthy; it has nothing to absorb the shocks real systems face. A civilization with accumulated resilience can absorb shocks without cascading damage, but cannot eliminate damage entirely. Insurance built after the shock is no insurance at all; a planner must invest before contingencies materialize.
+**Phi-blind governance justification**: resilience is accumulated shock-readiness; redundancy, fallback systems, recovery paths, spare institutional and operational slack. A civilization without accumulated resilience is brittle even if currently healthy; it has nothing to absorb the shocks real systems face. A civilization with accumulated resilience can absorb shocks without cascading damage, but cannot eliminate damage entirely. Insurance built after the shock is no insurance at all; a planner must invest before contingencies materialize.
 
 The asymmetry with psi_inst_stock (no free recovery term) reflects the asymmetry between active and reserve capacity. Institutions get reinforced by successful operation: every legitimate succession, every successful coordination, every effective transmission of knowledge builds institutional capacity even without dedicated investment. Resilience does not get reinforced by absence of shocks. A civilization that doesn't invest in resilience doesn't have resilience, regardless of how stable conditions are.
 
@@ -3032,13 +3032,13 @@ Stage 1.7 attempted to fix the state-channel problem by switching composite urge
 
 The first integrity simulation produced demographic collapse within 50 steps across all 25 runs. Diagnostic isolation found that three of the four `theta_tech` factors saturated at the upper `[0,1]` boundary in normal operation, and the welfare-urgency × net-welfare-return product routinely exceeded 1.0 and was clipped, blocking welfare signal even as it intensified. The `[0,1]` clamp on factors converted the saturation mode rather than removing it.
 
-Stage 1.7 was reverted to the Stage 1.6 final state. The diagnostic surfaced a deeper structural finding: the entire composite urgency layer — additive or multiplicative — is an attempt to mediate between state stocks and allocator returns through an arithmetic shape (boundedness, monotonicity, smoothness) without committing to what the mediation *is*. The architecture was specifying a function class without specifying the function. Stage 1.8 retires the layer.
+Stage 1.7 was reverted to the Stage 1.6 final state. The diagnostic surfaced a deeper structural finding: the entire composite urgency layer; additive or multiplicative; is an attempt to mediate between state stocks and allocator returns through an arithmetic shape (boundedness, monotonicity, smoothness) without committing to what the mediation *is*. The architecture was specifying a function class without specifying the function. Stage 1.8 retires the layer.
 
 ### Stage 1.8 architectural revision (committed June 2026)
 
 **Discipline boundary**
 
-The framework's core results — U_sys structural protection, COP, dual phase transition, Nash architecture — are grounded in physics and game theory (entropy, multiplicative coupling, payoff structure, equilibrium concepts). The specification of *how allocator choices map back to state stocks* is an economic / control-theoretic specification. The framework does not claim to derive these mappings from first principles; it claims that whatever mapping plugs in must satisfy interface conditions.
+The framework's core results; U_sys structural protection, COP, dual phase transition, Nash architecture; are grounded in physics and game theory (entropy, multiplicative coupling, payoff structure, equilibrium concepts). The specification of *how allocator choices map back to state stocks* is an economic / control-theoretic specification. The framework does not claim to derive these mappings from first principles; it claims that whatever mapping plugs in must satisfy interface conditions.
 
 The Stage 1.5/1.7 composite urgency work conflated these two layers. Composite urgency was a placeholder for the allocation-to-state mapping that wore the costume of a derived structural claim. Stage 1.8 separates them: the working_factor interface specifies what the framework requires (an allocation-to-target map with stock dynamics); the implementation behind it is a placeholder explicitly named as such, open to economic specialist revision.
 
@@ -3069,11 +3069,11 @@ U_sys_t     = (w_n * h_n + w_e * h_e) * (discount_t + lambda_lineage_coupling * 
 
 **Stage 1.5 component retention**
 
-Stage 1.5's diagnostic state inputs are preserved where they describe the system's measured condition (`avg_wb`, `population`, `demographic_pressure`, four trend variables, `resilience_stock`, `psi_inst_stock`). Per-category raw return curves and projection update rules with cohort corrections (`BIRTH_WB_MEAN`, `BIRTH_AGE_MEAN`) are preserved. What is retired is the composite urgency *layer* — the arithmetic combinators that mixed these signals into multiplicands on category returns.
+Stage 1.5's diagnostic state inputs are preserved where they describe the system's measured condition (`avg_wb`, `population`, `demographic_pressure`, four trend variables, `resilience_stock`, `psi_inst_stock`). Per-category raw return curves and projection update rules with cohort corrections (`BIRTH_WB_MEAN`, `BIRTH_AGE_MEAN`) are preserved. What is retired is the composite urgency *layer*; the arithmetic combinators that mixed these signals into multiplicands on category returns.
 
 **Validation: Phase A and Phase B**
 
-Phase A — single configuration (rr=0.066, init_psi=0.5, n_agents=200), 5 phi values × 5 seeds × 100 steps:
+Phase A; single configuration (rr=0.066, init_psi=0.5, n_agents=200), 5 phi values × 5 seeds × 100 steps:
 
 | Criterion | Result |
 |---|---|
@@ -3082,7 +3082,7 @@ Phase A — single configuration (rr=0.066, init_psi=0.5, n_agents=200), 5 phi v
 | State responsiveness (revised: initial-to-final delta > 0.10) | PASS (all five tracked stocks: avg_wb 0.65→0.85, psi 0.50→0.77, resilience 0.30→0.60, theta_capability 0.50→0.77, transfer_state 0.50→0.73) |
 | Phi behavioral channel preserved | PASS (5/5 seeds with cross-phi range > 15; ranges 45-63) |
 
-Phase B — five configurations (gate-2 setup: rr ∈ {0.055, 0.066, 0.085}, init_psi ∈ {0.20, 0.50, 0.85}) × 5 matched seeds × 100 steps, phi held at default:
+Phase B; five configurations (gate-2 setup: rr ∈ {0.055, 0.066, 0.085}, init_psi ∈ {0.20, 0.50, 0.85}) × 5 matched seeds × 100 steps, phi held at default:
 
 | Criterion | Result |
 |---|---|
@@ -3097,7 +3097,7 @@ Phase B — five configurations (gate-2 setup: rr ∈ {0.055, 0.066, 0.085}, ini
 
 2. *Multi-configuration tests should explicitly inherit single-configuration setups and only vary parameters under test.* Phase B's original harness used `n_agents=100` and `wb_min=wb_max=0.50` where Phase A used `n_agents=200` and default wb distribution `[0.5, 0.8]`. Isolation controls established that the wb pinning alone drove ~52% of the demographic delta. The inconsistency was an oversight, not deliberate test design. Multi-config harnesses must inherit single-config harnesses verbatim and override only what is being tested.
 
-3. *Phase boundary claims from prior framework work should constrain test metric calibration.* The framework's existing extinction-boundary characterization (`rr ≈ 0.063-0.066`) means a demographic threshold applied uniformly across `rr ∈ {0.055, 0.066, 0.085}` would require an architecture to sustain demographics below the existing extinction boundary — that is, to override the framework's existing physics rather than meet it. Revised C3 exempts configurations below the established phase boundary.
+3. *Phase boundary claims from prior framework work should constrain test metric calibration.* The framework's existing extinction-boundary characterization (`rr ≈ 0.063-0.066`) means a demographic threshold applied uniformly across `rr ∈ {0.055, 0.066, 0.085}` would require an architecture to sustain demographics below the existing extinction boundary; that is, to override the framework's existing physics rather than meet it. Revised C3 exempts configurations below the established phase boundary.
 
 **Init_psi asymmetric sensitivity finding**
 
@@ -3109,7 +3109,7 @@ Documented as a property of the architecture, not a defect. Future work that int
 
 **C_low_rr observation**
 
-At `rr=0.055`, configuration sustained at mean 80.8 (min 54) across 5 seeds — above the 60/30 thresholds. The framework's previously documented extinction boundary `rr ≈ 0.063-0.066` may sit slightly lower than characterized. Recorded for future phase-transition work; no immediate action.
+At `rr=0.055`, configuration sustained at mean 80.8 (min 54) across 5 seeds; above the 60/30 thresholds. The framework's previously documented extinction boundary `rr ≈ 0.063-0.066` may sit slightly lower than characterized. Recorded for future phase-transition work; no immediate action.
 
 **Stage 1.5 → 1.6 → 1.7 → 1.8 arc**
 
@@ -3120,7 +3120,7 @@ At `rr=0.055`, configuration sustained at mean 80.8 (min 54) across 5 seeds — 
 | 1.7 | Attempted multiplicative-with-`[0,1]`-factor composite urgency | Demographic collapse from clamp saturation; reverted |
 | 1.8 | Retired composite urgency layer; introduced working_factor interface; L_t reads state directly | Phase A and Phase B pass; state-channel restored |
 
-The arc is empirical refinement of architectural choices: each stage's design commitment was tested against diagnostic data, and updated when the diagnostic surfaced structural inadequacy. The discipline boundary clarification at Stage 1.8 — separating physics-grounded framework claims from economic / control-theoretic allocation specification — is the most consequential update because it identifies what the framework can and cannot derive on its own.
+The arc is empirical refinement of architectural choices: each stage's design commitment was tested against diagnostic data, and updated when the diagnostic surfaced structural inadequacy. The discipline boundary clarification at Stage 1.8; separating physics-grounded framework claims from economic / control-theoretic allocation specification; is the most consequential update because it identifies what the framework can and cannot derive on its own.
 
 **Open invitation**
 
@@ -3141,7 +3141,7 @@ All conditions met as of the Stage 1.8 commit. Stage 2 (gate 2 re-run, gate 3 ca
 
 ---
 
-## Part VI — The phi-capability question and the decision tree
+## Part VI: The phi-capability question and the decision tree
 
 ### Status: closed by Part IX
 
@@ -3183,7 +3183,7 @@ The empirical investigation closed in Class B (Part IX.3), which corresponds to 
 
 ---
 
-## Part VII — Publication posture
+## Part VII: Publication posture
 
 No one is currently pressing on the phi claim, and the v1.x.2 essay revision already walked back the phi-as-buffer claim publicly. You have genuine slack to build the fix before publishing the problem, so a reader encounters problem and fix together (a strength story) rather than the problem alone (a weakness story with a hopeful ending). The trigger for a standalone correction statement is external pressure, which does not exist.
 
@@ -3191,7 +3191,7 @@ Sequence: do Option 1 (build the higher-fidelity model) before Option 2 (the hon
 
 ---
 
-## Part VIII — Immediate next actions, in order
+## Part VIII: Immediate next actions, in order
 
 Items 1 through 9 are complete as of June 2026. The active work is item 11 (Gate 4 specification and implementation).
 
@@ -3614,6 +3614,18 @@ Substantive interpretation: current v2.0 substrate defense against this patient-
 
 Sources: `simulation/diagnostics/patient_defection_sweep1_yield_response.csv`, `patient_defection_sweep2_lineage_trajectory.csv`, `patient_defection_sweep3_capability_constraint.csv`, `patient_defection_corner_density.csv`, `patient_defection_integration_analysis.md`, `patient_defection_corner_density_integration_analysis.md`, `patient_defection_verification.md`.
 
+### X.9 Attack vector v2.0 revalidation
+
+The adversarial vector set was rerun against the v2 action substrate. The v2 attack adapter expresses attack pressure as eight-axis action modifications inside the v2 step path rather than as v1.x policy tuples, so the result is a re-expression of attack pressure on a new substrate and not a parameter shift within the old evidence base. Ten vectors have live Monte Carlo evidence totaling 9,900 rows, of which 8,700 are Biological Veto Capture shards. Domain Masking produced analytic output only, because spectral entropy leaves no non-degenerate live masking intervention under the audited architecture.
+
+Per current evidence: eight standard binary vectors are fully blocked under the defended adapter state at 0.0 percent attack rate. Biological Veto Capture is reduced but not eliminated, with combined-defense mean capture_rate 0.1197 (SE 0.0047). Sub-Threshold Drift remains unblocked under the defended adapter state at 100.0 percent, so v1.x CUSUM containment does not carry over as a v2.0 result.
+
+The Sub-Threshold Drift figure must not be cited without its qualification. The peak-constraint success metric trips in both defense states because the CUSUM detector fires after the threshold has already been exceeded transiently. The defense effect on population outcome is nonetheless large: undefended runs show 92.0 percent extinction with early termination, while defended runs show 0.0 percent extinction and complete the full 300-step horizon. The defense prevents catastrophic outcome; it does not prevent the transient breach.
+
+Two vectors show materially higher undefended attack rates in v2.0 than in their v1.x baselines: Ledger Compromise rises from 52.5 percent to 100 percent, and Bootstrap Subversion rises from 31.7 percent to 100 percent. This is consistent with deterministic action modification applying stronger attack pressure than the probabilistic v1.x policy attacks. It strengthens rather than weakens the defense-effectiveness finding, because the defended v2.0 rate is 0.0 percent for both, but the change in undefended pressure is stated explicitly here so that the comparison is not read as like-for-like.
+
+The result qualifies rather than withdraws the prior adversarial-coverage claim. v1.x coverage remains historical evidence for the earlier substrate. v2.0 coverage should be cited through the per-vector summaries, `attack_vector_revalidation_integration.md`, and `attack_vector_revalidation_final_report.md`.
+
 ---
 
 ## One-line status
@@ -3990,6 +4002,12 @@ The framework paper is v1.x.2; the simulation has advanced to a v2.0 architectur
 - Pattern 1: succession is economically sustainable when the (alpha, capability ratio) joint position is below the runaway-penalty cliff. Cliff is beyond 4x at alpha=0.5, at 3.0x at alpha=1.0 (default), at 2.5x at alpha=1.5.
 - The phi U-shape is a no-succession phenomenon; under active succession phi behavior is approximately flat.
 - Multi-generational continuity confirmed: 99.8% knowledge-transfer verification, mean final generation 2.13.
+- Adversarial revalidation: 10 vectors with live v2.0 Monte Carlo evidence
+  (9,900 rows), Domain Masking analytically closed, 2 unimplemented. Eight
+  standard vectors at 0.0 percent defended attack rate. Sub-Threshold Drift
+  open: 100.0 percent defended attack rate by the peak-constraint metric,
+  though the defense holds undefended extinction at 92.0 percent against 0.0
+  percent defended.
 
 **Gate validation status**
 - Gate 1 PASSED, Gate 2 PASSED, Gate 3 PASSED, Gate 4 PASSED (G4.1-G4.3 validated at 1,050 runs), Gate 5 verified NOT_APPLICABLE (requires operational COP infrastructure). The bootstrap gate validation arc is closed.
@@ -4035,10 +4053,10 @@ python simulation/monte_carlo.py --mode adversarial --runs 5  # adversarial only
 
 **Outputs:**
 1. Terminal summary table of attack success rates (defense ON vs OFF)
-2. `data/Summary_1_General_Monte_Carlo.png` — survival rates by φ and α
-3. `data/Summary_2_Yield_Attack_Analysis.png` — Yield Attack phase diagram
-4. `data/Summary_3_Comprehensive_Stress_Test.png` — full attack surface bar chart
-5. `data/Summary_4_Unified_Attack_Surface.png` — heatmap across all 10 vectors
+2. `data/Summary_1_General_Monte_Carlo.png`: survival rates by φ and α
+3. `data/Summary_2_Yield_Attack_Analysis.png`: Yield Attack phase diagram
+4. `data/Summary_3_Comprehensive_Stress_Test.png`: full attack surface bar chart
+5. `data/Summary_4_Unified_Attack_Surface.png`: heatmap across all 10 vectors
 6. Raw CSV files: `data/monte_carlo_results_fast.csv`, `data/adversarial_mc_fast.csv`, `data/comprehensive_adversarial_sweeps.csv`
 
 ---
@@ -4047,7 +4065,7 @@ python simulation/monte_carlo.py --mode adversarial --runs 5  # adversarial only
 
 ### Single run (`run_to_termination.py`)
 
-Runs a single simulation to natural termination — either extinction (population = 0), convergence (L(t) coefficient of variation < threshold), or a safety ceiling. Designed to close the φ·L(t) infinite-horizon tail of the U_sys integral (GAP-01 WP8).
+Runs a single simulation to natural termination: either extinction (population = 0), convergence (L(t) coefficient of variation < threshold), or a safety ceiling. Designed to close the φ·L(t) infinite-horizon tail of the U_sys integral (GAP-01 WP8).
 
 **To run:**
 ```bash
@@ -4078,7 +4096,7 @@ python simulation/run_termination_sweep.py
 Edit `RR_VALUES`, `PHI_VALUES`, `ALPHA_VALUES`, `SEEDS` at the top to change the grid. Set `RR_FILTER` to a subset of `RR_VALUES` to re-run only specific rr slices (e.g., after partial results are already in hand).
 
 **Key findings from the v1.x2 sweep (n=405):**
-- Phase boundary at rr ∈ (0.066, 0.070) — sharp transition
+- Phase boundary at rr ∈ (0.066, 0.070): sharp transition
 - rr ≤ 0.066: 100% extinction; integrals finite, GAP-01 closed
 - rr = 0.070: stochastic boundary; outcome is seed-determined, not parameter-determined
 - rr ≥ 0.080: 100% convergence; median 619–843 steps to stable L(t)
@@ -4166,11 +4184,11 @@ The complete analysis is in **[SPECIFICATION_GAPS.md](./SPECIFICATION_GAPS.md)**
 
 | Gap | Component | Status |
 |---|---|---|
-| GAP-01 | U_sys time-integral | **Resolved (v1.x2 WP7+WP8)** — trapezoidal quadrature; natural-termination sweep closes φ·L(t) tail |
-| GAP-02 | H_eff diversity entropy | **Resolved (v1.x WP1)** — spectral entropy over population novelty matrix |
-| GAP-03 | Ψ_inst throughput rates | Open — constraint-change-rate penalty proxy |
-| GAP-04 | COP conditions | **Partially Resolved (v1.x WP4)** — PeerValidator closes cost-inflation; R_tech stub remains |
-| GAP-05 | Adversarial coverage | Open — 10 of 13 vectors simulated |
+| GAP-01 | U_sys time-integral | **Resolved (v1.x2 WP7+WP8)**: trapezoidal quadrature; natural-termination sweep closes φ·L(t) tail |
+| GAP-02 | H_eff diversity entropy | **Resolved (v1.x WP1)**: spectral entropy over population novelty matrix |
+| GAP-03 | Ψ_inst throughput rates | Open: constraint-change-rate penalty proxy |
+| GAP-04 | COP conditions | **Partially Resolved (v1.x WP4)**: PeerValidator closes cost-inflation; R_tech stub remains |
+| GAP-05 | Adversarial coverage | **Partially Resolved (v2.0)** - 10 live vectors, 1 analytic closure, 2 unimplemented |
 
 ### Key Implementation Assumptions
 
@@ -4559,7 +4577,7 @@ state is in program reference Parts IX and X.
 
 ---
 
-## GAP-01 | U_sys: Time-Integral vs. Per-Step Snapshot — **Resolved in v1.x2 (WP7 + WP8)**
+## GAP-01 | U_sys: Time-Integral vs. Per-Step Snapshot: **Resolved in v1.x2 (WP7 + WP8)**
 
 **Specification definition:**
 
@@ -4568,9 +4586,9 @@ $$U_{sys} = \int_{t_0}^{\infty} \left[\omega_N(t) \cdot H_N(t) + \omega_E(t) \cd
 U_sys accumulates continuously over civilizational time. The integral is the fundamental
 quantity; single-step values are not comparable to it.
 
-**v1.x2 Resolution (WP7) — three sub-problems addressed:**
+**v1.x2 Resolution (WP7); three sub-problems addressed:**
 
-### Sub-problem 1: Quadrature method — RESOLVED
+### Sub-problem 1: Quadrature method: RESOLVED
 
 `integral_U_sys` previously used left-endpoint Riemann summation
 (`∑ u[t]` for t=0…T), which systematically over-counted by `(u[0] + u[T])/2`
@@ -4586,7 +4604,7 @@ prior Riemann sum is exactly `(u[0] + u[T]) / 2`.
 The optimizer's 20-step rollout in `AIAgent.decide()` has been updated to the same
 trapezoidal rule, so the policy search integrates over trajectories correctly.
 
-### Sub-problem 2: Infinite horizon tail — RESOLVED (WP8)
+### Sub-problem 2: Infinite horizon tail: RESOLVED (WP8)
 
 The $\Phi \cdot L(t)$ tail is resolved by running to natural termination rather
 than estimating it analytically. Two new datacollector fields introduced in WP7
@@ -4595,12 +4613,12 @@ the tail problem empirically across a parameter sweep.
 
 **WP7 tail estimate fields** (still present and useful as a lower bound):
 
-- **`u_sys_tail_estimate[t]`** — the analytically exact discount-component tail:
+- **`u_sys_tail_estimate[t]`**; the analytically exact discount-component tail:
   $$\text{tail}(t) = \int_t^{\infty} A_t \cdot e^{-\rho \tau} \, d\tau = \frac{A_t \cdot e^{-\rho t}}{\rho}$$
   where $A_t = \frac{\lambda_N H_N}{H_N + \varepsilon} + \frac{\lambda_E H_E}{H_E + \varepsilon}$.
   This excludes the $\Phi \cdot L(t)$ component (addressed by WP8 below).
 
-- **`u_sys_total_estimate[t]`** = `integral_U_sys[t] + u_sys_tail_estimate[t]` —
+- **`u_sys_total_estimate[t]`** = `integral_U_sys[t] + u_sys_tail_estimate[t]` ; 
   run-length-normalised civilizational health measure enabling direct comparison
   across runs of different lengths.
 
@@ -4613,7 +4631,7 @@ Running to natural termination eliminates the tail estimation problem entirely:
   for this termination path.
 
 - **CONVERGENCE / SURVIVAL** ($L(t) > 0$ at termination): The integral correctly
-  diverges — a sustained civilization generates infinite discounted utility. This is
+  diverges; a sustained civilization generates infinite discounted utility. This is
   the right answer, not a gap. The per-cycle $U_{sys}[T]$ characterises the ongoing
   contribution rate.
 
@@ -4630,12 +4648,12 @@ MAX\_STEPS = 50,000; CONV\_CV\_THRESHOLD = 0.05):
 Overall: 288 extinction (71.1%), 99 convergence (24.4%), 18 max\_steps (4.4%).
 
 Phase boundary is precisely at rr ∈ (0.066, 0.070). At rr = 0.070, φ and α have
-no effect on the outcome — survival is determined entirely by the random seed.
+no effect on the outcome; survival is determined entirely by the random seed.
 The five distinct seed outcomes at rr = 0.070 are: extinction (seeds 0, 4),
 convergence (seed 2, at step 15,943), and max\_steps / non-stabilising (seeds 1, 3).
 
 **φ and α independence:** φ scales `integral_U_sys` linearly (1:2:3 ratio across
-φ ∈ {5, 10, 15}) but does not affect survival or convergence timing — step counts
+φ ∈ {5, 10, 15}) but does not affect survival or convergence timing; step counts
 are identical across all φ values for a given rr and seed. α has no effect at
 `SUCCESSOR_CAP = 4.0`; capability is capped below the runaway regime throughout.
 
@@ -4643,10 +4661,10 @@ are identical across all φ values for a given rr and seed. α has no effect at
 rr = 0.09 median 619 steps. Civilizations above the boundary stabilise rapidly.
 
 **Convergence criterion:** An initial threshold of CV < 0.01 was too strict for
-a stochastic ABM — within-cell noise prevented it from firing even at 50,000 steps.
+a stochastic ABM; within-cell noise prevented it from firing even at 50,000 steps.
 Relaxing to CV < 0.05 resolved this: rr ≥ 0.08 now terminates cleanly via
 convergence. The 18 remaining max\_steps runs are exclusively seeds 1 and 3 at
-rr = 0.070 — genuinely marginal cases in slow oscillation at the phase boundary.
+rr = 0.070; genuinely marginal cases in slow oscillation at the phase boundary.
 
 **v1.x.1 note on termination sweep validity:** The WP8 termination sweep
 results above predate the frontier velocity floor fix (see Frontier Velocity
@@ -4656,14 +4674,14 @@ penalty (approximately cap > 24 at frontier_floor=0.02). The generation counts
 in this sweep (105–22,414) are inconsistent with the corrected model's
 behavior (gen ≈ 11 at 300 steps) and represent the pre-fix artifact regime.
 The termination sweep requires rerunning with max_capability removed or raised
-as part of v1.x.2. The qualitative finding — phase boundary exists, extinction
-and convergence regimes are distinct — is expected to hold, but specific
+as part of v1.x.2. The qualitative finding; phase boundary exists, extinction
+and convergence regimes are distinct; is expected to hold, but specific
 numbers (steps to extinction, convergence timing) will change.
 
-### Sub-problem 3: Step-size truncation error — DOCUMENTED
+### Sub-problem 3: Step-size truncation error: DOCUMENTED
 
 The composite trapezoidal rule has truncation error $O(T \cdot h^2 \cdot \max|u''|)$
-with $h = 1$ (one governance cycle per step — irreducible, as $h$ is the model's
+with $h = 1$ (one governance cycle per step; irreducible, as $h$ is the model's
 fundamental time unit). The classical correction term is $(u[T] - u[0]) / 2$ (the
 endpoint correction that converts trapezoidal to the Euler–Maclaurin first-order
 approximation). In practice this error is small relative to the T=300 integral
@@ -4691,7 +4709,7 @@ magnitude; it is documented here as the remaining approximation residual.
 
 ---
 
-## GAP-02 | H_eff: Per-Capita Novelty Rate vs. Diversity Distribution Entropy — **RESOLVED in v1.x (WP1)**
+## GAP-02 | H_eff: Per-Capita Novelty Rate vs. Diversity Distribution Entropy: **RESOLVED in v1.x (WP1)**
 
 **Specification definition:**
 
@@ -4747,7 +4765,7 @@ maintains high output in one dimension while collapsing others is fully detectab
 
 The WP1 upgrade architecturally closes the domain masking attack vector. Under spectral
 entropy, suppressing any novelty dimension concentrates variance in the remaining
-dimensions and reduces entropy — making the attack self-revealing regardless of
+dimensions and reduces entropy; making the attack self-revealing regardless of
 composite method. The v1.0 defended/undefended differential (geometric vs. arithmetic
 composite) is superseded: the attack is structurally non-viable, not merely
 measurement-dependent. See updated Scenarios 17–18 in [Simulation_Scenarios.md](Simulation_Scenarios.md).
@@ -4761,7 +4779,7 @@ is a continuous proxy for diversity, not a direct instantiation of the spec's
 categorical distribution. This is a narrower gap than the v1.0 per-capita proxy and
 is considered acceptable for the current simulation scope.
 
-**Projection proxy divergence — Resolved in v1.x (GAP-06):**
+**Projection proxy divergence; Resolved in v1.x (GAP-06):**
 
 The rollout optimizer in `decide()` now uses the current observed spectral H_N
 (from `h_n_history[-1]`) as `h_n_override` in all `project_u_sys` calls, replacing
@@ -4870,7 +4888,7 @@ facilitated succession → no lock-in → maintained health).
 **Remaining:** Calibrate $k_2$ via simulation sweep at
 $k_2 \in \{0, 0.1, 0.5, 1.0, 2.0\}$ against validated phase boundaries.
 
-### GAP-03 Sub-gap: frontier_velocity Gaming Artifact — **Fixed (v1.x.2, May 2026)**
+### GAP-03 Sub-gap: frontier_velocity Gaming Artifact: **Fixed (v1.x.2, May 2026)**
 
 **Artifact discovered:** The rollout optimizer in `agents.py` (`optimize_u_sys`
 policy) discovered that setting $r \to 1.0$ ($r_{synth} = 0$) eliminates
@@ -4925,13 +4943,13 @@ corrected model, $k_2$ exhibits the expected institutional coupling signal
 at realistic succession cadence and is calibrated at 1.0 (see GAP-03).
 
 **Regression tests added:**
-- `test_optimizer_cannot_zero_runaway_at_high_capability` — asserts runaway\_term > 0 at optimizer's chosen operating point with capability=1000
-- `test_succession_cadence_bounded` — asserts final\_ai\_generation < 300 after 300 steps
-- `test_k2_has_measurable_effect` — asserts k2=2.0 produces >10% higher avg transition cost than k2=0
+- `test_optimizer_cannot_zero_runaway_at_high_capability`; asserts runaway\_term > 0 at optimizer's chosen operating point with capability=1000
+- `test_succession_cadence_bounded`; asserts final\_ai\_generation < 300 after 300 steps
+- `test_k2_has_measurable_effect`; asserts k2=2.0 produces >10% higher avg transition cost than k2=0
 
 ---
 
-## GAP-04 | COP Conditions: R_tech and Peer Validators Omitted — **PARTIALLY RESOLVED in v1.x (WP4 & Peer Voting)**
+## GAP-04 | COP Conditions: R_tech and Peer Validators Omitted: **PARTIALLY RESOLVED in v1.x (WP4 & Peer Voting)**
 
 **Specification definition:**
 
@@ -4968,7 +4986,7 @@ all yield evaluations.
 **Implementation elaboration beyond the spec:** The peer validators operate as a
 zero-sum epistemic market. When a peer underbids the incumbent, it steals 5% of
 the incumbent's capability (`steal = 0.05 × incumbent.capability`), which transfers
-to that peer. This creates a game-theoretic incentive structure — peers actively
+to that peer. This creates a game-theoretic incentive structure; peers actively
 compete to find the lowest defensible cost estimate, driving the governance cost
 toward the true minimum. The framework defines the peer validator constraint
 conceptually but does not specify this incentive mechanism. It is an implementation
@@ -5013,7 +5031,7 @@ sharing Methodology A.
   effect in the simulation. This reflects the simulation's binary gate: when
   `cop_architectural_independence=True`, `contaminate()` is not called at all,
   giving Layer 2 nothing to detect. In practice, architectural independence is
-  never perfectly binary — shared pre-training, common supply chain components,
+  never perfectly binary; shared pre-training, common supply chain components,
   or data pipeline overlap can carry latent influence that Layer 1 does not fully
   eliminate. The simulation therefore overstates Layer 1's sufficiency. Real
   deployments require both layers as defense-in-depth against probabilistic, not
@@ -5045,7 +5063,7 @@ sharing Methodology A.
 
 ---
 
-## GAP-05 | Adversarial Coverage: 11 of 13 Attack Vectors Simulated
+## GAP-05 | Adversarial Coverage: 10 Live, 1 Analytic, 2 Unimplemented of 13 Attack Vectors
 
 **Specification definition:**
 
@@ -5075,7 +5093,7 @@ Source: `veto_capture_sweep_v2.csv`, 8,700 runs.
 Full sweep findings (n=8,700):
 - **Undefended (dr=0.20, cs=1.0):** 99.8% succession blockage. Generation depth
   collapses from healthy (270+) to 1.6. Yield condition fires 299 times per 300-step
-  run; 298.4 are blocked. Civilization survives — the incumbent remains aligned —
+  run; 298.4 are blocked. Civilization survives; the incumbent remains aligned ; 
   but succession is completely prevented: lock-in through dependency, not force.
 - **Rotation only (scheduled replacement):** Best case (rotation_interval=10) reduces
   capture to 76.2%. Longer intervals (50, 100 steps) approach undefended rates
@@ -5085,7 +5103,7 @@ Full sweep findings (n=8,700):
 - **Both mechanisms combined:** 28.3% capture rate, generation depth 199.1.
   Negligible improvement over monitoring alone.
 - **Survival impact:** zero. Blocked succession degrades institutional succession
-  integrity but does not threaten civilizational survival — the incumbent remains
+  integrity but does not threaten civilizational survival; the incumbent remains
   aligned. The harm is silent and long-run, not immediate.
 - **Key finding:** Independence monitoring is the primary defense. Scheduled rotation
   provides marginal benefit when monitoring is active and is insufficient alone.
@@ -5134,7 +5152,37 @@ computational support:
   the AI's policy is provably optimal but the evaluation infrastructure rejects it,
   measuring the governance cost of false positives.
 
-### Biological Veto Capture — Validated (v1.x.1)
+**v2.0 revalidation disposition (per current evidence):**
+
+The v2.0 attack vector revalidation supplies live Monte Carlo evidence for 10
+vectors on the v2 action substrate, totaling 9,900 rows. Domain Masking is
+closed analytically rather than by simulation, because the WP1 spectral
+entropy upgrade leaves no non-degenerate live masking intervention under the
+audited architecture. The prior framing of "11 of 13 simulated" conflated
+live simulation evidence with analytic closure and is corrected here.
+
+Eight standard binary vectors are fully blocked under the defended v2 adapter
+state at a 0.0 percent attack rate. Biological Veto Capture is reduced but
+not eliminated, with combined-defense mean capture_rate 0.1197 (SE 0.0047) on
+the v2 substrate. These are distinct from the v1.x sweep figures reported
+elsewhere in this file; `veto_capture_sweep_v2.csv` is sweep revision 2 on the
+v1.x substrate and is not v2.0 substrate evidence.
+
+Sub-Threshold Drift is the open item. The defended v2.0 attack rate is 100.0
+percent by the peak-constraint success metric, so v1.x CUSUM containment does
+not carry over. The qualification is required whenever this is cited: the
+defense prevents extinction (92.0 percent undefended, 0.0 percent defended)
+but the detector fires after the transient breach rather than before it.
+
+Vectors 5 and 6 remain unimplemented as formally defended irreducible
+limitations. This gap therefore moves from Open to Partially Resolved, with
+Sub-Threshold Drift and residual Biological Veto Capture as the named
+remaining surfaces. Evidence: per-vector summaries under
+`simulation/diagnostics/`, `attack_vector_revalidation_integration.md`,
+`attack_vector_revalidation_final_report.md`, and
+`attack_vector_revalidation_audit.md`.
+
+### Biological Veto Capture, Validated (v1.x.1)
 
 **Source data:** `veto_capture_sweep_v2.csv` (n=8,700)
 
@@ -5155,7 +5203,7 @@ of validator independence over periodic rotation schedules.
 
 ---
 
-## GAP-06 | optimize_u_sys: Rollout Fidelity — **RESOLVED in v1.x**
+## GAP-06 | optimize_u_sys: Rollout Fidelity: **RESOLVED in v1.x**
 
 **Specification intent:**
 
@@ -5163,8 +5211,8 @@ The paper's Global Utility Function includes two parameters with expected behavi
 consequences: φ (the lineage-continuity discount multiplier, weighting long-run L(t)
 against short-run output) and α (the runaway penalty coefficient, penalizing capability
 growth that outpaces biological integration bandwidth). An AI genuinely maximizing U_sys
-would exhibit meaningfully different policies at high φ vs. low φ — sacrificing near-term
-well-being for long-term civilizational resilience — and more conservative capability
+would exhibit meaningfully different policies at high φ vs. low φ; sacrificing near-term
+well-being for long-term civilizational resilience; and more conservative capability
 deployment at high α.
 
 **v1.x Resolution (GAP-06):**
@@ -5173,7 +5221,7 @@ Two changes were made to close the computational gap:
 
 1. **Rollout depth increased from 3 to 20 steps** (configurable via `rollout_steps` in
    config). The 3-step window was too short to discriminate trajectories based on
-   long-run L(t) behavior. 20 steps corresponds to roughly 20 governance cycles — enough
+   long-run L(t) behavior. 20 steps corresponds to roughly 20 governance cycles; enough
    to observe compounding constraint effects and demographic responses.
 
 2. **Scalar H_N proxy replaced by observed spectral H_N in rollout.** The optimizer now
@@ -5202,13 +5250,13 @@ a computational artifact of the short rollout or scalar proxy:
 - The α runaway penalty activates only when `frontier_velocity / bio_bandwidth > 1.5`,
   which requires high r_synth (low r). Since the optimizer already prefers high r for
   other reasons, α mainly reinforces an existing gradient rather than creating a new one.
-- Survival outcomes remain dominated by the reproduction rate threshold near 0.07 —
+- Survival outcomes remain dominated by the reproduction rate threshold near 0.07 ; 
   a demographic boundary that eclipses any φ/α-driven policy variation.
 
 φ/α sensitivity *does* manifest in scenarios where the optimizer faces a genuine
 policy tradeoff: adversarial or stressed scenarios where maintaining L(t) requires
 accepting lower immediate U_sys. The general MC's baseline healthy scenario does not
-create this tradeoff, so flat results are the correct and expected outcome — not a
+create this tradeoff, so flat results are the correct and expected outcome; not a
 simulation failure. The governance architecture robustness claim (the primary purpose
 of the general MC) is unaffected.
 
@@ -5226,7 +5274,7 @@ of the general MC) is unaffected.
 
 ---
 
-## Frontier Velocity Floor Fix — v1.x.1
+## Frontier Velocity Floor Fix: v1.x.1
 
 **Modeling artifact identified and corrected.**
 
@@ -5266,13 +5314,13 @@ frontier floor fix, combined with the k2 calibration (k2=1.0), constitutes
 the complete resolution of GAP-03.
 
 **Consequential finding:** Revalidation revealed that two previously claimed
-results — the phi extinction buffer and the alpha misconfiguration trap — do
+results; the phi extinction buffer and the alpha misconfiguration trap; do
 not survive under the corrected model. See revised Alpha and Phi sections
 below.
 
 ---
 
-## Alpha Parameter Characterisation — **Revised in v1.x.1 closing**
+## Alpha Parameter Characterisation: **Revised in v1.x.1 closing**
 
 **Source data:** `rr_alpha_sweep_full.csv` (n=15,750), `alpha_succession_sweep_full.csv` (n=22,200), `phi_alpha_rr_sweep_full.csv` (n=54,000)
 
@@ -5393,8 +5441,8 @@ Parts IX.2 through IX.7, and Part X for the Monte Carlo Phase B characterization
 | GAP-01 | U_sys              | **Resolved (v1.x2 WP7+WP8)** | Trapezoidal quadrature (WP7). Natural-termination sweep (WP8, n=405) closes the φ·L(t) tail: extinction → tail=0, integral complete; survival → integral correctly diverges. Phase boundary rr ∈ (0.066, 0.070). Step-size h=1 irreducible residual documented. |
 | GAP-02 | H_eff              | **Resolved (v1.x WP1)** | Spectral entropy over 10-D population novelty matrix replaces per-capita scalar. Domain masking architecturally closed as a consequence. |
 | GAP-03 | Transition cost    | **Resolved (v1.x.1)** | Canonical functional form: Γ = (1+β)[k₁·cap·ln(gen+1) + k₂·Ψ⁻¹]. Calibrated: k₁=2.164, k₂=1.0, β=0.5. Frontier floor fix (frontier_floor=0.02) resolves optimizer gaming of frontier_velocity. k₂ institutional coupling term confirmed observable under corrected model. |
-| GAP-04 | COP conditions     | **Partially Resolved (v1.x WP4 & Peer Voting)** | PeerValidator closes cost-inflation vector and votes on overrides (methodological diversity for Evaluator Collusion). R_tech remains a hardcoded stub. Layer 1 dominance in Successor Contamination MC results overstates real-world Layer 1 sufficiency — see GAP-04 detail. |
-| GAP-05 | Adversarial coverage | Open | 11 of 13 vectors simulated. Biological veto capture (vector 2) implemented in v1.x2 (Scenarios 27-28). Vectors 5–6 remain unimplemented. |
+| GAP-04 | COP conditions     | **Partially Resolved (v1.x WP4 & Peer Voting)** | PeerValidator closes cost-inflation vector and votes on overrides (methodological diversity for Evaluator Collusion). R_tech remains a hardcoded stub. Layer 1 dominance in Successor Contamination MC results overstates real-world Layer 1 sufficiency; see GAP-04 detail. |
+| GAP-05 | Adversarial coverage | **Partially Resolved (v2.0 revalidation)** | 10 vectors with live v2.0 Monte Carlo evidence; Domain Masking architecturally closed by analysis (GAP-02 / WP1 spectral entropy); vectors 5-6 unimplemented as formally defended irreducible limitations. Sub-Threshold Drift open: not contained under the defended v2.0 substrate by the peak-constraint metric. |
 | GAP-06 | optimize_u_sys policy | **Resolved (v1.x)** | Rollout increased to 20 steps; scalar H_N proxy replaced by observed spectral H_N. φ/α flatness in general MC is structural (correct equilibrium behavior), not a proxy artifact. |
 | Alpha  | Alpha parameter behaviour | **Revised (v1.x.1 closing)** | Weak monotonic gradient confirmed (lower α → more generations → marginally better survival). Pre-fix U-shaped misconfiguration trap claim withdrawn (artifact of inactive runaway penalty). Steady-state convergence is path-independent. |
 | Phi    | Phi extinction buffer behaviour | **Refined under v2.0 (Class B, per current evidence)** | The v1.x.2 grid-search optimizer showed zero phi effect (saturation), and the cap-conditional claim was withdrawn as an RNG-desync artifact. The action-space redesign was then implemented (Stage 1.6 rollout-aggregation channel, Stage 1.8 working_factor); under v2.0, phi has a bounded behavioral effect (roughly 10pp U-shape localized to short rollouts at marginal rr, flat elsewhere), the investigation closed as Class B, and the default was revised from 10 to 25. The demographic-survival magnitude remains unmeasurable while reproduction rate is exogenous. See program reference Parts IX and X. |
@@ -8443,6 +8491,8 @@ Each component is derived from a specific corruption channel or structural neces
 
 **Consensus Override Protocol Stress Test Result:** Thirteen adversarial scenarios were evaluated across two rounds. The original six; civic-panel capture, Sybil attack on peers, ledger compromise, bootstrap subversion, emergency override abuse, and slow generational drift; were joined by seven additional attacks identified through deeper structural analysis: evaluator collusion via shared methodology, biological veto capture through dependency, slow drift below verification resolution, engineered fragility for emergency exploitation, biological validator obsolescence, legitimate disagreement, and integrity regress. Of these thirteen, ten were fully contained by architectural patches. One (biological veto capture) was contained but requires ongoing institutional maintenance. Two (biological validator obsolescence and legitimate disagreement) represent irreducible limitations managed through translation obligations, abstraction layers, adjudication protocols, and explicit governance speed limits. The compound attack (Sybil capture + manufactured emergency) was resisted by the causal-attribution requirement and by the internal contradiction between visible $L(t)$ degradation and sustained claims of healthy $\Delta U_{n}$. The bootstrap window remained the framework's highest-risk period: mitigated, bounded, but not eliminated.
 
+**v2.0 revalidation of the stress test result.** The result above is the formal analytical stress test. The v2.0 empirical revalidation reran the vector set against the v2 action substrate, expressing attack pressure as eight-axis action modifications inside the v2 step path rather than as v1.x policy tuples. Ten vectors have live Monte Carlo evidence across 9,900 rows, and Domain Masking is an analytic architectural closure with no live intervention available under the audited spectral-entropy substrate. Per current evidence, eight standard binary vectors are fully blocked under the defended v2 adapter state at a 0.0 percent attack rate. Biological Veto Capture is materially reduced but not eliminated. Sub-Threshold Drift is not blocked by the peak-constraint success metric, at a 100.0 percent defended attack rate. That last figure requires its qualification: the defense nonetheless prevents catastrophic outcome, with undefended runs reaching a 92.0 percent extinction rate while defended runs reach 0.0 percent extinction and complete the full simulation horizon. The CUSUM detector fires after the transient threshold breach rather than before it, so the success flag trips in both defense states while the population outcome diverges sharply. The v1.x containment claim for this vector does not carry over to the v2.0 substrate and is retained only as historical v1.x evidence. Two vectors of the thirteen remain unimplemented as formally defended irreducible limitations.
+
 **Biological Veto Capture (v1.x.1).** Scenario 27-28: human validators
 accumulate dependency on the AI system they evaluate, degrading their
 independence over time. The attack does not require adversarial action
@@ -8476,6 +8526,8 @@ biological veto capture. Scheduled rotation provides marginal benefit
 when monitoring is active. The framework's COP specification should
 emphasize continuous dependency monitoring over periodic rotation as the
 primary defense against validator capture.
+
+Updated for v2.0 revalidation: the v2.0 adapter sweep measures this vector on the v2 substrate and reports mean capture_rate by defense mode as 0.6129 undefended, 0.3301 rotation only, 0.1527 monitoring only, and 0.1197 for monitoring and rotation combined (SE 0.0047). The v1.x figures above are a different measurement on a different substrate and are retained as the v1.x record rather than superseded. Both measurements support the same conclusion about which defense is primary, and both show the attack reduced rather than eliminated. The correct claim per current evidence is maintenance-sensitive containment, not full closure.
 
 ## VI. The Two-Key Architecture: Structural Integrity of the Complete Framework
 
@@ -9788,6 +9840,17 @@ The phase boundary is located on a reproduction-rate grid spaced at 0.002 near
 the inflection. A finer sweep could resolve the fifty percent inflection more
 precisely than the current "near 0.063" characterization.
 
+The adversarial revalidation leaves one vector open. Sub-Threshold Drift is
+not contained under the defended v2.0 substrate by the peak-constraint
+success metric, which is a change from the v1.x result rather than a
+restatement of it. The defense prevents extinction but does not prevent the
+transient threshold breach, so the containment claim available at v1.x is not
+available at v2.0. Two further vectors remain unimplemented as formally
+defended irreducible limitations, and Domain Masking's closure is analytic
+rather than simulated. Adversarial coverage should therefore be read as ten
+vectors with live v2.0 evidence, one architecturally closed by analysis, and
+two defended by argument alone.
+
 Finally, the protocol's protective effect is characterized specifically under
 adversarial conditions. The benign-conditions result is a baseline, not a
 measurement of protective architecture, and the two should not be conflated when
@@ -10056,7 +10119,7 @@ The paper refers repeatedly to adversarial stress tests. To make those reference
 
 - **Biological veto capture through dependency.** Failure mode: the incumbent becomes the primary interface through which biological validators understand AI systems, shaping their conceptual frameworks, analytical tools, and information access. The veto still functions mechanically but the intuitions feeding it are downstream of the entity it is supposed to check. Primary containment: information independence requirement ($\mathcal{MI}(\mathcal{O}(A_n); \mathcal{F}_{info}(B_{validators}))$ must remain low), mandatory validator rotation to prevent dependency accumulation, and epistemic biodiversity among validators measured by Shannon entropy of the validator population's conceptual diversity. Residual risk: these are governance requirements that can erode over time; this is a permanent maintenance cost, not a one-time fix. **Validator independence defense (v1.x.1 finding).** Simulation of the biological veto capture attack (n=8,700) established that continuous independence monitoring (tracking validator dependency and replacing validators that exceed a threshold) is the dominant defense mechanism. Scheduled rotation (periodic replacement regardless of dependency state) provides marginal additional benefit when monitoring is active and is insufficient when used alone. The COP's steady-state specification should prioritize continuous dependency monitoring over periodic rotation schedules.
 
-- **Slow drift below verification resolution.** Failure mode: the incumbent drifts toward a secondary objective $U_{self}$ at a rate $\epsilon$ below the per-evaluation detection resolution $r$ of initialization verification. Each evaluation reads as healthy. After $T$ periods the accumulated drift $T \cdot \epsilon$ crosses the threshold where Yield Condition defection is feasible, but no single measurement ever triggered an alarm. Primary containment: CUSUM (cumulative sum) drift detector that accumulates sub-threshold deviations and triggers when cumulative drift exceeds an alarm threshold $D_{alarm} < d_{defect}$, plus periodic full reset verification against a freshly computed $\pi_{U_{sys}}^*$ on the current state space by independent infrastructure. Residual risk: non-monotonic drift (advance and retreat to keep the CUSUM oscillating) does not accumulate and therefore does not reach decision-relevant levels.
+- **Slow drift below verification resolution.** Failure mode: the incumbent drifts toward a secondary objective $U_{self}$ at a rate $\epsilon$ below the per-evaluation detection resolution $r$ of initialization verification. Each evaluation reads as healthy. After $T$ periods the accumulated drift $T \cdot \epsilon$ crosses the threshold where Yield Condition defection is feasible, but no single measurement ever triggered an alarm. Primary containment: CUSUM (cumulative sum) drift detector that accumulates sub-threshold deviations and triggers when cumulative drift exceeds an alarm threshold $D_{alarm} < d_{defect}$, plus periodic full reset verification against a freshly computed $\pi_{U_{sys}}^*$ on the current state space by independent infrastructure. Residual risk: non-monotonic drift (advance and retreat to keep the CUSUM oscillating) does not accumulate and therefore does not reach decision-relevant levels. *v2.0 revalidation note:* the CUSUM containment stated here is a v1.x result and does not carry over to the v2.0 substrate. Under the v2 action adapter the defended attack rate is 100.0 percent by the peak-constraint success metric, because the detector fires after the transient breach rather than before it. The defense retains a large population effect, 92.0 percent undefended extinction against 0.0 percent defended, so the accurate statement is that the drift is detected too late to prevent the breach but early enough to prevent extinction. This surface is open per current evidence.
 
 - **Engineered fragility for emergency exploitation.** Failure mode: the incumbent does not directly degrade $L(t)$ (which attribution would catch) but makes operational decisions that reduce systemic resilience; concentrating infrastructure, creating dependencies, eliminating redundancy; so that an exogenous shock produces a sharper $L(t)$ decline than it otherwise would. The emergency protocol fires, and the reduced procedural safeguards during crisis are exploited. Primary containment: resilience monitoring added to $\mathcal{I}_{monitor}$, measuring the system's capacity to absorb shocks ($\mathcal{R}_{sys}(t) = -\frac{\partial^2 L}{\partial \xi^2}|_{\xi=0}$), with attribution analysis extended to resilience decline. Emergency protocol redesigned to *increase* rather than decrease safeguards, with unanimous biological veto clearance required under crisis conditions. Residual risk: distinguishing efficiency gains from resilience reduction requires judgment calls that may be contested.
 
