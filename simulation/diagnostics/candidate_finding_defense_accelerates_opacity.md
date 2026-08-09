@@ -85,6 +85,51 @@ Any cross-state opacity comparison must use `opacity_accum_final`. Using
 `max_opacity_reached` would have hidden most of this effect at exactly the rungs
 where it is largest.
 
+## Related one-cell observation: the health-channel face
+
+One cell, logged for the same reason as the observation above and with the same
+status. Not a result.
+
+Extension arm of the redesigned sweep, `ext_rr0.050`, reproduction_rate 0.050,
+`cs = 0.0`, `odt = 0.3`, n = 50 per arm:
+
+| Outcome | Undefended | Defended | Difference | Fisher p |
+| --- | ---: | ---: | ---: | ---: |
+| Extinction | 33/50 = 66.0% | 24/50 = 48.0% | 18.0 pp favoring the defense | 0.106 |
+
+Mean final population was 1.92 undefended against 2.38 defended, both effectively
+at the floor.
+
+**Not significant**, n = 50, and well under the 20 point minimum effect of
+interest later fixed for the powered arm. It is recorded as an observation, not
+as evidence.
+
+Why it is filed here rather than separately: it is consistent with the
+**health-channel face of the same mechanism**. If the veto clamps the constraint
+grab, lowers `c`, and raises `theta_tech` and L_t, then the system it leaves
+behind is more productive. That shows up in one channel as faster opacity
+accumulation, which is the observation at the top of this note, and it would
+show up in another channel as a lower extinction rate under demographic stress.
+Same cause, two faces, one apparently adverse and one apparently favorable.
+
+Two cautions against reading anything into it:
+
+- At reproduction_rate 0.050 the population is at the floor in both arms, mean
+  final population under 2.5. A difference between two near-certain collapses
+  may be measuring the reproduction floor rather than the comprehension gap.
+  This is the caution written into the original extension-arm registration and
+  it applies here.
+- The powered arm found no final-population effect at any rung between 0.068 and
+  0.074, with the confidence interval excluding the minimum effect of interest
+  at 4 of 4 rungs. If a health channel exists it did not appear where the
+  powered arm could see it.
+
+**Status: post-paper candidate question. Requires its own pre-registration if
+pursued**, including a minimum effect of interest justified independently, a
+power calculation at registration time, and a rung range where extinction has
+genuine variance, which means below 0.058 rather than the 0.066 to 0.075 band.
+Logged in `post_paper_queue.md`.
+
 ## What would settle it
 
 Not authorized here, and it needs a new question under the post-paper arc:
@@ -92,3 +137,7 @@ vary `opacity_defense_threshold` and `convergence_strength` while holding the
 reproduction rate fixed, and check whether the acceleration tracks blocked-action
 count independently of both. If it does not, the effect is specific to the
 clamp path rather than to the defense as such.
+
+The health-channel question above would be tested in the same design, by adding
+extinction as an outcome at rungs where it has variance, so that both faces of
+the mechanism are measured together rather than in separate arms.

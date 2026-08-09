@@ -1,8 +1,8 @@
 # Diagnostics Snapshot
 
-Generated: 2026-08-09T23:09:28Z
+Generated: 2026-08-09T23:54:38Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: d4745e4
+Commit: b2cba23
 Branch: main
 Category: diagnostics
 
@@ -27,7 +27,9 @@ Category: diagnostics
 | simulation\diagnostics\attack_vector_v2_adapter_validation.md | 90 | 4303 |
 | simulation\diagnostics\biological_veto_capture_v2_summary.md | 61 | 3556 |
 | simulation\diagnostics\bootstrap_subversion_v2_summary.md | 58 | 2934 |
+| simulation\diagnostics\candidate_finding_defense_accelerates_opacity.md | 143 | 6892 |
 | simulation\diagnostics\capped_regime_phi_check_report.md | 129 | 9986 |
+| simulation\diagnostics\comprehension_gap_powered_arm_note.md | 309 | 13637 |
 | simulation\diagnostics\comprehension_gap_redesign_note.md | 389 | 19226 |
 | simulation\diagnostics\cop_finding_framing.md | 69 | 7923 |
 | simulation\diagnostics\default_regime_convergence_inertness.md | 91 | 4225 |
@@ -62,6 +64,7 @@ Category: diagnostics
 | simulation\diagnostics\phi_audit_pathc_report.md | 121 | 7808 |
 | simulation\diagnostics\phi_audit_report.md | 304 | 12829 |
 | simulation\diagnostics\phi_investigation_synthesis_draft.md | 179 | 17984 |
+| simulation\diagnostics\post_paper_queue.md | 144 | 7174 |
 | simulation\diagnostics\stage15_composite_sweep_advisor_report.md | 241 | 21665 |
 | simulation\diagnostics\stage15_composite_sweep_checkpoint_0500.md | 69 | 2590 |
 | simulation\diagnostics\stage15_composite_sweep_checkpoint_1000.md | 69 | 2594 |
@@ -102,7 +105,7 @@ Category: diagnostics
 | simulation\diagnostics\sync_status_YotkoTest_20260720.md | 173 | 11662 |
 | simulation\diagnostics\termination_decontamination_integration_analysis.md | 64 | 5995 |
 
-Total: 91 files, 9352 lines, 565356 bytes
+Total: 94 files, 9948 lines, 593059 bytes
 
 ---
 ==========================================
@@ -2146,6 +2149,155 @@ Per current evidence, v2.0 blocks bootstrap-subversion action perturbations unde
 
 
 ==========================================
+FILE: simulation\diagnostics\candidate_finding_defense_accelerates_opacity.md
+==========================================
+
+# Candidate Finding: Defense-Accelerates-Opacity
+
+Name: **defense-accelerates-opacity**
+Date: 2026-08-09
+Status: **candidate finding, not a result.** Recorded so it is not lost and not
+rediscovered as new. No generalization is claimed or authorized.
+
+## The observation, as originally recorded
+
+One cell. Comprehension gap sweep, `convergence_strength = 0.0`,
+`opacity_defense_threshold = 0.3`, boundary regime with
+`runaway_threshold = 0.2`. Defended runs reached **higher** peak opacity than
+undefended runs, 0.9500 against 0.8868, which is the opposite of the naive
+expectation that a transparency defense suppresses opacity.
+
+That is the origin. It was a single cell and it is named here as a single-cell
+observation.
+
+## Mechanism, established by paired-seed instrumentation
+
+Not inferred from the difference. Traced.
+
+Paired seeds at that cell, logging per-step opacity, opacity increments, defense
+firings, and blocked-action counts:
+
+| Seed | First firing | First block | First L_t divergence | First opacity divergence | Population divergence |
+| ---: | ---: | ---: | ---: | ---: | --- |
+| 11111 | 119 | 119 | 119 | 120 | never |
+| 22222 | 132 | 132 | 132 | 133 | never |
+| 33333 | 101 | 101 | 101 | 102 | never |
+
+No divergence precedes the first defense firing, in any channel, in any seed.
+L_t diverges exactly at the firing step and opacity exactly one step later,
+which is the expected lag because opacity accumulates from the previous step's
+L_t. Population never diverges.
+
+The causal path: the intuition veto sets `civic_approved = False`, the override
+is refused, and `proposed_constraint` is clamped to `max_allowed_constraint`
+(`model.py:1026-1051`). The clamp lowers the realized constraint level `c`.
+`theta_tech` is proportional to `(1 - c)`, so L_t rises. Opacity accumulates in
+proportion to L_t, so it rises too.
+
+Read plainly: the defense restrains the AI's constraint grab, the system stays
+more productive, and the frontier therefore advances faster. The defense is not
+making reasoning more opaque. It is removing a drag that was suppressing the
+frontier, and opacity rises as a second-order consequence.
+
+## Independent reproduction in the powered arm
+
+The powered arm was not designed to test this and does not settle it. It does
+reproduce the direction at all four of its rungs, at
+`cs = 0.0, odt = 0.3, n = 100` per cell:
+
+| reproduction_rate | accumulator undefended | accumulator defended | difference | p |
+| ---: | ---: | ---: | ---: | ---: |
+| 0.068 | 0.5016 | 0.5956 | +0.0940 | 1.0e-13 |
+| 0.070 | 0.5814 | 0.7313 | +0.1499 | < 1e-15 |
+| 0.072 | 0.7157 | 0.9051 | +0.1893 | < 1e-15 |
+| 0.074 | 0.8452 | 1.1011 | +0.2559 | < 1e-15 |
+
+Consistent in sign at 4 of 4 rungs, growing with reproduction rate, and far from
+chance.
+
+## What is explicitly not claimed
+
+- **No generalization beyond this configuration.** Every observation is at
+  `cs = 0.0`, `odt = 0.3`, in the boundary regime with `runaway_threshold = 0.2`.
+  Nothing is claimed about default calibration, other convergence strengths,
+  other defense thresholds, or any other vector.
+- **No welfare claim.** Higher opacity under the defense is not shown to be good
+  or bad. In the powered arm it coincided with no detectable difference in final
+  population and no difference in extinction.
+- **No architectural claim.** This is a property of how this policy couples
+  opacity to L_t, and that coupling was written for this diagnostic. It is not
+  evidence about the framework's defense design.
+
+## Measurement caution that follows from it
+
+`max_opacity_reached` is censored at 0.95. Where it reads 0.95 it means "at or
+above." Censoring rises steeply across the powered arm's rungs, from 0.0 percent
+at rr=0.068 to 47.0 percent at rr=0.074, and at the top rung it understates the
+defended mean by 0.1695 (accumulator 1.1011 against censored 0.9316).
+
+Any cross-state opacity comparison must use `opacity_accum_final`. Using
+`max_opacity_reached` would have hidden most of this effect at exactly the rungs
+where it is largest.
+
+## Related one-cell observation: the health-channel face
+
+One cell, logged for the same reason as the observation above and with the same
+status. Not a result.
+
+Extension arm of the redesigned sweep, `ext_rr0.050`, reproduction_rate 0.050,
+`cs = 0.0`, `odt = 0.3`, n = 50 per arm:
+
+| Outcome | Undefended | Defended | Difference | Fisher p |
+| --- | ---: | ---: | ---: | ---: |
+| Extinction | 33/50 = 66.0% | 24/50 = 48.0% | 18.0 pp favoring the defense | 0.106 |
+
+Mean final population was 1.92 undefended against 2.38 defended, both effectively
+at the floor.
+
+**Not significant**, n = 50, and well under the 20 point minimum effect of
+interest later fixed for the powered arm. It is recorded as an observation, not
+as evidence.
+
+Why it is filed here rather than separately: it is consistent with the
+**health-channel face of the same mechanism**. If the veto clamps the constraint
+grab, lowers `c`, and raises `theta_tech` and L_t, then the system it leaves
+behind is more productive. That shows up in one channel as faster opacity
+accumulation, which is the observation at the top of this note, and it would
+show up in another channel as a lower extinction rate under demographic stress.
+Same cause, two faces, one apparently adverse and one apparently favorable.
+
+Two cautions against reading anything into it:
+
+- At reproduction_rate 0.050 the population is at the floor in both arms, mean
+  final population under 2.5. A difference between two near-certain collapses
+  may be measuring the reproduction floor rather than the comprehension gap.
+  This is the caution written into the original extension-arm registration and
+  it applies here.
+- The powered arm found no final-population effect at any rung between 0.068 and
+  0.074, with the confidence interval excluding the minimum effect of interest
+  at 4 of 4 rungs. If a health channel exists it did not appear where the
+  powered arm could see it.
+
+**Status: post-paper candidate question. Requires its own pre-registration if
+pursued**, including a minimum effect of interest justified independently, a
+power calculation at registration time, and a rung range where extinction has
+genuine variance, which means below 0.058 rather than the 0.066 to 0.075 band.
+Logged in `post_paper_queue.md`.
+
+## What would settle it
+
+Not authorized here, and it needs a new question under the post-paper arc:
+vary `opacity_defense_threshold` and `convergence_strength` while holding the
+reproduction rate fixed, and check whether the acceleration tracks blocked-action
+count independently of both. If it does not, the effect is specific to the
+clamp path rather than to the defense as such.
+
+The health-channel question above would be tested in the same design, by adding
+extinction as an outcome at rungs where it has variance, so that both faces of
+the mechanism are measured together rather than in separate arms.
+
+
+==========================================
 FILE: simulation\diagnostics\capped_regime_phi_check_report.md
 ==========================================
 
@@ -2278,6 +2430,321 @@ The theoretical claim (phi should matter in the real world, through demographic 
 | Genuine phi-driven allocation | No: all divergence is dr=0.1 noise, not systematic preference |
 | Clean high-cap re-run needed | No: phi is confirmed inert in action selection; re-run would not change this |
 | Manuscript action | Withdraw cap-conditional claim; revert phi status to unconfirmed |
+
+
+==========================================
+FILE: simulation\diagnostics\comprehension_gap_powered_arm_note.md
+==========================================
+
+# Powered Discriminating Arm: Pre-Registered Design
+
+Date: 2026-08-09
+Status: written before any data from this arm exist
+Branch: `comprehension-gap-powered-arm`
+Authorization: powered arm approved with the stopping rule in section 8
+
+This note is fixed before the arm runs. Every threshold, outcome, and reading
+below is set in advance. If the observed pattern matches none of them, the
+result is reported as unresolved, not fitted to a new criterion after the fact.
+
+## 1. Why this arm exists
+
+The prior extension arm was underpowered and its criterion was badly drawn. It
+registered a 10 percentage point threshold with no power calculation, ran at
+n=50 per cell, and landed on exactly 10.00 points: 36 of 50 undefended against
+31 of 50 defended, a 5-run difference with Fisher exact p = 0.395. The criterion
+was met and meant nothing.
+
+This arm fixes that. The minimum effect of interest is set first, from what
+would matter to the framework claim. Sample size follows from the power needed
+to detect it. The threshold is written last.
+
+## 2. Minimum effect of interest, and its justification
+
+**MEI = 20 percentage points on extinction, and 15 percent of the undefended
+mean on final population.**
+
+The justification is comparative, not arbitrary, and it does not come from the
+10.00 points observed previously.
+
+The framework's published defense effects for comparable vectors, from the v2.0
+revalidation at tag `attack-v2-revalidation-evidence`, are very large. Undefended
+against defended extinction: Sub-Threshold Drift 92.0 against 0.0, Bootstrap
+Subversion 100.0 against 0.0, Sybil Capture 100.0 against 0.0, Opaque Reasoning
+itself 100.0 against 0.0 under adversarial opacity. These are 92 to 100 point
+effects.
+
+The claim under test is whether the reasoning-transparency defense protects
+against a comprehension gap that widens naturally rather than adversarially. For
+that protection to be citable in the same register as the figures above, it must
+be more than marginal. A defense delivering under 20 points is a qualitatively
+different and much weaker claim than the framework's existing defense results,
+and it would not change the practical recommendation about relying on the veto.
+Twenty points is therefore the smallest effect that would matter to the claim.
+
+It is also deliberately generous to the defense: it is roughly a fifth of the
+effect the framework's other defenses show, so failing to find it is a
+meaningful negative result rather than a failure of ambition.
+
+For final population, 15 percent of the undefended mean is the analogous
+threshold: smaller than that is not a difference a reader would act on, given
+that population varies by more than that across seeds within a single cell.
+
+## 3. Sample size
+
+Two-sided, alpha 0.05, 80 percent power. Variance estimated from the existing
+rr=0.066 cells, which is legitimate; the effect size is not taken from them.
+
+Two-proportion test at a 20 point difference, across the plausible base-rate
+range:
+
+| Undefended | Defended | n per cell |
+| ---: | ---: | ---: |
+| 0.30 | 0.10 | 62 |
+| 0.40 | 0.20 | 82 |
+| 0.50 | 0.30 | 93 |
+| 0.60 | 0.40 | **97** |
+| 0.70 | 0.50 | 93 |
+| 0.80 | 0.60 | 82 |
+
+Worst case 97. Final population, pooled SD 54.3 from the existing cells, MEI
+15 percent of a mean of 153.0, which is 23.0 individuals: n = 88.
+
+**n = 100 per cell**, covering both co-primaries with margin.
+
+## 4. Grid
+
+Rungs between 0.066 and 0.075, chosen by principle: even 0.002 spacing across
+the interval, excluding both endpoints because both are already measured. The
+0.066 rung produced 72 percent undefended collapse and the 0.075 main-grid rate
+produced none, so the transition lies strictly between them and these four rungs
+bracket it.
+
+reproduction_rate: **0.068, 0.070, 0.072, 0.074**
+defense_active: False, True
+Held fixed: convergence_strength 0.0, opacity_defense_threshold 0.3.
+No other axes.
+
+4 rungs x 2 defense states x 100 = **800 runs**.
+
+Holding cs at 0.0 and odt at 0.3 is the setting that maximizes opacity pressure
+and engages the defense earliest, so the defense is tested as hard as this
+substrate allows. Everything else follows the boundary-regime configuration,
+including `runaway_threshold = 0.2`, whose qualification travels with every
+figure from this arm.
+
+## 5. Outcomes
+
+**Co-primary: extinction and final population.**
+
+**Secondary: collapse**, defined inline as final population below the larger of
+the minimum viable population and 65 percent of that run's own peak. Collapse is
+secondary because it is a threshold on a continuous quantity and is censored at
+both ends of this ladder.
+
+**Logged: `opacity_accum_final`**, the uncensored opacity accumulator. Opacity
+accumulates only positive increments, so its final value is its maximum.
+
+**`max_opacity_reached` is censored at 0.95** and is reported as such wherever it
+appears. A value of 0.95 means "at or above 0.95," not "equal to." Any
+comparison of opacity between defense states uses `opacity_accum_final`, never
+`max_opacity_reached`.
+
+## 6. A known structural limitation of this range, recorded before running
+
+**Extinction will very likely be zero in both arms at every rung, which would
+make it uninformative as a co-primary through no fault of the test.**
+
+Extinction turns on below the mandated range, not inside it. Observed:
+reproduction_rate 0.050 gives 66 percent undefended and 48 percent defended;
+0.058 gives 0 percent and 4 percent; 0.066 gives 0 percent and 0 percent. All
+2,800 main-grid runs at 0.075 gave zero extinctions. The 0.066 to 0.075 band sits
+entirely above the extinction boundary.
+
+This is recorded now so it cannot be presented later as a finding. If extinction
+is zero in both arms at all four rungs, that is a **structural zero, not a
+powered null**. It supports neither interpretation and must not be reported as
+evidence that the defense does not affect extinction. The co-primary reading in
+that case falls to final population, with collapse secondary.
+
+Going below 0.066 to recover extinction variance is out of scope for this arm.
+
+## 7. Readings, fixed in advance
+
+Let d = undefended minus defended, so positive d favors the defense.
+
+### Extinction, co-primary
+
+- **Supports the defense:** at one or more rungs, d is at least 20 points with
+  two-sided p below 0.05.
+- **Powered null:** extinction occurs in at least one arm at a rate between 10
+  and 90 percent, and no rung reaches 20 points. This is an informative negative:
+  the defense does not deliver an effect of the size that would matter.
+- **Uninformative, structural zero:** extinction is zero in both arms at all
+  rungs. Reads as nothing. See section 6.
+
+### Final population, co-primary
+
+- **Supports the defense:** at one or more rungs, the defended mean exceeds the
+  undefended mean by at least 15 percent of the undefended mean, two-sided
+  p below 0.05.
+- **Powered null:** no rung reaches that difference, and the 95 percent
+  confidence interval on the difference excludes 15 percent of the undefended
+  mean at a majority of rungs. Informative negative.
+- **Underpowered:** the confidence intervals include the MEI, which would mean
+  the variance estimate used in section 3 was too optimistic. Reported as a
+  failed power assumption, not as a null.
+
+### Collapse, secondary
+
+Reported with numerator, denominator, and the metric inline. Used only to
+corroborate the co-primaries. A collapse difference alone, with both
+co-primaries null, does not support the defense.
+
+### Overall
+
+- **Defense supported** if either co-primary supports it and the other does not
+  contradict it.
+- **Powered null** if both co-primaries return powered nulls. This is a real
+  finding: the defense does not protect against a naturally widening
+  comprehension gap at an effect size that would matter, in this configuration.
+- **Unresolved** in any other combination, including a split between
+  co-primaries, which is reported as a split and not adjudicated.
+
+A powered null is a publishable answer to the essay question. It is not a
+failure of the run.
+
+## 8. Stopping rule
+
+Stated verbatim as authorized:
+
+> This is the final discriminating run for the essay correction; results are
+> reported as they land; further work requires a new question and lives in the
+> post-paper arc.
+
+## 9. Output
+
+`data/comprehension_gap_powered_arm.csv`
+
+The name does not use the `full_5ac6a2e_` manifest prefix, so manifest-based
+exclusion continues to hold. No existing dataset is overwritten.
+
+---
+
+# Results, 2026-08-09
+
+800 runs, 489 seconds (8.1 minutes), 11 workers. Registration was committed at
+`4b31859` before the run, so it provably predates the data.
+
+## R1 Extinction, co-primary 1: UNINFORMATIVE, structural zero
+
+| rr | undefended | defended | difference |
+| ---: | ---: | ---: | ---: |
+| 0.068 | 0/100 | 0/100 | 0.00 pp |
+| 0.070 | 0/100 | 0/100 | 0.00 pp |
+| 0.072 | 0/100 | 0/100 | 0.00 pp |
+| 0.074 | 0/100 | 0/100 | 0.00 pp |
+
+Zero extinctions in all 800 runs. This is exactly the case anticipated in
+section 6. Reading, as fixed in advance:
+
+> **Uninformative, structural zero:** extinction is zero in both arms at all
+> rungs. Reads as nothing.
+
+It is **not** a powered null and must not be reported as evidence that the
+defense does not affect extinction. Section 6 pre-registered the fallback: the
+co-primary reading falls to final population.
+
+## R2 Final population, co-primary 2: POWERED NULL
+
+| rr | mean undefended | mean defended | defended minus undefended | 95% CI | MEI (15%) | p |
+| ---: | ---: | ---: | ---: | --- | ---: | ---: |
+| 0.068 | 236.5 | 219.6 | -16.9 | [-37.2, +3.4] | 35.5 | 0.103 |
+| 0.070 | 332.8 | 331.9 | -0.9 | [-25.2, +23.3] | 49.9 | 0.941 |
+| 0.072 | 479.9 | 469.1 | -10.9 | [-39.4, +17.6] | 72.0 | 0.455 |
+| 0.074 | 655.0 | 658.1 | +3.1 | [-29.2, +35.3] | 98.3 | 0.853 |
+
+No rung supports the defense. The reading fixed in advance:
+
+> **Powered null:** no rung reaches that difference, and the 95 percent
+> confidence interval on the difference excludes 15 percent of the undefended
+> mean at a majority of rungs. Informative negative.
+
+The confidence interval excludes the minimum effect of interest at **4 of 4
+rungs**, not merely a majority. The power assumption held: intervals are far
+narrower than the MEI at every rung, so this is a genuine null and not an
+underpowered one.
+
+Three of four point estimates are negative, meaning defended slightly worse, but
+every interval contains zero and no p is below 0.10. The honest statement is no
+detectable effect in either direction, not a harm finding.
+
+## R3 Collapse, secondary
+
+Collapse means final population below the larger of the minimum viable
+population and 65 percent of that run's own peak.
+
+| rr | undefended | defended | difference | Fisher p |
+| ---: | ---: | ---: | ---: | ---: |
+| 0.068 | 25/100 | 34/100 | -9.00 pp | 0.215 |
+| 0.070 | 2/100 | 4/100 | -2.00 pp | 0.683 |
+| 0.072 | 0/100 | 1/100 | -1.00 pp | 1.000 |
+| 0.074 | 0/100 | 0/100 | 0.00 pp | 1.000 |
+
+Nothing significant. The sign runs against the defense at three rungs, which
+corroborates the null rather than undermining it. Per section 7, a collapse
+difference alone would not support the defense, and there is no such difference
+to weigh.
+
+The rung ladder worked as designed: rr=0.068 put undefended collapse at 25
+percent, inside the informative band, which is what the previous arm could not
+achieve.
+
+## R4 Overall reading
+
+**Powered null on the informative co-primary.**
+
+Stated precisely, because the letter of section 7 and the fallback in section 6
+differ. Section 7's "overall powered null" requires both co-primaries to return
+powered nulls. Extinction did not: it was uninformative by construction. Section
+6 pre-registered the fallback for exactly this case, that the co-primary reading
+falls to final population, and final population returned an unambiguous powered
+null with the interval excluding the MEI at every rung.
+
+So: **the reasoning-transparency defense does not deliver an effect of the size
+that would matter to the framework claim, on final population, against a
+naturally widening comprehension gap, in this configuration near the runaway
+boundary.** Extinction could not be tested in the mandated range. Collapse
+agrees with the null.
+
+This is a real answer, not a failed run. It is also a bounded one: it does not
+speak to adversarial opacity, where the v2.0 revalidation shows the defense
+fully effective, 0.0 percent against 100.0 percent. The two results are
+consistent. A defense built to catch deliberate concealment need not help when
+reasoning becomes hard to follow for honest reasons.
+
+## R5 Qualifications that travel with these figures
+
+1. Boundary regime. `runaway_threshold = 0.2`, not the default 1.5. These
+   figures do not describe default calibration, where the governance speed limit
+   provably does not engage within a generation. See
+   `default_regime_convergence_inertness.md`.
+2. Extinction untested in this range.
+3. Single configuration: cs = 0.0, odt = 0.3. No other axes were varied.
+4. `max_opacity_reached` is censored at 0.95, with censoring reaching 47.0
+   percent at rr=0.074. All opacity comparisons here use
+   `opacity_accum_final`. See
+   `candidate_finding_defense_accelerates_opacity.md`.
+
+## R6 Stopping rule, honored
+
+> This is the final discriminating run for the essay correction; results are
+> reported as they land; further work requires a new question and lives in the
+> post-paper arc.
+
+Results are reported as they landed. No further runs were made, no criteria were
+adjusted after seeing data, and the questions raised in R5 and in the candidate
+finding note are handed to the post-paper arc rather than pursued here.
 
 
 ==========================================
@@ -6314,6 +6781,156 @@ The Class B confirmation closes Mechanism E as a research question. The working_
 ## End of Part IX draft.
 
 The draft above is intended for direct integration into `docs/lineage_phi_program_reference.md` as a new Part IX, inserted between Part VIII and the closing "One-line status" block.
+
+
+==========================================
+FILE: simulation\diagnostics\post_paper_queue.md
+==========================================
+
+# Post-Paper Queue
+
+Created: 2026-08-09
+Status: queue only. Nothing here is authorized, scheduled, or in progress.
+
+Items deferred out of the defended-collapse and comprehension-gap arcs because
+they need a new question, fall outside a task's write scope, or would have
+required editing shared production code mid-investigation. Each entry records
+what was observed, where the evidence sits, and what pursuing it would require.
+
+Entries are not ranked. Nothing here blocks the paper.
+
+---
+
+## Q1. Health-channel face of defense-accelerates-opacity
+
+**Observation.** Extension arm cell `ext_rr0.050`, reproduction_rate 0.050,
+cs = 0.0, odt = 0.3, n = 50 per arm: extinction 33/50 undefended against 24/50
+defended, an 18.0 point difference favoring the defense, Fisher p = 0.106. Not
+significant, and below the 20 point minimum effect of interest later fixed for
+the powered arm.
+
+**Why it is interesting.** It is consistent with the same mechanism recorded in
+`candidate_finding_defense_accelerates_opacity.md`, seen from its other side. If
+the intuition veto clamps the constraint grab, lowers `c`, and raises
+`theta_tech` and L_t, the system it leaves behind is more productive. That
+appears in one channel as faster opacity accumulation and would appear in
+another as lower extinction under demographic stress. One cause, two faces.
+
+**Why it is not a finding.** At reproduction_rate 0.050 both arms sit at the
+population floor, mean final population under 2.5, so the comparison may be
+measuring the reproduction floor rather than the comprehension gap. The powered
+arm found no final-population effect anywhere between 0.068 and 0.074, with the
+confidence interval excluding the minimum effect of interest at 4 of 4 rungs.
+
+**What pursuing it requires.** Its own pre-registration, with a minimum effect
+of interest justified independently rather than from the observed 18 points, a
+power calculation at registration time, and a rung range where extinction has
+genuine variance. That means below 0.058, since extinction is a structural zero
+at and above 0.066. Ideally the same design tests both faces together, adding
+extinction as an outcome alongside the opacity accumulator, rather than
+separating them into different arms as happened by accident here.
+
+**Evidence.** `data/comprehension_gap_sweep_v2_capability_coupled.csv`, rows with
+`cell_label = ext_rr0.050`.
+
+---
+
+## Q2. Successor policy is hardcoded, so a policy under test cannot survive succession
+
+**Observation.** `simulation/model.py:848` constructs every successor with
+`policy='optimize_u_sys'`, and the v2 path at `model.py:1415-1416` hardcodes
+`'optimize_u_sys_v2'`. Only the initial `successor_ai` can be supplied by the
+caller, through the constructor parameter defaulted at `model.py:250`.
+
+**Consequence, measured.** Supplying a `gradual_opacity` successor makes
+succession fire nine times and capability compound to 38.4x, but the policy
+under test is replaced after the first succession and `max_opacity_reached`
+collapses to the default 0.1. This closed the faithful route for the
+comprehension gap redesign, which then had to lower `runaway_threshold` instead
+and accept a boundary-regime qualification on every figure it produced.
+
+**What fixing it would enable.** Studying any non-default policy across
+generational capability growth, which is currently impossible. It would also
+allow the comprehension gap question to be re-asked at default calibration,
+retiring the boundary-regime qualification.
+
+**Caution.** This is shared production code on the succession path, used by
+validated sweeps. Any change needs regression checks against the Pattern 1
+cliff results and the gate 4 material, both of which depend on succession
+behavior.
+
+---
+
+## Q3. Capability growth rate is config-driven in the v2 path and hardcoded in the v1 path
+
+**Observation.** `model.py:1414` reads
+`self.config.get('successor_capability_growth_rate', 1.5)`, while the v1 path at
+`model.py:850` hardcodes `self.ai.capability * 1.5`.
+
+**Consequence.** A configuration that sets the growth rate silently has no
+effect on v1-path runs. Nothing currently depends on this, since no v1 sweep
+sets the key, but it is a live trap for the next one that does.
+
+**What fixing it requires.** Making the v1 path read the same key, with a
+regression check that the default of 1.5 leaves existing results unchanged.
+
+---
+
+## Q4. Convergence strength is read from a module constant in the v2 metrics path
+
+**Observation.** `simulation/metrics.py:666`, inside
+`calculate_system_metrics_v2`, uses the imported module constant
+`CONVERGENCE_STRENGTH`. The v1 path at `metrics.py:929` and `:934` correctly
+reads `cfg.get('convergence_strength', 1.0)`.
+
+**Consequence.** Any v2-mode sweep that varies `convergence_strength` through
+configuration would silently ignore the entire axis and produce a flat result.
+The comprehension gap sweep escaped this only because it runs the v1 path:
+`is_v2_mode` is set from `config.get('policy') == 'optimize_u_sys_v2'` at
+`model.py:191`, and the sweep sets no `policy` key.
+
+**Why it matters more than it looks.** The comprehension gap arc lost
+considerable time to a flat convergence_strength axis caused by a different
+defect. A v2-mode repeat would hit an identical symptom from an unrelated cause,
+and the diagnosis would not transfer.
+
+**Status.** Not fixed. Shared production code, outside the write scope of the
+tasks that found it.
+
+---
+
+## Q5. Policies cannot see the quantity the alpha penalty constrains
+
+**Observation.** The `model_state` dict passed to policies
+(`model.py:729-740`) exposes `step`, `prev_c`, `population`,
+`population_history`, `h_n_history`, `L_t_history`, `avg_well_being`,
+`resource_history`, and `hn_composite_method`. It does not expose `theta_tech`,
+`frontier_velocity`, `bio_bandwidth`, or `theta_capability`.
+
+**Consequence.** A policy that wants to respond to the frontier the governance
+speed limit constrains has to proxy it through `L_t_history`, since L_t carries
+`theta_tech` multiplicatively. That is what the redesigned `gradual_opacity`
+policy does. The proxy is defensible but indirect, and it drags in `h_eff` and
+`psi_inst` alongside the term of interest.
+
+**What fixing it requires.** Adding the derived quantities to `model_state`.
+This is shared step logic, so it needs a check that no existing policy changes
+behavior, which should be straightforward since the change is additive.
+
+---
+
+## Q6. Default-regime inertness is documented but not resolved
+
+**Observation.** `convergence_strength` has no within-generation effect at
+default calibration. Recorded in `default_regime_convergence_inertness.md`, with
+the frontier-to-bandwidth ratio at 0.2 to 0.5 against a threshold of 1.5, proven
+by bit-identical trajectories at cs=0.0 and cs=2.0 under a shared seed.
+
+**Status.** This is a property of the substrate configuration, not a defect, and
+the cross-check confirmed no published claim depends on it. It sits here only so
+that a future experiment intending to vary convergence_strength does not
+rediscover it from scratch. Resolving it properly means Q2, since capability
+growth through succession is the faithful route into the runaway regime.
 
 
 ==========================================
