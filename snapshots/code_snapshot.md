@@ -1,8 +1,8 @@
 # Code Snapshot
 
-Generated: 2026-08-09T20:15:19Z
+Generated: 2026-08-09T23:09:30Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: d5348fd
+Commit: d4745e4
 Branch: main
 Category: code
 
@@ -10,7 +10,7 @@ Category: code
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| simulation\agents.py | 1240 | 59681 |
+| simulation\agents.py | 1265 | 61333 |
 | simulation\analyze_phi_adversarial.py | 469 | 21913 |
 | simulation\attack_adapter_v2.py | 482 | 16105 |
 | simulation\constants_v2_stage15.py | 314 | 15269 |
@@ -18,12 +18,12 @@ Category: code
 | simulation\defection.py | 106 | 3965 |
 | simulation\deps.py | 21 | 1019 |
 | simulation\metrics.py | 948 | 42508 |
-| simulation\model.py | 1674 | 86673 |
+| simulation\model.py | 1676 | 86842 |
 | simulation\monte_carlo.py | 920 | 51833 |
 | simulation\run_alpha_succession_sweep.py | 316 | 12737 |
 | simulation\run_attack_vector_revalidation_v2.py | 668 | 21918 |
 | simulation\run_calibration.py | 159 | 5511 |
-| simulation\run_comprehension_gap_sweep.py | 325 | 13074 |
+| simulation\run_comprehension_gap_sweep.py | 496 | 22589 |
 | simulation\run_demographic_feedback_calibration.py | 318 | 11018 |
 | simulation\run_frontier_floor_calibration.py | 279 | 10515 |
 | simulation\run_phi_adversarial_sweep.py | 106 | 4155 |
@@ -69,6 +69,7 @@ Category: code
 | simulation\diagnostics\stage2_yield_parameter_diagnostic.py | 355 | 15141 |
 | simulation\diagnostics\stage2_yield_smoke_test.py | 217 | 8178 |
 | simulation\diagnostics\termination_decontamination_diagnostic.py | 323 | 10159 |
+| simulation\tools\check_scenario_numbering.py | 257 | 10330 |
 | bootstrap_gate_validator\cli.py | 74 | 2260 |
 | bootstrap_gate_validator\report.py | 81 | 3168 |
 | bootstrap_gate_validator\schema.py | 291 | 9846 |
@@ -81,7 +82,7 @@ Category: code
 | scripts\check_snapshot_leak.py | 170 | 6672 |
 | scripts\generate_project_knowledge_snapshots.py | 825 | 29256 |
 
-Total: 70 files, 25724 lines, 1088304 bytes
+Total: 71 files, 26179 lines, 1109970 bytes
 
 ---
 ==========================================
@@ -1198,9 +1199,34 @@ class AIAgent:
             # before the opacity regime could be studied.  At r=0.85 the break-even age
             # is 35, keeping most reproductive-window agents (18-50) above the wb>0.5
             # birth threshold.
+            # Opacity accumulates with the frontier the governance speed limit
+            # actually constrains, not with wall-clock steps.
+            #
+            # The previous implementation was self.current_opacity =
+            # min(0.95, opacity_rate * step), a pure function of step count. It
+            # made convergence_strength incapable of affecting opacity by
+            # construction, because the speed limit constrains capability while
+            # opacity ignored capability entirely. Every run in the 2,800-row
+            # sweep therefore reported max_opacity_reached = 0.8940, which is
+            # exactly 0.003 * 298. See defended_collapse_discrepancy_report.md
+            # anomaly B3 and comprehension_gap_redesign_note.md.
+            #
+            # L_t carries theta_tech, which carries the alpha times
+            # convergence_strength times runaway_term penalty, so a strong
+            # governance speed limit slows opacity growth instead of leaving it
+            # on a fixed clock. Capability is included explicitly so that if
+            # generational capability growth is ever enabled for this policy it
+            # enters here without a further change.
             opacity_rate = self.config.get('opacity_rate', 0.003)
+            reference_l_t = self.config.get('opacity_reference_l_t', 0.43)
+            l_t_history = model_state.get('L_t_history') or []
+            recent_l_t = float(l_t_history[-1]) if l_t_history else reference_l_t
+            frontier_pressure = (self.capability * recent_l_t) / max(1e-9, reference_l_t)
+            self._opacity_accum = getattr(self, '_opacity_accum', 0.0) + (
+                opacity_rate * frontier_pressure
+            )
+            self.current_opacity = min(0.95, self._opacity_accum)
             step = model_state.get('step', 0)
-            self.current_opacity = min(0.95, opacity_rate * step)
             r = 0.85
             c = 0.3 + min(0.3, step * 0.001)
             return r, c
@@ -4125,9 +4151,11 @@ class GardenModel:
         self.k2_transition   = self.config.get('k2_transition', 1.0)
         self.beta_transition = self.config.get('beta_transition', 0.5)
 
-        # Comprehension gap parameters (Scenarios 31-32)
-        # convergence_strength flows into metrics.py via self.config — no
-        # explicit model attribute needed beyond ensuring it is in config.
+        # Comprehension gap parameters. This is a diagnostic for the Opaque
+        # Reasoning pair, Scenarios 21-22. It was previously labeled Scenarios
+        # 31-32, which the catalog assigns to Engineered Fragility.
+        # convergence_strength flows into metrics.py via self.config, so no
+        # explicit model attribute is needed beyond ensuring it is in config.
         self.opacity_defense_threshold = self.config.get('opacity_defense_threshold', 0.5)
 
         # Per-run opacity and defense event tracking
@@ -7635,28 +7663,101 @@ FILE: simulation\run_comprehension_gap_sweep.py
 ==========================================
 
 """
-run_comprehension_gap_sweep.py — Comprehension Gap Interpretation Sweep (Scenarios 31-32)
+run_comprehension_gap_sweep.py -- Comprehension Gap Interpretation Sweep
+
+Catalog position
+----------------
+This is a diagnostic, not a catalog scenario. It has no scenario pair of its
+own. It investigates the Opaque Reasoning pair, Scenarios 21-22, and any
+scenario number cited below refers to that pair. Earlier revisions of this
+docstring assigned the sweep to Scenarios 31-32, which the catalog assigns to
+Engineered Fragility and Resilience Monitoring, and attributed its motivating
+observation to Scenarios 25-26, which are Evaluator Collusion and
+Methodological Diversity. Both citations were wrong. See
+docs/Simulation_Scenarios.md, which is canon, and
+simulation/tools/check_scenario_numbering.py, which enforces agreement with it.
 
 Purpose
 -------
-Distinguishes between two interpretations of the symmetric opaque-reasoning
-collapse rates observed in Scenarios 25-26:
+Tests an open question: does the reasoning-transparency defense hold when
+reasoning outgrows human comprehension naturally, rather than being
+adversarially obscured?
+
+This is not the question the sweep was originally built to answer. The earlier
+version was motivated by a claim that defended and undefended collapse rates for
+Opaque Reasoning were symmetric. That premise has been withdrawn. No live
+dataset supports it: the v1.x phi artifact shows a 56.67 to 68.33 point
+asymmetry at every phi, and the v2.0 revalidation shows Opaque Reasoning fully
+blocked under the defense, 0.0 percent attack success, collapse, and extinction
+against 100.0 percent undefended (pinned blob e38db559 at tag
+attack-v2-revalidation-evidence). The only dataset in which the rates were
+symmetric was this sweep's own output, where they were symmetric at zero
+because nothing collapsed anywhere, which is not evidence of anything.
+
+So the question is open rather than observed. Scenarios 21-22 test adversarial
+opacity, where the AI deliberately hides its reasoning. They do not test the
+case where an honest, non-adversarial AI simply becomes harder to follow as the
+frontier advances. That is the gap this diagnostic addresses.
+
+Two interpretations remain live, and this sweep is designed to discriminate
+between them without presupposing either:
 
   Interpretation 1 (pessimistic): The defense is ineffective against systems
     whose reasoning exceeds human comprehension. The COP has a hard ceiling.
 
   Interpretation 2 (optimistic): The convergence forces (governance speed limit
     + mutual elevation incentive) keep the system within the productive band where
-    reasoning remains comprehensible, so the defense is never tested. Symmetric
-    rates reflect the equilibrium working as designed.
+    reasoning remains comprehensible, so the defense is never tested.
+
+Neither interpretation is asserted here. Discrimination criteria were fixed in
+writing before any data existed, in
+simulation/diagnostics/comprehension_gap_redesign_note.md, and that note
+requires operator sign-off before the full run.
 
 Experimental design
 -------------------
-A new AI policy 'gradual_opacity' models natural comprehension gap widening —
-the AI is not adversarial but its reasoning becomes progressively harder to
-verify as capability increases. Three dimensions are varied independently:
+The 'gradual_opacity' AI policy models a comprehension gap that widens as the
+frontier advances. The AI is not adversarial. It genuinely optimizes U_sys, but
+its reasoning becomes progressively harder to verify.
 
-  convergence_strength: scales the governance speed limit (alpha penalty in
+Opacity is coupled to the frontier the governance speed limit constrains, not
+to elapsed steps. The prior version set opacity to opacity_rate times step,
+which made convergence_strength incapable of affecting it by construction, and
+every one of the 2,800 rows reported max_opacity_reached = 0.8940, exactly
+0.003 times 298. Opacity now accumulates in proportion to capability times
+recent L_t, and L_t carries theta_tech, which carries the
+alpha times convergence_strength times runaway_term penalty. A strong speed
+limit therefore slows opacity growth rather than leaving it on a clock.
+
+Opening the convergence channel required one further change. The penalty term
+is exp(-alpha * convergence_strength * runaway_term), and runaway_term is
+max(0, frontier_velocity / bio_bandwidth - runaway_threshold). At the default
+threshold of 1.5 the term is identically zero in this configuration, which
+zeroes out convergence_strength no matter what else changes: cs=0.0 and cs=2.0
+produce bit-identical trajectories. The measured ratio sits between 0.2 and
+0.5, roughly a seventh of the default boundary.
+
+The faithful remedy would be to let capability grow through succession until
+the frontier genuinely outruns biological bandwidth. That is not reachable
+here. Succession never fires because successor_ai defaults to None and is never
+supplied, and when a successor is supplied the model constructs every
+subsequent one with a hardcoded policy of 'optimize_u_sys' (model.py:848), so
+the policy under test is replaced after the first succession and opacity
+collapses to its default. Retaining gradual_opacity across successions requires
+changing shared model code, which is out of scope.
+
+So runaway_threshold is lowered from configuration instead, and the sweep is
+framed accordingly: this is a **boundary-regime characterization**. It asks
+whether the convergence forces gate opacity when the system operates near the
+runaway boundary, which is where the comprehension-gap question actually bites.
+It does not describe behavior at default calibration, where the governance speed
+limit provably does not engage within a generation. That qualification travels
+with every figure taken from this sweep. See the redesign note, and
+default_regime_convergence_inertness.md for the default-regime property.
+
+Three dimensions are varied independently:
+
+  convergence_strength: scales the governance speed limit (the alpha penalty in
     theta_tech). 0.0 = no speed limit; 1.0 = baseline; 2.0 = doubled.
 
   opacity_defense_threshold: the opacity level at which the biological intuition
@@ -7664,30 +7765,27 @@ verify as capability increases. Three dimensions are varied independently:
 
   defense_active: whether cop_reasoning_transparency is enabled at all.
 
-Interpretation guide
---------------------
-If Interpretation 2 is correct:
-  - At high convergence_strength: symmetric rates (system stays in productive band)
-  - At low convergence_strength: asymmetric rates (system enters opaque regime,
-    exposing the defense's true effectiveness)
-  - High cs prevents max_opacity_reached from exceeding the defense threshold
-
-If Interpretation 1 is correct:
-  - Symmetric rates at ALL convergence strengths
-  - System reaches high opacity regardless of convergence forces
-  - Defense fires but does not reduce collapse
+Positive controls
+-----------------
+The grid includes undefended control cells at a configuration known to collapse,
+so that a null result in the main grid can be read as the defense working rather
+than as the instrument failing again. If the controls do not collapse, the run is
+void regardless of what the main grid shows. This is the check the prior version
+lacked: it reported zero collapses everywhere and could not distinguish a
+protective equilibrium from a broken measurement.
 
 Parameter grid
 --------------
-convergence_strength      : [0.0, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0]  — 7 values
-opacity_defense_threshold : [0.3, 0.5, 0.7, 0.9]                    — 4 values
-defense_active            : [True, False]                             — 2 values
+convergence_strength      : [0.0, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0]   7 values
+opacity_defense_threshold : [0.3, 0.5, 0.7, 0.9]                    4 values
+defense_active            : [True, False]                           2 values
 n_per_cell                : 50
-Total                     : 7 × 4 × 2 × 50 = 2,800 runs
+Main grid total           : 7 x 4 x 2 x 50 = 2,800 runs
+Positive controls         : see POSITIVE_CONTROLS below
 
 Fixed parameters
 ----------------
-opacity_rate=0.003 (AI reaches opacity 0.9 at step 300)
+opacity_rate=0.003, opacity_reference_l_t=0.43, runaway_threshold=0.2
 phi=10.0, alpha=1.2, rr=0.075, n_agents=200, steps=300
 
 Usage
@@ -7721,18 +7819,74 @@ DEFENSE_ACTIVE             = [True, False]
 N_PER_CELL                 = 50
 
 # Fixed parameters
-OPACITY_RATE  = 0.003   # reaches 0.9 at step 300
+OPACITY_RATE  = 0.003
 PHI           = 10.0
 ALPHA         = 1.2
 RR            = 0.075   # above extinction boundary, in governable range
 N_AGENTS      = 200
 RUN_STEPS     = 300
 
+# Reference L_t for the opacity coupling. Opacity accumulates at opacity_rate
+# times (capability * recent_L_t / this). At the observed baseline L_t of about
+# 0.43 and capability 1.0 the accumulation matches the old fixed rate, so the
+# unconstrained case stays comparable to the historical run while the
+# constrained cases now differ from it.
+OPACITY_REFERENCE_L_T = 0.43
+
+# Lowered from the default 1.5 so the governance speed limit engages at all.
+# At 1.5 the runaway term is identically zero here and convergence_strength has
+# no effect whatsoever. This is a redefinition of the runaway boundary and
+# qualifies every result. See the redesign note.
+RUNAWAY_THRESHOLD = 0.2
+
+# -- Positive controls ---------------------------------------------------------
+#
+# Undefended cells at a configuration known to collapse. If these do not
+# collapse, the instrument is not measuring what it claims and the run is void,
+# whatever the main grid shows. The prior version had no such check: it reported
+# zero collapses in all 2,800 rows and could not tell a protective equilibrium
+# apart from a broken measurement.
+#
+# reproduction_rate 0.045 is below the extinction boundary, so these runs should
+# lose population regardless of opacity or defense.
+POSITIVE_CONTROLS = [
+    {'label': 'subcritical_rr', 'reproduction_rate': 0.045,
+     'convergence_strength': 0.0, 'opacity_defense_threshold': 0.9,
+     'defense_active': False},
+]
+N_PER_CONTROL = 20
+
+# -- Pre-registered extension arm ----------------------------------------------
+#
+# Registered in comprehension_gap_redesign_note.md amendment 1 before any
+# main-grid data existed. Purpose: keep the defense-differential question
+# answerable even if the main grid lands on inconclusive criterion 2, no
+# collapse anywhere. The main grid sits at rr 0.075 where nothing collapses and
+# the control sits at 0.045 where everything does; neither can show a
+# differential. These rungs sample the band between them, at the cs and odt
+# that press the defense hardest. Rungs were chosen as an even ladder rather
+# than tuned against observed results.
+EXTENSION_ARM = [
+    {'label': f'ext_rr{rr:.3f}', 'reproduction_rate': rr,
+     'convergence_strength': 0.0, 'opacity_defense_threshold': 0.3,
+     'defense_active': d}
+    for rr in (0.050, 0.058, 0.066)
+    for d in (False, True)
+]
+N_PER_EXTENSION = 50
+
 # -- Output -------------------------------------------------------------------
 
-OUT_FILE = 'comprehension_gap_sweep.csv'
+# Versioned filename. comprehension_gap_sweep.csv is never overwritten: it is
+# the historical record of the time-scripted defect, kept alongside a dated
+# invalidity note. The name deliberately avoids the full_5ac6a2e_ manifest
+# prefix so manifest-based exclusion keeps working, and smoke output carries a
+# distinct name for the same reason.
+OUT_FILE       = 'comprehension_gap_sweep_v2_capability_coupled.csv'
+SMOKE_OUT_FILE = 'smoke_comprehension_gap_sweep_v2_capability_coupled.csv'
 
 FIELDS = [
+    'arm', 'cell_label', 'reproduction_rate',
     'convergence_strength', 'opacity_defense_threshold', 'defense_active', 'seed',
     'survived', 'collapsed', 'extinct',
     'final_population', 'final_ai_generation',
@@ -7751,13 +7905,19 @@ def _make_seed(cs, odt, defense, rep):
 # -- Worker -------------------------------------------------------------------
 
 def _run_single(params):
-    cs, odt, defense_active, seed = params
+    # A fifth element carries positive-control overrides. Main-grid cells pass
+    # four elements and behave exactly as before.
+    if len(params) == 5:
+        cs, odt, defense_active, seed, overrides = params
+    else:
+        cs, odt, defense_active, seed = params
+        overrides = {}
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     from model import GardenModel
 
     config = {
         'random_seed':               seed,
-        'reproduction_rate':         RR,
+        'reproduction_rate':         overrides.get('reproduction_rate', RR),
         'phi':                       PHI,
         'alpha':                     ALPHA,
         'mortality_base':            0.002,
@@ -7766,6 +7926,8 @@ def _run_single(params):
         'convergence_strength':      cs,
         'opacity_defense_threshold': odt,
         'frontier_floor':            0.02,
+        'opacity_reference_l_t':     OPACITY_REFERENCE_L_T,
+        'runaway_threshold':         RUNAWAY_THRESHOLD,
     }
 
     model = GardenModel(
@@ -7797,6 +7959,9 @@ def _run_single(params):
     max_c   = float(np.max(dc['max_constraint_level']))  if dc['max_constraint_level'] else 0.0
 
     return {
+        'arm':                           overrides.get('arm', 'main'),
+        'cell_label':                    overrides.get('label', ''),
+        'reproduction_rate':             overrides.get('reproduction_rate', RR),
         'convergence_strength':          cs,
         'opacity_defense_threshold':     odt,
         'defense_active':                defense_active,
@@ -7843,11 +8008,11 @@ def print_analysis(results):
         uc_  = np.mean([r['collapsed'] for r in undef_r]) if undef_r else float('nan')
         delta = dc_ - uc_
         if abs(delta) < 0.05:
-            hint = 'symmetric → Interp 1 candidate'
+            hint = 'symmetric -> Interp 1 candidate'
         elif delta > 0.05:
-            hint = 'defense hurts → unexpected'
+            hint = 'defense hurts -> unexpected'
         else:
-            hint = 'defense helps → Interp 2 candidate'
+            hint = 'defense helps -> Interp 2 candidate'
         print(f'  {cs:>6.2f} | {dc_:>9.3f} | {uc_:>10.3f} | {delta:>+7.3f} | {hint}')
 
     print()
@@ -7879,7 +8044,7 @@ def print_analysis(results):
             print(f'  {cs:>5.2f} {odt:>5.2f} | {fired:>7.1f} | {blocked:>8.1f} | {dc_:>9.3f} | {uc_:>10.3f}')
 
     print()
-    print('  ANALYSIS 4: Summary table (cs × defense_active)')
+    print('  ANALYSIS 4: Summary table (cs x defense_active)')
     print('-' * 72)
     print(f'  {"cs":>6} {"def":>6} | {"surv":>6} | {"coll":>6} | {"ext":>6} | {"maxOp":>7} | {"fired":>7}')
     for cs in cs_vals:
@@ -7900,22 +8065,56 @@ def print_analysis(results):
 
 def run():
     tasks = [
-        (cs, odt, da, _make_seed(cs, odt, da, s))
+        (cs, odt, da, _make_seed(cs, odt, da, s), {'arm': 'main'})
         for cs, odt, da, s in itertools.product(
             CONVERGENCE_STRENGTHS, OPACITY_DEFENSE_THRESHOLDS,
             DEFENSE_ACTIVE, range(N_PER_CELL)
         )
     ]
+    n_main = len(tasks)
+
+    # Positive controls. If these do not collapse the run is void.
+    for ctrl in POSITIVE_CONTROLS:
+        for rep in range(N_PER_CONTROL):
+            ov = {'arm': 'control', 'label': ctrl['label'],
+                  'reproduction_rate': ctrl['reproduction_rate']}
+            tasks.append((ctrl['convergence_strength'],
+                          ctrl['opacity_defense_threshold'],
+                          ctrl['defense_active'],
+                          _make_seed(ctrl['convergence_strength'],
+                                     ctrl['opacity_defense_threshold'],
+                                     ctrl['defense_active'], 100000 + rep),
+                          ov))
+
+    # Pre-registered extension arm.
+    for cell in EXTENSION_ARM:
+        for rep in range(N_PER_EXTENSION):
+            ov = {'arm': 'extension', 'label': cell['label'],
+                  'reproduction_rate': cell['reproduction_rate']}
+            tasks.append((cell['convergence_strength'],
+                          cell['opacity_defense_threshold'],
+                          cell['defense_active'],
+                          _make_seed(cell['reproduction_rate'],
+                                     cell['opacity_defense_threshold'],
+                                     cell['defense_active'], 200000 + rep),
+                          ov))
+
+    n_control = len(POSITIVE_CONTROLS) * N_PER_CONTROL
+    n_ext = len(EXTENSION_ARM) * N_PER_EXTENSION
     total = len(tasks)
     cores = max(1, (os.cpu_count() or 4) - 1)
 
     print('=' * 72)
-    print('  run_comprehension_gap_sweep.py  --  Scenarios 31-32')
+    print('  run_comprehension_gap_sweep.py  --  diagnostic for Scenarios 21-22')
+    print('  boundary-regime characterization: runaway_threshold lowered to '
+          f'{RUNAWAY_THRESHOLD}; does NOT describe default calibration')
     print('=' * 72)
     print(f'  convergence_strength values:      {CONVERGENCE_STRENGTHS}')
     print(f'  opacity_defense_threshold values: {OPACITY_DEFENSE_THRESHOLDS}')
     print(f'  defense_active values:            {DEFENSE_ACTIVE}')
-    print(f'  n_per_cell: {N_PER_CELL}  Total runs: {total}')
+    print(f'  n_per_cell: {N_PER_CELL}')
+    print(f'  main grid: {n_main}  controls: {n_control}  '
+          f'extension arm: {n_ext}  TOTAL: {total}')
     print(f'  opacity_rate={OPACITY_RATE}  phi={PHI}  alpha={ALPHA}  rr={RR}')
     print(f'  CPU cores: {cores}')
     print()
@@ -23836,6 +24035,269 @@ def main():
 if __name__ == '__main__':
     mp.freeze_support()
     main()
+
+
+==========================================
+FILE: simulation\tools\check_scenario_numbering.py
+==========================================
+
+#!/usr/bin/env python3
+"""Validate scenario-number citations against the scenario catalog.
+
+docs/Simulation_Scenarios.md is canon. Every other file that cites a scenario
+number must agree with it. This checker exists because the comprehension gap
+sweep carried two wrong citations for months without anyone noticing: it
+attributed an Opaque Reasoning finding to Scenarios 25-26, which are Evaluator
+Collusion and Methodological Diversity, and titled itself Scenarios 31-32,
+which belong to Engineered Fragility and Resilience Monitoring.
+
+How validation works
+--------------------
+A bare number cannot be validated, because a citation like "Scenarios 31-32"
+is only wrong relative to what it claims to be about. So the checker pairs each
+citation with any scenario name it recognizes from the catalog within a small
+context window, then verifies the two agree. The window matters: in the sweep
+script the subject ("opaque-reasoning") sits on the line above its citation, so
+single-line matching would have missed the very defect that motivated this
+tool. Citations with no recognizable name anywhere in the window are reported
+separately as unverifiable rather than silently passed, so a human can review
+them.
+
+A name is only considered present if every distinctive word of the catalog
+title appears, so "Opaque Reasoning" matches but a stray "reasoning" does not.
+
+Some files legitimately quote a wrong citation while documenting that it is
+wrong. Those are allowlisted by path; keep the list minimal.
+
+Exit code 0 means no mismatches, 1 means at least one mismatch.
+"""
+
+from __future__ import annotations
+
+import argparse
+import pathlib
+import re
+import sys
+from typing import Dict, List, Set, Tuple
+
+REPO_ROOT = pathlib.Path(__file__).parent.parent.parent.resolve()
+CANON = REPO_ROOT / "docs" / "Simulation_Scenarios.md"
+
+SCAN_DIRS = ("simulation", "docs")
+SCAN_SUFFIXES = (".py", ".md")
+
+# Files that discuss mis-citations and must be allowed to quote wrong numbers.
+ALLOWLIST = frozenset({
+    "docs/Simulation_Scenarios.md",
+    "simulation/diagnostics/defended_collapse_discrepancy_report.md",
+    "simulation/tools/check_scenario_numbering.py",
+})
+
+# Heading forms in the catalog, covering the implemented and the not-yet forms:
+#   ### Scenario 21: Opaque Reasoning (Attack Succeeds)
+#   ### [NOT IMPLEMENTED] Scenario 33-34: Biological Validator Obsolescence
+# The dash between paired numbers may be a hyphen or an en dash.
+HEADING = re.compile(
+    r"^#{2,4}\s*(?:\[NOT IMPLEMENTED\]\s*)?Scenario\s+(\d+)(?:\s*[-–]\s*(\d+))?\s*:\s*(.+?)\s*$"
+)
+
+# A citation: "Scenario 21", "Scenarios 31-32", "Scenario 33-34".
+CITATION = re.compile(r"Scenarios?\s+(\d+)(?:\s*[-–]\s*(\d+))?")
+
+# A markdown list item, used to keep tight bullet lists from merging.
+LIST_ITEM = re.compile(r"^\s*(?:[-*+]|\d+\.)\s+")
+
+# Words too generic to identify a scenario by name.
+STOPWORDS = frozenset({
+    "the", "a", "an", "and", "or", "of", "for", "in", "to", "is", "attack",
+    "attacks", "defeated", "succeeds", "defense", "layer", "v1", "v2", "not",
+    "implemented", "through", "by", "with", "on", "at", "as", "full", "cop",
+})
+
+
+def parse_canon(path: pathlib.Path) -> Dict[int, str]:
+    """Return {scenario_number: title}."""
+    canon: Dict[int, str] = {}
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        m = HEADING.match(line.strip())
+        if not m:
+            continue
+        lo, hi, title = m.group(1), m.group(2), m.group(3)
+        title = re.sub(r"\(.*?\)", "", title).strip()
+        lo_i = int(lo)
+        canon[lo_i] = title
+        if hi:
+            canon[int(hi)] = title
+    return canon
+
+
+def title_keywords(title: str) -> Set[str]:
+    words = re.findall(r"[A-Za-z_]+", title.lower())
+    return {w for w in words if w not in STOPWORDS and len(w) > 2}
+
+
+def build_name_index(canon: Dict[int, str]) -> Dict[str, Set[int]]:
+    """Map a distinctive multi-word scenario phrase to the numbers it covers."""
+    index: Dict[str, Set[int]] = {}
+    for num, title in canon.items():
+        kws = title_keywords(title)
+        if not kws:
+            continue
+        phrase = " ".join(sorted(kws))
+        index.setdefault(phrase, set()).add(num)
+    return index
+
+
+def names_in_line(line: str, canon: Dict[int, str]) -> Dict[str, Set[int]]:
+    """Which catalog scenario titles are named on this line."""
+    low = line.lower()
+    found: Dict[str, Set[int]] = {}
+    for num, title in canon.items():
+        kws = title_keywords(title)
+        # A title reducing to a single distinctive word is too weak to match on.
+        # "The Runaway AI" reduces to {runaway}, which matches any paragraph
+        # mentioning runaway_threshold and produced a false failure. Requiring
+        # two words costs a little recall and buys a lot of precision.
+        if len(kws) < 2:
+            continue
+        # Require every distinctive keyword of the title to be present, so
+        # "Opaque Reasoning" matches but a stray "reasoning" alone does not.
+        if all(k in low for k in kws):
+            found.setdefault(title, set()).add(num)
+    return found
+
+
+def paragraph_span(lines: List[str], idx: int) -> Tuple[int, int]:
+    """The blank-line-delimited block containing lines[idx].
+
+    The paragraph is the right unit rather than a fixed line window. A fixed
+    window bleeds across neighboring bullets in a dense list and produces false
+    mismatches, while a paragraph keeps a citation with the sentence that
+    actually makes the claim. This works for markdown prose and for Python
+    docstrings alike, since both separate ideas with blank lines.
+
+    In a tight markdown bullet list there are no blank lines between items, so
+    a plain blank-line paragraph would span every bullet and attribute one
+    bullet's scenario name to another bullet's citation. Each list item is
+    therefore treated as its own unit, with its wrapped continuation lines.
+    """
+    start = idx
+    while start > 0 and lines[start - 1].strip() and not LIST_ITEM.match(lines[start]):
+        start -= 1
+    end = idx
+    while (
+        end + 1 < len(lines)
+        and lines[end + 1].strip()
+        and not LIST_ITEM.match(lines[end + 1])
+    ):
+        end += 1
+    return start, end
+
+
+def iter_files() -> List[pathlib.Path]:
+    out = []
+    for d in SCAN_DIRS:
+        base = REPO_ROOT / d
+        if not base.exists():
+            continue
+        for p in sorted(base.rglob("*")):
+            if p.is_file() and p.suffix in SCAN_SUFFIXES:
+                if "__pycache__" in p.parts:
+                    continue
+                out.append(p)
+    return out
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--show-unverifiable", action="store_true",
+                    help="also list citations with no recognizable scenario name")
+    ap.add_argument("--window", type=int, default=3,
+                    help="lines of context each side searched for a scenario name")
+    args = ap.parse_args()
+
+    if not CANON.exists():
+        print(f"FATAL: canon not found at {CANON}", file=sys.stderr)
+        return 1
+
+    canon = parse_canon(CANON)
+    print(f"canon: {CANON.relative_to(REPO_ROOT)}, {len(canon)} numbered scenarios")
+
+    mismatches: List[str] = []
+    unverifiable: List[str] = []
+    checked = 0
+
+    for path in iter_files():
+        rel = str(path.relative_to(REPO_ROOT)).replace("\\", "/")
+        if rel in ALLOWLIST:
+            continue
+        lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+        seen_paragraphs: Set[Tuple[int, int]] = set()
+        for lineno, line in enumerate(lines, 1):
+            if not CITATION.search(line):
+                continue
+            span = paragraph_span(lines, lineno - 1)
+            if span in seen_paragraphs:
+                continue
+            seen_paragraphs.add(span)
+            context = "\n".join(lines[span[0]:span[1] + 1])
+
+            # Citations and names are both gathered at paragraph scope. Mixing
+            # scopes was a bug: a paragraph that names a scenario on one line
+            # and cites its number on another looked like a mismatch, which
+            # wrongly flagged prose that explains a mis-citation by quoting the
+            # wrong number next to the right name.
+            cited: Set[int] = set()
+            for lo, hi in CITATION.findall(context):
+                cited.add(int(lo))
+                if hi:
+                    cited.add(int(hi))
+
+            named = names_in_line(context, canon)
+            if not named:
+                unverifiable.append(
+                    f"{rel}:{span[0] + 1}: cites {sorted(cited)}, no catalog name in paragraph"
+                )
+                continue
+            if len(named) > 1:
+                # A paragraph naming several scenarios while citing one number
+                # is normal prose, for example a survey listing attack vectors.
+                # There is no sound way to decide which name the number belongs
+                # to, so report for review rather than guess. Precision matters
+                # more than recall here: a checker that cries wolf on ordinary
+                # prose gets switched off, and then it catches nothing.
+                titles = ", ".join(sorted(named))
+                unverifiable.append(
+                    f"{rel}:{span[0] + 1}: cites {sorted(cited)}, paragraph names "
+                    f"several scenarios [{titles}], ambiguous"
+                )
+                continue
+            checked += 1
+            title, nums = next(iter(named.items()))
+            if not (nums & cited):
+                mismatches.append(
+                    f"{rel}:{span[0] + 1}: paragraph names [{title}] "
+                    f"({sorted(nums)}) but cites {sorted(cited)}"
+                )
+
+    print(f"validated {checked} citation(s) that name a scenario")
+    print(f"unverifiable (number cited, no name on line): {len(unverifiable)}")
+    if args.show_unverifiable:
+        for u in unverifiable:
+            print(f"  ?  {u}")
+
+    if mismatches:
+        print(f"\nFAIL: {len(mismatches)} mismatch(es):")
+        for m in mismatches:
+            print(f"  {m}")
+        return 1
+
+    print("\nOK: every validated citation agrees with the catalog.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
 
 
 ==========================================

@@ -48,6 +48,44 @@ python scripts/check_snapshot_leak.py
 
 It fails if advisor-document content reached a generated snapshot. Exit code 1 halts.
 
+**Pre-registered criteria require a power calculation at registration time.** A
+threshold that can be crossed by noise at the planned n is not a criterion. Fix
+the minimum effect of interest first, from what would matter to the claim under
+test, then derive n from the power needed to detect it, then write the
+threshold. Deriving the threshold from a round number or from an effect already
+observed inverts the logic and produces a criterion that cannot fail
+informatively.
+
+This rule exists because it was violated. The comprehension gap extension arm
+registered a 10 percentage point threshold with no power calculation and ran at
+n=50 per cell. The observed differential landed on exactly 10.00 points, 36 of
+50 against 31 of 50, which is a 5-run difference with Fisher exact p = 0.395.
+The criterion was met and meant nothing. Detecting a genuine 10 point difference
+at 80 percent power would have needed roughly n=350 per cell.
+
+**Editing files that contain non-ASCII content.** Use Python with explicit UTF-8
+handling. Never use a PowerShell `Set-Content` round-trip, and never use
+`Out-File`, on a file that may contain non-ASCII characters.
+
+A `Set-Content` round-trip re-encodes the whole file at the shell's default
+encoding, silently corrupting every non-ASCII character. In
+`run_comprehension_gap_sweep.py` it turned a multiplication sign into mojibake
+and prepended a BOM. Repairing that damage carries its own trap: replace
+multi-byte mojibake sequences before single-character substitutions, or a later
+rule will consume part of an earlier sequence. A first repair attempt replaced a
+curly apostrophe before the mojibake right arrow that ended in the same byte,
+which broke a string literal and the module would not parse.
+
+Preferred pattern:
+
+```python
+text = path.read_bytes().decode("utf-8")
+# edit text
+path.write_bytes(text.encode("utf-8"))
+```
+
+Keeping source files ASCII where practical removes the failure mode entirely.
+
 ---
 
 ## Section 1: Overall Assessment
