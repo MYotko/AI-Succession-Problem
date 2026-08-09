@@ -1,9 +1,9 @@
 # Code Snapshot
 
-Generated: 2026-08-09T18:37:11Z
+Generated: 2026-08-09T18:42:20Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 15d48d1
-Branch: main
+Commit: b3157d9
+Branch: defended-collapse-resolution
 Category: code
 
 ## Files included

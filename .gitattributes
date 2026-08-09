@@ -1,0 +1,26 @@
+# Line ending policy.
+#
+# Without this file the repository relied on core.autocrlf alone, which stored
+# some CSVs with CRLF and others with LF. That made "git hash-object <file>"
+# and "git hash-object --no-filters <file>" return different answers about
+# whether a working tree file matched its committed blob, so a provenance audit
+# could conclude that data had diverged when only the line endings differed.
+# See simulation/diagnostics/defended_collapse_discrepancy_report.md, Anomaly A1.
+
+# Documentation and tabular data are stored with LF in the repository.
+*.md  text eol=lf
+*.csv text eol=lf
+
+# The attack vector revalidation evidence is a pinned, immutable record.
+# Apply no line ending conversion to it in either direction, so that a raw byte
+# comparison and a normalized hash comparison against the evidence tag always
+# give the same answer. Seven of these blobs were committed with CRLF and must
+# stay byte for byte as committed. Normalizing them would leave the normalized
+# hash matching the tag while the raw byte comparison failed forever, which is
+# the exact confusion this file exists to remove.
+data/attack_vector_revalidation_v2/** -text
+
+# Binary assets, never converted.
+*.pdf binary
+*.png binary
+*.mp4 binary

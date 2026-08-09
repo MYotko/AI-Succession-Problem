@@ -7,6 +7,26 @@ Full audit deferred until Linux sweeps and synthesis layer are complete.
 
 ---
 
+## Standing methodology notes for audits of this arc
+
+**Counting.** Compute counts and rates with Python, or with `Measure-Object`. Never use
+bare `.Count` on Where-Object pipeline output under Windows PowerShell 5.1. When exactly
+one row matches, the pipeline yields a scalar rather than an array, `.Count` evaluates to
+null, and the rate silently divides to zero. Cells with zero matches and cells with many
+matches both come out correct, so the defect is invisible unless a true count of one
+happens to occur. This produced three wrong defended collapse figures in the 2026-07-20
+local-disk audit. See `defended_collapse_discrepancy_report.md`.
+
+**Input selection.** Select result CSVs from
+`attack_vector_revalidation_manifest.md` by exact filename. Do not glob `results.csv`
+under a vector directory: smoke, gate, and pilot artifacts share those directories and
+will be swept into the population.
+
+**Provenance.** Read the pinned blobs with `git show attack-v2-revalidation-evidence:<path>`
+rather than the working tree, which is not guaranteed to sit at the evidence tag.
+
+---
+
 ## Section 1: Overall Assessment
 
 **Substantive grounding of completed work:** Strong for the sweep data that exists.
