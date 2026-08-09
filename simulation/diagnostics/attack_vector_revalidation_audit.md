@@ -25,6 +25,29 @@ will be swept into the population.
 **Provenance.** Read the pinned blobs with `git show attack-v2-revalidation-evidence:<path>`
 rather than the working tree, which is not guaranteed to sit at the evidence tag.
 
+**Scenario numbering.** `docs/Simulation_Scenarios.md` is canon. Every scenario number
+cited anywhere in `simulation/` or `docs/` must agree with it. Run:
+
+```bash
+python simulation/tools/check_scenario_numbering.py
+```
+
+It pairs each citation with any catalog scenario name in the same paragraph or list item
+and fails on disagreement, exit code 1. Citations with no recognizable name nearby cannot
+be validated automatically and are listed under `--show-unverifiable` for manual review.
+The checker was written after the comprehension gap sweep was found citing Scenarios 25-26
+for an Opaque Reasoning finding, which is Scenarios 21-22, while titling itself Scenarios
+31-32, which belongs to Engineered Fragility. Both had stood unnoticed since the sweep was
+written.
+
+**Snapshot leakage.** After regenerating snapshots, run:
+
+```bash
+python scripts/check_snapshot_leak.py
+```
+
+It fails if advisor-document content reached a generated snapshot. Exit code 1 halts.
+
 ---
 
 ## Section 1: Overall Assessment

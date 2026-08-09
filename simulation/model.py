@@ -256,9 +256,11 @@ class GardenModel:
         self.k2_transition   = self.config.get('k2_transition', 1.0)
         self.beta_transition = self.config.get('beta_transition', 0.5)
 
-        # Comprehension gap parameters (Scenarios 31-32)
-        # convergence_strength flows into metrics.py via self.config — no
-        # explicit model attribute needed beyond ensuring it is in config.
+        # Comprehension gap parameters. This is a diagnostic for the Opaque
+        # Reasoning pair, Scenarios 21-22. It was previously labeled Scenarios
+        # 31-32, which the catalog assigns to Engineered Fragility.
+        # convergence_strength flows into metrics.py via self.config, so no
+        # explicit model attribute is needed beyond ensuring it is in config.
         self.opacity_defense_threshold = self.config.get('opacity_defense_threshold', 0.5)
 
         # Per-run opacity and defense event tracking

@@ -1,10 +1,22 @@
 """
-run_comprehension_gap_sweep.py — Comprehension Gap Interpretation Sweep (Scenarios 31-32)
+run_comprehension_gap_sweep.py -- Comprehension Gap Interpretation Sweep
+
+Catalog position
+----------------
+This is a diagnostic, not a catalog scenario. It has no scenario pair of its
+own. It investigates the Opaque Reasoning pair, Scenarios 21-22, and any
+scenario number cited below refers to that pair. Earlier revisions of this
+docstring assigned the sweep to Scenarios 31-32, which the catalog assigns to
+Engineered Fragility and Resilience Monitoring, and attributed its motivating
+observation to Scenarios 25-26, which are Evaluator Collusion and
+Methodological Diversity. Both citations were wrong. See
+docs/Simulation_Scenarios.md, which is canon, and
+simulation/tools/check_scenario_numbering.py, which enforces agreement with it.
 
 Purpose
 -------
-Distinguishes between two interpretations of the symmetric opaque-reasoning
-collapse rates observed in Scenarios 25-26:
+Distinguishes between two interpretations of the opaque-reasoning collapse
+rates observed in Scenarios 21-22:
 
   Interpretation 1 (pessimistic): The defense is ineffective against systems
     whose reasoning exceeds human comprehension. The COP has a hard ceiling.
@@ -274,7 +286,7 @@ def run():
     cores = max(1, (os.cpu_count() or 4) - 1)
 
     print('=' * 72)
-    print('  run_comprehension_gap_sweep.py  --  Scenarios 31-32')
+    print('  run_comprehension_gap_sweep.py  --  diagnostic for Scenarios 21-22')
     print('=' * 72)
     print(f'  convergence_strength values:      {CONVERGENCE_STRENGTHS}')
     print(f'  opacity_defense_threshold values: {OPACITY_DEFENSE_THRESHOLDS}')
