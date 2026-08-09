@@ -320,13 +320,27 @@ After: the same sentence, followed by a blockquote correction notice dated 2026-
 
 ### Edit 2. Same file, table rows 152, 154, 156, three cells
 
-| Row | Before | After |
-| --- | --- | --- |
-| Sub-Threshold Drift, True | `... | 0.00% | 0.00% | 300.00 |` | `... | 0.00% | 1.00% (corrected) | 300.00 |` |
-| Measurement Tampering, True | `... | 0.00% | 0.00% | 300.00 |` | `... | 0.00% | 1.67% (corrected) | 300.00 |` |
-| Bootstrap Subversion, True | `... | 0.00% | 0.00% | 300.00 |` | `... | 0.00% | 1.00% (corrected) | 300.00 |` |
+Column order is Vector, Defense, n, Attack success, Extinction, Collapse, Mean steps completed. The Collapse column is the one that changes in each row.
+
+Before:
+
+```text
+| Sub-Threshold Drift | True | 100 | 100.00% | 0.00% | 0.00% | 300.00 |
+| Measurement Tampering | True | 60 | 0.00% | 0.00% | 0.00% | 300.00 |
+| Bootstrap Subversion | True | 100 | 0.00% | 0.00% | 0.00% | 300.00 |
+```
+
+After:
+
+```text
+| Sub-Threshold Drift | True | 100 | 100.00% | 0.00% | 1.00% (corrected) | 300.00 |
+| Measurement Tampering | True | 60 | 0.00% | 0.00% | 1.67% (corrected) | 300.00 |
+| Bootstrap Subversion | True | 100 | 0.00% | 0.00% | 1.00% (corrected) | 300.00 |
+```
 
 The Extinction and Collapse columns sit adjacent in this table, so a distinction paragraph is added immediately below it giving both formulas and stating that extinction implies collapse but not the reverse.
+
+**Rendering defect in this record, found and fixed 2026-08-09.** The three rows above were originally presented as a three-column Before and After table whose cells contained unescaped pipe characters inside backticks. Markdown splits a table row at every pipe regardless of backticks, so each row overflowed its three declared columns: the rendered After column displayed `0.00%`, a fragment of the Before cell, and the `(corrected)` markers landed in overflow columns that most renderers drop. The raw text always carried the correct values and the committed file was never wrong, verified against `git show b3157d9:simulation/diagnostics/sync_status_YotkoTest_20260720.md`, which reads 1.00, 1.67, and 1.00 percent with markers intact. Only the presentation of this record was defective. Fenced blocks replace the table because they cannot be broken by pipes.
 
 ### Edit 3. Same file, line 162, Measurement Tampering disposition
 
@@ -415,3 +429,80 @@ After: the same sentence, followed by a guard giving defended collapse of 1.00 p
 ### Not in this commit
 
 Opaque Reasoning framing at `essays/the-fine-print.md:82` and `simulation/run_comprehension_gap_sweep.py:6-7` is untouched, as are Stage 1 anomalies B1 through B4. Those await an operator decision.
+
+---
+
+## 10. Amendment: complete the inline metric definition
+
+The inline collapse definitions written in Commit A stated only the 65 percent clause and omitted the minimum viable population floor. The authoritative metric has two terms and takes the larger of them. A reader given only the 65 percent clause would compute the wrong threshold for any run whose peak population was small enough that the floor binds. The omission did not affect any published figure, because all figures in this report were computed from the `collapsed` column as written by the simulator rather than from the prose definition, but the prose was incomplete as a specification.
+
+Authoritative form, unchanged since `simulation/run_attack_vector_revalidation_v2.py:419`:
+
+```python
+collapse_threshold = max(model.min_viable_population, int(0.65 * peak_population))
+collapsed = final_population < collapse_threshold
+```
+
+Standard replacement phrasing adopted at every site, matching the wording already used at `simulation/diagnostics/attack_vector_revalidation_inventory.md:54`:
+
+> a final population below the larger of the minimum viable population and 65 percent of that run's own peak
+
+### Sites amended
+
+**`paper/paper_v2_working.md:641`** and **`docs/The Lineage Imperative v2.0.md:641`**, identical text, verified byte-identical again after editing (2,023 characters each).
+
+Before:
+
+> where collapse means a final population below 65 percent of that run's own peak rather than a population of zero
+
+After:
+
+> where collapse means a final population below the larger of the minimum viable population and 65 percent of that run's own peak, rather than a population of zero
+
+**`docs/lineage_phi_program_reference.md:1709`**
+
+Before:
+
+> collapse being a final population below 65 percent of that run's own peak rather than a population of zero
+
+After:
+
+> collapse being a final population below the larger of the minimum viable population and 65 percent of that run's own peak, rather than a population of zero
+
+**`simulation/diagnostics/sub_threshold_drift_v2_summary.md:54`**
+
+Before:
+
+> Collapse here means a final population below 65 percent of that run's own peak and is a distinct measure from extinction
+
+After:
+
+> Collapse here means a final population below the larger of the minimum viable population and 65 percent of that run's own peak, and is a distinct measure from extinction
+
+**`simulation/diagnostics/attack_vector_revalidation_documentation_edits.md:17`**
+
+Before:
+
+> collapse being a final population below 65 percent of that run's own peak.
+
+After:
+
+> collapse being a final population below the larger of the minimum viable population and 65 percent of that run's own peak.
+
+**`simulation/diagnostics/sync_status_YotkoTest_20260720.md`, Bootstrap Subversion disposition bullet.** Not named in the amendment brief, but it is a Commit A edit carrying the same incomplete inline definition, so it is amended for consistency under the same dated-artifact notice already covering that file.
+
+Before:
+
+> extinction being zero population and collapse being a drawdown below 65 percent of peak.
+
+After:
+
+> extinction being zero population and collapse being a drawdown below the larger of the minimum viable population and 65 percent of peak.
+
+### Sites verified as already complete, not amended
+
+- The distinction paragraph below the `sync_status_YotkoTest_20260720.md` table, line 162, already carries the full `max(min_viable_population, int(0.65 * peak_population))` form.
+- The metric statement above the section 8 table, line 269, already carries the full form.
+- `simulation/diagnostics/attack_vector_revalidation_inventory.md:54` already carries the full form in prose and supplied the phrasing used above.
+
+A sweep of the five guard sites plus the sync_status dispositions confirms no partial 65 percent definition remains at any of them.
