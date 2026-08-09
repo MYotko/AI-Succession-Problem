@@ -1,20 +1,20 @@
 # Framework Papers Snapshot
 
-Generated: 2026-08-09T18:42:20Z
+Generated: 2026-08-09T20:15:19Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: b3157d9
-Branch: defended-collapse-resolution
+Commit: d5348fd
+Branch: main
 Category: framework_papers
 
 ## Files included
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| docs/The Lineage Imperative v2.0.md | 2536 | 238685 |
+| docs/The Lineage Imperative v2.0.md | 2536 | 238734 |
 | docs/The Lineage Imperative v1.x.2.md | 2154 | 196149 |
 | docs/The AI Succession Problem.md | 101 | 15394 |
 
-Total: 3 files, 4791 lines, 450228 bytes
+Total: 3 files, 4791 lines, 450277 bytes
 
 ---
 ==========================================
@@ -661,7 +661,7 @@ Each component is derived from a specific corruption channel or structural neces
 
 **Consensus Override Protocol Stress Test Result:** Thirteen adversarial scenarios were evaluated across two rounds. The original six; civic-panel capture, Sybil attack on peers, ledger compromise, bootstrap subversion, emergency override abuse, and slow generational drift; were joined by seven additional attacks identified through deeper structural analysis: evaluator collusion via shared methodology, biological veto capture through dependency, slow drift below verification resolution, engineered fragility for emergency exploitation, biological validator obsolescence, legitimate disagreement, and integrity regress. Of these thirteen, ten were fully contained by architectural patches. One (biological veto capture) was contained but requires ongoing institutional maintenance. Two (biological validator obsolescence and legitimate disagreement) represent irreducible limitations managed through translation obligations, abstraction layers, adjudication protocols, and explicit governance speed limits. The compound attack (Sybil capture + manufactured emergency) was resisted by the causal-attribution requirement and by the internal contradiction between visible $L(t)$ degradation and sustained claims of healthy $\Delta U_{n}$. The bootstrap window remained the framework's highest-risk period: mitigated, bounded, but not eliminated.
 
-**v2.0 revalidation of the stress test result.** The result above is the formal analytical stress test. The v2.0 empirical revalidation reran the vector set against the v2 action substrate, expressing attack pressure as eight-axis action modifications inside the v2 step path rather than as v1.x policy tuples. Ten vectors have live Monte Carlo evidence across 9,900 rows, and Domain Masking is an analytic architectural closure with no live intervention available under the audited spectral-entropy substrate. Per current evidence, eight standard binary vectors are fully blocked under the defended v2 adapter state at a 0.0 percent attack rate. Biological Veto Capture is materially reduced but not eliminated. Sub-Threshold Drift is not blocked by the peak-constraint success metric, at a 100.0 percent defended attack rate. That last figure requires its qualification: the defense nonetheless prevents catastrophic outcome, with undefended runs reaching a 92.0 percent extinction rate while defended runs reach 0.0 percent extinction and complete the full simulation horizon. Extinction and collapse are distinct measures and the defended figures differ: defended collapse for this vector is 1.00 percent (1 of 100), where collapse means a final population below 65 percent of that run's own peak rather than a population of zero, and the single collapsing run completed the full horizon. Collapse figures for every vector are tabulated in `simulation/diagnostics/defended_collapse_discrepancy_report.md`, section 8, which is the sole citable source for them. The CUSUM detector fires after the transient threshold breach rather than before it, so the success flag trips in both defense states while the population outcome diverges sharply. The v1.x containment claim for this vector does not carry over to the v2.0 substrate and is retained only as historical v1.x evidence. Two vectors of the thirteen remain unimplemented as formally defended irreducible limitations.
+**v2.0 revalidation of the stress test result.** The result above is the formal analytical stress test. The v2.0 empirical revalidation reran the vector set against the v2 action substrate, expressing attack pressure as eight-axis action modifications inside the v2 step path rather than as v1.x policy tuples. Ten vectors have live Monte Carlo evidence across 9,900 rows, and Domain Masking is an analytic architectural closure with no live intervention available under the audited spectral-entropy substrate. Per current evidence, eight standard binary vectors are fully blocked under the defended v2 adapter state at a 0.0 percent attack rate. Biological Veto Capture is materially reduced but not eliminated. Sub-Threshold Drift is not blocked by the peak-constraint success metric, at a 100.0 percent defended attack rate. That last figure requires its qualification: the defense nonetheless prevents catastrophic outcome, with undefended runs reaching a 92.0 percent extinction rate while defended runs reach 0.0 percent extinction and complete the full simulation horizon. Extinction and collapse are distinct measures and the defended figures differ: defended collapse for this vector is 1.00 percent (1 of 100), where collapse means a final population below the larger of the minimum viable population and 65 percent of that run's own peak, rather than a population of zero, and the single collapsing run completed the full horizon. Collapse figures for every vector are tabulated in `simulation/diagnostics/defended_collapse_discrepancy_report.md`, section 8, which is the sole citable source for them. The CUSUM detector fires after the transient threshold breach rather than before it, so the success flag trips in both defense states while the population outcome diverges sharply. The v1.x containment claim for this vector does not carry over to the v2.0 substrate and is retained only as historical v1.x evidence. Two vectors of the thirteen remain unimplemented as formally defended irreducible limitations.
 
 **Biological Veto Capture (v1.x.1).** Scenario 27-28: human validators
 accumulate dependency on the AI system they evaluate, degrading their

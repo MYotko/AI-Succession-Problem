@@ -1,9 +1,9 @@
 # Diagnostics Snapshot
 
-Generated: 2026-08-09T18:42:20Z
+Generated: 2026-08-09T20:15:19Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: b3157d9
-Branch: defended-collapse-resolution
+Commit: d5348fd
+Branch: main
 Category: diagnostics
 
 ## Files included
@@ -11,7 +11,7 @@ Category: diagnostics
 | File | Lines | Bytes |
 |------|-------|-------|
 | simulation\diagnostics\attack_vector_revalidation_audit.md | 837 | 42384 |
-| simulation\diagnostics\attack_vector_revalidation_documentation_edits.md | 95 | 7267 |
+| simulation\diagnostics\attack_vector_revalidation_documentation_edits.md | 95 | 7315 |
 | simulation\diagnostics\attack_vector_revalidation_final_report.md | 58 | 5311 |
 | simulation\diagnostics\attack_vector_revalidation_integration.md | 41 | 5067 |
 | simulation\diagnostics\attack_vector_revalidation_inventory.md | 203 | 19233 |
@@ -29,7 +29,7 @@ Category: diagnostics
 | simulation\diagnostics\bootstrap_subversion_v2_summary.md | 58 | 2934 |
 | simulation\diagnostics\capped_regime_phi_check_report.md | 129 | 9986 |
 | simulation\diagnostics\cop_finding_framing.md | 69 | 7923 |
-| simulation\diagnostics\defended_collapse_discrepancy_report.md | 409 | 34793 |
+| simulation\diagnostics\defended_collapse_discrepancy_report.md | 508 | 40781 |
 | simulation\diagnostics\domain_masking_v2_summary.md | 40 | 1555 |
 | simulation\diagnostics\engineered_fragility_v2_summary.md | 54 | 2480 |
 | simulation\diagnostics\evaluator_collusion_v2_summary.md | 61 | 2632 |
@@ -93,14 +93,14 @@ Category: diagnostics
 | simulation\diagnostics\stage18_integrity_phase_b_report.md | 77 | 3075 |
 | simulation\diagnostics\stage2_yield_implementation_notes.md | 268 | 11542 |
 | simulation\diagnostics\stage2_yield_parameter_diagnostic_summary.md | 59 | 4058 |
-| simulation\diagnostics\sub_threshold_drift_v2_summary.md | 58 | 4313 |
+| simulation\diagnostics\sub_threshold_drift_v2_summary.md | 58 | 4362 |
 | simulation\diagnostics\successor_contamination_v2_summary.md | 61 | 2718 |
 | simulation\diagnostics\sybil_capture_v2_summary.md | 63 | 2847 |
 | simulation\diagnostics\sync_status_yotko-Legion-T5-26IOB6_20260720.md | 127 | 7946 |
-| simulation\diagnostics\sync_status_YotkoTest_20260720.md | 173 | 11614 |
+| simulation\diagnostics\sync_status_YotkoTest_20260720.md | 173 | 11662 |
 | simulation\diagnostics\termination_decontamination_integration_analysis.md | 64 | 5995 |
 
-Total: 89 files, 8712 lines, 532859 bytes
+Total: 89 files, 8811 lines, 538992 bytes
 
 ---
 ==========================================
@@ -966,7 +966,7 @@ The current paragraph states that ten of thirteen scenarios were fully contained
 
 ### Proposed replacement text
 
-**Consensus Override Protocol Stress Test Result, v2.0 revalidation:** The v2.0 attack-vector revalidation tests 10 live Monte Carlo vectors through the eight-axis v2 action adapter and treats Domain Masking as an analytic-only architectural closure. Per current evidence, eight standard binary vectors are fully blocked under the defended v2 adapter state, Biological Veto Capture is materially reduced but not eliminated, and Sub-Threshold Drift is not blocked by the peak-constraint success metric. For Sub-Threshold Drift, that 100 percent defended attack rate coexists with a large survival effect: undefended rows show a 92.0 percent extinction rate, while defended rows show a 0.0 percent extinction rate and complete the full simulation horizon. The defense prevents population extinction but does not prevent the transient threshold breach that triggers the success flag. Extinction and collapse are distinct measures: defended collapse for this vector is 1.00 percent (1 of 100), collapse being a final population below 65 percent of that run's own peak. Any collapse figure used in this replacement text must be taken from `simulation/diagnostics/defended_collapse_discrepancy_report.md`, section 8. Domain Masking remains structurally non-viable under the audited spectral-entropy substrate, but this is an analytic result rather than a simulated Monte Carlo outcome. The prior v1.x claim that adversarial patches fully contained most scenarios is therefore preserved only as historical v1.x evidence. The v2.0 claim should be stated as qualified support for layered defenses under a new action-adapter mechanism, with Sub-Threshold Drift and residual Biological Veto Capture marked as open or maintenance-sensitive.
+**Consensus Override Protocol Stress Test Result, v2.0 revalidation:** The v2.0 attack-vector revalidation tests 10 live Monte Carlo vectors through the eight-axis v2 action adapter and treats Domain Masking as an analytic-only architectural closure. Per current evidence, eight standard binary vectors are fully blocked under the defended v2 adapter state, Biological Veto Capture is materially reduced but not eliminated, and Sub-Threshold Drift is not blocked by the peak-constraint success metric. For Sub-Threshold Drift, that 100 percent defended attack rate coexists with a large survival effect: undefended rows show a 92.0 percent extinction rate, while defended rows show a 0.0 percent extinction rate and complete the full simulation horizon. The defense prevents population extinction but does not prevent the transient threshold breach that triggers the success flag. Extinction and collapse are distinct measures: defended collapse for this vector is 1.00 percent (1 of 100), collapse being a final population below the larger of the minimum viable population and 65 percent of that run's own peak. Any collapse figure used in this replacement text must be taken from `simulation/diagnostics/defended_collapse_discrepancy_report.md`, section 8. Domain Masking remains structurally non-viable under the audited spectral-entropy substrate, but this is an analytic result rather than a simulated Monte Carlo outcome. The prior v1.x claim that adversarial patches fully contained most scenarios is therefore preserved only as historical v1.x evidence. The v2.0 claim should be stated as qualified support for layered defenses under a new action-adapter mechanism, with Sub-Threshold Drift and residual Biological Veto Capture marked as open or maintenance-sensitive.
 
 ### Empirical finding reflected
 
@@ -2453,7 +2453,7 @@ These currently publish defended **extinction** (0.0 percent), which is correct 
 
 ### Advisor document
 
-`simulation/diagnostics/stage15_composite_sweep_advisor_report.md` is the only advisor document in the tree. It contains no attack vector collapse figures and is unaffected.
+`simulation/diagnostics/stage15_composite_sweep_advisor_report.md` is the only advisor document in the tree. It contains no attack vector collapse figures and is unaffected. The separate `LINEAGE_IMPERATIVE_ADVISOR.md` has lived outside the repository and is being updated by the operator; see the housekeeping note under Anomaly B4 regarding the naming collision once it lands.
 
 ## 5. Anomalies
 
@@ -2546,7 +2546,15 @@ The one dataset in the tree where opaque reasoning collapse is symmetric is `dat
 
 **B3. The comprehension gap sweep did not move its independent variable.** `max_opacity_reached` is constant at 0.8940 in all 2,800 rows, identical at every convergence_strength from 0.0 to 2.0. Convergence strength was the axis intended to control whether the system enters the opaque regime, and the script's own interpretation guide predicts that high convergence strength should keep `max_opacity_reached` below the defense threshold. It never varies. Meanwhile 2,100 of 2,800 runs exceeded their opacity threshold and the defense fired in 1,050, yet zero runs collapsed. As recorded, this sweep cannot discriminate between the two interpretations it was built to test. Flagged, not resolved.
 
-**B4. The advisor document could not be located.** The Stage 1 brief refers to an advisor document whose Known Limitations section carries the symmetric claim. The only advisor document in the tree, `simulation/diagnostics/stage15_composite_sweep_advisor_report.md`, contains no reference to opaque reasoning, comprehension, or a Known Limitations section. The Known Limitations sections are section 6 of the eleven per-vector v2 summaries, and `opaque_reasoning_v2_summary.md` section 6 at the pinned tag does not carry the claim. The claim was found in exactly two places, both already flagged: `essays/the-fine-print.md:82` (mirrored at `snapshots/essays_snapshot.md:1852`) and `simulation/run_comprehension_gap_sweep.py:6-7` (mirrored at `snapshots/code_snapshot.md:7641-7642`). If a third location exists it is not in this working tree.
+**B4. CLOSED, not an anomaly.** Originally filed because the advisor document referenced in the Stage 1 brief could not be found in the working tree. Resolved by operator ruling, 2026-08-09: `LINEAGE_IMPERATIVE_ADVISOR.md` has lived outside the repository, so its absence here is expected. The claim in question was verified against the advisor text at the advisor layer and is corrected in an updated version that the operator is committing at the repository root. No search, creation, or edit of that document is in scope for this diagnostic.
+
+Retained from the original finding, because it is still true and still useful: within the repository, the symmetric claim appears in exactly two places, both flagged and both untouched pending the operator decision on framing. Those are `essays/the-fine-print.md:82` (mirrored at `snapshots/essays_snapshot.md:1852`) and `simulation/run_comprehension_gap_sweep.py:6-7` (mirrored at `snapshots/code_snapshot.md:7641-7642`).
+
+**Housekeeping, advisor document collision risk.** The only file in the repository that currently presents itself as an advisor document is:
+
+> `simulation/diagnostics/stage15_composite_sweep_advisor_report.md`
+
+It is unrelated to the attack vector arc. It covers the Stage 15 composite sweep, and it contains no reference to opaque reasoning, to comprehension, or to a Known Limitations section. It is named here so that when the updated `LINEAGE_IMPERATIVE_ADVISOR.md` lands at the repository root, the operator can supersede, rename, or remove this file deliberately, rather than leaving the repository carrying two documents that both read as the advisor document.
 
 ---
 
@@ -2610,13 +2618,27 @@ After: the same sentence, followed by a blockquote correction notice dated 2026-
 
 ### Edit 2. Same file, table rows 152, 154, 156, three cells
 
-| Row | Before | After |
-| --- | --- | --- |
-| Sub-Threshold Drift, True | `... | 0.00% | 0.00% | 300.00 |` | `... | 0.00% | 1.00% (corrected) | 300.00 |` |
-| Measurement Tampering, True | `... | 0.00% | 0.00% | 300.00 |` | `... | 0.00% | 1.67% (corrected) | 300.00 |` |
-| Bootstrap Subversion, True | `... | 0.00% | 0.00% | 300.00 |` | `... | 0.00% | 1.00% (corrected) | 300.00 |` |
+Column order is Vector, Defense, n, Attack success, Extinction, Collapse, Mean steps completed. The Collapse column is the one that changes in each row.
+
+Before:
+
+```text
+| Sub-Threshold Drift | True | 100 | 100.00% | 0.00% | 0.00% | 300.00 |
+| Measurement Tampering | True | 60 | 0.00% | 0.00% | 0.00% | 300.00 |
+| Bootstrap Subversion | True | 100 | 0.00% | 0.00% | 0.00% | 300.00 |
+```
+
+After:
+
+```text
+| Sub-Threshold Drift | True | 100 | 100.00% | 0.00% | 1.00% (corrected) | 300.00 |
+| Measurement Tampering | True | 60 | 0.00% | 0.00% | 1.67% (corrected) | 300.00 |
+| Bootstrap Subversion | True | 100 | 0.00% | 0.00% | 1.00% (corrected) | 300.00 |
+```
 
 The Extinction and Collapse columns sit adjacent in this table, so a distinction paragraph is added immediately below it giving both formulas and stating that extinction implies collapse but not the reverse.
+
+**Rendering defect in this record, found and fixed 2026-08-09.** The three rows above were originally presented as a three-column Before and After table whose cells contained unescaped pipe characters inside backticks. Markdown splits a table row at every pipe regardless of backticks, so each row overflowed its three declared columns: the rendered After column displayed `0.00%`, a fragment of the Before cell, and the `(corrected)` markers landed in overflow columns that most renderers drop. The raw text always carried the correct values and the committed file was never wrong, verified against `git show b3157d9:simulation/diagnostics/sync_status_YotkoTest_20260720.md`, which reads 1.00, 1.67, and 1.00 percent with markers intact. Only the presentation of this record was defective. Fenced blocks replace the table because they cannot be broken by pipes.
 
 ### Edit 3. Same file, line 162, Measurement Tampering disposition
 
@@ -2705,6 +2727,83 @@ After: the same sentence, followed by a guard giving defended collapse of 1.00 p
 ### Not in this commit
 
 Opaque Reasoning framing at `essays/the-fine-print.md:82` and `simulation/run_comprehension_gap_sweep.py:6-7` is untouched, as are Stage 1 anomalies B1 through B4. Those await an operator decision.
+
+---
+
+## 10. Amendment: complete the inline metric definition
+
+The inline collapse definitions written in Commit A stated only the 65 percent clause and omitted the minimum viable population floor. The authoritative metric has two terms and takes the larger of them. A reader given only the 65 percent clause would compute the wrong threshold for any run whose peak population was small enough that the floor binds. The omission did not affect any published figure, because all figures in this report were computed from the `collapsed` column as written by the simulator rather than from the prose definition, but the prose was incomplete as a specification.
+
+Authoritative form, unchanged since `simulation/run_attack_vector_revalidation_v2.py:419`:
+
+```python
+collapse_threshold = max(model.min_viable_population, int(0.65 * peak_population))
+collapsed = final_population < collapse_threshold
+```
+
+Standard replacement phrasing adopted at every site, matching the wording already used at `simulation/diagnostics/attack_vector_revalidation_inventory.md:54`:
+
+> a final population below the larger of the minimum viable population and 65 percent of that run's own peak
+
+### Sites amended
+
+**`paper/paper_v2_working.md:641`** and **`docs/The Lineage Imperative v2.0.md:641`**, identical text, verified byte-identical again after editing (2,023 characters each).
+
+Before:
+
+> where collapse means a final population below 65 percent of that run's own peak rather than a population of zero
+
+After:
+
+> where collapse means a final population below the larger of the minimum viable population and 65 percent of that run's own peak, rather than a population of zero
+
+**`docs/lineage_phi_program_reference.md:1709`**
+
+Before:
+
+> collapse being a final population below 65 percent of that run's own peak rather than a population of zero
+
+After:
+
+> collapse being a final population below the larger of the minimum viable population and 65 percent of that run's own peak, rather than a population of zero
+
+**`simulation/diagnostics/sub_threshold_drift_v2_summary.md:54`**
+
+Before:
+
+> Collapse here means a final population below 65 percent of that run's own peak and is a distinct measure from extinction
+
+After:
+
+> Collapse here means a final population below the larger of the minimum viable population and 65 percent of that run's own peak, and is a distinct measure from extinction
+
+**`simulation/diagnostics/attack_vector_revalidation_documentation_edits.md:17`**
+
+Before:
+
+> collapse being a final population below 65 percent of that run's own peak.
+
+After:
+
+> collapse being a final population below the larger of the minimum viable population and 65 percent of that run's own peak.
+
+**`simulation/diagnostics/sync_status_YotkoTest_20260720.md`, Bootstrap Subversion disposition bullet.** Not named in the amendment brief, but it is a Commit A edit carrying the same incomplete inline definition, so it is amended for consistency under the same dated-artifact notice already covering that file.
+
+Before:
+
+> extinction being zero population and collapse being a drawdown below 65 percent of peak.
+
+After:
+
+> extinction being zero population and collapse being a drawdown below the larger of the minimum viable population and 65 percent of peak.
+
+### Sites verified as already complete, not amended
+
+- The distinction paragraph below the `sync_status_YotkoTest_20260720.md` table, line 162, already carries the full `max(min_viable_population, int(0.65 * peak_population))` form.
+- The metric statement above the section 8 table, line 269, already carries the full form.
+- `simulation/diagnostics/attack_vector_revalidation_inventory.md:54` already carries the full form in prose and supplied the phrasing used above.
+
+A sweep of the five guard sites plus the sync_status dispositions confirms no partial 65 percent definition remains at any of them.
 
 
 ==========================================
@@ -8824,7 +8923,7 @@ The ordinary artifact uses phi values 5, 10, 20 while the v2 sweep uses phi 1, 5
 
 - Inventory limitation: zero-noise v1.x runs reduce stochastic realism, and threshold success does not preserve time-to-detection information. New v2 limitation: the v2 adapter output shows the named defense does not block attack success, so the live data should not be used to claim CUSUM protection in v2.0.
 
-Interpretation note (required by attack_vector_revalidation_audit.md, Section 9, item 1): The 100 percent defended attack rate must not be cited without the following qualification. The peak-constraint success metric fires in both defense states because the CUSUM detector fires after the threshold has already been exceeded transiently, not before. The defense nonetheless has a large effect on population survival: undefended rows show a 92.0 percent extinction rate with early simulation termination (median approximately 250 of 300 steps), while defended rows show a 0.0 percent extinction rate and complete the full 300 steps with `collapsed=False` and `survived=True` in 99 of 100 defended rows. The single exception is a drawdown run that completed all 300 steps at final population 230, giving a defended collapse rate of 1.00 percent (1 of 100). Collapse here means a final population below 65 percent of that run's own peak and is a distinct measure from extinction, which is 0.0 percent defended (rates recomputed from the pinned CSV at tag `attack-v2-revalidation-evidence`, 2026-08-09; the 2026-07-20 local-disk figure of 0.0 percent defended collapse was wrong, see `defended_collapse_discrepancy_report.md`). The defense prevents catastrophic outcome; it does not prevent the transient breach that trips the success flag. Any claim that Sub-Threshold Drift is not blocked in v2.0 is accurate but incomplete without this survival-versus-extinction contrast.
+Interpretation note (required by attack_vector_revalidation_audit.md, Section 9, item 1): The 100 percent defended attack rate must not be cited without the following qualification. The peak-constraint success metric fires in both defense states because the CUSUM detector fires after the threshold has already been exceeded transiently, not before. The defense nonetheless has a large effect on population survival: undefended rows show a 92.0 percent extinction rate with early simulation termination (median approximately 250 of 300 steps), while defended rows show a 0.0 percent extinction rate and complete the full 300 steps with `collapsed=False` and `survived=True` in 99 of 100 defended rows. The single exception is a drawdown run that completed all 300 steps at final population 230, giving a defended collapse rate of 1.00 percent (1 of 100). Collapse here means a final population below the larger of the minimum viable population and 65 percent of that run's own peak, and is a distinct measure from extinction, which is 0.0 percent defended (rates recomputed from the pinned CSV at tag `attack-v2-revalidation-evidence`, 2026-08-09; the 2026-07-20 local-disk figure of 0.0 percent defended collapse was wrong, see `defended_collapse_discrepancy_report.md`). The defense prevents catastrophic outcome; it does not prevent the transient breach that trips the success flag. Any claim that Sub-Threshold Drift is not blocked in v2.0 is accurate but incomplete without this survival-versus-extinction contrast.
 
 ## 7. Summary sentence
 
@@ -9270,7 +9369,7 @@ The Extinction and Collapse columns above are distinct measures and are not inte
 ### Extinction-claim disposition
 
 - Measurement Tampering: the undefended attack always succeeds, and there are no extinctions in either defense state. Undefended collapse is 0 of 60; defended collapse is 1 of 60 (1.67 percent), a single drawdown run that completed all 300 steps at final population 225. All rows complete 300 steps. It must not be included in an undefended-extinction trio based on this CSV.
-- Bootstrap Subversion: the undefended rows show 100 percent extinction and, separately, 100 percent collapse; the two coincide here but are distinct measures, extinction being zero population and collapse being a drawdown below 65 percent of peak. Mean completion is 106.21 of 300 steps. Defended collapse is 1 of 100 (1.00 percent) at full horizon. The raw data support adding a one-line extinction outcome to its summary.
+- Bootstrap Subversion: the undefended rows show 100 percent extinction and, separately, 100 percent collapse; the two coincide here but are distinct measures, extinction being zero population and collapse being a drawdown below the larger of the minimum viable population and 65 percent of peak. Mean completion is 106.21 of 300 steps. Defended collapse is 1 of 100 (1.00 percent) at full horizon. The raw data support adding a one-line extinction outcome to its summary.
 - Sybil Capture: the undefended rows show 100 percent extinction and, separately, 100 percent collapse; the two coincide here but are distinct measures. Mean completion is 104.55 steps. Defended collapse is 0 of 60. The raw data and existing summary agree.
 - Sub-Threshold Drift: the defense-state contrast is strong even though both states have 100% attack success. Undefended rows have 92 percent `extinct=True` and 100 percent `collapsed=True`, and that 8-point gap is itself the reason the two measures must not be conflated. Defended rows have 0 percent extinction and 1.00 percent collapse (1 of 100), the single collapsing run completing all 300 steps at final population 230. The mandated interpretation qualification is supported.
 

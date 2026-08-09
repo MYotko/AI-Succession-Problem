@@ -1,9 +1,9 @@
 # Constitutional Snapshot
 
-Generated: 2026-08-09T18:42:20Z
+Generated: 2026-08-09T20:15:19Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: b3157d9
-Branch: defended-collapse-resolution
+Commit: d5348fd
+Branch: main
 Category: constitutional
 
 ## Files included
