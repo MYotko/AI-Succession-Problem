@@ -70,6 +70,21 @@ EXCLUDED_FROM_ALL_RELPATHS = {
     "docs/The Lineage Imperative.md",
 }
 
+# Files that must NEVER reach a generated snapshot, matched on basename.
+#
+# This repository is public. The advisor document is deliberately untracked and
+# carries strategy, so it must not enter the repository indirectly through a
+# generated artifact. Two collector paths reach the repository root today:
+# collect_docs hardcodes README.md, and collect_data_files iterates the root
+# filtered only by extension. Neither picks up the advisor document as written,
+# but both are one small edit away from doing so, and .gitignore does not help
+# here because this script reads the filesystem directly rather than going
+# through Git. The deny-list closes that gap at the read choke point instead of
+# relying on every future collector being written carefully.
+NEVER_INGEST_BASENAMES = frozenset({
+    "LINEAGE_IMPERATIVE_ADVISOR.md",
+})
+
 # Directories to skip when walking for code
 CODE_SKIP_DIRS = frozenset({
     "__pycache__", ".pytest_cache", "venv", ".venv", "env",
@@ -113,7 +128,22 @@ def get_git_info() -> Tuple[str, str]:
 # File utilities
 # ---------------------------------------------------------------------------
 
+def is_never_ingest(path: Path) -> bool:
+    """True if this file must never reach a generated snapshot.
+
+    Matched on basename so the rule holds wherever the file sits, and so a
+    future change to a collector's scope cannot route around it.
+    """
+    return path.name in NEVER_INGEST_BASENAMES
+
+
 def read_file_safe(path: Path) -> Optional[str]:
+    if is_never_ingest(path):
+        print(
+            f"REFUSED: {path.name} is on the never-ingest list and was not read",
+            file=sys.stderr,
+        )
+        return None
     try:
         return path.read_text(encoding="utf-8", errors="replace")
     except Exception as e:
@@ -293,7 +323,10 @@ def collect_data_files() -> List[Path]:
     for p in REPO_ROOT.iterdir():
         if p.is_file() and p.suffix.lower() in DATA_EXTENSIONS:
             found.add(p)
-    return sorted(found)
+    # The data manifest lists filenames, so the deny-list applies here too even
+    # though no current extension in DATA_EXTENSIONS would match the advisor
+    # document. Filtering the collected set keeps the rule in one place.
+    return sorted(p for p in found if not is_never_ingest(p))
 
 
 def write_data_results_snapshot(
