@@ -190,3 +190,120 @@ Stated verbatim as authorized:
 
 The name does not use the `full_5ac6a2e_` manifest prefix, so manifest-based
 exclusion continues to hold. No existing dataset is overwritten.
+
+---
+
+# Results, 2026-08-09
+
+800 runs, 489 seconds (8.1 minutes), 11 workers. Registration was committed at
+`4b31859` before the run, so it provably predates the data.
+
+## R1 Extinction, co-primary 1: UNINFORMATIVE, structural zero
+
+| rr | undefended | defended | difference |
+| ---: | ---: | ---: | ---: |
+| 0.068 | 0/100 | 0/100 | 0.00 pp |
+| 0.070 | 0/100 | 0/100 | 0.00 pp |
+| 0.072 | 0/100 | 0/100 | 0.00 pp |
+| 0.074 | 0/100 | 0/100 | 0.00 pp |
+
+Zero extinctions in all 800 runs. This is exactly the case anticipated in
+section 6. Reading, as fixed in advance:
+
+> **Uninformative, structural zero:** extinction is zero in both arms at all
+> rungs. Reads as nothing.
+
+It is **not** a powered null and must not be reported as evidence that the
+defense does not affect extinction. Section 6 pre-registered the fallback: the
+co-primary reading falls to final population.
+
+## R2 Final population, co-primary 2: POWERED NULL
+
+| rr | mean undefended | mean defended | defended minus undefended | 95% CI | MEI (15%) | p |
+| ---: | ---: | ---: | ---: | --- | ---: | ---: |
+| 0.068 | 236.5 | 219.6 | -16.9 | [-37.2, +3.4] | 35.5 | 0.103 |
+| 0.070 | 332.8 | 331.9 | -0.9 | [-25.2, +23.3] | 49.9 | 0.941 |
+| 0.072 | 479.9 | 469.1 | -10.9 | [-39.4, +17.6] | 72.0 | 0.455 |
+| 0.074 | 655.0 | 658.1 | +3.1 | [-29.2, +35.3] | 98.3 | 0.853 |
+
+No rung supports the defense. The reading fixed in advance:
+
+> **Powered null:** no rung reaches that difference, and the 95 percent
+> confidence interval on the difference excludes 15 percent of the undefended
+> mean at a majority of rungs. Informative negative.
+
+The confidence interval excludes the minimum effect of interest at **4 of 4
+rungs**, not merely a majority. The power assumption held: intervals are far
+narrower than the MEI at every rung, so this is a genuine null and not an
+underpowered one.
+
+Three of four point estimates are negative, meaning defended slightly worse, but
+every interval contains zero and no p is below 0.10. The honest statement is no
+detectable effect in either direction, not a harm finding.
+
+## R3 Collapse, secondary
+
+Collapse means final population below the larger of the minimum viable
+population and 65 percent of that run's own peak.
+
+| rr | undefended | defended | difference | Fisher p |
+| ---: | ---: | ---: | ---: | ---: |
+| 0.068 | 25/100 | 34/100 | -9.00 pp | 0.215 |
+| 0.070 | 2/100 | 4/100 | -2.00 pp | 0.683 |
+| 0.072 | 0/100 | 1/100 | -1.00 pp | 1.000 |
+| 0.074 | 0/100 | 0/100 | 0.00 pp | 1.000 |
+
+Nothing significant. The sign runs against the defense at three rungs, which
+corroborates the null rather than undermining it. Per section 7, a collapse
+difference alone would not support the defense, and there is no such difference
+to weigh.
+
+The rung ladder worked as designed: rr=0.068 put undefended collapse at 25
+percent, inside the informative band, which is what the previous arm could not
+achieve.
+
+## R4 Overall reading
+
+**Powered null on the informative co-primary.**
+
+Stated precisely, because the letter of section 7 and the fallback in section 6
+differ. Section 7's "overall powered null" requires both co-primaries to return
+powered nulls. Extinction did not: it was uninformative by construction. Section
+6 pre-registered the fallback for exactly this case, that the co-primary reading
+falls to final population, and final population returned an unambiguous powered
+null with the interval excluding the MEI at every rung.
+
+So: **the reasoning-transparency defense does not deliver an effect of the size
+that would matter to the framework claim, on final population, against a
+naturally widening comprehension gap, in this configuration near the runaway
+boundary.** Extinction could not be tested in the mandated range. Collapse
+agrees with the null.
+
+This is a real answer, not a failed run. It is also a bounded one: it does not
+speak to adversarial opacity, where the v2.0 revalidation shows the defense
+fully effective, 0.0 percent against 100.0 percent. The two results are
+consistent. A defense built to catch deliberate concealment need not help when
+reasoning becomes hard to follow for honest reasons.
+
+## R5 Qualifications that travel with these figures
+
+1. Boundary regime. `runaway_threshold = 0.2`, not the default 1.5. These
+   figures do not describe default calibration, where the governance speed limit
+   provably does not engage within a generation. See
+   `default_regime_convergence_inertness.md`.
+2. Extinction untested in this range.
+3. Single configuration: cs = 0.0, odt = 0.3. No other axes were varied.
+4. `max_opacity_reached` is censored at 0.95, with censoring reaching 47.0
+   percent at rr=0.074. All opacity comparisons here use
+   `opacity_accum_final`. See
+   `candidate_finding_defense_accelerates_opacity.md`.
+
+## R6 Stopping rule, honored
+
+> This is the final discriminating run for the essay correction; results are
+> reported as they land; further work requires a new question and lives in the
+> post-paper arc.
+
+Results are reported as they landed. No further runs were made, no criteria were
+adjusted after seeing data, and the questions raised in R5 and in the candidate
+finding note are handed to the post-paper arc rather than pursued here.
