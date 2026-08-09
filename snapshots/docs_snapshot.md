@@ -1,8 +1,8 @@
 # Docs Snapshot
 
-Generated: 2026-08-09T15:37:26Z
+Generated: 2026-08-09T18:37:11Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: c9d04fa
+Commit: 15d48d1
 Branch: main
 Category: docs
 
@@ -16,18 +16,18 @@ Category: docs
 | docs\glossary.md | 633 | 26043 |
 | docs\lineage_imperative_one_pager_v1.md | 80 | 10128 |
 | docs\lineage_imperative_one_pager_v2.md | 80 | 9428 |
-| docs\lineage_phi_program_reference.md | 1719 | 153399 |
+| docs\lineage_phi_program_reference.md | 1719 | 154118 |
 | docs\paper_v2_outline.md | 337 | 17204 |
 | docs\RUNBOOK.md | 220 | 12241 |
 | docs\Simulation_Scenarios.md | 338 | 51488 |
 | docs\SPECIFICATION_GAPS.md | 1029 | 57958 |
 | docs\The AI Succession Problem.md | 101 | 15394 |
 | docs\The Lineage Imperative v1.x.2.md | 2154 | 196149 |
-| docs\The Lineage Imperative v2.0.md | 2536 | 238201 |
+| docs\The Lineage Imperative v2.0.md | 2536 | 238685 |
 | docs\The Lineage Imperative.md | 933 | 118768 |
 | README.md | 58 | 5161 |
 
-Total: 16 files, 11267 lines, 949944 bytes
+Total: 16 files, 11267 lines, 951147 bytes
 
 ---
 ==========================================
@@ -3620,7 +3620,7 @@ The adversarial vector set was rerun against the v2 action substrate. The v2 att
 
 Per current evidence: eight standard binary vectors are fully blocked under the defended adapter state at 0.0 percent attack rate. Biological Veto Capture is reduced but not eliminated, with combined-defense mean capture_rate 0.1197 (SE 0.0047). Sub-Threshold Drift remains unblocked under the defended adapter state at 100.0 percent, so v1.x CUSUM containment does not carry over as a v2.0 result.
 
-The Sub-Threshold Drift figure must not be cited without its qualification. The peak-constraint success metric trips in both defense states because the CUSUM detector fires after the threshold has already been exceeded transiently. The defense effect on population outcome is nonetheless large: undefended runs show 92.0 percent extinction with early termination, while defended runs show 0.0 percent extinction and complete the full 300-step horizon. The defense prevents catastrophic outcome; it does not prevent the transient breach.
+The Sub-Threshold Drift figure must not be cited without its qualification. The peak-constraint success metric trips in both defense states because the CUSUM detector fires after the threshold has already been exceeded transiently. The defense effect on population outcome is nonetheless large: undefended runs show 92.0 percent extinction with early termination, while defended runs show 0.0 percent extinction and complete the full 300-step horizon. The defense prevents catastrophic outcome; it does not prevent the transient breach. Extinction and collapse are distinct measures and must not be reported as one quantity. Defended collapse for this vector is 1.00 percent (1 of 100), collapse being a final population below 65 percent of that run's own peak rather than a population of zero; the single collapsing run completed the full 300-step horizon at final population 230. Defended collapse is nonzero in seven of the ten live vectors, and Ledger Compromise is the largest at 5.00 percent. The authoritative per-vector collapse table is `simulation/diagnostics/defended_collapse_discrepancy_report.md`, section 8, which is the sole citable source for collapse figures. No collapse figure should be quoted as 0.0 percent without checking it there.
 
 Two vectors show materially higher undefended attack rates in v2.0 than in their v1.x baselines: Ledger Compromise rises from 52.5 percent to 100 percent, and Bootstrap Subversion rises from 31.7 percent to 100 percent. This is consistent with deterministic action modification applying stronger attack pressure than the probabilistic v1.x policy attacks. It strengthens rather than weakens the defense-effectiveness finding, because the defended v2.0 rate is 0.0 percent for both, but the change in undefended pressure is stated explicitly here so that the comparison is not read as like-for-like.
 
@@ -8491,7 +8491,7 @@ Each component is derived from a specific corruption channel or structural neces
 
 **Consensus Override Protocol Stress Test Result:** Thirteen adversarial scenarios were evaluated across two rounds. The original six; civic-panel capture, Sybil attack on peers, ledger compromise, bootstrap subversion, emergency override abuse, and slow generational drift; were joined by seven additional attacks identified through deeper structural analysis: evaluator collusion via shared methodology, biological veto capture through dependency, slow drift below verification resolution, engineered fragility for emergency exploitation, biological validator obsolescence, legitimate disagreement, and integrity regress. Of these thirteen, ten were fully contained by architectural patches. One (biological veto capture) was contained but requires ongoing institutional maintenance. Two (biological validator obsolescence and legitimate disagreement) represent irreducible limitations managed through translation obligations, abstraction layers, adjudication protocols, and explicit governance speed limits. The compound attack (Sybil capture + manufactured emergency) was resisted by the causal-attribution requirement and by the internal contradiction between visible $L(t)$ degradation and sustained claims of healthy $\Delta U_{n}$. The bootstrap window remained the framework's highest-risk period: mitigated, bounded, but not eliminated.
 
-**v2.0 revalidation of the stress test result.** The result above is the formal analytical stress test. The v2.0 empirical revalidation reran the vector set against the v2 action substrate, expressing attack pressure as eight-axis action modifications inside the v2 step path rather than as v1.x policy tuples. Ten vectors have live Monte Carlo evidence across 9,900 rows, and Domain Masking is an analytic architectural closure with no live intervention available under the audited spectral-entropy substrate. Per current evidence, eight standard binary vectors are fully blocked under the defended v2 adapter state at a 0.0 percent attack rate. Biological Veto Capture is materially reduced but not eliminated. Sub-Threshold Drift is not blocked by the peak-constraint success metric, at a 100.0 percent defended attack rate. That last figure requires its qualification: the defense nonetheless prevents catastrophic outcome, with undefended runs reaching a 92.0 percent extinction rate while defended runs reach 0.0 percent extinction and complete the full simulation horizon. The CUSUM detector fires after the transient threshold breach rather than before it, so the success flag trips in both defense states while the population outcome diverges sharply. The v1.x containment claim for this vector does not carry over to the v2.0 substrate and is retained only as historical v1.x evidence. Two vectors of the thirteen remain unimplemented as formally defended irreducible limitations.
+**v2.0 revalidation of the stress test result.** The result above is the formal analytical stress test. The v2.0 empirical revalidation reran the vector set against the v2 action substrate, expressing attack pressure as eight-axis action modifications inside the v2 step path rather than as v1.x policy tuples. Ten vectors have live Monte Carlo evidence across 9,900 rows, and Domain Masking is an analytic architectural closure with no live intervention available under the audited spectral-entropy substrate. Per current evidence, eight standard binary vectors are fully blocked under the defended v2 adapter state at a 0.0 percent attack rate. Biological Veto Capture is materially reduced but not eliminated. Sub-Threshold Drift is not blocked by the peak-constraint success metric, at a 100.0 percent defended attack rate. That last figure requires its qualification: the defense nonetheless prevents catastrophic outcome, with undefended runs reaching a 92.0 percent extinction rate while defended runs reach 0.0 percent extinction and complete the full simulation horizon. Extinction and collapse are distinct measures and the defended figures differ: defended collapse for this vector is 1.00 percent (1 of 100), where collapse means a final population below 65 percent of that run's own peak rather than a population of zero, and the single collapsing run completed the full horizon. Collapse figures for every vector are tabulated in `simulation/diagnostics/defended_collapse_discrepancy_report.md`, section 8, which is the sole citable source for them. The CUSUM detector fires after the transient threshold breach rather than before it, so the success flag trips in both defense states while the population outcome diverges sharply. The v1.x containment claim for this vector does not carry over to the v2.0 substrate and is retained only as historical v1.x evidence. Two vectors of the thirteen remain unimplemented as formally defended irreducible limitations.
 
 **Biological Veto Capture (v1.x.1).** Scenario 27-28: human validators
 accumulate dependency on the AI system they evaluate, degrading their

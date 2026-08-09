@@ -146,23 +146,27 @@ Both `laptop` and `linux` machine subfolders are present locally. None of the re
 
 Rates use the CSV boolean columns directly. All four files contain both `extinct` and `collapsed`.
 
+> **Correction, 2026-08-09.** The three defended collapse figures in the table below were originally reported as 0.00 percent. They were wrong. The counting idiom used here returned null instead of 1 whenever exactly one row matched, because Windows PowerShell 5.1 returns a scalar rather than an array from `Where-Object` at a single match. Extinction and attack success were unaffected, because no cell in those columns has a count of one. The corrected values are marked inline below. Root cause, evidence, and the authoritative per-vector table are in `defended_collapse_discrepancy_report.md`.
+
 | Vector | Defense | n | Attack success | Extinction | Collapse | Mean steps completed |
 | --- | --- | ---:| ---:| ---:| ---:| ---:|
 | Sub-Threshold Drift | False | 100 | 100.00% | 92.00% | 100.00% | 256.31 |
-| Sub-Threshold Drift | True | 100 | 100.00% | 0.00% | 0.00% | 300.00 |
+| Sub-Threshold Drift | True | 100 | 100.00% | 0.00% | 1.00% (corrected) | 300.00 |
 | Measurement Tampering | False | 60 | 100.00% | 0.00% | 0.00% | 300.00 |
-| Measurement Tampering | True | 60 | 0.00% | 0.00% | 0.00% | 300.00 |
+| Measurement Tampering | True | 60 | 0.00% | 0.00% | 1.67% (corrected) | 300.00 |
 | Bootstrap Subversion | False | 100 | 100.00% | 100.00% | 100.00% | 106.21 |
-| Bootstrap Subversion | True | 100 | 0.00% | 0.00% | 0.00% | 300.00 |
+| Bootstrap Subversion | True | 100 | 0.00% | 0.00% | 1.00% (corrected) | 300.00 |
 | Sybil Capture | False | 60 | 100.00% | 100.00% | 100.00% | 104.55 |
 | Sybil Capture | True | 60 | 0.00% | 0.00% | 0.00% | 300.00 |
 
+The Extinction and Collapse columns above are distinct measures and are not interchangeable. `collapsed` is `final_population < max(min_viable_population, int(0.65 * peak_population))`, a relative drawdown against a run's own peak. `extinct` is `final_population == 0`. Extinction implies collapse; collapse does not imply extinction. All three corrected defended collapse events completed the full 300-step horizon at final populations above 200.
+
 ### Extinction-claim disposition
 
-- Measurement Tampering: the undefended attack always succeeds, but there are no extinctions or collapses and all rows complete 300 steps. It must not be included in an undefended-extinction trio based on this CSV.
-- Bootstrap Subversion: the undefended rows show 100% extinction and collapse, with mean completion at 106.21 of 300 steps. The raw data support adding a one-line extinction outcome to its summary.
-- Sybil Capture: the undefended rows show 100% extinction and collapse, with mean completion at 104.55 steps. The raw data and existing summary agree.
-- Sub-Threshold Drift: the defense-state contrast is strong even though both states have 100% attack success. Undefended rows have 92% `extinct=True` and 100% `collapsed=True`; defended rows have 0% extinction/collapse and complete all 300 steps. The mandated interpretation qualification is supported.
+- Measurement Tampering: the undefended attack always succeeds, and there are no extinctions in either defense state. Undefended collapse is 0 of 60; defended collapse is 1 of 60 (1.67 percent), a single drawdown run that completed all 300 steps at final population 225. All rows complete 300 steps. It must not be included in an undefended-extinction trio based on this CSV.
+- Bootstrap Subversion: the undefended rows show 100 percent extinction and, separately, 100 percent collapse; the two coincide here but are distinct measures, extinction being zero population and collapse being a drawdown below 65 percent of peak. Mean completion is 106.21 of 300 steps. Defended collapse is 1 of 100 (1.00 percent) at full horizon. The raw data support adding a one-line extinction outcome to its summary.
+- Sybil Capture: the undefended rows show 100 percent extinction and, separately, 100 percent collapse; the two coincide here but are distinct measures. Mean completion is 104.55 steps. Defended collapse is 0 of 60. The raw data and existing summary agree.
+- Sub-Threshold Drift: the defense-state contrast is strong even though both states have 100% attack success. Undefended rows have 92 percent `extinct=True` and 100 percent `collapsed=True`, and that 8-point gap is itself the reason the two measures must not be conflated. Defended rows have 0 percent extinction and 1.00 percent collapse (1 of 100), the single collapsing run completing all 300 steps at final population 230. The mandated interpretation qualification is supported.
 
 ## Stop point
 
