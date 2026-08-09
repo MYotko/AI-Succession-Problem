@@ -155,7 +155,7 @@ These currently publish defended **extinction** (0.0 percent), which is correct 
 
 ### Advisor document
 
-`simulation/diagnostics/stage15_composite_sweep_advisor_report.md` is the only advisor document in the tree. It contains no attack vector collapse figures and is unaffected.
+`simulation/diagnostics/stage15_composite_sweep_advisor_report.md` is the only advisor document in the tree. It contains no attack vector collapse figures and is unaffected. The separate `LINEAGE_IMPERATIVE_ADVISOR.md` has lived outside the repository and is being updated by the operator; see the housekeeping note under Anomaly B4 regarding the naming collision once it lands.
 
 ## 5. Anomalies
 
@@ -248,7 +248,15 @@ The one dataset in the tree where opaque reasoning collapse is symmetric is `dat
 
 **B3. The comprehension gap sweep did not move its independent variable.** `max_opacity_reached` is constant at 0.8940 in all 2,800 rows, identical at every convergence_strength from 0.0 to 2.0. Convergence strength was the axis intended to control whether the system enters the opaque regime, and the script's own interpretation guide predicts that high convergence strength should keep `max_opacity_reached` below the defense threshold. It never varies. Meanwhile 2,100 of 2,800 runs exceeded their opacity threshold and the defense fired in 1,050, yet zero runs collapsed. As recorded, this sweep cannot discriminate between the two interpretations it was built to test. Flagged, not resolved.
 
-**B4. The advisor document could not be located.** The Stage 1 brief refers to an advisor document whose Known Limitations section carries the symmetric claim. The only advisor document in the tree, `simulation/diagnostics/stage15_composite_sweep_advisor_report.md`, contains no reference to opaque reasoning, comprehension, or a Known Limitations section. The Known Limitations sections are section 6 of the eleven per-vector v2 summaries, and `opaque_reasoning_v2_summary.md` section 6 at the pinned tag does not carry the claim. The claim was found in exactly two places, both already flagged: `essays/the-fine-print.md:82` (mirrored at `snapshots/essays_snapshot.md:1852`) and `simulation/run_comprehension_gap_sweep.py:6-7` (mirrored at `snapshots/code_snapshot.md:7641-7642`). If a third location exists it is not in this working tree.
+**B4. CLOSED, not an anomaly.** Originally filed because the advisor document referenced in the Stage 1 brief could not be found in the working tree. Resolved by operator ruling, 2026-08-09: `LINEAGE_IMPERATIVE_ADVISOR.md` has lived outside the repository, so its absence here is expected. The claim in question was verified against the advisor text at the advisor layer and is corrected in an updated version that the operator is committing at the repository root. No search, creation, or edit of that document is in scope for this diagnostic.
+
+Retained from the original finding, because it is still true and still useful: within the repository, the symmetric claim appears in exactly two places, both flagged and both untouched pending the operator decision on framing. Those are `essays/the-fine-print.md:82` (mirrored at `snapshots/essays_snapshot.md:1852`) and `simulation/run_comprehension_gap_sweep.py:6-7` (mirrored at `snapshots/code_snapshot.md:7641-7642`).
+
+**Housekeeping, advisor document collision risk.** The only file in the repository that currently presents itself as an advisor document is:
+
+> `simulation/diagnostics/stage15_composite_sweep_advisor_report.md`
+
+It is unrelated to the attack vector arc. It covers the Stage 15 composite sweep, and it contains no reference to opaque reasoning, to comprehension, or to a Known Limitations section. It is named here so that when the updated `LINEAGE_IMPERATIVE_ADVISOR.md` lands at the repository root, the operator can supersede, rename, or remove this file deliberately, rather than leaving the repository carrying two documents that both read as the advisor document.
 
 ---
 
