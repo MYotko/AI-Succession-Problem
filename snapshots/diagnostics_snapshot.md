@@ -1,8 +1,8 @@
 # Diagnostics Snapshot
 
-Generated: 2026-08-09T23:54:38Z
+Generated: 2026-08-10T01:43:57Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: b2cba23
+Commit: 0db8be0
 Branch: main
 Category: diagnostics
 
@@ -27,9 +27,9 @@ Category: diagnostics
 | simulation\diagnostics\attack_vector_v2_adapter_validation.md | 90 | 4303 |
 | simulation\diagnostics\biological_veto_capture_v2_summary.md | 61 | 3556 |
 | simulation\diagnostics\bootstrap_subversion_v2_summary.md | 58 | 2934 |
-| simulation\diagnostics\candidate_finding_defense_accelerates_opacity.md | 143 | 6892 |
+| simulation\diagnostics\candidate_finding_defense_accelerates_opacity.md | 153 | 7552 |
 | simulation\diagnostics\capped_regime_phi_check_report.md | 129 | 9986 |
-| simulation\diagnostics\comprehension_gap_powered_arm_note.md | 309 | 13637 |
+| simulation\diagnostics\comprehension_gap_powered_arm_note.md | 317 | 14163 |
 | simulation\diagnostics\comprehension_gap_redesign_note.md | 389 | 19226 |
 | simulation\diagnostics\cop_finding_framing.md | 69 | 7923 |
 | simulation\diagnostics\default_regime_convergence_inertness.md | 91 | 4225 |
@@ -105,7 +105,7 @@ Category: diagnostics
 | simulation\diagnostics\sync_status_YotkoTest_20260720.md | 173 | 11662 |
 | simulation\diagnostics\termination_decontamination_integration_analysis.md | 64 | 5995 |
 
-Total: 94 files, 9948 lines, 593059 bytes
+Total: 94 files, 9966 lines, 594245 bytes
 
 ---
 ==========================================
@@ -2235,6 +2235,16 @@ above." Censoring rises steeply across the powered arm's rungs, from 0.0 percent
 at rr=0.068 to 47.0 percent at rr=0.074, and at the top rung it understates the
 defended mean by 0.1695 (accumulator 1.1011 against censored 0.9316).
 
+**Clarification, 2026-08-09.** The rung figures in the sentence above are
+**pooled across both defense arms**. At rr=0.074 the pooled rate is 47.0 percent,
+94 of 200 runs, while by arm it is **defended 76.0 percent** (76 of 100) and
+**undefended 18.0 percent** (18 of 100). The pooled framing understates
+censoring in the defended arm, which is the arm this caution is about, by 29
+points. Full picture by rung, defended and pooled: rr=0.068, 0.0 and 0.0
+percent; rr=0.070, 3.0 and 1.5 percent; rr=0.072, 31.0 and 16.5 percent;
+rr=0.074, 76.0 and 47.0 percent. The original wording is retained above per the
+dated-artifact policy; this clarification governs.
+
 Any cross-state opacity comparison must use `opacity_accum_final`. Using
 `max_opacity_reached` would have hidden most of this effect at exactly the rungs
 where it is largest.
@@ -2735,6 +2745,14 @@ reasoning becomes hard to follow for honest reasons.
    percent at rr=0.074. All opacity comparisons here use
    `opacity_accum_final`. See
    `candidate_finding_defense_accelerates_opacity.md`.
+
+   **Clarification, 2026-08-09.** The 47.0 percent figure above is **pooled
+   across both defense arms**, 94 of 200 runs. It is not the defended arm's
+   rate. By arm at rr=0.074: **defended 76.0 percent** (76 of 100),
+   **undefended 18.0 percent** (18 of 100). The original sentence did not label
+   the figure, and a downstream draft read it as the defended arm, which
+   understated censoring in that arm by 29 points. The original wording is
+   retained above per the dated-artifact policy; this clarification governs.
 
 ## R6 Stopping rule, honored
 

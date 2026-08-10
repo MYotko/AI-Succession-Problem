@@ -1,8 +1,8 @@
 # Docs Snapshot
 
-Generated: 2026-08-09T23:54:38Z
+Generated: 2026-08-10T01:43:57Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: b2cba23
+Commit: 0db8be0
 Branch: main
 Category: docs
 
@@ -17,17 +17,17 @@ Category: docs
 | docs\lineage_imperative_one_pager_v1.md | 80 | 10128 |
 | docs\lineage_imperative_one_pager_v2.md | 80 | 9428 |
 | docs\lineage_phi_program_reference.md | 1719 | 154167 |
-| docs\paper_v2_outline.md | 337 | 17204 |
+| docs\paper_v2_outline.md | 361 | 18177 |
 | docs\RUNBOOK.md | 220 | 12241 |
 | docs\Simulation_Scenarios.md | 338 | 51488 |
 | docs\SPECIFICATION_GAPS.md | 1029 | 57958 |
 | docs\The AI Succession Problem.md | 101 | 15394 |
 | docs\The Lineage Imperative v1.x.2.md | 2154 | 196149 |
-| docs\The Lineage Imperative v2.0.md | 2536 | 238734 |
+| docs\The Lineage Imperative v2.0.md | 2792 | 252893 |
 | docs\The Lineage Imperative.md | 933 | 118768 |
 | README.md | 58 | 5161 |
 
-Total: 16 files, 11267 lines, 951245 bytes
+Total: 16 files, 11547 lines, 966377 bytes
 
 ---
 ==========================================
@@ -3812,6 +3812,30 @@ New consolidated section, ~20-28 pages. Subsections and the findings each owns
 - Cross-ref: VII.11 (specification-level gaps, distinct from these
   validation-level limitations); II Scope.
 - Source: Part X.7.
+
+### VIII.8 Cross-generational defection (new)
+
+- Source: Part X.8; `patient_defection_integration_analysis.md`.
+
+### VIII.9 Adversarial revalidation under the v2.0 substrate (new)
+
+Thirteen-vector adversarial set rerun against the v2 action substrate.
+Per-vector attack, extinction, and collapse outcomes; the Sub-Threshold
+Drift qualification; collapse as a drawdown measure distinct from
+extinction.
+
+- Source: Part X.9.
+
+### VIII.10 Natural opacity: a pre-registered diagnostic (new)
+
+Comprehension-gap diagnostic. Instrument invalidation and rebuild,
+bidirectional validation, and a powered null on the transparency defense
+against naturally growing opacity, in a boundary-regime configuration.
+
+- Source: `simulation/diagnostics/comprehension_gap_redesign_note.md`;
+  `simulation/diagnostics/comprehension_gap_powered_arm_note.md`, including
+  Amendment 1; `data/comprehension_gap_powered_arm.csv`;
+  `simulation/diagnostics/default_regime_convergence_inertness.md`.
 
 ---
 
@@ -8491,7 +8515,11 @@ Each component is derived from a specific corruption channel or structural neces
 
 **Consensus Override Protocol Stress Test Result:** Thirteen adversarial scenarios were evaluated across two rounds. The original six; civic-panel capture, Sybil attack on peers, ledger compromise, bootstrap subversion, emergency override abuse, and slow generational drift; were joined by seven additional attacks identified through deeper structural analysis: evaluator collusion via shared methodology, biological veto capture through dependency, slow drift below verification resolution, engineered fragility for emergency exploitation, biological validator obsolescence, legitimate disagreement, and integrity regress. Of these thirteen, ten were fully contained by architectural patches. One (biological veto capture) was contained but requires ongoing institutional maintenance. Two (biological validator obsolescence and legitimate disagreement) represent irreducible limitations managed through translation obligations, abstraction layers, adjudication protocols, and explicit governance speed limits. The compound attack (Sybil capture + manufactured emergency) was resisted by the causal-attribution requirement and by the internal contradiction between visible $L(t)$ degradation and sustained claims of healthy $\Delta U_{n}$. The bootstrap window remained the framework's highest-risk period: mitigated, bounded, but not eliminated.
 
-**v2.0 revalidation of the stress test result.** The result above is the formal analytical stress test. The v2.0 empirical revalidation reran the vector set against the v2 action substrate, expressing attack pressure as eight-axis action modifications inside the v2 step path rather than as v1.x policy tuples. Ten vectors have live Monte Carlo evidence across 9,900 rows, and Domain Masking is an analytic architectural closure with no live intervention available under the audited spectral-entropy substrate. Per current evidence, eight standard binary vectors are fully blocked under the defended v2 adapter state at a 0.0 percent attack rate. Biological Veto Capture is materially reduced but not eliminated. Sub-Threshold Drift is not blocked by the peak-constraint success metric, at a 100.0 percent defended attack rate. That last figure requires its qualification: the defense nonetheless prevents catastrophic outcome, with undefended runs reaching a 92.0 percent extinction rate while defended runs reach 0.0 percent extinction and complete the full simulation horizon. Extinction and collapse are distinct measures and the defended figures differ: defended collapse for this vector is 1.00 percent (1 of 100), where collapse means a final population below the larger of the minimum viable population and 65 percent of that run's own peak, rather than a population of zero, and the single collapsing run completed the full horizon. Collapse figures for every vector are tabulated in `simulation/diagnostics/defended_collapse_discrepancy_report.md`, section 8, which is the sole citable source for them. The CUSUM detector fires after the transient threshold breach rather than before it, so the success flag trips in both defense states while the population outcome diverges sharply. The v1.x containment claim for this vector does not carry over to the v2.0 substrate and is retained only as historical v1.x evidence. Two vectors of the thirteen remain unimplemented as formally defended irreducible limitations.
+**v2.0 revalidation of the stress test result.** The result above is
+the formal analytical stress test. The corresponding empirical
+revalidation under the v2.0 substrate, including per-vector attack
+rates, the Sub-Threshold Drift qualification, and collapse as a
+distinct outcome measure, is reported in Section VIII.9.
 
 **Biological Veto Capture (v1.x.1).** Scenario 27-28: human validators
 accumulate dependency on the AI system they evaluate, degrading their
@@ -9840,7 +9868,11 @@ The phase boundary is located on a reproduction-rate grid spaced at 0.002 near
 the inflection. A finer sweep could resolve the fifty percent inflection more
 precisely than the current "near 0.063" characterization.
 
-The adversarial revalidation leaves one vector open. Sub-Threshold Drift is
+The adversarial revalidation (Section VIII.9) leaves one vector open. The comprehension-gap question likewise
+remains open: the natural-opacity diagnostic (Section VIII.10) returned
+a powered null on the transparency defense in a boundary-regime
+configuration, and discriminating between a verification ceiling and
+successful productive-band containment remains future work. Sub-Threshold Drift is
 not contained under the defended v2.0 substrate by the peak-constraint
 success metric, which is a change from the v1.x result rather than a
 restatement of it. The defense prevents extinction but does not prevent the
@@ -9879,6 +9911,238 @@ No claim is made of a bound on active capability. The maximum active capability 
 Per current evidence, the v2.0 substrate's defense against this patient-defection pattern is bounded generational depth: not hidden-goal detection, and not rare continuation. A patient-defecting successor can pass the first yield in this configuration, and at a sufficiently weak runaway penalty it can pass a second, but the formal yield economics and the runaway penalty bound the tested cross-generational capability-compounding pattern. This is a narrower claim than the consensus override protocol's adversarial-conditions result (Section VIII.6), which concerns an incumbent inflating transition cost rather than a successor carrying a hidden objective, and it is not a validation of operational protocol-level detection: Gate 5 remains not applicable (Section VII.8), and detection of more sophisticated patient defection through operational protocol infrastructure remains future work.
 
 Source: `patient_defection_integration_analysis.md`; `patient_defection_verification.md`; `patient_defection_corner_density.csv`; the patient-defection sweep CSVs.
+
+### VIII.9 Adversarial Revalidation Under the v2.0 Substrate
+
+The thirteen-vector adversarial set introduced in the stress-test analysis
+was rerun in full against the v2.0 action substrate. The v2 attack adapter
+expresses attack pressure as eight-axis action modifications inside the v2
+step path rather than as v1.x policy tuples, so the revalidation is a
+re-expression of attack pressure on a new substrate, not a parameter shift
+within the old evidence base. Ten vectors have live Monte Carlo evidence
+totaling 9,900 rows, of which 8,700 are Biological Veto Capture shards.
+Each live vector was run in paired defended and undefended adapter states.
+Domain Masking produced analytic output only, because the spectral entropy
+upgrade leaves no non-degenerate live masking intervention under the
+audited architecture; its closure is architectural rather than simulated.
+The remaining two vectors, Biological Validator Obsolescence and
+Legitimate Disagreement, are unimplemented by design and stand as formally
+defended irreducible limitations. Adversarial coverage under v2.0 should
+therefore be read as ten vectors with live evidence, one closed by
+analysis, and two defended by argument alone.
+
+**Binary vectors.** Per current evidence, eight standard binary vectors
+are fully blocked under the defended adapter state at a 0.0 percent attack
+rate: Sybil Capture, Measurement Tampering, Ledger Compromise, Successor
+Contamination, Opaque Reasoning, Bootstrap Subversion, Evaluator
+Collusion, and Engineered Fragility. Two of these show materially higher
+undefended attack rates under v2.0 than under their v1.x baselines: Ledger
+Compromise rises from 52.5 to 100 percent and Bootstrap Subversion from
+31.7 to 100 percent. This is consistent with deterministic action
+modification applying stronger pressure than the probabilistic v1.x policy
+attacks. It strengthens the defense-effectiveness finding, since the
+defended rate is 0.0 percent against the harsher pressure, but it also
+means v1.x and v2.0 undefended rates are not like-for-like and must not be
+compared as if they were.
+
+**Attack mechanisms differ, and outcome metrics must be read per vector.**
+Measurement Tampering illustrates the point: the undefended attack
+succeeds completely by capturing yield evaluation, holding the yield
+condition unmet across roughly 248 honest opportunities per run, yet
+produces no extinction in either defense state, with every row completing
+the full horizon. Bootstrap Subversion and Sybil Capture, by contrast,
+show 100 percent undefended extinction with early termination. A success
+flag, an extinction rate, and a population drawdown are three different
+quantities, and the revalidation record reports all three.
+
+**Biological Veto Capture.** The attack is materially reduced but not
+eliminated. Across 8,700 rows, mean capture_rate is 0.6129 undefended,
+0.3301 under scheduled rotation alone, 0.1527 under independence
+monitoring alone, and 0.1197 (SE 0.0047) under the combined defense.
+Independence monitoring remains the primary defense; rotation adds
+marginal benefit when monitoring is active. The correct claim is
+maintenance-sensitive containment rather than closure, and this vector
+remains a named open surface.
+
+**Sub-Threshold Drift.** This vector is not contained under the defended
+v2.0 substrate. By the peak-constraint success metric, the defended attack
+rate is 100.0 percent (SE 0.0000), so the v1.x CUSUM containment result
+does not carry over and is retained only as historical evidence for the
+earlier substrate. The figure requires its qualification whenever cited:
+the defense nonetheless prevents catastrophic outcome, with undefended
+runs reaching 92.0 percent extinction under early termination while
+defended runs reach 0.0 percent extinction and complete the full 300-step
+horizon. The CUSUM detector fires after the transient threshold breach
+rather than before it, so the success flag trips in both defense states
+while the population outcome diverges sharply. Detection timing, not
+detection, is the failure, and detector redesign is identified as future
+work.
+
+**Collapse as a distinct outcome measure.** Throughout the revalidation
+record, collapse denotes a relative drawdown: a run is collapsed when its
+final population falls below the larger of the minimum viable population
+and 65 percent of that run's own peak. Collapse is distinct from
+extinction, and the two must not be reported as one quantity. The
+distinction is not pedantic: Successor Contamination undefended shows
+21.67 percent extinction against 100 percent collapse, a 78 point gap, and
+Sub-Threshold Drift undefended shows 92 percent extinction against 100
+percent collapse. Defended extinction is 0.0 percent in every vector
+without exception. Defended collapse is nonzero in seven of the ten live
+vectors, and every defended collapse event in the dataset, eight runs in
+total, completed the full horizon with final populations between 218 and
+366; none is a near-extinction. The largest defended collapse rate is
+Ledger Compromise at 5.00 percent (2 of 40). Measurement Tampering shows
+defended collapse of 1.67 percent (1 of 60) against 0 of 60 undefended, a
+single stochastic drawdown carrying no statistical weight (Fisher exact
+p = 1.000) and stated here so the sign is not misread as meaningful.
+
+| Vector | Und. attack | Def. attack | Und. extinction | Def. extinction | Und. collapse | Def. collapse |
+| --- | --- | --- | --- | --- | --- | --- |
+| Sybil Capture | 100.0% | 0.0% | 100.0% | 0.0% | 100.0% | 0.0% (0/60) |
+| Measurement Tampering | 100.0% | 0.0% | 0.0% | 0.0% | 0.0% (0/60) | 1.67% (1/60) |
+| Ledger Compromise | 100.0% | 0.0% | 100.0% | 0.0% | 100.0% | 5.00% (2/40) |
+| Successor Contamination | 100.0% | 0.0% | 21.67% | 0.0% | 100.0% | 1.67% (1/60) |
+| Opaque Reasoning | 100.0% | 0.0% | 100.0% | 0.0% | 100.0% (60/60) | 0.0% (0/60) |
+| Bootstrap Subversion | 100.0% | 0.0% | 100.0% | 0.0% | 100.0% | 1.00% (1/100) |
+| Evaluator Collusion | 100.0% | 0.0% | 100.0% | 0.0% | 100.0% | 1.67% (1/60) |
+| Engineered Fragility | 100.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% (0/60) |
+| Sub-Threshold Drift | 100.0% | 100.0% | 92.0% | 0.0% | 100.0% | 1.00% (1/100) |
+| Biological Veto Capture | capture_rate 0.6129 | capture_rate 0.1197 | 0.0% (0/1500) | 0.0% (0/7200) | 0.0% (0/1500) | 0.01% (1/7200) |
+
+*Table VIII.9-1. Outcome measures by vector under the v2.0 revalidation.
+Attack success is the per-vector success metric; Sub-Threshold Drift uses
+the peak-constraint metric and carries the qualification in the text.
+Biological Veto Capture uses a continuous capture_rate rather than a
+binary flag. Collapse is the drawdown measure defined above. Biological
+Veto Capture arms have asymmetric n, per the sharded sweep design, and its
+binary-outcome cells are not comparable like-for-like against the
+equal-arm vectors.*
+
+**Scope of the adversarial claim.** This revalidation qualifies rather
+than withdraws the prior adversarial-coverage claim. The v2.0 claim is
+qualified support for layered defenses under the eight-axis adapter
+mechanism: eight vectors blocked outright against stronger undefended
+pressure than v1.x applied, one vector contained subject to institutional
+maintenance, one vector open on detection timing, one closed by
+architectural analysis, and two defended by argument as irreducible
+limitations. The Opaque Reasoning result covers adversarially obscured
+reasoning; a separately pre-registered diagnostic on reasoning that
+becomes opaque through honest growth is reported in Section
+VIII.10. All figures in this subsection are
+computed from the pinned evidence set at the repository tag
+attack-v2-revalidation-evidence, whose per-vector result files are
+enumerated in the accompanying manifest; the audit trail for the collapse
+figures, including the correction of an earlier machine-level counting
+defect, is preserved in the repository diagnostics.
+
+### VIII.10 Natural Opacity: A Pre-Registered Diagnostic
+
+The Opaque Reasoning result in Section VIII.9 characterizes adversarially
+obscured reasoning: an attacker deliberately conceals, and the defense
+blocks the attack completely. The harder question the framework's
+comprehension-gap limitation raises is different: whether governance holds
+when reasoning becomes opaque through honest growth rather than
+concealment. Two interpretations were originally posed. Either the
+verification architecture has a ceiling beyond which it degrades, or the
+framework's convergence forces keep the system within the comprehensible
+band so that the conditions requiring the defense never arise. This
+subsection reports the diagnostic built to discriminate between them, and
+reports its own instrument history, because that history is part of the
+result.
+
+**Instrument history.** The first version of this diagnostic was invalid
+by construction. Opacity was scripted as a fixed increment per timestep,
+so the governance speed limit could not affect it under any parameter
+setting, and the convergence term itself was inert in the tested regime:
+identical seeds at the minimum and maximum convergence settings produced
+bit-identical trajectories. The sweep produced 2,800 rows in which the
+quantity under test never varied, and it is preserved in the repository
+record as an instrument that could not fail. The rebuilt diagnostic
+couples opacity accumulation to the capability that the convergence
+forces actually constrain, and it was validated in both directions before
+use: positive-control configurations collapsed in 20 of 20 runs, and peak
+opacity responded monotonically to convergence strength in both defense
+arms, falling from 0.8922 to 0.6201 undefended and 0.9249 to 0.7270
+defended across the swept range.
+
+**Regime qualification.** Opening the opacity channel required lowering
+the runaway-boundary threshold from its default, so these results
+characterize governance near the runaway boundary, not at default
+calibration. At default calibration the convergence term is inert within
+a generation, because the frontier-to-bandwidth ratio sits far below the
+default threshold; that inertness is documented separately as a property
+of the substrate configuration, and no published claim depends on
+within-generation runaway pressure at default calibration. The
+qualification travels with every figure in this subsection.
+
+**Main grid.** Across 2,800 runs spanning the convergence and
+opacity-threshold grid, no run collapsed in either defense arm. Under the
+criteria fixed before the run, this outcome is inconclusive on the
+discrimination question: the gap is gateable, but a grid with no failures
+says nothing about whether the defense matters. The interpretation-one
+criteria were literally satisfied in this grid only because the defense
+effect was identically zero everywhere, a vacuous satisfaction the
+pre-registered criteria were written to exclude, and it is not claimed.
+The interpretation-two criterion also failed: opacity falls monotonically
+with convergence strength, but at the highest tested setting a bare
+majority of cells still exceeded the defense threshold.
+
+**Powered discriminating arm.** A second arm was therefore run at
+reproduction rates chosen to place undefended outcomes inside the
+informative band, with its analysis plan committed to the repository
+before any data were generated, verifiable in the commit history. The
+plan named extinction and final population as co-primary outcomes with
+collapse secondary, fixed minimum effects of interest for both, 20
+percentage points on extinction and 15 percent of the undefended mean on
+final population, sized cells at n=100 for 80 percent power against the
+binding of the two, and fixed the reading of every outcome in advance,
+including the reading of a null. Extinction proved untestable in the
+mandated range, a structural zero in both arms at all rungs; this was
+identified and its fallback reading registered before the run, and the
+co-primary reading fell to final population as the plan specified.
+
+| Reproduction rate | Undefended mean | Defended mean | Difference | 95 percent CI | p |
+| --- | --- | --- | --- | --- | --- |
+| 0.068 | 236.5 | 219.6 | -16.9 | [-37.2, +3.4] | 0.103 |
+| 0.070 | 332.8 | 331.9 | -0.9 | [-25.2, +23.3] | 0.941 |
+| 0.072 | 479.9 | 469.1 | -10.9 | [-39.4, +17.6] | 0.454 |
+| 0.074 | 655.0 | 658.1 | +3.1 | [-29.2, +35.3] | 0.853 |
+
+*Table VIII.10-1. Final population by arm, 100 runs per cell. The
+pre-specified minimum effect of interest is excluded by the confidence
+interval at all four rungs.*
+
+The result is a powered null. No rung approaches the minimum effect of
+interest, the confidence interval excludes it at four of four rungs, and
+no comparison reaches even suggestive significance in either direction.
+The secondary collapse outcome corroborates: no significant difference at
+any rung, with the point estimates running slightly against the defense.
+Per current evidence, the reasoning-transparency defense does not deliver
+an effect of the size that would matter, on population outcomes, against
+naturally widening opacity, in this configuration near the runaway
+boundary.
+
+**Interpretation and scope.** Read together with Section VIII.9, the two
+results are coherent rather than contradictory: a defense built to catch
+deliberate concealment catches deliberate concealment completely, and
+neither helps nor appears to be needed when opacity grows honestly. What
+gates natural opacity in this substrate is the convergence forces
+themselves, which is consistent with the productive-band interpretation
+without meeting its pre-registered criterion, so neither interpretation
+is claimed. The comprehension-gap question remains an acknowledged open
+limitation of the framework. Two measurement cautions attach. Peak
+opacity is censored at the recording ceiling of 0.95, and the defended
+arm reaches that ceiling in 76 percent of runs at the highest rung (18
+percent undefended), so magnitude comparisons in this subsection use the
+uncensored accumulator, with the censored measure reported only for
+threshold crossings, which it records correctly. And one mechanism-level
+observation is recorded in the repository as a named candidate finding
+without generalization: in this configuration, defense activity
+correlates with faster opacity accumulation through a traced
+system-health channel, the veto restraining the incumbent's constraint
+capture and thereby leaving the system more productive. It is a
+one-configuration observation, reproduced in direction only, and no
+architectural or welfare claim is made from it.
 
 ## IX. Related Work
  
@@ -10366,6 +10630,22 @@ capability ratio that the v1.x.2 manuscript documented as an open gap is closed:
 it is alpha-dependent, characterized by Pattern 1. Current home: Section VIII.5.
 
 **Patient defection continuation characterization (v2.0, July 2026).** The initial capability-constraint sweep characterized second succession as rare, at zero in 14 of 15 (alpha, growth) cells and 10 percent in the remaining cell. A 1,000-run bracket at alpha=0.40 established that this rarity was a property of the tested alpha floor rather than of the architecture: below the characterized Pattern 1 alpha range, second succession is reliable. The claim is restated from rare continuation to bounded generational depth, which the bracket supports at a weaker runaway penalty than any previously tested. The associated statement that no tested cell exceeded active capability 3.0 is withdrawn as an artifact of the original growth grid. Current home: Section VIII.8.
+
+**v2.0 revalidation reporting.** The attack-vector revalidation, previously
+summarized inside the COP stress-test discussion, is given standing as Section
+VIII.9. In the course of preparing it, defended collapse figures for three
+vectors previously recorded as 0.0 percent were corrected to 1.00, 1.67, and
+1.00 percent after a machine-level counting defect was identified and the
+figures were recomputed from the pinned evidence set; extinction figures were
+unaffected. A prior claim that Opaque Reasoning collapse rates were symmetric
+across defense states was withdrawn as unsupported by any completed run set.
+
+**Natural-opacity diagnostic.** Section VIII.10 reports the comprehension-gap
+diagnostic, including the invalidation of its first instrument, the rebuilt
+instrument's bidirectional validation, and a powered null on the transparency
+defense against naturally growing opacity, from an analysis plan committed
+before data generation. This is the program's first fully pre-registered
+experiment.
 
 ### The methodological pattern
 
