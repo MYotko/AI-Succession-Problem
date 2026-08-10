@@ -13,6 +13,7 @@ Gates, each pass or fail:
   5. every cell of every source table present in the extracted text, with the
      widest table checked cell by cell
   6. page count recorded
+  7. hyphens extract as U+002D, with no ToUnicode entry mapping to U+2011
 
 Exit code 0 if every gate passes, 1 otherwise.
 """
@@ -44,6 +45,27 @@ def extract(pdf_path):
         return n
 
     return pages, count_outline(outline) if outline else 0
+
+
+def cmap_hyphen_to_2011(pdf_path):
+    """Count ToUnicode entries mapping any glyph to U+2011, across all fonts."""
+    from pypdf import PdfReader
+    reader = PdfReader(str(pdf_path))
+    total, seen = 0, set()
+    for page in reader.pages:
+        fonts = (page.get("/Resources", {}) or {}).get("/Font", {}) or {}
+        for key in list(fonts.keys()):
+            obj = fonts[key].get_object()
+            tu = obj.get("/ToUnicode")
+            if tu is None:
+                continue
+            stream = tu.get_object()
+            if id(stream) in seen:
+                continue
+            seen.add(id(stream))
+            data = stream.get_data().decode("latin-1", "replace")
+            total += len(re.findall(r"<[0-9a-fA-F]{2,4}>\s*<2011>", data))
+    return total
 
 
 def source_tables(text):
@@ -152,6 +174,20 @@ def main():
     # Gate 6
     results.append(("6 page count recorded", True, f"{len(pages)} pages"))
 
+    #/ Gate 7, permanent. Some fonts map their hyphen glyph to U+2011 in the
+    #/ ToUnicode CMap, which leaves the page looking correct while breaking
+    #/ in-reader search and copy-paste. Cambria did exactly that, putting 1,277
+    #/ non-breaking hyphens into the extracted text. The gate checks both the
+    #/ extracted text and the embedded CMaps, since the CMap is the cause and
+    #/ the text is the symptom.
+    ascii_h = text.count("-")
+    nb = text.count("\u2011")
+    cmap_2011 = cmap_hyphen_to_2011(pdf)
+    ok7 = ascii_h > 0 and nb == 0 and cmap_2011 == 0
+    results.append(("7 ascii hyphens", ok7,
+                    f"{ascii_h} ASCII, {nb} U+2011 in text, "
+                    f"{cmap_2011} CMap entries mapping to U+2011"))
+
     print("GATES")
     for name, ok, note in results:
         print(f"  {'PASS' if ok else 'FAIL'}  {name:28} {note}")
@@ -167,8 +203,9 @@ def main():
                       (0x2011, "non-breaking hyphen"), (0x2013, "en dash"),
                       (0x2014, "em dash"), (0x2212, "minus sign")):
         print(f"  U+{cp:04X} {label:22} {text.count(chr(cp)):>6}")
-    print("  note: Cambria maps its hyphen glyph to U+2011, so search and")
-    print("  copy-paste return non-breaking hyphens. Rendering is unaffected.")
+    print("  note: gate 7 requires ASCII hyphens. Cambria failed it by mapping")
+    print("  its hyphen glyph to U+2011, which broke in-reader search while")
+    print("  leaving the page looking correct. DejaVu Serif passes.")
 
     # Glyph spot-check: characters known to be at risk in bold contexts.
     print("\nGLYPH SPOT-CHECK")

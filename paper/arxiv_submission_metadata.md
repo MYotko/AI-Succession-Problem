@@ -2,36 +2,52 @@
 
 Date prepared: 2026-08-09
 Source document: `docs/The Lineage Imperative v2.0.md`
-Build status: **built, 77 pages, all six QA gates pass.** Toolchain is pandoc
-3.10.1 with MiKTeX-XeTeX 4.16. Build script `build_arxiv_pdf.ps1`, QA script
-`qa_arxiv_pdf.py`. The PDF is written outside the repository, by default to
+Build status: **built, 87 pages, all seven QA gates pass.** Toolchain is pandoc
+3.10.1 with MiKTeX-XeTeX 4.16, main font DejaVu Serif, math font dejavu-math.
+Build script `build_arxiv_pdf.ps1`, QA script `qa_arxiv_pdf.py`. The PDF is
+written outside the repository, by default to
 `%USERPROFILE%\Documents\arxiv-build\`, since binaries stay out of version
 control.
 
 The submission itself is the operator's act. This file is preparation only.
 
-## Known characteristic: hyphens extract as U+2011
+## Font selection, decided by measurement
 
-Cambria's ToUnicode CMap maps its hyphen glyph to U+2011 non-breaking hyphen
-rather than U+002D. Verified in the PDF itself, not merely in one extractor: the
-embedded font's CMap contains a mapping to U+2011 and none to U+002D. Extracted
-text carries 1,277 non-breaking hyphens and zero ASCII hyphens.
+Three candidates were tested against two gates before any full build: every one
+of the twelve non-ASCII characters must render, and hyphens must extract as
+U+002D with no U+2011 in the PDF ToUnicode CMap.
 
-**Rendering is unaffected.** The pages look correct. What is affected is text
-extraction: a reader searching for "Sub-Threshold" with a plain hyphen will not
-match, and copy-paste yields U+2011.
+| Candidate | Characters | Hyphens | Outcome |
+| --- | --- | --- | --- |
+| **DejaVu Serif** | **pass**, all twelve | **pass**, zero U+2011 | **selected** |
+| STIX Two Text | fail, missing the arrow and the relations less-than-or-equal, greater-than-or-equal, element-of, and approximately-equal | pass | rejected |
+| Cambria | pass | fail, 1,277 U+2011 in extracted text | rejected |
+| Latin Modern, engine default | fail, drops nine of twelve | pass | rejected |
 
-The alternative was measured rather than assumed. Building with the engine
-default font, Latin Modern, restores ASCII hyphens but drops nine of the twelve
-required characters entirely: phi, alpha, beta, both subscript digits, and the
-relations less-than-or-equal, greater-than-or-equal, element-of, and
-approximately-equal. Characters silently vanishing from the page is a worse
-defect than a codepoint substitution in the text layer, so Cambria was kept.
+STIX Two Text fails because those relations live in STIX Two Math rather than
+the text face, and the paper uses them as literal text characters rather than
+inside math mode.
 
-If the operator prefers ASCII hyphens, the fix is to install a serif font with
-both full coverage and a correct hyphen mapping, then set `mainfont` in the
-build script. DejaVu Serif was the original choice for exactly this reason but
-is not installed on the build machine.
+DejaVu Serif and its math companion come from MiKTeX packages `dejavu`,
+`dejavu-math`, and are selected in the preamble by explicit path, because
+MiKTeX fonts are not registered as system fonts and family-name lookup fails
+for them.
+
+The font change cost ten pages, 77 to 87, since DejaVu Serif is wider than
+Cambria. That is the price of correct text extraction and it was accepted.
+
+## Known imperfection: two dropped math glyphs
+
+The build logs two missing-character warnings, for U+1D6F9 and U+1D6E9, the
+**mathematical italic capital** Psi and Theta. These are the bold math variants,
+which neither dejavu-math nor Cambria Math provides. **The warnings are not a
+regression from the font change: they appeared identically under Cambria.**
+
+Scope, measured: 18 of 19 Psi and 32 of 33 Theta from the source appear in the
+extracted text, and the output contains zero U+1D6F9 and zero U+1D6E9. Both
+bold-heading instances were checked individually and render correctly, on page
+12 for Psi and page 13 for Theta. The two dropped instances could not be pinned
+to a page with certainty and warrant an operator glance.
 
 ## Title
 
@@ -55,10 +71,10 @@ arXiv.org perpetual non-exclusive license
 
 > Working paper. Code, simulation data, and the full validation record are
 > available at https://github.com/MYotko/AI-Succession-Problem (evidence tag
-> attack-v2-revalidation-evidence). 77 pages.
+> attack-v2-revalidation-evidence). 87 pages.
 
-Measured from the built PDF, not estimated. The pre-build estimate of 70 to 90
-pages proved accurate.
+Measured from the built PDF, not estimated. The count rose from 77 to 87 when
+the main font changed from Cambria to the wider DejaVu Serif.
 
 ## Abstract field
 
@@ -105,11 +121,12 @@ The build font must cover all of them or they will render as mojibake.
 
 ## Pre-upload checklist
 
-- [x] PDF built with a toolchain that typesets math (pandoc 3.10.1, MiKTeX-XeTeX 4.16)
-- [x] Page count measured and substituted into the Comments field (77)
+- [x] PDF built with a toolchain that typesets math (pandoc 3.10.1, MiKTeX-XeTeX 4.16, DejaVu Serif)
+- [x] Page count measured and substituted into the Comments field (87)
 - [x] Extracted PDF text searched for replacement characters: 0
 - [x] Extracted PDF text searched for em-dashes: 0
-- [x] Table VIII.9-1 confirmed not overflowing: rightmost glyph 429.2 pt against a 540.0 pt right edge, all 77 cells present
+- [x] Table VIII.9-1 confirmed not overflowing on pages 31, 61, 62: rightmost glyphs 461.0, 227.1, 411.5 pt against a 540.0 pt right edge, all 77 cells present
 - [x] PDF bookmarks present for all 107 headings: 107 of 107
 - [x] Abstract confirmed at 1,893 characters, to be pasted as a single paragraph
+- [x] Hyphens extract as U+002D: 1,385 ASCII, zero U+2011 in text and CMap
 - [ ] Operator eyeball of the pages listed in the build report

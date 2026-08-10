@@ -45,6 +45,9 @@ if (-not (Get-Command $Engine -ErrorAction SilentlyContinue)) {
     throw "PDF engine '$Engine' not found on PATH."
 }
 
+# MiKTeX font tree, used for the path-based font selection below.
+$MiktexFontRoot = "$env:LOCALAPPDATA\Programs\MiKTeX\fonts"
+
 if (-not (Test-Path $OutDir)) { New-Item -ItemType Directory -Force $OutDir | Out-Null }
 $stamp = Get-Date -Format "yyyyMMdd"
 $out = Join-Path $OutDir "lineage_imperative_v2_$stamp.pdf"
@@ -74,6 +77,35 @@ $header = @'
 % sequence and the build fails with pandoc exit 43.
 \PassOptionsToPackage{bookmarksdepth=4}{hyperref}
 '@
+
+# Font selection, appended to the preamble. See the note above the pandoc
+# arguments for why DejaVu was chosen and by what measurement.
+if ($Engine -in @("xelatex", "lualatex")) {
+    $dv = ($MiktexFontRoot + "\truetype\public\dejavu") -replace "\\", "/"
+    $dvMath = ($MiktexFontRoot + "\opentype\public\dejavu-math") -replace "\\", "/"
+    foreach ($p in @("$dv/DejaVuSerif.ttf", "$dvMath/dejavu-math.otf")) {
+        if (-not (Test-Path $p)) {
+            throw "required font missing: $p. Install with: mpm --install=dejavu; mpm --install=dejavu-math"
+        }
+    }
+    $header += @"
+
+\usepackage{fontspec}
+\setmainfont{DejaVuSerif}[
+  Path = $dv/ ,
+  Extension = .ttf,
+  UprightFont = *,
+  BoldFont = *-Bold,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic ]
+\setmonofont{DejaVuSansMono}[
+  Path = $dv/ ,
+  Extension = .ttf,
+  Scale = MatchLowercase ]
+\usepackage{unicode-math}
+\setmathfont{dejavu-math.otf}[ Path = $dvMath/ ]
+"@
+}
 if ($LandscapeWideTable) {
     $header += @'
 
@@ -101,20 +133,22 @@ $pandocArgs = @(
     "-M", "author=Matthew Yotko"
 )
 
-# Unicode engines need a font covering the twelve non-ASCII characters the
-# source uses, including the arrow and the set and order relations.
+# Fonts are selected in the preamble by explicit path rather than by family
+# name, because these come from MiKTeX packages and are not registered as
+# system fonts. Family-name lookup fails for them.
 #
-# Cambria was chosen by measurement, not preference. Coverage was tested
-# character by character against the installed fonts: Cambria and Segoe UI
-# Symbol are the only ones with full coverage. Times, Georgia, Segoe UI,
-# Calibri, and Consolas all lack U+2208 element-of, and Arial additionally
-# lacks the subscript digits. DejaVu, the first choice, is not installed on
-# this machine at all. Cambria Math is the matching OpenType math font.
-if ($Engine -in @("xelatex", "lualatex")) {
-    $pandocArgs += @("-V", "mainfont=Cambria",
-                     "-V", "mathfont=Cambria Math",
-                     "-V", "monofont=Consolas")
-}
+# DejaVu Serif was chosen by measurement against two gates. Gate one, all twelve
+# non-ASCII characters the paper uses must render: DejaVu Serif covers them all.
+# Gate two, hyphens must extract as U+002D: DejaVu produces zero U+2011 in the
+# ToUnicode CMap.
+#
+# The candidates that lost. Cambria passes gate one but fails gate two: it maps
+# its hyphen glyph to U+2011, which put 1,277 non-breaking hyphens into the
+# extracted text and broke in-reader search. STIX Two Text passes gate two
+# cleanly but fails gate one, missing the arrow and the relations
+# less-than-or-equal, greater-than-or-equal, element-of, and approximately-equal,
+# because those live in STIX Two Math rather than the text face. Latin Modern,
+# the engine default, passes gate two but drops nine of the twelve characters.
 
 Write-Host "building with $Engine ..."
 # Remove any prior artifact first. Without this a failed build leaves the
