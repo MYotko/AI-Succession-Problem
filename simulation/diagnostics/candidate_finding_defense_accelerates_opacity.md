@@ -81,6 +81,16 @@ above." Censoring rises steeply across the powered arm's rungs, from 0.0 percent
 at rr=0.068 to 47.0 percent at rr=0.074, and at the top rung it understates the
 defended mean by 0.1695 (accumulator 1.1011 against censored 0.9316).
 
+**Clarification, 2026-08-09.** The rung figures in the sentence above are
+**pooled across both defense arms**. At rr=0.074 the pooled rate is 47.0 percent,
+94 of 200 runs, while by arm it is **defended 76.0 percent** (76 of 100) and
+**undefended 18.0 percent** (18 of 100). The pooled framing understates
+censoring in the defended arm, which is the arm this caution is about, by 29
+points. Full picture by rung, defended and pooled: rr=0.068, 0.0 and 0.0
+percent; rr=0.070, 3.0 and 1.5 percent; rr=0.072, 31.0 and 16.5 percent;
+rr=0.074, 76.0 and 47.0 percent. The original wording is retained above per the
+dated-artifact policy; this clarification governs.
+
 Any cross-state opacity comparison must use `opacity_accum_final`. Using
 `max_opacity_reached` would have hidden most of this effect at exactly the rungs
 where it is largest.

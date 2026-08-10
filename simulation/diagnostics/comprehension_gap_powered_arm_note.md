@@ -298,6 +298,14 @@ reasoning becomes hard to follow for honest reasons.
    `opacity_accum_final`. See
    `candidate_finding_defense_accelerates_opacity.md`.
 
+   **Clarification, 2026-08-09.** The 47.0 percent figure above is **pooled
+   across both defense arms**, 94 of 200 runs. It is not the defended arm's
+   rate. By arm at rr=0.074: **defended 76.0 percent** (76 of 100),
+   **undefended 18.0 percent** (18 of 100). The original sentence did not label
+   the figure, and a downstream draft read it as the defended arm, which
+   understated censoring in that arm by 29 points. The original wording is
+   retained above per the dated-artifact policy; this clarification governs.
+
 ## R6 Stopping rule, honored
 
 > This is the final discriminating run for the essay correction; results are
