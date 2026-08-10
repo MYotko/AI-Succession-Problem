@@ -1,8 +1,8 @@
 # Paper Drafts Snapshot
 
-Generated: 2026-08-10T03:17:46Z
+Generated: 2026-08-10T03:32:15Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 720e0b6
+Commit: 870732c
 Branch: main
 Category: paper_drafts
 
@@ -11,7 +11,7 @@ Category: paper_drafts
 | File | Lines | Bytes |
 |------|-------|-------|
 | paper\appendix_C_draft.md | 161 | 10431 |
-| paper\arxiv_submission_metadata.md | 132 | 7513 |
+| paper\arxiv_submission_metadata.md | 157 | 8793 |
 | paper\paper_closeout_application_record.md | 157 | 8216 |
 | paper\paper_v2_working.md | 2792 | 254186 |
 | paper\phase3_verification_report.md | 64 | 3676 |
@@ -19,7 +19,7 @@ Category: paper_drafts
 | paper\VIII_10_application_record.md | 124 | 5820 |
 | paper\VIII_9_application_record.md | 137 | 9411 |
 
-Total: 8 files, 4001 lines, 325368 bytes
+Total: 8 files, 4026 lines, 326648 bytes
 
 ---
 ==========================================
@@ -231,18 +231,42 @@ for them.
 The font change cost ten pages, 77 to 87, since DejaVu Serif is wider than
 Cambria. That is the price of correct text extraction and it was accepted.
 
-## Known imperfection: two dropped math glyphs
+## Resolved: the two dropped math glyphs
 
-The build logs two missing-character warnings, for U+1D6F9 and U+1D6E9, the
-**mathematical italic capital** Psi and Theta. These are the bold math variants,
-which neither dejavu-math nor Cambria Math provides. **The warnings are not a
-regression from the font change: they appeared identically under Cambria.**
+**The build now emits zero missing-character warnings and the PDF contains zero
+dropped glyphs.** Recorded here because the diagnosis was not obvious and the
+first attempted fix was wrong.
 
-Scope, measured: 18 of 19 Psi and 32 of 33 Theta from the source appear in the
-extracted text, and the output contains zero U+1D6F9 and zero U+1D6E9. Both
-bold-heading instances were checked individually and render correctly, on page
-12 for Psi and page 13 for Theta. The two dropped instances could not be pinned
-to a page with certainty and warrant an operator glance.
+Two headings use bold math, at source lines 2559 and 2577:
+
+```
+### 3. $\mathbf{\Psi}_{\mathbf{inst}}\left( \mathbf{t} \right)$; Institutional responsiveness
+### 4. $\mathbf{\Theta}_{\mathbf{tech}}\left( \mathbf{t} \right)$; Transfer fidelity
+```
+
+Under legacy semantics `\mathbf` selects the upright bold **text** font even
+inside math mode. So these requested U+1D6F9 and U+1D6E9, the mathematical
+italic capitals, from DejaVuSerif-Bold, which contains neither. Four glyphs were
+dropped as notdef marks: in the table of contents on page 3, and in the body
+headings on pages 82 and 83.
+
+The first fix attempted was a range-restricted math-font fallback to STIX Two
+Math over U+1D6E2 to U+1D6FA. **It did not work and was reverted.** The reason
+is instructive: the request never reaches the math font at all, so no
+`\setmathfont` range can intercept it. It also had a side effect, silently
+re-rendering the ordinary math Greek capitals through STIX.
+
+The working fix is `\AtBeginDocument{\let\mathbf\symbf}`. `\symbf` is
+unicode-math's math-font equivalent of `\mathbf`, and it maps Greek capitals to
+the bold block at U+1D6A8, which dejavu-math does provide. The
+`\AtBeginDocument` wrapper is load-bearing: unicode-math redefines `\mathbf`
+itself at begin-document, so a bare `\let` in the preamble is overwritten and
+the glyphs stay missing. Both forms were measured; only the wrapped one works.
+
+After the fix the two headings render as U+1D6BF bold capital Psi and U+1D6AF
+bold capital Theta, which is the semantically correct bold form. Full accounting:
+19 of 19 Psi and 33 of 33 Theta source instances render, zero notdef glyphs, and
+zero U+1D6F9 or U+1D6E9 anywhere. Page count is unchanged at 87.
 
 ## Title
 
@@ -324,6 +348,7 @@ The build font must cover all of them or they will render as mojibake.
 - [x] PDF bookmarks present for all 107 headings: 107 of 107
 - [x] Abstract confirmed at 1,893 characters, to be pasted as a single paragraph
 - [x] Hyphens extract as U+002D: 1,385 ASCII, zero U+2011 in text and CMap
+- [x] Zero missing-glyph warnings; 19 of 19 Psi and 33 of 33 Theta render
 - [ ] Operator eyeball of the pages listed in the build report
 
 

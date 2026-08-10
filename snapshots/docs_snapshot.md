@@ -1,8 +1,8 @@
 # Docs Snapshot
 
-Generated: 2026-08-10T03:17:46Z
+Generated: 2026-08-10T03:32:15Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 720e0b6
+Commit: 870732c
 Branch: main
 Category: docs
 
