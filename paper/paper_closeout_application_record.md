@@ -60,20 +60,18 @@ Resulting conclusion paragraph: 1,500 characters, identical across both surfaces
 | 1 | Mirror byte-identity of both edited regions | **PASS.** Abstract paragraph identical at L38 in both, 2,564 chars. Conclusion paragraph identical at L2447 in both, 1,500 chars. |
 | 2 | Em-dash grep, entirety of both surfaces | **PASS.** Zero em-dashes in either file, not merely in added lines. |
 | 3 | Scenario-numbering checker | **PASS.** Every validated citation agrees with the catalog. |
-| 4 | Cross-reference sweep | **PASS with one asymmetry explained below.** All Section VIII.9 and VIII.10 references resolve to real headings. No references to the superseded draft file. Outline and paper subsection sets match exactly at VIII.1 through VIII.10. |
+| 4 | Cross-reference sweep | **PASS.** All Section VIII.9 and VIII.10 references resolve to real headings. No references to the superseded draft file. Outline and paper subsection sets match exactly at VIII.1 through VIII.10. The earlier asymmetry is resolved; see below. |
 | 5 | "sole citable source" | **PASS.** Zero occurrences in either assembled surface. Application records exempt per standing ruling. |
-| 6 | Appendix C carries both version entries | **FAIL for `paper/paper_v2_working.md`.** See section 5. |
+| 6 | Appendix C carries both version entries | **PASS**, after the remediation in section 5. |
 
 ### Check 4 detail
 
 `Section VIII.9`: 4 references in each surface, at L645, L1994, L2163, L2248,
-identical in both. Heading present in both.
+identical in both.
 
-`Section VIII.10`: 1 reference in `paper_v2_working.md` and 2 in the v2.0 doc.
-The asymmetry sits outside Section VIII and is fully explained by the Appendix C
-gap in section 5: the v2.0 doc's extra reference is inside its Appendix C
-version entry at L2766, which `paper_v2_working.md` does not carry. Section VIII
-itself is identical between the surfaces.
+`Section VIII.10`: **2 references in each surface**, matched. The earlier
+asymmetry of 1 against 2 was a symptom of the Appendix C gap, not a separate
+defect, and it closed when that gap closed.
 
 ## 5. Anomaly: Appendix C diverges between the two assembled surfaces
 
@@ -98,21 +96,53 @@ applied literally to those two targets. Neither map anticipated that
 time covered the Section VIII and COP regions but not Appendix C. The gap is a
 miss in those earlier applications, surfaced here by check 6.
 
-**Not fixed.** The close-out is specified read-only, and which surface is
-authoritative for packaging is an operator decision. Recorded, not resolved.
+### Remediation, applied on operator ruling
+
+The 16 lines were copied byte-for-byte out of
+`docs/The Lineage Imperative v2.0.md` and inserted at the same relative position
+in `paper/paper_v2_working.md`, immediately before `### The methodological
+pattern`. Nothing was retyped or reflowed. The diff between the two Appendix C
+blocks was confirmed beforehand to be a single pure insert opcode with no lines
+present in the paper but absent from the mirror, so the copy could not lose
+content. The blocks are now identical.
+
+### Whole-file byte-identity, the new standing invariant
+
+After remediation, the two assembled surfaces were compared as whole files
+rather than by region:
+
+| Surface | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `paper/paper_v2_working.md` | 254,186 | `d062dc2a0052d52ac0ea9ad499cd2264dd0becb2536707708da6e84196aec230` |
+| `docs/The Lineage Imperative v2.0.md` | 254,167 | `91bd1cac2f149df6abc16eaa72ad0d86cf957d6ced7252f3e35f1e1452ba7d7b` |
+
+Line counts are equal at 2,793 each. The unified diff is **one hunk of one
+line**, at line 5:
+
+```
+paper   **Version:** 2.0 (working revision) - 2026
+mirror  **Version:** 2.0 - 2026
+```
+
+That is the deliberate label distinguishing the working revision from the
+assembled document, and it accounts for the entire 19-byte size difference. No
+other difference exists anywhere in either file.
+
+Whole-file byte-identity, with that single enumerated exception, is now the
+standing invariant and supersedes region-scoped mirror checks. The rule is
+recorded in `simulation/diagnostics/attack_vector_revalidation_audit.md`.
+Region checks are what let this defect through: they covered Section VIII and
+the COP region and never looked at Appendix C, so the surfaces disagreed for two
+commits with nothing failing.
 
 ## 6. arXiv packaging blockers
 
-One blocker and no others.
+**None.** The single blocker identified in the first pass, the Appendix C
+divergence, was remediated on operator ruling and is closed. Either assembled
+surface can now serve as the packaging source, since they are byte-identical
+apart from the version label.
 
-1. **Appendix C divergence between the two assembled surfaces**, section 5. If
-   `paper_v2_working.md` is the packaging source, the submitted paper's version
-   history would omit both the VIII.9 collapse-correction entry and the VIII.10
-   pre-registration entry, while Section VIII of the same document reports both.
-   That is an internal inconsistency in the submitted artifact, not merely a
-   repository untidiness. A three-line append to `paper_v2_working.md` closes it.
-
-Cleared, not blockers:
+Cleared:
 
 - Unresolved references: none. Every Section VIII.9 and VIII.10 reference
   resolves. No bracket placeholders remain anywhere in Section VIII. No dangling
