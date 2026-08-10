@@ -174,6 +174,10 @@ New consolidated section, ~20-28 pages. Subsections and the findings each owns
   validation-level limitations); II Scope.
 - Source: Part X.7.
 
+### VIII.8 Cross-generational defection (new)
+
+- Source: Part X.8; `patient_defection_integration_analysis.md`.
+
 ### VIII.9 Adversarial revalidation under the v2.0 substrate (new)
 
 Thirteen-vector adversarial set rerun against the v2 action substrate.
