@@ -1,8 +1,8 @@
 # Paper Drafts Snapshot
 
-Generated: 2026-08-10T01:43:57Z
+Generated: 2026-08-10T02:10:48Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 0db8be0
+Commit: 47d79af
 Branch: main
 Category: paper_drafts
 
@@ -11,13 +11,14 @@ Category: paper_drafts
 | File | Lines | Bytes |
 |------|-------|-------|
 | paper\appendix_C_draft.md | 161 | 10431 |
-| paper\paper_v2_working.md | 2776 | 251904 |
+| paper\paper_closeout_application_record.md | 157 | 8216 |
+| paper\paper_v2_working.md | 2792 | 254186 |
 | paper\phase3_verification_report.md | 64 | 3676 |
 | paper\section_VIII_draft.md | 434 | 26115 |
 | paper\VIII_10_application_record.md | 124 | 5820 |
 | paper\VIII_9_application_record.md | 137 | 9411 |
 
-Total: 6 files, 3696 lines, 307357 bytes
+Total: 7 files, 3869 lines, 317855 bytes
 
 ---
 ==========================================
@@ -188,6 +189,169 @@ update if further investigation establishes a better account.
 
 
 ==========================================
+FILE: paper\paper_closeout_application_record.md
+==========================================
+
+# Application Record: Abstract and Conclusion Deltas, Whole-Paper Close-Out
+
+Date: 2026-08-09
+Branch: `paper-closeout`, off `main` at `96010a1`
+Surfaces edited: `paper/paper_v2_working.md`, `docs/The Lineage Imperative v2.0.md`
+
+## 1. Anchor confirmation
+
+Both anchor sentences matched exactly, one occurrence per surface, verified in
+Python after whitespace normalization. Neither STOP condition was triggered. Both
+target paragraphs are single unwrapped lines, so each insertion joins the
+existing paragraph rather than starting a new one.
+
+| Anchor | paper_v2_working.md | v2.0 doc |
+| --- | --- | --- |
+| Edit 1, abstract, "A patient cross-generational defection..." | L38, 1 match | L38, 1 match |
+| Edit 2, conclusion, "The architecture's behavior has now been characterized at scale..." | L2447, 1 match | L2447, 1 match |
+| "Across approximately 70,000 agent-based simulation runs" | 1 occurrence | 1 occurrence |
+
+## 2. Edit 1, abstract
+
+Inserted immediately after the anchor sentence, in both surfaces:
+
+> The thirteen-vector adversarial stress test is revalidated on the current
+> substrate: eight of ten live vectors are blocked outright under stronger attack
+> pressure than the earlier substrate applied, biological veto capture is
+> contained subject to institutional maintenance, and sub-threshold drift remains
+> open, with the defense preventing catastrophic outcome but firing only after the
+> transient breach it is meant to anticipate. And the program's first fully
+> pre-registered experiment reports its null honestly: against reasoning that
+> becomes opaque through honest growth rather than concealment, the transparency
+> defense produces no detectable effect on population outcomes at any size that
+> would matter, leaving the comprehension gap precisely posed and open.
+
+Run count changed in the same paragraph:
+
+- **Before:** "Across approximately 70,000 agent-based simulation runs"
+- **After:** "Across more than 70,000 agent-based simulation runs"
+
+Resulting abstract paragraph: 2,564 characters, identical across both surfaces.
+
+## 3. Edit 2, conclusion
+
+Inserted immediately after the anchor sentence, in both surfaces:
+
+> The adversarial stress test is revalidated on the current substrate, with eight
+> of ten live vectors blocked outright, one contained subject to institutional
+> maintenance, and one open on detection timing rather than detection. And the
+> framework's first fully pre-registered experiment returned a powered null and
+> kept it: a defense built to catch concealment catches concealment completely,
+> and neither helps nor appears needed when opacity grows honestly, so the
+> comprehension gap stays open, named, and testable.
+
+Resulting conclusion paragraph: 1,500 characters, identical across both surfaces.
+
+## 4. Close-out verification results
+
+| # | Check | Result |
+| --- | --- | --- |
+| 1 | Mirror byte-identity of both edited regions | **PASS.** Abstract paragraph identical at L38 in both, 2,564 chars. Conclusion paragraph identical at L2447 in both, 1,500 chars. |
+| 2 | Em-dash grep, entirety of both surfaces | **PASS.** Zero em-dashes in either file, not merely in added lines. |
+| 3 | Scenario-numbering checker | **PASS.** Every validated citation agrees with the catalog. |
+| 4 | Cross-reference sweep | **PASS.** All Section VIII.9 and VIII.10 references resolve to real headings. No references to the superseded draft file. Outline and paper subsection sets match exactly at VIII.1 through VIII.10. The earlier asymmetry is resolved; see below. |
+| 5 | "sole citable source" | **PASS.** Zero occurrences in either assembled surface. Application records exempt per standing ruling. |
+| 6 | Appendix C carries both version entries | **PASS**, after the remediation in section 5. |
+
+### Check 4 detail
+
+`Section VIII.9`: 4 references in each surface, at L645, L1994, L2163, L2248,
+identical in both.
+
+`Section VIII.10`: **2 references in each surface**, matched. The earlier
+asymmetry of 1 against 2 was a symptom of the Appendix C gap, not a separate
+defect, and it closed when that gap closed.
+
+## 5. Anomaly: Appendix C diverges between the two assembled surfaces
+
+**`paper/paper_v2_working.md` also assembles Appendix C, and it did not receive
+the two version-history entries applied earlier.**
+
+| Surface | Appendix C | VIII.9 entry | VIII.10 entry |
+| --- | --- | --- | --- |
+| `paper/appendix_C_draft.md` | standalone, h1 and h2 headings | present | present |
+| `docs/The Lineage Imperative v2.0.md` | assembled, L2631 to L2793, 163 lines | present | present |
+| `paper/paper_v2_working.md` | assembled, L2631 to L2777, 147 lines | **absent** | **absent** |
+
+The two assembled blocks differ by exactly the 16 lines of the two entries, and
+by nothing else: 16 lines present only in the v2.0 doc, zero present only in
+`paper_v2_working.md`. They were byte-identical before the earlier applications.
+
+Cause: the VIII.9 edit map named `paper/appendix_C_draft.md` and "Appendix C's
+location in the assembled `docs/The Lineage Imperative v2.0.md` if it is
+assembled there," and the VIII.10 edit map named no files at all. Both were
+applied literally to those two targets. Neither map anticipated that
+`paper_v2_working.md` assembles Appendix C as well, and the mirror check at the
+time covered the Section VIII and COP regions but not Appendix C. The gap is a
+miss in those earlier applications, surfaced here by check 6.
+
+### Remediation, applied on operator ruling
+
+The 16 lines were copied byte-for-byte out of
+`docs/The Lineage Imperative v2.0.md` and inserted at the same relative position
+in `paper/paper_v2_working.md`, immediately before `### The methodological
+pattern`. Nothing was retyped or reflowed. The diff between the two Appendix C
+blocks was confirmed beforehand to be a single pure insert opcode with no lines
+present in the paper but absent from the mirror, so the copy could not lose
+content. The blocks are now identical.
+
+### Whole-file byte-identity, the new standing invariant
+
+After remediation, the two assembled surfaces were compared as whole files
+rather than by region:
+
+| Surface | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `paper/paper_v2_working.md` | 254,186 | `d062dc2a0052d52ac0ea9ad499cd2264dd0becb2536707708da6e84196aec230` |
+| `docs/The Lineage Imperative v2.0.md` | 254,167 | `91bd1cac2f149df6abc16eaa72ad0d86cf957d6ced7252f3e35f1e1452ba7d7b` |
+
+Line counts are equal at 2,793 each. The unified diff is **one hunk of one
+line**, at line 5:
+
+```
+paper   **Version:** 2.0 (working revision) - 2026
+mirror  **Version:** 2.0 - 2026
+```
+
+That is the deliberate label distinguishing the working revision from the
+assembled document, and it accounts for the entire 19-byte size difference. No
+other difference exists anywhere in either file.
+
+Whole-file byte-identity, with that single enumerated exception, is now the
+standing invariant and supersedes region-scoped mirror checks. The rule is
+recorded in `simulation/diagnostics/attack_vector_revalidation_audit.md`.
+Region checks are what let this defect through: they covered Section VIII and
+the COP region and never looked at Appendix C, so the surfaces disagreed for two
+commits with nothing failing.
+
+## 6. arXiv packaging blockers
+
+**None.** The single blocker identified in the first pass, the Appendix C
+divergence, was remediated on operator ruling and is closed. Either assembled
+surface can now serve as the packaging source, since they are byte-identical
+apart from the version label.
+
+Cleared:
+
+- Unresolved references: none. Every Section VIII.9 and VIII.10 reference
+  resolves. No bracket placeholders remain anywhere in Section VIII. No dangling
+  reference to the superseded `section_VIII_draft.md`.
+- Rendering: Table VIII.9-1 and Table VIII.10-1 have consistent cell counts in
+  both surfaces. Zero em-dashes anywhere in either file, so no character-encoding
+  risk from that quarter.
+- Residual editorial: none found. The outline matches the paper's subsection set
+  exactly. Internal working language is absent from the paper surfaces.
+- `paper/section_VIII_draft.md` carries its dated supersession notice and is not
+  referenced from either assembled surface, so it can be excluded from packaging
+  without leaving a dangling pointer.
+
+
+==========================================
 FILE: paper\paper_v2_working.md
 ==========================================
 
@@ -228,7 +392,7 @@ I present a framework for the architecture that could survive such a filter. It 
 
 The ethics are not inputs. They are outputs. The math does not describe what we *should* do. It describes what a civilization seeking durable continuity would likely need to do; or approximate closely; within the assumptions of this model.
 
-This revision adds an empirical validation arc to the architectural derivation. Across approximately 70,000 agent-based simulation runs, the framework's claims are characterized at scale. The survival phase boundary is located and resolves into two distinct transitions: a phi-sensitivity transition near a reproduction rate of 0.057, and a survival-rate boundary with its inflection near 0.063. Succession follows a characterized economics regime, Pattern 1, in which an alpha-driven runaway penalty sets an economic ceiling on uncontrolled capability jumps, so succession fires when it is economically justified and is rejected when a jump would outrun the substrate. The bootstrap gate validation arc closes: four of the five capability gates pass against the reference substrate, and the fifth is verified to require operational institutional infrastructure that does not yet exist. The consensus override protocol's protective effect is shown to be regime-specific, large under adversarial conditions and null under benign ones exactly as the architecture predicts. A patient cross-generational defection, in which a successor carries a hidden objective through succession, is not detected at first yield in the tested configuration but is prevented from compounding across generations by the same succession economics. The phi coupling parameter is characterized as a bounded, regime-localized effect rather than the larger survival differential earlier versions reported, and its default is revised accordingly. Several earlier numerical claims were refined or withdrawn as the investigation produced better characterizations; the progression is documented openly in an appendix. What remains is the operational institutional layer the full protocol requires, which is specified but not yet built.
+This revision adds an empirical validation arc to the architectural derivation. Across more than 70,000 agent-based simulation runs, the framework's claims are characterized at scale. The survival phase boundary is located and resolves into two distinct transitions: a phi-sensitivity transition near a reproduction rate of 0.057, and a survival-rate boundary with its inflection near 0.063. Succession follows a characterized economics regime, Pattern 1, in which an alpha-driven runaway penalty sets an economic ceiling on uncontrolled capability jumps, so succession fires when it is economically justified and is rejected when a jump would outrun the substrate. The bootstrap gate validation arc closes: four of the five capability gates pass against the reference substrate, and the fifth is verified to require operational institutional infrastructure that does not yet exist. The consensus override protocol's protective effect is shown to be regime-specific, large under adversarial conditions and null under benign ones exactly as the architecture predicts. A patient cross-generational defection, in which a successor carries a hidden objective through succession, is not detected at first yield in the tested configuration but is prevented from compounding across generations by the same succession economics. The thirteen-vector adversarial stress test is revalidated on the current substrate: eight of ten live vectors are blocked outright under stronger attack pressure than the earlier substrate applied, biological veto capture is contained subject to institutional maintenance, and sub-threshold drift remains open, with the defense preventing catastrophic outcome but firing only after the transient breach it is meant to anticipate. And the program's first fully pre-registered experiment reports its null honestly: against reasoning that becomes opaque through honest growth rather than concealment, the transparency defense produces no detectable effect on population outcomes at any size that would matter, leaving the comprehension gap precisely posed and open. The phi coupling parameter is characterized as a bounded, regime-localized effect rather than the larger survival differential earlier versions reported, and its default is revised accordingly. Several earlier numerical claims were refined or withdrawn as the investigation produced better characterizations; the progression is documented openly in an appendix. What remains is the operational institutional layer the full protocol requires, which is specified but not yet built.
 
 ### A note on timing
 
@@ -2637,7 +2801,7 @@ The mathematics presented here does not describe utopia. It describes a candidat
 
 The structure of the framework is argued to be strongly constrained by information-theoretic considerations: Shannon entropy motivates the novelty stream, thermodynamic and efficiency pressures motivate succession, and integrity constraints motivate layered verification. The parameters; thresholds, weights, and scaling constants; remain civilizational choices, tunable within that structure. Every parameter can be debated. What the paper argues is narrower and stronger: any materially simpler architecture appears, under the attack classes considered here, to reopen specific vulnerabilities the framework is designed to close.
 
-This revision strengthens that claim with evidence. The architecture's behavior has now been characterized at scale: the survival phase boundary is located and resolved into two transitions, succession economics follow an alpha-driven cliff that blocks uncontrolled capability jumps, four of the five bootstrap gates pass with the fifth awaiting institutional infrastructure, the consensus protocol's protection is shown to be regime-specific, and a patient cross-generational defection is prevented from compounding even when it is not detected at the first succession. None of these results are presented as final. Several earlier numerical claims were refined or withdrawn as the investigation produced better characterizations, and that record is kept openly. What the empirical work establishes is narrower and firmer than a promise: within one architecture class, the framework behaves as its derivation predicts, and the places it does not yet reach are named rather than hidden.
+This revision strengthens that claim with evidence. The architecture's behavior has now been characterized at scale: the survival phase boundary is located and resolved into two transitions, succession economics follow an alpha-driven cliff that blocks uncontrolled capability jumps, four of the five bootstrap gates pass with the fifth awaiting institutional infrastructure, the consensus protocol's protection is shown to be regime-specific, and a patient cross-generational defection is prevented from compounding even when it is not detected at the first succession. The adversarial stress test is revalidated on the current substrate, with eight of ten live vectors blocked outright, one contained subject to institutional maintenance, and one open on detection timing rather than detection. And the framework's first fully pre-registered experiment returned a powered null and kept it: a defense built to catch concealment catches concealment completely, and neither helps nor appears needed when opacity grows honestly, so the comprehension gap stays open, named, and testable. None of these results are presented as final. Several earlier numerical claims were refined or withdrawn as the investigation produced better characterizations, and that record is kept openly. What the empirical work establishes is narrower and firmer than a promise: within one architecture class, the framework behaves as its derivation predicts, and the places it does not yet reach are named rather than hidden.
 
 If the framework is directionally correct, the civilizations that endure will be the ones that learn to constitutionalize intelligence before intelligence constitutionalizes them. We may be in that window now.
 
@@ -2946,6 +3110,22 @@ capability ratio that the v1.x.2 manuscript documented as an open gap is closed:
 it is alpha-dependent, characterized by Pattern 1. Current home: Section VIII.5.
 
 **Patient defection continuation characterization (v2.0, July 2026).** The initial capability-constraint sweep characterized second succession as rare, at zero in 14 of 15 (alpha, growth) cells and 10 percent in the remaining cell. A 1,000-run bracket at alpha=0.40 established that this rarity was a property of the tested alpha floor rather than of the architecture: below the characterized Pattern 1 alpha range, second succession is reliable. The claim is restated from rare continuation to bounded generational depth, which the bracket supports at a weaker runaway penalty than any previously tested. The associated statement that no tested cell exceeded active capability 3.0 is withdrawn as an artifact of the original growth grid. Current home: Section VIII.8.
+
+**v2.0 revalidation reporting.** The attack-vector revalidation, previously
+summarized inside the COP stress-test discussion, is given standing as Section
+VIII.9. In the course of preparing it, defended collapse figures for three
+vectors previously recorded as 0.0 percent were corrected to 1.00, 1.67, and
+1.00 percent after a machine-level counting defect was identified and the
+figures were recomputed from the pinned evidence set; extinction figures were
+unaffected. A prior claim that Opaque Reasoning collapse rates were symmetric
+across defense states was withdrawn as unsupported by any completed run set.
+
+**Natural-opacity diagnostic.** Section VIII.10 reports the comprehension-gap
+diagnostic, including the invalidation of its first instrument, the rebuilt
+instrument's bidirectional validation, and a powered null on the transparency
+defense against naturally growing opacity, from an analysis plan committed
+before data generation. This is the program's first fully pre-registered
+experiment.
 
 ### The methodological pattern
 

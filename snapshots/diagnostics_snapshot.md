@@ -1,8 +1,8 @@
 # Diagnostics Snapshot
 
-Generated: 2026-08-10T01:43:57Z
+Generated: 2026-08-10T02:10:48Z
 Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 0db8be0
+Commit: 47d79af
 Branch: main
 Category: diagnostics
 
@@ -10,7 +10,7 @@ Category: diagnostics
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| simulation\diagnostics\attack_vector_revalidation_audit.md | 898 | 45297 |
+| simulation\diagnostics\attack_vector_revalidation_audit.md | 928 | 46762 |
 | simulation\diagnostics\attack_vector_revalidation_documentation_edits.md | 95 | 7315 |
 | simulation\diagnostics\attack_vector_revalidation_final_report.md | 58 | 5311 |
 | simulation\diagnostics\attack_vector_revalidation_integration.md | 41 | 5067 |
@@ -105,7 +105,7 @@ Category: diagnostics
 | simulation\diagnostics\sync_status_YotkoTest_20260720.md | 173 | 11662 |
 | simulation\diagnostics\termination_decontamination_integration_analysis.md | 64 | 5995 |
 
-Total: 94 files, 9966 lines, 594245 bytes
+Total: 94 files, 9996 lines, 595710 bytes
 
 ---
 ==========================================
@@ -176,6 +176,36 @@ n=50 per cell. The observed differential landed on exactly 10.00 points, 36 of
 50 against 31 of 50, which is a 5-run difference with Fisher exact p = 0.395.
 The criterion was met and meant nothing. Detecting a genuine 10 point difference
 at 80 percent power would have needed roughly n=350 per cell.
+
+**Mirror invariant for the two assembled paper surfaces.**
+`paper/paper_v2_working.md` and `docs/The Lineage Imperative v2.0.md` must be
+**byte-identical as whole files**, with exactly one enumerated exception:
+
+```
+line 5:  paper   **Version:** 2.0 (working revision) - 2026
+         mirror  **Version:** 2.0 - 2026
+```
+
+That line is a deliberate label distinguishing the working revision from the
+assembled document. Any other difference is a defect.
+
+This whole-file rule **supersedes region-scoped mirror checks**, which are no
+longer sufficient. Region checks are what allowed Appendix C to diverge silently:
+the VIII.9 and VIII.10 version-history entries were applied to
+`appendix_C_draft.md` and the assembled document but not to
+`paper_v2_working.md`, which also carries an assembled Appendix C. The mirror
+checks in force at the time covered the Section VIII and COP regions and did not
+look at Appendix C, so the two surfaces disagreed for two commits without
+anything failing. A whole-file comparison would have caught it immediately.
+
+Check it with a hash comparison, not a region extract:
+
+```bash
+python -c "import hashlib,pathlib; p=pathlib.Path('paper/paper_v2_working.md').read_bytes(); q=pathlib.Path('docs/The Lineage Imperative v2.0.md').read_bytes(); print(hashlib.sha256(p).hexdigest()); print(hashlib.sha256(q).hexdigest())"
+```
+
+If the hashes differ, diff the files and confirm the only hunk is the version
+line above. Anything else halts.
 
 **Editing files that contain non-ASCII content.** Use Python with explicit UTF-8
 handling. Never use a PowerShell `Set-Content` round-trip, and never use
