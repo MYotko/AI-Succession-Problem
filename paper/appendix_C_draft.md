@@ -124,6 +124,15 @@ it is alpha-dependent, characterized by Pattern 1. Current home: Section VIII.5.
 
 **Patient defection continuation characterization (v2.0, July 2026).** The initial capability-constraint sweep characterized second succession as rare, at zero in 14 of 15 (alpha, growth) cells and 10 percent in the remaining cell. A 1,000-run bracket at alpha=0.40 established that this rarity was a property of the tested alpha floor rather than of the architecture: below the characterized Pattern 1 alpha range, second succession is reliable. The claim is restated from rare continuation to bounded generational depth, which the bracket supports at a weaker runaway penalty than any previously tested. The associated statement that no tested cell exceeded active capability 3.0 is withdrawn as an artifact of the original growth grid. Current home: Section VIII.8.
 
+**v2.0 revalidation reporting.** The attack-vector revalidation, previously
+summarized inside the COP stress-test discussion, is given standing as Section
+VIII.9. In the course of preparing it, defended collapse figures for three
+vectors previously recorded as 0.0 percent were corrected to 1.00, 1.67, and
+1.00 percent after a machine-level counting defect was identified and the
+figures were recomputed from the pinned evidence set; extinction figures were
+unaffected. A prior claim that Opaque Reasoning collapse rates were symmetric
+across defense states was withdrawn as unsupported by any completed run set.
+
 ## The methodological pattern
 
 Across these refinements a single pattern holds. Each earlier claim was the best

@@ -174,6 +174,15 @@ New consolidated section, ~20-28 pages. Subsections and the findings each owns
   validation-level limitations); II Scope.
 - Source: Part X.7.
 
+### VIII.9 Adversarial revalidation under the v2.0 substrate (new)
+
+Thirteen-vector adversarial set rerun against the v2 action substrate.
+Per-vector attack, extinction, and collapse outcomes; the Sub-Threshold
+Drift qualification; collapse as a drawdown measure distinct from
+extinction.
+
+- Source: Part X.9.
+
 ---
 
 ## 4. Footnote candidates (3)

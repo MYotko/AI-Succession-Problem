@@ -1,3 +1,9 @@
+> **Superseded, 2026-08-09.** This is a Phase 1 drafting artifact, last
+> substantively edited June 23, 2026. It is superseded by
+> `paper/paper_v2_working.md`, which is the authoritative Section VIII
+> surface. This file receives no further edits. Content below this notice
+> is unchanged.
+
 # VIII. Empirical Validation at Scale
 
 *Draft for Phase 1 of the v2.0 paper revision. Inserted after Section VII
