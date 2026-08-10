@@ -183,6 +183,17 @@ extinction.
 
 - Source: Part X.9.
 
+### VIII.10 Natural opacity: a pre-registered diagnostic (new)
+
+Comprehension-gap diagnostic. Instrument invalidation and rebuild,
+bidirectional validation, and a powered null on the transparency defense
+against naturally growing opacity, in a boundary-regime configuration.
+
+- Source: `simulation/diagnostics/comprehension_gap_redesign_note.md`;
+  `simulation/diagnostics/comprehension_gap_powered_arm_note.md`, including
+  Amendment 1; `data/comprehension_gap_powered_arm.csv`;
+  `simulation/diagnostics/default_regime_convergence_inertness.md`.
+
 ---
 
 ## 4. Footnote candidates (3)

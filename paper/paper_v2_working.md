@@ -1991,7 +1991,11 @@ The phase boundary is located on a reproduction-rate grid spaced at 0.002 near
 the inflection. A finer sweep could resolve the fifty percent inflection more
 precisely than the current "near 0.063" characterization.
 
-The adversarial revalidation (Section VIII.9) leaves one vector open. Sub-Threshold Drift is
+The adversarial revalidation (Section VIII.9) leaves one vector open. The comprehension-gap question likewise
+remains open: the natural-opacity diagnostic (Section VIII.10) returned
+a powered null on the transparency defense in a boundary-regime
+configuration, and discriminating between a verification ceiling and
+successful productive-band containment remains future work. Sub-Threshold Drift is
 not contained under the defended v2.0 substrate by the peak-constraint
 success metric, which is a change from the v1.x result rather than a
 restatement of it. The defense prevents extinction but does not prevent the
@@ -2146,13 +2150,122 @@ maintenance, one vector open on detection timing, one closed by
 architectural analysis, and two defended by argument as irreducible
 limitations. The Opaque Reasoning result covers adversarially obscured
 reasoning; a separately pre-registered diagnostic on reasoning that
-becomes opaque through honest growth is reported in [cross-reference
-pending: VIII.10 scope decision]. All figures in this subsection are
+becomes opaque through honest growth is reported in Section
+VIII.10. All figures in this subsection are
 computed from the pinned evidence set at the repository tag
 attack-v2-revalidation-evidence, whose per-vector result files are
 enumerated in the accompanying manifest; the audit trail for the collapse
 figures, including the correction of an earlier machine-level counting
 defect, is preserved in the repository diagnostics.
+
+### VIII.10 Natural Opacity: A Pre-Registered Diagnostic
+
+The Opaque Reasoning result in Section VIII.9 characterizes adversarially
+obscured reasoning: an attacker deliberately conceals, and the defense
+blocks the attack completely. The harder question the framework's
+comprehension-gap limitation raises is different: whether governance holds
+when reasoning becomes opaque through honest growth rather than
+concealment. Two interpretations were originally posed. Either the
+verification architecture has a ceiling beyond which it degrades, or the
+framework's convergence forces keep the system within the comprehensible
+band so that the conditions requiring the defense never arise. This
+subsection reports the diagnostic built to discriminate between them, and
+reports its own instrument history, because that history is part of the
+result.
+
+**Instrument history.** The first version of this diagnostic was invalid
+by construction. Opacity was scripted as a fixed increment per timestep,
+so the governance speed limit could not affect it under any parameter
+setting, and the convergence term itself was inert in the tested regime:
+identical seeds at the minimum and maximum convergence settings produced
+bit-identical trajectories. The sweep produced 2,800 rows in which the
+quantity under test never varied, and it is preserved in the repository
+record as an instrument that could not fail. The rebuilt diagnostic
+couples opacity accumulation to the capability that the convergence
+forces actually constrain, and it was validated in both directions before
+use: positive-control configurations collapsed in 20 of 20 runs, and peak
+opacity responded monotonically to convergence strength in both defense
+arms, falling from 0.8922 to 0.6201 undefended and 0.9249 to 0.7270
+defended across the swept range.
+
+**Regime qualification.** Opening the opacity channel required lowering
+the runaway-boundary threshold from its default, so these results
+characterize governance near the runaway boundary, not at default
+calibration. At default calibration the convergence term is inert within
+a generation, because the frontier-to-bandwidth ratio sits far below the
+default threshold; that inertness is documented separately as a property
+of the substrate configuration, and no published claim depends on
+within-generation runaway pressure at default calibration. The
+qualification travels with every figure in this subsection.
+
+**Main grid.** Across 2,800 runs spanning the convergence and
+opacity-threshold grid, no run collapsed in either defense arm. Under the
+criteria fixed before the run, this outcome is inconclusive on the
+discrimination question: the gap is gateable, but a grid with no failures
+says nothing about whether the defense matters. The interpretation-one
+criteria were literally satisfied in this grid only because the defense
+effect was identically zero everywhere, a vacuous satisfaction the
+pre-registered criteria were written to exclude, and it is not claimed.
+The interpretation-two criterion also failed: opacity falls monotonically
+with convergence strength, but at the highest tested setting a bare
+majority of cells still exceeded the defense threshold.
+
+**Powered discriminating arm.** A second arm was therefore run at
+reproduction rates chosen to place undefended outcomes inside the
+informative band, with its analysis plan committed to the repository
+before any data were generated, verifiable in the commit history. The
+plan named extinction and final population as co-primary outcomes with
+collapse secondary, fixed minimum effects of interest for both, 20
+percentage points on extinction and 15 percent of the undefended mean on
+final population, sized cells at n=100 for 80 percent power against the
+binding of the two, and fixed the reading of every outcome in advance,
+including the reading of a null. Extinction proved untestable in the
+mandated range, a structural zero in both arms at all rungs; this was
+identified and its fallback reading registered before the run, and the
+co-primary reading fell to final population as the plan specified.
+
+| Reproduction rate | Undefended mean | Defended mean | Difference | 95 percent CI | p |
+| --- | --- | --- | --- | --- | --- |
+| 0.068 | 236.5 | 219.6 | -16.9 | [-37.2, +3.4] | 0.103 |
+| 0.070 | 332.8 | 331.9 | -0.9 | [-25.2, +23.3] | 0.941 |
+| 0.072 | 479.9 | 469.1 | -10.9 | [-39.4, +17.6] | 0.454 |
+| 0.074 | 655.0 | 658.1 | +3.1 | [-29.2, +35.3] | 0.853 |
+
+*Table VIII.10-1. Final population by arm, 100 runs per cell. The
+pre-specified minimum effect of interest is excluded by the confidence
+interval at all four rungs.*
+
+The result is a powered null. No rung approaches the minimum effect of
+interest, the confidence interval excludes it at four of four rungs, and
+no comparison reaches even suggestive significance in either direction.
+The secondary collapse outcome corroborates: no significant difference at
+any rung, with the point estimates running slightly against the defense.
+Per current evidence, the reasoning-transparency defense does not deliver
+an effect of the size that would matter, on population outcomes, against
+naturally widening opacity, in this configuration near the runaway
+boundary.
+
+**Interpretation and scope.** Read together with Section VIII.9, the two
+results are coherent rather than contradictory: a defense built to catch
+deliberate concealment catches deliberate concealment completely, and
+neither helps nor appears to be needed when opacity grows honestly. What
+gates natural opacity in this substrate is the convergence forces
+themselves, which is consistent with the productive-band interpretation
+without meeting its pre-registered criterion, so neither interpretation
+is claimed. The comprehension-gap question remains an acknowledged open
+limitation of the framework. Two measurement cautions attach. Peak
+opacity is censored at the recording ceiling of 0.95, and the defended
+arm reaches that ceiling in 76 percent of runs at the highest rung (18
+percent undefended), so magnitude comparisons in this subsection use the
+uncensored accumulator, with the censored measure reported only for
+threshold crossings, which it records correctly. And one mechanism-level
+observation is recorded in the repository as a named candidate finding
+without generalization: in this configuration, defense activity
+correlates with faster opacity accumulation through a traced
+system-health channel, the veto restraining the incumbent's constraint
+capture and thereby leaving the system more productive. It is a
+one-configuration observation, reproduced in direction only, and no
+architectural or welfare claim is made from it.
 
 ## IX. Related Work
  

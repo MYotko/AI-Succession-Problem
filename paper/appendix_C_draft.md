@@ -133,6 +133,13 @@ figures were recomputed from the pinned evidence set; extinction figures were
 unaffected. A prior claim that Opaque Reasoning collapse rates were symmetric
 across defense states was withdrawn as unsupported by any completed run set.
 
+**Natural-opacity diagnostic.** Section VIII.10 reports the comprehension-gap
+diagnostic, including the invalidation of its first instrument, the rebuilt
+instrument's bidirectional validation, and a powered null on the transparency
+defense against naturally growing opacity, from an analysis plan committed
+before data generation. This is the program's first fully pre-registered
+experiment.
+
 ## The methodological pattern
 
 Across these refinements a single pattern holds. Each earlier claim was the best
