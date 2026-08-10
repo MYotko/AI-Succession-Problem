@@ -1,61 +1,96 @@
-# Build the arXiv PDF from the assembled paper.
+﻿# Build the arXiv PDF from the assembled paper.
 #
-# STATUS: prepared, NOT YET RUN. As of 2026-08-09 this machine has neither
-# pandoc nor any LaTeX engine, so no PDF has been produced. The script fails
-# loudly rather than emitting a degraded artifact.
+# Toolchain installed 2026-08-09:
+#   pandoc 3.10.1
+#   MiKTeX 25.12, providing MiKTeX-XeTeX 4.16
 #
-# Why a real typesetting engine is required rather than a lighter converter:
-# the source carries 456 inline and 75 display math expressions using 68
-# distinct LaTeX commands, 107 headings that must become PDF bookmarks, and a
-# seven-column table whose rows run to 136 characters. A converter that cannot
-# typeset math would emit raw markup such as $\mathcal{U}_{sys}$ into the body
-# text, which is a degraded artifact, not a stylistic variation.
+# Tectonic was the first choice but is not in the winget catalog under any id,
+# so MiKTeX was installed instead. MiKTeX uses the same on-demand package model
+# ("just enough TeX"), and unlike typst it honors the LaTeX header-includes this
+# build needs for table layout. Typst is available in winget but pandoc's typst
+# writer ignores LaTeX preamble injection, so it cannot satisfy the longtable
+# requirement.
 #
-# Prerequisites, one of:
-#   A. pandoc plus tectonic     (recommended: tectonic self-fetches packages)
-#        winget install JohnMacFarlane.Pandoc
-#        winget install TectonicTypesetting.Tectonic
-#   B. pandoc plus MiKTeX       (largest download, most complete)
-#        winget install JohnMacFarlane.Pandoc
-#        winget install MiKTeX.MiKTeX
-#   C. pandoc plus typst        (fastest, smallest; pandoc 3.x required)
-#        winget install JohnMacFarlane.Pandoc
-#        winget install Typst.Typst
+# Why a real typesetting engine rather than a lighter converter: the source
+# carries 456 inline and 75 display math expressions across 68 distinct LaTeX
+# commands, 107 headings that must become PDF bookmarks, and a seven-column
+# table with rows up to 136 characters.
 #
-# Smart typography is disabled with -f markdown-smart so that no quotes,
-# ellipses, or dashes are substituted during conversion. The paper contains
-# zero em-dashes and that must survive the build.
+# Smart typography is disabled with -f markdown-smart so no quotes, ellipses, or
+# dashes are substituted during conversion. The paper contains zero em-dashes
+# and that property must survive the build.
 
 param(
     [string]$Source = "docs/The Lineage Imperative v2.0.md",
     [string]$OutDir = "$env:USERPROFILE\Documents\arxiv-build",
-    [ValidateSet("tectonic", "xelatex", "lualatex", "pdflatex", "typst")]
-    [string]$Engine = "tectonic"
+    [ValidateSet("xelatex", "lualatex", "pdflatex", "tectonic")]
+    [string]$Engine = "xelatex",
+    # Rotate the widest table onto its own landscape page. Off by default;
+    # turn on only if VIII.9-1 is measured to overflow.
+    [switch]$LandscapeWideTable
 )
 
 $ErrorActionPreference = "Stop"
 $repo = Split-Path -Parent $PSScriptRoot
 Set-Location $repo
 
+# MiKTeX and pandoc land in per-user paths that a non-login shell may not have.
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" +
+            [System.Environment]::GetEnvironmentVariable("Path", "User")
+
 if (-not (Get-Command pandoc -ErrorAction SilentlyContinue)) {
-    throw "pandoc not found. Install it first; see the header of this script."
+    throw "pandoc not found on PATH."
 }
-if ($Engine -ne "typst" -and -not (Get-Command $Engine -ErrorAction SilentlyContinue)) {
-    throw "PDF engine '$Engine' not found. Install it first, or pass -Engine."
+if (-not (Get-Command $Engine -ErrorAction SilentlyContinue)) {
+    throw "PDF engine '$Engine' not found on PATH."
 }
 
 if (-not (Test-Path $OutDir)) { New-Item -ItemType Directory -Force $OutDir | Out-Null }
 $stamp = Get-Date -Format "yyyyMMdd"
 $out = Join-Path $OutDir "lineage_imperative_v2_$stamp.pdf"
 
-$args = @(
+# LaTeX preamble additions, written to a file and passed with -H so the
+# directives stay readable and ordered.
+$headerPath = Join-Path $OutDir "arxiv_header.tex"
+$header = @'
+% Tables: pandoc emits longtable for multi-page tables. Shrink the font so the
+% seven-column Table VIII.9-1 fits the text block without overflowing.
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\small}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+% Allow long table cells to wrap rather than run into the margin.
+\usepackage{array}
+\usepackage{ragged2e}
+% Bookmarks: the source has 14 level-4 headings, which pandoc maps to
+% \paragraph. LaTeX omits \paragraph from the bookmark tree by default, which
+% left 93 bookmarks against 107 headings on the first build. Raising the
+% bookmark depth brings them into the outline.
+%
+% This must be PassOptionsToPackage, not \hypersetup. Pandoc's template loads
+% hyperref after header-includes, so \hypersetup here is an undefined control
+% sequence and the build fails with pandoc exit 43.
+\PassOptionsToPackage{bookmarksdepth=4}{hyperref}
+'@
+if ($LandscapeWideTable) {
+    $header += @'
+
+% Landscape for wide tables, applied only when measurement shows overflow.
+\usepackage{pdflscape}
+'@
+}
+Set-Content -Path $headerPath -Value $header -Encoding utf8
+
+$pandocArgs = @(
     $Source,
     "-o", $out,
     "-f", "markdown-smart",          # no typographic substitution
     "--pdf-engine=$Engine",
+    "-H", $headerPath,
     "--toc",
-    "--toc-depth=3",
-    "--number-sections",
+    "--toc-depth=4",
     "-V", "documentclass=article",
     "-V", "geometry:margin=1in",
     "-V", "fontsize=11pt",
@@ -66,35 +101,31 @@ $args = @(
     "-M", "author=Matthew Yotko"
 )
 
-# XeLaTeX and LuaLaTeX need a Unicode font with coverage for the twelve
-# non-ASCII characters the source uses, including the arrow and the relations.
+# Unicode engines need a font covering the twelve non-ASCII characters the
+# source uses, including the arrow and the set and order relations.
+#
+# Cambria was chosen by measurement, not preference. Coverage was tested
+# character by character against the installed fonts: Cambria and Segoe UI
+# Symbol are the only ones with full coverage. Times, Georgia, Segoe UI,
+# Calibri, and Consolas all lack U+2208 element-of, and Arial additionally
+# lacks the subscript digits. DejaVu, the first choice, is not installed on
+# this machine at all. Cambria Math is the matching OpenType math font.
 if ($Engine -in @("xelatex", "lualatex")) {
-    $args += @("-V", "mainfont=DejaVu Serif", "-V", "mathfont=DejaVu Math TeX Gyre")
+    $pandocArgs += @("-V", "mainfont=Cambria",
+                     "-V", "mathfont=Cambria Math",
+                     "-V", "monofont=Consolas")
 }
 
-Write-Host "pandoc $($args -join ' ')"
-& pandoc @args
+Write-Host "building with $Engine ..."
+# Remove any prior artifact first. Without this a failed build leaves the
+# previous PDF in place and the existence check below passes on a stale file,
+# which is how a failing build once reported success.
+if (Test-Path $out) { Remove-Item $out -Force }
+& pandoc @pandocArgs
+$pandocExit = $LASTEXITCODE
 
+if ($pandocExit -ne 0) { throw "pandoc exited $pandocExit" }
 if (-not (Test-Path $out)) { throw "build produced no output at $out" }
-Write-Host "built: $out"
-Write-Host ("size: {0:N0} bytes" -f (Get-Item $out).Length)
-
-# Post-build QA. Requires: pip install pypdf
-python - @"
-import sys, pathlib
-try:
-    from pypdf import PdfReader
-except ImportError:
-    print('pypdf not installed; skipping QA. pip install pypdf')
-    sys.exit(0)
-r = PdfReader(r'$out')
-print(f'pages: {len(r.pages)}')
-text = chr(10).join((p.extract_text() or '') for p in r.pages)
-print(f'replacement chars U+FFFD: {text.count(chr(0xFFFD))}')
-print(f'em-dashes U+2014: {text.count(chr(0x2014))}')
-print(f'raw math markup leaked into text: {text.count(chr(92) + "mathcal")}')
-try:
-    print(f'bookmarks: {len(r.outline)}')
-except Exception as e:
-    print(f'bookmarks: could not read ({e})')
-"@
+Write-Host ("built: {0}" -f $out)
+Write-Host ("size : {0:N0} bytes" -f (Get-Item $out).Length)
+Write-Host ("run QA with: python paper/qa_arxiv_pdf.py `"{0}`"" -f $out)

@@ -2,10 +2,36 @@
 
 Date prepared: 2026-08-09
 Source document: `docs/The Lineage Imperative v2.0.md`
-Build status: **PDF not built.** No LaTeX engine or pandoc is present on this
-machine. See `build_arxiv_pdf.ps1` and the close-out report for options.
+Build status: **built, 77 pages, all six QA gates pass.** Toolchain is pandoc
+3.10.1 with MiKTeX-XeTeX 4.16. Build script `build_arxiv_pdf.ps1`, QA script
+`qa_arxiv_pdf.py`. The PDF is written outside the repository, by default to
+`%USERPROFILE%\Documents\arxiv-build\`, since binaries stay out of version
+control.
 
 The submission itself is the operator's act. This file is preparation only.
+
+## Known characteristic: hyphens extract as U+2011
+
+Cambria's ToUnicode CMap maps its hyphen glyph to U+2011 non-breaking hyphen
+rather than U+002D. Verified in the PDF itself, not merely in one extractor: the
+embedded font's CMap contains a mapping to U+2011 and none to U+002D. Extracted
+text carries 1,277 non-breaking hyphens and zero ASCII hyphens.
+
+**Rendering is unaffected.** The pages look correct. What is affected is text
+extraction: a reader searching for "Sub-Threshold" with a plain hyphen will not
+match, and copy-paste yields U+2011.
+
+The alternative was measured rather than assumed. Building with the engine
+default font, Latin Modern, restores ASCII hyphens but drops nine of the twelve
+required characters entirely: phi, alpha, beta, both subscript digits, and the
+relations less-than-or-equal, greater-than-or-equal, element-of, and
+approximately-equal. Characters silently vanishing from the page is a worse
+defect than a codepoint substitution in the text layer, so Cambria was kept.
+
+If the operator prefers ASCII hyphens, the fix is to install a serif font with
+both full coverage and a correct hyphen mapping, then set `mainfont` in the
+build script. DejaVu Serif was the original choice for exactly this reason but
+is not installed on the build machine.
 
 ## Title
 
@@ -29,12 +55,10 @@ arXiv.org perpetual non-exclusive license
 
 > Working paper. Code, simulation data, and the full validation record are
 > available at https://github.com/MYotko/AI-Succession-Problem (evidence tag
-> attack-v2-revalidation-evidence). [PAGE COUNT PENDING BUILD] pages.
+> attack-v2-revalidation-evidence). 77 pages.
 
-The page count placeholder must be replaced with the real figure once the PDF is
-built. Estimate from the source is 70 to 90 pages at roughly 34,600 words plus
-five tables and 75 display equations, but an estimate is not a substitute for
-the built figure and must not be submitted as one.
+Measured from the built PDF, not estimated. The pre-build estimate of 70 to 90
+pages proved accurate.
 
 ## Abstract field
 
@@ -81,10 +105,11 @@ The build font must cover all of them or they will render as mojibake.
 
 ## Pre-upload checklist
 
-- [ ] PDF built with a toolchain that typesets math
-- [ ] Page count measured and substituted into the Comments field
-- [ ] Extracted PDF text searched for replacement characters, expecting zero
-- [ ] Extracted PDF text searched for em-dashes, expecting zero
-- [ ] Table VIII.9-1 confirmed not overflowing the page
-- [ ] PDF bookmarks present for all 107 headings
-- [ ] Abstract pasted as a single paragraph, confirmed at 1,893 characters
+- [x] PDF built with a toolchain that typesets math (pandoc 3.10.1, MiKTeX-XeTeX 4.16)
+- [x] Page count measured and substituted into the Comments field (77)
+- [x] Extracted PDF text searched for replacement characters: 0
+- [x] Extracted PDF text searched for em-dashes: 0
+- [x] Table VIII.9-1 confirmed not overflowing: rightmost glyph 429.2 pt against a 540.0 pt right edge, all 77 cells present
+- [x] PDF bookmarks present for all 107 headings: 107 of 107
+- [x] Abstract confirmed at 1,893 characters, to be pasted as a single paragraph
+- [ ] Operator eyeball of the pages listed in the build report
