@@ -104,6 +104,23 @@ if ($Engine -in @("xelatex", "lualatex")) {
   Scale = MatchLowercase ]
 \usepackage{unicode-math}
 \setmathfont{dejavu-math.otf}[ Path = $dvMath/ ]
+% Route \mathbf through the math font.
+%
+% Two headings use \mathbf{\Psi} and \mathbf{\Theta}. Under legacy semantics
+% \mathbf selects the upright bold TEXT font even inside math, so those
+% requested U+1D6F9 and U+1D6E9 from DejaVuSerif-Bold, which has neither, and
+% the glyphs were dropped: four notdef marks, in the table of contents on page
+% 3 and in the body headings on pages 82 and 83.
+%
+% A math-font range fallback cannot fix this, and was tried and reverted: the
+% request never reaches the math font. \symbf is unicode-math's math-font
+% equivalent, and it maps Greek capitals to the bold block at U+1D6A8, which
+% dejavu-math does provide.
+%
+% AtBeginDocument is required. unicode-math redefines \mathbf itself at
+% begin-document, so a bare \let in the preamble is overwritten and the
+% glyphs stay missing. That was measured, not assumed.
+\AtBeginDocument{\let\mathbf\symbf}
 "@
 }
 if ($LandscapeWideTable) {
