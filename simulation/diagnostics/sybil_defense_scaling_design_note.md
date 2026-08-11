@@ -1,21 +1,23 @@
 # Sybil Defense Scaling Study: Design Note and Pre-Registration
 
-*Completed pre-registration, specification-corrected. This revision closes
-four operational-surface gaps found when the sweep was first attempted:
-the ratio-collapse validation slice is fully specified (cells, n, pass
-criterion), the effective-rank axis is operationalized through a
-registered validator-set-size range (2 to 64 geometric plus the
-institution-alone corner), the complete-linkage sensitivity pass is scoped
-to a registered reduced slice, and the config fields are reconciled with
-the prose. These are completions of intent already present in the plan,
-not changes to the analysis criteria, and this corrected registration
-still provably predates all characterization data. The registration
-protects the analysis criteria from being chosen after seeing outcome
-data; the instrument-validation and variance-estimation smoke run that
-grounds the power calculation preceded it, which is correct, because
-variance estimation is not outcome data and cannot move the criteria. The
-characterization sweep is authorized as a separate step after this
-corrected commit.*
+*Completed pre-registration, specification-corrected (second correction).
+The first correction closed four operational-surface gaps. This second
+correction closes three registration gaps found when the characterization
+runner was specified: the 25 rank-axis points are now explicitly
+enumerated as (size, severity) tuples; the ratio-collapse slice is
+corrected from an incoherent nine-cell description to three parity levels
+each carrying the rank axis (75 cells); and the complete-linkage
+sensitivity scope is pinned to Arm A across the full cost grid (100 cells).
+These are completions and a correction of underspecified or mis-stated
+operational values, not changes to the analysis criteria (the MEIs, the
+sample size, the merge rule, the failure definitions, and the readings are
+unchanged). This corrected registration still provably predates all
+characterization data. The registration protects the analysis criteria
+from being chosen after seeing outcome data; the instrument-validation and
+variance-estimation smoke run that grounds the power calculation preceded
+it, which is correct, because variance estimation is not outcome data and
+cannot move the criteria. The characterization sweep is authorized as a
+separate step after this corrected commit.*
 
 *Editorial note: this is a working technical document. Internal parameter
 language is used deliberately here, as in all repository diagnostics. It
@@ -178,13 +180,18 @@ collapse together, not by a fixed pool.
 
 **Rank axis construction, registered.** Validator-set size steps
 geometrically: 2, 4, 8, 16, 32, 64, plus the institution-alone corner
-(size 1, the analytic floor). Collapse severity sweeps its full range at
-each size. Size and collapse together produce the 25-point effective-rank
-axis, with resolution concentrated at low effective rank near the floor,
-which is where the operating regime and any plausible-regime crossover
-live. The geometric spacing matches the multiplicative structure of both
-effective rank and the O(N^2) cost, giving even resolution in the space
-that matters.
+(size 1, the analytic floor). Collapse severity is registered at four
+levels, {0.0, 0.33, 0.66, 1.0}, applied at each of the six sizes. The
+25-point axis is therefore the Cartesian product of the six sizes and the
+four severity levels (24 points) plus the institution-alone corner (1
+point), fully enumerated with no allocation choice remaining. The axis
+points are registered as (size, severity) tuples; effective rank at each
+point is measured by the merge rule, not assigned, so "rank axis" denotes
+these 25 structural points and the effective rank at each is an instrument
+output. Resolution is densest at low effective rank near the floor, which
+is where the operating regime and any plausible-regime crossover live. The
+geometric size spacing matches the multiplicative structure of both
+effective rank and the O(N^2) cost.
 
 **Why 64 is the upper bound, registered rationale.** The operating regime
 the framework cares about is low effective rank: the count of genuinely
@@ -221,16 +228,23 @@ section 7. Plus the superlinear-attack-cost check.
 **The ratio-collapse validation slice, registered.** The two capability
 dials are hypothesized to matter only through their ratio. Before the main
 surface is reported as ratio-parameterized, a validation slice holds the
-capability ratio fixed at parity (1.0) and varies both absolute capability
-levels together across three levels each (low, mid, high, spanning the
-same compute-interpretable range as the main ratio sweep), nine cells,
-n=200 per cell matching the main surface. Pass criterion, fixed here: the
-located crossover rank does not move by more than one rank point across
-the nine cells. A movement of more than one rank point means the dials do
-not collapse to their ratio; that is registered as a finding that sends
-the study to the fuller two-dial grid rather than the ratio-parameterized
-surface, and the fuller grid is not run on a hunch. The slice runs and
-reports before the main surface is interpreted as a rank-by-ratio result.
+capability ratio fixed at parity (attacker level equal to defender level)
+and varies that common parity level across three registered points,
+{0.316, 1.0, 3.16} (log-spaced within the central portion of the 0.1-to-10
+ratio range), locating the crossover at each by running the full 25-point
+rank axis. This is 3 levels by 25 rank points, 75 cells, n=200 per cell
+matching the main surface. (An earlier draft described this as a nine-cell
+3-by-3 grid; that was incorrect, because a 3-by-3 attacker-by-defender grid
+has only three parity cells, and locating a crossover at each parity level
+requires the rank axis, not a single cell. The registered construction is
+three parity levels each carrying the rank axis.) Pass criterion, fixed
+here: the located crossover rank does not move by more than one rank point
+across the three parity levels. A movement of more than one rank point
+means the dials do not collapse to their ratio; that is registered as a
+finding that sends the study to the fuller two-dial grid rather than the
+ratio-parameterized surface, and the fuller grid is not run on a hunch.
+The slice runs and reports before the main surface is interpreted as a
+rank-by-ratio result.
 
 **Fixed and stated for round one, with bias direction named, logged for
 the next arc:**
@@ -306,13 +320,15 @@ is the primary registered rule, chosen as the defender-conservative option:
 connected-components merges more readily than complete-linkage, collapsing
 rank sooner, which is the harder and therefore more honest direction for a
 study whose headline concerns defender fragility. Complete-linkage is
-retained as a registered sensitivity pass, run at reduced scope: the
-primary arm and cost forms across the full rank axis at a single
-representative capability ratio (parity, 1.0), n=200 per cell. Its sole
-purpose is to answer whether the located crossover moves under a different
-merge rule; it is a reduced slice, not a duplicate of the full surface,
-and it is reported separately from the primary result rather than blended
-into it.
+retained as a registered sensitivity pass, run at reduced scope: Arm A
+(false-cluster injection, the direct Sybil analog and the arm with the
+cleanest crossover), across both defense-cost forms and both attack-cost
+forms (the full 2-by-2 cost grid), the full 25-point rank axis, at a single
+parity capability ratio (1.0), n=200 per cell, which is 25 by 2 by 2 = 100
+cells. Its sole purpose is to answer whether the located crossover moves
+under a different merge rule; it is a reduced slice, not a duplicate of the
+full surface, and it is reported separately from the primary result rather
+than blended into it.
 
 **Arm B failure reporting, registered choice.** Arm B defense failure is
 defined strictly: any partition corruption counts as failure, including a
