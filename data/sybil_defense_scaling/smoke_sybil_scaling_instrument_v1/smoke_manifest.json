@@ -1,0 +1,47 @@
+{
+  "artifacts": {
+    "smoke_evidence.json": {
+      "bytes": 2763,
+      "sha256": "4b26facdd0d208e08cd0f96a6da5c63c025ff94c29708408a685ce2a8339390b"
+    },
+    "smoke_execution.log": {
+      "bytes": 330,
+      "sha256": "58057009b9ef4f457273486d977ff9215c1a1728e94e562f28f0e7d99f0a9899"
+    },
+    "smoke_report.md": {
+      "bytes": 2858,
+      "sha256": "afd6ec00104a59b878ca08b581cbfcc3cd0a3be17e59dc4a363ea14d60a636ec"
+    },
+    "smoke_results.csv": {
+      "bytes": 44399,
+      "sha256": "8e15c7966ae92e53fbe699677cf19292d8a79ad1afeb91d2ef87c237a9d25b0e"
+    }
+  },
+  "branch": "sybil-scaling",
+  "capability_ratio_range": null,
+  "config_path": "/home/yotko/Documents/Github/ai-succession-problem/simulation/config/sybil_defense_scaling.json",
+  "config_sha256": "07cda5f20838acb406e6d63b91872c910cda39214f5842d1884e6b287d392d8a",
+  "cpu_count": 12,
+  "crossover_computed": false,
+  "ended_at_utc": "2026-08-10T20:48:05.919647+00:00",
+  "full_sweep_executed": false,
+  "gate_results": {
+    "a_cost_scaling": true,
+    "b_effective_rank": true,
+    "c_distinct_arm_effects": true,
+    "d_institution_floor": true,
+    "e_positive_controls": true,
+    "overall": true,
+    "validated_path_probe": true
+  },
+  "head_commit": "4da78721d7d38a7e8f0a14047a90e66a3b9e0189",
+  "mode": "instrument_validation_only",
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "power_sample_size_per_cell": null,
+  "python": "3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0]",
+  "row_count": 173,
+  "run_id": "smoke_sybil_scaling_instrument_v1",
+  "schema_version": "sybil-scaling-smoke-manifest-v1",
+  "started_at_utc": "2026-08-10T20:48:05.878285+00:00",
+  "working_tree_status": "M simulation/diagnostics/sybil_defense_scaling_design_note.md\n?? data/sybil_defense_scaling/\n?? simulation/config/\n?? simulation/run_sybil_defense_scaling_smoke.py\n?? simulation/sybil_defense_scaling.py\n?? simulation/test_sybil_defense_scaling.py"
+}

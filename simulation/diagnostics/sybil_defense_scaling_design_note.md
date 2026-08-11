@@ -1,8 +1,14 @@
 # Sybil Defense Scaling Study: Design Note and Pre-Registration
 
-*Draft for operator sign-off. Nothing in this note authorizes runs. On
-approval it becomes the committed pre-registration, and implementation
-begins only after the commit provably predates any generated data.*
+*Completed pre-registration, all operator decisions resolved. This note is
+committed as the registration on the sybil-scaling branch after the smoke
+artifacts and before any characterization data. The registration protects
+the analysis criteria from being chosen after seeing outcome data; the
+instrument-validation and variance-estimation smoke run that grounds the
+power calculation preceded it, which is correct, because variance
+estimation is not outcome data and cannot move the criteria. The
+characterization sweep is authorized as a separate step after this commit.
+The committed registration provably predates all characterization data.*
 
 *Editorial note: this is a working technical document. Internal parameter
 language is used deliberately here, as in all repository diagnostics. It
@@ -220,14 +226,61 @@ in check integrity).
 Pre-registered as robust (crossover moves little across the swept ratio
 range) versus ratio-sensitive (crossover collapses inward as attacker
 capability rises). Ratio-sensitive is the expected outcome; naming it in
-advance is what keeps it from being a post-hoc story.
+advance is what keeps it from being a post-hoc story. The capability ratio
+is attacker forging capacity over defender resolving power, swept from 0.1
+to 10 on a log scale at 25 points, two orders of magnitude centered on
+parity. The defender-favored floor at 10x defender advantage and the
+strong-attacker bound at 10x attacker advantage bracket the plausible
+asymmetry between the convened pool and a single frontier model; ratios
+beyond that are structurally determined (the smoke positive control at
+ratio 1,000,000 fails in both arms), so extending the range buys foregone
+conclusions at the cost of resolution near the crossover. A threat model
+in which a single model can out-forge the convened pool by more than 10x
+would justify widening the upper bound, and that widening is itself a
+stated threat-model claim; the registered range does not assume it.
 
-**Minimum effects and power.** Minimum effects of interest and the sample
-size delivering adequate power at the binding constraint are computed at
-registration and stated here before runs. A threshold crossable by noise
-at the planned n is not a criterion. [Power calculation to be completed and
-inserted before commit, using variance from the smoke run; the note is not
-committed as a pre-registration until this section carries real numbers.]
+**Minimum effects and power.** The characterization compares defense-
+failure rate between adjacent cells to locate a crossover, a two-proportion
+comparison. The minimum effect of interest is a 15 percentage point
+difference in defense-failure rate between adjacent rank cells; a shift
+smaller than that is margin noise, not an actionable boundary. Sample size
+is set for 80 percent power, two-sided, at alpha 0.05, at worst-case
+binomial variance (p=0.5), which requires 174 per cell for the 15-point
+MEI; the registered n is 200 per cell, carrying margin above that and
+over-powering Arm B, whose failure rate sits away from 0.5 (smoke mean
+0.78) and therefore has lower variance. A threshold crossable by noise at
+n=200 is not a criterion; the 15-point MEI clears that bar at this n. The
+variance estimates grounding this calculation are the smoke fixture
+variances (Arm A defense-failure sample variance 0.2537 at mean 0.484; Arm
+B 0.1736 at mean 0.781), which are instrument-validation and variance-
+estimation outputs, not readings of a crossover. At n=200 the full
+candidate surface (25 rank points by 25 ratio points by 2 arms by 2
+defense-cost forms by 2 attack-cost forms, 5,000 cells) is one million
+runs, single-digit minutes of compute across the available cores before
+orchestration overhead, so the sample size is not resource-constrained and
+is set for power, not economy.
+
+**Merge rule, registered choice.** Effective rank is computed by threshold-
+connected-components on pairwise cosine similarity at threshold 0.9. This
+is the primary registered rule, chosen as the defender-conservative option:
+connected-components merges more readily than complete-linkage, collapsing
+rank sooner, which is the harder and therefore more honest direction for a
+study whose headline concerns defender fragility. Complete-linkage is
+retained as a registered sensitivity option so the dependence of the
+finding on the merge rule can be reported rather than assumed.
+
+**Arm B failure reporting, registered choice.** Arm B defense failure is
+defined strictly: any partition corruption counts as failure, including a
+corrupted independence read that does not move the measured rank, because a
+check that has been corrupted is compromised even when its output
+coincidentally lands correct. This strict definition is the primary
+registered Arm B outcome. Because the strict bar makes Arm B's failure rate
+structurally higher than Arm A's by definition, Arm B is reported on two
+tracks: the strict failure rate (primary), and separately the rank-visible
+failure rate (corruption that actually moved measured rank below the
+floor), which is the subset mechanistically comparable to Arm A. The A-
+versus-B asymmetry is read on both tracks, so the definitional gap is never
+smuggled in as a mechanism difference.
 
 **Vacuous satisfaction refused.** A criterion satisfied only because an
 effect is identically zero everywhere, or met exactly at a boundary, is
@@ -254,11 +307,21 @@ in section 7.
 **Discipline carried from prior arts:** manifest not glob for authoritative
 CSVs; counting in Python or Measure-Object, never bare pipeline .Count
 under PowerShell 5.1; non-ASCII edits through Python UTF-8, never
-Set-Content round-trips; registration commit provably predates data;
-analysis against criteria stated verbatim before interpretation;
-whole-file byte-identity as the mirror invariant where surfaces are
-mirrored; re-running is characterization, never steering toward a
-predetermined place.
+Set-Content round-trips; registration commit provably predates all
+characterization data; analysis against criteria stated verbatim before
+interpretation; whole-file byte-identity as the mirror invariant where
+surfaces are mirrored; re-running is characterization, never steering
+toward a predetermined place.
+
+**Smoke versus characterization, the registration boundary.** The smoke
+run is authorized before registration because it validates the instrument
+and estimates variance, neither of which is outcome data and neither of
+which can move the analysis criteria. It must not run the characterization
+grid, must not compute or report a crossover, and must not sweep the
+primary rank-by-ratio surface. The characterization sweep is authorized
+only after the registration is committed. An agent that finds itself
+producing a crossover figure during the smoke run has crossed the boundary
+and must stop.
 
 ## 9. Scope and sequencing
 
@@ -267,9 +330,10 @@ migration begins; the migration starts from a fresh clone of origin after
 this arc is fully pushed, never from a synced working tree. This arc does
 not touch the paper, the essays, or the advisor document. Its deliverables
 are the redesigned cost model behind a config switch (the static model
-retained as a reproducible baseline), the swept results under the manifest,
-the design-note-plus-pre-registration committed before data, and a final
-report analyzed against section 7 verbatim.
+retained as a reproducible baseline), the smoke validation and its
+variance estimate, the design-note-plus-pre-registration committed after
+the smoke and before any characterization data, the swept results under
+the manifest, and a final report analyzed against section 7 verbatim.
 
 Post-paper questions logged, not pursued in this arc: the smarter
 sub-O(N^2) check and its relaxed exponent; participation quality and
@@ -277,17 +341,39 @@ convening latency as live variables; the specific compute-to-capability
 mapping shape; the capability-asymmetry surface when both dials turn freely
 beyond the ratio collapse.
 
-## 10. Open items for operator before commit
+## 10. Registration decisions, resolved
 
-1. Confirm the effective-rank axis and its poles as fraction of effective
-   community match intent, with the institution-alone corner mandatory.
-2. Confirm both attack arms, and the A/B floor-fragility asymmetry as a
-   pre-registered finding.
-3. The capability-ratio range: the defensible extremes, defender-favored
-   at the low end and strongest-plausible-attacker at the high end, from
-   the threat model. This sets how far inward the crossover is allowed to
-   push and is the one number that most shapes the finding. [Awaiting
-   operator value.]
-4. Sign-off gate: on approval, the power calculation in section 7 is
-   completed from the smoke run, real numbers inserted, and only then is
-   the note committed as the pre-registration and implementation begun.
+All four operator decisions are settled and written into the plan above.
+This section records them as the resolved analysis plan; nothing here
+remains open.
+
+1. Effective-rank axis and poles as fraction of effective community,
+   confirmed, with the institution-alone analytic corner mandatory in every
+   arm (section 6).
+2. Both attack arms confirmed, with the A/B floor-fragility asymmetry
+   registered as a finding read on two tracks per section 7's Arm B
+   reporting decision.
+3. Capability-ratio range set at 0.1 to 10, log scale, 25 points, centered
+   on parity, with the threat-model basis stated in section 7.
+4. Power set at n=200 per cell for the 15-point defense-failure-rate MEI,
+   grounded in the smoke variance estimates, section 7.
+5. Merge rule registered as threshold-connected-components at 0.9, the
+   defender-conservative choice, with complete-linkage as a registered
+   sensitivity option, section 7.
+6. Arm B failure defined strictly, reported on strict and rank-visible
+   tracks, section 7.
+
+The twelve non-substantive config interpretations surfaced by the smoke
+implementation (similarity construction, collapse-decay schedule, cost
+normalizations, resolution-probability coupling, forged-cluster count,
+institution corruption targeting, and the fixture-only smoke ratios) are
+accepted as built and remain config-visible for later revision without a
+rebuild. They do not affect the registered analysis criteria.
+
+**Commit sequence.** This completed note is committed as the
+pre-registration on the sybil-scaling branch after the smoke artifacts are
+in place, so git history shows the finished plan landing before any
+characterization data exist. The smoke data predating the registration is
+correct: it is instrument-validation and variance-estimation output, not
+outcome data, per the registration boundary in section 8. The
+characterization sweep is authorized as a separate step after this commit.

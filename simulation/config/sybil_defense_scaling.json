@@ -1,0 +1,120 @@
+{
+  "schema_version": "sybil-scaling-config-v1",
+  "scenario": {
+    "existing_vector": "sybil_capture",
+    "validated_path_probe_mode": "smoke"
+  },
+  "poles": {
+    "high_effective_community_fraction": 1.0,
+    "low_effective_community_fraction": 0.25,
+    "deployment_minimum_rank": 2,
+    "analytic_floor_rank": 1
+  },
+  "collapse": {
+    "severity_min": 0.0,
+    "severity_max": 1.0,
+    "base_diversity": 1.0,
+    "decay_rate_base": 1.0,
+    "decay_rate_step": 0.2,
+    "decay_rate_cycle": 3
+  },
+  "attribution": {
+    "similarity_metric": "cosine_shared_lineage",
+    "merge_rule": "threshold_connected_components",
+    "similarity_threshold": 0.9
+  },
+  "floor": {
+    "primary_composition": {
+      "frontier_validator_count": 6,
+      "institution_validator_count": 1
+    },
+    "deployment_minimum": {
+      "frontier_validator_count": 1,
+      "institution_validator_count": 1
+    },
+    "analytic_corner": {
+      "frontier_validator_count": 0,
+      "institution_validator_count": 1
+    },
+    "no_institution_control": {
+      "frontier_validator_count": 6,
+      "institution_validator_count": 0
+    },
+    "institution": {
+      "independent_by_construction": true,
+      "collapse_immune": true
+    }
+  },
+  "costs": {
+    "defense": {
+      "selected": "pairwise_exact",
+      "input_basis": "apparent_inputs",
+      "models": {
+        "pairwise_exact": {
+          "per_comparison_cost": 1.0
+        },
+        "static_baseline": {
+          "fixed_cost": 1.0
+        }
+      }
+    },
+    "attack": {
+      "selected": "linear",
+      "models": {
+        "linear": {
+          "coefficient": 1.0,
+          "exponent": 1.0
+        },
+        "superlinear": {
+          "coefficient": 1.0,
+          "exponent": 1.5
+        }
+      }
+    }
+  },
+  "defender_capability": {
+    "exponent_reduction": 0.0,
+    "base_resolution": 1.0,
+    "resolution_improvement": 1.0
+  },
+  "attack_arms": {
+    "false_cluster_injection": {
+      "enabled": true,
+      "forged_cluster_count": 2
+    },
+    "measurement_corruption": {
+      "enabled": true,
+      "false_independence_probability_multiplier": 1.0,
+      "institution_merge_probability_multiplier": 1.0,
+      "false_independent_similarity": 0.0,
+      "false_correlated_similarity": 1.0
+    }
+  },
+  "smoke": {
+    "authorization": "instrument_validation_only",
+    "run_id": "smoke_sybil_scaling_instrument_v1",
+    "cost_validator_counts": [2, 4, 8],
+    "frontier_validator_count": 6,
+    "nominal_capability_ratio_fixture": 0.05,
+    "far_above_capability_ratio_fixture": 1000000.0,
+    "nominal_replicates_per_arm": 64,
+    "positive_control_replicates_per_arm": 8
+  },
+  "sweep": {
+    "authorization": "blocked_pending_registration",
+    "capability_ratio_range": null,
+    "power_sample_size_per_cell": null,
+    "candidate_resolution": {
+      "rank_points_including_analytic_corner": 25,
+      "ratio_points": 25,
+      "arms": 2,
+      "defense_cost_models": 2,
+      "attack_cost_models": 2
+    }
+  },
+  "outputs": {
+    "root": "data/sybil_defense_scaling",
+    "authoritative_run_prefix": "full_5ac6a2e_",
+    "smoke_run_prefix": "smoke_"
+  }
+}

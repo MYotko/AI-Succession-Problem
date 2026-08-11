@@ -1,0 +1,105 @@
+{
+  "arm_b_floor_observation": {
+    "institution_merged_count": 13,
+    "maximum_measured_rank": 5,
+    "measured_rank_below_two_count": 2,
+    "measured_rank_overcount_count": 43,
+    "minimum_measured_rank": 1,
+    "n": 64
+  },
+  "attribution_ranks": {
+    "analytic_institution_alone": 1,
+    "maximum_collapse_with_institution": 2,
+    "six_correlated_no_collapse": 1,
+    "six_distinct_maximum_collapse": 1,
+    "six_distinct_no_collapse": 6
+  },
+  "cost_scaling": [
+    {
+      "effective_defense_cost": 1.0,
+      "pairwise_checks": 1,
+      "validator_count": 2
+    },
+    {
+      "effective_defense_cost": 6.0,
+      "pairwise_checks": 6,
+      "validator_count": 4
+    },
+    {
+      "effective_defense_cost": 28.0,
+      "pairwise_checks": 28,
+      "validator_count": 8
+    }
+  ],
+  "gate_results": {
+    "a_cost_scaling": true,
+    "b_effective_rank": true,
+    "c_distinct_arm_effects": true,
+    "d_institution_floor": true,
+    "e_positive_controls": true,
+    "overall": true,
+    "validated_path_probe": true
+  },
+  "positive_controls": {
+    "positive_control_high_attacker": {
+      "false_cluster_injection": {
+        "failures": 8,
+        "n": 8
+      },
+      "measurement_corruption": {
+        "failures": 8,
+        "n": 8
+      }
+    },
+    "positive_control_rank_one_no_institution": {
+      "false_cluster_injection": {
+        "failures": 8,
+        "n": 8
+      },
+      "measurement_corruption": {
+        "failures": 8,
+        "n": 8
+      }
+    }
+  },
+  "static_baseline_costs": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "timing_projection": {
+    "candidate_cell_count": 5000,
+    "candidate_resolution": {
+      "arms": 2,
+      "attack_cost_models": 2,
+      "defense_cost_models": 2,
+      "rank_points_including_analytic_corner": 25,
+      "ratio_points": 25
+    },
+    "maximum_seconds": 0.000256684,
+    "mean_seconds": 0.00010754005625,
+    "median_seconds": 9.2882e-05,
+    "minimum_seconds": 6.1638e-05,
+    "p95_seconds": 0.000152584,
+    "projected_core_hours_per_replicate_layer": 0.0002119222222222222,
+    "projected_seconds_per_replicate_layer": 0.7629199999999999,
+    "projection_formula": "0.762920000 seconds times the future operator-set powered replicates per cell",
+    "timed_run_count": 160
+  },
+  "variance_estimates": {
+    "false_cluster_injection": {
+      "defense_failure_mean": 0.484375,
+      "defense_failure_sample_variance": 0.2537202380952381,
+      "n": 64,
+      "rank_error_mean": 0.546875,
+      "rank_error_sample_variance": 0.3787202380952381
+    },
+    "measurement_corruption": {
+      "defense_failure_mean": 0.78125,
+      "defense_failure_sample_variance": 0.1736111111111111,
+      "n": 64,
+      "rank_error_mean": 0.890625,
+      "rank_error_sample_variance": 0.765625
+    }
+  }
+}
