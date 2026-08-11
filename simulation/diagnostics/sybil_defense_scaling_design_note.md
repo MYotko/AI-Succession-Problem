@@ -1,23 +1,21 @@
 # Sybil Defense Scaling Study: Design Note and Pre-Registration
 
-*Completed pre-registration, specification-corrected (second correction).
-The first correction closed four operational-surface gaps. This second
-correction closes three registration gaps found when the characterization
-runner was specified: the 25 rank-axis points are now explicitly
-enumerated as (size, severity) tuples; the ratio-collapse slice is
-corrected from an incoherent nine-cell description to three parity levels
-each carrying the rank axis (75 cells); and the complete-linkage
-sensitivity scope is pinned to Arm A across the full cost grid (100 cells).
-These are completions and a correction of underspecified or mis-stated
-operational values, not changes to the analysis criteria (the MEIs, the
-sample size, the merge rule, the failure definitions, and the readings are
-unchanged). This corrected registration still provably predates all
-characterization data. The registration protects the analysis criteria
-from being chosen after seeing outcome data; the instrument-validation and
-variance-estimation smoke run that grounds the power calculation preceded
-it, which is correct, because variance estimation is not outcome data and
-cannot move the criteria. The characterization sweep is authorized as a
-separate step after this corrected commit.*
+*Completed pre-registration, specification-corrected (fourth and intended-
+final correction), 2026-08-11. The operator directed that the absent,
+uncommitted third-correction note be disregarded. This commit therefore
+incorporates both corrections that had been intended for that artifact and
+the final main-surface measurement correction confirmed after the Stage 1
+diagnostic. The ratio-collapse slice now uses the validated two-dial
+failure-rate curve comparison. The main primary and sensitivity readings now
+use stable fixed-cell failure-rate quantities instead of an interpolated
+crossover rank. The crossover withdrawal is explicit below. Every frozen
+criterion is preserved: the 25-point structural axis, 25 ratios from 0.1 to
+10, both arms, both defense and attack cost forms, n=200, MEI 0.15, failure
+definitions, primary connected-components rule at 0.9, complete-linkage
+sensitivity scope, floor outcomes, and Arm B's two reporting tracks. This
+final corrected registration provably predates every characterization datum.
+The instrument-validation and variance-estimation smokes preceded it, which
+is correct because they are not characterization outcomes.*
 
 *Editorial note: this is a working technical document. Internal parameter
 language is used deliberately here, as in all repository diagnostics. It
@@ -113,18 +111,20 @@ not folded into this study.
 Sybil assumption and the conservative one for demonstrating a defense
 limit: the attacker's cost scales with how many false inputs it must
 introduce to swing consensus against a pool of effective rank N. A
-superlinear-attack sensitivity check is included so the crossover finding
+superlinear-attack sensitivity check is included so the failure-rate finding
 is not fragile to this assumption.
 
-**Capability as a ratio.** Attacker and defender capability enter through
-their ratio, because what determines whether a forged input survives the
-check is the attacker's forging power relative to the defender's resolving
-power. Capability is bought with compute, so the ratio is interpretable as
-a compute ratio. The swept quantity is the capability ratio itself; the
-compute-to-capability mapping is carried as a stated interpretive layer,
-assumed monotonic with shape uncertain, and its uncertainty is not allowed
-to contaminate the swept axis. The specific mapping shape is a post-paper
-refinement.
+**Capability as a ratio, with a validated two-dial check.** The main surface
+uses the derived attacker-to-defender capability ratio with the absolute-
+level term OFF, exactly reproducing the committed ratio mechanism at matched
+ratios. The swept quantity is the capability ratio itself; no compute-to-
+capability curve is baked into the mechanism. Before that surface is
+interpreted as ratio-parameterized, the registered ratio-collapse slice uses
+absolute attacker and defender levels with the validated absolute-resolution
+term ON. That slice can represent either collapse or non-collapse and tests
+the ratio framing rather than assuming it. Capability remains interpretable
+as compute-mediated, but the mapping shape is a post-paper refinement and is
+not allowed to contaminate either swept axis.
 
 **Defender capability, decomposed.** A more capable defender improves the
 check in two mechanistically distinct ways that must be modeled separately,
@@ -141,14 +141,14 @@ avoid.
 The attacker is a single frontier model's forging capacity. Its target is
 not raw flooding but the appearance of independence: making coordinated
 inputs register as distinct clusters. This runs as two arms with different
-crossovers.
+failure-rate mechanisms.
 
 **Arm A, false-cluster injection.** The attacker injects apparent clusters
 the pool does not truly contain; the check must resolve them back to their
 true rank. The direct Sybil analog. The defense wins by correctly
 collapsing forged diversity; the attacker wins when forged clusters survive
-as distinct. Crossover: the check's resolving power against manufactured
-distinctness. The rank-two floor is expected to hold meaningfully here,
+as distinct. Registered reading: the check's resolving failure rate against
+manufactured distinctness. The rank-two floor is expected to hold here,
 because genuine members remain present and checking.
 
 **Arm B, measurement corruption.** The attacker poisons the check so that
@@ -158,8 +158,8 @@ the pool, so a defender can believe it is strong while collapsing, and the
 orthogonal institution's cluster can be scored as correlated and merged
 away. This is the same class of failure as Sub-Threshold Drift, a check
 reporting healthy while the real quantity degrades, and that kinship is
-noted rather than smoothed over. Crossover: whether the rank-two floor is
-even visible to a corrupted check. The floor is expected to be fragile
+noted rather than smoothed over. Registered reading: whether the rank-two
+floor is visible to a corrupted check. The floor is expected to be fragile
 here, and locating that fragility is a primary purpose of the study.
 
 The A/B asymmetry is itself a pre-registered finding: a robust structural
@@ -189,23 +189,23 @@ points are registered as (size, severity) tuples; effective rank at each
 point is measured by the merge rule, not assigned, so "rank axis" denotes
 these 25 structural points and the effective rank at each is an instrument
 output. Resolution is densest at low effective rank near the floor, which
-is where the operating regime and any plausible-regime crossover live. The
+is where the operating regime and policy-relevant failure rates live. The
 geometric size spacing matches the multiplicative structure of both
 effective rank and the O(N^2) cost.
 
 **Why 64 is the upper bound, registered rationale.** The operating regime
 the framework cares about is low effective rank: the count of genuinely
 independent frontier lineages is single digits today and model collapse
-pushes effective independence lower, so the crossover, if it exists in a
-plausible regime, lives at low rank near the floor, and that is where the
-axis is densest. The high-rank cells (32, 64) do not model a realistic
+pushes effective independence lower, so the policy-relevant cells live near
+the floor, and that is where the axis is densest. The high-rank cells (32,
+64) do not model a realistic
 pool; they exist to make the O(N^2) defense-cost asymmetry legible. At
 N=64 the pairwise count is 2,016 against linear attack cost, a roughly 64x
 cost ratio, which is where the superlinear penalty is unmistakable and the
-crossover geometry is clean. Sixty-four is the smaller bound that still
+cost geometry is clean. Sixty-four is the smaller bound that still
 demonstrates the cost asymmetry the study claims; larger N quadruples per-
-cell cost for no added insight once the curve's divergence is established
-and the crossover is bracketed. The justification for the high end is the
+cell cost for no added insight once the curve's divergence is established.
+The justification for the high end is the
 cost curve, not a demographic claim about pool size, and the note states
 it as such.
 
@@ -225,26 +225,30 @@ it as such.
 power, as a capability ratio, swept across the registered ratio range in
 section 7. Plus the superlinear-attack-cost check.
 
-**The ratio-collapse validation slice, registered.** The two capability
-dials are hypothesized to matter only through their ratio. Before the main
-surface is reported as ratio-parameterized, a validation slice holds the
-capability ratio fixed at parity (attacker level equal to defender level)
-and varies that common parity level across three registered points,
-{0.316, 1.0, 3.16} (log-spaced within the central portion of the 0.1-to-10
-ratio range), locating the crossover at each by running the full 25-point
-rank axis. This is 3 levels by 25 rank points, 75 cells, n=200 per cell
-matching the main surface. (An earlier draft described this as a nine-cell
-3-by-3 grid; that was incorrect, because a 3-by-3 attacker-by-defender grid
-has only three parity cells, and locating a crossover at each parity level
-requires the rank axis, not a single cell. The registered construction is
-three parity levels each carrying the rank axis.) Pass criterion, fixed
-here: the located crossover rank does not move by more than one rank point
-across the three parity levels. A movement of more than one rank point
-means the dials do not collapse to their ratio; that is registered as a
-finding that sends the study to the fuller two-dial grid rather than the
-ratio-parameterized surface, and the fuller grid is not run on a hunch.
-The slice runs and reports before the main surface is interpreted as a
-rank-by-ratio result.
+**The ratio-collapse validation slice, final registered form.** The two
+capability dials are hypothesized to matter only through their ratio. Before
+the main surface is reported as ratio-parameterized, the validated two-dial
+instrument holds derived ratio at parity and varies the equal absolute
+attacker and defender levels across {0.316, 1.0, 3.16}. Each level carries
+the full 25-point structural rank axis, for 75 cells at n=200. The slice uses
+Arm A, exact pairwise defense cost, linear attack cost, primary connected-
+components attribution at 0.9, and the absolute-resolution term ON with its
+validated power-law form, reference level 1.0, and strength
+0.22163300225716118. These are the validated primary slice settings, not an
+additional cost or arm grid.
+
+The finding quantity is the failure-rate curve compared cell by cell across
+the three parity levels, never a crossover rank. At each structural point,
+all three pairwise absolute failure-rate differences are calculated. For a
+difference `d`, its registered normal delta-method 95 percent interval is
+`d +/- 1.96 * sqrt(p1*(1-p1)/200 + p2*(1-p2)/200)`. The dials collapse to
+their ratio if every interval's upper bound is below the 0.15 MEI. They do
+not collapse if at least one interval's lower bound is at or above 0.15.
+Any other result is boundary. A non-collapse result is reported as a
+material caveat on every ratio-expressed main-surface reading and identifies
+the fuller two-dial grid as a future registered study; that fuller grid is
+not added here. The slice runs and reports before the main surface is
+interpreted as ratio-parameterized.
 
 **Fixed and stated for round one, with bias direction named, logged for
 the next arc:**
@@ -263,72 +267,74 @@ the next arc:**
 Stated before any data exist. Each reading is fixed per arm, including the
 reading of a null and of a boundary result.
 
-**Primary, per arm:** the effective rank below which the pool cannot
-out-resolve a single forger. Reported as the crossover rank, with the
-crossover located on the swept axis and its confidence characterized at
-the cells that bracket it.
+**Primary, per arm, final registered form:** the fixed-cell defense-failure
+proportions at every maximum-collapse rank-two floor cell, reported
+separately for all six validator-set sizes and all four cost combinations.
+No cells are aggregated by effective rank because headcount still controls
+pairwise cost and Arm B corruption opportunities after rank collapses to
+two. The institution-only rank-one analytic corner is reported separately.
+Each proportion carries its normal 95 percent interval. Arm B strict failure
+is its primary proportion and rank-visible failure is its required companion
+track. The primary A/B contrast is the fixed-cell absolute difference with
+the same normal delta-method interval and 0.15 MEI discipline.
 
-**Headline, per arm:** whether the rank-two floor (collapsed frontier plus
-orthogonal institution) clears the attacker at maximum collapse. Three
-pre-registered outcomes: floor clears (defense has a hard structural floor
-immune to collapse); floor fails (defense inherits collapse risk, the
-institution is a boost not a floor); floor is boundary (clears in Arm A,
-fails in Arm B, the expected and most informative result, localizing risk
-in check integrity).
+**Headline, per arm:** whether each fixed rank-two floor cell clears the
+attacker at maximum collapse. A cell clears when its failure-rate interval
+is wholly below 0.5, fails when the interval is wholly above 0.5, and is
+statistical boundary when the interval includes 0.5. The three frozen
+cross-arm outcomes are then read at each cell and cost form: floor clears
+when both arms clear; floor fails when both fail; floor is boundary when the
+arms differ or either arm is statistical boundary. The direction of any
+mixed result is always stated, including a direction opposite the expected
+Arm-A-clears and Arm-B-fails pattern. Arm B is read on both strict and rank-
+visible tracks, so two cross-arm floor outcomes are reported per cell.
 
-**Sensitivity:** how the crossover rank responds to the capability ratio.
-Pre-registered as robust (crossover moves little across the swept ratio
-range) versus ratio-sensitive (crossover collapses inward as attacker
-capability rises). Ratio-sensitive is the expected outcome; naming it in
-advance is what keeps it from being a post-hoc story. The capability ratio
-is attacker forging capacity over defender resolving power, swept from 0.1
-to 10 on a log scale at 25 points, two orders of magnitude centered on
-parity. The defender-favored floor at 10x defender advantage and the
-strong-attacker bound at 10x attacker advantage bracket the plausible
-asymmetry between the convened pool and a single frontier model; ratios
-beyond that are structurally determined (the smoke positive control at
-ratio 1,000,000 fails in both arms), so extending the range buys foregone
-conclusions at the cost of resolution near the crossover. A threat model
-in which a single model can out-forge the convened pool by more than 10x
-would justify widening the upper bound, and that widening is itself a
-stated threat-model claim; the registered range does not assume it.
+**Ratio sensitivity, final registered form:** at every fixed structural and
+cost cell, report the full 25-point failure-rate curve and calculate the
+pre-fixed endpoint contrast `d = F(ratio 10) - F(ratio 0.1)`. Arm A and Arm
+B strict are monotonic in ratio under the committed mechanism, so this
+signed contrast is the full registered ratio response without a selected
+interior threshold. Its 95 percent interval is
+`d +/- 1.96 * sqrt(p10*(1-p10)/200 + p01*(1-p01)/200)`. A cell is ratio-
+sensitive when the interval's lower bound is at or above the 0.15 MEI,
+robust when its upper bound is below 0.15, and boundary otherwise. Arm B
+strict supplies the per-arm classification; the rank-visible 25-point curve
+and endpoint contrast are reported separately as the companion track. The
+ratio remains swept from 0.1 to 10 at 25 log-spaced points. Ratios beyond
+that frozen range are not added.
 
-**Minimum effects and power.** The characterization compares defense-
-failure rate between adjacent cells to locate a crossover, a two-proportion
-comparison. The minimum effect of interest is a 15 percentage point
-difference in defense-failure rate between adjacent rank cells; a shift
-smaller than that is margin noise, not an actionable boundary. Sample size
-is set for 80 percent power, two-sided, at alpha 0.05, at worst-case
-binomial variance (p=0.5), which requires 174 per cell for the 15-point
-MEI; the registered n is 200 per cell, carrying margin above that and
-over-powering Arm B, whose failure rate sits away from 0.5 (smoke mean
-0.78) and therefore has lower variance. A threshold crossable by noise at
-n=200 is not a criterion; the 15-point MEI clears that bar at this n. The
-variance estimates grounding this calculation are the smoke fixture
-variances (Arm A defense-failure sample variance 0.2537 at mean 0.484; Arm
-B 0.1736 at mean 0.781), which are instrument-validation and variance-
-estimation outputs, not readings of a crossover. At n=200 the full
-candidate surface (25 rank points by 25 ratio points by 2 arms by 2
-defense-cost forms by 2 attack-cost forms, 5,000 cells) is one million
-runs, single-digit minutes of compute across the available cores before
-orchestration overhead, so the sample size is not resource-constrained and
-is set for power, not economy.
+**Minimum effects and power.** Every registered comparison is now between
+fixed-cell defense-failure proportions. The MEI remains a 15 percentage
+point difference. At worst-case binomial variance, 80 percent power,
+two-sided alpha 0.05 requires
+`ceil(3.924439867174543 / 0.15^2) = 175` per cell. The registered n remains
+200, carrying 25 observations of margin and approximate worst-case power
+0.850838768327. The maximum fixed-cell proportion SE is 0.035355339059 and
+the maximum independent difference SE is 0.05. The variance estimates
+grounding the calculation remain the smoke values; no characterization
+outcome set n or the MEI. The main surface remains 5,000 cells and one
+million runs.
 
 **Merge rule, registered choice.** Effective rank is computed by threshold-
 connected-components on pairwise cosine similarity at threshold 0.9. This
-is the primary registered rule, chosen as the defender-conservative option:
-connected-components merges more readily than complete-linkage, collapsing
-rank sooner, which is the harder and therefore more honest direction for a
-study whose headline concerns defender fragility. Complete-linkage is
-retained as a registered sensitivity pass, run at reduced scope: Arm A
-(false-cluster injection, the direct Sybil analog and the arm with the
-cleanest crossover), across both defense-cost forms and both attack-cost
-forms (the full 2-by-2 cost grid), the full 25-point rank axis, at a single
-parity capability ratio (1.0), n=200 per cell, which is 25 by 2 by 2 = 100
-cells. Its sole purpose is to answer whether the located crossover moves
-under a different merge rule; it is a reduced slice, not a duplicate of the
-full surface, and it is reported separately from the primary result rather
-than blended into it.
+remains the primary defender-conservative rule. Complete linkage remains the
+registered reduced-scope sensitivity pass: Arm A, both defense-cost forms,
+both attack-cost forms, the full 25-point structural axis, parity ratio 1.0,
+and n=200, for 100 cells. Its finding quantity is the fixed-cell absolute
+difference between complete-linkage and primary connected-components
+failure rates. A cell is merge-sensitive when the difference interval's
+lower bound is at or above 0.15, robust when its upper bound is below 0.15,
+and boundary otherwise. The complete-linkage results are reported
+separately and never blended into the primary surface.
+
+**Dated crossover withdrawal, 2026-08-11.** The earlier primary crossover-
+rank and crossover-movement readings are withdrawn before characterization.
+Exact mechanism diagnostics showed that rank alone does not identify a cell,
+the 0.5 crossing is usually absent, and interpolation uncertainty is slope-
+amplified beyond one rank unit in the relevant curves. A crossing may be
+reported descriptively when one exists, but it carries no registered verdict
+and is not used by the primary, ratio-sensitivity, ratio-collapse, or merge-
+sensitivity readings.
 
 **Arm B failure reporting, registered choice.** Arm B defense failure is
 defined strictly: any partition corruption counts as failure, including a
@@ -404,9 +410,8 @@ beyond the ratio collapse.
 
 ## 10. Registration decisions, resolved
 
-All four operator decisions are settled and written into the plan above.
-This section records them as the resolved analysis plan; nothing here
-remains open.
+All operator decisions are settled and written into the plan above. This
+section records the final analysis plan; nothing here remains open.
 
 1. Effective-rank axis operationalized through a registered validator-set-
    size range (2, 4, 8, 16, 32, 64 geometric plus the institution-alone
@@ -417,20 +422,25 @@ remains open.
    registered as a finding read on two tracks per section 7's Arm B
    reporting decision.
 3. Capability-ratio range set at 0.1 to 10, log scale, 25 points, centered
-   on parity, with the threat-model basis stated in section 7. The ratio-
-   collapse validation slice is fully specified in section 6: parity, nine
-   cells, n=200, one-rank-point pass criterion.
+   on parity. Ratio sensitivity is the fixed-cell endpoint contrast with the
+   full curve reported, section 7.
 4. Power set at n=200 per cell for the 15-point defense-failure-rate MEI,
    grounded in the smoke variance estimates, section 7.
 5. Merge rule registered as threshold-connected-components at 0.9, the
    defender-conservative choice, with complete-linkage as a registered
-   reduced-scope sensitivity pass, section 7.
+   reduced-scope fixed-cell sensitivity pass, section 7.
 6. Arm B failure defined strictly, reported on strict and rank-visible
    tracks, section 7.
-7. Config reconciled with prose: capability_ratio_range set to 0.1 to 10
-   log-spaced 25 points, power_sample_size_per_cell set to 200, and the
-   validator-set-size range set to the section 6 geometric steps. No null
-   analysis-plan field remains.
+7. Ratio collapse registered as the 75-cell two-dial term-ON curve
+   comparison at three parity levels, MEI 0.15, n=200, section 6.
+8. Primary finding registered as the fixed maximum-collapse floor cells and
+   two-track A/B asymmetry. Crossover rank is withdrawn, section 7.
+9. The characterization runner and config reconciliation are mechanical
+   post-registration implementation steps. The schema values are fixed here:
+   25 log-spaced ratios from 0.1 to 10, six sizes crossed with four
+   severities plus the analytic corner, n=200, 75 ratio-collapse cells, and
+   100 complete-linkage cells. Authorization remains blocked until the
+   runner self-check proves those shapes.
 
 The twelve non-substantive config interpretations surfaced by the smoke
 implementation (similarity construction, collapse-decay schedule, cost
@@ -439,15 +449,13 @@ institution corruption targeting, and the fixture-only smoke ratios) are
 accepted as built and remain config-visible for later revision without a
 rebuild. They do not affect the registered analysis criteria.
 
-**Commit sequence.** This specification-corrected note is committed as the
-corrected pre-registration on the sybil-scaling branch, alongside the
-reconciled config, after the smoke artifacts and before any characterization
-data. Git history therefore shows: smoke artifacts (instrument validation
-and variance), then the original registration, then this specification
-correction closing the operational gaps, then the characterization data,
-which does not yet exist. The correction commit message states plainly that
-it completes the operational surface and changes no analysis criterion. The
-smoke data predating the registration is correct: it is instrument-
-validation and variance-estimation output, not outcome data, per the
-registration boundary in section 8. The characterization sweep is authorized
-as a separate step after this corrected commit.
+**Commit sequence.** This note is the final corrected pre-registration on the
+sybil-scaling branch. It follows both smoke validations and the report-only
+measurement diagnostic, and it precedes the characterization runner,
+self-check, and every characterization datum. The absent third-correction
+artifact was explicitly waived by the operator on 2026-08-11; its intended
+two-dial curve correction is incorporated here. The next commit may implement
+the frozen runner and reconcile config, but may not change this plan. Only a
+passing shape self-check may flip characterization authorization. Results and
+analysis follow in later commits and are selected only through the committed
+authoritative manifest.
