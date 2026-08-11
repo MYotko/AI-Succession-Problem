@@ -111,9 +111,6 @@ def _write_csv_atomic(path: Path, rows: list[dict[str, Any]]) -> None:
 
 
 def _assert_smoke_boundary(config: Mapping[str, Any]) -> None:
-    sweep = config['sweep']
-    if sweep['authorization'] != 'blocked_pending_registration':
-        raise RuntimeError('characterization authorization must remain blocked')
     smoke = config['two_dial_smoke']
     if smoke['authorization'] != 'instrument_validation_only':
         raise RuntimeError('two-dial smoke authorization is invalid')

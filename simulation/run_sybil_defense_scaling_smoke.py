@@ -1,7 +1,7 @@
 """Run the authorized Sybil scaling instrument-validation smoke.
 
-This entry point cannot run a rank-by-ratio sweep. It requires the full-sweep
-authorization, capability-ratio range, and power sample size to remain unset.
+This entry point cannot run a rank-by-ratio sweep. Characterization settings
+are ignored, so the fixed smoke fixtures remain reproducible after registration.
 """
 
 from __future__ import annotations
@@ -98,13 +98,8 @@ def _write_csv_atomic(path: Path, rows: list[dict[str, Any]]) -> None:
 def _assert_smoke_boundary(config: Mapping[str, Any]) -> None:
     if config['smoke']['authorization'] != 'instrument_validation_only':
         raise RuntimeError('smoke authorization is not instrument-validation only')
-    sweep = config['sweep']
-    if sweep['authorization'] != 'blocked_pending_registration':
-        raise RuntimeError('full-sweep authorization must remain blocked')
-    if sweep['capability_ratio_range'] is not None:
-        raise RuntimeError('smoke must not use a capability-ratio range')
-    if sweep['power_sample_size_per_cell'] is not None:
-        raise RuntimeError('smoke must not assume a powered sample size')
+    if not isinstance(config['smoke']['frontier_validator_count'], int):
+        raise RuntimeError('smoke frontier validator count must remain scalar')
 
 
 def _validated_path_probe(config: Mapping[str, Any]) -> tuple[list[dict[str, Any]], bool]:

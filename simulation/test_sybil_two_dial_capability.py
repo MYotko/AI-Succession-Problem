@@ -18,10 +18,9 @@ def config():
     return load_config(CONFIG_PATH)
 
 
-def test_two_dial_term_defaults_off_and_sweep_stays_blocked(config):
+def test_two_dial_term_defaults_off_and_smoke_scalar_is_preserved(config):
     term = config['two_dial_capability']['absolute_resolution_term']
     assert term['enabled'] is False
-    assert config['sweep']['authorization'] == 'blocked_pending_registration'
     assert isinstance(config['smoke']['frontier_validator_count'], int)
 
 

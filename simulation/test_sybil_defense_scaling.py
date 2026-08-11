@@ -50,10 +50,20 @@ def _costs(config, true_rank, validator_count):
     return defense, attack, resolution
 
 
-def test_open_sweep_inputs_remain_unset(config):
-    assert config['sweep']['authorization'] == 'blocked_pending_registration'
-    assert config['sweep']['capability_ratio_range'] is None
-    assert config['sweep']['power_sample_size_per_cell'] is None
+def test_registered_sweep_inputs_are_reconciled(config):
+    sweep = config['sweep']
+    assert sweep['authorization'] == 'authorized_registered_characterization'
+    assert sweep['capability_ratio_range'] == {
+        'schema': 'geomspace',
+        'start': 0.1,
+        'stop': 10.0,
+        'count': 25,
+    }
+    assert sweep['power_sample_size_per_cell'] == 200
+    assert sweep['structural_axis']['validator_set_sizes'] == [
+        2, 4, 8, 16, 32, 64
+    ]
+    assert config['smoke']['frontier_validator_count'] == 6
 
 
 def test_six_identical_validators_contribute_one_input(config):

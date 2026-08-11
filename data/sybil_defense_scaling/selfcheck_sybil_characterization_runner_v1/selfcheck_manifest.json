@@ -1,0 +1,16 @@
+{
+  "artifacts": [
+    {
+      "path": "data/sybil_defense_scaling/selfcheck_sybil_characterization_runner_v1/selfcheck_evidence.json",
+      "sha256": "c3bc6a80f06e2d9d069c9ac6c32260fd973d1721dfd763b6b87af8851ab1d014"
+    }
+  ],
+  "authoritative_artifacts": [],
+  "config_sha256": "027fb8e51902b1267f7eb3b33cc7f72a78a808a0e185a4a26872693aa3d7ddb0",
+  "git_head": "61222f1230ea0d9911eb815d1c83dabf9dd4a662",
+  "non_authoritative": true,
+  "passed": true,
+  "prefix_exclusion": "selfcheck_",
+  "run_id": "selfcheck_sybil_characterization_runner_v1",
+  "schema": "sybil-characterization-selfcheck-manifest-v1"
+}

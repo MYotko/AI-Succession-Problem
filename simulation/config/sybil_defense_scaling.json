@@ -138,9 +138,50 @@
     }
   },
   "sweep": {
-    "authorization": "blocked_pending_registration",
-    "capability_ratio_range": null,
-    "power_sample_size_per_cell": null,
+    "authorization": "authorized_registered_characterization",
+    "run_id": "full_5ac6a2e_sybil_scaling_characterization_v1",
+    "capability_ratio_range": {
+      "schema": "geomspace",
+      "start": 0.1,
+      "stop": 10.0,
+      "count": 25
+    },
+    "power_sample_size_per_cell": 200,
+    "structural_axis": {
+      "validator_set_sizes": [2, 4, 8, 16, 32, 64],
+      "collapse_severities": [0.0, 0.33, 0.66, 1.0],
+      "institution_alone_corner": {
+        "validator_set_size": 1,
+        "collapse_severity": 1.0
+      }
+    },
+    "main_surface": {
+      "arms": ["false_cluster_injection", "measurement_corruption"],
+      "defense_cost_models": ["pairwise_exact", "static_baseline"],
+      "attack_cost_models": ["linear", "superlinear"],
+      "merge_rule": "threshold_connected_components",
+      "absolute_term_enabled": false
+    },
+    "ratio_collapse_slice": {
+      "arm": "false_cluster_injection",
+      "defense_cost_model": "pairwise_exact",
+      "attack_cost_model": "linear",
+      "merge_rule": "threshold_connected_components",
+      "parity_levels": [0.316, 1.0, 3.16],
+      "absolute_term_enabled": true,
+      "failure_rate_mei": 0.15
+    },
+    "complete_linkage_sensitivity": {
+      "arm": "false_cluster_injection",
+      "defense_cost_models": ["pairwise_exact", "static_baseline"],
+      "attack_cost_models": ["linear", "superlinear"],
+      "capability_ratio": 1.0,
+      "merge_rule": "threshold_greedy_complete_linkage"
+    },
+    "selfcheck": {
+      "run_id": "selfcheck_sybil_characterization_runner_v1",
+      "tiny_n": 1
+    },
     "candidate_resolution": {
       "rank_points_including_analytic_corner": 25,
       "ratio_points": 25,
@@ -153,6 +194,7 @@
     "root": "data/sybil_defense_scaling",
     "authoritative_run_prefix": "full_5ac6a2e_",
     "smoke_run_prefix": "smoke_",
-    "two_dial_smoke_run_prefix": "two_dial_smoke_"
+    "two_dial_smoke_run_prefix": "two_dial_smoke_",
+    "selfcheck_run_prefix": "selfcheck_"
   }
 }
