@@ -77,6 +77,14 @@
     "base_resolution": 1.0,
     "resolution_improvement": 1.0
   },
+  "two_dial_capability": {
+    "absolute_resolution_term": {
+      "enabled": false,
+      "form": "defender_power_law_resolution",
+      "reference_level": 1.0,
+      "strength": 0.22163300225716118
+    }
+  },
   "attack_arms": {
     "false_cluster_injection": {
       "enabled": true,
@@ -100,6 +108,35 @@
     "nominal_replicates_per_arm": 64,
     "positive_control_replicates_per_arm": 8
   },
+  "two_dial_smoke": {
+    "authorization": "instrument_validation_only",
+    "run_id": "two_dial_smoke_sybil_scaling_curve_v1",
+    "parity_levels": [0.316, 1.0, 3.16],
+    "validator_set_sizes": [2, 4, 8, 16, 32, 64],
+    "collapse_severity": 0.0,
+    "failure_rate_mei": 0.15,
+    "replicates_per_cell": 200,
+    "power": {
+      "two_sided_alpha": 0.05,
+      "target_power": 0.8,
+      "worst_case_probability": 0.5
+    },
+    "ratio_recovery_tolerance": 1e-9,
+    "calibration": {
+      "target_maximum_separation": 0.15,
+      "most_sensitive_validator_set_size": 64
+    },
+    "gate_5": {
+      "replicates_per_cell": 50,
+      "cells": [
+        {"validator_set_size": 2, "capability_ratio": 0.1},
+        {"validator_set_size": 2, "capability_ratio": 10.0},
+        {"validator_set_size": 64, "capability_ratio": 0.1},
+        {"validator_set_size": 64, "capability_ratio": 10.0},
+        {"validator_set_size": 8, "capability_ratio": 1.0}
+      ]
+    }
+  },
   "sweep": {
     "authorization": "blocked_pending_registration",
     "capability_ratio_range": null,
@@ -115,6 +152,7 @@
   "outputs": {
     "root": "data/sybil_defense_scaling",
     "authoritative_run_prefix": "full_5ac6a2e_",
-    "smoke_run_prefix": "smoke_"
+    "smoke_run_prefix": "smoke_",
+    "two_dial_smoke_run_prefix": "two_dial_smoke_"
   }
 }

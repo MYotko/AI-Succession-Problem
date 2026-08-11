@@ -1,0 +1,14 @@
+gate_1_ratio_recovery: PASS
+gate_2_collapse_control: PASS
+gate_3_noncollapse_control: PASS
+gate_4_variance: PASS
+gate_5_main_surface_non_regression: PASS
+overall: PASS
+curve_cell_count: 36
+curve_run_count: 7200
+non_regression_paired_comparisons: 250
+started_at_utc: 2026-08-11T01:21:39.823439+00:00
+ended_at_utc: 2026-08-11T01:21:40.105066+00:00
+full_sweep_executed: false
+ratio_collapse_slice_executed: false
+crossover_computed: false

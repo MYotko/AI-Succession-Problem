@@ -21,6 +21,7 @@ SUPPORTED_MERGE_RULES = {
 }
 SUPPORTED_DEFENSE_COST_MODELS = {'pairwise_exact', 'static_baseline'}
 SUPPORTED_ATTACK_COST_MODELS = {'linear', 'superlinear'}
+SUPPORTED_ABSOLUTE_RESOLUTION_TERMS = {'defender_power_law_resolution'}
 
 
 @dataclass(frozen=True)
@@ -81,6 +82,20 @@ class AttackResult:
     institution_visible: bool
     resolution_probability: float
     details: Mapping[str, Any]
+
+
+@dataclass(frozen=True)
+class TwoDialCapabilityTerms:
+    """Derived capability terms while preserving both absolute input levels."""
+
+    attacker_capability: float
+    defender_capability: float
+    capability_ratio: float
+    absolute_term_enabled: bool
+    absolute_term_form: str
+    absolute_term_strength: float
+    absolute_resolution_multiplier: float
+    effective_resolution_power: float
 
 
 def load_config(path: str | Path) -> dict[str, Any]:
@@ -145,6 +160,17 @@ def validate_config(config: Mapping[str, Any]) -> None:
     if float(config['defender_capability']['base_resolution']) <= 0.0:
         raise ValueError('base_resolution must be positive')
 
+    two_dial = config['two_dial_capability']
+    absolute_term = two_dial['absolute_resolution_term']
+    if absolute_term['form'] not in SUPPORTED_ABSOLUTE_RESOLUTION_TERMS:
+        raise ValueError('unsupported absolute resolution term')
+    if not isinstance(absolute_term['enabled'], bool):
+        raise ValueError('absolute resolution enabled switch must be boolean')
+    if float(absolute_term['strength']) < 0.0:
+        raise ValueError('absolute resolution strength must be nonnegative')
+    if float(absolute_term['reference_level']) <= 0.0:
+        raise ValueError('absolute resolution reference level must be positive')
+
     arms = config['attack_arms']
     expected_arms = {'false_cluster_injection', 'measurement_corruption'}
     if set(arms) != expected_arms:
@@ -155,6 +181,64 @@ def validate_config(config: Mapping[str, Any]) -> None:
 
 def _clamp(value: float, low: float = 0.0, high: float = 1.0) -> float:
     return max(low, min(high, float(value)))
+
+
+def derive_two_dial_capability_terms(
+    *,
+    attacker_capability: float,
+    defender_capability: float,
+    base_resolution_power: float,
+    two_dial_config: Mapping[str, Any],
+    absolute_term_enabled: bool | None = None,
+) -> TwoDialCapabilityTerms:
+    """Derive the ratio and optional absolute defender resolution channel.
+
+    The configured power-law channel treats absolute defender capability as
+    evidence-resolution throughput for the independence check. Its exponent
+    is an elasticity. Disabling the term fixes its multiplier at exactly one,
+    so matched derived ratios recover the committed mechanism.
+    """
+
+    attacker = float(attacker_capability)
+    defender = float(defender_capability)
+    resolution = float(base_resolution_power)
+    if attacker < 0.0:
+        raise ValueError('attacker_capability must be nonnegative')
+    if defender <= 0.0:
+        raise ValueError('defender_capability must be positive')
+    if resolution <= 0.0:
+        raise ValueError('base_resolution_power must be positive')
+
+    term = two_dial_config['absolute_resolution_term']
+    form = str(term['form'])
+    if form not in SUPPORTED_ABSOLUTE_RESOLUTION_TERMS:
+        raise ValueError('unsupported absolute resolution term')
+    enabled = (
+        bool(term['enabled'])
+        if absolute_term_enabled is None
+        else bool(absolute_term_enabled)
+    )
+    strength = float(term['strength'])
+    reference = float(term['reference_level'])
+    if strength < 0.0:
+        raise ValueError('absolute resolution strength must be nonnegative')
+    if reference <= 0.0:
+        raise ValueError('absolute resolution reference level must be positive')
+
+    multiplier = 1.0
+    if enabled:
+        multiplier = (defender / reference) ** strength
+    ratio = attacker / defender
+    return TwoDialCapabilityTerms(
+        attacker_capability=attacker,
+        defender_capability=defender,
+        capability_ratio=ratio,
+        absolute_term_enabled=enabled,
+        absolute_term_form=form,
+        absolute_term_strength=strength,
+        absolute_resolution_multiplier=multiplier,
+        effective_resolution_power=resolution * multiplier,
+    )
 
 
 def build_validator_pool(

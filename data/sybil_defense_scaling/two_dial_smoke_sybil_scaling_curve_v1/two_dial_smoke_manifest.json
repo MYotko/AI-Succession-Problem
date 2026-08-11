@@ -1,0 +1,70 @@
+{
+  "artifacts": {
+    "two_dial_smoke_evidence.json": {
+      "bytes": 50624,
+      "sha256": "76a583bf18d34a4bcc0f917d5df50a6c045cb074453d5ca920f8c567c803bd7d"
+    },
+    "two_dial_smoke_execution.log": {
+      "bytes": 436,
+      "sha256": "4c52f9f54e5cd35203828fdae7ea40a2f1fc25fb0b0b47b87d1e7a358cc1bfe1"
+    },
+    "two_dial_smoke_report.md": {
+      "bytes": 6205,
+      "sha256": "23aae5951ae0810abf666c10e74dc472184358d8d41ce56a48575b30fd12f87c"
+    },
+    "two_dial_smoke_results.csv": {
+      "bytes": 1577573,
+      "sha256": "c4a376172be8f7e85c4476fce25415f1fac3b78f47b86deb56b6ea30371a94e4"
+    }
+  },
+  "authoritative_manifest": false,
+  "branch": "sybil-scaling",
+  "characterization_authorization": "blocked_pending_registration",
+  "config_path": "/home/yotko/Documents/Github/ai-succession-problem/simulation/config/sybil_defense_scaling.json",
+  "config_sha256": "6b1f2a54e77cd596f448689c878b5225d009b7b2f98ae661649a2577d6e4758a",
+  "counts": {
+    "gate_1_and_5_cells": 5,
+    "gate_1_and_5_mechanism_evaluations": 500,
+    "gate_1_and_5_paired_comparisons": 250,
+    "gate_2_cells": 18,
+    "gate_2_runs": 3600,
+    "gate_3_cells": 18,
+    "gate_3_runs": 3600,
+    "result_rows": 7450
+  },
+  "cpu_count": 12,
+  "crossover_computed": false,
+  "ended_at_utc": "2026-08-11T01:21:40.105066+00:00",
+  "full_sweep_executed": false,
+  "gate_results": {
+    "gate_1_ratio_recovery": true,
+    "gate_2_collapse_control": true,
+    "gate_3_noncollapse_control": true,
+    "gate_4_variance": true,
+    "gate_5_main_surface_non_regression": true,
+    "overall": true
+  },
+  "head_commit": "2b39c14f60c57c870a3bf26580849c26a3d3686a",
+  "mode": "instrument_validation_only",
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "power": {
+    "coefficient": 3.924439867174543,
+    "configured_n_per_cell": 200,
+    "mei": 0.15,
+    "n_margin": 25,
+    "normal_approximation_power_at_configured_n": 0.8508387683270561,
+    "raw_required_n_per_group": 174.4195496522019,
+    "required_n_per_group": 175,
+    "target_power": 0.8,
+    "two_sided_alpha": 0.05,
+    "worst_case_probability": 0.5,
+    "z_alpha": 1.9599639845400536,
+    "z_power": 0.8416212335729144
+  },
+  "python": "3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0]",
+  "ratio_collapse_slice_executed": false,
+  "run_id": "two_dial_smoke_sybil_scaling_curve_v1",
+  "schema_version": "sybil-two-dial-smoke-manifest-v1",
+  "started_at_utc": "2026-08-11T01:21:39.823439+00:00",
+  "working_tree_status": "M simulation/config/sybil_defense_scaling.json\n M simulation/sybil_defense_scaling.py\n?? data/sybil_defense_scaling/two_dial_smoke_sybil_scaling_curve_v1/\n?? simulation/diagnostics/sybil_failure_curve_mei_power_diagnostic.md\n?? simulation/diagnostics/two_dial_mechanism_spec.md\n?? simulation/run_sybil_two_dial_smoke.py\n?? simulation/test_sybil_two_dial_capability.py"
+}
