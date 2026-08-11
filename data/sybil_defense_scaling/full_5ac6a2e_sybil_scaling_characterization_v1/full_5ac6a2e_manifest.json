@@ -1,0 +1,72 @@
+{
+  "authoritative_artifacts": [
+    {
+      "path": "data/sybil_defense_scaling/full_5ac6a2e_sybil_scaling_characterization_v1/full_5ac6a2e_ratio_collapse_slice_results.csv",
+      "rows": 75,
+      "sha256": "1a8542131aeee66086f1f6950672f89a8685ba979971597121462973be6f5a1e"
+    },
+    {
+      "path": "data/sybil_defense_scaling/full_5ac6a2e_sybil_scaling_characterization_v1/full_5ac6a2e_main_surface_results.csv",
+      "rows": 5000,
+      "sha256": "8be54a3e40aad76db709b4707c4c8dce3ff26416f36d61b32d58a8bf36cc5eb6"
+    },
+    {
+      "path": "data/sybil_defense_scaling/full_5ac6a2e_sybil_scaling_characterization_v1/full_5ac6a2e_complete_linkage_results.csv",
+      "rows": 100,
+      "sha256": "70cf488ce26d0ec58006780517595db7a0d57c3a4a489f64c9ccf3b29000b435"
+    }
+  ],
+  "completed_counts": {
+    "complete_linkage": {
+      "cells": 100,
+      "runs": 20000
+    },
+    "main_surface": {
+      "cells": 5000,
+      "runs": 1000000
+    },
+    "ratio_collapse_slice": {
+      "cells": 75,
+      "runs": 15000
+    }
+  },
+  "config_path": "simulation/config/sybil_defense_scaling.json",
+  "config_sha256": "c3271d866be1ad0a6f806c622d7281e8bff405b37add956e92f74acaed6031e0",
+  "created_utc": "2026-08-11T21:30:24.007401+00:00",
+  "design_note_path": "simulation/diagnostics/sybil_defense_scaling_design_note.md",
+  "design_note_sha256": "b6bc09a8e022da3af768c5bff8d86b984cc60eb0ddfc00e9e3326d815158549e",
+  "excluded_process_artifacts": [
+    "data/sybil_defense_scaling/full_5ac6a2e_sybil_scaling_characterization_v1/sweep_progress.log"
+  ],
+  "git_head": "c6ef03cb18c3cfb8716a6d5f28e905e339585d65",
+  "n_per_cell": 200,
+  "pass_timings_seconds": {
+    "complete_linkage": 0.1391765121370554,
+    "main_surface": 21.67555381450802,
+    "ratio_collapse_slice": 0.09625226259231567
+  },
+  "planned_counts": {
+    "complete_linkage": {
+      "cells": 100,
+      "runs": 20000
+    },
+    "main_surface": {
+      "cells": 5000,
+      "runs": 1000000
+    },
+    "ratio_collapse_slice": {
+      "cells": 75,
+      "runs": 15000
+    }
+  },
+  "python_version": "3.13.12",
+  "run_id": "full_5ac6a2e_sybil_scaling_characterization_v1",
+  "schema": "sybil-characterization-manifest-v1",
+  "seed_schema": "sybil-characterization-seed-v1",
+  "selection_rule": "read authoritative_artifacts exactly; never glob",
+  "status": "complete",
+  "total_cells": 5175,
+  "total_elapsed_seconds": 22.082369440235198,
+  "total_runs": 1035000,
+  "worker_count": 16
+}
