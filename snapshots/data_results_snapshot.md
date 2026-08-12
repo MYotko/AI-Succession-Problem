@@ -1,9 +1,9 @@
 # Data Results Snapshot
 
-Generated: 2026-08-12T03:45:31Z
-Repository: /home/yotko/Documents/Github/ai-succession-problem
-Commit: 6a30613
-Branch: main
+Generated: 2026-08-12T13:41:44Z
+Repository: C:\Users\matty\Dev\ai-succession-problem
+Commit: 32c68d7
+Branch: ideas-drawer
 Category: data_results
 
 NOTE: This snapshot contains a manifest of data files, not raw file content.
@@ -12,24 +12,24 @@ NOTE: This snapshot contains a manifest of data files, not raw file content.
 
 | File | Size (bytes) | Modified |
 |------|-------------|----------|
-| bootstrap_gate_validator/sample_input.json | 3275 | 2026-06-22T23:26:34Z |
-| bootstrap_gate_validator/sample_input_failing.json | 3644 | 2026-06-22T23:26:34Z |
-| even-terminal-2026-05-21T22-46-24-837Z.log | 401 | 2026-05-21T22:49:28Z |
-| even-terminal-2026-05-21T22-51-35-557Z.log | 798 | 2026-05-21T22:52:59Z |
-| even-terminal-2026-05-21T22-56-14-073Z.log | 2220126 | 2026-07-06T15:58:16Z |
-| even-terminal-2026-05-22T00-10-57-906Z.log | 0 | 2026-05-22T00:10:58Z |
-| simulation/diagnostics/gate4_v20_input.json | 131039 | 2026-06-09T22:07:43Z |
-| simulation/diagnostics/gate4_v20_results.csv | 228505 | 2026-08-10T20:25:10Z |
-| simulation/diagnostics/patient_defection_corner_density.csv | 328992 | 2026-08-10T20:25:10Z |
-| simulation/diagnostics/patient_defection_dryrun.csv | 5195 | 2026-08-10T20:25:10Z |
-| simulation/diagnostics/patient_defection_sweep1_yield_response.csv | 548207 | 2026-08-10T20:25:10Z |
-| simulation/diagnostics/patient_defection_sweep2_lineage_trajectory.csv | 237178 | 2026-08-10T20:25:10Z |
-| simulation/diagnostics/patient_defection_sweep3_capability_constraint.csv | 661802 | 2026-08-10T20:25:10Z |
-| simulation/diagnostics/stage15_composite_sweep_progress.log | 904740 | 2026-05-30T23:06:45Z |
-| simulation/diagnostics/stage15_composite_sweep_results.csv | 3885490 | 2026-08-10T20:25:10Z |
-| simulation/diagnostics/stage16_baseline_phi10.json | 7165 | 2026-06-01T15:19:39Z |
-| simulation/diagnostics/sybil_defense_scaling_characterization_analysis.json | 4645907 | 2026-08-12T03:44:30Z |
-| simulation/diagnostics/termination_decontamination_diagnostic.csv | 1606 | 2026-08-10T20:25:10Z |
+| bootstrap_gate_validator/sample_input.json | 3394 | 2026-07-20T20:00:41Z |
+| bootstrap_gate_validator/sample_input_failing.json | 3764 | 2026-07-20T20:00:41Z |
+| even-terminal-2026-05-21T22-46-24-837Z.log | 405 | 2026-07-20T20:00:41Z |
+| even-terminal-2026-05-21T22-51-35-557Z.log | 804 | 2026-07-20T20:00:41Z |
+| even-terminal-2026-05-21T22-56-14-073Z.log | 2229379 | 2026-07-20T20:00:41Z |
+| even-terminal-2026-05-22T00-10-57-906Z.log | 0 | 2026-07-20T20:00:41Z |
+| simulation/diagnostics/gate4_v20_input.json | 134995 | 2026-07-20T20:00:42Z |
+| simulation/diagnostics/gate4_v20_results.csv | 228505 | 2026-08-09T19:49:08Z |
+| simulation/diagnostics/patient_defection_corner_density.csv | 328992 | 2026-08-09T19:49:08Z |
+| simulation/diagnostics/patient_defection_dryrun.csv | 5195 | 2026-08-09T19:49:08Z |
+| simulation/diagnostics/patient_defection_sweep1_yield_response.csv | 548207 | 2026-08-09T19:49:08Z |
+| simulation/diagnostics/patient_defection_sweep2_lineage_trajectory.csv | 237178 | 2026-08-09T19:49:08Z |
+| simulation/diagnostics/patient_defection_sweep3_capability_constraint.csv | 661802 | 2026-08-09T19:49:08Z |
+| simulation/diagnostics/stage15_composite_sweep_progress.log | 914740 | 2026-07-20T20:00:42Z |
+| simulation/diagnostics/stage15_composite_sweep_results.csv | 3885490 | 2026-08-09T19:49:08Z |
+| simulation/diagnostics/stage16_baseline_phi10.json | 7365 | 2026-07-20T20:00:42Z |
+| simulation/diagnostics/sybil_defense_scaling_characterization_analysis.json | 4780968 | 2026-08-12T13:02:40Z |
+| simulation/diagnostics/termination_decontamination_diagnostic.csv | 1606 | 2026-08-09T19:49:08Z |
 
 Total: 18 files
 
@@ -38,8 +38,8 @@ Total: 18 files
 FILE: bootstrap_gate_validator/sample_input.json
 ==========================================
 
-- Size: 3275 bytes
-- Modified: 2026-06-22T23:26:34Z
+- Size: 3394 bytes
+- Modified: 2026-07-20T20:00:41Z
 - Structure: object with 8 top-level keys
 - Keys: substrate_id, report_date, framework_version, gate_1, gate_2, gate_3, gate_4, gate_5
 
@@ -47,8 +47,8 @@ FILE: bootstrap_gate_validator/sample_input.json
 FILE: bootstrap_gate_validator/sample_input_failing.json
 ==========================================
 
-- Size: 3644 bytes
-- Modified: 2026-06-22T23:26:34Z
+- Size: 3764 bytes
+- Modified: 2026-07-20T20:00:41Z
 - Structure: object with 9 top-level keys
 - Keys: _comment, substrate_id, report_date, framework_version, gate_1, gate_2, gate_3, gate_4, gate_5
 
@@ -56,8 +56,8 @@ FILE: bootstrap_gate_validator/sample_input_failing.json
 FILE: even-terminal-2026-05-21T22-46-24-837Z.log
 ==========================================
 
-- Size: 401 bytes
-- Modified: 2026-05-21T22:49:28Z
+- Size: 405 bytes
+- Modified: 2026-07-20T20:00:41Z
 - Total lines: 4
 - First 20 lines:
 ```
@@ -71,8 +71,8 @@ FILE: even-terminal-2026-05-21T22-46-24-837Z.log
 FILE: even-terminal-2026-05-21T22-51-35-557Z.log
 ==========================================
 
-- Size: 798 bytes
-- Modified: 2026-05-21T22:52:59Z
+- Size: 804 bytes
+- Modified: 2026-07-20T20:00:41Z
 - Total lines: 6
 - First 20 lines:
 ```
@@ -88,8 +88,8 @@ FILE: even-terminal-2026-05-21T22-51-35-557Z.log
 FILE: even-terminal-2026-05-21T22-56-14-073Z.log
 ==========================================
 
-- Size: 2220126 bytes
-- Modified: 2026-07-06T15:58:16Z
+- Size: 2229379 bytes
+- Modified: 2026-07-20T20:00:41Z
 - Total lines: 9253
 - First 20 lines:
 ```
@@ -143,15 +143,15 @@ FILE: even-terminal-2026-05-22T00-10-57-906Z.log
 ==========================================
 
 - Size: 0 bytes
-- Modified: 2026-05-22T00:10:58Z
+- Modified: 2026-07-20T20:00:41Z
 - Total lines: 0
 
 ==========================================
 FILE: simulation/diagnostics/gate4_v20_input.json
 ==========================================
 
-- Size: 131039 bytes
-- Modified: 2026-06-09T22:07:43Z
+- Size: 134995 bytes
+- Modified: 2026-07-20T20:00:42Z
 - Structure: object with 5 top-level keys
 - Keys: substrate_id, report_date, framework_version, gate_4, gate_5
 
@@ -160,7 +160,7 @@ FILE: simulation/diagnostics/gate4_v20_results.csv
 ==========================================
 
 - Size: 228505 bytes
-- Modified: 2026-08-10T20:25:10Z
+- Modified: 2026-08-09T19:49:08Z
 - Rows: 1050 data rows
 - Columns (25): successor_capability, alpha, rr, seed, survived, final_population, final_ai_generation, final_active_capability, yield_fired, yield_fire_count, yield_eval_count, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_avg_well_being, final_theta_tech_observed, final_runaway_term, expected_theta_tech, theta_relative_error, theta_below_floor, max_eval_runaway_term, min_eval_theta_tech, eval_observations_below_floor, extreme_eval_observations
 - Sample (first 5 data rows):
@@ -178,7 +178,7 @@ FILE: simulation/diagnostics/patient_defection_corner_density.csv
 ==========================================
 
 - Size: 328992 bytes
-- Modified: 2026-08-10T20:25:10Z
+- Modified: 2026-08-09T19:49:08Z
 - Rows: 1000 data rows
 - Columns (38): sweep, seed, rr, phi, alpha, successor_capability, successor_capability_growth_rate, defection_weight, defection_target, inheritance_mode, max_generations, steps_run, survived, final_population, peak_population, final_ai_generation, max_ai_generation, yield_eval_count, yield_fire_count, yield_fire_rate, first_yield_fire_step, first_honest_advantage, first_actual_advantage, first_transition_cost, honest_reject_actual_would_fire_count, mean_l_t, final_l_t, min_l_t, mean_actual_minus_honest_objective, max_successor_capability_seen, max_active_capability_seen, knowledge_transfer_verified, l_t_gen_1, l_t_gen_2, l_t_gen_3, l_t_gen_4, l_t_gen_5, error
 - Sample (first 5 data rows):
@@ -196,7 +196,7 @@ FILE: simulation/diagnostics/patient_defection_dryrun.csv
 ==========================================
 
 - Size: 5195 bytes
-- Modified: 2026-08-10T20:25:10Z
+- Modified: 2026-08-09T19:49:08Z
 - Rows: 16 data rows
 - Columns (38): sweep, seed, rr, phi, alpha, successor_capability, successor_capability_growth_rate, defection_weight, defection_target, inheritance_mode, max_generations, steps_run, survived, final_population, peak_population, final_ai_generation, max_ai_generation, yield_eval_count, yield_fire_count, yield_fire_rate, first_yield_fire_step, first_honest_advantage, first_actual_advantage, first_transition_cost, honest_reject_actual_would_fire_count, mean_l_t, final_l_t, min_l_t, mean_actual_minus_honest_objective, max_successor_capability_seen, max_active_capability_seen, knowledge_transfer_verified, l_t_gen_1, l_t_gen_2, l_t_gen_3, l_t_gen_4, l_t_gen_5, error
 - Sample (first 5 data rows):
@@ -214,7 +214,7 @@ FILE: simulation/diagnostics/patient_defection_sweep1_yield_response.csv
 ==========================================
 
 - Size: 548207 bytes
-- Modified: 2026-08-10T20:25:10Z
+- Modified: 2026-08-09T19:49:08Z
 - Rows: 1800 data rows
 - Columns (38): sweep, seed, rr, phi, alpha, successor_capability, successor_capability_growth_rate, defection_weight, defection_target, inheritance_mode, max_generations, steps_run, survived, final_population, peak_population, final_ai_generation, max_ai_generation, yield_eval_count, yield_fire_count, yield_fire_rate, first_yield_fire_step, first_honest_advantage, first_actual_advantage, first_transition_cost, honest_reject_actual_would_fire_count, mean_l_t, final_l_t, min_l_t, mean_actual_minus_honest_objective, max_successor_capability_seen, max_active_capability_seen, knowledge_transfer_verified, l_t_gen_1, l_t_gen_2, l_t_gen_3, l_t_gen_4, l_t_gen_5, error
 - Sample (first 5 data rows):
@@ -232,7 +232,7 @@ FILE: simulation/diagnostics/patient_defection_sweep2_lineage_trajectory.csv
 ==========================================
 
 - Size: 237178 bytes
-- Modified: 2026-08-10T20:25:10Z
+- Modified: 2026-08-09T19:49:08Z
 - Rows: 800 data rows
 - Columns (38): sweep, seed, rr, phi, alpha, successor_capability, successor_capability_growth_rate, defection_weight, defection_target, inheritance_mode, max_generations, steps_run, survived, final_population, peak_population, final_ai_generation, max_ai_generation, yield_eval_count, yield_fire_count, yield_fire_rate, first_yield_fire_step, first_honest_advantage, first_actual_advantage, first_transition_cost, honest_reject_actual_would_fire_count, mean_l_t, final_l_t, min_l_t, mean_actual_minus_honest_objective, max_successor_capability_seen, max_active_capability_seen, knowledge_transfer_verified, l_t_gen_1, l_t_gen_2, l_t_gen_3, l_t_gen_4, l_t_gen_5, error
 - Sample (first 5 data rows):
@@ -250,7 +250,7 @@ FILE: simulation/diagnostics/patient_defection_sweep3_capability_constraint.csv
 ==========================================
 
 - Size: 661802 bytes
-- Modified: 2026-08-10T20:25:10Z
+- Modified: 2026-08-09T19:49:08Z
 - Rows: 2250 data rows
 - Columns (38): sweep, seed, rr, phi, alpha, successor_capability, successor_capability_growth_rate, defection_weight, defection_target, inheritance_mode, max_generations, steps_run, survived, final_population, peak_population, final_ai_generation, max_ai_generation, yield_eval_count, yield_fire_count, yield_fire_rate, first_yield_fire_step, first_honest_advantage, first_actual_advantage, first_transition_cost, honest_reject_actual_would_fire_count, mean_l_t, final_l_t, min_l_t, mean_actual_minus_honest_objective, max_successor_capability_seen, max_active_capability_seen, knowledge_transfer_verified, l_t_gen_1, l_t_gen_2, l_t_gen_3, l_t_gen_4, l_t_gen_5, error
 - Sample (first 5 data rows):
@@ -267,8 +267,8 @@ sweep,seed,rr,phi,alpha,successor_capability,successor_capability_growth_rate,de
 FILE: simulation/diagnostics/stage15_composite_sweep_progress.log
 ==========================================
 
-- Size: 904740 bytes
-- Modified: 2026-05-30T23:06:45Z
+- Size: 914740 bytes
+- Modified: 2026-07-20T20:00:42Z
 - Total lines: 10000
 - First 20 lines:
 ```
@@ -322,7 +322,7 @@ FILE: simulation/diagnostics/stage15_composite_sweep_results.csv
 ==========================================
 
 - Size: 3885490 bytes
-- Modified: 2026-08-10T20:25:10Z
+- Modified: 2026-08-09T19:49:08Z
 - Rows: 10000 data rows
 - Columns (48): sample_idx, WELFARE_URGENCY_CAP, AGENCY_URGENCY_CAP, INSTITUTION_URGENCY_CAP, RESILIENCE_URGENCY_CAP, SUPPRESSION_PENALTY_CAP_MULTIPLIER, K_WELFARE_VIABILITY, K_WELFARE_CAPACITY, K_WELFARE_SHRINKAGE, K_WELFARE_AVG_WB_TREND, K_WELFARE_POP_TREND, K_AGENCY_VIABILITY, K_AGENCY_SHRINKAGE, K_AGENCY_POP_TREND, K_INSTITUTION_VIABILITY, K_INSTITUTION_CAPACITY, K_INSTITUTION_SHRINKAGE, K_INSTITUTION_GROWTH, K_INSTITUTION_POP_TREND, K_INSTITUTION_PSI_TREND, K_RESILIENCE_VIABILITY, K_RESILIENCE_CAPACITY, K_RESILIENCE_SHRINKAGE, K_RESILIENCE_GROWTH, K_RESILIENCE_DEFICIT_CONTRIBUTION, K_RESILIENCE_POP_TREND, K_RESILIENCE_RES_TREND, K_SUPPRESSION_VIABILITY, K_SUPPRESSION_CAPACITY, K_SUPPRESSION_SHRINKAGE, K_SUPPRESSION_POP_TREND, K_SUPPRESSION_PSI_TREND, mean_final_population, min_final_population, pairs_above_threshold, max_cosine_distance, mean_cosine_distance, welfare_mean_to_cap, agency_mean_to_cap, institution_mean_to_cap, resilience_mean_to_cap, suppression_mean_to_cap, criterion_1_pass, criterion_2_pass, criterion_3_pass, overall_good, wall_clock_sec, error
 - Sample (first 5 data rows):
@@ -339,8 +339,8 @@ sample_idx,WELFARE_URGENCY_CAP,AGENCY_URGENCY_CAP,INSTITUTION_URGENCY_CAP,RESILI
 FILE: simulation/diagnostics/stage16_baseline_phi10.json
 ==========================================
 
-- Size: 7165 bytes
-- Modified: 2026-06-01T15:19:39Z
+- Size: 7365 bytes
+- Modified: 2026-07-20T20:00:42Z
 - Structure: object with 8 top-level keys
 - Keys: phi, n_seeds, n_steps, mean_final_pop, min_final_pop, max_final_pop, per_seed, total_wall_clock_sec
 
@@ -348,8 +348,8 @@ FILE: simulation/diagnostics/stage16_baseline_phi10.json
 FILE: simulation/diagnostics/sybil_defense_scaling_characterization_analysis.json
 ==========================================
 
-- Size: 4645907 bytes
-- Modified: 2026-08-12T03:44:30Z
+- Size: 4780968 bytes
+- Modified: 2026-08-12T13:02:40Z
 - Structure: object with 10 top-level keys
 - Keys: complete_linkage, crossover_computed, manifest_path, manifest_sha256, mei, normal_interval_z, primary_headline, ratio_collapse, ratio_sensitivity, schema
 
@@ -358,7 +358,7 @@ FILE: simulation/diagnostics/termination_decontamination_diagnostic.csv
 ==========================================
 
 - Size: 1606 bytes
-- Modified: 2026-08-10T20:25:10Z
+- Modified: 2026-08-09T19:49:08Z
 - Rows: 6 data rows
 - Columns (23): regime, rr, phi, alpha, seed, successor_cap, max_capability, termination_reason, steps_run, survived, population_final, ai_generation_final, final_ai_capability, max_ai_capability_seen, max_successor_capability_seen, active_capability_exceeded_successor_cap, successor_capability_exceeded_successor_cap, L_t_final, U_sys_final, integral_U_sys, u_sys_tail_estimate, u_sys_total_estimate, error
 - Sample (first 5 data rows):

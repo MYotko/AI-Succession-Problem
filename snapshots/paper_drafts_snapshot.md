@@ -1,9 +1,9 @@
 # Paper Drafts Snapshot
 
-Generated: 2026-08-12T03:45:31Z
-Repository: /home/yotko/Documents/Github/ai-succession-problem
-Commit: 6a30613
-Branch: main
+Generated: 2026-08-12T13:41:44Z
+Repository: C:\Users\matty\Dev\ai-succession-problem
+Commit: 32c68d7
+Branch: ideas-drawer
 Category: paper_drafts
 
 ## Files included
@@ -15,11 +15,11 @@ Category: paper_drafts
 | paper/appendix_C_draft.md | 161 | 10431 |
 | paper/arxiv_submission_metadata.md | 157 | 8793 |
 | paper/paper_closeout_application_record.md | 157 | 8216 |
-| paper/paper_v2_working.md | 2792 | 254186 |
+| paper/paper_v2_working.md | 2881 | 260177 |
 | paper/phase3_verification_report.md | 64 | 3676 |
 | paper/section_VIII_draft.md | 434 | 26115 |
 
-Total: 8 files, 4026 lines, 326648 bytes
+Total: 8 files, 4115 lines, 332639 bytes
 
 ---
 ==========================================
@@ -2800,6 +2800,21 @@ rather than simulated. Adversarial coverage should therefore be read as ten
 vectors with live v2.0 evidence, one architecturally closed by analysis, and
 two defended by argument alone.
 
+The Sybil defense's scaling behavior has been characterized (Section VIII.11),
+replacing the earlier static cost model, and the characterization localizes the
+residual risk rather than removing it. Under a direct false-participant attack,
+the pool's genuine independence is preserved: the true independent count is
+rarely driven below the safe floor even at maximum convergence of the validator
+population. Under an attack that corrupts the independence measurement itself
+rather than the pool, the check is compromised in the substantial majority of
+characterized cells while the underlying independence remains intact. The
+residual Sybil risk therefore localizes in the integrity of the check, not the
+size of the pool, which places it in the same class as Sub-Threshold Drift: a
+verification that reports a healthy state while it has been defeated. Hardening
+the independence check against measurement corruption, so that the
+verification's integrity is protected rather than only the pool's size, is the
+direction this characterization identifies for future work.
+
 Finally, the protocol's protective effect is characterized specifically under
 adversarial conditions. The benign-conditions result is a baseline, not a
 measurement of protective architecture, and the two should not be conflated when
@@ -3060,6 +3075,80 @@ system-health channel, the veto restraining the incumbent's constraint
 capture and thereby leaving the system more productive. It is a
 one-configuration observation, reproduced in direction only, and no
 architectural or welfare claim is made from it.
+
+### VIII.11 Sybil Defense Scaling: A Pre-Registered Characterization
+
+The stress-test analysis identified a static Sybil cost model as a named
+limitation: the Sybil defense was validated as effective, but its cost model
+did not scale with the size of the validator set, so the result described the
+defense at one implicit scale rather than as a function of the frontier that
+supplies validators. This subsection reports a pre-registered study that closes
+that limitation, replacing the static model with a cost structure derived from
+the independence check's own computational bottleneck and characterizing where
+the defense holds and where it fails as the validator population grows and
+converges.
+
+**Model.** The defender is the frontier community convened as a validator pool,
+not a single lagging institution. Participation is treated as mandatory,
+incentivized by the root threat, since every operator has a standing interest in
+preventing any single model from achieving Sybil-based lock-in. Attribution is
+weighted by independence: correlated validators merge to a single consensus
+input, so the pool's strength is its effective rank, the number of genuinely
+distinct epistemic positions represented, rather than its headcount. This makes
+the defense structurally immune to inflation by duplication, which is the Sybil
+attack turned against the defense itself. An epistemically orthogonal
+institutional validator, immune by construction to the convergence that erodes
+the commercial frontier, guarantees a floor of two distinct positions even at
+maximum frontier collapse. Model collapse is thereby expressed not as fewer
+participants but as loss of effective rank at full attendance. Defense cost is
+grounded in the pairwise independence check's quadratic bottleneck rather than
+assumed. The attack is run as two arms: false-cluster injection, in which the
+attacker forges apparent independence the check must resolve away, and
+measurement corruption, in which the attacker poisons the check so that genuine
+correlations read as independent.
+
+**Design and discipline.** The study was pre-registered before any
+characterization data were generated. Its analysis plan, minimum effect of
+interest, sample size, and the meaning of every outcome including a null were
+committed to the repository in advance, and the commit history establishes that
+the registration predates the data. The primary quantity is the fixed-cell
+defense-failure proportion at the maximum-collapse floor cells. An earlier
+crossover-in-rank formulation was withdrawn during the design, after a
+mechanism-level diagnostic proved it noise-dominated under this substrate, and
+replaced with the stable fixed-cell measure; this correction is itself part of
+the pre-registered record. The characterization comprises 1,035,000 runs across
+5,175 cells at a uniform per-cell sample size, and every headline figure was
+audited against the raw record rather than a summary.
+
+**The floor asymmetry.** The central result is a divergence between two tracks
+that the study measured separately. When the question is whether the pool's true
+independence survives, it survives: under the direct false-participant attack,
+the institution and the genuinely independent positions are preserved in every
+maximum-collapse cell, and the pool's real rank is rarely driven below the safe
+floor. When the question is whether the check that reports independence remains
+trustworthy under the corruption arm, it does not: the check is compromised in
+the substantial majority of characterized cells while the underlying
+independence, measured directly, remains intact. The defense preserves real
+independence but fails to certify that it has done so. The residual Sybil risk
+therefore localizes in the integrity of the check, not the size of the pool.
+This is the same failure class as Sub-Threshold Drift (Section VIII.9): a
+verification that reports a healthy state while it has in fact been defeated. It
+identifies the next hardening target as the check's integrity rather than the
+pool's scale.
+
+**A reporting caveat.** The study expressed much of its result through a single
+ratio between attacker and defender capability. A pre-registered slice, run on a
+validated two-dial instrument built precisely to make the question testable,
+found that this ratio does not fully capture the interaction: absolute
+capability levels affect the outcome beyond their ratio. The result clears the
+pre-registered threshold on a single comparison, so it is reported as evidence
+that a fuller two-dimensional characterization is warranted rather than as a
+refutation of the ratio framing, and every ratio-expressed reading in the
+underlying study carries this qualification. A fuller two-dimensional grid is
+identified as a future registered study.
+
+Source: the Sybil defense scaling design note and characterization report, with
+findings audited against the pinned evidence manifest.
 
 ## IX. Related Work
  

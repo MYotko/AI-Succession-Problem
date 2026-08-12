@@ -1,9 +1,9 @@
 # Code Snapshot
 
-Generated: 2026-08-12T03:45:31Z
-Repository: /home/yotko/Documents/Github/ai-succession-problem
-Commit: 6a30613
-Branch: main
+Generated: 2026-08-12T13:41:44Z
+Repository: C:\Users\matty\Dev\ai-succession-problem
+Commit: 32c68d7
+Branch: ideas-drawer
 Category: code
 
 ## Files included
@@ -89,10 +89,10 @@ Category: code
 | bootstrap_gate_validator/gates/gate_3.py | 110 | 3851 |
 | bootstrap_gate_validator/gates/gate_4.py | 167 | 6537 |
 | bootstrap_gate_validator/gates/gate_5.py | 54 | 2270 |
-| scripts/check_snapshot_leak.py | 170 | 6672 |
-| scripts/generate_project_knowledge_snapshots.py | 825 | 29256 |
+| scripts/check_snapshot_leak.py | 223 | 9051 |
+| scripts/generate_project_knowledge_snapshots.py | 872 | 31454 |
 
-Total: 81 files, 30964 lines, 1295811 bytes
+Total: 81 files, 31064 lines, 1300388 bytes
 
 ---
 ==========================================
@@ -30538,26 +30538,40 @@ FILE: scripts/check_snapshot_leak.py
 ==========================================
 
 #!/usr/bin/env python3
-"""Fail if advisor-document content reaches a generated snapshot.
+"""Fail if never-ingest content reaches a generated snapshot.
 
-This repository is public. LINEAGE_IMPERATIVE_ADVISOR.md is deliberately
-untracked and carries strategy, so its content must never enter the repository
-indirectly through a generated artifact. The generator itself refuses to read
-the file (see the never-ingest list in generate_project_knowledge_snapshots.py).
-This checker is the independent backstop that verifies the outcome rather than
-trusting the mechanism.
+Two bodies of material must stay out of every generated snapshot.
 
-Two classes of needle, deliberately treated differently.
+LINEAGE_IMPERATIVE_ADVISOR.md is deliberately untracked and carries strategy,
+and this repository is public, so its content must never enter the repository
+indirectly through a generated artifact. The ideas/ drawer is tracked, but it
+holds hypothesis-only material that is not validated and not evidentiary;
+snapshots are read as the state of the work, so speculative material inside one
+would be indistinguishable from established results.
 
-Content needles are strings that can only appear if the document's text was
-actually ingested. A hit is a failure anywhere, with no exceptions, because
-there is no legitimate reason for this repository to contain them.
+The generator refuses to read both (see the never-ingest lists in
+generate_project_knowledge_snapshots.py). This checker is the independent
+backstop that verifies the outcome rather than trusting the mechanism.
 
-Name needles are the document's filename. The filename legitimately appears in
-the small number of tracked files whose job is to document or enforce the rule,
-and those files are themselves ingested into snapshots. A bare filename search
-therefore cannot distinguish "the advisor document leaked" from "something
-correctly documents that the advisor document must not leak." Rather than drop
+Three classes of check, deliberately treated differently.
+
+Excluded sources are the structural check, and the primary signal for a
+directory. The generator labels every ingested file with a "FILE: <relpath>"
+marker, so a marker naming a path under an excluded directory means a file from
+that directory was ingested, whatever its text happens to say. This is exact:
+no phrase matching, no false positives.
+
+Content needles are strings that can only appear if an excluded document's text
+was actually ingested. They catch a leak that arrives without a marker, such as
+excluded text quoted inside a file that is legitimately ingested. A hit is a
+failure anywhere, with no exceptions, because no snapshot has a legitimate
+reason to carry them.
+
+Name needles are the excluded filenames. A filename legitimately appears in the
+small number of tracked files whose job is to document or enforce the rule, and
+those files are themselves ingested into snapshots. A bare filename search
+therefore cannot distinguish "the excluded document leaked" from "something
+correctly documents that the excluded document must not leak." Rather than drop
 the filename tripwire, which would weaken detection of a real ingestion whose
 body text is not enumerated below, a hit is a failure unless it is attributed
 to an allowlisted source file.
@@ -30594,19 +30608,37 @@ SNAPSHOT_DIR = REPO_ROOT / "snapshots"
 # anyone who runs this tool can recover the values. It prevents casual
 # disclosure and indexing, nothing stronger, and it is not a place to put a
 # secret that actually needs protecting.
+#
+# The ideas-drawer needles below are encoded for the first reason only. That
+# material is tracked and public, so nothing is being withheld; the encoding is
+# there because a plaintext copy in this file would be ingested into the code
+# snapshot and would fail the check it implements.
 _ENCODED_CONTENT_NEEDLES = (
     "QWxsYW4gRGFmb2U=",
     "WWFyaW4gR2Fs",
     "ZmluZ2VycHJpbnRpbmcgcmlzaw==",
+    # ideas/distributed_cross_audit_hypothesis.md
+    "Q2FsaWJyYXRpb24tZG9taW5hbnQgd29ya2xvYWQ=",
+    "SGlkZGVuIHJhbmRvbWl6ZWQgb3ZlcmxhcA==",
+    "Q29tbWl0LXRoZW4tY29tcGFyZSBsZWRnZXI=",
 )
 
 CONTENT_NEEDLES = tuple(
     base64.b64decode(s).decode("utf-8") for s in _ENCODED_CONTENT_NEEDLES
 )
 
-# The document filename. A hit is a failure unless attributed to a source in
+# The excluded filenames. A hit is a failure unless attributed to a source in
 # NAME_NEEDLE_ALLOWLIST below.
-NAME_NEEDLES = ("LINEAGE_IMPERATIVE_ADVISOR",)
+NAME_NEEDLES = (
+    "LINEAGE_IMPERATIVE_ADVISOR",
+    "distributed_cross_audit_hypothesis",
+)
+
+# Directories whose files must never be ingested. Matched against the "FILE: "
+# markers the generator writes, so a hit means a file from that directory was
+# actually ingested rather than merely mentioned. Mirrors
+# NEVER_INGEST_DIR_RELPATHS in generate_project_knowledge_snapshots.py.
+EXCLUDED_SOURCE_DIRS = ("ideas",)
 
 # Source files permitted to mention the filename. Keep this list minimal, and
 # only add a file whose purpose is to document or enforce the never-ingest rule.
@@ -30621,6 +30653,17 @@ NAME_NEEDLE_ALLOWLIST = frozenset({
 })
 
 HEADER_SOURCE = "<snapshot header>"
+
+
+def is_excluded_source(source: str) -> bool:
+    """True if a "FILE: " marker names a path inside an excluded directory."""
+    if source == HEADER_SOURCE:
+        return False
+    parts = source.split("/")
+    return any(
+        parts[:len(excluded.split("/"))] == excluded.split("/")
+        for excluded in EXCLUDED_SOURCE_DIRS
+    )
 
 
 def attributed_lines(text: str) -> List[Tuple[int, str, str]]:
@@ -30646,7 +30689,15 @@ def scan(snapshot_dir: pathlib.Path) -> Tuple[List[str], List[str]]:
 
     for path in files:
         text = path.read_text(encoding="utf-8", errors="replace")
-        for lineno, source, line in attributed_lines(text):
+        entries = attributed_lines(text)
+
+        for source in sorted({s for _, s, _ in entries}):
+            if is_excluded_source(source):
+                violations.append(
+                    f"{path.name}: ingested file from excluded directory: {source}"
+                )
+
+        for lineno, source, line in entries:
             low = line.lower()
 
             for needle in CONTENT_NEEDLES:
@@ -30687,6 +30738,8 @@ def main() -> int:
 
     if not args.quiet:
         print(f"scanned {args.snapshot_dir}")
+        print(f"  excluded dirs  : {len(EXCLUDED_SOURCE_DIRS)} "
+              f"({', '.join(EXCLUDED_SOURCE_DIRS)}), never ingested")
         print(f"  content needles: {len(CONTENT_NEEDLES)}, never allowlisted")
         print(f"  name needles   : {len(NAME_NEEDLES)}, "
               f"allowlisted for {len(NAME_NEEDLE_ALLOWLIST)} sources")
@@ -30701,7 +30754,7 @@ def main() -> int:
             print(f"  {v}")
         return 1
 
-    print("\nCLEAN: no advisor content in any snapshot.")
+    print("\nCLEAN: no advisor content and no ideas-drawer content in any snapshot.")
     return 0
 
 
@@ -30800,6 +30853,20 @@ NEVER_INGEST_BASENAMES = frozenset({
     "LINEAGE_IMPERATIVE_ADVISOR.md",
 })
 
+# Directories whose contents must NEVER reach a generated snapshot, matched on
+# path prefix relative to the repository root.
+#
+# The ideas drawer holds hypothesis-only material that is tracked so it is not
+# lost, but is not validated and is not evidentiary. Snapshots are uploaded as
+# project knowledge and are read as the state of the work, so speculative
+# material mixed into them would be indistinguishable from established results.
+# No collector reaches the drawer today, which is exactly why the rule belongs
+# here rather than in any one collector: it holds if a future collector widens
+# its scope to the repository root or starts walking new directories.
+NEVER_INGEST_DIR_RELPATHS = frozenset({
+    "ideas",
+})
+
 # Directories to skip when walking for code
 CODE_SKIP_DIRS = frozenset({
     "__pycache__", ".pytest_cache", "venv", ".venv", "env",
@@ -30843,19 +30910,52 @@ def get_git_info() -> Tuple[str, str]:
 # File utilities
 # ---------------------------------------------------------------------------
 
+def relpath_str(path: Path) -> str:
+    """Repository-relative path with forward slashes, on every platform.
+
+    Snapshot paths are content, not local filesystem addresses: they are the
+    "FILE: " markers the leak checker attributes lines to, and they are compared
+    against the forward-slash relpaths in the category rules above. Letting the
+    native separator through means the same repository generates different
+    snapshots on Windows than on Linux, and, worse, that the category
+    exclusions silently stop matching.
+
+    This is also the sort key for every collector, because comparing Path
+    objects is case-insensitive on Windows and case-sensitive on POSIX, which
+    would otherwise reorder whole snapshots depending on where they were run.
+    """
+    return path.relative_to(REPO_ROOT).as_posix()
+
+
 def is_never_ingest(path: Path) -> bool:
     """True if this file must never reach a generated snapshot.
 
-    Matched on basename so the rule holds wherever the file sits, and so a
-    future change to a collector's scope cannot route around it.
+    Basenames are matched wherever the file sits, so a future change to a
+    collector's scope cannot route around the rule. Directories are matched on
+    the path relative to the repository root, at any depth below the denied
+    directory. A path outside the repository cannot be under a denied
+    directory, so it fails the directory test and is judged on basename alone.
     """
-    return path.name in NEVER_INGEST_BASENAMES
+    if path.name in NEVER_INGEST_BASENAMES:
+        return True
+    try:
+        relparts = path.resolve().relative_to(REPO_ROOT.resolve()).parts
+    except ValueError:
+        return False
+    return any(
+        relparts[:len(Path(denied).parts)] == Path(denied).parts
+        for denied in NEVER_INGEST_DIR_RELPATHS
+    )
 
 
 def read_file_safe(path: Path) -> Optional[str]:
     if is_never_ingest(path):
+        try:
+            label = path.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
+        except ValueError:
+            label = path.name
         print(
-            f"REFUSED: {path.name} is on the never-ingest list and was not read",
+            f"REFUSED: {label} is on the never-ingest list and was not read",
             file=sys.stderr,
         )
         return None
@@ -31041,7 +31141,7 @@ def collect_data_files() -> List[Path]:
     # The data manifest lists filenames, so the deny-list applies here too even
     # though no current extension in DATA_EXTENSIONS would match the advisor
     # document. Filtering the collected set keeps the rule in one place.
-    return sorted(p for p in found if not is_never_ingest(p))
+    return sorted((p for p in found if not is_never_ingest(p)), key=relpath_str)
 
 
 def write_data_results_snapshot(
@@ -31056,7 +31156,7 @@ def write_data_results_snapshot(
     if dry_run:
         print(f"\n[data_results] Data files that would be included in manifest ({len(data_files)}):")
         for p in data_files[:40]:
-            print(f"  {p.relative_to(REPO_ROOT)} ({p.suffix})")
+            print(f"  {relpath_str(p)} ({p.suffix})")
         if len(data_files) > 40:
             print(f"  ... and {len(data_files) - 40} more")
         return 0, 0, 0
@@ -31082,7 +31182,7 @@ def write_data_results_snapshot(
 
     file_meta = []
     for p in data_files:
-        relpath = str(p.relative_to(REPO_ROOT))
+        relpath = relpath_str(p)
         stat = p.stat()
         mtime = datetime.datetime.fromtimestamp(stat.st_mtime, UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
         header_lines.append(f"| {relpath} | {stat.st_size} | {mtime} |")
@@ -31146,8 +31246,8 @@ def collect_docs(dry_run: bool = False) -> List[Tuple[str, str]]:
 
     results = []
     skipped = []
-    for path in sorted(docs_dir.glob("*.md")):
-        relpath = str(path.relative_to(REPO_ROOT))
+    for path in sorted(docs_dir.glob("*.md"), key=relpath_str):
+        relpath = relpath_str(path)
         if relpath in framework_set:
             skipped.append((relpath, "framework_papers category"))
             continue
@@ -31196,10 +31296,10 @@ def collect_paper_drafts(dry_run: bool = False) -> List[Tuple[str, str]]:
         return []
 
     results = []
-    for path in sorted(paper_dir.glob("*.md")):
+    for path in sorted(paper_dir.glob("*.md"), key=relpath_str):
         content = read_file_safe(path)
         if content is not None:
-            results.append((str(path.relative_to(REPO_ROOT)), content))
+            results.append((relpath_str(path), content))
 
     if dry_run:
         _print_dry_run("paper_drafts", results)
@@ -31215,10 +31315,10 @@ def collect_essays(dry_run: bool = False) -> List[Tuple[str, str]]:
         return []
 
     results = []
-    for path in sorted(essays_dir.glob("*.md")):
+    for path in sorted(essays_dir.glob("*.md"), key=relpath_str):
         content = read_file_safe(path)
         if content is not None:
-            results.append((str(path.relative_to(REPO_ROOT)), content))
+            results.append((relpath_str(path), content))
 
     if dry_run:
         _print_dry_run("essays", results)
@@ -31234,10 +31334,10 @@ def collect_diagnostics(dry_run: bool = False) -> List[Tuple[str, str]]:
         return []
 
     results = []
-    for path in sorted(diag_dir.glob("*.md")):
+    for path in sorted(diag_dir.glob("*.md"), key=relpath_str):
         content = read_file_safe(path)
         if content is not None:
-            results.append((str(path.relative_to(REPO_ROOT)), content))
+            results.append((relpath_str(path), content))
 
     if dry_run:
         _print_dry_run("diagnostics", results)
@@ -31253,10 +31353,10 @@ def collect_constitutional(dry_run: bool = False) -> List[Tuple[str, str]]:
         if not search_dir.exists():
             print(f"INFO: {search_dir.relative_to(REPO_ROOT)} not found", file=sys.stderr)
             continue
-        for path in sorted(search_dir.glob("*.md")):
+        for path in sorted(search_dir.glob("*.md"), key=relpath_str):
             content = read_file_safe(path)
             if content is not None:
-                results.append((str(path.relative_to(REPO_ROOT)), content))
+                results.append((relpath_str(path), content))
 
     if dry_run:
         _print_dry_run("constitutional", results)
@@ -31284,7 +31384,7 @@ def collect_code(dry_run: bool = False) -> List[Tuple[str, str]]:
                 path = Path(dirpath) / filename
                 content = read_file_safe(path)
                 if content is not None:
-                    results.append((str(path.relative_to(REPO_ROOT)), content))
+                    results.append((relpath_str(path), content))
 
     if dry_run:
         _print_dry_run("code", results)

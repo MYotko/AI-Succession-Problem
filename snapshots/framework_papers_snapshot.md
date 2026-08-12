@@ -1,9 +1,9 @@
 # Framework Papers Snapshot
 
-Generated: 2026-08-12T03:45:31Z
-Repository: /home/yotko/Documents/Github/ai-succession-problem
-Commit: 6a30613
-Branch: main
+Generated: 2026-08-12T13:41:44Z
+Repository: C:\Users\matty\Dev\ai-succession-problem
+Commit: 32c68d7
+Branch: ideas-drawer
 Category: framework_papers
 
 ## Files included
