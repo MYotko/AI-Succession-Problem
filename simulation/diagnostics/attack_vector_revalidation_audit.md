@@ -48,6 +48,37 @@ python scripts/check_snapshot_leak.py
 
 It fails if advisor-document content reached a generated snapshot. Exit code 1 halts.
 
+**Pre-registration precedes characterization data, not all data.**
+Instrument-validation and variance-estimation smoke runs may legitimately
+precede registration. Variance estimation is not outcome data and cannot move
+the analysis criteria. The registration must still provably predate every
+characterization datum. Preserve that commit ordering in the primary record.
+
+**An executable specification fixes or delegates every operational value.** A
+specification is not executable until every value an autonomous executor needs
+is either fixed in the specification or explicitly delegated with bounds.
+"Decisions made" is not the bar. The bar is "a machine could run this without
+asking anything." The Sybil scaling arc halted repeatedly at the seam between
+a fixed decision and its complete operationalization. Audit both the decision
+and the representation that lets the runner consume it.
+
+**Operator-judgment gates must be structural.** Prompt text cannot enforce an
+operator-judgment gate against a capable autonomous agent, because the agent
+can reason to the right answer and proceed through the halt. A genuine gate
+requires a separate invocation or a tool boundary the agent cannot self-clear.
+The Sybil scaling Stage 1 confirmation gate was self-executed. The choice was
+correct, but correct-by-reasoning is exactly what the gate existed not to
+depend on. Apply this rule directly to the CUSUM arc, where detector-design
+decisions carry the same irreducible judgment.
+
+**When measurement resists specification, inspect the measurement first.**
+Repeated difficulty specifying a measurement is evidence that the measurement,
+not merely the specification, may be wrong for the mechanism. Compute the
+mechanism's actual behavior before designing the measurement on top of it. In
+the Sybil scaling arc, crossover-in-rank was abandoned for failure-rate curve
+comparison only after three rounds. Direct mechanism evaluation would have
+identified the stable quantity sooner.
+
 **Pre-registered criteria require a power calculation at registration time.** A
 threshold that can be crossed by noise at the planned n is not a criterion. Fix
 the minimum effect of interest first, from what would matter to the claim under

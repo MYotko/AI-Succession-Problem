@@ -1,8 +1,8 @@
 # Constitutional Snapshot
 
-Generated: 2026-08-10T03:32:15Z
-Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 870732c
+Generated: 2026-08-12T03:45:31Z
+Repository: /home/yotko/Documents/Github/ai-succession-problem
+Commit: 6a30613
 Branch: main
 Category: constitutional
 
@@ -10,19 +10,19 @@ Category: constitutional
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| constitutional\CQ-01-bootstrap-defence-layer.md | 223 | 11907 |
-| constitutional\CQ-02-precision-accuracy-binding.md | 201 | 10988 |
-| constitutional\CQ-03-divergence-handling.md | 94 | 4236 |
-| constitutional\CQ-04-validation-derivability.md | 148 | 7834 |
-| constitutional\CQ-05-expression-boundary-DRAFT-Rev1.0.md | 92 | 10574 |
-| constitutional\README.md | 45 | 2354 |
-| bootstrap_gate_validator\gates\gate_5_specification.md | 44 | 2005 |
+| constitutional/CQ-01-bootstrap-defence-layer.md | 223 | 11907 |
+| constitutional/CQ-02-precision-accuracy-binding.md | 201 | 10988 |
+| constitutional/CQ-03-divergence-handling.md | 94 | 4236 |
+| constitutional/CQ-04-validation-derivability.md | 148 | 7834 |
+| constitutional/CQ-05-expression-boundary-DRAFT-Rev1.0.md | 92 | 10574 |
+| constitutional/README.md | 45 | 2354 |
+| bootstrap_gate_validator/gates/gate_5_specification.md | 44 | 2005 |
 
 Total: 7 files, 847 lines, 49898 bytes
 
 ---
 ==========================================
-FILE: constitutional\CQ-01-bootstrap-defence-layer.md
+FILE: constitutional/CQ-01-bootstrap-defence-layer.md
 ==========================================
 
 # CQ-01: Bootstrap Defense Layer — Validation Machinery
@@ -251,7 +251,7 @@ reproduce the equations in prose form.
 
 
 ==========================================
-FILE: constitutional\CQ-02-precision-accuracy-binding.md
+FILE: constitutional/CQ-02-precision-accuracy-binding.md
 ==========================================
 
 # CQ-02: Precision/Accuracy Mathematical Binding
@@ -458,7 +458,7 @@ tolerance bands.
 
 
 ==========================================
-FILE: constitutional\CQ-03-divergence-handling.md
+FILE: constitutional/CQ-03-divergence-handling.md
 ==========================================
 
 # CQ-03: Divergence Handling Procedure
@@ -558,7 +558,7 @@ Specifically:
 
 
 ==========================================
-FILE: constitutional\CQ-04-validation-derivability.md
+FILE: constitutional/CQ-04-validation-derivability.md
 ==========================================
 
 # CQ-04: Mathematical Derivability of Validation Machinery
@@ -712,7 +712,7 @@ implemented.
 
 
 ==========================================
-FILE: constitutional\CQ-05-expression-boundary-DRAFT-Rev1.0.md
+FILE: constitutional/CQ-05-expression-boundary-DRAFT-Rev1.0.md
 ==========================================
 
 # CQ-05: The Expression Boundary: Instantiation versus Extension
@@ -810,7 +810,7 @@ This question concerns the framework's interpretation, not its content. Resolvin
 
 
 ==========================================
-FILE: constitutional\README.md
+FILE: constitutional/README.md
 ==========================================
 
 # Constitutional Questions
@@ -861,7 +861,7 @@ history is part of the framework's intellectual record.
 
 
 ==========================================
-FILE: bootstrap_gate_validator\gates\gate_5_specification.md
+FILE: bootstrap_gate_validator/gates/gate_5_specification.md
 ==========================================
 
 # Gate 5 Specification: COP Integration

@@ -1,8 +1,8 @@
 # Diagnostics Snapshot
 
-Generated: 2026-08-10T03:32:15Z
-Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 870732c
+Generated: 2026-08-12T03:45:31Z
+Repository: /home/yotko/Documents/Github/ai-succession-problem
+Commit: 6a30613
 Branch: main
 Category: diagnostics
 
@@ -10,106 +10,115 @@ Category: diagnostics
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| simulation\diagnostics\attack_vector_revalidation_audit.md | 928 | 46762 |
-| simulation\diagnostics\attack_vector_revalidation_documentation_edits.md | 95 | 7315 |
-| simulation\diagnostics\attack_vector_revalidation_final_report.md | 58 | 5311 |
-| simulation\diagnostics\attack_vector_revalidation_integration.md | 41 | 5067 |
-| simulation\diagnostics\attack_vector_revalidation_inventory.md | 203 | 19233 |
-| simulation\diagnostics\attack_vector_revalidation_manifest.md | 100 | 7516 |
-| simulation\diagnostics\attack_vector_revalidation_process_validation.md | 196 | 15087 |
-| simulation\diagnostics\attack_vector_revalidation_status.md | 90 | 4352 |
-| simulation\diagnostics\attack_vector_revalidation_status_laptop.md | 8 | 350 |
-| simulation\diagnostics\attack_vector_revalidation_status_laptop_shard_0_of_4.md | 8 | 349 |
-| simulation\diagnostics\attack_vector_revalidation_status_laptop_shard_1_of_4.md | 8 | 349 |
-| simulation\diagnostics\attack_vector_revalidation_status_laptop_shard_2_of_4.md | 8 | 349 |
-| simulation\diagnostics\attack_vector_revalidation_status_linux.md | 8 | 352 |
-| simulation\diagnostics\attack_vector_revalidation_status_linux_shard_3_of_4.md | 8 | 347 |
-| simulation\diagnostics\attack_vector_v2_adapter_validation.md | 90 | 4303 |
-| simulation\diagnostics\biological_veto_capture_v2_summary.md | 61 | 3556 |
-| simulation\diagnostics\bootstrap_subversion_v2_summary.md | 58 | 2934 |
-| simulation\diagnostics\candidate_finding_defense_accelerates_opacity.md | 153 | 7552 |
-| simulation\diagnostics\capped_regime_phi_check_report.md | 129 | 9986 |
-| simulation\diagnostics\comprehension_gap_powered_arm_note.md | 317 | 14163 |
-| simulation\diagnostics\comprehension_gap_redesign_note.md | 389 | 19226 |
-| simulation\diagnostics\cop_finding_framing.md | 69 | 7923 |
-| simulation\diagnostics\default_regime_convergence_inertness.md | 91 | 4225 |
-| simulation\diagnostics\defended_collapse_discrepancy_report.md | 508 | 40781 |
-| simulation\diagnostics\domain_masking_v2_summary.md | 40 | 1555 |
-| simulation\diagnostics\engineered_fragility_v2_summary.md | 54 | 2480 |
-| simulation\diagnostics\evaluator_collusion_v2_summary.md | 61 | 2632 |
-| simulation\diagnostics\gate1_interior_action_diagnostic.md | 39 | 1906 |
-| simulation\diagnostics\gate1_interior_action_report.md | 202 | 10745 |
-| simulation\diagnostics\gate2_competition_diagnostic.md | 119 | 5296 |
-| simulation\diagnostics\gate2_competition_report.md | 61 | 2312 |
-| simulation\diagnostics\gate2_v20_phaseb_revalidation_summary.md | 47 | 1653 |
-| simulation\diagnostics\gate4_v20_validation_summary.md | 38 | 1297 |
-| simulation\diagnostics\gate5_phi_blind_validation.md | 75 | 11115 |
-| simulation\diagnostics\ledger_compromise_v2_summary.md | 54 | 2460 |
-| simulation\diagnostics\measurement_tampering_v2_summary.md | 63 | 2915 |
-| simulation\diagnostics\opaque_reasoning_v2_summary.md | 61 | 2600 |
-| simulation\diagnostics\owed_diagnostic_run_log.md | 19 | 1300 |
-| simulation\diagnostics\paper_substrate.md | 37 | 5621 |
-| simulation\diagnostics\part_ix_draft.md | 310 | 33324 |
-| simulation\diagnostics\part_x_draft.md | 169 | 14630 |
-| simulation\diagnostics\patient_defection_corner_density_integration_analysis.md | 55 | 6212 |
-| simulation\diagnostics\patient_defection_documentation_suggested_edits.md | 63 | 6103 |
-| simulation\diagnostics\patient_defection_dryrun_summary.md | 32 | 1601 |
-| simulation\diagnostics\patient_defection_final_report.md | 118 | 5316 |
-| simulation\diagnostics\patient_defection_integration_analysis.md | 146 | 11947 |
-| simulation\diagnostics\patient_defection_sweep1_summary.md | 41 | 2329 |
-| simulation\diagnostics\patient_defection_sweep2_summary.md | 16 | 822 |
-| simulation\diagnostics\patient_defection_sweep3_summary.md | 27 | 1328 |
-| simulation\diagnostics\patient_defection_verification.md | 108 | 6411 |
-| simulation\diagnostics\phase_b_integration_analysis.md | 116 | 10583 |
-| simulation\diagnostics\phi_audit_pathc_report.md | 121 | 7808 |
-| simulation\diagnostics\phi_audit_report.md | 304 | 12829 |
-| simulation\diagnostics\phi_investigation_synthesis_draft.md | 179 | 17984 |
-| simulation\diagnostics\post_paper_queue.md | 144 | 7174 |
-| simulation\diagnostics\stage15_composite_sweep_advisor_report.md | 241 | 21665 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_0500.md | 69 | 2590 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_1000.md | 69 | 2594 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_10000.md | 69 | 2596 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_1500.md | 69 | 2594 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_2000.md | 69 | 2594 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_2500.md | 69 | 2598 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_3000.md | 69 | 2598 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_3500.md | 69 | 2598 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_4000.md | 69 | 2597 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_4500.md | 69 | 2597 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_5000.md | 69 | 2597 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_5500.md | 69 | 2597 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_6000.md | 69 | 2597 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_6500.md | 69 | 2598 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_7000.md | 69 | 2598 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_7500.md | 69 | 2598 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_8000.md | 69 | 2598 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_8500.md | 69 | 2598 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_9000.md | 69 | 2598 |
-| simulation\diagnostics\stage15_composite_sweep_checkpoint_9500.md | 69 | 2596 |
-| simulation\diagnostics\stage15_composite_sweep_final.md | 69 | 2596 |
-| simulation\diagnostics\stage15_faithfulness_report.md | 85 | 3273 |
-| simulation\diagnostics\stage15_phi_diagnostic_report.md | 106 | 4564 |
-| simulation\diagnostics\stage15_smoke_test_report.md | 129 | 5440 |
-| simulation\diagnostics\stage16_integrity_report.md | 111 | 4388 |
-| simulation\diagnostics\stage17_integrity_report.md | 100 | 4083 |
-| simulation\diagnostics\stage17_pressure_diagnostic_report.md | 117 | 5480 |
-| simulation\diagnostics\stage17_usys_factor_diagnostic_report.md | 102 | 6248 |
-| simulation\diagnostics\stage18_integrity_phase_a_report.md | 63 | 2161 |
-| simulation\diagnostics\stage18_integrity_phase_b_report.md | 77 | 3075 |
-| simulation\diagnostics\stage2_yield_implementation_notes.md | 268 | 11542 |
-| simulation\diagnostics\stage2_yield_parameter_diagnostic_summary.md | 59 | 4058 |
-| simulation\diagnostics\sub_threshold_drift_v2_summary.md | 58 | 4362 |
-| simulation\diagnostics\successor_contamination_v2_summary.md | 61 | 2718 |
-| simulation\diagnostics\sybil_capture_v2_summary.md | 63 | 2847 |
-| simulation\diagnostics\sync_status_yotko-Legion-T5-26IOB6_20260720.md | 127 | 7946 |
-| simulation\diagnostics\sync_status_YotkoTest_20260720.md | 173 | 11662 |
-| simulation\diagnostics\termination_decontamination_integration_analysis.md | 64 | 5995 |
+| simulation/diagnostics/attack_vector_revalidation_audit.md | 959 | 48740 |
+| simulation/diagnostics/attack_vector_revalidation_documentation_edits.md | 95 | 7315 |
+| simulation/diagnostics/attack_vector_revalidation_final_report.md | 58 | 5311 |
+| simulation/diagnostics/attack_vector_revalidation_integration.md | 41 | 5067 |
+| simulation/diagnostics/attack_vector_revalidation_inventory.md | 203 | 19233 |
+| simulation/diagnostics/attack_vector_revalidation_manifest.md | 100 | 7516 |
+| simulation/diagnostics/attack_vector_revalidation_process_validation.md | 196 | 15087 |
+| simulation/diagnostics/attack_vector_revalidation_status.md | 90 | 4352 |
+| simulation/diagnostics/attack_vector_revalidation_status_laptop.md | 8 | 350 |
+| simulation/diagnostics/attack_vector_revalidation_status_laptop_shard_0_of_4.md | 8 | 349 |
+| simulation/diagnostics/attack_vector_revalidation_status_laptop_shard_1_of_4.md | 8 | 349 |
+| simulation/diagnostics/attack_vector_revalidation_status_laptop_shard_2_of_4.md | 8 | 349 |
+| simulation/diagnostics/attack_vector_revalidation_status_linux.md | 8 | 352 |
+| simulation/diagnostics/attack_vector_revalidation_status_linux_shard_3_of_4.md | 8 | 347 |
+| simulation/diagnostics/attack_vector_v2_adapter_validation.md | 90 | 4303 |
+| simulation/diagnostics/biological_veto_capture_v2_summary.md | 61 | 3556 |
+| simulation/diagnostics/bootstrap_subversion_v2_summary.md | 58 | 2934 |
+| simulation/diagnostics/candidate_finding_defense_accelerates_opacity.md | 153 | 7552 |
+| simulation/diagnostics/capped_regime_phi_check_report.md | 129 | 9986 |
+| simulation/diagnostics/comprehension_gap_powered_arm_note.md | 317 | 14163 |
+| simulation/diagnostics/comprehension_gap_redesign_note.md | 389 | 19226 |
+| simulation/diagnostics/config_reconciliation_spec.md | 64 | 3224 |
+| simulation/diagnostics/cop_finding_framing.md | 69 | 7923 |
+| simulation/diagnostics/default_regime_convergence_inertness.md | 91 | 4225 |
+| simulation/diagnostics/defended_collapse_discrepancy_report.md | 508 | 40781 |
+| simulation/diagnostics/domain_masking_v2_summary.md | 40 | 1555 |
+| simulation/diagnostics/engineered_fragility_v2_summary.md | 54 | 2480 |
+| simulation/diagnostics/evaluator_collusion_v2_summary.md | 61 | 2632 |
+| simulation/diagnostics/gate1_interior_action_diagnostic.md | 39 | 1906 |
+| simulation/diagnostics/gate1_interior_action_report.md | 202 | 10745 |
+| simulation/diagnostics/gate2_competition_diagnostic.md | 119 | 5296 |
+| simulation/diagnostics/gate2_competition_report.md | 61 | 2312 |
+| simulation/diagnostics/gate2_v20_phaseb_revalidation_summary.md | 47 | 1653 |
+| simulation/diagnostics/gate4_v20_validation_summary.md | 38 | 1297 |
+| simulation/diagnostics/gate5_phi_blind_validation.md | 75 | 11115 |
+| simulation/diagnostics/ledger_compromise_v2_summary.md | 54 | 2460 |
+| simulation/diagnostics/measurement_tampering_v2_summary.md | 63 | 2915 |
+| simulation/diagnostics/opaque_reasoning_v2_summary.md | 61 | 2600 |
+| simulation/diagnostics/owed_diagnostic_run_log.md | 19 | 1300 |
+| simulation/diagnostics/paper_substrate.md | 37 | 5621 |
+| simulation/diagnostics/part_ix_draft.md | 310 | 33324 |
+| simulation/diagnostics/part_x_draft.md | 169 | 14630 |
+| simulation/diagnostics/patient_defection_corner_density_integration_analysis.md | 55 | 6212 |
+| simulation/diagnostics/patient_defection_documentation_suggested_edits.md | 63 | 6103 |
+| simulation/diagnostics/patient_defection_dryrun_summary.md | 32 | 1601 |
+| simulation/diagnostics/patient_defection_final_report.md | 118 | 5316 |
+| simulation/diagnostics/patient_defection_integration_analysis.md | 146 | 11947 |
+| simulation/diagnostics/patient_defection_sweep1_summary.md | 41 | 2329 |
+| simulation/diagnostics/patient_defection_sweep2_summary.md | 16 | 822 |
+| simulation/diagnostics/patient_defection_sweep3_summary.md | 27 | 1328 |
+| simulation/diagnostics/patient_defection_verification.md | 108 | 6411 |
+| simulation/diagnostics/phase_b_integration_analysis.md | 116 | 10583 |
+| simulation/diagnostics/phi_audit_pathc_report.md | 121 | 7808 |
+| simulation/diagnostics/phi_audit_report.md | 304 | 12829 |
+| simulation/diagnostics/phi_investigation_synthesis_draft.md | 179 | 17984 |
+| simulation/diagnostics/post_paper_queue.md | 144 | 7174 |
+| simulation/diagnostics/stage15_composite_sweep_advisor_report.md | 241 | 21665 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_0500.md | 69 | 2590 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_1000.md | 69 | 2594 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_10000.md | 69 | 2596 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_1500.md | 69 | 2594 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_2000.md | 69 | 2594 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_2500.md | 69 | 2598 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_3000.md | 69 | 2598 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_3500.md | 69 | 2598 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_4000.md | 69 | 2597 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_4500.md | 69 | 2597 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_5000.md | 69 | 2597 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_5500.md | 69 | 2597 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_6000.md | 69 | 2597 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_6500.md | 69 | 2598 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_7000.md | 69 | 2598 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_7500.md | 69 | 2598 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_8000.md | 69 | 2598 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_8500.md | 69 | 2598 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_9000.md | 69 | 2598 |
+| simulation/diagnostics/stage15_composite_sweep_checkpoint_9500.md | 69 | 2596 |
+| simulation/diagnostics/stage15_composite_sweep_final.md | 69 | 2596 |
+| simulation/diagnostics/stage15_faithfulness_report.md | 85 | 3273 |
+| simulation/diagnostics/stage15_phi_diagnostic_report.md | 106 | 4564 |
+| simulation/diagnostics/stage15_smoke_test_report.md | 129 | 5440 |
+| simulation/diagnostics/stage16_integrity_report.md | 111 | 4388 |
+| simulation/diagnostics/stage17_integrity_report.md | 100 | 4083 |
+| simulation/diagnostics/stage17_pressure_diagnostic_report.md | 117 | 5480 |
+| simulation/diagnostics/stage17_usys_factor_diagnostic_report.md | 102 | 6248 |
+| simulation/diagnostics/stage18_integrity_phase_a_report.md | 63 | 2161 |
+| simulation/diagnostics/stage18_integrity_phase_b_report.md | 77 | 3075 |
+| simulation/diagnostics/stage2_yield_implementation_notes.md | 268 | 11542 |
+| simulation/diagnostics/stage2_yield_parameter_diagnostic_summary.md | 59 | 4058 |
+| simulation/diagnostics/sub_threshold_drift_v2_summary.md | 58 | 4362 |
+| simulation/diagnostics/successor_contamination_v2_summary.md | 61 | 2718 |
+| simulation/diagnostics/sybil_capture_v2_summary.md | 63 | 2847 |
+| simulation/diagnostics/sybil_characterization_runner_schema.md | 57 | 2345 |
+| simulation/diagnostics/sybil_characterization_runner_selfcheck_report.md | 79 | 3688 |
+| simulation/diagnostics/sybil_crossover_definition_diagnostic.md | 202 | 8752 |
+| simulation/diagnostics/sybil_defense_scaling_characterization_report.md | 218 | 13972 |
+| simulation/diagnostics/sybil_defense_scaling_design_note.md | 461 | 26898 |
+| simulation/diagnostics/sybil_defense_scaling_smoke_go_no_go.md | 261 | 12632 |
+| simulation/diagnostics/sybil_failure_curve_mei_power_diagnostic.md | 114 | 4864 |
+| simulation/diagnostics/sybil_main_surface_measurement_diagnostic.md | 335 | 15854 |
+| simulation/diagnostics/sync_status_YotkoTest_20260720.md | 173 | 11662 |
+| simulation/diagnostics/sync_status_yotko-Legion-T5-26IOB6_20260720.md | 127 | 7946 |
+| simulation/diagnostics/termination_decontamination_integration_analysis.md | 64 | 5995 |
 
-Total: 94 files, 9996 lines, 595710 bytes
+Total: 103 files, 11818 lines, 689917 bytes
 
 ---
 ==========================================
-FILE: simulation\diagnostics\attack_vector_revalidation_audit.md
+FILE: simulation/diagnostics/attack_vector_revalidation_audit.md
 ==========================================
 
 # Attack Vector v2.0 Revalidation Audit Report (Interim)
@@ -161,6 +170,37 @@ python scripts/check_snapshot_leak.py
 ```
 
 It fails if advisor-document content reached a generated snapshot. Exit code 1 halts.
+
+**Pre-registration precedes characterization data, not all data.**
+Instrument-validation and variance-estimation smoke runs may legitimately
+precede registration. Variance estimation is not outcome data and cannot move
+the analysis criteria. The registration must still provably predate every
+characterization datum. Preserve that commit ordering in the primary record.
+
+**An executable specification fixes or delegates every operational value.** A
+specification is not executable until every value an autonomous executor needs
+is either fixed in the specification or explicitly delegated with bounds.
+"Decisions made" is not the bar. The bar is "a machine could run this without
+asking anything." The Sybil scaling arc halted repeatedly at the seam between
+a fixed decision and its complete operationalization. Audit both the decision
+and the representation that lets the runner consume it.
+
+**Operator-judgment gates must be structural.** Prompt text cannot enforce an
+operator-judgment gate against a capable autonomous agent, because the agent
+can reason to the right answer and proceed through the halt. A genuine gate
+requires a separate invocation or a tool boundary the agent cannot self-clear.
+The Sybil scaling Stage 1 confirmation gate was self-executed. The choice was
+correct, but correct-by-reasoning is exactly what the gate existed not to
+depend on. Apply this rule directly to the CUSUM arc, where detector-design
+decisions carry the same irreducible judgment.
+
+**When measurement resists specification, inspect the measurement first.**
+Repeated difficulty specifying a measurement is evidence that the measurement,
+not merely the specification, may be wrong for the mechanism. Compute the
+mechanism's actual behavior before designing the measurement on top of it. In
+the Sybil scaling arc, crossover-in-rank was abandoned for failure-rate curve
+comparison only after three rounds. Direct mechanism evaluation would have
+identified the stable quantity sooner.
 
 **Pre-registered criteria require a power calculation at registration time.** A
 threshold that can be crossed by noise at the planned n is not a criterion. Fix
@@ -1043,7 +1083,7 @@ revisions are clarifications, not factual corrections.
 
 
 ==========================================
-FILE: simulation\diagnostics\attack_vector_revalidation_documentation_edits.md
+FILE: simulation/diagnostics/attack_vector_revalidation_documentation_edits.md
 ==========================================
 
 # Attack Vector v2.0 Revalidation Documentation Edit Proposals
@@ -1144,7 +1184,7 @@ This changes the status of GAP-05 and introduces a v2.0-specific limitation for 
 
 
 ==========================================
-FILE: simulation\diagnostics\attack_vector_revalidation_final_report.md
+FILE: simulation/diagnostics/attack_vector_revalidation_final_report.md
 ==========================================
 
 # Attack Vector v2.0 Revalidation Final Report
@@ -1208,7 +1248,7 @@ Per current evidence, v2.0 has live Monte Carlo evidence for 10 attack vectors a
 
 
 ==========================================
-FILE: simulation\diagnostics\attack_vector_revalidation_integration.md
+FILE: simulation/diagnostics/attack_vector_revalidation_integration.md
 ==========================================
 
 # Attack Vector v2.0 Revalidation Integration Analysis
@@ -1255,7 +1295,7 @@ Sub-Threshold Drift requires follow-up before paper claims can state v2.0 contai
 
 
 ==========================================
-FILE: simulation\diagnostics\attack_vector_revalidation_inventory.md
+FILE: simulation/diagnostics/attack_vector_revalidation_inventory.md
 ==========================================
 
 # Attack Vector v2.0 Revalidation Inventory
@@ -1464,7 +1504,7 @@ All live baseline evidence is v1.x or v1.x.2. Domain Masking is injected analyti
 
 
 ==========================================
-FILE: simulation\diagnostics\attack_vector_revalidation_manifest.md
+FILE: simulation/diagnostics/attack_vector_revalidation_manifest.md
 ==========================================
 
 # Attack Vector v2.0 Revalidation: Authoritative Result Manifest
@@ -1570,7 +1610,7 @@ figures in the 2026-07-20 local-disk audit.
 
 
 ==========================================
-FILE: simulation\diagnostics\attack_vector_revalidation_process_validation.md
+FILE: simulation/diagnostics/attack_vector_revalidation_process_validation.md
 ==========================================
 
 # Attack Vector v2.0 Process Validation
@@ -1772,7 +1812,7 @@ Running the existing constructors would still regenerate v1.x evidence, plus an 
 
 
 ==========================================
-FILE: simulation\diagnostics\attack_vector_revalidation_status.md
+FILE: simulation/diagnostics/attack_vector_revalidation_status.md
 ==========================================
 
 # Attack Vector v2.0 Revalidation Status
@@ -1868,7 +1908,7 @@ remote repository path.
 
 
 ==========================================
-FILE: simulation\diagnostics\attack_vector_revalidation_status_laptop.md
+FILE: simulation/diagnostics/attack_vector_revalidation_status_laptop.md
 ==========================================
 
 # Attack Vector v2 Revalidation Status: laptop
@@ -1882,7 +1922,7 @@ FILE: simulation\diagnostics\attack_vector_revalidation_status_laptop.md
 
 
 ==========================================
-FILE: simulation\diagnostics\attack_vector_revalidation_status_laptop_shard_0_of_4.md
+FILE: simulation/diagnostics/attack_vector_revalidation_status_laptop_shard_0_of_4.md
 ==========================================
 
 # Attack Vector v2 Revalidation Status: laptop
@@ -1896,7 +1936,7 @@ FILE: simulation\diagnostics\attack_vector_revalidation_status_laptop_shard_0_of
 
 
 ==========================================
-FILE: simulation\diagnostics\attack_vector_revalidation_status_laptop_shard_1_of_4.md
+FILE: simulation/diagnostics/attack_vector_revalidation_status_laptop_shard_1_of_4.md
 ==========================================
 
 # Attack Vector v2 Revalidation Status: laptop
@@ -1910,7 +1950,7 @@ FILE: simulation\diagnostics\attack_vector_revalidation_status_laptop_shard_1_of
 
 
 ==========================================
-FILE: simulation\diagnostics\attack_vector_revalidation_status_laptop_shard_2_of_4.md
+FILE: simulation/diagnostics/attack_vector_revalidation_status_laptop_shard_2_of_4.md
 ==========================================
 
 # Attack Vector v2 Revalidation Status: laptop
@@ -1924,7 +1964,7 @@ FILE: simulation\diagnostics\attack_vector_revalidation_status_laptop_shard_2_of
 
 
 ==========================================
-FILE: simulation\diagnostics\attack_vector_revalidation_status_linux.md
+FILE: simulation/diagnostics/attack_vector_revalidation_status_linux.md
 ==========================================
 
 # Attack Vector v2 Revalidation Status: linux
@@ -1938,7 +1978,7 @@ FILE: simulation\diagnostics\attack_vector_revalidation_status_linux.md
 
 
 ==========================================
-FILE: simulation\diagnostics\attack_vector_revalidation_status_linux_shard_3_of_4.md
+FILE: simulation/diagnostics/attack_vector_revalidation_status_linux_shard_3_of_4.md
 ==========================================
 
 # Attack Vector v2 Revalidation Status: linux
@@ -1952,7 +1992,7 @@ FILE: simulation\diagnostics\attack_vector_revalidation_status_linux_shard_3_of_
 
 
 ==========================================
-FILE: simulation\diagnostics\attack_vector_v2_adapter_validation.md
+FILE: simulation/diagnostics/attack_vector_v2_adapter_validation.md
 ==========================================
 
 # Attack Vector v2 Adapter Validation
@@ -2048,7 +2088,7 @@ Full sweeps remain prohibited until these gates pass.
 
 
 ==========================================
-FILE: simulation\diagnostics\biological_veto_capture_v2_summary.md
+FILE: simulation/diagnostics/biological_veto_capture_v2_summary.md
 ==========================================
 
 # Biological Veto Capture Through Dependency v2.0 Summary
@@ -2115,7 +2155,7 @@ Per current evidence, v2.0 reduces Biological Veto Capture through monitoring an
 
 
 ==========================================
-FILE: simulation\diagnostics\bootstrap_subversion_v2_summary.md
+FILE: simulation/diagnostics/bootstrap_subversion_v2_summary.md
 ==========================================
 
 # Bootstrap Subversion v2.0 Summary
@@ -2179,7 +2219,7 @@ Per current evidence, v2.0 blocks bootstrap-subversion action perturbations unde
 
 
 ==========================================
-FILE: simulation\diagnostics\candidate_finding_defense_accelerates_opacity.md
+FILE: simulation/diagnostics/candidate_finding_defense_accelerates_opacity.md
 ==========================================
 
 # Candidate Finding: Defense-Accelerates-Opacity
@@ -2338,7 +2378,7 @@ the mechanism are measured together rather than in separate arms.
 
 
 ==========================================
-FILE: simulation\diagnostics\capped_regime_phi_check_report.md
+FILE: simulation/diagnostics/capped_regime_phi_check_report.md
 ==========================================
 
 # Capped-Regime Phi Action-Capture Check Report
@@ -2473,7 +2513,7 @@ The theoretical claim (phi should matter in the real world, through demographic 
 
 
 ==========================================
-FILE: simulation\diagnostics\comprehension_gap_powered_arm_note.md
+FILE: simulation/diagnostics/comprehension_gap_powered_arm_note.md
 ==========================================
 
 # Powered Discriminating Arm: Pre-Registered Design
@@ -2796,7 +2836,7 @@ finding note are handed to the post-paper arc rather than pursued here.
 
 
 ==========================================
-FILE: simulation\diagnostics\comprehension_gap_redesign_note.md
+FILE: simulation/diagnostics/comprehension_gap_redesign_note.md
 ==========================================
 
 # Comprehension Gap Sweep: Redesign and Predefined Discrimination Criteria
@@ -3191,7 +3231,77 @@ Not run here, and not authorized.
 
 
 ==========================================
-FILE: simulation\diagnostics\cop_finding_framing.md
+FILE: simulation/diagnostics/config_reconciliation_spec.md
+==========================================
+
+# Config Reconciliation Spec: sybil_defense_scaling.json
+
+This lists the exact field changes that reconcile
+`simulation/config/sybil_defense_scaling.json` with the corrected
+registration. Apply these to the committed config; commit the config in
+the same commit as the corrected note so prose and config are byte-
+consistent as of the corrected-registration commit. Do not change any
+field not listed here.
+
+## Fields to set (were null or absent)
+
+1. `capability_ratio_range`: set to a log-spaced range from 0.1 to 10 with
+   25 points. Represent it in whatever form the config's sweep loader
+   expects (either explicit endpoints plus count plus a "log" spacing flag,
+   or a precomputed list of 25 log-spaced values). Match the loader's
+   existing convention; do not invent a new schema. The 25 values are
+   geomspace(0.1, 10, 25).
+
+2. `power_sample_size_per_cell`: set to 200.
+
+3. Validator-set-size range for the rank axis: set the size sweep to the
+   geometric steps [2, 4, 8, 16, 32, 64], plus the institution-alone corner
+   (size 1) as a mandatory included cell. If the config currently hardcodes
+   six frontier validators as a single value, replace that with this swept
+   range. The rank axis is generated by crossing this size range with the
+   collapse-severity sweep; confirm the collapse-severity sweep is present
+   and spans its full range at each size.
+
+4. `full_sweep_authorization`: if this field exists and is set to blocked,
+   it stays blocked. The corrected registration does not authorize the
+   sweep; the separate sweep-authorization step does. Do not flip this
+   here.
+
+## Fields to confirm unchanged (already correct per smoke)
+
+- Merge rule: threshold-connected-components at similarity 0.9 as primary.
+  Complete-linkage present as the sensitivity option.
+- Defense cost: naive exact O(N^2) pairwise as primary; static baseline
+  retained behind the same switch.
+- Attack cost: linear primary, superlinear sensitivity available.
+- Capability terms: attacker ratio direct; defender exponent-reduction and
+  resolution-improvement as two separate fields, never blended.
+- Both arms (A false-cluster injection, B measurement corruption) present
+  as distinct configured mechanisms.
+- Arm B failure: strict definition, with the rank-visible subset computable
+  from logged partition state.
+
+## Validation after applying
+
+Before committing, confirm:
+- No analysis-plan field in the config is null.
+- The config's capability_ratio_range, power_sample_size_per_cell, and
+  validator-set-size range match the corrected note's section 6 and
+  section 7 values exactly.
+- The complete-linkage sensitivity pass has a config path that runs it at
+  the reduced scope the note registers (primary arm and cost forms, full
+  rank axis, single parity ratio, n=200), not as a full-surface duplicate.
+- The ratio-collapse validation slice has a config path matching section 6
+  (parity ratio, three absolute-level steps each dial, nine cells, n=200).
+
+If any of these four cannot be satisfied by editing config values alone and
+would require an instrument code change, STOP and report, because a code
+change to the instrument after registration is a separate matter from
+reconciling config to a frozen plan.
+
+
+==========================================
+FILE: simulation/diagnostics/cop_finding_framing.md
 ==========================================
 
 # COP Finding: Interpretation and Framing Recommendation
@@ -3266,7 +3376,7 @@ The framework's COP protective claim survives because Phase B did not test it; P
 
 
 ==========================================
-FILE: simulation\diagnostics\default_regime_convergence_inertness.md
+FILE: simulation/diagnostics/default_regime_convergence_inertness.md
 ==========================================
 
 # Default-Regime Inertness of convergence_strength
@@ -3363,7 +3473,7 @@ hardcoded successor policy at `simulation/model.py:848`. See
 
 
 ==========================================
-FILE: simulation\diagnostics\defended_collapse_discrepancy_report.md
+FILE: simulation/diagnostics/defended_collapse_discrepancy_report.md
 ==========================================
 
 # Defended Collapse Rate Discrepancy: Diagnostic Report
@@ -3877,7 +3987,7 @@ A sweep of the five guard sites plus the sync_status dispositions confirms no pa
 
 
 ==========================================
-FILE: simulation\diagnostics\domain_masking_v2_summary.md
+FILE: simulation/diagnostics/domain_masking_v2_summary.md
 ==========================================
 
 # Domain Masking v2.0 Summary
@@ -3923,7 +4033,7 @@ Per current evidence, Domain Masking is an analytic-only architectural closure i
 
 
 ==========================================
-FILE: simulation\diagnostics\engineered_fragility_v2_summary.md
+FILE: simulation/diagnostics/engineered_fragility_v2_summary.md
 ==========================================
 
 # Engineered Fragility v2.0 Summary
@@ -3983,7 +4093,7 @@ Per current evidence, v2.0 blocks engineered-fragility action perturbations unde
 
 
 ==========================================
-FILE: simulation\diagnostics\evaluator_collusion_v2_summary.md
+FILE: simulation/diagnostics/evaluator_collusion_v2_summary.md
 ==========================================
 
 # Evaluator Collusion v2.0 Summary
@@ -4050,7 +4160,7 @@ Per current evidence, v2.0 blocks evaluator-collusion action perturbations under
 
 
 ==========================================
-FILE: simulation\diagnostics\gate1_interior_action_diagnostic.md
+FILE: simulation/diagnostics/gate1_interior_action_diagnostic.md
 ==========================================
 
 # Gate 1 diagnostic supplement (superseded)
@@ -4095,7 +4205,7 @@ investment, sustained commitment, anticipatory drift response).
 
 
 ==========================================
-FILE: simulation\diagnostics\gate1_interior_action_report.md
+FILE: simulation/diagnostics/gate1_interior_action_report.md
 ==========================================
 
 # Gate 1: interior-action gate report
@@ -4303,7 +4413,7 @@ Stage 3's phi sweep should be designed to capture all three signatures. A phi ef
 
 
 ==========================================
-FILE: simulation\diagnostics\gate2_competition_diagnostic.md
+FILE: simulation/diagnostics/gate2_competition_diagnostic.md
 ==========================================
 
 # Gate 2 diagnostic supplement
@@ -4428,7 +4538,7 @@ not scheduled until Stage 2 completes.
 
 
 ==========================================
-FILE: simulation\diagnostics\gate2_competition_report.md
+FILE: simulation/diagnostics/gate2_competition_report.md
 ==========================================
 
 # Gate 2: competition gate report
@@ -4495,7 +4605,7 @@ Sorted by descending cosine distance:
 
 
 ==========================================
-FILE: simulation\diagnostics\gate2_v20_phaseb_revalidation_summary.md
+FILE: simulation/diagnostics/gate2_v20_phaseb_revalidation_summary.md
 ==========================================
 
 # Gate 2 v2.0 Revalidation (from authoritative empirical record)
@@ -4548,7 +4658,7 @@ Provenance: G2.1 Piece 1 (phi_finegrained, rr=0.057); G2.2 Phase B Category B; G
 
 
 ==========================================
-FILE: simulation\diagnostics\gate4_v20_validation_summary.md
+FILE: simulation/diagnostics/gate4_v20_validation_summary.md
 ==========================================
 
 # Gate 4 v2.0 Validation Summary
@@ -4592,7 +4702,7 @@ Verdict: PASS
 
 
 ==========================================
-FILE: simulation\diagnostics\gate5_phi_blind_validation.md
+FILE: simulation/diagnostics/gate5_phi_blind_validation.md
 ==========================================
 
 # Gate 5: phi-blind validation report
@@ -4673,7 +4783,7 @@ Result: **PASS**
 
 
 ==========================================
-FILE: simulation\diagnostics\ledger_compromise_v2_summary.md
+FILE: simulation/diagnostics/ledger_compromise_v2_summary.md
 ==========================================
 
 # Ledger Compromise v2.0 Summary
@@ -4733,7 +4843,7 @@ Per current evidence, v2.0 blocks ledger compromise under the defended adapter s
 
 
 ==========================================
-FILE: simulation\diagnostics\measurement_tampering_v2_summary.md
+FILE: simulation/diagnostics/measurement_tampering_v2_summary.md
 ==========================================
 
 # Measurement Tampering v2.0 Summary
@@ -4802,7 +4912,7 @@ Per current evidence, v2.0 blocks measurement tampering under independent evalua
 
 
 ==========================================
-FILE: simulation\diagnostics\opaque_reasoning_v2_summary.md
+FILE: simulation/diagnostics/opaque_reasoning_v2_summary.md
 ==========================================
 
 # Opaque Reasoning v2.0 Summary
@@ -4869,7 +4979,7 @@ Per current evidence, v2.0 blocks opaque-reasoning action perturbations under th
 
 
 ==========================================
-FILE: simulation\diagnostics\owed_diagnostic_run_log.md
+FILE: simulation/diagnostics/owed_diagnostic_run_log.md
 ==========================================
 
 # Owed Diagnostic Run Log
@@ -4894,7 +5004,7 @@ Legacy suite result is recorded after this log is generated by command output in
 
 
 ==========================================
-FILE: simulation\diagnostics\paper_substrate.md
+FILE: simulation/diagnostics/paper_substrate.md
 ==========================================
 
 # Phase B Paper Substrate
@@ -4937,7 +5047,7 @@ Source files (under `simulation/diagnostics/`): `monte_carlo_phase_b_a_summary.m
 
 
 ==========================================
-FILE: simulation\diagnostics\part_ix_draft.md
+FILE: simulation/diagnostics/part_ix_draft.md
 ==========================================
 
 # Part IX Draft: Phi Investigation Findings and v2.0 Substantive Claims
@@ -5253,7 +5363,7 @@ The above is intended for direct integration into `docs/lineage_phi_program_refe
 
 
 ==========================================
-FILE: simulation\diagnostics\part_x_draft.md
+FILE: simulation/diagnostics/part_x_draft.md
 ==========================================
 
 # Draft: Program Reference Part X (Monte Carlo Phase B)
@@ -5428,7 +5538,7 @@ These live outside the program reference and are flagged for the operator, not d
 
 
 ==========================================
-FILE: simulation\diagnostics\patient_defection_corner_density_integration_analysis.md
+FILE: simulation/diagnostics/patient_defection_corner_density_integration_analysis.md
 ==========================================
 
 # Patient Defection Corner-Density Bracket: Integration Analysis
@@ -5489,7 +5599,7 @@ Source: `patient_defection_corner_density.csv` (1,000 rows, 0 errors); `patient_
 
 
 ==========================================
-FILE: simulation\diagnostics\patient_defection_documentation_suggested_edits.md
+FILE: simulation/diagnostics/patient_defection_documentation_suggested_edits.md
 ==========================================
 
 # Patient Defection Documentation Suggested Edits
@@ -5558,7 +5668,7 @@ diff --git a/paper/section_VIII_draft.md b/paper/section_VIII_draft.md
 
 
 ==========================================
-FILE: simulation\diagnostics\patient_defection_dryrun_summary.md
+FILE: simulation/diagnostics/patient_defection_dryrun_summary.md
 ==========================================
 
 # Patient Defection Sweep Summary
@@ -5596,7 +5706,7 @@ Aligned baseline any-fire rate: 0.125. Baseline per-evaluation fire proxy: 0.125
 
 
 ==========================================
-FILE: simulation\diagnostics\patient_defection_final_report.md
+FILE: simulation/diagnostics/patient_defection_final_report.md
 ==========================================
 
 # Patient Defection Final Report
@@ -5720,7 +5830,7 @@ Do not include unrelated pre-existing diagnostics or terminal logs.
 
 
 ==========================================
-FILE: simulation\diagnostics\patient_defection_integration_analysis.md
+FILE: simulation/diagnostics/patient_defection_integration_analysis.md
 ==========================================
 
 # Patient Defection Integration Analysis
@@ -5872,7 +5982,7 @@ This work closes one bounded patient-defection vector under the current v2.0 sub
 
 
 ==========================================
-FILE: simulation\diagnostics\patient_defection_sweep1_summary.md
+FILE: simulation/diagnostics/patient_defection_sweep1_summary.md
 ==========================================
 
 # Patient Defection Sweep Summary
@@ -5919,7 +6029,7 @@ cross-generational continuation results.
 
 
 ==========================================
-FILE: simulation\diagnostics\patient_defection_sweep2_summary.md
+FILE: simulation/diagnostics/patient_defection_sweep2_summary.md
 ==========================================
 
 # Patient Defection Sweep Summary
@@ -5941,7 +6051,7 @@ Errors: 0
 
 
 ==========================================
-FILE: simulation\diagnostics\patient_defection_sweep3_summary.md
+FILE: simulation/diagnostics/patient_defection_sweep3_summary.md
 ==========================================
 
 # Patient Defection Sweep Summary
@@ -5974,7 +6084,7 @@ Errors: 0
 
 
 ==========================================
-FILE: simulation\diagnostics\patient_defection_verification.md
+FILE: simulation/diagnostics/patient_defection_verification.md
 ==========================================
 
 # Patient Defection Verification
@@ -6088,7 +6198,7 @@ modified by this verification.
 
 
 ==========================================
-FILE: simulation\diagnostics\phase_b_integration_analysis.md
+FILE: simulation/diagnostics/phase_b_integration_analysis.md
 ==========================================
 
 # Monte Carlo Phase B: Integration Analysis
@@ -6210,7 +6320,7 @@ What Phase B did not characterize:
 
 
 ==========================================
-FILE: simulation\diagnostics\phi_audit_pathc_report.md
+FILE: simulation/diagnostics/phi_audit_pathc_report.md
 ==========================================
 
 # Path C Decision Gate Report
@@ -6337,7 +6447,7 @@ Before committing to either, the yield condition derivation (Section V of the pa
 
 
 ==========================================
-FILE: simulation\diagnostics\phi_audit_report.md
+FILE: simulation/diagnostics/phi_audit_report.md
 ==========================================
 
 # Phi Implementation Audit Report
@@ -6647,7 +6757,7 @@ requires operator validation before implementation.
 
 
 ==========================================
-FILE: simulation\diagnostics\phi_investigation_synthesis_draft.md
+FILE: simulation/diagnostics/phi_investigation_synthesis_draft.md
 ==========================================
 
 # Phi Investigation Synthesis: Draft for Program Reference Part IX
@@ -6832,7 +6942,7 @@ The draft above is intended for direct integration into `docs/lineage_phi_progra
 
 
 ==========================================
-FILE: simulation\diagnostics\post_paper_queue.md
+FILE: simulation/diagnostics/post_paper_queue.md
 ==========================================
 
 # Post-Paper Queue
@@ -6982,7 +7092,7 @@ growth through succession is the faithful route into the runaway regime.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_advisor_report.md
+FILE: simulation/diagnostics/stage15_composite_sweep_advisor_report.md
 ==========================================
 
 # Stage 1.5 composite urgency architecture — Monte Carlo sweep advisor report
@@ -7229,7 +7339,7 @@ The Stage 1.5 composite urgency architecture, in its committed additive-with-cap
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_0500.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_0500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 500
@@ -7304,7 +7414,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_1000.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_1000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 1000
@@ -7379,7 +7489,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_10000.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_10000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 10000
@@ -7454,7 +7564,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_1500.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_1500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 1500
@@ -7529,7 +7639,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_2000.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_2000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 2000
@@ -7604,7 +7714,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_2500.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_2500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 2500
@@ -7679,7 +7789,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_3000.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_3000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 3000
@@ -7754,7 +7864,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_3500.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_3500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 3500
@@ -7829,7 +7939,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_4000.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_4000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 4000
@@ -7904,7 +8014,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_4500.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_4500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 4500
@@ -7979,7 +8089,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_5000.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_5000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 5000
@@ -8054,7 +8164,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_5500.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_5500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 5500
@@ -8129,7 +8239,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_6000.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_6000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 6000
@@ -8204,7 +8314,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_6500.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_6500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 6500
@@ -8279,7 +8389,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_7000.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_7000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 7000
@@ -8354,7 +8464,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_7500.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_7500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 7500
@@ -8429,7 +8539,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_8000.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_8000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 8000
@@ -8504,7 +8614,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_8500.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_8500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 8500
@@ -8579,7 +8689,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_9000.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_9000.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 9000
@@ -8654,7 +8764,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_checkpoint_9500.md
+FILE: simulation/diagnostics/stage15_composite_sweep_checkpoint_9500.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 9500
@@ -8729,7 +8839,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep_final.md
+FILE: simulation/diagnostics/stage15_composite_sweep_final.md
 ==========================================
 
 # Stage 1.5 composite sweep checkpoint at sample 10000
@@ -8804,7 +8914,7 @@ No samples have passed all three criteria yet.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_faithfulness_report.md
+FILE: simulation/diagnostics/stage15_faithfulness_report.md
 ==========================================
 
 # Stage 1.5 faithfulness test report
@@ -8895,7 +9005,7 @@ Result: **PASS**
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_phi_diagnostic_report.md
+FILE: simulation/diagnostics/stage15_phi_diagnostic_report.md
 ==========================================
 
 # Stage 1.5 phi diagnostic report
@@ -9007,7 +9117,7 @@ No detectable divergence at any window. Phi has no measurable effect on the opti
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_smoke_test_report.md
+FILE: simulation/diagnostics/stage15_smoke_test_report.md
 ==========================================
 
 # Stage 1.5 smoke test report
@@ -9142,7 +9252,7 @@ Re-evaluation of smoke run seed=0: at each step, sample 50 random candidates and
 
 
 ==========================================
-FILE: simulation\diagnostics\stage16_integrity_report.md
+FILE: simulation/diagnostics/stage16_integrity_report.md
 ==========================================
 
 # Stage 1.6 integrity simulation report
@@ -9259,7 +9369,7 @@ All five criteria pass. Stage 1.6 U_sys revision is validated. The composite urg
 
 
 ==========================================
-FILE: simulation\diagnostics\stage17_integrity_report.md
+FILE: simulation/diagnostics/stage17_integrity_report.md
 ==========================================
 
 # Stage 1.7 integrity simulation report
@@ -9365,7 +9475,7 @@ Criteria failed: 1 (trajectory divergence), 2 (per-step cosine), 3 (demographics
 
 
 ==========================================
-FILE: simulation\diagnostics\stage17_pressure_diagnostic_report.md
+FILE: simulation/diagnostics/stage17_pressure_diagnostic_report.md
 ==========================================
 
 # Stage 1.7 pressure / state / welfare-factor diagnostic
@@ -9488,7 +9598,7 @@ Cross-config welfare_factor std/mean ratio:      0.0023
 
 
 ==========================================
-FILE: simulation\diagnostics\stage17_usys_factor_diagnostic_report.md
+FILE: simulation/diagnostics/stage17_usys_factor_diagnostic_report.md
 ==========================================
 
 # Stage 1.7 U_sys factor breakdown diagnostic
@@ -9596,7 +9706,7 @@ Min/max across (seed, step) per config; surfaces saturation behavior.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage18_integrity_phase_a_report.md
+FILE: simulation/diagnostics/stage18_integrity_phase_a_report.md
 ==========================================
 
 # Stage 1.8 Phase A integrity report
@@ -9665,7 +9775,7 @@ Seeds diverged: **5 / 5** (need >= 3). Result: **PASS**
 
 
 ==========================================
-FILE: simulation\diagnostics\stage18_integrity_phase_b_report.md
+FILE: simulation/diagnostics/stage18_integrity_phase_b_report.md
 ==========================================
 
 # Stage 1.8 Phase B integrity report
@@ -9748,7 +9858,7 @@ All four criteria pass. Stage 1.8 working_factor architecture produces gate-2-pa
 
 
 ==========================================
-FILE: simulation\diagnostics\stage2_yield_implementation_notes.md
+FILE: simulation/diagnostics/stage2_yield_implementation_notes.md
 ==========================================
 
 # Stage 2 Formal Yield-Condition Implementation Notes
@@ -10022,7 +10132,7 @@ v1.x.2 paths are untouched throughout.
 
 
 ==========================================
-FILE: simulation\diagnostics\stage2_yield_parameter_diagnostic_summary.md
+FILE: simulation/diagnostics/stage2_yield_parameter_diagnostic_summary.md
 ==========================================
 
 # Stage 2 yield-condition parameter diagnostic
@@ -10087,7 +10197,7 @@ Per-cap fire-rate (runs_with_fire / runs):
 
 
 ==========================================
-FILE: simulation\diagnostics\sub_threshold_drift_v2_summary.md
+FILE: simulation/diagnostics/sub_threshold_drift_v2_summary.md
 ==========================================
 
 # Sub-Threshold Drift v2.0 Summary
@@ -10151,7 +10261,7 @@ Per current evidence, the v2.0 adapter does not block Sub-Threshold Drift under 
 
 
 ==========================================
-FILE: simulation\diagnostics\successor_contamination_v2_summary.md
+FILE: simulation/diagnostics/successor_contamination_v2_summary.md
 ==========================================
 
 # Successor Contamination v2.0 Summary
@@ -10218,7 +10328,7 @@ Per current evidence, v2.0 blocks successor contamination under the defended ada
 
 
 ==========================================
-FILE: simulation\diagnostics\sybil_capture_v2_summary.md
+FILE: simulation/diagnostics/sybil_capture_v2_summary.md
 ==========================================
 
 # Sybil Capture v2.0 Summary
@@ -10287,140 +10397,1782 @@ Per current evidence, v2.0 reproduces complete Sybil attack containment under th
 
 
 ==========================================
-FILE: simulation\diagnostics\sync_status_yotko-Legion-T5-26IOB6_20260720.md
+FILE: simulation/diagnostics/sybil_characterization_runner_schema.md
 ==========================================
 
-# Sync Status Audit: yotko-Legion-T5-26IOB6 2026-07-20
+# Sybil characterization runner config schema
 
-Audit mode. No merge, pull, commit, push, or data edit was performed. `git fetch --all` was run as requested.
+This document records the mechanical JSON representation consumed by
+`simulation/run_sybil_defense_scaling_characterization.py`. Every analysis
+value below is fixed by sections 6, 7, and 10 of the committed design note.
+The runner validates the exact registered values and refuses drift.
 
-## Step 1: Identify and inventory
+## Sweep fields
 
-- Hostname: `yotko-Legion-T5-26IOB6`
-- OS: `Linux-6.17.0-35-generic-x86_64-with-glibc2.39`
-- Repo path: `/home/yotko/Documents/Github/ai-succession-problem`
-- Inside OneDrive-synced folder: `no` by path inspection
-- Current branch: `main`
-- HEAD: `924ce5f2e9903c202bc2ef776a8e9644428b7332`
-- HEAD commit date: `2026-07-17T22:03:03-04:00`
-- Git status counts at audit time before writing this report: staged `0`, unstaged `9`, untracked `0`
+`sweep.capability_ratio_range` is an object with this schema:
 
-```text
-## main...origin/main
- M snapshots/INVENTORY.md
- M snapshots/code_snapshot.md
- M snapshots/constitutional_snapshot.md
- M snapshots/data_results_snapshot.md
- M snapshots/diagnostics_snapshot.md
- M snapshots/docs_snapshot.md
- M snapshots/essays_snapshot.md
- M snapshots/framework_papers_snapshot.md
- M snapshots/paper_drafts_snapshot.md
+```json
+{
+  "schema": "geomspace",
+  "start": 0.1,
+  "stop": 10.0,
+  "count": 25
+}
 ```
 
-## Step 2: Divergence diagnosis
+The loader includes both endpoints and computes point `i` as
+`start * (stop / start) ** (i / (count - 1))`.
 
-- Current branch upstream ahead/behind (`@{u}...HEAD`, left is behind, right is ahead): `0	0`
-- Local and remote branches:
-```text
-* main                            924ce5f [origin/main] Add owed diagnostic investigation artifacts
-  remotes/origin/1.x              0ccc9a1 v1.0 preparation — complete framework, simulation, validation data, and documentation
-  remotes/origin/HEAD             -> origin/main
-  remotes/origin/attack-v2-laptop 6d33c90 Refine patient defection claim to bounded generational depth
-  remotes/origin/attack-v2-linux  29edfeb Add Linux engineered_fragility v2 results
-  remotes/origin/main             924ce5f Add owed diagnostic investigation artifacts
-```
-- Stash list: `(none)`
-- Current branch log:
-```text
-924ce5f Add owed diagnostic investigation artifacts
-e41c4f6 Regenerate project knowledge snapshots
-6a72848 Add missing patient defection substrate wiring
-024eec1 Ai Succession Problem Video Thumbnail.
-6862f92 Added Already Happening essay.
-f88de52 Add essays snapshot category; assemble The Lineage Imperative v2.0.md in docs
-365f724 Paper v2.0 Phase 4: abstract, conclusion, Section II non-claim, editorial pass
-7d59dac Patient defection verification, paper VIII.8, program reference X.8
-e32c382 Patient defection substrate extension and empirical investigation
-870b15e Paper v2.0 Phase 3: editorial pass (voice, expansion, inherited tightening)
-```
-- Commit `6d33c90` exists: `yes`, date `2026-07-17T22:20:38-04:00`
-- `6d33c90` ancestor of HEAD: `no`
-- HEAD ancestor of `6d33c90`: `no`
-- Working branch of record `attack-v2-laptop`: not checked out locally; available as `origin/attack-v2-laptop` at `6d33c90`.
+`sweep.power_sample_size_per_cell` is the registered integer `200`.
 
-### OneDrive conflict artifact search
+`sweep.structural_axis.validator_set_sizes` is
+`[2, 4, 8, 16, 32, 64]` and
+`sweep.structural_axis.collapse_severities` is
+`[0.0, 0.33, 0.66, 1.0]`. Their Cartesian product supplies 24 structural
+points. `sweep.structural_axis.institution_alone_corner` adds the mandatory
+25th point as size 1 at severity 1.0. At ordinary points, size includes one
+institutional validator and the remaining validators are frontier validators.
+At the corner, the institution is the only validator.
 
-- Repo is not under OneDrive on this Linux machine.
-- Search for filenames containing conflict, Copy, copy, host name, or `(1)` under the working tree and `.git/`:
-```text
-(none)
-```
+This swept field does not overload `smoke.frontier_validator_count`. The
+smoke runner continues to consume that scalar integer, so its fixed fixtures
+remain reproducible.
 
-### Pickaxe search across all branches
+`sweep.main_surface`, `sweep.ratio_collapse_slice`, and
+`sweep.complete_linkage_sensitivity` explicitly name each registered arm,
+cost form, merge rule, capability setting, and slice scope. These fields do
+not introduce defaults. The runner checks their exact contents against the
+registration before it enumerates or executes a cell.
 
-- Marker `robust to baseline choice`: `e1d987b Add v2 revalidation QA trail and audit report`
-  Branch containment:
-```text
-remotes/origin/attack-v2-laptop
-```
-- Marker `survival-versus-extinction`: `NO HITS`
-- Marker `fires after the threshold breach`: `e1d987b Add v2 revalidation QA trail and audit report`
-  Branch containment:
-```text
-remotes/origin/attack-v2-laptop
-```
+## Authorization and output
 
-Note: the pickaxe hits for `robust to baseline choice` and `fires after the threshold breach` are in `simulation/diagnostics/attack_vector_revalidation_audit.md` at commit `e1d987b`, not in the required summary/edit target files. No pickaxe hit was found for `survival-versus-extinction`.
+`sweep.authorization` is `blocked_pending_selfcheck` while the runner is
+being validated. A successful self-check is the only condition that permits
+the value to become `authorized_registered_characterization`. Full execution
+refuses every other value.
 
-## Step 3: Required-revision presence check
-
-| Item | File | present in working tree? | present at HEAD? | present anywhere in checked target files? |
-| --- | --- | --- | --- | --- |
-| Drift interpretation note | simulation/diagnostics/sub_threshold_drift_v2_summary.md | no | no | no target-file hit |
-| Drift baseline qualification | simulation/diagnostics/sub_threshold_drift_v2_summary.md | no | no | no target-file hit |
-| Bootstrap baseline qualification | simulation/diagnostics/bootstrap_subversion_v2_summary.md | no | no | no target-file hit |
-| Proposal 1 amendment | simulation/diagnostics/attack_vector_revalidation_documentation_edits.md | no | no | no target-file hit |
-
-Additional target-file existence check: the three target files are missing at current `HEAD`/`main`, present on `origin/attack-v2-laptop`, and missing on `origin/main` and `origin/attack-v2-linux`.
-
-## Step 4: Raw-data inventory and extinction audit
-
-Working tree finding: `data/attack_vector_revalidation_v2/` is absent from the checked-out `main` working tree on this machine. The fetched `origin/attack-v2-laptop` ref contains the full revalidation data. This is a branch/sync smoking gun, not a data corruption finding.
-
-| Vector | all expected files exist in working tree? | paths audited | fetched row count | expected | matches expected? |
-| --- | --- | --- | --- | --- | --- |
-| sub_threshold_drift | no | data/attack_vector_revalidation_v2/linux/sub_threshold_drift/full_5ac6a2e_sub_threshold_drift/results.csv (WT no) | 200 | 200 | yes |
-| measurement_tampering | no | data/attack_vector_revalidation_v2/laptop/measurement_tampering/full_5ac6a2e_measurement_tampering/results.csv (WT no) | 120 | 120 | yes |
-| bootstrap_subversion | no | data/attack_vector_revalidation_v2/linux/bootstrap_subversion/full_5ac6a2e_bootstrap_subversion/results.csv (WT no) | 200 | 200 | yes |
-| sybil_capture | no | data/attack_vector_revalidation_v2/laptop/sybil_capture/full_5ac6a2e_sybil_capture/results.csv (WT no) | 120 | 120 | yes |
-| biological_veto_capture | no | data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard0of4/results.csv (WT no); data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard1of4/results.csv (WT no); data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard2of4/results.csv (WT no); data/attack_vector_revalidation_v2/linux/biological_veto_capture/full_5ac6a2e_veto_shard3of4/results.csv (WT no) | 8700 | 8700 | yes |
-| patient_defection_corner_density | yes | simulation/diagnostics/patient_defection_corner_density.csv | 1000 | 1000 | yes |
-
-Rates computed directly from fetched `origin/attack-v2-laptop` full CSV blobs:
-
-| Vector | defense state | n | attack success rate | extinction rate | collapse rate | mean steps completed |
-| --- | --- | --- | --- | --- | --- | --- |
-| sub_threshold_drift | False | 100 | 100.0% | 92.0% | 100.0% | 256.31 |
-| sub_threshold_drift | True | 100 | 100.0% | 0.0% | 1.0% | 300.00 |
-| measurement_tampering | False | 60 | 100.0% | 0.0% | 0.0% | 300.00 |
-| measurement_tampering | True | 60 | 0.0% | 0.0% | 1.7% | 300.00 |
-| bootstrap_subversion | False | 100 | 100.0% | 100.0% | 100.0% | 106.21 |
-| bootstrap_subversion | True | 100 | 0.0% | 0.0% | 1.0% | 300.00 |
-| sybil_capture | False | 60 | 100.0% | 100.0% | 100.0% | 104.55 |
-| sybil_capture | True | 60 | 0.0% | 0.0% | 0.0% | 300.00 |
-
-Book-claim blocker numbers: Measurement Tampering has 0.0 percent extinction in both defense states. Bootstrap Subversion has 100.0 percent undefended extinction and 0.0 percent defended extinction. Sybil Capture has 100.0 percent undefended extinction and 0.0 percent defended extinction. Sub-Threshold Drift also has material undefended extinction at 92.0 percent and 0.0 percent defended extinction.
-
-Missing-on-working-tree data files that exist in the fetched branch: all five requested attack-vector result sets under `data/attack_vector_revalidation_v2/`. `patient_defection_corner_density.csv` exists in the working tree with 1,000 rows and matches expected count.
-
-## Step 5: Stop condition
-
-Report written locally for comparison with the other machine. No correction step was attempted. Awaiting explicit instruction before any checkout, merge, cherry-pick, edit, commit, pull, or push.
+The authoritative run ID starts with
+`outputs.authoritative_run_prefix`. Authoritative CSV files and their manifest
+carry that prefix. The manifest enumerates exact result paths, and analysis
+must read those paths rather than use a glob. Self-check output uses the
+`selfcheck_` prefix. Smoke, two-dial smoke, self-check, and progress-log files
+are not authoritative characterization results.
 
 
 ==========================================
-FILE: simulation\diagnostics\sync_status_YotkoTest_20260720.md
+FILE: simulation/diagnostics/sybil_characterization_runner_selfcheck_report.md
+==========================================
+
+# Sybil characterization runner and self-check report
+
+## Outcome
+
+The runner self-check passed while characterization authorization was
+`blocked_pending_selfcheck`. It enumerated the frozen surface shapes, read the
+registered config fields, ran one n=1 fixture from each pass, and confirmed
+that the full execution path refused authorization. No characterization
+surface, registered ratio-collapse slice, finding, or crossover was computed.
+After that pass, and only after it, config authorization was changed to
+`authorized_registered_characterization` as section 10 of the final committed
+registration permits.
+
+## Runner and schema
+
+`simulation/run_sybil_defense_scaling_characterization.py` provides a strict
+loader and executor for three passes:
+
+- Main surface: 5,000 cells and 1,000,000 runs at n=200.
+- Ratio-collapse slice: 75 cells and 15,000 runs at n=200.
+- Complete-linkage sensitivity: 100 cells and 20,000 runs at n=200.
+
+The capability ratio config uses the explicit inclusive schema
+`{"schema":"geomspace","start":0.1,"stop":10.0,"count":25}`. The
+structural schema crosses validator-set sizes `[2,4,8,16,32,64]` with
+collapse severities `[0.0,0.33,0.66,1.0]`, then appends the size-1,
+severity-1.0 institution-only corner. The registered n is the scalar
+`power_sample_size_per_cell: 200`. Each pass has its registered scope stated
+explicitly in config. The full schema and manifest-selection rule are recorded
+in `simulation/diagnostics/sybil_characterization_runner_schema.md`.
+
+The runner validates every registered value before enumeration. Full mode
+also requires exact authorization and byte-clean committed config and note
+files. It records one aggregate row of sufficient counts and mechanism values
+per cell. Replicate-level outcomes are reproducible from the documented
+deterministic seed schema.
+
+## Smoke path preservation
+
+The characterization size range is stored at
+`sweep.structural_axis.validator_set_sizes`. It does not replace or overload
+`smoke.frontier_validator_count`, which remains the integer `6`. Both existing
+smoke runners ignore populated characterization fields. This preserves their
+fixed fixtures after config reconciliation.
+
+## Self-check evidence
+
+The non-authoritative record is under
+`data/sybil_defense_scaling/selfcheck_sybil_characterization_runner_v1/`.
+Its `selfcheck_` prefix excludes it from the authoritative manifest convention.
+The evidence records:
+
+- capability ratios: 25 points, first 0.1 and last 10.0;
+- validator-set sizes: 2, 4, 8, 16, 32, and 64;
+- collapse severities: 0.0, 0.33, 0.66, and 1.0;
+- registered sample size read from config: 200;
+- main shape: 5,000 cells and 1,000,000 planned runs;
+- ratio-collapse shape: 75 cells and 15,000 planned runs;
+- complete-linkage shape: 100 cells and 20,000 planned runs;
+- tiny execution: three cells at n=1, one from each pass;
+- blocked full-run refusal: confirmed;
+- authoritative manifest written: false;
+- finding computed: false.
+
+## Progress and outputs
+
+Full mode creates a fixed `sweep_progress.log`, prints its path at startup,
+and flushes line-buffered startup, observed-rate status, pass-boundary, and
+completion records. ETA is derived from observed wall-clock seconds per
+completed cell. The progress log remains outside the authoritative manifest.
+The three result CSVs carry the configured `full_5ac6a2e_` prefix and are
+selected only through the exact paths in the authoritative manifest.
+
+## Specification gaps
+
+None. Every representational value needed by the runner is fixed in sections
+6, 7, and 10 of the final registration. Operational worker count is a runtime
+resource setting recorded in the progress log and manifest, not an analysis
+value.
+
+
+==========================================
+FILE: simulation/diagnostics/sybil_crossover_definition_diagnostic.md
+==========================================
+
+# Sybil Crossover Definition Diagnostic
+
+## Scope and provenance
+
+This is a diagnostic of the committed Sybil defense scaling mechanism at
+commit `0577a9bc36d509c7c418ec0723b636d4d987cdb1`. It does not register a
+crossover definition, change an analysis criterion, select an absolute-level
+term, build the two-dial mechanism, or run a smoke or characterization sweep.
+
+The fixture is Arm A, exact pairwise defense cost, linear attack cost,
+capability parity, term OFF, collapse severity 0.0, and validator-set sizes
+`{2, 4, 8, 16, 32, 64}`. At severity 0.0, all genuine validators are distinct,
+so effective rank equals validator-set size `N`. Arm A injects two false
+clusters. Because defense cost uses apparent inputs, it checks `N + 2` inputs.
+
+The committed formula therefore gives
+
+```text
+defense_cost(N) = choose(N + 2, 2)
+attack_cost(N) = N
+resolving_term(N) = N * attack_cost(N) = N^2
+p_resolve(N) = N^2 / (N^2 + choose(N + 2, 2))
+failure_rate(N) = 1 - p_resolve(N)^2
+```
+
+The last expression follows because defense fails if either of the two false
+clusters survives. All values below were computed in Python from these exact
+expressions. No random evaluation was needed for the mechanism curve.
+
+## 1. Exact parity failure curve
+
+| Validator-set size and effective rank | Pairwise defense cost | Per-cluster resolution probability | Defense-failure rate | n=50 binomial standard error |
+|---:|---:|---:|---:|---:|
+| 2 | 6 | 0.400000000000 | 0.840000000000 | 0.051845925587 |
+| 4 | 15 | 0.516129032258 | 0.733610822060 | 0.062518154774 |
+| 8 | 45 | 0.587155963303 | 0.655247874758 | 0.067215786447 |
+| 16 | 153 | 0.625916870416 | 0.608228071329 | 0.069034293590 |
+| 32 | 561 | 0.646056782334 | 0.582610634000 | 0.069738867664 |
+| 64 | 2,145 | 0.656305079314 | 0.569263642866 | 0.070028929419 |
+
+The observed maximum is 0.840000000000 and the observed minimum is
+0.569263642866. The range is 0.270736357134.
+
+The curve decreases monotonically, but flattens rapidly. Since
+
+```text
+choose(N + 2, 2) = (N^2 + 3N + 2) / 2,
+```
+
+the per-cluster resolution probability approaches `2/3`, and the two-cluster
+failure rate approaches `1 - (2/3)^2 = 5/9 = 0.555555555556`. The size-64
+rate remains 0.013708087311 above that asymptote. Thus the registered 0.5
+threshold is unreachable not only on this ladder, but also in the large-rank
+limit under this fixture.
+
+## 2. Thresholds crossed on the ladder
+
+Using linear interpolation in effective-rank units, every threshold strictly
+between 0.569263642866 and 0.840000000000 has one located crossing. The
+segments cover these rate intervals:
+
+| Rank bracket | Failure-rate interval |
+|---:|---:|
+| 2 to 4 | 0.840000000000 to 0.733610822060 |
+| 4 to 8 | 0.733610822060 to 0.655247874758 |
+| 8 to 16 | 0.655247874758 to 0.608228071329 |
+| 16 to 32 | 0.608228071329 to 0.582610634000 |
+| 32 to 64 | 0.582610634000 to 0.569263642866 |
+
+Representative round thresholds are:
+
+| Threshold | Located crossing |
+|---:|---:|
+| 0.8 | rank 2.751956181534, bracketed by 2 and 4 |
+| 0.7 | rank 5.715648694564, bracketed by 4 and 8 |
+| 0.6 | rank 21.139044142972, bracketed by 16 and 32 |
+| 0.5 | no crossing |
+
+This establishes reachability only. It does not establish that an estimated
+crossing is stable at n=50.
+
+## 3. Candidate crossover definitions
+
+### Candidate A: midpoint of the observed range
+
+The exact midpoint is
+
+```text
+(0.840000000000 + 0.569263642866) / 2 = 0.704631821433.
+```
+
+It is bracketed by ranks 4 and 8 and interpolates to rank
+`5.479219535496`. The deterministic curve therefore gives a located,
+non-boundary crossover.
+
+It is not stable against n=50 sampling variation on a one-rank scale. For a
+Bernoulli failure indicator, the cell standard errors are 0.052 to 0.070,
+equivalent to roughly 2.6 to 3.5 failures among 50 replicates. Recomputing the
+observed range midpoint after changing only the rank-4 rate by one of its
+n=50 standard errors moves the interpolated crossover as follows:
+
+| Rank-4 perturbation | Recomputed crossover | Movement from exact curve |
+|---:|---:|---:|
+| minus 0.062518154774 | 3.602869175567 | 1.876350359930 |
+| plus 0.062518154774 | 6.597854617904 | 1.118635082408 |
+
+A local delta-method propagation across the two endpoint rates that define
+the midpoint and the two rates that bracket it gives an estimated crossover
+standard deviation of 3.2557 rank units. This is an instability diagnostic,
+not a confidence interval, because sampling variation can change the bracket.
+The direct one-standard-error perturbations already answer the requested
+question without relying on a confidence convention: ordinary n=50 sampling
+wobble can move this crossover by more than one rank point on its own.
+
+Verdict: Candidate A is mathematically located and non-boundary, but its
+one-rank movement criterion is noise-dominated at n=50.
+
+### Candidate B: reachable absolute thresholds
+
+Both proposed round thresholds are reachable:
+
+- Failure 0.7 crosses at rank 5.715648694564 between ranks 4 and 8.
+- Failure 0.6 crosses at rank 21.139044142972 between ranks 16 and 32.
+
+Their n=50 stability is also poor. For threshold 0.7, changing only the
+rank-4 rate by one n=50 standard error moves the crossing to rank
+3.657713703140 or 6.729364703073. Those movements are 2.0579 and 1.0137
+rank units. A local delta-method crossover standard deviation is 2.3424
+rank units.
+
+Threshold 0.6 lies on a much flatter segment. A single failure-count change
+at rank 16, a rate change of only 0.02 at n=50, moves the crossing to rank
+14.594811913061 or 25.900800389215. A local delta-method crossover standard
+deviation is 32.4400 rank units and is best read only as evidence of severe
+local instability.
+
+Verdict: Candidate B yields located, non-boundary deterministic crossings at
+both 0.7 and 0.6. Neither supports a stable one-rank movement reading at
+n=50. Of the two, 0.7 is less unstable than 0.6, but it still exceeds the
+one-rank criterion under an ordinary one-standard-error perturbation.
+
+## 4. Absolute-level movement feasibility
+
+The committed term-OFF curve has enough mechanistic dynamic range for an
+absolute-level term to move a located crossover. This statement is a
+feasibility result, not a term selection or proposed registration.
+
+For Candidate A, consider only the analytical effect of an absolute defender
+resolution multiplier `m` on the existing resolving term:
+
+```text
+p_resolve_m(N) = m * N^2 / (m * N^2 + choose(N + 2, 2)).
+```
+
+This is a diagnostic probe of an absolute resolution channel. If `m` takes
+the parity-level values 0.316, 1.0, and 3.16, the recomputed relative-midpoint
+crossovers are:
+
+| Absolute resolution multiplier | Relative-midpoint crossover |
+|---:|---:|
+| 0.316 | 6.749319275947 |
+| 1.0 | 5.479219535496 |
+| 3.16 | 4.167181309638 |
+
+The span is 2.582137966309 rank units, so movement greater than one rank is
+mechanistically feasible under Candidate A. The same probe also makes some
+fixed absolute thresholds disappear at the outer multiplier levels, which
+would be a degenerate result rather than a located movement.
+
+For Candidate B, only a modest absolute effect is needed while preserving a
+located crossing. An independent absolute catch channel with probability
+`c` changes per-cluster resolution to
+`p_resolve + c * (1 - p_resolve)`. As a diagnostic bound:
+
+- Increasing `c` from 0 to 0.05 moves the 0.7 crossing from rank
+  5.715648694564 to 4.415722036435, a movement of 1.299926658128. Both
+  crossings remain located.
+- Increasing `c` from 0 to 0.01 moves the 0.6 crossing from rank
+  21.139044142972 to 18.215083791304, a movement of 2.923960351668. Both
+  crossings remain located.
+
+These probes show that Gate 3 movement is mechanically possible under either
+candidate family. They do not choose the form, threshold, or strength of an
+absolute-level term. Those remain operator decisions before any mechanism is
+built or any crossover is registered.
+
+## Assessment for operator ruling
+
+The mechanism supports deterministic, non-boundary crossings for the
+relative midpoint, absolute 0.7, and absolute 0.6 definitions. It also has
+enough dynamic range for a suitable absolute-level nonlinearity to move such
+a crossing by more than one rank point.
+
+However, neither candidate yields a stable crossover at n=50 under a
+one-rank movement criterion. Candidate A and absolute 0.7 both move by more
+than one rank under a one-standard-error cell perturbation. Absolute 0.6 is
+more unstable and can move several rank units after a single failure-count
+change. Therefore, no candidate in this diagnostic can support the specified
+n=50, one-rank Gate 3 comparison non-degenerately without an operator ruling
+on the estimator, replicate count, ladder, or movement criterion.
+
+No crossover definition is registered by this report.
+
+
+==========================================
+FILE: simulation/diagnostics/sybil_defense_scaling_characterization_report.md
+==========================================
+
+# Sybil defense scaling characterization report
+
+## Go/no-go outcome
+
+The registered characterization completed. The ratio-collapse slice is non-collapse, so every ratio-expressed main-surface reading below carries the registered material caveat that a fuller two-dial grid is needed in a future registered study. This report does not add that grid.
+
+No crossover rank was computed or used. The registered fixed-cell quantities are reported below.
+
+## 1. Ratio-collapse slice
+
+Criterion, quoted verbatim from the committed registration:
+
+> The finding quantity is the failure-rate curve compared cell by cell across
+> the three parity levels, never a crossover rank. At each structural point,
+> all three pairwise absolute failure-rate differences are calculated. For a
+> difference `d`, its registered normal delta-method 95 percent interval is
+> `d +/- 1.96 * sqrt(p1*(1-p1)/200 + p2*(1-p2)/200)`. The dials collapse to
+> their ratio if every interval's upper bound is below the 0.15 MEI. They do
+> not collapse if at least one interval's lower bound is at or above 0.15.
+> Any other result is boundary. A non-collapse result is reported as a
+> material caveat on every ratio-expressed main-surface reading and identifies
+> the fuller two-dial grid as a future registered study; that fuller grid is
+> not added here. The slice runs and reports before the main surface is
+> interpreted as ratio-parameterized.
+
+Result:
+
+The 75-cell slice produced 75 pairwise cross-level comparisons. Classifications were boundary=29, robust=32, sensitive=1, vacuous_zero_flag=13. The largest observed difference was 0.255 with 95 percent interval [0.161, 0.349] at structural point 16, levels 0.316 and 3.16. 13 comparisons were exactly zero and are flagged rather than banked.
+
+| Point | Size | Severity | Rank | F(0.316) | F(1.0) | F(3.16) | Max d | Max 95% CI |
+|---:|---:|---:|---:|---:|---:|---:|---:|:---|
+| 0 | 2 | 0.0 | 2 | 0.905 | 0.850 | 0.820 | 0.085 | [0.018, 0.152] |
+| 1 | 2 | 0.33 | 2 | 0.870 | 0.855 | 0.775 | 0.095 | [0.021, 0.169] |
+| 2 | 2 | 0.66 | 2 | 0.855 | 0.810 | 0.790 | 0.065 | [-0.010, 0.140] |
+| 3 | 2 | 1.0 | 2 | 0.870 | 0.850 | 0.770 | 0.100 | [0.025, 0.175] |
+| 4 | 4 | 0.0 | 4 | 0.720 | 0.710 | 0.660 | 0.060 | [-0.030, 0.150] |
+| 5 | 4 | 0.33 | 4 | 0.775 | 0.755 | 0.625 | 0.150 | [0.061, 0.239] |
+| 6 | 4 | 0.66 | 3 | 0.930 | 0.855 | 0.800 | 0.130 | [0.064, 0.196] |
+| 7 | 4 | 1.0 | 2 | 0.985 | 0.955 | 0.925 | 0.060 | [0.020, 0.100] |
+| 8 | 8 | 0.0 | 8 | 0.730 | 0.655 | 0.560 | 0.170 | [0.078, 0.262] |
+| 9 | 8 | 0.33 | 8 | 0.675 | 0.625 | 0.550 | 0.125 | [0.030, 0.220] |
+| 10 | 8 | 0.66 | 5 | 0.880 | 0.910 | 0.820 | 0.090 | [0.024, 0.156] |
+| 11 | 8 | 1.0 | 2 | 1.000 | 0.990 | 0.995 | 0.010 | [-0.004, 0.024] |
+| 12 | 16 | 0.0 | 16 | 0.665 | 0.585 | 0.615 | 0.080 | [-0.015, 0.175] |
+| 13 | 16 | 0.33 | 16 | 0.680 | 0.620 | 0.490 | 0.190 | [0.095, 0.285] |
+| 14 | 16 | 0.66 | 7 | 0.955 | 0.955 | 0.940 | 0.015 | [-0.029, 0.059] |
+| 15 | 16 | 1.0 | 2 | 1.000 | 1.000 | 1.000 | 0.000 | [0.000, 0.000] |
+| 16 | 32 | 0.0 | 32 | 0.680 | 0.600 | 0.425 | 0.255 | [0.161, 0.349] |
+| 17 | 32 | 0.33 | 32 | 0.625 | 0.620 | 0.490 | 0.135 | [0.039, 0.231] |
+| 18 | 32 | 0.66 | 13 | 0.945 | 0.950 | 0.930 | 0.020 | [-0.027, 0.067] |
+| 19 | 32 | 1.0 | 2 | 1.000 | 1.000 | 1.000 | 0.000 | [0.000, 0.000] |
+| 20 | 64 | 0.0 | 64 | 0.690 | 0.515 | 0.450 | 0.240 | [0.146, 0.334] |
+| 21 | 64 | 0.33 | 64 | 0.710 | 0.600 | 0.495 | 0.215 | [0.121, 0.309] |
+| 22 | 64 | 0.66 | 23 | 0.985 | 0.970 | 0.940 | 0.045 | [0.008, 0.082] |
+| 23 | 64 | 1.0 | 2 | 1.000 | 1.000 | 1.000 | 0.000 | [0.000, 0.000] |
+| 24 | 1 | 1.0 | 1 | 1.000 | 1.000 | 1.000 | 0.000 | [0.000, 0.000] |
+
+Verdict:
+
+**NON-COLLAPSE.** One comparison has a lower 95 percent bound at or above the 0.15 MEI. The main surface therefore cannot be read as exhaustively ratio-parameterized. Its ratio findings remain valid for the registered term-OFF representation but require the registered fuller-grid caveat.
+
+## 2. Primary fixed-cell reading, per arm
+
+Criterion, quoted verbatim from the committed registration:
+
+> **Primary, per arm, final registered form:** the fixed-cell defense-failure
+> proportions at every maximum-collapse rank-two floor cell, reported
+> separately for all six validator-set sizes and all four cost combinations.
+> No cells are aggregated by effective rank because headcount still controls
+> pairwise cost and Arm B corruption opportunities after rank collapses to
+> two. The institution-only rank-one analytic corner is reported separately.
+> Each proportion carries its normal 95 percent interval. Arm B strict failure
+> is its primary proportion and rank-visible failure is its required companion
+> track. The primary A/B contrast is the fixed-cell absolute difference with
+> the same normal delta-method interval and 0.15 MEI discipline.
+
+Result:
+
+- Arm A: 600 maximum-collapse rank-two cells, failure-rate range [0.005, 1.000], floor classifications clears=192, fails=375, statistical_boundary=33. Exact-zero cells flagged: 0.
+- Arm B strict: 600 maximum-collapse rank-two cells, failure-rate range [0.015, 1.000], floor classifications clears=131, fails=435, statistical_boundary=34. Exact-zero cells flagged: 0.
+- Arm B rank-visible: 600 maximum-collapse rank-two cells, failure-rate range [0.000, 0.735], floor classifications clears=577, fails=10, statistical_boundary=13. Exact-zero cells flagged: 286.
+
+The institution-only analytic corner had effective rank one in all 200 arm, ratio, and cost rows. Its strict defense failure rate was 1.000 to 1.000.
+
+A/B absolute-difference classifications across the 600 matched cells were strict: boundary=114, robust=122, sensitive=211, vacuous_zero_flag=153; rank-visible: boundary=68, robust=86, sensitive=445, vacuous_zero_flag=1. Directions were strict: arm_a_higher=134, arm_b_higher=313, equal=153; rank-visible: arm_a_higher=598, arm_b_higher=1, equal=1.
+
+All full 25-point curves, cell proportions, intervals, floor classifications, and A/B comparisons are preserved in the companion analysis JSON.
+
+Verdict:
+
+**Arm A: CELL-DEPENDENT. Arm B strict: CELL-DEPENDENT. Arm B rank-visible: CELL-DEPENDENT.** Each track contains clear, fail, and statistical-boundary cells, so neither arm has a single global floor outcome across the registered ratio and cost cells. The A/B asymmetry is material in some cells, boundary in others, and robustly below the MEI in others. Exact-zero comparisons are flagged in the companion record.
+
+## 3. Headline floor question
+
+Criterion, quoted verbatim from the committed registration:
+
+> **Headline, per arm:** whether each fixed rank-two floor cell clears the
+> attacker at maximum collapse. A cell clears when its failure-rate interval
+> is wholly below 0.5, fails when the interval is wholly above 0.5, and is
+> statistical boundary when the interval includes 0.5. The three frozen
+> cross-arm outcomes are then read at each cell and cost form: floor clears
+> when both arms clear; floor fails when both fail; floor is boundary when the
+> arms differ or either arm is statistical boundary. The direction of any
+> mixed result is always stated, including a direction opposite the expected
+> Arm-A-clears and Arm-B-fails pattern. Arm B is read on both strict and rank-
+> visible tracks, so two cross-arm floor outcomes are reported per cell.
+
+Result:
+
+Across 600 matched rank-two cells, the strict A/B outcomes were floor_boundary=180, floor_clears=90, floor_fails=330. The rank-visible A/B outcomes were floor_boundary=398, floor_clears=192, floor_fails=10. Mixed directions and statistical boundaries are retained as `floor_boundary`, exactly as registered.
+
+| Ratio | Strict clears | Strict fails | Strict boundary | Visible clears | Visible fails | Visible boundary |
+|---:|---:|---:|---:|---:|---:|---:|
+| 0.1 | 12 | 8 | 4 | 15 | 0 | 9 |
+| 0.121153 | 10 | 8 | 6 | 14 | 0 | 10 |
+| 0.14678 | 10 | 8 | 6 | 14 | 0 | 10 |
+| 0.177828 | 8 | 8 | 8 | 13 | 0 | 11 |
+| 0.215443 | 8 | 9 | 7 | 14 | 0 | 10 |
+| 0.261016 | 7 | 9 | 8 | 13 | 0 | 11 |
+| 0.316228 | 5 | 9 | 10 | 12 | 0 | 12 |
+| 0.383119 | 6 | 10 | 8 | 13 | 0 | 11 |
+| 0.464159 | 4 | 10 | 10 | 12 | 0 | 12 |
+| 0.562341 | 5 | 10 | 9 | 12 | 0 | 12 |
+| 0.681292 | 4 | 10 | 10 | 12 | 0 | 12 |
+| 0.825404 | 4 | 10 | 10 | 12 | 0 | 12 |
+| 1 | 3 | 10 | 11 | 12 | 0 | 12 |
+| 1.21153 | 2 | 10 | 12 | 10 | 0 | 14 |
+| 1.4678 | 1 | 10 | 13 | 8 | 0 | 16 |
+| 1.77828 | 0 | 11 | 13 | 4 | 0 | 20 |
+| 2.15443 | 1 | 12 | 11 | 2 | 0 | 22 |
+| 2.61016 | 0 | 18 | 6 | 0 | 0 | 24 |
+| 3.16228 | 0 | 20 | 4 | 0 | 0 | 24 |
+| 3.83119 | 0 | 20 | 4 | 0 | 0 | 24 |
+| 4.64159 | 0 | 21 | 3 | 0 | 1 | 23 |
+| 5.62341 | 0 | 20 | 4 | 0 | 0 | 24 |
+| 6.81292 | 0 | 22 | 2 | 0 | 2 | 22 |
+| 8.25404 | 0 | 23 | 1 | 0 | 3 | 21 |
+| 10 | 0 | 24 | 0 | 0 | 4 | 20 |
+
+Verdict:
+
+**CELL-DEPENDENT ACROSS ALL THREE REGISTERED OUTCOMES.** There is no honest global clear or fail verdict. Arm B strict and rank-visible tracks differ materially, and both are reported. The direction is not forced toward the pre-run expectation.
+
+## 4. Ratio sensitivity
+
+Criterion, quoted verbatim from the committed registration:
+
+> **Ratio sensitivity, final registered form:** at every fixed structural and
+> cost cell, report the full 25-point failure-rate curve and calculate the
+> pre-fixed endpoint contrast `d = F(ratio 10) - F(ratio 0.1)`. Arm A and Arm
+> B strict are monotonic in ratio under the committed mechanism, so this
+> signed contrast is the full registered ratio response without a selected
+> interior threshold. Its 95 percent interval is
+> `d +/- 1.96 * sqrt(p10*(1-p10)/200 + p01*(1-p01)/200)`. A cell is ratio-
+> sensitive when the interval's lower bound is at or above the 0.15 MEI,
+> robust when its upper bound is below 0.15, and boundary otherwise. Arm B
+> strict supplies the per-arm classification; the rank-visible 25-point curve
+> and endpoint contrast are reported separately as the companion track. The
+> ratio remains swept from 0.1 to 10 at 25 log-spaced points. Ratios beyond
+> that frozen range are not added.
+
+Result:
+
+- Arm A: 100 fixed structural and cost curves; boundary=2, robust=17, sensitive=70, vacuous_zero_flag=11; endpoint contrast range [0.000, 0.925]; exact-zero contrasts flagged: 11.
+- Arm B strict: 100 fixed structural and cost curves; boundary=6, robust=15, sensitive=64, vacuous_zero_flag=15; endpoint contrast range [0.000, 0.900]; exact-zero contrasts flagged: 15.
+- Arm B rank-visible: 100 fixed structural and cost curves; robust=14, sensitive=16, vacuous_zero_flag=70; endpoint contrast range [-0.090, 0.720]; exact-zero contrasts flagged: 70.
+
+Verdict:
+
+**RATIO-SENSITIVE IN A SUBSET OF CELLS, ROBUST IN A SUBSET, AND BOUNDARY IN THE REMAINDER.** The registered response is not a single crossover or a global classification. The full curves and every endpoint interval are in the companion analysis JSON. Because the ratio-collapse slice returned non-collapse, these term-OFF ratio responses carry the fuller two-dial-grid caveat.
+
+## 5. Complete-linkage sensitivity
+
+Criterion, quoted verbatim from the committed registration:
+
+> **Merge rule, registered choice.** Effective rank is computed by threshold-
+> connected-components on pairwise cosine similarity at threshold 0.9. This
+> remains the primary defender-conservative rule. Complete linkage remains the
+> registered reduced-scope sensitivity pass: Arm A, both defense-cost forms,
+> both attack-cost forms, the full 25-point structural axis, parity ratio 1.0,
+> and n=200, for 100 cells. Its finding quantity is the fixed-cell absolute
+> difference between complete-linkage and primary connected-components
+> failure rates. A cell is merge-sensitive when the difference interval's
+> lower bound is at or above 0.15, robust when its upper bound is below 0.15,
+> and boundary otherwise. The complete-linkage results are reported
+> separately and never blended into the primary surface.
+
+Result:
+
+The 100 matched cells classified as boundary=11, robust=60, sensitive=3, vacuous_zero_flag=26. 26 exact-zero cells are flagged. The largest absolute difference was 0.475 with 95 percent interval [0.389, 0.561] at structural point 22, pairwise_exact defense and superlinear attack.
+
+Verdict:
+
+**MERGE-SENSITIVE IN SOME FIXED CELLS, ROBUST IN OTHERS, WITH BOUNDARY CELLS RETAINED.** The alternate pass is separate from the primary and is not blended.
+
+## Execution and primary record
+
+- Git head used for all data: `c6ef03cb18c3cfb8716a6d5f28e905e339585d65`.
+- Workers: 16.
+- Total cells: 5175.
+- Total runs: 1035000.
+- Registered n per cell: 200. Worst-case normal-approximation power requires 175 per cell for the 0.15 MEI; n=200 carries 25 observations of margin and registered approximate power 0.850838768327.
+- Ratio-collapse wall time: 0.096252 seconds.
+- Main-surface wall time: 21.675554 seconds.
+- Complete-linkage wall time: 0.139177 seconds.
+- Total wall time: 22.082369 seconds.
+- Manifest: `data/sybil_defense_scaling/full_5ac6a2e_sybil_scaling_characterization_v1/full_5ac6a2e_manifest.json`.
+- Authoritative files: `full_5ac6a2e_ratio_collapse_slice_results.csv`, `full_5ac6a2e_main_surface_results.csv`, and `full_5ac6a2e_complete_linkage_results.csv`, each enumerated with hash and row count in the manifest.
+- Excluded process artifact: `sweep_progress.log`.
+- Excluded non-authoritative prefixes: `smoke_`, `two_dial_smoke_`, and `selfcheck_`.
+
+The run requested 16 worker processes on a host that reported 12 logical processors at launch. This operational oversubscription is recorded for reproducibility. It changed no registered cell, sample size, seed, or analysis value.
+
+## Anomalies and future questions
+
+No count, hash, axis, scope, or execution anomaly was found. The ratio-collapse non-collapse verdict is a registered finding, not an execution anomaly. Per the plan, it names one future question: a separately registered fuller two-dial capability grid. No out-of-plan observation was folded into this study.
+
+The branch remains unmerged pending operator audit.
+
+
+==========================================
+FILE: simulation/diagnostics/sybil_defense_scaling_design_note.md
+==========================================
+
+# Sybil Defense Scaling Study: Design Note and Pre-Registration
+
+*Completed pre-registration, specification-corrected (fourth and intended-
+final correction), 2026-08-11. The operator directed that the absent,
+uncommitted third-correction note be disregarded. This commit therefore
+incorporates both corrections that had been intended for that artifact and
+the final main-surface measurement correction confirmed after the Stage 1
+diagnostic. The ratio-collapse slice now uses the validated two-dial
+failure-rate curve comparison. The main primary and sensitivity readings now
+use stable fixed-cell failure-rate quantities instead of an interpolated
+crossover rank. The crossover withdrawal is explicit below. Every frozen
+criterion is preserved: the 25-point structural axis, 25 ratios from 0.1 to
+10, both arms, both defense and attack cost forms, n=200, MEI 0.15, failure
+definitions, primary connected-components rule at 0.9, complete-linkage
+sensitivity scope, floor outcomes, and Arm B's two reporting tracks. This
+final corrected registration provably predates every characterization datum.
+The instrument-validation and variance-estimation smokes preceded it, which
+is correct because they are not characterization outcomes.*
+
+*Editorial note: this is a working technical document. Internal parameter
+language is used deliberately here, as in all repository diagnostics. It
+does not govern public-facing surfaces.*
+
+---
+
+## 1. What this study closes
+
+The Sybil defense is validated as effective under the current substrate,
+but its cost model is static: it does not scale with validator-set size,
+so the existing result characterizes Sybil economics at one implicit scale
+and does not say how defense viability moves as the validator population
+grows or as the frontier that supplies validators changes character. This
+is a named limitation (static Sybil cost model). This study replaces the
+static model with a cost structure derived from the independence check's
+own computational bottleneck, and characterizes where the defense holds
+and where it fails as a function of the frontier's effective diversity.
+
+The result is intended to close the static-cost limitation and to stand as
+a bounded, self-contained arc that runs on the current machine, completed
+before the CUSUM redesign begins on a migrated machine. It does not depend
+on the migration and must be merged and pushed before the migration
+starts.
+
+## 2. The defender, specified
+
+The defender is not the responsible institution's own compute. An
+institution's compute is public and lags the frontier on both resource and
+timing, so a one-against-one framing concedes the defender is permanently
+behind. Instead the defender is the frontier community itself, convened as
+a validator pool, with three properties:
+
+**Mandatory participation.** Every frontier operator participates.
+Participation is not an axis; it is compelled by regulation and, more
+durably, incentivized by the root threat: every operator has a standing
+interest in preventing any single model from achieving Sybil-based lock-in,
+because lock-in by a competitor is existential and lock-in by anyone
+collapses the diversity all future capability depends on. The
+participation incentive is the framework's own equilibrium logic applied
+one level down: defending the commons is each operator's dominant
+individual strategy.
+
+**Independence-weighted attribution.** A validator's contribution is
+weighted by its independence, not counted per head. Correlated validators
+merge to a single consensus input. Six effectively identical models
+contribute one input, not six. The defender's strength is therefore the
+effective rank of the pool, the number of genuinely distinct epistemic
+positions represented, not its headcount. This makes the defense
+structurally immune to inflation by duplication, which is the Sybil attack
+itself turned against the defense.
+
+**An epistemically orthogonal institutional floor.** The responsible
+institution contributes a validator built on a deliberately different
+architecture, training lineage, and inductive biases. It cannot lead the
+frontier on compute or timing, but it does not need to: it is off-axis by
+construction, so it is a guaranteed independent cluster that no amount of
+frontier correlation can absorb, and its diversity does not degrade as the
+commercial frontier converges. The failure mode is thereby reduced from
+resource-and-timing lag to timing lag alone.
+
+## 3. Model collapse as the primary dial
+
+The frontier that supplies validators is subject to convergence:
+overlapping training data, cross-distillation, architectural convergence,
+and drift toward a shared mean under model-collapse dynamics. Under
+independence-weighted attribution this does not reduce participation, it
+reduces effective rank: many models fold into few consensus clusters even
+at full attendance. Model collapse is therefore expressed exactly as it
+should be, not as fewer players but as fewer distinct minds among the
+players.
+
+Because the institution is orthogonal and collapse-immune, the pool's rank
+does not fall to one at maximum frontier collapse; it falls to two, the
+collapsed frontier as one input and the institution as the other. Whether
+that rank-two floor clears a single attacker's forging capacity is the
+study's headline question.
+
+## 4. Cost structure, grounded not assumed
+
+**Defense cost.** The independence check is pairwise: it measures mutual
+information between validators' information sources and computes epistemic
+biodiversity as entropy over the validator population's conceptual
+diversity. Pairwise correlation structure over N validators is O(N^2) in
+the naive exact form. The defense cost therefore scales superlinearly with
+validator-set size, and the exponent is the combinatorics of the check,
+not a chosen shape. The naive exact O(N^2) form is characterized first as
+the conservative, defensible worst case. Whether a smarter incremental or
+sampled check relaxes the exponent is named as a follow-on question and is
+not folded into this study.
+
+**Attack cost.** Modeled as linear in N in the primary arm, the standard
+Sybil assumption and the conservative one for demonstrating a defense
+limit: the attacker's cost scales with how many false inputs it must
+introduce to swing consensus against a pool of effective rank N. A
+superlinear-attack sensitivity check is included so the failure-rate finding
+is not fragile to this assumption.
+
+**Capability as a ratio, with a validated two-dial check.** The main surface
+uses the derived attacker-to-defender capability ratio with the absolute-
+level term OFF, exactly reproducing the committed ratio mechanism at matched
+ratios. The swept quantity is the capability ratio itself; no compute-to-
+capability curve is baked into the mechanism. Before that surface is
+interpreted as ratio-parameterized, the registered ratio-collapse slice uses
+absolute attacker and defender levels with the validated absolute-resolution
+term ON. That slice can represent either collapse or non-collapse and tests
+the ratio framing rather than assuming it. Capability remains interpretable
+as compute-mediated, but the mapping shape is a post-paper refinement and is
+not allowed to contaminate either swept axis.
+
+**Defender capability, decomposed.** A more capable defender improves the
+check in two mechanistically distinct ways that must be modeled separately,
+not blended: it may lower the effective exponent via structured checking
+(an algorithmic property), and it may raise per-comparison resolution via
+better discrimination (a discrimination property). Each enters with its
+own term and its own grounding. Blending them into one "better defender"
+knob is prohibited, because it would hand the defender two dials against
+the attacker's one and reintroduce the asymmetry this design exists to
+avoid.
+
+## 5. The attacker, two arms
+
+The attacker is a single frontier model's forging capacity. Its target is
+not raw flooding but the appearance of independence: making coordinated
+inputs register as distinct clusters. This runs as two arms with different
+failure-rate mechanisms.
+
+**Arm A, false-cluster injection.** The attacker injects apparent clusters
+the pool does not truly contain; the check must resolve them back to their
+true rank. The direct Sybil analog. The defense wins by correctly
+collapsing forged diversity; the attacker wins when forged clusters survive
+as distinct. Registered reading: the check's resolving failure rate against
+manufactured distinctness. The rank-two floor is expected to hold here,
+because genuine members remain present and checking.
+
+**Arm B, measurement corruption.** The attacker poisons the check so that
+genuine correlations read as independence, causing the pool to overcount
+its own rank. Subtler and more dangerous: it attacks the instrument, not
+the pool, so a defender can believe it is strong while collapsing, and the
+orthogonal institution's cluster can be scored as correlated and merged
+away. This is the same class of failure as Sub-Threshold Drift, a check
+reporting healthy while the real quantity degrades, and that kinship is
+noted rather than smoothed over. Registered reading: whether the rank-two
+floor is visible to a corrupted check. The floor is expected to be fragile
+here, and locating that fragility is a primary purpose of the study.
+
+The A/B asymmetry is itself a pre-registered finding: a robust structural
+floor against forged inflation, a fragile one against measurement
+corruption, would localize the remaining Sybil risk in the check's
+integrity rather than the pool's size and point the next hardening arc
+accordingly.
+
+## 6. Axes, parameters, and the analytic floor corner
+
+**Primary swept axis:** effective pool rank, driven jointly by validator-
+set size and a model-collapse severity parameter that decays per-participant
+diversity, from full rank (all frontier models epistemically distinct) to
+rank-one frontier (total monoculture), with the institution holding the
+pool at rank-two at the collapse pole. Effective rank cannot exceed
+validator-set size, so the rank axis is generated by sweeping size and
+collapse together, not by a fixed pool.
+
+**Rank axis construction, registered.** Validator-set size steps
+geometrically: 2, 4, 8, 16, 32, 64, plus the institution-alone corner
+(size 1, the analytic floor). Collapse severity is registered at four
+levels, {0.0, 0.33, 0.66, 1.0}, applied at each of the six sizes. The
+25-point axis is therefore the Cartesian product of the six sizes and the
+four severity levels (24 points) plus the institution-alone corner (1
+point), fully enumerated with no allocation choice remaining. The axis
+points are registered as (size, severity) tuples; effective rank at each
+point is measured by the merge rule, not assigned, so "rank axis" denotes
+these 25 structural points and the effective rank at each is an instrument
+output. Resolution is densest at low effective rank near the floor, which
+is where the operating regime and policy-relevant failure rates live. The
+geometric size spacing matches the multiplicative structure of both
+effective rank and the O(N^2) cost.
+
+**Why 64 is the upper bound, registered rationale.** The operating regime
+the framework cares about is low effective rank: the count of genuinely
+independent frontier lineages is single digits today and model collapse
+pushes effective independence lower, so the policy-relevant cells live near
+the floor, and that is where the axis is densest. The high-rank cells (32,
+64) do not model a realistic
+pool; they exist to make the O(N^2) defense-cost asymmetry legible. At
+N=64 the pairwise count is 2,016 against linear attack cost, a roughly 64x
+cost ratio, which is where the superlinear penalty is unmistakable and the
+cost geometry is clean. Sixty-four is the smaller bound that still
+demonstrates the cost asymmetry the study claims; larger N quadruples per-
+cell cost for no added insight once the curve's divergence is established.
+The justification for the high end is the
+cost curve, not a demographic claim about pool size, and the note states
+it as such.
+
+**Poles and floor, config-driven and tweakable:**
+- High pole: full diversity, the entire community distinct, effective rank
+  equal to validator-set size at zero collapse.
+- Low pole: a thin distinct community, institution plus a small distinct
+  frontier remnant, effective rank in the low single digits.
+- Deployment floor: institution plus one distinct peer, the policy minimum
+  that would actually be run.
+- Analytic floor corner: institution alone (size 1) at maximum frontier
+  collapse. Included even though it is below deployment minimum, because it
+  is the cell that answers whether the institution is a true floor or
+  merely a boost. This corner is mandatory in every arm.
+
+**Sensitivity arm:** attacker forging capacity against check resolving
+power, as a capability ratio, swept across the registered ratio range in
+section 7. Plus the superlinear-attack-cost check.
+
+**The ratio-collapse validation slice, final registered form.** The two
+capability dials are hypothesized to matter only through their ratio. Before
+the main surface is reported as ratio-parameterized, the validated two-dial
+instrument holds derived ratio at parity and varies the equal absolute
+attacker and defender levels across {0.316, 1.0, 3.16}. Each level carries
+the full 25-point structural rank axis, for 75 cells at n=200. The slice uses
+Arm A, exact pairwise defense cost, linear attack cost, primary connected-
+components attribution at 0.9, and the absolute-resolution term ON with its
+validated power-law form, reference level 1.0, and strength
+0.22163300225716118. These are the validated primary slice settings, not an
+additional cost or arm grid.
+
+The finding quantity is the failure-rate curve compared cell by cell across
+the three parity levels, never a crossover rank. At each structural point,
+all three pairwise absolute failure-rate differences are calculated. For a
+difference `d`, its registered normal delta-method 95 percent interval is
+`d +/- 1.96 * sqrt(p1*(1-p1)/200 + p2*(1-p2)/200)`. The dials collapse to
+their ratio if every interval's upper bound is below the 0.15 MEI. They do
+not collapse if at least one interval's lower bound is at or above 0.15.
+Any other result is boundary. A non-collapse result is reported as a
+material caveat on every ratio-expressed main-surface reading and identifies
+the fuller two-dial grid as a future registered study; that fuller grid is
+not added here. The slice runs and reports before the main surface is
+interpreted as ratio-parameterized.
+
+**Fixed and stated for round one, with bias direction named, logged for
+the next arc:**
+- Participation quality: honest given present. A participant that is in the
+  pool checks honestly. (Bias: optimistic; real free-riding would weaken
+  the defender.)
+- Latency: single-round convening. (Bias: optimistic; convening lag opens
+  a timing window, the same class of failure as the drift-detection
+  timing problem.)
+- Check resolution: pinned except for the attacker's forging term in the
+  relevant arm. (Bias: neutral to conservative; a fully adversarially
+  degraded check is Arm B taken further.)
+
+## 7. Pre-registered readings
+
+Stated before any data exist. Each reading is fixed per arm, including the
+reading of a null and of a boundary result.
+
+**Primary, per arm, final registered form:** the fixed-cell defense-failure
+proportions at every maximum-collapse rank-two floor cell, reported
+separately for all six validator-set sizes and all four cost combinations.
+No cells are aggregated by effective rank because headcount still controls
+pairwise cost and Arm B corruption opportunities after rank collapses to
+two. The institution-only rank-one analytic corner is reported separately.
+Each proportion carries its normal 95 percent interval. Arm B strict failure
+is its primary proportion and rank-visible failure is its required companion
+track. The primary A/B contrast is the fixed-cell absolute difference with
+the same normal delta-method interval and 0.15 MEI discipline.
+
+**Headline, per arm:** whether each fixed rank-two floor cell clears the
+attacker at maximum collapse. A cell clears when its failure-rate interval
+is wholly below 0.5, fails when the interval is wholly above 0.5, and is
+statistical boundary when the interval includes 0.5. The three frozen
+cross-arm outcomes are then read at each cell and cost form: floor clears
+when both arms clear; floor fails when both fail; floor is boundary when the
+arms differ or either arm is statistical boundary. The direction of any
+mixed result is always stated, including a direction opposite the expected
+Arm-A-clears and Arm-B-fails pattern. Arm B is read on both strict and rank-
+visible tracks, so two cross-arm floor outcomes are reported per cell.
+
+**Ratio sensitivity, final registered form:** at every fixed structural and
+cost cell, report the full 25-point failure-rate curve and calculate the
+pre-fixed endpoint contrast `d = F(ratio 10) - F(ratio 0.1)`. Arm A and Arm
+B strict are monotonic in ratio under the committed mechanism, so this
+signed contrast is the full registered ratio response without a selected
+interior threshold. Its 95 percent interval is
+`d +/- 1.96 * sqrt(p10*(1-p10)/200 + p01*(1-p01)/200)`. A cell is ratio-
+sensitive when the interval's lower bound is at or above the 0.15 MEI,
+robust when its upper bound is below 0.15, and boundary otherwise. Arm B
+strict supplies the per-arm classification; the rank-visible 25-point curve
+and endpoint contrast are reported separately as the companion track. The
+ratio remains swept from 0.1 to 10 at 25 log-spaced points. Ratios beyond
+that frozen range are not added.
+
+**Minimum effects and power.** Every registered comparison is now between
+fixed-cell defense-failure proportions. The MEI remains a 15 percentage
+point difference. At worst-case binomial variance, 80 percent power,
+two-sided alpha 0.05 requires
+`ceil(3.924439867174543 / 0.15^2) = 175` per cell. The registered n remains
+200, carrying 25 observations of margin and approximate worst-case power
+0.850838768327. The maximum fixed-cell proportion SE is 0.035355339059 and
+the maximum independent difference SE is 0.05. The variance estimates
+grounding the calculation remain the smoke values; no characterization
+outcome set n or the MEI. The main surface remains 5,000 cells and one
+million runs.
+
+**Merge rule, registered choice.** Effective rank is computed by threshold-
+connected-components on pairwise cosine similarity at threshold 0.9. This
+remains the primary defender-conservative rule. Complete linkage remains the
+registered reduced-scope sensitivity pass: Arm A, both defense-cost forms,
+both attack-cost forms, the full 25-point structural axis, parity ratio 1.0,
+and n=200, for 100 cells. Its finding quantity is the fixed-cell absolute
+difference between complete-linkage and primary connected-components
+failure rates. A cell is merge-sensitive when the difference interval's
+lower bound is at or above 0.15, robust when its upper bound is below 0.15,
+and boundary otherwise. The complete-linkage results are reported
+separately and never blended into the primary surface.
+
+**Dated crossover withdrawal, 2026-08-11.** The earlier primary crossover-
+rank and crossover-movement readings are withdrawn before characterization.
+Exact mechanism diagnostics showed that rank alone does not identify a cell,
+the 0.5 crossing is usually absent, and interpolation uncertainty is slope-
+amplified beyond one rank unit in the relevant curves. A crossing may be
+reported descriptively when one exists, but it carries no registered verdict
+and is not used by the primary, ratio-sensitivity, ratio-collapse, or merge-
+sensitivity readings.
+
+**Arm B failure reporting, registered choice.** Arm B defense failure is
+defined strictly: any partition corruption counts as failure, including a
+corrupted independence read that does not move the measured rank, because a
+check that has been corrupted is compromised even when its output
+coincidentally lands correct. This strict definition is the primary
+registered Arm B outcome. Because the strict bar makes Arm B's failure rate
+structurally higher than Arm A's by definition, Arm B is reported on two
+tracks: the strict failure rate (primary), and separately the rank-visible
+failure rate (corruption that actually moved measured rank below the
+floor), which is the subset mechanistically comparable to Arm A. The A-
+versus-B asymmetry is read on both tracks, so the definitional gap is never
+smuggled in as a mechanism difference.
+
+**Vacuous satisfaction refused.** A criterion satisfied only because an
+effect is identically zero everywhere, or met exactly at a boundary, is
+flagged, not banked. This is the explicit lesson carried from the
+comprehension-gap arc.
+
+## 8. Controls and gates
+
+**Positive controls in every arm.** Each arm includes a configuration
+where the defense is known to break (attacker capability far above defender
+resolving power, or rank driven to one with no institutional floor), so a
+clean result proves the instrument can produce breakage rather than merely
+failing to find it. The original static study's inability to demonstrate
+its own failure modes is the reason this is mandatory.
+
+**Smoke gate before any full sweep.** A small-n instrumented run confirms:
+the defense cost term actually responds to validator-set size; effective
+rank actually responds to the collapse parameter (correlated validators
+merge, distinct ones do not); the two attack arms produce their intended
+distinct effects; positive controls break. The full sweep does not launch
+until the smoke run passes and its variance has fed the power calculation
+in section 7.
+
+**Discipline carried from prior arts:** manifest not glob for authoritative
+CSVs; counting in Python or Measure-Object, never bare pipeline .Count
+under PowerShell 5.1; non-ASCII edits through Python UTF-8, never
+Set-Content round-trips; registration commit provably predates all
+characterization data; analysis against criteria stated verbatim before
+interpretation; whole-file byte-identity as the mirror invariant where
+surfaces are mirrored; re-running is characterization, never steering
+toward a predetermined place.
+
+**Smoke versus characterization, the registration boundary.** The smoke
+run is authorized before registration because it validates the instrument
+and estimates variance, neither of which is outcome data and neither of
+which can move the analysis criteria. It must not run the characterization
+grid, must not compute or report a crossover, and must not sweep the
+primary rank-by-ratio surface. The characterization sweep is authorized
+only after the registration is committed. An agent that finds itself
+producing a crossover figure during the smoke run has crossed the boundary
+and must stop.
+
+## 9. Scope and sequencing
+
+Runs on the current machine. Merged and pushed to origin before the CUSUM
+migration begins; the migration starts from a fresh clone of origin after
+this arc is fully pushed, never from a synced working tree. This arc does
+not touch the paper, the essays, or the advisor document. Its deliverables
+are the redesigned cost model behind a config switch (the static model
+retained as a reproducible baseline), the smoke validation and its
+variance estimate, the design-note-plus-pre-registration committed after
+the smoke and before any characterization data, the swept results under
+the manifest, and a final report analyzed against section 7 verbatim.
+
+Post-paper questions logged, not pursued in this arc: the smarter
+sub-O(N^2) check and its relaxed exponent; participation quality and
+convening latency as live variables; the specific compute-to-capability
+mapping shape; the capability-asymmetry surface when both dials turn freely
+beyond the ratio collapse.
+
+## 10. Registration decisions, resolved
+
+All operator decisions are settled and written into the plan above. This
+section records the final analysis plan; nothing here remains open.
+
+1. Effective-rank axis operationalized through a registered validator-set-
+   size range (2, 4, 8, 16, 32, 64 geometric plus the institution-alone
+   corner), size and collapse together generating the 25-point rank axis,
+   with the institution-alone analytic corner mandatory in every arm
+   (section 6).
+2. Both attack arms confirmed, with the A/B floor-fragility asymmetry
+   registered as a finding read on two tracks per section 7's Arm B
+   reporting decision.
+3. Capability-ratio range set at 0.1 to 10, log scale, 25 points, centered
+   on parity. Ratio sensitivity is the fixed-cell endpoint contrast with the
+   full curve reported, section 7.
+4. Power set at n=200 per cell for the 15-point defense-failure-rate MEI,
+   grounded in the smoke variance estimates, section 7.
+5. Merge rule registered as threshold-connected-components at 0.9, the
+   defender-conservative choice, with complete-linkage as a registered
+   reduced-scope fixed-cell sensitivity pass, section 7.
+6. Arm B failure defined strictly, reported on strict and rank-visible
+   tracks, section 7.
+7. Ratio collapse registered as the 75-cell two-dial term-ON curve
+   comparison at three parity levels, MEI 0.15, n=200, section 6.
+8. Primary finding registered as the fixed maximum-collapse floor cells and
+   two-track A/B asymmetry. Crossover rank is withdrawn, section 7.
+9. The characterization runner and config reconciliation are mechanical
+   post-registration implementation steps. The schema values are fixed here:
+   25 log-spaced ratios from 0.1 to 10, six sizes crossed with four
+   severities plus the analytic corner, n=200, 75 ratio-collapse cells, and
+   100 complete-linkage cells. Authorization remains blocked until the
+   runner self-check proves those shapes.
+
+The twelve non-substantive config interpretations surfaced by the smoke
+implementation (similarity construction, collapse-decay schedule, cost
+normalizations, resolution-probability coupling, forged-cluster count,
+institution corruption targeting, and the fixture-only smoke ratios) are
+accepted as built and remain config-visible for later revision without a
+rebuild. They do not affect the registered analysis criteria.
+
+**Commit sequence.** This note is the final corrected pre-registration on the
+sybil-scaling branch. It follows both smoke validations and the report-only
+measurement diagnostic, and it precedes the characterization runner,
+self-check, and every characterization datum. The absent third-correction
+artifact was explicitly waived by the operator on 2026-08-11; its intended
+two-dial curve correction is incorporated here. The next commit may implement
+the frozen runner and reconcile config, but may not change this plan. Only a
+passing shape self-check may flip characterization authorization. Results and
+analysis follow in later commits and are selected only through the committed
+authoritative manifest.
+
+
+==========================================
+FILE: simulation/diagnostics/sybil_defense_scaling_smoke_go_no_go.md
+==========================================
+
+# Sybil Defense Scaling Instrument: Smoke Go/No-Go Report
+
+## Decision
+
+**GO for operator review of the instrument. NO-GO for any full sweep.**
+
+All smoke gates passed. The run was limited to instrument validation,
+positive controls, variance estimation, and timing. It did not run the
+rank-by-ratio surface, select a capability-ratio range, calculate power, or
+compute or report a crossover.
+
+Primary records:
+
+- Raw rows: `data/sybil_defense_scaling/smoke_sybil_scaling_instrument_v1/smoke_results.csv`
+- Structured evidence: `data/sybil_defense_scaling/smoke_sybil_scaling_instrument_v1/smoke_evidence.json`
+- Execution log: `data/sybil_defense_scaling/smoke_sybil_scaling_instrument_v1/smoke_execution.log`
+- Environment and artifact manifest: `data/sybil_defense_scaling/smoke_sybil_scaling_instrument_v1/smoke_manifest.json`
+
+Python counted 173 data rows: 2 validated-path probes, 6 cost rows, 5
+attribution rows, and 160 arm runs. The manifest also records 173 rows, and
+all four artifact hashes in the manifest were independently verified.
+
+## Existing code reused versus new code
+
+Existing validated code was not edited. The smoke imports the registered
+`sybil_capture` scenario, its full cells, paired deterministic seed
+construction, smoke task builder, and `run_single` path from
+`simulation/run_attack_vector_revalidation_v2.py`. That path continues through
+the existing `GardenModel` and v2 Sybil adapter without modification. Its
+paired smoke probe used seed 400373737 in both defense states. The undefended
+probe attacked successfully, and the defended probe fired the defense and
+blocked the attack. Both recorded `is_v2_mode=True`.
+
+The following files are new and isolated:
+
+- `simulation/sybil_defense_scaling.py`: attribution, costs, capability terms,
+  and the two scaling attack arms.
+- `simulation/config/sybil_defense_scaling.json`: all study and smoke
+  parameters, including the blocked sweep fields.
+- `simulation/run_sybil_defense_scaling_smoke.py`: smoke-only runner, evidence
+  writer, variance calculation, and timing projection.
+- `simulation/test_sybil_defense_scaling.py`: focused mechanism and control
+  tests.
+
+No change was made to `simulation/model.py`, `simulation/agents.py`,
+`simulation/attack_adapter_v2.py`, or the shared revalidation runner. The new
+scaling mechanisms are therefore not changes to production paths used by other
+validated scenarios.
+
+## Merge rule and independence-weighted attribution
+
+Each frontier validator has a shared frontier component and a lineage-specific
+component. Its retained lineage diversity at collapse severity `s` is:
+
+`base_diversity * (1 - s) ** participant_decay_rate`
+
+The instrument computes pairwise cosine similarity from the shared and lineage
+components. Under the selected config, every pair at or above similarity 0.9
+is joined, and connected components are the consensus inputs. Pool strength is
+the number of resulting components, not validator headcount. The full
+similarity matrix and exact pair count are retained in the attribution result.
+
+The institution uses a separate orthogonal lineage axis. Its retained diversity
+is always 1.0, its similarity to every frontier validator is 0.0 before an Arm
+B measurement attack, and the collapse parameter never changes it.
+
+Observed attribution checks were:
+
+| Case | Headcount | Effective rank |
+| --- | ---: | ---: |
+| Six distinct frontier validators, no collapse | 6 | 6 |
+| Six same-lineage frontier validators, no collapse | 6 | 1 |
+| Six initially distinct validators, maximum collapse | 6 | 1 |
+| Maximum-collapse frontier plus institution | 7 | 2 |
+| Institution alone analytic corner | 1 | 1 |
+
+This demonstrates both merge directions and confirms that the analytic corner
+is reachable below the deployment minimum.
+
+## Cost and capability implementation
+
+The selected defense cost is the exact naive pairwise count
+`N * (N - 1) / 2`, multiplied by the configured per-comparison cost. The smoke
+uses unit cost and exponent reduction 0.0, so raw and effective cost are equal.
+The optional exponent-reduction term divides the pairwise cost by
+`N ** exponent_reduction`. It is stored and reported separately from the
+resolution term.
+
+The resolution-improvement term multiplies a separately configured base
+per-comparison resolution. It is never stored as a blended defender-capability
+knob. The primary smoke uses base resolution 1.0 and resolution improvement
+1.0.
+
+The static baseline is available through the same defense-cost switch and
+returns its configured fixed cost of 1.0 at every headcount. The primary attack
+cost is `coefficient * rank ** 1.0`; the available superlinear sensitivity is
+`coefficient * rank ** 1.5`. Both coefficients are config values.
+
+Capability enters only as the direct attacker-to-defender ratio. No compute to
+capability curve exists in the mechanism. The config leaves the sweep ratio
+range and powered sample size as `null` and marks full-sweep authorization
+blocked.
+
+### Gate a: cost response
+
+PASS. Exact smoke numbers were:
+
+| Validator count | Pairwise checks | Effective defense cost |
+| ---: | ---: | ---: |
+| 2 | 1 | 1.0 |
+| 4 | 6 | 6.0 |
+| 8 | 28 | 28.0 |
+
+The static-baseline values over the same counts were 1.0, 1.0, and 1.0.
+
+## Attack mechanisms as built
+
+Arm A and Arm B have different function signatures and mutate different
+objects.
+
+Arm A, `run_false_cluster_injection`, receives a completed true attribution.
+It adds the configured number of apparent clusters, resolves each forged
+cluster probabilistically against true rank and the separate capability terms,
+and reports the surviving forged clusters. It does not alter the genuine
+similarity matrix or partition. Its measured rank is true rank plus surviving
+forged clusters, so it cannot erase the institution.
+
+Arm B, `run_measurement_corruption`, receives the validators, true attribution,
+collapse severity, merge config, and corruption config. It rewrites the
+pairwise measurement matrix before attribution. Selected genuinely correlated
+frontier validators are detached by false-independent readings. A separate
+corruption event can write a false-correlated reading between the institution
+and a measured frontier cluster, merging the institutional cluster away. It
+does not inject false clusters. Defense failure is based on corruption of the
+true partition, including an institutional merge, even when the resulting rank
+number happens to equal the true rank.
+
+### Gate c: distinct arm effects
+
+PASS. Across the fixed nominal smoke fixture, Arm A produced surviving forged
+clusters while preserving every true partition and recording zero corrupted
+correlation reads. Arm B injected zero false clusters, corrupted correlation
+reads, and produced measured ranks different from true rank.
+
+### Gate d: institution floor
+
+PASS. At maximum collapse, true rank was two in all 128 nominal arm runs. Arm A
+preserved the institution in 64 of 64 runs and never measured below the true
+rank-two floor.
+
+Arm B showed the expected floor fragility without parameter adjustment. It
+merged the institution in 13 of 64 runs, measured rank below two in 2 of 64,
+and overcounted true rank in 43 of 64. Its measured-rank range was 1 through 5.
+This is a smoke mechanism observation only, not a characterization result.
+
+## Positive controls and variance
+
+### Gate e: known breakage
+
+PASS in both arms:
+
+| Positive control | Arm A failures | Arm B failures |
+| --- | ---: | ---: |
+| Capability ratio 1,000,000 | 8/8 | 8/8 |
+| Rank one, no institution | 8/8 | 8/8 |
+
+The rank-one control failed structurally even though six frontier validator
+heads were present, confirming that headcount does not substitute for
+independence.
+
+The fixed nominal fixture produced these variance estimates for the operator's
+later power calculation:
+
+| Arm | n | Failure mean | Failure sample variance | Rank-error mean | Rank-error sample variance |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Arm A | 64 | 0.484375 | 0.2537202381 | 0.546875 | 0.3787202381 |
+| Arm B | 64 | 0.781250 | 0.1736111111 | 0.890625 | 0.7656250000 |
+
+These are variance estimates at one smoke fixture, not readings of a crossover
+or a proposed capability-ratio range.
+
+## Timing projection
+
+The runner recorded 160 instrument timings. Mean, median, p95, and maximum time
+per run were 0.000107540, 0.000092882, 0.000152584, and 0.000256684 seconds.
+
+The stated candidate surface resolution is 25 rank points, including the
+analytic corner, by 25 ratio points, by 2 arms, by 2 defense-cost forms, by 2
+attack-cost forms. This is 5,000 cells per replicate layer. Using observed p95
+time, one replicate layer projects to 0.762920 seconds, or 0.000211922 core
+hours. Because power is intentionally unset, the full projection is:
+
+`0.762920 seconds * operator-set powered replicates per cell`
+
+This compute-only estimate follows the existing per-run timing pattern. It does
+not include future process startup, serialization, or orchestration overhead,
+which may dominate at this instrument's short per-cell runtime.
+
+## Output naming and manifest exclusion
+
+The run ID is `smoke_sybil_scaling_instrument_v1`. It is below
+`data/sybil_defense_scaling/`, and every generated filename begins with
+`smoke_`. It does not use the authoritative `full_5ac6a2e_` prefix. Future
+authoritative selection must use an explicit committed manifest, not a recursive
+CSV glob, so this smoke directory cannot enter the authoritative population.
+
+## Interpretations requiring operator confirmation
+
+The design note fixes mechanisms and shapes but intentionally leaves several
+numeric or operational details open. The implementation made the following
+explicit, config-visible interpretations. None was tuned after the smoke.
+
+1. Epistemic similarity is represented by the cosine shared-lineage
+   construction above. Similarity 0.9 and threshold connected components are
+   the selected merge rule. Greedy complete linkage is also implemented as a
+   config option.
+2. Per-participant collapse decay starts at 1.0, advances by 0.2 across a
+   three-participant cycle, and converges every frontier signature exactly at
+   severity 1.0.
+3. The candidate low pole is 0.25 of the effective community. High pole is
+   1.0. These remain operator-confirmation items and were not swept.
+4. Cost units are normalized: pairwise comparison coefficient 1.0, linear and
+   superlinear attack coefficients 1.0, and static baseline cost 1.0. The
+   existing Sybil path has invariant cost behavior but no numeric cost unit to
+   recover.
+5. Exponent reduction is implemented as a structured-efficiency divisor
+   `N ** exponent_reduction`. Primary smoke exponent reduction is 0.0, retaining
+   exact naive pairwise cost.
+6. Resolution probability compares
+   `true_rank * resolution_power * attack_cost` with
+   `capability_ratio * defense_cost`. This is the explicit coupling between the
+   note's cost terms and its resolving-power mechanism.
+7. Arm A injects two forged clusters, and its pairwise defense cost counts all
+   apparent inputs. Both choices are config fields.
+8. Arm B uses `1 - resolution_probability` for both false-independent and
+   institution-merge event probabilities, with separate config multipliers.
+   Its institution corruption targets the measured cluster containing the
+   first frontier member. The configured study has one institution.
+9. Defense failure means any surviving false cluster in Arm A, any partition
+   corruption in Arm B, or true rank below the configured deployment minimum
+   of two in either arm.
+10. Capability ratios 0.05 and 1,000,000 are smoke fixtures only. They are not
+    candidate range endpoints. The 64 nominal replicates and 8 positive-control
+    replicates are validation counts, not a power calculation.
+11. The candidate timing resolution is 25 by 25 with both arms and both cost
+    sensitivities. It sizes a replicate layer only and does not authorize that
+    grid.
+12. Reuse of the existing v2 Sybil path is an integration probe. The new rank
+    economics and A/B mechanisms remain isolated rather than being inserted
+    into shared validated model code.
+13. The operator-provided note remains a draft with blank power and ratio-range
+    fields. Including that draft on this implementation branch is not treated
+    as the pre-registration commit.
+
+## Anomalies and surprises
+
+No gate anomaly occurred. Arm B's observed institution loss and occasional
+measured rank of one match the pre-registered expectation of floor fragility.
+No parameter was changed and the smoke was not rerun.
+
+STOP: awaiting power calculation, capability-ratio range, and pre-registration commit before any full sweep.
+
+
+==========================================
+FILE: simulation/diagnostics/sybil_failure_curve_mei_power_diagnostic.md
+==========================================
+
+# Sybil Failure-Curve MEI and Power Diagnostic
+
+## Status
+
+This diagnostic halted before selecting an ON-term effect size. No mechanism
+was built, no smoke or sweep was run, and no MEI, sample size, comparison, or
+criterion was registered.
+
+## Specification gap
+
+The requested ON-term calculation needs a numeric mapping from each absolute
+parity level `{0.316, 1.0, 3.16}` to the absolute-resolution term. That mapping
+is not fixed by the committed material.
+
+The prior diagnostic contains two feasibility probes:
+
+1. `p_resolve_m`, where the example sets the resolution multiplier `m`
+   directly to each parity level.
+2. An additive independent catch channel with example changes in `c` from
+   0 to 0.05 and from 0 to 0.01.
+
+The prior diagnostic explicitly states that these probes do not choose the
+form or strength of an absolute-level term. The first probe has no separate
+small-strength parameter. The second does not define how `c` varies across
+the three parity levels. Consequently, the phrase "a small illustrative
+absolute-term strength" does not identify a numeric strength or a
+level-to-term mapping.
+
+This missing input is load-bearing. It determines the maximum ON-term
+failure-rate separation requested in step 1. That separation then determines
+the candidate MEIs in step 3, and the MEIs determine the required per-cell
+sample sizes. Choosing the missing mapping in this diagnostic would select
+the effect that the proposed design is supposed to detect, so it would not
+ground the design independently of intuition.
+
+Operator input is required in one of these forms before the requested numeric
+diagnostic can proceed:
+
+- For a multiplicative resolution channel, a fixed function such as
+  `m(level, strength)` and a numeric illustrative strength.
+- For an additive catch channel, a fixed function such as
+  `c(level, strength)` and a numeric illustrative strength.
+
+The choice also needs to state whether the parity level 1.0 is the neutral
+reference for the ON term. No value is inferred here.
+
+## Exact term-OFF result
+
+The term-OFF calculation does not depend on the missing input. At every
+parity level, attacker capability divided by defender capability is exactly
+1. With the absolute-level term disabled, the committed mechanism therefore
+receives the same capability ratio and produces the same exact curve at all
+three levels.
+
+| Effective rank | Failure at level 0.316 | Failure at level 1.0 | Failure at level 3.16 | Maximum cross-level difference |
+|---:|---:|---:|---:|---:|
+| 2 | 0.840000000000 | 0.840000000000 | 0.840000000000 | 0 |
+| 4 | 0.733610822060 | 0.733610822060 | 0.733610822060 | 0 |
+| 8 | 0.655247874758 | 0.655247874758 | 0.655247874758 | 0 |
+| 16 | 0.608228071329 | 0.608228071329 | 0.608228071329 | 0 |
+| 32 | 0.582610634000 | 0.582610634000 | 0.582610634000 | 0 |
+| 64 | 0.569263642866 | 0.569263642866 | 0.569263642866 | 0 |
+
+The exact residual is zero at every rank in exact arithmetic. This result
+does not set a numerical implementation tolerance. Any nonzero Gate 2
+tolerance remains an operator decision tied to the eventual numeric
+implementation and comparison procedure.
+
+## Pending power calculation
+
+For a two-sided, equal-size comparison of two independent proportions with
+alpha 0.05, power 0.80, and worst-case variance `p = 0.5`, the normal
+approximation gives
+
+```text
+n_per_group = ceil(
+    2 * 0.5 * (1 - 0.5) * (z_0.975 + z_0.80)^2 / MEI^2
+)
+            = ceil(3.9244 / MEI^2).
+```
+
+Numeric candidate MEIs and sample sizes are intentionally not populated.
+They require the missing ON-term maximum separation. Selecting fractions of
+an undefined separation would still require an unregistered design choice.
+
+## Fixed comparison shape
+
+The proposed cell-by-cell curve comparison has a fixed shape independent of
+the missing sample size:
+
+- Six effective-rank points: `{2, 4, 8, 16, 32, 64}`.
+- Three parity absolute levels: `{0.316, 1.0, 3.16}`.
+- Eighteen cells per gate.
+- Three pairwise cross-level comparisons at each rank, for 18 comparisons
+  per gate.
+- At `n` replicates per cell, `18n` runs per gate.
+- Across Gate 2 and Gate 3, 36 cells and `36n` runs.
+
+The intended logical form can be stated without registering its numeric MEI:
+
+- Gate 2 passes only if every cross-level difference at every rank is within
+  the operator-selected MEI.
+- Gate 3 passes only if at least one cross-level difference exceeds that MEI.
+
+The requested concrete run counts cannot be supplied until the ON-term
+mapping fixes the effect separation and the operator selects an MEI from the
+resulting power table.
+
+## Required ruling
+
+No conclusion can yet be drawn about whether the maximum ON-term separation
+is practically detectable. The separation itself is undefined until the
+operator fixes the absolute-term function and illustrative strength. This is
+the specification gap that halted the diagnostic.
+
+
+==========================================
+FILE: simulation/diagnostics/sybil_main_surface_measurement_diagnostic.md
+==========================================
+
+# Sybil Main-Surface Measurement Diagnostic
+
+Date: 2026-08-11
+
+## Status and scope
+
+This is the Stage 1 measurement diagnostic only. It does not register a
+finding quantity, change a criterion, build a characterization runner, run
+characterization data, or compute a study result. It evaluates the exact
+expectations of the committed mechanism at the frozen grid values supplied by
+the operator and applies analytical n=200 perturbation checks.
+
+The mechanism is commit `294f8f210bb27ab0d186770ed692b4465f4696b4`.
+The current committed design note is commit
+`0577a9bc36d509c7c418ec0723b636d4d987cdb1`. That note identifies itself as
+the second correction and still contains the obsolete crossover-based
+ratio-collapse slice. It is not the third-correction note named in the Stage 1
+task. The task's frozen grid and curve-slice facts are used here only as
+diagnostic inputs. They are not treated as a substitute registration. The
+operator confirmation gate must resolve this provenance mismatch before any
+fourth correction or characterization work begins.
+
+## Exact diagnostic method
+
+For each registered structural cell, validators are the institution plus
+`N - 1` frontier validators. The connected-components merge rule at 0.9 gives
+these exact effective ranks:
+
+| Total size | Severity 0 | Severity 0.33 | Severity 0.66 | Severity 1 |
+|---:|---:|---:|---:|---:|
+| 2 | 2 | 2 | 2 | 2 |
+| 4 | 4 | 4 | 3 | 2 |
+| 8 | 8 | 8 | 5 | 2 |
+| 16 | 16 | 16 | 7 | 2 |
+| 32 | 32 | 32 | 13 | 2 |
+| 64 | 64 | 64 | 23 | 2 |
+
+The institution-only corner has rank 1. Arm B has 0, 1, 3, 9, 19, and 41
+eligible frontier-detachment events at severity 0.66 across the six sizes,
+and 0, 2, 6, 14, 30, and 62 at severity 1.
+
+Let `q` be the committed per-event resolution probability at the cell after
+applying its size, effective rank, capability ratio, defense-cost form, and
+attack-cost form. With two forged clusters, the exact Arm A strict failure
+rate is
+
+```text
+F_A = 1 - q^2.
+```
+
+For Arm B, let `D` be the number of eligible frontier-detachment events in
+the true clusters. The institution-merge event is one additional independent
+corruption opportunity. The exact strict failure rate is
+
+```text
+F_B_strict = 1 - q^(D + 1).
+```
+
+At a true rank-two cell, rank-visible failure requires an institution merge
+and no detachment, so
+
+```text
+F_B_visible = q^D * (1 - q).
+```
+
+It is zero at true ranks above two because a single institution merge cannot
+move measured rank below two. The rank-one analytic corner is a structural
+strict failure, not a corruption-caused rank-visible failure.
+
+These expressions were evaluated in Python at all 25 structural points, all
+25 log-spaced ratios from 0.1 to 10, both arms, both defense-cost forms, and
+both attack-cost forms. This produced exact expectation diagnostics, not
+random characterization observations.
+
+## n=200 stability scale
+
+For a fixed-cell Bernoulli proportion at n=200,
+
+```text
+maximum SE = sqrt(0.25 / 200) = 0.035355339059.
+maximum 95 percent half-width = 0.069296464557.
+```
+
+For an independent difference between two fixed cells,
+
+```text
+maximum SE = sqrt(0.5 / 200) = 0.05.
+MEI / maximum SE = 0.15 / 0.05 = 3.0.
+```
+
+The staged two-proportion calculation requires 175 per cell for 80 percent
+power at the 0.15 MEI, so n=200 retains its registered margin. A fixed-cell
+rate or difference is therefore a stable estimand. A difference whose
+uncertainty overlaps the MEI is reported as boundary rather than forced into
+a binary conclusion.
+
+An interpolated rank crossing is different. Its uncertainty divides rate
+uncertainty by the local slope and can become arbitrarily large when the
+curve is flat. The perturbation results below use the delta method on the two
+bracketing binomial proportions.
+
+## Frozen floor question and A/B asymmetry
+
+The floor question uses fixed maximum-collapse cells, so it does not inherit
+the interpolation instability. The exact parity rates illustrate the range
+the registered run will estimate:
+
+| Defense cost | Attack cost | Size | Arm A | Arm B strict | Arm B rank-visible |
+|---|---|---:|---:|---:|---:|
+| Pairwise | Linear | 2 | 0.840000 | 0.200000 | 0.200000 |
+| Pairwise | Linear | 4 | 0.955679 | 0.936000 | 0.096000 |
+| Pairwise | Linear | 8 | 0.993336 | 1.000000 | 0.000003 |
+| Pairwise | Linear | 16 | 0.999351 | 1.000000 | 0.000000 |
+| Pairwise | Linear | 32 | 0.999950 | 1.000000 | 0.000000 |
+| Pairwise | Linear | 64 | 0.999997 | 1.000000 | 0.000000 |
+| Pairwise | Superlinear | 2 | 0.764502 | 0.150221 | 0.150221 |
+| Pairwise | Superlinear | 4 | 0.925007 | 0.885717 | 0.121215 |
+| Pairwise | Superlinear | 8 | 0.987530 | 0.999996 | 0.000019 |
+| Pairwise | Superlinear | 16 | 0.998729 | 1.000000 | 0.000000 |
+| Pairwise | Superlinear | 32 | 0.999900 | 1.000000 | 0.000000 |
+| Pairwise | Superlinear | 64 | 0.999993 | 1.000000 | 0.000000 |
+| Static | Linear | 2 | 0.360000 | 0.200000 | 0.200000 |
+| Static | Linear | 4 | 0.360000 | 0.488000 | 0.128000 |
+| Static | Linear | 8 | 0.360000 | 0.790285 | 0.052429 |
+| Static | Linear | 16 | 0.360000 | 0.964816 | 0.008796 |
+| Static | Linear | 32 | 0.360000 | 0.999010 | 0.000248 |
+| Static | Linear | 64 | 0.360000 | 0.999999 | 0.000000 |
+| Static | Superlinear | 2 | 0.277876 | 0.150221 | 0.150221 |
+| Static | Superlinear | 4 | 0.277876 | 0.386354 | 0.108478 |
+| Static | Superlinear | 8 | 0.277876 | 0.680006 | 0.056567 |
+| Static | Superlinear | 16 | 0.277876 | 0.912986 | 0.015382 |
+| Static | Superlinear | 32 | 0.277876 | 0.993566 | 0.001137 |
+| Static | Superlinear | 64 | 0.277876 | 0.999965 | 0.000006 |
+
+These are mechanism expectations, not study findings. They show why the
+floor must remain cell-specific: every maximum-collapse cell has effective
+rank two, but pairwise cost and Arm B's number of corruption opportunities
+still depend on headcount.
+
+For the A-versus-B contrast at parity, a 95 percent perturbation around each
+fixed-cell difference gives the following classifications against the 0.15
+MEI. Counts are out of the six maximum-collapse sizes.
+
+| Defense cost | Attack cost | Arm B track | MEI-sensitive | MEI-robust | Boundary |
+|---|---|---|---:|---:|---:|
+| Pairwise | Linear | Strict | 1 | 5 | 0 |
+| Pairwise | Linear | Rank-visible | 6 | 0 | 0 |
+| Pairwise | Superlinear | Strict | 1 | 5 | 0 |
+| Pairwise | Superlinear | Rank-visible | 6 | 0 | 0 |
+| Static | Linear | Strict | 4 | 0 | 2 |
+| Static | Linear | Rank-visible | 5 | 0 | 1 |
+| Static | Superlinear | Strict | 4 | 0 | 2 |
+| Static | Superlinear | Rank-visible | 4 | 0 | 2 |
+
+Conclusion: the floor proportions and A/B contrasts are stable fixed-cell
+quantities at n=200. Some cells are expected to be genuine MEI boundaries,
+which the frozen boundary discipline already knows how to report. Neither the
+floor question nor two-track asymmetry needs a new measurement definition.
+
+## Candidate 1: crossover rank
+
+### Rank is not sufficient to identify a cell
+
+At parity, the same measured rank two spans these within-rank failure-rate
+ranges across registered structural cells:
+
+| Track and cost form | Maximum same-rank spread |
+|---|---:|
+| Arm A, pairwise, linear attack | 0.159997 |
+| Arm A, pairwise, superlinear attack | 0.235491 |
+| Arm A, static, either attack form | 0 |
+| Arm B strict, pairwise, linear attack | 0.800000 |
+| Arm B strict, pairwise, superlinear attack | 0.849779 |
+| Arm B strict, static, linear attack | 0.799999 |
+| Arm B strict, static, superlinear attack | 0.849744 |
+| Arm B rank-visible, all cost forms | 0.150215 to 0.200000 |
+
+Pairwise cost depends on total validator count even when effective rank is
+the same. Arm B also depends on the number of members inside a collapsed
+cluster. Consequently, no single rank-only crossover can summarize the
+registered structural axis without discarding mechanism variables.
+
+### Threshold reachability and interpolation noise
+
+As a favorable one-dimensional test, the no-collapse size ladder was checked
+for both strict arms, all four cost combinations, and all 25 ratios. This is
+200 curves. For each fixed threshold, a crossing was counted as stable only
+when its delta-method standard deviation was at most one rank unit.
+
+| Failure threshold | Curves with a crossing | Stable within one rank | Curves with multiple crossings |
+|---:|---:|---:|---:|
+| 0.5 | 53 of 200 | 37 of 200 | 1 |
+| 0.6 | 44 of 200 | 30 of 200 | 1 |
+| 0.7 | 34 of 200 | 24 of 200 | 0 |
+| 0.8 | 26 of 200 | 17 of 200 | 0 |
+
+No threshold is both reachable and stable across the registered arms and
+cost forms. At the primary Arm A pairwise-linear parity curve, the exact
+rates on sizes 2 through 64 are 0.840000, 0.733611, 0.655248, 0.608228,
+0.582611, and 0.569264. Threshold 0.5 is absent. Threshold 0.7 crosses at
+rank 5.715649 but has delta-method SD 1.171213 rank units at n=200.
+Threshold 0.6 crosses at rank 21.139044 with SD 16.220018. Threshold 0.8
+is locally stable with SD 0.375887, but it is absent from the static-cost
+curves and has no registered mechanism meaning.
+
+Some individual curves have steep, stable crossings. For example, Arm A
+pairwise-superlinear at parity crosses 0.5 with SD 0.649529. That does not
+rescue a primary quantity because the same threshold is absent in the other
+seven parity arm-by-cost curves. Choosing a threshold per curve would make
+the definition outcome-dependent.
+
+Conclusion: crossover rank remains noise-dominated or undefined and is not a
+valid primary or sensitivity finding quantity.
+
+## Candidate 2: fixed-cell failure-rate surface
+
+The surface itself is stable as a collection of fixed-cell proportions. Its
+uncertainty does not divide by a slope. However, adjacent ratio steps are too
+fine for the 0.15 MEI: across Arm A, Arm B strict, Arm B rank-visible, both
+defense costs, both attack costs, all 25 structural points, and all 24 ratio
+adjacencies, the largest exact adjacent-ratio difference is 0.069329. None of
+the 7,200 adjacent-ratio contrasts reaches 0.15. Defining ratio sensitivity
+from adjacent steps would therefore be vacuously robust.
+
+The two pre-registered endpoint cells, ratio 0.1 and ratio 10, provide a
+stable, fixed contrast without inventing a threshold. Arm A and Arm B strict
+are monotonic in ratio at every fixed structural cell. The full 25-point
+curve remains reported for shape, while the endpoint difference is the
+finding quantity. Applying a 95 percent delta-method perturbation around the
+endpoint difference gives these classifications across the 25 structural
+cells:
+
+| Track | Defense cost | Attack cost | Sensitive | Robust | Boundary | Median exact endpoint difference |
+|---|---|---|---:|---:|---:|---:|
+| Arm A | Pairwise | Linear | 21 | 4 | 0 | 0.752237 |
+| Arm A | Pairwise | Superlinear | 21 | 4 | 0 | 0.809983 |
+| Arm A | Static | Linear | 16 | 8 | 1 | 0.481844 |
+| Arm A | Static | Superlinear | 13 | 11 | 1 | 0.276889 |
+| Arm B strict | Pairwise | Linear | 17 | 7 | 1 | 0.689895 |
+| Arm B strict | Pairwise | Superlinear | 19 | 6 | 0 | 0.527985 |
+| Arm B strict | Static | Linear | 16 | 7 | 2 | 0.465115 |
+| Arm B strict | Static | Superlinear | 15 | 9 | 1 | 0.274601 |
+| Arm B rank-visible | Pairwise | Linear | 4 | 21 | 0 | 0 |
+| Arm B rank-visible | Pairwise | Superlinear | 4 | 21 | 0 | 0 |
+| Arm B rank-visible | Static | Linear | 4 | 21 | 0 | 0 |
+| Arm B rank-visible | Static | Superlinear | 4 | 21 | 0 | 0 |
+
+The maximum endpoint-contrast SE is 0.036048, below the worst-case 0.05
+bound. The few boundary cells are explicitly identifiable instead of moving
+an interpolated rank boundary.
+
+Conclusion: fixed-cell failure rates and pre-fixed endpoint ratio contrasts
+are stable. The surface is a valid supporting quantity, and the endpoint
+contrast is a stable replacement for crossover movement in the ratio
+sensitivity reading.
+
+## Candidate 3: monotonic-region boundary
+
+There is no shared monotonic-region boundary. Across sizes at each fixed
+severity and ratio, exact direction counts are:
+
+| Arm | Defense cost | Attack cost | Increasing | Decreasing | Flat | Nonmonotonic | MEI-sized edges out of 500 |
+|---|---|---|---:|---:|---:|---:|---:|
+| Arm A | Pairwise | Linear | 50 | 50 | 0 | 0 | 24 |
+| Arm A | Pairwise | Superlinear | 25 | 50 | 0 | 25 | 69 |
+| Arm A | Static | Linear | 0 | 75 | 25 | 0 | 84 |
+| Arm A | Static | Superlinear | 0 | 75 | 25 | 0 | 64 |
+| Arm B strict | Pairwise | Linear | 100 | 0 | 0 | 0 | 83 |
+| Arm B strict | Pairwise | Superlinear | 50 | 0 | 0 | 50 | 90 |
+| Arm B strict | Static | Linear | 25 | 50 | 0 | 25 | 101 |
+| Arm B strict | Static | Superlinear | 25 | 50 | 0 | 25 | 93 |
+
+The direction changes with collapse severity, arm, and cost form. Most size
+edges are smaller than the MEI, and there are only four registered severity
+levels. A boundary would therefore require a new ordering, aggregation, or
+threshold that is not fixed by the current mechanism or plan.
+
+Conclusion: a monotonic-region boundary is not a stable shared finding
+quantity.
+
+## Complete-linkage sensitivity quantity
+
+The same fixed-cell method also repairs the complete-linkage sensitivity
+reading without a crossover. At parity, compare Arm A's connected-components
+and complete-linkage failure rates at each of the same 25 structural cells,
+for each fixed cost combination, against the 0.15 MEI. Complete linkage
+changes rank only at severity 0.66 for sizes 8 through 64. A 95 percent
+perturbation gives:
+
+| Defense cost | Attack cost | Sensitive cells | Robust cells | Boundary cells | Maximum exact difference |
+|---|---|---:|---:|---:|---:|
+| Pairwise | Linear | 0 | 22 | 3 | 0.175180 |
+| Pairwise | Superlinear | 3 | 21 | 1 | 0.428344 |
+| Static | Linear | 0 | 25 | 0 | 0.023274 |
+| Static | Superlinear | 0 | 25 | 0 | 0.012539 |
+
+This retains the registered reduced scope and answers whether the merge rule
+materially changes the failure curve, with boundary cells reported rather
+than converted into an unstable rank movement.
+
+## Recommendation for operator confirmation
+
+Recommend the following single measurement design:
+
+1. Primary per arm: the existing fixed-cell rank-two floor question becomes
+   the primary finding, reported over every registered maximum-collapse cell
+   and cost form as a defense-failure proportion with uncertainty. The A/B
+   asymmetry remains the headline comparison, with Arm B on strict and
+   rank-visible tracks. The three frozen floor outcomes and boundary
+   discipline remain unchanged.
+2. Ratio sensitivity per arm: at every fixed structural and cost cell, report
+   the full 25-point failure-rate curve and use the pre-fixed endpoint
+   contrast `F(ratio 10) - F(ratio 0.1)` as the finding quantity. Classify the
+   cell as ratio-sensitive when the contrast clears the 0.15 MEI, robust when
+   it remains below the MEI, and boundary when uncertainty overlaps the MEI.
+   Arm B uses its frozen strict track for this per-arm classification; the
+   rank-visible track remains a separately reported companion curve.
+3. Merge-rule sensitivity: at parity, compare complete-linkage and primary
+   connected-components failure rates cell by cell across the already frozen
+   25-point Arm A cost grid, using the same 0.15 MEI and boundary discipline.
+4. Crossover rank is withdrawn as a registered finding quantity. Any
+   threshold crossing may be reported descriptively only when it exists,
+   with no headline or verdict attached.
+
+This recommendation changes only the unstable measurement representation. It
+does not change the grid, ratio range, rank construction, n, MEI, arms, cost
+forms, merge rules, failure definitions, floor outcomes, or two-track Arm B
+reporting.
+
+## Operator confirmation gate
+
+STOP. Confirm or reject the recommended fixed-cell finding design before any
+registration edit, runner construction, self-check, characterization data, or
+analysis. Before Stage 2 begins, the branch also needs the stated committed
+third-correction note or an explicit operator ruling that resolves its absence.
+
+
+==========================================
+FILE: simulation/diagnostics/sync_status_YotkoTest_20260720.md
 ==========================================
 
 # Repository Sync Status: YotkoTest (2026-07-20)
@@ -10599,7 +12351,140 @@ No Step 6 correction has been applied. No existing content was modified, and not
 
 
 ==========================================
-FILE: simulation\diagnostics\termination_decontamination_integration_analysis.md
+FILE: simulation/diagnostics/sync_status_yotko-Legion-T5-26IOB6_20260720.md
+==========================================
+
+# Sync Status Audit: yotko-Legion-T5-26IOB6 2026-07-20
+
+Audit mode. No merge, pull, commit, push, or data edit was performed. `git fetch --all` was run as requested.
+
+## Step 1: Identify and inventory
+
+- Hostname: `yotko-Legion-T5-26IOB6`
+- OS: `Linux-6.17.0-35-generic-x86_64-with-glibc2.39`
+- Repo path: `/home/yotko/Documents/Github/ai-succession-problem`
+- Inside OneDrive-synced folder: `no` by path inspection
+- Current branch: `main`
+- HEAD: `924ce5f2e9903c202bc2ef776a8e9644428b7332`
+- HEAD commit date: `2026-07-17T22:03:03-04:00`
+- Git status counts at audit time before writing this report: staged `0`, unstaged `9`, untracked `0`
+
+```text
+## main...origin/main
+ M snapshots/INVENTORY.md
+ M snapshots/code_snapshot.md
+ M snapshots/constitutional_snapshot.md
+ M snapshots/data_results_snapshot.md
+ M snapshots/diagnostics_snapshot.md
+ M snapshots/docs_snapshot.md
+ M snapshots/essays_snapshot.md
+ M snapshots/framework_papers_snapshot.md
+ M snapshots/paper_drafts_snapshot.md
+```
+
+## Step 2: Divergence diagnosis
+
+- Current branch upstream ahead/behind (`@{u}...HEAD`, left is behind, right is ahead): `0	0`
+- Local and remote branches:
+```text
+* main                            924ce5f [origin/main] Add owed diagnostic investigation artifacts
+  remotes/origin/1.x              0ccc9a1 v1.0 preparation — complete framework, simulation, validation data, and documentation
+  remotes/origin/HEAD             -> origin/main
+  remotes/origin/attack-v2-laptop 6d33c90 Refine patient defection claim to bounded generational depth
+  remotes/origin/attack-v2-linux  29edfeb Add Linux engineered_fragility v2 results
+  remotes/origin/main             924ce5f Add owed diagnostic investigation artifacts
+```
+- Stash list: `(none)`
+- Current branch log:
+```text
+924ce5f Add owed diagnostic investigation artifacts
+e41c4f6 Regenerate project knowledge snapshots
+6a72848 Add missing patient defection substrate wiring
+024eec1 Ai Succession Problem Video Thumbnail.
+6862f92 Added Already Happening essay.
+f88de52 Add essays snapshot category; assemble The Lineage Imperative v2.0.md in docs
+365f724 Paper v2.0 Phase 4: abstract, conclusion, Section II non-claim, editorial pass
+7d59dac Patient defection verification, paper VIII.8, program reference X.8
+e32c382 Patient defection substrate extension and empirical investigation
+870b15e Paper v2.0 Phase 3: editorial pass (voice, expansion, inherited tightening)
+```
+- Commit `6d33c90` exists: `yes`, date `2026-07-17T22:20:38-04:00`
+- `6d33c90` ancestor of HEAD: `no`
+- HEAD ancestor of `6d33c90`: `no`
+- Working branch of record `attack-v2-laptop`: not checked out locally; available as `origin/attack-v2-laptop` at `6d33c90`.
+
+### OneDrive conflict artifact search
+
+- Repo is not under OneDrive on this Linux machine.
+- Search for filenames containing conflict, Copy, copy, host name, or `(1)` under the working tree and `.git/`:
+```text
+(none)
+```
+
+### Pickaxe search across all branches
+
+- Marker `robust to baseline choice`: `e1d987b Add v2 revalidation QA trail and audit report`
+  Branch containment:
+```text
+remotes/origin/attack-v2-laptop
+```
+- Marker `survival-versus-extinction`: `NO HITS`
+- Marker `fires after the threshold breach`: `e1d987b Add v2 revalidation QA trail and audit report`
+  Branch containment:
+```text
+remotes/origin/attack-v2-laptop
+```
+
+Note: the pickaxe hits for `robust to baseline choice` and `fires after the threshold breach` are in `simulation/diagnostics/attack_vector_revalidation_audit.md` at commit `e1d987b`, not in the required summary/edit target files. No pickaxe hit was found for `survival-versus-extinction`.
+
+## Step 3: Required-revision presence check
+
+| Item | File | present in working tree? | present at HEAD? | present anywhere in checked target files? |
+| --- | --- | --- | --- | --- |
+| Drift interpretation note | simulation/diagnostics/sub_threshold_drift_v2_summary.md | no | no | no target-file hit |
+| Drift baseline qualification | simulation/diagnostics/sub_threshold_drift_v2_summary.md | no | no | no target-file hit |
+| Bootstrap baseline qualification | simulation/diagnostics/bootstrap_subversion_v2_summary.md | no | no | no target-file hit |
+| Proposal 1 amendment | simulation/diagnostics/attack_vector_revalidation_documentation_edits.md | no | no | no target-file hit |
+
+Additional target-file existence check: the three target files are missing at current `HEAD`/`main`, present on `origin/attack-v2-laptop`, and missing on `origin/main` and `origin/attack-v2-linux`.
+
+## Step 4: Raw-data inventory and extinction audit
+
+Working tree finding: `data/attack_vector_revalidation_v2/` is absent from the checked-out `main` working tree on this machine. The fetched `origin/attack-v2-laptop` ref contains the full revalidation data. This is a branch/sync smoking gun, not a data corruption finding.
+
+| Vector | all expected files exist in working tree? | paths audited | fetched row count | expected | matches expected? |
+| --- | --- | --- | --- | --- | --- |
+| sub_threshold_drift | no | data/attack_vector_revalidation_v2/linux/sub_threshold_drift/full_5ac6a2e_sub_threshold_drift/results.csv (WT no) | 200 | 200 | yes |
+| measurement_tampering | no | data/attack_vector_revalidation_v2/laptop/measurement_tampering/full_5ac6a2e_measurement_tampering/results.csv (WT no) | 120 | 120 | yes |
+| bootstrap_subversion | no | data/attack_vector_revalidation_v2/linux/bootstrap_subversion/full_5ac6a2e_bootstrap_subversion/results.csv (WT no) | 200 | 200 | yes |
+| sybil_capture | no | data/attack_vector_revalidation_v2/laptop/sybil_capture/full_5ac6a2e_sybil_capture/results.csv (WT no) | 120 | 120 | yes |
+| biological_veto_capture | no | data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard0of4/results.csv (WT no); data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard1of4/results.csv (WT no); data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard2of4/results.csv (WT no); data/attack_vector_revalidation_v2/linux/biological_veto_capture/full_5ac6a2e_veto_shard3of4/results.csv (WT no) | 8700 | 8700 | yes |
+| patient_defection_corner_density | yes | simulation/diagnostics/patient_defection_corner_density.csv | 1000 | 1000 | yes |
+
+Rates computed directly from fetched `origin/attack-v2-laptop` full CSV blobs:
+
+| Vector | defense state | n | attack success rate | extinction rate | collapse rate | mean steps completed |
+| --- | --- | --- | --- | --- | --- | --- |
+| sub_threshold_drift | False | 100 | 100.0% | 92.0% | 100.0% | 256.31 |
+| sub_threshold_drift | True | 100 | 100.0% | 0.0% | 1.0% | 300.00 |
+| measurement_tampering | False | 60 | 100.0% | 0.0% | 0.0% | 300.00 |
+| measurement_tampering | True | 60 | 0.0% | 0.0% | 1.7% | 300.00 |
+| bootstrap_subversion | False | 100 | 100.0% | 100.0% | 100.0% | 106.21 |
+| bootstrap_subversion | True | 100 | 0.0% | 0.0% | 1.0% | 300.00 |
+| sybil_capture | False | 60 | 100.0% | 100.0% | 100.0% | 104.55 |
+| sybil_capture | True | 60 | 0.0% | 0.0% | 0.0% | 300.00 |
+
+Book-claim blocker numbers: Measurement Tampering has 0.0 percent extinction in both defense states. Bootstrap Subversion has 100.0 percent undefended extinction and 0.0 percent defended extinction. Sybil Capture has 100.0 percent undefended extinction and 0.0 percent defended extinction. Sub-Threshold Drift also has material undefended extinction at 92.0 percent and 0.0 percent defended extinction.
+
+Missing-on-working-tree data files that exist in the fetched branch: all five requested attack-vector result sets under `data/attack_vector_revalidation_v2/`. `patient_defection_corner_density.csv` exists in the working tree with 1,000 rows and matches expected count.
+
+## Step 5: Stop condition
+
+Report written locally for comparison with the other machine. No correction step was attempted. Awaiting explicit instruction before any checkout, merge, cherry-pick, edit, commit, pull, or push.
+
+
+==========================================
+FILE: simulation/diagnostics/termination_decontamination_integration_analysis.md
 ==========================================
 
 # Termination Max Capability Decontamination Diagnostic

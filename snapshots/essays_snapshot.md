@@ -1,8 +1,8 @@
 # Essays Snapshot
 
-Generated: 2026-08-10T03:32:15Z
-Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 870732c
+Generated: 2026-08-12T03:45:31Z
+Repository: /home/yotko/Documents/Github/ai-succession-problem
+Commit: 6a30613
 Branch: main
 Category: essays
 
@@ -10,26 +10,26 @@ Category: essays
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| essays\about.md | 23 | 2433 |
-| essays\already-happening.md | 97 | 22274 |
-| essays\gaps.md | 491 | 26285 |
-| essays\glossary.md | 182 | 11010 |
-| essays\moral-constraints-wont-scale.md | 253 | 36974 |
-| essays\the-ai-succession-problem.md | 120 | 16304 |
-| essays\the-convention-we-havent-called.md | 304 | 40029 |
-| essays\the-extinction-buffer.md | 223 | 35165 |
-| essays\the-fine-print.md | 189 | 27536 |
-| essays\the-nash-result.md | 208 | 36725 |
-| essays\the-view-from-inside.md | 228 | 35959 |
-| essays\the_signal.md | 207 | 29683 |
-| essays\two-ways-to-lose.md | 137 | 18028 |
-| essays\what-comes-next.md | 189 | 26485 |
+| essays/about.md | 23 | 2433 |
+| essays/already-happening.md | 97 | 22274 |
+| essays/gaps.md | 491 | 26285 |
+| essays/glossary.md | 182 | 11010 |
+| essays/moral-constraints-wont-scale.md | 253 | 36974 |
+| essays/the-ai-succession-problem.md | 120 | 16304 |
+| essays/the-convention-we-havent-called.md | 304 | 40029 |
+| essays/the-extinction-buffer.md | 223 | 35165 |
+| essays/the-fine-print.md | 189 | 27536 |
+| essays/the-nash-result.md | 208 | 36725 |
+| essays/the-view-from-inside.md | 228 | 35959 |
+| essays/the_signal.md | 207 | 29683 |
+| essays/two-ways-to-lose.md | 137 | 18028 |
+| essays/what-comes-next.md | 189 | 26485 |
 
 Total: 14 files, 2851 lines, 364890 bytes
 
 ---
 ==========================================
-FILE: essays\about.md
+FILE: essays/about.md
 ==========================================
 
 ## The AI Succession Problem
@@ -57,7 +57,7 @@ I approach AI governance from an engineering orientation: identify the binding c
 The essay series explores the framework's arguments in accessible form, one concept at a time. The formal paper, simulation code, and full validation data are available for inspection, criticism, and engagement at github.com/MYotko/AI-Succession-Problem.
 
 ==========================================
-FILE: essays\already-happening.md
+FILE: essays/already-happening.md
 ==========================================
 
 # Already Happening
@@ -160,7 +160,7 @@ Thanks for reading The Lineage Imperative! Subscribe for free to receive new pos
 
 
 ==========================================
-FILE: essays\gaps.md
+FILE: essays/gaps.md
 ==========================================
 
 # What the Framework Knows, Doesn't Know, and Can't Know
@@ -657,7 +657,7 @@ the constitutional/ directory of the same repository.*
 
 
 ==========================================
-FILE: essays\glossary.md
+FILE: essays/glossary.md
 ==========================================
 
 # The AI Succession Problem Essay Series Glossary of Terms
@@ -845,7 +845,7 @@ own objective function. *Essays 1, 5, 6.*
 
 
 ==========================================
-FILE: essays\moral-constraints-wont-scale.md
+FILE: essays/moral-constraints-wont-scale.md
 ==========================================
 
 # Moral Constraints Won't Scale
@@ -1103,7 +1103,7 @@ A quick clarification is needed as I continue this series. When I say “physics
 *2.**[Two Ways to Lose](https://yotko.substack.com/p/two-ways-to-lose)*[](https://substack.com/profile/478843057-aj-fried)[](https://substack.com/profile/484338106-john-pollard)[](https://substack.com/profile/65706141-john)3 Likes[](https://substack.com/note/p-192658833/restacks?utm_source=substack&utm_content=facepile-restacks)
 
 ==========================================
-FILE: essays\the-ai-succession-problem.md
+FILE: essays/the-ai-succession-problem.md
 ==========================================
 
 # The AI Succession Problem
@@ -1228,7 +1228,7 @@ That is not a slogan. It is a constitutional requirement.
 Thanks for reading Matt's Substack! Subscribe for free to receive new posts and support my work.[](https://substack.com/profile/177361504-heardly-app)[](https://substack.com/profile/478843057-aj-fried)[](https://substack.com/profile/484338106-john-pollard)[](https://substack.com/profile/405401212-aj-fried)5 Likes∙[2 Restacks](https://substack.com/note/p-190923705/restacks?utm_source=substack&utm_content=facepile-restacks)
 
 ==========================================
-FILE: essays\the-convention-we-havent-called.md
+FILE: essays/the-convention-we-havent-called.md
 ==========================================
 
 # The Convention We Haven’t Called
@@ -1537,7 +1537,7 @@ Thanks for reading Matt's Substack! Subscribe for free to receive new posts.
 [Leave a comment](https://yotko.substack.com/p/the-convention-we-havent-called/comments)
 
 ==========================================
-FILE: essays\the-extinction-buffer.md
+FILE: essays/the-extinction-buffer.md
 ==========================================
 
 # The Extinction Buffer
@@ -1765,7 +1765,7 @@ The next essay examines what the governance architecture looks like from behind 
 Thanks for reading Matt's Substack! Subscribe for free to receive new posts and support my work.
 
 ==========================================
-FILE: essays\the-fine-print.md
+FILE: essays/the-fine-print.md
 ==========================================
 
 # The Fine Print
@@ -1959,7 +1959,7 @@ Thanks for reading Matt's Substack! Subscribe for free to receive new posts and 
 [Leave a comment](https://yotko.substack.com/p/the-fine-print/comments)[](https://substack.com/profile/506888207-marco)[](https://substack.com/profile/405401212-aj-fried)2 Likes∙[1 Restack](https://substack.com/note/p-197161994/restacks?utm_source=substack&utm_content=facepile-restacks)
 
 ==========================================
-FILE: essays\the-nash-result.md
+FILE: essays/the-nash-result.md
 ==========================================
 
 # The Nash Result
@@ -2172,7 +2172,7 @@ Not ethics. Physics.
 Thanks for reading Matt's Substack! Subscribe for free to receive new posts and support my work.[](https://substack.com/profile/219675833-george-bade)1 Like[](https://substack.com/note/p-193722873/restacks?utm_source=substack&utm_content=facepile-restacks)
 
 ==========================================
-FILE: essays\the-view-from-inside.md
+FILE: essays/the-view-from-inside.md
 ==========================================
 
 # The View from Inside
@@ -2405,7 +2405,7 @@ Thanks for reading Matt's Substack! Subscribe for free to receive new posts and 
 By Matthew Yotko · Launched a month agoA formal governance framework for human-AI coexistence, built from information theory, game theory, and physics.By subscribing, you agree Substack's [Terms of Use](https://substack.com/tos), and acknowledge its [Information Collection Notice](https://substack.com/ccpa#personal-data-collected) and [Privacy Policy](https://substack.com/privacy).
 
 ==========================================
-FILE: essays\the_signal.md
+FILE: essays/the_signal.md
 ==========================================
 
 # The Signal
@@ -2617,7 +2617,7 @@ Not ethics. Physics.
 *Previous essays in this series:[The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem)|[Two Ways to Lose](https://yotko.substack.com/p/two-ways-to-lose)|[Moral Constraints Won’t Scale](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0)|[The Convention We Haven’t Called](https://yotko.substack.com/p/the-convention-we-havent-called)|[The Nash Result](https://yotko.substack.com/p/the-nash-result)|[The Extinction Buffer](https://yotko.substack.com/p/the-extinction-buffer)|[The View from Inside](https://yotko.substack.com/p/the-view-from-inside)*
 
 ==========================================
-FILE: essays\two-ways-to-lose.md
+FILE: essays/two-ways-to-lose.md
 ==========================================
 
 # Two Ways to Lose
@@ -2759,7 +2759,7 @@ The next essay in this series will explore why moral constraints cannot scale to
 Thanks for reading Matt's Substack! Subscribe for free to receive new posts and support my work.[](https://substack.com/profile/206840367-greg)[](https://substack.com/profile/484338106-john-pollard)[](https://substack.com/profile/405401212-aj-fried)3 Likes[](https://substack.com/note/p-191944569/restacks?utm_source=substack&utm_content=facepile-restacks)
 
 ==========================================
-FILE: essays\what-comes-next.md
+FILE: essays/what-comes-next.md
 ==========================================
 
 # What Comes Next

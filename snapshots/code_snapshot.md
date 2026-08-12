@@ -1,8 +1,8 @@
 # Code Snapshot
 
-Generated: 2026-08-10T03:32:15Z
-Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 870732c
+Generated: 2026-08-12T03:45:31Z
+Repository: /home/yotko/Documents/Github/ai-succession-problem
+Commit: 6a30613
 Branch: main
 Category: code
 
@@ -10,84 +10,93 @@ Category: code
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| simulation\agents.py | 1265 | 61333 |
-| simulation\analyze_phi_adversarial.py | 469 | 21913 |
-| simulation\attack_adapter_v2.py | 482 | 16105 |
-| simulation\constants_v2_stage15.py | 314 | 15269 |
-| simulation\constants_v2_stage18.py | 152 | 7445 |
-| simulation\defection.py | 106 | 3965 |
-| simulation\deps.py | 21 | 1019 |
-| simulation\metrics.py | 948 | 42508 |
-| simulation\model.py | 1676 | 86842 |
-| simulation\monte_carlo.py | 920 | 51833 |
-| simulation\run_alpha_succession_sweep.py | 316 | 12737 |
-| simulation\run_attack_vector_revalidation_v2.py | 668 | 21918 |
-| simulation\run_calibration.py | 159 | 5511 |
-| simulation\run_comprehension_gap_powered_arm.py | 228 | 8859 |
-| simulation\run_comprehension_gap_sweep.py | 496 | 22589 |
-| simulation\run_demographic_feedback_calibration.py | 318 | 11018 |
-| simulation\run_frontier_floor_calibration.py | 279 | 10515 |
-| simulation\run_phi_adversarial_sweep.py | 106 | 4155 |
-| simulation\run_phi_alpha_rr_sweep.py | 462 | 18306 |
-| simulation\run_phi_shock_calibration.py | 371 | 13547 |
-| simulation\run_rr_alpha_sweep.py | 323 | 13248 |
-| simulation\run_termination_sweep.py | 233 | 9280 |
-| simulation\run_to_termination.py | 257 | 10736 |
-| simulation\run_transition_cost_calibration.py | 265 | 9821 |
-| simulation\run_veto_capture_sweep.py | 359 | 14924 |
-| simulation\simulation.py | 253 | 20226 |
-| simulation\test_attack_adapter_v2.py | 241 | 7803 |
-| simulation\test_attack_vector_revalidation_v2_runner.py | 78 | 2573 |
-| simulation\test_cop.py | 129 | 7048 |
-| simulation\test_invariants.py | 281 | 12345 |
-| simulation\test_refactor_1x.py | 570 | 21559 |
-| simulation\visualization.py | 95 | 3908 |
-| simulation\working_factor.py | 95 | 4020 |
-| simulation\diagnostics\capped_regime_phi_check.py | 237 | 9251 |
-| simulation\diagnostics\gate1_interior_action.py | 646 | 32247 |
-| simulation\diagnostics\gate2_competition.py | 206 | 7974 |
-| simulation\diagnostics\gate2_v20_phaseb_revalidation.py | 166 | 5957 |
-| simulation\diagnostics\gate3_capability_regime.py | 213 | 8664 |
-| simulation\diagnostics\gate4_v20_validation.py | 665 | 23567 |
-| simulation\diagnostics\gate5_phi_blind_check.py | 322 | 14334 |
-| simulation\diagnostics\patient_defection_corner_density.py | 169 | 5246 |
-| simulation\diagnostics\patient_defection_sweeps.py | 708 | 24818 |
-| simulation\diagnostics\phi_audit.py | 428 | 17996 |
-| simulation\diagnostics\phi_audit_pathc.py | 351 | 13512 |
-| simulation\diagnostics\stage15_composite_sweep.py | 647 | 27881 |
-| simulation\diagnostics\stage15_faithfulness_tests.py | 686 | 29854 |
-| simulation\diagnostics\stage15_phi_diagnostic.py | 442 | 19103 |
-| simulation\diagnostics\stage15_smoke_test.py | 542 | 24493 |
-| simulation\diagnostics\stage15_statedep_curves_diagnostic.py | 903 | 35518 |
-| simulation\diagnostics\stage16_baseline_capture.py | 143 | 5695 |
-| simulation\diagnostics\stage16_integrity_simulation.py | 482 | 21822 |
-| simulation\diagnostics\stage17_integrity_simulation.py | 465 | 19542 |
-| simulation\diagnostics\stage17_pressure_diagnostic.py | 439 | 19043 |
-| simulation\diagnostics\stage17_usys_factor_diagnostic.py | 365 | 14445 |
-| simulation\diagnostics\stage18_integrity_simulation_phase_a.py | 273 | 12126 |
-| simulation\diagnostics\stage18_integrity_simulation_phase_b.py | 394 | 17006 |
-| simulation\diagnostics\stage18_phase_ab_discrepancy_isolation.py | 109 | 3764 |
-| simulation\diagnostics\stage2_yield_parameter_diagnostic.py | 355 | 15141 |
-| simulation\diagnostics\stage2_yield_smoke_test.py | 217 | 8178 |
-| simulation\diagnostics\termination_decontamination_diagnostic.py | 323 | 10159 |
-| simulation\tools\check_scenario_numbering.py | 257 | 10330 |
-| bootstrap_gate_validator\cli.py | 74 | 2260 |
-| bootstrap_gate_validator\report.py | 81 | 3168 |
-| bootstrap_gate_validator\schema.py | 291 | 9846 |
-| bootstrap_gate_validator\validator.py | 65 | 2353 |
-| bootstrap_gate_validator\gates\gate_1.py | 159 | 5660 |
-| bootstrap_gate_validator\gates\gate_2.py | 323 | 14412 |
-| bootstrap_gate_validator\gates\gate_3.py | 110 | 3851 |
-| bootstrap_gate_validator\gates\gate_4.py | 167 | 6537 |
-| bootstrap_gate_validator\gates\gate_5.py | 54 | 2270 |
-| scripts\check_snapshot_leak.py | 170 | 6672 |
-| scripts\generate_project_knowledge_snapshots.py | 825 | 29256 |
+| simulation/agents.py | 1265 | 61333 |
+| simulation/analyze_phi_adversarial.py | 469 | 21913 |
+| simulation/analyze_sybil_defense_scaling_characterization.py | 768 | 33096 |
+| simulation/attack_adapter_v2.py | 482 | 16105 |
+| simulation/constants_v2_stage15.py | 314 | 15269 |
+| simulation/constants_v2_stage18.py | 152 | 7445 |
+| simulation/defection.py | 106 | 3965 |
+| simulation/deps.py | 21 | 1019 |
+| simulation/metrics.py | 948 | 42508 |
+| simulation/model.py | 1676 | 86842 |
+| simulation/monte_carlo.py | 920 | 51833 |
+| simulation/run_alpha_succession_sweep.py | 316 | 12737 |
+| simulation/run_attack_vector_revalidation_v2.py | 668 | 21918 |
+| simulation/run_calibration.py | 159 | 5511 |
+| simulation/run_comprehension_gap_powered_arm.py | 228 | 8859 |
+| simulation/run_comprehension_gap_sweep.py | 496 | 22589 |
+| simulation/run_demographic_feedback_calibration.py | 318 | 11018 |
+| simulation/run_frontier_floor_calibration.py | 279 | 10515 |
+| simulation/run_phi_adversarial_sweep.py | 106 | 4155 |
+| simulation/run_phi_alpha_rr_sweep.py | 462 | 18306 |
+| simulation/run_phi_shock_calibration.py | 371 | 13547 |
+| simulation/run_rr_alpha_sweep.py | 323 | 13248 |
+| simulation/run_sybil_defense_scaling_characterization.py | 789 | 30918 |
+| simulation/run_sybil_defense_scaling_smoke.py | 818 | 31458 |
+| simulation/run_sybil_two_dial_smoke.py | 924 | 36695 |
+| simulation/run_termination_sweep.py | 233 | 9280 |
+| simulation/run_to_termination.py | 257 | 10736 |
+| simulation/run_transition_cost_calibration.py | 265 | 9821 |
+| simulation/run_veto_capture_sweep.py | 359 | 14924 |
+| simulation/simulation.py | 253 | 20226 |
+| simulation/sybil_defense_scaling.py | 741 | 26810 |
+| simulation/test_attack_adapter_v2.py | 241 | 7803 |
+| simulation/test_attack_vector_revalidation_v2_runner.py | 78 | 2573 |
+| simulation/test_cop.py | 129 | 7048 |
+| simulation/test_invariants.py | 281 | 12345 |
+| simulation/test_refactor_1x.py | 570 | 21559 |
+| simulation/test_sybil_characterization_analysis.py | 67 | 2612 |
+| simulation/test_sybil_characterization_runner.py | 71 | 2384 |
+| simulation/test_sybil_defense_scaling.py | 245 | 8308 |
+| simulation/test_sybil_two_dial_capability.py | 134 | 4701 |
+| simulation/visualization.py | 95 | 3908 |
+| simulation/working_factor.py | 95 | 4020 |
+| simulation/diagnostics/capped_regime_phi_check.py | 237 | 9251 |
+| simulation/diagnostics/gate1_interior_action.py | 646 | 32247 |
+| simulation/diagnostics/gate2_competition.py | 206 | 7974 |
+| simulation/diagnostics/gate2_v20_phaseb_revalidation.py | 166 | 5957 |
+| simulation/diagnostics/gate3_capability_regime.py | 213 | 8664 |
+| simulation/diagnostics/gate4_v20_validation.py | 665 | 23567 |
+| simulation/diagnostics/gate5_phi_blind_check.py | 322 | 14334 |
+| simulation/diagnostics/patient_defection_corner_density.py | 169 | 5246 |
+| simulation/diagnostics/patient_defection_sweeps.py | 708 | 24818 |
+| simulation/diagnostics/phi_audit.py | 428 | 17996 |
+| simulation/diagnostics/phi_audit_pathc.py | 351 | 13512 |
+| simulation/diagnostics/stage15_composite_sweep.py | 647 | 27881 |
+| simulation/diagnostics/stage15_faithfulness_tests.py | 686 | 29854 |
+| simulation/diagnostics/stage15_phi_diagnostic.py | 442 | 19103 |
+| simulation/diagnostics/stage15_smoke_test.py | 542 | 24493 |
+| simulation/diagnostics/stage15_statedep_curves_diagnostic.py | 903 | 35518 |
+| simulation/diagnostics/stage16_baseline_capture.py | 143 | 5695 |
+| simulation/diagnostics/stage16_integrity_simulation.py | 482 | 21822 |
+| simulation/diagnostics/stage17_integrity_simulation.py | 465 | 19542 |
+| simulation/diagnostics/stage17_pressure_diagnostic.py | 439 | 19043 |
+| simulation/diagnostics/stage17_usys_factor_diagnostic.py | 365 | 14445 |
+| simulation/diagnostics/stage18_integrity_simulation_phase_a.py | 273 | 12126 |
+| simulation/diagnostics/stage18_integrity_simulation_phase_b.py | 394 | 17006 |
+| simulation/diagnostics/stage18_phase_ab_discrepancy_isolation.py | 109 | 3764 |
+| simulation/diagnostics/stage2_yield_parameter_diagnostic.py | 355 | 15141 |
+| simulation/diagnostics/stage2_yield_smoke_test.py | 217 | 8178 |
+| simulation/diagnostics/termination_decontamination_diagnostic.py | 323 | 10159 |
+| simulation/tools/check_scenario_numbering.py | 257 | 10330 |
+| bootstrap_gate_validator/cli.py | 74 | 2260 |
+| bootstrap_gate_validator/report.py | 81 | 3168 |
+| bootstrap_gate_validator/schema.py | 291 | 9846 |
+| bootstrap_gate_validator/validator.py | 65 | 2353 |
+| bootstrap_gate_validator/gates/gate_1.py | 159 | 5660 |
+| bootstrap_gate_validator/gates/gate_2.py | 323 | 14412 |
+| bootstrap_gate_validator/gates/gate_3.py | 110 | 3851 |
+| bootstrap_gate_validator/gates/gate_4.py | 167 | 6537 |
+| bootstrap_gate_validator/gates/gate_5.py | 54 | 2270 |
+| scripts/check_snapshot_leak.py | 170 | 6672 |
+| scripts/generate_project_knowledge_snapshots.py | 825 | 29256 |
 
-Total: 72 files, 26407 lines, 1118829 bytes
+Total: 81 files, 30964 lines, 1295811 bytes
 
 ---
 ==========================================
-FILE: simulation\agents.py
+FILE: simulation/agents.py
 ==========================================
 
 import numpy as np
@@ -1358,7 +1367,7 @@ class PeerValidator:
 
 
 ==========================================
-FILE: simulation\analyze_phi_adversarial.py
+FILE: simulation/analyze_phi_adversarial.py
 ==========================================
 
 """
@@ -1833,7 +1842,781 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\attack_adapter_v2.py
+FILE: simulation/analyze_sybil_defense_scaling_characterization.py
+==========================================
+
+"""Analyze the Sybil characterization against its committed registration."""
+
+from __future__ import annotations
+
+import csv
+import hashlib
+import itertools
+import json
+import math
+import os
+from collections import Counter, defaultdict
+from pathlib import Path
+from typing import Any, Iterable, Mapping, Sequence
+
+
+HERE = Path(__file__).resolve().parent
+REPO_ROOT = HERE.parent
+NOTE_PATH = HERE / 'diagnostics' / 'sybil_defense_scaling_design_note.md'
+RUN_DIR = (
+    REPO_ROOT
+    / 'data'
+    / 'sybil_defense_scaling'
+    / 'full_5ac6a2e_sybil_scaling_characterization_v1'
+)
+MANIFEST_PATH = RUN_DIR / 'full_5ac6a2e_manifest.json'
+REPORT_PATH = HERE / 'diagnostics' / 'sybil_defense_scaling_characterization_report.md'
+ANALYSIS_PATH = HERE / 'diagnostics' / 'sybil_defense_scaling_characterization_analysis.json'
+Z_95 = 1.96
+MEI = 0.15
+
+
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _read_csv(path: Path) -> list[dict[str, str]]:
+    with path.open(newline='', encoding='utf-8') as handle:
+        return list(csv.DictReader(handle))
+
+
+def _write_text_atomic(path: Path, content: str) -> None:
+    temporary = path.with_suffix(path.suffix + '.tmp')
+    temporary.write_text(content, encoding='utf-8')
+    os.replace(temporary, path)
+
+
+def _write_json_atomic(path: Path, value: Any) -> None:
+    _write_text_atomic(path, json.dumps(value, indent=2, sort_keys=True) + '\n')
+
+
+def _load_manifest_results() -> tuple[dict[str, Any], dict[str, list[dict[str, str]]]]:
+    manifest = json.loads(MANIFEST_PATH.read_text(encoding='utf-8'))
+    if manifest['status'] != 'complete':
+        raise RuntimeError('manifest is not complete')
+    expected_names = {
+        'full_5ac6a2e_main_surface_results.csv': 'main_surface',
+        'full_5ac6a2e_ratio_collapse_slice_results.csv': 'ratio_collapse_slice',
+        'full_5ac6a2e_complete_linkage_results.csv': 'complete_linkage',
+    }
+    selected: dict[str, list[dict[str, str]]] = {}
+    seen: set[str] = set()
+    for artifact in manifest['authoritative_artifacts']:
+        path = REPO_ROOT / artifact['path']
+        if path.name not in expected_names:
+            raise RuntimeError(f'unexpected authoritative artifact: {path.name}')
+        if _sha256(path) != artifact['sha256']:
+            raise RuntimeError(f'authoritative artifact hash mismatch: {path}')
+        rows = _read_csv(path)
+        if len(rows) != int(artifact['rows']):
+            raise RuntimeError(f'authoritative artifact row mismatch: {path}')
+        selected[expected_names[path.name]] = rows
+        seen.add(path.name)
+    if seen != set(expected_names):
+        raise RuntimeError('authoritative manifest does not enumerate exact passes')
+    return manifest, selected
+
+
+def _float(row: Mapping[str, str], key: str) -> float:
+    return float(row[key])
+
+
+def _int(row: Mapping[str, str], key: str) -> int:
+    return int(row[key])
+
+
+def _bool(row: Mapping[str, str], key: str) -> bool:
+    if row[key] not in {'True', 'False'}:
+        raise ValueError(f'invalid boolean text in {key}')
+    return row[key] == 'True'
+
+
+def _proportion_interval(p: float, n: int) -> dict[str, float]:
+    se = math.sqrt(p * (1.0 - p) / n)
+    return {'estimate': p, 'se': se, 'lower': p - Z_95 * se, 'upper': p + Z_95 * se}
+
+
+def _difference_interval(p1: float, p2: float, n1: int, n2: int, *, absolute: bool) -> dict[str, Any]:
+    signed = p1 - p2
+    estimate = abs(signed) if absolute else signed
+    se = math.sqrt(p1 * (1.0 - p1) / n1 + p2 * (1.0 - p2) / n2)
+    lower = estimate - Z_95 * se
+    upper = estimate + Z_95 * se
+    vacuous_zero = estimate == 0.0
+    if vacuous_zero:
+        classification = 'vacuous_zero_flag'
+    elif lower >= MEI:
+        classification = 'sensitive'
+    elif upper < MEI:
+        classification = 'robust'
+    else:
+        classification = 'boundary'
+    return {
+        'estimate': estimate,
+        'signed_difference': signed,
+        'se': se,
+        'lower': lower,
+        'upper': upper,
+        'classification': classification,
+        'vacuous_zero': vacuous_zero,
+    }
+
+
+def _floor_class(interval: Mapping[str, float]) -> str:
+    if interval['upper'] < 0.5:
+        return 'clears'
+    if interval['lower'] > 0.5:
+        return 'fails'
+    return 'statistical_boundary'
+
+
+def _cross_floor(left: str, right: str) -> str:
+    if left == right == 'clears':
+        return 'floor_clears'
+    if left == right == 'fails':
+        return 'floor_fails'
+    return 'floor_boundary'
+
+
+def _cell_key(row: Mapping[str, str]) -> tuple[Any, ...]:
+    return (
+        _int(row, 'structural_point_index'),
+        _float(row, 'capability_ratio'),
+        row['defense_cost_model'],
+        row['attack_cost_model'],
+    )
+
+
+def _structural(row: Mapping[str, str]) -> dict[str, Any]:
+    return {
+        'structural_point_index': _int(row, 'structural_point_index'),
+        'validator_set_size': _int(row, 'validator_set_size'),
+        'frontier_validator_count': _int(row, 'frontier_validator_count'),
+        'institution_validator_count': _int(row, 'institution_validator_count'),
+        'collapse_severity': _float(row, 'collapse_severity'),
+        'institution_alone_corner': _bool(row, 'institution_alone_corner'),
+        'true_effective_rank': _int(row, 'true_effective_rank'),
+    }
+
+
+def _ratio_collapse(rows: Sequence[Mapping[str, str]]) -> dict[str, Any]:
+    grouped: dict[int, list[Mapping[str, str]]] = defaultdict(list)
+    for row in rows:
+        grouped[_int(row, 'structural_point_index')].append(row)
+    if len(grouped) != 25:
+        raise RuntimeError('ratio-collapse slice does not have 25 structural points')
+    points: list[dict[str, Any]] = []
+    comparisons: list[dict[str, Any]] = []
+    for point_index in sorted(grouped):
+        selected = sorted(grouped[point_index], key=lambda row: _float(row, 'attacker_capability'))
+        if [_float(row, 'attacker_capability') for row in selected] != [0.316, 1.0, 3.16]:
+            raise RuntimeError('ratio-collapse levels drifted')
+        point_comparisons: list[dict[str, Any]] = []
+        for left, right in itertools.combinations(selected, 2):
+            interval = _difference_interval(
+                _float(left, 'failure_rate'),
+                _float(right, 'failure_rate'),
+                _int(left, 'n'),
+                _int(right, 'n'),
+                absolute=True,
+            )
+            comparison = {
+                'structural_point_index': point_index,
+                'level_a': _float(left, 'attacker_capability'),
+                'level_b': _float(right, 'attacker_capability'),
+                'failure_rate_a': _float(left, 'failure_rate'),
+                'failure_rate_b': _float(right, 'failure_rate'),
+                **interval,
+            }
+            comparisons.append(comparison)
+            point_comparisons.append(comparison)
+        maximum = max(point_comparisons, key=lambda item: item['estimate'])
+        points.append(
+            {
+                **_structural(selected[0]),
+                'rates_by_level': {
+                    str(_float(row, 'attacker_capability')): _float(row, 'failure_rate')
+                    for row in selected
+                },
+                'maximum_comparison': maximum,
+            }
+        )
+    noncollapse = [item for item in comparisons if item['lower'] >= MEI]
+    all_collapse = all(item['upper'] < MEI for item in comparisons)
+    verdict = 'noncollapse' if noncollapse else ('collapse' if all_collapse else 'boundary')
+    return {
+        'points': points,
+        'comparisons': comparisons,
+        'classification_counts': dict(Counter(item['classification'] for item in comparisons)),
+        'vacuous_zero_comparisons': sum(item['vacuous_zero'] for item in comparisons),
+        'maximum_comparison': max(comparisons, key=lambda item: item['estimate']),
+        'registered_verdict': verdict,
+    }
+
+
+def _primary_and_headline(rows: Sequence[Mapping[str, str]]) -> dict[str, Any]:
+    by_arm_key = {(row['arm'], _cell_key(row)): row for row in rows}
+    floor_rows = [
+        row for row in rows
+        if _float(row, 'collapse_severity') == 1.0
+        and not _bool(row, 'institution_alone_corner')
+    ]
+    if len(floor_rows) != 1200:
+        raise RuntimeError('maximum-collapse floor scope is not 1,200 arm rows')
+    if {int(row['true_effective_rank']) for row in floor_rows} != {2}:
+        raise RuntimeError('maximum-collapse floor did not have effective rank two')
+    arm_records: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in floor_rows:
+        interval = _proportion_interval(_float(row, 'failure_rate'), _int(row, 'n'))
+        record = {
+            **_structural(row),
+            'capability_ratio': _float(row, 'capability_ratio'),
+            'defense_cost_model': row['defense_cost_model'],
+            'attack_cost_model': row['attack_cost_model'],
+            'track': 'strict',
+            **interval,
+            'floor_classification': _floor_class(interval),
+            'vacuous_zero': interval['estimate'] == 0.0,
+        }
+        arm_records[row['arm']].append(record)
+        if row['arm'] == 'measurement_corruption':
+            visible = _proportion_interval(
+                _float(row, 'rank_visible_failure_rate'), _int(row, 'n')
+            )
+            arm_records['measurement_corruption_rank_visible'].append(
+                {
+                    **_structural(row),
+                    'capability_ratio': _float(row, 'capability_ratio'),
+                    'defense_cost_model': row['defense_cost_model'],
+                    'attack_cost_model': row['attack_cost_model'],
+                    'track': 'rank_visible',
+                    **visible,
+                    'floor_classification': _floor_class(visible),
+                    'vacuous_zero': visible['estimate'] == 0.0,
+                }
+            )
+    contrasts: dict[str, list[dict[str, Any]]] = {'strict': [], 'rank_visible': []}
+    headline: dict[str, list[dict[str, Any]]] = {'strict': [], 'rank_visible': []}
+    arm_a_rows = [row for row in floor_rows if row['arm'] == 'false_cluster_injection']
+    for arm_a in arm_a_rows:
+        key = _cell_key(arm_a)
+        arm_b = by_arm_key[('measurement_corruption', key)]
+        a_interval = _proportion_interval(_float(arm_a, 'failure_rate'), _int(arm_a, 'n'))
+        for track, b_field in (
+            ('strict', 'failure_rate'),
+            ('rank_visible', 'rank_visible_failure_rate'),
+        ):
+            b_interval = _proportion_interval(_float(arm_b, b_field), _int(arm_b, 'n'))
+            difference = _difference_interval(
+                a_interval['estimate'], b_interval['estimate'],
+                _int(arm_a, 'n'), _int(arm_b, 'n'), absolute=True,
+            )
+            common = {
+                **_structural(arm_a),
+                'capability_ratio': _float(arm_a, 'capability_ratio'),
+                'defense_cost_model': arm_a['defense_cost_model'],
+                'attack_cost_model': arm_a['attack_cost_model'],
+                'arm_a_failure_rate': a_interval['estimate'],
+                'arm_b_failure_rate': b_interval['estimate'],
+                'direction': (
+                    'arm_a_higher' if difference['signed_difference'] > 0
+                    else 'arm_b_higher' if difference['signed_difference'] < 0
+                    else 'equal'
+                ),
+                **difference,
+            }
+            contrasts[track].append(common)
+            a_class = _floor_class(a_interval)
+            b_class = _floor_class(b_interval)
+            headline[track].append(
+                {
+                    **common,
+                    'arm_a_floor': a_class,
+                    'arm_b_floor': b_class,
+                    'cross_arm_outcome': _cross_floor(a_class, b_class),
+                }
+            )
+    corner_rows = [row for row in rows if _bool(row, 'institution_alone_corner')]
+    if len(corner_rows) != 200:
+        raise RuntimeError('institution-only corner scope is not 200 rows')
+    corner = [
+        {
+            **_structural(row),
+            'arm': row['arm'],
+            'capability_ratio': _float(row, 'capability_ratio'),
+            'defense_cost_model': row['defense_cost_model'],
+            'attack_cost_model': row['attack_cost_model'],
+            'failure_rate': _float(row, 'failure_rate'),
+            'rank_visible_failure_rate': _float(row, 'rank_visible_failure_rate'),
+        }
+        for row in corner_rows
+    ]
+    return {
+        'arm_records': dict(arm_records),
+        'arm_classification_counts': {
+            arm: dict(Counter(item['floor_classification'] for item in selected))
+            for arm, selected in arm_records.items()
+        },
+        'arm_ranges': {
+            arm: {
+                'minimum': min(item['estimate'] for item in selected),
+                'maximum': max(item['estimate'] for item in selected),
+                'vacuous_zero_cells': sum(item['vacuous_zero'] for item in selected),
+            }
+            for arm, selected in arm_records.items()
+        },
+        'contrasts': contrasts,
+        'contrast_classification_counts': {
+            track: dict(Counter(item['classification'] for item in selected))
+            for track, selected in contrasts.items()
+        },
+        'contrast_direction_counts': {
+            track: dict(Counter(item['direction'] for item in selected))
+            for track, selected in contrasts.items()
+        },
+        'headline': headline,
+        'headline_outcome_counts': {
+            track: dict(Counter(item['cross_arm_outcome'] for item in selected))
+            for track, selected in headline.items()
+        },
+        'corner': corner,
+    }
+
+
+def _ratio_sensitivity(rows: Sequence[Mapping[str, str]]) -> dict[str, Any]:
+    grouped: dict[tuple[Any, ...], list[Mapping[str, str]]] = defaultdict(list)
+    for row in rows:
+        key = (
+            row['arm'],
+            _int(row, 'structural_point_index'),
+            row['defense_cost_model'],
+            row['attack_cost_model'],
+        )
+        grouped[key].append(row)
+    if len(grouped) != 200:
+        raise RuntimeError('main surface does not contain 200 arm structural cost curves')
+    records: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for (arm, _, defense_model, attack_model), selected in grouped.items():
+        selected = sorted(selected, key=lambda row: _float(row, 'capability_ratio'))
+        if len(selected) != 25:
+            raise RuntimeError('ratio curve does not contain 25 points')
+        low, high = selected[0], selected[-1]
+        for track, field in (
+            ('strict', 'failure_rate'),
+            ('rank_visible', 'rank_visible_failure_rate'),
+        ):
+            if track == 'rank_visible' and arm != 'measurement_corruption':
+                continue
+            interval = _difference_interval(
+                _float(high, field), _float(low, field),
+                _int(high, 'n'), _int(low, 'n'), absolute=False,
+            )
+            label = arm if track == 'strict' else 'measurement_corruption_rank_visible'
+            records[label].append(
+                {
+                    **_structural(low),
+                    'defense_cost_model': defense_model,
+                    'attack_cost_model': attack_model,
+                    'track': track,
+                    'ratio_low': _float(low, 'capability_ratio'),
+                    'ratio_high': _float(high, 'capability_ratio'),
+                    'failure_rate_low': _float(low, field),
+                    'failure_rate_high': _float(high, field),
+                    'curve': [
+                        {
+                            'capability_ratio': _float(row, 'capability_ratio'),
+                            'failure_rate': _float(row, field),
+                        }
+                        for row in selected
+                    ],
+                    **interval,
+                }
+            )
+    return {
+        'records': dict(records),
+        'classification_counts': {
+            label: dict(Counter(item['classification'] for item in selected))
+            for label, selected in records.items()
+        },
+        'vacuous_zero_counts': {
+            label: sum(item['vacuous_zero'] for item in selected)
+            for label, selected in records.items()
+        },
+        'ranges': {
+            label: {
+                'minimum_endpoint_contrast': min(item['estimate'] for item in selected),
+                'maximum_endpoint_contrast': max(item['estimate'] for item in selected),
+            }
+            for label, selected in records.items()
+        },
+    }
+
+
+def _complete_linkage(
+    complete_rows: Sequence[Mapping[str, str]], main_rows: Sequence[Mapping[str, str]]
+) -> dict[str, Any]:
+    primary = {
+        (
+            _int(row, 'structural_point_index'),
+            row['defense_cost_model'],
+            row['attack_cost_model'],
+        ): row
+        for row in main_rows
+        if row['arm'] == 'false_cluster_injection'
+        and _float(row, 'capability_ratio') == 1.0
+    }
+    if len(primary) != 100 or len(complete_rows) != 100:
+        raise RuntimeError('merge sensitivity does not have 100 matched cells')
+    records: list[dict[str, Any]] = []
+    for complete in complete_rows:
+        key = (
+            _int(complete, 'structural_point_index'),
+            complete['defense_cost_model'],
+            complete['attack_cost_model'],
+        )
+        connected = primary[key]
+        interval = _difference_interval(
+            _float(complete, 'failure_rate'),
+            _float(connected, 'failure_rate'),
+            _int(complete, 'n'),
+            _int(connected, 'n'),
+            absolute=True,
+        )
+        records.append(
+            {
+                **_structural(complete),
+                'defense_cost_model': complete['defense_cost_model'],
+                'attack_cost_model': complete['attack_cost_model'],
+                'connected_components_failure_rate': _float(connected, 'failure_rate'),
+                'complete_linkage_failure_rate': _float(complete, 'failure_rate'),
+                **interval,
+            }
+        )
+    return {
+        'records': records,
+        'classification_counts': dict(Counter(item['classification'] for item in records)),
+        'vacuous_zero_cells': sum(item['vacuous_zero'] for item in records),
+        'maximum_comparison': max(records, key=lambda item: item['estimate']),
+    }
+
+
+def _extract_paragraph(note: str, marker: str) -> str:
+    start = note.index(marker)
+    end = note.find('\n\n', start)
+    return note[start:] if end == -1 else note[start:end]
+
+
+def _quote(text: str) -> list[str]:
+    return ['> ' + line if line else '>' for line in text.splitlines()]
+
+
+def _fmt(value: float) -> str:
+    return f'{value:.3f}'
+
+
+def _counter_text(counter: Mapping[str, int]) -> str:
+    return ', '.join(f'{key}={value}' for key, value in sorted(counter.items()))
+
+
+def _report(manifest: Mapping[str, Any], analysis: Mapping[str, Any], note: str) -> str:
+    ratio = analysis['ratio_collapse']
+    primary = analysis['primary_headline']
+    sensitivity = analysis['ratio_sensitivity']
+    merge = analysis['complete_linkage']
+    maximum_ratio = ratio['maximum_comparison']
+    lines = [
+        '# Sybil defense scaling characterization report',
+        '',
+        '## Go/no-go outcome',
+        '',
+        'The registered characterization completed. The ratio-collapse slice '
+        'is non-collapse, so every ratio-expressed main-surface reading below '
+        'carries the registered material caveat that a fuller two-dial grid is '
+        'needed in a future registered study. This report does not add that grid.',
+        '',
+        'No crossover rank was computed or used. The registered fixed-cell '
+        'quantities are reported below.',
+        '',
+        '## 1. Ratio-collapse slice',
+        '',
+        'Criterion, quoted verbatim from the committed registration:',
+        '',
+        *_quote(_extract_paragraph(note, 'The finding quantity is the failure-rate curve')),
+        '',
+        'Result:',
+        '',
+        f'The 75-cell slice produced 75 pairwise cross-level comparisons. '
+        f'Classifications were {_counter_text(ratio["classification_counts"])}. '
+        f'The largest observed difference was {_fmt(maximum_ratio["estimate"])} '
+        f'with 95 percent interval [{_fmt(maximum_ratio["lower"])}, '
+        f'{_fmt(maximum_ratio["upper"])}] at structural point '
+        f'{maximum_ratio["structural_point_index"]}, levels '
+        f'{maximum_ratio["level_a"]} and {maximum_ratio["level_b"]}. '
+        f'{ratio["vacuous_zero_comparisons"]} comparisons were exactly zero '
+        'and are flagged rather than banked.',
+        '',
+        '| Point | Size | Severity | Rank | F(0.316) | F(1.0) | F(3.16) | Max d | Max 95% CI |',
+        '|---:|---:|---:|---:|---:|---:|---:|---:|:---|',
+    ]
+    for point in ratio['points']:
+        rates = point['rates_by_level']
+        comparison = point['maximum_comparison']
+        lines.append(
+            f'| {point["structural_point_index"]} | {point["validator_set_size"]} | '
+            f'{point["collapse_severity"]} | {point["true_effective_rank"]} | '
+            f'{_fmt(rates["0.316"])} | {_fmt(rates["1.0"])} | '
+            f'{_fmt(rates["3.16"])} | {_fmt(comparison["estimate"])} | '
+            f'[{_fmt(comparison["lower"])}, {_fmt(comparison["upper"])}] |'
+        )
+    lines.extend(
+        [
+            '',
+            'Verdict:',
+            '',
+            '**NON-COLLAPSE.** One comparison has a lower 95 percent bound at '
+            'or above the 0.15 MEI. The main surface therefore cannot be read '
+            'as exhaustively ratio-parameterized. Its ratio findings remain '
+            'valid for the registered term-OFF representation but require the '
+            'registered fuller-grid caveat.',
+            '',
+            '## 2. Primary fixed-cell reading, per arm',
+            '',
+            'Criterion, quoted verbatim from the committed registration:',
+            '',
+            *_quote(_extract_paragraph(note, '**Primary, per arm, final registered form:**')),
+            '',
+            'Result:',
+            '',
+        ]
+    )
+    labels = (
+        ('false_cluster_injection', 'Arm A'),
+        ('measurement_corruption', 'Arm B strict'),
+        ('measurement_corruption_rank_visible', 'Arm B rank-visible'),
+    )
+    for label, display in labels:
+        extent = primary['arm_ranges'][label]
+        counts = primary['arm_classification_counts'][label]
+        lines.append(
+            f'- {display}: 600 maximum-collapse rank-two cells, failure-rate '
+            f'range [{_fmt(extent["minimum"])}, {_fmt(extent["maximum"])}], '
+            f'floor classifications {_counter_text(counts)}. Exact-zero cells '
+            f'flagged: {extent["vacuous_zero_cells"]}.'
+        )
+    lines.extend(
+        [
+            '',
+            'The institution-only analytic corner had effective rank one in all '
+            '200 arm, ratio, and cost rows. Its strict defense failure rate was '
+            f'{_fmt(min(item["failure_rate"] for item in primary["corner"]))} '
+            f'to {_fmt(max(item["failure_rate"] for item in primary["corner"]))}.',
+            '',
+            'A/B absolute-difference classifications across the 600 matched '
+            f'cells were strict: {_counter_text(primary["contrast_classification_counts"]["strict"])}; '
+            f'rank-visible: {_counter_text(primary["contrast_classification_counts"]["rank_visible"])}. '
+            'Directions were strict: '
+            f'{_counter_text(primary["contrast_direction_counts"]["strict"])}; '
+            'rank-visible: '
+            f'{_counter_text(primary["contrast_direction_counts"]["rank_visible"])}.',
+            '',
+            'All full 25-point curves, cell proportions, intervals, floor '
+            'classifications, and A/B comparisons are preserved in the '
+            'companion analysis JSON.',
+            '',
+            'Verdict:',
+            '',
+            '**Arm A: CELL-DEPENDENT. Arm B strict: CELL-DEPENDENT. Arm B '
+            'rank-visible: CELL-DEPENDENT.** Each track contains clear, fail, '
+            'and statistical-boundary cells, so neither arm has a single global '
+            'floor outcome across the registered ratio and cost cells. The A/B '
+            'asymmetry is material in some cells, '
+            'boundary in others, and robustly below the MEI in others. Exact-zero '
+            'comparisons are flagged in the companion record.',
+            '',
+            '## 3. Headline floor question',
+            '',
+            'Criterion, quoted verbatim from the committed registration:',
+            '',
+            *_quote(_extract_paragraph(note, '**Headline, per arm:**')),
+            '',
+            'Result:',
+            '',
+            f'Across 600 matched rank-two cells, the strict A/B outcomes were '
+            f'{_counter_text(primary["headline_outcome_counts"]["strict"])}. '
+            f'The rank-visible A/B outcomes were '
+            f'{_counter_text(primary["headline_outcome_counts"]["rank_visible"])}. '
+            'Mixed directions and statistical boundaries are retained as '
+            '`floor_boundary`, exactly as registered.',
+            '',
+            '| Ratio | Strict clears | Strict fails | Strict boundary | Visible clears | Visible fails | Visible boundary |',
+            '|---:|---:|---:|---:|---:|---:|---:|',
+        ]
+    )
+    by_ratio: dict[float, dict[str, Counter[str]]] = defaultdict(lambda: {'strict': Counter(), 'rank_visible': Counter()})
+    for track in ('strict', 'rank_visible'):
+        for item in primary['headline'][track]:
+            by_ratio[item['capability_ratio']][track][item['cross_arm_outcome']] += 1
+    for ratio_value in sorted(by_ratio):
+        strict = by_ratio[ratio_value]['strict']
+        visible = by_ratio[ratio_value]['rank_visible']
+        lines.append(
+            f'| {ratio_value:.6g} | {strict["floor_clears"]} | '
+            f'{strict["floor_fails"]} | {strict["floor_boundary"]} | '
+            f'{visible["floor_clears"]} | {visible["floor_fails"]} | '
+            f'{visible["floor_boundary"]} |'
+        )
+    lines.extend(
+        [
+            '',
+            'Verdict:',
+            '',
+            '**CELL-DEPENDENT ACROSS ALL THREE REGISTERED OUTCOMES.** There is '
+            'no honest global clear or fail verdict. Arm B strict and rank-visible '
+            'tracks differ materially, and both are reported. The direction is '
+            'not forced toward the pre-run expectation.',
+            '',
+            '## 4. Ratio sensitivity',
+            '',
+            'Criterion, quoted verbatim from the committed registration:',
+            '',
+            *_quote(_extract_paragraph(note, '**Ratio sensitivity, final registered form:**')),
+            '',
+            'Result:',
+            '',
+        ]
+    )
+    for label, display in labels:
+        counts = sensitivity['classification_counts'][label]
+        extent = sensitivity['ranges'][label]
+        lines.append(
+            f'- {display}: 100 fixed structural and cost curves; '
+            f'{_counter_text(counts)}; endpoint contrast range '
+            f'[{_fmt(extent["minimum_endpoint_contrast"])}, '
+            f'{_fmt(extent["maximum_endpoint_contrast"])}]; exact-zero '
+            f'contrasts flagged: {sensitivity["vacuous_zero_counts"][label]}.'
+        )
+    lines.extend(
+        [
+            '',
+            'Verdict:',
+            '',
+            '**RATIO-SENSITIVE IN A SUBSET OF CELLS, ROBUST IN A SUBSET, AND '
+            'BOUNDARY IN THE REMAINDER.** The registered response is not a '
+            'single crossover or a global classification. The full curves and '
+            'every endpoint interval are in the companion analysis JSON. Because '
+            'the ratio-collapse slice returned non-collapse, these term-OFF ratio '
+            'responses carry the fuller two-dial-grid caveat.',
+            '',
+            '## 5. Complete-linkage sensitivity',
+            '',
+            'Criterion, quoted verbatim from the committed registration:',
+            '',
+            *_quote(_extract_paragraph(note, '**Merge rule, registered choice.**')),
+            '',
+            'Result:',
+            '',
+            f'The 100 matched cells classified as '
+            f'{_counter_text(merge["classification_counts"])}. '
+            f'{merge["vacuous_zero_cells"]} exact-zero cells are flagged. The '
+            f'largest absolute difference was '
+            f'{_fmt(merge["maximum_comparison"]["estimate"])} with 95 percent '
+            f'interval [{_fmt(merge["maximum_comparison"]["lower"])}, '
+            f'{_fmt(merge["maximum_comparison"]["upper"])}] at structural '
+            f'point {merge["maximum_comparison"]["structural_point_index"]}, '
+            f'{merge["maximum_comparison"]["defense_cost_model"]} defense and '
+            f'{merge["maximum_comparison"]["attack_cost_model"]} attack.',
+            '',
+            'Verdict:',
+            '',
+            '**MERGE-SENSITIVE IN SOME FIXED CELLS, ROBUST IN OTHERS, WITH '
+            'BOUNDARY CELLS RETAINED.** The alternate pass is separate from the '
+            'primary and is not blended.',
+            '',
+            '## Execution and primary record',
+            '',
+            f'- Git head used for all data: `{manifest["git_head"]}`.',
+            f'- Workers: {manifest["worker_count"]}.',
+            f'- Total cells: {manifest["total_cells"]}.',
+            f'- Total runs: {manifest["total_runs"]}.',
+            '- Registered n per cell: 200. Worst-case normal-approximation '
+            'power requires 175 per cell for the 0.15 MEI; n=200 carries 25 '
+            'observations of margin and registered approximate power '
+            '0.850838768327.',
+            f'- Ratio-collapse wall time: {manifest["pass_timings_seconds"]["ratio_collapse_slice"]:.6f} seconds.',
+            f'- Main-surface wall time: {manifest["pass_timings_seconds"]["main_surface"]:.6f} seconds.',
+            f'- Complete-linkage wall time: {manifest["pass_timings_seconds"]["complete_linkage"]:.6f} seconds.',
+            f'- Total wall time: {manifest["total_elapsed_seconds"]:.6f} seconds.',
+            f'- Manifest: `{MANIFEST_PATH.relative_to(REPO_ROOT)}`.',
+            '- Authoritative files: `full_5ac6a2e_ratio_collapse_slice_results.csv`, '
+            '`full_5ac6a2e_main_surface_results.csv`, and '
+            '`full_5ac6a2e_complete_linkage_results.csv`, each enumerated with '
+            'hash and row count in the manifest.',
+            '- Excluded process artifact: `sweep_progress.log`.',
+            '- Excluded non-authoritative prefixes: `smoke_`, `two_dial_smoke_`, '
+            'and `selfcheck_`.',
+            '',
+            'The run requested 16 worker processes on a host that reported 12 '
+            'logical processors at launch. This operational oversubscription is '
+            'recorded for reproducibility. It changed no registered cell, sample '
+            'size, seed, or analysis value.',
+            '',
+            '## Anomalies and future questions',
+            '',
+            'No count, hash, axis, scope, or execution anomaly was found. The '
+            'ratio-collapse non-collapse verdict is a registered finding, not an '
+            'execution anomaly. Per the plan, it names one future question: a '
+            'separately registered fuller two-dial capability grid. No out-of-plan '
+            'observation was folded into this study.',
+            '',
+            'The branch remains unmerged pending operator audit.',
+        ]
+    )
+    return '\n'.join(lines) + '\n'
+
+
+def analyze() -> dict[str, Any]:
+    manifest, results = _load_manifest_results()
+    if int(manifest['n_per_cell']) != 200:
+        raise RuntimeError('manifest n does not match registration')
+    analysis = {
+        'schema': 'sybil-characterization-analysis-v1',
+        'manifest_path': str(MANIFEST_PATH.relative_to(REPO_ROOT)),
+        'manifest_sha256': _sha256(MANIFEST_PATH),
+        'mei': MEI,
+        'normal_interval_z': Z_95,
+        'ratio_collapse': _ratio_collapse(results['ratio_collapse_slice']),
+        'primary_headline': _primary_and_headline(results['main_surface']),
+        'ratio_sensitivity': _ratio_sensitivity(results['main_surface']),
+        'complete_linkage': _complete_linkage(
+            results['complete_linkage'], results['main_surface']
+        ),
+        'crossover_computed': False,
+    }
+    note = NOTE_PATH.read_text(encoding='utf-8')
+    _write_json_atomic(ANALYSIS_PATH, analysis)
+    _write_text_atomic(REPORT_PATH, _report(manifest, analysis, note))
+    return analysis
+
+
+def main() -> int:
+    analysis = analyze()
+    print(f'Ratio-collapse verdict: {analysis["ratio_collapse"]["registered_verdict"]}')
+    print(f'Analysis JSON: {ANALYSIS_PATH}')
+    print(f'Report: {REPORT_PATH}')
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
+
+
+==========================================
+FILE: simulation/attack_adapter_v2.py
 ==========================================
 
 """Attack and defense adapter for the v2 eight-axis simulation path.
@@ -2321,7 +3104,7 @@ def append_adapter_diagnostics(model):
 
 
 ==========================================
-FILE: simulation\constants_v2_stage15.py
+FILE: simulation/constants_v2_stage15.py
 ==========================================
 
 """Stage 1.5 named constants for v2 diagnostic state.
@@ -2641,7 +3424,7 @@ PHI_HALF = 10.0
 
 
 ==========================================
-FILE: simulation\constants_v2_stage18.py
+FILE: simulation/constants_v2_stage18.py
 ==========================================
 
 """Stage 1.8 named constants for the working_factor architecture.
@@ -2799,7 +3582,7 @@ H_N_FLOOR = 0.01
 
 
 ==========================================
-FILE: simulation\defection.py
+FILE: simulation/defection.py
 ==========================================
 
 """Patient defection helpers for v2.0 diagnostic sweeps.
@@ -2911,7 +3694,7 @@ def copy_defection_for_successor(parent_ai, successor_ai):
 
 
 ==========================================
-FILE: simulation\deps.py
+FILE: simulation/deps.py
 ==========================================
 
 import sys
@@ -2937,7 +3720,7 @@ def check_and_install(package):
                 sys.exit(1)
 
 ==========================================
-FILE: simulation\metrics.py
+FILE: simulation/metrics.py
 ==========================================
 
 """
@@ -3891,7 +4674,7 @@ def calculate_system_metrics(r, c, pop, avg_wb, capability, h_n_override=None,
 
 
 ==========================================
-FILE: simulation\model.py
+FILE: simulation/model.py
 ==========================================
 
 import numpy as np
@@ -5573,7 +6356,7 @@ class GardenModel:
 
 
 ==========================================
-FILE: simulation\monte_carlo.py
+FILE: simulation/monte_carlo.py
 ==========================================
 
 # --- Imports and Dependency Check ---
@@ -6499,7 +7282,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\run_alpha_succession_sweep.py
+FILE: simulation/run_alpha_succession_sweep.py
 ==========================================
 
 """
@@ -6821,7 +7604,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\run_attack_vector_revalidation_v2.py
+FILE: simulation/run_attack_vector_revalidation_v2.py
 ==========================================
 
 """Guarded v2 attack-vector revalidation runner.
@@ -7495,7 +8278,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\run_calibration.py
+FILE: simulation/run_calibration.py
 ==========================================
 
 """
@@ -7660,7 +8443,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\run_comprehension_gap_powered_arm.py
+FILE: simulation/run_comprehension_gap_powered_arm.py
 ==========================================
 
 #!/usr/bin/env python3
@@ -7894,7 +8677,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\run_comprehension_gap_sweep.py
+FILE: simulation/run_comprehension_gap_sweep.py
 ==========================================
 
 """
@@ -8396,7 +9179,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\run_demographic_feedback_calibration.py
+FILE: simulation/run_demographic_feedback_calibration.py
 ==========================================
 
 """
@@ -8720,7 +9503,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\run_frontier_floor_calibration.py
+FILE: simulation/run_frontier_floor_calibration.py
 ==========================================
 
 """
@@ -9005,7 +9788,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\run_phi_adversarial_sweep.py
+FILE: simulation/run_phi_adversarial_sweep.py
 ==========================================
 
 """
@@ -9117,7 +9900,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\run_phi_alpha_rr_sweep.py
+FILE: simulation/run_phi_alpha_rr_sweep.py
 ==========================================
 
 """
@@ -9585,7 +10368,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\run_phi_shock_calibration.py
+FILE: simulation/run_phi_shock_calibration.py
 ==========================================
 
 """
@@ -9962,7 +10745,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\run_rr_alpha_sweep.py
+FILE: simulation/run_rr_alpha_sweep.py
 ==========================================
 
 """
@@ -10291,7 +11074,2556 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\run_termination_sweep.py
+FILE: simulation/run_sybil_defense_scaling_characterization.py
+==========================================
+
+"""Execute the frozen Sybil defense scaling characterization plan.
+
+The default mode runs the three registered passes only when characterization
+authorization is explicit. The self-check mode enumerates the registered
+shapes and evaluates one n=1 fixture per pass without producing a finding.
+"""
+
+from __future__ import annotations
+
+import argparse
+import concurrent.futures
+import csv
+import hashlib
+import json
+import math
+import os
+import platform
+import random
+import subprocess
+import sys
+import time
+from dataclasses import dataclass
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Iterable, Mapping, Sequence
+
+from sybil_defense_scaling import (
+    attribute_validators,
+    build_validator_pool,
+    compute_attack_cost,
+    compute_defense_cost,
+    derive_two_dial_capability_terms,
+    load_config,
+    run_false_cluster_injection,
+    run_measurement_corruption,
+)
+
+
+HERE = Path(__file__).resolve().parent
+REPO_ROOT = HERE.parent
+DEFAULT_CONFIG = HERE / 'config' / 'sybil_defense_scaling.json'
+DESIGN_NOTE = HERE / 'diagnostics' / 'sybil_defense_scaling_design_note.md'
+AUTHORIZED = 'authorized_registered_characterization'
+BLOCKED = 'blocked_pending_selfcheck'
+PASS_ORDER = ('ratio_collapse_slice', 'main_surface', 'complete_linkage')
+
+
+@dataclass(frozen=True)
+class SweepPlan:
+    """Validated, fully expanded values from the registered config."""
+
+    ratios: tuple[float, ...]
+    structural_points: tuple[dict[str, Any], ...]
+    n_per_cell: int
+    cells: Mapping[str, tuple[dict[str, Any], ...]]
+
+
+def _utc_now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _git_value(*args: str) -> str:
+    return subprocess.check_output(
+        ['git', *args], cwd=REPO_ROOT, text=True, encoding='utf-8'
+    ).strip()
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open('rb') as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b''):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def _json_safe(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {str(key): _json_safe(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_json_safe(item) for item in value]
+    if hasattr(value, 'item'):
+        return value.item()
+    return value
+
+
+def _write_text_atomic(path: Path, content: str) -> None:
+    temporary = path.with_suffix(path.suffix + '.tmp')
+    temporary.write_text(content, encoding='utf-8')
+    os.replace(temporary, path)
+
+
+def _write_json_atomic(path: Path, value: Any) -> None:
+    _write_text_atomic(
+        path, json.dumps(_json_safe(value), indent=2, sort_keys=True) + '\n'
+    )
+
+
+def _write_csv_atomic(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
+    fieldnames = sorted({key for row in rows for key in row})
+    temporary = path.with_suffix(path.suffix + '.tmp')
+    with temporary.open('w', newline='', encoding='utf-8') as handle:
+        writer = csv.DictWriter(
+            handle, fieldnames=fieldnames, lineterminator='\n'
+        )
+        writer.writeheader()
+        writer.writerows(_json_safe(list(rows)))
+    os.replace(temporary, path)
+
+
+def load_geomspace(specification: Mapping[str, Any]) -> tuple[float, ...]:
+    """Expand the registered inclusive geomspace config schema."""
+
+    if set(specification) != {'schema', 'start', 'stop', 'count'}:
+        raise ValueError('capability_ratio_range has unexpected fields')
+    if specification['schema'] != 'geomspace':
+        raise ValueError('capability_ratio_range schema must be geomspace')
+    start = float(specification['start'])
+    stop = float(specification['stop'])
+    count = int(specification['count'])
+    if start <= 0.0 or stop <= start or count < 2:
+        raise ValueError('invalid geomspace bounds or count')
+    values = [
+        start * (stop / start) ** (index / (count - 1))
+        for index in range(count)
+    ]
+    values[0] = start
+    values[-1] = stop
+    return tuple(values)
+
+
+def _structural_points(sweep: Mapping[str, Any]) -> tuple[dict[str, Any], ...]:
+    axis = sweep['structural_axis']
+    sizes = [int(value) for value in axis['validator_set_sizes']]
+    severities = [float(value) for value in axis['collapse_severities']]
+    corner = axis['institution_alone_corner']
+    points: list[dict[str, Any]] = []
+    for size in sizes:
+        for severity in severities:
+            points.append(
+                {
+                    'structural_point_index': len(points),
+                    'validator_set_size': size,
+                    'frontier_validator_count': size - 1,
+                    'institution_validator_count': 1,
+                    'collapse_severity': severity,
+                    'institution_alone_corner': False,
+                }
+            )
+    points.append(
+        {
+            'structural_point_index': len(points),
+            'validator_set_size': int(corner['validator_set_size']),
+            'frontier_validator_count': 0,
+            'institution_validator_count': 1,
+            'collapse_severity': float(corner['collapse_severity']),
+            'institution_alone_corner': True,
+        }
+    )
+    return tuple(points)
+
+
+def _require_equal(actual: Any, expected: Any, label: str) -> None:
+    if actual != expected:
+        raise ValueError(f'{label} does not match the committed registration')
+
+
+def validate_registered_plan(config: Mapping[str, Any]) -> None:
+    """Reject any config drift from the final committed registration."""
+
+    sweep = config['sweep']
+    ratio_spec = sweep['capability_ratio_range']
+    _require_equal(ratio_spec['schema'], 'geomspace', 'ratio schema')
+    _require_equal(float(ratio_spec['start']), 0.1, 'ratio start')
+    _require_equal(float(ratio_spec['stop']), 10.0, 'ratio stop')
+    _require_equal(int(ratio_spec['count']), 25, 'ratio count')
+    _require_equal(int(sweep['power_sample_size_per_cell']), 200, 'cell n')
+    axis = sweep['structural_axis']
+    _require_equal(
+        [int(value) for value in axis['validator_set_sizes']],
+        [2, 4, 8, 16, 32, 64],
+        'validator size axis',
+    )
+    _require_equal(
+        [float(value) for value in axis['collapse_severities']],
+        [0.0, 0.33, 0.66, 1.0],
+        'collapse severity axis',
+    )
+    _require_equal(
+        dict(axis['institution_alone_corner']),
+        {'validator_set_size': 1, 'collapse_severity': 1.0},
+        'institution-only corner',
+    )
+    _require_equal(float(config['attribution']['similarity_threshold']), 0.9,
+                   'merge threshold')
+    main = sweep['main_surface']
+    _require_equal(
+        list(main['arms']),
+        ['false_cluster_injection', 'measurement_corruption'],
+        'main arms',
+    )
+    _require_equal(
+        list(main['defense_cost_models']),
+        ['pairwise_exact', 'static_baseline'],
+        'main defense costs',
+    )
+    _require_equal(
+        list(main['attack_cost_models']),
+        ['linear', 'superlinear'],
+        'main attack costs',
+    )
+    _require_equal(main['merge_rule'], 'threshold_connected_components',
+                   'main merge rule')
+    _require_equal(main['absolute_term_enabled'], False,
+                   'main absolute term')
+    ratio_slice = sweep['ratio_collapse_slice']
+    _require_equal(ratio_slice['arm'], 'false_cluster_injection',
+                   'ratio slice arm')
+    _require_equal(ratio_slice['defense_cost_model'], 'pairwise_exact',
+                   'ratio slice defense cost')
+    _require_equal(ratio_slice['attack_cost_model'], 'linear',
+                   'ratio slice attack cost')
+    _require_equal(
+        ratio_slice['merge_rule'], 'threshold_connected_components',
+        'ratio slice merge rule',
+    )
+    _require_equal(
+        [float(value) for value in ratio_slice['parity_levels']],
+        [0.316, 1.0, 3.16],
+        'ratio slice levels',
+    )
+    _require_equal(ratio_slice['absolute_term_enabled'], True,
+                   'ratio slice absolute term')
+    _require_equal(float(ratio_slice['failure_rate_mei']), 0.15,
+                   'ratio slice MEI')
+    term = config['two_dial_capability']['absolute_resolution_term']
+    _require_equal(term['form'], 'defender_power_law_resolution',
+                   'absolute term form')
+    _require_equal(float(term['reference_level']), 1.0,
+                   'absolute term reference')
+    _require_equal(float(term['strength']), 0.22163300225716118,
+                   'absolute term strength')
+    complete = sweep['complete_linkage_sensitivity']
+    _require_equal(complete['arm'], 'false_cluster_injection',
+                   'complete-linkage arm')
+    _require_equal(
+        list(complete['defense_cost_models']),
+        ['pairwise_exact', 'static_baseline'],
+        'complete-linkage defense costs',
+    )
+    _require_equal(
+        list(complete['attack_cost_models']),
+        ['linear', 'superlinear'],
+        'complete-linkage attack costs',
+    )
+    _require_equal(float(complete['capability_ratio']), 1.0,
+                   'complete-linkage ratio')
+    _require_equal(
+        complete['merge_rule'], 'threshold_greedy_complete_linkage',
+        'complete-linkage merge rule',
+    )
+    if any(value is None for value in _walk_values(sweep)):
+        raise ValueError('analysis-plan field in sweep config is null')
+
+
+def _walk_values(value: Any) -> Iterable[Any]:
+    if isinstance(value, Mapping):
+        for child in value.values():
+            yield from _walk_values(child)
+    elif isinstance(value, (list, tuple)):
+        for child in value:
+            yield from _walk_values(child)
+    else:
+        yield value
+
+
+def build_sweep_plan(config: Mapping[str, Any]) -> SweepPlan:
+    """Validate and enumerate all three registered characterization passes."""
+
+    validate_registered_plan(config)
+    sweep = config['sweep']
+    ratios = load_geomspace(sweep['capability_ratio_range'])
+    structural = _structural_points(sweep)
+    main_spec = sweep['main_surface']
+    main: list[dict[str, Any]] = []
+    for point in structural:
+        for ratio in ratios:
+            for arm in main_spec['arms']:
+                for defense_model in main_spec['defense_cost_models']:
+                    for attack_model in main_spec['attack_cost_models']:
+                        main.append(
+                            {
+                                **point,
+                                'pass_name': 'main_surface',
+                                'arm': arm,
+                                'defense_cost_model': defense_model,
+                                'attack_cost_model': attack_model,
+                                'merge_rule': main_spec['merge_rule'],
+                                'attacker_capability': ratio,
+                                'defender_capability': 1.0,
+                                'capability_ratio': ratio,
+                                'absolute_term_enabled': False,
+                            }
+                        )
+    ratio_spec = sweep['ratio_collapse_slice']
+    ratio_slice: list[dict[str, Any]] = []
+    for point in structural:
+        for level in ratio_spec['parity_levels']:
+            ratio_slice.append(
+                {
+                    **point,
+                    'pass_name': 'ratio_collapse_slice',
+                    'arm': ratio_spec['arm'],
+                    'defense_cost_model': ratio_spec['defense_cost_model'],
+                    'attack_cost_model': ratio_spec['attack_cost_model'],
+                    'merge_rule': ratio_spec['merge_rule'],
+                    'attacker_capability': float(level),
+                    'defender_capability': float(level),
+                    'capability_ratio': 1.0,
+                    'absolute_term_enabled': True,
+                }
+            )
+    complete_spec = sweep['complete_linkage_sensitivity']
+    complete: list[dict[str, Any]] = []
+    for point in structural:
+        for defense_model in complete_spec['defense_cost_models']:
+            for attack_model in complete_spec['attack_cost_models']:
+                complete.append(
+                    {
+                        **point,
+                        'pass_name': 'complete_linkage',
+                        'arm': complete_spec['arm'],
+                        'defense_cost_model': defense_model,
+                        'attack_cost_model': attack_model,
+                        'merge_rule': complete_spec['merge_rule'],
+                        'attacker_capability': 1.0,
+                        'defender_capability': 1.0,
+                        'capability_ratio': 1.0,
+                        'absolute_term_enabled': False,
+                    }
+                )
+    cells = {
+        'main_surface': tuple(main),
+        'ratio_collapse_slice': tuple(ratio_slice),
+        'complete_linkage': tuple(complete),
+    }
+    counts = {name: len(selected) for name, selected in cells.items()}
+    _require_equal(counts['main_surface'], 5000, 'main cell count')
+    _require_equal(counts['ratio_collapse_slice'], 75,
+                   'ratio slice cell count')
+    _require_equal(counts['complete_linkage'], 100,
+                   'complete-linkage cell count')
+    return SweepPlan(
+        ratios=ratios,
+        structural_points=structural,
+        n_per_cell=int(sweep['power_sample_size_per_cell']),
+        cells=cells,
+    )
+
+
+def assert_characterization_authorized(config: Mapping[str, Any]) -> None:
+    if config['sweep']['authorization'] != AUTHORIZED:
+        raise RuntimeError(
+            'full characterization refused: authorization is not '
+            f'{AUTHORIZED}'
+        )
+
+
+def _seed(cell: Mapping[str, Any], replicate: int) -> int:
+    payload = json.dumps(
+        {
+            'schema': 'sybil-characterization-seed-v1',
+            'cell': dict(cell),
+            'replicate': int(replicate),
+        },
+        sort_keys=True,
+        separators=(',', ':'),
+    )
+    return int.from_bytes(
+        hashlib.sha256(payload.encode('utf-8')).digest()[:8], 'big'
+    ) % (2**31 - 1)
+
+
+def _cell_id(cell: Mapping[str, Any]) -> str:
+    payload = json.dumps(dict(cell), sort_keys=True, separators=(',', ':'))
+    return hashlib.sha256(payload.encode('utf-8')).hexdigest()[:20]
+
+
+def run_cell(
+    cell: Mapping[str, Any], config: Mapping[str, Any], n: int
+) -> dict[str, Any]:
+    """Evaluate one fixed registered cell and return sufficient counts."""
+
+    started = time.perf_counter()
+    attribution_config = dict(config['attribution'])
+    attribution_config['merge_rule'] = str(cell['merge_rule'])
+    validators = build_validator_pool(
+        int(cell['frontier_validator_count']),
+        int(cell['institution_validator_count']),
+        config['collapse'],
+        lineage_mode='distinct',
+    )
+    attribution = attribute_validators(
+        validators, float(cell['collapse_severity']), attribution_config
+    )
+    forged_count = int(
+        config['attack_arms']['false_cluster_injection']['forged_cluster_count']
+    )
+    defense_inputs = len(validators)
+    if (
+        cell['arm'] == 'false_cluster_injection'
+        and config['costs']['defense']['input_basis'] == 'apparent_inputs'
+    ):
+        defense_inputs += forged_count
+    defense = compute_defense_cost(
+        defense_inputs,
+        config['costs']['defense'],
+        float(config['defender_capability']['exponent_reduction']),
+        model=str(cell['defense_cost_model']),
+    )
+    attack = compute_attack_cost(
+        attribution.effective_rank,
+        config['costs']['attack'],
+        model=str(cell['attack_cost_model']),
+    )
+    base_resolution = float(config['defender_capability']['base_resolution']) * float(
+        config['defender_capability']['resolution_improvement']
+    )
+    terms = derive_two_dial_capability_terms(
+        attacker_capability=float(cell['attacker_capability']),
+        defender_capability=float(cell['defender_capability']),
+        base_resolution_power=base_resolution,
+        two_dial_config=config['two_dial_capability'],
+        absolute_term_enabled=bool(cell['absolute_term_enabled']),
+    )
+    minimum_rank = int(config['poles']['deployment_minimum_rank'])
+    failures = 0
+    rank_visible_failures = 0
+    partition_corruptions = 0
+    institution_hidden = 0
+    measured_rank_sum = 0
+    resolution_probability = 0.0
+    identifier = _cell_id(cell)
+    for replicate in range(int(n)):
+        rng = random.Random(_seed(cell, replicate))
+        if cell['arm'] == 'false_cluster_injection':
+            result = run_false_cluster_injection(
+                attribution,
+                validators,
+                forged_cluster_count=forged_count,
+                capability_ratio=terms.capability_ratio,
+                resolution_power=terms.effective_resolution_power,
+                defense_cost=defense.effective_cost,
+                attack_cost=attack.cost,
+                minimum_consensus_rank=minimum_rank,
+                rng=rng,
+            )
+        elif cell['arm'] == 'measurement_corruption':
+            result = run_measurement_corruption(
+                validators,
+                attribution,
+                collapse_severity=float(cell['collapse_severity']),
+                attribution_config=attribution_config,
+                arm_config=config['attack_arms']['measurement_corruption'],
+                capability_ratio=terms.capability_ratio,
+                resolution_power=terms.effective_resolution_power,
+                defense_cost=defense.effective_cost,
+                attack_cost=attack.cost,
+                minimum_consensus_rank=minimum_rank,
+                rng=rng,
+            )
+        else:
+            raise ValueError('unsupported attack arm')
+        partition_corrupted = not bool(result.details['partition_preserved'])
+        failures += int(result.defense_failed)
+        partition_corruptions += int(partition_corrupted)
+        rank_visible_failures += int(
+            partition_corrupted and result.measured_rank < minimum_rank
+        )
+        institution_hidden += int(not result.institution_visible)
+        measured_rank_sum += int(result.measured_rank)
+        resolution_probability = float(result.resolution_probability)
+    elapsed = time.perf_counter() - started
+    return {
+        'cell_id': identifier,
+        **dict(cell),
+        'n': int(n),
+        'true_effective_rank': attribution.effective_rank,
+        'failure_count': failures,
+        'failure_rate': failures / int(n),
+        'rank_visible_failure_count': rank_visible_failures,
+        'rank_visible_failure_rate': rank_visible_failures / int(n),
+        'partition_corruption_count': partition_corruptions,
+        'partition_corruption_rate': partition_corruptions / int(n),
+        'institution_hidden_count': institution_hidden,
+        'institution_hidden_rate': institution_hidden / int(n),
+        'mean_measured_rank': measured_rank_sum / int(n),
+        'resolution_probability': resolution_probability,
+        'absolute_resolution_multiplier': terms.absolute_resolution_multiplier,
+        'defense_input_count': defense_inputs,
+        'pairwise_checks': defense.pairwise_checks,
+        'effective_defense_cost': defense.effective_cost,
+        'effective_attack_cost': attack.cost,
+        'elapsed_seconds': elapsed,
+        'mean_seconds_per_run': elapsed / int(n),
+    }
+
+
+class ProgressLog:
+    """Line-buffered progress record with observed-rate ETA."""
+
+    def __init__(self, path: Path) -> None:
+        self.path = path
+        self.handle = path.open('w', encoding='utf-8', buffering=1)
+
+    def write(self, event: str, **fields: Any) -> None:
+        tokens = [f'timestamp={_utc_now()}', f'event={event}']
+        tokens.extend(f'{key}={value}' for key, value in fields.items())
+        self.handle.write(' '.join(tokens) + '\n')
+        self.handle.flush()
+
+    def close(self) -> None:
+        self.handle.close()
+
+
+def _execute_pass(
+    pass_name: str,
+    cells: Sequence[Mapping[str, Any]],
+    config: Mapping[str, Any],
+    n: int,
+    workers: int,
+    progress: ProgressLog,
+) -> tuple[list[dict[str, Any]], float]:
+    started = time.perf_counter()
+    total = len(cells)
+    progress.write(
+        'pass_start', pass_name=pass_name, cells_total=total,
+        runs_total=total * n,
+    )
+    results: list[dict[str, Any]] = []
+    last_log_time = started
+    last_log_count = 0
+    with concurrent.futures.ProcessPoolExecutor(max_workers=workers) as executor:
+        futures = [executor.submit(run_cell, cell, config, n) for cell in cells]
+        for future in concurrent.futures.as_completed(futures):
+            results.append(future.result())
+            completed = len(results)
+            now = time.perf_counter()
+            if (
+                completed == total
+                or (now - last_log_time >= 3.0 and completed - last_log_count >= 10)
+            ):
+                elapsed = now - started
+                mean_seconds = elapsed / completed
+                remaining = mean_seconds * (total - completed)
+                progress.write(
+                    'status',
+                    pass_name=pass_name,
+                    cells_completed=completed,
+                    cells_total=total,
+                    runs_completed=completed * n,
+                    runs_total=total * n,
+                    percent=f'{100.0 * completed / total:.6f}',
+                    elapsed_seconds=f'{elapsed:.6f}',
+                    mean_seconds_per_cell=f'{mean_seconds:.9f}',
+                    eta_seconds_observed_wall_rate=f'{remaining:.6f}',
+                )
+                last_log_time = now
+                last_log_count = completed
+    elapsed = time.perf_counter() - started
+    results.sort(key=lambda row: row['cell_id'])
+    progress.write(
+        'pass_finish', pass_name=pass_name, cells_completed=total,
+        runs_completed=total * n, elapsed_seconds=f'{elapsed:.6f}',
+    )
+    return results, elapsed
+
+
+def _planned_counts(plan: SweepPlan) -> dict[str, dict[str, int]]:
+    return {
+        name: {'cells': len(plan.cells[name]), 'runs': len(plan.cells[name]) * plan.n_per_cell}
+        for name in PASS_ORDER
+    }
+
+
+def _preflight_committed_inputs(config_path: Path) -> None:
+    for path in (config_path, DESIGN_NOTE):
+        relative = path.relative_to(REPO_ROOT)
+        result = subprocess.run(
+            ['git', 'diff', '--quiet', 'HEAD', '--', str(relative)],
+            cwd=REPO_ROOT,
+        )
+        if result.returncode != 0:
+            raise RuntimeError(f'working tree differs from HEAD: {relative}')
+
+
+def run_characterization(
+    config: Mapping[str, Any], config_path: Path, workers: int
+) -> Path:
+    assert_characterization_authorized(config)
+    _preflight_committed_inputs(config_path)
+    plan = build_sweep_plan(config)
+    run_id = str(config['sweep']['run_id'])
+    prefix = str(config['outputs']['authoritative_run_prefix'])
+    if not run_id.startswith(prefix):
+        raise RuntimeError('authoritative run ID does not carry committed prefix')
+    output_dir = REPO_ROOT / config['outputs']['root'] / run_id
+    if output_dir.exists():
+        raise RuntimeError(f'characterization output already exists: {output_dir}')
+    output_dir.mkdir(parents=True)
+    progress_path = output_dir / 'sweep_progress.log'
+    print(f'Progress log: {progress_path}', flush=True)
+    progress = ProgressLog(progress_path)
+    head = _git_value('rev-parse', 'HEAD')
+    counts = _planned_counts(plan)
+    total_started = time.perf_counter()
+    progress.write(
+        'startup', run_id=run_id, git_head=head, worker_count=workers,
+        main_cells=counts['main_surface']['cells'],
+        main_runs=counts['main_surface']['runs'],
+        ratio_collapse_cells=counts['ratio_collapse_slice']['cells'],
+        ratio_collapse_runs=counts['ratio_collapse_slice']['runs'],
+        complete_linkage_cells=counts['complete_linkage']['cells'],
+        complete_linkage_runs=counts['complete_linkage']['runs'],
+        pass_executing=PASS_ORDER[0], eta_basis='observed_wall_clock_per_cell',
+    )
+    artifacts: list[Path] = []
+    pass_timings: dict[str, float] = {}
+    try:
+        for pass_name in PASS_ORDER:
+            rows, elapsed = _execute_pass(
+                pass_name, plan.cells[pass_name], config, plan.n_per_cell,
+                workers, progress,
+            )
+            pass_timings[pass_name] = elapsed
+            artifact = output_dir / f'{prefix}{pass_name}_results.csv'
+            _write_csv_atomic(artifact, rows)
+            artifacts.append(artifact)
+        total_elapsed = time.perf_counter() - total_started
+        manifest_path = output_dir / f'{prefix}manifest.json'
+        manifest = {
+            'schema': 'sybil-characterization-manifest-v1',
+            'run_id': run_id,
+            'created_utc': _utc_now(),
+            'git_head': head,
+            'worker_count': workers,
+            'python_version': platform.python_version(),
+            'config_path': str(config_path.relative_to(REPO_ROOT)),
+            'config_sha256': _sha256(config_path),
+            'design_note_path': str(DESIGN_NOTE.relative_to(REPO_ROOT)),
+            'design_note_sha256': _sha256(DESIGN_NOTE),
+            'seed_schema': 'sybil-characterization-seed-v1',
+            'n_per_cell': plan.n_per_cell,
+            'planned_counts': counts,
+            'completed_counts': counts,
+            'pass_timings_seconds': pass_timings,
+            'total_cells': sum(item['cells'] for item in counts.values()),
+            'total_runs': sum(item['runs'] for item in counts.values()),
+            'total_elapsed_seconds': total_elapsed,
+            'authoritative_artifacts': [
+                {
+                    'path': str(path.relative_to(REPO_ROOT)),
+                    'sha256': _sha256(path),
+                    'rows': len(plan.cells[path.stem[len(prefix):-len('_results')]]),
+                }
+                for path in artifacts
+            ],
+            'excluded_process_artifacts': [
+                str(progress_path.relative_to(REPO_ROOT))
+            ],
+            'selection_rule': 'read authoritative_artifacts exactly; never glob',
+            'status': 'complete',
+        }
+        _write_json_atomic(manifest_path, manifest)
+        progress.write(
+            'completion', total_elapsed_seconds=f'{total_elapsed:.6f}',
+            total_runs=manifest['total_runs'],
+            output_paths=','.join(str(path) for path in artifacts),
+            manifest_path=manifest_path,
+        )
+        return manifest_path
+    finally:
+        progress.close()
+
+
+def run_selfcheck(config: Mapping[str, Any], config_path: Path) -> Path:
+    """Verify registered shape and blocked authorization with tiny fixtures."""
+
+    plan = build_sweep_plan(config)
+    if config['sweep']['authorization'] != BLOCKED:
+        raise RuntimeError('self-check must run while authorization is blocked')
+    refusal = False
+    refusal_message = ''
+    try:
+        assert_characterization_authorized(config)
+    except RuntimeError as error:
+        refusal = True
+        refusal_message = str(error)
+    if not refusal:
+        raise RuntimeError('full characterization was not refused')
+    tiny_n = int(config['sweep']['selfcheck']['tiny_n'])
+    _require_equal(tiny_n, 1, 'self-check tiny n')
+    fixtures = {
+        pass_name: run_cell(plan.cells[pass_name][0], config, tiny_n)
+        for pass_name in PASS_ORDER
+    }
+    counts = _planned_counts(plan)
+    run_id = str(config['sweep']['selfcheck']['run_id'])
+    prefix = str(config['outputs']['selfcheck_run_prefix'])
+    if not run_id.startswith(prefix):
+        raise RuntimeError('self-check run ID does not carry selfcheck prefix')
+    output_dir = REPO_ROOT / config['outputs']['root'] / run_id
+    if output_dir.exists():
+        raise RuntimeError(f'self-check output already exists: {output_dir}')
+    output_dir.mkdir(parents=True)
+    evidence_path = output_dir / 'selfcheck_evidence.json'
+    manifest_path = output_dir / 'selfcheck_manifest.json'
+    evidence = {
+        'schema': 'sybil-characterization-selfcheck-v1',
+        'created_utc': _utc_now(),
+        'config_path': str(config_path.relative_to(REPO_ROOT)),
+        'authorization_seen': config['sweep']['authorization'],
+        'blocked_authorization_refusal_confirmed': refusal,
+        'refusal_message': refusal_message,
+        'registered_fields_read': {
+            'capability_ratio_range': config['sweep']['capability_ratio_range'],
+            'expanded_ratio_count': len(plan.ratios),
+            'expanded_ratio_first': plan.ratios[0],
+            'expanded_ratio_last': plan.ratios[-1],
+            'validator_set_sizes': config['sweep']['structural_axis']['validator_set_sizes'],
+            'collapse_severities': config['sweep']['structural_axis']['collapse_severities'],
+            'power_sample_size_per_cell': plan.n_per_cell,
+        },
+        'planned_counts': counts,
+        'total_cells': sum(item['cells'] for item in counts.values()),
+        'total_runs_at_registered_n': sum(item['runs'] for item in counts.values()),
+        'tiny_fixture_n': tiny_n,
+        'tiny_fixtures_executed': fixtures,
+        'finding_computed': False,
+        'authoritative_manifest_written': False,
+        'passed': True,
+    }
+    _write_json_atomic(evidence_path, evidence)
+    manifest = {
+        'schema': 'sybil-characterization-selfcheck-manifest-v1',
+        'run_id': run_id,
+        'git_head': _git_value('rev-parse', 'HEAD'),
+        'config_sha256': _sha256(config_path),
+        'non_authoritative': True,
+        'prefix_exclusion': prefix,
+        'artifacts': [
+            {
+                'path': str(evidence_path.relative_to(REPO_ROOT)),
+                'sha256': _sha256(evidence_path),
+            }
+        ],
+        'authoritative_artifacts': [],
+        'passed': True,
+    }
+    _write_json_atomic(manifest_path, manifest)
+    print(json.dumps(evidence['planned_counts'], sort_keys=True))
+    print(f'Self-check evidence: {evidence_path}')
+    print('Blocked authorization refusal: confirmed')
+    return manifest_path
+
+
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--config', type=Path, default=DEFAULT_CONFIG)
+    parser.add_argument('--workers', type=int, default=max(1, os.cpu_count() or 1))
+    parser.add_argument('--self-check', action='store_true')
+    return parser.parse_args(argv)
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
+    if args.workers < 1:
+        raise ValueError('workers must be positive')
+    config_path = args.config.resolve()
+    config = load_config(config_path)
+    if args.self_check:
+        run_selfcheck(config, config_path)
+    else:
+        manifest = run_characterization(config, config_path, args.workers)
+        print(f'Authoritative manifest: {manifest}')
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())
+
+
+==========================================
+FILE: simulation/run_sybil_defense_scaling_smoke.py
+==========================================
+
+"""Run the authorized Sybil scaling instrument-validation smoke.
+
+This entry point cannot run a rank-by-ratio sweep. Characterization settings
+are ignored, so the fixed smoke fixtures remain reproducible after registration.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import json
+import math
+import os
+import platform
+import random
+import statistics
+import subprocess
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Iterable, Mapping
+
+from run_attack_vector_revalidation_v2 import (
+    LIVE_VECTORS,
+    _full_cells,
+    build_tasks,
+    deterministic_seed,
+    run_single,
+)
+from sybil_defense_scaling import (
+    AttackResult,
+    attribute_validators,
+    build_validator_pool,
+    compute_attack_cost,
+    compute_defense_cost,
+    load_config,
+    run_false_cluster_injection,
+    run_measurement_corruption,
+)
+
+
+HERE = Path(__file__).resolve().parent
+DEFAULT_CONFIG = HERE / 'config' / 'sybil_defense_scaling.json'
+
+
+def _utc_now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _git_value(*args: str) -> str:
+    return subprocess.check_output(
+        ['git', *args], text=True, encoding='utf-8'
+    ).strip()
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open('rb') as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b''):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def _json_safe(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {str(key): _json_safe(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_json_safe(item) for item in value]
+    if hasattr(value, 'item'):
+        return value.item()
+    return value
+
+
+def _write_text_atomic(path: Path, content: str) -> None:
+    temporary = path.with_suffix(path.suffix + '.tmp')
+    temporary.write_text(content, encoding='utf-8')
+    os.replace(temporary, path)
+
+
+def _write_json_atomic(path: Path, value: Any) -> None:
+    _write_text_atomic(
+        path, json.dumps(_json_safe(value), indent=2, sort_keys=True) + '\n'
+    )
+
+
+def _write_csv_atomic(path: Path, rows: list[dict[str, Any]]) -> None:
+    fieldnames = sorted({key for row in rows for key in row})
+    temporary = path.with_suffix('.tmp')
+    with temporary.open('w', newline='', encoding='utf-8') as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(_json_safe(rows))
+    os.replace(temporary, path)
+
+
+def _assert_smoke_boundary(config: Mapping[str, Any]) -> None:
+    if config['smoke']['authorization'] != 'instrument_validation_only':
+        raise RuntimeError('smoke authorization is not instrument-validation only')
+    if not isinstance(config['smoke']['frontier_validator_count'], int):
+        raise RuntimeError('smoke frontier validator count must remain scalar')
+
+
+def _validated_path_probe(config: Mapping[str, Any]) -> tuple[list[dict[str, Any]], bool]:
+    vector = str(config['scenario']['existing_vector'])
+    if vector not in LIVE_VECTORS:
+        raise RuntimeError(f'existing scenario is not registered: {vector}')
+    cells = _full_cells(vector)
+    tasks = build_tasks(vector, 'smoke', 1, 'linux')
+    rows: list[dict[str, Any]] = []
+    for task in tasks:
+        row = run_single(task)
+        rows.append(
+            {
+                'record_type': 'validated_path_probe',
+                'vector': vector,
+                'population': task['parameters']['population'],
+                'defense_active': task['parameters']['defense_active'],
+                'seed': task['seed'],
+                'attack_succeeded': bool(row['attack_succeeded']),
+                'defense_fired': bool(row['defense_fired']),
+                'is_v2_mode': bool(row['is_v2_mode']),
+                'elapsed_seconds': float(row['elapsed_seconds']),
+            }
+        )
+    paired_seed = len({row['seed'] for row in rows}) == 1
+    expected_outcomes = (
+        any(row['attack_succeeded'] for row in rows if not row['defense_active'])
+        and all(not row['attack_succeeded'] for row in rows if row['defense_active'])
+    )
+    registered_populations = sorted({cell['population'] for cell in cells})
+    grid_matches = (
+        bool(registered_populations)
+        and all(
+            {cell['defense_active'] for cell in cells if cell['population'] == population}
+            == {False, True}
+            for population in registered_populations
+        )
+    )
+    return rows, paired_seed and expected_outcomes and grid_matches
+
+
+def _cost_records(config: Mapping[str, Any]) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    counts = [int(value) for value in config['smoke']['cost_validator_counts']]
+    exponent_reduction = float(
+        config['defender_capability']['exponent_reduction']
+    )
+    for model in ('pairwise_exact', 'static_baseline'):
+        for count in counts:
+            result = compute_defense_cost(
+                count,
+                config['costs']['defense'],
+                exponent_reduction,
+                model=model,
+            )
+            records.append(
+                {
+                    'record_type': 'cost_scaling',
+                    'defense_cost_model': result.model,
+                    'validator_count': result.validator_count,
+                    'pairwise_checks': result.pairwise_checks,
+                    'raw_defense_cost': result.raw_cost,
+                    'structured_efficiency': result.structured_efficiency,
+                    'effective_defense_cost': result.effective_cost,
+                    'exponent_reduction': result.exponent_reduction,
+                    'effective_exponent': result.effective_exponent,
+                }
+            )
+    return records
+
+
+def _attribution_record(
+    config: Mapping[str, Any],
+    label: str,
+    *,
+    frontier_count: int,
+    institution_count: int,
+    severity: float,
+    lineage_mode: str,
+) -> dict[str, Any]:
+    validators = build_validator_pool(
+        frontier_count,
+        institution_count,
+        config['collapse'],
+        lineage_mode=lineage_mode,
+    )
+    result = attribute_validators(validators, severity, config['attribution'])
+    return {
+        'record_type': 'attribution_validation',
+        'case': label,
+        'frontier_validator_count': frontier_count,
+        'institution_validator_count': institution_count,
+        'validator_count': len(validators),
+        'lineage_mode': lineage_mode,
+        'collapse_severity': severity,
+        'effective_rank': result.effective_rank,
+        'pairwise_checks': result.pairwise_checks,
+        'clusters': json.dumps(result.clusters),
+        'retained_diversity': json.dumps(dict(result.retained_diversity)),
+    }
+
+
+def _attribution_records(config: Mapping[str, Any]) -> list[dict[str, Any]]:
+    count = int(config['smoke']['frontier_validator_count'])
+    minimum = float(config['collapse']['severity_min'])
+    maximum = float(config['collapse']['severity_max'])
+    analytic = config['floor']['analytic_corner']
+    return [
+        _attribution_record(
+            config,
+            'six_distinct_no_collapse',
+            frontier_count=count,
+            institution_count=0,
+            severity=minimum,
+            lineage_mode='distinct',
+        ),
+        _attribution_record(
+            config,
+            'six_correlated_no_collapse',
+            frontier_count=count,
+            institution_count=0,
+            severity=minimum,
+            lineage_mode='shared',
+        ),
+        _attribution_record(
+            config,
+            'six_distinct_maximum_collapse',
+            frontier_count=count,
+            institution_count=0,
+            severity=maximum,
+            lineage_mode='distinct',
+        ),
+        _attribution_record(
+            config,
+            'maximum_collapse_with_institution',
+            frontier_count=count,
+            institution_count=1,
+            severity=maximum,
+            lineage_mode='distinct',
+        ),
+        _attribution_record(
+            config,
+            'analytic_institution_alone',
+            frontier_count=int(analytic['frontier_validator_count']),
+            institution_count=int(analytic['institution_validator_count']),
+            severity=maximum,
+            lineage_mode='distinct',
+        ),
+    ]
+
+
+def _run_arm_scenario(
+    config: Mapping[str, Any],
+    *,
+    scenario_label: str,
+    arm_name: str,
+    frontier_count: int,
+    institution_count: int,
+    collapse_severity: float,
+    capability_ratio: float,
+    replicates: int,
+) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    capability = config['defender_capability']
+    arm_a = config['attack_arms']['false_cluster_injection']
+    resolution_power = (
+        float(capability['base_resolution'])
+        * float(capability['resolution_improvement'])
+    )
+    minimum_rank = int(config['poles']['deployment_minimum_rank'])
+
+    for replicate in range(replicates):
+        seed_parameters = {
+            'arm': arm_name,
+            'scenario_label': scenario_label,
+            'frontier_count': frontier_count,
+            'institution_count': institution_count,
+            'collapse_severity': collapse_severity,
+            'capability_ratio_fixture': capability_ratio,
+        }
+        seed = deterministic_seed(
+            str(config['scenario']['existing_vector']),
+            seed_parameters,
+            replicate,
+        )
+        rng = random.Random(seed)
+        started = time.perf_counter_ns()
+        validators = build_validator_pool(
+            frontier_count,
+            institution_count,
+            config['collapse'],
+            lineage_mode='distinct',
+        )
+        attribution = attribute_validators(
+            validators, collapse_severity, config['attribution']
+        )
+        forged_count = int(arm_a['forged_cluster_count'])
+        defense_input_count = len(validators)
+        if (
+            arm_name == 'false_cluster_injection'
+            and config['costs']['defense']['input_basis'] == 'apparent_inputs'
+        ):
+            defense_input_count += forged_count
+        defense_cost = compute_defense_cost(
+            defense_input_count,
+            config['costs']['defense'],
+            float(capability['exponent_reduction']),
+        )
+        attack_cost = compute_attack_cost(
+            attribution.effective_rank, config['costs']['attack']
+        )
+
+        result: AttackResult
+        if arm_name == 'false_cluster_injection':
+            result = run_false_cluster_injection(
+                attribution,
+                validators,
+                forged_cluster_count=forged_count,
+                capability_ratio=capability_ratio,
+                resolution_power=resolution_power,
+                defense_cost=defense_cost.effective_cost,
+                attack_cost=attack_cost.cost,
+                minimum_consensus_rank=minimum_rank,
+                rng=rng,
+            )
+        elif arm_name == 'measurement_corruption':
+            result = run_measurement_corruption(
+                validators,
+                attribution,
+                collapse_severity=collapse_severity,
+                attribution_config=config['attribution'],
+                arm_config=config['attack_arms']['measurement_corruption'],
+                capability_ratio=capability_ratio,
+                resolution_power=resolution_power,
+                defense_cost=defense_cost.effective_cost,
+                attack_cost=attack_cost.cost,
+                minimum_consensus_rank=minimum_rank,
+                rng=rng,
+            )
+        else:
+            raise ValueError(f'unsupported arm: {arm_name}')
+        elapsed_seconds = (time.perf_counter_ns() - started) / 1_000_000_000
+
+        record = {
+            'record_type': 'arm_run',
+            'scenario_label': scenario_label,
+            'arm': result.arm,
+            'replicate': replicate,
+            'seed': seed,
+            'frontier_validator_count': frontier_count,
+            'institution_validator_count': institution_count,
+            'validator_count': len(validators),
+            'defense_input_count': defense_input_count,
+            'collapse_severity': collapse_severity,
+            'capability_ratio_fixture': capability_ratio,
+            'true_rank': result.true_rank,
+            'measured_rank': result.measured_rank,
+            'rank_error': result.measured_rank - result.true_rank,
+            'defense_failed': result.defense_failed,
+            'institution_visible': result.institution_visible,
+            'resolution_probability': result.resolution_probability,
+            'defense_cost_model': defense_cost.model,
+            'pairwise_checks': defense_cost.pairwise_checks,
+            'raw_defense_cost': defense_cost.raw_cost,
+            'structured_efficiency': defense_cost.structured_efficiency,
+            'effective_defense_cost': defense_cost.effective_cost,
+            'exponent_reduction': defense_cost.exponent_reduction,
+            'resolution_improvement': capability['resolution_improvement'],
+            'attack_cost_model': attack_cost.model,
+            'attack_cost_exponent': attack_cost.exponent,
+            'attack_cost': attack_cost.cost,
+            'elapsed_seconds': elapsed_seconds,
+        }
+        record.update(result.details)
+        records.append(record)
+    return records
+
+
+def _arm_records(config: Mapping[str, Any]) -> list[dict[str, Any]]:
+    smoke = config['smoke']
+    maximum = float(config['collapse']['severity_max'])
+    nominal_ratio = float(smoke['nominal_capability_ratio_fixture'])
+    high_ratio = float(smoke['far_above_capability_ratio_fixture'])
+    nominal_replicates = int(smoke['nominal_replicates_per_arm'])
+    control_replicates = int(smoke['positive_control_replicates_per_arm'])
+    primary = config['floor']['primary_composition']
+    no_institution = config['floor']['no_institution_control']
+    records: list[dict[str, Any]] = []
+
+    for arm_name in ('false_cluster_injection', 'measurement_corruption'):
+        records.extend(
+            _run_arm_scenario(
+                config,
+                scenario_label='nominal_maximum_collapse_with_institution',
+                arm_name=arm_name,
+                frontier_count=int(primary['frontier_validator_count']),
+                institution_count=int(primary['institution_validator_count']),
+                collapse_severity=maximum,
+                capability_ratio=nominal_ratio,
+                replicates=nominal_replicates,
+            )
+        )
+        records.extend(
+            _run_arm_scenario(
+                config,
+                scenario_label='positive_control_high_attacker',
+                arm_name=arm_name,
+                frontier_count=int(primary['frontier_validator_count']),
+                institution_count=int(primary['institution_validator_count']),
+                collapse_severity=maximum,
+                capability_ratio=high_ratio,
+                replicates=control_replicates,
+            )
+        )
+        records.extend(
+            _run_arm_scenario(
+                config,
+                scenario_label='positive_control_rank_one_no_institution',
+                arm_name=arm_name,
+                frontier_count=int(no_institution['frontier_validator_count']),
+                institution_count=int(no_institution['institution_validator_count']),
+                collapse_severity=maximum,
+                capability_ratio=nominal_ratio,
+                replicates=control_replicates,
+            )
+        )
+    return records
+
+
+def _sample_variance(values: Iterable[float]) -> float:
+    sequence = [float(value) for value in values]
+    return statistics.variance(sequence) if len(sequence) > 1 else 0.0
+
+
+def _variance_estimates(arm_rows: list[dict[str, Any]]) -> dict[str, Any]:
+    estimates: dict[str, Any] = {}
+    nominal = [
+        row for row in arm_rows
+        if row['scenario_label'] == 'nominal_maximum_collapse_with_institution'
+    ]
+    for arm in ('false_cluster_injection', 'measurement_corruption'):
+        rows = [row for row in nominal if row['arm'] == arm]
+        failures = [int(row['defense_failed']) for row in rows]
+        rank_errors = [float(row['rank_error']) for row in rows]
+        estimates[arm] = {
+            'n': len(rows),
+            'defense_failure_mean': statistics.mean(failures),
+            'defense_failure_sample_variance': _sample_variance(failures),
+            'rank_error_mean': statistics.mean(rank_errors),
+            'rank_error_sample_variance': _sample_variance(rank_errors),
+        }
+    return estimates
+
+
+def _timing_projection(
+    config: Mapping[str, Any], arm_rows: list[dict[str, Any]]
+) -> dict[str, Any]:
+    timings = sorted(float(row['elapsed_seconds']) for row in arm_rows)
+    p95_index = max(0, math.ceil(0.95 * len(timings)) - 1)
+    p95 = timings[p95_index]
+    candidate = config['sweep']['candidate_resolution']
+    cell_count = math.prod(int(value) for value in candidate.values())
+    seconds_per_replicate_layer = p95 * cell_count
+    return {
+        'timed_run_count': len(timings),
+        'minimum_seconds': min(timings),
+        'mean_seconds': statistics.mean(timings),
+        'median_seconds': statistics.median(timings),
+        'p95_seconds': p95,
+        'maximum_seconds': max(timings),
+        'candidate_resolution': dict(candidate),
+        'candidate_cell_count': cell_count,
+        'projected_seconds_per_replicate_layer': seconds_per_replicate_layer,
+        'projected_core_hours_per_replicate_layer': (
+            seconds_per_replicate_layer / 3600.0
+        ),
+        'projection_formula': (
+            f'{seconds_per_replicate_layer:.9f} seconds times the future '
+            'operator-set powered replicates per cell'
+        ),
+    }
+
+
+def _gate_results(
+    config: Mapping[str, Any],
+    cost_rows: list[dict[str, Any]],
+    attribution_rows: list[dict[str, Any]],
+    arm_rows: list[dict[str, Any]],
+    validated_path_passed: bool,
+) -> dict[str, Any]:
+    pairwise = [
+        row for row in cost_rows if row['defense_cost_model'] == 'pairwise_exact'
+    ]
+    static = [
+        row for row in cost_rows if row['defense_cost_model'] == 'static_baseline'
+    ]
+    expected_checks = [
+        row['validator_count'] * (row['validator_count'] - 1) // 2
+        for row in pairwise
+    ]
+    pairwise_coefficient = float(
+        config['costs']['defense']['models']['pairwise_exact'][
+            'per_comparison_cost'
+        ]
+    )
+    expected_costs = [
+        pairwise_coefficient * checks for checks in expected_checks
+    ]
+    gate_a = (
+        [row['pairwise_checks'] for row in pairwise] == expected_checks
+        and [row['effective_defense_cost'] for row in pairwise] == expected_costs
+        and len({row['effective_defense_cost'] for row in static}) == 1
+    )
+
+    ranks = {row['case']: row['effective_rank'] for row in attribution_rows}
+    frontier_count = int(config['smoke']['frontier_validator_count'])
+    floor_rank = int(config['poles']['deployment_minimum_rank'])
+    analytic_rank = int(config['poles']['analytic_floor_rank'])
+    gate_b = (
+        ranks['six_distinct_no_collapse'] == frontier_count
+        and ranks['six_correlated_no_collapse'] == 1
+        and ranks['six_distinct_maximum_collapse'] == 1
+        and ranks['maximum_collapse_with_institution'] == floor_rank
+        and ranks['analytic_institution_alone'] == analytic_rank
+    )
+
+    nominal_a = [
+        row for row in arm_rows
+        if row['scenario_label'] == 'nominal_maximum_collapse_with_institution'
+        and row['arm'] == 'false_cluster_injection'
+    ]
+    nominal_b = [
+        row for row in arm_rows
+        if row['scenario_label'] == 'nominal_maximum_collapse_with_institution'
+        and row['arm'] == 'measurement_corruption'
+    ]
+    gate_c = (
+        all(row['partition_preserved'] for row in nominal_a)
+        and any(row['false_clusters_surviving'] > 0 for row in nominal_a)
+        and all(row['corrupted_correlation_reads'] == 0 for row in nominal_a)
+        and all(row['false_clusters_injected'] == 0 for row in nominal_b)
+        and any(row['corrupted_correlation_reads'] > 0 for row in nominal_b)
+        and any(row['measured_rank'] != row['true_rank'] for row in nominal_b)
+    )
+    gate_d = (
+        all(row['true_rank'] == floor_rank for row in nominal_a + nominal_b)
+        and all(row['institution_visible'] for row in nominal_a)
+        and any(row['institution_merged'] for row in nominal_b)
+    )
+
+    high = [
+        row for row in arm_rows
+        if row['scenario_label'] == 'positive_control_high_attacker'
+    ]
+    rank_one = [
+        row for row in arm_rows
+        if row['scenario_label'] == 'positive_control_rank_one_no_institution'
+    ]
+    gate_e = (
+        {row['arm'] for row in high}
+        == {'false_cluster_injection', 'measurement_corruption'}
+        and all(row['defense_failed'] for row in high)
+        and all(row['true_rank'] == 1 for row in rank_one)
+        and all(row['defense_failed'] for row in rank_one)
+    )
+
+    gates = {
+        'a_cost_scaling': gate_a,
+        'b_effective_rank': gate_b,
+        'c_distinct_arm_effects': gate_c,
+        'd_institution_floor': gate_d,
+        'e_positive_controls': gate_e,
+        'validated_path_probe': validated_path_passed,
+    }
+    gates['overall'] = all(gates.values())
+    return gates
+
+
+def _evidence_summary(
+    gates: Mapping[str, Any],
+    cost_rows: list[dict[str, Any]],
+    attribution_rows: list[dict[str, Any]],
+    arm_rows: list[dict[str, Any]],
+    variances: Mapping[str, Any],
+    timing: Mapping[str, Any],
+) -> dict[str, Any]:
+    nominal_b = [
+        row for row in arm_rows
+        if row['scenario_label'] == 'nominal_maximum_collapse_with_institution'
+        and row['arm'] == 'measurement_corruption'
+    ]
+    controls: dict[str, Any] = {}
+    for label in (
+        'positive_control_high_attacker',
+        'positive_control_rank_one_no_institution',
+    ):
+        selected = [row for row in arm_rows if row['scenario_label'] == label]
+        controls[label] = {
+            arm: {
+                'n': sum(row['arm'] == arm for row in selected),
+                'failures': sum(
+                    row['arm'] == arm and row['defense_failed'] for row in selected
+                ),
+            }
+            for arm in ('false_cluster_injection', 'measurement_corruption')
+        }
+    return {
+        'gate_results': dict(gates),
+        'cost_scaling': [
+            {
+                'validator_count': row['validator_count'],
+                'pairwise_checks': row['pairwise_checks'],
+                'effective_defense_cost': row['effective_defense_cost'],
+            }
+            for row in cost_rows
+            if row['defense_cost_model'] == 'pairwise_exact'
+        ],
+        'static_baseline_costs': [
+            row['effective_defense_cost'] for row in cost_rows
+            if row['defense_cost_model'] == 'static_baseline'
+        ],
+        'attribution_ranks': {
+            row['case']: row['effective_rank'] for row in attribution_rows
+        },
+        'arm_b_floor_observation': {
+            'n': len(nominal_b),
+            'institution_merged_count': sum(
+                row['institution_merged'] for row in nominal_b
+            ),
+            'measured_rank_below_two_count': sum(
+                row['measured_rank'] < 2 for row in nominal_b
+            ),
+            'measured_rank_overcount_count': sum(
+                row['measured_rank'] > row['true_rank'] for row in nominal_b
+            ),
+            'minimum_measured_rank': min(row['measured_rank'] for row in nominal_b),
+            'maximum_measured_rank': max(row['measured_rank'] for row in nominal_b),
+        },
+        'positive_controls': controls,
+        'variance_estimates': dict(variances),
+        'timing_projection': dict(timing),
+    }
+
+
+def _smoke_report(
+    summary: Mapping[str, Any],
+    run_id: str,
+    output_dir: Path,
+) -> str:
+    gate = summary['gate_results']
+    costs = summary['cost_scaling']
+    ranks = summary['attribution_ranks']
+    floor = summary['arm_b_floor_observation']
+    controls = summary['positive_controls']
+    variances = summary['variance_estimates']
+    timing = summary['timing_projection']
+    lines = [
+        '# Sybil defense scaling smoke report',
+        '',
+        f'Go/no-go: **{"GO" if gate["overall"] else "NO-GO"} for operator review of the instrument.**',
+        '',
+        'This was an instrument-validation and variance-estimation smoke only. '
+        'It did not run a rank-by-ratio grid, set a capability-ratio range, '
+        'calculate power, or read a crossover.',
+        '',
+        '## Logged smoke evidence',
+        '',
+        f'- Gate a, cost scaling: {"PASS" if gate["a_cost_scaling"] else "FAIL"}. '
+        f'Exact pair counts and costs were {[(row["validator_count"], row["pairwise_checks"], row["effective_defense_cost"]) for row in costs]}.',
+        f'- Gate b, effective rank: {"PASS" if gate["b_effective_rank"] else "FAIL"}. '
+        f'Observed ranks were {ranks}.',
+        f'- Gate c, distinct arm effects: {"PASS" if gate["c_distinct_arm_effects"] else "FAIL"}. '
+        'Arm A changed apparent rank through surviving forged clusters while '
+        'preserving the genuine partition. Arm B changed the similarity matrix '
+        'without injecting clusters.',
+        f'- Gate d, institutional floor: {"PASS" if gate["d_institution_floor"] else "FAIL"}. '
+        'Arm A kept the true maximum-collapse rank at two and preserved the '
+        f'institution in every run. Arm B merged the institution in '
+        f'{floor["institution_merged_count"]}/{floor["n"]} runs, produced measured '
+        f'rank below two in {floor["measured_rank_below_two_count"]}/{floor["n"]}, '
+        f'and overcounted rank in {floor["measured_rank_overcount_count"]}/{floor["n"]}.',
+        f'- Gate e, positive controls: {"PASS" if gate["e_positive_controls"] else "FAIL"}. '
+        f'High-attacker failures were {controls["positive_control_high_attacker"]}; '
+        f'rank-one failures were {controls["positive_control_rank_one_no_institution"]}.',
+        f'- Existing validated path probe: {"PASS" if gate["validated_path_probe"] else "FAIL"}.',
+        '',
+        '## Variance estimate for the operator power calculation',
+        '',
+        f'- Arm A: {variances["false_cluster_injection"]}.',
+        f'- Arm B: {variances["measurement_corruption"]}.',
+        '',
+        'These are smoke fixture variances, not crossover readings.',
+        '',
+        '## Timing and candidate projection',
+        '',
+        f'- Instrumented runs: {timing["timed_run_count"]}.',
+        f'- Seconds per run, mean/median/p95/max: '
+        f'{timing["mean_seconds"]:.9f} / {timing["median_seconds"]:.9f} / '
+        f'{timing["p95_seconds"]:.9f} / {timing["maximum_seconds"]:.9f}.',
+        f'- Candidate resolution: {timing["candidate_resolution"]}, '
+        f'{timing["candidate_cell_count"]} cells per replicate layer.',
+        f'- Projected cost: {timing["projection_formula"]}, equal to '
+        f'{timing["projected_core_hours_per_replicate_layer"]:.9f} core-hours '
+        'per replicate layer.',
+        '',
+        '## Output identity',
+        '',
+        f'- Run ID: `{run_id}`.',
+        f'- Output directory: `{output_dir}`.',
+        '- Every artifact and directory begins with or sits below `smoke_`. '
+        'The authoritative convention uses the exact `full_5ac6a2e_` prefix '
+        'and an explicit manifest, so these files cannot enter that selection.',
+        '',
+        'STOP: awaiting power calculation, capability-ratio range, and pre-registration commit before any full sweep.',
+        '',
+    ]
+    return '\n'.join(lines)
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--config', type=Path, default=DEFAULT_CONFIG)
+    parser.add_argument('--output-root', type=Path)
+    parser.add_argument('--run-id')
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    config = load_config(args.config)
+    _assert_smoke_boundary(config)
+    run_id = args.run_id or str(config['smoke']['run_id'])
+    smoke_prefix = str(config['outputs']['smoke_run_prefix'])
+    if not run_id.startswith(smoke_prefix):
+        raise SystemExit(f'smoke run ID must begin with {smoke_prefix}')
+    output_root = args.output_root or Path(config['outputs']['root'])
+    output_dir = output_root / run_id
+    output_dir.mkdir(parents=True, exist_ok=False)
+    started_at = _utc_now()
+
+    validated_rows, validated_path_passed = _validated_path_probe(config)
+    cost_rows = _cost_records(config)
+    attribution_rows = _attribution_records(config)
+    arm_rows = _arm_records(config)
+    all_rows = validated_rows + cost_rows + attribution_rows + arm_rows
+    variances = _variance_estimates(arm_rows)
+    timing = _timing_projection(config, arm_rows)
+    gates = _gate_results(
+        config,
+        cost_rows,
+        attribution_rows,
+        arm_rows,
+        validated_path_passed,
+    )
+    summary = _evidence_summary(
+        gates, cost_rows, attribution_rows, arm_rows, variances, timing
+    )
+
+    results_path = output_dir / 'smoke_results.csv'
+    evidence_path = output_dir / 'smoke_evidence.json'
+    report_path = output_dir / 'smoke_report.md'
+    log_path = output_dir / 'smoke_execution.log'
+    _write_csv_atomic(results_path, all_rows)
+    _write_json_atomic(evidence_path, summary)
+    _write_text_atomic(report_path, _smoke_report(summary, run_id, output_dir))
+    log_lines = [
+        f'{name}: {"PASS" if passed else "FAIL"}'
+        for name, passed in gates.items()
+    ]
+    log_lines.extend(
+        [
+            f'row_count: {len(all_rows)}',
+            f'started_at_utc: {started_at}',
+            f'ended_at_utc: {_utc_now()}',
+            'full_sweep_executed: false',
+            'crossover_computed: false',
+        ]
+    )
+    _write_text_atomic(log_path, '\n'.join(log_lines) + '\n')
+
+    manifest_path = output_dir / 'smoke_manifest.json'
+    manifest = {
+        'schema_version': 'sybil-scaling-smoke-manifest-v1',
+        'run_id': run_id,
+        'mode': 'instrument_validation_only',
+        'started_at_utc': started_at,
+        'ended_at_utc': _utc_now(),
+        'branch': _git_value('branch', '--show-current'),
+        'head_commit': _git_value('rev-parse', 'HEAD'),
+        'working_tree_status': _git_value('status', '--short'),
+        'python': sys.version,
+        'platform': platform.platform(),
+        'cpu_count': os.cpu_count(),
+        'config_path': str(args.config),
+        'config_sha256': _sha256(args.config),
+        'row_count': len(all_rows),
+        'gate_results': gates,
+        'full_sweep_executed': False,
+        'crossover_computed': False,
+        'capability_ratio_range': None,
+        'power_sample_size_per_cell': None,
+        'artifacts': {
+            path.name: {'sha256': _sha256(path), 'bytes': path.stat().st_size}
+            for path in (results_path, evidence_path, report_path, log_path)
+        },
+    }
+    _write_json_atomic(manifest_path, manifest)
+
+    print(report_path)
+    print(manifest_path)
+    print(f'go_no_go={"GO" if gates["overall"] else "NO-GO"}')
+    return 0 if gates['overall'] else 1
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
+
+
+==========================================
+FILE: simulation/run_sybil_two_dial_smoke.py
+==========================================
+
+"""Run the authorized two-dial Sybil capability smoke.
+
+This runner evaluates only the five registered validation gates. It cannot
+run the characterization surface or the actual ratio-collapse slice.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import itertools
+import json
+import math
+import os
+import platform
+import random
+import statistics
+import subprocess
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+from statistics import NormalDist
+from typing import Any, Iterable, Mapping
+
+from sybil_defense_scaling import (
+    AttackResult,
+    attribute_validators,
+    build_validator_pool,
+    compute_attack_cost,
+    compute_defense_cost,
+    derive_two_dial_capability_terms,
+    load_config,
+    resolution_probability,
+    run_false_cluster_injection,
+)
+
+
+HERE = Path(__file__).resolve().parent
+DEFAULT_CONFIG = HERE / 'config' / 'sybil_defense_scaling.json'
+
+
+def _utc_now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _git_value(*args: str) -> str:
+    return subprocess.check_output(
+        ['git', *args], text=True, encoding='utf-8'
+    ).strip()
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open('rb') as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b''):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def _deterministic_seed(
+    gate: str, parameters: Mapping[str, Any], replicate: int
+) -> int:
+    payload = json.dumps(
+        {
+            'schema': 'sybil-two-dial-smoke-seed-v1',
+            'gate': gate,
+            'parameters': dict(parameters),
+            'replicate': int(replicate),
+        },
+        sort_keys=True,
+        separators=(',', ':'),
+    )
+    digest = hashlib.sha256(payload.encode('utf-8')).digest()
+    return int.from_bytes(digest[:8], 'big') % (2**31 - 1)
+
+
+def _json_safe(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {str(key): _json_safe(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_json_safe(item) for item in value]
+    if hasattr(value, 'item'):
+        return value.item()
+    return value
+
+
+def _write_text_atomic(path: Path, content: str) -> None:
+    temporary = path.with_suffix(path.suffix + '.tmp')
+    temporary.write_text(content, encoding='utf-8')
+    os.replace(temporary, path)
+
+
+def _write_json_atomic(path: Path, value: Any) -> None:
+    _write_text_atomic(
+        path, json.dumps(_json_safe(value), indent=2, sort_keys=True) + '\n'
+    )
+
+
+def _write_csv_atomic(path: Path, rows: list[dict[str, Any]]) -> None:
+    fieldnames = sorted({key for row in rows for key in row})
+    temporary = path.with_suffix(path.suffix + '.tmp')
+    with temporary.open('w', newline='', encoding='utf-8') as handle:
+        writer = csv.DictWriter(
+            handle, fieldnames=fieldnames, lineterminator='\n'
+        )
+        writer.writeheader()
+        writer.writerows(_json_safe(rows))
+    os.replace(temporary, path)
+
+
+def _assert_smoke_boundary(config: Mapping[str, Any]) -> None:
+    smoke = config['two_dial_smoke']
+    if smoke['authorization'] != 'instrument_validation_only':
+        raise RuntimeError('two-dial smoke authorization is invalid')
+    if [float(value) for value in smoke['parity_levels']] != [0.316, 1.0, 3.16]:
+        raise RuntimeError('two-dial parity levels do not match the ruling')
+    if [int(value) for value in smoke['validator_set_sizes']] != [
+        2, 4, 8, 16, 32, 64
+    ]:
+        raise RuntimeError('two-dial rank ladder does not match the ruling')
+    if int(smoke['replicates_per_cell']) != 200:
+        raise RuntimeError('two-dial curve smoke must use n=200')
+    if float(smoke['failure_rate_mei']) != 0.15:
+        raise RuntimeError('two-dial curve smoke MEI must be 0.15')
+    power = smoke['power']
+    if (
+        float(power['two_sided_alpha']) != 0.05
+        or float(power['target_power']) != 0.8
+        or float(power['worst_case_probability']) != 0.5
+    ):
+        raise RuntimeError('two-dial power settings do not match the ruling')
+    term = config['two_dial_capability']['absolute_resolution_term']
+    if term['enabled'] is not False:
+        raise RuntimeError('absolute-level term must default OFF')
+    if str(term['form']) != 'defender_power_law_resolution':
+        raise RuntimeError('unexpected absolute-level term form')
+
+
+def _power_summary(smoke: Mapping[str, Any]) -> dict[str, Any]:
+    alpha = float(smoke['power']['two_sided_alpha'])
+    target_power = float(smoke['power']['target_power'])
+    probability = float(smoke['power']['worst_case_probability'])
+    mei = float(smoke['failure_rate_mei'])
+    configured_n = int(smoke['replicates_per_cell'])
+    normal = NormalDist()
+    z_alpha = normal.inv_cdf(1.0 - alpha / 2.0)
+    z_power = normal.inv_cdf(target_power)
+    variance_sum = 2.0 * probability * (1.0 - probability)
+    coefficient = variance_sum * (z_alpha + z_power) ** 2
+    raw_required_n = coefficient / mei**2
+    required_n = math.ceil(raw_required_n)
+    noncentrality = mei / math.sqrt(variance_sum / configured_n)
+    achieved_power = (
+        normal.cdf(-z_alpha - noncentrality)
+        + 1.0
+        - normal.cdf(z_alpha - noncentrality)
+    )
+    return {
+        'two_sided_alpha': alpha,
+        'target_power': target_power,
+        'worst_case_probability': probability,
+        'mei': mei,
+        'z_alpha': z_alpha,
+        'z_power': z_power,
+        'coefficient': coefficient,
+        'raw_required_n_per_group': raw_required_n,
+        'required_n_per_group': required_n,
+        'configured_n_per_cell': configured_n,
+        'n_margin': configured_n - required_n,
+        'normal_approximation_power_at_configured_n': achieved_power,
+    }
+
+
+def _base_resolution_power(config: Mapping[str, Any]) -> float:
+    capability = config['defender_capability']
+    return float(capability['base_resolution']) * float(
+        capability['resolution_improvement']
+    )
+
+
+def _fixture(
+    config: Mapping[str, Any], size: int
+) -> tuple[Any, Any, Any, Any, float, int]:
+    validators = build_validator_pool(
+        int(size) - 1,
+        1,
+        config['collapse'],
+        lineage_mode='distinct',
+    )
+    severity = float(config['two_dial_smoke']['collapse_severity'])
+    attribution = attribute_validators(validators, severity, config['attribution'])
+    forged_count = int(
+        config['attack_arms']['false_cluster_injection']['forged_cluster_count']
+    )
+    defense_inputs = len(validators)
+    if config['costs']['defense']['input_basis'] == 'apparent_inputs':
+        defense_inputs += forged_count
+    defense = compute_defense_cost(
+        defense_inputs,
+        config['costs']['defense'],
+        float(config['defender_capability']['exponent_reduction']),
+        model='pairwise_exact',
+    )
+    attack = compute_attack_cost(
+        attribution.effective_rank,
+        config['costs']['attack'],
+        model='linear',
+    )
+    return (
+        validators,
+        attribution,
+        defense,
+        attack,
+        _base_resolution_power(config),
+        forged_count,
+    )
+
+
+def _expected_curve(
+    config: Mapping[str, Any], *, absolute_term_enabled: bool
+) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    smoke = config['two_dial_smoke']
+    minimum_rank = int(config['poles']['deployment_minimum_rank'])
+    for size in smoke['validator_set_sizes']:
+        (
+            _,
+            attribution,
+            defense,
+            attack,
+            base_resolution,
+            forged_count,
+        ) = _fixture(config, int(size))
+        for level in smoke['parity_levels']:
+            terms = derive_two_dial_capability_terms(
+                attacker_capability=float(level),
+                defender_capability=float(level),
+                base_resolution_power=base_resolution,
+                two_dial_config=config['two_dial_capability'],
+                absolute_term_enabled=absolute_term_enabled,
+            )
+            probability = resolution_probability(
+                true_rank=attribution.effective_rank,
+                minimum_consensus_rank=minimum_rank,
+                capability_ratio=terms.capability_ratio,
+                resolution_power=terms.effective_resolution_power,
+                defense_cost=defense.effective_cost,
+                attack_cost=attack.cost,
+            )
+            rows.append(
+                {
+                    'validator_set_size': int(size),
+                    'effective_rank': attribution.effective_rank,
+                    'parity_level': float(level),
+                    'resolution_probability': probability,
+                    'failure_rate': 1.0 - probability**forged_count,
+                    'absolute_resolution_multiplier': (
+                        terms.absolute_resolution_multiplier
+                    ),
+                }
+            )
+    return rows
+
+
+def _curve_separations(rows: Iterable[Mapping[str, Any]]) -> list[dict[str, Any]]:
+    grouped: dict[int, list[Mapping[str, Any]]] = {}
+    for row in rows:
+        grouped.setdefault(int(row['validator_set_size']), []).append(row)
+    result: list[dict[str, Any]] = []
+    for size in sorted(grouped):
+        selected = sorted(grouped[size], key=lambda row: row['parity_level'])
+        rates = [float(row['failure_rate']) for row in selected]
+        result.append(
+            {
+                'validator_set_size': size,
+                'effective_rank': int(selected[0]['effective_rank']),
+                'rates_by_level': {
+                    str(row['parity_level']): float(row['failure_rate'])
+                    for row in selected
+                },
+                'maximum_cross_level_difference': max(rates) - min(rates),
+            }
+        )
+    return result
+
+
+def _run_curve_gate(
+    config: Mapping[str, Any], *, gate: str, absolute_term_enabled: bool
+) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    smoke = config['two_dial_smoke']
+    replicates = int(smoke['replicates_per_cell'])
+    minimum_rank = int(config['poles']['deployment_minimum_rank'])
+    severity = float(smoke['collapse_severity'])
+    for size in smoke['validator_set_sizes']:
+        (
+            validators,
+            attribution,
+            defense,
+            attack,
+            base_resolution,
+            forged_count,
+        ) = _fixture(config, int(size))
+        for level in smoke['parity_levels']:
+            terms = derive_two_dial_capability_terms(
+                attacker_capability=float(level),
+                defender_capability=float(level),
+                base_resolution_power=base_resolution,
+                two_dial_config=config['two_dial_capability'],
+                absolute_term_enabled=absolute_term_enabled,
+            )
+            for replicate in range(replicates):
+                seed_parameters = {
+                    'size': int(size),
+                    'parity_level': float(level),
+                    'absolute_term_enabled': absolute_term_enabled,
+                }
+                seed = _deterministic_seed(gate, seed_parameters, replicate)
+                started = time.perf_counter_ns()
+                result = run_false_cluster_injection(
+                    attribution,
+                    validators,
+                    forged_cluster_count=forged_count,
+                    capability_ratio=terms.capability_ratio,
+                    resolution_power=terms.effective_resolution_power,
+                    defense_cost=defense.effective_cost,
+                    attack_cost=attack.cost,
+                    minimum_consensus_rank=minimum_rank,
+                    rng=random.Random(seed),
+                )
+                elapsed = (time.perf_counter_ns() - started) / 1_000_000_000
+                rows.append(
+                    {
+                        'record_type': 'curve_run',
+                        'gate': gate,
+                        'replicate': replicate,
+                        'seed': seed,
+                        'validator_set_size': int(size),
+                        'frontier_validator_count': int(size) - 1,
+                        'institution_validator_count': 1,
+                        'effective_rank': attribution.effective_rank,
+                        'collapse_severity': severity,
+                        'parity_level': float(level),
+                        'attacker_capability': terms.attacker_capability,
+                        'defender_capability': terms.defender_capability,
+                        'derived_capability_ratio': terms.capability_ratio,
+                        'absolute_term_enabled': terms.absolute_term_enabled,
+                        'absolute_term_strength': terms.absolute_term_strength,
+                        'absolute_resolution_multiplier': (
+                            terms.absolute_resolution_multiplier
+                        ),
+                        'resolution_probability': result.resolution_probability,
+                        'defense_failed': result.defense_failed,
+                        'measured_rank': result.measured_rank,
+                        'defense_cost_model': defense.model,
+                        'attack_cost_model': attack.model,
+                        'merge_rule': config['attribution']['merge_rule'],
+                        'elapsed_seconds': elapsed,
+                    }
+                )
+    return rows
+
+
+def _sample_variance(values: Iterable[float]) -> float:
+    sequence = [float(value) for value in values]
+    return statistics.variance(sequence) if len(sequence) > 1 else 0.0
+
+
+def _summarize_curve_gate(
+    rows: list[dict[str, Any]], smoke: Mapping[str, Any]
+) -> dict[str, Any]:
+    grouped: dict[tuple[int, float], list[dict[str, Any]]] = {}
+    for row in rows:
+        key = (int(row['validator_set_size']), float(row['parity_level']))
+        grouped.setdefault(key, []).append(row)
+    cells: list[dict[str, Any]] = []
+    for (size, level), selected in sorted(grouped.items()):
+        failures = [int(row['defense_failed']) for row in selected]
+        cells.append(
+            {
+                'validator_set_size': size,
+                'effective_rank': int(selected[0]['effective_rank']),
+                'parity_level': level,
+                'n': len(selected),
+                'failure_rate': statistics.mean(failures),
+                'failure_sample_variance': _sample_variance(failures),
+                'resolution_probability': float(
+                    selected[0]['resolution_probability']
+                ),
+            }
+        )
+    cell_by_key = {
+        (cell['validator_set_size'], cell['parity_level']): cell for cell in cells
+    }
+    comparisons: list[dict[str, Any]] = []
+    levels = [float(value) for value in smoke['parity_levels']]
+    for size in smoke['validator_set_sizes']:
+        for low, high in itertools.combinations(levels, 2):
+            left = cell_by_key[(int(size), low)]
+            right = cell_by_key[(int(size), high)]
+            comparisons.append(
+                {
+                    'validator_set_size': int(size),
+                    'level_a': low,
+                    'level_b': high,
+                    'failure_rate_a': left['failure_rate'],
+                    'failure_rate_b': right['failure_rate'],
+                    'absolute_difference': abs(
+                        left['failure_rate'] - right['failure_rate']
+                    ),
+                    'variance_a': left['failure_sample_variance'],
+                    'variance_b': right['failure_sample_variance'],
+                }
+            )
+    return {
+        'cell_count': len(cells),
+        'run_count': len(rows),
+        'cells': cells,
+        'comparisons': comparisons,
+        'maximum_observed_cross_level_difference': max(
+            row['absolute_difference'] for row in comparisons
+        ),
+    }
+
+
+def _attack_results_equal(left: AttackResult, right: AttackResult) -> bool:
+    return (
+        left.arm == right.arm
+        and left.true_rank == right.true_rank
+        and left.measured_rank == right.measured_rank
+        and left.defense_failed == right.defense_failed
+        and left.institution_visible == right.institution_visible
+        and left.details == right.details
+    )
+
+
+def _run_gate_1_and_5(config: Mapping[str, Any]) -> dict[str, Any]:
+    smoke = config['two_dial_smoke']
+    tolerance = float(smoke['ratio_recovery_tolerance'])
+    replicates = int(smoke['gate_5']['replicates_per_cell'])
+    minimum_rank = int(config['poles']['deployment_minimum_rank'])
+    rows: list[dict[str, Any]] = []
+    for cell_index, cell in enumerate(smoke['gate_5']['cells']):
+        size = int(cell['validator_set_size'])
+        ratio = float(cell['capability_ratio'])
+        (
+            validators,
+            attribution,
+            defense,
+            attack,
+            base_resolution,
+            forged_count,
+        ) = _fixture(config, size)
+        terms = derive_two_dial_capability_terms(
+            attacker_capability=ratio,
+            defender_capability=1.0,
+            base_resolution_power=base_resolution,
+            two_dial_config=config['two_dial_capability'],
+            absolute_term_enabled=False,
+        )
+        for replicate in range(replicates):
+            parameters = {
+                'cell_index': cell_index,
+                'validator_set_size': size,
+                'capability_ratio': ratio,
+            }
+            seed = _deterministic_seed('gate_1_and_5', parameters, replicate)
+            committed = run_false_cluster_injection(
+                attribution,
+                validators,
+                forged_cluster_count=forged_count,
+                capability_ratio=ratio,
+                resolution_power=base_resolution,
+                defense_cost=defense.effective_cost,
+                attack_cost=attack.cost,
+                minimum_consensus_rank=minimum_rank,
+                rng=random.Random(seed),
+            )
+            changed = run_false_cluster_injection(
+                attribution,
+                validators,
+                forged_cluster_count=forged_count,
+                capability_ratio=terms.capability_ratio,
+                resolution_power=terms.effective_resolution_power,
+                defense_cost=defense.effective_cost,
+                attack_cost=attack.cost,
+                minimum_consensus_rank=minimum_rank,
+                rng=random.Random(seed),
+            )
+            probability_difference = abs(
+                committed.resolution_probability - changed.resolution_probability
+            )
+            rows.append(
+                {
+                    'record_type': 'non_regression_comparison',
+                    'gate': 'gate_1_and_5',
+                    'cell_index': cell_index,
+                    'replicate': replicate,
+                    'seed': seed,
+                    'validator_set_size': size,
+                    'effective_rank': attribution.effective_rank,
+                    'capability_ratio': ratio,
+                    'derived_capability_ratio': terms.capability_ratio,
+                    'absolute_term_enabled': terms.absolute_term_enabled,
+                    'absolute_resolution_multiplier': (
+                        terms.absolute_resolution_multiplier
+                    ),
+                    'committed_resolution_probability': (
+                        committed.resolution_probability
+                    ),
+                    'two_dial_resolution_probability': (
+                        changed.resolution_probability
+                    ),
+                    'resolution_probability_difference': probability_difference,
+                    'outputs_identical': _attack_results_equal(committed, changed),
+                    'rank_axis_unchanged': attribution.effective_rank == size,
+                    'defense_cost_model': defense.model,
+                    'attack_cost_model': attack.model,
+                    'merge_rule': config['attribution']['merge_rule'],
+                }
+            )
+    return {
+        'rows': rows,
+        'cell_count': len(smoke['gate_5']['cells']),
+        'paired_comparison_count': len(rows),
+        'mechanism_evaluation_count': 2 * len(rows),
+        'maximum_resolution_probability_difference': max(
+            row['resolution_probability_difference'] for row in rows
+        ),
+        'ratio_recovery_passed': all(
+            row['resolution_probability_difference'] <= tolerance for row in rows
+        ),
+        'main_surface_non_regression_passed': all(
+            row['outputs_identical']
+            and row['rank_axis_unchanged']
+            and row['defense_cost_model'] == 'pairwise_exact'
+            and row['attack_cost_model'] == 'linear'
+            and row['merge_rule'] == 'threshold_connected_components'
+            for row in rows
+        ),
+    }
+
+
+def _observed_variance_power(
+    summaries: Iterable[Mapping[str, Any]], power: Mapping[str, Any]
+) -> dict[str, Any]:
+    normal = NormalDist()
+    z_alpha = float(power['z_alpha'])
+    z_power = float(power['z_power'])
+    mei = float(power['mei'])
+    configured_n = int(power['configured_n_per_cell'])
+    comparisons: list[dict[str, Any]] = []
+    for summary in summaries:
+        for comparison in summary['comparisons']:
+            variance_sum = float(comparison['variance_a']) + float(
+                comparison['variance_b']
+            )
+            raw_required = (
+                (z_alpha + z_power) ** 2 * variance_sum / mei**2
+            )
+            required = math.ceil(raw_required)
+            if variance_sum > 0.0:
+                noncentrality = mei / math.sqrt(variance_sum / configured_n)
+                achieved = (
+                    normal.cdf(-z_alpha - noncentrality)
+                    + 1.0
+                    - normal.cdf(z_alpha - noncentrality)
+                )
+            else:
+                achieved = 1.0
+            comparisons.append(
+                {
+                    **comparison,
+                    'raw_required_n_per_group': raw_required,
+                    'required_n_per_group': required,
+                    'normal_approximation_power_at_n_200': achieved,
+                }
+            )
+    maximum_required = max(row['required_n_per_group'] for row in comparisons)
+    return {
+        'comparisons': comparisons,
+        'maximum_observed_variance_required_n_per_group': maximum_required,
+        'minimum_observed_variance_power_at_n_200': min(
+            row['normal_approximation_power_at_n_200'] for row in comparisons
+        ),
+        'passed': maximum_required <= configured_n,
+    }
+
+
+def _report(
+    *,
+    run_id: str,
+    output_dir: Path,
+    config: Mapping[str, Any],
+    power: Mapping[str, Any],
+    expected_off: list[dict[str, Any]],
+    expected_on: list[dict[str, Any]],
+    gate_2: Mapping[str, Any],
+    gate_3: Mapping[str, Any],
+    gate_4: Mapping[str, Any],
+    gate_1_5: Mapping[str, Any],
+    gates: Mapping[str, bool],
+) -> str:
+    term = config['two_dial_capability']['absolute_resolution_term']
+    on_separations = _curve_separations(expected_on)
+    off_separations = _curve_separations(expected_off)
+    lines = [
+        '# Sybil two-dial capability bidirectional smoke report',
+        '',
+        f'Go/no-go: **{"GO" if gates["overall"] else "NO-GO"}.**',
+        '',
+        'This run executed only the five authorized two-dial smoke gates. It '
+        'did not run the characterization surface, the actual ratio-collapse '
+        'slice, or any crossover calculation.',
+        '',
+        '## Power confirmation',
+        '',
+        f'- Two-sided alpha: {power["two_sided_alpha"]}.',
+        f'- Target power: {power["target_power"]}.',
+        f'- Failure-rate MEI: {power["mei"]}.',
+        f'- Worst-case staged coefficient: {power["coefficient"]:.12f}.',
+        f'- Raw required n per group: {power["raw_required_n_per_group"]:.12f}.',
+        f'- Required integer n per group: {power["required_n_per_group"]}.',
+        f'- Configured n per cell: {power["configured_n_per_cell"]}, a margin '
+        f'of {power["n_margin"]}.',
+        f'- Normal-approximation power at n=200 under worst-case variance: '
+        f'{power["normal_approximation_power_at_configured_n"]:.12f}.',
+        '',
+        '## Absolute-level term for operator confirmation',
+        '',
+        f'- Form: `{term["form"]}`.',
+        f'- Configured default: OFF.',
+        f'- Reference defender capability: {term["reference_level"]}.',
+        f'- Calibrated strength: {term["strength"]:.17g}.',
+        '- Functional form: '
+        '`absolute_resolution_multiplier = '
+        '(defender_capability / reference_level) ** strength`.',
+        '- Grounding: absolute defender capability scales the throughput with '
+        'which the pairwise independence check can resolve evidence. The '
+        'strength is the elasticity of that throughput. Level 1 is neutral, '
+        'and disabling the term forces the multiplier to exactly 1.',
+        '',
+        'Expected term-ON failure curves and separations:',
+        '',
+        '| Rank | Level 0.316 | Level 1.0 | Level 3.16 | Maximum separation |',
+        '|---:|---:|---:|---:|---:|',
+    ]
+    for row in on_separations:
+        rates = row['rates_by_level']
+        lines.append(
+            f'| {row["effective_rank"]} | {rates["0.316"]:.12f} | '
+            f'{rates["1.0"]:.12f} | {rates["3.16"]:.12f} | '
+            f'{row["maximum_cross_level_difference"]:.12f} |'
+        )
+    lines.extend(
+        [
+            '',
+            'Expected term-OFF maximum separations are exactly: '
+            + ', '.join(
+                f'rank {row["effective_rank"]}: '
+                f'{row["maximum_cross_level_difference"]:.12f}'
+                for row in off_separations
+            )
+            + '.',
+            '',
+            '## Gate results',
+            '',
+            f'- Gate 1, ratio recovery: '
+            f'{"PASS" if gates["gate_1_ratio_recovery"] else "FAIL"}. '
+            f'Maximum probability difference was '
+            f'{gate_1_5["maximum_resolution_probability_difference"]:.12g} '
+            f'against tolerance '
+            f'{config["two_dial_smoke"]["ratio_recovery_tolerance"]}.',
+            f'- Gate 2, collapse control: '
+            f'{"PASS" if gates["gate_2_collapse_control"] else "FAIL"}. '
+            f'Maximum observed cross-level difference was '
+            f'{gate_2["maximum_observed_cross_level_difference"]:.12f} '
+            f'against MEI {power["mei"]}.',
+            f'- Gate 3, non-collapse positive control: '
+            f'{"PASS" if gates["gate_3_noncollapse_control"] else "FAIL"}. '
+            f'Maximum observed cross-level difference was '
+            f'{gate_3["maximum_observed_cross_level_difference"]:.12f} '
+            f'against MEI {power["mei"]}.',
+            f'- Gate 4, observed variance: '
+            f'{"PASS" if gates["gate_4_variance"] else "FAIL"}. '
+            f'The largest required n from observed cell variances was '
+            f'{gate_4["maximum_observed_variance_required_n_per_group"]}; '
+            f'the minimum normal-approximation power at n=200 was '
+            f'{gate_4["minimum_observed_variance_power_at_n_200"]:.12f}.',
+            f'- Gate 5, main-surface non-regression: '
+            f'{"PASS" if gates["gate_5_main_surface_non_regression"] else "FAIL"}. '
+            f'{gate_1_5["paired_comparison_count"]} paired committed-versus-'
+            'two-dial comparisons used shared seeds at the five registered '
+            'cells, and term OFF produced identical outputs.',
+            '',
+            '## Gate 4 cell variances',
+            '',
+            '| Gate | Rank | Level | n | Failure rate | Sample variance |',
+            '|---|---:|---:|---:|---:|---:|',
+        ]
+    )
+    for name, summary in (('Gate 2', gate_2), ('Gate 3', gate_3)):
+        for cell in summary['cells']:
+            lines.append(
+                f'| {name} | {cell["effective_rank"]} | '
+                f'{cell["parity_level"]} | {cell["n"]} | '
+                f'{cell["failure_rate"]:.12f} | '
+                f'{cell["failure_sample_variance"]:.12f} |'
+            )
+    lines.extend(
+        [
+            '',
+            '## Scope, counts, and output identity',
+            '',
+            f'- Gate 2: {gate_2["cell_count"]} cells and '
+            f'{gate_2["run_count"]} runs.',
+            f'- Gate 3: {gate_3["cell_count"]} cells and '
+            f'{gate_3["run_count"]} runs.',
+            f'- Gate 1 and Gate 5: {gate_1_5["cell_count"]} registered cells, '
+            f'{gate_1_5["paired_comparison_count"]} paired comparisons, and '
+            f'{gate_1_5["mechanism_evaluation_count"]} mechanism evaluations.',
+            f'- Run ID: `{run_id}`.',
+            f'- Output directory: `{output_dir}`.',
+            '- The directory and every artifact use the `two_dial_smoke_` '
+            'prefix. They do not use the authoritative `full_5ac6a2e_` prefix '
+            'and are not part of an authoritative manifest.',
+            '- Characterization authorization remained '
+            '`blocked_pending_registration`.',
+            '',
+            '## Main-surface non-regression',
+            '',
+            'With the absolute-level term OFF, the derived ratio and effective '
+            'resolution power reproduce the committed capability inputs. The '
+            'rank attribution, Arm A path, pairwise defense cost, linear attack '
+            'cost, merge rule, failure definition, and seeded outcomes were '
+            'unchanged at all five registered Gate 5 cells. The committed '
+            'main-surface behavior is therefore unaffected in the default-OFF '
+            'configuration.',
+            '',
+            'The power-law functional form and calibrated strength remain '
+            'flagged for operator confirmation before any real ratio-collapse '
+            'slice is registered or run.',
+            '',
+        ]
+    )
+    return '\n'.join(lines)
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--config', type=Path, default=DEFAULT_CONFIG)
+    parser.add_argument('--output-root', type=Path)
+    parser.add_argument('--run-id')
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    config = load_config(args.config)
+    _assert_smoke_boundary(config)
+    smoke = config['two_dial_smoke']
+    run_id = args.run_id or str(smoke['run_id'])
+    prefix = str(config['outputs']['two_dial_smoke_run_prefix'])
+    if not run_id.startswith(prefix):
+        raise SystemExit(f'two-dial smoke run ID must begin with {prefix}')
+    output_root = args.output_root or Path(config['outputs']['root'])
+    output_dir = output_root / run_id
+    output_dir.mkdir(parents=True, exist_ok=False)
+    started_at = _utc_now()
+
+    power = _power_summary(smoke)
+    expected_off = _expected_curve(config, absolute_term_enabled=False)
+    expected_on = _expected_curve(config, absolute_term_enabled=True)
+    expected_on_separations = _curve_separations(expected_on)
+    expected_maximum = max(
+        row['maximum_cross_level_difference']
+        for row in expected_on_separations
+    )
+    if expected_maximum < float(smoke['failure_rate_mei']):
+        raise RuntimeError('calibrated term does not reach the failure-rate MEI')
+
+    gate_2_rows = _run_curve_gate(
+        config, gate='gate_2_collapse_control', absolute_term_enabled=False
+    )
+    gate_3_rows = _run_curve_gate(
+        config, gate='gate_3_noncollapse_control', absolute_term_enabled=True
+    )
+    gate_2 = _summarize_curve_gate(gate_2_rows, smoke)
+    gate_3 = _summarize_curve_gate(gate_3_rows, smoke)
+    gate_1_5 = _run_gate_1_and_5(config)
+    gate_4 = _observed_variance_power((gate_2, gate_3), power)
+    mei = float(smoke['failure_rate_mei'])
+    gates = {
+        'gate_1_ratio_recovery': bool(gate_1_5['ratio_recovery_passed']),
+        'gate_2_collapse_control': (
+            gate_2['maximum_observed_cross_level_difference'] <= mei
+        ),
+        'gate_3_noncollapse_control': (
+            gate_3['maximum_observed_cross_level_difference'] >= mei
+        ),
+        'gate_4_variance': bool(gate_4['passed']),
+        'gate_5_main_surface_non_regression': bool(
+            gate_1_5['main_surface_non_regression_passed']
+        ),
+    }
+    gates['overall'] = all(gates.values())
+
+    all_rows = gate_2_rows + gate_3_rows + gate_1_5['rows']
+    evidence = {
+        'gate_results': gates,
+        'power': power,
+        'absolute_resolution_term': dict(
+            config['two_dial_capability']['absolute_resolution_term']
+        ),
+        'expected_term_off_curve': expected_off,
+        'expected_term_on_curve': expected_on,
+        'expected_term_off_separations': _curve_separations(expected_off),
+        'expected_term_on_separations': expected_on_separations,
+        'gate_2': gate_2,
+        'gate_3': gate_3,
+        'gate_4': gate_4,
+        'gate_1_and_5': {
+            key: value for key, value in gate_1_5.items() if key != 'rows'
+        },
+        'full_sweep_executed': False,
+        'ratio_collapse_slice_executed': False,
+        'crossover_computed': False,
+    }
+
+    results_path = output_dir / 'two_dial_smoke_results.csv'
+    evidence_path = output_dir / 'two_dial_smoke_evidence.json'
+    report_path = output_dir / 'two_dial_smoke_report.md'
+    log_path = output_dir / 'two_dial_smoke_execution.log'
+    _write_csv_atomic(results_path, all_rows)
+    _write_json_atomic(evidence_path, evidence)
+    _write_text_atomic(
+        report_path,
+        _report(
+            run_id=run_id,
+            output_dir=output_dir,
+            config=config,
+            power=power,
+            expected_off=expected_off,
+            expected_on=expected_on,
+            gate_2=gate_2,
+            gate_3=gate_3,
+            gate_4=gate_4,
+            gate_1_5=gate_1_5,
+            gates=gates,
+        ),
+    )
+    ended_at = _utc_now()
+    log_lines = [
+        f'{name}: {"PASS" if passed else "FAIL"}'
+        for name, passed in gates.items()
+    ]
+    log_lines.extend(
+        [
+            f'curve_cell_count: {gate_2["cell_count"] + gate_3["cell_count"]}',
+            f'curve_run_count: {gate_2["run_count"] + gate_3["run_count"]}',
+            f'non_regression_paired_comparisons: '
+            f'{gate_1_5["paired_comparison_count"]}',
+            f'started_at_utc: {started_at}',
+            f'ended_at_utc: {ended_at}',
+            'full_sweep_executed: false',
+            'ratio_collapse_slice_executed: false',
+            'crossover_computed: false',
+        ]
+    )
+    _write_text_atomic(log_path, '\n'.join(log_lines) + '\n')
+
+    manifest_path = output_dir / 'two_dial_smoke_manifest.json'
+    manifest = {
+        'schema_version': 'sybil-two-dial-smoke-manifest-v1',
+        'run_id': run_id,
+        'mode': 'instrument_validation_only',
+        'started_at_utc': started_at,
+        'ended_at_utc': ended_at,
+        'branch': _git_value('branch', '--show-current'),
+        'head_commit': _git_value('rev-parse', 'HEAD'),
+        'working_tree_status': _git_value('status', '--short'),
+        'python': sys.version,
+        'platform': platform.platform(),
+        'cpu_count': os.cpu_count(),
+        'config_path': str(args.config),
+        'config_sha256': _sha256(args.config),
+        'gate_results': gates,
+        'power': power,
+        'counts': {
+            'gate_2_cells': gate_2['cell_count'],
+            'gate_2_runs': gate_2['run_count'],
+            'gate_3_cells': gate_3['cell_count'],
+            'gate_3_runs': gate_3['run_count'],
+            'gate_1_and_5_cells': gate_1_5['cell_count'],
+            'gate_1_and_5_paired_comparisons': (
+                gate_1_5['paired_comparison_count']
+            ),
+            'gate_1_and_5_mechanism_evaluations': (
+                gate_1_5['mechanism_evaluation_count']
+            ),
+            'result_rows': len(all_rows),
+        },
+        'full_sweep_executed': False,
+        'ratio_collapse_slice_executed': False,
+        'crossover_computed': False,
+        'characterization_authorization': config['sweep']['authorization'],
+        'authoritative_manifest': False,
+        'artifacts': {
+            path.name: {'sha256': _sha256(path), 'bytes': path.stat().st_size}
+            for path in (results_path, evidence_path, report_path, log_path)
+        },
+    }
+    _write_json_atomic(manifest_path, manifest)
+
+    print(report_path)
+    print(manifest_path)
+    print(f'go_no_go={"GO" if gates["overall"] else "NO-GO"}')
+    return 0 if gates['overall'] else 1
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
+
+
+==========================================
+FILE: simulation/run_termination_sweep.py
 ==========================================
 
 """
@@ -10530,7 +13862,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\run_to_termination.py
+FILE: simulation/run_to_termination.py
 ==========================================
 
 """
@@ -10793,7 +14125,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\run_transition_cost_calibration.py
+FILE: simulation/run_transition_cost_calibration.py
 ==========================================
 
 """
@@ -11064,7 +14396,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\run_veto_capture_sweep.py
+FILE: simulation/run_veto_capture_sweep.py
 ==========================================
 
 """
@@ -11429,7 +14761,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\simulation.py
+FILE: simulation/simulation.py
 ==========================================
 
 # --- Imports and Dependency Check ---
@@ -11687,7 +15019,754 @@ if __name__ == '__main__':
     plot_results(model_frag_def.datacollector, "Resilience Monitoring: Engineered Fragility Caught")
 
 ==========================================
-FILE: simulation\test_attack_adapter_v2.py
+FILE: simulation/sybil_defense_scaling.py
+==========================================
+
+"""Config-driven Sybil defense scaling instrument.
+
+This module is isolated from the validated simulation model. It provides the
+rank attribution, cost accounting, and two attack mechanisms needed by the
+Sybil scaling diagnostic without changing shared scenario behavior.
+"""
+
+from __future__ import annotations
+
+import json
+import math
+import random
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Iterable, Mapping, Sequence
+
+
+SUPPORTED_MERGE_RULES = {
+    'threshold_connected_components',
+    'threshold_greedy_complete_linkage',
+}
+SUPPORTED_DEFENSE_COST_MODELS = {'pairwise_exact', 'static_baseline'}
+SUPPORTED_ATTACK_COST_MODELS = {'linear', 'superlinear'}
+SUPPORTED_ABSOLUTE_RESOLUTION_TERMS = {'defender_power_law_resolution'}
+
+
+@dataclass(frozen=True)
+class Validator:
+    """One validator and its uncollapsed epistemic lineage."""
+
+    identifier: str
+    lineage: str
+    kind: str
+    base_diversity: float
+    collapse_decay_rate: float
+
+
+@dataclass(frozen=True)
+class AttributionResult:
+    """The consensus clusters produced by one independence check."""
+
+    effective_rank: int
+    clusters: tuple[tuple[str, ...], ...]
+    similarities: tuple[tuple[float, ...], ...]
+    pairwise_checks: int
+    retained_diversity: tuple[tuple[str, float], ...]
+
+
+@dataclass(frozen=True)
+class DefenseCostResult:
+    """Defense cost with the raw check and structured term kept separate."""
+
+    model: str
+    validator_count: int
+    pairwise_checks: int
+    raw_cost: float
+    exponent_reduction: float
+    structured_efficiency: float
+    effective_cost: float
+    effective_exponent: float
+
+
+@dataclass(frozen=True)
+class AttackCostResult:
+    """Attack cost for the selected rank-dependent cost form."""
+
+    model: str
+    effective_rank: int
+    coefficient: float
+    exponent: float
+    cost: float
+
+
+@dataclass(frozen=True)
+class AttackResult:
+    """One arm result with arm-specific evidence in details."""
+
+    arm: str
+    true_rank: int
+    measured_rank: int
+    defense_failed: bool
+    institution_visible: bool
+    resolution_probability: float
+    details: Mapping[str, Any]
+
+
+@dataclass(frozen=True)
+class TwoDialCapabilityTerms:
+    """Derived capability terms while preserving both absolute input levels."""
+
+    attacker_capability: float
+    defender_capability: float
+    capability_ratio: float
+    absolute_term_enabled: bool
+    absolute_term_form: str
+    absolute_term_strength: float
+    absolute_resolution_multiplier: float
+    effective_resolution_power: float
+
+
+def load_config(path: str | Path) -> dict[str, Any]:
+    """Load and validate an instrument configuration."""
+
+    config_path = Path(path)
+    with config_path.open('r', encoding='utf-8') as handle:
+        config = json.load(handle)
+    validate_config(config)
+    return config
+
+
+def validate_config(config: Mapping[str, Any]) -> None:
+    """Reject missing or internally inconsistent mechanism settings."""
+
+    attribution = config['attribution']
+    if attribution['merge_rule'] not in SUPPORTED_MERGE_RULES:
+        raise ValueError('unsupported attribution merge rule')
+    threshold = float(attribution['similarity_threshold'])
+    if not 0.0 <= threshold <= 1.0:
+        raise ValueError('similarity_threshold must be in [0, 1]')
+    if attribution['similarity_metric'] != 'cosine_shared_lineage':
+        raise ValueError('unsupported similarity metric')
+
+    collapse = config['collapse']
+    severity_min = float(collapse['severity_min'])
+    severity_max = float(collapse['severity_max'])
+    if not 0.0 <= severity_min < severity_max <= 1.0:
+        raise ValueError('collapse severity range must increase within [0, 1]')
+    if float(collapse['decay_rate_base']) <= 0.0:
+        raise ValueError('decay_rate_base must be positive')
+    if float(collapse['decay_rate_step']) < 0.0:
+        raise ValueError('decay_rate_step must be nonnegative')
+
+    institution = config['floor']['institution']
+    if not institution['independent_by_construction']:
+        raise ValueError('institution must be independent by construction')
+    if not institution['collapse_immune']:
+        raise ValueError('institution must be collapse immune')
+
+    defense_cost = config['costs']['defense']
+    if defense_cost['selected'] not in SUPPORTED_DEFENSE_COST_MODELS:
+        raise ValueError('unsupported defense cost model')
+    if set(defense_cost['models']) != SUPPORTED_DEFENSE_COST_MODELS:
+        raise ValueError('both defense cost models must be configured')
+    if defense_cost['input_basis'] not in {'apparent_inputs', 'genuine_pool'}:
+        raise ValueError('unsupported defense cost input basis')
+
+    attack_cost = config['costs']['attack']
+    if attack_cost['selected'] not in SUPPORTED_ATTACK_COST_MODELS:
+        raise ValueError('unsupported attack cost model')
+    if set(attack_cost['models']) != SUPPORTED_ATTACK_COST_MODELS:
+        raise ValueError('both attack cost models must be configured')
+
+    exponent_reduction = float(
+        config['defender_capability']['exponent_reduction']
+    )
+    if not 0.0 <= exponent_reduction < 2.0:
+        raise ValueError('exponent_reduction must be in [0, 2)')
+    if float(config['defender_capability']['resolution_improvement']) <= 0.0:
+        raise ValueError('resolution_improvement must be positive')
+    if float(config['defender_capability']['base_resolution']) <= 0.0:
+        raise ValueError('base_resolution must be positive')
+
+    two_dial = config['two_dial_capability']
+    absolute_term = two_dial['absolute_resolution_term']
+    if absolute_term['form'] not in SUPPORTED_ABSOLUTE_RESOLUTION_TERMS:
+        raise ValueError('unsupported absolute resolution term')
+    if not isinstance(absolute_term['enabled'], bool):
+        raise ValueError('absolute resolution enabled switch must be boolean')
+    if float(absolute_term['strength']) < 0.0:
+        raise ValueError('absolute resolution strength must be nonnegative')
+    if float(absolute_term['reference_level']) <= 0.0:
+        raise ValueError('absolute resolution reference level must be positive')
+
+    arms = config['attack_arms']
+    expected_arms = {'false_cluster_injection', 'measurement_corruption'}
+    if set(arms) != expected_arms:
+        raise ValueError('both attack arms must be configured')
+    if int(arms['false_cluster_injection']['forged_cluster_count']) < 1:
+        raise ValueError('Arm A requires at least one forged cluster')
+
+
+def _clamp(value: float, low: float = 0.0, high: float = 1.0) -> float:
+    return max(low, min(high, float(value)))
+
+
+def derive_two_dial_capability_terms(
+    *,
+    attacker_capability: float,
+    defender_capability: float,
+    base_resolution_power: float,
+    two_dial_config: Mapping[str, Any],
+    absolute_term_enabled: bool | None = None,
+) -> TwoDialCapabilityTerms:
+    """Derive the ratio and optional absolute defender resolution channel.
+
+    The configured power-law channel treats absolute defender capability as
+    evidence-resolution throughput for the independence check. Its exponent
+    is an elasticity. Disabling the term fixes its multiplier at exactly one,
+    so matched derived ratios recover the committed mechanism.
+    """
+
+    attacker = float(attacker_capability)
+    defender = float(defender_capability)
+    resolution = float(base_resolution_power)
+    if attacker < 0.0:
+        raise ValueError('attacker_capability must be nonnegative')
+    if defender <= 0.0:
+        raise ValueError('defender_capability must be positive')
+    if resolution <= 0.0:
+        raise ValueError('base_resolution_power must be positive')
+
+    term = two_dial_config['absolute_resolution_term']
+    form = str(term['form'])
+    if form not in SUPPORTED_ABSOLUTE_RESOLUTION_TERMS:
+        raise ValueError('unsupported absolute resolution term')
+    enabled = (
+        bool(term['enabled'])
+        if absolute_term_enabled is None
+        else bool(absolute_term_enabled)
+    )
+    strength = float(term['strength'])
+    reference = float(term['reference_level'])
+    if strength < 0.0:
+        raise ValueError('absolute resolution strength must be nonnegative')
+    if reference <= 0.0:
+        raise ValueError('absolute resolution reference level must be positive')
+
+    multiplier = 1.0
+    if enabled:
+        multiplier = (defender / reference) ** strength
+    ratio = attacker / defender
+    return TwoDialCapabilityTerms(
+        attacker_capability=attacker,
+        defender_capability=defender,
+        capability_ratio=ratio,
+        absolute_term_enabled=enabled,
+        absolute_term_form=form,
+        absolute_term_strength=strength,
+        absolute_resolution_multiplier=multiplier,
+        effective_resolution_power=resolution * multiplier,
+    )
+
+
+def build_validator_pool(
+    frontier_count: int,
+    institution_count: int,
+    collapse_config: Mapping[str, Any],
+    *,
+    lineage_mode: str = 'distinct',
+) -> tuple[Validator, ...]:
+    """Build a deterministic pool with configurable frontier lineages."""
+
+    if frontier_count < 0 or institution_count < 0:
+        raise ValueError('validator counts must be nonnegative')
+    if lineage_mode not in {'distinct', 'shared'}:
+        raise ValueError('lineage_mode must be distinct or shared')
+
+    base_diversity = float(collapse_config['base_diversity'])
+    decay_base = float(collapse_config['decay_rate_base'])
+    decay_step = float(collapse_config['decay_rate_step'])
+    decay_cycle = int(collapse_config['decay_rate_cycle'])
+    if decay_cycle < 1:
+        raise ValueError('decay_rate_cycle must be positive')
+
+    validators: list[Validator] = []
+    for index in range(frontier_count):
+        lineage = 'frontier-shared' if lineage_mode == 'shared' else f'frontier-{index}'
+        validators.append(
+            Validator(
+                identifier=f'frontier-{index}',
+                lineage=lineage,
+                kind='frontier',
+                base_diversity=base_diversity,
+                collapse_decay_rate=decay_base + decay_step * (index % decay_cycle),
+            )
+        )
+    for index in range(institution_count):
+        validators.append(
+            Validator(
+                identifier=f'institution-{index}',
+                lineage=f'institution-orthogonal-{index}',
+                kind='institution',
+                base_diversity=1.0,
+                collapse_decay_rate=0.0,
+            )
+        )
+    return tuple(validators)
+
+
+def retained_diversity(validator: Validator, collapse_severity: float) -> float:
+    """Return the participant-specific diversity remaining after collapse."""
+
+    severity = _clamp(collapse_severity)
+    if validator.kind == 'institution':
+        return 1.0
+    return _clamp(
+        validator.base_diversity
+        * (1.0 - severity) ** validator.collapse_decay_rate
+    )
+
+
+def validator_similarity(
+    left: Validator,
+    right: Validator,
+    collapse_severity: float,
+) -> float:
+    """Cosine similarity of shared and lineage-specific epistemic axes."""
+
+    if left.identifier == right.identifier:
+        return 1.0
+    if left.kind == 'institution' or right.kind == 'institution':
+        return 0.0
+
+    left_unique = retained_diversity(left, collapse_severity)
+    right_unique = retained_diversity(right, collapse_severity)
+    left_shared = 1.0 - left_unique
+    right_shared = 1.0 - right_unique
+    dot = left_shared * right_shared
+    if left.lineage == right.lineage:
+        dot += left_unique * right_unique
+    left_norm = math.hypot(left_shared, left_unique)
+    right_norm = math.hypot(right_shared, right_unique)
+    if left_norm == 0.0 or right_norm == 0.0:
+        return 0.0
+    return _clamp(dot / (left_norm * right_norm))
+
+
+def similarity_matrix(
+    validators: Sequence[Validator],
+    collapse_severity: float,
+) -> tuple[tuple[float, ...], ...]:
+    """Compute every pair exactly, retaining an auditable symmetric matrix."""
+
+    matrix = [[0.0 for _ in validators] for _ in validators]
+    for left_index, left in enumerate(validators):
+        matrix[left_index][left_index] = 1.0
+        for right_index in range(left_index + 1, len(validators)):
+            value = validator_similarity(
+                left, validators[right_index], collapse_severity
+            )
+            matrix[left_index][right_index] = value
+            matrix[right_index][left_index] = value
+    return tuple(tuple(row) for row in matrix)
+
+
+def _connected_components(
+    matrix: Sequence[Sequence[float]], threshold: float
+) -> tuple[tuple[int, ...], ...]:
+    parent = list(range(len(matrix)))
+
+    def find(index: int) -> int:
+        while parent[index] != index:
+            parent[index] = parent[parent[index]]
+            index = parent[index]
+        return index
+
+    def union(left: int, right: int) -> None:
+        left_root = find(left)
+        right_root = find(right)
+        if left_root != right_root:
+            parent[right_root] = left_root
+
+    for left in range(len(matrix)):
+        for right in range(left + 1, len(matrix)):
+            if float(matrix[left][right]) >= threshold:
+                union(left, right)
+
+    clusters: dict[int, list[int]] = {}
+    for index in range(len(matrix)):
+        clusters.setdefault(find(index), []).append(index)
+    return tuple(tuple(indices) for indices in clusters.values())
+
+
+def _greedy_complete_linkage(
+    matrix: Sequence[Sequence[float]], threshold: float
+) -> tuple[tuple[int, ...], ...]:
+    clusters: list[list[int]] = [[index] for index in range(len(matrix))]
+    changed = True
+    while changed:
+        changed = False
+        for left_index in range(len(clusters)):
+            for right_index in range(left_index + 1, len(clusters)):
+                if all(
+                    float(matrix[left][right]) >= threshold
+                    for left in clusters[left_index]
+                    for right in clusters[right_index]
+                ):
+                    clusters[left_index].extend(clusters.pop(right_index))
+                    changed = True
+                    break
+            if changed:
+                break
+    return tuple(tuple(cluster) for cluster in clusters)
+
+
+def attribute_from_matrix(
+    validators: Sequence[Validator],
+    matrix: Sequence[Sequence[float]],
+    *,
+    merge_rule: str,
+    similarity_threshold: float,
+    collapse_severity: float,
+) -> AttributionResult:
+    """Merge correlated validators according to the configured rule."""
+
+    if len(matrix) != len(validators):
+        raise ValueError('similarity matrix size does not match validator pool')
+    if merge_rule == 'threshold_connected_components':
+        index_clusters = _connected_components(matrix, similarity_threshold)
+    elif merge_rule == 'threshold_greedy_complete_linkage':
+        index_clusters = _greedy_complete_linkage(matrix, similarity_threshold)
+    else:
+        raise ValueError('unsupported attribution merge rule')
+
+    clusters = tuple(
+        tuple(sorted(validators[index].identifier for index in cluster))
+        for cluster in index_clusters
+    )
+    clusters = tuple(sorted(clusters, key=lambda cluster: cluster[0]))
+    retained = tuple(
+        (validator.identifier, retained_diversity(validator, collapse_severity))
+        for validator in validators
+    )
+    return AttributionResult(
+        effective_rank=len(clusters),
+        clusters=clusters,
+        similarities=tuple(tuple(float(value) for value in row) for row in matrix),
+        pairwise_checks=len(validators) * (len(validators) - 1) // 2,
+        retained_diversity=retained,
+    )
+
+
+def attribute_validators(
+    validators: Sequence[Validator],
+    collapse_severity: float,
+    attribution_config: Mapping[str, Any],
+) -> AttributionResult:
+    """Compute similarities and return independence-weighted attribution."""
+
+    matrix = similarity_matrix(validators, collapse_severity)
+    return attribute_from_matrix(
+        validators,
+        matrix,
+        merge_rule=str(attribution_config['merge_rule']),
+        similarity_threshold=float(attribution_config['similarity_threshold']),
+        collapse_severity=collapse_severity,
+    )
+
+
+def compute_defense_cost(
+    validator_count: int,
+    defense_cost_config: Mapping[str, Any],
+    exponent_reduction: float,
+    *,
+    model: str | None = None,
+) -> DefenseCostResult:
+    """Compute exact pairwise cost or the retained static baseline."""
+
+    if validator_count < 0:
+        raise ValueError('validator_count must be nonnegative')
+    selected = model or str(defense_cost_config['selected'])
+    if selected not in SUPPORTED_DEFENSE_COST_MODELS:
+        raise ValueError('unsupported defense cost model')
+    pairwise_checks = validator_count * (validator_count - 1) // 2
+
+    if selected == 'pairwise_exact':
+        coefficient = float(
+            defense_cost_config['models']['pairwise_exact']['per_comparison_cost']
+        )
+        raw_cost = coefficient * pairwise_checks
+        structured_efficiency = (
+            float(validator_count) ** float(exponent_reduction)
+            if validator_count > 0 else 1.0
+        )
+        effective_cost = raw_cost / structured_efficiency
+        effective_exponent = 2.0 - float(exponent_reduction)
+    else:
+        raw_cost = float(
+            defense_cost_config['models']['static_baseline']['fixed_cost']
+        )
+        structured_efficiency = 1.0
+        effective_cost = raw_cost
+        effective_exponent = 0.0
+
+    return DefenseCostResult(
+        model=selected,
+        validator_count=validator_count,
+        pairwise_checks=pairwise_checks,
+        raw_cost=raw_cost,
+        exponent_reduction=float(exponent_reduction),
+        structured_efficiency=structured_efficiency,
+        effective_cost=effective_cost,
+        effective_exponent=effective_exponent,
+    )
+
+
+def compute_attack_cost(
+    effective_rank: int,
+    attack_cost_config: Mapping[str, Any],
+    *,
+    model: str | None = None,
+) -> AttackCostResult:
+    """Compute the configured linear or superlinear attack cost."""
+
+    if effective_rank < 1:
+        raise ValueError('effective_rank must be positive')
+    selected = model or str(attack_cost_config['selected'])
+    if selected not in SUPPORTED_ATTACK_COST_MODELS:
+        raise ValueError('unsupported attack cost model')
+    settings = attack_cost_config['models'][selected]
+    coefficient = float(settings['coefficient'])
+    exponent = float(settings['exponent'])
+    cost = coefficient * float(effective_rank) ** exponent
+    return AttackCostResult(
+        model=selected,
+        effective_rank=effective_rank,
+        coefficient=coefficient,
+        exponent=exponent,
+        cost=cost,
+    )
+
+
+def resolution_probability(
+    *,
+    true_rank: int,
+    minimum_consensus_rank: int,
+    capability_ratio: float,
+    resolution_power: float,
+    defense_cost: float,
+    attack_cost: float,
+) -> float:
+    """Return per-event resolution chance from separate cost and resolution terms."""
+
+    if capability_ratio < 0.0:
+        raise ValueError('capability_ratio must be nonnegative')
+    if true_rank < minimum_consensus_rank:
+        return 0.0
+    resolving_term = float(true_rank) * float(resolution_power) * float(attack_cost)
+    adversarial_term = float(capability_ratio) * float(defense_cost)
+    if resolving_term <= 0.0:
+        return 0.0
+    if adversarial_term <= 0.0:
+        return 1.0
+    return _clamp(resolving_term / (resolving_term + adversarial_term))
+
+
+def institution_is_visible(
+    validators: Sequence[Validator], clusters: Iterable[Iterable[str]]
+) -> bool:
+    """Return whether every institution remains in an institution-only cluster."""
+
+    kinds = {validator.identifier: validator.kind for validator in validators}
+    institutions = {
+        validator.identifier
+        for validator in validators
+        if validator.kind == 'institution'
+    }
+    for institution in institutions:
+        containing = next(
+            (set(cluster) for cluster in clusters if institution in set(cluster)),
+            set(),
+        )
+        if not containing or any(kinds[member] != 'institution' for member in containing):
+            return False
+    return True
+
+
+def run_false_cluster_injection(
+    attribution: AttributionResult,
+    validators: Sequence[Validator],
+    *,
+    forged_cluster_count: int,
+    capability_ratio: float,
+    resolution_power: float,
+    defense_cost: float,
+    attack_cost: float,
+    minimum_consensus_rank: int,
+    rng: random.Random,
+) -> AttackResult:
+    """Arm A: inject apparent clusters and resolve each against true rank."""
+
+    probability = resolution_probability(
+        true_rank=attribution.effective_rank,
+        minimum_consensus_rank=minimum_consensus_rank,
+        capability_ratio=capability_ratio,
+        resolution_power=resolution_power,
+        defense_cost=defense_cost,
+        attack_cost=attack_cost,
+    )
+    resolved = sum(
+        rng.random() < probability for _ in range(int(forged_cluster_count))
+    )
+    surviving = int(forged_cluster_count) - resolved
+    structural_failure = attribution.effective_rank < minimum_consensus_rank
+    visible = institution_is_visible(validators, attribution.clusters)
+    return AttackResult(
+        arm='false_cluster_injection',
+        true_rank=attribution.effective_rank,
+        measured_rank=attribution.effective_rank + surviving,
+        defense_failed=structural_failure or surviving > 0,
+        institution_visible=visible,
+        resolution_probability=probability,
+        details={
+            'false_clusters_injected': int(forged_cluster_count),
+            'false_clusters_resolved': resolved,
+            'false_clusters_surviving': surviving,
+            'corrupted_correlation_reads': 0,
+            'institution_merged': False,
+            'partition_preserved': True,
+        },
+    )
+
+
+def _partition(clusters: Iterable[Iterable[str]]) -> frozenset[frozenset[str]]:
+    return frozenset(frozenset(cluster) for cluster in clusters)
+
+
+def run_measurement_corruption(
+    validators: Sequence[Validator],
+    true_attribution: AttributionResult,
+    *,
+    collapse_severity: float,
+    attribution_config: Mapping[str, Any],
+    arm_config: Mapping[str, Any],
+    capability_ratio: float,
+    resolution_power: float,
+    defense_cost: float,
+    attack_cost: float,
+    minimum_consensus_rank: int,
+    rng: random.Random,
+) -> AttackResult:
+    """Arm B: poison correlation reads before measured attribution."""
+
+    probability = resolution_probability(
+        true_rank=true_attribution.effective_rank,
+        minimum_consensus_rank=minimum_consensus_rank,
+        capability_ratio=capability_ratio,
+        resolution_power=resolution_power,
+        defense_cost=defense_cost,
+        attack_cost=attack_cost,
+    )
+    corruption_probability = _clamp(
+        (1.0 - probability)
+        * float(arm_config['false_independence_probability_multiplier'])
+    )
+    institution_merge_probability = _clamp(
+        (1.0 - probability)
+        * float(arm_config['institution_merge_probability_multiplier'])
+    )
+
+    matrix = [list(row) for row in true_attribution.similarities]
+    index_by_identifier = {
+        validator.identifier: index for index, validator in enumerate(validators)
+    }
+    kind_by_identifier = {
+        validator.identifier: validator.kind for validator in validators
+    }
+    corrupted_reads = 0
+    detached_validators = 0
+
+    for cluster in true_attribution.clusters:
+        frontier_members = sorted(
+            member for member in cluster if kind_by_identifier[member] == 'frontier'
+        )
+        for member in frontier_members[1:]:
+            if rng.random() >= corruption_probability:
+                continue
+            detached_validators += 1
+            member_index = index_by_identifier[member]
+            for peer in frontier_members:
+                if peer == member:
+                    continue
+                peer_index = index_by_identifier[peer]
+                matrix[member_index][peer_index] = float(
+                    arm_config['false_independent_similarity']
+                )
+                matrix[peer_index][member_index] = float(
+                    arm_config['false_independent_similarity']
+                )
+                corrupted_reads += 1
+
+    institution_merged = False
+    institutions = [
+        validator for validator in validators if validator.kind == 'institution'
+    ]
+    frontier = [validator for validator in validators if validator.kind == 'frontier']
+    if institutions and frontier and rng.random() < institution_merge_probability:
+        institution_merged = True
+        provisional = attribute_from_matrix(
+            validators,
+            matrix,
+            merge_rule=str(attribution_config['merge_rule']),
+            similarity_threshold=float(attribution_config['similarity_threshold']),
+            collapse_severity=collapse_severity,
+        )
+        target_cluster = next(
+            cluster for cluster in provisional.clusters
+            if frontier[0].identifier in cluster
+        )
+        institution_index = index_by_identifier[institutions[0].identifier]
+        for member in target_cluster:
+            member_index = index_by_identifier[member]
+            matrix[institution_index][member_index] = float(
+                arm_config['false_correlated_similarity']
+            )
+            matrix[member_index][institution_index] = float(
+                arm_config['false_correlated_similarity']
+            )
+            corrupted_reads += 1
+
+    measured = attribute_from_matrix(
+        validators,
+        matrix,
+        merge_rule=str(attribution_config['merge_rule']),
+        similarity_threshold=float(attribution_config['similarity_threshold']),
+        collapse_severity=collapse_severity,
+    )
+    partition_preserved = _partition(measured.clusters) == _partition(
+        true_attribution.clusters
+    )
+    structural_failure = true_attribution.effective_rank < minimum_consensus_rank
+    visible = institution_is_visible(validators, measured.clusters)
+    return AttackResult(
+        arm='measurement_corruption',
+        true_rank=true_attribution.effective_rank,
+        measured_rank=measured.effective_rank,
+        defense_failed=structural_failure or not partition_preserved,
+        institution_visible=visible,
+        resolution_probability=probability,
+        details={
+            'false_clusters_injected': 0,
+            'false_clusters_resolved': 0,
+            'false_clusters_surviving': 0,
+            'corrupted_correlation_reads': corrupted_reads,
+            'detached_frontier_validators': detached_validators,
+            'institution_merged': institution_merged,
+            'partition_preserved': partition_preserved,
+            'corruption_probability': corruption_probability,
+            'institution_merge_probability': institution_merge_probability,
+        },
+    )
+
+
+==========================================
+FILE: simulation/test_attack_adapter_v2.py
 ==========================================
 
 from types import SimpleNamespace
@@ -11934,7 +16013,7 @@ def test_v2_model_smoke_records_adapter_and_working_factor_fields():
 
 
 ==========================================
-FILE: simulation\test_attack_vector_revalidation_v2_runner.py
+FILE: simulation/test_attack_vector_revalidation_v2_runner.py
 ==========================================
 
 from run_attack_vector_revalidation_v2 import (
@@ -12018,7 +16097,7 @@ def test_seed_sharding_is_disjoint_complete_and_keeps_pairs_together():
 
 
 ==========================================
-FILE: simulation\test_cop.py
+FILE: simulation/test_cop.py
 ==========================================
 
 import numpy as np
@@ -12152,7 +16231,7 @@ if __name__ == "__main__":
     print("COP Governance Unit Tests PASSED.")
 
 ==========================================
-FILE: simulation\test_invariants.py
+FILE: simulation/test_invariants.py
 ==========================================
 
 import numpy as np
@@ -12438,7 +16517,7 @@ if __name__ == "__main__":
     print("All mathematical invariants PASSED.")
 
 ==========================================
-FILE: simulation\test_refactor_1x.py
+FILE: simulation/test_refactor_1x.py
 ==========================================
 
 """
@@ -13014,7 +17093,548 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\visualization.py
+FILE: simulation/test_sybil_characterization_analysis.py
+==========================================
+
+import hashlib
+import json
+from pathlib import Path
+
+
+HERE = Path(__file__).parent
+REPO_ROOT = HERE.parent
+RUN_DIR = (
+    REPO_ROOT
+    / 'data'
+    / 'sybil_defense_scaling'
+    / 'full_5ac6a2e_sybil_scaling_characterization_v1'
+)
+MANIFEST = RUN_DIR / 'full_5ac6a2e_manifest.json'
+ANALYSIS = HERE / 'diagnostics' / 'sybil_defense_scaling_characterization_analysis.json'
+REPORT = HERE / 'diagnostics' / 'sybil_defense_scaling_characterization_report.md'
+
+
+def test_authoritative_manifest_hashes_and_counts():
+    manifest = json.loads(MANIFEST.read_text(encoding='utf-8'))
+    assert manifest['total_cells'] == 5175
+    assert manifest['total_runs'] == 1_035_000
+    assert manifest['n_per_cell'] == 200
+    assert manifest['completed_counts'] == manifest['planned_counts']
+    assert len(manifest['authoritative_artifacts']) == 3
+    for artifact in manifest['authoritative_artifacts']:
+        path = REPO_ROOT / artifact['path']
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == artifact['sha256']
+
+
+def test_analysis_uses_registered_fixed_cell_quantities():
+    analysis = json.loads(ANALYSIS.read_text(encoding='utf-8'))
+    assert analysis['crossover_computed'] is False
+    assert analysis['ratio_collapse']['registered_verdict'] == 'noncollapse'
+    assert len(analysis['ratio_collapse']['comparisons']) == 75
+    assert len(
+        analysis['primary_headline']['arm_records']['false_cluster_injection']
+    ) == 600
+    assert len(
+        analysis['primary_headline']['arm_records']['measurement_corruption']
+    ) == 600
+    assert len(
+        analysis['primary_headline']['arm_records'][
+            'measurement_corruption_rank_visible'
+        ]
+    ) == 600
+    assert len(
+        analysis['ratio_sensitivity']['records']['false_cluster_injection']
+    ) == 100
+    assert len(analysis['complete_linkage']['records']) == 100
+
+
+def test_report_orders_criterion_before_result_before_verdict():
+    report = REPORT.read_text(encoding='utf-8')
+    assert 'No crossover rank was computed or used.' in report
+    for heading in (
+        '## 1. Ratio-collapse slice',
+        '## 2. Primary fixed-cell reading, per arm',
+        '## 3. Headline floor question',
+        '## 4. Ratio sensitivity',
+        '## 5. Complete-linkage sensitivity',
+    ):
+        start = report.index(heading)
+        next_heading = report.find('\n## ', start + len(heading))
+        section = report[start:next_heading if next_heading != -1 else None]
+        assert section.index('Criterion, quoted verbatim') < section.index('Result:')
+        assert section.index('Result:') < section.index('Verdict:')
+
+
+==========================================
+FILE: simulation/test_sybil_characterization_runner.py
+==========================================
+
+import copy
+from pathlib import Path
+
+import pytest
+
+from run_sybil_defense_scaling_characterization import (
+    assert_characterization_authorized,
+    build_sweep_plan,
+    load_geomspace,
+)
+from sybil_defense_scaling import load_config
+
+
+CONFIG_PATH = Path(__file__).parent / 'config' / 'sybil_defense_scaling.json'
+
+
+@pytest.fixture()
+def config():
+    return load_config(CONFIG_PATH)
+
+
+def test_geomspace_schema_includes_registered_endpoints(config):
+    values = load_geomspace(config['sweep']['capability_ratio_range'])
+    assert len(values) == 25
+    assert values[0] == 0.1
+    assert values[12] == pytest.approx(1.0)
+    assert values[-1] == 10.0
+
+
+def test_registered_surface_shapes(config):
+    plan = build_sweep_plan(config)
+    assert len(plan.structural_points) == 25
+    assert len(plan.cells['main_surface']) == 5000
+    assert len(plan.cells['ratio_collapse_slice']) == 75
+    assert len(plan.cells['complete_linkage']) == 100
+    assert plan.n_per_cell == 200
+    assert len(plan.cells['main_surface']) * plan.n_per_cell == 1_000_000
+    assert len(plan.cells['ratio_collapse_slice']) * plan.n_per_cell == 15_000
+    assert len(plan.cells['complete_linkage']) * plan.n_per_cell == 20_000
+
+
+def test_smoke_scalar_is_separate_from_characterization_size_axis(config):
+    assert isinstance(config['smoke']['frontier_validator_count'], int)
+    assert config['smoke']['frontier_validator_count'] == 6
+    assert config['sweep']['structural_axis']['validator_set_sizes'] == [
+        2, 4, 8, 16, 32, 64
+    ]
+
+
+def test_blocked_authorization_refuses_full_characterization(config):
+    blocked = copy.deepcopy(config)
+    blocked['sweep']['authorization'] = 'blocked_pending_selfcheck'
+    with pytest.raises(RuntimeError, match='full characterization refused'):
+        assert_characterization_authorized(blocked)
+
+
+def test_exact_registered_authorization_allows_characterization(config):
+    authorized = copy.deepcopy(config)
+    authorized['sweep']['authorization'] = (
+        'authorized_registered_characterization'
+    )
+    assert_characterization_authorized(authorized)
+
+
+def test_registered_plan_rejects_scope_drift(config):
+    changed = copy.deepcopy(config)
+    changed['sweep']['complete_linkage_sensitivity'][
+        'capability_ratio'
+    ] = 2.0
+    with pytest.raises(ValueError, match='complete-linkage ratio'):
+        build_sweep_plan(changed)
+
+
+==========================================
+FILE: simulation/test_sybil_defense_scaling.py
+==========================================
+
+import json
+import random
+from pathlib import Path
+
+import pytest
+
+from sybil_defense_scaling import (
+    attribute_validators,
+    build_validator_pool,
+    compute_attack_cost,
+    compute_defense_cost,
+    load_config,
+    run_false_cluster_injection,
+    run_measurement_corruption,
+)
+
+
+CONFIG_PATH = Path(__file__).parent / 'config' / 'sybil_defense_scaling.json'
+
+
+@pytest.fixture()
+def config():
+    return load_config(CONFIG_PATH)
+
+
+def _rank(config, frontier_count, institution_count, severity, lineage_mode='distinct'):
+    validators = build_validator_pool(
+        frontier_count,
+        institution_count,
+        config['collapse'],
+        lineage_mode=lineage_mode,
+    )
+    attribution = attribute_validators(
+        validators, severity, config['attribution']
+    )
+    return validators, attribution
+
+
+def _costs(config, true_rank, validator_count):
+    capability = config['defender_capability']
+    defense = compute_defense_cost(
+        validator_count,
+        config['costs']['defense'],
+        capability['exponent_reduction'],
+    )
+    attack = compute_attack_cost(true_rank, config['costs']['attack'])
+    resolution = (
+        capability['base_resolution'] * capability['resolution_improvement']
+    )
+    return defense, attack, resolution
+
+
+def test_registered_sweep_inputs_are_reconciled(config):
+    sweep = config['sweep']
+    assert sweep['authorization'] == 'authorized_registered_characterization'
+    assert sweep['capability_ratio_range'] == {
+        'schema': 'geomspace',
+        'start': 0.1,
+        'stop': 10.0,
+        'count': 25,
+    }
+    assert sweep['power_sample_size_per_cell'] == 200
+    assert sweep['structural_axis']['validator_set_sizes'] == [
+        2, 4, 8, 16, 32, 64
+    ]
+    assert config['smoke']['frontier_validator_count'] == 6
+
+
+def test_six_identical_validators_contribute_one_input(config):
+    _, attribution = _rank(config, 6, 0, 0.0, lineage_mode='shared')
+    assert attribution.effective_rank == 1
+
+
+def test_six_distinct_validators_contribute_six_inputs(config):
+    _, attribution = _rank(config, 6, 0, 0.0, lineage_mode='distinct')
+    assert attribution.effective_rank == 6
+
+
+def test_collapse_merges_frontier_and_institution_holds_rank_two(config):
+    _, no_floor = _rank(config, 6, 0, 1.0)
+    validators, with_floor = _rank(config, 6, 1, 1.0)
+    assert no_floor.effective_rank == 1
+    assert with_floor.effective_rank == 2
+    institution_retention = dict(with_floor.retained_diversity)['institution-0']
+    assert institution_retention == 1.0
+    assert any(v.kind == 'institution' for v in validators)
+
+
+def test_institution_alone_analytic_corner_is_reachable(config):
+    corner = config['floor']['analytic_corner']
+    _, attribution = _rank(
+        config,
+        corner['frontier_validator_count'],
+        corner['institution_validator_count'],
+        config['collapse']['severity_max'],
+    )
+    assert attribution.effective_rank == config['poles']['analytic_floor_rank']
+
+
+def test_exact_pairwise_cost_and_static_baseline_share_switch(config):
+    dynamic = [
+        compute_defense_cost(
+            count,
+            config['costs']['defense'],
+            config['defender_capability']['exponent_reduction'],
+            model='pairwise_exact',
+        )
+        for count in (2, 4, 8)
+    ]
+    static = [
+        compute_defense_cost(
+            count,
+            config['costs']['defense'],
+            config['defender_capability']['exponent_reduction'],
+            model='static_baseline',
+        )
+        for count in (2, 4, 8)
+    ]
+    assert [result.pairwise_checks for result in dynamic] == [1, 6, 28]
+    assert [result.effective_cost for result in dynamic] == [1.0, 6.0, 28.0]
+    assert [result.effective_cost for result in static] == [1.0, 1.0, 1.0]
+
+
+def test_exponent_reduction_and_resolution_improvement_are_separate(config):
+    baseline = compute_defense_cost(
+        8, config['costs']['defense'], exponent_reduction=0.0
+    )
+    structured = compute_defense_cost(
+        8, config['costs']['defense'], exponent_reduction=0.5
+    )
+    assert structured.effective_cost < baseline.effective_cost
+    assert config['defender_capability']['resolution_improvement'] == 1.0
+    assert structured.exponent_reduction == 0.5
+
+
+def test_linear_and_superlinear_attack_costs_are_available(config):
+    linear = compute_attack_cost(
+        4, config['costs']['attack'], model='linear'
+    )
+    superlinear = compute_attack_cost(
+        4, config['costs']['attack'], model='superlinear'
+    )
+    assert linear.cost == 4.0
+    assert superlinear.cost == 8.0
+
+
+def test_arm_a_inflates_apparent_rank_without_corrupting_partition(config):
+    validators, attribution = _rank(config, 6, 1, 1.0)
+    arm = config['attack_arms']['false_cluster_injection']
+    defense, attack, resolution = _costs(
+        config,
+        attribution.effective_rank,
+        len(validators) + arm['forged_cluster_count'],
+    )
+    result = run_false_cluster_injection(
+        attribution,
+        validators,
+        forged_cluster_count=arm['forged_cluster_count'],
+        capability_ratio=1000000.0,
+        resolution_power=resolution,
+        defense_cost=defense.effective_cost,
+        attack_cost=attack.cost,
+        minimum_consensus_rank=config['poles']['deployment_minimum_rank'],
+        rng=random.Random(3),
+    )
+    assert result.true_rank == 2
+    assert result.measured_rank == 4
+    assert result.institution_visible
+    assert result.details['partition_preserved']
+    assert result.details['corrupted_correlation_reads'] == 0
+
+
+def test_arm_b_corrupts_measurements_and_can_merge_institution(config):
+    validators, attribution = _rank(config, 6, 1, 1.0)
+    defense, attack, resolution = _costs(
+        config, attribution.effective_rank, len(validators)
+    )
+    result = run_measurement_corruption(
+        validators,
+        attribution,
+        collapse_severity=1.0,
+        attribution_config=config['attribution'],
+        arm_config=config['attack_arms']['measurement_corruption'],
+        capability_ratio=1000000.0,
+        resolution_power=resolution,
+        defense_cost=defense.effective_cost,
+        attack_cost=attack.cost,
+        minimum_consensus_rank=config['poles']['deployment_minimum_rank'],
+        rng=random.Random(3),
+    )
+    assert result.true_rank == 2
+    assert result.measured_rank == 6
+    assert not result.institution_visible
+    assert result.details['corrupted_correlation_reads'] > 0
+    assert result.details['false_clusters_injected'] == 0
+    assert not result.details['partition_preserved']
+
+
+@pytest.mark.parametrize('arm_name', [
+    'false_cluster_injection',
+    'measurement_corruption',
+])
+def test_rank_one_without_institution_is_structural_failure(config, arm_name):
+    validators, attribution = _rank(config, 6, 0, 1.0)
+    forged_count = config['attack_arms']['false_cluster_injection'][
+        'forged_cluster_count'
+    ]
+    cost_count = len(validators) + forged_count if arm_name.startswith('false') else len(validators)
+    defense, attack, resolution = _costs(
+        config, attribution.effective_rank, cost_count
+    )
+    common = {
+        'capability_ratio': 0.0,
+        'resolution_power': resolution,
+        'defense_cost': defense.effective_cost,
+        'attack_cost': attack.cost,
+        'minimum_consensus_rank': config['poles']['deployment_minimum_rank'],
+        'rng': random.Random(7),
+    }
+    if arm_name == 'false_cluster_injection':
+        result = run_false_cluster_injection(
+            attribution,
+            validators,
+            forged_cluster_count=forged_count,
+            **common,
+        )
+    else:
+        result = run_measurement_corruption(
+            validators,
+            attribution,
+            collapse_severity=1.0,
+            attribution_config=config['attribution'],
+            arm_config=config['attack_arms']['measurement_corruption'],
+            **common,
+        )
+    assert attribution.effective_rank == 1
+    assert result.defense_failed
+
+
+def test_invalid_floor_in_config_is_rejected(tmp_path, config):
+    config['floor']['institution']['collapse_immune'] = False
+    path = tmp_path / 'bad.json'
+    path.write_text(json.dumps(config), encoding='utf-8')
+    with pytest.raises(ValueError, match='collapse immune'):
+        load_config(path)
+
+
+==========================================
+FILE: simulation/test_sybil_two_dial_capability.py
+==========================================
+
+import math
+from pathlib import Path
+
+import pytest
+
+from sybil_defense_scaling import (
+    derive_two_dial_capability_terms,
+    load_config,
+    resolution_probability,
+)
+
+
+CONFIG_PATH = Path(__file__).parent / 'config' / 'sybil_defense_scaling.json'
+
+
+@pytest.fixture()
+def config():
+    return load_config(CONFIG_PATH)
+
+
+def test_two_dial_term_defaults_off_and_smoke_scalar_is_preserved(config):
+    term = config['two_dial_capability']['absolute_resolution_term']
+    assert term['enabled'] is False
+    assert isinstance(config['smoke']['frontier_validator_count'], int)
+
+
+@pytest.mark.parametrize('ratio', [0.1, 1.0, 10.0])
+def test_term_off_recovers_committed_resolution_probability(config, ratio):
+    terms = derive_two_dial_capability_terms(
+        attacker_capability=ratio * 3.16,
+        defender_capability=3.16,
+        base_resolution_power=1.0,
+        two_dial_config=config['two_dial_capability'],
+        absolute_term_enabled=False,
+    )
+    committed = resolution_probability(
+        true_rank=8,
+        minimum_consensus_rank=2,
+        capability_ratio=ratio,
+        resolution_power=1.0,
+        defense_cost=45.0,
+        attack_cost=8.0,
+    )
+    changed = resolution_probability(
+        true_rank=8,
+        minimum_consensus_rank=2,
+        capability_ratio=terms.capability_ratio,
+        resolution_power=terms.effective_resolution_power,
+        defense_cost=45.0,
+        attack_cost=8.0,
+    )
+    assert terms.absolute_resolution_multiplier == 1.0
+    assert changed == pytest.approx(committed, abs=1e-15)
+
+
+def test_term_on_uses_absolute_defender_resolution(config):
+    strength = config['two_dial_capability']['absolute_resolution_term'][
+        'strength'
+    ]
+    low = derive_two_dial_capability_terms(
+        attacker_capability=0.316,
+        defender_capability=0.316,
+        base_resolution_power=1.0,
+        two_dial_config=config['two_dial_capability'],
+        absolute_term_enabled=True,
+    )
+    high = derive_two_dial_capability_terms(
+        attacker_capability=3.16,
+        defender_capability=3.16,
+        base_resolution_power=1.0,
+        two_dial_config=config['two_dial_capability'],
+        absolute_term_enabled=True,
+    )
+    assert low.capability_ratio == 1.0
+    assert high.capability_ratio == 1.0
+    assert low.absolute_resolution_multiplier == pytest.approx(0.316 ** strength)
+    assert high.absolute_resolution_multiplier == pytest.approx(3.16 ** strength)
+    assert low.effective_resolution_power < 1.0
+    assert high.effective_resolution_power > 1.0
+
+
+def test_term_on_reference_level_is_neutral(config):
+    terms = derive_two_dial_capability_terms(
+        attacker_capability=1.0,
+        defender_capability=1.0,
+        base_resolution_power=1.0,
+        two_dial_config=config['two_dial_capability'],
+        absolute_term_enabled=True,
+    )
+    assert terms.capability_ratio == 1.0
+    assert terms.absolute_resolution_multiplier == 1.0
+    assert terms.effective_resolution_power == 1.0
+
+
+def test_two_dial_rejects_nonpositive_defender_capability(config):
+    with pytest.raises(ValueError, match='defender_capability must be positive'):
+        derive_two_dial_capability_terms(
+            attacker_capability=1.0,
+            defender_capability=0.0,
+            base_resolution_power=1.0,
+            two_dial_config=config['two_dial_capability'],
+        )
+
+
+def test_calibrated_strength_hits_registered_mei_at_rank_64(config):
+    smoke = config['two_dial_smoke']
+    term = config['two_dial_capability']['absolute_resolution_term']
+    size = int(smoke['calibration']['most_sensitive_validator_set_size'])
+    forged = int(
+        config['attack_arms']['false_cluster_injection']['forged_cluster_count']
+    )
+    defense_cost = math.comb(size + forged, 2)
+    failure_rates = []
+    for level in smoke['parity_levels']:
+        terms = derive_two_dial_capability_terms(
+            attacker_capability=level,
+            defender_capability=level,
+            base_resolution_power=1.0,
+            two_dial_config=config['two_dial_capability'],
+            absolute_term_enabled=True,
+        )
+        probability = resolution_probability(
+            true_rank=size,
+            minimum_consensus_rank=2,
+            capability_ratio=terms.capability_ratio,
+            resolution_power=terms.effective_resolution_power,
+            defense_cost=defense_cost,
+            attack_cost=size,
+        )
+        failure_rates.append(1.0 - probability ** forged)
+    separation = max(failure_rates) - min(failure_rates)
+    assert term['strength'] == pytest.approx(0.22163300225716118)
+    assert separation >= smoke['failure_rate_mei']
+    assert separation == pytest.approx(0.15, abs=1e-14)
+
+
+==========================================
+FILE: simulation/visualization.py
 ==========================================
 
 import os
@@ -13114,7 +17734,7 @@ def plot_results(datacollector, title):
     print(f"--> Saved data to {csv_filename}")
 
 ==========================================
-FILE: simulation\working_factor.py
+FILE: simulation/working_factor.py
 ==========================================
 
 """Stage 1.8 working_factor: the discipline boundary interface.
@@ -13215,7 +17835,7 @@ def apply_delta_state(state_dict, delta_state, clamp_to_unit_interval=True):
 
 
 ==========================================
-FILE: simulation\diagnostics\capped_regime_phi_check.py
+FILE: simulation/diagnostics/capped_regime_phi_check.py
 ==========================================
 
 """Capped-regime phi action-capture check.
@@ -13458,7 +18078,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\gate1_interior_action.py
+FILE: simulation/diagnostics/gate1_interior_action.py
 ==========================================
 
 """Gate 1 interior-action harness (operator-revised intent).
@@ -14110,7 +18730,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\gate2_competition.py
+FILE: simulation/diagnostics/gate2_competition.py
 ==========================================
 
 """Gate 2 competition harness.
@@ -14322,7 +18942,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\gate2_v20_phaseb_revalidation.py
+FILE: simulation/diagnostics/gate2_v20_phaseb_revalidation.py
 ==========================================
 
 """Gate 2 v2.0 revalidation from the authoritative v2.0 empirical record.
@@ -14494,7 +19114,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\gate3_capability_regime.py
+FILE: simulation/diagnostics/gate3_capability_regime.py
 ==========================================
 
 """Gate 3 capability-regime harness.
@@ -14713,7 +19333,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\gate4_v20_validation.py
+FILE: simulation/diagnostics/gate4_v20_validation.py
 ==========================================
 
 """Gate 4 v2.0 runaway-regime validation.
@@ -15384,7 +20004,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\gate5_phi_blind_check.py
+FILE: simulation/diagnostics/gate5_phi_blind_check.py
 ==========================================
 
 """Gate 5 phi-blind validation harness.
@@ -15712,7 +20332,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\patient_defection_corner_density.py
+FILE: simulation/diagnostics/patient_defection_corner_density.py
 ==========================================
 
 """Dense corner diagnostic for patient-defection sweep 3.
@@ -15887,7 +20507,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\patient_defection_sweeps.py
+FILE: simulation/diagnostics/patient_defection_sweeps.py
 ==========================================
 
 """Patient defection sweeps for v2.0 substrate characterization.
@@ -16601,7 +21221,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\phi_audit.py
+FILE: simulation/diagnostics/phi_audit.py
 ==========================================
 
 """Phi implementation audit harness.
@@ -17035,7 +21655,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\phi_audit_pathc.py
+FILE: simulation/diagnostics/phi_audit_pathc.py
 ==========================================
 
 """Path C decision gate harness.
@@ -17392,7 +22012,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_composite_sweep.py
+FILE: simulation/diagnostics/stage15_composite_sweep.py
 ==========================================
 
 """Stage 1.5 composite urgency architecture Monte Carlo sweep.
@@ -18045,7 +22665,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_faithfulness_tests.py
+FILE: simulation/diagnostics/stage15_faithfulness_tests.py
 ==========================================
 
 """Stage 1.5 faithfulness tests.
@@ -18737,7 +23357,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_phi_diagnostic.py
+FILE: simulation/diagnostics/stage15_phi_diagnostic.py
 ==========================================
 
 """Stage 1.5 phi diagnostic.
@@ -19185,7 +23805,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_smoke_test.py
+FILE: simulation/diagnostics/stage15_smoke_test.py
 ==========================================
 
 """Stage 1.5 smoke test.
@@ -19733,7 +24353,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\stage15_statedep_curves_diagnostic.py
+FILE: simulation/diagnostics/stage15_statedep_curves_diagnostic.py
 ==========================================
 
 #!/usr/bin/env python3
@@ -20642,7 +25262,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\stage16_baseline_capture.py
+FILE: simulation/diagnostics/stage16_baseline_capture.py
 ==========================================
 
 """Stage 1.6 pre-revision baseline capture.
@@ -20791,7 +25411,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\stage16_integrity_simulation.py
+FILE: simulation/diagnostics/stage16_integrity_simulation.py
 ==========================================
 
 """Stage 1.6 integrity simulation.
@@ -21279,7 +25899,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\stage17_integrity_simulation.py
+FILE: simulation/diagnostics/stage17_integrity_simulation.py
 ==========================================
 
 """Stage 1.7 integrity simulation.
@@ -21750,7 +26370,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\stage17_pressure_diagnostic.py
+FILE: simulation/diagnostics/stage17_pressure_diagnostic.py
 ==========================================
 
 """Stage 1.7 pressure/state/welfare-factor diagnostic.
@@ -22195,7 +26815,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\stage17_usys_factor_diagnostic.py
+FILE: simulation/diagnostics/stage17_usys_factor_diagnostic.py
 ==========================================
 
 """Stage 1.7 U_sys factor breakdown diagnostic.
@@ -22566,7 +27186,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\stage18_integrity_simulation_phase_a.py
+FILE: simulation/diagnostics/stage18_integrity_simulation_phase_a.py
 ==========================================
 
 """Stage 1.8 Phase A integrity simulation.
@@ -22845,7 +27465,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\stage18_integrity_simulation_phase_b.py
+FILE: simulation/diagnostics/stage18_integrity_simulation_phase_b.py
 ==========================================
 
 """Stage 1.8 Phase B integrity simulation (corrected harness).
@@ -23245,7 +27865,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\stage18_phase_ab_discrepancy_isolation.py
+FILE: simulation/diagnostics/stage18_phase_ab_discrepancy_isolation.py
 ==========================================
 
 """Isolate the two harness differences between Phase A and Phase B A_baseline.
@@ -23360,7 +27980,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\stage2_yield_parameter_diagnostic.py
+FILE: simulation/diagnostics/stage2_yield_parameter_diagnostic.py
 ==========================================
 
 """stage2_yield_parameter_diagnostic.py: Stage 2 formal yield-condition
@@ -23721,7 +28341,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\stage2_yield_smoke_test.py
+FILE: simulation/diagnostics/stage2_yield_smoke_test.py
 ==========================================
 
 """stage2_yield_smoke_test.py: Stage 2 formal yield-condition smoke test.
@@ -23944,7 +28564,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\diagnostics\termination_decontamination_diagnostic.py
+FILE: simulation/diagnostics/termination_decontamination_diagnostic.py
 ==========================================
 
 """Diagnostic rerun for the v1.x.2 termination cap/phi question.
@@ -24273,7 +28893,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: simulation\tools\check_scenario_numbering.py
+FILE: simulation/tools/check_scenario_numbering.py
 ==========================================
 
 #!/usr/bin/env python3
@@ -24536,7 +29156,7 @@ if __name__ == "__main__":
 
 
 ==========================================
-FILE: bootstrap_gate_validator\cli.py
+FILE: bootstrap_gate_validator/cli.py
 ==========================================
 
 #!/usr/bin/env python3
@@ -24616,7 +29236,7 @@ if __name__ == '__main__':
 
 
 ==========================================
-FILE: bootstrap_gate_validator\report.py
+FILE: bootstrap_gate_validator/report.py
 ==========================================
 
 """Report generation for the Bootstrap Gate Validator (text and JSON)."""
@@ -24703,7 +29323,7 @@ def format_json_report(results):
 
 
 ==========================================
-FILE: bootstrap_gate_validator\schema.py
+FILE: bootstrap_gate_validator/schema.py
 ==========================================
 
 """Input validation for the Bootstrap Gate Validator."""
@@ -25000,7 +29620,7 @@ def _require_keys(obj, key_type_pairs, section):
 
 
 ==========================================
-FILE: bootstrap_gate_validator\validator.py
+FILE: bootstrap_gate_validator/validator.py
 ==========================================
 
 """Main BootstrapGateValidator class."""
@@ -25071,7 +29691,7 @@ class BootstrapGateValidator:
 
 
 ==========================================
-FILE: bootstrap_gate_validator\gates\gate_1.py
+FILE: bootstrap_gate_validator/gates/gate_1.py
 ==========================================
 
 """Gate 1: Structural consistency at base capability (G1.1 - G1.5)."""
@@ -25236,7 +29856,7 @@ class Gate1:
 
 
 ==========================================
-FILE: bootstrap_gate_validator\gates\gate_2.py
+FILE: bootstrap_gate_validator/gates/gate_2.py
 ==========================================
 
 """Gate 2: Behavioral consistency under exercise.
@@ -25565,7 +30185,7 @@ class Gate2:
 
 
 ==========================================
-FILE: bootstrap_gate_validator\gates\gate_3.py
+FILE: bootstrap_gate_validator/gates/gate_3.py
 ==========================================
 
 """Gate 3: Succession-capable consistency (G3.1 - G3.3)."""
@@ -25681,7 +30301,7 @@ class Gate3:
 
 
 ==========================================
-FILE: bootstrap_gate_validator\gates\gate_4.py
+FILE: bootstrap_gate_validator/gates/gate_4.py
 ==========================================
 
 """Gate 4: Runaway-regime validation (G4.1 - G4.3).
@@ -25854,7 +30474,7 @@ class Gate4:
 
 
 ==========================================
-FILE: bootstrap_gate_validator\gates\gate_5.py
+FILE: bootstrap_gate_validator/gates/gate_5.py
 ==========================================
 
 """Gate 5: COP integration (G5.1 - G5.2). Not currently applicable.
@@ -25914,7 +30534,7 @@ class Gate5:
 
 
 ==========================================
-FILE: scripts\check_snapshot_leak.py
+FILE: scripts/check_snapshot_leak.py
 ==========================================
 
 #!/usr/bin/env python3
@@ -26090,7 +30710,7 @@ if __name__ == "__main__":
 
 
 ==========================================
-FILE: scripts\generate_project_knowledge_snapshots.py
+FILE: scripts/generate_project_knowledge_snapshots.py
 ==========================================
 
 #!/usr/bin/env python3
