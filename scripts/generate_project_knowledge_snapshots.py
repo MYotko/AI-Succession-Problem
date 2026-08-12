@@ -85,6 +85,20 @@ NEVER_INGEST_BASENAMES = frozenset({
     "LINEAGE_IMPERATIVE_ADVISOR.md",
 })
 
+# Directories whose contents must NEVER reach a generated snapshot, matched on
+# path prefix relative to the repository root.
+#
+# The ideas drawer holds hypothesis-only material that is tracked so it is not
+# lost, but is not validated and is not evidentiary. Snapshots are uploaded as
+# project knowledge and are read as the state of the work, so speculative
+# material mixed into them would be indistinguishable from established results.
+# No collector reaches the drawer today, which is exactly why the rule belongs
+# here rather than in any one collector: it holds if a future collector widens
+# its scope to the repository root or starts walking new directories.
+NEVER_INGEST_DIR_RELPATHS = frozenset({
+    "ideas",
+})
+
 # Directories to skip when walking for code
 CODE_SKIP_DIRS = frozenset({
     "__pycache__", ".pytest_cache", "venv", ".venv", "env",
@@ -128,19 +142,52 @@ def get_git_info() -> Tuple[str, str]:
 # File utilities
 # ---------------------------------------------------------------------------
 
+def relpath_str(path: Path) -> str:
+    """Repository-relative path with forward slashes, on every platform.
+
+    Snapshot paths are content, not local filesystem addresses: they are the
+    "FILE: " markers the leak checker attributes lines to, and they are compared
+    against the forward-slash relpaths in the category rules above. Letting the
+    native separator through means the same repository generates different
+    snapshots on Windows than on Linux, and, worse, that the category
+    exclusions silently stop matching.
+
+    This is also the sort key for every collector, because comparing Path
+    objects is case-insensitive on Windows and case-sensitive on POSIX, which
+    would otherwise reorder whole snapshots depending on where they were run.
+    """
+    return path.relative_to(REPO_ROOT).as_posix()
+
+
 def is_never_ingest(path: Path) -> bool:
     """True if this file must never reach a generated snapshot.
 
-    Matched on basename so the rule holds wherever the file sits, and so a
-    future change to a collector's scope cannot route around it.
+    Basenames are matched wherever the file sits, so a future change to a
+    collector's scope cannot route around the rule. Directories are matched on
+    the path relative to the repository root, at any depth below the denied
+    directory. A path outside the repository cannot be under a denied
+    directory, so it fails the directory test and is judged on basename alone.
     """
-    return path.name in NEVER_INGEST_BASENAMES
+    if path.name in NEVER_INGEST_BASENAMES:
+        return True
+    try:
+        relparts = path.resolve().relative_to(REPO_ROOT.resolve()).parts
+    except ValueError:
+        return False
+    return any(
+        relparts[:len(Path(denied).parts)] == Path(denied).parts
+        for denied in NEVER_INGEST_DIR_RELPATHS
+    )
 
 
 def read_file_safe(path: Path) -> Optional[str]:
     if is_never_ingest(path):
+        try:
+            label = path.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
+        except ValueError:
+            label = path.name
         print(
-            f"REFUSED: {path.name} is on the never-ingest list and was not read",
+            f"REFUSED: {label} is on the never-ingest list and was not read",
             file=sys.stderr,
         )
         return None
@@ -326,7 +373,7 @@ def collect_data_files() -> List[Path]:
     # The data manifest lists filenames, so the deny-list applies here too even
     # though no current extension in DATA_EXTENSIONS would match the advisor
     # document. Filtering the collected set keeps the rule in one place.
-    return sorted(p for p in found if not is_never_ingest(p))
+    return sorted((p for p in found if not is_never_ingest(p)), key=relpath_str)
 
 
 def write_data_results_snapshot(
@@ -341,7 +388,7 @@ def write_data_results_snapshot(
     if dry_run:
         print(f"\n[data_results] Data files that would be included in manifest ({len(data_files)}):")
         for p in data_files[:40]:
-            print(f"  {p.relative_to(REPO_ROOT)} ({p.suffix})")
+            print(f"  {relpath_str(p)} ({p.suffix})")
         if len(data_files) > 40:
             print(f"  ... and {len(data_files) - 40} more")
         return 0, 0, 0
@@ -367,7 +414,7 @@ def write_data_results_snapshot(
 
     file_meta = []
     for p in data_files:
-        relpath = str(p.relative_to(REPO_ROOT))
+        relpath = relpath_str(p)
         stat = p.stat()
         mtime = datetime.datetime.fromtimestamp(stat.st_mtime, UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
         header_lines.append(f"| {relpath} | {stat.st_size} | {mtime} |")
@@ -431,8 +478,8 @@ def collect_docs(dry_run: bool = False) -> List[Tuple[str, str]]:
 
     results = []
     skipped = []
-    for path in sorted(docs_dir.glob("*.md")):
-        relpath = str(path.relative_to(REPO_ROOT))
+    for path in sorted(docs_dir.glob("*.md"), key=relpath_str):
+        relpath = relpath_str(path)
         if relpath in framework_set:
             skipped.append((relpath, "framework_papers category"))
             continue
@@ -481,10 +528,10 @@ def collect_paper_drafts(dry_run: bool = False) -> List[Tuple[str, str]]:
         return []
 
     results = []
-    for path in sorted(paper_dir.glob("*.md")):
+    for path in sorted(paper_dir.glob("*.md"), key=relpath_str):
         content = read_file_safe(path)
         if content is not None:
-            results.append((str(path.relative_to(REPO_ROOT)), content))
+            results.append((relpath_str(path), content))
 
     if dry_run:
         _print_dry_run("paper_drafts", results)
@@ -500,10 +547,10 @@ def collect_essays(dry_run: bool = False) -> List[Tuple[str, str]]:
         return []
 
     results = []
-    for path in sorted(essays_dir.glob("*.md")):
+    for path in sorted(essays_dir.glob("*.md"), key=relpath_str):
         content = read_file_safe(path)
         if content is not None:
-            results.append((str(path.relative_to(REPO_ROOT)), content))
+            results.append((relpath_str(path), content))
 
     if dry_run:
         _print_dry_run("essays", results)
@@ -519,10 +566,10 @@ def collect_diagnostics(dry_run: bool = False) -> List[Tuple[str, str]]:
         return []
 
     results = []
-    for path in sorted(diag_dir.glob("*.md")):
+    for path in sorted(diag_dir.glob("*.md"), key=relpath_str):
         content = read_file_safe(path)
         if content is not None:
-            results.append((str(path.relative_to(REPO_ROOT)), content))
+            results.append((relpath_str(path), content))
 
     if dry_run:
         _print_dry_run("diagnostics", results)
@@ -538,10 +585,10 @@ def collect_constitutional(dry_run: bool = False) -> List[Tuple[str, str]]:
         if not search_dir.exists():
             print(f"INFO: {search_dir.relative_to(REPO_ROOT)} not found", file=sys.stderr)
             continue
-        for path in sorted(search_dir.glob("*.md")):
+        for path in sorted(search_dir.glob("*.md"), key=relpath_str):
             content = read_file_safe(path)
             if content is not None:
-                results.append((str(path.relative_to(REPO_ROOT)), content))
+                results.append((relpath_str(path), content))
 
     if dry_run:
         _print_dry_run("constitutional", results)
@@ -569,7 +616,7 @@ def collect_code(dry_run: bool = False) -> List[Tuple[str, str]]:
                 path = Path(dirpath) / filename
                 content = read_file_safe(path)
                 if content is not None:
-                    results.append((str(path.relative_to(REPO_ROOT)), content))
+                    results.append((relpath_str(path), content))
 
     if dry_run:
         _print_dry_run("code", results)

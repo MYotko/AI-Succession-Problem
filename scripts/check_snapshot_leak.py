@@ -1,24 +1,38 @@
 #!/usr/bin/env python3
-"""Fail if advisor-document content reaches a generated snapshot.
+"""Fail if never-ingest content reaches a generated snapshot.
 
-This repository is public. LINEAGE_IMPERATIVE_ADVISOR.md is deliberately
-untracked and carries strategy, so its content must never enter the repository
-indirectly through a generated artifact. The generator itself refuses to read
-the file (see the never-ingest list in generate_project_knowledge_snapshots.py).
-This checker is the independent backstop that verifies the outcome rather than
-trusting the mechanism.
+Two bodies of material must stay out of every generated snapshot.
 
-Two classes of needle, deliberately treated differently.
+LINEAGE_IMPERATIVE_ADVISOR.md is deliberately untracked and carries strategy,
+and this repository is public, so its content must never enter the repository
+indirectly through a generated artifact. The ideas/ drawer is tracked, but it
+holds hypothesis-only material that is not validated and not evidentiary;
+snapshots are read as the state of the work, so speculative material inside one
+would be indistinguishable from established results.
 
-Content needles are strings that can only appear if the document's text was
-actually ingested. A hit is a failure anywhere, with no exceptions, because
-there is no legitimate reason for this repository to contain them.
+The generator refuses to read both (see the never-ingest lists in
+generate_project_knowledge_snapshots.py). This checker is the independent
+backstop that verifies the outcome rather than trusting the mechanism.
 
-Name needles are the document's filename. The filename legitimately appears in
-the small number of tracked files whose job is to document or enforce the rule,
-and those files are themselves ingested into snapshots. A bare filename search
-therefore cannot distinguish "the advisor document leaked" from "something
-correctly documents that the advisor document must not leak." Rather than drop
+Three classes of check, deliberately treated differently.
+
+Excluded sources are the structural check, and the primary signal for a
+directory. The generator labels every ingested file with a "FILE: <relpath>"
+marker, so a marker naming a path under an excluded directory means a file from
+that directory was ingested, whatever its text happens to say. This is exact:
+no phrase matching, no false positives.
+
+Content needles are strings that can only appear if an excluded document's text
+was actually ingested. They catch a leak that arrives without a marker, such as
+excluded text quoted inside a file that is legitimately ingested. A hit is a
+failure anywhere, with no exceptions, because no snapshot has a legitimate
+reason to carry them.
+
+Name needles are the excluded filenames. A filename legitimately appears in the
+small number of tracked files whose job is to document or enforce the rule, and
+those files are themselves ingested into snapshots. A bare filename search
+therefore cannot distinguish "the excluded document leaked" from "something
+correctly documents that the excluded document must not leak." Rather than drop
 the filename tripwire, which would weaken detection of a real ingestion whose
 body text is not enumerated below, a hit is a failure unless it is attributed
 to an allowlisted source file.
@@ -55,19 +69,37 @@ SNAPSHOT_DIR = REPO_ROOT / "snapshots"
 # anyone who runs this tool can recover the values. It prevents casual
 # disclosure and indexing, nothing stronger, and it is not a place to put a
 # secret that actually needs protecting.
+#
+# The ideas-drawer needles below are encoded for the first reason only. That
+# material is tracked and public, so nothing is being withheld; the encoding is
+# there because a plaintext copy in this file would be ingested into the code
+# snapshot and would fail the check it implements.
 _ENCODED_CONTENT_NEEDLES = (
     "QWxsYW4gRGFmb2U=",
     "WWFyaW4gR2Fs",
     "ZmluZ2VycHJpbnRpbmcgcmlzaw==",
+    # ideas/distributed_cross_audit_hypothesis.md
+    "Q2FsaWJyYXRpb24tZG9taW5hbnQgd29ya2xvYWQ=",
+    "SGlkZGVuIHJhbmRvbWl6ZWQgb3ZlcmxhcA==",
+    "Q29tbWl0LXRoZW4tY29tcGFyZSBsZWRnZXI=",
 )
 
 CONTENT_NEEDLES = tuple(
     base64.b64decode(s).decode("utf-8") for s in _ENCODED_CONTENT_NEEDLES
 )
 
-# The document filename. A hit is a failure unless attributed to a source in
+# The excluded filenames. A hit is a failure unless attributed to a source in
 # NAME_NEEDLE_ALLOWLIST below.
-NAME_NEEDLES = ("LINEAGE_IMPERATIVE_ADVISOR",)
+NAME_NEEDLES = (
+    "LINEAGE_IMPERATIVE_ADVISOR",
+    "distributed_cross_audit_hypothesis",
+)
+
+# Directories whose files must never be ingested. Matched against the "FILE: "
+# markers the generator writes, so a hit means a file from that directory was
+# actually ingested rather than merely mentioned. Mirrors
+# NEVER_INGEST_DIR_RELPATHS in generate_project_knowledge_snapshots.py.
+EXCLUDED_SOURCE_DIRS = ("ideas",)
 
 # Source files permitted to mention the filename. Keep this list minimal, and
 # only add a file whose purpose is to document or enforce the never-ingest rule.
@@ -82,6 +114,17 @@ NAME_NEEDLE_ALLOWLIST = frozenset({
 })
 
 HEADER_SOURCE = "<snapshot header>"
+
+
+def is_excluded_source(source: str) -> bool:
+    """True if a "FILE: " marker names a path inside an excluded directory."""
+    if source == HEADER_SOURCE:
+        return False
+    parts = source.split("/")
+    return any(
+        parts[:len(excluded.split("/"))] == excluded.split("/")
+        for excluded in EXCLUDED_SOURCE_DIRS
+    )
 
 
 def attributed_lines(text: str) -> List[Tuple[int, str, str]]:
@@ -107,7 +150,15 @@ def scan(snapshot_dir: pathlib.Path) -> Tuple[List[str], List[str]]:
 
     for path in files:
         text = path.read_text(encoding="utf-8", errors="replace")
-        for lineno, source, line in attributed_lines(text):
+        entries = attributed_lines(text)
+
+        for source in sorted({s for _, s, _ in entries}):
+            if is_excluded_source(source):
+                violations.append(
+                    f"{path.name}: ingested file from excluded directory: {source}"
+                )
+
+        for lineno, source, line in entries:
             low = line.lower()
 
             for needle in CONTENT_NEEDLES:
@@ -148,6 +199,8 @@ def main() -> int:
 
     if not args.quiet:
         print(f"scanned {args.snapshot_dir}")
+        print(f"  excluded dirs  : {len(EXCLUDED_SOURCE_DIRS)} "
+              f"({', '.join(EXCLUDED_SOURCE_DIRS)}), never ingested")
         print(f"  content needles: {len(CONTENT_NEEDLES)}, never allowlisted")
         print(f"  name needles   : {len(NAME_NEEDLES)}, "
               f"allowlisted for {len(NAME_NEEDLE_ALLOWLIST)} sources")
@@ -162,7 +215,7 @@ def main() -> int:
             print(f"  {v}")
         return 1
 
-    print("\nCLEAN: no advisor content in any snapshot.")
+    print("\nCLEAN: no advisor content and no ideas-drawer content in any snapshot.")
     return 0
 
 
