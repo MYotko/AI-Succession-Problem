@@ -51,7 +51,7 @@ This repository contains a full Agent-Based Model (ABM) written in Python that c
 
 ## About the Author
 
-Matthew Yotko is a Vice President at Bessemer Trust, in the capacities of Automation Engineering Manager and Technical Operations Manager. His professional background spans Naval nuclear power, large-scale operational automation, practical AI/ML, and the application of constraint theory to complex systems. This paper applies that engineering orientation; identify the binding constraint, build the architecture around it; to the problem of AI governance and civilizational succession. It is a working paper, not an academic publication, and corrections and engagement from domain specialists are welcomed.
+Matthew Yotko is a technology Vice President in the financial services industry, in the capacities of Automation Engineering Manager and Technical Operations Manager. His professional background spans Naval nuclear power, large-scale operational automation, practical AI/ML, and the application of constraint theory to complex systems. This paper applies that engineering orientation; identify the binding constraint, build the architecture around it; to the problem of AI governance and civilizational succession. It is a working paper, not an academic publication, and corrections and engagement from domain specialists are welcomed.
 
 ## License
 
