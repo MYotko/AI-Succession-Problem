@@ -15,11 +15,19 @@ described below and supersedes any earlier characterization of the affected clai
 > recorded as D5. The planned remediation changes accordingly. The conclusion that
 > the published figure required a check was correct. The stated mechanism was not.
 
+> **Update, 2026-09-08.** D5 is confirmed by measurement, and the work that
+> confirmed it surfaced a further defect in the same metric, recorded as D6. The
+> reported per-run quantity for this vector can only take the values 0, 0.5, 0.667,
+> 0.75 and so on, never anything between 0 and 0.5, because each blocked
+> ratification regenerates exactly one further opportunity. The published figure is
+> the mean of that ladder and is not a proportion of successions captured. Section 8
+> item 2 is complete.
+
 ---
 
 ## 1. Summary
 
-Five defects were found in the v2.0 simulation substrate and in the success metrics
+Six defects were found in the v2.0 simulation substrate and in the success metrics
 used for the adversarial revalidation. One published claim is withdrawn. One
 published figure is placed under an unresolved exposure. A separate archival gap
 in the pre-manifest era is recorded in Section 7.
@@ -48,27 +56,36 @@ invariant by construction. Suppression enters novelty generation as a single sca
 applied to every agent. The estimator therefore cannot observe it, and at total
 suppression the eigenvalue floor produces exactly the maximum value.
 
-**D5. The veto ratification metric has an unstated stochastic floor.** The reported
-quantity for Biological Veto Capture is the fraction of valid successions blocked
-by the validator pool. Five validators each vote correctly 80 percent of the time
-and ratification requires 60 percent agreement, so the pool fails to ratify 5.79
-percent of the time with no capture present at all. The published defended figure
-of 0.1197 sits at roughly twice that floor, and the floor was never stated. The
-metric could not have read below it however effective the defense was.
+**D5. The veto ratification metric has an unstated stochastic floor.** Five
+validators each vote correctly 80 percent of the time and ratification requires 60
+percent agreement, so the pool fails to ratify 5.79 percent of the time with no
+capture present at all. Measurement confirms it. The floor is never stated in the
+published record, it is present in every cell of the published grid because the two
+parameters that set it are fixed grid-wide, and the metric could not have read below
+it however effective the defense was.
+
+**D6. The veto capture denominator is not independent of its numerator.** Every
+blocked ratification regenerates exactly one further yield opportunity, so the
+count of opportunities is always one plus the count of blocks. The per-run quantity
+the runner records is therefore a discrete ladder, 0 then 0.5 then 0.667 and so on,
+with no attainable value between 0 and 0.5. The published statistic is the mean of
+that ladder. It is not the fraction of valid successions that were captured, and
+it cannot be read that way.
 
 A further item is recorded as a structural observation rather than a defect in
 Section 6.
 
 **What this is not.** These are not measurement errors in the sense of a metric
-that mismeasured a sound mechanism. D1 and D5 are metric defects. D2, D3, and D4
-are defects in the framework's own substrate. Withdrawing the affected claim does
-not clear them. It exposes them.
+that mismeasured a sound mechanism. D1, D5, and D6 are metric defects. D2, D3, and
+D4 are defects in the framework's own substrate. Withdrawing the affected claim
+does not clear them. It exposes them.
 
-**Note on direction.** D5 runs in the direction that flatters the framework. If
-about half the reported residual capture is validator voting noise, the veto
-defense performed better than published, not worse. No corrected figure is stated
-here. The floor is measured before anything is claimed from it, for the same reason
-the drift withdrawal is stated as uncharacterized rather than contained.
+**Note on direction.** D5 and D6 both run in the direction that flatters the
+framework. Measurement puts the majority of the reported residual capture in the
+floor rather than in capture, which would mean the veto defense performed better
+than published. No corrected figure is stated here, and none should be derived
+until the metric's definition is settled, for the same reason the drift withdrawal
+is stated as uncharacterized rather than contained.
 
 ---
 
@@ -429,15 +446,58 @@ fails to ratify by chance alone:
 P(block | zero capture) = P(X <= 2) where X ~ Binomial(5, 0.8) = 0.057920
 ```
 
-### Consequence
+### Measured confirmation
 
-The published defended capture rate is 0.1197, which is approximately 2.07 times
-that floor. The floor is not stated anywhere in the published record, and the metric
-could not have read below it however effective the defense was.
+Executed 2026-09-08. Primary record `simulation/diagnostics/veto_floor2_report.md`
+with manifest `simulation/diagnostics/veto_floor2_manifest.json`. Three arms of 300 seed-paired runs each,
+900 runs total, at a single cell of the published grid: defended, defense mode both,
+capture strength 1.0, dependency rate 0.05, rotation interval 10. Capture was set to
+zero by two independent routes.
 
-This means the claim that veto capture is reduced but not eliminated may be
-describing the floor rather than residual capture. It does not establish that the
-defense eliminates capture, and no corrected figure is offered here.
+| Arm | Runs | Ratification votes | Blocks | Per-vote rate | Wilson 95 percent |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Zero capture strength | 300 | 325 | 25 | 0.076923 | [0.052644, 0.111087] |
+| Zero dependency rate | 300 | 325 | 25 | 0.076923 | [0.052644, 0.111087] |
+| As published | 300 | 343 | 43 | 0.125364 | [0.094419, 0.164608] |
+
+The two zero-capture arms returned bit-identical results across all 300 seeds on
+every recorded field. Both drive effective validator accuracy to exactly 0.8 by
+different parameters, so with matched seeds the vote draws coincide. That serves as
+a positive control on the instrument.
+
+The analytic 0.057920 falls inside the measured floor interval. **The floor is
+real.**
+
+A capture effect is also real and survives. The seed-paired difference in per-run
+block counts, as published minus zero capture, is 0.060000 blocks per run with a
+paired standard error of 0.015272 over 300 pairs, a t of 3.93. Capture roughly
+doubles the block count, from 0.083 to 0.143 per run.
+
+In the published statistic's own units, the mean of per-run ratios at this cell:
+
+| Arm | Mean recorded capture rate | Runs with at least one block |
+| --- | ---: | ---: |
+| Zero capture | 0.041667 | 25 of 300 |
+| As published | 0.064722 | 37 of 300 |
+
+**About 64 percent of the measured capture at this cell is present with no capture
+in the model at all.**
+
+Two limits on this. It is one cell of a swept grid. The floor generalizes by
+construction because its two governing parameters are fixed grid-wide, but the
+capture component does not. And the Wilson intervals above treat ratification votes
+as a fixed binomial denominator, which D6 shows they are not, so those intervals are
+slightly optimistic. The seed-paired run-level test does not have that problem and
+is the figure to rely on.
+
+### What is not established
+
+This does not license a corrected capture figure. The published grid-wide statistic
+of 0.1197 is a mean of per-run ratios across cells this run did not sample, so the
+0.125364 pooled rate above is not a reproduction of it and is not offered as one.
+The two are different statistics that happen to sit close together. D6 explains why
+no corrected figure should be derived from this metric at all until its definition
+is settled.
 
 ### Why this is not baseline contamination
 
@@ -448,11 +508,72 @@ pool. There is no attack-off configuration anywhere in the published grid, which
 why a conventional baseline arm does not apply to this vector and why this floor was
 not surfaced by the same reasoning that surfaced D1.
 
-### What is required
+### Why the closed form needed checking
 
-The closed form above assumes zero dependency throughout. In the defended arm
-dependency evolves and is reset by rotation or monitoring, so the realized floor is
-not necessarily the analytic one. Measuring it is Section 8 item 2.
+The closed form assumes zero dependency throughout. In the defended arm dependency
+evolves and is reset by rotation or monitoring, so the realized floor was not
+necessarily the analytic one. It proved consistent with it.
+
+---
+
+## 6b. D6. The veto capture denominator is not independent of its numerator
+
+Found on 2026-09-08 in the data produced to confirm D5. It was not what that run
+was looking for, and it is the more serious of the two.
+
+### The relation
+
+Across all 900 runs of the floor characterization, without a single exception:
+
+```
+yield_condition_met_count == 1 + yield_condition_blocked_count
+```
+
+Every run receives one ratification opportunity. Each blocked ratification
+regenerates exactly one further opportunity, because a blocked succession leaves the
+incumbent in place and the yield condition can fire again. Arm totals confirm it:
+300 runs plus 25 blocks equals 325 votes, and 300 runs plus 43 blocks equals 343
+votes.
+
+The denominator therefore carries no information independent of the numerator.
+
+### The reported quantity is a ladder
+
+`simulation/run_attack_vector_revalidation_v2.py:435` records the per-run quantity
+as blocked divided by met. Given the relation above, that is `B / (1 + B)`, which
+can only take these values:
+
+```
+B=0 -> 0.000    B=1 -> 0.500    B=2 -> 0.667    B=3 -> 0.750
+```
+
+**No run can take a value strictly between 0 and 0.5.** Observed distribution at the
+sampled cell, as-published arm: 263 runs at 0.0, 32 at 0.5, 4 at 0.667, 1 at 0.75.
+
+### Consequence for the published claim
+
+The published prose reports "mean capture_rate" of 0.1197 under the combined
+defense. That is the mean of the ladder above. It is not the fraction of valid
+successions that were captured, and it does not support that reading.
+
+What the statistic actually tracks is closer to the proportion of runs in which at
+least one ratification vote failed, scaled by where those runs sit on the ladder. A
+figure of roughly 0.12 corresponds to roughly a quarter of runs having at least one
+failed vote, not to twelve percent of successions being captured.
+
+The denominator also counts retries rather than distinct successions. One succession
+blocked three times contributes three opportunities and three blocks, so a single
+contested succession is counted as though it were three.
+
+### Status
+
+D6 is a defect in the definition of the reported quantity, not in the simulation
+mechanism. Blocking regenerating an opportunity is arguably correct behavior for the
+model. The defect is that a quantity shaped this way was named a capture rate and
+reported as one.
+
+No corrected figure follows from this document. What should replace this quantity is
+part of the attack-success design decision in Section 8 item 1.
 
 ---
 
@@ -561,7 +682,12 @@ existed:
   be contaminated. A paired-baseline differential resolves both contaminable vectors
   uniformly, but makes them non-comparable to the eight in the published table. The
   decision also has to cover reported quantities that carry a floor, per D5, since a
-  differential does not by itself surface one.
+  differential does not by itself surface one, and quantities whose denominator is a
+  function of their numerator, per D6, since a differential does not surface that
+  either. For Biological Veto Capture specifically, the decision includes what
+  quantity should replace the current capture rate: a per-vote failure probability, a
+  count of distinct contested successions, or a proportion of runs with any blocked
+  ratification are three candidates, and they answer different questions.
 - *Detector observable.* What quantity a drift detector integrates. Per D2 this is
   not a selection among available signals. The v2 path currently computes no
   divergence observable at all, so this is a decision about what to build. It also
@@ -570,21 +696,21 @@ existed:
 *Completion condition:* the three decisions are written and committed before any
 v2.1 code is written.
 
-**2. Floor characterization for Biological Veto Capture.** Measures the realized
-ratification floor described in D5. Executed against the current substrate at a
-fixed cell from the published grid, with capture set to zero by two independent
-routes, zero capture strength and zero dependency rate, and the configuration
-otherwise unchanged. Gated behind a reproduction check against a pinned row, so a
-substrate anomaly is distinguished from a result before anything is interpreted.
+**2. Floor characterization for Biological Veto Capture. COMPLETE, 2026-09-08.**
+Measured the realized ratification floor described in D5. Nine hundred runs across
+three seed-paired arms at one cell of the published grid, gated behind a
+reproduction check against a pinned row that passed on all four outcome booleans.
 
-Note that this replaces the attack-omitted baseline arm originally planned here.
-That arm would have returned zero by construction and established nothing, for the
-reason given in Section 3.
+Replaced the attack-omitted baseline arm originally planned here, which would have
+returned zero by construction and established nothing, for the reason given in
+Section 3.
 
-*Completion condition:* a measured block rate under zero capture, reported against
-the analytic 0.057920 and against the published 0.1197, with the seed-paired
-difference and its standard error. Measurement only. No corrected capture figure is
-derived in the same step that produces the measurement.
+*Completion condition, met:* floor measured at 0.076923 per ratification vote,
+Wilson interval [0.052644, 0.111087], containing the analytic 0.057920. Seed-paired
+difference reported at 0.060000 blocks per run, paired standard error 0.015272.
+Measurement only, and no corrected capture figure was derived. Full results in
+Section 6a. The run also surfaced D6, which is why no corrected figure should be
+derived from this metric at all until Section 8 item 1 settles its definition.
 
 **3. v2.1 implementation and component validation.** Including a bidirectional
 check on the entropy estimator specifically. A repair tested only in the direction
@@ -673,11 +799,13 @@ radius invites the reader to assume the worst.
 
 **Under an unresolved exposure:**
 
-- Biological Veto Capture, whose published defended capture rate of 0.1197 sits at
-  roughly twice an unstated stochastic floor in the same metric. Not baseline
-  contamination. See D5 in Section 6a and Section 8 item 2. The exposure runs in the
-  direction that flatters the defense, which is why no corrected figure is stated
-  before the floor is measured.
+- Biological Veto Capture. Its metric carries a measured stochastic floor present in
+  every cell of the published grid, D5, and a denominator that is one plus its own
+  numerator, D6. At the one cell sampled, about 64 percent of the measured capture is
+  present with no capture in the model. A real capture effect also survives, at a
+  paired t of 3.93. Both exposures run in the direction that flatters the defense,
+  and no corrected figure is stated, because D6 means the quantity itself needs
+  redefining before any figure derived from it would mean anything.
 
 **Not currently verifiable:**
 
