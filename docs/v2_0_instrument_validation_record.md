@@ -906,8 +906,18 @@ not be assumed in either direction.
 Generated snapshots follow from their sources and require no direct edit.
 
 Surfaces outside this repository carry both claims and are tracked separately: the
-book chapter covering slow drift, and the project site. The site post currently
-describes the veto exposure as the floor alone and does not carry D6.
+book chapter covering slow drift, and the project site.
+
+The site post is deliberately held as of 2026-09-08, to be folded into a later
+update rather than republished for each finding. Three items are known stale in it,
+recorded here so the deferral is not later mistaken for an oversight. It does not
+carry D6. It states the floor measurement as pending when it is complete. And it
+says the published figure "sits at roughly twice that floor," which compares the
+analytic per-vote floor against a mean of per-run ratios, two different statistics.
+Measured like for like at the sampled cell the ratio is about 1.55, so the floor is
+roughly 64 percent of the measured value rather than half of it. That sentence
+understates the problem rather than overstating it, which is why holding it is
+acceptable, but it is wrong and should not survive the next update.
 
 ---
 
