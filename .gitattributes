@@ -25,6 +25,15 @@
 # the exact confusion this file exists to remove.
 data/attack_vector_revalidation_v2/** -text
 
+# Hash-manifested diagnostic artifacts. Their manifests record SHA256 values
+# computed on the exact bytes the run produced on its Windows host, which are
+# CRLF. Store them verbatim, overriding the LF rules above, so a fresh clone on
+# any platform reproduces those bytes and the manifest verifies. Same rule and
+# reason as the pinned evidence line above. Forward fix for future runs is to
+# compute manifest hashes on LF-normalized bytes in the probe; these prefixes
+# predate that and are pinned as produced.
+simulation/diagnostics/drift_char_* -text
+
 # Binary assets, never converted.
 *.pdf binary
 *.png binary

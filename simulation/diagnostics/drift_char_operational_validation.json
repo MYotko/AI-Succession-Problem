@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "complete mismatch rejected",
+    "plan_fingerprint mismatch rejected",
+    "head mismatch rejected",
+    "script_sha256 mismatch rejected",
+    "recorded T0 identity, CSV hash, and csv.DictReader row count accepted"
+  ],
+  "passed": true,
+  "scope": "In-memory completion validation only; no synthetic run result was written.",
+  "simulation_runs": 0,
+  "utc": "2026-09-08T21:37:04.354368+00:00"
+}

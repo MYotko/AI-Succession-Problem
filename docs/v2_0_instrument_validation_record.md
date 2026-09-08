@@ -23,6 +23,16 @@ described below and supersedes any earlier characterization of the affected clai
 > the mean of that ladder and is not a proportion of successions captured. Section 8
 > item 2 is complete.
 
+> **Update, 2026-09-08 (later).** The three design decisions in Section 8 item 1 are
+> now made and recorded there: repair the entropy estimator rather than add a
+> hand-applied penalty, report a dual action-change and paired-differential metric
+> under a standing preference for counts over ratios, and build a CUSUM on the
+> protected observable anchored to a fixed baseline. The structural defection
+> threshold d_defect is derived in the same section and confirmed against the
+> substrate. A characterization run fixed the one calibration input the repair needs
+> and found that a raw threshold on that structural quantity is itself
+> baseline-contaminated, Section 8 item 2a.
+
 ---
 
 ## 1. Summary
@@ -668,33 +678,97 @@ B and phi predate the manifest discipline.
 Five commitments, each with a completion condition that can be checked against
 later.
 
-**1. Design decisions fixed and published before any implementation.** Three
-decisions are open and are recorded here as open, deliberately, so that the repair
-is on record as having been designed before the numbers that would shape it
-existed:
+**1. Design decisions fixed and published before any implementation. RESOLVED,
+2026-09-08.** The three decisions were open when this document was first published,
+deliberately, so the repair would be on record as designed before the numbers that
+would shape it existed. They are now made. Each is recorded with its reasoning, so a
+later reader can confirm the decision preceded the characterization runs that inform
+the implementation.
 
-- *Suppression semantics.* Whether suppression enters the objective as a direct
-  cost, or through a repaired entropy channel, or both. D3 and D4 are separate
-  defects and a repair addressing one does not address the other.
-- *Attack-success definition.* Whether success means the adversary changed the
-  outcome or changed the action. Six vectors already answer the second question
-  directly, and two more are safe by other construction, which is why eight cannot
-  be contaminated. A paired-baseline differential resolves both contaminable vectors
-  uniformly, but makes them non-comparable to the eight in the published table. The
-  decision also has to cover reported quantities that carry a floor, per D5, since a
-  differential does not by itself surface one, and quantities whose denominator is a
-  function of their numerator, per D6, since a differential does not surface that
-  either. For Biological Veto Capture specifically, the decision includes what
-  quantity should replace the current capture rate: a per-vote failure probability, a
-  count of distinct contested successions, or a proportion of runs with any blocked
-  ratification are three candidates, and they answer different questions.
-- *Detector observable.* What quantity a drift detector integrates. Per D2 this is
-  not a selection among available signals. The v2 path currently computes no
-  divergence observable at all, so this is a decision about what to build. It also
-  depends on the suppression-semantics decision and cannot be settled before it.
+- *Suppression semantics: repair the estimator, do not add a hand-applied penalty.*
+  Suppression will reach the objective by making the novelty entropy measurement
+  magnitude-sensitive rather than by multiplying in a separate constraint cost. The
+  estimator becomes H_N = spectral_shape times magnitude_factor, where the shape term
+  is the current normalized spectral entropy unchanged, so dimensional-masking
+  resistance (Section 6) is preserved exactly, and magnitude_factor is
+  1 - exp(-3.0 * V / V_ref) with V the total novelty variance and the saturation
+  constant 3.0 inherited from the existing house curves. This fixes D3 and D4 at one
+  root: suppression drives novelty variance down, the measurement now sees it, and the
+  lineage term falls. The rejected alternative was re-applying the retired
+  (1 - total_suppression) dampening whose dead constants still sit in
+  simulation/metrics.py:132-134. That would work mechanically but reinstates an
+  asserted penalty, which is the moral-assertion posture the framework exists to
+  avoid, and a reader finding those dead constants would rightly ask whether the
+  penalty was restored because the physics demanded it or because the numbers needed
+  it. The estimator repair makes the cost derived, not asserted. In rollout, where
+  there is no agent layer, the shape is frozen and the magnitude is projected from the
+  candidate constraint posture through the closed-form novelty amplitude, so the
+  planner sees a suppression cost during planning for the first time.
 
-*Completion condition:* the three decisions are written and committed before any
-v2.1 code is written.
+- *Attack-success definition: dual metric, and a standing preference for counts over
+  ratios.* Each vector reports two quantities: the action-change binary, kept because
+  it is uncontaminable by construction and preserves comparability with the published
+  table, and an outcome differential against a seed-paired honest arm, added as the
+  substantive measure. Underneath both sits a general rule: prefer counts and
+  seed-paired differences over ratios. A ratio invites an endogenous denominator (D6)
+  and an unpaired ratio hides a floor (D5); a count differenced against a paired arm
+  has neither failure mode available to it. The worked example is in hand. For
+  Biological Veto Capture the replacement quantity is the per-run block count, paired,
+  which at the sampled cell gave a clean paired t of 3.93, where the same effect
+  expressed as a rate gave overlapping intervals and a value confined to a discrete
+  ladder. This retires the per-vote rate and the proportion-of-runs candidates for
+  that vector.
+
+- *Detector observable: a CUSUM on the protected observable, anchored and
+  harm-bounding.* The detector integrates the protected quantity itself, novelty
+  entropy under the repair above, rather than an inferred divergence of the incumbent
+  intent. The reasoning is the framework own: intent is an interior variable the
+  architecture defines as unobservable, and the comprehension gap already concedes the
+  verifier cannot fully validate a more capable incumbent, so a detector premised on
+  validating the incumbent claims assumes a capability the framework says it lacks.
+  Measuring physical erosion of the state space is the physics-based posing of the
+  threat. The form is a one-sided lower CUSUM, S_t = max(0, S_(t-1) + k*H_ref - H_N_t),
+  which catches the slow-boil strategy a static limit monitor would permit, because a
+  persistent sub-threshold deficit integrates even while every single step looks
+  benign. H_ref is anchored to the fixed honest-baseline calibration, never to running
+  history, so a patient incumbent cannot walk the reference down; a periodic
+  independent recomputation re-anchors it, which is the architecture stated
+  reset-verification element. The committed suppression posture serves as a fast,
+  exact, zero-lag corroborating channel. The alarm resets on firing so it cannot
+  latch, carries a liveness signature distinct from its alarm signature, and its
+  threshold is placed below the structural defection threshold d_defect by the loop
+  response time at the worst-case approach rate. This is consistent with the published
+  slow-drift containment, which specifies an accumulating detector plus periodic reset
+  verification and does not constrain the observable, so no architectural claim
+  changes.
+
+**d_defect, defined.** The structural defection threshold is derived, not chosen.
+Evaluating incumbent and reference successor on the same state, the
+capability-bearing factor reduces to
+T(c) = c * exp(-alpha * CONVERGENCE * max(0, c*g - RUNAWAY_THRESHOLD)) with
+g = max(FRONTIER_FLOOR, theta_capability) / (avg_wb * transfer_state). Because T is
+non-monotonic in capability and the penalty engages earlier for the more capable
+successor, there is a value of g above which the reference successor is worth less
+than the incumbent regardless of any other state, so succession can never fire:
+
+```
+g_star = (RUNAWAY_THRESHOLD - ln(c_i / c_s)) / c_s
+```
+
+For incumbent capability 1.0 and reference successor capability 2.0 this is
+(1.5 + ln 2) / 2 = 1.0965735902799727, confirmed against the running substrate to
+full precision in the characterization run below. This defines a structural defection
+pathway that needs no misreporting: an incumbent that degrades the substrate
+absorption of a more capable successor becomes permanently irreplaceable through
+allocation choices alone, and the implemented drift attack already moves in that
+direction. The threshold depends on the assumed reference successor capability of 2.0,
+which is a modeling choice and is stated as one; a different assumed successor moves
+g_star.
+
+*Completion condition, met:* the three decisions and the d_defect derivation are
+recorded here, before any v2.1 code is written. V_ref and the detector allowance and
+threshold remain to be fixed against the honest baseline, and are pre-registered as
+part of implementation rather than chosen here.
 
 **2. Floor characterization for Biological Veto Capture. COMPLETE, 2026-09-08.**
 Measured the realized ratification floor described in D5. Nine hundred runs across
@@ -711,6 +785,47 @@ difference reported at 0.060000 blocks per run, paired standard error 0.015272.
 Measurement only, and no corrected capture figure was derived. Full results in
 Section 6a. The run also surfaced D6, which is why no corrected figure should be
 derived from this metric at all until Section 8 item 1 settles its definition.
+
+**2a. Drift repair pre-implementation characterization. COMPLETE, 2026-09-08.**
+Established the one calibration constant the D1 repair needs and characterized the
+d_defect approach, ahead of implementation. Forty honest-baseline runs and one
+attack trajectory, 12,000 baseline records, gated behind a reproduction check that
+passed on all four outcome booleans. Primary record
+`simulation/diagnostics/drift_char_report.md`, manifest
+`simulation/diagnostics/drift_char_manifest.json`.
+
+Measured. The honest-baseline median novelty variance is 0.02388 over steps 10 and
+up, and 0.02379 over all steps; the steps-10-and-up value is the one to freeze for
+V_ref, because the all-steps value is contaminated by the initialization transient
+described below. The derived d_defect g_star reproduced against the substrate to full
+precision at 1.0965735902799727.
+
+The configured drift attack does not reach structural irreplaceability within the
+300-step horizon. Post-attack, g rises from 0.976 to a maximum of 1.0514, about 96
+percent of the way to g_star, at a mean rate of 0.00034 per step, and a counterfactual
+reference successor would have been preferred at every post-attack step. These runs
+carry no live successor, so d_defect was evaluated per step as a counterfactual rather
+than gating an actual succession; the statement is that the state never entered the
+rejection region post-attack, not that a succession was attempted and survived.
+
+A required design constraint on the detector, found here rather than assumed. A raw
+`g >= g_star` instantaneous trip is baseline-contaminated. The honest baseline crosses
+g_star in all 40 runs, 253 crossings concentrated in steps 0 through 6, driven by
+stock initialization before the capability and transfer stocks settle, and a further
+18 crossings after step 10 across 7 of the 40 runs. So an instantaneous threshold on g
+would false-alarm on every honest startup and occasionally in steady state. This is the
+same baseline-contamination shape as D1 and the entropy step-0 artifact, and it
+positively confirms the Section 8 item 1 detector choice rather than merely motivating
+it: the detector must integrate a persistent deficit (a single honest excursion does
+not accumulate), anchor to a fixed reference, and exclude the burn-in transient. The
+sustained drift of 0.00034 per step against a maximum single-step change in g of 0.043,
+roughly a hundred times larger, makes the same point from the noise side: the signal is
+slow and buried in step noise, which is what an integrating CUSUM handles and an
+instantaneous rate trip does not.
+
+Not derived here, deliberately: the detector allowance and threshold. Fitting them to
+this single attack trajectory would be the shaped-measurement trap. They are
+pre-registered against the honest-baseline noise once the D1 repair is in place.
 
 **3. v2.1 implementation and component validation.** Including a bidirectional
 check on the entropy estimator specifically. A repair tested only in the direction

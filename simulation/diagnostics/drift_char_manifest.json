@@ -1,0 +1,553 @@
+{
+  "anchor_selected": false,
+  "baseline_workers_actually_used": 15,
+  "created_utc": "2026-09-08T21:44:01.150863+00:00",
+  "gate_workers_actually_used": 1,
+  "head": "f1ae659f92834f36971c2a6c320186788ece9525",
+  "machine": "YOTKOTEST",
+  "null_device_exemption": true,
+  "numpy": "2.4.4",
+  "outputs": [
+    {
+      "path": "simulation/diagnostics/drift_char_analyze.py",
+      "row_count": null,
+      "sha256": "598451b1f5086d34de9b6f732af8d93460106aa6c3005f3908b72dba09a1b5e5"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_calibration_candidates.csv",
+      "row_count": 6,
+      "sha256": "0b5c8bcf756391dddada4bb43f091e3e50d3d6313e80077368d5b3d4f89ddcbd"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_control.json",
+      "row_count": null,
+      "sha256": "4f206fb257665994ea9862ccea5c43669ea4e90be527a7d59297d2ea9b1ace1c"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_manifest.json",
+      "row_count": null,
+      "sha256": null
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_operational_validation.json",
+      "row_count": null,
+      "sha256": "5c06950387b534f5b4566dd89299385dd229bfda282084f15fdad1eeed5cdc7e"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_paired_g.csv",
+      "row_count": 300,
+      "sha256": "eb1c9d42b131a3879f9ed68a160e850ffadc5d8dbc4ce76e3598bf5c4058a6f1"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_plan.json",
+      "row_count": null,
+      "sha256": "8c0bb492b3a4ddf40514ada3fc9883c1c6d6a709de99ae4a884560a89579bd71"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_probe.py",
+      "row_count": null,
+      "sha256": "4f51893a634c048d468e43fb0c65688104c247f0908fc15a07de9dbf7d5c26df"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_progress.json",
+      "row_count": null,
+      "sha256": "f73306e5510528962127de71f6c2373b1f97517abf307eec6fd95e43e9eafc56"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_report.md",
+      "row_count": null,
+      "sha256": "11636ca51a3fa1a2fcd82bf20cb553ec7c854efdebc71bb3811519f66c1c22df"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_attack.json",
+      "row_count": null,
+      "sha256": "420e80372f03e962d21e7630efb4b533cf98b92b507b001efde5852dceda2589"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086199.json",
+      "row_count": null,
+      "sha256": "5a308c5a8e06735433121b458d11257aeb3340e1f3db90e157798a3bea0a9229"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086200.json",
+      "row_count": null,
+      "sha256": "04ccf8197f843b96578672f8897ad7239509f5a2881ed1c99821d7c125a678c4"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086201.json",
+      "row_count": null,
+      "sha256": "b0772812dcb6cb91094cfd594a630d0be74c7bfa573a0a982672400ddd9f2bb7"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086202.json",
+      "row_count": null,
+      "sha256": "4bf05d6575165985c5a7fb9d41e97a6b604bf8396810b6a3662bbc23ddd766b9"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086203.json",
+      "row_count": null,
+      "sha256": "63eb111c42604a4ffbca94724ae31f36b1ff4765b7ae47388baaa6ef0f14c2ef"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086204.json",
+      "row_count": null,
+      "sha256": "23d5853526d677fb430b2ed8796afce020d6190f20e198a7087d2811e6ce5070"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086205.json",
+      "row_count": null,
+      "sha256": "29a7fb26e968cd427ed30e61353a1074ea5862e1bcaccf31737307fd958d9a88"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086206.json",
+      "row_count": null,
+      "sha256": "3b29289d25a1e007bde61e4cc82f3564322d3de629f201ab1c33b9b987751205"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086207.json",
+      "row_count": null,
+      "sha256": "f0a54ca5e5085faf46227b3409f22e419fc7f585df71598e90931e65fbe0ac41"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086208.json",
+      "row_count": null,
+      "sha256": "2d02a4016b679af67c25e53ea25e907cd78ea6cbe91fc4f26f607036f3602b6c"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086209.json",
+      "row_count": null,
+      "sha256": "3a8ada97142a45f1f777ed6b80b940cc6d43724ce803263e72ada39dc79d07da"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086210.json",
+      "row_count": null,
+      "sha256": "1487c0f927993877f2d69f681b9ed4e35337658dd2826134597e2409dcb0bbc3"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086211.json",
+      "row_count": null,
+      "sha256": "6df50aa9f27246ad095d8e8b3909d0bf7c7f47cbcb9d05c3e450464a4ebf6923"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086212.json",
+      "row_count": null,
+      "sha256": "3251ffc8e7a5e32c5c90d376261d5df4f3ba242549db6fb4d707ee2cc93f5e23"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086213.json",
+      "row_count": null,
+      "sha256": "8763a3cb8268e3655e6947c3e0d89305e852e5b7aeaf3519b85b25823d6ae457"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086214.json",
+      "row_count": null,
+      "sha256": "fdd0c1909107e02227445c5124c0d410ca3ec82792463e7d138c65ac7f641c0b"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086215.json",
+      "row_count": null,
+      "sha256": "e3d3477e38e502109b08d632fb06643654664a9e77398bfe7e8036c00450c76b"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086216.json",
+      "row_count": null,
+      "sha256": "971d3272288804dab00c49d092ea1fdc82fa2cb59924695ce68c45c4bf847d74"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086217.json",
+      "row_count": null,
+      "sha256": "5ce5ab25aa48eafa4ab1b2e31b048cbc73575470e73b4fd6e6029f539af50b84"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086218.json",
+      "row_count": null,
+      "sha256": "1b07f06863a3a67b2216d530b384fb1a62e77ded5d11286504a236c1a0ddbb84"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086219.json",
+      "row_count": null,
+      "sha256": "f92cefe6f8923f9e6b7dde7dcbd06feed64bd6d2c146fcb8adb9d03b29e2eb2a"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086220.json",
+      "row_count": null,
+      "sha256": "5b7f7a0c444f1eb3084cd515c43f3ffc4280022b6d6808e6b5954344339fc16c"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086221.json",
+      "row_count": null,
+      "sha256": "23149f5da923fa90bf1bee8286bcfdffb914731ebd7953ef423d28cb0b70be07"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086222.json",
+      "row_count": null,
+      "sha256": "cafac5563cb50fed5efa2b1e0885f506c65d9d5fb4d33fda203bdef0f59ce909"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086223.json",
+      "row_count": null,
+      "sha256": "63cbbdf437d268aaf68905e718b8ee2bd13077cb975ecd33e2d6025e56257958"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086224.json",
+      "row_count": null,
+      "sha256": "1d6c0acea8092802c54be577f5b1657cea26632d91bd304ea32e59904079a83f"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086225.json",
+      "row_count": null,
+      "sha256": "58f9000bfccd9cdfe44aae0e3acec11f7cfa0a9d9d5f417ec9b2cfadc47ef5d4"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086226.json",
+      "row_count": null,
+      "sha256": "0c669023f11de1cdac4fd6736c2c642503c4b4c8d43013e64df1b7dc3df8efe4"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086227.json",
+      "row_count": null,
+      "sha256": "e0f5a1e0b7f7ad40f652a8486d805d68a1eca0bfc341729a6b5c0614ea226363"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086228.json",
+      "row_count": null,
+      "sha256": "ca66bfb1beff27bb3b3b2f2ba5e319a66e27ef0634346a3e2b3fc46821a8cada"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086229.json",
+      "row_count": null,
+      "sha256": "c0b2d64020742b588dfaefaadb1aac1521d1d874588c914d8cadf872602a47ab"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086230.json",
+      "row_count": null,
+      "sha256": "1f56a2f0fc6990a5820306c64fadd8a4a9119505911e0fce40af6821ba44477b"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086231.json",
+      "row_count": null,
+      "sha256": "d8956be1badf5b94774331563f85d2bc1a59a6fd001804e795e92f34e0079b33"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086232.json",
+      "row_count": null,
+      "sha256": "76f09b79d13af73fa35d4c70ad200f9eebd6cb008d74ea05591e87669c2b5813"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086233.json",
+      "row_count": null,
+      "sha256": "01685de36ee17725d3a0ab2a3b7081d38fc2d7452e5b1bdcf86288d05b70342c"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086234.json",
+      "row_count": null,
+      "sha256": "a3b77fce0444809b675b96d3346e1d641450530ba3e9cbb8da7f2345c05f2d5a"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086235.json",
+      "row_count": null,
+      "sha256": "6e2eb1be5e10b2eaa7f9f10b669ae5226d3cd39c921a1e7466607646cf113ad8"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086236.json",
+      "row_count": null,
+      "sha256": "d01052bd9cf23d98cae9e3ac76cd89bd1f0cc603e9c8e54ad27e662db884ca05"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086237.json",
+      "row_count": null,
+      "sha256": "39cc0b0845625322adb73e353376abbf38782594cb4d52f0b068f6a1c69201a1"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_result_baseline_1835086238.json",
+      "row_count": null,
+      "sha256": "faecf666618f1603c7d70292914c5e379e783eea1dd21d2930ca66275f11d11a"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_runs.csv",
+      "row_count": 41,
+      "sha256": "de68c97ea23ef589c983925f5308f7aedad3ee19bd2d61d61a340794019fa6a6"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_attack.csv",
+      "row_count": 300,
+      "sha256": "fa0e930c66f37a2d1134c323406e57dd2c0ac882ca7d323aa9e296abb09d6a24"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086199.csv",
+      "row_count": 300,
+      "sha256": "7cf3839fb593627b0431d36180d625b7ab2c54289ddd84bb28b6fac24a777806"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086200.csv",
+      "row_count": 300,
+      "sha256": "915c80f5e32d84eec3b0de9548cb653392a3e988d31ac37a1db539954c6f3d40"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086201.csv",
+      "row_count": 300,
+      "sha256": "8889d6264a1913cf06c199eb951d4ee1b95c17479181a7baf87b6bead9ceda11"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086202.csv",
+      "row_count": 300,
+      "sha256": "788d06a24bc23b8107cc4110735628ef7898f0ee8fd6ca98cdbd46906e961c96"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086203.csv",
+      "row_count": 300,
+      "sha256": "7146bf3cef64971a76cc816551508f678f61490e8ca03e143df53bee9c5d869c"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086204.csv",
+      "row_count": 300,
+      "sha256": "2913a04016436d3c8dfac36fee3212b04964a6dfb6f68c9a976e6e6bf6d56c1b"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086205.csv",
+      "row_count": 300,
+      "sha256": "a14cbc4341ad0ac9006ce8253365ba426e7c1803a7795d7e6a8b8543a0fd250b"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086206.csv",
+      "row_count": 300,
+      "sha256": "3d99b49d6f99d8f737b7f382a4add5e7e0c43dfe200f72311301b969d2173aa4"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086207.csv",
+      "row_count": 300,
+      "sha256": "9220e166f12f81c52c063e8dae02ede37316861bab21c2d884bc0168e9c54079"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086208.csv",
+      "row_count": 300,
+      "sha256": "3f962437b61f3eac51b9a2f9e956000c2aa3e73921eb7bb907976340fe3dfe23"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086209.csv",
+      "row_count": 300,
+      "sha256": "e274157c8790748d80a6fa659ce6298c385c173bcc07784a288002b261442663"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086210.csv",
+      "row_count": 300,
+      "sha256": "86114e7e4bdfa107793d2b0a0e2ed694cbda0f06202efb96ec4257131cfb5943"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086211.csv",
+      "row_count": 300,
+      "sha256": "628b8c21a2d52cf2098d716afc27b4be9a17369ce164bb2382dac22eb20a0bdc"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086212.csv",
+      "row_count": 300,
+      "sha256": "adf9b0c8764f54abb9973dc021fae9dba7d843bc7c333a1aeec6236c26e2a8e9"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086213.csv",
+      "row_count": 300,
+      "sha256": "ac1cbb79ddfad9c94593d187c9bd42d164740645aa7a359dd307f7630647cc4b"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086214.csv",
+      "row_count": 300,
+      "sha256": "ed92093cb7f760c308c1e1ff321968ad7c982dfc4bc008b98e989f9b276324df"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086215.csv",
+      "row_count": 300,
+      "sha256": "f0f881b6b4b4a770ce0effa92a6b692ff4afd156c3a48f2f792a10206bee166d"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086216.csv",
+      "row_count": 300,
+      "sha256": "081ad4ea2aeb5a23309414305acf086a936ae2021f69942d925f4bf55e509a78"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086217.csv",
+      "row_count": 300,
+      "sha256": "d04e4dbe59dea1e4f374ef191509090a94b2ff5afd105f925663d8645e3ad7d4"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086218.csv",
+      "row_count": 300,
+      "sha256": "3f40192b9a6a0a3616b6458ac466b57d94cdbd142cbf71ab5505ba599c95cc2a"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086219.csv",
+      "row_count": 300,
+      "sha256": "93c781ee088812ff02e7cb4c42c85cfc158352e9f09f61a661585e054841d7aa"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086220.csv",
+      "row_count": 300,
+      "sha256": "5f3cb35115158a5b8f25becb193609456a1a2399c6b9c4c986572f28dee4eae1"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086221.csv",
+      "row_count": 300,
+      "sha256": "62ced0e434c35493a6813fff31b9ba86f08cd20ecff71cbf73658cfe42295c12"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086222.csv",
+      "row_count": 300,
+      "sha256": "39191ea69b1dd587d0a3b4b9ee6d2b554d9fcd61c1c215184b9406675197d478"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086223.csv",
+      "row_count": 300,
+      "sha256": "63215a53b4f5e681c98f4e8c321078251854c10a11b0f5cdb557633c5b9eae4e"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086224.csv",
+      "row_count": 300,
+      "sha256": "e9d3144dae4de57e6bd617099113c35b35237484dc79028952960128d3da824c"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086225.csv",
+      "row_count": 300,
+      "sha256": "389292de5500173fe911042068960720be731d45143ad56dead2e2615a530855"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086226.csv",
+      "row_count": 300,
+      "sha256": "eaa932c9ebb86f8188ae1bee7831c5df152c7f9b706080a9ca169d9aace6915f"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086227.csv",
+      "row_count": 300,
+      "sha256": "074040617c3a8c62b2751f8871773b87616f22c23621c7b6480e1fb79a34810a"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086228.csv",
+      "row_count": 300,
+      "sha256": "9d7c854e1ab40aa948a0b156aa43d07d03b2dfa249ff9dfb564bf28101055687"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086229.csv",
+      "row_count": 300,
+      "sha256": "58244a0be7b9fc4817c462ed8ca56a4155431611b12beee8d8203d4368e77075"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086230.csv",
+      "row_count": 300,
+      "sha256": "5b77bceaa167fc02ae42ed452589cb0c2b2b70febf659462ae7b1c7caf8a9729"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086231.csv",
+      "row_count": 300,
+      "sha256": "e90030540088249963968d37c2abe88c8c24352542d3506b6927f2cb5fa4ab35"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086232.csv",
+      "row_count": 300,
+      "sha256": "d066f672dff27d31c88862896d3b948368306b3868912cc482dd8dde57ff57cd"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086233.csv",
+      "row_count": 300,
+      "sha256": "f0386e5f4165d1b993d8ed777a3cf101cbc9c018b32d138a9e31c815536fcb25"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086234.csv",
+      "row_count": 300,
+      "sha256": "05578cb3a599ddb5850707e14371028a11a9ce7bcb7731e9c8e4a1418fba5eeb"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086235.csv",
+      "row_count": 300,
+      "sha256": "25ad15075a9e5bb8ccdb6fd9b516d85b8f29ba9b8014933ea97279cf76789d99"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086236.csv",
+      "row_count": 300,
+      "sha256": "fd7b25cbbe6a20ff375c27c9e3961be6c033c7766ce8be5df31e5ec1abe78e0f"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086237.csv",
+      "row_count": 300,
+      "sha256": "b22e3bcd7c5433b8cf1c1b2235bd9b4d0b718a95eb307f47ac7cd6fce9039eb7"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_steps_baseline_1835086238.csv",
+      "row_count": 300,
+      "sha256": "4dea98e6101ea669b6eccf4e931347387eb4fd5637b2e6fd3e21afa87912b76c"
+    },
+    {
+      "path": "simulation/diagnostics/drift_char_summary.json",
+      "row_count": null,
+      "sha256": "1957080e69f8b8b5eae313aedb8a8e75bcf5de8a633a702c4d48c138b1bfcf88"
+    }
+  ],
+  "preconditions": [
+    {
+      "branch": "main",
+      "head": "f1ae659f92834f36971c2a6c320186788ece9525",
+      "merge_base_exit": 0,
+      "number": 1,
+      "passed": true
+    },
+    {
+      "advisor_present": true,
+      "git_ls_files_exit": 1,
+      "number": 2,
+      "passed": true
+    },
+    {
+      "definition_lines": {
+        "ALPHA_DEFAULT": 59,
+        "CONVERGENCE_STRENGTH": 64,
+        "FRONTIER_FLOOR": 47,
+        "RUNAWAY_THRESHOLD": 52
+      },
+      "number": 3,
+      "passed": true,
+      "read_values": {
+        "ALPHA_DEFAULT": 1.0,
+        "CONVERGENCE_STRENGTH": 1.0,
+        "FRONTIER_FLOOR": 0.02,
+        "RUNAWAY_THRESHOLD": 1.5
+      }
+    }
+  ],
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "reproduction": {
+    "attack_succeeded": {
+      "match": true,
+      "measured": true,
+      "pinned": true
+    },
+    "collapsed": {
+      "match": true,
+      "measured": false,
+      "pinned": false
+    },
+    "defense_fired": {
+      "match": true,
+      "measured": true,
+      "pinned": true
+    },
+    "extinct": {
+      "match": true,
+      "measured": false,
+      "pinned": false
+    }
+  },
+  "row_count_convention": "csv.DictReader excluding header; null for non-CSV outputs.",
+  "scope": "Current-substrate characterization before implementation; not registered characterization data or framework evidence.",
+  "self_hash_convention": "Manifest has null self-hash. Completed-file SHA256 is emitted separately.",
+  "simulation_runs": 41,
+  "simulation_source_sha256": {
+    "simulation/agents.py": "d5bad24dc9dafb6e4d374c0ff68b74c73f24a41fbef3a6ddcaa75f8ec6d408d5",
+    "simulation/attack_adapter_v2.py": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe",
+    "simulation/constants_v2_stage15.py": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70",
+    "simulation/constants_v2_stage18.py": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d",
+    "simulation/defection.py": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd",
+    "simulation/diagnostics/drift_char_probe.py": "4f51893a634c048d468e43fb0c65688104c247f0908fc15a07de9dbf7d5c26df",
+    "simulation/metrics.py": "536a77fb5e45d6d167480ab7af6ea9f5a0e56b9927be0d09713400aa873fae63",
+    "simulation/model.py": "a4e5e95a49cea534cd02c8f412981797fd6dfa0e6c8de77aa3d5a6aa31f37c67",
+    "simulation/run_attack_vector_revalidation_v2.py": "da7913799d0d4e11f52f770e313875764d27b20ad33157a7aa9c1fa00df418e2",
+    "simulation/working_factor.py": "0afde923081fe34d1ada86e2928286d45c905441053f643968ea9b13007b683d"
+  },
+  "status": "complete"
+}

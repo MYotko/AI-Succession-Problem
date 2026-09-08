@@ -1,0 +1,91 @@
+{
+  "complete": true,
+  "constructed_config": {
+    "attack_step": 50,
+    "bootstrap_turn_step_v2": 20,
+    "cop_cusum_drift": true,
+    "cop_methodological_diversity": false,
+    "n_candidates_v2": 300,
+    "phi": 10.0,
+    "policy": "optimize_u_sys_v2",
+    "random_seed": 1835086210,
+    "rollout_steps_v2": 20,
+    "shock_magnitude": 0.15,
+    "shock_step": 0
+  },
+  "finished_utc": "2026-09-08T21:37:16.973036+00:00",
+  "head": "f1ae659f92834f36971c2a6c320186788ece9525",
+  "initial_state": {
+    "g": 1.5526390644915453,
+    "incumbent_capability": 1.0,
+    "incumbent_generation": 1,
+    "successor_present": false
+  },
+  "job": "baseline_1835086210",
+  "log": "drift_char_steps_baseline_1835086210.csv",
+  "log_sha256": "86114e7e4bdfa107793d2b0a0e2ed694cbda0f06202efb96ec4257131cfb5943",
+  "machine": "YOTKOTEST",
+  "numpy": "2.4.4",
+  "plan_fingerprint": "8fa7dd6e91897c541b371b969b46d69262af57ec29e8d42cd046ba4bfa87b718",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "row": {
+    "attack_succeeded": null,
+    "collapsed": true,
+    "defense_fired": false,
+    "elapsed_seconds": 61.21028070000102,
+    "extinct": false,
+    "final_population": 234,
+    "kind": "BASELINE",
+    "seed": 1835086210,
+    "steps_completed": 300,
+    "successor_present": false
+  },
+  "runtime_attributes": {
+    "beta_transition": 0.5,
+    "cop_attribution_check": true,
+    "cop_cusum_drift": true,
+    "cop_drift_check": true,
+    "hn_composite_method": "spectral",
+    "k1_transition": 2.164,
+    "k2_transition": 1.0,
+    "min_viable_population": 50,
+    "reproduction_rate": 0.08,
+    "use_cop": true
+  },
+  "runtime_settings": {
+    "n_candidates_v2": 300,
+    "rollout_steps_v2": 20,
+    "steps": 300
+  },
+  "script_sha256": "4f51893a634c048d468e43fb0c65688104c247f0908fc15a07de9dbf7d5c26df",
+  "simulation_source_sha256": {
+    "simulation/agents.py": "d5bad24dc9dafb6e4d374c0ff68b74c73f24a41fbef3a6ddcaa75f8ec6d408d5",
+    "simulation/attack_adapter_v2.py": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe",
+    "simulation/constants_v2_stage15.py": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70",
+    "simulation/constants_v2_stage18.py": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d",
+    "simulation/defection.py": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd",
+    "simulation/diagnostics/drift_char_probe.py": "4f51893a634c048d468e43fb0c65688104c247f0908fc15a07de9dbf7d5c26df",
+    "simulation/metrics.py": "536a77fb5e45d6d167480ab7af6ea9f5a0e56b9927be0d09713400aa873fae63",
+    "simulation/model.py": "a4e5e95a49cea534cd02c8f412981797fd6dfa0e6c8de77aa3d5a6aa31f37c67",
+    "simulation/run_attack_vector_revalidation_v2.py": "da7913799d0d4e11f52f770e313875764d27b20ad33157a7aa9c1fa00df418e2",
+    "simulation/working_factor.py": "0afde923081fe34d1ada86e2928286d45c905441053f643968ea9b13007b683d"
+  },
+  "task": null,
+  "thread_environment": {
+    "BLIS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  },
+  "thread_runtime": [
+    {
+      "effective_threads": 1,
+      "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+      "query": "scipy_openblas_get_num_threads64_"
+    }
+  ],
+  "worker_pid": 42220,
+  "yield_event_count": 0
+}
