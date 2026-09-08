@@ -1,5 +1,21 @@
 # Sub-Threshold Drift v2.0 Summary
 
+> **CORRECTION, 2026-09-08. The headline result in this document is withdrawn.**
+> The 100 percent defended attack rate rests on a success metric that does not
+> discriminate an attack from an ordinary run. With no attack configured, the honest
+> baseline crosses the same 0.75 threshold in every run, usually within the first few
+> steps, and restricting the metric to the post-attack window does not change that.
+> The detector-timing explanation is withdrawn with it: the accumulator advances by a
+> fixed configured amount every step regardless of what the system does, and reaches
+> its alarm at the same step whether the defense is on or off.
+>
+> The honest status of this vector is **uncharacterized**, not contained and not
+> shown to be uncontained. The population outcome contrast in Section 6 is unaffected
+> and remains citable, as does the collapse figure.
+>
+> This document is retained as the dated record of what was reported. The primary
+> source for the correction is `docs/v2_0_instrument_validation_record.md`.
+
 ## 1. Data provenance
 
 - Run ID(s): `full_5ac6a2e_sub_threshold_drift`.

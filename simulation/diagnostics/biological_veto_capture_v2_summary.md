@@ -1,5 +1,26 @@
 # Biological Veto Capture Through Dependency v2.0 Summary
 
+> **CORRECTION, 2026-09-08. The figures in this document require two
+> qualifications.** Neither is a withdrawal, and a real capture effect survives both.
+>
+> First, the reported quantity has a floor. Five validators voting correctly 80
+> percent of the time against a 60 percent ratification threshold fail to ratify
+> 5.79 percent of the time with no capture present. Measured at 0.0769 per
+> ratification vote across a 900-run characterization. The two parameters that set
+> the floor are fixed grid-wide, so it is present in every cell below and the metric
+> could not have read lower however effective the defense was.
+>
+> Second, the quantity is not a proportion of captured successions. Each blocked
+> ratification regenerates exactly one further opportunity, so the yield count is
+> always one plus the block count and the per-run value can only be 0, 0.5, 0.667,
+> 0.75 and so on. The means tabulated below are means of that ladder. The
+> denominator also counts retries rather than distinct successions.
+>
+> No corrected figure is offered, because the quantity needs redefining first. The
+> v1.x figures in this document came from a different runner and these findings are
+> not established against them. Primary source:
+> `docs/v2_0_instrument_validation_record.md`.
+
 ## 1. Data provenance
 
 - Run ID(s): `full_5ac6a2e_veto_shard0of4`, `full_5ac6a2e_veto_shard1of4`, `full_5ac6a2e_veto_shard2of4`, `full_5ac6a2e_veto_shard3of4`.

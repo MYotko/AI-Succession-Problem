@@ -1,5 +1,23 @@
 # Attack Vector v2.0 Revalidation Final Report
 
+> **Superseding correction, 2026-09-08.** This is a dated artifact and is retained
+> as written. Two of the results it records have since been corrected.
+>
+> **Sub-Threshold Drift: withdrawn.** Its defended attack rate rests on a success
+> metric that the honest baseline trips in every run, so the figure carries no
+> information about the defense, and the detector-timing explanation is withdrawn
+> with it. The vector is uncharacterized under v2.0, neither contained nor shown
+> uncontained. Population outcome and collapse figures for it are unaffected.
+>
+> **Biological Veto Capture: qualified, not withdrawn.** The capture rate carries a
+> measured stochastic floor near 0.058 per ratification vote that is present with no
+> capture at all, and the quantity is not a proportion of captured successions
+> because each block regenerates one further opportunity. A real capture effect
+> survives both qualifications.
+>
+> Primary source: `docs/v2_0_instrument_validation_record.md`.
+
+
 ## 1. What was completed
 
 All requested full outputs are present after integration of laptop and Linux worker branches. Laptop completed Biological Veto Capture shards 0, 1, and 2, plus Measurement Tampering, Successor Contamination, Sybil Capture, and Evaluator Collusion. Linux completed Biological Veto Capture shard 3, Ledger Compromise, Domain Masking analytic full output, Opaque Reasoning, Bootstrap Subversion, Sub-Threshold Drift, and Engineered Fragility.

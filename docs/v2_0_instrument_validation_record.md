@@ -850,9 +850,14 @@ Pinned evidence referenced above resolves through the tag
 
 ## 11. Propagation
 
-The withdrawn claim in Section 2 appears on the following surfaces. The first two
-are byte-identical in the affected regions and must be corrected together, as
-nothing in the repository tests that they remain in agreement.
+Two distinct surfaces need correction. They overlap but are not the same set, and
+treating them as one is how the smaller of them gets missed.
+
+In both tables, the first two entries are byte-identical in the affected regions and
+must be corrected together, as nothing in the repository tests that they remain in
+agreement.
+
+### 11a. The withdrawn drift claim, Section 2
 
 | Surface | Sites |
 | --- | --- |
@@ -866,10 +871,43 @@ nothing in the repository tests that they remain in agreement.
 | `simulation/diagnostics/attack_vector_revalidation_audit.md` | lines 862 and 907, dated artifact, corrected inline |
 | `simulation/diagnostics/attack_vector_revalidation_documentation_edits.md` | dated artifact, corrected inline |
 
+### 11b. The veto capture figure, D5 and D6
+
+Added 2026-09-08. This surface was not in the first version of this document because
+D5 and D6 did not exist then. It is larger than 11a and four of its carriers appear
+nowhere in that table.
+
+The correction here is a qualification rather than a withdrawal. The figure stands
+as the number that was produced. What it does not support is the reading that some
+proportion of valid successions was captured.
+
+| Surface | Sites |
+| --- | --- |
+| `docs/The Lineage Imperative v2.0.md` | line 681, veto paragraph 2082-2090, table row 2133 |
+| `paper/paper_v2_working.md` | line 681, veto paragraph 2097-2105, table row 2148 |
+| `simulation/diagnostics/biological_veto_capture_v2_summary.md` | lines 28-46, the citable source for these figures |
+| `docs/SPECIFICATION_GAPS.md` | line 615 |
+| `docs/lineage_phi_program_reference.md` | line 1707 |
+| `paper/VIII_9_application_record.md` | line 67, dated artifact, corrected inline |
+| `simulation/diagnostics/attack_vector_revalidation_final_report.md` | line 44, dated artifact |
+| `simulation/diagnostics/attack_vector_revalidation_integration.md` | lines 21 and 41, dated artifact |
+| `simulation/diagnostics/attack_vector_revalidation_inventory.md` | line 192, which documents the metric definition without its consequences |
+| `simulation/diagnostics/attack_vector_revalidation_audit.md` | lines 592-595 and 719, dated artifact |
+| `simulation/diagnostics/attack_vector_revalidation_documentation_edits.md` | lines 23, 40, 44, 71, dated artifact |
+
+Note that the v1.x figures for this vector came from a different runner,
+`simulation/run_veto_capture_sweep.py`, and are recorded alongside the v2.0 ones in
+several of these documents. D5 and D6 are established against the v2 adapter path.
+Whether they apply to the v1.x figures as well is not established here and should
+not be assumed in either direction.
+
+### Out of scope for direct edit
+
 Generated snapshots follow from their sources and require no direct edit.
 
-Surfaces outside this repository also carry the claim and are tracked separately:
-the book chapter covering slow drift, and the project site.
+Surfaces outside this repository carry both claims and are tracked separately: the
+book chapter covering slow drift, and the project site. The site post currently
+describes the veto exposure as the floor alone and does not carry D6.
 
 ---
 

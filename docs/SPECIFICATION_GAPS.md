@@ -613,15 +613,24 @@ live simulation evidence with analytic closure and is corrected here.
 Eight standard binary vectors are fully blocked under the defended v2 adapter
 state at a 0.0 percent attack rate. Biological Veto Capture is reduced but
 not eliminated, with combined-defense mean capture_rate 0.1197 (SE 0.0047) on
-the v2 substrate. These are distinct from the v1.x sweep figures reported
+the v2 substrate. *(corrected 2026-09-08: that quantity carries a measured floor of
+roughly 0.058 per ratification vote present with no capture at all, and it is not a
+proportion of captured successions because each block regenerates one further
+opportunity. A capture effect survives both qualifications. See
+`docs/v2_0_instrument_validation_record.md`.)* These are distinct from the v1.x sweep figures reported
 elsewhere in this file; `veto_capture_sweep_v2.csv` is sweep revision 2 on the
 v1.x substrate and is not v2.0 substrate evidence.
 
-Sub-Threshold Drift is the open item. The defended v2.0 attack rate is 100.0
-percent by the peak-constraint success metric, so v1.x CUSUM containment does
-not carry over. The qualification is required whenever this is cited: the
-defense prevents extinction (92.0 percent undefended, 0.0 percent defended)
-but the detector fires after the transient breach rather than before it.
+Sub-Threshold Drift is the open item, and as of 2026-09-08 it is uncharacterized
+rather than uncontained. The defended v2.0 attack rate of 100.0 percent by the
+peak-constraint success metric is **withdrawn**: the honest baseline trips that same
+metric in every run, so the figure carries no information about the defense. The
+detector-timing explanation is withdrawn with it, because that accumulator advances
+by a fixed configured amount regardless of what the system does. v1.x CUSUM
+containment still does not carry over, and the vector is not shown to be contained
+either. The defense's effect on extinction (92.0 percent undefended, 0.0 percent
+defended) is a separate measure and is unaffected. See
+`docs/v2_0_instrument_validation_record.md`.
 
 Vectors 5 and 6 remain unimplemented as formally defended irreducible
 limitations. This gap therefore moves from Open to Partially Resolved, with

@@ -23,9 +23,11 @@ The framework paper is v1.x.2; the simulation has advanced to a v2.0 architectur
 - Adversarial revalidation: 10 vectors with live v2.0 Monte Carlo evidence
   (9,900 rows), Domain Masking analytically closed, 2 unimplemented. Eight
   standard vectors at 0.0 percent defended attack rate. Sub-Threshold Drift
-  open: 100.0 percent defended attack rate by the peak-constraint metric,
-  though the defense holds undefended extinction at 92.0 percent against 0.0
-  percent defended.
+  open: uncharacterized as of the 2026-09-08 correction. The 100.0 percent
+  defended attack rate previously reported here rests on a peak-constraint metric
+  that the honest baseline also trips, so it is withdrawn. The defense still holds
+  undefended extinction at 92.0 percent against 0.0 percent defended, which is a
+  separate measure and is unaffected. See docs/v2_0_instrument_validation_record.md.
 
 **Gate validation status**
 - Gate 1 PASSED, Gate 2 PASSED, Gate 3 PASSED, Gate 4 PASSED (G4.1-G4.3 validated at 1,050 runs), Gate 5 verified NOT_APPLICABLE (requires operational COP infrastructure). The bootstrap gate validation arc is closed.
