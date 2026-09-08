@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "complete mismatch rejected",
+    "plan_fingerprint mismatch rejected",
+    "head mismatch rejected",
+    "script_sha256 mismatch rejected",
+    "configuration mismatch rejected",
+    "matching completion accepted",
+    "exact completed job skipped, 899 remain"
+  ],
+  "in_memory_only": true,
+  "passed": true,
+  "scope": "Scheduler and resumption validation; synthetic objects were not written as run results.",
+  "simulation_runs": 0,
+  "utc": "2026-09-08T02:54:34.714823+00:00"
+}

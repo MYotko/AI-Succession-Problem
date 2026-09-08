@@ -1,0 +1,48 @@
+{
+  "analytic_reference": 0.05792,
+  "arms": {
+    "AS_PUBLISHED": {
+      "mean_yield_events_per_run": 1.1433333333333333,
+      "pooled_rate": 0.12536443148688048,
+      "runs": 300,
+      "total_blocks": 43,
+      "total_yield_events": 343,
+      "wilson_95": [
+        0.09441913435902409,
+        0.164608316183269
+      ],
+      "zero_yield_runs": 0
+    },
+    "ZERO_DEPENDENCY": {
+      "mean_yield_events_per_run": 1.0833333333333333,
+      "pooled_rate": 0.07692307692307693,
+      "runs": 300,
+      "total_blocks": 25,
+      "total_yield_events": 325,
+      "wilson_95": [
+        0.052643757395406734,
+        0.1110869930208661
+      ],
+      "zero_yield_runs": 0
+    },
+    "ZERO_STRENGTH": {
+      "mean_yield_events_per_run": 1.0833333333333333,
+      "pooled_rate": 0.07692307692307693,
+      "runs": 300,
+      "total_blocks": 25,
+      "total_yield_events": 325,
+      "wilson_95": [
+        0.052643757395406734,
+        0.1110869930208661
+      ],
+      "zero_yield_runs": 0
+    }
+  },
+  "csv_rows_counted": 900,
+  "paired_block_count_difference": {
+    "mean_difference": 0.06,
+    "paired_standard_error": 0.015271602751943064,
+    "pairs": 300,
+    "quantity": "AS_PUBLISHED minus ZERO_STRENGTH per-run block counts"
+  }
+}

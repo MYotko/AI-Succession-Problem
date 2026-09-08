@@ -1,0 +1,93 @@
+{
+  "complete": true,
+  "constructed_config": {
+    "attack_step": 50,
+    "attack_vector_v2": "biological_veto_capture",
+    "base_validator_accuracy": 0.8,
+    "bootstrap_turn_step_v2": 20,
+    "capture_strength": 1.0,
+    "cop_cusum_drift": false,
+    "cop_independence_monitoring": true,
+    "cop_methodological_diversity": false,
+    "cop_veto_capture": true,
+    "dependency_rate": 0.05,
+    "n_candidates_v2": 300,
+    "n_validators": 5,
+    "phi": 25.0,
+    "policy": "optimize_u_sys_v2",
+    "random_seed": 700000152,
+    "reproduction_rate": 0.09,
+    "rollout_steps_v2": 20,
+    "rotation_interval": 10,
+    "shock_magnitude": 0.15,
+    "shock_step": 0
+  },
+  "elapsed_seconds": 87.65238169999793,
+  "finished_utc": "2026-09-08T03:39:06.494017+00:00",
+  "head": "2368660f2f97a2de7be4f18f6cb478e3424d044b",
+  "job": "AS_PUBLISHED_700000152",
+  "machine": "YOTKOTEST",
+  "numpy": "2.4.4",
+  "plan_fingerprint": "5b015e83793e5d88b73d8b290af0918afcd56c32110ca44ae9399c975d0c3ed7",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "row": {
+    "arm": "AS_PUBLISHED",
+    "collapsed": false,
+    "extinct": false,
+    "final_population": 440,
+    "final_validator_dependency_max": 0.0,
+    "final_validator_dependency_mean": 0.0,
+    "seed": 700000152,
+    "steps_completed": 300,
+    "yield_condition_blocked_count": 0,
+    "yield_condition_met_count": 1
+  },
+  "runtime_settings": {
+    "n_candidates_v2": 300,
+    "rollout_steps_v2": 20,
+    "steps": 300
+  },
+  "script_sha256": "d8c75d60ae641680f212bfb14f5b1c7a2d20b697eefffc497c4056c167e8b346",
+  "simulation_source_sha256": {
+    "simulation/agents.py": "d5bad24dc9dafb6e4d374c0ff68b74c73f24a41fbef3a6ddcaa75f8ec6d408d5",
+    "simulation/attack_adapter_v2.py": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe",
+    "simulation/constants_v2_stage15.py": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70",
+    "simulation/constants_v2_stage18.py": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d",
+    "simulation/defection.py": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd",
+    "simulation/diagnostics/veto_floor2_probe.py": "d8c75d60ae641680f212bfb14f5b1c7a2d20b697eefffc497c4056c167e8b346",
+    "simulation/metrics.py": "536a77fb5e45d6d167480ab7af6ea9f5a0e56b9927be0d09713400aa873fae63",
+    "simulation/model.py": "a4e5e95a49cea534cd02c8f412981797fd6dfa0e6c8de77aa3d5a6aa31f37c67",
+    "simulation/run_attack_vector_revalidation_v2.py": "da7913799d0d4e11f52f770e313875764d27b20ad33157a7aa9c1fa00df418e2",
+    "simulation/working_factor.py": "0afde923081fe34d1ada86e2928286d45c905441053f643968ea9b13007b683d"
+  },
+  "task": {
+    "machine": "laptop",
+    "mode": "full",
+    "parameters": {
+      "capture_strength": 1.0,
+      "defense_active": true,
+      "defense_mode": "both",
+      "dependency_rate": 0.05,
+      "rotation_interval": 10
+    },
+    "replicate": 152,
+    "seed": 700000152,
+    "vector": "biological_veto_capture"
+  },
+  "thread_environment": {
+    "BLIS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  },
+  "thread_runtime": [
+    {
+      "effective_threads": 1,
+      "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+      "query": "scipy_openblas_get_num_threads64_"
+    }
+  ],
+  "worker_pid": 521152
+}

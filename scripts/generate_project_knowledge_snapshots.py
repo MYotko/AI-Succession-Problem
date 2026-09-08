@@ -86,7 +86,7 @@ NEVER_INGEST_BASENAMES = frozenset({
 })
 
 # Filename prefixes excluded from every category, including data manifests.
-NEVER_INGEST_BASENAME_PREFIXES = ("cusum_char_",)
+NEVER_INGEST_BASENAME_PREFIXES = ("cusum_char_", "veto_floor")
 
 # Directories whose contents must NEVER reach a generated snapshot, matched on
 # path prefix relative to the repository root.

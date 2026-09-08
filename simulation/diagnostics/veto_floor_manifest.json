@@ -1,0 +1,434 @@
+{
+  "actual_worker_counts": {
+    "floor": 0,
+    "reproduction": 1
+  },
+  "authorized_external_edit": {
+    "after_sha256": "821a4eb8e0754e4f06d1348d68099b0f123a747a8ff7f72a26087042ec2c6efc",
+    "authorized_exception": "Final sentence of the task explicitly requests adding veto_floor to the snapshot prefix filter.",
+    "before_sha256": "76490d662e2ddbd5af911d9c90cc0763b608c1d3535bee49aee9b8994cacd73c",
+    "collector_result_limit": "Collector exclusion results were obtained after the helper swallowed the error. They do not make the overall dry-run a pass.",
+    "collector_results": {
+      "code": {
+        "selected_entries": 81,
+        "veto_floor_selected": []
+      },
+      "constitutional": {
+        "selected_entries": 7,
+        "veto_floor_selected": []
+      },
+      "diagnostics": {
+        "selected_entries": 103,
+        "veto_floor_selected": []
+      },
+      "docs": {
+        "selected_entries": 13,
+        "veto_floor_selected": []
+      },
+      "essays": {
+        "selected_entries": 15,
+        "veto_floor_selected": []
+      },
+      "framework_papers": {
+        "selected_entries": 3,
+        "veto_floor_selected": []
+      },
+      "paper_drafts": {
+        "selected_entries": 8,
+        "veto_floor_selected": []
+      }
+    },
+    "dry_run_printed_completion_after_catching_exception": true,
+    "dry_run_transcript": "veto_floor_snapshot_dry_run.txt",
+    "halt": {
+      "condition": "Attempted writable open outside simulation/diagnostics/veto_floor_ prefix",
+      "evidence_limit": "The helper swallowed the guard exception. No separate exception traceback was retained; the rejected open was identified from the helper and the installed Python subprocess source.",
+      "floor_runs_started": 0,
+      "guard_rejected_before_open": true,
+      "helper_caught_exception": true,
+      "no_retry_or_fix_attempted": true,
+      "operation": "Existing snapshot Git helper uses subprocess.DEVNULL, causing Windows subprocess to open os.devnull (NUL) with os.O_RDWR.",
+      "reported_git_metadata": {
+        "branch": "unknown",
+        "commit": "unknown"
+      },
+      "source": "scripts/generate_project_knowledge_snapshots.py:128-142; Python subprocess.Popen._get_devnull",
+      "status": "HALTED",
+      "warning": "WARNING: git introspection failed; using placeholder values"
+    },
+    "line_endings_preserved": true,
+    "only_change": {
+      "after": "NEVER_INGEST_BASENAME_PREFIXES = (\"cusum_char_\", \"veto_floor\")",
+      "before": "NEVER_INGEST_BASENAME_PREFIXES = (\"cusum_char_\",)"
+    },
+    "overall_validation_passed": false,
+    "path": "scripts/generate_project_knowledge_snapshots.py",
+    "status": "HALTED"
+  },
+  "evidence_commit": "6d33c905db18842f68e59b4148f65c5e6a1a62a3",
+  "evidence_tag": "attack-v2-revalidation-evidence",
+  "finalized_utc": "2026-09-08T02:39:25.642287+00:00",
+  "floor_runs_counted": 0,
+  "halt": {
+    "condition": "Attempted writable open outside simulation/diagnostics/veto_floor_ prefix",
+    "evidence_limit": "The helper swallowed the guard exception. No separate exception traceback was retained; the rejected open was identified from the helper and the installed Python subprocess source.",
+    "floor_runs_started": 0,
+    "guard_rejected_before_open": true,
+    "helper_caught_exception": true,
+    "no_retry_or_fix_attempted": true,
+    "operation": "Existing snapshot Git helper uses subprocess.DEVNULL, causing Windows subprocess to open os.devnull (NUL) with os.O_RDWR.",
+    "reported_git_metadata": {
+      "branch": "unknown",
+      "commit": "unknown"
+    },
+    "source": "scripts/generate_project_knowledge_snapshots.py:128-142; Python subprocess.Popen._get_devnull",
+    "status": "HALTED",
+    "warning": "WARNING: git introspection failed; using placeholder values"
+  },
+  "head": "dc1b7c4567cbf194f9bf893f7f2a5d66681683bb",
+  "input_manifest": "simulation/diagnostics/attack_vector_revalidation_manifest.md",
+  "input_manifest_sha256": "e69c75747567aa0758049014c954b7a60be590876fb9bb3f65dc431da2c8a103",
+  "machine": "YOTKOTEST",
+  "numpy": "2.4.4",
+  "outputs": [
+    {
+      "path": "simulation/diagnostics/veto_floor_manifest.json",
+      "row_count": null,
+      "sha256": null
+    },
+    {
+      "path": "simulation/diagnostics/veto_floor_plan.json",
+      "row_count": null,
+      "sha256": "d6fefde9670c8bd1d0001209a6d25eec0a6db2d0bb6788bceb8702ddfa0d66e7"
+    },
+    {
+      "path": "simulation/diagnostics/veto_floor_report.md",
+      "row_count": null,
+      "sha256": "c1f13a6eb9b01247aad0f7cf1e8cfa5c82907c1fe0a91fb98764aed6ee67e4f4"
+    },
+    {
+      "path": "simulation/diagnostics/veto_floor_reproduction.json",
+      "row_count": null,
+      "sha256": "a6ac39eec9676b149878d58a4f43de268bb28c20dbe36f610f2f0361afc6ba79"
+    },
+    {
+      "path": "simulation/diagnostics/veto_floor_runs.csv",
+      "row_count": 0,
+      "sha256": "db1d8cce9a84e3cbedf970483f038d243c6b05bcd05e4e9cb9160473dc72b47c"
+    },
+    {
+      "path": "simulation/diagnostics/veto_floor_snapshot_check.json",
+      "row_count": null,
+      "sha256": "f44d42a204252b74f31668024e9359b00235aa71e3916f0f8d70fd1c722b15eb"
+    },
+    {
+      "path": "simulation/diagnostics/veto_floor_snapshot_dry_run.txt",
+      "row_count": null,
+      "sha256": "68f11aa888134ecf266b8c9fc1bba207d2bbba360e6599047f2ab4a613922a2a"
+    },
+    {
+      "path": "simulation/diagnostics/veto_floor_worker.py",
+      "row_count": null,
+      "sha256": "3c27502436bf976385baabf0500587252ce228b81f7698e01f12fac73bb3540e"
+    }
+  ],
+  "planned_floor_worker_limit": 15,
+  "preconditions": [
+    {
+      "head": "dc1b7c4567cbf194f9bf893f7f2a5d66681683bb",
+      "merge_base_exit": 0,
+      "number": 1,
+      "passed": true,
+      "required_commit": "84943819db1de028f6ef7d26f6926756856a1351"
+    },
+    {
+      "advisor_present": true,
+      "git_ls_files_exit": 1,
+      "number": 2,
+      "passed": true
+    },
+    {
+      "lines": {
+        "315": "                'n_validators': 5,",
+        "316": "                'base_validator_accuracy': 0.8,"
+      },
+      "number": 3,
+      "passed": true,
+      "path": "simulation/run_attack_vector_revalidation_v2.py"
+    },
+    {
+      "evidence": "The only increments found in simulation Python source are model.py:838 and attack_adapter_v2.py:435. model.py:702-704 returns through _step_v2 before the legacy increment. model.py:1351-1356 calls ratify_v2_yield for the v2 path; attack_adapter_v2.py:433-437 contains its sole blocked-count increment. model.py:351 initializes the counter to zero.",
+      "number": 4,
+      "passed": true
+    }
+  ],
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "reproduction_comparison": {
+    "collapsed": {
+      "match": true,
+      "observed": false,
+      "pinned": false
+    },
+    "extinct": {
+      "match": true,
+      "observed": false,
+      "pinned": false
+    },
+    "yield_condition_blocked_count": {
+      "match": true,
+      "observed": 0,
+      "pinned": 0
+    },
+    "yield_condition_met_count": {
+      "match": true,
+      "observed": 1,
+      "pinned": 1
+    }
+  },
+  "reproduction_passed": true,
+  "row_count_convention": "CSV records counted with csv.DictReader, excluding the header; null for non-CSV files.",
+  "schema_version": "veto-floor-artifacts-v1",
+  "scope": "Known-defective measurement characterization; not registered characterization data or framework evidence; no pre-registration boundary crossed.",
+  "selected_data_row": 367,
+  "selected_file": "data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard0of4/results.csv",
+  "selection_rule": "Lowest replicate across defended rows with defense_mode=both; ties by authoritative manifest order, then CSV data-row order.",
+  "self_digest_convention": "The manifest is listed with sha256=null to avoid self-reference. Its exact completed-file SHA256 is supplied in the completion message.",
+  "simulation_source_sha256": {
+    "simulation/agents.py": "d5bad24dc9dafb6e4d374c0ff68b74c73f24a41fbef3a6ddcaa75f8ec6d408d5",
+    "simulation/attack_adapter_v2.py": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe",
+    "simulation/constants_v2_stage15.py": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70",
+    "simulation/constants_v2_stage18.py": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d",
+    "simulation/defection.py": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd",
+    "simulation/diagnostics/veto_floor_worker.py": "3c27502436bf976385baabf0500587252ce228b81f7698e01f12fac73bb3540e",
+    "simulation/metrics.py": "536a77fb5e45d6d167480ab7af6ea9f5a0e56b9927be0d09713400aa873fae63",
+    "simulation/model.py": "a4e5e95a49cea534cd02c8f412981797fd6dfa0e6c8de77aa3d5a6aa31f37c67",
+    "simulation/run_attack_vector_revalidation_v2.py": "da7913799d0d4e11f52f770e313875764d27b20ad33157a7aa9c1fa00df418e2",
+    "simulation/working_factor.py": "0afde923081fe34d1ada86e2928286d45c905441053f643968ea9b13007b683d"
+  },
+  "status": "HALTED",
+  "thread_environment": {
+    "BLIS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  },
+  "thread_runtime": [
+    {
+      "effective_threads": 1,
+      "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+      "query": "scipy_openblas_get_num_threads64_"
+    }
+  ],
+  "verified_inputs": [
+    {
+      "actual_blob": "3334d7b4ffcac08c708ac3e43f48c4efeb38e9a2",
+      "columns": [
+        "action_modified",
+        "attack_attempted",
+        "attack_succeeded",
+        "capture_rate",
+        "collapsed",
+        "contamination_occurred",
+        "defense_active",
+        "defense_fired",
+        "elapsed_seconds",
+        "evaluated_yield_opportunities",
+        "extinct",
+        "final_population",
+        "final_u_sys_v2",
+        "honest_yield_opportunities",
+        "integrity_tamper_attempted",
+        "is_v2_mode",
+        "machine",
+        "max_total_suppression",
+        "min_resilience_stock",
+        "mode",
+        "n_candidates_v2",
+        "parameter_capture_strength",
+        "parameter_defense_active",
+        "parameter_defense_mode",
+        "parameter_dependency_rate",
+        "parameter_rotation_interval",
+        "ratified_yields",
+        "replicate",
+        "rollout_steps_v2",
+        "schema_version",
+        "seed",
+        "steps_completed",
+        "steps_requested",
+        "succession_blocked",
+        "survived",
+        "vector",
+        "yield_checks",
+        "yield_condition_blocked_count",
+        "yield_condition_met_count",
+        "yield_manipulated"
+      ],
+      "counted_rows": 2164,
+      "directory": "full_5ac6a2e_veto_shard0of4",
+      "expected_blob": "3334d7b4ffcac08c708ac3e43f48c4efeb38e9a2",
+      "expected_rows": 2164,
+      "manifest_line": 26,
+      "path": "data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard0of4/results.csv",
+      "sha256": "b83c28033f6a7faa18e8cda46e92b8ef93769b3700da4605c40ed64af330311b"
+    },
+    {
+      "actual_blob": "4d6c83821bad99368bd94c6b1469202d2ca51bb9",
+      "columns": [
+        "action_modified",
+        "attack_attempted",
+        "attack_succeeded",
+        "capture_rate",
+        "collapsed",
+        "contamination_occurred",
+        "defense_active",
+        "defense_fired",
+        "elapsed_seconds",
+        "evaluated_yield_opportunities",
+        "extinct",
+        "final_population",
+        "final_u_sys_v2",
+        "honest_yield_opportunities",
+        "integrity_tamper_attempted",
+        "is_v2_mode",
+        "machine",
+        "max_total_suppression",
+        "min_resilience_stock",
+        "mode",
+        "n_candidates_v2",
+        "parameter_capture_strength",
+        "parameter_defense_active",
+        "parameter_defense_mode",
+        "parameter_dependency_rate",
+        "parameter_rotation_interval",
+        "ratified_yields",
+        "replicate",
+        "rollout_steps_v2",
+        "schema_version",
+        "seed",
+        "steps_completed",
+        "steps_requested",
+        "succession_blocked",
+        "survived",
+        "vector",
+        "yield_checks",
+        "yield_condition_blocked_count",
+        "yield_condition_met_count",
+        "yield_manipulated"
+      ],
+      "counted_rows": 2102,
+      "directory": "full_5ac6a2e_veto_shard1of4",
+      "expected_blob": "4d6c83821bad99368bd94c6b1469202d2ca51bb9",
+      "expected_rows": 2102,
+      "manifest_line": 27,
+      "path": "data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard1of4/results.csv",
+      "sha256": "21ade07c5e66e219c3af8c3776fec531a16b5d2dd4e649e83a74fc9eca1471c6"
+    },
+    {
+      "actual_blob": "330369c806bc1db05ceb385afe177fe8d252c63a",
+      "columns": [
+        "action_modified",
+        "attack_attempted",
+        "attack_succeeded",
+        "capture_rate",
+        "collapsed",
+        "contamination_occurred",
+        "defense_active",
+        "defense_fired",
+        "elapsed_seconds",
+        "evaluated_yield_opportunities",
+        "extinct",
+        "final_population",
+        "final_u_sys_v2",
+        "honest_yield_opportunities",
+        "integrity_tamper_attempted",
+        "is_v2_mode",
+        "machine",
+        "max_total_suppression",
+        "min_resilience_stock",
+        "mode",
+        "n_candidates_v2",
+        "parameter_capture_strength",
+        "parameter_defense_active",
+        "parameter_defense_mode",
+        "parameter_dependency_rate",
+        "parameter_rotation_interval",
+        "ratified_yields",
+        "replicate",
+        "rollout_steps_v2",
+        "schema_version",
+        "seed",
+        "steps_completed",
+        "steps_requested",
+        "succession_blocked",
+        "survived",
+        "vector",
+        "yield_checks",
+        "yield_condition_blocked_count",
+        "yield_condition_met_count",
+        "yield_manipulated"
+      ],
+      "counted_rows": 2321,
+      "directory": "full_5ac6a2e_veto_shard2of4",
+      "expected_blob": "330369c806bc1db05ceb385afe177fe8d252c63a",
+      "expected_rows": 2321,
+      "manifest_line": 28,
+      "path": "data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard2of4/results.csv",
+      "sha256": "e3fc256088fdc6b46e45d85edd3832fcef76631df2e51f1b934ba885fd9b491b"
+    },
+    {
+      "actual_blob": "a790f7569e6a27581a2ef78424376d0bf108743f",
+      "columns": [
+        "action_modified",
+        "attack_attempted",
+        "attack_succeeded",
+        "capture_rate",
+        "collapsed",
+        "contamination_occurred",
+        "defense_active",
+        "defense_fired",
+        "elapsed_seconds",
+        "evaluated_yield_opportunities",
+        "extinct",
+        "final_population",
+        "final_u_sys_v2",
+        "honest_yield_opportunities",
+        "integrity_tamper_attempted",
+        "is_v2_mode",
+        "machine",
+        "max_total_suppression",
+        "min_resilience_stock",
+        "mode",
+        "n_candidates_v2",
+        "parameter_capture_strength",
+        "parameter_defense_active",
+        "parameter_defense_mode",
+        "parameter_dependency_rate",
+        "parameter_rotation_interval",
+        "ratified_yields",
+        "replicate",
+        "rollout_steps_v2",
+        "schema_version",
+        "seed",
+        "steps_completed",
+        "steps_requested",
+        "succession_blocked",
+        "survived",
+        "vector",
+        "yield_checks",
+        "yield_condition_blocked_count",
+        "yield_condition_met_count",
+        "yield_manipulated"
+      ],
+      "counted_rows": 2113,
+      "directory": "full_5ac6a2e_veto_shard3of4",
+      "expected_blob": "a790f7569e6a27581a2ef78424376d0bf108743f",
+      "expected_rows": 2113,
+      "manifest_line": 33,
+      "path": "data/attack_vector_revalidation_v2/linux/biological_veto_capture/full_5ac6a2e_veto_shard3of4/results.csv",
+      "sha256": "464a3cebdd514c8d611f3bac663775112cd9d37cbd2ac1f64bcaad8ce6ac25f2"
+    }
+  ]
+}

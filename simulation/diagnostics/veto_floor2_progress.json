@@ -1,0 +1,45 @@
+{
+  "active_jobs": [],
+  "batch_starts": [
+    {
+      "completed_skipped": 0,
+      "incomplete_jobs_restart_from_seed": [],
+      "utc": "2026-09-08T02:53:46.185559+00:00"
+    }
+  ],
+  "by_arm": {
+    "AS_PUBLISHED": {
+      "runs": 300,
+      "yield_events": 343,
+      "zero_event_runs": 0
+    },
+    "ZERO_DEPENDENCY": {
+      "runs": 300,
+      "yield_events": 325,
+      "zero_event_runs": 0
+    },
+    "ZERO_STRENGTH": {
+      "runs": 300,
+      "yield_events": 325,
+      "zero_event_runs": 0
+    }
+  },
+  "completed": 900,
+  "elapsed_seconds": 5243.645246399974,
+  "mode": "normal",
+  "mode_history": [
+    {
+      "event": "start_or_resume",
+      "mode": "normal",
+      "utc": "2026-09-08T02:53:46.185536+00:00",
+      "validated_completed": 0
+    }
+  ],
+  "mode_reduction_effective": true,
+  "peak_active_workers": 15,
+  "pending": 0,
+  "running": 0,
+  "status": "complete",
+  "updated_utc": "2026-09-08T04:21:09.837941+00:00",
+  "worker_limit": 15
+}

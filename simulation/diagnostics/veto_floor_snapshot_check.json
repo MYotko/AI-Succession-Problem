@@ -1,0 +1,62 @@
+{
+  "after_sha256": "821a4eb8e0754e4f06d1348d68099b0f123a747a8ff7f72a26087042ec2c6efc",
+  "authorized_exception": "Final sentence of the task explicitly requests adding veto_floor to the snapshot prefix filter.",
+  "before_sha256": "76490d662e2ddbd5af911d9c90cc0763b608c1d3535bee49aee9b8994cacd73c",
+  "collector_result_limit": "Collector exclusion results were obtained after the helper swallowed the error. They do not make the overall dry-run a pass.",
+  "collector_results": {
+    "code": {
+      "selected_entries": 81,
+      "veto_floor_selected": []
+    },
+    "constitutional": {
+      "selected_entries": 7,
+      "veto_floor_selected": []
+    },
+    "diagnostics": {
+      "selected_entries": 103,
+      "veto_floor_selected": []
+    },
+    "docs": {
+      "selected_entries": 13,
+      "veto_floor_selected": []
+    },
+    "essays": {
+      "selected_entries": 15,
+      "veto_floor_selected": []
+    },
+    "framework_papers": {
+      "selected_entries": 3,
+      "veto_floor_selected": []
+    },
+    "paper_drafts": {
+      "selected_entries": 8,
+      "veto_floor_selected": []
+    }
+  },
+  "dry_run_printed_completion_after_catching_exception": true,
+  "dry_run_transcript": "veto_floor_snapshot_dry_run.txt",
+  "halt": {
+    "condition": "Attempted writable open outside simulation/diagnostics/veto_floor_ prefix",
+    "evidence_limit": "The helper swallowed the guard exception. No separate exception traceback was retained; the rejected open was identified from the helper and the installed Python subprocess source.",
+    "floor_runs_started": 0,
+    "guard_rejected_before_open": true,
+    "helper_caught_exception": true,
+    "no_retry_or_fix_attempted": true,
+    "operation": "Existing snapshot Git helper uses subprocess.DEVNULL, causing Windows subprocess to open os.devnull (NUL) with os.O_RDWR.",
+    "reported_git_metadata": {
+      "branch": "unknown",
+      "commit": "unknown"
+    },
+    "source": "scripts/generate_project_knowledge_snapshots.py:128-142; Python subprocess.Popen._get_devnull",
+    "status": "HALTED",
+    "warning": "WARNING: git introspection failed; using placeholder values"
+  },
+  "line_endings_preserved": true,
+  "only_change": {
+    "after": "NEVER_INGEST_BASENAME_PREFIXES = (\"cusum_char_\", \"veto_floor\")",
+    "before": "NEVER_INGEST_BASENAME_PREFIXES = (\"cusum_char_\",)"
+  },
+  "overall_validation_passed": false,
+  "path": "scripts/generate_project_knowledge_snapshots.py",
+  "status": "HALTED"
+}

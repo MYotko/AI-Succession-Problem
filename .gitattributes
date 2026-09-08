@@ -8,8 +8,13 @@
 # See simulation/diagnostics/defended_collapse_discrepancy_report.md, Anomaly A1.
 
 # Documentation and tabular data are stored with LF in the repository.
-*.md  text eol=lf
-*.csv text eol=lf
+*.md   text eol=lf
+*.csv  text eol=lf
+# JSON added 2026-09-08. Diagnostic manifests record SHA256 values computed on
+# the working tree files. Without this, autocrlf stores LF and checks out CRLF on
+# Windows, so a fresh clone would produce different bytes and every hash in a
+# manifest would fail to verify. Same failure class as Anomaly A1 above.
+*.json text eol=lf
 
 # The attack vector revalidation evidence is a pinned, immutable record.
 # Apply no line ending conversion to it in either direction, so that a raw byte
