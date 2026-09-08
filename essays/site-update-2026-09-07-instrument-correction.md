@@ -2,6 +2,12 @@
 
 **Draft for lineageimperative.org. Date: 2026-09-07.**
 
+*Updated the same day it went up. While specifying the repair work for everything
+below, a second published figure turned out to have a problem of its own, and the
+reason originally given here for questioning it was wrong. Both are now described
+correctly in the section on the validator panel. The technical record carries the
+same correction.*
+
 *Technical record: `docs/v2_0_instrument_validation_record.md` in the project
 repository. That document is the citable source for everything summarized here.*
 
@@ -23,10 +29,15 @@ repository. That document is the citable source for everything summarized here.*
 > measurement of human novelty cannot detect suppression at all, returning its
 > highest possible value at the moment novelty output falls to zero.
 >
-> The honest status of that scenario is now uncharacterized, not contained. One
-> published failure becomes one open question and three documented defects. The
-> repair plan, and the three design decisions still open, are published here before
-> the corrected numbers exist.
+> A second published figure is also now in question. A validator panel of five, each
+> voting correctly 80 percent of the time, fails to reach agreement about 5.8 percent
+> of the time with no adversary present at all. The published capture figure sits at
+> roughly twice that floor, and the floor was never stated.
+>
+> The honest status of the first scenario is now uncharacterized, not contained. One
+> published failure becomes two open questions and three documented defects in the
+> simulation. The repair plan, and the three design decisions still open, are
+> published here before the corrected numbers exist.
 
 ---
 
@@ -114,10 +125,35 @@ What still stands, and is unaffected by any of the above:
 - The Sybil defense scaling study, whose data verifies exactly against its
   published inventory.
 
-One scenario now carries an unresolved question rather than a clean result. Its
-test reads a running total that could in principle be contaminated the same way,
-and unlike the others its published figure is not zero, so nothing bounds the
-problem from the outside. A baseline check on it is the first thing scheduled.
+## A second published figure, now in question
+
+One more scenario carries an unresolved question, and it surfaced while writing up
+the repair plan for everything above.
+
+In that scenario an adversary gradually captures the panel of independent validators
+who ratify a succession. The published result was that the defense reduces capture
+without eliminating it, with roughly 12 percent of valid successions still blocked
+when the defense was active.
+
+The panel has five validators. Each one votes correctly 80 percent of the time, and
+ratification needs agreement from at least three of the five. Run that with no
+capture at all, no adversary anywhere near the panel, and it still fails to ratify
+about 5.8 percent of the time. That is just five imperfect voters missing a
+threshold.
+
+So the published figure sits at roughly twice a floor that nobody calculated, and
+the measurement could never have read below that floor no matter how well the
+defense worked. About half of what was reported as residual capture may be the panel
+disagreeing with itself.
+
+This one runs in the direction that flatters us. If half that number is noise, the
+defense worked better than published, not worse. Which is exactly why no corrected
+figure appears here. The floor gets measured first, and the measurement is specified
+before it runs.
+
+It is also worth being clear that this is a different fault from the one above. It is
+not that a test could not tell an attack from an ordinary run. It is that a reported
+number had a floor built into it and the floor was never stated.
 
 ## A separate problem, found in the same review
 
@@ -150,7 +186,8 @@ kept.
    How suppression should enter the objective, what it should mean for an attack to
    have succeeded, and what a drift detector should actually be reading. These are
    published as open, deliberately, before the numbers that would shape them exist.
-2. **A baseline check on the one remaining scenario with an unbounded exposure.**
+2. **The validator panel's failure floor gets measured**, so the published capture
+   figure can be stated against it rather than against zero.
 3. **The repair, with validation that would fail if the repair were absent.**
 4. **The unarchived results regenerated and run on both the old and repaired
    simulation**, so the difference between them is measurable rather than asserted.

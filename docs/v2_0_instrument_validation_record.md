@@ -5,18 +5,28 @@
 **Status:** primary disclosure. This document is the citable source for the defects
 described below and supersedes any earlier characterization of the affected claims.
 
+> **Correction, 2026-09-07, same day as first publication.** The first version of
+> this document described the Biological Veto Capture success predicate as
+> baseline-contaminable in the same sense as Sub-Threshold Drift. That was wrong.
+> That predicate cannot fire without its own attack configured, so it joins the
+> vectors that are safe by construction, moving the count of structurally safe
+> vectors from seven to eight. The exposure on its published figure is real but has
+> a different cause, an unstated stochastic floor in the reported quantity, now
+> recorded as D5. The planned remediation changes accordingly. The conclusion that
+> the published figure required a check was correct. The stated mechanism was not.
+
 ---
 
 ## 1. Summary
 
-Four defects were found in the v2.0 simulation substrate and in the success metrics
+Five defects were found in the v2.0 simulation substrate and in the success metrics
 used for the adversarial revalidation. One published claim is withdrawn. One
 published figure is placed under an unresolved exposure. A separate archival gap
 in the pre-manifest era is recorded in Section 7.
 
 The defects, in the order they act on the measurement chain:
 
-**D1. Baseline contamination in three success metrics.** Three of the ten live
+**D1. Baseline contamination in two success metrics.** Two of the ten live
 adversarial vectors resolve on a threshold applied to a recorded state series over
 the whole run, with no post-attack window and no baseline arm. For Sub-Threshold
 Drift the honest baseline crosses the threshold in every run, so the reported
@@ -38,13 +48,27 @@ invariant by construction. Suppression enters novelty generation as a single sca
 applied to every agent. The estimator therefore cannot observe it, and at total
 suppression the eigenvalue floor produces exactly the maximum value.
 
-A fifth item is recorded as a structural observation rather than a defect in
+**D5. The veto ratification metric has an unstated stochastic floor.** The reported
+quantity for Biological Veto Capture is the fraction of valid successions blocked
+by the validator pool. Five validators each vote correctly 80 percent of the time
+and ratification requires 60 percent agreement, so the pool fails to ratify 5.79
+percent of the time with no capture present at all. The published defended figure
+of 0.1197 sits at roughly twice that floor, and the floor was never stated. The
+metric could not have read below it however effective the defense was.
+
+A further item is recorded as a structural observation rather than a defect in
 Section 6.
 
 **What this is not.** These are not measurement errors in the sense of a metric
-that mismeasured a sound mechanism. D1 is a metric defect. D2, D3, and D4 are
-defects in the framework's own substrate. Withdrawing the affected claim does not
-clear them. It exposes them.
+that mismeasured a sound mechanism. D1 and D5 are metric defects. D2, D3, and D4
+are defects in the framework's own substrate. Withdrawing the affected claim does
+not clear them. It exposes them.
+
+**Note on direction.** D5 runs in the direction that flatters the framework. If
+about half the reported residual capture is validator voting noise, the veto
+defense performed better than published, not worse. No corrected figure is stated
+here. The floor is measured before anything is claimed from it, for the same reason
+the drift withdrawal is stated as uncharacterized rather than contained.
 
 ---
 
@@ -132,7 +156,7 @@ therefore breaches the threshold as an ordinary consequence of candidate samplin
 
 ### Scope across the ten live vectors
 
-Seven of the ten cannot be contaminated by construction, by two distinct
+Eight of the ten cannot be contaminated by construction, by three distinct
 mechanisms.
 
 Six resolve on whether the adversary modified the committed action:
@@ -148,16 +172,23 @@ fired while the evaluated yield did not. With no attack configured,
 `simulation/attack_adapter_v2.py:381-384`, so the two are necessarily equal and the
 predicate is false by construction.
 
-Three read a recorded state series or counter and are contaminable in principle:
+One, `biological_veto_capture`, resolves at line 369 on a cumulative counter,
+`yield_condition_blocked_count`. That counter has two write sites. The one at
+`simulation/model.py:838` sits inside the legacy step function, which returns to
+the v2 path at line 703 before reaching it, so it never executes in v2 mode. The
+only live writer is `simulation/attack_adapter_v2.py:435`, inside `ratify_v2_yield`,
+which returns early unless the configured attack vector is this one. With no attack
+configured the counter cannot increment, so the predicate is false by construction.
+
+The remaining two read a recorded state series and are contaminable in principle:
 
 | Vector | Expression | Exposure |
 | --- | --- | --- |
 | `sub_threshold_drift` | `max(total_suppression) > 0.75` | Contaminated. Measured. Result withdrawn. |
 | `engineered_fragility` | `min(resilience_stock) < 0.25` | Contaminable, but empirically bounded. Its defended attack rate is 0.0 percent, which bounds baseline incidence at zero in that configuration only. |
-| `biological_veto_capture` | `yield_condition_blocked_count > 0` | Contaminable, and **not bounded**. Its defended result is a capture rate of 0.1197 rather than zero, so no empirical bound follows. |
 
-The Biological Veto Capture exposure is unresolved. Its figure is published. A
-baseline arm for it is open work and is item 2 in Section 8.
+Biological Veto Capture is therefore safe from baseline contamination. Its published
+figure carries a different and unrelated exposure, recorded as D5 in Section 6a.
 
 ---
 
@@ -371,6 +402,60 @@ published architecture and is item 3 in Section 8.
 
 ---
 
+## 6a. D5. The veto ratification metric has an unstated stochastic floor
+
+Recorded on 2026-09-07, the same day this document was first published, while
+specifying the remediation originally planned for this vector. The specification
+work found that the planned remediation addressed a mechanism that does not exist,
+and that the real exposure is this one.
+
+### The mechanism
+
+The reported quantity for Biological Veto Capture is a capture rate, the count of
+valid successions blocked divided by the count of yield conditions met. Blocking
+happens in `simulation/attack_adapter_v2.py:420-437`. Each validator votes to
+ratify with probability `base_validator_accuracy * (1 - dependency * capture_strength)`,
+and ratification requires at least 60 percent agreement.
+
+The revalidation runner fixes five validators and a base accuracy of 0.8 at
+`simulation/run_attack_vector_revalidation_v2.py:315-316`. With five validators, 60
+percent agreement means at least three votes to ratify.
+
+At zero effective capture, meaning either no dependency or no capture strength, each
+validator still votes to ratify only 80 percent of the time. The pool therefore
+fails to ratify by chance alone:
+
+```
+P(block | zero capture) = P(X <= 2) where X ~ Binomial(5, 0.8) = 0.057920
+```
+
+### Consequence
+
+The published defended capture rate is 0.1197, which is approximately 2.07 times
+that floor. The floor is not stated anywhere in the published record, and the metric
+could not have read below it however effective the defense was.
+
+This means the claim that veto capture is reduced but not eliminated may be
+describing the floor rather than residual capture. It does not establish that the
+defense eliminates capture, and no corrected figure is offered here.
+
+### Why this is not baseline contamination
+
+`cop_veto_capture` is set true in both arms at
+`simulation/run_attack_vector_revalidation_v2.py:307`. The defense in this vector is
+validator rotation and independence monitoring, not the presence of the validator
+pool. There is no attack-off configuration anywhere in the published grid, which is
+why a conventional baseline arm does not apply to this vector and why this floor was
+not surfaced by the same reasoning that surfaced D1.
+
+### What is required
+
+The closed form above assumes zero dependency throughout. In the defended arm
+dependency evolves and is reset by rotation or monitoring, so the realized floor is
+not necessarily the analytic one. Measuring it is Section 8 item 2.
+
+---
+
 ## 7. Archival gap: Phase B and phi primary data
 
 This is a process failure in the era before the manifest discipline existed. It is
@@ -471,10 +556,12 @@ existed:
   cost, or through a repaired entropy channel, or both. D3 and D4 are separate
   defects and a repair addressing one does not address the other.
 - *Attack-success definition.* Whether success means the adversary changed the
-  outcome or changed the action. Seven vectors already answer the second question,
-  which is why they cannot be contaminated. A paired-baseline differential resolves
-  all three contaminable vectors uniformly, but makes them non-comparable to the
-  seven in the published table.
+  outcome or changed the action. Six vectors already answer the second question
+  directly, and two more are safe by other construction, which is why eight cannot
+  be contaminated. A paired-baseline differential resolves both contaminable vectors
+  uniformly, but makes them non-comparable to the eight in the published table. The
+  decision also has to cover reported quantities that carry a floor, per D5, since a
+  differential does not by itself surface one.
 - *Detector observable.* What quantity a drift detector integrates. Per D2 this is
   not a selection among available signals. The v2 path currently computes no
   divergence observable at all, so this is a decision about what to build. It also
@@ -483,13 +570,21 @@ existed:
 *Completion condition:* the three decisions are written and committed before any
 v2.1 code is written.
 
-**2. Baseline arm for Biological Veto Capture.** The one unresolved contamination
-exposure. Executed against the current substrate with the attack vector omitted and
-the configuration otherwise unchanged, following the pattern already used for the
-drift baseline.
+**2. Floor characterization for Biological Veto Capture.** Measures the realized
+ratification floor described in D5. Executed against the current substrate at a
+fixed cell from the published grid, with capture set to zero by two independent
+routes, zero capture strength and zero dependency rate, and the configuration
+otherwise unchanged. Gated behind a reproduction check against a pinned row, so a
+substrate anomaly is distinguished from a result before anything is interpreted.
 
-*Completion condition:* a reported baseline incidence of blocked yields with no
-attack configured, either zero or nonzero, both reported.
+Note that this replaces the attack-omitted baseline arm originally planned here.
+That arm would have returned zero by construction and established nothing, for the
+reason given in Section 3.
+
+*Completion condition:* a measured block rate under zero capture, reported against
+the analytic 0.057920 and against the published 0.1197, with the seed-paired
+difference and its standard error. Measurement only. No corrected capture figure is
+derived in the same step that produces the measurement.
 
 **3. v2.1 implementation and component validation.** Including a bidirectional
 check on the entropy estimator specifically. A repair tested only in the direction
@@ -544,7 +639,7 @@ radius invites the reader to assume the worst.
 
 - The Nash equilibrium result. Analytic, not simulated.
 - Domain Masking's analytic closure. See Section 6.
-- The seven adversarial vectors that cannot be contaminated by construction. See
+- The eight adversarial vectors that cannot be contaminated by construction. See
   Section 3.
 - The reproduction gate. Eight of eight outcome booleans reproduced exactly in both
   arms against the pinned evidence, confirming the substrate has not drifted since
@@ -554,8 +649,11 @@ radius invites the reader to assume the worst.
 
 **Under an unresolved exposure:**
 
-- Biological Veto Capture, whose defended capture rate of 0.1197 is published and
-  whose metric is contaminable with no empirical bound. Section 8 item 2.
+- Biological Veto Capture, whose published defended capture rate of 0.1197 sits at
+  roughly twice an unstated stochastic floor in the same metric. Not baseline
+  contamination. See D5 in Section 6a and Section 8 item 2. The exposure runs in the
+  direction that flatters the defense, which is why no corrected figure is stated
+  before the floor is measured.
 
 **Not currently verifiable:**
 
