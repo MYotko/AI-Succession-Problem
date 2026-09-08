@@ -622,11 +622,35 @@ than after it.
 output path corrected, and no sweep runner able to write outside a tracked
 directory.
 
+**Deferred to v2.1 scope, recorded here so the deferral is not mistaken later for
+an oversight.** While measuring the yield-event rate for item 2, the defended rows
+at defense mode "both" in one pinned shard were observed to pool to a block rate of
+0.2327, against a published combined-defense figure of 0.1197. That difference is
+most likely an artifact of how the published figure aggregates across shards,
+defense modes, and attack strengths, and of the difference between a pooled rate
+and a mean of per-run ratios. It has not been traced, deliberately. Chasing it now
+would delay the floor measurement that unblocks the design decisions.
+
+If it proves not to be an aggregation artifact, it is a discrepancy in the
+published figure itself, distinct from the floor recorded as D5, and it is handled
+in the v2.1 arc. Nothing in this document depends on resolving it: D5 compares the
+published figure as published against the analytic floor, which is a statement
+about the published number rather than a claim that the number correctly summarizes
+its own data. That latter question is open and is named here as open.
+
 **Open item, not a commitment.** The third development machine is in a failed state
 and holds an unknown quantity of untracked output. There is no inventory of what
 that might be, because untracked files were never enumerated anywhere. This is the
 same failure mode as Section 7, still live, on a machine that cannot currently be
 reached.
+
+**Open item, not a commitment.** The snapshot generator's git introspection fails
+open. When it cannot read the commit and branch it emits a warning, records both as
+`unknown`, and reports completion. The tool that stamps provenance onto generated
+snapshots can therefore succeed while its provenance capture has silently failed.
+Found during the first veto floor attempt, at
+`scripts/generate_project_knowledge_snapshots.py:140-142`. Same class as the Sybil
+finding: a check reporting healthy while defeated.
 
 ---
 
