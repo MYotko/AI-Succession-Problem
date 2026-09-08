@@ -85,6 +85,9 @@ NEVER_INGEST_BASENAMES = frozenset({
     "LINEAGE_IMPERATIVE_ADVISOR.md",
 })
 
+# Filename prefixes excluded from every category, including data manifests.
+NEVER_INGEST_BASENAME_PREFIXES = ("cusum_char_",)
+
 # Directories whose contents must NEVER reach a generated snapshot, matched on
 # path prefix relative to the repository root.
 #
@@ -162,13 +165,17 @@ def relpath_str(path: Path) -> str:
 def is_never_ingest(path: Path) -> bool:
     """True if this file must never reach a generated snapshot.
 
-    Basenames are matched wherever the file sits, so a future change to a
-    collector's scope cannot route around the rule. Directories are matched on
-    the path relative to the repository root, at any depth below the denied
-    directory. A path outside the repository cannot be under a denied
-    directory, so it fails the directory test and is judged on basename alone.
+    Basenames and their prefixes are matched wherever the file sits, so a
+    future change to a collector's scope cannot route around the rule.
+    Directories are matched on the path relative to the repository root, at any
+    depth below the denied directory. A path outside the repository cannot be
+    under a denied directory, so it fails the directory test and is judged on
+    basename alone.
     """
-    if path.name in NEVER_INGEST_BASENAMES:
+    if (
+        path.name in NEVER_INGEST_BASENAMES
+        or path.name.startswith(NEVER_INGEST_BASENAME_PREFIXES)
+    ):
         return True
     try:
         relparts = path.resolve().relative_to(REPO_ROOT.resolve()).parts

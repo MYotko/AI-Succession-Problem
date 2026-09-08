@@ -1,0 +1,19 @@
+{
+  "authoritative_manifest_exclusion": "all cusum_char_ artifacts excluded by prefix",
+  "head": "1261c9f430411b9fa0060a7384bf4ec5175e4f4e",
+  "machine": "YOTKOTEST",
+  "numpy": "2.4.4",
+  "phases": {
+    "baseline": "complete and reported",
+    "pilot": "complete; exact reproduction in both arms"
+  },
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "scope": "instrument characterization; not registered characterization data",
+  "source_sha256": {
+    "agents.py": "d5bad24dc9dafb6e4d374c0ff68b74c73f24a41fbef3a6ddcaa75f8ec6d408d5",
+    "attack_adapter_v2.py": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe",
+    "model.py": "a4e5e95a49cea534cd02c8f412981797fd6dfa0e6c8de77aa3d5a6aa31f37c67",
+    "run_attack_vector_revalidation_v2.py": "da7913799d0d4e11f52f770e313875764d27b20ad33157a7aa9c1fa00df418e2"
+  },
+  "statement_recorded_utc": "2026-09-07T17:07:35.730352+00:00"
+}
