@@ -1,0 +1,50 @@
+{
+  "bytecode_writes_disabled": true,
+  "command": "git --no-optional-locks status --porcelain=v1",
+  "escalated_exit_code": 0,
+  "escalated_warning": "warning: could not open directory '.pytest_cache/': Permission denied",
+  "estimator_measurements_run": 0,
+  "initial_exit_code": 0,
+  "initial_warning": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied",
+  "modified_tracked_entries_reported": 0,
+  "prior_halt": {
+    "record": {
+      "attribute_file": ".gitattributes",
+      "attribute_line": 26,
+      "attribute_rule": "data/attack_vector_revalidation_v2/** -text",
+      "crlf_pairs": 23,
+      "estimator_measurements_run": 0,
+      "expected_index_blob_sha1": "0622f89bce4ca72bc4f6f571925976b98a6d2799",
+      "gate": "T0a clean tree",
+      "git_commands_run": 0,
+      "lf_normalized_worktree_blob_sha1": "0622f89bce4ca72bc4f6f571925976b98a6d2799",
+      "lf_sha256": "a97f588bc2abe5417e099be34e90e046c0fd4a0522cc0ddc243d7852d72a0b64",
+      "path": "data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard0of4/environment_manifest.json",
+      "production_edit_performed": false,
+      "raw_sha256": "fede5703a7f70da42475f53a0596d991bcc452c539e440b9d1b3eb54a1f3cb72",
+      "raw_worktree_blob_sha1": "f5f9f5c52da96d916c352810508d7947503af0ae",
+      "reason": "A tracked -text input differs from its index blob in raw bytes. LF normalization matches, but current attributes disable line-ending conversion. Clean-tree precondition cannot be confirmed without disregarding that rule.",
+      "regression_suite_runs": 0,
+      "status": "HALTED",
+      "task": "v2.1 step 1 novelty entropy estimator repair",
+      "utc": "2026-09-09T00:34:25.234951+00:00"
+    },
+    "status": "CLOSED_BY_OPERATOR"
+  },
+  "production_edit_performed": false,
+  "reason": "Read-only git status reported a directory permission warning after escalation. The task requires halting on anomalies other than its explicit line-ending exception.",
+  "regression_suite_runs": 0,
+  "stage": "T0 read-only Git status check",
+  "status": "HALTED",
+  "status_entries": [
+    "?? simulation/diagnostics/estimator_repair_halt.json",
+    "?? simulation/diagnostics/estimator_repair_harness.py",
+    "?? simulation/diagnostics/estimator_repair_manifest.json",
+    "?? simulation/diagnostics/estimator_repair_metrics.diff",
+    "?? simulation/diagnostics/estimator_repair_report.md",
+    "?? simulation/diagnostics/estimator_repair_state.json"
+  ],
+  "task": "v2.1 step 1 novelty entropy estimator repair",
+  "utc": "2026-09-09T00:49:23.552439+00:00",
+  "write_guard_null_exemption": true
+}

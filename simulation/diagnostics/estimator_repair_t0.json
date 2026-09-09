@@ -1,0 +1,66 @@
+{
+  "branch": "main",
+  "head": "2044f50a8cf71874f259e74fd05ec495169b9ae4",
+  "known_conditions": {
+    "line_endings": "Operator established: 380 of 1537 tracked worktree files are CRLF against LF blobs with no content differences. Accepted without comparison or normalization.",
+    "pytest_cache": "Operator established: unreadable, absent from .gitignore, and contains no tracked files. Tracked-only status used; no cache warning emitted in this attempt."
+  },
+  "observations": [
+    "Global Git ignore permission warning recorded under check d.",
+    "Advisor ls-files stderr is the expected absent-index result.",
+    "An initial source-display command hit cp1252 UnicodeEncodeError on an existing mathematical symbol; reading succeeded after configuring stdout as UTF-8. No measurement or file write was involved."
+  ],
+  "preconditions": {
+    "a": {
+      "command": "git rev-parse --abbrev-ref HEAD",
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "main\n"
+    },
+    "b": {
+      "command": "git merge-base --is-ancestor 2044f50a8cf71874f259e74fd05ec495169b9ae4 HEAD",
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": ""
+    },
+    "c": {
+      "command": "git rev-parse HEAD:simulation/metrics.py",
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "ce59c48e7e729917dc27df273c8c2bf1fd8e248b\n"
+    },
+    "d": {
+      "command": "git status --porcelain --untracked-files=no",
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n",
+      "stdout": "",
+      "stdout_line_count": 0
+    },
+    "e": {
+      "basis": "Raw CRLF worktree bytes",
+      "passed": true,
+      "raw_sha256": "536a77fb5e45d6d167480ab7af6ea9f5a0e56b9927be0d09713400aa873fae63"
+    },
+    "f": {
+      "advisor_present": true,
+      "command": "git ls-files --error-unmatch LINEAGE_IMPERATIVE_ADVISOR.md",
+      "exit_code": 1,
+      "passed": true,
+      "stderr": "error: pathspec 'LINEAGE_IMPERATIVE_ADVISOR.md' did not match any file(s) known to git\nDid you forget to 'git add'?\n",
+      "stdout": ""
+    },
+    "g": {
+      "median_V_read": "0.0238802249185",
+      "median_factor_read": "0.950212895482",
+      "passed": true,
+      "report": "simulation/diagnostics/drift_char_report.md",
+      "row_read": "| steps_ge_10 | 11600 | 0.0238802249185 | 0.0705886247884 | 0.124174294722 | 2395 |",
+      "section": "T1"
+    }
+  },
+  "utc": "2026-09-09T00:54:04.680900+00:00"
+}

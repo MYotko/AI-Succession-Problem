@@ -1,0 +1,322 @@
+{
+  "T0_observations": [
+    "Global Git ignore permission warning recorded under check d.",
+    "Advisor ls-files stderr is the expected absent-index result.",
+    "An initial source-display command hit cp1252 UnicodeEncodeError on an existing mathematical symbol; reading succeeded after configuring stdout as UTF-8. No measurement or file write was involved."
+  ],
+  "branch": "main",
+  "execution": {
+    "available_cpu_budget": 16,
+    "description": "Two parallel validation processes per phase: component measurement and the unmodified regression suite. At most one process executes model steps; no simulation sweep.",
+    "maximum_parallel_validation_processes": 2,
+    "normal_limit": 15,
+    "numerical_threads_configured": 1,
+    "numerical_threads_verified": 1,
+    "operating_mode": "normal",
+    "simulation_sweep_runs": 0,
+    "thread_runtime_by_phase": {
+      "post_component": [
+        {
+          "effective_threads": 1,
+          "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+          "query": "scipy_openblas_get_num_threads64_"
+        }
+      ],
+      "post_suite": [
+        {
+          "effective_threads": 1,
+          "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+          "query": "scipy_openblas_get_num_threads64_"
+        }
+      ],
+      "pre_component": [
+        {
+          "effective_threads": 1,
+          "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+          "query": "scipy_openblas_get_num_threads64_"
+        }
+      ],
+      "pre_suite": [
+        {
+          "effective_threads": 1,
+          "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+          "query": "scipy_openblas_get_num_threads64_"
+        }
+      ]
+    },
+    "workers_actually_used": 2
+  },
+  "guard": {
+    "bytecode_writes_disabled": true,
+    "os_devnull_exempt": true,
+    "out_of_scope_writable_open_attempts": 0
+  },
+  "hash_convention": "SHA256 over CRLF-to-LF normalized bytes. Raw module hashes are separately labeled.",
+  "head": "2044f50a8cf71874f259e74fd05ec495169b9ae4",
+  "known_conditions": {
+    "line_endings": "Operator established: 380 of 1537 tracked worktree files are CRLF against LF blobs with no content differences. Accepted without comparison or normalization.",
+    "pytest_cache": "Operator established: unreadable, absent from .gitignore, and contains no tracked files. Tracked-only status used; no cache warning emitted in this attempt."
+  },
+  "machine": "YOTKOTEST",
+  "metrics_hashes": {
+    "line_ending_policy": "Preserved existing CRLF bytes; LF normalization used in memory only for diff and labeled hashes.",
+    "post_lf_sha256": "311e0239e539c2c32473536d5ae6eddf8c2fec88774c83148b4068acbe894fda",
+    "post_raw_sha256": "b87c7b7b511977b5858285241cf8dffed7319194a648ef432acc5d32525d483f",
+    "pre_component_record": "estimator_repair_pre.json",
+    "pre_lf_sha256": "667465e55e087c9be193184228f3470c866565fea53af90e3092bc9de275a8ab",
+    "pre_raw_sha256": "536a77fb5e45d6d167480ab7af6ea9f5a0e56b9927be0d09713400aa873fae63",
+    "pre_suite_record": "estimator_repair_pre_suite.json",
+    "utc": "2026-09-09T00:55:09.412723+00:00"
+  },
+  "numpy": "2.4.4",
+  "outputs": [
+    {
+      "path": "simulation/diagnostics/estimator_repair_edit.json",
+      "row_count": null,
+      "sha256": "6e2829fb649f893db1d22ba2085150ed4b2df947bc408205e6f6e967f848746a"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_halt.json",
+      "role": "Historical prior halt; closed by revised operator instructions.",
+      "row_count": null,
+      "sha256": "2f222a51e579148b75d6602b5070433e8f2c5015bd2417bc446b237ffb84d62b"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_harness.py",
+      "row_count": null,
+      "sha256": "f4164788946b1b0eb4b1e7a74b367196467590dc9db75692469c136996ede711"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_manifest.json",
+      "row_count": null,
+      "sha256": null
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_metrics.diff",
+      "row_count": null,
+      "sha256": "58f70d8b400dc05696169d4130167c9b803ac383bcb3a3358381a4b724fa8065"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_post.json",
+      "row_count": null,
+      "sha256": "d20c0ce93b86262ab9fb8fc0cd9b6c7d4cbcf727d86f2a2e657b39714ddab270"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_post_amplitudes.csv",
+      "row_count": 6,
+      "sha256": "17dbb04361f2288e7782652fb88c923b375659142fc4f65d7a12a701e8ee3cb8"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_post_preservation.csv",
+      "row_count": 3,
+      "sha256": "846911208e5c367e5dc3429882a4f5031403936f95283420e6915f174a930f84"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_post_suite.json",
+      "row_count": null,
+      "sha256": "4d1e9bba7033c2edfa89bc00b776f9422a97ac2f1d807e644705b9f1c4b42dbe"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_post_suite.txt",
+      "row_count": null,
+      "sha256": "92178563bff75d5c2b340552d29cbf5b91f4e10434f905aaab8f5345e4f3ed61"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_pre.json",
+      "row_count": null,
+      "sha256": "a374ec06465044f933f802e735f80d113e7ff436aaf39b34f668b784e6cceb31"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_pre_amplitudes.csv",
+      "row_count": 6,
+      "sha256": "90f6e4bb7398bcdecb4e656dffa85fd960d7f8f6f0bdc7451dc35bdafdca3af3"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_pre_preservation.csv",
+      "row_count": 3,
+      "sha256": "cc1400097841158b9a08e5bc7aca7862c6d570db43619396855155ec3987b6f9"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_pre_suite.json",
+      "row_count": null,
+      "sha256": "461c1c77185853d357d2730a18001f56f2e52640d4c6783f31e5184023263e5a"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_pre_suite.txt",
+      "row_count": null,
+      "sha256": "92178563bff75d5c2b340552d29cbf5b91f4e10434f905aaab8f5345e4f3ed61"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_report.md",
+      "row_count": null,
+      "sha256": "e7c1e36edcd781e16b28e600bcdb8428ebc708ac8a346cb4a17e96ff0c406ed9"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_state.json",
+      "row_count": null,
+      "sha256": "20a6da1106343943377eea3aa869940d8fcecde41d6a0c76b01071644aef8514"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_t0.json",
+      "row_count": null,
+      "sha256": "5e57f8cb2adb4c356ba10124c8c8925fd1072da1d7dc5ef622bcbf9a9893bf54"
+    },
+    {
+      "path": "simulation/diagnostics/estimator_repair_validation.json",
+      "row_count": null,
+      "sha256": "e668c3189ac846d2782a785ad8f130d281ecb73b5174c38af005a7253867b3ac"
+    }
+  ],
+  "per_module_sha256": {
+    "post": {
+      "simulation/agents.py": {
+        "sha256_lf": "f0c1049370c001c9ac85191f47338ec4be8a197cc5a29332547b95d85a1168c3",
+        "sha256_raw": "d5bad24dc9dafb6e4d374c0ff68b74c73f24a41fbef3a6ddcaa75f8ec6d408d5"
+      },
+      "simulation/attack_adapter_v2.py": {
+        "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+      },
+      "simulation/constants_v2_stage15.py": {
+        "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+      },
+      "simulation/constants_v2_stage18.py": {
+        "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+      },
+      "simulation/defection.py": {
+        "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+      },
+      "simulation/diagnostics/estimator_repair_harness.py": {
+        "sha256_lf": "f4164788946b1b0eb4b1e7a74b367196467590dc9db75692469c136996ede711",
+        "sha256_raw": "f4164788946b1b0eb4b1e7a74b367196467590dc9db75692469c136996ede711"
+      },
+      "simulation/metrics.py": {
+        "sha256_lf": "311e0239e539c2c32473536d5ae6eddf8c2fec88774c83148b4068acbe894fda",
+        "sha256_raw": "b87c7b7b511977b5858285241cf8dffed7319194a648ef432acc5d32525d483f"
+      },
+      "simulation/model.py": {
+        "sha256_lf": "0a42a62268857c25c4bc99fa2162bfeb74c444bfa1f4fef6705a3a7e618d76b7",
+        "sha256_raw": "a4e5e95a49cea534cd02c8f412981797fd6dfa0e6c8de77aa3d5a6aa31f37c67"
+      },
+      "simulation/test_refactor_1x.py": {
+        "sha256_lf": "d4f52bd9e8c828c007fa569e2202f0c31a8fdbe367711d5160630387f66feeac",
+        "sha256_raw": "7b46b9247234f922ce48e04861348092fceca269816dc30e8967e6ce36f0a2a0"
+      }
+    },
+    "pre": {
+      "simulation/agents.py": {
+        "sha256_lf": "f0c1049370c001c9ac85191f47338ec4be8a197cc5a29332547b95d85a1168c3",
+        "sha256_raw": "d5bad24dc9dafb6e4d374c0ff68b74c73f24a41fbef3a6ddcaa75f8ec6d408d5"
+      },
+      "simulation/attack_adapter_v2.py": {
+        "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+      },
+      "simulation/constants_v2_stage15.py": {
+        "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+      },
+      "simulation/constants_v2_stage18.py": {
+        "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+      },
+      "simulation/defection.py": {
+        "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+      },
+      "simulation/diagnostics/estimator_repair_harness.py": {
+        "sha256_lf": "f4164788946b1b0eb4b1e7a74b367196467590dc9db75692469c136996ede711",
+        "sha256_raw": "f4164788946b1b0eb4b1e7a74b367196467590dc9db75692469c136996ede711"
+      },
+      "simulation/metrics.py": {
+        "sha256_lf": "667465e55e087c9be193184228f3470c866565fea53af90e3092bc9de275a8ab",
+        "sha256_raw": "536a77fb5e45d6d167480ab7af6ea9f5a0e56b9927be0d09713400aa873fae63"
+      },
+      "simulation/model.py": {
+        "sha256_lf": "0a42a62268857c25c4bc99fa2162bfeb74c444bfa1f4fef6705a3a7e618d76b7",
+        "sha256_raw": "a4e5e95a49cea534cd02c8f412981797fd6dfa0e6c8de77aa3d5a6aa31f37c67"
+      },
+      "simulation/test_refactor_1x.py": {
+        "sha256_lf": "d4f52bd9e8c828c007fa569e2202f0c31a8fdbe367711d5160630387f66feeac",
+        "sha256_raw": "7b46b9247234f922ce48e04861348092fceca269816dc30e8967e6ce36f0a2a0"
+      }
+    }
+  },
+  "preconditions": {
+    "a": {
+      "command": "git rev-parse --abbrev-ref HEAD",
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "main\n"
+    },
+    "b": {
+      "command": "git merge-base --is-ancestor 2044f50a8cf71874f259e74fd05ec495169b9ae4 HEAD",
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": ""
+    },
+    "c": {
+      "command": "git rev-parse HEAD:simulation/metrics.py",
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "ce59c48e7e729917dc27df273c8c2bf1fd8e248b\n"
+    },
+    "d": {
+      "command": "git status --porcelain --untracked-files=no",
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n",
+      "stdout": "",
+      "stdout_line_count": 0
+    },
+    "e": {
+      "basis": "Raw CRLF worktree bytes",
+      "passed": true,
+      "raw_sha256": "536a77fb5e45d6d167480ab7af6ea9f5a0e56b9927be0d09713400aa873fae63"
+    },
+    "f": {
+      "advisor_present": true,
+      "command": "git ls-files --error-unmatch LINEAGE_IMPERATIVE_ADVISOR.md",
+      "exit_code": 1,
+      "passed": true,
+      "stderr": "error: pathspec 'LINEAGE_IMPERATIVE_ADVISOR.md' did not match any file(s) known to git\nDid you forget to 'git add'?\n",
+      "stdout": ""
+    },
+    "g": {
+      "median_V_read": "0.0238802249185",
+      "median_factor_read": "0.950212895482",
+      "passed": true,
+      "report": "simulation/diagnostics/drift_char_report.md",
+      "row_read": "| steps_ge_10 | 11600 | 0.0238802249185 | 0.0705886247884 | 0.124174294722 | 2395 |",
+      "section": "T1"
+    }
+  },
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "row_count_convention": "csv.DictReader excluding header; null for non-CSV outputs.",
+  "self_hash_convention": "The manifest enumerates itself with sha256 null to avoid self-reference; its final LF-normalized SHA256 is emitted separately.",
+  "status": "COMPLETE",
+  "utc": "2026-09-09T00:58:50.888185+00:00",
+  "validation_checks": {
+    "T0_all_passed": true,
+    "T1_nonzero_values_identical_at_15_decimals": true,
+    "T1_positive_control_failed": true,
+    "T1_zero_exactly_one": true,
+    "T3_axis_permutation_invariant": true,
+    "T3_calibration_pin": true,
+    "T3_floor_assertion_passed": true,
+    "T3_positive_control_passed": true,
+    "T3_post_suite_passed": true,
+    "T3_pre_suite_passed": true,
+    "T3_rank_reduction_detected": true,
+    "T3_shape_preserved": true,
+    "T3_suite_stderr_identical": true,
+    "T3_suite_stdout_identical": true,
+    "T3_unit_variance_magnitude_exactly_one": true
+  }
+}

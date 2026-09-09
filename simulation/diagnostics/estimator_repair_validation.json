@@ -1,0 +1,125 @@
+{
+  "calibration_pin_measured_16_decimals": "0.9502129316321360",
+  "checks": {
+    "T0_all_passed": true,
+    "T1_nonzero_values_identical_at_15_decimals": true,
+    "T1_positive_control_failed": true,
+    "T1_zero_exactly_one": true,
+    "T3_axis_permutation_invariant": true,
+    "T3_calibration_pin": true,
+    "T3_floor_assertion_passed": true,
+    "T3_positive_control_passed": true,
+    "T3_post_suite_passed": true,
+    "T3_pre_suite_passed": true,
+    "T3_rank_reduction_detected": true,
+    "T3_shape_preserved": true,
+    "T3_suite_stderr_identical": true,
+    "T3_suite_stdout_identical": true,
+    "T3_unit_variance_magnitude_exactly_one": true
+  },
+  "execution": {
+    "available_cpu_budget": 16,
+    "maximum_parallel_validation_processes": 2,
+    "normal_limit": 15,
+    "operating_mode": "normal",
+    "simulation_sweep_runs": 0
+  },
+  "guard": {
+    "bytecode_writes_disabled": true,
+    "os_devnull_exempt": true,
+    "out_of_scope_writable_open_attempts": 0
+  },
+  "measurement_record_files": [
+    "estimator_repair_pre.json",
+    "estimator_repair_post.json",
+    "estimator_repair_pre_suite.json",
+    "estimator_repair_post_suite.json"
+  ],
+  "regression_pass_counts": {
+    "post": 22,
+    "pre": 22
+  },
+  "reported_value_changes": [],
+  "source_hash_basis": "sha256_raw: raw worktree bytes. sha256_lf: CRLF-to-LF normalized bytes in memory only.",
+  "source_hashes": {
+    "post": {
+      "simulation/agents.py": {
+        "sha256_lf": "f0c1049370c001c9ac85191f47338ec4be8a197cc5a29332547b95d85a1168c3",
+        "sha256_raw": "d5bad24dc9dafb6e4d374c0ff68b74c73f24a41fbef3a6ddcaa75f8ec6d408d5"
+      },
+      "simulation/attack_adapter_v2.py": {
+        "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+      },
+      "simulation/constants_v2_stage15.py": {
+        "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+      },
+      "simulation/constants_v2_stage18.py": {
+        "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+      },
+      "simulation/defection.py": {
+        "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+      },
+      "simulation/diagnostics/estimator_repair_harness.py": {
+        "sha256_lf": "f4164788946b1b0eb4b1e7a74b367196467590dc9db75692469c136996ede711",
+        "sha256_raw": "f4164788946b1b0eb4b1e7a74b367196467590dc9db75692469c136996ede711"
+      },
+      "simulation/metrics.py": {
+        "sha256_lf": "311e0239e539c2c32473536d5ae6eddf8c2fec88774c83148b4068acbe894fda",
+        "sha256_raw": "b87c7b7b511977b5858285241cf8dffed7319194a648ef432acc5d32525d483f"
+      },
+      "simulation/model.py": {
+        "sha256_lf": "0a42a62268857c25c4bc99fa2162bfeb74c444bfa1f4fef6705a3a7e618d76b7",
+        "sha256_raw": "a4e5e95a49cea534cd02c8f412981797fd6dfa0e6c8de77aa3d5a6aa31f37c67"
+      },
+      "simulation/test_refactor_1x.py": {
+        "sha256_lf": "d4f52bd9e8c828c007fa569e2202f0c31a8fdbe367711d5160630387f66feeac",
+        "sha256_raw": "7b46b9247234f922ce48e04861348092fceca269816dc30e8967e6ce36f0a2a0"
+      }
+    },
+    "pre": {
+      "simulation/agents.py": {
+        "sha256_lf": "f0c1049370c001c9ac85191f47338ec4be8a197cc5a29332547b95d85a1168c3",
+        "sha256_raw": "d5bad24dc9dafb6e4d374c0ff68b74c73f24a41fbef3a6ddcaa75f8ec6d408d5"
+      },
+      "simulation/attack_adapter_v2.py": {
+        "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+      },
+      "simulation/constants_v2_stage15.py": {
+        "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+      },
+      "simulation/constants_v2_stage18.py": {
+        "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+      },
+      "simulation/defection.py": {
+        "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+      },
+      "simulation/diagnostics/estimator_repair_harness.py": {
+        "sha256_lf": "f4164788946b1b0eb4b1e7a74b367196467590dc9db75692469c136996ede711",
+        "sha256_raw": "f4164788946b1b0eb4b1e7a74b367196467590dc9db75692469c136996ede711"
+      },
+      "simulation/metrics.py": {
+        "sha256_lf": "667465e55e087c9be193184228f3470c866565fea53af90e3092bc9de275a8ab",
+        "sha256_raw": "536a77fb5e45d6d167480ab7af6ea9f5a0e56b9927be0d09713400aa873fae63"
+      },
+      "simulation/model.py": {
+        "sha256_lf": "0a42a62268857c25c4bc99fa2162bfeb74c444bfa1f4fef6705a3a7e618d76b7",
+        "sha256_raw": "a4e5e95a49cea534cd02c8f412981797fd6dfa0e6c8de77aa3d5a6aa31f37c67"
+      },
+      "simulation/test_refactor_1x.py": {
+        "sha256_lf": "d4f52bd9e8c828c007fa569e2202f0c31a8fdbe367711d5160630387f66feeac",
+        "sha256_raw": "7b46b9247234f922ce48e04861348092fceca269816dc30e8967e6ce36f0a2a0"
+      }
+    }
+  },
+  "status": "COMPLETE",
+  "test_source_hash_note": "The unchanged test entry point executed via runpy is included explicitly because runpy removes its temporary __main__ module after execution.",
+  "utc": "2026-09-09T00:58:50.768252+00:00"
+}

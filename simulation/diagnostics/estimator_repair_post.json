@@ -1,0 +1,148 @@
+{
+  "amplitudes": [
+    {
+      "H_N": 0.9361986410788192,
+      "H_N_15_decimals": "0.936198641078819",
+      "V": 0.023880224918499993,
+      "amplitude_factor": 1.0,
+      "magnitude": 0.950212931632136
+    },
+    {
+      "H_N": 0.840806703174814,
+      "H_N_15_decimals": "0.840806703174814",
+      "V": 0.015283343947839999,
+      "amplitude_factor": 0.8,
+      "magnitude": 0.8533930378696498
+    },
+    {
+      "H_N": 0.5198516036433289,
+      "H_N_15_decimals": "0.519851603643329",
+      "V": 0.005970056229624998,
+      "amplitude_factor": 0.5,
+      "magnitude": 0.5276334472589852
+    },
+    {
+      "H_N": 0.029118580066228635,
+      "H_N_15_decimals": "0.029118580066229",
+      "V": 0.00023880224918499998,
+      "amplitude_factor": 0.1,
+      "magnitude": 0.029554466451491825
+    },
+    {
+      "H_N": 2.955749829169971e-06,
+      "H_N_15_decimals": "0.000002955749829",
+      "V": 2.3880224918499987e-08,
+      "amplitude_factor": 0.001,
+      "magnitude": 2.9999955000044976e-06
+    },
+    {
+      "H_N": 0.0,
+      "H_N_15_decimals": "0.000000000000000",
+      "V": 0.0,
+      "amplitude_factor": 0.0,
+      "magnitude": 0.0
+    }
+  ],
+  "axis_permutation_deviation": 0.0,
+  "base_covariance_trace": 0.023880224918499993,
+  "calibration": {
+    "V_exactly_equal_to_V_ref": 0.0238802249185,
+    "expected": 0.950212931632136,
+    "expected_interpolation_difference": 3.615013599578276e-08,
+    "measured_magnitude": 0.950212931632136,
+    "prior_report_median_factor": "0.950212895482"
+  },
+  "consumption_floor_assertion": {
+    "default_epsilon": 1e-06,
+    "denominator": 0.010001,
+    "finite_default_weight": 499.9500049995001,
+    "floored_entropy": 0.01,
+    "function_source_contains_floor": true,
+    "read_H_N_FLOOR": 0.01,
+    "returned_entropy": 0.0
+  },
+  "early_returns": {
+    "empty": 0.0,
+    "single_agent": 0.0
+  },
+  "fixture": {
+    "dimensions": 10,
+    "generator": "numpy.random.default_rng",
+    "preservation": "The unscaled fixed standard-normal draw, its reversed-axis copy, and a copy with its last five axes zeroed.",
+    "rows": 200,
+    "scale_control": "One fixed standard-normal draw, centered and scaled once so total sample covariance trace equals the report V_ref to floating precision. Amplitude factors apply to that fixed matrix.",
+    "seed": 20260908
+  },
+  "largest_absolute_shape_deviation": 0.0,
+  "machine": "YOTKOTEST",
+  "metrics_lf_sha256": "311e0239e539c2c32473536d5ae6eddf8c2fec88774c83148b4068acbe894fda",
+  "metrics_raw_sha256": "b87c7b7b511977b5858285241cf8dffed7319194a648ef432acc5d32525d483f",
+  "modules": {
+    "simulation/constants_v2_stage15.py": {
+      "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+      "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+    },
+    "simulation/constants_v2_stage18.py": {
+      "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+    },
+    "simulation/diagnostics/estimator_repair_harness.py": {
+      "sha256_lf": "f4164788946b1b0eb4b1e7a74b367196467590dc9db75692469c136996ede711",
+      "sha256_raw": "f4164788946b1b0eb4b1e7a74b367196467590dc9db75692469c136996ede711"
+    },
+    "simulation/metrics.py": {
+      "sha256_lf": "311e0239e539c2c32473536d5ae6eddf8c2fec88774c83148b4068acbe894fda",
+      "sha256_raw": "b87c7b7b511977b5858285241cf8dffed7319194a648ef432acc5d32525d483f"
+    }
+  },
+  "numpy": "2.4.4",
+  "phase": "post",
+  "positive_control_passed": true,
+  "preservation": [
+    {
+      "H_N": 0.985251420932311,
+      "V": 9.674749394574295,
+      "magnitude": 1.0,
+      "matrix": "unit_variance",
+      "recovered_shape": 0.985251420932311
+    },
+    {
+      "H_N": 0.985251420932311,
+      "V": 9.674749394574295,
+      "magnitude": 1.0,
+      "matrix": "axis_permuted",
+      "recovered_shape": 0.985251420932311
+    },
+    {
+      "H_N": 0.6945929546336552,
+      "V": 5.047918014598259,
+      "magnitude": 1.0,
+      "matrix": "rank_reduced",
+      "recovered_shape": 0.6945929546336552
+    }
+  ],
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "rank_reduction_detected": true,
+  "saturation_magnitude": 1.0,
+  "shape_deviations": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "thread_environment": {
+    "BLIS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  },
+  "thread_runtime": [
+    {
+      "effective_threads": 1,
+      "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+      "query": "scipy_openblas_get_num_threads64_"
+    }
+  ],
+  "utc": "2026-09-09T00:55:16.119052+00:00"
+}

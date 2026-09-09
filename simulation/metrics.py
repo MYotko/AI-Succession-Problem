@@ -39,6 +39,13 @@ from dataclasses import dataclass, replace
 
 NOVELTY_DIMS = 10  # must match agents.py NOVELTY_DIMS
 
+# Honest-baseline median novelty variance, steps 10 and up, 40 runs /
+# 11,600 records. Measured and published in drift_char_report.md T1 before
+# this repair consumed it. Ratified by the operator 2026-09-08. Frozen.
+H_N_V_REF = 0.0238802249185
+# Inherited house saturation value, not a free parameter.
+H_N_MAGNITUDE_SAT_K = 3.0
+
 
 # ===========================================================================
 # Stage 1.5 DiagnosticStateV2: state struct consumed by v2 metric and projection
@@ -790,6 +797,8 @@ def calculate_h_n(novelty_points, composite_method='spectral'):
         # Covariance matrix (NOVELTY_DIMS × NOVELTY_DIMS)
         # rowvar=False: each column is a variable, each row is an observation
         cov = np.cov(X, rowvar=False)
+        V = float(np.trace(cov))  # Raw eigenvalues, before clamp and normalization.
+        V = max(0.0, V)  # Guard floating-point error only.
 
         # Eigenvalues via eigh (symmetric; returns real, ascending-sorted values)
         eigvals = np.linalg.eigh(cov)[0]
@@ -803,7 +812,9 @@ def calculate_h_n(novelty_points, composite_method='spectral'):
         # Shannon entropy, normalised to [0, 1] by dividing by log₂(D)
         h_n = -np.sum(p * np.log2(p)) / np.log2(NOVELTY_DIMS)
 
-        return float(np.clip(h_n, 0.0, 1.0))
+        shape = float(np.clip(h_n, 0.0, 1.0))
+        magnitude = -np.expm1(-H_N_MAGNITUDE_SAT_K * V / H_N_V_REF)
+        return float(np.clip(shape * magnitude, 0.0, 1.0))
 
     # -----------------------------------------------------------------------
     # Legacy paths (retained for scenario comparison / backward compatibility)

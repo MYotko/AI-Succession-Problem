@@ -33,6 +33,16 @@ described below and supersedes any earlier characterization of the affected clai
 > and found that a raw threshold on that structural quantity is itself
 > baseline-contaminated, Section 8 item 2a.
 
+> **Update, 2026-09-08 (v2.1 step 1 landed).** The novelty entropy estimator repair
+> specified in Section 8 item 1 is implemented and component validated. V_ref is
+> ratified at the steps-10-and-up honest-baseline median 0.0238802249185 and is
+> recorded with its rejected alternatives in that item. The bidirectional check
+> required by Section 8 item 3 passed in both directions for the estimator, so that
+> item is partially met and stays open. A reproducibility gap in the Section 6
+> scale-invariance table is recorded in that section. No corrected figure is derived
+> for any published number, and none should be until the repaired instrument produces
+> one.
+
 ---
 
 ## 1. Summary
@@ -343,6 +353,17 @@ amplitude factor 0      H_N = 1.000000000000000
 
 Identical to fifteen digits across three orders of magnitude, then discontinuous at
 zero.
+
+**Reproducibility note, added 2026-09-08.** The table above prints values without
+identifying the novelty draw or the seed that produced them, so the specific entropy
+value is not reproducible from this document. The invariance property is. A
+deterministic fixture constructed during the v2.1 step 1 validation returned
+0.985251420932311 across the same five nonzero amplitude factors, with a measured
+spread of 3.33e-16, and exactly 1.0 at zero amplitude. The property reproduces
+exactly; the printed value belongs to an unarchived draw. Recorded because it is the
+same omission that Section 7 documents at much larger scale, and because a later
+reader comparing the two numbers would otherwise have no way to tell a defect from a
+different fixture.
 
 ### Measured frequency
 
@@ -770,6 +791,23 @@ recorded here, before any v2.1 code is written. V_ref and the detector allowance
 threshold remain to be fixed against the honest baseline, and are pre-registered as
 part of implementation rather than chosen here.
 
+**V_ref ratified, 2026-09-08.** The magnitude factor's calibration anchor is fixed at
+0.0238802249185, the honest-baseline median novelty variance over steps 10 and up,
+measured across 40 runs and 11,600 records and published in
+`simulation/diagnostics/drift_char_report.md` T1 before the repair that consumes it
+was written. The steps-10-and-up window was chosen over the all-steps median of
+0.0237870616199 because the latter is contaminated by the initialization transient
+described in item 2a. The 75th and 90th percentile alternatives, 0.0705886247884 and
+0.124174294722, were reported alongside the median for comparison and are declined.
+They seat the measured baseline magnitude factor at 0.637562732872 and 0.43838370246
+respectively, compressing the measurement toward the bottom of its range in exactly
+the operating region where resolution is wanted, whereas the median seats it at a
+measured 0.950212895482. Evaluated exactly at V_ref the factor is
+1 - exp(-3) = 0.950212931632136; the difference from the measured median factor is an
+interpolation artifact, because the median of a concave transform is not the transform
+of the median. The detector allowance and threshold remain unfixed and are
+pre-registered separately, before the characterization run that consumes them.
+
 **2. Floor characterization for Biological Veto Capture. COMPLETE, 2026-09-08.**
 Measured the realized ratification floor described in D5. Nine hundred runs across
 three seed-paired arms at one cell of the published grid, gated behind a
@@ -832,8 +870,51 @@ check on the entropy estimator specifically. A repair tested only in the directi
 of the known defect is not validated. Also resolves the inverse-scarcity question
 raised in Section 6 against the published architecture.
 
-*Completion condition:* component validation passes, including a positive control
-that would fail if the repair were absent.
+**Estimator repair landed and component validated, 2026-09-08. This item stays open.**
+The repair implements H_N as the unchanged normalized spectral entropy multiplied by
+1 - exp(-3.0 * V / V_ref), with V the trace of the raw novelty covariance read before
+the eigenvalue clamp and before normalization. The edit is confined to the spectral
+branch of `calculate_h_n` and two added constants in `simulation/metrics.py`. The
+retired constants at metrics.py:132-134, shifted to 139-141 by the addition, were not
+modified, revived, or referenced, so the rejected hand-applied penalty stays rejected
+in the source as well as in the design.
+
+The check passed in both directions. The positive control, requiring
+strictly decreasing H_N across amplitude factors 1.0, 0.8, 0.5, 0.1 and 0.001 and
+exactly zero output at zero amplitude, failed against the unmodified estimator and
+passed against the repaired one. A control that does not fail without the repair is
+not a control, and this one was confirmed to fail. Shape preservation was confirmed
+separately: at unit variance the magnitude factor saturates at exactly 1.0, the
+recovered shape term matched its pre-repair value with a largest absolute deviation of
+0.0, axis permutation left it unchanged, and rank reduction was still detected.
+Dimensional-masking resistance is therefore preserved structurally, because the shape
+term is the prior return expression verbatim, and confirmed empirically in the
+saturated regime where it was measured. The existing suite at
+`simulation/test_refactor_1x.py` reported 22 passed and 0 failed both before and after
+the edit, with identical captured output.
+
+Primary record `simulation/diagnostics/estimator_repair_report.md`, manifest
+`simulation/diagnostics/estimator_repair_manifest.json`. The manifest hashes
+LF-normalized bytes and verifies on a fresh clone with no gitattributes rule, which is
+the forward fix named in `.gitattributes` and the template for the remaining v2.1
+prefixes.
+
+Mechanical consequence, stated as a prediction from the expression and not measured
+here: of the honest-baseline records characterized in item 2a, 2,395 of 11,600 steps
+at or after step 10 carried zero novelty variance. Those estimator outputs move from
+1.0, the prior maximum, to 0.0, floored to H_N_FLOOR at 0.01 where the value is
+consumed. No sweep was run to quantify the downstream effect, and no corrected figure
+is derived for any published number.
+
+*Completion condition, partially met:* the bidirectional component validation passed
+for the entropy estimator, including a positive control confirmed to fail if the
+repair were absent. The item stays open on two counts. The inverse-scarcity question
+raised in Section 6 is untouched. And this change does not by itself resolve D3: the
+rollout holds novelty entropy constant at `simulation/agents.py:548` and consumes a
+frozen scalar rather than recalling the estimator per candidate, so the planner cannot
+yet see suppression during planning. The rollout magnitude projection that carries
+this repair into candidate selection is separate work, and the planner's response to
+constraint posture is to be measured rather than assumed.
 
 **4. Reconstruction of Phase B and phi, run on both substrates.** This is a
 reimplementation, not a rerun, because no generating code exists. That distinction
