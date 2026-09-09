@@ -1,0 +1,29 @@
+{
+  "allocation": [
+    0.16666666666666666,
+    0.16666666666666666,
+    0.16666666666666666,
+    0.16666666666666666,
+    0.16666666666666666,
+    0.16666666666666666
+  ],
+  "candidate_seed": 20260908,
+  "fixed_before_edit_utc": "2026-09-09T01:32:08.930902+00:00",
+  "grid_order": "_constraint_pair_for_index indices 0 through 35",
+  "initialization": "Create one seeded model, generate one novelty vector per initialized agent with the existing generate_novelty method, and build one state from this observation. Do not call model.step or agent.step.",
+  "model_constructor": {
+    "ai_policy": "optimize_u_sys_v2",
+    "config": {
+      "n_candidates_v2": 300,
+      "phi": 25.0,
+      "policy": "optimize_u_sys_v2",
+      "random_seed": 20260908,
+      "reproduction_rate": 0.09,
+      "rollout_steps_v2": 20
+    },
+    "n_agents": 200
+  },
+  "network_contagion": 0.5,
+  "positive_order_rule": "Strict decrease across distinct total_suppression values, exact equality within tied values.",
+  "shape_measurement": "Use return_components on the generated novelty matrix; no synthetic shape supplied."
+}

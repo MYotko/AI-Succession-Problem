@@ -1,0 +1,28 @@
+============================================================
+  WP5 Self-Audit - Refactor 1.x Verification Suite
+============================================================
+  PASS  WP1_human_agent_10d_vector
+  PASS  WP1_no_domain_arrays
+  PASS  WP1_calculate_h_n_spectral
+  PASS  WP1_spectral_detects_domain_suppression
+  PASS  WP2_no_07_floor_in_source
+  PASS  WP2_schedule_validator_rejects_starvation
+  PASS  WP2_schedule_validator_passes_healthy
+  PASS  WP3_cusum_initialised
+  PASS  WP3_no_hardcoded_20step_array
+  PASS  WP3_cusum_accumulates_on_drift
+  PASS  WP3_cusum_score_exposed_in_datacollector
+  PASS  WP4_no_self_reporting_cost_in_ai_agent
+  PASS  WP4_peer_validator_exists
+  PASS  WP4_peer_validator_installed_on_model
+  PASS  WP4_inflated_cost_undercut
+  PASS  WP4_peer_gains_capability_on_undercut
+  PASS  GAP01_trapezoidal_integration
+  PASS  GAP01_tail_fields_present
+  PASS  GAP01_total_identity
+  PASS  GAP01_tail_decreases_over_time
+  PASS  GAP01_trapezoidal_differs_from_riemann
+  PASS  INTEGRATION_manufacture_emergency_blocked
+============================================================
+  Results: 22 passed / 0 failed / 22 total
+============================================================

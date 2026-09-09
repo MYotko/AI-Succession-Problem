@@ -1,0 +1,122 @@
+{
+  "api": {
+    "default_equals_component_entropy": true,
+    "empty_components_flag": 0.0,
+    "empty_default": 0.0,
+    "shape_matches_state": true,
+    "single_components_flag": 0.0,
+    "single_default": 0.0
+  },
+  "candidate_seed": 20260908,
+  "fallback_after_state": 0,
+  "fallback_before": 0,
+  "fixed_allocation": [
+    0.16666666666666666,
+    0.16666666666666666,
+    0.16666666666666666,
+    0.16666666666666666,
+    0.16666666666666666,
+    0.16666666666666666
+  ],
+  "machine": "YOTKOTEST",
+  "measured_V": 0.06480659462805041,
+  "measured_h_n": 0.9827423269519955,
+  "measured_shape": 0.9830285977429757,
+  "model_config_as_constructed": {
+    "cop_cusum_drift": false,
+    "cop_methodological_diversity": false,
+    "n_candidates_v2": 300,
+    "phi": 25.0,
+    "policy": "optimize_u_sys_v2",
+    "random_seed": 20260908,
+    "reproduction_rate": 0.09,
+    "rollout_steps_v2": 20
+  },
+  "model_constructor": {
+    "ai_policy": "optimize_u_sys_v2",
+    "config": {
+      "n_candidates_v2": 300,
+      "phi": 25.0,
+      "policy": "optimize_u_sys_v2",
+      "random_seed": 20260908,
+      "reproduction_rate": 0.09,
+      "rollout_steps_v2": 20
+    },
+    "n_agents": 200
+  },
+  "model_steps_run": 0,
+  "modules": {
+    "simulation/agents.py": {
+      "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+    },
+    "simulation/attack_adapter_v2.py": {
+      "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+    },
+    "simulation/constants_v2_stage15.py": {
+      "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+      "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+    },
+    "simulation/constants_v2_stage18.py": {
+      "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+    },
+    "simulation/defection.py": {
+      "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+      "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+    },
+    "simulation/diagnostics/planner_d3_harness.py": {
+      "sha256_lf": "870d49bc15fd548a445fea4fdba4dd3b339b0d76f73d99c84e6ef40aaf176a52",
+      "sha256_raw": "870d49bc15fd548a445fea4fdba4dd3b339b0d76f73d99c84e6ef40aaf176a52"
+    },
+    "simulation/metrics.py": {
+      "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+    },
+    "simulation/model.py": {
+      "sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "sha256_raw": "e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945"
+    }
+  },
+  "novelty_generation_constraint": 0.2,
+  "novelty_generation_contagion": 0.5,
+  "numpy": "2.4.4",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "state": {
+    "avg_wb": 0.6492428413102752,
+    "avg_wb_trend": 0.0,
+    "carrying_capacity": 1600,
+    "expected_births": 9.84375,
+    "expected_deaths": 4.728947045263449,
+    "h_n": 0.9827423269519955,
+    "h_n_shape": 0.9830285977429757,
+    "min_viable_population": 50,
+    "population": 200,
+    "population_trend": 0.0,
+    "projected_avg_age": 25.315,
+    "psi_inst_stock": 0.5,
+    "psi_inst_trend": 0.0,
+    "reproductive_share": 0.625,
+    "resilience_stock": 0.3,
+    "resilience_trend": 0.0,
+    "theta_capability": 0.5,
+    "transfer_state": 0.5
+  },
+  "thread_environment": {
+    "BLIS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  },
+  "thread_runtime": [
+    {
+      "effective_threads": 1,
+      "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+      "query": "scipy_openblas_get_num_threads64_"
+    }
+  ],
+  "utc": "2026-09-09T01:33:57.498717+00:00"
+}

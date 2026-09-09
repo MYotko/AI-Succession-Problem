@@ -1,0 +1,91 @@
+--- a/simulation/metrics.py
++++ b/simulation/metrics.py
+@@ -45,6 +45,16 @@
+ H_N_V_REF = 0.0238802249185
+ # Inherited house saturation value, not a free parameter.
+ H_N_MAGNITUDE_SAT_K = 3.0
++
++# Novelty variance projection constant, V = K * (avg_wb * (1 - S))^2,
++# with S the coupled total suppression. Derived from the committed
++# drift_char honest baseline over steps 10 and up, 9,205 records.
++# Absorbs the network contagion term, which is pinned at its 0.5 clip
++# floor in all 11,960 baseline records. Ratified by the operator
++# 2026-09-08.
++H_N_V_PROJ_K = 0.24292031137077771
++# Counts state builds that cannot obtain a measured spectral shape.
++H_N_SHAPE_FALLBACK_COUNT = 0
+ 
+ 
+ # ===========================================================================
+@@ -94,6 +104,7 @@
+     # h_n is held constant at the model's current value (novelty is agent-
+     # derived; projection has no agent layer to generate novelty).
+     h_n: float
++    h_n_shape: float
+ 
+ 
+ # ===========================================================================
+@@ -545,19 +556,33 @@
+     # projection state both see the same value. Falls back to a floor if
+     # no measurement is available (very first step before agents step).
+     from constants_v2_stage18 import H_N_FLOOR, THETA_CAPABILITY_INITIAL, TRANSFER_STATE_INITIAL
++    global H_N_SHAPE_FALLBACK_COUNT
+     h_n_latest = getattr(model, 'h_n_latest', None)
+-    if h_n_latest is None:
++    h_n_shape_latest = getattr(model, 'h_n_shape_latest', None)
++    if h_n_latest is None or h_n_shape_latest is None:
+         # Compute fresh if novelty_log present, else fall back.
+         novelty_log = getattr(model, 'novelty_log', None)
+         if novelty_log:
+             method = getattr(model, 'hn_composite_method', 'spectral')
+             try:
+-                h_n_latest = float(calculate_h_n(novelty_log, composite_method=method))
++                measured = calculate_h_n(
++                    novelty_log, composite_method=method, return_components=True,
++                )
++                if isinstance(measured, tuple):
++                    measured_h_n, h_n_shape_latest, _ = measured
++                else:
++                    measured_h_n = float(measured)
++                if h_n_latest is None:
++                    h_n_latest = float(measured_h_n)
+             except Exception:
+-                h_n_latest = H_N_FLOOR
+-        else:
++                if h_n_latest is None:
++                    h_n_latest = H_N_FLOOR
++        elif h_n_latest is None:
+             h_n_latest = H_N_FLOOR
+     h_n_for_state = max(H_N_FLOOR, float(h_n_latest))
++    if h_n_shape_latest is None:
++        h_n_shape_latest = 1.0
++        H_N_SHAPE_FALLBACK_COUNT += 1
+ 
+     return DiagnosticStateV2(
+         avg_wb=avg_wb,
+@@ -577,6 +602,7 @@
+         theta_capability=float(getattr(model, 'theta_capability', THETA_CAPABILITY_INITIAL)),
+         transfer_state=float(getattr(model, 'transfer_state', TRANSFER_STATE_INITIAL)),
+         h_n=h_n_for_state,
++        h_n_shape=float(h_n_shape_latest),
+     )
+ 
+ 
+@@ -740,7 +766,7 @@
+     }
+     return u_sys_v2, components
+ 
+-def calculate_h_n(novelty_points, composite_method='spectral'):
++def calculate_h_n(novelty_points, composite_method='spectral', *, return_components=False):
+     """
+     Compute aggregate novelty score H_N from population novelty vectors.
+ 
+@@ -814,6 +840,8 @@
+ 
+         shape = float(np.clip(h_n, 0.0, 1.0))
+         magnitude = -np.expm1(-H_N_MAGNITUDE_SAT_K * V / H_N_V_REF)
++        if return_components:
++            return float(np.clip(shape * magnitude, 0.0, 1.0)), shape, V
+         return float(np.clip(shape * magnitude, 0.0, 1.0))
+ 
+     # -----------------------------------------------------------------------

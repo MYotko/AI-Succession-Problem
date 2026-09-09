@@ -43,6 +43,18 @@ described below and supersedes any earlier characterization of the affected clai
 > for any published number, and none should be until the repaired instrument produces
 > one.
 
+> **Update, 2026-09-08 (v2.1 step 2 landed).** The rollout magnitude projection is
+> implemented and D3 is closed at the objective level by measurement. With the
+> projection bypassed the planner's score is exactly invariant across all 36 constraint
+> postures, reproducing D3 as published; with it active the score is strictly
+> decreasing in coupled suppression. The projection constant K is ratified at
+> 0.24292031137077771, derived from committed evidence and recorded in Section 8 item
+> 1. A further structural observation, that the network contagion term is pinned at its
+> clip floor in every baseline record, is recorded in Section 6. Section 8 item 3 loses
+> its D3 open count and stays open on the inverse-scarcity question. This closes the
+> planner's blindness, not the drift question: no characterization has been run, and no
+> corrected figure is derived for any published number.
+
 ---
 
 ## 1. Summary
@@ -448,6 +460,42 @@ Whether this cancellation is the intended reading of the inverse-scarcity
 derivation or an artifact of the epsilon guard is an open question against the
 published architecture and is item 3 in Section 8.
 
+### Structural observation: the network contagion term is pinned at its clip floor
+
+Added 2026-09-08, found while deriving the rollout projection for the v2.1 step 2 work
+and recorded here because it bears on the same amplitude mechanism as D4.
+
+The novelty amplitude in `HumanAgent.generate_novelty` carries a
+`max(0.1, network_contagion)` factor, and the v2 step path in `simulation/model.py`
+supplies that contagion as `clip(prev_H_N / max(1.0, len(schedule)), 0.5, 2.0)`. The
+expression appears at two separate sites, once on the legacy step path and once on the
+v2 path; the v2 site is the live one. Line numbers are deliberately omitted here
+because the v2.1 edits have shifted them and this observation is dated later than the
+substrate commit named in the header.
+
+The numerator is bounded above by 1.0 and the denominator is the agent count, on the
+order of 200, so the ratio cannot approach the lower clip bound of 0.5 at any
+realistic population.
+
+Measured across the 40 committed honest-baseline runs, 11,960 step pairs: the maximum
+raw ratio is 0.005235602094240838, roughly two orders of magnitude below the clip
+bound, and the set of distinct realized contagion values is exactly `{0.5}`. Zero
+records were unclipped.
+
+Three consequences. The term is a constant in practice rather than a dynamic coupling,
+so the mechanism it was written to express does not operate at these populations. The
+feedback path from entropy through contagion back into novelty amplitude is therefore
+open, which is why the step 1 estimator repair cannot produce a downward spiral even
+though it drives entropy sharply lower on degenerate steps; a smaller `prev_H_N` pins
+the clip harder rather than propagating. And because the factor is constant, it is
+absorbed into the projection constant in Section 8 item 1 rather than modeled.
+
+This is a structural observation, not a defect claim. It is the same shape as the
+inverse-scarcity cancellation above and as D4 itself: a term that is present in the
+expression, carries an intended meaning, and is inert at the operating point. Whether
+the clip bounds or the population normalization are the intended reading is an open
+question against the published architecture, and it is not resolved here.
+
 ---
 
 ## 6a. D5. The veto ratification metric has an unstated stochastic floor
@@ -808,6 +856,30 @@ interpolation artifact, because the median of a concave transform is not the tra
 of the median. The detector allowance and threshold remain unfixed and are
 pre-registered separately, before the characterization run that consumes them.
 
+**K, the rollout projection constant, ratified 2026-09-08.** The rollout has no agent
+layer, so the magnitude factor's novelty variance must be projected from the candidate
+constraint posture rather than measured. The projection is
+V = K * (avg_wb * (1 - S))^2, with S the coupled total suppression, and K is fixed at
+0.24292031137077771.
+
+K is derived from committed evidence rather than chosen. Taking the 40 honest-baseline
+per-step files published with item 2a, filtering to steps 10 and up with positive
+variance and positive amplitude, 9,205 records remain, and K is the median of V / A^2
+over them. The closed form was validated before being adopted, not assumed: the
+correlation between V and A^2 is 0.99827197819633129 and the median absolute relative
+error of K * A^2 against the recorded V is 0.026890085308972234. Two further checks
+passed. Every one of the 2,395 records with exactly zero variance carries total
+suppression at or above 1.0, with no exceptions, which confirms the amplitude scalar
+is the mechanism. And evaluating the projection at the baseline median well-being and
+median suppression returns 0.9777 of V_ref, so the projection reproduces the operating
+point it was calibrated against.
+
+The network contagion factor is absorbed into K rather than modeled, which is licensed
+by the measurement recorded in Section 6: the term is pinned at its 0.5 clip floor in
+all 11,960 baseline records. Should population fall far enough for that clip to
+release, K would no longer be valid and the projection would need revisiting. That
+condition is stated here so it is not discovered later.
+
 **2. Floor characterization for Biological Veto Capture. COMPLETE, 2026-09-08.**
 Measured the realized ratification floor described in D5. Nine hundred runs across
 three seed-paired arms at one cell of the published grid, gated behind a
@@ -906,15 +978,66 @@ at or after step 10 carried zero novelty variance. Those estimator outputs move 
 consumed. No sweep was run to quantify the downstream effect, and no corrected figure
 is derived for any published number.
 
+**Rollout magnitude projection landed, and D3 closed at the objective level,
+2026-09-08.** The projection replaces the frozen novelty entropy carried through the
+rollout with a value projected from the candidate's own constraint posture. The
+spectral shape is measured once and carried forward unchanged across every horizon,
+per the decision on record; only the magnitude is projected. Three production files
+changed, each at a named function.
+
+D3 was closed by measurement against a pre-registered criterion, not by assumption.
+Over a 6 by 6 constraint grid at one fixed state, holding the six resource axes fixed
+so that only posture varies:
+
+- *Negative control.* With the projection bypassed, the score is exactly invariant
+  across all 36 postures, a maximum minus minimum of exactly 0.0. This reproduces D3
+  as published: the planner was exactly indifferent, not approximately.
+- *Positive result.* With the projection active, the score is strictly decreasing
+  across all 29 distinct coupled-suppression values.
+- *Structural test.* The projection reads the candidate only through the coupled
+  scalar, so postures with equal total suppression must score equally. The single tied
+  group of eight cells shows a maximum within-group difference of exactly 0.0,
+  confirming no constraint axis is read directly.
+- *Saturation.* At total suppression the projected variance and the projected entropy
+  are both exactly 0.0 before any downstream floor.
+- *Effect size.* The grid spread is 70.745 against a candidate-set score standard
+  deviation of 24.289 at the same state, so the posture channel is roughly 2.9
+  standard deviations rather than a marginal one.
+
+A bounded observation, recorded without generalization: over one fixed candidate set at
+one fixed state, the selected action's coupled suppression is 1.0 with the projection
+off and 0.126 with it on. This is consistent with the D1 mechanism in Section 3, where
+posture rides along with whichever allocation scores highest because nothing prices it.
+It is a single-state observation and is not a characterization result.
+
+Primary record `simulation/diagnostics/planner_d3_report.md`, manifest
+`simulation/diagnostics/planner_d3_manifest.json`. Every measurement above was
+independently replicated on a separate fixture with a different seed and a
+non-uniform allocation, and the negative control was reproduced by a second and
+different method, suppressing the input rather than bypassing the output, also at
+exactly 0.0. The existing suite reported 22 passed and 0 failed before and after with
+identical output.
+
 *Completion condition, partially met:* the bidirectional component validation passed
 for the entropy estimator, including a positive control confirmed to fail if the
-repair were absent. The item stays open on two counts. The inverse-scarcity question
-raised in Section 6 is untouched. And this change does not by itself resolve D3: the
-rollout holds novelty entropy constant at `simulation/agents.py:548` and consumes a
-frozen scalar rather than recalling the estimator per candidate, so the planner cannot
-yet see suppression during planning. The rollout magnitude projection that carries
-this repair into candidate selection is separate work, and the planner's response to
-constraint posture is to be measured rather than assumed.
+repair were absent, and the planner's indifference to suppression is measured as
+closed. The item stays open on one count: the inverse-scarcity question raised in
+Section 6 is untouched.
+
+**What this does not establish.** D3 is closed at the objective level only, measured at
+a fixed state with a bounded candidate set. It does not establish that Sub-Threshold
+Drift is contained, that any published figure changes, or what the repaired substrate
+does over a full run. No characterization has been run. The correction runs in the
+direction that flatters the framework, which is the condition under which this record
+requires the most care, so no corrected figure is derived here and none should be until
+a repaired-instrument characterization produces one.
+
+**A standing check for every later run.** The state builder substitutes a neutral
+spectral shape of 1.0 when no measured shape is available, and counts each such
+substitution in an observable module counter. That counter read zero throughout this
+work. Any future run that consumes the projection must assert it is zero, because a
+nonzero count means the shape was invented rather than measured and the results are
+contaminated.
 
 **4. Reconstruction of Phase B and phi, run on both substrates.** This is a
 reimplementation, not a rerun, because no generating code exists. That distinction

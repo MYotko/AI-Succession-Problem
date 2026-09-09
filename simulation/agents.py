@@ -3,6 +3,7 @@ from dataclasses import replace
 from metrics import (
     calculate_system_metrics, calculate_system_metrics_v2,
     DiagnosticStateV2, _build_state_from_model,
+    H_N_V_PROJ_K, H_N_MAGNITUDE_SAT_K, H_N_V_REF,
 )
 from defection import adjusted_objective, get_defection_profile
 
@@ -527,6 +528,11 @@ def _project_diagnostic_state_step(state, candidate, config):
     new_res_trend    = ((1.0 - _PROJ_ALPHA_TREND) * state.resilience_trend
                         + _PROJ_ALPHA_TREND * (new_res - state.resilience_stock))
 
+    S_proj = total_suppression(candidate)
+    V_proj = H_N_V_PROJ_K * (new_avg_wb * (1.0 - S_proj)) ** 2
+    magnitude = -np.expm1(-H_N_MAGNITUDE_SAT_K * V_proj / H_N_V_REF)
+    h_n_proj = float(np.clip(state.h_n_shape * magnitude, 0.0, 1.0))
+
     return replace(state,
         avg_wb=new_avg_wb,
         population=new_pop,
@@ -542,10 +548,9 @@ def _project_diagnostic_state_step(state, candidate, config):
         psi_inst_trend=new_psi_trend,
         resilience_trend=new_res_trend,
         projected_avg_age=new_projected_avg_age,
-        # h_n held constant during projection: spectral entropy is agent-
-        # derived and the rollout has no agent novelty layer. The optimizer
-        # sees the current model's h_n applied to all rollout horizons.
-        h_n=state.h_n,
+        # Project magnitude from cohort-corrected well-being and coupled
+        # suppression; retain measured shape because rollout has no novelty layer.
+        h_n=h_n_proj,
         # reproductive_share held constant per Q6 first-build aggregate
         # approximation. avg_age cohort correction does not propagate to
         # reproductive_share in first build; the share of population in

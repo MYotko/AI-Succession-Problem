@@ -1,0 +1,47 @@
+{
+  "H_N_MAGNITUDE_SAT_K": 3.0,
+  "H_N_V_REF": 0.0238802249185,
+  "T0_checks": {
+    "a": {
+      "exit_code": 0,
+      "passed": true,
+      "result": "main"
+    },
+    "b": {
+      "ancestor": "399e96f6bbc853fb497524382b5d89db310067ae",
+      "exit_code": 0,
+      "passed": true
+    },
+    "c": {
+      "command": "git status --porcelain --untracked-files=no",
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n",
+      "stdout": "",
+      "stdout_line_count": 0
+    },
+    "d": {
+      "passed": true,
+      "raw_metrics_sha256": "b87c7b7b511977b5858285241cf8dffed7319194a648ef432acc5d32525d483f"
+    },
+    "e": {
+      "model_and_agents_hashes_recorded": true,
+      "passed": true
+    },
+    "f": {
+      "passed": true,
+      "read_H_N_MAGNITUDE_SAT_K": 3.0,
+      "read_H_N_V_REF": 0.0238802249185
+    }
+  },
+  "branch": "main",
+  "bytecode_writes_disabled": true,
+  "head": "399e96f6bbc853fb497524382b5d89db310067ae",
+  "known_conditions": [
+    "Operator-established CRLF/LF basis differences accepted; no worktree-to-blob comparison and no normalization.",
+    "Unreadable cache and global Git ignore warnings are expected and non-halting."
+  ],
+  "status": "T0_PASSED",
+  "utc": "2026-09-09T01:27:44.009568+00:00",
+  "write_guard_null_exemption": true
+}

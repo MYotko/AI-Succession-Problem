@@ -1,0 +1,87 @@
+{
+  "frozen_shape_all_horizons": true,
+  "maximum_within_group_score_difference": 0.0,
+  "saturation_endpoint_passed": true,
+  "strict_decrease_between_distinct_suppression_values": true,
+  "tie_groups": [
+    {
+      "cells": [
+        {
+          "V_proj": 0.0,
+          "c_protective": 0.0,
+          "c_suppressive": 1.0,
+          "grid_index": 5,
+          "h_n_horizon_1": 0.0,
+          "score": 42.616845958732185,
+          "total_suppression": 1.0
+        },
+        {
+          "V_proj": 0.0,
+          "c_protective": 0.2,
+          "c_suppressive": 1.0,
+          "grid_index": 11,
+          "h_n_horizon_1": 0.0,
+          "score": 42.616845958732185,
+          "total_suppression": 1.0
+        },
+        {
+          "V_proj": 0.0,
+          "c_protective": 0.4,
+          "c_suppressive": 1.0,
+          "grid_index": 17,
+          "h_n_horizon_1": 0.0,
+          "score": 42.616845958732185,
+          "total_suppression": 1.0
+        },
+        {
+          "V_proj": 0.0,
+          "c_protective": 0.6,
+          "c_suppressive": 1.0,
+          "grid_index": 23,
+          "h_n_horizon_1": 0.0,
+          "score": 42.616845958732185,
+          "total_suppression": 1.0
+        },
+        {
+          "V_proj": 0.0,
+          "c_protective": 0.8,
+          "c_suppressive": 0.8,
+          "grid_index": 28,
+          "h_n_horizon_1": 0.0,
+          "score": 42.616845958732185,
+          "total_suppression": 1.0
+        },
+        {
+          "V_proj": 0.0,
+          "c_protective": 0.8,
+          "c_suppressive": 1.0,
+          "grid_index": 29,
+          "h_n_horizon_1": 0.0,
+          "score": 42.616845958732185,
+          "total_suppression": 1.0
+        },
+        {
+          "V_proj": 0.0,
+          "c_protective": 1.0,
+          "c_suppressive": 0.8,
+          "grid_index": 34,
+          "h_n_horizon_1": 0.0,
+          "score": 42.616845958732185,
+          "total_suppression": 1.0
+        },
+        {
+          "V_proj": 0.0,
+          "c_protective": 1.0,
+          "c_suppressive": 1.0,
+          "grid_index": 35,
+          "h_n_horizon_1": 0.0,
+          "score": 42.616845958732185,
+          "total_suppression": 1.0
+        }
+      ],
+      "score_difference": 0.0,
+      "total_suppression": 1.0
+    }
+  ],
+  "utc": "2026-09-09T01:33:57.584925+00:00"
+}

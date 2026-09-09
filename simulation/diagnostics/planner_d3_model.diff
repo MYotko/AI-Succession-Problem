@@ -1,0 +1,27 @@
+--- a/simulation/model.py
++++ b/simulation/model.py
+@@ -216,6 +216,7 @@
+         # sees the same value used by per-step metric computation. Updated in
+         # _step_v2 after agents step, before the metric call.
+         self.h_n_latest = None
++        self.h_n_shape_latest = None
+         # Previous-step trackers for delta computation. Initialized to current
+         # state at the first step (no delta on step 0); refreshed at the end
+         # of each step after metrics collection.
+@@ -1527,8 +1528,14 @@
+         # Stage 1.8: compute spectral H_N once and cache on the model so
+         # both per-step metric call and _build_state_from_model see the
+         # same value.
+-        h_n_spectral = calculate_h_n(self.novelty_log,
+-                                      composite_method=self.hn_composite_method)
++        h_n_components = calculate_h_n(self.novelty_log,
++                                       composite_method=self.hn_composite_method,
++                                       return_components=True)
++        if isinstance(h_n_components, tuple):
++            h_n_spectral, self.h_n_shape_latest, _ = h_n_components
++        else:
++            h_n_spectral = h_n_components
++            self.h_n_shape_latest = None
+         self.h_n_latest = float(h_n_spectral)
+ 
+         u_sys_v2, components = calculate_system_metrics_v2(

@@ -1,0 +1,61 @@
+{
+  "elapsed_seconds": 1.2107360999943921,
+  "exit_code": 0,
+  "initial_numpy_seed": 20260908,
+  "machine": "YOTKOTEST",
+  "modules": {
+    "simulation/agents.py": {
+      "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+    },
+    "simulation/attack_adapter_v2.py": {
+      "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+    },
+    "simulation/constants_v2_stage15.py": {
+      "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+      "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+    },
+    "simulation/constants_v2_stage18.py": {
+      "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+    },
+    "simulation/defection.py": {
+      "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+      "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+    },
+    "simulation/diagnostics/planner_d3_harness.py": {
+      "sha256_lf": "870d49bc15fd548a445fea4fdba4dd3b339b0d76f73d99c84e6ef40aaf176a52",
+      "sha256_raw": "870d49bc15fd548a445fea4fdba4dd3b339b0d76f73d99c84e6ef40aaf176a52"
+    },
+    "simulation/metrics.py": {
+      "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+    },
+    "simulation/model.py": {
+      "sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "sha256_raw": "e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945"
+    }
+  },
+  "numpy": "2.4.4",
+  "phase": "post",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "stderr": "",
+  "stdout": "============================================================\n  WP5 Self-Audit \u2014 Refactor 1.x Verification Suite\n============================================================\n  PASS  WP1_human_agent_10d_vector\n  PASS  WP1_no_domain_arrays\n  PASS  WP1_calculate_h_n_spectral\n  PASS  WP1_spectral_detects_domain_suppression\n  PASS  WP2_no_07_floor_in_source\n  PASS  WP2_schedule_validator_rejects_starvation\n  PASS  WP2_schedule_validator_passes_healthy\n  PASS  WP3_cusum_initialised\n  PASS  WP3_no_hardcoded_20step_array\n  PASS  WP3_cusum_accumulates_on_drift\n  PASS  WP3_cusum_score_exposed_in_datacollector\n  PASS  WP4_no_self_reporting_cost_in_ai_agent\n  PASS  WP4_peer_validator_exists\n  PASS  WP4_peer_validator_installed_on_model\n  PASS  WP4_inflated_cost_undercut\n  PASS  WP4_peer_gains_capability_on_undercut\n  PASS  GAP01_trapezoidal_integration\n  PASS  GAP01_tail_fields_present\n  PASS  GAP01_total_identity\n  PASS  GAP01_tail_decreases_over_time\n  PASS  GAP01_trapezoidal_differs_from_riemann\n  PASS  INTEGRATION_manufacture_emergency_blocked\n============================================================\n  Results: 22 passed / 0 failed / 22 total\n============================================================\n",
+  "thread_environment": {
+    "BLIS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  },
+  "thread_runtime": [
+    {
+      "effective_threads": 1,
+      "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+      "query": "scipy_openblas_get_num_threads64_"
+    }
+  ],
+  "utc": "2026-09-09T01:33:58.753287+00:00"
+}
