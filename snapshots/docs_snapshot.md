@@ -1,8 +1,8 @@
 # Docs Snapshot
 
-Generated: 2026-09-13T18:46:03Z
+Generated: 2026-09-13T19:06:53Z
 Repository: C:\Users\matty\Dev\AI-Succession-Problem
-Commit: c2f4ea9
+Commit: 6fdf3a1
 Branch: main
 Category: docs
 
@@ -10,7 +10,7 @@ Category: docs
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| docs/CITATIONS.md | 148 | 5725 |
+| docs/CITATIONS.md | 100 | 3751 |
 | docs/RUNBOOK.md | 222 | 12476 |
 | docs/SPECIFICATION_GAPS.md | 1038 | 58669 |
 | docs/Simulation_Scenarios.md | 338 | 51488 |
@@ -24,7 +24,7 @@ Category: docs
 | docs/v2_0_instrument_validation_record.md | 1321 | 73027 |
 | README.md | 58 | 5189 |
 
-Total: 13 files, 6899 lines, 458060 bytes
+Total: 13 files, 6851 lines, 456086 bytes
 
 ---
 ==========================================
@@ -67,7 +67,7 @@ Matthew Yotko. "The Lineage Imperative: A Formal Governance Framework for Human-
 
 The series is published on Substack at https://yotko.substack.com. Use the series-level citation when referencing the work as a whole; use the individual-essay citations and templates below when citing a specific piece.
 
-### Series — BibTeX
+### Series: BibTeX
 
 ```bibtex
 @misc{yotko2026aisuccession_series,
@@ -80,11 +80,11 @@ The series is published on Substack at https://yotko.substack.com. Use the serie
 }
 ```
 
-### Series — APA (7th edition)
+### Series: APA (7th edition)
 
 Yotko, M. (2026). *The AI succession problem* \[Essay series\]. Substack. https://yotko.substack.com
 
-### Series — Plain Text
+### Series: Plain Text
 
 Matthew Yotko. "The AI Succession Problem." Essay series. Substack, March–May 2026. https://yotko.substack.com
 
@@ -130,55 +130,7 @@ Matthew Yotko. "Title of Essay." Substack, Month Day, 2026. URL
 
 ---
 
-## NeurIPS 2026 Submission
-
-*Currently under review (anonymous submission). Update to `@inproceedings` and fill in volume, pages, and proceedings URL upon acceptance. Do not distribute the submission PDF.*
-
-### BibTeX
-
-```bibtex
-@misc{yotko2026neurips,
-  author       = {Yotko, Matthew},
-  title        = {Constitutional Architecture for {AI} Governance:
-                  Why Alignment Is Necessary but Not Sufficient},
-  year         = {2026},
-  howpublished = {Submitted to the 40th Conference on Neural Information
-                  Processing Systems (NeurIPS 2026)},
-  note         = {Under review},
-}
-```
-
-*Upon acceptance, replace with:*
-
-```bibtex
-@inproceedings{yotko2026neurips,
-  author    = {Yotko, Matthew},
-  title     = {Constitutional Architecture for {AI} Governance:
-               Why Alignment Is Necessary but Not Sufficient},
-  booktitle = {Advances in Neural Information Processing Systems},
-  volume    = {[VOLUME]},
-  pages     = {[START--END]},
-  year      = {2026},
-  publisher = {Curran Associates, Inc.},
-  url       = {[PROCEEDINGS URL]},
-}
-```
-
-### APA (7th edition)
-
-Yotko, M. (2026). *Constitutional architecture for AI governance: Why alignment is necessary but not sufficient* \[Manuscript submitted for publication\]. 40th Conference on Neural Information Processing Systems.
-
-*Upon acceptance:* Yotko, M. (2026). Constitutional architecture for AI governance: Why alignment is necessary but not sufficient. *Advances in Neural Information Processing Systems*, *[VOLUME]*, [START]–[END]. [URL]
-
-### Plain Text
-
-Matthew Yotko. "Constitutional Architecture for AI Governance: Why Alignment Is Necessary but Not Sufficient." Submitted to the 40th Conference on Neural Information Processing Systems (NeurIPS 2026), 2026. Under review.
-
-*Upon acceptance:* Matthew Yotko. "Constitutional Architecture for AI Governance: Why Alignment Is Necessary but Not Sufficient." Advances in Neural Information Processing Systems, 2026. [URL]
-
----
-
-*Last updated: May 2026. For corrections or additions, open an issue at https://github.com/MYotko/AI-Succession-Problem.*
+*Last updated: September 2026. For corrections or additions, open an issue at https://github.com/MYotko/AI-Succession-Problem.*
 
 
 ==========================================
