@@ -1,0 +1,74 @@
+{
+  "D6_identity_exceptions": [],
+  "arm_counts": {
+    "AS_PUBLISHED": 300,
+    "ZERO_DEPENDENCY": 300,
+    "ZERO_STRENGTH": 300
+  },
+  "checks": {
+    "D6_identity_all_900": true,
+    "ZERO_DEPENDENCY_blocks": true,
+    "ZERO_DEPENDENCY_mean_6dp": true,
+    "ZERO_DEPENDENCY_pairs_300": true,
+    "ZERO_DEPENDENCY_se_6dp": true,
+    "ZERO_DEPENDENCY_t_4dp": true,
+    "ZERO_DEPENDENCY_votes": true,
+    "ZERO_STRENGTH_blocks": true,
+    "ZERO_STRENGTH_mean_6dp": true,
+    "ZERO_STRENGTH_pairs_300": true,
+    "ZERO_STRENGTH_se_6dp": true,
+    "ZERO_STRENGTH_t_4dp": true,
+    "ZERO_STRENGTH_votes": true,
+    "both_controls_identical": true,
+    "rows_900": true,
+    "three_arms_300_each": true,
+    "total_exact_pairing": true,
+    "unique_seed_each_arm": true
+  },
+  "comparison": {
+    "ZERO_DEPENDENCY": {
+      "control_block_total": 25,
+      "control_vote_total": 325,
+      "mean_difference": 0.06,
+      "n_pairs": 300,
+      "paired_standard_error": 0.015271602751943064,
+      "t_statistic": 3.928860707980763,
+      "t_statistic_note": null,
+      "treatment_block_total": 43,
+      "treatment_vote_total": 343
+    },
+    "ZERO_STRENGTH": {
+      "control_block_total": 25,
+      "control_vote_total": 325,
+      "mean_difference": 0.06,
+      "n_pairs": 300,
+      "paired_standard_error": 0.015271602751943064,
+      "t_statistic": 3.928860707980763,
+      "t_statistic_note": null,
+      "treatment_block_total": 43,
+      "treatment_vote_total": 343
+    }
+  },
+  "method": "statistics.fmean and statistics.stdev (sample ddof=1), divided by math.sqrt(n). Inputs parsed directly from the committed blob. No new module imported.",
+  "source": {
+    "blob_sha1": "fc6d781983ef88d42af7ee1b6aa071e8ec11a721",
+    "columns": [
+      "arm",
+      "seed",
+      "steps_completed",
+      "yield_condition_met_count",
+      "yield_condition_blocked_count",
+      "extinct",
+      "collapsed",
+      "final_population",
+      "final_validator_dependency_mean",
+      "final_validator_dependency_max"
+    ],
+    "commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+    "path": "simulation/diagnostics/veto_floor2_runs.csv",
+    "row_count": 900,
+    "sha256_lf": "592d01deaca95b1c90a50bef3c660d2fbed7807c8c0d07226908aa5dd4cb33bf"
+  },
+  "status": "PASS",
+  "utc": "2026-09-09T13:14:54.380392+00:00"
+}

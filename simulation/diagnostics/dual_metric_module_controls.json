@@ -1,0 +1,87 @@
+{
+  "checks": {
+    "T3a_ZERO_DEPENDENCY_exact_match": true,
+    "T3a_ZERO_STRENGTH_exact_match": true,
+    "T3b_constant_offset": true,
+    "T3b_null_t_with_note": true,
+    "T3c_identical_arms": true,
+    "T3d_unmatched_treatment_seed_raises": true,
+    "action_count_boolean_parsing": true,
+    "action_count_empty": true,
+    "action_count_rejects_invalid_flag": true,
+    "total_pairing_extra_guards": true
+  },
+  "comparison": {
+    "ZERO_DEPENDENCY": {
+      "mean_difference": 0.06,
+      "n_pairs": 300,
+      "paired_standard_error": 0.015271602751943064,
+      "t_statistic": 3.928860707980763,
+      "t_statistic_note": null
+    },
+    "ZERO_STRENGTH": {
+      "mean_difference": 0.06,
+      "n_pairs": 300,
+      "paired_standard_error": 0.015271602751943064,
+      "t_statistic": 3.928860707980763,
+      "t_statistic_note": null
+    }
+  },
+  "guards": {
+    "control_only": {
+      "exception": "ValueError",
+      "message": "seed sets must match exactly; treatment-only seeds: []; control-only seeds: [55]",
+      "raised": true
+    },
+    "duplicate_seed": {
+      "exception": "ValueError",
+      "message": "duplicate seed: 11",
+      "raised": true
+    },
+    "seed_type_mismatch": {
+      "exception": "ValueError",
+      "message": "seed sets must match exactly; treatment-only seeds: ['11', '33', '44', '22']; control-only seeds: [33, 22, 11, 44]",
+      "raised": true
+    },
+    "treatment_only": {
+      "exception": "ValueError",
+      "message": "seed sets must match exactly; treatment-only seeds: [55]; control-only seeds: []",
+      "raised": true
+    }
+  },
+  "negative": {
+    "mean_difference": 0.0,
+    "n_pairs": 4,
+    "paired_standard_error": 0.0,
+    "t_statistic": null,
+    "t_statistic_note": "Paired standard error is exactly zero; t statistic is undefined."
+  },
+  "positive": {
+    "mean_difference": 4.0,
+    "n_pairs": 4,
+    "paired_standard_error": 0.0,
+    "t_statistic": null,
+    "t_statistic_note": "Paired standard error is exactly zero; t statistic is undefined."
+  },
+  "source": {
+    "blob_sha1": "fc6d781983ef88d42af7ee1b6aa071e8ec11a721",
+    "columns": [
+      "arm",
+      "seed",
+      "steps_completed",
+      "yield_condition_met_count",
+      "yield_condition_blocked_count",
+      "extinct",
+      "collapsed",
+      "final_population",
+      "final_validator_dependency_mean",
+      "final_validator_dependency_max"
+    ],
+    "commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+    "path": "simulation/diagnostics/veto_floor2_runs.csv",
+    "row_count": 900,
+    "sha256_lf": "592d01deaca95b1c90a50bef3c660d2fbed7807c8c0d07226908aa5dd4cb33bf"
+  },
+  "status": "PASS",
+  "utc": "2026-09-09T13:18:35.918306+00:00"
+}

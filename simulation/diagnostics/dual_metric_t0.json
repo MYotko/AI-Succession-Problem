@@ -1,0 +1,42 @@
+{
+  "T0_checks": {
+    "a": {
+      "command": "git rev-parse --abbrev-ref HEAD",
+      "exit_code": 0,
+      "passed": true,
+      "stdout": "main\n"
+    },
+    "b": {
+      "command": "git merge-base --is-ancestor 5095f77827aadf37b19ccca04b0985f1b2f2060a HEAD",
+      "exit_code": 0,
+      "passed": true
+    },
+    "c": {
+      "command": "git status --porcelain --untracked-files=no",
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n",
+      "stdout": "",
+      "stdout_line_count": 0
+    },
+    "d": {
+      "attack_metrics_v2_exists": false,
+      "passed": true
+    },
+    "e": {
+      "passed": true,
+      "runner_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+    }
+  },
+  "branch": "main",
+  "bytecode_writes_disabled": true,
+  "head": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+  "known_conditions": [
+    "CRLF worktree/LF blob condition accepted; every committed CSV is retrieved as a Git object.",
+    "Cache and global-ignore permission warnings are expected, recorded, and non-halting."
+  ],
+  "runner_pre_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+  "status": "T0_PASSED",
+  "utc": "2026-09-09T13:14:48.564406+00:00",
+  "write_guard_null_exemption": true
+}

@@ -1,0 +1,67 @@
+{
+  "T0_checks": {
+    "a": {
+      "command": "git rev-parse --abbrev-ref HEAD",
+      "exit_code": 0,
+      "passed": true,
+      "stdout": "main\n"
+    },
+    "b": {
+      "command": "git merge-base --is-ancestor 5095f77827aadf37b19ccca04b0985f1b2f2060a HEAD",
+      "exit_code": 0,
+      "passed": true
+    },
+    "c": {
+      "command": "git status --porcelain --untracked-files=no",
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n",
+      "stdout": "",
+      "stdout_line_count": 0
+    },
+    "d": {
+      "attack_metrics_v2_exists": false,
+      "passed": true
+    },
+    "e": {
+      "passed": true,
+      "runner_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+    }
+  },
+  "T1_completed_utc": "2026-09-09T13:14:54.391296+00:00",
+  "T1_source": {
+    "blob_sha1": "fc6d781983ef88d42af7ee1b6aa071e8ec11a721",
+    "columns": [
+      "arm",
+      "seed",
+      "steps_completed",
+      "yield_condition_met_count",
+      "yield_condition_blocked_count",
+      "extinct",
+      "collapsed",
+      "final_population",
+      "final_validator_dependency_mean",
+      "final_validator_dependency_max"
+    ],
+    "commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+    "path": "simulation/diagnostics/veto_floor2_runs.csv",
+    "row_count": 900,
+    "sha256_lf": "592d01deaca95b1c90a50bef3c660d2fbed7807c8c0d07226908aa5dd4cb33bf"
+  },
+  "branch": "main",
+  "bytecode_writes_disabled": true,
+  "completed_utc": "2026-09-09T13:21:37.121867+00:00",
+  "head": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+  "known_conditions": [
+    "CRLF worktree/LF blob condition accepted; every committed CSV is retrieved as a Git object.",
+    "Cache and global-ignore permission warnings are expected, recorded, and non-halting."
+  ],
+  "module_created_utc": "2026-09-09T13:16:20.116920+00:00",
+  "new_module_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+  "runner_hash_unchanged": true,
+  "runner_post_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+  "runner_pre_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+  "status": "COMPLETE",
+  "utc": "2026-09-09T13:14:48.564406+00:00",
+  "write_guard_null_exemption": true
+}

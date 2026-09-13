@@ -55,6 +55,16 @@ described below and supersedes any earlier characterization of the affected clai
 > planner's blindness, not the drift question: no characterization has been run, and no
 > corrected figure is derived for any published number.
 
+> **Update, 2026-09-13 (v2.1 step 3 landed).** The dual attack-success metric specified
+> in Section 8 item 1 is implemented as a new pure-function module and validated against
+> committed evidence alone; no simulation was run and no existing production file
+> changed. Applied to the pinned corpus, the action-change binary discriminates attack
+> from defense for seven of the ten live vectors. For two it is zero by mechanism, and
+> for Sub-Threshold Drift it is saturated at 100 of 100 in both arms, which is
+> consistent with D2 and does not reinstate the withdrawn figure. Both findings, and a
+> numerical limitation with the restriction that handles it, are recorded in Section 8
+> item 1. No corrected figure is derived for any published number.
+
 ---
 
 ## 1. Summary
@@ -787,6 +797,53 @@ the implementation.
   expressed as a rate gave overlapping intervals and a value confined to a discrete
   ladder. This retires the per-vote rate and the proportion-of-runs candidates for
   that vector.
+
+  *Implemented 2026-09-09, and scoped by what the evidence showed.* The metric lives in
+  `simulation/attack_metrics_v2.py` as two pure functions with no I/O, no simulation
+  import, and no global state: an action-change count, returned as a count and never
+  as a rate, and a seed-paired difference returning the pair count, mean difference,
+  paired standard error, and t statistic. Pairing is exact and total. An unmatched seed
+  in either arm, a duplicate seed, or a mismatch between seed representations raises
+  rather than being dropped, because a quietly intersected seed set is the failure mode
+  pairing exists to prevent. No function computes a ratio of two measured counts. The
+  module reproduced the item 2 veto figures exactly from the committed runs, a mean
+  block-count difference of 0.060000 with paired standard error 0.015272 and t of 3.9289
+  over 300 pairs. On the same data the retired per-run ratio shows the D6 ladder: 263
+  runs at 0, 32 at one half, 4 at two thirds, and 1 at three quarters, with nothing
+  strictly between 0 and one half. Primary record
+  `simulation/diagnostics/dual_metric_report.md`.
+
+  *The comparable binary discriminates for seven of the ten live vectors, not all ten.*
+  Counted from the pinned corpus, 9,900 runs. For bootstrap subversion, engineered
+  fragility, evaluator collusion, ledger compromise, opaque reasoning, successor
+  contamination, and Sybil capture, every undefended run modified the committed action
+  and no defended run did. For Biological Veto Capture, 0 of 8,700, and Measurement
+  Tampering, 0 of 120, the count is zero in both arms by mechanism, because those
+  attacks act on ratification and on yield evaluation rather than on the committed
+  action (Section 3). For Sub-Threshold Drift the count is 100 of 100 in both arms. That
+  count is not baseline-contaminated, since an honest run cannot modify an action, but
+  it is saturated. It is consistent with D2, under which the attack modifies the action
+  from onset until a fixed-latency timer alarm fires, sixteen steps in the trajectory
+  measured in item 2a, so it measures the timer's window rather than the defense. It
+  does not reinstate the withdrawn defended attack rate, which was a different quantity
+  resting on a predicate the honest baseline also trips, and it shows drift neither
+  contained nor uncontained. Drift remains uncharacterized. For these three vectors the
+  paired differential is the only substantive measure, and each vector's paired
+  quantity is to be declared in the characterization pre-registration before any
+  post-repair run: the paired block count for the veto vector, already banked; a
+  vector-specific paired quantity for Measurement Tampering, to be chosen there; and for
+  drift, a paired quantity on the repaired detector, which does not yet exist.
+
+  *A numerical limitation, and the restriction that handles it.* Found in review rather
+  than by the run's own fixtures. When paired differences are nearly but not exactly
+  constant, floating-point rounding can leave the paired standard error on the order of
+  1e-16 rather than exactly zero, so the zero guard does not fire and the t statistic
+  is reported as an enormous and meaningless value. Integer count differences are exact
+  and cannot trigger this. The restriction adopted is that the paired difference is
+  applied to integer count fields only, consistent with the standing preference for
+  counts, and any continuous outcome receives its own registered treatment. No
+  tolerance is introduced, because choosing one now would be a calibration decision
+  made without data.
 
 - *Detector observable: a CUSUM on the protected observable, anchored and
   harm-bounding.* The detector integrates the protected quantity itself, novelty

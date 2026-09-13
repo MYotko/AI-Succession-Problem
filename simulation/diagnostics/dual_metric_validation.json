@@ -1,0 +1,66 @@
+{
+  "T1_checks": {
+    "D6_identity_all_900": true,
+    "ZERO_DEPENDENCY_blocks": true,
+    "ZERO_DEPENDENCY_mean_6dp": true,
+    "ZERO_DEPENDENCY_pairs_300": true,
+    "ZERO_DEPENDENCY_se_6dp": true,
+    "ZERO_DEPENDENCY_t_4dp": true,
+    "ZERO_DEPENDENCY_votes": true,
+    "ZERO_STRENGTH_blocks": true,
+    "ZERO_STRENGTH_mean_6dp": true,
+    "ZERO_STRENGTH_pairs_300": true,
+    "ZERO_STRENGTH_se_6dp": true,
+    "ZERO_STRENGTH_t_4dp": true,
+    "ZERO_STRENGTH_votes": true,
+    "both_controls_identical": true,
+    "rows_900": true,
+    "three_arms_300_each": true,
+    "total_exact_pairing": true,
+    "unique_seed_each_arm": true
+  },
+  "T3_checks": {
+    "T3a_ZERO_DEPENDENCY_exact_match": true,
+    "T3a_ZERO_STRENGTH_exact_match": true,
+    "T3b_constant_offset": true,
+    "T3b_null_t_with_note": true,
+    "T3c_identical_arms": true,
+    "T3d_unmatched_treatment_seed_raises": true,
+    "T3e_no_value_between_zero_and_half": true,
+    "T3e_retired_ladder_matches": true,
+    "T3g_manifest_live_rows_9900": true,
+    "T3g_ten_live_vectors": true,
+    "T3g_two_defense_arms_each": true,
+    "action_count_boolean_parsing": true,
+    "action_count_empty": true,
+    "action_count_rejects_invalid_flag": true,
+    "total_pairing_extra_guards": true
+  },
+  "bytecode_writes_disabled": true,
+  "existing_simulation_module_imports": 0,
+  "model_steps": 0,
+  "module_hash_basis": "sha256_raw hashes raw file bytes; sha256_lf hashes CRLF-to-LF normalized bytes in memory only.",
+  "module_return_contract": "action_change_count returns a two-item tuple. paired_difference returns a named mapping of the four requested statistics plus t_statistic_note. The note explains a null t at zero standard error.",
+  "new_module_loaded_for_validation": "simulation/attack_metrics_v2.py",
+  "out_of_scope_writable_open_attempts_recorded": 0,
+  "runner_hash": {
+    "path": "simulation/run_attack_vector_revalidation_v2.py",
+    "sha256_lf_T0": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+    "sha256_lf_end": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+    "unchanged": true,
+    "utc": "2026-09-09T13:21:37.106221+00:00"
+  },
+  "source_modules": {
+    "simulation/attack_metrics_v2.py": {
+      "sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "sha256_raw": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323"
+    },
+    "simulation/diagnostics/dual_metric_harness.py": {
+      "sha256_lf": "f977339bfc1014e287774b33bec6be12aae4ea6da498397b1058232e0838fc7b",
+      "sha256_raw": "f977339bfc1014e287774b33bec6be12aae4ea6da498397b1058232e0838fc7b"
+    }
+  },
+  "status": "COMPLETE",
+  "utc": "2026-09-09T13:21:37.125529+00:00",
+  "write_guard_null_exemption": true
+}
