@@ -34,7 +34,7 @@ Matthew Yotko. "The Lineage Imperative: A Formal Governance Framework for Human-
 
 The series is published on Substack at https://yotko.substack.com. Use the series-level citation when referencing the work as a whole; use the individual-essay citations and templates below when citing a specific piece.
 
-### Series — BibTeX
+### Series: BibTeX
 
 ```bibtex
 @misc{yotko2026aisuccession_series,
@@ -47,11 +47,11 @@ The series is published on Substack at https://yotko.substack.com. Use the serie
 }
 ```
 
-### Series — APA (7th edition)
+### Series: APA (7th edition)
 
 Yotko, M. (2026). *The AI succession problem* \[Essay series\]. Substack. https://yotko.substack.com
 
-### Series — Plain Text
+### Series: Plain Text
 
 Matthew Yotko. "The AI Succession Problem." Essay series. Substack, March–May 2026. https://yotko.substack.com
 
