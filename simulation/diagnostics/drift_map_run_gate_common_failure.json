@@ -1,0 +1,7 @@
+{
+  "halt": "Execution halted by another gate failure",
+  "job": "common",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\drift_map_run_executor.py\", line 193, in main\n    try:worker(args.job)\n        ~~~~~~^^^^^^^^^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\drift_map_run_executor.py\", line 171, in worker\n    if(OUT/'drift_map_run_stop.json').exists():raise RuntimeError('Execution halted by another gate failure')\n                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Execution halted by another gate failure\n",
+  "utc": "2026-09-13T18:02:37.407616+00:00",
+  "violations": []
+}

@@ -8,6 +8,8 @@ executor verifies that structurally rather than by instruction.
 `fd444fc22254ec24472f4bad03f8f56bf4470110`, with steps 1 through 3 of the v2.1 arc in
 place.
 **Governs:** artifacts under the prefix `simulation/diagnostics/drift_map_run_`.
+**Amended:** 2026-09-13, Amendment 1 in Section 11, committed and pushed before any
+characterization run.
 
 ---
 
@@ -195,7 +197,8 @@ exists.
 
 Continuous checks during the run, each a halt on failure:
 
-- The `H_N_SHAPE_FALLBACK_COUNT` module counter is zero at the end of every run.
+- The `H_N_SHAPE_FALLBACK_COUNT` check, superseded by Amendment 1 in Section 11, where
+  the original wording is preserved.
 - The raw entropy recomputed by the recorder from the step's novelty matrix equals the
   model's cached `h_n_latest` exactly on every step.
 - Every attack run's seed equals its paired honest run's seed.
@@ -212,7 +215,7 @@ datacollector H_N; the coupled total suppression of the committed action; `avg_w
 population; the six allocation shares and two constraint axes of the committed action;
 adapter active; action modified; the old accumulator score. One summary row per run
 records steps completed, whether the run ended by extinction, and the shape fallback
-count.
+count increase during step 0 and after step 0, per Amendment 1.
 
 ## 8. Analysis, fixed now
 
@@ -279,3 +282,43 @@ verified. Estimated wall time about 30 minutes, scaled from the drift_char batch
 are restricted to the governed prefix and `os.devnull`. The manifest enumerates every
 output with SHA256 on LF-normalized bytes and CSV row counts, and records the committed
 blob SHA1 of this document and of every pinned source file.
+
+## 11. Amendment 1, 2026-09-13
+
+Committed and pushed before any characterization run. No arm had started when it was
+made. The only outputs in existence were gate probes, and no analysis quantity in
+Section 8 had been computed.
+
+**What is amended.** The first continuous check in Section 6, which originally read:
+"The `H_N_SHAPE_FALLBACK_COUNT` module counter is zero at the end of every run."
+
+**Why.** No run of this substrate can satisfy that check, so it was a specification
+error rather than a finding. Before the first step no novelty has been measured, so the
+state builder has no spectral shape to carry and substitutes the neutral value of 1.0,
+the same condition its source comment anticipates for entropy itself. A probe of the
+pre-registered honest configuration at seed 1835086199 read the counter at 0 after
+construction, 2 after step 0, and 2 after each of steps 1 through 4: both substitutions
+occur during step 0 and none occur after it. The first execution attempt halted on this
+check at the end of its 60-step honest probe with a count of 2, recorded in
+`drift_map_run_execution_halt_report.md`. The check was written from step 2 validation
+evidence in which the shape cache was set by hand and no model was stepped, so it was
+never exercised against a real run.
+
+The original wording has a second defect. The counter is a module-level value, so in a
+worker process that executes several runs in sequence it accumulates across all of them,
+and an end-of-run value is not a per-run quantity at all.
+
+**Consequence of the step 0 substitution.** It affects only the decision made during
+step 0. That decision is identical in every arm, because every arm is seed-identical
+before onset, and it lies outside every analysis window: honest-baseline distributions
+exclude steps before 10, and attack onset is step 50.
+
+**Replacement check, a halt on failure.** For every run, the counter's increase from the
+end of step 0 to the end of the run is zero. The increase during step 0 and the increase
+after step 0 are both recorded in the run summary. Any substitution after step 0 means a
+shape was invented after measurement began, and halts the run.
+
+**Nothing else changes.** Arms, seeds, construction, gates, and every analysis item A1
+through A6 stand exactly as originally committed. The only change to the recorded fields
+is that the single fallback count in the Section 7 run summary becomes the two increases
+defined above.

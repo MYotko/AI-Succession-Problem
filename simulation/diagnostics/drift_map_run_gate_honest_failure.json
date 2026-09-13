@@ -1,0 +1,7 @@
+{
+  "halt": "Continuous check failed at end of honest run: H_N_SHAPE_FALLBACK_COUNT=2",
+  "job": "honest",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\drift_map_run_executor.py\", line 193, in main\n    try:worker(args.job)\n        ~~~~~~^^^^^^^^^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\drift_map_run_executor.py\", line 186, in worker\n    if fallback!=0:raise RuntimeError('Continuous check failed at end of '+job+' run: H_N_SHAPE_FALLBACK_COUNT='+str(fallback))\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Continuous check failed at end of honest run: H_N_SHAPE_FALLBACK_COUNT=2\n",
+  "utc": "2026-09-13T18:02:37.316807+00:00",
+  "violations": []
+}

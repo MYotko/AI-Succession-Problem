@@ -1,0 +1,84 @@
+{
+  "T0_checks": {
+    "T0a": {
+      "command": "git rev-parse --abbrev-ref HEAD",
+      "exit_code": 0,
+      "passed": true,
+      "stdout": "main\n"
+    },
+    "T0b": {
+      "command": "git merge-base --is-ancestor fd444fc22254ec24472f4bad03f8f56bf4470110 HEAD",
+      "exit_code": 0,
+      "passed": true
+    },
+    "T0c": {
+      "command": "git status --porcelain --untracked-files=no",
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n",
+      "stdout": "",
+      "stdout_line_count": 0
+    },
+    "T0d_commit": {
+      "command": "git log -1 --format=%H -- simulation/diagnostics/drift_mapping_design_note.md",
+      "exit_code": 0,
+      "passed": false,
+      "stdout": ""
+    },
+    "T0d_index": {
+      "command": "git ls-files --error-unmatch simulation/diagnostics/drift_mapping_design_note.md",
+      "exit_code": 1,
+      "passed": false,
+      "stderr": "error: pathspec 'simulation/diagnostics/drift_mapping_design_note.md' did not match any file(s) known to git\nDid you forget to 'git add'?\n",
+      "stdout": ""
+    },
+    "T0d_publication_ancestry": {
+      "reason": "No last-modifying commit C was returned.",
+      "status": "NOT_RUN"
+    },
+    "T0e": {
+      "actual_sha256_lf": null,
+      "blob_sha1": null,
+      "command": "git cat-file blob HEAD:simulation/diagnostics/drift_mapping_design_note.md",
+      "exit_code": 128,
+      "expected_sha256_lf": "a31c047ab1ac099a407413be259b25e9f985656da0412dcc6fe466f41668e169",
+      "passed": false,
+      "stderr": "fatal: path 'simulation/diagnostics/drift_mapping_design_note.md' exists on disk, but not in 'HEAD'\n"
+    },
+    "T0f": {
+      "reason": "Verified committed note unavailable; Section 3 was not read.",
+      "status": "NOT_RUN"
+    }
+  },
+  "hash_basis": "SHA256 over CRLF-to-LF normalized bytes in memory.",
+  "head": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+  "machine": "YOTKOTEST",
+  "note_blob_sha1": null,
+  "numpy_installed_version": "2.4.4",
+  "outputs": [
+    {
+      "path": "simulation/diagnostics/drift_map_run_report.md",
+      "row_count": null,
+      "sha256": "d629bde4129421328c488110eeb1d2993df739b9f6bf7889c73ec2e7383cc539"
+    },
+    {
+      "path": "simulation/diagnostics/drift_map_run_halt.json",
+      "row_count": null,
+      "sha256": "470394964cf900decd391211eaed0453037997c381e28e193e8f5c1643f4fd3a"
+    },
+    {
+      "path": "simulation/diagnostics/drift_map_run_manifest.json",
+      "row_count": null,
+      "sha256": null
+    }
+  ],
+  "per_module_sha256": {},
+  "per_module_sha256_note": "No simulation module was executed; Section 3 pins could not be read.",
+  "pinned_source_blob_sha1": null,
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "resumed_seeds": [],
+  "row_count_convention": "csv.DictReader excluding headers for CSV files; null for non-CSV. No CSV was produced.",
+  "self_hash_convention": "Self-entry sha256 is null; final LF-normalized digest is emitted separately.",
+  "status": "HALTED",
+  "worker_count": 0
+}

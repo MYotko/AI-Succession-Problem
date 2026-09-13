@@ -1089,12 +1089,20 @@ direction that flatters the framework, which is the condition under which this r
 requires the most care, so no corrected figure is derived here and none should be until
 a repaired-instrument characterization produces one.
 
-**A standing check for every later run.** The state builder substitutes a neutral
-spectral shape of 1.0 when no measured shape is available, and counts each such
-substitution in an observable module counter. That counter read zero throughout this
-work. Any future run that consumes the projection must assert it is zero, because a
-nonzero count means the shape was invented rather than measured and the results are
-contaminated.
+**A standing check for every later run, corrected 2026-09-13.** The state builder
+substitutes a neutral spectral shape of 1.0 when no measured shape is available, and
+counts each such substitution in an observable module counter. The check first recorded
+here, that the counter must be zero in any run consuming the projection, was wrong. The
+counter read zero during this work only because the validation fixtures set the shape
+cache by hand and never stepped a model. In a real run no novelty exists before the
+first step, so the builder substitutes the neutral shape during step 0 by construction:
+a probe of the drift mapping honest configuration measured two substitutions, both
+during step 0 and none after. The counter also accumulates across runs within one
+process, so an end-of-run total is not a per-run quantity. The correct check is that the
+counter does not increase after step 0 within a run. A substitution after measurement
+has begun means a shape was invented rather than measured, and that run's results are
+contaminated. The drift mapping pre-registration's own gate caught the error before any
+characterization data existed, and it is corrected there as Amendment 1.
 
 **4. Reconstruction of Phase B and phi, run on both substrates.** This is a
 reimplementation, not a rerun, because no generating code exists. That distinction

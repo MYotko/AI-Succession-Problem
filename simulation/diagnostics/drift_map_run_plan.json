@@ -1,0 +1,90 @@
+{
+  "T0_passed": true,
+  "T0_status_command": "git status --porcelain --untracked-files=no",
+  "T0_status_exit_code": 0,
+  "T0_status_stdout": "",
+  "T0_stderr_warning": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n",
+  "arm_runs_started": 0,
+  "arms": {
+    "H": null,
+    "M05": 0.5,
+    "M1": 1.0,
+    "M2": 2.0,
+    "M4": 4.0,
+    "R02": 0.02,
+    "R05": 0.05,
+    "R10": 0.1,
+    "R20": 0.2
+  },
+  "available_cpu_budget": 16,
+  "branch": "main",
+  "bytecode_writes_disabled": true,
+  "created_utc": "2026-09-13T18:02:00.212510+00:00",
+  "g_star": 1.0965735902799727,
+  "gate_concurrency": 4,
+  "gate_jobs": [
+    "wrapper",
+    "factory",
+    "common",
+    "honest"
+  ],
+  "head": "0a9b8e1c4f62b18171b998a1c62e581ff74e2083",
+  "mode": "normal",
+  "normal_limit": 15,
+  "note_blob_sha1": "54d43154c811f534dc070522f859cfaf74320c6c",
+  "note_path": "simulation/diagnostics/drift_mapping_design_note.md",
+  "note_sha256_lf": "a31c047ab1ac099a407413be259b25e9f985656da0412dcc6fe466f41668e169",
+  "numerical_threads": 1,
+  "pins": [
+    {
+      "committed_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "initial_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "path": "simulation/metrics.py"
+    },
+    {
+      "committed_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "initial_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "path": "simulation/agents.py"
+    },
+    {
+      "committed_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "initial_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "path": "simulation/model.py"
+    },
+    {
+      "committed_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "initial_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "path": "simulation/attack_adapter_v2.py"
+    },
+    {
+      "committed_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "initial_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "path": "simulation/run_attack_vector_revalidation_v2.py"
+    },
+    {
+      "committed_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "initial_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "path": "simulation/working_factor.py"
+    },
+    {
+      "committed_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "initial_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "path": "simulation/constants_v2_stage18.py"
+    }
+  ],
+  "prior_halts": "Publication-gate attempts only. No prior seed ran.",
+  "publication_ancestry_exit_code": 0,
+  "publication_commit": "0a9b8e1c4f62b18171b998a1c62e581ff74e2083",
+  "resumed_seeds": [],
+  "seed_end": 1835086238,
+  "seed_start": 1835086199,
+  "work_limit": 12,
+  "write_guard_null_exemption": true
+}

@@ -1,0 +1,73 @@
+{
+  "T1_gates_run": 0,
+  "arm_runs": 0,
+  "branch": "main",
+  "bytecode_writes_disabled": true,
+  "checks": {
+    "T0a": {
+      "command": "git rev-parse --abbrev-ref HEAD",
+      "exit_code": 0,
+      "passed": true,
+      "stdout": "main\n"
+    },
+    "T0b": {
+      "command": "git merge-base --is-ancestor fd444fc22254ec24472f4bad03f8f56bf4470110 HEAD",
+      "exit_code": 0,
+      "passed": true
+    },
+    "T0c": {
+      "command": "git status --porcelain --untracked-files=no",
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n",
+      "stdout": "",
+      "stdout_line_count": 0
+    },
+    "T0d_commit": {
+      "command": "git log -1 --format=%H -- simulation/diagnostics/drift_mapping_design_note.md",
+      "exit_code": 0,
+      "passed": false,
+      "stdout": ""
+    },
+    "T0d_index": {
+      "command": "git ls-files --error-unmatch simulation/diagnostics/drift_mapping_design_note.md",
+      "exit_code": 1,
+      "passed": false,
+      "stderr": "error: pathspec 'simulation/diagnostics/drift_mapping_design_note.md' did not match any file(s) known to git\nDid you forget to 'git add'?\n",
+      "stdout": ""
+    },
+    "T0d_publication_ancestry": {
+      "reason": "No last-modifying commit C was returned.",
+      "status": "NOT_RUN"
+    },
+    "T0e": {
+      "actual_sha256_lf": null,
+      "blob_sha1": null,
+      "command": "git cat-file blob HEAD:simulation/diagnostics/drift_mapping_design_note.md",
+      "exit_code": 128,
+      "expected_sha256_lf": "a31c047ab1ac099a407413be259b25e9f985656da0412dcc6fe466f41668e169",
+      "passed": false,
+      "stderr": "fatal: path 'simulation/diagnostics/drift_mapping_design_note.md' exists on disk, but not in 'HEAD'\n"
+    },
+    "T0f": {
+      "reason": "Verified committed note unavailable; Section 3 was not read.",
+      "status": "NOT_RUN"
+    }
+  },
+  "head": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+  "machine": "YOTKOTEST",
+  "note_content_read": false,
+  "numpy_installed_version": "2.4.4",
+  "numpy_version_basis": "Installed package metadata; NumPy was not imported for computation.",
+  "out_of_scope_writable_open_attempts_recorded": 0,
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "reason": "The required design note is absent from the Git index and HEAD. Publication and committed hash checks failed.",
+  "resumed_seeds": [],
+  "simulation_workers": 0,
+  "source_modules_executed": [],
+  "source_pins": null,
+  "status": "HALTED",
+  "utc": "2026-09-13T17:52:37.757690+00:00",
+  "working_tree_note_read": false,
+  "write_guard_null_exemption": true
+}

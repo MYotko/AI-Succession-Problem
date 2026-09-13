@@ -1,0 +1,32 @@
+{
+  "hash_basis": "SHA256 on CRLF-to-LF normalized bytes in memory.",
+  "head": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+  "machine": "YOTKOTEST",
+  "note_blob_sha1": null,
+  "numpy_installed_version": "2.4.4",
+  "outputs": [
+    {
+      "path": "simulation/diagnostics/drift_map_run_recheck_20260913T175508Z.json",
+      "row_count": null,
+      "sha256": "c3ec7c35534dc1edec210aaca8bf0ef28eeecf7acd3be3445672a1c986fdb65c"
+    },
+    {
+      "path": "simulation/diagnostics/drift_map_run_recheck_20260913T175508Z_report.md",
+      "row_count": null,
+      "sha256": "14bd2ec85cc58faf2e8dfd4933ece6ed22e6bbc220507c1a9896ac3c7f2207eb"
+    },
+    {
+      "path": "simulation/diagnostics/drift_map_run_recheck_20260913T175508Z_manifest.json",
+      "row_count": null,
+      "sha256": null
+    }
+  ],
+  "per_module_sha256": {},
+  "pinned_source_blob_sha1": null,
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "resumed_seeds": [],
+  "row_count_convention": "csv.DictReader excluding headers for CSV files; null for non-CSV. No CSV outputs.",
+  "self_hash_convention": "Manifest self-entry is null to avoid self-reference. Final LF-normalized digest emitted separately.",
+  "status": "HALTED",
+  "workers": 0
+}

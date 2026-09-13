@@ -1,0 +1,306 @@
+{
+  "all_workers_exited": true,
+  "analyses_A1_through_A6": "NOT_RUN",
+  "characterization_arm_runs_started": 0,
+  "characterization_runs_complete": 0,
+  "expected_fallback_count": 0,
+  "g_reference_source": {
+    "commit": "0a9b8e1c4f62b18171b998a1c62e581ff74e2083",
+    "committed_blob_sha1": "cf52af233333a0c6e6cc4671233ad7f9310cd049",
+    "path": "simulation/diagnostics/drift_char_probe.py"
+  },
+  "gate2": {
+    "matching_source_pins": 7,
+    "passed": true
+  },
+  "gate3": {
+    "common_steps_recorded": 61,
+    "configuration_dictionaries_equal": true,
+    "factory_steps_recorded": 61,
+    "first_difference_in_completed_recorder_rows": null,
+    "full_datacollector_comparison_completed": false,
+    "partial_recorder_fields_compared": 24,
+    "required_steps": 300,
+    "status": "INCOMPLETE_DUE_TO_CONTINUOUS_HALT"
+  },
+  "gate4": {
+    "comparisons": 60000,
+    "passed": true,
+    "steps_each": 300,
+    "synthetic_actions": 200
+  },
+  "gate5": {
+    "action_modified_steps": 0,
+    "adapter_active_steps": 0,
+    "attack_vector_v2_initial": null,
+    "passed": true,
+    "steps": 60
+  },
+  "gate6": {
+    "passed": true,
+    "recorder_calls_checked": 60
+  },
+  "hash_basis": "sha256_raw is raw bytes; sha256_lf is CRLF-to-LF normalized bytes.",
+  "head": "0a9b8e1c4f62b18171b998a1c62e581ff74e2083",
+  "honest_extinct": false,
+  "honest_raw_entropy_exact_matches": 60,
+  "interrupted_gate_jobs": [
+    {
+      "completed_steps": 61,
+      "job": "factory",
+      "reason": "Stopped after the honest-probe continuous check failed.",
+      "seed": 1835086199
+    },
+    {
+      "completed_steps": 61,
+      "job": "common",
+      "reason": "Stopped after the honest-probe continuous check failed.",
+      "seed": 1835086199
+    }
+  ],
+  "model_probe_workers": 3,
+  "no_corrected_figures": true,
+  "no_parameter_selection": true,
+  "note_blob_sha1": "54d43154c811f534dc070522f859cfaf74320c6c",
+  "note_sha256_lf": "a31c047ab1ac099a407413be259b25e9f985656da0412dcc6fe466f41668e169",
+  "observed_fallback_count": 2,
+  "per_module_sha256_by_worker": {
+    "common": {
+      "simulation/agents.py": {
+        "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+      },
+      "simulation/attack_adapter_v2.py": {
+        "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+      },
+      "simulation/constants_v2_stage15.py": {
+        "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+      },
+      "simulation/constants_v2_stage18.py": {
+        "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+      },
+      "simulation/defection.py": {
+        "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+      },
+      "simulation/diagnostics/drift_map_run_executor.py": {
+        "sha256_lf": "2a81a9e35b6f20e6fe8d79f033e2fd2eaf2a4a3779eeefe83b9c31cea995a097",
+        "sha256_raw": "2a81a9e35b6f20e6fe8d79f033e2fd2eaf2a4a3779eeefe83b9c31cea995a097"
+      },
+      "simulation/metrics.py": {
+        "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+      },
+      "simulation/model.py": {
+        "sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "sha256_raw": "e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945"
+      }
+    },
+    "factory": {
+      "simulation/agents.py": {
+        "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+      },
+      "simulation/attack_adapter_v2.py": {
+        "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+      },
+      "simulation/constants_v2_stage15.py": {
+        "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+      },
+      "simulation/constants_v2_stage18.py": {
+        "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+      },
+      "simulation/defection.py": {
+        "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+      },
+      "simulation/diagnostics/drift_map_run_executor.py": {
+        "sha256_lf": "2a81a9e35b6f20e6fe8d79f033e2fd2eaf2a4a3779eeefe83b9c31cea995a097",
+        "sha256_raw": "2a81a9e35b6f20e6fe8d79f033e2fd2eaf2a4a3779eeefe83b9c31cea995a097"
+      },
+      "simulation/metrics.py": {
+        "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+      },
+      "simulation/model.py": {
+        "sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "sha256_raw": "e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945"
+      },
+      "simulation/run_attack_vector_revalidation_v2.py": {
+        "sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "sha256_raw": "da7913799d0d4e11f52f770e313875764d27b20ad33157a7aa9c1fa00df418e2"
+      }
+    },
+    "honest": {
+      "simulation/agents.py": {
+        "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+      },
+      "simulation/attack_adapter_v2.py": {
+        "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+      },
+      "simulation/constants_v2_stage15.py": {
+        "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+      },
+      "simulation/constants_v2_stage18.py": {
+        "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+      },
+      "simulation/defection.py": {
+        "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+      },
+      "simulation/diagnostics/drift_map_run_executor.py": {
+        "sha256_lf": "2a81a9e35b6f20e6fe8d79f033e2fd2eaf2a4a3779eeefe83b9c31cea995a097",
+        "sha256_raw": "2a81a9e35b6f20e6fe8d79f033e2fd2eaf2a4a3779eeefe83b9c31cea995a097"
+      },
+      "simulation/metrics.py": {
+        "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+      },
+      "simulation/model.py": {
+        "sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "sha256_raw": "e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945"
+      }
+    },
+    "honest_end": {
+      "simulation/agents.py": {
+        "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+      },
+      "simulation/attack_adapter_v2.py": {
+        "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+      },
+      "simulation/constants_v2_stage15.py": {
+        "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+      },
+      "simulation/constants_v2_stage18.py": {
+        "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+      },
+      "simulation/defection.py": {
+        "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+      },
+      "simulation/diagnostics/drift_map_run_executor.py": {
+        "sha256_lf": "2a81a9e35b6f20e6fe8d79f033e2fd2eaf2a4a3779eeefe83b9c31cea995a097",
+        "sha256_raw": "2a81a9e35b6f20e6fe8d79f033e2fd2eaf2a4a3779eeefe83b9c31cea995a097"
+      },
+      "simulation/metrics.py": {
+        "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+      },
+      "simulation/model.py": {
+        "sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "sha256_raw": "e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945"
+      },
+      "simulation/working_factor.py": {
+        "sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+        "sha256_raw": "0afde923081fe34d1ada86e2928286d45c905441053f643968ea9b13007b683d"
+      }
+    },
+    "wrapper": {
+      "simulation/agents.py": {
+        "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+      },
+      "simulation/attack_adapter_v2.py": {
+        "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+      },
+      "simulation/constants_v2_stage15.py": {
+        "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+      },
+      "simulation/defection.py": {
+        "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+      },
+      "simulation/diagnostics/drift_map_run_executor.py": {
+        "sha256_lf": "2a81a9e35b6f20e6fe8d79f033e2fd2eaf2a4a3779eeefe83b9c31cea995a097",
+        "sha256_raw": "2a81a9e35b6f20e6fe8d79f033e2fd2eaf2a4a3779eeefe83b9c31cea995a097"
+      },
+      "simulation/metrics.py": {
+        "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+      }
+    }
+  },
+  "prior_attempts": "Publication checks only, with no previous gate or arm simulations.",
+  "resumed_seeds": [],
+  "source_pins_end": [
+    {
+      "actual_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "initial_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "passed": true,
+      "path": "simulation/metrics.py"
+    },
+    {
+      "actual_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "initial_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "passed": true,
+      "path": "simulation/agents.py"
+    },
+    {
+      "actual_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "initial_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "passed": true,
+      "path": "simulation/model.py"
+    },
+    {
+      "actual_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "committed_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "initial_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "passed": true,
+      "path": "simulation/attack_adapter_v2.py"
+    },
+    {
+      "actual_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "committed_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "initial_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "passed": true,
+      "path": "simulation/run_attack_vector_revalidation_v2.py"
+    },
+    {
+      "actual_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "committed_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "initial_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "passed": true,
+      "path": "simulation/working_factor.py"
+    },
+    {
+      "actual_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "committed_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "initial_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "passed": true,
+      "path": "simulation/constants_v2_stage18.py"
+    }
+  ],
+  "status": "HALTED",
+  "synthetic_check_workers": 1,
+  "trigger": "Section 6 continuous check: H_N_SHAPE_FALLBACK_COUNT must be zero at the end of every run.",
+  "trigger_job": "honest 60-step gate probe",
+  "trigger_seed": 1835086199,
+  "utc": "2026-09-13T18:06:30.808271+00:00",
+  "workers_launched": 4
+}
