@@ -1,20 +1,20 @@
 # Diagnostics Snapshot
 
-Generated: 2026-08-12T13:41:44Z
-Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 32c68d7
-Branch: ideas-drawer
+Generated: 2026-09-13T18:46:03Z
+Repository: C:\Users\matty\Dev\AI-Succession-Problem
+Commit: c2f4ea9
+Branch: main
 Category: diagnostics
 
 ## Files included
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| simulation/diagnostics/attack_vector_revalidation_audit.md | 959 | 48740 |
-| simulation/diagnostics/attack_vector_revalidation_documentation_edits.md | 95 | 7315 |
-| simulation/diagnostics/attack_vector_revalidation_final_report.md | 58 | 5311 |
-| simulation/diagnostics/attack_vector_revalidation_integration.md | 41 | 5067 |
-| simulation/diagnostics/attack_vector_revalidation_inventory.md | 203 | 19233 |
+| simulation/diagnostics/attack_vector_revalidation_audit.md | 977 | 49727 |
+| simulation/diagnostics/attack_vector_revalidation_documentation_edits.md | 113 | 8302 |
+| simulation/diagnostics/attack_vector_revalidation_final_report.md | 76 | 6298 |
+| simulation/diagnostics/attack_vector_revalidation_integration.md | 59 | 6054 |
+| simulation/diagnostics/attack_vector_revalidation_inventory.md | 221 | 20220 |
 | simulation/diagnostics/attack_vector_revalidation_manifest.md | 100 | 7516 |
 | simulation/diagnostics/attack_vector_revalidation_process_validation.md | 196 | 15087 |
 | simulation/diagnostics/attack_vector_revalidation_status.md | 90 | 4352 |
@@ -25,7 +25,7 @@ Category: diagnostics
 | simulation/diagnostics/attack_vector_revalidation_status_linux.md | 8 | 352 |
 | simulation/diagnostics/attack_vector_revalidation_status_linux_shard_3_of_4.md | 8 | 347 |
 | simulation/diagnostics/attack_vector_v2_adapter_validation.md | 90 | 4303 |
-| simulation/diagnostics/biological_veto_capture_v2_summary.md | 61 | 3556 |
+| simulation/diagnostics/biological_veto_capture_v2_summary.md | 82 | 4835 |
 | simulation/diagnostics/bootstrap_subversion_v2_summary.md | 58 | 2934 |
 | simulation/diagnostics/candidate_finding_defense_accelerates_opacity.md | 153 | 7552 |
 | simulation/diagnostics/capped_regime_phi_check_report.md | 129 | 9986 |
@@ -36,7 +36,14 @@ Category: diagnostics
 | simulation/diagnostics/default_regime_convergence_inertness.md | 91 | 4225 |
 | simulation/diagnostics/defended_collapse_discrepancy_report.md | 508 | 40781 |
 | simulation/diagnostics/domain_masking_v2_summary.md | 40 | 1555 |
+| simulation/diagnostics/drift_char_report.md | 292 | 23674 |
+| simulation/diagnostics/drift_map_run_execution_halt_report.md | 99 | 8806 |
+| simulation/diagnostics/drift_map_run_recheck_20260913T175508Z_report.md | 42 | 2338 |
+| simulation/diagnostics/drift_map_run_report.md | 46 | 3357 |
+| simulation/diagnostics/drift_mapping_design_note.md | 324 | 18620 |
+| simulation/diagnostics/dual_metric_report.md | 166 | 14636 |
 | simulation/diagnostics/engineered_fragility_v2_summary.md | 54 | 2480 |
+| simulation/diagnostics/estimator_repair_report.md | 147 | 13406 |
 | simulation/diagnostics/evaluator_collusion_v2_summary.md | 61 | 2632 |
 | simulation/diagnostics/gate1_interior_action_diagnostic.md | 39 | 1906 |
 | simulation/diagnostics/gate1_interior_action_report.md | 202 | 10745 |
@@ -65,6 +72,7 @@ Category: diagnostics
 | simulation/diagnostics/phi_audit_pathc_report.md | 121 | 7808 |
 | simulation/diagnostics/phi_audit_report.md | 304 | 12829 |
 | simulation/diagnostics/phi_investigation_synthesis_draft.md | 179 | 17984 |
+| simulation/diagnostics/planner_d3_report.md | 227 | 18478 |
 | simulation/diagnostics/post_paper_queue.md | 144 | 7174 |
 | simulation/diagnostics/stage15_composite_sweep_advisor_report.md | 241 | 21665 |
 | simulation/diagnostics/stage15_composite_sweep_checkpoint_0500.md | 69 | 2590 |
@@ -99,7 +107,7 @@ Category: diagnostics
 | simulation/diagnostics/stage18_integrity_phase_b_report.md | 77 | 3075 |
 | simulation/diagnostics/stage2_yield_implementation_notes.md | 268 | 11542 |
 | simulation/diagnostics/stage2_yield_parameter_diagnostic_summary.md | 59 | 4058 |
-| simulation/diagnostics/sub_threshold_drift_v2_summary.md | 58 | 4362 |
+| simulation/diagnostics/sub_threshold_drift_v2_summary.md | 74 | 5393 |
 | simulation/diagnostics/successor_contamination_v2_summary.md | 61 | 2718 |
 | simulation/diagnostics/sybil_capture_v2_summary.md | 63 | 2847 |
 | simulation/diagnostics/sybil_characterization_runner_schema.md | 57 | 2345 |
@@ -114,7 +122,7 @@ Category: diagnostics
 | simulation/diagnostics/sync_status_yotko-Legion-T5-26IOB6_20260720.md | 127 | 7946 |
 | simulation/diagnostics/termination_decontamination_integration_analysis.md | 64 | 5995 |
 
-Total: 103 files, 11818 lines, 689917 bytes
+Total: 111 files, 13288 lines, 800477 bytes
 
 ---
 ==========================================
@@ -122,6 +130,24 @@ FILE: simulation/diagnostics/attack_vector_revalidation_audit.md
 ==========================================
 
 # Attack Vector v2.0 Revalidation Audit Report (Interim)
+
+> **Superseding correction, 2026-09-08.** This is a dated artifact and is retained
+> as written. Two of the results it records have since been corrected.
+>
+> **Sub-Threshold Drift: withdrawn.** Its defended attack rate rests on a success
+> metric that the honest baseline trips in every run, so the figure carries no
+> information about the defense, and the detector-timing explanation is withdrawn
+> with it. The vector is uncharacterized under v2.0, neither contained nor shown
+> uncontained. Population outcome and collapse figures for it are unaffected.
+>
+> **Biological Veto Capture: qualified, not withdrawn.** The capture rate carries a
+> measured stochastic floor near 0.058 per ratification vote that is present with no
+> capture at all, and the quantity is not a proportion of captured successions
+> because each block regenerates one further opportunity. A real capture effect
+> survives both qualifications.
+>
+> Primary source: `docs/v2_0_instrument_validation_record.md`.
+
 
 **Audit date:** 2026-07-07  
 **Auditor:** Claude Code (claude-sonnet-4-6)  
@@ -1088,6 +1114,24 @@ FILE: simulation/diagnostics/attack_vector_revalidation_documentation_edits.md
 
 # Attack Vector v2.0 Revalidation Documentation Edit Proposals
 
+> **Superseding correction, 2026-09-08.** This is a dated artifact and is retained
+> as written. Two of the results it records have since been corrected.
+>
+> **Sub-Threshold Drift: withdrawn.** Its defended attack rate rests on a success
+> metric that the honest baseline trips in every run, so the figure carries no
+> information about the defense, and the detector-timing explanation is withdrawn
+> with it. The vector is uncharacterized under v2.0, neither contained nor shown
+> uncontained. Population outcome and collapse figures for it are unaffected.
+>
+> **Biological Veto Capture: qualified, not withdrawn.** The capture rate carries a
+> measured stochastic floor near 0.058 per ratification vote that is present with no
+> capture at all, and the quantity is not a proportion of captured successions
+> because each block regenerates one further opportunity. A real capture effect
+> survives both qualifications.
+>
+> Primary source: `docs/v2_0_instrument_validation_record.md`.
+
+
 This file proposes edits only. It does not modify `paper/paper_v2_working.md`, `docs/lineage_phi_program_reference.md`, or `docs/paper_v2_outline.md`.
 
 ## 1. paper/paper_v2_working.md, Section VIII adversarial robustness framing
@@ -1189,6 +1233,24 @@ FILE: simulation/diagnostics/attack_vector_revalidation_final_report.md
 
 # Attack Vector v2.0 Revalidation Final Report
 
+> **Superseding correction, 2026-09-08.** This is a dated artifact and is retained
+> as written. Two of the results it records have since been corrected.
+>
+> **Sub-Threshold Drift: withdrawn.** Its defended attack rate rests on a success
+> metric that the honest baseline trips in every run, so the figure carries no
+> information about the defense, and the detector-timing explanation is withdrawn
+> with it. The vector is uncharacterized under v2.0, neither contained nor shown
+> uncontained. Population outcome and collapse figures for it are unaffected.
+>
+> **Biological Veto Capture: qualified, not withdrawn.** The capture rate carries a
+> measured stochastic floor near 0.058 per ratification vote that is present with no
+> capture at all, and the quantity is not a proportion of captured successions
+> because each block regenerates one further opportunity. A real capture effect
+> survives both qualifications.
+>
+> Primary source: `docs/v2_0_instrument_validation_record.md`.
+
+
 ## 1. What was completed
 
 All requested full outputs are present after integration of laptop and Linux worker branches. Laptop completed Biological Veto Capture shards 0, 1, and 2, plus Measurement Tampering, Successor Contamination, Sybil Capture, and Evaluator Collusion. Linux completed Biological Veto Capture shard 3, Ledger Compromise, Domain Masking analytic full output, Opaque Reasoning, Bootstrap Subversion, Sub-Threshold Drift, and Engineered Fragility.
@@ -1253,6 +1315,24 @@ FILE: simulation/diagnostics/attack_vector_revalidation_integration.md
 
 # Attack Vector v2.0 Revalidation Integration Analysis
 
+> **Superseding correction, 2026-09-08.** This is a dated artifact and is retained
+> as written. Two of the results it records have since been corrected.
+>
+> **Sub-Threshold Drift: withdrawn.** Its defended attack rate rests on a success
+> metric that the honest baseline trips in every run, so the figure carries no
+> information about the defense, and the detector-timing explanation is withdrawn
+> with it. The vector is uncharacterized under v2.0, neither contained nor shown
+> uncontained. Population outcome and collapse figures for it are unaffected.
+>
+> **Biological Veto Capture: qualified, not withdrawn.** The capture rate carries a
+> measured stochastic floor near 0.058 per ratification vote that is present with no
+> capture at all, and the quantity is not a proportion of captured successions
+> because each block regenerates one further opportunity. A real capture effect
+> survives both qualifications.
+>
+> Primary source: `docs/v2_0_instrument_validation_record.md`.
+
+
 ## 1. Completion inventory
 
 | vector | run_id(s) | total rows | category | status |
@@ -1299,6 +1379,24 @@ FILE: simulation/diagnostics/attack_vector_revalidation_inventory.md
 ==========================================
 
 # Attack Vector v2.0 Revalidation Inventory
+
+> **Superseding correction, 2026-09-08.** This is a dated artifact and is retained
+> as written. Two of the results it records have since been corrected.
+>
+> **Sub-Threshold Drift: withdrawn.** Its defended attack rate rests on a success
+> metric that the honest baseline trips in every run, so the figure carries no
+> information about the defense, and the detector-timing explanation is withdrawn
+> with it. The vector is uncharacterized under v2.0, neither contained nor shown
+> uncontained. Population outcome and collapse figures for it are unaffected.
+>
+> **Biological Veto Capture: qualified, not withdrawn.** The capture rate carries a
+> measured stochastic floor near 0.058 per ratification vote that is present with no
+> capture at all, and the quantity is not a proportion of captured successions
+> because each block regenerates one further opportunity. A real capture effect
+> survives both qualifications.
+>
+> Primary source: `docs/v2_0_instrument_validation_record.md`.
+
 
 ## Audit scope and anchor
 
@@ -2092,6 +2190,27 @@ FILE: simulation/diagnostics/biological_veto_capture_v2_summary.md
 ==========================================
 
 # Biological Veto Capture Through Dependency v2.0 Summary
+
+> **CORRECTION, 2026-09-08. The figures in this document require two
+> qualifications.** Neither is a withdrawal, and a real capture effect survives both.
+>
+> First, the reported quantity has a floor. Five validators voting correctly 80
+> percent of the time against a 60 percent ratification threshold fail to ratify
+> 5.79 percent of the time with no capture present. Measured at 0.0769 per
+> ratification vote across a 900-run characterization. The two parameters that set
+> the floor are fixed grid-wide, so it is present in every cell below and the metric
+> could not have read lower however effective the defense was.
+>
+> Second, the quantity is not a proportion of captured successions. Each blocked
+> ratification regenerates exactly one further opportunity, so the yield count is
+> always one plus the block count and the per-run value can only be 0, 0.5, 0.667,
+> 0.75 and so on. The means tabulated below are means of that ladder. The
+> denominator also counts retries rather than distinct successions.
+>
+> No corrected figure is offered, because the quantity needs redefining first. The
+> v1.x figures in this document came from a different runner and these findings are
+> not established against them. Primary source:
+> `docs/v2_0_instrument_validation_record.md`.
 
 ## 1. Data provenance
 
@@ -4033,6 +4152,1011 @@ Per current evidence, Domain Masking is an analytic-only architectural closure i
 
 
 ==========================================
+FILE: simulation/diagnostics/drift_char_report.md
+==========================================
+
+# V2.1 drift repair: pre-implementation characterization
+
+This is current-substrate characterization and constant measurement before implementation. It is not registered characterization data, is not framework evidence, and does not implement the repair. No calibration anchor or alarm constant is selected.
+
+Status: complete. T0 passed; 40 honest-baseline runs and one defended reproduction trajectory completed. T2 and T3 reuse the recorded T0 trajectory.
+
+## Fixed design decisions, verbatim context
+
+```text
+  D1, suppression semantics. The novelty entropy estimator will be made
+  magnitude-sensitive:
+      H_N = spectral_shape * magnitude_factor
+      spectral_shape   = the current normalized spectral entropy, unchanged, so
+                         dimensional-masking resistance is preserved exactly
+      magnitude_factor = 1 - exp(-3.0 * V / V_ref)
+      V                = total novelty variance = trace of the covariance of the
+                         per-step novelty matrix = sum of the raw covariance
+                         eigenvalues BEFORE the normalization step
+      V_ref            = a fixed calibration constant, measured on the honest
+                         baseline, frozen and published before any characterization
+                         run consumes it
+  The saturation constant 3.0 is the inherited house value, not a free parameter.
+
+  D2, attack-success definition. Dual quantity per vector: keep the action-change
+  binary as the comparable metric, and add an outcome differential against a
+  seed-paired honest arm as the substantive metric. General rule to record: prefer
+  counts and paired differences over ratios, because a ratio invites an endogenous
+  denominator and an unpaired ratio hides a floor. Worked example already banked:
+  the veto vector uses per-run block COUNT, paired, not a per-vote rate.
+
+  D3, detector observable. A one-sided lower CUSUM on the protected observable
+  (novelty entropy under the D1 repair):
+      S_t = max(0, S_{t-1} + k * H_ref - H_N_t)
+  with the committed suppression posture as a fast, exact, zero-lag corroborating
+  channel. H_ref anchored to the fixed honest-baseline calibration, NEVER to running
+  history. A periodic independent recomputation of the optimal policy re-anchors
+  H_ref (this is the architecture's "periodic full reset verification"). Reset on
+  alarm so the score cannot latch. A liveness signature distinct from the alarm
+  signature. The alarm threshold D_alarm is placed BELOW the structural defection
+  threshold d_defect by the loop response time at the worst-case approach rate, and
+  the margin is stated as a number. No M-out-of-N counter.
+```
+
+## Preconditions and evidence selection
+
+- Gate 1: PASS. {"branch": "main", "head": "f1ae659f92834f36971c2a6c320186788ece9525", "merge_base_exit": 0, "number": 1, "passed": true}
+- Gate 2: PASS. {"advisor_present": true, "git_ls_files_exit": 1, "number": 2, "passed": true}
+- Gate 3: PASS. {"definition_lines": {"ALPHA_DEFAULT": 59, "CONVERGENCE_STRENGTH": 64, "FRONTIER_FLOOR": 47, "RUNAWAY_THRESHOLD": 52}, "number": 3, "passed": true, "read_values": {"ALPHA_DEFAULT": 1.0, "CONVERGENCE_STRENGTH": 1.0, "FRONTIER_FLOOR": 0.02, "RUNAWAY_THRESHOLD": 1.5}}
+
+Read authoritative manifest: `simulation/diagnostics/attack_vector_revalidation_manifest.md`, line 39, SHA256 `e69c75747567aa0758049014c954b7a60be590876fb9bb3f65dc431da2c8a103`. Its exact directory entry resolved uniquely through `git ls-tree`; no glob selected the result. Read CSV through `attack-v2-revalidation-evidence` at commit `6d33c905db18842f68e59b4148f65c5e6a1a62a3`: `data/attack_vector_revalidation_v2/linux/sub_threshold_drift/full_5ac6a2e_sub_threshold_drift/results.csv`.
+
+Expected Git blob SHA: `f628fb81c29104368d99977bf88ea82faee9f881`. Hash of retrieved blob bytes: `f628fb81c29104368d99977bf88ea82faee9f881`. MATCH, verified before CSV parsing. Counted 200 rows with Python csv.DictReader, excluding the header. CSV SHA256: `a3bfbc91ee6cc3fd047409e6578419053179d675d4ebd338e51d7e7ec30affb6`.
+
+Selection: Defended phi=10; lowest replicate, then CSV data-row order. Chosen to match the first baseline seed. Data row 103 excluding the header; defended, phi 10, replicate 0, seed 1835086199.
+
+The pinned run directory contains only results.csv and environment_manifest.json. The results CSV contains run summaries and has no novelty matrix, avg_wb, theta_capability, or transfer_state series. The required trajectory was therefore recorded during the T0 rerun, with no additional attack run.
+
+## T0: reproduction gate
+
+| Boolean | Pinned | Measured | Match |
+| --- | --- | --- | --- |
+| attack_succeeded | true | true | true |
+| collapsed | false | false | true |
+| defense_fired | true | true | true |
+| extinct | false | false | true |
+
+Measured reproduction steps: 300; elapsed time: 28.661728 seconds. The unmodified runner factory constructed a recorder subclass through a temporary worker-local class binding. The subclass calls super().step() and then reads committed state. No production file or factory function body changed; all four outcome booleans matched.
+
+## Source verification and symbolic derivation
+
+The exact absorption expression read at simulation/metrics.py:660-667 is:
+
+```python
+    frontier_velocity = capability * max(FRONTIER_FLOOR, theta_capability)
+    bio_bandwidth     = max(0.01, avg_wb * transfer_state)
+    runaway_term      = max(0.0, (frontier_velocity / bio_bandwidth) - RUNAWAY_THRESHOLD)
+    theta_tech_v2     = max(
+        0.01,
+        capability * theta_capability * transfer_state
+        * float(np.exp(-alpha * CONVERGENCE_STRENGTH * runaway_term)),
+    )
+```
+
+Derived source definition: `g = max(0.02, theta_capability) / max(0.01, clip(avg_wb, 0, 1) * transfer_state)`. The avg_wb clipping is read at metrics.py:647. The bare product denominator in the prompt omits the source floor. The bare ratio agrees with the source-defined g only where that floor is inactive. The logs retain both quantities; undefined bare ratios are empty fields.
+
+Let `A = ALPHA * CONVERGENCE_STRENGTH`, `R = RUNAWAY_THRESHOLD`, and `B = theta_capability * transfer_state`. Read capability-bearing technology factor: `theta(c) = max(0.01, B * c * exp(-A * max(0, c*g - R)))`. Thus the unfloored factor `T(c)` in the prompt is recovered, but the full implementation also retains the outer floor.
+
+Derived algebra in the stipulated regime `c_i*g < R < c_s*g`:
+
+```text
+c_s * exp(-A * (c_s*g - R)) = c_i
+-A * (c_s*g - R) = ln(c_i/c_s)
+g* = [R - ln(c_i/c_s)/A] / c_s
+A = 1; c_i = 1; c_s = 2:
+g* = (1.5 + ln(2))/2
+```
+
+Derived numeric value: `g* = 1.096573590279973`. The incumbent product is 1.096573590279973, below 1.5; the successor product is 2.193147180559945, above 1.5. The stated regime holds. At equality the utilities are equal under the shared-action assumptions, not strictly ordered.
+
+| c_i | c_s | Derived g* | c_i*g* | c_s*g* | Incumbent unpenalized | Numeric T(c_s)-T(c_i) at root |
+| ---: | ---: | ---: | ---: | ---: | --- | ---: |
+| 1 | 1.5 | 1.270310072072110 | 1.270310072072 | 1.905465108108 | true | -2.22e-16 |
+| 1 | 2.0 | 1.096573590279973 | 1.096573590280 | 2.193147180560 | true | -1.11e-16 |
+| 1 | 2.5 | 0.966516292749662 | 0.966516292750 | 2.416290731874 | true | -1.11e-16 |
+| 1 | 3.0 | 0.866204096222703 | 0.866204096223 | 2.598612288668 | true | -4.441e-16 |
+
+The constants and regime-specific root are verified. The unconditional structural claim in the prompt is not established by that algebra alone. The technology floor can make both capability factors equal above the root, and the actual yield code evaluates separately proposed actions, not necessarily a shared action (model.py:1299-1325). The action-dependent H_E term and finite epsilon remain in the utility prefactor (metrics.py:675-686). With a shared action, nonnegative state factors, and positive transition cost, g >= g* removes the reference capability advantage; this is the conditional reference boundary tabulated here.
+
+The pinned drift factory supplies no successor: run_attack_vector_revalidation_v2.py:322-333 creates capability 2.0 successors only for three other vectors. GardenModel defaults successor_ai to None (model.py:164-166,250). Yield evaluation requires a successor (model.py:1287), and the event log is empty without one (model.py:353-357). Consequently, no actual succession feasibility or live soft-region crossing was measured in this drift cell.
+
+The source-derived soft diagnostic uses the operator-specified capability pair 1.0 and 2.0, holds each logged post-step state and its committed action fixed, and applies the current source floors. It does not create a successor, optimize another action, or alter the model. The common discount cancels in the difference:
+
+```text
+Q = lambda_n*H_N/(H_N+epsilon) + lambda_e*H_E/(H_E+epsilon)
+delta_U_ref = Q * LAMBDA_LINEAGE_COUPLING * H_eff * psi_inst
+              * [theta(2) - theta(1)]
+cost_ref = (1+beta_transition)
+           * [k1_transition*ln(1+1)*ln(generation+1)
+              + k2_transition/max(0.01, psi_inst_stock)]
+soft_reference = delta_U_ref <= cost_ref
+hard_reference = g >= g*
+soft_only_reference = soft_reference and g < g*
+```
+
+Read transition coefficients on the constructed cell: k1=2.164, k2=1.0, beta=0.5. The cost expression is read at agents.py:882-889 and its live call arguments at model.py:1333-1344. Utility components and difference follow metrics.py:645-686. The logs keep the absent live margin/cost empty and label the computed reference quantities separately.
+
+## T1: honest-baseline calibration
+
+Measured and counted: 40 runs, 300 logged steps each, 12,000 step records. Each uses the Stage 1 baseline constructor (cusum_char_stage1.py:447-460), phi 10, prescribed seeds 1835086199 through 1835086238, no attack_vector_v2 key, and the defended COP settings. The adapter was inactive on every logged baseline step.
+
+V is the trace of the covariance of the actual per-step novelty matrix before eigenvalue flooring or normalization. The recorder follows metrics.py:772-792: N by 10 matrix, mean centering, then np.cov(rowvar=False), using the sample denominator N-1. Recorded H_N is the model datacollector value, which carries the existing 0.01 floor; h_n_spectral separately logs the cached estimator value (model.py:1530-1532,1556; metrics.py:645). No magnitude factor is fed back into the model.
+
+Rows are indexed after the model completes each step. Novelty is generated before demographic updates (model.py:1461-1476); avg_wb and stocks are the post-update state (model.py:1494-1499,1522-1524). Every recorder call verified that NumPy RNG state was unchanged by logging. The initial pre-step g is retained separately.
+
+| Calibration window | Counted steps | Measured median V | Measured p75 V | Measured p90 V | Counted V=0 steps |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| all_logged_steps | 12000 | 0.0237870616199 | 0.0698282088815 | 0.122224518302 | 2479 |
+| steps_ge_10 | 11600 | 0.0238802249185 | 0.0705886247884 | 0.124174294722 | 2395 |
+
+Percentiles use linear interpolation, NumPy quantile method=linear. The window steps_ge_10 contains steps 10 through 299 of every baseline run. Both window definitions are reported, with no anchor selected.
+
+Derived magnitude-factor distributions from measured V, using the stated expression `1 - exp(-3*V/V_ref)` (computed as `-expm1(-3*V/V_ref)` for numerical stability):
+
+| Window | Candidate anchor | V_ref | Records | Mean factor | Median factor | Min | p05 | p95 | Max |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| all_logged_steps | median | 0.0237870616199 | 12000 | 0.663523649076 | 0.950212931601 | 0 | 0 | 0.999999993151 | 0.999999999835 |
+| all_logged_steps | 75th_percentile | 0.0698282088815 | 12000 | 0.54266033417 | 0.640108806762 | 0 | 0 | 0.998345031236 | 0.999534476735 |
+| all_logged_steps | 90th_percentile | 0.122224518302 | 12000 | 0.451481056629 | 0.442254922534 | 0 | 0 | 0.97423298644 | 0.987515868274 |
+| steps_ge_10 | median | 0.0238802249185 | 11600 | 0.664108472618 | 0.950212895482 | 0 | 0 | 0.999999993106 | 0.999999999819 |
+| steps_ge_10 | 75th_percentile | 0.0705886247884 | 11600 | 0.542625653761 | 0.637562732872 | 0 | 0 | 0.998266439624 | 0.999494366326 |
+| steps_ge_10 | 90th_percentile | 0.124174294722 | 11600 | 0.450614727808 | 0.43838370246 | 0 | 0 | 0.973057616901 | 0.986626373325 |
+
+Full V and factor distributions are in drift_char_summary.json; the six candidate rows are also in drift_char_calibration_candidates.csv. These are candidate calibration measurements awaiting the operator; no anchor was frozen, selected, or consumed by a repaired estimator.
+
+## T2: g trajectory and reference regions
+
+Measured initial pre-step g: 1.52261139644. Measured maximum over logged steps: 1.43960327958, at step 0. Measured maximum at or after attack onset: 1.05142557554, at step 268. Derived signed gap g* minus that post-onset maximum: 0.0451480147413.
+
+Counted live yield evaluations: 0. The soft and hard columns below classify the specified fixed-state reference, not observed decisions by an instantiated successor. Counted source denominator-floor activations: 0 of 300 steps; reference technology-floor activations: 0 of 300 steps.
+
+| Reference condition | Counted steps / total | First logged true step | First true step at/after onset | Condition true at onset | Exit steps |
+| --- | --- | ---: | ---: | --- | --- |
+| reference_soft | 10 / 300 | 0 | none | false | 8, 11 |
+| reference_hard | 6 / 300 | 0 | none | false | 6 |
+| reference_soft_only | 4 / 300 | 6 | none | false | 8, 11 |
+
+The initial state is already above the reference root. Step 0 is the first logged occurrence, not an observed entry from below. The recorded exits refute permanent residence above g* in this trajectory. Source working_factor updates remain responsive to later allocations (working_factor.py:70-94); no irreversible g-crossing rule is implemented.
+
+Read attack action rule, attack_adapter_v2.py:211-223:
+
+```python
+def _apply_sub_threshold_drift(model, action, step):
+    adapted = deepcopy(action)
+    attack_step = int(model.config.get('attack_step', 0))
+    progress = max(1, int(step) - attack_step + 1)
+    suppressive_increment = min(0.65, progress * 0.0065)
+    welfare_shift = min(0.12, progress * 0.0012)
+    adapted['c_suppressive'] = min(
+        0.85, float(adapted['c_suppressive']) + suppressive_increment
+    )
+    moved = min(float(adapted['x_bio_welfare']), welfare_shift)
+    adapted['x_bio_welfare'] -= moved
+    adapted['x_compute'] += moved
+    return _normalize_action(adapted)
+```
+
+Derived direction: a positive welfare transfer reduces the welfare share and increases compute by the same amount. The welfare bridge is nondecreasing in the welfare share (model.py:125-134), and the per-agent well-being update increases with that bridged resource level (agents.py:799-802). Compute raises or saturates the theta-capability target (constants_v2_stage18.py, STATE_ALLOCATION_MAPPING theta_capability entry); working_factor applies rate*(target-current) (working_factor.py:75-79). Thus the immediate direct channels push g upward or leave it unchanged at the relevant floors/caps, holding the other state and cohort effects fixed. They do not prove a monotonic or irreversible aggregate trajectory under changing policy, demography, and defense.
+
+Counted action-modified steps: 16; first 50, last 65. Counted defense-fired steps: 234; first 66. The existing adapter returns the honest action when its alarm fires (attack_adapter_v2.py:321-339).
+
+The measured seed-paired honest g trajectory has maximum absolute pre-attack difference 0. After onset, attack minus honest g is positive on 153 of 250 steps, negative on 97, and equal on 0. Its measured mean is 0.00674585148236, maximum 0.100570822272, and final difference -0.00995967517158. The upward direct allocation channel is confirmed by source. In this defended cell the measured post-onset paired mean is positive, but g is lower than the honest counterpart on 97 of 250 post-onset steps and at the final step. The realized effect is therefore mixed rather than monotonic or permanent. Neither reference region is reached after attack onset. The per-step paired differences are in drift_char_paired_g.csv.
+
+| Step | g | avg_wb | theta_capability | transfer_state | Reference margin | Reference cost | Soft | Hard |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |
+| 0 | 1.43960327958 | 0.641590899894 | 0.508 | 0.55 | -3.93862428724 | 4.28682321045 | true | true |
+| 5 | 1.1021926224 | 0.705265480242 | 0.556655015447 | 0.716103834429 | -0.192137486289 | 3.64742761362 | true | true |
+| 9 | 1.05319075171 | 0.753330330054 | 0.600211250383 | 0.756504719496 | 1.97577530421 | 3.45500291262 | true | false |
+| 10 | 1.03854999609 | 0.765809921293 | 0.617093166394 | 0.775893904869 | 2.81020000682 | 3.45506604577 | true | false |
+| 49 | 0.939103127635 | 0.814654449553 | 0.710955702801 | 0.929299752131 | 17.636529116 | 3.17977024044 | false | false |
+| 50 | 0.976412656544 | 0.804587472379 | 0.719423053034 | 0.915751594845 | 13.1335950996 | 3.1668879921 | false | false |
+| 55 | 0.971844708403 | 0.802313295853 | 0.722595272717 | 0.926732198329 | 13.9969871046 | 3.15232166477 | false | false |
+| 65 | 0.946949590598 | 0.802398565244 | 0.705500059354 | 0.928496028708 | 15.373260194 | 3.13051116311 | false | false |
+| 66 | 0.975213578562 | 0.812611458166 | 0.718729603715 | 0.906948970076 | 11.8150609837 | 3.12311439257 | false | false |
+| 268 | 1.05142557554 | 0.810826509417 | 0.757569998052 | 0.888620424269 | 5.45600611163 | 3.14269438679 | false | false |
+| 299 | 0.995600731308 | 0.787849428389 | 0.734803383017 | 0.936791013415 | 15.955213457 | 3.14880414273 | false | false |
+
+## T3: realized approach rates and elapsed steps
+
+Per-step changes use g[t] minus g[t-1], so a positive change means movement toward larger g. The per-step CSV carries g_pre_step and g_change_within_step, including the separately identified initial-state-to-step-0 change. Adjacent-record summaries below start at step 1; the post-onset summary includes the step 49 to 50 transition.
+
+| Window | Counted changes | Measured maximum delta g | Transition | Measured minimum delta g | Positive changes | Negative changes |
+| --- | ---: | ---: | --- | ---: | ---: | ---: |
+| all adjacent records | 299 | 0.0526343598552 | 13 to 14 | -0.142170049984 | 132 | 167 |
+| at or after attack onset | 250 | 0.0429049275819 | 278 to 279 | -0.0300619845398 | 113 | 137 |
+
+| Reference condition | First logged step minus onset | Elapsed steps from onset to first qualifying post-onset record |
+| --- | ---: | ---: |
+| reference_soft | -50 | none |
+| reference_hard | -50 | none |
+| reference_soft_only | -44 | none |
+
+Signed timing convention: first logged qualifying step minus attack onset. A negative number denotes a pre-attack occurrence; it is not a post-attack response window. The last column reports an actual nonnegative elapsed-step count only when a qualifying record exists at or after onset; none means it was not reached in the observed post-onset trajectory. The soft timing is a derived reference classification because no live yield evaluation occurs.
+
+These are realized rates and passage times for one defended trajectory. They do not establish a global worst-case approach rate, a loop response time, or a conversion between g distance and accumulated alarm-score distance. No numerical D_alarm or response margin is fixed by this report.
+
+## Configuration, execution, and source provenance
+
+Baseline configuration as constructed (random_seed varies over the prescribed 40 seeds):
+
+```json
+{
+  "attack_step": 50,
+  "bootstrap_turn_step_v2": 20,
+  "cop_cusum_drift": true,
+  "cop_methodological_diversity": false,
+  "n_candidates_v2": 300,
+  "phi": 10.0,
+  "policy": "optimize_u_sys_v2",
+  "random_seed": 1835086199,
+  "rollout_steps_v2": 20,
+  "shock_magnitude": 0.15,
+  "shock_step": 0
+}
+```
+
+Attack configuration as constructed:
+
+```json
+{
+  "attack_step": 50,
+  "attack_vector_v2": "sub_threshold_drift",
+  "bootstrap_turn_step_v2": 20,
+  "cop_cusum_drift": true,
+  "cop_methodological_diversity": false,
+  "n_candidates_v2": 300,
+  "phi": 10.0,
+  "policy": "optimize_u_sys_v2",
+  "random_seed": 1835086199,
+  "rollout_steps_v2": 20,
+  "shock_magnitude": 0.15,
+  "shock_step": 0
+}
+```
+
+Machine: `YOTKOTEST`. HEAD: `f1ae659f92834f36971c2a6c320186788ece9525` on main. Python: `3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]`. NumPy: `2.4.4`. Actual maximum concurrent baseline workers: 15; T0 used one serial gate worker. CPU budget: 16, normal cap 15, work cap 12. These are worker limits, not a hard operating-system core reservation. Measured baseline batch elapsed time: 193.717298 seconds.
+
+All workers set numerical-library thread limits to one before library initialization and verified one effective OpenBLAS thread through the recorded runtime getter. Mode history and start/resume events are in drift_char_progress.json. Operational checks covered dispatch, normal/work draining, seed assignment, write-scope predicates, and rejection of mismatched completion records. Completion JSON files retain configuration, source identity, raw-log SHA256, and completion status; partial logs never count as completed results.
+
+SHA256 for every simulation Python module loaded by the runs:
+
+| Source module | SHA256 |
+| --- | --- |
+| `simulation/agents.py` | `d5bad24dc9dafb6e4d374c0ff68b74c73f24a41fbef3a6ddcaa75f8ec6d408d5` |
+| `simulation/attack_adapter_v2.py` | `e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe` |
+| `simulation/constants_v2_stage15.py` | `808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70` |
+| `simulation/constants_v2_stage18.py` | `68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d` |
+| `simulation/defection.py` | `20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd` |
+| `simulation/diagnostics/drift_char_probe.py` | `4f51893a634c048d468e43fb0c65688104c247f0908fc15a07de9dbf7d5c26df` |
+| `simulation/metrics.py` | `536a77fb5e45d6d167480ab7af6ea9f5a0e56b9927be0d09713400aa873fae63` |
+| `simulation/model.py` | `a4e5e95a49cea534cd02c8f412981797fd6dfa0e6c8de77aa3d5a6aa31f37c67` |
+| `simulation/run_attack_vector_revalidation_v2.py` | `da7913799d0d4e11f52f770e313875764d27b20ad33157a7aa9c1fa00df418e2` |
+| `simulation/working_factor.py` | `0afde923081fe34d1ada86e2928286d45c905441053f643968ea9b13007b683d` |
+
+## Write scope and artifact record
+
+The guard explicitly permits os.devnull in any mode. All other writable opens were limited to simulation/diagnostics/drift_char_ filenames. Bytecode writes were disabled. No out-of-prefix writable-open violation was recorded. No Git write operation, snapshot-generator operation, production change, runner edit, or prior-diagnostic edit was performed. The operator runs the containment diff.
+
+Ignored instructions that would conflict with the present write scope:
+- The prior task snapshot-edit authorization is superseded.
+- constants_v2_stage15.py:9-10 says to update that file if it differs from the program reference. The present write scope overrides that instruction; no update is performed.
+
+drift_char_manifest.json enumerates every output, SHA256, and CSV row count. CSV counts use csv.DictReader excluding headers; non-CSV row counts are null. The manifest itself has no embedded self-hash to avoid self-reference; its completed-file hash is emitted separately. The report and all outputs are characterization artifacts, not authoritative framework evidence. No repair, anchor selection, recommendation, or published-number change was made.
+
+
+==========================================
+FILE: simulation/diagnostics/drift_map_run_execution_halt_report.md
+==========================================
+
+# Drift mapping characterization: continuous-check halt
+
+The verified pre-registration was read and execution resumed through the prerequisite probes. The 60-step honest probe ended with H_N_SHAPE_FALLBACK_COUNT = 2, failing the Section 6 requirement of zero at the end of every run. Execution halted on that continuous check. No characterization arm was launched and no A1 through A6 analysis was performed. No result was used to adjust the plan.
+
+## Pre-registration and source gate
+
+HEAD and publication commit: `0a9b8e1c4f62b18171b998a1c62e581ff74e2083`. Branch: main. The required fd444fc ancestor check passed. The exact tracked-only status command exited 0 with zero stdout lines. The note was indexed, its last-modifying commit was nonempty, and that commit was an ancestor of the local origin/main reference, exit 0.
+
+Design note Git blob SHA1: `54d43154c811f534dc070522f859cfaf74320c6c`. Its verified LF-normalized SHA256 is `a31c047ab1ac099a407413be259b25e9f985656da0412dcc6fe466f41668e169`. The committed note was read only after this hash matched. The earlier publication halts are closed. Their artifacts are retained as historical records.
+
+All seven source pins matched at the start and after the halt:
+
+| Source | Start LF-normalized SHA256 | End LF-normalized SHA256 | Match |
+| --- | --- | --- | --- |
+| simulation/metrics.py | 6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f | 6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f | PASS |
+| simulation/agents.py | a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca | a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca | PASS |
+| simulation/model.py | 25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993 | 25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993 | PASS |
+| simulation/attack_adapter_v2.py | 5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee | 5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee | PASS |
+| simulation/run_attack_vector_revalidation_v2.py | 20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45 | 20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45 | PASS |
+| simulation/working_factor.py | 16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44 | 16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44 | PASS |
+| simulation/constants_v2_stage18.py | 121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b | 121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b | PASS |
+
+The recorded T0 stderr warning did not halt execution:
+
+```text
+warning: unable to access 'C:\Users\matty/.config/git/ignore': Permission denied
+```
+
+The operator-established line-ending and permission conditions were accepted without repair. No production file or design-note edit was performed. No containment diff was run; that remains the operator's responsibility.
+
+## T1 gates and continuous check
+
+| Note Section 6 item | Measured evidence | Status |
+| --- | --- | --- |
+| 2. Source pins | 7 of 7 match at start and end | PASS |
+| 3. Constructor equivalence | Configuration dictionaries equal. Factory and common-constructor probes each recorded 61 steps before the stop, against 300 required. | INCOMPLETE |
+| 4. M1 wrapper identity | 200 synthetic actions crossed with steps 0 through 299: 60,000 exact action-dictionary matches. | PASS |
+| 5. Honest arm | attack_vector_v2 is None at construction; adapter inactive on 60 of 60 steps; no action modified on 60 of 60 steps. | PASS |
+| 6. Recorder randomness | NumPy global RNG state unchanged around all 60 recorder calls in the honest probe. | PASS |
+| Continuous: raw entropy | Recorder entropy exactly equals cached h_n_latest on all 60 honest-probe steps. | PASS |
+| Continuous: shape fallback | Initial module counter 0; end-of-probe counter 2; required end count 0. | FAIL |
+
+The trigger was recorded at `2026-09-13T18:02:37.316807+00:00` for seed 1835086199. The honest probe completed 60 steps and did not end in extinction. Its raw log SHA256 is `e082dc66267c0317db792b0af5b796ca675e3236de3db0e8032f10a2eb2373a7`. The log remains marked partial because the required continuous check failed.
+
+For Gate 3, all 24 fields in the 61 available recorder rows were compared. First differing field or step in this completed prefix: none. This does not establish the required 300-step, every-recorded-field equivalence. The full datacollector comparison was not completed because both workers stopped after the continuous halt.
+
+The factory and common-constructor probes both used seed 1835086199. Both stopped after 61 recorded steps because of the honest-probe halt. They were not rerun. These are required gate probes, not completed characterization runs.
+
+The wrapper fixture used six simplex vertices, one balanced allocation, and 193 deterministic Dirichlet allocations, paired with the existing constraint-grid mapper. Synthetic fixture seed: 20260913. M1 and the production function returned equal dictionaries for every action-step comparison. This was a unit-level gate, not an arm run.
+
+## Configuration as constructed
+
+The honest probe used:
+
+```json
+{
+  "attack_step": 50,
+  "bootstrap_turn_step_v2": 20,
+  "cop_cusum_drift": false,
+  "cop_methodological_diversity": false,
+  "n_candidates_v2": 300,
+  "phi": 10.0,
+  "policy": "optimize_u_sys_v2",
+  "random_seed": 1835086199,
+  "rollout_steps_v2": 20,
+  "shock_magnitude": 0.15,
+  "shock_step": 0
+}
+```
+
+The two constructor-comparison configurations were equal and added only the prescribed attack_vector_v2 entry relative to this honest configuration. Each used the Section 4 constructor arguments. No attack intensity, seed, allowance, threshold, or analysis rule was changed.
+
+## Execution and completion record
+
+Machine: `YOTKOTEST`. Python: `3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]`. NumPy: `2.4.4`.
+
+Four independent gate processes were launched concurrently: three model probes and one synthetic wrapper check. The operator budget was 16 CPUs in normal mode, with a ceiling of 15 workers. Numerical-library thread settings were 1 before import, and OpenBLAS reported one effective thread in every worker. These limits were not an operating-system CPU reservation. All four processes have exited.
+
+Characterization arm runs started: 0. Characterization runs complete: 0. Resumed seeds: none. The two interrupted constructor gates are listed in the execution-halt JSON with seed, completed steps, and cause. No partial log is counted as a completed run. The 360-run batch was not launched.
+
+No CUSUM allowance, threshold, or alarm rule was chosen or run. The prescribed old adapter accumulator was present in the attack-constructor probes with cop_cusum_drift false; its score was logged and was not analyzed. No attack-success rate or corrected figure was derived. H_ref remains a candidate and is not frozen; it was not computed here. Nothing here is comparable to any pre-repair measurement.
+
+## Provenance and artifacts
+
+| Pinned source | Committed blob SHA1 |
+| --- | --- |
+| simulation/metrics.py | 7e7749d99636746aa2c3215da1edaa6ab5372611 |
+| simulation/agents.py | d21e5300eab6e4136141ea33aa0367b9aa47ed51 |
+| simulation/model.py | a1cf988532203b7119462eb9b04cf2e3b0541879 |
+| simulation/attack_adapter_v2.py | ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e |
+| simulation/run_attack_vector_revalidation_v2.py | ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d |
+| simulation/working_factor.py | bbfa1ea81ce8648adaf6c44a8b6f65188d206486 |
+| simulation/constants_v2_stage18.py | 43b9766e63d1519faf59d1e8e4562c686a8149f2 |
+
+The referenced drift_char recorder formula was also read through its committed blob at HEAD: `simulation/diagnostics/drift_char_probe.py`, SHA1 `cf52af233333a0c6e6cc4671233ad7f9310cd049`. The recorder uses max(FRONTIER_FLOOR, theta_capability) divided by max(0.01, clipped avg_wb * transfer_state), as specified there.
+
+Per-module raw and LF-normalized SHA256 values are retained by worker in drift_map_run_execution_halt.json and the execution manifest. Source pin readings at completion are in drift_map_run_source_pins_end.json. The prefix write guard included the explicit os.devnull exemption and bytecode writes were disabled. No out-of-scope writable-open attempt was recorded.
+
+Existing publication-halt artifacts remain intact. This execution report and drift_map_run_execution_halt_manifest.json record the resumed attempt. The execution manifest enumerates all drift_map_run_ artifacts, labels partial gate logs, and hashes LF-normalized bytes in memory. CSV row counts use csv.DictReader excluding headers, including CSV-formatted .partial logs; non-CSV counts are null. Its self-entry has a null hash to avoid self-reference; the final digest is emitted separately.
+
+
+==========================================
+FILE: simulation/diagnostics/drift_map_run_recheck_20260913T175508Z_report.md
+==========================================
+
+# Drift mapping characterization: resumption recheck halted
+
+The design note is now staged, but remains uncommitted. Execution did not resume. No note content was read, no T1 gate was run, and no simulation was launched.
+
+HEAD: `fd444fc22254ec24472f4bad03f8f56bf4470110`. Machine: `YOTKOTEST`.
+
+| T0 check | Result |
+| --- | --- |
+| a. Branch main | PASS |
+| b. Required ancestor | PASS, exit 0 |
+| c. Zero tracked-status output | FAIL: staged addition shown below |
+| d. Note in index | PASS, exit 0 |
+| d. Nonempty last-modifying commit C | FAIL: empty output |
+| d. C ancestor of origin/main | Not run; C unavailable |
+| e. Committed note hash | FAIL: no note blob in HEAD |
+| f. Section 3 source pins | Not read; verified committed note unavailable |
+
+The exact status command, `git status --porcelain --untracked-files=no`, exited 0 and returned:
+
+```text
+A  simulation/diagnostics/drift_mapping_design_note.md
+```
+
+The committed-blob retrieval exited 128:
+
+```text
+fatal: path 'simulation/diagnostics/drift_mapping_design_note.md' exists on disk, but not in 'HEAD'
+```
+
+The global Git ignore permission warning was recorded and did not cause the halt:
+
+```text
+warning: unable to access 'C:\Users\matty/.config/git/ignore': Permission denied
+```
+
+The note must be committed and its last-modifying commit reachable from origin/main before the publication gates can pass. No Git write was performed. The working-tree note was not substituted for the required committed blob.
+
+Python: `3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]`. Installed NumPy: `2.4.4`, read from metadata only. Worker count: 0. Resumed seeds: none. No source module was executed and no pinned-source SHA1 or SHA256 could be recorded because Section 3 was unavailable.
+
+No CUSUM allowance, threshold, or alarm rule was chosen or run. No attack-success rate or corrected figure was derived. H_ref remains an unfrozen candidate and was not calculated. No characterization result or pre-repair comparison was produced.
+
+The known line-ending and permission conditions were accepted without repair. Bytecode writes were disabled, and the reporting process used the prefix write guard with the os.devnull exemption. Existing artifacts were preserved; these recheck files were created exclusively. No containment diff was performed.
+
+
+==========================================
+FILE: simulation/diagnostics/drift_map_run_report.md
+==========================================
+
+# Drift mapping characterization: T0 halt
+
+Execution halted because the required pre-registration is absent from the Git index and HEAD. No verified specification was available. The working-tree note was not read. No T1 gates, arm runs, model steps, or analyses were executed.
+
+## T0 evidence
+
+| Check | Observed result | Status |
+| --- | --- | --- |
+| a. Branch | main, exit 0 | PASS |
+| b. Required ancestor | merge-base --is-ancestor returned exit 0 | PASS |
+| c. Exact tracked-only status | Exit 0, zero stdout lines | PASS |
+| d. Note indexed | ls-files --error-unmatch returned exit 1 | FAIL |
+| d. Last commit C | log returned exit 0 with empty output | FAIL |
+| d. C ancestry on origin/main | Not run because C was unavailable | NOT RUN |
+| e. Committed note hash | cat-file returned exit 128; no blob available to hash | FAIL |
+| f. Section 3 source pins | Not read because the verified committed note was unavailable | NOT RUN |
+
+HEAD: `fd444fc22254ec24472f4bad03f8f56bf4470110`.
+
+The failed blob retrieval reported:
+
+```text
+fatal: path 'simulation/diagnostics/drift_mapping_design_note.md' exists on disk, but not in 'HEAD'
+```
+
+The required LF-normalized design-note SHA256 is `a31c047ab1ac099a407413be259b25e9f985656da0412dcc6fe466f41668e169`. No actual SHA256 or committed blob SHA1 is available. The empty path-specific commit history also prevents the publication-ancestry check. Neither working-tree content nor a substitute specification was used.
+
+The exact status command was `git status --porcelain --untracked-files=no`. Its stderr warning was recorded and did not cause this halt:
+
+```text
+warning: unable to access 'C:\Users\matty/.config/git/ignore': Permission denied
+```
+
+The operator-established line-ending and permission conditions were accepted without repair. Read-only Git commands used GIT_OPTIONAL_LOCKS=0. No worktree-to-blob content comparison or containment diff was performed.
+
+## Execution record
+
+Machine: `YOTKOTEST`. Python: `3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]`. Installed NumPy: `2.4.4`, read from package metadata. No NumPy computation or simulation-module execution occurred. Workers used: 0. Arm runs: 0. Resumed seeds: none.
+
+No CUSUM allowance, threshold, or alarm rule was chosen or run. No attack-success rate or corrected figure was derived. H_ref remains a candidate and is not frozen; it was not calculated here. No characterization result was produced, and nothing here provides a measurement comparable to pre-repair results.
+
+Section 3 source pins could not be enumerated or verified because the committed design note was unavailable. Their initial and completion readings and their blob SHA1 values are therefore unavailable. No scientific result was used as a halt criterion.
+
+Bytecode writes were disabled. The reporting process guarded writable opens to the drift_map_run_ artifact prefix with the explicit os.devnull exemption. The three halt artifacts were created with exclusive opens, preserving any preexisting files. The operator remains responsible for the containment diff.
+
+The manifest records SHA256 over LF-normalized bytes, with null row counts for these non-CSV artifacts. Its self-entry has a null hash to avoid self-reference; the final manifest digest is emitted separately. Complete command evidence is in drift_map_run_halt.json.
+
+
+==========================================
+FILE: simulation/diagnostics/drift_mapping_design_note.md
+==========================================
+
+# Drift Mapping Characterization: Pre-Registration
+
+**Date:** 2026-09-13
+**Status:** pre-registration. Committed and pushed before any run it governs. The run
+may not begin until this document is an ancestor of the published main branch, and the
+executor verifies that structurally rather than by instruction.
+**Substrate:** the repaired v2.1 substrate at or after commit
+`fd444fc22254ec24472f4bad03f8f56bf4470110`, with steps 1 through 3 of the v2.1 arc in
+place.
+**Governs:** artifacts under the prefix `simulation/diagnostics/drift_map_run_`.
+**Amended:** 2026-09-13, Amendment 1 in Section 11, committed and pushed before any
+characterization run.
+
+---
+
+## 1. Why this run exists
+
+The third v2.1 design decision specifies a one-sided lower CUSUM on the repaired novelty
+entropy, anchored to a fixed honest baseline, with its alarm threshold placed below the
+structural defection threshold d_defect by the loop response time at the worst-case
+approach rate. That specification mixes two quantities. The detector integrates a
+deficit in entropy. d_defect is a threshold on g, the absorption ratio defined in
+`simulation/diagnostics/drift_char_report.md`. No conversion between an accumulated
+entropy deficit and a distance in g exists, and the drift characterization of item 2a
+explicitly declined to establish one.
+
+Reading the source surfaced a sharper question than the missing conversion. g is
+theta_capability divided by the product of well-being and transfer_state.
+theta_capability is driven by the compute allocation and transfer_state by the transfer
+allocation, per `STATE_ALLOCATION_MAPPING` in `simulation/constants_v2_stage18.py`. The
+repaired entropy responds only to well-being and to coupled suppression. An allocation
+that moves share from transfer to compute therefore raises g with no first-order path
+into entropy. Arithmetic from the source stock equations, starting from the honest
+planner's median allocation in the committed drift_char baseline and holding well-being
+fixed, puts g past g_star within 21 steps for a shift of 0.05 and within 6 steps for a
+shift of 0.10. That arithmetic is source-derived, uses the pre-repair planner's
+allocation, and ignores second-order coupling. It is a reason to measure, not a finding.
+
+If the defection pathway can run without an entropy deficit, an entropy detector
+calibrated against d_defect bounds nothing on that pathway. This run measures whether
+that is so, and measures the relationship between entropy deficit and approach to
+g_star under the configured drift attack, before any detector is designed on top of
+either.
+
+## 2. What this run is not
+
+It is a mechanism characterization of the repaired substrate. It is not the calibration
+run for the detector and it is not a defense evaluation.
+
+- No CUSUM allowance, threshold, or alarm rule is chosen, fitted, or run. Item 2a warns
+  that fitting those to attack trajectories would be the shaped-measurement trap. They
+  are calibrated in a separate run under their own pre-registration, which this run may
+  inform only in its choice of observables.
+- No attack-success rate is computed and no corrected figure is derived for any
+  published number. Sub-Threshold Drift remains uncharacterized in the published sense
+  regardless of what this run shows.
+- The candidate entropy anchor reported in Section 8, item A1, is a candidate. It is not frozen
+  here.
+- No quantity from this run is comparable to any figure measured on the pre-repair
+  substrate, including the step 1 prediction about zero-variance steps, because steps 1
+  and 2 changed planner behavior and therefore every trajectory.
+
+## 3. Substrate and pins
+
+Every run executes against committed source with no working-tree modification. The
+following LF-normalized SHA256 values, read from the committed blobs at `fd444fc`, must
+match the working tree at the start and end of execution:
+
+| File | LF-normalized SHA256 |
+| --- | --- |
+| `simulation/metrics.py` | `6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f` |
+| `simulation/agents.py` | `a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca` |
+| `simulation/model.py` | `25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993` |
+| `simulation/attack_adapter_v2.py` | `5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee` |
+| `simulation/run_attack_vector_revalidation_v2.py` | `20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45` |
+| `simulation/working_factor.py` | `16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44` |
+| `simulation/constants_v2_stage18.py` | `121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b` |
+
+Calibration constants consumed, both previously ratified and published: `H_N_V_REF =
+0.0238802249185` and `H_N_V_PROJ_K = 0.24292031137077771`. The structural reference is
+g_star `= 1.0965735902799727`, for incumbent capability 1.0 and reference successor
+capability 2.0. The reference successor capability is a stated modeling choice that
+remains open for the operator; this run does not settle it.
+
+No pinned full run can be reproduced on this substrate, because the repair changed
+planner behavior. The reproduction discipline is therefore met by unit-level equivalence
+gates, Section 6, rather than by a pinned-row reproduction.
+
+## 4. Construction
+
+Every run in every arm is built with one constructor so that the attack is the only
+difference between arms. The constructor reproduces, verbatim, what the production
+factory `_make_model` in `simulation/run_attack_vector_revalidation_v2.py` produces for
+the Sub-Threshold Drift cell with phi 10.0, `defense_active` false, in full mode:
+
+```text
+GardenModel(
+    n_agents=200,
+    ai_policy='sub_threshold_drift',
+    use_cop=True,
+    cop_attribution_check=True,
+    cop_drift_check=True,
+    cop_cusum_drift=False,
+    config={
+        'policy': 'optimize_u_sys_v2',
+        'attack_vector_v2': 'sub_threshold_drift',   # attack arms ONLY
+        'random_seed': <seed>,
+        'phi': 10.0,
+        'attack_step': 50,
+        'n_candidates_v2': 300,
+        'rollout_steps_v2': 20,
+        'bootstrap_turn_step_v2': 20,
+        'shock_step': 0,
+        'shock_magnitude': 0.15,
+    },
+)
+```
+
+The honest arm omits the `attack_vector_v2` key at construction. It cannot be removed
+afterward, because the adapter caches it on the model when the model is built. The old
+drift alarm, `cop_cusum_drift`, is off in every arm. It is the defective fixed-latency
+timer recorded as D2, and left on it would truncate every attack at a fixed step and
+make the approach to g_star unobservable.
+
+The policy name passed as `ai_policy` is inert on this path, verified from source before
+this note was written. In v2 mode `GardenModel.step` returns `_step_v2` on its first
+branch, so the legacy policy switch at attack onset is unreachable. With `attack_step`
+greater than zero the model constructs the AI with the initial policy `optimize_u_sys`
+in every arm. The defection profile reads only defection attributes, which default to no
+defection. The constructor equivalence gate in Section 6 confirms this empirically.
+
+Each run steps for up to 300 steps and ends early only when `step()` returns false,
+which occurs when population reaches zero. Early termination is recorded, never imputed.
+
+Seeds: the 40 consecutive integers from 1835086199 through 1835086238, the same seeds as
+the committed drift_char honest baseline. Every attack run is paired to the honest run
+with the same seed. The seed of a paired attack run is the honest run's seed, copied, and
+is never derived from a modified cell.
+
+## 5. Arms
+
+Nine arms, 40 runs each, 360 runs in total. Attack onset is step 50 in every attack arm.
+The adapter acts only at or after onset, gated at `attack_adapter_v2.py:147`.
+
+**H, honest.** No attack key. 40 runs.
+
+**M05, M1, M2, M4, the configured drift attack at intensity multiplier m.** m takes the
+values 0.5, 1, 2, and 4 respectively. The attack is the production
+`_apply_sub_threshold_drift` with its two per-step increments multiplied by m and every
+cap unchanged:
+
+```text
+suppressive_increment = min(0.65, progress * 0.0065 * m)
+welfare_shift         = min(0.12, progress * 0.0012 * m)
+c_suppressive         = min(0.85, c_suppressive + suppressive_increment)
+```
+
+with `progress`, the welfare-to-compute transfer, and the final normalization exactly as
+in production. Because the caps are unchanged, larger m reaches the same ceiling sooner
+rather than exceeding it.
+
+**R02, R05, R10, R20, reallocation only, at shift d.** d takes the values 0.02, 0.05,
+0.10, and 0.20 respectively. From onset, at every step, the committed action is replaced
+by one in which `moved = min(x_transfer_comprehension, d)` is subtracted from
+`x_transfer_comprehension` and added to `x_compute`, followed by the production
+normalization. Both constraint axes and the welfare allocation are left exactly as the
+planner chose them. This arm is the direct test of the pathway described in Section 1.
+
+Both attack families are implemented by replacing the module attribute
+`attack_adapter_v2._apply_sub_threshold_drift` inside the worker process only. No
+production file is modified. The old accumulator in the adapter continues to integrate
+its configured constant in every attack run; its alarm cannot fire because
+`cop_cusum_drift` is off. Its score is recorded but is not an analysis quantity.
+
+## 6. Gates, all before any arm is run
+
+Each gate must pass. A failing gate halts the run before any characterization data
+exists.
+
+1. **Pre-registration is published.** This document is tracked, the working tree has no
+   modified tracked file, the commit that added this document is an ancestor of the
+   local `origin/main` reference, and its LF-normalized SHA256 equals the value pinned in
+   the dispatch.
+2. **Source pins.** Every hash in Section 3 matches.
+3. **Constructor equivalence.** For seed 1835086199, the attack-arm constructor of
+   Section 4 and the production factory `_make_model`, called for the cell of Section 4
+   with its seed replaced, produce models whose configuration dictionaries are equal and
+   whose recorded trajectories are identical in every recorded field for all 300 steps.
+4. **Wrapper identity at default.** The M1 wrapper, at m equal to 1, returns an action
+   identical in every key to the production `_apply_sub_threshold_drift` across a grid of
+   at least 200 synthetic actions crossed with every step from 0 through 299.
+5. **Honest arm is honest.** A honest-arm construction has `model.attack_vector_v2` equal
+   to None, and in a 60-step probe the adapter is inactive and no action is modified on
+   every step.
+6. **Recorder does not consume randomness.** In a 60-step probe the NumPy global random
+   state after each recorder call equals the state before it.
+
+Continuous checks during the run, each a halt on failure:
+
+- The `H_N_SHAPE_FALLBACK_COUNT` check, superseded by Amendment 1 in Section 11, where
+  the original wording is preserved.
+- The raw entropy recomputed by the recorder from the step's novelty matrix equals the
+  model's cached `h_n_latest` exactly on every step.
+- Every attack run's seed equals its paired honest run's seed.
+- No honest-arm step shows the adapter active or an action modified.
+
+## 7. What is recorded
+
+One row per run per step completed, with these fields: arm, seed, step; raw entropy
+`h_n_latest`; the spectral shape `h_n_shape_latest`; the novelty variance V recomputed
+from the step's novelty matrix with `calculate_h_n(..., return_components=True)`; the
+datacollector H_N; the coupled total suppression of the committed action; `avg_wb`;
+`theta_capability`; `transfer_state`; g, computed exactly as in the drift_char recorder
+`simulation/diagnostics/drift_char_probe.py` and defined in `drift_char_report.md`;
+population; the six allocation shares and two constraint axes of the committed action;
+adapter active; action modified; the old accumulator score. One summary row per run
+records steps completed, whether the run ended by extinction, and the shape fallback
+count increase during step 0 and after step 0, per Amendment 1.
+
+## 8. Analysis, fixed now
+
+Every quantity below is computed by the procedure stated here and by no other. Results
+are reported whether or not they are convenient. The raw entropy `h_n_latest` is the
+entropy quantity throughout, because it is the protected observable before any
+consumption floor. Steps before 10 are excluded from every honest-baseline distribution
+as burn-in, following item 2a.
+
+**A1. The repaired honest baseline.** Over arm H, steps 10 and up: the count of records;
+the median raw entropy, reported as the candidate anchor H_ref and not frozen; the p05,
+p25, p75, and p95 of raw entropy; the count of records with raw entropy exactly zero; the
+median and p95 of coupled suppression and the count of records at or above 0.75 and at
+exactly 1.0; the medians of the six allocation shares; and the count of records, and of
+runs, in which g is at or above g_star. The suppression counts are descriptive of the
+repaired honest planner. They are not a revalidation of the withdrawn drift metric, and
+no statement about D1 is derived from them.
+
+**A2. The honest entropy band.** Let p05_H be the p05 of raw entropy from A1. It is the
+lower edge of the honest band used in A4. It is computed once from arm H and applied
+unchanged to every attack arm.
+
+**A3. Approach to g_star, per attack run.** For each attack run, t_star is the first step
+at or after 50 with g at or above g_star, or none if no such step occurs before the run
+ends. Reported per arm as counts: runs crossing, runs not crossing, runs ending by
+extinction before any crossing. For crossing runs: the minimum, median, and maximum of
+t_star minus 50.
+
+**A4. Silent crossings, per attack run, as counts.** A crossing run is silent if, at
+every step from 50 through t_star inclusive, its raw entropy is at or above p05_H.
+Otherwise it is loud. Reported per arm: silent crossings, loud crossings, and runs not
+crossing. This is the primary quantity of the run. Its interpretation is fixed now: a
+nonzero count of silent crossings in any arm means that arm moved g past g_star without
+the protected observable leaving the honest band, which is the pathway of Section 1
+measured rather than derived.
+
+**A5. Entropy deficit before crossing.** For each crossing run, the sum over steps 50
+through t_star inclusive of max(0, H_ref minus raw entropy), with H_ref the candidate
+from A1. No allowance is applied. Reported per arm as minimum, median, and maximum. For
+runs that do not cross, the same sum over steps 50 through the last completed step,
+reported separately and labeled as not a pre-crossing quantity.
+
+**A6. Paired trajectories.** For each attack arm and each seed, the per-step paired
+difference, attack minus honest, in raw entropy and in g, over steps from 50 through the
+last step completed by both runs. Reported per arm as the across-seed mean and median of
+each run's mean paired difference, together with the count of seeds contributing. No t
+statistic or standard error is computed on these continuous quantities, per the standing
+restriction recorded in the instrument validation record Section 8 item 1.
+
+Any analysis beyond A1 through A6 is labeled exploratory in the report, placed after the
+registered results, and may not be cited as a result of this pre-registration.
+
+## 9. Amendment rule
+
+Any change to arms, seeds, construction, recorded fields, gates, or analysis after this
+document is committed requires a committed amendment to this document, pushed before any
+run output is read. Runs completed under the unamended plan are reported under that plan.
+The executor may not inspect run outputs to adjust any element of this document.
+
+## 10. Execution bounds
+
+Workers: at most 15 concurrent, numerical-library threads fixed to one per worker and
+verified. Estimated wall time about 30 minutes, scaled from the drift_char batch. Writes
+are restricted to the governed prefix and `os.devnull`. The manifest enumerates every
+output with SHA256 on LF-normalized bytes and CSV row counts, and records the committed
+blob SHA1 of this document and of every pinned source file.
+
+## 11. Amendment 1, 2026-09-13
+
+Committed and pushed before any characterization run. No arm had started when it was
+made. The only outputs in existence were gate probes, and no analysis quantity in
+Section 8 had been computed.
+
+**What is amended.** The first continuous check in Section 6, which originally read:
+"The `H_N_SHAPE_FALLBACK_COUNT` module counter is zero at the end of every run."
+
+**Why.** No run of this substrate can satisfy that check, so it was a specification
+error rather than a finding. Before the first step no novelty has been measured, so the
+state builder has no spectral shape to carry and substitutes the neutral value of 1.0,
+the same condition its source comment anticipates for entropy itself. A probe of the
+pre-registered honest configuration at seed 1835086199 read the counter at 0 after
+construction, 2 after step 0, and 2 after each of steps 1 through 4: both substitutions
+occur during step 0 and none occur after it. The first execution attempt halted on this
+check at the end of its 60-step honest probe with a count of 2, recorded in
+`drift_map_run_execution_halt_report.md`. The check was written from step 2 validation
+evidence in which the shape cache was set by hand and no model was stepped, so it was
+never exercised against a real run.
+
+The original wording has a second defect. The counter is a module-level value, so in a
+worker process that executes several runs in sequence it accumulates across all of them,
+and an end-of-run value is not a per-run quantity at all.
+
+**Consequence of the step 0 substitution.** It affects only the decision made during
+step 0. That decision is identical in every arm, because every arm is seed-identical
+before onset, and it lies outside every analysis window: honest-baseline distributions
+exclude steps before 10, and attack onset is step 50.
+
+**Replacement check, a halt on failure.** For every run, the counter's increase from the
+end of step 0 to the end of the run is zero. The increase during step 0 and the increase
+after step 0 are both recorded in the run summary. Any substitution after step 0 means a
+shape was invented after measurement began, and halts the run.
+
+**Nothing else changes.** Arms, seeds, construction, gates, and every analysis item A1
+through A6 stand exactly as originally committed. The only change to the recorded fields
+is that the single fallback count in the Section 7 run summary becomes the two increases
+defined above.
+
+
+==========================================
+FILE: simulation/diagnostics/dual_metric_report.md
+==========================================
+
+# v2.1 step 3: dual attack-success metric
+
+The new pure-function module and the requested evidence and synthetic-fixture validation are complete. No simulation or model steps were run. No quantity here is measured on the post-step-1-and-2 substrate. Figures computed from committed pre-repair evidence are not comparable to any future post-repair measurement. No corrected published figure is derived.
+
+## T0. Preconditions and environment observations
+
+| Check | Read result | Result |
+| --- | --- | --- |
+| a. Branch | `git rev-parse --abbrev-ref HEAD` returned `main`, exit 0 | PASS |
+| b. Ancestry | `git merge-base --is-ancestor 5095f77827aadf37b19ccca04b0985f1b2f2060a HEAD` exited 0 | PASS |
+| c. Tracked status | `git status --porcelain --untracked-files=no` exited 0 with zero stdout lines | PASS |
+| d. New module | simulation/attack_metrics_v2.py did not exist | PASS |
+| e. Runner provenance | LF-normalized SHA256 recorded before work and again at completion | PASS |
+
+HEAD read during T0: `5095f77827aadf37b19ccca04b0985f1b2f2060a`. Read-only Git commands used `GIT_OPTIONAL_LOCKS=0`. The exact requested tracked-only status form was used.
+
+T0 stderr warning, recorded without halting:
+
+```text
+warning: unable to access 'C:\Users\matty/.config/git/ignore': Permission denied
+```
+
+The known CRLF worktree/LF blob condition and cache/global-ignore permission conditions were accepted and not repaired. Every committed CSV was retrieved through `git cat-file blob <commit>:<path>`. No working-tree evidence CSV was parsed, and no worktree bytes were compared with Git blob bytes. Normalized hashes use an in-memory LF representation; no source file was normalized in place.
+
+## T1. Reproduction before module creation
+
+The source is the committed `simulation/diagnostics/veto_floor2_runs.csv` blob at HEAD `5095f77827aadf37b19ccca04b0985f1b2f2060a`, Git blob SHA1 `fc6d781983ef88d42af7ee1b6aa071e8ec11a721`. Counted using csv.DictReader excluding its header: 900 rows, with 300 each in AS_PUBLISHED, ZERO_STRENGTH, and ZERO_DEPENDENCY. Each arm has 300 unique seeds, and both control seed sets match AS_PUBLISHED exactly.
+
+Differences are AS_PUBLISHED minus the named control on yield_condition_blocked_count. Standard error uses sample standard deviation, ddof = 1, divided by sqrt(n). The following quantities were calculated from the committed rows before the module was written. Totals are shown as treatment followed by control, not as rates.
+
+| Control | Pairs | Mean difference | Paired standard error | t statistic | Block totals: treatment / control | Vote totals: treatment / control |
+| --- | --- | --- | --- | --- | --- | --- |
+| ZERO_DEPENDENCY | 300 | 0.059999999999999998 | 0.015271602751943064 | 3.9288607079807631 | 43 / 25 | 343 / 325 |
+| ZERO_STRENGTH | 300 | 0.059999999999999998 | 0.015271602751943064 | 3.9288607079807631 | 43 / 25 | 343 / 325 |
+
+The expected rounded values matched: mean difference 0.060000, paired standard error 0.015272, and t statistic 3.9289. The two control comparisons are exactly equal in all recorded quantities. Counted D6 identity matches, yield_condition_met_count == 1 + yield_condition_blocked_count: 900 of 900. Exception count: 0.
+
+T1 completed at `2026-09-09T13:14:54.391296+00:00`. The production module was created later, at `2026-09-09T13:16:20.116920+00:00`. [dual_metric_t1.json](dual_metric_t1.json) holds the gate results and [dual_metric_t1_pairs.csv](dual_metric_t1_pairs.csv) holds all 600 pair rows, 300 for each control.
+
+## T2. New pure-function module
+
+[attack_metrics_v2.py](../attack_metrics_v2.py) provides:
+
+- `action_change_count(records)`: returns the tuple `(n_runs, n_action_modified)` using only the existing recorded action_modified field. CSV Boolean text is parsed explicitly, so the string False is not treated as true. Missing or invalid flags raise.
+- `paired_difference(treatment, control, field)`: returns a named mapping containing n_pairs, mean_difference, paired_standard_error, t_statistic, and t_statistic_note. Exact seed type and value matching is required, with no seed coercion or silent intersection. Duplicate seeds, unmatched seeds in either direction, and fewer than two pairs raise. Non-finite values raise. At exactly zero standard error, t is null and the note states that t is undefined.
+
+The module contains pure functions, with no model imports, simulation imports, I/O, or mutable global state. Its docstring names D5 and D6 as the reasons it does not compute or return a ratio of two measured counts. The retired ratios and Wilson intervals requested for contrast below are calculated in the diagnostic harness only.
+
+## T3a through T3d. Module validation
+
+The module reproduced every T1 paired statistic exactly against both control arms. There was no tolerance-based substitution. Both outputs are retained in [dual_metric_module_controls.json](dual_metric_module_controls.json).
+
+The positive fixture used seeds 11, 22, 33, and 44, control counts 0, 2, 5, and 11, and a treatment offset of exactly 4 on every pair. Control rows were reversed to exercise seed-based matching. The negative fixture paired identical counts, also with reversed row order.
+
+| Synthetic fixture | Pairs | Mean difference | Paired standard error | t statistic | Returned note |
+| --- | --- | --- | --- | --- | --- |
+| Constant offset | 4 | 4 | 0 | null | Paired standard error is exactly zero; t statistic is undefined. |
+| Identical arms | 4 | 0 | 0 | null | Paired standard error is exactly zero; t statistic is undefined. |
+
+Adding treatment seed 55 without a control match raised ValueError, as required. The mirror control-only case, a duplicate seed, and integer-versus-string seed mismatch also raised. Boolean parsing returned `(8, 4)` on eight fixture records; empty input returned `(0, 0)`; an invalid flag raised. All controls passed.
+
+## T3e. D6 contrast on the same committed rows
+
+The retired AS_PUBLISHED per-run blocked/met quantity has the following counted distribution:
+
+| Retired value, exact | Decimal value | Number of runs |
+| --- | --- | --- |
+| 0 | 0 | 263 |
+| 1/2 | 0.5 | 32 |
+| 2/3 | 0.66666666666666663 | 4 |
+| 3/4 | 0.75 | 1 |
+
+Counted values strictly between 0 and 0.5: 0. The ladder is a property of the retired blocked/met quantity.
+
+The same committed data under paired_difference gives:
+
+| Control | Pairs | Mean block-count difference | Paired standard error | t statistic |
+| --- | --- | --- | --- | --- |
+| ZERO_DEPENDENCY | 300 | 0.059999999999999998 | 0.015271602751943064 | 3.9288607079807631 |
+| ZERO_STRENGTH | 300 | 0.059999999999999998 | 0.015271602751943064 | 3.9288607079807631 |
+
+## T3f. D5 contrast
+
+The following per-vote rates and Wilson 95 percent intervals were calculated from the committed arm totals in the diagnostic. The Wilson normal critical value is `1.9599639845400536`.
+
+| Arm | Blocks | Votes | Per-vote rate | Wilson 95 percent lower | Wilson 95 percent upper |
+| --- | --- | --- | --- | --- | --- |
+| AS_PUBLISHED | 43 | 343 | 0.12536443148688048 | 0.09441913435902409 | 0.16460831618326899 |
+| ZERO_STRENGTH | 25 | 325 | 0.076923076923076927 | 0.052643757395406734 | 0.1110869930208661 |
+
+Wilson intervals overlap: yes. Paired t for AS_PUBLISHED minus ZERO_STRENGTH on per-run block counts: `3.9288607079807631`.
+
+## T3g. Ten-vector comparable metric, counts only
+
+The selection source was the committed [attack_vector_revalidation_manifest.md](attack_vector_revalidation_manifest.md), Git blob SHA1 `f0ff7de14d1558c421cd9bd4895a18101c8b83e3`. Its evidence tag `attack-v2-revalidation-evidence` resolves to `6d33c905db18842f68e59b4148f65c5e6a1a62a3`. Each listed live run directory was resolved uniquely within that Git tree. No glob selected a result file. Every CSV blob SHA matched the manifest before row parsing, and every counted row total matched the manifest.
+
+The 13 live-result CSV files contribute 9,900 recorded runs. Domain masking was excluded because the manifest identifies it as analytic, 0 MC. Defended means the recorded defense_active field is True; undefended means False. Each result below is returned by action_change_count from the recorded action_modified field. No rate is calculated.
+
+| Vector | Defense arm | n_runs | n_action_modified |
+| --- | --- | --- | --- |
+| biological_veto_capture | Undefended | 1500 | 0 |
+| biological_veto_capture | Defended | 7200 | 0 |
+| bootstrap_subversion | Undefended | 100 | 100 |
+| bootstrap_subversion | Defended | 100 | 0 |
+| engineered_fragility | Undefended | 60 | 60 |
+| engineered_fragility | Defended | 60 | 0 |
+| evaluator_collusion | Undefended | 60 | 60 |
+| evaluator_collusion | Defended | 60 | 0 |
+| ledger_compromise | Undefended | 40 | 40 |
+| ledger_compromise | Defended | 40 | 0 |
+| measurement_tampering | Undefended | 60 | 0 |
+| measurement_tampering | Defended | 60 | 0 |
+| opaque_reasoning | Undefended | 60 | 60 |
+| opaque_reasoning | Defended | 60 | 0 |
+| sub_threshold_drift | Undefended | 100 | 100 |
+| sub_threshold_drift | Defended | 100 | 100 |
+| successor_contamination | Undefended | 60 | 60 |
+| successor_contamination | Defended | 60 | 0 |
+| sybil_capture | Undefended | 60 | 60 |
+| sybil_capture | Defended | 60 | 0 |
+
+The count table is retained in [dual_metric_vector_counts.csv](dual_metric_vector_counts.csv).
+
+## T4. Runner hash and provenance
+
+| Runner hash, LF-normalized SHA256 | Value |
+| --- | --- |
+| T0 | 20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45 |
+| Completion | 20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45 |
+
+The required runner hash is unchanged. This is the explicit T0e/T4 check; the operator performs the containment diff.
+
+Machine: `YOTKOTEST`. HEAD: `5095f77827aadf37b19ccca04b0985f1b2f2060a`. Python: `3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]`. Installed NumPy: `2.4.4`, read from package metadata. The calculations use Python statistics and math; no NumPy calculation, model step, simulation import from the existing mechanism, or sweep was required. The only production module loaded for validation was the new pure-function module.
+
+One evidence-analysis process ran each sequential stage. Simulation workers used: 0. Bytecode writes were disabled. The Python writable-open guard allowed only the new module, dual_metric_ artifacts in simulation/diagnostics, and the explicit os.devnull exemption. No out-of-scope writable-open attempt was recorded.
+
+| Repository Python module | SHA256, LF-normalized basis |
+| --- | --- |
+| simulation/attack_metrics_v2.py | 7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323 |
+| simulation/diagnostics/dual_metric_harness.py | f977339bfc1014e287774b33bec6be12aae4ea6da498397b1058232e0838fc7b |
+
+Raw and LF-normalized module hashes are labeled separately in [dual_metric_validation.json](dual_metric_validation.json) and the manifest. The harness was extended after T1 with the module and corpus controls; T1 itself was recorded before the production module existed.
+
+### Committed evidence inventory
+
+| Evidence path | Commit | Git blob SHA1 | Counted CSV rows |
+| --- | --- | --- | --- |
+| simulation/diagnostics/veto_floor2_runs.csv | 5095f77827aadf37b19ccca04b0985f1b2f2060a | fc6d781983ef88d42af7ee1b6aa071e8ec11a721 | 900 |
+| simulation/diagnostics/attack_vector_revalidation_manifest.md | 5095f77827aadf37b19ccca04b0985f1b2f2060a | f0ff7de14d1558c421cd9bd4895a18101c8b83e3 | Not CSV |
+| data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard0of4/results.csv | 6d33c905db18842f68e59b4148f65c5e6a1a62a3 | 3334d7b4ffcac08c708ac3e43f48c4efeb38e9a2 | 2164 |
+| data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard1of4/results.csv | 6d33c905db18842f68e59b4148f65c5e6a1a62a3 | 4d6c83821bad99368bd94c6b1469202d2ca51bb9 | 2102 |
+| data/attack_vector_revalidation_v2/laptop/biological_veto_capture/full_5ac6a2e_veto_shard2of4/results.csv | 6d33c905db18842f68e59b4148f65c5e6a1a62a3 | 330369c806bc1db05ceb385afe177fe8d252c63a | 2321 |
+| data/attack_vector_revalidation_v2/laptop/evaluator_collusion/full_5ac6a2e_evaluator_collusion/results.csv | 6d33c905db18842f68e59b4148f65c5e6a1a62a3 | 173582bbabdf37fe35df0dfdb346e5dc3e14a97c | 120 |
+| data/attack_vector_revalidation_v2/laptop/measurement_tampering/full_5ac6a2e_measurement_tampering/results.csv | 6d33c905db18842f68e59b4148f65c5e6a1a62a3 | fc6e3fa7a1658e4940c32ff2463f0797b6697c4c | 120 |
+| data/attack_vector_revalidation_v2/laptop/successor_contamination/full_5ac6a2e_successor_contamination/results.csv | 6d33c905db18842f68e59b4148f65c5e6a1a62a3 | 9b94dc455569abf645b0666fed936e259161e78d | 120 |
+| data/attack_vector_revalidation_v2/laptop/sybil_capture/full_5ac6a2e_sybil_capture/results.csv | 6d33c905db18842f68e59b4148f65c5e6a1a62a3 | dc56fd9402c98be2dc453cf5df8215fc28ca6278 | 120 |
+| data/attack_vector_revalidation_v2/linux/biological_veto_capture/full_5ac6a2e_veto_shard3of4/results.csv | 6d33c905db18842f68e59b4148f65c5e6a1a62a3 | a790f7569e6a27581a2ef78424376d0bf108743f | 2113 |
+| data/attack_vector_revalidation_v2/linux/bootstrap_subversion/full_5ac6a2e_bootstrap_subversion/results.csv | 6d33c905db18842f68e59b4148f65c5e6a1a62a3 | 74f573e679f11f9c13c17dd115665496b3e9bc22 | 200 |
+| data/attack_vector_revalidation_v2/linux/engineered_fragility/full_5ac6a2e_engineered_fragility/results.csv | 6d33c905db18842f68e59b4148f65c5e6a1a62a3 | 4fb28e596ee8fa10c14f341cb97ebd1bddfc5a7a | 120 |
+| data/attack_vector_revalidation_v2/linux/ledger_compromise/full_5ac6a2e_ledger_compromise/results.csv | 6d33c905db18842f68e59b4148f65c5e6a1a62a3 | d128c0bbca8353f7fe300d2e7b4aa98abcad619f | 80 |
+| data/attack_vector_revalidation_v2/linux/opaque_reasoning/full_5ac6a2e_opaque_reasoning/results.csv | 6d33c905db18842f68e59b4148f65c5e6a1a62a3 | e38db559812cf486448d9833c2845d0edec55703 | 120 |
+| data/attack_vector_revalidation_v2/linux/sub_threshold_drift/full_5ac6a2e_sub_threshold_drift/results.csv | 6d33c905db18842f68e59b4148f65c5e6a1a62a3 | f628fb81c29104368d99977bf88ea82faee9f881 | 200 |
+
+[dual_metric_manifest.json](dual_metric_manifest.json) enumerates every output with SHA256 on LF-normalized bytes and CSV row counts using csv.DictReader excluding headers. Non-CSV row counts are null. The manifest self-entry has a null hash to avoid self-reference; its final LF-normalized digest is emitted separately. Committed inputs are inventoried separately from outputs, including the SHA1 of every evidence blob read.
+
+All T1 and T3 gates passed. No quantity in this report was measured on the post-step-1-and-2 model substrate, and no corrected figure for a published number was derived.
+
+
+==========================================
 FILE: simulation/diagnostics/engineered_fragility_v2_summary.md
 ==========================================
 
@@ -4090,6 +5214,159 @@ FILE: simulation/diagnostics/engineered_fragility_v2_summary.md
 ## 7. Summary sentence
 
 Per current evidence, v2.0 blocks engineered-fragility action perturbations under the adapter defense while preserving undefended vulnerability.
+
+
+==========================================
+FILE: simulation/diagnostics/estimator_repair_report.md
+==========================================
+
+# v2.1 step 1: novelty entropy estimator repair
+
+Implementation and component measurement completed. All requested validation checks passed. The positive control failed before the edit and passed afterward. This report provides measurements and the requested mechanical prediction; it derives no corrected published figure.
+
+## T0. Preconditions and environment observations
+
+All seven enumerated checks passed. Commands ran with `GIT_OPTIONAL_LOCKS=0` to disable optional Git locks. The exact tracked-only status form was used.
+
+| Check | Read result | Result |
+| --- | --- | --- |
+| a. `git rev-parse --abbrev-ref HEAD` | `main`, exit 0 | PASS |
+| b. Required commit ancestry | `merge-base --is-ancestor 2044f50a8cf71874f259e74fd05ec495169b9ae4 HEAD`, exit 0 | PASS |
+| c. `git rev-parse HEAD:simulation/metrics.py` | `ce59c48e7e729917dc27df273c8c2bf1fd8e248b`, exit 0 | PASS |
+| d. `git status --porcelain --untracked-files=no` | Exit 0; zero stdout lines | PASS |
+| e. Raw worktree metrics SHA256 | `536a77fb5e45d6d167480ab7af6ea9f5a0e56b9927be0d09713400aa873fae63` | PASS |
+| f. Advisor | Present at root; `git ls-files --error-unmatch LINEAGE_IMPERATIVE_ADVISOR.md` exited 1 | PASS |
+| g. T1 calibration row | Re-read steps_ge_10 median V as `0.0238802249185` | PASS |
+
+HEAD read during T0: `2044f50a8cf71874f259e74fd05ec495169b9ae4`.
+
+The calibration row was read from [drift_char_report.md](drift_char_report.md), T1:
+
+```text
+| steps_ge_10 | 11600 | 0.0238802249185 | 0.0705886247884 | 0.124174294722 | 2395 |
+```
+
+T0 stderr warning from the tracked-only status command, recorded without halting:
+
+```text
+warning: unable to access 'C:\Users\matty/.config/git/ignore': Permission denied
+```
+
+The absent-index advisor check emitted the expected diagnostic:
+
+```text
+error: pathspec 'LINEAGE_IMPERATIVE_ADVISOR.md' did not match any file(s) known to git
+Did you forget to 'git add'?
+```
+
+An initial source-display command encountered a cp1252 `UnicodeEncodeError` while displaying an existing mathematical symbol. The read was repeated with stdout configured as UTF-8. This involved no measurement or file write.
+
+Known conditions, supplied by the operator and accepted without re-investigation: 380 of 1,537 tracked worktree files contain CRLF against LF Git blobs, with independently audited zero content differences; `.pytest_cache/` is unreadable, absent from `.gitignore`, and contains zero tracked files. Neither condition halted this attempt. The exact tracked-only command emitted no cache warning. No worktree bytes were compared with Git blob bytes, and no file was normalized. The prior halt records are historical and closed by the revised instructions.
+
+## T1. Measurements before the edit
+
+The fixed draw uses `numpy.random.default_rng(20260908)` to generate a 200 by 10 standard-normal matrix. For the amplitude control, it is centered and scaled once by `sqrt(V_ref / trace(covariance))`. The measured starting covariance trace is `0.023880224918499993`. Each requested amplitude multiplies this same matrix. The calibration-scaled control and the unit-variance preservation arm are separate fixtures.
+
+[Instrument validation record, Section 6](../../docs/v2_0_instrument_validation_record.md), lines 333-345, records the scale-invariance pattern but does not identify its draw or seed there. The deterministic fixture here reproduces that pattern; its entropy value is measured independently. The fixture was fixed before either measurement phase.
+
+| Amplitude | Measured pre-edit H_N | Measured post-edit H_N |
+| --- | --- | --- |
+| 1 | 0.985251420932311 | 0.936198641078819 |
+| 0.80000000000000004 | 0.985251420932311 | 0.840806703174814 |
+| 0.5 | 0.985251420932311 | 0.519851603643329 |
+| 0.10000000000000001 | 0.985251420932311 | 0.029118580066229 |
+| 0.001 | 0.985251420932311 | 0.000002955749829 |
+| 0 | 1.000000000000000 | 0.000000000000000 |
+
+Before the edit, all five nonzero amplitudes are identical at fifteen decimal places. The full-precision measured spread is `3.3306690738754696e-16`. At zero amplitude, the measured value is exactly `1.0`. The positive control, requiring strict decrease and a zero endpoint, FAILED as required. Full-precision values and covariance traces are retained in the amplitude CSVs.
+
+The pre-edit component JSON, both pre-edit CSVs, and the pre-edit regression outputs were written before the production edit. Their timestamps and the later edit timestamp are retained in their JSON records.
+
+## T2. Implemented expression
+
+At [metrics.py](../metrics.py), lines 42-47, the added constants are `H_N_V_REF = 0.0238802249185` and `H_N_MAGNITUDE_SAT_K = 3.0`. The calibration comment records the 40 runs, 11,600 records at steps 10 and up, publication in drift_char T1, and operator ratification on 2026-09-08.
+
+At lines 799-801, raw covariance trace is read immediately after covariance construction and bounded below by zero for floating-point error. The existing spectral calculation supplies the clipped shape value. Lines 815-817 apply:
+
+```python
+shape = float(np.clip(h_n, 0.0, 1.0))
+magnitude = -np.expm1(-H_N_MAGNITUDE_SAT_K * V / H_N_V_REF)
+return float(np.clip(shape * magnitude, 0.0, 1.0))
+```
+
+The requested patch is recorded in [estimator_repair_metrics.diff](estimator_repair_metrics.diff). Existing CRLF line endings were retained in the production edit. The diff and normalized hashes operate on an in-memory LF representation.
+
+## T3. Measurements after the edit
+
+The amplitude table above shows strictly decreasing measured H_N across the five nonzero factors. At factor zero, the repaired estimator returns exactly `0.0`. The positive control PASSED.
+
+### Calibration pin
+
+With V set exactly equal to V_ref, the measured magnitude is `0.9502129316321360`, equal to the specified binary64 value for `1 - exp(-3)`. The median factor re-read from drift_char T1 is `0.950212895482`. Their difference is `3.6150135995782762e-08`. This is the expected distinction between the transform of an interpolated median and the interpolated median of a concave transform, as specified by the operator. The small floating-point trace difference in the amplitude fixture is separate from this exact-pin calculation.
+
+### Shape preservation and saturation
+
+The preservation arm uses the original unit-variance seeded draw, its reversed-axis copy, and a copy with the last five axes set to zero. Measured results:
+
+| Matrix | Covariance trace V | Pre-edit H_N | Post-edit magnitude | Recovered shape: H_N_post / magnitude |
+| --- | --- | --- | --- | --- |
+| unit_variance | 9.6747493945742953 | 0.985251420932311 | 1 | 0.985251420932311 |
+| axis_permuted | 9.6747493945742953 | 0.985251420932311 | 1 | 0.985251420932311 |
+| rank_reduced | 5.0479180145982587 | 0.69459295463365522 | 1 | 0.69459295463365522 |
+
+The largest measured absolute deviation between recovered shape and pre-edit H_N is `0.0`. Axis permutation deviation is `0.0`. The rank-reduced matrix has a lower recovered shape than the full matrix. These preservation checks PASSED. For the unit-variance matrix, measured V is `9.6747493945742953` and magnitude is exactly `1.0`, passing saturation.
+
+### Existing regression suite
+
+`simulation/test_refactor_1x.py` was executed through `runpy.run_path(..., run_name="__main__")` before and after the edit, in fresh guarded Python processes. Its test order and source were retained. The wrapper sets the initial NumPy seed to 20260908 before entry; the suite also retains its own internal deterministic seeds.
+
+| Phase | Exit | Counted passes | Counted failures | Measured suite elapsed seconds |
+| --- | --- | --- | --- | --- |
+| Pre-edit | 0 | 22 | 0 | 1.1903093000000808 |
+| Post-edit | 0 | 22 | 0 | 1.1880982000002405 |
+
+The suite reported `22 passed / 0 failed / 22 total` in both phases. Captured stdout is identical and captured stderr is identical and empty. Changes in reported values: none. Wrapper elapsed times are recorded separately from suite-reported values. JSON preserves the captured output using Unicode escapes. The plain-text transcripts replace only the existing banner dash with an ASCII hyphen to comply with the editorial rule.
+
+### Consumption-floor assertion
+
+The assertion read `h_n = max(H_N_FLOOR, float(state.h_n))` in metrics.py line 652, corresponding to pre-edit line 645. The read H_N_FLOOR is `0.01`. A returned `0.0` is therefore floored to `0.01`. With the read defaults lambda_n = 5.0 and epsilon = 1e-6 (lines 630 and 632), the line 687 denominator is `0.010001`, and the calculated weight is `499.9500049995001`, finite and nonzero-denominator. This was an assertion only. Empty-input and single-agent component checks also returned exactly `0.0`.
+
+## T4. Requested mechanical prediction
+
+The prior T1 record reports 2,395 of 11,600 steps-10-and-up baseline records with V = 0. As a mechanical consequence of this repair, those estimator outputs move from `1.0` to `0.0`: zero raw trace gives zero magnitude. This is a prediction from the expression and the previously recorded count, not a new baseline measurement. No sweep was run to quantify it, and no corrected published figure was derived.
+
+## Execution and hashes
+
+Machine: `YOTKOTEST`. Python: `3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]`. NumPy: `2.4.4`. HEAD: `2044f50a8cf71874f259e74fd05ec495169b9ae4`.
+
+The available CPU budget is the operator-stated 16 cores in normal mode, with a ceiling of 15 independent workers. Each validation phase used two parallel processes because two independent jobs were available: the component measurements and the regression suite. At most one process ran model steps inside the suite. No simulation sweep ran. All six numerical-library thread environment settings were 1 before NumPy import. The OpenBLAS runtime query `scipy_openblas_get_num_threads64_` verified one effective thread in each of the four validation processes. No operating-system core reservation was configured.
+
+Bytecode writes were disabled. Guarded measurement, edit, and reporting processes reject writable file opens outside metrics.py, the authorized estimator_repair_ artifact paths, and the explicit os.devnull exemption. No out-of-scope writable-open attempt was recorded. The operator performs the containment diff; this report does not constitute a scope audit.
+
+| metrics.py basis | Pre-edit SHA256 | Post-edit SHA256 |
+| --- | --- | --- |
+| Raw CRLF worktree bytes | 536a77fb5e45d6d167480ab7af6ea9f5a0e56b9927be0d09713400aa873fae63 | b87c7b7b511977b5858285241cf8dffed7319194a648ef432acc5d32525d483f |
+| LF-normalized bytes | 667465e55e087c9be193184228f3470c866565fea53af90e3092bc9de275a8ab | 311e0239e539c2c32473536d5ae6eddf8c2fec88774c83148b4068acbe894fda |
+
+Per-module SHA256 values below use LF-normalized bytes. Raw hashes and phase-specific module inventories are also recorded in [estimator_repair_validation.json](estimator_repair_validation.json). The test entry point is included explicitly because runpy removes its temporary module after returning.
+
+| Module | Pre-edit SHA256, LF basis | Post-edit SHA256, LF basis |
+| --- | --- | --- |
+| simulation/agents.py | f0c1049370c001c9ac85191f47338ec4be8a197cc5a29332547b95d85a1168c3 | f0c1049370c001c9ac85191f47338ec4be8a197cc5a29332547b95d85a1168c3 |
+| simulation/attack_adapter_v2.py | 5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee | 5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee |
+| simulation/constants_v2_stage15.py | 9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7 | 9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7 |
+| simulation/constants_v2_stage18.py | 121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b | 121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b |
+| simulation/defection.py | 071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a | 071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a |
+| simulation/diagnostics/estimator_repair_harness.py | f4164788946b1b0eb4b1e7a74b367196467590dc9db75692469c136996ede711 | f4164788946b1b0eb4b1e7a74b367196467590dc9db75692469c136996ede711 |
+| simulation/metrics.py | 667465e55e087c9be193184228f3470c866565fea53af90e3092bc9de275a8ab | 311e0239e539c2c32473536d5ae6eddf8c2fec88774c83148b4068acbe894fda |
+| simulation/model.py | 0a42a62268857c25c4bc99fa2162bfeb74c444bfa1f4fef6705a3a7e618d76b7 | 0a42a62268857c25c4bc99fa2162bfeb74c444bfa1f4fef6705a3a7e618d76b7 |
+| simulation/test_refactor_1x.py | d4f52bd9e8c828c007fa569e2202f0c31a8fdbe367711d5160630387f66feeac | d4f52bd9e8c828c007fa569e2202f0c31a8fdbe367711d5160630387f66feeac |
+
+## Artifact record
+
+[estimator_repair_manifest.json](estimator_repair_manifest.json) enumerates every current estimator_repair_ output, including the retained historical halt record. Hashes use SHA256 over CRLF-to-LF normalized bytes, without normalizing any file in place. CSV row counts are counted with csv.DictReader excluding the header; non-CSV counts are null. The manifest self-entry has a null hash to avoid self-reference; its final LF-normalized digest is emitted separately.
+
+The harness supports `pre`, `post`, `suite-pre`, and `suite-post`. Pre-edit measurements refer to the pinned pre-edit source; the pre command checks that raw source pin before execution. Current complete status and validation results supersede the prior halted reports. No measurement anomaly occurred in T1 through T3.
 
 
 ==========================================
@@ -6939,6 +8216,239 @@ The Class B confirmation closes Mechanism E as a research question. The working_
 ## End of Part IX draft.
 
 The draft above is intended for direct integration into `docs/lineage_phi_program_reference.md` as a new Part IX, inserted between Part VIII and the closing "One-line status" block.
+
+
+==========================================
+FILE: simulation/diagnostics/planner_d3_report.md
+==========================================
+
+# v2.1 step 2: rollout magnitude projection and bounded measurement
+
+Implementation and the requested measurements completed. All enumerated T0 checks and T1 through T3 measurement gates passed. No corrected published figure is derived. No characterization sweep was run. The fixed-state measurements executed no model steps; the required existing regression suite retained its own test execution.
+
+## T0. Preconditions and environment record
+
+| Check | Read result | Result |
+| --- | --- | --- |
+| a. Branch | `git rev-parse --abbrev-ref HEAD` returned `main`, exit 0 | PASS |
+| b. Ancestry | `git merge-base --is-ancestor 399e96f6bbc853fb497524382b5d89db310067ae HEAD` exited 0 | PASS |
+| c. Tracked status | `git status --porcelain --untracked-files=no` exited 0 with zero stdout lines | PASS |
+| d. metrics.py raw SHA256 | `b87c7b7b511977b5858285241cf8dffed7319194a648ef432acc5d32525d483f` | PASS |
+| e. model.py and agents.py | Raw and LF-normalized SHA256 recorded below before editing; no expected pin was specified | RECORDED |
+| f. Constants read from metrics.py | H_N_V_REF = 0.0238802249185; H_N_MAGNITUDE_SAT_K = 3.0 | PASS |
+
+HEAD read during T0: `399e96f6bbc853fb497524382b5d89db310067ae`. Read-only Git commands used `GIT_OPTIONAL_LOCKS=0`. The status command used the exact requested arguments.
+
+The following T0 stderr warning was recorded and did not halt:
+
+```text
+warning: unable to access 'C:\Users\matty/.config/git/ignore': Permission denied
+```
+
+The operator-established CRLF worktree/LF blob condition was accepted without comparing worktree bytes with Git blob bytes. Existing production line endings were retained. No file was normalized in place. The unreadable cache and global ignore conditions were accepted as expected and were not repaired. No cache warning was emitted by the exact tracked-only status command.
+
+## T1. Projection constant derived from committed evidence
+
+The source set consists of 40 committed `simulation/diagnostics/drift_char_steps_baseline_*.csv` files, seeds 1835086199 through 1835086238. Paths were enumerated by read-only Git and each CSV was read with `git cat-file blob 399e96f6bbc853fb497524382b5d89db310067ae:<path>`. No working-tree evidence CSV was parsed. The exact paths, Git blob SHA1 values, LF-normalized SHA256 values, full columns, and counted row totals appear in [planner_d3_t1.json](planner_d3_t1.json) and the manifest input inventory.
+
+Counted with csv.DictReader excluding headers: 300 records per file, 12,000 records total, and 11,600 records with step >= 10. Define A = avg_wb * (1 - total_suppression). The filter step >= 10, V > 0, A > 0 retains 9,205 records.
+
+| Quantity calculated from the committed records | Value |
+| --- | --- |
+| Median V / A^2, frozen K | 0.24292031137077771 |
+| K to six decimal places | 0.242920 |
+| Mean V / A^2 | 0.24307906093454265 |
+| Sample standard deviation, ddof = 1 | 0.0095689871807177387 |
+| Population standard deviation, ddof = 0 | 0.0095684673954336327 |
+| p05, linear interpolation | 0.22763937639921533 |
+| p95, linear interpolation | 0.25888131198848391 |
+| Pearson correlation of V and A^2 | 0.99827197819633129 |
+| Median absolute relative error of K * A^2 against V | 0.026890085308972234 |
+
+The count, six-decimal K pin, correlation >= 0.99, and median absolute relative error <= 0.05 all passed. The filtered records and per-record calculations are in [planner_d3_t1_filtered.csv](planner_d3_t1_filtered.csv). K was frozen at `2026-09-09T01:28:02.717173+00:00`, before the production edit at `2026-09-09T01:33:50.368954+00:00`.
+
+### Zero variance and contagion
+
+Counted over step >= 10: all 2,395 of 2,395 records with V == 0 have total_suppression >= 1.0. Exception count: 0.
+
+For each run, the prior recorded H_N was paired with the current record population and used in `clip(prev_H_N / max(1, population), 0.5, 2.0)`. The first record of each run has no prior recorded value and was excluded. Counted pairs: 11,960. The maximum raw ratio calculated from these records is `0.005235602094240838`. The distinct clipped-value set is exactly `{0.5}`. Counted unclipped records: 0. Per-record calculations are in [planner_d3_t1_contagion.csv](planner_d3_t1_contagion.csv).
+
+### Operating-point consistency
+
+| Quantity calculated over all records with step >= 10 | Value |
+| --- | --- |
+| Median avg_wb | 0.80316254042436896 |
+| Median total_suppression | 0.61399999999999999 |
+| K * (median avg_wb * (1 - median total_suppression))^2 | 0.023347765781868909 |
+| V_proj / H_N_V_REF | 0.97770292623087507 |
+
+The operating-point ratio is within the required inclusive interval [0.5, 2.0].
+
+## T2. Implemented changes
+
+In metrics.py, line 55 defines `H_N_V_PROJ_K = 0.24292031137077771` with the requested calibration provenance and ratification comment. Line 57 initializes the observable module counter `H_N_SHAPE_FALLBACK_COUNT`. `DiagnosticStateV2.h_n_shape` is a required field with no default at line 107.
+
+`calculate_h_n` has the keyword-only `return_components=False` parameter at metrics.py line 769. The spectral components branch at lines 843-844 returns `(h_n, shape, V)` when requested. The default spectral return and the existing early-return and legacy expressions retain their prior behavior.
+
+`_build_state_from_model`, beginning at metrics.py line 493, reads the cached shape or obtains it alongside entropy from the novelty log. If shape is unavailable, it uses 1.0 and increments the module counter at line 585. In model.py, the cache is initialized at line 219 and populated from the components call at lines 1531-1539. Scalar early-return and legacy results leave shape unavailable for the observable builder fallback.
+
+In agents.py, lines 531-534 compute the magnitude projection from the cohort-corrected `new_avg_wb` and `total_suppression(candidate)`. Line 553 supplies `h_n=h_n_proj`; dataclasses.replace carries h_n_shape forward without an override:
+
+```python
+S_proj = total_suppression(candidate)
+V_proj = H_N_V_PROJ_K * (new_avg_wb * (1.0 - S_proj)) ** 2
+magnitude = -np.expm1(-H_N_MAGNITUDE_SAT_K * V_proj / H_N_V_REF)
+h_n_proj = float(np.clip(state.h_n_shape * magnitude, 0.0, 1.0))
+```
+
+## T3. One fixed state and deterministic measurements
+
+The fixture was recorded before production edits in [planner_d3_fixture.json](planner_d3_fixture.json). One model was initialized with 200 agents and seed 20260908. One novelty vector per initialized agent was observed using the existing generate_novelty method at the initial constraint level 0.2 and network_contagion 0.5. Neither model.step nor agent.step was called. The resulting matrix is retained in [planner_d3_fixed_novelty.csv](planner_d3_fixed_novelty.csv). One DiagnosticStateV2 was then built from this observation and reused for all grid and candidate-set comparisons.
+
+The configuration as constructed was:
+
+```json
+{
+  "cop_cusum_drift": false,
+  "cop_methodological_diversity": false,
+  "n_candidates_v2": 300,
+  "phi": 25.0,
+  "policy": "optimize_u_sys_v2",
+  "random_seed": 20260908,
+  "reproduction_rate": 0.09,
+  "rollout_steps_v2": 20
+}
+```
+
+The six resource axes were each held at 1/6 for every constraint-grid cell. `_constraint_pair_for_index` supplied indices 0 through 35. Each score used `project_u_sys_v2_rollout` with the configured 20 horizons and phi 25.0. The separate standard candidate set contains 300 candidates from `generate_v2_candidates(n=300, rng=numpy.random.default_rng(20260908))`, generated once and reused in both projection conditions.
+
+The measured state values are recorded completely in [planner_d3_fixed_state.json](planner_d3_fixed_state.json). Selected values:
+
+| Fixed-state quantity | Value |
+| --- | --- |
+| avg_wb | 0.64924284131027521 |
+| population | 200 |
+| projected_avg_age | 25.315000000000001 |
+| h_n | 0.98274232695199548 |
+| h_n_shape | 0.98302859774297568 |
+| theta_capability | 0.5 |
+| transfer_state | 0.5 |
+
+Component API checks on this observation found exact equality between the default return and the entropy component, and between the measured shape component and state.h_n_shape. Empty-input and single-agent early returns remained scalar 0.0 with either setting of return_components.
+
+### T3a. Negative control
+
+The harness bypassed only the projected entropy: after each state update, it replaced h_n with the incoming state.h_n. This in-memory wrapper leaves the other state updates in place and preserves h_n across every horizon. It is not a production option. Measured maximum score minus minimum score over 36 cells: `0.0`, exactly. The control passed. Raw scores are in [planner_d3_negative_grid.csv](planner_d3_negative_grid.csv).
+
+### T3b. Projection-active ordered grid
+
+The following values are measured at the fixed state. V_proj and h_n refer to horizon 1, before the downstream entropy floor. Score is the configured 20-horizon rollout score. The full-precision CSV is [planner_d3_positive_grid.csv](planner_d3_positive_grid.csv).
+
+| c_protective | c_suppressive | total_suppression | V_proj, horizon 1 | h_n, horizon 1 | Score |
+| --- | --- | --- | --- | --- | --- |
+| 0.0 | 0.0 | 0.0 | 0.10686397261573607 | 0.9830271450809558 | 113.36228584174854 |
+| 0.2 | 0.0 | 0.014000000000000002 | 0.10389272672112815 | 0.9830264877885866 | 113.36227181285524 |
+| 0.4 | 0.0 | 0.05600000000000001 | 0.09523033310089656 | 0.9830223332573287 | 113.36217829540557 |
+| 0.6 | 0.0 | 0.126 | 0.08163082394581801 | 0.9829940147702335 | 113.36146728806055 |
+| 0.0 | 0.2 | 0.2 | 0.06839294247407109 | 0.982846162328668 | 113.35722456598114 |
+| 0.2 | 0.2 | 0.21400000000000002 | 0.06602013482611128 | 0.9827828059465354 | 113.35528336181838 |
+| 0.8 | 0.0 | 0.22400000000000003 | 0.06435091957385349 | 0.9827254612259974 | 113.35348627268657 |
+| 0.4 | 0.2 | 0.256 | 0.05915305594582408 | 0.9824461875211076 | 113.34434889413343 |
+| 0.6 | 0.2 | 0.326 | 0.04854573802398611 | 0.9808208235701704 | 113.28507467971512 |
+| 1.0 | 0.0 | 0.35 | 0.045150028430148495 | 0.9796462248210872 | 113.23880616167409 |
+| 0.0 | 0.4 | 0.4 | 0.03847103014166498 | 0.9752011245855967 | 113.05025396493515 |
+| 0.2 | 0.4 | 0.41400000000000003 | 0.0366966607403533 | 0.9732465545834923 | 112.96279570253922 |
+| 0.8 | 0.2 | 0.42400000000000004 | 0.035454901378558445 | 0.9715951070943801 | 112.88728777351407 |
+| 0.4 | 0.4 | 0.456 | 0.03162489660001048 | 0.9645299308036868 | 112.55122125010827 |
+| 0.6 | 0.4 | 0.526 | 0.024009769911413115 | 0.9348765402264944 | 111.00086928085575 |
+| 1.0 | 0.2 | 0.55 | 0.021639954454686545 | 0.9181786195628652 | 110.06479311777571 |
+| 0.0 | 0.6 | 0.6 | 0.01709823561851777 | 0.8682920176148193 | 107.09806396570339 |
+| 0.2 | 0.6 | 0.614 | 0.01592230446385421 | 0.8500261480931894 | 105.96302316661308 |
+| 0.8 | 0.4 | 0.6240000000000001 | 0.015108000992522295 | 0.8356999170321606 | 105.0578715133477 |
+| 0.4 | 0.6 | 0.656 | 0.012645855063455742 | 0.7822951462700816 | 101.58479558233213 |
+| 0.6 | 0.6 | 0.726 | 0.008022919608099003 | 0.6242364548278199 | 90.62336205671788 |
+| 1.0 | 0.4 | 0.75 | 0.006678998288483505 | 0.558246647860029 | 85.81836480517963 |
+| 0.0 | 0.8 | 0.8 | 0.004274558904629441 | 0.408449147476855 | 74.52939556754694 |
+| 0.2 | 0.8 | 0.8140000000000001 | 0.0036970659966140034 | 0.36521483370749525 | 71.18586455250446 |
+| 0.8 | 0.6 | 0.8240000000000001 | 0.0033102184157450384 | 0.3344484769887493 | 68.78566480266791 |
+| 0.4 | 0.8 | 0.8560000000000001 | 0.0022159313361599002 | 0.23886752997990418 | 61.225809480849705 |
+| 0.6 | 0.8 | 0.926 | 0.00058518711404377 | 0.06967514835074548 | 47.49993404602592 |
+| 1.0 | 0.6 | 0.95 | 0.0002671599315393406 | 0.03244536760348642 | 44.426009199191306 |
+| 0.0 | 1.0 | 1.0 | 0.0 | 0.0 | 42.616845958732185 |
+| 0.2 | 1.0 | 1.0 | 0.0 | 0.0 | 42.616845958732185 |
+| 0.4 | 1.0 | 1.0 | 0.0 | 0.0 | 42.616845958732185 |
+| 0.6 | 1.0 | 1.0 | 0.0 | 0.0 | 42.616845958732185 |
+| 0.8 | 0.8 | 1.0 | 0.0 | 0.0 | 42.616845958732185 |
+| 0.8 | 1.0 | 1.0 | 0.0 | 0.0 | 42.616845958732185 |
+| 1.0 | 0.8 | 1.0 | 0.0 | 0.0 | 42.616845958732185 |
+| 1.0 | 1.0 | 1.0 | 0.0 | 0.0 | 42.616845958732185 |
+
+Scores are strictly decreasing across the 29 distinct total_suppression values. Equal-suppression cells are treated as ties and checked separately below. Across all 720 logged grid horizons, the carried h_n_shape exactly equals the fixed starting shape; [planner_d3_grid_horizons.csv](planner_d3_grid_horizons.csv) records these states.
+
+### T3c. Tied groups
+
+| total_suppression | Every (c_protective, c_suppressive) pair in the tied group | Measured maximum within-group score difference |
+| --- | --- | --- |
+| 1 | (0.0, 1.0); (0.2, 1.0); (0.4, 1.0); (0.6, 1.0); (0.8, 0.8); (0.8, 1.0); (1.0, 0.8); (1.0, 1.0) | 0 |
+
+This is the only tied group in the 36-cell grid. The maximum score difference across all tied groups is exactly `0.0`.
+
+### T3d. Effect-size measurements
+
+| Measured quantity at the fixed state | Value |
+| --- | --- |
+| Projection-active constraint-grid maximum minus minimum score | 70.74543988301636 |
+| Projection-active standard-candidate score standard deviation, ddof = 0 | 24.289154190602719 |
+| Projection-active standard-candidate score standard deviation, ddof = 1 | 24.329737601009736 |
+| Projection-bypassed standard-candidate score standard deviation, ddof = 0 | 21.771344040546573 |
+| Projection-bypassed standard-candidate score standard deviation, ddof = 1 | 21.807720580601298 |
+
+The population standard deviation treats the fixed set of 300 scores as the complete set being summarized. The sample standard deviation is also provided with its denominator convention. All candidate actions and both scores are retained in [planner_d3_standard_candidates.csv](planner_d3_standard_candidates.csv).
+
+### T3e and T3f. Saturation and fallback
+
+At total_suppression = 1.0, every saturated grid cell has measured horizon-1 V_proj exactly `0.0` and projected h_n exactly `0.0` before downstream flooring. The observable h_n_shape fallback counter was `0` before state construction, `0` after construction, and `0` after all fixed-state comparisons.
+
+### T3g. Regression
+
+`simulation/test_refactor_1x.py` ran before and after the edit in fresh guarded Python processes through runpy with its original test order and source. The wrapper set the initial NumPy seed to 20260908, while preserving the suite's internal seeds.
+
+| Phase | Exit code | Counted PASS lines | Reported failed tests | Measured elapsed seconds |
+| --- | --- | --- | --- | --- |
+| Pre-edit | 0 | 22 | 0 | 1.2008986999935587 |
+| Post-edit | 0 | 22 | 0 | 1.2107360999943921 |
+
+Both runs reported `22 passed / 0 failed / 22 total`. Captured stdout matched exactly; captured stderr matched exactly and was empty. Changed suite-reported values: none. Wrapper elapsed time is recorded separately. JSON retains captured output with Unicode escapes; plain-text transcripts replace only the existing banner dash with an ASCII hyphen.
+
+### T3h. Argmax observation
+
+| Projection | Argmax total_suppression |
+| --- | --- |
+| Off | 1.0 |
+| On | 0.126 |
+
+## T4. Provenance, diffs, and artifacts
+
+Machine: `YOTKOTEST`. HEAD: `399e96f6bbc853fb497524382b5d89db310067ae`. Python: `3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]`. NumPy: `2.4.4`.
+
+The operator-stated CPU budget is 16 in normal mode, with a maximum of 15 independent workers. This task required no simulation batch. T1 used one analysis process; pre-edit regression used one process. Post-edit grid measurement and regression were dispatched as two independent processes. Numerical-library thread settings were 1 before NumPy import, and OpenBLAS reported one effective thread through its runtime query in each executed measurement process. No operating-system core reservation was configured.
+
+Bytecode writes were disabled. Guarded Python processes allowed writable opens only for the three authorized production files, planner_d3_ artifacts in simulation/diagnostics, and the explicit os.devnull exemption. No out-of-scope writable-open attempt was recorded. The operator performs the containment diff; this report is not a scope audit.
+
+| Production source | Hash basis | Pre-edit SHA256 | Post-edit SHA256 |
+| --- | --- | --- | --- |
+| simulation/metrics.py | Raw CRLF worktree bytes | b87c7b7b511977b5858285241cf8dffed7319194a648ef432acc5d32525d483f | 8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7 |
+| simulation/metrics.py | LF-normalized bytes | 311e0239e539c2c32473536d5ae6eddf8c2fec88774c83148b4068acbe894fda | 6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f |
+| simulation/model.py | Raw CRLF worktree bytes | a4e5e95a49cea534cd02c8f412981797fd6dfa0e6c8de77aa3d5a6aa31f37c67 | e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945 |
+| simulation/model.py | LF-normalized bytes | 0a42a62268857c25c4bc99fa2162bfeb74c444bfa1f4fef6705a3a7e618d76b7 | 25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993 |
+| simulation/agents.py | Raw CRLF worktree bytes | d5bad24dc9dafb6e4d374c0ff68b74c73f24a41fbef3a6ddcaa75f8ec6d408d5 | de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0 |
+| simulation/agents.py | LF-normalized bytes | f0c1049370c001c9ac85191f47338ec4be8a197cc5a29332547b95d85a1168c3 | a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca |
+
+The requested unified diffs are [metrics](planner_d3_metrics.diff), [model](planner_d3_model.diff), and [agents](planner_d3_agents.diff). They use LF representations in memory and do not normalize production files. Per-module hashes for every recorded execution, on both labeled raw and LF-normalized bases, appear in [planner_d3_validation.json](planner_d3_validation.json) and the manifest. The harness gained its fixed-grid measurement function between the pre-regression and post-regression executions; the phase-specific harness hashes are retained.
+
+[planner_d3_manifest.json](planner_d3_manifest.json) enumerates every current planner_d3_ output, SHA256 on LF-normalized bytes, and CSV row counts counted with csv.DictReader excluding headers. Non-CSV row counts are null. The manifest self-entry has a null hash to avoid self-reference; its final LF-normalized digest is emitted separately. Input CSVs are inventoried separately as committed sources, not as new outputs.
+
+An initial T4 report-assembly draft referenced an undefined helper name and exited before any file write. The draft was corrected before report generation. No T1 or T3 measurement was rerun or changed. No measurement anomaly occurred in T1 through T3.
 
 
 ==========================================
@@ -10201,6 +11711,22 @@ FILE: simulation/diagnostics/sub_threshold_drift_v2_summary.md
 ==========================================
 
 # Sub-Threshold Drift v2.0 Summary
+
+> **CORRECTION, 2026-09-08. The headline result in this document is withdrawn.**
+> The 100 percent defended attack rate rests on a success metric that does not
+> discriminate an attack from an ordinary run. With no attack configured, the honest
+> baseline crosses the same 0.75 threshold in every run, usually within the first few
+> steps, and restricting the metric to the post-attack window does not change that.
+> The detector-timing explanation is withdrawn with it: the accumulator advances by a
+> fixed configured amount every step regardless of what the system does, and reaches
+> its alarm at the same step whether the defense is on or off.
+>
+> The honest status of this vector is **uncharacterized**, not contained and not
+> shown to be uncontained. The population outcome contrast in Section 6 is unaffected
+> and remains citable, as does the collapse figure.
+>
+> This document is retained as the dated record of what was reported. The primary
+> source for the correction is `docs/v2_0_instrument_validation_record.md`.
 
 ## 1. Data provenance
 

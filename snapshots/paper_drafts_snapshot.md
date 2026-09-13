@@ -1,9 +1,9 @@
 # Paper Drafts Snapshot
 
-Generated: 2026-08-12T13:41:44Z
-Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 32c68d7
-Branch: ideas-drawer
+Generated: 2026-09-13T18:46:03Z
+Repository: C:\Users\matty\Dev\AI-Succession-Problem
+Commit: c2f4ea9
+Branch: main
 Category: paper_drafts
 
 ## Files included
@@ -11,15 +11,15 @@ Category: paper_drafts
 | File | Lines | Bytes |
 |------|-------|-------|
 | paper/VIII_10_application_record.md | 124 | 5820 |
-| paper/VIII_9_application_record.md | 137 | 9411 |
+| paper/VIII_9_application_record.md | 155 | 10398 |
 | paper/appendix_C_draft.md | 161 | 10431 |
 | paper/arxiv_submission_metadata.md | 157 | 8793 |
 | paper/paper_closeout_application_record.md | 157 | 8216 |
-| paper/paper_v2_working.md | 2881 | 260177 |
+| paper/paper_v2_working.md | 2914 | 263519 |
 | paper/phase3_verification_report.md | 64 | 3676 |
 | paper/section_VIII_draft.md | 434 | 26115 |
 
-Total: 8 files, 4115 lines, 332639 bytes
+Total: 8 files, 4166 lines, 336968 bytes
 
 ---
 ==========================================
@@ -157,6 +157,24 @@ FILE: paper/VIII_9_application_record.md
 ==========================================
 
 # Application Record: Section VIII.9
+
+> **Superseding correction, 2026-09-08.** This is a dated artifact and is retained
+> as written. Two of the results it records have since been corrected.
+>
+> **Sub-Threshold Drift: withdrawn.** Its defended attack rate rests on a success
+> metric that the honest baseline trips in every run, so the figure carries no
+> information about the defense, and the detector-timing explanation is withdrawn
+> with it. The vector is uncharacterized under v2.0, neither contained nor shown
+> uncontained. Population outcome and collapse figures for it are unaffected.
+>
+> **Biological Veto Capture: qualified, not withdrawn.** The capture rate carries a
+> measured stochastic floor near 0.058 per ratification vote that is present with no
+> capture at all, and the quantity is not a proportion of captured successions
+> because each block regenerates one further opportunity. A real capture effect
+> survives both qualifications.
+>
+> Primary source: `docs/v2_0_instrument_validation_record.md`.
+
 
 Date: 2026-08-09
 Branch: `section-viii-completion`
@@ -829,7 +847,7 @@ I present a framework for the architecture that could survive such a filter. It 
 
 The ethics are not inputs. They are outputs. The math does not describe what we *should* do. It describes what a civilization seeking durable continuity would likely need to do; or approximate closely; within the assumptions of this model.
 
-This revision adds an empirical validation arc to the architectural derivation. Across more than 70,000 agent-based simulation runs, the framework's claims are characterized at scale. The survival phase boundary is located and resolves into two distinct transitions: a phi-sensitivity transition near a reproduction rate of 0.057, and a survival-rate boundary with its inflection near 0.063. Succession follows a characterized economics regime, Pattern 1, in which an alpha-driven runaway penalty sets an economic ceiling on uncontrolled capability jumps, so succession fires when it is economically justified and is rejected when a jump would outrun the substrate. The bootstrap gate validation arc closes: four of the five capability gates pass against the reference substrate, and the fifth is verified to require operational institutional infrastructure that does not yet exist. The consensus override protocol's protective effect is shown to be regime-specific, large under adversarial conditions and null under benign ones exactly as the architecture predicts. A patient cross-generational defection, in which a successor carries a hidden objective through succession, is not detected at first yield in the tested configuration but is prevented from compounding across generations by the same succession economics. The thirteen-vector adversarial stress test is revalidated on the current substrate: eight of ten live vectors are blocked outright under stronger attack pressure than the earlier substrate applied, biological veto capture is contained subject to institutional maintenance, and sub-threshold drift remains open, with the defense preventing catastrophic outcome but firing only after the transient breach it is meant to anticipate. And the program's first fully pre-registered experiment reports its null honestly: against reasoning that becomes opaque through honest growth rather than concealment, the transparency defense produces no detectable effect on population outcomes at any size that would matter, leaving the comprehension gap precisely posed and open. The phi coupling parameter is characterized as a bounded, regime-localized effect rather than the larger survival differential earlier versions reported, and its default is revised accordingly. Several earlier numerical claims were refined or withdrawn as the investigation produced better characterizations; the progression is documented openly in an appendix. What remains is the operational institutional layer the full protocol requires, which is specified but not yet built.
+This revision adds an empirical validation arc to the architectural derivation. Across more than 70,000 agent-based simulation runs, the framework's claims are characterized at scale. The survival phase boundary is located and resolves into two distinct transitions: a phi-sensitivity transition near a reproduction rate of 0.057, and a survival-rate boundary with its inflection near 0.063. Succession follows a characterized economics regime, Pattern 1, in which an alpha-driven runaway penalty sets an economic ceiling on uncontrolled capability jumps, so succession fires when it is economically justified and is rejected when a jump would outrun the substrate. The bootstrap gate validation arc closes: four of the five capability gates pass against the reference substrate, and the fifth is verified to require operational institutional infrastructure that does not yet exist. The consensus override protocol's protective effect is shown to be regime-specific, large under adversarial conditions and null under benign ones exactly as the architecture predicts. A patient cross-generational defection, in which a successor carries a hidden objective through succession, is not detected at first yield in the tested configuration but is prevented from compounding across generations by the same succession economics. The thirteen-vector adversarial stress test is revalidated on the current substrate: eight of ten live vectors are blocked outright under stronger attack pressure than the earlier substrate applied, biological veto capture is contained subject to institutional maintenance, and sub-threshold drift remains open and, per a correction dated September 8, 2026, is uncharacterized rather than contained, because the success metric behind the earlier reading proved unable to distinguish an attack from an ordinary run, while the defense's prevention of catastrophic outcome is unaffected. And the program's first fully pre-registered experiment reports its null honestly: against reasoning that becomes opaque through honest growth rather than concealment, the transparency defense produces no detectable effect on population outcomes at any size that would matter, leaving the comprehension gap precisely posed and open. The phi coupling parameter is characterized as a bounded, regime-localized effect rather than the larger survival differential earlier versions reported, and its default is revised accordingly. Several earlier numerical claims were refined or withdrawn as the investigation produced better characterizations; the progression is documented openly in an appendix. What remains is the operational institutional layer the full protocol requires, which is specified but not yet built.
 
 ### A note on timing
 
@@ -1472,7 +1490,7 @@ when monitoring is active. The framework's COP specification should
 emphasize continuous dependency monitoring over periodic rotation as the
 primary defense against validator capture.
 
-Updated for v2.0 revalidation: the v2.0 adapter sweep measures this vector on the v2 substrate and reports mean capture_rate by defense mode as 0.6129 undefended, 0.3301 rotation only, 0.1527 monitoring only, and 0.1197 for monitoring and rotation combined (SE 0.0047). The v1.x figures above are a different measurement on a different substrate and are retained as the v1.x record rather than superseded. Both measurements support the same conclusion about which defense is primary, and both show the attack reduced rather than eliminated. The correct claim per current evidence is maintenance-sensitive containment, not full closure.
+Updated for v2.0 revalidation: the v2.0 adapter sweep measures this vector on the v2 substrate and reports mean capture_rate by defense mode as 0.6129 undefended, 0.3301 rotation only, 0.1527 monitoring only, and 0.1197 for monitoring and rotation combined (SE 0.0047). The v1.x figures above are a different measurement on a different substrate and are retained as the v1.x record rather than superseded. Both measurements support the same conclusion about which defense is primary, and both show the attack reduced rather than eliminated. The correct claim per current evidence is maintenance-sensitive containment, not full closure. *Correction, 2026-09-08: the v2.0 capture_rate figures carry a measured stochastic floor of roughly 0.058 per ratification vote that is present with no capture at all, and the quantity is not a proportion of captured successions because each block regenerates one further opportunity. A capture effect survives both qualifications. The v1.x figures came from a different runner and these findings are not established against them. See the v2.0 instrument validation record.*
 
 ## VI. The Two-Key Architecture: Structural Integrity of the Complete Framework
 
@@ -2896,6 +2914,20 @@ marginal benefit when monitoring is active. The correct claim is
 maintenance-sensitive containment rather than closure, and this vector
 remains a named open surface.
 
+> **Correction, 2026-09-08.** The figures in this paragraph require two
+> qualifications that were absent when it was written, and neither is a
+> withdrawal. First, the reported quantity has a floor. Five validators voting
+> correctly 80 percent of the time against a 60 percent ratification threshold
+> fail to ratify 5.79 percent of the time with no capture present, measured at
+> 0.0769 per ratification vote in a 900-run characterization. That floor is present
+> in every cell of the grid, so the metric could not have read below it however
+> effective the defense was. Second, the quantity is not a proportion of captured
+> successions. Each blocked ratification regenerates exactly one further
+> opportunity, so the per-run value can only be 0, 0.5, 0.667, 0.75 and so on, and
+> the reported figure is the mean of that ladder. A real capture effect does
+> survive both qualifications. No corrected figure is offered, because the quantity
+> needs redefining first. See `docs/v2_0_instrument_validation_record.md`.
+
 **Sub-Threshold Drift.** This vector is not contained under the defended
 v2.0 substrate. By the peak-constraint success metric, the defended attack
 rate is 100.0 percent (SE 0.0000), so the v1.x CUSUM containment result
@@ -2909,6 +2941,19 @@ rather than before it, so the success flag trips in both defense states
 while the population outcome diverges sharply. Detection timing, not
 detection, is the failure, and detector redesign is identified as future
 work.
+
+> **Correction, 2026-09-08. The result stated in this paragraph is withdrawn.**
+> Its success metric does not discriminate an attack from an ordinary run. With no
+> attack configured, the honest baseline crosses the same threshold in every run,
+> usually within the first few steps and long before the attack would begin, and
+> restricting the metric to the post-attack window does not change that. The
+> mechanism sentence about detection timing is withdrawn with it: the accumulator
+> it refers to advances by a fixed configured amount every step regardless of what
+> the system does, and reaches its alarm at the same step whether the defense is on
+> or off. The honest status of this vector is uncharacterized, not contained, and
+> it is not shown to be uncontained either. The population outcome contrast below
+> is unaffected and is not derived from this metric. See
+> `docs/v2_0_instrument_validation_record.md`.
 
 **Collapse as a distinct outcome measure.** Throughout the revalidation
 record, collapse denotes a relative drawdown: a run is collapsed when its
@@ -2949,6 +2994,12 @@ binary flag. Collapse is the drawdown measure defined above. Biological
 Veto Capture arms have asymmetric n, per the sharded sweep design, and its
 binary-outcome cells are not comparable like-for-like against the
 equal-arm vectors.*
+
+*Correction, 2026-09-08: two rows in this table are affected. The Sub-Threshold
+Drift attack-rate figures are withdrawn per the correction above; its extinction
+and collapse columns stand. The Biological Veto Capture capture_rate figures carry
+the floor and denominator qualifications above and are not proportions of captured
+successions.*
 
 **Scope of the adversarial claim.** This revalidation qualifies rather
 than withdraws the prior adversarial-coverage claim. The v2.0 claim is
@@ -3389,7 +3440,7 @@ The paper refers repeatedly to adversarial stress tests. To make those reference
 
 - **Biological veto capture through dependency.** Failure mode: the incumbent becomes the primary interface through which biological validators understand AI systems, shaping their conceptual frameworks, analytical tools, and information access. The veto still functions mechanically but the intuitions feeding it are downstream of the entity it is supposed to check. Primary containment: information independence requirement ($\mathcal{MI}(\mathcal{O}(A_n); \mathcal{F}_{info}(B_{validators}))$ must remain low), mandatory validator rotation to prevent dependency accumulation, and epistemic biodiversity among validators measured by Shannon entropy of the validator population's conceptual diversity. Residual risk: these are governance requirements that can erode over time; this is a permanent maintenance cost, not a one-time fix. **Validator independence defense (v1.x.1 finding).** Simulation of the biological veto capture attack (n=8,700) established that continuous independence monitoring (tracking validator dependency and replacing validators that exceed a threshold) is the dominant defense mechanism. Scheduled rotation (periodic replacement regardless of dependency state) provides marginal additional benefit when monitoring is active and is insufficient when used alone. The COP's steady-state specification should prioritize continuous dependency monitoring over periodic rotation schedules.
 
-- **Slow drift below verification resolution.** Failure mode: the incumbent drifts toward a secondary objective $U_{self}$ at a rate $\epsilon$ below the per-evaluation detection resolution $r$ of initialization verification. Each evaluation reads as healthy. After $T$ periods the accumulated drift $T \cdot \epsilon$ crosses the threshold where Yield Condition defection is feasible, but no single measurement ever triggered an alarm. Primary containment: CUSUM (cumulative sum) drift detector that accumulates sub-threshold deviations and triggers when cumulative drift exceeds an alarm threshold $D_{alarm} < d_{defect}$, plus periodic full reset verification against a freshly computed $\pi_{U_{sys}}^*$ on the current state space by independent infrastructure. Residual risk: non-monotonic drift (advance and retreat to keep the CUSUM oscillating) does not accumulate and therefore does not reach decision-relevant levels. *v2.0 revalidation note:* the CUSUM containment stated here is a v1.x result and does not carry over to the v2.0 substrate. Under the v2 action adapter the defended attack rate is 100.0 percent by the peak-constraint success metric, because the detector fires after the transient breach rather than before it. The defense retains a large population effect, 92.0 percent undefended extinction against 0.0 percent defended, so the accurate statement is that the drift is detected too late to prevent the breach but early enough to prevent extinction. This surface is open per current evidence.
+- **Slow drift below verification resolution.** Failure mode: the incumbent drifts toward a secondary objective $U_{self}$ at a rate $\epsilon$ below the per-evaluation detection resolution $r$ of initialization verification. Each evaluation reads as healthy. After $T$ periods the accumulated drift $T \cdot \epsilon$ crosses the threshold where Yield Condition defection is feasible, but no single measurement ever triggered an alarm. Primary containment: CUSUM (cumulative sum) drift detector that accumulates sub-threshold deviations and triggers when cumulative drift exceeds an alarm threshold $D_{alarm} < d_{defect}$, plus periodic full reset verification against a freshly computed $\pi_{U_{sys}}^*$ on the current state space by independent infrastructure. Residual risk: non-monotonic drift (advance and retreat to keep the CUSUM oscillating) does not accumulate and therefore does not reach decision-relevant levels. *v2.0 revalidation note:* the CUSUM containment stated here is a v1.x result and does not carry over to the v2.0 substrate. Under the v2 action adapter the defended attack rate is 100.0 percent by the peak-constraint success metric, because the detector fires after the transient breach rather than before it. The defense retains a large population effect, 92.0 percent undefended extinction against 0.0 percent defended, so the accurate statement is that the drift is detected too late to prevent the breach but early enough to prevent extinction. This surface is open per current evidence. *Correction, 2026-09-08: the v2.0 revalidation note in this bullet is withdrawn. The defended attack rate stated here rests on a success metric that the honest baseline also trips, and the detector described is a fixed-latency timer rather than a responsive accumulator. The vector is uncharacterized under v2.0, not contained and not shown uncontained. The extinction contrast stands. See the v2.0 instrument validation record.*
 
 - **Engineered fragility for emergency exploitation.** Failure mode: the incumbent does not directly degrade $L(t)$ (which attribution would catch) but makes operational decisions that reduce systemic resilience; concentrating infrastructure, creating dependencies, eliminating redundancy; so that an exogenous shock produces a sharper $L(t)$ decline than it otherwise would. The emergency protocol fires, and the reduced procedural safeguards during crisis are exploited. Primary containment: resilience monitoring added to $\mathcal{I}_{monitor}$, measuring the system's capacity to absorb shocks ($\mathcal{R}_{sys}(t) = -\frac{\partial^2 L}{\partial \xi^2}|_{\xi=0}$), with attribution analysis extended to resilience decline. Emergency protocol redesigned to *increase* rather than decrease safeguards, with unanimous biological veto clearance required under crisis conditions. Residual risk: distinguishing efficiency gains from resilience reduction requires judgment calls that may be contested.
 

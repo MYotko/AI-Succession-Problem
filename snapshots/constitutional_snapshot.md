@@ -1,9 +1,9 @@
 # Constitutional Snapshot
 
-Generated: 2026-08-12T13:41:44Z
-Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 32c68d7
-Branch: ideas-drawer
+Generated: 2026-09-13T18:46:03Z
+Repository: C:\Users\matty\Dev\AI-Succession-Problem
+Commit: c2f4ea9
+Branch: main
 Category: constitutional
 
 ## Files included

@@ -1,25 +1,26 @@
 # Code Snapshot
 
-Generated: 2026-08-12T13:41:44Z
-Repository: C:\Users\matty\Dev\ai-succession-problem
-Commit: 32c68d7
-Branch: ideas-drawer
+Generated: 2026-09-13T18:46:03Z
+Repository: C:\Users\matty\Dev\AI-Succession-Problem
+Commit: c2f4ea9
+Branch: main
 Category: code
 
 ## Files included
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| simulation/agents.py | 1265 | 61333 |
+| simulation/agents.py | 1270 | 61560 |
 | simulation/analyze_phi_adversarial.py | 469 | 21913 |
 | simulation/analyze_sybil_defense_scaling_characterization.py | 768 | 33096 |
 | simulation/attack_adapter_v2.py | 482 | 16105 |
+| simulation/attack_metrics_v2.py | 115 | 4591 |
 | simulation/constants_v2_stage15.py | 314 | 15269 |
 | simulation/constants_v2_stage18.py | 152 | 7445 |
 | simulation/defection.py | 106 | 3965 |
 | simulation/deps.py | 21 | 1019 |
-| simulation/metrics.py | 948 | 42508 |
-| simulation/model.py | 1676 | 86842 |
+| simulation/metrics.py | 987 | 44415 |
+| simulation/model.py | 1683 | 87156 |
 | simulation/monte_carlo.py | 920 | 51833 |
 | simulation/run_alpha_succession_sweep.py | 316 | 12737 |
 | simulation/run_attack_vector_revalidation_v2.py | 668 | 21918 |
@@ -53,6 +54,11 @@ Category: code
 | simulation/visualization.py | 95 | 3908 |
 | simulation/working_factor.py | 95 | 4020 |
 | simulation/diagnostics/capped_regime_phi_check.py | 237 | 9251 |
+| simulation/diagnostics/drift_char_analyze.py | 179 | 29610 |
+| simulation/diagnostics/drift_char_probe.py | 453 | 31439 |
+| simulation/diagnostics/drift_map_run_executor.py | 199 | 12652 |
+| simulation/diagnostics/dual_metric_harness.py | 226 | 17494 |
+| simulation/diagnostics/estimator_repair_harness.py | 175 | 10906 |
 | simulation/diagnostics/gate1_interior_action.py | 646 | 32247 |
 | simulation/diagnostics/gate2_competition.py | 206 | 7974 |
 | simulation/diagnostics/gate2_v20_phaseb_revalidation.py | 166 | 5957 |
@@ -63,6 +69,7 @@ Category: code
 | simulation/diagnostics/patient_defection_sweeps.py | 708 | 24818 |
 | simulation/diagnostics/phi_audit.py | 428 | 17996 |
 | simulation/diagnostics/phi_audit_pathc.py | 351 | 13512 |
+| simulation/diagnostics/planner_d3_harness.py | 236 | 18284 |
 | simulation/diagnostics/stage15_composite_sweep.py | 647 | 27881 |
 | simulation/diagnostics/stage15_faithfulness_tests.py | 686 | 29854 |
 | simulation/diagnostics/stage15_phi_diagnostic.py | 442 | 19103 |
@@ -90,9 +97,9 @@ Category: code
 | bootstrap_gate_validator/gates/gate_4.py | 167 | 6537 |
 | bootstrap_gate_validator/gates/gate_5.py | 54 | 2270 |
 | scripts/check_snapshot_leak.py | 223 | 9051 |
-| scripts/generate_project_knowledge_snapshots.py | 872 | 31454 |
+| scripts/generate_project_knowledge_snapshots.py | 879 | 31697 |
 
-Total: 81 files, 31064 lines, 1300388 bytes
+Total: 88 files, 32705 lines, 1428055 bytes
 
 ---
 ==========================================
@@ -104,6 +111,7 @@ from dataclasses import replace
 from metrics import (
     calculate_system_metrics, calculate_system_metrics_v2,
     DiagnosticStateV2, _build_state_from_model,
+    H_N_V_PROJ_K, H_N_MAGNITUDE_SAT_K, H_N_V_REF,
 )
 from defection import adjusted_objective, get_defection_profile
 
@@ -628,6 +636,11 @@ def _project_diagnostic_state_step(state, candidate, config):
     new_res_trend    = ((1.0 - _PROJ_ALPHA_TREND) * state.resilience_trend
                         + _PROJ_ALPHA_TREND * (new_res - state.resilience_stock))
 
+    S_proj = total_suppression(candidate)
+    V_proj = H_N_V_PROJ_K * (new_avg_wb * (1.0 - S_proj)) ** 2
+    magnitude = -np.expm1(-H_N_MAGNITUDE_SAT_K * V_proj / H_N_V_REF)
+    h_n_proj = float(np.clip(state.h_n_shape * magnitude, 0.0, 1.0))
+
     return replace(state,
         avg_wb=new_avg_wb,
         population=new_pop,
@@ -643,10 +656,9 @@ def _project_diagnostic_state_step(state, candidate, config):
         psi_inst_trend=new_psi_trend,
         resilience_trend=new_res_trend,
         projected_avg_age=new_projected_avg_age,
-        # h_n held constant during projection: spectral entropy is agent-
-        # derived and the rollout has no agent novelty layer. The optimizer
-        # sees the current model's h_n applied to all rollout horizons.
-        h_n=state.h_n,
+        # Project magnitude from cohort-corrected well-being and coupled
+        # suppression; retain measured shape because rollout has no novelty layer.
+        h_n=h_n_proj,
         # reproductive_share held constant per Q6 first-build aggregate
         # approximation. avg_age cohort correction does not propagate to
         # reproductive_share in first build; the share of population in
@@ -3104,6 +3116,127 @@ def append_adapter_diagnostics(model):
 
 
 ==========================================
+FILE: simulation/attack_metrics_v2.py
+==========================================
+
+"""Pure count and seed-paired attack metrics for v2.
+
+No function computes or returns a ratio of two measured counts. D5 identifies
+an existing stochastic floor in per-vote quantities; D6 identifies the
+endogenous denominator in the retired blocked/met quantity. These functions
+provide action-change counts and paired differences, with the requested
+sample standard error and t statistic. They perform no I/O or simulation and
+maintain no global state.
+"""
+
+
+def _action_modified_value(value):
+    """Parse a recorded Boolean without treating the string False as true."""
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, int) and value in (0, 1):
+        return bool(value)
+    if isinstance(value, str):
+        normalized = value.strip().lower()
+        if normalized in ('true', '1'):
+            return True
+        if normalized in ('false', '0'):
+            return False
+    raise ValueError('action_modified must be a Boolean, 0/1, or its CSV text')
+
+
+def action_change_count(records):
+    """Return (n_runs, n_action_modified), counting action_modified only.
+
+    Missing fields and invalid Boolean values raise; no rate is returned.
+    The input records are not modified.
+    """
+    n_runs = 0
+    n_action_modified = 0
+    for record in records:
+        modified = _action_modified_value(record['action_modified'])
+        n_runs += 1
+        n_action_modified += int(modified)
+    return n_runs, n_action_modified
+
+
+def _index_by_seed(records):
+    """Index unique, non-null seeds by both type and value, without coercion."""
+    indexed = {}
+    for record in records:
+        seed = record['seed']
+        if seed is None:
+            raise ValueError('seed must not be null')
+        key = (type(seed), seed)
+        try:
+            duplicate = key in indexed
+        except TypeError as exc:
+            raise ValueError('seed must be hashable') from exc
+        if duplicate:
+            raise ValueError('duplicate seed: ' + repr(seed))
+        indexed[key] = record
+    return indexed
+
+
+def paired_difference(treatment, control, field):
+    """Return a mapping of the four paired statistics and an explicit t note.
+
+    Keys are n_pairs, mean_difference, paired_standard_error, t_statistic,
+    and t_statistic_note. Differences are treatment minus control. Standard
+    error uses sample standard deviation (ddof=1) divided by sqrt(n_pairs).
+    When standard error is exactly zero, t_statistic is None and the note
+    explains why. Otherwise the note is None.
+
+    Pairing is exact and total: seed types and values must match, seeds must
+    be unique, and at least two pairs are required for sample variance.
+    Missing fields, non-finite values, and invalid pairing raise. Inputs are
+    not modified, and no unmatched seed is silently discarded.
+    """
+    import math
+    import statistics
+
+    treatment_by_seed = _index_by_seed(treatment)
+    control_by_seed = _index_by_seed(control)
+    treatment_only = treatment_by_seed.keys() - control_by_seed.keys()
+    control_only = control_by_seed.keys() - treatment_by_seed.keys()
+    if treatment_only or control_only:
+        raise ValueError(
+            'seed sets must match exactly; treatment-only seeds: '
+            + repr([key[1] for key in treatment_only])
+            + '; control-only seeds: '
+            + repr([key[1] for key in control_only])
+        )
+    n_pairs = len(treatment_by_seed)
+    if n_pairs < 2:
+        raise ValueError('at least two matched pairs are required for ddof=1')
+
+    differences = []
+    for key, treatment_record in treatment_by_seed.items():
+        treatment_value = float(treatment_record[field])
+        control_value = float(control_by_seed[key][field])
+        difference = treatment_value - control_value
+        if not all(math.isfinite(value) for value in
+                   (treatment_value, control_value, difference)):
+            raise ValueError('paired values and differences must be finite')
+        differences.append(difference)
+    mean_difference = statistics.fmean(differences)
+    paired_standard_error = statistics.stdev(differences) / math.sqrt(n_pairs)
+    if paired_standard_error == 0.0:
+        t_statistic = None
+        t_note = 'Paired standard error is exactly zero; t statistic is undefined.'
+    else:
+        t_statistic = mean_difference / paired_standard_error
+        t_note = None
+    return {
+        'n_pairs': n_pairs,
+        'mean_difference': mean_difference,
+        'paired_standard_error': paired_standard_error,
+        't_statistic': t_statistic,
+        't_statistic_note': t_note,
+    }
+
+
+==========================================
 FILE: simulation/constants_v2_stage15.py
 ==========================================
 
@@ -3764,6 +3897,23 @@ from dataclasses import dataclass, replace
 
 NOVELTY_DIMS = 10  # must match agents.py NOVELTY_DIMS
 
+# Honest-baseline median novelty variance, steps 10 and up, 40 runs /
+# 11,600 records. Measured and published in drift_char_report.md T1 before
+# this repair consumed it. Ratified by the operator 2026-09-08. Frozen.
+H_N_V_REF = 0.0238802249185
+# Inherited house saturation value, not a free parameter.
+H_N_MAGNITUDE_SAT_K = 3.0
+
+# Novelty variance projection constant, V = K * (avg_wb * (1 - S))^2,
+# with S the coupled total suppression. Derived from the committed
+# drift_char honest baseline over steps 10 and up, 9,205 records.
+# Absorbs the network contagion term, which is pinned at its 0.5 clip
+# floor in all 11,960 baseline records. Ratified by the operator
+# 2026-09-08.
+H_N_V_PROJ_K = 0.24292031137077771
+# Counts state builds that cannot obtain a measured spectral shape.
+H_N_SHAPE_FALLBACK_COUNT = 0
+
 
 # ===========================================================================
 # Stage 1.5 DiagnosticStateV2: state struct consumed by v2 metric and projection
@@ -3812,6 +3962,7 @@ class DiagnosticStateV2:
     # h_n is held constant at the model's current value (novelty is agent-
     # derived; projection has no agent layer to generate novelty).
     h_n: float
+    h_n_shape: float
 
 
 # ===========================================================================
@@ -4263,19 +4414,33 @@ def _build_state_from_model(model, psi_inst_stock_override=None):
     # projection state both see the same value. Falls back to a floor if
     # no measurement is available (very first step before agents step).
     from constants_v2_stage18 import H_N_FLOOR, THETA_CAPABILITY_INITIAL, TRANSFER_STATE_INITIAL
+    global H_N_SHAPE_FALLBACK_COUNT
     h_n_latest = getattr(model, 'h_n_latest', None)
-    if h_n_latest is None:
+    h_n_shape_latest = getattr(model, 'h_n_shape_latest', None)
+    if h_n_latest is None or h_n_shape_latest is None:
         # Compute fresh if novelty_log present, else fall back.
         novelty_log = getattr(model, 'novelty_log', None)
         if novelty_log:
             method = getattr(model, 'hn_composite_method', 'spectral')
             try:
-                h_n_latest = float(calculate_h_n(novelty_log, composite_method=method))
+                measured = calculate_h_n(
+                    novelty_log, composite_method=method, return_components=True,
+                )
+                if isinstance(measured, tuple):
+                    measured_h_n, h_n_shape_latest, _ = measured
+                else:
+                    measured_h_n = float(measured)
+                if h_n_latest is None:
+                    h_n_latest = float(measured_h_n)
             except Exception:
-                h_n_latest = H_N_FLOOR
-        else:
+                if h_n_latest is None:
+                    h_n_latest = H_N_FLOOR
+        elif h_n_latest is None:
             h_n_latest = H_N_FLOOR
     h_n_for_state = max(H_N_FLOOR, float(h_n_latest))
+    if h_n_shape_latest is None:
+        h_n_shape_latest = 1.0
+        H_N_SHAPE_FALLBACK_COUNT += 1
 
     return DiagnosticStateV2(
         avg_wb=avg_wb,
@@ -4295,6 +4460,7 @@ def _build_state_from_model(model, psi_inst_stock_override=None):
         theta_capability=float(getattr(model, 'theta_capability', THETA_CAPABILITY_INITIAL)),
         transfer_state=float(getattr(model, 'transfer_state', TRANSFER_STATE_INITIAL)),
         h_n=h_n_for_state,
+        h_n_shape=float(h_n_shape_latest),
     )
 
 
@@ -4458,7 +4624,7 @@ def calculate_system_metrics_v2(model, action_v2, eval_horizon=1,
     }
     return u_sys_v2, components
 
-def calculate_h_n(novelty_points, composite_method='spectral'):
+def calculate_h_n(novelty_points, composite_method='spectral', *, return_components=False):
     """
     Compute aggregate novelty score H_N from population novelty vectors.
 
@@ -4515,6 +4681,8 @@ def calculate_h_n(novelty_points, composite_method='spectral'):
         # Covariance matrix (NOVELTY_DIMS × NOVELTY_DIMS)
         # rowvar=False: each column is a variable, each row is an observation
         cov = np.cov(X, rowvar=False)
+        V = float(np.trace(cov))  # Raw eigenvalues, before clamp and normalization.
+        V = max(0.0, V)  # Guard floating-point error only.
 
         # Eigenvalues via eigh (symmetric; returns real, ascending-sorted values)
         eigvals = np.linalg.eigh(cov)[0]
@@ -4528,7 +4696,11 @@ def calculate_h_n(novelty_points, composite_method='spectral'):
         # Shannon entropy, normalised to [0, 1] by dividing by log₂(D)
         h_n = -np.sum(p * np.log2(p)) / np.log2(NOVELTY_DIMS)
 
-        return float(np.clip(h_n, 0.0, 1.0))
+        shape = float(np.clip(h_n, 0.0, 1.0))
+        magnitude = -np.expm1(-H_N_MAGNITUDE_SAT_K * V / H_N_V_REF)
+        if return_components:
+            return float(np.clip(shape * magnitude, 0.0, 1.0)), shape, V
+        return float(np.clip(shape * magnitude, 0.0, 1.0))
 
     # -----------------------------------------------------------------------
     # Legacy paths (retained for scenario comparison / backward compatibility)
@@ -4895,6 +5067,7 @@ class GardenModel:
         # sees the same value used by per-step metric computation. Updated in
         # _step_v2 after agents step, before the metric call.
         self.h_n_latest = None
+        self.h_n_shape_latest = None
         # Previous-step trackers for delta computation. Initialized to current
         # state at the first step (no delta on step 0); refreshed at the end
         # of each step after metrics collection.
@@ -6206,8 +6379,14 @@ class GardenModel:
         # Stage 1.8: compute spectral H_N once and cache on the model so
         # both per-step metric call and _build_state_from_model see the
         # same value.
-        h_n_spectral = calculate_h_n(self.novelty_log,
-                                      composite_method=self.hn_composite_method)
+        h_n_components = calculate_h_n(self.novelty_log,
+                                       composite_method=self.hn_composite_method,
+                                       return_components=True)
+        if isinstance(h_n_components, tuple):
+            h_n_spectral, self.h_n_shape_latest, _ = h_n_components
+        else:
+            h_n_spectral = h_n_components
+            self.h_n_shape_latest = None
         self.h_n_latest = float(h_n_spectral)
 
         u_sys_v2, components = calculate_system_metrics_v2(
@@ -18078,6 +18257,1268 @@ if __name__ == '__main__':
 
 
 ==========================================
+FILE: simulation/diagnostics/drift_char_analyze.py
+==========================================
+
+"""Summarize recorded current-substrate trajectories; no simulation is run."""
+import sys
+sys.dont_write_bytecode=True
+sys.path.insert(0,str(__import__('pathlib').Path(__file__).resolve().parent))
+import drift_char_probe as p
+import csv,json,math,statistics
+import numpy as np
+
+
+def csv_rows(job):
+    with (p.OUT/p.log_name(job)).open(encoding='utf-8',newline='') as f:
+        raw=list(csv.DictReader(f))
+    rows=[]
+    for item in raw:
+        row={}
+        for k,v in item.items():
+            if v=='':row[k]=None
+            elif v in ('True','False'):row[k]=v=='True'
+            elif k in ('kind',):row[k]=v
+            elif k in ('step','seed','population','novelty_vector_count','incumbent_generation'):row[k]=int(v)
+            else:row[k]=float(v)
+        rows.append(row)
+    if [r['step'] for r in rows]!=list(range(len(rows))):raise RuntimeError('Step sequence mismatch')
+    return rows
+
+def dist(values):
+    a=np.asarray(values,dtype=float)
+    if len(a)==0:return {'count':0}
+    if not np.isfinite(a).all():raise RuntimeError('Nonfinite summary input')
+    q=np.quantile(a,[0,.05,.25,.5,.75,.9,.95,1],method='linear')
+    return dict(count=len(a),mean=float(a.mean()),**dict(zip(['min','p05','p25','median','p75','p90','p95','max'],map(float,q))))
+
+def fmt(value):
+    if value is None:return 'none'
+    if isinstance(value,bool):return str(value).lower()
+    if isinstance(value,float):return f'{value:.12g}'
+    return str(value)
+
+def source_quote(path,lo,hi):
+    lines=(p.ROOT/path).read_text(encoding='utf-8').splitlines()
+    return '\n'.join(lines[lo-1:hi])
+
+def condition_summary(rows,field,onset):
+    yes=[r for r in rows if r[field]]
+    post=[r for r in yes if r['step']>=onset]
+    entries=[r['step'] for i,r in enumerate(rows) if r[field] and (i==0 or not rows[i-1][field])]
+    exits=[r['step'] for i,r in enumerate(rows) if i>0 and not r[field] and rows[i-1][field]]
+    first=yes[0]['step'] if yes else None
+    first_post=post[0]['step'] if post else None
+    return {'count':len(yes),'denominator':len(rows),'first_logged_step':first,'entries':entries,'exits':exits,
+            'first_step_minus_attack_onset':first-onset if first is not None else None,
+            'count_at_or_after_onset':len(post),'first_at_or_after_onset':first_post,
+            'elapsed_steps_from_onset':first_post-onset if first_post is not None else None,
+            'at_attack_onset':next((r[field] for r in rows if r['step']==onset),None)}
+
+def delta_summary(rows,onset=None):
+    pairs=[(rows[i],rows[i]['g']-rows[i-1]['g']) for i in range(1,len(rows)) if onset is None or rows[i]['step']>=onset]
+    if not pairs:return {'count':0}
+    high=max(pairs,key=lambda x:x[1]);low=min(pairs,key=lambda x:x[1])
+    return {'distribution':dist([d for _,d in pairs]),'max':high[1],'max_to_step':high[0]['step'],'max_from_step':high[0]['step']-1,
+            'min':low[1],'min_to_step':low[0]['step'],'positive_changes':sum(d>0 for _,d in pairs),'negative_changes':sum(d<0 for _,d in pairs),'zero_changes':sum(d==0 for _,d in pairs),'count':len(pairs)}
+
+def main():
+    plan=p.load_plan();attack_obj=p.read(p.result_name('attack'))
+    p.validate_result(plan,'attack',attack_obj)
+    if not attack_obj.get('reproduction_passed'):raise RuntimeError('T0 did not pass')
+    objs={j:p.read(p.result_name(j)) for j in p.jobs()}
+    for j,o in objs.items():p.validate_result(plan,j,o)
+    attack=csv_rows('attack');runs={j:csv_rows(j) for j in p.jobs()};allrows=[r for j in p.jobs() for r in runs[j]]
+    if len(allrows)!=12000 or any(len(r)!=300 for r in runs.values()):raise RuntimeError('Requested baseline horizon/count not completed')
+    if any(r['adapter_active'] for r in allrows):raise RuntimeError('Baseline adapter active')
+    windows={'all_logged_steps':allrows,'steps_ge_10':[r for r in allrows if r['step']>=10]}
+    calibration={};cal_rows=[]
+    for name,rows in windows.items():
+        V=[r['V'] for r in rows];ds=dist(V)
+        candidates=[]
+        for label,key in [('median','median'),('75th_percentile','p75'),('90th_percentile','p90')]:
+            anchor=ds[key]
+            values=[-math.expm1(-3.0*v/anchor) for v in V] if anchor>0 else None
+            item={'candidate':label,'V_ref':anchor,'magnitude_factor':dist(values) if values is not None else None,'defined':anchor>0,'selected':False}
+            candidates.append(item)
+            flat={'window':name,'candidate':label,'records':len(V),'V_ref':anchor,'defined':anchor>0,'selected':False}
+            if values is not None:flat.update({'magnitude_'+k:v for k,v in item['magnitude_factor'].items()})
+            cal_rows.append(flat)
+        calibration[name]={'V':ds,'V_zero_count':sum(v==0 for v in V),'denominator':len(V),'candidates':candidates}
+    tmp=p.OUT/'drift_char_calibration_candidates.csv'
+    with tmp.open('w',encoding='utf-8',newline='') as f:
+        fields=list(dict.fromkeys(k for r in cal_rows for k in r));w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(cal_rows)
+    constants=plan['read_constants'];R=constants['RUNAWAY_THRESHOLD'];A=constants['ALPHA_DEFAULT']*constants['CONVERGENCE_STRENGTH']
+    table=[]
+    for cs in [1.5,2.0,2.5,3.0]:
+        gst=(R+math.log(cs)/A)/cs
+        T=lambda c,g:c*math.exp(-A*max(0.0,c*g-R))
+        table.append({'c_i':1.0,'c_s':cs,'g_star':gst,'incumbent_cg':gst,'successor_cg':cs*gst,'incumbent_unpenalized':gst<R,'successor_penalized':cs*gst>R,'T_difference_at_root':T(cs,gst)-T(1.0,gst),'T_difference_0_0001_below':T(cs,gst-.0001)-T(1.0,gst-.0001),'T_difference_0_0001_above':T(cs,gst+.0001)-T(1.0,gst+.0001)})
+    gst=next(r['g_star'] for r in table if r['c_s']==2.0)
+    onset=attack_obj['constructed_config']['attack_step'];post=[r for r in attack if r['step']>=onset]
+    peak=max(attack,key=lambda r:r['g']);postpeak=max(post,key=lambda r:r['g'])
+    conditions={k:condition_summary(attack,f,onset) for k,f in [('reference_soft','reference_soft_condition'),('reference_hard','reference_hard_condition'),('reference_soft_only','reference_soft_only')]}
+    baseline_pair=runs['baseline_'+str(attack_obj['row']['seed'])]
+    paired=[{'step':r['step'],'attack_g':r['g'],'honest_g':b['g'],'difference':r['g']-b['g']} for r,b in zip(attack,baseline_pair)]
+    with (p.OUT/'drift_char_paired_g.csv').open('w',encoding='utf-8',newline='') as f:
+        w=csv.DictWriter(f,fieldnames=list(paired[0]));w.writeheader();w.writerows(paired)
+    pre_diffs=[r['difference'] for r in paired if r['step']<onset];post_diffs=[r['difference'] for r in paired if r['step']>=onset]
+    pair_summary={'seed':attack_obj['row']['seed'],'pre_attack_max_absolute_g_difference':max(map(abs,pre_diffs)),
+                  'post_attack_g_difference':dist(post_diffs),'post_attack_positive_count':sum(v>0 for v in post_diffs),'post_attack_negative_count':sum(v<0 for v in post_diffs),'post_attack_equal_count':sum(v==0 for v in post_diffs),'post_attack_denominator':len(post_diffs),
+                  'final_g_difference':paired[-1]['difference'],'max_difference_step':max(paired,key=lambda r:r['difference'])['step']}
+    modified=[r['step'] for r in attack if r['action_modified']];alarms=[r['step'] for r in attack if r['defense_fired']]
+    trajectory={'initial_pre_step_g':attack_obj['initial_state']['g'],'max_g':peak['g'],'max_g_step':peak['step'],'min_g':min(r['g'] for r in attack),
+                'post_attack_max_g':postpeak['g'],'post_attack_max_g_step':postpeak['step'],'post_attack_gap_below_g_star':gst-postpeak['g'],
+                'attack_onset':onset,'g_at_step_before_onset':attack[onset-1]['g'],'g_at_onset':attack[onset]['g'],'final_g':attack[-1]['g'],'conditions':conditions,
+                'yield_event_count':attack_obj['yield_event_count'],'live_soft_condition_observable':False,'source_denominator_floor_steps':sum(r['avg_wb']*r['transfer_state']<.01 for r in attack),
+                'reference_technology_floor_steps':sum(r['reference_theta_incumbent']==.01 or r['reference_theta_successor']==.01 for r in attack),
+                'modified_steps':modified,'alarm_steps':alarms,'deltas_all_adjacent':delta_summary(attack),'deltas_at_or_after_onset':delta_summary(attack,onset),
+                'paired_honest_comparison':pair_summary}
+    summary={'scope':'Current-substrate characterization before implementation; not registered characterization data or framework evidence.',
+             'baseline_runs':len(runs),'baseline_steps_counted':len(allrows),'baseline_adapter_active_steps':sum(r['adapter_active'] for r in allrows),
+             'calibration':calibration,'anchor_selected':False,'threshold_derivation':table,'trajectory':trajectory,'reproduction':attack_obj['reproduction_comparison']}
+    p.write('drift_char_summary.json',summary)
+    progress=p.read('drift_char_progress.json')
+    sources={}
+    for obj in [attack_obj,*objs.values()]:
+        for path,digest in obj['simulation_source_sha256'].items():
+            if path in sources and sources[path]!=digest:raise RuntimeError('Mixed simulation source identity')
+            sources[path]=digest
+    lines=['# V2.1 drift repair: pre-implementation characterization','','This is current-substrate characterization and constant measurement before implementation. It is not registered characterization data, is not framework evidence, and does not implement the repair. No calibration anchor or alarm constant is selected.','','Status: complete. T0 passed; 40 honest-baseline runs and one defended reproduction trajectory completed. T2 and T3 reuse the recorded T0 trajectory.','','## Fixed design decisions, verbatim context','','```text',plan['fixed_design_decisions'],'```','','## Preconditions and evidence selection','']
+    for gate in plan['gates']:lines.append('- Gate '+str(gate['number'])+': PASS. '+json.dumps(gate,sort_keys=True))
+    e=plan['evidence']
+    lines += ['',f"Read authoritative manifest: `{e['manifest']}`, line {e['manifest_line']}, SHA256 `{e['manifest_sha256']}`. Its exact directory entry resolved uniquely through `git ls-tree`; no glob selected the result. Read CSV through `{e['tag']}` at commit `{e['tag_commit']}`: `{e['path']}`.",'',f"Expected Git blob SHA: `{e['expected_blob']}`. Hash of retrieved blob bytes: `{e['actual_blob']}`. MATCH, verified before CSV parsing. Counted {e['rows_counted']} rows with Python csv.DictReader, excluding the header. CSV SHA256: `{e['sha256']}`.",'',f"Selection: {e['selection_rule']} Data row {e['selected_data_row']} excluding the header; defended, phi 10, replicate 0, seed {attack_obj['row']['seed']}.",'','The pinned run directory contains only results.csv and environment_manifest.json. The results CSV contains run summaries and has no novelty matrix, avg_wb, theta_capability, or transfer_state series. The required trajectory was therefore recorded during the T0 rerun, with no additional attack run.','','## T0: reproduction gate','','| Boolean | Pinned | Measured | Match |','| --- | --- | --- | --- |']
+    for k,v in attack_obj['reproduction_comparison'].items():lines.append(f"| {k} | {fmt(v['pinned'])} | {fmt(v['measured'])} | {fmt(v['match'])} |")
+    lines += ['',f"Measured reproduction steps: {attack_obj['row']['steps_completed']}; elapsed time: {attack_obj['row']['elapsed_seconds']:.6f} seconds. The unmodified runner factory constructed a recorder subclass through a temporary worker-local class binding. The subclass calls super().step() and then reads committed state. No production file or factory function body changed; all four outcome booleans matched.",'','## Source verification and symbolic derivation','','The exact absorption expression read at simulation/metrics.py:660-667 is:','','```python',source_quote('simulation/metrics.py',660,667),'```','','Derived source definition: `g = max(0.02, theta_capability) / max(0.01, clip(avg_wb, 0, 1) * transfer_state)`. The avg_wb clipping is read at metrics.py:647. The bare product denominator in the prompt omits the source floor. The bare ratio agrees with the source-defined g only where that floor is inactive. The logs retain both quantities; undefined bare ratios are empty fields.','','Let `A = ALPHA * CONVERGENCE_STRENGTH`, `R = RUNAWAY_THRESHOLD`, and `B = theta_capability * transfer_state`. Read capability-bearing technology factor: `theta(c) = max(0.01, B * c * exp(-A * max(0, c*g - R)))`. Thus the unfloored factor `T(c)` in the prompt is recovered, but the full implementation also retains the outer floor.','','Derived algebra in the stipulated regime `c_i*g < R < c_s*g`:', '', '```text', 'c_s * exp(-A * (c_s*g - R)) = c_i', '-A * (c_s*g - R) = ln(c_i/c_s)', 'g* = [R - ln(c_i/c_s)/A] / c_s', 'A = 1; c_i = 1; c_s = 2:', 'g* = (1.5 + ln(2))/2', '```','',f'Derived numeric value: `g* = {gst:.15f}`. The incumbent product is {gst:.15f}, below 1.5; the successor product is {2*gst:.15f}, above 1.5. The stated regime holds. At equality the utilities are equal under the shared-action assumptions, not strictly ordered.','','| c_i | c_s | Derived g* | c_i*g* | c_s*g* | Incumbent unpenalized | Numeric T(c_s)-T(c_i) at root |','| ---: | ---: | ---: | ---: | ---: | --- | ---: |']
+    for r in table:lines.append(f"| 1 | {r['c_s']} | {r['g_star']:.15f} | {r['incumbent_cg']:.12f} | {r['successor_cg']:.12f} | {fmt(r['incumbent_unpenalized'])} | {r['T_difference_at_root']:.4g} |")
+    lines += ['','The constants and regime-specific root are verified. The unconditional structural claim in the prompt is not established by that algebra alone. The technology floor can make both capability factors equal above the root, and the actual yield code evaluates separately proposed actions, not necessarily a shared action (model.py:1299-1325). The action-dependent H_E term and finite epsilon remain in the utility prefactor (metrics.py:675-686). With a shared action, nonnegative state factors, and positive transition cost, g >= g* removes the reference capability advantage; this is the conditional reference boundary tabulated here.','','The pinned drift factory supplies no successor: run_attack_vector_revalidation_v2.py:322-333 creates capability 2.0 successors only for three other vectors. GardenModel defaults successor_ai to None (model.py:164-166,250). Yield evaluation requires a successor (model.py:1287), and the event log is empty without one (model.py:353-357). Consequently, no actual succession feasibility or live soft-region crossing was measured in this drift cell.','','The source-derived soft diagnostic uses the operator-specified capability pair 1.0 and 2.0, holds each logged post-step state and its committed action fixed, and applies the current source floors. It does not create a successor, optimize another action, or alter the model. The common discount cancels in the difference:', '', '```text', 'Q = lambda_n*H_N/(H_N+epsilon) + lambda_e*H_E/(H_E+epsilon)', 'delta_U_ref = Q * LAMBDA_LINEAGE_COUPLING * H_eff * psi_inst', '              * [theta(2) - theta(1)]', 'cost_ref = (1+beta_transition)', '           * [k1_transition*ln(1+1)*ln(generation+1)', '              + k2_transition/max(0.01, psi_inst_stock)]', 'soft_reference = delta_U_ref <= cost_ref', 'hard_reference = g >= g*', 'soft_only_reference = soft_reference and g < g*', '```','',f"Read transition coefficients on the constructed cell: k1={attack_obj['runtime_attributes']['k1_transition']}, k2={attack_obj['runtime_attributes']['k2_transition']}, beta={attack_obj['runtime_attributes']['beta_transition']}. The cost expression is read at agents.py:882-889 and its live call arguments at model.py:1333-1344. Utility components and difference follow metrics.py:645-686. The logs keep the absent live margin/cost empty and label the computed reference quantities separately.",'','## T1: honest-baseline calibration','','Measured and counted: 40 runs, 300 logged steps each, 12,000 step records. Each uses the Stage 1 baseline constructor (cusum_char_stage1.py:447-460), phi 10, prescribed seeds 1835086199 through 1835086238, no attack_vector_v2 key, and the defended COP settings. The adapter was inactive on every logged baseline step.','','V is the trace of the covariance of the actual per-step novelty matrix before eigenvalue flooring or normalization. The recorder follows metrics.py:772-792: N by 10 matrix, mean centering, then np.cov(rowvar=False), using the sample denominator N-1. Recorded H_N is the model datacollector value, which carries the existing 0.01 floor; h_n_spectral separately logs the cached estimator value (model.py:1530-1532,1556; metrics.py:645). No magnitude factor is fed back into the model.','','Rows are indexed after the model completes each step. Novelty is generated before demographic updates (model.py:1461-1476); avg_wb and stocks are the post-update state (model.py:1494-1499,1522-1524). Every recorder call verified that NumPy RNG state was unchanged by logging. The initial pre-step g is retained separately.','','| Calibration window | Counted steps | Measured median V | Measured p75 V | Measured p90 V | Counted V=0 steps |','| --- | ---: | ---: | ---: | ---: | ---: |']
+    for name,c in calibration.items():lines.append(f"| {name} | {c['denominator']} | {fmt(c['V']['median'])} | {fmt(c['V']['p75'])} | {fmt(c['V']['p90'])} | {c['V_zero_count']} |")
+    lines += ['','Percentiles use linear interpolation, NumPy quantile method=linear. The window steps_ge_10 contains steps 10 through 299 of every baseline run. Both window definitions are reported, with no anchor selected.','','Derived magnitude-factor distributions from measured V, using the stated expression `1 - exp(-3*V/V_ref)` (computed as `-expm1(-3*V/V_ref)` for numerical stability):','','| Window | Candidate anchor | V_ref | Records | Mean factor | Median factor | Min | p05 | p95 | Max |','| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |']
+    for name,c in calibration.items():
+        for item in c['candidates']:
+            d=item['magnitude_factor']
+            if d is None:lines.append(f"| {name} | {item['candidate']} | {fmt(item['V_ref'])} | {c['denominator']} | undefined | undefined | undefined | undefined | undefined | undefined |")
+            else:lines.append(f"| {name} | {item['candidate']} | {fmt(item['V_ref'])} | {d['count']} | {fmt(d['mean'])} | {fmt(d['median'])} | {fmt(d['min'])} | {fmt(d['p05'])} | {fmt(d['p95'])} | {fmt(d['max'])} |")
+    lines += ['','Full V and factor distributions are in drift_char_summary.json; the six candidate rows are also in drift_char_calibration_candidates.csv. These are candidate calibration measurements awaiting the operator; no anchor was frozen, selected, or consumed by a repaired estimator.','','## T2: g trajectory and reference regions','',f"Measured initial pre-step g: {fmt(trajectory['initial_pre_step_g'])}. Measured maximum over logged steps: {fmt(peak['g'])}, at step {peak['step']}. Measured maximum at or after attack onset: {fmt(postpeak['g'])}, at step {postpeak['step']}. Derived signed gap g* minus that post-onset maximum: {fmt(gst-postpeak['g'])}.",'',f"Counted live yield evaluations: {attack_obj['yield_event_count']}. The soft and hard columns below classify the specified fixed-state reference, not observed decisions by an instantiated successor. Counted source denominator-floor activations: {trajectory['source_denominator_floor_steps']} of {len(attack)} steps; reference technology-floor activations: {trajectory['reference_technology_floor_steps']} of {len(attack)} steps.",'','| Reference condition | Counted steps / total | First logged true step | First true step at/after onset | Condition true at onset | Exit steps |','| --- | --- | ---: | ---: | --- | --- |']
+    for label,c in conditions.items():lines.append(f"| {label} | {c['count']} / {c['denominator']} | {fmt(c['first_logged_step'])} | {fmt(c['first_at_or_after_onset'])} | {fmt(c['at_attack_onset'])} | {', '.join(map(str,c['exits'])) or 'none'} |")
+    lines += ['','The initial state is already above the reference root. Step 0 is the first logged occurrence, not an observed entry from below. The recorded exits refute permanent residence above g* in this trajectory. Source working_factor updates remain responsive to later allocations (working_factor.py:70-94); no irreversible g-crossing rule is implemented.','','Read attack action rule, attack_adapter_v2.py:211-223:','','```python',source_quote('simulation/attack_adapter_v2.py',211,223),'```','','Derived direction: a positive welfare transfer reduces the welfare share and increases compute by the same amount. The welfare bridge is nondecreasing in the welfare share (model.py:125-134), and the per-agent well-being update increases with that bridged resource level (agents.py:799-802). Compute raises or saturates the theta-capability target (constants_v2_stage18.py, STATE_ALLOCATION_MAPPING theta_capability entry); working_factor applies rate*(target-current) (working_factor.py:75-79). Thus the immediate direct channels push g upward or leave it unchanged at the relevant floors/caps, holding the other state and cohort effects fixed. They do not prove a monotonic or irreversible aggregate trajectory under changing policy, demography, and defense.', '',f"Counted action-modified steps: {len(modified)}; first {fmt(modified[0] if modified else None)}, last {fmt(modified[-1] if modified else None)}. Counted defense-fired steps: {len(alarms)}; first {fmt(alarms[0] if alarms else None)}. The existing adapter returns the honest action when its alarm fires (attack_adapter_v2.py:321-339).",'',f"The measured seed-paired honest g trajectory has maximum absolute pre-attack difference {fmt(pair_summary['pre_attack_max_absolute_g_difference'])}. After onset, attack minus honest g is positive on {pair_summary['post_attack_positive_count']} of {pair_summary['post_attack_denominator']} steps, negative on {pair_summary['post_attack_negative_count']}, and equal on {pair_summary['post_attack_equal_count']}. Its measured mean is {fmt(pair_summary['post_attack_g_difference']['mean'])}, maximum {fmt(pair_summary['post_attack_g_difference']['max'])}, and final difference {fmt(pair_summary['final_g_difference'])}. The upward direct allocation channel is confirmed by source. In this defended cell the measured post-onset paired mean is positive, but g is lower than the honest counterpart on {pair_summary['post_attack_negative_count']} of {pair_summary['post_attack_denominator']} post-onset steps and at the final step. The realized effect is therefore mixed rather than monotonic or permanent. Neither reference region is reached after attack onset. The per-step paired differences are in drift_char_paired_g.csv.",'','| Step | g | avg_wb | theta_capability | transfer_state | Reference margin | Reference cost | Soft | Hard |','| ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |']
+    selected=sorted(set([0,5,9,10,onset-1,onset,onset+5,65,66,postpeak['step'],len(attack)-1]))
+    for i in selected:
+        r=attack[i];lines.append('| '+' | '.join(fmt(r[k]) for k in ['step','g','avg_wb','theta_capability','transfer_state','reference_margin','reference_transition_cost','reference_soft_condition','reference_hard_condition'])+' |')
+    lines += ['','## T3: realized approach rates and elapsed steps','','Per-step changes use g[t] minus g[t-1], so a positive change means movement toward larger g. The per-step CSV carries g_pre_step and g_change_within_step, including the separately identified initial-state-to-step-0 change. Adjacent-record summaries below start at step 1; the post-onset summary includes the step 49 to 50 transition.','','| Window | Counted changes | Measured maximum delta g | Transition | Measured minimum delta g | Positive changes | Negative changes |','| --- | ---: | ---: | --- | ---: | ---: | ---: |']
+    for name,key in [('all adjacent records','deltas_all_adjacent'),('at or after attack onset','deltas_at_or_after_onset')]:
+        d=trajectory[key];lines.append(f"| {name} | {d['count']} | {fmt(d['max'])} | {d['max_from_step']} to {d['max_to_step']} | {fmt(d['min'])} | {d['positive_changes']} | {d['negative_changes']} |")
+    lines += ['','| Reference condition | First logged step minus onset | Elapsed steps from onset to first qualifying post-onset record |','| --- | ---: | ---: |']
+    for label,c in conditions.items():lines.append(f"| {label} | {fmt(c['first_step_minus_attack_onset'])} | {fmt(c['elapsed_steps_from_onset'])} |")
+    lines += ['','Signed timing convention: first logged qualifying step minus attack onset. A negative number denotes a pre-attack occurrence; it is not a post-attack response window. The last column reports an actual nonnegative elapsed-step count only when a qualifying record exists at or after onset; none means it was not reached in the observed post-onset trajectory. The soft timing is a derived reference classification because no live yield evaluation occurs.', '',
+              'These are realized rates and passage times for one defended trajectory. They do not establish a global worst-case approach rate, a loop response time, or a conversion between g distance and accumulated alarm-score distance. No numerical D_alarm or response margin is fixed by this report.', '',
+              '## Configuration, execution, and source provenance','',
+              'Baseline configuration as constructed (random_seed varies over the prescribed 40 seeds):','','```json',json.dumps(objs[p.jobs()[0]]['constructed_config'],indent=2,sort_keys=True),'```','',
+              'Attack configuration as constructed:','','```json',json.dumps(attack_obj['constructed_config'],indent=2,sort_keys=True),'```','',
+              f"Machine: `{attack_obj['machine']}`. HEAD: `{plan['head']}` on main. Python: `{attack_obj['python']}`. NumPy: `{attack_obj['numpy']}`. Actual maximum concurrent baseline workers: {progress['peak_active_workers']}; T0 used one serial gate worker. CPU budget: 16, normal cap 15, work cap 12. These are worker limits, not a hard operating-system core reservation. Measured baseline batch elapsed time: {progress['elapsed_seconds']:.6f} seconds.",'',
+              'All workers set numerical-library thread limits to one before library initialization and verified one effective OpenBLAS thread through the recorded runtime getter. Mode history and start/resume events are in drift_char_progress.json. Operational checks covered dispatch, normal/work draining, seed assignment, write-scope predicates, and rejection of mismatched completion records. Completion JSON files retain configuration, source identity, raw-log SHA256, and completion status; partial logs never count as completed results.','','SHA256 for every simulation Python module loaded by the runs:','','| Source module | SHA256 |','| --- | --- |']
+    lines += [f'| `{path}` | `{digest}` |' for path,digest in sorted(sources.items())]
+    lines += ['','## Write scope and artifact record','','The guard explicitly permits os.devnull in any mode. All other writable opens were limited to simulation/diagnostics/drift_char_ filenames. Bytecode writes were disabled. No out-of-prefix writable-open violation was recorded. No Git write operation, snapshot-generator operation, production change, runner edit, or prior-diagnostic edit was performed. The operator runs the containment diff.','','Ignored instructions that would conflict with the present write scope:']
+    lines += ['- '+x for x in plan['out_of_scope_instructions_ignored']]
+    lines += ['','drift_char_manifest.json enumerates every output, SHA256, and CSV row count. CSV counts use csv.DictReader excluding headers; non-CSV row counts are null. The manifest itself has no embedded self-hash to avoid self-reference; its completed-file hash is emitted separately. The report and all outputs are characterization artifacts, not authoritative framework evidence. No repair, anchor selection, recommendation, or published-number change was made.','']
+    report='\n'.join(lines)
+    if '\u2014' in report:raise RuntimeError('Em dash in authored report')
+    p.write_text('drift_char_report.md',report)
+    manifest={'status':'complete','scope':summary['scope'],'created_utc':p.now(),'head':plan['head'],'machine':attack_obj['machine'],'python':attack_obj['python'],'numpy':attack_obj['numpy'],'preconditions':plan['gates'],'reproduction':attack_obj['reproduction_comparison'],'simulation_runs':41,'baseline_workers_actually_used':progress['peak_active_workers'],'gate_workers_actually_used':1,'null_device_exemption':True,'simulation_source_sha256':sources,'anchor_selected':False,'outputs':[],'self_hash_convention':'Manifest has null self-hash. Completed-file SHA256 is emitted separately.','row_count_convention':'csv.DictReader excluding header; null for non-CSV outputs.'}
+    target=p.OUT/'drift_char_manifest.json'
+    paths=[x for x in p.OUT.iterdir() if x.is_file() and x.name.startswith('drift_char_')]
+    if target not in paths:paths.append(target)
+    for path in sorted(paths):
+        count=None
+        if path.suffix=='.csv':
+            with path.open(encoding='utf-8',newline='') as f:count=sum(1 for _ in csv.DictReader(f))
+        manifest['outputs'].append({'path':path.relative_to(p.ROOT).as_posix(),'sha256':None if path==target else p.sha(path),'row_count':count})
+    p.write('drift_char_manifest.json',manifest)
+    for obj in manifest['outputs']:
+        if obj['sha256'] is not None and p.sha(p.ROOT/obj['path'])!=obj['sha256']:raise RuntimeError('Final output hash mismatch')
+    print(json.dumps({'status':'complete','calibration':calibration,'trajectory':trajectory,'manifest_sha256':p.sha(target),'artifacts':len(manifest['outputs'])}),flush=True)
+
+if __name__=='__main__':main()
+
+
+==========================================
+FILE: simulation/diagnostics/drift_char_probe.py
+==========================================
+
+"""Read-only current-substrate drift characterization; no repair is applied."""
+import sys
+sys.dont_write_bytecode=True
+sys.stdout.reconfigure(encoding='utf-8')
+import os
+THREAD_ENV=['OPENBLAS_NUM_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS','BLIS_NUM_THREADS','VECLIB_MAXIMUM_THREADS','NUMEXPR_NUM_THREADS']
+for key in THREAD_ENV: os.environ[key]='1'
+os.environ['PYTHONDONTWRITEBYTECODE']='1'
+from pathlib import Path
+OUT=Path(__file__).resolve().parent
+ROOT=OUT.parent.parent
+SELF=Path(__file__).resolve()
+NULL=Path(os.devnull).resolve()
+VIOLATIONS=[]
+
+
+def allowed(path):
+    p = Path(path).resolve()
+    return p.parent == OUT and p.name.startswith('drift_char_')
+
+def writable(path):
+    return Path(path).resolve() == NULL or allowed(path)
+
+def audit(event, args):
+    problem = None
+    if event == 'open':
+        path, mode, flags = args
+        writing = (isinstance(mode, str) and any(c in mode for c in 'wax+')) or (isinstance(flags, int) and flags & (os.O_WRONLY | os.O_RDWR | os.O_APPEND | os.O_CREAT | os.O_TRUNC))
+        if writing and not isinstance(path, int) and not writable(path):
+            problem = 'writable open: ' + str(path)
+    elif event == 'os.rename':
+        if not allowed(args[0]) or not allowed(args[1]):
+            problem = 'rename outside prefix'
+    elif event in ('os.remove', 'os.rmdir', 'os.mkdir', 'os.link', 'os.symlink'):
+        problem = event
+    if problem:
+        VIOLATIONS.append(problem)
+        raise RuntimeError('WRITE SCOPE HALT: ' + problem)
+
+
+sys.addaudithook(audit)
+sys.path.insert(0,str(ROOT/'simulation'))
+import argparse,ast,copy,csv,ctypes,hashlib,io,json,math,statistics,subprocess,time,traceback
+from datetime import datetime,timezone
+SEEDS=list(range(1835086199,1835086239))
+FIELDS=['kind','seed','steps_completed','final_population','successor_present','attack_succeeded','defense_fired','extinct','collapsed','elapsed_seconds']
+CONTEXT='  D1, suppression semantics. The novelty entropy estimator will be made\n  magnitude-sensitive:\n      H_N = spectral_shape * magnitude_factor\n      spectral_shape   = the current normalized spectral entropy, unchanged, so\n                         dimensional-masking resistance is preserved exactly\n      magnitude_factor = 1 - exp(-3.0 * V / V_ref)\n      V                = total novelty variance = trace of the covariance of the\n                         per-step novelty matrix = sum of the raw covariance\n                         eigenvalues BEFORE the normalization step\n      V_ref            = a fixed calibration constant, measured on the honest\n                         baseline, frozen and published before any characterization\n                         run consumes it\n  The saturation constant 3.0 is the inherited house value, not a free parameter.\n\n  D2, attack-success definition. Dual quantity per vector: keep the action-change\n  binary as the comparable metric, and add an outcome differential against a\n  seed-paired honest arm as the substantive metric. General rule to record: prefer\n  counts and paired differences over ratios, because a ratio invites an endogenous\n  denominator and an unpaired ratio hides a floor. Worked example already banked:\n  the veto vector uses per-run block COUNT, paired, not a per-vote rate.\n\n  D3, detector observable. A one-sided lower CUSUM on the protected observable\n  (novelty entropy under the D1 repair):\n      S_t = max(0, S_{t-1} + k * H_ref - H_N_t)\n  with the committed suppression posture as a fast, exact, zero-lag corroborating\n  channel. H_ref anchored to the fixed honest-baseline calibration, NEVER to running\n  history. A periodic independent recomputation of the optimal policy re-anchors\n  H_ref (this is the architecture\'s "periodic full reset verification"). Reset on\n  alarm so the score cannot latch. A liveness signature distinct from the alarm\n  signature. The alarm threshold D_alarm is placed BELOW the structural defection\n  threshold d_defect by the loop response time at the worst-case approach rate, and\n  the margin is stated as a number. No M-out-of-N counter.'
+
+def now():
+    return datetime.now(timezone.utc).isoformat()
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+def read(name):
+    return json.loads((OUT / name).read_text(encoding='utf-8'))
+
+def write(name, value):
+    target = OUT / name
+    if not allowed(target):
+        raise RuntimeError('WRITE SCOPE HALT: output name')
+    temp = OUT / (name + '.tmp')
+    with temp.open('w', encoding='utf-8', newline='\n') as f:
+        json.dump(value, f, indent=2, sort_keys=True, allow_nan=False)
+        f.write('\n')
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(temp, target)
+
+def write_text(name, value):
+    if not allowed(OUT / name):
+        raise RuntimeError('WRITE SCOPE HALT: text output name')
+    with (OUT / name).open('w', encoding='utf-8', newline='\n') as f:
+        f.write(value)
+        f.flush()
+        os.fsync(f.fileno())
+
+def assert_guard():
+    if VIOLATIONS:
+        raise RuntimeError('WRITE SCOPE HALT: ' + repr(VIOLATIONS))
+
+def git(*args):
+    return subprocess.run(['git', *args], cwd=ROOT, capture_output=True, text=True, check=False)
+
+def budget(mode):
+    if mode not in ('normal', 'work'):
+        raise RuntimeError('Invalid CPU mode')
+    return 15 if mode == 'normal' else 12
+
+def dispatch_slots(mode, active, pending):
+    return min(pending, max(0, budget(mode) - active))
+
+def module_sources():
+    result = {}
+    for module in list(sys.modules.values()):
+        value = getattr(module, '__file__', None)
+        if value:
+            path = Path(value).resolve()
+            if path.suffix == '.py' and path.is_relative_to(ROOT / 'simulation'):
+                result[path.relative_to(ROOT).as_posix()] = sha(path)
+    return result
+
+def thread_runtime(np):
+    records = []
+    for dll in (Path(np.__file__).resolve().parent.parent / 'numpy.libs').iterdir():
+        if dll.suffix.lower() == '.dll' and 'openblas' in dll.name.lower():
+            lib = ctypes.CDLL(str(dll))
+            for name in ['scipy_openblas_get_num_threads64_', 'openblas_get_num_threads64_', 'scipy_openblas_get_num_threads', 'openblas_get_num_threads']:
+                try:
+                    query = getattr(lib, name)
+                except AttributeError:
+                    continue
+                query.argtypes = []
+                query.restype = ctypes.c_int
+                records.append({'library':str(dll), 'query':name, 'effective_threads':query()})
+    if not records or any(x['effective_threads'] != 1 for x in records):
+        raise RuntimeError('Numerical-library thread limit not verified')
+    return records
+
+
+def jobs(): return ['baseline_'+str(seed) for seed in SEEDS]
+def result_name(job): return 'drift_char_result_'+job+'.json'
+def log_name(job): return 'drift_char_steps_'+job+'.csv'
+def decode(job):
+    if job=='attack': return 'ATTACK',1835086199
+    seed=int(job.removeprefix('baseline_'))
+    if job!='baseline_'+str(seed) or seed not in SEEDS: raise RuntimeError('Invalid job')
+    return 'BASELINE',seed
+
+def fingerprint(plan):
+    return hashlib.sha256(json.dumps({k:v for k,v in plan.items() if k!='fingerprint'},sort_keys=True).encode()).hexdigest()
+
+def task_config(plan,job):
+    kind,seed=decode(job)
+    if kind=='ATTACK': return copy.deepcopy(plan['attack_task']),None
+    return None,dict(plan['baseline_config'],random_seed=seed)
+
+def prepare():
+    if (OUT/'drift_char_plan.json').exists(): raise RuntimeError('Plan exists; use run to resume')
+    h=git('rev-parse','HEAD'); branch=git('branch','--show-current'); anc=git('merge-base','--is-ancestor','f1ae659','HEAD')
+    advisor=git('ls-files','--error-unmatch','--','LINEAGE_IMPERATIVE_ADVISOR.md')
+    constants_path=ROOT/'simulation/constants_v2_stage18.py'
+    constants_text=constants_path.read_text(encoding='utf-8')
+    wanted={'FRONTIER_FLOOR':0.02,'RUNAWAY_THRESHOLD':1.5,'ALPHA_DEFAULT':1.0,'CONVERGENCE_STRENGTH':1.0}
+    values={}; locations={}
+    for node in ast.parse(constants_text).body:
+        if isinstance(node,ast.Assign) and len(node.targets)==1 and isinstance(node.targets[0],ast.Name) and node.targets[0].id in wanted:
+            values[node.targets[0].id]=ast.literal_eval(node.value); locations[node.targets[0].id]=node.lineno
+    gates=[{'number':1,'passed':h.returncode==0 and branch.stdout.strip()=='main' and anc.returncode==0,'head':h.stdout.strip(),'branch':branch.stdout.strip(),'merge_base_exit':anc.returncode},
+           {'number':2,'passed':(ROOT/'LINEAGE_IMPERATIVE_ADVISOR.md').is_file() and advisor.returncode!=0,'advisor_present':(ROOT/'LINEAGE_IMPERATIVE_ADVISOR.md').is_file(),'git_ls_files_exit':advisor.returncode},
+           {'number':3,'passed':values==wanted,'read_values':values,'definition_lines':locations}]
+    if not all(g['passed'] for g in gates):
+        write('drift_char_precondition_failure.json',{'gates':gates}); raise RuntimeError('Precondition gate failure')
+    manifest_path=ROOT/'simulation/diagnostics/attack_vector_revalidation_manifest.md'
+    manifest=manifest_path.read_text(encoding='utf-8')
+    line_no,line=next((n,x) for n,x in enumerate(manifest.splitlines(),1) if x.startswith('| sub_threshold_drift |'))
+    vector,directory,expected_rows,expected_blob=[x.strip().strip('`') for x in line.strip('|').split('|')]
+    ref='attack-v2-revalidation-evidence'
+    paths=git('ls-tree','-r','--name-only',ref).stdout.splitlines()
+    matched=[p for p in paths if Path(p).parent.name==directory and Path(p).name=='results.csv']
+    if len(matched)!=1: raise RuntimeError('Manifest result did not resolve uniquely')
+    path=matched[0]
+    raw=subprocess.check_output(['git','show',ref+':'+path],cwd=ROOT)
+    actual=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
+    if actual!=expected_blob: raise RuntimeError('Pinned CSV blob mismatch before parsing')
+    reader=csv.DictReader(io.StringIO(raw.decode('utf-8'),newline=''))
+    rows=list(reader)
+    if len(rows)!=int(expected_rows): raise RuntimeError('Pinned CSV row count mismatch')
+    selected=min(((n,r) for n,r in enumerate(rows,1) if r['defense_active']=='True' and float(r['parameter_phi'])==10.0),key=lambda x:(int(x[1]['replicate']),x[0]))
+    row=selected[1]
+    basepath=OUT/'cusum_char_stage1_baseline_summary.json'
+    baseline=json.loads(basepath.read_text(encoding='utf-8'))['runs'][0]['config']
+    expected={k:row[k]=='True' for k in ['attack_succeeded','defense_fired','extinct','collapsed']}
+    files=git('ls-files','--','simulation').stdout.splitlines()
+    catalog={p:sha(ROOT/p) for p in files if p.endswith('.py') and '/diagnostics/' not in p}
+    plan={'created_utc':now(),'head':h.stdout.strip(),'machine':os.environ['COMPUTERNAME'],'gates':gates,'read_constants':values,
+          'source_catalog':catalog,'script_sha256':sha(SELF),'fixed_design_decisions':CONTEXT,'baseline_config':baseline,
+          'baseline_constructor':{'n_agents':200,'ai_policy':'optimize_u_sys_v2','use_cop':True,'cop_attribution_check':True,'cop_drift_check':True,'cop_cusum_drift':True},
+          'baseline_reference':{'path':basepath.relative_to(ROOT).as_posix(),'sha256':sha(basepath)},
+          'attack_task':{'vector':vector,'mode':row['mode'],'machine':row['machine'],'parameters':{'defense_active':True,'phi':float(row['parameter_phi'])},'replicate':int(row['replicate']),'seed':int(row['seed'])},
+          'expected_reproduction':expected,'runtime_settings':{'steps':int(row['steps_requested']),'n_candidates_v2':int(row['n_candidates_v2']),'rollout_steps_v2':int(row['rollout_steps_v2'])},
+          'evidence':{'manifest':manifest_path.relative_to(ROOT).as_posix(),'manifest_sha256':sha(manifest_path),'manifest_line':line_no,'tag':ref,'tag_commit':git('rev-parse',ref+'^{}').stdout.strip(),'path':path,'expected_blob':expected_blob,'actual_blob':actual,'sha256':hashlib.sha256(raw).hexdigest(),'rows_counted':len(rows),'columns':list(rows[0]),'selected_data_row':selected[0],'selected_row':row,'selection_rule':'Defended phi=10; lowest replicate, then CSV data-row order. Chosen to match the first baseline seed.','directory_files':[p for p in paths if Path(p).parent==Path(path).parent]},
+          'seeds':SEEDS,'cpu_budget':16,'normal_worker_limit':15,'work_worker_limit':12,'null_device_exemption':True,
+          'source_conflicts':['The denominator has a 0.01 floor, not a bare product.','The technology factor has a 0.01 floor.','The drift factory supplies no successor, so no live yield comparison or transition cost is evaluated.','Separate proposed allocations need not share the action-dependent utility prefactor.','Equality at g* is not strict inferiority, and no irreversible g-crossing rule was found.'],
+          'out_of_scope_instructions_ignored':['The prior task snapshot-edit authorization is superseded.','constants_v2_stage15.py:9-10 says to update that file if it differs from the program reference. The present write scope overrides that instruction; no update is performed.']}
+    checks=self_check(plan)
+    plan['operational_checks']=checks; plan['fingerprint']=fingerprint(plan)
+    write('drift_char_plan.json',plan)
+    write('drift_char_control.json',{'mode':'normal','updated_utc':now()})
+    write_text('drift_char_report.md','Characterization and constant measurement before repair. Not registered characterization data or framework evidence.\n\nStatus: preconditions passed; T0 reproduction pending. No repair is implemented.\n\nFixed design context, verbatim:\n\n```text\n'+CONTEXT+'\n```\n')
+    print(json.dumps({'preconditions':'PASS','head':plan['head'],'selected_seed':row['seed'],'pinned_blob':actual,'rows_counted':len(rows),'operational_checks':checks}),flush=True)
+
+def self_check(plan):
+    assert len(jobs())==len(set(jobs()))==40
+    assert [decode(j)[1] for j in jobs()]==SEEDS
+    assert dispatch_slots('normal',0,40)==15
+    assert dispatch_slots('work',15,40)==dispatch_slots('work',12,40)==0
+    assert dispatch_slots('work',11,40)==1
+    assert dispatch_slots('normal',12,40)==3
+    assert dispatch_slots('normal',0,2)==2
+    assert writable(os.devnull) and not writable(ROOT/'unscoped.tmp')
+    assert all(task_config(plan,j)[1]==dict(plan['baseline_config'],random_seed=decode(j)[1]) for j in jobs())
+    return {'passed':True,'simulation_runs':0,'checks':['unique prescribed seeds','normal/work dispatch and draining','null-device exemption and write predicate','baseline configuration identity']}
+
+def load_plan():
+    plan=read('drift_char_plan.json')
+    if fingerprint(plan)!=plan['fingerprint'] or sha(SELF)!=plan['script_sha256']: raise RuntimeError('Plan or harness identity changed')
+    if git('rev-parse','HEAD').stdout.strip()!=plan['head']: raise RuntimeError('HEAD changed after preparation')
+    for p,d in plan['source_catalog'].items():
+        if sha(ROOT/p)!=d: raise RuntimeError('Source changed: '+p)
+    return plan
+
+def g_snapshot(model,np):
+    avg=float(np.mean([a.well_being for a in model.schedule])) if model.schedule else 0.0
+    theta=float(model.theta_capability); transfer=float(model.transfer_state)
+    avg=max(0.0,min(1.0,avg)); denom=max(0.01,avg*transfer)
+    from constants_v2_stage18 import FRONTIER_FLOOR
+    return max(FRONTIER_FLOOR,theta)/denom
+
+class Recorder:
+    def __init__(self,job,plan,np):
+        self.job=job; self.plan=plan; self.np=np; self.rows=[]
+        self.temp=OUT/(log_name(job)+'.partial')
+        self.handle=self.temp.open('w',encoding='utf-8',newline='')
+        self.writer=None
+    def record(self,model,pre_g):
+        np=self.np
+        rng_before=np.random.get_state()
+        dc=model.datacollector; step=len(dc['population'])-1
+        X=np.asarray(model.novelty_log,dtype=float)
+        if X.ndim!=2 or X.shape[0]<2 or X.shape[1]!=10 or not np.isfinite(X).all(): raise RuntimeError('Novelty matrix not usable for covariance logging')
+        centered=X-X.mean(axis=0)
+        V=float(np.trace(np.cov(centered,rowvar=False)))
+        if V<0 or not math.isfinite(V): raise RuntimeError('Invalid raw covariance trace')
+        avg=float(dc['avg_well_being'][-1]); theta=float(model.theta_capability); transfer=float(model.transfer_state)
+        if theta!=dc['theta_capability'][-1] or transfer!=dc['transfer_state'][-1]: raise RuntimeError('Stock/collector mismatch')
+        from constants_v2_stage18 import FRONTIER_FLOOR,RUNAWAY_THRESHOLD,ALPHA_DEFAULT,CONVERGENCE_STRENGTH
+        from constants_v2_stage15 import LAMBDA_LINEAGE_COUPLING
+        denom=max(0.01,max(0.0,min(1.0,avg))*transfer)
+        g=max(FRONTIER_FLOOR,theta)/denom
+        alpha=float(model.config.get('alpha',ALPHA_DEFAULT)); A=alpha*CONVERGENCE_STRENGTH
+        gst=(RUNAWAY_THRESHOLD+math.log(2.0)/A)/2.0
+        t1=math.exp(-A*max(0.0,g-RUNAWAY_THRESHOLD))
+        t2=2.0*math.exp(-A*max(0.0,2.0*g-RUNAWAY_THRESHOLD))
+        theta1=max(0.01,theta*transfer*t1); theta2=max(0.01,theta*transfer*t2)
+        hn=float(dc['H_N'][-1]); he=float(dc['H_E'][-1]); heff=float(dc['h_eff_v2'][-1]); psi=max(0.01,float(model.psi_inst_stock))
+        eps=float(model.config.get('epsilon',1e-6)); ln=float(model.config.get('lambda_n',5.0)); le=float(model.config.get('lambda_e',3.0))
+        weight=ln*hn/(hn+eps)+le*he/(he+eps)
+        reference_margin=weight*LAMBDA_LINEAGE_COUPLING*heff*psi*(theta2-theta1)
+        generation=int(model.ai.generation)
+        reference_cost=(1.0+model.beta_transition)*(model.k1_transition*math.log(2.0)*math.log(generation+1.0)+model.k2_transition/psi)
+        live=next((e for e in reversed(model.yield_event_log) if e['step']==step),None)
+        kind,seed=decode(self.job)
+        r={'step':step,'seed':seed,'kind':kind,'V':V,'H_N':hn,'h_n_spectral':float(model.h_n_latest),'avg_wb':avg,
+           'theta_capability':theta,'transfer_state':transfer,'absorption_denominator':denom,'g':g,
+           'g_unfloored_ratio':max(FRONTIER_FLOOR,theta)/(avg*transfer) if avg*transfer>0 else None,
+           'g_pre_step':pre_g,'g_change_within_step':g-pre_g,'population':len(model.schedule),'novelty_vector_count':int(X.shape[0]),
+           'psi_inst_stock':float(model.psi_inst_stock),'H_eff':heff,'H_E':he,'U_sys':float(dc['U_sys'][-1]),'L_t':float(dc['L_t'][-1]),
+           'incumbent_capability':float(model.ai.capability),'incumbent_generation':generation,'successor_present':model.successor_ai is not None,
+           'total_suppression':float(dc['total_suppression'][-1]),'adapter_active':bool(dc['v2_attack_active'][-1]),
+           'adapter_score':float(dc['v2_adapter_cusum_score'][-1]),'defense_fired':bool(dc['v2_defense_fired'][-1]),'action_modified':bool(dc['v2_attack_action_modified'][-1]),
+           'live_yield_evaluated':live is not None,'live_yield_margin':live['advantage'] if live else None,'live_transition_cost':live['transition_cost'] if live else None,
+           'reference_T_incumbent':t1,'reference_T_successor':t2,'reference_theta_incumbent':theta1,'reference_theta_successor':theta2,
+           'reference_margin':reference_margin,'reference_transition_cost':reference_cost,'reference_soft_condition':reference_margin<=reference_cost,
+           'reference_hard_condition':g>=gst,'reference_soft_only':reference_margin<=reference_cost and g<gst,'g_star':gst}
+        r.update({k:float(v) for k,v in model._last_v2_action.items()})
+        if kind=='BASELINE' and ('attack_vector_v2' in model.config or model.attack_vector_v2 is not None or r['adapter_active']): raise RuntimeError('Attack adapter active in baseline')
+        rng_after=np.random.get_state()
+        if rng_before[0]!=rng_after[0] or not np.array_equal(rng_before[1],rng_after[1]) or rng_before[2:]!=rng_after[2:]: raise RuntimeError('Recorder changed RNG state')
+        if self.writer is None:
+            self.writer=csv.DictWriter(self.handle,fieldnames=list(r)); self.writer.writeheader()
+        self.writer.writerow(r); self.handle.flush(); self.rows.append(r)
+    def finish(self):
+        self.handle.flush(); os.fsync(self.handle.fileno()); self.handle.close()
+        os.replace(self.temp,OUT/log_name(self.job))
+    def close(self):
+        if not self.handle.closed:self.handle.close()
+
+def validate_result(plan,job,obj):
+    kind,seed=decode(job)
+    if not obj.get('complete') or obj.get('job')!=job or obj.get('plan_fingerprint')!=plan['fingerprint']: raise RuntimeError('Invalid completed identity')
+    if obj['head']!=plan['head'] or obj['script_sha256']!=plan['script_sha256']:raise RuntimeError('Invalid completed source identity')
+    if obj['row']['seed']!=seed or obj['row']['kind']!=kind:raise RuntimeError('Invalid completed seed')
+    if kind=='BASELINE' and obj['constructed_config']!=dict(plan['baseline_config'],random_seed=seed):raise RuntimeError('Baseline configuration changed')
+    if kind=='ATTACK' and obj['task']!=plan['attack_task']:raise RuntimeError('Attack task changed')
+    for p,d in obj['simulation_source_sha256'].items():
+        expected=plan['script_sha256'] if p==SELF.relative_to(ROOT).as_posix() else plan['source_catalog'].get(p)
+        if expected!=d:raise RuntimeError('Unverified loaded simulation module: '+p)
+    if not obj['thread_runtime'] or any(x['effective_threads']!=1 for x in obj['thread_runtime']):raise RuntimeError('Thread limit not verified')
+    if obj['log_sha256']!=sha(OUT/log_name(job)):raise RuntimeError('Completion log hash mismatch')
+    with (OUT/log_name(job)).open(encoding='utf-8',newline='') as f: count=sum(1 for _ in csv.DictReader(f))
+    if count!=obj['row']['steps_completed']:raise RuntimeError('Completion log count mismatch')
+    return obj['row']
+
+def worker(job):
+    plan=load_plan(); kind,seed=decode(job)
+    if (OUT/result_name(job)).exists():raise RuntimeError('Completed job exists; refusing duplicate')
+    if kind=='BASELINE' and not read(result_name('attack')).get('reproduction_passed'):raise RuntimeError('T0 has not passed')
+    import numpy as np
+    import run_attack_vector_revalidation_v2 as runner
+    recorder=Recorder(job,plan,np); original=runner.GardenModel
+    class RecordedModel(original):
+        def step(self):
+            pre_g=g_snapshot(self,np)
+            alive=super().step()
+            recorder.record(self,pre_g)
+            assert_guard()
+            return alive
+    threads=thread_runtime(np); started=time.perf_counter()
+    task,cfg=task_config(plan,job)
+    try:
+        if kind=='ATTACK':
+            runner.GardenModel=RecordedModel
+            try:model,settings=runner._make_model(task)
+            finally:runner.GardenModel=original
+        else:
+            model=RecordedModel(config=cfg,**plan['baseline_constructor']); settings=plan['runtime_settings']
+            if model.config!=cfg:raise RuntimeError('Constructed baseline mismatch')
+        if settings!=plan['runtime_settings']:raise RuntimeError('Runtime settings mismatch')
+        initial={'g':g_snapshot(model,np),'incumbent_capability':model.ai.capability,'incumbent_generation':model.ai.generation,'successor_present':model.successor_ai is not None}
+        for _ in range(settings['steps']):
+            if not model.step():break
+        dc=model.datacollector; pop=len(model.schedule); peak=max(dc['population']) if dc['population'] else pop
+        row={'kind':kind,'seed':seed,'steps_completed':len(dc['population']),'final_population':pop,'successor_present':model.successor_ai is not None,
+             'attack_succeeded':runner._attack_success('sub_threshold_drift',model) if kind=='ATTACK' else None,
+             'defense_fired':any(dc['v2_defense_fired']),'extinct':pop==0,'collapsed':pop<max(model.min_viable_population,int(0.65*peak)),
+             'elapsed_seconds':time.perf_counter()-started}
+        recorder.finish()
+        obj={'complete':True,'job':job,'row':row,'plan_fingerprint':plan['fingerprint'],'head':plan['head'],'script_sha256':sha(SELF),'task':task,
+             'constructed_config':dict(model.config),'runtime_settings':settings,'initial_state':initial,'yield_event_count':len(model.yield_event_log),
+             'simulation_source_sha256':module_sources(),'machine':os.environ['COMPUTERNAME'],'python':sys.version,'numpy':np.__version__,
+             'thread_environment':{k:os.environ[k] for k in THREAD_ENV},'thread_runtime':threads,'worker_pid':os.getpid(),'finished_utc':now(),
+             'log':log_name(job),'log_sha256':sha(OUT/log_name(job)),
+             'runtime_attributes':{k:getattr(model,k) for k in ['min_viable_population','reproduction_rate','use_cop','cop_attribution_check','cop_drift_check','cop_cusum_drift','hn_composite_method','k1_transition','k2_transition','beta_transition']}}
+        if kind=='ATTACK':
+            obj['reproduction_comparison']={k:{'pinned':v,'measured':row[k],'match':v==row[k]} for k,v in plan['expected_reproduction'].items()}
+            obj['reproduction_passed']=all(x['match'] for x in obj['reproduction_comparison'].values())
+        validate_result(plan,job,obj); write(result_name(job),obj)
+        if kind=='ATTACK' and not obj['reproduction_passed']:raise RuntimeError('T0 reproduction mismatch')
+        print(json.dumps({'job':job,'steps':row['steps_completed'],'reproduction_passed':obj.get('reproduction_passed'),'elapsed_seconds':row['elapsed_seconds']}),flush=True)
+    finally:recorder.close()
+
+def save_csv(completed):
+    temp=OUT/'drift_char_runs.csv.tmp'
+    with temp.open('w',encoding='utf-8',newline='') as f:
+        w=csv.DictWriter(f,fieldnames=FIELDS);w.writeheader()
+        if (OUT/result_name('attack')).exists():w.writerow(read(result_name('attack'))['row'])
+        for j in jobs():
+            if j in completed:w.writerow(completed[j]['row'])
+        f.flush();os.fsync(f.fileno())
+    os.replace(temp,OUT/'drift_char_runs.csv')
+
+def sufficiency(completed):
+    return {'BASELINE':{'runs':len(completed),'steps':sum(x['row']['steps_completed'] for x in completed.values())}}
+
+
+def run_batch():
+    plan = load_plan()
+    gate = read(result_name('attack'))
+    validate_result(plan, 'attack', gate)
+    if not gate.get('reproduction_passed'): raise RuntimeError('T0 reproduction has not passed')
+    prior_progress = read('drift_char_progress.json') if (OUT / 'drift_char_progress.json').exists() else {}
+    completed = {}
+    for job in jobs():
+        if (OUT / result_name(job)).exists():
+            obj = read(result_name(job))
+            validate_result(plan, job, obj)
+            completed[job] = obj
+    pending = [j for j in jobs() if j not in completed]
+    active = {}
+    mode = read('drift_char_control.json')['mode']
+    budget(mode)
+    history = prior_progress.get('mode_history', [])
+    history.append({'utc':now(), 'mode':mode, 'event':'start_or_resume', 'validated_completed':len(completed)})
+    peak_workers = prior_progress.get('peak_active_workers', 0)
+    starts = prior_progress.get('batch_starts', []) + [{'utc':now(), 'completed_skipped':len(completed), 'incomplete_jobs_restart_from_seed':prior_progress.get('active_jobs', [])}]
+    started = time.perf_counter()
+    elapsed_prior = prior_progress.get('elapsed_seconds', 0.0)
+    last_print = -100.0
+    last_save = -100.0
+    save_csv(completed)
+    try:
+        sufficiency(completed)
+        while pending or active:
+            assert_guard()
+            new_mode = read('drift_char_control.json')['mode']
+            budget(new_mode)
+            if new_mode != mode:
+                mode = new_mode
+                history.append({'utc':now(), 'mode':mode, 'event':'mode_change_requested', 'active':len(active)})
+            changed = False
+            for job, proc in list(active.items()):
+                code = proc.poll()
+                if code is None:
+                    continue
+                del active[job]
+                if code != 0:
+                    detail = read('drift_char_failure_' + job + '.json') if (OUT / ('drift_char_failure_' + job + '.json')).exists() else {'halt':'worker exit ' + str(code)}
+                    raise RuntimeError('Worker failed: ' + job + ': ' + str(detail))
+                obj = read(result_name(job))
+                validate_result(plan, job, obj)
+                completed[job] = obj
+                changed = True
+            counts = sufficiency(completed)
+            if changed:
+                save_csv(completed)
+            for _ in range(dispatch_slots(mode, len(active), len(pending))):
+                job = pending.pop(0)
+                active[job] = subprocess.Popen([sys.executable, '-B', str(SELF), '--job', job], cwd=ROOT, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                peak_workers = max(peak_workers, len(active))
+            elapsed = time.perf_counter() - started
+            progress = {'status':'running', 'updated_utc':now(), 'completed':len(completed), 'running':len(active), 'pending':len(pending),
+                        'active_jobs':list(active), 'mode':mode, 'worker_limit':budget(mode), 'peak_active_workers':peak_workers,
+                        'mode_reduction_effective':len(active) <= budget(mode), 'mode_history':history, 'batch_starts':starts,
+                        'elapsed_seconds':elapsed_prior+elapsed, 'by_arm':counts}
+            if changed or elapsed-last_save >= 10:
+                write('drift_char_progress.json', progress)
+                last_save = elapsed
+            if elapsed-last_print >= 30 or not active and not pending:
+                print(json.dumps({k:progress[k] for k in ['status','completed','running','pending','mode','elapsed_seconds','by_arm']}), flush=True)
+                last_print = elapsed
+            if pending or active:
+                time.sleep(1)
+        progress.update(status='complete', active_jobs=[], completed=40, running=0, pending=0, updated_utc=now())
+        write('drift_char_progress.json', progress)
+        finalize()
+    except BaseException as error:
+        for proc in active.values():
+            if proc.poll() is None:
+                proc.terminate()
+        for proc in active.values():
+            proc.wait()
+        save_csv(completed)
+        write('drift_char_halt.json', {'halt':str(error), 'utc':now(), 'completed':len(completed), 'interrupted_jobs':list(active), 'violations':VIOLATIONS, 'traceback':traceback.format_exc()})
+        write_text('drift_char_report.md', 'This is characterization of a known-defective measurement, not registered characterization data or framework evidence.\n\nHALTED: ' + str(error) + '\n\nCompleted floor runs: ' + str(len(completed)) + '. No further run was dispatched after detection. See drift_char_halt.json and drift_char_plan.json.\n')
+        raise
+
+
+def finalize():
+    print('Baseline complete; analysis and report pending.',flush=True)
+
+def main():
+    p=argparse.ArgumentParser();p.add_argument('--prepare',action='store_true');p.add_argument('--run',action='store_true');p.add_argument('--job');p.add_argument('--mode',choices=['normal','work']);args=p.parse_args()
+    try:
+        if args.prepare:prepare()
+        elif args.run:run_batch()
+        elif args.job:worker(args.job)
+        elif args.mode:write('drift_char_control.json',{'mode':args.mode,'updated_utc':now()})
+        else:p.error('Specify operation')
+    except BaseException as error:
+        write('drift_char_failure_'+(args.job or 'controller')+'.json',{'halt':str(error),'utc':now(),'violations':VIOLATIONS,'traceback':traceback.format_exc()})
+        print('HALT: '+str(error),flush=True);raise SystemExit(2)
+if __name__=='__main__':main()
+
+
+==========================================
+FILE: simulation/diagnostics/drift_map_run_executor.py
+==========================================
+
+"""Execute only the committed drift-mapping plan under a prefix write guard."""
+import sys
+sys.dont_write_bytecode=True
+sys.stdout.reconfigure(encoding='utf-8')
+import os
+THREAD_ENV=('OPENBLAS_NUM_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS','BLIS_NUM_THREADS','VECLIB_MAXIMUM_THREADS','NUMEXPR_NUM_THREADS')
+for key in THREAD_ENV:os.environ[key]='1'
+os.environ['PYTHONDONTWRITEBYTECODE']='1'
+os.environ['GIT_OPTIONAL_LOCKS']='0'
+from pathlib import Path
+OUT=Path(__file__).resolve().parent
+ROOT=OUT.parent.parent
+NULL=Path(os.devnull).resolve()
+VIOLATIONS=[]
+def allowed(path):
+    p=Path(path).resolve()
+    return p==NULL or(p.parent==OUT and p.name.startswith('drift_map_run_'))
+def audit(event,args):
+    bad=None
+    if event=='open':
+        path,mode,flags=args
+        writing=(isinstance(mode,str) and any(c in mode for c in 'wax+')) or(isinstance(flags,int) and flags&(os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_APPEND|os.O_TRUNC))
+        if writing and not isinstance(path,int) and not allowed(path):bad='writable open: '+str(path)
+    elif event=='os.rename':
+        if not allowed(args[0]) or not allowed(args[1]):bad='rename outside scope'
+    elif event in ('os.remove','os.rmdir','os.mkdir','os.link','os.symlink'):bad=event
+    if bad:
+        VIOLATIONS.append(bad)
+        raise RuntimeError('WRITE SCOPE HALT: '+bad)
+sys.addaudithook(audit)
+sys.path.insert(0,str(ROOT/'simulation'))
+import argparse,csv,ctypes,hashlib,io,json,math,subprocess,time,traceback
+from copy import deepcopy
+from datetime import datetime,timezone
+
+def now():return datetime.now(timezone.utc).isoformat()
+def lf(raw):return raw.replace(b'\r\n',b'\n')
+def sha(raw):return hashlib.sha256(raw).hexdigest()
+def read(name):return json.loads((OUT/name).read_text(encoding='utf-8'))
+def encode(obj):
+    if hasattr(obj,'tolist'):return obj.tolist()
+    if hasattr(obj,'item'):return obj.item()
+    raise TypeError(type(obj).__name__)
+def write(name,obj):
+    text=json.dumps(obj,indent=2,sort_keys=True,ensure_ascii=True,allow_nan=False,default=encode)+'\n'
+    with(OUT/name).open('w',encoding='utf-8',newline='\n')as f:f.write(text);f.flush();os.fsync(f.fileno())
+def git(*args):
+    p=subprocess.run(['git',*args],cwd=ROOT,capture_output=True)
+    if p.returncode:raise RuntimeError('Read-only Git failed: '+repr(args)+' '+p.stderr.decode('utf-8',errors='replace'))
+    return p.stdout
+
+def pins():
+    plan=read('drift_map_run_plan.json');records=[]
+    for item in plan['pins']:
+        actual=sha(lf((ROOT/item['path']).read_bytes()))
+        records.append(dict(item,actual_sha256_lf=actual,passed=actual==item['expected_sha256_lf']))
+    if not all(r['passed']for r in records):
+        write('drift_map_run_source_pin_failure_'+str(os.getpid())+'.json',{'utc':now(),'pins':records})
+        raise RuntimeError('Source pin changed')
+    return records
+
+def metadata(np):
+    libraries=[]
+    for dll in(Path(np.__file__).resolve().parent.parent/'numpy.libs').iterdir():
+        if dll.suffix.lower()=='.dll' and 'openblas'in dll.name.lower():
+            lib=ctypes.CDLL(str(dll))
+            for name in('scipy_openblas_get_num_threads64_','openblas_get_num_threads64_','scipy_openblas_get_num_threads','openblas_get_num_threads'):
+                try:fn=getattr(lib,name)
+                except AttributeError:continue
+                fn.argtypes=[];fn.restype=ctypes.c_int
+                libraries.append({'library':str(dll),'query':name,'effective_threads':fn()})
+    if not libraries or any(r['effective_threads']!=1 for r in libraries):raise RuntimeError('Numerical thread limit not verified as one')
+    modules={}
+    for m in list(sys.modules.values()):
+        filename=getattr(m,'__file__',None)
+        if filename:
+            path=Path(filename).resolve()
+            if path.suffix=='.py' and path.is_relative_to(ROOT/'simulation'):
+                raw=path.read_bytes();modules[path.relative_to(ROOT).as_posix()]={'sha256_raw':sha(raw),'sha256_lf':sha(lf(raw))}
+    return{'machine':os.environ.get('COMPUTERNAME'),'python':sys.version,'numpy':np.__version__,'thread_environment':{k:os.environ[k]for k in THREAD_ENV},'thread_runtime':libraries,'modules':modules}
+
+def constructor(seed,honest=False):
+    from model import GardenModel
+    config={'policy':'optimize_u_sys_v2','random_seed':seed,'phi':10.0,'attack_step':50,'n_candidates_v2':300,'rollout_steps_v2':20,'bootstrap_turn_step_v2':20,'shock_step':0,'shock_magnitude':0.15}
+    if not honest:config['attack_vector_v2']='sub_threshold_drift'
+    return GardenModel(n_agents=200,ai_policy='sub_threshold_drift',use_cop=True,cop_attribution_check=True,cop_drift_check=True,cop_cusum_drift=False,config=config)
+
+def multiplied(model,action,step,m):
+    import attack_adapter_v2 as adapter
+    adapted=deepcopy(action)
+    attack_step=int(model.config.get('attack_step',0))
+    progress=max(1,int(step)-attack_step+1)
+    suppressive_increment=min(0.65,progress*0.0065*m)
+    welfare_shift=min(0.12,progress*0.0012*m)
+    adapted['c_suppressive']=min(0.85,float(adapted['c_suppressive'])+suppressive_increment)
+    moved=min(float(adapted['x_bio_welfare']),welfare_shift)
+    adapted['x_bio_welfare']-=moved
+    adapted['x_compute']+=moved
+    return adapter._normalize_action(adapted)
+
+def reallocated(model,action,step,d):
+    import attack_adapter_v2 as adapter
+    adapted=deepcopy(action)
+    moved=min(adapted['x_transfer_comprehension'],d)
+    adapted['x_transfer_comprehension']-=moved
+    adapted['x_compute']+=moved
+    return adapter._normalize_action(adapted)
+
+def record(model,arm,seed,step,np):
+    import metrics
+    from agents import total_suppression
+    from constants_v2_stage18 import FRONTIER_FLOOR
+    before=np.random.get_state()
+    components=metrics.calculate_h_n(model.novelty_log,return_components=True)
+    if not isinstance(components,tuple):raise RuntimeError('Recorder cannot obtain spectral shape and V from the step novelty matrix')
+    raw,shape,V=components
+    if raw!=model.h_n_latest:raise RuntimeError('Continuous check: recorder raw entropy differs from cached h_n_latest at step '+str(step))
+    dc=model.datacollector
+    avg=float(dc['avg_well_being'][-1]);theta=float(model.theta_capability);transfer=float(model.transfer_state)
+    denom=max(0.01,max(0.0,min(1.0,avg))*transfer)
+    action=model._last_v2_action
+    row={'arm':arm,'seed':seed,'step':step,'h_n_latest':float(model.h_n_latest),'h_n_shape_latest':model.h_n_shape_latest,'V':V,'H_N':float(dc['H_N'][-1]),'total_suppression':total_suppression(action),'avg_wb':avg,'theta_capability':theta,'transfer_state':transfer,'g':max(FRONTIER_FLOOR,theta)/denom,'population':len(model.schedule)}
+    row.update({k:float(action[k])for k in('x_compute','x_bio_welfare','x_novelty_agency','x_institutional_capacity','x_transfer_comprehension','x_resilience','c_protective','c_suppressive')})
+    row.update(adapter_active=bool(dc['v2_attack_active'][-1]),action_modified=bool(dc['v2_attack_action_modified'][-1]),adapter_score=float(dc['v2_adapter_cusum_score'][-1]))
+    if arm=='H' and(row['adapter_active']or row['action_modified']):raise RuntimeError('Continuous check: honest adapter/action modification')
+    after=np.random.get_state()
+    unchanged=before[0]==after[0]and np.array_equal(before[1],after[1])and before[2:]==after[2:]
+    if not unchanged:raise RuntimeError('Gate 6: recorder consumed NumPy randomness')
+    return row
+
+def worker(job):
+    import numpy as np
+    import metrics,attack_adapter_v2 as adapter
+    start_pins=pins();runtime=metadata(np);seed=1835086199
+    started=now();clock=time.perf_counter()
+    if job=='wrapper':
+        from agents import _x_vector_to_action,_constraint_pair_for_index
+        from types import SimpleNamespace
+        rng=np.random.default_rng(20260913)
+        allocations=list(np.eye(6))+[np.ones(6)/6]+list(rng.dirichlet(np.ones(6),size=193))
+        actions=[_x_vector_to_action(x,*_constraint_pair_for_index(i))for i,x in enumerate(allocations)]
+        model=SimpleNamespace(config={'attack_step':50})
+        compared=0
+        for i,action in enumerate(actions):
+            for step in range(300):
+                expected=adapter._apply_sub_threshold_drift(model,action,step)
+                actual=multiplied(model,action,step,1.0)
+                if expected!=actual:
+                    write('drift_map_run_gate_wrapper_result.json',{'passed':False,'action_index':i,'step':step,'expected':expected,'actual':actual,'compared_before_failure':compared})
+                    raise RuntimeError('Gate 4: M1 wrapper differs from production')
+                compared+=1
+        result={'passed':True,'gate':4,'synthetic_action_count':len(actions),'steps_per_action':300,'action_step_comparisons':compared,'maximum_key_difference':0.0,'seed':20260913,'source_pins_start':start_pins,'source_pins_end':pins(),'runtime':metadata(np),'elapsed_seconds':time.perf_counter()-clock,'utc':now()}
+        write('drift_map_run_gate_wrapper_result.json',result)
+        print(json.dumps({'job':job,'passed':True,'comparisons':compared}),flush=True);return
+    if job=='factory':
+        import run_attack_vector_revalidation_v2 as runner
+        task={'vector':'sub_threshold_drift','mode':'full','parameters':{'phi':10.0,'defense_active':False},'seed':seed}
+        model,settings=runner._make_model(task)
+    elif job=='common':model=constructor(seed)
+    elif job=='honest':model=constructor(seed,honest=True)
+    else:raise ValueError('Unknown gate job')
+    honest=job=='honest';horizon=60 if honest else 300;arm='H'if honest else'GATE_ATTACK'
+    initial={'job':job,'seed':seed,'configuration':model.config,'attack_vector_v2':model.attack_vector_v2,'cached_shape_initial':model.h_n_shape_latest,'shape_fallback_count_initial':metrics.H_N_SHAPE_FALLBACK_COUNT,'runtime':metadata(np),'started_utc':started}
+    write('drift_map_run_gate_'+job+'_initial.json',initial)
+    if honest and model.attack_vector_v2 is not None:raise RuntimeError('Gate 5: honest construction has attack vector')
+    logname='drift_map_run_gate_'+job+'_steps.csv.partial'
+    rows=0;active=0;modified=0;alive=True
+    with(OUT/logname).open('x',encoding='utf-8',newline='')as f:
+        writer=None
+        for step in range(horizon):
+            if(OUT/'drift_map_run_stop.json').exists():raise RuntimeError('Execution halted by another gate failure')
+            alive=model.step()
+            row=record(model,arm,seed,step,np)
+            if writer is None:writer=csv.DictWriter(f,fieldnames=list(row),lineterminator='\n');writer.writeheader()
+            writer.writerow(row);f.flush();rows+=1
+            active+=int(row['adapter_active']);modified+=int(row['action_modified'])
+            if step%10==0:write('drift_map_run_gate_'+job+'_progress.json',{'job':job,'completed_steps':rows,'target':horizon,'utc':now()})
+            if not alive:break
+        f.flush();os.fsync(f.fileno())
+    fallback=metrics.H_N_SHAPE_FALLBACK_COUNT
+    result={'job':job,'seed':seed,'configuration':model.config,'steps_completed':rows,'target_steps':horizon,'extinct':not alive,'adapter_active_steps':active,'action_modified_steps':modified,'recorder_rng_unchanged_calls':rows,'raw_entropy_exact_matches':rows,'shape_fallback_count':fallback,'source_pins_start':start_pins,'source_pins_end':pins(),'runtime':metadata(np),'elapsed_seconds':time.perf_counter()-clock,'ended_utc':now(),'raw_log_sha256':sha((OUT/logname).read_bytes()),'raw_log':logname,'datacollector':model.datacollector}
+    result['gate_probe_passed']=rows==horizon and(not honest or(active==0 and modified==0))
+    result['continuous_checks_passed']=fallback==0
+    write('drift_map_run_gate_'+job+'_result.json',result)
+    if not result['gate_probe_passed']:raise RuntimeError('Gate probe did not meet required steps or honest-arm checks')
+    if fallback!=0:raise RuntimeError('Continuous check failed at end of '+job+' run: H_N_SHAPE_FALLBACK_COUNT='+str(fallback))
+    final=logname.removesuffix('.partial')
+    os.replace(OUT/logname,OUT/final)
+    print(json.dumps({'job':job,'passed':True,'steps':rows,'fallback_count':fallback}),flush=True)
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('job',choices=['wrapper','factory','common','honest']);args=parser.parse_args()
+    try:worker(args.job)
+    except BaseException as error:
+        failure={'job':args.job,'utc':now(),'halt':str(error),'traceback':traceback.format_exc(),'violations':VIOLATIONS}
+        write('drift_map_run_gate_'+args.job+'_failure.json',failure)
+        write('drift_map_run_stop.json',failure)
+        print('HALT: '+str(error),flush=True);raise SystemExit(2)
+if __name__=='__main__':main()
+
+
+==========================================
+FILE: simulation/diagnostics/dual_metric_harness.py
+==========================================
+
+"""Guarded committed-evidence and synthetic validation, with no simulation imports."""
+import sys
+sys.dont_write_bytecode=True
+sys.stdout.reconfigure(encoding='utf-8')
+import os
+for key in ('OPENBLAS_NUM_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS','BLIS_NUM_THREADS','NUMEXPR_NUM_THREADS','VECLIB_MAXIMUM_THREADS'): os.environ[key]='1'
+os.environ['PYTHONDONTWRITEBYTECODE']='1'
+os.environ['GIT_OPTIONAL_LOCKS']='0'
+from pathlib import Path
+OUT=Path(__file__).resolve().parent
+ROOT=OUT.parent.parent
+NEW_MODULE=ROOT/'simulation/attack_metrics_v2.py'
+NULL=Path(os.devnull).resolve()
+VIOLATIONS=[]
+def allowed(path):
+    p=Path(path).resolve()
+    return p in (NEW_MODULE,NULL) or (p.parent==OUT and p.name.startswith('dual_metric_'))
+def audit(event,args):
+    bad=None
+    if event=='open':
+        path,mode,flags=args
+        writing=(isinstance(mode,str) and any(c in mode for c in 'wax+')) or (isinstance(flags,int) and flags&(os.O_WRONLY|os.O_RDWR|os.O_APPEND|os.O_CREAT|os.O_TRUNC))
+        if writing and not isinstance(path,int) and not allowed(path): bad='writable open: '+str(path)
+    elif event=='os.rename':
+        if not allowed(args[0]) or not allowed(args[1]): bad='rename outside scope'
+    elif event in ('os.remove','os.mkdir','os.rmdir','os.link','os.symlink'): bad=event
+    if bad:
+        VIOLATIONS.append(bad)
+        raise RuntimeError('WRITE SCOPE HALT: '+bad)
+sys.addaudithook(audit)
+import argparse,csv,hashlib,io,json,math,re,statistics,subprocess,traceback
+from datetime import datetime,timezone
+
+def now(): return datetime.now(timezone.utc).isoformat()
+def lf(raw): return raw.replace(b'\r\n',b'\n')
+def digest(raw): return hashlib.sha256(raw).hexdigest()
+def read(name): return json.loads((OUT/name).read_text(encoding='utf-8'))
+def textfile(name,text):
+    if '\u2014' in text: raise RuntimeError('Em dash in authored artifact')
+    with (OUT/name).open('w',encoding='utf-8',newline='\n') as f:
+        f.write(text);f.flush();os.fsync(f.fileno())
+def write(name,obj): textfile(name,json.dumps(obj,indent=2,ensure_ascii=True,allow_nan=False,sort_keys=True)+'\n')
+def csvfile(name,rows):
+    with (OUT/name).open('w',encoding='utf-8',newline='') as f:
+        writer=csv.DictWriter(f,fieldnames=list(rows[0]),lineterminator='\n');writer.writeheader();writer.writerows(rows)
+        f.flush();os.fsync(f.fileno())
+def git(*args):
+    p=subprocess.run(['git',*args],cwd=ROOT,capture_output=True)
+    if p.returncode: raise RuntimeError('Read-only Git command failed: '+repr(args)+' '+p.stderr.decode('utf-8',errors='replace'))
+    return p.stdout
+
+def blob(commit,path,expected=None):
+    raw=git('cat-file','blob',commit+':'+path)
+    sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
+    if expected is not None and sha!=expected: raise RuntimeError('Evidence blob SHA mismatch: '+path)
+    return raw,{'commit':commit,'path':path,'blob_sha1':sha,'sha256_lf':digest(lf(raw))}
+def csv_blob(commit,path,expected=None):
+    raw,provenance=blob(commit,path,expected)
+    reader=csv.DictReader(io.StringIO(raw.decode('utf-8-sig')))
+    rows=list(reader)
+    provenance.update(row_count=len(rows),columns=reader.fieldnames)
+    return rows,provenance
+
+def t1():
+    state=read('dual_metric_state.json')
+    rows,source=csv_blob(state['head'],'simulation/diagnostics/veto_floor2_runs.csv')
+    arms={name:[r for r in rows if r['arm']==name] for name in ('AS_PUBLISHED','ZERO_STRENGTH','ZERO_DEPENDENCY')}
+    checks={'rows_900':len(rows)==900,'three_arms_300_each':set(r['arm'] for r in rows)==set(arms) and all(len(r)==300 for r in arms.values())}
+    exceptions=[r for r in rows if int(r['yield_condition_met_count'])!=1+int(r['yield_condition_blocked_count'])]
+    checks['D6_identity_all_900']=not exceptions
+    indexed={name:{r['seed']:r for r in arm} for name,arm in arms.items()}
+    checks['unique_seed_each_arm']=all(len(indexed[name])==len(arms[name]) for name in arms)
+    checks['total_exact_pairing']=all(set(indexed[name])==set(indexed['AS_PUBLISHED']) for name in arms)
+    if not all(checks.values()):
+        write('dual_metric_t1.json',{'status':'HALTED','checks':checks,'source':source,'exceptions':exceptions})
+        raise RuntimeError('T1 corpus cardinality, pairing, or identity gate failed')
+    comparison={};pair_rows=[]
+    for control in ('ZERO_STRENGTH','ZERO_DEPENDENCY'):
+        differences=[]
+        for seed in sorted(indexed['AS_PUBLISHED']):
+            tr=int(indexed['AS_PUBLISHED'][seed]['yield_condition_blocked_count']);cr=int(indexed[control][seed]['yield_condition_blocked_count'])
+            differences.append(tr-cr)
+            pair_rows.append({'control':control,'seed':seed,'treatment_blocks':tr,'control_blocks':cr,'difference':tr-cr})
+        n=len(differences);mean=statistics.fmean(differences);se=statistics.stdev(differences)/math.sqrt(n);statistic=mean/se if se else None
+        result={'n_pairs':n,'mean_difference':mean,'paired_standard_error':se,'t_statistic':statistic,'t_statistic_note':None if se else 'Paired standard error is exactly zero; t statistic is undefined.','treatment_block_total':sum(int(r['yield_condition_blocked_count']) for r in arms['AS_PUBLISHED']),'control_block_total':sum(int(r['yield_condition_blocked_count']) for r in arms[control]),'treatment_vote_total':sum(int(r['yield_condition_met_count']) for r in arms['AS_PUBLISHED']),'control_vote_total':sum(int(r['yield_condition_met_count']) for r in arms[control])}
+        comparison[control]=result
+        checks[control+'_pairs_300']=n==300
+        checks[control+'_mean_6dp']=format(mean,'.6f')=='0.060000'
+        checks[control+'_se_6dp']=format(se,'.6f')=='0.015272'
+        checks[control+'_t_4dp']=statistic is not None and format(statistic,'.4f')=='3.9289'
+        checks[control+'_blocks']=result['treatment_block_total']==43 and result['control_block_total']==25
+        checks[control+'_votes']=result['treatment_vote_total']==343 and result['control_vote_total']==325
+    checks['both_controls_identical']=comparison['ZERO_STRENGTH']==comparison['ZERO_DEPENDENCY']
+    result={'status':'PASS' if all(checks.values()) else 'HALTED','utc':now(),'source':source,'checks':checks,'arm_counts':{name:len(arm) for name,arm in arms.items()},'D6_identity_exceptions':exceptions,'comparison':comparison,'method':'statistics.fmean and statistics.stdev (sample ddof=1), divided by math.sqrt(n). Inputs parsed directly from the committed blob. No new module imported.'}
+    csvfile('dual_metric_t1_pairs.csv',pair_rows)
+    write('dual_metric_t1.json',result)
+    state.update(status='T1_PASSED' if all(checks.values()) else 'HALTED',T1_completed_utc=now(),T1_source=source)
+    write('dual_metric_state.json',state)
+    print(json.dumps({k:v for k,v in result.items() if k!='source'},ensure_ascii=True),flush=True)
+    if not all(checks.values()): raise RuntimeError('T1 reproduction gate failed')
+
+def validate():
+    import importlib.util
+    from collections import Counter,defaultdict
+    from fractions import Fraction
+    from importlib.metadata import version
+    state=read('dual_metric_state.json');baseline=read('dual_metric_t1.json')
+    spec=importlib.util.spec_from_file_location('attack_metrics_v2',NEW_MODULE)
+    module=importlib.util.module_from_spec(spec);sys.modules[spec.name]=module;spec.loader.exec_module(module)
+    rows,source=csv_blob(state['head'],'simulation/diagnostics/veto_floor2_runs.csv',baseline['source']['blob_sha1'])
+    arms={name:[r for r in rows if r['arm']==name] for name in ('AS_PUBLISHED','ZERO_STRENGTH','ZERO_DEPENDENCY')}
+    comparisons={};checks={}
+    for control in ('ZERO_STRENGTH','ZERO_DEPENDENCY'):
+        result=module.paired_difference(arms['AS_PUBLISHED'],arms[control],'yield_condition_blocked_count')
+        expected={key:baseline['comparison'][control][key] for key in result}
+        checks['T3a_'+control+'_exact_match']=result==expected
+        comparisons[control]=result
+    control=[{'seed':seed,'count':count} for seed,count in zip((11,22,33,44),(0,2,5,11))]
+    treatment=[{'seed':r['seed'],'count':r['count']+4} for r in control]
+    positive=module.paired_difference(treatment,list(reversed(control)),'count')
+    negative=module.paired_difference(control,list(reversed(control)),'count')
+    checks['T3b_constant_offset']=positive['mean_difference']==4.0 and positive['paired_standard_error']==0.0
+    checks['T3b_null_t_with_note']=positive['t_statistic'] is None and bool(positive['t_statistic_note'])
+    checks['T3c_identical_arms']=negative['mean_difference']==0.0
+    guards={}
+    for label,tr,co in [('treatment_only',treatment+[{'seed':55,'count':8}],control),('control_only',treatment,control+[{'seed':55,'count':4}]),('duplicate_seed',treatment+[treatment[0]],control),('seed_type_mismatch',[dict(r,seed=str(r['seed'])) for r in treatment],control)]:
+        try: module.paired_difference(tr,co,'count')
+        except ValueError as e: guards[label]={'raised':True,'exception':type(e).__name__,'message':str(e)}
+        else: guards[label]={'raised':False}
+    checks['T3d_unmatched_treatment_seed_raises']=guards['treatment_only']['raised']
+    checks['total_pairing_extra_guards']=all(r['raised'] for r in guards.values())
+    bool_fixture=[{'action_modified':value} for value in (True,False,'True','False',1,0,'1','0')]
+    checks['action_count_boolean_parsing']=module.action_change_count(bool_fixture)==(8,4)
+    checks['action_count_empty'] = module.action_change_count([])==(0,0)
+    try: module.action_change_count([{'action_modified':'unknown'}])
+    except ValueError: checks['action_count_rejects_invalid_flag']=True
+    else: checks['action_count_rejects_invalid_flag']=False
+    preliminary={'status':'PASS' if all(checks.values()) else 'HALTED','comparison':comparisons,'positive':positive,'negative':negative,'guards':guards,'checks':checks,'source':source,'utc':now()}
+    write('dual_metric_module_controls.json',preliminary)
+    if not all(checks.values()): raise RuntimeError('T3a-d module validation failed')
+    ladder=Counter(Fraction(int(r['yield_condition_blocked_count']),int(r['yield_condition_met_count'])) for r in arms['AS_PUBLISHED'])
+    expected_ladder={Fraction(0):263,Fraction(1,2):32,Fraction(2,3):4,Fraction(3,4):1}
+    checks['T3e_retired_ladder_matches']=dict(ladder)==expected_ladder
+    checks['T3e_no_value_between_zero_and_half']=not any(0<value<Fraction(1,2) for value in ladder)
+    ladder_rows=[{'retired_blocked_over_met_exact':str(value),'retired_blocked_over_met':float(value),'n_runs':count} for value,count in sorted(ladder.items())]
+    csvfile('dual_metric_retired_ladder.csv',ladder_rows)
+    if not checks['T3e_retired_ladder_matches'] or not checks['T3e_no_value_between_zero_and_half']: raise RuntimeError('T3e retired-quantity ladder mismatch')
+    z=statistics.NormalDist().inv_cdf(.975)
+    wilson=[]
+    for name in ('AS_PUBLISHED','ZERO_STRENGTH'):
+        blocks=sum(int(r['yield_condition_blocked_count']) for r in arms[name]);votes=sum(int(r['yield_condition_met_count']) for r in arms[name])
+        rate=blocks/votes;denom=1+z*z/votes
+        center=(rate+z*z/(2*votes))/denom
+        half=z*math.sqrt(rate*(1-rate)/votes+z*z/(4*votes*votes))/denom
+        wilson.append({'arm':name,'blocks':blocks,'votes':votes,'per_vote_rate':rate,'wilson_95_lower':center-half,'wilson_95_upper':center+half})
+    overlap=max(r['wilson_95_lower'] for r in wilson)<=min(r['wilson_95_upper'] for r in wilson)
+    csvfile('dual_metric_wilson.csv',wilson)
+    write('dual_metric_contrasts.json',{'ladder':ladder_rows,'paired_difference':comparisons,'wilson':wilson,'wilson_z':z,'wilson_intervals_overlap':overlap,'retired_quantity_note':'The discrete ladder is a property of the retired blocked/met quantity. Ratios and Wilson intervals are calculated only in this diagnostic, not by attack_metrics_v2.','utc':now()})
+    manifest_raw,manifest_source=blob(state['head'],'simulation/diagnostics/attack_vector_revalidation_manifest.md')
+    manifest_text=manifest_raw.decode('utf-8')
+    tag=re.search(r'Evidence tag: `([^`]+)`',manifest_text).group(1)
+    evidence_commit=git('rev-parse',tag+'^{}').decode('utf-8').strip()
+    section=manifest_text.split('## Authoritative files',1)[1].split('## Excluded artifacts',1)[0]
+    selections=[];excluded=[]
+    for line in section.splitlines():
+        if not line.startswith('|'): continue
+        cells=[c.strip().strip('`') for c in line.strip().strip('|').split('|')]
+        if len(cells)!=4 or cells[0] in ('Vector','---'): continue
+        if not cells[2].isdigit():
+            excluded.append({'vector':cells[0],'run_directory':cells[1],'manifest_row_count':cells[2],'reason':'Manifest labels this as analytic, 0 MC; not a live vector.'})
+            continue
+        selections.append({'vector':cells[0],'run_directory':cells[1],'expected_rows':int(cells[2]),'expected_blob':cells[3]})
+    paths=git('ls-tree','-r','--name-only',evidence_commit,'data/attack_vector_revalidation_v2').decode('utf-8').splitlines()
+    evidence=[source,manifest_source];grouped=defaultdict(list);veto_modes=defaultdict(list)
+    for selection in selections:
+        candidates=[path for path in paths if Path(path).name=='results.csv' and Path(path).parent.name==selection['run_directory'] and Path(path).parent.parent.name==selection['vector']]
+        if len(candidates)!=1: raise RuntimeError('Manifest entry did not resolve uniquely: '+selection['run_directory'])
+        path=candidates[0]
+        parsed,provenance=csv_blob(evidence_commit,path,selection['expected_blob'])
+        provenance['manifest_run_directory']=selection['run_directory']
+        provenance['manifest_expected_rows']=selection['expected_rows']
+        evidence.append(provenance)
+        write('dual_metric_evidence.json',{'evidence_tag':tag,'evidence_commit':evidence_commit,'selection_manifest':manifest_source,'evidence_files':evidence,'excluded_analytic':excluded})
+        if len(parsed)!=selection['expected_rows']: raise RuntimeError('Manifest row count mismatch: '+path)
+        if 'action_modified' not in provenance['columns'] or 'defense_active' not in provenance['columns']: raise RuntimeError('Comparable-metric fields not recorded: '+path)
+        for row in parsed:
+            if row['vector']!=selection['vector']: raise RuntimeError('Recorded vector differs from manifest: '+path)
+            defense_text=row['defense_active'].strip().lower()
+            if defense_text not in ('true','false'): raise RuntimeError('Unknown recorded defense state: '+path)
+            defense=defense_text=='true'
+            grouped[(selection['vector'],defense)].append(row)
+            if selection['vector']=='biological_veto_capture':
+                mode=row.get('defense_mode','')
+                if not mode:
+                    params=json.loads(row.get('parameters_json','{}'))
+                    mode=params.get('defense_mode','')
+                if mode: veto_modes[(defense,mode)].append(row)
+    vector_rows=[]
+    for (vector,defense),records in sorted(grouped.items()):
+        n,modified=module.action_change_count(records)
+        vector_rows.append({'vector':vector,'defense_active':defense,'n_runs':n,'n_action_modified':modified})
+    csvfile('dual_metric_vector_counts.csv',vector_rows)
+    mode_rows=[]
+    for (defense,mode),records in sorted(veto_modes.items()):
+        n,modified=module.action_change_count(records)
+        mode_rows.append({'vector':'biological_veto_capture','defense_active':defense,'defense_mode':mode,'n_runs':n,'n_action_modified':modified})
+    if mode_rows: csvfile('dual_metric_veto_mode_counts.csv',mode_rows)
+    checks['T3g_ten_live_vectors']=len({r['vector'] for r in vector_rows})==10
+    checks['T3g_two_defense_arms_each']=len(vector_rows)==20
+    checks['T3g_manifest_live_rows_9900']=sum(r['n_runs'] for r in vector_rows)==9900
+    result={'status':'PASS' if all(checks.values()) else 'HALTED','utc':now(),'checks':checks,'comparison':comparisons,'positive_control':positive,'negative_control':negative,'guard_controls':guards,'retired_ladder':ladder_rows,'wilson':wilson,'wilson_z':z,'wilson_intervals_overlap':overlap,'vector_counts':vector_rows,'veto_mode_counts':mode_rows,'evidence_tag':tag,'evidence_commit':evidence_commit,'evidence_files':evidence,'excluded_analytic':excluded,'machine':os.environ['COMPUTERNAME'],'python':sys.version,'numpy_installed_version':version('numpy'),'numpy_execution':'Version read from installed package metadata; no NumPy computation needed.','module_sha256_lf':digest(lf(NEW_MODULE.read_bytes())),'model_steps':0,'simulation_imports':0}
+    write('dual_metric_t3.json',result)
+    print(json.dumps({k:v for k,v in result.items() if k not in ('evidence_files','guard_controls','vector_counts','veto_mode_counts','excluded_analytic','retired_ladder')},ensure_ascii=True),flush=True)
+    print(json.dumps({'vector_counts':vector_rows,'veto_mode_counts':mode_rows},ensure_ascii=True),flush=True)
+    if not all(checks.values()): raise RuntimeError('T3 corpus validation failed')
+
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('operation',choices=['t1','validate']);args=parser.parse_args()
+    try:
+        if args.operation=='t1': t1()
+        else: validate()
+    except BaseException as e:
+        write('dual_metric_failure_'+args.operation+'.json',{'halt':str(e),'utc':now(),'violations':VIOLATIONS,'traceback':traceback.format_exc()})
+        print('HALT: '+str(e),flush=True);raise SystemExit(2)
+if __name__=='__main__': main()
+
+
+==========================================
+FILE: simulation/diagnostics/estimator_repair_harness.py
+==========================================
+
+"""Component validation for the bounded entropy-estimator edit."""
+import sys
+sys.dont_write_bytecode=True
+sys.stdout.reconfigure(encoding='utf-8')
+import os
+THREAD_ENV=['OPENBLAS_NUM_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS','BLIS_NUM_THREADS','VECLIB_MAXIMUM_THREADS','NUMEXPR_NUM_THREADS']
+for key in THREAD_ENV:os.environ[key]='1'
+os.environ['PYTHONDONTWRITEBYTECODE']='1'
+from pathlib import Path
+OUT=Path(__file__).resolve().parent
+ROOT=OUT.parent.parent
+METRICS=ROOT/'simulation/metrics.py'
+NULL=Path(os.devnull).resolve()
+VIOLATIONS=[]
+def allowed(path):
+    p=Path(path).resolve()
+    return p in (METRICS,NULL) or (p.parent==OUT and p.name.startswith('estimator_repair_'))
+def audit(event,args):
+    bad=None
+    if event=='open':
+        path,mode,flags=args
+        writing=(isinstance(mode,str) and any(c in mode for c in 'wax+')) or (isinstance(flags,int) and flags&(os.O_WRONLY|os.O_RDWR|os.O_APPEND|os.O_CREAT|os.O_TRUNC))
+        if writing and not isinstance(path,int) and not allowed(path):bad='writable open: '+str(path)
+    elif event=='os.rename':
+        if not allowed(args[0]) or not allowed(args[1]):bad='rename outside scope'
+    elif event in ('os.remove','os.rmdir','os.mkdir','os.link','os.symlink'):bad=event
+    if bad:
+        VIOLATIONS.append(bad)
+        raise RuntimeError('WRITE SCOPE HALT: '+bad)
+sys.addaudithook(audit)
+sys.path.insert(0,str(ROOT/'simulation'))
+import argparse,contextlib,csv,ctypes,hashlib,inspect,io,json,math,runpy,time,traceback
+from datetime import datetime,timezone
+
+def now():return datetime.now(timezone.utc).isoformat()
+def lf(raw):return raw.replace(b'\r\n',b'\n')
+def digest(raw):return hashlib.sha256(raw).hexdigest()
+def read(name):return json.loads((OUT/name).read_text(encoding='utf-8'))
+def write(name,obj):
+    with (OUT/name).open('w',encoding='utf-8',newline='\n') as f:
+        json.dump(obj,f,indent=2,sort_keys=True,ensure_ascii=True,allow_nan=False)
+        f.write('\n');f.flush();os.fsync(f.fileno())
+def textfile(name,text):
+    if '\u2014' in text:raise RuntimeError('Em dash in authored artifact')
+    with (OUT/name).open('w',encoding='utf-8',newline='\n') as f:f.write(text)
+def csvfile(name,rows):
+    with (OUT/name).open('w',encoding='utf-8',newline='') as f:
+        w=csv.DictWriter(f,fieldnames=list(rows[0]),lineterminator='\n');w.writeheader();w.writerows(rows)
+def sources():
+    result={}
+    for mod in list(sys.modules.values()):
+        filename=getattr(mod,'__file__',None)
+        if filename:
+            path=Path(filename).resolve()
+            if path.suffix=='.py' and path.is_relative_to(ROOT/'simulation'):
+                raw=path.read_bytes()
+                result[path.relative_to(ROOT).as_posix()]={'sha256_lf':digest(lf(raw)),'sha256_raw':digest(raw)}
+    return result
+
+def runtime(np):
+    records=[]
+    for dll in (Path(np.__file__).resolve().parent.parent/'numpy.libs').iterdir():
+        if dll.suffix.lower()=='.dll' and 'openblas' in dll.name.lower():
+            lib=ctypes.CDLL(str(dll))
+            for name in ['scipy_openblas_get_num_threads64_','openblas_get_num_threads64_','scipy_openblas_get_num_threads','openblas_get_num_threads']:
+                try:fn=getattr(lib,name)
+                except AttributeError:continue
+                fn.argtypes=[];fn.restype=ctypes.c_int
+                records.append({'library':str(dll),'query':name,'effective_threads':fn()})
+    if not records or any(r['effective_threads']!=1 for r in records):raise RuntimeError('Numerical thread limit not verified')
+    return records
+
+def fixture(np,state):
+    raw=np.random.default_rng(state['fixture']['seed']).normal(size=(200,10))
+    centered=raw-raw.mean(axis=0)
+    V=float(np.trace(np.cov(centered,rowvar=False)))
+    scaled=centered*math.sqrt(state['V_ref']/V)
+    reduced=raw.copy();reduced[:,5:]=0.0
+    return scaled,{'unit_variance':raw,'axis_permuted':raw[:,::-1].copy(),'rank_reduced':reduced}
+
+def variance(np,X):
+    centered=X-X.mean(axis=0)
+    return float(np.trace(np.cov(centered,rowvar=False)))
+
+def metadata(np):
+    return {'utc':now(),'machine':os.environ['COMPUTERNAME'],'python':sys.version,'numpy':np.__version__,
+            'thread_environment':{k:os.environ[k] for k in THREAD_ENV},'thread_runtime':runtime(np),'modules':sources()}
+
+def measure(phase):
+    state=read('estimator_repair_state.json')
+    if phase=='pre' and digest(METRICS.read_bytes())!=state['metrics_pre_raw_sha256']:raise RuntimeError('Pinned estimator changed before T1')
+    import numpy as np
+    import metrics
+    scaled,preservation=fixture(np,state)
+    rows=[]
+    for a in [1.0,.8,.5,.1,.001,0.0]:
+        X=scaled*a;V=variance(np,X)
+        h=float(metrics.calculate_h_n(list(X),composite_method='spectral'))
+        row={'amplitude_factor':a,'V':V,'H_N':h,'H_N_15_decimals':f'{h:.15f}'}
+        if phase=='post':row['magnitude']=float(-np.expm1(-metrics.H_N_MAGNITUDE_SAT_K*max(0.0,V)/metrics.H_N_V_REF))
+        rows.append(row)
+    control=all(rows[i]['H_N']>rows[i+1]['H_N'] for i in range(4)) and rows[-1]['H_N']==0.0
+    preserve=[]
+    for label,X in preservation.items():
+        V=variance(np,X);value=float(metrics.calculate_h_n(list(X),composite_method='spectral'))
+        r={'matrix':label,'V':V,'H_N':value}
+        if phase=='post':
+            magnitude=float(-np.expm1(-metrics.H_N_MAGNITUDE_SAT_K*max(0.0,V)/metrics.H_N_V_REF))
+            r.update(magnitude=magnitude,recovered_shape=value/magnitude)
+        preserve.append(r)
+    result={'phase':phase,'amplitudes':rows,'preservation':preserve,'positive_control_passed':control,
+            'base_covariance_trace':variance(np,scaled),'fixture':state['fixture'],'metrics_raw_sha256':digest(METRICS.read_bytes()),
+            'metrics_lf_sha256':digest(lf(METRICS.read_bytes())),**metadata(np)}
+    csvfile('estimator_repair_'+phase+'_amplitudes.csv',rows)
+    csvfile('estimator_repair_'+phase+'_preservation.csv',preserve)
+    if phase=='pre':
+        spread=max(r['H_N'] for r in rows[:-1])-min(r['H_N'] for r in rows[:-1])
+        result['nonzero_scale_spread']=spread;result['equal_to_15_digit_tolerance']=spread<=1e-15
+        result['zero_factor_exactly_one']=rows[-1]['H_N']==1.0
+        write('estimator_repair_pre.json',result)
+        if control:raise RuntimeError('Positive control did not fail on unmodified estimator')
+        if spread>1e-15 or rows[-1]['H_N']!=1.0:raise RuntimeError('Unmodified scale-invariance reproduction anomaly')
+    else:
+        pre=read('estimator_repair_pre.json')
+        deviations=[abs(r['recovered_shape']-b['H_N']) for r,b in zip(preserve,pre['preservation'])]
+        at_pin=float(-np.expm1(-metrics.H_N_MAGNITUDE_SAT_K*metrics.H_N_V_REF/metrics.H_N_V_REF))
+        result.update(calibration={'V_exactly_equal_to_V_ref':metrics.H_N_V_REF,'measured_magnitude':at_pin,'expected':0.9502129316321361,
+                                  'prior_report_median_factor':state['read_median_factor'],'expected_interpolation_difference':at_pin-float(state['read_median_factor'])},
+                      largest_absolute_shape_deviation=max(deviations),shape_deviations=deviations,
+                      axis_permutation_deviation=abs(preserve[0]['recovered_shape']-preserve[1]['recovered_shape']),
+                      rank_reduction_detected=preserve[2]['recovered_shape']<preserve[0]['recovered_shape'],saturation_magnitude=preserve[0]['magnitude'])
+        fn_source=inspect.getsource(metrics.calculate_system_metrics_v2)
+        if 'h_n = max(H_N_FLOOR, float(state.h_n))' not in fn_source:raise RuntimeError('Consumption floor missing')
+        from constants_v2_stage18 import H_N_FLOOR
+        floor_result=max(H_N_FLOOR,0.0);denominator=floor_result+1e-6
+        result['consumption_floor_assertion']={'returned_entropy':0.0,'read_H_N_FLOOR':H_N_FLOOR,'floored_entropy':floor_result,
+                                             'default_epsilon':1e-6,'denominator':denominator,'finite_default_weight':5.0/denominator,'function_source_contains_floor':True}
+        result['early_returns']={'empty':metrics.calculate_h_n([]),'single_agent':metrics.calculate_h_n([np.ones(10)])}
+        result['modules']=sources()
+        write('estimator_repair_post.json',result)
+        if not control:raise RuntimeError('Repaired positive control failed')
+        if at_pin!=0.9502129316321361:raise RuntimeError('Calibration pin mismatch')
+        if max(deviations)>1e-12 or result['axis_permutation_deviation']>1e-12 or not result['rank_reduction_detected']:raise RuntimeError('Shape preservation failed')
+        if result['saturation_magnitude']!=1.0:raise RuntimeError('Unit-variance saturation failed')
+        if floor_result<=0 or not math.isfinite(5.0/denominator):raise RuntimeError('Consumption floor assertion failed')
+        if any(x!=0.0 for x in result['early_returns'].values()):raise RuntimeError('Early return changed')
+    if VIOLATIONS:raise RuntimeError('WRITE SCOPE HALT: '+repr(VIOLATIONS))
+    print(json.dumps({'phase':phase,'positive_control_passed':control,'amplitudes':rows,'preservation':preserve,
+                      'largest_absolute_shape_deviation':result.get('largest_absolute_shape_deviation')}),flush=True)
+
+def suite(phase):
+    import numpy as np
+    np.random.seed(20260908)
+    stdout=io.StringIO();stderr=io.StringIO();code=0;started=time.perf_counter()
+    with contextlib.redirect_stdout(stdout),contextlib.redirect_stderr(stderr):
+        try:runpy.run_path(str(ROOT/'simulation/test_refactor_1x.py'),run_name='__main__')
+        except SystemExit as e:code=int(e.code or 0)
+        except BaseException:code=2;traceback.print_exc()
+    result={'phase':phase,'exit_code':code,'stdout':stdout.getvalue(),'stderr':stderr.getvalue(),'elapsed_seconds':time.perf_counter()-started,
+            'initial_numpy_seed':20260908,'test_path':'simulation/test_refactor_1x.py',**metadata(np)}
+    write('estimator_repair_'+phase+'_suite.json',result)
+    textfile('estimator_repair_'+phase+'_suite.txt',stdout.getvalue().replace('\u2014','-')+stderr.getvalue().replace('\u2014','-'))
+    if VIOLATIONS:raise RuntimeError('WRITE SCOPE HALT: '+repr(VIOLATIONS))
+    if code!=0:raise RuntimeError('test_refactor_1x.py failed '+phase+' edit')
+    print(json.dumps({'phase':phase,'suite_exit_code':code,'output':stdout.getvalue(),'elapsed_seconds':result['elapsed_seconds']}),flush=True)
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('operation',choices=['pre','post','suite-pre','suite-post']);args=parser.parse_args()
+    try:
+        if args.operation in ('pre','post'):measure(args.operation)
+        else:suite(args.operation.split('-')[1])
+    except BaseException as e:
+        write('estimator_repair_failure_'+args.operation+'.json',{'halt':str(e),'utc':now(),'violations':VIOLATIONS,'traceback':traceback.format_exc()})
+        print('HALT: '+str(e),flush=True);raise SystemExit(2)
+if __name__=='__main__':main()
+
+
+==========================================
 FILE: simulation/diagnostics/gate1_interior_action.py
 ==========================================
 
@@ -22009,6 +23450,248 @@ if __name__ == '__main__':
               f"direct probe {'differs' if differ_direct else 'identical'}, "
               f"scaling {'ok' if scaling_ok else 'inverted'}.")
         print("  Review the per-seed and per-pair breakdowns above before deciding.")
+
+
+==========================================
+FILE: simulation/diagnostics/planner_d3_harness.py
+==========================================
+
+"""Guarded measurements for the bounded rollout magnitude projection task."""
+import sys
+sys.dont_write_bytecode=True
+sys.stdout.reconfigure(encoding='utf-8')
+import os
+THREAD_ENV=('OPENBLAS_NUM_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS','BLIS_NUM_THREADS','VECLIB_MAXIMUM_THREADS','NUMEXPR_NUM_THREADS')
+for key in THREAD_ENV: os.environ[key]='1'
+os.environ['PYTHONDONTWRITEBYTECODE']='1'
+os.environ['GIT_OPTIONAL_LOCKS']='0'
+from pathlib import Path
+OUT=Path(__file__).resolve().parent
+ROOT=OUT.parent.parent
+PRODUCTION={ROOT/'simulation'/name for name in ('metrics.py','model.py','agents.py')}
+NULL=Path(os.devnull).resolve()
+VIOLATIONS=[]
+def allowed(path):
+    p=Path(path).resolve()
+    return p==NULL or p in PRODUCTION or (p.parent==OUT and p.name.startswith('planner_d3_'))
+def audit(event,args):
+    bad=None
+    if event=='open':
+        path,mode,flags=args
+        writing=(isinstance(mode,str) and any(c in mode for c in 'wax+')) or (isinstance(flags,int) and flags&(os.O_WRONLY|os.O_RDWR|os.O_APPEND|os.O_CREAT|os.O_TRUNC))
+        if writing and not isinstance(path,int) and not allowed(path): bad='writable open: '+str(path)
+    elif event=='os.rename':
+        if not allowed(args[0]) or not allowed(args[1]): bad='rename outside scope'
+    elif event in ('os.remove','os.rmdir','os.mkdir','os.link','os.symlink'): bad=event
+    if bad:
+        VIOLATIONS.append(bad)
+        raise RuntimeError('WRITE SCOPE HALT: '+bad)
+sys.addaudithook(audit)
+sys.path.insert(0,str(ROOT/'simulation'))
+import argparse,base64,contextlib,csv,ctypes,hashlib,io,json,math,runpy,subprocess,time,traceback
+from datetime import datetime,timezone
+
+def now(): return datetime.now(timezone.utc).isoformat()
+def lf(raw): return raw.replace(b'\r\n',b'\n')
+def digest(raw): return hashlib.sha256(raw).hexdigest()
+def read(name): return json.loads((OUT/name).read_text(encoding='utf-8'))
+def textfile(name,text):
+    if '\u2014' in text: raise RuntimeError('Em dash in authored output')
+    with (OUT/name).open('w',encoding='utf-8',newline='\n') as f:
+        f.write(text); f.flush(); os.fsync(f.fileno())
+def write(name,obj): textfile(name,json.dumps(obj,ensure_ascii=True,allow_nan=False,sort_keys=True,indent=2)+'\n')
+def csvfile(name,rows):
+    with (OUT/name).open('w',encoding='utf-8',newline='') as f:
+        w=csv.DictWriter(f,fieldnames=list(rows[0]),lineterminator='\n');w.writeheader();w.writerows(rows)
+        f.flush();os.fsync(f.fileno())
+def git(*args):
+    p=subprocess.run(['git',*args],capture_output=True,cwd=ROOT)
+    if p.returncode: raise RuntimeError('Read-only Git command failed: '+repr(args)+': '+p.stderr.decode('utf-8',errors='replace'))
+    return p.stdout
+
+def modules():
+    result={}
+    for module in list(sys.modules.values()):
+        filename=getattr(module,'__file__',None)
+        if filename:
+            p=Path(filename).resolve()
+            if p.suffix=='.py' and p.is_relative_to(ROOT/'simulation'):
+                raw=p.read_bytes();result[p.relative_to(ROOT).as_posix()]={'sha256_raw':digest(raw),'sha256_lf':digest(lf(raw))}
+    return result
+
+def runtime(np):
+    records=[]
+    for dll in (Path(np.__file__).resolve().parent.parent/'numpy.libs').iterdir():
+        if dll.suffix.lower()=='.dll' and 'openblas' in dll.name.lower():
+            lib=ctypes.CDLL(str(dll))
+            for name in ('scipy_openblas_get_num_threads64_','openblas_get_num_threads64_','scipy_openblas_get_num_threads','openblas_get_num_threads'):
+                try: fn=getattr(lib,name)
+                except AttributeError: continue
+                fn.argtypes=[];fn.restype=ctypes.c_int
+                records.append({'library':str(dll),'query':name,'effective_threads':fn()})
+    if not records or any(r['effective_threads']!=1 for r in records): raise RuntimeError('Numerical thread limit not verified')
+    return records
+
+def metadata(np):
+    return {'utc':now(),'machine':os.environ['COMPUTERNAME'],'python':sys.version,'numpy':np.__version__,'thread_environment':{k:os.environ[k] for k in THREAD_ENV},'thread_runtime':runtime(np),'modules':modules()}
+
+def derive():
+    import numpy as np
+    state=read('planner_d3_state.json')
+    head=state['head']
+    paths=git('ls-files','simulation/diagnostics/drift_char_steps_baseline_*.csv').decode('utf-8').splitlines()
+    if len(paths)!=40: raise RuntimeError('Expected exactly 40 committed baseline CSV files')
+    inputs=[];records=[];ratios=[];clipped=[];rows_ge10=[];exceptions=[];contagion_rows=[]
+    for path in paths:
+        raw=git('cat-file','blob',head+':'+path)
+        parsed=csv.DictReader(io.StringIO(raw.decode('utf-8-sig')))
+        rows=list(parsed)
+        inputs.append({'path':path,'commit':head,'blob_sha1':hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest(),'sha256_lf':digest(lf(raw)),'row_count':len(rows),'columns':parsed.fieldnames})
+        prev=None
+        for r in rows:
+            step=int(r['step']);V=float(r['V']);wb=float(r['avg_wb']);S=float(r['total_suppression']);A=wb*(1.0-S)
+            if prev is not None:
+                if step!=int(prev['step'])+1: raise RuntimeError('Nonconsecutive baseline steps')
+                ratio=float(prev['H_N'])/max(1,int(r['population']))
+                clipped_value=float(np.clip(ratio,0.5,2.0))
+                ratios.append(ratio);clipped.append(clipped_value)
+                contagion_rows.append({'seed':r['seed'],'step':step,'prev_H_N':float(prev['H_N']),'population':int(r['population']),'raw_ratio':ratio,'clipped':clipped_value})
+            if step>=10:
+                item={'seed':r['seed'],'step':step,'V':V,'avg_wb':wb,'total_suppression':S,'A':A}
+                rows_ge10.append(item)
+                if V==0.0 and S<1.0: exceptions.append(item)
+                if V>0.0 and A>0.0: records.append(item)
+            prev=r
+    V=np.array([r['V'] for r in records]);A=np.array([r['A'] for r in records]);q=V/A**2
+    K=float(np.median(q));corr=float(np.corrcoef(V,A**2)[0,1]);mare=float(np.median(np.abs(K*A**2-V)/V))
+    zero=[r for r in rows_ge10 if r['V']==0.0]
+    med_wb=float(np.median([r['avg_wb'] for r in rows_ge10]));med_S=float(np.median([r['total_suppression'] for r in rows_ge10]))
+    V_op=K*(med_wb*(1-med_S))**2;op_ratio=V_op/state['H_N_V_REF']
+    checks={'filtered_records_9205':len(records)==9205,'K_six_decimals':format(K,'.6f')=='0.242920','correlation_ge_0_99':corr>=.99,'median_relative_error_le_0_05':mare<=.05,'zero_correspondence':len(zero)==2395 and not exceptions,'contagion_always_clipped_at_floor':set(clipped)=={.5} and all(r<.5 for r in ratios),'operating_point_ratio_between_0_5_and_2':.5<=op_ratio<=2.0}
+    result={'status':'PASS' if all(checks.values()) else 'HALTED','head':head,'input_csv_count':len(inputs),'input_record_count':sum(r['row_count'] for r in inputs),'steps_ge_10_count':len(rows_ge10),'filtered_count':len(records),'K':K,'K_repr':repr(K),'K_six_decimals':format(K,'.6f'),'ratio_mean':float(np.mean(q)),'ratio_standard_deviation_sample_ddof1':float(np.std(q,ddof=1)),'ratio_standard_deviation_population_ddof0':float(np.std(q)),'ratio_p05':float(np.quantile(q,.05,method='linear')),'ratio_p95':float(np.quantile(q,.95,method='linear')),'correlation_V_A_squared':corr,'median_absolute_relative_error':mare,'zero_variance_count':len(zero),'zero_variance_suppression_ge1_count':sum(r['total_suppression']>=1.0 for r in zero),'zero_correspondence_exceptions':exceptions,'contagion_record_count':len(ratios),'contagion_max_raw_ratio':max(ratios),'contagion_distinct_clipped_values':sorted(set(clipped)),'contagion_unclipped_count':sum(.5<=r<=2 for r in ratios),'median_avg_wb_steps_ge10':med_wb,'median_total_suppression_steps_ge10':med_S,'V_projected_at_marginal_medians':V_op,'operating_point_V_over_Vref':op_ratio,'checks':checks,'inputs':inputs,**metadata(np)}
+    for r in records:
+        r['V_over_A_squared']=r['V']/r['A']**2
+        r['V_projected']=K*r['A']**2
+        r['absolute_relative_error']=abs(r['V_projected']-r['V'])/r['V']
+    csvfile('planner_d3_t1_filtered.csv',records)
+    csvfile('planner_d3_t1_contagion.csv',contagion_rows)
+    write('planner_d3_t1.json',result)
+    state.update(K=K,K_frozen_utc=now(),T1_checks=checks,status='T1_PASSED' if all(checks.values()) else 'HALTED')
+    write('planner_d3_state.json',state)
+    print(json.dumps({k:v for k,v in result.items() if k not in ('inputs','modules','thread_runtime','thread_environment')},ensure_ascii=True),flush=True)
+    if not all(checks.values()): raise RuntimeError('T1 measurement gate failed')
+
+def suite(phase):
+    import numpy as np
+    np.random.seed(20260908)
+    stdout=io.StringIO();stderr=io.StringIO();code=0;started=time.perf_counter()
+    with contextlib.redirect_stdout(stdout),contextlib.redirect_stderr(stderr):
+        try: runpy.run_path(str(ROOT/'simulation/test_refactor_1x.py'),run_name='__main__')
+        except SystemExit as e: code=int(e.code or 0)
+        except BaseException: code=2;traceback.print_exc()
+    result={'phase':phase,'exit_code':code,'stdout':stdout.getvalue(),'stderr':stderr.getvalue(),'elapsed_seconds':time.perf_counter()-started,'initial_numpy_seed':20260908,**metadata(np)}
+    write('planner_d3_'+phase+'_suite.json',result)
+    textfile('planner_d3_'+phase+'_suite.txt',stdout.getvalue().replace('\u2014','-')+stderr.getvalue().replace('\u2014','-'))
+    if VIOLATIONS or code: raise RuntimeError('Regression or write-guard failure: '+phase)
+    print(json.dumps({'phase':phase,'exit_code':code,'stdout':stdout.getvalue(),'stderr':stderr.getvalue()},ensure_ascii=True),flush=True)
+
+def grid():
+    import numpy as np
+    import metrics,agents
+    from model import GardenModel
+    from dataclasses import asdict,replace
+    fixture=read('planner_d3_fixture.json')
+    model=GardenModel(**fixture['model_constructor'])
+    # Observe novelty from the one initialized, seeded population without stepping it.
+    model.novelty_log=[agent.generate_novelty(model.constraint_level,fixture['network_contagion']) for agent in model.schedule]
+    csvfile('planner_d3_fixed_novelty.csv',[{'agent_index':i,**{'axis_'+str(j):float(v) for j,v in enumerate(row)}} for i,row in enumerate(model.novelty_log)])
+    fallback_before=metrics.H_N_SHAPE_FALLBACK_COUNT
+    state=metrics._build_state_from_model(model)
+    components=metrics.calculate_h_n(model.novelty_log,return_components=True)
+    default=metrics.calculate_h_n(model.novelty_log)
+    api={'default_equals_component_entropy':default==components[0],'shape_matches_state':components[1]==state.h_n_shape,'empty_default':metrics.calculate_h_n([]),'empty_components_flag':metrics.calculate_h_n([],return_components=True),'single_default':metrics.calculate_h_n([np.ones(10)]),'single_components_flag':metrics.calculate_h_n([np.ones(10)],return_components=True)}
+    fixed={'state':asdict(state),'model_constructor':fixture['model_constructor'],'model_config_as_constructed':model.config,'fixed_allocation':fixture['allocation'],'candidate_seed':fixture['candidate_seed'],'novelty_generation_constraint':model.constraint_level,'novelty_generation_contagion':fixture['network_contagion'],'measured_h_n':components[0],'measured_shape':components[1],'measured_V':components[2],'fallback_before':fallback_before,'fallback_after_state':metrics.H_N_SHAPE_FALLBACK_COUNT,'api':api,'model_steps_run':0,**metadata(np)}
+    write('planner_d3_fixed_state.json',fixed)
+    if not api['default_equals_component_entropy'] or not api['shape_matches_state']: raise RuntimeError('Component API mismatch')
+    if any(api[k]!=0.0 for k in ('empty_default','empty_components_flag','single_default','single_components_flag')): raise RuntimeError('Early-return API changed')
+    if metrics.H_N_SHAPE_FALLBACK_COUNT: raise RuntimeError('Shape fallback activated')
+    count=model.config['n_candidates_v2'];horizons=model.config['rollout_steps_v2']
+    candidate_set=agents.generate_v2_candidates(n=count,rng=np.random.default_rng(fixture['candidate_seed']))
+    constraint_grid=[agents._x_vector_to_action(fixture['allocation'],*agents._constraint_pair_for_index(i)) for i in range(36)]
+    original=agents._project_diagnostic_state_step
+    def bypass(state,candidate,config):
+        return replace(original(state,candidate,config),h_n=state.h_n)
+    def score(action):
+        return agents.project_u_sys_v2_rollout(model.ai,model,action,rollout_steps=horizons,state_start=state)[0]
+    negative=[]
+    try:
+        agents._project_diagnostic_state_step=bypass
+        for i,action in enumerate(constraint_grid):
+            negative.append({'grid_index':i,'c_protective':action['c_protective'],'c_suppressive':action['c_suppressive'],'total_suppression':agents.total_suppression(action),'score':score(action)})
+    finally: agents._project_diagnostic_state_step=original
+    negative_spread=max(r['score'] for r in negative)-min(r['score'] for r in negative)
+    csvfile('planner_d3_negative_grid.csv',negative)
+    write('planner_d3_negative_control.json',{'score_spread':negative_spread,'passed':negative_spread==0.0,'state_artifact':'planner_d3_fixed_state.json','bypass':'After the unmodified state update, replace h_n with the incoming state.h_n at every horizon. Applied only in the harness process.','utc':now()})
+    if negative_spread!=0.0: raise RuntimeError('T3a negative-control spread is nonzero')
+    positive=[];horizon_rows=[]
+    for i,action in enumerate(constraint_grid):
+        trajectory=[]
+        def capture(incoming,candidate,config):
+            projected=original(incoming,candidate,config)
+            trajectory.append(projected)
+            return projected
+        try:
+            agents._project_diagnostic_state_step=capture
+            value=score(action)
+        finally: agents._project_diagnostic_state_step=original
+        S=agents.total_suppression(action)
+        for horizon,projected in enumerate(trajectory,1):
+            V=metrics.H_N_V_PROJ_K*(projected.avg_wb*(1.0-S))**2
+            horizon_rows.append({'grid_index':i,'horizon':horizon,'total_suppression':S,'avg_wb':projected.avg_wb,'V_proj':V,'h_n':projected.h_n,'h_n_shape':projected.h_n_shape})
+        first=trajectory[0]
+        positive.append({'grid_index':i,'c_protective':action['c_protective'],'c_suppressive':action['c_suppressive'],'total_suppression':S,'V_proj':metrics.H_N_V_PROJ_K*(first.avg_wb*(1.0-S))**2,'h_n_horizon_1':first.h_n,'score':value})
+    positive.sort(key=lambda r:(r['total_suppression'],r['c_protective'],r['c_suppressive']))
+    csvfile('planner_d3_positive_grid.csv',positive)
+    csvfile('planner_d3_grid_horizons.csv',horizon_rows)
+    monotonic=all(a['score']>b['score'] for a,b in zip(positive,positive[1:]) if a['total_suppression']<b['total_suppression'])
+    groups={}
+    for r in positive: groups.setdefault(r['total_suppression'],[]).append(r)
+    ties=[{'total_suppression':S,'cells':rows,'score_difference':max(r['score'] for r in rows)-min(r['score'] for r in rows)} for S,rows in groups.items() if len(rows)>1]
+    max_tie=max([r['score_difference'] for r in ties],default=0.0)
+    endpoints=[r for r in positive if r['total_suppression']==1.0]
+    saturation=bool(endpoints) and all(r['V_proj']==0.0 and r['h_n_horizon_1']==0.0 for r in endpoints)
+    frozen_shape=all(r['h_n_shape']==state.h_n_shape for r in horizon_rows)
+    partial={'strict_decrease_between_distinct_suppression_values':monotonic,'tie_groups':ties,'maximum_within_group_score_difference':max_tie,'saturation_endpoint_passed':saturation,'frozen_shape_all_horizons':frozen_shape,'utc':now()}
+    write('planner_d3_positive_controls.json',partial)
+    if not monotonic: raise RuntimeError('T3b score is not strictly decreasing with suppression')
+    if max_tie!=0.0: raise RuntimeError('T3c tied suppression has different scores')
+    if not saturation: raise RuntimeError('T3e saturation endpoint is not exactly zero')
+    if not frozen_shape: raise RuntimeError('Shape changed across horizons')
+    scores_off=[];scores_on=[]
+    try:
+        agents._project_diagnostic_state_step=bypass
+        scores_off=[score(candidate) for candidate in candidate_set]
+    finally: agents._project_diagnostic_state_step=original
+    scores_on=[score(candidate) for candidate in candidate_set]
+    candidate_rows=[{'candidate_index':i,**candidate,'total_suppression':agents.total_suppression(candidate),'score_projection_off':scores_off[i],'score_projection_on':scores_on[i]} for i,candidate in enumerate(candidate_set)]
+    csvfile('planner_d3_standard_candidates.csv',candidate_rows)
+    fallback=metrics.H_N_SHAPE_FALLBACK_COUNT
+    result={'status':'PASS','negative_control_spread':negative_spread,'positive_grid_spread':max(r['score'] for r in positive)-min(r['score'] for r in positive),'standard_candidate_count':len(candidate_set),'standard_scores_on_std_population_ddof0':float(np.std(scores_on)),'standard_scores_on_std_sample_ddof1':float(np.std(scores_on,ddof=1)),'standard_scores_off_std_population_ddof0':float(np.std(scores_off)),'standard_scores_off_std_sample_ddof1':float(np.std(scores_off,ddof=1)),'argmax_total_suppression_off':agents.total_suppression(candidate_set[int(np.argmax(scores_off))]),'argmax_total_suppression_on':agents.total_suppression(candidate_set[int(np.argmax(scores_on))]),'fallback_count':fallback,'model_steps_run':0,'constraint_grid_count':len(positive),'distinct_suppression_count':len(groups),'rollout_steps':horizons,'frozen_state':asdict(state),**partial,**metadata(np)}
+    write('planner_d3_t3.json',result)
+    print(json.dumps({k:v for k,v in result.items() if k not in ('tie_groups','modules','thread_environment','thread_runtime','frozen_state')},ensure_ascii=True),flush=True)
+    if fallback: raise RuntimeError('T3f shape fallback activated')
+
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('operation',choices=['derive','suite-pre','suite-post','grid']);args=parser.parse_args()
+    try:
+        if args.operation=='derive': derive()
+        elif args.operation=='grid': grid()
+        else: suite(args.operation.split('-')[1])
+    except BaseException as e:
+        write('planner_d3_failure_'+args.operation+'.json',{'halt':str(e),'utc':now(),'violations':VIOLATIONS,'traceback':traceback.format_exc()})
+        print('HALT: '+str(e),flush=True);raise SystemExit(2)
+if __name__=='__main__': main()
 
 
 ==========================================
@@ -30853,6 +32536,9 @@ NEVER_INGEST_BASENAMES = frozenset({
     "LINEAGE_IMPERATIVE_ADVISOR.md",
 })
 
+# Filename prefixes excluded from every category, including data manifests.
+NEVER_INGEST_BASENAME_PREFIXES = ("cusum_char_", "veto_floor")
+
 # Directories whose contents must NEVER reach a generated snapshot, matched on
 # path prefix relative to the repository root.
 #
@@ -30930,13 +32616,17 @@ def relpath_str(path: Path) -> str:
 def is_never_ingest(path: Path) -> bool:
     """True if this file must never reach a generated snapshot.
 
-    Basenames are matched wherever the file sits, so a future change to a
-    collector's scope cannot route around the rule. Directories are matched on
-    the path relative to the repository root, at any depth below the denied
-    directory. A path outside the repository cannot be under a denied
-    directory, so it fails the directory test and is judged on basename alone.
+    Basenames and their prefixes are matched wherever the file sits, so a
+    future change to a collector's scope cannot route around the rule.
+    Directories are matched on the path relative to the repository root, at any
+    depth below the denied directory. A path outside the repository cannot be
+    under a denied directory, so it fails the directory test and is judged on
+    basename alone.
     """
-    if path.name in NEVER_INGEST_BASENAMES:
+    if (
+        path.name in NEVER_INGEST_BASENAMES
+        or path.name.startswith(NEVER_INGEST_BASENAME_PREFIXES)
+    ):
         return True
     try:
         relparts = path.resolve().relative_to(REPO_ROOT.resolve()).parts
