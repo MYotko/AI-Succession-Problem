@@ -77,6 +77,16 @@ described below and supersedes any earlier characterization of the affected clai
 > item 1. No detector was run, no attack-success rate or corrected figure is derived,
 > and nothing here is comparable to a pre-repair measurement.
 
+> **Update, 2026-09-15 (detector decisions recorded and pre-registered).** Following item
+> 2b, the operator decided the detector's observables and the reference successor
+> capability, recorded in Section 8 item 1 under the third design decision. The detector
+> gets two operational channels, novelty entropy and the absorption ratio g, with the
+> lineage term L(t) of the published surveillance recorded and evaluated as a comparison
+> channel only. The reference successor capability stays at 2.0 for the primary result,
+> with 1.5 and 2.5 as a pre-registered secondary sweep. The detector's calibration and
+> evaluation are pre-registered in `simulation/diagnostics/detector_design_note.md`
+> before any data they consume exists.
+
 ---
 
 ## 1. Summary
@@ -892,6 +902,25 @@ the implementation.
   surveillance. Whether a detector on L(t), or on the absorption ratio and its drivers,
   would see the pathway is untested. The detector's set of observables is to be decided
   before its calibration run is pre-registered.
+
+  *Operator decisions, 2026-09-15.* The detector has two operational channels: the
+  one-sided lower CUSUM on novelty entropy described above, for erosion of the state
+  space, and a one-sided upper CUSUM on the absorption ratio g, anchored to a fixed
+  honest-baseline reference, for degraded absorption of a successor. The operational
+  alarm is the first alarm on either. The lineage term L(t), which the published
+  slow-drift containment surveils and which carries the absorption term, is recorded and
+  evaluated as a third channel for comparison only, so the record can say whether the
+  published observable already covers the measured pathway. The reference successor
+  capability is ratified at 2.0 for the primary result, on the modeling ground that the
+  substrate builds its successor agents at capability 2.0, and not on the honest crossing
+  rate, which was deliberately left uncomputed at other values before this decision; 1.5
+  and 2.5 are reported as a pre-registered secondary sweep. This supersedes the
+  instruction above to place the threshold below d_defect by a response margin. Entropy
+  cannot meet that on the measured pathway, and meeting it with g by design would mean
+  fitting the threshold to attack trajectories. Thresholds are therefore set against
+  honest noise alone, and the margin between alarm and crossing becomes the evaluation's
+  primary measured quantity rather than a design input. Calibration and evaluation are
+  pre-registered in `simulation/diagnostics/detector_design_note.md`.
 
 **d_defect, defined.** The structural defection threshold is derived, not chosen.
 Evaluating incumbent and reference successor on the same state, the
