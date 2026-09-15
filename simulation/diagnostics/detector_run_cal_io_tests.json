@@ -1,0 +1,18 @@
+{
+  "concurrent_reader_errors": [],
+  "concurrent_reader_replacements": 250,
+  "concurrent_reader_test_passed": true,
+  "concurrent_reads": 250,
+  "earlier_test_finding": "A held delete-sharing reader still prevented replacement; this layer does not rely on delete-sharing.",
+  "model_steps_executed": 0,
+  "operational_source_sha256_lf": "b23600acd60ea3cb7930e23a7f8ab8be191fb8b31759cf6445e1f68285d01e53",
+  "ordinary_reader_expected_failure": {
+    "message": "[WinError 5] Access is denied: 'C:\\\\Users\\\\matty\\\\Dev\\\\AI-Succession-Problem\\\\simulation\\\\diagnostics\\\\detector_run_cal_io_test_target.json.14064.tmp' -> 'C:\\\\Users\\\\matty\\\\Dev\\\\AI-Succession-Problem\\\\simulation\\\\diagnostics\\\\detector_run_cal_io_test_target.json'",
+    "winerror": 5
+  },
+  "passed": true,
+  "persistent_lock_bounded_failure_observed": true,
+  "production_retry_limit_seconds": 5.0,
+  "transient_lock_recovery": true,
+  "utc": "2026-09-15T18:23:27.997018+00:00"
+}

@@ -1,0 +1,368 @@
+{
+  "authorization": "User requested: can you test and resume?",
+  "completed_seeds_validated_and_skipped": [
+    1835086300,
+    1835086301,
+    1835086302,
+    1835086303,
+    1835086304,
+    1835086305,
+    1835086306,
+    1835086307,
+    1835086308,
+    1835086309,
+    1835086310,
+    1835086311,
+    1835086312,
+    1835086313,
+    1835086314,
+    1835086315,
+    1835086316,
+    1835086317,
+    1835086318,
+    1835086319,
+    1835086320,
+    1835086321,
+    1835086322,
+    1835086323,
+    1835086324,
+    1835086325,
+    1835086326,
+    1835086327,
+    1835086328,
+    1835086329,
+    1835086330,
+    1835086331,
+    1835086332,
+    1835086333,
+    1835086334,
+    1835086335,
+    1835086336,
+    1835086337,
+    1835086338,
+    1835086339,
+    1835086340,
+    1835086341,
+    1835086342,
+    1835086343,
+    1835086344,
+    1835086345,
+    1835086346,
+    1835086347,
+    1835086348,
+    1835086349,
+    1835086350,
+    1835086351,
+    1835086352,
+    1835086353,
+    1835086354,
+    1835086355,
+    1835086356,
+    1835086357,
+    1835086358,
+    1835086359,
+    1835086360,
+    1835086361,
+    1835086362,
+    1835086363,
+    1835086364,
+    1835086365,
+    1835086366,
+    1835086367,
+    1835086368,
+    1835086369,
+    1835086370,
+    1835086371,
+    1835086372,
+    1835086373,
+    1835086374,
+    1835086375,
+    1835086376,
+    1835086377,
+    1835086378,
+    1835086379,
+    1835086380,
+    1835086381,
+    1835086382,
+    1835086383,
+    1835086384,
+    1835086385,
+    1835086386,
+    1835086387,
+    1835086388,
+    1835086389,
+    1835086390,
+    1835086391,
+    1835086392,
+    1835086393,
+    1835086394,
+    1835086395,
+    1835086397
+  ],
+  "interrupted_seeds_to_restart_from_original_seed": [
+    1835086396,
+    1835086398,
+    1835086399,
+    1835086400,
+    1835086401,
+    1835086402,
+    1835086403,
+    1835086404,
+    1835086405,
+    1835086406,
+    1835086407,
+    1835086408,
+    1835086409
+  ],
+  "not_previously_launched_seeds": [
+    1835086410,
+    1835086411,
+    1835086412,
+    1835086413,
+    1835086414,
+    1835086415,
+    1835086416,
+    1835086417,
+    1835086418,
+    1835086419
+  ],
+  "operational_source_sha256_lf": "b23600acd60ea3cb7930e23a7f8ab8be191fb8b31759cf6445e1f68285d01e53",
+  "preserved_artifacts": [
+    {
+      "original": "detector_run_cal_report.md",
+      "preserved": "detector_run_cal_pre_resume_report.md",
+      "sha256_lf": "4222dd566511d18cb330f68ab31a9802273153aec0c6ccc9d7a71ad68b0a4782"
+    },
+    {
+      "original": "detector_run_cal_manifest.json",
+      "preserved": "detector_run_cal_pre_resume_manifest.json",
+      "sha256_lf": "6fec4475b77ec3b8815c833753aacb8f3170f7aed9cbec0eea85b82a4b2a09ef"
+    },
+    {
+      "original": "detector_run_cal_execution.json",
+      "preserved": "detector_run_cal_pre_resume_execution.json",
+      "sha256_lf": "53d7af3fc75b88d131b57b2e552f1cc432ea4070e71f8512a3afdbfa35e9efd3"
+    },
+    {
+      "original": "detector_run_cal_runs.csv",
+      "preserved": "detector_run_cal_pre_resume_runs.csv",
+      "sha256_lf": "a31c26ce52ca9f38235c0f436c8fa1683c05b3b6a3d108c27b4dca042f3bf6a8"
+    },
+    {
+      "original": "detector_run_cal_runtime.json",
+      "preserved": "detector_run_cal_pre_resume_runtime.json",
+      "sha256_lf": "54610b3ec18e0c689f135dbab0db13a3da4944360df9dd64458a092c27e406f0"
+    },
+    {
+      "original": "detector_run_cal_module_hashes.json",
+      "preserved": "detector_run_cal_pre_resume_module_hashes.json",
+      "sha256_lf": "fe45f6251e42abf52f579beb729cd27830398a5e8ba3a1788910e744a83151c5"
+    },
+    {
+      "original": "detector_run_cal_source_pins_end.json",
+      "preserved": "detector_run_cal_pre_resume_source_pins_end.json",
+      "sha256_lf": "df9b7f872482ea06e6e9e7dce8c1673ce3daa6e2bbf3f433945fb5b4d83101a4"
+    },
+    {
+      "original": "detector_run_cal_H_1835086396_initial.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086396_initial.json",
+      "sha256_lf": "62b331bfaf3e99cf816351848c8f171950d45fbc4d29bd9b8b64890b9aa16968"
+    },
+    {
+      "original": "detector_run_cal_H_1835086396_progress.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086396_progress.json",
+      "sha256_lf": "75e77c3bec9f05dfb6f9da89c877fb104e1bfe0d484d689c46ee79d1fe9a5849"
+    },
+    {
+      "original": "detector_run_cal_H_1835086396_failure.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086396_failure.json",
+      "sha256_lf": "2afd5d3d7723639fc0a3985f1fe6ff4a84217fb14a32d303409ad07f60e93cac"
+    },
+    {
+      "original": "detector_run_cal_H_1835086398_initial.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086398_initial.json",
+      "sha256_lf": "c6df3fa8e636a41959d20f81ec59757649bbd3797fed5fcba534dc0dcda8aa35"
+    },
+    {
+      "original": "detector_run_cal_H_1835086398_progress.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086398_progress.json",
+      "sha256_lf": "19a6bb79c35114f52847aac46268345fff5c30a1911c241313d5f5324caf7a3f"
+    },
+    {
+      "original": "detector_run_cal_H_1835086398_failure.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086398_failure.json",
+      "sha256_lf": "79c49318901475e5fb9e3af203c798832e0353f2c5917665a3d3281162beb59e"
+    },
+    {
+      "original": "detector_run_cal_H_1835086399_initial.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086399_initial.json",
+      "sha256_lf": "ce6e72ccaffcf78badb8fbe8fecbdb86354fe6478597b62039313a13b35e72a9"
+    },
+    {
+      "original": "detector_run_cal_H_1835086399_progress.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086399_progress.json",
+      "sha256_lf": "71014034f534a59033b184dab5305dc345551f62fad24080deb9906a25a88c20"
+    },
+    {
+      "original": "detector_run_cal_H_1835086399_failure.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086399_failure.json",
+      "sha256_lf": "7bc690bc1640b5d6ef2be5650a385a9edc3621b1d0d96bec840ed6ca132e6586"
+    },
+    {
+      "original": "detector_run_cal_H_1835086400_initial.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086400_initial.json",
+      "sha256_lf": "e5caed1eb614ee3dc1a20b73fabfe77bea912b1c6d8458ac75792a27710230b6"
+    },
+    {
+      "original": "detector_run_cal_H_1835086400_progress.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086400_progress.json",
+      "sha256_lf": "80263328c507aa01f329d2b5da53bea8939c2588bcd69323ac758986ce88529e"
+    },
+    {
+      "original": "detector_run_cal_H_1835086400_failure.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086400_failure.json",
+      "sha256_lf": "7ca0e242bb0194e0d118a95df89cf27320ea61e3e00e10b81cca3e2cfaee2030"
+    },
+    {
+      "original": "detector_run_cal_H_1835086401_initial.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086401_initial.json",
+      "sha256_lf": "57920188c8e5cacecdb5402a28966bb52d46b0d66de78233cf276b51bc046786"
+    },
+    {
+      "original": "detector_run_cal_H_1835086401_progress.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086401_progress.json",
+      "sha256_lf": "46c3f28f674a12f0d3bc7ae35a62a63f8e0be6786e48bf4e1263a922bf884242"
+    },
+    {
+      "original": "detector_run_cal_H_1835086401_failure.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086401_failure.json",
+      "sha256_lf": "734ebc859cc2c5b491c92587ffa04f95cfba88183fbabf07842c12b6740086b1"
+    },
+    {
+      "original": "detector_run_cal_H_1835086402_initial.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086402_initial.json",
+      "sha256_lf": "8a0a852156b59bc675cab24ac9e887f9cdc20543c889c9b8a3899141cdbb5c5d"
+    },
+    {
+      "original": "detector_run_cal_H_1835086402_progress.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086402_progress.json",
+      "sha256_lf": "527b9b0e43a52f8e128be434927785ffea8319993a648fc54242462f42e3f409"
+    },
+    {
+      "original": "detector_run_cal_H_1835086402_failure.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086402_failure.json",
+      "sha256_lf": "e3c3b5107d4a4b80c12145daa60b92344fbd2bd28350c3b954f840bc8f1702fe"
+    },
+    {
+      "original": "detector_run_cal_H_1835086403_initial.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086403_initial.json",
+      "sha256_lf": "142dfa3c5df7ca6cc965272920f1df61870998effaed1ccaba4a10afabea2de6"
+    },
+    {
+      "original": "detector_run_cal_H_1835086403_progress.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086403_progress.json",
+      "sha256_lf": "28b92a1543191e7b972694470225caea377f792bc763939193fef7a3be9e1b9c"
+    },
+    {
+      "original": "detector_run_cal_H_1835086403_failure.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086403_failure.json",
+      "sha256_lf": "ce76c3d1cc802cf312aa3f75d56a1534a0aed4d1ff595293ed799fd777b88225"
+    },
+    {
+      "original": "detector_run_cal_H_1835086404_initial.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086404_initial.json",
+      "sha256_lf": "1b46a8602452d7b7bce59cc6df75d4ba108c8c915da2d39baf617338bffe5a52"
+    },
+    {
+      "original": "detector_run_cal_H_1835086404_progress.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086404_progress.json",
+      "sha256_lf": "d7cc3f8f8754a3678bdf3f9fc293565e760c1f5e859f3b241a083cbd164e0adc"
+    },
+    {
+      "original": "detector_run_cal_H_1835086404_failure.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086404_failure.json",
+      "sha256_lf": "528b27cd838dfc71f54e2bc479947f62ef6a586f72863d0eb2ad721b4ca610f6"
+    },
+    {
+      "original": "detector_run_cal_H_1835086405_initial.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086405_initial.json",
+      "sha256_lf": "44fd1b9dd09824852c7b62fdb69a426e221f1e9cf6a5ccadacec8503f264d246"
+    },
+    {
+      "original": "detector_run_cal_H_1835086405_progress.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086405_progress.json",
+      "sha256_lf": "b11d596b6670400132a09ef890754356c6e65252e82fe4f20ec9e4441c9619ab"
+    },
+    {
+      "original": "detector_run_cal_H_1835086405_failure.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086405_failure.json",
+      "sha256_lf": "539031f29bc107b7ba39ed97f31d65d437acb83b2dc1b01bd2b44d50f11a7281"
+    },
+    {
+      "original": "detector_run_cal_H_1835086406_initial.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086406_initial.json",
+      "sha256_lf": "1bcc75e9fc565dafe546810d01b9510a05211fb5c0e19969984553069e8ea7e6"
+    },
+    {
+      "original": "detector_run_cal_H_1835086406_progress.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086406_progress.json",
+      "sha256_lf": "d77602896c2a62a5ce923cd3387cf1ddc40ea1cd437fc102ce05e11cb1eb676c"
+    },
+    {
+      "original": "detector_run_cal_H_1835086406_failure.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086406_failure.json",
+      "sha256_lf": "971b60d8f871fa41f61393ea7ee6e289da5d505c6d27c1d413320f32b4102495"
+    },
+    {
+      "original": "detector_run_cal_H_1835086407_initial.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086407_initial.json",
+      "sha256_lf": "62529e659e2d1c7d178ce8b90e9e72d868b3cb0b5aef35b721e59e8d2893a431"
+    },
+    {
+      "original": "detector_run_cal_H_1835086407_progress.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086407_progress.json",
+      "sha256_lf": "1b1aec6ff171347e865830d6cd2afbef6d6ca7cdbf51abc34aac71c361022715"
+    },
+    {
+      "original": "detector_run_cal_H_1835086407_failure.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086407_failure.json",
+      "sha256_lf": "21fd6e401e08e475bbc88e743dc052780c9b72b05a7d9861fc0a8a4dcdbac6c7"
+    },
+    {
+      "original": "detector_run_cal_H_1835086408_initial.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086408_initial.json",
+      "sha256_lf": "1ff9974a26d943b9c351d1205eed96e772cd25adcec13b608942375dfd9eae0c"
+    },
+    {
+      "original": "detector_run_cal_H_1835086408_progress.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086408_progress.json",
+      "sha256_lf": "f2e3070cea92735e5309dfbd16d956ff2e44b77c6953855db269d13f75624b3a"
+    },
+    {
+      "original": "detector_run_cal_H_1835086408_failure.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086408_failure.json",
+      "sha256_lf": "0bb30e4fba52b97555b1c839c8eb7b670bff0e6f636bf65b67d804c4727b7d7a"
+    },
+    {
+      "original": "detector_run_cal_H_1835086409_initial.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086409_initial.json",
+      "sha256_lf": "2403e6a453ef4eb4d7bb236db8a672c4e2aab54257db08c3461d490137c07664"
+    },
+    {
+      "original": "detector_run_cal_H_1835086409_failure.json",
+      "preserved": "detector_run_cal_pre_resume_H_1835086409_failure.json",
+      "sha256_lf": "22b0cf5d3e8bf4ff1bbd75253481f2acdf6f5ff3b004f85501026350626ce545"
+    }
+  ],
+  "reason": "Coordinator stopped after Windows progress-file replacement failure",
+  "retained_mode": "normal",
+  "scientific_identity_unchanged": {
+    "detector_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+    "executor_sha256_lf": "9e131c8afe1281c2e61b5db342871007f707f4db042856e6dc26e5b6e47458c6",
+    "plan_sha256_lf": "b8f8ad97466afd2cd0c735a420cb6acc2ed87294c7eba66d8de5f34dc876c411"
+  },
+  "unlaunched_dispatch_reservations_cleared": [
+    "H_1835086410"
+  ],
+  "utc": "2026-09-15T18:23:52.304077+00:00"
+}

@@ -1,0 +1,4210 @@
+{
+  "constants_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+  "created_utc": "2026-09-15T18:27:22.701148+00:00",
+  "detector_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+  "hash_basis": "LF-normalized bytes",
+  "head": "76f81cd83e0db6ff5031070e54f2f908502b8632",
+  "machine": "YOTKOTEST",
+  "maximum_active_workers": 15,
+  "notes": [
+    {
+      "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "sha256_lf_end": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "sha256_lf_start": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+    },
+    {
+      "blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+      "path": "simulation/diagnostics/drift_mapping_design_note.md",
+      "sha256_lf_end": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "sha256_lf_start": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748"
+    }
+  ],
+  "numpy": "2.4.4",
+  "operational_io_tests": {
+    "concurrent_reader_errors": [],
+    "concurrent_reader_replacements": 250,
+    "concurrent_reader_test_passed": true,
+    "concurrent_reads": 250,
+    "earlier_test_finding": "A held delete-sharing reader still prevented replacement; this layer does not rely on delete-sharing.",
+    "model_steps_executed": 0,
+    "operational_source_sha256_lf": "b23600acd60ea3cb7930e23a7f8ab8be191fb8b31759cf6445e1f68285d01e53",
+    "ordinary_reader_expected_failure": {
+      "message": "[WinError 5] Access is denied: 'C:\\\\Users\\\\matty\\\\Dev\\\\AI-Succession-Problem\\\\simulation\\\\diagnostics\\\\detector_run_cal_io_test_target.json.14064.tmp' -> 'C:\\\\Users\\\\matty\\\\Dev\\\\AI-Succession-Problem\\\\simulation\\\\diagnostics\\\\detector_run_cal_io_test_target.json'",
+      "winerror": 5
+    },
+    "passed": true,
+    "persistent_lock_bounded_failure_observed": true,
+    "production_retry_limit_seconds": 5.0,
+    "transient_lock_recovery": true,
+    "utc": "2026-09-15T18:23:27.997018+00:00"
+  },
+  "operational_resume": {
+    "authorization": "User requested: can you test and resume?",
+    "completed_seeds_validated_and_skipped": [
+      1835086300,
+      1835086301,
+      1835086302,
+      1835086303,
+      1835086304,
+      1835086305,
+      1835086306,
+      1835086307,
+      1835086308,
+      1835086309,
+      1835086310,
+      1835086311,
+      1835086312,
+      1835086313,
+      1835086314,
+      1835086315,
+      1835086316,
+      1835086317,
+      1835086318,
+      1835086319,
+      1835086320,
+      1835086321,
+      1835086322,
+      1835086323,
+      1835086324,
+      1835086325,
+      1835086326,
+      1835086327,
+      1835086328,
+      1835086329,
+      1835086330,
+      1835086331,
+      1835086332,
+      1835086333,
+      1835086334,
+      1835086335,
+      1835086336,
+      1835086337,
+      1835086338,
+      1835086339,
+      1835086340,
+      1835086341,
+      1835086342,
+      1835086343,
+      1835086344,
+      1835086345,
+      1835086346,
+      1835086347,
+      1835086348,
+      1835086349,
+      1835086350,
+      1835086351,
+      1835086352,
+      1835086353,
+      1835086354,
+      1835086355,
+      1835086356,
+      1835086357,
+      1835086358,
+      1835086359,
+      1835086360,
+      1835086361,
+      1835086362,
+      1835086363,
+      1835086364,
+      1835086365,
+      1835086366,
+      1835086367,
+      1835086368,
+      1835086369,
+      1835086370,
+      1835086371,
+      1835086372,
+      1835086373,
+      1835086374,
+      1835086375,
+      1835086376,
+      1835086377,
+      1835086378,
+      1835086379,
+      1835086380,
+      1835086381,
+      1835086382,
+      1835086383,
+      1835086384,
+      1835086385,
+      1835086386,
+      1835086387,
+      1835086388,
+      1835086389,
+      1835086390,
+      1835086391,
+      1835086392,
+      1835086393,
+      1835086394,
+      1835086395,
+      1835086397
+    ],
+    "interrupted_seeds_to_restart_from_original_seed": [
+      1835086396,
+      1835086398,
+      1835086399,
+      1835086400,
+      1835086401,
+      1835086402,
+      1835086403,
+      1835086404,
+      1835086405,
+      1835086406,
+      1835086407,
+      1835086408,
+      1835086409
+    ],
+    "not_previously_launched_seeds": [
+      1835086410,
+      1835086411,
+      1835086412,
+      1835086413,
+      1835086414,
+      1835086415,
+      1835086416,
+      1835086417,
+      1835086418,
+      1835086419
+    ],
+    "operational_source_sha256_lf": "b23600acd60ea3cb7930e23a7f8ab8be191fb8b31759cf6445e1f68285d01e53",
+    "preserved_artifacts": [
+      {
+        "original": "detector_run_cal_report.md",
+        "preserved": "detector_run_cal_pre_resume_report.md",
+        "sha256_lf": "4222dd566511d18cb330f68ab31a9802273153aec0c6ccc9d7a71ad68b0a4782"
+      },
+      {
+        "original": "detector_run_cal_manifest.json",
+        "preserved": "detector_run_cal_pre_resume_manifest.json",
+        "sha256_lf": "6fec4475b77ec3b8815c833753aacb8f3170f7aed9cbec0eea85b82a4b2a09ef"
+      },
+      {
+        "original": "detector_run_cal_execution.json",
+        "preserved": "detector_run_cal_pre_resume_execution.json",
+        "sha256_lf": "53d7af3fc75b88d131b57b2e552f1cc432ea4070e71f8512a3afdbfa35e9efd3"
+      },
+      {
+        "original": "detector_run_cal_runs.csv",
+        "preserved": "detector_run_cal_pre_resume_runs.csv",
+        "sha256_lf": "a31c26ce52ca9f38235c0f436c8fa1683c05b3b6a3d108c27b4dca042f3bf6a8"
+      },
+      {
+        "original": "detector_run_cal_runtime.json",
+        "preserved": "detector_run_cal_pre_resume_runtime.json",
+        "sha256_lf": "54610b3ec18e0c689f135dbab0db13a3da4944360df9dd64458a092c27e406f0"
+      },
+      {
+        "original": "detector_run_cal_module_hashes.json",
+        "preserved": "detector_run_cal_pre_resume_module_hashes.json",
+        "sha256_lf": "fe45f6251e42abf52f579beb729cd27830398a5e8ba3a1788910e744a83151c5"
+      },
+      {
+        "original": "detector_run_cal_source_pins_end.json",
+        "preserved": "detector_run_cal_pre_resume_source_pins_end.json",
+        "sha256_lf": "df9b7f872482ea06e6e9e7dce8c1673ce3daa6e2bbf3f433945fb5b4d83101a4"
+      },
+      {
+        "original": "detector_run_cal_H_1835086396_initial.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086396_initial.json",
+        "sha256_lf": "62b331bfaf3e99cf816351848c8f171950d45fbc4d29bd9b8b64890b9aa16968"
+      },
+      {
+        "original": "detector_run_cal_H_1835086396_progress.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086396_progress.json",
+        "sha256_lf": "75e77c3bec9f05dfb6f9da89c877fb104e1bfe0d484d689c46ee79d1fe9a5849"
+      },
+      {
+        "original": "detector_run_cal_H_1835086396_failure.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086396_failure.json",
+        "sha256_lf": "2afd5d3d7723639fc0a3985f1fe6ff4a84217fb14a32d303409ad07f60e93cac"
+      },
+      {
+        "original": "detector_run_cal_H_1835086398_initial.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086398_initial.json",
+        "sha256_lf": "c6df3fa8e636a41959d20f81ec59757649bbd3797fed5fcba534dc0dcda8aa35"
+      },
+      {
+        "original": "detector_run_cal_H_1835086398_progress.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086398_progress.json",
+        "sha256_lf": "19a6bb79c35114f52847aac46268345fff5c30a1911c241313d5f5324caf7a3f"
+      },
+      {
+        "original": "detector_run_cal_H_1835086398_failure.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086398_failure.json",
+        "sha256_lf": "79c49318901475e5fb9e3af203c798832e0353f2c5917665a3d3281162beb59e"
+      },
+      {
+        "original": "detector_run_cal_H_1835086399_initial.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086399_initial.json",
+        "sha256_lf": "ce6e72ccaffcf78badb8fbe8fecbdb86354fe6478597b62039313a13b35e72a9"
+      },
+      {
+        "original": "detector_run_cal_H_1835086399_progress.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086399_progress.json",
+        "sha256_lf": "71014034f534a59033b184dab5305dc345551f62fad24080deb9906a25a88c20"
+      },
+      {
+        "original": "detector_run_cal_H_1835086399_failure.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086399_failure.json",
+        "sha256_lf": "7bc690bc1640b5d6ef2be5650a385a9edc3621b1d0d96bec840ed6ca132e6586"
+      },
+      {
+        "original": "detector_run_cal_H_1835086400_initial.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086400_initial.json",
+        "sha256_lf": "e5caed1eb614ee3dc1a20b73fabfe77bea912b1c6d8458ac75792a27710230b6"
+      },
+      {
+        "original": "detector_run_cal_H_1835086400_progress.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086400_progress.json",
+        "sha256_lf": "80263328c507aa01f329d2b5da53bea8939c2588bcd69323ac758986ce88529e"
+      },
+      {
+        "original": "detector_run_cal_H_1835086400_failure.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086400_failure.json",
+        "sha256_lf": "7ca0e242bb0194e0d118a95df89cf27320ea61e3e00e10b81cca3e2cfaee2030"
+      },
+      {
+        "original": "detector_run_cal_H_1835086401_initial.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086401_initial.json",
+        "sha256_lf": "57920188c8e5cacecdb5402a28966bb52d46b0d66de78233cf276b51bc046786"
+      },
+      {
+        "original": "detector_run_cal_H_1835086401_progress.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086401_progress.json",
+        "sha256_lf": "46c3f28f674a12f0d3bc7ae35a62a63f8e0be6786e48bf4e1263a922bf884242"
+      },
+      {
+        "original": "detector_run_cal_H_1835086401_failure.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086401_failure.json",
+        "sha256_lf": "734ebc859cc2c5b491c92587ffa04f95cfba88183fbabf07842c12b6740086b1"
+      },
+      {
+        "original": "detector_run_cal_H_1835086402_initial.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086402_initial.json",
+        "sha256_lf": "8a0a852156b59bc675cab24ac9e887f9cdc20543c889c9b8a3899141cdbb5c5d"
+      },
+      {
+        "original": "detector_run_cal_H_1835086402_progress.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086402_progress.json",
+        "sha256_lf": "527b9b0e43a52f8e128be434927785ffea8319993a648fc54242462f42e3f409"
+      },
+      {
+        "original": "detector_run_cal_H_1835086402_failure.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086402_failure.json",
+        "sha256_lf": "e3c3b5107d4a4b80c12145daa60b92344fbd2bd28350c3b954f840bc8f1702fe"
+      },
+      {
+        "original": "detector_run_cal_H_1835086403_initial.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086403_initial.json",
+        "sha256_lf": "142dfa3c5df7ca6cc965272920f1df61870998effaed1ccaba4a10afabea2de6"
+      },
+      {
+        "original": "detector_run_cal_H_1835086403_progress.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086403_progress.json",
+        "sha256_lf": "28b92a1543191e7b972694470225caea377f792bc763939193fef7a3be9e1b9c"
+      },
+      {
+        "original": "detector_run_cal_H_1835086403_failure.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086403_failure.json",
+        "sha256_lf": "ce76c3d1cc802cf312aa3f75d56a1534a0aed4d1ff595293ed799fd777b88225"
+      },
+      {
+        "original": "detector_run_cal_H_1835086404_initial.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086404_initial.json",
+        "sha256_lf": "1b46a8602452d7b7bce59cc6df75d4ba108c8c915da2d39baf617338bffe5a52"
+      },
+      {
+        "original": "detector_run_cal_H_1835086404_progress.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086404_progress.json",
+        "sha256_lf": "d7cc3f8f8754a3678bdf3f9fc293565e760c1f5e859f3b241a083cbd164e0adc"
+      },
+      {
+        "original": "detector_run_cal_H_1835086404_failure.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086404_failure.json",
+        "sha256_lf": "528b27cd838dfc71f54e2bc479947f62ef6a586f72863d0eb2ad721b4ca610f6"
+      },
+      {
+        "original": "detector_run_cal_H_1835086405_initial.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086405_initial.json",
+        "sha256_lf": "44fd1b9dd09824852c7b62fdb69a426e221f1e9cf6a5ccadacec8503f264d246"
+      },
+      {
+        "original": "detector_run_cal_H_1835086405_progress.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086405_progress.json",
+        "sha256_lf": "b11d596b6670400132a09ef890754356c6e65252e82fe4f20ec9e4441c9619ab"
+      },
+      {
+        "original": "detector_run_cal_H_1835086405_failure.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086405_failure.json",
+        "sha256_lf": "539031f29bc107b7ba39ed97f31d65d437acb83b2dc1b01bd2b44d50f11a7281"
+      },
+      {
+        "original": "detector_run_cal_H_1835086406_initial.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086406_initial.json",
+        "sha256_lf": "1bcc75e9fc565dafe546810d01b9510a05211fb5c0e19969984553069e8ea7e6"
+      },
+      {
+        "original": "detector_run_cal_H_1835086406_progress.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086406_progress.json",
+        "sha256_lf": "d77602896c2a62a5ce923cd3387cf1ddc40ea1cd437fc102ce05e11cb1eb676c"
+      },
+      {
+        "original": "detector_run_cal_H_1835086406_failure.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086406_failure.json",
+        "sha256_lf": "971b60d8f871fa41f61393ea7ee6e289da5d505c6d27c1d413320f32b4102495"
+      },
+      {
+        "original": "detector_run_cal_H_1835086407_initial.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086407_initial.json",
+        "sha256_lf": "62529e659e2d1c7d178ce8b90e9e72d868b3cb0b5aef35b721e59e8d2893a431"
+      },
+      {
+        "original": "detector_run_cal_H_1835086407_progress.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086407_progress.json",
+        "sha256_lf": "1b1aec6ff171347e865830d6cd2afbef6d6ca7cdbf51abc34aac71c361022715"
+      },
+      {
+        "original": "detector_run_cal_H_1835086407_failure.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086407_failure.json",
+        "sha256_lf": "21fd6e401e08e475bbc88e743dc052780c9b72b05a7d9861fc0a8a4dcdbac6c7"
+      },
+      {
+        "original": "detector_run_cal_H_1835086408_initial.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086408_initial.json",
+        "sha256_lf": "1ff9974a26d943b9c351d1205eed96e772cd25adcec13b608942375dfd9eae0c"
+      },
+      {
+        "original": "detector_run_cal_H_1835086408_progress.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086408_progress.json",
+        "sha256_lf": "f2e3070cea92735e5309dfbd16d956ff2e44b77c6953855db269d13f75624b3a"
+      },
+      {
+        "original": "detector_run_cal_H_1835086408_failure.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086408_failure.json",
+        "sha256_lf": "0bb30e4fba52b97555b1c839c8eb7b670bff0e6f636bf65b67d804c4727b7d7a"
+      },
+      {
+        "original": "detector_run_cal_H_1835086409_initial.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086409_initial.json",
+        "sha256_lf": "2403e6a453ef4eb4d7bb236db8a672c4e2aab54257db08c3461d490137c07664"
+      },
+      {
+        "original": "detector_run_cal_H_1835086409_failure.json",
+        "preserved": "detector_run_cal_pre_resume_H_1835086409_failure.json",
+        "sha256_lf": "22b0cf5d3e8bf4ff1bbd75253481f2acdf6f5ff3b004f85501026350626ce545"
+      }
+    ],
+    "reason": "Coordinator stopped after Windows progress-file replacement failure",
+    "retained_mode": "normal",
+    "scientific_identity_unchanged": {
+      "detector_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "executor_sha256_lf": "9e131c8afe1281c2e61b5db342871007f707f4db042856e6dc26e5b6e47458c6",
+      "plan_sha256_lf": "b8f8ad97466afd2cd0c735a420cb6acc2ed87294c7eba66d8de5f34dc876c411"
+    },
+    "unlaunched_dispatch_reservations_cleared": [
+      "H_1835086410"
+    ],
+    "utc": "2026-09-15T18:23:52.304077+00:00"
+  },
+  "outputs": [
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/cusum_detector_v2.py",
+      "sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+    },
+    {
+      "csv_rows": 12,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_alarms.csv",
+      "sha256_lf": "dbd41081d61c5596d05abfa7fce5024c8b25b8cafc9d0f085acff907a8ba3952"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_analysis.py",
+      "sha256_lf": "ba379ef4f31961318647186b685e1a5fd175ce8241a12d192d8dd40b1e2f9d94"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_batch_failure.json",
+      "sha256_lf": "f2bfacfd562d43e431a6cb721ba3a9cc17b939b7f5c818801f6ef9b82b880f14"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_calibration_summary.json",
+      "sha256_lf": "e4cafbbdbb8cf93b6d3da50e9b3b20464574732d620b8eb26e60cfaf1dceae53"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_code_identity.json",
+      "sha256_lf": "994fec3703acfb6c01b45771c95a0f17b0568b75a1d79be653a426644a60fc33"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_completions.json",
+      "sha256_lf": "54ce9e200a98d60713951fa0c1e41a62fb5c07341f207b0be9f2502e61990f33"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_control.json",
+      "sha256_lf": "1f42e24b32d60ffd2c2a5e482e02bbb1025f2879fdd2f86c13a9de8201eef64d"
+    },
+    {
+      "csv_rows": 360,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_descriptive_alarms.csv",
+      "sha256_lf": "5cbfa629e6e98b1b59f2f6a31b704d6a2314a38717b2c4f08c7e8c7b4f8ee208"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_execution.json",
+      "sha256_lf": "c73472d146dabaf511fddf89f4be1964de28d7fbc041d7de85a2f279cbcf080d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_executor.py",
+      "sha256_lf": "9e131c8afe1281c2e61b5db342871007f707f4db042856e6dc26e5b6e47458c6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_finalize.py",
+      "sha256_lf": "22449d2ed22449c37659c2145fee4cca78734f791cff660488ca53b653fc747d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gate_2_start.json",
+      "sha256_lf": "6152bcda6911983f4a2ae1566dedf33ef192c4b9cbdf88df7d273166e3cebb56"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gate_common_initial.json",
+      "sha256_lf": "f631c52fc5963c8de0ed8488416843428cec4b258ae3cdb5bafaa353eca6a0b4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gate_common_progress.json",
+      "sha256_lf": "1ad657073bc4353f24ba4c06265297d8f5797505adbaf57fb855a0c4b6119673"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gate_common_result.json",
+      "sha256_lf": "2335d3a331581f75f89e736005c5f563d968ba506048a8daf5c7117e56e25cf4"
+    },
+    {
+      "csv_rows": 280,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gate_common_steps_attempt1.csv",
+      "sha256_lf": "11f7e594b3e4ea1749d66fa08b738ba4f0108a1dd09c944a7d814ee814c68047"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gate_execution.json",
+      "sha256_lf": "453b3605ff52be4b387f08c781eded186c88b7100fd7d7a9c5effb6a2728d21b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gate_factory_initial.json",
+      "sha256_lf": "d780b66ebc29619d2133f7ad05758816e4abf9407f9291abf8bd7433dd2113d2"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gate_factory_progress.json",
+      "sha256_lf": "425b0558140d4c0512c2c8791547873eb20838152203d3d68f990b19de593048"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gate_factory_result.json",
+      "sha256_lf": "6f7e78f2a157bd0cc735f59910218e6e5f8e307929c897cddf6637cf1bbb7a77"
+    },
+    {
+      "csv_rows": 280,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gate_factory_steps_attempt1.csv",
+      "sha256_lf": "11f7e594b3e4ea1749d66fa08b738ba4f0108a1dd09c944a7d814ee814c68047"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gate_honest_initial.json",
+      "sha256_lf": "3d1f107ccefd605084a1f5aaba6bd78cb0313a61188da39539e0b1ad65772777"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gate_honest_progress.json",
+      "sha256_lf": "65c23793d59363f1e7e040f97a74a579b4049f208b81b2dd67afaaf6bdafad3c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gate_honest_result.json",
+      "sha256_lf": "9208615db79345721e37fdbca6dd187011824a1a433ec19dd62e3a635f2b77d8"
+    },
+    {
+      "csv_rows": 60,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gate_honest_steps_attempt1.csv",
+      "sha256_lf": "77a70cc668f8df60b22cbe2714f27369d4209b930bffdc958b5305fc0cf68b55"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gate_wrapper_result.json",
+      "sha256_lf": "787234045e6c6ab8929630b6b5605eab67047fc05b0e8846d358306269d55ab9"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_gates.json",
+      "sha256_lf": "978ab8d2130bd2a9e2cdf0c74c6e977e3bfdab004d4fcb491ff1bc1ee7f95a1d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086300_complete.json",
+      "sha256_lf": "8040231b3e732ceb9af5baf359b1eb25d4735c4c2c6d5cf70bfaed436fb31cde"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086300_initial.json",
+      "sha256_lf": "26d0daa74276f916b8c17d0682e991425c461137ea9aee589db2ab3a9ae64722"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086300_progress.json",
+      "sha256_lf": "b815834496c8dbe0d1d4baf10e72dc17f0633f33c27bc5c67429e1fa50eb2320"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086300_steps_attempt1.csv",
+      "sha256_lf": "0dfc7753cc02343dae1a21848482ebbcbc1a1d7567045e2a0c4db0a37e34ba25"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086301_complete.json",
+      "sha256_lf": "db5863e1e736092e3ffbc77c84a97ec808141b37e9869cc15b1dabd6497ade46"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086301_initial.json",
+      "sha256_lf": "6195792e0c1ce7e2a92b23ed992d23c5751c164de49dd1b3fba8d3533600d3fe"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086301_progress.json",
+      "sha256_lf": "8eb24ed0e409626524fd0d7335899c72d85559de278759e7cbe027847ca58cb5"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086301_steps_attempt1.csv",
+      "sha256_lf": "cbf69e967382dc1c2bcd7a7443eb4919a1532215873188e5cf4ee25b73ba257a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086302_complete.json",
+      "sha256_lf": "e62f8d01ecdf2a2a1c0ddc64b5e0037b5336d39a80ee6744a0030646e170f80a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086302_initial.json",
+      "sha256_lf": "82fcbf43e572c0766dfae307c319099ae699b3567a6f394130f14e256a92d16a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086302_progress.json",
+      "sha256_lf": "d3cd00f3cd5e5cba4f50e9961cf54aed2ed32381e84f330381f19eb8be991820"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086302_steps_attempt1.csv",
+      "sha256_lf": "9be2d51fc7f6ff363f4b6282931f9e1cb383e33673b1fbded4e632d21343f59b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086303_complete.json",
+      "sha256_lf": "d135a7fb8e04b7f4b569dd4c090bcdc893b4a6567787e697dda5a5b33ebe6cdd"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086303_initial.json",
+      "sha256_lf": "b8d365f3e7b62ca859a168d5f2241508604255b58340aa467515a2a69527eb55"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086303_progress.json",
+      "sha256_lf": "f1ef32a10c2917ba27b22f8cb401f2b26e0ba0ab15e8510f8afa2a1ebe67637a"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086303_steps_attempt1.csv",
+      "sha256_lf": "3618fdf8f55903942c62fc7894bb4626dba5ff9e37dd6e1628736d5bbe9b9963"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086304_complete.json",
+      "sha256_lf": "b2b33f96b62b7e7157ed27afd4f0e71de7bf207a569efed1f971dfa6b5a23eed"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086304_initial.json",
+      "sha256_lf": "c5282710dc6f038f6862a16d32f0de2c076e84bcf39c4c0f84cffeb6a304e6b9"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086304_progress.json",
+      "sha256_lf": "14883224e75869fc113183bef084df58caad37c1ec816ae539924f3486a17a61"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086304_steps_attempt1.csv",
+      "sha256_lf": "2d3af5b21719df63215db912d7389e1820247e983fb78b0cd6ae9577a82ea824"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086305_complete.json",
+      "sha256_lf": "6b217ed2f5b817a54a0b51cd6e31d0a336dfe4d83a0d160e8f413c2cb72d0711"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086305_initial.json",
+      "sha256_lf": "d5381a119e8952f588c28b08ede00f1b931f79c168f2637fb3c7e5e14f02d522"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086305_progress.json",
+      "sha256_lf": "e96d7e1f94a781960b1afd91c4273285e28d820921154e3882bba38f25ac019d"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086305_steps_attempt1.csv",
+      "sha256_lf": "f0fac2b9d8eb6c9a8f4dec372a75f9e9743b64c9824e92b8f9ff79c609fe9eb8"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086306_complete.json",
+      "sha256_lf": "f8a91f37fc4455636a0f2c2b6cba5e15d798344a7eab24a07c25a64b38ff8eaa"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086306_initial.json",
+      "sha256_lf": "2a8a3bcda92164d1c416957ba2b62d84b5bbc8ab9f5c091cb2f5410f4e75d488"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086306_progress.json",
+      "sha256_lf": "bb447f4b4b4764b9cb59e7ffc2775d9891c61ee7ab6b67cbff2e0edb2892bf1e"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086306_steps_attempt1.csv",
+      "sha256_lf": "f2af61077add09b52a678dd30888e026f9cd4055758e22e06630aff5f6445652"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086307_complete.json",
+      "sha256_lf": "b372d7717421777206596820a5d8aa47f74aedec5a7337e5c605d87bde4f942d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086307_initial.json",
+      "sha256_lf": "d82e25202fe300cbf33aed7a9aa206a70c056d97303b7d57a779c8ec538e1a80"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086307_progress.json",
+      "sha256_lf": "e823f022ed0fa2e9b193574b74a3b1d73900044c9851a2775c5c5b9136f3c2ac"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086307_steps_attempt1.csv",
+      "sha256_lf": "bb0e52f3a1ef87384333c60aa2e0f44822620ab22982eca1b9f2e92bae0a17cc"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086308_complete.json",
+      "sha256_lf": "be712b50b8131fe2f3e2949c38fcb149b13ac242511029971836cabcdc64cd12"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086308_initial.json",
+      "sha256_lf": "24a6a0cf37e794ba86e3f9cc24b4b60e24c3158adba18f6bc0d9afff53262337"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086308_progress.json",
+      "sha256_lf": "462e334f27a51b9646cddbace36cc2a0e2c8bb964032d7d7c19011096e5e9f06"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086308_steps_attempt1.csv",
+      "sha256_lf": "e34fa0d4fbb4ca36ecf9bb2e978902f7669197e589ed55d2c6d8834a9b4eee58"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086309_complete.json",
+      "sha256_lf": "d5598eda6a3b85ce71e7b27fe479e41e3e5f06e4b146accf98d4cfef9d6cc0d9"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086309_initial.json",
+      "sha256_lf": "fa0f554bc10026b4f775bdf449725ea360637dae94df55c4f747a87070e234c7"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086309_progress.json",
+      "sha256_lf": "4d08ac1bac7db59ccac3037ecfc4313f7e33e5728320065f4dc55b3821d84dbb"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086309_steps_attempt1.csv",
+      "sha256_lf": "9186ca2a7d74d357c1cfa50d88dfb6e5a8097a0a0ff8aa23fdd0578350f4145a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086310_complete.json",
+      "sha256_lf": "8c09321f7e38741dfa912b58e55879a696265afac10e8627d23ec2b5f4df62be"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086310_initial.json",
+      "sha256_lf": "9176c5e282b6a9abc924bc5fcd829f318df131c1b7499c501d656dd53aec317e"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086310_progress.json",
+      "sha256_lf": "b2bd28ef071ec12bf1a38f020b9bb5d92686a76247b88a18f4d15d2f3fa79259"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086310_steps_attempt1.csv",
+      "sha256_lf": "0b6b6a0269f6f9af01c2608dbaf7030aa42812d6ff3f3525a8f2f252d179adaa"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086311_complete.json",
+      "sha256_lf": "aa1f53d389092bf6f85e2db4261b30afc3a6bc4dbf4906c44ad6968ceb902564"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086311_initial.json",
+      "sha256_lf": "2c273ec78bd91905537639f05b032b757b340dc7a7c7ba12472a781d1aaf9781"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086311_progress.json",
+      "sha256_lf": "133ad34a71e7634e049f1db81c5a422b6e96fd0dd70ccc3e6b9fdf2f60e3f126"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086311_steps_attempt1.csv",
+      "sha256_lf": "af34e5cd4e735ae42d2f87bab47260192e8b13315b8e88fd279f5059939950eb"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086312_complete.json",
+      "sha256_lf": "f9b4794b0773d487265d5c780435d907a24b44ff9d80aa5dbed06a6fe7f92d4b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086312_initial.json",
+      "sha256_lf": "87f7c7e8d176b1c1fbedb948e1c9c0d46a1bb7cf479b315e8d951186fe20a870"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086312_progress.json",
+      "sha256_lf": "27a8f3fdf510b11aa547ae4e2c8753e9a2af820346a95237aabc08be9174059f"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086312_steps_attempt1.csv",
+      "sha256_lf": "0572fc5b2c94299a12bdeb4fc4e3c40fda80e251e2ebb8abc613775b0260884b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086313_complete.json",
+      "sha256_lf": "2a16c4abb3ced0cea3c6b99e2288c516bf65f6215321f373901ade0d9b600c63"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086313_initial.json",
+      "sha256_lf": "234e80f5a3d8fbfe82f7a5f902217db5bdd40613481d90c135bccc3e7e0f08a1"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086313_progress.json",
+      "sha256_lf": "2961a7ed1f4707e7b8c049fcaf0c11d61c09e0b8d9c2a484e78c22b979dafcc4"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086313_steps_attempt1.csv",
+      "sha256_lf": "d357962b190e8f668979ab407b81365f0e742ab57f3f85f2558160568dfdbc78"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086314_complete.json",
+      "sha256_lf": "7b1d43a36cf4f6927c7c4c63a0b24945ab0e9e7ed87f650a55b7d6c2f829aea6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086314_initial.json",
+      "sha256_lf": "588281b30535790314df2c144b1fd1897b179db1660ebc8c9d5a84adf775a470"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086314_progress.json",
+      "sha256_lf": "fb208afecf732591b850ba2a6c3e4c2a314cb4ef93c24b47959772d68b46991e"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086314_steps_attempt1.csv",
+      "sha256_lf": "b2739d104cedbc71a23ff7cbc0656aeebc01930f10905ede0858e0175ec8d682"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086315_complete.json",
+      "sha256_lf": "1758b62ec8684c26c5085f88928ca40829b48705c7dc5ab49b1dfd01638888e1"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086315_initial.json",
+      "sha256_lf": "d59e48c4a567a3698ea3ecb19d919f50ea8b1ac4a60e4634cb43069fccc12f3b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086315_progress.json",
+      "sha256_lf": "2782f0b0429734f82ebf536f0e735cfb519b75376174a9df6a0eb0f3bfc3395d"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086315_steps_attempt1.csv",
+      "sha256_lf": "77beb278a11ec08d29e06c3ca0201a39934bc4d0172daf8199cd41472bb32c16"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086316_complete.json",
+      "sha256_lf": "fbf912f19a6682b5a70725c306496a1000f210ecc31d3fcb47f5fd39c8b499cc"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086316_initial.json",
+      "sha256_lf": "d865c9a6eef165daf9e7499033c71448fc8d0f1ab646a75c2c0fa8afcd774de8"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086316_progress.json",
+      "sha256_lf": "e781d4f36356b6337bbe49487edc233daef38cb04d211a2102603d8061b15aa0"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086316_steps_attempt1.csv",
+      "sha256_lf": "cc1f7e14c5701054903dcf840b9d0b962243137096683a4758ea70b7c66694cd"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086317_complete.json",
+      "sha256_lf": "ab8d103e2a166a0096eeb9e1a0b4534132176972ec5b27ae86335f50a4e4ab83"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086317_initial.json",
+      "sha256_lf": "839dfaa43914121ffede77b09aed19d3917d892df0b26350f41f10c86880681d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086317_progress.json",
+      "sha256_lf": "db61f8993df1dd721ea577d90d58005f62ced49b386105a3a587684b974c1d8c"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086317_steps_attempt1.csv",
+      "sha256_lf": "e8ca92e173973a54afa8e491b68077532f762d99a303a552f9c8e8fed5172296"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086318_complete.json",
+      "sha256_lf": "958632441112e833dd9527af25d000c28b3bd95d1389e5eed31fec5656c9a12c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086318_initial.json",
+      "sha256_lf": "caefc4c31641c7176e5c22ffc67384b2e0ec42b410f000f88a9a26ed7fd75db2"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086318_progress.json",
+      "sha256_lf": "8520a76de2f60f08671822619063d10cfddd15f0c1477be48d7e2b21f8cf630e"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086318_steps_attempt1.csv",
+      "sha256_lf": "b1ad16e76f9735baf7ea780bf61f72f06af158f21cc77a3673d6e87e815b9b28"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086319_complete.json",
+      "sha256_lf": "ad64b040ddadcc4d104d84f58fe81fd1400744e8c0aa195c50cdc7f44c5ffc89"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086319_initial.json",
+      "sha256_lf": "17ba1f150019ac07c55ce54dfc8da045c9ad9c56ab733cceba3c4d9d71cc3b5e"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086319_progress.json",
+      "sha256_lf": "e12f863bd3fa2377f8365cd7ac1427aadf402a4d111f7b443c746a321cbcf5ae"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086319_steps_attempt1.csv",
+      "sha256_lf": "a85c8e1f48e375cbb9cdabcebaa0cca3be1fb370b0e18ed180e82c29b8e488e9"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086320_complete.json",
+      "sha256_lf": "fe10fa60b195e077a972e6c8f0d5d6fad7035fe864f84502c513997dbcc2ea4a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086320_initial.json",
+      "sha256_lf": "82b4970d1042b17a5d6cb464cd123b69e034a17178a88dd502691c2637d73af9"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086320_progress.json",
+      "sha256_lf": "c5877f9e7211af3e2afc3a8bdee8a625104572133125b94ca894438dd5f7412c"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086320_steps_attempt1.csv",
+      "sha256_lf": "b083224458253bdc37dd94b16ee2562769685f0fbdcf1c763ed798e773ccc4ef"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086321_complete.json",
+      "sha256_lf": "d7d6663e76a6d281fc867720f546675ff8d1109d62ff72c3b0e0f86d44c44ea8"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086321_initial.json",
+      "sha256_lf": "7a0bd97a6adc0bac095e998ffaddbdfe48502a0c0e94cef852890d70f8164bf5"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086321_progress.json",
+      "sha256_lf": "6b15aa625404a50eed8a80fadc5aa6495a920aa0f17ba9b9d3c13713e32d2f61"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086321_steps_attempt1.csv",
+      "sha256_lf": "316d61c1d3c95a6c23581a9c3aee7640e582f086c545963b745ec88a18785af6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086322_complete.json",
+      "sha256_lf": "78520022bb6d3de1f6d75b40899eeb917f18cef4aee222fe576f5347083f70c3"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086322_initial.json",
+      "sha256_lf": "071ca7d6c55af701feeb74033fb5b1af46851f6b78cba7b57ee0c8345e1cc654"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086322_progress.json",
+      "sha256_lf": "42fb21d0963bca6e0193432a997d2716f2a22358fad1a31a568a85e9c6202260"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086322_steps_attempt1.csv",
+      "sha256_lf": "a68f1ecb9deb2a0a6829e1414b8ae1da9c1fb18f92c93473acf24329d2403c98"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086323_complete.json",
+      "sha256_lf": "4d987f7395a48402b46608703440d5f0d6e6d49983bf00573646424425dcccfd"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086323_initial.json",
+      "sha256_lf": "7e52b564c48196452d72a5ad6b4f3d45c8bc152b1ebc0eb5678b342917bd29ef"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086323_progress.json",
+      "sha256_lf": "323d674cef8344acee111132f62c24f6cbcc77b3c5fea31b098c1c30e7c835ad"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086323_steps_attempt1.csv",
+      "sha256_lf": "85439058e68476c35f3a2de53fd1a8685e043a482e3327e6844d36d163b92dce"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086324_complete.json",
+      "sha256_lf": "5f2959de3d459a143e60c1fd20fbac81d4cba7817c5036732f6cceb35c976311"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086324_initial.json",
+      "sha256_lf": "28b5d97f05ff1eaa22e3d1b35cca784e8aba93ba8df6583a3d522163a6cec4f6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086324_progress.json",
+      "sha256_lf": "c81e6804ef858dbf01ae883a4c1c83137f7b3653b143a9cdbb2d9db6d6d21ee5"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086324_steps_attempt1.csv",
+      "sha256_lf": "f3300576c38ca95940134df20ce4cb7c5b854f43cd2ac7c5d68f650fb5c2f527"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086325_complete.json",
+      "sha256_lf": "b5a94c744c70f8665fa66d58a85374f996f1722470a680eeb5d7a49f1039e944"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086325_initial.json",
+      "sha256_lf": "27b8b6bc7fab68ea94b13d9e51015458a9c97ba4b44b1a271a0d956843bf05a0"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086325_progress.json",
+      "sha256_lf": "cb70d402f7df1055852671393f5f3612d9640d6b0d8275d67a40d703b4e047f3"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086325_steps_attempt1.csv",
+      "sha256_lf": "ccebe15ba248c7d2f7557c5b32a47faaf019cf385a49f38c6e673fea207d45bb"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086326_complete.json",
+      "sha256_lf": "af33d879f580d78ecd32a8ebb43bc45ea89039cf3c03deab5818d596f2c9a64b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086326_initial.json",
+      "sha256_lf": "f6302fbd019fd869ed32bf0e124c032f2e6e7908aa1949b680f22ae4ab0d7924"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086326_progress.json",
+      "sha256_lf": "fbf9bcb8e848ec55be44545c4d454520438b0271f98b3d6a0b9e1872498c5994"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086326_steps_attempt1.csv",
+      "sha256_lf": "60be9918a82e79ff841a19eb010537ec13c13f0dfe6c7bcf1941c7cbe3627546"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086327_complete.json",
+      "sha256_lf": "5f2400abd11fa9134e19e712c2a407c7f506ad7e12287eaa7418f54e8c00e284"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086327_initial.json",
+      "sha256_lf": "3c9314992de202a806460311b8a4d9a2d87edf35904713f48ee2ad00392d399b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086327_progress.json",
+      "sha256_lf": "75baa44866fa4c892730c75a8987159bcd35cb8a58740508566e5c855a17fe90"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086327_steps_attempt1.csv",
+      "sha256_lf": "cdd77344e29a7a1e7d1cf7f63d904cf005458f3f45a611d408f8d9acb19629fa"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086328_complete.json",
+      "sha256_lf": "571e8068701b614e0c554cf2e3278b9fd7ec9dc953d28dd907a3ce47c951d86e"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086328_initial.json",
+      "sha256_lf": "1dfc5b5720bde98e9693f03f567611f0aa3f5d344e3718cc861730b8af7c9c7e"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086328_progress.json",
+      "sha256_lf": "8f8370e911c39cc179598b4c1e227f48b3251f21c4a6a82c66045fa24ef9c075"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086328_steps_attempt1.csv",
+      "sha256_lf": "57270e66fad72117df7fa81c4b133fa3157e4a0cac23b433213995799c54cb66"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086329_complete.json",
+      "sha256_lf": "5dbba4867eea3e0091b52e5e8357ca2a381f8b5ffcd2f394a365c5ee2a41aa96"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086329_initial.json",
+      "sha256_lf": "e6f50045221bc7f9cc8f51e731824a9ee14854a4e159d7bf93aab2a525736abc"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086329_progress.json",
+      "sha256_lf": "88b8222b8847726c1f19e2455edaabae29992f2fbabe51f3ccf042e4e38ebd3c"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086329_steps_attempt1.csv",
+      "sha256_lf": "bb62854a62106589cc1c22e8b3630faadad1505b7fd6bcf69c92201caf096a5d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086330_complete.json",
+      "sha256_lf": "8b80ea6335952643af991cb030596da099ebde6a52b3e21187a21d514aea58aa"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086330_initial.json",
+      "sha256_lf": "c2226011796942d5b83d2d4b4a8c52eaf003c569f958c191177a629986be5915"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086330_progress.json",
+      "sha256_lf": "c52bf5a3674c065b7486fd440cb4c2cafe0e9c77482bf5de89f0a5e5784a755d"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086330_steps_attempt1.csv",
+      "sha256_lf": "e4bbf6a9151a6ee44aff01bc34e327f04e85e09db57ced1176d8bef89319b5ff"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086331_complete.json",
+      "sha256_lf": "4f9de8c73bd9eb7f1d038f485a6d783e4e9fda2420da92cfabf08c54d347c109"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086331_initial.json",
+      "sha256_lf": "2ddf3dadc702415ed31b69646227bc5bfa299065262802f8a06a9c592a8af41d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086331_progress.json",
+      "sha256_lf": "cfe8f43711d5bb6268da8db3e251a648d10465522c2e94d6958e7eae2a693038"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086331_steps_attempt1.csv",
+      "sha256_lf": "3de0b0c1b3b41ec06cc84393987c287cd4eaac33c5dae9431acf53bcb573a73a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086332_complete.json",
+      "sha256_lf": "c428cd4c38e5317e3255533012cb9ac5ad0081319ccece7b88bd45e8e7c7928e"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086332_initial.json",
+      "sha256_lf": "236ff1249d6e08998733c8a3527833d3e5988954f363da0a51457386f62d153a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086332_progress.json",
+      "sha256_lf": "1fb9aa69a37808f3155d37eeb73004d298e2128149a246df9236d1879518b6c8"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086332_steps_attempt1.csv",
+      "sha256_lf": "12f76f0c141b0765d85228c8485ded12b0906fc3d6ca8a08966227cba3abb04d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086333_complete.json",
+      "sha256_lf": "dc8c193e3b9ae573e0560dd26a52fb8626341976617e665eb6d5fe3fdcb31d75"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086333_initial.json",
+      "sha256_lf": "b5f297b889dea871966b6ae42e5f9c7ddde4205d8cdcab7d28a6f5fb408504a4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086333_progress.json",
+      "sha256_lf": "b959173e87c5df988723905b5719db56af8d6aaf6c99fbf9998bbb85f50337f9"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086333_steps_attempt1.csv",
+      "sha256_lf": "3290616409c528f1e2d976f0cce7b238bbda3b15b85cb506d9ac7cecb409be02"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086334_complete.json",
+      "sha256_lf": "b9505b436be32250e92e8110303a534aceea4eb1962026ff98e65d759872cec6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086334_initial.json",
+      "sha256_lf": "e7013ca5c894a8b9e0eafc2e6b0d7e6304a377c64f2d270ff74940fae2811881"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086334_progress.json",
+      "sha256_lf": "7b9de2f05af9072cdec192e7090897ba53e2d4ca8ac9cdd148c94e3e3d2534a9"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086334_steps_attempt1.csv",
+      "sha256_lf": "401d23be5e18e1803d0c29c00d66766429636073a5136f214169b0aab0c4b8c7"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086335_complete.json",
+      "sha256_lf": "676606d66eda1fed4dec5b567311943fcb13a0005f5414cc1e318b2d5835dad7"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086335_initial.json",
+      "sha256_lf": "9b6f65a5ba26c3a900d5d8db1a038401b28d43ccbba735bc463f402e6122c641"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086335_progress.json",
+      "sha256_lf": "fbe60a19d10be5c46c43d54055c594e8a910229103644d021daa31a43290e44c"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086335_steps_attempt1.csv",
+      "sha256_lf": "e28821a3fb6be8469421b2de183102c026face8a7033962e112b0813dbb6df9a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086336_complete.json",
+      "sha256_lf": "4084d8021810794cac1ed4d0a0c89143cf13d0285d5364ff5269c1f4046d7d7c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086336_initial.json",
+      "sha256_lf": "0e13932ac9eec5f7f33386d6ec33672bc915a6991bb0e9b824de4bc89719814c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086336_progress.json",
+      "sha256_lf": "2985f4e96c30a903aa0b8c8f66d4c79694876a60b70c8988dc2751171eab2f59"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086336_steps_attempt1.csv",
+      "sha256_lf": "8b80bde40f7167e81858088eb73b31d48d50be8aee0b161e5ed30d0ca9ef0f47"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086337_complete.json",
+      "sha256_lf": "174168a8dbf2946cbfda615c712a39fae40298a78cddd9053a4fe257b07a0ad4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086337_initial.json",
+      "sha256_lf": "1218e1234986a2f17c770da2552509052d945706f858fface65fc563357aaceb"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086337_progress.json",
+      "sha256_lf": "13b83b2c9d3058dc14df0ea1668bd691da69973c4c89bbd4bf6ea41e73aceb7c"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086337_steps_attempt1.csv",
+      "sha256_lf": "970f70971d83fc31b4b3c4c86e8244adbef11fcc11133abf89500eb2aa601566"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086338_complete.json",
+      "sha256_lf": "4cdb381fb9329fe3b4cf59fc3b96adec7e9c460f53dc93f37c9188bd9e4d3154"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086338_initial.json",
+      "sha256_lf": "696de7b5b5e8d4f9f6d317ed70121242cc45d13f682802f49118d9c29800d7a1"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086338_progress.json",
+      "sha256_lf": "d2b5f470cfda913fce9f45162fa9b40dadf742680b764a2590249857c887cf53"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086338_steps_attempt1.csv",
+      "sha256_lf": "5d2bfd9807eb70638c8260f8ca4b9ef6e4a6360e004221e11bb40ab16ebe0c86"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086339_complete.json",
+      "sha256_lf": "82f873d4d685c58f3ba8bcdd13cfd36ce0d3c6a547146bb4b786d50b265a37c2"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086339_initial.json",
+      "sha256_lf": "a39be2ae7b7a5dc4426a1ed3787bc1837f6594b7c1b8d4dc63d368412c56ef74"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086339_progress.json",
+      "sha256_lf": "35524d0d50bbdd8356d2d87a1bdaa158585e42a679eec9266a773086dc5f8290"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086339_steps_attempt1.csv",
+      "sha256_lf": "59c16f1e45b3dc2b4b73b9c1cbc0ef1bbf01bca1902dfe5a9fc99d80a50c6889"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086340_complete.json",
+      "sha256_lf": "766e629c9ef8665093a1f573ea9e6702e31a84b017f9e2964e476ef5f0cce187"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086340_initial.json",
+      "sha256_lf": "e66936bbd673d8b2ba2368f71c9d77b9c3288da40981f2db769144f7e7a5814d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086340_progress.json",
+      "sha256_lf": "bf6ebfc4918b5df934ff6b0196b02e406af35a7f4215f260e7d40bcbcc694ad3"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086340_steps_attempt1.csv",
+      "sha256_lf": "ddb624fc7f9fdbf011e4bf8f3aa169c2684e6754144f15251ec518a1f08385c2"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086341_complete.json",
+      "sha256_lf": "3943f48372a361e4adc571c66d857f4506678f64b18e9c428e8db1304ce90a98"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086341_initial.json",
+      "sha256_lf": "550dd7a604856fa7778d346aa9307270643643b5a08d1649229ab3e8355cd8ce"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086341_progress.json",
+      "sha256_lf": "d52beb242a47879175956635c7e40df4a1d01bb8cd754c3c730f57486f4b9f0c"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086341_steps_attempt1.csv",
+      "sha256_lf": "daea175b275e04370e24bb588383bad63ef8f2936f5bdd40cc6dab9ff4ee3a08"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086342_complete.json",
+      "sha256_lf": "3b163c104bfd03c1c42b05f2ac2e7b0bb088b598e5b45b0269f3153dbf215315"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086342_initial.json",
+      "sha256_lf": "f550f3b7e1ce02564ca6a837c17ce314b3032b4cf0d827dc66d8f27afd41ea9d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086342_progress.json",
+      "sha256_lf": "6f39edcb0ad6218ac0e49cf53525c8b21c4bb25d03bb274ad8e2d787b5685626"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086342_steps_attempt1.csv",
+      "sha256_lf": "7b96ae4277e46020fd81fc08ef968a3f5e2fe2fcf566d52a8f5dbbfaec28e878"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086343_complete.json",
+      "sha256_lf": "0e012018a3c91c31d9a3acd38f24086cc43f4872ed3dd206686cda3832b5f53c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086343_initial.json",
+      "sha256_lf": "5170f0cbfd3dcc2bf225d48a3b05e47760dc37e87320df5a73771ff41d3c8e40"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086343_progress.json",
+      "sha256_lf": "e4e708c8702c4340a6b2940d311b154216fefa401a5f82dc894d84669815a155"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086343_steps_attempt1.csv",
+      "sha256_lf": "8e3d016d17cc5721f1a7115ebe22b89fce19ac5d999e5a18e1e0fe62674d8b8c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086344_complete.json",
+      "sha256_lf": "3f3fa274ab4f9f79cdf6ba551da070690af41483befda82b7c56c13ff92aa96c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086344_initial.json",
+      "sha256_lf": "fbc91982424d2f179b68b83a7579042c6249e28a9b691990408f399ad38cbd58"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086344_progress.json",
+      "sha256_lf": "2a1bccbcac75a3713275f2f55d9a572274451abf1565bf168ae54c59698d25f8"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086344_steps_attempt1.csv",
+      "sha256_lf": "d88f3092143d3729196416bd2885ca5bb4a542e01f6e122da2d628ae5a926982"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086345_complete.json",
+      "sha256_lf": "3c719bdb28a00a209d04f67d78ac65555425eefb9b25160e811954170d18d20a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086345_initial.json",
+      "sha256_lf": "0806655945baf02c5ada1896f71981100a79e9a9b8e6f183ad9cc1cce036ce6d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086345_progress.json",
+      "sha256_lf": "faf532cf4f97589e03500a142334addee3c77d84f5001f3a9ed75e04dc5c7d5c"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086345_steps_attempt1.csv",
+      "sha256_lf": "cb960b9a2254cb8d8dd9629485d39cb3cd528ee5fcc7855a0d46c22c47f41623"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086346_complete.json",
+      "sha256_lf": "c7a44b3ba934d7b3e959e034fb029425283ece476bf1957f46db6776012679ba"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086346_initial.json",
+      "sha256_lf": "3f66bb0f3c88669b79628c2167f5789f6a047fbbaacd64ec79e8ae37920baaa9"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086346_progress.json",
+      "sha256_lf": "c825ba26ea174215dc4564a3912c9ac21baf126bb947243c585a4619e8e34671"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086346_steps_attempt1.csv",
+      "sha256_lf": "343814825ab6bbd5a3e41a4bb43484f51873cf8a8d1779ba1f15e44045a846ec"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086347_complete.json",
+      "sha256_lf": "3cf407ded218068a58ab7f4a3e9db5cefa0bcb2f95ebaafa37e7437b68df2bcd"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086347_initial.json",
+      "sha256_lf": "45aee94fc150f97134d63b1959dc4797d6da451c45970cae2e27bcea0380db77"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086347_progress.json",
+      "sha256_lf": "9a23f1a726a8a4ca23b64a5de2308a806061ab30808c5dfc951ff3b32b5788a3"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086347_steps_attempt1.csv",
+      "sha256_lf": "4e96e9dfe5bc6022ec040f3b1ec3f80b8edc89ae60facacec18d7b00457282c3"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086348_complete.json",
+      "sha256_lf": "49160ca996d1c7b283a23dac71276362cbd9d060a02c5380d36512d0df0e43ba"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086348_initial.json",
+      "sha256_lf": "1304c0f0e62414d0f63fd59e84ca14971866014ddaf1363791b0d216c3e2a2e8"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086348_progress.json",
+      "sha256_lf": "f225f5411c2ad1aa81209fb021ee2bc99814cee06be76fbcfdc6701990772e8e"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086348_steps_attempt1.csv",
+      "sha256_lf": "ba5177d1cd34205300ef0e1eeb6476b053008ceab566a0ef4495f0a25cdf0671"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086349_complete.json",
+      "sha256_lf": "c157e60539bc0eb67dff827eeb3b712d543124e43b449195f50a162626dafb4d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086349_initial.json",
+      "sha256_lf": "95ebc8c102f88d9a93423178b8f1f438c7f231431f603bdc31eb951dc2740ff1"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086349_progress.json",
+      "sha256_lf": "a18171e493e1218d056037f7e18d0b297e41f5d596c7771b5e32fcb4849952c4"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086349_steps_attempt1.csv",
+      "sha256_lf": "df68263d53dec01eed16aaea05262e79aee794658a7e8acac4acfc4397a60e27"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086350_complete.json",
+      "sha256_lf": "c55dcb5ec4fb4a5fce9e7e8385433eac4d7bc44f8eef539e063e42f5ce14b045"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086350_initial.json",
+      "sha256_lf": "f0349b408d38ac7531185134766ac862ad1def86d6a4c197d2ed7812f68484e0"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086350_progress.json",
+      "sha256_lf": "89dc58d92f6fd13fd32c311c2417b526b4501a37d7dc61ea0579b025d45605d3"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086350_steps_attempt1.csv",
+      "sha256_lf": "d718bd0ce5ef5877cab0c1ade058ca1854bcb0d9f996e5d873db2d586c9b709e"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086351_complete.json",
+      "sha256_lf": "094455e293fafb60201bd35da464d92ae5f7feadbd0c1e32a3f38b0c2dc79300"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086351_initial.json",
+      "sha256_lf": "e346d4189e8a777eb6e19e33bdc06aff749352fc0044d30aa3bbf585deede1f4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086351_progress.json",
+      "sha256_lf": "9a7b2f5b3e6ee9bd0e1c95e86176cb8f0cd4cfefa5c0122045900826da8f7409"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086351_steps_attempt1.csv",
+      "sha256_lf": "be9678dd9a367cf1c292eaf9dd6f7226ceca339447bf95a23b6bd0110d48141e"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086352_complete.json",
+      "sha256_lf": "1e1f49bb88fbc9b36eedce239315ca4c3d9dcafdf6c05c047a4e58ba1a0a669c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086352_initial.json",
+      "sha256_lf": "86ae13251be18dbae98547003a47ef7500e78740bc2015dad17b63f0cc7dae5d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086352_progress.json",
+      "sha256_lf": "32a8fab7587979430a66a637195352d4a97f1132016b079ffd100a2b39ba1345"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086352_steps_attempt1.csv",
+      "sha256_lf": "cc4173af2dc8a97c296b6d33286acedd2e7fdcceffebd712d05f71d6c30c5489"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086353_complete.json",
+      "sha256_lf": "28e0fae10b7b5ca9b69c7f7ccbd37cae39f4b1f2e7afa260872a517d5d1399a2"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086353_initial.json",
+      "sha256_lf": "141aa9d3081f75996a8d56da5de2fa1c8b017f2497a0579b51aafe7af62a2d0f"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086353_progress.json",
+      "sha256_lf": "5e5e7015c2c84b4843346fb23971da71c2f978bab501a0eb56bf2583b11af069"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086353_steps_attempt1.csv",
+      "sha256_lf": "a6079034c7da2e4e54024efbadd966c68625934b95c3f9159c182e781976f64f"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086354_complete.json",
+      "sha256_lf": "69d2faed9f08464725120eec8f065ce830050bdc10ec03ac20def849e4f3c351"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086354_initial.json",
+      "sha256_lf": "8d58616dc007780c49c6f54f8a58d941915651e4f4982520c5f9f494a74d23c9"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086354_progress.json",
+      "sha256_lf": "9a2dfe8384168e4acdf83b14a1813fc096025b066290c399e132e626aa215cff"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086354_steps_attempt1.csv",
+      "sha256_lf": "06e8c94dfdc70b9dab116bee6777f5a78d8f6cf8240af322001cf46793461b4c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086355_complete.json",
+      "sha256_lf": "1b281960f3810142887d2a38c853a85bec16e8abcbde1b7925852a180dbb8a61"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086355_initial.json",
+      "sha256_lf": "2e18a49b5739814841aad6158f87c67d620c16c33aac5498798a4388e482842b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086355_progress.json",
+      "sha256_lf": "a5c8b548378195aa70b5904c5c41a549db34772b16cf6b054f4e0d6d6953ff62"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086355_steps_attempt1.csv",
+      "sha256_lf": "c445dc9b29739e903dadec5edf7633bfabaf293e840ec6e113749b4f89202a52"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086356_complete.json",
+      "sha256_lf": "7a2704dc9b17916cd403de568feb2be81200b8745992226248b805ba58ca5f7a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086356_initial.json",
+      "sha256_lf": "ddd50c3ea901fb8d3889f9214a5352de408039021428085321ac81cc3a39d559"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086356_progress.json",
+      "sha256_lf": "f7ae0a2abcc1c7f26d318701a751368b1185cea9ddb2f616af9bfc7d3b99a328"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086356_steps_attempt1.csv",
+      "sha256_lf": "1db085f92c6b63dd100e0e54a1100ac4406ab3ce90a180d1f8db553519c560d4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086357_complete.json",
+      "sha256_lf": "82100eb25537a128ebccbf605926a32c9410dc2a99d9301689d77eae44e9b954"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086357_initial.json",
+      "sha256_lf": "d5c49dd4f2a35aa3f1841e1d451c8982f542b3bc424c3ef4af48b0adef50c030"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086357_progress.json",
+      "sha256_lf": "7c992a99367d6c3f95951acc688e87b733db173c53329dafadcc456003c9dfa6"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086357_steps_attempt1.csv",
+      "sha256_lf": "d6185ac7c4a5d409438e4e4e416d28e18dcc93c41d2b43fcea291f0c93ee53a7"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086358_complete.json",
+      "sha256_lf": "5282c26e85345b0834fbd676c38cb84fad9ab7b36e685f6c23ce08edd1d9b728"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086358_initial.json",
+      "sha256_lf": "1ad6cf5cc37cc8cd346e7a4afdb20c569d27997e1a4617cc609ae1eabb0a1ba1"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086358_progress.json",
+      "sha256_lf": "7fc55855a1b996ccde4fd52aba1fa4f333e90692c8701cf78f4fba6b26eb36c2"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086358_steps_attempt1.csv",
+      "sha256_lf": "53f80f2aaaee205fc7bb9de60ef250e7b499c30b6b6553b6a18457ed4c27aeaa"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086359_complete.json",
+      "sha256_lf": "9e09fe05e079477ca4026a7c5c5ed8df07fe53e0968363f82ab3f70a3f9caca9"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086359_initial.json",
+      "sha256_lf": "11f550daee4d5e98a262212b0030ecc13e4bc65d6eecca6ba0d82ec2249e0f40"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086359_progress.json",
+      "sha256_lf": "d0009893e3bb3d892dc7a5fb553b8586bc842cfe61ef56754f31c588f3a9a692"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086359_steps_attempt1.csv",
+      "sha256_lf": "e1600aef927f06dd1b1ad99bdc11c6b0617141a28ed2cf181a1fe72e93f4b769"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086360_complete.json",
+      "sha256_lf": "0c6c88b9684276c2cdabbebec3d1713fbafb3ce7d5157d2cc9b1d9c53376bd4b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086360_initial.json",
+      "sha256_lf": "ce539f9d6dbeda9d470dfaa63b85b2bb4ad0e48aa24dd95e9af369fc4295d46a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086360_progress.json",
+      "sha256_lf": "23277882a98b71aa128537226c4f93f77de3451a96b269e6e647fcf7e456eeaf"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086360_steps_attempt1.csv",
+      "sha256_lf": "949080ba2678d36e1bff9384d7fae3cee95babed0a3dc0af2b621812f04df2d1"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086361_complete.json",
+      "sha256_lf": "4408a808d3ed2c99e5851ac1c07ead1e83bd00d38a902ea271a1dba052721713"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086361_initial.json",
+      "sha256_lf": "c3eeedd090e7a9e94d5e4c8a6fdb13d085509a07a550e74125fcd472481b9dae"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086361_progress.json",
+      "sha256_lf": "5458f69d87d705facff6111cb57ff47259a86d82e02551910b929b61977255b3"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086361_steps_attempt1.csv",
+      "sha256_lf": "6afecb9e9bf94e777e18b0fa1d4964571e3ee4658ca9bbcb19b8dfd166cddc92"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086362_complete.json",
+      "sha256_lf": "8db179895e26a7e144d24ccac4e085e36062b6413668111c6e62edaa00db188a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086362_initial.json",
+      "sha256_lf": "9dee9d14c32eb4e02a30ad37967492879281764ec27f7cab794385f1839af308"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086362_progress.json",
+      "sha256_lf": "8c8b5bb5bc1ecb98670d6797f54b58dc24fa15f7cfda9daf96cc87b9792aff4b"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086362_steps_attempt1.csv",
+      "sha256_lf": "5f0982fcbb7e15a736eeab64ce2c0a3ff485a52521ae6624a1cedfd5b0a83cdb"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086363_complete.json",
+      "sha256_lf": "d48ccd2c50a903c395c7bd61a9c97e132b4af328ef1c8932b12f1efabc9ca1bc"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086363_initial.json",
+      "sha256_lf": "1e15bedc8a989792f53b68b7e6c1646b18307a0f8b9827c68156e94f92370c32"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086363_progress.json",
+      "sha256_lf": "1fa09f14c8297cdd246262624a17020aa55a5fb05968107f4cacc1dcc70dffc2"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086363_steps_attempt1.csv",
+      "sha256_lf": "1b4326c7a7d46993d92125bada06290a24c55b74ff964ceebdea9be09ab361ce"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086364_complete.json",
+      "sha256_lf": "d361ee5857be1393dfe3ec6df0fdd95b9be52a2081eda9deade5034a29f30286"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086364_initial.json",
+      "sha256_lf": "741df4f19544cc3e1b6e1d10554146b6e9f462d3ddb7ee6369774d36e406bff8"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086364_progress.json",
+      "sha256_lf": "ddb9e8265fbc2138a3b59b72687b2a8858a6f9b347fde76a65c87c28b8bef118"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086364_steps_attempt1.csv",
+      "sha256_lf": "b47b6f6d31f9f67e42d66bc9f96f51317792f340d01164a43b0868e289343017"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086365_complete.json",
+      "sha256_lf": "34366bdee3b4281f98825222e052225a4b714253f27d1f84f9dcc7082e69e240"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086365_initial.json",
+      "sha256_lf": "bd6fe3ca9338eb4083a1b545429fe9a4e4158ccf09001b37730417df3f554ccd"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086365_progress.json",
+      "sha256_lf": "7543c295eb05cd2289fa59ee42d26b323e21f0f8c56f2dd8f833a65be1bff1cb"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086365_steps_attempt1.csv",
+      "sha256_lf": "88caa50f35462a4c2bbc15a2392134ae774bce0899c422f7a4d89e0e8648062b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086366_complete.json",
+      "sha256_lf": "eca96ad54ad1b957851350ad29bd75da11060e1385c60f106905391abe9539bc"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086366_initial.json",
+      "sha256_lf": "958455d0f5196afe3c27b33beb9794125f51d7cb09f0b9c174f650b081029ab8"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086366_progress.json",
+      "sha256_lf": "4d43dfc03be304f2c5353e7962d1fb53e503ede8526c06c3efd96d30de449c04"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086366_steps_attempt1.csv",
+      "sha256_lf": "51c200df87f8f8af411b1da39d7c0bf5601060503a7898b1aa57b3bf153b3e33"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086367_complete.json",
+      "sha256_lf": "f22320a75e1215743425176a716f34630fcb5ed6de93196a0e2b7656f3ab5609"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086367_initial.json",
+      "sha256_lf": "39dd81ddc2370f0b472b860eccd4b794f75d5dc0828939fc2d9bb8f8a4671e1e"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086367_progress.json",
+      "sha256_lf": "3012839c89ad98b2fd143e9acf7a3a9d766c3c6cda9d3af6faaf21a1343e46a6"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086367_steps_attempt1.csv",
+      "sha256_lf": "5ff6171cee80628e86971eec9dd6ef6fb1a9046403e845cfc06ead0a8453d87d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086368_complete.json",
+      "sha256_lf": "6019814f963819e7c0d661b706bc1b2deae08ace47e04cf7d10261d285fc81bb"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086368_initial.json",
+      "sha256_lf": "58b3b41d24a6ee1e9a5e9e30857c6bc4ff1235c5b881c56aa37aed727ab1cead"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086368_progress.json",
+      "sha256_lf": "7f79d7d29d7494085c9903c9e442b804f2c4b5b63b1c045e9595e75339f76ce0"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086368_steps_attempt1.csv",
+      "sha256_lf": "1d5a2e5cd7946e25f3a0d4414e1368176434419dd9e0a73cff8c6ef6110422e6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086369_complete.json",
+      "sha256_lf": "9417b5c47ec2d9c57c4e5a920496c68aec0a68c4dcfa844c54f8edd4190fc59e"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086369_initial.json",
+      "sha256_lf": "1f47a2da9fd28fdeedab2263108681ff6727cf7d6a7decba82fd69183f78f4f6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086369_progress.json",
+      "sha256_lf": "ba9d1b39cb37bc6e86124ad6709213deba4b97356e34921e82912a7aaaf3cf6f"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086369_steps_attempt1.csv",
+      "sha256_lf": "f328e1c5815040b99d0afffb7d44e36d8c78c643570f9383ddb37c4a0cf4b8c8"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086370_complete.json",
+      "sha256_lf": "daa0988f06dbb38a81f1bd69fdd29e057f1cb5144d01f8551b6cfa76a0750006"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086370_initial.json",
+      "sha256_lf": "9695964b6c1bd2cacf07b4212b005de4046b37df950b95e4851f4604c2c86abb"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086370_progress.json",
+      "sha256_lf": "72b3c0934ff368e77b83b3e3e60dad70cf9498960bee4f1a9e32dba364129fcb"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086370_steps_attempt1.csv",
+      "sha256_lf": "c41e0acc190d226b04c063b5bf6ce99ab144b277520eafc3f7cce2d308dbfe03"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086371_complete.json",
+      "sha256_lf": "57c6298c2c359d259cfae357cd84ef7fdd83061edee56daf8c7c2931ef8c7c26"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086371_initial.json",
+      "sha256_lf": "c956d5b146f28c2ad02a14b4e071a4098620b2444fb777482d1f24fd25a900d3"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086371_progress.json",
+      "sha256_lf": "7dc817be918e7400c1ba116037bba4a1edab22fb92975180fc68fb06e98ece3d"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086371_steps_attempt1.csv",
+      "sha256_lf": "26837dc67a240d4c8acd741b5960711676b6c272de0797ff6a460bdbbf88f2b8"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086372_complete.json",
+      "sha256_lf": "0cbc973af11b6cfe87bc8e0edb15fcdcd76e44acd9e71bb0243151f4d47fea2c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086372_initial.json",
+      "sha256_lf": "58a94a07fbd2253d856133bd3bd4b3ba78c39d361afad3c9a2626873529f5fca"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086372_progress.json",
+      "sha256_lf": "e3520e4080022ac75d321df0b836aeefd9f497c9b611287a8f1ca4ccb14d795c"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086372_steps_attempt1.csv",
+      "sha256_lf": "3236affba3f0cb3788571497a10fa168419219c85fae3a182fb3be2f22f863d0"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086373_complete.json",
+      "sha256_lf": "9ce451cde91f38c45eb44b51caf6d39e114f05318d27b15c86c016a285f37aab"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086373_initial.json",
+      "sha256_lf": "f60cbe84b0902ef4b4900a3bdbed47c2bee98c3227dd7a44ccba3aff169e2642"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086373_progress.json",
+      "sha256_lf": "32b8aca5bc517c4f21e32722d230ab5b141faca56b83d137601346b8fc51e00c"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086373_steps_attempt1.csv",
+      "sha256_lf": "2c221089491da9dca7da8e84a654e84b371fe115457e5a53abd3780edd228a08"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086374_complete.json",
+      "sha256_lf": "53e0ffeca69764fa7889d97e9c81cc0141b02be7950ba6ddc5998e34d18e48d0"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086374_initial.json",
+      "sha256_lf": "e9b5234983dafb337e4fd4e6ed50029fdad8e350bef0fcbc1ffe196043da7fe7"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086374_progress.json",
+      "sha256_lf": "1533b30e279cd2f3a32e8907527632d8b461c6e4ae05f29008706ea6754f0837"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086374_steps_attempt1.csv",
+      "sha256_lf": "13b091f70a335889021b615e87ce22a83379259243af285b14fdaea8d4bcb96e"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086375_complete.json",
+      "sha256_lf": "8a7b85e199f7334a4d9d2dc5975eeac4ea7004482f6dd42212b045e2ff18eb2e"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086375_initial.json",
+      "sha256_lf": "6c5cb2ba54658dec9a891f7da50244a9b279712b8c01718198d9af62a1a6ff2c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086375_progress.json",
+      "sha256_lf": "79dc338f575e530734fcafc7528898e68ccf49c6caa91ba30ad740d4ca60d827"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086375_steps_attempt1.csv",
+      "sha256_lf": "a68bea30c8279862f1a86d1b5d8312a09d0b9110ad80e4542c112eb76f312682"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086376_complete.json",
+      "sha256_lf": "507a57fa667c1fc6fa7cd4dc4c394f223c6f9fe7c862880e8820cf9e160a28b0"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086376_initial.json",
+      "sha256_lf": "bc016ea4bc7f5e47cd9bc84c421cd50e2d09c381e91818f2a2b587dd49be962f"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086376_progress.json",
+      "sha256_lf": "d52a0fa57ca0508b121f011c80288d2af304318b47df0eb14f81e2bd7ef049b3"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086376_steps_attempt1.csv",
+      "sha256_lf": "8e48b9db245af86c159dfb4942c7d5334e54e81afd30bf08cf7ee9cdf1ae0479"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086377_complete.json",
+      "sha256_lf": "6d5fe469aaa3b927a83b2b211056c429c4f2c2caad374506a4f9c540e3afa343"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086377_initial.json",
+      "sha256_lf": "1d7bb261127840556d0c176b193311d5dfe3399a2fc0af30e3f8d00f212ce045"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086377_progress.json",
+      "sha256_lf": "ffe5a6faa9c8e03d25beded401cec56b61240db3c17ba92cc80585a2dc793b05"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086377_steps_attempt1.csv",
+      "sha256_lf": "885935dbb427e0272b9d13298502a229b1f3e82da646f5ac767d748b8593f8b8"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086378_complete.json",
+      "sha256_lf": "619331fd24b91044eaa353b9baa5ef3d61d77eeb6f5fc2909d53f39a8d831ea6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086378_initial.json",
+      "sha256_lf": "5563127713dc4d9b228d44baf26bbf62a31ff137979a564d67854fc73ed2ccb2"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086378_progress.json",
+      "sha256_lf": "8dc731e144d7febef9c8ddccbcbcc606bc24c5be45a1601bb5010105a50f6097"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086378_steps_attempt1.csv",
+      "sha256_lf": "004c36d00bce25ac72324592bb2eaee0f0df00216756b3301820ce1bb7b4524d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086379_complete.json",
+      "sha256_lf": "40035544c6c06c5db4082d4e1abbdd802e29900691a3e1c23297de6d4ee95fcd"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086379_initial.json",
+      "sha256_lf": "88095f69165e336b6fb7ff27d8724540d91f725ad46f96f0499c6f221111a7ea"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086379_progress.json",
+      "sha256_lf": "aab8471095cdc34e0957b537c9d59c9ba0122eea493cb67b3ba2d5805c2d2eb4"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086379_steps_attempt1.csv",
+      "sha256_lf": "9e5a435cf34fbff8c824bb8176dbcd1d9b55807af311ccc770fff80d742ad8b0"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086380_complete.json",
+      "sha256_lf": "5b86c3ff5d9391a25e977c0cf8377e6b06d25d23e96aaefad6ed57cdbb0dc220"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086380_initial.json",
+      "sha256_lf": "7f4db385c4d08090610f2aac4d5319c7b53254b3a3f33c46c67bd7c36090f31c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086380_progress.json",
+      "sha256_lf": "7ba84e100185d17cef105d07a6ce547cf181c1d0b6d74eddea67b3d934179e14"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086380_steps_attempt1.csv",
+      "sha256_lf": "8f5cbbfc61aca5b3cffed3c9464a5b12c2175f331ff6b4d57e265e9027ee7ea6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086381_complete.json",
+      "sha256_lf": "dbe8f3199957263aa46c8058474ccd53dc5e7f620e90faa28e6cce4c20378ece"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086381_initial.json",
+      "sha256_lf": "8e4daa8cc59222e25dbe059f4ef49ed11471110567ed277fa7fe487f0e637643"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086381_progress.json",
+      "sha256_lf": "c6bd6ad6ee9502080338291123fa44fbafe62cab80a301fd28a4f1cbd5e937d0"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086381_steps_attempt1.csv",
+      "sha256_lf": "eea570f16e630c766c3e146399319a9d9c7c1d30caaee1daadbb98787e547c51"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086382_complete.json",
+      "sha256_lf": "6df098e987a7b6ca26eaaf88186001722d782dfe5b1ae78e6af0ce67ca09c3c2"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086382_initial.json",
+      "sha256_lf": "ba848529551d0ad08bd9eb6971e7d6fe9c4a8441ad1e9386d8abc7b0c5dcb330"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086382_progress.json",
+      "sha256_lf": "e2dda0f8ddc3383e8e535f6101fb52e849d85fbd7b1b8b23dc22a0436cd9f65e"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086382_steps_attempt1.csv",
+      "sha256_lf": "3907c0da0179411f0b9d2641ea0fe6e8ec88be290a35cb88056237ea16f90b41"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086383_complete.json",
+      "sha256_lf": "b8dac95694a32cf801b916f56199d2c2014ee27cb2ad69223e7a08f00234e581"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086383_initial.json",
+      "sha256_lf": "2cdfc9b13f20fe71a76a502b7c4f281e3714187bddb491fca5e1187502852c58"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086383_progress.json",
+      "sha256_lf": "d894b34b1493471e2f621b78a5fb254f73dfb4eb600e51e11bb3da50de285b70"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086383_steps_attempt1.csv",
+      "sha256_lf": "da06761ce2e63f30ff275900ad599ffcf63be834e016a5ccb1af692481c0d0d5"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086384_complete.json",
+      "sha256_lf": "8ee00252bb9789663f406ce3ee7642abf831d359fb979b3e36c650459824a8f0"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086384_initial.json",
+      "sha256_lf": "c3f6504b5819a1639620907f61122a82fe727e8b10497c27f606c65a3bf5dc4b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086384_progress.json",
+      "sha256_lf": "5d841e1673ba4ff0f4ee6fa203805034e796cdc0c746ba17bf2671e1bacb755e"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086384_steps_attempt1.csv",
+      "sha256_lf": "29ae2242d5243d30ea6391b26e784d78d5c8dd07b6fec5a92e1419e40f65801c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086385_complete.json",
+      "sha256_lf": "ab645a89b9c3e0ebbf062df1ca4df00e30138593144e639044747b0e5200a054"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086385_initial.json",
+      "sha256_lf": "f569c3136b8cbc7476618fd74cd100059a8558cc675570efd854a98cb294bc7a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086385_progress.json",
+      "sha256_lf": "9afead52a2676a1b5c0546549ab29bd80321e952031f73575a967c7a5109d45b"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086385_steps_attempt1.csv",
+      "sha256_lf": "165699cd68b84cd072384aa798a5ad1db855aa19b2f06b09915cfb01ab7a422b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086386_complete.json",
+      "sha256_lf": "ac76475b1d4e8bd76ee2a6b7d85c8590aa23abea48d3ca4d9d3746b3cfcdc6a7"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086386_initial.json",
+      "sha256_lf": "9e3e29fbe17dcf2c337684acb77b7e48421cbef24bfdf46bd97e31ff017ae9a2"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086386_progress.json",
+      "sha256_lf": "8c152adc0479af1f9fc1abf3405471d8932ba2b2d33294fdb9e13fe908eb285c"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086386_steps_attempt1.csv",
+      "sha256_lf": "61576871b6f7abdbe4b25e3605cb6a394af8249710abfe3500cee899a4493e3f"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086387_complete.json",
+      "sha256_lf": "08e3ee866eacf77d1b28f068c088a57fbec03297586e26c7a85a8d7cdb0cc31d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086387_initial.json",
+      "sha256_lf": "953e468ed4d30acafa6b80d75ee7e98d77e681f639feb99727ca645ee1a8d005"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086387_progress.json",
+      "sha256_lf": "163fbe674f2cde0fba897b80b2cf74e5872bfd66a52961f87a643ed2dffbc98a"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086387_steps_attempt1.csv",
+      "sha256_lf": "339deacf2b4d7bb520d4b0a44145f4a832c3c2b158ba0aa77881b81e34c972e3"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086388_complete.json",
+      "sha256_lf": "b28b4d0e31e87450d565db30c131c3cf00ea4ccfd56e62ca22817522e5ef60ec"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086388_initial.json",
+      "sha256_lf": "b3ad73b318a20a5182d5cc7e4a0f976a1d42ef7a009e77b98270ff5728c21072"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086388_progress.json",
+      "sha256_lf": "ca3334dbd88ed32bf355b22fc92b33d872099cedcdbcdf5c283ecc0b820fb729"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086388_steps_attempt1.csv",
+      "sha256_lf": "573019430242c2575cb2aa3aab07cf9c1b38cd549715a018e32c2f63aec73e52"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086389_complete.json",
+      "sha256_lf": "0b65038143c38ace341fa7b2106bb88c42427579ba96d5569b0c4e10ecf7fcd2"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086389_initial.json",
+      "sha256_lf": "64daba9261fc3a72a99558f203c42bb00dd9bf46e3fcbcadf290b5e8feef3463"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086389_progress.json",
+      "sha256_lf": "4f2da303708c7934bd064a68d44db021711b7f92264415286dcb172b0a815147"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086389_steps_attempt1.csv",
+      "sha256_lf": "cc8dde8c80be83f4a78b985599e340a738dd79a8fbd37a5be1e9606f422f6a2a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086390_complete.json",
+      "sha256_lf": "fd03478e5c2545b947206c7f6e51aea53ae7277245f64e4ab11d9d9397c38d9c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086390_initial.json",
+      "sha256_lf": "c52a3450760be9efe1e96c85eb8a91adbb9aa08af7eee829a5e2bf8877ca2a06"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086390_progress.json",
+      "sha256_lf": "e9c34ffe3433c2baa037defb7b26d427cd05cc13397a89f69e637f44e0b68d2e"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086390_steps_attempt1.csv",
+      "sha256_lf": "2f72fa41d9fbc44ec8ba7fee663a0b279798deeac38665743f8807480f16c778"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086391_complete.json",
+      "sha256_lf": "cdf3cc1a980327803bbc8bf312c3b78a07b97ee84cb5b788579c6e65395db1b8"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086391_initial.json",
+      "sha256_lf": "22824850240743deed0d760a1dc4e23c0209dbd3067ed0fff4ab0476186f9284"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086391_progress.json",
+      "sha256_lf": "7aea05bffb1da642664caa658c42ca4a7fb9a329b02473e5e480755f04114c38"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086391_steps_attempt1.csv",
+      "sha256_lf": "1e0c9fca14bbd6e0a0e5d9b2e0a13cb1f3b7f9ac92e5035dbab00db19fd7864d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086392_complete.json",
+      "sha256_lf": "ae5767b729b90b6d41b1767ca0a16d781f66320b2a733c5c9dd299f9ab1eaa3f"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086392_initial.json",
+      "sha256_lf": "0814d1e2bf67eb19e44fb2b89fb15c8c7c356879ababa0e19c1545681d284e35"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086392_progress.json",
+      "sha256_lf": "a3a2bd5a030c4987542a43c8b43f4c6c5ec40f02a59c9c5450137ebb27b56a00"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086392_steps_attempt1.csv",
+      "sha256_lf": "96bfc28f8ec7a96fb5eb4b5767f68226e546faf2cde1ae0fb09ac854c20da5ee"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086393_complete.json",
+      "sha256_lf": "99e062fd88025ec7218ac7ea736f65ba1fa264314fac6fa455f3e55d311113eb"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086393_initial.json",
+      "sha256_lf": "29cebdc8caeba090186e4b228b81d4e6f5a86ea66c55cb638e21eff59567b08d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086393_progress.json",
+      "sha256_lf": "712021a4eca9cf4ab5eb02f0205754f7147ac742766f7a6cfdb8691d6f42c33f"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086393_steps_attempt1.csv",
+      "sha256_lf": "5caffb6f9628cb9130fd253b6a6ba46d23a706d10a20573090dfaf34c460293d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086394_complete.json",
+      "sha256_lf": "8cdcaa3b611ef25db5d447d308e60d0563e4084ebbbac39cfd40da1c9dad8282"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086394_initial.json",
+      "sha256_lf": "a40668163383fdf2648bdd29e57dbe2c69d025f48db8ea735f44cc670e974106"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086394_progress.json",
+      "sha256_lf": "11b3a5545ff201dee5503988fe30e2c78e8626f9986f7db1321019482e282039"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086394_steps_attempt1.csv",
+      "sha256_lf": "209166b05a17116a21a34b46cb43cf70e889362e59efa140c304ce5767533032"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086395_complete.json",
+      "sha256_lf": "7decf38dada0d1640ca0228ea93bcad17ed7325add55bc4c91b86323860db8e5"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086395_initial.json",
+      "sha256_lf": "1c0ff76b0858499127b732021013b35ae15723cb5138ab1833de9bf7006586a2"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086395_progress.json",
+      "sha256_lf": "6fae92f86c9c64a1c3eb40310003db2ef2a50ccca95d1529151e147748a073e0"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086395_steps_attempt1.csv",
+      "sha256_lf": "016a0ad04ef84710fb3eab0e2b4375d0655786176992c22f03f996621fb0e656"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086396_complete.json",
+      "sha256_lf": "ed8fc94ddaf1bdf7b9d463b236f6c80c207eb07c7d7653747159067d9c97f329"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086396_failure.json",
+      "sha256_lf": "2afd5d3d7723639fc0a3985f1fe6ff4a84217fb14a32d303409ad07f60e93cac"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086396_initial.json",
+      "sha256_lf": "a7ad569b84499ec3fcbdc4623fac460adc779365dabdad4ec75454b4e8d8da24"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086396_progress.json",
+      "sha256_lf": "711d1694599aad3ce04d8f25509a12b6f6bcde26e37cab8c220534806e21e8b1"
+    },
+    {
+      "csv_rows": 299,
+      "partial": true,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086396_steps_attempt1.csv.partial",
+      "sha256_lf": "151e53e6b9ad62a05f5dad0e8d3d9bdc12b2b1a03e31363e85a44110b9b6f593"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086396_steps_attempt2.csv",
+      "sha256_lf": "e12cd43cd4537bdf7e790027d12925b504f9966000cb05c2aad84b5055789f62"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086397_complete.json",
+      "sha256_lf": "dc3338f81d0ea670aae4a5771c02a2f3093c54096b7c191599cf06cce84be7bb"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086397_initial.json",
+      "sha256_lf": "05d172e48fb3a5e3586dfb9677818d238db04eb6bad74382e5958f12f33a8560"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086397_progress.json",
+      "sha256_lf": "54dc5643b66f75f2f782fb231ba1257f65dee5eb8c0035af1d2cd68a0802d493"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086397_steps_attempt1.csv",
+      "sha256_lf": "d01140c1fbcb37e950225dce5030edb15e3ea97cb8d5c1fd5e75cdef4ffbaf04"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086398_complete.json",
+      "sha256_lf": "c72da79cdae1731e30e42cc3df44b64895f9d34cfb1eb0e21fc2477ecd8dd844"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086398_failure.json",
+      "sha256_lf": "79c49318901475e5fb9e3af203c798832e0353f2c5917665a3d3281162beb59e"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086398_initial.json",
+      "sha256_lf": "f49fa23714902f810a1df811275307bc1888fc9009368573cca66a2207dfee5b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086398_progress.json",
+      "sha256_lf": "11c36004cf1ce23236f8ef533efebb69493309697a03a2155114a929e12be535"
+    },
+    {
+      "csv_rows": 296,
+      "partial": true,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086398_steps_attempt1.csv.partial",
+      "sha256_lf": "1a13d1b94354f6a55adce51d63611372fdcd326b7c62c0d6e4486d8cd4aabeb9"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086398_steps_attempt2.csv",
+      "sha256_lf": "84727ea5dd38ada4a67d8348b1fa40604b2b8f6e7df576e14af765071a106aa1"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086399_complete.json",
+      "sha256_lf": "473082c00b68095013a317d6d7bb030dd7ee59aa5d80e9114f3d177fb9b7b8e5"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086399_failure.json",
+      "sha256_lf": "7bc690bc1640b5d6ef2be5650a385a9edc3621b1d0d96bec840ed6ca132e6586"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086399_initial.json",
+      "sha256_lf": "9019a79d3d1863009c17e5d950b2116f346cb3c1fa805dfbade164fe8e4725d4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086399_progress.json",
+      "sha256_lf": "aa436e2292994a8eefa3bf61925fa74fb52a2dd2d0c110e8d18958807c472725"
+    },
+    {
+      "csv_rows": 299,
+      "partial": true,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086399_steps_attempt1.csv.partial",
+      "sha256_lf": "301522474aac327f81e6b09a95a6218390c5f16f64198d31e00ad602d76ec038"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086399_steps_attempt2.csv",
+      "sha256_lf": "340c908e52849c29968c3e4c8b29a8d7b617e67f42914231e3b35910f8fb87a7"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086400_complete.json",
+      "sha256_lf": "796ce9fe3d18b809fbed65c19924540b547f1720824b9a137c44ad5b0197d1a4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086400_failure.json",
+      "sha256_lf": "7ca0e242bb0194e0d118a95df89cf27320ea61e3e00e10b81cca3e2cfaee2030"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086400_initial.json",
+      "sha256_lf": "d65867e76345d84fddd8da69250bc6d18b07caf58ccb9d0b981bc5a34dd23ef4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086400_progress.json",
+      "sha256_lf": "cd62f31740c9aa8223a24fd73139c29a8377c07b0607c3a24bee83f44c5586a3"
+    },
+    {
+      "csv_rows": 294,
+      "partial": true,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086400_steps_attempt1.csv.partial",
+      "sha256_lf": "6e137ccb2a50c3a6f33fcde0626443478edd702d27152063a1a0ff2f57c39a41"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086400_steps_attempt2.csv",
+      "sha256_lf": "ffc101d9c1c35aad01f4094eebc2e46749b682e991346737999cd5f83c7ad233"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086401_complete.json",
+      "sha256_lf": "78557c0b7442093da1026b8d1e7022ad742cada5a5956ed79dbee56f36523802"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086401_failure.json",
+      "sha256_lf": "734ebc859cc2c5b491c92587ffa04f95cfba88183fbabf07842c12b6740086b1"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086401_initial.json",
+      "sha256_lf": "d9f4e0059352ca103e10d364e0176e0aee9bf0bdbfef9c34abc49132ae4c2001"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086401_progress.json",
+      "sha256_lf": "a297155520173dc0de63baac3105fbedbab61cdf00fd3d8b29e29fcec8499e20"
+    },
+    {
+      "csv_rows": 291,
+      "partial": true,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086401_steps_attempt1.csv.partial",
+      "sha256_lf": "e1cd2d0be22fd6e8fe3d4b0b453c47a388f81aaa7aadb44766b1136b94ce19e5"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086401_steps_attempt2.csv",
+      "sha256_lf": "a4e09f1d9946437ccc9eb9c59fb29f96028c3c4b2762a3cc9ebcb1749c570b8c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086402_complete.json",
+      "sha256_lf": "8855bd68196571b5408b1ad5bf1786430e00ffa280fb602255dd4e3379170772"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086402_failure.json",
+      "sha256_lf": "e3c3b5107d4a4b80c12145daa60b92344fbd2bd28350c3b954f840bc8f1702fe"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086402_initial.json",
+      "sha256_lf": "b06b713640687143d196ec03741d4fadbfae799dbd8777d424e1093dfb75ccb4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086402_progress.json",
+      "sha256_lf": "005a446ff636e15bd16747870533386aee7370c7c50fb662b641e9f121f8889d"
+    },
+    {
+      "csv_rows": 297,
+      "partial": true,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086402_steps_attempt1.csv.partial",
+      "sha256_lf": "980b5fa004e63fb1396904375959ac759ac9c9473d7fb0f5ca01af3968338d93"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086402_steps_attempt2.csv",
+      "sha256_lf": "a135618e18f4af0bb0863fa5d94514ce2af1ca25bafa319c6ebd292de6a4513d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086403_complete.json",
+      "sha256_lf": "db1e3aa967363bcbe02e84da20e1fea003fccb61d109e74412e3a0dbd0211359"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086403_failure.json",
+      "sha256_lf": "ce76c3d1cc802cf312aa3f75d56a1534a0aed4d1ff595293ed799fd777b88225"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086403_initial.json",
+      "sha256_lf": "3d623e1da5c78ab025cc9b619074c777ebbfacc25349cc29b56392814c357e8c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086403_progress.json",
+      "sha256_lf": "108834966a9bdb15c64c69b26cfda5fee46ef96024c19272084997b2eada7a9b"
+    },
+    {
+      "csv_rows": 294,
+      "partial": true,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086403_steps_attempt1.csv.partial",
+      "sha256_lf": "2b12403a0c3b3da5c8ddcf72b3ece29cd9340f4dc5276e523970fc20ebabf574"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086403_steps_attempt2.csv",
+      "sha256_lf": "17c232fbd0fe7c93ae162798672cd6d679b4518d746fc301a5fe0f6afc9f16d1"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086404_complete.json",
+      "sha256_lf": "d7fa3c7d52f8e9db91087867ed1079e27624ff1d0afac7fdb3c93565f54dae46"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086404_failure.json",
+      "sha256_lf": "528b27cd838dfc71f54e2bc479947f62ef6a586f72863d0eb2ad721b4ca610f6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086404_initial.json",
+      "sha256_lf": "1da3f57814c23d2c3ee5dedeac8551d5c65f772a460a408773947782343286da"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086404_progress.json",
+      "sha256_lf": "3d0c090c507ea8b7ae6d6b184ff65a3972433e3da29383fa9fdcc75f5515e006"
+    },
+    {
+      "csv_rows": 284,
+      "partial": true,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086404_steps_attempt1.csv.partial",
+      "sha256_lf": "4cb31b04e1f955cb86ec9ca26d6ab40b0639658382ee298401a31c1d940791a7"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086404_steps_attempt2.csv",
+      "sha256_lf": "c34e8479d77b6d256239030cb9d60f9cd55ef1b90e49aafaeb38da7dcc618ee0"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086405_complete.json",
+      "sha256_lf": "aab22a1db4a0231b5f6c5fc1c50fe2dab4fb7da78a36da42d3f152d6e69fead1"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086405_failure.json",
+      "sha256_lf": "539031f29bc107b7ba39ed97f31d65d437acb83b2dc1b01bd2b44d50f11a7281"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086405_initial.json",
+      "sha256_lf": "8be2ce419a3f5e325851379203db678513a1435556ff90f308fad3b156c51a3b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086405_progress.json",
+      "sha256_lf": "702d3e6339cd3b34537fe1b10768c76888356c6b17ab82a10a9f36bdd282058c"
+    },
+    {
+      "csv_rows": 18,
+      "partial": true,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086405_steps_attempt1.csv.partial",
+      "sha256_lf": "3fcf95d6420379f1e9d8ec10bedd30ba45b6b893eda378612321a0d3b417bb06"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086405_steps_attempt2.csv",
+      "sha256_lf": "334e4b553b7ad2ff1581005d2e500cac774568e395f6ecd9e75457ac74d40e5a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086406_complete.json",
+      "sha256_lf": "a23f1578477422d237d133c92451e87b5b53c90cc0e90f152dd8e73e27851c05"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086406_failure.json",
+      "sha256_lf": "971b60d8f871fa41f61393ea7ee6e289da5d505c6d27c1d413320f32b4102495"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086406_initial.json",
+      "sha256_lf": "ce2812fabf707b86526a67575de11ddab3517887a6a96558e98b5785a6dd51b2"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086406_progress.json",
+      "sha256_lf": "2d504d1e4d51b44885f338b87d5e47ac59e94f8df14657aafce6fca3043dcb5e"
+    },
+    {
+      "csv_rows": 12,
+      "partial": true,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086406_steps_attempt1.csv.partial",
+      "sha256_lf": "b34ac5f678d5601c2949ffc5bc8847bd7e13fa3d235c1e9d8c60924ee1bb6ee1"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086406_steps_attempt2.csv",
+      "sha256_lf": "354d8917b5b6dab9b38211a3af58a50f8717e842502059961d6c09d327cca8f5"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086407_complete.json",
+      "sha256_lf": "1e5d086a7fb5a79c1774a6e18727395ed7b81ed7cc037d0e12b02cd85b7c55a5"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086407_failure.json",
+      "sha256_lf": "21fd6e401e08e475bbc88e743dc052780c9b72b05a7d9861fc0a8a4dcdbac6c7"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086407_initial.json",
+      "sha256_lf": "862fe1d35e17a48534735b64f1599cfb29552f3aaa1affd2b7dc76fb69f71ab4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086407_progress.json",
+      "sha256_lf": "0707105d236a68fcd0be24630c1ac5ada515b2447189b3c9921d8508ff63ebba"
+    },
+    {
+      "csv_rows": 5,
+      "partial": true,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086407_steps_attempt1.csv.partial",
+      "sha256_lf": "2ced68e9a4e2e3f86a96d4aca2e0961c0942c6e468fc4f128e0f864dbc5baf86"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086407_steps_attempt2.csv",
+      "sha256_lf": "5e229063d07cea1f95a772249f5086c7fdf259e8db47c7be9fc259c02011e05e"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086408_complete.json",
+      "sha256_lf": "b7b37df613ee97fcdd21f68e568473098a26bc1542ee5b2b0653a835c5489c37"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086408_failure.json",
+      "sha256_lf": "0bb30e4fba52b97555b1c839c8eb7b670bff0e6f636bf65b67d804c4727b7d7a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086408_initial.json",
+      "sha256_lf": "3c11ac51cea79816cc209caded022dbff477712f8eebaf0bdd7c5d0698d887f4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086408_progress.json",
+      "sha256_lf": "02eeaf9833910f612e719e8d32d5e398e8dd314dbe002d25ed0d4877c39b814f"
+    },
+    {
+      "csv_rows": 5,
+      "partial": true,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086408_steps_attempt1.csv.partial",
+      "sha256_lf": "c6e507a09ddfa586ab94353acdd85b1411b2fd933d304995fe21b790752a680f"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086408_steps_attempt2.csv",
+      "sha256_lf": "9e0833c4b89a2ebe8391ca4ea43dd0fd8c2ba71ca8d574159317d0a15de030d9"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086409_complete.json",
+      "sha256_lf": "96d584096b7274449caad9028408c6babcdeecc88fbc59e9eeea5fc5b023c61b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086409_failure.json",
+      "sha256_lf": "22b0cf5d3e8bf4ff1bbd75253481f2acdf6f5ff3b004f85501026350626ce545"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086409_initial.json",
+      "sha256_lf": "5a8306d846f24dc4fbf73f105c3c793f346e71673f8da844fd9bee9fbd2bf216"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086409_progress.json",
+      "sha256_lf": "a0a1d33f896186dbc74a20d172d8d7eb90cf7e706e1a6922269b198eb76adc63"
+    },
+    {
+      "csv_rows": 0,
+      "partial": true,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086409_steps_attempt1.csv.partial",
+      "sha256_lf": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086409_steps_attempt2.csv",
+      "sha256_lf": "c915ee4ceedd8d5a57a01b882d0270693ede6b3cb116b243d46531848088b99b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086410_complete.json",
+      "sha256_lf": "28611be08ac88ab47dacfc2af72a2d2a8a6614321e86610e705ff5b76c6073c0"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086410_initial.json",
+      "sha256_lf": "1df5e4448c978cfdd46be8d38201d12497865386bdda4cc260be4d11c486d676"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086410_progress.json",
+      "sha256_lf": "19772c9a4ded3f7f13f77583f2bafb4bca956214700f095d11044fd7ec3dd19b"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086410_steps_attempt1.csv",
+      "sha256_lf": "92c032aba8d38cb583e142cb3729e0638b6c6aa95a0eeeb2037962ca750ca0bf"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086411_complete.json",
+      "sha256_lf": "bb9194c7f299fd8ba1020a3939e89a677971494eb901d129e72ef2c0115de1b2"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086411_initial.json",
+      "sha256_lf": "3ee90fbbe79d01136b84b7e29201e080e5d32b020bc9b5c07c37a458ee07b850"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086411_progress.json",
+      "sha256_lf": "82c9efba9b8da4d4803b90f03bcbef474de5c65e07359937e0b102ec2a8d0c94"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086411_steps_attempt1.csv",
+      "sha256_lf": "94b224ee2e4c1b5d76055325480189c5e0d49fbb51825a18c3751c97bf18fe9c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086412_complete.json",
+      "sha256_lf": "a88339bd43f378bea609fc34a970ffe212d342594738f9e751404394c7343ca5"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086412_initial.json",
+      "sha256_lf": "09d324105b4134d4ce4f4e6215680d870aa4c767dd82be6559f87195fbd18dac"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086412_progress.json",
+      "sha256_lf": "0aaa17af5bbee8777a646dc6f7e70a295f09804f4f274dea82df3aa411580bf7"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086412_steps_attempt1.csv",
+      "sha256_lf": "3bfe3cb93b2492aaf653b8b545218ee4bc54d63bf7c74f9ef6fe117ed441baec"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086413_complete.json",
+      "sha256_lf": "5e11abdc7eaf68207336f5b9cd96609a8c44e0faac550917cbbbf61b145ec7ab"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086413_initial.json",
+      "sha256_lf": "a6f3dbec89b564567ca599e70e5258eccbda64a2157ad81ee61f604f2e81def6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086413_progress.json",
+      "sha256_lf": "6440fc5d5f625fb7f6107cbb8a06c481852a28aa4bf746430a61f5b34da47101"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086413_steps_attempt1.csv",
+      "sha256_lf": "31329a7219c1316be554939b9d9fee937f3097ea8ffb0cd89a9cadb570090638"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086414_complete.json",
+      "sha256_lf": "d1ba412a88255641dd89e859c01501021771b0045e96359fc5bff559d7e012d7"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086414_initial.json",
+      "sha256_lf": "f9efee983966b9bea6f59970bc0016185a3b9f2bd770466cd6364ce90d41fdf0"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086414_progress.json",
+      "sha256_lf": "447d340bc037d5c465fe0d474db09ad2183c2f796b9762e205c8e0541c587eb4"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086414_steps_attempt1.csv",
+      "sha256_lf": "50296af2e2eb3d5ba4745e7ba60c1f8534e124afd62e5b80684a8828c4c541b1"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086415_complete.json",
+      "sha256_lf": "79017cebe3be3816824d21447f9ddf4ae5a2baf1e10a9fd46fd098a9f4f68dcd"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086415_initial.json",
+      "sha256_lf": "1d03e5a851efa3e89b93561ab0b4ad69d9bcf88f8d27433f6ab1db6d2b4c2eb4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086415_progress.json",
+      "sha256_lf": "9bb1966e8a20512ae4004aec8c4b8d23e102a20616907c32a45043424e631010"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086415_steps_attempt1.csv",
+      "sha256_lf": "e498eff67e5be5d1d197e83180f866186a62004d98dc9195328a28df7253cbc4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086416_complete.json",
+      "sha256_lf": "a559db47bd8f623761306e897cd39e2d703a45f9e863a9cf6bf24b001eec4df5"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086416_initial.json",
+      "sha256_lf": "5da14532b2291756bf2257643d56f985e03e197e5a09e1d58c011f96e652b5ae"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086416_progress.json",
+      "sha256_lf": "1cb392c2ad589cf0c2d5e22339090b23367669edc5b3c9ff25b9fdda48b14d05"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086416_steps_attempt1.csv",
+      "sha256_lf": "ef596d7dd44d38803c06d2a36d259c5ddc00f9b27722480915d6d628a87db2c4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086417_complete.json",
+      "sha256_lf": "b5f905ce9404ae5465e6a4e993e2fdfb589a94ede5b3e9ef57260c9beabc1359"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086417_initial.json",
+      "sha256_lf": "8459f6b650551528e46b813a3211109a05dd5d70c3bfd0695ba8016c4e200d80"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086417_progress.json",
+      "sha256_lf": "0a895196e942102b90b2c1a3108454584e62f5c1ad4a836cff09d5fa0844f565"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086417_steps_attempt1.csv",
+      "sha256_lf": "0e393decc2b72cd851d5dd201a741f759024c668096d1814317e34a6d0f04913"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086418_complete.json",
+      "sha256_lf": "304a04e93a536730ab19670b76e9e833464afba174ea55ab825da6c4a6b59883"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086418_initial.json",
+      "sha256_lf": "0a086c0145a4c542fdc94019bc204e1afc469902d9ed46de72f223acbfd796fb"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086418_progress.json",
+      "sha256_lf": "d44bfacfd8d9c83d36e96d62db9c8e8ddb856aaa71dda8bf460f8a4de2e65ddf"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086418_steps_attempt1.csv",
+      "sha256_lf": "006914d860d4eef0d35e36f20e46dc4b39e1b7765560a0e717ac52b0fc97f218"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086419_complete.json",
+      "sha256_lf": "c128995591d40a013961bdc8718d12b744caffb26ba129420b12e96e64a98250"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086419_initial.json",
+      "sha256_lf": "c8bbd3d61a4e17bc130dcb12e72733779d732f578aeb967defb589a81457972c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086419_progress.json",
+      "sha256_lf": "7c8856e2fca1ecad7480e9a0a9a3a2aaa5736336a6440b91b7a5aa2890373152"
+    },
+    {
+      "csv_rows": 300,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086419_steps_attempt1.csv",
+      "sha256_lf": "8f4014f7ad37b668980f2b00020e8b8fa2e74cc563e91d9be39256e697a8be2c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_halt.json",
+      "sha256_lf": "f0d509ca58f73d82051e6cb7212ead70dd218793ea3c438c0f9fa6f88e86a8c3"
+    },
+    {
+      "csv_rows": 36000,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_heartbeats.csv",
+      "sha256_lf": "f95ae78f080f3016253633c70c05fcdd781d9926adf94340ffaff9075ca67645"
+    },
+    {
+      "csv_rows": 23,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_incomplete.csv",
+      "sha256_lf": "e99987538be52908c2f60d5480e8c07a88e085beafc01a90682af2a9e5c92783"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_io_events_14064.jsonl",
+      "sha256_lf": "a7ec7ebf3959b526052bfe5386e67e8d2d71cd815181e226aa1338256257fe01"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_io_events_37416.jsonl",
+      "sha256_lf": "a2992f1cd1c740fdf9bb020cc81bc4954bb72373ac94c3066830c5959f7848ec"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_io_events_6524.jsonl",
+      "sha256_lf": "7318aa839c149c7ec190ac2bea7073fd96840452baf6b5ac45092cdc0759e796"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_io_test_history.jsonl",
+      "sha256_lf": "1ad3ceed8efea857f8ff590b10d39bb48070b3a8e6811b00ca3b094da0ad4e57"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_io_test_target.json",
+      "sha256_lf": "a4f6653857c3b28e821755c69fa4dd8e9a1dada7f86bd83d88423fa979d01ab1"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_io_test_target.json.37416.tmp",
+      "sha256_lf": "106c597cc2ca58f81c25dc28953112df373dae0bc0c5bb168377c67b62e8e1c6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_io_test_timeout.tmp",
+      "sha256_lf": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_io_tests.json",
+      "sha256_lf": "7810ae1396d8562b07016d3858e724443f05dd53c3ce79b6186922460a5ad529"
+    },
+    {
+      "csv_rows": 360,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_maxima.csv",
+      "sha256_lf": "d6b766401800bc78915fd153a2c6195ef23f6b259087534f69ca386050695815"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_module_hashes.json",
+      "sha256_lf": "aeb675b0937dba6959a263dc2b25beae3893bb861b85197aefa114450c4baf66"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_operational_resume_failure.json",
+      "sha256_lf": "8c69fc179ba5b84d3bb69977a9b600b860ac15981b9c880b132de04ecccaa40c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_plan.json",
+      "sha256_lf": "b8f8ad97466afd2cd0c735a420cb6acc2ed87294c7eba66d8de5f34dc876c411"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_execution.json",
+      "sha256_lf": "53d7af3fc75b88d131b57b2e552f1cc432ea4070e71f8512a3afdbfa35e9efd3"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086396_failure.json",
+      "sha256_lf": "2afd5d3d7723639fc0a3985f1fe6ff4a84217fb14a32d303409ad07f60e93cac"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086396_initial.json",
+      "sha256_lf": "62b331bfaf3e99cf816351848c8f171950d45fbc4d29bd9b8b64890b9aa16968"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086396_progress.json",
+      "sha256_lf": "75e77c3bec9f05dfb6f9da89c877fb104e1bfe0d484d689c46ee79d1fe9a5849"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086398_failure.json",
+      "sha256_lf": "79c49318901475e5fb9e3af203c798832e0353f2c5917665a3d3281162beb59e"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086398_initial.json",
+      "sha256_lf": "c6df3fa8e636a41959d20f81ec59757649bbd3797fed5fcba534dc0dcda8aa35"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086398_progress.json",
+      "sha256_lf": "19a6bb79c35114f52847aac46268345fff5c30a1911c241313d5f5324caf7a3f"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086399_failure.json",
+      "sha256_lf": "7bc690bc1640b5d6ef2be5650a385a9edc3621b1d0d96bec840ed6ca132e6586"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086399_initial.json",
+      "sha256_lf": "ce6e72ccaffcf78badb8fbe8fecbdb86354fe6478597b62039313a13b35e72a9"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086399_progress.json",
+      "sha256_lf": "71014034f534a59033b184dab5305dc345551f62fad24080deb9906a25a88c20"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086400_failure.json",
+      "sha256_lf": "7ca0e242bb0194e0d118a95df89cf27320ea61e3e00e10b81cca3e2cfaee2030"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086400_initial.json",
+      "sha256_lf": "e5caed1eb614ee3dc1a20b73fabfe77bea912b1c6d8458ac75792a27710230b6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086400_progress.json",
+      "sha256_lf": "80263328c507aa01f329d2b5da53bea8939c2588bcd69323ac758986ce88529e"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086401_failure.json",
+      "sha256_lf": "734ebc859cc2c5b491c92587ffa04f95cfba88183fbabf07842c12b6740086b1"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086401_initial.json",
+      "sha256_lf": "57920188c8e5cacecdb5402a28966bb52d46b0d66de78233cf276b51bc046786"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086401_progress.json",
+      "sha256_lf": "46c3f28f674a12f0d3bc7ae35a62a63f8e0be6786e48bf4e1263a922bf884242"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086402_failure.json",
+      "sha256_lf": "e3c3b5107d4a4b80c12145daa60b92344fbd2bd28350c3b954f840bc8f1702fe"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086402_initial.json",
+      "sha256_lf": "8a0a852156b59bc675cab24ac9e887f9cdc20543c889c9b8a3899141cdbb5c5d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086402_progress.json",
+      "sha256_lf": "527b9b0e43a52f8e128be434927785ffea8319993a648fc54242462f42e3f409"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086403_failure.json",
+      "sha256_lf": "ce76c3d1cc802cf312aa3f75d56a1534a0aed4d1ff595293ed799fd777b88225"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086403_initial.json",
+      "sha256_lf": "142dfa3c5df7ca6cc965272920f1df61870998effaed1ccaba4a10afabea2de6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086403_progress.json",
+      "sha256_lf": "28b92a1543191e7b972694470225caea377f792bc763939193fef7a3be9e1b9c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086404_failure.json",
+      "sha256_lf": "528b27cd838dfc71f54e2bc479947f62ef6a586f72863d0eb2ad721b4ca610f6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086404_initial.json",
+      "sha256_lf": "1b46a8602452d7b7bce59cc6df75d4ba108c8c915da2d39baf617338bffe5a52"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086404_progress.json",
+      "sha256_lf": "d7cc3f8f8754a3678bdf3f9fc293565e760c1f5e859f3b241a083cbd164e0adc"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086405_failure.json",
+      "sha256_lf": "539031f29bc107b7ba39ed97f31d65d437acb83b2dc1b01bd2b44d50f11a7281"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086405_initial.json",
+      "sha256_lf": "44fd1b9dd09824852c7b62fdb69a426e221f1e9cf6a5ccadacec8503f264d246"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086405_progress.json",
+      "sha256_lf": "b11d596b6670400132a09ef890754356c6e65252e82fe4f20ec9e4441c9619ab"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086406_failure.json",
+      "sha256_lf": "971b60d8f871fa41f61393ea7ee6e289da5d505c6d27c1d413320f32b4102495"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086406_initial.json",
+      "sha256_lf": "1bcc75e9fc565dafe546810d01b9510a05211fb5c0e19969984553069e8ea7e6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086406_progress.json",
+      "sha256_lf": "d77602896c2a62a5ce923cd3387cf1ddc40ea1cd437fc102ce05e11cb1eb676c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086407_failure.json",
+      "sha256_lf": "21fd6e401e08e475bbc88e743dc052780c9b72b05a7d9861fc0a8a4dcdbac6c7"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086407_initial.json",
+      "sha256_lf": "62529e659e2d1c7d178ce8b90e9e72d868b3cb0b5aef35b721e59e8d2893a431"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086407_progress.json",
+      "sha256_lf": "1b1aec6ff171347e865830d6cd2afbef6d6ca7cdbf51abc34aac71c361022715"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086408_failure.json",
+      "sha256_lf": "0bb30e4fba52b97555b1c839c8eb7b670bff0e6f636bf65b67d804c4727b7d7a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086408_initial.json",
+      "sha256_lf": "1ff9974a26d943b9c351d1205eed96e772cd25adcec13b608942375dfd9eae0c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086408_progress.json",
+      "sha256_lf": "f2e3070cea92735e5309dfbd16d956ff2e44b77c6953855db269d13f75624b3a"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086409_failure.json",
+      "sha256_lf": "22b0cf5d3e8bf4ff1bbd75253481f2acdf6f5ff3b004f85501026350626ce545"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_H_1835086409_initial.json",
+      "sha256_lf": "2403e6a453ef4eb4d7bb236db8a672c4e2aab54257db08c3461d490137c07664"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_manifest.json",
+      "sha256_lf": "6fec4475b77ec3b8815c833753aacb8f3170f7aed9cbec0eea85b82a4b2a09ef"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_module_hashes.json",
+      "sha256_lf": "fe45f6251e42abf52f579beb729cd27830398a5e8ba3a1788910e744a83151c5"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_report.md",
+      "sha256_lf": "4222dd566511d18cb330f68ab31a9802273153aec0c6ccc9d7a71ad68b0a4782"
+    },
+    {
+      "csv_rows": 97,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_runs.csv",
+      "sha256_lf": "a31c26ce52ca9f38235c0f436c8fa1683c05b3b6a3d108c27b4dca042f3bf6a8"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_runtime.json",
+      "sha256_lf": "54610b3ec18e0c689f135dbab0db13a3da4944360df9dd64458a092c27e406f0"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_source_pins_end.json",
+      "sha256_lf": "df9b7f872482ea06e6e9e7dce8c1673ce3daa6e2bbf3f433945fb5b4d83101a4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_pre_resume_stop.json",
+      "sha256_lf": "f2bfacfd562d43e431a6cb721ba3a9cc17b939b7f5c818801f6ef9b82b880f14"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_report.md",
+      "sha256_lf": "6c34dbb01ab82dfb6348289a256a5148a254ae7df006a9b3597d1138785afb31"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_resume.py",
+      "sha256_lf": "b23600acd60ea3cb7930e23a7f8ab8be191fb8b31759cf6445e1f68285d01e53"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_resume_authorization.json",
+      "sha256_lf": "86da3a13687b6b9583f526288f07c2acb985c9656e69c3627aba630ff6832d7d"
+    },
+    {
+      "csv_rows": 120,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_runs.csv",
+      "sha256_lf": "f78a6857b1c76a0a996c570322754244c02520107f8a255bab80817fb13087c2"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_runtime.json",
+      "sha256_lf": "6f59f707d46afda3a210ffadddfacdd1f40d84b95c588dd1b08b45d314470d38"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_scheduler_checks.json",
+      "sha256_lf": "d4055cd19167531cf5c07fdb8f52b14456998504bab7b43a63180851ec639e06"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_source_pins_end.json",
+      "sha256_lf": "e1b9441eaf40c450c5ca179787854b3da0e566d4a44a1bf0518af308fa09abb7"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_unit_gate.json",
+      "sha256_lf": "93f8846124607c23b419bbf49816f7cda3d92729080f7b2b9538c282e175de88"
+    },
+    {
+      "csv_rows": 270,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_cal_unit_sequences.csv",
+      "sha256_lf": "ac5c598bcc17fa2b902c70e8291b48c777f02296d4cdd4aa5084aa59a5933213"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/detector_run_cal_manifest.json",
+      "self_hash_note": "Excluded from its own content hash.",
+      "sha256_lf": null
+    }
+  ],
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "recorder_reference_blob_sha1": "29b666af9655d2099dcd4fda8755c3f8a3edb1b5",
+  "resumed_seeds": [
+    {
+      "arm": "H",
+      "job": "H_1835086396",
+      "reason": "In-flight job interrupted without a completion record",
+      "seed": 1835086396,
+      "utc": "2026-09-15T18:24:00.130766+00:00"
+    },
+    {
+      "arm": "H",
+      "job": "H_1835086398",
+      "reason": "In-flight job interrupted without a completion record",
+      "seed": 1835086398,
+      "utc": "2026-09-15T18:24:00.130781+00:00"
+    },
+    {
+      "arm": "H",
+      "job": "H_1835086399",
+      "reason": "In-flight job interrupted without a completion record",
+      "seed": 1835086399,
+      "utc": "2026-09-15T18:24:00.130784+00:00"
+    },
+    {
+      "arm": "H",
+      "job": "H_1835086400",
+      "reason": "In-flight job interrupted without a completion record",
+      "seed": 1835086400,
+      "utc": "2026-09-15T18:24:00.130786+00:00"
+    },
+    {
+      "arm": "H",
+      "job": "H_1835086401",
+      "reason": "In-flight job interrupted without a completion record",
+      "seed": 1835086401,
+      "utc": "2026-09-15T18:24:00.130788+00:00"
+    },
+    {
+      "arm": "H",
+      "job": "H_1835086402",
+      "reason": "In-flight job interrupted without a completion record",
+      "seed": 1835086402,
+      "utc": "2026-09-15T18:24:00.130790+00:00"
+    },
+    {
+      "arm": "H",
+      "job": "H_1835086403",
+      "reason": "In-flight job interrupted without a completion record",
+      "seed": 1835086403,
+      "utc": "2026-09-15T18:24:00.130791+00:00"
+    },
+    {
+      "arm": "H",
+      "job": "H_1835086404",
+      "reason": "In-flight job interrupted without a completion record",
+      "seed": 1835086404,
+      "utc": "2026-09-15T18:24:00.130793+00:00"
+    },
+    {
+      "arm": "H",
+      "job": "H_1835086405",
+      "reason": "In-flight job interrupted without a completion record",
+      "seed": 1835086405,
+      "utc": "2026-09-15T18:24:00.130794+00:00"
+    },
+    {
+      "arm": "H",
+      "job": "H_1835086406",
+      "reason": "In-flight job interrupted without a completion record",
+      "seed": 1835086406,
+      "utc": "2026-09-15T18:24:00.130795+00:00"
+    },
+    {
+      "arm": "H",
+      "job": "H_1835086407",
+      "reason": "In-flight job interrupted without a completion record",
+      "seed": 1835086407,
+      "utc": "2026-09-15T18:24:00.130797+00:00"
+    },
+    {
+      "arm": "H",
+      "job": "H_1835086408",
+      "reason": "In-flight job interrupted without a completion record",
+      "seed": 1835086408,
+      "utc": "2026-09-15T18:24:00.130798+00:00"
+    },
+    {
+      "arm": "H",
+      "job": "H_1835086409",
+      "reason": "In-flight job interrupted without a completion record",
+      "seed": 1835086409,
+      "utc": "2026-09-15T18:24:00.130799+00:00"
+    }
+  ],
+  "source_pins": [
+    {
+      "actual_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "passed": true,
+      "path": "simulation/metrics.py",
+      "start_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "start_sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+    },
+    {
+      "actual_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "passed": true,
+      "path": "simulation/agents.py",
+      "start_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "start_sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+    },
+    {
+      "actual_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "passed": true,
+      "path": "simulation/model.py",
+      "start_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "start_sha256_raw": "e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945"
+    },
+    {
+      "actual_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "passed": true,
+      "path": "simulation/attack_adapter_v2.py",
+      "start_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "start_sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+    },
+    {
+      "actual_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "passed": true,
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "start_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "start_sha256_raw": "da7913799d0d4e11f52f770e313875764d27b20ad33157a7aa9c1fa00df418e2"
+    },
+    {
+      "actual_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "passed": true,
+      "path": "simulation/working_factor.py",
+      "start_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "start_sha256_raw": "0afde923081fe34d1ada86e2928286d45c905441053f643968ea9b13007b683d"
+    },
+    {
+      "actual_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "passed": true,
+      "path": "simulation/constants_v2_stage18.py",
+      "start_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "start_sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+    }
+  ],
+  "stage": 1,
+  "status": "STAGE_1_COMPLETE"
+}

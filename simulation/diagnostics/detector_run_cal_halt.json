@@ -1,0 +1,310 @@
+{
+  "all_workers_exited": true,
+  "calibration_performed": false,
+  "cause": {
+    "halt": "[WinError 5] Access is denied: 'C:\\\\Users\\\\matty\\\\Dev\\\\AI-Succession-Problem\\\\simulation\\\\diagnostics\\\\detector_run_cal_execution.json.37400.tmp' -> 'C:\\\\Users\\\\matty\\\\Dev\\\\AI-Succession-Problem\\\\simulation\\\\diagnostics\\\\detector_run_cal_execution.json'",
+    "job": "batch",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\detector_run_cal_executor.py\", line 456, in batch\n    state['active_jobs']=list(active)+[job];write(P+'execution.json',state)\n                                            ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\detector_run_cal_executor.py\", line 160, in write\n    os.replace(temp,OUT/name)\n    ~~~~~~~~~~^^^^^^^^^^^^^^^\nPermissionError: [WinError 5] Access is denied: 'C:\\\\Users\\\\matty\\\\Dev\\\\AI-Succession-Problem\\\\simulation\\\\diagnostics\\\\detector_run_cal_execution.json.37400.tmp' -> 'C:\\\\Users\\\\matty\\\\Dev\\\\AI-Succession-Problem\\\\simulation\\\\diagnostics\\\\detector_run_cal_execution.json'\n",
+    "utc": "2026-09-15T18:12:19.092510+00:00",
+    "violations": []
+  },
+  "completed_runs": 97,
+  "completed_seed_list": [
+    1835086300,
+    1835086301,
+    1835086302,
+    1835086303,
+    1835086304,
+    1835086305,
+    1835086306,
+    1835086307,
+    1835086308,
+    1835086309,
+    1835086310,
+    1835086311,
+    1835086312,
+    1835086313,
+    1835086314,
+    1835086315,
+    1835086316,
+    1835086317,
+    1835086318,
+    1835086319,
+    1835086320,
+    1835086321,
+    1835086322,
+    1835086323,
+    1835086324,
+    1835086325,
+    1835086326,
+    1835086327,
+    1835086328,
+    1835086329,
+    1835086330,
+    1835086331,
+    1835086332,
+    1835086333,
+    1835086334,
+    1835086335,
+    1835086336,
+    1835086337,
+    1835086338,
+    1835086339,
+    1835086340,
+    1835086341,
+    1835086342,
+    1835086343,
+    1835086344,
+    1835086345,
+    1835086346,
+    1835086347,
+    1835086348,
+    1835086349,
+    1835086350,
+    1835086351,
+    1835086352,
+    1835086353,
+    1835086354,
+    1835086355,
+    1835086356,
+    1835086357,
+    1835086358,
+    1835086359,
+    1835086360,
+    1835086361,
+    1835086362,
+    1835086363,
+    1835086364,
+    1835086365,
+    1835086366,
+    1835086367,
+    1835086368,
+    1835086369,
+    1835086370,
+    1835086371,
+    1835086372,
+    1835086373,
+    1835086374,
+    1835086375,
+    1835086376,
+    1835086377,
+    1835086378,
+    1835086379,
+    1835086380,
+    1835086381,
+    1835086382,
+    1835086383,
+    1835086384,
+    1835086385,
+    1835086386,
+    1835086387,
+    1835086388,
+    1835086389,
+    1835086390,
+    1835086391,
+    1835086392,
+    1835086393,
+    1835086394,
+    1835086395,
+    1835086397
+  ],
+  "completed_steps": 29100,
+  "constants_file_exists": false,
+  "detector_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+  "nonpermitted_increase_count_completed_runs": 0,
+  "not_launched_seeds": [
+    1835086410,
+    1835086411,
+    1835086412,
+    1835086413,
+    1835086414,
+    1835086415,
+    1835086416,
+    1835086417,
+    1835086418,
+    1835086419
+  ],
+  "note_pins_end": [
+    {
+      "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "end_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "start_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+    },
+    {
+      "blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+      "end_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "passed": true,
+      "path": "simulation/diagnostics/drift_mapping_design_note.md",
+      "start_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748"
+    }
+  ],
+  "partial_jobs": [
+    {
+      "raw_log": "detector_run_cal_H_1835086396_steps_attempt1.csv.partial",
+      "reason": "Stopped after the coordinator exception",
+      "recorded_rows": 299,
+      "seed": 1835086396,
+      "status": "PARTIAL_NOT_COMPLETE"
+    },
+    {
+      "raw_log": "detector_run_cal_H_1835086398_steps_attempt1.csv.partial",
+      "reason": "Stopped after the coordinator exception",
+      "recorded_rows": 296,
+      "seed": 1835086398,
+      "status": "PARTIAL_NOT_COMPLETE"
+    },
+    {
+      "raw_log": "detector_run_cal_H_1835086399_steps_attempt1.csv.partial",
+      "reason": "Stopped after the coordinator exception",
+      "recorded_rows": 299,
+      "seed": 1835086399,
+      "status": "PARTIAL_NOT_COMPLETE"
+    },
+    {
+      "raw_log": "detector_run_cal_H_1835086400_steps_attempt1.csv.partial",
+      "reason": "Stopped after the coordinator exception",
+      "recorded_rows": 294,
+      "seed": 1835086400,
+      "status": "PARTIAL_NOT_COMPLETE"
+    },
+    {
+      "raw_log": "detector_run_cal_H_1835086401_steps_attempt1.csv.partial",
+      "reason": "Stopped after the coordinator exception",
+      "recorded_rows": 291,
+      "seed": 1835086401,
+      "status": "PARTIAL_NOT_COMPLETE"
+    },
+    {
+      "raw_log": "detector_run_cal_H_1835086402_steps_attempt1.csv.partial",
+      "reason": "Stopped after the coordinator exception",
+      "recorded_rows": 297,
+      "seed": 1835086402,
+      "status": "PARTIAL_NOT_COMPLETE"
+    },
+    {
+      "raw_log": "detector_run_cal_H_1835086403_steps_attempt1.csv.partial",
+      "reason": "Stopped after the coordinator exception",
+      "recorded_rows": 294,
+      "seed": 1835086403,
+      "status": "PARTIAL_NOT_COMPLETE"
+    },
+    {
+      "raw_log": "detector_run_cal_H_1835086404_steps_attempt1.csv.partial",
+      "reason": "Stopped after the coordinator exception",
+      "recorded_rows": 284,
+      "seed": 1835086404,
+      "status": "PARTIAL_NOT_COMPLETE"
+    },
+    {
+      "raw_log": "detector_run_cal_H_1835086405_steps_attempt1.csv.partial",
+      "reason": "Stopped after the coordinator exception",
+      "recorded_rows": 18,
+      "seed": 1835086405,
+      "status": "PARTIAL_NOT_COMPLETE"
+    },
+    {
+      "raw_log": "detector_run_cal_H_1835086406_steps_attempt1.csv.partial",
+      "reason": "Stopped after the coordinator exception",
+      "recorded_rows": 12,
+      "seed": 1835086406,
+      "status": "PARTIAL_NOT_COMPLETE"
+    },
+    {
+      "raw_log": "detector_run_cal_H_1835086407_steps_attempt1.csv.partial",
+      "reason": "Stopped after the coordinator exception",
+      "recorded_rows": 5,
+      "seed": 1835086407,
+      "status": "PARTIAL_NOT_COMPLETE"
+    },
+    {
+      "raw_log": "detector_run_cal_H_1835086408_steps_attempt1.csv.partial",
+      "reason": "Stopped after the coordinator exception",
+      "recorded_rows": 5,
+      "seed": 1835086408,
+      "status": "PARTIAL_NOT_COMPLETE"
+    },
+    {
+      "raw_log": "detector_run_cal_H_1835086409_steps_attempt1.csv.partial",
+      "reason": "Stopped after the coordinator exception",
+      "recorded_rows": 0,
+      "seed": 1835086409,
+      "status": "PARTIAL_NOT_COMPLETE"
+    }
+  ],
+  "permitted_later_increase_completed_runs": 0,
+  "resumed_seeds": [],
+  "source_pins_end": [
+    {
+      "actual_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "passed": true,
+      "path": "simulation/metrics.py",
+      "start_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "start_sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+    },
+    {
+      "actual_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "passed": true,
+      "path": "simulation/agents.py",
+      "start_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "start_sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+    },
+    {
+      "actual_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "passed": true,
+      "path": "simulation/model.py",
+      "start_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "start_sha256_raw": "e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945"
+    },
+    {
+      "actual_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "passed": true,
+      "path": "simulation/attack_adapter_v2.py",
+      "start_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "start_sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+    },
+    {
+      "actual_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "passed": true,
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "start_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "start_sha256_raw": "da7913799d0d4e11f52f770e313875764d27b20ad33157a7aa9c1fa00df418e2"
+    },
+    {
+      "actual_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "passed": true,
+      "path": "simulation/working_factor.py",
+      "start_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "start_sha256_raw": "0afde923081fe34d1ada86e2928286d45c905441053f643968ea9b13007b683d"
+    },
+    {
+      "actual_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "passed": true,
+      "path": "simulation/constants_v2_stage18.py",
+      "start_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "start_sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+    }
+  ],
+  "status": "HALTED",
+  "step_0_increase_distribution_completed_runs": {
+    "2": 97
+  },
+  "t0_passed": true,
+  "t1_passed": true,
+  "utc": "2026-09-15T18:15:56.072614+00:00"
+}

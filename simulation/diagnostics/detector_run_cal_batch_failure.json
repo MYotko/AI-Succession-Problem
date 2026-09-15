@@ -1,0 +1,7 @@
+{
+  "halt": "[WinError 5] Access is denied: 'C:\\\\Users\\\\matty\\\\Dev\\\\AI-Succession-Problem\\\\simulation\\\\diagnostics\\\\detector_run_cal_execution.json.37400.tmp' -> 'C:\\\\Users\\\\matty\\\\Dev\\\\AI-Succession-Problem\\\\simulation\\\\diagnostics\\\\detector_run_cal_execution.json'",
+  "job": "batch",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\detector_run_cal_executor.py\", line 456, in batch\n    state['active_jobs']=list(active)+[job];write(P+'execution.json',state)\n                                            ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\detector_run_cal_executor.py\", line 160, in write\n    os.replace(temp,OUT/name)\n    ~~~~~~~~~~^^^^^^^^^^^^^^^\nPermissionError: [WinError 5] Access is denied: 'C:\\\\Users\\\\matty\\\\Dev\\\\AI-Succession-Problem\\\\simulation\\\\diagnostics\\\\detector_run_cal_execution.json.37400.tmp' -> 'C:\\\\Users\\\\matty\\\\Dev\\\\AI-Succession-Problem\\\\simulation\\\\diagnostics\\\\detector_run_cal_execution.json'\n",
+  "utc": "2026-09-15T18:12:19.092510+00:00",
+  "violations": []
+}

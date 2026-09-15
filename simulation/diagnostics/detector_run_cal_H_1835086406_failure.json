@@ -1,0 +1,7 @@
+{
+  "halt": "Stopped after another run or gate halted",
+  "job": "H_1835086406",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\detector_run_cal_executor.py\", line 284, in worker\n    else:run_model(args.job,args.arm,args.seed,attempt=args.attempt)\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\detector_run_cal_executor.py\", line 234, in run_model\n    check_stop();pins()\n    ~~~~~~~~~~^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\detector_run_cal_executor.py\", line 182, in check_stop\n    if (OUT/(P+'stop.json')).exists():raise RuntimeError('Stopped after another run or gate halted')\n                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Stopped after another run or gate halted\n",
+  "utc": "2026-09-15T18:12:19.402082+00:00",
+  "violations": []
+}
