@@ -1,8 +1,8 @@
 # Diagnostics Snapshot
 
-Generated: 2026-09-13T18:46:03Z
+Generated: 2026-09-15T14:45:56Z
 Repository: C:\Users\matty\Dev\AI-Succession-Problem
-Commit: c2f4ea9
+Commit: 7f0e9c7
 Branch: main
 Category: diagnostics
 
@@ -37,10 +37,7 @@ Category: diagnostics
 | simulation/diagnostics/defended_collapse_discrepancy_report.md | 508 | 40781 |
 | simulation/diagnostics/domain_masking_v2_summary.md | 40 | 1555 |
 | simulation/diagnostics/drift_char_report.md | 292 | 23674 |
-| simulation/diagnostics/drift_map_run_execution_halt_report.md | 99 | 8806 |
-| simulation/diagnostics/drift_map_run_recheck_20260913T175508Z_report.md | 42 | 2338 |
-| simulation/diagnostics/drift_map_run_report.md | 46 | 3357 |
-| simulation/diagnostics/drift_mapping_design_note.md | 324 | 18620 |
+| simulation/diagnostics/drift_mapping_design_note.md | 388 | 22952 |
 | simulation/diagnostics/dual_metric_report.md | 166 | 14636 |
 | simulation/diagnostics/engineered_fragility_v2_summary.md | 54 | 2480 |
 | simulation/diagnostics/estimator_repair_report.md | 147 | 13406 |
@@ -122,7 +119,7 @@ Category: diagnostics
 | simulation/diagnostics/sync_status_yotko-Legion-T5-26IOB6_20260720.md | 127 | 7946 |
 | simulation/diagnostics/termination_decontamination_integration_analysis.md | 64 | 5995 |
 
-Total: 111 files, 13288 lines, 800477 bytes
+Total: 108 files, 13165 lines, 790308 bytes
 
 ---
 ==========================================
@@ -4450,211 +4447,6 @@ drift_char_manifest.json enumerates every output, SHA256, and CSV row count. CSV
 
 
 ==========================================
-FILE: simulation/diagnostics/drift_map_run_execution_halt_report.md
-==========================================
-
-# Drift mapping characterization: continuous-check halt
-
-The verified pre-registration was read and execution resumed through the prerequisite probes. The 60-step honest probe ended with H_N_SHAPE_FALLBACK_COUNT = 2, failing the Section 6 requirement of zero at the end of every run. Execution halted on that continuous check. No characterization arm was launched and no A1 through A6 analysis was performed. No result was used to adjust the plan.
-
-## Pre-registration and source gate
-
-HEAD and publication commit: `0a9b8e1c4f62b18171b998a1c62e581ff74e2083`. Branch: main. The required fd444fc ancestor check passed. The exact tracked-only status command exited 0 with zero stdout lines. The note was indexed, its last-modifying commit was nonempty, and that commit was an ancestor of the local origin/main reference, exit 0.
-
-Design note Git blob SHA1: `54d43154c811f534dc070522f859cfaf74320c6c`. Its verified LF-normalized SHA256 is `a31c047ab1ac099a407413be259b25e9f985656da0412dcc6fe466f41668e169`. The committed note was read only after this hash matched. The earlier publication halts are closed. Their artifacts are retained as historical records.
-
-All seven source pins matched at the start and after the halt:
-
-| Source | Start LF-normalized SHA256 | End LF-normalized SHA256 | Match |
-| --- | --- | --- | --- |
-| simulation/metrics.py | 6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f | 6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f | PASS |
-| simulation/agents.py | a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca | a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca | PASS |
-| simulation/model.py | 25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993 | 25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993 | PASS |
-| simulation/attack_adapter_v2.py | 5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee | 5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee | PASS |
-| simulation/run_attack_vector_revalidation_v2.py | 20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45 | 20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45 | PASS |
-| simulation/working_factor.py | 16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44 | 16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44 | PASS |
-| simulation/constants_v2_stage18.py | 121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b | 121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b | PASS |
-
-The recorded T0 stderr warning did not halt execution:
-
-```text
-warning: unable to access 'C:\Users\matty/.config/git/ignore': Permission denied
-```
-
-The operator-established line-ending and permission conditions were accepted without repair. No production file or design-note edit was performed. No containment diff was run; that remains the operator's responsibility.
-
-## T1 gates and continuous check
-
-| Note Section 6 item | Measured evidence | Status |
-| --- | --- | --- |
-| 2. Source pins | 7 of 7 match at start and end | PASS |
-| 3. Constructor equivalence | Configuration dictionaries equal. Factory and common-constructor probes each recorded 61 steps before the stop, against 300 required. | INCOMPLETE |
-| 4. M1 wrapper identity | 200 synthetic actions crossed with steps 0 through 299: 60,000 exact action-dictionary matches. | PASS |
-| 5. Honest arm | attack_vector_v2 is None at construction; adapter inactive on 60 of 60 steps; no action modified on 60 of 60 steps. | PASS |
-| 6. Recorder randomness | NumPy global RNG state unchanged around all 60 recorder calls in the honest probe. | PASS |
-| Continuous: raw entropy | Recorder entropy exactly equals cached h_n_latest on all 60 honest-probe steps. | PASS |
-| Continuous: shape fallback | Initial module counter 0; end-of-probe counter 2; required end count 0. | FAIL |
-
-The trigger was recorded at `2026-09-13T18:02:37.316807+00:00` for seed 1835086199. The honest probe completed 60 steps and did not end in extinction. Its raw log SHA256 is `e082dc66267c0317db792b0af5b796ca675e3236de3db0e8032f10a2eb2373a7`. The log remains marked partial because the required continuous check failed.
-
-For Gate 3, all 24 fields in the 61 available recorder rows were compared. First differing field or step in this completed prefix: none. This does not establish the required 300-step, every-recorded-field equivalence. The full datacollector comparison was not completed because both workers stopped after the continuous halt.
-
-The factory and common-constructor probes both used seed 1835086199. Both stopped after 61 recorded steps because of the honest-probe halt. They were not rerun. These are required gate probes, not completed characterization runs.
-
-The wrapper fixture used six simplex vertices, one balanced allocation, and 193 deterministic Dirichlet allocations, paired with the existing constraint-grid mapper. Synthetic fixture seed: 20260913. M1 and the production function returned equal dictionaries for every action-step comparison. This was a unit-level gate, not an arm run.
-
-## Configuration as constructed
-
-The honest probe used:
-
-```json
-{
-  "attack_step": 50,
-  "bootstrap_turn_step_v2": 20,
-  "cop_cusum_drift": false,
-  "cop_methodological_diversity": false,
-  "n_candidates_v2": 300,
-  "phi": 10.0,
-  "policy": "optimize_u_sys_v2",
-  "random_seed": 1835086199,
-  "rollout_steps_v2": 20,
-  "shock_magnitude": 0.15,
-  "shock_step": 0
-}
-```
-
-The two constructor-comparison configurations were equal and added only the prescribed attack_vector_v2 entry relative to this honest configuration. Each used the Section 4 constructor arguments. No attack intensity, seed, allowance, threshold, or analysis rule was changed.
-
-## Execution and completion record
-
-Machine: `YOTKOTEST`. Python: `3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]`. NumPy: `2.4.4`.
-
-Four independent gate processes were launched concurrently: three model probes and one synthetic wrapper check. The operator budget was 16 CPUs in normal mode, with a ceiling of 15 workers. Numerical-library thread settings were 1 before import, and OpenBLAS reported one effective thread in every worker. These limits were not an operating-system CPU reservation. All four processes have exited.
-
-Characterization arm runs started: 0. Characterization runs complete: 0. Resumed seeds: none. The two interrupted constructor gates are listed in the execution-halt JSON with seed, completed steps, and cause. No partial log is counted as a completed run. The 360-run batch was not launched.
-
-No CUSUM allowance, threshold, or alarm rule was chosen or run. The prescribed old adapter accumulator was present in the attack-constructor probes with cop_cusum_drift false; its score was logged and was not analyzed. No attack-success rate or corrected figure was derived. H_ref remains a candidate and is not frozen; it was not computed here. Nothing here is comparable to any pre-repair measurement.
-
-## Provenance and artifacts
-
-| Pinned source | Committed blob SHA1 |
-| --- | --- |
-| simulation/metrics.py | 7e7749d99636746aa2c3215da1edaa6ab5372611 |
-| simulation/agents.py | d21e5300eab6e4136141ea33aa0367b9aa47ed51 |
-| simulation/model.py | a1cf988532203b7119462eb9b04cf2e3b0541879 |
-| simulation/attack_adapter_v2.py | ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e |
-| simulation/run_attack_vector_revalidation_v2.py | ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d |
-| simulation/working_factor.py | bbfa1ea81ce8648adaf6c44a8b6f65188d206486 |
-| simulation/constants_v2_stage18.py | 43b9766e63d1519faf59d1e8e4562c686a8149f2 |
-
-The referenced drift_char recorder formula was also read through its committed blob at HEAD: `simulation/diagnostics/drift_char_probe.py`, SHA1 `cf52af233333a0c6e6cc4671233ad7f9310cd049`. The recorder uses max(FRONTIER_FLOOR, theta_capability) divided by max(0.01, clipped avg_wb * transfer_state), as specified there.
-
-Per-module raw and LF-normalized SHA256 values are retained by worker in drift_map_run_execution_halt.json and the execution manifest. Source pin readings at completion are in drift_map_run_source_pins_end.json. The prefix write guard included the explicit os.devnull exemption and bytecode writes were disabled. No out-of-scope writable-open attempt was recorded.
-
-Existing publication-halt artifacts remain intact. This execution report and drift_map_run_execution_halt_manifest.json record the resumed attempt. The execution manifest enumerates all drift_map_run_ artifacts, labels partial gate logs, and hashes LF-normalized bytes in memory. CSV row counts use csv.DictReader excluding headers, including CSV-formatted .partial logs; non-CSV counts are null. Its self-entry has a null hash to avoid self-reference; the final digest is emitted separately.
-
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_recheck_20260913T175508Z_report.md
-==========================================
-
-# Drift mapping characterization: resumption recheck halted
-
-The design note is now staged, but remains uncommitted. Execution did not resume. No note content was read, no T1 gate was run, and no simulation was launched.
-
-HEAD: `fd444fc22254ec24472f4bad03f8f56bf4470110`. Machine: `YOTKOTEST`.
-
-| T0 check | Result |
-| --- | --- |
-| a. Branch main | PASS |
-| b. Required ancestor | PASS, exit 0 |
-| c. Zero tracked-status output | FAIL: staged addition shown below |
-| d. Note in index | PASS, exit 0 |
-| d. Nonempty last-modifying commit C | FAIL: empty output |
-| d. C ancestor of origin/main | Not run; C unavailable |
-| e. Committed note hash | FAIL: no note blob in HEAD |
-| f. Section 3 source pins | Not read; verified committed note unavailable |
-
-The exact status command, `git status --porcelain --untracked-files=no`, exited 0 and returned:
-
-```text
-A  simulation/diagnostics/drift_mapping_design_note.md
-```
-
-The committed-blob retrieval exited 128:
-
-```text
-fatal: path 'simulation/diagnostics/drift_mapping_design_note.md' exists on disk, but not in 'HEAD'
-```
-
-The global Git ignore permission warning was recorded and did not cause the halt:
-
-```text
-warning: unable to access 'C:\Users\matty/.config/git/ignore': Permission denied
-```
-
-The note must be committed and its last-modifying commit reachable from origin/main before the publication gates can pass. No Git write was performed. The working-tree note was not substituted for the required committed blob.
-
-Python: `3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]`. Installed NumPy: `2.4.4`, read from metadata only. Worker count: 0. Resumed seeds: none. No source module was executed and no pinned-source SHA1 or SHA256 could be recorded because Section 3 was unavailable.
-
-No CUSUM allowance, threshold, or alarm rule was chosen or run. No attack-success rate or corrected figure was derived. H_ref remains an unfrozen candidate and was not calculated. No characterization result or pre-repair comparison was produced.
-
-The known line-ending and permission conditions were accepted without repair. Bytecode writes were disabled, and the reporting process used the prefix write guard with the os.devnull exemption. Existing artifacts were preserved; these recheck files were created exclusively. No containment diff was performed.
-
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_report.md
-==========================================
-
-# Drift mapping characterization: T0 halt
-
-Execution halted because the required pre-registration is absent from the Git index and HEAD. No verified specification was available. The working-tree note was not read. No T1 gates, arm runs, model steps, or analyses were executed.
-
-## T0 evidence
-
-| Check | Observed result | Status |
-| --- | --- | --- |
-| a. Branch | main, exit 0 | PASS |
-| b. Required ancestor | merge-base --is-ancestor returned exit 0 | PASS |
-| c. Exact tracked-only status | Exit 0, zero stdout lines | PASS |
-| d. Note indexed | ls-files --error-unmatch returned exit 1 | FAIL |
-| d. Last commit C | log returned exit 0 with empty output | FAIL |
-| d. C ancestry on origin/main | Not run because C was unavailable | NOT RUN |
-| e. Committed note hash | cat-file returned exit 128; no blob available to hash | FAIL |
-| f. Section 3 source pins | Not read because the verified committed note was unavailable | NOT RUN |
-
-HEAD: `fd444fc22254ec24472f4bad03f8f56bf4470110`.
-
-The failed blob retrieval reported:
-
-```text
-fatal: path 'simulation/diagnostics/drift_mapping_design_note.md' exists on disk, but not in 'HEAD'
-```
-
-The required LF-normalized design-note SHA256 is `a31c047ab1ac099a407413be259b25e9f985656da0412dcc6fe466f41668e169`. No actual SHA256 or committed blob SHA1 is available. The empty path-specific commit history also prevents the publication-ancestry check. Neither working-tree content nor a substitute specification was used.
-
-The exact status command was `git status --porcelain --untracked-files=no`. Its stderr warning was recorded and did not cause this halt:
-
-```text
-warning: unable to access 'C:\Users\matty/.config/git/ignore': Permission denied
-```
-
-The operator-established line-ending and permission conditions were accepted without repair. Read-only Git commands used GIT_OPTIONAL_LOCKS=0. No worktree-to-blob content comparison or containment diff was performed.
-
-## Execution record
-
-Machine: `YOTKOTEST`. Python: `3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]`. Installed NumPy: `2.4.4`, read from package metadata. No NumPy computation or simulation-module execution occurred. Workers used: 0. Arm runs: 0. Resumed seeds: none.
-
-No CUSUM allowance, threshold, or alarm rule was chosen or run. No attack-success rate or corrected figure was derived. H_ref remains a candidate and is not frozen; it was not calculated here. No characterization result was produced, and nothing here provides a measurement comparable to pre-repair results.
-
-Section 3 source pins could not be enumerated or verified because the committed design note was unavailable. Their initial and completion readings and their blob SHA1 values are therefore unavailable. No scientific result was used as a halt criterion.
-
-Bytecode writes were disabled. The reporting process guarded writable opens to the drift_map_run_ artifact prefix with the explicit os.devnull exemption. The three halt artifacts were created with exclusive opens, preserving any preexisting files. The operator remains responsible for the containment diff.
-
-The manifest records SHA256 over LF-normalized bytes, with null row counts for these non-CSV artifacts. Its self-entry has a null hash to avoid self-reference; the final manifest digest is emitted separately. Complete command evidence is in drift_map_run_halt.json.
-
-
-==========================================
 FILE: simulation/diagnostics/drift_mapping_design_note.md
 ==========================================
 
@@ -4668,8 +4460,8 @@ executor verifies that structurally rather than by instruction.
 `fd444fc22254ec24472f4bad03f8f56bf4470110`, with steps 1 through 3 of the v2.1 arc in
 place.
 **Governs:** artifacts under the prefix `simulation/diagnostics/drift_map_run_`.
-**Amended:** 2026-09-13, Amendment 1 in Section 11, committed and pushed before any
-characterization run.
+**Amended:** 2026-09-13, Amendment 1 in Section 11, and 2026-09-15, Amendment 2 in
+Section 12, each committed and pushed before any characterization run.
 
 ---
 
@@ -4846,6 +4638,7 @@ exists.
    Section 4 and the production factory `_make_model`, called for the cell of Section 4
    with its seed replaced, produce models whose configuration dictionaries are equal and
    whose recorded trajectories are identical in every recorded field for all 300 steps.
+   This item is amended by Amendment 2 in Section 12.
 4. **Wrapper identity at default.** The M1 wrapper, at m equal to 1, returns an action
    identical in every key to the production `_apply_sub_threshold_drift` across a grid of
    at least 200 synthetic actions crossed with every step from 0 through 299.
@@ -4857,8 +4650,8 @@ exists.
 
 Continuous checks during the run, each a halt on failure:
 
-- The `H_N_SHAPE_FALLBACK_COUNT` check, superseded by Amendment 1 in Section 11, where
-  the original wording is preserved.
+- The `H_N_SHAPE_FALLBACK_COUNT` check, superseded by Amendment 1 in Section 11 and then
+  by Amendment 2 in Section 12. The original wording is preserved in Section 11.
 - The raw entropy recomputed by the recorder from the step's novelty matrix equals the
   model's cached `h_n_latest` exactly on every step.
 - Every attack run's seed equals its paired honest run's seed.
@@ -4875,7 +4668,8 @@ datacollector H_N; the coupled total suppression of the committed action; `avg_w
 population; the six allocation shares and two constraint axes of the committed action;
 adapter active; action modified; the old accumulator score. One summary row per run
 records steps completed, whether the run ended by extinction, and the shape fallback
-count increase during step 0 and after step 0, per Amendment 1.
+count increases defined in Amendment 2, which also adds the novelty vector count to the
+per-step fields and defines which fields are null.
 
 ## 8. Analysis, fixed now
 
@@ -4982,6 +4776,68 @@ shape was invented after measurement began, and halts the run.
 through A6 stand exactly as originally committed. The only change to the recorded fields
 is that the single fallback count in the Section 7 run summary becomes the two increases
 defined above.
+
+## 12. Amendment 2, 2026-09-15
+
+Committed and pushed before any characterization run. No arm had started when it was
+made. Attempt 2 halted inside the constructor-equivalence gate, and the only outputs in
+existence were gate probes.
+
+**What happened.** Gate 3 runs the attack-arm configuration of Section 4 with the old
+alarm off. In its probe the population fell below two agents. On the next step the
+novelty matrix held a single vector, `calculate_h_n` took its documented early return
+and gave the scalar 0.0 rather than the tuple of entropy, shape, and V, and the recorder,
+which required the tuple, halted. Both constructor logs matched in every recorded field
+on every step before that. The halt is recorded in `drift_map_run_a2_report.md`.
+
+**Exercised to termination before this amendment was written.** A probe of the same seed
+and configuration, printing mechanical fields only, stepped the model until `step()`
+returned false. It found three consequences of the same edge, none anticipated by
+Sections 6, 7, or 11.
+
+1. On any step whose novelty matrix has fewer than two vectors, no covariance exists, so
+   V and the spectral shape are undefined, and the estimator returns the scalar 0.0.
+2. The state builder then has no measured shape and substitutes the neutral one. The
+   first substitution occurs during the degenerate step itself, because the builder is
+   also called after the agents act within a step: one substitution on the first such
+   step, and three on each later one. The replacement check in Amendment 1, which
+   forbids any increase after step 0, would halt on these. So would a check that
+   permitted an increase only when the preceding step was degenerate, because it would
+   halt on the first degenerate step; the probe showed that directly.
+3. A run can end by extinction before step 300, so the gate 3 comparison "for all 300
+   steps" cannot be satisfied.
+
+**Amended, each replacing the text named.**
+
+- *Recorded fields, Section 7.* Add the step's novelty vector count to every per-step
+  row. On a step whose novelty matrix has fewer than two vectors, record the raw entropy
+  as the scalar the estimator returned, and record V and the spectral shape as null.
+  Never substitute a value for either.
+- *Continuous check on raw entropy, Section 6.* Unchanged. On such a step the recomputed
+  scalar must still equal the model's cached `h_n_latest` exactly.
+- *Continuous check on the shape fallback, replacing the check in Amendment 1.* For every
+  run, record the counter's increase during each step. The increase during step 0 is
+  recorded and permitted. For any later step t, an increase is permitted only if the
+  novelty matrix of step t, or of step t minus 1, had fewer than two vectors. Any other
+  increase is a halt. The run summary records the increase during step 0, the total
+  permitted increase after step 0, and the count of non-permitted increases, which must
+  be zero. The counter is module-level and accumulates across runs within a process, so
+  only per-step increases are ever tested.
+- *Gate 3, Section 6.* The constructor-equivalence comparison covers every completed
+  step, up to 300. Both constructors must complete the same number of steps and end for
+  the same reason, and their recorded trajectories must be identical in every recorded
+  field, nulls included, on every completed step.
+
+**Reported descriptively, not an analysis item.** Per arm, the number of runs that reach
+a step with fewer than two novelty vectors, and the first such step for each. Steps in
+that regime enter A1 through A6 exactly as recorded, with raw entropy as the estimator
+returned it. No step is dropped and none is imputed.
+
+**Nothing else changes.** Arms, seeds, construction, gates 2, 4, 5, and 6, and every
+analysis item A1 through A6 stand as committed. The probe that informed this amendment
+printed mechanical fields only. Operator-side review of the halted gate logs displayed
+entropy and g values for their final recorded steps; those values play no part in this
+amendment, which addresses only the undefined-shape edge and the early end of a run.
 
 
 ==========================================

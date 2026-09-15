@@ -1,8 +1,8 @@
 # Data Results Snapshot
 
-Generated: 2026-09-13T18:46:03Z
+Generated: 2026-09-15T14:45:57Z
 Repository: C:\Users\matty\Dev\AI-Succession-Problem
-Commit: c2f4ea9
+Commit: 7f0e9c7
 Branch: main
 Category: data_results
 
@@ -109,26 +109,6 @@ NOTE: This snapshot contains a manifest of data files, not raw file content.
 | simulation/diagnostics/drift_char_steps_baseline_1835086237.csv | 192808 | 2026-09-08T21:39:22Z |
 | simulation/diagnostics/drift_char_steps_baseline_1835086238.csv | 192934 | 2026-09-08T21:39:22Z |
 | simulation/diagnostics/drift_char_summary.json | 13373 | 2026-09-08T21:44:01Z |
-| simulation/diagnostics/drift_map_run_execution_halt.json | 14830 | 2026-09-13T18:06:30Z |
-| simulation/diagnostics/drift_map_run_execution_halt_manifest.json | 20833 | 2026-09-13T18:06:30Z |
-| simulation/diagnostics/drift_map_run_gate_common_failure.json | 784 | 2026-09-13T18:02:37Z |
-| simulation/diagnostics/drift_map_run_gate_common_initial.json | 3139 | 2026-09-13T18:02:30Z |
-| simulation/diagnostics/drift_map_run_gate_common_progress.json | 109 | 2026-09-13T18:02:37Z |
-| simulation/diagnostics/drift_map_run_gate_factory_failure.json | 785 | 2026-09-13T18:02:37Z |
-| simulation/diagnostics/drift_map_run_gate_factory_initial.json | 3386 | 2026-09-13T18:02:30Z |
-| simulation/diagnostics/drift_map_run_gate_factory_progress.json | 110 | 2026-09-13T18:02:37Z |
-| simulation/diagnostics/drift_map_run_gate_honest_failure.json | 884 | 2026-09-13T18:02:37Z |
-| simulation/diagnostics/drift_map_run_gate_honest_initial.json | 3075 | 2026-09-13T18:02:30Z |
-| simulation/diagnostics/drift_map_run_gate_honest_progress.json | 108 | 2026-09-13T18:02:36Z |
-| simulation/diagnostics/drift_map_run_gate_honest_result.json | 99645 | 2026-09-13T18:02:37Z |
-| simulation/diagnostics/drift_map_run_gate_wrapper_result.json | 8550 | 2026-09-13T18:02:32Z |
-| simulation/diagnostics/drift_map_run_halt.json | 2687 | 2026-09-13T17:52:37Z |
-| simulation/diagnostics/drift_map_run_manifest.json | 3108 | 2026-09-13T17:52:37Z |
-| simulation/diagnostics/drift_map_run_plan.json | 3648 | 2026-09-13T18:02:00Z |
-| simulation/diagnostics/drift_map_run_recheck_20260913T175508Z.json | 2080 | 2026-09-13T17:55:08Z |
-| simulation/diagnostics/drift_map_run_recheck_20260913T175508Z_manifest.json | 1260 | 2026-09-13T17:55:08Z |
-| simulation/diagnostics/drift_map_run_source_pins_end.json | 3155 | 2026-09-13T18:06:30Z |
-| simulation/diagnostics/drift_map_run_stop.json | 785 | 2026-09-13T18:02:37Z |
 | simulation/diagnostics/dual_metric_contrasts.json | 1712 | 2026-09-09T13:18:35Z |
 | simulation/diagnostics/dual_metric_evidence.json | 21844 | 2026-09-09T13:18:37Z |
 | simulation/diagnostics/dual_metric_manifest.json | 28599 | 2026-09-09T13:21:37Z |
@@ -190,7 +170,7 @@ NOTE: This snapshot contains a manifest of data files, not raw file content.
 | simulation/diagnostics/sybil_defense_scaling_characterization_analysis.json | 4780968 | 2026-08-21T19:34:08Z |
 | simulation/diagnostics/termination_decontamination_diagnostic.csv | 1606 | 2026-08-21T19:34:08Z |
 
-Total: 177 files
+Total: 157 files
 
 ---
 ==========================================
@@ -1519,186 +1499,6 @@ FILE: simulation/diagnostics/drift_char_summary.json
 - Modified: 2026-09-08T21:44:01Z
 - Structure: object with 9 top-level keys
 - Keys: anchor_selected, baseline_adapter_active_steps, baseline_runs, baseline_steps_counted, calibration, reproduction, scope, threshold_derivation, trajectory
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_execution_halt.json
-==========================================
-
-- Size: 14830 bytes
-- Modified: 2026-09-13T18:06:30Z
-- Structure: object with 33 top-level keys
-- Keys: all_workers_exited, analyses_A1_through_A6, characterization_arm_runs_started, characterization_runs_complete, expected_fallback_count, g_reference_source, gate2, gate3, gate4, gate5, gate6, hash_basis, head, honest_extinct, honest_raw_entropy_exact_matches, interrupted_gate_jobs, model_probe_workers, no_corrected_figures, no_parameter_selection, note_blob_sha1 ...
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_execution_halt_manifest.json
-==========================================
-
-- Size: 20833 bytes
-- Modified: 2026-09-13T18:06:30Z
-- Structure: object with 18 top-level keys
-- Keys: closed_halt_trigger, hash_basis, head, interrupted_gate_jobs, machine, note_blob_sha1, note_sha256_lf, numpy, observed_shape_fallback_count, outputs, per_module_sha256_by_worker, python, resumed_seeds, row_count_convention, self_hash_convention, source_pins_start_and_end, status, workers
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_gate_common_failure.json
-==========================================
-
-- Size: 784 bytes
-- Modified: 2026-09-13T18:02:37Z
-- Structure: object with 5 top-level keys
-- Keys: halt, job, traceback, utc, violations
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_gate_common_initial.json
-==========================================
-
-- Size: 3139 bytes
-- Modified: 2026-09-13T18:02:30Z
-- Structure: object with 8 top-level keys
-- Keys: attack_vector_v2, cached_shape_initial, configuration, job, runtime, seed, shape_fallback_count_initial, started_utc
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_gate_common_progress.json
-==========================================
-
-- Size: 109 bytes
-- Modified: 2026-09-13T18:02:37Z
-- Structure: object with 4 top-level keys
-- Keys: completed_steps, job, target, utc
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_gate_factory_failure.json
-==========================================
-
-- Size: 785 bytes
-- Modified: 2026-09-13T18:02:37Z
-- Structure: object with 5 top-level keys
-- Keys: halt, job, traceback, utc, violations
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_gate_factory_initial.json
-==========================================
-
-- Size: 3386 bytes
-- Modified: 2026-09-13T18:02:30Z
-- Structure: object with 8 top-level keys
-- Keys: attack_vector_v2, cached_shape_initial, configuration, job, runtime, seed, shape_fallback_count_initial, started_utc
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_gate_factory_progress.json
-==========================================
-
-- Size: 110 bytes
-- Modified: 2026-09-13T18:02:37Z
-- Structure: object with 4 top-level keys
-- Keys: completed_steps, job, target, utc
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_gate_honest_failure.json
-==========================================
-
-- Size: 884 bytes
-- Modified: 2026-09-13T18:02:37Z
-- Structure: object with 5 top-level keys
-- Keys: halt, job, traceback, utc, violations
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_gate_honest_initial.json
-==========================================
-
-- Size: 3075 bytes
-- Modified: 2026-09-13T18:02:30Z
-- Structure: object with 8 top-level keys
-- Keys: attack_vector_v2, cached_shape_initial, configuration, job, runtime, seed, shape_fallback_count_initial, started_utc
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_gate_honest_progress.json
-==========================================
-
-- Size: 108 bytes
-- Modified: 2026-09-13T18:02:36Z
-- Structure: object with 4 top-level keys
-- Keys: completed_steps, job, target, utc
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_gate_honest_result.json
-==========================================
-
-- Size: 99645 bytes
-- Modified: 2026-09-13T18:02:37Z
-- Structure: object with 21 top-level keys
-- Keys: action_modified_steps, adapter_active_steps, configuration, continuous_checks_passed, datacollector, elapsed_seconds, ended_utc, extinct, gate_probe_passed, job, raw_entropy_exact_matches, raw_log, raw_log_sha256, recorder_rng_unchanged_calls, runtime, seed, shape_fallback_count, source_pins_end, source_pins_start, steps_completed ...
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_gate_wrapper_result.json
-==========================================
-
-- Size: 8550 bytes
-- Modified: 2026-09-13T18:02:32Z
-- Structure: object with 12 top-level keys
-- Keys: action_step_comparisons, elapsed_seconds, gate, maximum_key_difference, passed, runtime, seed, source_pins_end, source_pins_start, steps_per_action, synthetic_action_count, utc
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_halt.json
-==========================================
-
-- Size: 2687 bytes
-- Modified: 2026-09-13T17:52:37Z
-- Structure: object with 21 top-level keys
-- Keys: T1_gates_run, arm_runs, branch, bytecode_writes_disabled, checks, head, machine, note_content_read, numpy_installed_version, numpy_version_basis, out_of_scope_writable_open_attempts_recorded, python, reason, resumed_seeds, simulation_workers, source_modules_executed, source_pins, status, utc, working_tree_note_read ...
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_manifest.json
-==========================================
-
-- Size: 3108 bytes
-- Modified: 2026-09-13T17:52:37Z
-- Structure: object with 16 top-level keys
-- Keys: T0_checks, hash_basis, head, machine, note_blob_sha1, numpy_installed_version, outputs, per_module_sha256, per_module_sha256_note, pinned_source_blob_sha1, python, resumed_seeds, row_count_convention, self_hash_convention, status, worker_count
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_plan.json
-==========================================
-
-- Size: 3648 bytes
-- Modified: 2026-09-13T18:02:00Z
-- Structure: object with 30 top-level keys
-- Keys: T0_passed, T0_status_command, T0_status_exit_code, T0_status_stdout, T0_stderr_warning, arm_runs_started, arms, available_cpu_budget, branch, bytecode_writes_disabled, created_utc, g_star, gate_concurrency, gate_jobs, head, mode, normal_limit, note_blob_sha1, note_path, note_sha256_lf ...
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_recheck_20260913T175508Z.json
-==========================================
-
-- Size: 2080 bytes
-- Modified: 2026-09-13T17:55:08Z
-- Structure: object with 16 top-level keys
-- Keys: T1_gates_run, arm_runs, bytecode_writes_disabled, checks, existing_artifacts_preserved, head, machine, note_content_read, numpy_installed_version, os_devnull_exempt, python, resumed_seeds, source_pins, status, utc, workers
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_recheck_20260913T175508Z_manifest.json
-==========================================
-
-- Size: 1260 bytes
-- Modified: 2026-09-13T17:55:08Z
-- Structure: object with 14 top-level keys
-- Keys: hash_basis, head, machine, note_blob_sha1, numpy_installed_version, outputs, per_module_sha256, pinned_source_blob_sha1, python, resumed_seeds, row_count_convention, self_hash_convention, status, workers
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_source_pins_end.json
-==========================================
-
-- Size: 3155 bytes
-- Modified: 2026-09-13T18:06:30Z
-- Structure: object with 3 top-level keys
-- Keys: all_match, pins, utc
-
-==========================================
-FILE: simulation/diagnostics/drift_map_run_stop.json
-==========================================
-
-- Size: 785 bytes
-- Modified: 2026-09-13T18:02:37Z
-- Structure: object with 5 top-level keys
-- Keys: halt, job, traceback, utc, violations
 
 ==========================================
 FILE: simulation/diagnostics/dual_metric_contrasts.json

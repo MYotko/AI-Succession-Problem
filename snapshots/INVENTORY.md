@@ -1,7 +1,7 @@
 # Project Knowledge Snapshots Inventory
 
-Last regeneration: 2026-09-13T19:06:53Z
-Git commit at regeneration: 6fdf3a1
+Last regeneration: 2026-09-15T14:45:57Z
+Git commit at regeneration: 7f0e9c7
 Branch: main
 
 ## Quick reference for Claude sessions
@@ -23,51 +23,51 @@ If you need specific content, ask the operator to upload the relevant category s
 
 ### docs
 - File: snapshots/docs_snapshot.md
-- Last generated: 2026-09-13T19:06:53Z
+- Last generated: 2026-09-15T14:45:56Z
 - Files included: 13
-- Snapshot size: 465478 bytes
+- Snapshot size: 472863 bytes
 
 ### framework_papers
 - File: snapshots/framework_papers_snapshot.md
-- Last generated: 2026-09-13T18:46:03Z
+- Last generated: 2026-09-15T14:45:56Z
 - Files included: 3
 - Snapshot size: 475013 bytes
 
 ### paper_drafts
 - File: snapshots/paper_drafts_snapshot.md
-- Last generated: 2026-09-13T18:46:03Z
+- Last generated: 2026-09-15T14:45:56Z
 - Files included: 8
 - Snapshot size: 342914 bytes
 
 ### essays
 - File: snapshots/essays_snapshot.md
-- Last generated: 2026-09-13T18:46:03Z
+- Last generated: 2026-09-15T14:45:56Z
 - Files included: 15
 - Snapshot size: 382529 bytes
 
 ### diagnostics
 - File: snapshots/diagnostics_snapshot.md
-- Last generated: 2026-09-13T18:46:03Z
+- Last generated: 2026-09-15T14:45:56Z
 - Files included: unknown
-- Snapshot size: 840687 bytes
+- Snapshot size: 829679 bytes
 
 ### constitutional
 - File: snapshots/constitutional_snapshot.md
-- Last generated: 2026-09-13T18:46:03Z
+- Last generated: 2026-09-15T14:45:56Z
 - Files included: 7
 - Snapshot size: 52528 bytes
 
 ### code
 - File: snapshots/code_snapshot.md
-- Last generated: 2026-09-13T18:46:03Z
+- Last generated: 2026-09-15T14:45:56Z
 - Files included: unknown
-- Snapshot size: 1479092 bytes
+- Snapshot size: 1466209 bytes
 
 ### data_results
 - File: snapshots/data_results_snapshot.md
-- Last generated: 2026-09-13T18:46:03Z
+- Last generated: 2026-09-15T14:45:57Z
 - Files included: unknown
-- Snapshot size: 322023 bytes
+- Snapshot size: 311737 bytes
 
 ## When to regenerate each category
 
