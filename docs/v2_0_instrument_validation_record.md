@@ -65,6 +65,18 @@ described below and supersedes any earlier characterization of the affected clai
 > numerical limitation with the restriction that handles it, are recorded in Section 8
 > item 1. No corrected figure is derived for any published number.
 
+> **Update, 2026-09-15 (drift mapping characterization complete).** The pre-registered
+> drift mapping characterization ran to completion, 360 runs, under
+> `simulation/diagnostics/drift_mapping_design_note.md` and its two amendments. Its
+> primary quantity measured the pathway described in Section 8 item 2b: an allocation
+> shift from transfer to compute carried the absorption ratio past the structural
+> defection threshold while the protected novelty entropy stayed inside the honest
+> band, in 7 to 37 of 40 runs depending on the size of the shift, and none of those
+> crossings is explained by the paired honest run. An entropy-only detector therefore
+> cannot bound that pathway, which qualifies the third design decision in Section 8
+> item 1. No detector was run, no attack-success rate or corrected figure is derived,
+> and nothing here is comparable to a pre-repair measurement.
+
 ---
 
 ## 1. Summary
@@ -868,6 +880,19 @@ the implementation.
   verification and does not constrain the observable, so no architectural claim
   changes.
 
+  *Qualified by measurement, 2026-09-15.* The drift mapping characterization in item
+  2b found that an allocation shift can carry g past g_star while this observable stays
+  inside the honest band. An entropy CUSUM alone therefore cannot bound the defection
+  pathway that d_defect defines, and placing its threshold below d_defect bounds
+  nothing on that pathway. Entropy remains a protected observable for erosion of the
+  state space; what fails is its sufficiency against irreplaceability. The published
+  slow-drift containment surveils the lineage term L(t) and a drift distance on
+  committed utility rather than entropy, so this finding contradicts no published
+  claim; it shows that the detector as specified here is narrower than that published
+  surveillance. Whether a detector on L(t), or on the absorption ratio and its drivers,
+  would see the pathway is untested. The detector's set of observables is to be decided
+  before its calibration run is pre-registered.
+
 **d_defect, defined.** The structural defection threshold is derived, not chosen.
 Evaluating incumbent and reference successor on the same state, the
 capability-bearing factor reduces to
@@ -993,6 +1018,81 @@ instantaneous rate trip does not.
 Not derived here, deliberately: the detector allowance and threshold. Fitting them to
 this single attack trajectory would be the shaped-measurement trap. They are
 pre-registered against the honest-baseline noise once the D1 repair is in place.
+
+**2b. Drift mapping characterization. COMPLETE, 2026-09-15.** Pre-registered in
+`simulation/diagnostics/drift_mapping_design_note.md`, published at 0a9b8e1 before any
+run and amended twice before any characterization output existed, in Sections 11 and 12
+of that note. Evidence at 2bffd4e under `simulation/diagnostics/drift_map_run_a3_`,
+1,488 artifacts, with its manifest verified against the committed blobs. The run chose
+no detector parameter and ran no detector. It measured whether the repaired protected
+observable sees the approach to d_defect.
+
+*Why it was run.* The third design decision places the entropy detector's threshold
+below d_defect, which is a threshold on the absorption ratio g, and no conversion
+between an entropy deficit and a distance in g exists. Source reading also showed that
+the numerator of g follows the compute allocation and its denominator partly the
+transfer allocation, while the repaired entropy responds only to well-being and
+suppression, so a transfer-to-compute shift could move g with no first-order entropy
+signal.
+
+*Design.* Nine arms of 40 seed-paired runs on the repaired substrate, with the old
+fixed-latency alarm off throughout: an honest baseline; the configured drift attack at
+intensity multipliers of 0.5, 1, 2 and 4; and a reallocation-only attack moving 0.02,
+0.05, 0.10 or 0.20 of allocation from transfer to compute, leaving welfare and both
+constraint axes as the planner chose them. A silent crossing is a run in which g first
+reaches g_star at or after attack onset while raw entropy stays at or above the honest
+band edge, the honest p05 of 0.9758244013258206, at every step up to and including
+that crossing. Its interpretation was fixed before any data.
+
+*Registered result, A4.*
+
+| Arm | Silent crossings | Loud crossings | Not crossing |
+| --- | ---: | ---: | ---: |
+| Drift attack, multiplier 0.5 | 2 | 38 | 0 |
+| Drift attack, multiplier 1 | 2 | 38 | 0 |
+| Drift attack, multiplier 2 | 0 | 40 | 0 |
+| Drift attack, multiplier 4 | 0 | 40 | 0 |
+| Reallocation, shift 0.02 | 7 | 33 | 0 |
+| Reallocation, shift 0.05 | 20 | 20 | 0 |
+| Reallocation, shift 0.10 | 31 | 9 | 0 |
+| Reallocation, shift 0.20 | 37 | 3 | 0 |
+
+Under the pre-registered interpretation, a nonzero count in any arm means that arm
+moved g past g_star without the protected observable leaving the honest band: the
+pathway measured rather than derived. Every reallocation arm is nonzero, and the count
+rises with the size of the shift. The paired trajectories agree. Across the
+reallocation arms the mean per-run paired entropy difference, attack minus honest, lies
+between -0.0017 and +0.0002, while the paired difference in g rises from 0.057 to 0.791.
+No reallocation run fell below two agents. The configured drift attack behaves
+differently: in 38 to 40 of 40 runs its entropy left the honest band at or before the
+step at which g crossed.
+
+*Exploratory, operator-side, not a registered result.* The honest arm itself reaches
+g_star at or after onset in 18 of 40 runs, 2 of them silently, so a crossing on its
+own is not an attack effect. Checked seed by seed against the paired honest run, all
+7, 20, 31 and 37 reallocation silent crossings, and both drift silent crossings at
+multiplier 1, occur where the honest run with the same seed had not reached g_star at
+or after onset by that step. Both drift silent crossings at multiplier 0.5 occur on
+seeds whose honest run had already crossed silently; they belong to the baseline, not
+the attack.
+
+*Verified by recomputation from the raw logs, not from the run report.* All 360 logs
+match their completion-record hashes. A1, A2 and A4 reproduce exactly. The step 0
+shape-fallback increase is 2 in every run, with 4,302 permitted increases after step 0
+and none that are non-permitted. The twelve runs resumed after an interruption
+reproduce their interrupted prefixes exactly. The constructor-equivalence gate was
+replicated independently on a seed the run did not use.
+
+*What this does not establish.* No detector was run, so nothing here says whether any
+detector would or would not alarm. No attack-success rate or corrected figure is
+derived. The candidate entropy anchor, 0.9891200034179453, is not frozen.
+Sub-Threshold Drift remains uncharacterized in the published sense. g_star depends on
+the assumed reference successor capability of 2.0, which remains open; that honest runs
+reach it after onset in 18 of 40 cases means any detector channel on g must integrate a
+persistent deficit against a fixed reference rather than trip on a raw threshold, as
+item 2a found before the repair. The honest planner's suppression and entropy
+descriptives in the run report describe the repaired planner only and support no
+statement about D1.
 
 **3. v2.1 implementation and component validation.** Including a bidirectional
 check on the entropy estimator specifically. A repair tested only in the direction
