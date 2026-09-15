@@ -1,0 +1,154 @@
+{
+  "design_note": "simulation/diagnostics/drift_mapping_design_note.md",
+  "design_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+  "design_blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+  "head": "2f2b9e0329f3368fd86a71380bcdf2d91260dcb0",
+  "pins": [
+    {
+      "path": "simulation/metrics.py",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "initial_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "basis": "LF-normalized working-tree bytes",
+      "crlf_count": 987
+    },
+    {
+      "path": "simulation/agents.py",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "initial_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "basis": "LF-normalized working-tree bytes",
+      "crlf_count": 1270
+    },
+    {
+      "path": "simulation/model.py",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "initial_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "basis": "LF-normalized working-tree bytes",
+      "crlf_count": 1683
+    },
+    {
+      "path": "simulation/attack_adapter_v2.py",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "initial_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "committed_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "basis": "LF-normalized working-tree bytes",
+      "crlf_count": 482
+    },
+    {
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "initial_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "committed_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "basis": "LF-normalized working-tree bytes",
+      "crlf_count": 668
+    },
+    {
+      "path": "simulation/working_factor.py",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "initial_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "committed_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "basis": "LF-normalized working-tree bytes",
+      "crlf_count": 95
+    },
+    {
+      "path": "simulation/constants_v2_stage18.py",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "initial_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "committed_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "basis": "LF-normalized working-tree bytes",
+      "crlf_count": 152
+    }
+  ],
+  "arms": {
+    "H": null,
+    "M05": 0.5,
+    "M1": 1,
+    "M2": 2,
+    "M4": 4,
+    "R02": 0.02,
+    "R05": 0.05,
+    "R10": 0.1,
+    "R20": 0.2
+  },
+  "seeds": [
+    1835086199,
+    1835086200,
+    1835086201,
+    1835086202,
+    1835086203,
+    1835086204,
+    1835086205,
+    1835086206,
+    1835086207,
+    1835086208,
+    1835086209,
+    1835086210,
+    1835086211,
+    1835086212,
+    1835086213,
+    1835086214,
+    1835086215,
+    1835086216,
+    1835086217,
+    1835086218,
+    1835086219,
+    1835086220,
+    1835086221,
+    1835086222,
+    1835086223,
+    1835086224,
+    1835086225,
+    1835086226,
+    1835086227,
+    1835086228,
+    1835086229,
+    1835086230,
+    1835086231,
+    1835086232,
+    1835086233,
+    1835086234,
+    1835086235,
+    1835086236,
+    1835086237,
+    1835086238
+  ],
+  "horizon": 300,
+  "attack_onset": 50,
+  "honest_burn_in": 10,
+  "worker_limits": {
+    "normal": 15,
+    "work": 12
+  },
+  "cpu_budget": 16,
+  "g_star": 1.0965735902799727,
+  "H_N_V_REF": 0.0238802249185,
+  "H_N_V_PROJ_K": 0.24292031137077771,
+  "gate_seed": 1835086199,
+  "gate_honest_steps": 60,
+  "gate_wrapper_synthetic_seed": 20260913,
+  "gate_wrapper_actions": 200,
+  "csv_null_encoding": "null",
+  "quantile_method": "numpy.percentile default linear",
+  "fallback_check": "Per-step increase permitted at step 0, or when current or previous novelty vector count is less than 2.",
+  "authorization": "User task and committed Sections 3 through 8, 11, and 12. Amendment 2 governs replaced text.",
+  "constructor": {
+    "n_agents": 200,
+    "ai_policy": "sub_threshold_drift",
+    "use_cop": true,
+    "cop_attribution_check": true,
+    "cop_drift_check": true,
+    "cop_cusum_drift": false
+  },
+  "runtime_mode_control": "drift_map_run_a3_control.json",
+  "resumed_seeds": [],
+  "evidence_reading": "Committed source retrieved with git cat-file. Source pins compared to LF-normalized working-tree bytes.",
+  "executor_source_provenance": "Operational code adapted from the committed a2 executor blob. No prior attempt state is used.",
+  "t0_stderr_warnings": [
+    {
+      "check": "c",
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n"
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "check": "a",
+      "command": [
+        "git",
+        "rev-parse",
+        "--abbrev-ref",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "main\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "check": "b",
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "fd444fc22254ec24472f4bad03f8f56bf4470110",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "check": "c",
+      "command": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n",
+      "passed": true
+    },
+    {
+      "check": "d_tracked",
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/drift_mapping_design_note.md"
+      ],
+      "exit_code": 0,
+      "stdout": "simulation/diagnostics/drift_mapping_design_note.md\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "check": "d_commit",
+      "command": [
+        "git",
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/diagnostics/drift_mapping_design_note.md"
+      ],
+      "exit_code": 0,
+      "stdout": "2f2b9e0329f3368fd86a71380bcdf2d91260dcb0\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "check": "d_published",
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "2f2b9e0329f3368fd86a71380bcdf2d91260dcb0",
+        "origin/main"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "check": "e",
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/drift_mapping_design_note.md"
+      ],
+      "exit_code": 0,
+      "sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "check": "f",
+      "file": "simulation/metrics.py",
+      "expected": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "actual": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "basis": "LF-normalized working-tree bytes",
+      "committed_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "crlf_count": 987,
+      "passed": true
+    },
+    {
+      "check": "f",
+      "file": "simulation/agents.py",
+      "expected": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "actual": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "basis": "LF-normalized working-tree bytes",
+      "committed_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "crlf_count": 1270,
+      "passed": true
+    },
+    {
+      "check": "f",
+      "file": "simulation/model.py",
+      "expected": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "actual": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "basis": "LF-normalized working-tree bytes",
+      "committed_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "crlf_count": 1683,
+      "passed": true
+    },
+    {
+      "check": "f",
+      "file": "simulation/attack_adapter_v2.py",
+      "expected": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "actual": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "basis": "LF-normalized working-tree bytes",
+      "committed_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "crlf_count": 482,
+      "passed": true
+    },
+    {
+      "check": "f",
+      "file": "simulation/run_attack_vector_revalidation_v2.py",
+      "expected": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "actual": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "basis": "LF-normalized working-tree bytes",
+      "committed_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "crlf_count": 668,
+      "passed": true
+    },
+    {
+      "check": "f",
+      "file": "simulation/working_factor.py",
+      "expected": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "actual": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "basis": "LF-normalized working-tree bytes",
+      "committed_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "crlf_count": 95,
+      "passed": true
+    },
+    {
+      "check": "f",
+      "file": "simulation/constants_v2_stage18.py",
+      "expected": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "actual": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "basis": "LF-normalized working-tree bytes",
+      "committed_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "crlf_count": 152,
+      "passed": true
+    },
+    {
+      "check": "g_prior_tracked",
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/drift_map_run_a2_stop.json"
+      ],
+      "exit_code": 0,
+      "stdout": "simulation/diagnostics/drift_map_run_a2_stop.json\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "check": "g_fresh",
+      "matches": [],
+      "passed": true
+    },
+    {
+      "head": "2f2b9e0329f3368fd86a71380bcdf2d91260dcb0",
+      "stderr": ""
+    },
+    {
+      "design_blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+      "stderr": ""
+    }
+  ],
+  "prior_dispatch_halt": {
+    "check": "T0(c)",
+    "reason": "Staged tracked changes were present before the operator requested retry.",
+    "runs_started": 0
+  },
+  "resumed_seeds": []
+}

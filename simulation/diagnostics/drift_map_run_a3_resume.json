@@ -1,0 +1,90 @@
+{
+  "active_workers": 0,
+  "analysis_status": "T3 has not been executed. No A1 through A6 results have been computed.",
+  "completed_runs": 263,
+  "gate_results": "drift_map_run_a3_gates.json",
+  "identity": {
+    "executor_sha256_lf": "bce7a1798c7ecf59f315574f3b402cdfe3811ae59f2a4f328048e56724d9481f",
+    "plan_sha256_lf": "cd0dc906861c934de8d826fa412aaa6a241e43a09251fd9ab268dabf46372856"
+  },
+  "interrupted_runs_requiring_original_seed_restart": [
+    {
+      "arm": "R05",
+      "job": "R05_1835086222",
+      "seed": 1835086222
+    },
+    {
+      "arm": "R05",
+      "job": "R05_1835086223",
+      "seed": 1835086223
+    },
+    {
+      "arm": "R05",
+      "job": "R05_1835086224",
+      "seed": 1835086224
+    },
+    {
+      "arm": "R05",
+      "job": "R05_1835086225",
+      "seed": 1835086225
+    },
+    {
+      "arm": "R05",
+      "job": "R05_1835086226",
+      "seed": 1835086226
+    },
+    {
+      "arm": "R05",
+      "job": "R05_1835086227",
+      "seed": 1835086227
+    },
+    {
+      "arm": "R05",
+      "job": "R05_1835086228",
+      "seed": 1835086228
+    },
+    {
+      "arm": "R05",
+      "job": "R05_1835086229",
+      "seed": 1835086229
+    },
+    {
+      "arm": "R05",
+      "job": "R05_1835086230",
+      "seed": 1835086230
+    },
+    {
+      "arm": "R05",
+      "job": "R05_1835086231",
+      "seed": 1835086231
+    },
+    {
+      "arm": "R05",
+      "job": "R05_1835086232",
+      "seed": 1835086232
+    },
+    {
+      "arm": "R05",
+      "job": "R05_1835086233",
+      "seed": 1835086233
+    }
+  ],
+  "mode": "work",
+  "not_started_runs": 85,
+  "partial_logs": "Preserved and excluded from completed runs. They do not contain a full model and random-state checkpoint.",
+  "post_completion_command": "python -B simulation/diagnostics/drift_map_run_a3_analyze.py",
+  "reason": "Operator requested interruption for resumption after reboot.",
+  "remaining_runs": 97,
+  "resume_commands": [
+    "python -B simulation/diagnostics/drift_map_run_a3_executor.py control --mode work",
+    "python -B simulation/diagnostics/drift_map_run_a3_executor.py batch"
+  ],
+  "resume_procedure": "Continue attempt 3 using its existing plan, executor, and passed gates. The batch validates and skips completed jobs, restarts interrupted jobs from the same seeds with incremented log attempt numbers, and records each resumed seed. Do not rerun the freshness gate or recreate the plan.",
+  "resume_working_directory": "C:\\Users\\matty\\Dev\\AI-Succession-Problem",
+  "resumed_seeds": [],
+  "statements": "No CUSUM allowance, threshold, or alarm rule was chosen or run. The production adapter accumulator score was recorded only, with cop_cusum_drift false. No attack-success rate or corrected figure was derived. H_ref is a candidate and is not frozen. Nothing here is comparable to any pre-repair measurement.",
+  "status": "INTERRUPTED_FOR_REBOOT",
+  "utc": "2026-09-15T13:38:54.464453+00:00",
+  "validation": "All completed records validated for identity, configuration, raw-log SHA256, row count, seed, arm, and step sequence.",
+  "worker_limit": 12
+}
