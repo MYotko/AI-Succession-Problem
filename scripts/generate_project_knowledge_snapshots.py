@@ -86,7 +86,9 @@ NEVER_INGEST_BASENAMES = frozenset({
 })
 
 # Filename prefixes excluded from every category, including data manifests.
-NEVER_INGEST_BASENAME_PREFIXES = ("cusum_char_", "veto_floor")
+# drift_map_run_ joins the two earlier per-run characterization sets: its results
+# live in the instrument validation record, not in 1,488 per-run artifact listings.
+NEVER_INGEST_BASENAME_PREFIXES = ("cusum_char_", "veto_floor", "drift_map_run_")
 
 # Directories whose contents must NEVER reach a generated snapshot, matched on
 # path prefix relative to the repository root.
