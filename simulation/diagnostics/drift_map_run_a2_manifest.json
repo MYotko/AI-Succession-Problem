@@ -1,0 +1,175 @@
+{
+  "attempt": 2,
+  "created_utc": "2026-09-13T19:19:46.886183+00:00",
+  "hash_basis": "LF-normalized bytes, CRLF replaced with LF without changing files",
+  "head": "b9bfba97eb11d3e127201c038b20fe0e28ae1f9d",
+  "machine": "YOTKOTEST",
+  "note_blob_sha1": "ccc2fe99ffb7e495f1168aaaffddd60f518c06a8",
+  "numpy": "2.4.4",
+  "outputs": [
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_control.json",
+      "sha256_lf": "28efc6c95ec1359bd2fea2fdcfb888cd9b84dab9bacde6af0f8bee75d720c6fd",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_executor.py",
+      "sha256_lf": "f900e055f12181899a4ec93189ca8ee3b38f9fc2e2644191cbc0ee86e3dfc58c",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_gate_common_failure.json",
+      "sha256_lf": "98db47c669c448d0fb60d53af6a35fba7db4b1daa7904e75d98678c93e173dd0",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_gate_common_initial.json",
+      "sha256_lf": "aee813ede6231ceff867dffc83301da06d9c323784e9b6cae977d63e6c066885",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_gate_common_progress.json",
+      "sha256_lf": "8bf0568d553e5789e3a5ee6b34c9a32b3f83b2ad63d8f50e1e80af4d64d4669e",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": 264,
+      "path": "simulation/diagnostics/drift_map_run_a2_gate_common_steps_attempt1.csv.partial",
+      "sha256_lf": "e52796a97b07e500e5a17c5e3dac0473e12547802ce45d685116f2b676f146dd",
+      "status": "PARTIAL_GATE_LOG_NOT_A_COMPLETED_RUN"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_gate_factory_failure.json",
+      "sha256_lf": "2c3c1c5e314fd3e4f18c6bd0e6a4294c2cfda13dcff158a140208e709c742c0b",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_gate_factory_initial.json",
+      "sha256_lf": "2bcd7cc7e46bf081ff9471eba80e64928ba14e2ae2128a3a85bc4d2e730fccd6",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_gate_factory_progress.json",
+      "sha256_lf": "20b90e7fa2bd0130d7f9bd08c2aa55033d99e032ef91dbc6bcc327e3152c0add",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": 264,
+      "path": "simulation/diagnostics/drift_map_run_a2_gate_factory_steps_attempt1.csv.partial",
+      "sha256_lf": "e52796a97b07e500e5a17c5e3dac0473e12547802ce45d685116f2b676f146dd",
+      "status": "PARTIAL_GATE_LOG_NOT_A_COMPLETED_RUN"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_gate_honest_initial.json",
+      "sha256_lf": "e2123556fa2c1194372837be8d34a10c9216374be5d2e7161a48c4db752de47c",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_gate_honest_progress.json",
+      "sha256_lf": "9adadb057fa68555ab5c297a7cc1333cc65e01b4eaf2b5c31e5ea13de525e198",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_gate_honest_result.json",
+      "sha256_lf": "b67c9fd9799497b8cbe7c7c92b623c8b04b677cf5bc9e131525299804291898a",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": 60,
+      "path": "simulation/diagnostics/drift_map_run_a2_gate_honest_steps_attempt1.csv",
+      "sha256_lf": "e082dc66267c0317db792b0af5b796ca675e3236de3db0e8032f10a2eb2373a7",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_gate_wrapper_result.json",
+      "sha256_lf": "1c9f25ba78e19b5e38378fa84282a221d93d7b2417804835577a33f6f58ea9ed",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_gates_failure.json",
+      "sha256_lf": "3f7f965dc7f09924238b020465147b42332be76e7f5d5fde7d113828d0bd9b4e",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_halt.json",
+      "sha256_lf": "018833a6b2a4eab3a5e17bec8a3170734cb48602035ae10891ed08f1d1f4fd25",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_module_hashes.json",
+      "sha256_lf": "d1fb8a7de69719930298a3f408a25070f0049ba2428e8ec9d1596c3b1532a61c",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_plan.json",
+      "sha256_lf": "268bc89936c7ab19be518f8927bcffb719ba706c419fd3a355c69583f014be72",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_report.md",
+      "sha256_lf": "cb980f196d1d1122177e6da9b3659e53b88edfad5b846da38bb25935a0e464c0",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_scheduler_checks.json",
+      "sha256_lf": "8fd407e4172d20646b9e2ab140d6fd0a9d617bf17f39210309521f6358977247",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_source_pins_end.json",
+      "sha256_lf": "1f4dc0541c63b130c39a0c3ea1e2262eda69575ea8eaa935620defcafc3162c5",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_stop.json",
+      "sha256_lf": "98db47c669c448d0fb60d53af6a35fba7db4b1daa7904e75d98678c93e173dd0",
+      "status": "GATE_OR_EXECUTION_ARTIFACT"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/drift_map_run_a2_manifest.json",
+      "self_hash_note": "A manifest cannot contain its own complete-content hash.",
+      "sha256_lf": null
+    }
+  ],
+  "pinned_source_blobs": {
+    "simulation/agents.py": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+    "simulation/attack_adapter_v2.py": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+    "simulation/constants_v2_stage18.py": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+    "simulation/metrics.py": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+    "simulation/model.py": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+    "simulation/run_attack_vector_revalidation_v2.py": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+    "simulation/working_factor.py": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486"
+  },
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "resumed_seeds": [],
+  "status": "HALTED",
+  "workers": {
+    "characterization_workers": 0,
+    "cpu_budget": 16,
+    "gate_processes": 4,
+    "mode": "normal",
+    "model_gate_processes": 3,
+    "numerical_threads_verified_per_worker": 1
+  }
+}

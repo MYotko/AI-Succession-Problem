@@ -1,0 +1,7 @@
+{
+  "halt": "Gate worker failed: gate_factory exit 2",
+  "job": "gates",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\drift_map_run_a2_executor.py\", line 341, in gates\n    if code:raise RuntimeError('Gate worker failed: '+job+' exit '+str(code))\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Gate worker failed: gate_factory exit 2\n",
+  "utc": "2026-09-13T19:16:39.443266+00:00",
+  "violations": []
+}

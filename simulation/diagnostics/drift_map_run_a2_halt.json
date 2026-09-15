@@ -1,0 +1,52 @@
+{
+  "all_gate_processes_exited": true,
+  "attempt": 2,
+  "cause": {
+    "halt": "Recorder cannot obtain spectral shape and V from the step novelty matrix",
+    "job": "gate_common",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\drift_map_run_a2_executor.py\", line 258, in worker\n    run_model(args.job,'H' if args.job=='gate_honest' else 'GATE_ATTACK',1835086199,gate=True)\n    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\drift_map_run_a2_executor.py\", line 220, in run_model\n    row=record(model,arm,seed,step,np)\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\drift_map_run_a2_executor.py\", line 115, in record\n    if not isinstance(components,tuple):raise RuntimeError('Recorder cannot obtain spectral shape and V from the step novelty matrix')\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Recorder cannot obtain spectral shape and V from the step novelty matrix\n",
+    "utc": "2026-09-13T19:16:39.065198+00:00",
+    "violations": []
+  },
+  "characterization_runs_completed": 0,
+  "characterization_runs_started": 0,
+  "configurations_equal": true,
+  "constructor_gate_completed": false,
+  "first_difference": null,
+  "first_unrecorded_step_derived_from_loop_and_log": 264,
+  "full_datacollector_comparison_completed": false,
+  "gate_workers_launched": 4,
+  "head": "b9bfba97eb11d3e127201c038b20fe0e28ae1f9d",
+  "honest_gate": {
+    "action_modified_steps": 0,
+    "adapter_active_steps": 0,
+    "raw_entropy_exact_matches": 60,
+    "recorder_rng_unchanged_calls": 60,
+    "shape_fallback_increase_after_step_0": 0,
+    "shape_fallback_increase_step_0": 2,
+    "steps_completed": 60
+  },
+  "incomplete_gate_fallback_totals": "Not persisted; not imputed. Per-step after-step-0 checks passed on all successfully emitted rows.",
+  "post_halt_read_command_error": "A source-excerpt display hit a cp1252 UnicodeEncodeError. It was read again with UTF-8 output; no model was run.",
+  "recorded_rows": {
+    "common": 264,
+    "factory": 264
+  },
+  "required_constructor_steps": 300,
+  "resumed_seeds": [],
+  "shared_recorder_prefix_fields": 24,
+  "shared_recorder_prefix_rows": 264,
+  "simulation_gate_workers_launched": 3,
+  "source_pins_start_and_end_match": true,
+  "status": "HALTED",
+  "step_0_distribution_completed_gate_probes": {
+    "2": 1
+  },
+  "utc": "2026-09-13T19:19:46.805118+00:00",
+  "wrapper_gate": {
+    "comparisons": 60000,
+    "maximum_key_difference": 0.0,
+    "steps_per_action": 300,
+    "synthetic_actions": 200
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "attempt": 2,
+  "utc": "2026-09-13T19:12:21.426537+00:00",
+  "head": "b9bfba97eb11d3e127201c038b20fe0e28ae1f9d",
+  "t0": {
+    "branch": {
+      "args": [
+        "rev-parse",
+        "--abbrev-ref",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stdout": "main",
+      "stderr": ""
+    },
+    "head": {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stdout": "b9bfba97eb11d3e127201c038b20fe0e28ae1f9d",
+      "stderr": ""
+    },
+    "ancestor": {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "fd444fc22254ec24472f4bad03f8f56bf4470110",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "status": {
+      "args": [
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied"
+    },
+    "indexed": {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/drift_mapping_design_note.md"
+      ],
+      "exit": 0,
+      "stdout": "simulation/diagnostics/drift_mapping_design_note.md",
+      "stderr": ""
+    },
+    "publication": {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/diagnostics/drift_mapping_design_note.md"
+      ],
+      "exit": 0,
+      "stdout": "c2f4ea9b908247ebe14fed1c081deba8e40142a3",
+      "stderr": ""
+    },
+    "old_stop_indexed": {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/drift_map_run_stop.json"
+      ],
+      "exit": 0,
+      "stdout": "simulation/diagnostics/drift_map_run_stop.json",
+      "stderr": ""
+    },
+    "published": {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "c2f4ea9b908247ebe14fed1c081deba8e40142a3",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "fresh_files": []
+  },
+  "t0_passed": true,
+  "note_sha256_lf": "185abccb9ee16a487d53afd9f45946626369f0a0f1806f5593402be224adfc72",
+  "note_blob_sha1": "ccc2fe99ffb7e495f1168aaaffddd60f518c06a8",
+  "pins": [
+    {
+      "path": "simulation/metrics.py",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "start_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "start_sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611"
+    },
+    {
+      "path": "simulation/agents.py",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "start_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "start_sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51"
+    },
+    {
+      "path": "simulation/model.py",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "start_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "start_sha256_raw": "e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879"
+    },
+    {
+      "path": "simulation/attack_adapter_v2.py",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "start_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "start_sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe",
+      "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e"
+    },
+    {
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "start_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "start_sha256_raw": "da7913799d0d4e11f52f770e313875764d27b20ad33157a7aa9c1fa00df418e2",
+      "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d"
+    },
+    {
+      "path": "simulation/working_factor.py",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "start_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "start_sha256_raw": "0afde923081fe34d1ada86e2928286d45c905441053f643968ea9b13007b683d",
+      "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486"
+    },
+    {
+      "path": "simulation/constants_v2_stage18.py",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "start_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "start_sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d",
+      "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2"
+    }
+  ],
+  "arms": {
+    "H": null,
+    "M05": 0.5,
+    "M1": 1.0,
+    "M2": 2.0,
+    "M4": 4.0,
+    "R02": 0.02,
+    "R05": 0.05,
+    "R10": 0.1,
+    "R20": 0.2
+  },
+  "seeds": [
+    1835086199,
+    1835086200,
+    1835086201,
+    1835086202,
+    1835086203,
+    1835086204,
+    1835086205,
+    1835086206,
+    1835086207,
+    1835086208,
+    1835086209,
+    1835086210,
+    1835086211,
+    1835086212,
+    1835086213,
+    1835086214,
+    1835086215,
+    1835086216,
+    1835086217,
+    1835086218,
+    1835086219,
+    1835086220,
+    1835086221,
+    1835086222,
+    1835086223,
+    1835086224,
+    1835086225,
+    1835086226,
+    1835086227,
+    1835086228,
+    1835086229,
+    1835086230,
+    1835086231,
+    1835086232,
+    1835086233,
+    1835086234,
+    1835086235,
+    1835086236,
+    1835086237,
+    1835086238
+  ],
+  "horizon": 300,
+  "attack_step": 50,
+  "g_star": 1.0965735902799727,
+  "cpu_budget": 16,
+  "worker_limits": {
+    "normal": 15,
+    "work": 12
+  },
+  "null_device_exemption": true,
+  "resumed_seeds": [],
+  "known_conditions": [
+    "CRLF worktree against LF blobs; not modified or compared here.",
+    "Unreadable pytest cache and global Git ignore can issue non-halting warnings."
+  ],
+  "fallback_check": "Increase after the end of step 0 must be zero; record both per-run increases."
+}

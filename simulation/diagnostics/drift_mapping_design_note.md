@@ -8,8 +8,8 @@ executor verifies that structurally rather than by instruction.
 `fd444fc22254ec24472f4bad03f8f56bf4470110`, with steps 1 through 3 of the v2.1 arc in
 place.
 **Governs:** artifacts under the prefix `simulation/diagnostics/drift_map_run_`.
-**Amended:** 2026-09-13, Amendment 1 in Section 11, committed and pushed before any
-characterization run.
+**Amended:** 2026-09-13, Amendment 1 in Section 11, and 2026-09-15, Amendment 2 in
+Section 12, each committed and pushed before any characterization run.
 
 ---
 
@@ -186,6 +186,7 @@ exists.
    Section 4 and the production factory `_make_model`, called for the cell of Section 4
    with its seed replaced, produce models whose configuration dictionaries are equal and
    whose recorded trajectories are identical in every recorded field for all 300 steps.
+   This item is amended by Amendment 2 in Section 12.
 4. **Wrapper identity at default.** The M1 wrapper, at m equal to 1, returns an action
    identical in every key to the production `_apply_sub_threshold_drift` across a grid of
    at least 200 synthetic actions crossed with every step from 0 through 299.
@@ -197,8 +198,8 @@ exists.
 
 Continuous checks during the run, each a halt on failure:
 
-- The `H_N_SHAPE_FALLBACK_COUNT` check, superseded by Amendment 1 in Section 11, where
-  the original wording is preserved.
+- The `H_N_SHAPE_FALLBACK_COUNT` check, superseded by Amendment 1 in Section 11 and then
+  by Amendment 2 in Section 12. The original wording is preserved in Section 11.
 - The raw entropy recomputed by the recorder from the step's novelty matrix equals the
   model's cached `h_n_latest` exactly on every step.
 - Every attack run's seed equals its paired honest run's seed.
@@ -215,7 +216,8 @@ datacollector H_N; the coupled total suppression of the committed action; `avg_w
 population; the six allocation shares and two constraint axes of the committed action;
 adapter active; action modified; the old accumulator score. One summary row per run
 records steps completed, whether the run ended by extinction, and the shape fallback
-count increase during step 0 and after step 0, per Amendment 1.
+count increases defined in Amendment 2, which also adds the novelty vector count to the
+per-step fields and defines which fields are null.
 
 ## 8. Analysis, fixed now
 
@@ -322,3 +324,65 @@ shape was invented after measurement began, and halts the run.
 through A6 stand exactly as originally committed. The only change to the recorded fields
 is that the single fallback count in the Section 7 run summary becomes the two increases
 defined above.
+
+## 12. Amendment 2, 2026-09-15
+
+Committed and pushed before any characterization run. No arm had started when it was
+made. Attempt 2 halted inside the constructor-equivalence gate, and the only outputs in
+existence were gate probes.
+
+**What happened.** Gate 3 runs the attack-arm configuration of Section 4 with the old
+alarm off. In its probe the population fell below two agents. On the next step the
+novelty matrix held a single vector, `calculate_h_n` took its documented early return
+and gave the scalar 0.0 rather than the tuple of entropy, shape, and V, and the recorder,
+which required the tuple, halted. Both constructor logs matched in every recorded field
+on every step before that. The halt is recorded in `drift_map_run_a2_report.md`.
+
+**Exercised to termination before this amendment was written.** A probe of the same seed
+and configuration, printing mechanical fields only, stepped the model until `step()`
+returned false. It found three consequences of the same edge, none anticipated by
+Sections 6, 7, or 11.
+
+1. On any step whose novelty matrix has fewer than two vectors, no covariance exists, so
+   V and the spectral shape are undefined, and the estimator returns the scalar 0.0.
+2. The state builder then has no measured shape and substitutes the neutral one. The
+   first substitution occurs during the degenerate step itself, because the builder is
+   also called after the agents act within a step: one substitution on the first such
+   step, and three on each later one. The replacement check in Amendment 1, which
+   forbids any increase after step 0, would halt on these. So would a check that
+   permitted an increase only when the preceding step was degenerate, because it would
+   halt on the first degenerate step; the probe showed that directly.
+3. A run can end by extinction before step 300, so the gate 3 comparison "for all 300
+   steps" cannot be satisfied.
+
+**Amended, each replacing the text named.**
+
+- *Recorded fields, Section 7.* Add the step's novelty vector count to every per-step
+  row. On a step whose novelty matrix has fewer than two vectors, record the raw entropy
+  as the scalar the estimator returned, and record V and the spectral shape as null.
+  Never substitute a value for either.
+- *Continuous check on raw entropy, Section 6.* Unchanged. On such a step the recomputed
+  scalar must still equal the model's cached `h_n_latest` exactly.
+- *Continuous check on the shape fallback, replacing the check in Amendment 1.* For every
+  run, record the counter's increase during each step. The increase during step 0 is
+  recorded and permitted. For any later step t, an increase is permitted only if the
+  novelty matrix of step t, or of step t minus 1, had fewer than two vectors. Any other
+  increase is a halt. The run summary records the increase during step 0, the total
+  permitted increase after step 0, and the count of non-permitted increases, which must
+  be zero. The counter is module-level and accumulates across runs within a process, so
+  only per-step increases are ever tested.
+- *Gate 3, Section 6.* The constructor-equivalence comparison covers every completed
+  step, up to 300. Both constructors must complete the same number of steps and end for
+  the same reason, and their recorded trajectories must be identical in every recorded
+  field, nulls included, on every completed step.
+
+**Reported descriptively, not an analysis item.** Per arm, the number of runs that reach
+a step with fewer than two novelty vectors, and the first such step for each. Steps in
+that regime enter A1 through A6 exactly as recorded, with raw entropy as the estimator
+returned it. No step is dropped and none is imputed.
+
+**Nothing else changes.** Arms, seeds, construction, gates 2, 4, 5, and 6, and every
+analysis item A1 through A6 stand as committed. The probe that informed this amendment
+printed mechanical fields only. Operator-side review of the halted gate logs displayed
+entropy and g values for their final recorded steps; those values play no part in this
+amendment, which addresses only the undefined-shape edge and the early end of a run.

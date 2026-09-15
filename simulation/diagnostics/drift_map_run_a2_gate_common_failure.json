@@ -1,0 +1,7 @@
+{
+  "halt": "Recorder cannot obtain spectral shape and V from the step novelty matrix",
+  "job": "gate_common",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\drift_map_run_a2_executor.py\", line 258, in worker\n    run_model(args.job,'H' if args.job=='gate_honest' else 'GATE_ATTACK',1835086199,gate=True)\n    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\drift_map_run_a2_executor.py\", line 220, in run_model\n    row=record(model,arm,seed,step,np)\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\drift_map_run_a2_executor.py\", line 115, in record\n    if not isinstance(components,tuple):raise RuntimeError('Recorder cannot obtain spectral shape and V from the step novelty matrix')\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Recorder cannot obtain spectral shape and V from the step novelty matrix\n",
+  "utc": "2026-09-13T19:16:39.065198+00:00",
+  "violations": []
+}

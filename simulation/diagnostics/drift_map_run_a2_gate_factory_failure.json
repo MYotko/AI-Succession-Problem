@@ -1,0 +1,7 @@
+{
+  "halt": "Stopped after another run or gate halted",
+  "job": "gate_factory",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\drift_map_run_a2_executor.py\", line 258, in worker\n    run_model(args.job,'H' if args.job=='gate_honest' else 'GATE_ATTACK',1835086199,gate=True)\n    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\drift_map_run_a2_executor.py\", line 218, in run_model\n    check_stop()\n    ~~~~~~~~~~^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\drift_map_run_a2_executor.py\", line 160, in check_stop\n    if (OUT/(P+'stop.json')).exists():raise RuntimeError('Stopped after another run or gate halted')\n                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Stopped after another run or gate halted\n",
+  "utc": "2026-09-13T19:16:39.301258+00:00",
+  "violations": []
+}

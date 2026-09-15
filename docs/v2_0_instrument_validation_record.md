@@ -1089,7 +1089,7 @@ direction that flatters the framework, which is the condition under which this r
 requires the most care, so no corrected figure is derived here and none should be until
 a repaired-instrument characterization produces one.
 
-**A standing check for every later run, corrected 2026-09-13.** The state builder
+**A standing check for every later run, corrected 2026-09-13 and 2026-09-15.** The state builder
 substitutes a neutral spectral shape of 1.0 when no measured shape is available, and
 counts each such substitution in an observable module counter. The check first recorded
 here, that the counter must be zero in any run consuming the projection, was wrong. The
@@ -1098,11 +1098,19 @@ cache by hand and never stepped a model. In a real run no novelty exists before 
 first step, so the builder substitutes the neutral shape during step 0 by construction:
 a probe of the drift mapping honest configuration measured two substitutions, both
 during step 0 and none after. The counter also accumulates across runs within one
-process, so an end-of-run total is not a per-run quantity. The correct check is that the
-counter does not increase after step 0 within a run. A substitution after measurement
-has begun means a shape was invented rather than measured, and that run's results are
-contaminated. The drift mapping pre-registration's own gate caught the error before any
-characterization data existed, and it is corrected there as Amendment 1.
+process, so an end-of-run total is not a per-run quantity. The check as first corrected, that the
+counter must not increase after step 0, was itself incomplete. When fewer than two
+agents remain, the novelty matrix has fewer than two rows, no covariance exists, and no
+shape can be measured, so the builder substitutes the neutral shape again: one
+substitution during the first such step and three during each later one, measured to
+termination on a drift mapping gate configuration. The correct check is that any
+substitution after step 0 occurs only during a step whose own novelty matrix, or whose
+preceding step's, had fewer than two vectors. A substitution anywhere else means a
+shape was invented while a measured one was available, and that run's results are
+contaminated. Both errors were caught by the drift mapping pre-registration's own gates
+before any characterization data existed, and are corrected there as Amendments 1 and
+2. The second was found by exercising the real path to termination before writing the
+check, which is the discipline the first error taught.
 
 **4. Reconstruction of Phase B and phi, run on both substrates.** This is a
 reimplementation, not a rerun, because no generating code exists. That distinction
