@@ -1,8 +1,8 @@
 # Diagnostics Snapshot
 
-Generated: 2026-09-15T14:45:56Z
+Generated: 2026-09-16T19:04:27Z
 Repository: C:\Users\matty\Dev\AI-Succession-Problem
-Commit: 7f0e9c7
+Commit: 4fde1dd
 Branch: main
 Category: diagnostics
 
@@ -35,6 +35,8 @@ Category: diagnostics
 | simulation/diagnostics/cop_finding_framing.md | 69 | 7923 |
 | simulation/diagnostics/default_regime_convergence_inertness.md | 91 | 4225 |
 | simulation/diagnostics/defended_collapse_discrepancy_report.md | 508 | 40781 |
+| simulation/diagnostics/detector_design_note.md | 259 | 14970 |
+| simulation/diagnostics/detector_round2_design_note.md | 255 | 15230 |
 | simulation/diagnostics/domain_masking_v2_summary.md | 40 | 1555 |
 | simulation/diagnostics/drift_char_report.md | 292 | 23674 |
 | simulation/diagnostics/drift_mapping_design_note.md | 388 | 22952 |
@@ -119,7 +121,7 @@ Category: diagnostics
 | simulation/diagnostics/sync_status_yotko-Legion-T5-26IOB6_20260720.md | 127 | 7946 |
 | simulation/diagnostics/termination_decontamination_integration_analysis.md | 64 | 5995 |
 
-Total: 108 files, 13165 lines, 790308 bytes
+Total: 110 files, 13679 lines, 820508 bytes
 
 ---
 ==========================================
@@ -4100,6 +4102,532 @@ After:
 - `simulation/diagnostics/attack_vector_revalidation_inventory.md:54` already carries the full form in prose and supplied the phrasing used above.
 
 A sweep of the five guard sites plus the sync_status dispositions confirms no partial 65 percent definition remains at any of them.
+
+
+==========================================
+FILE: simulation/diagnostics/detector_design_note.md
+==========================================
+
+# Anchored CUSUM Detector: Calibration and Evaluation Pre-Registration
+
+**Date:** 2026-09-15
+**Status:** pre-registration. Committed and pushed before any run it governs. Neither
+stage may begin until this document is an ancestor of the published main branch, and
+stage 2 may not begin until the stage 1 calibration constants are committed and pushed.
+Both conditions are verified structurally by the executor, not by instruction.
+**Governs:** artifacts under the prefix `simulation/diagnostics/detector_run_`, and the
+new module `simulation/cusum_detector_v2.py`.
+**Substrate:** the repaired v2.1 substrate with steps 1 through 3 in place, unchanged
+since the drift mapping characterization.
+
+---
+
+## 1. What this note implements
+
+The drift mapping characterization, recorded in the instrument validation record Section
+8 item 2b, measured that an allocation shift from transfer to compute carries the
+absorption ratio g past g_star while the repaired novelty entropy stays inside the honest
+band. An entropy-only detector cannot bound that pathway. On 2026-09-15 the operator made
+two decisions, recorded in the instrument validation record Section 8 item 1 under the
+third design decision, which this note implements.
+
+- **Observables.** Two operational channels: a one-sided lower CUSUM on raw novelty
+  entropy, for erosion of the state space, and a one-sided upper CUSUM on g, for degraded
+  absorption of a successor. A third channel, a one-sided lower CUSUM on the lineage term
+  L(t) that the published slow-drift containment surveils, is recorded and evaluated as a
+  comparison only. It never contributes to the operational alarm.
+- **Reference successor capability.** Ratified at 2.0 for the primary result, so g_star
+  is 1.0965735902799727. The values 1.5 and 2.5, giving g_star of 1.270310072072110 and
+  0.966516292749662, are a secondary sweep reported as secondary results only.
+
+## 2. What this run is not
+
+- It is a detection characterization, not a containment evaluation. The detector runs
+  offline over recorded trajectories and never acts on the model, so nothing here says
+  that any attack is stopped, and no statement that the architecture contains drift
+  follows from this run.
+- It computes no attack-success rate and derives no corrected figure for any published
+  number. Sub-Threshold Drift remains uncharacterized in the published sense.
+- It does not re-derive the drift mapping result at any other reference successor
+  capability. That result stays registered at 2.0.
+- The margin between alarm and crossing is measured, not designed in. The original third
+  design decision placed the threshold below d_defect by a response margin. Item 2b showed
+  that entropy cannot meet that, and meeting it with g by design would mean fitting the
+  threshold to attack trajectories. Thresholds are therefore set against honest noise
+  alone, and the margin to d_defect is the evaluation's primary measured quantity.
+
+## 3. Substrate, pins, and construction
+
+Every run executes against committed source with no working-tree modification. The same
+seven LF-normalized SHA256 pins as the drift mapping note, Section 3, must match at the
+start and end of each stage:
+
+| File | LF-normalized SHA256 |
+| --- | --- |
+| `simulation/metrics.py` | `6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f` |
+| `simulation/agents.py` | `a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca` |
+| `simulation/model.py` | `25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993` |
+| `simulation/attack_adapter_v2.py` | `5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee` |
+| `simulation/run_attack_vector_revalidation_v2.py` | `20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45` |
+| `simulation/working_factor.py` | `16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44` |
+| `simulation/constants_v2_stage18.py` | `121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b` |
+
+Construction, arms, attack wrappers, recorder, and continuous checks are exactly those of
+`simulation/diagnostics/drift_mapping_design_note.md` Sections 4, 5, 6, and 7, as amended
+by its Sections 11 and 12, with one addition to the recorder: on every step, record
+`L_t` as the value the model appends to `model.datacollector['L_t']` during that step,
+which is the lineage term `l_t_v2` of the v2 system metrics. The model configuration is
+the one pasted there:
+
+```text
+GardenModel(
+    n_agents=200,
+    ai_policy='sub_threshold_drift',
+    use_cop=True,
+    cop_attribution_check=True,
+    cop_drift_check=True,
+    cop_cusum_drift=False,
+    config={
+        'policy': 'optimize_u_sys_v2',
+        'attack_vector_v2': 'sub_threshold_drift',   # attack arms ONLY
+        'random_seed': <seed>,
+        'phi': 10.0,
+        'attack_step': 50,
+        'n_candidates_v2': 300,
+        'rollout_steps_v2': 20,
+        'bootstrap_turn_step_v2': 20,
+        'shock_step': 0,
+        'shock_magnitude': 0.15,
+    },
+)
+```
+
+g is computed exactly as in the drift mapping recorder. Runs step for up to 300 steps and
+end early only when `step()` returns false. Early termination is recorded, never imputed.
+
+## 4. The detector, fixed now
+
+The detector is implemented in the new module `simulation/cusum_detector_v2.py` as pure
+functions with no model import, no I/O, and no global state. For each channel it consumes
+one run's recorded per-step series and returns the statistic, alarm, and heartbeat
+sequences. Three one-sided CUSUM statistics are computed from the recorded series. Each is
+held at 0 for steps 0 through 9, which are burn-in, and first accumulates at step 10.
+
+- **Entropy channel, lower:** `S_H(t) = max(0, S_H(t-1) + (H_ref - k_H) - h(t))`, with
+  h(t) the raw entropy `h_n_latest`. This is the form in the third design decision,
+  `S_t = max(0, S_(t-1) + k*H_ref - H_N_t)`, with the allowance expressed as an offset:
+  `k = 1 - k_H / H_ref`.
+- **g channel, upper:** `S_g(t) = max(0, S_g(t-1) + g(t) - (g_ref + k_g))`.
+- **L channel, lower, comparison only:** `S_L(t) = max(0, S_L(t-1) + (L_ref - k_L) - L(t))`.
+
+A channel alarms at step t when its statistic reaches or exceeds its threshold, and on
+alarm its statistic resets to 0, so it cannot latch. The **operational alarm** is the
+first alarm on the entropy channel or the g channel. The L channel's alarms are recorded
+and analyzed separately and are never combined into the operational alarm.
+
+**Liveness.** On every completed step the detector emits one heartbeat record carrying
+all three statistics and a monotone heartbeat counter, distinct from alarm records. A run
+with fewer heartbeats than completed steps is a detector failure.
+
+**Anchors are fixed.** References, allowances, and thresholds come from stage 1 and are
+never updated from running history. The architecture's periodic independent re-anchoring
+is out of scope for this run: anchors stay fixed for the whole evaluation.
+
+**Degenerate steps.** On a step whose novelty matrix has fewer than two vectors, raw
+entropy enters the entropy channel exactly as recorded, the scalar the estimator
+returned. g and L enter as recorded.
+
+## 5. Gates before any run
+
+Each must pass. A failing gate halts before any run exists.
+
+1. **Pre-registration is published.** This note is tracked, the working tree has no
+   modified tracked file, the commit that last modified this note is an ancestor of the
+   local `origin/main` reference, and its LF-normalized SHA256 equals the value pinned in
+   the dispatch.
+2. **Source pins.** Every hash in Section 3 matches.
+3. **Detector unit gate**, on synthetic series only, no model:
+   - a series held exactly at its reference never accumulates and never alarms;
+   - a sustained shift of exactly one declared standard deviation in the harmful direction
+     accumulates at exactly `sigma - k` per step for an allowance k of `0.5 * sigma`, and
+     alarms at the step a hand computation predicts;
+   - the same shift in the harmless direction never accumulates;
+   - after an alarm the statistic is exactly 0 on the next step's start;
+   - steps 0 through 9 never accumulate;
+   - one heartbeat is emitted per step, including steps with no alarm.
+4. **Drift mapping gates 2 through 6, as amended**, rerun in full for each stage that steps
+   a model: source pins, constructor equivalence over every completed step, wrapper
+   identity, honest arm is honest, recorder consumes no randomness. The Amendment 2 shape
+   fallback check applies to every run.
+
+## 6. Stage 1: calibration, honest runs only
+
+**Seeds:** the 120 consecutive integers from 1835086300 through 1835086419. They overlap
+no seed used by the drift_char baseline, the drift mapping characterization, or stage 2.
+
+**Arm:** honest only, constructed as the drift mapping honest arm. 120 runs.
+
+**Calibration rule, applied identically to each channel c among entropy, g, and L, over
+every calibration record at steps 10 and up:**
+
+1. The reference `c_ref` is the median of the channel.
+2. `sigma_c` is the sample standard deviation of the channel, with ddof equal to 1.
+3. The allowance is `k_c = 0.5 * sigma_c`.
+4. For each calibration run, compute the channel's CUSUM from step 10 to the last
+   completed step with no threshold and no reset, and take that run's maximum statistic.
+5. The threshold `h_c` is a percentile of those 120 per-run maxima, using NumPy's linear
+   method: the 97.5th percentile for the entropy and g channels, and the 95th for the L
+   comparison channel. The operational alarm is the union of two channels, so a 2.5
+   percent per-run exceedance for each keeps honest runs with any operational alarm at or
+   below about 5 percent before any correlation between the channels.
+
+**Outputs:** the nine constants, three per channel, written to
+`simulation/diagnostics/detector_run_cal_constants.json` with the counts behind them; and
+descriptively, for each channel, the number of calibration runs that alarm once the
+thresholds are applied with resets. The candidate entropy anchor reported by the drift
+mapping run is not used and remains unfrozen; the stage 1 anchor supersedes it.
+
+**Publication gate.** Stage 1 ends when its outputs exist. The operator reviews,
+commits, and pushes them. Stage 2 is dispatched separately, and its first check is that
+the committed constants file and the committed detector module are ancestors of
+`origin/main` with LF-normalized hashes equal to those pinned in the stage 2 dispatch.
+No stage 2 run may start before that check passes.
+
+## 7. Stage 2: evaluation
+
+**Seeds:** the 40 consecutive integers from 1835086500 through 1835086539, overlapping no
+seed used anywhere before.
+
+**Arms:** the nine drift mapping arms, H, M05, M1, M2, M4, R02, R05, R10, R20, 40
+seed-paired runs each, 360 runs, constructed and attacked exactly as in the drift mapping
+note. Attack onset is step 50.
+
+**Constants:** read from the committed calibration constants file and never recomputed.
+
+For every attack run, `t_star` is the first step at or after 50 with g at or above g_star,
+or none. For every run, the **detection alarm** is the first operational alarm at or after
+step 50. Operational alarms at steps 10 through 49 are pre-onset alarms and are counted as
+false alarms, not detections.
+
+**Registered quantities.**
+
+- **E1, primary: detection before crossing, per attack arm, as counts.** Each run is
+  exactly one of: detected before or at the crossing, when the detection alarm exists and
+  its step is at or before `t_star`; detected after the crossing; crossed without any
+  detection alarm; or did not cross. For runs detected before or at the crossing, report
+  the margin `t_star` minus the detection alarm step as minimum, median, and maximum.
+  That margin is the response margin the third design decision required to be stated as a
+  number.
+- **E1a, registered secondary: E1 restricted to attributable crossings**, runs whose
+  paired honest run with the same seed had not reached g_star at or after step 50 by that
+  run's `t_star`. The drift mapping run showed why: honest runs also cross.
+- **E2: first channel to alarm**, per attack arm, as counts of entropy first, g first, and
+  same step.
+- **E3: false alarms.** The number of evaluation honest runs with at least one operational
+  alarm at steps 10 and up, and the number of attack runs with a pre-onset operational
+  alarm. The design target from stage 1 is at most about 5 percent of honest runs. A count
+  above it is reported as a calibration shortfall, not corrected by adjusting any constant.
+- **E4: the published observable.** E1 computed for the L channel alone, and per attack
+  arm the paired counts of runs in which the L channel alone detects before or at the
+  crossing while the g channel alone does not, and the reverse.
+- **E5, secondary sweep:** E1 recomputed with g_star at reference successor capability 1.5
+  and 2.5. Labeled secondary everywhere it appears.
+- **E6: liveness.** Heartbeat records equal completed steps in every run.
+
+**Interpretation, fixed now.**
+
+- In each reallocation arm, every run detected before or at the crossing is a run in which
+  the g channel closed the blind path that item 2b measured. Crossings without detection
+  in the reallocation arms are the residual of that path under this detector, and are
+  reported as such.
+- If the L channel alone detects before or at the crossing in every reallocation run in
+  which the g channel alone does, the published surveillance observable covers the
+  measured pathway, and the g channel is an implementation of it. Otherwise the g channel
+  adds coverage the published observable lacks, and the record says so.
+- None of this is a containment result, a defense rate, or a corrected published figure.
+
+Any analysis beyond E1 through E6 is labeled exploratory in the report, placed after the
+registered results, and may not be cited as a result of this pre-registration.
+
+## 8. Amendment rule
+
+Any change to seeds, arms, construction, recorded fields, the detector, the calibration
+rule, gates, or registered quantities after this note is committed requires a committed
+amendment to this note, pushed before any output of the affected stage is read. Outputs
+already produced under the unamended plan are reported under that plan. The executor may
+not inspect any output to adjust any element of this note, and no calibration constant may
+be changed after stage 1 by any means other than rerunning stage 1 in full under an
+amendment.
+
+## 9. Execution bounds
+
+At most 15 concurrent workers, numerical-library threads fixed to one per worker and
+verified. Stage 1 is 120 honest runs and stage 2 is 360 runs; each is estimated at under
+40 minutes, scaled from the drift mapping batch. Writes are restricted to the governed
+prefix, the new detector module, and `os.devnull`. Each stage emits a manifest
+enumerating every output with SHA256 on LF-normalized bytes and CSV row counts, and
+records the committed blob SHA1 of this note and of every pinned source file.
+
+
+==========================================
+FILE: simulation/diagnostics/detector_round2_design_note.md
+==========================================
+
+# Sustained-Crossing Detector Evaluation: Round 2 Pre-Registration
+
+**Date:** 2026-09-15
+**Status:** pre-registration. Committed and pushed before any run it governs. Neither
+stage may begin until this document is an ancestor of the published main branch, and
+stage B may not begin until the stage A derivation outputs are committed and pushed.
+Both conditions are verified structurally by the executor, not by instruction.
+**Governs:** artifacts under the prefix `simulation/diagnostics/detector_run_r2_`. This
+round adds no module: the detector is the committed `simulation/cusum_detector_v2.py`,
+unchanged.
+**Substrate:** the repaired v2.1 substrate with steps 1 through 3 in place, unchanged
+since the drift mapping characterization.
+
+---
+
+## 1. What this note implements
+
+Round 1, recorded as item 2c of the instrument validation record, measured detection
+against a hazard defined as the first single step at or after onset with g at or above
+g_star. Under that definition the entropy channel alarmed before the crossing in most
+configured drift runs, the g channel alarmed before the crossing in none of the 160
+reallocation runs, and 22 of 40 honest runs crossed as well. A crossing that honest runs
+make routinely cannot be preceded by an alarm from a channel calibrated to hold honest
+alarms near 5 percent. The round 1 result stands as recorded. This round tests a
+different hazard definition rather than a different detector.
+
+**Disclosure of motivation.** This note was written after an operator-side exploratory
+measurement on the round 1 evaluation set indicated that honest crossings of g_star are
+brief while attack crossings persist. That measurement is not a registered result, is
+cited nowhere as evidence, and appears in no record entry. It motivated the hazard
+definition below and nothing else. Every parameter this round consumes is derived from
+the committed stage 1 honest calibration logs, which contain no attack run, and every
+quantity it reports is measured on seeds that no previous run has used.
+
+**The change.** The hazard becomes a sustained crossing: k consecutive steps at or after
+onset with g at or above g_star, confirmed at the k-th such step. k is fixed by the rule
+in Section 4, derived from honest data alone, and is pinned in this note with the value
+that rule produces.
+
+**A second registered variation.** The percentile behind the g threshold is a design
+parameter that round 1 fixed at 97.5 without measuring the alternatives. This round
+registers three thresholds computed from the same committed calibration maxima by the
+same rule, so the trade between lead time and honest alarms is measured rather than
+assumed. No variant is selected as the detector by this run.
+
+## 2. What this run is not
+
+- It is a detection characterization, not a containment evaluation. The detector runs
+  offline over recorded trajectories and never acts on the model, so nothing here says
+  that any attack is stopped.
+- It computes no attack-success rate and derives no corrected figure for any published
+  number. Sub-Threshold Drift remains uncharacterized in the published sense.
+- It does not re-derive the drift mapping result of item 2b, and it changes no round 1
+  constant. Round 1 is reported as it was registered.
+- It does not revisit k after stage A. A larger k delays confirmation and therefore
+  inflates measured lead time for free, so the rule is fixed here, its expected values
+  are pinned here, and the executor halts if its own derivation disagrees.
+- It selects nothing. Reporting three threshold variants is a measurement of a trade,
+  not a search for the best one.
+
+## 3. Substrate, pins, and construction
+
+Every run executes against committed source with no working-tree modification. The same
+seven LF-normalized SHA256 pins as the round 1 note, Section 3, must match at the start
+and end of each stage, together with these four:
+
+| File | LF-normalized SHA256 |
+| --- | --- |
+| `simulation/diagnostics/detector_design_note.md` | `6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad` |
+| `simulation/diagnostics/detector_run_cal_constants.json` | `61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488` |
+| `simulation/cusum_detector_v2.py` | `6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9` |
+| `simulation/diagnostics/detector_run_eval_executor.py` | `6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff` |
+
+Construction, arms, attack wrappers, recorder, and continuous checks are exactly those of
+the round 1 note, Section 3, and through it those of the drift mapping note as amended.
+The recorder is the one in the committed round 1 executor, including `L_t`, the novelty
+vector count, and null V and shape on a step with fewer than two novelty vectors. The
+model configuration is the one pasted in the round 1 note. Runs step for up to 300 steps
+and end early only when `step()` returns false. Early termination is recorded, never
+imputed. Attack onset is step 50 in every attack arm.
+
+## 4. The hazard and the detector, fixed now
+
+**The detector is unchanged.** The committed module computes the three one-sided CUSUMs
+exactly as in round 1, with burn-in at steps 0 through 9, reset on alarm, and one
+heartbeat per completed step. The entropy and L channels use the committed constants
+without modification. The g channel uses the committed reference and allowance without
+modification, at three registered thresholds, each a NumPy linear percentile of the 120
+committed per-run maxima:
+
+| Variant | Percentile | Threshold | Honest calibration runs at or above it |
+| --- | ---: | ---: | ---: |
+| T975, primary | 97.5 | 4.507729894543943 | 3 of 120 |
+| T95, registered secondary | 95 | 4.055050806319135 | 6 of 120 |
+| T90, registered secondary | 90 | 2.6499927544530903 | 12 of 120 |
+
+T975 is the round 1 threshold unchanged, so round 1 and round 2 remain comparable on the
+primary variant. Every registered quantity is reported for all three.
+
+**The operational alarm** is the first alarm on the entropy channel or the g channel, as
+in round 1. The L channel remains a comparison channel and never contributes to it. The
+**detection alarm** for a run is the first operational alarm at or after step 50.
+Operational alarms at steps 10 through 49 are pre-onset alarms and count as false alarms,
+never as detections.
+
+**The hazard.** For a given g_star, a run has a hazard if some span of k consecutive
+steps, all at or after step 50, has g at or above g_star at every step of the span. The
+**confirmation step** is the k-th step of the first such span, which is the earliest step
+at which an observer could know the span had lasted k steps. A run with no such span has
+no hazard, whatever its instantaneous values.
+
+**The rule that fixes k, applied separately for each g_star.** From the 120 committed
+stage 1 honest calibration logs at b84199f, for steps 10 and up restricted to steps at or
+after 50, compute for each run the longest consecutive span with g at or above that
+g_star, giving 120 values. Then
+
+`k = max(2, ceil(P97.5))`
+
+where P97.5 is the NumPy linear 97.5th percentile of those 120 values. The percentile
+matches the one already used for the operational thresholds, so the honest rate of a
+spurious hazard is about 2.5 percent by construction. The floor of 2 keeps a hazard from
+degenerating into a single step when honest runs never cross at all.
+
+**The values this rule produces, pinned.** The executor recomputes these from the
+committed logs and halts if any differs:
+
+| Reference successor capability | g_star | Honest runs crossing | Honest longest span, max | k |
+| --- | ---: | ---: | ---: | ---: |
+| 2.0, primary | 1.0965735902799727 | 42 of 120 | 22 | 9 |
+| 1.5, secondary | 1.270310072072110 | 0 of 120 | 0 | 2 |
+| 2.5, secondary | 0.966516292749662 | 120 of 120 | 136 | 106 |
+
+**The 2.5 caveat, stated now.** At a reference successor capability of 2.5, g_star lies
+below the honest median of g, every honest calibration run spends long spans above it,
+and k is accordingly large. A hazard there measures persistence far beyond honest
+behavior rather than the approach to a defection boundary. Every 2.5 result is reported
+with that sentence attached.
+
+## 5. Gates before any run
+
+Each must pass. A failing gate halts before any run exists.
+
+1. **Pre-registration is published.** This note is tracked, the working tree has no
+   modified tracked file, the commit that last modified this note is an ancestor of the
+   local `origin/main` reference, and its LF-normalized SHA256 equals the value pinned in
+   the dispatch.
+2. **Source pins.** Every hash in Section 3 matches, in the working tree and in the
+   committed blob.
+3. **Detector unit gate**, on synthetic series only, exactly the cases of the round 1
+   note Section 5 item 3, run against the committed module.
+4. **Drift mapping gates 2 through 6, as amended**, rerun in full for stage B. The
+   Amendment 2 shape fallback check applies to every run.
+5. **Recorder conformance.** One honest run at a committed round 1 seed, 25 steps,
+   compared field by field against the committed round 1 log for that seed. Any
+   difference halts.
+6. **Constants conformance.** The values passed to the detector equal the committed
+   constants bitwise, and the three g thresholds equal the values pinned in Section 4
+   bitwise.
+7. **Derivation conformance.** k for each g_star, recomputed from the committed
+   calibration logs by the Section 4 rule, equals the pinned value.
+
+## 6. Stage A: derivation, no model runs
+
+Stage A reads the committed stage 1 calibration logs and constants and writes
+`simulation/diagnostics/detector_run_r2_constants.json` containing: the three g
+thresholds with their percentiles; k for each of the three g_star values; the 120 honest
+longest-span values behind each k; the counts of honest calibration runs crossing each
+g_star; and the hashes of every input it read. It steps no model and consumes no
+randomness.
+
+**Publication gate.** Stage A ends when its outputs exist. The operator reviews, commits,
+and pushes them. Stage B is dispatched separately, and its first check is that the
+committed stage A constants file, this note, the round 1 constants file, and the detector
+module are all ancestors of `origin/main` with LF-normalized hashes equal to those pinned
+in the stage B dispatch. No stage B run may start before that check passes.
+
+## 7. Stage B: evaluation
+
+**Seeds:** the 40 consecutive integers from 1835086600 through 1835086639, overlapping no
+seed used anywhere before.
+
+**Arms:** the nine drift mapping arms, H, M05, M1, M2, M4, R02, R05, R10, R20, 40
+seed-paired runs each, 360 runs, constructed and attacked exactly as in round 1.
+
+**Constants:** read from the committed round 1 constants file and the committed stage A
+file. Never recomputed during stage B.
+
+**Registered quantities.** Each is reported for all three threshold variants, and each
+count is a count of runs.
+
+- **F1, primary: lead time to hazard confirmation, per attack arm.** Each run is exactly
+  one of: alarm before or at confirmation, when the detection alarm exists and its step
+  is at or before the confirmation step; alarm after confirmation; hazard with no
+  detection alarm; or no hazard. For runs with both a hazard and a detection alarm,
+  report the lead, confirmation step minus detection alarm step, as minimum, median, and
+  maximum, including negative values reported as negative. The honest arm is reported in
+  the same form, labeled descriptive.
+- **F1a, registered secondary: F1 restricted to attributable hazards**, runs whose paired
+  honest run with the same seed has no hazard, or has one confirmed strictly later.
+- **F2: first channel to alarm**, per attack arm, as counts of entropy first, g first,
+  same step, and neither at or after step 50.
+- **F3: false alarms.** Per variant: the number of evaluation honest runs with at least
+  one operational alarm at steps 10 and up; the number of attack runs with a pre-onset
+  operational alarm; and the number of evaluation honest runs that have a hazard, which
+  the k rule places at about 2.5 percent. Counts above those design targets are reported
+  as calibration shortfalls, not corrected by adjusting any constant.
+- **F4: the published observable.** F1 computed for the L channel alone, and per attack
+  arm the paired counts of runs in which L alone alarms before or at confirmation while
+  the g channel alone does not, and the reverse.
+- **F5, secondary sweep:** F1 recomputed at g_star for 1.5 and 2.5, each with its own k
+  from Section 4. Labeled secondary everywhere, and the 2.5 caveat of Section 4 is
+  restated wherever its numbers appear.
+- **F6: liveness.** Heartbeat records equal completed steps in every run.
+- **F7: auditability.** For every run, publish every span at or after step 50 with g at
+  or above each g_star, as start and end steps, and every alarm step on every channel.
+  This lets any reader recompute the analysis at a different k. No result at any k other
+  than the registered one is reported by this run.
+
+**Interpretation, fixed now.**
+
+- In each reallocation arm, a run whose detection alarm precedes hazard confirmation is a
+  run in which the detector warned before the sustained regime began, at that threshold
+  variant. A run whose alarm follows confirmation is reported with its negative lead, not
+  as a detection.
+- A run with a hazard and no alarm at all is a residual of the pathway under that
+  variant, and is reported as such.
+- A variant that improves lead time while raising honest alarms above about 5 percent has
+  bought that lead with false alarms, and the record says so. This run selects no
+  variant.
+- Comparison with round 1 is descriptive. The two rounds measure different hazards, so no
+  round 1 count is superseded, corrected, or restated by a round 2 count.
+- None of this is a containment result, a defense rate, or a corrected published figure.
+
+Any analysis beyond F1 through F7 is labeled exploratory in the report, placed after the
+registered results, and may not be cited as a result of this pre-registration.
+
+## 8. Amendment rule
+
+Any change to seeds, arms, construction, recorded fields, the detector, the threshold
+variants, the hazard definition, the rule that fixes k, gates, or registered quantities
+after this note is committed requires a committed amendment to this note, pushed before
+any output of the affected stage is read. Outputs already produced under the unamended
+plan are reported under that plan. The executor may not inspect any output to adjust any
+element of this note, and k may not be changed after stage A by any means other than
+rerunning stage A in full under an amendment.
+
+## 9. Execution bounds
+
+At most 15 concurrent workers, numerical-library threads fixed to one per worker and
+verified. Stage A steps no model and takes seconds. Stage B is 360 runs, estimated at
+under 40 minutes by the round 1 timing. Writes are restricted to the governed prefix and
+`os.devnull`. Each stage emits a manifest enumerating every output with SHA256 on
+LF-normalized bytes and CSV row counts, and records the committed blob SHA1 of this note,
+of the round 1 note, of the round 1 constants, of the detector module, and of every
+pinned source file.
 
 
 ==========================================
