@@ -111,6 +111,16 @@ NAME_NEEDLE_ALLOWLIST = frozenset({
     "scripts/check_snapshot_leak.py",
     # Records anomaly B4 and the advisor-document collision note.
     "simulation/diagnostics/defended_collapse_discrepancy_report.md",
+    # The two below name the document while enforcing or reporting the rule
+    # that keeps it out of the index, which is the purpose this list exists
+    # for. Both are hash-pinned in committed manifests, so rewording them
+    # would invalidate recorded provenance to remove a string that .gitignore
+    # already publishes. Content needles still apply to them unconditionally.
+    # Gate 2 of the drift characterization asserts the file is present on disk
+    # and absent from the index.
+    "simulation/diagnostics/drift_char_probe.py",
+    # Reports that gate passing, including the git diagnostic it emits.
+    "simulation/diagnostics/estimator_repair_report.md",
 })
 
 HEADER_SOURCE = "<snapshot header>"
