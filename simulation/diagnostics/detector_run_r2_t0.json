@@ -1,0 +1,888 @@
+{
+  "status": "PASS",
+  "halt_reason": null,
+  "head": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+  "machine": "YotkoTest",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "pins": [
+    {
+      "path": "simulation/diagnostics/detector_round2_design_note.md",
+      "expected_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "worktree_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "committed_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "publication_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "git_blob_sha1": "cffa1d922c70759b3619856247a3f1ba3dbfdce9"
+    },
+    {
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "committed_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "publication_commit": "76f81cd83e0db6ff5031070e54f2f908502b8632",
+      "git_blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "committed_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "git_blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158"
+    },
+    {
+      "path": "simulation/cusum_detector_v2.py",
+      "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "committed_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "git_blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_eval_executor.py",
+      "expected_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "worktree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "committed_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "publication_commit": "9ce2e65931875f8cc6c2036a3e56475a1d08bd84",
+      "git_blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723"
+    },
+    {
+      "path": "simulation/metrics.py",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "git_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611"
+    },
+    {
+      "path": "simulation/agents.py",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "git_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51"
+    },
+    {
+      "path": "simulation/model.py",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "git_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879"
+    },
+    {
+      "path": "simulation/attack_adapter_v2.py",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "git_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e"
+    },
+    {
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "committed_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "git_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d"
+    },
+    {
+      "path": "simulation/working_factor.py",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "git_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486"
+    },
+    {
+      "path": "simulation/constants_v2_stage18.py",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "git_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2"
+    }
+  ],
+  "inputs": {
+    "simulation/diagnostics/detector_round2_design_note.md": {
+      "path": "simulation/diagnostics/detector_round2_design_note.md",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "git_blob_sha1": "cffa1d922c70759b3619856247a3f1ba3dbfdce9",
+      "sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632"
+    },
+    "simulation/diagnostics/detector_design_note.md": {
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "git_blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+    },
+    "simulation/diagnostics/detector_run_cal_constants.json": {
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "git_blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+      "sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488"
+    },
+    "simulation/cusum_detector_v2.py": {
+      "path": "simulation/cusum_detector_v2.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "git_blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+      "sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+    },
+    "simulation/diagnostics/detector_run_eval_executor.py": {
+      "path": "simulation/diagnostics/detector_run_eval_executor.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "git_blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723",
+      "sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff"
+    },
+    "simulation/metrics.py": {
+      "path": "simulation/metrics.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "git_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+    },
+    "simulation/agents.py": {
+      "path": "simulation/agents.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "git_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+    },
+    "simulation/model.py": {
+      "path": "simulation/model.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "git_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+    },
+    "simulation/attack_adapter_v2.py": {
+      "path": "simulation/attack_adapter_v2.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "git_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+    },
+    "simulation/run_attack_vector_revalidation_v2.py": {
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "git_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+    },
+    "simulation/working_factor.py": {
+      "path": "simulation/working_factor.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "git_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+    },
+    "simulation/constants_v2_stage18.py": {
+      "path": "simulation/constants_v2_stage18.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "git_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+    }
+  },
+  "commands": [
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "--abbrev-ref",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "main"
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit": 0,
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "684fa7006155fb81349f6f59c11be22a5f59d2cb"
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/detector_round2_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "simulation/diagnostics/detector_round2_design_note.md"
+    },
+    {
+      "command": [
+        "git",
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/diagnostics/detector_round2_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "684fa7006155fb81349f6f59c11be22a5f59d2cb"
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/detector_round2_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "[binary blob; hash recorded separately]"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/detector_round2_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "cffa1d922c70759b3619856247a3f1ba3dbfdce9"
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/detector_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "simulation/diagnostics/detector_design_note.md"
+    },
+    {
+      "command": [
+        "git",
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/diagnostics/detector_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "76f81cd83e0db6ff5031070e54f2f908502b8632"
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "76f81cd83e0db6ff5031070e54f2f908502b8632",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/detector_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "[binary blob; hash recorded separately]"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/detector_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400"
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/detector_run_cal_constants.json"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "simulation/diagnostics/detector_run_cal_constants.json"
+    },
+    {
+      "command": [
+        "git",
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/diagnostics/detector_run_cal_constants.json"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "b84199fd5b71041870e17acea22e0145aaf16e10"
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "b84199fd5b71041870e17acea22e0145aaf16e10",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/detector_run_cal_constants.json"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "[binary blob; hash recorded separately]"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/detector_run_cal_constants.json"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "6e38dc22b64f100f8945e602fb4016e645f9f158"
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/cusum_detector_v2.py"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "simulation/cusum_detector_v2.py"
+    },
+    {
+      "command": [
+        "git",
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/cusum_detector_v2.py"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "b84199fd5b71041870e17acea22e0145aaf16e10"
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "b84199fd5b71041870e17acea22e0145aaf16e10",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/cusum_detector_v2.py"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "[binary blob; hash recorded separately]"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/cusum_detector_v2.py"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "c2f5d340f353bcab0a6d180587ec46400b8b4953"
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/detector_run_eval_executor.py"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "simulation/diagnostics/detector_run_eval_executor.py"
+    },
+    {
+      "command": [
+        "git",
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/diagnostics/detector_run_eval_executor.py"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "9ce2e65931875f8cc6c2036a3e56475a1d08bd84"
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "9ce2e65931875f8cc6c2036a3e56475a1d08bd84",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/detector_run_eval_executor.py"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "[binary blob; hash recorded separately]"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/detector_run_eval_executor.py"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "36b1036e823dac3f6d653173196d402ff52aa723"
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/detector_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "[binary blob; hash recorded separately]"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/detector_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400"
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/detector_run_cal_constants.json"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "[binary blob; hash recorded separately]"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/detector_run_cal_constants.json"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "6e38dc22b64f100f8945e602fb4016e645f9f158"
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/cusum_detector_v2.py"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "[binary blob; hash recorded separately]"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/cusum_detector_v2.py"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "c2f5d340f353bcab0a6d180587ec46400b8b4953"
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/detector_run_eval_executor.py"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "[binary blob; hash recorded separately]"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/detector_run_eval_executor.py"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "36b1036e823dac3f6d653173196d402ff52aa723"
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "simulation/diagnostics/detector_run_cal_H_*_complete.json"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "simulation/diagnostics/detector_run_cal_H_1835086300_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086301_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086302_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086303_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086304_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086305_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086306_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086307_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086308_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086309_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086310_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086311_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086312_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086313_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086314_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086315_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086316_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086317_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086318_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086319_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086320_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086321_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086322_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086323_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086324_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086325_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086326_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086327_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086328_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086329_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086330_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086331_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086332_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086333_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086334_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086335_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086336_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086337_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086338_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086339_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086340_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086341_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086342_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086343_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086344_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086345_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086346_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086347_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086348_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086349_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086350_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086351_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086352_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086353_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086354_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086355_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086356_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086357_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086358_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086359_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086360_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086361_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086362_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086363_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086364_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086365_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086366_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086367_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086368_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086369_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086370_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086371_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086372_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086373_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086374_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086375_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086376_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086377_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086378_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086379_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086380_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086381_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086382_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086383_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086384_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086385_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086386_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086387_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086388_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086389_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086390_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086391_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086392_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086393_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086394_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086395_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086396_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086397_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086398_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086399_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086400_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086401_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086402_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086403_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086404_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086405_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086406_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086407_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086408_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086409_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086410_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086411_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086412_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086413_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086414_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086415_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086416_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086417_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086418_complete.json\nsimulation/diagnostics/detector_run_cal_H_1835086419_complete.json"
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/detector_design_note.md"
+      ],
+      "exit": 0,
+      "stdout": "[blob retrieved]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/metrics.py"
+      ],
+      "exit": 0,
+      "stdout": "[blob retrieved]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/metrics.py"
+      ],
+      "exit": 0,
+      "stdout": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/agents.py"
+      ],
+      "exit": 0,
+      "stdout": "[blob retrieved]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/agents.py"
+      ],
+      "exit": 0,
+      "stdout": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/model.py"
+      ],
+      "exit": 0,
+      "stdout": "[blob retrieved]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/model.py"
+      ],
+      "exit": 0,
+      "stdout": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/attack_adapter_v2.py"
+      ],
+      "exit": 0,
+      "stdout": "[blob retrieved]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/attack_adapter_v2.py"
+      ],
+      "exit": 0,
+      "stdout": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/run_attack_vector_revalidation_v2.py"
+      ],
+      "exit": 0,
+      "stdout": "[blob retrieved]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/run_attack_vector_revalidation_v2.py"
+      ],
+      "exit": 0,
+      "stdout": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/working_factor.py"
+      ],
+      "exit": 0,
+      "stdout": "[blob retrieved]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/working_factor.py"
+      ],
+      "exit": 0,
+      "stdout": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/constants_v2_stage18.py"
+      ],
+      "exit": 0,
+      "stdout": "[blob retrieved]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/constants_v2_stage18.py"
+      ],
+      "exit": 0,
+      "stdout": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "stderr": ""
+    }
+  ],
+  "completion_paths": [
+    "simulation/diagnostics/detector_run_cal_H_1835086300_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086301_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086302_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086303_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086304_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086305_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086306_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086307_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086308_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086309_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086310_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086311_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086312_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086313_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086314_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086315_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086316_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086317_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086318_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086319_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086320_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086321_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086322_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086323_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086324_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086325_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086326_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086327_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086328_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086329_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086330_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086331_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086332_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086333_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086334_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086335_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086336_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086337_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086338_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086339_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086340_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086341_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086342_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086343_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086344_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086345_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086346_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086347_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086348_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086349_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086350_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086351_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086352_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086353_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086354_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086355_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086356_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086357_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086358_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086359_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086360_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086361_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086362_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086363_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086364_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086365_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086366_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086367_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086368_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086369_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086370_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086371_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086372_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086373_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086374_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086375_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086376_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086377_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086378_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086379_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086380_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086381_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086382_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086383_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086384_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086385_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086386_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086387_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086388_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086389_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086390_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086391_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086392_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086393_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086394_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086395_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086396_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086397_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086398_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086399_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086400_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086401_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086402_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086403_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086404_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086405_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086406_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086407_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086408_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086409_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086410_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086411_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086412_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086413_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086414_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086415_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086416_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086417_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086418_complete.json",
+    "simulation/diagnostics/detector_run_cal_H_1835086419_complete.json"
+  ],
+  "namespace_fresh": true,
+  "violations": [],
+  "write_guard": {
+    "allowed_prefix": "simulation/diagnostics/detector_run_r2_",
+    "os_devnull_exemption": true
+  },
+  "known_conditions": [
+    "CRLF worktree against LF blobs retained",
+    "Permission-denied warnings recorded, non-halting"
+  ],
+  "inherited_source_pins_verified": 7
+}

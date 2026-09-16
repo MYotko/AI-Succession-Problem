@@ -1,0 +1,2213 @@
+{
+  "created_utc": "2026-09-16T10:50:45.281486+00:00",
+  "csv_count_method": "csv.DictReader excluding header",
+  "derivation_stderr_warnings": [],
+  "halt_reason": null,
+  "head": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+  "inputs": [
+    {
+      "git_blob_sha1": "cffa1d922c70759b3619856247a3f1ba3dbfdce9",
+      "path": "simulation/diagnostics/detector_round2_design_note.md",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "role": "pinned source or specification",
+      "sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632"
+    },
+    {
+      "git_blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "role": "pinned source or specification",
+      "sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+    },
+    {
+      "git_blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "role": "pinned source or specification",
+      "sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488"
+    },
+    {
+      "git_blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+      "path": "simulation/cusum_detector_v2.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "role": "pinned source or specification",
+      "sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+    },
+    {
+      "git_blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723",
+      "path": "simulation/diagnostics/detector_run_eval_executor.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "role": "pinned source or specification",
+      "sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff"
+    },
+    {
+      "git_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "path": "simulation/metrics.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "role": "pinned source or specification",
+      "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+    },
+    {
+      "git_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "path": "simulation/agents.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "role": "pinned source or specification",
+      "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+    },
+    {
+      "git_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "path": "simulation/model.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "role": "pinned source or specification",
+      "sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+    },
+    {
+      "git_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "path": "simulation/attack_adapter_v2.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "role": "pinned source or specification",
+      "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+    },
+    {
+      "git_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "role": "pinned source or specification",
+      "sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+    },
+    {
+      "git_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "path": "simulation/working_factor.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "role": "pinned source or specification",
+      "sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+    },
+    {
+      "git_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "path": "simulation/constants_v2_stage18.py",
+      "read_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "role": "pinned source or specification",
+      "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+    },
+    {
+      "git_blob_sha1": "bbefeab1d02502278a89460030616ae366a73167",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086300_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "8040231b3e732ceb9af5baf359b1eb25d4735c4c2c6d5cf70bfaed436fb31cde"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "a8a44d3330c9b5e2d0904ec58c17457ddb9e2326",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086300_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "0dfc7753cc02343dae1a21848482ebbcbc1a1d7567045e2a0c4db0a37e34ba25"
+    },
+    {
+      "git_blob_sha1": "ff6fcd199b746bbc514e748729bb65ab93cbd941",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086301_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "db5863e1e736092e3ffbc77c84a97ec808141b37e9869cc15b1dabd6497ade46"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "9cb94538da05884761fc16ce3b02ded3d34514f5",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086301_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "cbf69e967382dc1c2bcd7a7443eb4919a1532215873188e5cf4ee25b73ba257a"
+    },
+    {
+      "git_blob_sha1": "392cf36c59c6b73a7eb2c7afeaef5b04c6f65e1a",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086302_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "e62f8d01ecdf2a2a1c0ddc64b5e0037b5336d39a80ee6744a0030646e170f80a"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "5531199a8bbad7fe55d0133d2dfd914dd3b8f1d7",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086302_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "9be2d51fc7f6ff363f4b6282931f9e1cb383e33673b1fbded4e632d21343f59b"
+    },
+    {
+      "git_blob_sha1": "ee6b2afc4f1931180512c6a1567d51eb4f895243",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086303_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "d135a7fb8e04b7f4b569dd4c090bcdc893b4a6567787e697dda5a5b33ebe6cdd"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "3c2f99bbe8c1b409472e7b64b69b1630ce95fc19",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086303_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "3618fdf8f55903942c62fc7894bb4626dba5ff9e37dd6e1628736d5bbe9b9963"
+    },
+    {
+      "git_blob_sha1": "977bb11a5027afa86836ae8e0b7489b0c61e16a6",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086304_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "b2b33f96b62b7e7157ed27afd4f0e71de7bf207a569efed1f971dfa6b5a23eed"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "f0d430e661267e250ef0ae46c2b6290602a10679",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086304_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "2d3af5b21719df63215db912d7389e1820247e983fb78b0cd6ae9577a82ea824"
+    },
+    {
+      "git_blob_sha1": "d45b0e27ccc3d66bce2f4429f66118ca66819f03",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086305_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "6b217ed2f5b817a54a0b51cd6e31d0a336dfe4d83a0d160e8f413c2cb72d0711"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "72ca97dd001604d67c3efe80202615865d64ec9d",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086305_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "f0fac2b9d8eb6c9a8f4dec372a75f9e9743b64c9824e92b8f9ff79c609fe9eb8"
+    },
+    {
+      "git_blob_sha1": "e58a86769620eb2fd16cbb91d5d4103b810b6307",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086306_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "f8a91f37fc4455636a0f2c2b6cba5e15d798344a7eab24a07c25a64b38ff8eaa"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "e713364fa8043043bf17aeecde25f002359fbd79",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086306_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "f2af61077add09b52a678dd30888e026f9cd4055758e22e06630aff5f6445652"
+    },
+    {
+      "git_blob_sha1": "e5a051e325585521188d3607f5788c65e3bb822f",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086307_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "b372d7717421777206596820a5d8aa47f74aedec5a7337e5c605d87bde4f942d"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "c1f01aabaf0a56dd054e348daf9e74d0b706c166",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086307_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "bb0e52f3a1ef87384333c60aa2e0f44822620ab22982eca1b9f2e92bae0a17cc"
+    },
+    {
+      "git_blob_sha1": "a809309bc3e31d323328b0f76e38b2f0f884fd88",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086308_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "be712b50b8131fe2f3e2949c38fcb149b13ac242511029971836cabcdc64cd12"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "f9ff6f075097c84776609fd404d0fcc486f01541",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086308_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "e34fa0d4fbb4ca36ecf9bb2e978902f7669197e589ed55d2c6d8834a9b4eee58"
+    },
+    {
+      "git_blob_sha1": "fa4fd77c635270b83f4cb65abc3da8e68aff7e42",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086309_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "d5598eda6a3b85ce71e7b27fe479e41e3e5f06e4b146accf98d4cfef9d6cc0d9"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "a02715c14e00df6d7d0d6da2436355e0a129c497",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086309_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "9186ca2a7d74d357c1cfa50d88dfb6e5a8097a0a0ff8aa23fdd0578350f4145a"
+    },
+    {
+      "git_blob_sha1": "a4ce485e5975ba35e94c3374b675cc4690136516",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086310_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "8c09321f7e38741dfa912b58e55879a696265afac10e8627d23ec2b5f4df62be"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "f85251311912a840d8bf67079aded7ecf76ee1dc",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086310_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "0b6b6a0269f6f9af01c2608dbaf7030aa42812d6ff3f3525a8f2f252d179adaa"
+    },
+    {
+      "git_blob_sha1": "e461ad514d5169d7b989305ed64b31cfdf6e6c6f",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086311_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "aa1f53d389092bf6f85e2db4261b30afc3a6bc4dbf4906c44ad6968ceb902564"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "4256c1721879fb150272f7655583519e10b69deb",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086311_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "af34e5cd4e735ae42d2f87bab47260192e8b13315b8e88fd279f5059939950eb"
+    },
+    {
+      "git_blob_sha1": "0e8e069517e0bb17c86eb53cd2ebeb13aa0cf063",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086312_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "f9b4794b0773d487265d5c780435d907a24b44ff9d80aa5dbed06a6fe7f92d4b"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "c09f607ef703528e963cd70b81f4785bb055a749",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086312_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "0572fc5b2c94299a12bdeb4fc4e3c40fda80e251e2ebb8abc613775b0260884b"
+    },
+    {
+      "git_blob_sha1": "388d19c1c071188ec83c1005526bf184cfafe985",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086313_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "2a16c4abb3ced0cea3c6b99e2288c516bf65f6215321f373901ade0d9b600c63"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "1ebee78c6d53d579d95ef4d4efa44c8a001140e5",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086313_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "d357962b190e8f668979ab407b81365f0e742ab57f3f85f2558160568dfdbc78"
+    },
+    {
+      "git_blob_sha1": "118cdbc834f9de3754125464df3d2134019f3e8e",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086314_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "7b1d43a36cf4f6927c7c4c63a0b24945ab0e9e7ed87f650a55b7d6c2f829aea6"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "fe8e9d7ad59851334ad011f84c74ede1d75131e0",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086314_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "b2739d104cedbc71a23ff7cbc0656aeebc01930f10905ede0858e0175ec8d682"
+    },
+    {
+      "git_blob_sha1": "c461c0e5fd3ef3585d0296a145c8464f94a88e91",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086315_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "1758b62ec8684c26c5085f88928ca40829b48705c7dc5ab49b1dfd01638888e1"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "fea9b5bfa6aef76d62f3f98f327abfbeaea75e8c",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086315_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "77beb278a11ec08d29e06c3ca0201a39934bc4d0172daf8199cd41472bb32c16"
+    },
+    {
+      "git_blob_sha1": "ac6e09d42aa8773aaa209964fa9f330319f0dd41",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086316_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "fbf912f19a6682b5a70725c306496a1000f210ecc31d3fcb47f5fd39c8b499cc"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "254737906773df47e5740cab58e3a80af30ee7af",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086316_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "cc1f7e14c5701054903dcf840b9d0b962243137096683a4758ea70b7c66694cd"
+    },
+    {
+      "git_blob_sha1": "32b25683561b4760494c9cce5f0a5951b107dc48",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086317_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "ab8d103e2a166a0096eeb9e1a0b4534132176972ec5b27ae86335f50a4e4ab83"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "59e060c322243679e323cfb96553c90d9a6a0f6d",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086317_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "e8ca92e173973a54afa8e491b68077532f762d99a303a552f9c8e8fed5172296"
+    },
+    {
+      "git_blob_sha1": "e574306c9d8cbab73f67d14931af494d73a4c669",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086318_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "958632441112e833dd9527af25d000c28b3bd95d1389e5eed31fec5656c9a12c"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "d91a664a73361a20b21cf52f6000e2d865b1f121",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086318_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "b1ad16e76f9735baf7ea780bf61f72f06af158f21cc77a3673d6e87e815b9b28"
+    },
+    {
+      "git_blob_sha1": "b634956d81ac9ebe094ef31a72c19b84b5f6fd4d",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086319_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "ad64b040ddadcc4d104d84f58fe81fd1400744e8c0aa195c50cdc7f44c5ffc89"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "95b6e1e3884b3348484ca32ff5b29fdb18f37da7",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086319_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "a85c8e1f48e375cbb9cdabcebaa0cca3be1fb370b0e18ed180e82c29b8e488e9"
+    },
+    {
+      "git_blob_sha1": "43e106057bb5d303f1cae6908fecff582b3442c1",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086320_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "fe10fa60b195e077a972e6c8f0d5d6fad7035fe864f84502c513997dbcc2ea4a"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "be4cbe1d095b2282930011dcb4dd489d775aa42b",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086320_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "b083224458253bdc37dd94b16ee2562769685f0fbdcf1c763ed798e773ccc4ef"
+    },
+    {
+      "git_blob_sha1": "7f7a4432e676f9825cc17ee1dcdf62792c09fa7f",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086321_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "d7d6663e76a6d281fc867720f546675ff8d1109d62ff72c3b0e0f86d44c44ea8"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "3ce1f50484e37b2c73b691d85faf332b22cbcb3d",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086321_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "316d61c1d3c95a6c23581a9c3aee7640e582f086c545963b745ec88a18785af6"
+    },
+    {
+      "git_blob_sha1": "cac379774e1334d6db52baafe81ebf06126164d4",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086322_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "78520022bb6d3de1f6d75b40899eeb917f18cef4aee222fe576f5347083f70c3"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "f0a752578d055b0929c7d569e16532dd88720f6d",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086322_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "a68f1ecb9deb2a0a6829e1414b8ae1da9c1fb18f92c93473acf24329d2403c98"
+    },
+    {
+      "git_blob_sha1": "8741c1c8817d523c8a4107ceb6432e19da9fd91e",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086323_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "4d987f7395a48402b46608703440d5f0d6e6d49983bf00573646424425dcccfd"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "01687bfed4062041d9b400841db5b716dd6cd639",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086323_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "85439058e68476c35f3a2de53fd1a8685e043a482e3327e6844d36d163b92dce"
+    },
+    {
+      "git_blob_sha1": "be3c8578d02574c464e8b5db6251025a9d99964f",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086324_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "5f2959de3d459a143e60c1fd20fbac81d4cba7817c5036732f6cceb35c976311"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "b044c9d62d2674d44470c26e3259f12c0eb891a3",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086324_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "f3300576c38ca95940134df20ce4cb7c5b854f43cd2ac7c5d68f650fb5c2f527"
+    },
+    {
+      "git_blob_sha1": "669f29cccc24422e6d68dcfb6ea4519d2bbb0f47",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086325_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "b5a94c744c70f8665fa66d58a85374f996f1722470a680eeb5d7a49f1039e944"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "dd164f1664d66e71c526a87bffdf0e53037992af",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086325_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "ccebe15ba248c7d2f7557c5b32a47faaf019cf385a49f38c6e673fea207d45bb"
+    },
+    {
+      "git_blob_sha1": "b8cfaa1aa35b3e169b237bdb052d59b8715f85aa",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086326_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "af33d879f580d78ecd32a8ebb43bc45ea89039cf3c03deab5818d596f2c9a64b"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "85cdd342d2a90b9be3c57d850f20bff5f28427a9",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086326_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "60be9918a82e79ff841a19eb010537ec13c13f0dfe6c7bcf1941c7cbe3627546"
+    },
+    {
+      "git_blob_sha1": "092b1c54c173e4fce42d7fafb2339aff934e4b39",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086327_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "5f2400abd11fa9134e19e712c2a407c7f506ad7e12287eaa7418f54e8c00e284"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "b2a656e9a7dcfdbc11c0e279744ac349247517c3",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086327_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "cdd77344e29a7a1e7d1cf7f63d904cf005458f3f45a611d408f8d9acb19629fa"
+    },
+    {
+      "git_blob_sha1": "be43a65a677085e24050500de9ce8558d3bcfe1f",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086328_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "571e8068701b614e0c554cf2e3278b9fd7ec9dc953d28dd907a3ce47c951d86e"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "b768cbb45f20dadbff8edc1ca55b4e9d0db22b7a",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086328_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "57270e66fad72117df7fa81c4b133fa3157e4a0cac23b433213995799c54cb66"
+    },
+    {
+      "git_blob_sha1": "3e44291a078fc6af9f3f29565426e3efeee31be1",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086329_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "5dbba4867eea3e0091b52e5e8357ca2a381f8b5ffcd2f394a365c5ee2a41aa96"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "074980efd3094a810e009020ec5ab1754b778f97",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086329_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "bb62854a62106589cc1c22e8b3630faadad1505b7fd6bcf69c92201caf096a5d"
+    },
+    {
+      "git_blob_sha1": "c9b6edaca1e38dc5d4b544eb4b24651e7dcfaf88",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086330_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "8b80ea6335952643af991cb030596da099ebde6a52b3e21187a21d514aea58aa"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "4bd58ef684236664666df2e343b76fa219d79ccb",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086330_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "e4bbf6a9151a6ee44aff01bc34e327f04e85e09db57ced1176d8bef89319b5ff"
+    },
+    {
+      "git_blob_sha1": "c7264ce67d8f0073af8dd7fbe41b7c78e5b0fdf2",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086331_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "4f9de8c73bd9eb7f1d038f485a6d783e4e9fda2420da92cfabf08c54d347c109"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "29304d066df23b3b825397d76fae97bd47a87d82",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086331_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "3de0b0c1b3b41ec06cc84393987c287cd4eaac33c5dae9431acf53bcb573a73a"
+    },
+    {
+      "git_blob_sha1": "bd94a434c0c97f9076b8140b2d5ac1b740a64769",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086332_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "c428cd4c38e5317e3255533012cb9ac5ad0081319ccece7b88bd45e8e7c7928e"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "55ce699f346c5b02c4a9dc62513f3d2c17f9ead0",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086332_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "12f76f0c141b0765d85228c8485ded12b0906fc3d6ca8a08966227cba3abb04d"
+    },
+    {
+      "git_blob_sha1": "dbbe908a4eb8284af04259eed4f67c361957d859",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086333_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "dc8c193e3b9ae573e0560dd26a52fb8626341976617e665eb6d5fe3fdcb31d75"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "edf579b9edd89fcc39accee7a1a1ae9613bed56c",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086333_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "3290616409c528f1e2d976f0cce7b238bbda3b15b85cb506d9ac7cecb409be02"
+    },
+    {
+      "git_blob_sha1": "53016737e530a77c8d87854d4a64dd3554c7ff32",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086334_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "b9505b436be32250e92e8110303a534aceea4eb1962026ff98e65d759872cec6"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "70e135fdc96b8c9b1c5c0157354752e3ab4d20ba",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086334_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "401d23be5e18e1803d0c29c00d66766429636073a5136f214169b0aab0c4b8c7"
+    },
+    {
+      "git_blob_sha1": "e4ae9775f952c68716a85bc929ed6848fea6317c",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086335_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "676606d66eda1fed4dec5b567311943fcb13a0005f5414cc1e318b2d5835dad7"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "e2091accd97fe63ffd23b45b18efa99812b5cd5a",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086335_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "e28821a3fb6be8469421b2de183102c026face8a7033962e112b0813dbb6df9a"
+    },
+    {
+      "git_blob_sha1": "34d96b8ee94a42e5b2bd5494f1ebdf0a33bcb101",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086336_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "4084d8021810794cac1ed4d0a0c89143cf13d0285d5364ff5269c1f4046d7d7c"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "81648bea96c277aa789cc37ca4f1a719422b3619",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086336_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "8b80bde40f7167e81858088eb73b31d48d50be8aee0b161e5ed30d0ca9ef0f47"
+    },
+    {
+      "git_blob_sha1": "3b170e5a6f6083748f7fa306c7559e1f9f8c568f",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086337_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "174168a8dbf2946cbfda615c712a39fae40298a78cddd9053a4fe257b07a0ad4"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "c0db12baa5c8cfdf05159c21dad5c10a37d66ea7",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086337_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "970f70971d83fc31b4b3c4c86e8244adbef11fcc11133abf89500eb2aa601566"
+    },
+    {
+      "git_blob_sha1": "f205424b0c41e86aa3fcc63561c1b08e5e2634fe",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086338_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "4cdb381fb9329fe3b4cf59fc3b96adec7e9c460f53dc93f37c9188bd9e4d3154"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "63d406dd9ece1a2a8c652652a92f9bc4243c85d2",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086338_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "5d2bfd9807eb70638c8260f8ca4b9ef6e4a6360e004221e11bb40ab16ebe0c86"
+    },
+    {
+      "git_blob_sha1": "6209dbbf3e4848242d7ee5604f1935a772912e67",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086339_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "82f873d4d685c58f3ba8bcdd13cfd36ce0d3c6a547146bb4b786d50b265a37c2"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "8bad815f1d9c09d4db95e2252c44227488c8ea5e",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086339_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "59c16f1e45b3dc2b4b73b9c1cbc0ef1bbf01bca1902dfe5a9fc99d80a50c6889"
+    },
+    {
+      "git_blob_sha1": "eedb10e0ffca9f17eee278718c218578d6b3ee1f",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086340_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "766e629c9ef8665093a1f573ea9e6702e31a84b017f9e2964e476ef5f0cce187"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "c26689fedef561bd48e40ca64a01ec4f16518398",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086340_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "ddb624fc7f9fdbf011e4bf8f3aa169c2684e6754144f15251ec518a1f08385c2"
+    },
+    {
+      "git_blob_sha1": "b15a22f5d1e684b98ee7d3492d8034811ce0db92",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086341_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "3943f48372a361e4adc571c66d857f4506678f64b18e9c428e8db1304ce90a98"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "351cee41e90fc92e8cef8e46cec9f12ec55ba980",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086341_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "daea175b275e04370e24bb588383bad63ef8f2936f5bdd40cc6dab9ff4ee3a08"
+    },
+    {
+      "git_blob_sha1": "ca0caba2d6311640f2432c12e89bbeeb54cbb22a",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086342_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "3b163c104bfd03c1c42b05f2ac2e7b0bb088b598e5b45b0269f3153dbf215315"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "c87191028defee09622f774248766f461fcd64cc",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086342_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "7b96ae4277e46020fd81fc08ef968a3f5e2fe2fcf566d52a8f5dbbfaec28e878"
+    },
+    {
+      "git_blob_sha1": "e58b7d3d82324b21cbcba910be9d850dd62b403b",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086343_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "0e012018a3c91c31d9a3acd38f24086cc43f4872ed3dd206686cda3832b5f53c"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "7c8ade5342f5a565a37abc023a0814ef1387f15c",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086343_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "8e3d016d17cc5721f1a7115ebe22b89fce19ac5d999e5a18e1e0fe62674d8b8c"
+    },
+    {
+      "git_blob_sha1": "f196d749e173495bad7f1ab567fc96cee8a3a507",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086344_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "3f3fa274ab4f9f79cdf6ba551da070690af41483befda82b7c56c13ff92aa96c"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "2711a291059d4b80c4a7a7a2b29e15b84360c861",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086344_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "d88f3092143d3729196416bd2885ca5bb4a542e01f6e122da2d628ae5a926982"
+    },
+    {
+      "git_blob_sha1": "eecc9db39ca0af5c72916848244790a7a30014ef",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086345_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "3c719bdb28a00a209d04f67d78ac65555425eefb9b25160e811954170d18d20a"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "92dff9bd5f2d63df56b003634978889d787d6928",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086345_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "cb960b9a2254cb8d8dd9629485d39cb3cd528ee5fcc7855a0d46c22c47f41623"
+    },
+    {
+      "git_blob_sha1": "b20b5342a12b852a9288d01dc875fe6428a337ed",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086346_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "c7a44b3ba934d7b3e959e034fb029425283ece476bf1957f46db6776012679ba"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "c8b8fdcc517120edb5da3ef5c1ef4468d5087164",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086346_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "343814825ab6bbd5a3e41a4bb43484f51873cf8a8d1779ba1f15e44045a846ec"
+    },
+    {
+      "git_blob_sha1": "e64f5d9086847d25484cdf5550dcfeb51b4e72cc",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086347_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "3cf407ded218068a58ab7f4a3e9db5cefa0bcb2f95ebaafa37e7437b68df2bcd"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "0009cb1fc434c142be2526263ed8f8fffd3f1788",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086347_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "4e96e9dfe5bc6022ec040f3b1ec3f80b8edc89ae60facacec18d7b00457282c3"
+    },
+    {
+      "git_blob_sha1": "ace25f826851ac43f2c82c59289d3c596d825929",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086348_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "49160ca996d1c7b283a23dac71276362cbd9d060a02c5380d36512d0df0e43ba"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "e6c40a80aa93e46d7daec4f1dcd0589b9d90ad1e",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086348_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "ba5177d1cd34205300ef0e1eeb6476b053008ceab566a0ef4495f0a25cdf0671"
+    },
+    {
+      "git_blob_sha1": "6f429a1dbfb644e51b8b2ffdbbbf38b301c2eacc",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086349_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "c157e60539bc0eb67dff827eeb3b712d543124e43b449195f50a162626dafb4d"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "72615cfd6ebf4f6a5593ebfc88fa5125541f5fcb",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086349_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "df68263d53dec01eed16aaea05262e79aee794658a7e8acac4acfc4397a60e27"
+    },
+    {
+      "git_blob_sha1": "473b9ec1f20f60a751e3339c1a972bf1b2a41f39",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086350_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "c55dcb5ec4fb4a5fce9e7e8385433eac4d7bc44f8eef539e063e42f5ce14b045"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "2f1c4c3108b59914dcf4f8f35ed03a548f4cfa32",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086350_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "d718bd0ce5ef5877cab0c1ade058ca1854bcb0d9f996e5d873db2d586c9b709e"
+    },
+    {
+      "git_blob_sha1": "7be8e78b3736570adebc5f66b3206adddee7e3c7",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086351_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "094455e293fafb60201bd35da464d92ae5f7feadbd0c1e32a3f38b0c2dc79300"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "70c9ac9b1f22be422c193002088668e4dc6676ba",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086351_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "be9678dd9a367cf1c292eaf9dd6f7226ceca339447bf95a23b6bd0110d48141e"
+    },
+    {
+      "git_blob_sha1": "e2fb51c4f027a5778ced68f52ee61905f0112f7d",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086352_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "1e1f49bb88fbc9b36eedce239315ca4c3d9dcafdf6c05c047a4e58ba1a0a669c"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "e3915eba9ddeca45d73f16c39b2952855ab5ed1a",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086352_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "cc4173af2dc8a97c296b6d33286acedd2e7fdcceffebd712d05f71d6c30c5489"
+    },
+    {
+      "git_blob_sha1": "261048175a4f2bcc038b28a3a0c3075e5f384438",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086353_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "28e0fae10b7b5ca9b69c7f7ccbd37cae39f4b1f2e7afa260872a517d5d1399a2"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "879d9210e050227afef198435fecbd914d9489f5",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086353_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "a6079034c7da2e4e54024efbadd966c68625934b95c3f9159c182e781976f64f"
+    },
+    {
+      "git_blob_sha1": "c783f41d3e0755658e6894267014257895265cc8",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086354_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "69d2faed9f08464725120eec8f065ce830050bdc10ec03ac20def849e4f3c351"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "a81f14224ae9d23a3239893de01aaeed9711065e",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086354_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "06e8c94dfdc70b9dab116bee6777f5a78d8f6cf8240af322001cf46793461b4c"
+    },
+    {
+      "git_blob_sha1": "72e911dc8de7715ddd3fe2ba80d665e70056596d",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086355_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "1b281960f3810142887d2a38c853a85bec16e8abcbde1b7925852a180dbb8a61"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "77b701f1735a76dcfe505f714094edbe5f642c20",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086355_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "c445dc9b29739e903dadec5edf7633bfabaf293e840ec6e113749b4f89202a52"
+    },
+    {
+      "git_blob_sha1": "4af2e72cc8ccfa758755005ea5d83ebbcabcd818",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086356_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "7a2704dc9b17916cd403de568feb2be81200b8745992226248b805ba58ca5f7a"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "bca27c1cdb887001e197d99a782d05fe63c4a2c9",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086356_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "1db085f92c6b63dd100e0e54a1100ac4406ab3ce90a180d1f8db553519c560d4"
+    },
+    {
+      "git_blob_sha1": "1cf07bbef72199a675f6cc5599aa5987e427cbf6",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086357_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "82100eb25537a128ebccbf605926a32c9410dc2a99d9301689d77eae44e9b954"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "1a8c67b792eac17b369dee06410cf81bbfc5e685",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086357_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "d6185ac7c4a5d409438e4e4e416d28e18dcc93c41d2b43fcea291f0c93ee53a7"
+    },
+    {
+      "git_blob_sha1": "ad17019e98bbc7fd9abb3b61dff9896639fa4398",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086358_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "5282c26e85345b0834fbd676c38cb84fad9ab7b36e685f6c23ce08edd1d9b728"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "076fa3b06ac9397054157c078de54a6be2d3a03a",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086358_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "53f80f2aaaee205fc7bb9de60ef250e7b499c30b6b6553b6a18457ed4c27aeaa"
+    },
+    {
+      "git_blob_sha1": "816e98da6114316977ec6cf1872ddfe129d68bb7",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086359_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "9e09fe05e079477ca4026a7c5c5ed8df07fe53e0968363f82ab3f70a3f9caca9"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "0245ed9f4a144d688bbc3d3fde0a469fcab721eb",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086359_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "e1600aef927f06dd1b1ad99bdc11c6b0617141a28ed2cf181a1fe72e93f4b769"
+    },
+    {
+      "git_blob_sha1": "69375767df8edd40b368fd1b987668af316a23b3",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086360_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "0c6c88b9684276c2cdabbebec3d1713fbafb3ce7d5157d2cc9b1d9c53376bd4b"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "0bd2acdf781922be7f626ddf8b9ab7eccd484eb9",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086360_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "949080ba2678d36e1bff9384d7fae3cee95babed0a3dc0af2b621812f04df2d1"
+    },
+    {
+      "git_blob_sha1": "897907743766a9236a07c53aa8054c0f46aad5b6",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086361_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "4408a808d3ed2c99e5851ac1c07ead1e83bd00d38a902ea271a1dba052721713"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "d919b2550cb43999299aa87e6bab6cae800f1278",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086361_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "6afecb9e9bf94e777e18b0fa1d4964571e3ee4658ca9bbcb19b8dfd166cddc92"
+    },
+    {
+      "git_blob_sha1": "fda1d9efb41403010bc583dd37a6234bca77993d",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086362_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "8db179895e26a7e144d24ccac4e085e36062b6413668111c6e62edaa00db188a"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "ef1ea50cdbcc288776b8078b693af4683ac9cbf7",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086362_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "5f0982fcbb7e15a736eeab64ce2c0a3ff485a52521ae6624a1cedfd5b0a83cdb"
+    },
+    {
+      "git_blob_sha1": "f265b5551b1d1aca8a1b5837591a1a3842228dea",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086363_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "d48ccd2c50a903c395c7bd61a9c97e132b4af328ef1c8932b12f1efabc9ca1bc"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "f5ef8179292537318dceff6729c0b4251b391ac5",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086363_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "1b4326c7a7d46993d92125bada06290a24c55b74ff964ceebdea9be09ab361ce"
+    },
+    {
+      "git_blob_sha1": "652e96683f144f2ecb88defa1815728660de5366",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086364_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "d361ee5857be1393dfe3ec6df0fdd95b9be52a2081eda9deade5034a29f30286"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "b907b9bc8f18d855f1df2124b141abf47f053b81",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086364_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "b47b6f6d31f9f67e42d66bc9f96f51317792f340d01164a43b0868e289343017"
+    },
+    {
+      "git_blob_sha1": "5a1050468c3217fa59c2c764161ec087768ae572",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086365_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "34366bdee3b4281f98825222e052225a4b714253f27d1f84f9dcc7082e69e240"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "88ce1b8d4ecfd02e5847c0b9e8c39250ab30d068",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086365_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "88caa50f35462a4c2bbc15a2392134ae774bce0899c422f7a4d89e0e8648062b"
+    },
+    {
+      "git_blob_sha1": "623614dac8abf482e3611315e8ae75c326a963e8",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086366_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "eca96ad54ad1b957851350ad29bd75da11060e1385c60f106905391abe9539bc"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "5b823623bd8a4f3634a82345265639c52c5a4510",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086366_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "51c200df87f8f8af411b1da39d7c0bf5601060503a7898b1aa57b3bf153b3e33"
+    },
+    {
+      "git_blob_sha1": "162d492a940fd821d1f97e2a1b09aa2ee98e9268",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086367_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "f22320a75e1215743425176a716f34630fcb5ed6de93196a0e2b7656f3ab5609"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "e477f622c1ce06d47f4c544b667b6e47b769f862",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086367_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "5ff6171cee80628e86971eec9dd6ef6fb1a9046403e845cfc06ead0a8453d87d"
+    },
+    {
+      "git_blob_sha1": "6106afe4d3b6fe117cdca67a64a81922880fc9d2",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086368_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "6019814f963819e7c0d661b706bc1b2deae08ace47e04cf7d10261d285fc81bb"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "fdc879f9e0680cf48aa80cc894e96d9b2076d571",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086368_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "1d5a2e5cd7946e25f3a0d4414e1368176434419dd9e0a73cff8c6ef6110422e6"
+    },
+    {
+      "git_blob_sha1": "ac63e1be46406e7b16e7b2b66e68eb00846b4602",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086369_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "9417b5c47ec2d9c57c4e5a920496c68aec0a68c4dcfa844c54f8edd4190fc59e"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "7a0c7d8a3a9a4d9b8f619d0bb643b338496860d8",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086369_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "f328e1c5815040b99d0afffb7d44e36d8c78c643570f9383ddb37c4a0cf4b8c8"
+    },
+    {
+      "git_blob_sha1": "05d56a896ff1b0a183bbdb5c18273b04f9999c37",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086370_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "daa0988f06dbb38a81f1bd69fdd29e057f1cb5144d01f8551b6cfa76a0750006"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "1620a442f0af2429736b92b7bd2378d17ca8cc4e",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086370_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "c41e0acc190d226b04c063b5bf6ce99ab144b277520eafc3f7cce2d308dbfe03"
+    },
+    {
+      "git_blob_sha1": "2269801cc3e14632fcac8fcb920857e8ab0460bc",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086371_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "57c6298c2c359d259cfae357cd84ef7fdd83061edee56daf8c7c2931ef8c7c26"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "ff95b0aeb8a9d034015e4d5aedaf153bc75f7871",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086371_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "26837dc67a240d4c8acd741b5960711676b6c272de0797ff6a460bdbbf88f2b8"
+    },
+    {
+      "git_blob_sha1": "793d536f52183fa5fa04c97d0f758c5244589b7b",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086372_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "0cbc973af11b6cfe87bc8e0edb15fcdcd76e44acd9e71bb0243151f4d47fea2c"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "804d6bb8f1dba9ea3d68ade5f4d9e779dbb36418",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086372_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "3236affba3f0cb3788571497a10fa168419219c85fae3a182fb3be2f22f863d0"
+    },
+    {
+      "git_blob_sha1": "3347cc08c2fd0f5702d16332ad553d1ee238da71",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086373_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "9ce451cde91f38c45eb44b51caf6d39e114f05318d27b15c86c016a285f37aab"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "6b264d547016a48d90671f5d2bf8d82971b12ca5",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086373_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "2c221089491da9dca7da8e84a654e84b371fe115457e5a53abd3780edd228a08"
+    },
+    {
+      "git_blob_sha1": "c60e85c9441ef3bbbd0301f383d4d9b6763fd474",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086374_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "53e0ffeca69764fa7889d97e9c81cc0141b02be7950ba6ddc5998e34d18e48d0"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "38ee3002f7065f2b8d53f423ad18e9f920ea7a79",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086374_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "13b091f70a335889021b615e87ce22a83379259243af285b14fdaea8d4bcb96e"
+    },
+    {
+      "git_blob_sha1": "fc48105577ec4d3693e7d1dbdb6f382c12ff91d9",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086375_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "8a7b85e199f7334a4d9d2dc5975eeac4ea7004482f6dd42212b045e2ff18eb2e"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "bffa125fe7a387053d87960452b6d30aa0f07799",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086375_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "a68bea30c8279862f1a86d1b5d8312a09d0b9110ad80e4542c112eb76f312682"
+    },
+    {
+      "git_blob_sha1": "9afa216571d32abc86516d9e4b0adcf6ad53f524",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086376_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "507a57fa667c1fc6fa7cd4dc4c394f223c6f9fe7c862880e8820cf9e160a28b0"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "447c6557a6a7607dbb0296070ddb55f59a7d42ef",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086376_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "8e48b9db245af86c159dfb4942c7d5334e54e81afd30bf08cf7ee9cdf1ae0479"
+    },
+    {
+      "git_blob_sha1": "e18e71f6a6e098d90b45c6bb0ba6a98be5b4bff4",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086377_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "6d5fe469aaa3b927a83b2b211056c429c4f2c2caad374506a4f9c540e3afa343"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "54e05b92653bd4c98ba61878ac9988ed0fe10aa1",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086377_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "885935dbb427e0272b9d13298502a229b1f3e82da646f5ac767d748b8593f8b8"
+    },
+    {
+      "git_blob_sha1": "cd95a283362e28384557a802b2d5d88c4802814d",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086378_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "619331fd24b91044eaa353b9baa5ef3d61d77eeb6f5fc2909d53f39a8d831ea6"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "2ded453ef3134be06f0141d5e47398518f8e1319",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086378_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "004c36d00bce25ac72324592bb2eaee0f0df00216756b3301820ce1bb7b4524d"
+    },
+    {
+      "git_blob_sha1": "fe1b220def8fe57c84ccaac7e41a3eb5824a136f",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086379_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "40035544c6c06c5db4082d4e1abbdd802e29900691a3e1c23297de6d4ee95fcd"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "fdcf3d4165ec163767312076e507495115e8e78c",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086379_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "9e5a435cf34fbff8c824bb8176dbcd1d9b55807af311ccc770fff80d742ad8b0"
+    },
+    {
+      "git_blob_sha1": "2cb16488c9fa5eb8752f8dec93abb13de44488fb",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086380_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "5b86c3ff5d9391a25e977c0cf8377e6b06d25d23e96aaefad6ed57cdbb0dc220"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "22282fc149eb3860a6ff40cd31fc792ff5c519c6",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086380_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "8f5cbbfc61aca5b3cffed3c9464a5b12c2175f331ff6b4d57e265e9027ee7ea6"
+    },
+    {
+      "git_blob_sha1": "8a400a3c5fe1d068c56477af1c3175d2b2576c68",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086381_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "dbe8f3199957263aa46c8058474ccd53dc5e7f620e90faa28e6cce4c20378ece"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "c6b19375336088af7e510145131f66a46a838718",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086381_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "eea570f16e630c766c3e146399319a9d9c7c1d30caaee1daadbb98787e547c51"
+    },
+    {
+      "git_blob_sha1": "2b1ac65d627d5ddbf5acc8f063d3feeb4dbc06b9",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086382_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "6df098e987a7b6ca26eaaf88186001722d782dfe5b1ae78e6af0ce67ca09c3c2"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "d058fe6d9d3f6ddcc53e343ea7101a99b7c51f2a",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086382_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "3907c0da0179411f0b9d2641ea0fe6e8ec88be290a35cb88056237ea16f90b41"
+    },
+    {
+      "git_blob_sha1": "3a47e8d2f1d8348347f5c77b7c25fdbe47972b9b",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086383_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "b8dac95694a32cf801b916f56199d2c2014ee27cb2ad69223e7a08f00234e581"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "7f3e48b94aa169bdd6e3f08ca8e3f757834617b0",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086383_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "da06761ce2e63f30ff275900ad599ffcf63be834e016a5ccb1af692481c0d0d5"
+    },
+    {
+      "git_blob_sha1": "d7de8a632bf52e6631c3456e8dd7a18d2d8d13eb",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086384_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "8ee00252bb9789663f406ce3ee7642abf831d359fb979b3e36c650459824a8f0"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "d01d6853a75ceaa43671026b5df28e7a6397e8d8",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086384_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "29ae2242d5243d30ea6391b26e784d78d5c8dd07b6fec5a92e1419e40f65801c"
+    },
+    {
+      "git_blob_sha1": "821df08f521d0f7d74e14b5f921dc969209bd57f",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086385_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "ab645a89b9c3e0ebbf062df1ca4df00e30138593144e639044747b0e5200a054"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "50ce15a7cba38e60be2edaeeabbcd9add11e0e52",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086385_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "165699cd68b84cd072384aa798a5ad1db855aa19b2f06b09915cfb01ab7a422b"
+    },
+    {
+      "git_blob_sha1": "9e507d4df214077c4666082f2ddac76478c1bd49",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086386_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "ac76475b1d4e8bd76ee2a6b7d85c8590aa23abea48d3ca4d9d3746b3cfcdc6a7"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "f895e6416e93016279e2885d940b6498f2da7fb1",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086386_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "61576871b6f7abdbe4b25e3605cb6a394af8249710abfe3500cee899a4493e3f"
+    },
+    {
+      "git_blob_sha1": "b11a84c375e93ac673a949aab92ec631d2aa6c1b",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086387_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "08e3ee866eacf77d1b28f068c088a57fbec03297586e26c7a85a8d7cdb0cc31d"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "f20ef45c3e42b1de26557cd8c108296c554811a9",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086387_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "339deacf2b4d7bb520d4b0a44145f4a832c3c2b158ba0aa77881b81e34c972e3"
+    },
+    {
+      "git_blob_sha1": "61095ba208e9bf999a007d3e45e028437f028741",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086388_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "b28b4d0e31e87450d565db30c131c3cf00ea4ccfd56e62ca22817522e5ef60ec"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "5cf08ff439d285f814551510e3102440554ac03f",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086388_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "573019430242c2575cb2aa3aab07cf9c1b38cd549715a018e32c2f63aec73e52"
+    },
+    {
+      "git_blob_sha1": "fd208fa6be768163a1980a81728a509cfd9ce2db",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086389_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "0b65038143c38ace341fa7b2106bb88c42427579ba96d5569b0c4e10ecf7fcd2"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "6a24d98dbd60838826b503ecff3320a44d0e1fe2",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086389_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "cc8dde8c80be83f4a78b985599e340a738dd79a8fbd37a5be1e9606f422f6a2a"
+    },
+    {
+      "git_blob_sha1": "5ef3b69bbe5dbe2ca625352de4b7b6fe4a6c60fe",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086390_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "fd03478e5c2545b947206c7f6e51aea53ae7277245f64e4ab11d9d9397c38d9c"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "888fd64d2b00e703a39899f05088363d81f6c52c",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086390_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "2f72fa41d9fbc44ec8ba7fee663a0b279798deeac38665743f8807480f16c778"
+    },
+    {
+      "git_blob_sha1": "2716bb212b94d0ceb5650ede0348c50436408cf4",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086391_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "cdf3cc1a980327803bbc8bf312c3b78a07b97ee84cb5b788579c6e65395db1b8"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "2e25a007233349d0afce12ae72d7f0298b5532ea",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086391_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "1e0c9fca14bbd6e0a0e5d9b2e0a13cb1f3b7f9ac92e5035dbab00db19fd7864d"
+    },
+    {
+      "git_blob_sha1": "64275da6cd97ef243a6d3488e1d7b0c779ace819",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086392_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "ae5767b729b90b6d41b1767ca0a16d781f66320b2a733c5c9dd299f9ab1eaa3f"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "7175bac945fc8663f3364172a4f8563fa34d9dcb",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086392_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "96bfc28f8ec7a96fb5eb4b5767f68226e546faf2cde1ae0fb09ac854c20da5ee"
+    },
+    {
+      "git_blob_sha1": "2218953d8e4086a7f25c999f773a325e616686ed",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086393_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "99e062fd88025ec7218ac7ea736f65ba1fa264314fac6fa455f3e55d311113eb"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "f7d2b89104adf1307086b7e1fcac118b85a64e8c",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086393_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "5caffb6f9628cb9130fd253b6a6ba46d23a706d10a20573090dfaf34c460293d"
+    },
+    {
+      "git_blob_sha1": "6a39dca60c89eeab40673ad49e2c43f65890f5eb",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086394_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "8cdcaa3b611ef25db5d447d308e60d0563e4084ebbbac39cfd40da1c9dad8282"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "9f416f07688f7f2e06f9e263a1bff9a6fac858d0",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086394_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "209166b05a17116a21a34b46cb43cf70e889362e59efa140c304ce5767533032"
+    },
+    {
+      "git_blob_sha1": "952b0e32568dbe868bfc2643bc1cade35b3fa40e",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086395_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "7decf38dada0d1640ca0228ea93bcad17ed7325add55bc4c91b86323860db8e5"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "de843beef9762aa17d8e6d1a69e70a00cb488a25",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086395_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "016a0ad04ef84710fb3eab0e2b4375d0655786176992c22f03f996621fb0e656"
+    },
+    {
+      "git_blob_sha1": "a22ccc8db41c76b8cf69f2e9521f9a02416c3c75",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086396_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "ed8fc94ddaf1bdf7b9d463b236f6c80c207eb07c7d7653747159067d9c97f329"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "8ec76f14b2b0d167d16f4e60528ef9c6d91489b7",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086396_steps_attempt2.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "e12cd43cd4537bdf7e790027d12925b504f9966000cb05c2aad84b5055789f62"
+    },
+    {
+      "git_blob_sha1": "5d496568f5c25787017a1ef5306647a075bd49d7",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086397_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "dc3338f81d0ea670aae4a5771c02a2f3093c54096b7c191599cf06cce84be7bb"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "33ae19b84d32dc818bc6088772f26ce7d719379b",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086397_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "d01140c1fbcb37e950225dce5030edb15e3ea97cb8d5c1fd5e75cdef4ffbaf04"
+    },
+    {
+      "git_blob_sha1": "4f002d2d722037f6dec7dc7282eb35b68b7fdb27",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086398_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "c72da79cdae1731e30e42cc3df44b64895f9d34cfb1eb0e21fc2477ecd8dd844"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "6fe938a16c49e5ec7f2cb81b588e0fde0f376222",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086398_steps_attempt2.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "84727ea5dd38ada4a67d8348b1fa40604b2b8f6e7df576e14af765071a106aa1"
+    },
+    {
+      "git_blob_sha1": "119fa4d35aab986440d1debf12130ede1474e719",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086399_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "473082c00b68095013a317d6d7bb030dd7ee59aa5d80e9114f3d177fb9b7b8e5"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "013fd161bd74fbe4e86fd03d18f942f3becd09a2",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086399_steps_attempt2.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "340c908e52849c29968c3e4c8b29a8d7b617e67f42914231e3b35910f8fb87a7"
+    },
+    {
+      "git_blob_sha1": "540d24c56c7cbccf4809be9009599eb3b303dcb2",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086400_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "796ce9fe3d18b809fbed65c19924540b547f1720824b9a137c44ad5b0197d1a4"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "35fddedf6948183ca48ad0aaff12e26f8c6e3e25",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086400_steps_attempt2.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "ffc101d9c1c35aad01f4094eebc2e46749b682e991346737999cd5f83c7ad233"
+    },
+    {
+      "git_blob_sha1": "6bcc8728dc9d213846fb4840c39aeeb4b468c404",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086401_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "78557c0b7442093da1026b8d1e7022ad742cada5a5956ed79dbee56f36523802"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "ea399f807bb9e12ab9a2b279c30b661795e89fa9",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086401_steps_attempt2.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "a4e09f1d9946437ccc9eb9c59fb29f96028c3c4b2762a3cc9ebcb1749c570b8c"
+    },
+    {
+      "git_blob_sha1": "99deb19f065ce7bf81c722fee607e3449731b0ea",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086402_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "8855bd68196571b5408b1ad5bf1786430e00ffa280fb602255dd4e3379170772"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "d4761ace8d68611ad813ee180dad86174347a2ba",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086402_steps_attempt2.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "a135618e18f4af0bb0863fa5d94514ce2af1ca25bafa319c6ebd292de6a4513d"
+    },
+    {
+      "git_blob_sha1": "3e092a2d3a5e0bdaad9666d940d35a47301f5900",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086403_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "db1e3aa967363bcbe02e84da20e1fea003fccb61d109e74412e3a0dbd0211359"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "be90eaa379e697442added06b23b19d9251f1fe5",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086403_steps_attempt2.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "17c232fbd0fe7c93ae162798672cd6d679b4518d746fc301a5fe0f6afc9f16d1"
+    },
+    {
+      "git_blob_sha1": "18eab8bed24a5810e58a46cba05c42e819567c60",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086404_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "d7fa3c7d52f8e9db91087867ed1079e27624ff1d0afac7fdb3c93565f54dae46"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "79af643145559d774571287e37959c0697cfb3ed",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086404_steps_attempt2.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "c34e8479d77b6d256239030cb9d60f9cd55ef1b90e49aafaeb38da7dcc618ee0"
+    },
+    {
+      "git_blob_sha1": "39ab2c4ac437e50db5a393bc203575ea377dd738",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086405_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "aab22a1db4a0231b5f6c5fc1c50fe2dab4fb7da78a36da42d3f152d6e69fead1"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "9c1dd782a2b2911ace7b0be348bb4f115f52c93c",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086405_steps_attempt2.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "334e4b553b7ad2ff1581005d2e500cac774568e395f6ecd9e75457ac74d40e5a"
+    },
+    {
+      "git_blob_sha1": "fa30f9f1112edf836160f63d1bb710c7c4080198",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086406_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "a23f1578477422d237d133c92451e87b5b53c90cc0e90f152dd8e73e27851c05"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "0d1344df32d555f9c212cae7b0f22d7702825cb7",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086406_steps_attempt2.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "354d8917b5b6dab9b38211a3af58a50f8717e842502059961d6c09d327cca8f5"
+    },
+    {
+      "git_blob_sha1": "83eea980128e763421eaa917ed2801b9d6a27742",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086407_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "1e5d086a7fb5a79c1774a6e18727395ed7b81ed7cc037d0e12b02cd85b7c55a5"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "7600929e66ba0a0f568e34fb7a769bd6792ca7dd",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086407_steps_attempt2.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "5e229063d07cea1f95a772249f5086c7fdf259e8db47c7be9fc259c02011e05e"
+    },
+    {
+      "git_blob_sha1": "77f00c872371c9fcb19f29d9b69de60f32e1b8b9",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086408_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "b7b37df613ee97fcdd21f68e568473098a26bc1542ee5b2b0653a835c5489c37"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "c3ff7ecb1d53e7ae1f0aaaa809f4832a1fae1a4d",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086408_steps_attempt2.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "9e0833c4b89a2ebe8391ca4ea43dd0fd8c2ba71ca8d574159317d0a15de030d9"
+    },
+    {
+      "git_blob_sha1": "dbfaff4fd3b52f08f087bef32b9648e0c78e9ce9",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086409_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "96d584096b7274449caad9028408c6babcdeecc88fbc59e9eeea5fc5b023c61b"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "c9366cbbfd3775af26297191ec0080699386a7f0",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086409_steps_attempt2.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "c915ee4ceedd8d5a57a01b882d0270693ede6b3cb116b243d46531848088b99b"
+    },
+    {
+      "git_blob_sha1": "1dd9ce272fd33c08d1846acb6cda4b916c9792f7",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086410_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "28611be08ac88ab47dacfc2af72a2d2a8a6614321e86610e705ff5b76c6073c0"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "b007fa9756d6eee56d13edad24cf3e67f87da8c3",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086410_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "92c032aba8d38cb583e142cb3729e0638b6c6aa95a0eeeb2037962ca750ca0bf"
+    },
+    {
+      "git_blob_sha1": "c638b6a66d150c06119ee31d8134ff3c12ef493c",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086411_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "bb9194c7f299fd8ba1020a3939e89a677971494eb901d129e72ef2c0115de1b2"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "33ada04b2bc3542db82548d85493f51053fc21c5",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086411_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "94b224ee2e4c1b5d76055325480189c5e0d49fbb51825a18c3751c97bf18fe9c"
+    },
+    {
+      "git_blob_sha1": "ccd5f5ea023c9d6e2674d9a11ce115fa651a2655",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086412_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "a88339bd43f378bea609fc34a970ffe212d342594738f9e751404394c7343ca5"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "6bc049d3b839d5017110f2199d4166848ea72974",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086412_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "3bfe3cb93b2492aaf653b8b545218ee4bc54d63bf7c74f9ef6fe117ed441baec"
+    },
+    {
+      "git_blob_sha1": "4651b0ad3d938f61a195bc359653a09297bca847",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086413_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "5e11abdc7eaf68207336f5b9cd96609a8c44e0faac550917cbbbf61b145ec7ab"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "8c1285fbe33a0ecfea99a8b010069231b7928788",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086413_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "31329a7219c1316be554939b9d9fee937f3097ea8ffb0cd89a9cadb570090638"
+    },
+    {
+      "git_blob_sha1": "d2b76c46e9328226e9b48c94332cdf00402ef5ef",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086414_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "d1ba412a88255641dd89e859c01501021771b0045e96359fc5bff559d7e012d7"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "2939fb8ee3eecc95985852ca02d6005f675909d8",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086414_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "50296af2e2eb3d5ba4745e7ba60c1f8534e124afd62e5b80684a8828c4c541b1"
+    },
+    {
+      "git_blob_sha1": "e02362af04f934a5fe69b53ea1ca2190c8b5ac0d",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086415_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "79017cebe3be3816824d21447f9ddf4ae5a2baf1e10a9fd46fd098a9f4f68dcd"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "2417935e17175d70e9d821ff710947788ee30e39",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086415_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "e498eff67e5be5d1d197e83180f866186a62004d98dc9195328a28df7253cbc4"
+    },
+    {
+      "git_blob_sha1": "edec801aedb23770735a7f45ec85bc638a06e418",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086416_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "a559db47bd8f623761306e897cd39e2d703a45f9e863a9cf6bf24b001eec4df5"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "1e76d52e46821ff0de1fc0d336f84b194c01378c",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086416_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "ef596d7dd44d38803c06d2a36d259c5ddc00f9b27722480915d6d628a87db2c4"
+    },
+    {
+      "git_blob_sha1": "e57980fe1d3390d5f50bf0a2b47d61ca89040263",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086417_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "b5f905ce9404ae5465e6a4e993e2fdfb589a94ede5b3e9ef57260c9beabc1359"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "d7266939fc9f82dc3ade93305bad2c9affa4187b",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086417_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "0e393decc2b72cd851d5dd201a741f759024c668096d1814317e34a6d0f04913"
+    },
+    {
+      "git_blob_sha1": "2041c68657d8a87c97dede2cd768700f72a49965",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086418_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "304a04e93a536730ab19670b76e9e833464afba174ea55ab825da6c4a6b59883"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "0a8cf6e1ead132472eeaa772d454622dba7a8078",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086418_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "006914d860d4eef0d35e36f20e46dc4b39e1b7765560a0e717ac52b0fc97f218"
+    },
+    {
+      "git_blob_sha1": "5f17ff1b4a32cb1a98a11ca3b491db1ba3e617d0",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086419_complete.json",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration completion record",
+      "sha256_lf": "c128995591d40a013961bdc8718d12b744caffb26ba129420b12e96e64a98250"
+    },
+    {
+      "completion_record_hash_verified": true,
+      "csv_rows": 300,
+      "git_blob_sha1": "cb91acaf35db58595c2e8c10ea870ac273f9b23b",
+      "path": "simulation/diagnostics/detector_run_cal_H_1835086419_steps_attempt1.csv",
+      "read_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "role": "calibration raw step log",
+      "sha256_lf": "8f4014f7ad37b668980f2b00020e8b8fa2e74cc563e91d9be39256e697a8be2c"
+    }
+  ],
+  "machine": "YotkoTest",
+  "manifest_self": {
+    "csv_rows": null,
+    "path": "simulation/diagnostics/detector_run_r2_manifest.json",
+    "reason": "Self-hash omitted to avoid recursion",
+    "sha256_lf": null
+  },
+  "no_detector_evaluated": true,
+  "no_model_stepped": true,
+  "numpy": "2.4.4",
+  "outputs": [
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/detector_run_r2_constants.json",
+      "sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/detector_run_r2_derive.py",
+      "sha256_lf": "531d710a2781ce951931916033077d1ad759063caa02b2f83b8204d6f98f87e4"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/detector_run_r2_report.md",
+      "sha256_lf": "923b3ccb4e52770199c952eeedb4b8eaa4b5286f71a3a9f8e6c837f8bdfa111b"
+    },
+    {
+      "csv_rows": 360,
+      "path": "simulation/diagnostics/detector_run_r2_spans.csv",
+      "sha256_lf": "a8c1bc144bf096f9001fc22004cd71406c9976f5909e768d8ce6f6532643f4f6"
+    },
+    {
+      "csv_rows": null,
+      "path": "simulation/diagnostics/detector_run_r2_t0.json",
+      "sha256_lf": "d1134eedf7bfc89a6d31587142455a724deaedf2aed8d17e64fade3295757541"
+    }
+  ],
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "sha256_basis": "LF-normalized bytes",
+  "source_pins": [
+    {
+      "committed_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "current_head_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "expected_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "git_blob_sha1": "cffa1d922c70759b3619856247a3f1ba3dbfdce9",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_round2_design_note.md",
+      "phase": "completion",
+      "t0_committed_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "t0_worktree_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "worktree_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632"
+    },
+    {
+      "committed_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "current_head_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "git_blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "phase": "completion",
+      "t0_committed_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "t0_worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+    },
+    {
+      "committed_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "current_head_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "git_blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "phase": "completion",
+      "t0_committed_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "t0_worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488"
+    },
+    {
+      "committed_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "current_head_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "git_blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+      "passed": true,
+      "path": "simulation/cusum_detector_v2.py",
+      "phase": "completion",
+      "t0_committed_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "t0_worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+    },
+    {
+      "committed_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "current_head_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "expected_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "git_blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_eval_executor.py",
+      "phase": "completion",
+      "t0_committed_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "t0_worktree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "worktree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff"
+    },
+    {
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "current_head_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "git_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "passed": true,
+      "path": "simulation/metrics.py",
+      "phase": "completion",
+      "t0_committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "t0_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+    },
+    {
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "current_head_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "git_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "passed": true,
+      "path": "simulation/agents.py",
+      "phase": "completion",
+      "t0_committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "t0_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+    },
+    {
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "current_head_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "git_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "passed": true,
+      "path": "simulation/model.py",
+      "phase": "completion",
+      "t0_committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "t0_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+    },
+    {
+      "committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "current_head_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "git_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "passed": true,
+      "path": "simulation/attack_adapter_v2.py",
+      "phase": "completion",
+      "t0_committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "t0_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+    },
+    {
+      "committed_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "current_head_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "git_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "passed": true,
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "phase": "completion",
+      "t0_committed_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "t0_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+    },
+    {
+      "committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "current_head_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "git_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "passed": true,
+      "path": "simulation/working_factor.py",
+      "phase": "completion",
+      "t0_committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "t0_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+    },
+    {
+      "committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "current_head_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "git_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "passed": true,
+      "path": "simulation/constants_v2_stage18.py",
+      "phase": "completion",
+      "t0_committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "t0_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+    }
+  ],
+  "status": "COMPLETE",
+  "t0_stderr_warnings": [
+    {
+      "command": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit": 0,
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n",
+      "stdout": ""
+    }
+  ],
+  "write_guard_violations": []
+}
