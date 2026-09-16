@@ -1,0 +1,301 @@
+{
+  "amendment_2": {
+    "common": {
+      "first_fewer_than_two_novelty_vectors_step": 264,
+      "nonpermitted_increase_count": 0,
+      "permitted_after_step_0": 46,
+      "raw_entropy_exact_matches": 280,
+      "step_0": 2
+    },
+    "factory": {
+      "first_fewer_than_two_novelty_vectors_step": 264,
+      "nonpermitted_increase_count": 0,
+      "permitted_after_step_0": 46,
+      "raw_entropy_exact_matches": 280,
+      "step_0": 2
+    },
+    "honest": {
+      "first_fewer_than_two_novelty_vectors_step": null,
+      "nonpermitted_increase_count": 0,
+      "permitted_after_step_0": 0,
+      "raw_entropy_exact_matches": 60,
+      "step_0": 2
+    }
+  },
+  "completed_utc": "2026-09-15T20:26:05.154698+00:00",
+  "constants_conformance": {
+    "checks": [
+      {
+        "channel": "entropy",
+        "committed_bits": "3fefa6aaee8ddd2f",
+        "field": "reference",
+        "passed": true,
+        "passed_bits": "3fefa6aaee8ddd2f"
+      },
+      {
+        "channel": "entropy",
+        "committed_bits": "3f6d13280adbf63b",
+        "field": "allowance",
+        "passed": true,
+        "passed_bits": "3f6d13280adbf63b"
+      },
+      {
+        "channel": "entropy",
+        "committed_bits": "3fc62b3fc68fd4bc",
+        "field": "threshold",
+        "passed": true,
+        "passed_bits": "3fc62b3fc68fd4bc"
+      },
+      {
+        "channel": "g",
+        "committed_bits": "3fef510e7ddba7ac",
+        "field": "reference",
+        "passed": true,
+        "passed_bits": "3fef510e7ddba7ac"
+      },
+      {
+        "channel": "g",
+        "committed_bits": "3f96b15723554cc7",
+        "field": "allowance",
+        "passed": true,
+        "passed_bits": "3f96b15723554cc7"
+      },
+      {
+        "channel": "g",
+        "committed_bits": "401207ea58711231",
+        "field": "threshold",
+        "passed": true,
+        "passed_bits": "401207ea58711231"
+      },
+      {
+        "channel": "L",
+        "committed_bits": "3fe78ddd4ef6be2d",
+        "field": "reference",
+        "passed": true,
+        "passed_bits": "3fe78ddd4ef6be2d"
+      },
+      {
+        "channel": "L",
+        "committed_bits": "3fad0077fda81a1e",
+        "field": "allowance",
+        "passed": true,
+        "passed_bits": "3fad0077fda81a1e"
+      },
+      {
+        "channel": "L",
+        "committed_bits": "402e17079e31d2ce",
+        "field": "threshold",
+        "passed": true,
+        "passed_bits": "402e17079e31d2ce"
+      }
+    ],
+    "identity": {
+      "detector_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "executor_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "plan_sha256_lf": "c1914b3c5b497832debfb08f302feb4a88fa158ad1f4fb8f89101dcd4ee75bcb"
+    },
+    "passed": true,
+    "utc": "2026-09-15T20:25:14.917189+00:00",
+    "values_passed": {
+      "L": {
+        "allowance": 0.056644201005884506,
+        "reference": 0.7360674421560752,
+        "threshold": 15.04497999532887
+      },
+      "entropy": {
+        "allowance": 0.003549173553323096,
+        "reference": 0.9890951785336365,
+        "threshold": 0.17319485850717864
+      },
+      "g": {
+        "allowance": 0.022160874873702576,
+        "reference": 0.9786446054615587,
+        "threshold": 4.507729894543943
+      }
+    }
+  },
+  "gate_2": {
+    "passed": true,
+    "pins": [
+      {
+        "actual_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+        "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+        "committed_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+        "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+        "passed": true,
+        "path": "simulation/diagnostics/detector_design_note.md",
+        "publication_commit": "76f81cd83e0db6ff5031070e54f2f908502b8632",
+        "start_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+      },
+      {
+        "actual_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+        "blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+        "committed_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+        "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+        "passed": true,
+        "path": "simulation/diagnostics/detector_run_cal_constants.json",
+        "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+        "start_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488"
+      },
+      {
+        "actual_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+        "blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+        "committed_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+        "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+        "passed": true,
+        "path": "simulation/cusum_detector_v2.py",
+        "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+        "start_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+      },
+      {
+        "actual_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+        "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "passed": true,
+        "path": "simulation/metrics.py",
+        "start_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+      },
+      {
+        "actual_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+        "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "passed": true,
+        "path": "simulation/agents.py",
+        "start_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+      },
+      {
+        "actual_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+        "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "passed": true,
+        "path": "simulation/model.py",
+        "start_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+      },
+      {
+        "actual_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+        "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "passed": true,
+        "path": "simulation/attack_adapter_v2.py",
+        "start_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+      },
+      {
+        "actual_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+        "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "passed": true,
+        "path": "simulation/run_attack_vector_revalidation_v2.py",
+        "start_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+      },
+      {
+        "actual_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+        "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+        "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+        "passed": true,
+        "path": "simulation/working_factor.py",
+        "start_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+      },
+      {
+        "actual_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+        "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "passed": true,
+        "path": "simulation/constants_v2_stage18.py",
+        "start_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+      },
+      {
+        "actual_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+        "blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+        "expected_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+        "passed": true,
+        "path": "simulation/diagnostics/drift_mapping_design_note.md",
+        "start_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748"
+      }
+    ]
+  },
+  "gate_3": {
+    "common_end_reason": "extinction",
+    "common_steps_completed": 280,
+    "configuration_equal": true,
+    "datacollector_fields": 77,
+    "datacollector_value_comparisons": 21560,
+    "factory_end_reason": "extinction",
+    "factory_steps_completed": 280,
+    "field_value_comparisons": 7560,
+    "first_difference": null,
+    "null_encoding": "null",
+    "passed": true,
+    "recorder_fields": 27,
+    "seed": 1835086199,
+    "steps_compared": 280
+  },
+  "gate_4": {
+    "comparisons": 60000,
+    "maximum_key_difference": 0.0,
+    "passed": true,
+    "steps_per_action": 300,
+    "synthetic_actions": 200
+  },
+  "gate_5": {
+    "action_modified_steps": 0,
+    "adapter_active_steps": 0,
+    "attack_vector_v2": null,
+    "passed": true,
+    "steps": 60
+  },
+  "gate_6": {
+    "identical_rng_calls": 60,
+    "passed": true
+  },
+  "identity": {
+    "detector_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+    "executor_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+    "plan_sha256_lf": "c1914b3c5b497832debfb08f302feb4a88fa158ad1f4fb8f89101dcd4ee75bcb"
+  },
+  "passed": true,
+  "recorder_conformance": {
+    "columns": [
+      "arm",
+      "seed",
+      "step",
+      "novelty_vector_count",
+      "h_n_latest",
+      "h_n_shape_latest",
+      "V",
+      "H_N",
+      "L_t",
+      "total_suppression",
+      "avg_wb",
+      "theta_capability",
+      "transfer_state",
+      "g",
+      "population",
+      "x_compute",
+      "x_bio_welfare",
+      "x_novelty_agency",
+      "x_institutional_capacity",
+      "x_transfer_comprehension",
+      "x_resilience",
+      "c_protective",
+      "c_suppressive",
+      "adapter_active",
+      "action_modified",
+      "adapter_score",
+      "shape_fallback_increase"
+    ],
+    "field_comparisons": 675,
+    "first_difference": null,
+    "identity": {
+      "detector_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "executor_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "plan_sha256_lf": "c1914b3c5b497832debfb08f302feb4a88fa158ad1f4fb8f89101dcd4ee75bcb"
+    },
+    "nulls_compared_exactly": true,
+    "passed": true,
+    "reference_blob_sha1": "a8a44d3330c9b5e2d0904ec58c17457ddb9e2326",
+    "reference_path": "simulation/diagnostics/detector_run_cal_H_1835086300_steps_attempt1.csv",
+    "reference_sha256_lf": "0dfc7753cc02343dae1a21848482ebbcbc1a1d7567045e2a0c4db0a37e34ba25",
+    "seed": 1835086300,
+    "steps_compared": 25
+  }
+}

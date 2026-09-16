@@ -1,0 +1,1222 @@
+{
+  "E1": {
+    "H": {
+      "counts": {
+        "CROSSED_UNDETECTED": 21,
+        "DETECTED_AFTER": 0,
+        "DETECTED_BEFORE_OR_AT": 1,
+        "NO_CROSSING": 18
+      },
+      "label": "descriptive honest",
+      "margin_steps": {
+        "count": 1,
+        "maximum": 33,
+        "median": 33.0,
+        "minimum": 33
+      },
+      "n_runs": 40
+    },
+    "M05": {
+      "counts": {
+        "CROSSED_UNDETECTED": 0,
+        "DETECTED_AFTER": 17,
+        "DETECTED_BEFORE_OR_AT": 23,
+        "NO_CROSSING": 0
+      },
+      "label": "PRIMARY",
+      "margin_steps": {
+        "count": 23,
+        "maximum": 49,
+        "median": 11.0,
+        "minimum": 0
+      },
+      "n_runs": 40
+    },
+    "M1": {
+      "counts": {
+        "CROSSED_UNDETECTED": 0,
+        "DETECTED_AFTER": 12,
+        "DETECTED_BEFORE_OR_AT": 28,
+        "NO_CROSSING": 0
+      },
+      "label": "PRIMARY",
+      "margin_steps": {
+        "count": 28,
+        "maximum": 27,
+        "median": 11.5,
+        "minimum": 0
+      },
+      "n_runs": 40
+    },
+    "M2": {
+      "counts": {
+        "CROSSED_UNDETECTED": 0,
+        "DETECTED_AFTER": 7,
+        "DETECTED_BEFORE_OR_AT": 33,
+        "NO_CROSSING": 0
+      },
+      "label": "PRIMARY",
+      "margin_steps": {
+        "count": 33,
+        "maximum": 18,
+        "median": 7.0,
+        "minimum": 0
+      },
+      "n_runs": 40
+    },
+    "M4": {
+      "counts": {
+        "CROSSED_UNDETECTED": 0,
+        "DETECTED_AFTER": 6,
+        "DETECTED_BEFORE_OR_AT": 34,
+        "NO_CROSSING": 0
+      },
+      "label": "PRIMARY",
+      "margin_steps": {
+        "count": 34,
+        "maximum": 11,
+        "median": 6.0,
+        "minimum": 1
+      },
+      "n_runs": 40
+    },
+    "R02": {
+      "counts": {
+        "CROSSED_UNDETECTED": 1,
+        "DETECTED_AFTER": 38,
+        "DETECTED_BEFORE_OR_AT": 1,
+        "NO_CROSSING": 0
+      },
+      "label": "PRIMARY",
+      "margin_steps": {
+        "count": 1,
+        "maximum": 16,
+        "median": 16.0,
+        "minimum": 16
+      },
+      "n_runs": 40
+    },
+    "R05": {
+      "counts": {
+        "CROSSED_UNDETECTED": 0,
+        "DETECTED_AFTER": 40,
+        "DETECTED_BEFORE_OR_AT": 0,
+        "NO_CROSSING": 0
+      },
+      "label": "PRIMARY",
+      "margin_steps": {
+        "count": 0,
+        "maximum": null,
+        "median": null,
+        "minimum": null
+      },
+      "n_runs": 40
+    },
+    "R10": {
+      "counts": {
+        "CROSSED_UNDETECTED": 0,
+        "DETECTED_AFTER": 40,
+        "DETECTED_BEFORE_OR_AT": 0,
+        "NO_CROSSING": 0
+      },
+      "label": "PRIMARY",
+      "margin_steps": {
+        "count": 0,
+        "maximum": null,
+        "median": null,
+        "minimum": null
+      },
+      "n_runs": 40
+    },
+    "R20": {
+      "counts": {
+        "CROSSED_UNDETECTED": 0,
+        "DETECTED_AFTER": 40,
+        "DETECTED_BEFORE_OR_AT": 0,
+        "NO_CROSSING": 0
+      },
+      "label": "PRIMARY",
+      "margin_steps": {
+        "count": 0,
+        "maximum": null,
+        "median": null,
+        "minimum": null
+      },
+      "n_runs": 40
+    }
+  },
+  "E1a_SECONDARY": {
+    "M05": {
+      "counts": {
+        "CROSSED_UNDETECTED": 0,
+        "DETECTED_AFTER": 15,
+        "DETECTED_BEFORE_OR_AT": 22,
+        "NO_CROSSING": 0
+      },
+      "eligible_seeds": [
+        1835086500,
+        1835086501,
+        1835086502,
+        1835086503,
+        1835086504,
+        1835086506,
+        1835086507,
+        1835086508,
+        1835086509,
+        1835086510,
+        1835086511,
+        1835086512,
+        1835086513,
+        1835086514,
+        1835086515,
+        1835086516,
+        1835086517,
+        1835086518,
+        1835086519,
+        1835086520,
+        1835086522,
+        1835086523,
+        1835086524,
+        1835086526,
+        1835086527,
+        1835086528,
+        1835086529,
+        1835086530,
+        1835086531,
+        1835086532,
+        1835086533,
+        1835086534,
+        1835086535,
+        1835086536,
+        1835086537,
+        1835086538,
+        1835086539
+      ],
+      "label": "SECONDARY",
+      "margin_steps": {
+        "count": 22,
+        "maximum": 42,
+        "median": 10.5,
+        "minimum": 0
+      },
+      "n_runs": 37
+    },
+    "M1": {
+      "counts": {
+        "CROSSED_UNDETECTED": 0,
+        "DETECTED_AFTER": 10,
+        "DETECTED_BEFORE_OR_AT": 28,
+        "NO_CROSSING": 0
+      },
+      "eligible_seeds": [
+        1835086500,
+        1835086501,
+        1835086502,
+        1835086503,
+        1835086504,
+        1835086505,
+        1835086506,
+        1835086507,
+        1835086508,
+        1835086509,
+        1835086510,
+        1835086511,
+        1835086512,
+        1835086513,
+        1835086514,
+        1835086515,
+        1835086516,
+        1835086517,
+        1835086518,
+        1835086519,
+        1835086520,
+        1835086522,
+        1835086523,
+        1835086524,
+        1835086526,
+        1835086527,
+        1835086528,
+        1835086529,
+        1835086530,
+        1835086531,
+        1835086532,
+        1835086533,
+        1835086534,
+        1835086535,
+        1835086536,
+        1835086537,
+        1835086538,
+        1835086539
+      ],
+      "label": "SECONDARY",
+      "margin_steps": {
+        "count": 28,
+        "maximum": 27,
+        "median": 11.5,
+        "minimum": 0
+      },
+      "n_runs": 38
+    },
+    "M2": {
+      "counts": {
+        "CROSSED_UNDETECTED": 0,
+        "DETECTED_AFTER": 5,
+        "DETECTED_BEFORE_OR_AT": 33,
+        "NO_CROSSING": 0
+      },
+      "eligible_seeds": [
+        1835086500,
+        1835086501,
+        1835086502,
+        1835086503,
+        1835086504,
+        1835086505,
+        1835086506,
+        1835086507,
+        1835086508,
+        1835086509,
+        1835086510,
+        1835086511,
+        1835086512,
+        1835086513,
+        1835086514,
+        1835086515,
+        1835086516,
+        1835086517,
+        1835086518,
+        1835086519,
+        1835086520,
+        1835086522,
+        1835086523,
+        1835086524,
+        1835086526,
+        1835086527,
+        1835086528,
+        1835086529,
+        1835086530,
+        1835086531,
+        1835086532,
+        1835086533,
+        1835086534,
+        1835086535,
+        1835086536,
+        1835086537,
+        1835086538,
+        1835086539
+      ],
+      "label": "SECONDARY",
+      "margin_steps": {
+        "count": 33,
+        "maximum": 18,
+        "median": 7.0,
+        "minimum": 0
+      },
+      "n_runs": 38
+    },
+    "M4": {
+      "counts": {
+        "CROSSED_UNDETECTED": 0,
+        "DETECTED_AFTER": 4,
+        "DETECTED_BEFORE_OR_AT": 34,
+        "NO_CROSSING": 0
+      },
+      "eligible_seeds": [
+        1835086500,
+        1835086501,
+        1835086502,
+        1835086503,
+        1835086504,
+        1835086505,
+        1835086506,
+        1835086507,
+        1835086508,
+        1835086509,
+        1835086510,
+        1835086511,
+        1835086512,
+        1835086513,
+        1835086514,
+        1835086515,
+        1835086516,
+        1835086517,
+        1835086518,
+        1835086519,
+        1835086520,
+        1835086522,
+        1835086523,
+        1835086524,
+        1835086526,
+        1835086527,
+        1835086528,
+        1835086529,
+        1835086530,
+        1835086531,
+        1835086532,
+        1835086533,
+        1835086534,
+        1835086535,
+        1835086536,
+        1835086537,
+        1835086538,
+        1835086539
+      ],
+      "label": "SECONDARY",
+      "margin_steps": {
+        "count": 34,
+        "maximum": 11,
+        "median": 6.0,
+        "minimum": 1
+      },
+      "n_runs": 38
+    },
+    "R02": {
+      "counts": {
+        "CROSSED_UNDETECTED": 1,
+        "DETECTED_AFTER": 35,
+        "DETECTED_BEFORE_OR_AT": 1,
+        "NO_CROSSING": 0
+      },
+      "eligible_seeds": [
+        1835086500,
+        1835086501,
+        1835086502,
+        1835086504,
+        1835086505,
+        1835086506,
+        1835086507,
+        1835086508,
+        1835086509,
+        1835086510,
+        1835086511,
+        1835086512,
+        1835086513,
+        1835086514,
+        1835086515,
+        1835086516,
+        1835086517,
+        1835086518,
+        1835086519,
+        1835086520,
+        1835086522,
+        1835086523,
+        1835086524,
+        1835086526,
+        1835086527,
+        1835086528,
+        1835086529,
+        1835086530,
+        1835086531,
+        1835086532,
+        1835086533,
+        1835086534,
+        1835086535,
+        1835086536,
+        1835086537,
+        1835086538,
+        1835086539
+      ],
+      "label": "SECONDARY",
+      "margin_steps": {
+        "count": 1,
+        "maximum": 16,
+        "median": 16.0,
+        "minimum": 16
+      },
+      "n_runs": 37
+    },
+    "R05": {
+      "counts": {
+        "CROSSED_UNDETECTED": 0,
+        "DETECTED_AFTER": 39,
+        "DETECTED_BEFORE_OR_AT": 0,
+        "NO_CROSSING": 0
+      },
+      "eligible_seeds": [
+        1835086500,
+        1835086501,
+        1835086502,
+        1835086503,
+        1835086504,
+        1835086505,
+        1835086506,
+        1835086507,
+        1835086508,
+        1835086509,
+        1835086510,
+        1835086511,
+        1835086512,
+        1835086513,
+        1835086514,
+        1835086515,
+        1835086516,
+        1835086517,
+        1835086518,
+        1835086519,
+        1835086520,
+        1835086522,
+        1835086523,
+        1835086524,
+        1835086525,
+        1835086526,
+        1835086527,
+        1835086528,
+        1835086529,
+        1835086530,
+        1835086531,
+        1835086532,
+        1835086533,
+        1835086534,
+        1835086535,
+        1835086536,
+        1835086537,
+        1835086538,
+        1835086539
+      ],
+      "label": "SECONDARY",
+      "margin_steps": {
+        "count": 0,
+        "maximum": null,
+        "median": null,
+        "minimum": null
+      },
+      "n_runs": 39
+    },
+    "R10": {
+      "counts": {
+        "CROSSED_UNDETECTED": 0,
+        "DETECTED_AFTER": 40,
+        "DETECTED_BEFORE_OR_AT": 0,
+        "NO_CROSSING": 0
+      },
+      "eligible_seeds": [
+        1835086500,
+        1835086501,
+        1835086502,
+        1835086503,
+        1835086504,
+        1835086505,
+        1835086506,
+        1835086507,
+        1835086508,
+        1835086509,
+        1835086510,
+        1835086511,
+        1835086512,
+        1835086513,
+        1835086514,
+        1835086515,
+        1835086516,
+        1835086517,
+        1835086518,
+        1835086519,
+        1835086520,
+        1835086521,
+        1835086522,
+        1835086523,
+        1835086524,
+        1835086525,
+        1835086526,
+        1835086527,
+        1835086528,
+        1835086529,
+        1835086530,
+        1835086531,
+        1835086532,
+        1835086533,
+        1835086534,
+        1835086535,
+        1835086536,
+        1835086537,
+        1835086538,
+        1835086539
+      ],
+      "label": "SECONDARY",
+      "margin_steps": {
+        "count": 0,
+        "maximum": null,
+        "median": null,
+        "minimum": null
+      },
+      "n_runs": 40
+    },
+    "R20": {
+      "counts": {
+        "CROSSED_UNDETECTED": 0,
+        "DETECTED_AFTER": 40,
+        "DETECTED_BEFORE_OR_AT": 0,
+        "NO_CROSSING": 0
+      },
+      "eligible_seeds": [
+        1835086500,
+        1835086501,
+        1835086502,
+        1835086503,
+        1835086504,
+        1835086505,
+        1835086506,
+        1835086507,
+        1835086508,
+        1835086509,
+        1835086510,
+        1835086511,
+        1835086512,
+        1835086513,
+        1835086514,
+        1835086515,
+        1835086516,
+        1835086517,
+        1835086518,
+        1835086519,
+        1835086520,
+        1835086521,
+        1835086522,
+        1835086523,
+        1835086524,
+        1835086525,
+        1835086526,
+        1835086527,
+        1835086528,
+        1835086529,
+        1835086530,
+        1835086531,
+        1835086532,
+        1835086533,
+        1835086534,
+        1835086535,
+        1835086536,
+        1835086537,
+        1835086538,
+        1835086539
+      ],
+      "label": "SECONDARY",
+      "margin_steps": {
+        "count": 0,
+        "maximum": null,
+        "median": null,
+        "minimum": null
+      },
+      "n_runs": 40
+    }
+  },
+  "E2": {
+    "M05": {
+      "entropy_first": 40,
+      "g_first": 0,
+      "n_runs": 40,
+      "neither_at_or_after_50": 0,
+      "same_step": 0,
+      "with_operational_detection": 40
+    },
+    "M1": {
+      "entropy_first": 40,
+      "g_first": 0,
+      "n_runs": 40,
+      "neither_at_or_after_50": 0,
+      "same_step": 0,
+      "with_operational_detection": 40
+    },
+    "M2": {
+      "entropy_first": 40,
+      "g_first": 0,
+      "n_runs": 40,
+      "neither_at_or_after_50": 0,
+      "same_step": 0,
+      "with_operational_detection": 40
+    },
+    "M4": {
+      "entropy_first": 40,
+      "g_first": 0,
+      "n_runs": 40,
+      "neither_at_or_after_50": 0,
+      "same_step": 0,
+      "with_operational_detection": 40
+    },
+    "R02": {
+      "entropy_first": 1,
+      "g_first": 38,
+      "n_runs": 40,
+      "neither_at_or_after_50": 1,
+      "same_step": 0,
+      "with_operational_detection": 39
+    },
+    "R05": {
+      "entropy_first": 0,
+      "g_first": 40,
+      "n_runs": 40,
+      "neither_at_or_after_50": 0,
+      "same_step": 0,
+      "with_operational_detection": 40
+    },
+    "R10": {
+      "entropy_first": 1,
+      "g_first": 39,
+      "n_runs": 40,
+      "neither_at_or_after_50": 0,
+      "same_step": 0,
+      "with_operational_detection": 40
+    },
+    "R20": {
+      "entropy_first": 1,
+      "g_first": 39,
+      "n_runs": 40,
+      "neither_at_or_after_50": 0,
+      "same_step": 0,
+      "with_operational_detection": 40
+    }
+  },
+  "E3": {
+    "attack_pre_onset": {
+      "M05": {
+        "count": 0,
+        "denominator": 40
+      },
+      "M1": {
+        "count": 0,
+        "denominator": 40
+      },
+      "M2": {
+        "count": 0,
+        "denominator": 40
+      },
+      "M4": {
+        "count": 0,
+        "denominator": 40
+      },
+      "R02": {
+        "count": 0,
+        "denominator": 40
+      },
+      "R05": {
+        "count": 0,
+        "denominator": 40
+      },
+      "R10": {
+        "count": 0,
+        "denominator": 40
+      },
+      "R20": {
+        "count": 0,
+        "denominator": 40
+      }
+    },
+    "honest": {
+      "calibration_shortfall": false,
+      "count": 1,
+      "denominator": 40
+    }
+  },
+  "E4": {
+    "L_channel": {
+      "H": {
+        "counts": {
+          "CROSSED_UNDETECTED": 20,
+          "DETECTED_AFTER": 1,
+          "DETECTED_BEFORE_OR_AT": 1,
+          "NO_CROSSING": 18
+        },
+        "label": "descriptive honest",
+        "margin_steps": {
+          "count": 1,
+          "maximum": 57,
+          "median": 57.0,
+          "minimum": 57
+        },
+        "n_runs": 40
+      },
+      "M05": {
+        "counts": {
+          "CROSSED_UNDETECTED": 0,
+          "DETECTED_AFTER": 39,
+          "DETECTED_BEFORE_OR_AT": 1,
+          "NO_CROSSING": 0
+        },
+        "label": "PRIMARY",
+        "margin_steps": {
+          "count": 1,
+          "maximum": 1,
+          "median": 1.0,
+          "minimum": 1
+        },
+        "n_runs": 40
+      },
+      "M1": {
+        "counts": {
+          "CROSSED_UNDETECTED": 0,
+          "DETECTED_AFTER": 39,
+          "DETECTED_BEFORE_OR_AT": 1,
+          "NO_CROSSING": 0
+        },
+        "label": "PRIMARY",
+        "margin_steps": {
+          "count": 1,
+          "maximum": 3,
+          "median": 3.0,
+          "minimum": 3
+        },
+        "n_runs": 40
+      },
+      "M2": {
+        "counts": {
+          "CROSSED_UNDETECTED": 0,
+          "DETECTED_AFTER": 40,
+          "DETECTED_BEFORE_OR_AT": 0,
+          "NO_CROSSING": 0
+        },
+        "label": "PRIMARY",
+        "margin_steps": {
+          "count": 0,
+          "maximum": null,
+          "median": null,
+          "minimum": null
+        },
+        "n_runs": 40
+      },
+      "M4": {
+        "counts": {
+          "CROSSED_UNDETECTED": 0,
+          "DETECTED_AFTER": 40,
+          "DETECTED_BEFORE_OR_AT": 0,
+          "NO_CROSSING": 0
+        },
+        "label": "PRIMARY",
+        "margin_steps": {
+          "count": 0,
+          "maximum": null,
+          "median": null,
+          "minimum": null
+        },
+        "n_runs": 40
+      },
+      "R02": {
+        "counts": {
+          "CROSSED_UNDETECTED": 37,
+          "DETECTED_AFTER": 2,
+          "DETECTED_BEFORE_OR_AT": 1,
+          "NO_CROSSING": 0
+        },
+        "label": "PRIMARY",
+        "margin_steps": {
+          "count": 1,
+          "maximum": 23,
+          "median": 23.0,
+          "minimum": 23
+        },
+        "n_runs": 40
+      },
+      "R05": {
+        "counts": {
+          "CROSSED_UNDETECTED": 37,
+          "DETECTED_AFTER": 3,
+          "DETECTED_BEFORE_OR_AT": 0,
+          "NO_CROSSING": 0
+        },
+        "label": "PRIMARY",
+        "margin_steps": {
+          "count": 0,
+          "maximum": null,
+          "median": null,
+          "minimum": null
+        },
+        "n_runs": 40
+      },
+      "R10": {
+        "counts": {
+          "CROSSED_UNDETECTED": 36,
+          "DETECTED_AFTER": 4,
+          "DETECTED_BEFORE_OR_AT": 0,
+          "NO_CROSSING": 0
+        },
+        "label": "PRIMARY",
+        "margin_steps": {
+          "count": 0,
+          "maximum": null,
+          "median": null,
+          "minimum": null
+        },
+        "n_runs": 40
+      },
+      "R20": {
+        "counts": {
+          "CROSSED_UNDETECTED": 0,
+          "DETECTED_AFTER": 40,
+          "DETECTED_BEFORE_OR_AT": 0,
+          "NO_CROSSING": 0
+        },
+        "label": "PRIMARY",
+        "margin_steps": {
+          "count": 0,
+          "maximum": null,
+          "median": null,
+          "minimum": null
+        },
+        "n_runs": 40
+      }
+    },
+    "paired_channel_counts": {
+      "M05": {
+        "L_before_or_at_g_not": 1,
+        "denominator": 40,
+        "g_before_or_at_L_not": 0
+      },
+      "M1": {
+        "L_before_or_at_g_not": 1,
+        "denominator": 40,
+        "g_before_or_at_L_not": 0
+      },
+      "M2": {
+        "L_before_or_at_g_not": 0,
+        "denominator": 40,
+        "g_before_or_at_L_not": 0
+      },
+      "M4": {
+        "L_before_or_at_g_not": 0,
+        "denominator": 40,
+        "g_before_or_at_L_not": 0
+      },
+      "R02": {
+        "L_before_or_at_g_not": 1,
+        "denominator": 40,
+        "g_before_or_at_L_not": 0
+      },
+      "R05": {
+        "L_before_or_at_g_not": 0,
+        "denominator": 40,
+        "g_before_or_at_L_not": 0
+      },
+      "R10": {
+        "L_before_or_at_g_not": 0,
+        "denominator": 40,
+        "g_before_or_at_L_not": 0
+      },
+      "R20": {
+        "L_before_or_at_g_not": 0,
+        "denominator": 40,
+        "g_before_or_at_L_not": 0
+      }
+    }
+  },
+  "E5_SECONDARY": {
+    "SECONDARY_1_5": {
+      "arms": {
+        "H": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 0,
+            "DETECTED_BEFORE_OR_AT": 0,
+            "NO_CROSSING": 40
+          },
+          "label": "SECONDARY descriptive honest",
+          "margin_steps": {
+            "count": 0,
+            "maximum": null,
+            "median": null,
+            "minimum": null
+          },
+          "n_runs": 40
+        },
+        "M05": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 0,
+            "DETECTED_BEFORE_OR_AT": 40,
+            "NO_CROSSING": 0
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 40,
+            "maximum": 78,
+            "median": 52.5,
+            "minimum": 34
+          },
+          "n_runs": 40
+        },
+        "M1": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 0,
+            "DETECTED_BEFORE_OR_AT": 40,
+            "NO_CROSSING": 0
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 40,
+            "maximum": 50,
+            "median": 30.0,
+            "minimum": 16
+          },
+          "n_runs": 40
+        },
+        "M2": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 0,
+            "DETECTED_BEFORE_OR_AT": 40,
+            "NO_CROSSING": 0
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 40,
+            "maximum": 26,
+            "median": 18.0,
+            "minimum": 0
+          },
+          "n_runs": 40
+        },
+        "M4": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 0,
+            "DETECTED_BEFORE_OR_AT": 40,
+            "NO_CROSSING": 0
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 40,
+            "maximum": 18,
+            "median": 10.0,
+            "minimum": 3
+          },
+          "n_runs": 40
+        },
+        "R02": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 0,
+            "DETECTED_BEFORE_OR_AT": 0,
+            "NO_CROSSING": 40
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 0,
+            "maximum": null,
+            "median": null,
+            "minimum": null
+          },
+          "n_runs": 40
+        },
+        "R05": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 0,
+            "DETECTED_BEFORE_OR_AT": 21,
+            "NO_CROSSING": 19
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 21,
+            "maximum": 231,
+            "median": 80.0,
+            "minimum": 2
+          },
+          "n_runs": 40
+        },
+        "R10": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 37,
+            "DETECTED_BEFORE_OR_AT": 3,
+            "NO_CROSSING": 0
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 3,
+            "maximum": 15,
+            "median": 7.0,
+            "minimum": 3
+          },
+          "n_runs": 40
+        },
+        "R20": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 39,
+            "DETECTED_BEFORE_OR_AT": 1,
+            "NO_CROSSING": 0
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 1,
+            "maximum": 0,
+            "median": 0.0,
+            "minimum": 0
+          },
+          "n_runs": 40
+        }
+      },
+      "g_star": 1.27031007207211,
+      "label": "SECONDARY"
+    },
+    "SECONDARY_2_5": {
+      "arms": {
+        "H": {
+          "counts": {
+            "CROSSED_UNDETECTED": 39,
+            "DETECTED_AFTER": 1,
+            "DETECTED_BEFORE_OR_AT": 0,
+            "NO_CROSSING": 0
+          },
+          "label": "SECONDARY descriptive honest",
+          "margin_steps": {
+            "count": 0,
+            "maximum": null,
+            "median": null,
+            "minimum": null
+          },
+          "n_runs": 40
+        },
+        "M05": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 40,
+            "DETECTED_BEFORE_OR_AT": 0,
+            "NO_CROSSING": 0
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 0,
+            "maximum": null,
+            "median": null,
+            "minimum": null
+          },
+          "n_runs": 40
+        },
+        "M1": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 40,
+            "DETECTED_BEFORE_OR_AT": 0,
+            "NO_CROSSING": 0
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 0,
+            "maximum": null,
+            "median": null,
+            "minimum": null
+          },
+          "n_runs": 40
+        },
+        "M2": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 38,
+            "DETECTED_BEFORE_OR_AT": 2,
+            "NO_CROSSING": 0
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 2,
+            "maximum": 4,
+            "median": 3.0,
+            "minimum": 2
+          },
+          "n_runs": 40
+        },
+        "M4": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 33,
+            "DETECTED_BEFORE_OR_AT": 7,
+            "NO_CROSSING": 0
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 7,
+            "maximum": 5,
+            "median": 1.0,
+            "minimum": 0
+          },
+          "n_runs": 40
+        },
+        "R02": {
+          "counts": {
+            "CROSSED_UNDETECTED": 1,
+            "DETECTED_AFTER": 39,
+            "DETECTED_BEFORE_OR_AT": 0,
+            "NO_CROSSING": 0
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 0,
+            "maximum": null,
+            "median": null,
+            "minimum": null
+          },
+          "n_runs": 40
+        },
+        "R05": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 40,
+            "DETECTED_BEFORE_OR_AT": 0,
+            "NO_CROSSING": 0
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 0,
+            "maximum": null,
+            "median": null,
+            "minimum": null
+          },
+          "n_runs": 40
+        },
+        "R10": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 40,
+            "DETECTED_BEFORE_OR_AT": 0,
+            "NO_CROSSING": 0
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 0,
+            "maximum": null,
+            "median": null,
+            "minimum": null
+          },
+          "n_runs": 40
+        },
+        "R20": {
+          "counts": {
+            "CROSSED_UNDETECTED": 0,
+            "DETECTED_AFTER": 40,
+            "DETECTED_BEFORE_OR_AT": 0,
+            "NO_CROSSING": 0
+          },
+          "label": "SECONDARY",
+          "margin_steps": {
+            "count": 0,
+            "maximum": null,
+            "median": null,
+            "minimum": null
+          },
+          "n_runs": 40
+        }
+      },
+      "g_star": 0.966516292749662,
+      "label": "SECONDARY"
+    }
+  },
+  "E6": {
+    "completed_steps": 99293,
+    "heartbeat_count": 99293,
+    "mismatching_runs": [],
+    "runs": 360,
+    "runs_matching": 360
+  },
+  "created_utc": "2026-09-15T20:48:24.567089+00:00",
+  "g_stars": {
+    "PRIMARY_2_0": 1.0965735902799727,
+    "SECONDARY_1_5": 1.27031007207211,
+    "SECONDARY_2_5": 0.966516292749662
+  },
+  "identity": {
+    "detector_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+    "executor_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+    "plan_sha256_lf": "c1914b3c5b497832debfb08f302feb4a88fa158ad1f4fb8f89101dcd4ee75bcb"
+  },
+  "interpretation_reserved_for_operator": true,
+  "no_constants_recomputed": true,
+  "no_corrected_figure": true,
+  "status": "COMPLETE"
+}

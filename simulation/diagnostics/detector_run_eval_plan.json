@@ -1,0 +1,467 @@
+{
+  "head": "b84199fd5b71041870e17acea22e0145aaf16e10",
+  "pins": [
+    {
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "start_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "committed_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "publication_commit": "76f81cd83e0db6ff5031070e54f2f908502b8632"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "start_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "committed_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+      "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10"
+    },
+    {
+      "path": "simulation/cusum_detector_v2.py",
+      "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "start_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "committed_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+      "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10"
+    },
+    {
+      "path": "simulation/metrics.py",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "start_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611"
+    },
+    {
+      "path": "simulation/agents.py",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "start_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51"
+    },
+    {
+      "path": "simulation/model.py",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "start_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879"
+    },
+    {
+      "path": "simulation/attack_adapter_v2.py",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "start_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e"
+    },
+    {
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "start_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d"
+    },
+    {
+      "path": "simulation/working_factor.py",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "start_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486"
+    },
+    {
+      "path": "simulation/constants_v2_stage18.py",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "start_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2"
+    },
+    {
+      "path": "simulation/diagnostics/drift_mapping_design_note.md",
+      "expected_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "start_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c"
+    }
+  ],
+  "t0_checks": [
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "--abbrev-ref",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stdout": "main",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "b84199fd5b71041870e17acea22e0145aaf16e10",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stdout": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/detector_design_note.md"
+      ],
+      "exit": 0,
+      "stdout": "simulation/diagnostics/detector_design_note.md",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/diagnostics/detector_design_note.md"
+      ],
+      "exit": 0,
+      "stdout": "76f81cd83e0db6ff5031070e54f2f908502b8632",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "76f81cd83e0db6ff5031070e54f2f908502b8632",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/detector_design_note.md"
+      ],
+      "exit": 0,
+      "stdout": "[blob retrieved; hash recorded in pins]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/detector_design_note.md"
+      ],
+      "exit": 0,
+      "stdout": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/detector_run_cal_constants.json"
+      ],
+      "exit": 0,
+      "stdout": "simulation/diagnostics/detector_run_cal_constants.json",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/diagnostics/detector_run_cal_constants.json"
+      ],
+      "exit": 0,
+      "stdout": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "b84199fd5b71041870e17acea22e0145aaf16e10",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/detector_run_cal_constants.json"
+      ],
+      "exit": 0,
+      "stdout": "[blob retrieved; hash recorded in pins]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/detector_run_cal_constants.json"
+      ],
+      "exit": 0,
+      "stdout": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/cusum_detector_v2.py"
+      ],
+      "exit": 0,
+      "stdout": "simulation/cusum_detector_v2.py",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/cusum_detector_v2.py"
+      ],
+      "exit": 0,
+      "stdout": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "b84199fd5b71041870e17acea22e0145aaf16e10",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/cusum_detector_v2.py"
+      ],
+      "exit": 0,
+      "stdout": "[blob retrieved; hash recorded in pins]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/cusum_detector_v2.py"
+      ],
+      "exit": 0,
+      "stdout": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/metrics.py"
+      ],
+      "exit": 0,
+      "stdout": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/agents.py"
+      ],
+      "exit": 0,
+      "stdout": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/model.py"
+      ],
+      "exit": 0,
+      "stdout": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/attack_adapter_v2.py"
+      ],
+      "exit": 0,
+      "stdout": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/run_attack_vector_revalidation_v2.py"
+      ],
+      "exit": 0,
+      "stdout": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/working_factor.py"
+      ],
+      "exit": 0,
+      "stdout": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/constants_v2_stage18.py"
+      ],
+      "exit": 0,
+      "stdout": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/drift_mapping_design_note.md"
+      ],
+      "exit": 0,
+      "stdout": "[blob retrieved; hash recorded in pins]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/drift_mapping_design_note.md"
+      ],
+      "exit": 0,
+      "stdout": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+      "stderr": ""
+    }
+  ],
+  "t0_passed": true,
+  "fresh_namespace_before_creation": true,
+  "arms": [
+    "H",
+    "M05",
+    "M1",
+    "M2",
+    "M4",
+    "R02",
+    "R05",
+    "R10",
+    "R20"
+  ],
+  "seeds": [
+    1835086500,
+    1835086501,
+    1835086502,
+    1835086503,
+    1835086504,
+    1835086505,
+    1835086506,
+    1835086507,
+    1835086508,
+    1835086509,
+    1835086510,
+    1835086511,
+    1835086512,
+    1835086513,
+    1835086514,
+    1835086515,
+    1835086516,
+    1835086517,
+    1835086518,
+    1835086519,
+    1835086520,
+    1835086521,
+    1835086522,
+    1835086523,
+    1835086524,
+    1835086525,
+    1835086526,
+    1835086527,
+    1835086528,
+    1835086529,
+    1835086530,
+    1835086531,
+    1835086532,
+    1835086533,
+    1835086534,
+    1835086535,
+    1835086536,
+    1835086537,
+    1835086538,
+    1835086539
+  ],
+  "worker_limits": {
+    "normal": 15,
+    "work": 12
+  },
+  "operator_cpu_budget": 16,
+  "constructor": {
+    "n_agents": 200,
+    "ai_policy": "sub_threshold_drift",
+    "use_cop": true,
+    "cop_attribution_check": true,
+    "cop_drift_check": true,
+    "cop_cusum_drift": false
+  },
+  "g_stars": {
+    "PRIMARY_2_0": 1.0965735902799727,
+    "SECONDARY_1_5": 1.27031007207211,
+    "SECONDARY_2_5": 0.966516292749662
+  },
+  "known_conditions": [
+    "CRLF working tree and LF blobs; no normalization performed",
+    "Permission warnings recorded and non-halting"
+  ],
+  "write_guard": {
+    "permitted_prefix": "simulation/diagnostics/detector_run_eval_",
+    "os_devnull_exempt": true
+  },
+  "constant_source": "HEAD:simulation/diagnostics/detector_run_cal_constants.json"
+}

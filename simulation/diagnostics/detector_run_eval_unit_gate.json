@@ -1,0 +1,379 @@
+{
+  "cases": [
+    {
+      "case": "at_reference",
+      "channel": "entropy",
+      "measured_alarm_count": 0,
+      "measured_maximum": 0.0,
+      "passed": true
+    },
+    {
+      "allowance": 1.0,
+      "case": "one_sigma_harmful_shift",
+      "channel": "entropy",
+      "expected_alarm_steps": [
+        12,
+        15,
+        18,
+        21,
+        24,
+        27
+      ],
+      "expected_increment": 1.0,
+      "measured_alarm_steps": [
+        12,
+        15,
+        18,
+        21,
+        24,
+        27
+      ],
+      "measured_increments": [
+        1.0
+      ],
+      "passed": true,
+      "sigma": 2.0
+    },
+    {
+      "case": "harmless_shift",
+      "channel": "entropy",
+      "measured_alarm_count": 0,
+      "measured_maximum": 0.0,
+      "passed": true
+    },
+    {
+      "case": "reset_after_alarm",
+      "channel": "entropy",
+      "measured_next_start_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured_post_alarm_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true
+    },
+    {
+      "case": "burn_in",
+      "channel": "entropy",
+      "measured_alarm_count": 0,
+      "measured_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true,
+      "steps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "case": "heartbeat",
+      "channel": "entropy",
+      "expected_count_each": 30,
+      "measured_counts": {
+        "harmful": 30,
+        "harmless": 30,
+        "reference": 30
+      },
+      "passed": true
+    },
+    {
+      "case": "at_reference",
+      "channel": "g",
+      "measured_alarm_count": 0,
+      "measured_maximum": 0.0,
+      "passed": true
+    },
+    {
+      "allowance": 1.0,
+      "case": "one_sigma_harmful_shift",
+      "channel": "g",
+      "expected_alarm_steps": [
+        12,
+        15,
+        18,
+        21,
+        24,
+        27
+      ],
+      "expected_increment": 1.0,
+      "measured_alarm_steps": [
+        12,
+        15,
+        18,
+        21,
+        24,
+        27
+      ],
+      "measured_increments": [
+        1.0
+      ],
+      "passed": true,
+      "sigma": 2.0
+    },
+    {
+      "case": "harmless_shift",
+      "channel": "g",
+      "measured_alarm_count": 0,
+      "measured_maximum": 0.0,
+      "passed": true
+    },
+    {
+      "case": "reset_after_alarm",
+      "channel": "g",
+      "measured_next_start_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured_post_alarm_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true
+    },
+    {
+      "case": "burn_in",
+      "channel": "g",
+      "measured_alarm_count": 0,
+      "measured_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true,
+      "steps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "case": "heartbeat",
+      "channel": "g",
+      "expected_count_each": 30,
+      "measured_counts": {
+        "harmful": 30,
+        "harmless": 30,
+        "reference": 30
+      },
+      "passed": true
+    },
+    {
+      "case": "at_reference",
+      "channel": "L",
+      "measured_alarm_count": 0,
+      "measured_maximum": 0.0,
+      "passed": true
+    },
+    {
+      "allowance": 1.0,
+      "case": "one_sigma_harmful_shift",
+      "channel": "L",
+      "expected_alarm_steps": [
+        12,
+        15,
+        18,
+        21,
+        24,
+        27
+      ],
+      "expected_increment": 1.0,
+      "measured_alarm_steps": [
+        12,
+        15,
+        18,
+        21,
+        24,
+        27
+      ],
+      "measured_increments": [
+        1.0
+      ],
+      "passed": true,
+      "sigma": 2.0
+    },
+    {
+      "case": "harmless_shift",
+      "channel": "L",
+      "measured_alarm_count": 0,
+      "measured_maximum": 0.0,
+      "passed": true
+    },
+    {
+      "case": "reset_after_alarm",
+      "channel": "L",
+      "measured_next_start_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured_post_alarm_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true
+    },
+    {
+      "case": "burn_in",
+      "channel": "L",
+      "measured_alarm_count": 0,
+      "measured_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true,
+      "steps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "case": "heartbeat",
+      "channel": "L",
+      "expected_count_each": 30,
+      "measured_counts": {
+        "harmful": 30,
+        "harmless": 30,
+        "reference": 30
+      },
+      "passed": true
+    },
+    {
+      "case": "comparison_channel_separation",
+      "channel": "L",
+      "measured_L_alarm_steps": [
+        12,
+        15,
+        18,
+        21,
+        24,
+        27
+      ],
+      "measured_operational_alarm_steps": [],
+      "passed": true
+    }
+  ],
+  "identity": {
+    "detector_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+    "executor_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+    "plan_sha256_lf": "c1914b3c5b497832debfb08f302feb4a88fa158ad1f4fb8f89101dcd4ee75bcb"
+  },
+  "model_steps_executed": 0,
+  "passed": true,
+  "runtime": {
+    "machine": "YOTKOTEST",
+    "modules": {
+      "simulation/cusum_detector_v2.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+        "sha256_raw": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+      },
+      "simulation/diagnostics/detector_run_eval_executor.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+        "sha256_raw": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff"
+      },
+      "simulation/diagnostics/detector_run_eval_unit_gate.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "40af7d48509125e61ad7d9a3345a34273b08cc9b46b5517d970ce5b541652964",
+        "sha256_raw": "40af7d48509125e61ad7d9a3345a34273b08cc9b46b5517d970ce5b541652964"
+      }
+    },
+    "numpy": "2.4.4",
+    "operator_cpu_budget": 16,
+    "os_cpu_count": 16,
+    "process_cpu_count": 16,
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "thread_environment": {
+      "BLIS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "thread_runtime": [
+      {
+        "effective_threads": 1,
+        "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+        "query": "scipy_openblas_get_num_threads64_"
+      }
+    ],
+    "worker_pid": 34452
+  },
+  "utc": "2026-09-15T20:25:06.886085+00:00"
+}
