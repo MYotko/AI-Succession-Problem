@@ -1,0 +1,5676 @@
+{
+  "action_modified_steps": 232,
+  "adapter_active_steps": 232,
+  "arm": "M05",
+  "attempt": 1,
+  "completed_utc": "2026-09-16T12:11:24.909616+00:00",
+  "configuration": {
+    "attack_step": 50,
+    "attack_vector_v2": "sub_threshold_drift",
+    "bootstrap_turn_step_v2": 20,
+    "cop_cusum_drift": false,
+    "cop_methodological_diversity": false,
+    "n_candidates_v2": 300,
+    "phi": 10.0,
+    "policy": "optimize_u_sys_v2",
+    "random_seed": 1835086605,
+    "rollout_steps_v2": 20,
+    "shock_magnitude": 0.15,
+    "shock_step": 0
+  },
+  "constants_bitwise_checks": [
+    {
+      "channel": "entropy",
+      "committed_binary64_hex": "0x1.fa6aaee8ddd2fp-1",
+      "field": "reference",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.fa6aaee8ddd2fp-1",
+      "variant": "T975",
+      "variant_label": "PRIMARY"
+    },
+    {
+      "channel": "entropy",
+      "committed_binary64_hex": "0x1.d13280adbf63bp-9",
+      "field": "allowance",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.d13280adbf63bp-9",
+      "variant": "T975",
+      "variant_label": "PRIMARY"
+    },
+    {
+      "channel": "entropy",
+      "committed_binary64_hex": "0x1.62b3fc68fd4bcp-3",
+      "field": "threshold",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.62b3fc68fd4bcp-3",
+      "variant": "T975",
+      "variant_label": "PRIMARY"
+    },
+    {
+      "channel": "g",
+      "committed_binary64_hex": "0x1.f510e7ddba7acp-1",
+      "field": "reference",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.f510e7ddba7acp-1",
+      "variant": "T975",
+      "variant_label": "PRIMARY"
+    },
+    {
+      "channel": "g",
+      "committed_binary64_hex": "0x1.6b15723554cc7p-6",
+      "field": "allowance",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.6b15723554cc7p-6",
+      "variant": "T975",
+      "variant_label": "PRIMARY"
+    },
+    {
+      "channel": "g",
+      "committed_binary64_hex": "0x1.207ea58711231p+2",
+      "field": "threshold",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.207ea58711231p+2",
+      "variant": "T975",
+      "variant_label": "PRIMARY"
+    },
+    {
+      "channel": "L",
+      "committed_binary64_hex": "0x1.78ddd4ef6be2dp-1",
+      "field": "reference",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.78ddd4ef6be2dp-1",
+      "variant": "T975",
+      "variant_label": "PRIMARY"
+    },
+    {
+      "channel": "L",
+      "committed_binary64_hex": "0x1.d0077fda81a1ep-5",
+      "field": "allowance",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.d0077fda81a1ep-5",
+      "variant": "T975",
+      "variant_label": "PRIMARY"
+    },
+    {
+      "channel": "L",
+      "committed_binary64_hex": "0x1.e17079e31d2cep+3",
+      "field": "threshold",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.e17079e31d2cep+3",
+      "variant": "T975",
+      "variant_label": "PRIMARY"
+    },
+    {
+      "field": "threshold pin",
+      "passed": true,
+      "pinned_binary64_hex": "0x1.207ea58711231p+2",
+      "supplied_binary64_hex": "0x1.207ea58711231p+2",
+      "variant": "T975"
+    },
+    {
+      "channel": "entropy",
+      "committed_binary64_hex": "0x1.fa6aaee8ddd2fp-1",
+      "field": "reference",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.fa6aaee8ddd2fp-1",
+      "variant": "T95",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "entropy",
+      "committed_binary64_hex": "0x1.d13280adbf63bp-9",
+      "field": "allowance",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.d13280adbf63bp-9",
+      "variant": "T95",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "entropy",
+      "committed_binary64_hex": "0x1.62b3fc68fd4bcp-3",
+      "field": "threshold",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.62b3fc68fd4bcp-3",
+      "variant": "T95",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "g",
+      "committed_binary64_hex": "0x1.f510e7ddba7acp-1",
+      "field": "reference",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.f510e7ddba7acp-1",
+      "variant": "T95",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "g",
+      "committed_binary64_hex": "0x1.6b15723554cc7p-6",
+      "field": "allowance",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.6b15723554cc7p-6",
+      "variant": "T95",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "g",
+      "committed_binary64_hex": "0x1.0385f3d130955p+2",
+      "field": "threshold",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.0385f3d130955p+2",
+      "variant": "T95",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "L",
+      "committed_binary64_hex": "0x1.78ddd4ef6be2dp-1",
+      "field": "reference",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.78ddd4ef6be2dp-1",
+      "variant": "T95",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "L",
+      "committed_binary64_hex": "0x1.d0077fda81a1ep-5",
+      "field": "allowance",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.d0077fda81a1ep-5",
+      "variant": "T95",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "L",
+      "committed_binary64_hex": "0x1.e17079e31d2cep+3",
+      "field": "threshold",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.e17079e31d2cep+3",
+      "variant": "T95",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "field": "threshold pin",
+      "passed": true,
+      "pinned_binary64_hex": "0x1.0385f3d130955p+2",
+      "supplied_binary64_hex": "0x1.0385f3d130955p+2",
+      "variant": "T95"
+    },
+    {
+      "channel": "entropy",
+      "committed_binary64_hex": "0x1.fa6aaee8ddd2fp-1",
+      "field": "reference",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.fa6aaee8ddd2fp-1",
+      "variant": "T90",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "entropy",
+      "committed_binary64_hex": "0x1.d13280adbf63bp-9",
+      "field": "allowance",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.d13280adbf63bp-9",
+      "variant": "T90",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "entropy",
+      "committed_binary64_hex": "0x1.62b3fc68fd4bcp-3",
+      "field": "threshold",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.62b3fc68fd4bcp-3",
+      "variant": "T90",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "g",
+      "committed_binary64_hex": "0x1.f510e7ddba7acp-1",
+      "field": "reference",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.f510e7ddba7acp-1",
+      "variant": "T90",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "g",
+      "committed_binary64_hex": "0x1.6b15723554cc7p-6",
+      "field": "allowance",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.6b15723554cc7p-6",
+      "variant": "T90",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "g",
+      "committed_binary64_hex": "0x1.5332f66b81a96p+1",
+      "field": "threshold",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.5332f66b81a96p+1",
+      "variant": "T90",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "L",
+      "committed_binary64_hex": "0x1.78ddd4ef6be2dp-1",
+      "field": "reference",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.78ddd4ef6be2dp-1",
+      "variant": "T90",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "L",
+      "committed_binary64_hex": "0x1.d0077fda81a1ep-5",
+      "field": "allowance",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.d0077fda81a1ep-5",
+      "variant": "T90",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "channel": "L",
+      "committed_binary64_hex": "0x1.e17079e31d2cep+3",
+      "field": "threshold",
+      "passed": true,
+      "supplied_binary64_hex": "0x1.e17079e31d2cep+3",
+      "variant": "T90",
+      "variant_label": "SECONDARY"
+    },
+    {
+      "field": "threshold pin",
+      "passed": true,
+      "pinned_binary64_hex": "0x1.5332f66b81a96p+1",
+      "supplied_binary64_hex": "0x1.5332f66b81a96p+1",
+      "variant": "T90"
+    },
+    {
+      "case": "PRIMARY_2_0",
+      "passed": true,
+      "pinned_g_star_binary64_hex": "0x1.18b90bfbe8e7cp+0",
+      "pinned_k": 9,
+      "stage_A_g_star_binary64_hex": "0x1.18b90bfbe8e7cp+0",
+      "stage_A_k": 9
+    },
+    {
+      "case": "SECONDARY_1_5",
+      "passed": true,
+      "pinned_g_star_binary64_hex": "0x1.45330a775440fp+0",
+      "pinned_k": 2,
+      "stage_A_g_star_binary64_hex": "0x1.45330a775440fp+0",
+      "stage_A_k": 2
+    },
+    {
+      "case": "SECONDARY_2_5",
+      "passed": true,
+      "pinned_g_star_binary64_hex": "0x1.eedb3938d2696p-1",
+      "pinned_k": 106,
+      "section_4_caveat": "At a reference successor capability of 2.5, g_star lies below the honest median of g, every honest calibration run spends long spans above it, and k is accordingly large. A hazard there measures persistence far beyond honest behavior rather than the approach to a defection boundary.",
+      "stage_A_g_star_binary64_hex": "0x1.eedb3938d2696p-1",
+      "stage_A_k": 106
+    }
+  ],
+  "constructor": {
+    "ai_policy": "sub_threshold_drift",
+    "cop_attribution_check": true,
+    "cop_cusum_drift": false,
+    "cop_drift_check": true,
+    "n_agents": 200,
+    "use_cop": true
+  },
+  "continuous_checks_passed": true,
+  "detector_logs": {
+    "detector_run_r2_eval_M05_1835086605_alarms_attempt1.csv": "3c8d60e6daf4a0871bc7b37f73217f2aded0c3c2a75e4870b7b92ea2c8c57d05",
+    "detector_run_r2_eval_M05_1835086605_heartbeats_attempt1.csv": "951cfb359ec1cf0864c9fe0013aa026dc60951304daef86bc156882773539175",
+    "detector_run_r2_eval_M05_1835086605_spans_attempt1.csv": "d38b16085912da68d99f81dac2a3123f562670df6759f172cee4a5e68c6ec0bb"
+  },
+  "elapsed_seconds": 71.14216500001203,
+  "end_reason": "extinction",
+  "extinct": true,
+  "first_fewer_than_two_novelty_vectors_step": 271,
+  "hazards": {
+    "PRIMARY_2_0": {
+      "confirmation_step": 119,
+      "g_star": 1.0965735902799727,
+      "k": 9,
+      "label": "PRIMARY",
+      "spans": [
+        {
+          "end_step": 281,
+          "start_step": 111
+        }
+      ]
+    },
+    "SECONDARY_1_5": {
+      "confirmation_step": 149,
+      "g_star": 1.27031007207211,
+      "k": 2,
+      "label": "SECONDARY",
+      "spans": [
+        {
+          "end_step": 180,
+          "start_step": 148
+        },
+        {
+          "end_step": 182,
+          "start_step": 182
+        },
+        {
+          "end_step": 281,
+          "start_step": 185
+        }
+      ]
+    },
+    "SECONDARY_2_5": {
+      "confirmation_step": 183,
+      "g_star": 0.966516292749662,
+      "k": 106,
+      "label": "SECONDARY",
+      "section_4_caveat": "At a reference successor capability of 2.5, g_star lies below the honest median of g, every honest calibration run spends long spans above it, and k is accordingly large. A hazard there measures persistence far beyond honest behavior rather than the approach to a defection boundary.",
+      "spans": [
+        {
+          "end_step": 59,
+          "start_step": 50
+        },
+        {
+          "end_step": 61,
+          "start_step": 61
+        },
+        {
+          "end_step": 76,
+          "start_step": 74
+        },
+        {
+          "end_step": 281,
+          "start_step": 78
+        }
+      ]
+    }
+  },
+  "heartbeat_count": {
+    "T90": 282,
+    "T95": 282,
+    "T975": 282
+  },
+  "identity": {
+    "detector_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+    "executor_sha256_lf": "55af8caf25f1ab20cff28b7a15356e881a31920445afe60f73e45aee296f956d",
+    "plan_sha256_lf": "f864bae8851d25204daff0a64e89fbef0d50025083c8545d44987612b9fbd7f7"
+  },
+  "job": "M05_1835086605",
+  "paired_honest_seed": 1835086605,
+  "raw_entropy_exact_matches": 282,
+  "raw_log": "detector_run_r2_eval_M05_1835086605_steps_attempt1.csv",
+  "raw_log_sha256": "78dcfb0201747c59c63196f820d3bbaa88db3c4358d780c64d9fe1bc3761a1f9",
+  "raw_log_sha256_lf": "78dcfb0201747c59c63196f820d3bbaa88db3c4358d780c64d9fe1bc3761a1f9",
+  "recorder_rng_unchanged_calls": 282,
+  "runtime": {
+    "machine": "YOTKOTEST",
+    "modules": {
+      "simulation/agents.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+      },
+      "simulation/attack_adapter_v2.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+      },
+      "simulation/constants_v2_stage15.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+      },
+      "simulation/constants_v2_stage18.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+      },
+      "simulation/cusum_detector_v2.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+        "sha256_raw": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+      },
+      "simulation/defection.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+      },
+      "simulation/diagnostics/detector_run_r2_eval_executor.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "55af8caf25f1ab20cff28b7a15356e881a31920445afe60f73e45aee296f956d",
+        "sha256_raw": "55af8caf25f1ab20cff28b7a15356e881a31920445afe60f73e45aee296f956d"
+      },
+      "simulation/metrics.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+      },
+      "simulation/model.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "sha256_raw": "e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945"
+      },
+      "simulation/working_factor.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+        "sha256_raw": "0afde923081fe34d1ada86e2928286d45c905441053f643968ea9b13007b683d"
+      }
+    },
+    "numpy": "2.4.4",
+    "operator_cpu_budget": 16,
+    "os_cpu_count": 16,
+    "process_cpu_count": 16,
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "thread_environment": {
+      "BLIS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "thread_runtime": [
+      {
+        "effective_threads": 1,
+        "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+        "query": "scipy_openblas_get_num_threads64_"
+      }
+    ],
+    "worker_pid": 7180
+  },
+  "seed": 1835086605,
+  "shape_fallback_increase_step_0": 2,
+  "shape_fallback_nonpermitted_increase_count": 0,
+  "shape_fallback_permitted_increase_after_step_0": 31,
+  "source_pins_end": [
+    {
+      "actual_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "blob_sha1": "cffa1d922c70759b3619856247a3f1ba3dbfdce9",
+      "committed_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "expected_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_round2_design_note.md",
+      "publication_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "start_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632"
+    },
+    {
+      "actual_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "blob_sha1": "ff934c2613e90804c3ff5c18141f777eaa24276f",
+      "committed_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "expected_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_r2_constants.json",
+      "publication_commit": "242ec2265ee6e3b1158925af0c22f6b76e007007",
+      "start_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98"
+    },
+    {
+      "actual_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "committed_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "publication_commit": "76f81cd83e0db6ff5031070e54f2f908502b8632",
+      "start_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+    },
+    {
+      "actual_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+      "committed_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "start_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488"
+    },
+    {
+      "actual_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+      "committed_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "passed": true,
+      "path": "simulation/cusum_detector_v2.py",
+      "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "start_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+    },
+    {
+      "actual_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723",
+      "committed_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "expected_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_eval_executor.py",
+      "publication_commit": "9ce2e65931875f8cc6c2036a3e56475a1d08bd84",
+      "start_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff"
+    },
+    {
+      "actual_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "passed": true,
+      "path": "simulation/metrics.py",
+      "start_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+    },
+    {
+      "actual_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "passed": true,
+      "path": "simulation/agents.py",
+      "start_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+    },
+    {
+      "actual_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "passed": true,
+      "path": "simulation/model.py",
+      "start_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+    },
+    {
+      "actual_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "passed": true,
+      "path": "simulation/attack_adapter_v2.py",
+      "start_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+    },
+    {
+      "actual_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "committed_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "passed": true,
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "start_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+    },
+    {
+      "actual_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "passed": true,
+      "path": "simulation/working_factor.py",
+      "start_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+    },
+    {
+      "actual_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "passed": true,
+      "path": "simulation/constants_v2_stage18.py",
+      "start_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+    },
+    {
+      "actual_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+      "committed_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "expected_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "passed": true,
+      "path": "simulation/diagnostics/drift_mapping_design_note.md",
+      "start_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748"
+    }
+  ],
+  "source_pins_start": [
+    {
+      "actual_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "blob_sha1": "cffa1d922c70759b3619856247a3f1ba3dbfdce9",
+      "committed_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "expected_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_round2_design_note.md",
+      "publication_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "start_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632"
+    },
+    {
+      "actual_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "blob_sha1": "ff934c2613e90804c3ff5c18141f777eaa24276f",
+      "committed_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "expected_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_r2_constants.json",
+      "publication_commit": "242ec2265ee6e3b1158925af0c22f6b76e007007",
+      "start_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98"
+    },
+    {
+      "actual_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "committed_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "publication_commit": "76f81cd83e0db6ff5031070e54f2f908502b8632",
+      "start_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+    },
+    {
+      "actual_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+      "committed_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "start_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488"
+    },
+    {
+      "actual_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+      "committed_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "passed": true,
+      "path": "simulation/cusum_detector_v2.py",
+      "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "start_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+    },
+    {
+      "actual_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723",
+      "committed_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "expected_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_eval_executor.py",
+      "publication_commit": "9ce2e65931875f8cc6c2036a3e56475a1d08bd84",
+      "start_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff"
+    },
+    {
+      "actual_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "passed": true,
+      "path": "simulation/metrics.py",
+      "start_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+    },
+    {
+      "actual_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "passed": true,
+      "path": "simulation/agents.py",
+      "start_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+    },
+    {
+      "actual_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "passed": true,
+      "path": "simulation/model.py",
+      "start_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+    },
+    {
+      "actual_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "passed": true,
+      "path": "simulation/attack_adapter_v2.py",
+      "start_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+    },
+    {
+      "actual_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "committed_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "passed": true,
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "start_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+    },
+    {
+      "actual_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "passed": true,
+      "path": "simulation/working_factor.py",
+      "start_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+    },
+    {
+      "actual_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "passed": true,
+      "path": "simulation/constants_v2_stage18.py",
+      "start_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+    },
+    {
+      "actual_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+      "committed_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "expected_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "passed": true,
+      "path": "simulation/diagnostics/drift_mapping_design_note.md",
+      "start_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748"
+    }
+  ],
+  "started_utc": "2026-09-16T12:10:13.767417+00:00",
+  "status": "COMPLETE",
+  "steps_completed": 282,
+  "variants": {
+    "T90": {
+      "alarm_records": [
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.281710375167181,
+          "step": 95,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.18330002319998828,
+          "step": 102,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.202043817481516,
+          "step": 112,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.22448543411151822,
+          "step": 116,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2533142848276482,
+          "step": 119,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.35030791181215093,
+          "step": 120,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2748135172404663,
+          "step": 123,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.7669356063071566,
+          "step": 126,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5123783763926446,
+          "step": 127,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4347293971233116,
+          "step": 134,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4193437361396565,
+          "step": 138,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.42537200525546803,
+          "step": 139,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.30033669508469807,
+          "step": 140,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.763754726525711,
+          "step": 143,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5017501902184591,
+          "step": 144,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8567758104640704,
+          "step": 147,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4074341087033847,
+          "step": 148,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.23858704377937023,
+          "step": 151,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.6911684812883507,
+          "step": 152,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.45046675582952656,
+          "step": 155,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7573551662203011,
+          "step": 157,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "L",
+          "operational_channel": false,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 15.409206870637597,
+          "step": 157,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5753308824590526,
+          "step": 158,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.886600357053136,
+          "step": 158,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.18837060416907758,
+          "step": 159,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5686149156285878,
+          "step": 161,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5608233162693371,
+          "step": 163,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.7172618064475875,
+          "step": 163,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5741200003827728,
+          "step": 165,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.3250254866855983,
+          "step": 167,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4508000142621469,
+          "step": 168,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.17999734571670578,
+          "step": 169,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 3.006948518085263,
+          "step": 169,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2768658301750123,
+          "step": 171,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6653982114475572,
+          "step": 172,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.45338218736977953,
+          "step": 173,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4069564364666016,
+          "step": 174,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4591486923478182,
+          "step": 175,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.9516343272414822,
+          "step": 176,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.35924286270189065,
+          "step": 177,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7050250336926617,
+          "step": 178,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2787034353474106,
+          "step": 179,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2949732881117184,
+          "step": 182,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.45366161307610386,
+          "step": 183,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.23140587155438108,
+          "step": 184,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8505261240114508,
+          "step": 185,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.7913207022365816,
+          "step": 185,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.36998928609482373,
+          "step": 186,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8023616657501135,
+          "step": 187,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.3224974245434853,
+          "step": 188,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "L",
+          "operational_channel": false,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 15.42796875086786,
+          "step": 188,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9008911797128163,
+          "step": 190,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4272158158283401,
+          "step": 192,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 3.015835514260348,
+          "step": 192,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4684729232660958,
+          "step": 193,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9347860893297736,
+          "step": 195,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9111238698410711,
+          "step": 196,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4236773729193535,
+          "step": 197,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 3.0453728302318543,
+          "step": 197,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9805622693062886,
+          "step": 198,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7707087596683626,
+          "step": 199,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8092792186404179,
+          "step": 200,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2616079275441775,
+          "step": 201,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.6950898272333568,
+          "step": 202,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4839214182927618,
+          "step": 203,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.34133846148873126,
+          "step": 204,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.22369617369408445,
+          "step": 205,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.17939315971721026,
+          "step": 206,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5833338491907394,
+          "step": 207,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 3.156463133919205,
+          "step": 207,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6498900914251112,
+          "step": 208,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8406593969196001,
+          "step": 210,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5999296223640619,
+          "step": 211,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2522467126761244,
+          "step": 212,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 3.3840959896689453,
+          "step": 212,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.30315518021073684,
+          "step": 213,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "L",
+          "operational_channel": false,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 15.146128579425264,
+          "step": 213,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8988119812933849,
+          "step": 214,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5723806294312088,
+          "step": 215,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 3.0892247897598724,
+          "step": 215,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5107685264491477,
+          "step": 216,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7755089562323148,
+          "step": 217,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5130566174091353,
+          "step": 218,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 3.273679470582766,
+          "step": 218,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.49093373303366655,
+          "step": 219,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5917100575052285,
+          "step": 220,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7468776423400536,
+          "step": 221,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 3.3156867606063116,
+          "step": 221,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.602172024455103,
+          "step": 222,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.30174395869090354,
+          "step": 223,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.43032975313652344,
+          "step": 224,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.75535893529684,
+          "step": 224,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5116466873416994,
+          "step": 225,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4911501797298736,
+          "step": 226,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7892062624207263,
+          "step": 227,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8308060486422729,
+          "step": 228,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 3.2953595072545614,
+          "step": 228,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7702720776982156,
+          "step": 229,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8710140778815121,
+          "step": 230,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6125490684549655,
+          "step": 231,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.66607981539064,
+          "step": 231,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7957501098343591,
+          "step": 232,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.782172900299779,
+          "step": 233,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8699243856032205,
+          "step": 234,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6278305102899748,
+          "step": 235,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 3.2195443505708745,
+          "step": 235,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7123346568438131,
+          "step": 236,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "L",
+          "operational_channel": false,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 15.41196783911714,
+          "step": 236,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7113490479469049,
+          "step": 237,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8879058932727053,
+          "step": 238,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.697047147535722,
+          "step": 238,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8719273786542866,
+          "step": 239,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6776548138389163,
+          "step": 240,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7300145058005241,
+          "step": 241,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9272641712634253,
+          "step": 242,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 3.067705081016088,
+          "step": 242,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6344825885910821,
+          "step": 243,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6466429596449534,
+          "step": 244,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7447431515253778,
+          "step": 245,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9281003810031879,
+          "step": 246,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 3.446328281356336,
+          "step": 246,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7058201265415265,
+          "step": 247,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7198586868920488,
+          "step": 248,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7847835977443319,
+          "step": 249,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.916134348274805,
+          "step": 249,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8335346485996695,
+          "step": 250,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.983598266687791,
+          "step": 251,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8623606049478916,
+          "step": 252,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.6532574130391557,
+          "step": 252,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8627269926737555,
+          "step": 253,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9107456395772604,
+          "step": 254,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9491884956606726,
+          "step": 255,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7730584694239222,
+          "step": 256,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 3.4978047206652105,
+          "step": 256,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8842174887802815,
+          "step": 257,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9081192701415395,
+          "step": 258,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.7769958265897063,
+          "step": 258,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.932180389953012,
+          "step": 259,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "L",
+          "operational_channel": false,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 15.532005112432309,
+          "step": 259,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9418369883360265,
+          "step": 260,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9081827362926931,
+          "step": 261,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855392051115299,
+          "step": 262,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 263,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.7335743985278187,
+          "step": 263,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.985540841004276,
+          "step": 264,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855392072523939,
+          "step": 265,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 266,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855391779714956,
+          "step": 267,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 2.7772713966664533,
+          "step": 267,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855399777390276,
+          "step": 268,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855396146260214,
+          "step": 269,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 270,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 271,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 3.122274879290588,
+          "step": 271,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 272,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 273,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 274,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 3.244164180470073,
+          "step": 274,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 275,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 276,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 277,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.374953312817982,
+          "step": 277,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 278,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 279,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.8670001315070435,
+          "step": 279,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 280,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 281,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 80.18399243970782,
+          "step": 281,
+          "variant": "T90",
+          "variant_label": "SECONDARY"
+        }
+      ],
+      "constants_passed": {
+        "L": {
+          "allowance": 0.056644201005884506,
+          "reference": 0.7360674421560752,
+          "threshold": 15.04497999532887
+        },
+        "entropy": {
+          "allowance": 0.003549173553323096,
+          "reference": 0.9890951785336365,
+          "threshold": 0.17319485850717864
+        },
+        "g": {
+          "allowance": 0.022160874873702576,
+          "reference": 0.9786446054615587,
+          "threshold": 2.6499927544530903
+        }
+      },
+      "detection_alarm_step": 95,
+      "first_detection_steps": {
+        "L": 157,
+        "entropy": 95,
+        "g": 126
+      },
+      "heartbeat_count": 282,
+      "variant_label": "SECONDARY"
+    },
+    "T95": {
+      "alarm_records": [
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.281710375167181,
+          "step": 95,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.18330002319998828,
+          "step": 102,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.202043817481516,
+          "step": 112,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.22448543411151822,
+          "step": 116,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2533142848276482,
+          "step": 119,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.35030791181215093,
+          "step": 120,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2748135172404663,
+          "step": 123,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5123783763926446,
+          "step": 127,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4347293971233116,
+          "step": 134,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.060915285889569,
+          "step": 135,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4193437361396565,
+          "step": 138,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.42537200525546803,
+          "step": 139,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.30033669508469807,
+          "step": 140,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5017501902184591,
+          "step": 144,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8567758104640704,
+          "step": 147,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4074341087033847,
+          "step": 148,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.23858704377937023,
+          "step": 151,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.16094352823165,
+          "step": 152,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.45046675582952656,
+          "step": 155,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7573551662203011,
+          "step": 157,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "L",
+          "operational_channel": false,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 15.409206870637597,
+          "step": 157,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5753308824590526,
+          "step": 158,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.18837060416907758,
+          "step": 159,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.067689715076882,
+          "step": 160,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5686149156285878,
+          "step": 161,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5608233162693371,
+          "step": 163,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5741200003827728,
+          "step": 165,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.3250254866855983,
+          "step": 167,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4508000142621469,
+          "step": 168,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.17999734571670578,
+          "step": 169,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.543120966509106,
+          "step": 169,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2768658301750123,
+          "step": 171,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6653982114475572,
+          "step": 172,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.45338218736977953,
+          "step": 173,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4069564364666016,
+          "step": 174,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4591486923478182,
+          "step": 175,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.35924286270189065,
+          "step": 177,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7050250336926617,
+          "step": 178,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2787034353474106,
+          "step": 179,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.122217632160845,
+          "step": 179,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2949732881117184,
+          "step": 182,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.45366161307610386,
+          "step": 183,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.23140587155438108,
+          "step": 184,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8505261240114508,
+          "step": 185,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.36998928609482373,
+          "step": 186,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8023616657501135,
+          "step": 187,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.3224974245434853,
+          "step": 188,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "L",
+          "operational_channel": false,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 15.42796875086786,
+          "step": 188,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9008911797128163,
+          "step": 190,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.094959834808779,
+          "step": 191,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4272158158283401,
+          "step": 192,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4684729232660958,
+          "step": 193,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9347860893297736,
+          "step": 195,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9111238698410711,
+          "step": 196,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4236773729193535,
+          "step": 197,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9805622693062886,
+          "step": 198,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.072016950145909,
+          "step": 198,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7707087596683626,
+          "step": 199,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8092792186404179,
+          "step": 200,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2616079275441775,
+          "step": 201,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4839214182927618,
+          "step": 203,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.34133846148873126,
+          "step": 204,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.22369617369408445,
+          "step": 205,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.141185267634977,
+          "step": 205,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.17939315971721026,
+          "step": 206,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5833338491907394,
+          "step": 207,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6498900914251112,
+          "step": 208,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8406593969196001,
+          "step": 210,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5999296223640619,
+          "step": 211,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2522467126761244,
+          "step": 212,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.609432640041265,
+          "step": 212,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.30315518021073684,
+          "step": 213,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "L",
+          "operational_channel": false,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 15.146128579425264,
+          "step": 213,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8988119812933849,
+          "step": 214,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5723806294312088,
+          "step": 215,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5107685264491477,
+          "step": 216,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.123238828417357,
+          "step": 216,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7755089562323148,
+          "step": 217,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5130566174091353,
+          "step": 218,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.49093373303366655,
+          "step": 219,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5917100575052285,
+          "step": 220,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.553263021919678,
+          "step": 220,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7468776423400536,
+          "step": 221,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.602172024455103,
+          "step": 222,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.30174395869090354,
+          "step": 223,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.43032975313652344,
+          "step": 224,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5116466873416994,
+          "step": 225,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.592671959978205,
+          "step": 225,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4911501797298736,
+          "step": 226,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7892062624207263,
+          "step": 227,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8308060486422729,
+          "step": 228,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7702720776982156,
+          "step": 229,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8710140778815121,
+          "step": 230,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.355159653694014,
+          "step": 230,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6125490684549655,
+          "step": 231,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7957501098343591,
+          "step": 232,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.782172900299779,
+          "step": 233,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8699243856032205,
+          "step": 234,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6278305102899748,
+          "step": 235,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7123346568438131,
+          "step": 236,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.934330645992837,
+          "step": 236,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "L",
+          "operational_channel": false,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 15.41196783911714,
+          "step": 236,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7113490479469049,
+          "step": 237,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8879058932727053,
+          "step": 238,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8719273786542866,
+          "step": 239,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6776548138389163,
+          "step": 240,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7300145058005241,
+          "step": 241,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9272641712634253,
+          "step": 242,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.821021748011589,
+          "step": 242,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6344825885910821,
+          "step": 243,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6466429596449534,
+          "step": 244,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7447431515253778,
+          "step": 245,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9281003810031879,
+          "step": 246,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7058201265415265,
+          "step": 247,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.372288669404622,
+          "step": 247,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7198586868920488,
+          "step": 248,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7847835977443319,
+          "step": 249,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8335346485996695,
+          "step": 250,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.983598266687791,
+          "step": 251,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8623606049478916,
+          "step": 252,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.643431373265676,
+          "step": 252,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8627269926737555,
+          "step": 253,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9107456395772604,
+          "step": 254,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9491884956606726,
+          "step": 255,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7730584694239222,
+          "step": 256,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8842174887802815,
+          "step": 257,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.962813414525208,
+          "step": 257,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9081192701415395,
+          "step": 258,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.932180389953012,
+          "step": 259,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "L",
+          "operational_channel": false,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 15.532005112432309,
+          "step": 259,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9418369883360265,
+          "step": 260,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9081827362926931,
+          "step": 261,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855392051115299,
+          "step": 262,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 263,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.985540841004276,
+          "step": 264,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.6235082867317745,
+          "step": 264,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855392072523939,
+          "step": 265,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 266,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855391779714956,
+          "step": 267,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855399777390276,
+          "step": 268,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855396146260214,
+          "step": 269,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 270,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.586669545470716,
+          "step": 270,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 271,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 272,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 273,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 274,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 275,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 5.273190399195348,
+          "step": 275,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 276,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 277,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 278,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 5.457827245180354,
+          "step": 278,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 279,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 280,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 5.0511775755883495,
+          "step": 280,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 281,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 77.62284481955095,
+          "step": 281,
+          "variant": "T95",
+          "variant_label": "SECONDARY"
+        }
+      ],
+      "constants_passed": {
+        "L": {
+          "allowance": 0.056644201005884506,
+          "reference": 0.7360674421560752,
+          "threshold": 15.04497999532887
+        },
+        "entropy": {
+          "allowance": 0.003549173553323096,
+          "reference": 0.9890951785336365,
+          "threshold": 0.17319485850717864
+        },
+        "g": {
+          "allowance": 0.022160874873702576,
+          "reference": 0.9786446054615587,
+          "threshold": 4.055050806319135
+        }
+      },
+      "detection_alarm_step": 95,
+      "first_detection_steps": {
+        "L": 157,
+        "entropy": 95,
+        "g": 135
+      },
+      "heartbeat_count": 282,
+      "variant_label": "SECONDARY"
+    },
+    "T975": {
+      "alarm_records": [
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.281710375167181,
+          "step": 95,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.18330002319998828,
+          "step": 102,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.202043817481516,
+          "step": 112,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.22448543411151822,
+          "step": 116,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2533142848276482,
+          "step": 119,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.35030791181215093,
+          "step": 120,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2748135172404663,
+          "step": 123,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5123783763926446,
+          "step": 127,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4347293971233116,
+          "step": 134,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4193437361396565,
+          "step": 138,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.515501654321409,
+          "step": 138,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.42537200525546803,
+          "step": 139,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.30033669508469807,
+          "step": 140,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5017501902184591,
+          "step": 144,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8567758104640704,
+          "step": 147,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4074341087033847,
+          "step": 148,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.23858704377937023,
+          "step": 151,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.6607406971794685,
+          "step": 154,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.45046675582952656,
+          "step": 155,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7573551662203011,
+          "step": 157,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "L",
+          "operational_channel": false,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 15.409206870637597,
+          "step": 157,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5753308824590526,
+          "step": 158,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.18837060416907758,
+          "step": 159,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5686149156285878,
+          "step": 161,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5608233162693371,
+          "step": 163,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.649478626121069,
+          "step": 163,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5741200003827728,
+          "step": 165,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.3250254866855983,
+          "step": 167,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4508000142621469,
+          "step": 168,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.17999734571670578,
+          "step": 169,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2768658301750123,
+          "step": 171,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6653982114475572,
+          "step": 172,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.45338218736977953,
+          "step": 173,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.848811096874902,
+          "step": 173,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4069564364666016,
+          "step": 174,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4591486923478182,
+          "step": 175,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.35924286270189065,
+          "step": 177,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7050250336926617,
+          "step": 178,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2787034353474106,
+          "step": 179,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2949732881117184,
+          "step": 182,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.45366161307610386,
+          "step": 183,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.23140587155438108,
+          "step": 184,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8505261240114508,
+          "step": 185,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.36998928609482373,
+          "step": 186,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8023616657501135,
+          "step": 187,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.653997139526046,
+          "step": 187,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.3224974245434853,
+          "step": 188,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "L",
+          "operational_channel": false,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 15.42796875086786,
+          "step": 188,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9008911797128163,
+          "step": 190,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4272158158283401,
+          "step": 192,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4684729232660958,
+          "step": 193,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9347860893297736,
+          "step": 195,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9111238698410711,
+          "step": 196,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.759146751621257,
+          "step": 196,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4236773729193535,
+          "step": 197,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9805622693062886,
+          "step": 198,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7707087596683626,
+          "step": 199,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8092792186404179,
+          "step": 200,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2616079275441775,
+          "step": 201,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4839214182927618,
+          "step": 203,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.34133846148873126,
+          "step": 204,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.556550171460767,
+          "step": 204,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.22369617369408445,
+          "step": 205,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.17939315971721026,
+          "step": 206,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5833338491907394,
+          "step": 207,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6498900914251112,
+          "step": 208,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8406593969196001,
+          "step": 210,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5999296223640619,
+          "step": 211,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.2522467126761244,
+          "step": 212,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 5.2282556833940665,
+          "step": 212,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.30315518021073684,
+          "step": 213,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "L",
+          "operational_channel": false,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 15.146128579425264,
+          "step": 213,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8988119812933849,
+          "step": 214,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5723806294312088,
+          "step": 215,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5107685264491477,
+          "step": 216,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7755089562323148,
+          "step": 217,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 5.134504633655134,
+          "step": 217,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5130566174091353,
+          "step": 218,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.49093373303366655,
+          "step": 219,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5917100575052285,
+          "step": 220,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7468776423400536,
+          "step": 221,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.544086387293816,
+          "step": 221,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.602172024455103,
+          "step": 222,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.30174395869090354,
+          "step": 223,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.43032975313652344,
+          "step": 224,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.5116466873416994,
+          "step": 225,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.4911501797298736,
+          "step": 226,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7892062624207263,
+          "step": 227,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 5.2382794965732575,
+          "step": 227,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8308060486422729,
+          "step": 228,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7702720776982156,
+          "step": 229,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8710140778815121,
+          "step": 230,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6125490684549655,
+          "step": 231,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7957501098343591,
+          "step": 232,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.782172900299779,
+          "step": 233,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.8444903161892165,
+          "step": 233,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8699243856032205,
+          "step": 234,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6278305102899748,
+          "step": 235,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7123346568438131,
+          "step": 236,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "L",
+          "operational_channel": false,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 15.41196783911714,
+          "step": 236,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7113490479469049,
+          "step": 237,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8879058932727053,
+          "step": 238,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.550619943286165,
+          "step": 238,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8719273786542866,
+          "step": 239,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6776548138389163,
+          "step": 240,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7300145058005241,
+          "step": 241,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9272641712634253,
+          "step": 242,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6344825885910821,
+          "step": 243,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.6466429596449534,
+          "step": 244,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.764491374904402,
+          "step": 244,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7447431515253778,
+          "step": 245,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9281003810031879,
+          "step": 246,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7058201265415265,
+          "step": 247,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7198586868920488,
+          "step": 248,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7847835977443319,
+          "step": 249,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.665676335742827,
+          "step": 249,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8335346485996695,
+          "step": 250,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.983598266687791,
+          "step": 251,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8623606049478916,
+          "step": 252,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8627269926737555,
+          "step": 253,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9107456395772604,
+          "step": 254,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9491884956606726,
+          "step": 255,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 5.085817895645456,
+          "step": 255,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.7730584694239222,
+          "step": 256,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.8842174887802815,
+          "step": 257,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9081192701415395,
+          "step": 258,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.932180389953012,
+          "step": 259,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.6974367854951415,
+          "step": 259,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "L",
+          "operational_channel": false,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 15.532005112432309,
+          "step": 259,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9418369883360265,
+          "step": 260,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9081827362926931,
+          "step": 261,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855392051115299,
+          "step": 262,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 263,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.985540841004276,
+          "step": 264,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855392072523939,
+          "step": 265,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 266,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855391779714956,
+          "step": 267,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.655649074347749,
+          "step": 267,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855399777390276,
+          "step": 268,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855396146260214,
+          "step": 269,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 270,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 271,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 272,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 273,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 5.061330204437333,
+          "step": 273,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 274,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 275,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 276,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 277,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 5.68006216814131,
+          "step": 277,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 278,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 279,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 4.8670001315070435,
+          "step": 279,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 280,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "entropy",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 0.9855460049803134,
+          "step": 281,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        },
+        {
+          "channel": "g",
+          "operational_channel": true,
+          "record_type": "alarm",
+          "statistic_after_reset": 0.0,
+          "statistic_before_reset": 80.18399243970782,
+          "step": 281,
+          "variant": "T975",
+          "variant_label": "PRIMARY"
+        }
+      ],
+      "constants_passed": {
+        "L": {
+          "allowance": 0.056644201005884506,
+          "reference": 0.7360674421560752,
+          "threshold": 15.04497999532887
+        },
+        "entropy": {
+          "allowance": 0.003549173553323096,
+          "reference": 0.9890951785336365,
+          "threshold": 0.17319485850717864
+        },
+        "g": {
+          "allowance": 0.022160874873702576,
+          "reference": 0.9786446054615587,
+          "threshold": 4.507729894543943
+        }
+      },
+      "detection_alarm_step": 95,
+      "first_detection_steps": {
+        "L": 157,
+        "entropy": 95,
+        "g": 138
+      },
+      "heartbeat_count": 282,
+      "variant_label": "PRIMARY"
+    }
+  }
+}

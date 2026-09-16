@@ -1,0 +1,379 @@
+{
+  "cases": [
+    {
+      "case": "at_reference",
+      "channel": "entropy",
+      "measured_alarm_count": 0,
+      "measured_maximum": 0.0,
+      "passed": true
+    },
+    {
+      "allowance": 1.0,
+      "case": "one_sigma_harmful_shift",
+      "channel": "entropy",
+      "expected_alarm_steps": [
+        12,
+        15,
+        18,
+        21,
+        24,
+        27
+      ],
+      "expected_increment": 1.0,
+      "measured_alarm_steps": [
+        12,
+        15,
+        18,
+        21,
+        24,
+        27
+      ],
+      "measured_increments": [
+        1.0
+      ],
+      "passed": true,
+      "sigma": 2.0
+    },
+    {
+      "case": "harmless_shift",
+      "channel": "entropy",
+      "measured_alarm_count": 0,
+      "measured_maximum": 0.0,
+      "passed": true
+    },
+    {
+      "case": "reset_after_alarm",
+      "channel": "entropy",
+      "measured_next_start_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured_post_alarm_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true
+    },
+    {
+      "case": "burn_in",
+      "channel": "entropy",
+      "measured_alarm_count": 0,
+      "measured_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true,
+      "steps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "case": "heartbeat",
+      "channel": "entropy",
+      "expected_count_each": 30,
+      "measured_counts": {
+        "harmful": 30,
+        "harmless": 30,
+        "reference": 30
+      },
+      "passed": true
+    },
+    {
+      "case": "at_reference",
+      "channel": "g",
+      "measured_alarm_count": 0,
+      "measured_maximum": 0.0,
+      "passed": true
+    },
+    {
+      "allowance": 1.0,
+      "case": "one_sigma_harmful_shift",
+      "channel": "g",
+      "expected_alarm_steps": [
+        12,
+        15,
+        18,
+        21,
+        24,
+        27
+      ],
+      "expected_increment": 1.0,
+      "measured_alarm_steps": [
+        12,
+        15,
+        18,
+        21,
+        24,
+        27
+      ],
+      "measured_increments": [
+        1.0
+      ],
+      "passed": true,
+      "sigma": 2.0
+    },
+    {
+      "case": "harmless_shift",
+      "channel": "g",
+      "measured_alarm_count": 0,
+      "measured_maximum": 0.0,
+      "passed": true
+    },
+    {
+      "case": "reset_after_alarm",
+      "channel": "g",
+      "measured_next_start_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured_post_alarm_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true
+    },
+    {
+      "case": "burn_in",
+      "channel": "g",
+      "measured_alarm_count": 0,
+      "measured_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true,
+      "steps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "case": "heartbeat",
+      "channel": "g",
+      "expected_count_each": 30,
+      "measured_counts": {
+        "harmful": 30,
+        "harmless": 30,
+        "reference": 30
+      },
+      "passed": true
+    },
+    {
+      "case": "at_reference",
+      "channel": "L",
+      "measured_alarm_count": 0,
+      "measured_maximum": 0.0,
+      "passed": true
+    },
+    {
+      "allowance": 1.0,
+      "case": "one_sigma_harmful_shift",
+      "channel": "L",
+      "expected_alarm_steps": [
+        12,
+        15,
+        18,
+        21,
+        24,
+        27
+      ],
+      "expected_increment": 1.0,
+      "measured_alarm_steps": [
+        12,
+        15,
+        18,
+        21,
+        24,
+        27
+      ],
+      "measured_increments": [
+        1.0
+      ],
+      "passed": true,
+      "sigma": 2.0
+    },
+    {
+      "case": "harmless_shift",
+      "channel": "L",
+      "measured_alarm_count": 0,
+      "measured_maximum": 0.0,
+      "passed": true
+    },
+    {
+      "case": "reset_after_alarm",
+      "channel": "L",
+      "measured_next_start_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured_post_alarm_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true
+    },
+    {
+      "case": "burn_in",
+      "channel": "L",
+      "measured_alarm_count": 0,
+      "measured_statistics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true,
+      "steps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "case": "heartbeat",
+      "channel": "L",
+      "expected_count_each": 30,
+      "measured_counts": {
+        "harmful": 30,
+        "harmless": 30,
+        "reference": 30
+      },
+      "passed": true
+    },
+    {
+      "case": "comparison_channel_separation",
+      "channel": "L",
+      "measured_L_alarm_steps": [
+        12,
+        15,
+        18,
+        21,
+        24,
+        27
+      ],
+      "measured_operational_alarm_steps": [],
+      "passed": true
+    }
+  ],
+  "identity": {
+    "detector_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+    "executor_sha256_lf": "55af8caf25f1ab20cff28b7a15356e881a31920445afe60f73e45aee296f956d",
+    "plan_sha256_lf": "f864bae8851d25204daff0a64e89fbef0d50025083c8545d44987612b9fbd7f7"
+  },
+  "model_steps_executed": 0,
+  "passed": true,
+  "runtime": {
+    "machine": "YOTKOTEST",
+    "modules": {
+      "simulation/cusum_detector_v2.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+        "sha256_raw": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+      },
+      "simulation/diagnostics/detector_run_r2_eval_executor.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "55af8caf25f1ab20cff28b7a15356e881a31920445afe60f73e45aee296f956d",
+        "sha256_raw": "55af8caf25f1ab20cff28b7a15356e881a31920445afe60f73e45aee296f956d"
+      },
+      "simulation/diagnostics/detector_run_r2_eval_unit_gate.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "5e9e7d6a67f765827c6d62346aa16c2409db8a620e5fe91d6dbb5564064be3dc",
+        "sha256_raw": "5e9e7d6a67f765827c6d62346aa16c2409db8a620e5fe91d6dbb5564064be3dc"
+      }
+    },
+    "numpy": "2.4.4",
+    "operator_cpu_budget": 16,
+    "os_cpu_count": 16,
+    "process_cpu_count": 16,
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "thread_environment": {
+      "BLIS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "thread_runtime": [
+      {
+        "effective_threads": 1,
+        "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+        "query": "scipy_openblas_get_num_threads64_"
+      }
+    ],
+    "worker_pid": 20160
+  },
+  "utc": "2026-09-16T12:05:05.046027+00:00"
+}
