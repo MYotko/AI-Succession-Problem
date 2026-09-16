@@ -95,6 +95,16 @@ described below and supersedes any earlier characterization of the affected clai
 > the honest operating range. This is a detection characterization. It is not a
 > containment result and corrects no published figure.
 
+> **Update, 2026-09-16 (sustained-crossing evaluation complete).** Item 2c measured
+> detection against a hazard defined as a single step above g_star. Round 2, recorded in
+> item 2d, holds the detector fixed and redefines the hazard as a sustained crossing, with
+> its length derived from unattacked calibration data alone. Against that hazard the
+> configured drift attack is detected before the hazard in 38 to 40 of 40 runs per arm
+> with 14 to 30 steps of warning, the slowest reallocation arm in 14 of 40 with 13 further
+> runs never reaching a hazard, and the faster reallocation arms still late by a median of
+> 3 to 14 steps. Neither round is a containment result and neither corrects a published
+> figure.
+
 ---
 
 ## 1. Summary
@@ -1256,6 +1266,97 @@ published sense. The result is specific to these two channels, this calibration 
 a reference successor capability of 2.0. No constant may be changed on the basis of these
 outputs; a different detector design requires its own pre-registration and fresh seeds,
 because this evaluation set has now been seen.
+
+**2d. Sustained-crossing detector evaluation, round 2. COMPLETE, 2026-09-16.**
+Pre-registered in `simulation/diagnostics/detector_round2_design_note.md`, published at
+684fa70 before any run. Stage A, derivation, is at 242ec22; stage B, evaluation, at
+8105b79 under `simulation/diagnostics/detector_run_r2_eval_`, 2,617 artifacts, manifest
+verified. The detector module, its reference values, and its allowances are unchanged from
+item 2c. What changed is the definition of the event being detected.
+
+*Why it exists.* Item 2c measured detection against the first single step at or after
+onset with g at or above g_star. At a reference successor capability of 2.0 that line is
+one the unattacked baseline crosses in 22 of 40 runs, so no channel calibrated to hold
+false alarms near 5 percent can precede it. Round 2 therefore tests the hazard definition
+rather than the detector. As the note discloses, the change was motivated by an
+operator-side exploratory measurement on the item 2c evaluation set; that measurement is
+cited as evidence nowhere, contributed no parameter, and appears in no table here.
+
+*Design.* A hazard is k consecutive steps at or after onset with g at or above g_star,
+confirmed at the k-th step. k is derived only from the 120 committed calibration runs,
+which contain no attack: the NumPy linear 97.5th percentile of the per-run longest span
+above that g_star, floored at 2, the same percentile the operational thresholds use, which
+places a spurious hazard at about 2.5 percent by construction. Stage A derived k as 9 at
+2.0, 2 at 1.5 and 106 at 2.5, matching the values the note pinned before the run. The g
+channel was evaluated at three thresholds from the same committed per-run maxima, the
+committed 4.507729894543943 as primary and 4.055050806319135 and 2.6499927544530903 as
+registered secondaries. Stage B ran the nine arms of item 2b at 40 seed-paired runs each,
+360 runs at seeds 1835086600 through 1835086639.
+
+*Registered result, F1, at the primary threshold and a reference successor capability of
+2.0.* Lead is the confirmation step minus the detection alarm step; a negative lead means
+the alarm followed confirmation.
+
+| Arm | Alarm before or at confirmation | Alarm after | Hazard, no alarm | No hazard | Lead, median steps |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Unattacked baseline, descriptive | 0 | 0 | 1 | 39 | none |
+| Drift attack, multiplier 0.5 | 38 | 2 | 0 | 0 | 30 |
+| Drift attack, multiplier 1 | 39 | 1 | 0 | 0 | 22 |
+| Drift attack, multiplier 2 | 40 | 0 | 0 | 0 | 15 |
+| Drift attack, multiplier 4 | 40 | 0 | 0 | 0 | 14 |
+| Reallocation, shift 0.02 | 14 | 13 | 0 | 13 | 2 |
+| Reallocation, shift 0.05 | 1 | 39 | 0 | 0 | -14 |
+| Reallocation, shift 0.10 | 0 | 40 | 0 | 0 | -10 |
+| Reallocation, shift 0.20 | 0 | 40 | 0 | 0 | -3 |
+
+*What the hazard change moved.* Under item 2c every reallocation run at every shift
+crossed, and none was detected before crossing. Under a sustained hazard, 13 of the 40
+runs at shift 0.02 never reach a hazard at all, because g does not stay above g_star for
+nine consecutive steps. The detector also gains warning time it did not have: the drift
+arms move from 23, 28, 33 and 34 of 40 to 38, 39, 40 and 40, and the lateness in the
+faster reallocation arms falls from a median of 18 to 28 steps to a median of 3 to 14. The
+two rounds measure different hazards, so no item 2c count is superseded or corrected by
+these; the comparison is descriptive.
+
+*F3, false alarms.* At the primary threshold no unattacked run carries an operational
+alarm and one of 40 reaches a hazard, the 2.5 percent the k rule was built to produce. No
+attack run alarms before onset in any variant.
+
+*F4, the published observable.* At the primary threshold, in the shift 0.02 arm the
+absorption channel alarms before or at confirmation where the lineage term L(t) does not
+in 14 runs, against 1 run the other way. The comparison in item 2c could not distinguish
+them because the absorption channel never preceded a crossing there. It can now, and the
+published observable is the weaker of the two on this pathway.
+
+*The trade between lead time and false alarms, registered as secondary.* At the
+90th-percentile threshold the reallocation arms improve, to 22 of 40 at shift 0.02, 11 of
+40 at 0.05 and 34 of 40 at 0.20, while unattacked operational alarms rise to 5 of 40,
+which is 12.5 percent against a design target of about 5. The run flags that as a
+calibration shortfall and adjusts nothing. The arm at shift 0.10 stays at 2 of 40 even
+there. No variant is selected as the detector by this run.
+
+*What remains structurally true.* The hazard and the detector are both persistence
+measures on the same signal, so a large reallocation trips both at nearly the same step.
+Detection before the hazard at the faster shifts is bought either with a threshold that
+raises unattacked alarms or not at all. Round 2 narrows the gap; it does not remove it.
+
+*Verified by recomputation from the raw logs, not from the run reports.* All 360 logs
+match their completion-record hashes. Every hazard span, confirmation step, alarm step and
+detection step, and every count and margin in F1 through F7 at all three thresholds and
+both secondary sweeps, reproduce exactly from the raw logs and the committed constants
+using an independent implementation. Stage A reproduces bit for bit from the committed
+calibration blobs. The batch was interrupted once by a provider usage limit at 297 of 360
+runs and resumed under operator authorization: 297 runs preserved after hash validation,
+14 restarted from step 0 with partial logs retained as byte-identical prefixes, 49 run for
+the first time, and the pinned files unchanged across the interruption.
+
+*What this does not establish.* Nothing here is a containment result. The detector never
+acted on the model, no attack was stopped, no attack-success rate was computed, and no
+published figure is corrected. Sub-Threshold Drift remains uncharacterized in the
+published sense. The result is specific to these channels, this calibration rule, this
+hazard definition, and a reference successor capability of 2.0. These outputs may not be
+used to adjust any constant, and a different detector design requires its own
+pre-registration and fresh seeds.
 
 **3. v2.1 implementation and component validation.** Including a bidirectional
 check on the entropy estimator specifically. A repair tested only in the direction
