@@ -1,0 +1,143 @@
+{
+  "status": "HALTED",
+  "halt_reason": "Executor-creation tool call failed before shell execution: SyntaxError: Unexpected identifier 'text'.",
+  "runtime": {
+    "machine": "YotkoTest",
+    "head": "f28a106c710c3c0e3d7e56c9ac5cb9879b6c4aea",
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.4.4",
+    "simulation_workers": 0,
+    "derivation_executed": false,
+    "bytecode_disabled": true,
+    "os_devnull_write_guard_exemption": true
+  },
+  "outputs": [
+    {
+      "path": "simulation/diagnostics/detector_run_r3_preflight.json",
+      "sha256_lf": "8d272535bd3b533ad683ab3f5a5575e5434b320ebb272b9df6e8d39e587bcb9b",
+      "csv_rows": null
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r3_halt.json",
+      "sha256_lf": "c75437a8eb147dc5bc8b098257d65359d0ca7b9d4f784aba5f0b4e976c0596e1",
+      "csv_rows": null
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r3_report.md",
+      "sha256_lf": "ad123b55e0a26c998154b7f446bdff68fb450288eb25162292a3b31e6601e65d",
+      "csv_rows": null
+    }
+  ],
+  "hash_basis": "LF-normalized bytes",
+  "committed_source_and_note_blobs": [
+    {
+      "path": "simulation/diagnostics/detector_round3_design_note.md",
+      "pin": "b1309a7463b1d7b1f277fd4dd56e997f90fecf2386411871be22ccfabed6db83",
+      "committed_sha256_lf": "b1309a7463b1d7b1f277fd4dd56e997f90fecf2386411871be22ccfabed6db83",
+      "worktree_sha256_lf": "b1309a7463b1d7b1f277fd4dd56e997f90fecf2386411871be22ccfabed6db83",
+      "blob_sha1": "b9d4ec3cc4d1f291b2e643ec07a1a9a4c4ace24e",
+      "publication_commit": "33f54514d68a02449ad03d71df33382ccb841de0"
+    },
+    {
+      "path": "simulation/diagnostics/detector_round2_design_note.md",
+      "pin": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "committed_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "worktree_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "blob_sha1": "cffa1d922c70759b3619856247a3f1ba3dbfdce9"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r2_constants.json",
+      "pin": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "committed_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "worktree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "blob_sha1": "ff934c2613e90804c3ff5c18141f777eaa24276f"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "pin": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "committed_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158"
+    },
+    {
+      "path": "simulation/cusum_detector_v2.py",
+      "pin": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "committed_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953"
+    },
+    {
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "pin": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "committed_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_eval_executor.py",
+      "pin": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "committed_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "worktree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723"
+    },
+    {
+      "path": "simulation/metrics.py",
+      "pin": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611"
+    },
+    {
+      "path": "simulation/agents.py",
+      "pin": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51"
+    },
+    {
+      "path": "simulation/model.py",
+      "pin": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879"
+    },
+    {
+      "path": "simulation/attack_adapter_v2.py",
+      "pin": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e"
+    },
+    {
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "pin": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "committed_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d"
+    },
+    {
+      "path": "simulation/working_factor.py",
+      "pin": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486"
+    },
+    {
+      "path": "simulation/constants_v2_stage18.py",
+      "pin": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2"
+    }
+  ],
+  "t0_stderr_warnings": [
+    "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied"
+  ],
+  "constants_created": false,
+  "manifest_self": {
+    "path": "simulation/diagnostics/detector_run_r3_manifest.json",
+    "sha256_lf": null,
+    "csv_rows": null,
+    "reason": "Recursive self-hash excluded"
+  }
+}

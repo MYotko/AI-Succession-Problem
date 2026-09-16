@@ -1,0 +1,15 @@
+{
+  "status": "HALTED",
+  "reason": "Executor-creation tool call failed before shell execution: SyntaxError: Unexpected identifier 'text'.",
+  "runtime": {
+    "machine": "YotkoTest",
+    "head": "f28a106c710c3c0e3d7e56c9ac5cb9879b6c4aea",
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.4.4",
+    "simulation_workers": 0,
+    "derivation_executed": false,
+    "bytecode_disabled": true,
+    "os_devnull_write_guard_exemption": true
+  },
+  "constants_created": false
+}
