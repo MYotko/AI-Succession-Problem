@@ -99,6 +99,15 @@ described below and supersedes any earlier characterization of the affected clai
 
 ## 1. Summary
 
+**A note on one word.** Throughout this record and the pre-registrations it cites,
+*honest* is a mechanical label, not a moral one. An honest run is a run with no attack
+wrapper applied to the committed action, and an honest arm is the arm of such runs. It
+says nothing about intent, truthfulness, or virtue on the part of any agent, and a
+statement that an honest run crosses a threshold is a statement about the unattacked
+baseline, not about a system behaving badly. Outward-facing writing should prefer
+*baseline* or *unattacked*, which carry no such reading. The word is kept here because
+the committed pre-registrations use it and are not reworded after publication.
+
 Six defects were found in the v2.0 simulation substrate and in the success metrics
 used for the adversarial revalidation. One published claim is withdrawn. One
 published figure is placed under an unresolved exposure. A separate archival gap
