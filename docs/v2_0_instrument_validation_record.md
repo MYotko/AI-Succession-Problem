@@ -87,6 +87,14 @@ described below and supersedes any earlier characterization of the affected clai
 > evaluation are pre-registered in `simulation/diagnostics/detector_design_note.md`
 > before any data they consume exists.
 
+> **Update, 2026-09-15 (detector calibration and evaluation complete).** Both stages ran
+> under that pre-registration and are recorded in Section 8 item 2c. The entropy channel
+> detects the configured drift attack before g crosses g_star in most runs. The absorption
+> channel does not detect the reallocation pathway of item 2b before the crossing in any
+> run, because at a reference successor capability of 2.0 the crossing itself lies inside
+> the honest operating range. This is a detection characterization. It is not a
+> containment result and corrects no published figure.
+
 ---
 
 ## 1. Summary
@@ -1122,6 +1130,123 @@ persistent deficit against a fixed reference rather than trip on a raw threshold
 item 2a found before the repair. The honest planner's suppression and entropy
 descriptives in the run report describe the repaired planner only and support no
 statement about D1.
+
+**2c. Detector calibration and evaluation. COMPLETE, 2026-09-15.** Pre-registered in
+`simulation/diagnostics/detector_design_note.md`, published at 76f81cd before any run.
+Stage 1, calibration, is at b84199f under `simulation/diagnostics/detector_run_cal_`, 605
+artifacts. Stage 2, evaluation, is at 9ce2e65 under `detector_run_eval_`, 2,199 artifacts.
+Each manifest verifies against the committed blobs. The detector reads recorded
+trajectories offline and never acts on the model, so this measures detection timing and
+nothing else.
+
+*Design.* Two operational channels, a one-sided lower CUSUM on raw novelty entropy and a
+one-sided upper CUSUM on the absorption ratio g, with the published surveillance term
+L(t) carried as a comparison channel that never contributes to the operational alarm.
+Stage 1 fixed the nine constants from 120 honest runs at fresh seeds by the rule set in
+the note: the honest median as reference, half the honest standard deviation as
+allowance, and a percentile of the per-run maximum statistics as threshold. Those
+constants were committed and pushed before stage 2, whose executor verified their
+publication and their hashes structurally. Stage 2 ran the nine arms of item 2b at 40
+seed-paired runs each, 360 runs at seeds that overlap nothing used before, with attack
+onset at step 50.
+
+*Calibration constants, stage 1.*
+
+| Channel | Reference | Allowance | Threshold |
+| --- | ---: | ---: | ---: |
+| Entropy, lower | 0.9890951785336365 | 0.003549173553323096 | 0.17319485850717864 |
+| g, upper | 0.9786446054615587 | 0.022160874873702576 | 4.507729894543943 |
+| L, lower, comparison | 0.7360674421560752 | 0.056644201005884506 | 15.04497999532887 |
+
+*Registered result, E1, at the ratified reference successor capability of 2.0.* The
+detection alarm is the first operational alarm at or after onset, and `t_star` is the
+first step at or after onset at which g reaches g_star.
+
+| Arm | Alarm before or at the crossing | Alarm after | Crossed, no alarm | No crossing | Margin, median steps |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Honest, descriptive | 1 | 0 | 21 | 18 | 33 |
+| Drift attack, multiplier 0.5 | 23 | 17 | 0 | 0 | 11 |
+| Drift attack, multiplier 1 | 28 | 12 | 0 | 0 | 11.5 |
+| Drift attack, multiplier 2 | 33 | 7 | 0 | 0 | 7 |
+| Drift attack, multiplier 4 | 34 | 6 | 0 | 0 | 6 |
+| Reallocation, shift 0.02 | 1 | 38 | 1 | 0 | 16 |
+| Reallocation, shift 0.05 | 0 | 40 | 0 | 0 | none |
+| Reallocation, shift 0.10 | 0 | 40 | 0 | 0 | none |
+| Reallocation, shift 0.20 | 0 | 40 | 0 | 0 | none |
+
+E1a, the registered secondary restricted to crossings the paired honest run cannot
+explain, changes no conclusion: 22, 28, 33 and 34 of the eligible drift runs and 1 of the
+156 eligible reallocation runs are detected before or at the crossing.
+
+*E2, first channel to alarm.* Entropy alarms first in all 160 drift-attack runs. In the
+reallocation arms g alarms first in 156 of 160, entropy in 3, and 1 run has no
+operational alarm at or after onset.
+
+*E3, false alarms.* One of 40 honest runs carries an operational alarm at steps 10 and
+up, an entropy alarm at step 144, which is 2.5 percent against the stage 1 design target
+of about 5 percent. No attack run alarms before onset.
+
+*E4, the published observable.* L(t) alarms before or at the crossing in 1 of 160
+reallocation runs, alarms after the crossing in 49, and never alarms in the remaining 110.
+Under the configured drift attack it alarms before or at the crossing in 2 of 160.
+
+*E5, secondary sweep.* At a reference successor capability of 1.5, g_star rises to
+1.270310072072110 and every drift arm is detected before the crossing in 40 of 40, while
+the reallocation arms reach 21 of 40 at shift 0.05 and 0 of 40 at shift 0.02, where no
+run crosses at all. At 2.5, g_star falls to 0.966516292749662, below the honest median of
+g, and 39 of 40 honest runs cross it; the criterion carries no information there. Both
+are secondary.
+
+*E6, liveness.* Heartbeat records equal completed steps in all 360 runs, 99,293 of each.
+
+*The measured pathway is not closed before the crossing.* Under the interpretation fixed
+in Section 7 of the note, a run detected before or at the crossing in a reallocation arm
+is a run in which the g channel closed the path that item 2b measured. On the evidence
+the count for g is zero of 160: the single reallocation run detected before its crossing
+was detected by the entropy channel, at step 101 against a crossing at step 117. The g
+channel alarms in 159 of the 160 reallocation runs and in every case after the crossing,
+by a median of 63, 28.5, 18 and 11 steps as the shift rises from 0.02 to 0.20. The
+interpretation names no category for an alarm after the crossing, which is where 158 of
+those runs fall, so they are recorded here as measured: detected, late, with the lag
+stated.
+
+*The coverage test is uninformative, not passed.* Section 7 also states that if the L
+channel alone detects before or at the crossing in every reallocation run in which the g
+channel alone does, the published observable covers the measured pathway. The g channel
+does so in no run, so the condition holds vacuously and supports no claim of coverage.
+The record states it that way. The available evidence points the other way: L(t) never
+alarms in 110 of the 160 reallocation runs, while g alarms in 159 of them after the
+crossing.
+
+*Structural reason, operator-side, not a registered result.* At a reference successor
+capability of 2.0, g_star is 1.0965735902799727, which is 2.66 honest standard
+deviations above the honest median of g, and 22 of the 40 honest evaluation runs reach
+it after onset. A statistic held exactly at g_star accumulates at g_star minus reference
+minus allowance per step and needs about 47 steps to reach a threshold calibrated on
+honest noise. Reallocation raises g gradually, so the crossing precedes the alarm by
+construction. No threshold calibrated on honest runs can alarm before a crossing that
+honest runs themselves make. Detection before the crossing is therefore not a property
+this channel can have at this reference capability, and the honest-noise calibration is
+not at fault.
+
+*Verified by recomputation from the raw logs, not from the run reports.* All 120
+calibration logs and all 360 evaluation logs match their completion-record hashes. The
+nine constants reproduce bit for bit from the calibration logs. Every alarm step,
+crossing step, detection step, and every count and margin in E1 through E6 reproduce
+exactly from the evaluation logs and the committed constants blob, using an independent
+implementation of the statistic. Both manifests verify. The stage 1 batch halted once on
+a Windows file-replacement permission error and was resumed under a separately hashed
+operational layer; the 13 restarted runs retain partial logs that are byte-identical
+prefixes of their completed logs, and the pinned science files kept their hashes across
+the interruption. Stage 2 halted at no point and needed no retry.
+
+*What this does not establish.* Nothing here is a containment result. The detector never
+acted on the model, no attack was stopped, no attack-success rate was computed, and no
+published figure is corrected. Sub-Threshold Drift remains uncharacterized in the
+published sense. The result is specific to these two channels, this calibration rule, and
+a reference successor capability of 2.0. No constant may be changed on the basis of these
+outputs; a different detector design requires its own pre-registration and fresh seeds,
+because this evaluation set has now been seen.
 
 **3. v2.1 implementation and component validation.** Including a bidirectional
 check on the entropy estimator specifically. A repair tested only in the direction
