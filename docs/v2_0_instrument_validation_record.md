@@ -1599,6 +1599,32 @@ than after it.
 output path corrected, and no sweep runner able to write outside a tracked
 directory.
 
+**Output paths anchored, 2026-09-17. This item stays open on two counts.** An inventory
+of the top-level runners found four that resolved output paths against the directory
+they were launched from rather than the repository root: `simulation/monte_carlo.py`,
+`simulation/visualization.py`, and the two Sybil smoke runners. Launched from
+`simulation/`, the first two wrote into `simulation/data/`, which is gitignored, so their
+output could vanish silently, the failure mode of Section 7. All four now anchor to the
+repository root, matching the anchoring every other top-level runner already used, and
+the Sybil smokes resolve a relative `--output-root` against the root as well. For a run
+launched from the root nothing moves: every output directory resolves to the same place
+before and after. Two comments in `monte_carlo.py` stated the ignore rules backwards and
+were corrected to match `.gitignore`: the root `data/` directory is not ignored, and
+`docs/charts` is. New tests in `simulation/test_output_paths.py` resolve each path from a
+directory outside the repository and pass; the existing suite still reports 22 passed.
+
+*Open, by operator decision:* `simulation/run_attack_vector_revalidation_v2.py` still
+resolves its `--output-root` default against the launch directory. It is one of the
+seven files whose hashes every pre-registration since the drift mapping pins, so it is
+left unchanged as a recorded exception until the pin set has to change for another
+reason. On the development machine its only output directory is the tracked
+`data/attack_vector_revalidation_v2/`, with no stray copy under `simulation/`; the failed
+third machine named below cannot be checked.
+
+*Open, not yet addressed:* the second half of this item, a manifest written as part of
+the run rather than after it, is met by every pre-registered executor since the drift
+mapping but not by the older sweep runners, which were not changed here.
+
 **Deferred to v2.1 scope, recorded here so the deferral is not mistaken later for
 an oversight.** While measuring the yield-event rate for item 2, the defended rows
 at defense mode "both" in one pinned shard were observed to pool to a block rate of
@@ -1621,13 +1647,18 @@ that might be, because untracked files were never enumerated anywhere. This is t
 same failure mode as Section 7, still live, on a machine that cannot currently be
 reached.
 
-**Open item, not a commitment.** The snapshot generator's git introspection fails
-open. When it cannot read the commit and branch it emits a warning, records both as
-`unknown`, and reports completion. The tool that stamps provenance onto generated
-snapshots can therefore succeed while its provenance capture has silently failed.
+**Resolved 2026-09-17, formerly an open item.** The snapshot generator's git
+introspection failed open. When it could not read the commit and branch it emitted a
+warning, recorded both as `unknown`, and reported completion, so the tool that stamps
+provenance onto generated snapshots could succeed while its provenance capture had
+silently failed.
 Found during the first veto floor attempt, at
 `scripts/generate_project_knowledge_snapshots.py:140-142`. Same class as the Sybil
-finding: a check reporting healthy while defeated.
+finding: a check reporting healthy while defeated. It now fails closed: when git
+introspection fails, the generator prints an error naming the command that failed and
+exits nonzero before writing any snapshot. A new flag, `--allow-unknown-provenance`,
+restores the old behavior deliberately and says so on stderr. The change was exercised
+on the real path, with git removed from the search path, as well as by tests.
 
 ---
 
