@@ -199,3 +199,39 @@ blob SHA1 of this note and of every pinned file.
 prefix list does not yet cover `vector_paired_run_`. It should be added before the next
 snapshot regeneration, as `detector_run_` was, so that per-run artifacts stay out of the
 generated snapshots while this note itself stays in.
+
+## 13. Amendment 1, 2026-09-17: stage A construction is fixed
+
+**Status:** committed and pushed before any stage A run exists. No output was produced
+under the unamended text.
+
+**What was underdetermined.** Section 6 names the stage A arms as the configured attack and
+the same configuration with corruption disabled, but the measurement tampering vector
+carries two further construction dials that "the same configuration" does not fix. One is
+`cop_independent_eval`, this vector's defense, which the pinned corpus varies over both
+states. The other is `base_transition_cost`, which the pinned corpus varies over 1.5, 2.0
+and 3.0. An executor could satisfy the unamended text at any of six combinations, and the
+paired difference would mean something different at each.
+
+**Amended, replacing the stage A arm and seed counts in Section 6.**
+
+- `base_transition_cost` is fixed at 1.5, the production default in
+  `simulation/model.py`. It is not varied, and no result at another value is reported.
+- Both defense states are run: `cop_independent_eval` false and true.
+- The design is therefore 60 seeds, crossed with corruption active or disabled, crossed
+  with the defense off or on: 240 runs of 300 steps, still at seeds 1835087000 through
+  1835087059.
+- The paired difference is computed **within each defense state**, giving two registered
+  P1 values, one at defense off and one at defense on, each over 60 pairs. Neither is
+  subtracted from the other, and no difference of differences is registered.
+- P2 and P3 are likewise reported within each defense state, and P4 is reported over all
+  240 runs.
+
+**Why both states rather than one.** With the defense off, the quantity asks whether
+falsified measurement moves ratification at all. With it on, it asks whether the defense
+removes that movement. Fixing a single state would answer only one of those and would
+leave the other unanswerable without a second pre-registration.
+
+**Nothing else changes.** The quantity, the pairing rule, the control's construction by
+in-process replacement, the inertness gate, the seeds, the step count, stage B, stage C,
+and the interpretation of Section 10 stand as committed.
