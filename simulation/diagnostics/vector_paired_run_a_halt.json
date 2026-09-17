@@ -1,0 +1,15 @@
+{
+  "status": "HALTED",
+  "reason": "Specification conflict: the committed note Section 2 line 39 prohibits any function from computing or returning a ratio of two measured counts, while the dispatch requires unchanged run_single(task) and retention of every returned field. The pinned runner at line 435 computes and returns capture_rate as blocked / met if met else 0.0.",
+  "additional_findings": [],
+  "phase": "Specification reading after T0, before T1",
+  "t0_passed": true,
+  "gate_model_steps": 0,
+  "evaluation_runs_launched": 0,
+  "evaluation_runs_completed": 0,
+  "registered_analysis_computed": false,
+  "tool_layer_workarounds": [
+    "Halt-recorder authoring had a tool-layer syntax error before any shell ran; removed nested backtick quoting and authored through a base64 shell command."
+  ],
+  "utc": "2026-09-17T21:39:35.461471+00:00"
+}

@@ -1,0 +1,240 @@
+{
+  "status": "HALTED",
+  "halt": {
+    "status": "HALTED",
+    "reason": "Specification conflict: the committed note Section 2 line 39 prohibits any function from computing or returning a ratio of two measured counts, while the dispatch requires unchanged run_single(task) and retention of every returned field. The pinned runner at line 435 computes and returns capture_rate as blocked / met if met else 0.0.",
+    "additional_findings": [],
+    "phase": "Specification reading after T0, before T1",
+    "t0_passed": true,
+    "gate_model_steps": 0,
+    "evaluation_runs_launched": 0,
+    "evaluation_runs_completed": 0,
+    "registered_analysis_computed": false,
+    "tool_layer_workarounds": [
+      "Halt-recorder authoring had a tool-layer syntax error before any shell ran; removed nested backtick quoting and authored through a base64 shell command."
+    ],
+    "utc": "2026-09-17T21:39:35.461471+00:00"
+  },
+  "outputs": [
+    {
+      "path": "simulation/diagnostics/vector_paired_run_a_finalize_halt.py",
+      "sha256_lf": "796571daeaf08c5c3314c8de3c1238a82befe1b09f84daf45bd19b49c8aa15df",
+      "csv_rows": null
+    },
+    {
+      "path": "simulation/diagnostics/vector_paired_run_a_halt.json",
+      "sha256_lf": "8dd9267d32b33b5e3beeb2ecfb7d513581e9e1551d4811e9833db20b1df80f25",
+      "csv_rows": null
+    },
+    {
+      "path": "simulation/diagnostics/vector_paired_run_a_preflight.json",
+      "sha256_lf": "921a77197d2ff17c6705709425013b71154effa60e8ab2cd8b6709b862da1d86",
+      "csv_rows": null
+    },
+    {
+      "path": "simulation/diagnostics/vector_paired_run_a_report.md",
+      "sha256_lf": "b4707fa3e2d29300369a4b86577633fc203ef5d66be9b58bd3ab533140f7c366",
+      "csv_rows": null
+    },
+    {
+      "path": "simulation/diagnostics/vector_paired_run_a_results.json",
+      "sha256_lf": "77dacf98ed3af3a56b6bb149c7cfbbc07fcbb4b30749b3c6c13cba145a372104",
+      "csv_rows": null
+    }
+  ],
+  "source_pins_start_and_completion": [
+    {
+      "path": "simulation/diagnostics/per_vector_paired_design_note.md",
+      "expected_sha256_lf": "592401276ee736900a58c3ff3c8a6a93055b9a890a14ba3becffa7017766c307",
+      "start_blob_sha256_lf": "592401276ee736900a58c3ff3c8a6a93055b9a890a14ba3becffa7017766c307",
+      "start_worktree_sha256_lf": "592401276ee736900a58c3ff3c8a6a93055b9a890a14ba3becffa7017766c307",
+      "blob_sha1": "af43ea8c45ea9c779ad8c6709226c3bd6dfd7f2d",
+      "publication_commit": "3494cb9276629a2fde18aedea505de8b674b0fef",
+      "completion_blob_sha256_lf": "592401276ee736900a58c3ff3c8a6a93055b9a890a14ba3becffa7017766c307",
+      "completion_worktree_sha256_lf": "592401276ee736900a58c3ff3c8a6a93055b9a890a14ba3becffa7017766c307",
+      "completion_blob_sha1": "af43ea8c45ea9c779ad8c6709226c3bd6dfd7f2d",
+      "matched": true
+    },
+    {
+      "path": "simulation/attack_metrics_v2.py",
+      "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "start_blob_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "start_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+      "publication_commit": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+      "completion_blob_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "completion_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "completion_blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+      "matched": true
+    },
+    {
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "start_blob_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "start_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "publication_commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+      "completion_blob_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "completion_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "completion_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "matched": true
+    },
+    {
+      "path": "simulation/metrics.py",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "start_blob_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "start_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "completion_blob_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "completion_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "completion_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "matched": true
+    },
+    {
+      "path": "simulation/agents.py",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "start_blob_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "start_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "completion_blob_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "completion_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "completion_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "matched": true
+    },
+    {
+      "path": "simulation/model.py",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "start_blob_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "start_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "completion_blob_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "completion_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "completion_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "matched": true
+    },
+    {
+      "path": "simulation/attack_adapter_v2.py",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "start_blob_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "start_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "publication_commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+      "completion_blob_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "completion_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "completion_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "matched": true
+    },
+    {
+      "path": "simulation/working_factor.py",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "start_blob_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "start_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "publication_commit": "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+      "completion_blob_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "completion_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "completion_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "matched": true
+    },
+    {
+      "path": "simulation/constants_v2_stage18.py",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "start_blob_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "start_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "publication_commit": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+      "completion_blob_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "completion_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "completion_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "matched": true
+    }
+  ],
+  "inherited_source_pin": {
+    "path": "simulation/diagnostics/detector_design_note.md",
+    "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+    "blob_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+    "worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+    "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+    "matched": true,
+    "basis": "Section 3 inherited pin, read at halt before model execution"
+  },
+  "runtime": {
+    "machine": "YOTKOTEST",
+    "head": "3494cb9276629a2fde18aedea505de8b674b0fef",
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.4.4",
+    "operator_cpu_budget": 16,
+    "operating_mode": "normal",
+    "planned_worker_limit": 15,
+    "simulation_workers_used": 0,
+    "numerical_worker_threads_verified": false,
+    "reason_threads_not_verified": "No worker launched",
+    "resumed_seeds": [],
+    "retry_events": [],
+    "tool_layer_workarounds": [
+      "Halt-recorder authoring had a tool-layer syntax error before any shell ran; removed nested backtick quoting and authored through a base64 shell command."
+    ]
+  },
+  "per_module_sha256": {
+    "simulation/diagnostics/vector_paired_run_a_finalize_halt.py": {
+      "sha256_lf": "796571daeaf08c5c3314c8de3c1238a82befe1b09f84daf45bd19b49c8aa15df",
+      "basis": "LF-normalized bytes",
+      "executed": true
+    },
+    "simulation/attack_metrics_v2.py": {
+      "sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "basis": "LF-normalized working-tree bytes",
+      "executed": false
+    },
+    "simulation/run_attack_vector_revalidation_v2.py": {
+      "sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "basis": "LF-normalized working-tree bytes",
+      "executed": false
+    },
+    "simulation/metrics.py": {
+      "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "basis": "LF-normalized working-tree bytes",
+      "executed": false
+    },
+    "simulation/agents.py": {
+      "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "basis": "LF-normalized working-tree bytes",
+      "executed": false
+    },
+    "simulation/model.py": {
+      "sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "basis": "LF-normalized working-tree bytes",
+      "executed": false
+    },
+    "simulation/attack_adapter_v2.py": {
+      "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "basis": "LF-normalized working-tree bytes",
+      "executed": false
+    },
+    "simulation/working_factor.py": {
+      "sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "basis": "LF-normalized working-tree bytes",
+      "executed": false
+    },
+    "simulation/constants_v2_stage18.py": {
+      "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "basis": "LF-normalized working-tree bytes",
+      "executed": false
+    }
+  },
+  "t0_stderr_warnings": [
+    "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied"
+  ],
+  "sha256_basis": "LF-normalized bytes",
+  "csv_count_method": "csv.DictReader excluding header, null for non-CSV",
+  "manifest_self": {
+    "path": "simulation/diagnostics/vector_paired_run_a_manifest.json",
+    "sha256_lf": null,
+    "csv_rows": null,
+    "reason": "Recursive self-hash excluded"
+  },
+  "created_utc": "2026-09-17T21:39:35.691680+00:00"
+}
