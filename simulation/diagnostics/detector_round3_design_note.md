@@ -236,3 +236,44 @@ stage emits a manifest enumerating every output with SHA256 on LF-normalized byt
 row counts, and records the committed blob SHA1 of this note, of the round 1 and round 2
 notes, of the round 1 and round 2 constants, of the detector module, and of every pinned
 source file.
+
+## 10. Amendment 1, 2026-09-16: the summation that defines A is pinned
+
+**Status:** committed and pushed before any evaluation output of stage B existed. Stage B
+halted at its A-definition gate with zero of 360 evaluation runs launched, so no output
+was produced under the unamended text and none is reported under it.
+
+**What was underdetermined.** Section 4 defines `A(t)` as the sum over the six shares of
+the absolute difference between the share and its median. It does not say in what order,
+or by what operation, those six values are added. Floating-point addition is not
+associative, so two implementations that both satisfy the sentence can differ in the last
+bit. They did: on step 2 of the stage B recorder conformance run the executor recorded
+`0.36201162103876716` while the gate's independent recomputation produced
+`0.3620116210387671`. The gate required exact equality and therefore halted. The halt is
+recorded in `simulation/diagnostics/detector_run_r3_eval_report.md`.
+
+**Amended, replacing nothing and adding a constraint to Section 4.** For a step whose six
+shares in the registered order are `x` and whose fixed median vector is `m`, `A(t)` is
+
+`numpy.sum(numpy.abs(x - m))`
+
+evaluated in float64 over the six-element vector in the registered order, which is
+`x_compute`, `x_bio_welfare`, `x_novelty_agency`, `x_institutional_capacity`,
+`x_transfer_comprehension`, `x_resilience`. Any other summation order or accumulation
+method, including a left-to-right Python sum over the six values, is not this quantity
+even where it agrees to fifteen digits.
+
+**No constant changes.** This is the operation the stage A derivation used for every value
+it produced, in `simulation/diagnostics/detector_run_r3_a3_derive.py` at 7a588b6, where A
+is computed as `np.sum(np.abs(run["matrix"] - medians), axis=1)`. The six medians, the A
+reference, allowance and three thresholds, and the two directed channels' constants are
+unaffected and are not re-derived. The amendment pins the operation that produced them
+rather than choosing a new one.
+
+**The gate stands as written.** The stage B A-definition gate still requires exact
+equality between the recorded `A(t)` and a recomputation from the recorded shares. After
+this amendment both sides are the same operation, so equality is a real check on the
+recorder rather than an artifact of two spellings of the same formula.
+
+**Nothing else changes.** Seeds, arms, construction, recorded fields, the channels, the
+hazard, the gates and the registered quantities G1 through G7 stand as committed.
