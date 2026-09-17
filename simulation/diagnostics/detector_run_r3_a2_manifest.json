@@ -1,0 +1,51 @@
+{
+  "status": "HALTED",
+  "halt_reason": "Direct file-access tool failed before executing code: Mcp error -32602: js: codex/sandbox-state-meta: missing field sandboxPolicy.",
+  "runtime": {
+    "machine": "YOTKOTEST",
+    "head": "2ac9f8fe8b4f7a6c9d9b25d795ab7007531dc7bb",
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.4.4",
+    "simulation_workers": 0,
+    "model_steps": 0,
+    "derivation_executed": false,
+    "bytecode_disabled": true,
+    "halt_writer_write_guard_installed": true,
+    "os_devnull_write_guard_exemption": true
+  },
+  "outputs": [
+    {
+      "path": "simulation/diagnostics/detector_run_r3_a2_halt_writer.py",
+      "sha256_lf": "c191b88cbd8854acb6d18370e0044912ca7ff095713c674d17f3b97b101e5b92",
+      "csv_rows": null
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r3_a2_preflight.json",
+      "sha256_lf": "5472c2a07c71b659a6235b30ce05c8c69a7a6ce943afc81bbb850ed115ab96c9",
+      "csv_rows": null
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r3_a2_halt.json",
+      "sha256_lf": "38ff2cb163dc5b741bb0da44da2d7507e9e50e86884491bae2ca036b03b33b54",
+      "csv_rows": null
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r3_a2_report.md",
+      "sha256_lf": "d1002e2b9b8b554da6e6d96470ef7e18f551738612d43af33fa7412f3518c770",
+      "csv_rows": null
+    }
+  ],
+  "hash_basis": "LF-normalized bytes",
+  "committed_input_blob_sha1": null,
+  "unavailable_provenance_reason": "Halted before T0d and specification retrieval",
+  "t0_stderr_warnings": [
+    "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied"
+  ],
+  "constants_created": false,
+  "manifest_self": {
+    "path": "simulation/diagnostics/detector_run_r3_a2_manifest.json",
+    "sha256_lf": null,
+    "csv_rows": null,
+    "reason": "Recursive self-hash excluded"
+  }
+}

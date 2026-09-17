@@ -1,0 +1,17 @@
+{
+  "status": "HALTED",
+  "halt_reason": "Direct file-access tool failed before executing code: Mcp error -32602: js: codex/sandbox-state-meta: missing field sandboxPolicy.",
+  "constants_created": false,
+  "runtime": {
+    "machine": "YOTKOTEST",
+    "head": "2ac9f8fe8b4f7a6c9d9b25d795ab7007531dc7bb",
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.4.4",
+    "simulation_workers": 0,
+    "model_steps": 0,
+    "derivation_executed": false,
+    "bytecode_disabled": true,
+    "halt_writer_write_guard_installed": true,
+    "os_devnull_write_guard_exemption": true
+  }
+}

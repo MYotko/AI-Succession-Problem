@@ -1,0 +1,39 @@
+{
+  "status": "INCOMPLETE_AFTER_HALT",
+  "checks": [
+    {
+      "check": "T0a",
+      "command": "git rev-parse --abbrev-ref HEAD",
+      "exit": 0,
+      "stdout": "main",
+      "passed": true
+    },
+    {
+      "check": "T0b",
+      "command": "git merge-base --is-ancestor 2ac9f8fe8b4f7a6c9d9b25d795ab7007531dc7bb HEAD",
+      "exit": 0,
+      "passed": true
+    },
+    {
+      "check": "T0c",
+      "command": "git status --porcelain --untracked-files=no",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied",
+      "passed": true
+    }
+  ],
+  "checks_not_completed": [
+    "T0d",
+    "T0e",
+    "T0f",
+    "T0g",
+    "T0h"
+  ],
+  "post_halt_artifact_creation_check": {
+    "existing_attempt2_artifacts": [],
+    "purpose": "Avoid overwriting any existing attempt 2 artifact"
+  },
+  "committed_specification_read": false,
+  "source_pins_verified_this_attempt": false
+}
