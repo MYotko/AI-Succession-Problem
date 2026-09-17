@@ -235,3 +235,44 @@ leave the other unanswerable without a second pre-registration.
 **Nothing else changes.** The quantity, the pairing rule, the control's construction by
 in-process replacement, the inertness gate, the seeds, the step count, stage B, stage C,
 and the interpretation of Section 10 stand as committed.
+
+## 14. Amendment 2, 2026-09-17: the ratio prohibition binds this note's quantities
+
+**Status:** committed and pushed before any stage A run exists. Stage A halted at its
+first attempt with zero of 240 runs launched, so no output was produced under the
+unamended text. The halt is recorded in
+`simulation/diagnostics/vector_paired_run_a_report.md`.
+
+**What was overbroad.** Section 2 states, without qualification, that no function computes
+or returns a ratio of two measured counts. Section 3 requires every run to be constructed
+through the committed pinned runner, unchanged, and the stage A dispatch requires keeping
+every field that runner's `run_single` returns. That runner computes
+`capture_rate` as `blocked / met` at line 435 and returns it in every row. The two
+requirements cannot both hold, and the executor halted rather than choose between them,
+which is correct.
+
+**Amended, narrowing Section 2's sentence to its purpose.** The prohibition binds the
+quantities this note derives, the analysis code that derives them, and everything this
+note reports or cites. It does not bind the interior of a pinned file that the note
+deliberately does not modify. Concretely:
+
+- The pinned runner is used unchanged, as Section 3 requires.
+- Its legacy `capture_rate` field is retained verbatim in the raw recorded rows, for
+  provenance and byte-comparability with the pinned corpus.
+- That field is excluded from every registered quantity, appears in no table, and may not
+  be quoted anywhere in this note's outputs or in the record entry that follows.
+- The analysis script asserts that no registered quantity reads it, and the report states
+  that the field was recorded and not used.
+
+**Why not strip the field instead.** Removing it would mean editing the pinned runner,
+which is out of scope, or forking its row builder, which is what makes these counts
+comparable to the pinned corpus in the first place. Recording a legacy value and refusing
+to use it is the smaller and more auditable move.
+
+**What D5 and D6 still forbid.** Nothing here softens them. A ratio of two measured counts
+remains barred as a reported quantity, an analysis input, and a claim; the veto capture
+ladder that D6 identified is the reason, and the retired per-run ratio stays retired.
+
+**Nothing else changes.** The declared quantities, the pairing rule, the arms, the seeds,
+the gates, stages B and C, and the interpretation of Section 10 stand as committed,
+including Amendment 1.
