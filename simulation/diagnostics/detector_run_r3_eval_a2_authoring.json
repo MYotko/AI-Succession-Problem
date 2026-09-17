@@ -1,0 +1,39 @@
+{
+  "sources": [
+    {
+      "path": "simulation/diagnostics/detector_run_r3_eval_executor.py",
+      "commit": "63470090dc3836628b69fce432a30b15b3f212b7",
+      "sha256_lf": "301684b83bb155daf745f03bf0f0ccf50a35c11ee911e66dd5e46b39ab0d8338",
+      "blob_sha1": "7bcb99aa51de597e4f025143c6b64ece9e7c1797"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r3_eval_channels.py",
+      "commit": "63470090dc3836628b69fce432a30b15b3f212b7",
+      "sha256_lf": "4fd5c1588b9940489d935588666e0df81b8114ff6bfaae5c604f4541ed6dd4c6",
+      "blob_sha1": "f54ac13ae6436e79cb9855879c91ac8a59a68b20"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r3_eval_unit_gate.py",
+      "commit": "63470090dc3836628b69fce432a30b15b3f212b7",
+      "sha256_lf": "684a5780c774a8f136778b563712d98af76e1376b6a3053e8dedcf1f51b0863a",
+      "blob_sha1": "a06e5490b206f4beb8f2f7670dedb9680a4181b1"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r3_eval_analysis.py",
+      "commit": "63470090dc3836628b69fce432a30b15b3f212b7",
+      "sha256_lf": "7d6932690d13fabc7524c67d6b2efd81abdf0e04c5b1371f5cbdde5885b4a632",
+      "blob_sha1": "717d62f2e917535870eb472f8165784ddbea2151"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r3_eval_report.py",
+      "commit": "63470090dc3836628b69fce432a30b15b3f212b7",
+      "sha256_lf": "dc8a93e337d8598b8f950be79bc98c7c101a014062078be39828cf978448db92",
+      "blob_sha1": "481f2a10276f2c24ab65039b24933c897925a060"
+    }
+  ],
+  "all_scripts_parsed_before_execution": true,
+  "amendment": "Amendment 1 pins numpy.sum(numpy.abs(x - m)) on six float64 shares in registered order.",
+  "bytecode_writes": false,
+  "guard_prefix": "detector_run_r3_eval_a2_",
+  "os_devnull_exempt": true
+}

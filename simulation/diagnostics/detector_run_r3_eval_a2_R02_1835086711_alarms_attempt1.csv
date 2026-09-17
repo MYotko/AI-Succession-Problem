@@ -1,0 +1,7 @@
+record_type,channel,label,threshold,step,statistic_before_reset,statistic_after_reset
+alarm,A90,SECONDARY,0.6044759669277072,68,0.6314317709484436,0.0
+alarm,transfer_share,"SECONDARY, attack-specific",0.42746784963836376,75,0.4428589384557178,0.0
+alarm,compute_share,"SECONDARY, attack-specific",0.6568684632630958,195,0.7642898991563705,0.0
+alarm,g,comparison,4.507729894543943,180,4.541670212103583,0.0
+alarm,g,comparison,4.507729894543943,224,4.540653463813326,0.0
+alarm,g,comparison,4.507729894543943,296,4.553452403627343,0.0
