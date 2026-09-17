@@ -1,0 +1,20 @@
+{
+  "source_copies": [
+    {
+      "path": "simulation/diagnostics/detector_run_r2_eval_executor.py",
+      "read_commit": "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237",
+      "sha256_lf": "55af8caf25f1ab20cff28b7a15356e881a31920445afe60f73e45aee296f956d",
+      "blob_sha1": "6d45c5541b909689439e8bef431172699964a0a2"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r2_eval_unit_gate.py",
+      "read_commit": "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237",
+      "sha256_lf": "5e9e7d6a67f765827c6d62346aa16c2409db8a620e5fe91d6dbb5564064be3dc",
+      "blob_sha1": "9a1d1794a5f3717fd612660f25e7e74ba7230674"
+    }
+  ],
+  "executor_parse_passed": true,
+  "unit_parse_passed": true,
+  "recorder_function_copied_without_change": true,
+  "retry_layer_copied_without_change": true
+}

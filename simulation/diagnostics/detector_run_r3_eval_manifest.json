@@ -1,0 +1,604 @@
+{
+  "created_utc": "2026-09-17T01:00:46.052854+00:00",
+  "csv_count_method": "csv.DictReader excluding header",
+  "head": "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237",
+  "manifest_self": {
+    "csv_rows": null,
+    "path": "simulation/diagnostics/detector_run_r3_eval_manifest.json",
+    "reason": "Self-hash excluded to avoid circular hashing",
+    "sha256_lf": null
+  },
+  "module_hashes": {
+    "simulation/agents.py": {
+      "lf_basis": "LF-normalized working-tree bytes",
+      "raw_basis": "raw working-tree bytes",
+      "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+    },
+    "simulation/attack_adapter_v2.py": {
+      "lf_basis": "LF-normalized working-tree bytes",
+      "raw_basis": "raw working-tree bytes",
+      "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+    },
+    "simulation/constants_v2_stage15.py": {
+      "lf_basis": "LF-normalized working-tree bytes",
+      "raw_basis": "raw working-tree bytes",
+      "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+      "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+    },
+    "simulation/constants_v2_stage18.py": {
+      "lf_basis": "LF-normalized working-tree bytes",
+      "raw_basis": "raw working-tree bytes",
+      "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+    },
+    "simulation/defection.py": {
+      "lf_basis": "LF-normalized working-tree bytes",
+      "raw_basis": "raw working-tree bytes",
+      "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+      "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+    },
+    "simulation/diagnostics/detector_run_r3_eval_channels.py": {
+      "lf_basis": "LF-normalized working-tree bytes",
+      "raw_basis": "raw working-tree bytes",
+      "sha256_lf": "4fd5c1588b9940489d935588666e0df81b8114ff6bfaae5c604f4541ed6dd4c6",
+      "sha256_raw": "4fd5c1588b9940489d935588666e0df81b8114ff6bfaae5c604f4541ed6dd4c6"
+    },
+    "simulation/diagnostics/detector_run_r3_eval_executor.py": {
+      "lf_basis": "LF-normalized working-tree bytes",
+      "raw_basis": "raw working-tree bytes",
+      "sha256_lf": "301684b83bb155daf745f03bf0f0ccf50a35c11ee911e66dd5e46b39ab0d8338",
+      "sha256_raw": "301684b83bb155daf745f03bf0f0ccf50a35c11ee911e66dd5e46b39ab0d8338"
+    },
+    "simulation/diagnostics/detector_run_r3_eval_report.py": {
+      "lf_basis": "LF-normalized working-tree bytes",
+      "raw_basis": "raw working-tree bytes",
+      "sha256_lf": "dc8a93e337d8598b8f950be79bc98c7c101a014062078be39828cf978448db92",
+      "sha256_raw": "dc8a93e337d8598b8f950be79bc98c7c101a014062078be39828cf978448db92"
+    },
+    "simulation/metrics.py": {
+      "lf_basis": "LF-normalized working-tree bytes",
+      "raw_basis": "raw working-tree bytes",
+      "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+    },
+    "simulation/model.py": {
+      "lf_basis": "LF-normalized working-tree bytes",
+      "raw_basis": "raw working-tree bytes",
+      "sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "sha256_raw": "e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945"
+    },
+    "simulation/run_attack_vector_revalidation_v2.py": {
+      "lf_basis": "LF-normalized working-tree bytes",
+      "raw_basis": "raw working-tree bytes",
+      "sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "sha256_raw": "da7913799d0d4e11f52f770e313875764d27b20ad33157a7aa9c1fa00df418e2"
+    },
+    "simulation/working_factor.py": {
+      "lf_basis": "LF-normalized working-tree bytes",
+      "raw_basis": "raw working-tree bytes",
+      "sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "sha256_raw": "0afde923081fe34d1ada86e2928286d45c905441053f643968ea9b13007b683d"
+    }
+  },
+  "outputs": [
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_allocation_gate.json",
+      "sha256_lf": "248a0efc0db08ff33b082f3c6b3b2475a3ffcac854eb71794c478f31d97e878d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_analysis.py",
+      "sha256_lf": "7d6932690d13fabc7524c67d6b2efd81abdf0e04c5b1371f5cbdde5885b4a632"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_author.py",
+      "sha256_lf": "58b429708125972b75490386659a1b31501bf5e29f2092b5837ec5fb15c05c9d"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_authoring.json",
+      "sha256_lf": "1210b19f83de6bcdf71ce2c5cfc058d3d08a22dd6b7d6134bf5e767410d8cb8c"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_channels.py",
+      "sha256_lf": "4fd5c1588b9940489d935588666e0df81b8114ff6bfaae5c604f4541ed6dd4c6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_code_identity.json",
+      "sha256_lf": "e0df3ef4dcedb85260e6bbd40e61e10ea314739e1754c341b9cc6bc1439058ce"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_constants_gate.json",
+      "sha256_lf": "7493e79cd31433f17779de6058d4390b8535d6a83de7ad0633ff8e62748ee807"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_control.json",
+      "sha256_lf": "26dfae4a9c7755bb70501ce1e32def9fedc99088ef64c5aa6e50fe9210904b5b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_executor.py",
+      "sha256_lf": "301684b83bb155daf745f03bf0f0ccf50a35c11ee911e66dd5e46b39ab0d8338"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_2_start.json",
+      "sha256_lf": "48baa5602a6d902139c5633ac8f0629146f40f0dc479206b47c6da9ea47de3d3"
+    },
+    {
+      "csv_rows": 280,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_common_allocation_attempt1.csv",
+      "sha256_lf": "7a8aa75b2582c91f7a618d35e9297b8a85294999806f51e5b0949bfc1fdb1b98"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_common_initial.json",
+      "sha256_lf": "7c87abf28d294668c1dd49112387084071a8441fef8eeafff9425791b382b518"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_common_progress.json",
+      "sha256_lf": "61a8d5d9c65160f4f2d16b10399cb41e302809cc1707460a486b275c69fde791"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_common_result.json",
+      "sha256_lf": "b217e5bbf2dc5444a7d459baa48d03f004d08bbf5e82a9713d0f56b860d211b2"
+    },
+    {
+      "csv_rows": 280,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_common_steps_attempt1.csv",
+      "sha256_lf": "11f7e594b3e4ea1749d66fa08b738ba4f0108a1dd09c944a7d814ee814c68047"
+    },
+    {
+      "csv_rows": 280,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_factory_allocation_attempt1.csv",
+      "sha256_lf": "7a8aa75b2582c91f7a618d35e9297b8a85294999806f51e5b0949bfc1fdb1b98"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_factory_initial.json",
+      "sha256_lf": "9d57fc8a5534e85a68c3c08c9cc86b3467ecb176a1c9a5c41196d0c7a6d98795"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_factory_progress.json",
+      "sha256_lf": "2a661bcb905a7626a275add672b378f3a0bad379173702a748df4c368e2a7079"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_factory_result.json",
+      "sha256_lf": "e2f911e58079a6d921da3bee19e6109192adb5282717b758f9377ab33140e7ac"
+    },
+    {
+      "csv_rows": 280,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_factory_steps_attempt1.csv",
+      "sha256_lf": "11f7e594b3e4ea1749d66fa08b738ba4f0108a1dd09c944a7d814ee814c68047"
+    },
+    {
+      "csv_rows": 60,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_honest_allocation_attempt1.csv",
+      "sha256_lf": "39a7a833e6d55ae299b5d48460f6bc624f1c062a2e43d0d6678ae14e50b2fafe"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_honest_initial.json",
+      "sha256_lf": "594f921e2dd28ae51e8bcd8ff2ca336483af4a2643d4b0091ea03cc4fbf86a18"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_honest_progress.json",
+      "sha256_lf": "9d01caa8e049762589081d8bd0c6dc5ca04cd72ac42b7bcffd90b7695071e5da"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_honest_result.json",
+      "sha256_lf": "c9bc298510be0b00c8ed639777e25ef594d723c2b0a7daa302b3d44320249208"
+    },
+    {
+      "csv_rows": 60,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_honest_steps_attempt1.csv",
+      "sha256_lf": "77a70cc668f8df60b22cbe2714f27369d4209b930bffdc958b5305fc0cf68b55"
+    },
+    {
+      "csv_rows": 25,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_recorder_allocation_attempt1.csv",
+      "sha256_lf": "e12db39eea842a641e8244ab95aec0875339a7e5c1f788cac5d0c0618cdc69e5"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_recorder_initial.json",
+      "sha256_lf": "bb7a00fdebea4631b640f641f85e23d84abda770092d4365c409f8a6516bbcf7"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_recorder_progress.json",
+      "sha256_lf": "1526e8587b141c4ba8a0c3ce93455fb95490deebd6385a601bf3588fd66671b0"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_recorder_result.json",
+      "sha256_lf": "3c6bca265c0e206ead5b38ad6c81e2448c7049cd36a4474bfb8f009140b9edea"
+    },
+    {
+      "csv_rows": 25,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_recorder_steps_attempt1.csv",
+      "sha256_lf": "026d6a86dfcee9e14c8ca2a6432b0894d75fb370b8b643e72632e48ea57cdd11"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gate_wrapper_result.json",
+      "sha256_lf": "b920e8f9c91128f0e9f968d6c1bed7573dfa26f63f364b21f042dddbf9575ac6"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_gates_failure.json",
+      "sha256_lf": "7e1e9de3e6fdffa7f1c2b0b4afab1ba0ea0ec61ba5fda827c1a481b11379a7a4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_plan.json",
+      "sha256_lf": "8827006024ceecfeb6a389b64f2fb3733a831af3d57ceb38da8ca7010e09c5ae"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_recorder_conformance.json",
+      "sha256_lf": "cf81d4357d3315527734bf42ace3bd653c3fb1af7e1f2d00763cffa043bc2606"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_report.md",
+      "sha256_lf": "472f956dfc7b2872e2ea193a5684e1ad3cfc481eeb85299bf9825aaff7b193b9"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_report.py",
+      "sha256_lf": "dc8a93e337d8598b8f950be79bc98c7c101a014062078be39828cf978448db92"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_results.json",
+      "sha256_lf": "299d7405a22f0c7340729775acc87ec2cdd76482514bf560db9825c95df1bc72"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_scheduler_checks.json",
+      "sha256_lf": "4ecb4a73822670085c5f81542fcd80c70f64cfb6cd68913366a9fc4c101cc45b"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_source_readings.json",
+      "sha256_lf": "19ff26386cd965497146471f72f34974e1d3151dbef1e21b6e9ee3557504eeb5"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_stop.json",
+      "sha256_lf": "7e1e9de3e6fdffa7f1c2b0b4afab1ba0ea0ec61ba5fda827c1a481b11379a7a4"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_unit_gate.json",
+      "sha256_lf": "275f637b3d22516eae9b7db9eb99ad8da062af3f064005ee9c20d82d6c40d9b9"
+    },
+    {
+      "csv_rows": null,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_unit_gate.py",
+      "sha256_lf": "684a5780c774a8f136778b563712d98af76e1376b6a3053e8dedcf1f51b0863a"
+    },
+    {
+      "csv_rows": 270,
+      "partial": false,
+      "path": "simulation/diagnostics/detector_run_r3_eval_unit_sequences.csv",
+      "sha256_lf": "ac5c598bcc17fa2b902c70e8291b48c777f02296d4cdd4aa5084aa59a5933213"
+    }
+  ],
+  "retry_events": [],
+  "runtime": {
+    "machine": "YOTKOTEST",
+    "modules": {
+      "simulation/diagnostics/detector_run_r3_eval_channels.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "4fd5c1588b9940489d935588666e0df81b8114ff6bfaae5c604f4541ed6dd4c6",
+        "sha256_raw": "4fd5c1588b9940489d935588666e0df81b8114ff6bfaae5c604f4541ed6dd4c6"
+      },
+      "simulation/diagnostics/detector_run_r3_eval_executor.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "301684b83bb155daf745f03bf0f0ccf50a35c11ee911e66dd5e46b39ab0d8338",
+        "sha256_raw": "301684b83bb155daf745f03bf0f0ccf50a35c11ee911e66dd5e46b39ab0d8338"
+      },
+      "simulation/diagnostics/detector_run_r3_eval_report.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "dc8a93e337d8598b8f950be79bc98c7c101a014062078be39828cf978448db92",
+        "sha256_raw": "dc8a93e337d8598b8f950be79bc98c7c101a014062078be39828cf978448db92"
+      }
+    },
+    "numpy": "2.4.4",
+    "operator_cpu_budget": 16,
+    "os_cpu_count": 16,
+    "process_cpu_count": 16,
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "thread_environment": {
+      "BLIS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "thread_runtime": [
+      {
+        "effective_threads": 1,
+        "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+        "query": "scipy_openblas_get_num_threads64_"
+      }
+    ],
+    "worker_pid": 111604
+  },
+  "sha256_basis": "LF-normalized bytes",
+  "source_pins_start_and_end": [
+    {
+      "blob_sha1": "b9d4ec3cc4d1f291b2e643ec07a1a9a4c4ace24e",
+      "committed_sha256_lf": "b1309a7463b1d7b1f277fd4dd56e997f90fecf2386411871be22ccfabed6db83",
+      "completion_blob_sha1": "b9d4ec3cc4d1f291b2e643ec07a1a9a4c4ace24e",
+      "completion_committed_sha256_lf": "b1309a7463b1d7b1f277fd4dd56e997f90fecf2386411871be22ccfabed6db83",
+      "completion_sha256_lf": "b1309a7463b1d7b1f277fd4dd56e997f90fecf2386411871be22ccfabed6db83",
+      "expected_sha256_lf": "b1309a7463b1d7b1f277fd4dd56e997f90fecf2386411871be22ccfabed6db83",
+      "matched": true,
+      "path": "simulation/diagnostics/detector_round3_design_note.md",
+      "publication_commit": "33f54514d68a02449ad03d71df33382ccb841de0",
+      "start_sha256_lf": "b1309a7463b1d7b1f277fd4dd56e997f90fecf2386411871be22ccfabed6db83",
+      "worktree_sha256_lf": "b1309a7463b1d7b1f277fd4dd56e997f90fecf2386411871be22ccfabed6db83"
+    },
+    {
+      "blob_sha1": "09acbbcae9bb292dbd495eb3d72dd1bc985a5edf",
+      "committed_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "completion_blob_sha1": "09acbbcae9bb292dbd495eb3d72dd1bc985a5edf",
+      "completion_committed_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "completion_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "expected_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "matched": true,
+      "path": "simulation/diagnostics/detector_run_r3_a3_constants.json",
+      "publication_commit": "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237",
+      "start_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "worktree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35"
+    },
+    {
+      "blob_sha1": "cffa1d922c70759b3619856247a3f1ba3dbfdce9",
+      "committed_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "completion_blob_sha1": "cffa1d922c70759b3619856247a3f1ba3dbfdce9",
+      "completion_committed_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "completion_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "expected_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "matched": true,
+      "path": "simulation/diagnostics/detector_round2_design_note.md",
+      "publication_commit": "684fa7006155fb81349f6f59c11be22a5f59d2cb",
+      "start_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "worktree_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632"
+    },
+    {
+      "blob_sha1": "ff934c2613e90804c3ff5c18141f777eaa24276f",
+      "committed_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "completion_blob_sha1": "ff934c2613e90804c3ff5c18141f777eaa24276f",
+      "completion_committed_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "completion_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "expected_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "matched": true,
+      "path": "simulation/diagnostics/detector_run_r2_constants.json",
+      "publication_commit": "242ec2265ee6e3b1158925af0c22f6b76e007007",
+      "start_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "worktree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98"
+    },
+    {
+      "blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+      "committed_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "completion_blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+      "completion_committed_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "completion_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "matched": true,
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "start_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488"
+    },
+    {
+      "blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+      "committed_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "completion_blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+      "completion_committed_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "completion_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "matched": true,
+      "path": "simulation/cusum_detector_v2.py",
+      "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "start_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+    },
+    {
+      "blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723",
+      "committed_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "completion_blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723",
+      "completion_committed_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "completion_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "expected_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "matched": true,
+      "path": "simulation/diagnostics/detector_run_eval_executor.py",
+      "publication_commit": "9ce2e65931875f8cc6c2036a3e56475a1d08bd84",
+      "start_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "worktree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff"
+    },
+    {
+      "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "committed_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "completion_blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "completion_committed_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "completion_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "matched": true,
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "publication_commit": null,
+      "start_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+    },
+    {
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "completion_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "completion_committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "completion_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "matched": true,
+      "path": "simulation/metrics.py",
+      "publication_commit": null,
+      "start_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+    },
+    {
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "completion_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "completion_committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "completion_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "matched": true,
+      "path": "simulation/agents.py",
+      "publication_commit": null,
+      "start_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+    },
+    {
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "completion_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "completion_committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "completion_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "matched": true,
+      "path": "simulation/model.py",
+      "publication_commit": null,
+      "start_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+    },
+    {
+      "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "completion_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "completion_committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "completion_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "matched": true,
+      "path": "simulation/attack_adapter_v2.py",
+      "publication_commit": null,
+      "start_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+    },
+    {
+      "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "committed_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "completion_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "completion_committed_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "completion_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "matched": true,
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "publication_commit": null,
+      "start_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+    },
+    {
+      "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "completion_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "completion_committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "completion_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "matched": true,
+      "path": "simulation/working_factor.py",
+      "publication_commit": null,
+      "start_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+    },
+    {
+      "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "completion_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "completion_committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "completion_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "matched": true,
+      "path": "simulation/constants_v2_stage18.py",
+      "publication_commit": null,
+      "start_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+    },
+    {
+      "blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+      "committed_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "completion_blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+      "completion_committed_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "completion_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "expected_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "matched": true,
+      "path": "simulation/diagnostics/drift_mapping_design_note.md",
+      "start_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748"
+    }
+  ],
+  "status": "HALTED",
+  "t0_stderr_warnings": [
+    "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied"
+  ],
+  "worker_execution": {}
+}

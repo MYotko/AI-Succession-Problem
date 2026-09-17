@@ -1,0 +1,15 @@
+{
+  "concurrency_caps": [
+    15,
+    12
+  ],
+  "deterministic_job_count": 360,
+  "no_model_steps": true,
+  "normal_transition": "permits dispatch up to 15",
+  "passed": true,
+  "runnable_cap_checked": true,
+  "synthetic_resume_complete_count": 2,
+  "synthetic_resume_pending_count": 358,
+  "utc": "2026-09-17T00:59:30.994542+00:00",
+  "work_transition": "drains without dispatch until below 12"
+}

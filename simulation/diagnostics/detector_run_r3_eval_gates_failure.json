@@ -1,0 +1,7 @@
+{
+  "halt": "A-definition gate failed: {\"step\": 2, \"recorded_A\": 0.36201162103876716, \"recomputed_A\": 0.3620116210387671, \"passed\": false}",
+  "job": "gates",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\detector_run_r3_eval_executor.py\", line 413, in gates\n    allocation_definition_gate()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\detector_run_r3_eval_executor.py\", line 660, in allocation_definition_gate\n    return registered.allocation_gate(sys.modules[__name__])\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\detector_run_r3_eval_channels.py\", line 84, in allocation_gate\n    if first is not None:raise RuntimeError('A-definition gate failed: '+json.dumps(first))\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: A-definition gate failed: {\"step\": 2, \"recorded_A\": 0.36201162103876716, \"recomputed_A\": 0.3620116210387671, \"passed\": false}\n",
+  "utc": "2026-09-17T01:00:21.459010+00:00",
+  "violations": []
+}
