@@ -19,12 +19,12 @@ import argparse
 import sys
 import subprocess
 
-# CSV and individual scenario PNGs go here (gitignored, reproducible).
-DATA_DIR = 'data'
+# Repository-root data/ is not gitignored; simulation/data/ is.
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
 os.makedirs(DATA_DIR, exist_ok=True)
 
-# Publication-quality summary charts are also written here (versioned, public).
-CHARTS_DIR = os.path.join('docs', 'charts')
+# docs/charts is gitignored by /docs/charts, so charts here are not versioned.
+CHARTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'docs', 'charts')
 os.makedirs(CHARTS_DIR, exist_ok=True)
 
 def deterministic_seed(string_val):

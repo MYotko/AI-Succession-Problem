@@ -42,6 +42,7 @@ from sybil_defense_scaling import (
 
 
 HERE = Path(__file__).resolve().parent
+REPO_ROOT = HERE.parent
 DEFAULT_CONFIG = HERE / 'config' / 'sybil_defense_scaling.json'
 
 
@@ -719,10 +720,18 @@ def _smoke_report(
     return '\n'.join(lines)
 
 
+def resolve_output_root(config: Mapping[str, Any], override: Path | None = None) -> Path:
+    root = override if override is not None else Path(config['outputs']['root'])
+    return root if root.is_absolute() else REPO_ROOT / root
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', type=Path, default=DEFAULT_CONFIG)
-    parser.add_argument('--output-root', type=Path)
+    parser.add_argument(
+        '--output-root', type=Path,
+        help='Relative paths resolve against the repository root; absolute paths are used as given.',
+    )
     parser.add_argument('--run-id')
     return parser.parse_args()
 
@@ -735,7 +744,7 @@ def main() -> int:
     smoke_prefix = str(config['outputs']['smoke_run_prefix'])
     if not run_id.startswith(smoke_prefix):
         raise SystemExit(f'smoke run ID must begin with {smoke_prefix}')
-    output_root = args.output_root or Path(config['outputs']['root'])
+    output_root = resolve_output_root(config, args.output_root)
     output_dir = output_root / run_id
     output_dir.mkdir(parents=True, exist_ok=False)
     started_at = _utc_now()

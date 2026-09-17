@@ -2,8 +2,8 @@ import os
 import matplotlib.pyplot as plt
 import csv
 
-# All output files go here, relative to the working directory (repo root).
-DATA_DIR = 'data'
+# All output files go to the repository-root data directory.
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
 os.makedirs(DATA_DIR, exist_ok=True)
 
 # --- Output Helpers ---

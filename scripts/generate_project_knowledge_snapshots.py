@@ -135,20 +135,30 @@ DATA_SCAN_DIRS = [
 # Git helpers
 # ---------------------------------------------------------------------------
 
-def get_git_info() -> Tuple[str, str]:
-    """Return (short_commit_hash, branch_name)."""
+def get_git_info(allow_unknown_provenance: bool = False) -> Tuple[str, str]:
+    """Return provenance, refusing unavailable values unless explicitly allowed."""
+    command = ["git", "-C", str(REPO_ROOT), "rev-parse", "--short", "HEAD"]
     try:
         commit = subprocess.check_output(
-            ["git", "-C", str(REPO_ROOT), "rev-parse", "--short", "HEAD"],
-            stderr=subprocess.DEVNULL,
+            command, stderr=subprocess.DEVNULL,
         ).decode().strip()
+        if not commit or commit == "unknown":
+            raise ValueError("empty or unknown commit")
+        command = ["git", "-C", str(REPO_ROOT), "rev-parse", "--abbrev-ref", "HEAD"]
         branch = subprocess.check_output(
-            ["git", "-C", str(REPO_ROOT), "rev-parse", "--abbrev-ref", "HEAD"],
-            stderr=subprocess.DEVNULL,
+            command, stderr=subprocess.DEVNULL,
         ).decode().strip()
+        if not branch or branch == "unknown":
+            raise ValueError("empty or unknown branch")
         return commit, branch
-    except Exception:
-        print("WARNING: git introspection failed; using placeholder values", file=sys.stderr)
+    except Exception as error:
+        message = f"git introspection failed for {' '.join(command)}: {error}"
+        if not allow_unknown_provenance:
+            raise RuntimeError(message) from error
+        print(
+            f"WARNING: {message}; stamping commit and branch as 'unknown'",
+            file=sys.stderr,
+        )
         return "unknown", "unknown"
 
 # ---------------------------------------------------------------------------
@@ -852,6 +862,11 @@ def main() -> None:
         action="store_true",
         help="Print what would be included without writing any files.",
     )
+    parser.add_argument(
+        "--allow-unknown-provenance",
+        action="store_true",
+        help="Allow unknown commit and branch if git introspection fails, with a warning.",
+    )
     args = parser.parse_args()
 
     categories = [c.strip() for c in args.categories.split(",") if c.strip()]
@@ -862,7 +877,13 @@ def main() -> None:
         sys.exit(1)
 
     output_dir = Path(args.output_dir)
-    commit, branch = get_git_info()
+    try:
+        commit, branch = get_git_info(
+            allow_unknown_provenance=args.allow_unknown_provenance,
+        )
+    except RuntimeError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        sys.exit(1)
 
     if args.dry_run:
         print(f"DRY RUN (no files will be written)")
