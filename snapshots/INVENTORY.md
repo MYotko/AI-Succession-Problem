@@ -1,7 +1,7 @@
 # Project Knowledge Snapshots Inventory
 
-Last regeneration: 2026-09-16T19:04:29Z
-Git commit at regeneration: 4fde1dd
+Last regeneration: 2026-09-17T11:45:09Z
+Git commit at regeneration: 139fe25
 Branch: main
 
 ## Quick reference for Claude sessions
@@ -23,49 +23,49 @@ If you need specific content, ask the operator to upload the relevant category s
 
 ### docs
 - File: snapshots/docs_snapshot.md
-- Last generated: 2026-09-16T19:04:27Z
+- Last generated: 2026-09-17T11:45:04Z
 - Files included: 13
-- Snapshot size: 491165 bytes
+- Snapshot size: 497847 bytes
 
 ### framework_papers
 - File: snapshots/framework_papers_snapshot.md
-- Last generated: 2026-09-16T19:04:27Z
+- Last generated: 2026-09-17T11:45:05Z
 - Files included: 3
 - Snapshot size: 475013 bytes
 
 ### paper_drafts
 - File: snapshots/paper_drafts_snapshot.md
-- Last generated: 2026-09-16T19:04:27Z
+- Last generated: 2026-09-17T11:45:05Z
 - Files included: 8
 - Snapshot size: 342914 bytes
 
 ### essays
 - File: snapshots/essays_snapshot.md
-- Last generated: 2026-09-16T19:04:27Z
+- Last generated: 2026-09-17T11:45:05Z
 - Files included: 15
 - Snapshot size: 382529 bytes
 
 ### diagnostics
 - File: snapshots/diagnostics_snapshot.md
-- Last generated: 2026-09-16T19:04:27Z
+- Last generated: 2026-09-17T11:45:06Z
 - Files included: unknown
-- Snapshot size: 860835 bytes
+- Snapshot size: 878260 bytes
 
 ### constitutional
 - File: snapshots/constitutional_snapshot.md
-- Last generated: 2026-09-16T19:04:27Z
+- Last generated: 2026-09-17T11:45:06Z
 - Files included: 7
 - Snapshot size: 52528 bytes
 
 ### code
 - File: snapshots/code_snapshot.md
-- Last generated: 2026-09-16T19:04:28Z
+- Last generated: 2026-09-17T11:45:07Z
 - Files included: unknown
-- Snapshot size: 1471123 bytes
+- Snapshot size: 1471806 bytes
 
 ### data_results
 - File: snapshots/data_results_snapshot.md
-- Last generated: 2026-09-16T19:04:28Z
+- Last generated: 2026-09-17T11:45:07Z
 - Files included: unknown
 - Snapshot size: 311737 bytes
 
