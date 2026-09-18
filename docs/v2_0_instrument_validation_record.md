@@ -289,6 +289,19 @@ fired while the evaluated yield did not. With no attack configured,
 `simulation/attack_adapter_v2.py:381-384`, so the two are necessarily equal and the
 predicate is false by construction.
 
+*Qualification, 2026-09-18.* The same function makes the defended arm unable to succeed
+by construction as well. With `cop_independent_eval` on, it returns the unmodified values
+at `simulation/attack_adapter_v2.py:392-393`, so the evaluated yield equals the honest
+yield exactly and this predicate is false in every defended run. The published 0.0
+percent defended attack rate for Measurement Tampering is therefore a consequence of
+modeling independent evaluation as exact recovery of the true values, not a measured
+resistance to falsified measurement. It is not baseline contamination, and the undefended
+result stands: with the defense off, the falsified evaluation suppresses the honest yield.
+The per-vector characterization's first stage showed both directly, labeled exploratory
+there because it was not the registered contrast: with the defense off, no yield was
+ratified in any of 120 runs while honest yield opportunities fired about 246 times per run
+on average; with it on, every run ratified exactly one.
+
 One, `biological_veto_capture`, resolves at line 369 on a cumulative counter,
 `yield_condition_blocked_count`. That counter has two write sites. The one at
 `simulation/model.py:838` sits inside the legacy step function, which returns to
@@ -1672,7 +1685,15 @@ radius invites the reader to assume the worst.
 - The Nash equilibrium result. Analytic, not simulated.
 - Domain Masking's analytic closure. See Section 6.
 - The eight adversarial vectors that cannot be contaminated by construction. See
-  Section 3.
+  Section 3. One of the eight carries a separate qualification, below.
+
+**Qualified, 2026-09-18:**
+
+- Measurement Tampering. Its baseline cannot be contaminated, but its defended result
+  holds by construction: the defense is modeled as returning the true yield values
+  exactly, so no defended run can succeed. The 0.0 percent defended figure describes that
+  modeling assumption rather than a measured resistance, and it stands as a statement
+  about the model only. See the qualification in Section 3.
 - The reproduction gate. Eight of eight outcome booleans reproduced exactly in both
   arms against the pinned evidence, confirming the substrate has not drifted since
   the recorded runs.
