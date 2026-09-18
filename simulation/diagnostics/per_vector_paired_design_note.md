@@ -276,3 +276,57 @@ ladder that D6 identified is the reason, and the retired per-run ratio stays ret
 **Nothing else changes.** The declared quantities, the pairing rule, the arms, the seeds,
 the gates, stages B and C, and the interpretation of Section 10 stand as committed,
 including Amendment 1.
+
+## 15. Amendment 3, 2026-09-18: the Measurement Tampering control targeted the wrong mechanism
+
+**Status:** committed and pushed after stage A completed and before any stage A' run exists.
+Stage A's outputs are reported under the plan they ran, as Section 11 requires.
+
+**What was wrong.** Section 5 and Section 6 built the control by disabling
+`AIAgent.apply_measurement_corruption`. That method is the legacy v1 mechanism, which
+corrupts the state the AI reads before deciding. In v2 the attack does not act there. It
+acts in `adapt_yield_evaluation` in `simulation/attack_adapter_v2.py`, which falsifies the
+evaluated yield values directly, and every counter the pinned runner records, including
+`ratified_yields`, is computed downstream of that function. Disabling the legacy method
+therefore disabled nothing the registered quantity depends on. Stage A measured exactly
+that: in all 120 seed pairs, 60 in each defense state, the treatment and control counts
+were identical, and P1 and P2 are 0.0 with a paired standard error of exactly 0.0. The
+inertness gate passed correctly; it proved the named method was disabled, and the named
+method was the wrong one. The error is in this note, not in the execution.
+
+**A second error, found on the same reading.** P2 is registered on
+`yield_condition_blocked_count`. That counter's only live writer is inside
+`ratify_v2_yield`, which returns early unless the configured attack vector is Biological
+Veto Capture, as Section 3 of the instrument validation record documents. For this vector
+the counter is zero by construction in every arm, and stage A recorded it as zero in all
+240 runs. It cannot serve as a secondary quantity here.
+
+**Amended, adding a stage A' and replacing the control and the secondary.**
+
+- **Control:** the v2 measurement branch disabled. `simulation/model.py` imports
+  `adapt_yield_evaluation` by name, so the executor replaces the name bound in the `model`
+  module's namespace, inside the worker process only, with a function returning its
+  incumbent value, successor value and honest-fires flag unmodified. No production file is
+  modified, and the production function is restored after each control run.
+- **Gate before any run:** over synthetic inputs, the replacement returns its inputs
+  exactly. The production function, with the attack active and the defense off, returns
+  evaluated values that differ from the inputs; with the defense on it returns the inputs
+  exactly. The gate reports all three.
+- **Primary, P1':** the paired difference on `ratified_yields`, treatment production minus
+  control branch-disabled, within each defense state.
+- **Secondary, P2':** the same on `yield_condition_met_count`, which the v2 path does
+  increment for this vector, replacing P2.
+- **P3' and P4':** as P3 and P4, over stage A' runs.
+- **Seeds:** the 30 consecutive integers from 1835087060 through 1835087089, overlapping no
+  seed used before. The count is set by cost before any run, not by any expected effect:
+  30 seeds crossed with two arms and two defense states is 120 runs, against a weekly
+  execution budget that stage B also draws on.
+- **Everything else** in stage A, including `base_transition_cost` fixed at 1.5, 300 steps,
+  construction through the pinned runner, and the pairing rule, carries over unchanged.
+
+**What stage A still establishes.** Its registered result stands, reported as a measurement
+of the legacy method: disabling `apply_measurement_corruption` moves no recorded yield
+counter in either defense state. It says nothing about the v2 attack.
+
+**Nothing else changes.** Stage B, stage C, Sections 9 and 10, and Amendments 1 and 2 stand
+as committed.
