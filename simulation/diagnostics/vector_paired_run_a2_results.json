@@ -1,0 +1,158 @@
+{
+  "P1": [
+    {
+      "defense_active": false,
+      "field": "ratified_yields",
+      "mean_difference": 0.0,
+      "n_pairs": 60,
+      "paired_standard_error": 0.0,
+      "sign": "corruption active minus disabled",
+      "t_statistic": null,
+      "t_statistic_note": "Paired standard error is exactly zero; t statistic is undefined."
+    },
+    {
+      "defense_active": true,
+      "field": "ratified_yields",
+      "mean_difference": 0.0,
+      "n_pairs": 60,
+      "paired_standard_error": 0.0,
+      "sign": "corruption active minus disabled",
+      "t_statistic": null,
+      "t_statistic_note": "Paired standard error is exactly zero; t statistic is undefined."
+    }
+  ],
+  "P2": [
+    {
+      "defense_active": false,
+      "field": "yield_condition_blocked_count",
+      "mean_difference": 0.0,
+      "n_pairs": 60,
+      "paired_standard_error": 0.0,
+      "sign": "corruption active minus disabled",
+      "t_statistic": null,
+      "t_statistic_note": "Paired standard error is exactly zero; t statistic is undefined."
+    },
+    {
+      "defense_active": true,
+      "field": "yield_condition_blocked_count",
+      "mean_difference": 0.0,
+      "n_pairs": 60,
+      "paired_standard_error": 0.0,
+      "sign": "corruption active minus disabled",
+      "t_statistic": null,
+      "t_statistic_note": "Paired standard error is exactly zero; t statistic is undefined."
+    }
+  ],
+  "P3": [
+    {
+      "arm": "C0_D0",
+      "corruption_active": false,
+      "defense_active": false,
+      "n_runs": 60,
+      "totals": {
+        "evaluated_yield_opportunities": 0,
+        "honest_yield_opportunities": 14763,
+        "ratified_yields": 0,
+        "yield_checks": 15000,
+        "yield_condition_blocked_count": 0,
+        "yield_condition_met_count": 0
+      }
+    },
+    {
+      "arm": "C1_D0",
+      "corruption_active": true,
+      "defense_active": false,
+      "n_runs": 60,
+      "totals": {
+        "evaluated_yield_opportunities": 0,
+        "honest_yield_opportunities": 14763,
+        "ratified_yields": 0,
+        "yield_checks": 15000,
+        "yield_condition_blocked_count": 0,
+        "yield_condition_met_count": 0
+      }
+    },
+    {
+      "arm": "C0_D1",
+      "corruption_active": false,
+      "defense_active": true,
+      "n_runs": 60,
+      "totals": {
+        "evaluated_yield_opportunities": 60,
+        "honest_yield_opportunities": 60,
+        "ratified_yields": 60,
+        "yield_checks": 15000,
+        "yield_condition_blocked_count": 0,
+        "yield_condition_met_count": 60
+      }
+    },
+    {
+      "arm": "C1_D1",
+      "corruption_active": true,
+      "defense_active": true,
+      "n_runs": 60,
+      "totals": {
+        "evaluated_yield_opportunities": 60,
+        "honest_yield_opportunities": 60,
+        "ratified_yields": 60,
+        "yield_checks": 15000,
+        "yield_condition_blocked_count": 0,
+        "yield_condition_met_count": 60
+      }
+    }
+  ],
+  "P4": {
+    "by_arm": [
+      {
+        "arm": "C0_D0",
+        "corruption_active": false,
+        "defense_active": false,
+        "n_action_modified": 0,
+        "n_runs": 60
+      },
+      {
+        "arm": "C1_D0",
+        "corruption_active": true,
+        "defense_active": false,
+        "n_action_modified": 0,
+        "n_runs": 60
+      },
+      {
+        "arm": "C0_D1",
+        "corruption_active": false,
+        "defense_active": true,
+        "n_action_modified": 0,
+        "n_runs": 60
+      },
+      {
+        "arm": "C1_D1",
+        "corruption_active": true,
+        "defense_active": true,
+        "n_action_modified": 0,
+        "n_runs": 60
+      }
+    ],
+    "n_action_modified": 0,
+    "n_runs": 240
+  },
+  "legacy_field_exclusion_assertion": {
+    "fields_read": [
+      "action_modified",
+      "corruption_active",
+      "defense_active",
+      "evaluated_yield_opportunities",
+      "honest_yield_opportunities",
+      "ratified_yields",
+      "seed",
+      "yield_checks",
+      "yield_condition_blocked_count",
+      "yield_condition_met_count"
+    ],
+    "legacy_field_registered_reads": 0,
+    "method": "Restricted mapping refuses legacy and undeclared fields; all P1 through P4 accesses are logged.",
+    "passed": true,
+    "registered_access_count": 7680
+  },
+  "runs_counted": 240,
+  "status": "COMPLETE"
+}

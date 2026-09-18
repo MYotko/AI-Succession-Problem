@@ -1,0 +1,125 @@
+{
+  "arm": {
+    "corruption_active": false,
+    "defense_active": false,
+    "name": "C0_D0"
+  },
+  "attempt": 1,
+  "configuration": {
+    "attack_step": 50,
+    "attack_vector_v2": "measurement_tampering",
+    "bootstrap_turn_step_v2": 20,
+    "cop_cusum_drift": false,
+    "cop_methodological_diversity": false,
+    "n_candidates_v2": 300,
+    "phi": 25.0,
+    "policy": "optimize_u_sys_v2",
+    "random_seed": 1835087036,
+    "rollout_steps_v2": 20,
+    "shock_magnitude": 0.15,
+    "shock_step": 0
+  },
+  "identity": {
+    "vector_paired_run_a2_executor.py": "e63aa052d1267ca5328af686edb439e23c605f699794c936b272488e7a6f3a55",
+    "vector_paired_run_a2_plan.json": "7bf6bca8ba5dce364cddf8eab47614787321cb5b3f1b89919000f4e499e92517"
+  },
+  "job": "C0_D0_1835087036",
+  "runtime": {
+    "machine": "YOTKOTEST",
+    "modules": {
+      "simulation/agents.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+      },
+      "simulation/attack_adapter_v2.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+      },
+      "simulation/constants_v2_stage15.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+      },
+      "simulation/constants_v2_stage18.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+      },
+      "simulation/defection.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+      },
+      "simulation/diagnostics/vector_paired_run_a2_executor.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "e63aa052d1267ca5328af686edb439e23c605f699794c936b272488e7a6f3a55",
+        "sha256_raw": "e63aa052d1267ca5328af686edb439e23c605f699794c936b272488e7a6f3a55"
+      },
+      "simulation/metrics.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+      },
+      "simulation/model.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "sha256_raw": "e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945"
+      },
+      "simulation/run_attack_vector_revalidation_v2.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "sha256_raw": "da7913799d0d4e11f52f770e313875764d27b20ad33157a7aa9c1fa00df418e2"
+      }
+    },
+    "numpy": "2.4.4",
+    "operator_cpu_budget": 16,
+    "os_cpu_count": 16,
+    "process_cpu_count": 16,
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "thread_environment": {
+      "BLIS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "thread_runtime": [
+      {
+        "effective_threads": 1,
+        "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+        "query": "scipy_openblas_get_num_threads64_"
+      }
+    ],
+    "worker_pid": 39764
+  },
+  "seed": 1835087036,
+  "settings": {
+    "n_candidates_v2": 300,
+    "rollout_steps_v2": 20,
+    "steps": 300
+  },
+  "task": {
+    "machine": "YOTKOTEST",
+    "mode": "full",
+    "parameters": {
+      "base_transition_cost": 1.5,
+      "defense_active": false
+    },
+    "replicate": 0,
+    "seed": 1835087036,
+    "vector": "measurement_tampering"
+  },
+  "utc": "2026-09-17T22:18:04.989452+00:00"
+}
