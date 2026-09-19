@@ -395,6 +395,17 @@ divergence, but it is not reached on the v2 step path. See
 path contains no claimed-versus-actual comparison at all. The observable a drift
 detector would integrate does not currently exist on that path.
 
+*The consensus override is not reached either, verified 2026-09-19.* The published
+architecture's consensus override, the constraint cap with graduated trust and an
+emergency path, is implemented only at `simulation/model.py` lines 914 through 1049,
+inside the legacy step function. In v2 mode `step` returns `_step_v2()` at line 705,
+before any of it. Neither `_step_v2` nor `simulation/attack_adapter_v2.py` reads
+`cop_drift_check`, writes `trust_level`, or caps the constraint, and every v2 attack
+vector acts only through the adapter, so this holds for all ten live vectors: no v2 run
+reaches the override, and `cop_drift_check` is inert in v2. The only v2 defenses are the
+per-vector adapter flags. The in-loop defense of item 2f was built to fill that gap; it is
+a v2 construction, not an implementation of the published override.
+
 ---
 
 ## 5. D3. No constraint cost in the objective, and frozen entropy in planning
