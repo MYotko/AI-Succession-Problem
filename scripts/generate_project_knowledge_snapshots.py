@@ -90,12 +90,16 @@ NEVER_INGEST_BASENAMES = frozenset({
 # live in the instrument validation record, not in 1,488 per-run artifact listings.
 # detector_run_ does the same for the detector calibration and evaluation stages,
 # 2,804 per-run artifacts. The detector design note does not carry that prefix and
-# stays in the snapshots.
+# stays in the snapshots. vector_paired_run_ and drift_defense_run_ cover the
+# per-vector characterization and the in-loop drift defense evaluation on the same
+# terms; their design notes do not carry those prefixes and stay in.
 NEVER_INGEST_BASENAME_PREFIXES = (
     "cusum_char_",
     "veto_floor",
     "drift_map_run_",
     "detector_run_",
+    "vector_paired_run_",
+    "drift_defense_run_",
 )
 
 # Directories whose contents must NEVER reach a generated snapshot, matched on
