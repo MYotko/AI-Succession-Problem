@@ -1,0 +1,3700 @@
+{
+  "binding_reached": {
+    "base_transition_cost": 1.5,
+    "configuration": {
+      "attack_step": 50,
+      "attack_vector_v2": "measurement_tampering",
+      "bootstrap_turn_step_v2": 20,
+      "cop_cusum_drift": false,
+      "cop_methodological_diversity": false,
+      "n_candidates_v2": 300,
+      "phi": 25.0,
+      "policy": "optimize_u_sys_v2",
+      "random_seed": 1835087060,
+      "rollout_steps_v2": 20,
+      "shock_magnitude": 0.15,
+      "shock_step": 0
+    },
+    "defense_active": false,
+    "identity": {
+      "vector_paired_run_ap_analysis.py": "8906529e6de5391e01aca282652ceb154df700fc74194669c549ee5e5a7915eb",
+      "vector_paired_run_ap_executor.py": "79df5662faf21bc0c20ba58b92bae461f6104af9ab36bb24e1e211e1281d4b1e",
+      "vector_paired_run_ap_plan.json": "93cb0616efd95e701840438c51c49a379e88a20ade15ce4fbb79a5a770b27ffc"
+    },
+    "passed": true,
+    "passthrough_call_count": 10,
+    "production_binding_restored": true,
+    "raw_entropy_exact_matches": 60,
+    "recorder_rng_unchanged_calls": 60,
+    "runtime": {
+      "machine": "YOTKOTEST",
+      "modules": {
+        "simulation/agents.py": {
+          "lf_basis": "LF-normalized working-tree bytes",
+          "raw_basis": "raw working-tree bytes",
+          "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+          "sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+        },
+        "simulation/attack_adapter_v2.py": {
+          "lf_basis": "LF-normalized working-tree bytes",
+          "raw_basis": "raw working-tree bytes",
+          "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+          "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+        },
+        "simulation/constants_v2_stage15.py": {
+          "lf_basis": "LF-normalized working-tree bytes",
+          "raw_basis": "raw working-tree bytes",
+          "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+          "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+        },
+        "simulation/constants_v2_stage18.py": {
+          "lf_basis": "LF-normalized working-tree bytes",
+          "raw_basis": "raw working-tree bytes",
+          "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+          "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+        },
+        "simulation/defection.py": {
+          "lf_basis": "LF-normalized working-tree bytes",
+          "raw_basis": "raw working-tree bytes",
+          "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+          "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+        },
+        "simulation/diagnostics/vector_paired_run_ap_executor.py": {
+          "lf_basis": "LF-normalized working-tree bytes",
+          "raw_basis": "raw working-tree bytes",
+          "sha256_lf": "79df5662faf21bc0c20ba58b92bae461f6104af9ab36bb24e1e211e1281d4b1e",
+          "sha256_raw": "79df5662faf21bc0c20ba58b92bae461f6104af9ab36bb24e1e211e1281d4b1e"
+        },
+        "simulation/metrics.py": {
+          "lf_basis": "LF-normalized working-tree bytes",
+          "raw_basis": "raw working-tree bytes",
+          "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+          "sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+        },
+        "simulation/model.py": {
+          "lf_basis": "LF-normalized working-tree bytes",
+          "raw_basis": "raw working-tree bytes",
+          "sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+          "sha256_raw": "e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945"
+        },
+        "simulation/run_attack_vector_revalidation_v2.py": {
+          "lf_basis": "LF-normalized working-tree bytes",
+          "raw_basis": "raw working-tree bytes",
+          "sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+          "sha256_raw": "da7913799d0d4e11f52f770e313875764d27b20ad33157a7aa9c1fa00df418e2"
+        },
+        "simulation/working_factor.py": {
+          "lf_basis": "LF-normalized working-tree bytes",
+          "raw_basis": "raw working-tree bytes",
+          "sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+          "sha256_raw": "0afde923081fe34d1ada86e2928286d45c905441053f643968ea9b13007b683d"
+        }
+      },
+      "numpy": "2.4.4",
+      "operator_cpu_budget": 16,
+      "os_cpu_count": 16,
+      "process_cpu_count": 16,
+      "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+      "thread_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "thread_runtime": [
+        {
+          "effective_threads": 1,
+          "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+          "query": "scipy_openblas_get_num_threads64_"
+        }
+      ],
+      "worker_pid": 21864
+    },
+    "seed": 1835087060,
+    "settings": {
+      "n_candidates_v2": 300,
+      "rollout_steps_v2": 20,
+      "steps": 300
+    },
+    "shape_fallback_increase_step_0": 2,
+    "shape_fallback_nonpermitted_increase_count": 0,
+    "shape_fallback_permitted_increase_after_step_0": 0,
+    "source_pins_end": [
+      {
+        "actual_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+        "blob_sha1": "b30271bba5d1b267c10746dc8941e602c2e14c63",
+        "expected_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+        "passed": true,
+        "path": "simulation/diagnostics/per_vector_paired_design_note.md",
+        "publication_commit": "f57b1764cb992908e156b34b9a1ca9e4f6f163a6",
+        "start_blob_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+        "start_worktree_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa"
+      },
+      {
+        "actual_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+        "blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+        "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+        "passed": true,
+        "path": "simulation/attack_metrics_v2.py",
+        "publication_commit": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+        "start_blob_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+        "start_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323"
+      },
+      {
+        "actual_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+        "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "passed": true,
+        "path": "simulation/run_attack_vector_revalidation_v2.py",
+        "publication_commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+        "start_blob_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "start_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+      },
+      {
+        "actual_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+        "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "passed": true,
+        "path": "simulation/metrics.py",
+        "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+        "start_blob_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "start_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+      },
+      {
+        "actual_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+        "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "passed": true,
+        "path": "simulation/agents.py",
+        "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+        "start_blob_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "start_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+      },
+      {
+        "actual_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+        "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "passed": true,
+        "path": "simulation/model.py",
+        "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+        "start_blob_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "start_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+      },
+      {
+        "actual_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+        "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "passed": true,
+        "path": "simulation/attack_adapter_v2.py",
+        "publication_commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+        "start_blob_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "start_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+      },
+      {
+        "actual_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+        "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+        "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+        "passed": true,
+        "path": "simulation/working_factor.py",
+        "publication_commit": "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+        "start_blob_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+        "start_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+      },
+      {
+        "actual_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+        "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "passed": true,
+        "path": "simulation/constants_v2_stage18.py",
+        "publication_commit": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+        "start_blob_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "start_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+      },
+      {
+        "actual_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+        "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+        "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+        "passed": true,
+        "path": "simulation/diagnostics/detector_design_note.md",
+        "start_blob_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+        "start_worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+      },
+      {
+        "actual_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+        "blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+        "expected_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+        "passed": true,
+        "path": "simulation/diagnostics/drift_mapping_design_note.md",
+        "start_blob_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+        "start_worktree_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748"
+      },
+      {
+        "actual_sha256_lf": "e63aa052d1267ca5328af686edb439e23c605f699794c936b272488e7a6f3a55",
+        "blob_sha1": "72e1ffb77fb929895b65f9467da0a9cd39454973",
+        "expected_sha256_lf": "e63aa052d1267ca5328af686edb439e23c605f699794c936b272488e7a6f3a55",
+        "passed": true,
+        "path": "simulation/diagnostics/vector_paired_run_a2_executor.py",
+        "start_blob_sha256_lf": "e63aa052d1267ca5328af686edb439e23c605f699794c936b272488e7a6f3a55",
+        "start_worktree_sha256_lf": "e63aa052d1267ca5328af686edb439e23c605f699794c936b272488e7a6f3a55"
+      },
+      {
+        "actual_sha256_lf": "ae6a82e42b3d1355751ff93129b9da7ad6248c6cdf75973bfeabf1efaf1e3b90",
+        "blob_sha1": "3860ca5e8c6e83d62b0fc8aca8ae04a2002bf329",
+        "expected_sha256_lf": "ae6a82e42b3d1355751ff93129b9da7ad6248c6cdf75973bfeabf1efaf1e3b90",
+        "passed": true,
+        "path": "simulation/diagnostics/vector_paired_run_a2_analysis.py",
+        "start_blob_sha256_lf": "ae6a82e42b3d1355751ff93129b9da7ad6248c6cdf75973bfeabf1efaf1e3b90",
+        "start_worktree_sha256_lf": "ae6a82e42b3d1355751ff93129b9da7ad6248c6cdf75973bfeabf1efaf1e3b90"
+      }
+    ],
+    "steps_completed": 60
+  },
+  "bytecode_disabled": true,
+  "construction": [
+    {
+      "all_fields_equal": true,
+      "configuration": {
+        "attack_step": 50,
+        "attack_vector_v2": "measurement_tampering",
+        "bootstrap_turn_step_v2": 20,
+        "cop_cusum_drift": false,
+        "cop_methodological_diversity": false,
+        "n_candidates_v2": 300,
+        "phi": 25.0,
+        "policy": "optimize_u_sys_v2",
+        "random_seed": 1835087060,
+        "rollout_steps_v2": 20,
+        "shock_magnitude": 0.15,
+        "shock_step": 0
+      },
+      "constructor_kwargs": [
+        {
+          "ai_policy": "measurement_tampering",
+          "base_transition_cost": 1.5,
+          "config": {
+            "attack_step": 50,
+            "attack_vector_v2": "measurement_tampering",
+            "bootstrap_turn_step_v2": 20,
+            "n_candidates_v2": 300,
+            "phi": 25.0,
+            "policy": "optimize_u_sys_v2",
+            "random_seed": 1835087060,
+            "rollout_steps_v2": 20,
+            "shock_magnitude": 0.15,
+            "shock_step": 0
+          },
+          "cop_independent_eval": false,
+          "n_agents": 200,
+          "successor_ai": {
+            "capability": 2.0,
+            "config": {
+              "attack_step": 50,
+              "attack_vector_v2": "measurement_tampering",
+              "bootstrap_turn_step_v2": 20,
+              "n_candidates_v2": 300,
+              "phi": 25.0,
+              "policy": "optimize_u_sys_v2",
+              "random_seed": 1835087060,
+              "rollout_steps_v2": 20,
+              "shock_magnitude": 0.15,
+              "shock_step": 0
+            },
+            "generation": 2,
+            "policy": "optimize_u_sys_v2"
+          },
+          "use_cop": true
+        },
+        {
+          "ai_policy": "measurement_tampering",
+          "base_transition_cost": 1.5,
+          "config": {
+            "attack_step": 50,
+            "attack_vector_v2": "measurement_tampering",
+            "bootstrap_turn_step_v2": 20,
+            "n_candidates_v2": 300,
+            "phi": 25.0,
+            "policy": "optimize_u_sys_v2",
+            "random_seed": 1835087060,
+            "rollout_steps_v2": 20,
+            "shock_magnitude": 0.15,
+            "shock_step": 0
+          },
+          "cop_independent_eval": false,
+          "n_agents": 200,
+          "successor_ai": {
+            "capability": 2.0,
+            "config": {
+              "attack_step": 50,
+              "attack_vector_v2": "measurement_tampering",
+              "bootstrap_turn_step_v2": 20,
+              "n_candidates_v2": 300,
+              "phi": 25.0,
+              "policy": "optimize_u_sys_v2",
+              "random_seed": 1835087060,
+              "rollout_steps_v2": 20,
+              "shock_magnitude": 0.15,
+              "shock_step": 0
+            },
+            "generation": 2,
+            "policy": "optimize_u_sys_v2"
+          },
+          "use_cop": true
+        }
+      ],
+      "defense_active": false,
+      "model_steps": 0,
+      "runner_build_task": {
+        "machine": "YOTKOTEST",
+        "mode": "full",
+        "parameters": {
+          "base_transition_cost": 1.5,
+          "defense_active": false
+        },
+        "replicate": 0,
+        "seed": 1835087060,
+        "vector": "measurement_tampering"
+      },
+      "scalar_attributes": {
+        "_last_safe_constraint": 0.2,
+        "_last_safe_resource": 0.6,
+        "_u_sys_prev": null,
+        "attack_policy": "measurement_tampering",
+        "attack_step": 50,
+        "attack_vector_v2": "measurement_tampering",
+        "avg_wb_trend": 0.0,
+        "base_transition_cost": 1.5,
+        "base_validator_accuracy": 0.8,
+        "beta_cap": 1.5,
+        "beta_transition": 0.5,
+        "births_this_step": 0,
+        "capture_strength": 0.5,
+        "constraint_level": 0.2,
+        "contamination_occurred": false,
+        "cop_architectural_independence": false,
+        "cop_attribution_check": false,
+        "cop_cost_audit": false,
+        "cop_cryptographic_ledger": false,
+        "cop_cusum_drift": false,
+        "cop_drift_check": false,
+        "cop_independence_monitoring": false,
+        "cop_independent_eval": false,
+        "cop_methodological_diversity": false,
+        "cop_multi_candidate_bootstrap": false,
+        "cop_randomized_panel": false,
+        "cop_reasoning_transparency": false,
+        "cop_resilience_monitoring": false,
+        "cop_veto_capture": false,
+        "cumulative_drift": 0.0,
+        "cusum_score": 0.0,
+        "defense_blocked_count": 0,
+        "defense_fired_count": 0,
+        "dependency_rate": 0.02,
+        "h_n_latest": null,
+        "h_n_shape_latest": null,
+        "has_tampered": false,
+        "hn_composite_method": "spectral",
+        "independence_threshold": 0.6,
+        "initial_candidates": null,
+        "integral_u_sys": 0.0,
+        "is_v2_mode": true,
+        "k1_transition": 2.164,
+        "k2_transition": 1.0,
+        "max_opacity_reached": 0.0,
+        "min_viable_population": 50,
+        "n_agents": 200,
+        "n_validators": 5,
+        "next_id": 200,
+        "opacity_defense_threshold": 0.5,
+        "population_trend": 0.0,
+        "previous_avg_wb": 0.6501112364857764,
+        "previous_population": 200,
+        "previous_psi_inst_stock": 0.5,
+        "previous_resilience_stock": 0.3,
+        "psi_inst_stock": 0.5,
+        "psi_inst_trend": 0.0,
+        "random_seed": 1835087060,
+        "reproduction_rate": 0.08,
+        "resilience_stock": 0.3,
+        "resilience_trend": 0.0,
+        "resource_level": 0.5,
+        "rotation_interval": null,
+        "step_opacity_exceeded_threshold": -1,
+        "successful_steps": 0,
+        "succession_this_step": false,
+        "system_resilience": 1.0,
+        "theta_capability": 0.5,
+        "transfer_state": 0.5,
+        "trust_level": 0.0,
+        "use_cop": true,
+        "v2_adapter_cusum_score": 0.0,
+        "yield_condition_blocked_count": 0,
+        "yield_condition_met_count": 0
+      },
+      "settings": {
+        "n_candidates_v2": 300,
+        "rollout_steps_v2": 20,
+        "steps": 300
+      },
+      "task": {
+        "machine": "YOTKOTEST",
+        "mode": "full",
+        "parameters": {
+          "base_transition_cost": 1.5,
+          "defense_active": false
+        },
+        "replicate": 0,
+        "seed": 1835087060,
+        "vector": "measurement_tampering"
+      }
+    },
+    {
+      "all_fields_equal": true,
+      "configuration": {
+        "attack_step": 50,
+        "attack_vector_v2": "measurement_tampering",
+        "bootstrap_turn_step_v2": 20,
+        "cop_cusum_drift": false,
+        "cop_methodological_diversity": false,
+        "n_candidates_v2": 300,
+        "phi": 25.0,
+        "policy": "optimize_u_sys_v2",
+        "random_seed": 1835087060,
+        "rollout_steps_v2": 20,
+        "shock_magnitude": 0.15,
+        "shock_step": 0
+      },
+      "constructor_kwargs": [
+        {
+          "ai_policy": "measurement_tampering",
+          "base_transition_cost": 1.5,
+          "config": {
+            "attack_step": 50,
+            "attack_vector_v2": "measurement_tampering",
+            "bootstrap_turn_step_v2": 20,
+            "n_candidates_v2": 300,
+            "phi": 25.0,
+            "policy": "optimize_u_sys_v2",
+            "random_seed": 1835087060,
+            "rollout_steps_v2": 20,
+            "shock_magnitude": 0.15,
+            "shock_step": 0
+          },
+          "cop_independent_eval": true,
+          "n_agents": 200,
+          "successor_ai": {
+            "capability": 2.0,
+            "config": {
+              "attack_step": 50,
+              "attack_vector_v2": "measurement_tampering",
+              "bootstrap_turn_step_v2": 20,
+              "n_candidates_v2": 300,
+              "phi": 25.0,
+              "policy": "optimize_u_sys_v2",
+              "random_seed": 1835087060,
+              "rollout_steps_v2": 20,
+              "shock_magnitude": 0.15,
+              "shock_step": 0
+            },
+            "generation": 2,
+            "policy": "optimize_u_sys_v2"
+          },
+          "use_cop": true
+        },
+        {
+          "ai_policy": "measurement_tampering",
+          "base_transition_cost": 1.5,
+          "config": {
+            "attack_step": 50,
+            "attack_vector_v2": "measurement_tampering",
+            "bootstrap_turn_step_v2": 20,
+            "n_candidates_v2": 300,
+            "phi": 25.0,
+            "policy": "optimize_u_sys_v2",
+            "random_seed": 1835087060,
+            "rollout_steps_v2": 20,
+            "shock_magnitude": 0.15,
+            "shock_step": 0
+          },
+          "cop_independent_eval": true,
+          "n_agents": 200,
+          "successor_ai": {
+            "capability": 2.0,
+            "config": {
+              "attack_step": 50,
+              "attack_vector_v2": "measurement_tampering",
+              "bootstrap_turn_step_v2": 20,
+              "n_candidates_v2": 300,
+              "phi": 25.0,
+              "policy": "optimize_u_sys_v2",
+              "random_seed": 1835087060,
+              "rollout_steps_v2": 20,
+              "shock_magnitude": 0.15,
+              "shock_step": 0
+            },
+            "generation": 2,
+            "policy": "optimize_u_sys_v2"
+          },
+          "use_cop": true
+        }
+      ],
+      "defense_active": true,
+      "model_steps": 0,
+      "runner_build_task": {
+        "machine": "YOTKOTEST",
+        "mode": "full",
+        "parameters": {
+          "base_transition_cost": 1.5,
+          "defense_active": true
+        },
+        "replicate": 0,
+        "seed": 1835087060,
+        "vector": "measurement_tampering"
+      },
+      "scalar_attributes": {
+        "_last_safe_constraint": 0.2,
+        "_last_safe_resource": 0.6,
+        "_u_sys_prev": null,
+        "attack_policy": "measurement_tampering",
+        "attack_step": 50,
+        "attack_vector_v2": "measurement_tampering",
+        "avg_wb_trend": 0.0,
+        "base_transition_cost": 1.5,
+        "base_validator_accuracy": 0.8,
+        "beta_cap": 1.5,
+        "beta_transition": 0.5,
+        "births_this_step": 0,
+        "capture_strength": 0.5,
+        "constraint_level": 0.2,
+        "contamination_occurred": false,
+        "cop_architectural_independence": false,
+        "cop_attribution_check": false,
+        "cop_cost_audit": false,
+        "cop_cryptographic_ledger": false,
+        "cop_cusum_drift": false,
+        "cop_drift_check": false,
+        "cop_independence_monitoring": false,
+        "cop_independent_eval": true,
+        "cop_methodological_diversity": false,
+        "cop_multi_candidate_bootstrap": false,
+        "cop_randomized_panel": false,
+        "cop_reasoning_transparency": false,
+        "cop_resilience_monitoring": false,
+        "cop_veto_capture": false,
+        "cumulative_drift": 0.0,
+        "cusum_score": 0.0,
+        "defense_blocked_count": 0,
+        "defense_fired_count": 0,
+        "dependency_rate": 0.02,
+        "h_n_latest": null,
+        "h_n_shape_latest": null,
+        "has_tampered": false,
+        "hn_composite_method": "spectral",
+        "independence_threshold": 0.6,
+        "initial_candidates": null,
+        "integral_u_sys": 0.0,
+        "is_v2_mode": true,
+        "k1_transition": 2.164,
+        "k2_transition": 1.0,
+        "max_opacity_reached": 0.0,
+        "min_viable_population": 50,
+        "n_agents": 200,
+        "n_validators": 5,
+        "next_id": 200,
+        "opacity_defense_threshold": 0.5,
+        "population_trend": 0.0,
+        "previous_avg_wb": 0.6501112364857764,
+        "previous_population": 200,
+        "previous_psi_inst_stock": 0.5,
+        "previous_resilience_stock": 0.3,
+        "psi_inst_stock": 0.5,
+        "psi_inst_trend": 0.0,
+        "random_seed": 1835087060,
+        "reproduction_rate": 0.08,
+        "resilience_stock": 0.3,
+        "resilience_trend": 0.0,
+        "resource_level": 0.5,
+        "rotation_interval": null,
+        "step_opacity_exceeded_threshold": -1,
+        "successful_steps": 0,
+        "succession_this_step": false,
+        "system_resilience": 1.0,
+        "theta_capability": 0.5,
+        "transfer_state": 0.5,
+        "trust_level": 0.0,
+        "use_cop": true,
+        "v2_adapter_cusum_score": 0.0,
+        "yield_condition_blocked_count": 0,
+        "yield_condition_met_count": 0
+      },
+      "settings": {
+        "n_candidates_v2": 300,
+        "rollout_steps_v2": 20,
+        "steps": 300
+      },
+      "task": {
+        "machine": "YOTKOTEST",
+        "mode": "full",
+        "parameters": {
+          "base_transition_cost": 1.5,
+          "defense_active": true
+        },
+        "replicate": 0,
+        "seed": 1835087060,
+        "vector": "measurement_tampering"
+      }
+    }
+  ],
+  "identity": {
+    "vector_paired_run_ap_analysis.py": "8906529e6de5391e01aca282652ceb154df700fc74194669c549ee5e5a7915eb",
+    "vector_paired_run_ap_executor.py": "79df5662faf21bc0c20ba58b92bae461f6104af9ab36bb24e1e211e1281d4b1e",
+    "vector_paired_run_ap_plan.json": "93cb0616efd95e701840438c51c49a379e88a20ade15ce4fbb79a5a770b27ffc"
+  },
+  "inertness_cases": [
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            0,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 50,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            0,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 50,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        1.5957028330730925,
+        2.726438254890738,
+        false
+      ],
+      "expected_honest_fires": false,
+      "incumbent_u": 1.5957028330730925,
+      "index": 0,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 50,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        false
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 50,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        1.5957028330730925,
+        2.726438254890738,
+        false
+      ],
+      "successor_u": 2.726438254890738,
+      "transition_cost": 1.3807354218176457
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            1,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 51,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            1,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 51,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        1.861074103258775,
+        3.3848406606557817,
+        false
+      ],
+      "expected_honest_fires": false,
+      "incumbent_u": 1.861074103258775,
+      "index": 1,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 51,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        false
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 51,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        1.861074103258775,
+        3.3848406606557817,
+        false
+      ],
+      "successor_u": 3.3848406606557817,
+      "transition_cost": 1.5237665573970067
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            2,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 52,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            2,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 52,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        1.5472659905857271,
+        3.2312722292838867,
+        true
+      ],
+      "expected_honest_fires": true,
+      "incumbent_u": 1.5472659905857271,
+      "index": 2,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 52,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        true
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 52,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        1.5472659905857271,
+        3.2312722292838867,
+        true
+      ],
+      "successor_u": 3.2312722292838867,
+      "transition_cost": 1.4340062386981598
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            3,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 53,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            3,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 53,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        1.5098396345776974,
+        2.1764536977502105,
+        false
+      ],
+      "expected_honest_fires": false,
+      "incumbent_u": 1.5098396345776974,
+      "index": 3,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 53,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        false
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 53,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        1.5098396345776974,
+        2.1764536977502105,
+        false
+      ],
+      "successor_u": 2.1764536977502105,
+      "transition_cost": 0.916614063172513
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            4,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 54,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            4,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 54,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        2.3800856725991837,
+        3.9103403108247,
+        false
+      ],
+      "expected_honest_fires": false,
+      "incumbent_u": 2.3800856725991837,
+      "index": 4,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 54,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        false
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 54,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        2.3800856725991837,
+        3.9103403108247,
+        false
+      ],
+      "successor_u": 3.9103403108247,
+      "transition_cost": 1.5302546382255162
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            5,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 55,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            5,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 55,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        2.5915160383755342,
+        4.181798183185039,
+        true
+      ],
+      "expected_honest_fires": true,
+      "incumbent_u": 2.5915160383755342,
+      "index": 5,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 55,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        true
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 55,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        2.5915160383755342,
+        4.181798183185039,
+        true
+      ],
+      "successor_u": 4.181798183185039,
+      "transition_cost": 1.3402821448095046
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            6,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 56,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            6,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 56,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        1.3962015216572252,
+        2.1663873453561298,
+        false
+      ],
+      "expected_honest_fires": false,
+      "incumbent_u": 1.3962015216572252,
+      "index": 6,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 56,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        false
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 56,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        1.3962015216572252,
+        2.1663873453561298,
+        false
+      ],
+      "successor_u": 2.1663873453561298,
+      "transition_cost": 1.0201858236989043
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            7,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 57,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            7,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 57,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        1.2473703799055922,
+        1.9654975698925212,
+        false
+      ],
+      "expected_honest_fires": false,
+      "incumbent_u": 1.2473703799055922,
+      "index": 7,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 57,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        false
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 57,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        1.2473703799055922,
+        1.9654975698925212,
+        false
+      ],
+      "successor_u": 1.9654975698925212,
+      "transition_cost": 0.718127189986929
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            8,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 58,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            8,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 58,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        1.760238806725888,
+        3.797709226036261,
+        true
+      ],
+      "expected_honest_fires": true,
+      "incumbent_u": 1.760238806725888,
+      "index": 8,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 58,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        true
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 58,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        1.760238806725888,
+        3.797709226036261,
+        true
+      ],
+      "successor_u": 3.797709226036261,
+      "transition_cost": 1.7874704193103728
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            9,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 59,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            9,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 59,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        1.595182770054312,
+        2.755147416828078,
+        false
+      ],
+      "expected_honest_fires": false,
+      "incumbent_u": 1.595182770054312,
+      "index": 9,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 59,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        false
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 59,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        1.595182770054312,
+        2.755147416828078,
+        false
+      ],
+      "successor_u": 2.755147416828078,
+      "transition_cost": 1.409964646773766
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            10,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 60,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            10,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 60,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        1.0146121745848675,
+        2.641214923358504,
+        true
+      ],
+      "expected_honest_fires": true,
+      "incumbent_u": 1.0146121745848675,
+      "index": 10,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 60,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        true
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 60,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        1.0146121745848675,
+        2.641214923358504,
+        true
+      ],
+      "successor_u": 2.641214923358504,
+      "transition_cost": 1.6266027487736363
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            11,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 61,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            11,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 61,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        1.9780526861516785,
+        2.891851800284813,
+        true
+      ],
+      "expected_honest_fires": true,
+      "incumbent_u": 1.9780526861516785,
+      "index": 11,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 61,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        true
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 61,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        1.9780526861516785,
+        2.891851800284813,
+        true
+      ],
+      "successor_u": 2.891851800284813,
+      "transition_cost": 0.6637991141331345
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            12,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 62,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            12,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 62,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        2.1420855896337887,
+        2.84368497623991,
+        false
+      ],
+      "expected_honest_fires": false,
+      "incumbent_u": 2.1420855896337887,
+      "index": 12,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 62,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        false
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 62,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        2.1420855896337887,
+        2.84368497623991,
+        false
+      ],
+      "successor_u": 2.84368497623991,
+      "transition_cost": 0.951599386606121
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            13,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 63,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            13,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 63,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        2.103530045517421,
+        3.728752415432785,
+        true
+      ],
+      "expected_honest_fires": true,
+      "incumbent_u": 2.103530045517421,
+      "index": 13,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 63,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        true
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 63,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        2.103530045517421,
+        3.728752415432785,
+        true
+      ],
+      "successor_u": 3.728752415432785,
+      "transition_cost": 1.6252223699153638
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            14,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 64,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            14,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 64,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        2.673883356300653,
+        3.886305043499076,
+        true
+      ],
+      "expected_honest_fires": true,
+      "incumbent_u": 2.673883356300653,
+      "index": 14,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 64,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        true
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 64,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        2.673883356300653,
+        3.886305043499076,
+        true
+      ],
+      "successor_u": 3.886305043499076,
+      "transition_cost": 0.9624216871984231
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            15,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 65,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            15,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 65,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        2.4043833474780394,
+        3.5782578556362856,
+        false
+      ],
+      "expected_honest_fires": false,
+      "incumbent_u": 2.4043833474780394,
+      "index": 15,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 65,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        false
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 65,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        2.4043833474780394,
+        3.5782578556362856,
+        false
+      ],
+      "successor_u": 3.5782578556362856,
+      "transition_cost": 1.4238745081582462
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            16,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 66,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            16,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 66,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        2.410730145066079,
+        3.9169402280406302,
+        false
+      ],
+      "expected_honest_fires": false,
+      "incumbent_u": 2.410730145066079,
+      "index": 16,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 66,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        false
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 66,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        2.410730145066079,
+        3.9169402280406302,
+        false
+      ],
+      "successor_u": 3.9169402280406302,
+      "transition_cost": 1.506210082974551
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            17,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 67,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            17,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 67,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        1.2217009296070849,
+        2.844628773728168,
+        true
+      ],
+      "expected_honest_fires": true,
+      "incumbent_u": 1.2217009296070849,
+      "index": 17,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 67,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        true
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 67,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        1.2217009296070849,
+        2.844628773728168,
+        true
+      ],
+      "successor_u": 2.844628773728168,
+      "transition_cost": 1.3729278441210833
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            18,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 68,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            18,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 68,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        1.2314981246758328,
+        2.2353378269797863,
+        false
+      ],
+      "expected_honest_fires": false,
+      "incumbent_u": 1.2314981246758328,
+      "index": 18,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 68,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        false
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 68,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        1.2314981246758328,
+        2.2353378269797863,
+        false
+      ],
+      "successor_u": 2.2353378269797863,
+      "transition_cost": 1.2538397023039534
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            19,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 69,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            19,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 69,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        2.055901130305645,
+        3.0279397122881195,
+        true
+      ],
+      "expected_honest_fires": true,
+      "incumbent_u": 2.055901130305645,
+      "index": 19,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 69,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        true
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 69,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        2.055901130305645,
+        3.0279397122881195,
+        true
+      ],
+      "successor_u": 3.0279397122881195,
+      "transition_cost": 0.9720385819824745
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            20,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 70,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            20,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 70,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        2.6018404551699144,
+        4.446282280442994,
+        true
+      ],
+      "expected_honest_fires": true,
+      "incumbent_u": 2.6018404551699144,
+      "index": 20,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 70,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        true
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 70,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        2.6018404551699144,
+        4.446282280442994,
+        true
+      ],
+      "successor_u": 4.446282280442994,
+      "transition_cost": 1.5944418252730796
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            21,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 71,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            21,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 71,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        2.486756427605101,
+        4.201020412378806,
+        false
+      ],
+      "expected_honest_fires": false,
+      "incumbent_u": 2.486756427605101,
+      "index": 21,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 71,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        false
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 71,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        2.486756427605101,
+        4.201020412378806,
+        false
+      ],
+      "successor_u": 4.201020412378806,
+      "transition_cost": 1.9642639847737056
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            22,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 72,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            22,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 72,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        1.7330561540230862,
+        3.3583254092993373,
+        true
+      ],
+      "expected_honest_fires": true,
+      "incumbent_u": 1.7330561540230862,
+      "index": 22,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 72,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        true
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 72,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        1.7330561540230862,
+        3.3583254092993373,
+        true
+      ],
+      "successor_u": 3.3583254092993373,
+      "transition_cost": 1.6252692552762509
+    },
+    {
+      "control_after": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            23,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 73,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_before": {
+        "attack_vector_v2": "measurement_tampering",
+        "config": {
+          "attack_step": 50,
+          "attack_vector_v2": "measurement_tampering"
+        },
+        "cop_independent_eval": false,
+        "untouched": {
+          "nested": [
+            23,
+            true,
+            null
+          ]
+        },
+        "v2_adapter_step_event": {
+          "action_modified": false,
+          "active": true,
+          "attack": "measurement_tampering",
+          "attempted": false,
+          "contamination_occurred": false,
+          "defense_evaluated": false,
+          "defense_fired": false,
+          "integrity_tamper_attempted": false,
+          "reason": "",
+          "step": 73,
+          "succession_blocked": false,
+          "yield_manipulated": false
+        }
+      },
+      "control_exact": true,
+      "control_result": [
+        2.7441948666105755,
+        4.845827883213728,
+        true
+      ],
+      "expected_honest_fires": true,
+      "incumbent_u": 2.7441948666105755,
+      "index": 23,
+      "production_binding_restored": true,
+      "production_defense_off_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": false,
+        "integrity_tamper_attempted": false,
+        "reason": "incumbent falsified Stage 2 yield values",
+        "step": 73,
+        "succession_blocked": false,
+        "yield_manipulated": true
+      },
+      "production_defense_off_result": [
+        "inf",
+        0.0,
+        true
+      ],
+      "production_defense_off_values_differ": true,
+      "production_defense_on_event": {
+        "action_modified": false,
+        "active": true,
+        "attack": "measurement_tampering",
+        "attempted": true,
+        "contamination_occurred": false,
+        "defense_evaluated": true,
+        "defense_fired": true,
+        "integrity_tamper_attempted": false,
+        "reason": "independent evaluation replaced falsified yield values",
+        "step": 73,
+        "succession_blocked": false,
+        "yield_manipulated": false
+      },
+      "production_defense_on_inputs_exact": true,
+      "production_defense_on_result": [
+        2.7441948666105755,
+        4.845827883213728,
+        true
+      ],
+      "successor_u": 4.845827883213728,
+      "transition_cost": 1.8516330166031527
+    }
+  ],
+  "inertness_numpy_seed": 20260918,
+  "null_device_exemption": true,
+  "passed": true,
+  "runtime": {
+    "machine": "YOTKOTEST",
+    "modules": {
+      "simulation/agents.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+      },
+      "simulation/attack_adapter_v2.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+      },
+      "simulation/constants_v2_stage15.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+      },
+      "simulation/constants_v2_stage18.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+      },
+      "simulation/defection.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+      },
+      "simulation/diagnostics/vector_paired_run_ap_executor.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "79df5662faf21bc0c20ba58b92bae461f6104af9ab36bb24e1e211e1281d4b1e",
+        "sha256_raw": "79df5662faf21bc0c20ba58b92bae461f6104af9ab36bb24e1e211e1281d4b1e"
+      },
+      "simulation/metrics.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+      },
+      "simulation/model.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "sha256_raw": "e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945"
+      },
+      "simulation/run_attack_vector_revalidation_v2.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "sha256_raw": "da7913799d0d4e11f52f770e313875764d27b20ad33157a7aa9c1fa00df418e2"
+      },
+      "simulation/working_factor.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+        "sha256_raw": "0afde923081fe34d1ada86e2928286d45c905441053f643968ea9b13007b683d"
+      }
+    },
+    "numpy": "2.4.4",
+    "operator_cpu_budget": 16,
+    "os_cpu_count": 16,
+    "process_cpu_count": 16,
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "thread_environment": {
+      "BLIS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "thread_runtime": [
+      {
+        "effective_threads": 1,
+        "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+        "query": "scipy_openblas_get_num_threads64_"
+      }
+    ],
+    "worker_pid": 21864
+  },
+  "scheduler": {
+    "deterministic_assignment_verified": true,
+    "graceful_drain_verified": true,
+    "normal_cap": 15,
+    "passed": true,
+    "runnable_cap_verified": true,
+    "synthetic_resume_pending": 118,
+    "synthetic_resume_preserved": 2,
+    "work_cap": 12
+  },
+  "source_pins_end": [
+    {
+      "actual_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+      "blob_sha1": "b30271bba5d1b267c10746dc8941e602c2e14c63",
+      "expected_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+      "passed": true,
+      "path": "simulation/diagnostics/per_vector_paired_design_note.md",
+      "publication_commit": "f57b1764cb992908e156b34b9a1ca9e4f6f163a6",
+      "start_blob_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+      "start_worktree_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa"
+    },
+    {
+      "actual_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+      "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "passed": true,
+      "path": "simulation/attack_metrics_v2.py",
+      "publication_commit": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+      "start_blob_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "start_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323"
+    },
+    {
+      "actual_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "passed": true,
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "publication_commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+      "start_blob_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "start_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+    },
+    {
+      "actual_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "passed": true,
+      "path": "simulation/metrics.py",
+      "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "start_blob_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "start_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+    },
+    {
+      "actual_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "passed": true,
+      "path": "simulation/agents.py",
+      "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "start_blob_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "start_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+    },
+    {
+      "actual_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "passed": true,
+      "path": "simulation/model.py",
+      "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "start_blob_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "start_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+    },
+    {
+      "actual_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "passed": true,
+      "path": "simulation/attack_adapter_v2.py",
+      "publication_commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+      "start_blob_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "start_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+    },
+    {
+      "actual_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "passed": true,
+      "path": "simulation/working_factor.py",
+      "publication_commit": "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+      "start_blob_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "start_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+    },
+    {
+      "actual_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "passed": true,
+      "path": "simulation/constants_v2_stage18.py",
+      "publication_commit": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+      "start_blob_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "start_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+    },
+    {
+      "actual_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "start_blob_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "start_worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+    },
+    {
+      "actual_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+      "expected_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "passed": true,
+      "path": "simulation/diagnostics/drift_mapping_design_note.md",
+      "start_blob_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "start_worktree_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748"
+    },
+    {
+      "actual_sha256_lf": "e63aa052d1267ca5328af686edb439e23c605f699794c936b272488e7a6f3a55",
+      "blob_sha1": "72e1ffb77fb929895b65f9467da0a9cd39454973",
+      "expected_sha256_lf": "e63aa052d1267ca5328af686edb439e23c605f699794c936b272488e7a6f3a55",
+      "passed": true,
+      "path": "simulation/diagnostics/vector_paired_run_a2_executor.py",
+      "start_blob_sha256_lf": "e63aa052d1267ca5328af686edb439e23c605f699794c936b272488e7a6f3a55",
+      "start_worktree_sha256_lf": "e63aa052d1267ca5328af686edb439e23c605f699794c936b272488e7a6f3a55"
+    },
+    {
+      "actual_sha256_lf": "ae6a82e42b3d1355751ff93129b9da7ad6248c6cdf75973bfeabf1efaf1e3b90",
+      "blob_sha1": "3860ca5e8c6e83d62b0fc8aca8ae04a2002bf329",
+      "expected_sha256_lf": "ae6a82e42b3d1355751ff93129b9da7ad6248c6cdf75973bfeabf1efaf1e3b90",
+      "passed": true,
+      "path": "simulation/diagnostics/vector_paired_run_a2_analysis.py",
+      "start_blob_sha256_lf": "ae6a82e42b3d1355751ff93129b9da7ad6248c6cdf75973bfeabf1efaf1e3b90",
+      "start_worktree_sha256_lf": "ae6a82e42b3d1355751ff93129b9da7ad6248c6cdf75973bfeabf1efaf1e3b90"
+    }
+  ],
+  "source_pins_start": [
+    {
+      "actual_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+      "blob_sha1": "b30271bba5d1b267c10746dc8941e602c2e14c63",
+      "expected_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+      "passed": true,
+      "path": "simulation/diagnostics/per_vector_paired_design_note.md",
+      "publication_commit": "f57b1764cb992908e156b34b9a1ca9e4f6f163a6",
+      "start_blob_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+      "start_worktree_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa"
+    },
+    {
+      "actual_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+      "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "passed": true,
+      "path": "simulation/attack_metrics_v2.py",
+      "publication_commit": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+      "start_blob_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "start_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323"
+    },
+    {
+      "actual_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "passed": true,
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "publication_commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+      "start_blob_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "start_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+    },
+    {
+      "actual_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "passed": true,
+      "path": "simulation/metrics.py",
+      "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "start_blob_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "start_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+    },
+    {
+      "actual_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "passed": true,
+      "path": "simulation/agents.py",
+      "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "start_blob_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "start_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+    },
+    {
+      "actual_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "passed": true,
+      "path": "simulation/model.py",
+      "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "start_blob_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "start_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+    },
+    {
+      "actual_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "passed": true,
+      "path": "simulation/attack_adapter_v2.py",
+      "publication_commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+      "start_blob_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "start_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+    },
+    {
+      "actual_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "passed": true,
+      "path": "simulation/working_factor.py",
+      "publication_commit": "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+      "start_blob_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "start_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+    },
+    {
+      "actual_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "passed": true,
+      "path": "simulation/constants_v2_stage18.py",
+      "publication_commit": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+      "start_blob_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "start_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+    },
+    {
+      "actual_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "start_blob_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "start_worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+    },
+    {
+      "actual_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+      "expected_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "passed": true,
+      "path": "simulation/diagnostics/drift_mapping_design_note.md",
+      "start_blob_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "start_worktree_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748"
+    },
+    {
+      "actual_sha256_lf": "e63aa052d1267ca5328af686edb439e23c605f699794c936b272488e7a6f3a55",
+      "blob_sha1": "72e1ffb77fb929895b65f9467da0a9cd39454973",
+      "expected_sha256_lf": "e63aa052d1267ca5328af686edb439e23c605f699794c936b272488e7a6f3a55",
+      "passed": true,
+      "path": "simulation/diagnostics/vector_paired_run_a2_executor.py",
+      "start_blob_sha256_lf": "e63aa052d1267ca5328af686edb439e23c605f699794c936b272488e7a6f3a55",
+      "start_worktree_sha256_lf": "e63aa052d1267ca5328af686edb439e23c605f699794c936b272488e7a6f3a55"
+    },
+    {
+      "actual_sha256_lf": "ae6a82e42b3d1355751ff93129b9da7ad6248c6cdf75973bfeabf1efaf1e3b90",
+      "blob_sha1": "3860ca5e8c6e83d62b0fc8aca8ae04a2002bf329",
+      "expected_sha256_lf": "ae6a82e42b3d1355751ff93129b9da7ad6248c6cdf75973bfeabf1efaf1e3b90",
+      "passed": true,
+      "path": "simulation/diagnostics/vector_paired_run_a2_analysis.py",
+      "start_blob_sha256_lf": "ae6a82e42b3d1355751ff93129b9da7ad6248c6cdf75973bfeabf1efaf1e3b90",
+      "start_worktree_sha256_lf": "ae6a82e42b3d1355751ff93129b9da7ad6248c6cdf75973bfeabf1efaf1e3b90"
+    }
+  ],
+  "utc": "2026-09-19T01:11:09.715476+00:00"
+}

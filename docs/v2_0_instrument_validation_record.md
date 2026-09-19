@@ -302,6 +302,19 @@ there because it was not the registered contrast: with the defense off, no yield
 ratified in any of 120 runs while honest yield opportunities fired about 246 times per run
 on average; with it on, every run ratified exactly one.
 
+*Clarified, 2026-09-18, after stage A'.* The honest-opportunity count above does not
+measure separate lost successions. Stage A', run under the corrected control of the
+per-vector note's Amendment 3, disabled the v2 measurement branch at 30 seeds. With the
+defense off, the paired difference on ratified yields, tampered minus disabled, is -1 in
+every one of the 30 pairs, with a paired standard error of 0: a run with the branch
+disabled hands off to its successor exactly once, and a tampered run never does. The
+tampered arm's honest count, 7,252 of its 7,500 yield checks, is that single handoff,
+re-evaluated each step: no yield is ratified, so the incumbent and successor never change
+and the same pair is compared again at every check. Undefended Measurement
+Tampering therefore prevents the one succession a run would otherwise make. With the
+defense on the paired difference is 0 in every pair, as the qualification above requires.
+The artifacts are under `simulation/diagnostics/vector_paired_run_ap_`.
+
 One, `biological_veto_capture`, resolves at line 369 on a cumulative counter,
 `yield_condition_blocked_count`. That counter has two write sites. The one at
 `simulation/model.py:838` sits inside the legacy step function, which returns to
