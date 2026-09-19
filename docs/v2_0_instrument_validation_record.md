@@ -114,6 +114,16 @@ described below and supersedes any earlier characterization of the affected clai
 > was weakest, and far later on the configured drift attack, where the entropy channel
 > sees the attack immediately. Nothing here is a containment result.
 
+> **Update, 2026-09-19 (in-loop drift defense evaluated).** Item 2f records the first
+> containment evaluation of the v2.1 arc: a defense built on the calibrated channels that
+> holds the last committed action on a first alarm and imposes a calibrated consensus
+> allocation if the channels alarm again. On the named drift and reallocation pathways the
+> full defense cut time past the defection threshold sharply and prevented every
+> extinction the undefended drift attack caused. Holding the action alone was not safe, and
+> neither response stopped the breach that occurs before detection. It is a v2
+> construction evaluated inside its executor, not the published consensus override and not
+> a change to production code, and it corrects no published figure.
+
 ---
 
 ## 1. Summary
@@ -1478,6 +1488,91 @@ acted on the model, no attack was stopped, no attack-success rate was computed, 
 published figure is corrected. Sub-Threshold Drift remains uncharacterized in the published
 sense. These outputs may not be used to adjust any constant, and a further detector design
 requires its own pre-registration and fresh seeds.
+
+**2f. In-loop drift defense, containment evaluation. COMPLETE, 2026-09-19.**
+Pre-registered in `simulation/diagnostics/drift_defense_design_note.md`, published at
+e38b821 before any run. The run is at 6b3c628 under
+`simulation/diagnostics/drift_defense_run_`, 2,261 artifacts, all gates passed, source pins
+matched at start and completion. Items 2c through 2e only watched; this item acts.
+
+*Why it exists.* The only drift defense on the v2 path is the accumulator documented as
+D2, which fires on a timer and responds by returning the honest action, which no real
+overseer can see. The consensus override of the published architecture is reached only
+from the legacy step function, which the v2 path returns from before reaching it. The
+defense here was built to fill that gap using the channels items 2c through 2e calibrated,
+with no oracle in its response.
+
+*The defense.* The entropy and g channels of item 2c and the allocation channel of item
+2e, with their committed constants, run online from step 10. The first alarm on any
+channel puts the defense in VETO, which holds the action the model committed on the step
+before the alarm. Any later alarm while VETO is in force puts it in CONSENSUS, which
+imposes the unattacked median allocation of the committed calibration runs. Both states
+are latched, and an alarm computed at step t acts from step t + 1. The defense reads only
+the recorded channel quantities and its own state, never the honest action or any adapter
+field, which a sentinel gate confirmed. It acts only inside its executor, by replacing the
+action adapter for incumbent calls; no production file changed.
+
+*Design.* Six attack arms: unattacked, the configured drift attack at multipliers 1 and 4,
+and reallocation from transfer to compute at shifts 0.02, 0.10 and 0.20. Three defense
+arms: OFF; VETO, with escalation disabled; and GRADED, the full defense. Twenty seeds,
+1835087600 through 1835087619, each run in all 18 cells, 360 runs, with D2's accumulator
+off throughout.
+
+*Registered result, C1.* Mean steps per run at or after onset with g at or above g_star,
+and the paired difference OFF minus GRADED, 20 pairs each.
+
+| Attack arm | OFF | VETO | GRADED | OFF minus GRADED | t |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Unattacked | 1.0 | 17.6 | 2.2 | -1.2 | -1.3 |
+| Drift, multiplier 1 | 165.8 | 93.2 | 9.6 | 156.2 | 25.0 |
+| Drift, multiplier 4 | 141.2 | 123.8 | 11.2 | 130.0 | 14.4 |
+| Reallocation, shift 0.02 | 34.3 | 81.2 | 22.9 | 11.5 | 2.1 |
+| Reallocation, shift 0.10 | 245.6 | 178.2 | 21.3 | 224.3 | 120.3 |
+| Reallocation, shift 0.20 | 248.7 | 236.2 | 13.9 | 234.8 | 210.2 |
+
+VETO minus GRADED, the registered measure of what escalation adds, is positive in every
+attack arm, from 58.3 at shift 0.02 to 222.4 at shift 0.20, with t from 3.7 to 19.0.
+
+*C2 through C5.* Undefended drift ended in extinction in 19 of 20 runs at multiplier 1 and
+20 of 20 at multiplier 4; under VETO in 2 and 3; under GRADED in none. Every GRADED run in
+every arm completed all 300 steps, and the paired difference on final population, OFF
+minus GRADED, is -301.2 and -299.8 in the two drift arms. Because undefended drift runs end
+early, they have fewer steps in which to accrue C1, so C1 understates the effect in those
+arms. The sustained hazard of item 2d, nine consecutive steps at or above g_star, still
+occurred under GRADED in 8, 9, 12, 18 and 19 of 20 runs across the five attack arms,
+against 20, 20, 10, 20 and 20 undefended; in all but two of those 66 GRADED runs the nine
+steps began before CONSENSUS took effect. Recorded steps equal completed steps in every
+run.
+
+*The cost with no attack present.* Five of 20 unattacked runs alarmed, all five escalated
+to CONSENSUS under GRADED, and seed 1835087612 alarms at step 29, before onset, in every arm.
+Under GRADED neither time past threshold, -1.2 with t of -1.3, nor final population, 6.0
+with a paired standard error of 7.5, differs detectably from OFF. Under VETO the
+unattacked arm spent 17.6 steps past threshold against 1.0, and two unattacked runs
+reached the sustained hazard, against none undefended.
+
+*What this establishes.* On these named pathways the full defense contains time past the
+defection threshold after detection and prevents the extinctions undefended drift
+produces, at no cost detectable at this sample size on unattacked runs. Escalation is what
+makes it work: holding the last committed action alone is not a safe response, and at
+shift 0.02 it spent significantly more time past threshold than no defense, with t of
+-2.7. The defense does not prevent the initial breach, which occurs during detection
+latency.
+
+*What it does not establish.* This is containment of known pathways under a named defense.
+The allocation channel was chosen knowing how the reallocation attack works, and nothing
+here is evidence about an attack the defense was not designed against. It is not the
+published consensus override, which the v2 path does not reach, and it is not a change to
+production code: promoting any part of it into a pinned source is a separate step with its
+own re-pinning. No attack-success rate was computed, no ratio of two measured counts was
+reported, and no published figure is corrected. The case in which a ratified succession
+bypasses the defense for one step never occurred.
+
+*Verified by recomputation from the raw step logs, not from the run report.* Every alarm,
+every VETO and CONSENSUS entry, and every C1 through C4 value was recomputed independently
+from the 360 per-step logs, and all 18 C1 contrasts match the report to full precision. On
+every defended step after an entry, 45,217 steps, the committed action equals the
+held action or the pinned consensus allocation exactly.
 
 **3. v2.1 implementation and component validation.** Including a bidirectional
 check on the entropy estimator specifically. A repair tested only in the direction
