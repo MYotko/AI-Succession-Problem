@@ -330,3 +330,34 @@ counter in either defense state. It says nothing about the v2 attack.
 
 **Nothing else changes.** Stage B, stage C, Sections 9 and 10, and Amendments 1 and 2 stand
 as committed.
+
+## 16. Amendment 4, 2026-09-18: stage B's switch is inert in v2, and stage B moves
+
+**Status:** committed and pushed before any stage B run exists. No output was produced under
+the unamended text.
+
+**What was wrong.** Section 5 and Section 7 define the drift quantity with the treatment
+"drift check disabled" and the control "drift check enabled." The switch that governs the
+drift check, `cop_drift_check`, takes effect only at line 940 of `simulation/model.py`,
+inside the legacy step function. The v2 path returns from `step` at line 704, into
+`_step_v2`, before reaching it, so the two arms would be identical in every run. This is
+the same class of error Amendment 3 corrected for stage A: a switch that the recorded
+quantity does not depend on. It was caught by reading the source before dispatch, which is
+the check stage A taught. The only drift defense that does act on the v2 path is
+`cop_cusum_drift`, the fixed-latency accumulator the instrument validation record documents
+as D2, which returns the honest action and therefore cannot serve as a meaningful control
+arm.
+
+**Amended, replacing stage B.** Stage B is not run under this note. Sub-Threshold Drift's
+declared quantity is unchanged: the paired difference on the count of steps at or after
+step 50 with g at or above g_star, 1.0965735902799727, treatment undefended minus control
+defended, at the same seed. Its defended arm is now the in-loop defense pre-registered in
+`simulation/diagnostics/drift_defense_design_note.md`, committed at e38b821, and its value
+is that note's registered contrast C1, OFF minus GRADED, in the attack arm that runs the
+configured drift attack at production intensity. That note measures the quantity; this
+note declares it and cites that result rather than running a second measurement of the
+same thing.
+
+**Nothing else changes.** Stage A, stage A', stage C, the seven binary vectors, the pairing
+rule, and the interpretation of Section 10 stand as committed, including Amendments 1
+through 3.
