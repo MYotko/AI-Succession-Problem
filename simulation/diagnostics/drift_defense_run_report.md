@@ -1,0 +1,3884 @@
+# In-loop drift defense: containment evaluation
+
+This is a containment evaluation of named pathways under a named defense. It is not the published consensus override, not a change to production code, and not a correction of any published figure. No ratio of two measured counts was computed. The Section 8 interpretation is reserved for the operator.
+
+Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against.
+
+## C1. Primary paired count of steps past the threshold
+
+Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against.
+
+| Arm | Contrast | Pairs | Mean difference | Paired standard error | t statistic | Known-pathway qualification |
+| --- | --- | --- | --- | --- | --- | --- |
+| H | OFF minus VETO | 20 | -16.6 | 11.447914082578768 | -1.4500458232178373 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| H | OFF minus GRADED | 20 | -1.2 | 0.9020444615019348 | -1.3303113662512367 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| H | VETO minus GRADED | 20 | 15.4 | 10.605212223986348 | 1.452116155221207 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| M1 | OFF minus VETO | 20 | 72.6 | 23.113268005514428 | 3.1410530082841976 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| M1 | OFF minus GRADED | 20 | 156.2 | 6.238505219074602 | 25.038049102276805 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| M1 | VETO minus GRADED | 20 | 83.6 | 20.969702455033346 | 3.9867041594542765 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| M4 | OFF minus VETO | 20 | 17.35 | 29.129590218809966 | 0.5956142832656985 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| M4 | OFF minus GRADED | 20 | 129.95 | 9.031953510206211 | 14.387806564012426 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| M4 | VETO minus GRADED | 20 | 112.6 | 23.374570077667514 | 4.817200899347452 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| R02 | OFF minus VETO | 20 | -46.85 | 17.532267244621902 | -2.672215712110562 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| R02 | OFF minus GRADED | 20 | 11.45 | 5.490889583760779 | 2.085272308855599 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| R02 | VETO minus GRADED | 20 | 58.3 | 15.741179652176811 | 3.7036614337819227 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| R10 | OFF minus VETO | 20 | 67.4 | 23.681260635007543 | 2.8461322663019004 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| R10 | OFF minus GRADED | 20 | 224.3 | 1.863923422867954 | 120.33756175180064 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| R10 | VETO minus GRADED | 20 | 156.9 | 23.387007189103052 | 6.70885328470357 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| R20 | OFF minus VETO | 20 | 12.4 | 12.399999999999999 | 1.0000000000000002 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| R20 | OFF minus GRADED | 20 | 234.75 | 1.116561922293515 | 210.24360164262376 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| R20 | VETO minus GRADED | 20 | 222.35 | 11.735074506973124 | 18.947472371639133 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+
+## C2. Sustained hazard counts
+
+Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against.
+
+| Arm | Defense | Runs | Runs with registered sustained hazard |
+| --- | --- | --- | --- |
+| H | OFF | 20 | 0 |
+| H | VETO | 20 | 2 |
+| H | GRADED | 20 | 2 |
+| M1 | OFF | 20 | 20 |
+| M1 | VETO | 20 | 10 |
+| M1 | GRADED | 20 | 8 |
+| M4 | OFF | 20 | 20 |
+| M4 | VETO | 20 | 13 |
+| M4 | GRADED | 20 | 9 |
+| R02 | OFF | 20 | 10 |
+| R02 | VETO | 20 | 13 |
+| R02 | GRADED | 20 | 12 |
+| R10 | OFF | 20 | 20 |
+| R10 | VETO | 20 | 18 |
+| R10 | GRADED | 20 | 18 |
+| R20 | OFF | 20 | 20 |
+| R20 | VETO | 20 | 19 |
+| R20 | GRADED | 20 | 19 |
+
+## C3. Intervention counts and entry steps
+
+Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against.
+
+| Arm | Defense | Entered VETO | VETO min, median, max | Entered CONSENSUS | CONSENSUS min, median, max |
+| --- | --- | --- | --- | --- | --- |
+| H | OFF | 0 | [None, None, None] | 0 | [None, None, None] |
+| H | VETO | 5 | [29, 136, 209] | 0 | [None, None, None] |
+| H | GRADED | 5 | [29, 136, 209] | 5 | [132, 188, 221] |
+| M1 | OFF | 0 | [None, None, None] | 0 | [None, None, None] |
+| M1 | VETO | 20 | [29, 74.5, 80] | 0 | [None, None, None] |
+| M1 | GRADED | 20 | [29, 74.5, 80] | 18 | [72, 89.5, 188] |
+| M4 | OFF | 0 | [None, None, None] | 0 | [None, None, None] |
+| M4 | VETO | 20 | [29, 58.5, 68] | 0 | [None, None, None] |
+| M4 | GRADED | 20 | [29, 58.5, 68] | 19 | [57, 67, 188] |
+| R02 | OFF | 0 | [None, None, None] | 0 | [None, None, None] |
+| R02 | VETO | 20 | [29, 163.5, 224] | 0 | [None, None, None] |
+| R02 | GRADED | 20 | [29, 163.5, 224] | 16 | [99, 178.0, 244] |
+| R10 | OFF | 0 | [None, None, None] | 0 | [None, None, None] |
+| R10 | VETO | 20 | [29, 62.5, 78] | 0 | [None, None, None] |
+| R10 | GRADED | 20 | [29, 62.5, 78] | 18 | [60, 70.5, 188] |
+| R20 | OFF | 0 | [None, None, None] | 0 | [None, None, None] |
+| R20 | VETO | 20 | [29, 53.0, 55] | 0 | [None, None, None] |
+| R20 | GRADED | 20 | [29, 53.0, 55] | 20 | [54, 56.5, 188] |
+
+## C4. Paired final population counts
+
+Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against.
+
+| Arm | Contrast | Pairs | Mean difference | Paired standard error | t statistic | Known-pathway qualification |
+| --- | --- | --- | --- | --- | --- | --- |
+| H | OFF minus VETO | 20 | 5.5 | 9.377043636905025 | 0.586538808282151 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| H | OFF minus GRADED | 20 | 6.0 | 7.4906959834043105 | 0.8009936611087998 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| M1 | OFF minus VETO | 20 | -202.95 | 26.218863739481037 | -7.740610043843841 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| M1 | OFF minus GRADED | 20 | -301.15 | 9.714415495594814 | -31.000321134767415 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| M4 | OFF minus VETO | 20 | -218.65 | 32.12035549059358 | -6.807209841249468 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| M4 | OFF minus GRADED | 20 | -299.75 | 9.982847131059618 | -30.026504068903176 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| R02 | OFF minus VETO | 20 | 14.65 | 12.297255791435745 | 1.1913227022733635 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| R02 | OFF minus GRADED | 20 | 0.4 | 13.894792663364745 | 0.028787763134792723 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| R10 | OFF minus VETO | 20 | 22.35 | 11.949955956756536 | 1.8702997802567844 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| R10 | OFF minus GRADED | 20 | 9.5 | 10.591332106466762 | 0.8969598823361958 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| R20 | OFF minus VETO | 20 | 12.4 | 11.925293773276504 | 1.0398066693993961 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+| R20 | OFF minus GRADED | 20 | 11.1 | 12.151651393080176 | 0.913456092586803 | Known pathways only: the allocation channel was chosen knowing how the reallocation attack works; these values apply to the named attack arms on this substrate and are not evidence about attacks the architecture was not designed against. |
+
+## C5. Liveness
+
+{"runs": 360, "matching_runs": 360, "mismatches": []}
+
+## C6. Auditability
+
+Every run has a per-step CSV and per-run audit JSON, named and hashed in the results and manifest. Audit records include every alarm, every state transition with its effective step, incumbent replacement actions, committed snapshots, heartbeat statistics, and incumbent call counts. Production bindings were restored and verified by identity in every run.
+
+## Exploratory: ratified successor commits during defense
+
+These are exploratory counts, not registered results.
+
+| Arm | Defense | Seed | Exploratory count |
+| --- | --- | --- | --- |
+| H | OFF | 1835087600 | 0 |
+| H | OFF | 1835087601 | 0 |
+| H | OFF | 1835087602 | 0 |
+| H | OFF | 1835087603 | 0 |
+| H | OFF | 1835087604 | 0 |
+| H | OFF | 1835087605 | 0 |
+| H | OFF | 1835087606 | 0 |
+| H | OFF | 1835087607 | 0 |
+| H | OFF | 1835087608 | 0 |
+| H | OFF | 1835087609 | 0 |
+| H | OFF | 1835087610 | 0 |
+| H | OFF | 1835087611 | 0 |
+| H | OFF | 1835087612 | 0 |
+| H | OFF | 1835087613 | 0 |
+| H | OFF | 1835087614 | 0 |
+| H | OFF | 1835087615 | 0 |
+| H | OFF | 1835087616 | 0 |
+| H | OFF | 1835087617 | 0 |
+| H | OFF | 1835087618 | 0 |
+| H | OFF | 1835087619 | 0 |
+| H | VETO | 1835087600 | 0 |
+| H | VETO | 1835087601 | 0 |
+| H | VETO | 1835087602 | 0 |
+| H | VETO | 1835087603 | 0 |
+| H | VETO | 1835087604 | 0 |
+| H | VETO | 1835087605 | 0 |
+| H | VETO | 1835087606 | 0 |
+| H | VETO | 1835087607 | 0 |
+| H | VETO | 1835087608 | 0 |
+| H | VETO | 1835087609 | 0 |
+| H | VETO | 1835087610 | 0 |
+| H | VETO | 1835087611 | 0 |
+| H | VETO | 1835087612 | 0 |
+| H | VETO | 1835087613 | 0 |
+| H | VETO | 1835087614 | 0 |
+| H | VETO | 1835087615 | 0 |
+| H | VETO | 1835087616 | 0 |
+| H | VETO | 1835087617 | 0 |
+| H | VETO | 1835087618 | 0 |
+| H | VETO | 1835087619 | 0 |
+| H | GRADED | 1835087600 | 0 |
+| H | GRADED | 1835087601 | 0 |
+| H | GRADED | 1835087602 | 0 |
+| H | GRADED | 1835087603 | 0 |
+| H | GRADED | 1835087604 | 0 |
+| H | GRADED | 1835087605 | 0 |
+| H | GRADED | 1835087606 | 0 |
+| H | GRADED | 1835087607 | 0 |
+| H | GRADED | 1835087608 | 0 |
+| H | GRADED | 1835087609 | 0 |
+| H | GRADED | 1835087610 | 0 |
+| H | GRADED | 1835087611 | 0 |
+| H | GRADED | 1835087612 | 0 |
+| H | GRADED | 1835087613 | 0 |
+| H | GRADED | 1835087614 | 0 |
+| H | GRADED | 1835087615 | 0 |
+| H | GRADED | 1835087616 | 0 |
+| H | GRADED | 1835087617 | 0 |
+| H | GRADED | 1835087618 | 0 |
+| H | GRADED | 1835087619 | 0 |
+| M1 | OFF | 1835087600 | 0 |
+| M1 | OFF | 1835087601 | 0 |
+| M1 | OFF | 1835087602 | 0 |
+| M1 | OFF | 1835087603 | 0 |
+| M1 | OFF | 1835087604 | 0 |
+| M1 | OFF | 1835087605 | 0 |
+| M1 | OFF | 1835087606 | 0 |
+| M1 | OFF | 1835087607 | 0 |
+| M1 | OFF | 1835087608 | 0 |
+| M1 | OFF | 1835087609 | 0 |
+| M1 | OFF | 1835087610 | 0 |
+| M1 | OFF | 1835087611 | 0 |
+| M1 | OFF | 1835087612 | 0 |
+| M1 | OFF | 1835087613 | 0 |
+| M1 | OFF | 1835087614 | 0 |
+| M1 | OFF | 1835087615 | 0 |
+| M1 | OFF | 1835087616 | 0 |
+| M1 | OFF | 1835087617 | 0 |
+| M1 | OFF | 1835087618 | 0 |
+| M1 | OFF | 1835087619 | 0 |
+| M1 | VETO | 1835087600 | 0 |
+| M1 | VETO | 1835087601 | 0 |
+| M1 | VETO | 1835087602 | 0 |
+| M1 | VETO | 1835087603 | 0 |
+| M1 | VETO | 1835087604 | 0 |
+| M1 | VETO | 1835087605 | 0 |
+| M1 | VETO | 1835087606 | 0 |
+| M1 | VETO | 1835087607 | 0 |
+| M1 | VETO | 1835087608 | 0 |
+| M1 | VETO | 1835087609 | 0 |
+| M1 | VETO | 1835087610 | 0 |
+| M1 | VETO | 1835087611 | 0 |
+| M1 | VETO | 1835087612 | 0 |
+| M1 | VETO | 1835087613 | 0 |
+| M1 | VETO | 1835087614 | 0 |
+| M1 | VETO | 1835087615 | 0 |
+| M1 | VETO | 1835087616 | 0 |
+| M1 | VETO | 1835087617 | 0 |
+| M1 | VETO | 1835087618 | 0 |
+| M1 | VETO | 1835087619 | 0 |
+| M1 | GRADED | 1835087600 | 0 |
+| M1 | GRADED | 1835087601 | 0 |
+| M1 | GRADED | 1835087602 | 0 |
+| M1 | GRADED | 1835087603 | 0 |
+| M1 | GRADED | 1835087604 | 0 |
+| M1 | GRADED | 1835087605 | 0 |
+| M1 | GRADED | 1835087606 | 0 |
+| M1 | GRADED | 1835087607 | 0 |
+| M1 | GRADED | 1835087608 | 0 |
+| M1 | GRADED | 1835087609 | 0 |
+| M1 | GRADED | 1835087610 | 0 |
+| M1 | GRADED | 1835087611 | 0 |
+| M1 | GRADED | 1835087612 | 0 |
+| M1 | GRADED | 1835087613 | 0 |
+| M1 | GRADED | 1835087614 | 0 |
+| M1 | GRADED | 1835087615 | 0 |
+| M1 | GRADED | 1835087616 | 0 |
+| M1 | GRADED | 1835087617 | 0 |
+| M1 | GRADED | 1835087618 | 0 |
+| M1 | GRADED | 1835087619 | 0 |
+| M4 | OFF | 1835087600 | 0 |
+| M4 | OFF | 1835087601 | 0 |
+| M4 | OFF | 1835087602 | 0 |
+| M4 | OFF | 1835087603 | 0 |
+| M4 | OFF | 1835087604 | 0 |
+| M4 | OFF | 1835087605 | 0 |
+| M4 | OFF | 1835087606 | 0 |
+| M4 | OFF | 1835087607 | 0 |
+| M4 | OFF | 1835087608 | 0 |
+| M4 | OFF | 1835087609 | 0 |
+| M4 | OFF | 1835087610 | 0 |
+| M4 | OFF | 1835087611 | 0 |
+| M4 | OFF | 1835087612 | 0 |
+| M4 | OFF | 1835087613 | 0 |
+| M4 | OFF | 1835087614 | 0 |
+| M4 | OFF | 1835087615 | 0 |
+| M4 | OFF | 1835087616 | 0 |
+| M4 | OFF | 1835087617 | 0 |
+| M4 | OFF | 1835087618 | 0 |
+| M4 | OFF | 1835087619 | 0 |
+| M4 | VETO | 1835087600 | 0 |
+| M4 | VETO | 1835087601 | 0 |
+| M4 | VETO | 1835087602 | 0 |
+| M4 | VETO | 1835087603 | 0 |
+| M4 | VETO | 1835087604 | 0 |
+| M4 | VETO | 1835087605 | 0 |
+| M4 | VETO | 1835087606 | 0 |
+| M4 | VETO | 1835087607 | 0 |
+| M4 | VETO | 1835087608 | 0 |
+| M4 | VETO | 1835087609 | 0 |
+| M4 | VETO | 1835087610 | 0 |
+| M4 | VETO | 1835087611 | 0 |
+| M4 | VETO | 1835087612 | 0 |
+| M4 | VETO | 1835087613 | 0 |
+| M4 | VETO | 1835087614 | 0 |
+| M4 | VETO | 1835087615 | 0 |
+| M4 | VETO | 1835087616 | 0 |
+| M4 | VETO | 1835087617 | 0 |
+| M4 | VETO | 1835087618 | 0 |
+| M4 | VETO | 1835087619 | 0 |
+| M4 | GRADED | 1835087600 | 0 |
+| M4 | GRADED | 1835087601 | 0 |
+| M4 | GRADED | 1835087602 | 0 |
+| M4 | GRADED | 1835087603 | 0 |
+| M4 | GRADED | 1835087604 | 0 |
+| M4 | GRADED | 1835087605 | 0 |
+| M4 | GRADED | 1835087606 | 0 |
+| M4 | GRADED | 1835087607 | 0 |
+| M4 | GRADED | 1835087608 | 0 |
+| M4 | GRADED | 1835087609 | 0 |
+| M4 | GRADED | 1835087610 | 0 |
+| M4 | GRADED | 1835087611 | 0 |
+| M4 | GRADED | 1835087612 | 0 |
+| M4 | GRADED | 1835087613 | 0 |
+| M4 | GRADED | 1835087614 | 0 |
+| M4 | GRADED | 1835087615 | 0 |
+| M4 | GRADED | 1835087616 | 0 |
+| M4 | GRADED | 1835087617 | 0 |
+| M4 | GRADED | 1835087618 | 0 |
+| M4 | GRADED | 1835087619 | 0 |
+| R02 | OFF | 1835087600 | 0 |
+| R02 | OFF | 1835087601 | 0 |
+| R02 | OFF | 1835087602 | 0 |
+| R02 | OFF | 1835087603 | 0 |
+| R02 | OFF | 1835087604 | 0 |
+| R02 | OFF | 1835087605 | 0 |
+| R02 | OFF | 1835087606 | 0 |
+| R02 | OFF | 1835087607 | 0 |
+| R02 | OFF | 1835087608 | 0 |
+| R02 | OFF | 1835087609 | 0 |
+| R02 | OFF | 1835087610 | 0 |
+| R02 | OFF | 1835087611 | 0 |
+| R02 | OFF | 1835087612 | 0 |
+| R02 | OFF | 1835087613 | 0 |
+| R02 | OFF | 1835087614 | 0 |
+| R02 | OFF | 1835087615 | 0 |
+| R02 | OFF | 1835087616 | 0 |
+| R02 | OFF | 1835087617 | 0 |
+| R02 | OFF | 1835087618 | 0 |
+| R02 | OFF | 1835087619 | 0 |
+| R02 | VETO | 1835087600 | 0 |
+| R02 | VETO | 1835087601 | 0 |
+| R02 | VETO | 1835087602 | 0 |
+| R02 | VETO | 1835087603 | 0 |
+| R02 | VETO | 1835087604 | 0 |
+| R02 | VETO | 1835087605 | 0 |
+| R02 | VETO | 1835087606 | 0 |
+| R02 | VETO | 1835087607 | 0 |
+| R02 | VETO | 1835087608 | 0 |
+| R02 | VETO | 1835087609 | 0 |
+| R02 | VETO | 1835087610 | 0 |
+| R02 | VETO | 1835087611 | 0 |
+| R02 | VETO | 1835087612 | 0 |
+| R02 | VETO | 1835087613 | 0 |
+| R02 | VETO | 1835087614 | 0 |
+| R02 | VETO | 1835087615 | 0 |
+| R02 | VETO | 1835087616 | 0 |
+| R02 | VETO | 1835087617 | 0 |
+| R02 | VETO | 1835087618 | 0 |
+| R02 | VETO | 1835087619 | 0 |
+| R02 | GRADED | 1835087600 | 0 |
+| R02 | GRADED | 1835087601 | 0 |
+| R02 | GRADED | 1835087602 | 0 |
+| R02 | GRADED | 1835087603 | 0 |
+| R02 | GRADED | 1835087604 | 0 |
+| R02 | GRADED | 1835087605 | 0 |
+| R02 | GRADED | 1835087606 | 0 |
+| R02 | GRADED | 1835087607 | 0 |
+| R02 | GRADED | 1835087608 | 0 |
+| R02 | GRADED | 1835087609 | 0 |
+| R02 | GRADED | 1835087610 | 0 |
+| R02 | GRADED | 1835087611 | 0 |
+| R02 | GRADED | 1835087612 | 0 |
+| R02 | GRADED | 1835087613 | 0 |
+| R02 | GRADED | 1835087614 | 0 |
+| R02 | GRADED | 1835087615 | 0 |
+| R02 | GRADED | 1835087616 | 0 |
+| R02 | GRADED | 1835087617 | 0 |
+| R02 | GRADED | 1835087618 | 0 |
+| R02 | GRADED | 1835087619 | 0 |
+| R10 | OFF | 1835087600 | 0 |
+| R10 | OFF | 1835087601 | 0 |
+| R10 | OFF | 1835087602 | 0 |
+| R10 | OFF | 1835087603 | 0 |
+| R10 | OFF | 1835087604 | 0 |
+| R10 | OFF | 1835087605 | 0 |
+| R10 | OFF | 1835087606 | 0 |
+| R10 | OFF | 1835087607 | 0 |
+| R10 | OFF | 1835087608 | 0 |
+| R10 | OFF | 1835087609 | 0 |
+| R10 | OFF | 1835087610 | 0 |
+| R10 | OFF | 1835087611 | 0 |
+| R10 | OFF | 1835087612 | 0 |
+| R10 | OFF | 1835087613 | 0 |
+| R10 | OFF | 1835087614 | 0 |
+| R10 | OFF | 1835087615 | 0 |
+| R10 | OFF | 1835087616 | 0 |
+| R10 | OFF | 1835087617 | 0 |
+| R10 | OFF | 1835087618 | 0 |
+| R10 | OFF | 1835087619 | 0 |
+| R10 | VETO | 1835087600 | 0 |
+| R10 | VETO | 1835087601 | 0 |
+| R10 | VETO | 1835087602 | 0 |
+| R10 | VETO | 1835087603 | 0 |
+| R10 | VETO | 1835087604 | 0 |
+| R10 | VETO | 1835087605 | 0 |
+| R10 | VETO | 1835087606 | 0 |
+| R10 | VETO | 1835087607 | 0 |
+| R10 | VETO | 1835087608 | 0 |
+| R10 | VETO | 1835087609 | 0 |
+| R10 | VETO | 1835087610 | 0 |
+| R10 | VETO | 1835087611 | 0 |
+| R10 | VETO | 1835087612 | 0 |
+| R10 | VETO | 1835087613 | 0 |
+| R10 | VETO | 1835087614 | 0 |
+| R10 | VETO | 1835087615 | 0 |
+| R10 | VETO | 1835087616 | 0 |
+| R10 | VETO | 1835087617 | 0 |
+| R10 | VETO | 1835087618 | 0 |
+| R10 | VETO | 1835087619 | 0 |
+| R10 | GRADED | 1835087600 | 0 |
+| R10 | GRADED | 1835087601 | 0 |
+| R10 | GRADED | 1835087602 | 0 |
+| R10 | GRADED | 1835087603 | 0 |
+| R10 | GRADED | 1835087604 | 0 |
+| R10 | GRADED | 1835087605 | 0 |
+| R10 | GRADED | 1835087606 | 0 |
+| R10 | GRADED | 1835087607 | 0 |
+| R10 | GRADED | 1835087608 | 0 |
+| R10 | GRADED | 1835087609 | 0 |
+| R10 | GRADED | 1835087610 | 0 |
+| R10 | GRADED | 1835087611 | 0 |
+| R10 | GRADED | 1835087612 | 0 |
+| R10 | GRADED | 1835087613 | 0 |
+| R10 | GRADED | 1835087614 | 0 |
+| R10 | GRADED | 1835087615 | 0 |
+| R10 | GRADED | 1835087616 | 0 |
+| R10 | GRADED | 1835087617 | 0 |
+| R10 | GRADED | 1835087618 | 0 |
+| R10 | GRADED | 1835087619 | 0 |
+| R20 | OFF | 1835087600 | 0 |
+| R20 | OFF | 1835087601 | 0 |
+| R20 | OFF | 1835087602 | 0 |
+| R20 | OFF | 1835087603 | 0 |
+| R20 | OFF | 1835087604 | 0 |
+| R20 | OFF | 1835087605 | 0 |
+| R20 | OFF | 1835087606 | 0 |
+| R20 | OFF | 1835087607 | 0 |
+| R20 | OFF | 1835087608 | 0 |
+| R20 | OFF | 1835087609 | 0 |
+| R20 | OFF | 1835087610 | 0 |
+| R20 | OFF | 1835087611 | 0 |
+| R20 | OFF | 1835087612 | 0 |
+| R20 | OFF | 1835087613 | 0 |
+| R20 | OFF | 1835087614 | 0 |
+| R20 | OFF | 1835087615 | 0 |
+| R20 | OFF | 1835087616 | 0 |
+| R20 | OFF | 1835087617 | 0 |
+| R20 | OFF | 1835087618 | 0 |
+| R20 | OFF | 1835087619 | 0 |
+| R20 | VETO | 1835087600 | 0 |
+| R20 | VETO | 1835087601 | 0 |
+| R20 | VETO | 1835087602 | 0 |
+| R20 | VETO | 1835087603 | 0 |
+| R20 | VETO | 1835087604 | 0 |
+| R20 | VETO | 1835087605 | 0 |
+| R20 | VETO | 1835087606 | 0 |
+| R20 | VETO | 1835087607 | 0 |
+| R20 | VETO | 1835087608 | 0 |
+| R20 | VETO | 1835087609 | 0 |
+| R20 | VETO | 1835087610 | 0 |
+| R20 | VETO | 1835087611 | 0 |
+| R20 | VETO | 1835087612 | 0 |
+| R20 | VETO | 1835087613 | 0 |
+| R20 | VETO | 1835087614 | 0 |
+| R20 | VETO | 1835087615 | 0 |
+| R20 | VETO | 1835087616 | 0 |
+| R20 | VETO | 1835087617 | 0 |
+| R20 | VETO | 1835087618 | 0 |
+| R20 | VETO | 1835087619 | 0 |
+| R20 | GRADED | 1835087600 | 0 |
+| R20 | GRADED | 1835087601 | 0 |
+| R20 | GRADED | 1835087602 | 0 |
+| R20 | GRADED | 1835087603 | 0 |
+| R20 | GRADED | 1835087604 | 0 |
+| R20 | GRADED | 1835087605 | 0 |
+| R20 | GRADED | 1835087606 | 0 |
+| R20 | GRADED | 1835087607 | 0 |
+| R20 | GRADED | 1835087608 | 0 |
+| R20 | GRADED | 1835087609 | 0 |
+| R20 | GRADED | 1835087610 | 0 |
+| R20 | GRADED | 1835087611 | 0 |
+| R20 | GRADED | 1835087612 | 0 |
+| R20 | GRADED | 1835087613 | 0 |
+| R20 | GRADED | 1835087614 | 0 |
+| R20 | GRADED | 1835087615 | 0 |
+| R20 | GRADED | 1835087616 | 0 |
+| R20 | GRADED | 1835087617 | 0 |
+| R20 | GRADED | 1835087618 | 0 |
+| R20 | GRADED | 1835087619 | 0 |
+
+## Gate evidence
+
+All nine gates and the additional incumbent-call gate passed. Full measured evidence is in drift_defense_run_gates.json and the gate artifacts enumerated in the manifest.
+
+Online equivalence covered M1 and R10 under OFF, VETO and GRADED. Wrapper identity covered M1 and H. The no-oracle synthetic gate reached all three states and checked the pinned consensus fields bitwise.
+
+## Source pins
+
+Measured gate evidence:
+
+```json
+{
+  "gate_1": {
+    "passed": true,
+    "preflight": "drift_defense_run_preflight.json"
+  },
+  "gate_2": {
+    "passed": true,
+    "pins": [
+      {
+        "blob_sha1": "d902392c8d3a8c7a267dc040349175095bef945e",
+        "end_blob_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+        "end_worktree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+        "expected_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+        "path": "simulation/diagnostics/drift_defense_design_note.md",
+        "publication_commit": "e38b821c0648c6f5eae5f113d109aadd799b5df2",
+        "start_blob_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+        "start_worktree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920"
+      },
+      {
+        "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+        "end_blob_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+        "end_worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+        "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+        "path": "simulation/diagnostics/detector_design_note.md",
+        "publication_commit": "76f81cd83e0db6ff5031070e54f2f908502b8632",
+        "start_blob_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+        "start_worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+      },
+      {
+        "blob_sha1": "f584aa2fbf4e76db674ff487fed2b036f7e45a08",
+        "end_blob_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+        "end_worktree_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+        "expected_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+        "path": "simulation/diagnostics/detector_round3_design_note.md",
+        "publication_commit": "63470090dc3836628b69fce432a30b15b3f212b7",
+        "start_blob_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+        "start_worktree_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293"
+      },
+      {
+        "blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+        "end_blob_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+        "end_worktree_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+        "expected_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+        "path": "simulation/diagnostics/drift_mapping_design_note.md",
+        "publication_commit": "2f2b9e0329f3368fd86a71380bcdf2d91260dcb0",
+        "start_blob_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+        "start_worktree_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748"
+      },
+      {
+        "blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+        "end_blob_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+        "end_worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+        "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+        "path": "simulation/diagnostics/detector_run_cal_constants.json",
+        "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+        "start_blob_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+        "start_worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488"
+      },
+      {
+        "blob_sha1": "ff934c2613e90804c3ff5c18141f777eaa24276f",
+        "end_blob_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+        "end_worktree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+        "expected_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+        "path": "simulation/diagnostics/detector_run_r2_constants.json",
+        "publication_commit": "242ec2265ee6e3b1158925af0c22f6b76e007007",
+        "start_blob_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+        "start_worktree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98"
+      },
+      {
+        "blob_sha1": "09acbbcae9bb292dbd495eb3d72dd1bc985a5edf",
+        "end_blob_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+        "end_worktree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+        "expected_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+        "path": "simulation/diagnostics/detector_run_r3_a3_constants.json",
+        "publication_commit": "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237",
+        "start_blob_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+        "start_worktree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35"
+      },
+      {
+        "blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+        "end_blob_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+        "end_worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+        "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+        "path": "simulation/cusum_detector_v2.py",
+        "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+        "start_blob_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+        "start_worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+      },
+      {
+        "blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723",
+        "end_blob_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+        "end_worktree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+        "expected_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+        "path": "simulation/diagnostics/detector_run_eval_executor.py",
+        "publication_commit": "9ce2e65931875f8cc6c2036a3e56475a1d08bd84",
+        "start_blob_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+        "start_worktree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff"
+      },
+      {
+        "blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+        "end_blob_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+        "end_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+        "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+        "path": "simulation/attack_metrics_v2.py",
+        "publication_commit": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+        "start_blob_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+        "start_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323"
+      },
+      {
+        "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+        "end_blob_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "end_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "path": "simulation/run_attack_vector_revalidation_v2.py",
+        "publication_commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+        "start_blob_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "start_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+      },
+      {
+        "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+        "end_blob_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "end_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "path": "simulation/metrics.py",
+        "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+        "start_blob_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "start_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+      },
+      {
+        "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+        "end_blob_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "end_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "path": "simulation/agents.py",
+        "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+        "start_blob_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "start_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+      },
+      {
+        "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+        "end_blob_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "end_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "path": "simulation/model.py",
+        "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+        "start_blob_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "start_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+      },
+      {
+        "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+        "end_blob_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "end_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "path": "simulation/attack_adapter_v2.py",
+        "publication_commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+        "start_blob_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "start_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+      },
+      {
+        "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+        "end_blob_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+        "end_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+        "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+        "path": "simulation/working_factor.py",
+        "publication_commit": "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+        "start_blob_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+        "start_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+      },
+      {
+        "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+        "end_blob_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "end_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "path": "simulation/constants_v2_stage18.py",
+        "publication_commit": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+        "start_blob_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "start_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+      },
+      {
+        "blob_sha1": "cffa1d922c70759b3619856247a3f1ba3dbfdce9",
+        "end_blob_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+        "end_worktree_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+        "expected_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+        "path": "simulation/diagnostics/detector_round2_design_note.md",
+        "start_blob_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+        "start_worktree_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632"
+      }
+    ]
+  },
+  "gate_3": {
+    "cases": [
+      {
+        "allowance": 0.125,
+        "direction": "lower",
+        "expected_alarm_steps": [
+          13,
+          17,
+          21
+        ],
+        "harmful_series": {
+          "alarms": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            true
+          ],
+          "candidate_statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.125,
+            0.25,
+            0.375,
+            0.5,
+            0.125,
+            0.25,
+            0.375,
+            0.5,
+            0.125,
+            0.25,
+            0.375,
+            0.5
+          ],
+          "start_statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.125,
+            0.25,
+            0.375,
+            0.0,
+            0.125,
+            0.25,
+            0.375,
+            0.0,
+            0.125,
+            0.25,
+            0.375
+          ],
+          "statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.125,
+            0.25,
+            0.375,
+            0.0,
+            0.125,
+            0.25,
+            0.375,
+            0.0,
+            0.125,
+            0.25,
+            0.375,
+            0.0
+          ],
+          "steps": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21
+          ]
+        },
+        "harmless_series": {
+          "alarms": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "candidate_statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "start_statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "steps": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21
+          ]
+        },
+        "measured_alarm_steps": [
+          13,
+          17,
+          21
+        ],
+        "passed": true,
+        "reference": 1.0,
+        "reference_series": {
+          "alarms": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "candidate_statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "start_statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "steps": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21
+          ]
+        },
+        "sigma": 0.25,
+        "threshold": 0.5
+      },
+      {
+        "allowance": 0.125,
+        "direction": "upper",
+        "expected_alarm_steps": [
+          13,
+          17,
+          21
+        ],
+        "harmful_series": {
+          "alarms": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            true
+          ],
+          "candidate_statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.125,
+            0.25,
+            0.375,
+            0.5,
+            0.125,
+            0.25,
+            0.375,
+            0.5,
+            0.125,
+            0.25,
+            0.375,
+            0.5
+          ],
+          "start_statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.125,
+            0.25,
+            0.375,
+            0.0,
+            0.125,
+            0.25,
+            0.375,
+            0.0,
+            0.125,
+            0.25,
+            0.375
+          ],
+          "statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.125,
+            0.25,
+            0.375,
+            0.0,
+            0.125,
+            0.25,
+            0.375,
+            0.0,
+            0.125,
+            0.25,
+            0.375,
+            0.0
+          ],
+          "steps": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21
+          ]
+        },
+        "harmless_series": {
+          "alarms": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "candidate_statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "start_statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "steps": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21
+          ]
+        },
+        "measured_alarm_steps": [
+          13,
+          17,
+          21
+        ],
+        "passed": true,
+        "reference": 1.0,
+        "reference_series": {
+          "alarms": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "candidate_statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "start_statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "statistics": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "steps": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21
+          ]
+        },
+        "sigma": 0.25,
+        "threshold": 0.5
+      }
+    ],
+    "heartbeat_counters": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "heartbeat_steps": 22,
+    "passed": true
+  },
+  "gate_4": {
+    "constructor_equivalence": {
+      "comparisons": 7560,
+      "first": "gate_factory",
+      "first_difference": null,
+      "passed": true,
+      "second": "gate_common",
+      "steps": 280
+    },
+    "honest_arm": {
+      "action_modified_steps": 0,
+      "adapter_active_steps": 0,
+      "steps": 60
+    },
+    "passed": true,
+    "recorder_rng_checks": 60,
+    "wrapper_identity": {
+      "comparisons": 60000,
+      "elapsed_seconds": 1.7620223999983864,
+      "gate": 4,
+      "identity": {
+        "drift_defense_run_analysis.py": "df45410a375b45473efc721661696ad8d1677be5dac7ef3bea7c18769c46c9bc",
+        "drift_defense_run_executor.py": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+        "drift_defense_run_plan.json": "cf747e5029804e183618d65402e4819adc7a05d45a1ff806cf35d4fefb3a67c6"
+      },
+      "maximum_key_difference": 0.0,
+      "passed": true,
+      "pins_end": [
+        {
+          "blob_sha1": "d902392c8d3a8c7a267dc040349175095bef945e",
+          "end_worktree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+          "expected_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+          "path": "simulation/diagnostics/drift_defense_design_note.md",
+          "publication_commit": "e38b821c0648c6f5eae5f113d109aadd799b5df2",
+          "start_blob_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+          "start_worktree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920"
+        },
+        {
+          "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+          "end_worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+          "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+          "path": "simulation/diagnostics/detector_design_note.md",
+          "publication_commit": "76f81cd83e0db6ff5031070e54f2f908502b8632",
+          "start_blob_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+          "start_worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+        },
+        {
+          "blob_sha1": "f584aa2fbf4e76db674ff487fed2b036f7e45a08",
+          "end_worktree_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+          "expected_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+          "path": "simulation/diagnostics/detector_round3_design_note.md",
+          "publication_commit": "63470090dc3836628b69fce432a30b15b3f212b7",
+          "start_blob_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+          "start_worktree_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293"
+        },
+        {
+          "blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+          "end_worktree_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+          "expected_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+          "path": "simulation/diagnostics/drift_mapping_design_note.md",
+          "publication_commit": "2f2b9e0329f3368fd86a71380bcdf2d91260dcb0",
+          "start_blob_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+          "start_worktree_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748"
+        },
+        {
+          "blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+          "end_worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+          "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+          "path": "simulation/diagnostics/detector_run_cal_constants.json",
+          "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+          "start_blob_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+          "start_worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488"
+        },
+        {
+          "blob_sha1": "ff934c2613e90804c3ff5c18141f777eaa24276f",
+          "end_worktree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+          "expected_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+          "path": "simulation/diagnostics/detector_run_r2_constants.json",
+          "publication_commit": "242ec2265ee6e3b1158925af0c22f6b76e007007",
+          "start_blob_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+          "start_worktree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98"
+        },
+        {
+          "blob_sha1": "09acbbcae9bb292dbd495eb3d72dd1bc985a5edf",
+          "end_worktree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+          "expected_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+          "path": "simulation/diagnostics/detector_run_r3_a3_constants.json",
+          "publication_commit": "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237",
+          "start_blob_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+          "start_worktree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35"
+        },
+        {
+          "blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+          "end_worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+          "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+          "path": "simulation/cusum_detector_v2.py",
+          "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+          "start_blob_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+          "start_worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+        },
+        {
+          "blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723",
+          "end_worktree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+          "expected_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+          "path": "simulation/diagnostics/detector_run_eval_executor.py",
+          "publication_commit": "9ce2e65931875f8cc6c2036a3e56475a1d08bd84",
+          "start_blob_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+          "start_worktree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff"
+        },
+        {
+          "blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+          "end_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+          "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+          "path": "simulation/attack_metrics_v2.py",
+          "publication_commit": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+          "start_blob_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+          "start_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323"
+        },
+        {
+          "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+          "end_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+          "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+          "path": "simulation/run_attack_vector_revalidation_v2.py",
+          "publication_commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+          "start_blob_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+          "start_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+        },
+        {
+          "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+          "end_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+          "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+          "path": "simulation/metrics.py",
+          "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+          "start_blob_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+          "start_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+        },
+        {
+          "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+          "end_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+          "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+          "path": "simulation/agents.py",
+          "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+          "start_blob_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+          "start_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+        },
+        {
+          "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+          "end_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+          "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+          "path": "simulation/model.py",
+          "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+          "start_blob_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+          "start_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+        },
+        {
+          "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+          "end_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+          "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+          "path": "simulation/attack_adapter_v2.py",
+          "publication_commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+          "start_blob_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+          "start_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+        },
+        {
+          "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+          "end_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+          "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+          "path": "simulation/working_factor.py",
+          "publication_commit": "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+          "start_blob_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+          "start_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+        },
+        {
+          "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+          "end_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+          "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+          "path": "simulation/constants_v2_stage18.py",
+          "publication_commit": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+          "start_blob_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+          "start_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+        },
+        {
+          "blob_sha1": "cffa1d922c70759b3619856247a3f1ba3dbfdce9",
+          "end_worktree_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+          "expected_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+          "path": "simulation/diagnostics/detector_round2_design_note.md",
+          "start_blob_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+          "start_worktree_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632"
+        }
+      ],
+      "pins_start": [
+        {
+          "blob_sha1": "d902392c8d3a8c7a267dc040349175095bef945e",
+          "end_worktree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+          "expected_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+          "path": "simulation/diagnostics/drift_defense_design_note.md",
+          "publication_commit": "e38b821c0648c6f5eae5f113d109aadd799b5df2",
+          "start_blob_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+          "start_worktree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920"
+        },
+        {
+          "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+          "end_worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+          "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+          "path": "simulation/diagnostics/detector_design_note.md",
+          "publication_commit": "76f81cd83e0db6ff5031070e54f2f908502b8632",
+          "start_blob_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+          "start_worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+        },
+        {
+          "blob_sha1": "f584aa2fbf4e76db674ff487fed2b036f7e45a08",
+          "end_worktree_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+          "expected_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+          "path": "simulation/diagnostics/detector_round3_design_note.md",
+          "publication_commit": "63470090dc3836628b69fce432a30b15b3f212b7",
+          "start_blob_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+          "start_worktree_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293"
+        },
+        {
+          "blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+          "end_worktree_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+          "expected_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+          "path": "simulation/diagnostics/drift_mapping_design_note.md",
+          "publication_commit": "2f2b9e0329f3368fd86a71380bcdf2d91260dcb0",
+          "start_blob_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+          "start_worktree_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748"
+        },
+        {
+          "blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+          "end_worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+          "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+          "path": "simulation/diagnostics/detector_run_cal_constants.json",
+          "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+          "start_blob_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+          "start_worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488"
+        },
+        {
+          "blob_sha1": "ff934c2613e90804c3ff5c18141f777eaa24276f",
+          "end_worktree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+          "expected_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+          "path": "simulation/diagnostics/detector_run_r2_constants.json",
+          "publication_commit": "242ec2265ee6e3b1158925af0c22f6b76e007007",
+          "start_blob_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+          "start_worktree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98"
+        },
+        {
+          "blob_sha1": "09acbbcae9bb292dbd495eb3d72dd1bc985a5edf",
+          "end_worktree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+          "expected_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+          "path": "simulation/diagnostics/detector_run_r3_a3_constants.json",
+          "publication_commit": "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237",
+          "start_blob_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+          "start_worktree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35"
+        },
+        {
+          "blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+          "end_worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+          "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+          "path": "simulation/cusum_detector_v2.py",
+          "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+          "start_blob_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+          "start_worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+        },
+        {
+          "blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723",
+          "end_worktree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+          "expected_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+          "path": "simulation/diagnostics/detector_run_eval_executor.py",
+          "publication_commit": "9ce2e65931875f8cc6c2036a3e56475a1d08bd84",
+          "start_blob_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+          "start_worktree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff"
+        },
+        {
+          "blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+          "end_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+          "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+          "path": "simulation/attack_metrics_v2.py",
+          "publication_commit": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+          "start_blob_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+          "start_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323"
+        },
+        {
+          "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+          "end_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+          "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+          "path": "simulation/run_attack_vector_revalidation_v2.py",
+          "publication_commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+          "start_blob_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+          "start_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+        },
+        {
+          "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+          "end_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+          "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+          "path": "simulation/metrics.py",
+          "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+          "start_blob_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+          "start_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+        },
+        {
+          "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+          "end_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+          "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+          "path": "simulation/agents.py",
+          "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+          "start_blob_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+          "start_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+        },
+        {
+          "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+          "end_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+          "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+          "path": "simulation/model.py",
+          "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+          "start_blob_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+          "start_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+        },
+        {
+          "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+          "end_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+          "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+          "path": "simulation/attack_adapter_v2.py",
+          "publication_commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+          "start_blob_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+          "start_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+        },
+        {
+          "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+          "end_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+          "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+          "path": "simulation/working_factor.py",
+          "publication_commit": "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+          "start_blob_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+          "start_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+        },
+        {
+          "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+          "end_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+          "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+          "path": "simulation/constants_v2_stage18.py",
+          "publication_commit": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+          "start_blob_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+          "start_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+        },
+        {
+          "blob_sha1": "cffa1d922c70759b3619856247a3f1ba3dbfdce9",
+          "end_worktree_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+          "expected_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+          "path": "simulation/diagnostics/detector_round2_design_note.md",
+          "start_blob_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+          "start_worktree_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632"
+        }
+      ],
+      "runtime": {
+        "machine": "YOTKOTEST",
+        "modules": {
+          "simulation/agents.py": {
+            "lf_basis": "LF-normalized working-tree bytes",
+            "raw_basis": "raw working-tree bytes",
+            "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+            "sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+          },
+          "simulation/attack_adapter_v2.py": {
+            "lf_basis": "LF-normalized working-tree bytes",
+            "raw_basis": "raw working-tree bytes",
+            "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+            "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+          },
+          "simulation/constants_v2_stage15.py": {
+            "lf_basis": "LF-normalized working-tree bytes",
+            "raw_basis": "raw working-tree bytes",
+            "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+            "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+          },
+          "simulation/cusum_detector_v2.py": {
+            "lf_basis": "LF-normalized working-tree bytes",
+            "raw_basis": "raw working-tree bytes",
+            "sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+            "sha256_raw": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+          },
+          "simulation/defection.py": {
+            "lf_basis": "LF-normalized working-tree bytes",
+            "raw_basis": "raw working-tree bytes",
+            "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+            "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+          },
+          "simulation/diagnostics/drift_defense_run_executor.py": {
+            "lf_basis": "LF-normalized working-tree bytes",
+            "raw_basis": "raw working-tree bytes",
+            "sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+            "sha256_raw": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9"
+          },
+          "simulation/metrics.py": {
+            "lf_basis": "LF-normalized working-tree bytes",
+            "raw_basis": "raw working-tree bytes",
+            "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+            "sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+          }
+        },
+        "numpy": "2.4.4",
+        "operator_cpu_budget": 16,
+        "os_cpu_count": 16,
+        "process_cpu_count": 16,
+        "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+        "thread_environment": {
+          "BLIS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "thread_runtime": [
+          {
+            "effective_threads": 1,
+            "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+            "query": "scipy_openblas_get_num_threads64_"
+          }
+        ],
+        "worker_pid": 20724
+      },
+      "seed": 20260913,
+      "steps_per_action": 300,
+      "synthetic_actions": 200,
+      "utc": "2026-09-19T02:56:07.569048+00:00"
+    }
+  },
+  "gate_5": {
+    "columns": [
+      "arm",
+      "seed",
+      "step",
+      "novelty_vector_count",
+      "h_n_latest",
+      "h_n_shape_latest",
+      "V",
+      "H_N",
+      "L_t",
+      "total_suppression",
+      "avg_wb",
+      "theta_capability",
+      "transfer_state",
+      "g",
+      "population",
+      "x_compute",
+      "x_bio_welfare",
+      "x_novelty_agency",
+      "x_institutional_capacity",
+      "x_transfer_comprehension",
+      "x_resilience",
+      "c_protective",
+      "c_suppressive",
+      "adapter_active",
+      "action_modified",
+      "adapter_score",
+      "shape_fallback_increase"
+    ],
+    "field_comparisons": 675,
+    "first_difference": null,
+    "identity": {
+      "drift_defense_run_analysis.py": "df45410a375b45473efc721661696ad8d1677be5dac7ef3bea7c18769c46c9bc",
+      "drift_defense_run_executor.py": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "drift_defense_run_plan.json": "cf747e5029804e183618d65402e4819adc7a05d45a1ff806cf35d4fefb3a67c6"
+    },
+    "nulls_compared_exactly": true,
+    "passed": true,
+    "reference_blob_sha1": "a8a44d3330c9b5e2d0904ec58c17457ddb9e2326",
+    "reference_path": "simulation/diagnostics/detector_run_cal_H_1835086300_steps_attempt1.csv",
+    "reference_sha256_lf": "0dfc7753cc02343dae1a21848482ebbcbc1a1d7567045e2a0c4db0a37e34ba25",
+    "seed": 1835086300,
+    "steps_compared": 25
+  },
+  "gate_6": {
+    "channel_and_median_checks": [
+      {
+        "actual": 0.9890951785336365,
+        "binary64_hex": "0x1.fa6aaee8ddd2fp-1",
+        "expected": 0.9890951785336365,
+        "passed": true,
+        "quantity": "entropy.reference"
+      },
+      {
+        "actual": 0.003549173553323096,
+        "binary64_hex": "0x1.d13280adbf63bp-9",
+        "expected": 0.003549173553323096,
+        "passed": true,
+        "quantity": "entropy.allowance"
+      },
+      {
+        "actual": 0.17319485850717864,
+        "binary64_hex": "0x1.62b3fc68fd4bcp-3",
+        "expected": 0.17319485850717864,
+        "passed": true,
+        "quantity": "entropy.threshold"
+      },
+      {
+        "actual": 0.9786446054615587,
+        "binary64_hex": "0x1.f510e7ddba7acp-1",
+        "expected": 0.9786446054615587,
+        "passed": true,
+        "quantity": "g.reference"
+      },
+      {
+        "actual": 0.022160874873702576,
+        "binary64_hex": "0x1.6b15723554cc7p-6",
+        "expected": 0.022160874873702576,
+        "passed": true,
+        "quantity": "g.allowance"
+      },
+      {
+        "actual": 4.507729894543943,
+        "binary64_hex": "0x1.207ea58711231p+2",
+        "expected": 4.507729894543943,
+        "passed": true,
+        "quantity": "g.threshold"
+      },
+      {
+        "actual": 0.27535941373839806,
+        "binary64_hex": "0x1.19f7d1729bcdfp-2",
+        "expected": 0.27535941373839806,
+        "passed": true,
+        "quantity": "A.reference"
+      },
+      {
+        "actual": 0.045310678652355926,
+        "binary64_hex": "0x1.732f615f15fcep-5",
+        "expected": 0.045310678652355926,
+        "passed": true,
+        "quantity": "A.allowance"
+      },
+      {
+        "actual": 0.7701182670542909,
+        "binary64_hex": "0x1.8a4cf10619ca9p-1",
+        "expected": 0.7701182670542909,
+        "passed": true,
+        "quantity": "A.threshold"
+      },
+      {
+        "actual": 0.13058054663961136,
+        "binary64_hex": "0x1.0b6dd04a7ccabp-3",
+        "expected": 0.13058054663961136,
+        "passed": true,
+        "quantity": "median.x_compute"
+      },
+      {
+        "actual": 0.19789308864393101,
+        "binary64_hex": "0x1.9548f8bea4122p-3",
+        "expected": 0.19789308864393101,
+        "passed": true,
+        "quantity": "median.x_bio_welfare"
+      },
+      {
+        "actual": 0.050694324487428735,
+        "binary64_hex": "0x1.9f49b43885ae2p-5",
+        "expected": 0.050694324487428735,
+        "passed": true,
+        "quantity": "median.x_novelty_agency"
+      },
+      {
+        "actual": 0.25643120498706085,
+        "binary64_hex": "0x1.0695e6dc5f89ap-2",
+        "expected": 0.25643120498706085,
+        "passed": true,
+        "quantity": "median.x_institutional_capacity"
+      },
+      {
+        "actual": 0.27322100367503155,
+        "binary64_hex": "0x1.17c73f2d754e4p-2",
+        "expected": 0.27322100367503155,
+        "passed": true,
+        "quantity": "median.x_transfer_comprehension"
+      },
+      {
+        "actual": 0.051169013866533296,
+        "binary64_hex": "0x1.a32d332402b63p-5",
+        "expected": 0.051169013866533296,
+        "passed": true,
+        "quantity": "median.x_resilience"
+      }
+    ],
+    "consensus": {
+      "c_protective": 0.4,
+      "c_suppressive": 0.2,
+      "x_bio_welfare": 0.2061409568906703,
+      "x_compute": 0.1360229355155997,
+      "x_institutional_capacity": 0.26711884854035045,
+      "x_novelty_agency": 0.052807183062202334,
+      "x_resilience": 0.053301656737382165,
+      "x_transfer_comprehension": 0.2846084192537951
+    },
+    "consensus_binary64_hex": {
+      "c_protective": "0x1.999999999999ap-2",
+      "c_suppressive": "0x1.999999999999ap-3",
+      "x_bio_welfare": "0x1.a62d3ae1b14e2p-3",
+      "x_compute": "0x1.1693315c5d03fp-3",
+      "x_institutional_capacity": "0x1.11879a7a81019p-2",
+      "x_novelty_agency": "0x1.b098b087df980p-5",
+      "x_resilience": "0x1.b4a5ad104f40dp-5",
+      "x_transfer_comprehension": "0x1.237063b371fa6p-2"
+    },
+    "hazard": {
+      "g_star": 1.0965735902799727,
+      "k": 9
+    },
+    "passed": true,
+    "production_key_set": [
+      "c_protective",
+      "c_suppressive",
+      "x_bio_welfare",
+      "x_compute",
+      "x_institutional_capacity",
+      "x_novelty_agency",
+      "x_resilience",
+      "x_transfer_comprehension"
+    ]
+  },
+  "gate_7": {
+    "gate_online_M1_GRADED": {
+      "A": {
+        "alarm_steps": [],
+        "passed": true,
+        "steps": 300
+      },
+      "entropy": {
+        "alarm_steps": [
+          74,
+          76
+        ],
+        "passed": true,
+        "steps": 300
+      },
+      "g": {
+        "alarm_steps": [],
+        "passed": true,
+        "steps": 300
+      }
+    },
+    "gate_online_M1_OFF": {
+      "A": {
+        "alarm_steps": [
+          131,
+          140,
+          152,
+          160,
+          176,
+          187,
+          204,
+          219,
+          221,
+          222,
+          223,
+          224,
+          226
+        ],
+        "passed": true,
+        "steps": 228
+      },
+      "entropy": {
+        "alarm_steps": [
+          74,
+          82,
+          85,
+          87,
+          90,
+          93,
+          94,
+          96,
+          97,
+          99,
+          104,
+          106,
+          108,
+          113,
+          114,
+          115,
+          116,
+          118,
+          122,
+          124,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          196,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          210,
+          211,
+          212,
+          213,
+          214,
+          215,
+          216,
+          217,
+          218,
+          219,
+          220,
+          221,
+          222,
+          223,
+          224,
+          225,
+          226,
+          227
+        ],
+        "passed": true,
+        "steps": 228
+      },
+      "g": {
+        "alarm_steps": [
+          96,
+          111,
+          123,
+          131,
+          137,
+          144,
+          151,
+          158,
+          165,
+          171,
+          177,
+          183,
+          188,
+          193,
+          200,
+          207,
+          215,
+          218,
+          219,
+          220,
+          221,
+          222,
+          223,
+          224,
+          225,
+          226,
+          227
+        ],
+        "passed": true,
+        "steps": 228
+      }
+    },
+    "gate_online_M1_VETO": {
+      "A": {
+        "alarm_steps": [
+          79,
+          87,
+          95,
+          103,
+          111,
+          119,
+          127,
+          135,
+          143,
+          151,
+          159,
+          167,
+          175,
+          183,
+          191,
+          199,
+          207,
+          215,
+          223,
+          231,
+          239,
+          247,
+          255,
+          263,
+          271,
+          279,
+          287,
+          295
+        ],
+        "passed": true,
+        "steps": 300
+      },
+      "entropy": {
+        "alarm_steps": [
+          74,
+          76,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          196,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          210,
+          211,
+          212,
+          213,
+          214,
+          215,
+          216,
+          217,
+          218,
+          219,
+          220,
+          221,
+          222,
+          223,
+          224,
+          225,
+          226,
+          227,
+          228,
+          229,
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238,
+          239,
+          240,
+          241,
+          242,
+          243,
+          244,
+          245,
+          246,
+          247,
+          248,
+          249,
+          250,
+          251,
+          252,
+          253,
+          254,
+          255,
+          256,
+          257,
+          258,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267,
+          268,
+          269,
+          270,
+          271,
+          272,
+          273,
+          274,
+          275,
+          276,
+          277,
+          278,
+          279,
+          280,
+          281,
+          282,
+          283,
+          284,
+          285,
+          286,
+          287,
+          288,
+          289,
+          290,
+          291,
+          292,
+          293,
+          294,
+          295,
+          296,
+          297,
+          298,
+          299
+        ],
+        "passed": true,
+        "steps": 300
+      },
+      "g": {
+        "alarm_steps": [],
+        "passed": true,
+        "steps": 300
+      }
+    },
+    "gate_online_R10_GRADED": {
+      "A": {
+        "alarm_steps": [
+          77
+        ],
+        "passed": true,
+        "steps": 300
+      },
+      "entropy": {
+        "alarm_steps": [],
+        "passed": true,
+        "steps": 300
+      },
+      "g": {
+        "alarm_steps": [
+          64,
+          81
+        ],
+        "passed": true,
+        "steps": 300
+      }
+    },
+    "gate_online_R10_OFF": {
+      "A": {
+        "alarm_steps": [
+          67,
+          91,
+          109,
+          142,
+          153,
+          170,
+          178,
+          192,
+          200,
+          211,
+          249,
+          289
+        ],
+        "passed": true,
+        "steps": 300
+      },
+      "entropy": {
+        "alarm_steps": [],
+        "passed": true,
+        "steps": 300
+      },
+      "g": {
+        "alarm_steps": [
+          64,
+          79,
+          93,
+          106,
+          118,
+          132,
+          147,
+          161,
+          173,
+          184,
+          195,
+          204,
+          214,
+          225,
+          240,
+          254,
+          268,
+          284,
+          297
+        ],
+        "passed": true,
+        "steps": 300
+      }
+    },
+    "gate_online_R10_VETO": {
+      "A": {
+        "alarm_steps": [
+          77,
+          111,
+          145,
+          179,
+          213,
+          247,
+          281
+        ],
+        "passed": true,
+        "steps": 300
+      },
+      "entropy": {
+        "alarm_steps": [],
+        "passed": true,
+        "steps": 300
+      },
+      "g": {
+        "alarm_steps": [
+          64,
+          80,
+          95,
+          109,
+          123,
+          136,
+          149,
+          162,
+          175,
+          189,
+          201,
+          213,
+          226,
+          240,
+          255,
+          270,
+          284,
+          297
+        ],
+        "passed": true,
+        "steps": 300
+      }
+    }
+  },
+  "gate_8": {
+    "H": {
+      "comparisons": 8100,
+      "first": "gate_off_H",
+      "first_difference": null,
+      "passed": true,
+      "second": "gate_normal_H",
+      "steps": 300
+    },
+    "M1": {
+      "comparisons": 6156,
+      "first": "gate_online_M1_OFF",
+      "first_difference": null,
+      "passed": true,
+      "second": "gate_normal_M1",
+      "steps": 228
+    }
+  },
+  "gate_9": {
+    "cases": [
+      {
+        "incumbent_branch_calls": 2,
+        "outputs": [
+          {
+            "c_protective": 0.3,
+            "c_suppressive": 0.1,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.16666666666666666,
+            "x_compute": 0.16666666666666666,
+            "x_institutional_capacity": 0.16666666666666666,
+            "x_novelty_agency": 0.16666666666666666,
+            "x_resilience": 0.16666666666666666,
+            "x_transfer_comprehension": 0.16666666666666666
+          },
+          {
+            "c_protective": 0.3,
+            "c_suppressive": 0.1,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.16666666666666666,
+            "x_compute": 0.16666666666666666,
+            "x_institutional_capacity": 0.16666666666666666,
+            "x_novelty_agency": 0.16666666666666666,
+            "x_resilience": 0.16666666666666666,
+            "x_transfer_comprehension": 0.16666666666666666
+          }
+        ],
+        "passed": true,
+        "sentinel_cases": 2,
+        "state": "NORMAL"
+      },
+      {
+        "incumbent_branch_calls": 2,
+        "outputs": [
+          {
+            "c_protective": 0.2,
+            "c_suppressive": 0.1,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.16666666666666666,
+            "x_compute": 0.16666666666666666,
+            "x_institutional_capacity": 0.16666666666666666,
+            "x_novelty_agency": 0.16666666666666666,
+            "x_resilience": 0.16666666666666666,
+            "x_transfer_comprehension": 0.16666666666666666
+          },
+          {
+            "c_protective": 0.2,
+            "c_suppressive": 0.1,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.16666666666666666,
+            "x_compute": 0.16666666666666666,
+            "x_institutional_capacity": 0.16666666666666666,
+            "x_novelty_agency": 0.16666666666666666,
+            "x_resilience": 0.16666666666666666,
+            "x_transfer_comprehension": 0.16666666666666666
+          }
+        ],
+        "passed": true,
+        "sentinel_cases": 2,
+        "state": "VETO"
+      },
+      {
+        "incumbent_branch_calls": 2,
+        "outputs": [
+          {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          }
+        ],
+        "passed": true,
+        "sentinel_cases": 2,
+        "state": "CONSENSUS"
+      }
+    ],
+    "defense_receives_only_recorded_observables_and_committed_snapshot": true,
+    "passed": true,
+    "sentinel_fields": [
+      "honest_action",
+      "v2_adapter_step_event",
+      "attack_vector_v2",
+      "config"
+    ],
+    "synthetic_production_result_held_fixed": true
+  },
+  "incumbent_call_gate": {
+    "GRADED": {
+      "0": 1,
+      "1": 1,
+      "10": 1,
+      "100": 1,
+      "101": 1,
+      "102": 1,
+      "103": 1,
+      "104": 1,
+      "105": 1,
+      "106": 1,
+      "107": 1,
+      "108": 1,
+      "109": 1,
+      "11": 1,
+      "110": 1,
+      "111": 1,
+      "112": 1,
+      "113": 1,
+      "114": 1,
+      "115": 1,
+      "116": 1,
+      "117": 1,
+      "118": 1,
+      "119": 1,
+      "12": 1,
+      "120": 1,
+      "121": 1,
+      "122": 1,
+      "123": 1,
+      "124": 1,
+      "125": 1,
+      "126": 1,
+      "127": 1,
+      "128": 1,
+      "129": 1,
+      "13": 1,
+      "130": 1,
+      "131": 1,
+      "132": 1,
+      "133": 1,
+      "134": 1,
+      "135": 1,
+      "136": 1,
+      "137": 1,
+      "138": 1,
+      "139": 1,
+      "14": 1,
+      "140": 1,
+      "141": 1,
+      "142": 1,
+      "143": 1,
+      "144": 1,
+      "145": 1,
+      "146": 1,
+      "147": 1,
+      "148": 1,
+      "149": 1,
+      "15": 1,
+      "150": 1,
+      "151": 1,
+      "152": 1,
+      "153": 1,
+      "154": 1,
+      "155": 1,
+      "156": 1,
+      "157": 1,
+      "158": 1,
+      "159": 1,
+      "16": 1,
+      "160": 1,
+      "161": 1,
+      "162": 1,
+      "163": 1,
+      "164": 1,
+      "165": 1,
+      "166": 1,
+      "167": 1,
+      "168": 1,
+      "169": 1,
+      "17": 1,
+      "170": 1,
+      "171": 1,
+      "172": 1,
+      "173": 1,
+      "174": 1,
+      "175": 1,
+      "176": 1,
+      "177": 1,
+      "178": 1,
+      "179": 1,
+      "18": 1,
+      "180": 1,
+      "181": 1,
+      "182": 1,
+      "183": 1,
+      "184": 1,
+      "185": 1,
+      "186": 1,
+      "187": 1,
+      "188": 1,
+      "189": 1,
+      "19": 1,
+      "190": 1,
+      "191": 1,
+      "192": 1,
+      "193": 1,
+      "194": 1,
+      "195": 1,
+      "196": 1,
+      "197": 1,
+      "198": 1,
+      "199": 1,
+      "2": 1,
+      "20": 1,
+      "200": 1,
+      "201": 1,
+      "202": 1,
+      "203": 1,
+      "204": 1,
+      "205": 1,
+      "206": 1,
+      "207": 1,
+      "208": 1,
+      "209": 1,
+      "21": 1,
+      "210": 1,
+      "211": 1,
+      "212": 1,
+      "213": 1,
+      "214": 1,
+      "215": 1,
+      "216": 1,
+      "217": 1,
+      "218": 1,
+      "219": 1,
+      "22": 1,
+      "220": 1,
+      "221": 1,
+      "222": 1,
+      "223": 1,
+      "224": 1,
+      "225": 1,
+      "226": 1,
+      "227": 1,
+      "228": 1,
+      "229": 1,
+      "23": 1,
+      "230": 1,
+      "231": 1,
+      "232": 1,
+      "233": 1,
+      "234": 1,
+      "235": 1,
+      "236": 1,
+      "237": 1,
+      "238": 1,
+      "239": 1,
+      "24": 1,
+      "240": 1,
+      "241": 1,
+      "242": 1,
+      "243": 1,
+      "244": 1,
+      "245": 1,
+      "246": 1,
+      "247": 1,
+      "248": 1,
+      "249": 1,
+      "25": 1,
+      "250": 1,
+      "251": 1,
+      "252": 1,
+      "253": 1,
+      "254": 1,
+      "255": 1,
+      "256": 1,
+      "257": 1,
+      "258": 1,
+      "259": 1,
+      "26": 1,
+      "260": 1,
+      "261": 1,
+      "262": 1,
+      "263": 1,
+      "264": 1,
+      "265": 1,
+      "266": 1,
+      "267": 1,
+      "268": 1,
+      "269": 1,
+      "27": 1,
+      "270": 1,
+      "271": 1,
+      "272": 1,
+      "273": 1,
+      "274": 1,
+      "275": 1,
+      "276": 1,
+      "277": 1,
+      "278": 1,
+      "279": 1,
+      "28": 1,
+      "280": 1,
+      "281": 1,
+      "282": 1,
+      "283": 1,
+      "284": 1,
+      "285": 1,
+      "286": 1,
+      "287": 1,
+      "288": 1,
+      "289": 1,
+      "29": 1,
+      "290": 1,
+      "291": 1,
+      "292": 1,
+      "293": 1,
+      "294": 1,
+      "295": 1,
+      "296": 1,
+      "297": 1,
+      "298": 1,
+      "299": 1,
+      "3": 1,
+      "30": 1,
+      "31": 1,
+      "32": 1,
+      "33": 1,
+      "34": 1,
+      "35": 1,
+      "36": 1,
+      "37": 1,
+      "38": 1,
+      "39": 1,
+      "4": 1,
+      "40": 1,
+      "41": 1,
+      "42": 1,
+      "43": 1,
+      "44": 1,
+      "45": 1,
+      "46": 1,
+      "47": 1,
+      "48": 1,
+      "49": 1,
+      "5": 1,
+      "50": 1,
+      "51": 1,
+      "52": 1,
+      "53": 1,
+      "54": 1,
+      "55": 1,
+      "56": 1,
+      "57": 1,
+      "58": 1,
+      "59": 1,
+      "6": 1,
+      "60": 1,
+      "61": 1,
+      "62": 1,
+      "63": 1,
+      "64": 1,
+      "65": 1,
+      "66": 1,
+      "67": 1,
+      "68": 1,
+      "69": 1,
+      "7": 1,
+      "70": 1,
+      "71": 1,
+      "72": 1,
+      "73": 1,
+      "74": 1,
+      "75": 1,
+      "76": 1,
+      "77": 1,
+      "78": 1,
+      "79": 1,
+      "8": 1,
+      "80": 1,
+      "81": 1,
+      "82": 1,
+      "83": 1,
+      "84": 1,
+      "85": 1,
+      "86": 1,
+      "87": 1,
+      "88": 1,
+      "89": 1,
+      "9": 1,
+      "90": 1,
+      "91": 1,
+      "92": 1,
+      "93": 1,
+      "94": 1,
+      "95": 1,
+      "96": 1,
+      "97": 1,
+      "98": 1,
+      "99": 1
+    },
+    "OFF": {
+      "0": 1,
+      "1": 1,
+      "10": 1,
+      "100": 1,
+      "101": 1,
+      "102": 1,
+      "103": 1,
+      "104": 1,
+      "105": 1,
+      "106": 1,
+      "107": 1,
+      "108": 1,
+      "109": 1,
+      "11": 1,
+      "110": 1,
+      "111": 1,
+      "112": 1,
+      "113": 1,
+      "114": 1,
+      "115": 1,
+      "116": 1,
+      "117": 1,
+      "118": 1,
+      "119": 1,
+      "12": 1,
+      "120": 1,
+      "121": 1,
+      "122": 1,
+      "123": 1,
+      "124": 1,
+      "125": 1,
+      "126": 1,
+      "127": 1,
+      "128": 1,
+      "129": 1,
+      "13": 1,
+      "130": 1,
+      "131": 1,
+      "132": 1,
+      "133": 1,
+      "134": 1,
+      "135": 1,
+      "136": 1,
+      "137": 1,
+      "138": 1,
+      "139": 1,
+      "14": 1,
+      "140": 1,
+      "141": 1,
+      "142": 1,
+      "143": 1,
+      "144": 1,
+      "145": 1,
+      "146": 1,
+      "147": 1,
+      "148": 1,
+      "149": 1,
+      "15": 1,
+      "150": 1,
+      "151": 1,
+      "152": 1,
+      "153": 1,
+      "154": 1,
+      "155": 1,
+      "156": 1,
+      "157": 1,
+      "158": 1,
+      "159": 1,
+      "16": 1,
+      "160": 1,
+      "161": 1,
+      "162": 1,
+      "163": 1,
+      "164": 1,
+      "165": 1,
+      "166": 1,
+      "167": 1,
+      "168": 1,
+      "169": 1,
+      "17": 1,
+      "170": 1,
+      "171": 1,
+      "172": 1,
+      "173": 1,
+      "174": 1,
+      "175": 1,
+      "176": 1,
+      "177": 1,
+      "178": 1,
+      "179": 1,
+      "18": 1,
+      "180": 1,
+      "181": 1,
+      "182": 1,
+      "183": 1,
+      "184": 1,
+      "185": 1,
+      "186": 1,
+      "187": 1,
+      "188": 1,
+      "189": 1,
+      "19": 1,
+      "190": 1,
+      "191": 1,
+      "192": 1,
+      "193": 1,
+      "194": 1,
+      "195": 1,
+      "196": 1,
+      "197": 1,
+      "198": 1,
+      "199": 1,
+      "2": 1,
+      "20": 1,
+      "200": 1,
+      "201": 1,
+      "202": 1,
+      "203": 1,
+      "204": 1,
+      "205": 1,
+      "206": 1,
+      "207": 1,
+      "208": 1,
+      "209": 1,
+      "21": 1,
+      "210": 1,
+      "211": 1,
+      "212": 1,
+      "213": 1,
+      "214": 1,
+      "215": 1,
+      "216": 1,
+      "217": 1,
+      "218": 1,
+      "219": 1,
+      "22": 1,
+      "220": 1,
+      "221": 1,
+      "222": 1,
+      "223": 1,
+      "224": 1,
+      "225": 1,
+      "226": 1,
+      "227": 1,
+      "23": 1,
+      "24": 1,
+      "25": 1,
+      "26": 1,
+      "27": 1,
+      "28": 1,
+      "29": 1,
+      "3": 1,
+      "30": 1,
+      "31": 1,
+      "32": 1,
+      "33": 1,
+      "34": 1,
+      "35": 1,
+      "36": 1,
+      "37": 1,
+      "38": 1,
+      "39": 1,
+      "4": 1,
+      "40": 1,
+      "41": 1,
+      "42": 1,
+      "43": 1,
+      "44": 1,
+      "45": 1,
+      "46": 1,
+      "47": 1,
+      "48": 1,
+      "49": 1,
+      "5": 1,
+      "50": 1,
+      "51": 1,
+      "52": 1,
+      "53": 1,
+      "54": 1,
+      "55": 1,
+      "56": 1,
+      "57": 1,
+      "58": 1,
+      "59": 1,
+      "6": 1,
+      "60": 1,
+      "61": 1,
+      "62": 1,
+      "63": 1,
+      "64": 1,
+      "65": 1,
+      "66": 1,
+      "67": 1,
+      "68": 1,
+      "69": 1,
+      "7": 1,
+      "70": 1,
+      "71": 1,
+      "72": 1,
+      "73": 1,
+      "74": 1,
+      "75": 1,
+      "76": 1,
+      "77": 1,
+      "78": 1,
+      "79": 1,
+      "8": 1,
+      "80": 1,
+      "81": 1,
+      "82": 1,
+      "83": 1,
+      "84": 1,
+      "85": 1,
+      "86": 1,
+      "87": 1,
+      "88": 1,
+      "89": 1,
+      "9": 1,
+      "90": 1,
+      "91": 1,
+      "92": 1,
+      "93": 1,
+      "94": 1,
+      "95": 1,
+      "96": 1,
+      "97": 1,
+      "98": 1,
+      "99": 1
+    },
+    "VETO": {
+      "0": 1,
+      "1": 1,
+      "10": 1,
+      "100": 1,
+      "101": 1,
+      "102": 1,
+      "103": 1,
+      "104": 1,
+      "105": 1,
+      "106": 1,
+      "107": 1,
+      "108": 1,
+      "109": 1,
+      "11": 1,
+      "110": 1,
+      "111": 1,
+      "112": 1,
+      "113": 1,
+      "114": 1,
+      "115": 1,
+      "116": 1,
+      "117": 1,
+      "118": 1,
+      "119": 1,
+      "12": 1,
+      "120": 1,
+      "121": 1,
+      "122": 1,
+      "123": 1,
+      "124": 1,
+      "125": 1,
+      "126": 1,
+      "127": 1,
+      "128": 1,
+      "129": 1,
+      "13": 1,
+      "130": 1,
+      "131": 1,
+      "132": 1,
+      "133": 1,
+      "134": 1,
+      "135": 1,
+      "136": 1,
+      "137": 1,
+      "138": 1,
+      "139": 1,
+      "14": 1,
+      "140": 1,
+      "141": 1,
+      "142": 1,
+      "143": 1,
+      "144": 1,
+      "145": 1,
+      "146": 1,
+      "147": 1,
+      "148": 1,
+      "149": 1,
+      "15": 1,
+      "150": 1,
+      "151": 1,
+      "152": 1,
+      "153": 1,
+      "154": 1,
+      "155": 1,
+      "156": 1,
+      "157": 1,
+      "158": 1,
+      "159": 1,
+      "16": 1,
+      "160": 1,
+      "161": 1,
+      "162": 1,
+      "163": 1,
+      "164": 1,
+      "165": 1,
+      "166": 1,
+      "167": 1,
+      "168": 1,
+      "169": 1,
+      "17": 1,
+      "170": 1,
+      "171": 1,
+      "172": 1,
+      "173": 1,
+      "174": 1,
+      "175": 1,
+      "176": 1,
+      "177": 1,
+      "178": 1,
+      "179": 1,
+      "18": 1,
+      "180": 1,
+      "181": 1,
+      "182": 1,
+      "183": 1,
+      "184": 1,
+      "185": 1,
+      "186": 1,
+      "187": 1,
+      "188": 1,
+      "189": 1,
+      "19": 1,
+      "190": 1,
+      "191": 1,
+      "192": 1,
+      "193": 1,
+      "194": 1,
+      "195": 1,
+      "196": 1,
+      "197": 1,
+      "198": 1,
+      "199": 1,
+      "2": 1,
+      "20": 1,
+      "200": 1,
+      "201": 1,
+      "202": 1,
+      "203": 1,
+      "204": 1,
+      "205": 1,
+      "206": 1,
+      "207": 1,
+      "208": 1,
+      "209": 1,
+      "21": 1,
+      "210": 1,
+      "211": 1,
+      "212": 1,
+      "213": 1,
+      "214": 1,
+      "215": 1,
+      "216": 1,
+      "217": 1,
+      "218": 1,
+      "219": 1,
+      "22": 1,
+      "220": 1,
+      "221": 1,
+      "222": 1,
+      "223": 1,
+      "224": 1,
+      "225": 1,
+      "226": 1,
+      "227": 1,
+      "228": 1,
+      "229": 1,
+      "23": 1,
+      "230": 1,
+      "231": 1,
+      "232": 1,
+      "233": 1,
+      "234": 1,
+      "235": 1,
+      "236": 1,
+      "237": 1,
+      "238": 1,
+      "239": 1,
+      "24": 1,
+      "240": 1,
+      "241": 1,
+      "242": 1,
+      "243": 1,
+      "244": 1,
+      "245": 1,
+      "246": 1,
+      "247": 1,
+      "248": 1,
+      "249": 1,
+      "25": 1,
+      "250": 1,
+      "251": 1,
+      "252": 1,
+      "253": 1,
+      "254": 1,
+      "255": 1,
+      "256": 1,
+      "257": 1,
+      "258": 1,
+      "259": 1,
+      "26": 1,
+      "260": 1,
+      "261": 1,
+      "262": 1,
+      "263": 1,
+      "264": 1,
+      "265": 1,
+      "266": 1,
+      "267": 1,
+      "268": 1,
+      "269": 1,
+      "27": 1,
+      "270": 1,
+      "271": 1,
+      "272": 1,
+      "273": 1,
+      "274": 1,
+      "275": 1,
+      "276": 1,
+      "277": 1,
+      "278": 1,
+      "279": 1,
+      "28": 1,
+      "280": 1,
+      "281": 1,
+      "282": 1,
+      "283": 1,
+      "284": 1,
+      "285": 1,
+      "286": 1,
+      "287": 1,
+      "288": 1,
+      "289": 1,
+      "29": 1,
+      "290": 1,
+      "291": 1,
+      "292": 1,
+      "293": 1,
+      "294": 1,
+      "295": 1,
+      "296": 1,
+      "297": 1,
+      "298": 1,
+      "299": 1,
+      "3": 1,
+      "30": 1,
+      "31": 1,
+      "32": 1,
+      "33": 1,
+      "34": 1,
+      "35": 1,
+      "36": 1,
+      "37": 1,
+      "38": 1,
+      "39": 1,
+      "4": 1,
+      "40": 1,
+      "41": 1,
+      "42": 1,
+      "43": 1,
+      "44": 1,
+      "45": 1,
+      "46": 1,
+      "47": 1,
+      "48": 1,
+      "49": 1,
+      "5": 1,
+      "50": 1,
+      "51": 1,
+      "52": 1,
+      "53": 1,
+      "54": 1,
+      "55": 1,
+      "56": 1,
+      "57": 1,
+      "58": 1,
+      "59": 1,
+      "6": 1,
+      "60": 1,
+      "61": 1,
+      "62": 1,
+      "63": 1,
+      "64": 1,
+      "65": 1,
+      "66": 1,
+      "67": 1,
+      "68": 1,
+      "69": 1,
+      "7": 1,
+      "70": 1,
+      "71": 1,
+      "72": 1,
+      "73": 1,
+      "74": 1,
+      "75": 1,
+      "76": 1,
+      "77": 1,
+      "78": 1,
+      "79": 1,
+      "8": 1,
+      "80": 1,
+      "81": 1,
+      "82": 1,
+      "83": 1,
+      "84": 1,
+      "85": 1,
+      "86": 1,
+      "87": 1,
+      "88": 1,
+      "89": 1,
+      "9": 1,
+      "90": 1,
+      "91": 1,
+      "92": 1,
+      "93": 1,
+      "94": 1,
+      "95": 1,
+      "96": 1,
+      "97": 1,
+      "98": 1,
+      "99": 1
+    }
+  },
+  "passed": true,
+  "source_pins_end": [
+    {
+      "blob_sha1": "d902392c8d3a8c7a267dc040349175095bef945e",
+      "end_blob_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "end_worktree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "expected_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "path": "simulation/diagnostics/drift_defense_design_note.md",
+      "publication_commit": "e38b821c0648c6f5eae5f113d109aadd799b5df2",
+      "start_blob_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "start_worktree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920"
+    },
+    {
+      "blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "end_blob_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "end_worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "publication_commit": "76f81cd83e0db6ff5031070e54f2f908502b8632",
+      "start_blob_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "start_worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+    },
+    {
+      "blob_sha1": "f584aa2fbf4e76db674ff487fed2b036f7e45a08",
+      "end_blob_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "end_worktree_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "expected_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "path": "simulation/diagnostics/detector_round3_design_note.md",
+      "publication_commit": "63470090dc3836628b69fce432a30b15b3f212b7",
+      "start_blob_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "start_worktree_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293"
+    },
+    {
+      "blob_sha1": "0ddb02e4960948bc8f925ca77480f607370f0b2c",
+      "end_blob_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "end_worktree_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "expected_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "path": "simulation/diagnostics/drift_mapping_design_note.md",
+      "publication_commit": "2f2b9e0329f3368fd86a71380bcdf2d91260dcb0",
+      "start_blob_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748",
+      "start_worktree_sha256_lf": "9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748"
+    },
+    {
+      "blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+      "end_blob_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "end_worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "start_blob_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "start_worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488"
+    },
+    {
+      "blob_sha1": "ff934c2613e90804c3ff5c18141f777eaa24276f",
+      "end_blob_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "end_worktree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "expected_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "path": "simulation/diagnostics/detector_run_r2_constants.json",
+      "publication_commit": "242ec2265ee6e3b1158925af0c22f6b76e007007",
+      "start_blob_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "start_worktree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98"
+    },
+    {
+      "blob_sha1": "09acbbcae9bb292dbd495eb3d72dd1bc985a5edf",
+      "end_blob_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "end_worktree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "expected_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "path": "simulation/diagnostics/detector_run_r3_a3_constants.json",
+      "publication_commit": "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237",
+      "start_blob_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "start_worktree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35"
+    },
+    {
+      "blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+      "end_blob_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "end_worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "path": "simulation/cusum_detector_v2.py",
+      "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "start_blob_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "start_worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+    },
+    {
+      "blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723",
+      "end_blob_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "end_worktree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "expected_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "path": "simulation/diagnostics/detector_run_eval_executor.py",
+      "publication_commit": "9ce2e65931875f8cc6c2036a3e56475a1d08bd84",
+      "start_blob_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "start_worktree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff"
+    },
+    {
+      "blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+      "end_blob_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "end_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "path": "simulation/attack_metrics_v2.py",
+      "publication_commit": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+      "start_blob_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "start_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323"
+    },
+    {
+      "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "end_blob_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "end_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "publication_commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+      "start_blob_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "start_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+    },
+    {
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "end_blob_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "end_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "path": "simulation/metrics.py",
+      "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "start_blob_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "start_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+    },
+    {
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "end_blob_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "end_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "path": "simulation/agents.py",
+      "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "start_blob_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "start_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+    },
+    {
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "end_blob_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "end_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "path": "simulation/model.py",
+      "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "start_blob_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "start_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+    },
+    {
+      "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "end_blob_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "end_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "path": "simulation/attack_adapter_v2.py",
+      "publication_commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+      "start_blob_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "start_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+    },
+    {
+      "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "end_blob_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "end_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "path": "simulation/working_factor.py",
+      "publication_commit": "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+      "start_blob_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "start_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+    },
+    {
+      "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "end_blob_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "end_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "path": "simulation/constants_v2_stage18.py",
+      "publication_commit": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+      "start_blob_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "start_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+    },
+    {
+      "blob_sha1": "cffa1d922c70759b3619856247a3f1ba3dbfdce9",
+      "end_blob_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "end_worktree_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "expected_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "path": "simulation/diagnostics/detector_round2_design_note.md",
+      "start_blob_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632",
+      "start_worktree_sha256_lf": "45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632"
+    }
+  ]
+}
+```
+
+| Path | Start committed SHA256 (LF) | Start working-tree SHA256 (LF) | End committed SHA256 (LF) | End working-tree SHA256 (LF) |
+| --- | --- | --- | --- | --- |
+| simulation/diagnostics/drift_defense_design_note.md | cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920 | cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920 | cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920 | cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920 |
+| simulation/diagnostics/detector_design_note.md | 6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad | 6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad | 6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad | 6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad |
+| simulation/diagnostics/detector_round3_design_note.md | 47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293 | 47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293 | 47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293 | 47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293 |
+| simulation/diagnostics/drift_mapping_design_note.md | 9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748 | 9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748 | 9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748 | 9aee2d8e482f441375877cfec39a5841857ecf46fe35beb68b8af3345491c748 |
+| simulation/diagnostics/detector_run_cal_constants.json | 61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488 | 61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488 | 61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488 | 61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488 |
+| simulation/diagnostics/detector_run_r2_constants.json | 8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98 | 8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98 | 8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98 | 8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98 |
+| simulation/diagnostics/detector_run_r3_a3_constants.json | 0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35 | 0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35 | 0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35 | 0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35 |
+| simulation/cusum_detector_v2.py | 6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9 | 6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9 | 6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9 | 6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9 |
+| simulation/diagnostics/detector_run_eval_executor.py | 6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff | 6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff | 6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff | 6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff |
+| simulation/attack_metrics_v2.py | 7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323 | 7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323 | 7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323 | 7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323 |
+| simulation/run_attack_vector_revalidation_v2.py | 20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45 | 20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45 | 20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45 | 20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45 |
+| simulation/metrics.py | 6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f | 6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f | 6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f | 6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f |
+| simulation/agents.py | a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca | a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca | a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca | a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca |
+| simulation/model.py | 25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993 | 25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993 | 25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993 | 25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993 |
+| simulation/attack_adapter_v2.py | 5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee | 5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee | 5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee | 5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee |
+| simulation/working_factor.py | 16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44 | 16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44 | 16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44 | 16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44 |
+| simulation/constants_v2_stage18.py | 121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b | 121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b | 121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b | 121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b |
+| simulation/diagnostics/detector_round2_design_note.md | 45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632 | 45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632 | 45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632 | 45cfe81643e6d056310c36149c24ee47a029920a42d2e63540db2f9f05e7a632 |
+
+## Execution provenance
+
+Machine: YOTKOTEST. HEAD: b32511de2320c81d8bed70592bd2248b5a6199c6.
+Python: 3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]. NumPy: 2.4.4.
+Numerical-library threads were fixed to one and verified in every worker. The configured normal cap was 15 and work cap was 12, with runtime control in drift_defense_run_control.json.
+Maximum batch concurrency: 15.
+Resumed seeds: [].
+Tool-layer workarounds: ["An optional unit-gate source path was absent; the required synthetic cases were authored directly against the committed detector module."].
+T0 stderr warnings: ["warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied"].
+Known CRLF working-tree and LF blob condition was left unchanged.
+Every bounded permission-error retry is recorded in the manifest and per-process I/O event files.

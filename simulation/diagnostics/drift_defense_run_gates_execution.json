@@ -1,0 +1,30 @@
+{
+  "complete": 13,
+  "maximum_concurrent_workers": 13,
+  "mode_changes": [
+    {
+      "active_at_request": 0,
+      "cap": 15,
+      "mode": "normal",
+      "utc": "2026-09-19T02:56:08.178778+00:00"
+    }
+  ],
+  "new": [
+    "gate_factory",
+    "gate_common",
+    "gate_honest",
+    "gate_recorder",
+    "gate_online_M1_OFF",
+    "gate_online_M1_VETO",
+    "gate_online_M1_GRADED",
+    "gate_online_R10_OFF",
+    "gate_online_R10_VETO",
+    "gate_online_R10_GRADED",
+    "gate_normal_M1",
+    "gate_normal_H",
+    "gate_off_H"
+  ],
+  "phase": "gates",
+  "preserved": [],
+  "resumed": []
+}
