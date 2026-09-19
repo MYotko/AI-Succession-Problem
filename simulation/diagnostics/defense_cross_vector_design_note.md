@@ -192,3 +192,36 @@ emits a manifest enumerating every output with SHA256 on LF-normalized bytes and
 counts, and records the committed blob SHA1 of this note and of every pinned file. The
 snapshot generator's never-ingest list must gain `defense_xv_run_` before the next
 regeneration.
+
+## 10. Amendment 1, 2026-09-19: the ratio prohibition binds this note's quantities
+
+**Status:** committed and pushed before any run exists. The first attempt halted after T0
+with zero of 720 runs launched, so no output was produced under the unamended text. The
+halt is recorded in `simulation/diagnostics/defense_xv_run_report.md`.
+
+**What was overbroad.** Section 2 states, without qualification, that no ratio of two
+measured counts is computed. Section 3 requires every run to be constructed through the
+committed pinned runner's `run_single`, unchanged, and that function computes
+`capture_rate` as `blocked / met` at line 435 of
+`simulation/run_attack_vector_revalidation_v2.py` and returns it in every row. The two
+requirements cannot both hold, and the executor halted rather than choose between them,
+which is correct. This is the conflict Amendment 2 of the per-vector note resolved on
+2026-09-17; this note repeated the unscoped sentence, and the error is in this note.
+
+**Amended, exactly as the per-vector note's Amendment 2 did.** The prohibition binds the
+quantities this note derives, the analysis code that derives them, and everything this
+note reports or cites. It does not bind the interior of a pinned file that the note
+deliberately does not modify. The pinned runner is used unchanged. Its legacy
+`capture_rate` field is retained verbatim in the raw recorded rows for provenance, is
+excluded from every registered quantity, appears in no table, and may not be quoted in
+this note's outputs or in the record entry that follows. The analysis script asserts that
+no registered quantity reads it, and the report states that the field was recorded and not
+used. D5 and D6 still forbid a ratio of two measured counts as a reported quantity, an
+analysis input, or a claim.
+
+**Execution.** The run executes as a second attempt under the prefix
+`simulation/diagnostics/defense_xv_run_a2_`, leaving the first attempt's halt artifacts
+unmodified.
+
+**Nothing else changes.** Seeds, cells, arms, construction, the defense, the gates, the
+quantities, the criterion and the interpretation stand as committed.

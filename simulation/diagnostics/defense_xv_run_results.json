@@ -1,0 +1,15 @@
+{
+  "status": "HALTED",
+  "halt_reason": "Specification conflict: cross-vector note Section 2 prohibits computing any ratio of two measured counts, while Section 3 and the dispatch require the unmodified pinned runner run_single. That function computes capture_rate as blocked / met when met is nonzero, using yield_condition_blocked_count and yield_condition_met_count. The cross-vector note supplies no exception for that legacy computation.",
+  "runs_launched": 0,
+  "planned_runs": 720,
+  "X1": null,
+  "X2": null,
+  "X3": null,
+  "X4": null,
+  "X5": null,
+  "X6": null,
+  "registered_quantities_computed": false,
+  "promotion_gate_criterion_applied": false,
+  "interpretation_applied": false
+}

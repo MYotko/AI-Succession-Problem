@@ -1,0 +1,883 @@
+{
+  "checks": [
+    {
+      "args": [
+        "rev-parse",
+        "--abbrev-ref",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "a46b2bbef84386fb2b87459b23cfc56320e6bdfb",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "a46b2bbef84386fb2b87459b23cfc56320e6bdfb",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit": 0,
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n"
+    },
+    {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/defense_cross_vector_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/diagnostics/defense_cross_vector_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "a46b2bbef84386fb2b87459b23cfc56320e6bdfb",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/defense_cross_vector_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD:simulation/diagnostics/defense_cross_vector_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/drift_defense_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/diagnostics/drift_defense_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "e38b821c0648c6f5eae5f113d109aadd799b5df2",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/drift_defense_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD:simulation/diagnostics/drift_defense_design_note.md"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/drift_defense_run_executor.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/diagnostics/drift_defense_run_executor.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "6b3c628aea1322445a1df22732c5d93889a7a43a",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/drift_defense_run_executor.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD:simulation/diagnostics/drift_defense_run_executor.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/vector_paired_run_ap_executor.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/diagnostics/vector_paired_run_ap_executor.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "b32511de2320c81d8bed70592bd2248b5a6199c6",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/vector_paired_run_ap_executor.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD:simulation/diagnostics/vector_paired_run_ap_executor.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/detector_run_cal_constants.json"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/diagnostics/detector_run_cal_constants.json"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "b84199fd5b71041870e17acea22e0145aaf16e10",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/detector_run_cal_constants.json"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD:simulation/diagnostics/detector_run_cal_constants.json"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/detector_run_r3_a3_constants.json"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/diagnostics/detector_run_r3_a3_constants.json"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/detector_run_r3_a3_constants.json"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD:simulation/diagnostics/detector_run_r3_a3_constants.json"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/cusum_detector_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/cusum_detector_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "b84199fd5b71041870e17acea22e0145aaf16e10",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "blob",
+        "HEAD:simulation/cusum_detector_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD:simulation/cusum_detector_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/attack_metrics_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/attack_metrics_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "fd444fc22254ec24472f4bad03f8f56bf4470110",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "blob",
+        "HEAD:simulation/attack_metrics_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD:simulation/attack_metrics_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/run_attack_vector_revalidation_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/run_attack_vector_revalidation_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "blob",
+        "HEAD:simulation/run_attack_vector_revalidation_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD:simulation/run_attack_vector_revalidation_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/metrics.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/metrics.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "blob",
+        "HEAD:simulation/metrics.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD:simulation/metrics.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/agents.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/agents.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "blob",
+        "HEAD:simulation/agents.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD:simulation/agents.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/model.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/model.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "blob",
+        "HEAD:simulation/model.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD:simulation/model.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/attack_adapter_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/attack_adapter_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "blob",
+        "HEAD:simulation/attack_adapter_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD:simulation/attack_adapter_v2.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/working_factor.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/working_factor.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "blob",
+        "HEAD:simulation/working_factor.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD:simulation/working_factor.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "--error-unmatch",
+        "simulation/constants_v2_stage18.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "simulation/constants_v2_stage18.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+        "origin/main"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "cat-file",
+        "blob",
+        "HEAD:simulation/constants_v2_stage18.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD:simulation/constants_v2_stage18.py"
+      ],
+      "exit": 0,
+      "stderr": ""
+    }
+  ],
+  "pins": [
+    {
+      "path": "simulation/diagnostics/defense_cross_vector_design_note.md",
+      "expected_sha256_lf": "963a741926daaf3d8792af4cf04fd154813d36255326bf70169b184bec7bd444",
+      "start_blob_sha256_lf": "963a741926daaf3d8792af4cf04fd154813d36255326bf70169b184bec7bd444",
+      "start_worktree_sha256_lf": "963a741926daaf3d8792af4cf04fd154813d36255326bf70169b184bec7bd444",
+      "blob_sha1": "be3777397e555330ad0d310bf42151ff2fff36cf",
+      "publication_commit": "a46b2bbef84386fb2b87459b23cfc56320e6bdfb"
+    },
+    {
+      "path": "simulation/diagnostics/drift_defense_design_note.md",
+      "expected_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "start_blob_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "start_worktree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "blob_sha1": "d902392c8d3a8c7a267dc040349175095bef945e",
+      "publication_commit": "e38b821c0648c6f5eae5f113d109aadd799b5df2"
+    },
+    {
+      "path": "simulation/diagnostics/drift_defense_run_executor.py",
+      "expected_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "start_blob_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "start_worktree_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "blob_sha1": "b7b5a6a7f7f7023ace3547002359f62e54f9a9b2",
+      "publication_commit": "6b3c628aea1322445a1df22732c5d93889a7a43a"
+    },
+    {
+      "path": "simulation/diagnostics/vector_paired_run_ap_executor.py",
+      "expected_sha256_lf": "79df5662faf21bc0c20ba58b92bae461f6104af9ab36bb24e1e211e1281d4b1e",
+      "start_blob_sha256_lf": "79df5662faf21bc0c20ba58b92bae461f6104af9ab36bb24e1e211e1281d4b1e",
+      "start_worktree_sha256_lf": "79df5662faf21bc0c20ba58b92bae461f6104af9ab36bb24e1e211e1281d4b1e",
+      "blob_sha1": "1644ff3f2a0de49de1607e2b0b29f02c36ddd1fe",
+      "publication_commit": "b32511de2320c81d8bed70592bd2248b5a6199c6"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "start_blob_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "start_worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+      "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r3_a3_constants.json",
+      "expected_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "start_blob_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "start_worktree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "blob_sha1": "09acbbcae9bb292dbd495eb3d72dd1bc985a5edf",
+      "publication_commit": "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237"
+    },
+    {
+      "path": "simulation/cusum_detector_v2.py",
+      "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "start_blob_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "start_worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+      "publication_commit": "b84199fd5b71041870e17acea22e0145aaf16e10"
+    },
+    {
+      "path": "simulation/attack_metrics_v2.py",
+      "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "start_blob_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "start_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+      "publication_commit": "fd444fc22254ec24472f4bad03f8f56bf4470110"
+    },
+    {
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "start_blob_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "start_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "publication_commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a"
+    },
+    {
+      "path": "simulation/metrics.py",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "start_blob_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "start_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a"
+    },
+    {
+      "path": "simulation/agents.py",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "start_blob_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "start_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a"
+    },
+    {
+      "path": "simulation/model.py",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "start_blob_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "start_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "publication_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a"
+    },
+    {
+      "path": "simulation/attack_adapter_v2.py",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "start_blob_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "start_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "publication_commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0"
+    },
+    {
+      "path": "simulation/working_factor.py",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "start_blob_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "start_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "publication_commit": "50700dcde3f6dd1707a5f2d2b79927a751075b46"
+    },
+    {
+      "path": "simulation/constants_v2_stage18.py",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "start_blob_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "start_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "publication_commit": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe"
+    }
+  ],
+  "branch": "main",
+  "head": "d0d4c72bbb7bdebf7f057224eaae3b200be4ceca",
+  "status": "PASSED",
+  "tool_layer_workarounds": [
+    "The prior-turn encoding helper was unavailable; an in-memory base64 encoder was recreated before rerunning the unchanged preflight."
+  ]
+}
