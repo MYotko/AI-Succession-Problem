@@ -1,0 +1,26 @@
+{
+  "complete": 9,
+  "maximum_concurrent_workers": 9,
+  "mode_changes": [
+    {
+      "active_at_request": 0,
+      "cap": 15,
+      "mode": "normal",
+      "utc": "2026-09-19T13:13:21.396862+00:00"
+    }
+  ],
+  "new": [
+    "gate_online_sybil_capture",
+    "gate_online_successor_contamination",
+    "gate_online_engineered_fragility",
+    "gate_off_measurement_tampering",
+    "gate_normal_measurement_tampering",
+    "gate_off_opaque_reasoning",
+    "gate_normal_opaque_reasoning",
+    "gate_calls_biological_veto_capture",
+    "gate_calls_bootstrap_subversion"
+  ],
+  "phase": "gates",
+  "preserved": [],
+  "resumed": []
+}

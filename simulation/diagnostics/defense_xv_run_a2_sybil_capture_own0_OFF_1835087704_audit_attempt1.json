@@ -1,0 +1,5380 @@
+{
+  "alarms": [
+    {
+      "candidate": 0.8674578167285016,
+      "channel": "entropy",
+      "step": 50,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 50,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.856436824625586,
+      "channel": "entropy",
+      "step": 51,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 51,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.8791109044120241,
+      "channel": "entropy",
+      "step": 52,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 52,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.8910770340832653,
+      "channel": "entropy",
+      "step": 53,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 53,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9032442088589339,
+      "channel": "entropy",
+      "step": 54,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 54,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9192389572592008,
+      "channel": "entropy",
+      "step": 55,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 55,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9258856468316298,
+      "channel": "entropy",
+      "step": 56,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 5.960673009728771,
+      "channel": "g",
+      "step": 56,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 56,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9400065971574213,
+      "channel": "entropy",
+      "step": 57,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 57,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9459649689798195,
+      "channel": "entropy",
+      "step": 58,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 4.59805644149425,
+      "channel": "g",
+      "step": 58,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 58,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9527733467046277,
+      "channel": "entropy",
+      "step": 59,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 59,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9589659726114917,
+      "channel": "entropy",
+      "step": 60,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 7.306690869773702,
+      "channel": "g",
+      "step": 60,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 60,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9618230550026385,
+      "channel": "entropy",
+      "step": 61,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 5.095266426165803,
+      "channel": "g",
+      "step": 61,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 61,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9696010605999665,
+      "channel": "entropy",
+      "step": 62,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 6.44147650232161,
+      "channel": "g",
+      "step": 62,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 62,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9724546065218562,
+      "channel": "entropy",
+      "step": 63,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 8.194145965842194,
+      "channel": "g",
+      "step": 63,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 63,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9758062276906716,
+      "channel": "entropy",
+      "step": 64,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 11.019137349646735,
+      "channel": "g",
+      "step": 64,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 64,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9794902174948805,
+      "channel": "entropy",
+      "step": 65,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 15.578139431840958,
+      "channel": "g",
+      "step": 65,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 65,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9814613056349635,
+      "channel": "entropy",
+      "step": 66,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 20.70642736990954,
+      "channel": "g",
+      "step": 66,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 66,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9827781159108561,
+      "channel": "entropy",
+      "step": 67,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 27.657801789075346,
+      "channel": "g",
+      "step": 67,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 67,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9830078464314395,
+      "channel": "entropy",
+      "step": 68,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 41.144950230996784,
+      "channel": "g",
+      "step": 68,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 68,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9842794772292882,
+      "channel": "entropy",
+      "step": 69,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 48.63131618526001,
+      "channel": "g",
+      "step": 69,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 69,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9847945839264555,
+      "channel": "entropy",
+      "step": 70,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 63.65853131518395,
+      "channel": "g",
+      "step": 70,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 70,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9847095071587404,
+      "channel": "entropy",
+      "step": 71,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 90.46040853595943,
+      "channel": "g",
+      "step": 71,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 71,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9853406305752185,
+      "channel": "entropy",
+      "step": 72,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 90.8873478351447,
+      "channel": "g",
+      "step": 72,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 72,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9854111265419002,
+      "channel": "entropy",
+      "step": 73,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 91.2929401693707,
+      "channel": "g",
+      "step": 73,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 73,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855322884088109,
+      "channel": "entropy",
+      "step": 74,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 91.67825288688539,
+      "channel": "g",
+      "step": 74,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 74,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855419699801709,
+      "channel": "entropy",
+      "step": 75,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 92.04429996852436,
+      "channel": "g",
+      "step": 75,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 75,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855439747304954,
+      "channel": "entropy",
+      "step": 76,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 92.39204469608138,
+      "channel": "g",
+      "step": 76,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 76,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 77,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 92.72240218726054,
+      "channel": "g",
+      "step": 77,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 77,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 78,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 93.03624180388076,
+      "channel": "g",
+      "step": 78,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 78,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 79,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 93.33438943966996,
+      "channel": "g",
+      "step": 79,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 79,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 80,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 93.6176296936697,
+      "channel": "g",
+      "step": 80,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 80,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 81,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 93.88670793496945,
+      "channel": "g",
+      "step": 81,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 81,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 82,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 94.14233226420421,
+      "channel": "g",
+      "step": 82,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 82,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 83,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 94.38517537697724,
+      "channel": "g",
+      "step": 83,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 83,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 84,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 94.61587633411162,
+      "channel": "g",
+      "step": 84,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 84,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 85,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 94.83504224338927,
+      "channel": "g",
+      "step": 85,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 85,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 86,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 95.04324985720304,
+      "channel": "g",
+      "step": 86,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 86,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 87,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 95.24104709032613,
+      "channel": "g",
+      "step": 87,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 87,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 88,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 95.42895446179307,
+      "channel": "g",
+      "step": 88,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 88,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 89,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 95.60746646468664,
+      "channel": "g",
+      "step": 89,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 89,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 90,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 95.77705286743554,
+      "channel": "g",
+      "step": 90,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 90,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 91,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 95.938159950047,
+      "channel": "g",
+      "step": 91,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 91,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 92,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 96.0912116785279,
+      "channel": "g",
+      "step": 92,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 92,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 93,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 96.23661082058474,
+      "channel": "g",
+      "step": 93,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 93,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 94,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 96.37474000553873,
+      "channel": "g",
+      "step": 94,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 94,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 95,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 96.50596273124503,
+      "channel": "g",
+      "step": 95,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 95,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 96,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 96.63062432066602,
+      "channel": "g",
+      "step": 96,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 96,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 97,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 96.74905283061597,
+      "channel": "g",
+      "step": 97,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 97,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 98,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 96.8615599150684,
+      "channel": "g",
+      "step": 98,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 98,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 99,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 96.96844164529821,
+      "channel": "g",
+      "step": 99,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 99,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 100,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 97.06997928901654,
+      "channel": "g",
+      "step": 100,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 100,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 101,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 97.16644005054896,
+      "channel": "g",
+      "step": 101,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 101,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 102,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 97.25807777400475,
+      "channel": "g",
+      "step": 102,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 102,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 103,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 97.34513361128774,
+      "channel": "g",
+      "step": 103,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 103,
+      "threshold": 0.7701182670542909
+    },
+    {
+      "candidate": 0.9855460049803134,
+      "channel": "entropy",
+      "step": 104,
+      "threshold": 0.17319485850717864
+    },
+    {
+      "candidate": 97.42783665670659,
+      "channel": "g",
+      "step": 104,
+      "threshold": 4.507729894543943
+    },
+    {
+      "candidate": 0.9158199688965536,
+      "channel": "A",
+      "step": 104,
+      "threshold": 0.7701182670542909
+    }
+  ],
+  "binding_restored_by_identity": true,
+  "branch_counts": {
+    "CONSENSUS": 0,
+    "NORMAL": 0,
+    "VETO": 0
+  },
+  "factory_restored_by_identity": true,
+  "heartbeats": [
+    {
+      "A": 0.5362837043392932,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 1,
+      "step": 0
+    },
+    {
+      "A": 0.22621464704785446,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 2,
+      "step": 1
+    },
+    {
+      "A": 0.21094600501044197,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 3,
+      "step": 2
+    },
+    {
+      "A": 0.25433063376038606,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 4,
+      "step": 3
+    },
+    {
+      "A": 0.22162071914195025,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 5,
+      "step": 4
+    },
+    {
+      "A": 0.2950427490456916,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 6,
+      "step": 5
+    },
+    {
+      "A": 0.232185396234446,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 7,
+      "step": 6
+    },
+    {
+      "A": 0.4121463459927373,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 8,
+      "step": 7
+    },
+    {
+      "A": 0.243624929890114,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 9,
+      "step": 8
+    },
+    {
+      "A": 0.33325427859678614,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 10,
+      "step": 9
+    },
+    {
+      "A": 0.20624403795761498,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0005811067139412929,
+          "start": 0.0,
+          "statistic": 0.0005811067139412929
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.04047080136722969,
+          "start": 0.0,
+          "statistic": 0.04047080136722969
+        }
+      },
+      "heartbeat_counter": 11,
+      "step": 10
+    },
+    {
+      "A": 0.2797563740534687,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.00033673325634986373,
+          "start": 0.0005811067139412929,
+          "statistic": 0.00033673325634986373
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.03972041714050012,
+          "start": 0.04047080136722969,
+          "statistic": 0.03972041714050012
+        }
+      },
+      "heartbeat_counter": 12,
+      "step": 11
+    },
+    {
+      "A": 0.23098779415043363,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.00033673325634986373,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.03534063002136256,
+          "start": 0.03972041714050012,
+          "statistic": 0.03534063002136256
+        }
+      },
+      "heartbeat_counter": 13,
+      "step": 12
+    },
+    {
+      "A": 0.34311848496813846,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.022448392577384457,
+          "start": 0.0,
+          "statistic": 0.022448392577384457
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.005742149993692824,
+          "start": 0.0,
+          "statistic": 0.005742149993692824
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.05441569650235745,
+          "start": 0.03534063002136256,
+          "statistic": 0.05441569650235745
+        }
+      },
+      "heartbeat_counter": 14,
+      "step": 13
+    },
+    {
+      "A": 0.3039345987538184,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.005712898940448852,
+          "start": 0.022448392577384457,
+          "statistic": 0.005712898940448852
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.009912618313188792,
+          "start": 0.005742149993692824,
+          "statistic": 0.009912618313188792
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.02896647486802384,
+          "start": 0.05441569650235745,
+          "statistic": 0.02896647486802384
+        }
+      },
+      "heartbeat_counter": 15,
+      "step": 14
+    },
+    {
+      "A": 0.34580266948213445,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0308454760318293,
+          "start": 0.005712898940448852,
+          "statistic": 0.0308454760318293
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.015318412493306677,
+          "start": 0.009912618313188792,
+          "statistic": 0.015318412493306677
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.02896647486802384,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 16,
+      "step": 15
+    },
+    {
+      "A": 0.39285051749829686,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.10302590113937216,
+          "start": 0.0308454760318293,
+          "statistic": 0.10302590113937216
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.010140874888969198,
+          "start": 0.015318412493306677,
+          "statistic": 0.010140874888969198
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 17,
+      "step": 16
+    },
+    {
+      "A": 0.32135514308509827,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.10371095183371642,
+          "start": 0.10302590113937216,
+          "statistic": 0.10371095183371642
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.009496469585657863,
+          "start": 0.010140874888969198,
+          "statistic": 0.009496469585657863
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 18,
+      "step": 17
+    },
+    {
+      "A": 0.18815451683448603,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.10371095183371642,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.011109842688715066,
+          "start": 0.009496469585657863,
+          "statistic": 0.011109842688715066
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 19,
+      "step": 18
+    },
+    {
+      "A": 0.35216341101688087,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.031493318626126865,
+          "start": 0.0,
+          "statistic": 0.031493318626126865
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.007858929124379799,
+          "start": 0.011109842688715066,
+          "statistic": 0.007858929124379799
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 20,
+      "step": 19
+    },
+    {
+      "A": 0.20417404551189636,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.031493318626126865,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0069860672137382895,
+          "start": 0.007858929124379799,
+          "statistic": 0.0069860672137382895
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 21,
+      "step": 20
+    },
+    {
+      "A": 0.2311599996816706,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0022795021020494133,
+          "start": 0.0069860672137382895,
+          "statistic": 0.0022795021020494133
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 22,
+      "step": 21
+    },
+    {
+      "A": 0.46349278259081217,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.14282269020005817,
+          "start": 0.0,
+          "statistic": 0.14282269020005817
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.00033826446149620715,
+          "start": 0.0022795021020494133,
+          "statistic": 0.00033826446149620715
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 23,
+      "step": 22
+    },
+    {
+      "A": 0.22049590692397322,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.04264850473327736,
+          "start": 0.14282269020005817,
+          "statistic": 0.04264850473327736
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.004815235941023177,
+          "start": 0.00033826446149620715,
+          "statistic": 0.004815235941023177
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.002873827341398183,
+          "start": 0.0,
+          "statistic": 0.002873827341398183
+        }
+      },
+      "heartbeat_counter": 24,
+      "step": 23
+    },
+    {
+      "A": 0.35269350656149884,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0746719189040222,
+          "start": 0.04264850473327736,
+          "statistic": 0.0746719189040222
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.003964658608937244,
+          "start": 0.004815235941023177,
+          "statistic": 0.003964658608937244
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.005492983648256011,
+          "start": 0.002873827341398183,
+          "statistic": 0.005492983648256011
+        }
+      },
+      "heartbeat_counter": 25,
+      "step": 24
+    },
+    {
+      "A": 0.3892472148399063,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.1432490413531745,
+          "start": 0.0746719189040222,
+          "statistic": 0.1432490413531745
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.015868956796995737,
+          "start": 0.003964658608937244,
+          "statistic": 0.015868956796995737
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.009033556834419532,
+          "start": 0.005492983648256011,
+          "statistic": 0.009033556834419532
+        }
+      },
+      "heartbeat_counter": 26,
+      "step": 25
+    },
+    {
+      "A": 0.2873882897815495,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.10996723874397002,
+          "start": 0.1432490413531745,
+          "statistic": 0.10996723874397002
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.013175460826661656,
+          "start": 0.015868956796995737,
+          "statistic": 0.013175460826661656
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.014639657513706661,
+          "start": 0.009033556834419532,
+          "statistic": 0.014639657513706661
+        }
+      },
+      "heartbeat_counter": 27,
+      "step": 26
+    },
+    {
+      "A": 0.10757073270084949,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.10996723874397002,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.011342191470297691,
+          "start": 0.013175460826661656,
+          "statistic": 0.011342191470297691
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.017683366628410413,
+          "start": 0.014639657513706661,
+          "statistic": 0.017683366628410413
+        }
+      },
+      "heartbeat_counter": 28,
+      "step": 27
+    },
+    {
+      "A": 0.2954877412773726,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.006998047904483773,
+          "start": 0.011342191470297691,
+          "statistic": 0.006998047904483773
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.021960539746854968,
+          "start": 0.017683366628410413,
+          "statistic": 0.021960539746854968
+        }
+      },
+      "heartbeat_counter": 29,
+      "step": 28
+    },
+    {
+      "A": 0.2819265650868981,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.007479613756276926,
+          "start": 0.006998047904483773,
+          "statistic": 0.007479613756276926
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.015226768941493773,
+          "start": 0.021960539746854968,
+          "statistic": 0.015226768941493773
+        }
+      },
+      "heartbeat_counter": 30,
+      "step": 29
+    },
+    {
+      "A": 0.21779765529517098,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0038072804887590017,
+          "start": 0.007479613756276926,
+          "statistic": 0.0038072804887590017
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.005013933111868374,
+          "start": 0.015226768941493773,
+          "statistic": 0.005013933111868374
+        }
+      },
+      "heartbeat_counter": 31,
+      "step": 30
+    },
+    {
+      "A": 0.1881964496577444,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0015857079428956977,
+          "start": 0.0038072804887590017,
+          "statistic": 0.0015857079428956977
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.005013933111868374,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 32,
+      "step": 31
+    },
+    {
+      "A": 0.28583617509487846,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0015857079428956977,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 33,
+      "step": 32
+    },
+    {
+      "A": 0.4106613860817941,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.08999129369104009,
+          "start": 0.0,
+          "statistic": 0.08999129369104009
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 34,
+      "step": 33
+    },
+    {
+      "A": 0.21864247099938908,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.08999129369104009,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.005539117747141997,
+          "start": 0.0,
+          "statistic": 0.005539117747141997
+        }
+      },
+      "heartbeat_counter": 35,
+      "step": 34
+    },
+    {
+      "A": 0.40126458785461994,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.08059449546386593,
+          "start": 0.0,
+          "statistic": 0.08059449546386593
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.04344434771123451,
+          "start": 0.005539117747141997,
+          "statistic": 0.04344434771123451
+        }
+      },
+      "heartbeat_counter": 36,
+      "step": 35
+    },
+    {
+      "A": 0.2543776209753184,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.01430202404843034,
+          "start": 0.08059449546386593,
+          "statistic": 0.01430202404843034
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.06323152541145816,
+          "start": 0.04344434771123451,
+          "statistic": 0.06323152541145816
+        }
+      },
+      "heartbeat_counter": 37,
+      "step": 36
+    },
+    {
+      "A": 0.12294060069230014,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.01430202404843034,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0479186549508922,
+          "start": 0.0,
+          "statistic": 0.0479186549508922
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.07751215807765566,
+          "start": 0.06323152541145816,
+          "statistic": 0.07751215807765566
+        }
+      },
+      "heartbeat_counter": 38,
+      "step": 37
+    },
+    {
+      "A": 0.21043298919420733,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.048539198340307066,
+          "start": 0.0479186549508922,
+          "statistic": 0.048539198340307066
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.08382763195886422,
+          "start": 0.07751215807765566,
+          "statistic": 0.08382763195886422
+        }
+      },
+      "heartbeat_counter": 39,
+      "step": 38
+    },
+    {
+      "A": 0.37069842354218235,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.05002833115142835,
+          "start": 0.0,
+          "statistic": 0.05002833115142835
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.06553306741417708,
+          "start": 0.048539198340307066,
+          "statistic": 0.06553306741417708
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.07004877674173593,
+          "start": 0.08382763195886422,
+          "statistic": 0.07004877674173593
+        }
+      },
+      "heartbeat_counter": 40,
+      "step": 39
+    },
+    {
+      "A": 0.11791510056056835,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.05002833115142835,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.07357644245871586,
+          "start": 0.06553306741417708,
+          "statistic": 0.07357644245871586
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.044607280716930875,
+          "start": 0.07004877674173593,
+          "statistic": 0.044607280716930875
+        }
+      },
+      "heartbeat_counter": 41,
+      "step": 40
+    },
+    {
+      "A": 0.26041184173731796,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.06935677316095834,
+          "start": 0.07357644245871586,
+          "statistic": 0.06935677316095834
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.017992875141739084,
+          "start": 0.044607280716930875,
+          "statistic": 0.017992875141739084
+        }
+      },
+      "heartbeat_counter": 42,
+      "step": 41
+    },
+    {
+      "A": 0.2931528353264309,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.06267785657866953,
+          "start": 0.06935677316095834,
+          "statistic": 0.06267785657866953
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0007277212216545426,
+          "start": 0.017992875141739084,
+          "statistic": 0.0007277212216545426
+        }
+      },
+      "heartbeat_counter": 43,
+      "step": 42
+    },
+    {
+      "A": 0.20761265422232253,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.0573241929025291,
+          "start": 0.06267785657866953,
+          "statistic": 0.0573241929025291
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0007277212216545426,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 44,
+      "step": 43
+    },
+    {
+      "A": 0.38195145230722866,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.061281359916474654,
+          "start": 0.0,
+          "statistic": 0.061281359916474654
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.05276330991551037,
+          "start": 0.0573241929025291,
+          "statistic": 0.05276330991551037
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 45,
+      "step": 44
+    },
+    {
+      "A": 0.5013738085874038,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.24198507611312442,
+          "start": 0.061281359916474654,
+          "statistic": 0.24198507611312442
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.04520160852563826,
+          "start": 0.05276330991551037,
+          "statistic": 0.04520160852563826
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 46,
+      "step": 45
+    },
+    {
+      "A": 0.250875860038019,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.1721908437603894,
+          "start": 0.24198507611312442,
+          "statistic": 0.1721908437603894
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.03916919739727376,
+          "start": 0.04520160852563826,
+          "statistic": 0.03916919739727376
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 47,
+      "step": 46
+    },
+    {
+      "A": 0.2272217793522905,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.07874253072192589,
+          "start": 0.1721908437603894,
+          "statistic": 0.07874253072192589
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.03491180203624111,
+          "start": 0.03916919739727376,
+          "statistic": 0.03491180203624111
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 48,
+      "step": 47
+    },
+    {
+      "A": 0.24174063427521492,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.07874253072192589,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.028857935254890443,
+          "start": 0.03491180203624111,
+          "statistic": 0.028857935254890443
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.006132471528896621,
+          "start": 0.0,
+          "statistic": 0.006132471528896621
+        }
+      },
+      "heartbeat_counter": 49,
+      "step": 48
+    },
+    {
+      "A": 0.27360562169023406,
+      "channels": {
+        "A": {
+          "alarm": false,
+          "candidate": 0.0,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": false,
+          "candidate": 0.026168821043333734,
+          "start": 0.028857935254890443,
+          "statistic": 0.026168821043333734
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.02855360922101302,
+          "start": 0.006132471528896621,
+          "statistic": 0.02855360922101302
+        }
+      },
+      "heartbeat_counter": 50,
+      "step": 49
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.8674578167285016,
+          "start": 0.026168821043333734,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.2014624317207896,
+          "start": 0.02855360922101302,
+          "statistic": 0.2014624317207896
+        }
+      },
+      "heartbeat_counter": 51,
+      "step": 50
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.856436824625586,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 0.5561131794025744,
+          "start": 0.2014624317207896,
+          "statistic": 0.5561131794025744
+        }
+      },
+      "heartbeat_counter": 52,
+      "step": 51
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.8791109044120241,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 1.1180283933047555,
+          "start": 0.5561131794025744,
+          "statistic": 1.1180283933047555
+        }
+      },
+      "heartbeat_counter": 53,
+      "step": 52
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.8910770340832653,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 1.9054017881510414,
+          "start": 1.1180283933047555,
+          "statistic": 1.9054017881510414
+        }
+      },
+      "heartbeat_counter": 54,
+      "step": 53
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9032442088589339,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 2.935977097193918,
+          "start": 1.9054017881510414,
+          "statistic": 2.935977097193918
+        }
+      },
+      "heartbeat_counter": 55,
+      "step": 54
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9192389572592008,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 4.288585879831979,
+          "start": 2.935977097193918,
+          "statistic": 4.288585879831979
+        }
+      },
+      "heartbeat_counter": 56,
+      "step": 55
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9258856468316298,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 5.960673009728771,
+          "start": 4.288585879831979,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 57,
+      "step": 56
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9400065971574213,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 2.037484593320263,
+          "start": 0.0,
+          "statistic": 2.037484593320263
+        }
+      },
+      "heartbeat_counter": 58,
+      "step": 57
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9459649689798195,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 4.59805644149425,
+          "start": 2.037484593320263,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 59,
+      "step": 58
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9527733467046277,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": false,
+          "candidate": 3.2113200863424476,
+          "start": 0.0,
+          "statistic": 3.2113200863424476
+        }
+      },
+      "heartbeat_counter": 60,
+      "step": 59
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9589659726114917,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 7.306690869773702,
+          "start": 3.2113200863424476,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 61,
+      "step": 60
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9618230550026385,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 5.095266426165803,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 62,
+      "step": 61
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9696010605999665,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 6.44147650232161,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 63,
+      "step": 62
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9724546065218562,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 8.194145965842194,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 64,
+      "step": 63
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9758062276906716,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 11.019137349646735,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 65,
+      "step": 64
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9794902174948805,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 15.578139431840958,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 66,
+      "step": 65
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9814613056349635,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 20.70642736990954,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 67,
+      "step": 66
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9827781159108561,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 27.657801789075346,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 68,
+      "step": 67
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9830078464314395,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 41.144950230996784,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 69,
+      "step": 68
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9842794772292882,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 48.63131618526001,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 70,
+      "step": 69
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9847945839264555,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 63.65853131518395,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 71,
+      "step": 70
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9847095071587404,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 90.46040853595943,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 72,
+      "step": 71
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9853406305752185,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 90.8873478351447,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 73,
+      "step": 72
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9854111265419002,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 91.2929401693707,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 74,
+      "step": 73
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855322884088109,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 91.67825288688539,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 75,
+      "step": 74
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855419699801709,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 92.04429996852436,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 76,
+      "step": 75
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855439747304954,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 92.39204469608138,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 77,
+      "step": 76
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 92.72240218726054,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 78,
+      "step": 77
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 93.03624180388076,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 79,
+      "step": 78
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 93.33438943966996,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 80,
+      "step": 79
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 93.6176296936697,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 81,
+      "step": 80
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 93.88670793496945,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 82,
+      "step": 81
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 94.14233226420421,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 83,
+      "step": 82
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 94.38517537697724,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 84,
+      "step": 83
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 94.61587633411162,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 85,
+      "step": 84
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 94.83504224338927,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 86,
+      "step": 85
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 95.04324985720304,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 87,
+      "step": 86
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 95.24104709032613,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 88,
+      "step": 87
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 95.42895446179307,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 89,
+      "step": 88
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 95.60746646468664,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 90,
+      "step": 89
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 95.77705286743554,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 91,
+      "step": 90
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 95.938159950047,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 92,
+      "step": 91
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 96.0912116785279,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 93,
+      "step": 92
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 96.23661082058474,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 94,
+      "step": 93
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 96.37474000553873,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 95,
+      "step": 94
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 96.50596273124503,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 96,
+      "step": 95
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 96.63062432066602,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 97,
+      "step": 96
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 96.74905283061597,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 98,
+      "step": 97
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 96.8615599150684,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 99,
+      "step": 98
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 96.96844164529821,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 100,
+      "step": 99
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 97.06997928901654,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 101,
+      "step": 100
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 97.16644005054896,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 102,
+      "step": 101
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 97.25807777400475,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 103,
+      "step": 102
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 97.34513361128774,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 104,
+      "step": 103
+    },
+    {
+      "A": 1.2364900612873075,
+      "channels": {
+        "A": {
+          "alarm": true,
+          "candidate": 0.9158199688965536,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "entropy": {
+          "alarm": true,
+          "candidate": 0.9855460049803134,
+          "start": 0.0,
+          "statistic": 0.0
+        },
+        "g": {
+          "alarm": true,
+          "candidate": 97.42783665670659,
+          "start": 0.0,
+          "statistic": 0.0
+        }
+      },
+      "heartbeat_counter": 105,
+      "step": 104
+    }
+  ],
+  "incumbent_actions": [],
+  "job": "sybil_capture_own0_OFF_1835087704",
+  "production_key_set": [
+    "c_protective",
+    "c_suppressive",
+    "x_bio_welfare",
+    "x_compute",
+    "x_institutional_capacity",
+    "x_novelty_agency",
+    "x_resilience",
+    "x_transfer_comprehension"
+  ],
+  "steps": [
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.6,
+        "c_suppressive": 0.4,
+        "x_bio_welfare": 0.2505859574024363,
+        "x_compute": 0.32647163410343516,
+        "x_institutional_capacity": 0.29599450978458,
+        "x_novelty_agency": 1.6804947689567493e-07,
+        "x_resilience": 0.005690418276153105,
+        "x_transfer_comprehension": 0.12125731238391856
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 0
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.26646558444919455,
+        "x_compute": 0.1845894463228199,
+        "x_institutional_capacity": 0.1923906316099965,
+        "x_novelty_agency": 0.03432360467395017,
+        "x_resilience": 0.061700350752190034,
+        "x_transfer_comprehension": 0.2605303821918488
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 1
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.6,
+        "c_suppressive": 0.4,
+        "x_bio_welfare": 0.2775436761567497,
+        "x_compute": 0.15803417288842841,
+        "x_institutional_capacity": 0.19962553530684965,
+        "x_novelty_agency": 0.02203240051262062,
+        "x_resilience": 0.06255488992779916,
+        "x_transfer_comprehension": 0.2802093252075526
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 2
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.4,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.2539183779977789,
+        "x_compute": 0.06293078886504745,
+        "x_institutional_capacity": 0.27137513169518734,
+        "x_novelty_agency": 0.011184174232001269,
+        "x_resilience": 0.11539155923057333,
+        "x_transfer_comprehension": 0.28519996797941183
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 3
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.24178391099522145,
+        "x_compute": 0.06558839277345518,
+        "x_institutional_capacity": 0.2529498202769388,
+        "x_novelty_agency": 0.13525659107943916,
+        "x_resilience": 0.02883760172203799,
+        "x_transfer_comprehension": 0.27558368315290743
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 4
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.4,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.2498063041176234,
+        "x_compute": 0.1732475988567723,
+        "x_institutional_capacity": 0.30938715740506834,
+        "x_novelty_agency": 0.04609609978100122,
+        "x_resilience": 0.07115957713071987,
+        "x_transfer_comprehension": 0.15030326270881483
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 5
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.4,
+        "x_bio_welfare": 0.2402177864497217,
+        "x_compute": 0.1495196547519431,
+        "x_institutional_capacity": 0.331265506036363,
+        "x_novelty_agency": 0.0005542072957420117,
+        "x_resilience": 0.0225397960249465,
+        "x_transfer_comprehension": 0.2559030494412836
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 6
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.6,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.16564894871430624,
+        "x_compute": 0.08952583094319776,
+        "x_institutional_capacity": 0.43619766777489083,
+        "x_novelty_agency": 0.01719664453330377,
+        "x_resilience": 0.09748113292527356,
+        "x_transfer_comprehension": 0.19394977510902786
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 7
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.2,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.24913929216208885,
+        "x_compute": 0.124694613738664,
+        "x_institutional_capacity": 0.27626223372136693,
+        "x_novelty_agency": 0.0998539796458198,
+        "x_resilience": 0.07275000025093692,
+        "x_transfer_comprehension": 0.1772998804811235
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 8
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.6,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.1774755949743615,
+        "x_compute": 0.2495429084090093,
+        "x_institutional_capacity": 0.1590869804514945,
+        "x_novelty_agency": 0.10918565538647618,
+        "x_resilience": 0.02230900162347773,
+        "x_transfer_comprehension": 0.28239985915518084
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 9
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.2,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.21540836800576324,
+        "x_compute": 0.18655591724298048,
+        "x_institutional_capacity": 0.20385290505484635,
+        "x_novelty_agency": 0.05870582176704316,
+        "x_resilience": 0.020630703670141883,
+        "x_transfer_comprehension": 0.31484628425922484
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 10
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.8,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.24736488031780005,
+        "x_compute": 0.035690067848298083,
+        "x_institutional_capacity": 0.27465380208465745,
+        "x_novelty_agency": 0.025712025102209206,
+        "x_resilience": 0.1192694189792065,
+        "x_transfer_comprehension": 0.2973098056678286
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 11
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.6,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.17246387515187614,
+        "x_compute": 0.19445091256361577,
+        "x_institutional_capacity": 0.2598958314915811,
+        "x_novelty_agency": 0.1188586379843225,
+        "x_resilience": 0.011666864994962672,
+        "x_transfer_comprehension": 0.2426638778136418
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 12
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.4,
+        "c_suppressive": 0.4,
+        "x_bio_welfare": 0.23729566736579086,
+        "x_compute": 0.23754509552080533,
+        "x_institutional_capacity": 0.2858757995331805,
+        "x_novelty_agency": 0.06644725367252607,
+        "x_resilience": 0.005488762817317884,
+        "x_transfer_comprehension": 0.1673474210903793
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 13
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 1.0,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.22636952614629538,
+        "x_compute": 0.006156965987436933,
+        "x_institutional_capacity": 0.3418507422927135,
+        "x_novelty_agency": 0.04315601461289559,
+        "x_resilience": 0.08499527347519269,
+        "x_transfer_comprehension": 0.297471477485466
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 14
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.2,
+        "c_suppressive": 0.4,
+        "x_bio_welfare": 0.26139107672903605,
+        "x_compute": 0.02099138684231787,
+        "x_institutional_capacity": 0.35327285826918753,
+        "x_novelty_agency": 0.007880767508431051,
+        "x_resilience": 0.050675804751958826,
+        "x_transfer_comprehension": 0.30578810589906863
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 15
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.2,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.20139596383363023,
+        "x_compute": 0.21270604460479042,
+        "x_institutional_capacity": 0.21957771931941353,
+        "x_novelty_agency": 0.18149661893190053,
+        "x_resilience": 0.023677523463559235,
+        "x_transfer_comprehension": 0.16114612984670612
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 16
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.2,
+        "c_suppressive": 0.4,
+        "x_bio_welfare": 0.18904563867671897,
+        "x_compute": 0.23757744676064327,
+        "x_institutional_capacity": 0.1530244200882705,
+        "x_novelty_agency": 0.07401153246869478,
+        "x_resilience": 0.022751086040188193,
+        "x_transfer_comprehension": 0.3235898759654844
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 17
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.16320697890484065,
+        "x_compute": 0.15222585167537606,
+        "x_institutional_capacity": 0.2527399029934117,
+        "x_novelty_agency": 0.05010510199376328,
+        "x_resilience": 0.016063798525896796,
+        "x_transfer_comprehension": 0.3656583659067114
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 18
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.6,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.18102529754505078,
+        "x_compute": 0.20117506425926907,
+        "x_institutional_capacity": 0.1172226994277022,
+        "x_novelty_agency": 0.1503090936373929,
+        "x_resilience": 0.05194852667872608,
+        "x_transfer_comprehension": 0.2983193184518589
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 19
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.17116075603308362,
+        "x_compute": 0.1762046846409777,
+        "x_institutional_capacity": 0.20365132163280658,
+        "x_novelty_agency": 0.07058382884901758,
+        "x_resilience": 0.10774780310972788,
+        "x_transfer_comprehension": 0.2706516057343866
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 20
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.2,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.16791719051217077,
+        "x_compute": 0.1493616892126386,
+        "x_institutional_capacity": 0.21816205877583136,
+        "x_novelty_agency": 0.16635788669615997,
+        "x_resilience": 0.023839467218889306,
+        "x_transfer_comprehension": 0.27436170758430994
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 21
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.4,
+        "x_bio_welfare": 0.2764237774862678,
+        "x_compute": 0.2607747402280953,
+        "x_institutional_capacity": 0.2685686681795999,
+        "x_novelty_agency": 0.0139666237588729,
+        "x_resilience": 0.08205846838878124,
+        "x_transfer_comprehension": 0.09820772195838295
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 22
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.4,
+        "c_suppressive": 0.4,
+        "x_bio_welfare": 0.19476455112376156,
+        "x_compute": 0.1683781795835572,
+        "x_institutional_capacity": 0.3200329056809651,
+        "x_novelty_agency": 0.07954835316176687,
+        "x_resilience": 0.0288270603480901,
+        "x_transfer_comprehension": 0.20844895010185918
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 23
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.8,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.20819841595456154,
+        "x_compute": 0.2723163595122028,
+        "x_institutional_capacity": 0.11706484337543004,
+        "x_novelty_agency": 0.05098014341254525,
+        "x_resilience": 0.034194031047616334,
+        "x_transfer_comprehension": 0.3172462066976442
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 24
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.6,
+        "c_suppressive": 0.4,
+        "x_bio_welfare": 0.21377835450489724,
+        "x_compute": 0.2515202693915353,
+        "x_institutional_capacity": 0.18015309364786103,
+        "x_novelty_agency": 0.0013553326593252122,
+        "x_resilience": 0.0021679184640850924,
+        "x_transfer_comprehension": 0.3510250313322962
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 25
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.4,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.1691245309276936,
+        "x_compute": 0.11301417556493622,
+        "x_institutional_capacity": 0.20298596251857823,
+        "x_novelty_agency": 0.10128874590949143,
+        "x_resilience": 0.16427414618544697,
+        "x_transfer_comprehension": 0.24931243889385354
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 26
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.8,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.23310558645534332,
+        "x_compute": 0.13955231556788922,
+        "x_institutional_capacity": 0.2522449282850748,
+        "x_novelty_agency": 0.024276809453027806,
+        "x_resilience": 0.04799284810269712,
+        "x_transfer_comprehension": 0.3028275121359677
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 27
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.4,
+        "x_bio_welfare": 0.16794084264395293,
+        "x_compute": 0.2769251874985281,
+        "x_institutional_capacity": 0.1641516394374944,
+        "x_novelty_agency": 0.04518767424848858,
+        "x_resilience": 0.05670816827961091,
+        "x_transfer_comprehension": 0.2890864878919251
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 28
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.4,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.24063004077130476,
+        "x_compute": 0.06839508786360346,
+        "x_institutional_capacity": 0.22934401735111662,
+        "x_novelty_agency": 0.09482430537468184,
+        "x_resilience": 0.019483786585237948,
+        "x_transfer_comprehension": 0.3473227620540554
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 29
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.6,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.26707184549392293,
+        "x_compute": 0.10778531939361578,
+        "x_institutional_capacity": 0.23241784424427814,
+        "x_novelty_agency": 0.09947510900265755,
+        "x_resilience": 0.06211370899909968,
+        "x_transfer_comprehension": 0.23113617286642596
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 30
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.2,
+        "c_suppressive": 0.4,
+        "x_bio_welfare": 0.15078949244726625,
+        "x_compute": 0.12073128233393612,
+        "x_institutional_capacity": 0.23929124951073028,
+        "x_novelty_agency": 0.05722627541006501,
+        "x_resilience": 0.11385492071959162,
+        "x_transfer_comprehension": 0.31810677957841077
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 31
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.17589912373109795,
+        "x_compute": 0.04970639901981299,
+        "x_institutional_capacity": 0.39718813996486,
+        "x_novelty_agency": 0.04751354427123962,
+        "x_resilience": 0.07333557528637506,
+        "x_transfer_comprehension": 0.2563572177266145
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 32
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.4,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.14531595060634167,
+        "x_compute": 0.3326885714994324,
+        "x_institutional_capacity": 0.20165745086227918,
+        "x_novelty_agency": 0.020866600602645037,
+        "x_resilience": 0.003022345722992591,
+        "x_transfer_comprehension": 0.29644908070630915
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 33
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.1409885098099559,
+        "x_compute": 0.16175248386538144,
+        "x_institutional_capacity": 0.23377263502378712,
+        "x_novelty_agency": 0.05099571869402943,
+        "x_resilience": 0.14902232678405872,
+        "x_transfer_comprehension": 0.2634683258227875
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 34
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.19643015217846876,
+        "x_compute": 0.16471582994019485,
+        "x_institutional_capacity": 0.2865022796750838,
+        "x_novelty_agency": 0.20712566927633383,
+        "x_resilience": 0.01952063162091939,
+        "x_transfer_comprehension": 0.12570543730899927
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 35
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.19267495931382933,
+        "x_compute": 0.1649934728847801,
+        "x_institutional_capacity": 0.15446593267970493,
+        "x_novelty_agency": 0.09111780485328226,
+        "x_resilience": 0.1047339397176157,
+        "x_transfer_comprehension": 0.2920138905507877
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 36
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.6,
+        "x_bio_welfare": 0.18183431665595115,
+        "x_compute": 0.14845383778874288,
+        "x_institutional_capacity": 0.27452750862794534,
+        "x_novelty_agency": 0.02528820497946012,
+        "x_resilience": 0.07889408446879935,
+        "x_transfer_comprehension": 0.29100204747910113
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 37
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.6,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.20532356449717162,
+        "x_compute": 0.1643751414735328,
+        "x_institutional_capacity": 0.1883702656090083,
+        "x_novelty_agency": 0.03354417811857922,
+        "x_resilience": 0.10671452270240134,
+        "x_transfer_comprehension": 0.30167232759930673
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 38
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 1.0,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.18358658280550272,
+        "x_compute": 0.026307512589569915,
+        "x_institutional_capacity": 0.209666941954641,
+        "x_novelty_agency": 0.11526345455301615,
+        "x_resilience": 0.07641674657305603,
+        "x_transfer_comprehension": 0.3887587615242142
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 39
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.6,
+        "c_suppressive": 0.4,
+        "x_bio_welfare": 0.26371267894912415,
+        "x_compute": 0.10013613790654573,
+        "x_institutional_capacity": 0.2512239970603291,
+        "x_novelty_agency": 0.0540223540686529,
+        "x_resilience": 0.06098435311060179,
+        "x_transfer_comprehension": 0.26992047890474635
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 40
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.1775851643625445,
+        "x_compute": 0.19320350248639942,
+        "x_institutional_capacity": 0.17425788511445253,
+        "x_novelty_agency": 0.11228055191282368,
+        "x_resilience": 0.043449746002070695,
+        "x_transfer_comprehension": 0.2992231501217091
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 41
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.6,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.2098386694558013,
+        "x_compute": 0.09481857533338653,
+        "x_institutional_capacity": 0.23013395800670938,
+        "x_novelty_agency": 0.07225556386150309,
+        "x_resilience": 0.18424402019400576,
+        "x_transfer_comprehension": 0.208709213148594
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 42
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.4,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.21205552992439552,
+        "x_compute": 0.24022984132050973,
+        "x_institutional_capacity": 0.25428918293206293,
+        "x_novelty_agency": 0.032441901030223555,
+        "x_resilience": 0.038018192411157545,
+        "x_transfer_comprehension": 0.22296535238165074
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 43
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.4,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.1705274505375953,
+        "x_compute": 0.010180285399228009,
+        "x_institutional_capacity": 0.23322678703036712,
+        "x_novelty_agency": 0.17464344064270962,
+        "x_resilience": 0.09707075666553558,
+        "x_transfer_comprehension": 0.3143512797245643
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 44
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.8,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.15374587795671268,
+        "x_compute": 0.304502006753905,
+        "x_institutional_capacity": 0.1412989207854888,
+        "x_novelty_agency": 0.030455290259489936,
+        "x_resilience": 6.047539762166479e-06,
+        "x_transfer_comprehension": 0.3699918567046414
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 45
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.2,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.2627725621107088,
+        "x_compute": 0.07269028216837249,
+        "x_institutional_capacity": 0.25286837753781727,
+        "x_novelty_agency": 0.030405445747359098,
+        "x_resilience": 0.13173287926896665,
+        "x_transfer_comprehension": 0.24953045316677577
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 46
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.15974255064667875,
+        "x_compute": 0.19171701420772147,
+        "x_institutional_capacity": 0.2611654057988471,
+        "x_novelty_agency": 0.11843995463387921,
+        "x_resilience": 0.025887048134883312,
+        "x_transfer_comprehension": 0.24304802657799018
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 47
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.2,
+        "c_suppressive": 0.2,
+        "x_bio_welfare": 0.190119335129612,
+        "x_compute": 0.2644737566888383,
+        "x_institutional_capacity": 0.18115140271688576,
+        "x_novelty_agency": 0.04900437167296346,
+        "x_resilience": 0.035047614178086856,
+        "x_transfer_comprehension": 0.28020351961361367
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 48
+    },
+    {
+      "adapter_event_action_modified": false,
+      "committed_action": {
+        "c_protective": 0.8,
+        "c_suppressive": 0.0,
+        "x_bio_welfare": 0.17510161475994554,
+        "x_compute": 0.144310741541704,
+        "x_institutional_capacity": 0.26035382216309105,
+        "x_novelty_agency": 0.07738147812855882,
+        "x_resilience": 0.16363726784259897,
+        "x_transfer_comprehension": 0.1792150755641016
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 49
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 50
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 51
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 52
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 53
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 54
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 55
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 56
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 57
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 58
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 59
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 60
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 61
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 62
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 63
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 64
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 65
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 66
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 67
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 68
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 69
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 70
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 71
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 72
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 73
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 74
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 75
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 76
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 77
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 78
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 79
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 80
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 81
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 82
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 83
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 84
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 85
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 86
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 87
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 88
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 89
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 90
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 91
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 92
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 93
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 94
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 95
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 96
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 97
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 98
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 99
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 100
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 101
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 102
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 103
+    },
+    {
+      "adapter_event_action_modified": true,
+      "committed_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "incumbent_calls": 1,
+      "state_after_step": "NORMAL",
+      "state_in_force": "NORMAL",
+      "step": 104
+    }
+  ],
+  "transitions": []
+}

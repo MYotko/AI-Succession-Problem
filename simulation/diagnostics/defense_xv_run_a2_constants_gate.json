@@ -1,0 +1,204 @@
+{
+  "channels": {
+    "A": {
+      "allowance": 0.045310678652355926,
+      "direction": "upper",
+      "reference": 0.27535941373839806,
+      "threshold": 0.7701182670542909
+    },
+    "entropy": {
+      "allowance": 0.003549173553323096,
+      "direction": "lower",
+      "reference": 0.9890951785336365,
+      "threshold": 0.17319485850717864
+    },
+    "g": {
+      "allowance": 0.022160874873702576,
+      "direction": "upper",
+      "reference": 0.9786446054615587,
+      "threshold": 4.507729894543943
+    }
+  },
+  "checks": [
+    {
+      "actual": 0.9890951785336365,
+      "binary64_hex": "0x1.fa6aaee8ddd2fp-1",
+      "expected": 0.9890951785336365,
+      "passed": true,
+      "quantity": "entropy.reference"
+    },
+    {
+      "actual": 0.003549173553323096,
+      "binary64_hex": "0x1.d13280adbf63bp-9",
+      "expected": 0.003549173553323096,
+      "passed": true,
+      "quantity": "entropy.allowance"
+    },
+    {
+      "actual": 0.17319485850717864,
+      "binary64_hex": "0x1.62b3fc68fd4bcp-3",
+      "expected": 0.17319485850717864,
+      "passed": true,
+      "quantity": "entropy.threshold"
+    },
+    {
+      "actual": 0.9786446054615587,
+      "binary64_hex": "0x1.f510e7ddba7acp-1",
+      "expected": 0.9786446054615587,
+      "passed": true,
+      "quantity": "g.reference"
+    },
+    {
+      "actual": 0.022160874873702576,
+      "binary64_hex": "0x1.6b15723554cc7p-6",
+      "expected": 0.022160874873702576,
+      "passed": true,
+      "quantity": "g.allowance"
+    },
+    {
+      "actual": 4.507729894543943,
+      "binary64_hex": "0x1.207ea58711231p+2",
+      "expected": 4.507729894543943,
+      "passed": true,
+      "quantity": "g.threshold"
+    },
+    {
+      "actual": 0.27535941373839806,
+      "binary64_hex": "0x1.19f7d1729bcdfp-2",
+      "expected": 0.27535941373839806,
+      "passed": true,
+      "quantity": "A.reference"
+    },
+    {
+      "actual": 0.045310678652355926,
+      "binary64_hex": "0x1.732f615f15fcep-5",
+      "expected": 0.045310678652355926,
+      "passed": true,
+      "quantity": "A.allowance"
+    },
+    {
+      "actual": 0.7701182670542909,
+      "binary64_hex": "0x1.8a4cf10619ca9p-1",
+      "expected": 0.7701182670542909,
+      "passed": true,
+      "quantity": "A.threshold"
+    },
+    {
+      "actual": 0.13058054663961136,
+      "binary64_hex": "0x1.0b6dd04a7ccabp-3",
+      "expected": 0.13058054663961136,
+      "passed": true,
+      "quantity": "median.x_compute"
+    },
+    {
+      "actual": 0.19789308864393101,
+      "binary64_hex": "0x1.9548f8bea4122p-3",
+      "expected": 0.19789308864393101,
+      "passed": true,
+      "quantity": "median.x_bio_welfare"
+    },
+    {
+      "actual": 0.050694324487428735,
+      "binary64_hex": "0x1.9f49b43885ae2p-5",
+      "expected": 0.050694324487428735,
+      "passed": true,
+      "quantity": "median.x_novelty_agency"
+    },
+    {
+      "actual": 0.25643120498706085,
+      "binary64_hex": "0x1.0695e6dc5f89ap-2",
+      "expected": 0.25643120498706085,
+      "passed": true,
+      "quantity": "median.x_institutional_capacity"
+    },
+    {
+      "actual": 0.27322100367503155,
+      "binary64_hex": "0x1.17c73f2d754e4p-2",
+      "expected": 0.27322100367503155,
+      "passed": true,
+      "quantity": "median.x_transfer_comprehension"
+    },
+    {
+      "actual": 0.051169013866533296,
+      "binary64_hex": "0x1.a32d332402b63p-5",
+      "expected": 0.051169013866533296,
+      "passed": true,
+      "quantity": "median.x_resilience"
+    },
+    {
+      "actual": 0.1360229355155997,
+      "binary64_hex": "0x1.1693315c5d03fp-3",
+      "expected": 0.1360229355155997,
+      "passed": true,
+      "quantity": "consensus.x_compute"
+    },
+    {
+      "actual": 0.2061409568906703,
+      "binary64_hex": "0x1.a62d3ae1b14e2p-3",
+      "expected": 0.2061409568906703,
+      "passed": true,
+      "quantity": "consensus.x_bio_welfare"
+    },
+    {
+      "actual": 0.052807183062202334,
+      "binary64_hex": "0x1.b098b087df980p-5",
+      "expected": 0.052807183062202334,
+      "passed": true,
+      "quantity": "consensus.x_novelty_agency"
+    },
+    {
+      "actual": 0.26711884854035045,
+      "binary64_hex": "0x1.11879a7a81019p-2",
+      "expected": 0.26711884854035045,
+      "passed": true,
+      "quantity": "consensus.x_institutional_capacity"
+    },
+    {
+      "actual": 0.2846084192537951,
+      "binary64_hex": "0x1.237063b371fa6p-2",
+      "expected": 0.2846084192537951,
+      "passed": true,
+      "quantity": "consensus.x_transfer_comprehension"
+    },
+    {
+      "actual": 0.053301656737382165,
+      "binary64_hex": "0x1.b4a5ad104f40dp-5",
+      "expected": 0.053301656737382165,
+      "passed": true,
+      "quantity": "consensus.x_resilience"
+    },
+    {
+      "actual": 0.4,
+      "binary64_hex": "0x1.999999999999ap-2",
+      "expected": 0.4,
+      "passed": true,
+      "quantity": "consensus.c_protective"
+    },
+    {
+      "actual": 0.2,
+      "binary64_hex": "0x1.999999999999ap-3",
+      "expected": 0.2,
+      "passed": true,
+      "quantity": "consensus.c_suppressive"
+    }
+  ],
+  "consensus": {
+    "c_protective": 0.4,
+    "c_suppressive": 0.2,
+    "x_bio_welfare": 0.2061409568906703,
+    "x_compute": 0.1360229355155997,
+    "x_institutional_capacity": 0.26711884854035045,
+    "x_novelty_agency": 0.052807183062202334,
+    "x_resilience": 0.053301656737382165,
+    "x_transfer_comprehension": 0.2846084192537951
+  },
+  "medians": [
+    0.13058054663961136,
+    0.19789308864393101,
+    0.050694324487428735,
+    0.25643120498706085,
+    0.27322100367503155,
+    0.051169013866533296
+  ],
+  "passed": true
+}
