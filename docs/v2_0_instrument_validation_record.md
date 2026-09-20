@@ -124,6 +124,15 @@ described below and supersedes any earlier characterization of the affected clai
 > construction evaluated inside its executor, not the published consensus override and not
 > a change to production code, and it corrects no published figure.
 
+> **Update, 2026-09-19 (cross-vector gate for the in-loop defense complete).** Promotion of
+> that defense into production is now the goal, gated on four pre-registered steps. Item 2g
+> records the first: the defense run against the nine live vectors it was not designed
+> against, asking only whether adding it does harm. It did not. With each vector's own
+> defense on, nothing measured moved. With their defenses off, the defense prevented every
+> extinction those vectors caused, which is reported as incidental rather than as a
+> containment claim. Its measured cost is false alarms, which reach every run in the three
+> constructions that carry a successor.
+
 ---
 
 ## 1. Summary
@@ -1584,6 +1593,90 @@ every VETO and CONSENSUS entry, and every C1 through C4 value was recomputed ind
 from the 360 per-step logs, and all 18 C1 contrasts match the report to full precision. On
 every defended step after an entry, 45,217 steps, the committed action equals the
 held action or the pinned consensus allocation exactly.
+
+**2g. In-loop drift defense, gate 1, cross-vector evaluation. COMPLETE, 2026-09-19.**
+Pre-registered in `simulation/diagnostics/defense_cross_vector_design_note.md`, published at
+a46b2bb before any run, with two amendments. The run is at 524bfab under
+`simulation/diagnostics/defense_xv_run_a2_`, 5,126 artifacts, all gates passed, source pins
+matched at start and completion. 720 runs: the nine live vectors other than drift, each at
+one cell fixed by a stated rule, own defense off or on, crossed with the defense OFF or
+GRADED, at seeds 1835087700 through 1835087719.
+
+*Why it exists.* Item 2f evaluated the defense only against the pathways it was designed
+for. The operator made promotion into production the goal on 2026-09-19 and gated it on
+four steps in order: this cross-vector evaluation; a held-out attack specified before
+looking; a recovery rule, because both defense states latch and unattacked runs do alarm;
+and a promotion plan that re-pins every source and reruns the revalidation corpus. This is
+the first, and it asks only whether adding the defense does harm.
+
+*Two source findings, recorded in the note before any run.* No v2 vector corrupts what the
+defense reads. It reads entropy from the novelty log, g from the stocks, and the committed
+allocation; the eight action vectors move the allocation without falsifying any of them,
+Measurement Tampering falsifies only the two evaluated yield values, and Biological Veto
+Capture acts only on validators and ratification. Input corruption is therefore untestable
+with the existing vectors and moves to gate 2. Separately, the defense cannot weaken a
+vector's own defense, because every per-vector defense acts inside the adapter before the
+wrapper overrides anything, and the wrapper never feeds back into it. X4 below checks that
+rather than assuming it.
+
+*Registered result with each vector's own defense off.* Paired difference OFF minus GRADED,
+20 pairs, and extinctions per cell. The five vectors that substitute the same fixed hostile
+allocation produce identical trajectories and identical values.
+
+| Vector | X1, steps past g_star | t | X2, population | t | Extinctions, OFF to GRADED |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Sybil, ledger, opaque, bootstrap, evaluator | 45.55 | 16.2 | -317.75 | -43.7 | 20 of 20 to 0 |
+| Successor contamination | 161.80 | 65.7 | -313.20 | -40.0 | 9 of 20 to 0 |
+| Engineered fragility | 55.75 | 11.5 | -16.00 | -1.5 | 0 to 0 |
+| Measurement tampering | 0.35 | 1.4 | 11.85 | 1.8 | 0 to 0 |
+| Biological veto capture | 0.00 | undefined | -0.75 | -0.1 | 0 to 0 |
+
+A negative X2 means the defended arm ended with more population. The two yield-gate
+vectors measure exactly or nearly zero on X1 because neither moves the allocation.
+
+*Registered result with each vector's own defense on.* No X1 or X2 difference reaches a
+paired t of 2 in either direction, no cell has an extinction in either arm, and X4 is
+exactly zero in every pair of every binary vector, which is the prediction the second
+source finding makes. X3, successions, is zero in every pair of every vector with a
+successor except one run of biological veto capture, which differs by one.
+
+*The measured cost is false alarms.* With the attack neutralized by its own defense, the
+three constructions that carry a successor, measurement tampering, successor contamination
+and biological veto capture, alarm in 20 of 20 runs and reach the consensus state in 13 to
+18; the other six alarm in 4 to 6 of 20. The channel constants were calibrated on the drift
+mapping construction, which has no successor, and that is the most likely cause. Neither
+time past the threshold nor final population moved measurably in those runs, but a latched
+consensus state that engages in every run is a standing cost, and with no recovery rule it
+never lifts. Separately, 39 VETO entries across the run set held an action that was itself
+attack-modified at the step it was committed, because detection did not precede the first
+modified commit.
+
+*The gate criterion, and an error in it.* The note's harm criterion for X2 was written with
+its sign reversed, calling a negative value harm when negative means the defended arm kept
+more people alive. Applied as written it produces six harm findings, all of them the
+extinction-prevention results above. Amendment 2, at 7cbe2c9, corrects the sign and states
+plainly that the error was found by applying the criterion to the results, after the
+outputs were read. Under the corrected criterion there is no harm finding, so no
+confirmation rerun is owed and gate 1 passes.
+
+*What this establishes, and what it does not.* Adding the defense made nothing measurably
+worse on these nine vectors at 20 seeds per cell. It does not establish containment of
+them: the extinction prevention with their own defenses off is reported as incidental,
+since these vectors were not in the design and their published defenses are the
+architecture's answer to them. Passing gate 1 is necessary and not sufficient for
+promotion, which remains gated on gates 2 through 4. The known-pathway bias of item 2f
+applies throughout, and no published figure is corrected.
+
+*Verified by recomputation from the raw step logs, not from the run report.* Every alarm and
+state transition was recomputed independently from the 720 per-step logs, and all 42 paired
+contrasts and all 36 extinction counts match the report exactly.
+
+*Amendment 1 and the halted first attempt.* Attempt 1 halted after its preconditions with
+zero of 720 runs launched, on the same conflict the per-vector note met on 2026-09-17: the
+note barred any ratio of two measured counts while the pinned runner computes a legacy
+capture rate. Amendment 1, at a1597b5, scopes the prohibition to the note's own quantities;
+the legacy field is recorded verbatim and read by nothing, which the analysis asserts. The
+halt artifacts are committed unmodified.
 
 **3. v2.1 implementation and component validation.** Including a bidirectional
 check on the entropy estimator specifically. A repair tested only in the direction
