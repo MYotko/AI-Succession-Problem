@@ -1,0 +1,24 @@
+{
+  "batch_runs_completed": 0,
+  "failures": [
+    {
+      "error": "",
+      "status": "HALTED",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\defense_heldout_run_a2_executor.py\", line 746, in main\n    if args.command=='all':gates()\n                           ~~~~~^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\defense_heldout_run_a2_executor.py\", line 562, in gates\n    evidence={'source_pins_start':pins(full=True),'scheduler':scheduler_checks()}\n                                                              ~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\defense_heldout_run_a2_executor.py\", line 612, in scheduler_checks\n    assert all(j['seed'] in range(1835087800,1835087160) for j in pending)\n           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+      "utc": "2026-09-20T12:26:33.380565+00:00",
+      "where": "all:None"
+    }
+  ],
+  "registered": {
+    "Y1": null,
+    "Y2": null,
+    "Y3": null,
+    "Y4": null,
+    "Y5": null
+  },
+  "runs_planned": 160,
+  "sign_fixture": {
+    "status": "NOT_RUN"
+  },
+  "status": "HALTED"
+}
