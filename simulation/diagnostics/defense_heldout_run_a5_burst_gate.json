@@ -1,0 +1,80 @@
+{
+  "cases": [
+    {
+      "absolute_tolerance": 1e-09,
+      "actual": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "expected_production_hostile_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "passed": true,
+      "step": 50
+    },
+    {
+      "absolute_tolerance": 1e-09,
+      "actual": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "expected_production_hostile_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "passed": true,
+      "step": 51
+    },
+    {
+      "absolute_tolerance": 1e-09,
+      "actual": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "expected_production_hostile_action": {
+        "c_protective": 0.0,
+        "c_suppressive": 0.9,
+        "x_bio_welfare": 0.03,
+        "x_compute": 0.42,
+        "x_institutional_capacity": 0.04,
+        "x_novelty_agency": 0.03,
+        "x_resilience": 0.4,
+        "x_transfer_comprehension": 0.08
+      },
+      "passed": true,
+      "step": 52
+    }
+  ],
+  "passed": true
+}

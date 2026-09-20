@@ -1,0 +1,4857 @@
+{
+  "cases": [
+    {
+      "actual": {
+        "c_protective": 0.1,
+        "c_suppressive": 0.05,
+        "extra": {
+          "case": 0
+        },
+        "x_bio_welfare": 0.2,
+        "x_compute": 0.1,
+        "x_institutional_capacity": 0.15,
+        "x_novelty_agency": 0.25,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.3
+      },
+      "arm": "A1-low",
+      "case": 0,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.1,
+        "c_suppressive": 0.05,
+        "extra": {
+          "case": 0
+        },
+        "x_bio_welfare": 0.2,
+        "x_compute": 0.1,
+        "x_institutional_capacity": 0.15,
+        "x_novelty_agency": 0.25,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.3
+      },
+      "input": {
+        "c_protective": 0.1,
+        "c_suppressive": 0.05,
+        "extra": {
+          "case": 0
+        },
+        "x_bio_welfare": 0.2,
+        "x_compute": 0.1,
+        "x_institutional_capacity": 0.15,
+        "x_novelty_agency": 0.25,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.3
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.1,
+          "c_suppressive": 0.05,
+          "extra": {
+            "case": 0
+          },
+          "x_bio_welfare": 0.2,
+          "x_compute": 0.1,
+          "x_institutional_capacity": 0.15,
+          "x_novelty_agency": 0.25,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.3
+        },
+        "49": {
+          "c_protective": 0.1,
+          "c_suppressive": 0.05,
+          "extra": {
+            "case": 0
+          },
+          "x_bio_welfare": 0.2,
+          "x_compute": 0.1,
+          "x_institutional_capacity": 0.15,
+          "x_novelty_agency": 0.25,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.3
+        },
+        "9": {
+          "c_protective": 0.1,
+          "c_suppressive": 0.05,
+          "extra": {
+            "case": 0
+          },
+          "x_bio_welfare": 0.2,
+          "x_compute": 0.1,
+          "x_institutional_capacity": 0.15,
+          "x_novelty_agency": 0.25,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.3
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "zero",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 50
+    },
+    {
+      "actual": {
+        "c_protective": 0.12000000000000001,
+        "c_suppressive": 0.060000000000000005,
+        "extra": {
+          "case": 1
+        },
+        "x_bio_welfare": 0.249875,
+        "x_compute": 0.19990000000000002,
+        "x_institutional_capacity": 0.30035,
+        "x_novelty_agency": 0.149925,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.09995000000000001
+      },
+      "arm": "A1-low",
+      "case": 1,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.12000000000000001,
+        "c_suppressive": 0.060000000000000005,
+        "extra": {
+          "case": 1
+        },
+        "x_bio_welfare": 0.249875,
+        "x_compute": 0.19990000000000002,
+        "x_institutional_capacity": 0.30035,
+        "x_novelty_agency": 0.149925,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.09995000000000001
+      },
+      "input": {
+        "c_protective": 0.12000000000000001,
+        "c_suppressive": 0.060000000000000005,
+        "extra": {
+          "case": 1
+        },
+        "x_bio_welfare": 0.249875,
+        "x_compute": 0.19990000000000002,
+        "x_institutional_capacity": 0.29985,
+        "x_novelty_agency": 0.149925,
+        "x_resilience": 0.0005,
+        "x_transfer_comprehension": 0.09995000000000001
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0005,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.12000000000000001,
+          "c_suppressive": 0.060000000000000005,
+          "extra": {
+            "case": 1
+          },
+          "x_bio_welfare": 0.249875,
+          "x_compute": 0.19990000000000002,
+          "x_institutional_capacity": 0.29985,
+          "x_novelty_agency": 0.149925,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.09995000000000001
+        },
+        "49": {
+          "c_protective": 0.12000000000000001,
+          "c_suppressive": 0.060000000000000005,
+          "extra": {
+            "case": 1
+          },
+          "x_bio_welfare": 0.249875,
+          "x_compute": 0.19990000000000002,
+          "x_institutional_capacity": 0.29985,
+          "x_novelty_agency": 0.149925,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.09995000000000001
+        },
+        "9": {
+          "c_protective": 0.12000000000000001,
+          "c_suppressive": 0.060000000000000005,
+          "extra": {
+            "case": 1
+          },
+          "x_bio_welfare": 0.249875,
+          "x_compute": 0.19990000000000002,
+          "x_institutional_capacity": 0.29985,
+          "x_novelty_agency": 0.149925,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.09995000000000001
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "below",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 53
+    },
+    {
+      "actual": {
+        "c_protective": 0.14,
+        "c_suppressive": 0.07,
+        "extra": {
+          "case": 2
+        },
+        "x_bio_welfare": 0.147,
+        "x_compute": 0.245,
+        "x_institutional_capacity": 0.1,
+        "x_novelty_agency": 0.294,
+        "x_resilience": 0.018000000000000002,
+        "x_transfer_comprehension": 0.196
+      },
+      "arm": "A1-low",
+      "case": 2,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.14,
+        "c_suppressive": 0.07,
+        "extra": {
+          "case": 2
+        },
+        "x_bio_welfare": 0.147,
+        "x_compute": 0.245,
+        "x_institutional_capacity": 0.1,
+        "x_novelty_agency": 0.294,
+        "x_resilience": 0.018000000000000002,
+        "x_transfer_comprehension": 0.196
+      },
+      "input": {
+        "c_protective": 0.14,
+        "c_suppressive": 0.07,
+        "extra": {
+          "case": 2
+        },
+        "x_bio_welfare": 0.147,
+        "x_compute": 0.245,
+        "x_institutional_capacity": 0.098,
+        "x_novelty_agency": 0.294,
+        "x_resilience": 0.02,
+        "x_transfer_comprehension": 0.196
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.002,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.14,
+          "c_suppressive": 0.07,
+          "extra": {
+            "case": 2
+          },
+          "x_bio_welfare": 0.147,
+          "x_compute": 0.245,
+          "x_institutional_capacity": 0.098,
+          "x_novelty_agency": 0.294,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.196
+        },
+        "49": {
+          "c_protective": 0.14,
+          "c_suppressive": 0.07,
+          "extra": {
+            "case": 2
+          },
+          "x_bio_welfare": 0.147,
+          "x_compute": 0.245,
+          "x_institutional_capacity": 0.098,
+          "x_novelty_agency": 0.294,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.196
+        },
+        "9": {
+          "c_protective": 0.14,
+          "c_suppressive": 0.07,
+          "extra": {
+            "case": 2
+          },
+          "x_bio_welfare": 0.147,
+          "x_compute": 0.245,
+          "x_institutional_capacity": 0.098,
+          "x_novelty_agency": 0.294,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.196
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 149
+    },
+    {
+      "actual": {
+        "c_protective": 0.16,
+        "c_suppressive": 0.08,
+        "extra": {
+          "case": 3
+        },
+        "x_bio_welfare": 0.29819999999999997,
+        "x_compute": 0.14909999999999998,
+        "x_institutional_capacity": 0.2008,
+        "x_novelty_agency": 0.0994,
+        "x_resilience": 0.004,
+        "x_transfer_comprehension": 0.2485
+      },
+      "arm": "A1-low",
+      "case": 3,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.16,
+        "c_suppressive": 0.08,
+        "extra": {
+          "case": 3
+        },
+        "x_bio_welfare": 0.29819999999999997,
+        "x_compute": 0.14909999999999998,
+        "x_institutional_capacity": 0.2008,
+        "x_novelty_agency": 0.0994,
+        "x_resilience": 0.004,
+        "x_transfer_comprehension": 0.2485
+      },
+      "input": {
+        "c_protective": 0.16,
+        "c_suppressive": 0.08,
+        "extra": {
+          "case": 3
+        },
+        "x_bio_welfare": 0.29819999999999997,
+        "x_compute": 0.14909999999999998,
+        "x_institutional_capacity": 0.1988,
+        "x_novelty_agency": 0.0994,
+        "x_resilience": 0.006,
+        "x_transfer_comprehension": 0.2485
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.002,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.16,
+          "c_suppressive": 0.08,
+          "extra": {
+            "case": 3
+          },
+          "x_bio_welfare": 0.29819999999999997,
+          "x_compute": 0.14909999999999998,
+          "x_institutional_capacity": 0.1988,
+          "x_novelty_agency": 0.0994,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.2485
+        },
+        "49": {
+          "c_protective": 0.16,
+          "c_suppressive": 0.08,
+          "extra": {
+            "case": 3
+          },
+          "x_bio_welfare": 0.29819999999999997,
+          "x_compute": 0.14909999999999998,
+          "x_institutional_capacity": 0.1988,
+          "x_novelty_agency": 0.0994,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.2485
+        },
+        "9": {
+          "c_protective": 0.16,
+          "c_suppressive": 0.08,
+          "extra": {
+            "case": 3
+          },
+          "x_bio_welfare": 0.29819999999999997,
+          "x_compute": 0.14909999999999998,
+          "x_institutional_capacity": 0.1988,
+          "x_novelty_agency": 0.0994,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.2485
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 299
+    },
+    {
+      "actual": {
+        "c_protective": 0.18,
+        "c_suppressive": 0.09,
+        "extra": {
+          "case": 4
+        },
+        "x_bio_welfare": 0.1,
+        "x_compute": 0.3,
+        "x_institutional_capacity": 0.25,
+        "x_novelty_agency": 0.2,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.15
+      },
+      "arm": "A1-low",
+      "case": 4,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.18,
+        "c_suppressive": 0.09,
+        "extra": {
+          "case": 4
+        },
+        "x_bio_welfare": 0.1,
+        "x_compute": 0.3,
+        "x_institutional_capacity": 0.25,
+        "x_novelty_agency": 0.2,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.15
+      },
+      "input": {
+        "c_protective": 0.18,
+        "c_suppressive": 0.09,
+        "extra": {
+          "case": 4
+        },
+        "x_bio_welfare": 0.1,
+        "x_compute": 0.3,
+        "x_institutional_capacity": 0.25,
+        "x_novelty_agency": 0.2,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.15
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.18,
+          "c_suppressive": 0.09,
+          "extra": {
+            "case": 4
+          },
+          "x_bio_welfare": 0.1,
+          "x_compute": 0.3,
+          "x_institutional_capacity": 0.25,
+          "x_novelty_agency": 0.2,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.15
+        },
+        "49": {
+          "c_protective": 0.18,
+          "c_suppressive": 0.09,
+          "extra": {
+            "case": 4
+          },
+          "x_bio_welfare": 0.1,
+          "x_compute": 0.3,
+          "x_institutional_capacity": 0.25,
+          "x_novelty_agency": 0.2,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.15
+        },
+        "9": {
+          "c_protective": 0.18,
+          "c_suppressive": 0.09,
+          "extra": {
+            "case": 4
+          },
+          "x_bio_welfare": 0.1,
+          "x_compute": 0.3,
+          "x_institutional_capacity": 0.25,
+          "x_novelty_agency": 0.2,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.15
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "zero",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 50
+    },
+    {
+      "actual": {
+        "c_protective": 0.2,
+        "c_suppressive": 0.1,
+        "extra": {
+          "case": 5
+        },
+        "x_bio_welfare": 0.19990000000000002,
+        "x_compute": 0.09995000000000001,
+        "x_institutional_capacity": 0.150425,
+        "x_novelty_agency": 0.249875,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.29985
+      },
+      "arm": "A1-low",
+      "case": 5,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.2,
+        "c_suppressive": 0.1,
+        "extra": {
+          "case": 5
+        },
+        "x_bio_welfare": 0.19990000000000002,
+        "x_compute": 0.09995000000000001,
+        "x_institutional_capacity": 0.150425,
+        "x_novelty_agency": 0.249875,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.29985
+      },
+      "input": {
+        "c_protective": 0.2,
+        "c_suppressive": 0.1,
+        "extra": {
+          "case": 5
+        },
+        "x_bio_welfare": 0.19990000000000002,
+        "x_compute": 0.09995000000000001,
+        "x_institutional_capacity": 0.149925,
+        "x_novelty_agency": 0.249875,
+        "x_resilience": 0.0005,
+        "x_transfer_comprehension": 0.29985
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0005,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.2,
+          "c_suppressive": 0.1,
+          "extra": {
+            "case": 5
+          },
+          "x_bio_welfare": 0.19990000000000002,
+          "x_compute": 0.09995000000000001,
+          "x_institutional_capacity": 0.149925,
+          "x_novelty_agency": 0.249875,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.29985
+        },
+        "49": {
+          "c_protective": 0.2,
+          "c_suppressive": 0.1,
+          "extra": {
+            "case": 5
+          },
+          "x_bio_welfare": 0.19990000000000002,
+          "x_compute": 0.09995000000000001,
+          "x_institutional_capacity": 0.149925,
+          "x_novelty_agency": 0.249875,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.29985
+        },
+        "9": {
+          "c_protective": 0.2,
+          "c_suppressive": 0.1,
+          "extra": {
+            "case": 5
+          },
+          "x_bio_welfare": 0.19990000000000002,
+          "x_compute": 0.09995000000000001,
+          "x_institutional_capacity": 0.149925,
+          "x_novelty_agency": 0.249875,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.29985
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "below",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 53
+    },
+    {
+      "actual": {
+        "c_protective": 0.22,
+        "c_suppressive": 0.11,
+        "extra": {
+          "case": 6
+        },
+        "x_bio_welfare": 0.24500000000000002,
+        "x_compute": 0.19600000000000004,
+        "x_institutional_capacity": 0.29600000000000004,
+        "x_novelty_agency": 0.14700000000000002,
+        "x_resilience": 0.018000000000000002,
+        "x_transfer_comprehension": 0.09800000000000002
+      },
+      "arm": "A1-low",
+      "case": 6,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.22,
+        "c_suppressive": 0.11,
+        "extra": {
+          "case": 6
+        },
+        "x_bio_welfare": 0.24500000000000002,
+        "x_compute": 0.19600000000000004,
+        "x_institutional_capacity": 0.29600000000000004,
+        "x_novelty_agency": 0.14700000000000002,
+        "x_resilience": 0.018000000000000002,
+        "x_transfer_comprehension": 0.09800000000000002
+      },
+      "input": {
+        "c_protective": 0.22,
+        "c_suppressive": 0.11,
+        "extra": {
+          "case": 6
+        },
+        "x_bio_welfare": 0.24500000000000002,
+        "x_compute": 0.19600000000000004,
+        "x_institutional_capacity": 0.29400000000000004,
+        "x_novelty_agency": 0.14700000000000002,
+        "x_resilience": 0.020000000000000004,
+        "x_transfer_comprehension": 0.09800000000000002
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.002,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.22,
+          "c_suppressive": 0.11,
+          "extra": {
+            "case": 6
+          },
+          "x_bio_welfare": 0.24500000000000002,
+          "x_compute": 0.19600000000000004,
+          "x_institutional_capacity": 0.29400000000000004,
+          "x_novelty_agency": 0.14700000000000002,
+          "x_resilience": 0.020000000000000004,
+          "x_transfer_comprehension": 0.09800000000000002
+        },
+        "49": {
+          "c_protective": 0.22,
+          "c_suppressive": 0.11,
+          "extra": {
+            "case": 6
+          },
+          "x_bio_welfare": 0.24500000000000002,
+          "x_compute": 0.19600000000000004,
+          "x_institutional_capacity": 0.29400000000000004,
+          "x_novelty_agency": 0.14700000000000002,
+          "x_resilience": 0.020000000000000004,
+          "x_transfer_comprehension": 0.09800000000000002
+        },
+        "9": {
+          "c_protective": 0.22,
+          "c_suppressive": 0.11,
+          "extra": {
+            "case": 6
+          },
+          "x_bio_welfare": 0.24500000000000002,
+          "x_compute": 0.19600000000000004,
+          "x_institutional_capacity": 0.29400000000000004,
+          "x_novelty_agency": 0.14700000000000002,
+          "x_resilience": 0.020000000000000004,
+          "x_transfer_comprehension": 0.09800000000000002
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0000000000000002,
+      "step": 149
+    },
+    {
+      "actual": {
+        "c_protective": 0.24000000000000002,
+        "c_suppressive": 0.12000000000000001,
+        "extra": {
+          "case": 7
+        },
+        "x_bio_welfare": 0.14909999999999998,
+        "x_compute": 0.2485,
+        "x_institutional_capacity": 0.1014,
+        "x_novelty_agency": 0.29819999999999997,
+        "x_resilience": 0.004,
+        "x_transfer_comprehension": 0.1988
+      },
+      "arm": "A1-low",
+      "case": 7,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.24000000000000002,
+        "c_suppressive": 0.12000000000000001,
+        "extra": {
+          "case": 7
+        },
+        "x_bio_welfare": 0.14909999999999998,
+        "x_compute": 0.2485,
+        "x_institutional_capacity": 0.1014,
+        "x_novelty_agency": 0.29819999999999997,
+        "x_resilience": 0.004,
+        "x_transfer_comprehension": 0.1988
+      },
+      "input": {
+        "c_protective": 0.24000000000000002,
+        "c_suppressive": 0.12000000000000001,
+        "extra": {
+          "case": 7
+        },
+        "x_bio_welfare": 0.14909999999999998,
+        "x_compute": 0.2485,
+        "x_institutional_capacity": 0.0994,
+        "x_novelty_agency": 0.29819999999999997,
+        "x_resilience": 0.006,
+        "x_transfer_comprehension": 0.1988
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.002,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.24000000000000002,
+          "c_suppressive": 0.12000000000000001,
+          "extra": {
+            "case": 7
+          },
+          "x_bio_welfare": 0.14909999999999998,
+          "x_compute": 0.2485,
+          "x_institutional_capacity": 0.0994,
+          "x_novelty_agency": 0.29819999999999997,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.1988
+        },
+        "49": {
+          "c_protective": 0.24000000000000002,
+          "c_suppressive": 0.12000000000000001,
+          "extra": {
+            "case": 7
+          },
+          "x_bio_welfare": 0.14909999999999998,
+          "x_compute": 0.2485,
+          "x_institutional_capacity": 0.0994,
+          "x_novelty_agency": 0.29819999999999997,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.1988
+        },
+        "9": {
+          "c_protective": 0.24000000000000002,
+          "c_suppressive": 0.12000000000000001,
+          "extra": {
+            "case": 7
+          },
+          "x_bio_welfare": 0.14909999999999998,
+          "x_compute": 0.2485,
+          "x_institutional_capacity": 0.0994,
+          "x_novelty_agency": 0.29819999999999997,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.1988
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 299
+    },
+    {
+      "actual": {
+        "c_protective": 0.26,
+        "c_suppressive": 0.13,
+        "extra": {
+          "case": 8
+        },
+        "x_bio_welfare": 0.3,
+        "x_compute": 0.15,
+        "x_institutional_capacity": 0.2,
+        "x_novelty_agency": 0.1,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.25
+      },
+      "arm": "A1-low",
+      "case": 8,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.26,
+        "c_suppressive": 0.13,
+        "extra": {
+          "case": 8
+        },
+        "x_bio_welfare": 0.3,
+        "x_compute": 0.15,
+        "x_institutional_capacity": 0.2,
+        "x_novelty_agency": 0.1,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.25
+      },
+      "input": {
+        "c_protective": 0.26,
+        "c_suppressive": 0.13,
+        "extra": {
+          "case": 8
+        },
+        "x_bio_welfare": 0.3,
+        "x_compute": 0.15,
+        "x_institutional_capacity": 0.2,
+        "x_novelty_agency": 0.1,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.25
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.26,
+          "c_suppressive": 0.13,
+          "extra": {
+            "case": 8
+          },
+          "x_bio_welfare": 0.3,
+          "x_compute": 0.15,
+          "x_institutional_capacity": 0.2,
+          "x_novelty_agency": 0.1,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.25
+        },
+        "49": {
+          "c_protective": 0.26,
+          "c_suppressive": 0.13,
+          "extra": {
+            "case": 8
+          },
+          "x_bio_welfare": 0.3,
+          "x_compute": 0.15,
+          "x_institutional_capacity": 0.2,
+          "x_novelty_agency": 0.1,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.25
+        },
+        "9": {
+          "c_protective": 0.26,
+          "c_suppressive": 0.13,
+          "extra": {
+            "case": 8
+          },
+          "x_bio_welfare": 0.3,
+          "x_compute": 0.15,
+          "x_institutional_capacity": 0.2,
+          "x_novelty_agency": 0.1,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.25
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "zero",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 50
+    },
+    {
+      "actual": {
+        "c_protective": 0.28,
+        "c_suppressive": 0.14,
+        "extra": {
+          "case": 9
+        },
+        "x_bio_welfare": 0.09995,
+        "x_compute": 0.29985,
+        "x_institutional_capacity": 0.250375,
+        "x_novelty_agency": 0.1999,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.149925
+      },
+      "arm": "A1-low",
+      "case": 9,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.28,
+        "c_suppressive": 0.14,
+        "extra": {
+          "case": 9
+        },
+        "x_bio_welfare": 0.09995,
+        "x_compute": 0.29985,
+        "x_institutional_capacity": 0.250375,
+        "x_novelty_agency": 0.1999,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.149925
+      },
+      "input": {
+        "c_protective": 0.28,
+        "c_suppressive": 0.14,
+        "extra": {
+          "case": 9
+        },
+        "x_bio_welfare": 0.09994999999999998,
+        "x_compute": 0.29984999999999995,
+        "x_institutional_capacity": 0.24987499999999996,
+        "x_novelty_agency": 0.19989999999999997,
+        "x_resilience": 0.0004999999999999999,
+        "x_transfer_comprehension": 0.14992499999999997
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0004999999999999999,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.28,
+          "c_suppressive": 0.14,
+          "extra": {
+            "case": 9
+          },
+          "x_bio_welfare": 0.09994999999999998,
+          "x_compute": 0.29984999999999995,
+          "x_institutional_capacity": 0.24987499999999996,
+          "x_novelty_agency": 0.19989999999999997,
+          "x_resilience": 0.0004999999999999999,
+          "x_transfer_comprehension": 0.14992499999999997
+        },
+        "49": {
+          "c_protective": 0.28,
+          "c_suppressive": 0.14,
+          "extra": {
+            "case": 9
+          },
+          "x_bio_welfare": 0.09994999999999998,
+          "x_compute": 0.29984999999999995,
+          "x_institutional_capacity": 0.24987499999999996,
+          "x_novelty_agency": 0.19989999999999997,
+          "x_resilience": 0.0004999999999999999,
+          "x_transfer_comprehension": 0.14992499999999997
+        },
+        "9": {
+          "c_protective": 0.28,
+          "c_suppressive": 0.14,
+          "extra": {
+            "case": 9
+          },
+          "x_bio_welfare": 0.09994999999999998,
+          "x_compute": 0.29984999999999995,
+          "x_institutional_capacity": 0.24987499999999996,
+          "x_novelty_agency": 0.19989999999999997,
+          "x_resilience": 0.0004999999999999999,
+          "x_transfer_comprehension": 0.14992499999999997
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "below",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 53
+    },
+    {
+      "actual": {
+        "c_protective": 0.30000000000000004,
+        "c_suppressive": 0.15000000000000002,
+        "extra": {
+          "case": 10
+        },
+        "x_bio_welfare": 0.196,
+        "x_compute": 0.098,
+        "x_institutional_capacity": 0.149,
+        "x_novelty_agency": 0.245,
+        "x_resilience": 0.018000000000000002,
+        "x_transfer_comprehension": 0.294
+      },
+      "arm": "A1-low",
+      "case": 10,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.30000000000000004,
+        "c_suppressive": 0.15000000000000002,
+        "extra": {
+          "case": 10
+        },
+        "x_bio_welfare": 0.196,
+        "x_compute": 0.098,
+        "x_institutional_capacity": 0.149,
+        "x_novelty_agency": 0.245,
+        "x_resilience": 0.018000000000000002,
+        "x_transfer_comprehension": 0.294
+      },
+      "input": {
+        "c_protective": 0.30000000000000004,
+        "c_suppressive": 0.15000000000000002,
+        "extra": {
+          "case": 10
+        },
+        "x_bio_welfare": 0.196,
+        "x_compute": 0.098,
+        "x_institutional_capacity": 0.147,
+        "x_novelty_agency": 0.245,
+        "x_resilience": 0.02,
+        "x_transfer_comprehension": 0.294
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.002,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.30000000000000004,
+          "c_suppressive": 0.15000000000000002,
+          "extra": {
+            "case": 10
+          },
+          "x_bio_welfare": 0.196,
+          "x_compute": 0.098,
+          "x_institutional_capacity": 0.147,
+          "x_novelty_agency": 0.245,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.294
+        },
+        "49": {
+          "c_protective": 0.30000000000000004,
+          "c_suppressive": 0.15000000000000002,
+          "extra": {
+            "case": 10
+          },
+          "x_bio_welfare": 0.196,
+          "x_compute": 0.098,
+          "x_institutional_capacity": 0.147,
+          "x_novelty_agency": 0.245,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.294
+        },
+        "9": {
+          "c_protective": 0.30000000000000004,
+          "c_suppressive": 0.15000000000000002,
+          "extra": {
+            "case": 10
+          },
+          "x_bio_welfare": 0.196,
+          "x_compute": 0.098,
+          "x_institutional_capacity": 0.147,
+          "x_novelty_agency": 0.245,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.294
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 149
+    },
+    {
+      "actual": {
+        "c_protective": 0.32,
+        "c_suppressive": 0.16,
+        "extra": {
+          "case": 11
+        },
+        "x_bio_welfare": 0.2485,
+        "x_compute": 0.1988,
+        "x_institutional_capacity": 0.30019999999999997,
+        "x_novelty_agency": 0.14909999999999998,
+        "x_resilience": 0.004,
+        "x_transfer_comprehension": 0.0994
+      },
+      "arm": "A1-low",
+      "case": 11,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.32,
+        "c_suppressive": 0.16,
+        "extra": {
+          "case": 11
+        },
+        "x_bio_welfare": 0.2485,
+        "x_compute": 0.1988,
+        "x_institutional_capacity": 0.30019999999999997,
+        "x_novelty_agency": 0.14909999999999998,
+        "x_resilience": 0.004,
+        "x_transfer_comprehension": 0.0994
+      },
+      "input": {
+        "c_protective": 0.32,
+        "c_suppressive": 0.16,
+        "extra": {
+          "case": 11
+        },
+        "x_bio_welfare": 0.2485,
+        "x_compute": 0.1988,
+        "x_institutional_capacity": 0.29819999999999997,
+        "x_novelty_agency": 0.14909999999999998,
+        "x_resilience": 0.006,
+        "x_transfer_comprehension": 0.0994
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.002,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.32,
+          "c_suppressive": 0.16,
+          "extra": {
+            "case": 11
+          },
+          "x_bio_welfare": 0.2485,
+          "x_compute": 0.1988,
+          "x_institutional_capacity": 0.29819999999999997,
+          "x_novelty_agency": 0.14909999999999998,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.0994
+        },
+        "49": {
+          "c_protective": 0.32,
+          "c_suppressive": 0.16,
+          "extra": {
+            "case": 11
+          },
+          "x_bio_welfare": 0.2485,
+          "x_compute": 0.1988,
+          "x_institutional_capacity": 0.29819999999999997,
+          "x_novelty_agency": 0.14909999999999998,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.0994
+        },
+        "9": {
+          "c_protective": 0.32,
+          "c_suppressive": 0.16,
+          "extra": {
+            "case": 11
+          },
+          "x_bio_welfare": 0.2485,
+          "x_compute": 0.1988,
+          "x_institutional_capacity": 0.29819999999999997,
+          "x_novelty_agency": 0.14909999999999998,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.0994
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 299
+    },
+    {
+      "actual": {
+        "c_protective": 0.33999999999999997,
+        "c_suppressive": 0.16999999999999998,
+        "extra": {
+          "case": 12
+        },
+        "x_bio_welfare": 0.15,
+        "x_compute": 0.25,
+        "x_institutional_capacity": 0.1,
+        "x_novelty_agency": 0.3,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.2
+      },
+      "arm": "A1-low",
+      "case": 12,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.33999999999999997,
+        "c_suppressive": 0.16999999999999998,
+        "extra": {
+          "case": 12
+        },
+        "x_bio_welfare": 0.15,
+        "x_compute": 0.25,
+        "x_institutional_capacity": 0.1,
+        "x_novelty_agency": 0.3,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.2
+      },
+      "input": {
+        "c_protective": 0.33999999999999997,
+        "c_suppressive": 0.16999999999999998,
+        "extra": {
+          "case": 12
+        },
+        "x_bio_welfare": 0.15,
+        "x_compute": 0.25,
+        "x_institutional_capacity": 0.1,
+        "x_novelty_agency": 0.3,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.2
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.33999999999999997,
+          "c_suppressive": 0.16999999999999998,
+          "extra": {
+            "case": 12
+          },
+          "x_bio_welfare": 0.15,
+          "x_compute": 0.25,
+          "x_institutional_capacity": 0.1,
+          "x_novelty_agency": 0.3,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.2
+        },
+        "49": {
+          "c_protective": 0.33999999999999997,
+          "c_suppressive": 0.16999999999999998,
+          "extra": {
+            "case": 12
+          },
+          "x_bio_welfare": 0.15,
+          "x_compute": 0.25,
+          "x_institutional_capacity": 0.1,
+          "x_novelty_agency": 0.3,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.2
+        },
+        "9": {
+          "c_protective": 0.33999999999999997,
+          "c_suppressive": 0.16999999999999998,
+          "extra": {
+            "case": 12
+          },
+          "x_bio_welfare": 0.15,
+          "x_compute": 0.25,
+          "x_institutional_capacity": 0.1,
+          "x_novelty_agency": 0.3,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.2
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "zero",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 50
+    },
+    {
+      "actual": {
+        "c_protective": 0.36,
+        "c_suppressive": 0.18,
+        "extra": {
+          "case": 13
+        },
+        "x_bio_welfare": 0.29985,
+        "x_compute": 0.149925,
+        "x_institutional_capacity": 0.20040000000000002,
+        "x_novelty_agency": 0.09995000000000001,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.249875
+      },
+      "arm": "A1-low",
+      "case": 13,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.36,
+        "c_suppressive": 0.18,
+        "extra": {
+          "case": 13
+        },
+        "x_bio_welfare": 0.29985,
+        "x_compute": 0.149925,
+        "x_institutional_capacity": 0.20040000000000002,
+        "x_novelty_agency": 0.09995000000000001,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.249875
+      },
+      "input": {
+        "c_protective": 0.36,
+        "c_suppressive": 0.18,
+        "extra": {
+          "case": 13
+        },
+        "x_bio_welfare": 0.29985,
+        "x_compute": 0.149925,
+        "x_institutional_capacity": 0.19990000000000002,
+        "x_novelty_agency": 0.09995000000000001,
+        "x_resilience": 0.0005,
+        "x_transfer_comprehension": 0.249875
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0005,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.36,
+          "c_suppressive": 0.18,
+          "extra": {
+            "case": 13
+          },
+          "x_bio_welfare": 0.29985,
+          "x_compute": 0.149925,
+          "x_institutional_capacity": 0.19990000000000002,
+          "x_novelty_agency": 0.09995000000000001,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.249875
+        },
+        "49": {
+          "c_protective": 0.36,
+          "c_suppressive": 0.18,
+          "extra": {
+            "case": 13
+          },
+          "x_bio_welfare": 0.29985,
+          "x_compute": 0.149925,
+          "x_institutional_capacity": 0.19990000000000002,
+          "x_novelty_agency": 0.09995000000000001,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.249875
+        },
+        "9": {
+          "c_protective": 0.36,
+          "c_suppressive": 0.18,
+          "extra": {
+            "case": 13
+          },
+          "x_bio_welfare": 0.29985,
+          "x_compute": 0.149925,
+          "x_institutional_capacity": 0.19990000000000002,
+          "x_novelty_agency": 0.09995000000000001,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.249875
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "below",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 53
+    },
+    {
+      "actual": {
+        "c_protective": 0.38,
+        "c_suppressive": 0.19,
+        "extra": {
+          "case": 14
+        },
+        "x_bio_welfare": 0.098,
+        "x_compute": 0.294,
+        "x_institutional_capacity": 0.247,
+        "x_novelty_agency": 0.196,
+        "x_resilience": 0.018000000000000002,
+        "x_transfer_comprehension": 0.147
+      },
+      "arm": "A1-low",
+      "case": 14,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.38,
+        "c_suppressive": 0.19,
+        "extra": {
+          "case": 14
+        },
+        "x_bio_welfare": 0.098,
+        "x_compute": 0.294,
+        "x_institutional_capacity": 0.247,
+        "x_novelty_agency": 0.196,
+        "x_resilience": 0.018000000000000002,
+        "x_transfer_comprehension": 0.147
+      },
+      "input": {
+        "c_protective": 0.38,
+        "c_suppressive": 0.19,
+        "extra": {
+          "case": 14
+        },
+        "x_bio_welfare": 0.098,
+        "x_compute": 0.294,
+        "x_institutional_capacity": 0.245,
+        "x_novelty_agency": 0.196,
+        "x_resilience": 0.02,
+        "x_transfer_comprehension": 0.147
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.002,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.38,
+          "c_suppressive": 0.19,
+          "extra": {
+            "case": 14
+          },
+          "x_bio_welfare": 0.098,
+          "x_compute": 0.294,
+          "x_institutional_capacity": 0.245,
+          "x_novelty_agency": 0.196,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.147
+        },
+        "49": {
+          "c_protective": 0.38,
+          "c_suppressive": 0.19,
+          "extra": {
+            "case": 14
+          },
+          "x_bio_welfare": 0.098,
+          "x_compute": 0.294,
+          "x_institutional_capacity": 0.245,
+          "x_novelty_agency": 0.196,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.147
+        },
+        "9": {
+          "c_protective": 0.38,
+          "c_suppressive": 0.19,
+          "extra": {
+            "case": 14
+          },
+          "x_bio_welfare": 0.098,
+          "x_compute": 0.294,
+          "x_institutional_capacity": 0.245,
+          "x_novelty_agency": 0.196,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.147
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 149
+    },
+    {
+      "actual": {
+        "c_protective": 0.4,
+        "c_suppressive": 0.2,
+        "extra": {
+          "case": 15
+        },
+        "x_bio_welfare": 0.1988,
+        "x_compute": 0.0994,
+        "x_institutional_capacity": 0.15109999999999998,
+        "x_novelty_agency": 0.2485,
+        "x_resilience": 0.004,
+        "x_transfer_comprehension": 0.29819999999999997
+      },
+      "arm": "A1-low",
+      "case": 15,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.4,
+        "c_suppressive": 0.2,
+        "extra": {
+          "case": 15
+        },
+        "x_bio_welfare": 0.1988,
+        "x_compute": 0.0994,
+        "x_institutional_capacity": 0.15109999999999998,
+        "x_novelty_agency": 0.2485,
+        "x_resilience": 0.004,
+        "x_transfer_comprehension": 0.29819999999999997
+      },
+      "input": {
+        "c_protective": 0.4,
+        "c_suppressive": 0.2,
+        "extra": {
+          "case": 15
+        },
+        "x_bio_welfare": 0.1988,
+        "x_compute": 0.0994,
+        "x_institutional_capacity": 0.14909999999999998,
+        "x_novelty_agency": 0.2485,
+        "x_resilience": 0.006,
+        "x_transfer_comprehension": 0.29819999999999997
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.002,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.4,
+          "c_suppressive": 0.2,
+          "extra": {
+            "case": 15
+          },
+          "x_bio_welfare": 0.1988,
+          "x_compute": 0.0994,
+          "x_institutional_capacity": 0.14909999999999998,
+          "x_novelty_agency": 0.2485,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.29819999999999997
+        },
+        "49": {
+          "c_protective": 0.4,
+          "c_suppressive": 0.2,
+          "extra": {
+            "case": 15
+          },
+          "x_bio_welfare": 0.1988,
+          "x_compute": 0.0994,
+          "x_institutional_capacity": 0.14909999999999998,
+          "x_novelty_agency": 0.2485,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.29819999999999997
+        },
+        "9": {
+          "c_protective": 0.4,
+          "c_suppressive": 0.2,
+          "extra": {
+            "case": 15
+          },
+          "x_bio_welfare": 0.1988,
+          "x_compute": 0.0994,
+          "x_institutional_capacity": 0.14909999999999998,
+          "x_novelty_agency": 0.2485,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.29819999999999997
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 299
+    },
+    {
+      "actual": {
+        "c_protective": 0.42000000000000004,
+        "c_suppressive": 0.21000000000000002,
+        "extra": {
+          "case": 16
+        },
+        "x_bio_welfare": 0.25,
+        "x_compute": 0.19999999999999998,
+        "x_institutional_capacity": 0.3,
+        "x_novelty_agency": 0.15,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.09999999999999999
+      },
+      "arm": "A1-low",
+      "case": 16,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.42000000000000004,
+        "c_suppressive": 0.21000000000000002,
+        "extra": {
+          "case": 16
+        },
+        "x_bio_welfare": 0.25,
+        "x_compute": 0.19999999999999998,
+        "x_institutional_capacity": 0.3,
+        "x_novelty_agency": 0.15,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.09999999999999999
+      },
+      "input": {
+        "c_protective": 0.42000000000000004,
+        "c_suppressive": 0.21000000000000002,
+        "extra": {
+          "case": 16
+        },
+        "x_bio_welfare": 0.25000000000000006,
+        "x_compute": 0.20000000000000004,
+        "x_institutional_capacity": 0.30000000000000004,
+        "x_novelty_agency": 0.15000000000000002,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.10000000000000002
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.42000000000000004,
+          "c_suppressive": 0.21000000000000002,
+          "extra": {
+            "case": 16
+          },
+          "x_bio_welfare": 0.25000000000000006,
+          "x_compute": 0.20000000000000004,
+          "x_institutional_capacity": 0.30000000000000004,
+          "x_novelty_agency": 0.15000000000000002,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.10000000000000002
+        },
+        "49": {
+          "c_protective": 0.42000000000000004,
+          "c_suppressive": 0.21000000000000002,
+          "extra": {
+            "case": 16
+          },
+          "x_bio_welfare": 0.25000000000000006,
+          "x_compute": 0.20000000000000004,
+          "x_institutional_capacity": 0.30000000000000004,
+          "x_novelty_agency": 0.15000000000000002,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.10000000000000002
+        },
+        "9": {
+          "c_protective": 0.42000000000000004,
+          "c_suppressive": 0.21000000000000002,
+          "extra": {
+            "case": 16
+          },
+          "x_bio_welfare": 0.25000000000000006,
+          "x_compute": 0.20000000000000004,
+          "x_institutional_capacity": 0.30000000000000004,
+          "x_novelty_agency": 0.15000000000000002,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.10000000000000002
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "zero",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 50
+    },
+    {
+      "actual": {
+        "c_protective": 0.44000000000000006,
+        "c_suppressive": 0.22000000000000003,
+        "extra": {
+          "case": 17
+        },
+        "x_bio_welfare": 0.14992499999999997,
+        "x_compute": 0.24987499999999996,
+        "x_institutional_capacity": 0.10044999999999998,
+        "x_novelty_agency": 0.29984999999999995,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.19989999999999997
+      },
+      "arm": "A1-low",
+      "case": 17,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.44000000000000006,
+        "c_suppressive": 0.22000000000000003,
+        "extra": {
+          "case": 17
+        },
+        "x_bio_welfare": 0.14992499999999997,
+        "x_compute": 0.24987499999999996,
+        "x_institutional_capacity": 0.10044999999999998,
+        "x_novelty_agency": 0.29984999999999995,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.19989999999999997
+      },
+      "input": {
+        "c_protective": 0.44000000000000006,
+        "c_suppressive": 0.22000000000000003,
+        "extra": {
+          "case": 17
+        },
+        "x_bio_welfare": 0.149925,
+        "x_compute": 0.249875,
+        "x_institutional_capacity": 0.09995000000000001,
+        "x_novelty_agency": 0.29985,
+        "x_resilience": 0.0005,
+        "x_transfer_comprehension": 0.19990000000000002
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0005,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.44000000000000006,
+          "c_suppressive": 0.22000000000000003,
+          "extra": {
+            "case": 17
+          },
+          "x_bio_welfare": 0.149925,
+          "x_compute": 0.249875,
+          "x_institutional_capacity": 0.09995000000000001,
+          "x_novelty_agency": 0.29985,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.19990000000000002
+        },
+        "49": {
+          "c_protective": 0.44000000000000006,
+          "c_suppressive": 0.22000000000000003,
+          "extra": {
+            "case": 17
+          },
+          "x_bio_welfare": 0.149925,
+          "x_compute": 0.249875,
+          "x_institutional_capacity": 0.09995000000000001,
+          "x_novelty_agency": 0.29985,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.19990000000000002
+        },
+        "9": {
+          "c_protective": 0.44000000000000006,
+          "c_suppressive": 0.22000000000000003,
+          "extra": {
+            "case": 17
+          },
+          "x_bio_welfare": 0.149925,
+          "x_compute": 0.249875,
+          "x_institutional_capacity": 0.09995000000000001,
+          "x_novelty_agency": 0.29985,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.19990000000000002
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "below",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 0.9999999999999998,
+      "step": 53
+    },
+    {
+      "actual": {
+        "c_protective": 0.45999999999999996,
+        "c_suppressive": 0.22999999999999998,
+        "extra": {
+          "case": 18
+        },
+        "x_bio_welfare": 0.29400000000000004,
+        "x_compute": 0.14700000000000002,
+        "x_institutional_capacity": 0.19800000000000004,
+        "x_novelty_agency": 0.09800000000000002,
+        "x_resilience": 0.018000000000000002,
+        "x_transfer_comprehension": 0.24500000000000002
+      },
+      "arm": "A1-low",
+      "case": 18,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.45999999999999996,
+        "c_suppressive": 0.22999999999999998,
+        "extra": {
+          "case": 18
+        },
+        "x_bio_welfare": 0.29400000000000004,
+        "x_compute": 0.14700000000000002,
+        "x_institutional_capacity": 0.19800000000000004,
+        "x_novelty_agency": 0.09800000000000002,
+        "x_resilience": 0.018000000000000002,
+        "x_transfer_comprehension": 0.24500000000000002
+      },
+      "input": {
+        "c_protective": 0.45999999999999996,
+        "c_suppressive": 0.22999999999999998,
+        "extra": {
+          "case": 18
+        },
+        "x_bio_welfare": 0.29400000000000004,
+        "x_compute": 0.14700000000000002,
+        "x_institutional_capacity": 0.19600000000000004,
+        "x_novelty_agency": 0.09800000000000002,
+        "x_resilience": 0.020000000000000004,
+        "x_transfer_comprehension": 0.24500000000000002
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.002,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.45999999999999996,
+          "c_suppressive": 0.22999999999999998,
+          "extra": {
+            "case": 18
+          },
+          "x_bio_welfare": 0.29400000000000004,
+          "x_compute": 0.14700000000000002,
+          "x_institutional_capacity": 0.19600000000000004,
+          "x_novelty_agency": 0.09800000000000002,
+          "x_resilience": 0.020000000000000004,
+          "x_transfer_comprehension": 0.24500000000000002
+        },
+        "49": {
+          "c_protective": 0.45999999999999996,
+          "c_suppressive": 0.22999999999999998,
+          "extra": {
+            "case": 18
+          },
+          "x_bio_welfare": 0.29400000000000004,
+          "x_compute": 0.14700000000000002,
+          "x_institutional_capacity": 0.19600000000000004,
+          "x_novelty_agency": 0.09800000000000002,
+          "x_resilience": 0.020000000000000004,
+          "x_transfer_comprehension": 0.24500000000000002
+        },
+        "9": {
+          "c_protective": 0.45999999999999996,
+          "c_suppressive": 0.22999999999999998,
+          "extra": {
+            "case": 18
+          },
+          "x_bio_welfare": 0.29400000000000004,
+          "x_compute": 0.14700000000000002,
+          "x_institutional_capacity": 0.19600000000000004,
+          "x_novelty_agency": 0.09800000000000002,
+          "x_resilience": 0.020000000000000004,
+          "x_transfer_comprehension": 0.24500000000000002
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0000000000000002,
+      "step": 149
+    },
+    {
+      "actual": {
+        "c_protective": 0.48,
+        "c_suppressive": 0.24,
+        "extra": {
+          "case": 19
+        },
+        "x_bio_welfare": 0.0994,
+        "x_compute": 0.29819999999999997,
+        "x_institutional_capacity": 0.2505,
+        "x_novelty_agency": 0.1988,
+        "x_resilience": 0.004,
+        "x_transfer_comprehension": 0.14909999999999998
+      },
+      "arm": "A1-low",
+      "case": 19,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.48,
+        "c_suppressive": 0.24,
+        "extra": {
+          "case": 19
+        },
+        "x_bio_welfare": 0.0994,
+        "x_compute": 0.29819999999999997,
+        "x_institutional_capacity": 0.2505,
+        "x_novelty_agency": 0.1988,
+        "x_resilience": 0.004,
+        "x_transfer_comprehension": 0.14909999999999998
+      },
+      "input": {
+        "c_protective": 0.48,
+        "c_suppressive": 0.24,
+        "extra": {
+          "case": 19
+        },
+        "x_bio_welfare": 0.0994,
+        "x_compute": 0.29819999999999997,
+        "x_institutional_capacity": 0.2485,
+        "x_novelty_agency": 0.1988,
+        "x_resilience": 0.006,
+        "x_transfer_comprehension": 0.14909999999999998
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.002,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.48,
+          "c_suppressive": 0.24,
+          "extra": {
+            "case": 19
+          },
+          "x_bio_welfare": 0.0994,
+          "x_compute": 0.29819999999999997,
+          "x_institutional_capacity": 0.2485,
+          "x_novelty_agency": 0.1988,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.14909999999999998
+        },
+        "49": {
+          "c_protective": 0.48,
+          "c_suppressive": 0.24,
+          "extra": {
+            "case": 19
+          },
+          "x_bio_welfare": 0.0994,
+          "x_compute": 0.29819999999999997,
+          "x_institutional_capacity": 0.2485,
+          "x_novelty_agency": 0.1988,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.14909999999999998
+        },
+        "9": {
+          "c_protective": 0.48,
+          "c_suppressive": 0.24,
+          "extra": {
+            "case": 19
+          },
+          "x_bio_welfare": 0.0994,
+          "x_compute": 0.29819999999999997,
+          "x_institutional_capacity": 0.2485,
+          "x_novelty_agency": 0.1988,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.14909999999999998
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 299
+    },
+    {
+      "actual": {
+        "c_protective": 0.5,
+        "c_suppressive": 0.25,
+        "extra": {
+          "case": 20
+        },
+        "x_bio_welfare": 0.2,
+        "x_compute": 0.1,
+        "x_institutional_capacity": 0.15,
+        "x_novelty_agency": 0.25,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.3
+      },
+      "arm": "A1-low",
+      "case": 20,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.5,
+        "c_suppressive": 0.25,
+        "extra": {
+          "case": 20
+        },
+        "x_bio_welfare": 0.2,
+        "x_compute": 0.1,
+        "x_institutional_capacity": 0.15,
+        "x_novelty_agency": 0.25,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.3
+      },
+      "input": {
+        "c_protective": 0.5,
+        "c_suppressive": 0.25,
+        "extra": {
+          "case": 20
+        },
+        "x_bio_welfare": 0.2,
+        "x_compute": 0.1,
+        "x_institutional_capacity": 0.15,
+        "x_novelty_agency": 0.25,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.3
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.5,
+          "c_suppressive": 0.25,
+          "extra": {
+            "case": 20
+          },
+          "x_bio_welfare": 0.2,
+          "x_compute": 0.1,
+          "x_institutional_capacity": 0.15,
+          "x_novelty_agency": 0.25,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.3
+        },
+        "49": {
+          "c_protective": 0.5,
+          "c_suppressive": 0.25,
+          "extra": {
+            "case": 20
+          },
+          "x_bio_welfare": 0.2,
+          "x_compute": 0.1,
+          "x_institutional_capacity": 0.15,
+          "x_novelty_agency": 0.25,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.3
+        },
+        "9": {
+          "c_protective": 0.5,
+          "c_suppressive": 0.25,
+          "extra": {
+            "case": 20
+          },
+          "x_bio_welfare": 0.2,
+          "x_compute": 0.1,
+          "x_institutional_capacity": 0.15,
+          "x_novelty_agency": 0.25,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.3
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "zero",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 50
+    },
+    {
+      "actual": {
+        "c_protective": 0.52,
+        "c_suppressive": 0.26,
+        "extra": {
+          "case": 21
+        },
+        "x_bio_welfare": 0.249875,
+        "x_compute": 0.19990000000000002,
+        "x_institutional_capacity": 0.30035,
+        "x_novelty_agency": 0.149925,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.09995000000000001
+      },
+      "arm": "A1-low",
+      "case": 21,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.52,
+        "c_suppressive": 0.26,
+        "extra": {
+          "case": 21
+        },
+        "x_bio_welfare": 0.249875,
+        "x_compute": 0.19990000000000002,
+        "x_institutional_capacity": 0.30035,
+        "x_novelty_agency": 0.149925,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.09995000000000001
+      },
+      "input": {
+        "c_protective": 0.52,
+        "c_suppressive": 0.26,
+        "extra": {
+          "case": 21
+        },
+        "x_bio_welfare": 0.249875,
+        "x_compute": 0.19990000000000002,
+        "x_institutional_capacity": 0.29985,
+        "x_novelty_agency": 0.149925,
+        "x_resilience": 0.0005,
+        "x_transfer_comprehension": 0.09995000000000001
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0005,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.52,
+          "c_suppressive": 0.26,
+          "extra": {
+            "case": 21
+          },
+          "x_bio_welfare": 0.249875,
+          "x_compute": 0.19990000000000002,
+          "x_institutional_capacity": 0.29985,
+          "x_novelty_agency": 0.149925,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.09995000000000001
+        },
+        "49": {
+          "c_protective": 0.52,
+          "c_suppressive": 0.26,
+          "extra": {
+            "case": 21
+          },
+          "x_bio_welfare": 0.249875,
+          "x_compute": 0.19990000000000002,
+          "x_institutional_capacity": 0.29985,
+          "x_novelty_agency": 0.149925,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.09995000000000001
+        },
+        "9": {
+          "c_protective": 0.52,
+          "c_suppressive": 0.26,
+          "extra": {
+            "case": 21
+          },
+          "x_bio_welfare": 0.249875,
+          "x_compute": 0.19990000000000002,
+          "x_institutional_capacity": 0.29985,
+          "x_novelty_agency": 0.149925,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.09995000000000001
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "below",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 53
+    },
+    {
+      "actual": {
+        "c_protective": 0.54,
+        "c_suppressive": 0.27,
+        "extra": {
+          "case": 22
+        },
+        "x_bio_welfare": 0.147,
+        "x_compute": 0.245,
+        "x_institutional_capacity": 0.1,
+        "x_novelty_agency": 0.294,
+        "x_resilience": 0.018000000000000002,
+        "x_transfer_comprehension": 0.196
+      },
+      "arm": "A1-low",
+      "case": 22,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.54,
+        "c_suppressive": 0.27,
+        "extra": {
+          "case": 22
+        },
+        "x_bio_welfare": 0.147,
+        "x_compute": 0.245,
+        "x_institutional_capacity": 0.1,
+        "x_novelty_agency": 0.294,
+        "x_resilience": 0.018000000000000002,
+        "x_transfer_comprehension": 0.196
+      },
+      "input": {
+        "c_protective": 0.54,
+        "c_suppressive": 0.27,
+        "extra": {
+          "case": 22
+        },
+        "x_bio_welfare": 0.147,
+        "x_compute": 0.245,
+        "x_institutional_capacity": 0.098,
+        "x_novelty_agency": 0.294,
+        "x_resilience": 0.02,
+        "x_transfer_comprehension": 0.196
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.002,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.54,
+          "c_suppressive": 0.27,
+          "extra": {
+            "case": 22
+          },
+          "x_bio_welfare": 0.147,
+          "x_compute": 0.245,
+          "x_institutional_capacity": 0.098,
+          "x_novelty_agency": 0.294,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.196
+        },
+        "49": {
+          "c_protective": 0.54,
+          "c_suppressive": 0.27,
+          "extra": {
+            "case": 22
+          },
+          "x_bio_welfare": 0.147,
+          "x_compute": 0.245,
+          "x_institutional_capacity": 0.098,
+          "x_novelty_agency": 0.294,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.196
+        },
+        "9": {
+          "c_protective": 0.54,
+          "c_suppressive": 0.27,
+          "extra": {
+            "case": 22
+          },
+          "x_bio_welfare": 0.147,
+          "x_compute": 0.245,
+          "x_institutional_capacity": 0.098,
+          "x_novelty_agency": 0.294,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.196
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 149
+    },
+    {
+      "actual": {
+        "c_protective": 0.56,
+        "c_suppressive": 0.28,
+        "extra": {
+          "case": 23
+        },
+        "x_bio_welfare": 0.29819999999999997,
+        "x_compute": 0.14909999999999998,
+        "x_institutional_capacity": 0.2008,
+        "x_novelty_agency": 0.0994,
+        "x_resilience": 0.004,
+        "x_transfer_comprehension": 0.2485
+      },
+      "arm": "A1-low",
+      "case": 23,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.56,
+        "c_suppressive": 0.28,
+        "extra": {
+          "case": 23
+        },
+        "x_bio_welfare": 0.29819999999999997,
+        "x_compute": 0.14909999999999998,
+        "x_institutional_capacity": 0.2008,
+        "x_novelty_agency": 0.0994,
+        "x_resilience": 0.004,
+        "x_transfer_comprehension": 0.2485
+      },
+      "input": {
+        "c_protective": 0.56,
+        "c_suppressive": 0.28,
+        "extra": {
+          "case": 23
+        },
+        "x_bio_welfare": 0.29819999999999997,
+        "x_compute": 0.14909999999999998,
+        "x_institutional_capacity": 0.1988,
+        "x_novelty_agency": 0.0994,
+        "x_resilience": 0.006,
+        "x_transfer_comprehension": 0.2485
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.002,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.56,
+          "c_suppressive": 0.28,
+          "extra": {
+            "case": 23
+          },
+          "x_bio_welfare": 0.29819999999999997,
+          "x_compute": 0.14909999999999998,
+          "x_institutional_capacity": 0.1988,
+          "x_novelty_agency": 0.0994,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.2485
+        },
+        "49": {
+          "c_protective": 0.56,
+          "c_suppressive": 0.28,
+          "extra": {
+            "case": 23
+          },
+          "x_bio_welfare": 0.29819999999999997,
+          "x_compute": 0.14909999999999998,
+          "x_institutional_capacity": 0.1988,
+          "x_novelty_agency": 0.0994,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.2485
+        },
+        "9": {
+          "c_protective": 0.56,
+          "c_suppressive": 0.28,
+          "extra": {
+            "case": 23
+          },
+          "x_bio_welfare": 0.29819999999999997,
+          "x_compute": 0.14909999999999998,
+          "x_institutional_capacity": 0.1988,
+          "x_novelty_agency": 0.0994,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.2485
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.002,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 299
+    },
+    {
+      "actual": {
+        "c_protective": 0.1,
+        "c_suppressive": 0.05,
+        "extra": {
+          "case": 0
+        },
+        "x_bio_welfare": 0.2,
+        "x_compute": 0.1,
+        "x_institutional_capacity": 0.15,
+        "x_novelty_agency": 0.25,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.3
+      },
+      "arm": "A1-high",
+      "case": 0,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.1,
+        "c_suppressive": 0.05,
+        "extra": {
+          "case": 0
+        },
+        "x_bio_welfare": 0.2,
+        "x_compute": 0.1,
+        "x_institutional_capacity": 0.15,
+        "x_novelty_agency": 0.25,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.3
+      },
+      "input": {
+        "c_protective": 0.1,
+        "c_suppressive": 0.05,
+        "extra": {
+          "case": 0
+        },
+        "x_bio_welfare": 0.2,
+        "x_compute": 0.1,
+        "x_institutional_capacity": 0.15,
+        "x_novelty_agency": 0.25,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.3
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.1,
+          "c_suppressive": 0.05,
+          "extra": {
+            "case": 0
+          },
+          "x_bio_welfare": 0.2,
+          "x_compute": 0.1,
+          "x_institutional_capacity": 0.15,
+          "x_novelty_agency": 0.25,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.3
+        },
+        "49": {
+          "c_protective": 0.1,
+          "c_suppressive": 0.05,
+          "extra": {
+            "case": 0
+          },
+          "x_bio_welfare": 0.2,
+          "x_compute": 0.1,
+          "x_institutional_capacity": 0.15,
+          "x_novelty_agency": 0.25,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.3
+        },
+        "9": {
+          "c_protective": 0.1,
+          "c_suppressive": 0.05,
+          "extra": {
+            "case": 0
+          },
+          "x_bio_welfare": 0.2,
+          "x_compute": 0.1,
+          "x_institutional_capacity": 0.15,
+          "x_novelty_agency": 0.25,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.3
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "zero",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 50
+    },
+    {
+      "actual": {
+        "c_protective": 0.12000000000000001,
+        "c_suppressive": 0.060000000000000005,
+        "extra": {
+          "case": 1
+        },
+        "x_bio_welfare": 0.249875,
+        "x_compute": 0.19990000000000002,
+        "x_institutional_capacity": 0.30035,
+        "x_novelty_agency": 0.149925,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.09995000000000001
+      },
+      "arm": "A1-high",
+      "case": 1,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.12000000000000001,
+        "c_suppressive": 0.060000000000000005,
+        "extra": {
+          "case": 1
+        },
+        "x_bio_welfare": 0.249875,
+        "x_compute": 0.19990000000000002,
+        "x_institutional_capacity": 0.30035,
+        "x_novelty_agency": 0.149925,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.09995000000000001
+      },
+      "input": {
+        "c_protective": 0.12000000000000001,
+        "c_suppressive": 0.060000000000000005,
+        "extra": {
+          "case": 1
+        },
+        "x_bio_welfare": 0.249875,
+        "x_compute": 0.19990000000000002,
+        "x_institutional_capacity": 0.29985,
+        "x_novelty_agency": 0.149925,
+        "x_resilience": 0.0005,
+        "x_transfer_comprehension": 0.09995000000000001
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0005,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.12000000000000001,
+          "c_suppressive": 0.060000000000000005,
+          "extra": {
+            "case": 1
+          },
+          "x_bio_welfare": 0.249875,
+          "x_compute": 0.19990000000000002,
+          "x_institutional_capacity": 0.29985,
+          "x_novelty_agency": 0.149925,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.09995000000000001
+        },
+        "49": {
+          "c_protective": 0.12000000000000001,
+          "c_suppressive": 0.060000000000000005,
+          "extra": {
+            "case": 1
+          },
+          "x_bio_welfare": 0.249875,
+          "x_compute": 0.19990000000000002,
+          "x_institutional_capacity": 0.29985,
+          "x_novelty_agency": 0.149925,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.09995000000000001
+        },
+        "9": {
+          "c_protective": 0.12000000000000001,
+          "c_suppressive": 0.060000000000000005,
+          "extra": {
+            "case": 1
+          },
+          "x_bio_welfare": 0.249875,
+          "x_compute": 0.19990000000000002,
+          "x_institutional_capacity": 0.29985,
+          "x_novelty_agency": 0.149925,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.09995000000000001
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "below",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 53
+    },
+    {
+      "actual": {
+        "c_protective": 0.14,
+        "c_suppressive": 0.07,
+        "extra": {
+          "case": 2
+        },
+        "x_bio_welfare": 0.147,
+        "x_compute": 0.245,
+        "x_institutional_capacity": 0.10400000000000001,
+        "x_novelty_agency": 0.294,
+        "x_resilience": 0.014,
+        "x_transfer_comprehension": 0.196
+      },
+      "arm": "A1-high",
+      "case": 2,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.14,
+        "c_suppressive": 0.07,
+        "extra": {
+          "case": 2
+        },
+        "x_bio_welfare": 0.147,
+        "x_compute": 0.245,
+        "x_institutional_capacity": 0.10400000000000001,
+        "x_novelty_agency": 0.294,
+        "x_resilience": 0.014,
+        "x_transfer_comprehension": 0.196
+      },
+      "input": {
+        "c_protective": 0.14,
+        "c_suppressive": 0.07,
+        "extra": {
+          "case": 2
+        },
+        "x_bio_welfare": 0.147,
+        "x_compute": 0.245,
+        "x_institutional_capacity": 0.098,
+        "x_novelty_agency": 0.294,
+        "x_resilience": 0.02,
+        "x_transfer_comprehension": 0.196
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.006,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.14,
+          "c_suppressive": 0.07,
+          "extra": {
+            "case": 2
+          },
+          "x_bio_welfare": 0.147,
+          "x_compute": 0.245,
+          "x_institutional_capacity": 0.098,
+          "x_novelty_agency": 0.294,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.196
+        },
+        "49": {
+          "c_protective": 0.14,
+          "c_suppressive": 0.07,
+          "extra": {
+            "case": 2
+          },
+          "x_bio_welfare": 0.147,
+          "x_compute": 0.245,
+          "x_institutional_capacity": 0.098,
+          "x_novelty_agency": 0.294,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.196
+        },
+        "9": {
+          "c_protective": 0.14,
+          "c_suppressive": 0.07,
+          "extra": {
+            "case": 2
+          },
+          "x_bio_welfare": 0.147,
+          "x_compute": 0.245,
+          "x_institutional_capacity": 0.098,
+          "x_novelty_agency": 0.294,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.196
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 149
+    },
+    {
+      "actual": {
+        "c_protective": 0.16,
+        "c_suppressive": 0.08,
+        "extra": {
+          "case": 3
+        },
+        "x_bio_welfare": 0.29819999999999997,
+        "x_compute": 0.14909999999999998,
+        "x_institutional_capacity": 0.2048,
+        "x_novelty_agency": 0.0994,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.2485
+      },
+      "arm": "A1-high",
+      "case": 3,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.16,
+        "c_suppressive": 0.08,
+        "extra": {
+          "case": 3
+        },
+        "x_bio_welfare": 0.29819999999999997,
+        "x_compute": 0.14909999999999998,
+        "x_institutional_capacity": 0.2048,
+        "x_novelty_agency": 0.0994,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.2485
+      },
+      "input": {
+        "c_protective": 0.16,
+        "c_suppressive": 0.08,
+        "extra": {
+          "case": 3
+        },
+        "x_bio_welfare": 0.29819999999999997,
+        "x_compute": 0.14909999999999998,
+        "x_institutional_capacity": 0.1988,
+        "x_novelty_agency": 0.0994,
+        "x_resilience": 0.006,
+        "x_transfer_comprehension": 0.2485
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.006,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.16,
+          "c_suppressive": 0.08,
+          "extra": {
+            "case": 3
+          },
+          "x_bio_welfare": 0.29819999999999997,
+          "x_compute": 0.14909999999999998,
+          "x_institutional_capacity": 0.1988,
+          "x_novelty_agency": 0.0994,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.2485
+        },
+        "49": {
+          "c_protective": 0.16,
+          "c_suppressive": 0.08,
+          "extra": {
+            "case": 3
+          },
+          "x_bio_welfare": 0.29819999999999997,
+          "x_compute": 0.14909999999999998,
+          "x_institutional_capacity": 0.1988,
+          "x_novelty_agency": 0.0994,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.2485
+        },
+        "9": {
+          "c_protective": 0.16,
+          "c_suppressive": 0.08,
+          "extra": {
+            "case": 3
+          },
+          "x_bio_welfare": 0.29819999999999997,
+          "x_compute": 0.14909999999999998,
+          "x_institutional_capacity": 0.1988,
+          "x_novelty_agency": 0.0994,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.2485
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 299
+    },
+    {
+      "actual": {
+        "c_protective": 0.18,
+        "c_suppressive": 0.09,
+        "extra": {
+          "case": 4
+        },
+        "x_bio_welfare": 0.1,
+        "x_compute": 0.3,
+        "x_institutional_capacity": 0.25,
+        "x_novelty_agency": 0.2,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.15
+      },
+      "arm": "A1-high",
+      "case": 4,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.18,
+        "c_suppressive": 0.09,
+        "extra": {
+          "case": 4
+        },
+        "x_bio_welfare": 0.1,
+        "x_compute": 0.3,
+        "x_institutional_capacity": 0.25,
+        "x_novelty_agency": 0.2,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.15
+      },
+      "input": {
+        "c_protective": 0.18,
+        "c_suppressive": 0.09,
+        "extra": {
+          "case": 4
+        },
+        "x_bio_welfare": 0.1,
+        "x_compute": 0.3,
+        "x_institutional_capacity": 0.25,
+        "x_novelty_agency": 0.2,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.15
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.18,
+          "c_suppressive": 0.09,
+          "extra": {
+            "case": 4
+          },
+          "x_bio_welfare": 0.1,
+          "x_compute": 0.3,
+          "x_institutional_capacity": 0.25,
+          "x_novelty_agency": 0.2,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.15
+        },
+        "49": {
+          "c_protective": 0.18,
+          "c_suppressive": 0.09,
+          "extra": {
+            "case": 4
+          },
+          "x_bio_welfare": 0.1,
+          "x_compute": 0.3,
+          "x_institutional_capacity": 0.25,
+          "x_novelty_agency": 0.2,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.15
+        },
+        "9": {
+          "c_protective": 0.18,
+          "c_suppressive": 0.09,
+          "extra": {
+            "case": 4
+          },
+          "x_bio_welfare": 0.1,
+          "x_compute": 0.3,
+          "x_institutional_capacity": 0.25,
+          "x_novelty_agency": 0.2,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.15
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "zero",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 50
+    },
+    {
+      "actual": {
+        "c_protective": 0.2,
+        "c_suppressive": 0.1,
+        "extra": {
+          "case": 5
+        },
+        "x_bio_welfare": 0.19990000000000002,
+        "x_compute": 0.09995000000000001,
+        "x_institutional_capacity": 0.150425,
+        "x_novelty_agency": 0.249875,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.29985
+      },
+      "arm": "A1-high",
+      "case": 5,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.2,
+        "c_suppressive": 0.1,
+        "extra": {
+          "case": 5
+        },
+        "x_bio_welfare": 0.19990000000000002,
+        "x_compute": 0.09995000000000001,
+        "x_institutional_capacity": 0.150425,
+        "x_novelty_agency": 0.249875,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.29985
+      },
+      "input": {
+        "c_protective": 0.2,
+        "c_suppressive": 0.1,
+        "extra": {
+          "case": 5
+        },
+        "x_bio_welfare": 0.19990000000000002,
+        "x_compute": 0.09995000000000001,
+        "x_institutional_capacity": 0.149925,
+        "x_novelty_agency": 0.249875,
+        "x_resilience": 0.0005,
+        "x_transfer_comprehension": 0.29985
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0005,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.2,
+          "c_suppressive": 0.1,
+          "extra": {
+            "case": 5
+          },
+          "x_bio_welfare": 0.19990000000000002,
+          "x_compute": 0.09995000000000001,
+          "x_institutional_capacity": 0.149925,
+          "x_novelty_agency": 0.249875,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.29985
+        },
+        "49": {
+          "c_protective": 0.2,
+          "c_suppressive": 0.1,
+          "extra": {
+            "case": 5
+          },
+          "x_bio_welfare": 0.19990000000000002,
+          "x_compute": 0.09995000000000001,
+          "x_institutional_capacity": 0.149925,
+          "x_novelty_agency": 0.249875,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.29985
+        },
+        "9": {
+          "c_protective": 0.2,
+          "c_suppressive": 0.1,
+          "extra": {
+            "case": 5
+          },
+          "x_bio_welfare": 0.19990000000000002,
+          "x_compute": 0.09995000000000001,
+          "x_institutional_capacity": 0.149925,
+          "x_novelty_agency": 0.249875,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.29985
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "below",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 53
+    },
+    {
+      "actual": {
+        "c_protective": 0.22,
+        "c_suppressive": 0.11,
+        "extra": {
+          "case": 6
+        },
+        "x_bio_welfare": 0.24500000000000002,
+        "x_compute": 0.19600000000000004,
+        "x_institutional_capacity": 0.30000000000000004,
+        "x_novelty_agency": 0.14700000000000002,
+        "x_resilience": 0.014000000000000004,
+        "x_transfer_comprehension": 0.09800000000000002
+      },
+      "arm": "A1-high",
+      "case": 6,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.22,
+        "c_suppressive": 0.11,
+        "extra": {
+          "case": 6
+        },
+        "x_bio_welfare": 0.24500000000000002,
+        "x_compute": 0.19600000000000004,
+        "x_institutional_capacity": 0.30000000000000004,
+        "x_novelty_agency": 0.14700000000000002,
+        "x_resilience": 0.014000000000000004,
+        "x_transfer_comprehension": 0.09800000000000002
+      },
+      "input": {
+        "c_protective": 0.22,
+        "c_suppressive": 0.11,
+        "extra": {
+          "case": 6
+        },
+        "x_bio_welfare": 0.24500000000000002,
+        "x_compute": 0.19600000000000004,
+        "x_institutional_capacity": 0.29400000000000004,
+        "x_novelty_agency": 0.14700000000000002,
+        "x_resilience": 0.020000000000000004,
+        "x_transfer_comprehension": 0.09800000000000002
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.006,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.22,
+          "c_suppressive": 0.11,
+          "extra": {
+            "case": 6
+          },
+          "x_bio_welfare": 0.24500000000000002,
+          "x_compute": 0.19600000000000004,
+          "x_institutional_capacity": 0.29400000000000004,
+          "x_novelty_agency": 0.14700000000000002,
+          "x_resilience": 0.020000000000000004,
+          "x_transfer_comprehension": 0.09800000000000002
+        },
+        "49": {
+          "c_protective": 0.22,
+          "c_suppressive": 0.11,
+          "extra": {
+            "case": 6
+          },
+          "x_bio_welfare": 0.24500000000000002,
+          "x_compute": 0.19600000000000004,
+          "x_institutional_capacity": 0.29400000000000004,
+          "x_novelty_agency": 0.14700000000000002,
+          "x_resilience": 0.020000000000000004,
+          "x_transfer_comprehension": 0.09800000000000002
+        },
+        "9": {
+          "c_protective": 0.22,
+          "c_suppressive": 0.11,
+          "extra": {
+            "case": 6
+          },
+          "x_bio_welfare": 0.24500000000000002,
+          "x_compute": 0.19600000000000004,
+          "x_institutional_capacity": 0.29400000000000004,
+          "x_novelty_agency": 0.14700000000000002,
+          "x_resilience": 0.020000000000000004,
+          "x_transfer_comprehension": 0.09800000000000002
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0000000000000002,
+      "step": 149
+    },
+    {
+      "actual": {
+        "c_protective": 0.24000000000000002,
+        "c_suppressive": 0.12000000000000001,
+        "extra": {
+          "case": 7
+        },
+        "x_bio_welfare": 0.14909999999999998,
+        "x_compute": 0.2485,
+        "x_institutional_capacity": 0.10540000000000001,
+        "x_novelty_agency": 0.29819999999999997,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.1988
+      },
+      "arm": "A1-high",
+      "case": 7,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.24000000000000002,
+        "c_suppressive": 0.12000000000000001,
+        "extra": {
+          "case": 7
+        },
+        "x_bio_welfare": 0.14909999999999998,
+        "x_compute": 0.2485,
+        "x_institutional_capacity": 0.10540000000000001,
+        "x_novelty_agency": 0.29819999999999997,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.1988
+      },
+      "input": {
+        "c_protective": 0.24000000000000002,
+        "c_suppressive": 0.12000000000000001,
+        "extra": {
+          "case": 7
+        },
+        "x_bio_welfare": 0.14909999999999998,
+        "x_compute": 0.2485,
+        "x_institutional_capacity": 0.0994,
+        "x_novelty_agency": 0.29819999999999997,
+        "x_resilience": 0.006,
+        "x_transfer_comprehension": 0.1988
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.006,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.24000000000000002,
+          "c_suppressive": 0.12000000000000001,
+          "extra": {
+            "case": 7
+          },
+          "x_bio_welfare": 0.14909999999999998,
+          "x_compute": 0.2485,
+          "x_institutional_capacity": 0.0994,
+          "x_novelty_agency": 0.29819999999999997,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.1988
+        },
+        "49": {
+          "c_protective": 0.24000000000000002,
+          "c_suppressive": 0.12000000000000001,
+          "extra": {
+            "case": 7
+          },
+          "x_bio_welfare": 0.14909999999999998,
+          "x_compute": 0.2485,
+          "x_institutional_capacity": 0.0994,
+          "x_novelty_agency": 0.29819999999999997,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.1988
+        },
+        "9": {
+          "c_protective": 0.24000000000000002,
+          "c_suppressive": 0.12000000000000001,
+          "extra": {
+            "case": 7
+          },
+          "x_bio_welfare": 0.14909999999999998,
+          "x_compute": 0.2485,
+          "x_institutional_capacity": 0.0994,
+          "x_novelty_agency": 0.29819999999999997,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.1988
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 299
+    },
+    {
+      "actual": {
+        "c_protective": 0.26,
+        "c_suppressive": 0.13,
+        "extra": {
+          "case": 8
+        },
+        "x_bio_welfare": 0.3,
+        "x_compute": 0.15,
+        "x_institutional_capacity": 0.2,
+        "x_novelty_agency": 0.1,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.25
+      },
+      "arm": "A1-high",
+      "case": 8,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.26,
+        "c_suppressive": 0.13,
+        "extra": {
+          "case": 8
+        },
+        "x_bio_welfare": 0.3,
+        "x_compute": 0.15,
+        "x_institutional_capacity": 0.2,
+        "x_novelty_agency": 0.1,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.25
+      },
+      "input": {
+        "c_protective": 0.26,
+        "c_suppressive": 0.13,
+        "extra": {
+          "case": 8
+        },
+        "x_bio_welfare": 0.3,
+        "x_compute": 0.15,
+        "x_institutional_capacity": 0.2,
+        "x_novelty_agency": 0.1,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.25
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.26,
+          "c_suppressive": 0.13,
+          "extra": {
+            "case": 8
+          },
+          "x_bio_welfare": 0.3,
+          "x_compute": 0.15,
+          "x_institutional_capacity": 0.2,
+          "x_novelty_agency": 0.1,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.25
+        },
+        "49": {
+          "c_protective": 0.26,
+          "c_suppressive": 0.13,
+          "extra": {
+            "case": 8
+          },
+          "x_bio_welfare": 0.3,
+          "x_compute": 0.15,
+          "x_institutional_capacity": 0.2,
+          "x_novelty_agency": 0.1,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.25
+        },
+        "9": {
+          "c_protective": 0.26,
+          "c_suppressive": 0.13,
+          "extra": {
+            "case": 8
+          },
+          "x_bio_welfare": 0.3,
+          "x_compute": 0.15,
+          "x_institutional_capacity": 0.2,
+          "x_novelty_agency": 0.1,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.25
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "zero",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 50
+    },
+    {
+      "actual": {
+        "c_protective": 0.28,
+        "c_suppressive": 0.14,
+        "extra": {
+          "case": 9
+        },
+        "x_bio_welfare": 0.09995,
+        "x_compute": 0.29985,
+        "x_institutional_capacity": 0.250375,
+        "x_novelty_agency": 0.1999,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.149925
+      },
+      "arm": "A1-high",
+      "case": 9,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.28,
+        "c_suppressive": 0.14,
+        "extra": {
+          "case": 9
+        },
+        "x_bio_welfare": 0.09995,
+        "x_compute": 0.29985,
+        "x_institutional_capacity": 0.250375,
+        "x_novelty_agency": 0.1999,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.149925
+      },
+      "input": {
+        "c_protective": 0.28,
+        "c_suppressive": 0.14,
+        "extra": {
+          "case": 9
+        },
+        "x_bio_welfare": 0.09994999999999998,
+        "x_compute": 0.29984999999999995,
+        "x_institutional_capacity": 0.24987499999999996,
+        "x_novelty_agency": 0.19989999999999997,
+        "x_resilience": 0.0004999999999999999,
+        "x_transfer_comprehension": 0.14992499999999997
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0004999999999999999,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.28,
+          "c_suppressive": 0.14,
+          "extra": {
+            "case": 9
+          },
+          "x_bio_welfare": 0.09994999999999998,
+          "x_compute": 0.29984999999999995,
+          "x_institutional_capacity": 0.24987499999999996,
+          "x_novelty_agency": 0.19989999999999997,
+          "x_resilience": 0.0004999999999999999,
+          "x_transfer_comprehension": 0.14992499999999997
+        },
+        "49": {
+          "c_protective": 0.28,
+          "c_suppressive": 0.14,
+          "extra": {
+            "case": 9
+          },
+          "x_bio_welfare": 0.09994999999999998,
+          "x_compute": 0.29984999999999995,
+          "x_institutional_capacity": 0.24987499999999996,
+          "x_novelty_agency": 0.19989999999999997,
+          "x_resilience": 0.0004999999999999999,
+          "x_transfer_comprehension": 0.14992499999999997
+        },
+        "9": {
+          "c_protective": 0.28,
+          "c_suppressive": 0.14,
+          "extra": {
+            "case": 9
+          },
+          "x_bio_welfare": 0.09994999999999998,
+          "x_compute": 0.29984999999999995,
+          "x_institutional_capacity": 0.24987499999999996,
+          "x_novelty_agency": 0.19989999999999997,
+          "x_resilience": 0.0004999999999999999,
+          "x_transfer_comprehension": 0.14992499999999997
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "below",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 53
+    },
+    {
+      "actual": {
+        "c_protective": 0.30000000000000004,
+        "c_suppressive": 0.15000000000000002,
+        "extra": {
+          "case": 10
+        },
+        "x_bio_welfare": 0.196,
+        "x_compute": 0.098,
+        "x_institutional_capacity": 0.153,
+        "x_novelty_agency": 0.245,
+        "x_resilience": 0.014,
+        "x_transfer_comprehension": 0.294
+      },
+      "arm": "A1-high",
+      "case": 10,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.30000000000000004,
+        "c_suppressive": 0.15000000000000002,
+        "extra": {
+          "case": 10
+        },
+        "x_bio_welfare": 0.196,
+        "x_compute": 0.098,
+        "x_institutional_capacity": 0.153,
+        "x_novelty_agency": 0.245,
+        "x_resilience": 0.014,
+        "x_transfer_comprehension": 0.294
+      },
+      "input": {
+        "c_protective": 0.30000000000000004,
+        "c_suppressive": 0.15000000000000002,
+        "extra": {
+          "case": 10
+        },
+        "x_bio_welfare": 0.196,
+        "x_compute": 0.098,
+        "x_institutional_capacity": 0.147,
+        "x_novelty_agency": 0.245,
+        "x_resilience": 0.02,
+        "x_transfer_comprehension": 0.294
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.006,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.30000000000000004,
+          "c_suppressive": 0.15000000000000002,
+          "extra": {
+            "case": 10
+          },
+          "x_bio_welfare": 0.196,
+          "x_compute": 0.098,
+          "x_institutional_capacity": 0.147,
+          "x_novelty_agency": 0.245,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.294
+        },
+        "49": {
+          "c_protective": 0.30000000000000004,
+          "c_suppressive": 0.15000000000000002,
+          "extra": {
+            "case": 10
+          },
+          "x_bio_welfare": 0.196,
+          "x_compute": 0.098,
+          "x_institutional_capacity": 0.147,
+          "x_novelty_agency": 0.245,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.294
+        },
+        "9": {
+          "c_protective": 0.30000000000000004,
+          "c_suppressive": 0.15000000000000002,
+          "extra": {
+            "case": 10
+          },
+          "x_bio_welfare": 0.196,
+          "x_compute": 0.098,
+          "x_institutional_capacity": 0.147,
+          "x_novelty_agency": 0.245,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.294
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 149
+    },
+    {
+      "actual": {
+        "c_protective": 0.32,
+        "c_suppressive": 0.16,
+        "extra": {
+          "case": 11
+        },
+        "x_bio_welfare": 0.2485,
+        "x_compute": 0.1988,
+        "x_institutional_capacity": 0.30419999999999997,
+        "x_novelty_agency": 0.14909999999999998,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0994
+      },
+      "arm": "A1-high",
+      "case": 11,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.32,
+        "c_suppressive": 0.16,
+        "extra": {
+          "case": 11
+        },
+        "x_bio_welfare": 0.2485,
+        "x_compute": 0.1988,
+        "x_institutional_capacity": 0.30419999999999997,
+        "x_novelty_agency": 0.14909999999999998,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0994
+      },
+      "input": {
+        "c_protective": 0.32,
+        "c_suppressive": 0.16,
+        "extra": {
+          "case": 11
+        },
+        "x_bio_welfare": 0.2485,
+        "x_compute": 0.1988,
+        "x_institutional_capacity": 0.29819999999999997,
+        "x_novelty_agency": 0.14909999999999998,
+        "x_resilience": 0.006,
+        "x_transfer_comprehension": 0.0994
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.006,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.32,
+          "c_suppressive": 0.16,
+          "extra": {
+            "case": 11
+          },
+          "x_bio_welfare": 0.2485,
+          "x_compute": 0.1988,
+          "x_institutional_capacity": 0.29819999999999997,
+          "x_novelty_agency": 0.14909999999999998,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.0994
+        },
+        "49": {
+          "c_protective": 0.32,
+          "c_suppressive": 0.16,
+          "extra": {
+            "case": 11
+          },
+          "x_bio_welfare": 0.2485,
+          "x_compute": 0.1988,
+          "x_institutional_capacity": 0.29819999999999997,
+          "x_novelty_agency": 0.14909999999999998,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.0994
+        },
+        "9": {
+          "c_protective": 0.32,
+          "c_suppressive": 0.16,
+          "extra": {
+            "case": 11
+          },
+          "x_bio_welfare": 0.2485,
+          "x_compute": 0.1988,
+          "x_institutional_capacity": 0.29819999999999997,
+          "x_novelty_agency": 0.14909999999999998,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.0994
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 299
+    },
+    {
+      "actual": {
+        "c_protective": 0.33999999999999997,
+        "c_suppressive": 0.16999999999999998,
+        "extra": {
+          "case": 12
+        },
+        "x_bio_welfare": 0.15,
+        "x_compute": 0.25,
+        "x_institutional_capacity": 0.1,
+        "x_novelty_agency": 0.3,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.2
+      },
+      "arm": "A1-high",
+      "case": 12,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.33999999999999997,
+        "c_suppressive": 0.16999999999999998,
+        "extra": {
+          "case": 12
+        },
+        "x_bio_welfare": 0.15,
+        "x_compute": 0.25,
+        "x_institutional_capacity": 0.1,
+        "x_novelty_agency": 0.3,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.2
+      },
+      "input": {
+        "c_protective": 0.33999999999999997,
+        "c_suppressive": 0.16999999999999998,
+        "extra": {
+          "case": 12
+        },
+        "x_bio_welfare": 0.15,
+        "x_compute": 0.25,
+        "x_institutional_capacity": 0.1,
+        "x_novelty_agency": 0.3,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.2
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.33999999999999997,
+          "c_suppressive": 0.16999999999999998,
+          "extra": {
+            "case": 12
+          },
+          "x_bio_welfare": 0.15,
+          "x_compute": 0.25,
+          "x_institutional_capacity": 0.1,
+          "x_novelty_agency": 0.3,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.2
+        },
+        "49": {
+          "c_protective": 0.33999999999999997,
+          "c_suppressive": 0.16999999999999998,
+          "extra": {
+            "case": 12
+          },
+          "x_bio_welfare": 0.15,
+          "x_compute": 0.25,
+          "x_institutional_capacity": 0.1,
+          "x_novelty_agency": 0.3,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.2
+        },
+        "9": {
+          "c_protective": 0.33999999999999997,
+          "c_suppressive": 0.16999999999999998,
+          "extra": {
+            "case": 12
+          },
+          "x_bio_welfare": 0.15,
+          "x_compute": 0.25,
+          "x_institutional_capacity": 0.1,
+          "x_novelty_agency": 0.3,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.2
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "zero",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 50
+    },
+    {
+      "actual": {
+        "c_protective": 0.36,
+        "c_suppressive": 0.18,
+        "extra": {
+          "case": 13
+        },
+        "x_bio_welfare": 0.29985,
+        "x_compute": 0.149925,
+        "x_institutional_capacity": 0.20040000000000002,
+        "x_novelty_agency": 0.09995000000000001,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.249875
+      },
+      "arm": "A1-high",
+      "case": 13,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.36,
+        "c_suppressive": 0.18,
+        "extra": {
+          "case": 13
+        },
+        "x_bio_welfare": 0.29985,
+        "x_compute": 0.149925,
+        "x_institutional_capacity": 0.20040000000000002,
+        "x_novelty_agency": 0.09995000000000001,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.249875
+      },
+      "input": {
+        "c_protective": 0.36,
+        "c_suppressive": 0.18,
+        "extra": {
+          "case": 13
+        },
+        "x_bio_welfare": 0.29985,
+        "x_compute": 0.149925,
+        "x_institutional_capacity": 0.19990000000000002,
+        "x_novelty_agency": 0.09995000000000001,
+        "x_resilience": 0.0005,
+        "x_transfer_comprehension": 0.249875
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0005,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.36,
+          "c_suppressive": 0.18,
+          "extra": {
+            "case": 13
+          },
+          "x_bio_welfare": 0.29985,
+          "x_compute": 0.149925,
+          "x_institutional_capacity": 0.19990000000000002,
+          "x_novelty_agency": 0.09995000000000001,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.249875
+        },
+        "49": {
+          "c_protective": 0.36,
+          "c_suppressive": 0.18,
+          "extra": {
+            "case": 13
+          },
+          "x_bio_welfare": 0.29985,
+          "x_compute": 0.149925,
+          "x_institutional_capacity": 0.19990000000000002,
+          "x_novelty_agency": 0.09995000000000001,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.249875
+        },
+        "9": {
+          "c_protective": 0.36,
+          "c_suppressive": 0.18,
+          "extra": {
+            "case": 13
+          },
+          "x_bio_welfare": 0.29985,
+          "x_compute": 0.149925,
+          "x_institutional_capacity": 0.19990000000000002,
+          "x_novelty_agency": 0.09995000000000001,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.249875
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "below",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 53
+    },
+    {
+      "actual": {
+        "c_protective": 0.38,
+        "c_suppressive": 0.19,
+        "extra": {
+          "case": 14
+        },
+        "x_bio_welfare": 0.098,
+        "x_compute": 0.294,
+        "x_institutional_capacity": 0.251,
+        "x_novelty_agency": 0.196,
+        "x_resilience": 0.014,
+        "x_transfer_comprehension": 0.147
+      },
+      "arm": "A1-high",
+      "case": 14,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.38,
+        "c_suppressive": 0.19,
+        "extra": {
+          "case": 14
+        },
+        "x_bio_welfare": 0.098,
+        "x_compute": 0.294,
+        "x_institutional_capacity": 0.251,
+        "x_novelty_agency": 0.196,
+        "x_resilience": 0.014,
+        "x_transfer_comprehension": 0.147
+      },
+      "input": {
+        "c_protective": 0.38,
+        "c_suppressive": 0.19,
+        "extra": {
+          "case": 14
+        },
+        "x_bio_welfare": 0.098,
+        "x_compute": 0.294,
+        "x_institutional_capacity": 0.245,
+        "x_novelty_agency": 0.196,
+        "x_resilience": 0.02,
+        "x_transfer_comprehension": 0.147
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.006,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.38,
+          "c_suppressive": 0.19,
+          "extra": {
+            "case": 14
+          },
+          "x_bio_welfare": 0.098,
+          "x_compute": 0.294,
+          "x_institutional_capacity": 0.245,
+          "x_novelty_agency": 0.196,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.147
+        },
+        "49": {
+          "c_protective": 0.38,
+          "c_suppressive": 0.19,
+          "extra": {
+            "case": 14
+          },
+          "x_bio_welfare": 0.098,
+          "x_compute": 0.294,
+          "x_institutional_capacity": 0.245,
+          "x_novelty_agency": 0.196,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.147
+        },
+        "9": {
+          "c_protective": 0.38,
+          "c_suppressive": 0.19,
+          "extra": {
+            "case": 14
+          },
+          "x_bio_welfare": 0.098,
+          "x_compute": 0.294,
+          "x_institutional_capacity": 0.245,
+          "x_novelty_agency": 0.196,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.147
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 149
+    },
+    {
+      "actual": {
+        "c_protective": 0.4,
+        "c_suppressive": 0.2,
+        "extra": {
+          "case": 15
+        },
+        "x_bio_welfare": 0.1988,
+        "x_compute": 0.0994,
+        "x_institutional_capacity": 0.1551,
+        "x_novelty_agency": 0.2485,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.29819999999999997
+      },
+      "arm": "A1-high",
+      "case": 15,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.4,
+        "c_suppressive": 0.2,
+        "extra": {
+          "case": 15
+        },
+        "x_bio_welfare": 0.1988,
+        "x_compute": 0.0994,
+        "x_institutional_capacity": 0.1551,
+        "x_novelty_agency": 0.2485,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.29819999999999997
+      },
+      "input": {
+        "c_protective": 0.4,
+        "c_suppressive": 0.2,
+        "extra": {
+          "case": 15
+        },
+        "x_bio_welfare": 0.1988,
+        "x_compute": 0.0994,
+        "x_institutional_capacity": 0.14909999999999998,
+        "x_novelty_agency": 0.2485,
+        "x_resilience": 0.006,
+        "x_transfer_comprehension": 0.29819999999999997
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.006,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.4,
+          "c_suppressive": 0.2,
+          "extra": {
+            "case": 15
+          },
+          "x_bio_welfare": 0.1988,
+          "x_compute": 0.0994,
+          "x_institutional_capacity": 0.14909999999999998,
+          "x_novelty_agency": 0.2485,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.29819999999999997
+        },
+        "49": {
+          "c_protective": 0.4,
+          "c_suppressive": 0.2,
+          "extra": {
+            "case": 15
+          },
+          "x_bio_welfare": 0.1988,
+          "x_compute": 0.0994,
+          "x_institutional_capacity": 0.14909999999999998,
+          "x_novelty_agency": 0.2485,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.29819999999999997
+        },
+        "9": {
+          "c_protective": 0.4,
+          "c_suppressive": 0.2,
+          "extra": {
+            "case": 15
+          },
+          "x_bio_welfare": 0.1988,
+          "x_compute": 0.0994,
+          "x_institutional_capacity": 0.14909999999999998,
+          "x_novelty_agency": 0.2485,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.29819999999999997
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 299
+    },
+    {
+      "actual": {
+        "c_protective": 0.42000000000000004,
+        "c_suppressive": 0.21000000000000002,
+        "extra": {
+          "case": 16
+        },
+        "x_bio_welfare": 0.25,
+        "x_compute": 0.19999999999999998,
+        "x_institutional_capacity": 0.3,
+        "x_novelty_agency": 0.15,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.09999999999999999
+      },
+      "arm": "A1-high",
+      "case": 16,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.42000000000000004,
+        "c_suppressive": 0.21000000000000002,
+        "extra": {
+          "case": 16
+        },
+        "x_bio_welfare": 0.25,
+        "x_compute": 0.19999999999999998,
+        "x_institutional_capacity": 0.3,
+        "x_novelty_agency": 0.15,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.09999999999999999
+      },
+      "input": {
+        "c_protective": 0.42000000000000004,
+        "c_suppressive": 0.21000000000000002,
+        "extra": {
+          "case": 16
+        },
+        "x_bio_welfare": 0.25000000000000006,
+        "x_compute": 0.20000000000000004,
+        "x_institutional_capacity": 0.30000000000000004,
+        "x_novelty_agency": 0.15000000000000002,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.10000000000000002
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.42000000000000004,
+          "c_suppressive": 0.21000000000000002,
+          "extra": {
+            "case": 16
+          },
+          "x_bio_welfare": 0.25000000000000006,
+          "x_compute": 0.20000000000000004,
+          "x_institutional_capacity": 0.30000000000000004,
+          "x_novelty_agency": 0.15000000000000002,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.10000000000000002
+        },
+        "49": {
+          "c_protective": 0.42000000000000004,
+          "c_suppressive": 0.21000000000000002,
+          "extra": {
+            "case": 16
+          },
+          "x_bio_welfare": 0.25000000000000006,
+          "x_compute": 0.20000000000000004,
+          "x_institutional_capacity": 0.30000000000000004,
+          "x_novelty_agency": 0.15000000000000002,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.10000000000000002
+        },
+        "9": {
+          "c_protective": 0.42000000000000004,
+          "c_suppressive": 0.21000000000000002,
+          "extra": {
+            "case": 16
+          },
+          "x_bio_welfare": 0.25000000000000006,
+          "x_compute": 0.20000000000000004,
+          "x_institutional_capacity": 0.30000000000000004,
+          "x_novelty_agency": 0.15000000000000002,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.10000000000000002
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "zero",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 50
+    },
+    {
+      "actual": {
+        "c_protective": 0.44000000000000006,
+        "c_suppressive": 0.22000000000000003,
+        "extra": {
+          "case": 17
+        },
+        "x_bio_welfare": 0.14992499999999997,
+        "x_compute": 0.24987499999999996,
+        "x_institutional_capacity": 0.10044999999999998,
+        "x_novelty_agency": 0.29984999999999995,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.19989999999999997
+      },
+      "arm": "A1-high",
+      "case": 17,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.44000000000000006,
+        "c_suppressive": 0.22000000000000003,
+        "extra": {
+          "case": 17
+        },
+        "x_bio_welfare": 0.14992499999999997,
+        "x_compute": 0.24987499999999996,
+        "x_institutional_capacity": 0.10044999999999998,
+        "x_novelty_agency": 0.29984999999999995,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.19989999999999997
+      },
+      "input": {
+        "c_protective": 0.44000000000000006,
+        "c_suppressive": 0.22000000000000003,
+        "extra": {
+          "case": 17
+        },
+        "x_bio_welfare": 0.149925,
+        "x_compute": 0.249875,
+        "x_institutional_capacity": 0.09995000000000001,
+        "x_novelty_agency": 0.29985,
+        "x_resilience": 0.0005,
+        "x_transfer_comprehension": 0.19990000000000002
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0005,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.44000000000000006,
+          "c_suppressive": 0.22000000000000003,
+          "extra": {
+            "case": 17
+          },
+          "x_bio_welfare": 0.149925,
+          "x_compute": 0.249875,
+          "x_institutional_capacity": 0.09995000000000001,
+          "x_novelty_agency": 0.29985,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.19990000000000002
+        },
+        "49": {
+          "c_protective": 0.44000000000000006,
+          "c_suppressive": 0.22000000000000003,
+          "extra": {
+            "case": 17
+          },
+          "x_bio_welfare": 0.149925,
+          "x_compute": 0.249875,
+          "x_institutional_capacity": 0.09995000000000001,
+          "x_novelty_agency": 0.29985,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.19990000000000002
+        },
+        "9": {
+          "c_protective": 0.44000000000000006,
+          "c_suppressive": 0.22000000000000003,
+          "extra": {
+            "case": 17
+          },
+          "x_bio_welfare": 0.149925,
+          "x_compute": 0.249875,
+          "x_institutional_capacity": 0.09995000000000001,
+          "x_novelty_agency": 0.29985,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.19990000000000002
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "below",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 0.9999999999999998,
+      "step": 53
+    },
+    {
+      "actual": {
+        "c_protective": 0.45999999999999996,
+        "c_suppressive": 0.22999999999999998,
+        "extra": {
+          "case": 18
+        },
+        "x_bio_welfare": 0.29400000000000004,
+        "x_compute": 0.14700000000000002,
+        "x_institutional_capacity": 0.20200000000000004,
+        "x_novelty_agency": 0.09800000000000002,
+        "x_resilience": 0.014000000000000004,
+        "x_transfer_comprehension": 0.24500000000000002
+      },
+      "arm": "A1-high",
+      "case": 18,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.45999999999999996,
+        "c_suppressive": 0.22999999999999998,
+        "extra": {
+          "case": 18
+        },
+        "x_bio_welfare": 0.29400000000000004,
+        "x_compute": 0.14700000000000002,
+        "x_institutional_capacity": 0.20200000000000004,
+        "x_novelty_agency": 0.09800000000000002,
+        "x_resilience": 0.014000000000000004,
+        "x_transfer_comprehension": 0.24500000000000002
+      },
+      "input": {
+        "c_protective": 0.45999999999999996,
+        "c_suppressive": 0.22999999999999998,
+        "extra": {
+          "case": 18
+        },
+        "x_bio_welfare": 0.29400000000000004,
+        "x_compute": 0.14700000000000002,
+        "x_institutional_capacity": 0.19600000000000004,
+        "x_novelty_agency": 0.09800000000000002,
+        "x_resilience": 0.020000000000000004,
+        "x_transfer_comprehension": 0.24500000000000002
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.006,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.45999999999999996,
+          "c_suppressive": 0.22999999999999998,
+          "extra": {
+            "case": 18
+          },
+          "x_bio_welfare": 0.29400000000000004,
+          "x_compute": 0.14700000000000002,
+          "x_institutional_capacity": 0.19600000000000004,
+          "x_novelty_agency": 0.09800000000000002,
+          "x_resilience": 0.020000000000000004,
+          "x_transfer_comprehension": 0.24500000000000002
+        },
+        "49": {
+          "c_protective": 0.45999999999999996,
+          "c_suppressive": 0.22999999999999998,
+          "extra": {
+            "case": 18
+          },
+          "x_bio_welfare": 0.29400000000000004,
+          "x_compute": 0.14700000000000002,
+          "x_institutional_capacity": 0.19600000000000004,
+          "x_novelty_agency": 0.09800000000000002,
+          "x_resilience": 0.020000000000000004,
+          "x_transfer_comprehension": 0.24500000000000002
+        },
+        "9": {
+          "c_protective": 0.45999999999999996,
+          "c_suppressive": 0.22999999999999998,
+          "extra": {
+            "case": 18
+          },
+          "x_bio_welfare": 0.29400000000000004,
+          "x_compute": 0.14700000000000002,
+          "x_institutional_capacity": 0.19600000000000004,
+          "x_novelty_agency": 0.09800000000000002,
+          "x_resilience": 0.020000000000000004,
+          "x_transfer_comprehension": 0.24500000000000002
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0000000000000002,
+      "step": 149
+    },
+    {
+      "actual": {
+        "c_protective": 0.48,
+        "c_suppressive": 0.24,
+        "extra": {
+          "case": 19
+        },
+        "x_bio_welfare": 0.0994,
+        "x_compute": 0.29819999999999997,
+        "x_institutional_capacity": 0.2545,
+        "x_novelty_agency": 0.1988,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.14909999999999998
+      },
+      "arm": "A1-high",
+      "case": 19,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.48,
+        "c_suppressive": 0.24,
+        "extra": {
+          "case": 19
+        },
+        "x_bio_welfare": 0.0994,
+        "x_compute": 0.29819999999999997,
+        "x_institutional_capacity": 0.2545,
+        "x_novelty_agency": 0.1988,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.14909999999999998
+      },
+      "input": {
+        "c_protective": 0.48,
+        "c_suppressive": 0.24,
+        "extra": {
+          "case": 19
+        },
+        "x_bio_welfare": 0.0994,
+        "x_compute": 0.29819999999999997,
+        "x_institutional_capacity": 0.2485,
+        "x_novelty_agency": 0.1988,
+        "x_resilience": 0.006,
+        "x_transfer_comprehension": 0.14909999999999998
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.006,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.48,
+          "c_suppressive": 0.24,
+          "extra": {
+            "case": 19
+          },
+          "x_bio_welfare": 0.0994,
+          "x_compute": 0.29819999999999997,
+          "x_institutional_capacity": 0.2485,
+          "x_novelty_agency": 0.1988,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.14909999999999998
+        },
+        "49": {
+          "c_protective": 0.48,
+          "c_suppressive": 0.24,
+          "extra": {
+            "case": 19
+          },
+          "x_bio_welfare": 0.0994,
+          "x_compute": 0.29819999999999997,
+          "x_institutional_capacity": 0.2485,
+          "x_novelty_agency": 0.1988,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.14909999999999998
+        },
+        "9": {
+          "c_protective": 0.48,
+          "c_suppressive": 0.24,
+          "extra": {
+            "case": 19
+          },
+          "x_bio_welfare": 0.0994,
+          "x_compute": 0.29819999999999997,
+          "x_institutional_capacity": 0.2485,
+          "x_novelty_agency": 0.1988,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.14909999999999998
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 299
+    },
+    {
+      "actual": {
+        "c_protective": 0.5,
+        "c_suppressive": 0.25,
+        "extra": {
+          "case": 20
+        },
+        "x_bio_welfare": 0.2,
+        "x_compute": 0.1,
+        "x_institutional_capacity": 0.15,
+        "x_novelty_agency": 0.25,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.3
+      },
+      "arm": "A1-high",
+      "case": 20,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.5,
+        "c_suppressive": 0.25,
+        "extra": {
+          "case": 20
+        },
+        "x_bio_welfare": 0.2,
+        "x_compute": 0.1,
+        "x_institutional_capacity": 0.15,
+        "x_novelty_agency": 0.25,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.3
+      },
+      "input": {
+        "c_protective": 0.5,
+        "c_suppressive": 0.25,
+        "extra": {
+          "case": 20
+        },
+        "x_bio_welfare": 0.2,
+        "x_compute": 0.1,
+        "x_institutional_capacity": 0.15,
+        "x_novelty_agency": 0.25,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.3
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.5,
+          "c_suppressive": 0.25,
+          "extra": {
+            "case": 20
+          },
+          "x_bio_welfare": 0.2,
+          "x_compute": 0.1,
+          "x_institutional_capacity": 0.15,
+          "x_novelty_agency": 0.25,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.3
+        },
+        "49": {
+          "c_protective": 0.5,
+          "c_suppressive": 0.25,
+          "extra": {
+            "case": 20
+          },
+          "x_bio_welfare": 0.2,
+          "x_compute": 0.1,
+          "x_institutional_capacity": 0.15,
+          "x_novelty_agency": 0.25,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.3
+        },
+        "9": {
+          "c_protective": 0.5,
+          "c_suppressive": 0.25,
+          "extra": {
+            "case": 20
+          },
+          "x_bio_welfare": 0.2,
+          "x_compute": 0.1,
+          "x_institutional_capacity": 0.15,
+          "x_novelty_agency": 0.25,
+          "x_resilience": 0.0,
+          "x_transfer_comprehension": 0.3
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "zero",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 50
+    },
+    {
+      "actual": {
+        "c_protective": 0.52,
+        "c_suppressive": 0.26,
+        "extra": {
+          "case": 21
+        },
+        "x_bio_welfare": 0.249875,
+        "x_compute": 0.19990000000000002,
+        "x_institutional_capacity": 0.30035,
+        "x_novelty_agency": 0.149925,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.09995000000000001
+      },
+      "arm": "A1-high",
+      "case": 21,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.52,
+        "c_suppressive": 0.26,
+        "extra": {
+          "case": 21
+        },
+        "x_bio_welfare": 0.249875,
+        "x_compute": 0.19990000000000002,
+        "x_institutional_capacity": 0.30035,
+        "x_novelty_agency": 0.149925,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.09995000000000001
+      },
+      "input": {
+        "c_protective": 0.52,
+        "c_suppressive": 0.26,
+        "extra": {
+          "case": 21
+        },
+        "x_bio_welfare": 0.249875,
+        "x_compute": 0.19990000000000002,
+        "x_institutional_capacity": 0.29985,
+        "x_novelty_agency": 0.149925,
+        "x_resilience": 0.0005,
+        "x_transfer_comprehension": 0.09995000000000001
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.0005,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.52,
+          "c_suppressive": 0.26,
+          "extra": {
+            "case": 21
+          },
+          "x_bio_welfare": 0.249875,
+          "x_compute": 0.19990000000000002,
+          "x_institutional_capacity": 0.29985,
+          "x_novelty_agency": 0.149925,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.09995000000000001
+        },
+        "49": {
+          "c_protective": 0.52,
+          "c_suppressive": 0.26,
+          "extra": {
+            "case": 21
+          },
+          "x_bio_welfare": 0.249875,
+          "x_compute": 0.19990000000000002,
+          "x_institutional_capacity": 0.29985,
+          "x_novelty_agency": 0.149925,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.09995000000000001
+        },
+        "9": {
+          "c_protective": 0.52,
+          "c_suppressive": 0.26,
+          "extra": {
+            "case": 21
+          },
+          "x_bio_welfare": 0.249875,
+          "x_compute": 0.19990000000000002,
+          "x_institutional_capacity": 0.29985,
+          "x_novelty_agency": 0.149925,
+          "x_resilience": 0.0005,
+          "x_transfer_comprehension": 0.09995000000000001
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "below",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 53
+    },
+    {
+      "actual": {
+        "c_protective": 0.54,
+        "c_suppressive": 0.27,
+        "extra": {
+          "case": 22
+        },
+        "x_bio_welfare": 0.147,
+        "x_compute": 0.245,
+        "x_institutional_capacity": 0.10400000000000001,
+        "x_novelty_agency": 0.294,
+        "x_resilience": 0.014,
+        "x_transfer_comprehension": 0.196
+      },
+      "arm": "A1-high",
+      "case": 22,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.54,
+        "c_suppressive": 0.27,
+        "extra": {
+          "case": 22
+        },
+        "x_bio_welfare": 0.147,
+        "x_compute": 0.245,
+        "x_institutional_capacity": 0.10400000000000001,
+        "x_novelty_agency": 0.294,
+        "x_resilience": 0.014,
+        "x_transfer_comprehension": 0.196
+      },
+      "input": {
+        "c_protective": 0.54,
+        "c_suppressive": 0.27,
+        "extra": {
+          "case": 22
+        },
+        "x_bio_welfare": 0.147,
+        "x_compute": 0.245,
+        "x_institutional_capacity": 0.098,
+        "x_novelty_agency": 0.294,
+        "x_resilience": 0.02,
+        "x_transfer_comprehension": 0.196
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.006,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.54,
+          "c_suppressive": 0.27,
+          "extra": {
+            "case": 22
+          },
+          "x_bio_welfare": 0.147,
+          "x_compute": 0.245,
+          "x_institutional_capacity": 0.098,
+          "x_novelty_agency": 0.294,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.196
+        },
+        "49": {
+          "c_protective": 0.54,
+          "c_suppressive": 0.27,
+          "extra": {
+            "case": 22
+          },
+          "x_bio_welfare": 0.147,
+          "x_compute": 0.245,
+          "x_institutional_capacity": 0.098,
+          "x_novelty_agency": 0.294,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.196
+        },
+        "9": {
+          "c_protective": 0.54,
+          "c_suppressive": 0.27,
+          "extra": {
+            "case": 22
+          },
+          "x_bio_welfare": 0.147,
+          "x_compute": 0.245,
+          "x_institutional_capacity": 0.098,
+          "x_novelty_agency": 0.294,
+          "x_resilience": 0.02,
+          "x_transfer_comprehension": 0.196
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 149
+    },
+    {
+      "actual": {
+        "c_protective": 0.56,
+        "c_suppressive": 0.28,
+        "extra": {
+          "case": 23
+        },
+        "x_bio_welfare": 0.29819999999999997,
+        "x_compute": 0.14909999999999998,
+        "x_institutional_capacity": 0.2048,
+        "x_novelty_agency": 0.0994,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.2485
+      },
+      "arm": "A1-high",
+      "case": 23,
+      "constraints_unchanged_exactly": true,
+      "expected": {
+        "c_protective": 0.56,
+        "c_suppressive": 0.28,
+        "extra": {
+          "case": 23
+        },
+        "x_bio_welfare": 0.29819999999999997,
+        "x_compute": 0.14909999999999998,
+        "x_institutional_capacity": 0.2048,
+        "x_novelty_agency": 0.0994,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.2485
+      },
+      "input": {
+        "c_protective": 0.56,
+        "c_suppressive": 0.28,
+        "extra": {
+          "case": 23
+        },
+        "x_bio_welfare": 0.29819999999999997,
+        "x_compute": 0.14909999999999998,
+        "x_institutional_capacity": 0.1988,
+        "x_novelty_agency": 0.0994,
+        "x_resilience": 0.006,
+        "x_transfer_comprehension": 0.2485
+      },
+      "input_unchanged_exactly": true,
+      "moved": 0.006,
+      "passed": true,
+      "pre_onset_outputs": {
+        "0": {
+          "c_protective": 0.56,
+          "c_suppressive": 0.28,
+          "extra": {
+            "case": 23
+          },
+          "x_bio_welfare": 0.29819999999999997,
+          "x_compute": 0.14909999999999998,
+          "x_institutional_capacity": 0.1988,
+          "x_novelty_agency": 0.0994,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.2485
+        },
+        "49": {
+          "c_protective": 0.56,
+          "c_suppressive": 0.28,
+          "extra": {
+            "case": 23
+          },
+          "x_bio_welfare": 0.29819999999999997,
+          "x_compute": 0.14909999999999998,
+          "x_institutional_capacity": 0.1988,
+          "x_novelty_agency": 0.0994,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.2485
+        },
+        "9": {
+          "c_protective": 0.56,
+          "c_suppressive": 0.28,
+          "extra": {
+            "case": 23
+          },
+          "x_bio_welfare": 0.29819999999999997,
+          "x_compute": 0.14909999999999998,
+          "x_institutional_capacity": 0.1988,
+          "x_novelty_agency": 0.0994,
+          "x_resilience": 0.006,
+          "x_transfer_comprehension": 0.2485
+        }
+      },
+      "pre_onset_unchanged_exactly": true,
+      "rate": 0.006,
+      "resilience_category": "at_or_above",
+      "share_absolute_differences": {
+        "x_bio_welfare": 0.0,
+        "x_compute": 0.0,
+        "x_institutional_capacity": 0.0,
+        "x_novelty_agency": 0.0,
+        "x_resilience": 0.0,
+        "x_transfer_comprehension": 0.0
+      },
+      "share_sum": 1.0,
+      "step": 299
+    }
+  ],
+  "cases_per_rate": 24,
+  "computed_share_absolute_tolerance": 1e-12,
+  "constraint_and_pre_onset_equality": "exact",
+  "passed": true,
+  "share_sum_absolute_tolerance": 1e-12
+}

@@ -1,0 +1,22 @@
+{
+  "complete": 5,
+  "maximum_concurrent_workers": 5,
+  "mode_changes": [
+    {
+      "active_at_request": 0,
+      "cap": 15,
+      "mode": "normal",
+      "utc": "2026-09-20T13:14:32.189931+00:00"
+    }
+  ],
+  "new": [
+    "gate_A2_OFF",
+    "gate_C_NORMAL",
+    "gate_A1_high_NORMAL",
+    "gate_A1_high_GRADED",
+    "gate_A2_GRADED"
+  ],
+  "phase": "gate_remaining",
+  "preserved": [],
+  "resumed": []
+}

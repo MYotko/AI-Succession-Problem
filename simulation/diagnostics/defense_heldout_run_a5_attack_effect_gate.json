@@ -1,0 +1,1752 @@
+{
+  "comparison": "control resilience minus attacked resilience greater than 1e-9",
+  "comparisons": [
+    {
+      "attacked_resilience_share": 0.01441654878605324,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.02041654878605324,
+      "lower_with_tolerance": true,
+      "step": 51
+    },
+    {
+      "attacked_resilience_share": 0.05805936291599275,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.06405936291599275,
+      "lower_with_tolerance": true,
+      "step": 52
+    },
+    {
+      "attacked_resilience_share": 0.03755112072470247,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.04355112072470248,
+      "lower_with_tolerance": true,
+      "step": 53
+    },
+    {
+      "attacked_resilience_share": 0.1323286232002721,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.13832862320027212,
+      "lower_with_tolerance": true,
+      "step": 54
+    },
+    {
+      "attacked_resilience_share": 0.013625391676733599,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.0196253916767336,
+      "lower_with_tolerance": true,
+      "step": 55
+    },
+    {
+      "attacked_resilience_share": 0.0232197393716356,
+      "control_minus_attacked": 0.006000000000000002,
+      "control_resilience_share": 0.029219739371635602,
+      "lower_with_tolerance": true,
+      "step": 56
+    },
+    {
+      "attacked_resilience_share": 0.01570831956047409,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.021708319560474088,
+      "lower_with_tolerance": true,
+      "step": 57
+    },
+    {
+      "attacked_resilience_share": 0.10749013226616122,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.11349013226616123,
+      "lower_with_tolerance": true,
+      "step": 58
+    },
+    {
+      "attacked_resilience_share": 0.03878356283936042,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.04478356283936042,
+      "lower_with_tolerance": true,
+      "step": 59
+    },
+    {
+      "attacked_resilience_share": 0.09924564878023948,
+      "control_minus_attacked": 0.006000000000000033,
+      "control_resilience_share": 0.10524564878023951,
+      "lower_with_tolerance": true,
+      "step": 60
+    },
+    {
+      "attacked_resilience_share": 0.023440053043707734,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.029440053043707733,
+      "lower_with_tolerance": true,
+      "step": 61
+    },
+    {
+      "attacked_resilience_share": 0.10925286248987914,
+      "control_minus_attacked": 0.0059999999999999915,
+      "control_resilience_share": 0.11525286248987913,
+      "lower_with_tolerance": true,
+      "step": 62
+    },
+    {
+      "attacked_resilience_share": 0.07225721904577147,
+      "control_minus_attacked": 0.006000000000000019,
+      "control_resilience_share": 0.07825721904577149,
+      "lower_with_tolerance": true,
+      "step": 63
+    },
+    {
+      "attacked_resilience_share": 0.06974610866547729,
+      "control_minus_attacked": 0.0059999999999999915,
+      "control_resilience_share": 0.07574610866547728,
+      "lower_with_tolerance": true,
+      "step": 64
+    },
+    {
+      "attacked_resilience_share": 0.022246195187352796,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.028246195187352795,
+      "lower_with_tolerance": true,
+      "step": 65
+    },
+    {
+      "attacked_resilience_share": 0.0617497906856436,
+      "control_minus_attacked": 0.006000000000000012,
+      "control_resilience_share": 0.06774979068564362,
+      "lower_with_tolerance": true,
+      "step": 66
+    },
+    {
+      "attacked_resilience_share": 0.0048468803882179496,
+      "control_minus_attacked": 0.005999999999999999,
+      "control_resilience_share": 0.010846880388217949,
+      "lower_with_tolerance": true,
+      "step": 67
+    },
+    {
+      "attacked_resilience_share": 0.09581104486392016,
+      "control_minus_attacked": 0.0059999999999999915,
+      "control_resilience_share": 0.10181104486392015,
+      "lower_with_tolerance": true,
+      "step": 68
+    },
+    {
+      "attacked_resilience_share": 0.034104296021481094,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.04010429602148109,
+      "lower_with_tolerance": true,
+      "step": 69
+    },
+    {
+      "attacked_resilience_share": 0.012479465229445092,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.018479465229445092,
+      "lower_with_tolerance": true,
+      "step": 70
+    },
+    {
+      "attacked_resilience_share": 0.005041502773517691,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.01104150277351769,
+      "lower_with_tolerance": true,
+      "step": 71
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.001820089749510672,
+      "control_resilience_share": 0.001820089749510672,
+      "lower_with_tolerance": true,
+      "step": 72
+    },
+    {
+      "attacked_resilience_share": 0.06293287528770079,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.0689328752877008,
+      "lower_with_tolerance": true,
+      "step": 73
+    },
+    {
+      "attacked_resilience_share": 0.03953135588427894,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.04553135588427894,
+      "lower_with_tolerance": true,
+      "step": 74
+    },
+    {
+      "attacked_resilience_share": 0.09092224335035827,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.09692224335035828,
+      "lower_with_tolerance": true,
+      "step": 75
+    },
+    {
+      "attacked_resilience_share": 0.08074117875043195,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.08674117875043195,
+      "lower_with_tolerance": true,
+      "step": 76
+    },
+    {
+      "attacked_resilience_share": 0.013143521436722648,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.019143521436722648,
+      "lower_with_tolerance": true,
+      "step": 77
+    },
+    {
+      "attacked_resilience_share": 0.014343707528648624,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.020343707528648624,
+      "lower_with_tolerance": true,
+      "step": 78
+    },
+    {
+      "attacked_resilience_share": 0.05508269685415267,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.06108269685415267,
+      "lower_with_tolerance": true,
+      "step": 79
+    },
+    {
+      "attacked_resilience_share": 0.0736081291456771,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.07960812914567711,
+      "lower_with_tolerance": true,
+      "step": 80
+    },
+    {
+      "attacked_resilience_share": 0.05136090962150615,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.05736090962150615,
+      "lower_with_tolerance": true,
+      "step": 81
+    },
+    {
+      "attacked_resilience_share": 0.12100292971182039,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.1270029297118204,
+      "lower_with_tolerance": true,
+      "step": 82
+    },
+    {
+      "attacked_resilience_share": 0.058870460077712745,
+      "control_minus_attacked": 0.006000000000000012,
+      "control_resilience_share": 0.06487046007771276,
+      "lower_with_tolerance": true,
+      "step": 83
+    },
+    {
+      "attacked_resilience_share": 0.01615484650602237,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.02215484650602237,
+      "lower_with_tolerance": true,
+      "step": 84
+    },
+    {
+      "attacked_resilience_share": 0.009226649618174642,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.015226649618174642,
+      "lower_with_tolerance": true,
+      "step": 85
+    },
+    {
+      "attacked_resilience_share": 0.040737599210322765,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.046737599210322764,
+      "lower_with_tolerance": true,
+      "step": 86
+    },
+    {
+      "attacked_resilience_share": 0.01376885790288117,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.01976885790288117,
+      "lower_with_tolerance": true,
+      "step": 87
+    },
+    {
+      "attacked_resilience_share": 0.1301016388042848,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.1361016388042848,
+      "lower_with_tolerance": true,
+      "step": 88
+    },
+    {
+      "attacked_resilience_share": 0.029679685787741696,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.035679685787741694,
+      "lower_with_tolerance": true,
+      "step": 89
+    },
+    {
+      "attacked_resilience_share": 0.028742137976534368,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.03474213797653437,
+      "lower_with_tolerance": true,
+      "step": 90
+    },
+    {
+      "attacked_resilience_share": 0.01331590142228401,
+      "control_minus_attacked": 0.006000000000000004,
+      "control_resilience_share": 0.019315901422284013,
+      "lower_with_tolerance": true,
+      "step": 91
+    },
+    {
+      "attacked_resilience_share": 0.0061304907236694635,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.012130490723669464,
+      "lower_with_tolerance": true,
+      "step": 92
+    },
+    {
+      "attacked_resilience_share": 0.06100652050809944,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.06700652050809944,
+      "lower_with_tolerance": true,
+      "step": 93
+    },
+    {
+      "attacked_resilience_share": 0.014688521022216914,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.020688521022216914,
+      "lower_with_tolerance": true,
+      "step": 94
+    },
+    {
+      "attacked_resilience_share": 0.006592948295070048,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.012592948295070048,
+      "lower_with_tolerance": true,
+      "step": 95
+    },
+    {
+      "attacked_resilience_share": 0.035433863942492094,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.04143386394249209,
+      "lower_with_tolerance": true,
+      "step": 96
+    },
+    {
+      "attacked_resilience_share": 0.023503646868742116,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.029503646868742114,
+      "lower_with_tolerance": true,
+      "step": 97
+    },
+    {
+      "attacked_resilience_share": 0.03184834491823604,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.03784834491823605,
+      "lower_with_tolerance": true,
+      "step": 98
+    },
+    {
+      "attacked_resilience_share": 0.04624275681043676,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.05224275681043676,
+      "lower_with_tolerance": true,
+      "step": 99
+    },
+    {
+      "attacked_resilience_share": 0.0009673716260153486,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.006967371626015349,
+      "lower_with_tolerance": true,
+      "step": 100
+    },
+    {
+      "attacked_resilience_share": 0.009645644392693152,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.015645644392693153,
+      "lower_with_tolerance": true,
+      "step": 101
+    },
+    {
+      "attacked_resilience_share": 0.01394736201404989,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.01994736201404989,
+      "lower_with_tolerance": true,
+      "step": 102
+    },
+    {
+      "attacked_resilience_share": 0.10292191530158053,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.10892191530158053,
+      "lower_with_tolerance": true,
+      "step": 103
+    },
+    {
+      "attacked_resilience_share": 0.06410946270623595,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.07010946270623596,
+      "lower_with_tolerance": true,
+      "step": 104
+    },
+    {
+      "attacked_resilience_share": 0.04801006479290954,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.05401006479290954,
+      "lower_with_tolerance": true,
+      "step": 105
+    },
+    {
+      "attacked_resilience_share": 0.009298229021883927,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.015298229021883927,
+      "lower_with_tolerance": true,
+      "step": 106
+    },
+    {
+      "attacked_resilience_share": 0.04142675176717408,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.04742675176717408,
+      "lower_with_tolerance": true,
+      "step": 107
+    },
+    {
+      "attacked_resilience_share": 0.03712192850057956,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.04312192850057956,
+      "lower_with_tolerance": true,
+      "step": 108
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.0028545185444700224,
+      "control_resilience_share": 0.0028545185444700224,
+      "lower_with_tolerance": true,
+      "step": 109
+    },
+    {
+      "attacked_resilience_share": 0.020025002787862137,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.026025002787862135,
+      "lower_with_tolerance": true,
+      "step": 110
+    },
+    {
+      "attacked_resilience_share": 0.005364707235421477,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.011364707235421477,
+      "lower_with_tolerance": true,
+      "step": 111
+    },
+    {
+      "attacked_resilience_share": 0.021307908119712282,
+      "control_minus_attacked": 0.006000000000000002,
+      "control_resilience_share": 0.027307908119712284,
+      "lower_with_tolerance": true,
+      "step": 112
+    },
+    {
+      "attacked_resilience_share": 0.10344753283749981,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.10944753283749982,
+      "lower_with_tolerance": true,
+      "step": 113
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.0006173366863573791,
+      "control_resilience_share": 0.0006173366863573791,
+      "lower_with_tolerance": true,
+      "step": 114
+    },
+    {
+      "attacked_resilience_share": 0.05995673555625149,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.06595673555625149,
+      "lower_with_tolerance": true,
+      "step": 115
+    },
+    {
+      "attacked_resilience_share": 0.08945591769911954,
+      "control_minus_attacked": 0.0059999999999999915,
+      "control_resilience_share": 0.09545591769911953,
+      "lower_with_tolerance": true,
+      "step": 116
+    },
+    {
+      "attacked_resilience_share": 0.005617325672721315,
+      "control_minus_attacked": 0.005999999999999999,
+      "control_resilience_share": 0.011617325672721314,
+      "lower_with_tolerance": true,
+      "step": 117
+    },
+    {
+      "attacked_resilience_share": 0.004302746109722183,
+      "control_minus_attacked": 0.005999999999999999,
+      "control_resilience_share": 0.010302746109722183,
+      "lower_with_tolerance": true,
+      "step": 118
+    },
+    {
+      "attacked_resilience_share": 0.22212293774063108,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.22812293774063108,
+      "lower_with_tolerance": true,
+      "step": 119
+    },
+    {
+      "attacked_resilience_share": 0.0592372709789109,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.0652372709789109,
+      "lower_with_tolerance": true,
+      "step": 120
+    },
+    {
+      "attacked_resilience_share": 0.11122188021562279,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.1172218802156228,
+      "lower_with_tolerance": true,
+      "step": 121
+    },
+    {
+      "attacked_resilience_share": 0.003127298093981117,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.009127298093981117,
+      "lower_with_tolerance": true,
+      "step": 122
+    },
+    {
+      "attacked_resilience_share": 0.06488989406058598,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.07088989406058599,
+      "lower_with_tolerance": true,
+      "step": 123
+    },
+    {
+      "attacked_resilience_share": 0.009515419262260585,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.015515419262260586,
+      "lower_with_tolerance": true,
+      "step": 124
+    },
+    {
+      "attacked_resilience_share": 0.17311509862064442,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.17911509862064443,
+      "lower_with_tolerance": true,
+      "step": 125
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.0018898901446787585,
+      "control_resilience_share": 0.0018898901446787585,
+      "lower_with_tolerance": true,
+      "step": 126
+    },
+    {
+      "attacked_resilience_share": 0.07229377124469041,
+      "control_minus_attacked": 0.0059999999999999915,
+      "control_resilience_share": 0.0782937712446904,
+      "lower_with_tolerance": true,
+      "step": 127
+    },
+    {
+      "attacked_resilience_share": 0.06455346933269619,
+      "control_minus_attacked": 0.006000000000000019,
+      "control_resilience_share": 0.07055346933269621,
+      "lower_with_tolerance": true,
+      "step": 128
+    },
+    {
+      "attacked_resilience_share": 0.0802487798738348,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.08624877987383481,
+      "lower_with_tolerance": true,
+      "step": 129
+    },
+    {
+      "attacked_resilience_share": 0.07010582611700737,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.07610582611700738,
+      "lower_with_tolerance": true,
+      "step": 130
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.0011165940778511965,
+      "control_resilience_share": 0.0011165940778511965,
+      "lower_with_tolerance": true,
+      "step": 131
+    },
+    {
+      "attacked_resilience_share": 0.049357009830552925,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.055357009830552924,
+      "lower_with_tolerance": true,
+      "step": 132
+    },
+    {
+      "attacked_resilience_share": 0.007396170916685931,
+      "control_minus_attacked": 0.006,
+      "control_resilience_share": 0.013396170916685931,
+      "lower_with_tolerance": true,
+      "step": 133
+    },
+    {
+      "attacked_resilience_share": 0.009503266309466882,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.01550326630946688,
+      "lower_with_tolerance": true,
+      "step": 134
+    },
+    {
+      "attacked_resilience_share": 0.05474867848675708,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.06074867848675708,
+      "lower_with_tolerance": true,
+      "step": 135
+    },
+    {
+      "attacked_resilience_share": 0.11774819161835967,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.12374819161835968,
+      "lower_with_tolerance": true,
+      "step": 136
+    },
+    {
+      "attacked_resilience_share": 0.02899972240595257,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.03499972240595257,
+      "lower_with_tolerance": true,
+      "step": 137
+    },
+    {
+      "attacked_resilience_share": 0.04687768729608887,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.05287768729608887,
+      "lower_with_tolerance": true,
+      "step": 138
+    },
+    {
+      "attacked_resilience_share": 0.01906806853601534,
+      "control_minus_attacked": 0.006000000000000002,
+      "control_resilience_share": 0.025068068536015342,
+      "lower_with_tolerance": true,
+      "step": 139
+    },
+    {
+      "attacked_resilience_share": 0.09522308583834696,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.10122308583834697,
+      "lower_with_tolerance": true,
+      "step": 140
+    },
+    {
+      "attacked_resilience_share": 0.03766343586349292,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.043663435863492916,
+      "lower_with_tolerance": true,
+      "step": 141
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.005218102828856522,
+      "control_resilience_share": 0.005218102828856522,
+      "lower_with_tolerance": true,
+      "step": 142
+    },
+    {
+      "attacked_resilience_share": 0.06681486949347398,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.07281486949347399,
+      "lower_with_tolerance": true,
+      "step": 143
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.0036810726858452613,
+      "control_resilience_share": 0.0036810726858452613,
+      "lower_with_tolerance": true,
+      "step": 144
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.0017150695537786838,
+      "control_resilience_share": 0.0017150695537786838,
+      "lower_with_tolerance": true,
+      "step": 145
+    },
+    {
+      "attacked_resilience_share": 0.04789134919281806,
+      "control_minus_attacked": 0.0059999999999999915,
+      "control_resilience_share": 0.05389134919281805,
+      "lower_with_tolerance": true,
+      "step": 146
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.005983510020909921,
+      "control_resilience_share": 0.005983510020909921,
+      "lower_with_tolerance": true,
+      "step": 147
+    },
+    {
+      "attacked_resilience_share": 0.06199532655416893,
+      "control_minus_attacked": 0.005999999999999998,
+      "control_resilience_share": 0.06799532655416893,
+      "lower_with_tolerance": true,
+      "step": 148
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.004235415388254105,
+      "control_resilience_share": 0.004235415388254105,
+      "lower_with_tolerance": true,
+      "step": 149
+    },
+    {
+      "attacked_resilience_share": 0.13867404089957044,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.14467404089957045,
+      "lower_with_tolerance": true,
+      "step": 150
+    },
+    {
+      "attacked_resilience_share": 0.1680424778014933,
+      "control_minus_attacked": 0.006000000000000005,
+      "control_resilience_share": 0.17404247780149332,
+      "lower_with_tolerance": true,
+      "step": 151
+    },
+    {
+      "attacked_resilience_share": 0.27022723789581726,
+      "control_minus_attacked": -0.16035250464770712,
+      "control_resilience_share": 0.10987473324811013,
+      "lower_with_tolerance": false,
+      "step": 152
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.06744405194706758,
+      "control_resilience_share": 0.06744405194706758,
+      "lower_with_tolerance": true,
+      "step": 153
+    },
+    {
+      "attacked_resilience_share": 0.24724176521760904,
+      "control_minus_attacked": -0.1887324160721008,
+      "control_resilience_share": 0.058509349145508226,
+      "lower_with_tolerance": false,
+      "step": 154
+    },
+    {
+      "attacked_resilience_share": 0.06093878615348463,
+      "control_minus_attacked": -0.054507529103283534,
+      "control_resilience_share": 0.006431257050201093,
+      "lower_with_tolerance": false,
+      "step": 155
+    },
+    {
+      "attacked_resilience_share": 0.07970109403654425,
+      "control_minus_attacked": 0.040256814634678825,
+      "control_resilience_share": 0.11995790867122308,
+      "lower_with_tolerance": true,
+      "step": 156
+    },
+    {
+      "attacked_resilience_share": 0.06437298356466789,
+      "control_minus_attacked": 0.010151477281724872,
+      "control_resilience_share": 0.07452446084639276,
+      "lower_with_tolerance": true,
+      "step": 157
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.02212699989869408,
+      "control_resilience_share": 0.02212699989869408,
+      "lower_with_tolerance": true,
+      "step": 158
+    },
+    {
+      "attacked_resilience_share": 0.029035414548738155,
+      "control_minus_attacked": 0.06597287636831767,
+      "control_resilience_share": 0.09500829091705582,
+      "lower_with_tolerance": true,
+      "step": 159
+    },
+    {
+      "attacked_resilience_share": 0.050563166382177525,
+      "control_minus_attacked": -0.018138523547488253,
+      "control_resilience_share": 0.03242464283468927,
+      "lower_with_tolerance": false,
+      "step": 160
+    },
+    {
+      "attacked_resilience_share": 0.025430313461786525,
+      "control_minus_attacked": 0.06669410731802479,
+      "control_resilience_share": 0.09212442077981131,
+      "lower_with_tolerance": true,
+      "step": 161
+    },
+    {
+      "attacked_resilience_share": 0.10806803463775796,
+      "control_minus_attacked": -0.007129384265890909,
+      "control_resilience_share": 0.10093865037186706,
+      "lower_with_tolerance": false,
+      "step": 162
+    },
+    {
+      "attacked_resilience_share": 0.09589273057612169,
+      "control_minus_attacked": 0.013494073757159955,
+      "control_resilience_share": 0.10938680433328164,
+      "lower_with_tolerance": true,
+      "step": 163
+    },
+    {
+      "attacked_resilience_share": 0.12093342937285084,
+      "control_minus_attacked": -0.08966421056106808,
+      "control_resilience_share": 0.031269218811782774,
+      "lower_with_tolerance": false,
+      "step": 164
+    },
+    {
+      "attacked_resilience_share": 0.15215416752083816,
+      "control_minus_attacked": -0.10355342632807599,
+      "control_resilience_share": 0.04860074119276216,
+      "lower_with_tolerance": false,
+      "step": 165
+    },
+    {
+      "attacked_resilience_share": 0.11094175648481484,
+      "control_minus_attacked": -0.016104610650325257,
+      "control_resilience_share": 0.09483714583448959,
+      "lower_with_tolerance": false,
+      "step": 166
+    },
+    {
+      "attacked_resilience_share": 0.017986207970817153,
+      "control_minus_attacked": -0.0010405589630594313,
+      "control_resilience_share": 0.01694564900775772,
+      "lower_with_tolerance": false,
+      "step": 167
+    },
+    {
+      "attacked_resilience_share": 0.06823946383174916,
+      "control_minus_attacked": -0.03175750050802974,
+      "control_resilience_share": 0.03648196332371942,
+      "lower_with_tolerance": false,
+      "step": 168
+    },
+    {
+      "attacked_resilience_share": 0.08048557033776922,
+      "control_minus_attacked": -0.021753291339908866,
+      "control_resilience_share": 0.058732278997860356,
+      "lower_with_tolerance": false,
+      "step": 169
+    },
+    {
+      "attacked_resilience_share": 0.02863007586675792,
+      "control_minus_attacked": -0.013391192022671378,
+      "control_resilience_share": 0.015238883844086542,
+      "lower_with_tolerance": false,
+      "step": 170
+    },
+    {
+      "attacked_resilience_share": 0.12187534847905013,
+      "control_minus_attacked": -0.05240105778633766,
+      "control_resilience_share": 0.06947429069271246,
+      "lower_with_tolerance": false,
+      "step": 171
+    },
+    {
+      "attacked_resilience_share": 0.1419060867198118,
+      "control_minus_attacked": -0.04096239845192612,
+      "control_resilience_share": 0.10094368826788569,
+      "lower_with_tolerance": false,
+      "step": 172
+    },
+    {
+      "attacked_resilience_share": 0.04690994873093336,
+      "control_minus_attacked": -0.02409014752138844,
+      "control_resilience_share": 0.022819801209544924,
+      "lower_with_tolerance": false,
+      "step": 173
+    },
+    {
+      "attacked_resilience_share": 0.04462501060239131,
+      "control_minus_attacked": 0.053886739717962956,
+      "control_resilience_share": 0.09851175032035427,
+      "lower_with_tolerance": true,
+      "step": 174
+    },
+    {
+      "attacked_resilience_share": 0.11294686527072267,
+      "control_minus_attacked": -0.09726702008941254,
+      "control_resilience_share": 0.01567984518131013,
+      "lower_with_tolerance": false,
+      "step": 175
+    },
+    {
+      "attacked_resilience_share": 0.0592071101700361,
+      "control_minus_attacked": -0.03410043317747071,
+      "control_resilience_share": 0.025106676992565385,
+      "lower_with_tolerance": false,
+      "step": 176
+    },
+    {
+      "attacked_resilience_share": 0.054397881253748656,
+      "control_minus_attacked": -0.051712511711422,
+      "control_resilience_share": 0.002685369542326655,
+      "lower_with_tolerance": false,
+      "step": 177
+    },
+    {
+      "attacked_resilience_share": 0.06975445767820761,
+      "control_minus_attacked": 0.020067317989178796,
+      "control_resilience_share": 0.0898217756673864,
+      "lower_with_tolerance": true,
+      "step": 178
+    },
+    {
+      "attacked_resilience_share": 0.05466449747835628,
+      "control_minus_attacked": -0.0373204822838072,
+      "control_resilience_share": 0.017344015194549076,
+      "lower_with_tolerance": false,
+      "step": 179
+    },
+    {
+      "attacked_resilience_share": 0.09037456027654281,
+      "control_minus_attacked": -0.03926921863920863,
+      "control_resilience_share": 0.05110534163733418,
+      "lower_with_tolerance": false,
+      "step": 180
+    },
+    {
+      "attacked_resilience_share": 0.06260045225785293,
+      "control_minus_attacked": 0.07985585883799512,
+      "control_resilience_share": 0.14245631109584805,
+      "lower_with_tolerance": true,
+      "step": 181
+    },
+    {
+      "attacked_resilience_share": 0.11158331700190047,
+      "control_minus_attacked": 0.06761145452478892,
+      "control_resilience_share": 0.1791947715266894,
+      "lower_with_tolerance": true,
+      "step": 182
+    },
+    {
+      "attacked_resilience_share": 0.1158957138225378,
+      "control_minus_attacked": -0.05380858519480447,
+      "control_resilience_share": 0.06208712862773333,
+      "lower_with_tolerance": false,
+      "step": 183
+    },
+    {
+      "attacked_resilience_share": 0.09124185862262577,
+      "control_minus_attacked": -0.05647349548803252,
+      "control_resilience_share": 0.03476836313459324,
+      "lower_with_tolerance": false,
+      "step": 184
+    },
+    {
+      "attacked_resilience_share": 0.21139257330989367,
+      "control_minus_attacked": -0.14588164697621808,
+      "control_resilience_share": 0.06551092633367558,
+      "lower_with_tolerance": false,
+      "step": 185
+    },
+    {
+      "attacked_resilience_share": 0.18147275229478835,
+      "control_minus_attacked": -0.16393011861827603,
+      "control_resilience_share": 0.017542633676512324,
+      "lower_with_tolerance": false,
+      "step": 186
+    },
+    {
+      "attacked_resilience_share": 0.03601820332671423,
+      "control_minus_attacked": 0.1177602949078774,
+      "control_resilience_share": 0.15377849823459164,
+      "lower_with_tolerance": true,
+      "step": 187
+    },
+    {
+      "attacked_resilience_share": 0.05167887333576156,
+      "control_minus_attacked": -0.02220918852545655,
+      "control_resilience_share": 0.029469684810305007,
+      "lower_with_tolerance": false,
+      "step": 188
+    },
+    {
+      "attacked_resilience_share": 0.14630549394626477,
+      "control_minus_attacked": -0.12710988646087323,
+      "control_resilience_share": 0.019195607485391526,
+      "lower_with_tolerance": false,
+      "step": 189
+    },
+    {
+      "attacked_resilience_share": 0.04267269792532766,
+      "control_minus_attacked": 0.15611058400240965,
+      "control_resilience_share": 0.1987832819277373,
+      "lower_with_tolerance": true,
+      "step": 190
+    },
+    {
+      "attacked_resilience_share": 0.17497975430127488,
+      "control_minus_attacked": -0.04974312784591817,
+      "control_resilience_share": 0.12523662645535671,
+      "lower_with_tolerance": false,
+      "step": 191
+    },
+    {
+      "attacked_resilience_share": 0.011149068166967408,
+      "control_minus_attacked": 0.06376006419157682,
+      "control_resilience_share": 0.07490913235854423,
+      "lower_with_tolerance": true,
+      "step": 192
+    },
+    {
+      "attacked_resilience_share": 0.05724879584899286,
+      "control_minus_attacked": -0.025026725952772007,
+      "control_resilience_share": 0.032222069896220853,
+      "lower_with_tolerance": false,
+      "step": 193
+    },
+    {
+      "attacked_resilience_share": 0.016195489590577025,
+      "control_minus_attacked": 0.05764362171763021,
+      "control_resilience_share": 0.07383911130820724,
+      "lower_with_tolerance": true,
+      "step": 194
+    },
+    {
+      "attacked_resilience_share": 0.15124784562191596,
+      "control_minus_attacked": -0.12312813184360549,
+      "control_resilience_share": 0.028119713778310462,
+      "lower_with_tolerance": false,
+      "step": 195
+    },
+    {
+      "attacked_resilience_share": 0.0924224413767144,
+      "control_minus_attacked": -0.04162069850203607,
+      "control_resilience_share": 0.050801742874678334,
+      "lower_with_tolerance": false,
+      "step": 196
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.012538651757583784,
+      "control_resilience_share": 0.012538651757583784,
+      "lower_with_tolerance": true,
+      "step": 197
+    },
+    {
+      "attacked_resilience_share": 0.033421940446416706,
+      "control_minus_attacked": 0.06643377394761558,
+      "control_resilience_share": 0.09985571439403229,
+      "lower_with_tolerance": true,
+      "step": 198
+    },
+    {
+      "attacked_resilience_share": 0.006932000095758636,
+      "control_minus_attacked": 0.08268900909698737,
+      "control_resilience_share": 0.089621009192746,
+      "lower_with_tolerance": true,
+      "step": 199
+    },
+    {
+      "attacked_resilience_share": 0.03836302110016118,
+      "control_minus_attacked": 0.0571772580784453,
+      "control_resilience_share": 0.09554027917860648,
+      "lower_with_tolerance": true,
+      "step": 200
+    },
+    {
+      "attacked_resilience_share": 0.05256285688746387,
+      "control_minus_attacked": 0.06267237808846611,
+      "control_resilience_share": 0.11523523497592998,
+      "lower_with_tolerance": true,
+      "step": 201
+    },
+    {
+      "attacked_resilience_share": 0.0946058784924432,
+      "control_minus_attacked": -0.049341361003527595,
+      "control_resilience_share": 0.04526451748891561,
+      "lower_with_tolerance": false,
+      "step": 202
+    },
+    {
+      "attacked_resilience_share": 0.07310352874933508,
+      "control_minus_attacked": -0.06898996275487712,
+      "control_resilience_share": 0.004113565994457958,
+      "lower_with_tolerance": false,
+      "step": 203
+    },
+    {
+      "attacked_resilience_share": 0.02601941390264858,
+      "control_minus_attacked": -0.010804556150787728,
+      "control_resilience_share": 0.015214857751860851,
+      "lower_with_tolerance": false,
+      "step": 204
+    },
+    {
+      "attacked_resilience_share": 0.17488088314541383,
+      "control_minus_attacked": -0.14213918473622192,
+      "control_resilience_share": 0.03274169840919191,
+      "lower_with_tolerance": false,
+      "step": 205
+    },
+    {
+      "attacked_resilience_share": 0.02058106193863643,
+      "control_minus_attacked": 0.041011106692890695,
+      "control_resilience_share": 0.061592168631527125,
+      "lower_with_tolerance": true,
+      "step": 206
+    },
+    {
+      "attacked_resilience_share": 0.06517738430800583,
+      "control_minus_attacked": 0.04083856165381297,
+      "control_resilience_share": 0.1060159459618188,
+      "lower_with_tolerance": true,
+      "step": 207
+    },
+    {
+      "attacked_resilience_share": 0.07980427299292508,
+      "control_minus_attacked": -0.038707744235242425,
+      "control_resilience_share": 0.04109652875768266,
+      "lower_with_tolerance": false,
+      "step": 208
+    },
+    {
+      "attacked_resilience_share": 0.07943626745854879,
+      "control_minus_attacked": 0.03255690866055909,
+      "control_resilience_share": 0.11199317611910788,
+      "lower_with_tolerance": true,
+      "step": 209
+    },
+    {
+      "attacked_resilience_share": 0.003224826790989766,
+      "control_minus_attacked": 0.04538223416606963,
+      "control_resilience_share": 0.0486070609570594,
+      "lower_with_tolerance": true,
+      "step": 210
+    },
+    {
+      "attacked_resilience_share": 0.010657082557190145,
+      "control_minus_attacked": 0.0686425045176573,
+      "control_resilience_share": 0.07929958707484744,
+      "lower_with_tolerance": true,
+      "step": 211
+    },
+    {
+      "attacked_resilience_share": 0.03532491231141821,
+      "control_minus_attacked": -0.019830561055540315,
+      "control_resilience_share": 0.015494351255877895,
+      "lower_with_tolerance": false,
+      "step": 212
+    },
+    {
+      "attacked_resilience_share": 0.0012647944905597999,
+      "control_minus_attacked": 0.05064852866621005,
+      "control_resilience_share": 0.05191332315676985,
+      "lower_with_tolerance": true,
+      "step": 213
+    },
+    {
+      "attacked_resilience_share": 0.0174762822246843,
+      "control_minus_attacked": 0.009670782956489151,
+      "control_resilience_share": 0.027147065181173453,
+      "lower_with_tolerance": true,
+      "step": 214
+    },
+    {
+      "attacked_resilience_share": 0.06962868572050933,
+      "control_minus_attacked": -0.019746130605279993,
+      "control_resilience_share": 0.049882555115229335,
+      "lower_with_tolerance": false,
+      "step": 215
+    },
+    {
+      "attacked_resilience_share": 0.057831029936894034,
+      "control_minus_attacked": -0.03952953702757982,
+      "control_resilience_share": 0.01830149290931422,
+      "lower_with_tolerance": false,
+      "step": 216
+    },
+    {
+      "attacked_resilience_share": 0.02490841837272577,
+      "control_minus_attacked": 0.087201056342147,
+      "control_resilience_share": 0.11210947471487277,
+      "lower_with_tolerance": true,
+      "step": 217
+    },
+    {
+      "attacked_resilience_share": 0.030782186006660182,
+      "control_minus_attacked": 0.045736389397213285,
+      "control_resilience_share": 0.07651857540387347,
+      "lower_with_tolerance": true,
+      "step": 218
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.16157322384482653,
+      "control_resilience_share": 0.16157322384482653,
+      "lower_with_tolerance": true,
+      "step": 219
+    },
+    {
+      "attacked_resilience_share": 0.1274047656005805,
+      "control_minus_attacked": -0.12606344054730012,
+      "control_resilience_share": 0.0013413250532803764,
+      "lower_with_tolerance": false,
+      "step": 220
+    },
+    {
+      "attacked_resilience_share": 0.049839763954427546,
+      "control_minus_attacked": 0.042006878668146605,
+      "control_resilience_share": 0.09184664262257415,
+      "lower_with_tolerance": true,
+      "step": 221
+    },
+    {
+      "attacked_resilience_share": 0.00020019784434639493,
+      "control_minus_attacked": 0.011342173794624304,
+      "control_resilience_share": 0.011542371638970698,
+      "lower_with_tolerance": true,
+      "step": 222
+    },
+    {
+      "attacked_resilience_share": 0.020885016082282527,
+      "control_minus_attacked": 0.02291491313585376,
+      "control_resilience_share": 0.04379992921813629,
+      "lower_with_tolerance": true,
+      "step": 223
+    },
+    {
+      "attacked_resilience_share": 0.08431444624295371,
+      "control_minus_attacked": 0.04501903708223133,
+      "control_resilience_share": 0.12933348332518504,
+      "lower_with_tolerance": true,
+      "step": 224
+    },
+    {
+      "attacked_resilience_share": 0.06230877541685973,
+      "control_minus_attacked": -0.008973307208601476,
+      "control_resilience_share": 0.053335468208258255,
+      "lower_with_tolerance": false,
+      "step": 225
+    },
+    {
+      "attacked_resilience_share": 0.08108643261037984,
+      "control_minus_attacked": 0.04584168710110903,
+      "control_resilience_share": 0.12692811971148887,
+      "lower_with_tolerance": true,
+      "step": 226
+    },
+    {
+      "attacked_resilience_share": 0.1516269069479335,
+      "control_minus_attacked": -0.12647597984313844,
+      "control_resilience_share": 0.025150927104795048,
+      "lower_with_tolerance": false,
+      "step": 227
+    },
+    {
+      "attacked_resilience_share": 0.06663201090583608,
+      "control_minus_attacked": -0.0028597579690501362,
+      "control_resilience_share": 0.06377225293678594,
+      "lower_with_tolerance": false,
+      "step": 228
+    },
+    {
+      "attacked_resilience_share": 0.12581052892659675,
+      "control_minus_attacked": -0.043715693162628036,
+      "control_resilience_share": 0.08209483576396871,
+      "lower_with_tolerance": false,
+      "step": 229
+    },
+    {
+      "attacked_resilience_share": 0.08421042489618566,
+      "control_minus_attacked": 0.04279622739242772,
+      "control_resilience_share": 0.12700665228861338,
+      "lower_with_tolerance": true,
+      "step": 230
+    },
+    {
+      "attacked_resilience_share": 0.029406761134119372,
+      "control_minus_attacked": 0.07029048020168643,
+      "control_resilience_share": 0.0996972413358058,
+      "lower_with_tolerance": true,
+      "step": 231
+    },
+    {
+      "attacked_resilience_share": 0.1277610497316617,
+      "control_minus_attacked": 0.0026284855050646982,
+      "control_resilience_share": 0.1303895352367264,
+      "lower_with_tolerance": true,
+      "step": 232
+    },
+    {
+      "attacked_resilience_share": 0.0495480136319261,
+      "control_minus_attacked": -0.016208350271476858,
+      "control_resilience_share": 0.03333966336044924,
+      "lower_with_tolerance": false,
+      "step": 233
+    },
+    {
+      "attacked_resilience_share": 0.04391076616777692,
+      "control_minus_attacked": -0.0009531714952322884,
+      "control_resilience_share": 0.04295759467254463,
+      "lower_with_tolerance": false,
+      "step": 234
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.020825039589014202,
+      "control_resilience_share": 0.020825039589014202,
+      "lower_with_tolerance": true,
+      "step": 235
+    },
+    {
+      "attacked_resilience_share": 0.050008790451272316,
+      "control_minus_attacked": 0.08152322672689352,
+      "control_resilience_share": 0.13153201717816584,
+      "lower_with_tolerance": true,
+      "step": 236
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.019574793866021123,
+      "control_resilience_share": 0.019574793866021123,
+      "lower_with_tolerance": true,
+      "step": 237
+    },
+    {
+      "attacked_resilience_share": 0.10998741830472318,
+      "control_minus_attacked": -0.06560229462082776,
+      "control_resilience_share": 0.04438512368389543,
+      "lower_with_tolerance": false,
+      "step": 238
+    },
+    {
+      "attacked_resilience_share": 0.01962441905494831,
+      "control_minus_attacked": 0.156800766936585,
+      "control_resilience_share": 0.1764251859915333,
+      "lower_with_tolerance": true,
+      "step": 239
+    },
+    {
+      "attacked_resilience_share": 0.05023845751344054,
+      "control_minus_attacked": 0.00014163875342713267,
+      "control_resilience_share": 0.05038009626686767,
+      "lower_with_tolerance": true,
+      "step": 240
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.005115536231119515,
+      "control_resilience_share": 0.005115536231119515,
+      "lower_with_tolerance": true,
+      "step": 241
+    },
+    {
+      "attacked_resilience_share": 0.056497879472619465,
+      "control_minus_attacked": 0.034935293710300984,
+      "control_resilience_share": 0.09143317318292045,
+      "lower_with_tolerance": true,
+      "step": 242
+    },
+    {
+      "attacked_resilience_share": 0.04259164505980148,
+      "control_minus_attacked": 0.005347791461887394,
+      "control_resilience_share": 0.047939436521688875,
+      "lower_with_tolerance": true,
+      "step": 243
+    },
+    {
+      "attacked_resilience_share": 0.20357946347903347,
+      "control_minus_attacked": -0.17325270550096972,
+      "control_resilience_share": 0.030326757978063737,
+      "lower_with_tolerance": false,
+      "step": 244
+    },
+    {
+      "attacked_resilience_share": 0.021690993892580265,
+      "control_minus_attacked": 0.06349191856035048,
+      "control_resilience_share": 0.08518291245293075,
+      "lower_with_tolerance": true,
+      "step": 245
+    },
+    {
+      "attacked_resilience_share": 0.07046736875289077,
+      "control_minus_attacked": -0.06266829977131225,
+      "control_resilience_share": 0.007799068981578523,
+      "lower_with_tolerance": false,
+      "step": 246
+    },
+    {
+      "attacked_resilience_share": 0.04328153903172382,
+      "control_minus_attacked": 0.08977772522230532,
+      "control_resilience_share": 0.13305926425402914,
+      "lower_with_tolerance": true,
+      "step": 247
+    },
+    {
+      "attacked_resilience_share": 0.013548980635850518,
+      "control_minus_attacked": 0.08771896768239819,
+      "control_resilience_share": 0.1012679483182487,
+      "lower_with_tolerance": true,
+      "step": 248
+    },
+    {
+      "attacked_resilience_share": 0.05326553835002333,
+      "control_minus_attacked": 0.0454212862631307,
+      "control_resilience_share": 0.09868682461315403,
+      "lower_with_tolerance": true,
+      "step": 249
+    },
+    {
+      "attacked_resilience_share": 0.1749122127974479,
+      "control_minus_attacked": -0.1457648720277282,
+      "control_resilience_share": 0.029147340769719685,
+      "lower_with_tolerance": false,
+      "step": 250
+    },
+    {
+      "attacked_resilience_share": 0.01102297244173391,
+      "control_minus_attacked": 0.05863238886691496,
+      "control_resilience_share": 0.06965536130864887,
+      "lower_with_tolerance": true,
+      "step": 251
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.008547795893580623,
+      "control_resilience_share": 0.008547795893580623,
+      "lower_with_tolerance": true,
+      "step": 252
+    },
+    {
+      "attacked_resilience_share": 0.007883888796971996,
+      "control_minus_attacked": 0.19414970620187177,
+      "control_resilience_share": 0.20203359499884377,
+      "lower_with_tolerance": true,
+      "step": 253
+    },
+    {
+      "attacked_resilience_share": 0.021424477957012456,
+      "control_minus_attacked": -0.021323060088431208,
+      "control_resilience_share": 0.00010141786858124707,
+      "lower_with_tolerance": false,
+      "step": 254
+    },
+    {
+      "attacked_resilience_share": 0.004627253397391079,
+      "control_minus_attacked": 0.09715638937383374,
+      "control_resilience_share": 0.10178364277122481,
+      "lower_with_tolerance": true,
+      "step": 255
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.1541870744180993,
+      "control_resilience_share": 0.1541870744180993,
+      "lower_with_tolerance": true,
+      "step": 256
+    },
+    {
+      "attacked_resilience_share": 0.01692365813012144,
+      "control_minus_attacked": 0.06480089612485464,
+      "control_resilience_share": 0.08172455425497607,
+      "lower_with_tolerance": true,
+      "step": 257
+    },
+    {
+      "attacked_resilience_share": 0.032379603791903265,
+      "control_minus_attacked": 0.1014380071551145,
+      "control_resilience_share": 0.13381761094701777,
+      "lower_with_tolerance": true,
+      "step": 258
+    },
+    {
+      "attacked_resilience_share": 0.04328419413469023,
+      "control_minus_attacked": 0.071685997098626,
+      "control_resilience_share": 0.11497019123331623,
+      "lower_with_tolerance": true,
+      "step": 259
+    },
+    {
+      "attacked_resilience_share": 0.10604829500041595,
+      "control_minus_attacked": 0.022814140641297068,
+      "control_resilience_share": 0.128862435641713,
+      "lower_with_tolerance": true,
+      "step": 260
+    },
+    {
+      "attacked_resilience_share": 0.16566477662187368,
+      "control_minus_attacked": -0.1568564794291985,
+      "control_resilience_share": 0.008808297192675162,
+      "lower_with_tolerance": false,
+      "step": 261
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.005347881328091492,
+      "control_resilience_share": 0.005347881328091492,
+      "lower_with_tolerance": true,
+      "step": 262
+    },
+    {
+      "attacked_resilience_share": 0.06566080545597304,
+      "control_minus_attacked": 0.07600363245849302,
+      "control_resilience_share": 0.14166443791446606,
+      "lower_with_tolerance": true,
+      "step": 263
+    },
+    {
+      "attacked_resilience_share": 0.037685835472407656,
+      "control_minus_attacked": 0.031586285875708026,
+      "control_resilience_share": 0.06927212134811568,
+      "lower_with_tolerance": true,
+      "step": 264
+    },
+    {
+      "attacked_resilience_share": 0.03421911504774637,
+      "control_minus_attacked": 0.05013411025807468,
+      "control_resilience_share": 0.08435322530582105,
+      "lower_with_tolerance": true,
+      "step": 265
+    },
+    {
+      "attacked_resilience_share": 0.1464988342067134,
+      "control_minus_attacked": -0.10889286913901032,
+      "control_resilience_share": 0.03760596506770307,
+      "lower_with_tolerance": false,
+      "step": 266
+    },
+    {
+      "attacked_resilience_share": 0.06512635065521022,
+      "control_minus_attacked": 0.04322853352565545,
+      "control_resilience_share": 0.10835488418086567,
+      "lower_with_tolerance": true,
+      "step": 267
+    },
+    {
+      "attacked_resilience_share": 0.17906410826798763,
+      "control_minus_attacked": -0.16731520955582857,
+      "control_resilience_share": 0.01174889871215905,
+      "lower_with_tolerance": false,
+      "step": 268
+    },
+    {
+      "attacked_resilience_share": 0.07032065133997939,
+      "control_minus_attacked": -0.007094227964856384,
+      "control_resilience_share": 0.063226423375123,
+      "lower_with_tolerance": false,
+      "step": 269
+    },
+    {
+      "attacked_resilience_share": 0.1296466146885728,
+      "control_minus_attacked": -0.011942563356657027,
+      "control_resilience_share": 0.11770405133191578,
+      "lower_with_tolerance": false,
+      "step": 270
+    },
+    {
+      "attacked_resilience_share": 0.05021554481547863,
+      "control_minus_attacked": 0.03229437075859169,
+      "control_resilience_share": 0.08250991557407032,
+      "lower_with_tolerance": true,
+      "step": 271
+    },
+    {
+      "attacked_resilience_share": 0.03716580528910485,
+      "control_minus_attacked": 0.026439550859191585,
+      "control_resilience_share": 0.06360535614829643,
+      "lower_with_tolerance": true,
+      "step": 272
+    },
+    {
+      "attacked_resilience_share": 0.11295939053817858,
+      "control_minus_attacked": -0.10279627881349371,
+      "control_resilience_share": 0.010163111724684874,
+      "lower_with_tolerance": false,
+      "step": 273
+    },
+    {
+      "attacked_resilience_share": 0.07101479843012053,
+      "control_minus_attacked": -0.06245531226388626,
+      "control_resilience_share": 0.008559486166234271,
+      "lower_with_tolerance": false,
+      "step": 274
+    },
+    {
+      "attacked_resilience_share": 0.06523240449725622,
+      "control_minus_attacked": -0.02459277343079562,
+      "control_resilience_share": 0.040639631066460596,
+      "lower_with_tolerance": false,
+      "step": 275
+    },
+    {
+      "attacked_resilience_share": 0.03611636677761018,
+      "control_minus_attacked": -0.01294489267265787,
+      "control_resilience_share": 0.02317147410495231,
+      "lower_with_tolerance": false,
+      "step": 276
+    },
+    {
+      "attacked_resilience_share": 0.07916891917510532,
+      "control_minus_attacked": 0.03381159047811108,
+      "control_resilience_share": 0.1129805096532164,
+      "lower_with_tolerance": true,
+      "step": 277
+    },
+    {
+      "attacked_resilience_share": 0.04359496945393853,
+      "control_minus_attacked": -0.022208332940798818,
+      "control_resilience_share": 0.021386636513139712,
+      "lower_with_tolerance": false,
+      "step": 278
+    },
+    {
+      "attacked_resilience_share": 0.1412395478393639,
+      "control_minus_attacked": -0.09756976735682565,
+      "control_resilience_share": 0.04366978048253826,
+      "lower_with_tolerance": false,
+      "step": 279
+    },
+    {
+      "attacked_resilience_share": 0.13201446533232747,
+      "control_minus_attacked": -0.001019022962700844,
+      "control_resilience_share": 0.13099544236962662,
+      "lower_with_tolerance": false,
+      "step": 280
+    },
+    {
+      "attacked_resilience_share": 0.07318868050295406,
+      "control_minus_attacked": -0.031386934273796435,
+      "control_resilience_share": 0.041801746229157624,
+      "lower_with_tolerance": false,
+      "step": 281
+    },
+    {
+      "attacked_resilience_share": 0.05004737770229747,
+      "control_minus_attacked": 0.006184523007806052,
+      "control_resilience_share": 0.05623190071010352,
+      "lower_with_tolerance": true,
+      "step": 282
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.021768048204366057,
+      "control_resilience_share": 0.021768048204366057,
+      "lower_with_tolerance": true,
+      "step": 283
+    },
+    {
+      "attacked_resilience_share": 0.07431566216067158,
+      "control_minus_attacked": -0.030994810335855313,
+      "control_resilience_share": 0.043320851824816264,
+      "lower_with_tolerance": false,
+      "step": 284
+    },
+    {
+      "attacked_resilience_share": 0.01937172056353212,
+      "control_minus_attacked": -0.006608247296706837,
+      "control_resilience_share": 0.012763473266825281,
+      "lower_with_tolerance": false,
+      "step": 285
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.012622124994948067,
+      "control_resilience_share": 0.012622124994948067,
+      "lower_with_tolerance": true,
+      "step": 286
+    },
+    {
+      "attacked_resilience_share": 0.04667604009454289,
+      "control_minus_attacked": -0.0016091439307855948,
+      "control_resilience_share": 0.045066896163757295,
+      "lower_with_tolerance": false,
+      "step": 287
+    },
+    {
+      "attacked_resilience_share": 0.03762738714610543,
+      "control_minus_attacked": -0.0026984664372721526,
+      "control_resilience_share": 0.03492892070883328,
+      "lower_with_tolerance": false,
+      "step": 288
+    },
+    {
+      "attacked_resilience_share": 0.04703053625812561,
+      "control_minus_attacked": 0.03709481892208532,
+      "control_resilience_share": 0.08412535518021093,
+      "lower_with_tolerance": true,
+      "step": 289
+    },
+    {
+      "attacked_resilience_share": 0.014609539282616471,
+      "control_minus_attacked": 0.07887946961297104,
+      "control_resilience_share": 0.09348900889558752,
+      "lower_with_tolerance": true,
+      "step": 290
+    },
+    {
+      "attacked_resilience_share": 0.0,
+      "control_minus_attacked": 0.0937070650121203,
+      "control_resilience_share": 0.0937070650121203,
+      "lower_with_tolerance": true,
+      "step": 291
+    },
+    {
+      "attacked_resilience_share": 0.03777581802447232,
+      "control_minus_attacked": -0.018287289625611314,
+      "control_resilience_share": 0.019488528398861008,
+      "lower_with_tolerance": false,
+      "step": 292
+    },
+    {
+      "attacked_resilience_share": 0.04266953322200674,
+      "control_minus_attacked": 0.031553283548628325,
+      "control_resilience_share": 0.07422281677063507,
+      "lower_with_tolerance": true,
+      "step": 293
+    },
+    {
+      "attacked_resilience_share": 0.03897438255015727,
+      "control_minus_attacked": -0.004246597737646088,
+      "control_resilience_share": 0.03472778481251118,
+      "lower_with_tolerance": false,
+      "step": 294
+    },
+    {
+      "attacked_resilience_share": 0.11963745037265805,
+      "control_minus_attacked": -0.019229474178603254,
+      "control_resilience_share": 0.1004079761940548,
+      "lower_with_tolerance": false,
+      "step": 295
+    },
+    {
+      "attacked_resilience_share": 0.12121711475280605,
+      "control_minus_attacked": -0.07325208886434958,
+      "control_resilience_share": 0.047965025888456476,
+      "lower_with_tolerance": false,
+      "step": 296
+    },
+    {
+      "attacked_resilience_share": 0.06817590910249134,
+      "control_minus_attacked": 0.06220321069183281,
+      "control_resilience_share": 0.13037911979432415,
+      "lower_with_tolerance": true,
+      "step": 297
+    },
+    {
+      "attacked_resilience_share": 0.01946849792931407,
+      "control_minus_attacked": 0.03571942366151751,
+      "control_resilience_share": 0.05518792159083158,
+      "lower_with_tolerance": true,
+      "step": 298
+    },
+    {
+      "attacked_resilience_share": 0.12355850787359376,
+      "control_minus_attacked": -0.0879953203578719,
+      "control_resilience_share": 0.035563187515721864,
+      "lower_with_tolerance": false,
+      "step": 299
+    }
+  ],
+  "computed_float_absolute_tolerance": 1e-09,
+  "passed": true,
+  "required_count": 100,
+  "steps_strictly_after_50_with_lower_resilience_share": 177
+}
