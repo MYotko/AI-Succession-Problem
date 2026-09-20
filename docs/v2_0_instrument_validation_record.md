@@ -1788,6 +1788,47 @@ hold once an attack changes a trajectory, at 7fec0c67. Every one was in the scaf
 none touched the attacks, seeds, quantities, predictions or criterion. Zero model steps ran
 under any of them.
 
+*Stage A3, the corrected attack, 2026-09-20.* Amendment 2 at a6a072c7 added a validity gate
+binding every held-out attack and a stage A3 that zeroes the resilience share outright
+rather than shaving it. A3 ran at b1a54983 under `defense_heldout_run_a3s_`, 80 runs at
+seeds 1835087900 through 1835087919 with the unattacked control at the same seeds.
+
+**It is a valid attack.** The median resilience stock at step 149 is 0.2000 against the
+control's 0.3915, a paired difference of 0.2051 at t of 19.61 against the declared margin of
+0.10, and the committed resilience share after onset is exactly 0.0 in every attacked step.
+Undefended, A3 loses 40.55 more people at the shock than the unattacked control, at t of
+9.34. A1 moved none of these; A3 moves all of them.
+
+**The defense was not harmed by it, and helped modestly.** Paired OFF minus GRADED, 20
+pairs: Y1, final population, is -14.00 at t of -1.14, in the direction of the defended arm
+ending with more people; Y2, steps past g_star, is 3.30 at t of 2.22; Y3, the shock loss, is
+9.30 at t of 2.22, meaning the undefended arm lost about nine more people at the shock. No
+extinctions in either arm. No harm finding arises, so gate 2's pass now rests on an attack
+that demonstrably perturbs the substrate.
+
+**Two of the four predictions were wrong, and both errors are in this note's reasoning, not
+in the defense.** Prediction 1, validity, and prediction 3, that the undefended attack loses
+more at the shock, were right. Prediction 2, that no channel alarms before the shock in at
+least 15 of 20 undefended runs, was wrong: only 8 of 20. The reason is that a CUSUM
+accumulates. The note argued that a 0.1 shift in allocation distance is far below the 0.77
+threshold, which is true of a single step and false of a sustained shift: a persistent
+excess of about 0.05 per step above the reference and allowance crosses that threshold in
+roughly fifteen steps. The allocation channel does see a sustained buffer drain, and the
+blind-spot claim of item 2h holds only for a drain too small to accumulate, which is what A1
+was. Prediction 4, that the defense could not repair the buffer and so would leave final
+population within a paired t of 2, was right in its number and wrong in its mechanism: the
+defense acts outside the attack, so once latched its consensus allocation replaces the
+attacked action entirely and restores a resilience share of 0.0533, close to the unattacked
+median of 0.0512. It repairs the buffer by overwriting the attack rather than by responding
+to it.
+
+**What this changes in the reading of gate 2.** The defense now has one valid held-out
+attack against it, detected in 12 of 20 undefended runs before the shock and materially
+blunted where it was detected. That is a stronger result than stage A supported, and it is
+still bounded: one attack, one substrate, 20 seeds, and a defense whose response happens to
+sit outside the attack's reach by construction of the wrapper order. The cost observation
+stands unchanged, since A3's defended runs latched in 20 of 20.
+
 *First run under the artifact convention.* The 160 per-step logs and completion records were
 merged into `defense_heldout_run_a5_steps.csv`, 48,000 rows, and
 `defense_heldout_run_a5_completions.jsonl`, each run verified by row count and by the hash
