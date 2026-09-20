@@ -1,0 +1,52 @@
+{
+  "status": "HALTED",
+  "stage": "after T0, before T1",
+  "halt_reason": "Specification conflicts between the dispatch and the committed recovery note.",
+  "specification_conflicts": [
+    {
+      "id": "analysis_and_report_quantities",
+      "dispatch": "T4 requires computing Y1 through Y5; T5 requires registered results Y1 through Y5 in order.",
+      "committed_note": "defense_recovery_design_note.md Section 5 registers R1 through R6. Section 8 requires analysis beyond R1 through R6 to be labeled exploratory and placed after registered results.",
+      "effect": "The required registered analysis and report quantities do not agree."
+    },
+    {
+      "id": "gate_identity",
+      "dispatch": "T5 requires the report to state that this is gate 2 of the promotion plan.",
+      "committed_note": "defense_recovery_design_note.md title and Sections 1 and 6 identify this recovery evaluation as gate 3.",
+      "effect": "The required report gate identifier does not agree."
+    },
+    {
+      "id": "governing_specification",
+      "dispatch": "THE SPECIFICATION names defense_heldout_design_note.md as the committed pre-registration.",
+      "committed_note": "defense_recovery_design_note.md governs defense_recovery_run_ and specifies recovery, fifteen cells and 300 runs; defense_heldout_design_note.md governs defense_heldout_run_ and registers Y1 through Y5.",
+      "effect": "The named governing note does not agree with the task's recovery design and output prefix."
+    }
+  ],
+  "T0_status": "PASS",
+  "T1_status": "NOT_RUN",
+  "sign_fixture_status": "NOT_RUN",
+  "analysis_status": "NOT_RUN",
+  "registered_run_count": 300,
+  "batch_runs_launched": 0,
+  "batch_runs_completed": 0,
+  "gate_runs_launched": 0,
+  "model_steps_executed": 0,
+  "source_pin_failures_at_completion": [],
+  "source_pins_match_at_completion": true,
+  "resumed_seeds": [],
+  "retry_events": [],
+  "tool_layer_workarounds": [],
+  "utc": "2026-09-20T19:35:16.173666+00:00",
+  "registered_quantities_status": "UNMEASURED",
+  "R1": null,
+  "R2": null,
+  "R3": null,
+  "R4": null,
+  "R5": null,
+  "R6": null,
+  "attack_validity_check": null,
+  "sign_fixture": null,
+  "registered_predictions": null,
+  "parameter_selected": null,
+  "promotion_gate_decision": null
+}
