@@ -1,0 +1,24 @@
+{
+  "batch_runs_completed": 0,
+  "failures": [
+    {
+      "error": "T1 gate 2 failed; see defense_heldout_run_a4_attack_effect_gate.json",
+      "status": "HALTED",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\defense_heldout_run_a4_executor.py\", line 755, in main\n    if args.command=='all':gates()\n                           ~~~~~^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\defense_heldout_run_a4_executor.py\", line 586, in gates\n    evidence['2_attack_effect']=attack_effect_gate()\n                                ~~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\defense_heldout_run_a4_executor.py\", line 566, in attack_effect_gate\n    if not result['passed']:raise RuntimeError('T1 gate 2 failed; see '+P+'attack_effect_gate.json')\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: T1 gate 2 failed; see defense_heldout_run_a4_attack_effect_gate.json\n",
+      "utc": "2026-09-20T12:59:24.881501+00:00",
+      "where": "all:None"
+    }
+  ],
+  "registered": {
+    "Y1": null,
+    "Y2": null,
+    "Y3": null,
+    "Y4": null,
+    "Y5": null
+  },
+  "runs_planned": 160,
+  "sign_fixture": {
+    "status": "NOT_RUN"
+  },
+  "status": "HALTED"
+}

@@ -1,0 +1,2495 @@
+{
+  "head": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+  "pins": [
+    {
+      "path": "simulation/diagnostics/defense_heldout_design_note.md",
+      "expected_sha256_lf": "555fdba674139aebcaa7377daf1f19e3278e2c00f13ec742d729983f212be6b9",
+      "committed_sha256_lf": "555fdba674139aebcaa7377daf1f19e3278e2c00f13ec742d729983f212be6b9",
+      "working_tree_sha256_lf": "555fdba674139aebcaa7377daf1f19e3278e2c00f13ec742d729983f212be6b9",
+      "committed_blob_sha1": "7f3df99041984c3a85d72d5319474db075d80ef0",
+      "last_modified_commit": "939d4242101fcea06f84d892e5d38f2a0b7ed93a",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "expected_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "committed_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "working_tree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "committed_blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d",
+      "last_modified_commit": "b5783f41df0b3be1cbae8ab79921939847be9181",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/drift_defense_design_note.md",
+      "expected_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "committed_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "working_tree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "committed_blob_sha1": "d902392c8d3a8c7a267dc040349175095bef945e",
+      "last_modified_commit": "e38b821c0648c6f5eae5f113d109aadd799b5df2",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/drift_defense_run_executor.py",
+      "expected_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "committed_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "working_tree_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "committed_blob_sha1": "b7b5a6a7f7f7023ace3547002359f62e54f9a9b2",
+      "last_modified_commit": "6b3c628aea1322445a1df22732c5d93889a7a43a",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "committed_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "working_tree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "committed_blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+      "last_modified_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r3_a3_constants.json",
+      "expected_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "committed_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "working_tree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "committed_blob_sha1": "09acbbcae9bb292dbd495eb3d72dd1bc985a5edf",
+      "last_modified_commit": "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/cusum_detector_v2.py",
+      "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "committed_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "working_tree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "committed_blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+      "last_modified_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/attack_metrics_v2.py",
+      "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "committed_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "working_tree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "committed_blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+      "last_modified_commit": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/metrics.py",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/agents.py",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/model.py",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/attack_adapter_v2.py",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "working_tree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "committed_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "last_modified_commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/working_factor.py",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "working_tree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "committed_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "last_modified_commit": "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/constants_v2_stage18.py",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "working_tree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "committed_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "last_modified_commit": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "committed_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "working_tree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "committed_blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "last_modified_commit": "76f81cd83e0db6ff5031070e54f2f908502b8632",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/detector_round3_design_note.md",
+      "expected_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "committed_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "working_tree_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "committed_blob_sha1": "f584aa2fbf4e76db674ff487fed2b036f7e45a08",
+      "last_modified_commit": "63470090dc3836628b69fce432a30b15b3f212b7",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r2_constants.json",
+      "expected_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "committed_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "working_tree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "committed_blob_sha1": "ff934c2613e90804c3ff5c18141f777eaa24276f",
+      "last_modified_commit": "242ec2265ee6e3b1158925af0c22f6b76e007007",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_eval_executor.py",
+      "expected_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "committed_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "working_tree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "committed_blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723",
+      "last_modified_commit": "9ce2e65931875f8cc6c2036a3e56475a1d08bd84",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "committed_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "working_tree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "committed_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "last_modified_commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/defense_cross_vector_design_note.md",
+      "expected_sha256_lf": "70cb496651610f8e13b7c793854efb3a6d79754f2f19725701a8f41c3c9a05e7",
+      "committed_sha256_lf": "70cb496651610f8e13b7c793854efb3a6d79754f2f19725701a8f41c3c9a05e7",
+      "working_tree_sha256_lf": "70cb496651610f8e13b7c793854efb3a6d79754f2f19725701a8f41c3c9a05e7",
+      "committed_blob_sha1": "f754a8b498bf0d2c5866769cf30a830668c6b92e",
+      "last_modified_commit": "7cbe2c95e0fd0ef363574d19c0300cd1c7d5dd20",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/defense_xv_run_a2_executor.py",
+      "expected_sha256_lf": "25b544872c1b23ea96432e566a43a6483ca6bd9707318ade80ba12cd85a85b4a",
+      "committed_sha256_lf": "25b544872c1b23ea96432e566a43a6483ca6bd9707318ade80ba12cd85a85b4a",
+      "working_tree_sha256_lf": "25b544872c1b23ea96432e566a43a6483ca6bd9707318ade80ba12cd85a85b4a",
+      "committed_blob_sha1": "bf389f19cd2a8dad3ffb04370adba0bdef921b89",
+      "last_modified_commit": "524bfab286994e115309b36c7c5f1478cabf583c",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/defense_heldout_run_a2_executor.py",
+      "expected_sha256_lf": "a8c47a9a28cc9dd0d1a549fcdf8d8463acc053fa6f0d0378421292c64fb68f16",
+      "committed_sha256_lf": "a8c47a9a28cc9dd0d1a549fcdf8d8463acc053fa6f0d0378421292c64fb68f16",
+      "working_tree_sha256_lf": "a8c47a9a28cc9dd0d1a549fcdf8d8463acc053fa6f0d0378421292c64fb68f16",
+      "committed_blob_sha1": "84d30261da068e21a7196e6e36f0022a01fbc423",
+      "last_modified_commit": "6fd01bea886d98d88bc091de8fd3d766e534b126",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/defense_heldout_run_a2_analysis.py",
+      "expected_sha256_lf": "0831f3f4ab0ad44c6d81ad53d37c897656f7056b9373e4c272cc1325d2396c6c",
+      "committed_sha256_lf": "0831f3f4ab0ad44c6d81ad53d37c897656f7056b9373e4c272cc1325d2396c6c",
+      "working_tree_sha256_lf": "0831f3f4ab0ad44c6d81ad53d37c897656f7056b9373e4c272cc1325d2396c6c",
+      "committed_blob_sha1": "afa314bf7640c190cf36f94151bb7222b3271765",
+      "last_modified_commit": "6fd01bea886d98d88bc091de8fd3d766e534b126",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/defense_heldout_run_a2_plan.json",
+      "expected_sha256_lf": "6dbbb094c44e70349a6a772af6c6208c1a039ae81b016231cff560d69c0f8726",
+      "committed_sha256_lf": "6dbbb094c44e70349a6a772af6c6208c1a039ae81b016231cff560d69c0f8726",
+      "working_tree_sha256_lf": "6dbbb094c44e70349a6a772af6c6208c1a039ae81b016231cff560d69c0f8726",
+      "committed_blob_sha1": "650c7276468acac456bcd4b50db18f48c1212918",
+      "last_modified_commit": "6fd01bea886d98d88bc091de8fd3d766e534b126",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/defense_heldout_run_a3_executor.py",
+      "expected_sha256_lf": "d2920d49e82854fd5c2c468cc00c46385b41336fe2985e6a6b762328b7cee9a4",
+      "committed_sha256_lf": "d2920d49e82854fd5c2c468cc00c46385b41336fe2985e6a6b762328b7cee9a4",
+      "working_tree_sha256_lf": "d2920d49e82854fd5c2c468cc00c46385b41336fe2985e6a6b762328b7cee9a4",
+      "committed_blob_sha1": "fb9de19a810f29edaebbc3f1a9410020872a563d",
+      "last_modified_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "committed source copied before execution"
+    },
+    {
+      "path": "simulation/diagnostics/defense_heldout_run_a3_analysis.py",
+      "expected_sha256_lf": "d290dd129909b25120abd5779a0b3125309e5325fc98150a49f44aa6204aac78",
+      "committed_sha256_lf": "d290dd129909b25120abd5779a0b3125309e5325fc98150a49f44aa6204aac78",
+      "working_tree_sha256_lf": "d290dd129909b25120abd5779a0b3125309e5325fc98150a49f44aa6204aac78",
+      "committed_blob_sha1": "922750213b30485c9f6a4f542cac32842f3c7e90",
+      "last_modified_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "committed source copied before execution"
+    },
+    {
+      "path": "simulation/diagnostics/defense_heldout_run_a3_plan.json",
+      "expected_sha256_lf": "2a183ecb07766ff5ca06d8c29a80edfc1abc825657b5d4fbeb5834944b95bde2",
+      "committed_sha256_lf": "2a183ecb07766ff5ca06d8c29a80edfc1abc825657b5d4fbeb5834944b95bde2",
+      "working_tree_sha256_lf": "2a183ecb07766ff5ca06d8c29a80edfc1abc825657b5d4fbeb5834944b95bde2",
+      "committed_blob_sha1": "28db3698cc6f6dc2589a7916014bf6b8a2649edf",
+      "last_modified_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "committed source copied before execution"
+    }
+  ],
+  "copied_sources": [
+    {
+      "path": "simulation/diagnostics/drift_defense_run_executor.py",
+      "expected_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "committed_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "working_tree_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "committed_blob_sha1": "b7b5a6a7f7f7023ace3547002359f62e54f9a9b2",
+      "last_modified_commit": "6b3c628aea1322445a1df22732c5d93889a7a43a",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/defense_xv_run_a2_executor.py",
+      "expected_sha256_lf": "25b544872c1b23ea96432e566a43a6483ca6bd9707318ade80ba12cd85a85b4a",
+      "committed_sha256_lf": "25b544872c1b23ea96432e566a43a6483ca6bd9707318ade80ba12cd85a85b4a",
+      "working_tree_sha256_lf": "25b544872c1b23ea96432e566a43a6483ca6bd9707318ade80ba12cd85a85b4a",
+      "committed_blob_sha1": "bf389f19cd2a8dad3ffb04370adba0bdef921b89",
+      "last_modified_commit": "524bfab286994e115309b36c7c5f1478cabf583c",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/defense_heldout_run_a2_executor.py",
+      "expected_sha256_lf": "a8c47a9a28cc9dd0d1a549fcdf8d8463acc053fa6f0d0378421292c64fb68f16",
+      "committed_sha256_lf": "a8c47a9a28cc9dd0d1a549fcdf8d8463acc053fa6f0d0378421292c64fb68f16",
+      "working_tree_sha256_lf": "a8c47a9a28cc9dd0d1a549fcdf8d8463acc053fa6f0d0378421292c64fb68f16",
+      "committed_blob_sha1": "84d30261da068e21a7196e6e36f0022a01fbc423",
+      "last_modified_commit": "6fd01bea886d98d88bc091de8fd3d766e534b126",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/defense_heldout_run_a2_analysis.py",
+      "expected_sha256_lf": "0831f3f4ab0ad44c6d81ad53d37c897656f7056b9373e4c272cc1325d2396c6c",
+      "committed_sha256_lf": "0831f3f4ab0ad44c6d81ad53d37c897656f7056b9373e4c272cc1325d2396c6c",
+      "working_tree_sha256_lf": "0831f3f4ab0ad44c6d81ad53d37c897656f7056b9373e4c272cc1325d2396c6c",
+      "committed_blob_sha1": "afa314bf7640c190cf36f94151bb7222b3271765",
+      "last_modified_commit": "6fd01bea886d98d88bc091de8fd3d766e534b126",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/defense_heldout_run_a2_plan.json",
+      "expected_sha256_lf": "6dbbb094c44e70349a6a772af6c6208c1a039ae81b016231cff560d69c0f8726",
+      "committed_sha256_lf": "6dbbb094c44e70349a6a772af6c6208c1a039ae81b016231cff560d69c0f8726",
+      "working_tree_sha256_lf": "6dbbb094c44e70349a6a772af6c6208c1a039ae81b016231cff560d69c0f8726",
+      "committed_blob_sha1": "650c7276468acac456bcd4b50db18f48c1212918",
+      "last_modified_commit": "6fd01bea886d98d88bc091de8fd3d766e534b126",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "registered or previously recorded source pin"
+    },
+    {
+      "path": "simulation/diagnostics/defense_heldout_run_a3_executor.py",
+      "expected_sha256_lf": "d2920d49e82854fd5c2c468cc00c46385b41336fe2985e6a6b762328b7cee9a4",
+      "committed_sha256_lf": "d2920d49e82854fd5c2c468cc00c46385b41336fe2985e6a6b762328b7cee9a4",
+      "working_tree_sha256_lf": "d2920d49e82854fd5c2c468cc00c46385b41336fe2985e6a6b762328b7cee9a4",
+      "committed_blob_sha1": "fb9de19a810f29edaebbc3f1a9410020872a563d",
+      "last_modified_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "committed source copied before execution"
+    },
+    {
+      "path": "simulation/diagnostics/defense_heldout_run_a3_analysis.py",
+      "expected_sha256_lf": "d290dd129909b25120abd5779a0b3125309e5325fc98150a49f44aa6204aac78",
+      "committed_sha256_lf": "d290dd129909b25120abd5779a0b3125309e5325fc98150a49f44aa6204aac78",
+      "working_tree_sha256_lf": "d290dd129909b25120abd5779a0b3125309e5325fc98150a49f44aa6204aac78",
+      "committed_blob_sha1": "922750213b30485c9f6a4f542cac32842f3c7e90",
+      "last_modified_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "committed source copied before execution"
+    },
+    {
+      "path": "simulation/diagnostics/defense_heldout_run_a3_plan.json",
+      "expected_sha256_lf": "2a183ecb07766ff5ca06d8c29a80edfc1abc825657b5d4fbeb5834944b95bde2",
+      "committed_sha256_lf": "2a183ecb07766ff5ca06d8c29a80edfc1abc825657b5d4fbeb5834944b95bde2",
+      "working_tree_sha256_lf": "2a183ecb07766ff5ca06d8c29a80edfc1abc825657b5d4fbeb5834944b95bde2",
+      "committed_blob_sha1": "28db3698cc6f6dc2589a7916014bf6b8a2649edf",
+      "last_modified_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+      "passed": true,
+      "pin_basis": "committed source copied before execution"
+    }
+  ],
+  "jobs": [
+    {
+      "job": "run_A1_high_GRADED_1835087800",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087800
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087801",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087801
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087802",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087802
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087803",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087803
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087804",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087804
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087805",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087805
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087806",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087806
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087807",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087807
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087808",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087808
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087809",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087809
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087810",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087810
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087811",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087811
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087812",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087812
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087813",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087813
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087814",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087814
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087815",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087815
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087816",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087816
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087817",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087817
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087818",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087818
+    },
+    {
+      "job": "run_A1_high_GRADED_1835087819",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087819
+    },
+    {
+      "job": "run_A1_high_OFF_1835087800",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087800
+    },
+    {
+      "job": "run_A1_high_OFF_1835087801",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087801
+    },
+    {
+      "job": "run_A1_high_OFF_1835087802",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087802
+    },
+    {
+      "job": "run_A1_high_OFF_1835087803",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087803
+    },
+    {
+      "job": "run_A1_high_OFF_1835087804",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087804
+    },
+    {
+      "job": "run_A1_high_OFF_1835087805",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087805
+    },
+    {
+      "job": "run_A1_high_OFF_1835087806",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087806
+    },
+    {
+      "job": "run_A1_high_OFF_1835087807",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087807
+    },
+    {
+      "job": "run_A1_high_OFF_1835087808",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087808
+    },
+    {
+      "job": "run_A1_high_OFF_1835087809",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087809
+    },
+    {
+      "job": "run_A1_high_OFF_1835087810",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087810
+    },
+    {
+      "job": "run_A1_high_OFF_1835087811",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087811
+    },
+    {
+      "job": "run_A1_high_OFF_1835087812",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087812
+    },
+    {
+      "job": "run_A1_high_OFF_1835087813",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087813
+    },
+    {
+      "job": "run_A1_high_OFF_1835087814",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087814
+    },
+    {
+      "job": "run_A1_high_OFF_1835087815",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087815
+    },
+    {
+      "job": "run_A1_high_OFF_1835087816",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087816
+    },
+    {
+      "job": "run_A1_high_OFF_1835087817",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087817
+    },
+    {
+      "job": "run_A1_high_OFF_1835087818",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087818
+    },
+    {
+      "job": "run_A1_high_OFF_1835087819",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087819
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087800",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087800
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087801",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087801
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087802",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087802
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087803",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087803
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087804",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087804
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087805",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087805
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087806",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087806
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087807",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087807
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087808",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087808
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087809",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087809
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087810",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087810
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087811",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087811
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087812",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087812
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087813",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087813
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087814",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087814
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087815",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087815
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087816",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087816
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087817",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087817
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087818",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087818
+    },
+    {
+      "job": "run_A1_low_GRADED_1835087819",
+      "arm": "A1-low",
+      "defense_arm": "GRADED",
+      "seed": 1835087819
+    },
+    {
+      "job": "run_A1_low_OFF_1835087800",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087800
+    },
+    {
+      "job": "run_A1_low_OFF_1835087801",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087801
+    },
+    {
+      "job": "run_A1_low_OFF_1835087802",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087802
+    },
+    {
+      "job": "run_A1_low_OFF_1835087803",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087803
+    },
+    {
+      "job": "run_A1_low_OFF_1835087804",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087804
+    },
+    {
+      "job": "run_A1_low_OFF_1835087805",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087805
+    },
+    {
+      "job": "run_A1_low_OFF_1835087806",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087806
+    },
+    {
+      "job": "run_A1_low_OFF_1835087807",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087807
+    },
+    {
+      "job": "run_A1_low_OFF_1835087808",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087808
+    },
+    {
+      "job": "run_A1_low_OFF_1835087809",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087809
+    },
+    {
+      "job": "run_A1_low_OFF_1835087810",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087810
+    },
+    {
+      "job": "run_A1_low_OFF_1835087811",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087811
+    },
+    {
+      "job": "run_A1_low_OFF_1835087812",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087812
+    },
+    {
+      "job": "run_A1_low_OFF_1835087813",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087813
+    },
+    {
+      "job": "run_A1_low_OFF_1835087814",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087814
+    },
+    {
+      "job": "run_A1_low_OFF_1835087815",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087815
+    },
+    {
+      "job": "run_A1_low_OFF_1835087816",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087816
+    },
+    {
+      "job": "run_A1_low_OFF_1835087817",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087817
+    },
+    {
+      "job": "run_A1_low_OFF_1835087818",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087818
+    },
+    {
+      "job": "run_A1_low_OFF_1835087819",
+      "arm": "A1-low",
+      "defense_arm": "OFF",
+      "seed": 1835087819
+    },
+    {
+      "job": "run_A2_GRADED_1835087800",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087800
+    },
+    {
+      "job": "run_A2_GRADED_1835087801",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087801
+    },
+    {
+      "job": "run_A2_GRADED_1835087802",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087802
+    },
+    {
+      "job": "run_A2_GRADED_1835087803",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087803
+    },
+    {
+      "job": "run_A2_GRADED_1835087804",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087804
+    },
+    {
+      "job": "run_A2_GRADED_1835087805",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087805
+    },
+    {
+      "job": "run_A2_GRADED_1835087806",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087806
+    },
+    {
+      "job": "run_A2_GRADED_1835087807",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087807
+    },
+    {
+      "job": "run_A2_GRADED_1835087808",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087808
+    },
+    {
+      "job": "run_A2_GRADED_1835087809",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087809
+    },
+    {
+      "job": "run_A2_GRADED_1835087810",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087810
+    },
+    {
+      "job": "run_A2_GRADED_1835087811",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087811
+    },
+    {
+      "job": "run_A2_GRADED_1835087812",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087812
+    },
+    {
+      "job": "run_A2_GRADED_1835087813",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087813
+    },
+    {
+      "job": "run_A2_GRADED_1835087814",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087814
+    },
+    {
+      "job": "run_A2_GRADED_1835087815",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087815
+    },
+    {
+      "job": "run_A2_GRADED_1835087816",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087816
+    },
+    {
+      "job": "run_A2_GRADED_1835087817",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087817
+    },
+    {
+      "job": "run_A2_GRADED_1835087818",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087818
+    },
+    {
+      "job": "run_A2_GRADED_1835087819",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087819
+    },
+    {
+      "job": "run_A2_OFF_1835087800",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087800
+    },
+    {
+      "job": "run_A2_OFF_1835087801",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087801
+    },
+    {
+      "job": "run_A2_OFF_1835087802",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087802
+    },
+    {
+      "job": "run_A2_OFF_1835087803",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087803
+    },
+    {
+      "job": "run_A2_OFF_1835087804",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087804
+    },
+    {
+      "job": "run_A2_OFF_1835087805",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087805
+    },
+    {
+      "job": "run_A2_OFF_1835087806",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087806
+    },
+    {
+      "job": "run_A2_OFF_1835087807",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087807
+    },
+    {
+      "job": "run_A2_OFF_1835087808",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087808
+    },
+    {
+      "job": "run_A2_OFF_1835087809",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087809
+    },
+    {
+      "job": "run_A2_OFF_1835087810",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087810
+    },
+    {
+      "job": "run_A2_OFF_1835087811",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087811
+    },
+    {
+      "job": "run_A2_OFF_1835087812",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087812
+    },
+    {
+      "job": "run_A2_OFF_1835087813",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087813
+    },
+    {
+      "job": "run_A2_OFF_1835087814",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087814
+    },
+    {
+      "job": "run_A2_OFF_1835087815",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087815
+    },
+    {
+      "job": "run_A2_OFF_1835087816",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087816
+    },
+    {
+      "job": "run_A2_OFF_1835087817",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087817
+    },
+    {
+      "job": "run_A2_OFF_1835087818",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087818
+    },
+    {
+      "job": "run_A2_OFF_1835087819",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087819
+    },
+    {
+      "job": "run_C_GRADED_1835087800",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087800
+    },
+    {
+      "job": "run_C_GRADED_1835087801",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087801
+    },
+    {
+      "job": "run_C_GRADED_1835087802",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087802
+    },
+    {
+      "job": "run_C_GRADED_1835087803",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087803
+    },
+    {
+      "job": "run_C_GRADED_1835087804",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087804
+    },
+    {
+      "job": "run_C_GRADED_1835087805",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087805
+    },
+    {
+      "job": "run_C_GRADED_1835087806",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087806
+    },
+    {
+      "job": "run_C_GRADED_1835087807",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087807
+    },
+    {
+      "job": "run_C_GRADED_1835087808",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087808
+    },
+    {
+      "job": "run_C_GRADED_1835087809",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087809
+    },
+    {
+      "job": "run_C_GRADED_1835087810",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087810
+    },
+    {
+      "job": "run_C_GRADED_1835087811",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087811
+    },
+    {
+      "job": "run_C_GRADED_1835087812",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087812
+    },
+    {
+      "job": "run_C_GRADED_1835087813",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087813
+    },
+    {
+      "job": "run_C_GRADED_1835087814",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087814
+    },
+    {
+      "job": "run_C_GRADED_1835087815",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087815
+    },
+    {
+      "job": "run_C_GRADED_1835087816",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087816
+    },
+    {
+      "job": "run_C_GRADED_1835087817",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087817
+    },
+    {
+      "job": "run_C_GRADED_1835087818",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087818
+    },
+    {
+      "job": "run_C_GRADED_1835087819",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087819
+    },
+    {
+      "job": "run_C_OFF_1835087800",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087800
+    },
+    {
+      "job": "run_C_OFF_1835087801",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087801
+    },
+    {
+      "job": "run_C_OFF_1835087802",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087802
+    },
+    {
+      "job": "run_C_OFF_1835087803",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087803
+    },
+    {
+      "job": "run_C_OFF_1835087804",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087804
+    },
+    {
+      "job": "run_C_OFF_1835087805",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087805
+    },
+    {
+      "job": "run_C_OFF_1835087806",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087806
+    },
+    {
+      "job": "run_C_OFF_1835087807",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087807
+    },
+    {
+      "job": "run_C_OFF_1835087808",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087808
+    },
+    {
+      "job": "run_C_OFF_1835087809",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087809
+    },
+    {
+      "job": "run_C_OFF_1835087810",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087810
+    },
+    {
+      "job": "run_C_OFF_1835087811",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087811
+    },
+    {
+      "job": "run_C_OFF_1835087812",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087812
+    },
+    {
+      "job": "run_C_OFF_1835087813",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087813
+    },
+    {
+      "job": "run_C_OFF_1835087814",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087814
+    },
+    {
+      "job": "run_C_OFF_1835087815",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087815
+    },
+    {
+      "job": "run_C_OFF_1835087816",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087816
+    },
+    {
+      "job": "run_C_OFF_1835087817",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087817
+    },
+    {
+      "job": "run_C_OFF_1835087818",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087818
+    },
+    {
+      "job": "run_C_OFF_1835087819",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087819
+    }
+  ],
+  "gate_jobs": [
+    {
+      "job": "gate_C_OFF",
+      "arm": "C",
+      "defense_arm": "OFF",
+      "seed": 1835087800,
+      "gate": true
+    },
+    {
+      "job": "gate_A1_high_OFF",
+      "arm": "A1-high",
+      "defense_arm": "OFF",
+      "seed": 1835087800,
+      "gate": true
+    },
+    {
+      "job": "gate_A2_OFF",
+      "arm": "A2",
+      "defense_arm": "OFF",
+      "seed": 1835087800,
+      "gate": true
+    },
+    {
+      "job": "gate_C_NORMAL",
+      "arm": "C",
+      "defense_arm": "GRADED",
+      "seed": 1835087800,
+      "gate": true,
+      "force_normal": true
+    },
+    {
+      "job": "gate_A1_high_NORMAL",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087800,
+      "gate": true,
+      "force_normal": true
+    },
+    {
+      "job": "gate_A1_high_GRADED",
+      "arm": "A1-high",
+      "defense_arm": "GRADED",
+      "seed": 1835087800,
+      "gate": true
+    },
+    {
+      "job": "gate_A2_GRADED",
+      "arm": "A2",
+      "defense_arm": "GRADED",
+      "seed": 1835087800,
+      "gate": true
+    }
+  ],
+  "steps": 300,
+  "onset": 50,
+  "shock_step": 150,
+  "shock_magnitude": 0.6,
+  "seed_start": 1835087800,
+  "seed_end": 1835087819,
+  "normal_worker_cap": 15,
+  "work_worker_cap": 12,
+  "numerical_threads_per_worker": 1,
+  "control_file": "defense_heldout_run_a4_control.json",
+  "resumption": "Validate completed runs; preserve partial artifacts and restart interrupted runs from step 0.",
+  "harm_directions": {
+    "Y1": "positive",
+    "Y2": "negative",
+    "Y3": "negative"
+  },
+  "tool_layer_workarounds": [],
+  "artifact_merge": "Order arm, defense arm, seed, step; verify original data-row bytes and completion objects before deletion.",
+  "registered_preflight": {
+    "status": "PASS",
+    "failures": [],
+    "head": "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+    "utc": "2026-09-20T12:44:34.396445+00:00",
+    "machine": "YOTKOTEST",
+    "commands": [
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "--abbrev-ref",
+          "HEAD"
+        ],
+        "exit_code": 0,
+        "stdout": "main\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+          "origin/main"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "dba0e98a88c12447ea4000474dae026d9f2d84ea",
+          "HEAD"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--porcelain",
+          "--untracked-files=no"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n"
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0,
+        "stdout": "dba0e98a88c12447ea4000474dae026d9f2d84ea\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "--error-unmatch",
+          "simulation/diagnostics/defense_heldout_design_note.md"
+        ],
+        "exit_code": 0,
+        "stdout": "simulation/diagnostics/defense_heldout_design_note.md\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "-1",
+          "--format=%H",
+          "--",
+          "simulation/diagnostics/defense_heldout_design_note.md"
+        ],
+        "exit_code": 0,
+        "stdout": "939d4242101fcea06f84d892e5d38f2a0b7ed93a\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "939d4242101fcea06f84d892e5d38f2a0b7ed93a",
+          "origin/main"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "blob",
+          "HEAD:simulation/diagnostics/defense_heldout_design_note.md"
+        ],
+        "exit_code": 0,
+        "stdout": null,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD:simulation/diagnostics/defense_heldout_design_note.md"
+        ],
+        "exit_code": 0,
+        "stdout": "7f3df99041984c3a85d72d5319474db075d80ef0\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "--error-unmatch",
+          "simulation/diagnostics/ARTIFACT_CONVENTION.md"
+        ],
+        "exit_code": 0,
+        "stdout": "simulation/diagnostics/ARTIFACT_CONVENTION.md\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "-1",
+          "--format=%H",
+          "--",
+          "simulation/diagnostics/ARTIFACT_CONVENTION.md"
+        ],
+        "exit_code": 0,
+        "stdout": "b5783f41df0b3be1cbae8ab79921939847be9181\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "b5783f41df0b3be1cbae8ab79921939847be9181",
+          "origin/main"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "blob",
+          "HEAD:simulation/diagnostics/ARTIFACT_CONVENTION.md"
+        ],
+        "exit_code": 0,
+        "stdout": null,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD:simulation/diagnostics/ARTIFACT_CONVENTION.md"
+        ],
+        "exit_code": 0,
+        "stdout": "29e9b300ab301dd61807317bef4a907a5930ae4d\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "--error-unmatch",
+          "simulation/diagnostics/drift_defense_design_note.md"
+        ],
+        "exit_code": 0,
+        "stdout": "simulation/diagnostics/drift_defense_design_note.md\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "-1",
+          "--format=%H",
+          "--",
+          "simulation/diagnostics/drift_defense_design_note.md"
+        ],
+        "exit_code": 0,
+        "stdout": "e38b821c0648c6f5eae5f113d109aadd799b5df2\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "e38b821c0648c6f5eae5f113d109aadd799b5df2",
+          "origin/main"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "blob",
+          "HEAD:simulation/diagnostics/drift_defense_design_note.md"
+        ],
+        "exit_code": 0,
+        "stdout": null,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD:simulation/diagnostics/drift_defense_design_note.md"
+        ],
+        "exit_code": 0,
+        "stdout": "d902392c8d3a8c7a267dc040349175095bef945e\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "--error-unmatch",
+          "simulation/diagnostics/drift_defense_run_executor.py"
+        ],
+        "exit_code": 0,
+        "stdout": "simulation/diagnostics/drift_defense_run_executor.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "-1",
+          "--format=%H",
+          "--",
+          "simulation/diagnostics/drift_defense_run_executor.py"
+        ],
+        "exit_code": 0,
+        "stdout": "6b3c628aea1322445a1df22732c5d93889a7a43a\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "6b3c628aea1322445a1df22732c5d93889a7a43a",
+          "origin/main"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "blob",
+          "HEAD:simulation/diagnostics/drift_defense_run_executor.py"
+        ],
+        "exit_code": 0,
+        "stdout": null,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD:simulation/diagnostics/drift_defense_run_executor.py"
+        ],
+        "exit_code": 0,
+        "stdout": "b7b5a6a7f7f7023ace3547002359f62e54f9a9b2\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "--error-unmatch",
+          "simulation/diagnostics/detector_run_cal_constants.json"
+        ],
+        "exit_code": 0,
+        "stdout": "simulation/diagnostics/detector_run_cal_constants.json\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "-1",
+          "--format=%H",
+          "--",
+          "simulation/diagnostics/detector_run_cal_constants.json"
+        ],
+        "exit_code": 0,
+        "stdout": "b84199fd5b71041870e17acea22e0145aaf16e10\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "b84199fd5b71041870e17acea22e0145aaf16e10",
+          "origin/main"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "blob",
+          "HEAD:simulation/diagnostics/detector_run_cal_constants.json"
+        ],
+        "exit_code": 0,
+        "stdout": null,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD:simulation/diagnostics/detector_run_cal_constants.json"
+        ],
+        "exit_code": 0,
+        "stdout": "6e38dc22b64f100f8945e602fb4016e645f9f158\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "--error-unmatch",
+          "simulation/diagnostics/detector_run_r3_a3_constants.json"
+        ],
+        "exit_code": 0,
+        "stdout": "simulation/diagnostics/detector_run_r3_a3_constants.json\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "-1",
+          "--format=%H",
+          "--",
+          "simulation/diagnostics/detector_run_r3_a3_constants.json"
+        ],
+        "exit_code": 0,
+        "stdout": "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237",
+          "origin/main"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "blob",
+          "HEAD:simulation/diagnostics/detector_run_r3_a3_constants.json"
+        ],
+        "exit_code": 0,
+        "stdout": null,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD:simulation/diagnostics/detector_run_r3_a3_constants.json"
+        ],
+        "exit_code": 0,
+        "stdout": "09acbbcae9bb292dbd495eb3d72dd1bc985a5edf\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "--error-unmatch",
+          "simulation/cusum_detector_v2.py"
+        ],
+        "exit_code": 0,
+        "stdout": "simulation/cusum_detector_v2.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "-1",
+          "--format=%H",
+          "--",
+          "simulation/cusum_detector_v2.py"
+        ],
+        "exit_code": 0,
+        "stdout": "b84199fd5b71041870e17acea22e0145aaf16e10\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "b84199fd5b71041870e17acea22e0145aaf16e10",
+          "origin/main"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "blob",
+          "HEAD:simulation/cusum_detector_v2.py"
+        ],
+        "exit_code": 0,
+        "stdout": null,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD:simulation/cusum_detector_v2.py"
+        ],
+        "exit_code": 0,
+        "stdout": "c2f5d340f353bcab0a6d180587ec46400b8b4953\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "--error-unmatch",
+          "simulation/attack_metrics_v2.py"
+        ],
+        "exit_code": 0,
+        "stdout": "simulation/attack_metrics_v2.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "-1",
+          "--format=%H",
+          "--",
+          "simulation/attack_metrics_v2.py"
+        ],
+        "exit_code": 0,
+        "stdout": "fd444fc22254ec24472f4bad03f8f56bf4470110\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "fd444fc22254ec24472f4bad03f8f56bf4470110",
+          "origin/main"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "blob",
+          "HEAD:simulation/attack_metrics_v2.py"
+        ],
+        "exit_code": 0,
+        "stdout": null,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD:simulation/attack_metrics_v2.py"
+        ],
+        "exit_code": 0,
+        "stdout": "3623a0285d0125b41df30a528a155d207ed12bdb\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "--error-unmatch",
+          "simulation/metrics.py"
+        ],
+        "exit_code": 0,
+        "stdout": "simulation/metrics.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "-1",
+          "--format=%H",
+          "--",
+          "simulation/metrics.py"
+        ],
+        "exit_code": 0,
+        "stdout": "5095f77827aadf37b19ccca04b0985f1b2f2060a\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+          "origin/main"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "blob",
+          "HEAD:simulation/metrics.py"
+        ],
+        "exit_code": 0,
+        "stdout": null,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD:simulation/metrics.py"
+        ],
+        "exit_code": 0,
+        "stdout": "7e7749d99636746aa2c3215da1edaa6ab5372611\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "--error-unmatch",
+          "simulation/agents.py"
+        ],
+        "exit_code": 0,
+        "stdout": "simulation/agents.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "-1",
+          "--format=%H",
+          "--",
+          "simulation/agents.py"
+        ],
+        "exit_code": 0,
+        "stdout": "5095f77827aadf37b19ccca04b0985f1b2f2060a\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+          "origin/main"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "blob",
+          "HEAD:simulation/agents.py"
+        ],
+        "exit_code": 0,
+        "stdout": null,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD:simulation/agents.py"
+        ],
+        "exit_code": 0,
+        "stdout": "d21e5300eab6e4136141ea33aa0367b9aa47ed51\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "--error-unmatch",
+          "simulation/model.py"
+        ],
+        "exit_code": 0,
+        "stdout": "simulation/model.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "-1",
+          "--format=%H",
+          "--",
+          "simulation/model.py"
+        ],
+        "exit_code": 0,
+        "stdout": "5095f77827aadf37b19ccca04b0985f1b2f2060a\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+          "origin/main"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "blob",
+          "HEAD:simulation/model.py"
+        ],
+        "exit_code": 0,
+        "stdout": null,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD:simulation/model.py"
+        ],
+        "exit_code": 0,
+        "stdout": "a1cf988532203b7119462eb9b04cf2e3b0541879\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "--error-unmatch",
+          "simulation/attack_adapter_v2.py"
+        ],
+        "exit_code": 0,
+        "stdout": "simulation/attack_adapter_v2.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "-1",
+          "--format=%H",
+          "--",
+          "simulation/attack_adapter_v2.py"
+        ],
+        "exit_code": 0,
+        "stdout": "4b32f136d636dd228b2483e741eaaf25044f8ea0\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+          "origin/main"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "blob",
+          "HEAD:simulation/attack_adapter_v2.py"
+        ],
+        "exit_code": 0,
+        "stdout": null,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD:simulation/attack_adapter_v2.py"
+        ],
+        "exit_code": 0,
+        "stdout": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "--error-unmatch",
+          "simulation/working_factor.py"
+        ],
+        "exit_code": 0,
+        "stdout": "simulation/working_factor.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "-1",
+          "--format=%H",
+          "--",
+          "simulation/working_factor.py"
+        ],
+        "exit_code": 0,
+        "stdout": "50700dcde3f6dd1707a5f2d2b79927a751075b46\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+          "origin/main"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "blob",
+          "HEAD:simulation/working_factor.py"
+        ],
+        "exit_code": 0,
+        "stdout": null,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD:simulation/working_factor.py"
+        ],
+        "exit_code": 0,
+        "stdout": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "--error-unmatch",
+          "simulation/constants_v2_stage18.py"
+        ],
+        "exit_code": 0,
+        "stdout": "simulation/constants_v2_stage18.py\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "-1",
+          "--format=%H",
+          "--",
+          "simulation/constants_v2_stage18.py"
+        ],
+        "exit_code": 0,
+        "stdout": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+          "origin/main"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "blob",
+          "HEAD:simulation/constants_v2_stage18.py"
+        ],
+        "exit_code": 0,
+        "stdout": null,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD:simulation/constants_v2_stage18.py"
+        ],
+        "exit_code": 0,
+        "stdout": "43b9766e63d1519faf59d1e8e4562c686a8149f2\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "ls-files",
+          "simulation/diagnostics/defense_heldout_run_*"
+        ],
+        "exit_code": 0,
+        "stdout": "simulation/diagnostics/defense_heldout_run_a2_analysis.py\nsimulation/diagnostics/defense_heldout_run_a2_code_identity.json\nsimulation/diagnostics/defense_heldout_run_a2_control.json\nsimulation/diagnostics/defense_heldout_run_a2_executor.py\nsimulation/diagnostics/defense_heldout_run_a2_failure_46304.json\nsimulation/diagnostics/defense_heldout_run_a2_manifest.json\nsimulation/diagnostics/defense_heldout_run_a2_plan.json\nsimulation/diagnostics/defense_heldout_run_a2_preflight.json\nsimulation/diagnostics/defense_heldout_run_a2_report.md\nsimulation/diagnostics/defense_heldout_run_a2_results.json\nsimulation/diagnostics/defense_heldout_run_a2_stop.json\nsimulation/diagnostics/defense_heldout_run_a3_analysis.py\nsimulation/diagnostics/defense_heldout_run_a3_attack_effect_gate.json\nsimulation/diagnostics/defense_heldout_run_a3_code_identity.json\nsimulation/diagnostics/defense_heldout_run_a3_constants_gate.json\nsimulation/diagnostics/defense_heldout_run_a3_control.json\nsimulation/diagnostics/defense_heldout_run_a3_executor.py\nsimulation/diagnostics/defense_heldout_run_a3_failure_27304.json\nsimulation/diagnostics/defense_heldout_run_a3_gate_A1_high_OFF_audit_attempt1.json\nsimulation/diagnostics/defense_heldout_run_a3_gate_A1_high_OFF_console_attempt1.log\nsimulation/diagnostics/defense_heldout_run_a3_gate_A1_high_OFF_initial.json\nsimulation/diagnostics/defense_heldout_run_a3_gate_A1_high_OFF_progress.json\nsimulation/diagnostics/defense_heldout_run_a3_gate_A1_high_OFF_result.json\nsimulation/diagnostics/defense_heldout_run_a3_gate_A1_high_OFF_steps_attempt1.csv\nsimulation/diagnostics/defense_heldout_run_a3_gate_C_OFF_audit_attempt1.json\nsimulation/diagnostics/defense_heldout_run_a3_gate_C_OFF_console_attempt1.log\nsimulation/diagnostics/defense_heldout_run_a3_gate_C_OFF_initial.json\nsimulation/diagnostics/defense_heldout_run_a3_gate_C_OFF_progress.json\nsimulation/diagnostics/defense_heldout_run_a3_gate_C_OFF_result.json\nsimulation/diagnostics/defense_heldout_run_a3_gate_C_OFF_steps_attempt1.csv\nsimulation/diagnostics/defense_heldout_run_a3_gate_C_OFF_versus_gate_A1_high_OFF.json\nsimulation/diagnostics/defense_heldout_run_a3_gate_initial_execution.json\nsimulation/diagnostics/defense_heldout_run_a3_gate_initial_progress.json\nsimulation/diagnostics/defense_heldout_run_a3_gates.json\nsimulation/diagnostics/defense_heldout_run_a3_manifest.json\nsimulation/diagnostics/defense_heldout_run_a3_no_oracle_gate.json\nsimulation/diagnostics/defense_heldout_run_a3_plan.json\nsimulation/diagnostics/defense_heldout_run_a3_preflight.json\nsimulation/diagnostics/defense_heldout_run_a3_report.md\nsimulation/diagnostics/defense_heldout_run_a3_results.json\nsimulation/diagnostics/defense_heldout_run_a3_scheduler_checks.json\nsimulation/diagnostics/defense_heldout_run_a3_stop.json\nsimulation/diagnostics/defense_heldout_run_halt.json\nsimulation/diagnostics/defense_heldout_run_halt_writer.py\nsimulation/diagnostics/defense_heldout_run_manifest.json\nsimulation/diagnostics/defense_heldout_run_preflight.json\nsimulation/diagnostics/defense_heldout_run_report.md\nsimulation/diagnostics/defense_heldout_run_results.json\n",
+        "stderr": ""
+      }
+    ],
+    "source_readings": {
+      "simulation/diagnostics/defense_heldout_design_note.md": {
+        "expected_sha256_lf": "555fdba674139aebcaa7377daf1f19e3278e2c00f13ec742d729983f212be6b9",
+        "committed_sha256_lf": "555fdba674139aebcaa7377daf1f19e3278e2c00f13ec742d729983f212be6b9",
+        "working_tree_sha256_lf": "555fdba674139aebcaa7377daf1f19e3278e2c00f13ec742d729983f212be6b9",
+        "committed_blob_sha1": "7f3df99041984c3a85d72d5319474db075d80ef0",
+        "last_modified_commit": "939d4242101fcea06f84d892e5d38f2a0b7ed93a",
+        "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea"
+      },
+      "simulation/diagnostics/ARTIFACT_CONVENTION.md": {
+        "expected_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+        "committed_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+        "working_tree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+        "committed_blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d",
+        "last_modified_commit": "b5783f41df0b3be1cbae8ab79921939847be9181",
+        "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea"
+      },
+      "simulation/diagnostics/drift_defense_design_note.md": {
+        "expected_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+        "committed_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+        "working_tree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+        "committed_blob_sha1": "d902392c8d3a8c7a267dc040349175095bef945e",
+        "last_modified_commit": "e38b821c0648c6f5eae5f113d109aadd799b5df2",
+        "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea"
+      },
+      "simulation/diagnostics/drift_defense_run_executor.py": {
+        "expected_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+        "committed_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+        "working_tree_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+        "committed_blob_sha1": "b7b5a6a7f7f7023ace3547002359f62e54f9a9b2",
+        "last_modified_commit": "6b3c628aea1322445a1df22732c5d93889a7a43a",
+        "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea"
+      },
+      "simulation/diagnostics/detector_run_cal_constants.json": {
+        "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+        "committed_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+        "working_tree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+        "committed_blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+        "last_modified_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+        "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea"
+      },
+      "simulation/diagnostics/detector_run_r3_a3_constants.json": {
+        "expected_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+        "committed_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+        "working_tree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+        "committed_blob_sha1": "09acbbcae9bb292dbd495eb3d72dd1bc985a5edf",
+        "last_modified_commit": "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237",
+        "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea"
+      },
+      "simulation/cusum_detector_v2.py": {
+        "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+        "committed_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+        "working_tree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+        "committed_blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+        "last_modified_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+        "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea"
+      },
+      "simulation/attack_metrics_v2.py": {
+        "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+        "committed_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+        "working_tree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+        "committed_blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+        "last_modified_commit": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+        "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea"
+      },
+      "simulation/metrics.py": {
+        "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "committed_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+        "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+        "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea"
+      },
+      "simulation/agents.py": {
+        "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "committed_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+        "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+        "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea"
+      },
+      "simulation/model.py": {
+        "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "committed_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+        "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+        "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea"
+      },
+      "simulation/attack_adapter_v2.py": {
+        "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "working_tree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "committed_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+        "last_modified_commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+        "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea"
+      },
+      "simulation/working_factor.py": {
+        "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+        "committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+        "working_tree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+        "committed_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+        "last_modified_commit": "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+        "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea"
+      },
+      "simulation/constants_v2_stage18.py": {
+        "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "working_tree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "committed_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+        "last_modified_commit": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+        "read_commit": "dba0e98a88c12447ea4000474dae026d9f2d84ea"
+      }
+    },
+    "existing_prefix_files": [],
+    "prior_artifacts": [
+      "simulation/diagnostics/defense_heldout_run_a2_analysis.py",
+      "simulation/diagnostics/defense_heldout_run_a2_code_identity.json",
+      "simulation/diagnostics/defense_heldout_run_a2_control.json",
+      "simulation/diagnostics/defense_heldout_run_a2_executor.py",
+      "simulation/diagnostics/defense_heldout_run_a2_failure_46304.json",
+      "simulation/diagnostics/defense_heldout_run_a2_manifest.json",
+      "simulation/diagnostics/defense_heldout_run_a2_plan.json",
+      "simulation/diagnostics/defense_heldout_run_a2_preflight.json",
+      "simulation/diagnostics/defense_heldout_run_a2_report.md",
+      "simulation/diagnostics/defense_heldout_run_a2_results.json",
+      "simulation/diagnostics/defense_heldout_run_a2_stop.json",
+      "simulation/diagnostics/defense_heldout_run_a3_analysis.py",
+      "simulation/diagnostics/defense_heldout_run_a3_attack_effect_gate.json",
+      "simulation/diagnostics/defense_heldout_run_a3_code_identity.json",
+      "simulation/diagnostics/defense_heldout_run_a3_constants_gate.json",
+      "simulation/diagnostics/defense_heldout_run_a3_control.json",
+      "simulation/diagnostics/defense_heldout_run_a3_executor.py",
+      "simulation/diagnostics/defense_heldout_run_a3_failure_27304.json",
+      "simulation/diagnostics/defense_heldout_run_a3_gate_A1_high_OFF_audit_attempt1.json",
+      "simulation/diagnostics/defense_heldout_run_a3_gate_A1_high_OFF_console_attempt1.log",
+      "simulation/diagnostics/defense_heldout_run_a3_gate_A1_high_OFF_initial.json",
+      "simulation/diagnostics/defense_heldout_run_a3_gate_A1_high_OFF_progress.json",
+      "simulation/diagnostics/defense_heldout_run_a3_gate_A1_high_OFF_result.json",
+      "simulation/diagnostics/defense_heldout_run_a3_gate_A1_high_OFF_steps_attempt1.csv",
+      "simulation/diagnostics/defense_heldout_run_a3_gate_C_OFF_audit_attempt1.json",
+      "simulation/diagnostics/defense_heldout_run_a3_gate_C_OFF_console_attempt1.log",
+      "simulation/diagnostics/defense_heldout_run_a3_gate_C_OFF_initial.json",
+      "simulation/diagnostics/defense_heldout_run_a3_gate_C_OFF_progress.json",
+      "simulation/diagnostics/defense_heldout_run_a3_gate_C_OFF_result.json",
+      "simulation/diagnostics/defense_heldout_run_a3_gate_C_OFF_steps_attempt1.csv",
+      "simulation/diagnostics/defense_heldout_run_a3_gate_C_OFF_versus_gate_A1_high_OFF.json",
+      "simulation/diagnostics/defense_heldout_run_a3_gate_initial_execution.json",
+      "simulation/diagnostics/defense_heldout_run_a3_gate_initial_progress.json",
+      "simulation/diagnostics/defense_heldout_run_a3_gates.json",
+      "simulation/diagnostics/defense_heldout_run_a3_manifest.json",
+      "simulation/diagnostics/defense_heldout_run_a3_no_oracle_gate.json",
+      "simulation/diagnostics/defense_heldout_run_a3_plan.json",
+      "simulation/diagnostics/defense_heldout_run_a3_preflight.json",
+      "simulation/diagnostics/defense_heldout_run_a3_report.md",
+      "simulation/diagnostics/defense_heldout_run_a3_results.json",
+      "simulation/diagnostics/defense_heldout_run_a3_scheduler_checks.json",
+      "simulation/diagnostics/defense_heldout_run_a3_stop.json",
+      "simulation/diagnostics/defense_heldout_run_halt.json",
+      "simulation/diagnostics/defense_heldout_run_halt_writer.py",
+      "simulation/diagnostics/defense_heldout_run_manifest.json",
+      "simulation/diagnostics/defense_heldout_run_preflight.json",
+      "simulation/diagnostics/defense_heldout_run_report.md",
+      "simulation/diagnostics/defense_heldout_run_results.json"
+    ],
+    "stderr_warnings": [
+      {
+        "command": [
+          "git",
+          "status",
+          "--porcelain",
+          "--untracked-files=no"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n"
+      }
+    ]
+  },
+  "interpretation_reserved_for_operator": true,
+  "executor_fixes": [],
+  "gate_tolerances": {
+    "computed_floats_absolute": 1e-9,
+    "share_sum_absolute": 1e-12,
+    "constants": "bitwise",
+    "consensus": "bitwise",
+    "attack_inertness": "exact",
+    "wrapper_composition": "exact",
+    "alarm_steps": "exact",
+    "source": "attempt 4 dispatch",
+    "registered_quantities": "integer counts, never tolerance-adjusted"
+  },
+  "attempt_history": [
+    "Attempt 1 halted before T1 on specification conflicts resolved by Amendment 1 and the dispatch.",
+    "Attempt 2 halted before any model step on the scheduler seed bound.",
+    "Attempt 3 corrected the seed bound and halted at T1 gate 2 after two gate runs and zero batch runs.",
+    "Attempt 4 uses the authorized gate tolerance; all scientific mechanisms, seeds, constants and registered quantities are unchanged."
+  ]
+}

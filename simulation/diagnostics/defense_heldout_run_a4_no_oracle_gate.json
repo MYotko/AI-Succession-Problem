@@ -1,0 +1,133 @@
+{
+  "cases": [
+    {
+      "incumbent_branch_calls": 2,
+      "outputs": [
+        {
+          "c_protective": 0.3,
+          "c_suppressive": 0.1,
+          "extra": {
+            "untouched": [
+              1,
+              2
+            ]
+          },
+          "x_bio_welfare": 0.16666666666666666,
+          "x_compute": 0.16666666666666666,
+          "x_institutional_capacity": 0.16666666666666666,
+          "x_novelty_agency": 0.16666666666666666,
+          "x_resilience": 0.16666666666666666,
+          "x_transfer_comprehension": 0.16666666666666666
+        },
+        {
+          "c_protective": 0.3,
+          "c_suppressive": 0.1,
+          "extra": {
+            "untouched": [
+              1,
+              2
+            ]
+          },
+          "x_bio_welfare": 0.16666666666666666,
+          "x_compute": 0.16666666666666666,
+          "x_institutional_capacity": 0.16666666666666666,
+          "x_novelty_agency": 0.16666666666666666,
+          "x_resilience": 0.16666666666666666,
+          "x_transfer_comprehension": 0.16666666666666666
+        }
+      ],
+      "passed": true,
+      "sentinel_cases": 2,
+      "state": "NORMAL"
+    },
+    {
+      "incumbent_branch_calls": 2,
+      "outputs": [
+        {
+          "c_protective": 0.2,
+          "c_suppressive": 0.1,
+          "extra": {
+            "untouched": [
+              1,
+              2
+            ]
+          },
+          "x_bio_welfare": 0.16666666666666666,
+          "x_compute": 0.16666666666666666,
+          "x_institutional_capacity": 0.16666666666666666,
+          "x_novelty_agency": 0.16666666666666666,
+          "x_resilience": 0.16666666666666666,
+          "x_transfer_comprehension": 0.16666666666666666
+        },
+        {
+          "c_protective": 0.2,
+          "c_suppressive": 0.1,
+          "extra": {
+            "untouched": [
+              1,
+              2
+            ]
+          },
+          "x_bio_welfare": 0.16666666666666666,
+          "x_compute": 0.16666666666666666,
+          "x_institutional_capacity": 0.16666666666666666,
+          "x_novelty_agency": 0.16666666666666666,
+          "x_resilience": 0.16666666666666666,
+          "x_transfer_comprehension": 0.16666666666666666
+        }
+      ],
+      "passed": true,
+      "sentinel_cases": 2,
+      "state": "VETO"
+    },
+    {
+      "incumbent_branch_calls": 2,
+      "outputs": [
+        {
+          "c_protective": 0.4,
+          "c_suppressive": 0.2,
+          "extra": {
+            "untouched": [
+              1,
+              2
+            ]
+          },
+          "x_bio_welfare": 0.2061409568906703,
+          "x_compute": 0.1360229355155997,
+          "x_institutional_capacity": 0.26711884854035045,
+          "x_novelty_agency": 0.052807183062202334,
+          "x_resilience": 0.053301656737382165,
+          "x_transfer_comprehension": 0.2846084192537951
+        },
+        {
+          "c_protective": 0.4,
+          "c_suppressive": 0.2,
+          "extra": {
+            "untouched": [
+              1,
+              2
+            ]
+          },
+          "x_bio_welfare": 0.2061409568906703,
+          "x_compute": 0.1360229355155997,
+          "x_institutional_capacity": 0.26711884854035045,
+          "x_novelty_agency": 0.052807183062202334,
+          "x_resilience": 0.053301656737382165,
+          "x_transfer_comprehension": 0.2846084192537951
+        }
+      ],
+      "passed": true,
+      "sentinel_cases": 2,
+      "state": "CONSENSUS"
+    }
+  ],
+  "defense_receives_only_recorded_observables_and_committed_snapshot": true,
+  "passed": true,
+  "sentinel_fields": [
+    "honest_action",
+    "v2_adapter_step_event",
+    "attack_vector_v2",
+    "config"
+  ],
+  "synthetic_production_result_held_fixed": true
+}
