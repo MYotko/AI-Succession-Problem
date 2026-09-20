@@ -1,0 +1,36 @@
+{
+  "status": "HALTED",
+  "stage": "after T0, before T1",
+  "halt_reason": "The dispatch names the held-out pre-registration as its specification, but requires the recovery design and quantities.",
+  "specification_conflicts": [
+    {
+      "id": "governing_specification",
+      "dispatch": "THE SPECIFICATION names simulation/diagnostics/defense_heldout_design_note.md as the committed pre-registration.",
+      "committed_evidence": "The held-out note governs defense_heldout_run_ and registers Y1 through Y5 with OFF and GRADED. The recovery note governs defense_recovery_run_ and its Sections 3 through 5 specify the recovery rule, 300 runs, five defense arms, and R1 through R6.",
+      "conflict": "The named governing specification does not agree with this dispatch's recovery design and registered quantities.",
+      "halt_basis": "Where anything in this prompt appears to conflict with a note, HALT and report the conflict."
+    },
+    {
+      "id": "artifact_prefix",
+      "dispatch": "The attempt context says this attempt writes under defense_recovery_run_a2_a2_. WRITE SCOPE and T3 through T5 specify defense_recovery_run_a2_* and filenames beginning defense_recovery_run_a2_.",
+      "committed_evidence": "The recovery note's broad governed prefix is defense_recovery_run_; both attempt prefixes fit it.",
+      "conflict": "The attempt context and required artifact filenames use different prefixes.",
+      "halt_basis": "Additional dispatch inconsistency recorded with the governing-specification halt. Halt artifacts use the exact T4 and T5 filenames inside WRITE SCOPE."
+    }
+  ],
+  "T0_status": "PASS",
+  "T1_status": "NOT_RUN",
+  "registered_run_count": 300,
+  "batch_runs_launched": 0,
+  "batch_runs_completed": 0,
+  "gate_runs_launched": 0,
+  "model_steps_executed": 0,
+  "analysis_status": "NOT_RUN",
+  "sign_fixture_status": "NOT_RUN",
+  "source_pins_match_at_completion": true,
+  "source_pin_failures_at_completion": [],
+  "resumed_seeds": [],
+  "retry_events": [],
+  "tool_layer_workarounds": [],
+  "utc": "2026-09-20T19:42:00.649324+00:00"
+}
