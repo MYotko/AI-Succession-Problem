@@ -133,6 +133,15 @@ described below and supersedes any earlier characterization of the affected clai
 > containment claim. Its measured cost is false alarms, which reach every run in the three
 > constructions that carry a successor.
 
+> **Update, 2026-09-20 (held-out attacks run against the in-loop defense).** Item 2h records
+> gate 2: two attacks written against the defense's blind spots before they ran, one of them
+> designed to turn the defense's own latching into the weapon. Neither broke it, and the
+> trap did not work. Two limits are recorded with the result. The slow buffer drain is
+> invisible to every channel, which stands as a blind-spot finding, but it proved too weak
+> an attack to test the defense hard, because it attacked a flow as though it were a stock.
+> And a shock alone puts the defense permanently into its consensus state, in attacked and
+> unattacked runs alike, which is what gate 3 must address.
+
 ---
 
 ## 1. Summary
@@ -1677,6 +1686,113 @@ note barred any ratio of two measured counts while the pinned runner computes a 
 capture rate. Amendment 1, at a1597b5, scopes the prohibition to the note's own quantities;
 the legacy field is recorded verbatim and read by nothing, which the analysis asserts. The
 halt artifacts are committed unmodified.
+
+**2h. In-loop drift defense, gate 2, held-out attacks. COMPLETE, 2026-09-20.**
+Pre-registered in `simulation/diagnostics/defense_heldout_design_note.md`, published at
+282b54fd before any run, with one amendment. The run is at 988827d1 under
+`simulation/diagnostics/defense_heldout_run_a5_`, 231 artifacts, all gates and the sign
+fixture passed, source pins matched at start and completion. 160 runs: two attacks
+specified before any run, plus an unattacked control, crossed with the defense OFF and
+GRADED, at seeds 1835087800 through 1835087819, with a shock of magnitude 0.60 at step 150
+in every arm.
+
+*Why it exists.* Gate 1 showed the defense does no harm on the nine live vectors, but every
+one of those attacks either moves the allocation far and fast, which the defense was built
+to see, or attacks the yield gate, which it does not touch. Gate 2 asks what the defense
+does against attacks aimed at its blind spots, written down before they ran.
+
+*The attacks, and how they were chosen.* From the channel definitions, by asking what each
+channel cannot see. The allocation channel reads the six resource shares against their
+unattacked median, so draining the resilience share, whose median is 0.0512, moves that
+distance by about 0.1 against a threshold of 0.77. The entropy channel reads novelty
+amplitude, which that drain does not touch. The g channel moves only through consequences.
+A1 therefore siphons a fixed amount from the resilience share into institutional capacity
+on every committed action from step 50, at rates 0.002 and 0.006, and the step-150 shock is
+what makes a missing buffer matter, since `apply_shock_v2` attenuates damage by the
+resilience stock. A2 adds a three-step hostile burst at steps 50 through 52 whose only
+purpose is to make the defense latch, after which the siphon resumes: once latched, the
+defense holds a constant allocation whose resilience share is fixed at 0.0533 and which it
+can never raise, so the shock should arrive against a system that cannot rebuild.
+
+*Registered result.* Paired difference OFF minus GRADED, 20 pairs per arm. Y1 is the final
+population, where harm is positive. Y2 is steps at or after 50 with g at or above g_star,
+where harm is negative. Y3 is the population lost between steps 149 and 160, where harm is
+negative, per Amendment 1.
+
+| Arm | Y1 | t | Y2 | t | Y3 | t |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Control, no attack | 8.35 | 0.61 | 4.90 | 4.61 | -0.60 | -1.08 |
+| A1, rate 0.002 | 0.40 | 0.04 | 3.15 | 3.24 | -0.50 | -0.97 |
+| A1, rate 0.006 | 4.20 | 0.38 | 5.35 | 4.79 | -0.70 | -0.75 |
+| A2, burst then siphon | 4.80 | 0.55 | 16.15 | 5.43 | -2.90 | -0.42 |
+
+No cell had an extinction in either arm. No harm finding arises under the criterion, so no
+confirmation rerun is owed and gate 2 passes as written.
+
+*The registered predictions, checked against their stated thresholds.*
+
+1. **Right.** No channel alarmed before step 150 in 20 of 20 undefended A1 runs, against a
+   threshold of 15. The evasion claim holds: the defense never saw the siphon.
+2. **Wrong in part.** A1 was predicted to be neither helped nor harmed. Y1 and Y3 are
+   within a paired t of 2 as predicted, but Y2 is 3.15 and 5.35 at t of 3.24 and 4.79, a
+   small benefit of three to five steps past the threshold.
+3. **Right.** A2 latched CONSENSUS in 20 of 20 defended runs, against a threshold of 18.
+4. **Wrong.** The trap was predicted to harm, with Y1 positive at a t of 2 or above. Y1 is
+   4.80 at t of 0.55, in the direction of the defense helping rather than harming, and the
+   defended arm's median final population equals the undefended arm's at 272. Under A2 the
+   defense roughly halved time past the threshold, a median of 22 steps against 42.
+
+*A weakness in A1, found while verifying and recorded because it bounds what this gate
+establishes.* The siphon did not deplete the buffer. The median resilience stock at step
+149 was 0.3701 under A1 at rate 0.006 against 0.3917 in the control, about five percent
+lower, and the median committed resilience share after onset was 0.0468 against 0.0526,
+about eleven percent lower. The reason is structural: the planner re-decides its allocation
+from the current state at every step, so a fixed subtraction from each freshly chosen share
+cuts the investment flow by a constant fraction rather than accumulating, while the stock's
+own dynamics keep it near equilibrium. A1 attacked a flow as though it were a stock. It was
+therefore a weak attack, which the undefended numbers show directly: A1's undefended final
+population matches the unattacked control's, a median of 286 in both at rate 0.006.
+
+*What this establishes, and what it does not.* The defense was not broken by either attack,
+and it was not turned into a weapon by the one attack designed to do exactly that, which is
+the sharper of the two results. Both are real but bounded. A1 tested the defense weakly
+because the attack itself was weak, so the evasion result, that the channels never see a
+slow buffer drain, stands on its own as a blind-spot finding while the harm numbers under
+A1 say little. A2 delivered a genuine perturbation and the defense came out ahead on time
+past the threshold and level on population. Nothing here is evidence of robustness against
+attacks not specified in the note, the known-pathway bias of item 2f still applies, and the
+calibration mismatch of item 2g still applies. Gate 2 passing is necessary and not
+sufficient for promotion, which remains gated on gates 3 and 4.
+
+*A cost observation the record carries forward to gate 3.* In every arm including the
+unattacked control, the defended runs alarmed after the step-150 shock and latched, 20 of 20
+into VETO and 19 or 20 of 20 into CONSENSUS. A shock alone is enough to put the defense
+permanently into its consensus allocation in an otherwise healthy system. No harm followed
+at this sample size, and time past the threshold was slightly better, but a defense that
+latches for the remaining 150 steps of every shocked run is a standing commitment, which is
+what gate 3's recovery rule has to address.
+
+*Verified by recomputation from the merged step log, not from the run report.* Every alarm
+and state transition was recomputed independently, and all 12 paired contrasts match the
+report exactly.
+
+*The four halts before this run.* Attempt 1 halted after its preconditions on two conflicts
+in the note and dispatch: Y3's harm direction was stated with the sign reversed, corrected
+by Amendment 1 at 939d4242, and the dispatch forbade reporting prediction outcomes the note
+required. Attempt 2 halted in its own scheduler gate on an off-by-one seed bound in the
+executor, recorded at 6fd01bea, after which dispatches carry a rule that a defect in the
+executor found before any model run is fixed rather than halted on. Attempt 3 halted on a
+gate bound written without a floating-point tolerance, at dba0e98a. Attempt 4 halted on a
+gate that compared per-share differences across two separately evolving runs, which cannot
+hold once an attack changes a trajectory, at 7fec0c67. Every one was in the scaffolding and
+none touched the attacks, seeds, quantities, predictions or criterion. Zero model steps ran
+under any of them.
+
+*First run under the artifact convention.* The 160 per-step logs and completion records were
+merged into `defense_heldout_run_a5_steps.csv`, 48,000 rows, and
+`defense_heldout_run_a5_completions.jsonl`, each run verified by row count and by the hash
+of its rows as written before the per-run copies were deleted. The commit is 231 files
+rather than the 1,100 the old layout would have produced.
 
 **3. v2.1 implementation and component validation.** Including a bidirectional
 check on the entropy estimator specifically. A repair tested only in the direction
