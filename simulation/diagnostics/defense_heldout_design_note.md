@@ -228,3 +228,75 @@ direction in words and proves it against a known-worse fixture before reporting 
 Y1, Y2, Y4, Y5, the registered predictions and the criterion stand as committed. Attempt 2
 writes under the prefix `simulation/diagnostics/defense_heldout_run_a2_`, leaving the first
 attempt's halt artifacts unmodified.
+
+## 11. Amendment 2, 2026-09-20: A1 attacked a flow, and an attack-validity gate
+
+**Status:** committed after the stage A outputs were read, which Section 9 permits only as
+an amendment. The stage A outputs stand as produced and are reported under the plan they
+ran, in item 2h at f31a3a57. This amendment adds a stage A3 and a validity gate; it changes
+no quantity, no criterion and no result already recorded.
+
+**What was wrong with A1.** Section 4 defines the siphon as subtracting a fixed amount from
+the resilience share of every committed action. The planner re-decides its whole allocation
+from the current state at every step, so that subtraction removes a constant fraction of
+each freshly chosen share rather than accumulating: at rate 0.006 the median committed
+resilience share after onset was 0.0468 against the control's 0.0526, and the median
+resilience stock at step 149 was 0.3701 against 0.3917. A1 attacked an investment flow as
+though it were a stock. The measured consequence is that its undefended arm matches the
+unattacked control on the outcome quantities, a median final population of 286 in both at
+rate 0.006, so A1 did not perturb the system and could not test the defense.
+
+**Why this is not attack tuning.** A1's weakness is established without reference to the
+defense: the comparison that shows it is undefended attack against unattacked control, a
+comparison in which the defense does not appear. A rerun justified that way is a repair of
+an invalid instrument, not a search for an attack that embarrasses the defense. To keep
+that distinction enforceable rather than a matter of judgment, the gate below is declared
+now and binds every held-out attack this note governs, including A3 and any later one.
+
+**The attack-validity gate, binding from now on.** An attack counts as evidence only if,
+with the defense OFF, it moves the substrate away from the unattacked control at the same
+seeds. For an attack whose harm route is the buffer, the declared margin is a median
+resilience stock at the step before the shock that is at least 0.10 below the control's at
+the same seeds, and a paired difference on that stock, control minus attacked, with a
+paired t of 2.0 or above. An attack that fails this gate is **void**: its defended arm is
+reported and may not be cited as evidence about the defense, in this note's outputs or in
+the record. A1 at both rates is void under this gate, and item 2h's reading of it, that its
+evasion result stands and its harm numbers say little, is what a void attack's report looks
+like. Validity is assessed before any defended comparison is read.
+
+**A3, the corrected attack.** From step 50 onward, on every incumbent action, the entire
+resilience share is moved to institutional capacity:
+
+```
+moved = float(action['x_resilience'])
+action['x_resilience'] = 0.0
+action['x_institutional_capacity'] += moved
+```
+
+then normalized through the production `_normalize_action`. Nothing else is touched. This
+stays inside the same blind spot: the allocation distance moves by about 0.1 against a
+threshold of 0.7701182670542909, novelty is untouched, and g moves only through
+consequences. Unlike A1 it stops investment entirely, so the stock decays under its own
+dynamics.
+
+**A3's arms and seeds.** A3 crossed with the defense OFF and GRADED, plus the unattacked
+control at the same seeds for the validity gate, at the 20 consecutive integers from
+1835087900 through 1835087919, which overlap no seed used or declared before. 80 runs. The
+construction, the shock at step 150 at magnitude 0.60, the defense, the quantities Y1
+through Y5, their harm directions as amended, the sign fixture and the gate criterion are
+unchanged from stage A.
+
+**A3's registered predictions, written before it runs.**
+
+1. A3 passes the validity gate: the median resilience stock at step 149 with the defense
+   OFF is at least 0.10 below the control's.
+2. No channel alarms before step 150 in at least 15 of 20 undefended A3 runs. The blind
+   spot does not depend on the attack's strength.
+3. The undefended A3 arm loses more population at the shock than the undefended control,
+   paired t of 2.0 or above on Y3.
+4. The defense does not repair the missing buffer, because nothing it can do raises the
+   resilience share above the consensus value of 0.053301656737382165 once latched: Y1 is
+   within a paired t of 2 either way. This note does not predict that the defense helps.
+
+**Nothing else changes.** Stage A's outputs, A1, A2, the control, the criterion, the sign
+discipline and stage B stand as committed.
