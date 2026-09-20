@@ -1,0 +1,58 @@
+{
+  "status": "HALTED",
+  "phase": "After T0 and committed-note reading, before T1",
+  "halt_reason": "Conflicting specification requirements",
+  "conflicts": [
+    {
+      "id": "Y3_SIGN_FIXTURE_CONFLICT",
+      "source": "Held-out note Section 6 and dispatch sign fixture",
+      "difference": "OFF minus GRADED",
+      "per_run_quantity": "population at step 149 minus population at step 160",
+      "harm_direction": "positive",
+      "required_fixture": "Larger defended shock loss must be labeled harm",
+      "conflict": "A larger GRADED shock loss produces a negative OFF-minus-GRADED difference, incompatible with the required positive harm direction."
+    },
+    {
+      "id": "PREDICTION_REPORTING_CONFLICT",
+      "source": "Held-out note Section 6 and dispatch",
+      "note": "Registered predictions, written before any run and reported as right or wrong.",
+      "dispatch": "do not say whether a registered prediction was right or wrong beyond reporting the number the prediction names",
+      "conflict": "The note requires right-or-wrong prediction reporting and the dispatch prohibits it, while requiring a halt on conflicts."
+    }
+  ],
+  "runs_planned": 160,
+  "runs_launched": 0,
+  "runs_completed": 0,
+  "model_steps": 0,
+  "T0": "PASS",
+  "T1": "NOT_RUN",
+  "sign_fixture": "NOT_RUN",
+  "analysis": "NOT_RUN",
+  "source_changes_at_halt": [],
+  "utc": "2026-09-20T02:20:55.456992+00:00",
+  "registered_results": {
+    "Y1": {
+      "status": "NOT_COMPUTED",
+      "values": null
+    },
+    "Y2": {
+      "status": "NOT_COMPUTED",
+      "values": null
+    },
+    "Y3": {
+      "status": "NOT_COMPUTED",
+      "values": null
+    },
+    "Y4": {
+      "status": "NOT_COMPUTED",
+      "values": null
+    },
+    "Y5": {
+      "status": "NOT_COMPUTED",
+      "values": null
+    }
+  },
+  "criterion_applied": false,
+  "prediction_assessments": null,
+  "interpretation": null
+}

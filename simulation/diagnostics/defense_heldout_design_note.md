@@ -198,3 +198,33 @@ that plan. The executor may not inspect any output to adjust any element of this
 At most 15 concurrent workers, numerical-library threads fixed to one and verified per
 worker. 160 runs. Writes are restricted to the governed prefix and `os.devnull`. The
 manifest follows Section 3 of the artifact convention.
+
+## 10. Amendment 1, 2026-09-20: Y3's harm direction was reversed
+
+**Status:** committed and pushed before any run exists. The first attempt halted after its
+preconditions with zero of 160 runs launched, before T1 and before the sign fixture ran, so
+no output was produced under the unamended text. The halt is recorded in
+`simulation/diagnostics/defense_heldout_run_report.md`.
+
+**What was wrong.** Y3 is the shock's cost, the population at step 149 minus the population
+at step 160, and its paired value is OFF minus GRADED like every other quantity here. A
+defended arm that loses more people at the shock therefore produces a negative Y3, not a
+positive one. Section 6 said harm was positive. The sign fixture that Section 6 itself
+requires made the contradiction explicit: a fixture built with a larger defended shock loss
+cannot be labeled harm under the text as written, and the executor halted rather than
+choose between the two requirements, which is correct.
+
+**Amended.** Y3 reads: **harm is a negative Y3**, meaning the defended arm lost more people
+between step 149 and step 160 than the undefended arm at the same seed. The sign fixture
+asserts harm on Y1 positive, Y2 negative and Y3 negative.
+
+**What this says about the sign discipline.** Section 6 added that discipline because of the
+reversed criterion in the cross-vector note, which was found only after the outputs were
+read. Here the same class of error was caught before a single model step ran, by the guard
+the discipline requires. The discipline stays, and every future note states each harm
+direction in words and proves it against a known-worse fixture before reporting anything.
+
+**Nothing else changes.** The attacks, the arms, the seeds, the construction, the defense,
+Y1, Y2, Y4, Y5, the registered predictions and the criterion stand as committed. Attempt 2
+writes under the prefix `simulation/diagnostics/defense_heldout_run_a2_`, leaving the first
+attempt's halt artifacts unmodified.
