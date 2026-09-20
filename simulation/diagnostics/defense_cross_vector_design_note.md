@@ -225,3 +225,33 @@ unmodified.
 
 **Nothing else changes.** Seeds, cells, arms, construction, the defense, the gates, the
 quantities, the criterion and the interpretation stand as committed.
+
+## 11. Amendment 2, 2026-09-19: the X2 harm criterion had its sign reversed
+
+**Status:** committed after the attempt 2 outputs were read, which Section 8 permits only
+as an amendment, and this one is recorded as such. The outputs stand as produced under the
+unamended plan and are reported under it, with the criterion as written applied first and
+the corrected criterion applied second.
+
+**What was wrong.** Section 6 lists as a harm finding "X2 population negative at a paired t
+of -2.0 or below". X2 is defined in Section 5 as OFF minus GRADED. A negative value
+therefore means the defended arm ended with more population, which is a benefit, and the
+sentence labels it harm. The direction is not a matter of judgment: the drift defense note
+registers the same contrast in the same direction, and item 2f reports its two drift arms
+at -301.2 and -299.8 as the defense preventing extinctions. The same sentence in Section 6
+about X1 is correct, because X1 counts steps past the threshold, where OFF minus GRADED
+negative does mean the defended arm was worse.
+
+**How it was found, stated plainly.** By applying the criterion to the results, which is
+after the outputs were read. Under the sentence as written, attempt 2 produces six harm
+findings, all of them cases where GRADED ended with about 318 more people alive and
+prevented every extinction. Under the corrected sentence it produces none.
+
+**Amended.** Harm criterion 2 reads: X2 population **positive** at a paired t of 2.0 or
+above, meaning OFF ended with more population than GRADED; or any cell with more
+extinctions under GRADED than under OFF. The confirmation procedure is unchanged, with the
+sign of a t-based confirmation taken from this corrected direction.
+
+**Nothing else changes.** Seeds, cells, arms, construction, the defense, the gates, the
+quantities, the X1 criterion, the X4 criterion, the succession finding and the
+interpretation stand as committed, including Amendment 1.
