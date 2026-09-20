@@ -102,6 +102,7 @@ NEVER_INGEST_BASENAME_PREFIXES = (
     "vector_paired_run_",
     "drift_defense_run_",
     "defense_xv_run_",
+    "defense_heldout_run_",
 )
 
 # Directories whose contents must NEVER reach a generated snapshot, matched on
