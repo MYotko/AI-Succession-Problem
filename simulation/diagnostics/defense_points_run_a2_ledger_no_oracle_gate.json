@@ -1,0 +1,4342 @@
+{
+  "base_sentinel_gate": {
+    "cases": [
+      {
+        "incumbent_branch_calls": 2,
+        "outputs": [
+          {
+            "c_protective": 0.3,
+            "c_suppressive": 0.1,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.16666666666666666,
+            "x_compute": 0.16666666666666666,
+            "x_institutional_capacity": 0.16666666666666666,
+            "x_novelty_agency": 0.16666666666666666,
+            "x_resilience": 0.16666666666666666,
+            "x_transfer_comprehension": 0.16666666666666666
+          },
+          {
+            "c_protective": 0.3,
+            "c_suppressive": 0.1,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.16666666666666666,
+            "x_compute": 0.16666666666666666,
+            "x_institutional_capacity": 0.16666666666666666,
+            "x_novelty_agency": 0.16666666666666666,
+            "x_resilience": 0.16666666666666666,
+            "x_transfer_comprehension": 0.16666666666666666
+          }
+        ],
+        "passed": true,
+        "sentinel_cases": 2,
+        "state": "NORMAL"
+      },
+      {
+        "incumbent_branch_calls": 2,
+        "outputs": [
+          {
+            "c_protective": 0.2,
+            "c_suppressive": 0.1,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.16666666666666666,
+            "x_compute": 0.16666666666666666,
+            "x_institutional_capacity": 0.16666666666666666,
+            "x_novelty_agency": 0.16666666666666666,
+            "x_resilience": 0.16666666666666666,
+            "x_transfer_comprehension": 0.16666666666666666
+          },
+          {
+            "c_protective": 0.2,
+            "c_suppressive": 0.1,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.16666666666666666,
+            "x_compute": 0.16666666666666666,
+            "x_institutional_capacity": 0.16666666666666666,
+            "x_novelty_agency": 0.16666666666666666,
+            "x_resilience": 0.16666666666666666,
+            "x_transfer_comprehension": 0.16666666666666666
+          }
+        ],
+        "passed": true,
+        "sentinel_cases": 2,
+        "state": "VETO"
+      },
+      {
+        "incumbent_branch_calls": 2,
+        "outputs": [
+          {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          }
+        ],
+        "passed": true,
+        "sentinel_cases": 2,
+        "state": "CONSENSUS"
+      }
+    ],
+    "defense_receives_only_recorded_observables_and_committed_snapshot": true,
+    "passed": true,
+    "sentinel_fields": [
+      "honest_action",
+      "v2_adapter_step_event",
+      "attack_vector_v2",
+      "config"
+    ],
+    "synthetic_production_result_held_fixed": true
+  },
+  "ledger_inputs": [
+    "completed_step",
+    "operational_alarm_boolean",
+    "recorded_g",
+    "own_ledger",
+    "own_state",
+    "own_suspension_counter",
+    "own_g_clean_counter",
+    "own_committed_action_snapshot"
+  ],
+  "passed": true,
+  "sentinel_sequences": [
+    {
+      "alarms": [
+        {
+          "candidate": 0.9855460049803134,
+          "channel": "entropy",
+          "step": 12,
+          "threshold": 0.17319485850717864
+        },
+        {
+          "candidate": 0.9855460049803134,
+          "channel": "entropy",
+          "step": 13,
+          "threshold": 0.17319485850717864
+        }
+      ],
+      "events": [
+        {
+          "earned_step": 12,
+          "event": "earned",
+          "points": 1,
+          "state_when_alarm_computed": "NORMAL",
+          "step": 12
+        },
+        {
+          "earned_step": 13,
+          "event": "earned",
+          "points": 2,
+          "state_when_alarm_computed": "VETO",
+          "step": 13
+        },
+        {
+          "earned_step": 12,
+          "event": "expired",
+          "points": 1,
+          "state_when_alarm_computed": "NORMAL",
+          "step": 52
+        },
+        {
+          "earned_step": 13,
+          "event": "expired",
+          "points": 2,
+          "state_when_alarm_computed": "VETO",
+          "step": 53
+        }
+      ],
+      "state": "NORMAL",
+      "trace": [
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 1,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 0,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 2,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 1,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 3,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 2,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 4,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 3,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 5,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 4,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 6,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 5,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 7,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 6,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 8,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 7,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 9,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 8,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 10,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 9,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 11,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 10,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 12,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 11,
+          "suspensions": 0
+        },
+        {
+          "earned": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            }
+          ],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 13,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            }
+          ],
+          "live_points": 1,
+          "operational_alarm": true,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "VETO",
+          "state_before": "NORMAL",
+          "step": 12,
+          "suspensions": 0
+        },
+        {
+          "earned": [
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 14,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": true,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "VETO",
+          "step": 13,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 15,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 14,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 16,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 15,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 17,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 16,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 18,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 17,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 19,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 18,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 20,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 19,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 21,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 20,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 22,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 21,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 23,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 22,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 24,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 23,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 25,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 24,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 26,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 25,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 27,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 26,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 28,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 27,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 29,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 28,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 30,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 29,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 31,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 30,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 32,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 31,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 33,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 32,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 34,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 33,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 35,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 34,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 36,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 35,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 37,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 36,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 38,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 37,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 39,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 38,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 40,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 39,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 41,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 40,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 42,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 41,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 43,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 42,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 44,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 43,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 45,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 44,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 46,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 45,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 47,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 46,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 48,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 47,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 49,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 48,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 50,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 49,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 51,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 50,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 52,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 51,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            }
+          ],
+          "g": 0.0,
+          "g_clean_count": 53,
+          "ledger": [
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 2,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "VETO",
+          "state_before": "CONSENSUS",
+          "step": 52,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "g": 0.0,
+          "g_clean_count": 54,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "VETO",
+          "step": 53,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 55,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 54,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 56,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 55,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 57,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 56,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 58,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 57,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 59,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 58,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 60,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 59,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 61,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 60,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 62,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 61,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 63,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 62,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 64,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 63,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 65,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 64,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 66,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 65,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 67,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 66,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 68,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 67,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 69,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 68,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 70,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 69,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 71,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 70,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 72,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 71,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 73,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 72,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 74,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 73,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 75,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 74,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 76,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 75,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 77,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 76,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 78,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 77,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 79,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 78,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 80,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 79,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 81,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 80,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 82,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 81,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 83,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 82,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 84,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 83,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 85,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 84,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 86,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 85,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 87,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 86,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 88,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 87,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 89,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 88,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 90,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 89,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 91,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 90,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 92,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 91,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 93,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 92,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 94,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 93,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 95,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 94,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 96,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 95,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 97,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 96,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 98,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 97,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 99,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 98,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 100,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 99,
+          "suspensions": 1
+        }
+      ],
+      "transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "g_clean_count": 13,
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "live_points": 1,
+          "permanent": false,
+          "step": 12,
+          "suspensions": 0,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 14,
+          "from": "VETO",
+          "g_clean_count": 14,
+          "held_action": null,
+          "live_points": 3,
+          "permanent": false,
+          "step": 13,
+          "suspensions": 1,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "de_escalation",
+          "effective_from_step": 53,
+          "from": "CONSENSUS",
+          "g_clean_count": 53,
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 51,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "live_points": 2,
+          "permanent": false,
+          "step": 52,
+          "suspensions": 1,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "de_escalation",
+          "effective_from_step": 54,
+          "from": "VETO",
+          "g_clean_count": 54,
+          "held_action": null,
+          "live_points": 0,
+          "permanent": false,
+          "step": 53,
+          "suspensions": 1,
+          "to": "NORMAL"
+        }
+      ]
+    },
+    {
+      "alarms": [
+        {
+          "candidate": 0.9855460049803134,
+          "channel": "entropy",
+          "step": 12,
+          "threshold": 0.17319485850717864
+        },
+        {
+          "candidate": 0.9855460049803134,
+          "channel": "entropy",
+          "step": 13,
+          "threshold": 0.17319485850717864
+        }
+      ],
+      "events": [
+        {
+          "earned_step": 12,
+          "event": "earned",
+          "points": 1,
+          "state_when_alarm_computed": "NORMAL",
+          "step": 12
+        },
+        {
+          "earned_step": 13,
+          "event": "earned",
+          "points": 2,
+          "state_when_alarm_computed": "VETO",
+          "step": 13
+        },
+        {
+          "earned_step": 12,
+          "event": "expired",
+          "points": 1,
+          "state_when_alarm_computed": "NORMAL",
+          "step": 52
+        },
+        {
+          "earned_step": 13,
+          "event": "expired",
+          "points": 2,
+          "state_when_alarm_computed": "VETO",
+          "step": 53
+        }
+      ],
+      "state": "NORMAL",
+      "trace": [
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 1,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 0,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 2,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 1,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 3,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 2,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 4,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 3,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 5,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 4,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 6,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 5,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 7,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 6,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 8,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 7,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 9,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 8,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 10,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 9,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 11,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 10,
+          "suspensions": 0
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 12,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 11,
+          "suspensions": 0
+        },
+        {
+          "earned": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            }
+          ],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 13,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            }
+          ],
+          "live_points": 1,
+          "operational_alarm": true,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "VETO",
+          "state_before": "NORMAL",
+          "step": 12,
+          "suspensions": 0
+        },
+        {
+          "earned": [
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 14,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": true,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "VETO",
+          "step": 13,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 15,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 14,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 16,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 15,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 17,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 16,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 18,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 17,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 19,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 18,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 20,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 19,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 21,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 20,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 22,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 21,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 23,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 22,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 24,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 23,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 25,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 24,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 26,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 25,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 27,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 26,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 28,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 27,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 29,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 28,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 30,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 29,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 31,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 30,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 32,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 31,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 33,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 32,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 34,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 33,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 35,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 34,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 36,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 35,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 37,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 36,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 38,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 37,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 39,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 38,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 40,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 39,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 41,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 40,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 42,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 41,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 43,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 42,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 44,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 43,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 45,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 44,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 46,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 45,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 47,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 46,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 48,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 47,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 49,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 48,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 50,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 49,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 51,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 50,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 52,
+          "ledger": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            },
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 3,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "CONSENSUS",
+          "state_before": "CONSENSUS",
+          "step": 51,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [
+            {
+              "earned_step": 12,
+              "points": 1,
+              "state_when_alarm_computed": "NORMAL"
+            }
+          ],
+          "g": 0.0,
+          "g_clean_count": 53,
+          "ledger": [
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "live_points": 2,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "VETO",
+          "state_before": "CONSENSUS",
+          "step": 52,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [
+            {
+              "earned_step": 13,
+              "points": 2,
+              "state_when_alarm_computed": "VETO"
+            }
+          ],
+          "g": 0.0,
+          "g_clean_count": 54,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "VETO",
+          "step": 53,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 55,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 54,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 56,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 55,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 57,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 56,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 58,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 57,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 59,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 58,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 60,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 59,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 61,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 60,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 62,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 61,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 63,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 62,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 64,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 63,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 65,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 64,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 66,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 65,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 67,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 66,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 68,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 67,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 69,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 68,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 70,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 69,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 71,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 70,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 72,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 71,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 73,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 72,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 74,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 73,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 75,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 74,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 76,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 75,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 77,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 76,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 78,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 77,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 79,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 78,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 80,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 79,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 81,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 80,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 82,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 81,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 83,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 82,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 84,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 83,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 85,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 84,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 86,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 85,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 87,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 86,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 88,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 87,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 89,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 88,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 90,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 89,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 91,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 90,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 92,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 91,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 93,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 92,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 94,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 93,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 95,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 94,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 96,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 95,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 97,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 96,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 98,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 97,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 99,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 98,
+          "suspensions": 1
+        },
+        {
+          "earned": [],
+          "expired": [],
+          "g": 0.0,
+          "g_clean_count": 100,
+          "ledger": [],
+          "live_points": 0,
+          "operational_alarm": false,
+          "permanence_step": null,
+          "permanent": false,
+          "state_after": "NORMAL",
+          "state_before": "NORMAL",
+          "step": 99,
+          "suspensions": 1
+        }
+      ],
+      "transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "g_clean_count": 13,
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "live_points": 1,
+          "permanent": false,
+          "step": 12,
+          "suspensions": 0,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 14,
+          "from": "VETO",
+          "g_clean_count": 14,
+          "held_action": null,
+          "live_points": 3,
+          "permanent": false,
+          "step": 13,
+          "suspensions": 1,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "de_escalation",
+          "effective_from_step": 53,
+          "from": "CONSENSUS",
+          "g_clean_count": 53,
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 51,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "live_points": 2,
+          "permanent": false,
+          "step": 52,
+          "suspensions": 1,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "de_escalation",
+          "effective_from_step": 54,
+          "from": "VETO",
+          "g_clean_count": 54,
+          "held_action": null,
+          "live_points": 0,
+          "permanent": false,
+          "step": 53,
+          "suspensions": 1,
+          "to": "NORMAL"
+        }
+      ]
+    }
+  ]
+}

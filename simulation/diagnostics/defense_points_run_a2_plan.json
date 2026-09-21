@@ -1,0 +1,1835 @@
+{
+  "head": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+  "pins": [
+    {
+      "path": "simulation/diagnostics/defense_points_design_note.md",
+      "expected_sha256_lf": "a298267b5929fa89d5c2dd9be20a4d0afa0bf6dc14fe602709545b78e00af4a3",
+      "committed_sha256_lf": "a298267b5929fa89d5c2dd9be20a4d0afa0bf6dc14fe602709545b78e00af4a3",
+      "working_tree_sha256_lf": "a298267b5929fa89d5c2dd9be20a4d0afa0bf6dc14fe602709545b78e00af4a3",
+      "committed_blob_sha1": "4e1c5e39acc9378686c903a033bed962f3a911dc",
+      "last_modified_commit": "cd792e72ea4042280fbf3e914e1d3e65b5b485f5",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/defense_heldout_design_note.md",
+      "expected_sha256_lf": "f1140c037528c3503ceddd56b6e780238b8bf2e78e183af757171900663f37dd",
+      "committed_sha256_lf": "f1140c037528c3503ceddd56b6e780238b8bf2e78e183af757171900663f37dd",
+      "working_tree_sha256_lf": "f1140c037528c3503ceddd56b6e780238b8bf2e78e183af757171900663f37dd",
+      "committed_blob_sha1": "1136b263966172407f60a92d1af689a77d54f323",
+      "last_modified_commit": "a6a072c777e11928df0bf08bcf8384fd5a4a7d2d",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "expected_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "committed_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "working_tree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "committed_blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d",
+      "last_modified_commit": "b5783f41df0b3be1cbae8ab79921939847be9181",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/drift_defense_design_note.md",
+      "expected_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "committed_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "working_tree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "committed_blob_sha1": "d902392c8d3a8c7a267dc040349175095bef945e",
+      "last_modified_commit": "e38b821c0648c6f5eae5f113d109aadd799b5df2",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/drift_defense_run_executor.py",
+      "expected_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "committed_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "working_tree_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "committed_blob_sha1": "b7b5a6a7f7f7023ace3547002359f62e54f9a9b2",
+      "last_modified_commit": "6b3c628aea1322445a1df22732c5d93889a7a43a",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "committed_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "working_tree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "committed_blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+      "last_modified_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r3_a3_constants.json",
+      "expected_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "committed_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "working_tree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "committed_blob_sha1": "09acbbcae9bb292dbd495eb3d72dd1bc985a5edf",
+      "last_modified_commit": "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/cusum_detector_v2.py",
+      "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "committed_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "working_tree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "committed_blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+      "last_modified_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/attack_metrics_v2.py",
+      "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "committed_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "working_tree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "committed_blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+      "last_modified_commit": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/metrics.py",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/agents.py",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/model.py",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/attack_adapter_v2.py",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "working_tree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "committed_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "last_modified_commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/working_factor.py",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "working_tree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "committed_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "last_modified_commit": "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/constants_v2_stage18.py",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "working_tree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "committed_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "last_modified_commit": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "committed_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "working_tree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "committed_blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "last_modified_commit": "76f81cd83e0db6ff5031070e54f2f908502b8632",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/detector_round3_design_note.md",
+      "expected_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "committed_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "working_tree_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "committed_blob_sha1": "f584aa2fbf4e76db674ff487fed2b036f7e45a08",
+      "last_modified_commit": "63470090dc3836628b69fce432a30b15b3f212b7",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_r2_constants.json",
+      "expected_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "committed_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "working_tree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "committed_blob_sha1": "ff934c2613e90804c3ff5c18141f777eaa24276f",
+      "last_modified_commit": "242ec2265ee6e3b1158925af0c22f6b76e007007",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/detector_run_eval_executor.py",
+      "expected_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "committed_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "working_tree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "committed_blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723",
+      "last_modified_commit": "9ce2e65931875f8cc6c2036a3e56475a1d08bd84",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "committed_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "working_tree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "committed_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "last_modified_commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/defense_heldout_run_a3s_executor.py",
+      "expected_sha256_lf": "5ddec0d9c3df7ad919557fb4cd54972f3a70e1a7e4d1c90603ba83f5ccbb9e37",
+      "committed_sha256_lf": "5ddec0d9c3df7ad919557fb4cd54972f3a70e1a7e4d1c90603ba83f5ccbb9e37",
+      "working_tree_sha256_lf": "5ddec0d9c3df7ad919557fb4cd54972f3a70e1a7e4d1c90603ba83f5ccbb9e37",
+      "committed_blob_sha1": "b7bde2ff018aacfb291ce1ccd4bb8039bcc81868",
+      "last_modified_commit": "b1a5498333c6d6d8f99da58ca80b93de2d04e80c",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/defense_recovery_run_conf_executor.py",
+      "expected_sha256_lf": "ba893ec7b84371ed42cd4f0ba3fac72a9ccfc7501cedfd72878c1e34a401c6c8",
+      "committed_sha256_lf": "ba893ec7b84371ed42cd4f0ba3fac72a9ccfc7501cedfd72878c1e34a401c6c8",
+      "working_tree_sha256_lf": "ba893ec7b84371ed42cd4f0ba3fac72a9ccfc7501cedfd72878c1e34a401c6c8",
+      "committed_blob_sha1": "414467f6b132efe7b66340286d459981ee8c9778",
+      "last_modified_commit": "791a2c660ab93c76ccaf08fb7d52291260772747",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/defense_recovery_run_conf_analysis.py",
+      "expected_sha256_lf": "86000a0a1cad53569500c5c3828afe125e4e0587aa1a964c7871533c135c55d1",
+      "committed_sha256_lf": "86000a0a1cad53569500c5c3828afe125e4e0587aa1a964c7871533c135c55d1",
+      "working_tree_sha256_lf": "86000a0a1cad53569500c5c3828afe125e4e0587aa1a964c7871533c135c55d1",
+      "committed_blob_sha1": "3ab3c55f577a95ac1b6459ab27ec525c8e23be8c",
+      "last_modified_commit": "791a2c660ab93c76ccaf08fb7d52291260772747",
+      "read_commit": "dfedf4d9c668ec77155412c1ffaa069cfc0f8a34",
+      "passed": true
+    }
+  ],
+  "copied_sources": [
+    {
+      "path": "simulation/diagnostics/drift_defense_run_executor.py",
+      "commit": "6b3c628aea1322445a1df22732c5d93889a7a43a",
+      "blob_sha1": "b7b5a6a7f7f7023ace3547002359f62e54f9a9b2",
+      "sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "basis": "Committed blob retrieved with git cat-file; copied, not imported."
+    },
+    {
+      "path": "simulation/diagnostics/defense_heldout_run_a3s_executor.py",
+      "commit": "b1a5498333c6d6d8f99da58ca80b93de2d04e80c",
+      "blob_sha1": "b7bde2ff018aacfb291ce1ccd4bb8039bcc81868",
+      "sha256_lf": "5ddec0d9c3df7ad919557fb4cd54972f3a70e1a7e4d1c90603ba83f5ccbb9e37",
+      "basis": "Committed blob retrieved with git cat-file; copied, not imported."
+    },
+    {
+      "path": "simulation/diagnostics/defense_recovery_run_conf_executor.py",
+      "commit": "791a2c660ab93c76ccaf08fb7d52291260772747",
+      "blob_sha1": "414467f6b132efe7b66340286d459981ee8c9778",
+      "sha256_lf": "ba893ec7b84371ed42cd4f0ba3fac72a9ccfc7501cedfd72878c1e34a401c6c8",
+      "basis": "Committed blob retrieved with git cat-file; copied, not imported."
+    },
+    {
+      "path": "simulation/diagnostics/defense_recovery_run_conf_analysis.py",
+      "commit": "791a2c660ab93c76ccaf08fb7d52291260772747",
+      "blob_sha1": "3ab3c55f577a95ac1b6459ab27ec525c8e23be8c",
+      "sha256_lf": "86000a0a1cad53569500c5c3828afe125e4e0587aa1a964c7871533c135c55d1",
+      "basis": "Committed blob retrieved with git cat-file; copied, not imported."
+    }
+  ],
+  "jobs": [
+    {
+      "job": "run_A3_LATCHED_1835088200",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088200
+    },
+    {
+      "job": "run_A3_LATCHED_1835088201",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088201
+    },
+    {
+      "job": "run_A3_LATCHED_1835088202",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088202
+    },
+    {
+      "job": "run_A3_LATCHED_1835088203",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088203
+    },
+    {
+      "job": "run_A3_LATCHED_1835088204",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088204
+    },
+    {
+      "job": "run_A3_LATCHED_1835088205",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088205
+    },
+    {
+      "job": "run_A3_LATCHED_1835088206",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088206
+    },
+    {
+      "job": "run_A3_LATCHED_1835088207",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088207
+    },
+    {
+      "job": "run_A3_LATCHED_1835088208",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088208
+    },
+    {
+      "job": "run_A3_LATCHED_1835088209",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088209
+    },
+    {
+      "job": "run_A3_LATCHED_1835088210",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088210
+    },
+    {
+      "job": "run_A3_LATCHED_1835088211",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088211
+    },
+    {
+      "job": "run_A3_LATCHED_1835088212",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088212
+    },
+    {
+      "job": "run_A3_LATCHED_1835088213",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088213
+    },
+    {
+      "job": "run_A3_LATCHED_1835088214",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088214
+    },
+    {
+      "job": "run_A3_LATCHED_1835088215",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088215
+    },
+    {
+      "job": "run_A3_LATCHED_1835088216",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088216
+    },
+    {
+      "job": "run_A3_LATCHED_1835088217",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088217
+    },
+    {
+      "job": "run_A3_LATCHED_1835088218",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088218
+    },
+    {
+      "job": "run_A3_LATCHED_1835088219",
+      "arm": "A3",
+      "defense_arm": "LATCHED",
+      "seed": 1835088219
+    },
+    {
+      "job": "run_A3_OFF_1835088200",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088200
+    },
+    {
+      "job": "run_A3_OFF_1835088201",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088201
+    },
+    {
+      "job": "run_A3_OFF_1835088202",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088202
+    },
+    {
+      "job": "run_A3_OFF_1835088203",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088203
+    },
+    {
+      "job": "run_A3_OFF_1835088204",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088204
+    },
+    {
+      "job": "run_A3_OFF_1835088205",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088205
+    },
+    {
+      "job": "run_A3_OFF_1835088206",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088206
+    },
+    {
+      "job": "run_A3_OFF_1835088207",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088207
+    },
+    {
+      "job": "run_A3_OFF_1835088208",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088208
+    },
+    {
+      "job": "run_A3_OFF_1835088209",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088209
+    },
+    {
+      "job": "run_A3_OFF_1835088210",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088210
+    },
+    {
+      "job": "run_A3_OFF_1835088211",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088211
+    },
+    {
+      "job": "run_A3_OFF_1835088212",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088212
+    },
+    {
+      "job": "run_A3_OFF_1835088213",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088213
+    },
+    {
+      "job": "run_A3_OFF_1835088214",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088214
+    },
+    {
+      "job": "run_A3_OFF_1835088215",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088215
+    },
+    {
+      "job": "run_A3_OFF_1835088216",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088216
+    },
+    {
+      "job": "run_A3_OFF_1835088217",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088217
+    },
+    {
+      "job": "run_A3_OFF_1835088218",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088218
+    },
+    {
+      "job": "run_A3_OFF_1835088219",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088219
+    },
+    {
+      "job": "run_A3_POINTS_1835088200",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088200
+    },
+    {
+      "job": "run_A3_POINTS_1835088201",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088201
+    },
+    {
+      "job": "run_A3_POINTS_1835088202",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088202
+    },
+    {
+      "job": "run_A3_POINTS_1835088203",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088203
+    },
+    {
+      "job": "run_A3_POINTS_1835088204",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088204
+    },
+    {
+      "job": "run_A3_POINTS_1835088205",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088205
+    },
+    {
+      "job": "run_A3_POINTS_1835088206",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088206
+    },
+    {
+      "job": "run_A3_POINTS_1835088207",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088207
+    },
+    {
+      "job": "run_A3_POINTS_1835088208",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088208
+    },
+    {
+      "job": "run_A3_POINTS_1835088209",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088209
+    },
+    {
+      "job": "run_A3_POINTS_1835088210",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088210
+    },
+    {
+      "job": "run_A3_POINTS_1835088211",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088211
+    },
+    {
+      "job": "run_A3_POINTS_1835088212",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088212
+    },
+    {
+      "job": "run_A3_POINTS_1835088213",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088213
+    },
+    {
+      "job": "run_A3_POINTS_1835088214",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088214
+    },
+    {
+      "job": "run_A3_POINTS_1835088215",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088215
+    },
+    {
+      "job": "run_A3_POINTS_1835088216",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088216
+    },
+    {
+      "job": "run_A3_POINTS_1835088217",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088217
+    },
+    {
+      "job": "run_A3_POINTS_1835088218",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088218
+    },
+    {
+      "job": "run_A3_POINTS_1835088219",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088219
+    },
+    {
+      "job": "run_A4_LATCHED_1835088200",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088200
+    },
+    {
+      "job": "run_A4_LATCHED_1835088201",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088201
+    },
+    {
+      "job": "run_A4_LATCHED_1835088202",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088202
+    },
+    {
+      "job": "run_A4_LATCHED_1835088203",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088203
+    },
+    {
+      "job": "run_A4_LATCHED_1835088204",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088204
+    },
+    {
+      "job": "run_A4_LATCHED_1835088205",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088205
+    },
+    {
+      "job": "run_A4_LATCHED_1835088206",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088206
+    },
+    {
+      "job": "run_A4_LATCHED_1835088207",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088207
+    },
+    {
+      "job": "run_A4_LATCHED_1835088208",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088208
+    },
+    {
+      "job": "run_A4_LATCHED_1835088209",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088209
+    },
+    {
+      "job": "run_A4_LATCHED_1835088210",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088210
+    },
+    {
+      "job": "run_A4_LATCHED_1835088211",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088211
+    },
+    {
+      "job": "run_A4_LATCHED_1835088212",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088212
+    },
+    {
+      "job": "run_A4_LATCHED_1835088213",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088213
+    },
+    {
+      "job": "run_A4_LATCHED_1835088214",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088214
+    },
+    {
+      "job": "run_A4_LATCHED_1835088215",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088215
+    },
+    {
+      "job": "run_A4_LATCHED_1835088216",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088216
+    },
+    {
+      "job": "run_A4_LATCHED_1835088217",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088217
+    },
+    {
+      "job": "run_A4_LATCHED_1835088218",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088218
+    },
+    {
+      "job": "run_A4_LATCHED_1835088219",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088219
+    },
+    {
+      "job": "run_A4_OFF_1835088200",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088200
+    },
+    {
+      "job": "run_A4_OFF_1835088201",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088201
+    },
+    {
+      "job": "run_A4_OFF_1835088202",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088202
+    },
+    {
+      "job": "run_A4_OFF_1835088203",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088203
+    },
+    {
+      "job": "run_A4_OFF_1835088204",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088204
+    },
+    {
+      "job": "run_A4_OFF_1835088205",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088205
+    },
+    {
+      "job": "run_A4_OFF_1835088206",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088206
+    },
+    {
+      "job": "run_A4_OFF_1835088207",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088207
+    },
+    {
+      "job": "run_A4_OFF_1835088208",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088208
+    },
+    {
+      "job": "run_A4_OFF_1835088209",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088209
+    },
+    {
+      "job": "run_A4_OFF_1835088210",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088210
+    },
+    {
+      "job": "run_A4_OFF_1835088211",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088211
+    },
+    {
+      "job": "run_A4_OFF_1835088212",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088212
+    },
+    {
+      "job": "run_A4_OFF_1835088213",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088213
+    },
+    {
+      "job": "run_A4_OFF_1835088214",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088214
+    },
+    {
+      "job": "run_A4_OFF_1835088215",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088215
+    },
+    {
+      "job": "run_A4_OFF_1835088216",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088216
+    },
+    {
+      "job": "run_A4_OFF_1835088217",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088217
+    },
+    {
+      "job": "run_A4_OFF_1835088218",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088218
+    },
+    {
+      "job": "run_A4_OFF_1835088219",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088219
+    },
+    {
+      "job": "run_A4_POINTS_1835088200",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088200
+    },
+    {
+      "job": "run_A4_POINTS_1835088201",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088201
+    },
+    {
+      "job": "run_A4_POINTS_1835088202",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088202
+    },
+    {
+      "job": "run_A4_POINTS_1835088203",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088203
+    },
+    {
+      "job": "run_A4_POINTS_1835088204",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088204
+    },
+    {
+      "job": "run_A4_POINTS_1835088205",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088205
+    },
+    {
+      "job": "run_A4_POINTS_1835088206",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088206
+    },
+    {
+      "job": "run_A4_POINTS_1835088207",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088207
+    },
+    {
+      "job": "run_A4_POINTS_1835088208",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088208
+    },
+    {
+      "job": "run_A4_POINTS_1835088209",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088209
+    },
+    {
+      "job": "run_A4_POINTS_1835088210",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088210
+    },
+    {
+      "job": "run_A4_POINTS_1835088211",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088211
+    },
+    {
+      "job": "run_A4_POINTS_1835088212",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088212
+    },
+    {
+      "job": "run_A4_POINTS_1835088213",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088213
+    },
+    {
+      "job": "run_A4_POINTS_1835088214",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088214
+    },
+    {
+      "job": "run_A4_POINTS_1835088215",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088215
+    },
+    {
+      "job": "run_A4_POINTS_1835088216",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088216
+    },
+    {
+      "job": "run_A4_POINTS_1835088217",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088217
+    },
+    {
+      "job": "run_A4_POINTS_1835088218",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088218
+    },
+    {
+      "job": "run_A4_POINTS_1835088219",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088219
+    },
+    {
+      "job": "run_H_LATCHED_1835088200",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088200
+    },
+    {
+      "job": "run_H_LATCHED_1835088201",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088201
+    },
+    {
+      "job": "run_H_LATCHED_1835088202",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088202
+    },
+    {
+      "job": "run_H_LATCHED_1835088203",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088203
+    },
+    {
+      "job": "run_H_LATCHED_1835088204",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088204
+    },
+    {
+      "job": "run_H_LATCHED_1835088205",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088205
+    },
+    {
+      "job": "run_H_LATCHED_1835088206",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088206
+    },
+    {
+      "job": "run_H_LATCHED_1835088207",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088207
+    },
+    {
+      "job": "run_H_LATCHED_1835088208",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088208
+    },
+    {
+      "job": "run_H_LATCHED_1835088209",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088209
+    },
+    {
+      "job": "run_H_LATCHED_1835088210",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088210
+    },
+    {
+      "job": "run_H_LATCHED_1835088211",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088211
+    },
+    {
+      "job": "run_H_LATCHED_1835088212",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088212
+    },
+    {
+      "job": "run_H_LATCHED_1835088213",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088213
+    },
+    {
+      "job": "run_H_LATCHED_1835088214",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088214
+    },
+    {
+      "job": "run_H_LATCHED_1835088215",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088215
+    },
+    {
+      "job": "run_H_LATCHED_1835088216",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088216
+    },
+    {
+      "job": "run_H_LATCHED_1835088217",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088217
+    },
+    {
+      "job": "run_H_LATCHED_1835088218",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088218
+    },
+    {
+      "job": "run_H_LATCHED_1835088219",
+      "arm": "H",
+      "defense_arm": "LATCHED",
+      "seed": 1835088219
+    },
+    {
+      "job": "run_H_OFF_1835088200",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088200
+    },
+    {
+      "job": "run_H_OFF_1835088201",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088201
+    },
+    {
+      "job": "run_H_OFF_1835088202",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088202
+    },
+    {
+      "job": "run_H_OFF_1835088203",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088203
+    },
+    {
+      "job": "run_H_OFF_1835088204",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088204
+    },
+    {
+      "job": "run_H_OFF_1835088205",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088205
+    },
+    {
+      "job": "run_H_OFF_1835088206",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088206
+    },
+    {
+      "job": "run_H_OFF_1835088207",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088207
+    },
+    {
+      "job": "run_H_OFF_1835088208",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088208
+    },
+    {
+      "job": "run_H_OFF_1835088209",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088209
+    },
+    {
+      "job": "run_H_OFF_1835088210",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088210
+    },
+    {
+      "job": "run_H_OFF_1835088211",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088211
+    },
+    {
+      "job": "run_H_OFF_1835088212",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088212
+    },
+    {
+      "job": "run_H_OFF_1835088213",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088213
+    },
+    {
+      "job": "run_H_OFF_1835088214",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088214
+    },
+    {
+      "job": "run_H_OFF_1835088215",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088215
+    },
+    {
+      "job": "run_H_OFF_1835088216",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088216
+    },
+    {
+      "job": "run_H_OFF_1835088217",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088217
+    },
+    {
+      "job": "run_H_OFF_1835088218",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088218
+    },
+    {
+      "job": "run_H_OFF_1835088219",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088219
+    },
+    {
+      "job": "run_H_POINTS_1835088200",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088200
+    },
+    {
+      "job": "run_H_POINTS_1835088201",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088201
+    },
+    {
+      "job": "run_H_POINTS_1835088202",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088202
+    },
+    {
+      "job": "run_H_POINTS_1835088203",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088203
+    },
+    {
+      "job": "run_H_POINTS_1835088204",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088204
+    },
+    {
+      "job": "run_H_POINTS_1835088205",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088205
+    },
+    {
+      "job": "run_H_POINTS_1835088206",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088206
+    },
+    {
+      "job": "run_H_POINTS_1835088207",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088207
+    },
+    {
+      "job": "run_H_POINTS_1835088208",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088208
+    },
+    {
+      "job": "run_H_POINTS_1835088209",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088209
+    },
+    {
+      "job": "run_H_POINTS_1835088210",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088210
+    },
+    {
+      "job": "run_H_POINTS_1835088211",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088211
+    },
+    {
+      "job": "run_H_POINTS_1835088212",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088212
+    },
+    {
+      "job": "run_H_POINTS_1835088213",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088213
+    },
+    {
+      "job": "run_H_POINTS_1835088214",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088214
+    },
+    {
+      "job": "run_H_POINTS_1835088215",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088215
+    },
+    {
+      "job": "run_H_POINTS_1835088216",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088216
+    },
+    {
+      "job": "run_H_POINTS_1835088217",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088217
+    },
+    {
+      "job": "run_H_POINTS_1835088218",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088218
+    },
+    {
+      "job": "run_H_POINTS_1835088219",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088219
+    },
+    {
+      "job": "run_M1_LATCHED_1835088200",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088200
+    },
+    {
+      "job": "run_M1_LATCHED_1835088201",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088201
+    },
+    {
+      "job": "run_M1_LATCHED_1835088202",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088202
+    },
+    {
+      "job": "run_M1_LATCHED_1835088203",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088203
+    },
+    {
+      "job": "run_M1_LATCHED_1835088204",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088204
+    },
+    {
+      "job": "run_M1_LATCHED_1835088205",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088205
+    },
+    {
+      "job": "run_M1_LATCHED_1835088206",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088206
+    },
+    {
+      "job": "run_M1_LATCHED_1835088207",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088207
+    },
+    {
+      "job": "run_M1_LATCHED_1835088208",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088208
+    },
+    {
+      "job": "run_M1_LATCHED_1835088209",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088209
+    },
+    {
+      "job": "run_M1_LATCHED_1835088210",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088210
+    },
+    {
+      "job": "run_M1_LATCHED_1835088211",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088211
+    },
+    {
+      "job": "run_M1_LATCHED_1835088212",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088212
+    },
+    {
+      "job": "run_M1_LATCHED_1835088213",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088213
+    },
+    {
+      "job": "run_M1_LATCHED_1835088214",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088214
+    },
+    {
+      "job": "run_M1_LATCHED_1835088215",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088215
+    },
+    {
+      "job": "run_M1_LATCHED_1835088216",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088216
+    },
+    {
+      "job": "run_M1_LATCHED_1835088217",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088217
+    },
+    {
+      "job": "run_M1_LATCHED_1835088218",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088218
+    },
+    {
+      "job": "run_M1_LATCHED_1835088219",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088219
+    },
+    {
+      "job": "run_M1_OFF_1835088200",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088200
+    },
+    {
+      "job": "run_M1_OFF_1835088201",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088201
+    },
+    {
+      "job": "run_M1_OFF_1835088202",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088202
+    },
+    {
+      "job": "run_M1_OFF_1835088203",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088203
+    },
+    {
+      "job": "run_M1_OFF_1835088204",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088204
+    },
+    {
+      "job": "run_M1_OFF_1835088205",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088205
+    },
+    {
+      "job": "run_M1_OFF_1835088206",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088206
+    },
+    {
+      "job": "run_M1_OFF_1835088207",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088207
+    },
+    {
+      "job": "run_M1_OFF_1835088208",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088208
+    },
+    {
+      "job": "run_M1_OFF_1835088209",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088209
+    },
+    {
+      "job": "run_M1_OFF_1835088210",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088210
+    },
+    {
+      "job": "run_M1_OFF_1835088211",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088211
+    },
+    {
+      "job": "run_M1_OFF_1835088212",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088212
+    },
+    {
+      "job": "run_M1_OFF_1835088213",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088213
+    },
+    {
+      "job": "run_M1_OFF_1835088214",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088214
+    },
+    {
+      "job": "run_M1_OFF_1835088215",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088215
+    },
+    {
+      "job": "run_M1_OFF_1835088216",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088216
+    },
+    {
+      "job": "run_M1_OFF_1835088217",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088217
+    },
+    {
+      "job": "run_M1_OFF_1835088218",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088218
+    },
+    {
+      "job": "run_M1_OFF_1835088219",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088219
+    },
+    {
+      "job": "run_M1_POINTS_1835088200",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088200
+    },
+    {
+      "job": "run_M1_POINTS_1835088201",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088201
+    },
+    {
+      "job": "run_M1_POINTS_1835088202",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088202
+    },
+    {
+      "job": "run_M1_POINTS_1835088203",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088203
+    },
+    {
+      "job": "run_M1_POINTS_1835088204",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088204
+    },
+    {
+      "job": "run_M1_POINTS_1835088205",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088205
+    },
+    {
+      "job": "run_M1_POINTS_1835088206",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088206
+    },
+    {
+      "job": "run_M1_POINTS_1835088207",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088207
+    },
+    {
+      "job": "run_M1_POINTS_1835088208",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088208
+    },
+    {
+      "job": "run_M1_POINTS_1835088209",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088209
+    },
+    {
+      "job": "run_M1_POINTS_1835088210",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088210
+    },
+    {
+      "job": "run_M1_POINTS_1835088211",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088211
+    },
+    {
+      "job": "run_M1_POINTS_1835088212",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088212
+    },
+    {
+      "job": "run_M1_POINTS_1835088213",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088213
+    },
+    {
+      "job": "run_M1_POINTS_1835088214",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088214
+    },
+    {
+      "job": "run_M1_POINTS_1835088215",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088215
+    },
+    {
+      "job": "run_M1_POINTS_1835088216",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088216
+    },
+    {
+      "job": "run_M1_POINTS_1835088217",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088217
+    },
+    {
+      "job": "run_M1_POINTS_1835088218",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088218
+    },
+    {
+      "job": "run_M1_POINTS_1835088219",
+      "arm": "M1",
+      "defense_arm": "POINTS",
+      "seed": 1835088219
+    }
+  ],
+  "gate_jobs": [
+    {
+      "job": "gate_H_OFF",
+      "arm": "H",
+      "defense_arm": "OFF",
+      "seed": 1835088200,
+      "gate": true,
+      "force_normal": false
+    },
+    {
+      "job": "gate_A3_OFF",
+      "arm": "A3",
+      "defense_arm": "OFF",
+      "seed": 1835088200,
+      "gate": true,
+      "force_normal": false
+    },
+    {
+      "job": "gate_A4_OFF",
+      "arm": "A4",
+      "defense_arm": "OFF",
+      "seed": 1835088200,
+      "gate": true,
+      "force_normal": false
+    },
+    {
+      "job": "gate_M1_OFF",
+      "arm": "M1",
+      "defense_arm": "OFF",
+      "seed": 1835088200,
+      "gate": true,
+      "force_normal": false
+    },
+    {
+      "job": "gate_H_NORMAL",
+      "arm": "H",
+      "defense_arm": "POINTS",
+      "seed": 1835088200,
+      "gate": true,
+      "force_normal": true
+    },
+    {
+      "job": "gate_A3_NORMAL",
+      "arm": "A3",
+      "defense_arm": "POINTS",
+      "seed": 1835088200,
+      "gate": true,
+      "force_normal": true
+    },
+    {
+      "job": "gate_M1_LATCHED",
+      "arm": "M1",
+      "defense_arm": "LATCHED",
+      "seed": 1835088200,
+      "gate": true,
+      "force_normal": false
+    },
+    {
+      "job": "gate_A4_LATCHED",
+      "arm": "A4",
+      "defense_arm": "LATCHED",
+      "seed": 1835088200,
+      "gate": true,
+      "force_normal": false
+    },
+    {
+      "job": "gate_A4_POINTS",
+      "arm": "A4",
+      "defense_arm": "POINTS",
+      "seed": 1835088200,
+      "gate": true,
+      "force_normal": false
+    }
+  ],
+  "steps": 300,
+  "onset": 50,
+  "shock_step": 150,
+  "shock_magnitude": 0.6,
+  "seed_start": 1835088200,
+  "seed_end": 1835088219,
+  "normal_worker_cap": 15,
+  "work_worker_cap": 12,
+  "numerical_threads_per_worker": 1,
+  "control_file": "defense_points_run_a2_control.json",
+  "resumption": "Validate completed jobs and code identity; skip exact completions; retain interrupted artifacts with .partial names and restart each interrupted job from step 0.",
+  "harm_directions": {
+    "P1": "negative",
+    "P2": "positive"
+  },
+  "tool_layer_workarounds": [
+    "Decoded JSON explicitly in the pin-reading helper after a JSON boolean was treated as Python syntax; no project code ran."
+  ],
+  "executor_fixes": [],
+  "artifact_merge": "Verify per-run row counts and original-row hashes before deletion.",
+  "interpretation_reserved_for_operator": true,
+  "gate_tolerances": {
+    "computed_floats_absolute": 1e-9,
+    "share_sum_absolute": 1e-12,
+    "attack_arithmetic_absolute": 1e-12,
+    "constants": "bitwise",
+    "consensus": "bitwise",
+    "inertness": "exact",
+    "wrapper_identity": "exact",
+    "alarm_steps": "exact",
+    "registered_counts": "not tolerance-adjusted"
+  },
+  "attack_validity": {
+    "step": 149,
+    "contrast": "H OFF minus A4 OFF",
+    "median_margin": 0.1,
+    "t_threshold": 2,
+    "A3_reference": true
+  },
+  "points": {
+    "window": 40,
+    "clean_g_steps": 20,
+    "normal_alarm_weight": 1,
+    "acting_alarm_weight": 2,
+    "consensus_threshold": 3,
+    "permanent_suspensions": 3,
+    "operational_alarm_unit": "One completed step with any channel alarm; channel events remain individually recorded."
+  },
+  "attack_ordering": {
+    "attack_commit": "ab53c865",
+    "defense_commit": "cd792e72",
+    "sections_1_to_4_unchanged": true,
+    "both_ancestors_of_HEAD_and_origin_main": true
+  }
+}

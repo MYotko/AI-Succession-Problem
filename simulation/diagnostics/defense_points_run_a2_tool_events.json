@@ -1,0 +1,6 @@
+{
+  "tool_layer_workarounds": [
+    "Decoded JSON explicitly in the pin-reading helper after a JSON boolean was treated as Python syntax; no project code ran.",
+    "Handled an empty progress-tool response as a running tool session instead of passing empty text to the notification helper; simulation execution was unchanged."
+  ]
+}

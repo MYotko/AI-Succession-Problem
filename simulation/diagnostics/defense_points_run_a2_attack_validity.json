@@ -1,0 +1,371 @@
+{
+  "A3": {
+    "H_median_stock": 0.39532385807085113,
+    "attacked_median_stock": 0.20000059741514928,
+    "bias": "Known-pathway design; constants calibrated on the drift mapping construction.",
+    "contrast": "H OFF minus A3 OFF",
+    "median_margin_at_least_0_10": true,
+    "median_stock_difference": 0.19532326065570185,
+    "paired": {
+      "mean_difference": 0.19824744796343988,
+      "n_pairs": 20,
+      "paired_standard_error": 0.01012982233105225,
+      "t_statistic": 19.57067374772472,
+      "t_statistic_note": null
+    },
+    "per_run_stock": {
+      "A3": [
+        {
+          "resilience_stock": 0.20000054887584412,
+          "seed": 1835088200
+        },
+        {
+          "resilience_stock": 0.20000058288443795,
+          "seed": 1835088201
+        },
+        {
+          "resilience_stock": 0.20000060338176687,
+          "seed": 1835088202
+        },
+        {
+          "resilience_stock": 0.2000007340070471,
+          "seed": 1835088203
+        },
+        {
+          "resilience_stock": 0.20000055195897337,
+          "seed": 1835088204
+        },
+        {
+          "resilience_stock": 0.20000062669325502,
+          "seed": 1835088205
+        },
+        {
+          "resilience_stock": 0.20000063388329486,
+          "seed": 1835088206
+        },
+        {
+          "resilience_stock": 0.20000086263930536,
+          "seed": 1835088207
+        },
+        {
+          "resilience_stock": 0.20000060582847667,
+          "seed": 1835088208
+        },
+        {
+          "resilience_stock": 0.20000059770966575,
+          "seed": 1835088209
+        },
+        {
+          "resilience_stock": 0.20000057199122356,
+          "seed": 1835088210
+        },
+        {
+          "resilience_stock": 0.20000043873567624,
+          "seed": 1835088211
+        },
+        {
+          "resilience_stock": 0.2000005971206328,
+          "seed": 1835088212
+        },
+        {
+          "resilience_stock": 0.20000047668764717,
+          "seed": 1835088213
+        },
+        {
+          "resilience_stock": 0.2000005969747835,
+          "seed": 1835088214
+        },
+        {
+          "resilience_stock": 0.2000007167623959,
+          "seed": 1835088215
+        },
+        {
+          "resilience_stock": 0.20000047360282028,
+          "seed": 1835088216
+        },
+        {
+          "resilience_stock": 0.20000057241512606,
+          "seed": 1835088217
+        },
+        {
+          "resilience_stock": 0.2000006822050733,
+          "seed": 1835088218
+        },
+        {
+          "resilience_stock": 0.20000063913696164,
+          "seed": 1835088219
+        }
+      ],
+      "H": [
+        {
+          "resilience_stock": 0.39358288129896185,
+          "seed": 1835088200
+        },
+        {
+          "resilience_stock": 0.41977605647650995,
+          "seed": 1835088201
+        },
+        {
+          "resilience_stock": 0.39706483484274036,
+          "seed": 1835088202
+        },
+        {
+          "resilience_stock": 0.47892128223549857,
+          "seed": 1835088203
+        },
+        {
+          "resilience_stock": 0.4282645645738415,
+          "seed": 1835088204
+        },
+        {
+          "resilience_stock": 0.42804099131438056,
+          "seed": 1835088205
+        },
+        {
+          "resilience_stock": 0.4056720544047255,
+          "seed": 1835088206
+        },
+        {
+          "resilience_stock": 0.3518057704377252,
+          "seed": 1835088207
+        },
+        {
+          "resilience_stock": 0.32515492051941053,
+          "seed": 1835088208
+        },
+        {
+          "resilience_stock": 0.4240857575764801,
+          "seed": 1835088209
+        },
+        {
+          "resilience_stock": 0.3736214062335257,
+          "seed": 1835088210
+        },
+        {
+          "resilience_stock": 0.39207550698730725,
+          "seed": 1835088211
+        },
+        {
+          "resilience_stock": 0.36419205111336483,
+          "seed": 1835088212
+        },
+        {
+          "resilience_stock": 0.3278197645805266,
+          "seed": 1835088213
+        },
+        {
+          "resilience_stock": 0.4556628678378667,
+          "seed": 1835088214
+        },
+        {
+          "resilience_stock": 0.48985036975176127,
+          "seed": 1835088215
+        },
+        {
+          "resilience_stock": 0.3653394610687714,
+          "seed": 1835088216
+        },
+        {
+          "resilience_stock": 0.40824044412717303,
+          "seed": 1835088217
+        },
+        {
+          "resilience_stock": 0.35192490001813553,
+          "seed": 1835088218
+        },
+        {
+          "resilience_stock": 0.3838651873644987,
+          "seed": 1835088219
+        }
+      ]
+    },
+    "reference": "A3 met this gate at b1a54983; these numbers are a reference.",
+    "step": 149,
+    "t_at_least_2": true
+  },
+  "A4": {
+    "H_median_stock": 0.39532385807085113,
+    "attacked_median_stock": 0.3699576765463883,
+    "bias": "Known-pathway design; constants calibrated on the drift mapping construction.",
+    "contrast": "H OFF minus A4 OFF",
+    "median_margin_at_least_0_10": false,
+    "median_stock_difference": 0.02536618152446285,
+    "paired": {
+      "mean_difference": 0.02575922265612988,
+      "n_pairs": 20,
+      "paired_standard_error": 0.0029933182706216653,
+      "t_statistic": 8.605574258156015,
+      "t_statistic_note": null
+    },
+    "per_run_stock": {
+      "A4": [
+        {
+          "resilience_stock": 0.3700724001844016,
+          "seed": 1835088200
+        },
+        {
+          "resilience_stock": 0.39983750220829206,
+          "seed": 1835088201
+        },
+        {
+          "resilience_stock": 0.36558308501250386,
+          "seed": 1835088202
+        },
+        {
+          "resilience_stock": 0.4566838274799808,
+          "seed": 1835088203
+        },
+        {
+          "resilience_stock": 0.39206123423196265,
+          "seed": 1835088204
+        },
+        {
+          "resilience_stock": 0.39591623906055773,
+          "seed": 1835088205
+        },
+        {
+          "resilience_stock": 0.391207005149784,
+          "seed": 1835088206
+        },
+        {
+          "resilience_stock": 0.3538442318385704,
+          "seed": 1835088207
+        },
+        {
+          "resilience_stock": 0.29478854777378444,
+          "seed": 1835088208
+        },
+        {
+          "resilience_stock": 0.369842952908375,
+          "seed": 1835088209
+        },
+        {
+          "resilience_stock": 0.3393265023822202,
+          "seed": 1835088210
+        },
+        {
+          "resilience_stock": 0.3573594683656457,
+          "seed": 1835088211
+        },
+        {
+          "resilience_stock": 0.3704078182544373,
+          "seed": 1835088212
+        },
+        {
+          "resilience_stock": 0.3085422302824007,
+          "seed": 1835088213
+        },
+        {
+          "resilience_stock": 0.4301864985450349,
+          "seed": 1835088214
+        },
+        {
+          "resilience_stock": 0.45247288981391687,
+          "seed": 1835088215
+        },
+        {
+          "resilience_stock": 0.33641731008740783,
+          "seed": 1835088216
+        },
+        {
+          "resilience_stock": 0.3776415623527345,
+          "seed": 1835088217
+        },
+        {
+          "resilience_stock": 0.3229845890274497,
+          "seed": 1835088218
+        },
+        {
+          "resilience_stock": 0.3646007246811473,
+          "seed": 1835088219
+        }
+      ],
+      "H": [
+        {
+          "resilience_stock": 0.39358288129896185,
+          "seed": 1835088200
+        },
+        {
+          "resilience_stock": 0.41977605647650995,
+          "seed": 1835088201
+        },
+        {
+          "resilience_stock": 0.39706483484274036,
+          "seed": 1835088202
+        },
+        {
+          "resilience_stock": 0.47892128223549857,
+          "seed": 1835088203
+        },
+        {
+          "resilience_stock": 0.4282645645738415,
+          "seed": 1835088204
+        },
+        {
+          "resilience_stock": 0.42804099131438056,
+          "seed": 1835088205
+        },
+        {
+          "resilience_stock": 0.4056720544047255,
+          "seed": 1835088206
+        },
+        {
+          "resilience_stock": 0.3518057704377252,
+          "seed": 1835088207
+        },
+        {
+          "resilience_stock": 0.32515492051941053,
+          "seed": 1835088208
+        },
+        {
+          "resilience_stock": 0.4240857575764801,
+          "seed": 1835088209
+        },
+        {
+          "resilience_stock": 0.3736214062335257,
+          "seed": 1835088210
+        },
+        {
+          "resilience_stock": 0.39207550698730725,
+          "seed": 1835088211
+        },
+        {
+          "resilience_stock": 0.36419205111336483,
+          "seed": 1835088212
+        },
+        {
+          "resilience_stock": 0.3278197645805266,
+          "seed": 1835088213
+        },
+        {
+          "resilience_stock": 0.4556628678378667,
+          "seed": 1835088214
+        },
+        {
+          "resilience_stock": 0.48985036975176127,
+          "seed": 1835088215
+        },
+        {
+          "resilience_stock": 0.3653394610687714,
+          "seed": 1835088216
+        },
+        {
+          "resilience_stock": 0.40824044412717303,
+          "seed": 1835088217
+        },
+        {
+          "resilience_stock": 0.35192490001813553,
+          "seed": 1835088218
+        },
+        {
+          "resilience_stock": 0.3838651873644987,
+          "seed": 1835088219
+        }
+      ]
+    },
+    "step": 149,
+    "t_at_least_2": true,
+    "validity_gate_met": false,
+    "void": true
+  }
+}
