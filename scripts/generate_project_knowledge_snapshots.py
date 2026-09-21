@@ -104,6 +104,7 @@ NEVER_INGEST_BASENAME_PREFIXES = (
     "defense_xv_run_",
     "defense_heldout_run_",
     "defense_recovery_run_",
+    "defense_points_run_",
 )
 
 # Directories whose contents must NEVER reach a generated snapshot, matched on
