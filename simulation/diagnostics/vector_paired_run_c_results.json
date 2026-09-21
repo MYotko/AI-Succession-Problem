@@ -1,0 +1,58 @@
+{
+  "capture_rate_exclusion_assertion": {
+    "reason": "Analysis was not launched; the C5 specification conflicts with the required exclusion.",
+    "status": "NOT_RUN"
+  },
+  "capture_rate_values_recorded": 0,
+  "capture_rate_values_used": 0,
+  "halt_phase": "after T0, before T1 and model construction",
+  "halt_reason": "C5 requires comparing the two zero-capture arms on every recorded field, including the pinned runner's capture_rate field. Amendment 2 (Section 14) excludes capture_rate from every registered quantity and requires asserting that no registered quantity reads it. C5 is a registered quantity, so both requirements cannot be satisfied without changing the specified comparison.",
+  "interpretation_applied": false,
+  "model_steps_completed": 0,
+  "pre_repair_comparison_drawn": false,
+  "registered": {
+    "C1": {
+      "status": "NOT_COMPUTED",
+      "value": null
+    },
+    "C2": {
+      "status": "NOT_COMPUTED",
+      "value": null
+    },
+    "C3": {
+      "status": "NOT_COMPUTED",
+      "value": null
+    },
+    "C4": {
+      "status": "NOT_COMPUTED",
+      "value": null
+    },
+    "C5": {
+      "status": "NOT_COMPUTED",
+      "value": null
+    },
+    "C6": {
+      "status": "NOT_COMPUTED",
+      "value": null
+    }
+  },
+  "runs_completed": 0,
+  "runs_launched": 0,
+  "runs_planned": 900,
+  "specification_evidence": [
+    {
+      "requirement": "The two zero-capture arms are compared field by field at every seed; report whether they are bit-identical on every recorded field.",
+      "source": "dispatch C5"
+    },
+    {
+      "requirement": "The legacy field is retained verbatim in raw rows, excluded from every registered quantity, and the analysis must assert no registered quantity reads it.",
+      "source": "committed pre-registration Section 14, lines 260 through 264"
+    },
+    {
+      "requirement": "The returned row includes capture_rate.",
+      "source": "committed pinned runner run_single, line 435"
+    }
+  ],
+  "stage": "C",
+  "status": "HALTED"
+}

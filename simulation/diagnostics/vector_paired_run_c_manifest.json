@@ -1,0 +1,234 @@
+{
+  "T0_stderr_warnings": [
+    {
+      "command": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n"
+    }
+  ],
+  "committed_blob_sha1": {
+    "simulation/agents.py": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+    "simulation/attack_adapter_v2.py": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+    "simulation/attack_metrics_v2.py": "3623a0285d0125b41df30a528a155d207ed12bdb",
+    "simulation/constants_v2_stage18.py": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+    "simulation/diagnostics/per_vector_paired_design_note.md": "b30271bba5d1b267c10746dc8941e602c2e14c63",
+    "simulation/metrics.py": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+    "simulation/model.py": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+    "simulation/run_attack_vector_revalidation_v2.py": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+    "simulation/working_factor.py": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486"
+  },
+  "created_utc": "2026-09-21T21:20:57.493317+00:00",
+  "executor_self_fixes": [],
+  "halt_reason": "C5 requires comparing the two zero-capture arms on every recorded field, including the pinned runner's capture_rate field. Amendment 2 (Section 14) excludes capture_rate from every registered quantity and requires asserting that no registered quantity reads it. C5 is a registered quantity, so both requirements cannot be satisfied without changing the specified comparison.",
+  "manifest_self_hash": "Excluded to avoid a recursive self-hash.",
+  "merge": {
+    "deleted_file_counts": {},
+    "merged_row_count": 0,
+    "recorded_row_hashes": [],
+    "status": "NOT_RUN"
+  },
+  "outputs": [
+    {
+      "csv_row_count": null,
+      "hash_basis": "LF-normalized bytes",
+      "path": "simulation/diagnostics/vector_paired_run_c_halt.py",
+      "sha256_lf": "5faef0a368216231d2fb93c4ab3ba80e19b961db81b15f190d6882a5fa531a4d"
+    },
+    {
+      "csv_row_count": null,
+      "hash_basis": "LF-normalized bytes",
+      "path": "simulation/diagnostics/vector_paired_run_c_preflight.json",
+      "sha256_lf": "14cff256b79a7175c4c6609ad7bd7fc4cab6f0259cf52451e833e1ad46b632c2"
+    },
+    {
+      "csv_row_count": null,
+      "hash_basis": "LF-normalized bytes",
+      "path": "simulation/diagnostics/vector_paired_run_c_report.md",
+      "sha256_lf": "08febefe26d5abc0fe3d5488ea064bf1e286866962fa9851a25db5e82dd07630"
+    },
+    {
+      "csv_row_count": null,
+      "hash_basis": "LF-normalized bytes",
+      "path": "simulation/diagnostics/vector_paired_run_c_results.json",
+      "sha256_lf": "0ef1213b885cef3eaed1d137cddc4fc4639151628c204eeed736568b29d302bf"
+    }
+  ],
+  "per_module_hash_basis": "No simulation module was imported. Source pins and artifact hashes are recorded separately.",
+  "per_module_sha256": {},
+  "read_committed_sources": [
+    {
+      "basis": "Committed blob retrieved with git cat-file",
+      "blob_sha1": "b30271bba5d1b267c10746dc8941e602c2e14c63",
+      "commit": "f57b1764cb992908e156b34b9a1ca9e4f6f163a6",
+      "path": "simulation/diagnostics/per_vector_paired_design_note.md",
+      "sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa"
+    },
+    {
+      "basis": "Committed blob retrieved with git cat-file",
+      "blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d",
+      "commit": "b5783f41df0b3be1cbae8ab79921939847be9181",
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb"
+    },
+    {
+      "basis": "Committed blob retrieved with git cat-file",
+      "blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+    },
+    {
+      "basis": "Committed blob retrieved with git cat-file",
+      "blob_sha1": "1644ff3f2a0de49de1607e2b0b29f02c36ddd1fe",
+      "commit": "b32511de2320c81d8bed70592bd2248b5a6199c6",
+      "path": "simulation/diagnostics/vector_paired_run_ap_executor.py",
+      "sha256_lf": "79df5662faf21bc0c20ba58b92bae461f6104af9ab36bb24e1e211e1281d4b1e"
+    }
+  ],
+  "resumed_seeds": [],
+  "retry_events": [],
+  "runs_completed": 0,
+  "runs_launched": 0,
+  "runs_planned": 900,
+  "runtime": {
+    "effective_threads_verified_per_worker": [],
+    "head": "eac4f0e2799af5baeb21a49c9be7c0b581005783",
+    "machine": "YOTKOTEST",
+    "maximum_concurrent_workers": 0,
+    "normal_worker_cap": 15,
+    "numerical_threads_configured_per_worker": 1,
+    "numpy_version": "2.4.4",
+    "numpy_version_basis": "Installed distribution metadata; NumPy was not imported.",
+    "operating_mode": "normal",
+    "operator_cpu_budget": 16,
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "thread_verification_status": "NOT_RUN",
+    "work_worker_cap": 12,
+    "workers_launched": 0
+  },
+  "source_readings": [
+    {
+      "committed_blob_sha1": "b30271bba5d1b267c10746dc8941e602c2e14c63",
+      "committed_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+      "completion_committed_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+      "completion_working_tree_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+      "expected_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+      "last_modified_commit": "f57b1764cb992908e156b34b9a1ca9e4f6f163a6",
+      "passed": true,
+      "path": "simulation/diagnostics/per_vector_paired_design_note.md",
+      "read_commit": "eac4f0e2799af5baeb21a49c9be7c0b581005783",
+      "working_tree_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+      "worktree_has_CRLF": false
+    },
+    {
+      "committed_blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+      "committed_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "completion_committed_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "completion_working_tree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "last_modified_commit": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+      "passed": true,
+      "path": "simulation/attack_metrics_v2.py",
+      "read_commit": "eac4f0e2799af5baeb21a49c9be7c0b581005783",
+      "working_tree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "worktree_has_CRLF": false
+    },
+    {
+      "committed_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "committed_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "completion_committed_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "completion_working_tree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "last_modified_commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+      "passed": true,
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "read_commit": "eac4f0e2799af5baeb21a49c9be7c0b581005783",
+      "working_tree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "worktree_has_CRLF": true
+    },
+    {
+      "committed_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "completion_committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "completion_working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "passed": true,
+      "path": "simulation/metrics.py",
+      "read_commit": "eac4f0e2799af5baeb21a49c9be7c0b581005783",
+      "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "worktree_has_CRLF": true
+    },
+    {
+      "committed_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "completion_committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "completion_working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "passed": true,
+      "path": "simulation/agents.py",
+      "read_commit": "eac4f0e2799af5baeb21a49c9be7c0b581005783",
+      "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "worktree_has_CRLF": true
+    },
+    {
+      "committed_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "completion_committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "completion_working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "passed": true,
+      "path": "simulation/model.py",
+      "read_commit": "eac4f0e2799af5baeb21a49c9be7c0b581005783",
+      "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "worktree_has_CRLF": true
+    },
+    {
+      "committed_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "completion_committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "completion_working_tree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "last_modified_commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+      "passed": true,
+      "path": "simulation/attack_adapter_v2.py",
+      "read_commit": "eac4f0e2799af5baeb21a49c9be7c0b581005783",
+      "working_tree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "worktree_has_CRLF": true
+    },
+    {
+      "committed_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "completion_committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "completion_working_tree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "last_modified_commit": "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+      "passed": true,
+      "path": "simulation/working_factor.py",
+      "read_commit": "eac4f0e2799af5baeb21a49c9be7c0b581005783",
+      "working_tree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "worktree_has_CRLF": true
+    },
+    {
+      "committed_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "completion_committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "completion_working_tree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "last_modified_commit": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+      "passed": true,
+      "path": "simulation/constants_v2_stage18.py",
+      "read_commit": "eac4f0e2799af5baeb21a49c9be7c0b581005783",
+      "working_tree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "worktree_has_CRLF": true
+    }
+  ],
+  "status": "HALTED",
+  "tool_layer_workarounds": []
+}
