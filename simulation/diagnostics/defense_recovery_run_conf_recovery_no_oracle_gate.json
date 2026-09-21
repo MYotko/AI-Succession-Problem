@@ -1,0 +1,243 @@
+{
+  "base_sentinel_gate": {
+    "cases": [
+      {
+        "incumbent_branch_calls": 2,
+        "outputs": [
+          {
+            "c_protective": 0.3,
+            "c_suppressive": 0.1,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.16666666666666666,
+            "x_compute": 0.16666666666666666,
+            "x_institutional_capacity": 0.16666666666666666,
+            "x_novelty_agency": 0.16666666666666666,
+            "x_resilience": 0.16666666666666666,
+            "x_transfer_comprehension": 0.16666666666666666
+          },
+          {
+            "c_protective": 0.3,
+            "c_suppressive": 0.1,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.16666666666666666,
+            "x_compute": 0.16666666666666666,
+            "x_institutional_capacity": 0.16666666666666666,
+            "x_novelty_agency": 0.16666666666666666,
+            "x_resilience": 0.16666666666666666,
+            "x_transfer_comprehension": 0.16666666666666666
+          }
+        ],
+        "passed": true,
+        "sentinel_cases": 2,
+        "state": "NORMAL"
+      },
+      {
+        "incumbent_branch_calls": 2,
+        "outputs": [
+          {
+            "c_protective": 0.2,
+            "c_suppressive": 0.1,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.16666666666666666,
+            "x_compute": 0.16666666666666666,
+            "x_institutional_capacity": 0.16666666666666666,
+            "x_novelty_agency": 0.16666666666666666,
+            "x_resilience": 0.16666666666666666,
+            "x_transfer_comprehension": 0.16666666666666666
+          },
+          {
+            "c_protective": 0.2,
+            "c_suppressive": 0.1,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.16666666666666666,
+            "x_compute": 0.16666666666666666,
+            "x_institutional_capacity": 0.16666666666666666,
+            "x_novelty_agency": 0.16666666666666666,
+            "x_resilience": 0.16666666666666666,
+            "x_transfer_comprehension": 0.16666666666666666
+          }
+        ],
+        "passed": true,
+        "sentinel_cases": 2,
+        "state": "VETO"
+      },
+      {
+        "incumbent_branch_calls": 2,
+        "outputs": [
+          {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "extra": {
+              "untouched": [
+                1,
+                2
+              ]
+            },
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          }
+        ],
+        "passed": true,
+        "sentinel_cases": 2,
+        "state": "CONSENSUS"
+      }
+    ],
+    "defense_receives_only_recorded_observables_and_committed_snapshot": true,
+    "passed": true,
+    "sentinel_fields": [
+      "honest_action",
+      "v2_adapter_step_event",
+      "attack_vector_v2",
+      "config"
+    ],
+    "synthetic_production_result_held_fixed": true
+  },
+  "passed": true,
+  "recovery_cases": [
+    {
+      "k": 20,
+      "passed": true,
+      "sentinel_cases": 2,
+      "sequence": {
+        "alarms": [
+          {
+            "candidate": 0.9855460049803134,
+            "channel": "entropy",
+            "step": 12,
+            "threshold": 0.17319485850717864
+          },
+          {
+            "candidate": 0.9855460049803134,
+            "channel": "entropy",
+            "step": 13,
+            "threshold": 0.17319485850717864
+          }
+        ],
+        "quiet": 0,
+        "state": "NORMAL",
+        "transitions": [
+          {
+            "consensus_fields": null,
+            "direction": "escalation",
+            "effective_from_step": 13,
+            "from": "NORMAL",
+            "held_action": {
+              "c_protective": 0.4,
+              "c_suppressive": 0.2,
+              "snapshot_step": 11,
+              "x_bio_welfare": 0.2061409568906703,
+              "x_compute": 0.1360229355155997,
+              "x_institutional_capacity": 0.26711884854035045,
+              "x_novelty_agency": 0.052807183062202334,
+              "x_resilience": 0.053301656737382165,
+              "x_transfer_comprehension": 0.2846084192537951
+            },
+            "quiet_count_after": 0,
+            "re_escalation_after_recovery": false,
+            "step": 12,
+            "to": "VETO"
+          },
+          {
+            "consensus_fields": {
+              "c_protective": 0.4,
+              "c_suppressive": 0.2,
+              "x_bio_welfare": 0.2061409568906703,
+              "x_compute": 0.1360229355155997,
+              "x_institutional_capacity": 0.26711884854035045,
+              "x_novelty_agency": 0.052807183062202334,
+              "x_resilience": 0.053301656737382165,
+              "x_transfer_comprehension": 0.2846084192537951
+            },
+            "direction": "escalation",
+            "effective_from_step": 14,
+            "from": "VETO",
+            "held_action": null,
+            "quiet_count_after": 0,
+            "re_escalation_after_recovery": false,
+            "step": 13,
+            "to": "CONSENSUS"
+          },
+          {
+            "consensus_fields": null,
+            "direction": "recovery",
+            "effective_from_step": 34,
+            "from": "CONSENSUS",
+            "held_action": {
+              "c_protective": 0.4,
+              "c_suppressive": 0.2,
+              "snapshot_step": 32,
+              "x_bio_welfare": 0.2061409568906703,
+              "x_compute": 0.1360229355155997,
+              "x_institutional_capacity": 0.26711884854035045,
+              "x_novelty_agency": 0.052807183062202334,
+              "x_resilience": 0.053301656737382165,
+              "x_transfer_comprehension": 0.2846084192537951
+            },
+            "quiet_count_after": 0,
+            "re_escalation_after_recovery": false,
+            "step": 33,
+            "to": "VETO"
+          },
+          {
+            "consensus_fields": null,
+            "direction": "recovery",
+            "effective_from_step": 54,
+            "from": "VETO",
+            "held_action": null,
+            "quiet_count_after": 0,
+            "re_escalation_after_recovery": false,
+            "step": 53,
+            "to": "NORMAL"
+          }
+        ]
+      }
+    }
+  ],
+  "recovery_inputs": [
+    "step",
+    "alarm_boolean",
+    "own_state",
+    "own_quiet_counter",
+    "own_action_snapshot"
+  ]
+}

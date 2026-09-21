@@ -1,0 +1,97 @@
+{
+  "checks": [
+    {
+      "actual": "optimize_u_sys_v2",
+      "field": "policy",
+      "passed": true,
+      "reference_with_registered_shock": "optimize_u_sys_v2"
+    },
+    {
+      "actual": 1835088100,
+      "field": "random_seed",
+      "passed": true,
+      "reference_with_registered_shock": 1835088100
+    },
+    {
+      "actual": 10.0,
+      "field": "phi",
+      "passed": true,
+      "reference_with_registered_shock": 10.0
+    },
+    {
+      "actual": 50,
+      "field": "attack_step",
+      "passed": true,
+      "reference_with_registered_shock": 50
+    },
+    {
+      "actual": 300,
+      "field": "n_candidates_v2",
+      "passed": true,
+      "reference_with_registered_shock": 300
+    },
+    {
+      "actual": 20,
+      "field": "rollout_steps_v2",
+      "passed": true,
+      "reference_with_registered_shock": 20
+    },
+    {
+      "actual": 20,
+      "field": "bootstrap_turn_step_v2",
+      "passed": true,
+      "reference_with_registered_shock": 20
+    },
+    {
+      "actual": 150,
+      "field": "shock_step",
+      "passed": true,
+      "reference_with_registered_shock": 150
+    },
+    {
+      "actual": 0.6,
+      "field": "shock_magnitude",
+      "passed": true,
+      "reference_with_registered_shock": 0.6
+    },
+    {
+      "actual": "sub_threshold_drift",
+      "field": "attack_vector_v2",
+      "passed": true,
+      "reference_with_registered_shock": "sub_threshold_drift"
+    },
+    {
+      "actual": false,
+      "field": "cop_methodological_diversity",
+      "passed": true,
+      "reference_with_registered_shock": false
+    },
+    {
+      "actual": false,
+      "field": "cop_cusum_drift",
+      "passed": true,
+      "reference_with_registered_shock": false
+    }
+  ],
+  "passed": true,
+  "reference_configuration": {
+    "attack_step": 50,
+    "attack_vector_v2": "sub_threshold_drift",
+    "bootstrap_turn_step_v2": 20,
+    "cop_cusum_drift": false,
+    "cop_methodological_diversity": false,
+    "n_candidates_v2": 300,
+    "phi": 10.0,
+    "policy": "optimize_u_sys_v2",
+    "random_seed": 1835088100,
+    "rollout_steps_v2": 20,
+    "shock_magnitude": 0.15,
+    "shock_step": 0
+  },
+  "reference_constructor_basis": "Copied verbatim from committed drift_defense_run_executor.py",
+  "registered_shock_overrides": {
+    "shock_magnitude": 0.6,
+    "shock_step": 150
+  },
+  "seed": 1835088100
+}

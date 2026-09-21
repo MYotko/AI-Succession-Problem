@@ -1,0 +1,27 @@
+{
+  "complete": 10,
+  "maximum_concurrent_workers": 10,
+  "mode_changes": [
+    {
+      "active_at_request": 0,
+      "cap": 15,
+      "mode": "normal",
+      "utc": "2026-09-21T02:50:49.586043+00:00"
+    }
+  ],
+  "new": [
+    "gate_H_OFF",
+    "gate_A3_OFF",
+    "gate_M1_OFF",
+    "gate_H_NORMAL",
+    "gate_A3_NORMAL",
+    "gate_H_LATCHED",
+    "gate_H_RECOVER20",
+    "gate_M1_LATCHED",
+    "gate_A3_LATCHED",
+    "gate_M1_RECOVER20"
+  ],
+  "phase": "gates",
+  "preserved": [],
+  "resumed": []
+}

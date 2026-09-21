@@ -1,0 +1,28 @@
+{
+  "exact_recorded_field_comparisons": 1111,
+  "first_recorded_model_field_divergence": {
+    "field": "h_n_latest",
+    "latched": 0.9867364909351616,
+    "recover_20": 0.9868227133503724,
+    "step": 41
+  },
+  "first_recovery": {
+    "consensus_fields": null,
+    "direction": "recovery",
+    "effective_from_step": 41,
+    "from": "VETO",
+    "held_action": null,
+    "quiet_count_after": 0,
+    "re_escalation_after_recovery": false,
+    "step": 40,
+    "to": "NORMAL"
+  },
+  "first_state_divergence": {
+    "latched": "VETO",
+    "recover_20": "NORMAL",
+    "step": 40
+  },
+  "passed": true,
+  "recorded_fields_exact_until_recovery": true,
+  "timing": "State transition after step t affects actions from step t+1."
+}

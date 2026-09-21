@@ -1,0 +1,181 @@
+{
+  "A3_median_stock": 0.2000005551106584,
+  "H_median_stock": 0.39095707397566704,
+  "bias": "Known-pathway design; constants calibrated on the drift mapping construction.",
+  "contrast": "H OFF minus A3 OFF",
+  "paired": {
+    "mean_difference": 0.20236498774830786,
+    "n_pairs": 20,
+    "paired_standard_error": 0.007907840346536531,
+    "t_statistic": 25.59042404503519,
+    "t_statistic_note": null
+  },
+  "per_run_stock": {
+    "A3": [
+      {
+        "resilience_stock": 0.20000075185816174,
+        "seed": 1835088100
+      },
+      {
+        "resilience_stock": 0.2000005230126322,
+        "seed": 1835088101
+      },
+      {
+        "resilience_stock": 0.20000062563276857,
+        "seed": 1835088102
+      },
+      {
+        "resilience_stock": 0.20000055396713776,
+        "seed": 1835088103
+      },
+      {
+        "resilience_stock": 0.20000047264770784,
+        "seed": 1835088104
+      },
+      {
+        "resilience_stock": 0.2000007595368042,
+        "seed": 1835088105
+      },
+      {
+        "resilience_stock": 0.2000005324110304,
+        "seed": 1835088106
+      },
+      {
+        "resilience_stock": 0.20000051525367463,
+        "seed": 1835088107
+      },
+      {
+        "resilience_stock": 0.20000067801112661,
+        "seed": 1835088108
+      },
+      {
+        "resilience_stock": 0.20000054526016942,
+        "seed": 1835088109
+      },
+      {
+        "resilience_stock": 0.20000055625417903,
+        "seed": 1835088110
+      },
+      {
+        "resilience_stock": 0.20000051569551486,
+        "seed": 1835088111
+      },
+      {
+        "resilience_stock": 0.20000059275704202,
+        "seed": 1835088112
+      },
+      {
+        "resilience_stock": 0.20000063809423949,
+        "seed": 1835088113
+      },
+      {
+        "resilience_stock": 0.20000039217283164,
+        "seed": 1835088114
+      },
+      {
+        "resilience_stock": 0.2000006560172888,
+        "seed": 1835088115
+      },
+      {
+        "resilience_stock": 0.2000007471270083,
+        "seed": 1835088116
+      },
+      {
+        "resilience_stock": 0.200000291115782,
+        "seed": 1835088117
+      },
+      {
+        "resilience_stock": 0.20000067995525467,
+        "seed": 1835088118
+      },
+      {
+        "resilience_stock": 0.2000005440104852,
+        "seed": 1835088119
+      }
+    ],
+    "H": [
+      {
+        "resilience_stock": 0.37201262285955106,
+        "seed": 1835088100
+      },
+      {
+        "resilience_stock": 0.4394971657644865,
+        "seed": 1835088101
+      },
+      {
+        "resilience_stock": 0.3938702327287195,
+        "seed": 1835088102
+      },
+      {
+        "resilience_stock": 0.3874007356083549,
+        "seed": 1835088103
+      },
+      {
+        "resilience_stock": 0.3634681021977001,
+        "seed": 1835088104
+      },
+      {
+        "resilience_stock": 0.38449290808822073,
+        "seed": 1835088105
+      },
+      {
+        "resilience_stock": 0.38574608996014276,
+        "seed": 1835088106
+      },
+      {
+        "resilience_stock": 0.35554636328504247,
+        "seed": 1835088107
+      },
+      {
+        "resilience_stock": 0.4591148416562453,
+        "seed": 1835088108
+      },
+      {
+        "resilience_stock": 0.33717353207139616,
+        "seed": 1835088109
+      },
+      {
+        "resilience_stock": 0.43620347375920265,
+        "seed": 1835088110
+      },
+      {
+        "resilience_stock": 0.42334278783800783,
+        "seed": 1835088111
+      },
+      {
+        "resilience_stock": 0.3880439152226146,
+        "seed": 1835088112
+      },
+      {
+        "resilience_stock": 0.38048106961408673,
+        "seed": 1835088113
+      },
+      {
+        "resilience_stock": 0.4680030415819043,
+        "seed": 1835088114
+      },
+      {
+        "resilience_stock": 0.41634879793698465,
+        "seed": 1835088115
+      },
+      {
+        "resilience_stock": 0.3982816330581029,
+        "seed": 1835088116
+      },
+      {
+        "resilience_stock": 0.38754531227167593,
+        "seed": 1835088117
+      },
+      {
+        "resilience_stock": 0.4455632598581123,
+        "seed": 1835088118
+      },
+      {
+        "resilience_stock": 0.4251754403964447,
+        "seed": 1835088119
+      }
+    ]
+  },
+  "step": 149,
+  "validity_ruling": null
+}

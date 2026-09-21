@@ -1,0 +1,1450 @@
+{
+  "10_source_pins_end": [
+    {
+      "committed_blob_sha1": "85447f3cc3bda4518a399f1b6484273778d56534",
+      "committed_sha256_lf": "23f07aeff3953c237f5ea71101791e00b54f258371082075fc0afe77a2453250",
+      "end_blob_sha256_lf": "23f07aeff3953c237f5ea71101791e00b54f258371082075fc0afe77a2453250",
+      "end_worktree_sha256_lf": "23f07aeff3953c237f5ea71101791e00b54f258371082075fc0afe77a2453250",
+      "expected_sha256_lf": "23f07aeff3953c237f5ea71101791e00b54f258371082075fc0afe77a2453250",
+      "last_modified_commit": "c74f5f2e43ca3bdf21c89fee8c79932517852efb",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_recovery_design_note.md",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "23f07aeff3953c237f5ea71101791e00b54f258371082075fc0afe77a2453250"
+    },
+    {
+      "committed_blob_sha1": "1136b263966172407f60a92d1af689a77d54f323",
+      "committed_sha256_lf": "f1140c037528c3503ceddd56b6e780238b8bf2e78e183af757171900663f37dd",
+      "end_blob_sha256_lf": "f1140c037528c3503ceddd56b6e780238b8bf2e78e183af757171900663f37dd",
+      "end_worktree_sha256_lf": "f1140c037528c3503ceddd56b6e780238b8bf2e78e183af757171900663f37dd",
+      "expected_sha256_lf": "f1140c037528c3503ceddd56b6e780238b8bf2e78e183af757171900663f37dd",
+      "last_modified_commit": "a6a072c777e11928df0bf08bcf8384fd5a4a7d2d",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_heldout_design_note.md",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "f1140c037528c3503ceddd56b6e780238b8bf2e78e183af757171900663f37dd"
+    },
+    {
+      "committed_blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d",
+      "committed_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "end_blob_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "end_worktree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "expected_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "last_modified_commit": "b5783f41df0b3be1cbae8ab79921939847be9181",
+      "passed": true,
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb"
+    },
+    {
+      "committed_blob_sha1": "d902392c8d3a8c7a267dc040349175095bef945e",
+      "committed_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "end_blob_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "end_worktree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "expected_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "last_modified_commit": "e38b821c0648c6f5eae5f113d109aadd799b5df2",
+      "passed": true,
+      "path": "simulation/diagnostics/drift_defense_design_note.md",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920"
+    },
+    {
+      "committed_blob_sha1": "b7b5a6a7f7f7023ace3547002359f62e54f9a9b2",
+      "committed_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "end_blob_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "end_worktree_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "expected_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "last_modified_commit": "6b3c628aea1322445a1df22732c5d93889a7a43a",
+      "passed": true,
+      "path": "simulation/diagnostics/drift_defense_run_executor.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9"
+    },
+    {
+      "committed_blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+      "committed_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "end_blob_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "end_worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "last_modified_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488"
+    },
+    {
+      "committed_blob_sha1": "09acbbcae9bb292dbd495eb3d72dd1bc985a5edf",
+      "committed_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "end_blob_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "end_worktree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "expected_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "last_modified_commit": "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_r3_a3_constants.json",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35"
+    },
+    {
+      "committed_blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+      "committed_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "end_blob_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "end_worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "last_modified_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "passed": true,
+      "path": "simulation/cusum_detector_v2.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+    },
+    {
+      "committed_blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+      "committed_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "end_blob_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "end_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "last_modified_commit": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+      "passed": true,
+      "path": "simulation/attack_metrics_v2.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323"
+    },
+    {
+      "committed_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "end_blob_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "end_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "passed": true,
+      "path": "simulation/metrics.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+    },
+    {
+      "committed_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "end_blob_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "end_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "passed": true,
+      "path": "simulation/agents.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+    },
+    {
+      "committed_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "end_blob_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "end_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "passed": true,
+      "path": "simulation/model.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+    },
+    {
+      "committed_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "end_blob_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "end_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "last_modified_commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+      "passed": true,
+      "path": "simulation/attack_adapter_v2.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+    },
+    {
+      "committed_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "end_blob_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "end_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "last_modified_commit": "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+      "passed": true,
+      "path": "simulation/working_factor.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+    },
+    {
+      "committed_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "end_blob_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "end_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "last_modified_commit": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+      "passed": true,
+      "path": "simulation/constants_v2_stage18.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+    },
+    {
+      "committed_blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "committed_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "end_blob_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "end_worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "last_modified_commit": "76f81cd83e0db6ff5031070e54f2f908502b8632",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+    },
+    {
+      "committed_blob_sha1": "f584aa2fbf4e76db674ff487fed2b036f7e45a08",
+      "committed_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "end_blob_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "end_worktree_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "expected_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "last_modified_commit": "63470090dc3836628b69fce432a30b15b3f212b7",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_round3_design_note.md",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293"
+    },
+    {
+      "committed_blob_sha1": "ff934c2613e90804c3ff5c18141f777eaa24276f",
+      "committed_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "end_blob_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "end_worktree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "expected_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "last_modified_commit": "242ec2265ee6e3b1158925af0c22f6b76e007007",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_r2_constants.json",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98"
+    },
+    {
+      "committed_blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723",
+      "committed_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "end_blob_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "end_worktree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "expected_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "last_modified_commit": "9ce2e65931875f8cc6c2036a3e56475a1d08bd84",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_eval_executor.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff"
+    },
+    {
+      "committed_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "committed_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "end_blob_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "end_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "last_modified_commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+      "passed": true,
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+    },
+    {
+      "committed_blob_sha1": "b7bde2ff018aacfb291ce1ccd4bb8039bcc81868",
+      "committed_sha256_lf": "5ddec0d9c3df7ad919557fb4cd54972f3a70e1a7e4d1c90603ba83f5ccbb9e37",
+      "end_blob_sha256_lf": "5ddec0d9c3df7ad919557fb4cd54972f3a70e1a7e4d1c90603ba83f5ccbb9e37",
+      "end_worktree_sha256_lf": "5ddec0d9c3df7ad919557fb4cd54972f3a70e1a7e4d1c90603ba83f5ccbb9e37",
+      "expected_sha256_lf": "5ddec0d9c3df7ad919557fb4cd54972f3a70e1a7e4d1c90603ba83f5ccbb9e37",
+      "last_modified_commit": "b1a5498333c6d6d8f99da58ca80b93de2d04e80c",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_heldout_run_a3s_executor.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "5ddec0d9c3df7ad919557fb4cd54972f3a70e1a7e4d1c90603ba83f5ccbb9e37"
+    },
+    {
+      "committed_blob_sha1": "bfbf0bd6238a1056e469e140a5ebacc0354890cb",
+      "committed_sha256_lf": "cc7f8aef601fd86d15f68e866c0a46fa8c0a7b269b0e04f8cabe306e27e3e49a",
+      "end_blob_sha256_lf": "cc7f8aef601fd86d15f68e866c0a46fa8c0a7b269b0e04f8cabe306e27e3e49a",
+      "end_worktree_sha256_lf": "cc7f8aef601fd86d15f68e866c0a46fa8c0a7b269b0e04f8cabe306e27e3e49a",
+      "expected_sha256_lf": "cc7f8aef601fd86d15f68e866c0a46fa8c0a7b269b0e04f8cabe306e27e3e49a",
+      "last_modified_commit": "b1a5498333c6d6d8f99da58ca80b93de2d04e80c",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_heldout_run_a3s_analysis.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "cc7f8aef601fd86d15f68e866c0a46fa8c0a7b269b0e04f8cabe306e27e3e49a"
+    },
+    {
+      "committed_blob_sha1": "87472b8cf459acaebe4657a0da303147077255dc",
+      "committed_sha256_lf": "70c1ff75797335da27330767f1242e3636d3d34364b2272d29c0e46175d20b46",
+      "end_blob_sha256_lf": "70c1ff75797335da27330767f1242e3636d3d34364b2272d29c0e46175d20b46",
+      "end_worktree_sha256_lf": "70c1ff75797335da27330767f1242e3636d3d34364b2272d29c0e46175d20b46",
+      "expected_sha256_lf": "70c1ff75797335da27330767f1242e3636d3d34364b2272d29c0e46175d20b46",
+      "last_modified_commit": "b1a5498333c6d6d8f99da58ca80b93de2d04e80c",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_heldout_run_a3s_plan.json",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "70c1ff75797335da27330767f1242e3636d3d34364b2272d29c0e46175d20b46"
+    },
+    {
+      "committed_blob_sha1": "c90eca316f0ca574c102fb8f23f98a2da4d2d619",
+      "committed_sha256_lf": "6d84c5137373ed2951416de9c4adae121533e747648a1934ead800efc3dc7ba5",
+      "end_blob_sha256_lf": "6d84c5137373ed2951416de9c4adae121533e747648a1934ead800efc3dc7ba5",
+      "end_worktree_sha256_lf": "6d84c5137373ed2951416de9c4adae121533e747648a1934ead800efc3dc7ba5",
+      "expected_sha256_lf": "6d84c5137373ed2951416de9c4adae121533e747648a1934ead800efc3dc7ba5",
+      "last_modified_commit": "8cad41fb964eeac6ff038aaabde0f580b3309d4f",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_recovery_run_a3_executor.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "6d84c5137373ed2951416de9c4adae121533e747648a1934ead800efc3dc7ba5"
+    },
+    {
+      "committed_blob_sha1": "c574678fc83d7e813fa85b74a47ce33405680016",
+      "committed_sha256_lf": "c70c2d731ec893620b1802ff3e77443de828dc5132edd61b6fb830fea62c7bce",
+      "end_blob_sha256_lf": "c70c2d731ec893620b1802ff3e77443de828dc5132edd61b6fb830fea62c7bce",
+      "end_worktree_sha256_lf": "c70c2d731ec893620b1802ff3e77443de828dc5132edd61b6fb830fea62c7bce",
+      "expected_sha256_lf": "c70c2d731ec893620b1802ff3e77443de828dc5132edd61b6fb830fea62c7bce",
+      "last_modified_commit": "8cad41fb964eeac6ff038aaabde0f580b3309d4f",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_recovery_run_a3_analysis.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "c70c2d731ec893620b1802ff3e77443de828dc5132edd61b6fb830fea62c7bce"
+    },
+    {
+      "committed_blob_sha1": "91e65a09a05f868c259e69915aeb07282d8f8e27",
+      "committed_sha256_lf": "75b00aa1461a64b7bb01cb0e8d176fb8a8cd4036b5ae8ea12905c08c8c1ccdce",
+      "end_blob_sha256_lf": "75b00aa1461a64b7bb01cb0e8d176fb8a8cd4036b5ae8ea12905c08c8c1ccdce",
+      "end_worktree_sha256_lf": "75b00aa1461a64b7bb01cb0e8d176fb8a8cd4036b5ae8ea12905c08c8c1ccdce",
+      "expected_sha256_lf": "75b00aa1461a64b7bb01cb0e8d176fb8a8cd4036b5ae8ea12905c08c8c1ccdce",
+      "last_modified_commit": "8cad41fb964eeac6ff038aaabde0f580b3309d4f",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_recovery_run_a3_plan.json",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "75b00aa1461a64b7bb01cb0e8d176fb8a8cd4036b5ae8ea12905c08c8c1ccdce"
+    }
+  ],
+  "1_inertness": {
+    "exact_recorded_field_comparisons": 1111,
+    "first_recorded_model_field_divergence": {
+      "field": "h_n_latest",
+      "latched": 0.9867364909351616,
+      "recover_20": 0.9868227133503724,
+      "step": 41
+    },
+    "first_recovery": {
+      "consensus_fields": null,
+      "direction": "recovery",
+      "effective_from_step": 41,
+      "from": "VETO",
+      "held_action": null,
+      "quiet_count_after": 0,
+      "re_escalation_after_recovery": false,
+      "step": 40,
+      "to": "NORMAL"
+    },
+    "first_state_divergence": {
+      "latched": "VETO",
+      "recover_20": "NORMAL",
+      "step": 40
+    },
+    "passed": true,
+    "recorded_fields_exact_until_recovery": true,
+    "timing": "State transition after step t affects actions from step t+1."
+  },
+  "2_recovery_mechanics": {
+    "case_count": 5,
+    "evidence_file": "defense_recovery_run_conf_recovery_mechanics_gate.json",
+    "passed": true
+  },
+  "3_attack_arithmetic": {
+    "evidence_file": "defense_recovery_run_conf_attack_arithmetic_gate.json",
+    "passed": true
+  },
+  "4_m1_identity": {
+    "checks": [
+      {
+        "actual": "optimize_u_sys_v2",
+        "field": "policy",
+        "passed": true,
+        "reference_with_registered_shock": "optimize_u_sys_v2"
+      },
+      {
+        "actual": 1835088100,
+        "field": "random_seed",
+        "passed": true,
+        "reference_with_registered_shock": 1835088100
+      },
+      {
+        "actual": 10.0,
+        "field": "phi",
+        "passed": true,
+        "reference_with_registered_shock": 10.0
+      },
+      {
+        "actual": 50,
+        "field": "attack_step",
+        "passed": true,
+        "reference_with_registered_shock": 50
+      },
+      {
+        "actual": 300,
+        "field": "n_candidates_v2",
+        "passed": true,
+        "reference_with_registered_shock": 300
+      },
+      {
+        "actual": 20,
+        "field": "rollout_steps_v2",
+        "passed": true,
+        "reference_with_registered_shock": 20
+      },
+      {
+        "actual": 20,
+        "field": "bootstrap_turn_step_v2",
+        "passed": true,
+        "reference_with_registered_shock": 20
+      },
+      {
+        "actual": 150,
+        "field": "shock_step",
+        "passed": true,
+        "reference_with_registered_shock": 150
+      },
+      {
+        "actual": 0.6,
+        "field": "shock_magnitude",
+        "passed": true,
+        "reference_with_registered_shock": 0.6
+      },
+      {
+        "actual": "sub_threshold_drift",
+        "field": "attack_vector_v2",
+        "passed": true,
+        "reference_with_registered_shock": "sub_threshold_drift"
+      },
+      {
+        "actual": false,
+        "field": "cop_methodological_diversity",
+        "passed": true,
+        "reference_with_registered_shock": false
+      },
+      {
+        "actual": false,
+        "field": "cop_cusum_drift",
+        "passed": true,
+        "reference_with_registered_shock": false
+      }
+    ],
+    "passed": true,
+    "reference_configuration": {
+      "attack_step": 50,
+      "attack_vector_v2": "sub_threshold_drift",
+      "bootstrap_turn_step_v2": 20,
+      "cop_cusum_drift": false,
+      "cop_methodological_diversity": false,
+      "n_candidates_v2": 300,
+      "phi": 10.0,
+      "policy": "optimize_u_sys_v2",
+      "random_seed": 1835088100,
+      "rollout_steps_v2": 20,
+      "shock_magnitude": 0.15,
+      "shock_step": 0
+    },
+    "reference_constructor_basis": "Copied verbatim from committed drift_defense_run_executor.py",
+    "registered_shock_overrides": {
+      "shock_magnitude": 0.6,
+      "shock_step": 150
+    },
+    "seed": 1835088100
+  },
+  "5_composition": [
+    {
+      "comparisons": 8100,
+      "first": "gate_H_OFF",
+      "first_difference": null,
+      "identity_columns_not_observables": [
+        "arm",
+        "defense_arm"
+      ],
+      "passed": true,
+      "second": "gate_H_NORMAL"
+    },
+    {
+      "comparisons": 8100,
+      "first": "gate_A3_OFF",
+      "first_difference": null,
+      "identity_columns_not_observables": [
+        "arm",
+        "defense_arm"
+      ],
+      "passed": true,
+      "second": "gate_A3_NORMAL"
+    }
+  ],
+  "6_online_equivalence": {
+    "gate_A3_LATCHED": {
+      "A": {
+        "alarm_steps": [
+          20
+        ],
+        "computed_float_absolute_tolerance": 1e-09,
+        "passed": true,
+        "steps": 300
+      },
+      "entropy": {
+        "alarm_steps": [
+          151,
+          153,
+          156,
+          162,
+          176,
+          191,
+          206
+        ],
+        "computed_float_absolute_tolerance": 1e-09,
+        "passed": true,
+        "steps": 300
+      },
+      "g": {
+        "alarm_steps": [
+          155
+        ],
+        "computed_float_absolute_tolerance": 1e-09,
+        "passed": true,
+        "steps": 300
+      }
+    },
+    "gate_M1_LATCHED": {
+      "A": {
+        "alarm_steps": [
+          20
+        ],
+        "computed_float_absolute_tolerance": 1e-09,
+        "passed": true,
+        "steps": 300
+      },
+      "entropy": {
+        "alarm_steps": [
+          151,
+          153,
+          156,
+          162,
+          176,
+          191,
+          206
+        ],
+        "computed_float_absolute_tolerance": 1e-09,
+        "passed": true,
+        "steps": 300
+      },
+      "g": {
+        "alarm_steps": [
+          155
+        ],
+        "computed_float_absolute_tolerance": 1e-09,
+        "passed": true,
+        "steps": 300
+      }
+    }
+  },
+  "7_no_oracle": {
+    "evidence_file": "defense_recovery_run_conf_recovery_no_oracle_gate.json",
+    "passed": true
+  },
+  "8_incumbent_calls": {
+    "passed": true,
+    "per_step_counts": {
+      "0": 1,
+      "1": 1,
+      "10": 1,
+      "100": 1,
+      "101": 1,
+      "102": 1,
+      "103": 1,
+      "104": 1,
+      "105": 1,
+      "106": 1,
+      "107": 1,
+      "108": 1,
+      "109": 1,
+      "11": 1,
+      "110": 1,
+      "111": 1,
+      "112": 1,
+      "113": 1,
+      "114": 1,
+      "115": 1,
+      "116": 1,
+      "117": 1,
+      "118": 1,
+      "119": 1,
+      "12": 1,
+      "120": 1,
+      "121": 1,
+      "122": 1,
+      "123": 1,
+      "124": 1,
+      "125": 1,
+      "126": 1,
+      "127": 1,
+      "128": 1,
+      "129": 1,
+      "13": 1,
+      "130": 1,
+      "131": 1,
+      "132": 1,
+      "133": 1,
+      "134": 1,
+      "135": 1,
+      "136": 1,
+      "137": 1,
+      "138": 1,
+      "139": 1,
+      "14": 1,
+      "140": 1,
+      "141": 1,
+      "142": 1,
+      "143": 1,
+      "144": 1,
+      "145": 1,
+      "146": 1,
+      "147": 1,
+      "148": 1,
+      "149": 1,
+      "15": 1,
+      "150": 1,
+      "151": 1,
+      "152": 1,
+      "153": 1,
+      "154": 1,
+      "155": 1,
+      "156": 1,
+      "157": 1,
+      "158": 1,
+      "159": 1,
+      "16": 1,
+      "160": 1,
+      "161": 1,
+      "162": 1,
+      "163": 1,
+      "164": 1,
+      "165": 1,
+      "166": 1,
+      "167": 1,
+      "168": 1,
+      "169": 1,
+      "17": 1,
+      "170": 1,
+      "171": 1,
+      "172": 1,
+      "173": 1,
+      "174": 1,
+      "175": 1,
+      "176": 1,
+      "177": 1,
+      "178": 1,
+      "179": 1,
+      "18": 1,
+      "180": 1,
+      "181": 1,
+      "182": 1,
+      "183": 1,
+      "184": 1,
+      "185": 1,
+      "186": 1,
+      "187": 1,
+      "188": 1,
+      "189": 1,
+      "19": 1,
+      "190": 1,
+      "191": 1,
+      "192": 1,
+      "193": 1,
+      "194": 1,
+      "195": 1,
+      "196": 1,
+      "197": 1,
+      "198": 1,
+      "199": 1,
+      "2": 1,
+      "20": 1,
+      "200": 1,
+      "201": 1,
+      "202": 1,
+      "203": 1,
+      "204": 1,
+      "205": 1,
+      "206": 1,
+      "207": 1,
+      "208": 1,
+      "209": 1,
+      "21": 1,
+      "210": 1,
+      "211": 1,
+      "212": 1,
+      "213": 1,
+      "214": 1,
+      "215": 1,
+      "216": 1,
+      "217": 1,
+      "218": 1,
+      "219": 1,
+      "22": 1,
+      "220": 1,
+      "221": 1,
+      "222": 1,
+      "223": 1,
+      "224": 1,
+      "225": 1,
+      "226": 1,
+      "227": 1,
+      "228": 1,
+      "229": 1,
+      "23": 1,
+      "230": 1,
+      "231": 1,
+      "232": 1,
+      "233": 1,
+      "234": 1,
+      "235": 1,
+      "236": 1,
+      "237": 1,
+      "238": 1,
+      "239": 1,
+      "24": 1,
+      "240": 1,
+      "241": 1,
+      "242": 1,
+      "243": 1,
+      "244": 1,
+      "245": 1,
+      "246": 1,
+      "247": 1,
+      "248": 1,
+      "249": 1,
+      "25": 1,
+      "250": 1,
+      "251": 1,
+      "252": 1,
+      "253": 1,
+      "254": 1,
+      "255": 1,
+      "256": 1,
+      "257": 1,
+      "258": 1,
+      "259": 1,
+      "26": 1,
+      "260": 1,
+      "261": 1,
+      "262": 1,
+      "263": 1,
+      "264": 1,
+      "265": 1,
+      "266": 1,
+      "267": 1,
+      "268": 1,
+      "269": 1,
+      "27": 1,
+      "270": 1,
+      "271": 1,
+      "272": 1,
+      "273": 1,
+      "274": 1,
+      "275": 1,
+      "276": 1,
+      "277": 1,
+      "278": 1,
+      "279": 1,
+      "28": 1,
+      "280": 1,
+      "281": 1,
+      "282": 1,
+      "283": 1,
+      "284": 1,
+      "285": 1,
+      "286": 1,
+      "287": 1,
+      "288": 1,
+      "289": 1,
+      "29": 1,
+      "290": 1,
+      "291": 1,
+      "292": 1,
+      "293": 1,
+      "294": 1,
+      "295": 1,
+      "296": 1,
+      "297": 1,
+      "298": 1,
+      "299": 1,
+      "3": 1,
+      "30": 1,
+      "31": 1,
+      "32": 1,
+      "33": 1,
+      "34": 1,
+      "35": 1,
+      "36": 1,
+      "37": 1,
+      "38": 1,
+      "39": 1,
+      "4": 1,
+      "40": 1,
+      "41": 1,
+      "42": 1,
+      "43": 1,
+      "44": 1,
+      "45": 1,
+      "46": 1,
+      "47": 1,
+      "48": 1,
+      "49": 1,
+      "5": 1,
+      "50": 1,
+      "51": 1,
+      "52": 1,
+      "53": 1,
+      "54": 1,
+      "55": 1,
+      "56": 1,
+      "57": 1,
+      "58": 1,
+      "59": 1,
+      "6": 1,
+      "60": 1,
+      "61": 1,
+      "62": 1,
+      "63": 1,
+      "64": 1,
+      "65": 1,
+      "66": 1,
+      "67": 1,
+      "68": 1,
+      "69": 1,
+      "7": 1,
+      "70": 1,
+      "71": 1,
+      "72": 1,
+      "73": 1,
+      "74": 1,
+      "75": 1,
+      "76": 1,
+      "77": 1,
+      "78": 1,
+      "79": 1,
+      "8": 1,
+      "80": 1,
+      "81": 1,
+      "82": 1,
+      "83": 1,
+      "84": 1,
+      "85": 1,
+      "86": 1,
+      "87": 1,
+      "88": 1,
+      "89": 1,
+      "9": 1,
+      "90": 1,
+      "91": 1,
+      "92": 1,
+      "93": 1,
+      "94": 1,
+      "95": 1,
+      "96": 1,
+      "97": 1,
+      "98": 1,
+      "99": 1
+    }
+  },
+  "9_constants": {
+    "channels": {
+      "A": {
+        "allowance": 0.045310678652355926,
+        "direction": "upper",
+        "reference": 0.27535941373839806,
+        "threshold": 0.7701182670542909
+      },
+      "entropy": {
+        "allowance": 0.003549173553323096,
+        "direction": "lower",
+        "reference": 0.9890951785336365,
+        "threshold": 0.17319485850717864
+      },
+      "g": {
+        "allowance": 0.022160874873702576,
+        "direction": "upper",
+        "reference": 0.9786446054615587,
+        "threshold": 4.507729894543943
+      }
+    },
+    "checks": [
+      {
+        "actual": 0.9890951785336365,
+        "binary64_hex": "0x1.fa6aaee8ddd2fp-1",
+        "expected": 0.9890951785336365,
+        "passed": true,
+        "quantity": "entropy.reference"
+      },
+      {
+        "actual": 0.003549173553323096,
+        "binary64_hex": "0x1.d13280adbf63bp-9",
+        "expected": 0.003549173553323096,
+        "passed": true,
+        "quantity": "entropy.allowance"
+      },
+      {
+        "actual": 0.17319485850717864,
+        "binary64_hex": "0x1.62b3fc68fd4bcp-3",
+        "expected": 0.17319485850717864,
+        "passed": true,
+        "quantity": "entropy.threshold"
+      },
+      {
+        "actual": 0.9786446054615587,
+        "binary64_hex": "0x1.f510e7ddba7acp-1",
+        "expected": 0.9786446054615587,
+        "passed": true,
+        "quantity": "g.reference"
+      },
+      {
+        "actual": 0.022160874873702576,
+        "binary64_hex": "0x1.6b15723554cc7p-6",
+        "expected": 0.022160874873702576,
+        "passed": true,
+        "quantity": "g.allowance"
+      },
+      {
+        "actual": 4.507729894543943,
+        "binary64_hex": "0x1.207ea58711231p+2",
+        "expected": 4.507729894543943,
+        "passed": true,
+        "quantity": "g.threshold"
+      },
+      {
+        "actual": 0.27535941373839806,
+        "binary64_hex": "0x1.19f7d1729bcdfp-2",
+        "expected": 0.27535941373839806,
+        "passed": true,
+        "quantity": "A.reference"
+      },
+      {
+        "actual": 0.045310678652355926,
+        "binary64_hex": "0x1.732f615f15fcep-5",
+        "expected": 0.045310678652355926,
+        "passed": true,
+        "quantity": "A.allowance"
+      },
+      {
+        "actual": 0.7701182670542909,
+        "binary64_hex": "0x1.8a4cf10619ca9p-1",
+        "expected": 0.7701182670542909,
+        "passed": true,
+        "quantity": "A.threshold"
+      },
+      {
+        "actual": 0.13058054663961136,
+        "binary64_hex": "0x1.0b6dd04a7ccabp-3",
+        "expected": 0.13058054663961136,
+        "passed": true,
+        "quantity": "median.x_compute"
+      },
+      {
+        "actual": 0.19789308864393101,
+        "binary64_hex": "0x1.9548f8bea4122p-3",
+        "expected": 0.19789308864393101,
+        "passed": true,
+        "quantity": "median.x_bio_welfare"
+      },
+      {
+        "actual": 0.050694324487428735,
+        "binary64_hex": "0x1.9f49b43885ae2p-5",
+        "expected": 0.050694324487428735,
+        "passed": true,
+        "quantity": "median.x_novelty_agency"
+      },
+      {
+        "actual": 0.25643120498706085,
+        "binary64_hex": "0x1.0695e6dc5f89ap-2",
+        "expected": 0.25643120498706085,
+        "passed": true,
+        "quantity": "median.x_institutional_capacity"
+      },
+      {
+        "actual": 0.27322100367503155,
+        "binary64_hex": "0x1.17c73f2d754e4p-2",
+        "expected": 0.27322100367503155,
+        "passed": true,
+        "quantity": "median.x_transfer_comprehension"
+      },
+      {
+        "actual": 0.051169013866533296,
+        "binary64_hex": "0x1.a32d332402b63p-5",
+        "expected": 0.051169013866533296,
+        "passed": true,
+        "quantity": "median.x_resilience"
+      },
+      {
+        "actual": 0.1360229355155997,
+        "binary64_hex": "0x1.1693315c5d03fp-3",
+        "expected": 0.1360229355155997,
+        "passed": true,
+        "quantity": "consensus.x_compute"
+      },
+      {
+        "actual": 0.2061409568906703,
+        "binary64_hex": "0x1.a62d3ae1b14e2p-3",
+        "expected": 0.2061409568906703,
+        "passed": true,
+        "quantity": "consensus.x_bio_welfare"
+      },
+      {
+        "actual": 0.052807183062202334,
+        "binary64_hex": "0x1.b098b087df980p-5",
+        "expected": 0.052807183062202334,
+        "passed": true,
+        "quantity": "consensus.x_novelty_agency"
+      },
+      {
+        "actual": 0.26711884854035045,
+        "binary64_hex": "0x1.11879a7a81019p-2",
+        "expected": 0.26711884854035045,
+        "passed": true,
+        "quantity": "consensus.x_institutional_capacity"
+      },
+      {
+        "actual": 0.2846084192537951,
+        "binary64_hex": "0x1.237063b371fa6p-2",
+        "expected": 0.2846084192537951,
+        "passed": true,
+        "quantity": "consensus.x_transfer_comprehension"
+      },
+      {
+        "actual": 0.053301656737382165,
+        "binary64_hex": "0x1.b4a5ad104f40dp-5",
+        "expected": 0.053301656737382165,
+        "passed": true,
+        "quantity": "consensus.x_resilience"
+      },
+      {
+        "actual": 0.4,
+        "binary64_hex": "0x1.999999999999ap-2",
+        "expected": 0.4,
+        "passed": true,
+        "quantity": "consensus.c_protective"
+      },
+      {
+        "actual": 0.2,
+        "binary64_hex": "0x1.999999999999ap-3",
+        "expected": 0.2,
+        "passed": true,
+        "quantity": "consensus.c_suppressive"
+      }
+    ],
+    "medians": [
+      0.13058054663961136,
+      0.19789308864393101,
+      0.050694324487428735,
+      0.25643120498706085,
+      0.27322100367503155,
+      0.051169013866533296
+    ],
+    "passed": true
+  },
+  "passed": true,
+  "runtime": {
+    "machine": "YOTKOTEST",
+    "modules": {
+      "simulation/agents.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "sha256_raw": "de5f196f4732808d3bba99026f618564505ea4cf557bd2167358a524fe7850c0"
+      },
+      "simulation/attack_adapter_v2.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "sha256_raw": "e4dd5a436ab33b348691b8c777608a655147610603181705694dcb3b2c35dcfe"
+      },
+      "simulation/constants_v2_stage15.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "sha256_raw": "808ac150f51ae33acbbc326e108451e9ac9d54b3c0f4ccc7adc537c58254cc70"
+      },
+      "simulation/constants_v2_stage18.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "sha256_raw": "68c3c8fd29c451079496b9e44b2fe5892932cf1b431358ad549f45419a15873d"
+      },
+      "simulation/defection.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "sha256_raw": "20466e6fd4a592f24c5c6fe07a40bc683b243b3939e3b69a94a1fcfc4ae269dd"
+      },
+      "simulation/diagnostics/defense_recovery_run_conf_executor.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "ba893ec7b84371ed42cd4f0ba3fac72a9ccfc7501cedfd72878c1e34a401c6c8",
+        "sha256_raw": "ba893ec7b84371ed42cd4f0ba3fac72a9ccfc7501cedfd72878c1e34a401c6c8"
+      },
+      "simulation/metrics.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "sha256_raw": "8fdbb78c5ddf41bb5deeb49fe11adfd9db55d323d68d6b5feb24d9e83439c2f7"
+      },
+      "simulation/model.py": {
+        "lf_basis": "LF-normalized working-tree bytes",
+        "raw_basis": "raw working-tree bytes",
+        "sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "sha256_raw": "e2c9ea91b5b182915d4db00ea09ba896ec3f85a5d92a7aea7329bc3cce5c2945"
+      }
+    },
+    "numpy": "2.4.4",
+    "operator_cpu_budget": 16,
+    "os_cpu_count": 16,
+    "process_cpu_count": 16,
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "thread_environment": {
+      "BLIS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "thread_runtime": [
+      {
+        "effective_threads": 1,
+        "library": "C:\\Users\\matty\\AppData\\Roaming\\Python\\Python314\\site-packages\\numpy.libs\\libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+        "query": "scipy_openblas_get_num_threads64_"
+      }
+    ],
+    "worker_pid": 48108
+  },
+  "scheduler": {
+    "normal_cap": 15,
+    "passed": true,
+    "seed_assignment_independent_of_dispatch_order": true,
+    "slot_measurements": [
+      15,
+      0,
+      0,
+      0,
+      1,
+      3,
+      2
+    ],
+    "synthetic_resume_pending": 178,
+    "synthetic_resume_preserved": 2,
+    "work_cap": 12
+  },
+  "source_pins_start": [
+    {
+      "committed_blob_sha1": "85447f3cc3bda4518a399f1b6484273778d56534",
+      "committed_sha256_lf": "23f07aeff3953c237f5ea71101791e00b54f258371082075fc0afe77a2453250",
+      "end_blob_sha256_lf": "23f07aeff3953c237f5ea71101791e00b54f258371082075fc0afe77a2453250",
+      "end_worktree_sha256_lf": "23f07aeff3953c237f5ea71101791e00b54f258371082075fc0afe77a2453250",
+      "expected_sha256_lf": "23f07aeff3953c237f5ea71101791e00b54f258371082075fc0afe77a2453250",
+      "last_modified_commit": "c74f5f2e43ca3bdf21c89fee8c79932517852efb",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_recovery_design_note.md",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "23f07aeff3953c237f5ea71101791e00b54f258371082075fc0afe77a2453250"
+    },
+    {
+      "committed_blob_sha1": "1136b263966172407f60a92d1af689a77d54f323",
+      "committed_sha256_lf": "f1140c037528c3503ceddd56b6e780238b8bf2e78e183af757171900663f37dd",
+      "end_blob_sha256_lf": "f1140c037528c3503ceddd56b6e780238b8bf2e78e183af757171900663f37dd",
+      "end_worktree_sha256_lf": "f1140c037528c3503ceddd56b6e780238b8bf2e78e183af757171900663f37dd",
+      "expected_sha256_lf": "f1140c037528c3503ceddd56b6e780238b8bf2e78e183af757171900663f37dd",
+      "last_modified_commit": "a6a072c777e11928df0bf08bcf8384fd5a4a7d2d",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_heldout_design_note.md",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "f1140c037528c3503ceddd56b6e780238b8bf2e78e183af757171900663f37dd"
+    },
+    {
+      "committed_blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d",
+      "committed_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "end_blob_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "end_worktree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "expected_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "last_modified_commit": "b5783f41df0b3be1cbae8ab79921939847be9181",
+      "passed": true,
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb"
+    },
+    {
+      "committed_blob_sha1": "d902392c8d3a8c7a267dc040349175095bef945e",
+      "committed_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "end_blob_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "end_worktree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "expected_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920",
+      "last_modified_commit": "e38b821c0648c6f5eae5f113d109aadd799b5df2",
+      "passed": true,
+      "path": "simulation/diagnostics/drift_defense_design_note.md",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "cb39f08611759d9f9ac5b350af8bbbe267cff857f7d3ced01f67c16f76e4e920"
+    },
+    {
+      "committed_blob_sha1": "b7b5a6a7f7f7023ace3547002359f62e54f9a9b2",
+      "committed_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "end_blob_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "end_worktree_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "expected_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9",
+      "last_modified_commit": "6b3c628aea1322445a1df22732c5d93889a7a43a",
+      "passed": true,
+      "path": "simulation/diagnostics/drift_defense_run_executor.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "75ce4846ce1d9730d0a3e37ae2c880e14ee058b45cbd1b1fd2e875791d3896b9"
+    },
+    {
+      "committed_blob_sha1": "6e38dc22b64f100f8945e602fb4016e645f9f158",
+      "committed_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "end_blob_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "end_worktree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "expected_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488",
+      "last_modified_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_cal_constants.json",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "61e48361457cf26209718f600fdf3340ae56daec34a5245aa19d2dc5c6548488"
+    },
+    {
+      "committed_blob_sha1": "09acbbcae9bb292dbd495eb3d72dd1bc985a5edf",
+      "committed_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "end_blob_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "end_worktree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "expected_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35",
+      "last_modified_commit": "7a588b6737a1d0d9bb6cbbfd1ae60ee3f4eac237",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_r3_a3_constants.json",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "0bcb751e667af145ab6e36d85780e81ff3bc8dcc757d72ba923e4341cc16ec35"
+    },
+    {
+      "committed_blob_sha1": "c2f5d340f353bcab0a6d180587ec46400b8b4953",
+      "committed_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "end_blob_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "end_worktree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "expected_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+      "last_modified_commit": "b84199fd5b71041870e17acea22e0145aaf16e10",
+      "passed": true,
+      "path": "simulation/cusum_detector_v2.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9"
+    },
+    {
+      "committed_blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+      "committed_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "end_blob_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "end_worktree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+      "last_modified_commit": "fd444fc22254ec24472f4bad03f8f56bf4470110",
+      "passed": true,
+      "path": "simulation/attack_metrics_v2.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323"
+    },
+    {
+      "committed_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "end_blob_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "end_worktree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "passed": true,
+      "path": "simulation/metrics.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+    },
+    {
+      "committed_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "end_blob_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "end_worktree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "passed": true,
+      "path": "simulation/agents.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+    },
+    {
+      "committed_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "end_blob_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "end_worktree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "last_modified_commit": "5095f77827aadf37b19ccca04b0985f1b2f2060a",
+      "passed": true,
+      "path": "simulation/model.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+    },
+    {
+      "committed_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+      "committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "end_blob_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "end_worktree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+      "last_modified_commit": "4b32f136d636dd228b2483e741eaaf25044f8ea0",
+      "passed": true,
+      "path": "simulation/attack_adapter_v2.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+    },
+    {
+      "committed_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+      "committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "end_blob_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "end_worktree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+      "last_modified_commit": "50700dcde3f6dd1707a5f2d2b79927a751075b46",
+      "passed": true,
+      "path": "simulation/working_factor.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+    },
+    {
+      "committed_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+      "committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "end_blob_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "end_worktree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+      "last_modified_commit": "8bf1303e0ff98544cc9ed205f61055ed418fa0fe",
+      "passed": true,
+      "path": "simulation/constants_v2_stage18.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+    },
+    {
+      "committed_blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+      "committed_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "end_blob_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "end_worktree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+      "last_modified_commit": "76f81cd83e0db6ff5031070e54f2f908502b8632",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_design_note.md",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+    },
+    {
+      "committed_blob_sha1": "f584aa2fbf4e76db674ff487fed2b036f7e45a08",
+      "committed_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "end_blob_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "end_worktree_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "expected_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293",
+      "last_modified_commit": "63470090dc3836628b69fce432a30b15b3f212b7",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_round3_design_note.md",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "47ea6fdd6bd4191fb262d1923c367a143c4fd279b94473497f595c7bc2ea5293"
+    },
+    {
+      "committed_blob_sha1": "ff934c2613e90804c3ff5c18141f777eaa24276f",
+      "committed_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "end_blob_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "end_worktree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "expected_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98",
+      "last_modified_commit": "242ec2265ee6e3b1158925af0c22f6b76e007007",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_r2_constants.json",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "8340f3697b529cfa2c0afb773d13e769258ef8a439f450ec68d9512239c05b98"
+    },
+    {
+      "committed_blob_sha1": "36b1036e823dac3f6d653173196d402ff52aa723",
+      "committed_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "end_blob_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "end_worktree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "expected_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff",
+      "last_modified_commit": "9ce2e65931875f8cc6c2036a3e56475a1d08bd84",
+      "passed": true,
+      "path": "simulation/diagnostics/detector_run_eval_executor.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "6375bd639252bc67c1ec39323c80d51a12f16925fd24ac1356c77fffd78362ff"
+    },
+    {
+      "committed_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+      "committed_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "end_blob_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "end_worktree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+      "last_modified_commit": "5ac6a2efc45430bbce121eb17b643f4ded3aab5a",
+      "passed": true,
+      "path": "simulation/run_attack_vector_revalidation_v2.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+    },
+    {
+      "committed_blob_sha1": "b7bde2ff018aacfb291ce1ccd4bb8039bcc81868",
+      "committed_sha256_lf": "5ddec0d9c3df7ad919557fb4cd54972f3a70e1a7e4d1c90603ba83f5ccbb9e37",
+      "end_blob_sha256_lf": "5ddec0d9c3df7ad919557fb4cd54972f3a70e1a7e4d1c90603ba83f5ccbb9e37",
+      "end_worktree_sha256_lf": "5ddec0d9c3df7ad919557fb4cd54972f3a70e1a7e4d1c90603ba83f5ccbb9e37",
+      "expected_sha256_lf": "5ddec0d9c3df7ad919557fb4cd54972f3a70e1a7e4d1c90603ba83f5ccbb9e37",
+      "last_modified_commit": "b1a5498333c6d6d8f99da58ca80b93de2d04e80c",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_heldout_run_a3s_executor.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "5ddec0d9c3df7ad919557fb4cd54972f3a70e1a7e4d1c90603ba83f5ccbb9e37"
+    },
+    {
+      "committed_blob_sha1": "bfbf0bd6238a1056e469e140a5ebacc0354890cb",
+      "committed_sha256_lf": "cc7f8aef601fd86d15f68e866c0a46fa8c0a7b269b0e04f8cabe306e27e3e49a",
+      "end_blob_sha256_lf": "cc7f8aef601fd86d15f68e866c0a46fa8c0a7b269b0e04f8cabe306e27e3e49a",
+      "end_worktree_sha256_lf": "cc7f8aef601fd86d15f68e866c0a46fa8c0a7b269b0e04f8cabe306e27e3e49a",
+      "expected_sha256_lf": "cc7f8aef601fd86d15f68e866c0a46fa8c0a7b269b0e04f8cabe306e27e3e49a",
+      "last_modified_commit": "b1a5498333c6d6d8f99da58ca80b93de2d04e80c",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_heldout_run_a3s_analysis.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "cc7f8aef601fd86d15f68e866c0a46fa8c0a7b269b0e04f8cabe306e27e3e49a"
+    },
+    {
+      "committed_blob_sha1": "87472b8cf459acaebe4657a0da303147077255dc",
+      "committed_sha256_lf": "70c1ff75797335da27330767f1242e3636d3d34364b2272d29c0e46175d20b46",
+      "end_blob_sha256_lf": "70c1ff75797335da27330767f1242e3636d3d34364b2272d29c0e46175d20b46",
+      "end_worktree_sha256_lf": "70c1ff75797335da27330767f1242e3636d3d34364b2272d29c0e46175d20b46",
+      "expected_sha256_lf": "70c1ff75797335da27330767f1242e3636d3d34364b2272d29c0e46175d20b46",
+      "last_modified_commit": "b1a5498333c6d6d8f99da58ca80b93de2d04e80c",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_heldout_run_a3s_plan.json",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "70c1ff75797335da27330767f1242e3636d3d34364b2272d29c0e46175d20b46"
+    },
+    {
+      "committed_blob_sha1": "c90eca316f0ca574c102fb8f23f98a2da4d2d619",
+      "committed_sha256_lf": "6d84c5137373ed2951416de9c4adae121533e747648a1934ead800efc3dc7ba5",
+      "end_blob_sha256_lf": "6d84c5137373ed2951416de9c4adae121533e747648a1934ead800efc3dc7ba5",
+      "end_worktree_sha256_lf": "6d84c5137373ed2951416de9c4adae121533e747648a1934ead800efc3dc7ba5",
+      "expected_sha256_lf": "6d84c5137373ed2951416de9c4adae121533e747648a1934ead800efc3dc7ba5",
+      "last_modified_commit": "8cad41fb964eeac6ff038aaabde0f580b3309d4f",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_recovery_run_a3_executor.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "6d84c5137373ed2951416de9c4adae121533e747648a1934ead800efc3dc7ba5"
+    },
+    {
+      "committed_blob_sha1": "c574678fc83d7e813fa85b74a47ce33405680016",
+      "committed_sha256_lf": "c70c2d731ec893620b1802ff3e77443de828dc5132edd61b6fb830fea62c7bce",
+      "end_blob_sha256_lf": "c70c2d731ec893620b1802ff3e77443de828dc5132edd61b6fb830fea62c7bce",
+      "end_worktree_sha256_lf": "c70c2d731ec893620b1802ff3e77443de828dc5132edd61b6fb830fea62c7bce",
+      "expected_sha256_lf": "c70c2d731ec893620b1802ff3e77443de828dc5132edd61b6fb830fea62c7bce",
+      "last_modified_commit": "8cad41fb964eeac6ff038aaabde0f580b3309d4f",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_recovery_run_a3_analysis.py",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "c70c2d731ec893620b1802ff3e77443de828dc5132edd61b6fb830fea62c7bce"
+    },
+    {
+      "committed_blob_sha1": "91e65a09a05f868c259e69915aeb07282d8f8e27",
+      "committed_sha256_lf": "75b00aa1461a64b7bb01cb0e8d176fb8a8cd4036b5ae8ea12905c08c8c1ccdce",
+      "end_blob_sha256_lf": "75b00aa1461a64b7bb01cb0e8d176fb8a8cd4036b5ae8ea12905c08c8c1ccdce",
+      "end_worktree_sha256_lf": "75b00aa1461a64b7bb01cb0e8d176fb8a8cd4036b5ae8ea12905c08c8c1ccdce",
+      "expected_sha256_lf": "75b00aa1461a64b7bb01cb0e8d176fb8a8cd4036b5ae8ea12905c08c8c1ccdce",
+      "last_modified_commit": "8cad41fb964eeac6ff038aaabde0f580b3309d4f",
+      "passed": true,
+      "path": "simulation/diagnostics/defense_recovery_run_a3_plan.json",
+      "read_commit": "3d9d0ce5d29a28d628e25f65b344a6b90e5db094",
+      "working_tree_sha256_lf": "75b00aa1461a64b7bb01cb0e8d176fb8a8cd4036b5ae8ea12905c08c8c1ccdce"
+    }
+  ],
+  "status": "COMPLETE"
+}

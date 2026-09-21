@@ -1,0 +1,7 @@
+{
+  "executor_self_fixes": [],
+  "tool_layer_workarounds": [
+    "Corrected a malformed yield_time_ms property in the supervision tool call after a tooling parse error; the running executor was unaffected."
+  ],
+  "utc": "2026-09-21T04:14:08.652854+00:00"
+}
