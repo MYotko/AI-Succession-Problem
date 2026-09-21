@@ -53,6 +53,20 @@ This repository contains a full Agent-Based Model (ABM) written in Python that c
 
 Matthew Yotko is a technology Vice President in the financial services industry, in the capacities of Automation Engineering Manager and Technical Operations Manager. His professional background spans Naval nuclear power, large-scale operational automation, practical AI/ML, and the application of constraint theory to complex systems. This paper applies that engineering orientation; identify the binding constraint, build the architecture around it; to the problem of AI governance and civilizational succession. It is a working paper, not an academic publication, and corrections and engagement from domain specialists are welcomed.
 
+## On the Use of AI Tools
+
+I draft with large language models, primarily Claude and ChatGPT. This is a project about AI governance, so concealing that would be a strange choice.
+
+The division of labor is this. The models work on prose. The claims, the architecture, the simulation design, and the judgment about what counts as a failure are mine, and I am accountable for them regardless of what helped me phrase them.
+
+That is an assertion about process, and assertions about process are cheap. Here is what can be checked instead:
+
+- The commit history records adversarial tests registered before the defenses they were built to break existed, and records the outcomes when those tests won. See the commits `Pre-register the gate 3b held-out attack, before the defense exists` and `Record gate 3b as failed, and the pattern across both release mechanisms`.
+- `docs/v2_0_instrument_validation_record.md` withdraws published figures from this project's own paper, enumerates six defects in the instrument that produced them, and corrects an error in its own first version on the day of publication. Section 12 records that no external party raised any of it.
+- Every claim in that document cites a file and a line at a stated commit. Section 10 gives the reproduction path.
+
+If a passage in this project reads as generated rather than reasoned, name the claim you doubt and the record is where to test it. Corrections get published.
+
 ## License
 
 This work is licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). You are free to share and adapt this material with appropriate attribution.

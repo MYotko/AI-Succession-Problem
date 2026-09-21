@@ -21,3 +21,13 @@ I am a technology Vice President in the finance industry, serving as Automation 
 I approach AI governance from an engineering orientation: identify the binding constraint, build the architecture around it.
 
 The essay series explores the framework's arguments in accessible form, one concept at a time. The formal paper, simulation code, and full validation data are available for inspection, criticism, and engagement at github.com/MYotko/AI-Succession-Problem.
+
+## On the Use of AI Tools
+
+I draft these essays with large language models, primarily Claude and ChatGPT. The series is about AI governance, so it seems right to work out loud about that.
+
+The models help with prose. The framework's claims, its architecture, the simulation design, and the judgment about what counts as a failure are mine, and I am accountable for them regardless of what helped me write the sentences.
+
+That is an assertion about process, and those are cheap. The repository is where it can be checked. It holds adversarial tests registered before the defenses they were built to defeat, the recorded outcomes when those tests won, and a validation record that withdraws published figures from my own paper and corrects its own first version. Every claim in that record cites a file and a line.
+
+If something here reads as generated rather than reasoned, say so and name the claim you doubt. Corrections get published.
