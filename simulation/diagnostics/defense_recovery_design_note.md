@@ -165,3 +165,40 @@ element of this note.
 At most 15 concurrent workers, numerical-library threads fixed to one and verified per
 worker. 300 runs. Writes are restricted to the governed prefix and `os.devnull`. The
 manifest follows Section 3 of the artifact convention.
+
+## 10. Amendment 1, 2026-09-20: the confirmation stage for a quiet period of 20
+
+**Status:** committed after the stage A outputs were read, which Section 9 permits only as
+an amendment. The stage A outputs stand as produced under the plan they ran, at 8cad41fb.
+This amendment declares the confirmation Section 6 already requires; it changes no
+quantity, no criterion and no selection rule.
+
+**What stage A produced.** Applying the Section 6 selection rule to the stage A numbers,
+RECOVER-10 fails on the drift arm, on containment at a paired t of -4.19 and on survival at
+4.29. RECOVER-40 fails on the drift arm's containment at -2.49. RECOVER-20 satisfies both
+conditions in both attack arms and is therefore the candidate the rule selects, and it
+releases: unattacked runs still in a non-NORMAL state at the last step fall from 20 of 20
+under LATCHED to 2 of 20, with a median release of 70 steps after the shock.
+
+**Why this confirmation matters more than a formality.** The pattern is not monotonic. A
+longer quiet period should preserve containment at least as well as a shorter one, yet
+RECOVER-40 fails the drift arm where RECOVER-20 passes, at -2.49 against -1.97. Those two
+values straddle the threshold and are consistent with noise at twenty seeds. The selection
+is therefore uncertain, and the confirmation decides it.
+
+**The confirmation stage, fixed now.** The stage A design, restricted to the arms needed to
+decide RECOVER-20 and run at fresh seeds: attack arms H, M1 and A3, crossed with defense
+arms OFF, LATCHED and RECOVER-20, at the 20 consecutive integers from 1835088100 through
+1835088119, which overlap no seed used or declared before. 180 runs. Construction, the
+shock, the defense, the recovery rule, the quantities, the harm directions, the sign
+fixture and the criterion are unchanged.
+
+**The decision rule, fixed now.** RECOVER-20 is adopted if and only if, on the confirmation
+seeds, both Section 6 selection conditions hold again in both M1 and A3, and the release
+check holds: unattacked runs still in a non-NORMAL state at the last step are fewer than
+under LATCHED in the same stage. If either fails, RECOVER-20 is not adopted, gate 3 fails
+as Section 6 provides, and no other quiet period may be substituted without a further
+amendment and its own fresh seeds. The record reports both stages either way.
+
+**Nothing else changes.** Stage A's outputs, the three quiet periods, the selection rule,
+the criterion, stages B and C and the interpretation stand as committed.
