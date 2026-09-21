@@ -142,6 +142,14 @@ described below and supersedes any earlier characterization of the affected clai
 > And a shock alone puts the defense permanently into its consensus state, in attacked and
 > unattacked runs alike, which is what gate 3 must address.
 
+> **Update, 2026-09-21 (the recovery rule failed its confirmation).** Item 2i records gate 3
+> as failed. Step-down recovery on a quiet period does release the defense's grip, taking
+> unattacked runs still under intervention from 20 of 20 to 3 of 20, but at fresh seeds it
+> loses containment on both attacks it was tested against, and the pre-registered decision
+> rule refuses adoption on that evidence. The defense as it stands contains attacks and
+> never lets go; a defense that lets go on a timer stops containing. Promotion is blocked at
+> gate 3, and items 2g and 2h continue to describe the latching defense only.
+
 ---
 
 ## 1. Summary
@@ -1834,6 +1842,89 @@ merged into `defense_heldout_run_a5_steps.csv`, 48,000 rows, and
 `defense_heldout_run_a5_completions.jsonl`, each run verified by row count and by the hash
 of its rows as written before the per-run copies were deleted. The commit is 231 files
 rather than the 1,100 the old layout would have produced.
+
+**2i. In-loop drift defense, gate 3, recovery rule. FAILED, 2026-09-21.**
+Pre-registered in `simulation/diagnostics/defense_recovery_design_note.md`, published at
+1a0b1670 before any run, with one amendment. Stage A is at 8cad41fb under
+`defense_recovery_run_a3_`, 300 runs at seeds 1835088000 through 1835088019. The
+confirmation is at 791a2c66 under `defense_recovery_run_conf_`, 180 runs at seeds
+1835088100 through 1835088119. All gates and both sign fixtures passed, source pins matched
+at start and completion in both stages.
+
+*Why it exists.* Items 2f, 2g and 2h each recorded the same standing cost: the defense's two
+states latch forever, so one shock puts it into its consensus allocation for the rest of the
+run, in attacked and unattacked arms alike. The operator made promotion the goal on
+2026-09-19 and gated it on four steps; this is the third. The operator chose step-down
+recovery with a quiet period on 2026-09-20.
+
+*The rule.* Escalation is unchanged. CONSENSUS returns to VETO when no channel has alarmed
+for `k` consecutive steps, and VETO returns to NORMAL after a further `k`. Any alarm resets
+the quiet counter, escalation preempts de-escalation, and re-escalation is unlimited. `k`
+took the values 10, 20 and 40, declared before any run as the burn-in length and two
+multiples of it.
+
+*Stage A.* Three attack arms, no attack, the configured drift attack at production
+intensity, and the A3 buffer drain, crossed with OFF, LATCHED and the three recovery
+values, with the step-150 shock present in every arm. Applying the note's selection rule:
+`k` of 10 lost containment on the drift arm, at a paired t of -4.19 on time past the
+threshold and 4.29 on survival; `k` of 40 lost containment on the drift arm at -2.49; `k`
+of 20 satisfied both conditions in both attack arms, at -1.97 and 0.53 on time past the
+threshold. Recovery released as intended: unattacked runs still in a non-NORMAL state at
+the last step fell from 20 of 20 under LATCHED to 2 of 20, and the median time under
+intervention in the unattacked arm fell from 145 steps to 76.
+
+*Why the selection was not trusted.* The pattern is not monotonic. A longer quiet period
+should preserve containment at least as well as a shorter one, yet `k` of 40 failed the
+drift arm where `k` of 20 passed, at -2.49 against -1.97, two values straddling the
+threshold. Amendment 1 at c74f5f2e declared the confirmation at fresh seeds and fixed the
+decision rule before it ran: adoption only if both conditions hold again in both attack
+arms and the release check holds; otherwise gate 3 fails and no other quiet period may be
+substituted without a further amendment and its own fresh seeds.
+
+*The confirmation, and the result.* At the fresh seeds, `k` of 20 loses containment in both
+attack arms, in the same direction, contrast LATCHED minus RECOVER-20 on steps at or after
+step 50 with g at or above g_star:
+
+| Attack arm | Mean difference | Paired standard error | t |
+| --- | ---: | ---: | ---: |
+| Drift, production intensity | -7.35 | 2.37 | -3.10 |
+| A3, the buffer drain | -3.30 | 1.16 | -2.85 |
+
+Survival showed no significant difference in either arm. Recovery again released, 3 of 20
+unattacked runs still under intervention against 20 of 20 latched, with a median release 59
+steps after the shock. Under the decision rule, `k` of 20 is not adopted and **gate 3
+fails**.
+
+*What the failure means.* On this substrate, step-down recovery on a quiet period cannot
+give the grip back without measurably losing containment. The mechanism is visible in the
+transition counts: under the drift attack the recovered defense makes a median of 9
+escalations and 8 de-escalations per run. It is not releasing once and staying quiet; it is
+repeatedly handing control back to an attack that has not stopped, and each handback lets g
+cross the threshold again. The quiet period is a proxy for "the attack is over" and on a
+persistent attack that proxy is wrong by construction.
+
+*Consequences, stated plainly.* The latching defense of items 2f through 2h contains the
+attacks it was evaluated against and never lets go. A defense that lets go on a timer loses
+containment. Neither is deployable as recorded, and promotion is blocked at gate 3. Items
+2g and 2h continue to describe the latching defense only. Stages B and C of the recovery
+note, the re-validation of gates 1 and 2 against a recovered defense, do not run, because
+there is no adopted recovery rule to validate.
+
+*What is not concluded.* This is not evidence that no recovery rule can work. It is
+evidence that this one, at these three quiet periods, on these two attacks and this
+substrate, does not. Searching further quiet periods against the same seeds is barred by
+the note, and for good reason: with contrasts this close to the threshold, a search over
+parameters would find a passing value by chance before it found a working design.
+
+*Verified by recomputation from the merged step logs, not from the run reports.* Every
+alarm, every state transition under each quiet period, and every paired value in both
+stages was recomputed independently from the 480 per-step logs; all 18 stage A contrasts and
+all 6 confirmation contrasts match the reports exactly.
+
+*Cost and conduct.* Five dispatch-level halts preceded the two completed stages, all of them
+conflicts between a dispatch and its committed note, none touching the registered plan, and
+zero model steps ran under any of them. A mechanical residue check now runs before every
+dispatch. The two stages together cost about 8 percent of a weekly execution budget.
 
 **3. v2.1 implementation and component validation.** Including a bidirectional
 check on the entropy estimator specifically. A repair tested only in the direction
