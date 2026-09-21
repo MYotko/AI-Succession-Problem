@@ -1,0 +1,39 @@
+{
+  "exact_recorded_field_comparisons": 7348,
+  "first_recorded_model_field_divergence": {
+    "field": "h_n_latest",
+    "latched": 0.9898060138058764,
+    "recover_40": 0.9898194553431636,
+    "step": 272
+  },
+  "first_recovery": {
+    "consensus_fields": null,
+    "direction": "recovery",
+    "effective_from_step": 232,
+    "from": "CONSENSUS",
+    "held_action": {
+      "c_protective": 0.4,
+      "c_suppressive": 0.2,
+      "x_bio_welfare": 0.2061409568906703,
+      "x_compute": 0.1360229355155997,
+      "x_institutional_capacity": 0.26711884854035045,
+      "x_novelty_agency": 0.052807183062202334,
+      "x_resilience": 0.053301656737382165,
+      "x_transfer_comprehension": 0.2846084192537951
+    },
+    "held_action_attack_modified": false,
+    "held_action_commit_step": 230,
+    "quiet_count_after": 0,
+    "re_escalation_after_recovery": false,
+    "step": 231,
+    "to": "VETO"
+  },
+  "first_state_divergence": {
+    "latched": "CONSENSUS",
+    "recover_40": "VETO",
+    "step": 231
+  },
+  "passed": true,
+  "recorded_fields_exact_until_recovery": true,
+  "timing": "State transition after step t affects actions from step t+1."
+}

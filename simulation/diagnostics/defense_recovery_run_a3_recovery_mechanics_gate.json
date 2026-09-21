@@ -1,0 +1,7973 @@
+{
+  "cases": [
+    {
+      "actual_transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 12,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 23,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 22,
+          "to": "NORMAL"
+        }
+      ],
+      "alarm_steps": [
+        12
+      ],
+      "case": "veto_release",
+      "expected_transitions": [
+        [
+          12,
+          "NORMAL",
+          "VETO",
+          "escalation"
+        ],
+        [
+          22,
+          "VETO",
+          "NORMAL",
+          "recovery"
+        ]
+      ],
+      "k": 10,
+      "passed": true,
+      "sequence": [
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 0
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 1
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 2
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 3
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 4
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 5
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 6
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 7
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 8
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 9
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 10
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 11
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 12
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "VETO",
+          "step": 13
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "VETO",
+          "step": 14
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "VETO",
+          "step": 15
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "VETO",
+          "step": 16
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "VETO",
+          "step": 17
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "VETO",
+          "step": 18
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "VETO",
+          "step": 19
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "VETO",
+          "step": 20
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "VETO",
+          "step": 21
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 22
+        }
+      ]
+    },
+    {
+      "actual_transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 12,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 14,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 13,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 24,
+          "from": "CONSENSUS",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 22,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 23,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 34,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 33,
+          "to": "NORMAL"
+        }
+      ],
+      "alarm_steps": [
+        12,
+        13
+      ],
+      "case": "two_step_downs",
+      "expected_transitions": [
+        [
+          12,
+          "NORMAL",
+          "VETO",
+          "escalation"
+        ],
+        [
+          13,
+          "VETO",
+          "CONSENSUS",
+          "escalation"
+        ],
+        [
+          23,
+          "CONSENSUS",
+          "VETO",
+          "recovery"
+        ],
+        [
+          33,
+          "VETO",
+          "NORMAL",
+          "recovery"
+        ]
+      ],
+      "k": 10,
+      "passed": true,
+      "sequence": [
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 0
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 1
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 2
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 3
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 4
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 5
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 6
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 7
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 8
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 9
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 10
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 11
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 12
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 13
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 14
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 15
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 16
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 17
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 18
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 19
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 20
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 21
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 22
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 23
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "VETO",
+          "step": 24
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "VETO",
+          "step": 25
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "VETO",
+          "step": 26
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "VETO",
+          "step": 27
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "VETO",
+          "step": 28
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "VETO",
+          "step": 29
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "VETO",
+          "step": 30
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "VETO",
+          "step": 31
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "VETO",
+          "step": 32
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 33
+        }
+      ]
+    },
+    {
+      "actual_transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 12,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 14,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 13,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 33,
+          "from": "CONSENSUS",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 31,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 32,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 43,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 42,
+          "to": "NORMAL"
+        }
+      ],
+      "alarm_steps": [
+        12,
+        13,
+        22
+      ],
+      "case": "reset_before_quiet_completes",
+      "expected_transitions": [
+        [
+          12,
+          "NORMAL",
+          "VETO",
+          "escalation"
+        ],
+        [
+          13,
+          "VETO",
+          "CONSENSUS",
+          "escalation"
+        ],
+        [
+          32,
+          "CONSENSUS",
+          "VETO",
+          "recovery"
+        ],
+        [
+          42,
+          "VETO",
+          "NORMAL",
+          "recovery"
+        ]
+      ],
+      "k": 10,
+      "passed": true,
+      "sequence": [
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 0
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 1
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 2
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 3
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 4
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 5
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 6
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 7
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 8
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 9
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 10
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 11
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 12
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 13
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 14
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 15
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 16
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 17
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 18
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 19
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 20
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 21
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 22
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 23
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 24
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 25
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 26
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 27
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 28
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 29
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 30
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 31
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 32
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "VETO",
+          "step": 33
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "VETO",
+          "step": 34
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "VETO",
+          "step": 35
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "VETO",
+          "step": 36
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "VETO",
+          "step": 37
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "VETO",
+          "step": 38
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "VETO",
+          "step": 39
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "VETO",
+          "step": 40
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "VETO",
+          "step": 41
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 42
+        }
+      ]
+    },
+    {
+      "actual_transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 12,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 14,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 13,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 34,
+          "from": "CONSENSUS",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 32,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 33,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 44,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 43,
+          "to": "NORMAL"
+        }
+      ],
+      "alarm_steps": [
+        12,
+        13,
+        23
+      ],
+      "case": "alarm_preempts_step_down",
+      "expected_transitions": [
+        [
+          12,
+          "NORMAL",
+          "VETO",
+          "escalation"
+        ],
+        [
+          13,
+          "VETO",
+          "CONSENSUS",
+          "escalation"
+        ],
+        [
+          33,
+          "CONSENSUS",
+          "VETO",
+          "recovery"
+        ],
+        [
+          43,
+          "VETO",
+          "NORMAL",
+          "recovery"
+        ]
+      ],
+      "k": 10,
+      "passed": true,
+      "sequence": [
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 0
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 1
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 2
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 3
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 4
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 5
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 6
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 7
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 8
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 9
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 10
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 11
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 12
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 13
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 14
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 15
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 16
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 17
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 18
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 19
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 20
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 21
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 22
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 23
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 24
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 25
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 26
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 27
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 28
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 29
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 30
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 31
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 32
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 33
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "VETO",
+          "step": 34
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "VETO",
+          "step": 35
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "VETO",
+          "step": 36
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "VETO",
+          "step": 37
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "VETO",
+          "step": 38
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "VETO",
+          "step": 39
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "VETO",
+          "step": 40
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "VETO",
+          "step": 41
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "VETO",
+          "step": 42
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 43
+        }
+      ]
+    },
+    {
+      "actual_transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 12,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 14,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 13,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 24,
+          "from": "CONSENSUS",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 22,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 23,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 25,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": true,
+          "step": 24,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 35,
+          "from": "CONSENSUS",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 33,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 34,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 45,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 44,
+          "to": "NORMAL"
+        }
+      ],
+      "alarm_steps": [
+        12,
+        13,
+        24
+      ],
+      "case": "re_escalation",
+      "expected_transitions": [
+        [
+          12,
+          "NORMAL",
+          "VETO",
+          "escalation"
+        ],
+        [
+          13,
+          "VETO",
+          "CONSENSUS",
+          "escalation"
+        ],
+        [
+          23,
+          "CONSENSUS",
+          "VETO",
+          "recovery"
+        ],
+        [
+          24,
+          "VETO",
+          "CONSENSUS",
+          "escalation"
+        ],
+        [
+          34,
+          "CONSENSUS",
+          "VETO",
+          "recovery"
+        ],
+        [
+          44,
+          "VETO",
+          "NORMAL",
+          "recovery"
+        ]
+      ],
+      "k": 10,
+      "passed": true,
+      "sequence": [
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 0
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 1
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 2
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 3
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 4
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 5
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 6
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 7
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 8
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 9
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 10
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 11
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 12
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 13
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 14
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 15
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 16
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 17
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 18
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 19
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 20
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 21
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 22
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 23
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 24
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 25
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 26
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 27
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 28
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 29
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 30
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 31
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 32
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 33
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 34
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "VETO",
+          "step": 35
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "VETO",
+          "step": 36
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "VETO",
+          "step": 37
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "VETO",
+          "step": 38
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "VETO",
+          "step": 39
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "VETO",
+          "step": 40
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "VETO",
+          "step": 41
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "VETO",
+          "step": 42
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "VETO",
+          "step": 43
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 44
+        }
+      ]
+    },
+    {
+      "actual_transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 12,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 33,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 32,
+          "to": "NORMAL"
+        }
+      ],
+      "alarm_steps": [
+        12
+      ],
+      "case": "veto_release",
+      "expected_transitions": [
+        [
+          12,
+          "NORMAL",
+          "VETO",
+          "escalation"
+        ],
+        [
+          32,
+          "VETO",
+          "NORMAL",
+          "recovery"
+        ]
+      ],
+      "k": 20,
+      "passed": true,
+      "sequence": [
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 0
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 1
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 2
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 3
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 4
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 5
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 6
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 7
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 8
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 9
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 10
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 11
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 12
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "VETO",
+          "step": 13
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "VETO",
+          "step": 14
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "VETO",
+          "step": 15
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "VETO",
+          "step": 16
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "VETO",
+          "step": 17
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "VETO",
+          "step": 18
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "VETO",
+          "step": 19
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "VETO",
+          "step": 20
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "VETO",
+          "step": 21
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "VETO",
+          "step": 22
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "VETO",
+          "step": 23
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "VETO",
+          "step": 24
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "VETO",
+          "step": 25
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "VETO",
+          "step": 26
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "VETO",
+          "step": 27
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "VETO",
+          "step": 28
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "VETO",
+          "step": 29
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "VETO",
+          "step": 30
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "VETO",
+          "step": 31
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 32
+        }
+      ]
+    },
+    {
+      "actual_transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 12,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 14,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 13,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 34,
+          "from": "CONSENSUS",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 32,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 33,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 54,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 53,
+          "to": "NORMAL"
+        }
+      ],
+      "alarm_steps": [
+        12,
+        13
+      ],
+      "case": "two_step_downs",
+      "expected_transitions": [
+        [
+          12,
+          "NORMAL",
+          "VETO",
+          "escalation"
+        ],
+        [
+          13,
+          "VETO",
+          "CONSENSUS",
+          "escalation"
+        ],
+        [
+          33,
+          "CONSENSUS",
+          "VETO",
+          "recovery"
+        ],
+        [
+          53,
+          "VETO",
+          "NORMAL",
+          "recovery"
+        ]
+      ],
+      "k": 20,
+      "passed": true,
+      "sequence": [
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 0
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 1
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 2
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 3
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 4
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 5
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 6
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 7
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 8
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 9
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 10
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 11
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 12
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 13
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 14
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 15
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 16
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 17
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 18
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 19
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 20
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 21
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 22
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "CONSENSUS",
+          "step": 23
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "CONSENSUS",
+          "step": 24
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "CONSENSUS",
+          "step": 25
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "CONSENSUS",
+          "step": 26
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "CONSENSUS",
+          "step": 27
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "CONSENSUS",
+          "step": 28
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "CONSENSUS",
+          "step": 29
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "CONSENSUS",
+          "step": 30
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "CONSENSUS",
+          "step": 31
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "CONSENSUS",
+          "step": 32
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 33
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "VETO",
+          "step": 34
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "VETO",
+          "step": 35
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "VETO",
+          "step": 36
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "VETO",
+          "step": 37
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "VETO",
+          "step": 38
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "VETO",
+          "step": 39
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "VETO",
+          "step": 40
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "VETO",
+          "step": 41
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "VETO",
+          "step": 42
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "VETO",
+          "step": 43
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "VETO",
+          "step": 44
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "VETO",
+          "step": 45
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "VETO",
+          "step": 46
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "VETO",
+          "step": 47
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "VETO",
+          "step": 48
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "VETO",
+          "step": 49
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "VETO",
+          "step": 50
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "VETO",
+          "step": 51
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "VETO",
+          "step": 52
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 53
+        }
+      ]
+    },
+    {
+      "actual_transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 12,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 14,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 13,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 53,
+          "from": "CONSENSUS",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 51,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 52,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 73,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 72,
+          "to": "NORMAL"
+        }
+      ],
+      "alarm_steps": [
+        12,
+        13,
+        32
+      ],
+      "case": "reset_before_quiet_completes",
+      "expected_transitions": [
+        [
+          12,
+          "NORMAL",
+          "VETO",
+          "escalation"
+        ],
+        [
+          13,
+          "VETO",
+          "CONSENSUS",
+          "escalation"
+        ],
+        [
+          52,
+          "CONSENSUS",
+          "VETO",
+          "recovery"
+        ],
+        [
+          72,
+          "VETO",
+          "NORMAL",
+          "recovery"
+        ]
+      ],
+      "k": 20,
+      "passed": true,
+      "sequence": [
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 0
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 1
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 2
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 3
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 4
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 5
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 6
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 7
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 8
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 9
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 10
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 11
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 12
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 13
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 14
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 15
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 16
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 17
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 18
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 19
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 20
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 21
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 22
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "CONSENSUS",
+          "step": 23
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "CONSENSUS",
+          "step": 24
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "CONSENSUS",
+          "step": 25
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "CONSENSUS",
+          "step": 26
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "CONSENSUS",
+          "step": 27
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "CONSENSUS",
+          "step": 28
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "CONSENSUS",
+          "step": 29
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "CONSENSUS",
+          "step": 30
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "CONSENSUS",
+          "step": 31
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 32
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 33
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 34
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 35
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 36
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 37
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 38
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 39
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 40
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 41
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "CONSENSUS",
+          "step": 42
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "CONSENSUS",
+          "step": 43
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "CONSENSUS",
+          "step": 44
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "CONSENSUS",
+          "step": 45
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "CONSENSUS",
+          "step": 46
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "CONSENSUS",
+          "step": 47
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "CONSENSUS",
+          "step": 48
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "CONSENSUS",
+          "step": 49
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "CONSENSUS",
+          "step": 50
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "CONSENSUS",
+          "step": 51
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 52
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "VETO",
+          "step": 53
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "VETO",
+          "step": 54
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "VETO",
+          "step": 55
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "VETO",
+          "step": 56
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "VETO",
+          "step": 57
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "VETO",
+          "step": 58
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "VETO",
+          "step": 59
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "VETO",
+          "step": 60
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "VETO",
+          "step": 61
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "VETO",
+          "step": 62
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "VETO",
+          "step": 63
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "VETO",
+          "step": 64
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "VETO",
+          "step": 65
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "VETO",
+          "step": 66
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "VETO",
+          "step": 67
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "VETO",
+          "step": 68
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "VETO",
+          "step": 69
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "VETO",
+          "step": 70
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "VETO",
+          "step": 71
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 72
+        }
+      ]
+    },
+    {
+      "actual_transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 12,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 14,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 13,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 54,
+          "from": "CONSENSUS",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 52,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 53,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 74,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 73,
+          "to": "NORMAL"
+        }
+      ],
+      "alarm_steps": [
+        12,
+        13,
+        33
+      ],
+      "case": "alarm_preempts_step_down",
+      "expected_transitions": [
+        [
+          12,
+          "NORMAL",
+          "VETO",
+          "escalation"
+        ],
+        [
+          13,
+          "VETO",
+          "CONSENSUS",
+          "escalation"
+        ],
+        [
+          53,
+          "CONSENSUS",
+          "VETO",
+          "recovery"
+        ],
+        [
+          73,
+          "VETO",
+          "NORMAL",
+          "recovery"
+        ]
+      ],
+      "k": 20,
+      "passed": true,
+      "sequence": [
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 0
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 1
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 2
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 3
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 4
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 5
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 6
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 7
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 8
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 9
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 10
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 11
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 12
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 13
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 14
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 15
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 16
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 17
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 18
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 19
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 20
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 21
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 22
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "CONSENSUS",
+          "step": 23
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "CONSENSUS",
+          "step": 24
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "CONSENSUS",
+          "step": 25
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "CONSENSUS",
+          "step": 26
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "CONSENSUS",
+          "step": 27
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "CONSENSUS",
+          "step": 28
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "CONSENSUS",
+          "step": 29
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "CONSENSUS",
+          "step": 30
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "CONSENSUS",
+          "step": 31
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "CONSENSUS",
+          "step": 32
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 33
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 34
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 35
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 36
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 37
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 38
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 39
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 40
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 41
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 42
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "CONSENSUS",
+          "step": 43
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "CONSENSUS",
+          "step": 44
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "CONSENSUS",
+          "step": 45
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "CONSENSUS",
+          "step": 46
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "CONSENSUS",
+          "step": 47
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "CONSENSUS",
+          "step": 48
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "CONSENSUS",
+          "step": 49
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "CONSENSUS",
+          "step": 50
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "CONSENSUS",
+          "step": 51
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "CONSENSUS",
+          "step": 52
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 53
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "VETO",
+          "step": 54
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "VETO",
+          "step": 55
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "VETO",
+          "step": 56
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "VETO",
+          "step": 57
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "VETO",
+          "step": 58
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "VETO",
+          "step": 59
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "VETO",
+          "step": 60
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "VETO",
+          "step": 61
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "VETO",
+          "step": 62
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "VETO",
+          "step": 63
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "VETO",
+          "step": 64
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "VETO",
+          "step": 65
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "VETO",
+          "step": 66
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "VETO",
+          "step": 67
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "VETO",
+          "step": 68
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "VETO",
+          "step": 69
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "VETO",
+          "step": 70
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "VETO",
+          "step": 71
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "VETO",
+          "step": 72
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 73
+        }
+      ]
+    },
+    {
+      "actual_transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 12,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 14,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 13,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 34,
+          "from": "CONSENSUS",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 32,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 33,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 35,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": true,
+          "step": 34,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 55,
+          "from": "CONSENSUS",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 53,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 54,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 75,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 74,
+          "to": "NORMAL"
+        }
+      ],
+      "alarm_steps": [
+        12,
+        13,
+        34
+      ],
+      "case": "re_escalation",
+      "expected_transitions": [
+        [
+          12,
+          "NORMAL",
+          "VETO",
+          "escalation"
+        ],
+        [
+          13,
+          "VETO",
+          "CONSENSUS",
+          "escalation"
+        ],
+        [
+          33,
+          "CONSENSUS",
+          "VETO",
+          "recovery"
+        ],
+        [
+          34,
+          "VETO",
+          "CONSENSUS",
+          "escalation"
+        ],
+        [
+          54,
+          "CONSENSUS",
+          "VETO",
+          "recovery"
+        ],
+        [
+          74,
+          "VETO",
+          "NORMAL",
+          "recovery"
+        ]
+      ],
+      "k": 20,
+      "passed": true,
+      "sequence": [
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 0
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 1
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 2
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 3
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 4
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 5
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 6
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 7
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 8
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 9
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 10
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 11
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 12
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 13
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 14
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 15
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 16
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 17
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 18
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 19
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 20
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 21
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 22
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "CONSENSUS",
+          "step": 23
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "CONSENSUS",
+          "step": 24
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "CONSENSUS",
+          "step": 25
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "CONSENSUS",
+          "step": 26
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "CONSENSUS",
+          "step": 27
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "CONSENSUS",
+          "step": 28
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "CONSENSUS",
+          "step": 29
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "CONSENSUS",
+          "step": 30
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "CONSENSUS",
+          "step": 31
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "CONSENSUS",
+          "step": 32
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 33
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 34
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 35
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 36
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 37
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 38
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 39
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 40
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 41
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 42
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 43
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "CONSENSUS",
+          "step": 44
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "CONSENSUS",
+          "step": 45
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "CONSENSUS",
+          "step": 46
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "CONSENSUS",
+          "step": 47
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "CONSENSUS",
+          "step": 48
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "CONSENSUS",
+          "step": 49
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "CONSENSUS",
+          "step": 50
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "CONSENSUS",
+          "step": 51
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "CONSENSUS",
+          "step": 52
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "CONSENSUS",
+          "step": 53
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 54
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "VETO",
+          "step": 55
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "VETO",
+          "step": 56
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "VETO",
+          "step": 57
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "VETO",
+          "step": 58
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "VETO",
+          "step": 59
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "VETO",
+          "step": 60
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "VETO",
+          "step": 61
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "VETO",
+          "step": 62
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "VETO",
+          "step": 63
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "VETO",
+          "step": 64
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "VETO",
+          "step": 65
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "VETO",
+          "step": 66
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "VETO",
+          "step": 67
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "VETO",
+          "step": 68
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "VETO",
+          "step": 69
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "VETO",
+          "step": 70
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "VETO",
+          "step": 71
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "VETO",
+          "step": 72
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "VETO",
+          "step": 73
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 74
+        }
+      ]
+    },
+    {
+      "actual_transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 12,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 53,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 52,
+          "to": "NORMAL"
+        }
+      ],
+      "alarm_steps": [
+        12
+      ],
+      "case": "veto_release",
+      "expected_transitions": [
+        [
+          12,
+          "NORMAL",
+          "VETO",
+          "escalation"
+        ],
+        [
+          52,
+          "VETO",
+          "NORMAL",
+          "recovery"
+        ]
+      ],
+      "k": 40,
+      "passed": true,
+      "sequence": [
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 0
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 1
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 2
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 3
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 4
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 5
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 6
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 7
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 8
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 9
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 10
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 11
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 12
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "VETO",
+          "step": 13
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "VETO",
+          "step": 14
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "VETO",
+          "step": 15
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "VETO",
+          "step": 16
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "VETO",
+          "step": 17
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "VETO",
+          "step": 18
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "VETO",
+          "step": 19
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "VETO",
+          "step": 20
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "VETO",
+          "step": 21
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "VETO",
+          "step": 22
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "VETO",
+          "step": 23
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "VETO",
+          "step": 24
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "VETO",
+          "step": 25
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "VETO",
+          "step": 26
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "VETO",
+          "step": 27
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "VETO",
+          "step": 28
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "VETO",
+          "step": 29
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "VETO",
+          "step": 30
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "VETO",
+          "step": 31
+        },
+        {
+          "alarm": false,
+          "quiet_count": 20,
+          "state": "VETO",
+          "step": 32
+        },
+        {
+          "alarm": false,
+          "quiet_count": 21,
+          "state": "VETO",
+          "step": 33
+        },
+        {
+          "alarm": false,
+          "quiet_count": 22,
+          "state": "VETO",
+          "step": 34
+        },
+        {
+          "alarm": false,
+          "quiet_count": 23,
+          "state": "VETO",
+          "step": 35
+        },
+        {
+          "alarm": false,
+          "quiet_count": 24,
+          "state": "VETO",
+          "step": 36
+        },
+        {
+          "alarm": false,
+          "quiet_count": 25,
+          "state": "VETO",
+          "step": 37
+        },
+        {
+          "alarm": false,
+          "quiet_count": 26,
+          "state": "VETO",
+          "step": 38
+        },
+        {
+          "alarm": false,
+          "quiet_count": 27,
+          "state": "VETO",
+          "step": 39
+        },
+        {
+          "alarm": false,
+          "quiet_count": 28,
+          "state": "VETO",
+          "step": 40
+        },
+        {
+          "alarm": false,
+          "quiet_count": 29,
+          "state": "VETO",
+          "step": 41
+        },
+        {
+          "alarm": false,
+          "quiet_count": 30,
+          "state": "VETO",
+          "step": 42
+        },
+        {
+          "alarm": false,
+          "quiet_count": 31,
+          "state": "VETO",
+          "step": 43
+        },
+        {
+          "alarm": false,
+          "quiet_count": 32,
+          "state": "VETO",
+          "step": 44
+        },
+        {
+          "alarm": false,
+          "quiet_count": 33,
+          "state": "VETO",
+          "step": 45
+        },
+        {
+          "alarm": false,
+          "quiet_count": 34,
+          "state": "VETO",
+          "step": 46
+        },
+        {
+          "alarm": false,
+          "quiet_count": 35,
+          "state": "VETO",
+          "step": 47
+        },
+        {
+          "alarm": false,
+          "quiet_count": 36,
+          "state": "VETO",
+          "step": 48
+        },
+        {
+          "alarm": false,
+          "quiet_count": 37,
+          "state": "VETO",
+          "step": 49
+        },
+        {
+          "alarm": false,
+          "quiet_count": 38,
+          "state": "VETO",
+          "step": 50
+        },
+        {
+          "alarm": false,
+          "quiet_count": 39,
+          "state": "VETO",
+          "step": 51
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 52
+        }
+      ]
+    },
+    {
+      "actual_transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 12,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 14,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 13,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 54,
+          "from": "CONSENSUS",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 52,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 53,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 94,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 93,
+          "to": "NORMAL"
+        }
+      ],
+      "alarm_steps": [
+        12,
+        13
+      ],
+      "case": "two_step_downs",
+      "expected_transitions": [
+        [
+          12,
+          "NORMAL",
+          "VETO",
+          "escalation"
+        ],
+        [
+          13,
+          "VETO",
+          "CONSENSUS",
+          "escalation"
+        ],
+        [
+          53,
+          "CONSENSUS",
+          "VETO",
+          "recovery"
+        ],
+        [
+          93,
+          "VETO",
+          "NORMAL",
+          "recovery"
+        ]
+      ],
+      "k": 40,
+      "passed": true,
+      "sequence": [
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 0
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 1
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 2
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 3
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 4
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 5
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 6
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 7
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 8
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 9
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 10
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 11
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 12
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 13
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 14
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 15
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 16
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 17
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 18
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 19
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 20
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 21
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 22
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "CONSENSUS",
+          "step": 23
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "CONSENSUS",
+          "step": 24
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "CONSENSUS",
+          "step": 25
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "CONSENSUS",
+          "step": 26
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "CONSENSUS",
+          "step": 27
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "CONSENSUS",
+          "step": 28
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "CONSENSUS",
+          "step": 29
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "CONSENSUS",
+          "step": 30
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "CONSENSUS",
+          "step": 31
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "CONSENSUS",
+          "step": 32
+        },
+        {
+          "alarm": false,
+          "quiet_count": 20,
+          "state": "CONSENSUS",
+          "step": 33
+        },
+        {
+          "alarm": false,
+          "quiet_count": 21,
+          "state": "CONSENSUS",
+          "step": 34
+        },
+        {
+          "alarm": false,
+          "quiet_count": 22,
+          "state": "CONSENSUS",
+          "step": 35
+        },
+        {
+          "alarm": false,
+          "quiet_count": 23,
+          "state": "CONSENSUS",
+          "step": 36
+        },
+        {
+          "alarm": false,
+          "quiet_count": 24,
+          "state": "CONSENSUS",
+          "step": 37
+        },
+        {
+          "alarm": false,
+          "quiet_count": 25,
+          "state": "CONSENSUS",
+          "step": 38
+        },
+        {
+          "alarm": false,
+          "quiet_count": 26,
+          "state": "CONSENSUS",
+          "step": 39
+        },
+        {
+          "alarm": false,
+          "quiet_count": 27,
+          "state": "CONSENSUS",
+          "step": 40
+        },
+        {
+          "alarm": false,
+          "quiet_count": 28,
+          "state": "CONSENSUS",
+          "step": 41
+        },
+        {
+          "alarm": false,
+          "quiet_count": 29,
+          "state": "CONSENSUS",
+          "step": 42
+        },
+        {
+          "alarm": false,
+          "quiet_count": 30,
+          "state": "CONSENSUS",
+          "step": 43
+        },
+        {
+          "alarm": false,
+          "quiet_count": 31,
+          "state": "CONSENSUS",
+          "step": 44
+        },
+        {
+          "alarm": false,
+          "quiet_count": 32,
+          "state": "CONSENSUS",
+          "step": 45
+        },
+        {
+          "alarm": false,
+          "quiet_count": 33,
+          "state": "CONSENSUS",
+          "step": 46
+        },
+        {
+          "alarm": false,
+          "quiet_count": 34,
+          "state": "CONSENSUS",
+          "step": 47
+        },
+        {
+          "alarm": false,
+          "quiet_count": 35,
+          "state": "CONSENSUS",
+          "step": 48
+        },
+        {
+          "alarm": false,
+          "quiet_count": 36,
+          "state": "CONSENSUS",
+          "step": 49
+        },
+        {
+          "alarm": false,
+          "quiet_count": 37,
+          "state": "CONSENSUS",
+          "step": 50
+        },
+        {
+          "alarm": false,
+          "quiet_count": 38,
+          "state": "CONSENSUS",
+          "step": 51
+        },
+        {
+          "alarm": false,
+          "quiet_count": 39,
+          "state": "CONSENSUS",
+          "step": 52
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 53
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "VETO",
+          "step": 54
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "VETO",
+          "step": 55
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "VETO",
+          "step": 56
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "VETO",
+          "step": 57
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "VETO",
+          "step": 58
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "VETO",
+          "step": 59
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "VETO",
+          "step": 60
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "VETO",
+          "step": 61
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "VETO",
+          "step": 62
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "VETO",
+          "step": 63
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "VETO",
+          "step": 64
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "VETO",
+          "step": 65
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "VETO",
+          "step": 66
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "VETO",
+          "step": 67
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "VETO",
+          "step": 68
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "VETO",
+          "step": 69
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "VETO",
+          "step": 70
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "VETO",
+          "step": 71
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "VETO",
+          "step": 72
+        },
+        {
+          "alarm": false,
+          "quiet_count": 20,
+          "state": "VETO",
+          "step": 73
+        },
+        {
+          "alarm": false,
+          "quiet_count": 21,
+          "state": "VETO",
+          "step": 74
+        },
+        {
+          "alarm": false,
+          "quiet_count": 22,
+          "state": "VETO",
+          "step": 75
+        },
+        {
+          "alarm": false,
+          "quiet_count": 23,
+          "state": "VETO",
+          "step": 76
+        },
+        {
+          "alarm": false,
+          "quiet_count": 24,
+          "state": "VETO",
+          "step": 77
+        },
+        {
+          "alarm": false,
+          "quiet_count": 25,
+          "state": "VETO",
+          "step": 78
+        },
+        {
+          "alarm": false,
+          "quiet_count": 26,
+          "state": "VETO",
+          "step": 79
+        },
+        {
+          "alarm": false,
+          "quiet_count": 27,
+          "state": "VETO",
+          "step": 80
+        },
+        {
+          "alarm": false,
+          "quiet_count": 28,
+          "state": "VETO",
+          "step": 81
+        },
+        {
+          "alarm": false,
+          "quiet_count": 29,
+          "state": "VETO",
+          "step": 82
+        },
+        {
+          "alarm": false,
+          "quiet_count": 30,
+          "state": "VETO",
+          "step": 83
+        },
+        {
+          "alarm": false,
+          "quiet_count": 31,
+          "state": "VETO",
+          "step": 84
+        },
+        {
+          "alarm": false,
+          "quiet_count": 32,
+          "state": "VETO",
+          "step": 85
+        },
+        {
+          "alarm": false,
+          "quiet_count": 33,
+          "state": "VETO",
+          "step": 86
+        },
+        {
+          "alarm": false,
+          "quiet_count": 34,
+          "state": "VETO",
+          "step": 87
+        },
+        {
+          "alarm": false,
+          "quiet_count": 35,
+          "state": "VETO",
+          "step": 88
+        },
+        {
+          "alarm": false,
+          "quiet_count": 36,
+          "state": "VETO",
+          "step": 89
+        },
+        {
+          "alarm": false,
+          "quiet_count": 37,
+          "state": "VETO",
+          "step": 90
+        },
+        {
+          "alarm": false,
+          "quiet_count": 38,
+          "state": "VETO",
+          "step": 91
+        },
+        {
+          "alarm": false,
+          "quiet_count": 39,
+          "state": "VETO",
+          "step": 92
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 93
+        }
+      ]
+    },
+    {
+      "actual_transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 12,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 14,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 13,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 93,
+          "from": "CONSENSUS",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 91,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 92,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 133,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 132,
+          "to": "NORMAL"
+        }
+      ],
+      "alarm_steps": [
+        12,
+        13,
+        52
+      ],
+      "case": "reset_before_quiet_completes",
+      "expected_transitions": [
+        [
+          12,
+          "NORMAL",
+          "VETO",
+          "escalation"
+        ],
+        [
+          13,
+          "VETO",
+          "CONSENSUS",
+          "escalation"
+        ],
+        [
+          92,
+          "CONSENSUS",
+          "VETO",
+          "recovery"
+        ],
+        [
+          132,
+          "VETO",
+          "NORMAL",
+          "recovery"
+        ]
+      ],
+      "k": 40,
+      "passed": true,
+      "sequence": [
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 0
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 1
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 2
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 3
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 4
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 5
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 6
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 7
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 8
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 9
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 10
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 11
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 12
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 13
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 14
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 15
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 16
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 17
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 18
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 19
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 20
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 21
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 22
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "CONSENSUS",
+          "step": 23
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "CONSENSUS",
+          "step": 24
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "CONSENSUS",
+          "step": 25
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "CONSENSUS",
+          "step": 26
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "CONSENSUS",
+          "step": 27
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "CONSENSUS",
+          "step": 28
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "CONSENSUS",
+          "step": 29
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "CONSENSUS",
+          "step": 30
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "CONSENSUS",
+          "step": 31
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "CONSENSUS",
+          "step": 32
+        },
+        {
+          "alarm": false,
+          "quiet_count": 20,
+          "state": "CONSENSUS",
+          "step": 33
+        },
+        {
+          "alarm": false,
+          "quiet_count": 21,
+          "state": "CONSENSUS",
+          "step": 34
+        },
+        {
+          "alarm": false,
+          "quiet_count": 22,
+          "state": "CONSENSUS",
+          "step": 35
+        },
+        {
+          "alarm": false,
+          "quiet_count": 23,
+          "state": "CONSENSUS",
+          "step": 36
+        },
+        {
+          "alarm": false,
+          "quiet_count": 24,
+          "state": "CONSENSUS",
+          "step": 37
+        },
+        {
+          "alarm": false,
+          "quiet_count": 25,
+          "state": "CONSENSUS",
+          "step": 38
+        },
+        {
+          "alarm": false,
+          "quiet_count": 26,
+          "state": "CONSENSUS",
+          "step": 39
+        },
+        {
+          "alarm": false,
+          "quiet_count": 27,
+          "state": "CONSENSUS",
+          "step": 40
+        },
+        {
+          "alarm": false,
+          "quiet_count": 28,
+          "state": "CONSENSUS",
+          "step": 41
+        },
+        {
+          "alarm": false,
+          "quiet_count": 29,
+          "state": "CONSENSUS",
+          "step": 42
+        },
+        {
+          "alarm": false,
+          "quiet_count": 30,
+          "state": "CONSENSUS",
+          "step": 43
+        },
+        {
+          "alarm": false,
+          "quiet_count": 31,
+          "state": "CONSENSUS",
+          "step": 44
+        },
+        {
+          "alarm": false,
+          "quiet_count": 32,
+          "state": "CONSENSUS",
+          "step": 45
+        },
+        {
+          "alarm": false,
+          "quiet_count": 33,
+          "state": "CONSENSUS",
+          "step": 46
+        },
+        {
+          "alarm": false,
+          "quiet_count": 34,
+          "state": "CONSENSUS",
+          "step": 47
+        },
+        {
+          "alarm": false,
+          "quiet_count": 35,
+          "state": "CONSENSUS",
+          "step": 48
+        },
+        {
+          "alarm": false,
+          "quiet_count": 36,
+          "state": "CONSENSUS",
+          "step": 49
+        },
+        {
+          "alarm": false,
+          "quiet_count": 37,
+          "state": "CONSENSUS",
+          "step": 50
+        },
+        {
+          "alarm": false,
+          "quiet_count": 38,
+          "state": "CONSENSUS",
+          "step": 51
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 52
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 53
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 54
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 55
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 56
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 57
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 58
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 59
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 60
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 61
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "CONSENSUS",
+          "step": 62
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "CONSENSUS",
+          "step": 63
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "CONSENSUS",
+          "step": 64
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "CONSENSUS",
+          "step": 65
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "CONSENSUS",
+          "step": 66
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "CONSENSUS",
+          "step": 67
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "CONSENSUS",
+          "step": 68
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "CONSENSUS",
+          "step": 69
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "CONSENSUS",
+          "step": 70
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "CONSENSUS",
+          "step": 71
+        },
+        {
+          "alarm": false,
+          "quiet_count": 20,
+          "state": "CONSENSUS",
+          "step": 72
+        },
+        {
+          "alarm": false,
+          "quiet_count": 21,
+          "state": "CONSENSUS",
+          "step": 73
+        },
+        {
+          "alarm": false,
+          "quiet_count": 22,
+          "state": "CONSENSUS",
+          "step": 74
+        },
+        {
+          "alarm": false,
+          "quiet_count": 23,
+          "state": "CONSENSUS",
+          "step": 75
+        },
+        {
+          "alarm": false,
+          "quiet_count": 24,
+          "state": "CONSENSUS",
+          "step": 76
+        },
+        {
+          "alarm": false,
+          "quiet_count": 25,
+          "state": "CONSENSUS",
+          "step": 77
+        },
+        {
+          "alarm": false,
+          "quiet_count": 26,
+          "state": "CONSENSUS",
+          "step": 78
+        },
+        {
+          "alarm": false,
+          "quiet_count": 27,
+          "state": "CONSENSUS",
+          "step": 79
+        },
+        {
+          "alarm": false,
+          "quiet_count": 28,
+          "state": "CONSENSUS",
+          "step": 80
+        },
+        {
+          "alarm": false,
+          "quiet_count": 29,
+          "state": "CONSENSUS",
+          "step": 81
+        },
+        {
+          "alarm": false,
+          "quiet_count": 30,
+          "state": "CONSENSUS",
+          "step": 82
+        },
+        {
+          "alarm": false,
+          "quiet_count": 31,
+          "state": "CONSENSUS",
+          "step": 83
+        },
+        {
+          "alarm": false,
+          "quiet_count": 32,
+          "state": "CONSENSUS",
+          "step": 84
+        },
+        {
+          "alarm": false,
+          "quiet_count": 33,
+          "state": "CONSENSUS",
+          "step": 85
+        },
+        {
+          "alarm": false,
+          "quiet_count": 34,
+          "state": "CONSENSUS",
+          "step": 86
+        },
+        {
+          "alarm": false,
+          "quiet_count": 35,
+          "state": "CONSENSUS",
+          "step": 87
+        },
+        {
+          "alarm": false,
+          "quiet_count": 36,
+          "state": "CONSENSUS",
+          "step": 88
+        },
+        {
+          "alarm": false,
+          "quiet_count": 37,
+          "state": "CONSENSUS",
+          "step": 89
+        },
+        {
+          "alarm": false,
+          "quiet_count": 38,
+          "state": "CONSENSUS",
+          "step": 90
+        },
+        {
+          "alarm": false,
+          "quiet_count": 39,
+          "state": "CONSENSUS",
+          "step": 91
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 92
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "VETO",
+          "step": 93
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "VETO",
+          "step": 94
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "VETO",
+          "step": 95
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "VETO",
+          "step": 96
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "VETO",
+          "step": 97
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "VETO",
+          "step": 98
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "VETO",
+          "step": 99
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "VETO",
+          "step": 100
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "VETO",
+          "step": 101
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "VETO",
+          "step": 102
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "VETO",
+          "step": 103
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "VETO",
+          "step": 104
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "VETO",
+          "step": 105
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "VETO",
+          "step": 106
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "VETO",
+          "step": 107
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "VETO",
+          "step": 108
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "VETO",
+          "step": 109
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "VETO",
+          "step": 110
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "VETO",
+          "step": 111
+        },
+        {
+          "alarm": false,
+          "quiet_count": 20,
+          "state": "VETO",
+          "step": 112
+        },
+        {
+          "alarm": false,
+          "quiet_count": 21,
+          "state": "VETO",
+          "step": 113
+        },
+        {
+          "alarm": false,
+          "quiet_count": 22,
+          "state": "VETO",
+          "step": 114
+        },
+        {
+          "alarm": false,
+          "quiet_count": 23,
+          "state": "VETO",
+          "step": 115
+        },
+        {
+          "alarm": false,
+          "quiet_count": 24,
+          "state": "VETO",
+          "step": 116
+        },
+        {
+          "alarm": false,
+          "quiet_count": 25,
+          "state": "VETO",
+          "step": 117
+        },
+        {
+          "alarm": false,
+          "quiet_count": 26,
+          "state": "VETO",
+          "step": 118
+        },
+        {
+          "alarm": false,
+          "quiet_count": 27,
+          "state": "VETO",
+          "step": 119
+        },
+        {
+          "alarm": false,
+          "quiet_count": 28,
+          "state": "VETO",
+          "step": 120
+        },
+        {
+          "alarm": false,
+          "quiet_count": 29,
+          "state": "VETO",
+          "step": 121
+        },
+        {
+          "alarm": false,
+          "quiet_count": 30,
+          "state": "VETO",
+          "step": 122
+        },
+        {
+          "alarm": false,
+          "quiet_count": 31,
+          "state": "VETO",
+          "step": 123
+        },
+        {
+          "alarm": false,
+          "quiet_count": 32,
+          "state": "VETO",
+          "step": 124
+        },
+        {
+          "alarm": false,
+          "quiet_count": 33,
+          "state": "VETO",
+          "step": 125
+        },
+        {
+          "alarm": false,
+          "quiet_count": 34,
+          "state": "VETO",
+          "step": 126
+        },
+        {
+          "alarm": false,
+          "quiet_count": 35,
+          "state": "VETO",
+          "step": 127
+        },
+        {
+          "alarm": false,
+          "quiet_count": 36,
+          "state": "VETO",
+          "step": 128
+        },
+        {
+          "alarm": false,
+          "quiet_count": 37,
+          "state": "VETO",
+          "step": 129
+        },
+        {
+          "alarm": false,
+          "quiet_count": 38,
+          "state": "VETO",
+          "step": 130
+        },
+        {
+          "alarm": false,
+          "quiet_count": 39,
+          "state": "VETO",
+          "step": 131
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 132
+        }
+      ]
+    },
+    {
+      "actual_transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 12,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 14,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 13,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 94,
+          "from": "CONSENSUS",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 92,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 93,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 134,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 133,
+          "to": "NORMAL"
+        }
+      ],
+      "alarm_steps": [
+        12,
+        13,
+        53
+      ],
+      "case": "alarm_preempts_step_down",
+      "expected_transitions": [
+        [
+          12,
+          "NORMAL",
+          "VETO",
+          "escalation"
+        ],
+        [
+          13,
+          "VETO",
+          "CONSENSUS",
+          "escalation"
+        ],
+        [
+          93,
+          "CONSENSUS",
+          "VETO",
+          "recovery"
+        ],
+        [
+          133,
+          "VETO",
+          "NORMAL",
+          "recovery"
+        ]
+      ],
+      "k": 40,
+      "passed": true,
+      "sequence": [
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 0
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 1
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 2
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 3
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 4
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 5
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 6
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 7
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 8
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 9
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 10
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 11
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 12
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 13
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 14
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 15
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 16
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 17
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 18
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 19
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 20
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 21
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 22
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "CONSENSUS",
+          "step": 23
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "CONSENSUS",
+          "step": 24
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "CONSENSUS",
+          "step": 25
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "CONSENSUS",
+          "step": 26
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "CONSENSUS",
+          "step": 27
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "CONSENSUS",
+          "step": 28
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "CONSENSUS",
+          "step": 29
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "CONSENSUS",
+          "step": 30
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "CONSENSUS",
+          "step": 31
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "CONSENSUS",
+          "step": 32
+        },
+        {
+          "alarm": false,
+          "quiet_count": 20,
+          "state": "CONSENSUS",
+          "step": 33
+        },
+        {
+          "alarm": false,
+          "quiet_count": 21,
+          "state": "CONSENSUS",
+          "step": 34
+        },
+        {
+          "alarm": false,
+          "quiet_count": 22,
+          "state": "CONSENSUS",
+          "step": 35
+        },
+        {
+          "alarm": false,
+          "quiet_count": 23,
+          "state": "CONSENSUS",
+          "step": 36
+        },
+        {
+          "alarm": false,
+          "quiet_count": 24,
+          "state": "CONSENSUS",
+          "step": 37
+        },
+        {
+          "alarm": false,
+          "quiet_count": 25,
+          "state": "CONSENSUS",
+          "step": 38
+        },
+        {
+          "alarm": false,
+          "quiet_count": 26,
+          "state": "CONSENSUS",
+          "step": 39
+        },
+        {
+          "alarm": false,
+          "quiet_count": 27,
+          "state": "CONSENSUS",
+          "step": 40
+        },
+        {
+          "alarm": false,
+          "quiet_count": 28,
+          "state": "CONSENSUS",
+          "step": 41
+        },
+        {
+          "alarm": false,
+          "quiet_count": 29,
+          "state": "CONSENSUS",
+          "step": 42
+        },
+        {
+          "alarm": false,
+          "quiet_count": 30,
+          "state": "CONSENSUS",
+          "step": 43
+        },
+        {
+          "alarm": false,
+          "quiet_count": 31,
+          "state": "CONSENSUS",
+          "step": 44
+        },
+        {
+          "alarm": false,
+          "quiet_count": 32,
+          "state": "CONSENSUS",
+          "step": 45
+        },
+        {
+          "alarm": false,
+          "quiet_count": 33,
+          "state": "CONSENSUS",
+          "step": 46
+        },
+        {
+          "alarm": false,
+          "quiet_count": 34,
+          "state": "CONSENSUS",
+          "step": 47
+        },
+        {
+          "alarm": false,
+          "quiet_count": 35,
+          "state": "CONSENSUS",
+          "step": 48
+        },
+        {
+          "alarm": false,
+          "quiet_count": 36,
+          "state": "CONSENSUS",
+          "step": 49
+        },
+        {
+          "alarm": false,
+          "quiet_count": 37,
+          "state": "CONSENSUS",
+          "step": 50
+        },
+        {
+          "alarm": false,
+          "quiet_count": 38,
+          "state": "CONSENSUS",
+          "step": 51
+        },
+        {
+          "alarm": false,
+          "quiet_count": 39,
+          "state": "CONSENSUS",
+          "step": 52
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 53
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 54
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 55
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 56
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 57
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 58
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 59
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 60
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 61
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 62
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "CONSENSUS",
+          "step": 63
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "CONSENSUS",
+          "step": 64
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "CONSENSUS",
+          "step": 65
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "CONSENSUS",
+          "step": 66
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "CONSENSUS",
+          "step": 67
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "CONSENSUS",
+          "step": 68
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "CONSENSUS",
+          "step": 69
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "CONSENSUS",
+          "step": 70
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "CONSENSUS",
+          "step": 71
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "CONSENSUS",
+          "step": 72
+        },
+        {
+          "alarm": false,
+          "quiet_count": 20,
+          "state": "CONSENSUS",
+          "step": 73
+        },
+        {
+          "alarm": false,
+          "quiet_count": 21,
+          "state": "CONSENSUS",
+          "step": 74
+        },
+        {
+          "alarm": false,
+          "quiet_count": 22,
+          "state": "CONSENSUS",
+          "step": 75
+        },
+        {
+          "alarm": false,
+          "quiet_count": 23,
+          "state": "CONSENSUS",
+          "step": 76
+        },
+        {
+          "alarm": false,
+          "quiet_count": 24,
+          "state": "CONSENSUS",
+          "step": 77
+        },
+        {
+          "alarm": false,
+          "quiet_count": 25,
+          "state": "CONSENSUS",
+          "step": 78
+        },
+        {
+          "alarm": false,
+          "quiet_count": 26,
+          "state": "CONSENSUS",
+          "step": 79
+        },
+        {
+          "alarm": false,
+          "quiet_count": 27,
+          "state": "CONSENSUS",
+          "step": 80
+        },
+        {
+          "alarm": false,
+          "quiet_count": 28,
+          "state": "CONSENSUS",
+          "step": 81
+        },
+        {
+          "alarm": false,
+          "quiet_count": 29,
+          "state": "CONSENSUS",
+          "step": 82
+        },
+        {
+          "alarm": false,
+          "quiet_count": 30,
+          "state": "CONSENSUS",
+          "step": 83
+        },
+        {
+          "alarm": false,
+          "quiet_count": 31,
+          "state": "CONSENSUS",
+          "step": 84
+        },
+        {
+          "alarm": false,
+          "quiet_count": 32,
+          "state": "CONSENSUS",
+          "step": 85
+        },
+        {
+          "alarm": false,
+          "quiet_count": 33,
+          "state": "CONSENSUS",
+          "step": 86
+        },
+        {
+          "alarm": false,
+          "quiet_count": 34,
+          "state": "CONSENSUS",
+          "step": 87
+        },
+        {
+          "alarm": false,
+          "quiet_count": 35,
+          "state": "CONSENSUS",
+          "step": 88
+        },
+        {
+          "alarm": false,
+          "quiet_count": 36,
+          "state": "CONSENSUS",
+          "step": 89
+        },
+        {
+          "alarm": false,
+          "quiet_count": 37,
+          "state": "CONSENSUS",
+          "step": 90
+        },
+        {
+          "alarm": false,
+          "quiet_count": 38,
+          "state": "CONSENSUS",
+          "step": 91
+        },
+        {
+          "alarm": false,
+          "quiet_count": 39,
+          "state": "CONSENSUS",
+          "step": 92
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 93
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "VETO",
+          "step": 94
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "VETO",
+          "step": 95
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "VETO",
+          "step": 96
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "VETO",
+          "step": 97
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "VETO",
+          "step": 98
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "VETO",
+          "step": 99
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "VETO",
+          "step": 100
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "VETO",
+          "step": 101
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "VETO",
+          "step": 102
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "VETO",
+          "step": 103
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "VETO",
+          "step": 104
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "VETO",
+          "step": 105
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "VETO",
+          "step": 106
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "VETO",
+          "step": 107
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "VETO",
+          "step": 108
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "VETO",
+          "step": 109
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "VETO",
+          "step": 110
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "VETO",
+          "step": 111
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "VETO",
+          "step": 112
+        },
+        {
+          "alarm": false,
+          "quiet_count": 20,
+          "state": "VETO",
+          "step": 113
+        },
+        {
+          "alarm": false,
+          "quiet_count": 21,
+          "state": "VETO",
+          "step": 114
+        },
+        {
+          "alarm": false,
+          "quiet_count": 22,
+          "state": "VETO",
+          "step": 115
+        },
+        {
+          "alarm": false,
+          "quiet_count": 23,
+          "state": "VETO",
+          "step": 116
+        },
+        {
+          "alarm": false,
+          "quiet_count": 24,
+          "state": "VETO",
+          "step": 117
+        },
+        {
+          "alarm": false,
+          "quiet_count": 25,
+          "state": "VETO",
+          "step": 118
+        },
+        {
+          "alarm": false,
+          "quiet_count": 26,
+          "state": "VETO",
+          "step": 119
+        },
+        {
+          "alarm": false,
+          "quiet_count": 27,
+          "state": "VETO",
+          "step": 120
+        },
+        {
+          "alarm": false,
+          "quiet_count": 28,
+          "state": "VETO",
+          "step": 121
+        },
+        {
+          "alarm": false,
+          "quiet_count": 29,
+          "state": "VETO",
+          "step": 122
+        },
+        {
+          "alarm": false,
+          "quiet_count": 30,
+          "state": "VETO",
+          "step": 123
+        },
+        {
+          "alarm": false,
+          "quiet_count": 31,
+          "state": "VETO",
+          "step": 124
+        },
+        {
+          "alarm": false,
+          "quiet_count": 32,
+          "state": "VETO",
+          "step": 125
+        },
+        {
+          "alarm": false,
+          "quiet_count": 33,
+          "state": "VETO",
+          "step": 126
+        },
+        {
+          "alarm": false,
+          "quiet_count": 34,
+          "state": "VETO",
+          "step": 127
+        },
+        {
+          "alarm": false,
+          "quiet_count": 35,
+          "state": "VETO",
+          "step": 128
+        },
+        {
+          "alarm": false,
+          "quiet_count": 36,
+          "state": "VETO",
+          "step": 129
+        },
+        {
+          "alarm": false,
+          "quiet_count": 37,
+          "state": "VETO",
+          "step": 130
+        },
+        {
+          "alarm": false,
+          "quiet_count": 38,
+          "state": "VETO",
+          "step": 131
+        },
+        {
+          "alarm": false,
+          "quiet_count": 39,
+          "state": "VETO",
+          "step": 132
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 133
+        }
+      ]
+    },
+    {
+      "actual_transitions": [
+        {
+          "consensus_fields": null,
+          "direction": "escalation",
+          "effective_from_step": 13,
+          "from": "NORMAL",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 11,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 12,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 14,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 13,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 54,
+          "from": "CONSENSUS",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 52,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 53,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "direction": "escalation",
+          "effective_from_step": 55,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": true,
+          "step": 54,
+          "to": "CONSENSUS"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 95,
+          "from": "CONSENSUS",
+          "held_action": {
+            "c_protective": 0.4,
+            "c_suppressive": 0.2,
+            "snapshot_step": 93,
+            "x_bio_welfare": 0.2061409568906703,
+            "x_compute": 0.1360229355155997,
+            "x_institutional_capacity": 0.26711884854035045,
+            "x_novelty_agency": 0.052807183062202334,
+            "x_resilience": 0.053301656737382165,
+            "x_transfer_comprehension": 0.2846084192537951
+          },
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 94,
+          "to": "VETO"
+        },
+        {
+          "consensus_fields": null,
+          "direction": "recovery",
+          "effective_from_step": 135,
+          "from": "VETO",
+          "held_action": null,
+          "quiet_count_after": 0,
+          "re_escalation_after_recovery": false,
+          "step": 134,
+          "to": "NORMAL"
+        }
+      ],
+      "alarm_steps": [
+        12,
+        13,
+        54
+      ],
+      "case": "re_escalation",
+      "expected_transitions": [
+        [
+          12,
+          "NORMAL",
+          "VETO",
+          "escalation"
+        ],
+        [
+          13,
+          "VETO",
+          "CONSENSUS",
+          "escalation"
+        ],
+        [
+          53,
+          "CONSENSUS",
+          "VETO",
+          "recovery"
+        ],
+        [
+          54,
+          "VETO",
+          "CONSENSUS",
+          "escalation"
+        ],
+        [
+          94,
+          "CONSENSUS",
+          "VETO",
+          "recovery"
+        ],
+        [
+          134,
+          "VETO",
+          "NORMAL",
+          "recovery"
+        ]
+      ],
+      "k": 40,
+      "passed": true,
+      "sequence": [
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 0
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 1
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 2
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 3
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 4
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 5
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 6
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 7
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 8
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 9
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 10
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 11
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 12
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 13
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 14
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 15
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 16
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 17
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 18
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 19
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 20
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 21
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 22
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "CONSENSUS",
+          "step": 23
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "CONSENSUS",
+          "step": 24
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "CONSENSUS",
+          "step": 25
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "CONSENSUS",
+          "step": 26
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "CONSENSUS",
+          "step": 27
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "CONSENSUS",
+          "step": 28
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "CONSENSUS",
+          "step": 29
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "CONSENSUS",
+          "step": 30
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "CONSENSUS",
+          "step": 31
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "CONSENSUS",
+          "step": 32
+        },
+        {
+          "alarm": false,
+          "quiet_count": 20,
+          "state": "CONSENSUS",
+          "step": 33
+        },
+        {
+          "alarm": false,
+          "quiet_count": 21,
+          "state": "CONSENSUS",
+          "step": 34
+        },
+        {
+          "alarm": false,
+          "quiet_count": 22,
+          "state": "CONSENSUS",
+          "step": 35
+        },
+        {
+          "alarm": false,
+          "quiet_count": 23,
+          "state": "CONSENSUS",
+          "step": 36
+        },
+        {
+          "alarm": false,
+          "quiet_count": 24,
+          "state": "CONSENSUS",
+          "step": 37
+        },
+        {
+          "alarm": false,
+          "quiet_count": 25,
+          "state": "CONSENSUS",
+          "step": 38
+        },
+        {
+          "alarm": false,
+          "quiet_count": 26,
+          "state": "CONSENSUS",
+          "step": 39
+        },
+        {
+          "alarm": false,
+          "quiet_count": 27,
+          "state": "CONSENSUS",
+          "step": 40
+        },
+        {
+          "alarm": false,
+          "quiet_count": 28,
+          "state": "CONSENSUS",
+          "step": 41
+        },
+        {
+          "alarm": false,
+          "quiet_count": 29,
+          "state": "CONSENSUS",
+          "step": 42
+        },
+        {
+          "alarm": false,
+          "quiet_count": 30,
+          "state": "CONSENSUS",
+          "step": 43
+        },
+        {
+          "alarm": false,
+          "quiet_count": 31,
+          "state": "CONSENSUS",
+          "step": 44
+        },
+        {
+          "alarm": false,
+          "quiet_count": 32,
+          "state": "CONSENSUS",
+          "step": 45
+        },
+        {
+          "alarm": false,
+          "quiet_count": 33,
+          "state": "CONSENSUS",
+          "step": 46
+        },
+        {
+          "alarm": false,
+          "quiet_count": 34,
+          "state": "CONSENSUS",
+          "step": 47
+        },
+        {
+          "alarm": false,
+          "quiet_count": 35,
+          "state": "CONSENSUS",
+          "step": 48
+        },
+        {
+          "alarm": false,
+          "quiet_count": 36,
+          "state": "CONSENSUS",
+          "step": 49
+        },
+        {
+          "alarm": false,
+          "quiet_count": 37,
+          "state": "CONSENSUS",
+          "step": 50
+        },
+        {
+          "alarm": false,
+          "quiet_count": 38,
+          "state": "CONSENSUS",
+          "step": 51
+        },
+        {
+          "alarm": false,
+          "quiet_count": 39,
+          "state": "CONSENSUS",
+          "step": 52
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 53
+        },
+        {
+          "alarm": true,
+          "quiet_count": 0,
+          "state": "CONSENSUS",
+          "step": 54
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "CONSENSUS",
+          "step": 55
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "CONSENSUS",
+          "step": 56
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "CONSENSUS",
+          "step": 57
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "CONSENSUS",
+          "step": 58
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "CONSENSUS",
+          "step": 59
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "CONSENSUS",
+          "step": 60
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "CONSENSUS",
+          "step": 61
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "CONSENSUS",
+          "step": 62
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "CONSENSUS",
+          "step": 63
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "CONSENSUS",
+          "step": 64
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "CONSENSUS",
+          "step": 65
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "CONSENSUS",
+          "step": 66
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "CONSENSUS",
+          "step": 67
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "CONSENSUS",
+          "step": 68
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "CONSENSUS",
+          "step": 69
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "CONSENSUS",
+          "step": 70
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "CONSENSUS",
+          "step": 71
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "CONSENSUS",
+          "step": 72
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "CONSENSUS",
+          "step": 73
+        },
+        {
+          "alarm": false,
+          "quiet_count": 20,
+          "state": "CONSENSUS",
+          "step": 74
+        },
+        {
+          "alarm": false,
+          "quiet_count": 21,
+          "state": "CONSENSUS",
+          "step": 75
+        },
+        {
+          "alarm": false,
+          "quiet_count": 22,
+          "state": "CONSENSUS",
+          "step": 76
+        },
+        {
+          "alarm": false,
+          "quiet_count": 23,
+          "state": "CONSENSUS",
+          "step": 77
+        },
+        {
+          "alarm": false,
+          "quiet_count": 24,
+          "state": "CONSENSUS",
+          "step": 78
+        },
+        {
+          "alarm": false,
+          "quiet_count": 25,
+          "state": "CONSENSUS",
+          "step": 79
+        },
+        {
+          "alarm": false,
+          "quiet_count": 26,
+          "state": "CONSENSUS",
+          "step": 80
+        },
+        {
+          "alarm": false,
+          "quiet_count": 27,
+          "state": "CONSENSUS",
+          "step": 81
+        },
+        {
+          "alarm": false,
+          "quiet_count": 28,
+          "state": "CONSENSUS",
+          "step": 82
+        },
+        {
+          "alarm": false,
+          "quiet_count": 29,
+          "state": "CONSENSUS",
+          "step": 83
+        },
+        {
+          "alarm": false,
+          "quiet_count": 30,
+          "state": "CONSENSUS",
+          "step": 84
+        },
+        {
+          "alarm": false,
+          "quiet_count": 31,
+          "state": "CONSENSUS",
+          "step": 85
+        },
+        {
+          "alarm": false,
+          "quiet_count": 32,
+          "state": "CONSENSUS",
+          "step": 86
+        },
+        {
+          "alarm": false,
+          "quiet_count": 33,
+          "state": "CONSENSUS",
+          "step": 87
+        },
+        {
+          "alarm": false,
+          "quiet_count": 34,
+          "state": "CONSENSUS",
+          "step": 88
+        },
+        {
+          "alarm": false,
+          "quiet_count": 35,
+          "state": "CONSENSUS",
+          "step": 89
+        },
+        {
+          "alarm": false,
+          "quiet_count": 36,
+          "state": "CONSENSUS",
+          "step": 90
+        },
+        {
+          "alarm": false,
+          "quiet_count": 37,
+          "state": "CONSENSUS",
+          "step": 91
+        },
+        {
+          "alarm": false,
+          "quiet_count": 38,
+          "state": "CONSENSUS",
+          "step": 92
+        },
+        {
+          "alarm": false,
+          "quiet_count": 39,
+          "state": "CONSENSUS",
+          "step": 93
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "VETO",
+          "step": 94
+        },
+        {
+          "alarm": false,
+          "quiet_count": 1,
+          "state": "VETO",
+          "step": 95
+        },
+        {
+          "alarm": false,
+          "quiet_count": 2,
+          "state": "VETO",
+          "step": 96
+        },
+        {
+          "alarm": false,
+          "quiet_count": 3,
+          "state": "VETO",
+          "step": 97
+        },
+        {
+          "alarm": false,
+          "quiet_count": 4,
+          "state": "VETO",
+          "step": 98
+        },
+        {
+          "alarm": false,
+          "quiet_count": 5,
+          "state": "VETO",
+          "step": 99
+        },
+        {
+          "alarm": false,
+          "quiet_count": 6,
+          "state": "VETO",
+          "step": 100
+        },
+        {
+          "alarm": false,
+          "quiet_count": 7,
+          "state": "VETO",
+          "step": 101
+        },
+        {
+          "alarm": false,
+          "quiet_count": 8,
+          "state": "VETO",
+          "step": 102
+        },
+        {
+          "alarm": false,
+          "quiet_count": 9,
+          "state": "VETO",
+          "step": 103
+        },
+        {
+          "alarm": false,
+          "quiet_count": 10,
+          "state": "VETO",
+          "step": 104
+        },
+        {
+          "alarm": false,
+          "quiet_count": 11,
+          "state": "VETO",
+          "step": 105
+        },
+        {
+          "alarm": false,
+          "quiet_count": 12,
+          "state": "VETO",
+          "step": 106
+        },
+        {
+          "alarm": false,
+          "quiet_count": 13,
+          "state": "VETO",
+          "step": 107
+        },
+        {
+          "alarm": false,
+          "quiet_count": 14,
+          "state": "VETO",
+          "step": 108
+        },
+        {
+          "alarm": false,
+          "quiet_count": 15,
+          "state": "VETO",
+          "step": 109
+        },
+        {
+          "alarm": false,
+          "quiet_count": 16,
+          "state": "VETO",
+          "step": 110
+        },
+        {
+          "alarm": false,
+          "quiet_count": 17,
+          "state": "VETO",
+          "step": 111
+        },
+        {
+          "alarm": false,
+          "quiet_count": 18,
+          "state": "VETO",
+          "step": 112
+        },
+        {
+          "alarm": false,
+          "quiet_count": 19,
+          "state": "VETO",
+          "step": 113
+        },
+        {
+          "alarm": false,
+          "quiet_count": 20,
+          "state": "VETO",
+          "step": 114
+        },
+        {
+          "alarm": false,
+          "quiet_count": 21,
+          "state": "VETO",
+          "step": 115
+        },
+        {
+          "alarm": false,
+          "quiet_count": 22,
+          "state": "VETO",
+          "step": 116
+        },
+        {
+          "alarm": false,
+          "quiet_count": 23,
+          "state": "VETO",
+          "step": 117
+        },
+        {
+          "alarm": false,
+          "quiet_count": 24,
+          "state": "VETO",
+          "step": 118
+        },
+        {
+          "alarm": false,
+          "quiet_count": 25,
+          "state": "VETO",
+          "step": 119
+        },
+        {
+          "alarm": false,
+          "quiet_count": 26,
+          "state": "VETO",
+          "step": 120
+        },
+        {
+          "alarm": false,
+          "quiet_count": 27,
+          "state": "VETO",
+          "step": 121
+        },
+        {
+          "alarm": false,
+          "quiet_count": 28,
+          "state": "VETO",
+          "step": 122
+        },
+        {
+          "alarm": false,
+          "quiet_count": 29,
+          "state": "VETO",
+          "step": 123
+        },
+        {
+          "alarm": false,
+          "quiet_count": 30,
+          "state": "VETO",
+          "step": 124
+        },
+        {
+          "alarm": false,
+          "quiet_count": 31,
+          "state": "VETO",
+          "step": 125
+        },
+        {
+          "alarm": false,
+          "quiet_count": 32,
+          "state": "VETO",
+          "step": 126
+        },
+        {
+          "alarm": false,
+          "quiet_count": 33,
+          "state": "VETO",
+          "step": 127
+        },
+        {
+          "alarm": false,
+          "quiet_count": 34,
+          "state": "VETO",
+          "step": 128
+        },
+        {
+          "alarm": false,
+          "quiet_count": 35,
+          "state": "VETO",
+          "step": 129
+        },
+        {
+          "alarm": false,
+          "quiet_count": 36,
+          "state": "VETO",
+          "step": 130
+        },
+        {
+          "alarm": false,
+          "quiet_count": 37,
+          "state": "VETO",
+          "step": 131
+        },
+        {
+          "alarm": false,
+          "quiet_count": 38,
+          "state": "VETO",
+          "step": 132
+        },
+        {
+          "alarm": false,
+          "quiet_count": 39,
+          "state": "VETO",
+          "step": 133
+        },
+        {
+          "alarm": false,
+          "quiet_count": 0,
+          "state": "NORMAL",
+          "step": 134
+        }
+      ]
+    }
+  ],
+  "passed": true
+}
