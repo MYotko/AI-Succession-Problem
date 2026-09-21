@@ -1,0 +1,14 @@
+{
+  "batch_runs_completed": 0,
+  "batch_runs_launched": 0,
+  "executor_self_fixes": [],
+  "gate_model_runs_launched": 0,
+  "reason": "Specification conflict: the committed defense_recovery_design_note.md governs simulation/diagnostics/defense_recovery_run_ (line 7), and Section 9 restricts writes to that governed prefix and os.devnull (line 166). Amendment 1 does not authorize a different output prefix. The dispatch requires all outputs under simulation/diagnostics/defense_recovery_conf_run_, which is outside the note's governed prefix. The dispatch requires a halt on any conflict with the note.",
+  "registered_batch_runs": 180,
+  "stage": "after T0, before T1",
+  "status": "HALTED",
+  "tool_layer_workarounds": [
+    "Rewrote the finalizer-authoring tool call without unescaped backticks after a tooling parse error; no project code ran."
+  ],
+  "utc": "2026-09-21T02:43:34.942910+00:00"
+}

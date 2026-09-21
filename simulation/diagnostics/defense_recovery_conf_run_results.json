@@ -1,0 +1,43 @@
+{
+  "adoption_ruling": null,
+  "attack_validity_check": {
+    "status": "not measured"
+  },
+  "batch_runs_completed": 0,
+  "batch_runs_launched": 0,
+  "halt_reason": "Specification conflict: the committed defense_recovery_design_note.md governs simulation/diagnostics/defense_recovery_run_ (line 7), and Section 9 restricts writes to that governed prefix and os.devnull (line 166). Amendment 1 does not authorize a different output prefix. The dispatch requires all outputs under simulation/diagnostics/defense_recovery_conf_run_, which is outside the note's governed prefix. The dispatch requires a halt on any conflict with the note.",
+  "registered": {
+    "R1": {
+      "status": "not measured",
+      "value": null
+    },
+    "R2": {
+      "status": "not measured",
+      "value": null
+    },
+    "R3": {
+      "status": "not measured",
+      "value": null
+    },
+    "R4": {
+      "status": "not measured",
+      "value": null
+    },
+    "R5": {
+      "status": "not measured",
+      "value": null
+    },
+    "R6": {
+      "status": "not measured",
+      "value": null
+    }
+  },
+  "registered_batch_runs": 180,
+  "selection_conditions": {
+    "status": "not measured"
+  },
+  "sign_fixture": {
+    "status": "not run"
+  },
+  "status": "HALTED"
+}
