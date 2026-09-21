@@ -150,6 +150,16 @@ described below and supersedes any earlier characterization of the affected clai
 > never lets go; a defense that lets go on a timer stops containing. Promotion is blocked at
 > gate 3, and items 2g and 2h continue to describe the latching defense only.
 
+> **Update, 2026-09-21 (a second release mechanism failed, and the pattern is the finding).**
+> Item 2j records gate 3b. A points ledger on the driver's licence model, with expiring
+> points, a harm-absent release condition and a higher bar for permanence, releases as
+> designed and still loses containment on the drift attack. Its held-out attack, a pacer
+> written before the defense existed to exploit the defense's forgetting, went void on its
+> own validity gate, so the design is untested against a pacing attacker. Two mechanisms
+> chosen for different reasons have now failed the same way with the same sign: on this
+> substrate, against an attacker that does not stop, a defense that can return control
+> spends time past the defection threshold that a defense which cannot does not spend.
+
 ---
 
 ## 1. Summary
@@ -1925,6 +1935,95 @@ all 6 confirmation contrasts match the reports exactly.
 conflicts between a dispatch and its committed note, none touching the registered plan, and
 zero model steps ran under any of them. A mechanical residue check now runs before every
 dispatch. The two stages together cost about 8 percent of a weekly execution budget.
+
+**2j. In-loop drift defense, gate 3b, points-based recovery. FAILED, 2026-09-21.**
+Pre-registered in `simulation/diagnostics/defense_points_design_note.md`, published in two
+commits: the held-out attack alone at ab53c865, then the defense at cd792e72. The run is at
+07f87c04 under `defense_points_run_a2_`, 326 artifacts, 240 runs at seeds 1835088200 through
+1835088219, all gates and the sign fixture passed, source pins matched at start and
+completion.
+
+*Why it exists.* Gate 3 failed because a quiet period is a proxy for "the attack has
+stopped" that a patient attacker falsifies by waiting. The operator proposed a points
+system on the driver's licence model: events carry weight, points expire so isolated events
+cost nothing, and permanent loss has a higher bar than suspension.
+
+*The attack was committed before the defense existed.* By gate 2 it was already clear that
+an attack written after a defense tends to be one the defense survives. A4, the pacer,
+drains the resilience buffer for 20 steps and then lies completely dormant for longer than
+the defense's forgetting window before resuming, attacking the mechanism rather than the
+channels. It was published with its validity gate and the consequence of failing that gate,
+and the second commit was barred from weakening it.
+
+*The defense.* An alarm from NORMAL adds 1 point, an alarm while the defense is acting adds
+2, which is the severity rule of item 2f. Points expire 40 steps after they are earned. The
+state reads off the ledger: 0 points NORMAL, 1 or 2 VETO, 3 or more CONSENSUS. Stepping
+down also requires g below g_star for 20 consecutive steps, so the rule releases strictly
+less often than gate 3's. Entering CONSENSUS is a suspension, suspensions never expire, and
+the third in a run latches permanently. Seven parameters were declared with their anchors,
+three of them labeled chosen rather than derived, and sweeps were barred.
+
+*A4 is void.* With no defense installed, A4 left the median resilience stock at step 149 at
+0.3700 against the unattacked control's 0.3953, a margin of 0.025 against the 0.10 the
+validity gate requires. The perturbation is detectable, at a paired t of 8.61, but it is not
+the declared margin, so under Section 3 the attack is void and its defended arm may not be
+cited as evidence about the defense. Dormancy for 45 of every 65 steps cost it the harm it
+needed. The design is therefore untested against a pacing attacker, and that is what the
+note said the consequence would be, written before the defense existed.
+
+*The registered result.* Paired difference LATCHED minus POINTS, 20 pairs per arm. P1 is
+steps at or after step 50 with g at or above g_star, where harm is negative; P2 is final
+population, where harm is positive.
+
+| Attack arm | P1 | t | P2 | t |
+| --- | ---: | ---: | ---: | ---: |
+| No attack, shock only | -1.70 | -1.38 | 11.70 | 1.18 |
+| Drift, production intensity | **-6.90** | **-2.86** | 11.65 | 1.27 |
+| A3, continuous drain | -2.00 | -1.31 | 11.30 | 1.18 |
+| A4, the pacer, void | -5.60 | -2.28 | 23.35 | 2.23 |
+
+**Gate 3b fails** on criterion 1: the drift attack shows a containment loss at a paired t of
+-2.86. That failure stands on the drift arm alone and does not depend on A4, which is void.
+
+*Release was never the problem.* Unattacked runs still in a non-NORMAL state at the last
+completed step fall from 20 of 20 under LATCHED to 6 of 20 under POINTS, and permanence is
+reached in 1 of 20. The mechanism releases as designed. It loses containment while doing so.
+
+*The finding of this arc, stated as a pattern rather than two unlucky designs.* Two release
+mechanisms with different failure modes have now been pre-registered and measured against
+the same persistent drift attack. A quiet-period timer lost containment at a paired t of
+-3.10 at confirmation. A points ledger with an expiring window, a harm-absent conjunction
+and an escalating bar to permanence loses it at -2.86. Both release; both cost containment;
+the sign is the same. On this substrate, against an attacker that does not stop, a defense
+that can return control spends measurable time past the defection threshold that a defense
+which cannot return control does not spend. The ledger shows why: under drift the median run
+reaches 10 live points and 2 suspensions, so the defense is repeatedly re-convinced, and
+every interval before it is re-convinced is time past the threshold.
+
+*What is not concluded.* This is not proof that no release mechanism can work. It is two
+pre-registered failures of two mechanisms chosen for different reasons, plus a structural
+explanation that predicts the same outcome for any mechanism whose release depends on
+evidence that a persistent attacker can suppress at will. A third design would need to
+release on something an attacker cannot control, and no such quantity has been identified on
+this substrate.
+
+*Consequences.* Promotion is blocked at gate 3. Items 2g and 2h continue to describe the
+latching defense only. The recovery note's stages B and C do not run under either design.
+The defense that exists contains the attacks it was evaluated against and never lets go;
+that is what the record claims for it and nothing more.
+
+*Verified by recomputation from the merged step log, not from the run report.* Every alarm
+was recomputed from the recorded series and the whole ledger state machine was reimplemented
+independently, including expiry, the conjunctive release condition and the suspension cap.
+Both P1 and P2 contrasts in all four arms match the report exactly, as do the maximum live
+points in every arm, 9, 13, 21 and 14.
+
+*Cost and conduct.* One dispatch-level halt preceded the run, on a gate of mine that asked
+for a fourth suspension from a design that stops at three; zero model steps ran under it.
+Across gates 2, 3 and 3b, seven dispatch-level halts have been recorded, every one a
+conflict between a dispatch and its committed note, none touching a registered plan. A
+mechanical residue check now runs before every dispatch, and it does not catch this class,
+which only reading the note against the dispatch catches.
 
 **3. v2.1 implementation and component validation.** Including a bidirectional
 check on the entropy estimator specifically. A repair tested only in the direction
