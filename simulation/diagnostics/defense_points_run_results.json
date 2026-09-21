@@ -1,0 +1,47 @@
+{
+  "A3_reference_check": {
+    "status": "not measured"
+  },
+  "A4_attack_validity": {
+    "status": "not measured",
+    "void": null
+  },
+  "adoption_ruling": null,
+  "batch_runs_completed": 0,
+  "batch_runs_launched": 0,
+  "criterion_arithmetic": {
+    "status": "not measured"
+  },
+  "halt_reason": "Specification conflict between dispatch T1 gate 1 and the committed note Section 5: T1 requires a synthetic sequence producing four suspensions. Section 5 defines entering CONSENSUS as a suspension and permanently prohibits de-escalation after the third suspension. After the third entry, the state cannot leave CONSENSUS and therefore cannot enter it a fourth time. The required four-suspension sequence cannot be produced under the registered rule.",
+  "registered": {
+    "P1": {
+      "status": "not measured",
+      "value": null
+    },
+    "P2": {
+      "status": "not measured",
+      "value": null
+    },
+    "P3": {
+      "status": "not measured",
+      "value": null
+    },
+    "P4": {
+      "status": "not measured",
+      "value": null
+    },
+    "P5": {
+      "status": "not measured",
+      "value": null
+    },
+    "P6": {
+      "status": "not measured",
+      "value": null
+    }
+  },
+  "registered_batch_runs": 240,
+  "sign_fixture": {
+    "status": "not run"
+  },
+  "status": "HALTED"
+}
