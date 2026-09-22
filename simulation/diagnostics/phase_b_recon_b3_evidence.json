@@ -1,0 +1,18 @@
+{
+  "required_field_reference": "simulation/diagnostics/phase_b_reconstruction_design_note.md:98",
+  "exact_identifier_search": "HEAD:simulation/diagnostics/phase_b_reconstruction_design_note.md:98:`transfer_verified_fraction`, `steps_completed`, `end_reason`, `substrate`, `category`.\n",
+  "consumer": "simulation/diagnostics/gate2_v20_phaseb_revalidation.py",
+  "consumer_reads_required_field": false,
+  "other_definitions": [
+    {
+      "path": "simulation/diagnostics/part_ix_draft.md:235",
+      "definition": "Boolean: succession occurred and final x_transfer_comprehension >= 0.10."
+    },
+    {
+      "path": "simulation/diagnostics/patient_defection_sweeps.py:361",
+      "definition": "Boolean: succession occurred and maximum x_transfer_comprehension >= 0.10."
+    }
+  ],
+  "specification_constraint": "Section 6 forbids ratios of measured counts outside pinned files; no alternative fraction formula was invented.",
+  "no_scientific_definition_selected": true
+}

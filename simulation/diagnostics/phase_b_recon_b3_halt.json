@@ -1,0 +1,51 @@
+{
+  "status": "halted_before_implementation",
+  "reason": "The required per-run transfer_verified_fraction has no computation defined in Section 5 or in the committed consuming script. The surviving transfer verification references describe a Boolean knowledge_transfer_verified or aggregate fractions, not this per-run field. Choosing a numerator, denominator, threshold, time basis, or no-succession value would require clarification. The dispatch requires a halt where a question would otherwise be necessary.",
+  "halt_basis": "Noninteractive dispatch instruction: where a question would be needed, halt and report.",
+  "t0_passed": true,
+  "smoke_runs_launched": 0,
+  "measured_runs_launched": 0,
+  "executor_created": false,
+  "checks": [
+    [
+      1,
+      "Both substrates and HEADs",
+      "Not run. Read-only HEAD checks match v21 52de0f9055d1c384866d5badcef6b64956eabbb0 and v20 2044f50a8cf71874f259e74fd05ec495169b9ae4."
+    ],
+    [
+      2,
+      "Recorded field types",
+      "Not run. Blocked by undefined per-run transfer_verified_fraction."
+    ],
+    [
+      3,
+      "Live survival, yield, generation fields",
+      "Not run. No model was constructed or stepped."
+    ],
+    [
+      4,
+      "Determinism",
+      "Not run."
+    ],
+    [
+      5,
+      "Kill and resume",
+      "Not run. Preserved 0, restarted 0, never launched 40 smoke runs."
+    ],
+    [
+      6,
+      "Merge count and hash recovery",
+      "Not run. No run rows exist."
+    ],
+    [
+      7,
+      "Two worker settings",
+      "Not run. Active simulation workers: 0."
+    ],
+    [
+      8,
+      "Matched substrate differences",
+      "Not run. No scientific outputs exist."
+    ]
+  ]
+}

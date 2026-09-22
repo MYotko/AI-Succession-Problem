@@ -1,0 +1,159 @@
+{
+  "status": "halted_before_implementation",
+  "halt_reason": "The required per-run transfer_verified_fraction has no computation defined in Section 5 or in the committed consuming script. The surviving transfer verification references describe a Boolean knowledge_transfer_verified or aggregate fractions, not this per-run field. Choosing a numerator, denominator, threshold, time basis, or no-succession value would require clarification. The dispatch requires a halt where a question would otherwise be necessary.",
+  "generated_utc": "2026-09-22T03:32:07.964057+00:00",
+  "head": "52de0f9055d1c384866d5badcef6b64956eabbb0",
+  "machine": "YotkoTest",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "numpy_version_installed_not_imported": "2.4.4",
+  "v20_worktree": {
+    "path": "C:/Users/matty/Dev/phase-b-recon-v20",
+    "head": "2044f50a8cf71874f259e74fd05ec495169b9ae4",
+    "access": "read_only"
+  },
+  "initial_source_readings": [
+    {
+      "path": "simulation/diagnostics/phase_b_reconstruction_design_note.md",
+      "pin": "0485df4ad8573a1e522fbfd4053288264ca8568851a59ea169dee84dbab1d3bd",
+      "committed_sha256_lf": "0485df4ad8573a1e522fbfd4053288264ca8568851a59ea169dee84dbab1d3bd",
+      "working_tree_sha256_lf": "0485df4ad8573a1e522fbfd4053288264ca8568851a59ea169dee84dbab1d3bd",
+      "blob_sha1": "f57bf10a210aaf44dba2dada3ca2526fa0fcc381",
+      "worktree_has_crlf": false,
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "pin": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "committed_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "working_tree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d",
+      "worktree_has_crlf": false,
+      "passed": true
+    },
+    {
+      "path": "simulation/model.py",
+      "pin": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "worktree_has_crlf": true,
+      "passed": true
+    },
+    {
+      "path": "simulation/agents.py",
+      "pin": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "worktree_has_crlf": true,
+      "passed": true
+    },
+    {
+      "path": "simulation/metrics.py",
+      "pin": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "worktree_has_crlf": true,
+      "passed": true
+    }
+  ],
+  "completion_source_readings": [
+    {
+      "path": "simulation/diagnostics/phase_b_reconstruction_design_note.md",
+      "pin": "0485df4ad8573a1e522fbfd4053288264ca8568851a59ea169dee84dbab1d3bd",
+      "committed_sha256_lf": "0485df4ad8573a1e522fbfd4053288264ca8568851a59ea169dee84dbab1d3bd",
+      "working_tree_sha256_lf": "0485df4ad8573a1e522fbfd4053288264ca8568851a59ea169dee84dbab1d3bd",
+      "blob_sha1": "f57bf10a210aaf44dba2dada3ca2526fa0fcc381"
+    },
+    {
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "pin": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "committed_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "working_tree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d"
+    },
+    {
+      "path": "simulation/model.py",
+      "pin": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879"
+    },
+    {
+      "path": "simulation/agents.py",
+      "pin": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51"
+    },
+    {
+      "path": "simulation/metrics.py",
+      "pin": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611"
+    }
+  ],
+  "source_hash_basis": "SHA256 of LF-normalized bytes, with Git blob SHA1 recorded separately",
+  "imported_project_modules": [],
+  "workers_used": 0,
+  "smoke_runs_launched": 0,
+  "measured_runs_launched": 0,
+  "resumed_runs": [],
+  "retry_events": [],
+  "tool_layer_workarounds": [
+    "Used a command-scoped safe.directory setting for the operator-owned v20 worktree after Git rejected its ownership; no Git configuration file was changed."
+  ],
+  "executor_self_fixes": [],
+  "t0_stderr": [
+    {
+      "command": [
+        "git",
+        "-C",
+        "C:/Users/matty/Dev/phase-b-recon-v20",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 128,
+      "stdout": "",
+      "stderr": "fatal: detected dubious ownership in repository at 'C:/Users/matty/Dev/phase-b-recon-v20'\n'C:/Users/matty/Dev/phase-b-recon-v20/.git' is owned by:\n\tYotkoTest/matty (S-1-5-21-2945749749-428036227-2920552123-1001)\nbut the current user is:\n\tYotkoTest/CodexSandboxOffline (S-1-5-21-2945749749-428036227-2920552123-1003)\nTo add an exception for this directory, call:\n\n\tgit config --global --add safe.directory C:/Users/matty/Dev/phase-b-recon-v20\n"
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b3_preflight.json",
+      "sha256_lf": "d61a7a02dcd4a0f872a8aa17f344c4aa8d02eed6f67ca213a93cfe3f5e87f3f5",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b3_halt.json",
+      "sha256_lf": "d70c07cab57f7578136ef1d3f8718731c3952f64880009e39a2b6372ce1eac29",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b3_evidence.json",
+      "sha256_lf": "ae99d1afb24d7b8fd939c454de19c84753a0174640e32ba4b9c7c57261c2f605",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b3_report.md",
+      "sha256_lf": "9cfa895c94536cffa77e350f02a33284ce9b53f0cf093a449e3267ae5eb4958f",
+      "csv_row_count": null
+    }
+  ],
+  "manifest_self_hash": "Not included because a file cannot contain its own content hash.",
+  "per_run_hashes": [],
+  "deleted_per_run_files": 0
+}

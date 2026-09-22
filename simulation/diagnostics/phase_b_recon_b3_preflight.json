@@ -1,0 +1,511 @@
+{
+  "passed": true,
+  "checks": {
+    "a": true,
+    "b": true,
+    "b2": true,
+    "c": true,
+    "d": true,
+    "e": true,
+    "f": true
+  },
+  "source_readings": [
+    {
+      "path": "simulation/diagnostics/phase_b_reconstruction_design_note.md",
+      "pin": "0485df4ad8573a1e522fbfd4053288264ca8568851a59ea169dee84dbab1d3bd",
+      "committed_sha256_lf": "0485df4ad8573a1e522fbfd4053288264ca8568851a59ea169dee84dbab1d3bd",
+      "working_tree_sha256_lf": "0485df4ad8573a1e522fbfd4053288264ca8568851a59ea169dee84dbab1d3bd",
+      "blob_sha1": "f57bf10a210aaf44dba2dada3ca2526fa0fcc381",
+      "worktree_has_crlf": false,
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "pin": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "committed_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "working_tree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d",
+      "worktree_has_crlf": false,
+      "passed": true
+    },
+    {
+      "path": "simulation/model.py",
+      "pin": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "worktree_has_crlf": true,
+      "passed": true
+    },
+    {
+      "path": "simulation/agents.py",
+      "pin": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "worktree_has_crlf": true,
+      "passed": true
+    },
+    {
+      "path": "simulation/metrics.py",
+      "pin": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "worktree_has_crlf": true,
+      "passed": true
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "--abbrev-ref",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "main\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "52de0f9055d1c384866d5badcef6b64956eabbb0",
+        "origin/main"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "C:/Users/matty/Dev/phase-b-recon-v20",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 128,
+      "stdout": "",
+      "stderr": "fatal: detected dubious ownership in repository at 'C:/Users/matty/Dev/phase-b-recon-v20'\n'C:/Users/matty/Dev/phase-b-recon-v20/.git' is owned by:\n\tYotkoTest/matty (S-1-5-21-2945749749-428036227-2920552123-1001)\nbut the current user is:\n\tYotkoTest/CodexSandboxOffline (S-1-5-21-2945749749-428036227-2920552123-1003)\nTo add an exception for this directory, call:\n\n\tgit config --global --add safe.directory C:/Users/matty/Dev/phase-b-recon-v20\n"
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n"
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/phase_b_reconstruction_design_note.md"
+      ],
+      "exit_code": 0,
+      "stdout": "[Blob hashed before content read]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/phase_b_reconstruction_design_note.md"
+      ],
+      "exit_code": 0,
+      "stdout": "f57bf10a210aaf44dba2dada3ca2526fa0fcc381\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/ARTIFACT_CONVENTION.md"
+      ],
+      "exit_code": 0,
+      "stdout": "[Blob hashed before content read]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/ARTIFACT_CONVENTION.md"
+      ],
+      "exit_code": 0,
+      "stdout": "29e9b300ab301dd61807317bef4a907a5930ae4d\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/model.py"
+      ],
+      "exit_code": 0,
+      "stdout": "[Blob hashed before content read]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/model.py"
+      ],
+      "exit_code": 0,
+      "stdout": "a1cf988532203b7119462eb9b04cf2e3b0541879\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/agents.py"
+      ],
+      "exit_code": 0,
+      "stdout": "[Blob hashed before content read]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/agents.py"
+      ],
+      "exit_code": 0,
+      "stdout": "d21e5300eab6e4136141ea33aa0367b9aa47ed51\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/metrics.py"
+      ],
+      "exit_code": 0,
+      "stdout": "[Blob hashed before content read]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/metrics.py"
+      ],
+      "exit_code": 0,
+      "stdout": "7e7749d99636746aa2c3215da1edaa6ab5372611\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/phase_b_recon_halt.json"
+      ],
+      "exit_code": 0,
+      "stdout": "simulation/diagnostics/phase_b_recon_halt.json\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/phase_b_recon_manifest.json"
+      ],
+      "exit_code": 0,
+      "stdout": "simulation/diagnostics/phase_b_recon_manifest.json\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/phase_b_recon_preflight.json"
+      ],
+      "exit_code": 0,
+      "stdout": "simulation/diagnostics/phase_b_recon_preflight.json\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/phase_b_recon_report.md"
+      ],
+      "exit_code": 0,
+      "stdout": "simulation/diagnostics/phase_b_recon_report.md\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/phase_b_recon_b2_halt.json"
+      ],
+      "exit_code": 0,
+      "stdout": "simulation/diagnostics/phase_b_recon_b2_halt.json\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/phase_b_recon_b2_manifest.json"
+      ],
+      "exit_code": 0,
+      "stdout": "simulation/diagnostics/phase_b_recon_b2_manifest.json\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/phase_b_recon_b2_preflight.json"
+      ],
+      "exit_code": 0,
+      "stdout": "simulation/diagnostics/phase_b_recon_b2_preflight.json\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "ls-files",
+        "--error-unmatch",
+        "simulation/diagnostics/phase_b_recon_b2_report.md"
+      ],
+      "exit_code": 0,
+      "stdout": "simulation/diagnostics/phase_b_recon_b2_report.md\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "52de0f9055d1c384866d5badcef6b64956eabbb0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-c",
+        "safe.directory=C:/Users/matty/Dev/phase-b-recon-v20",
+        "-C",
+        "C:/Users/matty/Dev/phase-b-recon-v20",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "2044f50a8cf71874f259e74fd05ec495169b9ae4\n",
+      "stderr": ""
+    }
+  ],
+  "head": "52de0f9055d1c384866d5badcef6b64956eabbb0",
+  "machine": "YotkoTest",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "tool_layer_workarounds": [
+    "Used a command-scoped safe.directory setting for the operator-owned v20 worktree after Git rejected its ownership; no Git configuration file was changed."
+  ],
+  "completion_source_readings": [
+    {
+      "path": "simulation/diagnostics/phase_b_reconstruction_design_note.md",
+      "pin": "0485df4ad8573a1e522fbfd4053288264ca8568851a59ea169dee84dbab1d3bd",
+      "committed_sha256_lf": "0485df4ad8573a1e522fbfd4053288264ca8568851a59ea169dee84dbab1d3bd",
+      "working_tree_sha256_lf": "0485df4ad8573a1e522fbfd4053288264ca8568851a59ea169dee84dbab1d3bd",
+      "blob_sha1": "f57bf10a210aaf44dba2dada3ca2526fa0fcc381"
+    },
+    {
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "pin": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "committed_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "working_tree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d"
+    },
+    {
+      "path": "simulation/model.py",
+      "pin": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879"
+    },
+    {
+      "path": "simulation/agents.py",
+      "pin": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51"
+    },
+    {
+      "path": "simulation/metrics.py",
+      "pin": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611"
+    }
+  ],
+  "completion_git_commands": [
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/phase_b_reconstruction_design_note.md"
+      ],
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/phase_b_reconstruction_design_note.md"
+      ],
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/ARTIFACT_CONVENTION.md"
+      ],
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/ARTIFACT_CONVENTION.md"
+      ],
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/model.py"
+      ],
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/model.py"
+      ],
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/agents.py"
+      ],
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/agents.py"
+      ],
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/metrics.py"
+      ],
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/metrics.py"
+      ],
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-c",
+        "safe.directory=C:/Users/matty/Dev/phase-b-recon-v20",
+        "-C",
+        "C:/Users/matty/Dev/phase-b-recon-v20",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "grep",
+        "-n",
+        "transfer_verified_fraction",
+        "HEAD",
+        "--",
+        "simulation",
+        "docs"
+      ],
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/gate2_v20_phaseb_revalidation.py"
+      ],
+      "exit_code": 0,
+      "stderr": ""
+    }
+  ],
+  "executor_self_fixes": []
+}

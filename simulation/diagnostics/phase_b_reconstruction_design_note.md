@@ -166,3 +166,46 @@ targets, tolerance or branch rules after this note is committed requires a commi
 amendment, pushed before any output is read. Outputs already produced under the unamended
 plan are reported under that plan. Neither the implementing agent nor the operator may
 inspect any measured output and then adjust any element of this note.
+
+## 10. Amendment 1, 2026-09-21: transfer verification was named but not defined
+
+**Status:** committed before any measured run and before any test-mode run. No output exists
+under this note. The build halted at 52de0f90's successor attempt with zero runs launched,
+recorded in `phase_b_recon_b3_report.md`.
+
+**What was missing.** Section 5 lists `transfer_verified_fraction` among the recorded
+fields. It gives no per-run calculation, and neither does the consuming script. The phrase
+was taken from the integration analysis, which reports a transfer-verified fraction at or
+near 1.0 below the succession cliff, without the generating code that defined it. The
+executor halted rather than invent one, which is correct: a field with no definition is not
+a recorded field.
+
+**Amended, adopting a definition already committed in this repository.**
+`simulation/diagnostics/patient_defection_sweeps.py` at lines 361 and 362 defines, for a
+single run:
+
+```python
+'knowledge_transfer_verified': bool(
+    fires and max(float(v) for v in dc.get('x_transfer_comprehension', [0.0])) >= 0.10
+)
+```
+
+This note records the same per-run boolean, under the same name,
+`knowledge_transfer_verified`, computed by that expression: a yield fired in the run, and
+the committed transfer comprehension share reached at least 0.10 at some step.
+`transfer_verified_fraction` is removed from Section 5 and is not recorded.
+
+**Its status is descriptive.** No registered quantity in Section 6 reads this field, and the
+fidelity targets in Section 2 do not include it. It is recorded for provenance and
+comparability with the integration analysis, may be reported per cell as a fraction of runs
+labeled exploratory, and may not be cited as evidence for any target or branch decision.
+
+**Why not simply drop it.** The integration analysis cites the transfer-verified fraction
+when describing multi-generational continuity below the cliff. Recording the same boolean
+under a committed definition keeps that description checkable later, at no cost to any
+registered quantity. Adopting an existing definition is also preferable to authoring a new
+one after the fact, which would be a choice made with the targets already known.
+
+**Nothing else changes.** The grids, seeds, seed counts, construction, the other recorded
+fields, the quantities, the targets, the tolerance and both branch rules stand as
+committed.
