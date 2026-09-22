@@ -1,0 +1,20 @@
+{
+  "status": "HALTED",
+  "reason": "The declared test-mode grid specifies 20 runs per substrate and 40 across both substrates, while the dispatch requires 44. Four additional runs are not specified. The non-interactive instruction requires a halt where clarification is needed.",
+  "t0_passed": true,
+  "enumerated_test_runs_per_category_per_substrate": {
+    "A": 4,
+    "B": 8,
+    "C": 4,
+    "phi": 4
+  },
+  "enumerated_test_runs_per_substrate": 20,
+  "enumerated_test_runs_both_substrates": 40,
+  "stated_test_runs_both_substrates": 44,
+  "test_runs_launched": 0,
+  "measured_runs_launched": 0,
+  "executor_built": false,
+  "v20_worktree_created": false,
+  "tool_layer_workarounds": [],
+  "executor_self_fixes": []
+}

@@ -1,0 +1,75 @@
+{
+  "status": "HALTED",
+  "head": "6d698f21ac929807fdfdd53bb07b8f5370320d5d",
+  "machine": "YotkoTest",
+  "source_readings": [
+    {
+      "path": "simulation/diagnostics/phase_b_reconstruction_design_note.md",
+      "expected_sha256_lf": "0485df4ad8573a1e522fbfd4053288264ca8568851a59ea169dee84dbab1d3bd",
+      "committed_sha256_lf": "0485df4ad8573a1e522fbfd4053288264ca8568851a59ea169dee84dbab1d3bd",
+      "working_tree_sha256_lf": "0485df4ad8573a1e522fbfd4053288264ca8568851a59ea169dee84dbab1d3bd",
+      "blob_sha1": "f57bf10a210aaf44dba2dada3ca2526fa0fcc381",
+      "worktree_has_crlf": false,
+      "passed": true
+    },
+    {
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "expected_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "committed_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "working_tree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d",
+      "worktree_has_crlf": false,
+      "passed": true
+    },
+    {
+      "path": "simulation/model.py",
+      "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+      "worktree_has_crlf": true,
+      "passed": true
+    },
+    {
+      "path": "simulation/agents.py",
+      "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+      "worktree_has_crlf": true,
+      "passed": true
+    },
+    {
+      "path": "simulation/metrics.py",
+      "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+      "worktree_has_crlf": true,
+      "passed": true
+    }
+  ],
+  "test_runs_launched": 0,
+  "measured_runs_launched": 0,
+  "halt_reason": "The declared test-mode grid specifies 20 runs per substrate and 40 across both substrates, while the dispatch requires 44. Four additional runs are not specified. The non-interactive instruction requires a halt where clarification is needed.",
+  "outputs": [
+    {
+      "path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_recon_preflight.json",
+      "sha256_lf": "6cde74b0d8766f013f413e3a963aab925dd07f71ca6702cbb223d01aa45f3c46",
+      "basis": "LF-normalized bytes"
+    },
+    {
+      "path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_recon_halt.json",
+      "sha256_lf": "2e0ccba45f8bf802b31c6feacf2a58a0a3537f10b84c975c514fd8959f244a45",
+      "basis": "LF-normalized bytes"
+    },
+    {
+      "path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_recon_report.md",
+      "sha256_lf": "33af2ce58377b9638d52dcd0ec6902b33d00a1edf51f64ae187ade9ca509347b",
+      "basis": "LF-normalized bytes"
+    }
+  ],
+  "manifest_self_hash": "Omitted to avoid a recursive hash",
+  "tool_layer_workarounds": [],
+  "executor_self_fixes": []
+}
