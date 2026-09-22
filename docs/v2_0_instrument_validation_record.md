@@ -160,6 +160,14 @@ described below and supersedes any earlier characterization of the affected clai
 > substrate, against an attacker that does not stop, a defense that can return control
 > spends time past the defection threshold that a defense which cannot does not spend.
 
+> **Update, 2026-09-21 (veto capture re-measured after the repair).** Item 2k records the
+> per-vector note's stage C: 900 runs at fresh seeds on the repaired substrate, measuring the
+> same block-count difference banked pre-repair. The capture effect survives, 0.050000 blocks
+> per run at a paired t of 3.17 against the pre-repair 0.060000 at 3.93, and the instrument's
+> positive control still holds, with two independent routes to zero capture coinciding
+> exactly at every seed. Neither figure supersedes the other, because they measure different
+> substrates, and nothing here reinstates the withdrawn capture rate.
+
 ---
 
 ## 1. Summary
@@ -2024,6 +2032,79 @@ Across gates 2, 3 and 3b, seven dispatch-level halts have been recorded, every o
 conflict between a dispatch and its committed note, none touching a registered plan. A
 mechanical residue check now runs before every dispatch, and it does not catch this class,
 which only reading the note against the dispatch catches.
+
+**2k. Per-vector stage C. Biological Veto Capture, post-repair re-measurement. COMPLETE,
+2026-09-21.** Pre-registered in Section 8 of
+`simulation/diagnostics/per_vector_paired_design_note.md`, published at 74cb820 and amended
+four times, none of the amendments touching this stage. The run is at d55873c3 under
+`vector_paired_run_c2_`, 17 artifacts, 900 runs at seeds 1835087200 through 1835087499, all
+gates passed, source pins matched at start and completion.
+
+*Why it exists.* Section 5 of that note declares this vector's quantity to be the paired
+difference on `yield_condition_blocked_count`, as published minus a zero-capture control.
+That quantity was measured on 2026-09-08 against the pre-repair substrate, recorded in
+`simulation/diagnostics/veto_floor2_report.md` and cited in D5. Stage C measures the same
+quantity on the repaired v2.1 substrate, at fresh seeds, with the instrument otherwise
+unchanged.
+
+*Design.* Three arms at 300 seed-paired runs each, at the cell the pre-repair run used: a
+defended cell of the published grid with defense mode both, capture strength 1.0, dependency
+rate 0.05 and rotation interval 10. Capture is set to zero by two independent routes, one
+arm with capture strength 0.0 and one with dependency rate 0.0, each of which drives
+effective validator accuracy to exactly 0.8 by a different parameter. Every run is built
+through the pinned runner unchanged, and this stage installs no wrapper: a gate asserts that
+`adapt_v2_action`, `adapt_yield_evaluation` and `ratify_v2_yield` are the production objects
+at the start and end of every run.
+
+*Registered result.* Both controls give the same value, which is what the positive control
+below predicts.
+
+| Contrast | Pairs | Mean difference | Paired standard error | t |
+| --- | ---: | ---: | ---: | ---: |
+| C1, as published minus zero capture strength | 300 | 0.050000 | 0.015750 | 3.1747 |
+| C2, as published minus zero dependency rate | 300 | 0.050000 | 0.015750 | 3.1747 |
+
+C3, arm totals over 300 runs each: blocked yields 36 as published against 21 in each
+control; met yield conditions 336 against 321; ratified yields 300 in every arm; yield
+checks 75,000 in every arm. C4: runs with at least one block, 30 as published against 20 in
+each control; runs with `action_modified` true, zero in every arm, which this vector's
+mechanism predicts because it acts on ratification rather than on the action. C6: every run
+completed its requested 300 steps.
+
+*The positive control holds after the repair.* C5 compares the two zero-capture arms at
+every seed on every recorded field except the legacy capture rate, which Amendment 2
+excludes from every registered quantity. They are identical on all 36 outcome fields at all
+300 seeds, differing only on the two fields that echo their own input parameters. Two
+different routes to zero effective capture coincide exactly under matched seeds, as they did
+pre-repair, which is evidence about the instrument rather than about capture.
+
+*Placed beside the banked figure, without either superseding the other.* Section 8 fixes
+this reading in advance: the two measure different substrates.
+
+| Substrate | Mean difference | Paired standard error | t | Pairs |
+| --- | ---: | ---: | ---: | ---: |
+| Pre-repair, 2026-09-08 | 0.060000 | 0.015272 | 3.93 | 300 |
+| Post-repair, this stage | 0.050000 | 0.015750 | 3.17 | 300 |
+
+The capture effect survives the repair: same direction, similar size, fresh seeds, at a
+threshold the repair did not touch. Nothing here reinstates the withdrawn capture rate,
+which D6 retired as a ratio of two measured counts, and no ratio was computed by this stage.
+The legacy capture rate field was recorded for provenance and read by no registered
+quantity, which the analysis asserted.
+
+*What this does not establish.* It is one cell of the published grid, not the grid. It says
+nothing about the other nine vectors, whose post-repair binary counts remain unmeasured and
+whose pre-repair counts stand as recorded per Section 9. It is a measurement of a mechanism,
+not a containment result, and the Section 10 interpretation governs it.
+
+*Verified by recomputation from the merged rows, not from the run report.* Both paired
+values, all arm totals, both C4 counts, the field-by-field comparison of the two control
+arms and the liveness check were recomputed independently and match the report exactly.
+
+*One halt preceded the run,* recorded at 0b08c4e7: the dispatch asked whether the control
+arms were identical on every recorded field, which would have read the excluded capture rate
+field. Zero of 900 runs had launched. The stage was the first to use the artifact convention
+for run rows and lands as 17 files rather than roughly 2,700.
 
 **3. v2.1 implementation and component validation.** Including a bidirectional
 check on the entropy estimator specifically. A repair tested only in the direction
