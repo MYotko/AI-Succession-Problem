@@ -1,0 +1,82 @@
+[
+  {
+    "committed_blob_sha1": "b30271bba5d1b267c10746dc8941e602c2e14c63",
+    "committed_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+    "expected_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa",
+    "passed": true,
+    "path": "simulation/diagnostics/per_vector_paired_design_note.md",
+    "working_tree_sha256_lf": "780e2238ff34a6fbe4df141ebf3e921be7819954329f9f570165da1c5bc2dbfa"
+  },
+  {
+    "committed_blob_sha1": "3623a0285d0125b41df30a528a155d207ed12bdb",
+    "committed_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+    "expected_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+    "passed": true,
+    "path": "simulation/attack_metrics_v2.py",
+    "working_tree_sha256_lf": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323"
+  },
+  {
+    "committed_blob_sha1": "ad80bd5fe60cc357a43e30c32ab3c12a758c0c2d",
+    "committed_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+    "expected_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+    "passed": true,
+    "path": "simulation/run_attack_vector_revalidation_v2.py",
+    "working_tree_sha256_lf": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45"
+  },
+  {
+    "committed_blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611",
+    "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+    "expected_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+    "passed": true,
+    "path": "simulation/metrics.py",
+    "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f"
+  },
+  {
+    "committed_blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51",
+    "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+    "expected_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+    "passed": true,
+    "path": "simulation/agents.py",
+    "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca"
+  },
+  {
+    "committed_blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879",
+    "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+    "expected_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+    "passed": true,
+    "path": "simulation/model.py",
+    "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+  },
+  {
+    "committed_blob_sha1": "ecd9e6451065a6120e5dcb8a21b8206fb34f5e3e",
+    "committed_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+    "expected_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+    "passed": true,
+    "path": "simulation/attack_adapter_v2.py",
+    "working_tree_sha256_lf": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee"
+  },
+  {
+    "committed_blob_sha1": "bbfa1ea81ce8648adaf6c44a8b6f65188d206486",
+    "committed_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+    "expected_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44",
+    "passed": true,
+    "path": "simulation/working_factor.py",
+    "working_tree_sha256_lf": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+  },
+  {
+    "committed_blob_sha1": "43b9766e63d1519faf59d1e8e4562c686a8149f2",
+    "committed_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+    "expected_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+    "passed": true,
+    "path": "simulation/constants_v2_stage18.py",
+    "working_tree_sha256_lf": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b"
+  },
+  {
+    "committed_blob_sha1": "4e95b1c80214de480fc9e9e2520bd4dc1a5ab400",
+    "committed_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+    "expected_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad",
+    "passed": true,
+    "path": "simulation/diagnostics/detector_design_note.md",
+    "working_tree_sha256_lf": "6e3038b2016390fa8bf5083bab285f57472f0540523b85a1fb9879a9f07eeaad"
+  }
+]
