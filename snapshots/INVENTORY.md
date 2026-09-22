@@ -1,7 +1,7 @@
 # Project Knowledge Snapshots Inventory
 
-Last regeneration: 2026-09-17T11:45:09Z
-Git commit at regeneration: 139fe25
+Last regeneration: 2026-09-22T02:21:22Z
+Git commit at regeneration: f136aa6d
 Branch: main
 
 ## Quick reference for Claude sessions
@@ -23,51 +23,51 @@ If you need specific content, ask the operator to upload the relevant category s
 
 ### docs
 - File: snapshots/docs_snapshot.md
-- Last generated: 2026-09-17T11:45:04Z
+- Last generated: 2026-09-22T02:21:20Z
 - Files included: 13
-- Snapshot size: 497847 bytes
+- Snapshot size: 546999 bytes
 
 ### framework_papers
 - File: snapshots/framework_papers_snapshot.md
-- Last generated: 2026-09-17T11:45:05Z
+- Last generated: 2026-09-22T02:21:20Z
 - Files included: 3
-- Snapshot size: 475013 bytes
+- Snapshot size: 475014 bytes
 
 ### paper_drafts
 - File: snapshots/paper_drafts_snapshot.md
-- Last generated: 2026-09-17T11:45:05Z
+- Last generated: 2026-09-22T02:21:20Z
 - Files included: 8
-- Snapshot size: 342914 bytes
+- Snapshot size: 342915 bytes
 
 ### essays
 - File: snapshots/essays_snapshot.md
-- Last generated: 2026-09-17T11:45:05Z
+- Last generated: 2026-09-22T02:21:20Z
 - Files included: 15
-- Snapshot size: 382529 bytes
+- Snapshot size: 382530 bytes
 
 ### diagnostics
 - File: snapshots/diagnostics_snapshot.md
-- Last generated: 2026-09-17T11:45:06Z
+- Last generated: 2026-09-22T02:21:20Z
 - Files included: unknown
-- Snapshot size: 878260 bytes
+- Snapshot size: 990421 bytes
 
 ### constitutional
 - File: snapshots/constitutional_snapshot.md
-- Last generated: 2026-09-17T11:45:06Z
+- Last generated: 2026-09-22T02:21:20Z
 - Files included: 7
-- Snapshot size: 52528 bytes
+- Snapshot size: 52529 bytes
 
 ### code
 - File: snapshots/code_snapshot.md
-- Last generated: 2026-09-17T11:45:07Z
+- Last generated: 2026-09-22T02:21:20Z
 - Files included: unknown
-- Snapshot size: 1471806 bytes
+- Snapshot size: 1491281 bytes
 
 ### data_results
 - File: snapshots/data_results_snapshot.md
-- Last generated: 2026-09-17T11:45:07Z
+- Last generated: 2026-09-22T02:21:21Z
 - Files included: unknown
-- Snapshot size: 311737 bytes
+- Snapshot size: 313954 bytes
 
 ## When to regenerate each category
 

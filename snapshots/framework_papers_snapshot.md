@@ -1,8 +1,8 @@
 # Framework Papers Snapshot
 
-Generated: 2026-09-17T11:45:05Z
+Generated: 2026-09-22T02:21:20Z
 Repository: C:\Users\matty\Dev\AI-Succession-Problem
-Commit: 139fe25
+Commit: f136aa6d
 Branch: main
 Category: framework_papers
 

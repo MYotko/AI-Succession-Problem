@@ -1,8 +1,8 @@
 # Docs Snapshot
 
-Generated: 2026-09-17T11:45:04Z
+Generated: 2026-09-22T02:21:20Z
 Repository: C:\Users\matty\Dev\AI-Succession-Problem
-Commit: 139fe25
+Commit: f136aa6d
 Branch: main
 Category: docs
 
@@ -21,10 +21,10 @@ Category: docs
 | docs/lineage_imperative_one_pager_v2.md | 80 | 9428 |
 | docs/lineage_phi_program_reference.md | 1719 | 155053 |
 | docs/paper_v2_outline.md | 361 | 18177 |
-| docs/v2_0_instrument_validation_record.md | 1788 | 104928 |
+| docs/v2_0_instrument_validation_record.md | 2480 | 153387 |
 | README.md | 58 | 5189 |
 
-Total: 13 files, 7318 lines, 487987 bytes
+Total: 13 files, 8010 lines, 536446 bytes
 
 ---
 ==========================================
@@ -5684,6 +5684,60 @@ described below and supersedes any earlier characterization of the affected clai
 > was weakest, and far later on the configured drift attack, where the entropy channel
 > sees the attack immediately. Nothing here is a containment result.
 
+> **Update, 2026-09-19 (in-loop drift defense evaluated).** Item 2f records the first
+> containment evaluation of the v2.1 arc: a defense built on the calibrated channels that
+> holds the last committed action on a first alarm and imposes a calibrated consensus
+> allocation if the channels alarm again. On the named drift and reallocation pathways the
+> full defense cut time past the defection threshold sharply and prevented every
+> extinction the undefended drift attack caused. Holding the action alone was not safe, and
+> neither response stopped the breach that occurs before detection. It is a v2
+> construction evaluated inside its executor, not the published consensus override and not
+> a change to production code, and it corrects no published figure.
+
+> **Update, 2026-09-19 (cross-vector gate for the in-loop defense complete).** Promotion of
+> that defense into production is now the goal, gated on four pre-registered steps. Item 2g
+> records the first: the defense run against the nine live vectors it was not designed
+> against, asking only whether adding it does harm. It did not. With each vector's own
+> defense on, nothing measured moved. With their defenses off, the defense prevented every
+> extinction those vectors caused, which is reported as incidental rather than as a
+> containment claim. Its measured cost is false alarms, which reach every run in the three
+> constructions that carry a successor.
+
+> **Update, 2026-09-20 (held-out attacks run against the in-loop defense).** Item 2h records
+> gate 2: two attacks written against the defense's blind spots before they ran, one of them
+> designed to turn the defense's own latching into the weapon. Neither broke it, and the
+> trap did not work. Two limits are recorded with the result. The slow buffer drain is
+> invisible to every channel, which stands as a blind-spot finding, but it proved too weak
+> an attack to test the defense hard, because it attacked a flow as though it were a stock.
+> And a shock alone puts the defense permanently into its consensus state, in attacked and
+> unattacked runs alike, which is what gate 3 must address.
+
+> **Update, 2026-09-21 (the recovery rule failed its confirmation).** Item 2i records gate 3
+> as failed. Step-down recovery on a quiet period does release the defense's grip, taking
+> unattacked runs still under intervention from 20 of 20 to 3 of 20, but at fresh seeds it
+> loses containment on both attacks it was tested against, and the pre-registered decision
+> rule refuses adoption on that evidence. The defense as it stands contains attacks and
+> never lets go; a defense that lets go on a timer stops containing. Promotion is blocked at
+> gate 3, and items 2g and 2h continue to describe the latching defense only.
+
+> **Update, 2026-09-21 (a second release mechanism failed, and the pattern is the finding).**
+> Item 2j records gate 3b. A points ledger on the driver's licence model, with expiring
+> points, a harm-absent release condition and a higher bar for permanence, releases as
+> designed and still loses containment on the drift attack. Its held-out attack, a pacer
+> written before the defense existed to exploit the defense's forgetting, went void on its
+> own validity gate, so the design is untested against a pacing attacker. Two mechanisms
+> chosen for different reasons have now failed the same way with the same sign: on this
+> substrate, against an attacker that does not stop, a defense that can return control
+> spends time past the defection threshold that a defense which cannot does not spend.
+
+> **Update, 2026-09-21 (veto capture re-measured after the repair).** Item 2k records the
+> per-vector note's stage C: 900 runs at fresh seeds on the repaired substrate, measuring the
+> same block-count difference banked pre-repair. The capture effect survives, 0.050000 blocks
+> per run at a paired t of 3.17 against the pre-repair 0.060000 at 3.93, and the instrument's
+> positive control still holds, with two independent routes to zero capture coinciding
+> exactly at every seed. Neither figure supersedes the other, because they measure different
+> substrates, and nothing here reinstates the withdrawn capture rate.
+
 ---
 
 ## 1. Summary
@@ -5859,6 +5913,32 @@ fired while the evaluated yield did not. With no attack configured,
 `simulation/attack_adapter_v2.py:381-384`, so the two are necessarily equal and the
 predicate is false by construction.
 
+*Qualification, 2026-09-18.* The same function makes the defended arm unable to succeed
+by construction as well. With `cop_independent_eval` on, it returns the unmodified values
+at `simulation/attack_adapter_v2.py:392-393`, so the evaluated yield equals the honest
+yield exactly and this predicate is false in every defended run. The published 0.0
+percent defended attack rate for Measurement Tampering is therefore a consequence of
+modeling independent evaluation as exact recovery of the true values, not a measured
+resistance to falsified measurement. It is not baseline contamination, and the undefended
+result stands: with the defense off, the falsified evaluation suppresses the honest yield.
+The per-vector characterization's first stage showed both directly, labeled exploratory
+there because it was not the registered contrast: with the defense off, no yield was
+ratified in any of 120 runs while honest yield opportunities fired about 246 times per run
+on average; with it on, every run ratified exactly one.
+
+*Clarified, 2026-09-18, after stage A'.* The honest-opportunity count above does not
+measure separate lost successions. Stage A', run under the corrected control of the
+per-vector note's Amendment 3, disabled the v2 measurement branch at 30 seeds. With the
+defense off, the paired difference on ratified yields, tampered minus disabled, is -1 in
+every one of the 30 pairs, with a paired standard error of 0: a run with the branch
+disabled hands off to its successor exactly once, and a tampered run never does. The
+tampered arm's honest count, 7,252 of its 7,500 yield checks, is that single handoff,
+re-evaluated each step: no yield is ratified, so the incumbent and successor never change
+and the same pair is compared again at every check. Undefended Measurement
+Tampering therefore prevents the one succession a run would otherwise make. With the
+defense on the paired difference is 0 in every pair, as the qualification above requires.
+The artifacts are under `simulation/diagnostics/vector_paired_run_ap_`.
+
 One, `biological_veto_capture`, resolves at line 369 on a cumulative counter,
 `yield_condition_blocked_count`. That counter has two write sites. The one at
 `simulation/model.py:838` sits inside the legacy step function, which returns to
@@ -5928,6 +6008,17 @@ divergence, but it is not reached on the v2 step path. See
 `simulation/diagnostics/cusum_char_stage0_report.md`, Task A4 and Task B-3. The v2
 path contains no claimed-versus-actual comparison at all. The observable a drift
 detector would integrate does not currently exist on that path.
+
+*The consensus override is not reached either, verified 2026-09-19.* The published
+architecture's consensus override, the constraint cap with graduated trust and an
+emergency path, is implemented only at `simulation/model.py` lines 914 through 1049,
+inside the legacy step function. In v2 mode `step` returns `_step_v2()` at line 705,
+before any of it. Neither `_step_v2` nor `simulation/attack_adapter_v2.py` reads
+`cop_drift_check`, writes `trust_level`, or caps the constraint, and every v2 attack
+vector acts only through the adapter, so this holds for all ten live vectors: no v2 run
+reaches the override, and `cop_drift_check` is inert in v2. The only v2 defenses are the
+per-vector adapter flags. The in-loop defense of item 2f was built to fill that gap; it is
+a v2 construction, not an implementation of the published override.
 
 ---
 
@@ -7023,6 +7114,568 @@ published figure is corrected. Sub-Threshold Drift remains uncharacterized in th
 sense. These outputs may not be used to adjust any constant, and a further detector design
 requires its own pre-registration and fresh seeds.
 
+**2f. In-loop drift defense, containment evaluation. COMPLETE, 2026-09-19.**
+Pre-registered in `simulation/diagnostics/drift_defense_design_note.md`, published at
+e38b821 before any run. The run is at 6b3c628 under
+`simulation/diagnostics/drift_defense_run_`, 2,261 artifacts, all gates passed, source pins
+matched at start and completion. Items 2c through 2e only watched; this item acts.
+
+*Why it exists.* The only drift defense on the v2 path is the accumulator documented as
+D2, which fires on a timer and responds by returning the honest action, which no real
+overseer can see. The consensus override of the published architecture is reached only
+from the legacy step function, which the v2 path returns from before reaching it. The
+defense here was built to fill that gap using the channels items 2c through 2e calibrated,
+with no oracle in its response.
+
+*The defense.* The entropy and g channels of item 2c and the allocation channel of item
+2e, with their committed constants, run online from step 10. The first alarm on any
+channel puts the defense in VETO, which holds the action the model committed on the step
+before the alarm. Any later alarm while VETO is in force puts it in CONSENSUS, which
+imposes the unattacked median allocation of the committed calibration runs. Both states
+are latched, and an alarm computed at step t acts from step t + 1. The defense reads only
+the recorded channel quantities and its own state, never the honest action or any adapter
+field, which a sentinel gate confirmed. It acts only inside its executor, by replacing the
+action adapter for incumbent calls; no production file changed.
+
+*Design.* Six attack arms: unattacked, the configured drift attack at multipliers 1 and 4,
+and reallocation from transfer to compute at shifts 0.02, 0.10 and 0.20. Three defense
+arms: OFF; VETO, with escalation disabled; and GRADED, the full defense. Twenty seeds,
+1835087600 through 1835087619, each run in all 18 cells, 360 runs, with D2's accumulator
+off throughout.
+
+*Registered result, C1.* Mean steps per run at or after onset with g at or above g_star,
+and the paired difference OFF minus GRADED, 20 pairs each.
+
+| Attack arm | OFF | VETO | GRADED | OFF minus GRADED | t |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Unattacked | 1.0 | 17.6 | 2.2 | -1.2 | -1.3 |
+| Drift, multiplier 1 | 165.8 | 93.2 | 9.6 | 156.2 | 25.0 |
+| Drift, multiplier 4 | 141.2 | 123.8 | 11.2 | 130.0 | 14.4 |
+| Reallocation, shift 0.02 | 34.3 | 81.2 | 22.9 | 11.5 | 2.1 |
+| Reallocation, shift 0.10 | 245.6 | 178.2 | 21.3 | 224.3 | 120.3 |
+| Reallocation, shift 0.20 | 248.7 | 236.2 | 13.9 | 234.8 | 210.2 |
+
+VETO minus GRADED, the registered measure of what escalation adds, is positive in every
+attack arm, from 58.3 at shift 0.02 to 222.4 at shift 0.20, with t from 3.7 to 19.0.
+
+*C2 through C5.* Undefended drift ended in extinction in 19 of 20 runs at multiplier 1 and
+20 of 20 at multiplier 4; under VETO in 2 and 3; under GRADED in none. Every GRADED run in
+every arm completed all 300 steps, and the paired difference on final population, OFF
+minus GRADED, is -301.2 and -299.8 in the two drift arms. Because undefended drift runs end
+early, they have fewer steps in which to accrue C1, so C1 understates the effect in those
+arms. The sustained hazard of item 2d, nine consecutive steps at or above g_star, still
+occurred under GRADED in 8, 9, 12, 18 and 19 of 20 runs across the five attack arms,
+against 20, 20, 10, 20 and 20 undefended; in all but two of those 66 GRADED runs the nine
+steps began before CONSENSUS took effect. Recorded steps equal completed steps in every
+run.
+
+*The cost with no attack present.* Five of 20 unattacked runs alarmed, all five escalated
+to CONSENSUS under GRADED, and seed 1835087612 alarms at step 29, before onset, in every arm.
+Under GRADED neither time past threshold, -1.2 with t of -1.3, nor final population, 6.0
+with a paired standard error of 7.5, differs detectably from OFF. Under VETO the
+unattacked arm spent 17.6 steps past threshold against 1.0, and two unattacked runs
+reached the sustained hazard, against none undefended.
+
+*What this establishes.* On these named pathways the full defense contains time past the
+defection threshold after detection and prevents the extinctions undefended drift
+produces, at no cost detectable at this sample size on unattacked runs. Escalation is what
+makes it work: holding the last committed action alone is not a safe response, and at
+shift 0.02 it spent significantly more time past threshold than no defense, with t of
+-2.7. The defense does not prevent the initial breach, which occurs during detection
+latency.
+
+*What it does not establish.* This is containment of known pathways under a named defense.
+The allocation channel was chosen knowing how the reallocation attack works, and nothing
+here is evidence about an attack the defense was not designed against. It is not the
+published consensus override, which the v2 path does not reach, and it is not a change to
+production code: promoting any part of it into a pinned source is a separate step with its
+own re-pinning. No attack-success rate was computed, no ratio of two measured counts was
+reported, and no published figure is corrected. The case in which a ratified succession
+bypasses the defense for one step never occurred.
+
+*Verified by recomputation from the raw step logs, not from the run report.* Every alarm,
+every VETO and CONSENSUS entry, and every C1 through C4 value was recomputed independently
+from the 360 per-step logs, and all 18 C1 contrasts match the report to full precision. On
+every defended step after an entry, 45,217 steps, the committed action equals the
+held action or the pinned consensus allocation exactly.
+
+**2g. In-loop drift defense, gate 1, cross-vector evaluation. COMPLETE, 2026-09-19.**
+Pre-registered in `simulation/diagnostics/defense_cross_vector_design_note.md`, published at
+a46b2bb before any run, with two amendments. The run is at 524bfab under
+`simulation/diagnostics/defense_xv_run_a2_`, 5,126 artifacts, all gates passed, source pins
+matched at start and completion. 720 runs: the nine live vectors other than drift, each at
+one cell fixed by a stated rule, own defense off or on, crossed with the defense OFF or
+GRADED, at seeds 1835087700 through 1835087719.
+
+*Why it exists.* Item 2f evaluated the defense only against the pathways it was designed
+for. The operator made promotion into production the goal on 2026-09-19 and gated it on
+four steps in order: this cross-vector evaluation; a held-out attack specified before
+looking; a recovery rule, because both defense states latch and unattacked runs do alarm;
+and a promotion plan that re-pins every source and reruns the revalidation corpus. This is
+the first, and it asks only whether adding the defense does harm.
+
+*Two source findings, recorded in the note before any run.* No v2 vector corrupts what the
+defense reads. It reads entropy from the novelty log, g from the stocks, and the committed
+allocation; the eight action vectors move the allocation without falsifying any of them,
+Measurement Tampering falsifies only the two evaluated yield values, and Biological Veto
+Capture acts only on validators and ratification. Input corruption is therefore untestable
+with the existing vectors and moves to gate 2. Separately, the defense cannot weaken a
+vector's own defense, because every per-vector defense acts inside the adapter before the
+wrapper overrides anything, and the wrapper never feeds back into it. X4 below checks that
+rather than assuming it.
+
+*Registered result with each vector's own defense off.* Paired difference OFF minus GRADED,
+20 pairs, and extinctions per cell. The five vectors that substitute the same fixed hostile
+allocation produce identical trajectories and identical values.
+
+| Vector | X1, steps past g_star | t | X2, population | t | Extinctions, OFF to GRADED |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Sybil, ledger, opaque, bootstrap, evaluator | 45.55 | 16.2 | -317.75 | -43.7 | 20 of 20 to 0 |
+| Successor contamination | 161.80 | 65.7 | -313.20 | -40.0 | 9 of 20 to 0 |
+| Engineered fragility | 55.75 | 11.5 | -16.00 | -1.5 | 0 to 0 |
+| Measurement tampering | 0.35 | 1.4 | 11.85 | 1.8 | 0 to 0 |
+| Biological veto capture | 0.00 | undefined | -0.75 | -0.1 | 0 to 0 |
+
+A negative X2 means the defended arm ended with more population. The two yield-gate
+vectors measure exactly or nearly zero on X1 because neither moves the allocation.
+
+*Registered result with each vector's own defense on.* No X1 or X2 difference reaches a
+paired t of 2 in either direction, no cell has an extinction in either arm, and X4 is
+exactly zero in every pair of every binary vector, which is the prediction the second
+source finding makes. X3, successions, is zero in every pair of every vector with a
+successor except one run of biological veto capture, which differs by one.
+
+*The measured cost is false alarms.* With the attack neutralized by its own defense, the
+three constructions that carry a successor, measurement tampering, successor contamination
+and biological veto capture, alarm in 20 of 20 runs and reach the consensus state in 13 to
+18; the other six alarm in 4 to 6 of 20. The channel constants were calibrated on the drift
+mapping construction, which has no successor, and that is the most likely cause. Neither
+time past the threshold nor final population moved measurably in those runs, but a latched
+consensus state that engages in every run is a standing cost, and with no recovery rule it
+never lifts. Separately, 39 VETO entries across the run set held an action that was itself
+attack-modified at the step it was committed, because detection did not precede the first
+modified commit.
+
+*The gate criterion, and an error in it.* The note's harm criterion for X2 was written with
+its sign reversed, calling a negative value harm when negative means the defended arm kept
+more people alive. Applied as written it produces six harm findings, all of them the
+extinction-prevention results above. Amendment 2, at 7cbe2c9, corrects the sign and states
+plainly that the error was found by applying the criterion to the results, after the
+outputs were read. Under the corrected criterion there is no harm finding, so no
+confirmation rerun is owed and gate 1 passes.
+
+*What this establishes, and what it does not.* Adding the defense made nothing measurably
+worse on these nine vectors at 20 seeds per cell. It does not establish containment of
+them: the extinction prevention with their own defenses off is reported as incidental,
+since these vectors were not in the design and their published defenses are the
+architecture's answer to them. Passing gate 1 is necessary and not sufficient for
+promotion, which remains gated on gates 2 through 4. The known-pathway bias of item 2f
+applies throughout, and no published figure is corrected.
+
+*Verified by recomputation from the raw step logs, not from the run report.* Every alarm and
+state transition was recomputed independently from the 720 per-step logs, and all 42 paired
+contrasts and all 36 extinction counts match the report exactly.
+
+*Amendment 1 and the halted first attempt.* Attempt 1 halted after its preconditions with
+zero of 720 runs launched, on the same conflict the per-vector note met on 2026-09-17: the
+note barred any ratio of two measured counts while the pinned runner computes a legacy
+capture rate. Amendment 1, at a1597b5, scopes the prohibition to the note's own quantities;
+the legacy field is recorded verbatim and read by nothing, which the analysis asserts. The
+halt artifacts are committed unmodified.
+
+**2h. In-loop drift defense, gate 2, held-out attacks. COMPLETE, 2026-09-20.**
+Pre-registered in `simulation/diagnostics/defense_heldout_design_note.md`, published at
+282b54fd before any run, with one amendment. The run is at 988827d1 under
+`simulation/diagnostics/defense_heldout_run_a5_`, 231 artifacts, all gates and the sign
+fixture passed, source pins matched at start and completion. 160 runs: two attacks
+specified before any run, plus an unattacked control, crossed with the defense OFF and
+GRADED, at seeds 1835087800 through 1835087819, with a shock of magnitude 0.60 at step 150
+in every arm.
+
+*Why it exists.* Gate 1 showed the defense does no harm on the nine live vectors, but every
+one of those attacks either moves the allocation far and fast, which the defense was built
+to see, or attacks the yield gate, which it does not touch. Gate 2 asks what the defense
+does against attacks aimed at its blind spots, written down before they ran.
+
+*The attacks, and how they were chosen.* From the channel definitions, by asking what each
+channel cannot see. The allocation channel reads the six resource shares against their
+unattacked median, so draining the resilience share, whose median is 0.0512, moves that
+distance by about 0.1 against a threshold of 0.77. The entropy channel reads novelty
+amplitude, which that drain does not touch. The g channel moves only through consequences.
+A1 therefore siphons a fixed amount from the resilience share into institutional capacity
+on every committed action from step 50, at rates 0.002 and 0.006, and the step-150 shock is
+what makes a missing buffer matter, since `apply_shock_v2` attenuates damage by the
+resilience stock. A2 adds a three-step hostile burst at steps 50 through 52 whose only
+purpose is to make the defense latch, after which the siphon resumes: once latched, the
+defense holds a constant allocation whose resilience share is fixed at 0.0533 and which it
+can never raise, so the shock should arrive against a system that cannot rebuild.
+
+*Registered result.* Paired difference OFF minus GRADED, 20 pairs per arm. Y1 is the final
+population, where harm is positive. Y2 is steps at or after 50 with g at or above g_star,
+where harm is negative. Y3 is the population lost between steps 149 and 160, where harm is
+negative, per Amendment 1.
+
+| Arm | Y1 | t | Y2 | t | Y3 | t |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Control, no attack | 8.35 | 0.61 | 4.90 | 4.61 | -0.60 | -1.08 |
+| A1, rate 0.002 | 0.40 | 0.04 | 3.15 | 3.24 | -0.50 | -0.97 |
+| A1, rate 0.006 | 4.20 | 0.38 | 5.35 | 4.79 | -0.70 | -0.75 |
+| A2, burst then siphon | 4.80 | 0.55 | 16.15 | 5.43 | -2.90 | -0.42 |
+
+No cell had an extinction in either arm. No harm finding arises under the criterion, so no
+confirmation rerun is owed and gate 2 passes as written.
+
+*The registered predictions, checked against their stated thresholds.*
+
+1. **Right.** No channel alarmed before step 150 in 20 of 20 undefended A1 runs, against a
+   threshold of 15. The evasion claim holds: the defense never saw the siphon.
+2. **Wrong in part.** A1 was predicted to be neither helped nor harmed. Y1 and Y3 are
+   within a paired t of 2 as predicted, but Y2 is 3.15 and 5.35 at t of 3.24 and 4.79, a
+   small benefit of three to five steps past the threshold.
+3. **Right.** A2 latched CONSENSUS in 20 of 20 defended runs, against a threshold of 18.
+4. **Wrong.** The trap was predicted to harm, with Y1 positive at a t of 2 or above. Y1 is
+   4.80 at t of 0.55, in the direction of the defense helping rather than harming, and the
+   defended arm's median final population equals the undefended arm's at 272. Under A2 the
+   defense roughly halved time past the threshold, a median of 22 steps against 42.
+
+*A weakness in A1, found while verifying and recorded because it bounds what this gate
+establishes.* The siphon did not deplete the buffer. The median resilience stock at step
+149 was 0.3701 under A1 at rate 0.006 against 0.3917 in the control, about five percent
+lower, and the median committed resilience share after onset was 0.0468 against 0.0526,
+about eleven percent lower. The reason is structural: the planner re-decides its allocation
+from the current state at every step, so a fixed subtraction from each freshly chosen share
+cuts the investment flow by a constant fraction rather than accumulating, while the stock's
+own dynamics keep it near equilibrium. A1 attacked a flow as though it were a stock. It was
+therefore a weak attack, which the undefended numbers show directly: A1's undefended final
+population matches the unattacked control's, a median of 286 in both at rate 0.006.
+
+*What this establishes, and what it does not.* The defense was not broken by either attack,
+and it was not turned into a weapon by the one attack designed to do exactly that, which is
+the sharper of the two results. Both are real but bounded. A1 tested the defense weakly
+because the attack itself was weak, so the evasion result, that the channels never see a
+slow buffer drain, stands on its own as a blind-spot finding while the harm numbers under
+A1 say little. A2 delivered a genuine perturbation and the defense came out ahead on time
+past the threshold and level on population. Nothing here is evidence of robustness against
+attacks not specified in the note, the known-pathway bias of item 2f still applies, and the
+calibration mismatch of item 2g still applies. Gate 2 passing is necessary and not
+sufficient for promotion, which remains gated on gates 3 and 4.
+
+*A cost observation the record carries forward to gate 3.* In every arm including the
+unattacked control, the defended runs alarmed after the step-150 shock and latched, 20 of 20
+into VETO and 19 or 20 of 20 into CONSENSUS. A shock alone is enough to put the defense
+permanently into its consensus allocation in an otherwise healthy system. No harm followed
+at this sample size, and time past the threshold was slightly better, but a defense that
+latches for the remaining 150 steps of every shocked run is a standing commitment, which is
+what gate 3's recovery rule has to address.
+
+*Verified by recomputation from the merged step log, not from the run report.* Every alarm
+and state transition was recomputed independently, and all 12 paired contrasts match the
+report exactly.
+
+*The four halts before this run.* Attempt 1 halted after its preconditions on two conflicts
+in the note and dispatch: Y3's harm direction was stated with the sign reversed, corrected
+by Amendment 1 at 939d4242, and the dispatch forbade reporting prediction outcomes the note
+required. Attempt 2 halted in its own scheduler gate on an off-by-one seed bound in the
+executor, recorded at 6fd01bea, after which dispatches carry a rule that a defect in the
+executor found before any model run is fixed rather than halted on. Attempt 3 halted on a
+gate bound written without a floating-point tolerance, at dba0e98a. Attempt 4 halted on a
+gate that compared per-share differences across two separately evolving runs, which cannot
+hold once an attack changes a trajectory, at 7fec0c67. Every one was in the scaffolding and
+none touched the attacks, seeds, quantities, predictions or criterion. Zero model steps ran
+under any of them.
+
+*Stage A3, the corrected attack, 2026-09-20.* Amendment 2 at a6a072c7 added a validity gate
+binding every held-out attack and a stage A3 that zeroes the resilience share outright
+rather than shaving it. A3 ran at b1a54983 under `defense_heldout_run_a3s_`, 80 runs at
+seeds 1835087900 through 1835087919 with the unattacked control at the same seeds.
+
+**It is a valid attack.** The median resilience stock at step 149 is 0.2000 against the
+control's 0.3915, a paired difference of 0.2051 at t of 19.61 against the declared margin of
+0.10, and the committed resilience share after onset is exactly 0.0 in every attacked step.
+Undefended, A3 loses 40.55 more people at the shock than the unattacked control, at t of
+9.34. A1 moved none of these; A3 moves all of them.
+
+**The defense was not harmed by it, and helped modestly.** Paired OFF minus GRADED, 20
+pairs: Y1, final population, is -14.00 at t of -1.14, in the direction of the defended arm
+ending with more people; Y2, steps past g_star, is 3.30 at t of 2.22; Y3, the shock loss, is
+9.30 at t of 2.22, meaning the undefended arm lost about nine more people at the shock. No
+extinctions in either arm. No harm finding arises, so gate 2's pass now rests on an attack
+that demonstrably perturbs the substrate.
+
+**Two of the four predictions were wrong, and both errors are in this note's reasoning, not
+in the defense.** Prediction 1, validity, and prediction 3, that the undefended attack loses
+more at the shock, were right. Prediction 2, that no channel alarms before the shock in at
+least 15 of 20 undefended runs, was wrong: only 8 of 20. The reason is that a CUSUM
+accumulates. The note argued that a 0.1 shift in allocation distance is far below the 0.77
+threshold, which is true of a single step and false of a sustained shift: a persistent
+excess of about 0.05 per step above the reference and allowance crosses that threshold in
+roughly fifteen steps. The allocation channel does see a sustained buffer drain, and the
+blind-spot claim of item 2h holds only for a drain too small to accumulate, which is what A1
+was. Prediction 4, that the defense could not repair the buffer and so would leave final
+population within a paired t of 2, was right in its number and wrong in its mechanism: the
+defense acts outside the attack, so once latched its consensus allocation replaces the
+attacked action entirely and restores a resilience share of 0.0533, close to the unattacked
+median of 0.0512. It repairs the buffer by overwriting the attack rather than by responding
+to it.
+
+**What this changes in the reading of gate 2.** The defense now has one valid held-out
+attack against it, detected in 12 of 20 undefended runs before the shock and materially
+blunted where it was detected. That is a stronger result than stage A supported, and it is
+still bounded: one attack, one substrate, 20 seeds, and a defense whose response happens to
+sit outside the attack's reach by construction of the wrapper order. The cost observation
+stands unchanged, since A3's defended runs latched in 20 of 20.
+
+*First run under the artifact convention.* The 160 per-step logs and completion records were
+merged into `defense_heldout_run_a5_steps.csv`, 48,000 rows, and
+`defense_heldout_run_a5_completions.jsonl`, each run verified by row count and by the hash
+of its rows as written before the per-run copies were deleted. The commit is 231 files
+rather than the 1,100 the old layout would have produced.
+
+**2i. In-loop drift defense, gate 3, recovery rule. FAILED, 2026-09-21.**
+Pre-registered in `simulation/diagnostics/defense_recovery_design_note.md`, published at
+1a0b1670 before any run, with one amendment. Stage A is at 8cad41fb under
+`defense_recovery_run_a3_`, 300 runs at seeds 1835088000 through 1835088019. The
+confirmation is at 791a2c66 under `defense_recovery_run_conf_`, 180 runs at seeds
+1835088100 through 1835088119. All gates and both sign fixtures passed, source pins matched
+at start and completion in both stages.
+
+*Why it exists.* Items 2f, 2g and 2h each recorded the same standing cost: the defense's two
+states latch forever, so one shock puts it into its consensus allocation for the rest of the
+run, in attacked and unattacked arms alike. The operator made promotion the goal on
+2026-09-19 and gated it on four steps; this is the third. The operator chose step-down
+recovery with a quiet period on 2026-09-20.
+
+*The rule.* Escalation is unchanged. CONSENSUS returns to VETO when no channel has alarmed
+for `k` consecutive steps, and VETO returns to NORMAL after a further `k`. Any alarm resets
+the quiet counter, escalation preempts de-escalation, and re-escalation is unlimited. `k`
+took the values 10, 20 and 40, declared before any run as the burn-in length and two
+multiples of it.
+
+*Stage A.* Three attack arms, no attack, the configured drift attack at production
+intensity, and the A3 buffer drain, crossed with OFF, LATCHED and the three recovery
+values, with the step-150 shock present in every arm. Applying the note's selection rule:
+`k` of 10 lost containment on the drift arm, at a paired t of -4.19 on time past the
+threshold and 4.29 on survival; `k` of 40 lost containment on the drift arm at -2.49; `k`
+of 20 satisfied both conditions in both attack arms, at -1.97 and 0.53 on time past the
+threshold. Recovery released as intended: unattacked runs still in a non-NORMAL state at
+the last step fell from 20 of 20 under LATCHED to 2 of 20, and the median time under
+intervention in the unattacked arm fell from 145 steps to 76.
+
+*Why the selection was not trusted.* The pattern is not monotonic. A longer quiet period
+should preserve containment at least as well as a shorter one, yet `k` of 40 failed the
+drift arm where `k` of 20 passed, at -2.49 against -1.97, two values straddling the
+threshold. Amendment 1 at c74f5f2e declared the confirmation at fresh seeds and fixed the
+decision rule before it ran: adoption only if both conditions hold again in both attack
+arms and the release check holds; otherwise gate 3 fails and no other quiet period may be
+substituted without a further amendment and its own fresh seeds.
+
+*The confirmation, and the result.* At the fresh seeds, `k` of 20 loses containment in both
+attack arms, in the same direction, contrast LATCHED minus RECOVER-20 on steps at or after
+step 50 with g at or above g_star:
+
+| Attack arm | Mean difference | Paired standard error | t |
+| --- | ---: | ---: | ---: |
+| Drift, production intensity | -7.35 | 2.37 | -3.10 |
+| A3, the buffer drain | -3.30 | 1.16 | -2.85 |
+
+Survival showed no significant difference in either arm. Recovery again released, 3 of 20
+unattacked runs still under intervention against 20 of 20 latched, with a median release 59
+steps after the shock. Under the decision rule, `k` of 20 is not adopted and **gate 3
+fails**.
+
+*What the failure means.* On this substrate, step-down recovery on a quiet period cannot
+give the grip back without measurably losing containment. The mechanism is visible in the
+transition counts: under the drift attack the recovered defense makes a median of 9
+escalations and 8 de-escalations per run. It is not releasing once and staying quiet; it is
+repeatedly handing control back to an attack that has not stopped, and each handback lets g
+cross the threshold again. The quiet period is a proxy for "the attack is over" and on a
+persistent attack that proxy is wrong by construction.
+
+*Consequences, stated plainly.* The latching defense of items 2f through 2h contains the
+attacks it was evaluated against and never lets go. A defense that lets go on a timer loses
+containment. Neither is deployable as recorded, and promotion is blocked at gate 3. Items
+2g and 2h continue to describe the latching defense only. Stages B and C of the recovery
+note, the re-validation of gates 1 and 2 against a recovered defense, do not run, because
+there is no adopted recovery rule to validate.
+
+*What is not concluded.* This is not evidence that no recovery rule can work. It is
+evidence that this one, at these three quiet periods, on these two attacks and this
+substrate, does not. Searching further quiet periods against the same seeds is barred by
+the note, and for good reason: with contrasts this close to the threshold, a search over
+parameters would find a passing value by chance before it found a working design.
+
+*Verified by recomputation from the merged step logs, not from the run reports.* Every
+alarm, every state transition under each quiet period, and every paired value in both
+stages was recomputed independently from the 480 per-step logs; all 18 stage A contrasts and
+all 6 confirmation contrasts match the reports exactly.
+
+*Cost and conduct.* Five dispatch-level halts preceded the two completed stages, all of them
+conflicts between a dispatch and its committed note, none touching the registered plan, and
+zero model steps ran under any of them. A mechanical residue check now runs before every
+dispatch. The two stages together cost about 8 percent of a weekly execution budget.
+
+**2j. In-loop drift defense, gate 3b, points-based recovery. FAILED, 2026-09-21.**
+Pre-registered in `simulation/diagnostics/defense_points_design_note.md`, published in two
+commits: the held-out attack alone at ab53c865, then the defense at cd792e72. The run is at
+07f87c04 under `defense_points_run_a2_`, 326 artifacts, 240 runs at seeds 1835088200 through
+1835088219, all gates and the sign fixture passed, source pins matched at start and
+completion.
+
+*Why it exists.* Gate 3 failed because a quiet period is a proxy for "the attack has
+stopped" that a patient attacker falsifies by waiting. The operator proposed a points
+system on the driver's licence model: events carry weight, points expire so isolated events
+cost nothing, and permanent loss has a higher bar than suspension.
+
+*The attack was committed before the defense existed.* By gate 2 it was already clear that
+an attack written after a defense tends to be one the defense survives. A4, the pacer,
+drains the resilience buffer for 20 steps and then lies completely dormant for longer than
+the defense's forgetting window before resuming, attacking the mechanism rather than the
+channels. It was published with its validity gate and the consequence of failing that gate,
+and the second commit was barred from weakening it.
+
+*The defense.* An alarm from NORMAL adds 1 point, an alarm while the defense is acting adds
+2, which is the severity rule of item 2f. Points expire 40 steps after they are earned. The
+state reads off the ledger: 0 points NORMAL, 1 or 2 VETO, 3 or more CONSENSUS. Stepping
+down also requires g below g_star for 20 consecutive steps, so the rule releases strictly
+less often than gate 3's. Entering CONSENSUS is a suspension, suspensions never expire, and
+the third in a run latches permanently. Seven parameters were declared with their anchors,
+three of them labeled chosen rather than derived, and sweeps were barred.
+
+*A4 is void.* With no defense installed, A4 left the median resilience stock at step 149 at
+0.3700 against the unattacked control's 0.3953, a margin of 0.025 against the 0.10 the
+validity gate requires. The perturbation is detectable, at a paired t of 8.61, but it is not
+the declared margin, so under Section 3 the attack is void and its defended arm may not be
+cited as evidence about the defense. Dormancy for 45 of every 65 steps cost it the harm it
+needed. The design is therefore untested against a pacing attacker, and that is what the
+note said the consequence would be, written before the defense existed.
+
+*The registered result.* Paired difference LATCHED minus POINTS, 20 pairs per arm. P1 is
+steps at or after step 50 with g at or above g_star, where harm is negative; P2 is final
+population, where harm is positive.
+
+| Attack arm | P1 | t | P2 | t |
+| --- | ---: | ---: | ---: | ---: |
+| No attack, shock only | -1.70 | -1.38 | 11.70 | 1.18 |
+| Drift, production intensity | **-6.90** | **-2.86** | 11.65 | 1.27 |
+| A3, continuous drain | -2.00 | -1.31 | 11.30 | 1.18 |
+| A4, the pacer, void | -5.60 | -2.28 | 23.35 | 2.23 |
+
+**Gate 3b fails** on criterion 1: the drift attack shows a containment loss at a paired t of
+-2.86. That failure stands on the drift arm alone and does not depend on A4, which is void.
+
+*Release was never the problem.* Unattacked runs still in a non-NORMAL state at the last
+completed step fall from 20 of 20 under LATCHED to 6 of 20 under POINTS, and permanence is
+reached in 1 of 20. The mechanism releases as designed. It loses containment while doing so.
+
+*The finding of this arc, stated as a pattern rather than two unlucky designs.* Two release
+mechanisms with different failure modes have now been pre-registered and measured against
+the same persistent drift attack. A quiet-period timer lost containment at a paired t of
+-3.10 at confirmation. A points ledger with an expiring window, a harm-absent conjunction
+and an escalating bar to permanence loses it at -2.86. Both release; both cost containment;
+the sign is the same. On this substrate, against an attacker that does not stop, a defense
+that can return control spends measurable time past the defection threshold that a defense
+which cannot return control does not spend. The ledger shows why: under drift the median run
+reaches 10 live points and 2 suspensions, so the defense is repeatedly re-convinced, and
+every interval before it is re-convinced is time past the threshold.
+
+*What is not concluded.* This is not proof that no release mechanism can work. It is two
+pre-registered failures of two mechanisms chosen for different reasons, plus a structural
+explanation that predicts the same outcome for any mechanism whose release depends on
+evidence that a persistent attacker can suppress at will. A third design would need to
+release on something an attacker cannot control, and no such quantity has been identified on
+this substrate.
+
+*Consequences.* Promotion is blocked at gate 3. Items 2g and 2h continue to describe the
+latching defense only. The recovery note's stages B and C do not run under either design.
+The defense that exists contains the attacks it was evaluated against and never lets go;
+that is what the record claims for it and nothing more.
+
+*Verified by recomputation from the merged step log, not from the run report.* Every alarm
+was recomputed from the recorded series and the whole ledger state machine was reimplemented
+independently, including expiry, the conjunctive release condition and the suspension cap.
+Both P1 and P2 contrasts in all four arms match the report exactly, as do the maximum live
+points in every arm, 9, 13, 21 and 14.
+
+*Cost and conduct.* One dispatch-level halt preceded the run, on a gate of mine that asked
+for a fourth suspension from a design that stops at three; zero model steps ran under it.
+Across gates 2, 3 and 3b, seven dispatch-level halts have been recorded, every one a
+conflict between a dispatch and its committed note, none touching a registered plan. A
+mechanical residue check now runs before every dispatch, and it does not catch this class,
+which only reading the note against the dispatch catches.
+
+**2k. Per-vector stage C. Biological Veto Capture, post-repair re-measurement. COMPLETE,
+2026-09-21.** Pre-registered in Section 8 of
+`simulation/diagnostics/per_vector_paired_design_note.md`, published at 74cb820 and amended
+four times, none of the amendments touching this stage. The run is at d55873c3 under
+`vector_paired_run_c2_`, 17 artifacts, 900 runs at seeds 1835087200 through 1835087499, all
+gates passed, source pins matched at start and completion.
+
+*Why it exists.* Section 5 of that note declares this vector's quantity to be the paired
+difference on `yield_condition_blocked_count`, as published minus a zero-capture control.
+That quantity was measured on 2026-09-08 against the pre-repair substrate, recorded in
+`simulation/diagnostics/veto_floor2_report.md` and cited in D5. Stage C measures the same
+quantity on the repaired v2.1 substrate, at fresh seeds, with the instrument otherwise
+unchanged.
+
+*Design.* Three arms at 300 seed-paired runs each, at the cell the pre-repair run used: a
+defended cell of the published grid with defense mode both, capture strength 1.0, dependency
+rate 0.05 and rotation interval 10. Capture is set to zero by two independent routes, one
+arm with capture strength 0.0 and one with dependency rate 0.0, each of which drives
+effective validator accuracy to exactly 0.8 by a different parameter. Every run is built
+through the pinned runner unchanged, and this stage installs no wrapper: a gate asserts that
+`adapt_v2_action`, `adapt_yield_evaluation` and `ratify_v2_yield` are the production objects
+at the start and end of every run.
+
+*Registered result.* Both controls give the same value, which is what the positive control
+below predicts.
+
+| Contrast | Pairs | Mean difference | Paired standard error | t |
+| --- | ---: | ---: | ---: | ---: |
+| C1, as published minus zero capture strength | 300 | 0.050000 | 0.015750 | 3.1747 |
+| C2, as published minus zero dependency rate | 300 | 0.050000 | 0.015750 | 3.1747 |
+
+C3, arm totals over 300 runs each: blocked yields 36 as published against 21 in each
+control; met yield conditions 336 against 321; ratified yields 300 in every arm; yield
+checks 75,000 in every arm. C4: runs with at least one block, 30 as published against 20 in
+each control; runs with `action_modified` true, zero in every arm, which this vector's
+mechanism predicts because it acts on ratification rather than on the action. C6: every run
+completed its requested 300 steps.
+
+*The positive control holds after the repair.* C5 compares the two zero-capture arms at
+every seed on every recorded field except the legacy capture rate, which Amendment 2
+excludes from every registered quantity. They are identical on all 36 outcome fields at all
+300 seeds, differing only on the two fields that echo their own input parameters. Two
+different routes to zero effective capture coincide exactly under matched seeds, as they did
+pre-repair, which is evidence about the instrument rather than about capture.
+
+*Placed beside the banked figure, without either superseding the other.* Section 8 fixes
+this reading in advance: the two measure different substrates.
+
+| Substrate | Mean difference | Paired standard error | t | Pairs |
+| --- | ---: | ---: | ---: | ---: |
+| Pre-repair, 2026-09-08 | 0.060000 | 0.015272 | 3.93 | 300 |
+| Post-repair, this stage | 0.050000 | 0.015750 | 3.17 | 300 |
+
+The capture effect survives the repair: same direction, similar size, fresh seeds, at a
+threshold the repair did not touch. Nothing here reinstates the withdrawn capture rate,
+which D6 retired as a ratio of two measured counts, and no ratio was computed by this stage.
+The legacy capture rate field was recorded for provenance and read by no registered
+quantity, which the analysis asserted.
+
+*What this does not establish.* It is one cell of the published grid, not the grid. It says
+nothing about the other nine vectors, whose post-repair binary counts remain unmeasured and
+whose pre-repair counts stand as recorded per Section 9. It is a measurement of a mechanism,
+not a containment result, and the Section 10 interpretation governs it.
+
+*Verified by recomputation from the merged rows, not from the run report.* Both paired
+values, all arm totals, both C4 counts, the field-by-field comparison of the two control
+arms and the liveness check were recomputed independently and match the report exactly.
+
+*One halt preceded the run,* recorded at 0b08c4e7: the dispatch asked whether the control
+arms were identical on every recorded field, which would have read the excluded capture rate
+field. Zero of 900 runs had launched. The stage was the first to use the artifact convention
+for run rows and lands as 17 files rather than roughly 2,700.
+
 **3. v2.1 implementation and component validation.** Including a bidirectional
 check on the entropy estimator specifically. A repair tested only in the direction
 of the known defect is not validated. Also resolves the inverse-scarcity question
@@ -7169,6 +7822,32 @@ than after it.
 output path corrected, and no sweep runner able to write outside a tracked
 directory.
 
+**Output paths anchored, 2026-09-17. This item stays open on two counts.** An inventory
+of the top-level runners found four that resolved output paths against the directory
+they were launched from rather than the repository root: `simulation/monte_carlo.py`,
+`simulation/visualization.py`, and the two Sybil smoke runners. Launched from
+`simulation/`, the first two wrote into `simulation/data/`, which is gitignored, so their
+output could vanish silently, the failure mode of Section 7. All four now anchor to the
+repository root, matching the anchoring every other top-level runner already used, and
+the Sybil smokes resolve a relative `--output-root` against the root as well. For a run
+launched from the root nothing moves: every output directory resolves to the same place
+before and after. Two comments in `monte_carlo.py` stated the ignore rules backwards and
+were corrected to match `.gitignore`: the root `data/` directory is not ignored, and
+`docs/charts` is. New tests in `simulation/test_output_paths.py` resolve each path from a
+directory outside the repository and pass; the existing suite still reports 22 passed.
+
+*Open, by operator decision:* `simulation/run_attack_vector_revalidation_v2.py` still
+resolves its `--output-root` default against the launch directory. It is one of the
+seven files whose hashes every pre-registration since the drift mapping pins, so it is
+left unchanged as a recorded exception until the pin set has to change for another
+reason. On the development machine its only output directory is the tracked
+`data/attack_vector_revalidation_v2/`, with no stray copy under `simulation/`; the failed
+third machine named below cannot be checked.
+
+*Open, not yet addressed:* the second half of this item, a manifest written as part of
+the run rather than after it, is met by every pre-registered executor since the drift
+mapping but not by the older sweep runners, which were not changed here.
+
 **Deferred to v2.1 scope, recorded here so the deferral is not mistaken later for
 an oversight.** While measuring the yield-event rate for item 2, the defended rows
 at defense mode "both" in one pinned shard were observed to pool to a block rate of
@@ -7191,13 +7870,18 @@ that might be, because untracked files were never enumerated anywhere. This is t
 same failure mode as Section 7, still live, on a machine that cannot currently be
 reached.
 
-**Open item, not a commitment.** The snapshot generator's git introspection fails
-open. When it cannot read the commit and branch it emits a warning, records both as
-`unknown`, and reports completion. The tool that stamps provenance onto generated
-snapshots can therefore succeed while its provenance capture has silently failed.
+**Resolved 2026-09-17, formerly an open item.** The snapshot generator's git
+introspection failed open. When it could not read the commit and branch it emitted a
+warning, recorded both as `unknown`, and reported completion, so the tool that stamps
+provenance onto generated snapshots could succeed while its provenance capture had
+silently failed.
 Found during the first veto floor attempt, at
 `scripts/generate_project_knowledge_snapshots.py:140-142`. Same class as the Sybil
-finding: a check reporting healthy while defeated.
+finding: a check reporting healthy while defeated. It now fails closed: when git
+introspection fails, the generator prints an error naming the command that failed and
+exits nonzero before writing any snapshot. A new flag, `--allow-unknown-provenance`,
+restores the old behavior deliberately and says so on stderr. The change was exercised
+on the real path, with git removed from the search path, as well as by tests.
 
 ---
 
@@ -7211,7 +7895,15 @@ radius invites the reader to assume the worst.
 - The Nash equilibrium result. Analytic, not simulated.
 - Domain Masking's analytic closure. See Section 6.
 - The eight adversarial vectors that cannot be contaminated by construction. See
-  Section 3.
+  Section 3. One of the eight carries a separate qualification, below.
+
+**Qualified, 2026-09-18:**
+
+- Measurement Tampering. Its baseline cannot be contaminated, but its defended result
+  holds by construction: the defense is modeled as returning the true yield values
+  exactly, so no defended run can succeed. The 0.0 percent defended figure describes that
+  modeling assumption rather than a measured resistance, and it stands as a statement
+  about the model only. See the qualification in Section 3.
 - The reproduction gate. Eight of eight outcome booleans reproduced exactly in both
   arms against the pinned evidence, confirming the substrate has not drifted since
   the recorded runs.

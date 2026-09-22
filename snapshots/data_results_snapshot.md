@@ -1,8 +1,8 @@
 # Data Results Snapshot
 
-Generated: 2026-09-17T11:45:07Z
+Generated: 2026-09-22T02:21:21Z
 Repository: C:\Users\matty\Dev\AI-Succession-Problem
-Commit: 139fe25
+Commit: f136aa6d
 Branch: main
 Category: data_results
 
@@ -18,6 +18,10 @@ NOTE: This snapshot contains a manifest of data files, not raw file content.
 | even-terminal-2026-05-21T22-51-35-557Z.log | 804 | 2026-07-20T14:47:42Z |
 | even-terminal-2026-05-21T22-56-14-073Z.log | 2229379 | 2026-07-20T14:47:42Z |
 | even-terminal-2026-05-22T00-10-57-906Z.log | 0 | 2026-07-20T14:47:42Z |
+| simulation/diagnostics/defense_recovery_conf_run_halt.json | 900 | 2026-09-21T02:43:34Z |
+| simulation/diagnostics/defense_recovery_conf_run_manifest.json | 18580 | 2026-09-21T02:43:35Z |
+| simulation/diagnostics/defense_recovery_conf_run_preflight.json | 61393 | 2026-09-21T02:43:33Z |
+| simulation/diagnostics/defense_recovery_conf_run_results.json | 1252 | 2026-09-21T02:43:34Z |
 | simulation/diagnostics/drift_char_calibration_candidates.csv | 1475 | 2026-09-08T21:44:01Z |
 | simulation/diagnostics/drift_char_control.json | 76 | 2026-09-08T21:34:24Z |
 | simulation/diagnostics/drift_char_manifest.json | 21708 | 2026-09-08T21:44:01Z |
@@ -170,7 +174,7 @@ NOTE: This snapshot contains a manifest of data files, not raw file content.
 | simulation/diagnostics/sybil_defense_scaling_characterization_analysis.json | 4780968 | 2026-08-21T19:34:08Z |
 | simulation/diagnostics/termination_decontamination_diagnostic.csv | 1606 | 2026-08-21T19:34:08Z |
 
-Total: 157 files
+Total: 161 files
 
 ---
 ==========================================
@@ -284,6 +288,42 @@ FILE: even-terminal-2026-05-22T00-10-57-906Z.log
 - Size: 0 bytes
 - Modified: 2026-07-20T14:47:42Z
 - Total lines: 0
+
+==========================================
+FILE: simulation/diagnostics/defense_recovery_conf_run_halt.json
+==========================================
+
+- Size: 900 bytes
+- Modified: 2026-09-21T02:43:34Z
+- Structure: object with 10 top-level keys
+- Keys: batch_runs_completed, batch_runs_launched, executor_self_fixes, gate_model_runs_launched, reason, registered_batch_runs, stage, status, tool_layer_workarounds, utc
+
+==========================================
+FILE: simulation/diagnostics/defense_recovery_conf_run_manifest.json
+==========================================
+
+- Size: 18580 bytes
+- Modified: 2026-09-21T02:43:35Z
+- Structure: object with 22 top-level keys
+- Keys: T0_stderr_warnings, committed_blob_sha1, copied_executors, effective_thread_limits, executor_self_fixes, halt_reason, head, machine, manifest_self_hash, merge, numpy_version, numpy_version_basis, outputs, per_module_sha256, python_version, resumed_seeds, retry_events, source_readings, status, tool_layer_workarounds ...
+
+==========================================
+FILE: simulation/diagnostics/defense_recovery_conf_run_preflight.json
+==========================================
+
+- Size: 61393 bytes
+- Modified: 2026-09-21T02:43:33Z
+- Structure: object with 8 top-level keys
+- Keys: status, commands, source_readings, T0_stderr_warnings, machine, utc, head, prior_artifact_count
+
+==========================================
+FILE: simulation/diagnostics/defense_recovery_conf_run_results.json
+==========================================
+
+- Size: 1252 bytes
+- Modified: 2026-09-21T02:43:34Z
+- Structure: object with 10 top-level keys
+- Keys: adoption_ruling, attack_validity_check, batch_runs_completed, batch_runs_launched, halt_reason, registered, registered_batch_runs, selection_conditions, sign_fixture, status
 
 ==========================================
 FILE: simulation/diagnostics/drift_char_calibration_candidates.csv
