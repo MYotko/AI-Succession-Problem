@@ -1,0 +1,59 @@
+{
+  "status": "HALTED",
+  "reason": "Pinned v20 worktree creation failed three times: Git could not create leading directories of '.git/worktrees/phase-b-recon-v20': Permission denied.",
+  "t0_passed": true,
+  "test_runs_launched": 0,
+  "measured_runs_launched": 0,
+  "executor_built": false,
+  "v20_worktree_created": false,
+  "intended_v20_worktree": "C:/Users/matty/Dev/phase-b-recon-v20",
+  "v20_worktree_head": null,
+  "tool_layer_failures": [
+    {
+      "attempt": 1,
+      "command": [
+        "git",
+        "worktree",
+        "add",
+        "--detach",
+        "C:/Users/matty/Dev/phase-b-recon-v20",
+        "2044f50a8cf71874f259e74fd05ec495169b9ae4"
+      ],
+      "exit_code": 1,
+      "error": "Pinned v20 worktree creation failed three times: Git could not create leading directories of '.git/worktrees/phase-b-recon-v20': Permission denied."
+    },
+    {
+      "attempt": 2,
+      "command": [
+        "git",
+        "-C",
+        "C:/Users/matty/Dev/AI-Succession-Problem",
+        "worktree",
+        "add",
+        "--detach",
+        "C:/Users/matty/Dev/phase-b-recon-v20",
+        "2044f50a8cf71874f259e74fd05ec495169b9ae4"
+      ],
+      "exit_code": 1,
+      "error": "Pinned v20 worktree creation failed three times: Git could not create leading directories of '.git/worktrees/phase-b-recon-v20': Permission denied."
+    },
+    {
+      "attempt": 3,
+      "command": [
+        "git",
+        "worktree",
+        "add",
+        "--detach",
+        "C:/Users/matty/Dev/phase-b-recon-v20",
+        "2044f50a8cf71874f259e74fd05ec495169b9ae4"
+      ],
+      "exit_code": 1,
+      "error": "Pinned v20 worktree creation failed three times: Git could not create leading directories of '.git/worktrees/phase-b-recon-v20': Permission denied."
+    }
+  ],
+  "tool_layer_workarounds": [
+    "Retried worktree creation using an explicit git -C repository path; the same permission error remained.",
+    "Retried the original worktree command; the third identical failure triggered the tool-layer halt rule."
+  ],
+  "executor_self_fixes": []
+}
