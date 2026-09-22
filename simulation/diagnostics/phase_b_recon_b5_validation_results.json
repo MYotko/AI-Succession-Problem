@@ -1,0 +1,417 @@
+{
+  "non_registered": true,
+  "smoke_unique_runs": 40,
+  "repeat_validation_runs": 2,
+  "measured_runs_launched": 0,
+  "checks": [
+    {
+      "number": 1,
+      "check": "Both substrates and pinned HEADs",
+      "demonstrated": true,
+      "evidence": {
+        "counts": {
+          "v20": 20,
+          "v21": 20
+        },
+        "heads": {
+          "v21": "1a5fa6505fa079906b2df2a97e1f965b3e0f8713",
+          "v20": "2044f50a8cf71874f259e74fd05ec495169b9ae4"
+        }
+      }
+    },
+    {
+      "number": 2,
+      "check": "Required recorded fields and types",
+      "demonstrated": true,
+      "evidence": {
+        "rows": 40,
+        "fields": [
+          "rr",
+          "phi",
+          "alpha",
+          "successor_capability",
+          "cop_cost_audit",
+          "seed",
+          "survived",
+          "collapsed",
+          "extinct",
+          "final_population",
+          "final_ai_generation",
+          "yield_fired",
+          "max_yield_margin",
+          "knowledge_transfer_verified",
+          "steps_completed",
+          "end_reason",
+          "substrate",
+          "category"
+        ]
+      }
+    },
+    {
+      "number": 3,
+      "check": "Computed and nonconstant fields",
+      "demonstrated": true,
+      "evidence": {
+        "recomputed_from_steps": true,
+        "unique_values": {
+          "survived": [
+            false,
+            true
+          ],
+          "yield_fired": [
+            false,
+            true
+          ],
+          "final_ai_generation": [
+            1,
+            2,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "number": 4,
+      "check": "Repeat determinism",
+      "demonstrated": true,
+      "evidence": {
+        "v20": {
+          "key": {
+            "category": "A",
+            "cell": "7d603f92ccb1b1ac",
+            "seed": 1835089000,
+            "substrate": "v20"
+          },
+          "differing_fields": [],
+          "steps_hash_identical": true,
+          "baseline_steps_sha256_lf": "c2bb6912bf7867df32e15d1aacd96b4d58052bca4fe8b3ffe34c95581540cad8",
+          "repeat_steps_sha256_lf": "c2bb6912bf7867df32e15d1aacd96b4d58052bca4fe8b3ffe34c95581540cad8",
+          "elapsed_seconds": 71.31907919998048
+        },
+        "v21": {
+          "key": {
+            "category": "A",
+            "cell": "7d603f92ccb1b1ac",
+            "seed": 1835089000,
+            "substrate": "v21"
+          },
+          "differing_fields": [],
+          "steps_hash_identical": true,
+          "baseline_steps_sha256_lf": "501a7d7d5a7c5b4454aeadd3ebb3f60603c96a5d604de957c79d44e5c1ee6296",
+          "repeat_steps_sha256_lf": "501a7d7d5a7c5b4454aeadd3ebb3f60603c96a5d604de957c79d44e5c1ee6296",
+          "elapsed_seconds": 84.09599489998072
+        }
+      }
+    },
+    {
+      "number": 5,
+      "check": "Worker termination and resume",
+      "demonstrated": true,
+      "evidence": {
+        "preserved_completion_hashes": [
+          "v21_A_7d603f92ccb1b1ac_1835089000",
+          "v21_A_7d603f92ccb1b1ac_1835089001"
+        ],
+        "resume_counts": {
+          "preserved": 2,
+          "restarted": 2,
+          "never_launched": 36
+        },
+        "killed_worker": {
+          "key": "v21_A_31880113343579f1_1835089000",
+          "pid": 35896
+        },
+        "partial_steps": 276
+      }
+    },
+    {
+      "number": 6,
+      "check": "Merge recovery",
+      "demonstrated": true,
+      "evidence": {
+        "run_rows": 40,
+        "step_rows": 12000,
+        "categories": {
+          "A": {
+            "rows": 8,
+            "steps": 2400,
+            "hashes_verified": true
+          },
+          "B": {
+            "rows": 16,
+            "steps": 4800,
+            "hashes_verified": true
+          },
+          "C": {
+            "rows": 8,
+            "steps": 2400,
+            "hashes_verified": true
+          },
+          "phi": {
+            "rows": 8,
+            "steps": 2400,
+            "hashes_verified": true
+          }
+        }
+      }
+    },
+    {
+      "number": 7,
+      "check": "Worker settings honored",
+      "demonstrated": true,
+      "evidence": {
+        "requested_and_peak": [
+          [
+            2,
+            2
+          ],
+          [
+            8,
+            8
+          ]
+        ]
+      }
+    },
+    {
+      "number": 8,
+      "check": "Matched substrate differences",
+      "demonstrated": true,
+      "evidence": {
+        "pairs_with_differences": 20,
+        "paired_cells_and_seeds": 20,
+        "differences": [
+          {
+            "category": "A",
+            "cell": "31880113343579f1",
+            "seed": 1835089000,
+            "differing_fields": [
+              "survived",
+              "collapsed",
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "A",
+            "cell": "31880113343579f1",
+            "seed": 1835089001,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "A",
+            "cell": "7d603f92ccb1b1ac",
+            "seed": 1835089000,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "A",
+            "cell": "7d603f92ccb1b1ac",
+            "seed": 1835089001,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "B",
+            "cell": "1b86f39af78a26c2",
+            "seed": 1835089100,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "B",
+            "cell": "1b86f39af78a26c2",
+            "seed": 1835089101,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "B",
+            "cell": "601f616c65e51cb1",
+            "seed": 1835089100,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "B",
+            "cell": "601f616c65e51cb1",
+            "seed": 1835089101,
+            "differing_fields": [
+              "final_population"
+            ]
+          },
+          {
+            "category": "B",
+            "cell": "b34432c7c080923f",
+            "seed": 1835089100,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "B",
+            "cell": "b34432c7c080923f",
+            "seed": 1835089101,
+            "differing_fields": [
+              "survived",
+              "collapsed",
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "B",
+            "cell": "c5a77cd9d8b3ca87",
+            "seed": 1835089100,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "B",
+            "cell": "c5a77cd9d8b3ca87",
+            "seed": 1835089101,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "C",
+            "cell": "bce7b193eaa5a5bd",
+            "seed": 1835089200,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "C",
+            "cell": "bce7b193eaa5a5bd",
+            "seed": 1835089201,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "C",
+            "cell": "c954d73f498217d5",
+            "seed": 1835089200,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "C",
+            "cell": "c954d73f498217d5",
+            "seed": 1835089201,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "phi",
+            "cell": "3ebc23e15d89e550",
+            "seed": 1835089300,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "phi",
+            "cell": "3ebc23e15d89e550",
+            "seed": 1835089301,
+            "differing_fields": [
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "phi",
+            "cell": "ce98cec31a3af575",
+            "seed": 1835089300,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          },
+          {
+            "category": "phi",
+            "cell": "ce98cec31a3af575",
+            "seed": 1835089301,
+            "differing_fields": [
+              "final_population",
+              "max_yield_margin"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "mean_seconds_per_run": {
+    "v20": 90.66294694000389,
+    "v21": 107.7183212050004
+  },
+  "ideal_wall_clock_hours": {
+    "8": 51.93731811851848,
+    "12": 34.624878745678984,
+    "16": 25.96865905925924
+  },
+  "normal_cap_15_wall_clock_hours": 27.69990299654319,
+  "projection_basis": "7540 * (mean v20 seconds + mean v21 seconds) / workers; excludes startup and merge overhead; assumes smoke timing represents the full grid.",
+  "completion_source_readings": [
+    {
+      "path": "simulation/diagnostics/phase_b_reconstruction_design_note.md",
+      "pin": "c6416f59660210f14f4c0d8e70423570f58a1c6749768b89d6985f39e67f5a0d",
+      "committed_sha256_lf": "c6416f59660210f14f4c0d8e70423570f58a1c6749768b89d6985f39e67f5a0d",
+      "working_tree_sha256_lf": "c6416f59660210f14f4c0d8e70423570f58a1c6749768b89d6985f39e67f5a0d",
+      "blob_sha1": "88d79b15985ff11681b82dddb0df3d1424d22660"
+    },
+    {
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "pin": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "committed_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "working_tree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d"
+    },
+    {
+      "path": "simulation/model.py",
+      "pin": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879"
+    },
+    {
+      "path": "simulation/agents.py",
+      "pin": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51"
+    },
+    {
+      "path": "simulation/metrics.py",
+      "pin": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611"
+    }
+  ]
+}

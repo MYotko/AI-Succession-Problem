@@ -1,0 +1,38 @@
+{
+  "old_executor_sha256_lf": "9232896ff76e5971360819e951c6323f1d474f021e27eed4772956222e0ccc12",
+  "new_executor_sha256_lf": "596099e425fc82c5fe0206dae77a37694dd0e09e2d929ab0866f91541cfd34fe",
+  "unchanged_functions": [
+    "assert_grids",
+    "atomic_bytes",
+    "atomic_json",
+    "canonical",
+    "category_files",
+    "cpu_budget",
+    "csv_bytes",
+    "digest",
+    "effective_threads",
+    "git",
+    "grid",
+    "imported_sources",
+    "install_guard",
+    "job_id",
+    "launch",
+    "merged_records",
+    "parse_args",
+    "paths",
+    "read_json",
+    "retry",
+    "source_identity",
+    "utc",
+    "verify_pins",
+    "worker",
+    "worker_limit"
+  ],
+  "all_prior_global_assignments_unchanged": true,
+  "operational_changes_only": [
+    "stream category merge and verification",
+    "accept the single prior identical-worker executor version on resume",
+    "retain executor source versions"
+  ],
+  "prior_completion_records_not_rewritten": true
+}

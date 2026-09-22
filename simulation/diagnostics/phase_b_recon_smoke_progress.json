@@ -1,0 +1,62 @@
+{
+  "status": "complete",
+  "updated_utc": "2026-09-22T04:13:33.741236+00:00",
+  "parent_pid": 54096,
+  "prefix": "phase_b_recon_smoke_",
+  "cells": {
+    "A/v21": {
+      "completed": 4,
+      "running": 0,
+      "pending": 0
+    },
+    "B/v21": {
+      "completed": 8,
+      "running": 0,
+      "pending": 0
+    },
+    "C/v21": {
+      "completed": 4,
+      "running": 0,
+      "pending": 0
+    },
+    "phi/v21": {
+      "completed": 4,
+      "running": 0,
+      "pending": 0
+    },
+    "A/v20": {
+      "completed": 4,
+      "running": 0,
+      "pending": 0
+    },
+    "B/v20": {
+      "completed": 8,
+      "running": 0,
+      "pending": 0
+    },
+    "C/v20": {
+      "completed": 4,
+      "running": 0,
+      "pending": 0
+    },
+    "phi/v20": {
+      "completed": 4,
+      "running": 0,
+      "pending": 0
+    }
+  },
+  "completed": 40,
+  "running": 0,
+  "pending": 0,
+  "elapsed_seconds": 6.872239299991634,
+  "mean_seconds_per_run": 99.19063407250215,
+  "requested_workers": 8,
+  "worker_limit": 8,
+  "mode": "normal",
+  "active": [],
+  "resume_counts": {
+    "preserved": 40,
+    "restarted": 0,
+    "never_launched": 0
+  }
+}

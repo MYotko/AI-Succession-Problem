@@ -1,0 +1,78 @@
+{
+  "valid_completion_preserved": true,
+  "invalid_json_restarts": true,
+  "filename_key_mismatch_restarts": true,
+  "static_mode_transition_trace": [
+    {
+      "mode": "normal",
+      "finished": 0,
+      "cap": 15,
+      "launched": 0,
+      "active": 15
+    },
+    {
+      "mode": "work",
+      "finished": 0,
+      "cap": 12,
+      "launched": 0,
+      "active": 15
+    },
+    {
+      "mode": "work",
+      "finished": 1,
+      "cap": 12,
+      "launched": 0,
+      "active": 14
+    },
+    {
+      "mode": "work",
+      "finished": 1,
+      "cap": 12,
+      "launched": 0,
+      "active": 13
+    },
+    {
+      "mode": "work",
+      "finished": 1,
+      "cap": 12,
+      "launched": 0,
+      "active": 12
+    },
+    {
+      "mode": "work",
+      "finished": 1,
+      "cap": 12,
+      "launched": 1,
+      "active": 12
+    },
+    {
+      "mode": "normal",
+      "finished": 0,
+      "cap": 15,
+      "launched": 3,
+      "active": 15
+    }
+  ],
+  "job_assignment_independent_of_worker_count": true,
+  "completed_smoke_resume_invocation": {
+    "started_utc": "2026-09-22T04:08:26.078329+00:00",
+    "requested_workers": 8,
+    "peak_workers": 0,
+    "preserved": 40,
+    "restarted": 0,
+    "never_launched": 0,
+    "selected_count": 40,
+    "category": [
+      "A",
+      "B",
+      "C",
+      "phi"
+    ],
+    "substrate": "both",
+    "mode_at_start": "normal",
+    "restarted_keys": [],
+    "ended_utc": "2026-09-22T04:08:32.985101+00:00",
+    "status": "complete",
+    "elapsed_seconds": 6.906792399997357
+  }
+}

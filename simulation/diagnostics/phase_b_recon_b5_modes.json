@@ -1,0 +1,188 @@
+[
+  {
+    "event": "work_preserved_on_resume",
+    "utc": "2026-09-22T03:57:44.236692+00:00",
+    "progress": {
+      "status": "running",
+      "updated_utc": "2026-09-22T03:57:43.868522+00:00",
+      "parent_pid": 21216,
+      "prefix": "phase_b_recon_smoke_",
+      "cells": {
+        "A/v21": {
+          "completed": 2,
+          "running": 2,
+          "pending": 0
+        },
+        "B/v21": {
+          "completed": 0,
+          "running": 0,
+          "pending": 8
+        },
+        "C/v21": {
+          "completed": 0,
+          "running": 0,
+          "pending": 4
+        },
+        "phi/v21": {
+          "completed": 0,
+          "running": 0,
+          "pending": 4
+        },
+        "A/v20": {
+          "completed": 0,
+          "running": 4,
+          "pending": 0
+        },
+        "B/v20": {
+          "completed": 0,
+          "running": 0,
+          "pending": 8
+        },
+        "C/v20": {
+          "completed": 0,
+          "running": 0,
+          "pending": 4
+        },
+        "phi/v20": {
+          "completed": 0,
+          "running": 0,
+          "pending": 4
+        }
+      },
+      "completed": 2,
+      "running": 6,
+      "pending": 32,
+      "elapsed_seconds": 1.041039300034754,
+      "mean_seconds_per_run": 88.59051285000169,
+      "requested_workers": 8,
+      "worker_limit": 6,
+      "mode": "work",
+      "active": [
+        {
+          "key": "v21_A_31880113343579f1_1835089000",
+          "pid": 49220
+        },
+        {
+          "key": "v21_A_31880113343579f1_1835089001",
+          "pid": 47128
+        },
+        {
+          "key": "v20_A_7d603f92ccb1b1ac_1835089000",
+          "pid": 42916
+        },
+        {
+          "key": "v20_A_7d603f92ccb1b1ac_1835089001",
+          "pid": 11416
+        },
+        {
+          "key": "v20_A_31880113343579f1_1835089000",
+          "pid": 45064
+        },
+        {
+          "key": "v20_A_31880113343579f1_1835089001",
+          "pid": 47740
+        }
+      ],
+      "resume_counts": {
+        "preserved": 2,
+        "restarted": 2,
+        "never_launched": 36
+      }
+    }
+  },
+  {
+    "event": "normal_requested",
+    "utc": "2026-09-22T03:57:44.243424+00:00"
+  },
+  {
+    "event": "normal_applied",
+    "utc": "2026-09-22T03:57:46.254925+00:00",
+    "progress": {
+      "status": "running",
+      "updated_utc": "2026-09-22T03:57:45.906546+00:00",
+      "parent_pid": 21216,
+      "prefix": "phase_b_recon_smoke_",
+      "cells": {
+        "A/v21": {
+          "completed": 2,
+          "running": 2,
+          "pending": 0
+        },
+        "B/v21": {
+          "completed": 0,
+          "running": 0,
+          "pending": 8
+        },
+        "C/v21": {
+          "completed": 0,
+          "running": 0,
+          "pending": 4
+        },
+        "phi/v21": {
+          "completed": 0,
+          "running": 0,
+          "pending": 4
+        },
+        "A/v20": {
+          "completed": 0,
+          "running": 4,
+          "pending": 0
+        },
+        "B/v20": {
+          "completed": 0,
+          "running": 0,
+          "pending": 8
+        },
+        "C/v20": {
+          "completed": 0,
+          "running": 0,
+          "pending": 4
+        },
+        "phi/v20": {
+          "completed": 0,
+          "running": 0,
+          "pending": 4
+        }
+      },
+      "completed": 2,
+      "running": 6,
+      "pending": 32,
+      "elapsed_seconds": 3.079039200034458,
+      "mean_seconds_per_run": 88.59051285000169,
+      "requested_workers": 8,
+      "worker_limit": 6,
+      "mode": "normal",
+      "active": [
+        {
+          "key": "v21_A_31880113343579f1_1835089000",
+          "pid": 49220
+        },
+        {
+          "key": "v21_A_31880113343579f1_1835089001",
+          "pid": 47128
+        },
+        {
+          "key": "v20_A_7d603f92ccb1b1ac_1835089000",
+          "pid": 42916
+        },
+        {
+          "key": "v20_A_7d603f92ccb1b1ac_1835089001",
+          "pid": 11416
+        },
+        {
+          "key": "v20_A_31880113343579f1_1835089000",
+          "pid": 45064
+        },
+        {
+          "key": "v20_A_31880113343579f1_1835089001",
+          "pid": 47740
+        }
+      ],
+      "resume_counts": {
+        "preserved": 2,
+        "restarted": 2,
+        "never_launched": 36
+      }
+    }
+  }
+]

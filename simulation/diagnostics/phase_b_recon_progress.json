@@ -1,0 +1,80 @@
+{
+  "status": "running",
+  "updated_utc": "2026-09-22T12:39:16.342979+00:00",
+  "parent_pid": 31736,
+  "prefix": "phase_b_recon_",
+  "cells": {
+    "phi/v21": {
+      "completed": 24,
+      "running": 12,
+      "pending": 384
+    },
+    "phi/v20": {
+      "completed": 0,
+      "running": 0,
+      "pending": 420
+    }
+  },
+  "completed": 24,
+  "running": 12,
+  "pending": 804,
+  "elapsed_seconds": 261.7598488999647,
+  "mean_seconds_per_run": 115.45525007082809,
+  "requested_workers": 12,
+  "worker_limit": 12,
+  "mode": "normal",
+  "active": [
+    {
+      "key": "v21_phi_ce98cec31a3af575_1835089324",
+      "pid": 41072
+    },
+    {
+      "key": "v21_phi_ce98cec31a3af575_1835089325",
+      "pid": 16092
+    },
+    {
+      "key": "v21_phi_ce98cec31a3af575_1835089326",
+      "pid": 49448
+    },
+    {
+      "key": "v21_phi_ce98cec31a3af575_1835089327",
+      "pid": 48400
+    },
+    {
+      "key": "v21_phi_ce98cec31a3af575_1835089328",
+      "pid": 41176
+    },
+    {
+      "key": "v21_phi_ce98cec31a3af575_1835089329",
+      "pid": 3312
+    },
+    {
+      "key": "v21_phi_ce98cec31a3af575_1835089330",
+      "pid": 52876
+    },
+    {
+      "key": "v21_phi_ce98cec31a3af575_1835089331",
+      "pid": 49648
+    },
+    {
+      "key": "v21_phi_ce98cec31a3af575_1835089332",
+      "pid": 49828
+    },
+    {
+      "key": "v21_phi_ce98cec31a3af575_1835089333",
+      "pid": 52420
+    },
+    {
+      "key": "v21_phi_ce98cec31a3af575_1835089334",
+      "pid": 51324
+    },
+    {
+      "key": "v21_phi_ce98cec31a3af575_1835089335",
+      "pid": 12308
+    }
+  ],
+  "resume_counts": {
+    "preserved": 0,
+    "restarted": 0,
+    "never_launched": 840
+  }

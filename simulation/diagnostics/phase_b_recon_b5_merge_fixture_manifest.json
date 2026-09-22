@@ -1,0 +1,53 @@
+{
+  "synthetic_fixture": true,
+  "runs": {
+    "v21_A_7d603f92ccb1b1ac_1835089000": {
+      "key": {
+        "substrate": "v21",
+        "category": "A",
+        "cell": "7d603f92ccb1b1ac",
+        "seed": 1835089000
+      },
+      "row_count": 1,
+      "row_sha256_lf": "e10381471575f71640808a7b4970626a520f23cffa97abee5870d7e8fb447b09",
+      "step_row_count": 3,
+      "steps_sha256_lf": "53765402360c590d7b0a6032223abd382b2cace1c462cee3590a60f93f49570a"
+    },
+    "v20_A_7d603f92ccb1b1ac_1835089000": {
+      "key": {
+        "substrate": "v20",
+        "category": "A",
+        "cell": "7d603f92ccb1b1ac",
+        "seed": 1835089000
+      },
+      "row_count": 1,
+      "row_sha256_lf": "c031aed1ce679f502a3070c6bc7ccf843c7017f307559baef0fe92afa6955ab3",
+      "step_row_count": 3,
+      "steps_sha256_lf": "862e24c0e07b4113223231728e9bc57eb6947d8cc7f9a5fbac9fb47f5828a1a7"
+    }
+  },
+  "merged_files": {
+    "A": {
+      "rows": {
+        "path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_recon_b5_merge_fixture_A_runs.csv",
+        "sha256_lf": "4314bee8e970cc66b729b0a1d26513f2128c136a18801d996c2659040d3d3753",
+        "row_count": 2
+      },
+      "steps": {
+        "path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_recon_b5_merge_fixture_A_steps.csv",
+        "sha256_lf": "5bb4518f843405d1a1a4be02de7d4df7ca242d79a2ac3dd6c6647daf0ec70321",
+        "row_count": 6
+      },
+      "completions": {
+        "path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_recon_b5_merge_fixture_A_completions.jsonl",
+        "sha256_lf": "fb8d27da136a156b7033bc357a9f291d9de95786b68bde513908753559f36fe4",
+        "row_count": 2
+      }
+    }
+  },
+  "deleted_per_run_files": {
+    "completion": 2,
+    "row": 2,
+    "steps": 2
+  }
+}

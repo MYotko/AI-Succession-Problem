@@ -1,0 +1,1171 @@
+{
+  "status": "test_validation_complete",
+  "executor_kept": true,
+  "created_utc": "2026-09-22T04:14:21.244350+00:00",
+  "machine": "YotkoTest",
+  "head": "1a5fa6505fa079906b2df2a97e1f965b3e0f8713",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "numpy_versions": [
+    "2.4.4"
+  ],
+  "initial_source_readings": [
+    {
+      "path": "simulation/diagnostics/phase_b_reconstruction_design_note.md",
+      "pin": "c6416f59660210f14f4c0d8e70423570f58a1c6749768b89d6985f39e67f5a0d",
+      "committed_sha256_lf": "c6416f59660210f14f4c0d8e70423570f58a1c6749768b89d6985f39e67f5a0d",
+      "working_tree_sha256_lf": "c6416f59660210f14f4c0d8e70423570f58a1c6749768b89d6985f39e67f5a0d",
+      "blob_sha1": "88d79b15985ff11681b82dddb0df3d1424d22660"
+    },
+    {
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "pin": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "committed_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "working_tree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d"
+    },
+    {
+      "path": "simulation/model.py",
+      "pin": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879"
+    },
+    {
+      "path": "simulation/agents.py",
+      "pin": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51"
+    },
+    {
+      "path": "simulation/metrics.py",
+      "pin": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611"
+    }
+  ],
+  "completion_source_readings": [
+    {
+      "path": "simulation/diagnostics/phase_b_reconstruction_design_note.md",
+      "pin": "c6416f59660210f14f4c0d8e70423570f58a1c6749768b89d6985f39e67f5a0d",
+      "committed_sha256_lf": "c6416f59660210f14f4c0d8e70423570f58a1c6749768b89d6985f39e67f5a0d",
+      "working_tree_sha256_lf": "c6416f59660210f14f4c0d8e70423570f58a1c6749768b89d6985f39e67f5a0d",
+      "blob_sha1": "88d79b15985ff11681b82dddb0df3d1424d22660"
+    },
+    {
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "pin": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "committed_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "working_tree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d"
+    },
+    {
+      "path": "simulation/model.py",
+      "pin": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879"
+    },
+    {
+      "path": "simulation/agents.py",
+      "pin": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51"
+    },
+    {
+      "path": "simulation/metrics.py",
+      "pin": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611"
+    }
+  ],
+  "substrates": {
+    "v21": {
+      "path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem",
+      "head": "1a5fa6505fa079906b2df2a97e1f965b3e0f8713",
+      "modules_sha256_lf": {
+        "simulation/agents.py": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "simulation/analyze_phi_adversarial.py": "d88656b8d6d0c8678e741e2b876713cc83b065254380b492f41bb933a9133839",
+        "simulation/analyze_sybil_defense_scaling_characterization.py": "81d58d9c7bbeaa8a1f0ac1d6c0d566a38ba04cbfe2bb7cb843e651b3222c936a",
+        "simulation/attack_adapter_v2.py": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "simulation/attack_metrics_v2.py": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+        "simulation/constants_v2_stage15.py": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "simulation/constants_v2_stage18.py": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "simulation/cusum_detector_v2.py": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+        "simulation/defection.py": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "simulation/deps.py": "f20f0579b6c264ab1690e6c45de4f24108158b221cb2d2f31247a7239aafe70a",
+        "simulation/metrics.py": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "simulation/model.py": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "simulation/monte_carlo.py": "bf6fbce4e8990d1e9ae7a4fa6fb1003dd95d82f038ddcc4f27fef285e2e440ff",
+        "simulation/run_alpha_succession_sweep.py": "e1742fc0e84bff089989ecfb79afbeb74c375bd7ff0317ca1bb5b59144a00e44",
+        "simulation/run_attack_vector_revalidation_v2.py": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "simulation/run_calibration.py": "a530742d83080b32f21070a12e5ed35d82f72ce59c853fad478d39838aab2f8a",
+        "simulation/run_comprehension_gap_powered_arm.py": "1066df0ccbe35ce4e0647cf71662bc2f950ead2e5c87f1a3dda7db515b27828b",
+        "simulation/run_comprehension_gap_sweep.py": "703f641d743220c0fdacfa6c6aab315527782f4f4857bee38ea4090d5e911cac",
+        "simulation/run_demographic_feedback_calibration.py": "c74e6db001be8ba9a1a6d01951fc0205a07b1f17ac1d40ccedf501fc5a76ee42",
+        "simulation/run_frontier_floor_calibration.py": "2d69ac68699173a8208800465b337b4bf6ed073036f7d9bf0a5096a3681004da",
+        "simulation/run_phi_adversarial_sweep.py": "10b9fb94c3faa28a6637eeb9c9b90e8925241bfbd2ab92fecec3356002e731e9",
+        "simulation/run_phi_alpha_rr_sweep.py": "6989423c2001d1812a59e7029f3e9593d18e005283cc85a9421e6c252b866d97",
+        "simulation/run_phi_shock_calibration.py": "bc045cc999c1dbe1e1720caafd8d4fbf78aef6c24e8b556e894cd1cfac29d72c",
+        "simulation/run_rr_alpha_sweep.py": "48ac7b77ca1ce7f46fdac3e7712c03466ffad2e1855fe0fc19a09f8882ff7b3b",
+        "simulation/run_sybil_defense_scaling_characterization.py": "b523342c954d52c991e084c168be3e9b10f55425a3cba44d16be4c2b9c78ebd3",
+        "simulation/run_sybil_defense_scaling_smoke.py": "1ba6d40c3776a97b6576fe9749c605f539bf3842a465303f6d79c5996572dc2f",
+        "simulation/run_sybil_two_dial_smoke.py": "c99d8e185476cc25b67056b2c99db01462fe0de4f2aff13399f953075f06b03c",
+        "simulation/run_termination_sweep.py": "b5fa654cefc9f232ecab30cbbbd99abbf724cca25ba553abcfc3d8445c1bf34c",
+        "simulation/run_to_termination.py": "cffb6eb30aec86f9b28b3ab2e1dca703a6d2e06e1be47b3e145759880a2c0aee",
+        "simulation/run_transition_cost_calibration.py": "a14d0441ef9635c9807397e0488fd1d46d3038650eba7ecef153b3734e38c25e",
+        "simulation/run_veto_capture_sweep.py": "6377bae70845dcc86ca0b0062bbb2b01df53f917f32bc25534bb2f31dd1a129a",
+        "simulation/simulation.py": "41da4be9fac62800f636592bc016e4dbacbee828b6d340aae6f316733e7163e8",
+        "simulation/sybil_defense_scaling.py": "03e8e7d8bf21e0a81918d4dfd3a5be511eb760d0f9ead58f8dea7e71df7d75e8",
+        "simulation/test_attack_adapter_v2.py": "11f1e2b04e2a04503886df37d8049dbb9c6bcd2c910e72bdb878bdec4fd40063",
+        "simulation/test_attack_vector_revalidation_v2_runner.py": "7ecbcb7444a2391d97b4f55314cdb6b0ec26a1d71027cf7e37e36e56d536203e",
+        "simulation/test_cop.py": "9ce8196b550c3f5b0af802119769cbbd757e6de984b66acb0e4cae1abb6ab9b3",
+        "simulation/test_invariants.py": "fd4addf76ab27d25ef247338666aa6779656d4dd775f520f3a14be0a371c5266",
+        "simulation/test_output_paths.py": "9f4ef3085f9e95274df199f6d618c6e381d9b8c135ad7fc441b940853f011bd3",
+        "simulation/test_refactor_1x.py": "d4f52bd9e8c828c007fa569e2202f0c31a8fdbe367711d5160630387f66feeac",
+        "simulation/test_sybil_characterization_analysis.py": "7bae39d67460565f2a1b2cac27b727613e15ee5aee8b49da5e81b4c341edc1fe",
+        "simulation/test_sybil_characterization_runner.py": "a768fe1cb1ce0bde144ecb93dc712aac1a4579688c24660b80473fdabb6e90c5",
+        "simulation/test_sybil_defense_scaling.py": "ec65db4a04184d9fa17815c028e0328cc52a5368a38e6a3d138ae8bdb01544e6",
+        "simulation/test_sybil_two_dial_capability.py": "e7c1631b729318810e7c1a52144b0ab5bf866f9059e4af94660ba5fe5ba91050",
+        "simulation/tools/check_scenario_numbering.py": "fdf6c5c717ae8a005d004725f6ec1419f5061e7e0027f888b785259d00c30166",
+        "simulation/visualization.py": "7fc4ca1430c7d54e14f98d8db58c94879c17de720ef2e382ba1b11f3fb351e1d",
+        "simulation/working_factor.py": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+      }
+    },
+    "v20": {
+      "path": "C:\\Users\\matty\\Dev\\phase-b-recon-v20",
+      "head": "2044f50a8cf71874f259e74fd05ec495169b9ae4",
+      "modules_sha256_lf": {
+        "simulation/agents.py": "f0c1049370c001c9ac85191f47338ec4be8a197cc5a29332547b95d85a1168c3",
+        "simulation/analyze_phi_adversarial.py": "d88656b8d6d0c8678e741e2b876713cc83b065254380b492f41bb933a9133839",
+        "simulation/analyze_sybil_defense_scaling_characterization.py": "81d58d9c7bbeaa8a1f0ac1d6c0d566a38ba04cbfe2bb7cb843e651b3222c936a",
+        "simulation/attack_adapter_v2.py": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "simulation/constants_v2_stage15.py": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "simulation/constants_v2_stage18.py": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "simulation/defection.py": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "simulation/deps.py": "f20f0579b6c264ab1690e6c45de4f24108158b221cb2d2f31247a7239aafe70a",
+        "simulation/metrics.py": "667465e55e087c9be193184228f3470c866565fea53af90e3092bc9de275a8ab",
+        "simulation/model.py": "0a42a62268857c25c4bc99fa2162bfeb74c444bfa1f4fef6705a3a7e618d76b7",
+        "simulation/monte_carlo.py": "bef036a78c4e957657b84eec8f29c53c834551ef8235fbe9964ddff6e80f82c4",
+        "simulation/run_alpha_succession_sweep.py": "e1742fc0e84bff089989ecfb79afbeb74c375bd7ff0317ca1bb5b59144a00e44",
+        "simulation/run_attack_vector_revalidation_v2.py": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "simulation/run_calibration.py": "a530742d83080b32f21070a12e5ed35d82f72ce59c853fad478d39838aab2f8a",
+        "simulation/run_comprehension_gap_powered_arm.py": "1066df0ccbe35ce4e0647cf71662bc2f950ead2e5c87f1a3dda7db515b27828b",
+        "simulation/run_comprehension_gap_sweep.py": "703f641d743220c0fdacfa6c6aab315527782f4f4857bee38ea4090d5e911cac",
+        "simulation/run_demographic_feedback_calibration.py": "c74e6db001be8ba9a1a6d01951fc0205a07b1f17ac1d40ccedf501fc5a76ee42",
+        "simulation/run_frontier_floor_calibration.py": "2d69ac68699173a8208800465b337b4bf6ed073036f7d9bf0a5096a3681004da",
+        "simulation/run_phi_adversarial_sweep.py": "10b9fb94c3faa28a6637eeb9c9b90e8925241bfbd2ab92fecec3356002e731e9",
+        "simulation/run_phi_alpha_rr_sweep.py": "6989423c2001d1812a59e7029f3e9593d18e005283cc85a9421e6c252b866d97",
+        "simulation/run_phi_shock_calibration.py": "bc045cc999c1dbe1e1720caafd8d4fbf78aef6c24e8b556e894cd1cfac29d72c",
+        "simulation/run_rr_alpha_sweep.py": "48ac7b77ca1ce7f46fdac3e7712c03466ffad2e1855fe0fc19a09f8882ff7b3b",
+        "simulation/run_sybil_defense_scaling_characterization.py": "b523342c954d52c991e084c168be3e9b10f55425a3cba44d16be4c2b9c78ebd3",
+        "simulation/run_sybil_defense_scaling_smoke.py": "3f199af5ad6f1165a7165525ee5c419295afedf140992896dfe39bc192438c51",
+        "simulation/run_sybil_two_dial_smoke.py": "e9dc6ce02a2eaf010354d3f5043a01aeed729aa964efaa3f959c12e150bad08e",
+        "simulation/run_termination_sweep.py": "b5fa654cefc9f232ecab30cbbbd99abbf724cca25ba553abcfc3d8445c1bf34c",
+        "simulation/run_to_termination.py": "cffb6eb30aec86f9b28b3ab2e1dca703a6d2e06e1be47b3e145759880a2c0aee",
+        "simulation/run_transition_cost_calibration.py": "a14d0441ef9635c9807397e0488fd1d46d3038650eba7ecef153b3734e38c25e",
+        "simulation/run_veto_capture_sweep.py": "6377bae70845dcc86ca0b0062bbb2b01df53f917f32bc25534bb2f31dd1a129a",
+        "simulation/simulation.py": "41da4be9fac62800f636592bc016e4dbacbee828b6d340aae6f316733e7163e8",
+        "simulation/sybil_defense_scaling.py": "03e8e7d8bf21e0a81918d4dfd3a5be511eb760d0f9ead58f8dea7e71df7d75e8",
+        "simulation/test_attack_adapter_v2.py": "11f1e2b04e2a04503886df37d8049dbb9c6bcd2c910e72bdb878bdec4fd40063",
+        "simulation/test_attack_vector_revalidation_v2_runner.py": "7ecbcb7444a2391d97b4f55314cdb6b0ec26a1d71027cf7e37e36e56d536203e",
+        "simulation/test_cop.py": "9ce8196b550c3f5b0af802119769cbbd757e6de984b66acb0e4cae1abb6ab9b3",
+        "simulation/test_invariants.py": "fd4addf76ab27d25ef247338666aa6779656d4dd775f520f3a14be0a371c5266",
+        "simulation/test_refactor_1x.py": "d4f52bd9e8c828c007fa569e2202f0c31a8fdbe367711d5160630387f66feeac",
+        "simulation/test_sybil_characterization_analysis.py": "7bae39d67460565f2a1b2cac27b727613e15ee5aee8b49da5e81b4c341edc1fe",
+        "simulation/test_sybil_characterization_runner.py": "a768fe1cb1ce0bde144ecb93dc712aac1a4579688c24660b80473fdabb6e90c5",
+        "simulation/test_sybil_defense_scaling.py": "ec65db4a04184d9fa17815c028e0328cc52a5368a38e6a3d138ae8bdb01544e6",
+        "simulation/test_sybil_two_dial_capability.py": "e7c1631b729318810e7c1a52144b0ab5bf866f9059e4af94660ba5fe5ba91050",
+        "simulation/tools/check_scenario_numbering.py": "fdf6c5c717ae8a005d004725f6ec1419f5061e7e0027f888b785259d00c30166",
+        "simulation/visualization.py": "e6b77a43d81059cd5e7f55adfc8fa7157247d7d4cea2343a070203efac87f7e1",
+        "simulation/working_factor.py": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+      }
+    }
+  },
+  "source_hash_basis": "SHA256 on LF-normalized bytes; blob SHA1 separately",
+  "cpu_budget": 16,
+  "mode_changes": [
+    {
+      "utc": "2026-09-22T03:53:54.952001+00:00",
+      "from": "normal",
+      "to": "work"
+    },
+    {
+      "utc": "2026-09-22T03:57:44.295085+00:00",
+      "from": "work",
+      "to": "normal"
+    }
+  ],
+  "invocations": [
+    {
+      "started_utc": "2026-09-22T03:53:54.182779+00:00",
+      "requested_workers": 2,
+      "peak_workers": 2,
+      "preserved": 0,
+      "restarted": 0,
+      "never_launched": 40,
+      "selected_count": 40,
+      "category": [
+        "A",
+        "B",
+        "C",
+        "phi"
+      ],
+      "substrate": "both",
+      "mode_at_start": "normal",
+      "restarted_keys": [],
+      "worker_failure": {
+        "key": "v21_A_31880113343579f1_1835089000",
+        "exit_code": 99,
+        "console": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_recon_smoke_job_v21_A_31880113343579f1_1835089000_console.txt"
+      },
+      "error": "Worker terminated or raised an exception: v21_A_31880113343579f1_1835089000",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_recon_executor.py\", line 668, in main\n    raise RuntimeError(\"Worker terminated or raised an exception: \"+ident)\nRuntimeError: Worker terminated or raised an exception: v21_A_31880113343579f1_1835089000\n",
+      "ended_utc": "2026-09-22T03:56:53.736437+00:00",
+      "status": "stopped",
+      "elapsed_seconds": 179.55367910000496
+    },
+    {
+      "started_utc": "2026-09-22T03:57:42.827528+00:00",
+      "requested_workers": 8,
+      "peak_workers": 8,
+      "preserved": 2,
+      "restarted": 2,
+      "never_launched": 36,
+      "selected_count": 40,
+      "category": [
+        "A",
+        "B",
+        "C",
+        "phi"
+      ],
+      "substrate": "both",
+      "mode_at_start": "work",
+      "restarted_keys": [
+        "v21_A_31880113343579f1_1835089000",
+        "v21_A_31880113343579f1_1835089001"
+      ],
+      "ended_utc": "2026-09-22T04:07:12.902233+00:00",
+      "status": "complete",
+      "elapsed_seconds": 570.0747249000124
+    },
+    {
+      "started_utc": "2026-09-22T04:08:26.078329+00:00",
+      "requested_workers": 8,
+      "peak_workers": 0,
+      "preserved": 40,
+      "restarted": 0,
+      "never_launched": 0,
+      "selected_count": 40,
+      "category": [
+        "A",
+        "B",
+        "C",
+        "phi"
+      ],
+      "substrate": "both",
+      "mode_at_start": "normal",
+      "restarted_keys": [],
+      "ended_utc": "2026-09-22T04:08:32.985101+00:00",
+      "status": "complete",
+      "elapsed_seconds": 6.906792399997357
+    },
+    {
+      "started_utc": "2026-09-22T04:13:26.869024+00:00",
+      "requested_workers": 8,
+      "peak_workers": 0,
+      "preserved": 40,
+      "restarted": 0,
+      "never_launched": 0,
+      "selected_count": 40,
+      "category": [
+        "A",
+        "B",
+        "C",
+        "phi"
+      ],
+      "substrate": "both",
+      "mode_at_start": "normal",
+      "restarted_keys": [],
+      "ended_utc": "2026-09-22T04:13:33.731410+00:00",
+      "status": "complete",
+      "elapsed_seconds": 6.862418600008823
+    }
+  ],
+  "worker_threads_verified_one": true,
+  "smoke_unique_runs": 40,
+  "repeat_validation_runs": 2,
+  "measured_runs_launched": 0,
+  "tool_layer_workarounds": [
+    "Extracted the JSON line from shell output after a leading tool warning prevented JSON parsing; repeated read-only T0 commands.",
+    "Used command-scoped safe.directory after Git rejected the operator-owned v20 worktree; no Git configuration changed.",
+    "Constructed Markdown fences from character codes after literal backticks caused a JavaScript tool-payload parse error."
+  ],
+  "executor_self_fixes": [
+    "Gave repeat probes their own console filenames so they cannot overwrite a normal run console.",
+    "Replaced the validation controller PID kill with a minimal-rights Windows process handle after os.kill returned access denied.",
+    "Streamed category merging and hash verification to bound memory, preserving prior completions from the verified identical worker code.",
+    "Compared canonical completion content across a no-work resume because merging changes JSON key order; reused completed repeat probes."
+  ],
+  "retry_events": [],
+  "outputs": [
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_apply_merge_repair.py",
+      "sha256_lf": "f6a18b00eed812d0bc06419aac72d8b9218faa0567e4fe15213ab2faf689b270",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_atomic_test.json",
+      "sha256_lf": "32e70773b3a61ae61ee7855f92bdcda28645d3224ef8e5c82bc528003ff891e9",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_completion_preservation.json",
+      "sha256_lf": "ba8e5fa706da591b93782556df8ce934d7b5903735abfa8ed0f62e098b458649",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_determinism.json",
+      "sha256_lf": "d765d0b7ae2a4b779c5da40f51d1ce96ec6b57e2674e739d6abad7a9b155d68c",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_fixture_job_v20_A_31880113343579f1_1835089000_completion.json",
+      "sha256_lf": "20043270f6744bc7319486da86c784c7e3b1c6e3e563020dc1890c3d96b1477e",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_interrupt_console.txt",
+      "sha256_lf": "a0836c7466e2d1ea96d5c425853f83fb13774c231877526654108c41482b86b8",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_interruption.json",
+      "sha256_lf": "6241f3476b2c19659ff090fcc99e572a03cbad1f48afe637896300bdf0b16938",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_merge_fixture_A_completions.jsonl",
+      "sha256_lf": "fb8d27da136a156b7033bc357a9f291d9de95786b68bde513908753559f36fe4",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_merge_fixture_A_runs.csv",
+      "sha256_lf": "4314bee8e970cc66b729b0a1d26513f2128c136a18801d996c2659040d3d3753",
+      "csv_row_count": 2
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_merge_fixture_A_steps.csv",
+      "sha256_lf": "5bb4518f843405d1a1a4be02de7d4df7ca242d79a2ac3dd6c6647daf0ec70321",
+      "csv_row_count": 6
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_merge_fixture_manifest.json",
+      "sha256_lf": "9de0aeb42ea671e52883a338c7018bdb52090f8d5e556c7623648407888fa561",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_merge_repair_proof.json",
+      "sha256_lf": "070c551661d99c0f7fef2eb9c9c6aa028bb8691c84f7529b7710884779549b23",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_merge_validation.json",
+      "sha256_lf": "e90c7bd4a938d77ec2721a384d8ba7dba568558275036923915c09e4ebf5bd0b",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_modes.json",
+      "sha256_lf": "81ff896ad95e5309eaf55735c5ad733f9ac3f17dd1637116e6c2d9a276a54aca",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_no_work_resume_console.txt",
+      "sha256_lf": "c165841fd73a30d61bf01571947af2a0475cf74f13020565fd99230b897b89c2",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_operational_checks.json",
+      "sha256_lf": "60423bdef0d6e7a09109d2062de2edd7c610f0c9c0511504a655016dbabff42e",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_postvalidate.py",
+      "sha256_lf": "62b838fb1cf0b6b9621af1be59c2dd5bfa6e6acec7063a0cf45a0cbf3cf675f8",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_preflight.json",
+      "sha256_lf": "c79f161735ed47850e6084750903f73567b6623e203dc778c1a7636bde791056",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_prior_phase_b_recon_smoke_batch_manifest.json",
+      "sha256_lf": "2b1c0b8c780b2ac6fcba4669900670926ddabad8791ba9d1b10e32aa711ac013",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_prior_phase_b_recon_smoke_runtime_control.json",
+      "sha256_lf": "ccea7e652feb3f0b99abc17e7c7bec93d1f8faf4ab5d03ee09f492d6978eec7d",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_report.md",
+      "sha256_lf": "6ff4bed56fb5849ba844d5a69d0471d7346a741f4d028dd820f90f031b0dc33f",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_report_builder.py",
+      "sha256_lf": "94c983baa8c42c10265affad76f0399547a05cb59d9ccccad98e7b65825bde66",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_resume_console.txt",
+      "sha256_lf": "c165841fd73a30d61bf01571947af2a0475cf74f13020565fd99230b897b89c2",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_resume_validate.py",
+      "sha256_lf": "c81ce43957f1393ea52c072a040267afc7932333519df2a733e58af722f35715",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_stream_merge.py",
+      "sha256_lf": "4ebf37c5e18a6244727f026ccf703ed83c4abbd4ec0838b91a9004db67840d64",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_stream_merge_checks.json",
+      "sha256_lf": "251f23af182b3f6df1e70088b17da1388174d65d924277c8b27d3b63ef0a5f5b",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_validate.py",
+      "sha256_lf": "b025a34dc58924f92eb62630df46b7cb4bcd40a7f03111f0a62bee74c1c9ea37",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_validation_results.json",
+      "sha256_lf": "e897ef8bfba0d83d58f58f81888748c3fd2d0ed2a88bd3d997f4458b46153b11",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b5_validation_state.json",
+      "sha256_lf": "6db5621ef889ede98cdf45ad93129c493c21065b449ced53f787c37115fe644e",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_executor.py",
+      "sha256_lf": "596099e425fc82c5fe0206dae77a37694dd0e09e2d929ab0866f91541cfd34fe",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_progress.json",
+      "sha256_lf": "4ea56713dfa5fcb26e6df5e80bdc66e941c4ae9034d7b95420f83423ce0487b6",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_A_completions.jsonl",
+      "sha256_lf": "0d9a5a1bc4ef1e0d97d9e961684b0dd6abc8a2fe3069acdda51091701535182e",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_A_runs.csv",
+      "sha256_lf": "979cde1fe979aeaca858faf1f631868f8631bd551cb0e57e1d8d34816f98911c",
+      "csv_row_count": 8
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_A_steps.csv",
+      "sha256_lf": "17797ed96e768fe7096d082a37360e17f500e800d6e658dba0b119e65a57cb89",
+      "csv_row_count": 2400
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_B_completions.jsonl",
+      "sha256_lf": "9b5f32a847dc2d7cd9933f35450c3fffb2cff5765728c1b666461f85b557f021",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_B_runs.csv",
+      "sha256_lf": "7c48bece98743887a132fbcc5bfaed3e75823f4468e3d4b95d4f7d3f4669195a",
+      "csv_row_count": 16
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_B_steps.csv",
+      "sha256_lf": "7c8f799c3e38c481c1885510f66af8ce16017f4161af845709d50cfe2a746ccd",
+      "csv_row_count": 4800
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_batch_manifest.json",
+      "sha256_lf": "6b4cdecee4373ec848fe123e13676863f7577238f5c6d4b54242c2618a766f4b",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_C_completions.jsonl",
+      "sha256_lf": "cc64653f57ffc7acd7ea6dc90f2580400a969a67bf8ddc795bc6a480a98a31ba",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_C_runs.csv",
+      "sha256_lf": "cc78141992696a904c7453ce3e2cf3706c8aaf5c8eda33359cb2e32ae6aa19e0",
+      "csv_row_count": 8
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_C_steps.csv",
+      "sha256_lf": "692206fce2dff2ca7852a59dc737b1a66722973e60a716c26d9469a464a45a1b",
+      "csv_row_count": 2400
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_executor_source_596099e425fc82c5fe0206dae77a37694dd0e09e2d929ab0866f91541cfd34fe.py",
+      "sha256_lf": "596099e425fc82c5fe0206dae77a37694dd0e09e2d929ab0866f91541cfd34fe",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_executor_source_9232896ff76e5971360819e951c6323f1d474f021e27eed4772956222e0ccc12.py",
+      "sha256_lf": "9232896ff76e5971360819e951c6323f1d474f021e27eed4772956222e0ccc12",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_job_v21_A_31880113343579f1_1835089000_console.txt.partial.1790049462813675900",
+      "sha256_lf": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_job_v21_A_31880113343579f1_1835089000_initial.json.partial.1790049462813675900",
+      "sha256_lf": "0ebf4c34b156cb218b104536551f72c0e53570db41dde13eee8c544a9fe9be0f",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_job_v21_A_31880113343579f1_1835089000_progress.json.partial.1790049462813675900",
+      "sha256_lf": "d95c2fae294f2d6551055ccebaa62e853faea3eda83329e5d650db2660407d67",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_job_v21_A_31880113343579f1_1835089000_steps.csv.partial.1790049462813675900",
+      "sha256_lf": "aae02aedc8576e46e68f1a6d180c7040485057cb77a5bfd2d1b881635b56d2df",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_job_v21_A_31880113343579f1_1835089001_console.txt.partial.1790049462817662300",
+      "sha256_lf": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_job_v21_A_31880113343579f1_1835089001_initial.json.partial.1790049462817662300",
+      "sha256_lf": "a03299ad93dc06eba15b33b63650f90e045de09d8da90b64729bca1c6be22cc6",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_job_v21_A_31880113343579f1_1835089001_progress.json.partial.1790049462817662300",
+      "sha256_lf": "ac922dcaea2b9713991a14545164d2d8d03d7ee9ea5a2ed98b962a04ffaf3319",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_job_v21_A_31880113343579f1_1835089001_steps.csv.partial.1790049462817662300",
+      "sha256_lf": "a2be46cf12ba28c774e2fab0b02f9c3fa3beb90baac45239f8cadec3ac18a1c5",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_phi_completions.jsonl",
+      "sha256_lf": "fd521465f597c8e63083c359688691bdad74ccc4c3c19df477d363e8d6220717",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_phi_runs.csv",
+      "sha256_lf": "2552498cdff976756682531360d55c259eda21cdb42344cf1e53ef2aa9455882",
+      "csv_row_count": 8
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_phi_steps.csv",
+      "sha256_lf": "f96d938f857c1c17007330faf1efb36ec0111958cada298c813bce5f0acc8f0c",
+      "csv_row_count": 2400
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_progress.json",
+      "sha256_lf": "4ea56713dfa5fcb26e6df5e80bdc66e941c4ae9034d7b95420f83423ce0487b6",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_repeat_A_completions.jsonl",
+      "sha256_lf": "95c982cd901762678a56361703351486f867a809426608e0aad3157ecb57031e",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_repeat_A_runs.csv",
+      "sha256_lf": "3b48d70e27301a34d84429d415e42c4bdee67092be714ccc23f59ea35e789b95",
+      "csv_row_count": 2
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_repeat_A_steps.csv",
+      "sha256_lf": "a910b447db065a7e3819993251b341c148bf088fc59538b64c4cf662ed3912f3",
+      "csv_row_count": 600
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_repeat_manifest.json",
+      "sha256_lf": "c9ef727bc5d12e04c2ef68c6417baba009aebf7dfd55cd01da0af122da02804d",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_runtime_control.json",
+      "sha256_lf": "ccea7e652feb3f0b99abc17e7c7bec93d1f8faf4ab5d03ee09f492d6978eec7d",
+      "csv_row_count": null
+    }
+  ],
+  "per_run_hashes": {
+    "v20_A_31880113343579f1_1835089000": {
+      "key": {
+        "category": "A",
+        "cell": "31880113343579f1",
+        "seed": 1835089000,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "e474652d9e97461ef33ca9ca09c491fbf838cbcba68a02d3c086e7971d043974",
+      "step_row_count": 300,
+      "steps_sha256_lf": "d3e1c02e40bff261ecd80d43f7151cad29bc792d124048de1d5863c18284791f"
+    },
+    "v20_A_31880113343579f1_1835089001": {
+      "key": {
+        "category": "A",
+        "cell": "31880113343579f1",
+        "seed": 1835089001,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "384c8b9528e99cc43ff5b8872591224ce909bd90587ec649b90bb099b4db906d",
+      "step_row_count": 300,
+      "steps_sha256_lf": "cc30095fa75294a0ab80c2b896ce6ff5a2771da4a6a73d8d65e495b1eb1f2fab"
+    },
+    "v20_A_7d603f92ccb1b1ac_1835089000": {
+      "key": {
+        "category": "A",
+        "cell": "7d603f92ccb1b1ac",
+        "seed": 1835089000,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "cd659295e5541307598aea917a788b6053b44358704858ff8e628b68cc9e9541",
+      "step_row_count": 300,
+      "steps_sha256_lf": "c2bb6912bf7867df32e15d1aacd96b4d58052bca4fe8b3ffe34c95581540cad8"
+    },
+    "v20_A_7d603f92ccb1b1ac_1835089001": {
+      "key": {
+        "category": "A",
+        "cell": "7d603f92ccb1b1ac",
+        "seed": 1835089001,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "f73e5ab75ee482f358504d63b8801af646180f7de21785bdce653657155f442c",
+      "step_row_count": 300,
+      "steps_sha256_lf": "ca2a2b9c41585291322a6e2e901cc9837fc63b7daf3494eeb771a9665b4ac5e4"
+    },
+    "v21_A_31880113343579f1_1835089000": {
+      "key": {
+        "category": "A",
+        "cell": "31880113343579f1",
+        "seed": 1835089000,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "069618bb43170cd1edea5dfdc88f28d51878ca70f8fad5303bd13dcefe432c35",
+      "step_row_count": 300,
+      "steps_sha256_lf": "1f9be40a50f11042dca427faafd646f008a9494f366949eafe31671e29f3a8fe"
+    },
+    "v21_A_31880113343579f1_1835089001": {
+      "key": {
+        "category": "A",
+        "cell": "31880113343579f1",
+        "seed": 1835089001,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "779e1a9087e5cced53bcfd21f1d87b3d79d1973e9385ea0b79f8ddfb23f5ca4b",
+      "step_row_count": 300,
+      "steps_sha256_lf": "150d0b270391719befa1cb517501a5840588e1aa42c67d21c8d695bf4838e41d"
+    },
+    "v21_A_7d603f92ccb1b1ac_1835089000": {
+      "key": {
+        "category": "A",
+        "cell": "7d603f92ccb1b1ac",
+        "seed": 1835089000,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "d8377e43d48812fa9ee38ef719acda604e77b29d6f8e5d9e2d873ba4a42b12cf",
+      "step_row_count": 300,
+      "steps_sha256_lf": "501a7d7d5a7c5b4454aeadd3ebb3f60603c96a5d604de957c79d44e5c1ee6296"
+    },
+    "v21_A_7d603f92ccb1b1ac_1835089001": {
+      "key": {
+        "category": "A",
+        "cell": "7d603f92ccb1b1ac",
+        "seed": 1835089001,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "f0e1fa7082391f4da1d18c7fe44d81b5275488e21d2930c6ba83f7149e1c9041",
+      "step_row_count": 300,
+      "steps_sha256_lf": "6a69db804f09ad53bb3717b48fdbc159dc66fbbaa52412f5b19bf5e8735b8b07"
+    },
+    "v20_B_1b86f39af78a26c2_1835089100": {
+      "key": {
+        "category": "B",
+        "cell": "1b86f39af78a26c2",
+        "seed": 1835089100,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "c01370a1e57026528ab1980732f5826e27f1de1dd0235abe1629b2e81a12af02",
+      "step_row_count": 300,
+      "steps_sha256_lf": "8863fae4aa91738757a845bc2b1a1bc7d3708e6c25c32385f15c02633b258133"
+    },
+    "v20_B_1b86f39af78a26c2_1835089101": {
+      "key": {
+        "category": "B",
+        "cell": "1b86f39af78a26c2",
+        "seed": 1835089101,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "ea114cfa94c312a15c617b99fc1bd269fdd11fe275c047de1f9df3601ea353a3",
+      "step_row_count": 300,
+      "steps_sha256_lf": "f93190ecd0595a4ce311fcfd8e3c3425ea76b96ab44f903ab9968996bddbf97d"
+    },
+    "v20_B_601f616c65e51cb1_1835089100": {
+      "key": {
+        "category": "B",
+        "cell": "601f616c65e51cb1",
+        "seed": 1835089100,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "577fd48b3905e12f7b260145a3af230eeade4946160f82d463b17fa317a477fa",
+      "step_row_count": 300,
+      "steps_sha256_lf": "773c45883235b7e50978318bb6fc89762a69843cfdfc1a128d2a9b16772e3732"
+    },
+    "v20_B_601f616c65e51cb1_1835089101": {
+      "key": {
+        "category": "B",
+        "cell": "601f616c65e51cb1",
+        "seed": 1835089101,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "c728304452ef6d225a558a799209920fe21fe50548974e2f5f92c90fcbf5ca02",
+      "step_row_count": 300,
+      "steps_sha256_lf": "7863643b0bd5b8b4a47d6c5f4ead86b92c329e025415853a7deb82c0bcfcb19a"
+    },
+    "v20_B_b34432c7c080923f_1835089100": {
+      "key": {
+        "category": "B",
+        "cell": "b34432c7c080923f",
+        "seed": 1835089100,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "9a996266aa02e27711f937566b63041ef45984092db3613791416767081a6d4e",
+      "step_row_count": 300,
+      "steps_sha256_lf": "cac20750cd5d04d9e71d4595120bfb64a79038d0f4e687a049af439762854cb5"
+    },
+    "v20_B_b34432c7c080923f_1835089101": {
+      "key": {
+        "category": "B",
+        "cell": "b34432c7c080923f",
+        "seed": 1835089101,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "92c1f51752338179189288d7da42d9b0131a620f04aed11e6931d5f8e91e3361",
+      "step_row_count": 300,
+      "steps_sha256_lf": "59a84248d20cb76b9ad81d0093f422c201b8ea311b6bb6e900492a54d57576bc"
+    },
+    "v20_B_c5a77cd9d8b3ca87_1835089100": {
+      "key": {
+        "category": "B",
+        "cell": "c5a77cd9d8b3ca87",
+        "seed": 1835089100,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "d7211bf3ad68dc74e48a652e8ad34c0111c4bf4261e79674e574c5a26525374f",
+      "step_row_count": 300,
+      "steps_sha256_lf": "8c60aa7d17aa95e3ea77f2f808167c2661907f4c57ccca1a99f644e1794c7527"
+    },
+    "v20_B_c5a77cd9d8b3ca87_1835089101": {
+      "key": {
+        "category": "B",
+        "cell": "c5a77cd9d8b3ca87",
+        "seed": 1835089101,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "b4ff5a7ef5f9dc5a6b7c79478c55a9b92a213bb6d28e4c422bf4ea2c4ae2398d",
+      "step_row_count": 300,
+      "steps_sha256_lf": "bcdfb738360899d27384fca2be930089137becc7d2bd141e509c8854c4b44451"
+    },
+    "v21_B_1b86f39af78a26c2_1835089100": {
+      "key": {
+        "category": "B",
+        "cell": "1b86f39af78a26c2",
+        "seed": 1835089100,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "2f495077e67d56dbdcac9c2eb90ab35b08ff9821d9e35f64493c65c290384783",
+      "step_row_count": 300,
+      "steps_sha256_lf": "f4a8766085a50b99f6220891945ee490c0539e6695545d2019d12fa25fbe6998"
+    },
+    "v21_B_1b86f39af78a26c2_1835089101": {
+      "key": {
+        "category": "B",
+        "cell": "1b86f39af78a26c2",
+        "seed": 1835089101,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "733ee012664e080ea2f5ecb19b7ecc6426360af17c7c4920adbcb3ea0d88027f",
+      "step_row_count": 300,
+      "steps_sha256_lf": "3e4e8e93a3a2007eb03fb6526eb44a7da1b801e81c8791b72d44fee9d735e5fe"
+    },
+    "v21_B_601f616c65e51cb1_1835089100": {
+      "key": {
+        "category": "B",
+        "cell": "601f616c65e51cb1",
+        "seed": 1835089100,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "9010b237c044d70fe3f39bdd2fe0476baf46a11fd4c5ff5fbca61c67b8cfc95d",
+      "step_row_count": 300,
+      "steps_sha256_lf": "a69f57e9cd73ca891ab546033108f7f2ed62d696ada879b03850d28a75f69b10"
+    },
+    "v21_B_601f616c65e51cb1_1835089101": {
+      "key": {
+        "category": "B",
+        "cell": "601f616c65e51cb1",
+        "seed": 1835089101,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "e10693dfbfb2806a4247dfeedb19fda18e67dae13f02c2e63b137f5862588014",
+      "step_row_count": 300,
+      "steps_sha256_lf": "6d580ca0dc5119f52277129d64ad3bd7150c1866446acb4d99cec4e2f1af042d"
+    },
+    "v21_B_b34432c7c080923f_1835089100": {
+      "key": {
+        "category": "B",
+        "cell": "b34432c7c080923f",
+        "seed": 1835089100,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "bdd60338e259ae249c4d4f05ef1ef5adb99f7584548fab85520d87164bf2159f",
+      "step_row_count": 300,
+      "steps_sha256_lf": "8e2e090af2edd4f1a38b087a78249290f3f953c3f0892fe88f4f85a93e8dede4"
+    },
+    "v21_B_b34432c7c080923f_1835089101": {
+      "key": {
+        "category": "B",
+        "cell": "b34432c7c080923f",
+        "seed": 1835089101,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "6d3171dc83a0227b4d9c3c3aa4994e87eed36b9f480d9e2ed7dd6694a0a6415d",
+      "step_row_count": 300,
+      "steps_sha256_lf": "9ff8e8b9609d5c22df3583153f6ab8df87de190b5793679a873aa539bc53eaec"
+    },
+    "v21_B_c5a77cd9d8b3ca87_1835089100": {
+      "key": {
+        "category": "B",
+        "cell": "c5a77cd9d8b3ca87",
+        "seed": 1835089100,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "e0e6d788433813256de32a6ca481979bf7770a8a80cf9cd0d7debd148761a2c2",
+      "step_row_count": 300,
+      "steps_sha256_lf": "1bbc6b561c5ccd145263b89e080a1b5f51c5f5802c07b828487c6dba50f19362"
+    },
+    "v21_B_c5a77cd9d8b3ca87_1835089101": {
+      "key": {
+        "category": "B",
+        "cell": "c5a77cd9d8b3ca87",
+        "seed": 1835089101,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "bed504ec96146f3fb8b5fadb808874eabe4c1a20c37ebd3a9e985253f33ae3fd",
+      "step_row_count": 300,
+      "steps_sha256_lf": "fce834f2cb4746fcbbff36500ef03c6902c7affd9cfb8551a5e903a5f39fb2dd"
+    },
+    "v20_C_bce7b193eaa5a5bd_1835089200": {
+      "key": {
+        "category": "C",
+        "cell": "bce7b193eaa5a5bd",
+        "seed": 1835089200,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "c2d1358b21399516bae98ae5e15911920db5b8e5d833d93650d748e0d931f835",
+      "step_row_count": 300,
+      "steps_sha256_lf": "cda3d58ad776d7ad7aa4483de542cc8eaf3e3fda97b210f349b0877824af1196"
+    },
+    "v20_C_bce7b193eaa5a5bd_1835089201": {
+      "key": {
+        "category": "C",
+        "cell": "bce7b193eaa5a5bd",
+        "seed": 1835089201,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "e71648c3f74f363274a78d80d11b540c19fb1371ad73a06f186010cbaad7f5b0",
+      "step_row_count": 300,
+      "steps_sha256_lf": "927f1ef90ab62a450082bfe2994e1e7c32b1af826340051efcfd462974215373"
+    },
+    "v20_C_c954d73f498217d5_1835089200": {
+      "key": {
+        "category": "C",
+        "cell": "c954d73f498217d5",
+        "seed": 1835089200,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "d8a32e770ec084ba66ddfdf118272a3fa5e73507762a4be0c1266bd6c852a79c",
+      "step_row_count": 300,
+      "steps_sha256_lf": "bb797e48ac62bd5555b6bda5b8e33d4d498aa1bc039778448105882a6d005951"
+    },
+    "v20_C_c954d73f498217d5_1835089201": {
+      "key": {
+        "category": "C",
+        "cell": "c954d73f498217d5",
+        "seed": 1835089201,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "27929f98c453159d5d073b6e20b4c31949ab5dc3b14dab77473c8d2f78a7ce8a",
+      "step_row_count": 300,
+      "steps_sha256_lf": "70aaec01e8d65f617a0951a5a5dfb2113a92e267e341aaeab98acc5f730a7934"
+    },
+    "v21_C_bce7b193eaa5a5bd_1835089200": {
+      "key": {
+        "category": "C",
+        "cell": "bce7b193eaa5a5bd",
+        "seed": 1835089200,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "73d1e71ae6189f5a2eb5f55f3a0888edb3c693ca263a8eb5df4dfd42a8eea75d",
+      "step_row_count": 300,
+      "steps_sha256_lf": "86063627460d9807d2878d56e367f0432d19917cd280de2d827a24633013cd94"
+    },
+    "v21_C_bce7b193eaa5a5bd_1835089201": {
+      "key": {
+        "category": "C",
+        "cell": "bce7b193eaa5a5bd",
+        "seed": 1835089201,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "4feb73eaefd04b3fda03addd007dbbabd047f40b0c028a229a72be6de37f6a7e",
+      "step_row_count": 300,
+      "steps_sha256_lf": "70f0a7a54916d3e4df83d891382161cda7cd6f5421e377d2b3cb0c44dcfa6060"
+    },
+    "v21_C_c954d73f498217d5_1835089200": {
+      "key": {
+        "category": "C",
+        "cell": "c954d73f498217d5",
+        "seed": 1835089200,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "4dba4cf054b25a96871a0088970e48607396c78d814d9fe5447cf60d3858c36e",
+      "step_row_count": 300,
+      "steps_sha256_lf": "fb0aa1e3fec7df8856a4a0be87109cd0fe3c90c86dfb83b4380cecd994ab2b7b"
+    },
+    "v21_C_c954d73f498217d5_1835089201": {
+      "key": {
+        "category": "C",
+        "cell": "c954d73f498217d5",
+        "seed": 1835089201,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "631129e9fc987d0be8dcc7fa44f7a02dccd6f8575d1458b2ca1c3f2e46e146a2",
+      "step_row_count": 300,
+      "steps_sha256_lf": "d08c25d28013848b46960923dac51fa78f191e1855b840d5fb73ff1d485866f4"
+    },
+    "v20_phi_3ebc23e15d89e550_1835089300": {
+      "key": {
+        "category": "phi",
+        "cell": "3ebc23e15d89e550",
+        "seed": 1835089300,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "60ee358ec13f0fb35c0b309553f6b0fdad407ffee10a02a117923924d65e8298",
+      "step_row_count": 300,
+      "steps_sha256_lf": "d3cb00099de47e9b41c2c39f20e23f307b4bc7f9c0d7d95cabcd82dba3a5e354"
+    },
+    "v20_phi_3ebc23e15d89e550_1835089301": {
+      "key": {
+        "category": "phi",
+        "cell": "3ebc23e15d89e550",
+        "seed": 1835089301,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "efd84ad2c83ebfa908cf96c9b87e7e346056493bd6a2c50baf6993cc06161b63",
+      "step_row_count": 300,
+      "steps_sha256_lf": "d33e9083dd3e08e60eb152715a583caba1f36612b1c514dd32ad653bc25adc22"
+    },
+    "v20_phi_ce98cec31a3af575_1835089300": {
+      "key": {
+        "category": "phi",
+        "cell": "ce98cec31a3af575",
+        "seed": 1835089300,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "481d26ffe1a62c2e762e4d4ba484b08c68e6211000aa9639eb93a1ca82f3f917",
+      "step_row_count": 300,
+      "steps_sha256_lf": "01b98ea9e1af662783fb84b819877208dff1aad9e5be05f0c59cce628cb6702c"
+    },
+    "v20_phi_ce98cec31a3af575_1835089301": {
+      "key": {
+        "category": "phi",
+        "cell": "ce98cec31a3af575",
+        "seed": 1835089301,
+        "substrate": "v20"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "cd6be798bb8f1a463b649c2e47739079322cb0d0ce92a892917d398baf5c96c5",
+      "step_row_count": 300,
+      "steps_sha256_lf": "741feb4390bb963cb517af4972022c9aa080600f5d1a0d4ac163454dfa9b9987"
+    },
+    "v21_phi_3ebc23e15d89e550_1835089300": {
+      "key": {
+        "category": "phi",
+        "cell": "3ebc23e15d89e550",
+        "seed": 1835089300,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "499b7a32d80795ebd1185d3dc51d9ed266f036984bfd62e326e6cf4f29e374e5",
+      "step_row_count": 300,
+      "steps_sha256_lf": "8a28a8c14f95a9c854a72d14752b1ed7842334050ed44e14c87cfa84547f6e2f"
+    },
+    "v21_phi_3ebc23e15d89e550_1835089301": {
+      "key": {
+        "category": "phi",
+        "cell": "3ebc23e15d89e550",
+        "seed": 1835089301,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "832a8a821a4a412ccf3ec427ba9e3098bed36efc7344ae0c9ae6fe8c4c2f5dc3",
+      "step_row_count": 300,
+      "steps_sha256_lf": "e5e1749a90a9b6320d5fb106628d5be6489706ffa1e6e6d94d7d0d941b2248fb"
+    },
+    "v21_phi_ce98cec31a3af575_1835089300": {
+      "key": {
+        "category": "phi",
+        "cell": "ce98cec31a3af575",
+        "seed": 1835089300,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "257b1ca973071fe5fdbb982fb3900a4d2a15e53a593240d7b5ad4875a844509a",
+      "step_row_count": 300,
+      "steps_sha256_lf": "c422434696e8a81633739ec6b48592f6eaf52dbf01960be0665c72598b78f93e"
+    },
+    "v21_phi_ce98cec31a3af575_1835089301": {
+      "key": {
+        "category": "phi",
+        "cell": "ce98cec31a3af575",
+        "seed": 1835089301,
+        "substrate": "v21"
+      },
+      "row_count": 1,
+      "row_sha256_lf": "f4834c814f53dfca201d0f6cb66cfd4ce04a8576c2e1cdca12f3bce6e3976684",
+      "step_row_count": 300,
+      "steps_sha256_lf": "35ad4901591a7857dafed297b2d6245b7f50049192c1bd2cbc8f923fe6f856a5"
+    }
+  },
+  "repeat_probe_hashes": {
+    "v20_A_7d603f92ccb1b1ac_1835089000": {
+      "key": {
+        "substrate": "v20",
+        "category": "A",
+        "cell": "7d603f92ccb1b1ac",
+        "seed": 1835089000
+      },
+      "row_count": 1,
+      "row_sha256_lf": "fb395f060e65448b8b495d0a1ca1db0436c5dd9b37a71c6cf5656d1a621808c5",
+      "step_row_count": 300,
+      "steps_sha256_lf": "c2bb6912bf7867df32e15d1aacd96b4d58052bca4fe8b3ffe34c95581540cad8"
+    },
+    "v21_A_7d603f92ccb1b1ac_1835089000": {
+      "key": {
+        "substrate": "v21",
+        "category": "A",
+        "cell": "7d603f92ccb1b1ac",
+        "seed": 1835089000
+      },
+      "row_count": 1,
+      "row_sha256_lf": "775e575ae45202de862a3bb8391e9d7759f2f08e1e96ffbf20fac167875fe896",
+      "step_row_count": 300,
+      "steps_sha256_lf": "501a7d7d5a7c5b4454aeadd3ebb3f60603c96a5d604de957c79d44e5c1ee6296"
+    }
+  },
+  "deleted_per_run_files": {
+    "completion": 40,
+    "row": 40,
+    "steps": 40,
+    "initial": 40,
+    "progress": 40,
+    "console": 40
+  },
+  "repeat_deleted_per_run_files": {
+    "completion": 2,
+    "row": 2,
+    "steps": 2,
+    "initial": 2,
+    "progress": 2,
+    "console": 2
+  },
+  "executor_versions": [
+    "9232896ff76e5971360819e951c6323f1d474f021e27eed4772956222e0ccc12",
+    "596099e425fc82c5fe0206dae77a37694dd0e09e2d929ab0866f91541cfd34fe"
+  ],
+  "t0_stderr_warnings": [
+    {
+      "command": [
+        "git",
+        "-C",
+        "C:/Users/matty/Dev/phase-b-recon-v20",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 128,
+      "stdout": "",
+      "stderr": "fatal: detected dubious ownership in repository at 'C:/Users/matty/Dev/phase-b-recon-v20'\n'C:/Users/matty/Dev/phase-b-recon-v20/.git' is owned by:\n\tYotkoTest/matty (S-1-5-21-2945749749-428036227-2920552123-1001)\nbut the current user is:\n\tYotkoTest/CodexSandboxOffline (S-1-5-21-2945749749-428036227-2920552123-1003)\nTo add an exception for this directory, call:\n\n\tgit config --global --add safe.directory C:/Users/matty/Dev/phase-b-recon-v20\n"
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n"
+    }
+  ],
+  "manifest_self_hash": "Not included because the manifest cannot contain its own content hash.",
+  "non_registered_notice": "Test outputs are not measurements or evidence for registered quantities."
+}

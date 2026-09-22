@@ -1,0 +1,57 @@
+{
+  "non_registered": true,
+  "validation_only": true,
+  "runs": {
+    "v20_A_7d603f92ccb1b1ac_1835089000": {
+      "key": {
+        "substrate": "v20",
+        "category": "A",
+        "cell": "7d603f92ccb1b1ac",
+        "seed": 1835089000
+      },
+      "row_count": 1,
+      "row_sha256_lf": "fb395f060e65448b8b495d0a1ca1db0436c5dd9b37a71c6cf5656d1a621808c5",
+      "step_row_count": 300,
+      "steps_sha256_lf": "c2bb6912bf7867df32e15d1aacd96b4d58052bca4fe8b3ffe34c95581540cad8"
+    },
+    "v21_A_7d603f92ccb1b1ac_1835089000": {
+      "key": {
+        "substrate": "v21",
+        "category": "A",
+        "cell": "7d603f92ccb1b1ac",
+        "seed": 1835089000
+      },
+      "row_count": 1,
+      "row_sha256_lf": "775e575ae45202de862a3bb8391e9d7759f2f08e1e96ffbf20fac167875fe896",
+      "step_row_count": 300,
+      "steps_sha256_lf": "501a7d7d5a7c5b4454aeadd3ebb3f60603c96a5d604de957c79d44e5c1ee6296"
+    }
+  },
+  "merged_files": {
+    "A": {
+      "rows": {
+        "path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_recon_smoke_repeat_A_runs.csv",
+        "sha256_lf": "3b48d70e27301a34d84429d415e42c4bdee67092be714ccc23f59ea35e789b95",
+        "row_count": 2
+      },
+      "steps": {
+        "path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_recon_smoke_repeat_A_steps.csv",
+        "sha256_lf": "a910b447db065a7e3819993251b341c148bf088fc59538b64c4cf662ed3912f3",
+        "row_count": 600
+      },
+      "completions": {
+        "path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_recon_smoke_repeat_A_completions.jsonl",
+        "sha256_lf": "95c982cd901762678a56361703351486f867a809426608e0aad3157ecb57031e",
+        "row_count": 2
+      }
+    }
+  },
+  "deleted_per_run_files": {
+    "completion": 2,
+    "row": 2,
+    "steps": 2,
+    "initial": 2,
+    "progress": 2,
+    "console": 2
+  }
+}

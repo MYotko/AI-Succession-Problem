@@ -1,0 +1,158 @@
+{
+  "utc": "2026-09-22T03:56:53.659955+00:00",
+  "killed_worker": {
+    "key": "v21_A_31880113343579f1_1835089000",
+    "pid": 35896
+  },
+  "progress_before": {
+    "status": "running",
+    "updated_utc": "2026-09-22T03:56:51.795316+00:00",
+    "parent_pid": 40680,
+    "prefix": "phase_b_recon_smoke_",
+    "cells": {
+      "A/v21": {
+        "completed": 2,
+        "running": 2,
+        "pending": 0
+      },
+      "B/v21": {
+        "completed": 0,
+        "running": 0,
+        "pending": 8
+      },
+      "C/v21": {
+        "completed": 0,
+        "running": 0,
+        "pending": 4
+      },
+      "phi/v21": {
+        "completed": 0,
+        "running": 0,
+        "pending": 4
+      },
+      "A/v20": {
+        "completed": 0,
+        "running": 0,
+        "pending": 4
+      },
+      "B/v20": {
+        "completed": 0,
+        "running": 0,
+        "pending": 8
+      },
+      "C/v20": {
+        "completed": 0,
+        "running": 0,
+        "pending": 4
+      },
+      "phi/v20": {
+        "completed": 0,
+        "running": 0,
+        "pending": 4
+      }
+    },
+    "completed": 2,
+    "running": 2,
+    "pending": 36,
+    "elapsed_seconds": 177.61257140000816,
+    "mean_seconds_per_run": 88.59051285000169,
+    "requested_workers": 2,
+    "worker_limit": 2,
+    "mode": "work",
+    "active": [
+      {
+        "key": "v21_A_31880113343579f1_1835089000",
+        "pid": 35896
+      },
+      {
+        "key": "v21_A_31880113343579f1_1835089001",
+        "pid": 17808
+      }
+    ],
+    "resume_counts": {
+      "preserved": 0,
+      "restarted": 0,
+      "never_launched": 40
+    }
+  },
+  "partial_heartbeat": {
+    "key": {
+      "substrate": "v21",
+      "category": "A",
+      "cell": "31880113343579f1",
+      "seed": 1835089000
+    },
+    "pid": 35896,
+    "steps_completed": 276,
+    "updated_utc": "2026-09-22T03:56:50.633508+00:00",
+    "elapsed_seconds": 81.57223500002874
+  },
+  "completed_file_hashes_before": {
+    "phase_b_recon_smoke_job_v21_A_7d603f92ccb1b1ac_1835089000_completion.json": "ac01fd1fa9674402983be49ba12d44fdf2ea53c33f916a7fe65e10a263954e08",
+    "phase_b_recon_smoke_job_v21_A_7d603f92ccb1b1ac_1835089001_completion.json": "7b8e5b12f45927e038d17714cf93fc0ba8579d90944e458c72c6203d3a406c34"
+  },
+  "method": "Windows OpenProcess(PROCESS_TERMINATE) and TerminateProcess",
+  "initial_exit_code": 2,
+  "parent_stopped_progress": {
+    "status": "stopped",
+    "updated_utc": "2026-09-22T03:56:53.744251+00:00",
+    "parent_pid": 40680,
+    "prefix": "phase_b_recon_smoke_",
+    "cells": {
+      "A/v21": {
+        "completed": 2,
+        "running": 0,
+        "pending": 2
+      },
+      "B/v21": {
+        "completed": 0,
+        "running": 0,
+        "pending": 8
+      },
+      "C/v21": {
+        "completed": 0,
+        "running": 0,
+        "pending": 4
+      },
+      "phi/v21": {
+        "completed": 0,
+        "running": 0,
+        "pending": 4
+      },
+      "A/v20": {
+        "completed": 0,
+        "running": 0,
+        "pending": 4
+      },
+      "B/v20": {
+        "completed": 0,
+        "running": 0,
+        "pending": 8
+      },
+      "C/v20": {
+        "completed": 0,
+        "running": 0,
+        "pending": 4
+      },
+      "phi/v20": {
+        "completed": 0,
+        "running": 0,
+        "pending": 4
+      }
+    },
+    "completed": 2,
+    "running": 0,
+    "pending": 38,
+    "elapsed_seconds": 179.56149709998863,
+    "mean_seconds_per_run": 88.59051285000169,
+    "requested_workers": 2,
+    "worker_limit": 2,
+    "mode": "work",
+    "active": [],
+    "resume_counts": {
+      "preserved": 0,
+      "restarted": 0,
+      "never_launched": 40
+    }
+  }
+}
