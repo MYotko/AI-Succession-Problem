@@ -1,0 +1,56 @@
+{
+  "status": "halted_write_scope_attempt",
+  "reason": "The executor atomic-write helper attempted to create phase_b_recon_progress.json.tmp.7300. The exhaustive scope permits phase_b_recon_progress.json, but not a temporary file with that name. The write guard rejected the attempt before file creation and before any worker launched. The explicit halt rule for any attempted write outside scope applies even to an executor defect.",
+  "smoke_runs_launched": 0,
+  "measured_runs_launched": 0,
+  "worker_processes_launched": 0,
+  "executor_exists": true,
+  "executor_validated": false,
+  "blocked_path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_recon_progress.json.tmp.7300",
+  "outside_scope_file_created": false,
+  "self_fix_applied": false,
+  "why_not_fixed": "The dispatch explicitly makes an attempted write outside scope a halt, including defects in the executor.",
+  "checks": [
+    [
+      1,
+      "Both substrates ran and HEADs match",
+      "HEADs verified: v21 20a6327a289b94fade04c915c6e38ff495cf3468; v20 2044f50a8cf71874f259e74fd05ec495169b9ae4. Neither substrate ran."
+    ],
+    [
+      2,
+      "Required fields and types",
+      "Schema implemented and parsed; no rows exist to validate."
+    ],
+    [
+      3,
+      "Survival, yield and generation liveness",
+      "Not tested; zero model runs."
+    ],
+    [
+      4,
+      "Determinism",
+      "Grid and job assignment static checks passed; model repetition not tested."
+    ],
+    [
+      5,
+      "Kill and resume",
+      "Not reached. Preserved 0, restarted 0, never launched 40."
+    ],
+    [
+      6,
+      "Merge recovery and hashes",
+      "Implemented but not exercised. No run rows or step logs exist."
+    ],
+    [
+      7,
+      "Two worker settings",
+      "Requested 2; actual peak 0. The 8-worker invocation was never launched."
+    ],
+    [
+      8,
+      "Matched substrate differences",
+      "Source files and HEADs differ; scientific output comparison not run."
+    ]
+  ],
+  "source_pins_match_at_completion": true
+}

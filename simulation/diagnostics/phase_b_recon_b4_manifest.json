@@ -1,0 +1,251 @@
+{
+  "status": "halted_write_scope_attempt",
+  "generated_utc": "2026-09-22T03:48:46.466973+00:00",
+  "head": "20a6327a289b94fade04c915c6e38ff495cf3468",
+  "machine": "YotkoTest",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "numpy_version_installed_not_imported": "2.4.4",
+  "initial_source_readings": [
+    {
+      "path": "simulation/diagnostics/phase_b_reconstruction_design_note.md",
+      "pin": "c6416f59660210f14f4c0d8e70423570f58a1c6749768b89d6985f39e67f5a0d",
+      "committed_sha256_lf": "c6416f59660210f14f4c0d8e70423570f58a1c6749768b89d6985f39e67f5a0d",
+      "working_tree_sha256_lf": "c6416f59660210f14f4c0d8e70423570f58a1c6749768b89d6985f39e67f5a0d",
+      "blob_sha1": "88d79b15985ff11681b82dddb0df3d1424d22660"
+    },
+    {
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "pin": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "committed_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "working_tree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d"
+    },
+    {
+      "path": "simulation/model.py",
+      "pin": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879"
+    },
+    {
+      "path": "simulation/agents.py",
+      "pin": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51"
+    },
+    {
+      "path": "simulation/metrics.py",
+      "pin": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611"
+    }
+  ],
+  "completion_source_readings": [
+    {
+      "path": "simulation/diagnostics/phase_b_reconstruction_design_note.md",
+      "pin": "c6416f59660210f14f4c0d8e70423570f58a1c6749768b89d6985f39e67f5a0d",
+      "committed_sha256_lf": "c6416f59660210f14f4c0d8e70423570f58a1c6749768b89d6985f39e67f5a0d",
+      "working_tree_sha256_lf": "c6416f59660210f14f4c0d8e70423570f58a1c6749768b89d6985f39e67f5a0d",
+      "blob_sha1": "88d79b15985ff11681b82dddb0df3d1424d22660"
+    },
+    {
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "pin": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "committed_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "working_tree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d"
+    },
+    {
+      "path": "simulation/model.py",
+      "pin": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "committed_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "working_tree_sha256_lf": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+      "blob_sha1": "a1cf988532203b7119462eb9b04cf2e3b0541879"
+    },
+    {
+      "path": "simulation/agents.py",
+      "pin": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "committed_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "working_tree_sha256_lf": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+      "blob_sha1": "d21e5300eab6e4136141ea33aa0367b9aa47ed51"
+    },
+    {
+      "path": "simulation/metrics.py",
+      "pin": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "committed_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "working_tree_sha256_lf": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+      "blob_sha1": "7e7749d99636746aa2c3215da1edaa6ab5372611"
+    }
+  ],
+  "substrates": {
+    "v21": {
+      "path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem",
+      "head": "20a6327a289b94fade04c915c6e38ff495cf3468",
+      "modules_sha256_lf": {
+        "simulation/agents.py": "a51f6d833fa2e228aaa4e95ca59f9c7e0f83e5741c94deef88a0ea895554cfca",
+        "simulation/analyze_phi_adversarial.py": "d88656b8d6d0c8678e741e2b876713cc83b065254380b492f41bb933a9133839",
+        "simulation/analyze_sybil_defense_scaling_characterization.py": "81d58d9c7bbeaa8a1f0ac1d6c0d566a38ba04cbfe2bb7cb843e651b3222c936a",
+        "simulation/attack_adapter_v2.py": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "simulation/attack_metrics_v2.py": "7aaef0063bc485b96f85372e89f7b369f153733cd3e1f285e8e326a416f8d323",
+        "simulation/constants_v2_stage15.py": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "simulation/constants_v2_stage18.py": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "simulation/cusum_detector_v2.py": "6667bc6c573bdceb2dd27908a272ee397922dcf61ad7f872d6b31e135dd596e9",
+        "simulation/defection.py": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "simulation/deps.py": "f20f0579b6c264ab1690e6c45de4f24108158b221cb2d2f31247a7239aafe70a",
+        "simulation/metrics.py": "6dc16efdfd4faed1638a96f6c2af7365757d1ca47eeb86deb5619a3e580b901f",
+        "simulation/model.py": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993",
+        "simulation/monte_carlo.py": "bf6fbce4e8990d1e9ae7a4fa6fb1003dd95d82f038ddcc4f27fef285e2e440ff",
+        "simulation/run_alpha_succession_sweep.py": "e1742fc0e84bff089989ecfb79afbeb74c375bd7ff0317ca1bb5b59144a00e44",
+        "simulation/run_attack_vector_revalidation_v2.py": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "simulation/run_calibration.py": "a530742d83080b32f21070a12e5ed35d82f72ce59c853fad478d39838aab2f8a",
+        "simulation/run_comprehension_gap_powered_arm.py": "1066df0ccbe35ce4e0647cf71662bc2f950ead2e5c87f1a3dda7db515b27828b",
+        "simulation/run_comprehension_gap_sweep.py": "703f641d743220c0fdacfa6c6aab315527782f4f4857bee38ea4090d5e911cac",
+        "simulation/run_demographic_feedback_calibration.py": "c74e6db001be8ba9a1a6d01951fc0205a07b1f17ac1d40ccedf501fc5a76ee42",
+        "simulation/run_frontier_floor_calibration.py": "2d69ac68699173a8208800465b337b4bf6ed073036f7d9bf0a5096a3681004da",
+        "simulation/run_phi_adversarial_sweep.py": "10b9fb94c3faa28a6637eeb9c9b90e8925241bfbd2ab92fecec3356002e731e9",
+        "simulation/run_phi_alpha_rr_sweep.py": "6989423c2001d1812a59e7029f3e9593d18e005283cc85a9421e6c252b866d97",
+        "simulation/run_phi_shock_calibration.py": "bc045cc999c1dbe1e1720caafd8d4fbf78aef6c24e8b556e894cd1cfac29d72c",
+        "simulation/run_rr_alpha_sweep.py": "48ac7b77ca1ce7f46fdac3e7712c03466ffad2e1855fe0fc19a09f8882ff7b3b",
+        "simulation/run_sybil_defense_scaling_characterization.py": "b523342c954d52c991e084c168be3e9b10f55425a3cba44d16be4c2b9c78ebd3",
+        "simulation/run_sybil_defense_scaling_smoke.py": "1ba6d40c3776a97b6576fe9749c605f539bf3842a465303f6d79c5996572dc2f",
+        "simulation/run_sybil_two_dial_smoke.py": "c99d8e185476cc25b67056b2c99db01462fe0de4f2aff13399f953075f06b03c",
+        "simulation/run_termination_sweep.py": "b5fa654cefc9f232ecab30cbbbd99abbf724cca25ba553abcfc3d8445c1bf34c",
+        "simulation/run_to_termination.py": "cffb6eb30aec86f9b28b3ab2e1dca703a6d2e06e1be47b3e145759880a2c0aee",
+        "simulation/run_transition_cost_calibration.py": "a14d0441ef9635c9807397e0488fd1d46d3038650eba7ecef153b3734e38c25e",
+        "simulation/run_veto_capture_sweep.py": "6377bae70845dcc86ca0b0062bbb2b01df53f917f32bc25534bb2f31dd1a129a",
+        "simulation/simulation.py": "41da4be9fac62800f636592bc016e4dbacbee828b6d340aae6f316733e7163e8",
+        "simulation/sybil_defense_scaling.py": "03e8e7d8bf21e0a81918d4dfd3a5be511eb760d0f9ead58f8dea7e71df7d75e8",
+        "simulation/test_attack_adapter_v2.py": "11f1e2b04e2a04503886df37d8049dbb9c6bcd2c910e72bdb878bdec4fd40063",
+        "simulation/test_attack_vector_revalidation_v2_runner.py": "7ecbcb7444a2391d97b4f55314cdb6b0ec26a1d71027cf7e37e36e56d536203e",
+        "simulation/test_cop.py": "9ce8196b550c3f5b0af802119769cbbd757e6de984b66acb0e4cae1abb6ab9b3",
+        "simulation/test_invariants.py": "fd4addf76ab27d25ef247338666aa6779656d4dd775f520f3a14be0a371c5266",
+        "simulation/test_output_paths.py": "9f4ef3085f9e95274df199f6d618c6e381d9b8c135ad7fc441b940853f011bd3",
+        "simulation/test_refactor_1x.py": "d4f52bd9e8c828c007fa569e2202f0c31a8fdbe367711d5160630387f66feeac",
+        "simulation/test_sybil_characterization_analysis.py": "7bae39d67460565f2a1b2cac27b727613e15ee5aee8b49da5e81b4c341edc1fe",
+        "simulation/test_sybil_characterization_runner.py": "a768fe1cb1ce0bde144ecb93dc712aac1a4579688c24660b80473fdabb6e90c5",
+        "simulation/test_sybil_defense_scaling.py": "ec65db4a04184d9fa17815c028e0328cc52a5368a38e6a3d138ae8bdb01544e6",
+        "simulation/test_sybil_two_dial_capability.py": "e7c1631b729318810e7c1a52144b0ab5bf866f9059e4af94660ba5fe5ba91050",
+        "simulation/tools/check_scenario_numbering.py": "fdf6c5c717ae8a005d004725f6ec1419f5061e7e0027f888b785259d00c30166",
+        "simulation/visualization.py": "7fc4ca1430c7d54e14f98d8db58c94879c17de720ef2e382ba1b11f3fb351e1d",
+        "simulation/working_factor.py": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+      }
+    },
+    "v20": {
+      "path": "C:\\Users\\matty\\Dev\\phase-b-recon-v20",
+      "head": "2044f50a8cf71874f259e74fd05ec495169b9ae4",
+      "modules_sha256_lf": {
+        "simulation/agents.py": "f0c1049370c001c9ac85191f47338ec4be8a197cc5a29332547b95d85a1168c3",
+        "simulation/analyze_phi_adversarial.py": "d88656b8d6d0c8678e741e2b876713cc83b065254380b492f41bb933a9133839",
+        "simulation/analyze_sybil_defense_scaling_characterization.py": "81d58d9c7bbeaa8a1f0ac1d6c0d566a38ba04cbfe2bb7cb843e651b3222c936a",
+        "simulation/attack_adapter_v2.py": "5c303dc96d458eb2165416c925fa5ff526d89fdf3bb7fb5c02538bb96f7c41ee",
+        "simulation/constants_v2_stage15.py": "9637604b34f472dd97035fb42db5b9ce77620560776f2bfe2c6e5188e5d9b5c7",
+        "simulation/constants_v2_stage18.py": "121a7c1c9e86d585553a2975ae27143804757a0ef344305124fcc4c802b3285b",
+        "simulation/defection.py": "071abb31a84231386572cdfd901524647a5800f56d8117c89c44c5f75e24f97a",
+        "simulation/deps.py": "f20f0579b6c264ab1690e6c45de4f24108158b221cb2d2f31247a7239aafe70a",
+        "simulation/metrics.py": "667465e55e087c9be193184228f3470c866565fea53af90e3092bc9de275a8ab",
+        "simulation/model.py": "0a42a62268857c25c4bc99fa2162bfeb74c444bfa1f4fef6705a3a7e618d76b7",
+        "simulation/monte_carlo.py": "bef036a78c4e957657b84eec8f29c53c834551ef8235fbe9964ddff6e80f82c4",
+        "simulation/run_alpha_succession_sweep.py": "e1742fc0e84bff089989ecfb79afbeb74c375bd7ff0317ca1bb5b59144a00e44",
+        "simulation/run_attack_vector_revalidation_v2.py": "20608b2db9efc3d67b4de1e801d2d025b757ca1a16a5e280a5999a66303beb45",
+        "simulation/run_calibration.py": "a530742d83080b32f21070a12e5ed35d82f72ce59c853fad478d39838aab2f8a",
+        "simulation/run_comprehension_gap_powered_arm.py": "1066df0ccbe35ce4e0647cf71662bc2f950ead2e5c87f1a3dda7db515b27828b",
+        "simulation/run_comprehension_gap_sweep.py": "703f641d743220c0fdacfa6c6aab315527782f4f4857bee38ea4090d5e911cac",
+        "simulation/run_demographic_feedback_calibration.py": "c74e6db001be8ba9a1a6d01951fc0205a07b1f17ac1d40ccedf501fc5a76ee42",
+        "simulation/run_frontier_floor_calibration.py": "2d69ac68699173a8208800465b337b4bf6ed073036f7d9bf0a5096a3681004da",
+        "simulation/run_phi_adversarial_sweep.py": "10b9fb94c3faa28a6637eeb9c9b90e8925241bfbd2ab92fecec3356002e731e9",
+        "simulation/run_phi_alpha_rr_sweep.py": "6989423c2001d1812a59e7029f3e9593d18e005283cc85a9421e6c252b866d97",
+        "simulation/run_phi_shock_calibration.py": "bc045cc999c1dbe1e1720caafd8d4fbf78aef6c24e8b556e894cd1cfac29d72c",
+        "simulation/run_rr_alpha_sweep.py": "48ac7b77ca1ce7f46fdac3e7712c03466ffad2e1855fe0fc19a09f8882ff7b3b",
+        "simulation/run_sybil_defense_scaling_characterization.py": "b523342c954d52c991e084c168be3e9b10f55425a3cba44d16be4c2b9c78ebd3",
+        "simulation/run_sybil_defense_scaling_smoke.py": "3f199af5ad6f1165a7165525ee5c419295afedf140992896dfe39bc192438c51",
+        "simulation/run_sybil_two_dial_smoke.py": "e9dc6ce02a2eaf010354d3f5043a01aeed729aa964efaa3f959c12e150bad08e",
+        "simulation/run_termination_sweep.py": "b5fa654cefc9f232ecab30cbbbd99abbf724cca25ba553abcfc3d8445c1bf34c",
+        "simulation/run_to_termination.py": "cffb6eb30aec86f9b28b3ab2e1dca703a6d2e06e1be47b3e145759880a2c0aee",
+        "simulation/run_transition_cost_calibration.py": "a14d0441ef9635c9807397e0488fd1d46d3038650eba7ecef153b3734e38c25e",
+        "simulation/run_veto_capture_sweep.py": "6377bae70845dcc86ca0b0062bbb2b01df53f917f32bc25534bb2f31dd1a129a",
+        "simulation/simulation.py": "41da4be9fac62800f636592bc016e4dbacbee828b6d340aae6f316733e7163e8",
+        "simulation/sybil_defense_scaling.py": "03e8e7d8bf21e0a81918d4dfd3a5be511eb760d0f9ead58f8dea7e71df7d75e8",
+        "simulation/test_attack_adapter_v2.py": "11f1e2b04e2a04503886df37d8049dbb9c6bcd2c910e72bdb878bdec4fd40063",
+        "simulation/test_attack_vector_revalidation_v2_runner.py": "7ecbcb7444a2391d97b4f55314cdb6b0ec26a1d71027cf7e37e36e56d536203e",
+        "simulation/test_cop.py": "9ce8196b550c3f5b0af802119769cbbd757e6de984b66acb0e4cae1abb6ab9b3",
+        "simulation/test_invariants.py": "fd4addf76ab27d25ef247338666aa6779656d4dd775f520f3a14be0a371c5266",
+        "simulation/test_refactor_1x.py": "d4f52bd9e8c828c007fa569e2202f0c31a8fdbe367711d5160630387f66feeac",
+        "simulation/test_sybil_characterization_analysis.py": "7bae39d67460565f2a1b2cac27b727613e15ee5aee8b49da5e81b4c341edc1fe",
+        "simulation/test_sybil_characterization_runner.py": "a768fe1cb1ce0bde144ecb93dc712aac1a4579688c24660b80473fdabb6e90c5",
+        "simulation/test_sybil_defense_scaling.py": "ec65db4a04184d9fa17815c028e0328cc52a5368a38e6a3d138ae8bdb01544e6",
+        "simulation/test_sybil_two_dial_capability.py": "e7c1631b729318810e7c1a52144b0ab5bf866f9059e4af94660ba5fe5ba91050",
+        "simulation/tools/check_scenario_numbering.py": "fdf6c5c717ae8a005d004725f6ec1419f5061e7e0027f888b785259d00c30166",
+        "simulation/visualization.py": "e6b77a43d81059cd5e7f55adfc8fa7157247d7d4cea2343a070203efac87f7e1",
+        "simulation/working_factor.py": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+      }
+    }
+  },
+  "source_hash_basis": "SHA256 on LF-normalized source bytes",
+  "worker_count_used": 0,
+  "requested_workers": 2,
+  "smoke_runs_launched": 0,
+  "measured_runs_launched": 0,
+  "tool_layer_workarounds": [
+    "Used command-scoped safe.directory after Git rejected the operator-owned v20 worktree; no Git configuration file changed.",
+    "Bounded a committed-source excerpt to the actual file length after the read helper raised IndexError.",
+    "Checked progress-file existence after a read found it absent; initialization had stopped before publishing it."
+  ],
+  "executor_self_fixes": [],
+  "unfixed_executor_defect": "Atomic progress temporary filename outside permitted exact filename",
+  "retry_events": [],
+  "resumed_runs": [],
+  "outputs": [
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b4_halt.json",
+      "sha256_lf": "f52bdc0697a1580c5813756302bfa3b8b1c15180666017d33aaa7d11844b2d19",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b4_interrupt_console.txt",
+      "sha256_lf": "d71de9ce8e5dfe796903aa780740c5d5d4f7f3bdebb54644419f31f5da6c0834",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b4_preflight.json",
+      "sha256_lf": "48b747051288aa1e84422e4b5839fc6d5176672225d11beaf615c84da94c05d2",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b4_report.md",
+      "sha256_lf": "709c823d032ecd27ca704176290dd03bf67ce818a1454f058404106c4ac4686c",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b4_validate.py",
+      "sha256_lf": "c353e71b83a6c5e99ef5e9d923997cf1b56e9785a2919d840d54b799318269da",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_b4_validation_state.json",
+      "sha256_lf": "6ea2fb8bec0f115e8a92ba25a083dcee926e7c75a4024f4df430437a0c053c50",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_executor.py",
+      "sha256_lf": "f7fa5807c3a24c8089a9ee3cc449c225d55df79f869a0b35ecf770cd4a37d9c9",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_batch_manifest.json",
+      "sha256_lf": "2b1c0b8c780b2ac6fcba4669900670926ddabad8791ba9d1b10e32aa711ac013",
+      "csv_row_count": null
+    },
+    {
+      "path": "simulation/diagnostics/phase_b_recon_smoke_runtime_control.json",
+      "sha256_lf": "ccea7e652feb3f0b99abc17e7c7bec93d1f8faf4ab5d03ee09f492d6978eec7d",
+      "csv_row_count": null
+    }
+  ],
+  "manifest_self_hash": "Not included because the manifest cannot contain its own content hash.",
+  "t0_stderr_warnings": [
+    "warning: unable to access C:/Users/matty/.config/git/ignore: Permission denied"
+  ],
+  "scope_guard_rejection": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_recon_progress.json.tmp.7300"
+}

@@ -1,0 +1,23 @@
+Workers in use: 2 (requested 2)
+Traceback (most recent call last):
+  File "C:\Users\matty\Dev\AI-Succession-Problem\simulation\diagnostics\phase_b_recon_executor.py", line 699, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\matty\Dev\AI-Succession-Problem\simulation\diagnostics\phase_b_recon_executor.py", line 628, in main
+    save_progress()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\matty\Dev\AI-Succession-Problem\simulation\diagnostics\phase_b_recon_executor.py", line 625, in save_progress
+    atomic_json(progress_path,value)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\matty\Dev\AI-Succession-Problem\simulation\diagnostics\phase_b_recon_executor.py", line 126, in atomic_json
+    atomic_bytes(path, (json.dumps(value, indent=2, allow_nan=False) + "\n").encode())
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\matty\Dev\AI-Succession-Problem\simulation\diagnostics\phase_b_recon_executor.py", line 119, in atomic_bytes
+    with temp.open("wb") as f:
+         ~~~~~~~~~^^^^^^
+  File "C:\Python314\Lib\pathlib\__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\matty\Dev\AI-Succession-Problem\simulation\diagnostics\phase_b_recon_executor.py", line 93, in audit
+    raise PermissionError("Write outside scope: " + str(p))
+PermissionError: Write outside scope: C:\Users\matty\Dev\AI-Succession-Problem\simulation\diagnostics\phase_b_recon_progress.json.tmp.7300
