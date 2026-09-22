@@ -2244,6 +2244,54 @@ advance:
 *Completion condition:* both arms executed, manifest with hashes and row counts for
 every output, and the branch outcome reported.
 
+**Reconstruction begun, 2026-09-21. The phi category is complete and fails its fidelity
+target. This item stays open.** Pre-registered in
+`simulation/diagnostics/phase_b_reconstruction_design_note.md` at 6d698f21, amended once at
+20a6327a, with the executor and its non-registered test run at 56c14363. The phi category
+ran 840 runs, 420 per substrate, at seeds 1835089300 through 1835089359, and is landed at
+34a0a4b7. The remaining categories have not run.
+
+*The registered result.* Survival is zero in all 840 runs, at every one of the seven phi
+values, on both substrates. Every run ended at generation 1, so no succession fired in any
+run, and every run terminated between steps 267 and 299 rather than completing 300. There
+is therefore no curve, no peak, no trough and no differential to compare against target T3,
+whose published values are a peak of 0.676 at phi 20 and a trough of 0.544 at phi 2.
+
+*The branch this triggers, as committed in advance.* Section 7 of the note fixes both
+branches before any run. T3 is not faithful, so the second branch applies: either the
+reconstruction is unfaithful or the original results were not reproducible, and **this
+evidence cannot separate the two**. The construction was not adjusted to match, which the
+note forbids, and no element of the note was changed in response to the result.
+
+*Two observations that bear on which it is, recorded without resolving it.*
+
+1. The two surviving documents disagree with each other at this reproduction rate. Section
+   1 of `phase_b_integration_analysis.md` reports 1.1 percent aggregate survival at rr
+   0.057 from Category A, while `gate2_v20_phaseb_revalidation_summary.md` reports 54 to 68
+   percent survival at the same rr from the phi corpus. That is a gap of about 60
+   percentage points between two published figures, and it exists in the record
+   independently of this reconstruction. The reconstruction's zero lies near the Category A
+   figure, not the phi figure.
+2. `simulation/run_phi_alpha_rr_sweep.py` records in its docstring that the existing deep
+   Monte Carlo "varies phi but runs single-generation with no successor_ai". Section 5 of
+   the reconstruction note requires a successor agent in every run, and at the unvaried
+   successor capability of 1 no yield condition can fire. The phi corpus may therefore have
+   been produced under a construction this note does not use. **This is inference and is
+   labeled as such.** It is not established, and it was not acted on.
+
+*What this does and does not mean.* It does not withdraw the published phi characterization,
+and it does not establish that the figure was wrong. It does mean the phi figure is not
+reproduced by a pre-registered reconstruction under the construction this note declared, and
+that the record's own two accounts of survival at rr 0.057 cannot both describe the same
+construction. Categories A, B and C have their own targets and are unaffected; if Category A
+reproduces its target while the phi curve does not, that combination is evidence for the
+second observation above rather than for a general failure of the reconstruction.
+
+*Artifacts.* Per-run rows, completion records and the manifest are committed. The merged
+per-step log is 863 MB for this category alone and the full reconstruction would produce
+about 15 GB, so step logs are excluded from the repository at 34a0a4b7 and their hashes and
+row counts are retained in the manifest. No registered quantity reads them.
+
 **5. Output-path and archival controls.** Absolute output paths anchored to the
 repository root in every runner, and a manifest written as part of the run rather
 than after it.
