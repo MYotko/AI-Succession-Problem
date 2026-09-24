@@ -2292,6 +2292,96 @@ per-step log is 863 MB for this category alone and the full reconstruction would
 about 15 GB, so step logs are excluded from the repository at 34a0a4b7 and their hashes and
 row counts are retained in the manifest. No registered quantity reads them.
 
+*Categories A and B, and the recovered generating code, 2026-09-24.* Amendment 2 to the
+note, committed on a side branch at 0a8047b6 on 2026-09-22 while the batch ran and merged at
+59dcc5ae, fixed that fidelity is judged on the pre-repair arm only, and recorded that the note
+never fixed the successor's capability for Category A or the phi curve. It was published
+before the pre-repair arm had results at the reproduction rates that decide T1. Categories A
+and B are landed at 3813897e.
+
+*Target T1, Category A, not faithful.* On the pre-repair arm, 1 of 9 reproduction rates lies
+within two standard errors of the published value, against the 7 the note requires. Ordering
+is monotonic. The reconstruction's curve has the published shape, a sharp rr-driven
+transition with phi a weak driver and alpha flat, but sits lower and later: 3.3 percent
+against 12.2 at rr 0.060, 11.0 against 34.5 at 0.062, 47.7 against 60.8 at 0.064, and 88.0
+against 86.5 at 0.066. **A defect in the note's test is recorded here rather than repaired:**
+at the five lowest rates the reconstruction saw no survivors in 300 runs, so the plug-in
+standard error is zero and the tolerance has zero width, which no positive published value
+can pass. A proper binomial interval would pass three of those five, giving about 4 of 9.
+The verdict is the same under either reading.
+
+*Target T2, Category B, faithful.* On the pre-repair arm, cap_star by alpha is 5.0, 3.0,
+2.5, 2.0 and 2.0, matching the published sequence at all 5 alpha values against the 3 the
+note requires, and monotonic. The fire rates behind it track the published narrative: 7
+percent at 3.0 times capability for alpha 1.0, against a published 4.0 to 13.3; 40 percent
+at 2.5 times for alpha 1.25, against 30.7 to 49.3. The repaired arm gives the identical
+sequence, so the estimator repair does not move the succession cliff.
+
+*The registered verdict.* The note's branch rule requires fidelity on T1 through T3. T1 and T3
+fail and T2 passes, so the reconstruction as registered is not faithful, and under the rule
+as written the substrate difference is not reported as the defects' measured effect on the
+published figures.
+
+*Category C was stopped by the operator* after the repaired arm completed and with the
+pre-repair arm at 486 of 1,620 runs. It is not merged, its per-run files stay on disk, and
+it is excluded from the registered result. Target T4 was not evaluated.
+
+*The generating code, recovered, 2026-09-24.* A USB drive carrying files pulled from the third
+development machine, the one Section 7 records as in a failed state and not searchable, holds
+a compiled copy of the missing sweep script: `monte_carlo_phase_b.cpython-313.pyc`, SHA256
+`2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b`. Its header records that it
+was compiled from a 21,497-byte `simulation/diagnostics/monte_carlo_phase_b.py` last modified
+2026-06-09 at 19:14. Its modes are A, B, C and a dry run, and its grids and seed counts, 100,
+75 and 150 per cell, match the published corpus exactly. In that machine's working tree the
+bytecode is listed as ignored by git, which is consistent with the root cause Section 7
+inferred. The drive also holds `alpha_succession_sweep_pilot.csv`, 90 lines, SHA256
+`16834e6e59ffd3467a085c1c3b16d65c82685792dffd16684d13da99bc5b4152`, the file Section 7 found
+in the excluded directory of a snapshot and absent from the repository. **No Phase B or phi
+results file was on the drive.** The bytecode reflects the source as of June 9, and the
+integration analysis is dated June 18, so later edits to the script are possible and are not
+excluded by this evidence.
+
+*What the recovered code shows about the reconstruction.* It differs from the note's Section 5
+in three places, each of which the note had to decide without the original:
+
+| | Original script | Reconstruction as registered |
+| --- | --- | --- |
+| Steps per run | 500 | 300 |
+| Successor capability, Category A | 1.5 | 1.0, so no succession could fire |
+| Survival | final population at or above 30 | final population at or above the larger of the minimum viable population and 65 percent of peak |
+
+The third is the consequential one. The original script computes the 65-percent-of-peak rule
+too, but records it as a separate field, `collapsed`; its `survived` is an absolute threshold
+of 30. The note's Section 5 took the collapse rule for the survival definition, from an
+earlier runner. The reconstruction therefore measured a different quantity from the published
+one, at a different horizon, for both targets that failed.
+
+*An exploratory recomputation, not a registered result.* Applying the original survival rule
+to the reconstruction's existing final populations, at its 300-step horizon: the phi curve
+comes out at 0.38 to 0.58 on the pre-repair arm and 0.42 to 0.65 on the repaired arm, broadly
+higher at high phi, against a published 0.544 to 0.676 and against zero under the registered
+rule. Category A comes out above the published curve at every reproduction rate, which is
+what a shorter horizon than the original's would produce, since collapsing populations have 200 fewer steps to fall below 30. This is
+labeled exploratory, was computed after the registered result was known, and may not be cited
+as a reconstruction of either target.
+
+*What this means.* The one target that does not depend on the survival definition reproduced
+exactly. The two that depend on it failed, and the recovered code shows the reconstruction
+measured them differently from the original. The evidence now points toward the
+reconstruction being unfaithful, not toward the original results being irreproducible,
+although the registered branch rule cannot say so and this entry does not claim a
+reproduction. The earlier observation that the two surviving documents disagree by about 60
+percentage points at rr 0.057 is plausibly the same survival rule at two different horizons;
+that is inference, labeled as such.
+
+*Next.* A second stage, pre-registered separately and committed before it runs, will rebuild
+Categories A and C under the construction the recovered code specifies, pinned to the
+bytecode's hash, with that provenance and the order of events stated in full. The phi curve
+came from a different script, the fine-grained phi sweep, which remains unrecovered, so its
+construction can only be inferred and any second-stage phi arm will say so.
+The bytecode and the pilot file will be committed as evidence alongside it. The USB drive is
+retained unmodified.
+
 **5. Output-path and archival controls.** Absolute output paths anchored to the
 repository root in every runner, and a manifest written as part of the run rather
 than after it.
