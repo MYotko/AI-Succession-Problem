@@ -14,3 +14,5 @@ AGENTS.md
 simulation/diagnostics/phase_b_recon_*_steps.csv
 # Reconstruction per-run job files: transient until a category merges; a stopped category's stay on disk.
 simulation/diagnostics/phase_b_recon_job_*
+!simulation/diagnostics/phase_b_rerun_evidence/*.pyc
+simulation/diagnostics/phase_b_rerun_job_*

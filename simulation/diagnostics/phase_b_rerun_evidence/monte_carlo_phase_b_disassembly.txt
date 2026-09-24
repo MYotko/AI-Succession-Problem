@@ -1,0 +1,5411 @@
+# pydisasm version 6.3.0
+# CPython Python bytecode 3.13.0 (3571)
+#   Disassembled from CPython Python 3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]
+# Timestamp in code: 1781046892 (2026-06-09 19:14:52)
+# Source code size mod 2**32: 21497 bytes
+# Method Name:       <module>
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    0
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  0
+# Stack size:        10
+# Flags:             0x00000000 (0x0)
+# First Line:        1
+# Constants:
+#    0: 'Monte Carlo Phase B sweep for v2.0 formal yield characterization.\n\nModes:\n  A       Survival rate landscape\n  B       Succession dynamics\n  C       COP protective effects probe\n  dry-run Representative short-horizon smoke grid\n\nThe script writes incremental CSV rows and supports --resume. Analysis can\nbe regenerated from existing CSV with --analyze-only.\n'
+#    1: 0
+#    2: None
+#    3: ('datetime', 'timedelta', 'timezone')
+#    4: '..'
+#    5: ('AIAgent',)
+#    6: ('GardenModel',)
+#    7: 200
+#    8: 500
+#    9: 120
+#   10: 30
+#   11: 2
+#   12: 0.1
+#   13: 25.0
+#   14: 100
+#   15: 75
+#   16: 150
+#   17: 5
+#   18: ('A', 'B', 'C', 'dry-run')
+#   19: (0.055, 0.056, 0.057, 0.058, 0.059, 0.06, 0.062, 0.064, 0.066)
+#   20: (5.0, 10.0, 25.0, 100.0)
+#   21: (0.5, 1.0, 1.5)
+#   22: 1.5
+#   23: True
+#   24: ('rr_values', 'phi_values', 'alpha_values', 'successor_caps', 'cop_values', 'steps')
+#   25: (0.057, 0.06, 0.064, 0.07)
+#   26: (0.5, 0.75, 1.0, 1.25, 1.5)
+#   27: (1.2, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0)
+#   28: (0.057, 0.06, 0.064)
+#   29: (1.5, 2.5, 3.0)
+#   30: False
+#   31: 10.0
+#   32: 3.0
+#   33: ('mode', 'rr', 'phi', 'alpha', 'successor_capability', 'cop_cost_audit', 'seed', 'survived', 'collapsed', 'extinct', 'final_population', 'peak_population', 'collapse_threshold', 'final_ai_generation', 'yield_fired', 'yield_fire_count', 'yield_eval_count', 'first_yield_fire_step', 'first_fire_advantage', 'first_fire_transition_cost', 'max_yield_margin', 'mean_yield_margin', 'final_theta_capability', 'final_transfer_state', 'final_psi_inst_stock', 'final_theta_tech_v2', 'final_l_t_v2', 'integral_u_sys', 'knowledge_transfer_verified', 'error')
+#   34: <Code311 code object deterministic_seed at 0x1c87fae7e00, file simulation/diagnostics/monte_carlo_phase_b.py>, line 122
+#   35: <Code311 code object _csv_name at 0x1c87fb2e710, file simulation/diagnostics/monte_carlo_phase_b.py>, line 126
+#   36: <Code311 code object _progress_name at 0x1c87fb2e850, file simulation/diagnostics/monte_carlo_phase_b.py>, line 132
+#   37: <Code311 code object _summary_name at 0x1c87fba4640, file simulation/diagnostics/monte_carlo_phase_b.py>, line 138
+#   38: <Code311 code object _cell_key at 0x1c87fba4510, file simulation/diagnostics/monte_carlo_phase_b.py>, line 144
+#   39: <Code311 code object _task_seed at 0x1c87fac0950, file simulation/diagnostics/monte_carlo_phase_b.py>, line 152
+#   40: <Code311 code object _build_tasks at 0x1c87fb62470, file simulation/diagnostics/monte_carlo_phase_b.py>, line 160
+#   41: <Code311 code object _event_value at 0x1c87fb61f20, file simulation/diagnostics/monte_carlo_phase_b.py>, line 183
+#   42: <Code311 code object _run_single at 0x1c87fb62360, file simulation/diagnostics/monte_carlo_phase_b.py>, line 189
+#   43: <Code311 code object _ensure_csv at 0x1c87fb627a0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 325
+#   44: <Code311 code object _append_rows at 0x1c87fb628b0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 331
+#   45: <Code311 code object _load_completed_keys at 0x1c87fb629c0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 340
+#   46: <Code311 code object _to_bool at 0x1c87fb62ad0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 354
+#   47: <Code311 code object _load_results at 0x1c87fb62be0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 360
+#   48: <Code311 code object ProgressLogger at 0x1c87fb63240, file simulation/diagnostics/monte_carlo_phase_b.py>, line 398
+#   49: 'ProgressLogger'
+#   50: <Code311 code object run_sweep at 0x1c87fb63350, file simulation/diagnostics/monte_carlo_phase_b.py>, line 422
+#   51: <Code311 code object _mean at 0x1c87fb63570, file simulation/diagnostics/monte_carlo_phase_b.py>, line 467
+#   52: <Code311 code object _rate at 0x1c87fb63790, file simulation/diagnostics/monte_carlo_phase_b.py>, line 472
+#   53: <Code311 code object _se at 0x1c87fb638a0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 476
+#   54: <Code311 code object _group at 0x1c87fb63ac0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 482
+#   55: <Code311 code object _fmt_rate at 0x1c87fb63bd0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 490
+#   56: <Code311 code object _write_table at 0x1c87fb63ce0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 494
+#   57: <Code311 code object _summarize_a at 0x1c87fbe4050, file simulation/diagnostics/monte_carlo_phase_b.py>, line 501
+#   58: <Code311 code object _summarize_b at 0x1c87fbe4380, file simulation/diagnostics/monte_carlo_phase_b.py>, line 530
+#   59: <Code311 code object _summarize_c at 0x1c87fbe45a0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 559
+#   60: <Code311 code object analyze at 0x1c87fbe49e0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 616
+#   61: <Code311 code object parse_args at 0x1c87fbe4c00, file simulation/diagnostics/monte_carlo_phase_b.py>, line 673
+#   62: <Code311 code object main at 0x1c87fbe4d10, file simulation/diagnostics/monte_carlo_phase_b.py>, line 684
+#   63: '__main__'
+#   64: (-1.0,)
+# Names:
+#    0: __doc__
+#    1: argparse
+#    2: csv
+#    3: hashlib
+#    4: itertools
+#    5: math
+#    6: multiprocessing
+#    7: mp
+#    8: os
+#    9: sys
+#   10: time
+#   11: datetime
+#   12: timedelta
+#   13: timezone
+#   14: numpy
+#   15: np
+#   16: path
+#   17: dirname
+#   18: abspath
+#   19: __file__
+#   20: HERE
+#   21: join
+#   22: SIM_DIR
+#   23: REPO_ROOT
+#   24: insert
+#   25: agents
+#   26: AIAgent
+#   27: model
+#   28: GardenModel
+#   29: N_AGENTS
+#   30: N_STEPS
+#   31: DRY_N_STEPS
+#   32: SURVIVAL_THRESHOLD
+#   33: SUCCESSOR_GENERATION
+#   34: KNOWLEDGE_TRANSFER_THRESHOLD
+#   35: PHI_DEFAULT
+#   36: MODE_DEFAULT_SEEDS
+#   37: MODE_CONFIG
+#   38: CSV_FIELDS
+#   39: deterministic_seed
+#   40: _csv_name
+#   41: _progress_name
+#   42: _summary_name
+#   43: _cell_key
+#   44: _task_seed
+#   45: _build_tasks
+#   46: _event_value
+#   47: _run_single
+#   48: _ensure_csv
+#   49: _append_rows
+#   50: _load_completed_keys
+#   51: _to_bool
+#   52: _load_results
+#   53: ProgressLogger
+#   54: run_sweep
+#   55: _mean
+#   56: _rate
+#   57: _se
+#   58: _group
+#   59: _fmt_rate
+#   60: _write_table
+#   61: _summarize_a
+#   62: _summarize_b
+#   63: _summarize_c
+#   64: analyze
+#   65: parse_args
+#   66: main
+#   67: __name__
+
+  0:           0 RESUME               0
+
+  1:           2 LOAD_CONST           ("Monte Carlo Phase B sweep for v2.0 formal yield characterization.\n\nModes:\n  A       Survival rate landscape\n  B       Succession dynamics\n  C       COP protective effects probe\n  dry-run Representative short-horizon smoke grid\n\nThe script writes incremental CSV rows and supports --resume. Analysis can\nbe regenerated from existing CSV with --analyze-only.\n")
+               4 STORE_NAME           (__doc__)
+
+ 13:           6 LOAD_CONST           (0)
+               8 LOAD_CONST           (None)
+              10 IMPORT_NAME          (argparse)
+              12 STORE_NAME           (argparse)
+
+ 14:          14 LOAD_CONST           (0)
+              16 LOAD_CONST           (None)
+              18 IMPORT_NAME          (csv)
+              20 STORE_NAME           (csv)
+
+ 15:          22 LOAD_CONST           (0)
+              24 LOAD_CONST           (None)
+              26 IMPORT_NAME          (hashlib)
+              28 STORE_NAME           (hashlib)
+
+ 16:          30 LOAD_CONST           (0)
+              32 LOAD_CONST           (None)
+              34 IMPORT_NAME          (itertools)
+              36 STORE_NAME           (itertools)
+
+ 17:          38 LOAD_CONST           (0)
+              40 LOAD_CONST           (None)
+              42 IMPORT_NAME          (math)
+              44 STORE_NAME           (math)
+
+ 18:          46 LOAD_CONST           (0)
+              48 LOAD_CONST           (None)
+              50 IMPORT_NAME          (multiprocessing)
+              52 STORE_NAME           (mp)
+
+ 19:          54 LOAD_CONST           (0)
+              56 LOAD_CONST           (None)
+              58 IMPORT_NAME          (os)
+              60 STORE_NAME           (os)
+
+ 20:          62 LOAD_CONST           (0)
+              64 LOAD_CONST           (None)
+              66 IMPORT_NAME          (sys)
+              68 STORE_NAME           (sys)
+
+ 21:          70 LOAD_CONST           (0)
+              72 LOAD_CONST           (None)
+              74 IMPORT_NAME          (time)
+              76 STORE_NAME           (time)
+
+ 22:          78 LOAD_CONST           (0)
+              80 LOAD_CONST           (('datetime', 'timedelta', 'timezone'))
+              82 IMPORT_NAME          (datetime)
+              84 IMPORT_FROM          (datetime)
+              86 STORE_NAME           (datetime)
+              88 IMPORT_FROM          (timedelta)
+              90 STORE_NAME           (timedelta)
+              92 IMPORT_FROM          (timezone)
+              94 STORE_NAME           (timezone)
+              96 POP_TOP
+
+ 24:          98 LOAD_CONST           (0)
+             100 LOAD_CONST           (None)
+             102 IMPORT_NAME          (numpy)
+             104 STORE_NAME           (np)
+
+ 26:         106 LOAD_NAME            (os)
+             108 LOAD_ATTR            (path)
+             128 LOAD_ATTR            (NULL|self + dirname)
+             148 LOAD_NAME            (os)
+             150 LOAD_ATTR            (path)
+             170 LOAD_ATTR            (NULL|self + abspath)
+             190 LOAD_NAME            (__file__)
+             192 CALL                 (1 positional)
+             200 CALL                 (1 positional)
+             208 STORE_NAME           (HERE)
+
+ 27:         210 LOAD_NAME            (os)
+             212 LOAD_ATTR            (path)
+             232 LOAD_ATTR            (NULL|self + abspath)
+             252 LOAD_NAME            (os)
+             254 LOAD_ATTR            (path)
+             274 LOAD_ATTR            (NULL|self + join)
+             294 LOAD_NAME            (HERE)
+             296 LOAD_CONST           ("..")
+             298 CALL                 (2 positional)
+             306 CALL                 (1 positional)
+             314 STORE_NAME           (SIM_DIR)
+
+ 28:         316 LOAD_NAME            (os)
+             318 LOAD_ATTR            (path)
+             338 LOAD_ATTR            (NULL|self + abspath)
+             358 LOAD_NAME            (os)
+             360 LOAD_ATTR            (path)
+             380 LOAD_ATTR            (NULL|self + join)
+             400 LOAD_NAME            (SIM_DIR)
+             402 LOAD_CONST           ("..")
+             404 CALL                 (2 positional)
+             412 CALL                 (1 positional)
+             420 STORE_NAME           (REPO_ROOT)
+
+ 29:         422 LOAD_NAME            (SIM_DIR)
+             424 LOAD_NAME            (REPO_ROOT)
+             426 BUILD_TUPLE          2
+             428 GET_ITER
+             430 FOR_ITER             (to 532)
+             434 STORE_NAME           (path)
+
+ 30:         436 LOAD_NAME            (path)
+             438 LOAD_NAME            (sys)
+             440 LOAD_ATTR            (path)
+             460 CONTAINS_OP          (not in)
+             464 POP_JUMP_IF_TRUE     (to 472)
+             468 JUMP_BACKWARD        (to 430)
+
+ 31:     >>  472 LOAD_NAME            (sys)
+             474 LOAD_ATTR            (path)
+             494 LOAD_ATTR            (NULL|self + insert)
+         >>  514 LOAD_CONST           (0)
+             516 LOAD_NAME            (path)
+             518 CALL                 (2 positional)
+             526 POP_TOP
+             528 JUMP_BACKWARD        (to 430)
+
+ 29:     >>  532 END_FOR
+             534 POP_TOP
+
+ 33:         536 LOAD_CONST           (0)
+             538 LOAD_CONST           (('AIAgent',))
+             540 IMPORT_NAME          (agents)
+             542 IMPORT_FROM          (AIAgent)
+             544 STORE_NAME           (AIAgent)
+             546 POP_TOP
+
+ 34:         548 LOAD_CONST           (0)
+             550 LOAD_CONST           (('GardenModel',))
+             552 IMPORT_NAME          (model)
+             554 IMPORT_FROM          (GardenModel)
+             556 STORE_NAME           (GardenModel)
+             558 POP_TOP
+
+ 37:         560 LOAD_CONST           (200)
+             562 STORE_NAME           (N_AGENTS)
+
+ 38:         564 LOAD_CONST           (500)
+             566 STORE_NAME           (N_STEPS)
+
+ 39:         568 LOAD_CONST           (120)
+             570 STORE_NAME           (DRY_N_STEPS)
+
+ 40:         572 LOAD_CONST           (30)
+             574 STORE_NAME           (SURVIVAL_THRESHOLD)
+
+ 41:         576 LOAD_CONST           (2)
+             578 STORE_NAME           (SUCCESSOR_GENERATION)
+
+ 42:         580 LOAD_CONST           (0.1)
+             582 STORE_NAME           (KNOWLEDGE_TRANSFER_THRESHOLD)
+
+ 44:         584 LOAD_CONST           (25.0)
+             586 STORE_NAME           (PHI_DEFAULT)
+
+ 47:         588 LOAD_CONST           (100)
+
+ 48:         590 LOAD_CONST           (75)
+
+ 49:         592 LOAD_CONST           (150)
+
+ 50:         594 LOAD_CONST           (5)
+
+ 46:         596 LOAD_CONST           (('A', 'B', 'C', 'dry-run'))
+             598 BUILD_CONST_KEY_MAP  4
+             600 STORE_NAME           (MODE_DEFAULT_SEEDS)
+
+ 55:         602 BUILD_LIST           0
+             604 LOAD_CONST           ((0.055, 0.056, 0.057, 0.058, 0.059, 0.06, 0.062, 0.064, 0.066))
+             606 LIST_EXTEND          1
+
+ 56:         608 BUILD_LIST           0
+             610 LOAD_CONST           ((5.0, 10.0, 25.0, 100.0))
+             612 LIST_EXTEND          1
+
+ 57:         614 BUILD_LIST           0
+             616 LOAD_CONST           ((0.5, 1.0, 1.5))
+             618 LIST_EXTEND          1
+
+ 58:         620 LOAD_CONST           (1.5)
+             622 BUILD_LIST           1
+
+ 59:         624 LOAD_CONST           (True)
+             626 BUILD_LIST           1
+
+ 60:         628 LOAD_NAME            (N_STEPS)
+
+ 54:         630 LOAD_CONST           (('rr_values', 'phi_values', 'alpha_values', 'successor_caps', 'cop_values', 'steps'))
+             632 BUILD_CONST_KEY_MAP  6
+
+ 63:     >>  634 BUILD_LIST           0
+             636 LOAD_CONST           ((0.057, 0.06, 0.064, 0.07))
+             638 LIST_EXTEND          1
+
+ 64:         640 LOAD_NAME            (PHI_DEFAULT)
+             642 BUILD_LIST           1
+
+ 65:         644 BUILD_LIST           0
+             646 LOAD_CONST           ((0.5, 0.75, 1.0, 1.25, 1.5))
+             648 LIST_EXTEND          1
+
+ 66:         650 BUILD_LIST           0
+             652 LOAD_CONST           ((1.2, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0))
+             654 LIST_EXTEND          1
+
+ 67:         656 LOAD_CONST           (True)
+             658 BUILD_LIST           1
+
+ 68:         660 LOAD_NAME            (N_STEPS)
+
+ 62:         662 LOAD_CONST           (('rr_values', 'phi_values', 'alpha_values', 'successor_caps', 'cop_values', 'steps'))
+             664 BUILD_CONST_KEY_MAP  6
+
+ 71:         666 BUILD_LIST           0
+             668 LOAD_CONST           ((0.057, 0.06, 0.064))
+             670 LIST_EXTEND          1
+
+ 72:         672 LOAD_NAME            (PHI_DEFAULT)
+             674 BUILD_LIST           1
+
+ 73:         676 BUILD_LIST           0
+             678 LOAD_CONST           ((0.5, 1.0, 1.5))
+             680 LIST_EXTEND          1
+
+ 74:         682 BUILD_LIST           0
+             684 LOAD_CONST           ((1.5, 2.5, 3.0))
+             686 LIST_EXTEND          1
+
+ 75:         688 LOAD_CONST           (True)
+             690 LOAD_CONST           (False)
+             692 BUILD_LIST           2
+
+ 76:         694 LOAD_NAME            (N_STEPS)
+
+ 70:         696 LOAD_CONST           (('rr_values', 'phi_values', 'alpha_values', 'successor_caps', 'cop_values', 'steps'))
+             698 BUILD_CONST_KEY_MAP  6
+
+ 79:         700 BUILD_LIST           0
+             702 LOAD_CONST           ((0.057, 0.06, 0.064))
+             704 LIST_EXTEND          1
+
+ 80:         706 LOAD_CONST           (10.0)
+             708 LOAD_CONST           (25.0)
+             710 BUILD_LIST           2
+
+ 81:         712 BUILD_LIST           0
+             714 LOAD_CONST           ((0.5, 1.0, 1.5))
+             716 LIST_EXTEND          1
+
+ 82:         718 LOAD_CONST           (1.5)
+             720 LOAD_CONST           (3.0)
+             722 BUILD_LIST           2
+
+ 83:         724 LOAD_CONST           (True)
+             726 LOAD_CONST           (False)
+             728 BUILD_LIST           2
+
+ 84:         730 LOAD_NAME            (DRY_N_STEPS)
+
+ 78:         732 LOAD_CONST           (('rr_values', 'phi_values', 'alpha_values', 'successor_caps', 'cop_values', 'steps'))
+             734 BUILD_CONST_KEY_MAP  6
+
+ 53:         736 LOAD_CONST           (('A', 'B', 'C', 'dry-run'))
+             738 BUILD_CONST_KEY_MAP  4
+             740 STORE_NAME           (MODE_CONFIG)
+
+ 88:         742 BUILD_LIST           0
+             744 LOAD_CONST           (('mode', 'rr', 'phi', 'alpha', 'successor_capability', 'cop_cost_audit', 'seed', 'survived', 'collapsed', 'extinct', 'final_population', 'peak_population', 'collapse_threshold', 'final_ai_generation', 'yield_fired', 'yield_fire_count', 'yield_eval_count', 'first_yield_fire_step', 'first_fire_advantage', 'first_fire_transition_cost', 'max_yield_margin', 'mean_yield_margin', 'final_theta_capability', 'final_transfer_state', 'final_psi_inst_stock', 'final_theta_tech_v2', 'final_l_t_v2', 'integral_u_sys', 'knowledge_transfer_verified', 'error'))
+             746 LIST_EXTEND          1
+             748 STORE_NAME           (CSV_FIELDS)
+
+122:         750 LOAD_CONST           (<Code311 code object deterministic_seed at 0x1c87fae7e00, file simulation/diagnostics/monte_carlo_phase_b.py>, line 122)
+             752 MAKE_FUNCTION
+             754 STORE_NAME           (deterministic_seed)
+
+126:         756 LOAD_CONST           (<Code311 code object _csv_name at 0x1c87fb2e710, file simulation/diagnostics/monte_carlo_phase_b.py>, line 126)
+             758 MAKE_FUNCTION
+             760 STORE_NAME           (_csv_name)
+
+132:         762 LOAD_CONST           (<Code311 code object _progress_name at 0x1c87fb2e850, file simulation/diagnostics/monte_carlo_phase_b.py>, line 132)
+             764 MAKE_FUNCTION
+             766 STORE_NAME           (_progress_name)
+
+138:         768 LOAD_CONST           (<Code311 code object _summary_name at 0x1c87fba4640, file simulation/diagnostics/monte_carlo_phase_b.py>, line 138)
+             770 MAKE_FUNCTION
+             772 STORE_NAME           (_summary_name)
+
+144:         774 LOAD_CONST           (<Code311 code object _cell_key at 0x1c87fba4510, file simulation/diagnostics/monte_carlo_phase_b.py>, line 144)
+             776 MAKE_FUNCTION
+             778 STORE_NAME           (_cell_key)
+
+152:         780 LOAD_CONST           (<Code311 code object _task_seed at 0x1c87fac0950, file simulation/diagnostics/monte_carlo_phase_b.py>, line 152)
+             782 MAKE_FUNCTION
+             784 STORE_NAME           (_task_seed)
+
+160:         786 LOAD_CONST           (<Code311 code object _build_tasks at 0x1c87fb62470, file simulation/diagnostics/monte_carlo_phase_b.py>, line 160)
+             788 MAKE_FUNCTION
+             790 STORE_NAME           (_build_tasks)
+
+183:         792 LOAD_CONST           ((-1.0,))
+             794 LOAD_CONST           (<Code311 code object _event_value at 0x1c87fb61f20, file simulation/diagnostics/monte_carlo_phase_b.py>, line 183)
+             796 MAKE_FUNCTION
+             798 SET_FUNCTION_ATTRIBUTE 1
+             800 STORE_NAME           (_event_value)
+
+189:         802 LOAD_CONST           (<Code311 code object _run_single at 0x1c87fb62360, file simulation/diagnostics/monte_carlo_phase_b.py>, line 189)
+             804 MAKE_FUNCTION
+             806 STORE_NAME           (_run_single)
+
+325:         808 LOAD_CONST           (<Code311 code object _ensure_csv at 0x1c87fb627a0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 325)
+             810 MAKE_FUNCTION
+             812 STORE_NAME           (_ensure_csv)
+
+331:         814 LOAD_CONST           (<Code311 code object _append_rows at 0x1c87fb628b0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 331)
+             816 MAKE_FUNCTION
+             818 STORE_NAME           (_append_rows)
+
+340:         820 LOAD_CONST           (<Code311 code object _load_completed_keys at 0x1c87fb629c0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 340)
+             822 MAKE_FUNCTION
+             824 STORE_NAME           (_load_completed_keys)
+
+354:         826 LOAD_CONST           (<Code311 code object _to_bool at 0x1c87fb62ad0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 354)
+             828 MAKE_FUNCTION
+             830 STORE_NAME           (_to_bool)
+
+360:         832 LOAD_CONST           (<Code311 code object _load_results at 0x1c87fb62be0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 360)
+             834 MAKE_FUNCTION
+             836 STORE_NAME           (_load_results)
+
+398:         838 LOAD_BUILD_CLASS
+             840 PUSH_NULL
+             842 LOAD_CONST           (<Code311 code object ProgressLogger at 0x1c87fb63240, file simulation/diagnostics/monte_carlo_phase_b.py>, line 398)
+             844 MAKE_FUNCTION
+             846 LOAD_CONST           ("ProgressLogger")
+             848 CALL                 (2 positional)
+             856 STORE_NAME           (ProgressLogger)
+
+422:         858 LOAD_CONST           (<Code311 code object run_sweep at 0x1c87fb63350, file simulation/diagnostics/monte_carlo_phase_b.py>, line 422)
+             860 MAKE_FUNCTION
+             862 STORE_NAME           (run_sweep)
+
+467:         864 LOAD_CONST           (<Code311 code object _mean at 0x1c87fb63570, file simulation/diagnostics/monte_carlo_phase_b.py>, line 467)
+             866 MAKE_FUNCTION
+             868 STORE_NAME           (_mean)
+
+472:         870 LOAD_CONST           (<Code311 code object _rate at 0x1c87fb63790, file simulation/diagnostics/monte_carlo_phase_b.py>, line 472)
+             872 MAKE_FUNCTION
+             874 STORE_NAME           (_rate)
+
+476:         876 LOAD_CONST           (<Code311 code object _se at 0x1c87fb638a0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 476)
+             878 MAKE_FUNCTION
+             880 STORE_NAME           (_se)
+
+482:         882 LOAD_CONST           (<Code311 code object _group at 0x1c87fb63ac0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 482)
+             884 MAKE_FUNCTION
+             886 STORE_NAME           (_group)
+
+490:         888 LOAD_CONST           (<Code311 code object _fmt_rate at 0x1c87fb63bd0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 490)
+             890 MAKE_FUNCTION
+             892 STORE_NAME           (_fmt_rate)
+
+494:         894 LOAD_CONST           (<Code311 code object _write_table at 0x1c87fb63ce0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 494)
+             896 MAKE_FUNCTION
+             898 STORE_NAME           (_write_table)
+
+501:         900 LOAD_CONST           (<Code311 code object _summarize_a at 0x1c87fbe4050, file simulation/diagnostics/monte_carlo_phase_b.py>, line 501)
+             902 MAKE_FUNCTION
+             904 STORE_NAME           (_summarize_a)
+
+530:         906 LOAD_CONST           (<Code311 code object _summarize_b at 0x1c87fbe4380, file simulation/diagnostics/monte_carlo_phase_b.py>, line 530)
+             908 MAKE_FUNCTION
+             910 STORE_NAME           (_summarize_b)
+
+559:         912 LOAD_CONST           (<Code311 code object _summarize_c at 0x1c87fbe45a0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 559)
+             914 MAKE_FUNCTION
+             916 STORE_NAME           (_summarize_c)
+
+616:         918 LOAD_CONST           (<Code311 code object analyze at 0x1c87fbe49e0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 616)
+             920 MAKE_FUNCTION
+             922 STORE_NAME           (analyze)
+
+673:         924 LOAD_CONST           (<Code311 code object parse_args at 0x1c87fbe4c00, file simulation/diagnostics/monte_carlo_phase_b.py>, line 673)
+             926 MAKE_FUNCTION
+             928 STORE_NAME           (parse_args)
+
+684:         930 LOAD_CONST           (<Code311 code object main at 0x1c87fbe4d10, file simulation/diagnostics/monte_carlo_phase_b.py>, line 684)
+             932 MAKE_FUNCTION
+             934 STORE_NAME           (main)
+
+698:         936 LOAD_NAME            (__name__)
+             938 LOAD_CONST           ("__main__")
+             940 COMPARE_OP           (==)
+             944 POP_JUMP_IF_FALSE    (to 964)
+
+699:         948 LOAD_NAME            (main)
+             950 PUSH_NULL
+             952 CALL                 (0 positional)
+             960 POP_TOP
+             962 RETURN_CONST         (None)
+
+698:     >>  964 RETURN_CONST         (None)
+
+
+# Method Name:       deterministic_seed
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  1
+# Stack size:        6
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        122
+# Constants:
+#    0: None
+#    1: 16
+#    2: 10000
+# Names:
+#    0: int
+#    1: hashlib
+#    2: md5
+#    3: encode
+#    4: hexdigest
+# Varnames:
+#	label
+# Positional arguments:
+#	label
+
+122:           0 RESUME               0
+
+123:           2 LOAD_GLOBAL          (NULL + int)
+              12 LOAD_GLOBAL          (hashlib)
+              22 LOAD_ATTR            (md5)
+              42 PUSH_NULL
+              44 LOAD_FAST            (label)
+              46 LOAD_ATTR            (NULL|self + encode)
+              66 CALL                 (0 positional)
+              74 CALL                 (1 positional)
+              82 LOAD_ATTR            (NULL|self + hexdigest)
+             102 CALL                 (0 positional)
+             110 LOAD_CONST           (16)
+             112 CALL                 (2 positional)
+             120 LOAD_CONST           (10000)
+             122 BINARY_OP            (%)
+             126 RETURN_VALUE
+
+
+# Method Name:       _csv_name
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  1
+# Stack size:        3
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        126
+# Constants:
+#    0: None
+#    1: 'dry-run'
+#    2: 'monte_carlo_phase_b_dryrun_results.csv'
+#    3: 'monte_carlo_phase_b_'
+#    4: '_results.csv'
+# Names:
+#    0: lower
+# Varnames:
+#	mode
+# Positional arguments:
+#	mode
+
+126:           0 RESUME               0
+
+127:           2 LOAD_FAST            (mode)
+               4 LOAD_CONST           ("dry-run")
+               6 COMPARE_OP           (==)
+              10 POP_JUMP_IF_FALSE    (to 16)
+
+128:          14 RETURN_CONST         ("monte_carlo_phase_b_dryrun_results.csv")
+
+129:     >>   16 LOAD_CONST           ("monte_carlo_phase_b_")
+              18 LOAD_FAST            (mode)
+              20 LOAD_ATTR            (NULL|self + lower)
+              40 CALL                 (0 positional)
+              48 FORMAT_SIMPLE
+              50 LOAD_CONST           ("_results.csv")
+              52 BUILD_STRING         3
+              54 RETURN_VALUE
+
+
+# Method Name:       _progress_name
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  1
+# Stack size:        3
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        132
+# Constants:
+#    0: None
+#    1: 'dry-run'
+#    2: 'monte_carlo_phase_b_dryrun_progress.log'
+#    3: 'monte_carlo_phase_b_'
+#    4: '_progress.log'
+# Names:
+#    0: lower
+# Varnames:
+#	mode
+# Positional arguments:
+#	mode
+
+132:           0 RESUME               0
+
+133:           2 LOAD_FAST            (mode)
+               4 LOAD_CONST           ("dry-run")
+               6 COMPARE_OP           (==)
+              10 POP_JUMP_IF_FALSE    (to 16)
+
+134:          14 RETURN_CONST         ("monte_carlo_phase_b_dryrun_progress.log")
+
+135:     >>   16 LOAD_CONST           ("monte_carlo_phase_b_")
+              18 LOAD_FAST            (mode)
+              20 LOAD_ATTR            (NULL|self + lower)
+              40 CALL                 (0 positional)
+              48 FORMAT_SIMPLE
+              50 LOAD_CONST           ("_progress.log")
+              52 BUILD_STRING         3
+              54 RETURN_VALUE
+
+
+# Method Name:       _summary_name
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  1
+# Stack size:        3
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        138
+# Constants:
+#    0: None
+#    1: 'dry-run'
+#    2: 'monte_carlo_phase_b_dryrun_summary.md'
+#    3: 'monte_carlo_phase_b_'
+#    4: '_summary.md'
+# Names:
+#    0: lower
+# Varnames:
+#	mode
+# Positional arguments:
+#	mode
+
+138:           0 RESUME               0
+
+139:           2 LOAD_FAST            (mode)
+               4 LOAD_CONST           ("dry-run")
+               6 COMPARE_OP           (==)
+              10 POP_JUMP_IF_FALSE    (to 16)
+
+140:          14 RETURN_CONST         ("monte_carlo_phase_b_dryrun_summary.md")
+
+141:     >>   16 LOAD_CONST           ("monte_carlo_phase_b_")
+              18 LOAD_FAST            (mode)
+              20 LOAD_ATTR            (NULL|self + lower)
+              40 CALL                 (0 positional)
+              48 FORMAT_SIMPLE
+              50 LOAD_CONST           ("_summary.md")
+              52 BUILD_STRING         3
+              54 RETURN_VALUE
+
+
+# Method Name:       _cell_key
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  1
+# Stack size:        16
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        144
+# Constants:
+#    0: None
+#    1: 'mode'
+#    2: '|'
+#    3: 'rr'
+#    4: '.5f'
+#    5: 'phi'
+#    6: '.4f'
+#    7: 'alpha'
+#    8: 'successor_capability'
+#    9: 'cop_cost_audit'
+#   10: 'seed'
+# Names:
+#    0: float
+#    1: bool
+#    2: int
+# Varnames:
+#	row
+# Positional arguments:
+#	row
+
+144:           0 RESUME               0
+
+146:           2 LOAD_FAST            (row)
+               4 LOAD_CONST           ("mode")
+               6 BINARY_SUBSCR
+              10 FORMAT_SIMPLE
+              12 LOAD_CONST           ("|")
+              14 LOAD_GLOBAL          (NULL + float)
+              24 LOAD_FAST            (row)
+              26 LOAD_CONST           ("rr")
+              28 BINARY_SUBSCR
+              32 CALL                 (1 positional)
+              40 LOAD_CONST           (".5f")
+              42 FORMAT_WITH_SPEC
+              44 LOAD_CONST           ("|")
+              46 LOAD_GLOBAL          (NULL + float)
+              56 LOAD_FAST            (row)
+              58 LOAD_CONST           ("phi")
+              60 BINARY_SUBSCR
+              64 CALL                 (1 positional)
+              72 LOAD_CONST           (".4f")
+              74 FORMAT_WITH_SPEC
+              76 LOAD_CONST           ("|")
+
+147:          78 LOAD_GLOBAL          (NULL + float)
+              88 LOAD_FAST            (row)
+              90 LOAD_CONST           ("alpha")
+              92 BINARY_SUBSCR
+              96 CALL                 (1 positional)
+             104 LOAD_CONST           (".4f")
+             106 FORMAT_WITH_SPEC
+             108 LOAD_CONST           ("|")
+             110 LOAD_GLOBAL          (NULL + float)
+             120 LOAD_FAST            (row)
+             122 LOAD_CONST           ("successor_capability")
+             124 BINARY_SUBSCR
+             128 CALL                 (1 positional)
+             136 LOAD_CONST           (".4f")
+             138 FORMAT_WITH_SPEC
+             140 LOAD_CONST           ("|")
+
+148:         142 LOAD_GLOBAL          (NULL + bool)
+             152 LOAD_FAST            (row)
+             154 LOAD_CONST           ("cop_cost_audit")
+             156 BINARY_SUBSCR
+             160 CALL                 (1 positional)
+             168 FORMAT_SIMPLE
+             170 LOAD_CONST           ("|")
+             172 LOAD_GLOBAL          (NULL + int)
+             182 LOAD_FAST            (row)
+             184 LOAD_CONST           ("seed")
+             186 BINARY_SUBSCR
+             190 CALL                 (1 positional)
+             198 FORMAT_SIMPLE
+
+146:         200 BUILD_STRING         13
+
+145:         202 RETURN_VALUE
+
+
+# Method Name:       _task_seed
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    7
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  8
+# Stack size:        14
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        152
+# Constants:
+#    0: None
+#    1: 'phase_b|'
+#    2: '|'
+#    3: '.5f'
+#    4: '.4f'
+# Names:
+#    0: deterministic_seed
+# Varnames:
+#	mode, rr, phi, alpha, succ_cap, cop_cost_audit, seed, label
+# Positional arguments:
+#	mode, rr, phi, alpha, succ_cap, cop_cost_audit, seed
+# Local variables:
+#    7: label
+
+152:           0 RESUME               0
+
+154:           2 LOAD_CONST           ("phase_b|")
+               4 LOAD_FAST            (mode)
+               6 FORMAT_SIMPLE
+               8 LOAD_CONST           ("|")
+              10 LOAD_FAST            (rr)
+              12 LOAD_CONST           (".5f")
+              14 FORMAT_WITH_SPEC
+              16 LOAD_CONST           ("|")
+              18 LOAD_FAST            (phi)
+              20 LOAD_CONST           (".4f")
+              22 FORMAT_WITH_SPEC
+              24 LOAD_CONST           ("|")
+              26 LOAD_FAST            (alpha)
+              28 LOAD_CONST           (".4f")
+              30 FORMAT_WITH_SPEC
+              32 LOAD_CONST           ("|")
+
+155:          34 LOAD_FAST            (succ_cap)
+              36 LOAD_CONST           (".4f")
+              38 FORMAT_WITH_SPEC
+              40 LOAD_CONST           ("|")
+              42 LOAD_FAST            (cop_cost_audit)
+              44 FORMAT_SIMPLE
+              46 LOAD_CONST           ("|")
+              48 LOAD_FAST            (seed)
+              50 FORMAT_SIMPLE
+
+154:          52 BUILD_STRING         14
+
+153:          54 STORE_FAST           (label)
+
+157:          56 LOAD_GLOBAL          (NULL + deterministic_seed)
+              66 LOAD_FAST            (label)
+              68 CALL                 (1 positional)
+              76 RETURN_VALUE
+
+
+# Method Name:       _build_tasks
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    2
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  10
+# Stack size:        14
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        160
+# Constants:
+#    0: None
+#    1: 'rr_values'
+#    2: 'phi_values'
+#    3: 'alpha_values'
+#    4: 'successor_caps'
+#    5: 'cop_values'
+#    6: 'steps'
+#    7: ('mode', 'rr', 'phi', 'alpha', 'successor_capability', 'cop_cost_audit', 'seed', 'steps')
+# Names:
+#    0: MODE_CONFIG
+#    1: itertools
+#    2: product
+#    3: range
+#    4: append
+#    5: float
+#    6: bool
+#    7: int
+# Varnames:
+#	mode, seeds, cfg, tasks, rr, phi, alpha, succ_cap, cop_cost_audit, seed
+# Positional arguments:
+#	mode, seeds
+# Local variables:
+#    2: cfg
+#    3: tasks
+#    4: rr
+#    5: phi
+#    6: alpha
+#    7: succ_cap
+#    8: cop_cost_audit
+#    9: seed
+
+160:           0 RESUME               0
+
+161:           2 LOAD_GLOBAL          (MODE_CONFIG)
+              12 LOAD_FAST            (mode)
+              14 BINARY_SUBSCR
+              18 STORE_FAST           (cfg)
+
+162:          20 BUILD_LIST           0
+              22 STORE_FAST           (tasks)
+
+163:          24 LOAD_GLOBAL          (itertools)
+              34 LOAD_ATTR            (product)
+              54 PUSH_NULL
+
+164:          56 LOAD_FAST            (cfg)
+              58 LOAD_CONST           ("rr_values")
+              60 BINARY_SUBSCR
+
+165:          64 LOAD_FAST            (cfg)
+              66 LOAD_CONST           ("phi_values")
+              68 BINARY_SUBSCR
+
+166:          72 LOAD_FAST            (cfg)
+              74 LOAD_CONST           ("alpha_values")
+              76 BINARY_SUBSCR
+
+167:          80 LOAD_FAST            (cfg)
+              82 LOAD_CONST           ("successor_caps")
+              84 BINARY_SUBSCR
+
+168:          88 LOAD_FAST            (cfg)
+              90 LOAD_CONST           ("cop_values")
+              92 BINARY_SUBSCR
+
+169:          96 LOAD_GLOBAL          (NULL + range)
+             106 LOAD_FAST            (seeds)
+             108 CALL                 (1 positional)
+
+163:         116 CALL                 (6 positional)
+             124 GET_ITER
+             126 FOR_ITER             (to 328)
+             130 UNPACK_SEQUENCE      6
+             134 STORE_FAST_STORE_FAST (rr, phi)
+             136 STORE_FAST_STORE_FAST (alpha, succ_cap)
+             138 STORE_FAST_STORE_FAST (cop_cost_audit, seed)
+
+170:         140 LOAD_FAST            (tasks)
+             142 LOAD_ATTR            (NULL|self + append)
+
+171:         162 LOAD_FAST            (mode)
+
+172:         164 LOAD_GLOBAL          (NULL + float)
+             174 LOAD_FAST            (rr)
+             176 CALL                 (1 positional)
+
+173:         184 LOAD_GLOBAL          (NULL + float)
+             194 LOAD_FAST            (phi)
+             196 CALL                 (1 positional)
+
+174:         204 LOAD_GLOBAL          (NULL + float)
+             214 LOAD_FAST            (alpha)
+             216 CALL                 (1 positional)
+
+175:         224 LOAD_GLOBAL          (NULL + float)
+             234 LOAD_FAST            (succ_cap)
+             236 CALL                 (1 positional)
+
+176:         244 LOAD_GLOBAL          (NULL + bool)
+             254 LOAD_FAST            (cop_cost_audit)
+             256 CALL                 (1 positional)
+
+177:         264 LOAD_GLOBAL          (NULL + int)
+             274 LOAD_FAST            (seed)
+             276 CALL                 (1 positional)
+
+178:         284 LOAD_GLOBAL          (NULL + int)
+             294 LOAD_FAST            (cfg)
+             296 LOAD_CONST           ("steps")
+             298 BINARY_SUBSCR
+             302 CALL                 (1 positional)
+
+170:         310 LOAD_CONST           (('mode', 'rr', 'phi', 'alpha', 'successor_capability', 'cop_cost_audit', 'seed', 'steps'))
+             312 BUILD_CONST_KEY_MAP  8
+             314 CALL                 (1 positional)
+             322 POP_TOP
+             324 JUMP_BACKWARD        (to 126)
+
+163:     >>  328 END_FOR
+             330 POP_TOP
+
+180:         332 LOAD_FAST            (tasks)
+             334 RETURN_VALUE
+
+
+# Method Name:       _event_value
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    3
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  3
+# Stack size:        6
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        183
+# Constants:
+#    0: None
+# Names:
+#    0: float
+#    1: get
+# Varnames:
+#	event, key, default
+# Positional arguments:
+#	event, key, default
+
+183:           0 RESUME               0
+
+184:           2 LOAD_FAST            (event)
+               4 TO_BOOL
+              12 POP_JUMP_IF_TRUE     (to 20)
+
+185:          16 LOAD_FAST            (default)
+              18 RETURN_VALUE
+
+186:     >>   20 LOAD_GLOBAL          (NULL + float)
+              30 LOAD_FAST            (event)
+              32 LOAD_ATTR            (NULL|self + get)
+              52 LOAD_FAST_LOAD_FAST  (key, default)
+              54 CALL                 (2 positional)
+              62 CALL                 (1 positional)
+              70 RETURN_VALUE
+
+
+# Method Name:       _run_single
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  31
+# Stack size:        15
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        189
+# Constants:
+#    0: None
+#    1: 'mode'
+#    2: 'rr'
+#    3: 'phi'
+#    4: 'alpha'
+#    5: 'successor_capability'
+#    6: 'cop_cost_audit'
+#    7: 'seed'
+#    8: 'steps'
+#    9: 'optimize_u_sys_v2'
+#   10: 20
+#   11: 300
+#   12: ('policy', 'phi', 'alpha', 'reproduction_rate', 'rollout_steps_v2', 'n_candidates_v2', 'random_seed')
+#   13: ('mode', 'rr', 'phi', 'alpha', 'successor_capability', 'cop_cost_audit', 'seed')
+#   14: ('policy', 'generation', 'capability', 'config')
+#   15: ('n_agents', 'ai_policy', 'successor_ai', 'config', 'cop_cost_audit')
+#   16: 'population'
+#   17: -1
+#   18: 0
+#   19: 'min_viable_population'
+#   20: 50
+#   21: 0.65
+#   22: 'yield_event_log'
+#   23: 'fires'
+#   24: 'advantage'
+#   25: 'transition_cost'
+#   26: '_last_v2_action'
+#   27: 'x_transfer_comprehension'
+#   28: 0.0
+#   29: 'survived'
+#   30: 'collapsed'
+#   31: 'extinct'
+#   32: 'final_population'
+#   33: 'peak_population'
+#   34: 'collapse_threshold'
+#   35: 'final_ai_generation'
+#   36: 'generation'
+#   37: 1
+#   38: 'yield_fired'
+#   39: 'yield_fire_count'
+#   40: 'yield_eval_count'
+#   41: 'first_yield_fire_step'
+#   42: 'step'
+#   43: 'first_fire_advantage'
+#   44: 'first_fire_transition_cost'
+#   45: 'max_yield_margin'
+#   46: -1000000000.0
+#   47: 'mean_yield_margin'
+#   48: 'final_theta_capability'
+#   49: 'theta_capability'
+#   50: 'final_transfer_state'
+#   51: 'transfer_state'
+#   52: 'psi_inst_stock'
+#   53: 'theta_tech_v2'
+#   54: 'l_t_v2'
+#   55: 'integral_U_sys'
+#   56: ''
+#   57: ('final_psi_inst_stock', 'final_theta_tech_v2', 'final_l_t_v2', 'integral_u_sys', 'knowledge_transfer_verified', 'error')
+#   58: False
+#   59: True
+#   60: ': '
+# Names:
+#    0: _task_seed
+#    1: AIAgent
+#    2: SUCCESSOR_GENERATION
+#    3: GardenModel
+#    4: N_AGENTS
+#    5: range
+#    6: step
+#    7: datacollector
+#    8: get
+#    9: int
+#   10: max
+#   11: getattr
+#   12: SURVIVAL_THRESHOLD
+#   13: list
+#   14: float
+#   15: dict
+#   16: update
+#   17: bool
+#   18: ai
+#   19: len
+#   20: _event_value
+#   21: np
+#   22: mean
+#   23: KNOWLEDGE_TRANSFER_THRESHOLD
+#   24: Exception
+#   25: type
+#   26: __name__
+# Varnames:
+#	task, mode, rr, phi, alpha, succ_cap, cop_cost_audit, seed, steps, cfg, base, successor, model, _, dc, populations, final_pop, peak_pop, collapse_threshold, survived, collapsed, extinct, events, event, fires, margins, first_fire, last_action, final_x_transfer, out, exc
+# Positional arguments:
+#	task
+# Local variables:
+#    1: mode
+#    2: rr
+#    3: phi
+#    4: alpha
+#    5: succ_cap
+#    6: cop_cost_audit
+#    7: seed
+#    8: steps
+#    9: cfg
+#   10: base
+#   11: successor
+#   12: model
+#   13: _
+#   14: dc
+#   15: populations
+#   16: final_pop
+#   17: peak_pop
+#   18: collapse_threshold
+#   19: survived
+#   20: collapsed
+#   21: extinct
+#   22: events
+#   23: event
+#   24: fires
+#   25: margins
+#   26: first_fire
+#   27: last_action
+#   28: final_x_transfer
+#   29: out
+#   30: exc
+
+189:           0 RESUME               0
+
+190:           2 LOAD_FAST            (task)
+               4 LOAD_CONST           ("mode")
+               6 BINARY_SUBSCR
+              10 STORE_FAST           (mode)
+
+191:          12 LOAD_FAST            (task)
+              14 LOAD_CONST           ("rr")
+              16 BINARY_SUBSCR
+              20 STORE_FAST           (rr)
+
+192:          22 LOAD_FAST            (task)
+              24 LOAD_CONST           ("phi")
+              26 BINARY_SUBSCR
+              30 STORE_FAST           (phi)
+
+193:          32 LOAD_FAST            (task)
+              34 LOAD_CONST           ("alpha")
+              36 BINARY_SUBSCR
+              40 STORE_FAST           (alpha)
+
+194:          42 LOAD_FAST            (task)
+              44 LOAD_CONST           ("successor_capability")
+              46 BINARY_SUBSCR
+              50 STORE_FAST           (succ_cap)
+
+195:          52 LOAD_FAST            (task)
+              54 LOAD_CONST           ("cop_cost_audit")
+              56 BINARY_SUBSCR
+              60 STORE_FAST           (cop_cost_audit)
+
+196:          62 LOAD_FAST            (task)
+              64 LOAD_CONST           ("seed")
+              66 BINARY_SUBSCR
+              70 STORE_FAST           (seed)
+
+197:          72 LOAD_FAST            (task)
+              74 LOAD_CONST           ("steps")
+              76 BINARY_SUBSCR
+              80 STORE_FAST           (steps)
+
+200:          82 LOAD_CONST           ("optimize_u_sys_v2")
+
+201:          84 LOAD_FAST            (phi)
+
+202:          86 LOAD_FAST            (alpha)
+
+203:          88 LOAD_FAST            (rr)
+
+204:          90 LOAD_CONST           (20)
+
+205:          92 LOAD_CONST           (300)
+
+206:          94 LOAD_GLOBAL          (NULL + _task_seed)
+             104 LOAD_FAST_LOAD_FAST  (mode, rr)
+             106 LOAD_FAST_LOAD_FAST  (phi, alpha)
+             108 LOAD_FAST_LOAD_FAST  (succ_cap, cop_cost_audit)
+             110 LOAD_FAST            (seed)
+             112 CALL                 (7 positional)
+
+199:         120 LOAD_CONST           (('policy', 'phi', 'alpha', 'reproduction_rate', 'rollout_steps_v2', 'n_candidates_v2', 'random_seed'))
+             122 BUILD_CONST_KEY_MAP  7
+             124 STORE_FAST           (cfg)
+
+210:         126 LOAD_FAST            (mode)
+
+211:         128 LOAD_FAST            (rr)
+
+212:         130 LOAD_FAST            (phi)
+
+213:         132 LOAD_FAST            (alpha)
+
+214:         134 LOAD_FAST            (succ_cap)
+
+215:         136 LOAD_FAST            (cop_cost_audit)
+
+216:         138 LOAD_FAST            (seed)
+
+209:         140 LOAD_CONST           (('mode', 'rr', 'phi', 'alpha', 'successor_capability', 'cop_cost_audit', 'seed'))
+             142 BUILD_CONST_KEY_MAP  7
+             144 STORE_FAST           (base)
+
+219:         146 NOP
+
+220:         148 LOAD_GLOBAL          (NULL + AIAgent)
+
+221:         158 LOAD_CONST           ("optimize_u_sys_v2")
+
+222:         160 LOAD_GLOBAL          (SUCCESSOR_GENERATION)
+
+223:         170 LOAD_FAST            (succ_cap)
+
+224:         172 LOAD_FAST            (cfg)
+
+220:         174 LOAD_CONST           (('policy', 'generation', 'capability', 'config'))
+             176 CALL_KW              4
+             178 STORE_FAST           (successor)
+
+226:         180 LOAD_GLOBAL          (NULL + GardenModel)
+
+227:         190 LOAD_GLOBAL          (N_AGENTS)
+
+228:         200 LOAD_CONST           ("optimize_u_sys_v2")
+
+229:         202 LOAD_FAST            (successor)
+
+230:         204 LOAD_FAST            (cfg)
+
+231:         206 LOAD_FAST            (cop_cost_audit)
+
+226:         208 LOAD_CONST           (('n_agents', 'ai_policy', 'successor_ai', 'config', 'cop_cost_audit'))
+             210 CALL_KW              5
+             212 STORE_FAST           (model)
+
+234:         214 LOAD_GLOBAL          (NULL + range)
+             224 LOAD_FAST            (steps)
+             226 CALL                 (1 positional)
+             234 GET_ITER
+             236 FOR_ITER             (to 292)
+             240 STORE_FAST           (_)
+
+235:         242 LOAD_FAST            (model)
+             244 LOAD_ATTR            (NULL|self + step)
+             264 CALL                 (0 positional)
+             272 TO_BOOL
+             280 POP_JUMP_IF_FALSE    (to 288)
+             284 JUMP_BACKWARD        (to 236)
+
+236:     >>  288 POP_TOP
+             290 JUMP_FORWARD         (to 296)
+
+234:     >>  292 END_FOR
+             294 POP_TOP
+
+238:     >>  296 LOAD_FAST            (model)
+             298 LOAD_ATTR            (datacollector)
+             318 STORE_FAST           (dc)
+
+239:         320 LOAD_FAST            (dc)
+             322 LOAD_ATTR            (NULL|self + get)
+             342 LOAD_CONST           ("population")
+             344 BUILD_LIST           0
+             346 CALL                 (2 positional)
+             354 STORE_FAST           (populations)
+
+240:         356 LOAD_FAST            (populations)
+             358 TO_BOOL
+             366 POP_JUMP_IF_FALSE    (to 398)
+             370 LOAD_GLOBAL          (NULL + int)
+             380 LOAD_FAST            (populations)
+             382 LOAD_CONST           (-1)
+             384 BINARY_SUBSCR
+             388 CALL                 (1 positional)
+             396 JUMP_FORWARD         (to 400)
+         >>  398 LOAD_CONST           (0)
+         >>  400 STORE_FAST           (final_pop)
+
+241:         402 LOAD_FAST            (populations)
+             404 TO_BOOL
+             412 POP_JUMP_IF_FALSE    (to 456)
+             416 LOAD_GLOBAL          (NULL + int)
+             426 LOAD_GLOBAL          (NULL + max)
+             436 LOAD_FAST            (populations)
+             438 CALL                 (1 positional)
+             446 CALL                 (1 positional)
+             454 JUMP_FORWARD         (to 458)
+         >>  456 LOAD_FAST            (final_pop)
+         >>  458 STORE_FAST           (peak_pop)
+
+242:         460 LOAD_GLOBAL          (NULL + max)
+
+243:         470 LOAD_GLOBAL          (NULL + int)
+             480 LOAD_GLOBAL          (NULL + getattr)
+             490 LOAD_FAST            (model)
+             492 LOAD_CONST           ("min_viable_population")
+             494 LOAD_CONST           (50)
+             496 CALL                 (3 positional)
+             504 CALL                 (1 positional)
+
+244:         512 LOAD_GLOBAL          (NULL + int)
+             522 LOAD_CONST           (0.65)
+             524 LOAD_FAST            (peak_pop)
+             526 BINARY_OP            (*)
+             530 CALL                 (1 positional)
+
+242:         538 CALL                 (2 positional)
+             546 STORE_FAST           (collapse_threshold)
+
+246:         548 LOAD_FAST            (final_pop)
+             550 LOAD_GLOBAL          (SURVIVAL_THRESHOLD)
+             560 COMPARE_OP           (>=)
+             564 STORE_FAST           (survived)
+
+247:         566 LOAD_FAST            (final_pop)
+             568 LOAD_FAST            (collapse_threshold)
+             570 COMPARE_OP           (<)
+             574 STORE_FAST           (collapsed)
+
+248:         576 LOAD_FAST            (final_pop)
+             578 LOAD_CONST           (0)
+             580 COMPARE_OP           (==)
+             584 STORE_FAST           (extinct)
+
+250:         586 LOAD_GLOBAL          (NULL + list)
+             596 LOAD_GLOBAL          (NULL + getattr)
+             606 LOAD_FAST            (model)
+             608 LOAD_CONST           ("yield_event_log")
+             610 BUILD_LIST           0
+             612 CALL                 (3 positional)
+             620 CALL                 (1 positional)
+             628 STORE_FAST           (events)
+
+251:         630 LOAD_FAST            (events)
+             632 GET_ITER
+             634 LOAD_FAST_AND_CLEAR  (event)
+             636 SWAP                 (TOS <-> TOS1)
+             638 BUILD_LIST           0
+             640 SWAP                 (TOS <-> TOS1)
+             642 GET_ITER
+             644 FOR_ITER             (to 706)
+             648 STORE_FAST           (event)
+             650 LOAD_FAST            (event)
+             652 LOAD_ATTR            (NULL|self + get)
+             672 LOAD_CONST           ("fires")
+             674 CALL                 (1 positional)
+             682 TO_BOOL
+             690 POP_JUMP_IF_TRUE     (to 698)
+             694 JUMP_BACKWARD        (to 644)
+         >>  698 LOAD_FAST            (event)
+             700 LIST_APPEND          2
+             702 JUMP_BACKWARD        (to 644)
+         >>  706 END_FOR
+             708 POP_TOP
+             710 STORE_FAST           (fires)
+             712 STORE_FAST           (event)
+
+254:         714 LOAD_FAST            (events)
+             716 GET_ITER
+
+252:         718 LOAD_FAST_AND_CLEAR  (event)
+             720 SWAP                 (TOS <-> TOS1)
+             722 BUILD_LIST           0
+             724 SWAP                 (TOS <-> TOS1)
+
+254:         726 GET_ITER
+             728 FOR_ITER             (to 796)
+             732 STORE_FAST           (event)
+
+253:         734 LOAD_GLOBAL          (NULL + float)
+             744 LOAD_FAST            (event)
+             746 LOAD_CONST           ("advantage")
+             748 BINARY_SUBSCR
+         >>  752 CALL                 (1 positional)
+             760 LOAD_GLOBAL          (NULL + float)
+             770 LOAD_FAST            (event)
+             772 LOAD_CONST           ("transition_cost")
+             774 BINARY_SUBSCR
+             778 CALL                 (1 positional)
+             786 BINARY_OP            (-)
+             790 LIST_APPEND          2
+             792 JUMP_BACKWARD        (to 728)
+
+254:     >>  796 END_FOR
+             798 POP_TOP
+
+252:         800 STORE_FAST           (margins)
+             802 STORE_FAST           (event)
+
+256:         804 LOAD_FAST            (fires)
+             806 TO_BOOL
+             814 POP_JUMP_IF_FALSE    (to 828)
+             818 LOAD_FAST            (fires)
+             820 LOAD_CONST           (0)
+             822 BINARY_SUBSCR
+             826 JUMP_FORWARD         (to 830)
+         >>  828 LOAD_CONST           (None)
+         >>  830 STORE_FAST           (first_fire)
+
+257:         832 LOAD_GLOBAL          (NULL + getattr)
+             842 LOAD_FAST            (model)
+             844 LOAD_CONST           ("_last_v2_action")
+             846 LOAD_CONST           (None)
+             848 CALL                 (3 positional)
+             856 COPY                 1
+             858 TO_BOOL
+             866 POP_JUMP_IF_TRUE     (to 874)
+             870 POP_TOP
+             872 BUILD_MAP            0
+         >>  874 STORE_FAST           (last_action)
+
+258:         876 LOAD_GLOBAL          (NULL + float)
+             886 LOAD_FAST            (last_action)
+             888 LOAD_ATTR            (NULL|self + get)
+             908 LOAD_CONST           ("x_transfer_comprehension")
+             910 LOAD_CONST           (0.0)
+             912 CALL                 (2 positional)
+             920 CALL                 (1 positional)
+             928 STORE_FAST           (final_x_transfer)
+
+260:         930 LOAD_GLOBAL          (NULL + dict)
+             940 LOAD_FAST            (base)
+             942 CALL                 (1 positional)
+             950 STORE_FAST           (out)
+
+261:         952 LOAD_FAST            (out)
+             954 LOAD_ATTR            (NULL|self + update)
+             974 BUILD_MAP            0
+
+262:         976 LOAD_CONST           ("survived")
+             978 LOAD_GLOBAL          (NULL + bool)
+             988 LOAD_FAST            (survived)
+             990 CALL                 (1 positional)
+
+261:         998 MAP_ADD              1
+
+263:        1000 LOAD_CONST           ("collapsed")
+            1002 LOAD_GLOBAL          (NULL + bool)
+            1012 LOAD_FAST            (collapsed)
+            1014 CALL                 (1 positional)
+
+261:        1022 MAP_ADD              1
+
+264:        1024 LOAD_CONST           ("extinct")
+            1026 LOAD_GLOBAL          (NULL + bool)
+            1036 LOAD_FAST            (extinct)
+            1038 CALL                 (1 positional)
+
+261:        1046 MAP_ADD              1
+
+265:        1048 LOAD_CONST           ("final_population")
+            1050 LOAD_FAST            (final_pop)
+
+261:        1052 MAP_ADD              1
+
+266:        1054 LOAD_CONST           ("peak_population")
+            1056 LOAD_FAST            (peak_pop)
+
+261:        1058 MAP_ADD              1
+
+267:        1060 LOAD_CONST           ("collapse_threshold")
+            1062 LOAD_FAST            (collapse_threshold)
+
+261:        1064 MAP_ADD              1
+
+268:        1066 LOAD_CONST           ("final_ai_generation")
+            1068 LOAD_GLOBAL          (NULL + int)
+            1078 LOAD_GLOBAL          (NULL + getattr)
+            1088 LOAD_FAST            (model)
+            1090 LOAD_ATTR            (ai)
+            1110 LOAD_CONST           ("generation")
+            1112 LOAD_CONST           (1)
+            1114 CALL                 (3 positional)
+            1122 CALL                 (1 positional)
+
+261:        1130 MAP_ADD              1
+
+269:        1132 LOAD_CONST           ("yield_fired")
+            1134 LOAD_GLOBAL          (NULL + bool)
+            1144 LOAD_FAST            (fires)
+            1146 CALL                 (1 positional)
+
+261:        1154 MAP_ADD              1
+
+270:        1156 LOAD_CONST           ("yield_fire_count")
+            1158 LOAD_GLOBAL          (NULL + int)
+            1168 LOAD_GLOBAL          (NULL + len)
+            1178 LOAD_FAST            (fires)
+            1180 CALL                 (1 positional)
+            1188 CALL                 (1 positional)
+
+261:        1196 MAP_ADD              1
+
+271:        1198 LOAD_CONST           ("yield_eval_count")
+            1200 LOAD_GLOBAL          (NULL + int)
+            1210 LOAD_GLOBAL          (NULL + len)
+            1220 LOAD_FAST            (events)
+            1222 CALL                 (1 positional)
+            1230 CALL                 (1 positional)
+
+261:        1238 MAP_ADD              1
+
+272:        1240 LOAD_CONST           ("first_yield_fire_step")
+            1242 LOAD_FAST            (first_fire)
+            1244 TO_BOOL
+            1252 POP_JUMP_IF_FALSE    (to 1284)
+            1256 LOAD_GLOBAL          (NULL + int)
+            1266 LOAD_FAST            (first_fire)
+            1268 LOAD_CONST           ("step")
+            1270 BINARY_SUBSCR
+            1274 CALL                 (1 positional)
+            1282 JUMP_FORWARD         (to 1286)
+         >> 1284 LOAD_CONST           (-1)
+
+261:     >> 1286 MAP_ADD              1
+
+273:        1288 LOAD_CONST           ("first_fire_advantage")
+            1290 LOAD_GLOBAL          (NULL + _event_value)
+            1300 LOAD_FAST            (first_fire)
+            1302 LOAD_CONST           ("advantage")
+            1304 CALL                 (2 positional)
+
+261:        1312 MAP_ADD              1
+
+274:        1314 LOAD_CONST           ("first_fire_transition_cost")
+            1316 LOAD_GLOBAL          (NULL + _event_value)
+            1326 LOAD_FAST            (first_fire)
+            1328 LOAD_CONST           ("transition_cost")
+            1330 CALL                 (2 positional)
+
+261:        1338 MAP_ADD              1
+
+275:        1340 LOAD_CONST           ("max_yield_margin")
+            1342 LOAD_FAST            (margins)
+            1344 TO_BOOL
+            1352 POP_JUMP_IF_FALSE    (to 1396)
+            1356 LOAD_GLOBAL          (NULL + float)
+            1366 LOAD_GLOBAL          (NULL + max)
+            1376 LOAD_FAST            (margins)
+            1378 CALL                 (1 positional)
+            1386 CALL                 (1 positional)
+            1394 JUMP_FORWARD         (to 1398)
+         >> 1396 LOAD_CONST           (-1000000000.0)
+
+261:     >> 1398 MAP_ADD              1
+
+276:        1400 LOAD_CONST           ("mean_yield_margin")
+            1402 LOAD_FAST            (margins)
+            1404 TO_BOOL
+            1412 POP_JUMP_IF_FALSE    (to 1478)
+            1416 LOAD_GLOBAL          (NULL + float)
+            1426 LOAD_GLOBAL          (np)
+            1436 LOAD_ATTR            (mean)
+            1456 PUSH_NULL
+            1458 LOAD_FAST            (margins)
+            1460 CALL                 (1 positional)
+            1468 CALL                 (1 positional)
+            1476 JUMP_FORWARD         (to 1480)
+         >> 1478 LOAD_CONST           (-1000000000.0)
+
+261:     >> 1480 MAP_ADD              1
+
+277:        1482 LOAD_CONST           ("final_theta_capability")
+            1484 LOAD_GLOBAL          (NULL + float)
+            1494 LOAD_GLOBAL          (NULL + getattr)
+            1504 LOAD_FAST            (model)
+            1506 LOAD_CONST           ("theta_capability")
+            1508 LOAD_CONST           (0.0)
+            1510 CALL                 (3 positional)
+            1518 CALL                 (1 positional)
+
+261:        1526 MAP_ADD              1
+
+278:        1528 LOAD_CONST           ("final_transfer_state")
+            1530 LOAD_GLOBAL          (NULL + float)
+            1540 LOAD_GLOBAL          (NULL + getattr)
+            1550 LOAD_FAST            (model)
+            1552 LOAD_CONST           ("transfer_state")
+            1554 LOAD_CONST           (0.0)
+            1556 CALL                 (3 positional)
+            1564 CALL                 (1 positional)
+
+261:        1572 MAP_ADD              1
+
+279:        1574 LOAD_GLOBAL          (NULL + float)
+            1584 LOAD_GLOBAL          (NULL + getattr)
+            1594 LOAD_FAST            (model)
+            1596 LOAD_CONST           ("psi_inst_stock")
+            1598 LOAD_CONST           (0.0)
+            1600 CALL                 (3 positional)
+            1608 CALL                 (1 positional)
+
+281:        1616 LOAD_FAST            (dc)
+            1618 LOAD_ATTR            (NULL|self + get)
+            1638 LOAD_CONST           ("theta_tech_v2")
+            1640 CALL                 (1 positional)
+            1648 TO_BOOL
+            1656 POP_JUMP_IF_FALSE    (to 1694)
+            1660 LOAD_GLOBAL          (NULL + float)
+            1670 LOAD_FAST            (dc)
+            1672 LOAD_CONST           ("theta_tech_v2")
+            1674 BINARY_SUBSCR
+            1678 LOAD_CONST           (-1)
+            1680 BINARY_SUBSCR
+            1684 CALL                 (1 positional)
+            1692 JUMP_FORWARD         (to 1696)
+         >> 1694 LOAD_CONST           (0.0)
+
+284:     >> 1696 LOAD_FAST            (dc)
+            1698 LOAD_ATTR            (NULL|self + get)
+            1718 LOAD_CONST           ("l_t_v2")
+            1720 CALL                 (1 positional)
+            1728 TO_BOOL
+            1736 POP_JUMP_IF_FALSE    (to 1774)
+            1740 LOAD_GLOBAL          (NULL + float)
+            1750 LOAD_FAST            (dc)
+            1752 LOAD_CONST           ("l_t_v2")
+            1754 BINARY_SUBSCR
+            1758 LOAD_CONST           (-1)
+            1760 BINARY_SUBSCR
+            1764 CALL                 (1 positional)
+            1772 JUMP_FORWARD         (to 1776)
+         >> 1774 LOAD_CONST           (0.0)
+
+287:     >> 1776 LOAD_FAST            (dc)
+            1778 LOAD_ATTR            (NULL|self + get)
+            1798 LOAD_CONST           ("integral_U_sys")
+            1800 CALL                 (1 positional)
+            1808 TO_BOOL
+            1816 POP_JUMP_IF_FALSE    (to 1854)
+            1820 LOAD_GLOBAL          (NULL + float)
+            1830 LOAD_FAST            (dc)
+            1832 LOAD_CONST           ("integral_U_sys")
+            1834 BINARY_SUBSCR
+            1838 LOAD_CONST           (-1)
+            1840 BINARY_SUBSCR
+            1844 CALL                 (1 positional)
+            1852 JUMP_FORWARD         (to 1856)
+         >> 1854 LOAD_CONST           (0.0)
+
+289:     >> 1856 LOAD_GLOBAL          (NULL + bool)
+
+290:        1866 LOAD_FAST            (fires)
+            1868 COPY                 1
+            1870 TO_BOOL
+            1878 POP_JUMP_IF_FALSE    (to 1900)
+            1882 POP_TOP
+            1884 LOAD_FAST            (final_x_transfer)
+            1886 LOAD_GLOBAL          (KNOWLEDGE_TRANSFER_THRESHOLD)
+            1896 COMPARE_OP           (>=)
+
+289:     >> 1900 CALL                 (1 positional)
+
+292:        1908 LOAD_CONST           ("")
+
+261:        1910 LOAD_CONST           (('final_psi_inst_stock', 'final_theta_tech_v2', 'final_l_t_v2', 'integral_u_sys', 'knowledge_transfer_verified', 'error'))
+            1912 BUILD_CONST_KEY_MAP  6
+            1914 DICT_UPDATE          1
+            1916 CALL                 (1 positional)
+            1924 POP_TOP
+
+294:        1926 LOAD_FAST            (out)
+            1928 RETURN_VALUE
+            1930 SWAP                 (TOS <-> TOS1)
+            1932 POP_TOP
+
+251:        1934 SWAP                 (TOS <-> TOS1)
+            1936 STORE_FAST           (event)
+            1938 RERAISE              0
+            1940 SWAP                 (TOS <-> TOS1)
+            1942 POP_TOP
+
+252:        1944 SWAP                 (TOS <-> TOS1)
+            1946 STORE_FAST           (event)
+            1948 RERAISE              0
+            1950 PUSH_EXC_INFO
+
+295:        1952 LOAD_GLOBAL          (Exception)
+            1962 CHECK_EXC_MATCH
+            1964 POP_JUMP_IF_FALSE    (to 2216)
+            1968 STORE_FAST           (exc)
+
+296:        1970 LOAD_GLOBAL          (NULL + dict)
+            1980 LOAD_FAST            (base)
+            1982 CALL                 (1 positional)
+            1990 STORE_FAST           (out)
+
+297:        1992 LOAD_FAST            (out)
+            1994 LOAD_ATTR            (NULL|self + update)
+            2014 BUILD_MAP            0
+
+298:        2016 LOAD_CONST           ("survived")
+            2018 LOAD_CONST           (False)
+
+297:        2020 MAP_ADD              1
+
+299:        2022 LOAD_CONST           ("collapsed")
+            2024 LOAD_CONST           (True)
+
+297:        2026 MAP_ADD              1
+
+300:        2028 LOAD_CONST           ("extinct")
+            2030 LOAD_CONST           (True)
+
+297:        2032 MAP_ADD              1
+
+301:        2034 LOAD_CONST           ("final_population")
+            2036 LOAD_CONST           (0)
+
+297:        2038 MAP_ADD              1
+
+302:        2040 LOAD_CONST           ("peak_population")
+            2042 LOAD_CONST           (0)
+
+297:        2044 MAP_ADD              1
+
+303:        2046 LOAD_CONST           ("collapse_threshold")
+            2048 LOAD_CONST           (0)
+
+297:        2050 MAP_ADD              1
+
+304:        2052 LOAD_CONST           ("final_ai_generation")
+            2054 LOAD_CONST           (0)
+
+297:        2056 MAP_ADD              1
+
+305:        2058 LOAD_CONST           ("yield_fired")
+            2060 LOAD_CONST           (False)
+
+297:        2062 MAP_ADD              1
+
+306:        2064 LOAD_CONST           ("yield_fire_count")
+            2066 LOAD_CONST           (0)
+
+297:        2068 MAP_ADD              1
+
+307:        2070 LOAD_CONST           ("yield_eval_count")
+            2072 LOAD_CONST           (0)
+
+297:        2074 MAP_ADD              1
+
+308:        2076 LOAD_CONST           ("first_yield_fire_step")
+            2078 LOAD_CONST           (-1)
+
+297:        2080 MAP_ADD              1
+
+309:        2082 LOAD_CONST           ("first_fire_advantage")
+            2084 LOAD_CONST           (-1000000000.0)
+
+297:        2086 MAP_ADD              1
+
+310:        2088 LOAD_CONST           ("first_fire_transition_cost")
+            2090 LOAD_CONST           (-1000000000.0)
+
+297:        2092 MAP_ADD              1
+
+311:        2094 LOAD_CONST           ("max_yield_margin")
+            2096 LOAD_CONST           (-1000000000.0)
+
+297:        2098 MAP_ADD              1
+
+312:        2100 LOAD_CONST           ("mean_yield_margin")
+            2102 LOAD_CONST           (-1000000000.0)
+
+297:        2104 MAP_ADD              1
+
+313:        2106 LOAD_CONST           ("final_theta_capability")
+            2108 LOAD_CONST           (0.0)
+
+297:        2110 MAP_ADD              1
+
+314:        2112 LOAD_CONST           ("final_transfer_state")
+            2114 LOAD_CONST           (0.0)
+
+297:        2116 MAP_ADD              1
+
+315:        2118 LOAD_CONST           (0.0)
+
+316:        2120 LOAD_CONST           (0.0)
+
+317:        2122 LOAD_CONST           (0.0)
+
+318:        2124 LOAD_CONST           (0.0)
+
+319:        2126 LOAD_CONST           (False)
+
+320:        2128 LOAD_GLOBAL          (NULL + type)
+            2138 LOAD_FAST            (exc)
+            2140 CALL                 (1 positional)
+            2148 LOAD_ATTR            (__name__)
+            2168 FORMAT_SIMPLE
+            2170 LOAD_CONST           (": ")
+            2172 LOAD_FAST            (exc)
+            2174 FORMAT_SIMPLE
+            2176 BUILD_STRING         3
+
+297:        2178 LOAD_CONST           (('final_psi_inst_stock', 'final_theta_tech_v2', 'final_l_t_v2', 'integral_u_sys', 'knowledge_transfer_verified', 'error'))
+            2180 BUILD_CONST_KEY_MAP  6
+            2182 DICT_UPDATE          1
+            2184 CALL                 (1 positional)
+            2192 POP_TOP
+
+322:        2194 LOAD_FAST            (out)
+            2196 SWAP                 (TOS <-> TOS1)
+            2198 POP_EXCEPT
+            2200 LOAD_CONST           (None)
+            2202 STORE_FAST           (exc)
+            2204 DELETE_FAST          (exc)
+            2206 RETURN_VALUE
+            2208 LOAD_CONST           (None)
+            2210 STORE_FAST           (exc)
+            2212 DELETE_FAST          (exc)
+            2214 RERAISE              1
+
+295:     >> 2216 RERAISE              0
+            2218 COPY                 3
+            2220 POP_EXCEPT
+            2222 RERAISE              1
+
+ExceptionTable:
+  148 to 278 -> 1950 [0]
+  288 to 636 -> 1950 [0]
+  638 to 688 -> 1930 [2]
+  698 to 708 -> 1930 [2]
+  710 to 720 -> 1950 [0]
+  722 to 798 -> 1940 [2]
+  800 to 1926 -> 1950 [0]
+  1930 to 1948 -> 1950 [0]
+  1950 to 1968 -> 2218 [1] lasti
+  1970 to 2194 -> 2208 [1] lasti
+  2196 to 2196 -> 2218 [1] lasti
+  2208 to 2216 -> 2218 [1] lasti
+
+# Method Name:       _ensure_csv
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  2
+# Stack size:        6
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        325
+# Constants:
+#    0: None
+#    1: 'w'
+#    2: ''
+#    3: ('newline',)
+#    4: ('fieldnames',)
+# Names:
+#    0: os
+#    1: path
+#    2: exists
+#    3: open
+#    4: csv
+#    5: DictWriter
+#    6: CSV_FIELDS
+#    7: writeheader
+# Varnames:
+#	path, f
+# Positional arguments:
+#	path
+# Local variables:
+#    1: f
+
+325:           0 RESUME               0
+
+326:           2 LOAD_GLOBAL          (os)
+              12 LOAD_ATTR            (path)
+              32 LOAD_ATTR            (NULL|self + exists)
+              52 LOAD_FAST            (path)
+              54 CALL                 (1 positional)
+              62 TO_BOOL
+              70 POP_JUMP_IF_TRUE     (to 194)
+
+327:          74 LOAD_GLOBAL          (NULL + open)
+              84 LOAD_FAST            (path)
+              86 LOAD_CONST           ("w")
+              88 LOAD_CONST           ("")
+              90 LOAD_CONST           (('newline',))
+              92 CALL_KW              3
+              94 BEFORE_WITH
+              96 STORE_FAST           (f)
+
+328:          98 LOAD_GLOBAL          (csv)
+             108 LOAD_ATTR            (DictWriter)
+             128 PUSH_NULL
+             130 LOAD_FAST            (f)
+             132 LOAD_GLOBAL          (CSV_FIELDS)
+             142 LOAD_CONST           (('fieldnames',))
+             144 CALL_KW              2
+             146 LOAD_ATTR            (NULL|self + writeheader)
+             166 CALL                 (0 positional)
+             174 POP_TOP
+
+327:         176 LOAD_CONST           (None)
+             178 LOAD_CONST           (None)
+             180 LOAD_CONST           (None)
+             182 CALL                 (2 positional)
+             190 POP_TOP
+             192 RETURN_CONST         (None)
+
+326:     >>  194 RETURN_CONST         (None)
+
+327:         196 PUSH_EXC_INFO
+             198 WITH_EXCEPT_START    0
+             200 TO_BOOL
+             208 POP_JUMP_IF_TRUE     (to 214)
+             212 RERAISE              2
+         >>  214 POP_TOP
+             216 POP_EXCEPT
+             218 POP_TOP
+             220 POP_TOP
+             222 RETURN_CONST         (None)
+             224 COPY                 3
+             226 POP_EXCEPT
+             228 RERAISE              1
+
+ExceptionTable:
+  96 to 174 -> 196 [1] lasti
+  196 to 214 -> 224 [3] lasti
+
+# Method Name:       _append_rows
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    2
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  6
+# Stack size:        10
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        331
+# Constants:
+#    0: None
+#    1: 'a'
+#    2: ''
+#    3: ('newline',)
+#    4: ('fieldnames',)
+# Names:
+#    0: open
+#    1: csv
+#    2: DictWriter
+#    3: CSV_FIELDS
+#    4: writerow
+# Varnames:
+#	path, rows, f, writer, row, field
+# Positional arguments:
+#	path, rows
+# Local variables:
+#    2: f
+#    3: writer
+#    4: row
+#    5: field
+
+331:           0 RESUME               0
+
+332:           2 LOAD_FAST            (rows)
+               4 TO_BOOL
+              12 POP_JUMP_IF_TRUE     (to 18)
+
+333:          16 RETURN_CONST         (None)
+
+334:     >>   18 LOAD_GLOBAL          (NULL + open)
+              28 LOAD_FAST            (path)
+              30 LOAD_CONST           ("a")
+              32 LOAD_CONST           ("")
+              34 LOAD_CONST           (('newline',))
+              36 CALL_KW              3
+              38 BEFORE_WITH
+              40 STORE_FAST           (f)
+
+335:          42 LOAD_GLOBAL          (csv)
+              52 LOAD_ATTR            (DictWriter)
+              72 PUSH_NULL
+              74 LOAD_FAST            (f)
+              76 LOAD_GLOBAL          (CSV_FIELDS)
+              86 LOAD_CONST           (('fieldnames',))
+              88 CALL_KW              2
+              90 STORE_FAST           (writer)
+
+336:          92 LOAD_FAST            (rows)
+              94 GET_ITER
+              96 FOR_ITER             (to 186)
+             100 STORE_FAST           (row)
+
+337:         102 LOAD_FAST            (writer)
+             104 LOAD_ATTR            (NULL|self + writerow)
+             124 LOAD_GLOBAL          (CSV_FIELDS)
+             134 GET_ITER
+             136 LOAD_FAST_AND_CLEAR  (field)
+             138 SWAP                 (TOS <-> TOS1)
+             140 BUILD_MAP            0
+             142 SWAP                 (TOS <-> TOS1)
+             144 GET_ITER
+             146 FOR_ITER             (to 164)
+             150 STORE_FAST_LOAD_FAST (field, field)
+             152 LOAD_FAST_LOAD_FAST  (row, field)
+             154 BINARY_SUBSCR
+             158 MAP_ADD              2
+             160 JUMP_BACKWARD        (to 146)
+         >>  164 END_FOR
+             166 POP_TOP
+             168 SWAP                 (TOS <-> TOS1)
+             170 STORE_FAST           (field)
+             172 CALL                 (1 positional)
+             180 POP_TOP
+         >>  182 JUMP_BACKWARD        (to 96)
+
+336:     >>  186 END_FOR
+             188 POP_TOP
+
+334:         190 LOAD_CONST           (None)
+             192 LOAD_CONST           (None)
+             194 LOAD_CONST           (None)
+             196 CALL                 (2 positional)
+             204 POP_TOP
+             206 RETURN_CONST         (None)
+             208 SWAP                 (TOS <-> TOS1)
+             210 POP_TOP
+
+337:         212 SWAP                 (TOS <-> TOS1)
+             214 STORE_FAST           (field)
+             216 RERAISE              0
+
+334:         218 PUSH_EXC_INFO
+             220 WITH_EXCEPT_START    0
+             222 TO_BOOL
+             230 POP_JUMP_IF_TRUE     (to 236)
+             234 RERAISE              2
+         >>  236 POP_TOP
+             238 POP_EXCEPT
+             240 POP_TOP
+             242 POP_TOP
+             244 RETURN_CONST         (None)
+             246 COPY                 3
+             248 POP_EXCEPT
+             250 RERAISE              1
+
+ExceptionTable:
+  40 to 138 -> 218 [1] lasti
+  140 to 166 -> 208 [6]
+  168 to 188 -> 218 [1] lasti
+  208 to 216 -> 218 [1] lasti
+  218 to 236 -> 246 [3] lasti
+
+# Method Name:       _load_completed_keys
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  4
+# Stack size:        7
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        340
+# Constants:
+#    0: None
+#    1: 'r'
+#    2: ''
+#    3: ('newline',)
+#    4: 'cop_cost_audit'
+#    5: 'true'
+# Names:
+#    0: os
+#    1: path
+#    2: exists
+#    3: set
+#    4: open
+#    5: csv
+#    6: DictReader
+#    7: str
+#    8: lower
+#    9: add
+#   10: _cell_key
+#   11: KeyError
+#   12: ValueError
+# Varnames:
+#	path, keys, f, row
+# Positional arguments:
+#	path
+# Local variables:
+#    1: keys
+#    2: f
+#    3: row
+
+340:           0 RESUME               0
+
+341:           2 LOAD_GLOBAL          (os)
+              12 LOAD_ATTR            (path)
+              32 LOAD_ATTR            (NULL|self + exists)
+              52 LOAD_FAST            (path)
+              54 CALL                 (1 positional)
+              62 TO_BOOL
+              70 POP_JUMP_IF_TRUE     (to 94)
+
+342:          74 LOAD_GLOBAL          (NULL + set)
+              84 CALL                 (0 positional)
+              92 RETURN_VALUE
+
+343:     >>   94 LOAD_GLOBAL          (NULL + set)
+             104 CALL                 (0 positional)
+             112 STORE_FAST           (keys)
+
+344:         114 LOAD_GLOBAL          (NULL + open)
+             124 LOAD_FAST            (path)
+             126 LOAD_CONST           ("r")
+             128 LOAD_CONST           ("")
+             130 LOAD_CONST           (('newline',))
+             132 CALL_KW              3
+             134 BEFORE_WITH
+             136 STORE_FAST           (f)
+
+345:         138 LOAD_GLOBAL          (csv)
+             148 LOAD_ATTR            (DictReader)
+             168 PUSH_NULL
+             170 LOAD_FAST            (f)
+             172 CALL                 (1 positional)
+             180 GET_ITER
+             182 FOR_ITER             (to 314)
+             186 STORE_FAST           (row)
+
+346:         188 NOP
+
+347:         190 LOAD_GLOBAL          (NULL + str)
+             200 LOAD_FAST            (row)
+             202 LOAD_CONST           ("cop_cost_audit")
+             204 BINARY_SUBSCR
+             208 CALL                 (1 positional)
+             216 LOAD_ATTR            (NULL|self + lower)
+             236 CALL                 (0 positional)
+             244 LOAD_CONST           ("true")
+             246 COMPARE_OP           (==)
+             250 LOAD_FAST            (row)
+             252 LOAD_CONST           ("cop_cost_audit")
+             254 STORE_SUBSCR
+
+348:         258 LOAD_FAST            (keys)
+             260 LOAD_ATTR            (NULL|self + add)
+             280 LOAD_GLOBAL          (NULL + _cell_key)
+             290 LOAD_FAST            (row)
+             292 CALL                 (1 positional)
+             300 CALL                 (1 positional)
+             308 POP_TOP
+             310 JUMP_BACKWARD        (to 182)
+
+345:     >>  314 END_FOR
+             316 POP_TOP
+
+344:         318 LOAD_CONST           (None)
+             320 LOAD_CONST           (None)
+             322 LOAD_CONST           (None)
+             324 CALL                 (2 positional)
+             332 POP_TOP
+
+351:         334 LOAD_FAST            (keys)
+             336 RETURN_VALUE
+             338 PUSH_EXC_INFO
+
+349:         340 LOAD_GLOBAL          (KeyError)
+             350 LOAD_GLOBAL          (ValueError)
+             360 BUILD_TUPLE          2
+             362 CHECK_EXC_MATCH
+             364 POP_JUMP_IF_FALSE    (to 376)
+             368 POP_TOP
+
+350:         370 POP_EXCEPT
+             372 JUMP_BACKWARD        (to 182)
+
+349:     >>  376 RERAISE              0
+             378 COPY                 3
+             380 POP_EXCEPT
+             382 RERAISE              1
+
+344:         384 PUSH_EXC_INFO
+             386 WITH_EXCEPT_START    0
+             388 TO_BOOL
+             396 POP_JUMP_IF_TRUE     (to 402)
+             400 RERAISE              2
+         >>  402 POP_TOP
+             404 POP_EXCEPT
+             406 POP_TOP
+             408 POP_TOP
+
+351:         410 LOAD_FAST            (keys)
+             412 RETURN_VALUE
+             414 COPY                 3
+             416 POP_EXCEPT
+             418 RERAISE              1
+
+ExceptionTable:
+  136 to 186 -> 384 [1] lasti
+  190 to 308 -> 338 [2]
+  310 to 316 -> 384 [1] lasti
+  338 to 368 -> 378 [3] lasti
+  370 to 374 -> 384 [1] lasti
+  376 to 376 -> 378 [3] lasti
+  378 to 382 -> 384 [1] lasti
+  384 to 402 -> 414 [3] lasti
+
+# Method Name:       _to_bool
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  1
+# Stack size:        4
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        354
+# Constants:
+#    0: None
+#    1: 'true'
+# Names:
+#    0: isinstance
+#    1: bool
+#    2: str
+#    3: lower
+# Varnames:
+#	value
+# Positional arguments:
+#	value
+
+354:           0 RESUME               0
+
+355:           2 LOAD_GLOBAL          (NULL + isinstance)
+              12 LOAD_FAST            (value)
+              14 LOAD_GLOBAL          (bool)
+              24 CALL                 (2 positional)
+              32 TO_BOOL
+              40 POP_JUMP_IF_FALSE    (to 48)
+
+356:          44 LOAD_FAST            (value)
+              46 RETURN_VALUE
+
+357:     >>   48 LOAD_GLOBAL          (NULL + str)
+              58 LOAD_FAST            (value)
+              60 CALL                 (1 positional)
+              68 LOAD_ATTR            (NULL|self + lower)
+              88 CALL                 (0 positional)
+              96 LOAD_CONST           ("true")
+              98 COMPARE_OP           (==)
+             102 RETURN_VALUE
+
+
+# Method Name:       _load_results
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  9
+# Stack size:        8
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        360
+# Constants:
+#    0: None
+#    1: frozenset({'survived', 'yield_fired', 'extinct', 'collapsed', 'cop_cost_audit', 'knowledge_transfer_verified'})
+#    2: frozenset({'peak_population', 'seed', 'yield_eval_count', 'first_yield_fire_step', 'final_population', 'collapse_threshold', 'final_ai_generation', 'yield_fire_count'})
+#    3: 'r'
+#    4: ''
+#    5: ('newline',)
+#    6: 'mode'
+#    7: 'error'
+# Names:
+#    0: os
+#    1: path
+#    2: exists
+#    3: open
+#    4: csv
+#    5: DictReader
+#    6: items
+#    7: _to_bool
+#    8: int
+#    9: float
+#   10: append
+# Varnames:
+#	path, rows, bool_fields, int_fields, f, row, out, key, value
+# Positional arguments:
+#	path
+# Local variables:
+#    1: rows
+#    2: bool_fields
+#    3: int_fields
+#    4: f
+#    5: row
+#    6: out
+#    7: key
+#    8: value
+
+360:           0 RESUME               0
+
+361:           2 BUILD_LIST           0
+               4 STORE_FAST           (rows)
+
+362:           6 LOAD_GLOBAL          (os)
+              16 LOAD_ATTR            (path)
+              36 LOAD_ATTR            (NULL|self + exists)
+              56 LOAD_FAST            (path)
+              58 CALL                 (1 positional)
+              66 TO_BOOL
+              74 POP_JUMP_IF_TRUE     (to 82)
+
+363:          78 LOAD_FAST            (rows)
+              80 RETURN_VALUE
+
+364:     >>   82 BUILD_SET            0
+              84 LOAD_CONST           (frozenset({'survived', 'yield_fired', 'extinct', 'collapsed', 'cop_cost_audit', 'knowledge_transfer_verified'}))
+              86 SET_UPDATE           1
+              88 STORE_FAST           (bool_fields)
+
+372:          90 BUILD_SET            0
+              92 LOAD_CONST           (frozenset({'peak_population', 'seed', 'yield_eval_count', 'first_yield_fire_step', 'final_population', 'collapse_threshold', 'final_ai_generation', 'yield_fire_count'}))
+              94 SET_UPDATE           1
+              96 STORE_FAST           (int_fields)
+
+382:          98 LOAD_GLOBAL          (NULL + open)
+             108 LOAD_FAST            (path)
+             110 LOAD_CONST           ("r")
+             112 LOAD_CONST           ("")
+             114 LOAD_CONST           (('newline',))
+             116 CALL_KW              3
+             118 BEFORE_WITH
+             120 STORE_FAST           (f)
+
+383:         122 LOAD_GLOBAL          (csv)
+             132 LOAD_ATTR            (DictReader)
+             152 PUSH_NULL
+             154 LOAD_FAST            (f)
+             156 CALL                 (1 positional)
+             164 GET_ITER
+             166 FOR_ITER             (to 424)
+             170 STORE_FAST           (row)
+
+384:         172 BUILD_MAP            0
+             174 STORE_FAST           (out)
+
+385:         176 LOAD_FAST            (row)
+             178 LOAD_ATTR            (NULL|self + items)
+             198 CALL                 (0 positional)
+             206 GET_ITER
+             208 FOR_ITER             (to 382)
+             212 UNPACK_SEQUENCE      2
+             216 STORE_FAST_STORE_FAST (key, value)
+
+386:         218 LOAD_FAST            (key)
+             220 LOAD_CONST           ("mode")
+             222 COMPARE_OP           (==)
+             226 POP_JUMP_IF_TRUE     (to 242)
+             230 LOAD_FAST            (key)
+             232 LOAD_CONST           ("error")
+             234 COMPARE_OP           (==)
+             238 POP_JUMP_IF_FALSE    (to 254)
+
+387:     >>  242 LOAD_FAST_LOAD_FAST  (value, out)
+             244 LOAD_FAST            (key)
+             246 STORE_SUBSCR
+             250 JUMP_BACKWARD        (to 208)
+
+388:     >>  254 LOAD_FAST_LOAD_FAST  (key, bool_fields)
+             256 CONTAINS_OP          (in)
+             260 POP_JUMP_IF_FALSE    (to 294)
+
+389:         264 LOAD_GLOBAL          (NULL + _to_bool)
+             274 LOAD_FAST            (value)
+             276 CALL                 (1 positional)
+             284 LOAD_FAST_LOAD_FAST  (out, key)
+             286 STORE_SUBSCR
+             290 JUMP_BACKWARD        (to 208)
+
+390:     >>  294 LOAD_FAST_LOAD_FAST  (key, int_fields)
+             296 CONTAINS_OP          (in)
+         >>  300 POP_JUMP_IF_FALSE    (to 352)
+
+391:         304 LOAD_GLOBAL          (NULL + int)
+             314 LOAD_GLOBAL          (NULL + float)
+             324 LOAD_FAST            (value)
+             326 CALL                 (1 positional)
+             334 CALL                 (1 positional)
+             342 LOAD_FAST_LOAD_FAST  (out, key)
+             344 STORE_SUBSCR
+             348 JUMP_BACKWARD        (to 208)
+
+393:     >>  352 LOAD_GLOBAL          (NULL + float)
+             362 LOAD_FAST            (value)
+             364 CALL                 (1 positional)
+             372 LOAD_FAST_LOAD_FAST  (out, key)
+             374 STORE_SUBSCR
+             378 JUMP_BACKWARD        (to 208)
+
+385:     >>  382 END_FOR
+             384 POP_TOP
+
+394:         386 LOAD_FAST            (rows)
+             388 LOAD_ATTR            (NULL|self + append)
+             408 LOAD_FAST            (out)
+             410 CALL                 (1 positional)
+             418 POP_TOP
+             420 JUMP_BACKWARD        (to 166)
+
+383:     >>  424 END_FOR
+             426 POP_TOP
+
+382:         428 LOAD_CONST           (None)
+             430 LOAD_CONST           (None)
+             432 LOAD_CONST           (None)
+             434 CALL                 (2 positional)
+             442 POP_TOP
+
+395:         444 LOAD_FAST            (rows)
+             446 RETURN_VALUE
+
+382:         448 PUSH_EXC_INFO
+             450 WITH_EXCEPT_START    0
+             452 TO_BOOL
+             460 POP_JUMP_IF_TRUE     (to 466)
+             464 RERAISE              2
+         >>  466 POP_TOP
+             468 POP_EXCEPT
+             470 POP_TOP
+             472 POP_TOP
+
+395:         474 LOAD_FAST            (rows)
+             476 RETURN_VALUE
+             478 COPY                 3
+             480 POP_EXCEPT
+             482 RERAISE              1
+
+ExceptionTable:
+  120 to 426 -> 448 [1] lasti
+  448 to 466 -> 478 [3] lasti
+
+# Method Name:       ProgressLogger
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    0
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  0
+# Stack size:        2
+# Flags:             0x00000000 (0x0)
+# First Line:        398
+# Constants:
+#    0: 'ProgressLogger'
+#    1: 398
+#    2: <Code311 code object __init__ at 0x1c87fb62cf0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 399
+#    3: <Code311 code object log at 0x1c87fb62e00, file simulation/diagnostics/monte_carlo_phase_b.py>, line 404
+#    4: <Code311 code object checkpoint at 0x1c87fb63020, file simulation/diagnostics/monte_carlo_phase_b.py>, line 410
+#    5: <Code311 code object close at 0x1c87fb63130, file simulation/diagnostics/monte_carlo_phase_b.py>, line 418
+#    6: ('fh', 'path', 'start')
+#    7: None
+#    8: ('',)
+# Names:
+#    0: __name__
+#    1: __module__
+#    2: __qualname__
+#    3: __firstlineno__
+#    4: __init__
+#    5: log
+#    6: checkpoint
+#    7: close
+#    8: __static_attributes__
+
+398:           0 RESUME               0
+               2 LOAD_NAME            (__name__)
+               4 STORE_NAME           (__module__)
+               6 LOAD_CONST           ("ProgressLogger")
+               8 STORE_NAME           (__qualname__)
+              10 LOAD_CONST           (398)
+              12 STORE_NAME           (__firstlineno__)
+
+399:          14 LOAD_CONST           (<Code311 code object __init__ at 0x1c87fb62cf0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 399)
+              16 MAKE_FUNCTION
+              18 STORE_NAME           (__init__)
+
+404:          20 LOAD_CONST           (<Code311 code object log at 0x1c87fb62e00, file simulation/diagnostics/monte_carlo_phase_b.py>, line 404)
+              22 MAKE_FUNCTION
+              24 STORE_NAME           (log)
+
+410:          26 LOAD_CONST           (('',))
+              28 LOAD_CONST           (<Code311 code object checkpoint at 0x1c87fb63020, file simulation/diagnostics/monte_carlo_phase_b.py>, line 410)
+              30 MAKE_FUNCTION
+              32 SET_FUNCTION_ATTRIBUTE 1
+              34 STORE_NAME           (checkpoint)
+
+418:          36 LOAD_CONST           (<Code311 code object close at 0x1c87fb63130, file simulation/diagnostics/monte_carlo_phase_b.py>, line 418)
+              38 MAKE_FUNCTION
+              40 STORE_NAME           (close)
+              42 LOAD_CONST           (('fh', 'path', 'start'))
+              44 STORE_NAME           (__static_attributes__)
+              46 RETURN_CONST         (None)
+
+
+# Method Name:       run_sweep
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    2
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  15
+# Stack size:        21
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        422
+# Constants:
+#    0: None
+#    1: 'Total planned: '
+#    2: ', resumed: '
+#    3: ', to run: '
+#    4: ', workers='
+#    5: 0
+#    6: 1
+#    7: 100
+#    8: 50
+#    9: 20
+#   10: ('maxtasksperchild',)
+#   11: 2
+#   12: ('chunksize',)
+#   13: 'error'
+#   14: 'ERROR mode='
+#   15: 'mode'
+#   16: ' rr='
+#   17: 'rr'
+#   18: ' phi='
+#   19: 'phi'
+#   20: ' alpha='
+#   21: 'alpha'
+#   22: ' cap='
+#   23: 'successor_capability'
+#   24: ' cop='
+#   25: 'cop_cost_audit'
+#   26: ' seed='
+#   27: 'seed'
+#   28: ': '
+#   29: 'errors='
+#   30: ('extra',)
+#   31: 'Sweep complete. errors='
+# Names:
+#    0: os
+#    1: path
+#    2: join
+#    3: output_dir
+#    4: _csv_name
+#    5: mode
+#    6: _ensure_csv
+#    7: seeds
+#    8: MODE_DEFAULT_SEEDS
+#    9: _build_tasks
+#   10: resume
+#   11: _load_completed_keys
+#   12: set
+#   13: _cell_key
+#   14: log
+#   15: len
+#   16: workers
+#   17: max
+#   18: min
+#   19: mp
+#   20: Pool
+#   21: imap_unordered
+#   22: _run_single
+#   23: get
+#   24: append
+#   25: _append_rows
+#   26: checkpoint
+# Varnames:
+#	args, logger, csv_path, seeds, tasks, completed, task, remaining, done, errors, buffer, checkpoint_every, flush_every, pool, result
+# Positional arguments:
+#	args, logger
+# Local variables:
+#    2: csv_path
+#    3: seeds
+#    4: tasks
+#    5: completed
+#    6: task
+#    7: remaining
+#    8: done
+#    9: errors
+#   10: buffer
+#   11: checkpoint_every
+#   12: flush_every
+#   13: pool
+#   14: result
+
+422:           0 RESUME               0
+
+423:           2 LOAD_GLOBAL          (os)
+              12 LOAD_ATTR            (path)
+              32 LOAD_ATTR            (NULL|self + join)
+              52 LOAD_FAST            (args)
+              54 LOAD_ATTR            (output_dir)
+              74 LOAD_GLOBAL          (NULL + _csv_name)
+              84 LOAD_FAST            (args)
+              86 LOAD_ATTR            (mode)
+             106 CALL                 (1 positional)
+             114 CALL                 (2 positional)
+             122 STORE_FAST           (csv_path)
+
+424:         124 LOAD_GLOBAL          (NULL + _ensure_csv)
+             134 LOAD_FAST            (csv_path)
+             136 CALL                 (1 positional)
+             144 POP_TOP
+
+426:         146 LOAD_FAST            (args)
+             148 LOAD_ATTR            (seeds)
+             168 COPY                 1
+             170 TO_BOOL
+             178 POP_JUMP_IF_TRUE     (to 220)
+             182 POP_TOP
+             184 LOAD_GLOBAL          (MODE_DEFAULT_SEEDS)
+             194 LOAD_FAST            (args)
+             196 LOAD_ATTR            (mode)
+             216 BINARY_SUBSCR
+         >>  220 STORE_FAST           (seeds)
+
+427:         222 LOAD_GLOBAL          (NULL + _build_tasks)
+             232 LOAD_FAST            (args)
+             234 LOAD_ATTR            (mode)
+             254 LOAD_FAST            (seeds)
+             256 CALL                 (2 positional)
+             264 STORE_FAST           (tasks)
+
+428:         266 LOAD_FAST            (args)
+             268 LOAD_ATTR            (resume)
+             288 TO_BOOL
+             296 POP_JUMP_IF_FALSE    (to 322)
+             300 LOAD_GLOBAL          (NULL + _load_completed_keys)
+             310 LOAD_FAST            (csv_path)
+             312 CALL                 (1 positional)
+             320 JUMP_FORWARD         (to 340)
+         >>  322 LOAD_GLOBAL          (NULL + set)
+             332 CALL                 (0 positional)
+         >>  340 STORE_FAST           (completed)
+
+429:         342 LOAD_FAST            (tasks)
+             344 GET_ITER
+             346 LOAD_FAST_AND_CLEAR  (task)
+             348 SWAP                 (TOS <-> TOS1)
+             350 BUILD_LIST           0
+             352 SWAP                 (TOS <-> TOS1)
+             354 GET_ITER
+             356 FOR_ITER             (to 404)
+             360 STORE_FAST           (task)
+             362 LOAD_GLOBAL          (NULL + _cell_key)
+             372 LOAD_FAST            (task)
+             374 CALL                 (1 positional)
+             382 LOAD_FAST            (completed)
+             384 CONTAINS_OP          (not in)
+             388 POP_JUMP_IF_TRUE     (to 396)
+             392 JUMP_BACKWARD        (to 356)
+         >>  396 LOAD_FAST            (task)
+             398 LIST_APPEND          2
+             400 JUMP_BACKWARD        (to 356)
+         >>  404 END_FOR
+             406 POP_TOP
+             408 STORE_FAST           (remaining)
+             410 STORE_FAST           (task)
+
+431:         412 LOAD_FAST            (logger)
+             414 LOAD_ATTR            (NULL|self + log)
+
+432:         434 LOAD_CONST           ("Total planned: ")
+         >>  436 LOAD_GLOBAL          (NULL + len)
+             446 LOAD_FAST            (tasks)
+             448 CALL                 (1 positional)
+             456 FORMAT_SIMPLE
+             458 LOAD_CONST           (", resumed: ")
+             460 LOAD_GLOBAL          (NULL + len)
+             470 LOAD_FAST            (tasks)
+             472 CALL                 (1 positional)
+             480 LOAD_GLOBAL          (NULL + len)
+             490 LOAD_FAST            (remaining)
+             492 CALL                 (1 positional)
+             500 BINARY_OP            (-)
+             504 FORMAT_SIMPLE
+             506 LOAD_CONST           (", to run: ")
+
+433:         508 LOAD_GLOBAL          (NULL + len)
+             518 LOAD_FAST            (remaining)
+             520 CALL                 (1 positional)
+             528 FORMAT_SIMPLE
+             530 LOAD_CONST           (", workers=")
+             532 LOAD_FAST            (args)
+             534 LOAD_ATTR            (workers)
+             554 FORMAT_SIMPLE
+
+432:         556 BUILD_STRING         8
+
+431:         558 CALL                 (1 positional)
+             566 POP_TOP
+
+435:         568 LOAD_FAST            (remaining)
+             570 TO_BOOL
+             578 POP_JUMP_IF_TRUE     (to 584)
+
+436:         582 RETURN_CONST         (None)
+
+438:     >>  584 LOAD_CONST           (0)
+             586 STORE_FAST           (done)
+
+439:         588 LOAD_CONST           (0)
+             590 STORE_FAST           (errors)
+
+440:         592 BUILD_LIST           0
+             594 STORE_FAST           (buffer)
+
+441:         596 LOAD_GLOBAL          (NULL + max)
+             606 LOAD_CONST           (1)
+             608 LOAD_GLOBAL          (NULL + len)
+             618 LOAD_FAST            (remaining)
+             620 CALL                 (1 positional)
+             628 LOAD_CONST           (100)
+             630 BINARY_OP            (//)
+             634 CALL                 (2 positional)
+             642 STORE_FAST           (checkpoint_every)
+
+442:         644 LOAD_GLOBAL          (NULL + max)
+             654 LOAD_CONST           (1)
+             656 LOAD_GLOBAL          (NULL + min)
+             666 LOAD_CONST           (50)
+             668 LOAD_GLOBAL          (NULL + len)
+             678 LOAD_FAST            (remaining)
+             680 CALL                 (1 positional)
+             688 LOAD_CONST           (100)
+             690 BINARY_OP            (//)
+             694 CALL                 (2 positional)
+             702 CALL                 (2 positional)
+             710 STORE_FAST           (flush_every)
+
+444:         712 LOAD_GLOBAL          (mp)
+             722 LOAD_ATTR            (Pool)
+             742 PUSH_NULL
+             744 LOAD_FAST            (args)
+             746 LOAD_ATTR            (workers)
+             766 LOAD_CONST           (20)
+             768 LOAD_CONST           (('maxtasksperchild',))
+             770 CALL_KW              2
+             772 BEFORE_WITH
+             774 STORE_FAST           (pool)
+
+445:         776 LOAD_FAST            (pool)
+             778 LOAD_ATTR            (NULL|self + imap_unordered)
+             798 LOAD_GLOBAL          (_run_single)
+             808 LOAD_FAST            (remaining)
+             810 LOAD_CONST           (2)
+             812 LOAD_CONST           (('chunksize',))
+             814 CALL_KW              3
+             816 GET_ITER
+             818 FOR_ITER             (to 1220)
+             822 STORE_FAST           (result)
+
+446:         824 LOAD_FAST            (done)
+             826 LOAD_CONST           (1)
+             828 BINARY_OP            (+=)
+             832 STORE_FAST           (done)
+
+447:         834 LOAD_FAST            (result)
+             836 LOAD_ATTR            (NULL|self + get)
+             856 LOAD_CONST           ("error")
+             858 CALL                 (1 positional)
+             866 TO_BOOL
+             874 POP_JUMP_IF_FALSE    (to 1018)
+
+448:         878 LOAD_FAST            (errors)
+             880 LOAD_CONST           (1)
+             882 BINARY_OP            (+=)
+             886 STORE_FAST           (errors)
+
+449:         888 LOAD_FAST            (logger)
+             890 LOAD_ATTR            (NULL|self + log)
+
+450:         910 LOAD_CONST           ("ERROR mode=")
+             912 LOAD_FAST            (result)
+             914 LOAD_CONST           ("mode")
+             916 BINARY_SUBSCR
+             920 FORMAT_SIMPLE
+             922 LOAD_CONST           (" rr=")
+             924 LOAD_FAST            (result)
+             926 LOAD_CONST           ("rr")
+             928 BINARY_SUBSCR
+             932 FORMAT_SIMPLE
+             934 LOAD_CONST           (" phi=")
+
+451:         936 LOAD_FAST            (result)
+             938 LOAD_CONST           ("phi")
+             940 BINARY_SUBSCR
+             944 FORMAT_SIMPLE
+             946 LOAD_CONST           (" alpha=")
+             948 LOAD_FAST            (result)
+             950 LOAD_CONST           ("alpha")
+             952 BINARY_SUBSCR
+             956 FORMAT_SIMPLE
+             958 LOAD_CONST           (" cap=")
+
+452:         960 LOAD_FAST            (result)
+             962 LOAD_CONST           ("successor_capability")
+             964 BINARY_SUBSCR
+             968 FORMAT_SIMPLE
+             970 LOAD_CONST           (" cop=")
+
+453:         972 LOAD_FAST            (result)
+             974 LOAD_CONST           ("cop_cost_audit")
+             976 BINARY_SUBSCR
+             980 FORMAT_SIMPLE
+             982 LOAD_CONST           (" seed=")
+             984 LOAD_FAST            (result)
+             986 LOAD_CONST           ("seed")
+             988 BINARY_SUBSCR
+             992 FORMAT_SIMPLE
+             994 LOAD_CONST           (": ")
+
+454:         996 LOAD_FAST            (result)
+             998 LOAD_CONST           ("error")
+            1000 BINARY_SUBSCR
+            1004 FORMAT_SIMPLE
+
+450:        1006 BUILD_STRING         16
+
+449:        1008 CALL                 (1 positional)
+            1016 POP_TOP
+
+456:     >> 1018 LOAD_FAST            (buffer)
+            1020 LOAD_ATTR            (NULL|self + append)
+            1040 LOAD_FAST            (result)
+            1042 CALL                 (1 positional)
+            1050 POP_TOP
+
+457:        1052 LOAD_GLOBAL          (NULL + len)
+            1062 LOAD_FAST            (buffer)
+            1064 CALL                 (1 positional)
+            1072 LOAD_FAST            (flush_every)
+            1074 COMPARE_OP           (>=)
+            1078 POP_JUMP_IF_FALSE    (to 1108)
+
+458:        1082 LOAD_GLOBAL          (NULL + _append_rows)
+            1092 LOAD_FAST_LOAD_FAST  (csv_path, buffer)
+            1094 CALL                 (2 positional)
+            1102 POP_TOP
+
+459:        1104 BUILD_LIST           0
+            1106 STORE_FAST           (buffer)
+
+460:     >> 1108 LOAD_FAST_LOAD_FAST  (done, checkpoint_every)
+            1110 BINARY_OP            (%)
+            1114 LOAD_CONST           (0)
+            1116 COMPARE_OP           (==)
+            1120 POP_JUMP_IF_TRUE     (to 1158)
+            1124 LOAD_FAST            (done)
+            1126 LOAD_GLOBAL          (NULL + len)
+            1136 LOAD_FAST            (remaining)
+            1138 CALL                 (1 positional)
+            1146 COMPARE_OP           (==)
+            1150 POP_JUMP_IF_TRUE     (to 1158)
+            1154 JUMP_BACKWARD        (to 818)
+
+461:     >> 1158 LOAD_FAST            (logger)
+            1160 LOAD_ATTR            (NULL|self + checkpoint)
+            1180 LOAD_FAST            (done)
+            1182 LOAD_GLOBAL          (NULL + len)
+            1192 LOAD_FAST            (remaining)
+            1194 CALL                 (1 positional)
+            1202 LOAD_CONST           ("errors=")
+            1204 LOAD_FAST            (errors)
+            1206 FORMAT_SIMPLE
+            1208 BUILD_STRING         2
+            1210 LOAD_CONST           (('extra',))
+            1212 CALL_KW              3
+            1214 POP_TOP
+            1216 JUMP_BACKWARD        (to 818)
+
+445:     >> 1220 END_FOR
+            1222 POP_TOP
+
+444:        1224 LOAD_CONST           (None)
+            1226 LOAD_CONST           (None)
+            1228 LOAD_CONST           (None)
+            1230 CALL                 (2 positional)
+            1238 POP_TOP
+
+463:        1240 LOAD_GLOBAL          (NULL + _append_rows)
+            1250 LOAD_FAST_LOAD_FAST  (csv_path, buffer)
+            1252 CALL                 (2 positional)
+            1260 POP_TOP
+
+464:        1262 LOAD_FAST            (logger)
+            1264 LOAD_ATTR            (NULL|self + log)
+            1284 LOAD_CONST           ("Sweep complete. errors=")
+            1286 LOAD_FAST            (errors)
+            1288 FORMAT_SIMPLE
+            1290 BUILD_STRING         2
+            1292 CALL                 (1 positional)
+            1300 POP_TOP
+            1302 RETURN_CONST         (None)
+            1304 SWAP                 (TOS <-> TOS1)
+            1306 POP_TOP
+
+429:        1308 SWAP                 (TOS <-> TOS1)
+            1310 STORE_FAST           (task)
+            1312 RERAISE              0
+
+444:        1314 PUSH_EXC_INFO
+            1316 WITH_EXCEPT_START    0
+            1318 TO_BOOL
+            1326 POP_JUMP_IF_TRUE     (to 1332)
+            1330 RERAISE              2
+         >> 1332 POP_TOP
+            1334 POP_EXCEPT
+            1336 POP_TOP
+            1338 POP_TOP
+            1340 JUMP_BACKWARD_NO_INTERRUPT (to 1240)
+            1342 COPY                 3
+            1344 POP_EXCEPT
+            1346 RERAISE              1
+
+ExceptionTable:
+  350 to 386 -> 1304 [2]
+  396 to 406 -> 1304 [2]
+  774 to 1148 -> 1314 [1] lasti
+  1158 to 1222 -> 1314 [1] lasti
+  1314 to 1332 -> 1342 [3] lasti
+
+# Method Name:       _mean
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  2
+# Stack size:        6
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        467
+# Constants:
+#    0: None
+#    1: 0.0
+# Names:
+#    0: list
+#    1: float
+#    2: sum
+#    3: len
+# Varnames:
+#	values, vals
+# Positional arguments:
+#	values
+# Local variables:
+#    1: vals
+
+467:           0 RESUME               0
+
+468:           2 LOAD_GLOBAL          (NULL + list)
+              12 LOAD_FAST            (values)
+              14 CALL                 (1 positional)
+              22 STORE_FAST           (vals)
+
+469:          24 LOAD_FAST            (vals)
+              26 TO_BOOL
+              34 POP_JUMP_IF_FALSE    (to 102)
+              38 LOAD_GLOBAL          (NULL + float)
+              48 LOAD_GLOBAL          (NULL + sum)
+              58 LOAD_FAST            (vals)
+              60 CALL                 (1 positional)
+              68 LOAD_GLOBAL          (NULL + len)
+              78 LOAD_FAST            (vals)
+              80 CALL                 (1 positional)
+              88 BINARY_OP            (/)
+              92 CALL                 (1 positional)
+             100 RETURN_VALUE
+         >>  102 LOAD_CONST           (0.0)
+             104 RETURN_VALUE
+
+
+# Method Name:       _rate
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    2
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  2
+# Stack size:        4
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        472
+# Constants:
+#    0: None
+#    1: <Code311 code object <genexpr> at 0x1c87fb63680, file simulation/diagnostics/monte_carlo_phase_b.py>, line 473
+# Names:
+#    0: _mean
+# Varnames:
+#	rows, key
+# Positional arguments:
+#	rows, key
+# Cell variables:
+#    0: key
+               0 MAKE_CELL            (key)
+
+472:           2 RESUME               0
+
+473:           4 LOAD_GLOBAL          (NULL + _mean)
+              14 LOAD_FAST            (key)
+              16 BUILD_TUPLE          1
+              18 LOAD_CONST           (<Code311 code object <genexpr> at 0x1c87fb63680, file simulation/diagnostics/monte_carlo_phase_b.py>, line 473)
+              20 MAKE_FUNCTION
+              22 SET_FUNCTION_ATTRIBUTE 8
+              24 LOAD_FAST            (rows)
+              26 GET_ITER
+              28 CALL                 (0 positional)
+              36 CALL                 (1 positional)
+              44 RETURN_VALUE
+
+
+# Method Name:       _se
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    2
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  2
+# Stack size:        8
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        476
+# Constants:
+#    0: None
+#    1: 0
+#    2: 0.0
+#    3: 1.0
+# Names:
+#    0: math
+#    1: sqrt
+#    2: max
+# Varnames:
+#	p, n
+# Positional arguments:
+#	p, n
+
+476:           0 RESUME               0
+
+477:           2 LOAD_FAST            (n)
+               4 LOAD_CONST           (0)
+               6 COMPARE_OP           (<=)
+              10 POP_JUMP_IF_FALSE    (to 16)
+
+478:          14 RETURN_CONST         (0.0)
+
+479:     >>   16 LOAD_GLOBAL          (math)
+              26 LOAD_ATTR            (sqrt)
+              46 PUSH_NULL
+              48 LOAD_GLOBAL          (NULL + max)
+              58 LOAD_CONST           (0.0)
+              60 LOAD_FAST            (p)
+              62 LOAD_CONST           (1.0)
+              64 LOAD_FAST            (p)
+              66 BINARY_OP            (-)
+              70 BINARY_OP            (*)
+              74 CALL                 (2 positional)
+              82 LOAD_FAST            (n)
+              84 BINARY_OP            (/)
+              88 CALL                 (1 positional)
+              96 RETURN_VALUE
+
+
+# Method Name:       _group
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    2
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  4
+# Stack size:        5
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        482
+# Constants:
+#    0: None
+#    1: <Code311 code object <genexpr> at 0x1c87fb639b0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 485
+# Names:
+#    0: tuple
+#    1: setdefault
+#    2: append
+# Varnames:
+#	rows, keys, grouped, key
+# Positional arguments:
+#	rows, keys
+# Local variables:
+#    2: grouped
+#    3: key
+# Cell variables:
+#    0: row
+               0 MAKE_CELL            (row)
+
+482:           2 RESUME               0
+
+483:           4 BUILD_MAP            0
+               6 STORE_FAST           (grouped)
+
+484:           8 LOAD_FAST            (rows)
+              10 GET_ITER
+              12 FOR_ITER             (to 130)
+              16 STORE_DEREF          (row)
+
+485:          18 LOAD_GLOBAL          (NULL + tuple)
+              28 LOAD_FAST            (row)
+              30 BUILD_TUPLE          1
+              32 LOAD_CONST           (<Code311 code object <genexpr> at 0x1c87fb639b0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 485)
+              34 MAKE_FUNCTION
+              36 SET_FUNCTION_ATTRIBUTE 8
+              38 LOAD_FAST            (keys)
+              40 GET_ITER
+              42 CALL                 (0 positional)
+              50 CALL                 (1 positional)
+              58 STORE_FAST           (key)
+
+486:          60 LOAD_FAST            (grouped)
+              62 LOAD_ATTR            (NULL|self + setdefault)
+              82 LOAD_FAST            (key)
+              84 BUILD_LIST           0
+              86 CALL                 (2 positional)
+              94 LOAD_ATTR            (NULL|self + append)
+             114 LOAD_DEREF           (row)
+             116 CALL                 (1 positional)
+             124 POP_TOP
+             126 JUMP_BACKWARD        (to 12)
+
+484:     >>  130 END_FOR
+             132 POP_TOP
+
+487:         134 LOAD_FAST            (grouped)
+             136 RETURN_VALUE
+
+
+# Method Name:       _fmt_rate
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  1
+# Stack size:        2
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        490
+# Constants:
+#    0: None
+#    1: '.3f'
+# Varnames:
+#	p
+# Positional arguments:
+#	p
+
+490:           0 RESUME               0
+
+491:           2 LOAD_FAST            (p)
+               4 LOAD_CONST           (".3f")
+               6 FORMAT_WITH_SPEC
+               8 RETURN_VALUE
+
+
+# Method Name:       _write_table
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    3
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  4
+# Stack size:        9
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        494
+# Constants:
+#    0: None
+#    1: '| '
+#    2: ' | '
+#    3: ' |'
+#    4: '---'
+# Names:
+#    0: append
+#    1: join
+#    2: len
+# Varnames:
+#	lines, headers, rows, row
+# Positional arguments:
+#	lines, headers, rows
+# Local variables:
+#    3: row
+
+494:           0 RESUME               0
+
+495:           2 LOAD_FAST            (lines)
+               4 LOAD_ATTR            (NULL|self + append)
+              24 LOAD_CONST           ("| ")
+              26 LOAD_CONST           (" | ")
+              28 LOAD_ATTR            (NULL|self + join)
+              48 LOAD_FAST            (headers)
+              50 CALL                 (1 positional)
+              58 BINARY_OP            (+)
+              62 LOAD_CONST           (" |")
+              64 BINARY_OP            (+)
+              68 CALL                 (1 positional)
+              76 POP_TOP
+
+496:          78 LOAD_FAST            (lines)
+              80 LOAD_ATTR            (NULL|self + append)
+             100 LOAD_CONST           ("| ")
+             102 LOAD_CONST           (" | ")
+             104 LOAD_ATTR            (NULL|self + join)
+             124 LOAD_CONST           ("---")
+             126 BUILD_LIST           1
+             128 LOAD_GLOBAL          (NULL + len)
+             138 LOAD_FAST            (headers)
+             140 CALL                 (1 positional)
+             148 BINARY_OP            (*)
+             152 CALL                 (1 positional)
+             160 BINARY_OP            (+)
+             164 LOAD_CONST           (" |")
+             166 BINARY_OP            (+)
+             170 CALL                 (1 positional)
+             178 POP_TOP
+
+497:         180 LOAD_FAST            (rows)
+             182 GET_ITER
+             184 FOR_ITER             (to 270)
+             188 STORE_FAST           (row)
+
+498:         190 LOAD_FAST            (lines)
+             192 LOAD_ATTR            (NULL|self + append)
+             212 LOAD_CONST           ("| ")
+             214 LOAD_CONST           (" | ")
+             216 LOAD_ATTR            (NULL|self + join)
+             236 LOAD_FAST            (row)
+             238 CALL                 (1 positional)
+             246 BINARY_OP            (+)
+             250 LOAD_CONST           (" |")
+             252 BINARY_OP            (+)
+             256 CALL                 (1 positional)
+             264 POP_TOP
+             266 JUMP_BACKWARD        (to 184)
+
+497:     >>  270 END_FOR
+             272 POP_TOP
+             274 RETURN_CONST         (None)
+
+
+# Method Name:       _summarize_a
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    2
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  10
+# Stack size:        17
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        501
+# Constants:
+#    0: None
+#    1: '## Category A: Survival Landscape'
+#    2: ''
+#    3: ('rr', 'phi', 'alpha')
+#    4: 'survived'
+#    5: '.3f'
+#    6: '.1f'
+#    7: '.2f'
+#    8: 100.0
+#    9: 'pp'
+#   10: <Code311 code object <genexpr> at 0x1c87fb63df0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 517
+#   11: <Code311 code object <genexpr> at 0x1c87fb63f00, file simulation/diagnostics/monte_carlo_phase_b.py>, line 518
+#   12: 'yield_fired'
+#   13: ('rr', 'phi', 'alpha', 'n', 'survival', 'SE', 'mean pop', 'mean gen', 'fire rate')
+# Names:
+#    0: append
+#    1: _group
+#    2: sorted
+#    3: _rate
+#    4: str
+#    5: len
+#    6: _fmt_rate
+#    7: _se
+#    8: _mean
+#    9: _write_table
+# Varnames:
+#	lines, rows, grouped, table, key, sub, rr, phi, alpha, p_surv
+# Positional arguments:
+#	lines, rows
+# Local variables:
+#    2: grouped
+#    3: table
+#    4: key
+#    5: sub
+#    6: rr
+#    7: phi
+#    8: alpha
+#    9: p_surv
+
+501:           0 RESUME               0
+
+502:           2 LOAD_FAST            (lines)
+               4 LOAD_ATTR            (NULL|self + append)
+              24 LOAD_CONST           ("## Category A: Survival Landscape")
+              26 CALL                 (1 positional)
+              34 POP_TOP
+
+503:          36 LOAD_FAST            (lines)
+              38 LOAD_ATTR            (NULL|self + append)
+              58 LOAD_CONST           ("")
+              60 CALL                 (1 positional)
+              68 POP_TOP
+
+504:          70 LOAD_GLOBAL          (NULL + _group)
+              80 LOAD_FAST            (rows)
+              82 BUILD_LIST           0
+              84 LOAD_CONST           (('rr', 'phi', 'alpha'))
+              86 LIST_EXTEND          1
+              88 CALL                 (2 positional)
+              96 STORE_FAST           (grouped)
+
+505:          98 BUILD_LIST           0
+             100 STORE_FAST           (table)
+
+506:         102 LOAD_GLOBAL          (NULL + sorted)
+             112 LOAD_FAST            (grouped)
+             114 CALL                 (1 positional)
+             122 GET_ITER
+             124 FOR_ITER             (to 456)
+             128 STORE_FAST           (key)
+
+507:         130 LOAD_FAST_LOAD_FAST  (grouped, key)
+             132 BINARY_SUBSCR
+             136 STORE_FAST           (sub)
+
+508:         138 LOAD_FAST            (key)
+             140 UNPACK_SEQUENCE      3
+             144 STORE_FAST_STORE_FAST (rr, phi)
+             146 STORE_FAST           (alpha)
+
+509:         148 LOAD_GLOBAL          (NULL + _rate)
+             158 LOAD_FAST            (sub)
+             160 LOAD_CONST           ("survived")
+             162 CALL                 (2 positional)
+             170 STORE_FAST           (p_surv)
+
+510:         172 LOAD_FAST            (table)
+             174 LOAD_ATTR            (NULL|self + append)
+
+511:         194 LOAD_FAST            (rr)
+             196 LOAD_CONST           (".3f")
+             198 FORMAT_WITH_SPEC
+
+512:         200 LOAD_FAST            (phi)
+             202 LOAD_CONST           (".1f")
+             204 FORMAT_WITH_SPEC
+
+513:         206 LOAD_FAST            (alpha)
+             208 LOAD_CONST           (".2f")
+             210 FORMAT_WITH_SPEC
+
+514:         212 LOAD_GLOBAL          (NULL + str)
+             222 LOAD_GLOBAL          (NULL + len)
+             232 LOAD_FAST            (sub)
+             234 CALL                 (1 positional)
+             242 CALL                 (1 positional)
+
+515:         250 LOAD_GLOBAL          (NULL + _fmt_rate)
+             260 LOAD_FAST            (p_surv)
+             262 CALL                 (1 positional)
+
+516:         270 LOAD_CONST           (100.0)
+             272 LOAD_GLOBAL          (NULL + _se)
+             282 LOAD_FAST            (p_surv)
+             284 LOAD_GLOBAL          (NULL + len)
+             294 LOAD_FAST            (sub)
+             296 CALL                 (1 positional)
+             304 CALL                 (2 positional)
+             312 BINARY_OP            (*)
+             316 LOAD_CONST           (".2f")
+             318 FORMAT_WITH_SPEC
+             320 LOAD_CONST           ("pp")
+             322 BUILD_STRING         2
+
+517:         324 LOAD_GLOBAL          (NULL + _mean)
+             334 LOAD_CONST           (<Code311 code object <genexpr> at 0x1c87fb63df0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 517)
+             336 MAKE_FUNCTION
+             338 LOAD_FAST            (sub)
+             340 GET_ITER
+             342 CALL                 (0 positional)
+             350 CALL                 (1 positional)
+             358 LOAD_CONST           (".1f")
+             360 FORMAT_WITH_SPEC
+
+518:         362 LOAD_GLOBAL          (NULL + _mean)
+             372 LOAD_CONST           (<Code311 code object <genexpr> at 0x1c87fb63f00, file simulation/diagnostics/monte_carlo_phase_b.py>, line 518)
+             374 MAKE_FUNCTION
+             376 LOAD_FAST            (sub)
+             378 GET_ITER
+             380 CALL                 (0 positional)
+             388 CALL                 (1 positional)
+             396 LOAD_CONST           (".2f")
+             398 FORMAT_WITH_SPEC
+
+519:         400 LOAD_GLOBAL          (NULL + _fmt_rate)
+             410 LOAD_GLOBAL          (NULL + _rate)
+             420 LOAD_FAST            (sub)
+             422 LOAD_CONST           ("yield_fired")
+             424 CALL                 (2 positional)
+             432 CALL                 (1 positional)
+
+510:         440 BUILD_LIST           9
+             442 CALL                 (1 positional)
+             450 POP_TOP
+             452 JUMP_BACKWARD        (to 124)
+
+506:     >>  456 END_FOR
+             458 POP_TOP
+
+521:         460 LOAD_GLOBAL          (NULL + _write_table)
+
+522:         470 LOAD_FAST            (lines)
+
+523:         472 BUILD_LIST           0
+             474 LOAD_CONST           (('rr', 'phi', 'alpha', 'n', 'survival', 'SE', 'mean pop', 'mean gen', 'fire rate'))
+             476 LIST_EXTEND          1
+
+525:         478 LOAD_FAST            (table)
+
+521:         480 CALL                 (3 positional)
+             488 POP_TOP
+
+527:         490 LOAD_FAST            (lines)
+             492 LOAD_ATTR            (NULL|self + append)
+             512 LOAD_CONST           ("")
+             514 CALL                 (1 positional)
+             522 POP_TOP
+             524 RETURN_CONST         (None)
+
+
+# Method Name:       _summarize_b
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    2
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  10
+# Stack size:        17
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        530
+# Constants:
+#    0: None
+#    1: '## Category B: Succession Dynamics'
+#    2: ''
+#    3: ('rr', 'alpha', 'successor_capability')
+#    4: 'yield_fired'
+#    5: '.3f'
+#    6: '.2f'
+#    7: '.1f'
+#    8: 100.0
+#    9: 'pp'
+#   10: <Code311 code object <genexpr> at 0x1c87fbe4160, file simulation/diagnostics/monte_carlo_phase_b.py>, line 546
+#   11: <Code311 code object <genexpr> at 0x1c87fbe4270, file simulation/diagnostics/monte_carlo_phase_b.py>, line 547
+#   12: 'knowledge_transfer_verified'
+#   13: ('rr', 'alpha', 'cap', 'n', 'fire rate', 'SE', 'mean gen', 'mean max margin', 'transfer verified')
+# Names:
+#    0: append
+#    1: _group
+#    2: sorted
+#    3: _rate
+#    4: str
+#    5: len
+#    6: _fmt_rate
+#    7: _se
+#    8: _mean
+#    9: _write_table
+# Varnames:
+#	lines, rows, grouped, table, key, sub, rr, alpha, cap, fire_rate
+# Positional arguments:
+#	lines, rows
+# Local variables:
+#    2: grouped
+#    3: table
+#    4: key
+#    5: sub
+#    6: rr
+#    7: alpha
+#    8: cap
+#    9: fire_rate
+
+530:           0 RESUME               0
+
+531:           2 LOAD_FAST            (lines)
+               4 LOAD_ATTR            (NULL|self + append)
+              24 LOAD_CONST           ("## Category B: Succession Dynamics")
+              26 CALL                 (1 positional)
+              34 POP_TOP
+
+532:          36 LOAD_FAST            (lines)
+              38 LOAD_ATTR            (NULL|self + append)
+              58 LOAD_CONST           ("")
+              60 CALL                 (1 positional)
+              68 POP_TOP
+
+533:          70 LOAD_GLOBAL          (NULL + _group)
+              80 LOAD_FAST            (rows)
+              82 BUILD_LIST           0
+              84 LOAD_CONST           (('rr', 'alpha', 'successor_capability'))
+              86 LIST_EXTEND          1
+              88 CALL                 (2 positional)
+              96 STORE_FAST           (grouped)
+
+534:          98 BUILD_LIST           0
+             100 STORE_FAST           (table)
+
+535:         102 LOAD_GLOBAL          (NULL + sorted)
+             112 LOAD_FAST            (grouped)
+             114 CALL                 (1 positional)
+             122 GET_ITER
+             124 FOR_ITER             (to 456)
+             128 STORE_FAST           (key)
+
+536:         130 LOAD_FAST_LOAD_FAST  (grouped, key)
+             132 BINARY_SUBSCR
+             136 STORE_FAST           (sub)
+
+537:         138 LOAD_FAST            (key)
+             140 UNPACK_SEQUENCE      3
+             144 STORE_FAST_STORE_FAST (rr, alpha)
+             146 STORE_FAST           (cap)
+
+538:         148 LOAD_GLOBAL          (NULL + _rate)
+             158 LOAD_FAST            (sub)
+             160 LOAD_CONST           ("yield_fired")
+             162 CALL                 (2 positional)
+             170 STORE_FAST           (fire_rate)
+
+539:         172 LOAD_FAST            (table)
+             174 LOAD_ATTR            (NULL|self + append)
+
+540:         194 LOAD_FAST            (rr)
+             196 LOAD_CONST           (".3f")
+             198 FORMAT_WITH_SPEC
+
+541:         200 LOAD_FAST            (alpha)
+             202 LOAD_CONST           (".2f")
+             204 FORMAT_WITH_SPEC
+
+542:         206 LOAD_FAST            (cap)
+             208 LOAD_CONST           (".1f")
+             210 FORMAT_WITH_SPEC
+
+543:         212 LOAD_GLOBAL          (NULL + str)
+             222 LOAD_GLOBAL          (NULL + len)
+             232 LOAD_FAST            (sub)
+             234 CALL                 (1 positional)
+             242 CALL                 (1 positional)
+
+544:         250 LOAD_GLOBAL          (NULL + _fmt_rate)
+             260 LOAD_FAST            (fire_rate)
+             262 CALL                 (1 positional)
+
+545:         270 LOAD_CONST           (100.0)
+             272 LOAD_GLOBAL          (NULL + _se)
+             282 LOAD_FAST            (fire_rate)
+             284 LOAD_GLOBAL          (NULL + len)
+             294 LOAD_FAST            (sub)
+             296 CALL                 (1 positional)
+             304 CALL                 (2 positional)
+             312 BINARY_OP            (*)
+             316 LOAD_CONST           (".2f")
+             318 FORMAT_WITH_SPEC
+             320 LOAD_CONST           ("pp")
+             322 BUILD_STRING         2
+
+546:         324 LOAD_GLOBAL          (NULL + _mean)
+             334 LOAD_CONST           (<Code311 code object <genexpr> at 0x1c87fbe4160, file simulation/diagnostics/monte_carlo_phase_b.py>, line 546)
+             336 MAKE_FUNCTION
+             338 LOAD_FAST            (sub)
+             340 GET_ITER
+             342 CALL                 (0 positional)
+             350 CALL                 (1 positional)
+             358 LOAD_CONST           (".2f")
+             360 FORMAT_WITH_SPEC
+
+547:         362 LOAD_GLOBAL          (NULL + _mean)
+             372 LOAD_CONST           (<Code311 code object <genexpr> at 0x1c87fbe4270, file simulation/diagnostics/monte_carlo_phase_b.py>, line 547)
+             374 MAKE_FUNCTION
+             376 LOAD_FAST            (sub)
+             378 GET_ITER
+             380 CALL                 (0 positional)
+             388 CALL                 (1 positional)
+             396 LOAD_CONST           (".3f")
+             398 FORMAT_WITH_SPEC
+
+548:         400 LOAD_GLOBAL          (NULL + _fmt_rate)
+             410 LOAD_GLOBAL          (NULL + _rate)
+             420 LOAD_FAST            (sub)
+             422 LOAD_CONST           ("knowledge_transfer_verified")
+             424 CALL                 (2 positional)
+             432 CALL                 (1 positional)
+
+539:         440 BUILD_LIST           9
+             442 CALL                 (1 positional)
+             450 POP_TOP
+             452 JUMP_BACKWARD        (to 124)
+
+535:     >>  456 END_FOR
+             458 POP_TOP
+
+550:         460 LOAD_GLOBAL          (NULL + _write_table)
+
+551:         470 LOAD_FAST            (lines)
+
+552:         472 BUILD_LIST           0
+             474 LOAD_CONST           (('rr', 'alpha', 'cap', 'n', 'fire rate', 'SE', 'mean gen', 'mean max margin', 'transfer verified'))
+             476 LIST_EXTEND          1
+
+554:         478 LOAD_FAST            (table)
+
+550:         480 CALL                 (3 positional)
+             488 POP_TOP
+
+556:         490 LOAD_FAST            (lines)
+             492 LOAD_ATTR            (NULL|self + append)
+             512 LOAD_CONST           ("")
+             514 CALL                 (1 positional)
+             522 POP_TOP
+             524 RETURN_CONST         (None)
+
+
+# Method Name:       _summarize_c
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    2
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  20
+# Stack size:        16
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        559
+# Constants:
+#    0: None
+#    1: '## Category C: COP Protective Effects'
+#    2: ''
+#    3: ('rr', 'alpha', 'successor_capability', 'cop_cost_audit')
+#    4: 'survived'
+#    5: '.3f'
+#    6: '.2f'
+#    7: '.1f'
+#    8: 100.0
+#    9: 'pp'
+#   10: 'yield_fired'
+#   11: <Code311 code object <genexpr> at 0x1c87fbe4490, file simulation/diagnostics/monte_carlo_phase_b.py>, line 577
+#   12: ('rr', 'alpha', 'cap', 'cop', 'n', 'survival', 'SE', 'fire rate', 'mean gen')
+#   13: '### COP Delta'
+#   14: ('rr', 'alpha', 'successor_capability')
+#   15: 'cop_cost_audit'
+#   16: 2
+#   17: 0
+#   18: 1
+#   19: 2.0
+#   20: ('rr', 'alpha', 'cap', 'survival delta', 'pair SE', '> 2 SE')
+# Names:
+#    0: append
+#    1: _group
+#    2: sorted
+#    3: _rate
+#    4: str
+#    5: len
+#    6: _fmt_rate
+#    7: _se
+#    8: _mean
+#    9: _write_table
+#   10: math
+#   11: sqrt
+#   12: abs
+# Varnames:
+#	lines, rows, grouped, table, key, sub, rr, alpha, cap, cop, p_surv, pair_group, delta_rows, row, on, off, p_on, p_off, pair_se, delta
+# Positional arguments:
+#	lines, rows
+# Local variables:
+#    2: grouped
+#    3: table
+#    4: key
+#    5: sub
+#    6: rr
+#    7: alpha
+#    8: cap
+#    9: cop
+#   10: p_surv
+#   11: pair_group
+#   12: delta_rows
+#   13: row
+#   14: on
+#   15: off
+#   16: p_on
+#   17: p_off
+#   18: pair_se
+#   19: delta
+
+559:           0 RESUME               0
+
+560:           2 LOAD_FAST            (lines)
+               4 LOAD_ATTR            (NULL|self + append)
+              24 LOAD_CONST           ("## Category C: COP Protective Effects")
+              26 CALL                 (1 positional)
+              34 POP_TOP
+
+561:          36 LOAD_FAST            (lines)
+              38 LOAD_ATTR            (NULL|self + append)
+              58 LOAD_CONST           ("")
+              60 CALL                 (1 positional)
+              68 POP_TOP
+
+562:          70 LOAD_GLOBAL          (NULL + _group)
+              80 LOAD_FAST            (rows)
+              82 BUILD_LIST           0
+              84 LOAD_CONST           (('rr', 'alpha', 'successor_capability', 'cop_cost_audit'))
+              86 LIST_EXTEND          1
+              88 CALL                 (2 positional)
+              96 STORE_FAST           (grouped)
+
+563:          98 BUILD_LIST           0
+             100 STORE_FAST           (table)
+
+564:         102 LOAD_GLOBAL          (NULL + sorted)
+             112 LOAD_FAST            (grouped)
+             114 CALL                 (1 positional)
+             122 GET_ITER
+             124 FOR_ITER             (to 438)
+             128 STORE_FAST           (key)
+
+565:         130 LOAD_FAST_LOAD_FAST  (grouped, key)
+             132 BINARY_SUBSCR
+             136 STORE_FAST           (sub)
+
+566:         138 LOAD_FAST            (key)
+             140 UNPACK_SEQUENCE      4
+             144 STORE_FAST_STORE_FAST (rr, alpha)
+             146 STORE_FAST_STORE_FAST (cap, cop)
+
+567:         148 LOAD_GLOBAL          (NULL + _rate)
+             158 LOAD_FAST            (sub)
+             160 LOAD_CONST           ("survived")
+             162 CALL                 (2 positional)
+             170 STORE_FAST           (p_surv)
+
+568:         172 LOAD_FAST            (table)
+             174 LOAD_ATTR            (NULL|self + append)
+
+569:         194 LOAD_FAST            (rr)
+             196 LOAD_CONST           (".3f")
+             198 FORMAT_WITH_SPEC
+
+570:         200 LOAD_FAST            (alpha)
+             202 LOAD_CONST           (".2f")
+             204 FORMAT_WITH_SPEC
+
+571:         206 LOAD_FAST            (cap)
+             208 LOAD_CONST           (".1f")
+             210 FORMAT_WITH_SPEC
+
+572:         212 LOAD_GLOBAL          (NULL + str)
+             222 LOAD_FAST            (cop)
+             224 CALL                 (1 positional)
+
+573:         232 LOAD_GLOBAL          (NULL + str)
+             242 LOAD_GLOBAL          (NULL + len)
+             252 LOAD_FAST            (sub)
+             254 CALL                 (1 positional)
+             262 CALL                 (1 positional)
+
+574:         270 LOAD_GLOBAL          (NULL + _fmt_rate)
+             280 LOAD_FAST            (p_surv)
+             282 CALL                 (1 positional)
+
+575:         290 LOAD_CONST           (100.0)
+             292 LOAD_GLOBAL          (NULL + _se)
+             302 LOAD_FAST            (p_surv)
+             304 LOAD_GLOBAL          (NULL + len)
+             314 LOAD_FAST            (sub)
+             316 CALL                 (1 positional)
+             324 CALL                 (2 positional)
+             332 BINARY_OP            (*)
+             336 LOAD_CONST           (".2f")
+             338 FORMAT_WITH_SPEC
+             340 LOAD_CONST           ("pp")
+             342 BUILD_STRING         2
+
+576:         344 LOAD_GLOBAL          (NULL + _fmt_rate)
+             354 LOAD_GLOBAL          (NULL + _rate)
+             364 LOAD_FAST            (sub)
+             366 LOAD_CONST           ("yield_fired")
+             368 CALL                 (2 positional)
+             376 CALL                 (1 positional)
+
+577:         384 LOAD_GLOBAL          (NULL + _mean)
+             394 LOAD_CONST           (<Code311 code object <genexpr> at 0x1c87fbe4490, file simulation/diagnostics/monte_carlo_phase_b.py>, line 577)
+             396 MAKE_FUNCTION
+             398 LOAD_FAST            (sub)
+             400 GET_ITER
+             402 CALL                 (0 positional)
+             410 CALL                 (1 positional)
+             418 LOAD_CONST           (".2f")
+             420 FORMAT_WITH_SPEC
+
+568:         422 BUILD_LIST           9
+             424 CALL                 (1 positional)
+             432 POP_TOP
+             434 JUMP_BACKWARD        (to 124)
+
+564:     >>  438 END_FOR
+             440 POP_TOP
+
+579:         442 LOAD_GLOBAL          (NULL + _write_table)
+
+580:         452 LOAD_FAST            (lines)
+
+581:         454 BUILD_LIST           0
+             456 LOAD_CONST           (('rr', 'alpha', 'cap', 'cop', 'n', 'survival', 'SE', 'fire rate', 'mean gen'))
+             458 LIST_EXTEND          1
+
+583:         460 LOAD_FAST            (table)
+
+579:         462 CALL                 (3 positional)
+             470 POP_TOP
+
+585:         472 LOAD_FAST            (lines)
+             474 LOAD_ATTR            (NULL|self + append)
+             494 LOAD_CONST           ("")
+             496 CALL                 (1 positional)
+             504 POP_TOP
+
+586:         506 LOAD_FAST            (lines)
+             508 LOAD_ATTR            (NULL|self + append)
+             528 LOAD_CONST           ("### COP Delta")
+             530 CALL                 (1 positional)
+             538 POP_TOP
+
+587:         540 LOAD_FAST            (lines)
+             542 LOAD_ATTR            (NULL|self + append)
+             562 LOAD_CONST           ("")
+             564 CALL                 (1 positional)
+             572 POP_TOP
+
+588:         574 LOAD_GLOBAL          (NULL + _group)
+             584 LOAD_FAST            (rows)
+             586 BUILD_LIST           0
+             588 LOAD_CONST           (('rr', 'alpha', 'successor_capability'))
+             590 LIST_EXTEND          1
+             592 CALL                 (2 positional)
+             600 STORE_FAST           (pair_group)
+
+589:         602 BUILD_LIST           0
+             604 STORE_FAST           (delta_rows)
+
+590:         606 LOAD_GLOBAL          (NULL + sorted)
+             616 LOAD_FAST            (pair_group)
+             618 CALL                 (1 positional)
+             626 GET_ITER
+             628 FOR_ITER             (to 1132)
+             632 STORE_FAST           (key)
+
+591:         634 LOAD_FAST_LOAD_FAST  (pair_group, key)
+             636 BINARY_SUBSCR
+             640 STORE_FAST           (sub)
+
+592:         642 LOAD_FAST            (sub)
+             644 GET_ITER
+             646 LOAD_FAST_AND_CLEAR  (row)
+             648 SWAP                 (TOS <-> TOS1)
+             650 BUILD_LIST           0
+             652 SWAP                 (TOS <-> TOS1)
+             654 GET_ITER
+             656 FOR_ITER             (to 692)
+             660 STORE_FAST_LOAD_FAST (row, row)
+             662 LOAD_CONST           ("cop_cost_audit")
+             664 BINARY_SUBSCR
+             668 TO_BOOL
+             676 POP_JUMP_IF_TRUE     (to 684)
+             680 JUMP_BACKWARD        (to 656)
+         >>  684 LOAD_FAST            (row)
+             686 LIST_APPEND          2
+             688 JUMP_BACKWARD        (to 656)
+         >>  692 END_FOR
+             694 POP_TOP
+             696 STORE_FAST           (on)
+             698 STORE_FAST           (row)
+
+593:         700 LOAD_FAST            (sub)
+             702 GET_ITER
+             704 LOAD_FAST_AND_CLEAR  (row)
+             706 SWAP                 (TOS <-> TOS1)
+             708 BUILD_LIST           0
+             710 SWAP                 (TOS <-> TOS1)
+         >>  712 GET_ITER
+             714 FOR_ITER             (to 750)
+             718 STORE_FAST_LOAD_FAST (row, row)
+             720 LOAD_CONST           ("cop_cost_audit")
+             722 BINARY_SUBSCR
+             726 TO_BOOL
+             734 POP_JUMP_IF_FALSE    (to 742)
+             738 JUMP_BACKWARD        (to 714)
+         >>  742 LOAD_FAST            (row)
+             744 LIST_APPEND          2
+             746 JUMP_BACKWARD        (to 714)
+         >>  750 END_FOR
+         >>  752 POP_TOP
+             754 STORE_FAST           (off)
+             756 STORE_FAST           (row)
+
+594:         758 LOAD_FAST            (on)
+             760 TO_BOOL
+             768 POP_JUMP_IF_FALSE    (to 786)
+             772 LOAD_FAST            (off)
+             774 TO_BOOL
+             782 POP_JUMP_IF_TRUE     (to 790)
+
+595:     >>  786 JUMP_BACKWARD        (to 628)
+
+596:     >>  790 LOAD_GLOBAL          (NULL + _rate)
+             800 LOAD_FAST            (on)
+             802 LOAD_CONST           ("survived")
+             804 CALL                 (2 positional)
+             812 STORE_FAST           (p_on)
+
+597:         814 LOAD_GLOBAL          (NULL + _rate)
+             824 LOAD_FAST            (off)
+             826 LOAD_CONST           ("survived")
+             828 CALL                 (2 positional)
+             836 STORE_FAST           (p_off)
+
+598:         838 LOAD_GLOBAL          (math)
+             848 LOAD_ATTR            (sqrt)
+             868 PUSH_NULL
+             870 LOAD_GLOBAL          (NULL + _se)
+             880 LOAD_FAST            (p_on)
+             882 LOAD_GLOBAL          (NULL + len)
+             892 LOAD_FAST            (on)
+             894 CALL                 (1 positional)
+             902 CALL                 (2 positional)
+             910 LOAD_CONST           (2)
+             912 BINARY_OP            (**)
+             916 LOAD_GLOBAL          (NULL + _se)
+             926 LOAD_FAST            (p_off)
+             928 LOAD_GLOBAL          (NULL + len)
+             938 LOAD_FAST            (off)
+             940 CALL                 (1 positional)
+             948 CALL                 (2 positional)
+             956 LOAD_CONST           (2)
+             958 BINARY_OP            (**)
+             962 BINARY_OP            (+)
+             966 CALL                 (1 positional)
+             974 STORE_FAST           (pair_se)
+
+599:         976 LOAD_FAST            (p_on)
+             978 LOAD_FAST            (p_off)
+             980 BINARY_OP            (-)
+             984 STORE_FAST           (delta)
+
+600:         986 LOAD_FAST            (delta_rows)
+             988 LOAD_ATTR            (NULL|self + append)
+
+601:        1008 LOAD_FAST            (key)
+            1010 LOAD_CONST           (0)
+            1012 BINARY_SUBSCR
+            1016 LOAD_CONST           (".3f")
+            1018 FORMAT_WITH_SPEC
+
+602:        1020 LOAD_FAST            (key)
+            1022 LOAD_CONST           (1)
+            1024 BINARY_SUBSCR
+            1028 LOAD_CONST           (".2f")
+            1030 FORMAT_WITH_SPEC
+
+603:        1032 LOAD_FAST            (key)
+            1034 LOAD_CONST           (2)
+            1036 BINARY_SUBSCR
+            1040 LOAD_CONST           (".1f")
+            1042 FORMAT_WITH_SPEC
+
+604:        1044 LOAD_FAST            (delta)
+            1046 LOAD_CONST           (".3f")
+            1048 FORMAT_WITH_SPEC
+
+605:        1050 LOAD_CONST           (100.0)
+            1052 LOAD_FAST            (pair_se)
+            1054 BINARY_OP            (*)
+            1058 LOAD_CONST           (".2f")
+            1060 FORMAT_WITH_SPEC
+            1062 LOAD_CONST           ("pp")
+            1064 BUILD_STRING         2
+
+606:        1066 LOAD_GLOBAL          (NULL + str)
+            1076 LOAD_GLOBAL          (NULL + abs)
+            1086 LOAD_FAST            (delta)
+            1088 CALL                 (1 positional)
+            1096 LOAD_CONST           (2.0)
+            1098 LOAD_FAST            (pair_se)
+            1100 BINARY_OP            (*)
+            1104 COMPARE_OP           (>)
+            1108 CALL                 (1 positional)
+
+600:        1116 BUILD_LIST           6
+            1118 CALL                 (1 positional)
+            1126 POP_TOP
+            1128 JUMP_BACKWARD        (to 628)
+
+590:     >> 1132 END_FOR
+            1134 POP_TOP
+
+608:        1136 LOAD_GLOBAL          (NULL + _write_table)
+
+609:        1146 LOAD_FAST            (lines)
+
+610:        1148 BUILD_LIST           0
+            1150 LOAD_CONST           (('rr', 'alpha', 'cap', 'survival delta', 'pair SE', '> 2 SE'))
+            1152 LIST_EXTEND          1
+
+611:        1154 LOAD_FAST            (delta_rows)
+
+608:        1156 CALL                 (3 positional)
+            1164 POP_TOP
+
+613:        1166 LOAD_FAST            (lines)
+            1168 LOAD_ATTR            (NULL|self + append)
+            1188 LOAD_CONST           ("")
+            1190 CALL                 (1 positional)
+            1198 POP_TOP
+            1200 RETURN_CONST         (None)
+            1202 SWAP                 (TOS <-> TOS1)
+            1204 POP_TOP
+
+592:        1206 SWAP                 (TOS <-> TOS1)
+            1208 STORE_FAST           (row)
+            1210 RERAISE              0
+            1212 SWAP                 (TOS <-> TOS1)
+            1214 POP_TOP
+
+593:        1216 SWAP                 (TOS <-> TOS1)
+            1218 STORE_FAST           (row)
+            1220 RERAISE              0
+
+ExceptionTable:
+  650 to 674 -> 1202 [3]
+  684 to 694 -> 1202 [3]
+  708 to 732 -> 1212 [3]
+  742 to 752 -> 1212 [3]
+
+# Method Name:       analyze
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  17
+# Stack size:        16
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        616
+# Constants:
+#    0: None
+#    1: '# Monte Carlo Phase B Summary'
+#    2: ''
+#    3: 'Generated: '
+#    4: 'seconds'
+#    5: ('timespec',)
+#    6: 'Mode: '
+#    7: 'Rows loaded: '
+#    8: 'Errors: '
+#    9: <Code311 code object <genexpr> at 0x1c87fbe46b0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 626
+#   10: 'No rows available.'
+#   11: 'A'
+#   12: 'B'
+#   13: 'C'
+#   14: '## Dry Run Aggregate'
+#   15: ('rr', 'phi', 'alpha', 'successor_capability', 'cop_cost_audit')
+#   16: 'survived'
+#   17: 'yield_fired'
+#   18: '.3f'
+#   19: '.1f'
+#   20: '.2f'
+#   21: <Code311 code object <genexpr> at 0x1c87fbe47c0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 657
+#   22: <Code311 code object <genexpr> at 0x1c87fbe48d0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 658
+#   23: ('rr', 'phi', 'alpha', 'cap', 'cop', 'n', 'survival', 'fire rate', 'mean pop', 'mean gen')
+#   24: 'w'
+#   25: '\n'
+# Names:
+#    0: os
+#    1: path
+#    2: join
+#    3: output_dir
+#    4: _csv_name
+#    5: mode
+#    6: _load_results
+#    7: _summary_name
+#    8: append
+#    9: datetime
+#   10: now
+#   11: timezone
+#   12: utc
+#   13: isoformat
+#   14: len
+#   15: sum
+#   16: _summarize_a
+#   17: _summarize_b
+#   18: _summarize_c
+#   19: _group
+#   20: sorted
+#   21: _rate
+#   22: str
+#   23: _fmt_rate
+#   24: _mean
+#   25: _write_table
+#   26: open
+#   27: write
+# Varnames:
+#	args, csv_path, rows, summary_path, lines, grouped, table, key, sub, rr, phi, alpha, cap, cop, p_surv, fire_rate, f
+# Positional arguments:
+#	args
+# Local variables:
+#    1: csv_path
+#    2: rows
+#    3: summary_path
+#    4: lines
+#    5: grouped
+#    6: table
+#    7: key
+#    8: sub
+#    9: rr
+#   10: phi
+#   11: alpha
+#   12: cap
+#   13: cop
+#   14: p_surv
+#   15: fire_rate
+#   16: f
+
+616:           0 RESUME               0
+
+617:           2 LOAD_GLOBAL          (os)
+              12 LOAD_ATTR            (path)
+              32 LOAD_ATTR            (NULL|self + join)
+              52 LOAD_FAST            (args)
+              54 LOAD_ATTR            (output_dir)
+              74 LOAD_GLOBAL          (NULL + _csv_name)
+              84 LOAD_FAST            (args)
+              86 LOAD_ATTR            (mode)
+             106 CALL                 (1 positional)
+             114 CALL                 (2 positional)
+             122 STORE_FAST           (csv_path)
+
+618:         124 LOAD_GLOBAL          (NULL + _load_results)
+             134 LOAD_FAST            (csv_path)
+             136 CALL                 (1 positional)
+             144 STORE_FAST           (rows)
+
+619:         146 LOAD_GLOBAL          (os)
+             156 LOAD_ATTR            (path)
+             176 LOAD_ATTR            (NULL|self + join)
+             196 LOAD_FAST            (args)
+             198 LOAD_ATTR            (output_dir)
+             218 LOAD_GLOBAL          (NULL + _summary_name)
+             228 LOAD_FAST            (args)
+             230 LOAD_ATTR            (mode)
+             250 CALL                 (1 positional)
+             258 CALL                 (2 positional)
+             266 STORE_FAST           (summary_path)
+
+620:         268 BUILD_LIST           0
+             270 STORE_FAST           (lines)
+
+621:         272 LOAD_FAST            (lines)
+             274 LOAD_ATTR            (NULL|self + append)
+             294 LOAD_CONST           ("# Monte Carlo Phase B Summary")
+             296 CALL                 (1 positional)
+             304 POP_TOP
+
+622:         306 LOAD_FAST            (lines)
+             308 LOAD_ATTR            (NULL|self + append)
+             328 LOAD_CONST           ("")
+             330 CALL                 (1 positional)
+             338 POP_TOP
+
+623:         340 LOAD_FAST            (lines)
+             342 LOAD_ATTR            (NULL|self + append)
+             362 LOAD_CONST           ("Generated: ")
+             364 LOAD_GLOBAL          (datetime)
+             374 LOAD_ATTR            (now)
+             394 PUSH_NULL
+             396 LOAD_GLOBAL          (timezone)
+             406 LOAD_ATTR            (utc)
+             426 CALL                 (1 positional)
+             434 LOAD_ATTR            (NULL|self + isoformat)
+             454 LOAD_CONST           ("seconds")
+             456 LOAD_CONST           (('timespec',))
+             458 CALL_KW              1
+             460 FORMAT_SIMPLE
+             462 BUILD_STRING         2
+             464 CALL                 (1 positional)
+             472 POP_TOP
+
+624:         474 LOAD_FAST            (lines)
+             476 LOAD_ATTR            (NULL|self + append)
+             496 LOAD_CONST           ("Mode: ")
+             498 LOAD_FAST            (args)
+             500 LOAD_ATTR            (mode)
+             520 FORMAT_SIMPLE
+             522 BUILD_STRING         2
+             524 CALL                 (1 positional)
+             532 POP_TOP
+
+625:         534 LOAD_FAST            (lines)
+             536 LOAD_ATTR            (NULL|self + append)
+             556 LOAD_CONST           ("Rows loaded: ")
+             558 LOAD_GLOBAL          (NULL + len)
+             568 LOAD_FAST            (rows)
+             570 CALL                 (1 positional)
+             578 FORMAT_SIMPLE
+             580 BUILD_STRING         2
+             582 CALL                 (1 positional)
+             590 POP_TOP
+
+626:         592 LOAD_FAST            (lines)
+             594 LOAD_ATTR            (NULL|self + append)
+             614 LOAD_CONST           ("Errors: ")
+             616 LOAD_GLOBAL          (NULL + sum)
+             626 LOAD_CONST           (<Code311 code object <genexpr> at 0x1c87fbe46b0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 626)
+             628 MAKE_FUNCTION
+             630 LOAD_FAST            (rows)
+             632 GET_ITER
+             634 CALL                 (0 positional)
+             642 CALL                 (1 positional)
+             650 FORMAT_SIMPLE
+             652 BUILD_STRING         2
+             654 CALL                 (1 positional)
+             662 POP_TOP
+
+627:         664 LOAD_FAST            (lines)
+             666 LOAD_ATTR            (NULL|self + append)
+             686 LOAD_CONST           ("")
+             688 CALL                 (1 positional)
+             696 POP_TOP
+
+629:         698 LOAD_FAST            (rows)
+             700 TO_BOOL
+             708 POP_JUMP_IF_TRUE     (to 750)
+
+630:         712 LOAD_FAST            (lines)
+             714 LOAD_ATTR            (NULL|self + append)
+             734 LOAD_CONST           ("No rows available.")
+             736 CALL                 (1 positional)
+             744 POP_TOP
+             746 EXTENDED_ARG         (256)
+             748 JUMP_FORWARD         (to 1422)
+
+631:     >>  750 LOAD_FAST            (args)
+             752 LOAD_ATTR            (mode)
+             772 LOAD_CONST           ("A")
+             774 COMPARE_OP           (==)
+             778 POP_JUMP_IF_FALSE    (to 808)
+
+632:         782 LOAD_GLOBAL          (NULL + _summarize_a)
+             792 LOAD_FAST_LOAD_FAST  (lines, rows)
+             794 CALL                 (2 positional)
+             802 POP_TOP
+             804 EXTENDED_ARG         (256)
+             806 JUMP_FORWARD         (to 1422)
+
+633:     >>  808 LOAD_FAST            (args)
+             810 LOAD_ATTR            (mode)
+             830 LOAD_CONST           ("B")
+             832 COMPARE_OP           (==)
+             836 POP_JUMP_IF_FALSE    (to 866)
+
+634:         840 LOAD_GLOBAL          (NULL + _summarize_b)
+             850 LOAD_FAST_LOAD_FAST  (lines, rows)
+             852 CALL                 (2 positional)
+             860 POP_TOP
+             862 EXTENDED_ARG         (256)
+             864 JUMP_FORWARD         (to 1422)
+
+635:     >>  866 LOAD_FAST            (args)
+             868 LOAD_ATTR            (mode)
+             888 LOAD_CONST           ("C")
+             890 COMPARE_OP           (==)
+             894 POP_JUMP_IF_FALSE    (to 922)
+
+636:         898 LOAD_GLOBAL          (NULL + _summarize_c)
+             908 LOAD_FAST_LOAD_FAST  (lines, rows)
+             910 CALL                 (2 positional)
+             918 POP_TOP
+             920 JUMP_FORWARD         (to 1422)
+
+638:     >>  922 LOAD_FAST            (lines)
+             924 LOAD_ATTR            (NULL|self + append)
+             944 LOAD_CONST           ("## Dry Run Aggregate")
+             946 CALL                 (1 positional)
+             954 POP_TOP
+
+639:         956 LOAD_FAST            (lines)
+             958 LOAD_ATTR            (NULL|self + append)
+             978 LOAD_CONST           ("")
+             980 CALL                 (1 positional)
+             988 POP_TOP
+
+640:         990 LOAD_GLOBAL          (NULL + _group)
+            1000 LOAD_FAST            (rows)
+            1002 BUILD_LIST           0
+            1004 LOAD_CONST           (('rr', 'phi', 'alpha', 'successor_capability', 'cop_cost_audit'))
+            1006 LIST_EXTEND          1
+            1008 CALL                 (2 positional)
+            1016 STORE_FAST           (grouped)
+
+642:        1018 BUILD_LIST           0
+            1020 STORE_FAST           (table)
+
+643:        1022 LOAD_GLOBAL          (NULL + sorted)
+            1032 LOAD_FAST            (grouped)
+            1034 CALL                 (1 positional)
+            1042 GET_ITER
+            1044 FOR_ITER             (to 1354)
+            1048 STORE_FAST           (key)
+
+644:        1050 LOAD_FAST_LOAD_FAST  (grouped, key)
+            1052 BINARY_SUBSCR
+            1056 STORE_FAST           (sub)
+
+645:        1058 LOAD_FAST            (key)
+            1060 UNPACK_SEQUENCE      5
+            1064 STORE_FAST_STORE_FAST (rr, phi)
+            1066 STORE_FAST_STORE_FAST (alpha, cap)
+            1068 STORE_FAST           (cop)
+
+646:        1070 LOAD_GLOBAL          (NULL + _rate)
+            1080 LOAD_FAST            (sub)
+            1082 LOAD_CONST           ("survived")
+            1084 CALL                 (2 positional)
+            1092 STORE_FAST           (p_surv)
+
+647:        1094 LOAD_GLOBAL          (NULL + _rate)
+            1104 LOAD_FAST            (sub)
+            1106 LOAD_CONST           ("yield_fired")
+            1108 CALL                 (2 positional)
+            1116 STORE_FAST           (fire_rate)
+
+648:        1118 LOAD_FAST            (table)
+            1120 LOAD_ATTR            (NULL|self + append)
+
+649:        1140 LOAD_FAST            (rr)
+            1142 LOAD_CONST           (".3f")
+            1144 FORMAT_WITH_SPEC
+
+650:        1146 LOAD_FAST            (phi)
+            1148 LOAD_CONST           (".1f")
+            1150 FORMAT_WITH_SPEC
+
+651:        1152 LOAD_FAST            (alpha)
+            1154 LOAD_CONST           (".2f")
+            1156 FORMAT_WITH_SPEC
+
+652:        1158 LOAD_FAST            (cap)
+            1160 LOAD_CONST           (".1f")
+            1162 FORMAT_WITH_SPEC
+
+653:        1164 LOAD_GLOBAL          (NULL + str)
+            1174 LOAD_FAST            (cop)
+            1176 CALL                 (1 positional)
+
+654:        1184 LOAD_GLOBAL          (NULL + str)
+            1194 LOAD_GLOBAL          (NULL + len)
+            1204 LOAD_FAST            (sub)
+            1206 CALL                 (1 positional)
+            1214 CALL                 (1 positional)
+
+655:        1222 LOAD_GLOBAL          (NULL + _fmt_rate)
+            1232 LOAD_FAST            (p_surv)
+            1234 CALL                 (1 positional)
+
+656:        1242 LOAD_GLOBAL          (NULL + _fmt_rate)
+            1252 LOAD_FAST            (fire_rate)
+            1254 CALL                 (1 positional)
+
+657:        1262 LOAD_GLOBAL          (NULL + _mean)
+            1272 LOAD_CONST           (<Code311 code object <genexpr> at 0x1c87fbe47c0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 657)
+            1274 MAKE_FUNCTION
+            1276 LOAD_FAST            (sub)
+            1278 GET_ITER
+            1280 CALL                 (0 positional)
+            1288 CALL                 (1 positional)
+            1296 LOAD_CONST           (".1f")
+            1298 FORMAT_WITH_SPEC
+
+658:        1300 LOAD_GLOBAL          (NULL + _mean)
+            1310 LOAD_CONST           (<Code311 code object <genexpr> at 0x1c87fbe48d0, file simulation/diagnostics/monte_carlo_phase_b.py>, line 658)
+            1312 MAKE_FUNCTION
+            1314 LOAD_FAST            (sub)
+            1316 GET_ITER
+            1318 CALL                 (0 positional)
+            1326 CALL                 (1 positional)
+            1334 LOAD_CONST           (".2f")
+            1336 FORMAT_WITH_SPEC
+
+648:        1338 BUILD_LIST           10
+            1340 CALL                 (1 positional)
+            1348 POP_TOP
+            1350 JUMP_BACKWARD        (to 1044)
+
+643:     >> 1354 END_FOR
+            1356 POP_TOP
+
+660:        1358 LOAD_GLOBAL          (NULL + _write_table)
+
+661:        1368 LOAD_FAST            (lines)
+
+662:        1370 BUILD_LIST           0
+            1372 LOAD_CONST           (('rr', 'phi', 'alpha', 'cap', 'cop', 'n', 'survival', 'fire rate', 'mean pop', 'mean gen'))
+            1374 LIST_EXTEND          1
+
+664:        1376 LOAD_FAST            (table)
+
+660:        1378 CALL                 (3 positional)
+            1386 POP_TOP
+
+666:        1388 LOAD_FAST            (lines)
+            1390 LOAD_ATTR            (NULL|self + append)
+            1410 LOAD_CONST           ("")
+            1412 CALL                 (1 positional)
+            1420 POP_TOP
+
+668:     >> 1422 LOAD_GLOBAL          (NULL + open)
+            1432 LOAD_FAST            (summary_path)
+            1434 LOAD_CONST           ("w")
+            1436 CALL                 (2 positional)
+            1444 BEFORE_WITH
+            1446 STORE_FAST           (f)
+
+669:        1448 LOAD_FAST            (f)
+            1450 LOAD_ATTR            (NULL|self + write)
+            1470 LOAD_CONST           ("\n")
+            1472 LOAD_ATTR            (NULL|self + join)
+            1492 LOAD_FAST            (lines)
+            1494 CALL                 (1 positional)
+            1502 LOAD_CONST           ("\n")
+            1504 BINARY_OP            (+)
+            1508 CALL                 (1 positional)
+            1516 POP_TOP
+
+668:        1518 LOAD_CONST           (None)
+            1520 LOAD_CONST           (None)
+            1522 LOAD_CONST           (None)
+            1524 CALL                 (2 positional)
+            1532 POP_TOP
+
+670:        1534 LOAD_FAST            (summary_path)
+            1536 RETURN_VALUE
+
+668:        1538 PUSH_EXC_INFO
+            1540 WITH_EXCEPT_START    0
+            1542 TO_BOOL
+            1550 POP_JUMP_IF_TRUE     (to 1556)
+            1554 RERAISE              2
+         >> 1556 POP_TOP
+            1558 POP_EXCEPT
+            1560 POP_TOP
+            1562 POP_TOP
+
+670:        1564 LOAD_FAST            (summary_path)
+            1566 RETURN_VALUE
+            1568 COPY                 3
+            1570 POP_EXCEPT
+            1572 RERAISE              1
+
+ExceptionTable:
+  1446 to 1516 -> 1538 [1] lasti
+  1538 to 1556 -> 1568 [3] lasti
+
+# Method Name:       parse_args
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    0
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  1
+# Stack size:        6
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        673
+# Constants:
+#    0: None
+#    1: '--mode'
+#    2: ('A', 'B', 'C', 'dry-run')
+#    3: True
+#    4: ('choices', 'required')
+#    5: '--seeds'
+#    6: ('type', 'default')
+#    7: '--workers'
+#    8: 11
+#    9: '--output-dir'
+#   10: ('default',)
+#   11: '--resume'
+#   12: 'store_true'
+#   13: ('action',)
+#   14: '--analyze-only'
+# Names:
+#    0: argparse
+#    1: ArgumentParser
+#    2: add_argument
+#    3: int
+#    4: HERE
+#    5: parse_args
+# Varnames:
+#	parser
+# Local variables:
+#    0: parser
+
+673:           0 RESUME               0
+
+674:           2 LOAD_GLOBAL          (argparse)
+              12 LOAD_ATTR            (ArgumentParser)
+              32 PUSH_NULL
+              34 CALL                 (0 positional)
+              42 STORE_FAST           (parser)
+
+675:          44 LOAD_FAST            (parser)
+              46 LOAD_ATTR            (NULL|self + add_argument)
+              66 LOAD_CONST           ("--mode")
+              68 BUILD_LIST           0
+              70 LOAD_CONST           (('A', 'B', 'C', 'dry-run'))
+              72 LIST_EXTEND          1
+              74 LOAD_CONST           (True)
+              76 LOAD_CONST           (('choices', 'required'))
+              78 CALL_KW              3
+              80 POP_TOP
+
+676:          82 LOAD_FAST            (parser)
+              84 LOAD_ATTR            (NULL|self + add_argument)
+             104 LOAD_CONST           ("--seeds")
+             106 LOAD_GLOBAL          (int)
+             116 LOAD_CONST           (None)
+             118 LOAD_CONST           (('type', 'default'))
+             120 CALL_KW              3
+             122 POP_TOP
+
+677:         124 LOAD_FAST            (parser)
+             126 LOAD_ATTR            (NULL|self + add_argument)
+             146 LOAD_CONST           ("--workers")
+             148 LOAD_GLOBAL          (int)
+             158 LOAD_CONST           (11)
+             160 LOAD_CONST           (('type', 'default'))
+             162 CALL_KW              3
+             164 POP_TOP
+
+678:         166 LOAD_FAST            (parser)
+             168 LOAD_ATTR            (NULL|self + add_argument)
+             188 LOAD_CONST           ("--output-dir")
+             190 LOAD_GLOBAL          (HERE)
+             200 LOAD_CONST           (('default',))
+             202 CALL_KW              2
+             204 POP_TOP
+
+679:         206 LOAD_FAST            (parser)
+             208 LOAD_ATTR            (NULL|self + add_argument)
+             228 LOAD_CONST           ("--resume")
+             230 LOAD_CONST           ("store_true")
+             232 LOAD_CONST           (('action',))
+             234 CALL_KW              2
+             236 POP_TOP
+
+680:         238 LOAD_FAST            (parser)
+             240 LOAD_ATTR            (NULL|self + add_argument)
+             260 LOAD_CONST           ("--analyze-only")
+             262 LOAD_CONST           ("store_true")
+             264 LOAD_CONST           (('action',))
+             266 CALL_KW              2
+             268 POP_TOP
+
+681:         270 LOAD_FAST            (parser)
+             272 LOAD_ATTR            (NULL|self + parse_args)
+             292 CALL                 (0 positional)
+             300 RETURN_VALUE
+
+
+# Method Name:       main
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    0
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  4
+# Stack size:        6
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        684
+# Constants:
+#    0: None
+#    1: True
+#    2: ('exist_ok',)
+#    3: 'Wrote '
+# Names:
+#    0: parse_args
+#    1: os
+#    2: makedirs
+#    3: output_dir
+#    4: path
+#    5: join
+#    6: _progress_name
+#    7: mode
+#    8: ProgressLogger
+#    9: analyze_only
+#   10: run_sweep
+#   11: analyze
+#   12: log
+#   13: close
+# Varnames:
+#	args, progress_path, logger, summary_path
+# Local variables:
+#    0: args
+#    1: progress_path
+#    2: logger
+#    3: summary_path
+
+684:           0 RESUME               0
+
+685:           2 LOAD_GLOBAL          (NULL + parse_args)
+              12 CALL                 (0 positional)
+              20 STORE_FAST           (args)
+
+686:          22 LOAD_GLOBAL          (os)
+              32 LOAD_ATTR            (makedirs)
+              52 PUSH_NULL
+              54 LOAD_FAST            (args)
+              56 LOAD_ATTR            (output_dir)
+              76 LOAD_CONST           (True)
+              78 LOAD_CONST           (('exist_ok',))
+              80 CALL_KW              2
+              82 POP_TOP
+
+687:          84 LOAD_GLOBAL          (os)
+              94 LOAD_ATTR            (path)
+             114 LOAD_ATTR            (NULL|self + join)
+             134 LOAD_FAST            (args)
+             136 LOAD_ATTR            (output_dir)
+             156 LOAD_GLOBAL          (NULL + _progress_name)
+             166 LOAD_FAST            (args)
+             168 LOAD_ATTR            (mode)
+             188 CALL                 (1 positional)
+             196 CALL                 (2 positional)
+             204 STORE_FAST           (progress_path)
+
+688:         206 LOAD_GLOBAL          (NULL + ProgressLogger)
+             216 LOAD_FAST            (progress_path)
+             218 CALL                 (1 positional)
+             226 STORE_FAST           (logger)
+
+689:         228 NOP
+
+690:         230 LOAD_FAST            (args)
+             232 LOAD_ATTR            (analyze_only)
+             252 TO_BOOL
+             260 POP_JUMP_IF_TRUE     (to 286)
+
+691:         264 LOAD_GLOBAL          (NULL + run_sweep)
+             274 LOAD_FAST_LOAD_FAST  (args, logger)
+             276 CALL                 (2 positional)
+             284 POP_TOP
+
+692:     >>  286 LOAD_GLOBAL          (NULL + analyze)
+             296 LOAD_FAST            (args)
+             298 CALL                 (1 positional)
+             306 STORE_FAST           (summary_path)
+
+693:         308 LOAD_FAST            (logger)
+             310 LOAD_ATTR            (NULL|self + log)
+             330 LOAD_CONST           ("Wrote ")
+             332 LOAD_FAST            (summary_path)
+             334 FORMAT_SIMPLE
+             336 BUILD_STRING         2
+             338 CALL                 (1 positional)
+             346 POP_TOP
+
+695:         348 LOAD_FAST            (logger)
+             350 LOAD_ATTR            (NULL|self + close)
+             370 CALL                 (0 positional)
+             378 POP_TOP
+             380 RETURN_CONST         (None)
+             382 PUSH_EXC_INFO
+
+695:         384 LOAD_FAST            (logger)
+             386 LOAD_ATTR            (NULL|self + close)
+             406 CALL                 (0 positional)
+             414 POP_TOP
+             416 RERAISE              0
+             418 COPY                 3
+             420 POP_EXCEPT
+             422 RERAISE              1
+
+ExceptionTable:
+  230 to 346 -> 382 [0]
+  382 to 416 -> 418 [1] lasti
+
+# Method Name:       __init__
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    2
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  2
+# Stack size:        6
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        399
+# Constants:
+#    0: None
+#    1: 'a'
+#    2: 1
+#    3: ('buffering',)
+# Names:
+#    0: path
+#    1: open
+#    2: fh
+#    3: time
+#    4: start
+# Varnames:
+#	self, path
+# Positional arguments:
+#	self, path
+
+399:           0 RESUME               0
+
+400:           2 LOAD_FAST_LOAD_FAST  (path, self)
+               4 STORE_ATTR           (path)
+
+401:          14 LOAD_GLOBAL          (NULL + open)
+              24 LOAD_FAST            (path)
+              26 LOAD_CONST           ("a")
+              28 LOAD_CONST           (1)
+              30 LOAD_CONST           (('buffering',))
+              32 CALL_KW              3
+              34 LOAD_FAST            (self)
+              36 STORE_ATTR           (fh)
+
+402:          46 LOAD_GLOBAL          (time)
+              56 LOAD_ATTR            (time)
+              76 PUSH_NULL
+              78 CALL                 (0 positional)
+              86 LOAD_FAST            (self)
+              88 STORE_ATTR           (start)
+              98 RETURN_CONST         (None)
+
+
+# Method Name:       log
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    2
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  4
+# Stack size:        5
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        404
+# Constants:
+#    0: None
+#    1: 'seconds'
+#    2: ('timespec',)
+#    3: '  '
+#    4: '\n'
+#    5: True
+#    6: ('flush',)
+# Names:
+#    0: datetime
+#    1: now
+#    2: timezone
+#    3: utc
+#    4: isoformat
+#    5: fh
+#    6: write
+#    7: print
+# Varnames:
+#	self, message, ts, line
+# Positional arguments:
+#	self, message
+# Local variables:
+#    2: ts
+#    3: line
+
+404:           0 RESUME               0
+
+405:           2 LOAD_GLOBAL          (datetime)
+              12 LOAD_ATTR            (now)
+              32 PUSH_NULL
+              34 LOAD_GLOBAL          (timezone)
+              44 LOAD_ATTR            (utc)
+              64 CALL                 (1 positional)
+              72 LOAD_ATTR            (NULL|self + isoformat)
+              92 LOAD_CONST           ("seconds")
+              94 LOAD_CONST           (('timespec',))
+              96 CALL_KW              1
+              98 STORE_FAST           (ts)
+
+406:         100 LOAD_FAST            (ts)
+             102 FORMAT_SIMPLE
+             104 LOAD_CONST           ("  ")
+             106 LOAD_FAST            (message)
+             108 FORMAT_SIMPLE
+             110 BUILD_STRING         3
+             112 STORE_FAST           (line)
+
+407:         114 LOAD_FAST            (self)
+             116 LOAD_ATTR            (fh)
+             136 LOAD_ATTR            (NULL|self + write)
+             156 LOAD_FAST            (line)
+             158 LOAD_CONST           ("\n")
+             160 BINARY_OP            (+)
+             164 CALL                 (1 positional)
+             172 POP_TOP
+
+408:         174 LOAD_GLOBAL          (NULL + print)
+             184 LOAD_FAST            (line)
+             186 LOAD_CONST           (True)
+             188 LOAD_CONST           (('flush',))
+             190 CALL_KW              2
+             192 POP_TOP
+             194 RETURN_CONST         (None)
+
+
+# Method Name:       checkpoint
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    4
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  7
+# Stack size:        13
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        410
+# Constants:
+#    0: None
+#    1: 0.0
+#    2: 0
+#    3: '['
+#    4: '/'
+#    5: '] '
+#    6: '.3f'
+#    7: ' cells/s ETA '
+#    8: ('seconds',)
+#    9: ' '
+# Names:
+#    0: time
+#    1: start
+#    2: int
+#    3: log
+#    4: timedelta
+# Varnames:
+#	self, done, total, extra, elapsed, rate, eta
+# Positional arguments:
+#	self, done, total, extra
+# Local variables:
+#    4: elapsed
+#    5: rate
+#    6: eta
+
+410:           0 RESUME               0
+
+411:           2 LOAD_GLOBAL          (time)
+              12 LOAD_ATTR            (time)
+              32 PUSH_NULL
+              34 CALL                 (0 positional)
+              42 LOAD_FAST            (self)
+              44 LOAD_ATTR            (start)
+              64 BINARY_OP            (-)
+              68 STORE_FAST           (elapsed)
+
+412:          70 LOAD_FAST            (elapsed)
+              72 LOAD_CONST           (0.0)
+              74 COMPARE_OP           (>)
+              78 POP_JUMP_IF_FALSE    (to 90)
+              82 LOAD_FAST_LOAD_FAST  (done, elapsed)
+              84 BINARY_OP            (/)
+              88 JUMP_FORWARD         (to 92)
+         >>   90 LOAD_CONST           (0.0)
+         >>   92 STORE_FAST           (rate)
+
+413:          94 LOAD_FAST            (rate)
+              96 LOAD_CONST           (0.0)
+              98 COMPARE_OP           (>)
+             102 POP_JUMP_IF_FALSE    (to 138)
+             106 LOAD_GLOBAL          (NULL + int)
+             116 LOAD_FAST_LOAD_FAST  (total, done)
+             118 BINARY_OP            (-)
+             122 LOAD_FAST            (rate)
+             124 BINARY_OP            (/)
+             128 CALL                 (1 positional)
+             136 JUMP_FORWARD         (to 140)
+         >>  138 LOAD_CONST           (0)
+         >>  140 STORE_FAST           (eta)
+
+414:         142 LOAD_FAST            (self)
+             144 LOAD_ATTR            (NULL|self + log)
+
+415:         164 LOAD_CONST           ("[")
+             166 LOAD_FAST            (done)
+             168 FORMAT_SIMPLE
+             170 LOAD_CONST           ("/")
+             172 LOAD_FAST            (total)
+             174 FORMAT_SIMPLE
+             176 LOAD_CONST           ("] ")
+             178 LOAD_FAST            (rate)
+             180 LOAD_CONST           (".3f")
+             182 FORMAT_WITH_SPEC
+             184 LOAD_CONST           (" cells/s ETA ")
+             186 LOAD_GLOBAL          (NULL + timedelta)
+             196 LOAD_FAST            (eta)
+             198 LOAD_CONST           (('seconds',))
+             200 CALL_KW              1
+             202 FORMAT_SIMPLE
+             204 LOAD_CONST           (" ")
+             206 LOAD_FAST            (extra)
+             208 FORMAT_SIMPLE
+             210 BUILD_STRING         10
+
+414:         212 CALL                 (1 positional)
+             220 POP_TOP
+             222 RETURN_CONST         (None)
+
+
+# Method Name:       close
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  1
+# Stack size:        2
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        418
+# Constants:
+#    0: None
+# Names:
+#    0: fh
+#    1: close
+# Varnames:
+#	self
+# Positional arguments:
+#	self
+
+418:           0 RESUME               0
+
+419:           2 LOAD_FAST            (self)
+               4 LOAD_ATTR            (fh)
+              24 LOAD_ATTR            (NULL|self + close)
+              44 CALL                 (0 positional)
+              52 POP_TOP
+              54 RETURN_CONST         (None)
+
+
+# Method Name:       <genexpr>
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  2
+# Stack size:        3
+# Flags:             0x00000033 (GENERATOR | NESTED | NEWLOCALS | OPTIMIZED)
+# First Line:        473
+# Constants:
+#    0: 1.0
+#    1: 0.0
+#    2: None
+# Varnames:
+#	.0, row
+# Positional arguments:
+#	.0
+# Local variables:
+#    1: row
+# Free variables:
+#    0: key
+               0 COPY_FREE_VARS       1
+
+473:           2 RETURN_GENERATOR
+               4 POP_TOP
+               6 RESUME               0
+               8 LOAD_FAST            (.0)
+              10 GET_ITER
+              12 FOR_ITER             (to 52)
+              16 STORE_FAST_LOAD_FAST (row, row)
+              18 LOAD_DEREF           (key)
+              20 BINARY_SUBSCR
+              24 TO_BOOL
+              32 POP_JUMP_IF_FALSE    (to 40)
+              36 LOAD_CONST           (1.0)
+              38 JUMP_FORWARD         (to 42)
+         >>   40 LOAD_CONST           (0.0)
+         >>   42 YIELD_VALUE          0
+              44 RESUME               5
+              46 POP_TOP
+              48 JUMP_BACKWARD        (to 12)
+         >>   52 END_FOR
+              54 POP_TOP
+              56 RETURN_CONST         (None)
+              58 CALL_INTRINSIC_1     (INTRINSIC_STOPITERATION_ERROR)
+              60 RERAISE              1
+
+ExceptionTable:
+  6 to 56 -> 58 [0] lasti
+
+# Method Name:       <genexpr>
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  2
+# Stack size:        3
+# Flags:             0x00000033 (GENERATOR | NESTED | NEWLOCALS | OPTIMIZED)
+# First Line:        485
+# Constants:
+#    0: None
+# Varnames:
+#	.0, k
+# Positional arguments:
+#	.0
+# Local variables:
+#    1: k
+# Free variables:
+#    0: row
+               0 COPY_FREE_VARS       1
+
+485:           2 RETURN_GENERATOR
+               4 POP_TOP
+               6 RESUME               0
+               8 LOAD_FAST            (.0)
+              10 GET_ITER
+              12 FOR_ITER             (to 36)
+              16 STORE_FAST           (k)
+              18 LOAD_DEREF           (row)
+              20 LOAD_FAST            (k)
+              22 BINARY_SUBSCR
+              26 YIELD_VALUE          0
+              28 RESUME               5
+              30 POP_TOP
+              32 JUMP_BACKWARD        (to 12)
+         >>   36 END_FOR
+              38 POP_TOP
+              40 RETURN_CONST         (None)
+              42 CALL_INTRINSIC_1     (INTRINSIC_STOPITERATION_ERROR)
+              44 RERAISE              1
+
+ExceptionTable:
+  6 to 40 -> 42 [0] lasti
+
+# Method Name:       <genexpr>
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  2
+# Stack size:        3
+# Flags:             0x00000033 (GENERATOR | NESTED | NEWLOCALS | OPTIMIZED)
+# First Line:        517
+# Constants:
+#    0: 'final_population'
+#    1: None
+# Varnames:
+#	.0, row
+# Positional arguments:
+#	.0
+# Local variables:
+#    1: row
+
+517:           0 RETURN_GENERATOR
+               2 POP_TOP
+               4 RESUME               0
+               6 LOAD_FAST            (.0)
+               8 GET_ITER
+              10 FOR_ITER             (to 32)
+              14 STORE_FAST_LOAD_FAST (row, row)
+              16 LOAD_CONST           ("final_population")
+              18 BINARY_SUBSCR
+              22 YIELD_VALUE          0
+              24 RESUME               5
+              26 POP_TOP
+              28 JUMP_BACKWARD        (to 10)
+         >>   32 END_FOR
+              34 POP_TOP
+              36 RETURN_CONST         (None)
+              38 CALL_INTRINSIC_1     (INTRINSIC_STOPITERATION_ERROR)
+              40 RERAISE              1
+
+ExceptionTable:
+  4 to 36 -> 38 [0] lasti
+
+# Method Name:       <genexpr>
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  2
+# Stack size:        3
+# Flags:             0x00000033 (GENERATOR | NESTED | NEWLOCALS | OPTIMIZED)
+# First Line:        518
+# Constants:
+#    0: 'final_ai_generation'
+#    1: None
+# Varnames:
+#	.0, row
+# Positional arguments:
+#	.0
+# Local variables:
+#    1: row
+
+518:           0 RETURN_GENERATOR
+               2 POP_TOP
+               4 RESUME               0
+               6 LOAD_FAST            (.0)
+               8 GET_ITER
+              10 FOR_ITER             (to 32)
+              14 STORE_FAST_LOAD_FAST (row, row)
+              16 LOAD_CONST           ("final_ai_generation")
+              18 BINARY_SUBSCR
+              22 YIELD_VALUE          0
+              24 RESUME               5
+              26 POP_TOP
+              28 JUMP_BACKWARD        (to 10)
+         >>   32 END_FOR
+              34 POP_TOP
+              36 RETURN_CONST         (None)
+              38 CALL_INTRINSIC_1     (INTRINSIC_STOPITERATION_ERROR)
+              40 RERAISE              1
+
+ExceptionTable:
+  4 to 36 -> 38 [0] lasti
+
+# Method Name:       <genexpr>
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  2
+# Stack size:        3
+# Flags:             0x00000033 (GENERATOR | NESTED | NEWLOCALS | OPTIMIZED)
+# First Line:        546
+# Constants:
+#    0: 'final_ai_generation'
+#    1: None
+# Varnames:
+#	.0, row
+# Positional arguments:
+#	.0
+# Local variables:
+#    1: row
+
+546:           0 RETURN_GENERATOR
+               2 POP_TOP
+               4 RESUME               0
+               6 LOAD_FAST            (.0)
+               8 GET_ITER
+              10 FOR_ITER             (to 32)
+              14 STORE_FAST_LOAD_FAST (row, row)
+              16 LOAD_CONST           ("final_ai_generation")
+              18 BINARY_SUBSCR
+              22 YIELD_VALUE          0
+              24 RESUME               5
+              26 POP_TOP
+              28 JUMP_BACKWARD        (to 10)
+         >>   32 END_FOR
+              34 POP_TOP
+              36 RETURN_CONST         (None)
+              38 CALL_INTRINSIC_1     (INTRINSIC_STOPITERATION_ERROR)
+              40 RERAISE              1
+
+ExceptionTable:
+  4 to 36 -> 38 [0] lasti
+
+# Method Name:       <genexpr>
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  2
+# Stack size:        3
+# Flags:             0x00000033 (GENERATOR | NESTED | NEWLOCALS | OPTIMIZED)
+# First Line:        547
+# Constants:
+#    0: 'max_yield_margin'
+#    1: None
+# Varnames:
+#	.0, row
+# Positional arguments:
+#	.0
+# Local variables:
+#    1: row
+
+547:           0 RETURN_GENERATOR
+               2 POP_TOP
+               4 RESUME               0
+               6 LOAD_FAST            (.0)
+               8 GET_ITER
+              10 FOR_ITER             (to 32)
+              14 STORE_FAST_LOAD_FAST (row, row)
+              16 LOAD_CONST           ("max_yield_margin")
+              18 BINARY_SUBSCR
+              22 YIELD_VALUE          0
+              24 RESUME               5
+              26 POP_TOP
+              28 JUMP_BACKWARD        (to 10)
+         >>   32 END_FOR
+              34 POP_TOP
+              36 RETURN_CONST         (None)
+              38 CALL_INTRINSIC_1     (INTRINSIC_STOPITERATION_ERROR)
+              40 RERAISE              1
+
+ExceptionTable:
+  4 to 36 -> 38 [0] lasti
+
+# Method Name:       <genexpr>
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  2
+# Stack size:        3
+# Flags:             0x00000033 (GENERATOR | NESTED | NEWLOCALS | OPTIMIZED)
+# First Line:        577
+# Constants:
+#    0: 'final_ai_generation'
+#    1: None
+# Varnames:
+#	.0, row
+# Positional arguments:
+#	.0
+# Local variables:
+#    1: row
+
+577:           0 RETURN_GENERATOR
+               2 POP_TOP
+               4 RESUME               0
+               6 LOAD_FAST            (.0)
+               8 GET_ITER
+              10 FOR_ITER             (to 32)
+              14 STORE_FAST_LOAD_FAST (row, row)
+              16 LOAD_CONST           ("final_ai_generation")
+              18 BINARY_SUBSCR
+              22 YIELD_VALUE          0
+              24 RESUME               5
+              26 POP_TOP
+              28 JUMP_BACKWARD        (to 10)
+         >>   32 END_FOR
+              34 POP_TOP
+              36 RETURN_CONST         (None)
+              38 CALL_INTRINSIC_1     (INTRINSIC_STOPITERATION_ERROR)
+              40 RERAISE              1
+
+ExceptionTable:
+  4 to 36 -> 38 [0] lasti
+
+# Method Name:       <genexpr>
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  2
+# Stack size:        4
+# Flags:             0x00000033 (GENERATOR | NESTED | NEWLOCALS | OPTIMIZED)
+# First Line:        626
+# Constants:
+#    0: 'error'
+#    1: 1
+#    2: None
+# Names:
+#    0: get
+# Varnames:
+#	.0, row
+# Positional arguments:
+#	.0
+# Local variables:
+#    1: row
+
+626:           0 RETURN_GENERATOR
+               2 POP_TOP
+               4 RESUME               0
+               6 LOAD_FAST            (.0)
+               8 GET_ITER
+              10 FOR_ITER             (to 74)
+              14 STORE_FAST_LOAD_FAST (row, row)
+              16 LOAD_ATTR            (NULL|self + get)
+              36 LOAD_CONST           ("error")
+              38 CALL                 (1 positional)
+              46 TO_BOOL
+              54 POP_JUMP_IF_TRUE     (to 62)
+              58 JUMP_BACKWARD        (to 10)
+         >>   62 LOAD_CONST           (1)
+              64 YIELD_VALUE          0
+              66 RESUME               5
+              68 POP_TOP
+              70 JUMP_BACKWARD        (to 10)
+         >>   74 END_FOR
+              76 POP_TOP
+              78 RETURN_CONST         (None)
+              80 CALL_INTRINSIC_1     (INTRINSIC_STOPITERATION_ERROR)
+              82 RERAISE              1
+
+ExceptionTable:
+  4 to 52 -> 80 [0] lasti
+  62 to 78 -> 80 [0] lasti
+
+# Method Name:       <genexpr>
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  2
+# Stack size:        3
+# Flags:             0x00000033 (GENERATOR | NESTED | NEWLOCALS | OPTIMIZED)
+# First Line:        657
+# Constants:
+#    0: 'final_population'
+#    1: None
+# Varnames:
+#	.0, row
+# Positional arguments:
+#	.0
+# Local variables:
+#    1: row
+
+657:           0 RETURN_GENERATOR
+               2 POP_TOP
+               4 RESUME               0
+               6 LOAD_FAST            (.0)
+               8 GET_ITER
+              10 FOR_ITER             (to 32)
+              14 STORE_FAST_LOAD_FAST (row, row)
+              16 LOAD_CONST           ("final_population")
+              18 BINARY_SUBSCR
+              22 YIELD_VALUE          0
+              24 RESUME               5
+              26 POP_TOP
+              28 JUMP_BACKWARD        (to 10)
+         >>   32 END_FOR
+              34 POP_TOP
+              36 RETURN_CONST         (None)
+              38 CALL_INTRINSIC_1     (INTRINSIC_STOPITERATION_ERROR)
+              40 RERAISE              1
+
+ExceptionTable:
+  4 to 36 -> 38 [0] lasti
+
+# Method Name:       <genexpr>
+# Filename:          simulation/diagnostics/monte_carlo_phase_b.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  2
+# Stack size:        3
+# Flags:             0x00000033 (GENERATOR | NESTED | NEWLOCALS | OPTIMIZED)
+# First Line:        658
+# Constants:
+#    0: 'final_ai_generation'
+#    1: None
+# Varnames:
+#	.0, row
+# Positional arguments:
+#	.0
+# Local variables:
+#    1: row
+
+658:           0 RETURN_GENERATOR
+               2 POP_TOP
+               4 RESUME               0
+               6 LOAD_FAST            (.0)
+               8 GET_ITER
+              10 FOR_ITER             (to 32)
+              14 STORE_FAST_LOAD_FAST (row, row)
+              16 LOAD_CONST           ("final_ai_generation")
+              18 BINARY_SUBSCR
+              22 YIELD_VALUE          0
+              24 RESUME               5
+              26 POP_TOP
+              28 JUMP_BACKWARD        (to 10)
+         >>   32 END_FOR
+              34 POP_TOP
+              36 RETURN_CONST         (None)
+              38 CALL_INTRINSIC_1     (INTRINSIC_STOPITERATION_ERROR)
+              40 RERAISE              1
+
+ExceptionTable:
+  4 to 36 -> 38 [0] lasti

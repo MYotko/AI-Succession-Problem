@@ -1,0 +1,32 @@
+{
+  "recovered_utc_date": "2026-09-24",
+  "source_medium": "USB drive holding files copied from the third development machine, retained unmodified and read only",
+  "files": {
+    "monte_carlo_phase_b.cpython-313.pyc": {
+      "path_on_drive": "ai-succession-problem/simulation/diagnostics/__pycache__/monte_carlo_phase_b.cpython-313.pyc",
+      "sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+      "bytes": 31104,
+      "header": {
+        "magic": 3571,
+        "interpreter": "CPython 3.13",
+        "flags": 0,
+        "validation": "timestamp",
+        "source_mtime_utc": "2026-06-09T23:14:52Z",
+        "source_mtime_edt": "2026-06-09T19:14:52-04:00",
+        "source_size_bytes": 21497,
+        "source_path_in_code_objects": "simulation/diagnostics/monte_carlo_phase_b.py"
+      }
+    },
+    "alpha_succession_sweep_pilot.csv": {
+      "path_on_drive": "ai-succession-problem/data/alpha_succession_sweep_pilot.csv",
+      "sha256": "16834e6e59ffd3467a085c1c3b16d65c82685792dffd16684d13da99bc5b4152",
+      "lines": 91,
+      "note": "Output of the v1.x alpha succession sweep, not Phase B. Evidence for Section 7 of the instrument validation record only."
+    },
+    "monte_carlo_phase_b_disassembly.txt": {
+      "generated_by": "xdis 6.3.0 pydisasm, run under CPython 3.14.3, from the .pyc above",
+      "sha256_lf": "746992ca240dd66eb0e3de64f36078e75dfb8f9002386cc7747a82ece5078688"
+    }
+  },
+  "not_on_drive": "No Phase B or phi results file."
+}
