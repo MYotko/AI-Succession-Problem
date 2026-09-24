@@ -209,3 +209,63 @@ one after the fact, which would be a choice made with the targets already known.
 **Nothing else changes.** The grids, seeds, seed counts, construction, the other recorded
 fields, the quantities, the targets, the tolerance and both branch rules stand as
 committed.
+
+## 11. Amendment 2, 2026-09-22: which substrate the tolerance is judged on, and the successor's capability
+
+**Status and provenance, stated in full because this amendment follows some outputs.** This
+amendment is committed on the side branch `prereg-amendments` while the measured batch runs
+on `main`, because a commit to `main` would change the HEAD that every running worker
+verifies. It is pushed before the pre-repair arm of Category A has produced results at the
+reproduction rates that decide target T1. At the time of writing, the pre-repair arm of
+Category A had completed 162 of 2,700 runs, all at the lowest reproduction rates in the grid
+order, and the first 139 of them, all at rr 0.055 with zero survivors, had been read. The repaired arm of Category A was complete, 2,700 runs, and
+had been read: it is what exposed the ambiguity below. The phi category was complete on both
+substrates and is recorded in the instrument validation record at 61013c8a.
+
+**The ambiguity.** Section 7 says the reconstruction is faithful on a target when the
+published value lies within two standard errors of the reconstruction's own estimate. It
+does not say on which substrate. The published targets in Section 2 were produced on the
+v2.0 substrate, before the estimator repair. The repaired arm therefore differs from them
+for two reasons at once, fidelity and the repair's own effect, and Section 6 already assigns
+the second of those to F5, the substrate comparison.
+
+**Amended.** Fidelity on every target in Section 7 is judged on the **pre-repair, v2.0 arm
+only**. The repaired arm's departure from a published target is not a fidelity result: it is
+reported under F5 as part of the defects' measured effect, and only after fidelity on the
+v2.0 arm has been decided. The branch rules of Section 7 then apply as committed.
+
+**Why this reading, and why it is not chosen for convenience.** The repaired arm of Category A
+fails T1, with 3 of 9 points within tolerance. A reader could suspect that the v2.0 arm is
+nominated here because the v2.0 arm might pass. The reading is instead the only one under
+which the targets mean anything: a figure produced on one substrate can test the
+reconstruction's fidelity only on that substrate, and Section 4's design, running the v2.0
+arm at all, exists for exactly this purpose. The amendment is published before the v2.0
+results at the deciding reproduction rates exist, so it cannot be fitted to them. The phi
+result is unaffected: survival was zero on both substrates, so target T3 fails under either
+reading, and the record's account of it stands.
+
+**A second gap, recorded without any change to execution.** Section 5 requires a successor
+agent in every run but does not fix the successor's capability for Category A or the phi
+curve, whose grids do not vary it. The executor uses the production default, 1.0, as its
+docstring records. At a capability of 1.0 the successor can never exceed the incumbent, so no
+yield condition can be met. The observed consequence, from the completed repaired arm of
+Category A and both arms of the phi curve: no yield fired in any run, and every run ended at
+generation 1. **Category A and the phi curve, as reconstructed, are therefore single-generation
+runs in practice**, whatever the original corpus used. The original's successor capability
+for these categories is not recorded in any surviving document, so it cannot be reproduced,
+and choosing a value now, with results in hand, would be exactly the adjustment Section 7
+forbids. Execution is not changed. Every comparison of these categories with a published
+figure carries this statement, and the record says in plain words that a single-generation
+reconstruction may differ from the original for this reason alone.
+
+**What this means for the phi finding.** The committed phi sweep records that the older deep
+Monte Carlo ran single generation with no successor, which item 4 of the record cites as the
+likely reason the phi target was not reproduced. This gap narrows that inference rather than
+confirming it: the reconstruction was single-generation too, in practice, and still found
+zero survival at rr 0.057 on both substrates. Whatever separates the published phi curve
+from this reconstruction, it is not the absence of succession, since this reconstruction had
+none either.
+
+**Nothing else changes.** The grids, seeds, seed counts, construction, recorded fields,
+quantities, targets, tolerance values and both branch rules stand as committed, including
+Amendment 1.
