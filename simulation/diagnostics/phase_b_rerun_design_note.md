@@ -358,3 +358,41 @@ rules or branch rules after this note is committed requires a committed amendmen
 before any output of the affected part is read. Outputs already produced under the unamended
 plan are reported under that plan. Neither the implementing agent nor the operator may
 inspect any measured output and then adjust any element of this note.
+
+## 14. Amendment 1, 2026-09-24: a second machine
+
+**Status.** Committed and pushed before the executor exists and before any run of any kind,
+registered or test. No output of this note has been produced.
+
+**What changes.** The operator has made a second machine available, the Linux workstation
+`yotko-legion-t5-26iob6`, alongside `YOTKOTEST`. Runs may execute on either machine. This
+changes only where runs execute. The parts, grids, seeds, seed counts, substrates, targets,
+verdicts and branch rules are unchanged.
+
+**How work is divided.** Whole parts are assigned to machines; a part is never split across
+machines unless the check below passes. Each machine runs its own copy of the executor. It
+has its own checkouts of both substrates at the pinned commits and its own copy of the
+bytecode, verified by hash. Each machine's CPU budget, worker schedule and override are its
+own. The operator-stated budget on the second machine is all of its CPUs, and normal mode
+there runs one fewer worker than that. Every row and completion record carries the machine's
+name, and the execution metadata records each machine's CPU budget, interpreter and numpy
+versions. Merged part files are brought to `YOTKOTEST` by copying, and verified by hash.
+
+**Why this needs a rule.** numpy selects vectorized code paths by processor. Two machines
+with the same interpreter and numpy versions can then differ in the last bits of some
+elementwise results. A marginal run could diverge, which would matter for the verdict of
+identical in Section 9.
+
+**The cross-machine check, registered now.** Before any registered run, the same test-mode
+tasks, at seed indices 150 and 151 and outside every registered range, run on both machines
+and both arms. Their 30 original fields are compared. The result is recorded and cited in
+the record whatever it shows.
+
+- **If every row is identical,** the machine is treated as immaterial. Parts may be assigned
+  or moved between machines freely, including after an interruption.
+- **If any row differs,** each part runs wholly on one machine. A part interrupted on one
+  machine resumes on the same machine. Every verdict names the machine its part ran on. If
+  Part 4 and the arm O part it is paired with ran on different machines, R4 is reported as
+  including that machine difference.
+
+**Nothing else changes.** In particular, the worker cap on `YOTKOTEST` stays at no more than 15.
