@@ -1,0 +1,365 @@
+{
+  "result": "DIFFERENT",
+  "machine_labels": [
+    "YOTKOTEST",
+    "yotko-legion-t5-26iob6"
+  ],
+  "executor_hashes": {
+    "phase_b_rerun_executor.py": "fe199e8d67fbf0c19abebdf0c21fbbae9aa8f9bb04b1139e1902c7fde1285568",
+    "phase_b_rerun_common.py": "00ce1aa25f0edc40d520cc9ef5b1a44004afac1a4bb5760737b81aaaed50a5a1",
+    "phase_b_rerun_child.py": "f9551a5696fe4560e577471664b3296d313745c07da67ac5f73e2d8ac734b51c",
+    "phase_b_rerun_xcheck_compare.py": "060d132bb0e8006f70b6acd401d458d5970e8c57cc12010efa4897bb7137367e"
+  },
+  "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+  "environments": {
+    "YOTKOTEST": {
+      "O": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      }
+    },
+    "yotko-legion-t5-26iob6": {
+      "O": {
+        "interpreter_version": "3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "task_count": 16,
+  "differences": [
+    {
+      "task": {
+        "arm": "O",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "A",
+          "phi": 25.0,
+          "rr": 0.055,
+          "seed": 150,
+          "steps": 500,
+          "successor_capability": 1.5
+        }
+      },
+      "field": "integral_u_sys",
+      "left": 6397.322145067296,
+      "right": 6397.322145067298
+    },
+    {
+      "task": {
+        "arm": "O",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "A",
+          "phi": 25.0,
+          "rr": 0.055,
+          "seed": 151,
+          "steps": 500,
+          "successor_capability": 1.5
+        }
+      },
+      "field": "mean_yield_margin",
+      "left": -5.952557096452712,
+      "right": -5.952557096452714
+    },
+    {
+      "task": {
+        "arm": "O",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "A",
+          "phi": 25.0,
+          "rr": 0.066,
+          "seed": 150,
+          "steps": 500,
+          "successor_capability": 1.5
+        }
+      },
+      "field": "mean_yield_margin",
+      "left": -6.925883876578873,
+      "right": -6.925883876578875
+    },
+    {
+      "task": {
+        "arm": "O",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "A",
+          "phi": 25.0,
+          "rr": 0.066,
+          "seed": 150,
+          "steps": 500,
+          "successor_capability": 1.5
+        }
+      },
+      "field": "final_l_t_v2",
+      "left": 0.4636107958046613,
+      "right": 0.46361079580466136
+    },
+    {
+      "task": {
+        "arm": "O",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "A",
+          "phi": 25.0,
+          "rr": 0.066,
+          "seed": 151,
+          "steps": 500,
+          "successor_capability": 1.5
+        }
+      },
+      "field": "integral_u_sys",
+      "left": 20682.168982528918,
+      "right": 20682.168982528914
+    },
+    {
+      "task": {
+        "arm": "O",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "B",
+          "phi": 25.0,
+          "rr": 0.06,
+          "seed": 150,
+          "steps": 500,
+          "successor_capability": 3.0
+        }
+      },
+      "field": "mean_yield_margin",
+      "left": -7.0135608015139095,
+      "right": -7.01356080151391
+    },
+    {
+      "task": {
+        "arm": "O",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "C",
+          "phi": 25.0,
+          "rr": 0.06,
+          "seed": 150,
+          "steps": 500,
+          "successor_capability": 2.5
+        }
+      },
+      "field": "mean_yield_margin",
+      "left": -11.990707751168399,
+      "right": -11.9907077511684
+    },
+    {
+      "task": {
+        "arm": "O",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "C",
+          "phi": 25.0,
+          "rr": 0.06,
+          "seed": 151,
+          "steps": 500,
+          "successor_capability": 2.5
+        }
+      },
+      "field": "first_fire_advantage",
+      "left": 4.091432191365087,
+      "right": 4.0914321913650795
+    },
+    {
+      "task": {
+        "arm": "O",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "C",
+          "phi": 25.0,
+          "rr": 0.06,
+          "seed": 151,
+          "steps": 500,
+          "successor_capability": 2.5
+        }
+      },
+      "field": "max_yield_margin",
+      "left": 0.7542916949416467,
+      "right": 0.7542916949416396
+    },
+    {
+      "task": {
+        "arm": "O",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "C",
+          "phi": 25.0,
+          "rr": 0.06,
+          "seed": 151,
+          "steps": 500,
+          "successor_capability": 2.5
+        }
+      },
+      "field": "integral_u_sys",
+      "left": 6717.660225935029,
+      "right": 6717.66022593503
+    },
+    {
+      "task": {
+        "arm": "R",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": false,
+          "mode": "C",
+          "phi": 25.0,
+          "rr": 0.06,
+          "seed": 151,
+          "steps": 500,
+          "successor_capability": 2.5
+        }
+      },
+      "field": "integral_u_sys",
+      "left": 12245.380582549615,
+      "right": 12245.380582549617
+    },
+    {
+      "task": {
+        "arm": "R",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "A",
+          "phi": 25.0,
+          "rr": 0.066,
+          "seed": 150,
+          "steps": 500,
+          "successor_capability": 1.5
+        }
+      },
+      "field": "first_fire_advantage",
+      "left": 5.795015231633386,
+      "right": 5.795015231633389
+    },
+    {
+      "task": {
+        "arm": "R",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "A",
+          "phi": 25.0,
+          "rr": 0.066,
+          "seed": 150,
+          "steps": 500,
+          "successor_capability": 1.5
+        }
+      },
+      "field": "max_yield_margin",
+      "left": 2.0787878093196586,
+      "right": 2.078787809319662
+    },
+    {
+      "task": {
+        "arm": "R",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "A",
+          "phi": 25.0,
+          "rr": 0.066,
+          "seed": 151,
+          "steps": 500,
+          "successor_capability": 1.5
+        }
+      },
+      "field": "first_fire_advantage",
+      "left": 4.968523745217993,
+      "right": 4.96852374521799
+    },
+    {
+      "task": {
+        "arm": "R",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "A",
+          "phi": 25.0,
+          "rr": 0.066,
+          "seed": 151,
+          "steps": 500,
+          "successor_capability": 1.5
+        }
+      },
+      "field": "max_yield_margin",
+      "left": 1.2130451130670195,
+      "right": 1.213045113067016
+    },
+    {
+      "task": {
+        "arm": "R",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "A",
+          "phi": 25.0,
+          "rr": 0.066,
+          "seed": 151,
+          "steps": 500,
+          "successor_capability": 1.5
+        }
+      },
+      "field": "integral_u_sys",
+      "left": 16443.550560814183,
+      "right": 16443.550560814187
+    },
+    {
+      "task": {
+        "arm": "R",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "C",
+          "phi": 25.0,
+          "rr": 0.06,
+          "seed": 151,
+          "steps": 500,
+          "successor_capability": 2.5
+        }
+      },
+      "field": "final_l_t_v2",
+      "left": 0.045775937464460036,
+      "right": 0.04577593746446004
+    },
+    {
+      "task": {
+        "arm": "R",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "C",
+          "phi": 25.0,
+          "rr": 0.06,
+          "seed": 151,
+          "steps": 500,
+          "successor_capability": 2.5
+        }
+      },
+      "field": "integral_u_sys",
+      "left": 6999.117151612704,
+      "right": 6999.117151612705
+    }
+  ],
+  "created_utc": "2026-09-24T12:23:43.069599+00:00",
+  "test_fixture": false
+}
