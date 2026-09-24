@@ -12,3 +12,5 @@ AGENTS.md
 
 # Reconstruction merged step logs: multi-GB, no registered quantity reads them.
 simulation/diagnostics/phase_b_recon_*_steps.csv
+# Reconstruction per-run job files: transient until a category merges; a stopped category's stay on disk.
+simulation/diagnostics/phase_b_recon_job_*
