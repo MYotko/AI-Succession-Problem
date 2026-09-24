@@ -1,0 +1,22 @@
+{
+  "timezone": "local",
+  "default_workers": 15,
+  "modes": {
+    "normal": 15,
+    "work": 10
+  },
+  "rules": [
+    {
+      "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "start": "07:00",
+      "end": "17:00",
+      "workers": 10
+    }
+  ]
+}

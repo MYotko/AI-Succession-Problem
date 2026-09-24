@@ -1,0 +1,62 @@
+{
+  "part": 3,
+  "machine_label": "YOTKOTEST",
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "2daf239aee284648e99c4a6e57e84966d05e82cb0cf95de0efc9c7371c1e79d2",
+      "phase_b_rerun_common.py": "0cd74debbf8f17cc1910df741b1f0103e5140d0250e85c26d1468a8f93623eac",
+      "phase_b_rerun_child.py": "5f3614e28f694cd2e1af8f9a3dcdc695ed99ccd12fa6546c52a262f1704a980c",
+      "phase_b_rerun_xcheck_compare.py": "41fcdd81796703de6863b3f9440412e1fc7e241f1c442a8a2bf30ea2359953a6"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "O": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "run_count": 1,
+  "runs_file": "phase_b_rerun_smoke_repeat_O_part3_runs.csv",
+  "completions_file": "phase_b_rerun_smoke_repeat_O_part3_completions.jsonl",
+  "steps_file": "phase_b_rerun_smoke_repeat_O_part3_steps.csv",
+  "files": {
+    "phase_b_rerun_smoke_repeat_O_part3_runs.csv": {
+      "sha256_lf": "e2e84e11929a04146a262432d619224f7cb5d00491570072b5d0be16fd47d98c",
+      "row_count": 1
+    },
+    "phase_b_rerun_smoke_repeat_O_part3_completions.jsonl": {
+      "sha256_lf": "f8456e3963fe8cb942ff343345e9eae6a955e7db50052030e769f4d59421d0aa",
+      "row_count": 1
+    },
+    "phase_b_rerun_smoke_repeat_O_part3_steps.csv": {
+      "sha256_lf": "56892da2a9ed5b0b43859d8dcf2807d8e26e375e579a4e9d7c99ddef6872db67",
+      "row_count": 500
+    }
+  },
+  "runs": {
+    "O_p3_C_0de9b507be0110cdce85a9b2": {
+      "arm": "O",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "3379117c60f9100d981103214050fe848b8d7a24b4956d6b3a7c8e20c9a54ee0",
+      "step_count": 500,
+      "steps_sha256": "9e8c7e995dc89229886091f3c0d332ff8c7f8dcc2fecb8bc81295b2cf8d76204"
+    }
+  },
+  "deleted_by_kind": {
+    "completion.json": 1,
+    "steps.jsonl": 1,
+    "request.json": 1,
+    "console.txt": 1
+  }
+}

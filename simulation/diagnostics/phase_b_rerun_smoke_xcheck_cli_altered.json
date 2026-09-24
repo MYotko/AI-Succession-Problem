@@ -1,0 +1,49 @@
+{
+  "result": "DIFFERENT",
+  "machine_labels": [
+    "YOTKOTEST",
+    "YOTKOTEST"
+  ],
+  "executor_hashes": {
+    "phase_b_rerun_executor.py": "fe199e8d67fbf0c19abebdf0c21fbbae9aa8f9bb04b1139e1902c7fde1285568",
+    "phase_b_rerun_common.py": "00ce1aa25f0edc40d520cc9ef5b1a44004afac1a4bb5760737b81aaaed50a5a1",
+    "phase_b_rerun_child.py": "f9551a5696fe4560e577471664b3296d313745c07da67ac5f73e2d8ac734b51c",
+    "phase_b_rerun_xcheck_compare.py": "060d132bb0e8006f70b6acd401d458d5970e8c57cc12010efa4897bb7137367e"
+  },
+  "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+  "environments": {
+    "YOTKOTEST": {
+      "O": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "task_count": 16,
+  "differences": [
+    {
+      "task": {
+        "arm": "O",
+        "task": {
+          "alpha": 1.0,
+          "cop_cost_audit": true,
+          "mode": "B",
+          "phi": 25.0,
+          "rr": 0.06,
+          "seed": 150,
+          "steps": 500,
+          "successor_capability": 3.0
+        }
+      },
+      "field": "final_population",
+      "left": 25,
+      "right": 26
+    }
+  ],
+  "created_utc": "2026-09-24T12:00:24.576247+00:00",
+  "test_fixture": false
+}

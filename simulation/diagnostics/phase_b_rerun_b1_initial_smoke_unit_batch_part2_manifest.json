@@ -1,0 +1,53 @@
+{
+  "part": 2,
+  "machine_label": "YOTKOTEST",
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "ca9194ef9bce1fdec0629f1ebaad752ccf876296a87e0675e8d110733c4b810b",
+      "phase_b_rerun_common.py": "8c342d8fdaf342db026697910efe5df45e2c8aa01417656790d135f3cbc70bc5",
+      "phase_b_rerun_child.py": "4a2274cf4d5bcf95c800e95048a26fe4eb360dd4e5892afe9e11c560ac33e1b4",
+      "phase_b_rerun_xcheck_compare.py": "41fcdd81796703de6863b3f9440412e1fc7e241f1c442a8a2bf30ea2359953a6"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "fixture": "not model output"
+    }
+  },
+  "run_count": 1,
+  "runs_file": "phase_b_rerun_smoke_unit_batch_part2_runs.csv",
+  "completions_file": "phase_b_rerun_smoke_unit_batch_part2_completions.jsonl",
+  "steps_file": "phase_b_rerun_smoke_unit_batch_part2_steps.csv",
+  "files": {
+    "phase_b_rerun_smoke_unit_batch_part2_runs.csv": {
+      "sha256_lf": "acc0ad44ff040b25531706c5a563987e88749e7aac49015d214632b1cfeadda7",
+      "row_count": 1
+    },
+    "phase_b_rerun_smoke_unit_batch_part2_completions.jsonl": {
+      "sha256_lf": "3dbf3306a561be208630fd7b65fc7a0ce19fc8cd8b0b6ece8d09e1e242d0b883",
+      "row_count": 1
+    },
+    "phase_b_rerun_smoke_unit_batch_part2_steps.csv": {
+      "sha256_lf": "35f2a8c1844d4947dc42d80066bb7ffbbc757780ce3bad8ccf12a6e03ec3a44f",
+      "row_count": 0
+    }
+  },
+  "runs": {
+    "O_p2_A_333d7e2994dc3327f52160a6": {
+      "arm": "O",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "98b1b4e0773455db968869a91bc53056553f5ca752970c983f7d63c8193e6d4f",
+      "step_count": 0,
+      "steps_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "deleted_by_kind": {
+    "completion.json": 1,
+    "steps.jsonl": 1
+  }
+}

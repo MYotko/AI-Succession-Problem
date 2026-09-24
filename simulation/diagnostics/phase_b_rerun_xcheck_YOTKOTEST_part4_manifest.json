@@ -1,0 +1,106 @@
+{
+  "part": 4,
+  "machine_label": "YOTKOTEST",
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "fe199e8d67fbf0c19abebdf0c21fbbae9aa8f9bb04b1139e1902c7fde1285568",
+      "phase_b_rerun_common.py": "00ce1aa25f0edc40d520cc9ef5b1a44004afac1a4bb5760737b81aaaed50a5a1",
+      "phase_b_rerun_child.py": "f9551a5696fe4560e577471664b3296d313745c07da67ac5f73e2d8ac734b51c",
+      "phase_b_rerun_xcheck_compare.py": "060d132bb0e8006f70b6acd401d458d5970e8c57cc12010efa4897bb7137367e"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "O": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "run_count": 6,
+  "runs_file": "phase_b_rerun_xcheck_YOTKOTEST_part4_runs.csv",
+  "completions_file": "phase_b_rerun_xcheck_YOTKOTEST_part4_completions.jsonl",
+  "steps_file": "phase_b_rerun_xcheck_YOTKOTEST_part4_steps.csv",
+  "files": {
+    "phase_b_rerun_xcheck_YOTKOTEST_part4_runs.csv": {
+      "sha256_lf": "5e2d925e5db305baee929f44db0b34c8132c98b5a680776f59e1ea8dcfc731b7",
+      "row_count": 6
+    },
+    "phase_b_rerun_xcheck_YOTKOTEST_part4_completions.jsonl": {
+      "sha256_lf": "bd781a748fcc3eb0922a6e2ec421b4fff057a1520006762903394d79acc73b30",
+      "row_count": 6
+    },
+    "phase_b_rerun_xcheck_YOTKOTEST_part4_steps.csv": {
+      "sha256_lf": "fe552be6fb3a7ab5c3926e42413a278d6a450b8bfe4c7f0674a847fc96a2881c",
+      "row_count": 3000
+    },
+    "phase_b_rerun_xcheck_YOTKOTEST_part4_interruption_journal.jsonl": {
+      "sha256_lf": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "row_count": 0
+    }
+  },
+  "runs": {
+    "R_p4_A_1838f22be8317bf11ca2d2c7": {
+      "arm": "R",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "7b3533f5fb7a09cafa53b97f24d0259729a8e62ba229a9e04a400b3b03984854",
+      "step_count": 500,
+      "steps_sha256": "61282623dc1278bc0c440f9b3601c1fa0fae237a12139f8c61c7ff970b43d1bd"
+    },
+    "R_p4_A_2fa60758a32b0829125ca58a": {
+      "arm": "R",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "5238356ac52589790f31d56d9ca6bd6cea9e3cbee6799e12e7587e83ad3f0adb",
+      "step_count": 500,
+      "steps_sha256": "1164310c12445e50fc2c7e23865c0ed0738cfa1b3215c0d4d0faf4b82ca431c2"
+    },
+    "R_p4_C_0de9b507be0110cdce85a9b2": {
+      "arm": "R",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "9b745ee7267fbec7c334c2378ccda53d400c5605f2661ad7ebffc5acecf5a42f",
+      "step_count": 500,
+      "steps_sha256": "03d7873160c2e6f95b5450507c059ca33920b7d8c6c10d12cb15afc5620a5a9a"
+    },
+    "R_p4_C_451abe9d26b28c4cef9ccd3d": {
+      "arm": "R",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "9668ffef0463808b0b48145bedf74900cf67080ed94a84c04239ba4d0302d359",
+      "step_count": 500,
+      "steps_sha256": "09cba2a470e181f156fc26ae2f5ff9a32de35b5be7c9c07517b7a25bb68282d8"
+    },
+    "R_p4_C_58359a2bbed8c2243c6e6f4f": {
+      "arm": "R",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "02293cae9f76028a8ef5d8d5baa5bf6a5da8eb742444aab3435ea98c1f95ecb2",
+      "step_count": 500,
+      "steps_sha256": "54b9fd8232f40e082472cf37f223a48a6c90e9dd94c76daca0dd461b7f3dbfe4"
+    },
+    "R_p4_C_7ded96c31cc385c178bc6e42": {
+      "arm": "R",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "4b54b47ffc92bb5a0909aca14ea2053bf695e35fdfe7b3cd0898ddd025c6592c",
+      "step_count": 500,
+      "steps_sha256": "0625e08199dd143e3cc08c7ec54f7919ca462ba0515a8b4da887e179f2d445a3"
+    }
+  },
+  "deleted_by_kind": {
+    "completion.json": 6,
+    "steps.jsonl": 6,
+    "request.json": 6,
+    "console.txt": 6
+  }
+}

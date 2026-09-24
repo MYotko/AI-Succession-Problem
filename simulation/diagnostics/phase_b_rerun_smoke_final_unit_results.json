@@ -1,0 +1,47 @@
+{
+  "synthetic_fixture": true,
+  "schedule_clock": [
+    {
+      "local": "2026-09-24T23:00",
+      "expected": 15,
+      "actual": 15
+    },
+    {
+      "local": "2026-09-25T06:59",
+      "expected": 15,
+      "actual": 15
+    },
+    {
+      "local": "2026-09-25T07:00",
+      "expected": 10,
+      "actual": 10
+    },
+    {
+      "local": "2026-09-25T16:59",
+      "expected": 10,
+      "actual": 10
+    },
+    {
+      "local": "2026-09-25T17:00",
+      "expected": 15,
+      "actual": 15
+    },
+    {
+      "local": "2026-09-26T10:00",
+      "expected": 15,
+      "actual": 15
+    },
+    {
+      "local": "2026-09-28T08:00",
+      "expected": 10,
+      "actual": 10
+    }
+  ],
+  "streaming_hash_boundary": true,
+  "streaming_copy": true,
+  "cross_machine_environment_binding": true,
+  "same_machine_version_change_refused": true,
+  "test_permission_ignored_in_registered_mode": true,
+  "changed_attested_environment_refused": true,
+  "registered_runs_executed": 0
+}

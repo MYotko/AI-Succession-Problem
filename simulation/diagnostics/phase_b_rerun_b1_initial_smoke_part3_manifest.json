@@ -1,0 +1,86 @@
+{
+  "part": 3,
+  "machine_label": "YOTKOTEST",
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "2daf239aee284648e99c4a6e57e84966d05e82cb0cf95de0efc9c7371c1e79d2",
+      "phase_b_rerun_common.py": "0cd74debbf8f17cc1910df741b1f0103e5140d0250e85c26d1468a8f93623eac",
+      "phase_b_rerun_child.py": "5f3614e28f694cd2e1af8f9a3dcdc695ed99ccd12fa6546c52a262f1704a980c",
+      "phase_b_rerun_xcheck_compare.py": "41fcdd81796703de6863b3f9440412e1fc7e241f1c442a8a2bf30ea2359953a6"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "O": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "run_count": 4,
+  "runs_file": "phase_b_rerun_smoke_part3_runs.csv",
+  "completions_file": "phase_b_rerun_smoke_part3_completions.jsonl",
+  "steps_file": "phase_b_rerun_smoke_part3_steps.csv",
+  "files": {
+    "phase_b_rerun_smoke_part3_runs.csv": {
+      "sha256_lf": "b2df4985f9bfaa4676f2c408c7a2c07e44026ca42aab68b52717d4c1f7d07dcd",
+      "row_count": 4
+    },
+    "phase_b_rerun_smoke_part3_completions.jsonl": {
+      "sha256_lf": "66675b3e1abcb868b26c7d0292d5f4bb8f0f9278f9805a9e987373fb050add00",
+      "row_count": 4
+    },
+    "phase_b_rerun_smoke_part3_steps.csv": {
+      "sha256_lf": "26f55dab85af456cbc97fa3f32717411527808e4a5edf23b3629d01fc702870b",
+      "row_count": 1835
+    }
+  },
+  "runs": {
+    "O_p3_C_0de9b507be0110cdce85a9b2": {
+      "arm": "O",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "10eb4265e04925d16e9cdb824e0f51260669a58982d6e539c7ed0bb820accfb6",
+      "step_count": 500,
+      "steps_sha256": "9e8c7e995dc89229886091f3c0d332ff8c7f8dcc2fecb8bc81295b2cf8d76204"
+    },
+    "O_p3_C_451abe9d26b28c4cef9ccd3d": {
+      "arm": "O",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "b1b12a930f4a82d5417617558908e936ee802ef7ad0097e3a4a3fe726abec1f2",
+      "step_count": 500,
+      "steps_sha256": "5093acff6c601a668c3c93f80d19ca0645b443f7b8e2e2d27ccd5fe2fc8ecafb"
+    },
+    "O_p3_C_58359a2bbed8c2243c6e6f4f": {
+      "arm": "O",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "9eb3b28beeab0c34be7c3e05c19a1c3228ae3e6a0f3f94aac0a35bf74b318211",
+      "step_count": 500,
+      "steps_sha256": "f0763b834440b5c83753cb97cf2f0646619feeb6f808c3afaceb518f093910d8"
+    },
+    "O_p3_C_7ded96c31cc385c178bc6e42": {
+      "arm": "O",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "4d5ec0c4ae0ffa0677d45fea0eb1fb532ac6bfa72022df55f74378fdeb7f8c76",
+      "step_count": 335,
+      "steps_sha256": "8c53b55860fb462ec31a85a8e7105320f6c0e43aa6b1cbc49967f1846b4f9fc5"
+    }
+  },
+  "deleted_by_kind": {
+    "completion.json": 4,
+    "steps.jsonl": 4,
+    "request.json": 4,
+    "console.txt": 4
+  }
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "case": "self",
+    "stdout": "IDENTICAL\n"
+  },
+  {
+    "case": "altered",
+    "stdout": "DIFFERENT\n{\"field\":\"final_population\",\"left\":25,\"right\":26,\"task\":{\"arm\":\"O\",\"task\":{\"alpha\":1.0,\"cop_cost_audit\":true,\"mode\":\"B\",\"phi\":25.0,\"rr\":0.06,\"seed\":150,\"steps\":500,\"successor_capability\":3.0}}}\n"
+  }
+]

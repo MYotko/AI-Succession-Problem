@@ -1,0 +1,200 @@
+{
+  "status": "complete",
+  "machine_label": "YOTKOTEST",
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "fe199e8d67fbf0c19abebdf0c21fbbae9aa8f9bb04b1139e1902c7fde1285568",
+      "phase_b_rerun_common.py": "00ce1aa25f0edc40d520cc9ef5b1a44004afac1a4bb5760737b81aaaed50a5a1",
+      "phase_b_rerun_child.py": "f9551a5696fe4560e577471664b3296d313745c07da67ac5f73e2d8ac734b51c",
+      "phase_b_rerun_xcheck_compare.py": "060d132bb0e8006f70b6acd401d458d5970e8c57cc12010efa4897bb7137367e"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "O": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "proof": {
+    "counts": {
+      "(1, 'B')": 1500,
+      "(2, 'A')": 10800,
+      "(3, 'C')": 8100,
+      "(4, 'A')": 2700,
+      "(4, 'C')": 2700
+    },
+    "seed_tasks_checked": 25800,
+    "part4_subset": true,
+    "task_list_hashes": {
+      "1": "15d4cf8cd5b3cc4dd95cbf610aad13de1bf7604832bbda7bc275227d0de549d1",
+      "2": "976e61872b38a8e1480f851d36c94a790492eb8458bcaa9dc830d64d45c27953",
+      "3": "3da3d6e08e76baefc02589c848365f3d42c9d9a9666b788c6c8037c3e82c7580",
+      "4": "5d70950c03ebec21a58f9b31705b154169fa3b1c28592763f110b11e08576e28"
+    },
+    "identity": {
+      "executor_hashes": {
+        "phase_b_rerun_executor.py": "fe199e8d67fbf0c19abebdf0c21fbbae9aa8f9bb04b1139e1902c7fde1285568",
+        "phase_b_rerun_common.py": "00ce1aa25f0edc40d520cc9ef5b1a44004afac1a4bb5760737b81aaaed50a5a1",
+        "phase_b_rerun_child.py": "f9551a5696fe4560e577471664b3296d313745c07da67ac5f73e2d8ac734b51c",
+        "phase_b_rerun_xcheck_compare.py": "060d132bb0e8006f70b6acd401d458d5970e8c57cc12010efa4897bb7137367e"
+      },
+      "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+      "worktree_heads": {
+        "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+        "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+      },
+      "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+      "versions": {
+        "O": {
+          "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+          "numpy_version": "2.4.4"
+        },
+        "R": {
+          "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+          "numpy_version": "2.4.4"
+        }
+      }
+    },
+    "main_head_provenance_only": "43f125dfc200eeb262ef2e2e2c459c9715269592",
+    "machine_label": "YOTKOTEST",
+    "cpu_budget": 16
+  },
+  "parts": {
+    "4": {
+      "part": 4,
+      "machine_label": "YOTKOTEST",
+      "identity": {
+        "executor_hashes": {
+          "phase_b_rerun_executor.py": "fe199e8d67fbf0c19abebdf0c21fbbae9aa8f9bb04b1139e1902c7fde1285568",
+          "phase_b_rerun_common.py": "00ce1aa25f0edc40d520cc9ef5b1a44004afac1a4bb5760737b81aaaed50a5a1",
+          "phase_b_rerun_child.py": "f9551a5696fe4560e577471664b3296d313745c07da67ac5f73e2d8ac734b51c",
+          "phase_b_rerun_xcheck_compare.py": "060d132bb0e8006f70b6acd401d458d5970e8c57cc12010efa4897bb7137367e"
+        },
+        "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+        "worktree_heads": {
+          "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+          "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+        },
+        "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+        "versions": {
+          "O": {
+            "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+            "numpy_version": "2.4.4"
+          },
+          "R": {
+            "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+            "numpy_version": "2.4.4"
+          }
+        }
+      },
+      "run_count": 1,
+      "runs_file": "phase_b_rerun_smoke_repeat_R_part4_runs.csv",
+      "completions_file": "phase_b_rerun_smoke_repeat_R_part4_completions.jsonl",
+      "steps_file": "phase_b_rerun_smoke_repeat_R_part4_steps.csv",
+      "files": {
+        "phase_b_rerun_smoke_repeat_R_part4_runs.csv": {
+          "sha256_lf": "168459f06ff39245f397159289bc0f8d18b4dc1314531c35db766edcd18d52b0",
+          "row_count": 1
+        },
+        "phase_b_rerun_smoke_repeat_R_part4_completions.jsonl": {
+          "sha256_lf": "d6dfc1c18531ab1e3110f585f5e1fac6282dcff876770d68fd62ff9a5bca85bb",
+          "row_count": 1
+        },
+        "phase_b_rerun_smoke_repeat_R_part4_steps.csv": {
+          "sha256_lf": "1738d3edc5e9c18a248ec48c3859198bad6e62d693edca91f33d5b35462dc86c",
+          "row_count": 500
+        },
+        "phase_b_rerun_smoke_repeat_R_part4_interruption_journal.jsonl": {
+          "sha256_lf": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "row_count": 0
+        }
+      },
+      "runs": {
+        "R_p4_C_0de9b507be0110cdce85a9b2": {
+          "arm": "R",
+          "seed_index": 150,
+          "row_count": 1,
+          "row_sha256": "f807aabab71c90fa68a229870f7c2171d192677c4292dc2bedd4fee728586b56",
+          "step_count": 500,
+          "steps_sha256": "03d7873160c2e6f95b5450507c059ca33920b7d8c6c10d12cb15afc5620a5a9a"
+        }
+      },
+      "deleted_by_kind": {
+        "completion.json": 1,
+        "steps.jsonl": 1,
+        "request.json": 1,
+        "console.txt": 1
+      }
+    }
+  },
+  "resume_counts": {
+    "preserved": 0,
+    "restarted": 0,
+    "never_launched": 1
+  },
+  "events": [
+    {
+      "event": "worker_cap",
+      "requested_utc": "2026-09-24T11:53:15.618684+00:00",
+      "requested_local": "2026-09-24T07:53:15.616094",
+      "previous_cap": 1,
+      "cap": 1,
+      "source": "override:workers",
+      "active_at_request": 0,
+      "effective_utc": "2026-09-24T11:53:15.618705+00:00",
+      "active_at_effective": 0
+    },
+    {
+      "event": "dispatch",
+      "run_id": "R_p4_C_0de9b507be0110cdce85a9b2",
+      "pid": 36700,
+      "utc": "2026-09-24T11:53:15.651870+00:00",
+      "active_after": 1,
+      "cap": 1
+    },
+    {
+      "event": "complete",
+      "run_id": "R_p4_C_0de9b507be0110cdce85a9b2",
+      "utc": "2026-09-24T11:55:07.525243+00:00",
+      "pid": 36700
+    },
+    {
+      "event": "part_merged",
+      "part": 4,
+      "utc": "2026-09-24T11:55:07.806769+00:00",
+      "rows": 1
+    }
+  ],
+  "cpu_budget": 16,
+  "priority": "below-normal",
+  "non_registered": true,
+  "retry_events": [],
+  "files": {
+    "phase_b_rerun_smoke_repeat_R_part4_runs.csv": {
+      "sha256_lf": "168459f06ff39245f397159289bc0f8d18b4dc1314531c35db766edcd18d52b0",
+      "row_count": 1
+    },
+    "phase_b_rerun_smoke_repeat_R_part4_completions.jsonl": {
+      "sha256_lf": "d6dfc1c18531ab1e3110f585f5e1fac6282dcff876770d68fd62ff9a5bca85bb",
+      "row_count": 1
+    },
+    "phase_b_rerun_smoke_repeat_R_part4_steps.csv": {
+      "sha256_lf": "1738d3edc5e9c18a248ec48c3859198bad6e62d693edca91f33d5b35462dc86c",
+      "row_count": 500
+    },
+    "phase_b_rerun_smoke_repeat_R_part4_interruption_journal.jsonl": {
+      "sha256_lf": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "row_count": 0
+    }
+  }
+}

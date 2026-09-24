@@ -1,0 +1,44 @@
+{
+  "counts": {
+    "(1, 'B')": 1500,
+    "(2, 'A')": 10800,
+    "(3, 'C')": 8100,
+    "(4, 'A')": 2700,
+    "(4, 'C')": 2700
+  },
+  "seed_tasks_checked": 25800,
+  "part4_subset": true,
+  "task_list_hashes": {
+    "1": "15d4cf8cd5b3cc4dd95cbf610aad13de1bf7604832bbda7bc275227d0de549d1",
+    "2": "976e61872b38a8e1480f851d36c94a790492eb8458bcaa9dc830d64d45c27953",
+    "3": "3da3d6e08e76baefc02589c848365f3d42c9d9a9666b788c6c8037c3e82c7580",
+    "4": "5d70950c03ebec21a58f9b31705b154169fa3b1c28592763f110b11e08576e28"
+  },
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "2daf239aee284648e99c4a6e57e84966d05e82cb0cf95de0efc9c7371c1e79d2",
+      "phase_b_rerun_common.py": "0cd74debbf8f17cc1910df741b1f0103e5140d0250e85c26d1468a8f93623eac",
+      "phase_b_rerun_child.py": "5f3614e28f694cd2e1af8f9a3dcdc695ed99ccd12fa6546c52a262f1704a980c",
+      "phase_b_rerun_xcheck_compare.py": "41fcdd81796703de6863b3f9440412e1fc7e241f1c442a8a2bf30ea2359953a6"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "O": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "main_head_provenance_only": "43f125dfc200eeb262ef2e2e2c459c9715269592",
+  "machine_label": "YOTKOTEST",
+  "cpu_budget": 16
+}

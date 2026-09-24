@@ -1,0 +1,80 @@
+{
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "2daf239aee284648e99c4a6e57e84966d05e82cb0cf95de0efc9c7371c1e79d2",
+      "phase_b_rerun_common.py": "0cd74debbf8f17cc1910df741b1f0103e5140d0250e85c26d1468a8f93623eac",
+      "phase_b_rerun_child.py": "5f3614e28f694cd2e1af8f9a3dcdc695ed99ccd12fa6546c52a262f1704a980c",
+      "phase_b_rerun_xcheck_compare.py": "41fcdd81796703de6863b3f9440412e1fc7e241f1c442a8a2bf30ea2359953a6"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "O": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "task_ids": [
+    "O_p3_C_0de9b507be0110cdce85a9b2"
+  ],
+  "machine_label": "YOTKOTEST",
+  "events": [
+    {
+      "event": "worker_cap",
+      "requested_utc": "2026-09-24T11:29:21.533033+00:00",
+      "requested_local": "2026-09-24T07:29:21.525181",
+      "previous_cap": 1,
+      "cap": 1,
+      "source": "override:workers",
+      "active_at_request": 0,
+      "effective_utc": "2026-09-24T11:29:21.533047+00:00",
+      "active_at_effective": 0
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+      "pid": 43768,
+      "utc": "2026-09-24T11:29:21.658389+00:00",
+      "active_after": 1,
+      "cap": 1
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+      "utc": "2026-09-24T11:30:32.283453+00:00",
+      "pid": 43768
+    },
+    {
+      "event": "part_merged",
+      "part": 3,
+      "utc": "2026-09-24T11:30:32.421657+00:00",
+      "rows": 1
+    }
+  ],
+  "resume_counts": {
+    "preserved": 0,
+    "restarted": 0,
+    "never_launched": 1
+  },
+  "elapsed_seconds": 71.59721610002453,
+  "cpu_budget": 16,
+  "priority": "below-normal",
+  "retry_events": [
+    {
+      "utc": "2026-09-24T11:22:21.997256+00:00",
+      "operation": "read C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_rerun_smoke_progress.json",
+      "error": "[Errno 13] Permission denied: 'C:\\\\Users\\\\matty\\\\Dev\\\\AI-Succession-Problem\\\\simulation\\\\diagnostics\\\\phase_b_rerun_smoke_progress.json'"
+    }
+  ],
+  "last_cap": 1,
+  "last_cap_source": "override:workers"
+}

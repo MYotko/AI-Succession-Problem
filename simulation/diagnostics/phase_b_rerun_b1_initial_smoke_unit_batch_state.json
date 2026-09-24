@@ -1,0 +1,47 @@
+{
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "ca9194ef9bce1fdec0629f1ebaad752ccf876296a87e0675e8d110733c4b810b",
+      "phase_b_rerun_common.py": "8c342d8fdaf342db026697910efe5df45e2c8aa01417656790d135f3cbc70bc5",
+      "phase_b_rerun_child.py": "4a2274cf4d5bcf95c800e95048a26fe4eb360dd4e5892afe9e11c560ac33e1b4",
+      "phase_b_rerun_xcheck_compare.py": "41fcdd81796703de6863b3f9440412e1fc7e241f1c442a8a2bf30ea2359953a6"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "fixture": "not model output"
+    }
+  },
+  "task_ids": [
+    "O_p2_A_333d7e2994dc3327f52160a6"
+  ],
+  "machine_label": "YOTKOTEST",
+  "events": [
+    {
+      "event": "worker_cap",
+      "requested_utc": "2026-09-24T11:16:17.328728+00:00",
+      "requested_local": "2026-09-24T07:16:17.325954",
+      "previous_cap": 1,
+      "cap": 10,
+      "source": "schedule:rule",
+      "active_at_request": 0,
+      "effective_utc": "2026-09-24T11:16:17.328736+00:00",
+      "active_at_effective": 0
+    }
+  ],
+  "resume_counts": {
+    "preserved": 1,
+    "restarted": 0,
+    "never_launched": 0
+  },
+  "elapsed_seconds": 0.02222840004833415,
+  "cpu_budget": 16,
+  "priority": "below-normal",
+  "retry_events": [],
+  "last_cap": 10,
+  "last_cap_source": "schedule:rule"
+}

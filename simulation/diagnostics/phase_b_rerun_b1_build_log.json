@@ -1,0 +1,33 @@
+{
+  "tool_layer_workarounds": [
+    "PowerShell stripped quotes in a Python -c writer; passed the unchanged writer as hexadecimal-encoded source instead.",
+    "The tool isolate lacked TextEncoder; encoded the ASCII writer using character codes instead.",
+    "Windows rejected an oversized authoring command; split the unchanged source into smaller file-write commands."
+  ],
+  "executor_self_fixes": [
+    "Added the Linux nice increment of 10 before model imports.",
+    "Restored the last worker cap and source from execution state on resume.",
+    "Added completion-payload hash checks and retained invalid partial completion files before restart.",
+    "Moved part merges to a background thread so progress and worker control remain responsive during large merges.",
+    "Added an operating-system controller lock to prevent concurrent dispatch into the same output set.",
+    "Handled incomplete model initialization when retaining per-step evidence for an original error row.",
+    "Handled resume after the last completion but before merging, retained startup warnings, and strengthened source and imported-part checks.",
+    "Protected the evidence directory itself in the write guard and made ETA retain the previous cap while control input is invalid.",
+    "Extended the per-step evidence serializer to handle NumPy arrays as well as scalars.",
+    "Bound cross-machine environment versions to the matching IDENTICAL crosscheck while preserving strict same-machine version checks.",
+    "Consolidated interrupted per-run process files into verified per-part journals.",
+    "Changed large-file hashing and part copying to bounded-memory streaming.",
+    "Measured child wall time from initialization and rechecked interpreter, NumPy, executor, and worktree identities before each model call.",
+    "Disabled optional Git index locks and added Linux thread verification from libraries listed in /proc/self/maps.",
+    "Bound a restored worker cap by the destination machine's CPU budget."
+  ],
+  "interpreter_readiness": {
+    "ready": true,
+    "attempts": 5,
+    "elapsed_seconds": 241.4891047999845,
+    "python": "3.13.15",
+    "numpy": "2.4.4"
+  },
+  "registered_runs_executed": 0,
+  "initial_cohort_retained": true
+}

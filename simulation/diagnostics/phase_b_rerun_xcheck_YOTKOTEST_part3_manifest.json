@@ -1,0 +1,90 @@
+{
+  "part": 3,
+  "machine_label": "YOTKOTEST",
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "fe199e8d67fbf0c19abebdf0c21fbbae9aa8f9bb04b1139e1902c7fde1285568",
+      "phase_b_rerun_common.py": "00ce1aa25f0edc40d520cc9ef5b1a44004afac1a4bb5760737b81aaaed50a5a1",
+      "phase_b_rerun_child.py": "f9551a5696fe4560e577471664b3296d313745c07da67ac5f73e2d8ac734b51c",
+      "phase_b_rerun_xcheck_compare.py": "060d132bb0e8006f70b6acd401d458d5970e8c57cc12010efa4897bb7137367e"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "O": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "run_count": 4,
+  "runs_file": "phase_b_rerun_xcheck_YOTKOTEST_part3_runs.csv",
+  "completions_file": "phase_b_rerun_xcheck_YOTKOTEST_part3_completions.jsonl",
+  "steps_file": "phase_b_rerun_xcheck_YOTKOTEST_part3_steps.csv",
+  "files": {
+    "phase_b_rerun_xcheck_YOTKOTEST_part3_runs.csv": {
+      "sha256_lf": "145aaa04020ba5d455edff4f7d353a4fcb23116e7d5f4de72906e5eff57f8ded",
+      "row_count": 4
+    },
+    "phase_b_rerun_xcheck_YOTKOTEST_part3_completions.jsonl": {
+      "sha256_lf": "550871715848e4de35fd7767971b5e35a39986d54d13c126908bb5af05f4e42f",
+      "row_count": 4
+    },
+    "phase_b_rerun_xcheck_YOTKOTEST_part3_steps.csv": {
+      "sha256_lf": "26f55dab85af456cbc97fa3f32717411527808e4a5edf23b3629d01fc702870b",
+      "row_count": 1835
+    },
+    "phase_b_rerun_xcheck_YOTKOTEST_part3_interruption_journal.jsonl": {
+      "sha256_lf": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "row_count": 0
+    }
+  },
+  "runs": {
+    "O_p3_C_0de9b507be0110cdce85a9b2": {
+      "arm": "O",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "0e7217c81488d94fb056e38807d82d9f26c5678092450ea59c8135685ded9c3d",
+      "step_count": 500,
+      "steps_sha256": "9e8c7e995dc89229886091f3c0d332ff8c7f8dcc2fecb8bc81295b2cf8d76204"
+    },
+    "O_p3_C_451abe9d26b28c4cef9ccd3d": {
+      "arm": "O",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "4f1b4ebf127277c8691001888e3a97f82b01b9d25326ea24d4964a984eff3551",
+      "step_count": 500,
+      "steps_sha256": "5093acff6c601a668c3c93f80d19ca0645b443f7b8e2e2d27ccd5fe2fc8ecafb"
+    },
+    "O_p3_C_58359a2bbed8c2243c6e6f4f": {
+      "arm": "O",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "52764c7add4e84da0ce922b7d0d018192d5f5d38d9fe44e4e6dc7bed836eb67f",
+      "step_count": 500,
+      "steps_sha256": "f0763b834440b5c83753cb97cf2f0646619feeb6f808c3afaceb518f093910d8"
+    },
+    "O_p3_C_7ded96c31cc385c178bc6e42": {
+      "arm": "O",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "48911be4882652033366900698a68134e66651c5d88dc5a5219556af592ffe93",
+      "step_count": 335,
+      "steps_sha256": "8c53b55860fb462ec31a85a8e7105320f6c0e43aa6b1cbc49967f1846b4f9fc5"
+    }
+  },
+  "deleted_by_kind": {
+    "completion.json": 4,
+    "steps.jsonl": 4,
+    "request.json": 4,
+    "console.txt": 4
+  }
+}

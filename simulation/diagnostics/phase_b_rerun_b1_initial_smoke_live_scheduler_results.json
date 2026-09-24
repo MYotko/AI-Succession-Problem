@@ -1,0 +1,1238 @@
+{
+  "initial_cap": 4,
+  "reduced": {
+    "updated_utc": "2026-09-24T11:22:27.063296+00:00",
+    "status": "running",
+    "machine_label": "YOTKOTEST",
+    "controller_pid": 20772,
+    "cpu_budget": 16,
+    "maximum_workers": 15,
+    "parts": {
+      "1": {
+        "completed": 1,
+        "running": 1,
+        "pending": 0,
+        "errors": 0
+      },
+      "2": {
+        "completed": 1,
+        "running": 1,
+        "pending": 2,
+        "errors": 0
+      },
+      "3": {
+        "completed": 0,
+        "running": 0,
+        "pending": 4,
+        "errors": 0
+      },
+      "4": {
+        "completed": 0,
+        "running": 0,
+        "pending": 6,
+        "errors": 0
+      }
+    },
+    "current_cap": 2,
+    "requested_cap": 2,
+    "cap_source": "override:workers",
+    "active_children": [
+      {
+        "pid": 53680,
+        "run_id": "O_p1_B_5d277a51fca4df2641468951",
+        "started_utc": "2026-09-24T11:20:35.887571+00:00"
+      },
+      {
+        "pid": 51924,
+        "run_id": "O_p2_A_c0a5bd479a50328512c32432",
+        "started_utc": "2026-09-24T11:20:35.941903+00:00"
+      }
+    ],
+    "elapsed_seconds": 111.35585739999078,
+    "mean_wall_seconds_per_arm": {
+      "O": 105.76038525000331,
+      "R": null
+    },
+    "estimated_finish_local": null,
+    "eta_assumption": "current schedule and override expiry",
+    "resume_counts": {
+      "preserved": 0,
+      "restarted": 0,
+      "never_launched": 16
+    },
+    "schedule_path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_rerun_smoke_schedule_YOTKOTEST.json",
+    "runtime_control_path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_rerun_smoke_runtime_control_YOTKOTEST.json",
+    "events": [
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:20:35.732879+00:00",
+        "requested_local": "2026-09-24T07:20:35.718825",
+        "previous_cap": 1,
+        "cap": 4,
+        "source": "override:workers",
+        "active_at_request": 0,
+        "effective_utc": "2026-09-24T11:20:35.732912+00:00",
+        "active_at_effective": 0
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p1_B_5d277a51fca4df2641468951",
+        "pid": 53680,
+        "utc": "2026-09-24T11:20:35.887592+00:00",
+        "active_after": 1,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p1_B_f919e2ba22ecc161f3be7cdc",
+        "pid": 38672,
+        "utc": "2026-09-24T11:20:35.905263+00:00",
+        "active_after": 2,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_333d7e2994dc3327f52160a6",
+        "pid": 54108,
+        "utc": "2026-09-24T11:20:35.923229+00:00",
+        "active_after": 3,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_c0a5bd479a50328512c32432",
+        "pid": 51924,
+        "utc": "2026-09-24T11:20:35.941921+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:20:41.003769+00:00",
+        "requested_local": "2026-09-24T07:20:40.995686",
+        "previous_cap": 4,
+        "cap": 2,
+        "source": "override:workers",
+        "active_at_request": 4,
+        "effective_utc": "2026-09-24T11:22:25.043951+00:00",
+        "active_at_effective": 2
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p1_B_f919e2ba22ecc161f3be7cdc",
+        "utc": "2026-09-24T11:22:19.972673+00:00",
+        "pid": 38672
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p2_A_333d7e2994dc3327f52160a6",
+        "utc": "2026-09-24T11:22:25.043250+00:00",
+        "pid": 54108
+      }
+    ]
+  },
+  "raised": {
+    "updated_utc": "2026-09-24T11:22:32.243844+00:00",
+    "status": "running",
+    "machine_label": "YOTKOTEST",
+    "controller_pid": 20772,
+    "cpu_budget": 16,
+    "maximum_workers": 15,
+    "parts": {
+      "1": {
+        "completed": 2,
+        "running": 0,
+        "pending": 0,
+        "errors": 0
+      },
+      "2": {
+        "completed": 2,
+        "running": 2,
+        "pending": 0,
+        "errors": 0
+      },
+      "3": {
+        "completed": 0,
+        "running": 2,
+        "pending": 2,
+        "errors": 0
+      },
+      "4": {
+        "completed": 0,
+        "running": 0,
+        "pending": 6,
+        "errors": 0
+      }
+    },
+    "current_cap": 4,
+    "requested_cap": 4,
+    "cap_source": "override:workers",
+    "active_children": [
+      {
+        "pid": 54800,
+        "run_id": "O_p2_A_1838f22be8317bf11ca2d2c7",
+        "started_utc": "2026-09-24T11:22:27.302728+00:00"
+      },
+      {
+        "pid": 54580,
+        "run_id": "O_p2_A_2fa60758a32b0829125ca58a",
+        "started_utc": "2026-09-24T11:22:27.322032+00:00"
+      },
+      {
+        "pid": 15996,
+        "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+        "started_utc": "2026-09-24T11:22:30.589213+00:00"
+      },
+      {
+        "pid": 14860,
+        "run_id": "O_p3_C_451abe9d26b28c4cef9ccd3d",
+        "started_utc": "2026-09-24T11:22:32.243753+00:00"
+      }
+    ],
+    "elapsed_seconds": 116.53639359999215,
+    "mean_wall_seconds_per_arm": {
+      "O": 110.1682092500123,
+      "R": null
+    },
+    "estimated_finish_local": null,
+    "eta_assumption": "current schedule and override expiry",
+    "resume_counts": {
+      "preserved": 0,
+      "restarted": 0,
+      "never_launched": 16
+    },
+    "schedule_path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_rerun_smoke_schedule_YOTKOTEST.json",
+    "runtime_control_path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_rerun_smoke_runtime_control_YOTKOTEST.json",
+    "events": [
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:20:35.732879+00:00",
+        "requested_local": "2026-09-24T07:20:35.718825",
+        "previous_cap": 1,
+        "cap": 4,
+        "source": "override:workers",
+        "active_at_request": 0,
+        "effective_utc": "2026-09-24T11:20:35.732912+00:00",
+        "active_at_effective": 0
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p1_B_5d277a51fca4df2641468951",
+        "pid": 53680,
+        "utc": "2026-09-24T11:20:35.887592+00:00",
+        "active_after": 1,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p1_B_f919e2ba22ecc161f3be7cdc",
+        "pid": 38672,
+        "utc": "2026-09-24T11:20:35.905263+00:00",
+        "active_after": 2,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_333d7e2994dc3327f52160a6",
+        "pid": 54108,
+        "utc": "2026-09-24T11:20:35.923229+00:00",
+        "active_after": 3,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_c0a5bd479a50328512c32432",
+        "pid": 51924,
+        "utc": "2026-09-24T11:20:35.941921+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:20:41.003769+00:00",
+        "requested_local": "2026-09-24T07:20:40.995686",
+        "previous_cap": 4,
+        "cap": 2,
+        "source": "override:workers",
+        "active_at_request": 4,
+        "effective_utc": "2026-09-24T11:22:25.043951+00:00",
+        "active_at_effective": 2
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p1_B_f919e2ba22ecc161f3be7cdc",
+        "utc": "2026-09-24T11:22:19.972673+00:00",
+        "pid": 38672
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p2_A_333d7e2994dc3327f52160a6",
+        "utc": "2026-09-24T11:22:25.043250+00:00",
+        "pid": 54108
+      },
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:22:27.281080+00:00",
+        "requested_local": "2026-09-24T07:22:27.278103",
+        "previous_cap": 2,
+        "cap": 4,
+        "source": "override:workers",
+        "active_at_request": 2,
+        "effective_utc": "2026-09-24T11:22:27.281101+00:00",
+        "active_at_effective": 2
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_1838f22be8317bf11ca2d2c7",
+        "pid": 54800,
+        "utc": "2026-09-24T11:22:27.302746+00:00",
+        "active_after": 3,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_2fa60758a32b0829125ca58a",
+        "pid": 54580,
+        "utc": "2026-09-24T11:22:27.322051+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p1_B_5d277a51fca4df2641468951",
+        "utc": "2026-09-24T11:22:30.566244+00:00",
+        "pid": 53680
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+        "pid": 15996,
+        "utc": "2026-09-24T11:22:30.589229+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "part_merged",
+        "part": 1,
+        "utc": "2026-09-24T11:22:30.887175+00:00",
+        "rows": 2
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p2_A_c0a5bd479a50328512c32432",
+        "utc": "2026-09-24T11:22:32.224426+00:00",
+        "pid": 51924
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p3_C_451abe9d26b28c4cef9ccd3d",
+        "pid": 14860,
+        "utc": "2026-09-24T11:22:32.243773+00:00",
+        "active_after": 4,
+        "cap": 4
+      }
+    ]
+  },
+  "named_mode": {
+    "updated_utc": "2026-09-24T11:22:37.445896+00:00",
+    "status": "running",
+    "machine_label": "YOTKOTEST",
+    "controller_pid": 20772,
+    "cpu_budget": 16,
+    "maximum_workers": 15,
+    "parts": {
+      "1": {
+        "completed": 2,
+        "running": 0,
+        "pending": 0,
+        "errors": 0
+      },
+      "2": {
+        "completed": 2,
+        "running": 2,
+        "pending": 0,
+        "errors": 0
+      },
+      "3": {
+        "completed": 0,
+        "running": 4,
+        "pending": 0,
+        "errors": 0
+      },
+      "4": {
+        "completed": 0,
+        "running": 4,
+        "pending": 2,
+        "errors": 0
+      }
+    },
+    "current_cap": 10,
+    "requested_cap": 10,
+    "cap_source": "override:work",
+    "active_children": [
+      {
+        "pid": 54800,
+        "run_id": "O_p2_A_1838f22be8317bf11ca2d2c7",
+        "started_utc": "2026-09-24T11:22:27.302728+00:00"
+      },
+      {
+        "pid": 54580,
+        "run_id": "O_p2_A_2fa60758a32b0829125ca58a",
+        "started_utc": "2026-09-24T11:22:27.322032+00:00"
+      },
+      {
+        "pid": 15996,
+        "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+        "started_utc": "2026-09-24T11:22:30.589213+00:00"
+      },
+      {
+        "pid": 14860,
+        "run_id": "O_p3_C_451abe9d26b28c4cef9ccd3d",
+        "started_utc": "2026-09-24T11:22:32.243753+00:00"
+      },
+      {
+        "pid": 12688,
+        "run_id": "O_p3_C_58359a2bbed8c2243c6e6f4f",
+        "started_utc": "2026-09-24T11:22:32.487998+00:00"
+      },
+      {
+        "pid": 49332,
+        "run_id": "O_p3_C_7ded96c31cc385c178bc6e42",
+        "started_utc": "2026-09-24T11:22:32.508240+00:00"
+      },
+      {
+        "pid": 13228,
+        "run_id": "R_p4_A_1838f22be8317bf11ca2d2c7",
+        "started_utc": "2026-09-24T11:22:32.528189+00:00"
+      },
+      {
+        "pid": 49168,
+        "run_id": "R_p4_A_2fa60758a32b0829125ca58a",
+        "started_utc": "2026-09-24T11:22:32.548606+00:00"
+      },
+      {
+        "pid": 55052,
+        "run_id": "R_p4_C_0de9b507be0110cdce85a9b2",
+        "started_utc": "2026-09-24T11:22:32.571251+00:00"
+      },
+      {
+        "pid": 54440,
+        "run_id": "R_p4_C_451abe9d26b28c4cef9ccd3d",
+        "started_utc": "2026-09-24T11:22:32.593374+00:00"
+      }
+    ],
+    "elapsed_seconds": 121.7384752999642,
+    "mean_wall_seconds_per_arm": {
+      "O": 110.1682092500123,
+      "R": null
+    },
+    "estimated_finish_local": null,
+    "eta_assumption": "current schedule and override expiry",
+    "resume_counts": {
+      "preserved": 0,
+      "restarted": 0,
+      "never_launched": 16
+    },
+    "schedule_path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_rerun_smoke_schedule_YOTKOTEST.json",
+    "runtime_control_path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_rerun_smoke_runtime_control_YOTKOTEST.json",
+    "events": [
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:20:35.732879+00:00",
+        "requested_local": "2026-09-24T07:20:35.718825",
+        "previous_cap": 1,
+        "cap": 4,
+        "source": "override:workers",
+        "active_at_request": 0,
+        "effective_utc": "2026-09-24T11:20:35.732912+00:00",
+        "active_at_effective": 0
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p1_B_5d277a51fca4df2641468951",
+        "pid": 53680,
+        "utc": "2026-09-24T11:20:35.887592+00:00",
+        "active_after": 1,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p1_B_f919e2ba22ecc161f3be7cdc",
+        "pid": 38672,
+        "utc": "2026-09-24T11:20:35.905263+00:00",
+        "active_after": 2,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_333d7e2994dc3327f52160a6",
+        "pid": 54108,
+        "utc": "2026-09-24T11:20:35.923229+00:00",
+        "active_after": 3,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_c0a5bd479a50328512c32432",
+        "pid": 51924,
+        "utc": "2026-09-24T11:20:35.941921+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:20:41.003769+00:00",
+        "requested_local": "2026-09-24T07:20:40.995686",
+        "previous_cap": 4,
+        "cap": 2,
+        "source": "override:workers",
+        "active_at_request": 4,
+        "effective_utc": "2026-09-24T11:22:25.043951+00:00",
+        "active_at_effective": 2
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p1_B_f919e2ba22ecc161f3be7cdc",
+        "utc": "2026-09-24T11:22:19.972673+00:00",
+        "pid": 38672
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p2_A_333d7e2994dc3327f52160a6",
+        "utc": "2026-09-24T11:22:25.043250+00:00",
+        "pid": 54108
+      },
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:22:27.281080+00:00",
+        "requested_local": "2026-09-24T07:22:27.278103",
+        "previous_cap": 2,
+        "cap": 4,
+        "source": "override:workers",
+        "active_at_request": 2,
+        "effective_utc": "2026-09-24T11:22:27.281101+00:00",
+        "active_at_effective": 2
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_1838f22be8317bf11ca2d2c7",
+        "pid": 54800,
+        "utc": "2026-09-24T11:22:27.302746+00:00",
+        "active_after": 3,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_2fa60758a32b0829125ca58a",
+        "pid": 54580,
+        "utc": "2026-09-24T11:22:27.322051+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p1_B_5d277a51fca4df2641468951",
+        "utc": "2026-09-24T11:22:30.566244+00:00",
+        "pid": 53680
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+        "pid": 15996,
+        "utc": "2026-09-24T11:22:30.589229+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "part_merged",
+        "part": 1,
+        "utc": "2026-09-24T11:22:30.887175+00:00",
+        "rows": 2
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p2_A_c0a5bd479a50328512c32432",
+        "utc": "2026-09-24T11:22:32.224426+00:00",
+        "pid": 51924
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p3_C_451abe9d26b28c4cef9ccd3d",
+        "pid": 14860,
+        "utc": "2026-09-24T11:22:32.243773+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:22:32.469055+00:00",
+        "requested_local": "2026-09-24T07:22:32.459386",
+        "previous_cap": 4,
+        "cap": 10,
+        "source": "override:work",
+        "active_at_request": 4,
+        "effective_utc": "2026-09-24T11:22:32.469069+00:00",
+        "active_at_effective": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p3_C_58359a2bbed8c2243c6e6f4f",
+        "pid": 12688,
+        "utc": "2026-09-24T11:22:32.488028+00:00",
+        "active_after": 5,
+        "cap": 10
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p3_C_7ded96c31cc385c178bc6e42",
+        "pid": 49332,
+        "utc": "2026-09-24T11:22:32.508260+00:00",
+        "active_after": 6,
+        "cap": 10
+      },
+      {
+        "event": "dispatch",
+        "run_id": "R_p4_A_1838f22be8317bf11ca2d2c7",
+        "pid": 13228,
+        "utc": "2026-09-24T11:22:32.528208+00:00",
+        "active_after": 7,
+        "cap": 10
+      },
+      {
+        "event": "dispatch",
+        "run_id": "R_p4_A_2fa60758a32b0829125ca58a",
+        "pid": 49168,
+        "utc": "2026-09-24T11:22:32.548637+00:00",
+        "active_after": 8,
+        "cap": 10
+      },
+      {
+        "event": "dispatch",
+        "run_id": "R_p4_C_0de9b507be0110cdce85a9b2",
+        "pid": 55052,
+        "utc": "2026-09-24T11:22:32.571271+00:00",
+        "active_after": 9,
+        "cap": 10
+      },
+      {
+        "event": "dispatch",
+        "run_id": "R_p4_C_451abe9d26b28c4cef9ccd3d",
+        "pid": 54440,
+        "utc": "2026-09-24T11:22:32.593398+00:00",
+        "active_after": 10,
+        "cap": 10
+      }
+    ]
+  },
+  "expired": {
+    "updated_utc": "2026-09-24T11:22:42.601247+00:00",
+    "status": "running",
+    "machine_label": "YOTKOTEST",
+    "controller_pid": 20772,
+    "cpu_budget": 16,
+    "maximum_workers": 15,
+    "parts": {
+      "1": {
+        "completed": 2,
+        "running": 0,
+        "pending": 0,
+        "errors": 0
+      },
+      "2": {
+        "completed": 2,
+        "running": 2,
+        "pending": 0,
+        "errors": 0
+      },
+      "3": {
+        "completed": 0,
+        "running": 4,
+        "pending": 0,
+        "errors": 0
+      },
+      "4": {
+        "completed": 0,
+        "running": 4,
+        "pending": 2,
+        "errors": 0
+      }
+    },
+    "current_cap": 10,
+    "requested_cap": 10,
+    "cap_source": "schedule:rule",
+    "active_children": [
+      {
+        "pid": 54800,
+        "run_id": "O_p2_A_1838f22be8317bf11ca2d2c7",
+        "started_utc": "2026-09-24T11:22:27.302728+00:00"
+      },
+      {
+        "pid": 54580,
+        "run_id": "O_p2_A_2fa60758a32b0829125ca58a",
+        "started_utc": "2026-09-24T11:22:27.322032+00:00"
+      },
+      {
+        "pid": 15996,
+        "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+        "started_utc": "2026-09-24T11:22:30.589213+00:00"
+      },
+      {
+        "pid": 14860,
+        "run_id": "O_p3_C_451abe9d26b28c4cef9ccd3d",
+        "started_utc": "2026-09-24T11:22:32.243753+00:00"
+      },
+      {
+        "pid": 12688,
+        "run_id": "O_p3_C_58359a2bbed8c2243c6e6f4f",
+        "started_utc": "2026-09-24T11:22:32.487998+00:00"
+      },
+      {
+        "pid": 49332,
+        "run_id": "O_p3_C_7ded96c31cc385c178bc6e42",
+        "started_utc": "2026-09-24T11:22:32.508240+00:00"
+      },
+      {
+        "pid": 13228,
+        "run_id": "R_p4_A_1838f22be8317bf11ca2d2c7",
+        "started_utc": "2026-09-24T11:22:32.528189+00:00"
+      },
+      {
+        "pid": 49168,
+        "run_id": "R_p4_A_2fa60758a32b0829125ca58a",
+        "started_utc": "2026-09-24T11:22:32.548606+00:00"
+      },
+      {
+        "pid": 55052,
+        "run_id": "R_p4_C_0de9b507be0110cdce85a9b2",
+        "started_utc": "2026-09-24T11:22:32.571251+00:00"
+      },
+      {
+        "pid": 54440,
+        "run_id": "R_p4_C_451abe9d26b28c4cef9ccd3d",
+        "started_utc": "2026-09-24T11:22:32.593374+00:00"
+      }
+    ],
+    "elapsed_seconds": 126.89381789998151,
+    "mean_wall_seconds_per_arm": {
+      "O": 110.1682092500123,
+      "R": null
+    },
+    "estimated_finish_local": null,
+    "eta_assumption": "current schedule and override expiry",
+    "resume_counts": {
+      "preserved": 0,
+      "restarted": 0,
+      "never_launched": 16
+    },
+    "schedule_path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_rerun_smoke_schedule_YOTKOTEST.json",
+    "runtime_control_path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_rerun_smoke_runtime_control_YOTKOTEST.json",
+    "events": [
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:20:35.732879+00:00",
+        "requested_local": "2026-09-24T07:20:35.718825",
+        "previous_cap": 1,
+        "cap": 4,
+        "source": "override:workers",
+        "active_at_request": 0,
+        "effective_utc": "2026-09-24T11:20:35.732912+00:00",
+        "active_at_effective": 0
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p1_B_5d277a51fca4df2641468951",
+        "pid": 53680,
+        "utc": "2026-09-24T11:20:35.887592+00:00",
+        "active_after": 1,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p1_B_f919e2ba22ecc161f3be7cdc",
+        "pid": 38672,
+        "utc": "2026-09-24T11:20:35.905263+00:00",
+        "active_after": 2,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_333d7e2994dc3327f52160a6",
+        "pid": 54108,
+        "utc": "2026-09-24T11:20:35.923229+00:00",
+        "active_after": 3,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_c0a5bd479a50328512c32432",
+        "pid": 51924,
+        "utc": "2026-09-24T11:20:35.941921+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:20:41.003769+00:00",
+        "requested_local": "2026-09-24T07:20:40.995686",
+        "previous_cap": 4,
+        "cap": 2,
+        "source": "override:workers",
+        "active_at_request": 4,
+        "effective_utc": "2026-09-24T11:22:25.043951+00:00",
+        "active_at_effective": 2
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p1_B_f919e2ba22ecc161f3be7cdc",
+        "utc": "2026-09-24T11:22:19.972673+00:00",
+        "pid": 38672
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p2_A_333d7e2994dc3327f52160a6",
+        "utc": "2026-09-24T11:22:25.043250+00:00",
+        "pid": 54108
+      },
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:22:27.281080+00:00",
+        "requested_local": "2026-09-24T07:22:27.278103",
+        "previous_cap": 2,
+        "cap": 4,
+        "source": "override:workers",
+        "active_at_request": 2,
+        "effective_utc": "2026-09-24T11:22:27.281101+00:00",
+        "active_at_effective": 2
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_1838f22be8317bf11ca2d2c7",
+        "pid": 54800,
+        "utc": "2026-09-24T11:22:27.302746+00:00",
+        "active_after": 3,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_2fa60758a32b0829125ca58a",
+        "pid": 54580,
+        "utc": "2026-09-24T11:22:27.322051+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p1_B_5d277a51fca4df2641468951",
+        "utc": "2026-09-24T11:22:30.566244+00:00",
+        "pid": 53680
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+        "pid": 15996,
+        "utc": "2026-09-24T11:22:30.589229+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "part_merged",
+        "part": 1,
+        "utc": "2026-09-24T11:22:30.887175+00:00",
+        "rows": 2
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p2_A_c0a5bd479a50328512c32432",
+        "utc": "2026-09-24T11:22:32.224426+00:00",
+        "pid": 51924
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p3_C_451abe9d26b28c4cef9ccd3d",
+        "pid": 14860,
+        "utc": "2026-09-24T11:22:32.243773+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:22:32.469055+00:00",
+        "requested_local": "2026-09-24T07:22:32.459386",
+        "previous_cap": 4,
+        "cap": 10,
+        "source": "override:work",
+        "active_at_request": 4,
+        "effective_utc": "2026-09-24T11:22:32.469069+00:00",
+        "active_at_effective": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p3_C_58359a2bbed8c2243c6e6f4f",
+        "pid": 12688,
+        "utc": "2026-09-24T11:22:32.488028+00:00",
+        "active_after": 5,
+        "cap": 10
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p3_C_7ded96c31cc385c178bc6e42",
+        "pid": 49332,
+        "utc": "2026-09-24T11:22:32.508260+00:00",
+        "active_after": 6,
+        "cap": 10
+      },
+      {
+        "event": "dispatch",
+        "run_id": "R_p4_A_1838f22be8317bf11ca2d2c7",
+        "pid": 13228,
+        "utc": "2026-09-24T11:22:32.528208+00:00",
+        "active_after": 7,
+        "cap": 10
+      },
+      {
+        "event": "dispatch",
+        "run_id": "R_p4_A_2fa60758a32b0829125ca58a",
+        "pid": 49168,
+        "utc": "2026-09-24T11:22:32.548637+00:00",
+        "active_after": 8,
+        "cap": 10
+      },
+      {
+        "event": "dispatch",
+        "run_id": "R_p4_C_0de9b507be0110cdce85a9b2",
+        "pid": 55052,
+        "utc": "2026-09-24T11:22:32.571271+00:00",
+        "active_after": 9,
+        "cap": 10
+      },
+      {
+        "event": "dispatch",
+        "run_id": "R_p4_C_451abe9d26b28c4cef9ccd3d",
+        "pid": 54440,
+        "utc": "2026-09-24T11:22:32.593398+00:00",
+        "active_after": 10,
+        "cap": 10
+      },
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:22:37.688231+00:00",
+        "requested_local": "2026-09-24T07:22:37.676600",
+        "previous_cap": 10,
+        "cap": 10,
+        "source": "schedule:rule",
+        "active_at_request": 10,
+        "effective_utc": "2026-09-24T11:22:37.688257+00:00",
+        "active_at_effective": 10
+      }
+    ]
+  },
+  "refused": {
+    "updated_utc": "2026-09-24T11:22:47.700497+00:00",
+    "status": "running",
+    "machine_label": "YOTKOTEST",
+    "controller_pid": 20772,
+    "cpu_budget": 16,
+    "maximum_workers": 15,
+    "parts": {
+      "1": {
+        "completed": 2,
+        "running": 0,
+        "pending": 0,
+        "errors": 0
+      },
+      "2": {
+        "completed": 2,
+        "running": 2,
+        "pending": 0,
+        "errors": 0
+      },
+      "3": {
+        "completed": 0,
+        "running": 4,
+        "pending": 0,
+        "errors": 0
+      },
+      "4": {
+        "completed": 0,
+        "running": 4,
+        "pending": 2,
+        "errors": 0
+      }
+    },
+    "current_cap": 10,
+    "requested_cap": 10,
+    "cap_source": "schedule:rule",
+    "active_children": [
+      {
+        "pid": 54800,
+        "run_id": "O_p2_A_1838f22be8317bf11ca2d2c7",
+        "started_utc": "2026-09-24T11:22:27.302728+00:00"
+      },
+      {
+        "pid": 54580,
+        "run_id": "O_p2_A_2fa60758a32b0829125ca58a",
+        "started_utc": "2026-09-24T11:22:27.322032+00:00"
+      },
+      {
+        "pid": 15996,
+        "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+        "started_utc": "2026-09-24T11:22:30.589213+00:00"
+      },
+      {
+        "pid": 14860,
+        "run_id": "O_p3_C_451abe9d26b28c4cef9ccd3d",
+        "started_utc": "2026-09-24T11:22:32.243753+00:00"
+      },
+      {
+        "pid": 12688,
+        "run_id": "O_p3_C_58359a2bbed8c2243c6e6f4f",
+        "started_utc": "2026-09-24T11:22:32.487998+00:00"
+      },
+      {
+        "pid": 49332,
+        "run_id": "O_p3_C_7ded96c31cc385c178bc6e42",
+        "started_utc": "2026-09-24T11:22:32.508240+00:00"
+      },
+      {
+        "pid": 13228,
+        "run_id": "R_p4_A_1838f22be8317bf11ca2d2c7",
+        "started_utc": "2026-09-24T11:22:32.528189+00:00"
+      },
+      {
+        "pid": 49168,
+        "run_id": "R_p4_A_2fa60758a32b0829125ca58a",
+        "started_utc": "2026-09-24T11:22:32.548606+00:00"
+      },
+      {
+        "pid": 55052,
+        "run_id": "R_p4_C_0de9b507be0110cdce85a9b2",
+        "started_utc": "2026-09-24T11:22:32.571251+00:00"
+      },
+      {
+        "pid": 54440,
+        "run_id": "R_p4_C_451abe9d26b28c4cef9ccd3d",
+        "started_utc": "2026-09-24T11:22:32.593374+00:00"
+      }
+    ],
+    "elapsed_seconds": 131.99306730000535,
+    "mean_wall_seconds_per_arm": {
+      "O": 110.1682092500123,
+      "R": null
+    },
+    "estimated_finish_local": null,
+    "eta_assumption": "previous cap retained while control is invalid",
+    "resume_counts": {
+      "preserved": 0,
+      "restarted": 0,
+      "never_launched": 16
+    },
+    "schedule_path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_rerun_smoke_schedule_YOTKOTEST.json",
+    "runtime_control_path": "C:\\Users\\matty\\Dev\\AI-Succession-Problem\\simulation\\diagnostics\\phase_b_rerun_smoke_runtime_control_YOTKOTEST.json",
+    "events": [
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:20:35.732879+00:00",
+        "requested_local": "2026-09-24T07:20:35.718825",
+        "previous_cap": 1,
+        "cap": 4,
+        "source": "override:workers",
+        "active_at_request": 0,
+        "effective_utc": "2026-09-24T11:20:35.732912+00:00",
+        "active_at_effective": 0
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p1_B_5d277a51fca4df2641468951",
+        "pid": 53680,
+        "utc": "2026-09-24T11:20:35.887592+00:00",
+        "active_after": 1,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p1_B_f919e2ba22ecc161f3be7cdc",
+        "pid": 38672,
+        "utc": "2026-09-24T11:20:35.905263+00:00",
+        "active_after": 2,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_333d7e2994dc3327f52160a6",
+        "pid": 54108,
+        "utc": "2026-09-24T11:20:35.923229+00:00",
+        "active_after": 3,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_c0a5bd479a50328512c32432",
+        "pid": 51924,
+        "utc": "2026-09-24T11:20:35.941921+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:20:41.003769+00:00",
+        "requested_local": "2026-09-24T07:20:40.995686",
+        "previous_cap": 4,
+        "cap": 2,
+        "source": "override:workers",
+        "active_at_request": 4,
+        "effective_utc": "2026-09-24T11:22:25.043951+00:00",
+        "active_at_effective": 2
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p1_B_f919e2ba22ecc161f3be7cdc",
+        "utc": "2026-09-24T11:22:19.972673+00:00",
+        "pid": 38672
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p2_A_333d7e2994dc3327f52160a6",
+        "utc": "2026-09-24T11:22:25.043250+00:00",
+        "pid": 54108
+      },
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:22:27.281080+00:00",
+        "requested_local": "2026-09-24T07:22:27.278103",
+        "previous_cap": 2,
+        "cap": 4,
+        "source": "override:workers",
+        "active_at_request": 2,
+        "effective_utc": "2026-09-24T11:22:27.281101+00:00",
+        "active_at_effective": 2
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_1838f22be8317bf11ca2d2c7",
+        "pid": 54800,
+        "utc": "2026-09-24T11:22:27.302746+00:00",
+        "active_after": 3,
+        "cap": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p2_A_2fa60758a32b0829125ca58a",
+        "pid": 54580,
+        "utc": "2026-09-24T11:22:27.322051+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p1_B_5d277a51fca4df2641468951",
+        "utc": "2026-09-24T11:22:30.566244+00:00",
+        "pid": 53680
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+        "pid": 15996,
+        "utc": "2026-09-24T11:22:30.589229+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "part_merged",
+        "part": 1,
+        "utc": "2026-09-24T11:22:30.887175+00:00",
+        "rows": 2
+      },
+      {
+        "event": "complete",
+        "run_id": "O_p2_A_c0a5bd479a50328512c32432",
+        "utc": "2026-09-24T11:22:32.224426+00:00",
+        "pid": 51924
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p3_C_451abe9d26b28c4cef9ccd3d",
+        "pid": 14860,
+        "utc": "2026-09-24T11:22:32.243773+00:00",
+        "active_after": 4,
+        "cap": 4
+      },
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:22:32.469055+00:00",
+        "requested_local": "2026-09-24T07:22:32.459386",
+        "previous_cap": 4,
+        "cap": 10,
+        "source": "override:work",
+        "active_at_request": 4,
+        "effective_utc": "2026-09-24T11:22:32.469069+00:00",
+        "active_at_effective": 4
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p3_C_58359a2bbed8c2243c6e6f4f",
+        "pid": 12688,
+        "utc": "2026-09-24T11:22:32.488028+00:00",
+        "active_after": 5,
+        "cap": 10
+      },
+      {
+        "event": "dispatch",
+        "run_id": "O_p3_C_7ded96c31cc385c178bc6e42",
+        "pid": 49332,
+        "utc": "2026-09-24T11:22:32.508260+00:00",
+        "active_after": 6,
+        "cap": 10
+      },
+      {
+        "event": "dispatch",
+        "run_id": "R_p4_A_1838f22be8317bf11ca2d2c7",
+        "pid": 13228,
+        "utc": "2026-09-24T11:22:32.528208+00:00",
+        "active_after": 7,
+        "cap": 10
+      },
+      {
+        "event": "dispatch",
+        "run_id": "R_p4_A_2fa60758a32b0829125ca58a",
+        "pid": 49168,
+        "utc": "2026-09-24T11:22:32.548637+00:00",
+        "active_after": 8,
+        "cap": 10
+      },
+      {
+        "event": "dispatch",
+        "run_id": "R_p4_C_0de9b507be0110cdce85a9b2",
+        "pid": 55052,
+        "utc": "2026-09-24T11:22:32.571271+00:00",
+        "active_after": 9,
+        "cap": 10
+      },
+      {
+        "event": "dispatch",
+        "run_id": "R_p4_C_451abe9d26b28c4cef9ccd3d",
+        "pid": 54440,
+        "utc": "2026-09-24T11:22:32.593398+00:00",
+        "active_after": 10,
+        "cap": 10
+      },
+      {
+        "event": "worker_cap",
+        "requested_utc": "2026-09-24T11:22:37.688231+00:00",
+        "requested_local": "2026-09-24T07:22:37.676600",
+        "previous_cap": 10,
+        "cap": 10,
+        "source": "schedule:rule",
+        "active_at_request": 10,
+        "effective_utc": "2026-09-24T11:22:37.688257+00:00",
+        "active_at_effective": 10
+      },
+      {
+        "event": "scheduler_warning",
+        "utc": "2026-09-24T11:22:42.845209+00:00",
+        "warning": "Worker count 16 outside 1..15",
+        "previous_cap": 10
+      }
+    ]
+  },
+  "no_worker_killed_for_cap_change": true
+}

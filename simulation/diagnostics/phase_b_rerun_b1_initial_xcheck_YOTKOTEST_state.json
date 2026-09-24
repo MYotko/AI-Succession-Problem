@@ -1,0 +1,317 @@
+{
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "2daf239aee284648e99c4a6e57e84966d05e82cb0cf95de0efc9c7371c1e79d2",
+      "phase_b_rerun_common.py": "0cd74debbf8f17cc1910df741b1f0103e5140d0250e85c26d1468a8f93623eac",
+      "phase_b_rerun_child.py": "5f3614e28f694cd2e1af8f9a3dcdc695ed99ccd12fa6546c52a262f1704a980c",
+      "phase_b_rerun_xcheck_compare.py": "41fcdd81796703de6863b3f9440412e1fc7e241f1c442a8a2bf30ea2359953a6"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "O": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "task_ids": [
+    "O_p1_B_5d277a51fca4df2641468951",
+    "O_p1_B_f919e2ba22ecc161f3be7cdc",
+    "O_p2_A_333d7e2994dc3327f52160a6",
+    "O_p2_A_c0a5bd479a50328512c32432",
+    "O_p2_A_1838f22be8317bf11ca2d2c7",
+    "O_p2_A_2fa60758a32b0829125ca58a",
+    "O_p3_C_0de9b507be0110cdce85a9b2",
+    "O_p3_C_451abe9d26b28c4cef9ccd3d",
+    "O_p3_C_58359a2bbed8c2243c6e6f4f",
+    "O_p3_C_7ded96c31cc385c178bc6e42",
+    "R_p4_A_1838f22be8317bf11ca2d2c7",
+    "R_p4_A_2fa60758a32b0829125ca58a",
+    "R_p4_C_0de9b507be0110cdce85a9b2",
+    "R_p4_C_451abe9d26b28c4cef9ccd3d",
+    "R_p4_C_58359a2bbed8c2243c6e6f4f",
+    "R_p4_C_7ded96c31cc385c178bc6e42"
+  ],
+  "machine_label": "YOTKOTEST",
+  "events": [
+    {
+      "event": "worker_cap",
+      "requested_utc": "2026-09-24T11:32:21.563232+00:00",
+      "requested_local": "2026-09-24T07:32:21.553967",
+      "previous_cap": 1,
+      "cap": 8,
+      "source": "override:workers",
+      "active_at_request": 0,
+      "effective_utc": "2026-09-24T11:32:21.563248+00:00",
+      "active_at_effective": 0
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p1_B_5d277a51fca4df2641468951",
+      "pid": 48188,
+      "utc": "2026-09-24T11:32:21.684517+00:00",
+      "active_after": 1,
+      "cap": 8
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p1_B_f919e2ba22ecc161f3be7cdc",
+      "pid": 18896,
+      "utc": "2026-09-24T11:32:21.699309+00:00",
+      "active_after": 2,
+      "cap": 8
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p2_A_333d7e2994dc3327f52160a6",
+      "pid": 4324,
+      "utc": "2026-09-24T11:32:21.713529+00:00",
+      "active_after": 3,
+      "cap": 8
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p2_A_c0a5bd479a50328512c32432",
+      "pid": 43060,
+      "utc": "2026-09-24T11:32:21.730491+00:00",
+      "active_after": 4,
+      "cap": 8
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p2_A_1838f22be8317bf11ca2d2c7",
+      "pid": 11556,
+      "utc": "2026-09-24T11:32:21.747112+00:00",
+      "active_after": 5,
+      "cap": 8
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p2_A_2fa60758a32b0829125ca58a",
+      "pid": 52860,
+      "utc": "2026-09-24T11:32:21.763019+00:00",
+      "active_after": 6,
+      "cap": 8
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+      "pid": 53012,
+      "utc": "2026-09-24T11:32:21.779833+00:00",
+      "active_after": 7,
+      "cap": 8
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p3_C_451abe9d26b28c4cef9ccd3d",
+      "pid": 46932,
+      "utc": "2026-09-24T11:32:21.798439+00:00",
+      "active_after": 8,
+      "cap": 8
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p1_B_f919e2ba22ecc161f3be7cdc",
+      "utc": "2026-09-24T11:33:50.801477+00:00",
+      "pid": 18896
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p3_C_58359a2bbed8c2243c6e6f4f",
+      "pid": 54160,
+      "utc": "2026-09-24T11:33:50.829978+00:00",
+      "active_after": 8,
+      "cap": 8
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p2_A_333d7e2994dc3327f52160a6",
+      "utc": "2026-09-24T11:33:56.724895+00:00",
+      "pid": 4324
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p3_C_7ded96c31cc385c178bc6e42",
+      "pid": 26408,
+      "utc": "2026-09-24T11:33:56.744516+00:00",
+      "active_after": 8,
+      "cap": 8
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p2_A_c0a5bd479a50328512c32432",
+      "utc": "2026-09-24T11:34:03.041117+00:00",
+      "pid": 43060
+    },
+    {
+      "event": "dispatch",
+      "run_id": "R_p4_A_1838f22be8317bf11ca2d2c7",
+      "pid": 9604,
+      "utc": "2026-09-24T11:34:03.060535+00:00",
+      "active_after": 8,
+      "cap": 8
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p2_A_2fa60758a32b0829125ca58a",
+      "utc": "2026-09-24T11:34:03.889067+00:00",
+      "pid": 52860
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p3_C_451abe9d26b28c4cef9ccd3d",
+      "utc": "2026-09-24T11:34:03.897395+00:00",
+      "pid": 46932
+    },
+    {
+      "event": "dispatch",
+      "run_id": "R_p4_A_2fa60758a32b0829125ca58a",
+      "pid": 22796,
+      "utc": "2026-09-24T11:34:03.912585+00:00",
+      "active_after": 7,
+      "cap": 8
+    },
+    {
+      "event": "dispatch",
+      "run_id": "R_p4_C_0de9b507be0110cdce85a9b2",
+      "pid": 51572,
+      "utc": "2026-09-24T11:34:03.930559+00:00",
+      "active_after": 8,
+      "cap": 8
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+      "utc": "2026-09-24T11:34:04.139708+00:00",
+      "pid": 53012
+    },
+    {
+      "event": "dispatch",
+      "run_id": "R_p4_C_451abe9d26b28c4cef9ccd3d",
+      "pid": 46304,
+      "utc": "2026-09-24T11:34:04.158409+00:00",
+      "active_after": 8,
+      "cap": 8
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p2_A_1838f22be8317bf11ca2d2c7",
+      "utc": "2026-09-24T11:34:04.368427+00:00",
+      "pid": 11556
+    },
+    {
+      "event": "dispatch",
+      "run_id": "R_p4_C_58359a2bbed8c2243c6e6f4f",
+      "pid": 37368,
+      "utc": "2026-09-24T11:34:04.387295+00:00",
+      "active_after": 8,
+      "cap": 8
+    },
+    {
+      "event": "part_merged",
+      "part": 2,
+      "utc": "2026-09-24T11:34:04.864773+00:00",
+      "rows": 4
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p1_B_5d277a51fca4df2641468951",
+      "utc": "2026-09-24T11:34:07.036591+00:00",
+      "pid": 48188
+    },
+    {
+      "event": "dispatch",
+      "run_id": "R_p4_C_7ded96c31cc385c178bc6e42",
+      "pid": 50336,
+      "utc": "2026-09-24T11:34:07.057999+00:00",
+      "active_after": 8,
+      "cap": 8
+    },
+    {
+      "event": "part_merged",
+      "part": 1,
+      "utc": "2026-09-24T11:34:07.333647+00:00",
+      "rows": 2
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p3_C_7ded96c31cc385c178bc6e42",
+      "utc": "2026-09-24T11:35:09.978699+00:00",
+      "pid": 26408
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p3_C_58359a2bbed8c2243c6e6f4f",
+      "utc": "2026-09-24T11:35:35.729855+00:00",
+      "pid": 54160
+    },
+    {
+      "event": "part_merged",
+      "part": 3,
+      "utc": "2026-09-24T11:35:36.116139+00:00",
+      "rows": 4
+    },
+    {
+      "event": "complete",
+      "run_id": "R_p4_C_58359a2bbed8c2243c6e6f4f",
+      "utc": "2026-09-24T11:36:15.189519+00:00",
+      "pid": 37368
+    },
+    {
+      "event": "complete",
+      "run_id": "R_p4_A_2fa60758a32b0829125ca58a",
+      "utc": "2026-09-24T11:36:15.612944+00:00",
+      "pid": 22796
+    },
+    {
+      "event": "complete",
+      "run_id": "R_p4_A_1838f22be8317bf11ca2d2c7",
+      "utc": "2026-09-24T11:36:16.023513+00:00",
+      "pid": 9604
+    },
+    {
+      "event": "complete",
+      "run_id": "R_p4_C_451abe9d26b28c4cef9ccd3d",
+      "utc": "2026-09-24T11:36:16.031250+00:00",
+      "pid": 46304
+    },
+    {
+      "event": "complete",
+      "run_id": "R_p4_C_0de9b507be0110cdce85a9b2",
+      "utc": "2026-09-24T11:36:18.057171+00:00",
+      "pid": 51572
+    },
+    {
+      "event": "complete",
+      "run_id": "R_p4_C_7ded96c31cc385c178bc6e42",
+      "utc": "2026-09-24T11:36:18.066557+00:00",
+      "pid": 50336
+    },
+    {
+      "event": "part_merged",
+      "part": 4,
+      "utc": "2026-09-24T11:36:18.628014+00:00",
+      "rows": 6
+    }
+  ],
+  "resume_counts": {
+    "preserved": 0,
+    "restarted": 0,
+    "never_launched": 16
+  },
+  "elapsed_seconds": 237.77877330000047,
+  "cpu_budget": 16,
+  "priority": "below-normal",
+  "retry_events": [],
+  "last_cap": 8,
+  "last_cap_source": "override:workers"
+}

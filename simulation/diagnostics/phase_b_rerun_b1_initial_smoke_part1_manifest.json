@@ -1,0 +1,70 @@
+{
+  "part": 1,
+  "machine_label": "YOTKOTEST",
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "2daf239aee284648e99c4a6e57e84966d05e82cb0cf95de0efc9c7371c1e79d2",
+      "phase_b_rerun_common.py": "0cd74debbf8f17cc1910df741b1f0103e5140d0250e85c26d1468a8f93623eac",
+      "phase_b_rerun_child.py": "5f3614e28f694cd2e1af8f9a3dcdc695ed99ccd12fa6546c52a262f1704a980c",
+      "phase_b_rerun_xcheck_compare.py": "41fcdd81796703de6863b3f9440412e1fc7e241f1c442a8a2bf30ea2359953a6"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "O": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "run_count": 2,
+  "runs_file": "phase_b_rerun_smoke_part1_runs.csv",
+  "completions_file": "phase_b_rerun_smoke_part1_completions.jsonl",
+  "steps_file": "phase_b_rerun_smoke_part1_steps.csv",
+  "files": {
+    "phase_b_rerun_smoke_part1_runs.csv": {
+      "sha256_lf": "e5e128f7e1a101996b56b52b2d0fe70ad5d4b7da09014f15bcebba5a560a94ce",
+      "row_count": 2
+    },
+    "phase_b_rerun_smoke_part1_completions.jsonl": {
+      "sha256_lf": "fff76c57e1b60dc528aab7f1d11739a1988a47676f4698ed3ee8da271cfd989c",
+      "row_count": 2
+    },
+    "phase_b_rerun_smoke_part1_steps.csv": {
+      "sha256_lf": "036a7396c14a1f405df3b843a41b4bfbdf899bb71cbe0c1bec1f274d6be29f94",
+      "row_count": 941
+    }
+  },
+  "runs": {
+    "O_p1_B_5d277a51fca4df2641468951": {
+      "arm": "O",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "dc0d3b4907c222373f09cf1a44ad4e3b2d82f1d059e8242ccd7c348edfbd4cbc",
+      "step_count": 500,
+      "steps_sha256": "7e1db75da56fa4bc0394ebfd2a576a099148f42d10242666551f94aa2787f07e"
+    },
+    "O_p1_B_f919e2ba22ecc161f3be7cdc": {
+      "arm": "O",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "e613d930eecf1ae63d00e89dd7343825e21a762a0b177634d86977a44bc8d6e3",
+      "step_count": 441,
+      "steps_sha256": "c5e4d02ea82cca558bfe68eb31584285ade91e6e8dfdcfab715ff000c54db29f"
+    }
+  },
+  "deleted_by_kind": {
+    "completion.json": 2,
+    "steps.jsonl": 2,
+    "request.json": 2,
+    "console.txt": 2
+  }
+}

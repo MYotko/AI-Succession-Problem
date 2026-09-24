@@ -16,3 +16,16 @@ simulation/diagnostics/phase_b_recon_*_steps.csv
 simulation/diagnostics/phase_b_recon_job_*
 !simulation/diagnostics/phase_b_rerun_evidence/*.pyc
 simulation/diagnostics/phase_b_rerun_job_*
+# Phase B rerun: step evidence, per-run files and live controller state stay on disk, out of git.
+simulation/diagnostics/phase_b_rerun_*steps.csv
+simulation/diagnostics/phase_b_rerun_*steps.jsonl
+simulation/diagnostics/phase_b_rerun_*_run_O_p*
+simulation/diagnostics/phase_b_rerun_*_run_R_p*
+simulation/diagnostics/phase_b_rerun_run_O_p*
+simulation/diagnostics/phase_b_rerun_run_R_p*
+simulation/diagnostics/phase_b_rerun_*.partial*
+simulation/diagnostics/phase_b_rerun_*.lock
+simulation/diagnostics/phase_b_rerun_*progress.json
+simulation/diagnostics/phase_b_rerun_*runtime_control_*.json
+simulation/diagnostics/phase_b_rerun_*startup_O.json
+simulation/diagnostics/phase_b_rerun_*startup_R.json

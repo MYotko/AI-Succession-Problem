@@ -1,0 +1,74 @@
+{
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "fe199e8d67fbf0c19abebdf0c21fbbae9aa8f9bb04b1139e1902c7fde1285568",
+      "phase_b_rerun_common.py": "00ce1aa25f0edc40d520cc9ef5b1a44004afac1a4bb5760737b81aaaed50a5a1",
+      "phase_b_rerun_child.py": "f9551a5696fe4560e577471664b3296d313745c07da67ac5f73e2d8ac734b51c",
+      "phase_b_rerun_xcheck_compare.py": "060d132bb0e8006f70b6acd401d458d5970e8c57cc12010efa4897bb7137367e"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "O": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "task_ids": [
+    "O_p3_C_0de9b507be0110cdce85a9b2"
+  ],
+  "machine_label": "YOTKOTEST",
+  "events": [
+    {
+      "event": "worker_cap",
+      "requested_utc": "2026-09-24T11:51:50.381422+00:00",
+      "requested_local": "2026-09-24T07:51:50.379269",
+      "previous_cap": 1,
+      "cap": 1,
+      "source": "override:workers",
+      "active_at_request": 0,
+      "effective_utc": "2026-09-24T11:51:50.381440+00:00",
+      "active_at_effective": 0
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+      "pid": 43836,
+      "utc": "2026-09-24T11:51:50.524213+00:00",
+      "active_after": 1,
+      "cap": 1
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+      "utc": "2026-09-24T11:53:14.467571+00:00",
+      "pid": 43836
+    },
+    {
+      "event": "part_merged",
+      "part": 3,
+      "utc": "2026-09-24T11:53:14.707607+00:00",
+      "rows": 1
+    }
+  ],
+  "resume_counts": {
+    "preserved": 0,
+    "restarted": 0,
+    "never_launched": 1
+  },
+  "elapsed_seconds": 85.17927029996645,
+  "cpu_budget": 16,
+  "priority": "below-normal",
+  "retry_events": [],
+  "last_cap": 1,
+  "last_cap_source": "override:workers"
+}

@@ -1,0 +1,209 @@
+{
+  "passed": true,
+  "checks": {
+    "a": true,
+    "b": true,
+    "c": true,
+    "d": true,
+    "e": true,
+    "f": true,
+    "g": true
+  },
+  "commands": [
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "--abbrev-ref",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "main\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "43f125dfc200eeb262ef2e2e2c459c9715269592",
+        "origin/main"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n"
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/phase_b_rerun_design_note.md"
+      ],
+      "exit_code": 0,
+      "stdout": "[blob hashed before content read]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/phase_b_rerun_design_note.md"
+      ],
+      "exit_code": 0,
+      "stdout": "739264d6df4f6690b1ab64f664d1d2e8fe82d414\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/ARTIFACT_CONVENTION.md"
+      ],
+      "exit_code": 0,
+      "stdout": "[blob hashed before content read]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD:simulation/diagnostics/ARTIFACT_CONVENTION.md"
+      ],
+      "exit_code": 0,
+      "stdout": "29e9b300ab301dd61807317bef4a907a5930ae4d\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "cat-file",
+        "blob",
+        "HEAD:simulation/diagnostics/phase_b_rerun_evidence/monte_carlo_phase_b.cpython-313.pyc"
+      ],
+      "exit_code": 0,
+      "stdout": "[raw bytecode hashed]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-c",
+        "safe.directory=C:/Users/matty/Dev/phase-b-rerun-O",
+        "-C",
+        "C:/Users/matty/Dev/phase-b-rerun-O",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "45409d469a82bb599fe354e8ae3760e4cc3af048\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-c",
+        "safe.directory=C:/Users/matty/Dev/phase-b-rerun-O",
+        "-C",
+        "C:/Users/matty/Dev/phase-b-rerun-O",
+        "status",
+        "--porcelain"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n"
+    },
+    {
+      "command": [
+        "git",
+        "-c",
+        "safe.directory=C:/Users/matty/Dev/phase-b-rerun-R",
+        "-C",
+        "C:/Users/matty/Dev/phase-b-rerun-R",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "a370925d53a786a3cdaeb36543c02e7135a0ecab\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-c",
+        "safe.directory=C:/Users/matty/Dev/phase-b-rerun-R",
+        "-C",
+        "C:/Users/matty/Dev/phase-b-rerun-R",
+        "status",
+        "--porcelain"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "warning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\matty/.config/git/ignore': Permission denied\n"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "43f125dfc200eeb262ef2e2e2c459c9715269592\n",
+      "stderr": ""
+    }
+  ],
+  "source_readings": [
+    {
+      "path": "simulation/diagnostics/phase_b_rerun_design_note.md",
+      "pin": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+      "head_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+      "worktree_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+      "blob_sha1": "739264d6df4f6690b1ab64f664d1d2e8fe82d414"
+    },
+    {
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "pin": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "head_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "worktree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d"
+    }
+  ],
+  "bytecode_readings": {
+    "committed": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "evidence_worktree": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "O": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "R": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b"
+  },
+  "arms": {
+    "O": {
+      "path": "C:/Users/matty/Dev/phase-b-rerun-O",
+      "pin": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "head": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "clean": true,
+      "head_matches": true
+    },
+    "R": {
+      "path": "C:/Users/matty/Dev/phase-b-rerun-R",
+      "pin": "a370925d53a786a3cdaeb36543c02e7135a0ecab",
+      "head": "a370925d53a786a3cdaeb36543c02e7135a0ecab",
+      "clean": true,
+      "head_matches": true
+    }
+  },
+  "unexpected_files": [],
+  "head": "43f125dfc200eeb262ef2e2e2c459c9715269592",
+  "machine": "YotkoTest",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]"
+}

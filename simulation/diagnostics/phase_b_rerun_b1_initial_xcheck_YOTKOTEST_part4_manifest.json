@@ -1,0 +1,102 @@
+{
+  "part": 4,
+  "machine_label": "YOTKOTEST",
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "2daf239aee284648e99c4a6e57e84966d05e82cb0cf95de0efc9c7371c1e79d2",
+      "phase_b_rerun_common.py": "0cd74debbf8f17cc1910df741b1f0103e5140d0250e85c26d1468a8f93623eac",
+      "phase_b_rerun_child.py": "5f3614e28f694cd2e1af8f9a3dcdc695ed99ccd12fa6546c52a262f1704a980c",
+      "phase_b_rerun_xcheck_compare.py": "41fcdd81796703de6863b3f9440412e1fc7e241f1c442a8a2bf30ea2359953a6"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "O": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "run_count": 6,
+  "runs_file": "phase_b_rerun_xcheck_YOTKOTEST_part4_runs.csv",
+  "completions_file": "phase_b_rerun_xcheck_YOTKOTEST_part4_completions.jsonl",
+  "steps_file": "phase_b_rerun_xcheck_YOTKOTEST_part4_steps.csv",
+  "files": {
+    "phase_b_rerun_xcheck_YOTKOTEST_part4_runs.csv": {
+      "sha256_lf": "9430b125c5b3fb8bc2c34e59f951b3e99c05fdf35668f12019f6a9c93c8a72d1",
+      "row_count": 6
+    },
+    "phase_b_rerun_xcheck_YOTKOTEST_part4_completions.jsonl": {
+      "sha256_lf": "e6d3cd015e6977645ce4e2d4afe1b27dc11c977828a0af44c161eedccd4146e2",
+      "row_count": 6
+    },
+    "phase_b_rerun_xcheck_YOTKOTEST_part4_steps.csv": {
+      "sha256_lf": "fe552be6fb3a7ab5c3926e42413a278d6a450b8bfe4c7f0674a847fc96a2881c",
+      "row_count": 3000
+    }
+  },
+  "runs": {
+    "R_p4_A_1838f22be8317bf11ca2d2c7": {
+      "arm": "R",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "cf9f6e20b75837d9d172748636a54f08f60eadb3a9a7067c27078cbf3b329b78",
+      "step_count": 500,
+      "steps_sha256": "61282623dc1278bc0c440f9b3601c1fa0fae237a12139f8c61c7ff970b43d1bd"
+    },
+    "R_p4_A_2fa60758a32b0829125ca58a": {
+      "arm": "R",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "88f2c8d33957f4b00997a322849102c06768907a30a8b96d1017f639a9d03d13",
+      "step_count": 500,
+      "steps_sha256": "1164310c12445e50fc2c7e23865c0ed0738cfa1b3215c0d4d0faf4b82ca431c2"
+    },
+    "R_p4_C_0de9b507be0110cdce85a9b2": {
+      "arm": "R",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "8ca55b7618fcd74ccadfcf33fae2d9110b148c2e91e64172993bb37f08cd6a10",
+      "step_count": 500,
+      "steps_sha256": "03d7873160c2e6f95b5450507c059ca33920b7d8c6c10d12cb15afc5620a5a9a"
+    },
+    "R_p4_C_451abe9d26b28c4cef9ccd3d": {
+      "arm": "R",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "2e9f092af7bc032380ba442e897ee4e72b22f2fc8288ff5f3e8e24971f108966",
+      "step_count": 500,
+      "steps_sha256": "09cba2a470e181f156fc26ae2f5ff9a32de35b5be7c9c07517b7a25bb68282d8"
+    },
+    "R_p4_C_58359a2bbed8c2243c6e6f4f": {
+      "arm": "R",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "f351ffe62eb6ccdb7c6756c75fb12b2b08d1fc2378ff9c27eff2b3354fcf07a0",
+      "step_count": 500,
+      "steps_sha256": "54b9fd8232f40e082472cf37f223a48a6c90e9dd94c76daca0dd461b7f3dbfe4"
+    },
+    "R_p4_C_7ded96c31cc385c178bc6e42": {
+      "arm": "R",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "e1be3dc33bb91a003fdfcc42998b1923015316f484eb5e61a4aa308e5b14905a",
+      "step_count": 500,
+      "steps_sha256": "0625e08199dd143e3cc08c7ec54f7919ca462ba0515a8b4da887e179f2d445a3"
+    }
+  },
+  "deleted_by_kind": {
+    "completion.json": 6,
+    "steps.jsonl": 6,
+    "request.json": 6,
+    "console.txt": 6
+  }
+}

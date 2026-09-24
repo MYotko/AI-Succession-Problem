@@ -1,0 +1,208 @@
+{
+  "status": "complete",
+  "checks": [
+    [
+      1,
+      "Both arms passed identity checks; every completed child recorded the pinned bytecode hash."
+    ],
+    [
+      2,
+      "25800 registered tasks independently seed-checked; none executed."
+    ],
+    [
+      3,
+      "Counts 1500, 10800, 8100, 2700, 2700; Part 4 task-identical subset: True."
+    ],
+    [
+      4,
+      "All simulation modules loaded from their own worktrees; model.py hashes differ: True."
+    ],
+    [
+      5,
+      "All 30 original fields in order, followed by the ten appended fields: True."
+    ],
+    [
+      6,
+      "Distinct values: {\"final_population\":[0,1,9,10,15,17,20,25,32,41,74,83,125],\"survived\":[false,true],\"yield_fired\":[false,true]}."
+    ],
+    [
+      7,
+      "Two separate repeats: [{\"arm\":\"O\",\"differing_fields\":[],\"run_id\":\"O_p3_C_0de9b507be0110cdce85a9b2\"},{\"arm\":\"R\",\"differing_fields\":[],\"run_id\":\"R_p4_C_0de9b507be0110cdce85a9b2\"}]."
+    ],
+    [
+      8,
+      "6 matched O/R tasks compared; differing fields are listed below."
+    ],
+    [
+      9,
+      "Preserved 4, restarted 10, never launched 2 at resume; saved completion hashes unchanged."
+    ],
+    [
+      10,
+      "Live 4 to 2 drain, return to 4, work mode, expired override, and refusal of 16 verified; no child killed for a cap change."
+    ],
+    [
+      11,
+      "Seven injected-clock caps: 15, 15, 10, 10, 15, 15, 10."
+    ],
+    [
+      12,
+      "One numerical thread verified from loaded libraries in all 34 completed final-build children."
+    ],
+    [
+      13,
+      "All 34 final-build rows and their step records recovered from merged files with matching hashes."
+    ],
+    [
+      14,
+      "Original error rows among all 34 final-build completions: 0; []."
+    ],
+    [
+      15,
+      "Mean wall seconds, 500-step horizon: O 105.01347174000111; R 147.20890553332478."
+    ],
+    [
+      16,
+      "Crosscheck completed 16 runs; CLI self-comparison IDENTICAL; altered copy DIFFERENT on final_population."
+    ],
+    [
+      17,
+      "Different-label resume refused; marked smoke-only IDENTICAL fixture accepted 16 preserved runs. Additional version-binding fixtures passed."
+    ]
+  ],
+  "timings": {
+    "O": 105.01347174000111,
+    "R": 147.20890553332478
+  },
+  "projections": {
+    "override_then_schedule": {
+      "start_local": "2026-09-24T08:09:33.797482",
+      "finish_local": "2026-09-26T17:52:38.861370",
+      "elapsed_hours": 57.71807330222222
+    },
+    "constant_10": {
+      "start_local": "2026-09-24T08:09:33.797482",
+      "finish_local": "2026-09-27T17:44:54.089602",
+      "elapsed_hours": 81.58897003333334
+    },
+    "constant_15": {
+      "start_local": "2026-09-24T08:09:33.797482",
+      "finish_local": "2026-09-26T14:33:07.325562",
+      "elapsed_hours": 54.39264668888889
+    }
+  },
+  "counts": {
+    "final_completed_non_registered": 34,
+    "initial_completed_non_registered": 34,
+    "total_completed_non_registered": 68,
+    "registered_runs_executed": 0
+  },
+  "report_local": "2026-09-24T08:09:33.797482",
+  "local_timezone": "Eastern Daylight Time",
+  "model_hashes": {
+    "O": "6dedc49da573dbc03e6668afb808db4d0096cb891bfaf5223414607cbd33d4b7",
+    "R": "25e65d8daa4332df32198b424b25b1630d7a5aca98971c47eac82df7d5679993"
+  },
+  "registered_runs_executed": 0,
+  "source_readings": [
+    {
+      "path": "simulation/diagnostics/phase_b_rerun_design_note.md",
+      "initial": {
+        "path": "simulation/diagnostics/phase_b_rerun_design_note.md",
+        "pin": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+        "head_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+        "worktree_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+        "blob_sha1": "739264d6df4f6690b1ab64f664d1d2e8fe82d414"
+      },
+      "completion_head_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+      "completion_worktree_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72"
+    },
+    {
+      "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+      "initial": {
+        "path": "simulation/diagnostics/ARTIFACT_CONVENTION.md",
+        "pin": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+        "head_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+        "worktree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+        "blob_sha1": "29e9b300ab301dd61807317bef4a907a5930ae4d"
+      },
+      "completion_head_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb",
+      "completion_worktree_sha256_lf": "def9d1d57053310335541bb4bf22cdfb1f9449fb569ad8cce39693442cc461eb"
+    }
+  ],
+  "runtime_requested_and_effective": [
+    {
+      "event": "worker_cap",
+      "requested_utc": "2026-09-24T11:42:47.576479+00:00",
+      "requested_local": "2026-09-24T07:42:47.574414",
+      "previous_cap": 1,
+      "cap": 4,
+      "source": "override:workers",
+      "active_at_request": 0,
+      "effective_utc": "2026-09-24T11:42:47.576491+00:00",
+      "active_at_effective": 0
+    },
+    {
+      "event": "worker_cap",
+      "requested_utc": "2026-09-24T11:42:52.820343+00:00",
+      "requested_local": "2026-09-24T07:42:52.817076",
+      "previous_cap": 4,
+      "cap": 2,
+      "source": "override:workers",
+      "active_at_request": 4,
+      "effective_utc": "2026-09-24T11:44:30.769702+00:00",
+      "active_at_effective": 2
+    },
+    {
+      "event": "worker_cap",
+      "requested_utc": "2026-09-24T11:44:34.012523+00:00",
+      "requested_local": "2026-09-24T07:44:34.010290",
+      "previous_cap": 2,
+      "cap": 4,
+      "source": "override:workers",
+      "active_at_request": 2,
+      "effective_utc": "2026-09-24T11:44:34.012543+00:00",
+      "active_at_effective": 2
+    },
+    {
+      "event": "worker_cap",
+      "requested_utc": "2026-09-24T11:44:39.167595+00:00",
+      "requested_local": "2026-09-24T07:44:39.164947",
+      "previous_cap": 4,
+      "cap": 10,
+      "source": "override:work",
+      "active_at_request": 4,
+      "effective_utc": "2026-09-24T11:44:39.167617+00:00",
+      "active_at_effective": 4
+    },
+    {
+      "event": "worker_cap",
+      "requested_utc": "2026-09-24T11:44:44.345090+00:00",
+      "requested_local": "2026-09-24T07:44:44.342195",
+      "previous_cap": 10,
+      "cap": 10,
+      "source": "schedule:rule",
+      "active_at_request": 10,
+      "effective_utc": "2026-09-24T11:44:44.345105+00:00",
+      "active_at_effective": 10
+    },
+    {
+      "event": "worker_cap",
+      "requested_utc": "2026-09-24T11:45:00.170444+00:00",
+      "requested_local": "2026-09-24T07:45:00.168426",
+      "previous_cap": 10,
+      "cap": 4,
+      "source": "override:workers",
+      "active_at_request": 0,
+      "effective_utc": "2026-09-24T11:45:00.170454+00:00",
+      "active_at_effective": 0
+    }
+  ],
+  "interpreter_readiness": {
+    "ready": true,
+    "attempts": 5,
+    "elapsed_seconds": 241.4891047999845,
+    "python": "3.13.15",
+    "numpy": "2.4.4"
+  }
+}
