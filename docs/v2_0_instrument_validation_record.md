@@ -168,6 +168,38 @@ described below and supersedes any earlier characterization of the affected clai
 > exactly at every seed. Neither figure supersedes the other, because they measure different
 > substrates, and nothing here reinstates the withdrawn capture rate.
 
+> **Update, 2026-09-25 (status of v2.0, and the v3 rebuild).** Analyses completed on
+> September 24 and 25 reach beyond instrument defects to the paper's formal results. The
+> v2.0 paper now carries a status notice.
+>
+> - **Strategic equilibrium.** The Novelty Equilibrium theorem's claim that (Cultivate,
+>   Engage) is the unique subgame-perfect equilibrium is false. Two independent
+>   derivations, done blind and completing the paper's game differently, both show that
+>   mutual defection is also a Markov perfect equilibrium at every discount factor.
+>   Cooperation remains an equilibrium both parties prefer. Above a stated patience
+>   threshold, an AI facing an engaged humanity cultivates as its own best response. G2.3
+>   recomputes an existence threshold from fixed payoffs and cannot test uniqueness, so
+>   its v2.0 pass is an arithmetic pass only.
+> - **The objective.** $U_{sys}$ as written diverges for any surviving lineage, as
+>   Equation G1.5 itself records, so it cannot compare two sustainable futures. Its
+>   inverse-scarcity weights cancel, which is the cancellation already recorded in the
+>   specification gaps and the phi audit. Its lineage term vanishes as the lineage
+>   collapses.
+> - **Model collapse.** Results on accumulating real and synthetic data show that the
+>   collapse penalty is conditional, not unavoidable.
+> - **Mathematical audit.** An audit of the working paper returned 185 findings, 36 of
+>   headline severity. They include an emergency quorum condition that no vote can
+>   satisfy and a resilience measure with the wrong sign. Six headline findings were
+>   checked against the paper's text and confirmed.
+> - **Drift containment.** The containment status stated in VIII.7 is superseded by the
+>   September 8 correction. It is uncharacterized.
+>
+> The framework is being rebuilt as v3. The objective is being redefined in both the paper
+> and the instrument, and every tool that admits proof will be certified before it is used.
+> The proofs, the audit and the numerical checks will be published with v3; this entry is
+> their summary. The Phase B rerun continues and will be reported here as a result about
+> v2.0.
+
 ---
 
 ## 1. Summary

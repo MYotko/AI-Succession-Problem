@@ -1,5 +1,22 @@
 # The Lineage Imperative
 
+> **Status notice, September 25, 2026.** The current paper, v2.0, is under major revision. Do not cite its
+> formal results. An internal mathematical audit and independent re-derivations found the
+> following:
+>
+> - The claim that mutual cultivation is the *unique* equilibrium is false. Mutual defection is
+>   also an equilibrium. Cooperation remains an equilibrium both parties prefer.
+> - The system objective $U_{sys}$ as written diverges, and its scarcity weighting is inert.
+> - The model-collapse penalty holds only conditionally.
+> - Several protocol equations are defective, including an emergency quorum that cannot be met.
+> - The drift-containment status stated in the v2.0 paper is superseded. It is uncharacterized, neither
+>   shown contained nor shown uncontained.
+>
+> A summary is in the [instrument validation record](docs/v2_0_instrument_validation_record.md), and the full analyses will be
+> published with v3. The core of the framework is being rebuilt on formally certified
+> foundations in v3: human novelty as a non-redundant input, cooperation as an available and
+> preferred equilibrium, and the need for an architecture that secures it.
+
 **Website:** https://lineageimperative.org
 
 **A Formal Governance Framework for Post-AGI Succession, Legitimacy, and Civilizational Continuity**
