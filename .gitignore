@@ -42,3 +42,5 @@ verification/provenance/parameter_register.csv
 simulation/diagnostics/phase_b_rerun_box_records/*progress.json
 simulation/diagnostics/phase_b_rerun_box_records/*startup_O.json
 simulation/diagnostics/phase_b_rerun_box_records/*startup_R.json
+# Even terminal session logs carry an access token and session transcripts. Never commit them.
+even-terminal-*.log

@@ -106,6 +106,9 @@ NEVER_INGEST_BASENAME_PREFIXES = (
     "defense_recovery_run_",
     "defense_points_run_",
     "phase_b_recon_",
+    # Even terminal session logs carry the terminal's access token in request URLs and
+    # session transcripts. They are never repository content and never snapshot content.
+    "even-terminal-",
 )
 
 # Directories whose contents must NEVER reach a generated snapshot, matched on
