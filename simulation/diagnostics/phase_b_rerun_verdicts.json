@@ -1,0 +1,444 @@
+{
+ "design_n_note": "rates are counts over fixed design n",
+ "P": {
+  "pairs": {
+   "alpha 0.5, cap 5.0": {
+    "by_rr": {
+     "0.057": 66,
+     "0.06": 68,
+     "0.064": 72,
+     "0.07": 72
+    },
+    "n_per_cell": 75,
+    "rerun_min_max": [
+     66,
+     72
+    ],
+    "published_min_max": [
+     66,
+     72
+    ],
+    "identical": true,
+    "faithful": true,
+    "wilson_lowest": [
+     0.785148432794592,
+     0.9363705545471802
+    ],
+    "wilson_highest": [
+     0.8868412263200197,
+     0.9865764951989676
+    ]
+   },
+   "alpha 1.0, cap 2.5": {
+    "by_rr": {
+     "0.057": 74,
+     "0.06": 74,
+     "0.064": 75,
+     "0.07": 75
+    },
+    "n_per_cell": 75,
+    "rerun_min_max": [
+     74,
+     75
+    ],
+    "published_min_max": [
+     74,
+     75
+    ],
+    "identical": true,
+    "faithful": true,
+    "wilson_lowest": [
+     0.9263419839462179,
+     0.9977086489651747
+    ],
+    "wilson_highest": [
+     0.949367088607595,
+     1.0
+    ]
+   },
+   "alpha 1.0, cap 3.0": {
+    "by_rr": {
+     "0.057": 3,
+     "0.06": 10,
+     "0.064": 4,
+     "0.07": 7
+    },
+    "n_per_cell": 75,
+    "rerun_min_max": [
+     3,
+     10
+    ],
+    "published_min_max": [
+     3,
+     10
+    ],
+    "identical": true,
+    "faithful": true,
+    "wilson_lowest": [
+     0.013423504801032382,
+     0.11315877367998028
+    ],
+    "wilson_highest": [
+     0.07318667465747834,
+     0.23061079369695203
+    ]
+   },
+   "alpha 1.25, cap 2.5": {
+    "by_rr": {
+     "0.057": 32,
+     "0.06": 28,
+     "0.064": 23,
+     "0.07": 37
+    },
+    "n_per_cell": 75,
+    "rerun_min_max": [
+     23,
+     37
+    ],
+    "published_min_max": [
+     23,
+     37
+    ],
+    "identical": true,
+    "faithful": true,
+    "wilson_lowest": [
+     0.21223714105476504,
+     0.4206742513502983
+    ],
+    "wilson_highest": [
+     0.381171590796655,
+     0.6061701813552439
+    ]
+   },
+   "alpha 1.5, cap 2.5": {
+    "by_rr": {
+     "0.057": 1,
+     "0.06": 1,
+     "0.064": 0,
+     "0.07": 0
+    },
+    "n_per_cell": 75,
+    "rerun_min_max": [
+     0,
+     1
+    ],
+    "published_min_max": [
+     0,
+     1
+    ],
+    "identical": true,
+    "faithful": true,
+    "wilson_lowest": [
+     0.0,
+     0.05063291139240507
+    ],
+    "wilson_highest": [
+     0.002291351034825355,
+     0.07365801605378225
+    ]
+   }
+  },
+  "machine": "YOTKOTEST",
+  "verdict": "IDENTICAL"
+ },
+ "T1": {
+  "by_rr": [
+   {
+    "rr": 0.055,
+    "survived": 2,
+    "n": 1200,
+    "published_rate": 0.002,
+    "published_counts": [
+     2
+    ],
+    "identical": true,
+    "wilson": [
+     0.0004466971932228607,
+     0.006197821079202389
+    ],
+    "published_inside_interval": true
+   },
+   {
+    "rr": 0.056,
+    "survived": 11,
+    "n": 1200,
+    "published_rate": 0.009,
+    "published_counts": [
+     11
+    ],
+    "identical": true,
+    "wilson": [
+     0.005067247716968486,
+     0.016527436668413574
+    ],
+    "published_inside_interval": true
+   },
+   {
+    "rr": 0.057,
+    "survived": 13,
+    "n": 1200,
+    "published_rate": 0.011,
+    "published_counts": [
+     13
+    ],
+    "identical": true,
+    "wilson": [
+     0.006274434929802667,
+     0.018642508591792017
+    ],
+    "published_inside_interval": true
+   },
+   {
+    "rr": 0.058,
+    "survived": 35,
+    "n": 1200,
+    "published_rate": 0.029,
+    "published_counts": [
+     35
+    ],
+    "identical": true,
+    "wilson": [
+     0.02090644720435825,
+     0.04055534681557531
+    ],
+    "published_inside_interval": true
+   },
+   {
+    "rr": 0.059,
+    "survived": 58,
+    "n": 1200,
+    "published_rate": 0.048,
+    "published_counts": [
+     58
+    ],
+    "identical": true,
+    "wilson": [
+     0.03738132292151776,
+     0.062286451164860965
+    ],
+    "published_inside_interval": true
+   },
+   {
+    "rr": 0.06,
+    "survived": 147,
+    "n": 1200,
+    "published_rate": 0.122,
+    "published_counts": [
+     147
+    ],
+    "identical": true,
+    "wilson": [
+     0.10481490805732507,
+     0.14269339759051544
+    ],
+    "published_inside_interval": true
+   },
+   {
+    "rr": 0.062,
+    "survived": 414,
+    "n": 1200,
+    "published_rate": 0.345,
+    "published_counts": [
+     414
+    ],
+    "identical": true,
+    "wilson": [
+     0.31811033956900303,
+     0.37291956076322275
+    ],
+    "published_inside_interval": true
+   },
+   {
+    "rr": 0.064,
+    "survived": 730,
+    "n": 1200,
+    "published_rate": 0.608,
+    "published_counts": [
+     729,
+     730
+    ],
+    "identical": true,
+    "wilson": [
+     0.5798361882691547,
+     0.6361106555846658
+    ],
+    "published_inside_interval": true
+   },
+   {
+    "rr": 0.066,
+    "survived": 1038,
+    "n": 1200,
+    "published_rate": 0.865,
+    "published_counts": [
+     1038
+    ],
+    "identical": true,
+    "wilson": [
+     0.8440534637651637,
+     0.8835212870654011
+    ],
+    "published_inside_interval": true
+   }
+  ],
+  "points_inside": 9,
+  "monotone_nondecreasing": true,
+  "machine": "yotko-legion-t5-26iob6",
+  "verdict": "IDENTICAL"
+ },
+ "T4": {
+  "audit_off": [
+   1029,
+   4050
+  ],
+  "audit_on": [
+   1010,
+   4050
+  ],
+  "delta": -0.004691358024691339,
+  "published_delta": -0.0047,
+  "se_published_definition": 0.009644436968029508,
+  "se_seed_index_matched": 0.007734163918896035,
+  "pairs_with_identical_derived_seed": 0,
+  "by_rr": {
+   "0.057": {
+    "on": 16,
+    "off": 20,
+    "n_each": 1350,
+    "delta_count": -4
+   },
+   "0.06": {
+    "on": 146,
+    "off": 151,
+    "n_each": 1350,
+    "delta_count": -5
+   },
+   "0.064": {
+    "on": 848,
+    "off": 858,
+    "n_each": 1350,
+    "delta_count": -10
+   }
+  },
+  "machine": "YOTKOTEST",
+  "faithful_under_published_se": true,
+  "faithful_under_matched_se": true,
+  "verdict": "IDENTICAL"
+ },
+ "R4": {
+  "groups": {
+   "A 0.055": {
+    "pairs": 300,
+    "R_minus_O_rate": 0.0033333333333333335,
+    "paired_se": 0.0033333333333333335,
+    "R_only_survived": 1,
+    "O_only_survived": 0
+   },
+   "A 0.056": {
+    "pairs": 300,
+    "R_minus_O_rate": -0.013333333333333334,
+    "paired_se": 0.008142177693922274,
+    "R_only_survived": 1,
+    "O_only_survived": 5
+   },
+   "A 0.057": {
+    "pairs": 300,
+    "R_minus_O_rate": -0.013333333333333334,
+    "paired_se": 0.010530344043323293,
+    "R_only_survived": 3,
+    "O_only_survived": 7
+   },
+   "A 0.058": {
+    "pairs": 300,
+    "R_minus_O_rate": -0.013333333333333334,
+    "paired_se": 0.011540567131056811,
+    "R_only_survived": 4,
+    "O_only_survived": 8
+   },
+   "A 0.059": {
+    "pairs": 300,
+    "R_minus_O_rate": 0.01,
+    "paired_se": 0.016002368832448564,
+    "R_only_survived": 13,
+    "O_only_survived": 10
+   },
+   "A 0.06": {
+    "pairs": 300,
+    "R_minus_O_rate": -0.08333333333333333,
+    "paired_se": 0.02811757974289911,
+    "R_only_survived": 24,
+    "O_only_survived": 49
+   },
+   "A 0.062": {
+    "pairs": 300,
+    "R_minus_O_rate": 0.013333333333333334,
+    "paired_se": 0.03687132505984189,
+    "R_only_survived": 63,
+    "O_only_survived": 59
+   },
+   "A 0.064": {
+    "pairs": 300,
+    "R_minus_O_rate": -0.03333333333333333,
+    "paired_se": 0.04138982725349699,
+    "R_only_survived": 72,
+    "O_only_survived": 82
+   },
+   "A 0.066": {
+    "pairs": 300,
+    "R_minus_O_rate": 0.023333333333333334,
+    "paired_se": 0.027296764291130086,
+    "R_only_survived": 37,
+    "O_only_survived": 30
+   },
+   "C audit False": {
+    "pairs": 1350,
+    "R_minus_O_rate": 0.0014814814814814814,
+    "paired_se": 0.013255622252909473,
+    "R_only_survived": 161,
+    "O_only_survived": 159
+   },
+   "C audit True": {
+    "pairs": 1350,
+    "R_minus_O_rate": -0.005185185185185185,
+    "paired_se": 0.012769645074389012,
+    "R_only_survived": 145,
+    "O_only_survived": 152
+   }
+  },
+  "unmatched_rows": 0,
+  "derived_seed_mismatches": 0,
+  "note": "Combined effect of every model change since June 8, including the v2.1 estimator repair; not the repair's effect alone. Category A pairs cross machines (O on the box, R on YOTKOTEST) and include that machine difference."
+ },
+ "R5": {
+  "interpreter_numpy_machine": {
+   "part1": [
+    [
+     "3.13.15",
+     "2.4.4",
+     "YOTKOTEST"
+    ]
+   ],
+   "part2": [
+    [
+     "3.13.12",
+     "2.4.4",
+     "yotko-legion-t5-26iob6"
+    ]
+   ],
+   "part3": [
+    [
+     "3.13.15",
+     "2.4.4",
+     "YOTKOTEST"
+    ]
+   ],
+   "part4": [
+    [
+     "3.13.15",
+     "2.4.4",
+     "YOTKOTEST"
+    ]
+   ]
+  },
+  "error_rows": 0
+ }
+}

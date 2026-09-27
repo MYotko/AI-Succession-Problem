@@ -2414,6 +2414,112 @@ construction can only be inferred and any second-stage phi arm will say so.
 The bytecode and the pilot file will be committed as evidence alongside it. The USB drive is
 retained unmodified.
 
+*The second stage, 2026-09-26.*
+
+**How it ran.** The second stage ran as pre-registered in
+`simulation/diagnostics/phase_b_rerun_design_note.md`:
+
+- **Registration:** registered at a370925d and amended for a second machine at 43f125df.
+- **Executor:** built and validated in test mode at abbdeae0.
+- **Code:** the recovered bytecode was verified by its hash, `2d79795c...`, before every load. It
+  ran against two worktrees: arm O pinned at 45409d46, the June substrate, and arm R at a370925d,
+  the current one.
+- **Machines:**
+  - The registered cross-machine check found every discrete outcome equal, and last-digit
+    differences in eighteen continuous fields.
+  - Each part therefore ran wholly on one machine. Part 2 ran on `yotko-legion-t5-26iob6`, under
+    CPython 3.13.12. Parts 1, 3 and 4 ran on `YOTKOTEST`, under CPython 3.13.15. Both used
+    numpy 2.4.4.
+- **Completion:** all 25,800 runs completed at 500 steps, with no error rows.
+- **Integrity:** every merged part verifies against its manifest, by file hash and by per-row
+  hash.
+
+**Results.** Every registered target reproduced exactly.
+
+| Target | Compared | Rerun | Verdict |
+| --- | --- | --- | --- |
+| P, Category B cliff ranges | fewest and most runs that fired, of 75, across four reproduction rates, for each of five pairs | 66 and 72; 74 and 75; 3 and 10; 23 and 37; 0 and 1 | Identical |
+| T1, Category A survival | survivors of 1,200 at each of nine reproduction rates | 2, 11, 13, 35, 58, 147, 414, 730 and 1,038 | Identical |
+| T4, Category C cost audit | survivors of 4,050 with the audit off and on; the by-rate deltas, of 1,350 each | 1,029 and 1,010, nineteen fewer; deltas -4, -5 and -10 | Identical |
+
+Every T1 count is one that the published rate and standard error admit.
+
+**What the branch rules say.** They were committed before any run.
+
+- **P identical:** the recovered code, on the June substrate, in this environment, reproduces the
+  original runs.
+- **T1 identical:** the published Category A figures are reproduced by their own generating code.
+  The first stage's T1 failure is therefore attributed to its construction: the three differences
+  tabled above, above all its survival rule.
+- **T4 identical:** this is the original test at its original power, and it reproduces the
+  published null exactly.
+
+The expectation recorded before any run was:
+- P identical or nearly;
+- T1 faithful and perhaps identical;
+- T4 faithful.
+
+Every target came out identical.
+
+**R4, reported whatever Parts 1 to 3 show.** R4 compares the current substrate with the June one
+at matched seeds: arm R survival minus arm O survival. Every one of the 5,400 Part 4 runs matched
+its arm O partner at an identical derived seed.
+
+It carries two caveats:
+- **It is not the repair's effect.** R4 is the combined effect of every model change since June 8,
+  including the v2.1 estimator repair. It is never to be reported as the repair's effect alone.
+- **Category A pairs cross machines.** Arm O ran on the retired machine and arm R on `YOTKOTEST`,
+  so those pairs include that machine difference.
+
+| Group | Pairs | R minus O | Paired SE | Survived under R only | Survived under O only |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| A, rr 0.055 | 300 | +0.3pp | 0.3 | 1 | 0 |
+| A, rr 0.056 | 300 | -1.3pp | 0.8 | 1 | 5 |
+| A, rr 0.057 | 300 | -1.3pp | 1.1 | 3 | 7 |
+| A, rr 0.058 | 300 | -1.3pp | 1.2 | 4 | 8 |
+| A, rr 0.059 | 300 | +1.0pp | 1.6 | 13 | 10 |
+| A, rr 0.060 | 300 | -8.3pp | 2.8 | 24 | 49 |
+| A, rr 0.062 | 300 | +1.3pp | 3.7 | 63 | 59 |
+| A, rr 0.064 | 300 | -3.3pp | 4.1 | 72 | 82 |
+| A, rr 0.066 | 300 | +2.3pp | 2.7 | 37 | 30 |
+| C, audit off | 1,350 | +0.1pp | 1.3 | 161 | 159 |
+| C, audit on | 1,350 | -0.5pp | 1.3 | 145 | 152 |
+
+What R4 shows:
+- **The pooled change is small.** It is -1.2 points in Category A, with a paired standard error of
+  0.8, and -0.2 points in Category C, with 0.9.
+- **Individual runs change outcome in both directions.** Near the cliff, dozens of runs survive
+  under only one arm.
+- **One rate stands apart.** At rr 0.060 the difference is about three standard errors. It is one
+  of eleven comparisons, with no registered rule, so it is reported and not interpreted.
+
+**What this cannot establish.**
+- **Later edits to the script.** The bytecode reflects the source of June 9, so edits to the
+  script before the June 18 analysis are not excluded.
+- **Uncommitted substrate edits.** Uncommitted edits to the substrate on the failed machine are
+  not excluded either.
+- **The phi curve.** It came from a different script, which is unrecovered, and is not tested
+  here.
+
+An exact match on every registered count leaves little room for either kind of edit to have
+mattered to these figures. This entry nonetheless claims only what the branch rules allow.
+
+**What this means.** The published Phase B figures for Categories A, B and C are reproduced
+exactly by the code that generated them. Section 7's archival gap remains a real failure of
+process, but the figures it put in doubt, apart from the untested phi curve, stand.
+
+**Where the data are.**
+- **Committed under `simulation/diagnostics/`:**
+  - the merged run tables, completion records and manifests of all four parts;
+  - the batch manifest;
+  - the execution metadata of both machines, with the retired machine's in
+    `phase_b_rerun_box_records/`;
+  - the verdict script, `phase_b_rerun_verdicts.py`, and its output, `phase_b_rerun_verdicts.json`.
+- **Kept out of git:** the per-step files, 26 GB, under the existing ignore rules. Each is pinned
+  by hash in its part manifest and held on `YOTKOTEST`.
+- **The retired machine:** it has been retired since Part 2 finished. Its full state is archived
+  off the machine.
+
 **5. Output-path and archival controls.** Absolute output paths anchored to the
 repository root in every runner, and a manifest written as part of the run rather
 than after it.
