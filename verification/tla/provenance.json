@@ -1,0 +1,79 @@
+{
+    "preconditions":  {
+                          "branch":  "main",
+                          "head":  "e5716dfd6caffdb9f06eebee37605030334a8838",
+                          "targetAbsentBeforeTask":  true,
+                          "javaExistsAndVersionSucceeds":  true,
+                          "jarExists":  true
+                      },
+    "source":  {
+                   "path":  "docs/The Lineage Imperative v2.0.md",
+                   "sha256":  "EB0A5C6E5DA70F0B57075E98ABBB99D504DB21703AA72283B3AAC879CBF8A5F3"
+               },
+    "audit":  {
+                  "path":  "C:/Users/matty/OneDrive/Downloads/Lineage v3/phase1/inputs/audit_findings.md",
+                  "sha256":  "C072CF8F724566F49FDF51317DDF14E2441ACFD01ADEBAD69AF3C51962340D28",
+                  "readable":  true,
+                  "findingsUsed":  [
+                                       "F060",
+                                       "F061",
+                                       "F062"
+                                   ],
+                  "adjacentAmbiguity":  "F059"
+              },
+    "toolchain":  {
+                      "java":  "C:/Users/matty/Dev/tools/jre/bin/java.exe",
+                      "javaVersion":  "OpenJDK Temurin 21.0.12.1+1-LTS, 2026-08-18",
+                      "javaExecutableSha256":  "82051FDAB26319D77D20CC0065045D05EC00B3E3D05F44935D7C06B96B621D55",
+                      "jar":  "C:/Users/matty/Dev/tools/tla/tla2tools.jar",
+                      "jarSha256":  "936A262061C914694DFD669A543BE24573C45D5AA0FF20A8B96B23D01E050E88",
+                      "tlcVersion":  "2.19, 08 August 2024, revision 5a47802"
+                  },
+    "execution":  {
+                      "machine":  "YOTKOTEST",
+                      "operatorMachineCoreBudget":  16,
+                      "taskTlcWorkerBudget":  2,
+                      "simultaneousTlcProcesses":  1,
+                      "jvmActiveProcessorCount":  2,
+                      "parallelGCThreads":  2,
+                      "maxJavaHeap":  "768m",
+                      "numericalLibraries":  "None",
+                      "pythonProcessesTouched":  false,
+                      "seed":  0,
+                      "fingerprintPolynomial":  0,
+                      "mode":  "bounded exhaustive TLC model checking, not random simulation",
+                      "durability":  "One atomic completion record after each closed, hashed TLC log; interrupted in-flight checks restart.",
+                      "restartEvents":  [
+                                            {
+                                                "recordedUTC":  "2026-09-26T04:20:40.3755877Z",
+                                                "reason":  "Corrected a zero-trust anomaly increase in the finite abstraction",
+                                                "procedure":  "Canceled only the owned TLC exec session, then verified no Java process remained",
+                                                "completedPreliminaryChecks":  78,
+                                                "interruptedCheck":  "candidate-base-SignatureSafety",
+                                                "preservedAt":  "history/pre-trust-fix",
+                                                "finalChecks":  "Entire final matrix will run against the corrected model"
+                                            }
+                                        ],
+                      "javaFlagVerification":  "java-flags.log: ActiveProcessorCount=2, ParallelGCThreads=2, UseParallelGC=true were reported by the installed JVM"
+                  },
+    "finalVerification":  {
+                              "verifiedUTC":  "2026-09-26T05:08:55.9194775Z",
+                              "completedProductionChecks":  189,
+                              "tlcHolds":  107,
+                              "tlcViolated":  82,
+                              "outcomesIncludeDeliberateReachabilityWitnessesAndAblations":  true,
+                              "counterexampleSummaries":  82,
+                              "sourceConfigAndLogHashesVerified":  true,
+                              "workersVerifiedInEveryLog":  2,
+                              "paperAndAuditUnchanged":  true,
+                              "branch":  "main",
+                              "headUnchanged":  true,
+                              "trackedChanges":  [
+
+                                                 ],
+                              "taskWrites":  "verification/tla/",
+                              "missingReportLinks":  0,
+                              "emDashFiles":  0,
+                              "modelCheckingComplete":  true
+                          }
+}

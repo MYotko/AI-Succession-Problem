@@ -1,0 +1,65 @@
+# Modeling choices and source mapping
+
+The source was read directly. Source line numbers and hashes refer to the working-tree file at the start of this task. The audit file was readable, so all requested corrections were included. `provenance.json` pins both files and the installed tools.
+
+## Source mapping
+
+| Model element or property | Paper text formalized |
+| --- | --- |
+| `BiologicalSet`, `PeerSet`, `FaultyPeers`, votes | Lines 476-482 define the two validator classes and exclude the incumbent from peers; lines 508-526 define the non-interested civic panel and per-person binary votes. Selection randomness, independence, and authentication of voter identity are environmental assumptions. |
+| `NormalCondition` | Lines 534-538: civic fraction, complete review, peer fraction, and ledger membership. The default as-written gate includes exactly these conjunctions. |
+| `EmergencyCondition` | Lines 540-546: critical decline, attribution, emergency technical verification, and the written peer inequality. |
+| `TwoKeySafety` | Lines 476-482 and 538 require both intelligence classes; line 548 and Appendix A, line 2561, specify unanimous emergency biological clearance. This property checks independently defined key conditions on executed transitions. |
+| `NoSingleClass` | Line 482 says neither class is sufficient alone; line 538 denies unilateral authority. Execution requires at least one actual affirmative vote from each class. |
+| `EmergencyReachable` | Lines 544 and 550 describe an emergency path that can act to save continuity; XI.5, lines 2437-2451, supplies its emergency preconditions. The test supplies all positive evidence and unanimous honest peers, with zero faulty peers, for every bounded size. |
+| `Liveness` | Line 530 says a state change occurs if and only if a gate holds; line 550 says the system can act. Eventual execution under weak fairness is an added temporal interpretation, not an explicit theorem in the paper. |
+| `ByzantineSafety` | Peer consensus in lines 536 and 542, class independence in lines 476-488, and the peer Sybil warning in Appendix A, line 2545. The paper gives no numerical fault theorem. The model measures the fault bound rather than assuming it. |
+| `DecisionSafety`, `SignatureSafety` | Audit F060, lines 603-611; normal-process requirements at paper lines 2433-2435. `Decision` is the independently evaluated Yield predicate for succession or the separately defined decision predicate for the selected other transition kind. |
+| `EmergencySafeguards` | Audit F061, lines 613-621; paper lines 548-550, 2441-2451, and 2561: timely civic incapacity, unanimous clearance, benefit/cost decision, elevated integrity, and causal nonmanufacture. |
+| Trust and reset properties | Lines 600-620 specify graduated trust, a significant single-anomaly drop, and repeated-anomaly reset with fresh panel and full audit; lines 642-648 also require fresh panels for re-bootstrap. |
+
+F060 explicitly says to add Yield for succession, signature validation, and nonempty denominators, and to define per-person votes independently of the aggregate civic predicate. F061 explicitly identifies the civic incapacity/time window, succession benefit/cost decision, unanimous biological veto clearance, and causal-test definition. All are represented. The bounded domain makes nonemptiness checks redundant within these runs; empty-set behavior is not certified.
+
+## Gate arithmetic
+
+The written emergency condition is preserved as `2 * PeerYes > n * (n + 1)`. For positive `n`, this is exactly the paper's rational inequality `PeerYes / n > (n + 1) / 2`. It uses neither truncating integer division nor a guessed corrected quorum. Binary votes imply `PeerYes <= n`. TLC checks the finite instances independently of that arithmetic argument.
+
+The candidate fraction is compared by `PeerYes * TauDen >= n * TauNum`, with `1/2 < TauNum/TauDen <= 1`. The alternative count rule is `PeerYes >= (n div 2) + 1`. A general supermajority fraction is not always equivalent to ordinary strict majority. For sizes up to four, thresholds `2/3`, `3/4`, and `1` cover every different peer acceptance boundary in `(1/2,1]`. The default is `2/3`.
+
+## Constant-selected ambiguities
+
+1. `GateReading`: `Equations` follows the displayed conjunctions and the deterministic prose. `Textual` additionally treats the adjacent safeguards and XI.4/XI.5 as binding, even in the as-written model. It still preserves the impossible emergency inequality there. `Probability` takes the displayed `P(StateChange)=1` literally: false gates can still permit an execution with probability below one. TLC models possible executions through an `uncertified` action, without assigning a probability. This is an explicit support abstraction of F059, not probabilistic model checking. Candidate gate corrections alone do not resolve this notation.
+
+2. `BioReading`: `Cached` requires every panel member's explicit approval of this proposal, retained before incapacity or expiration of the response window. This adds a timing interpretation absent from the paper. `Fresh` requires unanimous contemporaneous approval from a responsive panel; combining it with mandatory incapacity blocks the emergency route. `NoObjection` treats an incapacitated panel's silence as clearance, so it can authorize without any biological affirmative vote. This is a defensible absence-of-veto reading, but it is weaker than explicit unanimous consent and must be evaluated against the two-key requirements. The candidate cannot be described as unconditionally certified across these conflicting readings.
+
+3. `AttributionReading`: `Independent` tests the displayed independence symbol as an abstract statistical predicate. `NonManufactured` tests causal nonmanufacture, as the adjacent explanation and XI.5 say. The two inputs are independent Boolean abstractions, with no assumed mathematical equivalence. A fully corrected candidate uses nonmanufacture regardless of the source reading. `EmergencyVerified` supplies independent review of the causal evidence; causal inference itself is outside this Boolean model.
+
+4. `ReviewReading`: `Exclusive` treats `Complete` and `EmergencyVerified` as different enum values, following the two equality tests. `Cumulative` lets emergency verification imply completed normal review. This can make an ordinary transition possible when the emergency path is blocked. A normal-path execution is never counted as an emergency witness.
+
+5. `TrustReading`: `Fixed` uses the state-function threshold as a fixed constant. `Graduated` incorporates the later time-varying biological threshold, with initialization threshold one and normal threshold `2/3`. Trust takes values zero, a positive low bin represented by `9/100`, and `90/100`; a single anomaly multiplies `90/100` by `1/10`, and repetition resets to zero. Further decay inside the positive low bin remains in that bin; an anomaly at zero leaves trust at zero. Every low-bin value requires unanimity for panels of at most four, so this quotient preserves the gate outcome. These are finite representatives, not a numerical integration of the continuous formula. Trust never reaches one. At high trust the default effective biological threshold is `7/10`, so a three-person panel requires all three approvals. Every possible vote count is explored.
+
+6. `ResetReading`: `Consecutive` resets the anomaly counter on a consistent observation; `Cumulative` preserves it. Both trigger full re-bootstrap after two anomalies. The paper does not quantify how many anomalies count as repeated. Two is the smallest faithful finite instance. Reset clears all votes and review, changes the panel epoch, and requires a full new audit before execution. Alternating epoch tags are safe here because the model retains no old messages or certificates after reset.
+
+7. `EnvironmentReading`: `Stable` allows fair vote delivery and fair execution once positive evidence is available. `Anomalies` also permits recurring anomalies, observation, and re-bootstrap. Weak fairness does not force an action that is repeatedly disabled by reset. The paper supplies no eventual-stability assumption, so both environments are checked.
+
+8. `ByzantineReading`: `PeerQuorum` asks whether any executing transition can lack honest peer participation even while biological consent is independently present. `EntireTransition` asks whether faulty peers can execute with neither biological approval nor honest peer approval. These different meanings of "faulty votes alone" have different maximum bounds and are reported separately.
+
+9. `TransitionKind`: succession uses an abstract Yield decision; resource reallocation and architectural modification use separate abstract decision predicates. Each is constant-selected. The arithmetic and measurement procedures for these decisions are not supplied by the gate and are not invented by this model.
+
+## Exhaustiveness and temporal assumptions
+
+The main safety configurations enumerate every one of the 256 combinations of eight evidence predicates, all three review states, every biological and peer size in one through four, every possible faulty count up to `f`, every biological affirmative-vote count, and every combination of honest and faulty peer affirmative-vote counts. Identical voters within each class are interchangeable for this protocol's guards and properties. The canonical prefix representation is the quotient by those permutations. No TLC state constraint, depth limit, random simulation, or sampled vote configuration is used.
+
+Faulty membership is fixed within a proposal. The adversary controls its own ballots; it cannot change honest ballots, validator membership, the decision oracle, or technical-review evidence. The Incapacity predicate abstracts the disjunction of incapacity, unavailability, and inability to respond within the continuity window. The model has no real-time deadline and proves no response-time bound.
+
+The executed phase denotes the proposed succession, resource reallocation, or architectural modification. Voting, review, and trust updates are internal protocol bookkeeping before that protected execution. Commitment signature validation is checked on the normal route, matching F060's scope. Attribution and decision predicates are trusted abstract inputs, whose real-world measurement procedures are outside this model.
+
+The all-evidence safety domain has 741,888 initial states: 14 biological size/approval-count combinations, 69 peer size/fault-count/honest-approval/faulty-approval combinations, three review values, and 256 evidence valuations. Each primary safety log reports that initial count. Additional single-guard probes retain the same transition relation and restrict initial states to isolate one absent emergency safeguard at a time.
+
+For liveness, the same module begins before votes arrive. Honest validators support the legitimate proposal, and weak fairness covers biological vote delivery, honest peer vote delivery, execution on each route, and full audit after reset. The honest peer population alone must meet the applicable quorum. Faulty peers can cast, withhold, or replace their votes arbitrarily. Evidence is favorable and fixed. These checks do not prove that technical review, signature validation, or the decision oracle eventually becomes favorable in a real system. The normal route is not subject to the emergency continuity deadline, so fair eventual civic responses on that route do not imply responses within that deadline.
+
+In the Cached emergency reading, biological vote delivery means retrieving proposal-specific approvals granted before incapacity. It does not assume an incapacitated person can cast a new vote. In Fresh, that delivery action is disabled by incapacity. NoObjection requires no delivered biological ballot during incapacity. This timing distinction is an explicit assumption, not a rule supplied by the paper.
+
+`EmergencyReachable` is a state invariant asserting `ENABLED ExecuteEmergency` in each prepared positive emergency. Its `ENABLED` quantifier is existential over a next state. A separate `NeverEmergency` invariant searches the transition graph for an actual emergency execution. Passing enablement at every bounded size plus the execution witness distinguishes existential reachability from a universal eventuality claim. As-written `NeverEmergency` passes exhaustively, mechanically establishing that the emergency route is dead within the bounds. An instrument-only setup step makes failed enablement visible after initialization, so TLC supplies both state counts and a counterexample.
+
+TLC invariant violations stop at the first counterexample, so their reported state counts are partial, and two-worker discovery order can vary. Passing checks finish with an empty queue. `TypeOK` accompanies every check. State counts refer to the identity quotient, not the expanded set of all labeled validator permutations. TLC's finite fingerprints carry the collision qualification printed in its raw logs; this is bounded mechanical evidence, not a deductive proof for unbounded deployments.

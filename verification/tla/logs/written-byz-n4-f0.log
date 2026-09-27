@@ -1,0 +1,34 @@
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+Running breadth-first search Model-Checking with fp 0 and seed 0 with 2 workers on 2 cores with 736MB heap and 64MB offheap memory [pid: 42888] (Windows 11 10.0 amd64, Eclipse Adoptium 21.0.12.1 x86_64, MSBDiskFPSet, DiskStateQueue).
+Parsing file COP_as_written.tla
+Parsing file C:\Users\matty\Dev\AI-Succession-Problem\verification\tla\tmp\Integers.tla
+Parsing file C:\Users\matty\Dev\AI-Succession-Problem\verification\tla\tmp\FiniteSets.tla
+Parsing file C:\Users\matty\Dev\AI-Succession-Problem\verification\tla\tmp\TLC.tla
+Parsing file C:\Users\matty\Dev\AI-Succession-Problem\verification\tla\tmp\Naturals.tla
+Parsing file COP_core.tla
+Parsing file C:\Users\matty\Dev\AI-Succession-Problem\verification\tla\tmp\Sequences.tla
+Semantic processing of module Naturals
+Semantic processing of module Integers
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module COP_core
+Semantic processing of module COP_as_written
+Starting... (2026-09-26 00:29:06)
+Computing initial states...
+Computed 2 initial states...
+Computed 4 initial states...
+Computed 8 initial states...
+Computed 16 initial states...
+Computed 32 initial states...
+Computed 64 initial states...
+Computed 128 initial states...
+Finished computing initial states: 210 distinct states generated at 2026-09-26 00:29:14.
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 0.0
+220 states generated, 220 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 2.
+The average outdegree of the complete state graph is 0 (minimum is 0, the maximum 1 and the 95th percentile is 0).
+Finished in 08s at (2026-09-26 00:29:14)

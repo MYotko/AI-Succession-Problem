@@ -1,0 +1,55 @@
+{
+  "source_commit": "e5716dfd6caffdb9f06eebee37605030334a8838",
+  "source_files_verified": 47,
+  "source_hashes_unchanged": true,
+  "ast_and_tokenizer_numeric_locations": 3339,
+  "missing_numeric_literals": 0,
+  "duplicate_numeric_locations": 0,
+  "counts_by_class": {
+    "measured": 0,
+    "calibrated": 29,
+    "derived": 287,
+    "arbitrary": 3128
+  },
+  "operator_decisions": 3148,
+  "documentation_reference_locations_verified": 15045,
+  "documentation_files_verified": 186,
+  "owned_artifacts": [
+    "verification/conformance/README.md",
+    "verification/conformance/pytest_result.txt",
+    "verification/conformance/test_conformance_v2.py",
+    "verification/provenance/build_parameter_register.py",
+    "verification/provenance/coverage_manifest.json",
+    "verification/provenance/parameter_register.csv",
+    "verification/provenance/parameter_register_summary.md",
+    "verification/provenance/validation_report.json"
+  ],
+  "no_bytecode_in_owned_directories": true,
+  "no_literal_em_dashes": true,
+  "preconditions": {
+    "branch": "main",
+    "tracked_status_empty": true,
+    "verification_absent": true
+  },
+  "pytest": {
+    "passed": 2,
+    "xfailed": 3,
+    "strict_xpass": 1,
+    "exit_code": 1,
+    "pytest_seconds": 1.7,
+    "wall_seconds": 4.83
+  },
+  "tool_workarounds": [
+    "Replaced oversized tool output with bounded source reads.",
+    "Replaced a literal Windows wildcard path with directory glob filtering."
+  ],
+  "self_fixes": [
+    "Expanded provenance coverage to include infinity/NaN expressions and numeric strings.",
+    "Traced config defaults through later reads of assigned instance attributes.",
+    "Made summary creation exclusive, matching the CSV and manifest."
+  ],
+  "final_tracked_diff_empty": true,
+  "tool_warnings": [
+    "Git could not read the global ignore file. Read-only diff still completed with exit status 0 and no tracked changes."
+  ]
+}

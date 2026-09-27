@@ -1,0 +1,73 @@
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+Running breadth-first search Model-Checking with fp 0 and seed 0 with 2 workers on 2 cores with 736MB heap and 64MB offheap memory [pid: 15120] (Windows 11 10.0 amd64, Eclipse Adoptium 21.0.12.1 x86_64, MSBDiskFPSet, DiskStateQueue).
+Parsing file COP_as_written.tla
+Parsing file C:\Users\matty\Dev\AI-Succession-Problem\verification\tla\tmp\Integers.tla
+Parsing file C:\Users\matty\Dev\AI-Succession-Problem\verification\tla\tmp\FiniteSets.tla
+Parsing file C:\Users\matty\Dev\AI-Succession-Problem\verification\tla\tmp\TLC.tla
+Parsing file C:\Users\matty\Dev\AI-Succession-Problem\verification\tla\tmp\Naturals.tla
+Parsing file COP_core.tla
+Parsing file C:\Users\matty\Dev\AI-Succession-Problem\verification\tla\tmp\Sequences.tla
+Semantic processing of module Naturals
+Semantic processing of module Integers
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module COP_core
+Semantic processing of module COP_as_written
+Starting... (2026-09-26 00:34:03)
+Computing initial states...
+Computed 2 initial states...
+Computed 4 initial states...
+Computed 8 initial states...
+Finished computing initial states: 16 distinct states generated at 2026-09-26 00:34:11.
+Error: Invariant EmergencyReachable is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ phase = "setup"
+/\ bioYes = 1
+/\ trust = 90
+/\ sawReset = FALSE
+/\ honestYes = 1
+/\ m = 1
+/\ n = 1
+/\ route = "none"
+/\ faulty = 0
+/\ certificateEpoch = 0
+/\ review = "EmergencyVerified"
+/\ panelEpoch = 0
+/\ anomalies = 0
+/\ faultyYes = 0
+/\ evidence = { "Emergency",
+  "Independent",
+  "Decision",
+  "Signature",
+  "Ledger",
+  "Incapacity",
+  "Integrity" }
+
+State 2: <Action line 10, col 1 to line 10, col 41 of module COP_as_written>
+/\ phase = "ready"
+/\ bioYes = 1
+/\ trust = 90
+/\ sawReset = FALSE
+/\ honestYes = 1
+/\ m = 1
+/\ n = 1
+/\ route = "none"
+/\ faulty = 0
+/\ certificateEpoch = 0
+/\ review = "EmergencyVerified"
+/\ panelEpoch = 0
+/\ anomalies = 0
+/\ faultyYes = 0
+/\ evidence = { "Emergency",
+  "Independent",
+  "Decision",
+  "Signature",
+  "Ledger",
+  "Incapacity",
+  "Integrity" }
+
+18 states generated, 18 distinct states found, 14 states left on queue.
+The depth of the complete state graph search is 2.
+Finished in 08s at (2026-09-26 00:34:11)

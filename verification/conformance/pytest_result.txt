@@ -1,0 +1,37 @@
+Source commit: e5716dfd6caffdb9f06eebee37605030334a8838
+Command: python -B -m pytest -p no:cacheprovider --assert=plain verification/conformance/test_conformance_v2.py -q -rXxf
+Environment: PYTHONDONTWRITEBYTECODE=1, PYTEST_DISABLE_PLUGIN_AUTOLOAD=1,
+OMP_NUM_THREADS=1, OPENBLAS_NUM_THREADS=1, MKL_NUM_THREADS=1.
+The test module sets additional numerical-library thread environment variables.
+These are configured limits; effective library thread counts were not measured.
+
+Rerun 2026-09-26 after the expected-failure mark was removed from test (b), which v2
+satisfies. Same command and environment.
+
+Observed pytest output:
+
+x.x.x.                                                                   [100%]
+=========================== short test summary info ===========================
+XFAIL verification/conformance/test_conformance_v2.py::test_objective_responds_to_novelty_at_fixed_lineage - Task (a), audit ID not supplied: inverse-scarcity products nearly cancel
+XFAIL verification/conformance/test_conformance_v2.py::test_lineage_protection_near_collapse_retains_relative_sensitivity - F015: relative lineage sensitivity fades near the collapse floor
+XFAIL verification/conformance/test_conformance_v2.py::test_g2_3_enforces_cultivate_exploit_collapse_payoff_ordering - G2.3, audit ID not supplied: payoff_ordering_valid is reported but not enforced
+3 passed, 3 xfailed in 2.02s
+
+Independent calls to the same production metric, with no simulation:
+Novelty elasticities at fixed L:
+  h_n=0.25, h_e=0.2: 2.5002409573669233e-06
+  h_n=0.5, h_e=0.4: 1.2501227329327266e-06
+  h_n=0.8, h_e=0.7: 7.813272131613641e-07
+Marginal novelty/execution ratios, h_n=0.5:
+  h_e=0.2: 0.2666682633320489
+  h_e=0.4: 1.066667727133155
+  h_e=0.7: 3.266662877716458
+Relative lineage sensitivity, L*(dU/dL)/present_value:
+  L=0.0001: 0.001010050167123987
+  L=0.00001: 0.00010100501674604533
+  L=0.00000101: 1.0201506673407136e-05
+Absolute lineage sensitivity, (dU/dL)/present_value, stays near 10.10050167.
+
+Only F015 was supplied as an audit finding ID. G2.3 is a gate identifier.
+The missing audit IDs were not invented. See README.md for assumptions,
+proposed materiality thresholds, derivative definitions, and domain limits.
