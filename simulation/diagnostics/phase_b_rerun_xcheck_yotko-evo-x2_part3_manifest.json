@@ -1,0 +1,90 @@
+{
+  "part": 3,
+  "machine_label": "yotko-evo-x2",
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "fe199e8d67fbf0c19abebdf0c21fbbae9aa8f9bb04b1139e1902c7fde1285568",
+      "phase_b_rerun_common.py": "00ce1aa25f0edc40d520cc9ef5b1a44004afac1a4bb5760737b81aaaed50a5a1",
+      "phase_b_rerun_child.py": "f9551a5696fe4560e577471664b3296d313745c07da67ac5f73e2d8ac734b51c",
+      "phase_b_rerun_xcheck_compare.py": "060d132bb0e8006f70b6acd401d458d5970e8c57cc12010efa4897bb7137367e"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "O": {
+        "interpreter_version": "3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "run_count": 4,
+  "runs_file": "phase_b_rerun_xcheck_yotko-evo-x2_part3_runs.csv",
+  "completions_file": "phase_b_rerun_xcheck_yotko-evo-x2_part3_completions.jsonl",
+  "steps_file": "phase_b_rerun_xcheck_yotko-evo-x2_part3_steps.csv",
+  "files": {
+    "phase_b_rerun_xcheck_yotko-evo-x2_part3_runs.csv": {
+      "sha256_lf": "4fee53922fbed3e6bd14d3b230bd502d8bf162c839911e31fd232e6f0e89f38c",
+      "row_count": 4
+    },
+    "phase_b_rerun_xcheck_yotko-evo-x2_part3_completions.jsonl": {
+      "sha256_lf": "b8963efda73920f0dec9a9d9f8da48e1a350355292a3e9779bf328bcecdc0caf",
+      "row_count": 4
+    },
+    "phase_b_rerun_xcheck_yotko-evo-x2_part3_steps.csv": {
+      "sha256_lf": "770e3cd8fec6f8adcb948efde0d76303b0b27b0b5ddc54b0543416a2ff5de151",
+      "row_count": 1835
+    },
+    "phase_b_rerun_xcheck_yotko-evo-x2_part3_interruption_journal.jsonl": {
+      "sha256_lf": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "row_count": 0
+    }
+  },
+  "runs": {
+    "O_p3_C_0de9b507be0110cdce85a9b2": {
+      "arm": "O",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "53b17e62be66c3db8593b4cd0e345137b7226c9dad13710bfb7e34f29753bd77",
+      "step_count": 500,
+      "steps_sha256": "b5d7d75ec58f397b57cf421128c3e6da03525f645e39492e84e68e1769613429"
+    },
+    "O_p3_C_451abe9d26b28c4cef9ccd3d": {
+      "arm": "O",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "57f35f8654f38e29e929331c3079c65185e7f2f932efcbf14ab03e09ba68e69f",
+      "step_count": 500,
+      "steps_sha256": "89b5bdf69ce5dc2676633d3329bf736c19a8b7df6583b4ed4503cc017ca37455"
+    },
+    "O_p3_C_58359a2bbed8c2243c6e6f4f": {
+      "arm": "O",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "f3c89b09e83b0499f8d313c43c65ff23b60a5653571291df1fd420f3bd4ad419",
+      "step_count": 500,
+      "steps_sha256": "9bdbedea7e2b95cfac7107e92bb783a300e70d589db3f8a0c7d71db5e28c2dd0"
+    },
+    "O_p3_C_7ded96c31cc385c178bc6e42": {
+      "arm": "O",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "c0bd01f7737a7cf1959517c3e048425660755fadbacdbf1a977580dc4e84e663",
+      "step_count": 335,
+      "steps_sha256": "3d555cdeac4e159f8c957027e319447b2fdf1ac27477ce969f86855fb7ce5ee5"
+    }
+  },
+  "deleted_by_kind": {
+    "completion.json": 4,
+    "steps.jsonl": 4,
+    "request.json": 4,
+    "console.txt": 4
+  }
+}

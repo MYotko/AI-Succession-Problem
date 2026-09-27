@@ -1,0 +1,106 @@
+{
+  "part": 4,
+  "machine_label": "yotko-evo-x2",
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "fe199e8d67fbf0c19abebdf0c21fbbae9aa8f9bb04b1139e1902c7fde1285568",
+      "phase_b_rerun_common.py": "00ce1aa25f0edc40d520cc9ef5b1a44004afac1a4bb5760737b81aaaed50a5a1",
+      "phase_b_rerun_child.py": "f9551a5696fe4560e577471664b3296d313745c07da67ac5f73e2d8ac734b51c",
+      "phase_b_rerun_xcheck_compare.py": "060d132bb0e8006f70b6acd401d458d5970e8c57cc12010efa4897bb7137367e"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "O": {
+        "interpreter_version": "3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "run_count": 6,
+  "runs_file": "phase_b_rerun_xcheck_yotko-evo-x2_part4_runs.csv",
+  "completions_file": "phase_b_rerun_xcheck_yotko-evo-x2_part4_completions.jsonl",
+  "steps_file": "phase_b_rerun_xcheck_yotko-evo-x2_part4_steps.csv",
+  "files": {
+    "phase_b_rerun_xcheck_yotko-evo-x2_part4_runs.csv": {
+      "sha256_lf": "d4a5d9287cbbdc0101873dc86e93c0bceb96f3de106684d79de2e0e32a4ce496",
+      "row_count": 6
+    },
+    "phase_b_rerun_xcheck_yotko-evo-x2_part4_completions.jsonl": {
+      "sha256_lf": "0913ab5bfc8af69a31189d793381b2c5d49452d66d541569e0e85096db342bf7",
+      "row_count": 6
+    },
+    "phase_b_rerun_xcheck_yotko-evo-x2_part4_steps.csv": {
+      "sha256_lf": "8dd004a77e898cabb440b0e3aa2f0fb838a148cc90dac1668ea4eca8e0705d9a",
+      "row_count": 3000
+    },
+    "phase_b_rerun_xcheck_yotko-evo-x2_part4_interruption_journal.jsonl": {
+      "sha256_lf": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "row_count": 0
+    }
+  },
+  "runs": {
+    "R_p4_A_1838f22be8317bf11ca2d2c7": {
+      "arm": "R",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "4fffa9dde510e88859e0866b2ebfc7b37cfbd1298193f068e7698b66950f266d",
+      "step_count": 500,
+      "steps_sha256": "f4b152a805a437702f917c8bbaba22dc2ad2bbbbbbc93569d8886dd4c52b9098"
+    },
+    "R_p4_A_2fa60758a32b0829125ca58a": {
+      "arm": "R",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "c42576cfc349bc59a4e896a8dec5f41ee160352e32da2d5ed01663340ef45554",
+      "step_count": 500,
+      "steps_sha256": "9f5578572e9649d7653a687d8c08b70fbd42488d24469b4080d06baac9c0e537"
+    },
+    "R_p4_C_0de9b507be0110cdce85a9b2": {
+      "arm": "R",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "66d4c8edde79515d7e8475f562a843848307954416be36037d3970b335d2cdfd",
+      "step_count": 500,
+      "steps_sha256": "b3ba22e93d990ebe1001b2bbac07a60dbb26ea31ef33b30d2e3fa9af056a13ac"
+    },
+    "R_p4_C_451abe9d26b28c4cef9ccd3d": {
+      "arm": "R",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "bed5aca8f60cd523058b1b2391f704670dc8df3dd075e25ef7b7df92bd4e93e7",
+      "step_count": 500,
+      "steps_sha256": "839c2aa75238362b725fd69ab4614c58f744764ae1240d7fd1aba7315248f36e"
+    },
+    "R_p4_C_58359a2bbed8c2243c6e6f4f": {
+      "arm": "R",
+      "seed_index": 150,
+      "row_count": 1,
+      "row_sha256": "4ed74d9204caeb50d15bce6c0e00d6b6fc15f18482fe1431e2e25c8552d50dec",
+      "step_count": 500,
+      "steps_sha256": "fd57c5f195ae3b177e5503e98a6b687da1034aeffabfc52e6225047c0446945f"
+    },
+    "R_p4_C_7ded96c31cc385c178bc6e42": {
+      "arm": "R",
+      "seed_index": 151,
+      "row_count": 1,
+      "row_sha256": "af37d78eec766121940f0ab2defb628fd0da7c9166c840074b08bce3bf178042",
+      "step_count": 500,
+      "steps_sha256": "4680d7172a383521625a1d5f6722a6b7ea7e120e89b237ad173a5f79e3f1881c"
+    }
+  },
+  "deleted_by_kind": {
+    "completion.json": 6,
+    "steps.jsonl": 6,
+    "request.json": 6,
+    "console.txt": 6
+  }
+}

@@ -2520,6 +2520,23 @@ process, but the figures it put in doubt, apart from the untested phi curve, sta
 - **The retired machine:** it has been retired since Part 2 finished. Its full state is archived
   off the machine.
 
+*A successor machine, 2026-09-26.* The retired machine was replaced by `yotko-evo-x2`, an AMD
+Ryzen AI Max+ 395, set up with the retired machine's exact Python environment:
+- the same conda-forge CPython 3.13.12 build;
+- numpy 2.4.4;
+- glibc 2.39.
+
+It then ran Amendment 1's registered cross-machine check: the same 16 non-registered tasks, at
+seed indices 150 and 151, on both arms, with identical executor and bytecode hashes.
+
+- **Against the retired machine's recorded rows:** all 30 original fields are identical, bit for
+  bit, in every task (`phase_b_rerun_xcheck_result_10e1e0ce941b.json`).
+- **Against `YOTKOTEST`:** it differs in the same eighteen last-digit fields as the retired
+  machine did.
+
+Under the amendment's rule the two Linux machines are therefore interchangeable, and any
+reproduction of Part 2 can run on the successor. No registered run was repeated.
+
 **5. Output-path and archival controls.** Absolute output paths anchored to the
 repository root in every runner, and a manifest written as part of the run rather
 than after it.

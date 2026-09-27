@@ -1,0 +1,317 @@
+{
+  "identity": {
+    "executor_hashes": {
+      "phase_b_rerun_executor.py": "fe199e8d67fbf0c19abebdf0c21fbbae9aa8f9bb04b1139e1902c7fde1285568",
+      "phase_b_rerun_common.py": "00ce1aa25f0edc40d520cc9ef5b1a44004afac1a4bb5760737b81aaaed50a5a1",
+      "phase_b_rerun_child.py": "f9551a5696fe4560e577471664b3296d313745c07da67ac5f73e2d8ac734b51c",
+      "phase_b_rerun_xcheck_compare.py": "060d132bb0e8006f70b6acd401d458d5970e8c57cc12010efa4897bb7137367e"
+    },
+    "bytecode_sha256": "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b",
+    "worktree_heads": {
+      "O": "45409d469a82bb599fe354e8ae3760e4cc3af048",
+      "R": "a370925d53a786a3cdaeb36543c02e7135a0ecab"
+    },
+    "note_sha256_lf": "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72",
+    "versions": {
+      "O": {
+        "interpreter_version": "3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0]",
+        "numpy_version": "2.4.4"
+      },
+      "R": {
+        "interpreter_version": "3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0]",
+        "numpy_version": "2.4.4"
+      }
+    }
+  },
+  "task_ids": [
+    "O_p1_B_5d277a51fca4df2641468951",
+    "O_p1_B_f919e2ba22ecc161f3be7cdc",
+    "O_p2_A_333d7e2994dc3327f52160a6",
+    "O_p2_A_c0a5bd479a50328512c32432",
+    "O_p2_A_1838f22be8317bf11ca2d2c7",
+    "O_p2_A_2fa60758a32b0829125ca58a",
+    "O_p3_C_0de9b507be0110cdce85a9b2",
+    "O_p3_C_451abe9d26b28c4cef9ccd3d",
+    "O_p3_C_58359a2bbed8c2243c6e6f4f",
+    "O_p3_C_7ded96c31cc385c178bc6e42",
+    "R_p4_A_1838f22be8317bf11ca2d2c7",
+    "R_p4_A_2fa60758a32b0829125ca58a",
+    "R_p4_C_0de9b507be0110cdce85a9b2",
+    "R_p4_C_451abe9d26b28c4cef9ccd3d",
+    "R_p4_C_58359a2bbed8c2243c6e6f4f",
+    "R_p4_C_7ded96c31cc385c178bc6e42"
+  ],
+  "machine_label": "yotko-evo-x2",
+  "events": [
+    {
+      "event": "worker_cap",
+      "requested_utc": "2026-09-27T01:28:39.154957+00:00",
+      "requested_local": "2026-09-26T21:28:39.154787",
+      "previous_cap": 1,
+      "cap": 16,
+      "source": "override:workers",
+      "active_at_request": 0,
+      "effective_utc": "2026-09-27T01:28:39.154976+00:00",
+      "active_at_effective": 0
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p1_B_5d277a51fca4df2641468951",
+      "pid": 13529,
+      "utc": "2026-09-27T01:28:39.174010+00:00",
+      "active_after": 1,
+      "cap": 16
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p1_B_f919e2ba22ecc161f3be7cdc",
+      "pid": 13530,
+      "utc": "2026-09-27T01:28:39.175393+00:00",
+      "active_after": 2,
+      "cap": 16
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p2_A_333d7e2994dc3327f52160a6",
+      "pid": 13531,
+      "utc": "2026-09-27T01:28:39.176905+00:00",
+      "active_after": 3,
+      "cap": 16
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p2_A_c0a5bd479a50328512c32432",
+      "pid": 13532,
+      "utc": "2026-09-27T01:28:39.178164+00:00",
+      "active_after": 4,
+      "cap": 16
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p2_A_1838f22be8317bf11ca2d2c7",
+      "pid": 13533,
+      "utc": "2026-09-27T01:28:39.179403+00:00",
+      "active_after": 5,
+      "cap": 16
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p2_A_2fa60758a32b0829125ca58a",
+      "pid": 13534,
+      "utc": "2026-09-27T01:28:39.180548+00:00",
+      "active_after": 6,
+      "cap": 16
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+      "pid": 13535,
+      "utc": "2026-09-27T01:28:39.181922+00:00",
+      "active_after": 7,
+      "cap": 16
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p3_C_451abe9d26b28c4cef9ccd3d",
+      "pid": 13536,
+      "utc": "2026-09-27T01:28:39.183185+00:00",
+      "active_after": 8,
+      "cap": 16
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p3_C_58359a2bbed8c2243c6e6f4f",
+      "pid": 13537,
+      "utc": "2026-09-27T01:28:39.184402+00:00",
+      "active_after": 9,
+      "cap": 16
+    },
+    {
+      "event": "dispatch",
+      "run_id": "O_p3_C_7ded96c31cc385c178bc6e42",
+      "pid": 13538,
+      "utc": "2026-09-27T01:28:39.185618+00:00",
+      "active_after": 10,
+      "cap": 16
+    },
+    {
+      "event": "dispatch",
+      "run_id": "R_p4_A_1838f22be8317bf11ca2d2c7",
+      "pid": 13539,
+      "utc": "2026-09-27T01:28:39.186912+00:00",
+      "active_after": 11,
+      "cap": 16
+    },
+    {
+      "event": "dispatch",
+      "run_id": "R_p4_A_2fa60758a32b0829125ca58a",
+      "pid": 13540,
+      "utc": "2026-09-27T01:28:39.188072+00:00",
+      "active_after": 12,
+      "cap": 16
+    },
+    {
+      "event": "dispatch",
+      "run_id": "R_p4_C_0de9b507be0110cdce85a9b2",
+      "pid": 13541,
+      "utc": "2026-09-27T01:28:39.189220+00:00",
+      "active_after": 13,
+      "cap": 16
+    },
+    {
+      "event": "dispatch",
+      "run_id": "R_p4_C_451abe9d26b28c4cef9ccd3d",
+      "pid": 13542,
+      "utc": "2026-09-27T01:28:39.190324+00:00",
+      "active_after": 14,
+      "cap": 16
+    },
+    {
+      "event": "dispatch",
+      "run_id": "R_p4_C_58359a2bbed8c2243c6e6f4f",
+      "pid": 13543,
+      "utc": "2026-09-27T01:28:39.195067+00:00",
+      "active_after": 15,
+      "cap": 16
+    },
+    {
+      "event": "dispatch",
+      "run_id": "R_p4_C_7ded96c31cc385c178bc6e42",
+      "pid": 13544,
+      "utc": "2026-09-27T01:28:39.198973+00:00",
+      "active_after": 16,
+      "cap": 16
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p3_C_7ded96c31cc385c178bc6e42",
+      "utc": "2026-09-27T01:29:25.366341+00:00",
+      "pid": 13538
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p2_A_333d7e2994dc3327f52160a6",
+      "utc": "2026-09-27T01:29:36.385688+00:00",
+      "pid": 13531
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p1_B_f919e2ba22ecc161f3be7cdc",
+      "utc": "2026-09-27T01:29:38.188280+00:00",
+      "pid": 13530
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p3_C_0de9b507be0110cdce85a9b2",
+      "utc": "2026-09-27T01:29:38.989522+00:00",
+      "pid": 13535
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p1_B_5d277a51fca4df2641468951",
+      "utc": "2026-09-27T01:29:39.792837+00:00",
+      "pid": 13529
+    },
+    {
+      "event": "part_merged",
+      "part": 1,
+      "utc": "2026-09-27T01:29:39.905380+00:00",
+      "rows": 2
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p2_A_c0a5bd479a50328512c32432",
+      "utc": "2026-09-27T01:29:40.394285+00:00",
+      "pid": 13532
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p3_C_451abe9d26b28c4cef9ccd3d",
+      "utc": "2026-09-27T01:29:41.996443+00:00",
+      "pid": 13536
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p3_C_58359a2bbed8c2243c6e6f4f",
+      "utc": "2026-09-27T01:29:43.398478+00:00",
+      "pid": 13537
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p2_A_1838f22be8317bf11ca2d2c7",
+      "utc": "2026-09-27T01:29:43.599584+00:00",
+      "pid": 13533
+    },
+    {
+      "event": "part_merged",
+      "part": 3,
+      "utc": "2026-09-27T01:29:43.601112+00:00",
+      "rows": 4
+    },
+    {
+      "event": "complete",
+      "run_id": "O_p2_A_2fa60758a32b0829125ca58a",
+      "utc": "2026-09-27T01:29:44.806592+00:00",
+      "pid": 13534
+    },
+    {
+      "event": "part_merged",
+      "part": 2,
+      "utc": "2026-09-27T01:29:45.013037+00:00",
+      "rows": 4
+    },
+    {
+      "event": "complete",
+      "run_id": "R_p4_C_0de9b507be0110cdce85a9b2",
+      "utc": "2026-09-27T01:29:54.241371+00:00",
+      "pid": 13541
+    },
+    {
+      "event": "complete",
+      "run_id": "R_p4_A_1838f22be8317bf11ca2d2c7",
+      "utc": "2026-09-27T01:29:54.845758+00:00",
+      "pid": 13539
+    },
+    {
+      "event": "complete",
+      "run_id": "R_p4_A_2fa60758a32b0829125ca58a",
+      "utc": "2026-09-27T01:29:56.848096+00:00",
+      "pid": 13540
+    },
+    {
+      "event": "complete",
+      "run_id": "R_p4_C_7ded96c31cc385c178bc6e42",
+      "utc": "2026-09-27T01:29:57.048645+00:00",
+      "pid": 13544
+    },
+    {
+      "event": "complete",
+      "run_id": "R_p4_C_451abe9d26b28c4cef9ccd3d",
+      "utc": "2026-09-27T01:29:57.649410+00:00",
+      "pid": 13542
+    },
+    {
+      "event": "complete",
+      "run_id": "R_p4_C_58359a2bbed8c2243c6e6f4f",
+      "utc": "2026-09-27T01:29:58.450812+00:00",
+      "pid": 13543
+    },
+    {
+      "event": "part_merged",
+      "part": 4,
+      "utc": "2026-09-27T01:29:58.780509+00:00",
+      "rows": 6
+    }
+  ],
+  "resume_counts": {
+    "preserved": 0,
+    "restarted": 0,
+    "never_launched": 16
+  },
+  "elapsed_seconds": 79.93080181699997,
+  "cpu_budget": 32,
+  "priority": "normal",
+  "retry_events": [],
+  "last_cap": 16,
+  "last_cap_source": "override:workers"
+}
