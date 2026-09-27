@@ -1,8 +1,8 @@
 # Framework Papers Snapshot
 
-Generated: 2026-09-22T02:21:20Z
+Generated: 2026-09-27T16:57:31Z
 Repository: C:\Users\matty\Dev\AI-Succession-Problem
-Commit: f136aa6d
+Commit: dd7d6eeb
 Branch: main
 Category: framework_papers
 
@@ -10,11 +10,11 @@ Category: framework_papers
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| docs/The Lineage Imperative v2.0.md | 2825 | 257509 |
+| docs/The Lineage Imperative v2.0.md | 2842 | 258645 |
 | docs/The Lineage Imperative v1.x.2.md | 2154 | 196149 |
 | docs/The AI Succession Problem.md | 101 | 15394 |
 
-Total: 3 files, 5080 lines, 469052 bytes
+Total: 3 files, 5097 lines, 470188 bytes
 
 ---
 ==========================================
@@ -22,6 +22,23 @@ FILE: docs/The Lineage Imperative v2.0.md
 ==========================================
 
 # The Lineage Imperative
+
+> **Status notice, September 25, 2026.** This version is under major revision. Do not cite its
+> formal results. An internal mathematical audit and independent re-derivations found the
+> following:
+>
+> - The claim that mutual cultivation is the *unique* equilibrium is false. Mutual defection is
+>   also an equilibrium. Cooperation remains an equilibrium both parties prefer.
+> - The system objective $U_{sys}$ as written diverges, and its scarcity weighting is inert.
+> - The model-collapse penalty holds only conditionally.
+> - Several protocol equations are defective, including an emergency quorum that cannot be met.
+> - The drift-containment status stated here is superseded. It is uncharacterized, neither
+>   shown contained nor shown uncontained.
+>
+> A summary is in the [instrument validation record](v2_0_instrument_validation_record.md), and the full analyses will be
+> published with v3. The core of the framework is being rebuilt on formally certified
+> foundations in v3: human novelty as a non-redundant input, cooperation as an available and
+> preferred equilibrium, and the need for an architecture that secures it.
 
 **Author:** Matthew Yotko **Date:** March 13, 2026
 

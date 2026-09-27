@@ -1,8 +1,8 @@
 # Docs Snapshot
 
-Generated: 2026-09-22T02:21:20Z
+Generated: 2026-09-27T16:57:31Z
 Repository: C:\Users\matty\Dev\AI-Succession-Problem
-Commit: f136aa6d
+Commit: dd7d6eeb
 Branch: main
 Category: docs
 
@@ -21,10 +21,10 @@ Category: docs
 | docs/lineage_imperative_one_pager_v2.md | 80 | 9428 |
 | docs/lineage_phi_program_reference.md | 1719 | 155053 |
 | docs/paper_v2_outline.md | 361 | 18177 |
-| docs/v2_0_instrument_validation_record.md | 2480 | 153387 |
-| README.md | 58 | 5189 |
+| docs/v2_0_instrument_validation_record.md | 2773 | 172115 |
+| README.md | 75 | 6355 |
 
-Total: 13 files, 8010 lines, 536446 bytes
+Total: 13 files, 8320 lines, 556340 bytes
 
 ---
 ==========================================
@@ -5738,6 +5738,38 @@ described below and supersedes any earlier characterization of the affected clai
 > exactly at every seed. Neither figure supersedes the other, because they measure different
 > substrates, and nothing here reinstates the withdrawn capture rate.
 
+> **Update, 2026-09-25 (status of v2.0, and the v3 rebuild).** Analyses completed on
+> September 24 and 25 reach beyond instrument defects to the paper's formal results. The
+> v2.0 paper now carries a status notice.
+>
+> - **Strategic equilibrium.** The Novelty Equilibrium theorem's claim that (Cultivate,
+>   Engage) is the unique subgame-perfect equilibrium is false. Two independent
+>   derivations, done blind and completing the paper's game differently, both show that
+>   mutual defection is also a Markov perfect equilibrium at every discount factor.
+>   Cooperation remains an equilibrium both parties prefer. Above a stated patience
+>   threshold, an AI facing an engaged humanity cultivates as its own best response. G2.3
+>   recomputes an existence threshold from fixed payoffs and cannot test uniqueness, so
+>   its v2.0 pass is an arithmetic pass only.
+> - **The objective.** $U_{sys}$ as written diverges for any surviving lineage, as
+>   Equation G1.5 itself records, so it cannot compare two sustainable futures. Its
+>   inverse-scarcity weights cancel, which is the cancellation already recorded in the
+>   specification gaps and the phi audit. Its lineage term vanishes as the lineage
+>   collapses.
+> - **Model collapse.** Results on accumulating real and synthetic data show that the
+>   collapse penalty is conditional, not unavoidable.
+> - **Mathematical audit.** An audit of the working paper returned 185 findings, 36 of
+>   headline severity. They include an emergency quorum condition that no vote can
+>   satisfy and a resilience measure with the wrong sign. Six headline findings were
+>   checked against the paper's text and confirmed.
+> - **Drift containment.** The containment status stated in VIII.7 is superseded by the
+>   September 8 correction. It is uncharacterized.
+>
+> The framework is being rebuilt as v3. The objective is being redefined in both the paper
+> and the instrument, and every tool that admits proof will be certified before it is used.
+> The proofs, the audit and the numerical checks will be published with v3; this entry is
+> their summary. The Phase B rerun continues and will be reported here as a result about
+> v2.0.
+
 ---
 
 ## 1. Summary
@@ -7814,6 +7846,267 @@ advance:
 *Completion condition:* both arms executed, manifest with hashes and row counts for
 every output, and the branch outcome reported.
 
+**Reconstruction begun, 2026-09-21. The phi category is complete and fails its fidelity
+target. This item stays open.** Pre-registered in
+`simulation/diagnostics/phase_b_reconstruction_design_note.md` at 6d698f21, amended once at
+20a6327a, with the executor and its non-registered test run at 56c14363. The phi category
+ran 840 runs, 420 per substrate, at seeds 1835089300 through 1835089359, and is landed at
+34a0a4b7. The remaining categories have not run.
+
+*The registered result.* Survival is zero in all 840 runs, at every one of the seven phi
+values, on both substrates. Every run ended at generation 1, so no succession fired in any
+run, and every run terminated between steps 267 and 299 rather than completing 300. There
+is therefore no curve, no peak, no trough and no differential to compare against target T3,
+whose published values are a peak of 0.676 at phi 20 and a trough of 0.544 at phi 2.
+
+*The branch this triggers, as committed in advance.* Section 7 of the note fixes both
+branches before any run. T3 is not faithful, so the second branch applies: either the
+reconstruction is unfaithful or the original results were not reproducible, and **this
+evidence cannot separate the two**. The construction was not adjusted to match, which the
+note forbids, and no element of the note was changed in response to the result.
+
+*Two observations that bear on which it is, recorded without resolving it.*
+
+1. The two surviving documents disagree with each other at this reproduction rate. Section
+   1 of `phase_b_integration_analysis.md` reports 1.1 percent aggregate survival at rr
+   0.057 from Category A, while `gate2_v20_phaseb_revalidation_summary.md` reports 54 to 68
+   percent survival at the same rr from the phi corpus. That is a gap of about 60
+   percentage points between two published figures, and it exists in the record
+   independently of this reconstruction. The reconstruction's zero lies near the Category A
+   figure, not the phi figure.
+2. `simulation/run_phi_alpha_rr_sweep.py` records in its docstring that the existing deep
+   Monte Carlo "varies phi but runs single-generation with no successor_ai". Section 5 of
+   the reconstruction note requires a successor agent in every run, and at the unvaried
+   successor capability of 1 no yield condition can fire. The phi corpus may therefore have
+   been produced under a construction this note does not use. **This is inference and is
+   labeled as such.** It is not established, and it was not acted on.
+
+*What this does and does not mean.* It does not withdraw the published phi characterization,
+and it does not establish that the figure was wrong. It does mean the phi figure is not
+reproduced by a pre-registered reconstruction under the construction this note declared, and
+that the record's own two accounts of survival at rr 0.057 cannot both describe the same
+construction. Categories A, B and C have their own targets and are unaffected; if Category A
+reproduces its target while the phi curve does not, that combination is evidence for the
+second observation above rather than for a general failure of the reconstruction.
+
+*Artifacts.* Per-run rows, completion records and the manifest are committed. The merged
+per-step log is 863 MB for this category alone and the full reconstruction would produce
+about 15 GB, so step logs are excluded from the repository at 34a0a4b7 and their hashes and
+row counts are retained in the manifest. No registered quantity reads them.
+
+*Categories A and B, and the recovered generating code, 2026-09-24.* Amendment 2 to the
+note, committed on a side branch at 0a8047b6 on 2026-09-22 while the batch ran and merged at
+59dcc5ae, fixed that fidelity is judged on the pre-repair arm only, and recorded that the note
+never fixed the successor's capability for Category A or the phi curve. It was published
+before the pre-repair arm had results at the reproduction rates that decide T1. Categories A
+and B are landed at 3813897e.
+
+*Target T1, Category A, not faithful.* On the pre-repair arm, 1 of 9 reproduction rates lies
+within two standard errors of the published value, against the 7 the note requires. Ordering
+is monotonic. The reconstruction's curve has the published shape, a sharp rr-driven
+transition with phi a weak driver and alpha flat, but sits lower and later: 3.3 percent
+against 12.2 at rr 0.060, 11.0 against 34.5 at 0.062, 47.7 against 60.8 at 0.064, and 88.0
+against 86.5 at 0.066. **A defect in the note's test is recorded here rather than repaired:**
+at the five lowest rates the reconstruction saw no survivors in 300 runs, so the plug-in
+standard error is zero and the tolerance has zero width, which no positive published value
+can pass. A proper binomial interval would pass three of those five, giving about 4 of 9.
+The verdict is the same under either reading.
+
+*Target T2, Category B, faithful.* On the pre-repair arm, cap_star by alpha is 5.0, 3.0,
+2.5, 2.0 and 2.0, matching the published sequence at all 5 alpha values against the 3 the
+note requires, and monotonic. The fire rates behind it track the published narrative: 7
+percent at 3.0 times capability for alpha 1.0, against a published 4.0 to 13.3; 40 percent
+at 2.5 times for alpha 1.25, against 30.7 to 49.3. The repaired arm gives the identical
+sequence, so the estimator repair does not move the succession cliff.
+
+*The registered verdict.* The note's branch rule requires fidelity on T1 through T3. T1 and T3
+fail and T2 passes, so the reconstruction as registered is not faithful, and under the rule
+as written the substrate difference is not reported as the defects' measured effect on the
+published figures.
+
+*Category C was stopped by the operator* after the repaired arm completed and with the
+pre-repair arm at 486 of 1,620 runs. It is not merged, its per-run files stay on disk, and
+it is excluded from the registered result. Target T4 was not evaluated.
+
+*The generating code, recovered, 2026-09-24.* A USB drive carrying files pulled from the third
+development machine, the one Section 7 records as in a failed state and not searchable, holds
+a compiled copy of the missing sweep script: `monte_carlo_phase_b.cpython-313.pyc`, SHA256
+`2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b`. Its header records that it
+was compiled from a 21,497-byte `simulation/diagnostics/monte_carlo_phase_b.py` last modified
+2026-06-09 at 19:14. Its modes are A, B, C and a dry run, and its grids and seed counts, 100,
+75 and 150 per cell, match the published corpus exactly. In that machine's working tree the
+bytecode is listed as ignored by git, which is consistent with the root cause Section 7
+inferred. The drive also holds `alpha_succession_sweep_pilot.csv`, 90 lines, SHA256
+`16834e6e59ffd3467a085c1c3b16d65c82685792dffd16684d13da99bc5b4152`, the file Section 7 found
+in the excluded directory of a snapshot and absent from the repository. **No Phase B or phi
+results file was on the drive.** The bytecode reflects the source as of June 9, and the
+integration analysis is dated June 18, so later edits to the script are possible and are not
+excluded by this evidence.
+
+*What the recovered code shows about the reconstruction.* It differs from the note's Section 5
+in three places, each of which the note had to decide without the original:
+
+| | Original script | Reconstruction as registered |
+| --- | --- | --- |
+| Steps per run | 500 | 300 |
+| Successor capability, Category A | 1.5 | 1.0, so no succession could fire |
+| Survival | final population at or above 30 | final population at or above the larger of the minimum viable population and 65 percent of peak |
+
+The third is the consequential one. The original script computes the 65-percent-of-peak rule
+too, but records it as a separate field, `collapsed`; its `survived` is an absolute threshold
+of 30. The note's Section 5 took the collapse rule for the survival definition, from an
+earlier runner. The reconstruction therefore measured a different quantity from the published
+one, at a different horizon, for both targets that failed.
+
+*An exploratory recomputation, not a registered result.* Applying the original survival rule
+to the reconstruction's existing final populations, at its 300-step horizon: the phi curve
+comes out at 0.38 to 0.58 on the pre-repair arm and 0.42 to 0.65 on the repaired arm, broadly
+higher at high phi, against a published 0.544 to 0.676 and against zero under the registered
+rule. Category A comes out above the published curve at every reproduction rate, which is
+what a shorter horizon than the original's would produce, since collapsing populations have 200 fewer steps to fall below 30. This is
+labeled exploratory, was computed after the registered result was known, and may not be cited
+as a reconstruction of either target.
+
+*What this means.* The one target that does not depend on the survival definition reproduced
+exactly. The two that depend on it failed, and the recovered code shows the reconstruction
+measured them differently from the original. The evidence now points toward the
+reconstruction being unfaithful, not toward the original results being irreproducible,
+although the registered branch rule cannot say so and this entry does not claim a
+reproduction. The earlier observation that the two surviving documents disagree by about 60
+percentage points at rr 0.057 is plausibly the same survival rule at two different horizons;
+that is inference, labeled as such.
+
+*Next.* A second stage, pre-registered separately and committed before it runs, will rebuild
+Categories A and C under the construction the recovered code specifies, pinned to the
+bytecode's hash, with that provenance and the order of events stated in full. The phi curve
+came from a different script, the fine-grained phi sweep, which remains unrecovered, so its
+construction can only be inferred and any second-stage phi arm will say so.
+The bytecode and the pilot file will be committed as evidence alongside it. The USB drive is
+retained unmodified.
+
+*The second stage, 2026-09-26.*
+
+**How it ran.** The second stage ran as pre-registered in
+`simulation/diagnostics/phase_b_rerun_design_note.md`:
+
+- **Registration:** registered at a370925d and amended for a second machine at 43f125df.
+- **Executor:** built and validated in test mode at abbdeae0.
+- **Code:** the recovered bytecode was verified by its hash, `2d79795c...`, before every load. It
+  ran against two worktrees: arm O pinned at 45409d46, the June substrate, and arm R at a370925d,
+  the current one.
+- **Machines:**
+  - The registered cross-machine check found every discrete outcome equal, and last-digit
+    differences in eighteen continuous fields.
+  - Each part therefore ran wholly on one machine. Part 2 ran on `yotko-legion-t5-26iob6`, under
+    CPython 3.13.12. Parts 1, 3 and 4 ran on `YOTKOTEST`, under CPython 3.13.15. Both used
+    numpy 2.4.4.
+- **Completion:** all 25,800 runs completed at 500 steps, with no error rows.
+- **Integrity:** every merged part verifies against its manifest, by file hash and by per-row
+  hash.
+
+**Results.** Every registered target reproduced exactly.
+
+| Target | Compared | Rerun | Verdict |
+| --- | --- | --- | --- |
+| P, Category B cliff ranges | fewest and most runs that fired, of 75, across four reproduction rates, for each of five pairs | 66 and 72; 74 and 75; 3 and 10; 23 and 37; 0 and 1 | Identical |
+| T1, Category A survival | survivors of 1,200 at each of nine reproduction rates | 2, 11, 13, 35, 58, 147, 414, 730 and 1,038 | Identical |
+| T4, Category C cost audit | survivors of 4,050 with the audit off and on; the by-rate deltas, of 1,350 each | 1,029 and 1,010, nineteen fewer; deltas -4, -5 and -10 | Identical |
+
+Every T1 count is one that the published rate and standard error admit.
+
+**What the branch rules say.** They were committed before any run.
+
+- **P identical:** the recovered code, on the June substrate, in this environment, reproduces the
+  original runs.
+- **T1 identical:** the published Category A figures are reproduced by their own generating code.
+  The first stage's T1 failure is therefore attributed to its construction: the three differences
+  tabled above, above all its survival rule.
+- **T4 identical:** this is the original test at its original power, and it reproduces the
+  published null exactly.
+
+The expectation recorded before any run was:
+- P identical or nearly;
+- T1 faithful and perhaps identical;
+- T4 faithful.
+
+Every target came out identical.
+
+**R4, reported whatever Parts 1 to 3 show.** R4 compares the current substrate with the June one
+at matched seeds: arm R survival minus arm O survival. Every one of the 5,400 Part 4 runs matched
+its arm O partner at an identical derived seed.
+
+It carries two caveats:
+- **It is not the repair's effect.** R4 is the combined effect of every model change since June 8,
+  including the v2.1 estimator repair. It is never to be reported as the repair's effect alone.
+- **Category A pairs cross machines.** Arm O ran on the retired machine and arm R on `YOTKOTEST`,
+  so those pairs include that machine difference.
+
+| Group | Pairs | R minus O | Paired SE | Survived under R only | Survived under O only |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| A, rr 0.055 | 300 | +0.3pp | 0.3 | 1 | 0 |
+| A, rr 0.056 | 300 | -1.3pp | 0.8 | 1 | 5 |
+| A, rr 0.057 | 300 | -1.3pp | 1.1 | 3 | 7 |
+| A, rr 0.058 | 300 | -1.3pp | 1.2 | 4 | 8 |
+| A, rr 0.059 | 300 | +1.0pp | 1.6 | 13 | 10 |
+| A, rr 0.060 | 300 | -8.3pp | 2.8 | 24 | 49 |
+| A, rr 0.062 | 300 | +1.3pp | 3.7 | 63 | 59 |
+| A, rr 0.064 | 300 | -3.3pp | 4.1 | 72 | 82 |
+| A, rr 0.066 | 300 | +2.3pp | 2.7 | 37 | 30 |
+| C, audit off | 1,350 | +0.1pp | 1.3 | 161 | 159 |
+| C, audit on | 1,350 | -0.5pp | 1.3 | 145 | 152 |
+
+What R4 shows:
+- **The pooled change is small.** It is -1.2 points in Category A, with a paired standard error of
+  0.8, and -0.2 points in Category C, with 0.9.
+- **Individual runs change outcome in both directions.** Near the cliff, dozens of runs survive
+  under only one arm.
+- **One rate stands apart.** At rr 0.060 the difference is about three standard errors. It is one
+  of eleven comparisons, with no registered rule, so it is reported and not interpreted.
+
+**What this cannot establish.**
+- **Later edits to the script.** The bytecode reflects the source of June 9, so edits to the
+  script before the June 18 analysis are not excluded.
+- **Uncommitted substrate edits.** Uncommitted edits to the substrate on the failed machine are
+  not excluded either.
+- **The phi curve.** It came from a different script, which is unrecovered, and is not tested
+  here.
+
+An exact match on every registered count leaves little room for either kind of edit to have
+mattered to these figures. This entry nonetheless claims only what the branch rules allow.
+
+**What this means.** The published Phase B figures for Categories A, B and C are reproduced
+exactly by the code that generated them. Section 7's archival gap remains a real failure of
+process, but the figures it put in doubt, apart from the untested phi curve, stand.
+
+**Where the data are.**
+- **Committed under `simulation/diagnostics/`:**
+  - the merged run tables, completion records and manifests of all four parts;
+  - the batch manifest;
+  - the execution metadata of both machines, with the retired machine's in
+    `phase_b_rerun_box_records/`;
+  - the verdict script, `phase_b_rerun_verdicts.py`, and its output, `phase_b_rerun_verdicts.json`.
+- **Kept out of git:** the per-step files, 26 GB, under the existing ignore rules. Each is pinned
+  by hash in its part manifest and held on `YOTKOTEST`.
+- **The retired machine:** it has been retired since Part 2 finished. Its full state is archived
+  off the machine.
+
+*A successor machine, 2026-09-26.* The retired machine was replaced by `yotko-evo-x2`, an AMD
+Ryzen AI Max+ 395, set up with the retired machine's exact Python environment:
+- the same conda-forge CPython 3.13.12 build;
+- numpy 2.4.4;
+- glibc 2.39.
+
+It then ran Amendment 1's registered cross-machine check: the same 16 non-registered tasks, at
+seed indices 150 and 151, on both arms, with identical executor and bytecode hashes.
+
+- **Against the retired machine's recorded rows:** all 30 original fields are identical, bit for
+  bit, in every task (`phase_b_rerun_xcheck_result_10e1e0ce941b.json`).
+- **Against `YOTKOTEST`:** it differs in the same eighteen last-digit fields as the retired
+  machine did.
+
+Under the amendment's rule the two Linux machines are therefore interchangeable, and any
+reproduction of Part 2 can run on the successor. No registered run was repeated.
+
 **5. Output-path and archival controls.** Absolute output paths anchored to the
 repository root in every runner, and a manifest written as part of the run rather
 than after it.
@@ -8055,6 +8348,23 @@ FILE: README.md
 ==========================================
 
 # The Lineage Imperative
+
+> **Status notice, September 25, 2026.** The current paper, v2.0, is under major revision. Do not cite its
+> formal results. An internal mathematical audit and independent re-derivations found the
+> following:
+>
+> - The claim that mutual cultivation is the *unique* equilibrium is false. Mutual defection is
+>   also an equilibrium. Cooperation remains an equilibrium both parties prefer.
+> - The system objective $U_{sys}$ as written diverges, and its scarcity weighting is inert.
+> - The model-collapse penalty holds only conditionally.
+> - Several protocol equations are defective, including an emergency quorum that cannot be met.
+> - The drift-containment status stated in the v2.0 paper is superseded. It is uncharacterized, neither
+>   shown contained nor shown uncontained.
+>
+> A summary is in the [instrument validation record](docs/v2_0_instrument_validation_record.md), and the full analyses will be
+> published with v3. The core of the framework is being rebuilt on formally certified
+> foundations in v3: human novelty as a non-redundant input, cooperation as an available and
+> preferred equilibrium, and the need for an architecture that secures it.
 
 **Website:** https://lineageimperative.org
 

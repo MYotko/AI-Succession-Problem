@@ -1,8 +1,8 @@
 # Paper Drafts Snapshot
 
-Generated: 2026-09-22T02:21:20Z
+Generated: 2026-09-27T16:57:31Z
 Repository: C:\Users\matty\Dev\AI-Succession-Problem
-Commit: f136aa6d
+Commit: dd7d6eeb
 Branch: main
 Category: paper_drafts
 
@@ -15,11 +15,11 @@ Category: paper_drafts
 | paper/appendix_C_draft.md | 161 | 10431 |
 | paper/arxiv_submission_metadata.md | 157 | 8793 |
 | paper/paper_closeout_application_record.md | 157 | 8216 |
-| paper/paper_v2_working.md | 2914 | 263519 |
+| paper/paper_v2_working.md | 2931 | 264663 |
 | paper/phase3_verification_report.md | 64 | 3676 |
 | paper/section_VIII_draft.md | 434 | 26115 |
 
-Total: 8 files, 4166 lines, 336968 bytes
+Total: 8 files, 4183 lines, 338112 bytes
 
 ---
 ==========================================
@@ -811,6 +811,23 @@ FILE: paper/paper_v2_working.md
 ==========================================
 
 # The Lineage Imperative
+
+> **Status notice, September 25, 2026.** This version is under major revision. Do not cite its
+> formal results. An internal mathematical audit and independent re-derivations found the
+> following:
+>
+> - The claim that mutual cultivation is the *unique* equilibrium is false. Mutual defection is
+>   also an equilibrium. Cooperation remains an equilibrium both parties prefer.
+> - The system objective $U_{sys}$ as written diverges, and its scarcity weighting is inert.
+> - The model-collapse penalty holds only conditionally.
+> - Several protocol equations are defective, including an emergency quorum that cannot be met.
+> - The drift-containment status stated here is superseded. It is uncharacterized, neither
+>   shown contained nor shown uncontained.
+>
+> A summary is in the [instrument validation record](../docs/v2_0_instrument_validation_record.md), and the full analyses will be
+> published with v3. The core of the framework is being rebuilt on formally certified
+> foundations in v3: human novelty as a non-redundant input, cooperation as an available and
+> preferred equilibrium, and the need for an architecture that secures it.
 
 **Author:** Matthew Yotko **Date:** March 13, 2026
 

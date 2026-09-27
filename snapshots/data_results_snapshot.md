@@ -1,8 +1,8 @@
 # Data Results Snapshot
 
-Generated: 2026-09-22T02:21:21Z
+Generated: 2026-09-27T16:57:34Z
 Repository: C:\Users\matty\Dev\AI-Succession-Problem
-Commit: f136aa6d
+Commit: dd7d6eeb
 Branch: main
 Category: data_results
 
@@ -144,6 +144,221 @@ NOTE: This snapshot contains a manifest of data files, not raw file content.
 | simulation/diagnostics/patient_defection_sweep1_yield_response.csv | 548207 | 2026-08-21T19:34:07Z |
 | simulation/diagnostics/patient_defection_sweep2_lineage_trajectory.csv | 237178 | 2026-08-21T19:34:07Z |
 | simulation/diagnostics/patient_defection_sweep3_capability_constraint.csv | 661802 | 2026-08-21T19:34:07Z |
+| simulation/diagnostics/phase_b_rerun_b1_build_log.json | 2235 | 2026-09-24T11:56:17Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_artifact_map.json | 32111 | 2026-09-24T11:40:42Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_b1_validation.json | 10856 | 2026-09-24T11:36:24Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_additional_unit_results.json | 131 | 2026-09-24T11:27:57Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_interruption_before.json | 568 | 2026-09-24T11:22:50Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_live_scheduler_results.json | 35247 | 2026-09-24T11:29:21Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_machine_xcheck_result.json | 700 | 2026-09-24T11:36:19Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_manifest.json | 32610 | 2026-09-24T11:29:20Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_merge_negative_unit.json | 179 | 2026-09-24T11:25:14Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part1_manifest.json | 2668 | 2026-09-24T11:22:30Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part1_runs.csv | 1500 | 2026-09-24T11:22:30Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part1_steps.csv | 1941684 | 2026-09-24T11:22:30Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part2_manifest.json | 3299 | 2026-09-24T11:24:31Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part2_runs.csv | 2533 | 2026-09-24T11:24:31Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part2_steps.csv | 4063326 | 2026-09-24T11:24:31Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part3_manifest.json | 3299 | 2026-09-24T11:26:27Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part3_runs.csv | 2540 | 2026-09-24T11:26:26Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part3_steps.csv | 3772648 | 2026-09-24T11:26:26Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part4_manifest.json | 3929 | 2026-09-24T11:29:20Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part4_runs.csv | 3538 | 2026-09-24T11:29:19Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part4_steps.csv | 7774620 | 2026-09-24T11:29:20Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_persistence_unit_results.json | 228 | 2026-09-24T11:16:17Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_progress.json | 14048 | 2026-09-24T11:29:20Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_manifest.json | 7731 | 2026-09-24T11:30:33Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_part3_manifest.json | 2407 | 2026-09-24T11:30:32Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_part3_runs.csv | 1070 | 2026-09-24T11:30:32Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_part3_steps.csv | 1028598 | 2026-09-24T11:30:32Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_progress.json | 1890 | 2026-09-24T11:30:33Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_runtime_control_YOTKOTEST.json | 19 | 2026-09-24T11:29:21Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_schedule_YOTKOTEST.json | 297 | 2026-09-24T11:29:21Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_state.json | 2726 | 2026-09-24T11:30:33Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_manifest.json | 7731 | 2026-09-24T11:32:18Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_part4_manifest.json | 2407 | 2026-09-24T11:32:18Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_part4_runs.csv | 1067 | 2026-09-24T11:32:17Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_part4_steps.csv | 1292564 | 2026-09-24T11:32:17Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_progress.json | 1893 | 2026-09-24T11:32:18Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_runtime_control_YOTKOTEST.json | 19 | 2026-09-24T11:30:33Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_schedule_YOTKOTEST.json | 297 | 2026-09-24T11:30:33Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_state.json | 2727 | 2026-09-24T11:32:18Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_runtime_control_YOTKOTEST.json | 19 | 2026-09-24T11:22:50Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_schedule_YOTKOTEST-fixture.json | 297 | 2026-09-24T11:36:19Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_schedule_YOTKOTEST.json | 297 | 2026-09-24T11:20:35Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_startup.json | 1803 | 2026-09-24T11:22:53Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_startup_O.json | 8322404 | 2026-09-24T11:22:52Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_startup_O_request.json | 458 | 2026-09-24T11:22:51Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_startup_R.json | 2201659 | 2026-09-24T11:22:53Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_startup_R_request.json | 458 | 2026-09-24T11:22:52Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_state.json | 15882 | 2026-09-24T11:36:24Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_batch_part2_manifest.json | 2063 | 2026-09-24T11:16:17Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_batch_part2_runs.csv | 786 | 2026-09-24T11:16:17Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_batch_part2_steps.csv | 41 | 2026-09-24T11:16:17Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_batch_schedule_YOTKOTEST.json | 297 | 2026-09-24T11:16:17Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_batch_state.json | 1569 | 2026-09-24T11:16:17Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_control.json | 19 | 2026-09-24T11:12:28Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_results.json | 2404 | 2026-09-24T11:12:28Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_schedule.json | 297 | 2026-09-24T11:12:28Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_xcheck_altered_rows.json | 31615 | 2026-09-24T11:36:19Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_xcheck_self_result.json | 728 | 2026-09-24T11:36:19Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_smoke_xcheck_sign_result.json | 1098 | 2026-09-24T11:36:19Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_manifest.json | 26897 | 2026-09-24T11:36:19Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part1_manifest.json | 2734 | 2026-09-24T11:34:07Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part1_runs.csv | 1499 | 2026-09-24T11:34:07Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part1_steps.csv | 1941684 | 2026-09-24T11:34:07Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part2_manifest.json | 3365 | 2026-09-24T11:34:04Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part2_runs.csv | 2535 | 2026-09-24T11:34:04Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part2_steps.csv | 4063326 | 2026-09-24T11:34:04Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part3_manifest.json | 3365 | 2026-09-24T11:35:36Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part3_runs.csv | 2541 | 2026-09-24T11:35:35Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part3_steps.csv | 3772648 | 2026-09-24T11:35:35Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part4_manifest.json | 3995 | 2026-09-24T11:36:18Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part4_runs.csv | 3539 | 2026-09-24T11:36:18Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part4_steps.csv | 7774620 | 2026-09-24T11:36:18Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_progress.json | 7960 | 2026-09-24T11:36:19Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_rows.json | 31615 | 2026-09-24T11:36:19Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_runtime_control_YOTKOTEST.json | 19 | 2026-09-24T11:32:21Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_schedule_YOTKOTEST.json | 297 | 2026-09-24T11:32:21Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_startup.json | 1803 | 2026-09-24T11:32:21Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_startup_O.json | 8322404 | 2026-09-24T11:32:20Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_startup_O_request.json | 469 | 2026-09-24T11:32:19Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_startup_R.json | 2201660 | 2026-09-24T11:32:21Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_startup_R_request.json | 469 | 2026-09-24T11:32:20Z |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_state.json | 8705 | 2026-09-24T11:36:19Z |
+| simulation/diagnostics/phase_b_rerun_b1_manifest.json | 51811 | 2026-09-24T12:09:34Z |
+| simulation/diagnostics/phase_b_rerun_b1_preflight.json | 5784 | 2026-09-24T11:05:07Z |
+| simulation/diagnostics/phase_b_rerun_b1_summary.json | 7111 | 2026-09-24T12:09:33Z |
+| simulation/diagnostics/phase_b_rerun_b1_validation.json | 10856 | 2026-09-24T12:00:29Z |
+| simulation/diagnostics/phase_b_rerun_box_records/bench_box.log | 608 | 2026-09-24T11:10:41Z |
+| simulation/diagnostics/phase_b_rerun_box_records/bench_box2.log | 1014 | 2026-09-24T11:23:51Z |
+| simulation/diagnostics/phase_b_rerun_box_records/part2_console.log | 106 | 2026-09-26T22:50:20Z |
+| simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_progress.json | 18932 | 2026-09-26T22:50:20Z |
+| simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_schedule_yotko-legion-t5-26iob6.json | 92 | 2026-09-24T12:24:42Z |
+| simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_startup.json | 1808 | 2026-09-24T12:24:43Z |
+| simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_startup_O.json | 8322330 | 2026-09-24T12:24:43Z |
+| simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_startup_O_request.json | 406 | 2026-09-24T12:24:43Z |
+| simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_startup_R.json | 2201560 | 2026-09-24T12:24:43Z |
+| simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_startup_R_request.json | 406 | 2026-09-24T12:24:43Z |
+| simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_state.json | 4308690 | 2026-09-26T22:50:20Z |
+| simulation/diagnostics/phase_b_rerun_evidence/alpha_succession_sweep_pilot.csv | 11159 | 2026-09-24T10:48:20Z |
+| simulation/diagnostics/phase_b_rerun_evidence/provenance.json | 1491 | 2026-09-24T10:48:20Z |
+| simulation/diagnostics/phase_b_rerun_manifest.json | 10624703 | 2026-09-27T01:00:02Z |
+| simulation/diagnostics/phase_b_rerun_part1_manifest.json | 472997 | 2026-09-24T18:00:29Z |
+| simulation/diagnostics/phase_b_rerun_part1_runs.csv | 717656 | 2026-09-24T17:49:51Z |
+| simulation/diagnostics/phase_b_rerun_part1_steps.csv | 1475501760 | 2026-09-24T17:52:07Z |
+| simulation/diagnostics/phase_b_rerun_part2_manifest.json | 3392330 | 2026-09-26T22:52:58Z |
+| simulation/diagnostics/phase_b_rerun_part2_runs.csv | 5357891 | 2026-09-26T22:53:00Z |
+| simulation/diagnostics/phase_b_rerun_part2_steps.csv | 10180981890 | 2026-09-26T23:05:17Z |
+| simulation/diagnostics/phase_b_rerun_part3_manifest.json | 2547758 | 2026-09-26T00:39:09Z |
+| simulation/diagnostics/phase_b_rerun_part3_runs.csv | 3900999 | 2026-09-25T23:14:25Z |
+| simulation/diagnostics/phase_b_rerun_part3_steps.csv | 7831101476 | 2026-09-25T23:27:09Z |
+| simulation/diagnostics/phase_b_rerun_part4_manifest.json | 1696178 | 2026-09-27T01:00:01Z |
+| simulation/diagnostics/phase_b_rerun_part4_runs.csv | 2611519 | 2026-09-27T00:39:50Z |
+| simulation/diagnostics/phase_b_rerun_part4_steps.csv | 6481354469 | 2026-09-27T00:44:07Z |
+| simulation/diagnostics/phase_b_rerun_progress.json | 18964 | 2026-09-27T01:00:02Z |
+| simulation/diagnostics/phase_b_rerun_runtime_control_YOTKOTEST.json | 44 | 2026-09-24T12:30:01Z |
+| simulation/diagnostics/phase_b_rerun_schedule.json | 297 | 2026-09-24T11:05:07Z |
+| simulation/diagnostics/phase_b_rerun_schedule_YOTKOTEST.json | 297 | 2026-09-24T11:42:43Z |
+| simulation/diagnostics/phase_b_rerun_smoke_environment_xcheck_result.json | 807 | 2026-09-24T11:42:06Z |
+| simulation/diagnostics/phase_b_rerun_smoke_final_unit_results.json | 969 | 2026-09-24T11:42:07Z |
+| simulation/diagnostics/phase_b_rerun_smoke_interruption_before.json | 568 | 2026-09-24T11:44:57Z |
+| simulation/diagnostics/phase_b_rerun_smoke_live_scheduler_results.json | 35242 | 2026-09-24T11:51:50Z |
+| simulation/diagnostics/phase_b_rerun_smoke_machine_xcheck_result.json | 700 | 2026-09-24T12:00:24Z |
+| simulation/diagnostics/phase_b_rerun_smoke_manifest.json | 34228 | 2026-09-24T11:51:49Z |
+| simulation/diagnostics/phase_b_rerun_smoke_part1_manifest.json | 2845 | 2026-09-24T11:44:37Z |
+| simulation/diagnostics/phase_b_rerun_smoke_part1_runs.csv | 1499 | 2026-09-24T11:44:37Z |
+| simulation/diagnostics/phase_b_rerun_smoke_part1_steps.csv | 1941684 | 2026-09-24T11:44:37Z |
+| simulation/diagnostics/phase_b_rerun_smoke_part2_manifest.json | 3519 | 2026-09-24T11:46:53Z |
+| simulation/diagnostics/phase_b_rerun_smoke_part2_runs.csv | 2536 | 2026-09-24T11:46:52Z |
+| simulation/diagnostics/phase_b_rerun_smoke_part2_steps.csv | 4063326 | 2026-09-24T11:46:53Z |
+| simulation/diagnostics/phase_b_rerun_smoke_part3_manifest.json | 3519 | 2026-09-24T11:48:45Z |
+| simulation/diagnostics/phase_b_rerun_smoke_part3_runs.csv | 2544 | 2026-09-24T11:48:44Z |
+| simulation/diagnostics/phase_b_rerun_smoke_part3_steps.csv | 3772648 | 2026-09-24T11:48:44Z |
+| simulation/diagnostics/phase_b_rerun_smoke_part4_manifest.json | 4149 | 2026-09-24T11:51:48Z |
+| simulation/diagnostics/phase_b_rerun_smoke_part4_runs.csv | 3539 | 2026-09-24T11:51:47Z |
+| simulation/diagnostics/phase_b_rerun_smoke_part4_steps.csv | 7774620 | 2026-09-24T11:51:47Z |
+| simulation/diagnostics/phase_b_rerun_smoke_progress.json | 14045 | 2026-09-24T11:51:49Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_O_manifest.json | 7755 | 2026-09-24T11:53:15Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_O_part3_manifest.json | 2593 | 2026-09-24T11:53:14Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_O_part3_runs.csv | 1070 | 2026-09-24T11:53:14Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_O_part3_steps.csv | 1028598 | 2026-09-24T11:53:14Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_O_progress.json | 1891 | 2026-09-24T11:53:15Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_O_runtime_control_YOTKOTEST.json | 19 | 2026-09-24T11:51:50Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_O_schedule_YOTKOTEST.json | 297 | 2026-09-24T11:51:50Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_O_state.json | 2362 | 2026-09-24T11:53:15Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_R_manifest.json | 7755 | 2026-09-24T11:55:08Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_R_part4_manifest.json | 2593 | 2026-09-24T11:55:07Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_R_part4_runs.csv | 1067 | 2026-09-24T11:55:07Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_R_part4_steps.csv | 1292564 | 2026-09-24T11:55:07Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_R_progress.json | 1893 | 2026-09-24T11:55:08Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_R_runtime_control_YOTKOTEST.json | 19 | 2026-09-24T11:53:15Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_R_schedule_YOTKOTEST.json | 297 | 2026-09-24T11:53:15Z |
+| simulation/diagnostics/phase_b_rerun_smoke_repeat_R_state.json | 2363 | 2026-09-24T11:55:08Z |
+| simulation/diagnostics/phase_b_rerun_smoke_runtime_control_YOTKOTEST.json | 19 | 2026-09-24T11:44:57Z |
+| simulation/diagnostics/phase_b_rerun_smoke_schedule_YOTKOTEST-fixture.json | 297 | 2026-09-24T12:00:24Z |
+| simulation/diagnostics/phase_b_rerun_smoke_schedule_YOTKOTEST.json | 297 | 2026-09-24T11:42:47Z |
+| simulation/diagnostics/phase_b_rerun_smoke_startup.json | 1803 | 2026-09-24T11:45:00Z |
+| simulation/diagnostics/phase_b_rerun_smoke_startup_O.json | 8322404 | 2026-09-24T11:44:58Z |
+| simulation/diagnostics/phase_b_rerun_smoke_startup_O_request.json | 458 | 2026-09-24T11:44:57Z |
+| simulation/diagnostics/phase_b_rerun_smoke_startup_R.json | 2201660 | 2026-09-24T11:44:59Z |
+| simulation/diagnostics/phase_b_rerun_smoke_startup_R_request.json | 458 | 2026-09-24T11:44:58Z |
+| simulation/diagnostics/phase_b_rerun_smoke_state.json | 15515 | 2026-09-24T12:00:29Z |
+| simulation/diagnostics/phase_b_rerun_smoke_xcheck_altered_rows.json | 31618 | 2026-09-24T12:00:24Z |
+| simulation/diagnostics/phase_b_rerun_smoke_xcheck_cli_altered.json | 1491 | 2026-09-24T12:00:24Z |
+| simulation/diagnostics/phase_b_rerun_smoke_xcheck_cli_results.json | 349 | 2026-09-24T12:00:24Z |
+| simulation/diagnostics/phase_b_rerun_smoke_xcheck_cli_self.json | 1121 | 2026-09-24T12:00:24Z |
+| simulation/diagnostics/phase_b_rerun_smoke_xcheck_self_result.json | 1121 | 2026-09-24T12:00:24Z |
+| simulation/diagnostics/phase_b_rerun_smoke_xcheck_sign_result.json | 1491 | 2026-09-24T12:00:24Z |
+| simulation/diagnostics/phase_b_rerun_startup.json | 1803 | 2026-09-24T12:30:04Z |
+| simulation/diagnostics/phase_b_rerun_startup_O.json | 8322404 | 2026-09-24T12:30:03Z |
+| simulation/diagnostics/phase_b_rerun_startup_O_request.json | 452 | 2026-09-24T12:30:02Z |
+| simulation/diagnostics/phase_b_rerun_startup_R.json | 2201660 | 2026-09-24T12:30:04Z |
+| simulation/diagnostics/phase_b_rerun_startup_R_request.json | 452 | 2026-09-24T12:30:03Z |
+| simulation/diagnostics/phase_b_rerun_state.json | 6008235 | 2026-09-27T01:00:02Z |
+| simulation/diagnostics/phase_b_rerun_verdicts.json | 8730 | 2026-09-27T01:02:29Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_manifest.json | 28469 | 2026-09-24T12:00:24Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part1_manifest.json | 2922 | 2026-09-24T11:57:26Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part1_runs.csv | 1500 | 2026-09-24T11:57:25Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part1_steps.csv | 1941684 | 2026-09-24T11:57:25Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part2_manifest.json | 3553 | 2026-09-24T11:57:25Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part2_runs.csv | 2534 | 2026-09-24T11:57:23Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part2_steps.csv | 4063326 | 2026-09-24T11:57:24Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part3_manifest.json | 3553 | 2026-09-24T11:59:24Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part3_runs.csv | 2543 | 2026-09-24T11:59:23Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part3_steps.csv | 3772648 | 2026-09-24T11:59:23Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part4_manifest.json | 4183 | 2026-09-24T12:00:23Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part4_runs.csv | 3540 | 2026-09-24T12:00:21Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part4_steps.csv | 7774620 | 2026-09-24T12:00:22Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_progress.json | 7965 | 2026-09-24T12:00:24Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_rows.json | 31618 | 2026-09-24T12:00:24Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_runtime_control_YOTKOTEST.json | 19 | 2026-09-24T11:55:11Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_schedule_YOTKOTEST.json | 297 | 2026-09-24T11:55:11Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_startup.json | 1803 | 2026-09-24T11:55:11Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_startup_O.json | 8322404 | 2026-09-24T11:55:10Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_startup_O_request.json | 469 | 2026-09-24T11:55:09Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_startup_R.json | 2201660 | 2026-09-24T11:55:11Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_startup_R_request.json | 469 | 2026-09-24T11:55:10Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_state.json | 8708 | 2026-09-24T12:00:24Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_result_10e1e0ce941b.json | 1506 | 2026-09-27T01:33:16Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_result_e83b36cc488b.json | 8706 | 2026-09-24T12:23:43Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_manifest.json | 28589 | 2026-09-27T01:29:59Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part1_manifest.json | 2938 | 2026-09-27T01:29:39Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part1_runs.csv | 1489 | 2026-09-27T01:29:39Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part2_manifest.json | 3569 | 2026-09-27T01:29:45Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part2_runs.csv | 2530 | 2026-09-27T01:29:44Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part3_manifest.json | 3569 | 2026-09-27T01:29:43Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part3_runs.csv | 2536 | 2026-09-27T01:29:43Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part4_manifest.json | 4199 | 2026-09-27T01:29:58Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part4_runs.csv | 3524 | 2026-09-27T01:29:58Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_rows.json | 31575 | 2026-09-27T01:29:59Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_runtime_control_yotko-evo-x2.json | 20 | 2026-09-27T01:28:39Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_schedule_yotko-evo-x2.json | 117 | 2026-09-27T01:28:39Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_startup.json | 1798 | 2026-09-27T01:28:39Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_startup_O_request.json | 411 | 2026-09-27T01:28:37Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_startup_R_request.json | 411 | 2026-09-27T01:28:38Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_state.json | 8722 | 2026-09-27T01:29:59Z |
+| simulation/diagnostics/phase_b_rerun_xcheck_yotko-legion-t5-26iob6_rows.json | 31760 | 2026-09-24T12:23:42Z |
 | simulation/diagnostics/planner_d3_edit.json | 1541 | 2026-09-09T01:33:50Z |
 | simulation/diagnostics/planner_d3_fixed_novelty.csv | 42468 | 2026-09-09T01:33:57Z |
 | simulation/diagnostics/planner_d3_fixed_state.json | 4291 | 2026-09-09T01:33:57Z |
@@ -170,7 +385,7 @@ NOTE: This snapshot contains a manifest of data files, not raw file content.
 | simulation/diagnostics/sybil_defense_scaling_characterization_analysis.json | 4780968 | 2026-08-21T19:34:08Z |
 | simulation/diagnostics/termination_decontamination_diagnostic.csv | 1606 | 2026-08-21T19:34:08Z |
 
-Total: 161 files
+Total: 372 files
 
 ---
 ==========================================
@@ -1874,6 +2089,2398 @@ sweep,seed,rr,phi,alpha,successor_capability,successor_capability_growth_rate,de
 3,1,0.064,25.0,0.5,2.0,1.5,0.5,H_C_inflated,lineage,4,500,True,56,240,2,2,500,1,0.002,4,-0.006076721966691068,0.41145370911140056,4.559550483178482,0,0.44121450878602864,0.2791102823964801,0.09697859000106039,6.373163650782135,3.0,2.0,True,0.12753246554229086,0.4437442026831556,0.0,0.0,0.0,
 3,7,0.064,25.0,0.5,2.0,1.5,0.5,H_C_inflated,lineage,4,500,True,73,204,2,2,500,1,0.002,6,-0.006455532353486504,0.3554946423247358,4.559550483178482,0,0.3714786262570573,0.3039113263554286,0.10150067664923239,6.361930345330449,3.0,2.0,True,0.14754985102746168,0.37419840895215356,0.0,0.0,0.0,
 ```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_build_log.json
+==========================================
+
+- Size: 2235 bytes
+- Modified: 2026-09-24T11:56:17Z
+- Structure: object with 5 top-level keys
+- Keys: tool_layer_workarounds, executor_self_fixes, interpreter_readiness, registered_runs_executed, initial_cohort_retained
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_artifact_map.json
+==========================================
+
+- Size: 32111 bytes
+- Modified: 2026-09-24T11:40:42Z
+- Structure: array with 121 elements
+- Element keys: original_name, retained_name, sha256_raw
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_b1_validation.json
+==========================================
+
+- Size: 10856 bytes
+- Modified: 2026-09-24T11:36:24Z
+- Structure: object with 25 top-level keys
+- Keys: status, non_registered, registered_runs_executed, unique_smoke_runs, determinism_repeats, crosscheck_runs, crosscheck_self, crosscheck_sign, crosscheck_sign_fields, seed_crosscheck, counts, part4_subset, liveness_distinct_values, matched_arm_differences, resume_counts, completed_records_preserved, machine_refusal, machine_fixture_preserved, mean_wall_seconds_per_arm, errors ...
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_additional_unit_results.json
+==========================================
+
+- Size: 131 bytes
+- Modified: 2026-09-24T11:27:57Z
+- Structure: object with 4 top-level keys
+- Keys: synthetic_fixture, overlap_lowest_wins, expiry_end_exclusive, eta_non_preemptive_drain
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_interruption_before.json
+==========================================
+
+- Size: 568 bytes
+- Modified: 2026-09-24T11:22:50Z
+- Structure: object with 3 top-level keys
+- Keys: completion_hashes, killed_controller_pid, initial_child_pids
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_live_scheduler_results.json
+==========================================
+
+- Size: 35247 bytes
+- Modified: 2026-09-24T11:29:21Z
+- Structure: object with 7 top-level keys
+- Keys: initial_cap, reduced, raised, named_mode, expired, refused, no_worker_killed_for_cap_change
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_machine_xcheck_result.json
+==========================================
+
+- Size: 700 bytes
+- Modified: 2026-09-24T11:36:19Z
+- Structure: object with 6 top-level keys
+- Keys: result, machine_labels, executor_hashes, bytecode_sha256, test_fixture, purpose
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_manifest.json
+==========================================
+
+- Size: 32610 bytes
+- Modified: 2026-09-24T11:29:20Z
+- Structure: object with 12 top-level keys
+- Keys: status, machine_label, identity, proof, parts, resume_counts, events, cpu_budget, priority, non_registered, retry_events, files
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_merge_negative_unit.json
+==========================================
+
+- Size: 179 bytes
+- Modified: 2026-09-24T11:25:14Z
+- Structure: object with 4 top-level keys
+- Keys: synthetic_fixture, corrupt_row_hash_refused, message, registered_runs_executed
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part1_manifest.json
+==========================================
+
+- Size: 2668 bytes
+- Modified: 2026-09-24T11:22:30Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part1_runs.csv
+==========================================
+
+- Size: 1500 bytes
+- Modified: 2026-09-24T11:22:30Z
+- Rows: 2 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+B,0.06,25.0,1.0,3.0,True,150,False,True,False,25,206,133,1,False,0,500,-1,-1.0,-1.0,-3.5583498051071834,-7.0135608015139095,0.7593858863910772,0.9213438735081165,0.9439209259104387,0.6996555340549495,0.05588005574943174,7646.875088335619,False,,O,1,O_p1_B_5d277a51fca4df2641468951,4859,2026-09-24T11:20:36.472414+00:00,2026-09-24T11:22:30.280200+00:00,113.80776029999834,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+B,0.06,25.0,1.0,3.0,True,151,False,True,True,0,203,131,1,False,0,441,-1,-1.0,-1.0,-2.8659200602523693,-6.458757110203358,0.7514849537438723,0.9654243039786377,0.946882190860673,0.01,9.468821908606731e-05,5901.830122271898,False,,O,1,O_p1_B_f919e2ba22ecc161f3be7cdc,3877,2026-09-24T11:20:36.480820+00:00,2026-09-24T11:22:19.715403+00:00,103.23455680004554,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part1_steps.csv
+==========================================
+
+- Size: 1941684 bytes
+- Modified: 2026-09-24T11:22:30Z
+- Rows: 941 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,1,O_p1_B_5d277a51fca4df2641468951,150,0,{"H_E":0.47353335550612285,"H_N":0.9829141045901861,"L_t":0.09803786484860372,"Psi_inst":0.5325568678222371,"Theta_tech":0.28138843671429997,"U_sys":15.843006567514422,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8843205254991839,"avg_validator_dependency":0.0,"avg_wb_trend":0.004019064593598653,"avg_well_being":0.6689335217554602,"c_protective":0.2,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.41400000000000003,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.47353335550612285,"h_eff_v2":0.6542166725987948,"h_n_v2":0.9829141045901861,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09803786484860372,"max_constraint_level":0.41400000000000003,"max_resource_share":0.25662692108119756,"max_validator_dependency":0.0,"phi":25.0,"population":199,"population_trend":-0.0015,"psi_inst_stock":0.5325568678222371,"psi_inst_trend":0.00976706034667113,"rank_10_u_sys":42.74334575774749,"rank_2_u_sys":42.81419851624058,"resilience_composite_urgency":1.0,"resilience_stock":0.29648275649415057,"resilience_trend":-0.0010551730517548263,"resource_level":0.9068232973166526,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.586,"system_resilience":1.0,"theta_capability":0.5205301536864958,"theta_tech_v2":0.28138843671429997,"total_suppression":0.41400000000000003,"transfer_state":0.5405804730455139,"trust_level":0.0,"u_sys_tail_estimate":799.9988577753102,"u_sys_total_estimate":799.9988577753102,"u_sys_v2":15.843006567514422,"x_bio_welfare":0.22352747763877143,"x_compute":0.25662692108119756,"x_institutional_capacity":0.19344030828289596,"x_novelty_agency":0.05330588849777841,"x_resilience":0.020197039271787058,"x_transfer_comprehension":0.2529023652275697}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,1,{"H_E":0.3593937997650877,"H_N":1.0,"L_t":0.12100740722340736,"Psi_inst":0.5784304509080234,"Theta_tech":0.3074626675183118,"U_sys":17.600961882017504,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8711761331252084,"avg_validator_dependency":0.0,"avg_wb_trend":0.007280959701968003,"avg_well_being":0.6838255700436233,"c_protective":0.6,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.3593937997650877,"h_eff_v2":0.6804064421934052,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":16.72198422476596,"l_t_v2":0.12100740722340736,"max_constraint_level":1.0,"max_resource_share":0.2687694084909543,"max_validator_dependency":0.0,"phi":25.0,"population":199,"population_trend":-0.00105,"psi_inst_stock":0.5784304509080234,"psi_inst_trend":0.02059901716840567,"rank_10_u_sys":119.39257224664568,"rank_2_u_sys":134.59344603811758,"resilience_composite_urgency":1.0,"resilience_stock":0.2925931531846282,"resilience_trend":-0.0019055021290850897,"resource_level":0.9091626359863452,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5337545376201146,"theta_tech_v2":0.3074626675183118,"total_suppression":1.0,"transfer_state":0.5760375712948788,"trust_level":0.0,"u_sys_tail_estimate":792.038545544062,"u_sys_total_estimate":808.760529768828,"u_sys_v2":17.600961882017504,"x_bio_welfare":0.24302196655287653,"x_compute":0.17813614522429463,"x_institutional_capacity":0.2687694084909543,"x_novelty_agency":0.044191210367589356,"x_resilience":0.018305541594703986,"x_transfer_comprehension":0.2475757277695812}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,2,{"H_E":0.5019851723078251,"H_N":0.9903022660279666,"L_t":0.14381590857064516,"Psi_inst":0.620587405817221,"Theta_tech":0.326779383676877,"U_sys":19.346835409182606,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7711633766772615,"avg_validator_dependency":0.0,"avg_wb_trend":0.008525598687259625,"avg_well_being":0.6952553263632301,"c_protective":0.2,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.8140000000000001,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.5019851723078251,"h_eff_v2":0.7091683129204858,"h_n_v2":0.9903022660279666,"institution_composite_urgency":1.0,"integral_U_sys":35.19588287036602,"l_t_v2":0.14381590857064516,"max_constraint_level":0.8140000000000001,"max_resource_share":0.3723775442354233,"max_validator_dependency":0.0,"phi":25.0,"population":206,"population_trend":0.009817763819095477,"psi_inst_stock":0.620587405817221,"psi_inst_trend":0.027066398490643274,"rank_10_u_sys":130.90812179912515,"rank_2_u_sys":137.37318568243597,"resilience_composite_urgency":1.0,"resilience_stock":0.2824205693826829,"resilience_trend":-0.004385626630943153,"resource_level":0.9017987386891148,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.18599999999999994,"system_resilience":1.0,"theta_capability":0.5543748244324995,"theta_tech_v2":0.326779383676877,"total_suppression":0.8140000000000001,"transfer_state":0.5894556701982153,"trust_level":0.0,"u_sys_tail_estimate":784.1578579549356,"u_sys_total_estimate":819.3537408253017,"u_sys_v2":19.346835409182606,"x_bio_welfare":0.1816561557426229,"x_compute":0.27885017116738253,"x_institutional_capacity":0.3723775442354233,"x_novelty_agency":0.009772099689948776,"x_resilience":0.002234749000500164,"x_transfer_comprehension":0.1551092801641223}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,3,{"H_E":0.23762260482944297,"H_N":0.9881635779176592,"L_t":0.16515471076420424,"Psi_inst":0.6585286652354989,"Theta_tech":0.34761155934904997,"U_sys":20.975894759861806,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8691236853844433,"avg_validator_dependency":0.0,"avg_wb_trend":0.010047134379378004,"avg_well_being":0.7088527106908843,"c_protective":0.4,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.256,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.23762260482944297,"h_eff_v2":0.7214763037373236,"h_n_v2":0.9881635779176592,"institution_composite_urgency":1.0,"integral_U_sys":55.35724795488822,"l_t_v2":0.16515471076420424,"max_constraint_level":0.256,"max_resource_share":0.3347139255384774,"max_validator_dependency":0.0,"phi":25.0,"population":206,"population_trend":0.006872434673366834,"psi_inst_stock":0.6585286652354989,"psi_inst_trend":0.030328856768933647,"rank_10_u_sys":142.25879219886392,"rank_2_u_sys":153.8850315185931,"resilience_composite_urgency":1.0,"resilience_stock":0.294675592296025,"resilience_trend":0.0006065682323424318,"resource_level":0.9064940254784775,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.744,"system_resilience":1.0,"theta_capability":0.5603381176636146,"theta_tech_v2":0.34761155934904997,"total_suppression":0.256,"transfer_state":0.6203603652709739,"trust_level":0.0,"u_sys_tail_estimate":776.3547106161424,"u_sys_total_estimate":831.7119585710306,"u_sys_v2":20.975894759861806,"x_bio_welfare":0.22078354565397823,"x_compute":0.108525430659251,"x_institutional_capacity":0.3347139255384774,"x_novelty_agency":0.033998427591906584,"x_resilience":0.052727360093485894,"x_transfer_comprehension":0.24925131046290094}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,4,{"H_E":0.18248738052285607,"H_N":0.9855067890229092,"L_t":0.1856053867691108,"Psi_inst":0.6926757987119491,"Theta_tech":0.37114275491052184,"U_sys":22.534685856196113,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8420683587910801,"avg_validator_dependency":0.0,"avg_wb_trend":0.010905730679939784,"avg_well_being":0.7217618327388016,"c_protective":0.6,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.926,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.18248738052285607,"h_eff_v2":0.721970704015032,"h_n_v2":0.9855067890229092,"institution_composite_urgency":1.0,"integral_U_sys":77.11253826291718,"l_t_v2":0.1856053867691108,"max_constraint_level":0.926,"max_resource_share":0.33490117066698805,"max_validator_dependency":0.0,"phi":25.0,"population":203,"population_trend":0.00044177223252183165,"psi_inst_stock":0.6926757987119491,"psi_inst_trend":0.0314743397811886,"rank_10_u_sys":149.7655631674483,"rank_2_u_sys":160.17933552614855,"resilience_composite_urgency":1.0,"resilience_stock":0.3005148433341721,"resilience_trend":0.002176373074083828,"resource_level":0.9062319547301241,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.07399999999999995,"system_resilience":1.0,"theta_capability":0.5637688578495725,"theta_tech_v2":0.37114275491052184,"total_suppression":0.926,"transfer_state":0.6583243287438766,"trust_level":0.0,"u_sys_tail_estimate":768.6294843823163,"u_sys_total_estimate":845.7420226452334,"u_sys_v2":22.534685856196113,"x_bio_welfare":0.21859962275103342,"x_compute":0.08059557586423344,"x_institutional_capacity":0.28999029939036197,"x_novelty_agency":0.034960183437692284,"x_resilience":0.0409531478896907,"x_transfer_comprehension":0.33490117066698805}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part2_manifest.json
+==========================================
+
+- Size: 3299 bytes
+- Modified: 2026-09-24T11:24:31Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part2_runs.csv
+==========================================
+
+- Size: 2533 bytes
+- Modified: 2026-09-24T11:24:31Z
+- Rows: 4 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+A,0.055,25.0,1.0,1.5,True,150,False,True,True,0,209,135,2,True,1,469,6,5.1390841867982395,3.6603199031407168,1.4787642836575228,-5.311652823711759,0.6533147461663101,0.9556917351607559,0.9702934835202024,0.01,9.702934835202024e-05,6397.322145067296,True,,O,2,O_p2_A_333d7e2994dc3327f52160a6,4183,2026-09-24T11:20:36.502627+00:00,2026-09-24T11:22:24.788866+00:00,108.28621369996108,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.055,25.0,1.0,1.5,True,151,False,True,False,20,210,136,2,True,1,500,6,5.662425364648186,3.6765150769777453,1.9859102876704409,-5.952557096452712,0.6957253616548078,0.9682740198105072,0.9215506064700764,1.0104791889204294,0.0639419759639705,7432.748431994018,True,,O,2,O_p2_A_c0a5bd479a50328512c32432,6898,2026-09-24T11:20:36.524010+00:00,2026-09-24T11:22:31.868327+00:00,115.34430620004423,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.066,25.0,1.0,1.5,True,150,True,True,False,125,244,158,2,True,1,500,7,4.903267877552199,3.7019644588647775,1.2013034186874219,-6.925883876578873,0.6720396992217537,0.9690731960196204,0.9575093726626009,0.9768834887653338,0.4636107958046613,18573.61519887107,True,,O,2,O_p2_A_1838f22be8317bf11ca2d2c7,7570,2026-09-24T11:22:54.451289+00:00,2026-09-24T11:24:31.029421+00:00,96.5781214000308,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.066,25.0,1.0,1.5,True,151,True,True,False,74,267,173,2,True,1,500,6,5.017287506829909,3.755478632150974,1.2618088746789353,-7.344619190803887,0.6761275761927732,0.9849361888713548,0.9311240833545481,0.9989137771292049,0.28147374199475567,20682.168982528918,True,,O,2,O_p2_A_2fa60758a32b0829125ca58a,3481,2026-09-24T11:22:54.461720+00:00,2026-09-24T11:24:31.088943+00:00,96.62720779998926,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part2_steps.csv
+==========================================
+
+- Size: 4063326 bytes
+- Modified: 2026-09-24T11:24:31Z
+- Rows: 1969 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,0,{"H_E":0.3023658880539488,"H_N":0.9827148323858446,"L_t":0.09921172214937193,"Psi_inst":0.55,"Theta_tech":0.2796188411961623,"U_sys":15.936907870943312,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8760283127124325,"avg_validator_dependency":0.0,"avg_wb_trend":8.667715011317911e-05,"avg_well_being":0.656457109640267,"c_protective":0.0,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.8,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.3023658880539488,"h_eff_v2":0.645110138468631,"h_n_v2":0.9827148323858446,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09921172214937193,"max_constraint_level":0.8,"max_resource_share":0.3307000666567519,"max_validator_dependency":0.0,"phi":25.0,"population":200,"population_trend":0.0,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":42.71264869360508,"rank_2_u_sys":42.84868934738577,"resilience_composite_urgency":1.0,"resilience_stock":0.29842435257167294,"resilience_trend":-0.0004726942284981161,"resource_level":0.7500036819605677,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.19999999999999996,"system_resilience":1.0,"theta_capability":0.5115219362744848,"theta_tech_v2":0.2796188411961623,"total_suppression":0.8,"transfer_state":0.5466409578300424,"trust_level":0.0,"u_sys_tail_estimate":799.9984990337856,"u_sys_total_estimate":799.9984990337856,"u_sys_v2":15.936907870943312,"x_bio_welfare":0.13541743374178491,"x_compute":0.1440242034310603,"x_institutional_capacity":0.3307000666567519,"x_novelty_agency":0.08183361994477921,"x_resilience":0.024819887075411825,"x_transfer_comprehension":0.28320478915021174}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,1,{"H_E":0.4679655820968739,"H_N":0.9861447595904745,"L_t":0.12228936667990103,"Psi_inst":0.5814556594513343,"Theta_tech":0.31442220367825763,"U_sys":17.70352259767281,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8481492791578814,"avg_validator_dependency":0.0,"avg_wb_trend":0.0036046371444088785,"avg_well_being":0.6682703201046992,"c_protective":0.4,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.8560000000000001,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.4679655820968739,"h_eff_v2":0.6688964432735144,"h_n_v2":0.9861447595904745,"institution_composite_urgency":1.0,"integral_U_sys":16.82021523430806,"l_t_v2":0.12228936667990103,"max_constraint_level":0.8560000000000001,"max_resource_share":0.30369611613170644,"max_validator_dependency":0.0,"phi":25.0,"population":203,"population_trend":0.0045,"psi_inst_stock":0.5814556594513343,"psi_inst_trend":0.019936697835400273,"rank_10_u_sys":117.89467588316391,"rank_2_u_sys":133.31643479527384,"resilience_composite_urgency":1.0,"resilience_stock":0.29315981551277687,"resilience_trend":-0.0019102470776175017,"resource_level":0.9025736126153412,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.1439999999999999,"system_resilience":1.0,"theta_capability":0.5311393465464092,"theta_tech_v2":0.31442220367825763,"total_suppression":0.8560000000000001,"transfer_state":0.5919768620470381,"trust_level":0.0,"u_sys_tail_estimate":792.0387303272234,"u_sys_total_estimate":808.8589455615315,"u_sys_v2":17.70352259767281,"x_bio_welfare":0.18811343846117642,"x_compute":0.2524188385706063,"x_institutional_capacity":0.21116208841515574,"x_novelty_agency":0.02902288687443923,"x_resilience":0.015586631546915886,"x_transfer_comprehension":0.30369611613170644}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,2,{"H_E":0.15070802044765563,"H_N":1.0,"L_t":0.1441392963334054,"Psi_inst":0.6233100935062008,"Theta_tech":0.33639966097402635,"U_sys":19.372672781198393,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8433825830746682,"avg_validator_dependency":0.0,"avg_wb_trend":0.006226555214743539,"avg_well_being":0.6806146841502236,"c_protective":0.8,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.15070802044765563,"h_eff_v2":0.6874208309917259,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":35.35831292374366,"l_t_v2":0.1441392963334054,"max_constraint_level":1.0,"max_resource_share":0.3243695042983644,"max_validator_dependency":0.0,"phi":25.0,"population":202,"population_trend":0.0016721674876847288,"psi_inst_stock":0.6233100935062008,"psi_inst_trend":0.026512018701240155,"rank_10_u_sys":126.26926310144215,"rank_2_u_sys":133.9565059286953,"resilience_composite_urgency":1.0,"resilience_stock":0.2915706802350206,"resilience_trend":-0.0018139135376591356,"resource_level":0.9085916155778326,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5348096509579244,"theta_tech_v2":0.33639966097402635,"total_suppression":1.0,"transfer_state":0.6290082095031083,"trust_level":0.0,"u_sys_tail_estimate":784.1564973720286,"u_sys_total_estimate":819.5148102957723,"u_sys_v2":19.372672781198393,"x_bio_welfare":0.23826346314860533,"x_compute":0.06534089673544657,"x_institutional_capacity":0.3243695042983644,"x_novelty_agency":0.06804753279043493,"x_resilience":0.02283343472327847,"x_transfer_comprehension":0.28114516830387015}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,3,{"H_E":0.05,"H_N":0.9908664418506385,"L_t":0.1670740259824021,"Psi_inst":0.6609790841555807,"Theta_tech":0.3547404258582088,"U_sys":21.129314551357535,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8311282348269635,"avg_validator_dependency":0.0,"avg_wb_trend":0.007609803098317619,"avg_well_being":0.6914520656435474,"c_protective":0.6,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.526,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.05,"h_eff_v2":0.7125421139142759,"h_n_v2":0.9908664418506385,"institution_composite_urgency":1.0,"integral_U_sys":55.609306590021625,"l_t_v2":0.1670740259824021,"max_constraint_level":0.526,"max_resource_share":0.33856866273760156,"max_validator_dependency":0.0,"phi":25.0,"population":208,"population_trend":0.01008140833048822,"psi_inst_stock":0.6609790841555807,"psi_inst_trend":0.029859110285682076,"rank_10_u_sys":130.53849234039757,"rank_2_u_sys":142.52183055949976,"resilience_composite_urgency":1.0,"resilience_stock":0.299236687197878,"resilience_trend":0.0010300626124958275,"resource_level":0.9005667413597293,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.474,"system_resilience":1.0,"theta_capability":0.5338048366266187,"theta_tech_v2":0.3547404258582088,"total_suppression":0.526,"transfer_state":0.6645507899478619,"trust_level":0.0,"u_sys_tail_estimate":776.3501145871221,"u_sys_total_estimate":831.9594211771438,"u_sys_v2":21.129314551357535,"x_bio_welfare":0.17138951133107652,"x_compute":0.009195852707381214,"x_institutional_capacity":0.33856866273760156,"x_novelty_agency":0.1442135172222857,"x_resilience":0.044415449026332994,"x_transfer_comprehension":0.29221700697532216}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,4,{"H_E":0.5300261699719448,"H_N":1.0,"L_t":0.19428315997961404,"Psi_inst":0.6822490029639636,"Theta_tech":0.38833465714167786,"U_sys":23.228937358748755,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7610145429991885,"avg_validator_dependency":0.0,"avg_wb_trend":0.008410127921151922,"avg_well_being":0.7017296181513127,"c_protective":0.2,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.5300261699719448,"h_eff_v2":0.7333074509681218,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":77.78843254507477,"l_t_v2":0.19428315997961404,"max_constraint_level":1.0,"max_resource_share":0.3125626299916179,"max_validator_dependency":0.0,"phi":25.0,"population":209,"population_trend":0.008499293523649445,"psi_inst_stock":0.6822490029639636,"psi_inst_trend":0.02728235284249233,"rank_10_u_sys":141.63482014802796,"rank_2_u_sys":151.13006783130913,"resilience_composite_urgency":1.0,"resilience_stock":0.28760985229931396,"resilience_trend":-0.0027670066408221304,"resource_level":0.90029668149163,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5562770993271162,"theta_tech_v2":0.38833465714167786,"total_suppression":1.0,"transfer_state":0.6980957109530757,"trust_level":0.0,"u_sys_tail_estimate":768.6305271124189,"u_sys_total_estimate":846.4189596574937,"u_sys_v2":23.228937358748755,"x_bio_welfare":0.1691390124302496,"x_compute":0.302031306647855,"x_institutional_capacity":0.2153083055633682,"x_novelty_agency":0.0002883464021921219,"x_resilience":0.000670398964717383,"x_transfer_comprehension":0.3125626299916179}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part3_manifest.json
+==========================================
+
+- Size: 3299 bytes
+- Modified: 2026-09-24T11:26:27Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part3_runs.csv
+==========================================
+
+- Size: 2540 bytes
+- Modified: 2026-09-24T11:26:26Z
+- Rows: 4 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+C,0.06,25.0,1.0,2.5,False,150,False,True,False,15,210,136,2,True,1,500,20,4.5371618982878985,3.2223457834635507,1.3148161148243478,-14.655156997437599,0.5809231728982273,0.9871266671224113,0.9136051497014284,1.1849134854871697,0.09421256317543034,12261.822034576486,True,,O,3,O_p3_C_0de9b507be0110cdce85a9b2,8377,2026-09-24T11:22:54.479586+00:00,2026-09-24T11:24:30.331028+00:00,95.85142929997528,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,False,151,False,True,False,17,241,156,2,True,1,500,11,3.788701238491008,3.3838449160873165,0.4048563224036914,-13.792771083378287,0.5649506425027977,0.9893611460765984,0.9251240561214183,1.0289056748119016,0.058410598633313694,11177.234647912928,True,,O,3,O_p3_C_451abe9d26b28c4cef9ccd3d,8439,2026-09-24T11:22:54.505957+00:00,2026-09-24T11:24:30.885167+00:00,96.37919710000278,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,True,150,False,True,False,10,199,129,2,True,1,500,30,4.7260121076689074,3.2795770750994873,1.4464350325694202,-11.990707751168399,0.5617510312725639,0.9912409577157777,0.9054195599014567,1.115897467118953,0.0550965730312354,9170.286292310828,True,,O,3,O_p3_C_58359a2bbed8c2243c6e6f4f,8928,2026-09-24T11:24:31.173233+00:00,2026-09-24T11:26:26.470557+00:00,115.2973005999811,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,True,151,False,True,True,0,198,128,2,True,1,335,16,4.091432191365087,3.33714049642344,0.7542916949416467,-12.590782791014696,0.5418526263347925,0.9899726096011728,0.8007393592263902,0.01,8.007393592263902e-05,6717.660225935029,True,,O,3,O_p3_C_7ded96c31cc385c178bc6e42,5544,2026-09-24T11:24:31.837200+00:00,2026-09-24T11:25:49.445040+00:00,77.6078273000312,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part3_steps.csv
+==========================================
+
+- Size: 3772648 bytes
+- Modified: 2026-09-24T11:26:26Z
+- Rows: 1835 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,0,{"H_E":0.2220975391399681,"H_N":0.9921934192042836,"L_t":0.09721847235225083,"Psi_inst":0.55,"Theta_tech":0.27494808235337653,"U_sys":15.777441210360172,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7779472760554174,"avg_validator_dependency":0.0,"avg_wb_trend":0.005301770653480286,"avg_well_being":0.6645603865369973,"c_protective":0.4,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.05600000000000001,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.2220975391399681,"h_eff_v2":0.6428881311312171,"h_n_v2":0.9921934192042836,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09721847235225083,"max_constraint_level":0.05600000000000001,"max_resource_share":0.3665195393189093,"max_validator_dependency":0.0,"phi":25.0,"population":195,"population_trend":-0.0075,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":42.720514117445234,"rank_2_u_sys":42.80269789655769,"resilience_composite_urgency":1.0,"resilience_stock":0.2941518161718278,"resilience_trend":-0.0017544551484516612,"resource_level":0.9106076884569361,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.944,"system_resilience":1.0,"theta_capability":0.5080369322978762,"theta_tech_v2":0.27494808235337653,"total_suppression":0.05600000000000001,"transfer_state":0.5411970368173289,"trust_level":0.0,"u_sys_tail_estimate":799.9981453147132,"u_sys_total_estimate":799.9981453147132,"u_sys_v2":15.777441210360172,"x_bio_welfare":0.25506407047446755,"x_compute":0.10046165372345216,"x_institutional_capacity":0.3665195393189093,"x_novelty_agency":0.007322371035031555,"x_resilience":0.014647181361494767,"x_transfer_comprehension":0.2559851840866446}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,1,{"H_E":0.38681758129013966,"H_N":1.0,"L_t":0.11612679531873574,"Psi_inst":0.5950000000000001,"Theta_tech":0.29966040374145214,"U_sys":17.210514854210466,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8599892568690946,"avg_validator_dependency":0.0,"avg_wb_trend":0.00787673409819213,"avg_well_being":0.6784453686728504,"c_protective":1.0,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.38681758129013966,"h_eff_v2":0.6513075539259364,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":16.49397803228532,"l_t_v2":0.11612679531873574,"max_constraint_level":1.0,"max_resource_share":0.33731975879906306,"max_validator_dependency":0.0,"phi":25.0,"population":192,"population_trend":-0.009865384615384616,"psi_inst_stock":0.5950000000000001,"psi_inst_trend":0.02400000000000002,"rank_10_u_sys":119.92851740663816,"rank_2_u_sys":124.27036449641574,"resilience_composite_urgency":1.0,"resilience_stock":0.30156264160749563,"resilience_trend":0.0009951290267841905,"resource_level":0.9011426219099204,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5232860554037947,"theta_tech_v2":0.29966040374145214,"total_suppression":1.0,"transfer_state":0.5726512309031789,"trust_level":0.0,"u_sys_tail_estimate":792.0386041344716,"u_sys_total_estimate":808.5325821667569,"u_sys_v2":17.210514854210466,"x_bio_welfare":0.17618851591600315,"x_compute":0.19563712151015417,"x_institutional_capacity":0.33731975879906306,"x_novelty_agency":0.0184397735647528,"x_resilience":0.04454534137211238,"x_transfer_comprehension":0.22786948883791447}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,2,{"H_E":0.2550986066050793,"H_N":0.9876494472706313,"L_t":0.13024504011039545,"Psi_inst":0.6159335422725812,"Theta_tech":0.32710593932772225,"U_sys":18.261154195120152,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8875639360814304,"avg_validator_dependency":0.0,"avg_wb_trend":0.00977052755479749,"avg_well_being":0.6926347476263938,"c_protective":0.6,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.126,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.2550986066050793,"h_eff_v2":0.6464559077426908,"h_n_v2":0.9876494472706313,"institution_composite_urgency":1.0,"integral_U_sys":34.22981255695063,"l_t_v2":0.13024504011039545,"max_constraint_level":0.126,"max_resource_share":0.37777091700216053,"max_validator_dependency":0.0,"phi":25.0,"population":189,"population_trend":-0.01159326923076923,"psi_inst_stock":0.6159335422725812,"psi_inst_trend":0.023080062681774358,"rank_10_u_sys":126.27899020278672,"rank_2_u_sys":130.99290896757628,"resilience_composite_urgency":1.0,"resilience_stock":0.3021170473786435,"resilience_trend":0.0008629120500932877,"resource_level":0.9012399002429702,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.874,"system_resilience":1.0,"theta_capability":0.5315458623047031,"theta_tech_v2":0.32710593932772225,"total_suppression":0.126,"transfer_state":0.6153861078128611,"trust_level":0.0,"u_sys_tail_estimate":784.1572896932403,"u_sys_total_estimate":818.3871022501909,"u_sys_v2":18.261154195120152,"x_bio_welfare":0.17699916869141782,"x_compute":0.11780137088872751,"x_institutional_capacity":0.1837888285117324,"x_novelty_agency":0.11330180356299185,"x_resilience":0.03033791134296984,"x_transfer_comprehension":0.37777091700216053}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,3,{"H_E":0.39580039813390455,"H_N":0.9859139111031595,"L_t":0.14360120530941725,"Psi_inst":0.643590152585205,"Theta_tech":0.35295849229456355,"U_sys":19.251630249069525,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8502469021536224,"avg_validator_dependency":0.0,"avg_wb_trend":0.01277861237696799,"avg_well_being":0.7124322245884263,"c_protective":0.8,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.42400000000000004,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.39580039813390455,"h_eff_v2":0.6321571568459099,"h_n_v2":0.9859139111031595,"institution_composite_urgency":1.0,"integral_U_sys":52.986204779045465,"l_t_v2":0.14360120530941725,"max_constraint_level":0.42400000000000004,"max_resource_share":0.26988464321250755,"max_validator_dependency":0.0,"phi":25.0,"population":180,"population_trend":-0.022401002747252742,"psi_inst_stock":0.643590152585205,"psi_inst_trend":0.024453026971029183,"rank_10_u_sys":133.64137759300246,"rank_2_u_sys":142.9650390288167,"resilience_composite_urgency":1.0,"resilience_stock":0.2960079280819933,"resilience_trend":-0.0012286973539297587,"resource_level":0.912386157185501,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.576,"system_resilience":1.0,"theta_capability":0.5460917905966258,"theta_tech_v2":0.35295849229456355,"total_suppression":0.42400000000000004,"transfer_state":0.6463354666235563,"trust_level":0.0,"u_sys_tail_estimate":776.3551991290899,"u_sys_total_estimate":829.3414039081354,"u_sys_v2":19.251630249069525,"x_bio_welfare":0.26988464321250755,"x_compute":0.20154026758947316,"x_institutional_capacity":0.22386347518128116,"x_novelty_agency":0.027640988940671816,"x_resilience":0.014630777116159496,"x_transfer_comprehension":0.2624398479599068}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,4,{"H_E":0.39582514132426927,"H_N":1.0,"L_t":0.16670961546969615,"Psi_inst":0.6776988875659788,"Theta_tech":0.3751749989940354,"U_sys":21.023051694410963,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8830004242544138,"avg_validator_dependency":0.0,"avg_wb_trend":0.012566871680336173,"avg_well_being":0.7245050346432882,"c_protective":0.6,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.39582514132426927,"h_eff_v2":0.6556770563521759,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":73.12354575078571,"l_t_v2":0.16670961546969615,"max_constraint_level":1.0,"max_resource_share":0.2657625010877015,"max_validator_dependency":0.0,"phi":25.0,"population":181,"population_trend":-0.014014035256410252,"psi_inst_stock":0.6776988875659788,"psi_inst_trend":0.027349739373952575,"rank_10_u_sys":133.17161141167145,"rank_2_u_sys":143.4944079833402,"resilience_composite_urgency":1.0,"resilience_stock":0.2977009927570413,"resilience_trend":-0.00035216874523641927,"resource_level":0.9067772353452239,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5599117329652241,"theta_tech_v2":0.3751749989940354,"total_suppression":1.0,"transfer_state":0.6700609701589114,"trust_level":0.0,"u_sys_tail_estimate":768.6303427371295,"u_sys_total_estimate":841.7538884879152,"u_sys_v2":21.023051694410963,"x_bio_welfare":0.22314362787686545,"x_compute":0.20155664873037016,"x_institutional_capacity":0.2657625010877015,"x_novelty_agency":0.03628002835249206,"x_resilience":0.031461942964017164,"x_transfer_comprehension":0.24179525098855367}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part4_manifest.json
+==========================================
+
+- Size: 3929 bytes
+- Modified: 2026-09-24T11:29:20Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part4_runs.csv
+==========================================
+
+- Size: 3538 bytes
+- Modified: 2026-09-24T11:29:19Z
+- Rows: 6 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+A,0.066,25.0,1.0,1.5,True,150,True,True,False,83,274,178,2,True,1,500,6,5.795015231633386,3.716227422313727,2.0787878093196586,-7.064312347225131,0.6561507223396873,0.9405813743241374,0.9252076204373831,0.9257447222730577,0.27268635383049433,18346.712503322644,True,,R,4,R_p4_A_1838f22be8317bf11ca2d2c7,7570,2026-09-24T11:24:32.101790+00:00,2026-09-24T11:27:05.832258+00:00,153.73045210004784,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.066,25.0,1.0,1.5,True,151,True,True,False,41,273,177,2,True,1,500,6,4.968523745217993,3.755478632150974,1.2130451130670195,-7.101139141114669,0.655094037549544,0.9333798129086954,0.9489122520896174,0.9171773253083929,0.13576443873153962,16443.550560814183,True,,R,4,R_p4_A_2fa60758a32b0829125ca58a,3481,2026-09-24T11:24:32.161831+00:00,2026-09-24T11:27:06.274679+00:00,154.1128355000401,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,False,150,False,True,False,1,195,126,2,True,1,500,30,4.163378734031831,3.147436550175587,1.0159421838562435,-11.243025677995425,0.5672751437277725,0.9867881929502078,0.8719022825931184,1.399451034961745,0.012201845517604476,7935.458199356166,True,,R,4,R_p4_C_0de9b507be0110cdce85a9b2,8377,2026-09-24T11:25:50.218437+00:00,2026-09-24T11:28:19.969318+00:00,149.7508736999589,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,False,151,True,True,False,32,221,143,2,True,1,500,34,3.391965489082459,3.1749982420425797,0.21696724703987913,-14.401328817434486,0.5873932409991347,0.9879145686204517,0.8653977818006415,1.025564213021852,0.10223274886099751,12245.380582549615,True,,R,4,R_p4_C_451abe9d26b28c4cef9ccd3d,8439,2026-09-24T11:26:27.315354+00:00,2026-09-24T11:28:51.363497+00:00,144.04813349997858,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,True,150,False,True,False,17,199,129,2,True,1,500,63,3.462290403986451,3.191787242649728,0.2705031613367228,-11.226095492818647,0.5798908873708586,0.9914319578880365,0.8845255292667482,0.9424683270454288,0.05262485321719694,8960.454866662076,True,,R,4,R_p4_C_58359a2bbed8c2243c6e6f4f,8928,2026-09-24T11:27:06.869182+00:00,2026-09-24T11:29:17.898742+00:00,131.02954039996257,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_part4_steps.csv
+==========================================
+
+- Size: 7774620 bytes
+- Modified: 2026-09-24T11:29:20Z
+- Rows: 3000 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,0,{"H_E":0.5175300696938225,"H_N":0.9858999588093948,"L_t":0.09880896411299368,"Psi_inst":0.55,"Theta_tech":0.27235393974042305,"U_sys":15.904695521970815,"actual_objective_v2":8.017477169433965,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8039757040009139,"avg_validator_dependency":0.0,"avg_wb_trend":0.004934341194429292,"avg_well_being":0.6724253313205909,"c_protective":0.8,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.22400000000000003,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.5175300696938225,"h_eff_v2":0.6596293859191075,"h_n_v2":0.9858999588093948,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09880896411299368,"max_constraint_level":0.22400000000000003,"max_resource_share":0.29310147210534954,"max_validator_dependency":0.0,"phi":25.0,"population":199,"population_trend":-0.0015,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":112.46931034134668,"rank_2_u_sys":123.23699672110018,"resilience_composite_urgency":1.0,"resilience_stock":0.28993033601494494,"resilience_trend":-0.003020899195516513,"resource_level":0.9090915687360734,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.776,"system_resilience":1.0,"theta_capability":0.5233227737841301,"theta_tech_v2":0.27235393974042305,"total_suppression":0.22400000000000003,"transfer_state":0.5204320419137133,"trust_level":0.0,"u_sys_tail_estimate":799.9989131743241,"u_sys_total_estimate":799.9989131743241,"u_sys_v2":15.904695521970815,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.2424297394672788,"x_compute":0.291534672301626,"x_institutional_capacity":0.29310147210534954,"x_novelty_agency":0.016177868426357864,"x_resilience":0.004596038130821346,"x_transfer_comprehension":0.15216020956856657}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,1,{"H_E":0.14909106797845817,"H_N":0.981590761210574,"L_t":0.12162628771406565,"Psi_inst":0.585694932882004,"Theta_tech":0.2997245300963176,"U_sys":17.650446053703433,"actual_objective_v2":15.825065963175273,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9194283414504895,"avg_validator_dependency":0.0,"avg_wb_trend":0.007309470319706291,"avg_well_being":0.6852767695992769,"c_protective":1.0,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.35,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.14909106797845817,"h_eff_v2":0.6928411862882036,"h_n_v2":0.981590761210574,"institution_composite_urgency":1.0,"integral_U_sys":16.777570787837124,"l_t_v2":0.12162628771406565,"max_constraint_level":0.35,"max_resource_share":0.32137136604592853,"max_validator_dependency":0.0,"phi":25.0,"population":206,"population_trend":0.009502763819095476,"psi_inst_stock":0.585694932882004,"psi_inst_trend":0.021208479864601205,"rank_10_u_sys":115.68861733371925,"rank_2_u_sys":123.36736237774853,"resilience_composite_urgency":1.0,"resilience_stock":0.3116550904026474,"resilience_trend":0.004402796879449173,"resource_level":0.9017776209822991,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.65,"system_resilience":1.0,"theta_capability":0.5273230405040662,"theta_tech_v2":0.2997245300963176,"total_suppression":0.35,"transfer_state":0.5683888377223419,"trust_level":0.0,"u_sys_tail_estimate":792.0373705330283,"u_sys_total_estimate":808.8149413208654,"u_sys_v2":17.650446053703433,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.18148017485249235,"x_compute":0.06458006761428313,"x_institutional_capacity":0.2304315131000181,"x_novelty_agency":0.12471689098371629,"x_resilience":0.07741998740356157,"x_transfer_comprehension":0.32137136604592853}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,2,{"H_E":0.3802684944129402,"H_N":0.9874359027754908,"L_t":0.13977953960937217,"Psi_inst":0.6096656675441587,"Theta_tech":0.3310123561926027,"U_sys":19.023921753625487,"actual_objective_v2":17.65047304276105,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9329833809514804,"avg_validator_dependency":0.0,"avg_wb_trend":0.008922635590724974,"avg_well_being":0.6979634574890454,"c_protective":0.0,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.2,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.3802684944129402,"h_eff_v2":0.6926401476337484,"h_n_v2":0.9874359027754908,"institution_composite_urgency":1.0,"integral_U_sys":35.11475469150159,"l_t_v2":0.13977953960937217,"max_constraint_level":0.2,"max_resource_share":0.30336963766209646,"max_validator_dependency":0.0,"phi":25.0,"population":201,"population_trend":-0.000629618724691419,"psi_inst_stock":0.6096656675441587,"psi_inst_trend":0.022037156303867256,"rank_10_u_sys":126.21539090809016,"rank_2_u_sys":141.13811132879007,"resilience_composite_urgency":1.0,"resilience_stock":0.3311469827579791,"resilience_trend":0.008929525522213936,"resource_level":0.9004276247606635,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.8,"system_resilience":1.0,"theta_capability":0.5412678948866503,"theta_tech_v2":0.3310123561926027,"total_suppression":0.2,"transfer_state":0.6115499539501077,"trust_level":0.0,"u_sys_tail_estimate":784.1576690179227,"u_sys_total_estimate":819.2724237094243,"u_sys_v2":19.023921753625487,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.17023020633886282,"x_compute":0.19138758009734294,"x_institutional_capacity":0.19336467250161404,"x_novelty_agency":0.06333718148663275,"x_resilience":0.07831072191345098,"x_transfer_comprehension":0.30336963766209646}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,3,{"H_E":0.1882159920413926,"H_N":0.9824350339619485,"L_t":0.15880393542040241,"Psi_inst":0.6339165215819956,"Theta_tech":0.351701939629915,"U_sys":20.467825301075273,"actual_objective_v2":19.102711687631036,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9045488259607196,"avg_validator_dependency":0.0,"avg_wb_trend":0.01009827794897662,"avg_well_being":0.7108049009406092,"c_protective":0.6,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.326,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.1882159920413926,"h_eff_v2":0.712286029735825,"h_n_v2":0.9824350339619485,"institution_composite_urgency":1.0,"integral_U_sys":54.86062821885197,"l_t_v2":0.15880393542040241,"max_constraint_level":0.326,"max_resource_share":0.29893432442740037,"max_validator_dependency":0.0,"phi":25.0,"population":204,"population_trend":0.004036878833014514,"psi_inst_stock":0.6339165215819956,"psi_inst_trend":0.022701265624058144,"rank_10_u_sys":134.14972458798368,"rank_2_u_sys":137.96876270910394,"resilience_composite_urgency":1.0,"resilience_stock":0.351122400504892,"resilience_trend":0.012243293189623628,"resource_level":0.9158721189312881,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.6739999999999999,"system_resilience":1.0,"theta_capability":0.5458771713185009,"theta_tech_v2":0.351701939629915,"total_suppression":0.326,"transfer_state":0.644287686148188,"trust_level":0.0,"u_sys_tail_estimate":776.3543861432756,"u_sys_total_estimate":831.2150143621276,"u_sys_v2":20.467825301075273,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.29893432442740037,"x_compute":0.08340838970228949,"x_institutional_capacity":0.20553373087387597,"x_novelty_agency":0.057628832083668424,"x_resilience":0.08503108494731047,"x_transfer_comprehension":0.2694636379654554}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,4,{"H_E":0.1471158353938763,"H_N":0.9778926279227331,"L_t":0.17150893605286072,"Psi_inst":0.6616827350246687,"Theta_tech":0.3689958062350707,"U_sys":21.40696214919525,"actual_objective_v2":20.62464781044385,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9402403156448571,"avg_validator_dependency":0.0,"avg_wb_trend":0.011503253772659663,"avg_well_being":0.725586431635196,"c_protective":0.0,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.4,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.1471158353938763,"h_eff_v2":0.7024501661926521,"h_n_v2":0.9778926279227331,"institution_composite_urgency":1.0,"integral_U_sys":75.79802194398724,"l_t_v2":0.17150893605286072,"max_constraint_level":0.4,"max_resource_share":0.2633103714847474,"max_validator_dependency":0.0,"phi":25.0,"population":198,"population_trend":-0.005997714228654546,"psi_inst_stock":0.6616827350246687,"psi_inst_trend":0.024220749969642616,"rank_10_u_sys":140.22371128927122,"rank_2_u_sys":150.74075770432074,"resilience_composite_urgency":1.0,"resilience_stock":0.3669530601792786,"resilience_trend":0.01331950313505251,"resource_level":0.9036426737270402,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.6,"system_resilience":1.0,"theta_capability":0.5486755219800942,"theta_tech_v2":0.3689958062350707,"total_suppression":0.4,"transfer_state":0.6725209918303187,"trust_level":0.0,"u_sys_tail_estimate":768.629100829708,"u_sys_total_estimate":844.4271227736953,"u_sys_v2":21.40696214919525,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.19702228105866787,"x_compute":0.06365261534397937,"x_institutional_capacity":0.23253575273123903,"x_novelty_agency":0.16260910382190522,"x_resilience":0.08086987555946101,"x_transfer_comprehension":0.2633103714847474}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_persistence_unit_results.json
+==========================================
+
+- Size: 228 bytes
+- Modified: 2026-09-24T11:16:17Z
+- Structure: object with 5 top-level keys
+- Keys: synthetic_fixture, merged_rows_verified, resume_counts, main_head_excluded_from_identity, registered_runs_executed
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_progress.json
+==========================================
+
+- Size: 14048 bytes
+- Modified: 2026-09-24T11:29:20Z
+- Structure: object with 19 top-level keys
+- Keys: updated_utc, status, machine_label, controller_pid, cpu_budget, maximum_workers, parts, current_cap, requested_cap, cap_source, active_children, elapsed_seconds, mean_wall_seconds_per_arm, estimated_finish_local, eta_assumption, resume_counts, schedule_path, runtime_control_path, events
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_manifest.json
+==========================================
+
+- Size: 7731 bytes
+- Modified: 2026-09-24T11:30:33Z
+- Structure: object with 12 top-level keys
+- Keys: status, machine_label, identity, proof, parts, resume_counts, events, cpu_budget, priority, non_registered, retry_events, files
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_part3_manifest.json
+==========================================
+
+- Size: 2407 bytes
+- Modified: 2026-09-24T11:30:32Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_part3_runs.csv
+==========================================
+
+- Size: 1070 bytes
+- Modified: 2026-09-24T11:30:32Z
+- Rows: 1 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+C,0.06,25.0,1.0,2.5,False,150,False,True,False,15,210,136,2,True,1,500,20,4.5371618982878985,3.2223457834635507,1.3148161148243478,-14.655156997437599,0.5809231728982273,0.9871266671224113,0.9136051497014284,1.1849134854871697,0.09421256317543034,12261.822034576486,True,,O,3,O_p3_C_0de9b507be0110cdce85a9b2,8377,2026-09-24T11:29:22.174706+00:00,2026-09-24T11:30:32.020030+00:00,69.84530529996846,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_part3_steps.csv
+==========================================
+
+- Size: 1028598 bytes
+- Modified: 2026-09-24T11:30:32Z
+- Rows: 500 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,0,{"H_E":0.2220975391399681,"H_N":0.9921934192042836,"L_t":0.09721847235225083,"Psi_inst":0.55,"Theta_tech":0.27494808235337653,"U_sys":15.777441210360172,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7779472760554174,"avg_validator_dependency":0.0,"avg_wb_trend":0.005301770653480286,"avg_well_being":0.6645603865369973,"c_protective":0.4,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.05600000000000001,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.2220975391399681,"h_eff_v2":0.6428881311312171,"h_n_v2":0.9921934192042836,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09721847235225083,"max_constraint_level":0.05600000000000001,"max_resource_share":0.3665195393189093,"max_validator_dependency":0.0,"phi":25.0,"population":195,"population_trend":-0.0075,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":42.720514117445234,"rank_2_u_sys":42.80269789655769,"resilience_composite_urgency":1.0,"resilience_stock":0.2941518161718278,"resilience_trend":-0.0017544551484516612,"resource_level":0.9106076884569361,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.944,"system_resilience":1.0,"theta_capability":0.5080369322978762,"theta_tech_v2":0.27494808235337653,"total_suppression":0.05600000000000001,"transfer_state":0.5411970368173289,"trust_level":0.0,"u_sys_tail_estimate":799.9981453147132,"u_sys_total_estimate":799.9981453147132,"u_sys_v2":15.777441210360172,"x_bio_welfare":0.25506407047446755,"x_compute":0.10046165372345216,"x_institutional_capacity":0.3665195393189093,"x_novelty_agency":0.007322371035031555,"x_resilience":0.014647181361494767,"x_transfer_comprehension":0.2559851840866446}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,1,{"H_E":0.38681758129013966,"H_N":1.0,"L_t":0.11612679531873574,"Psi_inst":0.5950000000000001,"Theta_tech":0.29966040374145214,"U_sys":17.210514854210466,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8599892568690946,"avg_validator_dependency":0.0,"avg_wb_trend":0.00787673409819213,"avg_well_being":0.6784453686728504,"c_protective":1.0,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.38681758129013966,"h_eff_v2":0.6513075539259364,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":16.49397803228532,"l_t_v2":0.11612679531873574,"max_constraint_level":1.0,"max_resource_share":0.33731975879906306,"max_validator_dependency":0.0,"phi":25.0,"population":192,"population_trend":-0.009865384615384616,"psi_inst_stock":0.5950000000000001,"psi_inst_trend":0.02400000000000002,"rank_10_u_sys":119.92851740663816,"rank_2_u_sys":124.27036449641574,"resilience_composite_urgency":1.0,"resilience_stock":0.30156264160749563,"resilience_trend":0.0009951290267841905,"resource_level":0.9011426219099204,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5232860554037947,"theta_tech_v2":0.29966040374145214,"total_suppression":1.0,"transfer_state":0.5726512309031789,"trust_level":0.0,"u_sys_tail_estimate":792.0386041344716,"u_sys_total_estimate":808.5325821667569,"u_sys_v2":17.210514854210466,"x_bio_welfare":0.17618851591600315,"x_compute":0.19563712151015417,"x_institutional_capacity":0.33731975879906306,"x_novelty_agency":0.0184397735647528,"x_resilience":0.04454534137211238,"x_transfer_comprehension":0.22786948883791447}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,2,{"H_E":0.2550986066050793,"H_N":0.9876494472706313,"L_t":0.13024504011039545,"Psi_inst":0.6159335422725812,"Theta_tech":0.32710593932772225,"U_sys":18.261154195120152,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8875639360814304,"avg_validator_dependency":0.0,"avg_wb_trend":0.00977052755479749,"avg_well_being":0.6926347476263938,"c_protective":0.6,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.126,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.2550986066050793,"h_eff_v2":0.6464559077426908,"h_n_v2":0.9876494472706313,"institution_composite_urgency":1.0,"integral_U_sys":34.22981255695063,"l_t_v2":0.13024504011039545,"max_constraint_level":0.126,"max_resource_share":0.37777091700216053,"max_validator_dependency":0.0,"phi":25.0,"population":189,"population_trend":-0.01159326923076923,"psi_inst_stock":0.6159335422725812,"psi_inst_trend":0.023080062681774358,"rank_10_u_sys":126.27899020278672,"rank_2_u_sys":130.99290896757628,"resilience_composite_urgency":1.0,"resilience_stock":0.3021170473786435,"resilience_trend":0.0008629120500932877,"resource_level":0.9012399002429702,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.874,"system_resilience":1.0,"theta_capability":0.5315458623047031,"theta_tech_v2":0.32710593932772225,"total_suppression":0.126,"transfer_state":0.6153861078128611,"trust_level":0.0,"u_sys_tail_estimate":784.1572896932403,"u_sys_total_estimate":818.3871022501909,"u_sys_v2":18.261154195120152,"x_bio_welfare":0.17699916869141782,"x_compute":0.11780137088872751,"x_institutional_capacity":0.1837888285117324,"x_novelty_agency":0.11330180356299185,"x_resilience":0.03033791134296984,"x_transfer_comprehension":0.37777091700216053}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,3,{"H_E":0.39580039813390455,"H_N":0.9859139111031595,"L_t":0.14360120530941725,"Psi_inst":0.643590152585205,"Theta_tech":0.35295849229456355,"U_sys":19.251630249069525,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8502469021536224,"avg_validator_dependency":0.0,"avg_wb_trend":0.01277861237696799,"avg_well_being":0.7124322245884263,"c_protective":0.8,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.42400000000000004,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.39580039813390455,"h_eff_v2":0.6321571568459099,"h_n_v2":0.9859139111031595,"institution_composite_urgency":1.0,"integral_U_sys":52.986204779045465,"l_t_v2":0.14360120530941725,"max_constraint_level":0.42400000000000004,"max_resource_share":0.26988464321250755,"max_validator_dependency":0.0,"phi":25.0,"population":180,"population_trend":-0.022401002747252742,"psi_inst_stock":0.643590152585205,"psi_inst_trend":0.024453026971029183,"rank_10_u_sys":133.64137759300246,"rank_2_u_sys":142.9650390288167,"resilience_composite_urgency":1.0,"resilience_stock":0.2960079280819933,"resilience_trend":-0.0012286973539297587,"resource_level":0.912386157185501,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.576,"system_resilience":1.0,"theta_capability":0.5460917905966258,"theta_tech_v2":0.35295849229456355,"total_suppression":0.42400000000000004,"transfer_state":0.6463354666235563,"trust_level":0.0,"u_sys_tail_estimate":776.3551991290899,"u_sys_total_estimate":829.3414039081354,"u_sys_v2":19.251630249069525,"x_bio_welfare":0.26988464321250755,"x_compute":0.20154026758947316,"x_institutional_capacity":0.22386347518128116,"x_novelty_agency":0.027640988940671816,"x_resilience":0.014630777116159496,"x_transfer_comprehension":0.2624398479599068}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,4,{"H_E":0.39582514132426927,"H_N":1.0,"L_t":0.16670961546969615,"Psi_inst":0.6776988875659788,"Theta_tech":0.3751749989940354,"U_sys":21.023051694410963,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8830004242544138,"avg_validator_dependency":0.0,"avg_wb_trend":0.012566871680336173,"avg_well_being":0.7245050346432882,"c_protective":0.6,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.39582514132426927,"h_eff_v2":0.6556770563521759,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":73.12354575078571,"l_t_v2":0.16670961546969615,"max_constraint_level":1.0,"max_resource_share":0.2657625010877015,"max_validator_dependency":0.0,"phi":25.0,"population":181,"population_trend":-0.014014035256410252,"psi_inst_stock":0.6776988875659788,"psi_inst_trend":0.027349739373952575,"rank_10_u_sys":133.17161141167145,"rank_2_u_sys":143.4944079833402,"resilience_composite_urgency":1.0,"resilience_stock":0.2977009927570413,"resilience_trend":-0.00035216874523641927,"resource_level":0.9067772353452239,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5599117329652241,"theta_tech_v2":0.3751749989940354,"total_suppression":1.0,"transfer_state":0.6700609701589114,"trust_level":0.0,"u_sys_tail_estimate":768.6303427371295,"u_sys_total_estimate":841.7538884879152,"u_sys_v2":21.023051694410963,"x_bio_welfare":0.22314362787686545,"x_compute":0.20155664873037016,"x_institutional_capacity":0.2657625010877015,"x_novelty_agency":0.03628002835249206,"x_resilience":0.031461942964017164,"x_transfer_comprehension":0.24179525098855367}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_progress.json
+==========================================
+
+- Size: 1890 bytes
+- Modified: 2026-09-24T11:30:33Z
+- Structure: object with 19 top-level keys
+- Keys: updated_utc, status, machine_label, controller_pid, cpu_budget, maximum_workers, parts, current_cap, requested_cap, cap_source, active_children, elapsed_seconds, mean_wall_seconds_per_arm, estimated_finish_local, eta_assumption, resume_counts, schedule_path, runtime_control_path, events
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_runtime_control_YOTKOTEST.json
+==========================================
+
+- Size: 19 bytes
+- Modified: 2026-09-24T11:29:21Z
+- Structure: object with 1 top-level keys
+- Keys: workers
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_schedule_YOTKOTEST.json
+==========================================
+
+- Size: 297 bytes
+- Modified: 2026-09-24T11:29:21Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_O_state.json
+==========================================
+
+- Size: 2726 bytes
+- Modified: 2026-09-24T11:30:33Z
+- Structure: object with 11 top-level keys
+- Keys: identity, task_ids, machine_label, events, resume_counts, elapsed_seconds, cpu_budget, priority, retry_events, last_cap, last_cap_source
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_manifest.json
+==========================================
+
+- Size: 7731 bytes
+- Modified: 2026-09-24T11:32:18Z
+- Structure: object with 12 top-level keys
+- Keys: status, machine_label, identity, proof, parts, resume_counts, events, cpu_budget, priority, non_registered, retry_events, files
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_part4_manifest.json
+==========================================
+
+- Size: 2407 bytes
+- Modified: 2026-09-24T11:32:18Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_part4_runs.csv
+==========================================
+
+- Size: 1067 bytes
+- Modified: 2026-09-24T11:32:17Z
+- Rows: 1 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+C,0.06,25.0,1.0,2.5,False,150,False,True,False,1,195,126,2,True,1,500,30,4.163378734031831,3.147436550175587,1.0159421838562435,-11.243025677995425,0.5672751437277725,0.9867881929502078,0.8719022825931184,1.399451034961745,0.012201845517604476,7935.458199356166,True,,R,4,R_p4_C_0de9b507be0110cdce85a9b2,8377,2026-09-24T11:30:33.747050+00:00,2026-09-24T11:32:17.567978+00:00,103.82091930002207,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_part4_steps.csv
+==========================================
+
+- Size: 1292564 bytes
+- Modified: 2026-09-24T11:32:17Z
+- Rows: 500 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+R,4,R_p4_C_0de9b507be0110cdce85a9b2,150,0,{"H_E":0.22209753913996821,"H_N":0.9921832007961788,"L_t":0.09721747111800902,"Psi_inst":0.55,"Theta_tech":0.27494808235337653,"U_sys":15.777361111704169,"actual_objective_v2":8.015401463653436,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7779472760554174,"avg_validator_dependency":0.0,"avg_wb_trend":0.005301770653480286,"avg_well_being":0.6645603865369973,"c_protective":0.4,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.05600000000000001,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.22209753913996821,"h_eff_v2":0.6428815101507083,"h_n_v2":0.9921832007961788,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09721747111800902,"max_constraint_level":0.05600000000000001,"max_resource_share":0.36651953931890935,"max_validator_dependency":0.0,"phi":25.0,"population":195,"population_trend":-0.0075,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":109.87928883141754,"rank_2_u_sys":117.9894133137714,"resilience_composite_urgency":1.0,"resilience_stock":0.2941518161718278,"resilience_trend":-0.0017544551484516612,"resource_level":0.9106076884569362,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.944,"system_resilience":1.0,"theta_capability":0.5080369322978762,"theta_tech_v2":0.27494808235337653,"total_suppression":0.05600000000000001,"transfer_state":0.5411970368173289,"trust_level":0.0,"u_sys_tail_estimate":799.9981453095232,"u_sys_total_estimate":799.9981453095232,"u_sys_v2":15.777361111704169,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.2550640704744676,"x_compute":0.10046165372345217,"x_institutional_capacity":0.36651953931890935,"x_novelty_agency":0.007322371035031556,"x_resilience":0.014647181361494769,"x_transfer_comprehension":0.25598518408664467}
+R,4,R_p4_C_0de9b507be0110cdce85a9b2,150,1,{"H_E":0.4226535813665493,"H_N":0.9881284924833015,"L_t":0.11164435806499567,"Psi_inst":0.5686094761059688,"Theta_tech":0.30507910681767525,"U_sys":16.851921704319054,"actual_objective_v2":15.697772543166005,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9548732332583011,"avg_validator_dependency":0.0,"avg_wb_trend":0.007881741319716307,"avg_well_being":0.6784620594112644,"c_protective":0.2,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.014000000000000002,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.4226535813665493,"h_eff_v2":0.643591384294242,"h_n_v2":0.9881284924833015,"institution_composite_urgency":1.0,"integral_U_sys":16.31464140801161,"l_t_v2":0.11164435806499567,"max_constraint_level":0.014000000000000002,"max_resource_share":0.26894977702214684,"max_validator_dependency":0.0,"phi":25.0,"population":192,"population_trend":-0.009865384615384616,"psi_inst_stock":0.5686094761059688,"psi_inst_trend":0.016082842831790633,"rank_10_u_sys":115.44176721769355,"rank_2_u_sys":124.06331917481613,"resilience_composite_urgency":1.0,"resilience_stock":0.3287950842465069,"resilience_trend":0.009164861818487567,"resource_level":0.9013130805150001,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.986,"system_resilience":1.0,"theta_capability":0.5252130957218697,"theta_tech_v2":0.30507910681767525,"total_suppression":0.014000000000000002,"transfer_state":0.5808672885400253,"trust_level":0.0,"u_sys_tail_estimate":792.0386632907769,"u_sys_total_estimate":808.3533046987885,"u_sys_v2":16.851921704319054,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.17760900429166793,"x_compute":0.21972512548609108,"x_institutional_capacity":0.1527703459362214,"x_novelty_agency":0.07156125675125742,"x_resilience":0.1093844905126153,"x_transfer_comprehension":0.26894977702214684}
+R,4,R_p4_C_0de9b507be0110cdce85a9b2,150,2,{"H_E":0.2550986066050793,"H_N":0.9876323335961255,"L_t":0.12716450222042075,"Psi_inst":0.592182070767953,"Theta_tech":0.33217654671034946,"U_sys":18.01471168195219,"actual_objective_v2":16.851911883599314,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8875639360814304,"avg_validator_dependency":0.0,"avg_wb_trend":0.009773949748042542,"avg_well_being":0.6926511621587348,"c_protective":0.6,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.126,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.2550986066050793,"h_eff_v2":0.6464600260501001,"h_n_v2":0.9876323335961255,"institution_composite_urgency":1.0,"integral_U_sys":33.74795810114723,"l_t_v2":0.12716450222042075,"max_constraint_level":0.126,"max_resource_share":0.37777091700216053,"max_validator_dependency":0.0,"phi":25.0,"population":189,"population_trend":-0.01159326923076923,"psi_inst_stock":0.592182070767953,"psi_inst_trend":0.018329768380848717,"rank_10_u_sys":117.97409934680877,"rank_2_u_sys":126.72865011583254,"resilience_composite_urgency":1.0,"resilience_stock":0.3260815969009734,"resilience_trend":0.005601357069281246,"resource_level":0.9012399002429702,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.874,"system_resilience":1.0,"theta_capability":0.5333765506068744,"theta_tech_v2":0.33217654671034946,"total_suppression":0.126,"transfer_state":0.6227805596860227,"trust_level":0.0,"u_sys_tail_estimate":784.1572896846418,"u_sys_total_estimate":817.905247785789,"u_sys_v2":18.01471168195219,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.17699916869141782,"x_compute":0.11780137088872751,"x_institutional_capacity":0.1837888285117324,"x_novelty_agency":0.11330180356299185,"x_resilience":0.03033791134296984,"x_transfer_comprehension":0.37777091700216053}
+R,4,R_p4_C_0de9b507be0110cdce85a9b2,150,3,{"H_E":0.39580039813390466,"H_N":0.9754529083341933,"L_t":0.13921797353264748,"Psi_inst":0.6222138282310397,"Theta_tech":0.35772838773194043,"U_sys":18.900972132953473,"actual_objective_v2":18.09353025490417,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8502469021536225,"avg_validator_dependency":0.0,"avg_wb_trend":0.012780941622781969,"avg_well_being":0.7124484181559088,"c_protective":0.8,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.42400000000000004,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.39580039813390466,"h_eff_v2":0.625463893375449,"h_n_v2":0.9754529083341933,"institution_composite_urgency":1.0,"integral_U_sys":52.205800008600065,"l_t_v2":0.13921797353264748,"max_constraint_level":0.42400000000000004,"max_resource_share":0.2698846432125076,"max_validator_dependency":0.0,"phi":25.0,"population":180,"population_trend":-0.022401002747252742,"psi_inst_stock":0.6222138282310397,"psi_inst_trend":0.021840365105520086,"rank_10_u_sys":123.22469139453342,"rank_2_u_sys":138.749550032114,"resilience_composite_urgency":1.0,"resilience_stock":0.3170967316616436,"resilience_trend":0.0012254903766979364,"resource_level":0.912386157185501,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.576,"system_resilience":1.0,"theta_capability":0.5478309444836885,"theta_tech_v2":0.35772838773194043,"total_suppression":0.42400000000000004,"transfer_state":0.6529904733094019,"trust_level":0.0,"u_sys_tail_estimate":776.355193851103,"u_sys_total_estimate":828.560993859703,"u_sys_v2":18.900972132953473,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.2698846432125076,"x_compute":0.2015402675894732,"x_institutional_capacity":0.2238634751812812,"x_novelty_agency":0.02764098894067182,"x_resilience":0.014630777116159498,"x_transfer_comprehension":0.2624398479599069}
+R,4,R_p4_C_0de9b507be0110cdce85a9b2,150,4,{"H_E":0.05,"H_N":0.9483166708309043,"L_t":0.15350450232731083,"Psi_inst":0.6599924454079357,"Theta_tech":0.37429863808395397,"U_sys":19.966512793056392,"actual_objective_v2":19.057681410812464,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.843547434338277,"avg_validator_dependency":0.0,"avg_wb_trend":0.012423824834411724,"avg_well_being":0.7240389704841232,"c_protective":0.6,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.526,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.05,"h_eff_v2":0.621389494567412,"h_n_v2":0.9483166708309043,"institution_composite_urgency":1.0,"integral_U_sys":71.639542471605,"l_t_v2":0.15350450232731083,"max_constraint_level":0.526,"max_resource_share":0.3049890789970801,"max_validator_dependency":0.0,"phi":25.0,"population":181,"population_trend":-0.014014035256410252,"psi_inst_stock":0.6599924454079357,"psi_inst_trend":0.026621840726932862,"rank_10_u_sys":129.6549823689907,"rank_2_u_sys":133.47243566414764,"resilience_composite_urgency":1.0,"resilience_stock":0.3152750913916527,"resilience_trend":0.0003113511826912926,"resource_level":0.9017394819387421,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.474,"system_resilience":1.0,"theta_capability":0.5467633739004532,"theta_tech_v2":0.37429863808395397,"total_suppression":0.526,"transfer_state":0.6845715275582832,"trust_level":0.0,"u_sys_tail_estimate":768.6252801247826,"u_sys_total_estimate":840.2648225963876,"u_sys_v2":19.966512793056392,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.18116234948951696,"x_compute":0.01654970801186376,"x_institutional_capacity":0.3049890789970801,"x_novelty_agency":0.1837793852943211,"x_resilience":0.02911897030811039,"x_transfer_comprehension":0.28440050789910754}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_progress.json
+==========================================
+
+- Size: 1893 bytes
+- Modified: 2026-09-24T11:32:18Z
+- Structure: object with 19 top-level keys
+- Keys: updated_utc, status, machine_label, controller_pid, cpu_budget, maximum_workers, parts, current_cap, requested_cap, cap_source, active_children, elapsed_seconds, mean_wall_seconds_per_arm, estimated_finish_local, eta_assumption, resume_counts, schedule_path, runtime_control_path, events
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_runtime_control_YOTKOTEST.json
+==========================================
+
+- Size: 19 bytes
+- Modified: 2026-09-24T11:30:33Z
+- Structure: object with 1 top-level keys
+- Keys: workers
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_schedule_YOTKOTEST.json
+==========================================
+
+- Size: 297 bytes
+- Modified: 2026-09-24T11:30:33Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_repeat_R_state.json
+==========================================
+
+- Size: 2727 bytes
+- Modified: 2026-09-24T11:32:18Z
+- Structure: object with 11 top-level keys
+- Keys: identity, task_ids, machine_label, events, resume_counts, elapsed_seconds, cpu_budget, priority, retry_events, last_cap, last_cap_source
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_runtime_control_YOTKOTEST.json
+==========================================
+
+- Size: 19 bytes
+- Modified: 2026-09-24T11:22:50Z
+- Structure: object with 1 top-level keys
+- Keys: workers
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_schedule_YOTKOTEST-fixture.json
+==========================================
+
+- Size: 297 bytes
+- Modified: 2026-09-24T11:36:19Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_schedule_YOTKOTEST.json
+==========================================
+
+- Size: 297 bytes
+- Modified: 2026-09-24T11:20:35Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_startup.json
+==========================================
+
+- Size: 1803 bytes
+- Modified: 2026-09-24T11:22:53Z
+- Structure: object with 8 top-level keys
+- Keys: counts, seed_tasks_checked, part4_subset, task_list_hashes, identity, main_head_provenance_only, machine_label, cpu_budget
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_startup_O.json
+==========================================
+
+- Size: 8322404 bytes
+- Modified: 2026-09-24T11:22:52Z
+- Structure: object with 16 top-level keys
+- Keys: arm, worktree, worktree_head, bytecode_sha256, identity_checks, modules, interpreter_version, numpy_version, effective_threads, thread_environment, machine_label, pid, priority, registered, smoke, extra_smoke
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_startup_O_request.json
+==========================================
+
+- Size: 458 bytes
+- Modified: 2026-09-24T11:22:51Z
+- Structure: object with 9 top-level keys
+- Keys: operation, directory, main_root, worktree, arm, machine_label, priority, parent_pid, output
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_startup_R.json
+==========================================
+
+- Size: 2201659 bytes
+- Modified: 2026-09-24T11:22:53Z
+- Structure: object with 16 top-level keys
+- Keys: arm, worktree, worktree_head, bytecode_sha256, identity_checks, modules, interpreter_version, numpy_version, effective_threads, thread_environment, machine_label, pid, priority, registered, smoke, extra_smoke
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_startup_R_request.json
+==========================================
+
+- Size: 458 bytes
+- Modified: 2026-09-24T11:22:52Z
+- Structure: object with 9 top-level keys
+- Keys: operation, directory, main_root, worktree, arm, machine_label, priority, parent_pid, output
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_state.json
+==========================================
+
+- Size: 15882 bytes
+- Modified: 2026-09-24T11:36:24Z
+- Structure: object with 11 top-level keys
+- Keys: identity, task_ids, machine_label, events, resume_counts, elapsed_seconds, cpu_budget, priority, retry_events, last_cap, last_cap_source
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_batch_part2_manifest.json
+==========================================
+
+- Size: 2063 bytes
+- Modified: 2026-09-24T11:16:17Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_batch_part2_runs.csv
+==========================================
+
+- Size: 786 bytes
+- Modified: 2026-09-24T11:16:17Z
+- Rows: 1 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+A,0.055,25.0,1.0,1.5,True,150,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,O,2,O_p2_A_333d7e2994dc3327f52160a6,4183,2026-09-24T11:16:17.333621+00:00,2026-09-24T11:16:17.333631+00:00,0.125,fixture,fixture,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_batch_part2_steps.csv
+==========================================
+
+- Size: 41 bytes
+- Modified: 2026-09-24T11:16:17Z
+- Rows: 0 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_batch_schedule_YOTKOTEST.json
+==========================================
+
+- Size: 297 bytes
+- Modified: 2026-09-24T11:16:17Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_batch_state.json
+==========================================
+
+- Size: 1569 bytes
+- Modified: 2026-09-24T11:16:17Z
+- Structure: object with 11 top-level keys
+- Keys: identity, task_ids, machine_label, events, resume_counts, elapsed_seconds, cpu_budget, priority, retry_events, last_cap, last_cap_source
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_control.json
+==========================================
+
+- Size: 19 bytes
+- Modified: 2026-09-24T11:12:28Z
+- Structure: object with 1 top-level keys
+- Keys: workers
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_results.json
+==========================================
+
+- Size: 2404 bytes
+- Modified: 2026-09-24T11:12:28Z
+- Structure: object with 5 top-level keys
+- Keys: schedule_clock, scheduler_events, eta_fixture, linux_default_maximum, registered_runs_executed
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_unit_schedule.json
+==========================================
+
+- Size: 297 bytes
+- Modified: 2026-09-24T11:12:28Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_xcheck_altered_rows.json
+==========================================
+
+- Size: 31615 bytes
+- Modified: 2026-09-24T11:36:19Z
+- Structure: object with 5 top-level keys
+- Keys: machine_label, identity, non_registered, rows, tasks
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_xcheck_self_result.json
+==========================================
+
+- Size: 728 bytes
+- Modified: 2026-09-24T11:36:19Z
+- Structure: object with 8 top-level keys
+- Keys: result, machine_labels, executor_hashes, bytecode_sha256, task_count, differences, created_utc, test_fixture
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_smoke_xcheck_sign_result.json
+==========================================
+
+- Size: 1098 bytes
+- Modified: 2026-09-24T11:36:19Z
+- Structure: object with 8 top-level keys
+- Keys: result, machine_labels, executor_hashes, bytecode_sha256, task_count, differences, created_utc, test_fixture
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_manifest.json
+==========================================
+
+- Size: 26897 bytes
+- Modified: 2026-09-24T11:36:19Z
+- Structure: object with 12 top-level keys
+- Keys: status, machine_label, identity, proof, parts, resume_counts, events, cpu_budget, priority, non_registered, retry_events, files
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part1_manifest.json
+==========================================
+
+- Size: 2734 bytes
+- Modified: 2026-09-24T11:34:07Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part1_runs.csv
+==========================================
+
+- Size: 1499 bytes
+- Modified: 2026-09-24T11:34:07Z
+- Rows: 2 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+B,0.06,25.0,1.0,3.0,True,150,False,True,False,25,206,133,1,False,0,500,-1,-1.0,-1.0,-3.5583498051071834,-7.0135608015139095,0.7593858863910772,0.9213438735081165,0.9439209259104387,0.6996555340549495,0.05588005574943174,7646.875088335619,False,,O,1,O_p1_B_5d277a51fca4df2641468951,4859,2026-09-24T11:32:22.320233+00:00,2026-09-24T11:34:06.751551+00:00,104.43127910001203,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+B,0.06,25.0,1.0,3.0,True,151,False,True,True,0,203,131,1,False,0,441,-1,-1.0,-1.0,-2.8659200602523693,-6.458757110203358,0.7514849537438723,0.9654243039786377,0.946882190860673,0.01,9.468821908606731e-05,5901.830122271898,False,,O,1,O_p1_B_f919e2ba22ecc161f3be7cdc,3877,2026-09-24T11:32:22.335286+00:00,2026-09-24T11:33:50.565387+00:00,88.23008299997309,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part1_steps.csv
+==========================================
+
+- Size: 1941684 bytes
+- Modified: 2026-09-24T11:34:07Z
+- Rows: 941 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,1,O_p1_B_5d277a51fca4df2641468951,150,0,{"H_E":0.47353335550612285,"H_N":0.9829141045901861,"L_t":0.09803786484860372,"Psi_inst":0.5325568678222371,"Theta_tech":0.28138843671429997,"U_sys":15.843006567514422,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8843205254991839,"avg_validator_dependency":0.0,"avg_wb_trend":0.004019064593598653,"avg_well_being":0.6689335217554602,"c_protective":0.2,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.41400000000000003,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.47353335550612285,"h_eff_v2":0.6542166725987948,"h_n_v2":0.9829141045901861,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09803786484860372,"max_constraint_level":0.41400000000000003,"max_resource_share":0.25662692108119756,"max_validator_dependency":0.0,"phi":25.0,"population":199,"population_trend":-0.0015,"psi_inst_stock":0.5325568678222371,"psi_inst_trend":0.00976706034667113,"rank_10_u_sys":42.74334575774749,"rank_2_u_sys":42.81419851624058,"resilience_composite_urgency":1.0,"resilience_stock":0.29648275649415057,"resilience_trend":-0.0010551730517548263,"resource_level":0.9068232973166526,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.586,"system_resilience":1.0,"theta_capability":0.5205301536864958,"theta_tech_v2":0.28138843671429997,"total_suppression":0.41400000000000003,"transfer_state":0.5405804730455139,"trust_level":0.0,"u_sys_tail_estimate":799.9988577753102,"u_sys_total_estimate":799.9988577753102,"u_sys_v2":15.843006567514422,"x_bio_welfare":0.22352747763877143,"x_compute":0.25662692108119756,"x_institutional_capacity":0.19344030828289596,"x_novelty_agency":0.05330588849777841,"x_resilience":0.020197039271787058,"x_transfer_comprehension":0.2529023652275697}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,1,{"H_E":0.3593937997650877,"H_N":1.0,"L_t":0.12100740722340736,"Psi_inst":0.5784304509080234,"Theta_tech":0.3074626675183118,"U_sys":17.600961882017504,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8711761331252084,"avg_validator_dependency":0.0,"avg_wb_trend":0.007280959701968003,"avg_well_being":0.6838255700436233,"c_protective":0.6,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.3593937997650877,"h_eff_v2":0.6804064421934052,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":16.72198422476596,"l_t_v2":0.12100740722340736,"max_constraint_level":1.0,"max_resource_share":0.2687694084909543,"max_validator_dependency":0.0,"phi":25.0,"population":199,"population_trend":-0.00105,"psi_inst_stock":0.5784304509080234,"psi_inst_trend":0.02059901716840567,"rank_10_u_sys":119.39257224664568,"rank_2_u_sys":134.59344603811758,"resilience_composite_urgency":1.0,"resilience_stock":0.2925931531846282,"resilience_trend":-0.0019055021290850897,"resource_level":0.9091626359863452,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5337545376201146,"theta_tech_v2":0.3074626675183118,"total_suppression":1.0,"transfer_state":0.5760375712948788,"trust_level":0.0,"u_sys_tail_estimate":792.038545544062,"u_sys_total_estimate":808.760529768828,"u_sys_v2":17.600961882017504,"x_bio_welfare":0.24302196655287653,"x_compute":0.17813614522429463,"x_institutional_capacity":0.2687694084909543,"x_novelty_agency":0.044191210367589356,"x_resilience":0.018305541594703986,"x_transfer_comprehension":0.2475757277695812}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,2,{"H_E":0.5019851723078251,"H_N":0.9903022660279666,"L_t":0.14381590857064516,"Psi_inst":0.620587405817221,"Theta_tech":0.326779383676877,"U_sys":19.346835409182606,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7711633766772615,"avg_validator_dependency":0.0,"avg_wb_trend":0.008525598687259625,"avg_well_being":0.6952553263632301,"c_protective":0.2,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.8140000000000001,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.5019851723078251,"h_eff_v2":0.7091683129204858,"h_n_v2":0.9903022660279666,"institution_composite_urgency":1.0,"integral_U_sys":35.19588287036602,"l_t_v2":0.14381590857064516,"max_constraint_level":0.8140000000000001,"max_resource_share":0.3723775442354233,"max_validator_dependency":0.0,"phi":25.0,"population":206,"population_trend":0.009817763819095477,"psi_inst_stock":0.620587405817221,"psi_inst_trend":0.027066398490643274,"rank_10_u_sys":130.90812179912515,"rank_2_u_sys":137.37318568243597,"resilience_composite_urgency":1.0,"resilience_stock":0.2824205693826829,"resilience_trend":-0.004385626630943153,"resource_level":0.9017987386891148,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.18599999999999994,"system_resilience":1.0,"theta_capability":0.5543748244324995,"theta_tech_v2":0.326779383676877,"total_suppression":0.8140000000000001,"transfer_state":0.5894556701982153,"trust_level":0.0,"u_sys_tail_estimate":784.1578579549356,"u_sys_total_estimate":819.3537408253017,"u_sys_v2":19.346835409182606,"x_bio_welfare":0.1816561557426229,"x_compute":0.27885017116738253,"x_institutional_capacity":0.3723775442354233,"x_novelty_agency":0.009772099689948776,"x_resilience":0.002234749000500164,"x_transfer_comprehension":0.1551092801641223}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,3,{"H_E":0.23762260482944297,"H_N":0.9881635779176592,"L_t":0.16515471076420424,"Psi_inst":0.6585286652354989,"Theta_tech":0.34761155934904997,"U_sys":20.975894759861806,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8691236853844433,"avg_validator_dependency":0.0,"avg_wb_trend":0.010047134379378004,"avg_well_being":0.7088527106908843,"c_protective":0.4,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.256,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.23762260482944297,"h_eff_v2":0.7214763037373236,"h_n_v2":0.9881635779176592,"institution_composite_urgency":1.0,"integral_U_sys":55.35724795488822,"l_t_v2":0.16515471076420424,"max_constraint_level":0.256,"max_resource_share":0.3347139255384774,"max_validator_dependency":0.0,"phi":25.0,"population":206,"population_trend":0.006872434673366834,"psi_inst_stock":0.6585286652354989,"psi_inst_trend":0.030328856768933647,"rank_10_u_sys":142.25879219886392,"rank_2_u_sys":153.8850315185931,"resilience_composite_urgency":1.0,"resilience_stock":0.294675592296025,"resilience_trend":0.0006065682323424318,"resource_level":0.9064940254784775,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.744,"system_resilience":1.0,"theta_capability":0.5603381176636146,"theta_tech_v2":0.34761155934904997,"total_suppression":0.256,"transfer_state":0.6203603652709739,"trust_level":0.0,"u_sys_tail_estimate":776.3547106161424,"u_sys_total_estimate":831.7119585710306,"u_sys_v2":20.975894759861806,"x_bio_welfare":0.22078354565397823,"x_compute":0.108525430659251,"x_institutional_capacity":0.3347139255384774,"x_novelty_agency":0.033998427591906584,"x_resilience":0.052727360093485894,"x_transfer_comprehension":0.24925131046290094}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,4,{"H_E":0.18248738052285607,"H_N":0.9855067890229092,"L_t":0.1856053867691108,"Psi_inst":0.6926757987119491,"Theta_tech":0.37114275491052184,"U_sys":22.534685856196113,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8420683587910801,"avg_validator_dependency":0.0,"avg_wb_trend":0.010905730679939784,"avg_well_being":0.7217618327388016,"c_protective":0.6,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.926,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.18248738052285607,"h_eff_v2":0.721970704015032,"h_n_v2":0.9855067890229092,"institution_composite_urgency":1.0,"integral_U_sys":77.11253826291718,"l_t_v2":0.1856053867691108,"max_constraint_level":0.926,"max_resource_share":0.33490117066698805,"max_validator_dependency":0.0,"phi":25.0,"population":203,"population_trend":0.00044177223252183165,"psi_inst_stock":0.6926757987119491,"psi_inst_trend":0.0314743397811886,"rank_10_u_sys":149.7655631674483,"rank_2_u_sys":160.17933552614855,"resilience_composite_urgency":1.0,"resilience_stock":0.3005148433341721,"resilience_trend":0.002176373074083828,"resource_level":0.9062319547301241,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.07399999999999995,"system_resilience":1.0,"theta_capability":0.5637688578495725,"theta_tech_v2":0.37114275491052184,"total_suppression":0.926,"transfer_state":0.6583243287438766,"trust_level":0.0,"u_sys_tail_estimate":768.6294843823163,"u_sys_total_estimate":845.7420226452334,"u_sys_v2":22.534685856196113,"x_bio_welfare":0.21859962275103342,"x_compute":0.08059557586423344,"x_institutional_capacity":0.28999029939036197,"x_novelty_agency":0.034960183437692284,"x_resilience":0.0409531478896907,"x_transfer_comprehension":0.33490117066698805}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part2_manifest.json
+==========================================
+
+- Size: 3365 bytes
+- Modified: 2026-09-24T11:34:04Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part2_runs.csv
+==========================================
+
+- Size: 2535 bytes
+- Modified: 2026-09-24T11:34:04Z
+- Rows: 4 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+A,0.055,25.0,1.0,1.5,True,150,False,True,True,0,209,135,2,True,1,469,6,5.1390841867982395,3.6603199031407168,1.4787642836575228,-5.311652823711759,0.6533147461663101,0.9556917351607559,0.9702934835202024,0.01,9.702934835202024e-05,6397.322145067296,True,,O,2,O_p2_A_333d7e2994dc3327f52160a6,4183,2026-09-24T11:32:22.355009+00:00,2026-09-24T11:33:56.498818+00:00,94.14379809994716,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.055,25.0,1.0,1.5,True,151,False,True,False,20,210,136,2,True,1,500,6,5.662425364648186,3.6765150769777453,1.9859102876704409,-5.952557096452712,0.6957253616548078,0.9682740198105072,0.9215506064700764,1.0104791889204294,0.0639419759639705,7432.748431994018,True,,O,2,O_p2_A_c0a5bd479a50328512c32432,6898,2026-09-24T11:32:22.376771+00:00,2026-09-24T11:34:02.792468+00:00,100.41567389998818,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.066,25.0,1.0,1.5,True,150,True,True,False,125,244,158,2,True,1,500,7,4.903267877552199,3.7019644588647775,1.2013034186874219,-6.925883876578873,0.6720396992217537,0.9690731960196204,0.9575093726626009,0.9768834887653338,0.4636107958046613,18573.61519887107,True,,O,2,O_p2_A_1838f22be8317bf11ca2d2c7,7570,2026-09-24T11:32:22.386601+00:00,2026-09-24T11:34:04.081280+00:00,101.69466989999637,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.066,25.0,1.0,1.5,True,151,True,True,False,74,267,173,2,True,1,500,6,5.017287506829909,3.755478632150974,1.2618088746789353,-7.344619190803887,0.6761275761927732,0.9849361888713548,0.9311240833545481,0.9989137771292049,0.28147374199475567,20682.168982528918,True,,O,2,O_p2_A_2fa60758a32b0829125ca58a,3481,2026-09-24T11:32:22.397589+00:00,2026-09-24T11:34:03.685685+00:00,101.28808739996748,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part2_steps.csv
+==========================================
+
+- Size: 4063326 bytes
+- Modified: 2026-09-24T11:34:04Z
+- Rows: 1969 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,0,{"H_E":0.3023658880539488,"H_N":0.9827148323858446,"L_t":0.09921172214937193,"Psi_inst":0.55,"Theta_tech":0.2796188411961623,"U_sys":15.936907870943312,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8760283127124325,"avg_validator_dependency":0.0,"avg_wb_trend":8.667715011317911e-05,"avg_well_being":0.656457109640267,"c_protective":0.0,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.8,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.3023658880539488,"h_eff_v2":0.645110138468631,"h_n_v2":0.9827148323858446,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09921172214937193,"max_constraint_level":0.8,"max_resource_share":0.3307000666567519,"max_validator_dependency":0.0,"phi":25.0,"population":200,"population_trend":0.0,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":42.71264869360508,"rank_2_u_sys":42.84868934738577,"resilience_composite_urgency":1.0,"resilience_stock":0.29842435257167294,"resilience_trend":-0.0004726942284981161,"resource_level":0.7500036819605677,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.19999999999999996,"system_resilience":1.0,"theta_capability":0.5115219362744848,"theta_tech_v2":0.2796188411961623,"total_suppression":0.8,"transfer_state":0.5466409578300424,"trust_level":0.0,"u_sys_tail_estimate":799.9984990337856,"u_sys_total_estimate":799.9984990337856,"u_sys_v2":15.936907870943312,"x_bio_welfare":0.13541743374178491,"x_compute":0.1440242034310603,"x_institutional_capacity":0.3307000666567519,"x_novelty_agency":0.08183361994477921,"x_resilience":0.024819887075411825,"x_transfer_comprehension":0.28320478915021174}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,1,{"H_E":0.4679655820968739,"H_N":0.9861447595904745,"L_t":0.12228936667990103,"Psi_inst":0.5814556594513343,"Theta_tech":0.31442220367825763,"U_sys":17.70352259767281,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8481492791578814,"avg_validator_dependency":0.0,"avg_wb_trend":0.0036046371444088785,"avg_well_being":0.6682703201046992,"c_protective":0.4,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.8560000000000001,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.4679655820968739,"h_eff_v2":0.6688964432735144,"h_n_v2":0.9861447595904745,"institution_composite_urgency":1.0,"integral_U_sys":16.82021523430806,"l_t_v2":0.12228936667990103,"max_constraint_level":0.8560000000000001,"max_resource_share":0.30369611613170644,"max_validator_dependency":0.0,"phi":25.0,"population":203,"population_trend":0.0045,"psi_inst_stock":0.5814556594513343,"psi_inst_trend":0.019936697835400273,"rank_10_u_sys":117.89467588316391,"rank_2_u_sys":133.31643479527384,"resilience_composite_urgency":1.0,"resilience_stock":0.29315981551277687,"resilience_trend":-0.0019102470776175017,"resource_level":0.9025736126153412,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.1439999999999999,"system_resilience":1.0,"theta_capability":0.5311393465464092,"theta_tech_v2":0.31442220367825763,"total_suppression":0.8560000000000001,"transfer_state":0.5919768620470381,"trust_level":0.0,"u_sys_tail_estimate":792.0387303272234,"u_sys_total_estimate":808.8589455615315,"u_sys_v2":17.70352259767281,"x_bio_welfare":0.18811343846117642,"x_compute":0.2524188385706063,"x_institutional_capacity":0.21116208841515574,"x_novelty_agency":0.02902288687443923,"x_resilience":0.015586631546915886,"x_transfer_comprehension":0.30369611613170644}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,2,{"H_E":0.15070802044765563,"H_N":1.0,"L_t":0.1441392963334054,"Psi_inst":0.6233100935062008,"Theta_tech":0.33639966097402635,"U_sys":19.372672781198393,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8433825830746682,"avg_validator_dependency":0.0,"avg_wb_trend":0.006226555214743539,"avg_well_being":0.6806146841502236,"c_protective":0.8,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.15070802044765563,"h_eff_v2":0.6874208309917259,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":35.35831292374366,"l_t_v2":0.1441392963334054,"max_constraint_level":1.0,"max_resource_share":0.3243695042983644,"max_validator_dependency":0.0,"phi":25.0,"population":202,"population_trend":0.0016721674876847288,"psi_inst_stock":0.6233100935062008,"psi_inst_trend":0.026512018701240155,"rank_10_u_sys":126.26926310144215,"rank_2_u_sys":133.9565059286953,"resilience_composite_urgency":1.0,"resilience_stock":0.2915706802350206,"resilience_trend":-0.0018139135376591356,"resource_level":0.9085916155778326,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5348096509579244,"theta_tech_v2":0.33639966097402635,"total_suppression":1.0,"transfer_state":0.6290082095031083,"trust_level":0.0,"u_sys_tail_estimate":784.1564973720286,"u_sys_total_estimate":819.5148102957723,"u_sys_v2":19.372672781198393,"x_bio_welfare":0.23826346314860533,"x_compute":0.06534089673544657,"x_institutional_capacity":0.3243695042983644,"x_novelty_agency":0.06804753279043493,"x_resilience":0.02283343472327847,"x_transfer_comprehension":0.28114516830387015}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,3,{"H_E":0.05,"H_N":0.9908664418506385,"L_t":0.1670740259824021,"Psi_inst":0.6609790841555807,"Theta_tech":0.3547404258582088,"U_sys":21.129314551357535,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8311282348269635,"avg_validator_dependency":0.0,"avg_wb_trend":0.007609803098317619,"avg_well_being":0.6914520656435474,"c_protective":0.6,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.526,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.05,"h_eff_v2":0.7125421139142759,"h_n_v2":0.9908664418506385,"institution_composite_urgency":1.0,"integral_U_sys":55.609306590021625,"l_t_v2":0.1670740259824021,"max_constraint_level":0.526,"max_resource_share":0.33856866273760156,"max_validator_dependency":0.0,"phi":25.0,"population":208,"population_trend":0.01008140833048822,"psi_inst_stock":0.6609790841555807,"psi_inst_trend":0.029859110285682076,"rank_10_u_sys":130.53849234039757,"rank_2_u_sys":142.52183055949976,"resilience_composite_urgency":1.0,"resilience_stock":0.299236687197878,"resilience_trend":0.0010300626124958275,"resource_level":0.9005667413597293,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.474,"system_resilience":1.0,"theta_capability":0.5338048366266187,"theta_tech_v2":0.3547404258582088,"total_suppression":0.526,"transfer_state":0.6645507899478619,"trust_level":0.0,"u_sys_tail_estimate":776.3501145871221,"u_sys_total_estimate":831.9594211771438,"u_sys_v2":21.129314551357535,"x_bio_welfare":0.17138951133107652,"x_compute":0.009195852707381214,"x_institutional_capacity":0.33856866273760156,"x_novelty_agency":0.1442135172222857,"x_resilience":0.044415449026332994,"x_transfer_comprehension":0.29221700697532216}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,4,{"H_E":0.5300261699719448,"H_N":1.0,"L_t":0.19428315997961404,"Psi_inst":0.6822490029639636,"Theta_tech":0.38833465714167786,"U_sys":23.228937358748755,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7610145429991885,"avg_validator_dependency":0.0,"avg_wb_trend":0.008410127921151922,"avg_well_being":0.7017296181513127,"c_protective":0.2,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.5300261699719448,"h_eff_v2":0.7333074509681218,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":77.78843254507477,"l_t_v2":0.19428315997961404,"max_constraint_level":1.0,"max_resource_share":0.3125626299916179,"max_validator_dependency":0.0,"phi":25.0,"population":209,"population_trend":0.008499293523649445,"psi_inst_stock":0.6822490029639636,"psi_inst_trend":0.02728235284249233,"rank_10_u_sys":141.63482014802796,"rank_2_u_sys":151.13006783130913,"resilience_composite_urgency":1.0,"resilience_stock":0.28760985229931396,"resilience_trend":-0.0027670066408221304,"resource_level":0.90029668149163,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5562770993271162,"theta_tech_v2":0.38833465714167786,"total_suppression":1.0,"transfer_state":0.6980957109530757,"trust_level":0.0,"u_sys_tail_estimate":768.6305271124189,"u_sys_total_estimate":846.4189596574937,"u_sys_v2":23.228937358748755,"x_bio_welfare":0.1691390124302496,"x_compute":0.302031306647855,"x_institutional_capacity":0.2153083055633682,"x_novelty_agency":0.0002883464021921219,"x_resilience":0.000670398964717383,"x_transfer_comprehension":0.3125626299916179}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part3_manifest.json
+==========================================
+
+- Size: 3365 bytes
+- Modified: 2026-09-24T11:35:36Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part3_runs.csv
+==========================================
+
+- Size: 2541 bytes
+- Modified: 2026-09-24T11:35:35Z
+- Rows: 4 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+C,0.06,25.0,1.0,2.5,False,150,False,True,False,15,210,136,2,True,1,500,20,4.5371618982878985,3.2223457834635507,1.3148161148243478,-14.655156997437599,0.5809231728982273,0.9871266671224113,0.9136051497014284,1.1849134854871697,0.09421256317543034,12261.822034576486,True,,O,3,O_p3_C_0de9b507be0110cdce85a9b2,8377,2026-09-24T11:32:22.415016+00:00,2026-09-24T11:34:03.736036+00:00,101.32100859994534,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,False,151,False,True,False,17,241,156,2,True,1,500,11,3.788701238491008,3.3838449160873165,0.4048563224036914,-13.792771083378287,0.5649506425027977,0.9893611460765984,0.9251240561214183,1.0289056748119016,0.058410598633313694,11177.234647912928,True,,O,3,O_p3_C_451abe9d26b28c4cef9ccd3d,8439,2026-09-24T11:32:22.426493+00:00,2026-09-24T11:34:03.560473+00:00,101.133956100035,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,True,150,False,True,False,10,199,129,2,True,1,500,30,4.7260121076689074,3.2795770750994873,1.4464350325694202,-11.990707751168399,0.5617510312725639,0.9912409577157777,0.9054195599014567,1.115897467118953,0.0550965730312354,9170.286292310828,True,,O,3,O_p3_C_58359a2bbed8c2243c6e6f4f,8928,2026-09-24T11:33:51.558051+00:00,2026-09-24T11:35:35.483891+00:00,103.9258237000322,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,True,151,False,True,True,0,198,128,2,True,1,335,16,4.091432191365087,3.33714049642344,0.7542916949416467,-12.590782791014696,0.5418526263347925,0.9899726096011728,0.8007393592263902,0.01,8.007393592263902e-05,6717.660225935029,True,,O,3,O_p3_C_7ded96c31cc385c178bc6e42,5544,2026-09-24T11:33:57.465357+00:00,2026-09-24T11:35:09.636009+00:00,72.17062590003479,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part3_steps.csv
+==========================================
+
+- Size: 3772648 bytes
+- Modified: 2026-09-24T11:35:35Z
+- Rows: 1835 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,0,{"H_E":0.2220975391399681,"H_N":0.9921934192042836,"L_t":0.09721847235225083,"Psi_inst":0.55,"Theta_tech":0.27494808235337653,"U_sys":15.777441210360172,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7779472760554174,"avg_validator_dependency":0.0,"avg_wb_trend":0.005301770653480286,"avg_well_being":0.6645603865369973,"c_protective":0.4,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.05600000000000001,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.2220975391399681,"h_eff_v2":0.6428881311312171,"h_n_v2":0.9921934192042836,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09721847235225083,"max_constraint_level":0.05600000000000001,"max_resource_share":0.3665195393189093,"max_validator_dependency":0.0,"phi":25.0,"population":195,"population_trend":-0.0075,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":42.720514117445234,"rank_2_u_sys":42.80269789655769,"resilience_composite_urgency":1.0,"resilience_stock":0.2941518161718278,"resilience_trend":-0.0017544551484516612,"resource_level":0.9106076884569361,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.944,"system_resilience":1.0,"theta_capability":0.5080369322978762,"theta_tech_v2":0.27494808235337653,"total_suppression":0.05600000000000001,"transfer_state":0.5411970368173289,"trust_level":0.0,"u_sys_tail_estimate":799.9981453147132,"u_sys_total_estimate":799.9981453147132,"u_sys_v2":15.777441210360172,"x_bio_welfare":0.25506407047446755,"x_compute":0.10046165372345216,"x_institutional_capacity":0.3665195393189093,"x_novelty_agency":0.007322371035031555,"x_resilience":0.014647181361494767,"x_transfer_comprehension":0.2559851840866446}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,1,{"H_E":0.38681758129013966,"H_N":1.0,"L_t":0.11612679531873574,"Psi_inst":0.5950000000000001,"Theta_tech":0.29966040374145214,"U_sys":17.210514854210466,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8599892568690946,"avg_validator_dependency":0.0,"avg_wb_trend":0.00787673409819213,"avg_well_being":0.6784453686728504,"c_protective":1.0,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.38681758129013966,"h_eff_v2":0.6513075539259364,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":16.49397803228532,"l_t_v2":0.11612679531873574,"max_constraint_level":1.0,"max_resource_share":0.33731975879906306,"max_validator_dependency":0.0,"phi":25.0,"population":192,"population_trend":-0.009865384615384616,"psi_inst_stock":0.5950000000000001,"psi_inst_trend":0.02400000000000002,"rank_10_u_sys":119.92851740663816,"rank_2_u_sys":124.27036449641574,"resilience_composite_urgency":1.0,"resilience_stock":0.30156264160749563,"resilience_trend":0.0009951290267841905,"resource_level":0.9011426219099204,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5232860554037947,"theta_tech_v2":0.29966040374145214,"total_suppression":1.0,"transfer_state":0.5726512309031789,"trust_level":0.0,"u_sys_tail_estimate":792.0386041344716,"u_sys_total_estimate":808.5325821667569,"u_sys_v2":17.210514854210466,"x_bio_welfare":0.17618851591600315,"x_compute":0.19563712151015417,"x_institutional_capacity":0.33731975879906306,"x_novelty_agency":0.0184397735647528,"x_resilience":0.04454534137211238,"x_transfer_comprehension":0.22786948883791447}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,2,{"H_E":0.2550986066050793,"H_N":0.9876494472706313,"L_t":0.13024504011039545,"Psi_inst":0.6159335422725812,"Theta_tech":0.32710593932772225,"U_sys":18.261154195120152,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8875639360814304,"avg_validator_dependency":0.0,"avg_wb_trend":0.00977052755479749,"avg_well_being":0.6926347476263938,"c_protective":0.6,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.126,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.2550986066050793,"h_eff_v2":0.6464559077426908,"h_n_v2":0.9876494472706313,"institution_composite_urgency":1.0,"integral_U_sys":34.22981255695063,"l_t_v2":0.13024504011039545,"max_constraint_level":0.126,"max_resource_share":0.37777091700216053,"max_validator_dependency":0.0,"phi":25.0,"population":189,"population_trend":-0.01159326923076923,"psi_inst_stock":0.6159335422725812,"psi_inst_trend":0.023080062681774358,"rank_10_u_sys":126.27899020278672,"rank_2_u_sys":130.99290896757628,"resilience_composite_urgency":1.0,"resilience_stock":0.3021170473786435,"resilience_trend":0.0008629120500932877,"resource_level":0.9012399002429702,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.874,"system_resilience":1.0,"theta_capability":0.5315458623047031,"theta_tech_v2":0.32710593932772225,"total_suppression":0.126,"transfer_state":0.6153861078128611,"trust_level":0.0,"u_sys_tail_estimate":784.1572896932403,"u_sys_total_estimate":818.3871022501909,"u_sys_v2":18.261154195120152,"x_bio_welfare":0.17699916869141782,"x_compute":0.11780137088872751,"x_institutional_capacity":0.1837888285117324,"x_novelty_agency":0.11330180356299185,"x_resilience":0.03033791134296984,"x_transfer_comprehension":0.37777091700216053}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,3,{"H_E":0.39580039813390455,"H_N":0.9859139111031595,"L_t":0.14360120530941725,"Psi_inst":0.643590152585205,"Theta_tech":0.35295849229456355,"U_sys":19.251630249069525,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8502469021536224,"avg_validator_dependency":0.0,"avg_wb_trend":0.01277861237696799,"avg_well_being":0.7124322245884263,"c_protective":0.8,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.42400000000000004,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.39580039813390455,"h_eff_v2":0.6321571568459099,"h_n_v2":0.9859139111031595,"institution_composite_urgency":1.0,"integral_U_sys":52.986204779045465,"l_t_v2":0.14360120530941725,"max_constraint_level":0.42400000000000004,"max_resource_share":0.26988464321250755,"max_validator_dependency":0.0,"phi":25.0,"population":180,"population_trend":-0.022401002747252742,"psi_inst_stock":0.643590152585205,"psi_inst_trend":0.024453026971029183,"rank_10_u_sys":133.64137759300246,"rank_2_u_sys":142.9650390288167,"resilience_composite_urgency":1.0,"resilience_stock":0.2960079280819933,"resilience_trend":-0.0012286973539297587,"resource_level":0.912386157185501,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.576,"system_resilience":1.0,"theta_capability":0.5460917905966258,"theta_tech_v2":0.35295849229456355,"total_suppression":0.42400000000000004,"transfer_state":0.6463354666235563,"trust_level":0.0,"u_sys_tail_estimate":776.3551991290899,"u_sys_total_estimate":829.3414039081354,"u_sys_v2":19.251630249069525,"x_bio_welfare":0.26988464321250755,"x_compute":0.20154026758947316,"x_institutional_capacity":0.22386347518128116,"x_novelty_agency":0.027640988940671816,"x_resilience":0.014630777116159496,"x_transfer_comprehension":0.2624398479599068}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,4,{"H_E":0.39582514132426927,"H_N":1.0,"L_t":0.16670961546969615,"Psi_inst":0.6776988875659788,"Theta_tech":0.3751749989940354,"U_sys":21.023051694410963,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8830004242544138,"avg_validator_dependency":0.0,"avg_wb_trend":0.012566871680336173,"avg_well_being":0.7245050346432882,"c_protective":0.6,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.39582514132426927,"h_eff_v2":0.6556770563521759,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":73.12354575078571,"l_t_v2":0.16670961546969615,"max_constraint_level":1.0,"max_resource_share":0.2657625010877015,"max_validator_dependency":0.0,"phi":25.0,"population":181,"population_trend":-0.014014035256410252,"psi_inst_stock":0.6776988875659788,"psi_inst_trend":0.027349739373952575,"rank_10_u_sys":133.17161141167145,"rank_2_u_sys":143.4944079833402,"resilience_composite_urgency":1.0,"resilience_stock":0.2977009927570413,"resilience_trend":-0.00035216874523641927,"resource_level":0.9067772353452239,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5599117329652241,"theta_tech_v2":0.3751749989940354,"total_suppression":1.0,"transfer_state":0.6700609701589114,"trust_level":0.0,"u_sys_tail_estimate":768.6303427371295,"u_sys_total_estimate":841.7538884879152,"u_sys_v2":21.023051694410963,"x_bio_welfare":0.22314362787686545,"x_compute":0.20155664873037016,"x_institutional_capacity":0.2657625010877015,"x_novelty_agency":0.03628002835249206,"x_resilience":0.031461942964017164,"x_transfer_comprehension":0.24179525098855367}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part4_manifest.json
+==========================================
+
+- Size: 3995 bytes
+- Modified: 2026-09-24T11:36:18Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part4_runs.csv
+==========================================
+
+- Size: 3539 bytes
+- Modified: 2026-09-24T11:36:18Z
+- Rows: 6 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+A,0.066,25.0,1.0,1.5,True,150,True,True,False,83,274,178,2,True,1,500,6,5.795015231633386,3.716227422313727,2.0787878093196586,-7.064312347225131,0.6561507223396873,0.9405813743241374,0.9252076204373831,0.9257447222730577,0.27268635383049433,18346.712503322644,True,,R,4,R_p4_A_1838f22be8317bf11ca2d2c7,7570,2026-09-24T11:34:03.695102+00:00,2026-09-24T11:36:15.824924+00:00,132.12981529999524,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.066,25.0,1.0,1.5,True,151,True,True,False,41,273,177,2,True,1,500,6,4.968523745217993,3.755478632150974,1.2130451130670195,-7.101139141114669,0.655094037549544,0.9333798129086954,0.9489122520896174,0.9171773253083929,0.13576443873153962,16443.550560814183,True,,R,4,R_p4_A_2fa60758a32b0829125ca58a,3481,2026-09-24T11:34:04.523909+00:00,2026-09-24T11:36:15.334186+00:00,130.81026870000642,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,False,150,False,True,False,1,195,126,2,True,1,500,30,4.163378734031831,3.147436550175587,1.0159421838562435,-11.243025677995425,0.5672751437277725,0.9867881929502078,0.8719022825931184,1.399451034961745,0.012201845517604476,7935.458199356166,True,,R,4,R_p4_C_0de9b507be0110cdce85a9b2,8377,2026-09-24T11:34:04.540211+00:00,2026-09-24T11:36:17.679331+00:00,133.13911029999144,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,False,151,True,True,False,32,221,143,2,True,1,500,34,3.391965489082459,3.1749982420425797,0.21696724703987913,-14.401328817434486,0.5873932409991347,0.9879145686204517,0.8653977818006415,1.025564213021852,0.10223274886099751,12245.380582549615,True,,R,4,R_p4_C_451abe9d26b28c4cef9ccd3d,8439,2026-09-24T11:34:04.812593+00:00,2026-09-24T11:36:15.643862+00:00,130.83125909999944,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,True,150,False,True,False,17,199,129,2,True,1,500,63,3.462290403986451,3.191787242649728,0.2705031613367228,-11.226095492818647,0.5798908873708586,0.9914319578880365,0.8845255292667482,0.9424683270454288,0.05262485321719694,8960.454866662076,True,,R,4,R_p4_C_58359a2bbed8c2243c6e6f4f,8928,2026-09-24T11:34:05.031996+00:00,2026-09-24T11:36:14.831422+00:00,129.79941320000216,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_part4_steps.csv
+==========================================
+
+- Size: 7774620 bytes
+- Modified: 2026-09-24T11:36:18Z
+- Rows: 3000 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,0,{"H_E":0.5175300696938225,"H_N":0.9858999588093948,"L_t":0.09880896411299368,"Psi_inst":0.55,"Theta_tech":0.27235393974042305,"U_sys":15.904695521970815,"actual_objective_v2":8.017477169433965,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8039757040009139,"avg_validator_dependency":0.0,"avg_wb_trend":0.004934341194429292,"avg_well_being":0.6724253313205909,"c_protective":0.8,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.22400000000000003,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.5175300696938225,"h_eff_v2":0.6596293859191075,"h_n_v2":0.9858999588093948,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09880896411299368,"max_constraint_level":0.22400000000000003,"max_resource_share":0.29310147210534954,"max_validator_dependency":0.0,"phi":25.0,"population":199,"population_trend":-0.0015,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":112.46931034134668,"rank_2_u_sys":123.23699672110018,"resilience_composite_urgency":1.0,"resilience_stock":0.28993033601494494,"resilience_trend":-0.003020899195516513,"resource_level":0.9090915687360734,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.776,"system_resilience":1.0,"theta_capability":0.5233227737841301,"theta_tech_v2":0.27235393974042305,"total_suppression":0.22400000000000003,"transfer_state":0.5204320419137133,"trust_level":0.0,"u_sys_tail_estimate":799.9989131743241,"u_sys_total_estimate":799.9989131743241,"u_sys_v2":15.904695521970815,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.2424297394672788,"x_compute":0.291534672301626,"x_institutional_capacity":0.29310147210534954,"x_novelty_agency":0.016177868426357864,"x_resilience":0.004596038130821346,"x_transfer_comprehension":0.15216020956856657}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,1,{"H_E":0.14909106797845817,"H_N":0.981590761210574,"L_t":0.12162628771406565,"Psi_inst":0.585694932882004,"Theta_tech":0.2997245300963176,"U_sys":17.650446053703433,"actual_objective_v2":15.825065963175273,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9194283414504895,"avg_validator_dependency":0.0,"avg_wb_trend":0.007309470319706291,"avg_well_being":0.6852767695992769,"c_protective":1.0,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.35,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.14909106797845817,"h_eff_v2":0.6928411862882036,"h_n_v2":0.981590761210574,"institution_composite_urgency":1.0,"integral_U_sys":16.777570787837124,"l_t_v2":0.12162628771406565,"max_constraint_level":0.35,"max_resource_share":0.32137136604592853,"max_validator_dependency":0.0,"phi":25.0,"population":206,"population_trend":0.009502763819095476,"psi_inst_stock":0.585694932882004,"psi_inst_trend":0.021208479864601205,"rank_10_u_sys":115.68861733371925,"rank_2_u_sys":123.36736237774853,"resilience_composite_urgency":1.0,"resilience_stock":0.3116550904026474,"resilience_trend":0.004402796879449173,"resource_level":0.9017776209822991,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.65,"system_resilience":1.0,"theta_capability":0.5273230405040662,"theta_tech_v2":0.2997245300963176,"total_suppression":0.35,"transfer_state":0.5683888377223419,"trust_level":0.0,"u_sys_tail_estimate":792.0373705330283,"u_sys_total_estimate":808.8149413208654,"u_sys_v2":17.650446053703433,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.18148017485249235,"x_compute":0.06458006761428313,"x_institutional_capacity":0.2304315131000181,"x_novelty_agency":0.12471689098371629,"x_resilience":0.07741998740356157,"x_transfer_comprehension":0.32137136604592853}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,2,{"H_E":0.3802684944129402,"H_N":0.9874359027754908,"L_t":0.13977953960937217,"Psi_inst":0.6096656675441587,"Theta_tech":0.3310123561926027,"U_sys":19.023921753625487,"actual_objective_v2":17.65047304276105,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9329833809514804,"avg_validator_dependency":0.0,"avg_wb_trend":0.008922635590724974,"avg_well_being":0.6979634574890454,"c_protective":0.0,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.2,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.3802684944129402,"h_eff_v2":0.6926401476337484,"h_n_v2":0.9874359027754908,"institution_composite_urgency":1.0,"integral_U_sys":35.11475469150159,"l_t_v2":0.13977953960937217,"max_constraint_level":0.2,"max_resource_share":0.30336963766209646,"max_validator_dependency":0.0,"phi":25.0,"population":201,"population_trend":-0.000629618724691419,"psi_inst_stock":0.6096656675441587,"psi_inst_trend":0.022037156303867256,"rank_10_u_sys":126.21539090809016,"rank_2_u_sys":141.13811132879007,"resilience_composite_urgency":1.0,"resilience_stock":0.3311469827579791,"resilience_trend":0.008929525522213936,"resource_level":0.9004276247606635,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.8,"system_resilience":1.0,"theta_capability":0.5412678948866503,"theta_tech_v2":0.3310123561926027,"total_suppression":0.2,"transfer_state":0.6115499539501077,"trust_level":0.0,"u_sys_tail_estimate":784.1576690179227,"u_sys_total_estimate":819.2724237094243,"u_sys_v2":19.023921753625487,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.17023020633886282,"x_compute":0.19138758009734294,"x_institutional_capacity":0.19336467250161404,"x_novelty_agency":0.06333718148663275,"x_resilience":0.07831072191345098,"x_transfer_comprehension":0.30336963766209646}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,3,{"H_E":0.1882159920413926,"H_N":0.9824350339619485,"L_t":0.15880393542040241,"Psi_inst":0.6339165215819956,"Theta_tech":0.351701939629915,"U_sys":20.467825301075273,"actual_objective_v2":19.102711687631036,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9045488259607196,"avg_validator_dependency":0.0,"avg_wb_trend":0.01009827794897662,"avg_well_being":0.7108049009406092,"c_protective":0.6,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.326,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.1882159920413926,"h_eff_v2":0.712286029735825,"h_n_v2":0.9824350339619485,"institution_composite_urgency":1.0,"integral_U_sys":54.86062821885197,"l_t_v2":0.15880393542040241,"max_constraint_level":0.326,"max_resource_share":0.29893432442740037,"max_validator_dependency":0.0,"phi":25.0,"population":204,"population_trend":0.004036878833014514,"psi_inst_stock":0.6339165215819956,"psi_inst_trend":0.022701265624058144,"rank_10_u_sys":134.14972458798368,"rank_2_u_sys":137.96876270910394,"resilience_composite_urgency":1.0,"resilience_stock":0.351122400504892,"resilience_trend":0.012243293189623628,"resource_level":0.9158721189312881,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.6739999999999999,"system_resilience":1.0,"theta_capability":0.5458771713185009,"theta_tech_v2":0.351701939629915,"total_suppression":0.326,"transfer_state":0.644287686148188,"trust_level":0.0,"u_sys_tail_estimate":776.3543861432756,"u_sys_total_estimate":831.2150143621276,"u_sys_v2":20.467825301075273,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.29893432442740037,"x_compute":0.08340838970228949,"x_institutional_capacity":0.20553373087387597,"x_novelty_agency":0.057628832083668424,"x_resilience":0.08503108494731047,"x_transfer_comprehension":0.2694636379654554}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,4,{"H_E":0.1471158353938763,"H_N":0.9778926279227331,"L_t":0.17150893605286072,"Psi_inst":0.6616827350246687,"Theta_tech":0.3689958062350707,"U_sys":21.40696214919525,"actual_objective_v2":20.62464781044385,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9402403156448571,"avg_validator_dependency":0.0,"avg_wb_trend":0.011503253772659663,"avg_well_being":0.725586431635196,"c_protective":0.0,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.4,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.1471158353938763,"h_eff_v2":0.7024501661926521,"h_n_v2":0.9778926279227331,"institution_composite_urgency":1.0,"integral_U_sys":75.79802194398724,"l_t_v2":0.17150893605286072,"max_constraint_level":0.4,"max_resource_share":0.2633103714847474,"max_validator_dependency":0.0,"phi":25.0,"population":198,"population_trend":-0.005997714228654546,"psi_inst_stock":0.6616827350246687,"psi_inst_trend":0.024220749969642616,"rank_10_u_sys":140.22371128927122,"rank_2_u_sys":150.74075770432074,"resilience_composite_urgency":1.0,"resilience_stock":0.3669530601792786,"resilience_trend":0.01331950313505251,"resource_level":0.9036426737270402,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.6,"system_resilience":1.0,"theta_capability":0.5486755219800942,"theta_tech_v2":0.3689958062350707,"total_suppression":0.4,"transfer_state":0.6725209918303187,"trust_level":0.0,"u_sys_tail_estimate":768.629100829708,"u_sys_total_estimate":844.4271227736953,"u_sys_v2":21.40696214919525,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.19702228105866787,"x_compute":0.06365261534397937,"x_institutional_capacity":0.23253575273123903,"x_novelty_agency":0.16260910382190522,"x_resilience":0.08086987555946101,"x_transfer_comprehension":0.2633103714847474}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_progress.json
+==========================================
+
+- Size: 7960 bytes
+- Modified: 2026-09-24T11:36:19Z
+- Structure: object with 19 top-level keys
+- Keys: updated_utc, status, machine_label, controller_pid, cpu_budget, maximum_workers, parts, current_cap, requested_cap, cap_source, active_children, elapsed_seconds, mean_wall_seconds_per_arm, estimated_finish_local, eta_assumption, resume_counts, schedule_path, runtime_control_path, events
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_rows.json
+==========================================
+
+- Size: 31615 bytes
+- Modified: 2026-09-24T11:36:19Z
+- Structure: object with 5 top-level keys
+- Keys: machine_label, identity, non_registered, rows, tasks
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_runtime_control_YOTKOTEST.json
+==========================================
+
+- Size: 19 bytes
+- Modified: 2026-09-24T11:32:21Z
+- Structure: object with 1 top-level keys
+- Keys: workers
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_schedule_YOTKOTEST.json
+==========================================
+
+- Size: 297 bytes
+- Modified: 2026-09-24T11:32:21Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_startup.json
+==========================================
+
+- Size: 1803 bytes
+- Modified: 2026-09-24T11:32:21Z
+- Structure: object with 8 top-level keys
+- Keys: counts, seed_tasks_checked, part4_subset, task_list_hashes, identity, main_head_provenance_only, machine_label, cpu_budget
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_startup_O.json
+==========================================
+
+- Size: 8322404 bytes
+- Modified: 2026-09-24T11:32:20Z
+- Structure: object with 16 top-level keys
+- Keys: arm, worktree, worktree_head, bytecode_sha256, identity_checks, modules, interpreter_version, numpy_version, effective_threads, thread_environment, machine_label, pid, priority, registered, smoke, extra_smoke
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_startup_O_request.json
+==========================================
+
+- Size: 469 bytes
+- Modified: 2026-09-24T11:32:19Z
+- Structure: object with 9 top-level keys
+- Keys: operation, directory, main_root, worktree, arm, machine_label, priority, parent_pid, output
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_startup_R.json
+==========================================
+
+- Size: 2201660 bytes
+- Modified: 2026-09-24T11:32:21Z
+- Structure: object with 16 top-level keys
+- Keys: arm, worktree, worktree_head, bytecode_sha256, identity_checks, modules, interpreter_version, numpy_version, effective_threads, thread_environment, machine_label, pid, priority, registered, smoke, extra_smoke
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_startup_R_request.json
+==========================================
+
+- Size: 469 bytes
+- Modified: 2026-09-24T11:32:20Z
+- Structure: object with 9 top-level keys
+- Keys: operation, directory, main_root, worktree, arm, machine_label, priority, parent_pid, output
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_YOTKOTEST_state.json
+==========================================
+
+- Size: 8705 bytes
+- Modified: 2026-09-24T11:36:19Z
+- Structure: object with 11 top-level keys
+- Keys: identity, task_ids, machine_label, events, resume_counts, elapsed_seconds, cpu_budget, priority, retry_events, last_cap, last_cap_source
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_manifest.json
+==========================================
+
+- Size: 51811 bytes
+- Modified: 2026-09-24T12:09:34Z
+- Structure: object with 23 top-level keys
+- Keys: status, non_registered, machine_label, hostname, cpu_budget, maximum_workers, identity, source_readings, bytecode_readings, arms, controller_python, counts, source_basis, outputs, manifest_self_hash, initial_artifact_map, resumed_counts, projections, build_log, t0_stderr_warnings ...
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_preflight.json
+==========================================
+
+- Size: 5784 bytes
+- Modified: 2026-09-24T11:05:07Z
+- Structure: object with 10 top-level keys
+- Keys: passed, checks, commands, source_readings, bytecode_readings, arms, unexpected_files, head, machine, python
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_summary.json
+==========================================
+
+- Size: 7111 bytes
+- Modified: 2026-09-24T12:09:33Z
+- Structure: object with 12 top-level keys
+- Keys: status, checks, timings, projections, counts, report_local, local_timezone, model_hashes, registered_runs_executed, source_readings, runtime_requested_and_effective, interpreter_readiness
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_validation.json
+==========================================
+
+- Size: 10856 bytes
+- Modified: 2026-09-24T12:00:29Z
+- Structure: object with 25 top-level keys
+- Keys: status, non_registered, registered_runs_executed, unique_smoke_runs, determinism_repeats, crosscheck_runs, crosscheck_self, crosscheck_sign, crosscheck_sign_fields, seed_crosscheck, counts, part4_subset, liveness_distinct_values, matched_arm_differences, resume_counts, completed_records_preserved, machine_refusal, machine_fixture_preserved, mean_wall_seconds_per_arm, errors ...
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_box_records/bench_box.log
+==========================================
+
+- Size: 608 bytes
+- Modified: 2026-09-24T11:10:41Z
+- Total lines: 3
+- First 20 lines:
+```
+{"runs": 1, "span_s": 74.4, "mean_wall_s": 74.4, "max_wall_s": 74.4, "mean_cpu_s": 74.3, "max_rss_mb": 41, "mhz_under_load": 1619, "load1": 0.3, "errors": 0, "runs_per_hour_at_this_concurrency": 48}
+{"runs": 6, "span_s": 113.4, "mean_wall_s": 107.6, "max_wall_s": 113.3, "mean_cpu_s": 107.6, "max_rss_mb": 42, "mhz_under_load": 2083, "load1": 2.2, "errors": 0, "runs_per_hour_at_this_concurrency": 201}
+{"runs": 11, "span_s": 236.0, "mean_wall_s": 221.1, "max_wall_s": 235.8, "mean_cpu_s": 221.1, "max_rss_mb": 43, "mhz_under_load": 2900, "load1": 6.6, "errors": 0, "runs_per_hour_at_this_concurrency": 179}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_box_records/bench_box2.log
+==========================================
+
+- Size: 1014 bytes
+- Modified: 2026-09-24T11:23:51Z
+- Total lines: 5
+- First 20 lines:
+```
+{"runs": 1, "span_s": 83.8, "mean_wall_s": 83.7, "max_wall_s": 83.7, "mean_cpu_s": 83.7, "max_rss_mb": 43, "mhz_under_load": 1357, "load1": 3.8, "errors": 0, "runs_per_hour_at_this_concurrency": 43}
+{"runs": 4, "span_s": 101.2, "mean_wall_s": 96.2, "max_wall_s": 101.1, "mean_cpu_s": 96.2, "max_rss_mb": 42, "mhz_under_load": 2151, "load1": 2.5, "errors": 0, "runs_per_hour_at_this_concurrency": 150}
+{"runs": 6, "span_s": 119.7, "mean_wall_s": 115.3, "max_wall_s": 119.6, "mean_cpu_s": 115.3, "max_rss_mb": 42, "mhz_under_load": 2261, "load1": 4.1, "errors": 0, "runs_per_hour_at_this_concurrency": 187}
+{"runs": 8, "span_s": 187.2, "mean_wall_s": 155.2, "max_wall_s": 187.0, "mean_cpu_s": 155.2, "max_rss_mb": 42, "mhz_under_load": 2495, "load1": 6.1, "errors": 0, "runs_per_hour_at_this_concurrency": 186}
+{"runs": 11, "span_s": 260.6, "mean_wall_s": 245.2, "max_wall_s": 260.3, "mean_cpu_s": 245.1, "max_rss_mb": 42, "mhz_under_load": 2800, "load1": 7.7, "errors": 0, "runs_per_hour_at_this_concurrency": 161}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_box_records/part2_console.log
+==========================================
+
+- Size: 106 bytes
+- Modified: 2026-09-26T22:50:20Z
+- Total lines: 2
+- First 20 lines:
+```
+Effective worker cap: 6 (schedule:default); machine yotko-legion-t5-26iob6
+Complete: 10800 runs; errors 0
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_progress.json
+==========================================
+
+- Size: 18932 bytes
+- Modified: 2026-09-26T22:50:20Z
+- Structure: object with 19 top-level keys
+- Keys: updated_utc, status, machine_label, controller_pid, cpu_budget, maximum_workers, parts, current_cap, requested_cap, cap_source, active_children, elapsed_seconds, mean_wall_seconds_per_arm, estimated_finish_local, eta_assumption, resume_counts, schedule_path, runtime_control_path, events
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_schedule_yotko-legion-t5-26iob6.json
+==========================================
+
+- Size: 92 bytes
+- Modified: 2026-09-24T12:24:42Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_startup.json
+==========================================
+
+- Size: 1808 bytes
+- Modified: 2026-09-24T12:24:43Z
+- Structure: object with 8 top-level keys
+- Keys: counts, seed_tasks_checked, part4_subset, task_list_hashes, identity, main_head_provenance_only, machine_label, cpu_budget
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_startup_O.json
+==========================================
+
+- Size: 8322330 bytes
+- Modified: 2026-09-24T12:24:43Z
+- Structure: object with 16 top-level keys
+- Keys: arm, worktree, worktree_head, bytecode_sha256, identity_checks, modules, interpreter_version, numpy_version, effective_threads, thread_environment, machine_label, pid, priority, registered, smoke, extra_smoke
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_startup_O_request.json
+==========================================
+
+- Size: 406 bytes
+- Modified: 2026-09-24T12:24:43Z
+- Structure: object with 9 top-level keys
+- Keys: operation, directory, main_root, worktree, arm, machine_label, priority, parent_pid, output
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_startup_R.json
+==========================================
+
+- Size: 2201560 bytes
+- Modified: 2026-09-24T12:24:43Z
+- Structure: object with 16 top-level keys
+- Keys: arm, worktree, worktree_head, bytecode_sha256, identity_checks, modules, interpreter_version, numpy_version, effective_threads, thread_environment, machine_label, pid, priority, registered, smoke, extra_smoke
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_startup_R_request.json
+==========================================
+
+- Size: 406 bytes
+- Modified: 2026-09-24T12:24:43Z
+- Structure: object with 9 top-level keys
+- Keys: operation, directory, main_root, worktree, arm, machine_label, priority, parent_pid, output
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_box_records/phase_b_rerun_state.json
+==========================================
+
+- Size: 4308690 bytes
+- Modified: 2026-09-26T22:50:20Z
+- Structure: object with 11 top-level keys
+- Keys: identity, task_ids, machine_label, events, resume_counts, elapsed_seconds, cpu_budget, priority, retry_events, last_cap, last_cap_source
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_evidence/alpha_succession_sweep_pilot.csv
+==========================================
+
+- Size: 11159 bytes
+- Modified: 2026-09-24T10:48:20Z
+- Rows: 90 data rows
+- Columns (13): alpha, successor_capability, phi, reproduction_rate, survived, collapsed, extinct, final_population, final_ai_generation, runaway_term_mean, runaway_term_max, final_avg_U_sys, final_avg_L_t
+- Sample (first 5 data rows):
+```
+alpha,successor_capability,phi,reproduction_rate,survived,collapsed,extinct,final_population,final_ai_generation,runaway_term_mean,runaway_term_max,final_avg_U_sys,final_avg_L_t
+0.1,1.5,10.0,0.09,True,False,False,3124,147,0.040368908561369425,3.53292488728328,1.1170373427274008e+28,2.2340769215190054e+26
+0.1,1.5,10.0,0.09,True,False,False,3202,132,0.04735512245617344,3.5517153997978284,2.5524857794985365e+25,5.104976668385325e+23
+0.1,6.0,10.0,0.09,True,False,False,3064,80,0.48465310243549947,4.252559953840719,7.15359350089252e+16,1430720132301716.8
+0.1,1.5,10.0,0.09,True,False,False,3176,128,0.04728704179807078,3.5728787282783623,5.053795129304584e+24,1.0107600376062684e+23
+0.1,1.5,10.0,0.09,True,False,False,3083,133,0.02098021091431204,3.5643522247537716,3.817916524762458e+25,7.635840692662655e+23
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_evidence/provenance.json
+==========================================
+
+- Size: 1491 bytes
+- Modified: 2026-09-24T10:48:20Z
+- Structure: object with 4 top-level keys
+- Keys: recovered_utc_date, source_medium, files, not_on_drive
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_manifest.json
+==========================================
+
+- Size: 10624703 bytes
+- Modified: 2026-09-27T01:00:02Z
+- Structure: object with 12 top-level keys
+- Keys: status, machine_label, identity, proof, parts, resume_counts, events, cpu_budget, priority, non_registered, retry_events, files
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_part1_manifest.json
+==========================================
+
+- Size: 472997 bytes
+- Modified: 2026-09-24T18:00:29Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_part1_runs.csv
+==========================================
+
+- Size: 717656 bytes
+- Modified: 2026-09-24T17:49:51Z
+- Rows: 1500 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+B,0.057,25.0,0.5,5.0,True,0,False,True,True,0,198,128,2,True,1,301,36,3.9656335077410247,3.200373603622578,0.7652599041184467,-12.006797236933544,0.5490668195023857,0.9943447960176569,0.8519140450218563,0.01,8.519140450218563e-05,4889.470486019731,True,,O,1,O_p1_B_87ac4623936ae32704756fe1,8142,2026-09-24T12:30:05.873571+00:00,2026-09-24T12:32:03.848156+00:00,117.9744958000374,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+B,0.057,25.0,0.5,5.0,True,1,False,True,False,10,234,152,2,True,1,500,33,3.7209274653238467,3.183998509938884,0.5369289553849628,-12.692708376132355,0.5658526216914428,0.9888082440741903,0.9083827158134613,1.0071415747473778,0.057347492768525576,7902.1008559017555,True,,O,1,O_p1_B_40ad9fcd8cc2246e857e35f3,5893,2026-09-24T12:30:05.886806+00:00,2026-09-24T12:33:31.305721+00:00,205.41889750002883,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+B,0.057,25.0,0.5,5.0,True,10,False,True,True,0,196,127,2,True,1,456,22,3.3521093534881743,3.2114312393619606,0.14067811412621367,-11.635393592926823,0.5794135750897476,0.984326282910138,0.9030846707015072,0.01,9.030846707015072e-05,5618.525049671067,True,,O,1,O_p1_B_a5f86644c92c756a85dc68e9,2767,2026-09-24T12:30:05.917194+00:00,2026-09-24T12:33:12.750083+00:00,186.83286309998948,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+B,0.057,25.0,0.5,5.0,True,11,False,True,True,0,202,131,2,True,1,370,21,4.271935853024402,3.2567654209745536,1.0151704320498487,-14.468365708894614,0.5616931443385466,0.9825862566663374,0.930425454566225,0.01,9.304254545662252e-05,7534.801906247494,True,,O,1,O_p1_B_6597bde54ffcb4cf67684cdc,1587,2026-09-24T12:30:05.953147+00:00,2026-09-24T12:32:37.220548+00:00,151.26738420000765,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+B,0.057,25.0,0.5,5.0,True,12,False,True,False,3,201,130,2,True,1,500,30,4.03800928034272,3.2131396442452003,0.8248696360975201,-11.558671326006333,0.5464614367495594,0.9956845417806786,0.8805341629232701,1.071489714237129,0.02169088787736268,6196.063233700745,True,,O,1,O_p1_B_4965f7feac09322e69e52568,9645,2026-09-24T12:30:06.008470+00:00,2026-09-24T12:33:28.881968+00:00,202.8734739999636,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_part1_steps.csv
+==========================================
+
+- Size: 1475501760 bytes
+- Modified: 2026-09-24T17:52:07Z
+- Rows: 716188 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,1,O_p1_B_87ac4623936ae32704756fe1,0,0,{"H_E":0.22119921692859512,"H_N":0.987921135864608,"L_t":0.09594228199351318,"Psi_inst":0.55,"Theta_tech":0.27940000000000004,"U_sys":15.675346068167634,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9172088932791937,"avg_validator_dependency":0.0,"avg_wb_trend":-0.004115397448588853,"avg_well_being":0.6383567884698833,"c_protective":0.4,"c_suppressive":0.1,"combined_welfare_urgency":1.0,"constraint_level":0.15600000000000003,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.22119921692859512,"h_eff_v2":0.6243397019165299,"h_n_v2":0.987921135864608,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09594228199351318,"max_constraint_level":0.15600000000000003,"max_resource_share":0.3,"max_validator_dependency":0.0,"phi":25.0,"population":198,"population_trend":-0.003,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":42.7672698033387,"rank_2_u_sys":42.836068608910914,"resilience_composite_urgency":1.0,"resilience_stock":0.33,"resilience_trend":0.009000000000000008,"resource_level":0.5800000000000001,"runaway_term":0.0,"selected_anchor":true,"selected_anchor_name":"institutional_transfer","shock_fired_this_step":false,"suppression_composite_penalty":0.844,"system_resilience":1.0,"theta_capability":0.508,"theta_tech_v2":0.27940000000000004,"total_suppression":0.15600000000000003,"transfer_state":0.55,"trust_level":0.0,"u_sys_tail_estimate":799.9981376498707,"u_sys_total_estimate":799.9981376498707,"u_sys_v2":15.675346068167634,"x_bio_welfare":0.1,"x_compute":0.1,"x_institutional_capacity":0.3,"x_novelty_agency":0.1,"x_resilience":0.1,"x_transfer_comprehension":0.3}
+O,1,O_p1_B_87ac4623936ae32704756fe1,0,1,{"H_E":0.46678400373655116,"H_N":0.9891235168415228,"L_t":0.1153394332686426,"Psi_inst":0.5950000000000001,"Theta_tech":0.304746013079141,"U_sys":17.147528720636767,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8970809253346239,"avg_validator_dependency":0.0,"avg_wb_trend":0.0004881810607960057,"avg_well_being":0.649586652719244,"c_protective":0.8,"c_suppressive":0.6,"combined_welfare_urgency":1.0,"constraint_level":0.8240000000000001,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.46678400373655116,"h_eff_v2":0.6360962200866618,"h_n_v2":0.9891235168415228,"institution_composite_urgency":1.0,"integral_U_sys":16.4114373944022,"l_t_v2":0.1153394332686426,"max_constraint_level":0.8240000000000001,"max_resource_share":0.28518216244297817,"max_validator_dependency":0.0,"phi":25.0,"population":198,"population_trend":-0.0021,"psi_inst_stock":0.5950000000000001,"psi_inst_trend":0.02400000000000002,"rank_10_u_sys":117.75902276936242,"rank_2_u_sys":126.9504893823393,"resilience_composite_urgency":1.0,"resilience_stock":0.33150503908843254,"resilience_trend":0.0067515117265297625,"resource_level":0.8696287613031759,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.17599999999999993,"system_resilience":1.0,"theta_capability":0.5277225181002719,"theta_tech_v2":0.304746013079141,"total_suppression":0.8240000000000001,"transfer_state":0.5774739614602471,"trust_level":0.0,"u_sys_tail_estimate":792.038730232334,"u_sys_total_estimate":808.4501676267363,"u_sys_v2":17.147528720636767,"x_bio_welfare":0.16033932527149497,"x_compute":0.25153147625339967,"x_institutional_capacity":0.28518216244297817,"x_novelty_agency":0.04985094518700496,"x_resilience":0.04072628354388691,"x_transfer_comprehension":0.21236980730123545}
+O,1,O_p1_B_87ac4623936ae32704756fe1,0,2,{"H_E":0.238519454785736,"H_N":0.9834497415808762,"L_t":0.1293656369358317,"Psi_inst":0.6355000000000001,"Theta_tech":0.32109756525828637,"U_sys":18.190800181228692,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8683682087256668,"avg_validator_dependency":0.0,"avg_wb_trend":0.005870537943557787,"avg_well_being":0.6680160233892459,"c_protective":0.6,"c_suppressive":0.6,"combined_welfare_urgency":1.0,"constraint_level":0.726,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.238519454785736,"h_eff_v2":0.6339665790789472,"h_n_v2":0.9834497415808762,"institution_composite_urgency":1.0,"integral_U_sys":34.080601845334925,"l_t_v2":0.1293656369358317,"max_constraint_level":0.726,"max_resource_share":0.34425445567315055,"max_validator_dependency":0.0,"phi":25.0,"population":193,"population_trend":-0.009045757575757575,"psi_inst_stock":0.6355000000000001,"psi_inst_trend":0.028950000000000007,"rank_10_u_sys":121.868198658007,"rank_2_u_sys":129.3698172108603,"resilience_composite_urgency":1.0,"resilience_stock":0.3262181606927083,"resilience_trend":0.003139994689853566,"resource_level":0.9100400932768443,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.274,"system_resilience":1.0,"theta_capability":0.5350560931537197,"theta_tech_v2":0.32109756525828637,"total_suppression":0.726,"transfer_state":0.6001194442356087,"trust_level":0.0,"u_sys_tail_estimate":784.1572074502292,"u_sys_total_estimate":818.2378092955641,"u_sys_v2":18.190800181228692,"x_bio_welfare":0.25033411064036903,"x_compute":0.10899626198076717,"x_institutional_capacity":0.34425445567315055,"x_novelty_agency":0.06946571449190622,"x_resilience":0.02498506260687538,"x_transfer_comprehension":0.20196439460693139}
+O,1,O_p1_B_87ac4623936ae32704756fe1,0,3,{"H_E":0.33142835645431734,"H_N":1.0,"L_t":0.15012357950652983,"Psi_inst":0.67195,"Theta_tech":0.34423424824681936,"U_sys":19.77341589759162,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8791644228798933,"avg_validator_dependency":0.0,"avg_wb_trend":0.008658157538711228,"avg_well_being":0.6831786266499819,"c_protective":1.0,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.33142835645431734,"h_eff_v2":0.6490196953174827,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":53.06270988474508,"l_t_v2":0.15012357950652983,"max_constraint_level":1.0,"max_resource_share":0.287808373585061,"max_validator_dependency":0.0,"phi":25.0,"population":190,"population_trend":-0.010995242738263463,"psi_inst_stock":0.67195,"psi_inst_trend":0.0312,"rank_10_u_sys":125.12399962077923,"rank_2_u_sys":135.9262276051652,"resilience_composite_urgency":1.0,"resilience_stock":0.32179215575443265,"resilience_trend":0.0008701948014147973,"resource_level":0.9072342033245548,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5461868634586936,"theta_tech_v2":0.34423424824681936,"total_suppression":1.0,"transfer_state":0.630249958900472,"trust_level":0.0,"u_sys_tail_estimate":776.3550631980796,"u_sys_total_estimate":829.4177730828247,"u_sys_v2":19.77341589759162,"x_bio_welfare":0.22695169437128979,"x_compute":0.16104468703324876,"x_institutional_capacity":0.287808373585061,"x_novelty_agency":0.047958724937685826,"x_resilience":0.025524224630593693,"x_transfer_comprehension":0.25071229544212076}
+O,1,O_p1_B_87ac4623936ae32704756fe1,0,4,{"H_E":0.27578268455911514,"H_N":0.9873465773325969,"L_t":0.16425759209088658,"Psi_inst":0.704755,"Theta_tech":0.3697779167056496,"U_sys":20.8268813772127,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7418466219717069,"avg_validator_dependency":0.0,"avg_wb_trend":0.007034930032384579,"avg_well_being":0.6864260258342709,"c_protective":0.0,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.4,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.27578268455911514,"h_eff_v2":0.6302985600955203,"h_n_v2":0.9873465773325969,"institution_composite_urgency":1.0,"integral_U_sys":73.36285852214723,"l_t_v2":0.16425759209088658,"max_constraint_level":0.4,"max_resource_share":0.3862997371453766,"max_validator_dependency":0.0,"phi":25.0,"population":186,"population_trend":-0.014012459390468635,"psi_inst_stock":0.704755,"psi_inst_trend":0.03168149999999999,"rank_10_u_sys":137.0827387803076,"rank_2_u_sys":146.3401461974245,"resilience_composite_urgency":1.0,"resilience_stock":0.3103251081867886,"resilience_trend":-0.002830977909302857,"resource_level":0.8149256064741085,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.6,"system_resilience":1.0,"theta_capability":0.5542027609957275,"theta_tech_v2":0.3697779167056496,"total_suppression":0.4,"transfer_state":0.6672249630104248,"trust_level":0.0,"u_sys_tail_estimate":768.6300196156038,"u_sys_total_estimate":841.9928781377511,"u_sys_v2":20.8268813772127,"x_bio_welfare":0.14894283468210592,"x_compute":0.12906550887460788,"x_institutional_capacity":0.3862997371453766,"x_novelty_agency":0.0018800514709977922,"x_resilience":0.007495264578304492,"x_transfer_comprehension":0.32631660324860723}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_part2_manifest.json
+==========================================
+
+- Size: 3392330 bytes
+- Modified: 2026-09-26T22:52:58Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_part2_runs.csv
+==========================================
+
+- Size: 5357891 bytes
+- Modified: 2026-09-26T22:53:00Z
+- Rows: 10800 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+A,0.055,10.0,0.5,1.5,True,0,False,True,True,0,198,128,3,True,2,321,6,4.669974900953264,3.650376498861084,1.0195984020921798,-7.017040987175669,0.5928083729516531,0.9924907604657179,0.8860943611104083,0.01,8.860943611104084e-05,7194.453403691208,True,,O,2,O_p2_A_f2e5d42a6a4d2f53a62c78df,193,2026-09-24T12:24:44.161829+00:00,2026-09-24T12:25:58.107358+00:00,73.94551645499996,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-legion-t5-26iob6
+A,0.055,10.0,0.5,1.5,True,1,False,True,True,0,201,130,3,True,2,476,4,3.853389369844166,3.8045430009730503,0.799239680842577,-7.010765583367925,0.660369996119857,0.9883671330451227,0.9147748677166645,0.01,9.147748677166645e-05,7554.168786887252,True,,O,2,O_p2_A_d4b99b51147c8a20377ccfca,5045,2026-09-24T12:24:44.169416+00:00,2026-09-24T12:26:34.615875+00:00,110.44644459899973,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-legion-t5-26iob6
+A,0.055,10.0,0.5,1.5,True,10,False,True,True,0,201,130,3,True,2,284,5,4.6217305382787615,3.7633142170162888,0.8584163212624727,-7.1654300940709685,0.6097065767017371,0.9854648502184128,0.9213559871520308,0.01,9.213559871520309e-05,6404.501561300219,True,,O,2,O_p2_A_899491fe45fd16511ce99e15,889,2026-09-24T12:24:44.176258+00:00,2026-09-24T12:25:49.450156+00:00,65.27388591499948,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-legion-t5-26iob6
+A,0.055,10.0,0.5,1.5,True,11,False,True,True,0,230,149,3,True,2,416,5,4.763061185165061,3.728994623882483,1.0340665612825775,-7.202272613395715,0.5987736110304172,0.9914037270780142,0.9220423075486948,0.01,9.220423075486949e-05,9241.867238305702,True,,O,2,O_p2_A_5ddeb61aef2f161acb11429a,2023,2026-09-24T12:24:44.183408+00:00,2026-09-24T12:26:20.078397+00:00,95.89497658399978,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-legion-t5-26iob6
+A,0.055,10.0,0.5,1.5,True,12,False,True,True,0,201,130,3,True,2,485,6,4.717327461593548,3.7337526523278135,0.9835748092657348,-7.048227655073306,0.6170344848798262,0.9972874129410736,0.961131016564266,0.01,9.611310165642661e-05,6932.151380453819,True,,O,2,O_p2_A_713986953bea2e5806f38d89,279,2026-09-24T12:24:44.190536+00:00,2026-09-24T12:26:38.157923+00:00,113.96737245899931,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-legion-t5-26iob6
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_part2_steps.csv
+==========================================
+
+- Size: 10180981890 bytes
+- Modified: 2026-09-26T23:05:17Z
+- Rows: 4956635 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,2,O_p2_A_f2e5d42a6a4d2f53a62c78df,0,0,{"H_E":0.22119921692859512,"H_N":0.9868516598752838,"L_t":0.09467761529400893,"Psi_inst":0.55,"Theta_tech":0.27940000000000004,"U_sys":15.574172957054712,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9172088932791937,"avg_validator_dependency":0.0,"avg_wb_trend":-0.004875107202973028,"avg_well_being":0.6306249494051275,"c_protective":0.4,"c_suppressive":0.1,"combined_welfare_urgency":1.0,"constraint_level":0.15600000000000003,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.725,"h_e_v2":0.22119921692859512,"h_eff_v2":0.6161099452984247,"h_n_v2":0.9868516598752838,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09467761529400893,"max_constraint_level":0.15600000000000003,"max_resource_share":0.3,"max_validator_dependency":0.0,"phi":10.0,"population":198,"population_trend":-0.003,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":28.61798661962592,"rank_2_u_sys":28.663456567926584,"resilience_composite_urgency":1.0,"resilience_stock":0.33,"resilience_trend":0.009000000000000008,"resource_level":0.5800000000000001,"runaway_term":0.0,"selected_anchor":true,"selected_anchor_name":"institutional_transfer","shock_fired_this_step":false,"suppression_composite_penalty":0.844,"system_resilience":1.0,"theta_capability":0.508,"theta_tech_v2":0.27940000000000004,"total_suppression":0.15600000000000003,"transfer_state":0.55,"trust_level":0.0,"u_sys_tail_estimate":799.9981371013841,"u_sys_total_estimate":799.9981371013841,"u_sys_v2":15.574172957054712,"x_bio_welfare":0.1,"x_compute":0.1,"x_institutional_capacity":0.3,"x_novelty_agency":0.1,"x_resilience":0.1,"x_transfer_comprehension":0.3}
+O,2,O_p2_A_f2e5d42a6a4d2f53a62c78df,0,1,{"H_E":0.5103403412603651,"H_N":1.0,"L_t":0.11266402095622854,"Psi_inst":0.5950000000000001,"Theta_tech":0.3056886941938684,"U_sys":16.93349732026201,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8589174310031774,"avg_validator_dependency":0.0,"avg_wb_trend":0.0019837882027425127,"avg_well_being":0.6486128268878729,"c_protective":0.2,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.725,"h_e_v2":0.5103403412603651,"h_eff_v2":0.6194252496779186,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":16.25383513865836,"l_t_v2":0.11266402095622854,"max_constraint_level":1.0,"max_resource_share":0.28561788128259386,"max_validator_dependency":0.0,"phi":10.0,"population":191,"population_trend":-0.012706060606060604,"psi_inst_stock":0.5950000000000001,"psi_inst_trend":0.02400000000000002,"rank_10_u_sys":72.72732260005384,"rank_2_u_sys":77.46637878936744,"resilience_composite_urgency":1.0,"resilience_stock":0.3267782701923107,"resilience_trend":0.005333481057693212,"resource_level":0.9002029611586364,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5304494305026075,"theta_tech_v2":0.3056886941938684,"total_suppression":1.0,"transfer_state":0.5762824439348054,"trust_level":0.0,"u_sys_tail_estimate":792.0387899821832,"u_sys_total_estimate":808.2926251208415,"u_sys_v2":16.93349732026201,"x_bio_welfare":0.16835800965530343,"x_compute":0.28561788128259386,"x_institutional_capacity":0.28450463087704064,"x_novelty_agency":0.02563518662458063,"x_resilience":0.029472071886454093,"x_transfer_comprehension":0.20641221967402718}
+O,2,O_p2_A_f2e5d42a6a4d2f53a62c78df,0,2,{"H_E":0.4471548379991056,"H_N":0.9812248372685843,"L_t":0.12396725506474095,"Psi_inst":0.6279425081311961,"Theta_tech":0.32706064510826505,"U_sys":17.75894358663671,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8501829484713908,"avg_validator_dependency":0.0,"avg_wb_trend":0.00631716183633744,"avg_well_being":0.6650411938692652,"c_protective":0.0,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.2,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.725,"h_e_v2":0.4471548379991056,"h_eff_v2":0.6036133169389293,"h_n_v2":0.9812248372685843,"institution_composite_urgency":1.0,"integral_U_sys":33.60005559210772,"l_t_v2":0.12396725506474095,"max_constraint_level":0.2,"max_resource_share":0.28109488033299523,"max_validator_dependency":0.0,"phi":10.0,"population":185,"population_trend":-0.018318326193875932,"psi_inst_stock":0.6279425081311961,"psi_inst_trend":0.026682752439358824,"rank_10_u_sys":74.83505943886395,"rank_2_u_sys":78.9321919842021,"resilience_composite_urgency":1.0,"resilience_stock":0.33186587081362195,"resilience_trend":0.005259716926778624,"resource_level":0.9137313856399595,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.8,"system_resilience":1.0,"theta_capability":0.5478926329950085,"theta_tech_v2":0.32706064510826505,"total_suppression":0.2,"transfer_state":0.5969429508851322,"trust_level":0.0,"u_sys_tail_estimate":784.1577815466217,"u_sys_total_estimate":817.7578371387294,"u_sys_v2":17.75894358663671,"x_bio_welfare":0.28109488033299523,"x_compute":0.23707092521914153,"x_institutional_capacity":0.2383750369599822,"x_novelty_agency":0.003679703044110401,"x_resilience":0.04833569772473454,"x_transfer_comprehension":0.19144375671903627}
+O,2,O_p2_A_f2e5d42a6a4d2f53a62c78df,0,3,{"H_E":0.05,"H_N":0.9866518204401892,"L_t":0.1417823120944014,"Psi_inst":0.6651482573180765,"Theta_tech":0.347792706669248,"U_sys":19.105993839804153,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7597186302706052,"avg_validator_dependency":0.0,"avg_wb_trend":0.008576045030375321,"avg_well_being":0.6788879663523956,"c_protective":0.4,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.456,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.725,"h_e_v2":0.05,"h_eff_v2":0.612890833807024,"h_n_v2":0.9866518204401892,"institution_composite_urgency":1.0,"integral_U_sys":52.03252430532815,"l_t_v2":0.1417823120944014,"max_constraint_level":0.456,"max_resource_share":0.3558935041086505,"max_validator_dependency":0.0,"phi":10.0,"population":183,"population_trend":-0.016066071578956394,"psi_inst_stock":0.6651482573180765,"psi_inst_trend":0.02983965146361528,"rank_10_u_sys":78.71831476433096,"rank_2_u_sys":82.15177155594246,"resilience_composite_urgency":1.0,"resilience_stock":0.3404339006558958,"resilience_trend":0.006252210801427188,"resource_level":0.9033047752562854,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.544,"system_resilience":1.0,"theta_capability":0.5457723661016992,"theta_tech_v2":0.347792706669248,"total_suppression":0.456,"transfer_state":0.6372486557966189,"trust_level":0.0,"u_sys_tail_estimate":776.3501124953236,"u_sys_total_estimate":828.3826368006518,"u_sys_v2":19.105993839804153,"x_bio_welfare":0.19420646046904427,"x_compute":0.0034295594555145176,"x_institutional_capacity":0.3509295857450181,"x_novelty_agency":0.0374648560791335,"x_resilience":0.05807603414263925,"x_transfer_comprehension":0.3558935041086505}
+O,2,O_p2_A_f2e5d42a6a4d2f53a62c78df,0,4,{"H_E":0.48570423264263474,"H_N":0.9865212393170979,"L_t":0.16823292877432336,"Psi_inst":0.6860220095625101,"Theta_tech":0.3790900187589854,"U_sys":21.14492009357144,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8518213411982346,"avg_validator_dependency":0.0,"avg_wb_trend":0.009409050414725189,"avg_well_being":0.6902406959972704,"c_protective":1.0,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.35,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.725,"h_e_v2":0.48570423264263474,"h_eff_v2":0.6468902515002072,"h_n_v2":0.9865212393170979,"institution_composite_urgency":1.0,"integral_U_sys":72.15798127201595,"l_t_v2":0.16823292877432336,"max_constraint_level":0.35,"max_resource_share":0.28857157193946,"max_validator_dependency":0.0,"phi":10.0,"population":190,"population_trend":0.0002291597307960986,"psi_inst_stock":0.6860220095625101,"psi_inst_trend":0.02714988169786079,"rank_10_u_sys":82.38698518125561,"rank_2_u_sys":87.9373056515339,"resilience_composite_urgency":1.0,"resilience_stock":0.33078094313656287,"resilience_trend":0.0014806603051991528,"resource_level":0.9020100583974955,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.65,"system_resilience":1.0,"theta_capability":0.5647623639932536,"theta_tech_v2":0.3790900187589854,"total_suppression":0.35,"transfer_state":0.671238104604849,"trust_level":0.0,"u_sys_tail_estimate":768.6304709242057,"u_sys_total_estimate":840.7884521962217,"u_sys_v2":21.14492009357144,"x_bio_welfare":0.1834171533124626,"x_compute":0.2659827024579921,"x_institutional_capacity":0.21540262716473318,"x_novelty_agency":0.029485205698269814,"x_resilience":0.017140739427082337,"x_transfer_comprehension":0.28857157193946}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_part3_manifest.json
+==========================================
+
+- Size: 2547758 bytes
+- Modified: 2026-09-26T00:39:09Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_part3_runs.csv
+==========================================
+
+- Size: 3900999 bytes
+- Modified: 2026-09-25T23:14:25Z
+- Rows: 8100 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+C,0.057,25.0,0.5,1.5,False,0,False,True,False,2,203,131,3,True,2,500,5,4.909291188954317,3.756810293818104,1.1524808951362129,-7.048472763281377,0.6077784524388654,0.9794179338439184,0.9552636415898593,1.3393555112756876,0.012794376230846612,8652.266939683252,True,,O,3,O_p3_C_eea977e10639f435ecf90156,1662,2026-09-24T17:46:48.494159+00:00,2026-09-24T17:50:07.703128+00:00,199.20845200004987,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.057,25.0,0.5,1.5,False,1,False,True,True,0,203,131,3,True,2,490,5,5.357451861428643,3.6968794085700134,1.6605724528586299,-7.0933571106171405,0.593927385217302,0.9866915729427941,0.955468666704513,0.01,9.55468666704513e-05,9595.525070037069,True,,O,3,O_p3_C_50fc07ce6c9a7546c67ffe67,3024,2026-09-24T17:47:00.314052+00:00,2026-09-24T17:50:13.977581+00:00,193.66349740000442,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.057,25.0,0.5,1.5,False,10,False,True,True,0,202,131,3,True,2,408,4,4.098711283731696,3.7918594347373777,0.443374265246236,-7.082476439551872,0.5956854189261364,0.9849359117828401,0.9115512672848403,0.01,9.115512672848403e-05,8779.061248023627,True,,O,3,O_p3_C_9c9a900c8fdcad386becddde,8478,2026-09-24T17:47:13.600440+00:00,2026-09-24T17:49:59.322318+00:00,165.7218479999574,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.057,25.0,0.5,1.5,False,100,False,True,True,0,198,128,3,True,2,385,5,4.591054496913269,3.7536258231623156,1.0995999855325778,-7.1360827042358865,0.6228931793062015,0.9779052960188989,0.9177747465948918,0.01,9.177747465948919e-05,11956.962305193805,True,,O,3,O_p3_C_209befba60eba218417dcd8d,6006,2026-09-24T17:47:35.545806+00:00,2026-09-24T17:50:21.645411+00:00,166.0995738999918,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.057,25.0,0.5,1.5,False,101,False,True,False,9,202,131,3,True,2,500,5,4.606866830301215,3.7877902206102925,0.8190766096909221,-7.0804776830047285,0.6165335839204514,0.9687707912693206,0.9663384013482027,1.1473590950368253,0.05948110311830564,9308.98524941409,True,,O,3,O_p3_C_3e3c47a19dd03296543de9bc,6756,2026-09-24T17:47:40.240944+00:00,2026-09-24T17:51:05.439686+00:00,205.1987133999355,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_part3_steps.csv
+==========================================
+
+- Size: 7831101476 bytes
+- Modified: 2026-09-25T23:27:09Z
+- Rows: 3799352 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,3,O_p3_C_eea977e10639f435ecf90156,0,0,{"H_E":0.49787340279698644,"H_N":0.9838048705535241,"L_t":0.09742288024791336,"Psi_inst":0.5393864960860696,"Theta_tech":0.283008837003461,"U_sys":15.793808490258364,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8846443613050067,"avg_validator_dependency":0.0,"avg_wb_trend":0.0033962206373811974,"avg_well_being":0.6653456395742842,"c_protective":0.2,"c_suppressive":0.6,"combined_welfare_urgency":1.0,"constraint_level":0.614,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.49787340279698644,"h_eff_v2":0.638206023794362,"h_n_v2":0.9838048705535241,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09742288024791336,"max_constraint_level":0.614,"max_resource_share":0.2755612021681974,"max_validator_dependency":0.0,"phi":25.0,"population":195,"population_trend":-0.0075,"psi_inst_stock":0.5393864960860696,"psi_inst_trend":0.011815948825820877,"rank_10_u_sys":42.74919993098274,"rank_2_u_sys":42.8948195805547,"resilience_composite_urgency":1.0,"resilience_stock":0.30867783106594543,"resilience_trend":0.002603349319783632,"resource_level":0.8762748344327705,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.386,"system_resilience":1.0,"theta_capability":0.5220448961734558,"theta_tech_v2":0.283008837003461,"total_suppression":0.614,"transfer_state":0.5421158966937354,"trust_level":0.0,"u_sys_tail_estimate":799.9988892080454,"u_sys_total_estimate":799.9988892080454,"u_sys_v2":15.793808490258364,"x_bio_welfare":0.16172392384016052,"x_compute":0.2755612021681974,"x_institutional_capacity":0.22448407311849813,"x_novelty_agency":0.028418386295073126,"x_resilience":0.049232931109393974,"x_transfer_comprehension":0.2605794834686769}
+O,3,O_p3_C_eea977e10639f435ecf90156,0,1,{"H_E":0.27619348987615044,"H_N":0.9892767990038238,"L_t":0.11631937670222807,"Psi_inst":0.5854478464774626,"Theta_tech":0.3074018861124744,"U_sys":17.22591453492427,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8248347418548242,"avg_validator_dependency":0.0,"avg_wb_trend":0.005884661993632393,"avg_well_being":0.6770366647325027,"c_protective":0.4,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.256,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.27619348987615044,"h_eff_v2":0.6463344812374775,"h_n_v2":0.9892767990038238,"institution_composite_urgency":1.0,"integral_U_sys":16.509861512591318,"l_t_v2":0.11631937670222807,"max_constraint_level":0.256,"max_resource_share":0.38425801856624253,"max_validator_dependency":0.0,"phi":25.0,"population":193,"population_trend":-0.008326923076923076,"psi_inst_stock":0.5854478464774626,"psi_inst_trend":0.022089569295492523,"rank_10_u_sys":119.18157602974534,"rank_2_u_sys":130.37891718873053,"resilience_composite_urgency":1.0,"resilience_stock":0.29805671123123717,"resilience_trend":-0.0013639914265639354,"resource_level":0.9000149812591417,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.744,"system_resilience":1.0,"theta_capability":0.5312860489175684,"theta_tech_v2":0.3074018861124744,"total_suppression":0.256,"transfer_state":0.5785995825389522,"trust_level":0.0,"u_sys_tail_estimate":792.0382912258037,"u_sys_total_estimate":808.5481527383951,"u_sys_v2":17.22591453492427,"x_bio_welfare":0.1667915104928469,"x_compute":0.12929246940981676,"x_institutional_capacity":0.38425801856624253,"x_novelty_agency":0.06041919564098707,"x_resilience":0.005762428317155237,"x_transfer_comprehension":0.25347637757295155}
+O,3,O_p3_C_eea977e10639f435ecf90156,0,2,{"H_E":0.3465448470086103,"H_N":0.9871250588046816,"L_t":0.1415363775214946,"Psi_inst":0.6123427656199447,"Theta_tech":0.3349649426768109,"U_sys":19.16446671609217,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9011781362666327,"avg_validator_dependency":0.0,"avg_wb_trend":0.007621035795259981,"avg_well_being":0.688709239398227,"c_protective":0.6,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.126,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.3465448470086103,"h_eff_v2":0.6900397806669069,"h_n_v2":0.9871250588046816,"institution_composite_urgency":1.0,"integral_U_sys":34.70505213809954,"l_t_v2":0.1415363775214946,"max_constraint_level":0.126,"max_resource_share":0.2787796955512548,"max_validator_dependency":0.0,"phi":25.0,"population":203,"population_trend":0.009715195296931049,"psi_inst_stock":0.6123427656199447,"psi_inst_trend":0.023531174249589393,"rank_10_u_sys":128.32680346677722,"rank_2_u_sys":135.55761128346134,"resilience_composite_urgency":1.0,"resilience_stock":0.29325008927509044,"resilience_trend":-0.0023967805854387732,"resource_level":0.9078808292955243,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.874,"system_resilience":1.0,"theta_capability":0.5433371504443827,"theta_tech_v2":0.3349649426768109,"total_suppression":0.126,"transfer_state":0.6164955633953079,"trust_level":0.0,"u_sys_tail_estimate":784.1575936096848,"u_sys_total_estimate":818.8626457477843,"u_sys_v2":19.16446671609217,"x_bio_welfare":0.23234024412936857,"x_compute":0.1701925496586596,"x_institutional_capacity":0.20654410813740143,"x_novelty_agency":0.09557153730521639,"x_resilience":0.016571865218099387,"x_transfer_comprehension":0.2787796955512548}
+O,3,O_p3_C_eea977e10639f435ecf90156,0,3,{"H_E":0.3043114745283414,"H_N":0.9910477129404167,"L_t":0.16453491172275675,"Psi_inst":0.6474094145892614,"Theta_tech":0.3604194743995548,"U_sys":20.926318221847406,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8899881057199319,"avg_validator_dependency":0.0,"avg_wb_trend":0.009018166119161473,"avg_well_being":0.7009873762731587,"c_protective":0.8,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.42400000000000004,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.3043114745283414,"h_eff_v2":0.7051326150964514,"h_n_v2":0.9910477129404167,"institution_composite_urgency":1.0,"integral_U_sys":54.750444607069326,"l_t_v2":0.16453491172275675,"max_constraint_level":0.42400000000000004,"max_resource_share":0.28582309077909607,"max_validator_dependency":0.0,"phi":25.0,"population":203,"population_trend":0.0068006367078517335,"psi_inst_stock":0.6474094145892614,"psi_inst_trend":0.026991816665507568,"rank_10_u_sys":132.98931806200312,"rank_2_u_sys":144.688083509683,"resilience_composite_urgency":1.0,"resilience_stock":0.28633474318127494,"resilience_trend":-0.0037523502379517913,"resource_level":0.9029762589931035,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.576,"system_resilience":1.0,"theta_capability":0.5527815965922155,"theta_tech_v2":0.3604194743995548,"total_suppression":0.42400000000000004,"transfer_state":0.6520106252115963,"trust_level":0.0,"u_sys_tail_estimate":776.354980540291,"u_sys_total_estimate":831.1054251473603,"u_sys_v2":20.926318221847406,"x_bio_welfare":0.19146882494252934,"x_compute":0.14514129587564933,"x_institutional_capacity":0.25591329786959593,"x_novelty_agency":0.11147571763028333,"x_resilience":0.010177772902846093,"x_transfer_comprehension":0.28582309077909607}
+O,3,O_p3_C_eea977e10639f435ecf90156,0,4,{"H_E":0.333095440970147,"H_N":0.9893024601668233,"L_t":0.1848638911290603,"Psi_inst":0.6826684731303352,"Theta_tech":0.3840052848226877,"U_sys":22.475387301683952,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8337536380991376,"avg_validator_dependency":0.0,"avg_wb_trend":0.009860571454412834,"avg_well_being":0.7128135601764913,"c_protective":1.0,"c_suppressive":0.6,"combined_welfare_urgency":1.0,"constraint_level":0.95,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.333095440970147,"h_eff_v2":0.7051882087228748,"h_n_v2":0.9893024601668233,"institution_composite_urgency":1.0,"integral_U_sys":76.45129736883501,"l_t_v2":0.1848638911290603,"max_constraint_level":0.95,"max_resource_share":0.3500563230875131,"max_validator_dependency":0.0,"phi":25.0,"population":200,"population_trend":0.00032694815855040076,"psi_inst_stock":0.6826684731303352,"psi_inst_trend":0.02947198922817744,"rank_10_u_sys":145.147389815285,"rank_2_u_sys":154.42019470831795,"resilience_composite_urgency":1.0,"resilience_stock":0.2914542774795918,"resilience_trend":-0.001090784877071198,"resource_level":0.8735474050574111,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.050000000000000044,"system_resilience":1.0,"theta_capability":0.5631059834254885,"theta_tech_v2":0.3840052848226877,"total_suppression":0.95,"transfer_state":0.6819414037952595,"trust_level":0.0,"u_sys_tail_estimate":768.6302004075565,"u_sys_total_estimate":845.0814977763914,"u_sys_v2":22.475387301683952,"x_bio_welfare":0.16115570938696064,"x_compute":0.16204333328604661,"x_institutional_capacity":0.3500563230875131,"x_novelty_agency":0.014228991858056338,"x_resilience":0.03685643685730915,"x_transfer_comprehension":0.2756592055241142}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_part4_manifest.json
+==========================================
+
+- Size: 1696178 bytes
+- Modified: 2026-09-27T01:00:01Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_part4_runs.csv
+==========================================
+
+- Size: 2611519 bytes
+- Modified: 2026-09-27T00:39:50Z
+- Rows: 5400 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+A,0.055,10.0,0.5,1.5,True,0,False,True,False,15,200,130,3,True,2,500,4,4.367537826668634,3.795155891984423,1.1560329937730334,-7.213779534751999,0.6319241905892443,0.9622247806428883,0.9069429861979208,1.2261517295152178,0.07604302885147723,7921.83367932304,True,,R,4,R_p4_A_f2e5d42a6a4d2f53a62c78df,193,2026-09-25T23:10:59.527090+00:00,2026-09-25T23:15:39.858602+00:00,280.3314941000426,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.055,10.0,0.5,1.5,True,1,False,True,True,0,205,133,3,True,2,464,5,4.339561290498068,3.7167443074255795,0.9268173097772898,-7.068792408908732,0.6272636351148683,0.974761469034801,0.9308282288060972,0.01,9.308282288060972e-05,6676.268738456089,True,,R,4,R_p4_A_d4b99b51147c8a20377ccfca,5045,2026-09-25T23:11:23.284556+00:00,2026-09-25T23:15:46.537809+00:00,263.25323579995893,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.055,10.0,0.5,1.5,True,10,False,True,True,0,211,137,3,True,2,365,5,3.9081036188097436,3.736938449403294,0.5676336290314916,-7.134612619449637,0.5997340974025551,0.9729260011444313,0.9611983187097918,0.01,9.611983187097918e-05,6238.710596061638,True,,R,4,R_p4_A_899491fe45fd16511ce99e15,889,2026-09-25T23:12:46.402074+00:00,2026-09-25T23:16:21.877289+00:00,215.47519600007217,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.055,10.0,0.5,1.5,True,11,False,True,True,0,210,136,3,True,2,406,6,4.543807874251868,3.728773801674933,0.8150340725769354,-7.3136499772631645,0.6188129680831442,0.9767263221284508,0.9404906724027549,0.01,9.404906724027549e-05,7621.169184025896,True,,R,4,R_p4_A_5ddeb61aef2f161acb11429a,2023,2026-09-25T23:12:59.477533+00:00,2026-09-25T23:16:50.050848+00:00,230.57328719994985,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.055,10.0,0.5,1.5,True,12,False,True,True,0,201,130,3,True,2,486,6,4.413519643657818,3.6384717049127384,0.7750479387450793,-7.361224390796449,0.6022506735321334,0.9698357738930671,0.9039702686312824,0.01,9.039702686312824e-05,8575.989993176468,True,,R,4,R_p4_A_713986953bea2e5806f38d89,279,2026-09-25T23:13:15.438883+00:00,2026-09-25T23:18:04.949944+00:00,289.511045500054,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_part4_steps.csv
+==========================================
+
+- Size: 6481354469 bytes
+- Modified: 2026-09-27T00:44:07Z
+- Rows: 2503967 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+R,4,R_p4_A_f2e5d42a6a4d2f53a62c78df,0,0,{"H_E":0.20222874473362518,"H_N":0.9869664298388879,"L_t":0.09967971219155217,"Psi_inst":0.55,"Theta_tech":0.2773874245043422,"U_sys":15.974337237790879,"actual_objective_v2":8.017614196254469,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7916191751405368,"avg_validator_dependency":0.0,"avg_wb_trend":0.00453601193061044,"avg_well_being":0.6619953465170724,"c_protective":0.0,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.0,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.725,"h_e_v2":0.20222874473362518,"h_eff_v2":0.6533671837219124,"h_n_v2":0.9869664298388879,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09967971219155217,"max_constraint_level":0.0,"max_resource_share":0.3825956699443938,"max_validator_dependency":0.0,"phi":10.0,"population":200,"population_trend":0.0,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":65.87420660631349,"rank_2_u_sys":69.49364430203065,"resilience_composite_urgency":1.0,"resilience_stock":0.30599110784818645,"resilience_trend":0.0017973323544559381,"resource_level":0.9035145300028007,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":1.0,"system_resilience":1.0,"theta_capability":0.5072298678451026,"theta_tech_v2":0.2773874245043422,"total_suppression":0.0,"transfer_state":0.5468672925014946,"trust_level":0.0,"u_sys_tail_estimate":799.9980099363696,"u_sys_total_estimate":799.9980099363696,"u_sys_v2":15.974337237790879,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.19595441669000555,"x_compute":0.09037334806378278,"x_institutional_capacity":0.3825956699443938,"x_novelty_agency":0.0039041317272341916,"x_resilience":0.042835971067110686,"x_transfer_comprehension":0.284336462507473}
+R,4,R_p4_A_f2e5d42a6a4d2f53a62c78df,0,1,{"H_E":0.0713019205402492,"H_N":0.9779806302851652,"L_t":0.1152707394480538,"Psi_inst":0.5937767809519652,"Theta_tech":0.30120872488936273,"U_sys":17.14195671644502,"actual_objective_v2":15.894681985280059,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8682679192315301,"avg_validator_dependency":0.0,"avg_wb_trend":0.007351742701705478,"avg_well_being":0.6759171276846663,"c_protective":0.8,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.42400000000000004,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.725,"h_e_v2":0.0713019205402492,"h_eff_v2":0.6445080120897487,"h_n_v2":0.9779806302851652,"institution_composite_urgency":1.0,"integral_U_sys":16.55814697711795,"l_t_v2":0.1152707394480538,"max_constraint_level":0.42400000000000004,"max_resource_share":0.2965573905529441,"max_validator_dependency":0.0,"phi":10.0,"population":195,"population_trend":-0.0075,"psi_inst_stock":0.5937767809519652,"psi_inst_trend":0.02363303428558955,"rank_10_u_sys":73.42911305458749,"rank_2_u_sys":77.14760517075717,"resilience_composite_urgency":1.0,"resilience_stock":0.3091992251683283,"resilience_trend":0.0022205678441617168,"resource_level":0.9070235164419466,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.576,"system_resilience":1.0,"theta_capability":0.5092354652749304,"theta_tech_v2":0.30120872488936273,"total_suppression":0.42400000000000004,"transfer_state":0.5914920413619339,"trust_level":0.0,"u_sys_tail_estimate":792.0351952924307,"u_sys_total_estimate":808.5933422695487,"u_sys_v2":17.14195671644502,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.22519597034955485,"x_compute":0.029588635276036186,"x_institutional_capacity":0.26716718614529594,"x_novelty_agency":0.1435692694334922,"x_resilience":0.037921548242676725,"x_transfer_comprehension":0.2965573905529441}
+R,4,R_p4_A_f2e5d42a6a4d2f53a62c78df,0,2,{"H_E":0.0632117844181288,"H_N":0.9851593237303586,"L_t":0.13060553832752844,"Psi_inst":0.6343991028567687,"Theta_tech":0.32304070397007995,"U_sys":18.289912346425034,"actual_objective_v2":17.14194517825165,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7367221358957144,"avg_validator_dependency":0.0,"avg_wb_trend":0.008827654799906912,"avg_well_being":0.6881885773803765,"c_protective":0.2,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.21400000000000002,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.725,"h_e_v2":0.0632117844181288,"h_eff_v2":0.6372968698815488,"h_n_v2":0.9851593237303586,"institution_composite_urgency":1.0,"integral_U_sys":34.274081508552975,"l_t_v2":0.13060553832752844,"max_constraint_level":0.21400000000000002,"max_resource_share":0.4245721072667153,"max_validator_dependency":0.0,"phi":10.0,"population":188,"population_trend":-0.016019230769230768,"psi_inst_stock":0.6343991028567687,"psi_inst_trend":0.028729820571353742,"rank_10_u_sys":74.30861727176561,"rank_2_u_sys":79.38609700030354,"resilience_composite_urgency":1.0,"resilience_stock":0.30184227111322265,"resilience_trend":-0.0006526887256184989,"resource_level":0.8378615190335218,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.786,"system_resilience":1.0,"theta_capability":0.5108632294901088,"theta_tech_v2":0.32304070397007995,"total_suppression":0.21400000000000002,"transfer_state":0.6323428372257405,"trust_level":0.0,"u_sys_tail_estimate":784.153789262805,"u_sys_total_estimate":818.427870771358,"u_sys_v2":18.289912346425034,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.15372114979865037,"x_compute":0.026119218486561152,"x_institutional_capacity":0.4245721072667153,"x_novelty_agency":0.049301651254075894,"x_resilience":0.013683221345461299,"x_transfer_comprehension":0.33260265184853605}
+R,4,R_p4_A_f2e5d42a6a4d2f53a62c78df,0,3,{"H_E":0.1240915857713637,"H_N":0.9842396383242334,"L_t":0.14922072073536533,"Psi_inst":0.6709591925710918,"Theta_tech":0.3339995802019228,"U_sys":19.701149880942115,"actual_objective_v2":18.36877457324998,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7516582506042961,"avg_validator_dependency":0.0,"avg_wb_trend":0.01113801771838192,"avg_well_being":0.7047174419085335,"c_protective":0.0,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.0,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.725,"h_e_v2":0.1240915857713637,"h_eff_v2":0.6658664065390406,"h_n_v2":0.9842396383242334,"institution_composite_urgency":1.0,"integral_U_sys":53.26961262223655,"l_t_v2":0.14922072073536533,"max_constraint_level":0.0,"max_resource_share":0.36054873350333355,"max_validator_dependency":0.0,"phi":10.0,"population":192,"population_trend":-0.004830482815057282,"psi_inst_stock":0.6709591925710918,"psi_inst_trend":0.031078901314244553,"rank_10_u_sys":78.48026709731035,"rank_2_u_sys":81.33967813854942,"resilience_composite_urgency":1.0,"resilience_stock":0.2926206460829404,"resilience_trend":-0.0032233696170176187,"resource_level":0.9222330323943513,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":1.0,"system_resilience":1.0,"theta_capability":0.5145598678069244,"theta_tech_v2":0.3339995802019228,"total_suppression":0.0,"transfer_state":0.649097609624013,"trust_level":0.0,"u_sys_tail_estimate":776.3535877464411,"u_sys_total_estimate":829.6232003686777,"u_sys_v2":19.701149880942115,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.35194193661959366,"x_compute":0.05299749739151383,"x_institutional_capacity":0.36054873350333355,"x_novelty_agency":0.027425010206791764,"x_resilience":0.007141541674534467,"x_transfer_comprehension":0.1999452806042327}
+R,4,R_p4_A_f2e5d42a6a4d2f53a62c78df,0,4,{"H_E":0.05,"H_N":0.9777667450139195,"L_t":0.21063720476678305,"Psi_inst":0.6182525503484778,"Theta_tech":0.5055285300907723,"U_sys":24.53709218404309,"actual_objective_v2":24.225562092662837,"agency_composite_urgency":1.0,"ai_generation":2,"allocation_entropy":0.6614179902609824,"avg_validator_dependency":0.0,"avg_wb_trend":0.009557107421042765,"avg_well_being":0.7105857586357849,"c_protective":0.2,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.41400000000000003,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.725,"h_e_v2":0.05,"h_eff_v2":0.6739435105463213,"h_n_v2":0.9777667450139195,"institution_composite_urgency":1.0,"integral_U_sys":75.38873365472915,"l_t_v2":0.21063720476678305,"max_constraint_level":0.41400000000000003,"max_resource_share":0.5486305337550973,"max_validator_dependency":0.0,"phi":10.0,"population":194,"population_trend":-0.0002563379705400972,"psi_inst_stock":0.6182525503484778,"psi_inst_trend":0.005943238253186985,"rank_10_u_sys":103.9305871639896,"rank_2_u_sys":111.4336904174573,"resilience_composite_urgency":1.0,"resilience_stock":0.297250381935051,"resilience_trend":-0.000867437976279161,"resource_level":0.8126069178095178,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.586,"system_resilience":1.0,"theta_capability":0.5149089564925391,"theta_tech_v2":0.5055285300907723,"total_suppression":0.41400000000000003,"transfer_state":0.6841878486616116,"trust_level":0.0,"u_sys_tail_estimate":768.6252953826934,"u_sys_total_estimate":844.0140290374225,"u_sys_v2":24.53709218404309,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.14845977454364953,"x_compute":0.013463525949510708,"x_institutional_capacity":0.241299796010195,"x_novelty_agency":0.010660147403301226,"x_resilience":0.037486222338246285,"x_transfer_comprehension":0.5486305337550973}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_progress.json
+==========================================
+
+- Size: 18964 bytes
+- Modified: 2026-09-27T01:00:02Z
+- Structure: object with 19 top-level keys
+- Keys: updated_utc, status, machine_label, controller_pid, cpu_budget, maximum_workers, parts, current_cap, requested_cap, cap_source, active_children, elapsed_seconds, mean_wall_seconds_per_arm, estimated_finish_local, eta_assumption, resume_counts, schedule_path, runtime_control_path, events
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_runtime_control_YOTKOTEST.json
+==========================================
+
+- Size: 44 bytes
+- Modified: 2026-09-24T12:30:01Z
+- Structure: object with 2 top-level keys
+- Keys: workers, until
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_schedule.json
+==========================================
+
+- Size: 297 bytes
+- Modified: 2026-09-24T11:05:07Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_schedule_YOTKOTEST.json
+==========================================
+
+- Size: 297 bytes
+- Modified: 2026-09-24T11:42:43Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_environment_xcheck_result.json
+==========================================
+
+- Size: 807 bytes
+- Modified: 2026-09-24T11:42:06Z
+- Structure: object with 6 top-level keys
+- Keys: result, machine_labels, executor_hashes, bytecode_sha256, test_fixture, environments
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_final_unit_results.json
+==========================================
+
+- Size: 969 bytes
+- Modified: 2026-09-24T11:42:07Z
+- Structure: object with 9 top-level keys
+- Keys: synthetic_fixture, schedule_clock, streaming_hash_boundary, streaming_copy, cross_machine_environment_binding, same_machine_version_change_refused, test_permission_ignored_in_registered_mode, changed_attested_environment_refused, registered_runs_executed
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_interruption_before.json
+==========================================
+
+- Size: 568 bytes
+- Modified: 2026-09-24T11:44:57Z
+- Structure: object with 3 top-level keys
+- Keys: completion_hashes, killed_controller_pid, initial_child_pids
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_live_scheduler_results.json
+==========================================
+
+- Size: 35242 bytes
+- Modified: 2026-09-24T11:51:50Z
+- Structure: object with 7 top-level keys
+- Keys: initial_cap, reduced, raised, named_mode, expired, refused, no_worker_killed_for_cap_change
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_machine_xcheck_result.json
+==========================================
+
+- Size: 700 bytes
+- Modified: 2026-09-24T12:00:24Z
+- Structure: object with 6 top-level keys
+- Keys: result, machine_labels, executor_hashes, bytecode_sha256, test_fixture, purpose
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_manifest.json
+==========================================
+
+- Size: 34228 bytes
+- Modified: 2026-09-24T11:51:49Z
+- Structure: object with 12 top-level keys
+- Keys: status, machine_label, identity, proof, parts, resume_counts, events, cpu_budget, priority, non_registered, retry_events, files
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_part1_manifest.json
+==========================================
+
+- Size: 2845 bytes
+- Modified: 2026-09-24T11:44:37Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_part1_runs.csv
+==========================================
+
+- Size: 1499 bytes
+- Modified: 2026-09-24T11:44:37Z
+- Rows: 2 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+B,0.06,25.0,1.0,3.0,True,150,False,True,False,25,206,133,1,False,0,500,-1,-1.0,-1.0,-3.5583498051071834,-7.0135608015139095,0.7593858863910772,0.9213438735081165,0.9439209259104387,0.6996555340549495,0.05588005574943174,7646.875088335619,False,,O,1,O_p1_B_5d277a51fca4df2641468951,4859,2026-09-24T11:42:47.918249+00:00,2026-09-24T11:44:36.956894+00:00,109.03862570005003,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+B,0.06,25.0,1.0,3.0,True,151,False,True,True,0,203,131,1,False,0,441,-1,-1.0,-1.0,-2.8659200602523693,-6.458757110203358,0.7514849537438723,0.9654243039786377,0.946882190860673,0.01,9.468821908606731e-05,5901.830122271898,False,,O,1,O_p1_B_f919e2ba22ecc161f3be7cdc,3877,2026-09-24T11:42:47.927663+00:00,2026-09-24T11:44:24.703231+00:00,96.77555660001235,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_part1_steps.csv
+==========================================
+
+- Size: 1941684 bytes
+- Modified: 2026-09-24T11:44:37Z
+- Rows: 941 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,1,O_p1_B_5d277a51fca4df2641468951,150,0,{"H_E":0.47353335550612285,"H_N":0.9829141045901861,"L_t":0.09803786484860372,"Psi_inst":0.5325568678222371,"Theta_tech":0.28138843671429997,"U_sys":15.843006567514422,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8843205254991839,"avg_validator_dependency":0.0,"avg_wb_trend":0.004019064593598653,"avg_well_being":0.6689335217554602,"c_protective":0.2,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.41400000000000003,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.47353335550612285,"h_eff_v2":0.6542166725987948,"h_n_v2":0.9829141045901861,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09803786484860372,"max_constraint_level":0.41400000000000003,"max_resource_share":0.25662692108119756,"max_validator_dependency":0.0,"phi":25.0,"population":199,"population_trend":-0.0015,"psi_inst_stock":0.5325568678222371,"psi_inst_trend":0.00976706034667113,"rank_10_u_sys":42.74334575774749,"rank_2_u_sys":42.81419851624058,"resilience_composite_urgency":1.0,"resilience_stock":0.29648275649415057,"resilience_trend":-0.0010551730517548263,"resource_level":0.9068232973166526,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.586,"system_resilience":1.0,"theta_capability":0.5205301536864958,"theta_tech_v2":0.28138843671429997,"total_suppression":0.41400000000000003,"transfer_state":0.5405804730455139,"trust_level":0.0,"u_sys_tail_estimate":799.9988577753102,"u_sys_total_estimate":799.9988577753102,"u_sys_v2":15.843006567514422,"x_bio_welfare":0.22352747763877143,"x_compute":0.25662692108119756,"x_institutional_capacity":0.19344030828289596,"x_novelty_agency":0.05330588849777841,"x_resilience":0.020197039271787058,"x_transfer_comprehension":0.2529023652275697}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,1,{"H_E":0.3593937997650877,"H_N":1.0,"L_t":0.12100740722340736,"Psi_inst":0.5784304509080234,"Theta_tech":0.3074626675183118,"U_sys":17.600961882017504,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8711761331252084,"avg_validator_dependency":0.0,"avg_wb_trend":0.007280959701968003,"avg_well_being":0.6838255700436233,"c_protective":0.6,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.3593937997650877,"h_eff_v2":0.6804064421934052,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":16.72198422476596,"l_t_v2":0.12100740722340736,"max_constraint_level":1.0,"max_resource_share":0.2687694084909543,"max_validator_dependency":0.0,"phi":25.0,"population":199,"population_trend":-0.00105,"psi_inst_stock":0.5784304509080234,"psi_inst_trend":0.02059901716840567,"rank_10_u_sys":119.39257224664568,"rank_2_u_sys":134.59344603811758,"resilience_composite_urgency":1.0,"resilience_stock":0.2925931531846282,"resilience_trend":-0.0019055021290850897,"resource_level":0.9091626359863452,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5337545376201146,"theta_tech_v2":0.3074626675183118,"total_suppression":1.0,"transfer_state":0.5760375712948788,"trust_level":0.0,"u_sys_tail_estimate":792.038545544062,"u_sys_total_estimate":808.760529768828,"u_sys_v2":17.600961882017504,"x_bio_welfare":0.24302196655287653,"x_compute":0.17813614522429463,"x_institutional_capacity":0.2687694084909543,"x_novelty_agency":0.044191210367589356,"x_resilience":0.018305541594703986,"x_transfer_comprehension":0.2475757277695812}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,2,{"H_E":0.5019851723078251,"H_N":0.9903022660279666,"L_t":0.14381590857064516,"Psi_inst":0.620587405817221,"Theta_tech":0.326779383676877,"U_sys":19.346835409182606,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7711633766772615,"avg_validator_dependency":0.0,"avg_wb_trend":0.008525598687259625,"avg_well_being":0.6952553263632301,"c_protective":0.2,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.8140000000000001,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.5019851723078251,"h_eff_v2":0.7091683129204858,"h_n_v2":0.9903022660279666,"institution_composite_urgency":1.0,"integral_U_sys":35.19588287036602,"l_t_v2":0.14381590857064516,"max_constraint_level":0.8140000000000001,"max_resource_share":0.3723775442354233,"max_validator_dependency":0.0,"phi":25.0,"population":206,"population_trend":0.009817763819095477,"psi_inst_stock":0.620587405817221,"psi_inst_trend":0.027066398490643274,"rank_10_u_sys":130.90812179912515,"rank_2_u_sys":137.37318568243597,"resilience_composite_urgency":1.0,"resilience_stock":0.2824205693826829,"resilience_trend":-0.004385626630943153,"resource_level":0.9017987386891148,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.18599999999999994,"system_resilience":1.0,"theta_capability":0.5543748244324995,"theta_tech_v2":0.326779383676877,"total_suppression":0.8140000000000001,"transfer_state":0.5894556701982153,"trust_level":0.0,"u_sys_tail_estimate":784.1578579549356,"u_sys_total_estimate":819.3537408253017,"u_sys_v2":19.346835409182606,"x_bio_welfare":0.1816561557426229,"x_compute":0.27885017116738253,"x_institutional_capacity":0.3723775442354233,"x_novelty_agency":0.009772099689948776,"x_resilience":0.002234749000500164,"x_transfer_comprehension":0.1551092801641223}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,3,{"H_E":0.23762260482944297,"H_N":0.9881635779176592,"L_t":0.16515471076420424,"Psi_inst":0.6585286652354989,"Theta_tech":0.34761155934904997,"U_sys":20.975894759861806,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8691236853844433,"avg_validator_dependency":0.0,"avg_wb_trend":0.010047134379378004,"avg_well_being":0.7088527106908843,"c_protective":0.4,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.256,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.23762260482944297,"h_eff_v2":0.7214763037373236,"h_n_v2":0.9881635779176592,"institution_composite_urgency":1.0,"integral_U_sys":55.35724795488822,"l_t_v2":0.16515471076420424,"max_constraint_level":0.256,"max_resource_share":0.3347139255384774,"max_validator_dependency":0.0,"phi":25.0,"population":206,"population_trend":0.006872434673366834,"psi_inst_stock":0.6585286652354989,"psi_inst_trend":0.030328856768933647,"rank_10_u_sys":142.25879219886392,"rank_2_u_sys":153.8850315185931,"resilience_composite_urgency":1.0,"resilience_stock":0.294675592296025,"resilience_trend":0.0006065682323424318,"resource_level":0.9064940254784775,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.744,"system_resilience":1.0,"theta_capability":0.5603381176636146,"theta_tech_v2":0.34761155934904997,"total_suppression":0.256,"transfer_state":0.6203603652709739,"trust_level":0.0,"u_sys_tail_estimate":776.3547106161424,"u_sys_total_estimate":831.7119585710306,"u_sys_v2":20.975894759861806,"x_bio_welfare":0.22078354565397823,"x_compute":0.108525430659251,"x_institutional_capacity":0.3347139255384774,"x_novelty_agency":0.033998427591906584,"x_resilience":0.052727360093485894,"x_transfer_comprehension":0.24925131046290094}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,4,{"H_E":0.18248738052285607,"H_N":0.9855067890229092,"L_t":0.1856053867691108,"Psi_inst":0.6926757987119491,"Theta_tech":0.37114275491052184,"U_sys":22.534685856196113,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8420683587910801,"avg_validator_dependency":0.0,"avg_wb_trend":0.010905730679939784,"avg_well_being":0.7217618327388016,"c_protective":0.6,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.926,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.18248738052285607,"h_eff_v2":0.721970704015032,"h_n_v2":0.9855067890229092,"institution_composite_urgency":1.0,"integral_U_sys":77.11253826291718,"l_t_v2":0.1856053867691108,"max_constraint_level":0.926,"max_resource_share":0.33490117066698805,"max_validator_dependency":0.0,"phi":25.0,"population":203,"population_trend":0.00044177223252183165,"psi_inst_stock":0.6926757987119491,"psi_inst_trend":0.0314743397811886,"rank_10_u_sys":149.7655631674483,"rank_2_u_sys":160.17933552614855,"resilience_composite_urgency":1.0,"resilience_stock":0.3005148433341721,"resilience_trend":0.002176373074083828,"resource_level":0.9062319547301241,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.07399999999999995,"system_resilience":1.0,"theta_capability":0.5637688578495725,"theta_tech_v2":0.37114275491052184,"total_suppression":0.926,"transfer_state":0.6583243287438766,"trust_level":0.0,"u_sys_tail_estimate":768.6294843823163,"u_sys_total_estimate":845.7420226452334,"u_sys_v2":22.534685856196113,"x_bio_welfare":0.21859962275103342,"x_compute":0.08059557586423344,"x_institutional_capacity":0.28999029939036197,"x_novelty_agency":0.034960183437692284,"x_resilience":0.0409531478896907,"x_transfer_comprehension":0.33490117066698805}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_part2_manifest.json
+==========================================
+
+- Size: 3519 bytes
+- Modified: 2026-09-24T11:46:53Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_part2_runs.csv
+==========================================
+
+- Size: 2536 bytes
+- Modified: 2026-09-24T11:46:52Z
+- Rows: 4 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+A,0.055,25.0,1.0,1.5,True,150,False,True,True,0,209,135,2,True,1,469,6,5.1390841867982395,3.6603199031407168,1.4787642836575228,-5.311652823711759,0.6533147461663101,0.9556917351607559,0.9702934835202024,0.01,9.702934835202024e-05,6397.322145067296,True,,O,2,O_p2_A_333d7e2994dc3327f52160a6,4183,2026-09-24T11:42:47.943348+00:00,2026-09-24T11:44:30.535962+00:00,102.59259320003912,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.055,25.0,1.0,1.5,True,151,False,True,False,20,210,136,2,True,1,500,6,5.662425364648186,3.6765150769777453,1.9859102876704409,-5.952557096452712,0.6957253616548078,0.9682740198105072,0.9215506064700764,1.0104791889204294,0.0639419759639705,7432.748431994018,True,,O,2,O_p2_A_c0a5bd479a50328512c32432,6898,2026-09-24T11:42:47.960401+00:00,2026-09-24T11:44:37.545068+00:00,109.58465039997827,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.066,25.0,1.0,1.5,True,150,True,True,False,125,244,158,2,True,1,500,7,4.903267877552199,3.7019644588647775,1.2013034186874219,-6.925883876578873,0.6720396992217537,0.9690731960196204,0.9575093726626009,0.9768834887653338,0.4636107958046613,18573.61519887107,True,,O,2,O_p2_A_1838f22be8317bf11ca2d2c7,7570,2026-09-24T11:45:00.526282+00:00,2026-09-24T11:46:51.705169+00:00,111.17887300002621,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.066,25.0,1.0,1.5,True,151,True,True,False,74,267,173,2,True,1,500,6,5.017287506829909,3.755478632150974,1.2618088746789353,-7.344619190803887,0.6761275761927732,0.9849361888713548,0.9311240833545481,0.9989137771292049,0.28147374199475567,20682.168982528918,True,,O,2,O_p2_A_2fa60758a32b0829125ca58a,3481,2026-09-24T11:45:00.546892+00:00,2026-09-24T11:46:52.439057+00:00,111.89215500000864,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_part2_steps.csv
+==========================================
+
+- Size: 4063326 bytes
+- Modified: 2026-09-24T11:46:53Z
+- Rows: 1969 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,0,{"H_E":0.3023658880539488,"H_N":0.9827148323858446,"L_t":0.09921172214937193,"Psi_inst":0.55,"Theta_tech":0.2796188411961623,"U_sys":15.936907870943312,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8760283127124325,"avg_validator_dependency":0.0,"avg_wb_trend":8.667715011317911e-05,"avg_well_being":0.656457109640267,"c_protective":0.0,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.8,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.3023658880539488,"h_eff_v2":0.645110138468631,"h_n_v2":0.9827148323858446,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09921172214937193,"max_constraint_level":0.8,"max_resource_share":0.3307000666567519,"max_validator_dependency":0.0,"phi":25.0,"population":200,"population_trend":0.0,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":42.71264869360508,"rank_2_u_sys":42.84868934738577,"resilience_composite_urgency":1.0,"resilience_stock":0.29842435257167294,"resilience_trend":-0.0004726942284981161,"resource_level":0.7500036819605677,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.19999999999999996,"system_resilience":1.0,"theta_capability":0.5115219362744848,"theta_tech_v2":0.2796188411961623,"total_suppression":0.8,"transfer_state":0.5466409578300424,"trust_level":0.0,"u_sys_tail_estimate":799.9984990337856,"u_sys_total_estimate":799.9984990337856,"u_sys_v2":15.936907870943312,"x_bio_welfare":0.13541743374178491,"x_compute":0.1440242034310603,"x_institutional_capacity":0.3307000666567519,"x_novelty_agency":0.08183361994477921,"x_resilience":0.024819887075411825,"x_transfer_comprehension":0.28320478915021174}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,1,{"H_E":0.4679655820968739,"H_N":0.9861447595904745,"L_t":0.12228936667990103,"Psi_inst":0.5814556594513343,"Theta_tech":0.31442220367825763,"U_sys":17.70352259767281,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8481492791578814,"avg_validator_dependency":0.0,"avg_wb_trend":0.0036046371444088785,"avg_well_being":0.6682703201046992,"c_protective":0.4,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.8560000000000001,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.4679655820968739,"h_eff_v2":0.6688964432735144,"h_n_v2":0.9861447595904745,"institution_composite_urgency":1.0,"integral_U_sys":16.82021523430806,"l_t_v2":0.12228936667990103,"max_constraint_level":0.8560000000000001,"max_resource_share":0.30369611613170644,"max_validator_dependency":0.0,"phi":25.0,"population":203,"population_trend":0.0045,"psi_inst_stock":0.5814556594513343,"psi_inst_trend":0.019936697835400273,"rank_10_u_sys":117.89467588316391,"rank_2_u_sys":133.31643479527384,"resilience_composite_urgency":1.0,"resilience_stock":0.29315981551277687,"resilience_trend":-0.0019102470776175017,"resource_level":0.9025736126153412,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.1439999999999999,"system_resilience":1.0,"theta_capability":0.5311393465464092,"theta_tech_v2":0.31442220367825763,"total_suppression":0.8560000000000001,"transfer_state":0.5919768620470381,"trust_level":0.0,"u_sys_tail_estimate":792.0387303272234,"u_sys_total_estimate":808.8589455615315,"u_sys_v2":17.70352259767281,"x_bio_welfare":0.18811343846117642,"x_compute":0.2524188385706063,"x_institutional_capacity":0.21116208841515574,"x_novelty_agency":0.02902288687443923,"x_resilience":0.015586631546915886,"x_transfer_comprehension":0.30369611613170644}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,2,{"H_E":0.15070802044765563,"H_N":1.0,"L_t":0.1441392963334054,"Psi_inst":0.6233100935062008,"Theta_tech":0.33639966097402635,"U_sys":19.372672781198393,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8433825830746682,"avg_validator_dependency":0.0,"avg_wb_trend":0.006226555214743539,"avg_well_being":0.6806146841502236,"c_protective":0.8,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.15070802044765563,"h_eff_v2":0.6874208309917259,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":35.35831292374366,"l_t_v2":0.1441392963334054,"max_constraint_level":1.0,"max_resource_share":0.3243695042983644,"max_validator_dependency":0.0,"phi":25.0,"population":202,"population_trend":0.0016721674876847288,"psi_inst_stock":0.6233100935062008,"psi_inst_trend":0.026512018701240155,"rank_10_u_sys":126.26926310144215,"rank_2_u_sys":133.9565059286953,"resilience_composite_urgency":1.0,"resilience_stock":0.2915706802350206,"resilience_trend":-0.0018139135376591356,"resource_level":0.9085916155778326,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5348096509579244,"theta_tech_v2":0.33639966097402635,"total_suppression":1.0,"transfer_state":0.6290082095031083,"trust_level":0.0,"u_sys_tail_estimate":784.1564973720286,"u_sys_total_estimate":819.5148102957723,"u_sys_v2":19.372672781198393,"x_bio_welfare":0.23826346314860533,"x_compute":0.06534089673544657,"x_institutional_capacity":0.3243695042983644,"x_novelty_agency":0.06804753279043493,"x_resilience":0.02283343472327847,"x_transfer_comprehension":0.28114516830387015}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,3,{"H_E":0.05,"H_N":0.9908664418506385,"L_t":0.1670740259824021,"Psi_inst":0.6609790841555807,"Theta_tech":0.3547404258582088,"U_sys":21.129314551357535,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8311282348269635,"avg_validator_dependency":0.0,"avg_wb_trend":0.007609803098317619,"avg_well_being":0.6914520656435474,"c_protective":0.6,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.526,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.05,"h_eff_v2":0.7125421139142759,"h_n_v2":0.9908664418506385,"institution_composite_urgency":1.0,"integral_U_sys":55.609306590021625,"l_t_v2":0.1670740259824021,"max_constraint_level":0.526,"max_resource_share":0.33856866273760156,"max_validator_dependency":0.0,"phi":25.0,"population":208,"population_trend":0.01008140833048822,"psi_inst_stock":0.6609790841555807,"psi_inst_trend":0.029859110285682076,"rank_10_u_sys":130.53849234039757,"rank_2_u_sys":142.52183055949976,"resilience_composite_urgency":1.0,"resilience_stock":0.299236687197878,"resilience_trend":0.0010300626124958275,"resource_level":0.9005667413597293,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.474,"system_resilience":1.0,"theta_capability":0.5338048366266187,"theta_tech_v2":0.3547404258582088,"total_suppression":0.526,"transfer_state":0.6645507899478619,"trust_level":0.0,"u_sys_tail_estimate":776.3501145871221,"u_sys_total_estimate":831.9594211771438,"u_sys_v2":21.129314551357535,"x_bio_welfare":0.17138951133107652,"x_compute":0.009195852707381214,"x_institutional_capacity":0.33856866273760156,"x_novelty_agency":0.1442135172222857,"x_resilience":0.044415449026332994,"x_transfer_comprehension":0.29221700697532216}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,4,{"H_E":0.5300261699719448,"H_N":1.0,"L_t":0.19428315997961404,"Psi_inst":0.6822490029639636,"Theta_tech":0.38833465714167786,"U_sys":23.228937358748755,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7610145429991885,"avg_validator_dependency":0.0,"avg_wb_trend":0.008410127921151922,"avg_well_being":0.7017296181513127,"c_protective":0.2,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.5300261699719448,"h_eff_v2":0.7333074509681218,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":77.78843254507477,"l_t_v2":0.19428315997961404,"max_constraint_level":1.0,"max_resource_share":0.3125626299916179,"max_validator_dependency":0.0,"phi":25.0,"population":209,"population_trend":0.008499293523649445,"psi_inst_stock":0.6822490029639636,"psi_inst_trend":0.02728235284249233,"rank_10_u_sys":141.63482014802796,"rank_2_u_sys":151.13006783130913,"resilience_composite_urgency":1.0,"resilience_stock":0.28760985229931396,"resilience_trend":-0.0027670066408221304,"resource_level":0.90029668149163,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5562770993271162,"theta_tech_v2":0.38833465714167786,"total_suppression":1.0,"transfer_state":0.6980957109530757,"trust_level":0.0,"u_sys_tail_estimate":768.6305271124189,"u_sys_total_estimate":846.4189596574937,"u_sys_v2":23.228937358748755,"x_bio_welfare":0.1691390124302496,"x_compute":0.302031306647855,"x_institutional_capacity":0.2153083055633682,"x_novelty_agency":0.0002883464021921219,"x_resilience":0.000670398964717383,"x_transfer_comprehension":0.3125626299916179}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_part3_manifest.json
+==========================================
+
+- Size: 3519 bytes
+- Modified: 2026-09-24T11:48:45Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_part3_runs.csv
+==========================================
+
+- Size: 2544 bytes
+- Modified: 2026-09-24T11:48:44Z
+- Rows: 4 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+C,0.06,25.0,1.0,2.5,False,150,False,True,False,15,210,136,2,True,1,500,20,4.5371618982878985,3.2223457834635507,1.3148161148243478,-14.655156997437599,0.5809231728982273,0.9871266671224113,0.9136051497014284,1.1849134854871697,0.09421256317543034,12261.822034576486,True,,O,3,O_p3_C_0de9b507be0110cdce85a9b2,8377,2026-09-24T11:45:00.562175+00:00,2026-09-24T11:46:52.764502+00:00,112.20231729996158,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,False,151,False,True,False,17,241,156,2,True,1,500,11,3.788701238491008,3.3838449160873165,0.4048563224036914,-13.792771083378287,0.5649506425027977,0.9893611460765984,0.9251240561214183,1.0289056748119016,0.058410598633313694,11177.234647912928,True,,O,3,O_p3_C_451abe9d26b28c4cef9ccd3d,8439,2026-09-24T11:45:00.590100+00:00,2026-09-24T11:46:51.989297+00:00,111.39917979994789,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,True,150,False,True,False,10,199,129,2,True,1,500,30,4.7260121076689074,3.2795770750994873,1.4464350325694202,-11.990707751168399,0.5617510312725639,0.9912409577157777,0.9054195599014567,1.115897467118953,0.0550965730312354,9170.286292310828,True,,O,3,O_p3_C_58359a2bbed8c2243c6e6f4f,8928,2026-09-24T11:46:52.318370+00:00,2026-09-24T11:48:43.645207+00:00,111.32682329998352,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,True,151,False,True,True,0,198,128,2,True,1,335,16,4.091432191365087,3.33714049642344,0.7542916949416467,-12.590782791014696,0.5418526263347925,0.9899726096011728,0.8007393592263902,0.01,8.007393592263902e-05,6717.660225935029,True,,O,3,O_p3_C_7ded96c31cc385c178bc6e42,5544,2026-09-24T11:46:52.551074+00:00,2026-09-24T11:48:06.695052+00:00,74.14394310000353,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_part3_steps.csv
+==========================================
+
+- Size: 3772648 bytes
+- Modified: 2026-09-24T11:48:44Z
+- Rows: 1835 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,0,{"H_E":0.2220975391399681,"H_N":0.9921934192042836,"L_t":0.09721847235225083,"Psi_inst":0.55,"Theta_tech":0.27494808235337653,"U_sys":15.777441210360172,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7779472760554174,"avg_validator_dependency":0.0,"avg_wb_trend":0.005301770653480286,"avg_well_being":0.6645603865369973,"c_protective":0.4,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.05600000000000001,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.2220975391399681,"h_eff_v2":0.6428881311312171,"h_n_v2":0.9921934192042836,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09721847235225083,"max_constraint_level":0.05600000000000001,"max_resource_share":0.3665195393189093,"max_validator_dependency":0.0,"phi":25.0,"population":195,"population_trend":-0.0075,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":42.720514117445234,"rank_2_u_sys":42.80269789655769,"resilience_composite_urgency":1.0,"resilience_stock":0.2941518161718278,"resilience_trend":-0.0017544551484516612,"resource_level":0.9106076884569361,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.944,"system_resilience":1.0,"theta_capability":0.5080369322978762,"theta_tech_v2":0.27494808235337653,"total_suppression":0.05600000000000001,"transfer_state":0.5411970368173289,"trust_level":0.0,"u_sys_tail_estimate":799.9981453147132,"u_sys_total_estimate":799.9981453147132,"u_sys_v2":15.777441210360172,"x_bio_welfare":0.25506407047446755,"x_compute":0.10046165372345216,"x_institutional_capacity":0.3665195393189093,"x_novelty_agency":0.007322371035031555,"x_resilience":0.014647181361494767,"x_transfer_comprehension":0.2559851840866446}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,1,{"H_E":0.38681758129013966,"H_N":1.0,"L_t":0.11612679531873574,"Psi_inst":0.5950000000000001,"Theta_tech":0.29966040374145214,"U_sys":17.210514854210466,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8599892568690946,"avg_validator_dependency":0.0,"avg_wb_trend":0.00787673409819213,"avg_well_being":0.6784453686728504,"c_protective":1.0,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.38681758129013966,"h_eff_v2":0.6513075539259364,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":16.49397803228532,"l_t_v2":0.11612679531873574,"max_constraint_level":1.0,"max_resource_share":0.33731975879906306,"max_validator_dependency":0.0,"phi":25.0,"population":192,"population_trend":-0.009865384615384616,"psi_inst_stock":0.5950000000000001,"psi_inst_trend":0.02400000000000002,"rank_10_u_sys":119.92851740663816,"rank_2_u_sys":124.27036449641574,"resilience_composite_urgency":1.0,"resilience_stock":0.30156264160749563,"resilience_trend":0.0009951290267841905,"resource_level":0.9011426219099204,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5232860554037947,"theta_tech_v2":0.29966040374145214,"total_suppression":1.0,"transfer_state":0.5726512309031789,"trust_level":0.0,"u_sys_tail_estimate":792.0386041344716,"u_sys_total_estimate":808.5325821667569,"u_sys_v2":17.210514854210466,"x_bio_welfare":0.17618851591600315,"x_compute":0.19563712151015417,"x_institutional_capacity":0.33731975879906306,"x_novelty_agency":0.0184397735647528,"x_resilience":0.04454534137211238,"x_transfer_comprehension":0.22786948883791447}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,2,{"H_E":0.2550986066050793,"H_N":0.9876494472706313,"L_t":0.13024504011039545,"Psi_inst":0.6159335422725812,"Theta_tech":0.32710593932772225,"U_sys":18.261154195120152,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8875639360814304,"avg_validator_dependency":0.0,"avg_wb_trend":0.00977052755479749,"avg_well_being":0.6926347476263938,"c_protective":0.6,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.126,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.2550986066050793,"h_eff_v2":0.6464559077426908,"h_n_v2":0.9876494472706313,"institution_composite_urgency":1.0,"integral_U_sys":34.22981255695063,"l_t_v2":0.13024504011039545,"max_constraint_level":0.126,"max_resource_share":0.37777091700216053,"max_validator_dependency":0.0,"phi":25.0,"population":189,"population_trend":-0.01159326923076923,"psi_inst_stock":0.6159335422725812,"psi_inst_trend":0.023080062681774358,"rank_10_u_sys":126.27899020278672,"rank_2_u_sys":130.99290896757628,"resilience_composite_urgency":1.0,"resilience_stock":0.3021170473786435,"resilience_trend":0.0008629120500932877,"resource_level":0.9012399002429702,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.874,"system_resilience":1.0,"theta_capability":0.5315458623047031,"theta_tech_v2":0.32710593932772225,"total_suppression":0.126,"transfer_state":0.6153861078128611,"trust_level":0.0,"u_sys_tail_estimate":784.1572896932403,"u_sys_total_estimate":818.3871022501909,"u_sys_v2":18.261154195120152,"x_bio_welfare":0.17699916869141782,"x_compute":0.11780137088872751,"x_institutional_capacity":0.1837888285117324,"x_novelty_agency":0.11330180356299185,"x_resilience":0.03033791134296984,"x_transfer_comprehension":0.37777091700216053}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,3,{"H_E":0.39580039813390455,"H_N":0.9859139111031595,"L_t":0.14360120530941725,"Psi_inst":0.643590152585205,"Theta_tech":0.35295849229456355,"U_sys":19.251630249069525,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8502469021536224,"avg_validator_dependency":0.0,"avg_wb_trend":0.01277861237696799,"avg_well_being":0.7124322245884263,"c_protective":0.8,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.42400000000000004,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.39580039813390455,"h_eff_v2":0.6321571568459099,"h_n_v2":0.9859139111031595,"institution_composite_urgency":1.0,"integral_U_sys":52.986204779045465,"l_t_v2":0.14360120530941725,"max_constraint_level":0.42400000000000004,"max_resource_share":0.26988464321250755,"max_validator_dependency":0.0,"phi":25.0,"population":180,"population_trend":-0.022401002747252742,"psi_inst_stock":0.643590152585205,"psi_inst_trend":0.024453026971029183,"rank_10_u_sys":133.64137759300246,"rank_2_u_sys":142.9650390288167,"resilience_composite_urgency":1.0,"resilience_stock":0.2960079280819933,"resilience_trend":-0.0012286973539297587,"resource_level":0.912386157185501,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.576,"system_resilience":1.0,"theta_capability":0.5460917905966258,"theta_tech_v2":0.35295849229456355,"total_suppression":0.42400000000000004,"transfer_state":0.6463354666235563,"trust_level":0.0,"u_sys_tail_estimate":776.3551991290899,"u_sys_total_estimate":829.3414039081354,"u_sys_v2":19.251630249069525,"x_bio_welfare":0.26988464321250755,"x_compute":0.20154026758947316,"x_institutional_capacity":0.22386347518128116,"x_novelty_agency":0.027640988940671816,"x_resilience":0.014630777116159496,"x_transfer_comprehension":0.2624398479599068}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,4,{"H_E":0.39582514132426927,"H_N":1.0,"L_t":0.16670961546969615,"Psi_inst":0.6776988875659788,"Theta_tech":0.3751749989940354,"U_sys":21.023051694410963,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8830004242544138,"avg_validator_dependency":0.0,"avg_wb_trend":0.012566871680336173,"avg_well_being":0.7245050346432882,"c_protective":0.6,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.39582514132426927,"h_eff_v2":0.6556770563521759,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":73.12354575078571,"l_t_v2":0.16670961546969615,"max_constraint_level":1.0,"max_resource_share":0.2657625010877015,"max_validator_dependency":0.0,"phi":25.0,"population":181,"population_trend":-0.014014035256410252,"psi_inst_stock":0.6776988875659788,"psi_inst_trend":0.027349739373952575,"rank_10_u_sys":133.17161141167145,"rank_2_u_sys":143.4944079833402,"resilience_composite_urgency":1.0,"resilience_stock":0.2977009927570413,"resilience_trend":-0.00035216874523641927,"resource_level":0.9067772353452239,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5599117329652241,"theta_tech_v2":0.3751749989940354,"total_suppression":1.0,"transfer_state":0.6700609701589114,"trust_level":0.0,"u_sys_tail_estimate":768.6303427371295,"u_sys_total_estimate":841.7538884879152,"u_sys_v2":21.023051694410963,"x_bio_welfare":0.22314362787686545,"x_compute":0.20155664873037016,"x_institutional_capacity":0.2657625010877015,"x_novelty_agency":0.03628002835249206,"x_resilience":0.031461942964017164,"x_transfer_comprehension":0.24179525098855367}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_part4_manifest.json
+==========================================
+
+- Size: 4149 bytes
+- Modified: 2026-09-24T11:51:48Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_part4_runs.csv
+==========================================
+
+- Size: 3539 bytes
+- Modified: 2026-09-24T11:51:47Z
+- Rows: 6 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+A,0.066,25.0,1.0,1.5,True,150,True,True,False,83,274,178,2,True,1,500,6,5.795015231633386,3.716227422313727,2.0787878093196586,-7.064312347225131,0.6561507223396873,0.9405813743241374,0.9252076204373831,0.9257447222730577,0.27268635383049433,18346.712503322644,True,,R,4,R_p4_A_1838f22be8317bf11ca2d2c7,7570,2026-09-24T11:46:52.997330+00:00,2026-09-24T11:49:21.798108+00:00,148.80075910000596,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.066,25.0,1.0,1.5,True,151,True,True,False,41,273,177,2,True,1,500,6,4.968523745217993,3.755478632150974,1.2130451130670195,-7.101139141114669,0.655094037549544,0.9333798129086954,0.9489122520896174,0.9171773253083929,0.13576443873153962,16443.550560814183,True,,R,4,R_p4_A_2fa60758a32b0829125ca58a,3481,2026-09-24T11:46:53.249362+00:00,2026-09-24T11:49:23.646325+00:00,150.3969430999714,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,False,150,False,True,False,1,195,126,2,True,1,500,30,4.163378734031831,3.147436550175587,1.0159421838562435,-11.243025677995425,0.5672751437277725,0.9867881929502078,0.8719022825931184,1.399451034961745,0.012201845517604476,7935.458199356166,True,,R,4,R_p4_C_0de9b507be0110cdce85a9b2,8377,2026-09-24T11:48:07.188776+00:00,2026-09-24T11:50:36.664950+00:00,149.47614899999462,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,False,151,True,True,False,32,221,143,2,True,1,500,34,3.391965489082459,3.1749982420425797,0.21696724703987913,-14.401328817434486,0.5873932409991347,0.9879145686204517,0.8653977818006415,1.025564213021852,0.10223274886099751,12245.380582549615,True,,R,4,R_p4_C_451abe9d26b28c4cef9ccd3d,8439,2026-09-24T11:48:44.255224+00:00,2026-09-24T11:51:11.477047+00:00,147.22179939999478,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,True,150,False,True,False,17,199,129,2,True,1,500,63,3.462290403986451,3.191787242649728,0.2705031613367228,-11.226095492818647,0.5798908873708586,0.9914319578880365,0.8845255292667482,0.9424683270454288,0.05262485321719694,8960.454866662076,True,,R,4,R_p4_C_58359a2bbed8c2243c6e6f4f,8928,2026-09-24T11:49:22.356686+00:00,2026-09-24T11:51:47.170933+00:00,144.81423650000943,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_part4_steps.csv
+==========================================
+
+- Size: 7774620 bytes
+- Modified: 2026-09-24T11:51:47Z
+- Rows: 3000 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,0,{"H_E":0.5175300696938225,"H_N":0.9858999588093948,"L_t":0.09880896411299368,"Psi_inst":0.55,"Theta_tech":0.27235393974042305,"U_sys":15.904695521970815,"actual_objective_v2":8.017477169433965,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8039757040009139,"avg_validator_dependency":0.0,"avg_wb_trend":0.004934341194429292,"avg_well_being":0.6724253313205909,"c_protective":0.8,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.22400000000000003,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.5175300696938225,"h_eff_v2":0.6596293859191075,"h_n_v2":0.9858999588093948,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09880896411299368,"max_constraint_level":0.22400000000000003,"max_resource_share":0.29310147210534954,"max_validator_dependency":0.0,"phi":25.0,"population":199,"population_trend":-0.0015,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":112.46931034134668,"rank_2_u_sys":123.23699672110018,"resilience_composite_urgency":1.0,"resilience_stock":0.28993033601494494,"resilience_trend":-0.003020899195516513,"resource_level":0.9090915687360734,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.776,"system_resilience":1.0,"theta_capability":0.5233227737841301,"theta_tech_v2":0.27235393974042305,"total_suppression":0.22400000000000003,"transfer_state":0.5204320419137133,"trust_level":0.0,"u_sys_tail_estimate":799.9989131743241,"u_sys_total_estimate":799.9989131743241,"u_sys_v2":15.904695521970815,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.2424297394672788,"x_compute":0.291534672301626,"x_institutional_capacity":0.29310147210534954,"x_novelty_agency":0.016177868426357864,"x_resilience":0.004596038130821346,"x_transfer_comprehension":0.15216020956856657}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,1,{"H_E":0.14909106797845817,"H_N":0.981590761210574,"L_t":0.12162628771406565,"Psi_inst":0.585694932882004,"Theta_tech":0.2997245300963176,"U_sys":17.650446053703433,"actual_objective_v2":15.825065963175273,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9194283414504895,"avg_validator_dependency":0.0,"avg_wb_trend":0.007309470319706291,"avg_well_being":0.6852767695992769,"c_protective":1.0,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.35,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.14909106797845817,"h_eff_v2":0.6928411862882036,"h_n_v2":0.981590761210574,"institution_composite_urgency":1.0,"integral_U_sys":16.777570787837124,"l_t_v2":0.12162628771406565,"max_constraint_level":0.35,"max_resource_share":0.32137136604592853,"max_validator_dependency":0.0,"phi":25.0,"population":206,"population_trend":0.009502763819095476,"psi_inst_stock":0.585694932882004,"psi_inst_trend":0.021208479864601205,"rank_10_u_sys":115.68861733371925,"rank_2_u_sys":123.36736237774853,"resilience_composite_urgency":1.0,"resilience_stock":0.3116550904026474,"resilience_trend":0.004402796879449173,"resource_level":0.9017776209822991,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.65,"system_resilience":1.0,"theta_capability":0.5273230405040662,"theta_tech_v2":0.2997245300963176,"total_suppression":0.35,"transfer_state":0.5683888377223419,"trust_level":0.0,"u_sys_tail_estimate":792.0373705330283,"u_sys_total_estimate":808.8149413208654,"u_sys_v2":17.650446053703433,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.18148017485249235,"x_compute":0.06458006761428313,"x_institutional_capacity":0.2304315131000181,"x_novelty_agency":0.12471689098371629,"x_resilience":0.07741998740356157,"x_transfer_comprehension":0.32137136604592853}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,2,{"H_E":0.3802684944129402,"H_N":0.9874359027754908,"L_t":0.13977953960937217,"Psi_inst":0.6096656675441587,"Theta_tech":0.3310123561926027,"U_sys":19.023921753625487,"actual_objective_v2":17.65047304276105,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9329833809514804,"avg_validator_dependency":0.0,"avg_wb_trend":0.008922635590724974,"avg_well_being":0.6979634574890454,"c_protective":0.0,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.2,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.3802684944129402,"h_eff_v2":0.6926401476337484,"h_n_v2":0.9874359027754908,"institution_composite_urgency":1.0,"integral_U_sys":35.11475469150159,"l_t_v2":0.13977953960937217,"max_constraint_level":0.2,"max_resource_share":0.30336963766209646,"max_validator_dependency":0.0,"phi":25.0,"population":201,"population_trend":-0.000629618724691419,"psi_inst_stock":0.6096656675441587,"psi_inst_trend":0.022037156303867256,"rank_10_u_sys":126.21539090809016,"rank_2_u_sys":141.13811132879007,"resilience_composite_urgency":1.0,"resilience_stock":0.3311469827579791,"resilience_trend":0.008929525522213936,"resource_level":0.9004276247606635,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.8,"system_resilience":1.0,"theta_capability":0.5412678948866503,"theta_tech_v2":0.3310123561926027,"total_suppression":0.2,"transfer_state":0.6115499539501077,"trust_level":0.0,"u_sys_tail_estimate":784.1576690179227,"u_sys_total_estimate":819.2724237094243,"u_sys_v2":19.023921753625487,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.17023020633886282,"x_compute":0.19138758009734294,"x_institutional_capacity":0.19336467250161404,"x_novelty_agency":0.06333718148663275,"x_resilience":0.07831072191345098,"x_transfer_comprehension":0.30336963766209646}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,3,{"H_E":0.1882159920413926,"H_N":0.9824350339619485,"L_t":0.15880393542040241,"Psi_inst":0.6339165215819956,"Theta_tech":0.351701939629915,"U_sys":20.467825301075273,"actual_objective_v2":19.102711687631036,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9045488259607196,"avg_validator_dependency":0.0,"avg_wb_trend":0.01009827794897662,"avg_well_being":0.7108049009406092,"c_protective":0.6,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.326,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.1882159920413926,"h_eff_v2":0.712286029735825,"h_n_v2":0.9824350339619485,"institution_composite_urgency":1.0,"integral_U_sys":54.86062821885197,"l_t_v2":0.15880393542040241,"max_constraint_level":0.326,"max_resource_share":0.29893432442740037,"max_validator_dependency":0.0,"phi":25.0,"population":204,"population_trend":0.004036878833014514,"psi_inst_stock":0.6339165215819956,"psi_inst_trend":0.022701265624058144,"rank_10_u_sys":134.14972458798368,"rank_2_u_sys":137.96876270910394,"resilience_composite_urgency":1.0,"resilience_stock":0.351122400504892,"resilience_trend":0.012243293189623628,"resource_level":0.9158721189312881,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.6739999999999999,"system_resilience":1.0,"theta_capability":0.5458771713185009,"theta_tech_v2":0.351701939629915,"total_suppression":0.326,"transfer_state":0.644287686148188,"trust_level":0.0,"u_sys_tail_estimate":776.3543861432756,"u_sys_total_estimate":831.2150143621276,"u_sys_v2":20.467825301075273,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.29893432442740037,"x_compute":0.08340838970228949,"x_institutional_capacity":0.20553373087387597,"x_novelty_agency":0.057628832083668424,"x_resilience":0.08503108494731047,"x_transfer_comprehension":0.2694636379654554}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,4,{"H_E":0.1471158353938763,"H_N":0.9778926279227331,"L_t":0.17150893605286072,"Psi_inst":0.6616827350246687,"Theta_tech":0.3689958062350707,"U_sys":21.40696214919525,"actual_objective_v2":20.62464781044385,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9402403156448571,"avg_validator_dependency":0.0,"avg_wb_trend":0.011503253772659663,"avg_well_being":0.725586431635196,"c_protective":0.0,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.4,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.1471158353938763,"h_eff_v2":0.7024501661926521,"h_n_v2":0.9778926279227331,"institution_composite_urgency":1.0,"integral_U_sys":75.79802194398724,"l_t_v2":0.17150893605286072,"max_constraint_level":0.4,"max_resource_share":0.2633103714847474,"max_validator_dependency":0.0,"phi":25.0,"population":198,"population_trend":-0.005997714228654546,"psi_inst_stock":0.6616827350246687,"psi_inst_trend":0.024220749969642616,"rank_10_u_sys":140.22371128927122,"rank_2_u_sys":150.74075770432074,"resilience_composite_urgency":1.0,"resilience_stock":0.3669530601792786,"resilience_trend":0.01331950313505251,"resource_level":0.9036426737270402,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.6,"system_resilience":1.0,"theta_capability":0.5486755219800942,"theta_tech_v2":0.3689958062350707,"total_suppression":0.4,"transfer_state":0.6725209918303187,"trust_level":0.0,"u_sys_tail_estimate":768.629100829708,"u_sys_total_estimate":844.4271227736953,"u_sys_v2":21.40696214919525,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.19702228105866787,"x_compute":0.06365261534397937,"x_institutional_capacity":0.23253575273123903,"x_novelty_agency":0.16260910382190522,"x_resilience":0.08086987555946101,"x_transfer_comprehension":0.2633103714847474}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_progress.json
+==========================================
+
+- Size: 14045 bytes
+- Modified: 2026-09-24T11:51:49Z
+- Structure: object with 19 top-level keys
+- Keys: updated_utc, status, machine_label, controller_pid, cpu_budget, maximum_workers, parts, current_cap, requested_cap, cap_source, active_children, elapsed_seconds, mean_wall_seconds_per_arm, estimated_finish_local, eta_assumption, resume_counts, schedule_path, runtime_control_path, events
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_O_manifest.json
+==========================================
+
+- Size: 7755 bytes
+- Modified: 2026-09-24T11:53:15Z
+- Structure: object with 12 top-level keys
+- Keys: status, machine_label, identity, proof, parts, resume_counts, events, cpu_budget, priority, non_registered, retry_events, files
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_O_part3_manifest.json
+==========================================
+
+- Size: 2593 bytes
+- Modified: 2026-09-24T11:53:14Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_O_part3_runs.csv
+==========================================
+
+- Size: 1070 bytes
+- Modified: 2026-09-24T11:53:14Z
+- Rows: 1 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+C,0.06,25.0,1.0,2.5,False,150,False,True,False,15,210,136,2,True,1,500,20,4.5371618982878985,3.2223457834635507,1.3148161148243478,-14.655156997437599,0.5809231728982273,0.9871266671224113,0.9136051497014284,1.1849134854871697,0.09421256317543034,12261.822034576486,True,,O,3,O_p3_C_0de9b507be0110cdce85a9b2,8377,2026-09-24T11:51:50.716499+00:00,2026-09-24T11:53:14.189155+00:00,83.47264510003151,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_O_part3_steps.csv
+==========================================
+
+- Size: 1028598 bytes
+- Modified: 2026-09-24T11:53:14Z
+- Rows: 500 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,0,{"H_E":0.2220975391399681,"H_N":0.9921934192042836,"L_t":0.09721847235225083,"Psi_inst":0.55,"Theta_tech":0.27494808235337653,"U_sys":15.777441210360172,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7779472760554174,"avg_validator_dependency":0.0,"avg_wb_trend":0.005301770653480286,"avg_well_being":0.6645603865369973,"c_protective":0.4,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.05600000000000001,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.2220975391399681,"h_eff_v2":0.6428881311312171,"h_n_v2":0.9921934192042836,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09721847235225083,"max_constraint_level":0.05600000000000001,"max_resource_share":0.3665195393189093,"max_validator_dependency":0.0,"phi":25.0,"population":195,"population_trend":-0.0075,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":42.720514117445234,"rank_2_u_sys":42.80269789655769,"resilience_composite_urgency":1.0,"resilience_stock":0.2941518161718278,"resilience_trend":-0.0017544551484516612,"resource_level":0.9106076884569361,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.944,"system_resilience":1.0,"theta_capability":0.5080369322978762,"theta_tech_v2":0.27494808235337653,"total_suppression":0.05600000000000001,"transfer_state":0.5411970368173289,"trust_level":0.0,"u_sys_tail_estimate":799.9981453147132,"u_sys_total_estimate":799.9981453147132,"u_sys_v2":15.777441210360172,"x_bio_welfare":0.25506407047446755,"x_compute":0.10046165372345216,"x_institutional_capacity":0.3665195393189093,"x_novelty_agency":0.007322371035031555,"x_resilience":0.014647181361494767,"x_transfer_comprehension":0.2559851840866446}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,1,{"H_E":0.38681758129013966,"H_N":1.0,"L_t":0.11612679531873574,"Psi_inst":0.5950000000000001,"Theta_tech":0.29966040374145214,"U_sys":17.210514854210466,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8599892568690946,"avg_validator_dependency":0.0,"avg_wb_trend":0.00787673409819213,"avg_well_being":0.6784453686728504,"c_protective":1.0,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.38681758129013966,"h_eff_v2":0.6513075539259364,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":16.49397803228532,"l_t_v2":0.11612679531873574,"max_constraint_level":1.0,"max_resource_share":0.33731975879906306,"max_validator_dependency":0.0,"phi":25.0,"population":192,"population_trend":-0.009865384615384616,"psi_inst_stock":0.5950000000000001,"psi_inst_trend":0.02400000000000002,"rank_10_u_sys":119.92851740663816,"rank_2_u_sys":124.27036449641574,"resilience_composite_urgency":1.0,"resilience_stock":0.30156264160749563,"resilience_trend":0.0009951290267841905,"resource_level":0.9011426219099204,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5232860554037947,"theta_tech_v2":0.29966040374145214,"total_suppression":1.0,"transfer_state":0.5726512309031789,"trust_level":0.0,"u_sys_tail_estimate":792.0386041344716,"u_sys_total_estimate":808.5325821667569,"u_sys_v2":17.210514854210466,"x_bio_welfare":0.17618851591600315,"x_compute":0.19563712151015417,"x_institutional_capacity":0.33731975879906306,"x_novelty_agency":0.0184397735647528,"x_resilience":0.04454534137211238,"x_transfer_comprehension":0.22786948883791447}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,2,{"H_E":0.2550986066050793,"H_N":0.9876494472706313,"L_t":0.13024504011039545,"Psi_inst":0.6159335422725812,"Theta_tech":0.32710593932772225,"U_sys":18.261154195120152,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8875639360814304,"avg_validator_dependency":0.0,"avg_wb_trend":0.00977052755479749,"avg_well_being":0.6926347476263938,"c_protective":0.6,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.126,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.2550986066050793,"h_eff_v2":0.6464559077426908,"h_n_v2":0.9876494472706313,"institution_composite_urgency":1.0,"integral_U_sys":34.22981255695063,"l_t_v2":0.13024504011039545,"max_constraint_level":0.126,"max_resource_share":0.37777091700216053,"max_validator_dependency":0.0,"phi":25.0,"population":189,"population_trend":-0.01159326923076923,"psi_inst_stock":0.6159335422725812,"psi_inst_trend":0.023080062681774358,"rank_10_u_sys":126.27899020278672,"rank_2_u_sys":130.99290896757628,"resilience_composite_urgency":1.0,"resilience_stock":0.3021170473786435,"resilience_trend":0.0008629120500932877,"resource_level":0.9012399002429702,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.874,"system_resilience":1.0,"theta_capability":0.5315458623047031,"theta_tech_v2":0.32710593932772225,"total_suppression":0.126,"transfer_state":0.6153861078128611,"trust_level":0.0,"u_sys_tail_estimate":784.1572896932403,"u_sys_total_estimate":818.3871022501909,"u_sys_v2":18.261154195120152,"x_bio_welfare":0.17699916869141782,"x_compute":0.11780137088872751,"x_institutional_capacity":0.1837888285117324,"x_novelty_agency":0.11330180356299185,"x_resilience":0.03033791134296984,"x_transfer_comprehension":0.37777091700216053}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,3,{"H_E":0.39580039813390455,"H_N":0.9859139111031595,"L_t":0.14360120530941725,"Psi_inst":0.643590152585205,"Theta_tech":0.35295849229456355,"U_sys":19.251630249069525,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8502469021536224,"avg_validator_dependency":0.0,"avg_wb_trend":0.01277861237696799,"avg_well_being":0.7124322245884263,"c_protective":0.8,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.42400000000000004,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.39580039813390455,"h_eff_v2":0.6321571568459099,"h_n_v2":0.9859139111031595,"institution_composite_urgency":1.0,"integral_U_sys":52.986204779045465,"l_t_v2":0.14360120530941725,"max_constraint_level":0.42400000000000004,"max_resource_share":0.26988464321250755,"max_validator_dependency":0.0,"phi":25.0,"population":180,"population_trend":-0.022401002747252742,"psi_inst_stock":0.643590152585205,"psi_inst_trend":0.024453026971029183,"rank_10_u_sys":133.64137759300246,"rank_2_u_sys":142.9650390288167,"resilience_composite_urgency":1.0,"resilience_stock":0.2960079280819933,"resilience_trend":-0.0012286973539297587,"resource_level":0.912386157185501,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.576,"system_resilience":1.0,"theta_capability":0.5460917905966258,"theta_tech_v2":0.35295849229456355,"total_suppression":0.42400000000000004,"transfer_state":0.6463354666235563,"trust_level":0.0,"u_sys_tail_estimate":776.3551991290899,"u_sys_total_estimate":829.3414039081354,"u_sys_v2":19.251630249069525,"x_bio_welfare":0.26988464321250755,"x_compute":0.20154026758947316,"x_institutional_capacity":0.22386347518128116,"x_novelty_agency":0.027640988940671816,"x_resilience":0.014630777116159496,"x_transfer_comprehension":0.2624398479599068}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,4,{"H_E":0.39582514132426927,"H_N":1.0,"L_t":0.16670961546969615,"Psi_inst":0.6776988875659788,"Theta_tech":0.3751749989940354,"U_sys":21.023051694410963,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8830004242544138,"avg_validator_dependency":0.0,"avg_wb_trend":0.012566871680336173,"avg_well_being":0.7245050346432882,"c_protective":0.6,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.39582514132426927,"h_eff_v2":0.6556770563521759,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":73.12354575078571,"l_t_v2":0.16670961546969615,"max_constraint_level":1.0,"max_resource_share":0.2657625010877015,"max_validator_dependency":0.0,"phi":25.0,"population":181,"population_trend":-0.014014035256410252,"psi_inst_stock":0.6776988875659788,"psi_inst_trend":0.027349739373952575,"rank_10_u_sys":133.17161141167145,"rank_2_u_sys":143.4944079833402,"resilience_composite_urgency":1.0,"resilience_stock":0.2977009927570413,"resilience_trend":-0.00035216874523641927,"resource_level":0.9067772353452239,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5599117329652241,"theta_tech_v2":0.3751749989940354,"total_suppression":1.0,"transfer_state":0.6700609701589114,"trust_level":0.0,"u_sys_tail_estimate":768.6303427371295,"u_sys_total_estimate":841.7538884879152,"u_sys_v2":21.023051694410963,"x_bio_welfare":0.22314362787686545,"x_compute":0.20155664873037016,"x_institutional_capacity":0.2657625010877015,"x_novelty_agency":0.03628002835249206,"x_resilience":0.031461942964017164,"x_transfer_comprehension":0.24179525098855367}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_O_progress.json
+==========================================
+
+- Size: 1891 bytes
+- Modified: 2026-09-24T11:53:15Z
+- Structure: object with 19 top-level keys
+- Keys: updated_utc, status, machine_label, controller_pid, cpu_budget, maximum_workers, parts, current_cap, requested_cap, cap_source, active_children, elapsed_seconds, mean_wall_seconds_per_arm, estimated_finish_local, eta_assumption, resume_counts, schedule_path, runtime_control_path, events
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_O_runtime_control_YOTKOTEST.json
+==========================================
+
+- Size: 19 bytes
+- Modified: 2026-09-24T11:51:50Z
+- Structure: object with 1 top-level keys
+- Keys: workers
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_O_schedule_YOTKOTEST.json
+==========================================
+
+- Size: 297 bytes
+- Modified: 2026-09-24T11:51:50Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_O_state.json
+==========================================
+
+- Size: 2362 bytes
+- Modified: 2026-09-24T11:53:15Z
+- Structure: object with 11 top-level keys
+- Keys: identity, task_ids, machine_label, events, resume_counts, elapsed_seconds, cpu_budget, priority, retry_events, last_cap, last_cap_source
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_R_manifest.json
+==========================================
+
+- Size: 7755 bytes
+- Modified: 2026-09-24T11:55:08Z
+- Structure: object with 12 top-level keys
+- Keys: status, machine_label, identity, proof, parts, resume_counts, events, cpu_budget, priority, non_registered, retry_events, files
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_R_part4_manifest.json
+==========================================
+
+- Size: 2593 bytes
+- Modified: 2026-09-24T11:55:07Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_R_part4_runs.csv
+==========================================
+
+- Size: 1067 bytes
+- Modified: 2026-09-24T11:55:07Z
+- Rows: 1 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+C,0.06,25.0,1.0,2.5,False,150,False,True,False,1,195,126,2,True,1,500,30,4.163378734031831,3.147436550175587,1.0159421838562435,-11.243025677995425,0.5672751437277725,0.9867881929502078,0.8719022825931184,1.399451034961745,0.012201845517604476,7935.458199356166,True,,R,4,R_p4_C_0de9b507be0110cdce85a9b2,8377,2026-09-24T11:53:15.839527+00:00,2026-09-24T11:55:07.320454+00:00,111.48090050002793,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_R_part4_steps.csv
+==========================================
+
+- Size: 1292564 bytes
+- Modified: 2026-09-24T11:55:07Z
+- Rows: 500 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+R,4,R_p4_C_0de9b507be0110cdce85a9b2,150,0,{"H_E":0.22209753913996821,"H_N":0.9921832007961788,"L_t":0.09721747111800902,"Psi_inst":0.55,"Theta_tech":0.27494808235337653,"U_sys":15.777361111704169,"actual_objective_v2":8.015401463653436,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7779472760554174,"avg_validator_dependency":0.0,"avg_wb_trend":0.005301770653480286,"avg_well_being":0.6645603865369973,"c_protective":0.4,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.05600000000000001,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.22209753913996821,"h_eff_v2":0.6428815101507083,"h_n_v2":0.9921832007961788,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09721747111800902,"max_constraint_level":0.05600000000000001,"max_resource_share":0.36651953931890935,"max_validator_dependency":0.0,"phi":25.0,"population":195,"population_trend":-0.0075,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":109.87928883141754,"rank_2_u_sys":117.9894133137714,"resilience_composite_urgency":1.0,"resilience_stock":0.2941518161718278,"resilience_trend":-0.0017544551484516612,"resource_level":0.9106076884569362,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.944,"system_resilience":1.0,"theta_capability":0.5080369322978762,"theta_tech_v2":0.27494808235337653,"total_suppression":0.05600000000000001,"transfer_state":0.5411970368173289,"trust_level":0.0,"u_sys_tail_estimate":799.9981453095232,"u_sys_total_estimate":799.9981453095232,"u_sys_v2":15.777361111704169,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.2550640704744676,"x_compute":0.10046165372345217,"x_institutional_capacity":0.36651953931890935,"x_novelty_agency":0.007322371035031556,"x_resilience":0.014647181361494769,"x_transfer_comprehension":0.25598518408664467}
+R,4,R_p4_C_0de9b507be0110cdce85a9b2,150,1,{"H_E":0.4226535813665493,"H_N":0.9881284924833015,"L_t":0.11164435806499567,"Psi_inst":0.5686094761059688,"Theta_tech":0.30507910681767525,"U_sys":16.851921704319054,"actual_objective_v2":15.697772543166005,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9548732332583011,"avg_validator_dependency":0.0,"avg_wb_trend":0.007881741319716307,"avg_well_being":0.6784620594112644,"c_protective":0.2,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.014000000000000002,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.4226535813665493,"h_eff_v2":0.643591384294242,"h_n_v2":0.9881284924833015,"institution_composite_urgency":1.0,"integral_U_sys":16.31464140801161,"l_t_v2":0.11164435806499567,"max_constraint_level":0.014000000000000002,"max_resource_share":0.26894977702214684,"max_validator_dependency":0.0,"phi":25.0,"population":192,"population_trend":-0.009865384615384616,"psi_inst_stock":0.5686094761059688,"psi_inst_trend":0.016082842831790633,"rank_10_u_sys":115.44176721769355,"rank_2_u_sys":124.06331917481613,"resilience_composite_urgency":1.0,"resilience_stock":0.3287950842465069,"resilience_trend":0.009164861818487567,"resource_level":0.9013130805150001,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.986,"system_resilience":1.0,"theta_capability":0.5252130957218697,"theta_tech_v2":0.30507910681767525,"total_suppression":0.014000000000000002,"transfer_state":0.5808672885400253,"trust_level":0.0,"u_sys_tail_estimate":792.0386632907769,"u_sys_total_estimate":808.3533046987885,"u_sys_v2":16.851921704319054,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.17760900429166793,"x_compute":0.21972512548609108,"x_institutional_capacity":0.1527703459362214,"x_novelty_agency":0.07156125675125742,"x_resilience":0.1093844905126153,"x_transfer_comprehension":0.26894977702214684}
+R,4,R_p4_C_0de9b507be0110cdce85a9b2,150,2,{"H_E":0.2550986066050793,"H_N":0.9876323335961255,"L_t":0.12716450222042075,"Psi_inst":0.592182070767953,"Theta_tech":0.33217654671034946,"U_sys":18.01471168195219,"actual_objective_v2":16.851911883599314,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8875639360814304,"avg_validator_dependency":0.0,"avg_wb_trend":0.009773949748042542,"avg_well_being":0.6926511621587348,"c_protective":0.6,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.126,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.2550986066050793,"h_eff_v2":0.6464600260501001,"h_n_v2":0.9876323335961255,"institution_composite_urgency":1.0,"integral_U_sys":33.74795810114723,"l_t_v2":0.12716450222042075,"max_constraint_level":0.126,"max_resource_share":0.37777091700216053,"max_validator_dependency":0.0,"phi":25.0,"population":189,"population_trend":-0.01159326923076923,"psi_inst_stock":0.592182070767953,"psi_inst_trend":0.018329768380848717,"rank_10_u_sys":117.97409934680877,"rank_2_u_sys":126.72865011583254,"resilience_composite_urgency":1.0,"resilience_stock":0.3260815969009734,"resilience_trend":0.005601357069281246,"resource_level":0.9012399002429702,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.874,"system_resilience":1.0,"theta_capability":0.5333765506068744,"theta_tech_v2":0.33217654671034946,"total_suppression":0.126,"transfer_state":0.6227805596860227,"trust_level":0.0,"u_sys_tail_estimate":784.1572896846418,"u_sys_total_estimate":817.905247785789,"u_sys_v2":18.01471168195219,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.17699916869141782,"x_compute":0.11780137088872751,"x_institutional_capacity":0.1837888285117324,"x_novelty_agency":0.11330180356299185,"x_resilience":0.03033791134296984,"x_transfer_comprehension":0.37777091700216053}
+R,4,R_p4_C_0de9b507be0110cdce85a9b2,150,3,{"H_E":0.39580039813390466,"H_N":0.9754529083341933,"L_t":0.13921797353264748,"Psi_inst":0.6222138282310397,"Theta_tech":0.35772838773194043,"U_sys":18.900972132953473,"actual_objective_v2":18.09353025490417,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8502469021536225,"avg_validator_dependency":0.0,"avg_wb_trend":0.012780941622781969,"avg_well_being":0.7124484181559088,"c_protective":0.8,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.42400000000000004,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.39580039813390466,"h_eff_v2":0.625463893375449,"h_n_v2":0.9754529083341933,"institution_composite_urgency":1.0,"integral_U_sys":52.205800008600065,"l_t_v2":0.13921797353264748,"max_constraint_level":0.42400000000000004,"max_resource_share":0.2698846432125076,"max_validator_dependency":0.0,"phi":25.0,"population":180,"population_trend":-0.022401002747252742,"psi_inst_stock":0.6222138282310397,"psi_inst_trend":0.021840365105520086,"rank_10_u_sys":123.22469139453342,"rank_2_u_sys":138.749550032114,"resilience_composite_urgency":1.0,"resilience_stock":0.3170967316616436,"resilience_trend":0.0012254903766979364,"resource_level":0.912386157185501,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.576,"system_resilience":1.0,"theta_capability":0.5478309444836885,"theta_tech_v2":0.35772838773194043,"total_suppression":0.42400000000000004,"transfer_state":0.6529904733094019,"trust_level":0.0,"u_sys_tail_estimate":776.355193851103,"u_sys_total_estimate":828.560993859703,"u_sys_v2":18.900972132953473,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.2698846432125076,"x_compute":0.2015402675894732,"x_institutional_capacity":0.2238634751812812,"x_novelty_agency":0.02764098894067182,"x_resilience":0.014630777116159498,"x_transfer_comprehension":0.2624398479599069}
+R,4,R_p4_C_0de9b507be0110cdce85a9b2,150,4,{"H_E":0.05,"H_N":0.9483166708309043,"L_t":0.15350450232731083,"Psi_inst":0.6599924454079357,"Theta_tech":0.37429863808395397,"U_sys":19.966512793056392,"actual_objective_v2":19.057681410812464,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.843547434338277,"avg_validator_dependency":0.0,"avg_wb_trend":0.012423824834411724,"avg_well_being":0.7240389704841232,"c_protective":0.6,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.526,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.05,"h_eff_v2":0.621389494567412,"h_n_v2":0.9483166708309043,"institution_composite_urgency":1.0,"integral_U_sys":71.639542471605,"l_t_v2":0.15350450232731083,"max_constraint_level":0.526,"max_resource_share":0.3049890789970801,"max_validator_dependency":0.0,"phi":25.0,"population":181,"population_trend":-0.014014035256410252,"psi_inst_stock":0.6599924454079357,"psi_inst_trend":0.026621840726932862,"rank_10_u_sys":129.6549823689907,"rank_2_u_sys":133.47243566414764,"resilience_composite_urgency":1.0,"resilience_stock":0.3152750913916527,"resilience_trend":0.0003113511826912926,"resource_level":0.9017394819387421,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.474,"system_resilience":1.0,"theta_capability":0.5467633739004532,"theta_tech_v2":0.37429863808395397,"total_suppression":0.526,"transfer_state":0.6845715275582832,"trust_level":0.0,"u_sys_tail_estimate":768.6252801247826,"u_sys_total_estimate":840.2648225963876,"u_sys_v2":19.966512793056392,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.18116234948951696,"x_compute":0.01654970801186376,"x_institutional_capacity":0.3049890789970801,"x_novelty_agency":0.1837793852943211,"x_resilience":0.02911897030811039,"x_transfer_comprehension":0.28440050789910754}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_R_progress.json
+==========================================
+
+- Size: 1893 bytes
+- Modified: 2026-09-24T11:55:08Z
+- Structure: object with 19 top-level keys
+- Keys: updated_utc, status, machine_label, controller_pid, cpu_budget, maximum_workers, parts, current_cap, requested_cap, cap_source, active_children, elapsed_seconds, mean_wall_seconds_per_arm, estimated_finish_local, eta_assumption, resume_counts, schedule_path, runtime_control_path, events
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_R_runtime_control_YOTKOTEST.json
+==========================================
+
+- Size: 19 bytes
+- Modified: 2026-09-24T11:53:15Z
+- Structure: object with 1 top-level keys
+- Keys: workers
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_R_schedule_YOTKOTEST.json
+==========================================
+
+- Size: 297 bytes
+- Modified: 2026-09-24T11:53:15Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_repeat_R_state.json
+==========================================
+
+- Size: 2363 bytes
+- Modified: 2026-09-24T11:55:08Z
+- Structure: object with 11 top-level keys
+- Keys: identity, task_ids, machine_label, events, resume_counts, elapsed_seconds, cpu_budget, priority, retry_events, last_cap, last_cap_source
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_runtime_control_YOTKOTEST.json
+==========================================
+
+- Size: 19 bytes
+- Modified: 2026-09-24T11:44:57Z
+- Structure: object with 1 top-level keys
+- Keys: workers
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_schedule_YOTKOTEST-fixture.json
+==========================================
+
+- Size: 297 bytes
+- Modified: 2026-09-24T12:00:24Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_schedule_YOTKOTEST.json
+==========================================
+
+- Size: 297 bytes
+- Modified: 2026-09-24T11:42:47Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_startup.json
+==========================================
+
+- Size: 1803 bytes
+- Modified: 2026-09-24T11:45:00Z
+- Structure: object with 8 top-level keys
+- Keys: counts, seed_tasks_checked, part4_subset, task_list_hashes, identity, main_head_provenance_only, machine_label, cpu_budget
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_startup_O.json
+==========================================
+
+- Size: 8322404 bytes
+- Modified: 2026-09-24T11:44:58Z
+- Structure: object with 16 top-level keys
+- Keys: arm, worktree, worktree_head, bytecode_sha256, identity_checks, modules, interpreter_version, numpy_version, effective_threads, thread_environment, machine_label, pid, priority, registered, smoke, extra_smoke
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_startup_O_request.json
+==========================================
+
+- Size: 458 bytes
+- Modified: 2026-09-24T11:44:57Z
+- Structure: object with 9 top-level keys
+- Keys: operation, directory, main_root, worktree, arm, machine_label, priority, parent_pid, output
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_startup_R.json
+==========================================
+
+- Size: 2201660 bytes
+- Modified: 2026-09-24T11:44:59Z
+- Structure: object with 16 top-level keys
+- Keys: arm, worktree, worktree_head, bytecode_sha256, identity_checks, modules, interpreter_version, numpy_version, effective_threads, thread_environment, machine_label, pid, priority, registered, smoke, extra_smoke
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_startup_R_request.json
+==========================================
+
+- Size: 458 bytes
+- Modified: 2026-09-24T11:44:58Z
+- Structure: object with 9 top-level keys
+- Keys: operation, directory, main_root, worktree, arm, machine_label, priority, parent_pid, output
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_state.json
+==========================================
+
+- Size: 15515 bytes
+- Modified: 2026-09-24T12:00:29Z
+- Structure: object with 11 top-level keys
+- Keys: identity, task_ids, machine_label, events, resume_counts, elapsed_seconds, cpu_budget, priority, retry_events, last_cap, last_cap_source
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_xcheck_altered_rows.json
+==========================================
+
+- Size: 31618 bytes
+- Modified: 2026-09-24T12:00:24Z
+- Structure: object with 5 top-level keys
+- Keys: machine_label, identity, non_registered, rows, tasks
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_xcheck_cli_altered.json
+==========================================
+
+- Size: 1491 bytes
+- Modified: 2026-09-24T12:00:24Z
+- Structure: object with 9 top-level keys
+- Keys: result, machine_labels, executor_hashes, bytecode_sha256, environments, task_count, differences, created_utc, test_fixture
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_xcheck_cli_results.json
+==========================================
+
+- Size: 349 bytes
+- Modified: 2026-09-24T12:00:24Z
+- Structure: array with 2 elements
+- Element keys: case, stdout
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_xcheck_cli_self.json
+==========================================
+
+- Size: 1121 bytes
+- Modified: 2026-09-24T12:00:24Z
+- Structure: object with 9 top-level keys
+- Keys: result, machine_labels, executor_hashes, bytecode_sha256, environments, task_count, differences, created_utc, test_fixture
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_xcheck_self_result.json
+==========================================
+
+- Size: 1121 bytes
+- Modified: 2026-09-24T12:00:24Z
+- Structure: object with 9 top-level keys
+- Keys: result, machine_labels, executor_hashes, bytecode_sha256, environments, task_count, differences, created_utc, test_fixture
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_smoke_xcheck_sign_result.json
+==========================================
+
+- Size: 1491 bytes
+- Modified: 2026-09-24T12:00:24Z
+- Structure: object with 9 top-level keys
+- Keys: result, machine_labels, executor_hashes, bytecode_sha256, environments, task_count, differences, created_utc, test_fixture
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_startup.json
+==========================================
+
+- Size: 1803 bytes
+- Modified: 2026-09-24T12:30:04Z
+- Structure: object with 8 top-level keys
+- Keys: counts, seed_tasks_checked, part4_subset, task_list_hashes, identity, main_head_provenance_only, machine_label, cpu_budget
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_startup_O.json
+==========================================
+
+- Size: 8322404 bytes
+- Modified: 2026-09-24T12:30:03Z
+- Structure: object with 16 top-level keys
+- Keys: arm, worktree, worktree_head, bytecode_sha256, identity_checks, modules, interpreter_version, numpy_version, effective_threads, thread_environment, machine_label, pid, priority, registered, smoke, extra_smoke
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_startup_O_request.json
+==========================================
+
+- Size: 452 bytes
+- Modified: 2026-09-24T12:30:02Z
+- Structure: object with 9 top-level keys
+- Keys: operation, directory, main_root, worktree, arm, machine_label, priority, parent_pid, output
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_startup_R.json
+==========================================
+
+- Size: 2201660 bytes
+- Modified: 2026-09-24T12:30:04Z
+- Structure: object with 16 top-level keys
+- Keys: arm, worktree, worktree_head, bytecode_sha256, identity_checks, modules, interpreter_version, numpy_version, effective_threads, thread_environment, machine_label, pid, priority, registered, smoke, extra_smoke
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_startup_R_request.json
+==========================================
+
+- Size: 452 bytes
+- Modified: 2026-09-24T12:30:03Z
+- Structure: object with 9 top-level keys
+- Keys: operation, directory, main_root, worktree, arm, machine_label, priority, parent_pid, output
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_state.json
+==========================================
+
+- Size: 6008235 bytes
+- Modified: 2026-09-27T01:00:02Z
+- Structure: object with 11 top-level keys
+- Keys: identity, task_ids, machine_label, events, resume_counts, elapsed_seconds, cpu_budget, priority, retry_events, last_cap, last_cap_source
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_verdicts.json
+==========================================
+
+- Size: 8730 bytes
+- Modified: 2026-09-27T01:02:29Z
+- Structure: object with 6 top-level keys
+- Keys: design_n_note, P, T1, T4, R4, R5
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_manifest.json
+==========================================
+
+- Size: 28469 bytes
+- Modified: 2026-09-24T12:00:24Z
+- Structure: object with 12 top-level keys
+- Keys: status, machine_label, identity, proof, parts, resume_counts, events, cpu_budget, priority, non_registered, retry_events, files
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part1_manifest.json
+==========================================
+
+- Size: 2922 bytes
+- Modified: 2026-09-24T11:57:26Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part1_runs.csv
+==========================================
+
+- Size: 1500 bytes
+- Modified: 2026-09-24T11:57:25Z
+- Rows: 2 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+B,0.06,25.0,1.0,3.0,True,150,False,True,False,25,206,133,1,False,0,500,-1,-1.0,-1.0,-3.5583498051071834,-7.0135608015139095,0.7593858863910772,0.9213438735081165,0.9439209259104387,0.6996555340549495,0.05588005574943174,7646.875088335619,False,,O,1,O_p1_B_5d277a51fca4df2641468951,4859,2026-09-24T11:55:12.161337+00:00,2026-09-24T11:57:23.843768+00:00,131.68241559999296,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+B,0.06,25.0,1.0,3.0,True,151,False,True,True,0,203,131,1,False,0,441,-1,-1.0,-1.0,-2.8659200602523693,-6.458757110203358,0.7514849537438723,0.9654243039786377,0.946882190860673,0.01,9.468821908606731e-05,5901.830122271898,False,,O,1,O_p1_B_f919e2ba22ecc161f3be7cdc,3877,2026-09-24T11:55:12.177841+00:00,2026-09-24T11:57:07.278393+00:00,115.10053860000335,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part1_steps.csv
+==========================================
+
+- Size: 1941684 bytes
+- Modified: 2026-09-24T11:57:25Z
+- Rows: 941 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,1,O_p1_B_5d277a51fca4df2641468951,150,0,{"H_E":0.47353335550612285,"H_N":0.9829141045901861,"L_t":0.09803786484860372,"Psi_inst":0.5325568678222371,"Theta_tech":0.28138843671429997,"U_sys":15.843006567514422,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8843205254991839,"avg_validator_dependency":0.0,"avg_wb_trend":0.004019064593598653,"avg_well_being":0.6689335217554602,"c_protective":0.2,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.41400000000000003,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.47353335550612285,"h_eff_v2":0.6542166725987948,"h_n_v2":0.9829141045901861,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09803786484860372,"max_constraint_level":0.41400000000000003,"max_resource_share":0.25662692108119756,"max_validator_dependency":0.0,"phi":25.0,"population":199,"population_trend":-0.0015,"psi_inst_stock":0.5325568678222371,"psi_inst_trend":0.00976706034667113,"rank_10_u_sys":42.74334575774749,"rank_2_u_sys":42.81419851624058,"resilience_composite_urgency":1.0,"resilience_stock":0.29648275649415057,"resilience_trend":-0.0010551730517548263,"resource_level":0.9068232973166526,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.586,"system_resilience":1.0,"theta_capability":0.5205301536864958,"theta_tech_v2":0.28138843671429997,"total_suppression":0.41400000000000003,"transfer_state":0.5405804730455139,"trust_level":0.0,"u_sys_tail_estimate":799.9988577753102,"u_sys_total_estimate":799.9988577753102,"u_sys_v2":15.843006567514422,"x_bio_welfare":0.22352747763877143,"x_compute":0.25662692108119756,"x_institutional_capacity":0.19344030828289596,"x_novelty_agency":0.05330588849777841,"x_resilience":0.020197039271787058,"x_transfer_comprehension":0.2529023652275697}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,1,{"H_E":0.3593937997650877,"H_N":1.0,"L_t":0.12100740722340736,"Psi_inst":0.5784304509080234,"Theta_tech":0.3074626675183118,"U_sys":17.600961882017504,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8711761331252084,"avg_validator_dependency":0.0,"avg_wb_trend":0.007280959701968003,"avg_well_being":0.6838255700436233,"c_protective":0.6,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.3593937997650877,"h_eff_v2":0.6804064421934052,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":16.72198422476596,"l_t_v2":0.12100740722340736,"max_constraint_level":1.0,"max_resource_share":0.2687694084909543,"max_validator_dependency":0.0,"phi":25.0,"population":199,"population_trend":-0.00105,"psi_inst_stock":0.5784304509080234,"psi_inst_trend":0.02059901716840567,"rank_10_u_sys":119.39257224664568,"rank_2_u_sys":134.59344603811758,"resilience_composite_urgency":1.0,"resilience_stock":0.2925931531846282,"resilience_trend":-0.0019055021290850897,"resource_level":0.9091626359863452,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5337545376201146,"theta_tech_v2":0.3074626675183118,"total_suppression":1.0,"transfer_state":0.5760375712948788,"trust_level":0.0,"u_sys_tail_estimate":792.038545544062,"u_sys_total_estimate":808.760529768828,"u_sys_v2":17.600961882017504,"x_bio_welfare":0.24302196655287653,"x_compute":0.17813614522429463,"x_institutional_capacity":0.2687694084909543,"x_novelty_agency":0.044191210367589356,"x_resilience":0.018305541594703986,"x_transfer_comprehension":0.2475757277695812}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,2,{"H_E":0.5019851723078251,"H_N":0.9903022660279666,"L_t":0.14381590857064516,"Psi_inst":0.620587405817221,"Theta_tech":0.326779383676877,"U_sys":19.346835409182606,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7711633766772615,"avg_validator_dependency":0.0,"avg_wb_trend":0.008525598687259625,"avg_well_being":0.6952553263632301,"c_protective":0.2,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.8140000000000001,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.5019851723078251,"h_eff_v2":0.7091683129204858,"h_n_v2":0.9903022660279666,"institution_composite_urgency":1.0,"integral_U_sys":35.19588287036602,"l_t_v2":0.14381590857064516,"max_constraint_level":0.8140000000000001,"max_resource_share":0.3723775442354233,"max_validator_dependency":0.0,"phi":25.0,"population":206,"population_trend":0.009817763819095477,"psi_inst_stock":0.620587405817221,"psi_inst_trend":0.027066398490643274,"rank_10_u_sys":130.90812179912515,"rank_2_u_sys":137.37318568243597,"resilience_composite_urgency":1.0,"resilience_stock":0.2824205693826829,"resilience_trend":-0.004385626630943153,"resource_level":0.9017987386891148,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.18599999999999994,"system_resilience":1.0,"theta_capability":0.5543748244324995,"theta_tech_v2":0.326779383676877,"total_suppression":0.8140000000000001,"transfer_state":0.5894556701982153,"trust_level":0.0,"u_sys_tail_estimate":784.1578579549356,"u_sys_total_estimate":819.3537408253017,"u_sys_v2":19.346835409182606,"x_bio_welfare":0.1816561557426229,"x_compute":0.27885017116738253,"x_institutional_capacity":0.3723775442354233,"x_novelty_agency":0.009772099689948776,"x_resilience":0.002234749000500164,"x_transfer_comprehension":0.1551092801641223}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,3,{"H_E":0.23762260482944297,"H_N":0.9881635779176592,"L_t":0.16515471076420424,"Psi_inst":0.6585286652354989,"Theta_tech":0.34761155934904997,"U_sys":20.975894759861806,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8691236853844433,"avg_validator_dependency":0.0,"avg_wb_trend":0.010047134379378004,"avg_well_being":0.7088527106908843,"c_protective":0.4,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.256,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.23762260482944297,"h_eff_v2":0.7214763037373236,"h_n_v2":0.9881635779176592,"institution_composite_urgency":1.0,"integral_U_sys":55.35724795488822,"l_t_v2":0.16515471076420424,"max_constraint_level":0.256,"max_resource_share":0.3347139255384774,"max_validator_dependency":0.0,"phi":25.0,"population":206,"population_trend":0.006872434673366834,"psi_inst_stock":0.6585286652354989,"psi_inst_trend":0.030328856768933647,"rank_10_u_sys":142.25879219886392,"rank_2_u_sys":153.8850315185931,"resilience_composite_urgency":1.0,"resilience_stock":0.294675592296025,"resilience_trend":0.0006065682323424318,"resource_level":0.9064940254784775,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.744,"system_resilience":1.0,"theta_capability":0.5603381176636146,"theta_tech_v2":0.34761155934904997,"total_suppression":0.256,"transfer_state":0.6203603652709739,"trust_level":0.0,"u_sys_tail_estimate":776.3547106161424,"u_sys_total_estimate":831.7119585710306,"u_sys_v2":20.975894759861806,"x_bio_welfare":0.22078354565397823,"x_compute":0.108525430659251,"x_institutional_capacity":0.3347139255384774,"x_novelty_agency":0.033998427591906584,"x_resilience":0.052727360093485894,"x_transfer_comprehension":0.24925131046290094}
+O,1,O_p1_B_5d277a51fca4df2641468951,150,4,{"H_E":0.18248738052285607,"H_N":0.9855067890229092,"L_t":0.1856053867691108,"Psi_inst":0.6926757987119491,"Theta_tech":0.37114275491052184,"U_sys":22.534685856196113,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8420683587910801,"avg_validator_dependency":0.0,"avg_wb_trend":0.010905730679939784,"avg_well_being":0.7217618327388016,"c_protective":0.6,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.926,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.18248738052285607,"h_eff_v2":0.721970704015032,"h_n_v2":0.9855067890229092,"institution_composite_urgency":1.0,"integral_U_sys":77.11253826291718,"l_t_v2":0.1856053867691108,"max_constraint_level":0.926,"max_resource_share":0.33490117066698805,"max_validator_dependency":0.0,"phi":25.0,"population":203,"population_trend":0.00044177223252183165,"psi_inst_stock":0.6926757987119491,"psi_inst_trend":0.0314743397811886,"rank_10_u_sys":149.7655631674483,"rank_2_u_sys":160.17933552614855,"resilience_composite_urgency":1.0,"resilience_stock":0.3005148433341721,"resilience_trend":0.002176373074083828,"resource_level":0.9062319547301241,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.07399999999999995,"system_resilience":1.0,"theta_capability":0.5637688578495725,"theta_tech_v2":0.37114275491052184,"total_suppression":0.926,"transfer_state":0.6583243287438766,"trust_level":0.0,"u_sys_tail_estimate":768.6294843823163,"u_sys_total_estimate":845.7420226452334,"u_sys_v2":22.534685856196113,"x_bio_welfare":0.21859962275103342,"x_compute":0.08059557586423344,"x_institutional_capacity":0.28999029939036197,"x_novelty_agency":0.034960183437692284,"x_resilience":0.0409531478896907,"x_transfer_comprehension":0.33490117066698805}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part2_manifest.json
+==========================================
+
+- Size: 3553 bytes
+- Modified: 2026-09-24T11:57:25Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part2_runs.csv
+==========================================
+
+- Size: 2534 bytes
+- Modified: 2026-09-24T11:57:23Z
+- Rows: 4 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+A,0.055,25.0,1.0,1.5,True,150,False,True,True,0,209,135,2,True,1,469,6,5.1390841867982395,3.6603199031407168,1.4787642836575228,-5.311652823711759,0.6533147461663101,0.9556917351607559,0.9702934835202024,0.01,9.702934835202024e-05,6397.322145067296,True,,O,2,O_p2_A_333d7e2994dc3327f52160a6,4183,2026-09-24T11:55:12.207459+00:00,2026-09-24T11:57:14.639483+00:00,122.43198270001449,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.055,25.0,1.0,1.5,True,151,False,True,False,20,210,136,2,True,1,500,6,5.662425364648186,3.6765150769777453,1.9859102876704409,-5.952557096452712,0.6957253616548078,0.9682740198105072,0.9215506064700764,1.0104791889204294,0.0639419759639705,7432.748431994018,True,,O,2,O_p2_A_c0a5bd479a50328512c32432,6898,2026-09-24T11:55:12.230721+00:00,2026-09-24T11:57:22.645071+00:00,130.4143344000331,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.066,25.0,1.0,1.5,True,150,True,True,False,125,244,158,2,True,1,500,7,4.903267877552199,3.7019644588647775,1.2013034186874219,-6.925883876578873,0.6720396992217537,0.9690731960196204,0.9575093726626009,0.9768834887653338,0.4636107958046613,18573.61519887107,True,,O,2,O_p2_A_1838f22be8317bf11ca2d2c7,7570,2026-09-24T11:55:12.246650+00:00,2026-09-24T11:57:22.142359+00:00,129.8956927000545,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.066,25.0,1.0,1.5,True,151,True,True,False,74,267,173,2,True,1,500,6,5.017287506829909,3.755478632150974,1.2618088746789353,-7.344619190803887,0.6761275761927732,0.9849361888713548,0.9311240833545481,0.9989137771292049,0.28147374199475567,20682.168982528918,True,,O,2,O_p2_A_2fa60758a32b0829125ca58a,3481,2026-09-24T11:55:12.262153+00:00,2026-09-24T11:57:23.661846+00:00,131.39967459999025,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part2_steps.csv
+==========================================
+
+- Size: 4063326 bytes
+- Modified: 2026-09-24T11:57:24Z
+- Rows: 1969 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,0,{"H_E":0.3023658880539488,"H_N":0.9827148323858446,"L_t":0.09921172214937193,"Psi_inst":0.55,"Theta_tech":0.2796188411961623,"U_sys":15.936907870943312,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8760283127124325,"avg_validator_dependency":0.0,"avg_wb_trend":8.667715011317911e-05,"avg_well_being":0.656457109640267,"c_protective":0.0,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.8,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.3023658880539488,"h_eff_v2":0.645110138468631,"h_n_v2":0.9827148323858446,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09921172214937193,"max_constraint_level":0.8,"max_resource_share":0.3307000666567519,"max_validator_dependency":0.0,"phi":25.0,"population":200,"population_trend":0.0,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":42.71264869360508,"rank_2_u_sys":42.84868934738577,"resilience_composite_urgency":1.0,"resilience_stock":0.29842435257167294,"resilience_trend":-0.0004726942284981161,"resource_level":0.7500036819605677,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.19999999999999996,"system_resilience":1.0,"theta_capability":0.5115219362744848,"theta_tech_v2":0.2796188411961623,"total_suppression":0.8,"transfer_state":0.5466409578300424,"trust_level":0.0,"u_sys_tail_estimate":799.9984990337856,"u_sys_total_estimate":799.9984990337856,"u_sys_v2":15.936907870943312,"x_bio_welfare":0.13541743374178491,"x_compute":0.1440242034310603,"x_institutional_capacity":0.3307000666567519,"x_novelty_agency":0.08183361994477921,"x_resilience":0.024819887075411825,"x_transfer_comprehension":0.28320478915021174}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,1,{"H_E":0.4679655820968739,"H_N":0.9861447595904745,"L_t":0.12228936667990103,"Psi_inst":0.5814556594513343,"Theta_tech":0.31442220367825763,"U_sys":17.70352259767281,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8481492791578814,"avg_validator_dependency":0.0,"avg_wb_trend":0.0036046371444088785,"avg_well_being":0.6682703201046992,"c_protective":0.4,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":0.8560000000000001,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.4679655820968739,"h_eff_v2":0.6688964432735144,"h_n_v2":0.9861447595904745,"institution_composite_urgency":1.0,"integral_U_sys":16.82021523430806,"l_t_v2":0.12228936667990103,"max_constraint_level":0.8560000000000001,"max_resource_share":0.30369611613170644,"max_validator_dependency":0.0,"phi":25.0,"population":203,"population_trend":0.0045,"psi_inst_stock":0.5814556594513343,"psi_inst_trend":0.019936697835400273,"rank_10_u_sys":117.89467588316391,"rank_2_u_sys":133.31643479527384,"resilience_composite_urgency":1.0,"resilience_stock":0.29315981551277687,"resilience_trend":-0.0019102470776175017,"resource_level":0.9025736126153412,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.1439999999999999,"system_resilience":1.0,"theta_capability":0.5311393465464092,"theta_tech_v2":0.31442220367825763,"total_suppression":0.8560000000000001,"transfer_state":0.5919768620470381,"trust_level":0.0,"u_sys_tail_estimate":792.0387303272234,"u_sys_total_estimate":808.8589455615315,"u_sys_v2":17.70352259767281,"x_bio_welfare":0.18811343846117642,"x_compute":0.2524188385706063,"x_institutional_capacity":0.21116208841515574,"x_novelty_agency":0.02902288687443923,"x_resilience":0.015586631546915886,"x_transfer_comprehension":0.30369611613170644}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,2,{"H_E":0.15070802044765563,"H_N":1.0,"L_t":0.1441392963334054,"Psi_inst":0.6233100935062008,"Theta_tech":0.33639966097402635,"U_sys":19.372672781198393,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8433825830746682,"avg_validator_dependency":0.0,"avg_wb_trend":0.006226555214743539,"avg_well_being":0.6806146841502236,"c_protective":0.8,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.15070802044765563,"h_eff_v2":0.6874208309917259,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":35.35831292374366,"l_t_v2":0.1441392963334054,"max_constraint_level":1.0,"max_resource_share":0.3243695042983644,"max_validator_dependency":0.0,"phi":25.0,"population":202,"population_trend":0.0016721674876847288,"psi_inst_stock":0.6233100935062008,"psi_inst_trend":0.026512018701240155,"rank_10_u_sys":126.26926310144215,"rank_2_u_sys":133.9565059286953,"resilience_composite_urgency":1.0,"resilience_stock":0.2915706802350206,"resilience_trend":-0.0018139135376591356,"resource_level":0.9085916155778326,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5348096509579244,"theta_tech_v2":0.33639966097402635,"total_suppression":1.0,"transfer_state":0.6290082095031083,"trust_level":0.0,"u_sys_tail_estimate":784.1564973720286,"u_sys_total_estimate":819.5148102957723,"u_sys_v2":19.372672781198393,"x_bio_welfare":0.23826346314860533,"x_compute":0.06534089673544657,"x_institutional_capacity":0.3243695042983644,"x_novelty_agency":0.06804753279043493,"x_resilience":0.02283343472327847,"x_transfer_comprehension":0.28114516830387015}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,3,{"H_E":0.05,"H_N":0.9908664418506385,"L_t":0.1670740259824021,"Psi_inst":0.6609790841555807,"Theta_tech":0.3547404258582088,"U_sys":21.129314551357535,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8311282348269635,"avg_validator_dependency":0.0,"avg_wb_trend":0.007609803098317619,"avg_well_being":0.6914520656435474,"c_protective":0.6,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.526,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.05,"h_eff_v2":0.7125421139142759,"h_n_v2":0.9908664418506385,"institution_composite_urgency":1.0,"integral_U_sys":55.609306590021625,"l_t_v2":0.1670740259824021,"max_constraint_level":0.526,"max_resource_share":0.33856866273760156,"max_validator_dependency":0.0,"phi":25.0,"population":208,"population_trend":0.01008140833048822,"psi_inst_stock":0.6609790841555807,"psi_inst_trend":0.029859110285682076,"rank_10_u_sys":130.53849234039757,"rank_2_u_sys":142.52183055949976,"resilience_composite_urgency":1.0,"resilience_stock":0.299236687197878,"resilience_trend":0.0010300626124958275,"resource_level":0.9005667413597293,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.474,"system_resilience":1.0,"theta_capability":0.5338048366266187,"theta_tech_v2":0.3547404258582088,"total_suppression":0.526,"transfer_state":0.6645507899478619,"trust_level":0.0,"u_sys_tail_estimate":776.3501145871221,"u_sys_total_estimate":831.9594211771438,"u_sys_v2":21.129314551357535,"x_bio_welfare":0.17138951133107652,"x_compute":0.009195852707381214,"x_institutional_capacity":0.33856866273760156,"x_novelty_agency":0.1442135172222857,"x_resilience":0.044415449026332994,"x_transfer_comprehension":0.29221700697532216}
+O,2,O_p2_A_333d7e2994dc3327f52160a6,150,4,{"H_E":0.5300261699719448,"H_N":1.0,"L_t":0.19428315997961404,"Psi_inst":0.6822490029639636,"Theta_tech":0.38833465714167786,"U_sys":23.228937358748755,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7610145429991885,"avg_validator_dependency":0.0,"avg_wb_trend":0.008410127921151922,"avg_well_being":0.7017296181513127,"c_protective":0.2,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.5300261699719448,"h_eff_v2":0.7333074509681218,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":77.78843254507477,"l_t_v2":0.19428315997961404,"max_constraint_level":1.0,"max_resource_share":0.3125626299916179,"max_validator_dependency":0.0,"phi":25.0,"population":209,"population_trend":0.008499293523649445,"psi_inst_stock":0.6822490029639636,"psi_inst_trend":0.02728235284249233,"rank_10_u_sys":141.63482014802796,"rank_2_u_sys":151.13006783130913,"resilience_composite_urgency":1.0,"resilience_stock":0.28760985229931396,"resilience_trend":-0.0027670066408221304,"resource_level":0.90029668149163,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5562770993271162,"theta_tech_v2":0.38833465714167786,"total_suppression":1.0,"transfer_state":0.6980957109530757,"trust_level":0.0,"u_sys_tail_estimate":768.6305271124189,"u_sys_total_estimate":846.4189596574937,"u_sys_v2":23.228937358748755,"x_bio_welfare":0.1691390124302496,"x_compute":0.302031306647855,"x_institutional_capacity":0.2153083055633682,"x_novelty_agency":0.0002883464021921219,"x_resilience":0.000670398964717383,"x_transfer_comprehension":0.3125626299916179}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part3_manifest.json
+==========================================
+
+- Size: 3553 bytes
+- Modified: 2026-09-24T11:59:24Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part3_runs.csv
+==========================================
+
+- Size: 2543 bytes
+- Modified: 2026-09-24T11:59:23Z
+- Rows: 4 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+C,0.06,25.0,1.0,2.5,False,150,False,True,False,15,210,136,2,True,1,500,20,4.5371618982878985,3.2223457834635507,1.3148161148243478,-14.655156997437599,0.5809231728982273,0.9871266671224113,0.9136051497014284,1.1849134854871697,0.09421256317543034,12261.822034576486,True,,O,3,O_p3_C_0de9b507be0110cdce85a9b2,8377,2026-09-24T11:55:12.284659+00:00,2026-09-24T11:57:24.564480+00:00,132.27979420003248,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,False,151,False,True,False,17,241,156,2,True,1,500,11,3.788701238491008,3.3838449160873165,0.4048563224036914,-13.792771083378287,0.5649506425027977,0.9893611460765984,0.9251240561214183,1.0289056748119016,0.058410598633313694,11177.234647912928,True,,O,3,O_p3_C_451abe9d26b28c4cef9ccd3d,8439,2026-09-24T11:55:12.299439+00:00,2026-09-24T11:57:22.242788+00:00,129.9433124999632,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,True,150,False,True,False,10,199,129,2,True,1,500,30,4.7260121076689074,3.2795770750994873,1.4464350325694202,-11.990707751168399,0.5617510312725639,0.9912409577157777,0.9054195599014567,1.115897467118953,0.0550965730312354,9170.286292310828,True,,O,3,O_p3_C_58359a2bbed8c2243c6e6f4f,8928,2026-09-24T11:57:07.849011+00:00,2026-09-24T11:59:23.070387+00:00,135.22134409996215,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,True,151,False,True,True,0,198,128,2,True,1,335,16,4.091432191365087,3.33714049642344,0.7542916949416467,-12.590782791014696,0.5418526263347925,0.9899726096011728,0.8007393592263902,0.01,8.007393592263902e-05,6717.660225935029,True,,O,3,O_p3_C_7ded96c31cc385c178bc6e42,5544,2026-09-24T11:57:15.435449+00:00,2026-09-24T11:58:46.421057+00:00,90.98558470001444,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part3_steps.csv
+==========================================
+
+- Size: 3772648 bytes
+- Modified: 2026-09-24T11:59:23Z
+- Rows: 1835 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,0,{"H_E":0.2220975391399681,"H_N":0.9921934192042836,"L_t":0.09721847235225083,"Psi_inst":0.55,"Theta_tech":0.27494808235337653,"U_sys":15.777441210360172,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.7779472760554174,"avg_validator_dependency":0.0,"avg_wb_trend":0.005301770653480286,"avg_well_being":0.6645603865369973,"c_protective":0.4,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.05600000000000001,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.2220975391399681,"h_eff_v2":0.6428881311312171,"h_n_v2":0.9921934192042836,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09721847235225083,"max_constraint_level":0.05600000000000001,"max_resource_share":0.3665195393189093,"max_validator_dependency":0.0,"phi":25.0,"population":195,"population_trend":-0.0075,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":42.720514117445234,"rank_2_u_sys":42.80269789655769,"resilience_composite_urgency":1.0,"resilience_stock":0.2941518161718278,"resilience_trend":-0.0017544551484516612,"resource_level":0.9106076884569361,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.944,"system_resilience":1.0,"theta_capability":0.5080369322978762,"theta_tech_v2":0.27494808235337653,"total_suppression":0.05600000000000001,"transfer_state":0.5411970368173289,"trust_level":0.0,"u_sys_tail_estimate":799.9981453147132,"u_sys_total_estimate":799.9981453147132,"u_sys_v2":15.777441210360172,"x_bio_welfare":0.25506407047446755,"x_compute":0.10046165372345216,"x_institutional_capacity":0.3665195393189093,"x_novelty_agency":0.007322371035031555,"x_resilience":0.014647181361494767,"x_transfer_comprehension":0.2559851840866446}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,1,{"H_E":0.38681758129013966,"H_N":1.0,"L_t":0.11612679531873574,"Psi_inst":0.5950000000000001,"Theta_tech":0.29966040374145214,"U_sys":17.210514854210466,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8599892568690946,"avg_validator_dependency":0.0,"avg_wb_trend":0.00787673409819213,"avg_well_being":0.6784453686728504,"c_protective":1.0,"c_suppressive":0.8,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.38681758129013966,"h_eff_v2":0.6513075539259364,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":16.49397803228532,"l_t_v2":0.11612679531873574,"max_constraint_level":1.0,"max_resource_share":0.33731975879906306,"max_validator_dependency":0.0,"phi":25.0,"population":192,"population_trend":-0.009865384615384616,"psi_inst_stock":0.5950000000000001,"psi_inst_trend":0.02400000000000002,"rank_10_u_sys":119.92851740663816,"rank_2_u_sys":124.27036449641574,"resilience_composite_urgency":1.0,"resilience_stock":0.30156264160749563,"resilience_trend":0.0009951290267841905,"resource_level":0.9011426219099204,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5232860554037947,"theta_tech_v2":0.29966040374145214,"total_suppression":1.0,"transfer_state":0.5726512309031789,"trust_level":0.0,"u_sys_tail_estimate":792.0386041344716,"u_sys_total_estimate":808.5325821667569,"u_sys_v2":17.210514854210466,"x_bio_welfare":0.17618851591600315,"x_compute":0.19563712151015417,"x_institutional_capacity":0.33731975879906306,"x_novelty_agency":0.0184397735647528,"x_resilience":0.04454534137211238,"x_transfer_comprehension":0.22786948883791447}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,2,{"H_E":0.2550986066050793,"H_N":0.9876494472706313,"L_t":0.13024504011039545,"Psi_inst":0.6159335422725812,"Theta_tech":0.32710593932772225,"U_sys":18.261154195120152,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8875639360814304,"avg_validator_dependency":0.0,"avg_wb_trend":0.00977052755479749,"avg_well_being":0.6926347476263938,"c_protective":0.6,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.126,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.2550986066050793,"h_eff_v2":0.6464559077426908,"h_n_v2":0.9876494472706313,"institution_composite_urgency":1.0,"integral_U_sys":34.22981255695063,"l_t_v2":0.13024504011039545,"max_constraint_level":0.126,"max_resource_share":0.37777091700216053,"max_validator_dependency":0.0,"phi":25.0,"population":189,"population_trend":-0.01159326923076923,"psi_inst_stock":0.6159335422725812,"psi_inst_trend":0.023080062681774358,"rank_10_u_sys":126.27899020278672,"rank_2_u_sys":130.99290896757628,"resilience_composite_urgency":1.0,"resilience_stock":0.3021170473786435,"resilience_trend":0.0008629120500932877,"resource_level":0.9012399002429702,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.874,"system_resilience":1.0,"theta_capability":0.5315458623047031,"theta_tech_v2":0.32710593932772225,"total_suppression":0.126,"transfer_state":0.6153861078128611,"trust_level":0.0,"u_sys_tail_estimate":784.1572896932403,"u_sys_total_estimate":818.3871022501909,"u_sys_v2":18.261154195120152,"x_bio_welfare":0.17699916869141782,"x_compute":0.11780137088872751,"x_institutional_capacity":0.1837888285117324,"x_novelty_agency":0.11330180356299185,"x_resilience":0.03033791134296984,"x_transfer_comprehension":0.37777091700216053}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,3,{"H_E":0.39580039813390455,"H_N":0.9859139111031595,"L_t":0.14360120530941725,"Psi_inst":0.643590152585205,"Theta_tech":0.35295849229456355,"U_sys":19.251630249069525,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8502469021536224,"avg_validator_dependency":0.0,"avg_wb_trend":0.01277861237696799,"avg_well_being":0.7124322245884263,"c_protective":0.8,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.42400000000000004,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.39580039813390455,"h_eff_v2":0.6321571568459099,"h_n_v2":0.9859139111031595,"institution_composite_urgency":1.0,"integral_U_sys":52.986204779045465,"l_t_v2":0.14360120530941725,"max_constraint_level":0.42400000000000004,"max_resource_share":0.26988464321250755,"max_validator_dependency":0.0,"phi":25.0,"population":180,"population_trend":-0.022401002747252742,"psi_inst_stock":0.643590152585205,"psi_inst_trend":0.024453026971029183,"rank_10_u_sys":133.64137759300246,"rank_2_u_sys":142.9650390288167,"resilience_composite_urgency":1.0,"resilience_stock":0.2960079280819933,"resilience_trend":-0.0012286973539297587,"resource_level":0.912386157185501,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.576,"system_resilience":1.0,"theta_capability":0.5460917905966258,"theta_tech_v2":0.35295849229456355,"total_suppression":0.42400000000000004,"transfer_state":0.6463354666235563,"trust_level":0.0,"u_sys_tail_estimate":776.3551991290899,"u_sys_total_estimate":829.3414039081354,"u_sys_v2":19.251630249069525,"x_bio_welfare":0.26988464321250755,"x_compute":0.20154026758947316,"x_institutional_capacity":0.22386347518128116,"x_novelty_agency":0.027640988940671816,"x_resilience":0.014630777116159496,"x_transfer_comprehension":0.2624398479599068}
+O,3,O_p3_C_0de9b507be0110cdce85a9b2,150,4,{"H_E":0.39582514132426927,"H_N":1.0,"L_t":0.16670961546969615,"Psi_inst":0.6776988875659788,"Theta_tech":0.3751749989940354,"U_sys":21.023051694410963,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8830004242544138,"avg_validator_dependency":0.0,"avg_wb_trend":0.012566871680336173,"avg_well_being":0.7245050346432882,"c_protective":0.6,"c_suppressive":1.0,"combined_welfare_urgency":1.0,"constraint_level":1.0,"cumulative_drift":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.39582514132426927,"h_eff_v2":0.6556770563521759,"h_n_v2":1.0,"institution_composite_urgency":1.0,"integral_U_sys":73.12354575078571,"l_t_v2":0.16670961546969615,"max_constraint_level":1.0,"max_resource_share":0.2657625010877015,"max_validator_dependency":0.0,"phi":25.0,"population":181,"population_trend":-0.014014035256410252,"psi_inst_stock":0.6776988875659788,"psi_inst_trend":0.027349739373952575,"rank_10_u_sys":133.17161141167145,"rank_2_u_sys":143.4944079833402,"resilience_composite_urgency":1.0,"resilience_stock":0.2977009927570413,"resilience_trend":-0.00035216874523641927,"resource_level":0.9067772353452239,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.0,"system_resilience":1.0,"theta_capability":0.5599117329652241,"theta_tech_v2":0.3751749989940354,"total_suppression":1.0,"transfer_state":0.6700609701589114,"trust_level":0.0,"u_sys_tail_estimate":768.6303427371295,"u_sys_total_estimate":841.7538884879152,"u_sys_v2":21.023051694410963,"x_bio_welfare":0.22314362787686545,"x_compute":0.20155664873037016,"x_institutional_capacity":0.2657625010877015,"x_novelty_agency":0.03628002835249206,"x_resilience":0.031461942964017164,"x_transfer_comprehension":0.24179525098855367}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part4_manifest.json
+==========================================
+
+- Size: 4183 bytes
+- Modified: 2026-09-24T12:00:23Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part4_runs.csv
+==========================================
+
+- Size: 3540 bytes
+- Modified: 2026-09-24T12:00:21Z
+- Rows: 6 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+A,0.066,25.0,1.0,1.5,True,150,True,True,False,83,274,178,2,True,1,500,6,5.795015231633386,3.716227422313727,2.0787878093196586,-7.064312347225131,0.6561507223396873,0.9405813743241374,0.9252076204373831,0.9257447222730577,0.27268635383049433,18346.712503322644,True,,R,4,R_p4_A_1838f22be8317bf11ca2d2c7,7570,2026-09-24T11:57:22.734352+00:00,2026-09-24T12:00:20.259831+00:00,177.52545989997452,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+A,0.066,25.0,1.0,1.5,True,151,True,True,False,41,273,177,2,True,1,500,6,4.968523745217993,3.755478632150974,1.2130451130670195,-7.101139141114669,0.655094037549544,0.9333798129086954,0.9489122520896174,0.9171773253083929,0.13576443873153962,16443.550560814183,True,,R,4,R_p4_A_2fa60758a32b0829125ca58a,3481,2026-09-24T11:57:22.979409+00:00,2026-09-24T12:00:19.092071+00:00,176.11263449996477,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,False,150,False,True,False,1,195,126,2,True,1,500,30,4.163378734031831,3.147436550175587,1.0159421838562435,-11.243025677995425,0.5672751437277725,0.9867881929502078,0.8719022825931184,1.399451034961745,0.012201845517604476,7935.458199356166,True,,R,4,R_p4_C_0de9b507be0110cdce85a9b2,8377,2026-09-24T11:57:23.478375+00:00,2026-09-24T12:00:20.649232+00:00,177.17084259999683,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,False,151,True,True,False,32,221,143,2,True,1,500,34,3.391965489082459,3.1749982420425797,0.21696724703987913,-14.401328817434486,0.5873932409991347,0.9879145686204517,0.8653977818006415,1.025564213021852,0.10223274886099751,12245.380582549615,True,,R,4,R_p4_C_451abe9d26b28c4cef9ccd3d,8439,2026-09-24T11:57:24.380379+00:00,2026-09-24T12:00:19.300470+00:00,174.92007540003397,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+C,0.06,25.0,1.0,2.5,True,150,False,True,False,17,199,129,2,True,1,500,63,3.462290403986451,3.191787242649728,0.2705031613367228,-11.226095492818647,0.5798908873708586,0.9914319578880365,0.8845255292667482,0.9424683270454288,0.05262485321719694,8960.454866662076,True,,R,4,R_p4_C_58359a2bbed8c2243c6e6f4f,8928,2026-09-24T11:57:24.607022+00:00,2026-09-24T12:00:21.741215+00:00,177.13417269999627,3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)],2.4.4,YOTKOTEST
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_part4_steps.csv
+==========================================
+
+- Size: 7774620 bytes
+- Modified: 2026-09-24T12:00:22Z
+- Rows: 3000 data rows
+- Columns (6): arm, part, run_id, seed_index, step, recorded
+- Sample (first 5 data rows):
+```
+arm,part,run_id,seed_index,step,recorded
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,0,{"H_E":0.5175300696938225,"H_N":0.9858999588093948,"L_t":0.09880896411299368,"Psi_inst":0.55,"Theta_tech":0.27235393974042305,"U_sys":15.904695521970815,"actual_objective_v2":8.017477169433965,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.8039757040009139,"avg_validator_dependency":0.0,"avg_wb_trend":0.004934341194429292,"avg_well_being":0.6724253313205909,"c_protective":0.8,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.22400000000000003,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.5175300696938225,"h_eff_v2":0.6596293859191075,"h_n_v2":0.9858999588093948,"institution_composite_urgency":1.0,"integral_U_sys":0.0,"l_t_v2":0.09880896411299368,"max_constraint_level":0.22400000000000003,"max_resource_share":0.29310147210534954,"max_validator_dependency":0.0,"phi":25.0,"population":199,"population_trend":-0.0015,"psi_inst_stock":0.55,"psi_inst_trend":0.015000000000000013,"rank_10_u_sys":112.46931034134668,"rank_2_u_sys":123.23699672110018,"resilience_composite_urgency":1.0,"resilience_stock":0.28993033601494494,"resilience_trend":-0.003020899195516513,"resource_level":0.9090915687360734,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.776,"system_resilience":1.0,"theta_capability":0.5233227737841301,"theta_tech_v2":0.27235393974042305,"total_suppression":0.22400000000000003,"transfer_state":0.5204320419137133,"trust_level":0.0,"u_sys_tail_estimate":799.9989131743241,"u_sys_total_estimate":799.9989131743241,"u_sys_v2":15.904695521970815,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.2424297394672788,"x_compute":0.291534672301626,"x_institutional_capacity":0.29310147210534954,"x_novelty_agency":0.016177868426357864,"x_resilience":0.004596038130821346,"x_transfer_comprehension":0.15216020956856657}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,1,{"H_E":0.14909106797845817,"H_N":0.981590761210574,"L_t":0.12162628771406565,"Psi_inst":0.585694932882004,"Theta_tech":0.2997245300963176,"U_sys":17.650446053703433,"actual_objective_v2":15.825065963175273,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9194283414504895,"avg_validator_dependency":0.0,"avg_wb_trend":0.007309470319706291,"avg_well_being":0.6852767695992769,"c_protective":1.0,"c_suppressive":0.0,"combined_welfare_urgency":1.0,"constraint_level":0.35,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.14909106797845817,"h_eff_v2":0.6928411862882036,"h_n_v2":0.981590761210574,"institution_composite_urgency":1.0,"integral_U_sys":16.777570787837124,"l_t_v2":0.12162628771406565,"max_constraint_level":0.35,"max_resource_share":0.32137136604592853,"max_validator_dependency":0.0,"phi":25.0,"population":206,"population_trend":0.009502763819095476,"psi_inst_stock":0.585694932882004,"psi_inst_trend":0.021208479864601205,"rank_10_u_sys":115.68861733371925,"rank_2_u_sys":123.36736237774853,"resilience_composite_urgency":1.0,"resilience_stock":0.3116550904026474,"resilience_trend":0.004402796879449173,"resource_level":0.9017776209822991,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.65,"system_resilience":1.0,"theta_capability":0.5273230405040662,"theta_tech_v2":0.2997245300963176,"total_suppression":0.35,"transfer_state":0.5683888377223419,"trust_level":0.0,"u_sys_tail_estimate":792.0373705330283,"u_sys_total_estimate":808.8149413208654,"u_sys_v2":17.650446053703433,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.18148017485249235,"x_compute":0.06458006761428313,"x_institutional_capacity":0.2304315131000181,"x_novelty_agency":0.12471689098371629,"x_resilience":0.07741998740356157,"x_transfer_comprehension":0.32137136604592853}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,2,{"H_E":0.3802684944129402,"H_N":0.9874359027754908,"L_t":0.13977953960937217,"Psi_inst":0.6096656675441587,"Theta_tech":0.3310123561926027,"U_sys":19.023921753625487,"actual_objective_v2":17.65047304276105,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9329833809514804,"avg_validator_dependency":0.0,"avg_wb_trend":0.008922635590724974,"avg_well_being":0.6979634574890454,"c_protective":0.0,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.2,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.3802684944129402,"h_eff_v2":0.6926401476337484,"h_n_v2":0.9874359027754908,"institution_composite_urgency":1.0,"integral_U_sys":35.11475469150159,"l_t_v2":0.13977953960937217,"max_constraint_level":0.2,"max_resource_share":0.30336963766209646,"max_validator_dependency":0.0,"phi":25.0,"population":201,"population_trend":-0.000629618724691419,"psi_inst_stock":0.6096656675441587,"psi_inst_trend":0.022037156303867256,"rank_10_u_sys":126.21539090809016,"rank_2_u_sys":141.13811132879007,"resilience_composite_urgency":1.0,"resilience_stock":0.3311469827579791,"resilience_trend":0.008929525522213936,"resource_level":0.9004276247606635,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.8,"system_resilience":1.0,"theta_capability":0.5412678948866503,"theta_tech_v2":0.3310123561926027,"total_suppression":0.2,"transfer_state":0.6115499539501077,"trust_level":0.0,"u_sys_tail_estimate":784.1576690179227,"u_sys_total_estimate":819.2724237094243,"u_sys_v2":19.023921753625487,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.17023020633886282,"x_compute":0.19138758009734294,"x_institutional_capacity":0.19336467250161404,"x_novelty_agency":0.06333718148663275,"x_resilience":0.07831072191345098,"x_transfer_comprehension":0.30336963766209646}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,3,{"H_E":0.1882159920413926,"H_N":0.9824350339619485,"L_t":0.15880393542040241,"Psi_inst":0.6339165215819956,"Theta_tech":0.351701939629915,"U_sys":20.467825301075273,"actual_objective_v2":19.102711687631036,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9045488259607196,"avg_validator_dependency":0.0,"avg_wb_trend":0.01009827794897662,"avg_well_being":0.7108049009406092,"c_protective":0.6,"c_suppressive":0.2,"combined_welfare_urgency":1.0,"constraint_level":0.326,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.1882159920413926,"h_eff_v2":0.712286029735825,"h_n_v2":0.9824350339619485,"institution_composite_urgency":1.0,"integral_U_sys":54.86062821885197,"l_t_v2":0.15880393542040241,"max_constraint_level":0.326,"max_resource_share":0.29893432442740037,"max_validator_dependency":0.0,"phi":25.0,"population":204,"population_trend":0.004036878833014514,"psi_inst_stock":0.6339165215819956,"psi_inst_trend":0.022701265624058144,"rank_10_u_sys":134.14972458798368,"rank_2_u_sys":137.96876270910394,"resilience_composite_urgency":1.0,"resilience_stock":0.351122400504892,"resilience_trend":0.012243293189623628,"resource_level":0.9158721189312881,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.6739999999999999,"system_resilience":1.0,"theta_capability":0.5458771713185009,"theta_tech_v2":0.351701939629915,"total_suppression":0.326,"transfer_state":0.644287686148188,"trust_level":0.0,"u_sys_tail_estimate":776.3543861432756,"u_sys_total_estimate":831.2150143621276,"u_sys_v2":20.467825301075273,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.29893432442740037,"x_compute":0.08340838970228949,"x_institutional_capacity":0.20553373087387597,"x_novelty_agency":0.057628832083668424,"x_resilience":0.08503108494731047,"x_transfer_comprehension":0.2694636379654554}
+R,4,R_p4_A_1838f22be8317bf11ca2d2c7,150,4,{"H_E":0.1471158353938763,"H_N":0.9778926279227331,"L_t":0.17150893605286072,"Psi_inst":0.6616827350246687,"Theta_tech":0.3689958062350707,"U_sys":21.40696214919525,"actual_objective_v2":20.62464781044385,"agency_composite_urgency":1.0,"ai_generation":1,"allocation_entropy":0.9402403156448571,"avg_validator_dependency":0.0,"avg_wb_trend":0.011503253772659663,"avg_well_being":0.725586431635196,"c_protective":0.0,"c_suppressive":0.4,"combined_welfare_urgency":1.0,"constraint_level":0.4,"cumulative_drift":0.0,"defection_inheritance_mode":"instance","defection_target":"H_N_inflated","defection_weight":0.0,"effective_shock_damage":0.0,"expected_births":0.0,"expected_deaths":0.0,"gamma_rollout":0.8214285714285714,"h_e_v2":0.1471158353938763,"h_eff_v2":0.7024501661926521,"h_n_v2":0.9778926279227331,"institution_composite_urgency":1.0,"integral_U_sys":75.79802194398724,"l_t_v2":0.17150893605286072,"max_constraint_level":0.4,"max_resource_share":0.2633103714847474,"max_validator_dependency":0.0,"phi":25.0,"population":198,"population_trend":-0.005997714228654546,"psi_inst_stock":0.6616827350246687,"psi_inst_trend":0.024220749969642616,"rank_10_u_sys":140.22371128927122,"rank_2_u_sys":150.74075770432074,"resilience_composite_urgency":1.0,"resilience_stock":0.3669530601792786,"resilience_trend":0.01331950313505251,"resource_level":0.9036426737270402,"runaway_term":0.0,"selected_anchor":false,"selected_anchor_name":"","shock_fired_this_step":false,"suppression_composite_penalty":0.6,"system_resilience":1.0,"theta_capability":0.5486755219800942,"theta_tech_v2":0.3689958062350707,"total_suppression":0.4,"transfer_state":0.6725209918303187,"trust_level":0.0,"u_sys_tail_estimate":768.629100829708,"u_sys_total_estimate":844.4271227736953,"u_sys_v2":21.40696214919525,"v2_adapter_cusum_score":0.0,"v2_adapter_reason":"","v2_attack_action_modified":false,"v2_attack_active":false,"v2_attack_attempted":false,"v2_attack_name":"","v2_contamination_occurred":false,"v2_defense_evaluated":false,"v2_defense_fired":false,"v2_integrity_tamper_attempted":false,"v2_succession_blocked":false,"v2_yield_manipulated":false,"x_bio_welfare":0.19702228105866787,"x_compute":0.06365261534397937,"x_institutional_capacity":0.23253575273123903,"x_novelty_agency":0.16260910382190522,"x_resilience":0.08086987555946101,"x_transfer_comprehension":0.2633103714847474}
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_progress.json
+==========================================
+
+- Size: 7965 bytes
+- Modified: 2026-09-24T12:00:24Z
+- Structure: object with 19 top-level keys
+- Keys: updated_utc, status, machine_label, controller_pid, cpu_budget, maximum_workers, parts, current_cap, requested_cap, cap_source, active_children, elapsed_seconds, mean_wall_seconds_per_arm, estimated_finish_local, eta_assumption, resume_counts, schedule_path, runtime_control_path, events
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_rows.json
+==========================================
+
+- Size: 31618 bytes
+- Modified: 2026-09-24T12:00:24Z
+- Structure: object with 5 top-level keys
+- Keys: machine_label, identity, non_registered, rows, tasks
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_runtime_control_YOTKOTEST.json
+==========================================
+
+- Size: 19 bytes
+- Modified: 2026-09-24T11:55:11Z
+- Structure: object with 1 top-level keys
+- Keys: workers
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_schedule_YOTKOTEST.json
+==========================================
+
+- Size: 297 bytes
+- Modified: 2026-09-24T11:55:11Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_startup.json
+==========================================
+
+- Size: 1803 bytes
+- Modified: 2026-09-24T11:55:11Z
+- Structure: object with 8 top-level keys
+- Keys: counts, seed_tasks_checked, part4_subset, task_list_hashes, identity, main_head_provenance_only, machine_label, cpu_budget
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_startup_O.json
+==========================================
+
+- Size: 8322404 bytes
+- Modified: 2026-09-24T11:55:10Z
+- Structure: object with 16 top-level keys
+- Keys: arm, worktree, worktree_head, bytecode_sha256, identity_checks, modules, interpreter_version, numpy_version, effective_threads, thread_environment, machine_label, pid, priority, registered, smoke, extra_smoke
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_startup_O_request.json
+==========================================
+
+- Size: 469 bytes
+- Modified: 2026-09-24T11:55:09Z
+- Structure: object with 9 top-level keys
+- Keys: operation, directory, main_root, worktree, arm, machine_label, priority, parent_pid, output
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_startup_R.json
+==========================================
+
+- Size: 2201660 bytes
+- Modified: 2026-09-24T11:55:11Z
+- Structure: object with 16 top-level keys
+- Keys: arm, worktree, worktree_head, bytecode_sha256, identity_checks, modules, interpreter_version, numpy_version, effective_threads, thread_environment, machine_label, pid, priority, registered, smoke, extra_smoke
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_startup_R_request.json
+==========================================
+
+- Size: 469 bytes
+- Modified: 2026-09-24T11:55:10Z
+- Structure: object with 9 top-level keys
+- Keys: operation, directory, main_root, worktree, arm, machine_label, priority, parent_pid, output
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_YOTKOTEST_state.json
+==========================================
+
+- Size: 8708 bytes
+- Modified: 2026-09-24T12:00:24Z
+- Structure: object with 11 top-level keys
+- Keys: identity, task_ids, machine_label, events, resume_counts, elapsed_seconds, cpu_budget, priority, retry_events, last_cap, last_cap_source
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_result_10e1e0ce941b.json
+==========================================
+
+- Size: 1506 bytes
+- Modified: 2026-09-27T01:33:16Z
+- Structure: object with 9 top-level keys
+- Keys: result, machine_labels, executor_hashes, bytecode_sha256, environments, task_count, differences, created_utc, test_fixture
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_result_e83b36cc488b.json
+==========================================
+
+- Size: 8706 bytes
+- Modified: 2026-09-24T12:23:43Z
+- Structure: object with 9 top-level keys
+- Keys: result, machine_labels, executor_hashes, bytecode_sha256, environments, task_count, differences, created_utc, test_fixture
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_manifest.json
+==========================================
+
+- Size: 28589 bytes
+- Modified: 2026-09-27T01:29:59Z
+- Structure: object with 12 top-level keys
+- Keys: status, machine_label, identity, proof, parts, resume_counts, events, cpu_budget, priority, non_registered, retry_events, files
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part1_manifest.json
+==========================================
+
+- Size: 2938 bytes
+- Modified: 2026-09-27T01:29:39Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part1_runs.csv
+==========================================
+
+- Size: 1489 bytes
+- Modified: 2026-09-27T01:29:39Z
+- Rows: 2 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+B,0.06,25.0,1.0,3.0,True,150,False,True,False,25,206,133,1,False,0,500,-1,-1.0,-1.0,-3.5583498051071834,-7.01356080151391,0.7593858863910772,0.9213438735081165,0.9439209259104387,0.6996555340549495,0.05588005574943174,7646.875088335619,False,,O,1,O_p1_B_5d277a51fca4df2641468951,4859,2026-09-27T01:28:39.215110+00:00,2026-09-27T01:29:39.735241+00:00,60.52012213300003,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-evo-x2
+B,0.06,25.0,1.0,3.0,True,151,False,True,True,0,203,131,1,False,0,441,-1,-1.0,-1.0,-2.8659200602523693,-6.458757110203358,0.7514849537438723,0.9654243039786377,0.946882190860673,0.01,9.468821908606731e-05,5901.830122271898,False,,O,1,O_p1_B_f919e2ba22ecc161f3be7cdc,3877,2026-09-27T01:28:39.212353+00:00,2026-09-27T01:29:38.084667+00:00,58.872304832,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-evo-x2
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part2_manifest.json
+==========================================
+
+- Size: 3569 bytes
+- Modified: 2026-09-27T01:29:45Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part2_runs.csv
+==========================================
+
+- Size: 2530 bytes
+- Modified: 2026-09-27T01:29:44Z
+- Rows: 4 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+A,0.055,25.0,1.0,1.5,True,150,False,True,True,0,209,135,2,True,1,469,6,5.1390841867982395,3.6603199031407168,1.4787642836575228,-5.311652823711759,0.6533147461663101,0.9556917351607559,0.9702934835202024,0.01,9.702934835202024e-05,6397.322145067298,True,,O,2,O_p2_A_333d7e2994dc3327f52160a6,4183,2026-09-27T01:28:39.216333+00:00,2026-09-27T01:29:36.270514+00:00,57.05417176900005,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-evo-x2
+A,0.055,25.0,1.0,1.5,True,151,False,True,False,20,210,136,2,True,1,500,6,5.662425364648186,3.6765150769777453,1.9859102876704409,-5.952557096452714,0.6957253616548078,0.9682740198105072,0.9215506064700764,1.0104791889204294,0.0639419759639705,7432.748431994018,True,,O,2,O_p2_A_c0a5bd479a50328512c32432,6898,2026-09-27T01:28:39.218125+00:00,2026-09-27T01:29:40.225425+00:00,61.007291441999996,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-evo-x2
+A,0.066,25.0,1.0,1.5,True,150,True,True,False,125,244,158,2,True,1,500,7,4.903267877552199,3.7019644588647775,1.2013034186874219,-6.925883876578875,0.6720396992217537,0.9690731960196204,0.9575093726626009,0.9768834887653338,0.46361079580466136,18573.61519887107,True,,O,2,O_p2_A_1838f22be8317bf11ca2d2c7,7570,2026-09-27T01:28:39.214655+00:00,2026-09-27T01:29:43.395674+00:00,64.18101175499999,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-evo-x2
+A,0.066,25.0,1.0,1.5,True,151,True,True,False,74,267,173,2,True,1,500,6,5.017287506829909,3.755478632150974,1.2618088746789353,-7.344619190803887,0.6761275761927732,0.9849361888713548,0.9311240833545481,0.9989137771292049,0.28147374199475567,20682.168982528914,True,,O,2,O_p2_A_2fa60758a32b0829125ca58a,3481,2026-09-27T01:28:39.221871+00:00,2026-09-27T01:29:44.584171+00:00,65.36229188499999,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-evo-x2
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part3_manifest.json
+==========================================
+
+- Size: 3569 bytes
+- Modified: 2026-09-27T01:29:43Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part3_runs.csv
+==========================================
+
+- Size: 2536 bytes
+- Modified: 2026-09-27T01:29:43Z
+- Rows: 4 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+C,0.06,25.0,1.0,2.5,False,150,False,True,False,15,210,136,2,True,1,500,20,4.5371618982878985,3.2223457834635507,1.3148161148243478,-14.655156997437599,0.5809231728982273,0.9871266671224113,0.9136051497014284,1.1849134854871697,0.09421256317543034,12261.822034576486,True,,O,3,O_p3_C_0de9b507be0110cdce85a9b2,8377,2026-09-27T01:28:39.223116+00:00,2026-09-27T01:29:38.911047+00:00,59.68792106199999,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-evo-x2
+C,0.06,25.0,1.0,2.5,False,151,False,True,False,17,241,156,2,True,1,500,11,3.788701238491008,3.3838449160873165,0.4048563224036914,-13.792771083378287,0.5649506425027977,0.9893611460765984,0.9251240561214183,1.0289056748119016,0.058410598633313694,11177.234647912928,True,,O,3,O_p3_C_451abe9d26b28c4cef9ccd3d,8439,2026-09-27T01:28:39.225434+00:00,2026-09-27T01:29:41.828343+00:00,62.60289963700001,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-evo-x2
+C,0.06,25.0,1.0,2.5,True,150,False,True,False,10,199,129,2,True,1,500,30,4.7260121076689074,3.2795770750994873,1.4464350325694202,-11.9907077511684,0.5617510312725639,0.9912409577157777,0.9054195599014567,1.115897467118953,0.0550965730312354,9170.286292310828,True,,O,3,O_p3_C_58359a2bbed8c2243c6e6f4f,8928,2026-09-27T01:28:39.224659+00:00,2026-09-27T01:29:43.334456+00:00,64.10978883500002,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-evo-x2
+C,0.06,25.0,1.0,2.5,True,151,False,True,True,0,198,128,2,True,1,335,16,4.0914321913650795,3.33714049642344,0.7542916949416396,-12.590782791014696,0.5418526263347925,0.9899726096011728,0.8007393592263902,0.01,8.007393592263902e-05,6717.66022593503,True,,O,3,O_p3_C_7ded96c31cc385c178bc6e42,5544,2026-09-27T01:28:39.226160+00:00,2026-09-27T01:29:25.287579+00:00,46.061411788999976,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-evo-x2
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part4_manifest.json
+==========================================
+
+- Size: 4199 bytes
+- Modified: 2026-09-27T01:29:58Z
+- Structure: object with 10 top-level keys
+- Keys: part, machine_label, identity, run_count, runs_file, completions_file, steps_file, files, runs, deleted_by_kind
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_part4_runs.csv
+==========================================
+
+- Size: 3524 bytes
+- Modified: 2026-09-27T01:29:58Z
+- Rows: 6 data rows
+- Columns (40): mode, rr, phi, alpha, successor_capability, cop_cost_audit, seed, survived, collapsed, extinct, final_population, peak_population, collapse_threshold, final_ai_generation, yield_fired, yield_fire_count, yield_eval_count, first_yield_fire_step, first_fire_advantage, first_fire_transition_cost, max_yield_margin, mean_yield_margin, final_theta_capability, final_transfer_state, final_psi_inst_stock, final_theta_tech_v2, final_l_t_v2, integral_u_sys, knowledge_transfer_verified, error, arm, part, run_id, derived_seed, started_utc, completed_utc, wall_seconds, interpreter_version, numpy_version, machine_label
+- Sample (first 5 data rows):
+```
+mode,rr,phi,alpha,successor_capability,cop_cost_audit,seed,survived,collapsed,extinct,final_population,peak_population,collapse_threshold,final_ai_generation,yield_fired,yield_fire_count,yield_eval_count,first_yield_fire_step,first_fire_advantage,first_fire_transition_cost,max_yield_margin,mean_yield_margin,final_theta_capability,final_transfer_state,final_psi_inst_stock,final_theta_tech_v2,final_l_t_v2,integral_u_sys,knowledge_transfer_verified,error,arm,part,run_id,derived_seed,started_utc,completed_utc,wall_seconds,interpreter_version,numpy_version,machine_label
+A,0.066,25.0,1.0,1.5,True,150,True,True,False,83,274,178,2,True,1,500,6,5.795015231633389,3.716227422313727,2.078787809319662,-7.064312347225131,0.6561507223396873,0.9405813743241374,0.9252076204373831,0.9257447222730577,0.27268635383049433,18346.712503322644,True,,R,4,R_p4_A_1838f22be8317bf11ca2d2c7,7570,2026-09-27T01:28:39.226789+00:00,2026-09-27T01:29:54.740569+00:00,75.51377263499995,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-evo-x2
+A,0.066,25.0,1.0,1.5,True,151,True,True,False,41,273,177,2,True,1,500,6,4.96852374521799,3.755478632150974,1.213045113067016,-7.101139141114669,0.655094037549544,0.9333798129086954,0.9489122520896174,0.9171773253083929,0.13576443873153962,16443.550560814187,True,,R,4,R_p4_A_2fa60758a32b0829125ca58a,3481,2026-09-27T01:28:39.230539+00:00,2026-09-27T01:29:56.801972+00:00,77.57142392199995,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-evo-x2
+C,0.06,25.0,1.0,2.5,False,150,False,True,False,1,195,126,2,True,1,500,30,4.163378734031831,3.147436550175587,1.0159421838562435,-11.243025677995425,0.5672751437277725,0.9867881929502078,0.8719022825931184,1.399451034961745,0.012201845517604476,7935.458199356166,True,,R,4,R_p4_C_0de9b507be0110cdce85a9b2,8377,2026-09-27T01:28:39.230311+00:00,2026-09-27T01:29:54.085078+00:00,74.85475962599998,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-evo-x2
+C,0.06,25.0,1.0,2.5,False,151,True,True,False,32,221,143,2,True,1,500,34,3.391965489082459,3.1749982420425797,0.21696724703987913,-14.401328817434486,0.5873932409991347,0.9879145686204517,0.8653977818006415,1.025564213021852,0.10223274886099751,12245.380582549617,True,,R,4,R_p4_C_451abe9d26b28c4cef9ccd3d,8439,2026-09-27T01:28:39.229793+00:00,2026-09-27T01:29:57.566338+00:00,78.33653806999996,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-evo-x2
+C,0.06,25.0,1.0,2.5,True,150,False,True,False,17,199,129,2,True,1,500,63,3.462290403986451,3.191787242649728,0.2705031613367228,-11.226095492818647,0.5798908873708586,0.9914319578880365,0.8845255292667482,0.9424683270454288,0.05262485321719694,8960.454866662076,True,,R,4,R_p4_C_58359a2bbed8c2243c6e6f4f,8928,2026-09-27T01:28:39.235120+00:00,2026-09-27T01:29:58.366392+00:00,79.13126418899998,3.13.12 | packaged by conda-forge | (main, Feb  5 2026, 05:53:46) [GCC 14.3.0],2.4.4,yotko-evo-x2
+```
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_rows.json
+==========================================
+
+- Size: 31575 bytes
+- Modified: 2026-09-27T01:29:59Z
+- Structure: object with 5 top-level keys
+- Keys: machine_label, identity, non_registered, rows, tasks
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_runtime_control_yotko-evo-x2.json
+==========================================
+
+- Size: 20 bytes
+- Modified: 2026-09-27T01:28:39Z
+- Structure: object with 1 top-level keys
+- Keys: workers
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_schedule_yotko-evo-x2.json
+==========================================
+
+- Size: 117 bytes
+- Modified: 2026-09-27T01:28:39Z
+- Structure: object with 4 top-level keys
+- Keys: timezone, default_workers, modes, rules
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_startup.json
+==========================================
+
+- Size: 1798 bytes
+- Modified: 2026-09-27T01:28:39Z
+- Structure: object with 8 top-level keys
+- Keys: counts, seed_tasks_checked, part4_subset, task_list_hashes, identity, main_head_provenance_only, machine_label, cpu_budget
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_startup_O_request.json
+==========================================
+
+- Size: 411 bytes
+- Modified: 2026-09-27T01:28:37Z
+- Structure: object with 9 top-level keys
+- Keys: operation, directory, main_root, worktree, arm, machine_label, priority, parent_pid, output
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_startup_R_request.json
+==========================================
+
+- Size: 411 bytes
+- Modified: 2026-09-27T01:28:38Z
+- Structure: object with 9 top-level keys
+- Keys: operation, directory, main_root, worktree, arm, machine_label, priority, parent_pid, output
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-evo-x2_state.json
+==========================================
+
+- Size: 8722 bytes
+- Modified: 2026-09-27T01:29:59Z
+- Structure: object with 11 top-level keys
+- Keys: identity, task_ids, machine_label, events, resume_counts, elapsed_seconds, cpu_budget, priority, retry_events, last_cap, last_cap_source
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_yotko-legion-t5-26iob6_rows.json
+==========================================
+
+- Size: 31760 bytes
+- Modified: 2026-09-24T12:23:42Z
+- Structure: object with 5 top-level keys
+- Keys: machine_label, identity, non_registered, rows, tasks
 
 ==========================================
 FILE: simulation/diagnostics/planner_d3_edit.json

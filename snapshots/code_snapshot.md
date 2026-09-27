@@ -1,8 +1,8 @@
 # Code Snapshot
 
-Generated: 2026-09-22T02:21:20Z
+Generated: 2026-09-27T16:57:33Z
 Repository: C:\Users\matty\Dev\AI-Succession-Problem
-Commit: f136aa6d
+Commit: dd7d6eeb
 Branch: main
 Category: code
 
@@ -69,6 +69,17 @@ Category: code
 | simulation/diagnostics/gate5_phi_blind_check.py | 322 | 14334 |
 | simulation/diagnostics/patient_defection_corner_density.py | 169 | 5246 |
 | simulation/diagnostics/patient_defection_sweeps.py | 708 | 24818 |
+| simulation/diagnostics/phase_b_rerun_b1_finish.py | 157 | 11012 |
+| simulation/diagnostics/phase_b_rerun_b1_initial_child.py | 237 | 11650 |
+| simulation/diagnostics/phase_b_rerun_b1_initial_common.py | 226 | 10359 |
+| simulation/diagnostics/phase_b_rerun_b1_initial_executor.py | 551 | 30865 |
+| simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_compare.py | 65 | 2776 |
+| simulation/diagnostics/phase_b_rerun_b1_validate.py | 203 | 10984 |
+| simulation/diagnostics/phase_b_rerun_child.py | 263 | 13331 |
+| simulation/diagnostics/phase_b_rerun_common.py | 254 | 11196 |
+| simulation/diagnostics/phase_b_rerun_executor.py | 581 | 32735 |
+| simulation/diagnostics/phase_b_rerun_verdicts.py | 180 | 8565 |
+| simulation/diagnostics/phase_b_rerun_xcheck_compare.py | 66 | 2910 |
 | simulation/diagnostics/phi_audit.py | 428 | 17996 |
 | simulation/diagnostics/phi_audit_pathc.py | 351 | 13512 |
 | simulation/diagnostics/planner_d3_harness.py | 236 | 18284 |
@@ -99,9 +110,9 @@ Category: code
 | bootstrap_gate_validator/gates/gate_4.py | 167 | 6537 |
 | bootstrap_gate_validator/gates/gate_5.py | 54 | 2270 |
 | scripts/check_snapshot_leak.py | 233 | 9724 |
-| scripts/generate_project_knowledge_snapshots.py | 919 | 33412 |
+| scripts/generate_project_knowledge_snapshots.py | 923 | 33632 |
 
-Total: 90 files, 32947 lines, 1439613 bytes
+Total: 101 files, 35734 lines, 1586216 bytes
 
 ---
 ==========================================
@@ -22868,6 +22879,2855 @@ if __name__ == '__main__':
 
 
 ==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_finish.py
+==========================================
+
+"""Build report only. Reads non-registered validation artifacts; runs no models."""
+import sys
+sys.dont_write_bytecode=True
+import csv
+import datetime as dt
+import json
+from pathlib import Path
+import socket
+import subprocess
+import phase_b_rerun_executor as e
+from phase_b_rerun_common import *
+
+HERE=Path(__file__).resolve().parent
+ROOT=HERE.parent.parent
+
+def main():
+    install_guard(HERE)
+    v=read_json(HERE/"phase_b_rerun_b1_validation.json")
+    if v["status"]!="complete":
+        raise RuntimeError("Validation is not complete")
+    e.check_sources({a:Path(p) for a,p in e.DEFAULT_ARMS.items()})
+    if e.own_hashes()!=v["identity"]["executor_hashes"]:
+        raise RuntimeError("Final source identity differs from validated source")
+    preflight=read_json(HERE/"phase_b_rerun_b1_preflight.json")
+    source_readings=[]
+    for prior in preflight["source_readings"]:
+        blob=subprocess.check_output(["git","cat-file","blob","HEAD:"+prior["path"]],cwd=ROOT)
+        row={"path":prior["path"],"initial":prior,"completion_head_sha256_lf":digest(blob.replace(b"\r\n",b"\n")),
+             "completion_worktree_sha256_lf":file_hash(ROOT/prior["path"])}
+        if row["completion_head_sha256_lf"]!=prior["pin"] or row["completion_worktree_sha256_lf"]!=prior["pin"]:
+            raise RuntimeError("Source pin changed at completion")
+        source_readings.append(row)
+    records=[]
+    for prefix in ("phase_b_rerun_smoke_","phase_b_rerun_smoke_repeat_O_",
+                   "phase_b_rerun_smoke_repeat_R_","phase_b_rerun_xcheck_YOTKOTEST_"):
+        manifest=read_json(HERE/(prefix+"manifest.json"))
+        for part in manifest["parts"].values():
+            records.extend(e.verify_merged(HERE,part))
+    if len(records)!=34:
+        raise RuntimeError("Unexpected final validation completion count")
+    archive=read_json(HERE/"phase_b_rerun_b1_initial_artifact_map.json")
+    for entry in archive:
+        if digest((HERE/entry["retained_name"]).read_bytes())!=entry["sha256_raw"]:
+            raise RuntimeError("Retained initial artifact changed")
+    counts={"final_completed_non_registered":34,"initial_completed_non_registered":34,
+            "total_completed_non_registered":68,"registered_runs_executed":0}
+    means=v["mean_wall_seconds_per_arm"]
+    report_time=dt.datetime.now()
+    durations=[means["O"]]*20400+[means["R"]]*5400
+    override={"workers":15,"until":"2026-09-25T07:00:00"}
+    projections={}
+    for name,schedule,control in (
+        ("override_then_schedule",DEFAULT_SCHEDULE,override),
+        ("constant_10",{"timezone":"local","default_workers":10,"modes":{},"rules":[]},None),
+        ("constant_15",{"timezone":"local","default_workers":15,"modes":{},"rules":[]},None)):
+        finish=projected_finish(report_time,durations,schedule,control,15)
+        projections[name]={"start_local":report_time.isoformat(),"finish_local":finish.isoformat(),
+                           "elapsed_hours":(finish-report_time).total_seconds()/3600}
+    model_hashes={a:next(m["sha256_lf"] for m in modules.values()
+                       if Path(m["path"]).name=="model.py") for a,modules in v["modules_by_arm"].items()}
+    unit=read_json(HERE/"phase_b_rerun_smoke_final_unit_results.json")
+    live=read_json(HERE/"phase_b_rerun_smoke_live_scheduler_results.json")
+    checks=[
+      [1,"Both arms passed identity checks; every completed child recorded the pinned bytecode hash."],
+      [2,str(v["seed_crosscheck"])+" registered tasks independently seed-checked; none executed."],
+      [3,"Counts 1500, 10800, 8100, 2700, 2700; Part 4 task-identical subset: "+str(v["part4_subset"])+"."],
+      [4,"All simulation modules loaded from their own worktrees; model.py hashes differ: "+str(model_hashes["O"]!=model_hashes["R"])+"."],
+      [5,"All 30 original fields in order, followed by the ten appended fields: "+str(v["all_rows_ordered"])+"."],
+      [6,"Distinct values: "+canonical(v["liveness_distinct_values"])+"."],
+      [7,"Two separate repeats: "+canonical(v["determinism_repeats"])+"."],
+      [8,str(len(v["matched_arm_differences"]))+" matched O/R tasks compared; differing fields are listed below."],
+      [9,"Preserved "+str(v["resume_counts"]["preserved"])+", restarted "+str(v["resume_counts"]["restarted"])+
+         ", never launched "+str(v["resume_counts"]["never_launched"])+" at resume; saved completion hashes unchanged."],
+      [10,"Live 4 to 2 drain, return to 4, work mode, expired override, and refusal of 16 verified; no child killed for a cap change."],
+      [11,"Seven injected-clock caps: "+", ".join(str(x["actual"]) for x in unit["schedule_clock"])+"."],
+      [12,"One numerical thread verified from loaded libraries in all "+str(len(records))+" completed final-build children."],
+      [13,"All "+str(len(records))+" final-build rows and their step records recovered from merged files with matching hashes."],
+      [14,"Original error rows among all 34 final-build completions: "+str(sum(bool(r["row"]["error"]) for r in records))+"; "+canonical([r["row"]["error"] for r in records if r["row"]["error"]])+"."],
+      [15,"Mean wall seconds, 500-step horizon: O "+repr(means["O"])+"; R "+repr(means["R"])+"."],
+      [16,"Crosscheck completed 16 runs; CLI self-comparison IDENTICAL; altered copy DIFFERENT on final_population."],
+      [17,"Different-label resume refused; marked smoke-only IDENTICAL fixture accepted 16 preserved runs. Additional version-binding fixtures passed."]
+    ]
+    build=read_json(HERE/"phase_b_rerun_b1_build_log.json")
+    lines=["# Phase B rerun executor build and validation","",
+       "Build complete and validated on YOTKOTEST. No registered run was launched and nothing was committed.",
+       "The first validation cohort was retained byte for byte while operational repairs were applied. "
+       "The final cohort used the final executor file hashes. Each cohort completed 16 smoke runs, "
+       "two determinism repeats, and 16 crosscheck runs. All are non-registered and may not be cited "
+       "as evidence for the note's registered quantities.","",
+       "| Check | Evidence |","| --- | --- |"]
+    for number,evidence in checks:
+        lines.append("| "+str(number)+" | "+evidence.replace("|","&#124;")+" |")
+    lines+=["","## Timing projection","",
+        "Projection start: "+report_time.isoformat()+" local ("+dt.datetime.now().astimezone().tzname()+").",
+        "These estimates use the final 16-run cohort's mean child wall time per arm, including initialization, "
+        "for 20,400 arm O runs and 5,400 arm R runs. They assume the same per-arm means at other worker counts. "
+        "The scheduler simulation keeps running jobs when a cap falls.","",
+        "| Worker policy | Projected local finish | Hours |","| --- | --- | --- |"]
+    for name,value in projections.items():
+        lines.append("| "+name+" | "+value["finish_local"]+" | "+repr(value["elapsed_hours"])+" |")
+    lines+=["","## Matched O/R fields","",
+      "| Original task | Differing original fields |","| --- | --- |"]
+    for pair in v["matched_arm_differences"]:
+        lines.append("| "+canonical(pair["task"]).replace("|","&#124;")+" | "+", ".join(pair["differing_fields"])+" |")
+    lines+=["","## Module paths from one completed child per arm",""]
+    for arm,modules in v["modules_by_arm"].items():
+        lines+=["Arm "+arm+":",""]
+        for name,value in modules.items():
+            lines.append("- "+name+": "+value["path"]+"; LF SHA256 "+value["sha256_lf"])
+        lines.append("")
+    lines+=["## Source pins","",
+       "| Source | Initial HEAD / worktree LF SHA256 | Completion HEAD / worktree LF SHA256 |",
+       "| --- | --- | --- |"]
+    for row in source_readings:
+        lines.append("| "+row["path"]+" | "+row["initial"]["head_sha256_lf"]+" / "+row["initial"]["worktree_sha256_lf"]+
+                     " | "+row["completion_head_sha256_lf"]+" / "+row["completion_worktree_sha256_lf"]+" |")
+    lines+=["","The bytecode pin and both worktree HEADs were also rechecked at completion. "
+            "The known global Git ignore permission warning is retained in the preflight evidence.",
+            "The Linux machine was not contacted. Its real cross-machine comparison remains the operator's step before registered execution.","",
+            "## Tool-layer workarounds",""]
+    lines+=["- "+x for x in build["tool_layer_workarounds"]]
+    lines+=["","## Executor self-fixes",""]
+    lines+=["- "+x for x in build["executor_self_fixes"]]
+    lines+=["","## Operator commands","",
+            "See phase_b_rerun_b1_operator_guide.md for exact Windows and Linux commands, runtime controls, "
+            "whole-part transfer and import, and healthy progress readings.",""]
+    save(HERE/"phase_b_rerun_b1_summary.json",{"status":"complete","checks":checks,"timings":means,
+         "projections":projections,"counts":counts,"report_local":report_time.isoformat(),
+         "local_timezone":dt.datetime.now().astimezone().tzname(),"model_hashes":model_hashes,
+         "registered_runs_executed":0,"source_readings":source_readings,
+         "runtime_requested_and_effective":[ev for ev in read_json(HERE/"phase_b_rerun_smoke_manifest.json")["events"] if ev["event"]=="worker_cap"],
+         "interpreter_readiness":build["interpreter_readiness"]})
+    atomic(HERE/"phase_b_rerun_b1_report.md","\n".join(lines))
+    inventory={}
+    for path in sorted(HERE.glob("phase_b_rerun_*")):
+        if not path.is_file() or path.name in ("phase_b_rerun_design_note.md","phase_b_rerun_b1_manifest.json"):
+            continue
+        entry={"sha256_lf":file_hash(path),"bytes":path.stat().st_size}
+        if path.suffix==".csv":
+            with path.open(encoding="utf-8",newline="") as f:
+                entry["csv_rows"]=max(0,sum(1 for _ in csv.reader(f))-1)
+        inventory[path.name]=entry
+    manifest={"status":"complete","non_registered":True,"machine_label":"YOTKOTEST","hostname":socket.gethostname(),
+        "cpu_budget":16,"maximum_workers":15,"identity":v["identity"],"source_readings":source_readings,
+        "bytecode_readings":preflight["bytecode_readings"],"arms":preflight["arms"],
+        "controller_python":sys.version,"counts":counts,"source_basis":"LF-normalized SHA256, except explicitly raw bytecode pins",
+        "outputs":inventory,"manifest_self_hash":"Excluded to avoid recursive self-hashing",
+        "initial_artifact_map":"phase_b_rerun_b1_initial_artifact_map.json",
+        "resumed_counts":v["resume_counts"],"projections":projections,"build_log":build,
+        "t0_stderr_warnings":[x["stderr"] for x in preflight["commands"] if x["stderr"]],
+        "per_run_hashes":"See each final and retained initial part manifest; every final merge was reverified.",
+        "main_head_provenance_only":e.git("rev-parse","HEAD"),"commits_created":0}
+    save(HERE/"phase_b_rerun_b1_manifest.json",manifest)
+    print(json.dumps({"status":"complete","timings":means,"projections":projections,"counts":counts}))
+
+if __name__=="__main__":
+    main()
+
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_child.py
+==========================================
+
+"""Executed as source by a -c bootstrap in a fresh CPython 3.13 process."""
+import ctypes
+import importlib.machinery
+import importlib.util
+import platform
+import subprocess
+import threading
+import traceback
+
+def watch_parent(pid):
+    if not pid:
+        return
+    def watch():
+        if os.name=="nt":
+            kernel=ctypes.WinDLL("kernel32",use_last_error=True)
+            kernel.OpenProcess.argtypes=[ctypes.c_ulong,ctypes.c_int,ctypes.c_ulong]
+            kernel.OpenProcess.restype=ctypes.c_void_p
+            kernel.WaitForSingleObject.argtypes=[ctypes.c_void_p,ctypes.c_ulong]
+            handle=kernel.OpenProcess(0x00100000,False,pid)
+            if not handle:
+                os._exit(130)
+            kernel.WaitForSingleObject(handle,0xffffffff)
+            os._exit(130)
+        else:
+            while os.getppid()==pid:
+                time.sleep(.5)
+            os._exit(130)
+    threading.Thread(target=watch,daemon=True).start()
+
+def library_threads(np):
+    np.dot(np.ones((2,2)),np.ones((2,2)))
+    result=[]
+    try:
+        from threadpoolctl import threadpool_info
+        result=[{"library":x["filepath"],"threads":x["num_threads"],"api":x["internal_api"]}
+                for x in threadpool_info()]
+    except ImportError:
+        pass
+    if not result:
+        roots=[Path(np.__file__).parent.parent/"numpy.libs",Path(np.__file__).parent/".libs",
+               Path(sys.prefix)/"Library/bin",Path(sys.prefix)/"lib"]
+        for directory in roots:
+            if not directory.exists():
+                continue
+            for path in directory.iterdir():
+                if "openblas" not in path.name.lower() or not any(x in path.name for x in (".dll",".so",".dylib")):
+                    continue
+                lib=ctypes.CDLL(str(path))
+                for symbol in ("scipy_openblas_get_num_threads64_","openblas_get_num_threads64_",
+                               "scipy_openblas_get_num_threads","openblas_get_num_threads"):
+                    if hasattr(lib,symbol):
+                        fn=getattr(lib,symbol); fn.restype=ctypes.c_int
+                        result.append({"library":str(path),"symbol":symbol,"threads":fn()})
+                        break
+    if not result or any(x["threads"]!=1 for x in result):
+        raise RuntimeError("Effective numerical thread limit not verified as one: "+repr(result))
+    return result
+
+def module_audit(worktree,main_root):
+    result={}
+    for name,module in list(sys.modules.items()):
+        source=getattr(module,"__file__",None)
+        if not source:
+            continue
+        path=Path(source).resolve()
+        if "simulation" not in [x.lower() for x in path.parts]:
+            continue
+        if not path.is_relative_to(worktree) or path.is_relative_to(main_root):
+            raise RuntimeError("Simulation import escaped arm: "+name+" "+str(path))
+        result[name]={"path":str(path),"sha256_lf":file_hash(path),"basis":"LF-normalized file bytes"}
+    return result
+
+def identity_checks(module):
+    expected={"N_AGENTS":200,"N_STEPS":500,"DRY_N_STEPS":120,"SURVIVAL_THRESHOLD":30,
+              "SUCCESSOR_GENERATION":2,"KNOWLEDGE_TRANSFER_THRESHOLD":.1,"PHI_DEFAULT":25.,
+              "MODE_DEFAULT_SEEDS":{"A":100,"B":75,"C":150,"dry-run":5},"CSV_FIELDS":FIELDS}
+    for name,value in expected.items():
+        if getattr(module,name)!=value:
+            raise RuntimeError("Identity mismatch: "+name)
+    grids={
+      "A":((.055,.056,.057,.058,.059,.06,.062,.064,.066),(5,10,25,100),(.5,1.,1.5),(1.5,),(True,)),
+      "B":((.057,.06,.064,.07),(25.,),(.5,.75,1.,1.25,1.5),(1.2,1.5,2.,2.5,3.,4.,5.),(True,)),
+      "C":((.057,.06,.064),(25.,),(.5,1.,1.5),(1.5,2.5,3.),(True,False))}
+    for mode,grid in grids.items():
+        config=module.MODE_CONFIG[mode]
+        if config["steps"]!=500:
+            raise RuntimeError("Identity mismatch: horizon "+mode)
+        for key,value in zip(("rr_values","phi_values","alpha_values","successor_caps","cop_values"),grid):
+            if tuple(config[key])!=value:
+                raise RuntimeError("Identity mismatch: "+mode+" "+key)
+    return expected
+
+def encode_task(module,arm,part,task):
+    own=module._task_seed(task["mode"],task["rr"],task["phi"],task["alpha"],
+                          task["successor_capability"],task["cop_cost_audit"],task["seed"])
+    return {"arm":arm,"part":part,"task":task,"derived_seed":own,
+            "cell_key":module._cell_key(task),"run_id":stable_id(arm,part,task)}
+
+def enumerate_tasks(module,arm):
+    registered=[]
+    if arm=="O":
+        pairs={(0.5,5.0),(1.,2.5),(1.,3.),(1.25,2.5),(1.5,2.5)}
+        for task in module._build_tasks("B",75):
+            if (task["alpha"],task["successor_capability"]) in pairs:
+                registered.append(encode_task(module,arm,1,task))
+        for mode,n,part in (("A",100,2),("C",150,3)):
+            registered.extend(encode_task(module,arm,part,t) for t in module._build_tasks(mode,n))
+    else:
+        for mode,n in (("A",25),("C",50)):
+            registered.extend(encode_task(module,arm,4,t) for t in module._build_tasks(mode,n))
+    smoke=[]; extras=[]
+    for mode in ("B","A","C"):
+        for task in module._build_tasks(mode,152):
+            if task["seed"] not in (150,151):
+                continue
+            take=(mode=="B" and arm=="O" and task["rr"]==.06 and task["alpha"]==1. and task["successor_capability"]==3.)
+            take=take or (mode=="A" and task["rr"] in ((.055,.066) if arm=="O" else (.066,)) and task["phi"]==25 and task["alpha"]==1.)
+            take=take or (mode=="C" and task["rr"]==.06 and task["alpha"]==1. and task["successor_capability"]==2.5)
+            part={"B":1,"A":2,"C":3}[mode] if arm=="O" else 4
+            if take:
+                smoke.append(encode_task(module,arm,part,task))
+            elif arm=="O" and mode=="A" and task["rr"]==.055:
+                extras.append(encode_task(module,arm,2,task))
+    return {"registered":registered,"smoke":smoke,"extra_smoke":extras}
+
+def serial(value):
+    if isinstance(value,dict):
+        return {str(k):serial(v) for k,v in value.items()}
+    if isinstance(value,(list,tuple)):
+        return [serial(v) for v in value]
+    if hasattr(value,"tolist"):
+        return value.tolist()
+    if hasattr(value,"item"):
+        return value.item()
+    return value
+
+def child_main(request):
+    install_guard(request["directory"])
+    watch_parent(request.get("parent_pid"))
+    if os.name != "nt" and request["priority"] == "below-normal":
+        os.nice(10)
+    if sys.version_info[:2]!=(3,13):
+        raise RuntimeError("Bytecode requires CPython 3.13")
+    worktree=Path(request["worktree"]).resolve()
+    main_root=Path(request["main_root"]).resolve()
+    os.chdir(worktree)
+    sys.path[:]=[str(worktree),str(worktree/"simulation")]+[
+        p for p in sys.path if p and not Path(p).resolve().is_relative_to(main_root)
+        and Path(p).resolve()!=worktree]
+    for key in THREAD_ENV:
+        if os.environ.get(key)!="1":
+            raise RuntimeError("Numerical thread environment not configured before import")
+    head=subprocess.check_output(["git","-c","safe.directory="+str(worktree),"-C",str(worktree),"rev-parse","HEAD"],text=True).strip()
+    if head!=ARM_HEADS[request["arm"]]:
+        raise RuntimeError("Worktree HEAD changed")
+    pyc=worktree/"simulation/diagnostics/monte_carlo_phase_b.pyc"
+    if digest(pyc.read_bytes())!=BYTECODE_HASH:
+        raise RuntimeError("Bytecode hash changed")
+    loader=importlib.machinery.SourcelessFileLoader("monte_carlo_phase_b",str(pyc))
+    spec=importlib.util.spec_from_loader(loader.name,loader)
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    loader.exec_module(module)
+    checked=identity_checks(module)
+    import numpy as np
+    threads=library_threads(np)
+    modules=module_audit(worktree,main_root)
+    metadata={"arm":request["arm"],"worktree":str(worktree),"worktree_head":head,
+              "bytecode_sha256":BYTECODE_HASH,"identity_checks":checked,"modules":modules,
+              "interpreter_version":sys.version,"numpy_version":np.__version__,
+              "effective_threads":threads,"thread_environment":{k:os.environ[k] for k in THREAD_ENV},
+              "machine_label":request["machine_label"],"pid":os.getpid(),"priority":request["priority"]}
+    if request["operation"]=="enumerate":
+        metadata.update(enumerate_tasks(module,request["arm"]))
+        save(request["output"],metadata)
+        return
+    entry=request["entry"]; task=entry["task"]
+    if request["non_registered"] and task["seed"] not in (150,151):
+        raise RuntimeError("Test execution attempted a registered seed index")
+    candidates=module._build_tasks(task["mode"],task["seed"]+1)
+    match=[t for t in candidates if t==task]
+    if len(match)!=1:
+        raise RuntimeError("Task is not exactly a recovered builder task")
+    task=match[0]
+    if seed_check(task)!=entry["derived_seed"]:
+        raise RuntimeError("Seed cross-check failed in run child")
+    captured=[]
+    init_code=module.GardenModel.__init__.__code__
+    def observer(frame,event,arg):
+        if event=="return" and frame.f_code is init_code:
+            captured.append(frame.f_locals["self"])
+            sys.setprofile(None)
+    start=time.perf_counter(); started=utc()
+    sys.setprofile(observer)
+    try:
+        original=module._run_single(task)
+    finally:
+        sys.setprofile(None)
+    wall=time.perf_counter()-start
+    if set(original)!=set(FIELDS):
+        raise RuntimeError("Original row field mismatch")
+    row={key:original[key] for key in FIELDS}
+    row.update({"arm":entry["arm"],"part":entry["part"],"run_id":entry["run_id"],
+                "derived_seed":entry["derived_seed"],"started_utc":started,"completed_utc":utc(),
+                "wall_seconds":wall,"interpreter_version":sys.version,"numpy_version":np.__version__,
+                "machine_label":request["machine_label"]})
+    steps=[]
+    if captured:
+        dc=getattr(captured[0],"datacollector",{})
+        count=len(dc.get("population",[]))
+        for i in range(count):
+            values={k:serial(v[i]) for k,v in dc.items() if isinstance(v,(list,tuple)) and len(v)>i}
+            steps.append({"arm":entry["arm"],"part":entry["part"],"run_id":entry["run_id"],
+                          "seed_index":task["seed"],"step":i,"recorded":values})
+    step_data="".join(canonical(s)+"\n" for s in steps)
+    atomic(request["steps_output"],step_data)
+    metadata["modules"]=module_audit(worktree,main_root)
+    if any(metadata["modules"].get(name)!=value for name,value in modules.items()):
+        raise RuntimeError("Loaded simulation source changed during run")
+    metadata["effective_threads_after"]=library_threads(np)
+    completion={"status":"complete","entry":entry,"row":row,"metadata":metadata,
+                "machine_label":request["machine_label"],"identity":request["identity"],
+                "row_sha256":digest(csv_line(row).encode()),"row_count":1,
+                "step_count":len(steps),"steps_sha256":digest(step_data.encode()),
+                "end_reason":"original_error" if original["error"] else
+                    ("horizon" if len(steps)>=task["steps"] else "step_returned_false"),
+                "retry_events":RETRIES}
+    save(request["output"],completion)
+
+if __name__=="__main__":
+    request=read_json(sys.argv[1])
+    try:
+        child_main(request)
+    except BaseException as exc:
+        save(request["output"]+".failure.json",{"status":"halt","error":repr(exc),
+             "traceback":traceback.format_exc(),"machine_label":request.get("machine_label")})
+        raise
+
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_common.py
+==========================================
+
+"""Operational support for the recovered Phase B runner. No model logic."""
+import csv
+import datetime as dt
+import hashlib
+import io
+import json
+import os
+from pathlib import Path
+import socket
+import sys
+import time
+
+sys.dont_write_bytecode = True
+NOTE_COMMIT = "43f125dfc200eeb262ef2e2e2c459c9715269592"
+NOTE_HASH = "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72"
+BYTECODE_HASH = "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b"
+ARM_HEADS = {"O":"45409d469a82bb599fe354e8ae3760e4cc3af048",
+             "R":"a370925d53a786a3cdaeb36543c02e7135a0ecab"}
+FIELDS = ["mode","rr","phi","alpha","successor_capability","cop_cost_audit","seed",
+ "survived","collapsed","extinct","final_population","peak_population","collapse_threshold",
+ "final_ai_generation","yield_fired","yield_fire_count","yield_eval_count",
+ "first_yield_fire_step","first_fire_advantage","first_fire_transition_cost","max_yield_margin",
+ "mean_yield_margin","final_theta_capability","final_transfer_state","final_psi_inst_stock",
+ "final_theta_tech_v2","final_l_t_v2","integral_u_sys","knowledge_transfer_verified","error"]
+EXTRA = ["arm","part","run_id","derived_seed","started_utc","completed_utc","wall_seconds",
+         "interpreter_version","numpy_version","machine_label"]
+THREAD_ENV = ("OMP_NUM_THREADS","OPENBLAS_NUM_THREADS","MKL_NUM_THREADS","NUMEXPR_NUM_THREADS")
+DEFAULT_SCHEDULE = {"timezone":"local","default_workers":15,
+ "modes":{"normal":15,"work":10},
+ "rules":[{"days":["Mon","Tue","Wed","Thu","Fri"],"start":"07:00","end":"17:00","workers":10}]}
+RETRIES = []
+
+class ScopeViolation(BaseException):
+    pass
+
+def utc():
+    return dt.datetime.now(dt.timezone.utc).isoformat()
+
+def canonical(value):
+    return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(",",":"), allow_nan=False)
+
+def digest(data):
+    return hashlib.sha256(data).hexdigest()
+
+def file_hash(path):
+    return digest(Path(path).read_bytes().replace(b"\r\n",b"\n"))
+
+def install_guard(directory):
+    directory = Path(directory).resolve()
+    null = os.path.normcase(os.path.abspath(os.devnull))
+    def check(path):
+        if isinstance(path, int):
+            return
+        p = Path(os.fsdecode(path)).resolve()
+        if os.path.normcase(str(p)) == null:
+            return
+        if p.parent != directory or not p.name.startswith("phase_b_rerun_") or p.name in ("phase_b_rerun_design_note.md","phase_b_rerun_evidence"):
+            raise ScopeViolation("Write outside authorized scope: "+str(p))
+    def audit(event,args):
+        if event == "open":
+            path,mode,flags = args
+            if (isinstance(mode,str) and any(x in mode for x in "wax+")) or (isinstance(flags,int) and flags & (os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND)):
+                check(path)
+        elif event in ("os.remove","os.rmdir","os.mkdir","os.chmod","os.utime","os.truncate"):
+            check(args[0])
+        elif event in ("os.rename","os.replace","os.link","os.symlink"):
+            check(args[0]); check(args[1])
+    sys.addaudithook(audit)
+
+def retry(operation, description):
+    start = time.monotonic()
+    while True:
+        try:
+            return operation()
+        except PermissionError as exc:
+            RETRIES.append({"utc":utc(),"operation":description,"error":str(exc)})
+            if time.monotonic()-start >= 5:
+                raise
+            time.sleep(.1)
+
+def atomic(path, data):
+    path=Path(path)
+    temp=path.with_name(path.name+".tmp."+str(os.getpid()))
+    with open(temp,"wb") as f:
+        f.write(data if isinstance(data,bytes) else data.encode("utf-8"))
+        f.flush()
+        os.fsync(f.fileno())
+    retry(lambda: os.replace(temp,path),"replace "+str(path))
+
+def save(path,value):
+    atomic(path, json.dumps(value,indent=2,ensure_ascii=True,allow_nan=False)+"\n")
+
+def read_json(path):
+    return retry(lambda: json.loads(Path(path).read_text(encoding="utf-8-sig")),"read "+str(path))
+
+def csv_line(row,fields=None):
+    out=io.StringIO(newline="")
+    writer=csv.writer(out,lineterminator="\n")
+    writer.writerow([row[k] for k in (fields or FIELDS+EXTRA)])
+    return out.getvalue()
+
+def csv_header(fields=None):
+    fields=fields or FIELDS+EXTRA
+    return csv_line(dict(zip(fields,fields)),fields)
+
+def seed_check(task):
+    label=(f"phase_b|{task['mode']}|{task['rr']:.5f}|{task['phi']:.4f}|"
+           f"{task['alpha']:.4f}|{task['successor_capability']:.4f}|"
+           f"{task['cop_cost_audit']}|{task['seed']}")
+    return int(hashlib.md5(label.encode()).hexdigest(),16)%10000
+
+def stable_id(arm,part,task):
+    cell={k:task[k] for k in ("mode","rr","phi","alpha","successor_capability","cop_cost_audit","seed")}
+    return f"{arm}_p{part}_{task['mode']}_{digest(canonical(cell).encode())[:24]}"
+
+def cpu_budget(host=None):
+    host=host or socket.gethostname()
+    if host.upper()=="YOTKOTEST":
+        return 16
+    return len(os.sched_getaffinity(0)) if hasattr(os,"sched_getaffinity") else (os.cpu_count() or 1)
+
+def default_schedule(host,maximum):
+    if host.upper()=="YOTKOTEST":
+        return json.loads(json.dumps(DEFAULT_SCHEDULE))
+    return {"timezone":"local","default_workers":maximum,
+            "modes":{"normal":maximum,"work":max(1,maximum-3)},"rules":[]}
+
+def valid_count(value,maximum):
+    if type(value) is not int or not 1 <= value <= maximum:
+        raise ValueError(f"Worker count {value!r} outside 1..{maximum}")
+    return value
+
+def validate_schedule(schedule,maximum):
+    if schedule["timezone"]!="local":
+        raise ValueError("Only local timezone is supported")
+    valid_count(schedule["default_workers"],maximum)
+    for n in schedule.get("modes",{}).values():
+        valid_count(n,maximum)
+    for rule in schedule["rules"]:
+        valid_count(rule["workers"],maximum)
+        if not rule["days"] or any(x not in ("Mon","Tue","Wed","Thu","Fri","Sat","Sun") for x in rule["days"]):
+            raise ValueError("Invalid schedule days")
+        start=dt.time.fromisoformat(rule["start"]); end=dt.time.fromisoformat(rule["end"])
+        if start>=end:
+            raise ValueError("Rules must start before end on the same day")
+
+def evaluate_schedule(schedule,override,now,maximum):
+    validate_schedule(schedule,maximum)
+    if override is not None:
+        if set(override)-{"workers","mode","until"} or ("workers" in override)==("mode" in override):
+            raise ValueError("Override requires exactly one of workers and mode")
+        until=dt.datetime.fromisoformat(override["until"]) if "until" in override else None
+        if until is not None and until.tzinfo is not None:
+            until=until.astimezone().replace(tzinfo=None)
+        n=override.get("workers") if "workers" in override else schedule.get("modes",{})[override["mode"]]
+        valid_count(n,maximum)
+        if until is None or now<until:
+            return n,"override:"+("workers" if "workers" in override else override["mode"])
+    matched=[r["workers"] for r in schedule["rules"]
+             if now.strftime("%a") in r["days"] and
+             dt.time.fromisoformat(r["start"]) <= now.time() < dt.time.fromisoformat(r["end"])]
+    return (min(matched),"schedule:rule") if matched else (schedule["default_workers"],"schedule:default")
+
+class Scheduler:
+    def __init__(self,schedule_path,control_path,maximum,events):
+        self.schedule_path=Path(schedule_path); self.control_path=Path(control_path)
+        self.maximum=maximum; self.events=events
+        self.cap=1; self.source="initial"; self.pending=None
+        self.schedule=None; self.override=None; self.bad=None
+    def poll(self,active,now=None):
+        now=now or dt.datetime.now()
+        try:
+            schedule=read_json(self.schedule_path)
+            override=read_json(self.control_path) if self.control_path.exists() else None
+            cap,source=evaluate_schedule(schedule,override,now,self.maximum)
+            self.schedule=schedule; self.override=override; self.bad=None
+        except (ValueError,KeyError,TypeError,OSError) as exc:
+            message=str(exc)
+            if message!=self.bad:
+                self.events.append({"event":"scheduler_warning","utc":utc(),"warning":message,
+                                    "previous_cap":self.cap})
+                self.bad=message
+            cap,source=self.cap,self.source
+        if (cap,source)!=(self.cap,self.source):
+            change={"event":"worker_cap","requested_utc":utc(),"requested_local":now.isoformat(),
+                    "previous_cap":self.cap,"cap":cap,"source":source,"active_at_request":active,
+                    "effective_utc":None}
+            if self.pending is not None:
+                self.pending["superseded_utc"]=utc()
+            self.events.append(change)
+            self.pending=change; self.cap=cap; self.source=source
+        if self.pending is not None and active<=self.cap:
+            self.pending["effective_utc"]=utc()
+            self.pending["active_at_effective"]=active
+            self.pending=None
+        return self.cap
+
+def projected_finish(start,durations,schedule,override,maximum,active_remaining=None):
+    """Discrete event simulation of queued jobs and non-preemptive cap changes."""
+    import heapq
+    now=start; index=0; active=[]
+    for seconds in active_remaining or []:
+        heapq.heappush(active,now+dt.timedelta(seconds=max(.01,seconds)))
+    durations=list(durations)
+    limit=0
+    while index<len(durations) or active:
+        cap,_=evaluate_schedule(schedule,override,now,maximum)
+        while index<len(durations) and len(active)<cap:
+            heapq.heappush(active,now+dt.timedelta(seconds=max(.01,durations[index])))
+            index+=1
+        if index==len(durations):
+            return max(active,default=now)
+        boundary=now.replace(second=0,microsecond=0)+dt.timedelta(minutes=1)
+        if override and override.get("until"):
+            expiry=dt.datetime.fromisoformat(override["until"])
+            if expiry.tzinfo:
+                expiry=expiry.astimezone().replace(tzinfo=None)
+            if now<expiry<boundary:
+                boundary=expiry
+        now=min(boundary,active[0] if active else boundary)
+        while active and active[0]<=now:
+            heapq.heappop(active)
+        limit+=1
+        if limit>2000000:
+            raise ValueError("ETA simulation horizon exceeded")
+    return now
+
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_executor.py
+==========================================
+
+"""Phase B recovered-code executor. Registered runs are operator-launched only."""
+import sys
+sys.dont_write_bytecode=True
+import argparse
+import concurrent.futures
+from collections import Counter
+import datetime as dt
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import socket
+import subprocess
+import time
+import traceback
+from phase_b_rerun_common import *
+
+HERE=Path(__file__).resolve().parent
+ROOT=HERE.parent.parent
+PY313="C:/Users/matty/AppData/Local/Python/pythoncore-3.13-64/python.exe"
+DEFAULT_ARMS={"O":"C:/Users/matty/Dev/phase-b-rerun-O","R":"C:/Users/matty/Dev/phase-b-rerun-R"}
+OWN_FILES=("phase_b_rerun_executor.py","phase_b_rerun_common.py","phase_b_rerun_child.py",
+           "phase_b_rerun_xcheck_compare.py")
+BOOTSTRAP="import sys;sys.dont_write_bytecode=True;exec(compile(open(sys.argv[2],encoding='utf-8').read(),'<runner-support>','exec'));exec(compile(open(sys.argv[3],encoding='utf-8').read(),'<runner-child>','exec'))"
+
+def git(*args):
+    p=subprocess.run(["git",*args],cwd=ROOT,capture_output=True,text=True)
+    if p.returncode:
+        raise RuntimeError("Git check failed: "+repr(args)+" "+p.stderr)
+    return p.stdout.strip()
+
+def own_hashes():
+    return {name:file_hash(HERE/name) for name in OWN_FILES}
+
+def check_sources(arms):
+    git("merge-base","--is-ancestor",NOTE_COMMIT,"origin/main")
+    note="simulation/diagnostics/phase_b_rerun_design_note.md"
+    blob=subprocess.check_output(["git","cat-file","blob","HEAD:"+note],cwd=ROOT)
+    if digest(blob.replace(b"\r\n",b"\n"))!=NOTE_HASH or file_hash(ROOT/note)!=NOTE_HASH:
+        raise RuntimeError("Note pin changed")
+    result={}
+    for arm,path in arms.items():
+        head=git("-c","safe.directory="+str(path),"-C",str(path),"rev-parse","HEAD")
+        if head!=ARM_HEADS[arm]:
+            raise RuntimeError("Worktree HEAD changed: "+arm)
+        code=Path(path)/"simulation/diagnostics/monte_carlo_phase_b.pyc"
+        if digest(code.read_bytes())!=BYTECODE_HASH:
+            raise RuntimeError("Bytecode pin changed: "+arm)
+        if git("-c","safe.directory="+str(path),"-C",str(path),"status","--porcelain"):
+            raise RuntimeError("Worktree became modified: "+arm)
+        result[arm]=head
+    return result
+
+def child_environment():
+    env=os.environ.copy()
+    env.update({name:"1" for name in THREAD_ENV})
+    env["PYTHONDONTWRITEBYTECODE"]="1"
+    env.pop("PYTHONPATH",None)
+    return env
+
+def start_child(python,request_path,worktree,priority,console_path):
+    flags=0
+    if os.name=="nt":
+        flags=getattr(subprocess,"CREATE_NO_WINDOW",0)
+        flags |= (subprocess.BELOW_NORMAL_PRIORITY_CLASS if priority=="below-normal" else subprocess.NORMAL_PRIORITY_CLASS)
+    stderr=open(console_path,"ab")
+    process=subprocess.Popen([str(python),"-B","-c",BOOTSTRAP,str(request_path),
+         str(HERE/"phase_b_rerun_common.py"),str(HERE/"phase_b_rerun_child.py")],
+        cwd=worktree,env=child_environment(),stdout=stderr,stderr=stderr,creationflags=flags)
+    stderr.close()
+    return process
+
+def prefix_for(args):
+    if args.crosscheck:
+        return "phase_b_rerun_xcheck_"+args.machine_label+"_"
+    return "phase_b_rerun_smoke_" if args.test_mode else "phase_b_rerun_"
+
+def validate_label(label):
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*",label):
+        raise ValueError("Machine label must contain only letters, digits, dot, hyphen or underscore")
+    return label
+
+def enumerate_startup(args,prefix):
+    arms={"O":Path(args.arm_o_worktree).resolve(),"R":Path(args.arm_r_worktree).resolve()}
+    heads=check_sources(arms)
+    metadata={}
+    for arm in ("O","R"):
+        stem=HERE/(prefix+"startup_"+arm)
+        request={"operation":"enumerate","directory":str(HERE),"main_root":str(ROOT),
+                 "worktree":str(arms[arm]),"arm":arm,"machine_label":args.machine_label,
+                 "priority":args.priority,"parent_pid":os.getpid(),"output":str(stem)+".json"}
+        save(str(stem)+"_request.json",request)
+        proc=start_child(args.python313,str(stem)+"_request.json",arms[arm],args.priority,str(stem)+"_console.txt")
+        while proc.poll() is None:
+            time.sleep(.2)
+        if proc.returncode:
+            failure=Path(str(stem)+".json.failure.json")
+            raise RuntimeError("Startup child failed: "+(failure.read_text() if failure.exists() else str(stem)+"_console.txt"))
+        metadata[arm]=read_json(str(stem)+".json")
+    registered=metadata["O"]["registered"]+metadata["R"]["registered"]
+    counts=Counter((e["part"],e["task"]["mode"]) for e in registered)
+    expected={(1,"B"):1500,(2,"A"):10800,(3,"C"):8100,(4,"A"):2700,(4,"C"):2700}
+    if counts!=expected:
+        raise RuntimeError("Registered task identity count mismatch: "+repr(counts))
+    original={canonical(e["task"]) for e in registered if e["part"] in (2,3)}
+    if not all(canonical(e["task"]) in original for e in registered if e["part"]==4):
+        raise RuntimeError("Part 4 is not a task-identical subset")
+    for entry in registered:
+        if seed_check(entry["task"])!=entry["derived_seed"]:
+            raise RuntimeError("Seed cross-check mismatch: "+entry["run_id"])
+    smoke=metadata["O"]["smoke"]+metadata["R"]["smoke"]
+    if len(smoke)!=16 or Counter(e["arm"] for e in smoke)!={"O":10,"R":6}:
+        raise RuntimeError("Test task identity count mismatch")
+    for e in smoke:
+        if e["task"]["seed"] not in (150,151) or seed_check(e["task"])!=e["derived_seed"]:
+            raise RuntimeError("Test seed cross-check mismatch")
+    versions={arm:{"interpreter_version":m["interpreter_version"],"numpy_version":m["numpy_version"]}
+              for arm,m in metadata.items()}
+    identity={"executor_hashes":own_hashes(),"bytecode_sha256":BYTECODE_HASH,
+              "worktree_heads":heads,"note_sha256_lf":NOTE_HASH,"versions":versions}
+    proof={"counts":{str(k):v for k,v in counts.items()},"seed_tasks_checked":len(registered),
+           "part4_subset":True,"task_list_hashes":{str(p):digest(canonical([e["task"] for e in registered if e["part"]==p]).encode()) for p in range(1,5)},
+           "identity":identity,"main_head_provenance_only":git("rev-parse","HEAD"),
+           "machine_label":args.machine_label,"cpu_budget":args.cpu_budget}
+    save(HERE/(prefix+"startup.json"),proof)
+    return arms,metadata,registered,smoke,identity,proof
+
+def verify_identity(old,new):
+    changes=[key for key in set(old)|set(new) if old.get(key)!=new.get(key)]
+    if changes:
+        raise RuntimeError("Resume identity changed: "+", ".join(sorted(changes)))
+
+def crosscheck_permission(first,second,identity,test_mode=False):
+    if first==second:
+        return True
+    paths=list(HERE.glob("phase_b_rerun_xcheck_result_*.json"))
+    if test_mode:
+        paths+=list(HERE.glob("phase_b_rerun_smoke_*xcheck_result*.json"))
+    for path in paths:
+        try:
+            result=read_json(path)
+            if result.get("result")=="IDENTICAL" and set(result.get("machine_labels",[]))=={first,second} and result.get("executor_hashes")==identity["executor_hashes"] and result.get("bytecode_sha256")==BYTECODE_HASH:
+                if not test_mode and result.get("test_fixture"):
+                    continue
+                return True
+        except (ValueError,OSError):
+            continue
+    return False
+
+def validate_completion(record,entry,identity):
+    if record["status"]!="complete" or record["entry"]!=entry:
+        raise RuntimeError("Completion key or task mismatch: "+entry["run_id"])
+    verify_identity(record["identity"],identity)
+    row=record["row"]
+    if list(row)!=FIELDS+EXTRA or row["run_id"]!=entry["run_id"]:
+        raise RuntimeError("Completion row schema mismatch")
+    if digest(csv_line(row).encode())!=record["row_sha256"] or record["row_count"]!=1:
+        raise RuntimeError("Completion row hash mismatch")
+    return record
+
+def verify_merged(directory,manifest):
+    directory=Path(directory)
+    for name,info in manifest["files"].items():
+        path=directory/name
+        if file_hash(path)!=info["sha256_lf"]:
+            raise RuntimeError("Merged file hash mismatch: "+str(path))
+    runs_path=directory/manifest["runs_file"]
+    with runs_path.open(encoding="utf-8",newline="") as f:
+        reader=csv.DictReader(f)
+        if reader.fieldnames!=FIELDS+EXTRA:
+            raise RuntimeError("Merged CSV field order mismatch")
+        rows=list(reader)
+    records=[json.loads(line) for line in (directory/manifest["completions_file"]).read_text().splitlines()]
+    by_id={r["run_id"]:r for r in rows}
+    if len(by_id)!=len(rows) or len(rows)!=manifest["run_count"] or len(records)!=len(rows):
+        raise RuntimeError("Merged row count mismatch")
+    for record in records:
+        rid=record["row"]["run_id"]
+        if digest(csv_line(record["row"]).encode()) != record["row_sha256"]:
+            raise RuntimeError("Completion payload hash mismatch: "+rid)
+        reconstructed=csv_line(by_id[rid])
+        if digest(reconstructed.encode())!=record["row_sha256"] or manifest["runs"][rid]["row_sha256"]!=record["row_sha256"]:
+            raise RuntimeError("Merged per-run hash mismatch: "+rid)
+        if by_id[rid]["arm"]!=record["entry"]["arm"] or int(by_id[rid]["part"])!=record["entry"]["part"] or int(by_id[rid]["seed"])!=record["entry"]["task"]["seed"]:
+            raise RuntimeError("Merged filter identity mismatch")
+    steps_path=directory/manifest["steps_file"]
+    grouped={}
+    with steps_path.open(encoding="utf-8",newline="") as f:
+        for r in csv.DictReader(f):
+            rid=r["run_id"]
+            value=json.loads(r["recorded"])
+            raw=canonical({"arm":r["arm"],"part":int(r["part"]),"run_id":rid,
+                           "seed_index":int(r["seed_index"]),"step":int(r["step"]),"recorded":value})+"\n"
+            if rid not in grouped:
+                grouped[rid]=[hashlib.sha256(),0]
+            grouped[rid][0].update(raw.encode()); grouped[rid][1]+=1
+    for record in records:
+        rid=record["row"]["run_id"]
+        h,n=grouped.get(rid,[hashlib.sha256(),0])
+        if h.hexdigest()!=record["steps_sha256"] or n!=record["step_count"]:
+            raise RuntimeError("Merged step recovery mismatch: "+rid)
+    return records
+
+class Batch:
+    def __init__(self,args,prefix,entries,arms,identity,proof):
+        self.args=args; self.prefix=prefix; self.arms=arms; self.identity=identity; self.proof=proof
+        self.entries=sorted(entries,key=lambda e:(e["part"],e["arm"],e["cell_key"]))
+        self.by_id={e["run_id"]:e for e in self.entries}
+        if len(self.by_id)!=len(entries):
+            raise RuntimeError("Duplicate run identifiers")
+        self.events=[]; self.active={}; self.completed={}; self.merged={}; self.start=time.monotonic()
+        self.initial_elapsed=0.; self.resume_counts={"preserved":0,"restarted":0,"never_launched":0}
+        self.machine=args.machine_label; self.maximum=max(1,args.cpu_budget-1)
+        schedule_prefix=prefix if args.test_mode or args.crosscheck else "phase_b_rerun_"
+        self.schedule_path=HERE/(schedule_prefix+"schedule_"+self.machine+".json")
+        self.control_path=HERE/(schedule_prefix+"runtime_control_"+self.machine+".json")
+        if not self.schedule_path.exists():
+            save(self.schedule_path,default_schedule(socket.gethostname(),self.maximum))
+        self.scheduler=Scheduler(self.schedule_path,self.control_path,self.maximum,self.events)
+        if args.workers is not None:
+            try:
+                valid_count(args.workers,self.maximum)
+                save(self.control_path,{"workers":args.workers})
+            except ValueError as exc:
+                self.events.append({"event":"scheduler_warning","utc":utc(),"warning":str(exc)})
+        self.state_path=HERE/(prefix+"state.json")
+        self.progress_path=HERE/(prefix+"progress.json")
+        if self.state_path.exists():
+            if not args.resume:
+                raise RuntimeError("Existing execution state requires --resume")
+            old=read_json(self.state_path)
+            verify_identity(old["identity"],identity)
+            if old["task_ids"]!=list(self.by_id):
+                raise RuntimeError("Resume task selection changed")
+            self.events[:]=old.get("events",[])+self.events
+            self.scheduler.cap=old.get("last_cap",1)
+            self.scheduler.source=old.get("last_cap_source","initial")
+            self.initial_elapsed=old.get("elapsed_seconds",0.)
+        elif args.resume:
+            self.events.append({"event":"resume_without_state","utc":utc()})
+        for part in sorted({e["part"] for e in self.entries}):
+            mp=HERE/(prefix+f"part{part}_manifest.json")
+            if mp.exists():
+                manifest=read_json(mp)
+                verify_identity(manifest["identity"],identity)
+                records=verify_merged(HERE,manifest)
+                self.merged[part]=manifest
+                for rec in records:
+                    self._accept(rec)
+        for entry in self.entries:
+            rid=entry["run_id"]
+            path=self.path(rid,"completion.json")
+            if rid in self.completed:
+                continue
+            if path.exists():
+                try:
+                    rec=read_json(path)
+                except (ValueError,OSError) as exc:
+                    self.events.append({"event":"invalid_partial_completion","run_id":rid,"error":str(exc),"utc":utc()})
+                else:
+                    self._accept(rec)
+            if rid not in self.completed:
+                if self.path(rid,"request.json").exists():
+                    self.resume_counts["restarted"]+=1
+                    self.events.append({"event":"restart","run_id":rid,"seed_index":entry["task"]["seed"],"utc":utc(),"reason":"interrupted or invalid completion"})
+                else:
+                    self.resume_counts["never_launched"]+=1
+        self.resume_counts["preserved"]=len(self.completed)
+        self.pending=[e for e in self.entries if e["run_id"] not in self.completed]
+        self.scheduler.poll(0)
+        self.save_state()
+    def path(self,rid,suffix):
+        return HERE/(self.prefix+"run_"+rid+"_"+suffix)
+    def _accept(self,record):
+        rid=record["row"]["run_id"]
+        if rid not in self.by_id:
+            raise RuntimeError("Unexpected completion "+rid)
+        validate_completion(record,self.by_id[rid],self.identity)
+        machine=record["machine_label"]
+        if not crosscheck_permission(machine,self.machine,self.identity,self.args.test_mode):
+            raise RuntimeError("Resume refused: machine "+machine+" differs from "+self.machine+" without matching IDENTICAL crosscheck")
+        if rid in self.completed and self.completed[rid]!=record:
+            raise RuntimeError("Conflicting duplicate completion")
+        self.completed[rid]=record
+    def elapsed(self):
+        return self.initial_elapsed+time.monotonic()-self.start
+    def save_state(self):
+        save(self.state_path,{"identity":self.identity,"task_ids":list(self.by_id),"machine_label":self.machine,
+            "events":self.events,"resume_counts":self.resume_counts,"elapsed_seconds":self.elapsed(),
+            "cpu_budget":self.args.cpu_budget,"priority":self.args.priority,"retry_events":RETRIES,
+            "last_cap":self.scheduler.cap,"last_cap_source":self.scheduler.source})
+    def dispatch(self,entry):
+        rid=entry["run_id"]
+        for suffix in ("request.json","steps.jsonl","completion.json","completion.json.failure.json","console.txt"):
+            existing=self.path(rid,suffix)
+            if existing.exists():
+                archive=existing.with_name(existing.name+".partial."+str(time.time_ns()))
+                os.replace(existing,archive)
+        request={"operation":"run","directory":str(HERE),"main_root":str(ROOT),
+                 "worktree":str(self.arms[entry["arm"]]),"arm":entry["arm"],
+                 "machine_label":self.machine,"priority":self.args.priority,"parent_pid":os.getpid(),
+                 "entry":entry,"identity":self.identity,"non_registered":self.args.test_mode or self.args.crosscheck,
+                 "output":str(self.path(rid,"completion.json")),"steps_output":str(self.path(rid,"steps.jsonl"))}
+        save(self.path(rid,"request.json"),request)
+        process=start_child(self.args.python313,self.path(rid,"request.json"),self.arms[entry["arm"]],
+                            self.args.priority,self.path(rid,"console.txt"))
+        self.active[rid]={"process":process,"entry":entry,"started":time.monotonic(),"started_utc":utc()}
+        self.events.append({"event":"dispatch","run_id":rid,"pid":process.pid,"utc":utc(),
+                            "active_after":len(self.active),"cap":self.scheduler.cap})
+    def progress(self,status="running"):
+        part_counts={}
+        for part in sorted({e["part"] for e in self.entries}):
+            ids={e["run_id"] for e in self.entries if e["part"]==part}
+            done=ids & self.completed.keys(); active=ids & self.active.keys()
+            part_counts[str(part)]={"completed":len(done),"running":len(active),
+                "pending":len(ids)-len(done)-len(active),
+                "errors":sum(bool(self.completed[r]["row"]["error"]) for r in done)}
+        means={}
+        for arm in ("O","R"):
+            values=[r["row"]["wall_seconds"] for r in self.completed.values() if r["entry"]["arm"]==arm]
+            means[arm]=sum(values)/len(values) if values else None
+        eta=None
+        if all(means[e["arm"]] is not None for e in self.pending) and all(means[a["entry"]["arm"]] is not None for a in self.active.values()) and self.scheduler.schedule:
+            try:
+                end=projected_finish(dt.datetime.now(),[means[e["arm"]] for e in self.pending],
+                     ({"timezone":"local","default_workers":self.scheduler.cap,"modes":{},"rules":[]} if self.scheduler.bad else self.scheduler.schedule),
+                     (None if self.scheduler.bad else self.scheduler.override),self.maximum,
+                     [max(.01,means[a["entry"]["arm"]]-(time.monotonic()-a["started"])) for a in self.active.values()])
+                eta=end.isoformat()
+            except (ValueError,KeyError):
+                pass
+        save(self.progress_path,{"updated_utc":utc(),"status":status,"machine_label":self.machine,
+            "controller_pid":os.getpid(),"cpu_budget":self.args.cpu_budget,"maximum_workers":self.maximum,
+            "parts":part_counts,"current_cap":min(self.scheduler.cap,len(self.pending)+len(self.active)) if self.pending or self.active else 0,
+            "requested_cap":self.scheduler.cap,"cap_source":self.scheduler.source,
+            "active_children":[{"pid":a["process"].pid,"run_id":rid,"started_utc":a["started_utc"]} for rid,a in self.active.items()],
+            "elapsed_seconds":self.elapsed(),"mean_wall_seconds_per_arm":means,"estimated_finish_local":eta,"eta_assumption":("previous cap retained while control is invalid" if self.scheduler.bad else "current schedule and override expiry"),
+            "resume_counts":self.resume_counts,"schedule_path":str(self.schedule_path),
+            "runtime_control_path":str(self.control_path),"events":self.events[-100:]})
+        self.save_state()
+    def merge(self,part):
+        records=sorted([r for r in list(self.completed.values()) if r["entry"]["part"]==part],
+                       key=lambda r:(r["entry"]["arm"],r["entry"]["cell_key"]))
+        expected=sum(e["part"]==part for e in self.entries)
+        if len(records)!=expected:
+            return
+        stem=self.prefix+f"part{part}_"
+        runs=HERE/(stem+"runs.csv"); completions=HERE/(stem+"completions.jsonl"); steps=HERE/(stem+"steps.csv")
+        atomic(runs,csv_header()+"".join(csv_line(r["row"]) for r in records))
+        atomic(completions,"".join(json.dumps(r,separators=(",",":"),allow_nan=False)+"\n" for r in records))
+        temp=steps.with_name(steps.name+".tmp."+str(os.getpid()))
+        sf=["arm","part","run_id","seed_index","step","recorded"]
+        nsteps=0
+        with temp.open("w",encoding="utf-8",newline="") as output:
+            writer=csv.DictWriter(output,fieldnames=sf,lineterminator="\n"); writer.writeheader()
+            for record in records:
+                raw_path=self.path(record["row"]["run_id"],"steps.jsonl")
+                h=hashlib.sha256(); n=0
+                with raw_path.open("rb") as inp:
+                    for line in inp:
+                        h.update(line); n+=1; value=json.loads(line)
+                        value["recorded"]=canonical(value["recorded"])
+                        writer.writerow(value)
+                if h.hexdigest()!=record["steps_sha256"] or n!=record["step_count"]:
+                    raise RuntimeError("Per-run step hash mismatch before merge")
+                nsteps+=n
+            output.flush(); os.fsync(output.fileno())
+        retry(lambda:os.replace(temp,steps),"publish merged steps")
+        manifest={"part":part,"machine_label":self.machine,"identity":self.identity,"run_count":len(records),
+             "runs_file":runs.name,"completions_file":completions.name,"steps_file":steps.name,
+             "files":{p.name:{"sha256_lf":file_hash(p),"row_count":n} for p,n in [(runs,len(records)),(completions,len(records)),(steps,nsteps)]},
+             "runs":{r["row"]["run_id"]:{"arm":r["entry"]["arm"],"seed_index":r["entry"]["task"]["seed"],
+                 "row_count":1,"row_sha256":r["row_sha256"],"step_count":r["step_count"],
+                 "steps_sha256":r["steps_sha256"]} for r in records},"deleted_by_kind":{}}
+        verify_merged(HERE,manifest)
+        mp=HERE/(stem+"manifest.json")
+        save(mp,manifest)
+        deleted=Counter()
+        for record in records:
+            rid=record["row"]["run_id"]
+            for suffix in ("completion.json","steps.jsonl","request.json","console.txt"):
+                p=self.path(rid,suffix)
+                if p.exists():
+                    p.unlink(); deleted[suffix]+=1
+        manifest["deleted_by_kind"]=dict(deleted)
+        save(mp,manifest); self.merged[part]=manifest
+        self.events.append({"event":"part_merged","part":part,"utc":utc(),"rows":len(records)})
+    def run(self):
+        print(f"Effective worker cap: {self.scheduler.cap} ({self.scheduler.source}); machine {self.machine}",flush=True)
+        self.progress()
+        last_progress=time.monotonic()
+        merger=concurrent.futures.ThreadPoolExecutor(max_workers=1)
+        merging={}
+        try:
+            while self.pending or self.active or merging or any(e["part"] not in self.merged for e in self.entries):
+                self.scheduler.poll(len(self.active))
+                for rid,a in list(self.active.items()):
+                    status=a["process"].poll()
+                    if status is None:
+                        continue
+                    del self.active[rid]
+                    if status:
+                        failure=self.path(rid,"completion.json.failure.json")
+                        if failure.exists():
+                            raise RuntimeError("Child exception: "+failure.read_text())
+                        self.events.append({"event":"terminated_worker","run_id":rid,"exit_code":status,"utc":utc()})
+                        raise InterruptedError("Worker terminated; resume required: "+rid)
+                    self._accept(read_json(self.path(rid,"completion.json")))
+                    self.events.append({"event":"complete","run_id":rid,"utc":utc(),"pid":a["process"].pid})
+                self.scheduler.poll(len(self.active))
+                for part,future in list(merging.items()):
+                    if future.done():
+                        future.result()
+                        del merging[part]
+                for part in sorted({e["part"] for e in self.entries}):
+                    if part not in self.merged and part not in merging and all(e["run_id"] in self.completed for e in self.entries if e["part"]==part):
+                        merging[part]=merger.submit(self.merge,part)
+                while self.pending and len(self.active)<self.scheduler.cap:
+                    self.dispatch(self.pending.pop(0))
+                if time.monotonic()-last_progress>=5:
+                    self.progress(); last_progress=time.monotonic()
+                time.sleep(.2)
+            merger.shutdown(wait=True)
+            check_sources(self.arms)
+            if own_hashes()!=self.identity["executor_hashes"]:
+                raise RuntimeError("Executor source changed during execution")
+            self.progress("complete")
+            manifest={"status":"complete","machine_label":self.machine,"identity":self.identity,
+                "proof":self.proof,"parts":self.merged,"resume_counts":self.resume_counts,
+                "events":self.events,"cpu_budget":self.args.cpu_budget,"priority":self.args.priority,
+                "non_registered":self.args.test_mode or self.args.crosscheck,"retry_events":RETRIES,
+                "files":{name:info for m in self.merged.values() for name,info in m["files"].items()}}
+            save(HERE/(self.prefix+"manifest.json"),manifest)
+            if self.args.crosscheck:
+                records=[self.completed[e["run_id"]] for e in self.entries]
+                save(HERE/(self.prefix+"rows.json"),{"machine_label":self.machine,"identity":self.identity,
+                     "non_registered":True,"rows":[r["row"] for r in records],"tasks":[r["entry"] for r in records]})
+            print(f"Complete: {len(self.completed)} runs; errors {sum(bool(r['row']['error']) for r in self.completed.values())}",flush=True)
+            return manifest
+        except BaseException:
+            merger.shutdown(wait=True,cancel_futures=True)
+            for a in self.active.values():
+                if a["process"].poll() is None:
+                    a["process"].terminate()
+            for a in self.active.values():
+                a["process"].wait()
+            self.active.clear()
+            self.progress("interrupted")
+            raise
+
+def import_parts(files,args):
+    supplied={Path(f).resolve().name:Path(f).resolve() for f in files}
+    manifests=[p for p in supplied.values() if p.name.endswith("_manifest.json")]
+    if not manifests:
+        raise RuntimeError("--import-part requires each part manifest and its merged files")
+    for path in manifests:
+        manifest=read_json(path)
+        if "part" not in manifest:
+            raise RuntimeError("Import requires a per-part manifest")
+        if manifest["identity"]["worktree_heads"]!=ARM_HEADS or manifest["identity"]["note_sha256_lf"]!=NOTE_HASH:
+            raise RuntimeError("Imported substrate or note identity mismatch")
+        if manifest["identity"]["executor_hashes"]!=own_hashes() or manifest["identity"]["bytecode_sha256"]!=BYTECODE_HASH:
+            raise RuntimeError("Imported executor or bytecode identity mismatch")
+        for name,info in manifest["files"].items():
+            if name not in supplied or file_hash(supplied[name])!=info["sha256_lf"]:
+                raise RuntimeError("Missing or mismatched imported file: "+name)
+            if supplied[name].parent!=path.parent:
+                raise RuntimeError("Import files must be together with their part manifest")
+        verify_merged(path.parent,manifest)
+        for name in [*manifest["files"],path.name]:
+            if not name.startswith("phase_b_rerun_") or Path(name).name!=name:
+                raise RuntimeError("Invalid imported filename")
+            dest=HERE/name
+            source=supplied[name]
+            if dest.exists():
+                if file_hash(dest)!=file_hash(source):
+                    raise RuntimeError("Refusing to overwrite existing import: "+name)
+            else:
+                atomic(dest,source.read_bytes())
+        verify_merged(HERE,manifest)
+    print("Imported and re-verified "+str(len(manifests))+" whole parts.")
+
+def parser():
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--parts",nargs="+",type=int,choices=(1,2,3,4),default=[1,2,3,4])
+    p.add_argument("--arm-o-worktree",default=DEFAULT_ARMS["O"])
+    p.add_argument("--arm-r-worktree",default=DEFAULT_ARMS["R"])
+    p.add_argument("--python313",default=PY313)
+    p.add_argument("--workers",type=int)
+    p.add_argument("--resume",action="store_true")
+    p.add_argument("--status",action="store_true")
+    p.add_argument("--test-mode",action="store_true")
+    p.add_argument("--crosscheck",action="store_true")
+    p.add_argument("--machine-label",default=socket.gethostname())
+    p.add_argument("--cpu-budget",type=int,default=cpu_budget())
+    p.add_argument("--priority",choices=("below-normal","normal"),default="below-normal")
+    p.add_argument("--import-part",nargs="+",metavar="FILES")
+    return p
+
+def controller_lock(prefix):
+    handle=open(HERE/(prefix+"controller.lock"),"a+b")
+    handle.seek(0,2)
+    if handle.tell()==0:
+        handle.write(b"x"); handle.flush()
+    handle.seek(0)
+    if os.name=="nt":
+        import msvcrt
+        msvcrt.locking(handle.fileno(),msvcrt.LK_NBLCK,1)
+    else:
+        import fcntl
+        fcntl.flock(handle.fileno(),fcntl.LOCK_EX|fcntl.LOCK_NB)
+    return handle
+
+def main():
+    args=parser().parse_args()
+    validate_label(args.machine_label)
+    if args.cpu_budget<2:
+        raise ValueError("CPU budget must be at least two")
+    prefix=prefix_for(args)
+    if args.status:
+        path=HERE/(prefix+"progress.json")
+        if not path.exists():
+            print("No progress file: "+str(path)); return
+        progress=read_json(path)
+        print(f"{progress['machine_label']}: {progress['status']}; cap {progress['current_cap']} ({progress['cap_source']})")
+        for part,counts in progress["parts"].items():
+            print("Part "+part+": "+", ".join(f"{k}={v}" for k,v in counts.items()))
+        print("Updated "+progress["updated_utc"]+"; estimated finish "+str(progress["estimated_finish_local"]))
+        return
+    install_guard(HERE)
+    lock=controller_lock(prefix)
+    if args.import_part:
+        check_sources({"O":Path(args.arm_o_worktree),"R":Path(args.arm_r_worktree)})
+        import_parts(args.import_part,args); return
+    arms,metadata,registered,smoke,identity,proof=enumerate_startup(args,prefix)
+    entries=smoke if args.test_mode or args.crosscheck else registered
+    if args.crosscheck and sorted(set(args.parts))!=[1,2,3,4]:
+        raise ValueError("--crosscheck always executes all 16 tasks")
+    entries=[e for e in entries if e["part"] in args.parts]
+    batch=Batch(args,prefix,entries,arms,identity,proof)
+    batch.run()
+
+if __name__=="__main__":
+    try:
+        main()
+    except BaseException as exc:
+        if isinstance(exc,SystemExit):
+            raise
+        print("HALT: "+str(exc),file=sys.stderr)
+        sys.exit(1)
+
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_initial_xcheck_compare.py
+==========================================
+
+"""Compare all 30 original fields in two non-registered crosscheck outputs."""
+import sys
+sys.dont_write_bytecode=True
+import argparse
+from pathlib import Path
+import struct
+from phase_b_rerun_common import *
+HERE=Path(__file__).resolve().parent
+
+def equal_value(a,b):
+    if type(a) is not type(b):
+        return False
+    if type(a) is float:
+        return struct.pack("!d",a)==struct.pack("!d",b)
+    return a==b
+
+def compare(left,right):
+    verify_keys=("executor_hashes","bytecode_sha256")
+    for key in verify_keys:
+        if left["identity"][key]!=right["identity"][key]:
+            raise ValueError("Crosscheck identity mismatch: "+key)
+    def keyed(data):
+        if len(data["rows"])!=16 or len(data["tasks"])!=16 or not data["non_registered"]:
+            raise ValueError("Crosscheck requires exactly 16 non-registered tasks")
+        result={}
+        for entry,row in zip(data["tasks"],data["rows"]):
+            if entry["task"]["seed"] not in (150,151) or list(row)!=FIELDS+EXTRA:
+                raise ValueError("Invalid crosscheck row")
+            key=canonical({"arm":entry["arm"],"task":entry["task"]})
+            if key in result:
+                raise ValueError("Duplicate crosscheck task")
+            result[key]=row
+        return result
+    a=keyed(left); b=keyed(right)
+    if a.keys()!=b.keys():
+        raise ValueError("Crosscheck task sets differ")
+    differences=[]
+    for key in sorted(a):
+        for field in FIELDS:
+            if not equal_value(a[key][field],b[key][field]):
+                differences.append({"task":json.loads(key),"field":field,"left":a[key][field],"right":b[key][field]})
+    return {"result":"DIFFERENT" if differences else "IDENTICAL",
+            "machine_labels":[left["machine_label"],right["machine_label"]],
+            "executor_hashes":left["identity"]["executor_hashes"],
+            "bytecode_sha256":left["identity"]["bytecode_sha256"],
+            "task_count":16,"differences":differences,"created_utc":utc(),"test_fixture":False}
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument("left"); p.add_argument("right")
+    p.add_argument("--out",default=None)
+    args=p.parse_args()
+    install_guard(HERE)
+    left=read_json(args.left); right=read_json(args.right)
+    result=compare(left,right)
+    name="phase_b_rerun_xcheck_result_"+digest(canonical(result["machine_labels"]).encode())[:12]+".json"
+    output=Path(args.out) if args.out else HERE/name
+    if not output.name.startswith(("phase_b_rerun_xcheck_result_","phase_b_rerun_smoke_")):
+        raise ValueError("Invalid comparison output prefix")
+    save(output,result)
+    print(result["result"])
+    for d in result["differences"]:
+        print(canonical(d))
+if __name__=="__main__":
+    main()
+
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_b1_validate.py
+==========================================
+
+"""Non-registered build validation. Never dispatches registered seed indices."""
+import sys
+sys.dont_write_bytecode=True
+import argparse
+import copy
+import ctypes
+import datetime as dt
+import json
+import os
+from pathlib import Path
+import subprocess
+import time
+import traceback
+import phase_b_rerun_executor as executor
+from phase_b_rerun_common import *
+from phase_b_rerun_xcheck_compare import compare, equal_value
+
+HERE=Path(__file__).resolve().parent
+ROOT=HERE.parent.parent
+
+def wait_until(predicate,deadline=7200):
+    start=time.monotonic()
+    while time.monotonic()-start<deadline:
+        value=predicate()
+        if value:
+            return value
+        time.sleep(.2)
+    raise TimeoutError("Validation condition timed out")
+
+def read_if(path):
+    try:
+        return read_json(path) if Path(path).exists() else None
+    except (ValueError,OSError):
+        return None
+
+def launch(arguments,name):
+    out=open(HERE/("phase_b_rerun_smoke_"+name+"_console.txt"),"ab")
+    p=subprocess.Popen([sys.executable,"-B",str(HERE/"phase_b_rerun_executor.py"),*arguments],
+                       cwd=ROOT,stdout=out,stderr=out,creationflags=getattr(subprocess,"CREATE_NO_WINDOW",0))
+    out.close()
+    return p
+
+def kill_owned(process):
+    if process.poll() is not None:
+        raise RuntimeError("Controller already exited before interruption test")
+    process.kill()
+    process.wait()
+
+def progress_predicate(process,predicate):
+    def read():
+        if process.poll() is not None:
+            raise RuntimeError("Controller exited during live validation: "+str(process.returncode))
+        value=read_if(HERE/"phase_b_rerun_smoke_progress.json")
+        return value if value and predicate(value) else None
+    return read
+
+def all_records(prefix):
+    manifest=read_json(HERE/(prefix+"manifest.json"))
+    records=[]
+    for part in sorted(manifest["parts"],key=int):
+        records.extend(executor.verify_merged(HERE,manifest["parts"][part]))
+    return records
+
+def main():
+    install_guard(HERE)
+    args_common=["--test-mode","--machine-label","YOTKOTEST","--cpu-budget","16"]
+    controller=launch(args_common+["--workers","4"],"controller_first")
+    control=HERE/"phase_b_rerun_smoke_runtime_control_YOTKOTEST.json"
+    first=wait_until(progress_predicate(controller,lambda p:len(p["active_children"])==4))
+    initial_pids=[p["pid"] for p in first["active_children"]]
+    save(control,{"workers":2})
+    reduced=wait_until(progress_predicate(controller,lambda p:
+        p["requested_cap"]==2 and len(p["active_children"])<=2
+        and any(e.get("cap")==2 and e.get("effective_utc") for e in p["events"])))
+    save(control,{"workers":4})
+    raised=wait_until(progress_predicate(controller,lambda p:p["requested_cap"]==4 and p["cap_source"]=="override:workers"))
+    save(control,{"mode":"work"})
+    named=wait_until(progress_predicate(controller,lambda p:p["cap_source"]=="override:work"))
+    save(control,{"workers":4,"until":"2000-01-01T00:00:00"})
+    expired=wait_until(progress_predicate(controller,lambda p:p["cap_source"].startswith("schedule:")))
+    old_cap=expired["requested_cap"]
+    save(control,{"workers":16})
+    refused=wait_until(progress_predicate(controller,lambda p:any(
+        e["event"]=="scheduler_warning" and "16" in e.get("warning","") for e in p["events"])))
+    assert refused["requested_cap"]==old_cap
+    before={}
+    for path in HERE.glob("phase_b_rerun_smoke_run_*_completion.json"):
+        rec=read_json(path);before[rec["row"]["run_id"]]=digest(canonical(rec).encode())
+    for path in HERE.glob("phase_b_rerun_smoke_part*_manifest.json"):
+        for rec in executor.verify_merged(HERE,read_json(path)):
+            before[rec["row"]["run_id"]]=digest(canonical(rec).encode())
+    assert before and len(before)<16
+    kill_owned(controller)
+    time.sleep(2)
+    # Valid completed records that raced with the intentional controller kill also persist.
+    for path in HERE.glob("phase_b_rerun_smoke_run_*_completion.json"):
+        rec=read_json(path);before[rec["row"]["run_id"]]=digest(canonical(rec).encode())
+    save(HERE/"phase_b_rerun_smoke_interruption_before.json",{"completion_hashes":before,
+         "killed_controller_pid":controller.pid,"initial_child_pids":initial_pids})
+    save(control,{"workers":4})
+    controller=launch(args_common+["--resume"],"controller_resume")
+    result=controller.wait()
+    if result:
+        raise RuntimeError("Resumed controller failed: "+str(result))
+    records=all_records("phase_b_rerun_smoke_")
+    after={r["row"]["run_id"]:digest(canonical(r).encode()) for r in records}
+    assert all(after[rid]==h for rid,h in before.items())
+    manifest=read_json(HERE/"phase_b_rerun_smoke_manifest.json")
+    assert not any(e["event"]=="terminated_worker" for e in manifest["events"])
+    scheduler={"initial_cap":4,"reduced":reduced,"raised":raised,"named_mode":named,
+               "expired":expired,"refused":refused,"no_worker_killed_for_cap_change":True}
+    save(HERE/"phase_b_rerun_smoke_live_scheduler_results.json",scheduler)
+    # Repeat one O task and its R partner, separately, with one worker.
+    startup=read_json(HERE/"phase_b_rerun_smoke_startup.json")
+    identity=startup["identity"]
+    arms={a:Path(p) for a,p in executor.DEFAULT_ARMS.items()}
+    baseline={}
+    for arm in ("O","R"):
+        baseline[arm]=next(r for r in records if r["entry"]["arm"]==arm and r["entry"]["task"]["mode"]=="C")
+    repeats=[]
+    for arm,original in baseline.items():
+        a=executor.parser().parse_args(["--test-mode","--machine-label","YOTKOTEST","--workers","1"])
+        prefix="phase_b_rerun_smoke_repeat_"+arm+"_"
+        batch=executor.Batch(a,prefix,[original["entry"]],arms,identity,startup)
+        batch.run()
+        rec=all_records(prefix)[0]
+        differing=[f for f in FIELDS if not equal_value(rec["row"][f],original["row"][f])]
+        repeats.append({"arm":arm,"run_id":rec["row"]["run_id"],"differing_fields":differing})
+    # Real crosscheck invocation, 16 additional non-registered model runs.
+    process=launch(["--crosscheck","--machine-label","YOTKOTEST","--workers","8"],"crosscheck")
+    if process.wait():
+        raise RuntimeError("Crosscheck execution failed")
+    xcheck=read_json(HERE/"phase_b_rerun_xcheck_YOTKOTEST_rows.json")
+    self_result=compare(xcheck,xcheck)
+    save(HERE/"phase_b_rerun_smoke_xcheck_self_result.json",self_result)
+    assert self_result["result"]=="IDENTICAL"
+    altered=copy.deepcopy(xcheck)
+    altered["rows"][0]["final_population"]+=1
+    save(HERE/"phase_b_rerun_smoke_xcheck_altered_rows.json",altered)
+    sign=compare(xcheck,altered)
+    save(HERE/"phase_b_rerun_smoke_xcheck_sign_result.json",sign)
+    assert sign["result"]=="DIFFERENT" and [x["field"] for x in sign["differences"]]==["final_population"]
+    cli_outputs=[]
+    for label,right in (("self",HERE/"phase_b_rerun_xcheck_YOTKOTEST_rows.json"),
+                        ("altered",HERE/"phase_b_rerun_smoke_xcheck_altered_rows.json")):
+        completed=subprocess.run([sys.executable,"-B",str(HERE/"phase_b_rerun_xcheck_compare.py"),
+            str(HERE/"phase_b_rerun_xcheck_YOTKOTEST_rows.json"),str(right),"--out",
+            str(HERE/("phase_b_rerun_smoke_xcheck_cli_"+label+".json"))],
+            cwd=ROOT,capture_output=True,text=True,check=True)
+        cli_outputs.append({"case":label,"stdout":completed.stdout})
+    save(HERE/"phase_b_rerun_smoke_xcheck_cli_results.json",cli_outputs)
+    # Cross-machine resume is tested only against smoke outputs with a marked fixture.
+    entries=[r["entry"] for r in records]
+    other=executor.parser().parse_args(["--test-mode","--resume","--machine-label","YOTKOTEST-fixture"])
+    refused_machine=False
+    try:
+        executor.Batch(other,"phase_b_rerun_smoke_",entries,arms,identity,startup)
+    except RuntimeError as exc:
+        if "Resume refused: machine" not in str(exc):
+            raise
+        refused_machine=True
+    assert refused_machine
+    permission={"result":"IDENTICAL","machine_labels":["YOTKOTEST","YOTKOTEST-fixture"],
+                "executor_hashes":identity["executor_hashes"],"bytecode_sha256":BYTECODE_HASH,
+                "test_fixture":True,"purpose":"Non-registered machine-resume unit fixture"}
+    save(HERE/"phase_b_rerun_smoke_machine_xcheck_result.json",permission)
+    permitted=executor.Batch(other,"phase_b_rerun_smoke_",entries,arms,identity,startup)
+    assert permitted.resume_counts["preserved"]==16 and not permitted.pending
+    # Restore original operator-facing machine metadata without dispatching any run.
+    original_args=executor.parser().parse_args(args_common+["--resume"])
+    executor.Batch(original_args,"phase_b_rerun_smoke_",entries,arms,identity,startup)
+    pairs=[]
+    for o in records:
+        if o["entry"]["arm"]!="O":
+            continue
+        for r in records:
+            if r["entry"]["arm"]=="R" and o["entry"]["task"]==r["entry"]["task"]:
+                pairs.append({"task":o["entry"]["task"],"differing_fields":[f for f in FIELDS if not equal_value(o["row"][f],r["row"][f])]})
+    values={field:sorted({r["row"][field] for r in records}) for field in ("survived","yield_fired","final_population")}
+    means={arm:sum(r["row"]["wall_seconds"] for r in records if r["entry"]["arm"]==arm)/sum(r["entry"]["arm"]==arm for r in records) for arm in ("O","R")}
+    output={"status":"complete","non_registered":True,"registered_runs_executed":0,
+        "unique_smoke_runs":len(records),"determinism_repeats":repeats,
+        "crosscheck_runs":len(xcheck["rows"]),"crosscheck_self":self_result["result"],
+        "crosscheck_sign":sign["result"],"crosscheck_sign_fields":[d["field"] for d in sign["differences"]],
+        "seed_crosscheck":startup["seed_tasks_checked"],"counts":startup["counts"],
+        "part4_subset":startup["part4_subset"],"liveness_distinct_values":values,
+        "matched_arm_differences":pairs,"resume_counts":manifest["resume_counts"],
+        "completed_records_preserved":len(before),"machine_refusal":refused_machine,
+        "machine_fixture_preserved":permitted.resume_counts["preserved"],
+        "mean_wall_seconds_per_arm":means,"errors":[r["row"]["error"] for r in records if r["row"]["error"]],
+        "all_rows_ordered":all(list(r["row"])==FIELDS+EXTRA for r in records),
+        "modules_by_arm":{a:next(r["metadata"]["modules"] for r in records if r["entry"]["arm"]==a) for a in ("O","R")},
+        "all_threads_one":all(all(x["threads"]==1 for x in r["metadata"]["effective_threads_after"]) for r in records),
+        "identity":identity,"generated_utc":utc()}
+    save(HERE/"phase_b_rerun_b1_validation.json",output)
+    print("Validation complete: 16 smoke runs, 2 determinism repeats, 16 crosscheck runs; registered runs 0.")
+
+if __name__=="__main__":
+    try:
+        main()
+    except BaseException as exc:
+        save(HERE/"phase_b_rerun_b1_validation_failure.json",{"error":repr(exc),"traceback":traceback.format_exc(),"utc":utc()})
+        raise
+
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_child.py
+==========================================
+
+"""Executed as source by a -c bootstrap in a fresh CPython 3.13 process."""
+import ctypes
+import importlib.machinery
+import importlib.util
+import platform
+import subprocess
+import threading
+import traceback
+
+def watch_parent(pid):
+    if not pid:
+        return
+    def watch():
+        if os.name=="nt":
+            kernel=ctypes.WinDLL("kernel32",use_last_error=True)
+            kernel.OpenProcess.argtypes=[ctypes.c_ulong,ctypes.c_int,ctypes.c_ulong]
+            kernel.OpenProcess.restype=ctypes.c_void_p
+            kernel.WaitForSingleObject.argtypes=[ctypes.c_void_p,ctypes.c_ulong]
+            handle=kernel.OpenProcess(0x00100000,False,pid)
+            if not handle:
+                os._exit(130)
+            kernel.WaitForSingleObject(handle,0xffffffff)
+            os._exit(130)
+        else:
+            while os.getppid()==pid:
+                time.sleep(.5)
+            os._exit(130)
+    threading.Thread(target=watch,daemon=True).start()
+
+def library_threads(np):
+    np.dot(np.ones((2,2)),np.ones((2,2)))
+    result=[]
+    try:
+        from threadpoolctl import threadpool_info
+        result=[{"library":x["filepath"],"threads":x["num_threads"],"api":x["internal_api"]}
+                for x in threadpool_info()]
+    except ImportError:
+        pass
+    if not result:
+        roots=[Path(np.__file__).parent.parent/"numpy.libs",Path(np.__file__).parent/".libs",
+               Path(sys.prefix)/"Library/bin",Path(sys.prefix)/"lib"]
+        if os.name != "nt" and Path("/proc/self/maps").exists():
+            loaded=set()
+            for line in Path("/proc/self/maps").read_text().splitlines():
+                name=line.split()[-1]
+                if name.startswith("/") and "openblas" in name.lower():
+                    loaded.add(Path(name).resolve())
+            roots=[]
+            for path in sorted(loaded):
+                lib=ctypes.CDLL(str(path))
+                for symbol in ("scipy_openblas_get_num_threads64_","openblas_get_num_threads64_",
+                               "scipy_openblas_get_num_threads","openblas_get_num_threads"):
+                    if hasattr(lib,symbol):
+                        fn=getattr(lib,symbol); fn.restype=ctypes.c_int
+                        result.append({"library":str(path),"symbol":symbol,"threads":fn(),
+                                       "discovery":"loaded /proc/self/maps entry"})
+                        break
+        for directory in roots:
+            if not directory.exists():
+                continue
+            for path in directory.iterdir():
+                if "openblas" not in path.name.lower() or not any(x in path.name for x in (".dll",".so",".dylib")):
+                    continue
+                lib=ctypes.CDLL(str(path))
+                for symbol in ("scipy_openblas_get_num_threads64_","openblas_get_num_threads64_",
+                               "scipy_openblas_get_num_threads","openblas_get_num_threads"):
+                    if hasattr(lib,symbol):
+                        fn=getattr(lib,symbol); fn.restype=ctypes.c_int
+                        result.append({"library":str(path),"symbol":symbol,"threads":fn()})
+                        break
+    if not result or any(x["threads"]!=1 for x in result):
+        raise RuntimeError("Effective numerical thread limit not verified as one: "+repr(result))
+    return result
+
+def module_audit(worktree,main_root):
+    result={}
+    for name,module in list(sys.modules.items()):
+        source=getattr(module,"__file__",None)
+        if not source:
+            continue
+        path=Path(source).resolve()
+        if "simulation" not in [x.lower() for x in path.parts]:
+            continue
+        if not path.is_relative_to(worktree) or path.is_relative_to(main_root):
+            raise RuntimeError("Simulation import escaped arm: "+name+" "+str(path))
+        result[name]={"path":str(path),"sha256_lf":file_hash(path),"basis":"LF-normalized file bytes"}
+    return result
+
+def identity_checks(module):
+    expected={"N_AGENTS":200,"N_STEPS":500,"DRY_N_STEPS":120,"SURVIVAL_THRESHOLD":30,
+              "SUCCESSOR_GENERATION":2,"KNOWLEDGE_TRANSFER_THRESHOLD":.1,"PHI_DEFAULT":25.,
+              "MODE_DEFAULT_SEEDS":{"A":100,"B":75,"C":150,"dry-run":5},"CSV_FIELDS":FIELDS}
+    for name,value in expected.items():
+        if getattr(module,name)!=value:
+            raise RuntimeError("Identity mismatch: "+name)
+    grids={
+      "A":((.055,.056,.057,.058,.059,.06,.062,.064,.066),(5,10,25,100),(.5,1.,1.5),(1.5,),(True,)),
+      "B":((.057,.06,.064,.07),(25.,),(.5,.75,1.,1.25,1.5),(1.2,1.5,2.,2.5,3.,4.,5.),(True,)),
+      "C":((.057,.06,.064),(25.,),(.5,1.,1.5),(1.5,2.5,3.),(True,False))}
+    for mode,grid in grids.items():
+        config=module.MODE_CONFIG[mode]
+        if config["steps"]!=500:
+            raise RuntimeError("Identity mismatch: horizon "+mode)
+        for key,value in zip(("rr_values","phi_values","alpha_values","successor_caps","cop_values"),grid):
+            if tuple(config[key])!=value:
+                raise RuntimeError("Identity mismatch: "+mode+" "+key)
+    return expected
+
+def encode_task(module,arm,part,task):
+    own=module._task_seed(task["mode"],task["rr"],task["phi"],task["alpha"],
+                          task["successor_capability"],task["cop_cost_audit"],task["seed"])
+    return {"arm":arm,"part":part,"task":task,"derived_seed":own,
+            "cell_key":module._cell_key(task),"run_id":stable_id(arm,part,task)}
+
+def enumerate_tasks(module,arm):
+    registered=[]
+    if arm=="O":
+        pairs={(0.5,5.0),(1.,2.5),(1.,3.),(1.25,2.5),(1.5,2.5)}
+        for task in module._build_tasks("B",75):
+            if (task["alpha"],task["successor_capability"]) in pairs:
+                registered.append(encode_task(module,arm,1,task))
+        for mode,n,part in (("A",100,2),("C",150,3)):
+            registered.extend(encode_task(module,arm,part,t) for t in module._build_tasks(mode,n))
+    else:
+        for mode,n in (("A",25),("C",50)):
+            registered.extend(encode_task(module,arm,4,t) for t in module._build_tasks(mode,n))
+    smoke=[]; extras=[]
+    for mode in ("B","A","C"):
+        for task in module._build_tasks(mode,152):
+            if task["seed"] not in (150,151):
+                continue
+            take=(mode=="B" and arm=="O" and task["rr"]==.06 and task["alpha"]==1. and task["successor_capability"]==3.)
+            take=take or (mode=="A" and task["rr"] in ((.055,.066) if arm=="O" else (.066,)) and task["phi"]==25 and task["alpha"]==1.)
+            take=take or (mode=="C" and task["rr"]==.06 and task["alpha"]==1. and task["successor_capability"]==2.5)
+            part={"B":1,"A":2,"C":3}[mode] if arm=="O" else 4
+            if take:
+                smoke.append(encode_task(module,arm,part,task))
+            elif arm=="O" and mode=="A" and task["rr"]==.055:
+                extras.append(encode_task(module,arm,2,task))
+    return {"registered":registered,"smoke":smoke,"extra_smoke":extras}
+
+def serial(value):
+    if isinstance(value,dict):
+        return {str(k):serial(v) for k,v in value.items()}
+    if isinstance(value,(list,tuple)):
+        return [serial(v) for v in value]
+    if hasattr(value,"tolist"):
+        return value.tolist()
+    if hasattr(value,"item"):
+        return value.item()
+    return value
+
+def child_main(request):
+    start=time.perf_counter(); started=utc()
+    install_guard(request["directory"])
+    watch_parent(request.get("parent_pid"))
+    if os.name != "nt" and request["priority"] == "below-normal":
+        os.nice(10)
+    if sys.version_info[:2]!=(3,13):
+        raise RuntimeError("Bytecode requires CPython 3.13")
+    worktree=Path(request["worktree"]).resolve()
+    main_root=Path(request["main_root"]).resolve()
+    os.chdir(worktree)
+    sys.path[:]=[str(worktree),str(worktree/"simulation")]+[
+        p for p in sys.path if p and not Path(p).resolve().is_relative_to(main_root)
+        and Path(p).resolve()!=worktree]
+    for key in THREAD_ENV:
+        if os.environ.get(key)!="1":
+            raise RuntimeError("Numerical thread environment not configured before import")
+    head=subprocess.check_output(["git","-c","safe.directory="+str(worktree),"-C",str(worktree),"rev-parse","HEAD"],text=True).strip()
+    if head!=ARM_HEADS[request["arm"]]:
+        raise RuntimeError("Worktree HEAD changed")
+    pyc=worktree/"simulation/diagnostics/monte_carlo_phase_b.pyc"
+    if digest(pyc.read_bytes())!=BYTECODE_HASH:
+        raise RuntimeError("Bytecode hash changed")
+    loader=importlib.machinery.SourcelessFileLoader("monte_carlo_phase_b",str(pyc))
+    spec=importlib.util.spec_from_loader(loader.name,loader)
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    loader.exec_module(module)
+    checked=identity_checks(module)
+    import numpy as np
+    threads=library_threads(np)
+    modules=module_audit(worktree,main_root)
+    metadata={"arm":request["arm"],"worktree":str(worktree),"worktree_head":head,
+              "bytecode_sha256":BYTECODE_HASH,"identity_checks":checked,"modules":modules,
+              "interpreter_version":sys.version,"numpy_version":np.__version__,
+              "effective_threads":threads,"thread_environment":{k:os.environ[k] for k in THREAD_ENV},
+              "machine_label":request["machine_label"],"pid":os.getpid(),"priority":request["priority"]}
+    if request["operation"]=="enumerate":
+        metadata.update(enumerate_tasks(module,request["arm"]))
+        save(request["output"],metadata)
+        return
+    expected_environment=request["identity"]["versions"][request["arm"]]
+    if expected_environment != {"interpreter_version":sys.version,"numpy_version":np.__version__}:
+        raise RuntimeError("Interpreter or NumPy version changed since startup")
+    for name,pin in request["identity"]["executor_hashes"].items():
+        if file_hash(main_root/"simulation/diagnostics"/name)!=pin:
+            raise RuntimeError("Executor source changed before child execution: "+name)
+    clean=subprocess.check_output(["git","-c","safe.directory="+str(worktree),"-C",str(worktree),
+                                   "status","--porcelain"],text=True).strip()
+    if clean:
+        raise RuntimeError("Worktree modified before child execution")
+    entry=request["entry"]; task=entry["task"]
+    if request["non_registered"] and task["seed"] not in (150,151):
+        raise RuntimeError("Test execution attempted a registered seed index")
+    candidates=module._build_tasks(task["mode"],task["seed"]+1)
+    match=[t for t in candidates if t==task]
+    if len(match)!=1:
+        raise RuntimeError("Task is not exactly a recovered builder task")
+    task=match[0]
+    if seed_check(task)!=entry["derived_seed"]:
+        raise RuntimeError("Seed cross-check failed in run child")
+    captured=[]
+    init_code=module.GardenModel.__init__.__code__
+    def observer(frame,event,arg):
+        if event=="return" and frame.f_code is init_code:
+            captured.append(frame.f_locals["self"])
+            sys.setprofile(None)
+    sys.setprofile(observer)
+    try:
+        original=module._run_single(task)
+    finally:
+        sys.setprofile(None)
+    wall=time.perf_counter()-start
+    if set(original)!=set(FIELDS):
+        raise RuntimeError("Original row field mismatch")
+    row={key:original[key] for key in FIELDS}
+    row.update({"arm":entry["arm"],"part":entry["part"],"run_id":entry["run_id"],
+                "derived_seed":entry["derived_seed"],"started_utc":started,"completed_utc":utc(),
+                "wall_seconds":wall,"interpreter_version":sys.version,"numpy_version":np.__version__,
+                "machine_label":request["machine_label"]})
+    steps=[]
+    if captured:
+        dc=getattr(captured[0],"datacollector",{})
+        count=len(dc.get("population",[]))
+        for i in range(count):
+            values={k:serial(v[i]) for k,v in dc.items() if isinstance(v,(list,tuple)) and len(v)>i}
+            steps.append({"arm":entry["arm"],"part":entry["part"],"run_id":entry["run_id"],
+                          "seed_index":task["seed"],"step":i,"recorded":values})
+    step_data="".join(canonical(s)+"\n" for s in steps)
+    atomic(request["steps_output"],step_data)
+    metadata["modules"]=module_audit(worktree,main_root)
+    if any(metadata["modules"].get(name)!=value for name,value in modules.items()):
+        raise RuntimeError("Loaded simulation source changed during run")
+    metadata["effective_threads_after"]=library_threads(np)
+    completion={"status":"complete","entry":entry,"row":row,"metadata":metadata,
+                "machine_label":request["machine_label"],"identity":request["identity"],
+                "row_sha256":digest(csv_line(row).encode()),"row_count":1,
+                "step_count":len(steps),"steps_sha256":digest(step_data.encode()),
+                "end_reason":"original_error" if original["error"] else
+                    ("horizon" if len(steps)>=task["steps"] else "step_returned_false"),
+                "retry_events":RETRIES}
+    save(request["output"],completion)
+
+if __name__=="__main__":
+    request=read_json(sys.argv[1])
+    try:
+        child_main(request)
+    except BaseException as exc:
+        save(request["output"]+".failure.json",{"status":"halt","error":repr(exc),
+             "traceback":traceback.format_exc(),"machine_label":request.get("machine_label")})
+        raise
+
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_common.py
+==========================================
+
+"""Operational support for the recovered Phase B runner. No model logic."""
+import csv
+import datetime as dt
+import hashlib
+import io
+import json
+import os
+from pathlib import Path
+import socket
+import sys
+import time
+
+sys.dont_write_bytecode = True
+NOTE_COMMIT = "43f125dfc200eeb262ef2e2e2c459c9715269592"
+NOTE_HASH = "736cc7b513aa3e70df8a492f041de89a2e6ecd08364b865ce84ac75f31163f72"
+BYTECODE_HASH = "2d79795ca50405ff2586a2751fb38861b592d32008aa5e1aebffd07619781d6b"
+ARM_HEADS = {"O":"45409d469a82bb599fe354e8ae3760e4cc3af048",
+             "R":"a370925d53a786a3cdaeb36543c02e7135a0ecab"}
+FIELDS = ["mode","rr","phi","alpha","successor_capability","cop_cost_audit","seed",
+ "survived","collapsed","extinct","final_population","peak_population","collapse_threshold",
+ "final_ai_generation","yield_fired","yield_fire_count","yield_eval_count",
+ "first_yield_fire_step","first_fire_advantage","first_fire_transition_cost","max_yield_margin",
+ "mean_yield_margin","final_theta_capability","final_transfer_state","final_psi_inst_stock",
+ "final_theta_tech_v2","final_l_t_v2","integral_u_sys","knowledge_transfer_verified","error"]
+EXTRA = ["arm","part","run_id","derived_seed","started_utc","completed_utc","wall_seconds",
+         "interpreter_version","numpy_version","machine_label"]
+THREAD_ENV = ("OMP_NUM_THREADS","OPENBLAS_NUM_THREADS","MKL_NUM_THREADS","NUMEXPR_NUM_THREADS")
+DEFAULT_SCHEDULE = {"timezone":"local","default_workers":15,
+ "modes":{"normal":15,"work":10},
+ "rules":[{"days":["Mon","Tue","Wed","Thu","Fri"],"start":"07:00","end":"17:00","workers":10}]}
+RETRIES = []
+
+class ScopeViolation(BaseException):
+    pass
+
+def utc():
+    return dt.datetime.now(dt.timezone.utc).isoformat()
+
+def canonical(value):
+    return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(",",":"), allow_nan=False)
+
+def digest(data):
+    return hashlib.sha256(data).hexdigest()
+
+def file_hash(path):
+    h=hashlib.sha256()
+    tail=b""
+    with Path(path).open("rb") as source:
+        while True:
+            block=source.read(1024*1024)
+            if not block:
+                break
+            block=tail+block
+            if block.endswith(b"\r"):
+                block,tail=block[:-1],b"\r"
+            else:
+                tail=b""
+            h.update(block.replace(b"\r\n",b"\n"))
+    h.update(tail)
+    return h.hexdigest()
+
+def atomic_copy(source,destination):
+    destination=Path(destination)
+    temp=destination.with_name(destination.name+".tmp."+str(os.getpid()))
+    with Path(source).open("rb") as inp, temp.open("wb") as out:
+        while True:
+            block=inp.read(1024*1024)
+            if not block:
+                break
+            out.write(block)
+        out.flush()
+        os.fsync(out.fileno())
+    retry(lambda:os.replace(temp,destination),"publish copied part")
+
+
+def install_guard(directory):
+    directory = Path(directory).resolve()
+    null = os.path.normcase(os.path.abspath(os.devnull))
+    def check(path):
+        if isinstance(path, int):
+            return
+        p = Path(os.fsdecode(path)).resolve()
+        if os.path.normcase(str(p)) == null:
+            return
+        if p.parent != directory or not p.name.startswith("phase_b_rerun_") or p.name in ("phase_b_rerun_design_note.md","phase_b_rerun_evidence"):
+            raise ScopeViolation("Write outside authorized scope: "+str(p))
+    def audit(event,args):
+        if event == "open":
+            path,mode,flags = args
+            if (isinstance(mode,str) and any(x in mode for x in "wax+")) or (isinstance(flags,int) and flags & (os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND)):
+                check(path)
+        elif event in ("os.remove","os.rmdir","os.mkdir","os.chmod","os.utime","os.truncate"):
+            check(args[0])
+        elif event in ("os.rename","os.replace","os.link","os.symlink"):
+            check(args[0]); check(args[1])
+    sys.addaudithook(audit)
+
+def retry(operation, description):
+    start = time.monotonic()
+    while True:
+        try:
+            return operation()
+        except PermissionError as exc:
+            RETRIES.append({"utc":utc(),"operation":description,"error":str(exc)})
+            if time.monotonic()-start >= 5:
+                raise
+            time.sleep(.1)
+
+def atomic(path, data):
+    path=Path(path)
+    temp=path.with_name(path.name+".tmp."+str(os.getpid()))
+    with open(temp,"wb") as f:
+        f.write(data if isinstance(data,bytes) else data.encode("utf-8"))
+        f.flush()
+        os.fsync(f.fileno())
+    retry(lambda: os.replace(temp,path),"replace "+str(path))
+
+def save(path,value):
+    atomic(path, json.dumps(value,indent=2,ensure_ascii=True,allow_nan=False)+"\n")
+
+def read_json(path):
+    return retry(lambda: json.loads(Path(path).read_text(encoding="utf-8-sig")),"read "+str(path))
+
+def csv_line(row,fields=None):
+    out=io.StringIO(newline="")
+    writer=csv.writer(out,lineterminator="\n")
+    writer.writerow([row[k] for k in (fields or FIELDS+EXTRA)])
+    return out.getvalue()
+
+def csv_header(fields=None):
+    fields=fields or FIELDS+EXTRA
+    return csv_line(dict(zip(fields,fields)),fields)
+
+def seed_check(task):
+    label=(f"phase_b|{task['mode']}|{task['rr']:.5f}|{task['phi']:.4f}|"
+           f"{task['alpha']:.4f}|{task['successor_capability']:.4f}|"
+           f"{task['cop_cost_audit']}|{task['seed']}")
+    return int(hashlib.md5(label.encode()).hexdigest(),16)%10000
+
+def stable_id(arm,part,task):
+    cell={k:task[k] for k in ("mode","rr","phi","alpha","successor_capability","cop_cost_audit","seed")}
+    return f"{arm}_p{part}_{task['mode']}_{digest(canonical(cell).encode())[:24]}"
+
+def cpu_budget(host=None):
+    host=host or socket.gethostname()
+    if host.upper()=="YOTKOTEST":
+        return 16
+    return len(os.sched_getaffinity(0)) if hasattr(os,"sched_getaffinity") else (os.cpu_count() or 1)
+
+def default_schedule(host,maximum):
+    if host.upper()=="YOTKOTEST":
+        return json.loads(json.dumps(DEFAULT_SCHEDULE))
+    return {"timezone":"local","default_workers":maximum,
+            "modes":{"normal":maximum,"work":max(1,maximum-3)},"rules":[]}
+
+def valid_count(value,maximum):
+    if type(value) is not int or not 1 <= value <= maximum:
+        raise ValueError(f"Worker count {value!r} outside 1..{maximum}")
+    return value
+
+def validate_schedule(schedule,maximum):
+    if schedule["timezone"]!="local":
+        raise ValueError("Only local timezone is supported")
+    valid_count(schedule["default_workers"],maximum)
+    for n in schedule.get("modes",{}).values():
+        valid_count(n,maximum)
+    for rule in schedule["rules"]:
+        valid_count(rule["workers"],maximum)
+        if not rule["days"] or any(x not in ("Mon","Tue","Wed","Thu","Fri","Sat","Sun") for x in rule["days"]):
+            raise ValueError("Invalid schedule days")
+        start=dt.time.fromisoformat(rule["start"]); end=dt.time.fromisoformat(rule["end"])
+        if start>=end:
+            raise ValueError("Rules must start before end on the same day")
+
+def evaluate_schedule(schedule,override,now,maximum):
+    validate_schedule(schedule,maximum)
+    if override is not None:
+        if set(override)-{"workers","mode","until"} or ("workers" in override)==("mode" in override):
+            raise ValueError("Override requires exactly one of workers and mode")
+        until=dt.datetime.fromisoformat(override["until"]) if "until" in override else None
+        if until is not None and until.tzinfo is not None:
+            until=until.astimezone().replace(tzinfo=None)
+        n=override.get("workers") if "workers" in override else schedule.get("modes",{})[override["mode"]]
+        valid_count(n,maximum)
+        if until is None or now<until:
+            return n,"override:"+("workers" if "workers" in override else override["mode"])
+    matched=[r["workers"] for r in schedule["rules"]
+             if now.strftime("%a") in r["days"] and
+             dt.time.fromisoformat(r["start"]) <= now.time() < dt.time.fromisoformat(r["end"])]
+    return (min(matched),"schedule:rule") if matched else (schedule["default_workers"],"schedule:default")
+
+class Scheduler:
+    def __init__(self,schedule_path,control_path,maximum,events):
+        self.schedule_path=Path(schedule_path); self.control_path=Path(control_path)
+        self.maximum=maximum; self.events=events
+        self.cap=1; self.source="initial"; self.pending=None
+        self.schedule=None; self.override=None; self.bad=None
+    def poll(self,active,now=None):
+        now=now or dt.datetime.now()
+        try:
+            schedule=read_json(self.schedule_path)
+            override=read_json(self.control_path) if self.control_path.exists() else None
+            cap,source=evaluate_schedule(schedule,override,now,self.maximum)
+            self.schedule=schedule; self.override=override; self.bad=None
+        except (ValueError,KeyError,TypeError,OSError) as exc:
+            message=str(exc)
+            if message!=self.bad:
+                self.events.append({"event":"scheduler_warning","utc":utc(),"warning":message,
+                                    "previous_cap":self.cap})
+                self.bad=message
+            cap,source=self.cap,self.source
+        if (cap,source)!=(self.cap,self.source):
+            change={"event":"worker_cap","requested_utc":utc(),"requested_local":now.isoformat(),
+                    "previous_cap":self.cap,"cap":cap,"source":source,"active_at_request":active,
+                    "effective_utc":None}
+            if self.pending is not None:
+                self.pending["superseded_utc"]=utc()
+            self.events.append(change)
+            self.pending=change; self.cap=cap; self.source=source
+        if self.pending is not None and active<=self.cap:
+            self.pending["effective_utc"]=utc()
+            self.pending["active_at_effective"]=active
+            self.pending=None
+        return self.cap
+
+def projected_finish(start,durations,schedule,override,maximum,active_remaining=None):
+    """Discrete event simulation of queued jobs and non-preemptive cap changes."""
+    import heapq
+    now=start; index=0; active=[]
+    for seconds in active_remaining or []:
+        heapq.heappush(active,now+dt.timedelta(seconds=max(.01,seconds)))
+    durations=list(durations)
+    limit=0
+    while index<len(durations) or active:
+        cap,_=evaluate_schedule(schedule,override,now,maximum)
+        while index<len(durations) and len(active)<cap:
+            heapq.heappush(active,now+dt.timedelta(seconds=max(.01,durations[index])))
+            index+=1
+        if index==len(durations):
+            return max(active,default=now)
+        boundary=now.replace(second=0,microsecond=0)+dt.timedelta(minutes=1)
+        if override and override.get("until"):
+            expiry=dt.datetime.fromisoformat(override["until"])
+            if expiry.tzinfo:
+                expiry=expiry.astimezone().replace(tzinfo=None)
+            if now<expiry<boundary:
+                boundary=expiry
+        now=min(boundary,active[0] if active else boundary)
+        while active and active[0]<=now:
+            heapq.heappop(active)
+        limit+=1
+        if limit>2000000:
+            raise ValueError("ETA simulation horizon exceeded")
+    return now
+
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_executor.py
+==========================================
+
+"""Phase B recovered-code executor. Registered runs are operator-launched only."""
+import sys
+sys.dont_write_bytecode=True
+import argparse
+import concurrent.futures
+from collections import Counter
+import datetime as dt
+import json
+import os
+os.environ["GIT_OPTIONAL_LOCKS"]="0"
+from pathlib import Path
+import re
+import shutil
+import socket
+import subprocess
+import time
+import traceback
+from phase_b_rerun_common import *
+
+HERE=Path(__file__).resolve().parent
+ROOT=HERE.parent.parent
+PY313="C:/Users/matty/AppData/Local/Python/pythoncore-3.13-64/python.exe"
+DEFAULT_ARMS={"O":"C:/Users/matty/Dev/phase-b-rerun-O","R":"C:/Users/matty/Dev/phase-b-rerun-R"}
+OWN_FILES=("phase_b_rerun_executor.py","phase_b_rerun_common.py","phase_b_rerun_child.py",
+           "phase_b_rerun_xcheck_compare.py")
+BOOTSTRAP="import sys;sys.dont_write_bytecode=True;exec(compile(open(sys.argv[2],encoding='utf-8').read(),'<runner-support>','exec'));exec(compile(open(sys.argv[3],encoding='utf-8').read(),'<runner-child>','exec'))"
+
+def git(*args):
+    p=subprocess.run(["git",*args],cwd=ROOT,capture_output=True,text=True)
+    if p.returncode:
+        raise RuntimeError("Git check failed: "+repr(args)+" "+p.stderr)
+    return p.stdout.strip()
+
+def own_hashes():
+    return {name:file_hash(HERE/name) for name in OWN_FILES}
+
+def check_sources(arms):
+    git("merge-base","--is-ancestor",NOTE_COMMIT,"origin/main")
+    note="simulation/diagnostics/phase_b_rerun_design_note.md"
+    blob=subprocess.check_output(["git","cat-file","blob","HEAD:"+note],cwd=ROOT)
+    if digest(blob.replace(b"\r\n",b"\n"))!=NOTE_HASH or file_hash(ROOT/note)!=NOTE_HASH:
+        raise RuntimeError("Note pin changed")
+    result={}
+    for arm,path in arms.items():
+        head=git("-c","safe.directory="+str(path),"-C",str(path),"rev-parse","HEAD")
+        if head!=ARM_HEADS[arm]:
+            raise RuntimeError("Worktree HEAD changed: "+arm)
+        code=Path(path)/"simulation/diagnostics/monte_carlo_phase_b.pyc"
+        if digest(code.read_bytes())!=BYTECODE_HASH:
+            raise RuntimeError("Bytecode pin changed: "+arm)
+        if git("-c","safe.directory="+str(path),"-C",str(path),"status","--porcelain"):
+            raise RuntimeError("Worktree became modified: "+arm)
+        result[arm]=head
+    return result
+
+def child_environment():
+    env=os.environ.copy()
+    env.update({name:"1" for name in THREAD_ENV})
+    env["PYTHONDONTWRITEBYTECODE"]="1"
+    env.pop("PYTHONPATH",None)
+    return env
+
+def start_child(python,request_path,worktree,priority,console_path):
+    flags=0
+    if os.name=="nt":
+        flags=getattr(subprocess,"CREATE_NO_WINDOW",0)
+        flags |= (subprocess.BELOW_NORMAL_PRIORITY_CLASS if priority=="below-normal" else subprocess.NORMAL_PRIORITY_CLASS)
+    stderr=open(console_path,"ab")
+    process=subprocess.Popen([str(python),"-B","-c",BOOTSTRAP,str(request_path),
+         str(HERE/"phase_b_rerun_common.py"),str(HERE/"phase_b_rerun_child.py")],
+        cwd=worktree,env=child_environment(),stdout=stderr,stderr=stderr,creationflags=flags)
+    stderr.close()
+    return process
+
+def prefix_for(args):
+    if args.crosscheck:
+        return "phase_b_rerun_xcheck_"+args.machine_label+"_"
+    return "phase_b_rerun_smoke_" if args.test_mode else "phase_b_rerun_"
+
+def validate_label(label):
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*",label):
+        raise ValueError("Machine label must contain only letters, digits, dot, hyphen or underscore")
+    return label
+
+def enumerate_startup(args,prefix):
+    arms={"O":Path(args.arm_o_worktree).resolve(),"R":Path(args.arm_r_worktree).resolve()}
+    heads=check_sources(arms)
+    metadata={}
+    for arm in ("O","R"):
+        stem=HERE/(prefix+"startup_"+arm)
+        request={"operation":"enumerate","directory":str(HERE),"main_root":str(ROOT),
+                 "worktree":str(arms[arm]),"arm":arm,"machine_label":args.machine_label,
+                 "priority":args.priority,"parent_pid":os.getpid(),"output":str(stem)+".json"}
+        save(str(stem)+"_request.json",request)
+        proc=start_child(args.python313,str(stem)+"_request.json",arms[arm],args.priority,str(stem)+"_console.txt")
+        while proc.poll() is None:
+            time.sleep(.2)
+        if proc.returncode:
+            failure=Path(str(stem)+".json.failure.json")
+            raise RuntimeError("Startup child failed: "+(failure.read_text() if failure.exists() else str(stem)+"_console.txt"))
+        metadata[arm]=read_json(str(stem)+".json")
+    registered=metadata["O"]["registered"]+metadata["R"]["registered"]
+    counts=Counter((e["part"],e["task"]["mode"]) for e in registered)
+    expected={(1,"B"):1500,(2,"A"):10800,(3,"C"):8100,(4,"A"):2700,(4,"C"):2700}
+    if counts!=expected:
+        raise RuntimeError("Registered task identity count mismatch: "+repr(counts))
+    original={canonical(e["task"]) for e in registered if e["part"] in (2,3)}
+    if not all(canonical(e["task"]) in original for e in registered if e["part"]==4):
+        raise RuntimeError("Part 4 is not a task-identical subset")
+    for entry in registered:
+        if seed_check(entry["task"])!=entry["derived_seed"]:
+            raise RuntimeError("Seed cross-check mismatch: "+entry["run_id"])
+    smoke=metadata["O"]["smoke"]+metadata["R"]["smoke"]
+    if len(smoke)!=16 or Counter(e["arm"] for e in smoke)!={"O":10,"R":6}:
+        raise RuntimeError("Test task identity count mismatch")
+    for e in smoke:
+        if e["task"]["seed"] not in (150,151) or seed_check(e["task"])!=e["derived_seed"]:
+            raise RuntimeError("Test seed cross-check mismatch")
+    versions={arm:{"interpreter_version":m["interpreter_version"],"numpy_version":m["numpy_version"]}
+              for arm,m in metadata.items()}
+    identity={"executor_hashes":own_hashes(),"bytecode_sha256":BYTECODE_HASH,
+              "worktree_heads":heads,"note_sha256_lf":NOTE_HASH,"versions":versions}
+    proof={"counts":{str(k):v for k,v in counts.items()},"seed_tasks_checked":len(registered),
+           "part4_subset":True,"task_list_hashes":{str(p):digest(canonical([e["task"] for e in registered if e["part"]==p]).encode()) for p in range(1,5)},
+           "identity":identity,"main_head_provenance_only":git("rev-parse","HEAD"),
+           "machine_label":args.machine_label,"cpu_budget":args.cpu_budget}
+    save(HERE/(prefix+"startup.json"),proof)
+    return arms,metadata,registered,smoke,identity,proof
+
+def verify_identity(old,new,old_machine=None,new_machine=None,test_mode=False):
+    changes=[key for key in set(old)|set(new) if old.get(key)!=new.get(key)]
+    if changes == ["versions"] and old_machine and new_machine and old_machine != new_machine:
+        paths=list(HERE.glob("phase_b_rerun_xcheck_result_*.json"))
+        if test_mode:
+            paths += list(HERE.glob("phase_b_rerun_smoke_*xcheck_result*.json"))
+        for path in paths:
+            result=read_json(path)
+            env=result.get("environments",{})
+            if (result.get("result")=="IDENTICAL"
+                and set(result.get("machine_labels",[]))=={old_machine,new_machine}
+                and result.get("executor_hashes")==new["executor_hashes"]
+                and result.get("bytecode_sha256")==new["bytecode_sha256"]
+                and (test_mode or not result.get("test_fixture"))
+                and env.get(old_machine)==old["versions"]
+                and env.get(new_machine)==new["versions"]):
+                return
+    if changes:
+        raise RuntimeError("Resume identity changed: "+", ".join(sorted(changes)))
+
+def crosscheck_permission(first,second,identity,test_mode=False):
+    if first==second:
+        return True
+    paths=list(HERE.glob("phase_b_rerun_xcheck_result_*.json"))
+    if test_mode:
+        paths+=list(HERE.glob("phase_b_rerun_smoke_*xcheck_result*.json"))
+    for path in paths:
+        try:
+            result=read_json(path)
+            if result.get("result")=="IDENTICAL" and set(result.get("machine_labels",[]))=={first,second} and result.get("executor_hashes")==identity["executor_hashes"] and result.get("bytecode_sha256")==BYTECODE_HASH:
+                if not test_mode and result.get("test_fixture"):
+                    continue
+                return True
+        except (ValueError,OSError):
+            continue
+    return False
+
+def validate_completion(record,entry,identity,new_machine=None,test_mode=False):
+    if record["status"]!="complete" or record["entry"]!=entry:
+        raise RuntimeError("Completion key or task mismatch: "+entry["run_id"])
+    verify_identity(record["identity"],identity,record["machine_label"],new_machine,test_mode)
+    row=record["row"]
+    if list(row)!=FIELDS+EXTRA or row["run_id"]!=entry["run_id"]:
+        raise RuntimeError("Completion row schema mismatch")
+    if digest(csv_line(row).encode())!=record["row_sha256"] or record["row_count"]!=1:
+        raise RuntimeError("Completion row hash mismatch")
+    return record
+
+def verify_merged(directory,manifest):
+    directory=Path(directory)
+    for name,info in manifest["files"].items():
+        path=directory/name
+        if file_hash(path)!=info["sha256_lf"]:
+            raise RuntimeError("Merged file hash mismatch: "+str(path))
+    runs_path=directory/manifest["runs_file"]
+    with runs_path.open(encoding="utf-8",newline="") as f:
+        reader=csv.DictReader(f)
+        if reader.fieldnames!=FIELDS+EXTRA:
+            raise RuntimeError("Merged CSV field order mismatch")
+        rows=list(reader)
+    records=[json.loads(line) for line in (directory/manifest["completions_file"]).read_text().splitlines()]
+    by_id={r["run_id"]:r for r in rows}
+    if len(by_id)!=len(rows) or len(rows)!=manifest["run_count"] or len(records)!=len(rows):
+        raise RuntimeError("Merged row count mismatch")
+    for record in records:
+        rid=record["row"]["run_id"]
+        if digest(csv_line(record["row"]).encode()) != record["row_sha256"]:
+            raise RuntimeError("Completion payload hash mismatch: "+rid)
+        reconstructed=csv_line(by_id[rid])
+        if digest(reconstructed.encode())!=record["row_sha256"] or manifest["runs"][rid]["row_sha256"]!=record["row_sha256"]:
+            raise RuntimeError("Merged per-run hash mismatch: "+rid)
+        if by_id[rid]["arm"]!=record["entry"]["arm"] or int(by_id[rid]["part"])!=record["entry"]["part"] or int(by_id[rid]["seed"])!=record["entry"]["task"]["seed"]:
+            raise RuntimeError("Merged filter identity mismatch")
+    steps_path=directory/manifest["steps_file"]
+    grouped={}
+    with steps_path.open(encoding="utf-8",newline="") as f:
+        for r in csv.DictReader(f):
+            rid=r["run_id"]
+            value=json.loads(r["recorded"])
+            raw=canonical({"arm":r["arm"],"part":int(r["part"]),"run_id":rid,
+                           "seed_index":int(r["seed_index"]),"step":int(r["step"]),"recorded":value})+"\n"
+            if rid not in grouped:
+                grouped[rid]=[hashlib.sha256(),0]
+            grouped[rid][0].update(raw.encode()); grouped[rid][1]+=1
+    for record in records:
+        rid=record["row"]["run_id"]
+        h,n=grouped.get(rid,[hashlib.sha256(),0])
+        if h.hexdigest()!=record["steps_sha256"] or n!=record["step_count"]:
+            raise RuntimeError("Merged step recovery mismatch: "+rid)
+    return records
+
+class Batch:
+    def __init__(self,args,prefix,entries,arms,identity,proof):
+        self.args=args; self.prefix=prefix; self.arms=arms; self.identity=identity; self.proof=proof
+        self.entries=sorted(entries,key=lambda e:(e["part"],e["arm"],e["cell_key"]))
+        self.by_id={e["run_id"]:e for e in self.entries}
+        if len(self.by_id)!=len(entries):
+            raise RuntimeError("Duplicate run identifiers")
+        self.events=[]; self.active={}; self.completed={}; self.merged={}; self.start=time.monotonic()
+        self.initial_elapsed=0.; self.resume_counts={"preserved":0,"restarted":0,"never_launched":0}
+        self.machine=args.machine_label; self.maximum=max(1,args.cpu_budget-1)
+        schedule_prefix=prefix if args.test_mode or args.crosscheck else "phase_b_rerun_"
+        self.schedule_path=HERE/(schedule_prefix+"schedule_"+self.machine+".json")
+        self.control_path=HERE/(schedule_prefix+"runtime_control_"+self.machine+".json")
+        if not self.schedule_path.exists():
+            save(self.schedule_path,default_schedule(socket.gethostname(),self.maximum))
+        self.scheduler=Scheduler(self.schedule_path,self.control_path,self.maximum,self.events)
+        if args.workers is not None:
+            try:
+                valid_count(args.workers,self.maximum)
+                save(self.control_path,{"workers":args.workers})
+            except ValueError as exc:
+                self.events.append({"event":"scheduler_warning","utc":utc(),"warning":str(exc)})
+        self.state_path=HERE/(prefix+"state.json")
+        self.progress_path=HERE/(prefix+"progress.json")
+        if self.state_path.exists():
+            if not args.resume:
+                raise RuntimeError("Existing execution state requires --resume")
+            old=read_json(self.state_path)
+            verify_identity(old["identity"],identity,old["machine_label"],self.machine,args.test_mode)
+            if old["task_ids"]!=list(self.by_id):
+                raise RuntimeError("Resume task selection changed")
+            self.events[:]=old.get("events",[])+self.events
+            self.scheduler.cap=min(old.get("last_cap",1),self.maximum)
+            self.scheduler.source=old.get("last_cap_source","initial")
+            self.initial_elapsed=old.get("elapsed_seconds",0.)
+        elif args.resume:
+            self.events.append({"event":"resume_without_state","utc":utc()})
+        for part in sorted({e["part"] for e in self.entries}):
+            mp=HERE/(prefix+f"part{part}_manifest.json")
+            if mp.exists():
+                manifest=read_json(mp)
+                verify_identity(manifest["identity"],identity,manifest["machine_label"],self.machine,args.test_mode)
+                records=verify_merged(HERE,manifest)
+                self.merged[part]=manifest
+                for rec in records:
+                    self._accept(rec)
+        for entry in self.entries:
+            rid=entry["run_id"]
+            path=self.path(rid,"completion.json")
+            if rid in self.completed:
+                continue
+            if path.exists():
+                try:
+                    rec=read_json(path)
+                except (ValueError,OSError) as exc:
+                    self.events.append({"event":"invalid_partial_completion","run_id":rid,"error":str(exc),"utc":utc()})
+                else:
+                    self._accept(rec)
+            if rid not in self.completed:
+                if self.path(rid,"request.json").exists():
+                    self.resume_counts["restarted"]+=1
+                    self.events.append({"event":"restart","run_id":rid,"seed_index":entry["task"]["seed"],"utc":utc(),"reason":"interrupted or invalid completion"})
+                else:
+                    self.resume_counts["never_launched"]+=1
+        self.resume_counts["preserved"]=len(self.completed)
+        self.pending=[e for e in self.entries if e["run_id"] not in self.completed]
+        self.scheduler.poll(0)
+        self.save_state()
+    def path(self,rid,suffix):
+        return HERE/(self.prefix+"run_"+rid+"_"+suffix)
+    def _accept(self,record):
+        rid=record["row"]["run_id"]
+        if rid not in self.by_id:
+            raise RuntimeError("Unexpected completion "+rid)
+        validate_completion(record,self.by_id[rid],self.identity,self.machine,self.args.test_mode)
+        machine=record["machine_label"]
+        if not crosscheck_permission(machine,self.machine,self.identity,self.args.test_mode):
+            raise RuntimeError("Resume refused: machine "+machine+" differs from "+self.machine+" without matching IDENTICAL crosscheck")
+        if rid in self.completed and self.completed[rid]!=record:
+            raise RuntimeError("Conflicting duplicate completion")
+        self.completed[rid]=record
+    def elapsed(self):
+        return self.initial_elapsed+time.monotonic()-self.start
+    def save_state(self):
+        save(self.state_path,{"identity":self.identity,"task_ids":list(self.by_id),"machine_label":self.machine,
+            "events":self.events,"resume_counts":self.resume_counts,"elapsed_seconds":self.elapsed(),
+            "cpu_budget":self.args.cpu_budget,"priority":self.args.priority,"retry_events":RETRIES,
+            "last_cap":self.scheduler.cap,"last_cap_source":self.scheduler.source})
+    def dispatch(self,entry):
+        rid=entry["run_id"]
+        for suffix in ("request.json","steps.jsonl","completion.json","completion.json.failure.json","console.txt"):
+            existing=self.path(rid,suffix)
+            if existing.exists():
+                archive=existing.with_name(existing.name+".partial."+str(time.time_ns()))
+                os.replace(existing,archive)
+        request={"operation":"run","directory":str(HERE),"main_root":str(ROOT),
+                 "worktree":str(self.arms[entry["arm"]]),"arm":entry["arm"],
+                 "machine_label":self.machine,"priority":self.args.priority,"parent_pid":os.getpid(),
+                 "entry":entry,"identity":self.identity,"non_registered":self.args.test_mode or self.args.crosscheck,
+                 "output":str(self.path(rid,"completion.json")),"steps_output":str(self.path(rid,"steps.jsonl"))}
+        save(self.path(rid,"request.json"),request)
+        process=start_child(self.args.python313,self.path(rid,"request.json"),self.arms[entry["arm"]],
+                            self.args.priority,self.path(rid,"console.txt"))
+        self.active[rid]={"process":process,"entry":entry,"started":time.monotonic(),"started_utc":utc()}
+        self.events.append({"event":"dispatch","run_id":rid,"pid":process.pid,"utc":utc(),
+                            "active_after":len(self.active),"cap":self.scheduler.cap})
+    def progress(self,status="running"):
+        part_counts={}
+        for part in sorted({e["part"] for e in self.entries}):
+            ids={e["run_id"] for e in self.entries if e["part"]==part}
+            done=ids & self.completed.keys(); active=ids & self.active.keys()
+            part_counts[str(part)]={"completed":len(done),"running":len(active),
+                "pending":len(ids)-len(done)-len(active),
+                "errors":sum(bool(self.completed[r]["row"]["error"]) for r in done)}
+        means={}
+        for arm in ("O","R"):
+            values=[r["row"]["wall_seconds"] for r in self.completed.values() if r["entry"]["arm"]==arm]
+            means[arm]=sum(values)/len(values) if values else None
+        eta=None
+        if all(means[e["arm"]] is not None for e in self.pending) and all(means[a["entry"]["arm"]] is not None for a in self.active.values()) and self.scheduler.schedule:
+            try:
+                end=projected_finish(dt.datetime.now(),[means[e["arm"]] for e in self.pending],
+                     ({"timezone":"local","default_workers":self.scheduler.cap,"modes":{},"rules":[]} if self.scheduler.bad else self.scheduler.schedule),
+                     (None if self.scheduler.bad else self.scheduler.override),self.maximum,
+                     [max(.01,means[a["entry"]["arm"]]-(time.monotonic()-a["started"])) for a in self.active.values()])
+                eta=end.isoformat()
+            except (ValueError,KeyError):
+                pass
+        save(self.progress_path,{"updated_utc":utc(),"status":status,"machine_label":self.machine,
+            "controller_pid":os.getpid(),"cpu_budget":self.args.cpu_budget,"maximum_workers":self.maximum,
+            "parts":part_counts,"current_cap":min(self.scheduler.cap,len(self.pending)+len(self.active)) if self.pending or self.active else 0,
+            "requested_cap":self.scheduler.cap,"cap_source":self.scheduler.source,
+            "active_children":[{"pid":a["process"].pid,"run_id":rid,"started_utc":a["started_utc"]} for rid,a in self.active.items()],
+            "elapsed_seconds":self.elapsed(),"mean_wall_seconds_per_arm":means,"estimated_finish_local":eta,"eta_assumption":("previous cap retained while control is invalid" if self.scheduler.bad else "current schedule and override expiry"),
+            "resume_counts":self.resume_counts,"schedule_path":str(self.schedule_path),
+            "runtime_control_path":str(self.control_path),"events":self.events[-100:]})
+        self.save_state()
+    def merge(self,part):
+        records=sorted([r for r in list(self.completed.values()) if r["entry"]["part"]==part],
+                       key=lambda r:(r["entry"]["arm"],r["entry"]["cell_key"]))
+        expected=sum(e["part"]==part for e in self.entries)
+        if len(records)!=expected:
+            return
+        stem=self.prefix+f"part{part}_"
+        runs=HERE/(stem+"runs.csv"); completions=HERE/(stem+"completions.jsonl"); steps=HERE/(stem+"steps.csv")
+        atomic(runs,csv_header()+"".join(csv_line(r["row"]) for r in records))
+        atomic(completions,"".join(json.dumps(r,separators=(",",":"),allow_nan=False)+"\n" for r in records))
+        temp=steps.with_name(steps.name+".tmp."+str(os.getpid()))
+        sf=["arm","part","run_id","seed_index","step","recorded"]
+        nsteps=0
+        with temp.open("w",encoding="utf-8",newline="") as output:
+            writer=csv.DictWriter(output,fieldnames=sf,lineterminator="\n"); writer.writeheader()
+            for record in records:
+                raw_path=self.path(record["row"]["run_id"],"steps.jsonl")
+                h=hashlib.sha256(); n=0
+                with raw_path.open("rb") as inp:
+                    for line in inp:
+                        h.update(line); n+=1; value=json.loads(line)
+                        value["recorded"]=canonical(value["recorded"])
+                        writer.writerow(value)
+                if h.hexdigest()!=record["steps_sha256"] or n!=record["step_count"]:
+                    raise RuntimeError("Per-run step hash mismatch before merge")
+                nsteps+=n
+            output.flush(); os.fsync(output.fileno())
+        retry(lambda:os.replace(temp,steps),"publish merged steps")
+        partials=[]
+        for record in records:
+            rid=record["row"]["run_id"]
+            partials.extend(HERE.glob(self.prefix+"run_"+rid+"_*.partial.*"))
+        journal=HERE/(stem+"interruption_journal.jsonl")
+        journal_rows=[]
+        for path in partials:
+            raw=path.read_bytes()
+            journal_rows.append({"filename":path.name,"sha256_raw":digest(raw),
+                                 "contents":raw.decode("utf-8","backslashreplace")})
+        atomic(journal,"".join(canonical(r)+"\n" for r in journal_rows))
+        manifest={"part":part,"machine_label":self.machine,"identity":self.identity,"run_count":len(records),
+             "runs_file":runs.name,"completions_file":completions.name,"steps_file":steps.name,
+             "files":{p.name:{"sha256_lf":file_hash(p),"row_count":n} for p,n in [(runs,len(records)),(completions,len(records)),(steps,nsteps),(journal,len(journal_rows))]},
+             "runs":{r["row"]["run_id"]:{"arm":r["entry"]["arm"],"seed_index":r["entry"]["task"]["seed"],
+                 "row_count":1,"row_sha256":r["row_sha256"],"step_count":r["step_count"],
+                 "steps_sha256":r["steps_sha256"]} for r in records},"deleted_by_kind":{}}
+        verify_merged(HERE,manifest)
+        mp=HERE/(stem+"manifest.json")
+        save(mp,manifest)
+        deleted=Counter()
+        for record in records:
+            rid=record["row"]["run_id"]
+            for suffix in ("completion.json","steps.jsonl","request.json","console.txt"):
+                p=self.path(rid,suffix)
+                if p.exists():
+                    p.unlink(); deleted[suffix]+=1
+        for path in partials:
+            path.unlink()
+            deleted["retained_in_interruption_journal"]+=1
+        manifest["deleted_by_kind"]=dict(deleted)
+        save(mp,manifest); self.merged[part]=manifest
+        self.events.append({"event":"part_merged","part":part,"utc":utc(),"rows":len(records)})
+    def run(self):
+        print(f"Effective worker cap: {self.scheduler.cap} ({self.scheduler.source}); machine {self.machine}",flush=True)
+        self.progress()
+        last_progress=time.monotonic()
+        merger=concurrent.futures.ThreadPoolExecutor(max_workers=1)
+        merging={}
+        try:
+            while self.pending or self.active or merging or any(e["part"] not in self.merged for e in self.entries):
+                self.scheduler.poll(len(self.active))
+                for rid,a in list(self.active.items()):
+                    status=a["process"].poll()
+                    if status is None:
+                        continue
+                    del self.active[rid]
+                    if status:
+                        failure=self.path(rid,"completion.json.failure.json")
+                        if failure.exists():
+                            raise RuntimeError("Child exception: "+failure.read_text())
+                        self.events.append({"event":"terminated_worker","run_id":rid,"exit_code":status,"utc":utc()})
+                        raise InterruptedError("Worker terminated; resume required: "+rid)
+                    self._accept(read_json(self.path(rid,"completion.json")))
+                    self.events.append({"event":"complete","run_id":rid,"utc":utc(),"pid":a["process"].pid})
+                self.scheduler.poll(len(self.active))
+                for part,future in list(merging.items()):
+                    if future.done():
+                        future.result()
+                        del merging[part]
+                for part in sorted({e["part"] for e in self.entries}):
+                    if part not in self.merged and part not in merging and all(e["run_id"] in self.completed for e in self.entries if e["part"]==part):
+                        merging[part]=merger.submit(self.merge,part)
+                while self.pending and len(self.active)<self.scheduler.cap:
+                    self.dispatch(self.pending.pop(0))
+                if time.monotonic()-last_progress>=5:
+                    self.progress(); last_progress=time.monotonic()
+                time.sleep(.2)
+            merger.shutdown(wait=True)
+            check_sources(self.arms)
+            if own_hashes()!=self.identity["executor_hashes"]:
+                raise RuntimeError("Executor source changed during execution")
+            self.progress("complete")
+            manifest={"status":"complete","machine_label":self.machine,"identity":self.identity,
+                "proof":self.proof,"parts":self.merged,"resume_counts":self.resume_counts,
+                "events":self.events,"cpu_budget":self.args.cpu_budget,"priority":self.args.priority,
+                "non_registered":self.args.test_mode or self.args.crosscheck,"retry_events":RETRIES,
+                "files":{name:info for m in self.merged.values() for name,info in m["files"].items()}}
+            save(HERE/(self.prefix+"manifest.json"),manifest)
+            if self.args.crosscheck:
+                records=[self.completed[e["run_id"]] for e in self.entries]
+                save(HERE/(self.prefix+"rows.json"),{"machine_label":self.machine,"identity":self.identity,
+                     "non_registered":True,"rows":[r["row"] for r in records],"tasks":[r["entry"] for r in records]})
+            print(f"Complete: {len(self.completed)} runs; errors {sum(bool(r['row']['error']) for r in self.completed.values())}",flush=True)
+            return manifest
+        except BaseException:
+            merger.shutdown(wait=True,cancel_futures=True)
+            for a in self.active.values():
+                if a["process"].poll() is None:
+                    a["process"].terminate()
+            for a in self.active.values():
+                a["process"].wait()
+            self.active.clear()
+            self.progress("interrupted")
+            raise
+
+def import_parts(files,args):
+    supplied={Path(f).resolve().name:Path(f).resolve() for f in files}
+    manifests=[p for p in supplied.values() if p.name.endswith("_manifest.json")]
+    if not manifests:
+        raise RuntimeError("--import-part requires each part manifest and its merged files")
+    for path in manifests:
+        manifest=read_json(path)
+        if "part" not in manifest:
+            raise RuntimeError("Import requires a per-part manifest")
+        if manifest["identity"]["worktree_heads"]!=ARM_HEADS or manifest["identity"]["note_sha256_lf"]!=NOTE_HASH:
+            raise RuntimeError("Imported substrate or note identity mismatch")
+        if manifest["identity"]["executor_hashes"]!=own_hashes() or manifest["identity"]["bytecode_sha256"]!=BYTECODE_HASH:
+            raise RuntimeError("Imported executor or bytecode identity mismatch")
+        for name,info in manifest["files"].items():
+            if name not in supplied or file_hash(supplied[name])!=info["sha256_lf"]:
+                raise RuntimeError("Missing or mismatched imported file: "+name)
+            if supplied[name].parent!=path.parent:
+                raise RuntimeError("Import files must be together with their part manifest")
+        verify_merged(path.parent,manifest)
+        for name in [*manifest["files"],path.name]:
+            if not name.startswith("phase_b_rerun_") or Path(name).name!=name:
+                raise RuntimeError("Invalid imported filename")
+            dest=HERE/name
+            source=supplied[name]
+            if dest.exists():
+                if file_hash(dest)!=file_hash(source):
+                    raise RuntimeError("Refusing to overwrite existing import: "+name)
+            else:
+                atomic_copy(source,dest)
+        verify_merged(HERE,manifest)
+    print("Imported and re-verified "+str(len(manifests))+" whole parts.")
+
+def parser():
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--parts",nargs="+",type=int,choices=(1,2,3,4),default=[1,2,3,4])
+    p.add_argument("--arm-o-worktree",default=DEFAULT_ARMS["O"])
+    p.add_argument("--arm-r-worktree",default=DEFAULT_ARMS["R"])
+    p.add_argument("--python313",default=PY313)
+    p.add_argument("--workers",type=int)
+    p.add_argument("--resume",action="store_true")
+    p.add_argument("--status",action="store_true")
+    p.add_argument("--test-mode",action="store_true")
+    p.add_argument("--crosscheck",action="store_true")
+    p.add_argument("--machine-label",default=socket.gethostname())
+    p.add_argument("--cpu-budget",type=int,default=cpu_budget())
+    p.add_argument("--priority",choices=("below-normal","normal"),default="below-normal")
+    p.add_argument("--import-part",nargs="+",metavar="FILES")
+    return p
+
+def controller_lock(prefix):
+    handle=open(HERE/(prefix+"controller.lock"),"a+b")
+    handle.seek(0,2)
+    if handle.tell()==0:
+        handle.write(b"x"); handle.flush()
+    handle.seek(0)
+    if os.name=="nt":
+        import msvcrt
+        msvcrt.locking(handle.fileno(),msvcrt.LK_NBLCK,1)
+    else:
+        import fcntl
+        fcntl.flock(handle.fileno(),fcntl.LOCK_EX|fcntl.LOCK_NB)
+    return handle
+
+def main():
+    args=parser().parse_args()
+    validate_label(args.machine_label)
+    if args.cpu_budget<2:
+        raise ValueError("CPU budget must be at least two")
+    prefix=prefix_for(args)
+    if args.status:
+        path=HERE/(prefix+"progress.json")
+        if not path.exists():
+            print("No progress file: "+str(path)); return
+        progress=read_json(path)
+        print(f"{progress['machine_label']}: {progress['status']}; cap {progress['current_cap']} ({progress['cap_source']})")
+        for part,counts in progress["parts"].items():
+            print("Part "+part+": "+", ".join(f"{k}={v}" for k,v in counts.items()))
+        print("Updated "+progress["updated_utc"]+"; estimated finish "+str(progress["estimated_finish_local"]))
+        return
+    install_guard(HERE)
+    lock=controller_lock(prefix)
+    if args.import_part:
+        check_sources({"O":Path(args.arm_o_worktree),"R":Path(args.arm_r_worktree)})
+        import_parts(args.import_part,args); return
+    arms,metadata,registered,smoke,identity,proof=enumerate_startup(args,prefix)
+    entries=smoke if args.test_mode or args.crosscheck else registered
+    if args.crosscheck and sorted(set(args.parts))!=[1,2,3,4]:
+        raise ValueError("--crosscheck always executes all 16 tasks")
+    entries=[e for e in entries if e["part"] in args.parts]
+    batch=Batch(args,prefix,entries,arms,identity,proof)
+    batch.run()
+
+if __name__=="__main__":
+    try:
+        main()
+    except BaseException as exc:
+        if isinstance(exc,SystemExit):
+            raise
+        print("HALT: "+str(exc),file=sys.stderr)
+        sys.exit(1)
+
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_verdicts.py
+==========================================
+
+"""Registered verdicts for the Phase B stage 2 rerun (phase_b_rerun_design_note.md, Sections 7 to 9).
+
+Run: python simulation/diagnostics/phase_b_rerun_verdicts.py
+Reads the four merged part run tables only, and writes phase_b_rerun_verdicts.json beside this
+script. No ratio of two measured counts is computed; every rate is a count over a fixed design n.
+"""
+import csv
+import json
+import math
+from collections import defaultdict
+from pathlib import Path
+
+DIAG = Path(__file__).resolve().parent
+PART2 = DIAG
+OUT = DIAG / "phase_b_rerun_verdicts.json"
+Z = 2.0
+
+
+def rows(path):
+    with open(path, encoding="utf-8", newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def truthy(v):
+    return v == "True"
+
+
+def wilson(k, n, z=Z):
+    p = k / n
+    centre = (p + z * z / (2 * n)) / (1 + z * z / n)
+    half = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / (1 + z * z / n)
+    return centre - half, centre + half
+
+
+def paired_se(diffs):
+    n = len(diffs)
+    mean = sum(diffs) / n
+    var = sum((d - mean) ** 2 for d in diffs) / (n - 1)
+    return mean, math.sqrt(var / n)
+
+
+out = {"design_n_note": "rates are counts over fixed design n"}
+
+# ---------------- P: Part 1 cliff pairs ----------------
+P_TABLE = {(0.5, 5.0): (66, 72), (1.0, 2.5): (74, 75), (1.0, 3.0): (3, 10),
+           (1.25, 2.5): (23, 37), (1.5, 2.5): (0, 1)}
+p1 = rows(DIAG / "phase_b_rerun_part1_runs.csv")
+fired = defaultdict(int)
+celln = defaultdict(int)
+for r in p1:
+    key = (float(r["alpha"]), float(r["successor_capability"]), float(r["rr"]))
+    celln[key] += 1
+    fired[key] += truthy(r["yield_fired"])
+p_pairs = {}
+p_identical = p_faithful = True
+for (a, c), (pub_min, pub_max) in P_TABLE.items():
+    cells = sorted((rr, fired[(a, c, rr)], celln[(a, c, rr)]) for (aa, cc, rr) in celln if (aa, cc) == (a, c))
+    counts = [k for _, k, _ in cells]
+    ns = {n for _, _, n in cells}
+    lo_k, hi_k = min(counts), max(counts)
+    n = ns.pop()
+    ident = (lo_k, hi_k) == (pub_min, pub_max)
+    lo_ci, hi_ci = wilson(lo_k, n), wilson(hi_k, n)
+    faith = lo_ci[0] <= pub_min / n <= lo_ci[1] and hi_ci[0] <= pub_max / n <= hi_ci[1]
+    p_identical &= ident
+    p_faithful &= faith
+    p_pairs[f"alpha {a}, cap {c}"] = {"by_rr": {str(rr): k for rr, k, _ in cells}, "n_per_cell": n,
+                                      "rerun_min_max": [lo_k, hi_k], "published_min_max": [pub_min, pub_max],
+                                      "identical": ident, "faithful": faith,
+                                      "wilson_lowest": lo_ci, "wilson_highest": hi_ci}
+out["P"] = {"pairs": p_pairs, "machine": "YOTKOTEST",
+            "verdict": "IDENTICAL" if p_identical else ("FAITHFUL" if p_faithful else "NOT FAITHFUL")}
+
+# ---------------- T1: Part 2 Category A survival by rr ----------------
+T1_COUNTS = [{2}, {11}, {13}, {35}, {58}, {147}, {414}, {729, 730}, {1038}]
+T1_RATES = [0.002, 0.009, 0.011, 0.029, 0.048, 0.122, 0.345, 0.608, 0.865]
+p2 = rows(PART2 / "phase_b_rerun_part2_runs.csv")
+surv = defaultdict(int)
+nrr = defaultdict(int)
+for r in p2:
+    rr = float(r["rr"])
+    nrr[rr] += 1
+    surv[rr] += truthy(r["survived"])
+rrs = sorted(nrr)
+t1 = []
+inside = 0
+for i, rr in enumerate(rrs):
+    k, n = surv[rr], nrr[rr]
+    ci = wilson(k, n)
+    ok = ci[0] <= T1_RATES[i] <= ci[1]
+    inside += ok
+    t1.append({"rr": rr, "survived": k, "n": n, "published_rate": T1_RATES[i],
+               "published_counts": sorted(T1_COUNTS[i]), "identical": k in T1_COUNTS[i],
+               "wilson": ci, "published_inside_interval": ok})
+monotone = all(surv[a] <= surv[b] for a, b in zip(rrs, rrs[1:]))
+t1_ident = all(x["identical"] for x in t1) and len(rrs) == 9
+out["T1"] = {"by_rr": t1, "points_inside": inside, "monotone_nondecreasing": monotone,
+             "machine": "yotko-legion-t5-26iob6",
+             "verdict": "IDENTICAL" if t1_ident else ("FAITHFUL" if inside >= 7 and monotone else "NOT FAITHFUL")}
+
+# ---------------- T4: Part 3 Category C audit on minus off ----------------
+p3 = rows(DIAG / "phase_b_rerun_part3_runs.csv")
+by_state = {"True": [], "False": []}
+match = defaultdict(dict)
+for r in p3:
+    s = truthy(r["survived"])
+    by_state[r["cop_cost_audit"]].append(s)
+    cell = (r["rr"], r["phi"], r["alpha"], r["successor_capability"], r["seed"])
+    match[cell][r["cop_cost_audit"]] = (s, r["derived_seed"])
+k_off, n_off = sum(by_state["False"]), len(by_state["False"])
+k_on, n_on = sum(by_state["True"]), len(by_state["True"])
+delta = k_on / n_on - k_off / n_off
+se_pub = math.sqrt((k_on / n_on) * (1 - k_on / n_on) / n_on + (k_off / n_off) * (1 - k_off / n_off) / n_off)
+diffs = [int(v["True"][0]) - int(v["False"][0]) for v in match.values() if len(v) == 2]
+same_seed = sum(v["True"][1] == v["False"][1] for v in match.values() if len(v) == 2)
+_, se_matched = paired_se(diffs)
+PUB_DELTA = -0.0047
+by_rr = {}
+for rr in sorted({r["rr"] for r in p3}):
+    on = [truthy(r["survived"]) for r in p3 if r["rr"] == rr and r["cop_cost_audit"] == "True"]
+    off = [truthy(r["survived"]) for r in p3 if r["rr"] == rr and r["cop_cost_audit"] == "False"]
+    by_rr[rr] = {"on": sum(on), "off": sum(off), "n_each": len(on), "delta_count": sum(on) - sum(off)}
+t4_ident = (k_off in (1027, 1028, 1029) and k_on == k_off - 19 and n_off == n_on == 4050
+            and [v["delta_count"] for v in by_rr.values()] == [-4, -5, -10])
+faith_pub = abs(delta - PUB_DELTA) <= 2 * se_pub
+faith_matched = abs(delta - PUB_DELTA) <= 2 * se_matched
+out["T4"] = {"audit_off": [k_off, n_off], "audit_on": [k_on, n_on], "delta": delta,
+             "published_delta": PUB_DELTA, "se_published_definition": se_pub,
+             "se_seed_index_matched": se_matched, "pairs_with_identical_derived_seed": same_seed,
+             "by_rr": by_rr, "machine": "YOTKOTEST",
+             "faithful_under_published_se": faith_pub, "faithful_under_matched_se": faith_matched,
+             "verdict": "IDENTICAL" if t4_ident else ("FAITHFUL" if faith_pub else "NOT FAITHFUL")}
+
+# ---------------- R4: Part 4, R minus O at matched seeds ----------------
+p4_path = DIAG / "phase_b_rerun_part4_runs.csv"
+if p4_path.exists():
+    p4 = rows(p4_path)
+    o_index = {}
+    for r in p2 + p3:
+        o_index[(r["mode"], r["rr"], r["phi"], r["alpha"], r["successor_capability"], r["cop_cost_audit"], r["seed"])] = r
+    groups = defaultdict(list)
+    seed_mismatch = missing = 0
+    for r in p4:
+        key = (r["mode"], r["rr"], r["phi"], r["alpha"], r["successor_capability"], r["cop_cost_audit"], r["seed"])
+        o = o_index.get(key)
+        if o is None:
+            missing += 1
+            continue
+        seed_mismatch += o["derived_seed"] != r["derived_seed"]
+        g = (r["mode"], r["rr"]) if r["mode"] == "A" else (r["mode"], "audit " + r["cop_cost_audit"])
+        groups[g].append(int(truthy(r["survived"])) - int(truthy(o["survived"])))
+    r4 = {}
+    for g, d in sorted(groups.items()):
+        mean, se = paired_se(d)
+        r4[" ".join(g)] = {"pairs": len(d), "R_minus_O_rate": mean, "paired_se": se,
+                           "R_only_survived": d.count(1), "O_only_survived": d.count(-1)}
+    out["R4"] = {"groups": r4, "unmatched_rows": missing, "derived_seed_mismatches": seed_mismatch,
+                 "note": "Combined effect of every model change since June 8, including the v2.1 estimator "
+                         "repair; not the repair's effect alone. Category A pairs cross machines "
+                         "(O on the box, R on YOTKOTEST) and include that machine difference."}
+else:
+    out["R4"] = "Part 4 not yet merged"
+
+# ---------------- R5: liveness and provenance ----------------
+prov = defaultdict(set)
+errs = 0
+for name, rs in (("part1", p1), ("part2", p2), ("part3", p3)) + ((("part4", p4),) if p4_path.exists() else ()):
+    for r in rs:
+        prov[name].add((r["interpreter_version"].split()[0], r["numpy_version"], r["machine_label"]))
+        errs += bool(r["error"])
+out["R5"] = {"interpreter_numpy_machine": {k: sorted(v) for k, v in prov.items()}, "error_rows": errs}
+
+OUT.write_text(json.dumps(out, indent=1, default=str))
+for t in ("P", "T1", "T4"):
+    print(t, out[t]["verdict"])
+print("P pairs:", {k: (v["rerun_min_max"], v["published_min_max"]) for k, v in p_pairs.items()})
+print("T1:", [(x["rr"], x["survived"], sorted(x["published_counts"])) for x in t1], "inside", inside, "monotone", monotone)
+print("T4: off", k_off, "on", k_on, "delta %.4f" % delta, "se_pub %.4f se_matched %.4f" % (se_pub, se_matched),
+      "by_rr", {k: v["delta_count"] for k, v in by_rr.items()}, "same derived seed pairs", same_seed)
+print("R5:", out["R5"])
+
+
+==========================================
+FILE: simulation/diagnostics/phase_b_rerun_xcheck_compare.py
+==========================================
+
+"""Compare all 30 original fields in two non-registered crosscheck outputs."""
+import sys
+sys.dont_write_bytecode=True
+import argparse
+from pathlib import Path
+import struct
+from phase_b_rerun_common import *
+HERE=Path(__file__).resolve().parent
+
+def equal_value(a,b):
+    if type(a) is not type(b):
+        return False
+    if type(a) is float:
+        return struct.pack("!d",a)==struct.pack("!d",b)
+    return a==b
+
+def compare(left,right):
+    verify_keys=("executor_hashes","bytecode_sha256")
+    for key in verify_keys:
+        if left["identity"][key]!=right["identity"][key]:
+            raise ValueError("Crosscheck identity mismatch: "+key)
+    def keyed(data):
+        if len(data["rows"])!=16 or len(data["tasks"])!=16 or not data["non_registered"]:
+            raise ValueError("Crosscheck requires exactly 16 non-registered tasks")
+        result={}
+        for entry,row in zip(data["tasks"],data["rows"]):
+            if entry["task"]["seed"] not in (150,151) or list(row)!=FIELDS+EXTRA:
+                raise ValueError("Invalid crosscheck row")
+            key=canonical({"arm":entry["arm"],"task":entry["task"]})
+            if key in result:
+                raise ValueError("Duplicate crosscheck task")
+            result[key]=row
+        return result
+    a=keyed(left); b=keyed(right)
+    if a.keys()!=b.keys():
+        raise ValueError("Crosscheck task sets differ")
+    differences=[]
+    for key in sorted(a):
+        for field in FIELDS:
+            if not equal_value(a[key][field],b[key][field]):
+                differences.append({"task":json.loads(key),"field":field,"left":a[key][field],"right":b[key][field]})
+    return {"result":"DIFFERENT" if differences else "IDENTICAL",
+            "machine_labels":[left["machine_label"],right["machine_label"]],
+            "executor_hashes":left["identity"]["executor_hashes"],
+            "bytecode_sha256":left["identity"]["bytecode_sha256"],
+            "environments":{left["machine_label"]:left["identity"]["versions"],right["machine_label"]:right["identity"]["versions"]},
+            "task_count":16,"differences":differences,"created_utc":utc(),"test_fixture":False}
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument("left"); p.add_argument("right")
+    p.add_argument("--out",default=None)
+    args=p.parse_args()
+    install_guard(HERE)
+    left=read_json(args.left); right=read_json(args.right)
+    result=compare(left,right)
+    name="phase_b_rerun_xcheck_result_"+digest(canonical(result["machine_labels"]).encode())[:12]+".json"
+    output=Path(args.out) if args.out else HERE/name
+    if not output.name.startswith(("phase_b_rerun_xcheck_result_","phase_b_rerun_smoke_")):
+        raise ValueError("Invalid comparison output prefix")
+    save(output,result)
+    print(result["result"])
+    for d in result["differences"]:
+        print(canonical(d))
+if __name__=="__main__":
+    main()
+
+
+==========================================
 FILE: simulation/diagnostics/phi_audit.py
 ==========================================
 
@@ -32772,6 +35632,10 @@ NEVER_INGEST_BASENAME_PREFIXES = (
     "defense_heldout_run_",
     "defense_recovery_run_",
     "defense_points_run_",
+    "phase_b_recon_",
+    # Even terminal session logs carry the terminal's access token in request URLs and
+    # session transcripts. They are never repository content and never snapshot content.
+    "even-terminal-",
 )
 
 # Directories whose contents must NEVER reach a generated snapshot, matched on
