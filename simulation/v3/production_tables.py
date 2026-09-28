@@ -4,7 +4,7 @@ from dataclasses import dataclass
 import tempfile
 import math
 import numpy as np
-from .artifacts import atomic_json, read, seal, unseal, digest, code_identity
+from .artifacts import atomic_json, read, seal, unseal, digest, code_identity, file_hash
 from .tables import Lookup
 
 
@@ -49,7 +49,16 @@ class ProductionTables:
         document = read(path_or_document) if isinstance(path_or_document, (str, Path)) else path_or_document
         self.payload = unseal(document)
         p = self.payload
-        if p.get("schema") != "v3-tables-1" or p["code_hash"] != code_identity():
+        if 'repair' in p.get('manifest', {}):
+            from .table_compatibility_a3 import require_compatible
+            require_compatible(path_or_document, document)
+        from .table_compatibility import compatible
+        source_file_hash = file_hash(path_or_document) if isinstance(path_or_document, (str, Path)) else None
+        validation_fixture = False
+        if not registered and p.get("fixture") is True:
+            from .recording_validation import validation_probe_compatible
+            validation_fixture = validation_probe_compatible(document, source_file_hash)
+        if p.get("schema") != "v3-tables-1" or p["code_hash"] != code_identity() and not validation_fixture and not compatible(document, source_file_hash):
             raise ValueError("stale table source identity")
         if p["manifest_hash"] != digest(p["manifest"]) or expected_manifest_hash is not None and p["manifest_hash"] != expected_manifest_hash:
             raise ValueError("table manifest hash mismatch")

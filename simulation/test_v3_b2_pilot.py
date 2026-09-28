@@ -105,3 +105,7 @@ def test_complete_local_scientific_launch_and_resume(tmp_path):
     broken["phases"] = []
     with pytest.raises(ValueError, match="phase"):
         runner.validate_spec(broken, {**settings, "caps": runner.caps("local", 4)})
+
+
+# Artifacts stay inside the authorized tree even with default pytest options.
+from test_v3_paths import tmp_path

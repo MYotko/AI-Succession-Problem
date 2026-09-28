@@ -175,3 +175,7 @@ def test_assembly_preserves_primary_failure_and_exposes_a_passing_contrast_with_
     assert counterpart["numerical_contrast_passed"] and not counterpart["passed"]
     assert counterpart["other_status"] == "not_estimable"
     assert not result["sensitivity"]["passed"] and result["status"] == "not_estimable"
+
+
+# Artifacts stay inside the authorized tree even with default pytest options.
+from test_v3_paths import tmp_path

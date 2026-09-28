@@ -106,7 +106,7 @@ def execute(job, registered=False, registration=None):
         return estimate(config, job["seed"], calibration)
     if kind != "rerun":
         raise ValueError("unknown job kind")
-    from .integration import V3Model
+    from .recording import RecordedV3Model as V3Model, pack_evidence
     from .production_tables import ProductionTables
     model_args = dict(config.get("model", {}))
     tables = None
@@ -122,15 +122,17 @@ def execute(job, registered=False, registration=None):
                     "steps_with_rule_exclusions": sum(r["unavailable_rule_count"] > 0 for r in records),
                     "maximum_rules_excluded": max((r["unavailable_rule_count"] for r in records), default=0),
                     "balanced_fallback_steps": sum(r["balanced_fallback"] for r in records),
+                    "survival_first_scores_unavailable_steps": sum(r["survival_first_scores_unavailable"] for r in records),
                     "rule_exclusions_by_rule": {rule.rule_id: sum(rule.rule_id in r["unavailable_rules"] for r in records) for rule in model.rules},
                     "unavailable_plans_total": sum(r["yield_unavailable_plan_count"] for r in records),
                     "yield_reviews_held_no_admissible_plan": sum(r["yield_held_no_admissible_plan"] for r in records)}
-    return {"tag": job["tag"], "fixture_tables": model.tables.fixture, "steps": len(records),
+    return pack_evidence({"tag": job["tag"], "fixture_tables": model.tables.fixture, "steps": len(records),
             "population_path": populations, "population_mean": sum(populations) / max(1, len(populations)),
             "population_max": max(populations, default=0), "final_population": model.population,
             "survived_threshold_30": model.population >= 30, "yield_events": model.yield_events,
             "periods": [p.audit() for p in model.periods], "diagnostics": records,
-            "continuation_availability": availability}
+            "override_records": model.override_records,
+            "continuation_availability": availability})
 
 
 def worker(root_name, job, code, threads, registered, registration):
@@ -158,7 +160,7 @@ def worker(root_name, job, code, threads, registered, registration):
         raise
 
 
-def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=None, control_root=None, registered=False, registration=None):
+def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=None, control_root=None, registered=False, registration=None, completion_screen=None):
     root = scoped(root)
     root.mkdir(parents=True, exist_ok=True)
     control_root = control_root or root
@@ -199,8 +201,25 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
             process.join(max(0, kill_end - time.monotonic()))
             if process.is_alive():
                 raise RuntimeError("worker failed to stop")
+    def check(job):
+        failure = completion_screen(job, completed(root, job, code)) if completion_screen else None
+        if failure:
+            atomic_json(root / "screen_failure.json", {"epoch": time.time(), "job": job["id"], "failure": failure})
+            event(root, "screen_failure", job=job["id"], failure=failure)
+        return bool(failure)
     try:
+        failed = (root / "screen_failure.json").exists()
+        if not failed:
+            failed = any(check(j) for j in jobs if j["id"] in done)
+        if failed:
+            reason = "screen_failure"
+            return {**publish(), "wall_seconds": time.perf_counter() - start}
         while pending or active:
+            if completion_screen and getattr(completion_screen, 'family_failed', lambda: False)():
+                reason = 'screen_failure'
+                stop(reason)
+                active.clear()
+                break
             control = read(control_root / "control.json")
             mode = control["mode"]
             if mode not in ("normal", "work"):
@@ -235,6 +254,13 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                     else:
                         done.add(key)
                         event(root, "complete", job=key, pid=process.pid)
+                        if check(job):
+                            reason = "screen_failure"
+                            stop(reason)
+                            active.clear()
+                            break
+            if reason == "screen_failure":
+                break
             effective_limit = min(cap, selected["workers"])
             if len(active) <= effective_limit and mode_effective != mode:
                 mode_effective = mode
@@ -305,6 +331,11 @@ def configuration_test(root, phase, profile, settings, deadline, launch_number):
 def validate_spec(spec, settings):
     if spec["code_hash"] != code_identity():
         raise RuntimeError("frozen specification source hash mismatch")
+    if 'repair' in spec:
+        from .table_compatibility_a3 import validate_plan
+        validate_plan(spec)
+    elif spec.get('completion_screen'):
+        raise ValueError('completion screen is reserved for the frozen A3 manifest')
     if settings["profile"] == "x2" and (platform.node().lower() != "yotko-evo-x2" or platform.system() != "Linux"):
         raise RuntimeError("X2 profile must run on the declared X2 machine")
     if not 1 <= settings["workers"] <= settings["caps"]["configuration"] or settings["threads"] not in (1, 2):
@@ -351,20 +382,56 @@ def validate_spec(spec, settings):
                         loaded.add(identity)
 
 
+def preflight_completion(spec, root):
+    """Refuse a failed family before configuration work or service changes."""
+    if not spec.get('completion_screen'):
+        return None
+    from .table_repair_a3 import completion_screen
+    from .table_compatibility_a3 import (validate_plan, family_directory, refuse_family_failure,
+                                         record_family_failure)
+    p = validate_plan(spec)
+    refuse_family_failure(p)
+    root = scoped(root)
+    family = family_directory(p)
+    with lease(family / 'preflight.lock'):
+        refuse_family_failure(p)
+        registry = family / 'roots.json'
+        roots = read(registry) if registry.exists() else []
+        name = str(root.resolve())
+        if name not in roots:
+            roots.append(name)
+            atomic_json(registry, roots)
+        screen = completion_screen(spec, root)
+        for name in roots:
+            phase = Path(name) / 'table'
+            if (phase / 'screen_failure.json').exists():
+                record_family_failure(p, read(phase / 'screen_failure.json'), name)
+                refuse_family_failure(p)
+            for job in spec['jobs']:
+                output = completed(phase, job, spec['code_hash'])
+                if output is not None and screen(job, output):
+                    refuse_family_failure(p)
+        return screen
+
+
 def launch(spec_path, root, settings, service_record=None):
     spec = unseal(read(spec_path))
     settings = {**settings, "caps": caps(settings["profile"], settings["cpu_budget"])}
     validate_spec(spec, settings)
+    screen = preflight_completion(spec, root)
     root = scoped(root)
     root.mkdir(parents=True, exist_ok=True)
     if settings["profile"] == "x2":
         if not service_record or service_record.get("down_exit_code") != 0:
             raise RuntimeError("X2 launch requires the active service lease wrapper")
     with lease(root / "runner.lock"):
+        if any(root.glob('*/screen_failure.json')):
+            raise RuntimeError('A3 screen failure is latched; no resumption or configuration dispatch')
         identity = {"spec_hash": digest(spec), "code_hash": code_identity()}
         if (root / "identity.json").exists() and read(root / "identity.json") != identity:
             raise RuntimeError("incompatible resumption")
         atomic_json(root / "identity.json", identity)
+        atomic_json(root / "manifest.json", seal(spec))
         if not (root / "control.json").exists():
             atomic_json(root / "control.json", {"mode": settings["mode"], "max_workers": settings["workers"], "stop_dispatch": False, "interrupt_now": False})
         if not (root / "budget.json").exists():
@@ -395,11 +462,13 @@ def launch(spec_path, root, settings, service_record=None):
         for phase in spec["phases"]:
             jobs = [j for j in spec["jobs"] if j["config"].get("phase", j["kind"]) == phase]
             result = dispatch(root / phase, jobs, code_identity(), settings, deadline, measurements=record["configuration"][phase],
-                              control_root=root, registered=spec["registered"], registration=spec.get("registration"))
+                              control_root=root, registered=spec["registered"], registration=spec.get("registration"), completion_screen=screen)
             outcomes[phase] = result
             record["outcomes"] = outcomes
             atomic_json(root / "launches.json", history)
-            if result["completed"] != len(jobs):
+            if result["completed"] != len(jobs) or result['reason'] == 'screen_failure':
+                record.update(complete=False, finished_epoch=time.time())
+                atomic_json(root / 'launches.json', history)
                 if spec.get("tag") == "pilot":
                     from .pilot import project_costs
                     atomic_json(root / "cost_projection.json", project_costs(spec, root, outcomes, record["configuration"]))

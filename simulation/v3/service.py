@@ -12,11 +12,12 @@ def command(root, action):
 
 
 def run_with_service(spec_path, output_root, settings):
-    from .production_runner import validate_spec, launch, caps
+    from .production_runner import validate_spec, launch, caps, preflight_completion
     if platform.node().lower() != "yotko-evo-x2" or platform.system() != "Linux":
         raise RuntimeError("service management is permitted only on X2")
     spec = unseal(read(spec_path))
     validate_spec(spec, {**settings, "caps": caps(settings["profile"], settings["cpu_budget"])})
+    preflight_completion(spec, output_root)
     root = scoped(output_root)
     root.mkdir(parents=True, exist_ok=True)
     # This lease serializes v3 supervisors. The operator must let the separate

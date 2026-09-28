@@ -111,6 +111,10 @@ class V3Model:
     def _rng(self, channel):
         return ChannelRandom(independent_seed(self.seed, self.time, channel))
 
+    def _transition_drawdown(self, stocks, actions, capability_gap, uniform):
+        """Observation hook around the unchanged transition computation."""
+        return transition_drawdown(stocks, actions, capability_gap, uniform)
+
     @property
     def population(self):
         return int(self.state.population[0])
@@ -162,7 +166,7 @@ class V3Model:
             if first_actions is None:
                 first_actions = actions.copy()
             if transition_at is not None and t == transition_at:
-                state.stocks = transition_drawdown(state.stocks, actions, max(0, cap - self.capability), rng.random(()))
+                state.stocks = self._transition_drawdown(state.stocks, actions, max(0, cap - self.capability), rng.random(()))
             # Consume the same transition draw even on no-transition paths,
             # so other environment channels remain common across plans.
             else:
@@ -174,7 +178,7 @@ class V3Model:
             # A yield at the absolute deadline is in the continuation. Apply
             # its actual drawdown before looking up that successor state.
             actions = self.rule_batch.actions(state.summary_bins(self.capacity))
-            state.stocks = transition_drawdown(state.stocks, actions, max(0, cap - self.capability),
+            state.stocks = self._transition_drawdown(state.stocks, actions, max(0, cap - self.capability),
                                                self._rng(f"{seed_channel}:{horizon}").random(()))
         lookup = self._lookup(state, self.rules, cap)
         discount = (1 - self.beta) * self.beta**np.arange(horizon)
@@ -200,10 +204,20 @@ class V3Model:
 
     def _choose(self, evaluation):
         mask, risks, survival_first = self._eligible(evaluation.actions)
+        self.survival_first_scores_unavailable = False
+        self.minimum_bound_unavailable_count = 0
         # Under survival-first choose the minimum bound strictly; R7's wider
         # mask is retained in diagnostics and cannot turn failure into a proof.
         if survival_first:
             mask &= risks == risks.min()
+            self.minimum_bound_unavailable_count = int((mask & ~evaluation.available).sum())
+            if not (mask & evaluation.available).any():
+                # D23: missing W scores cannot displace the minimum-risk
+                # action. Balanced is first in the declared rule order.
+                self.survival_first_scores_unavailable = True
+                self.balanced_fallback = False
+                self.balanced_fallback_reason = None
+                return int(np.flatnonzero(mask)[0]), True, [], risks
         mask &= evaluation.available
         self.balanced_fallback = not bool(mask.any())
         self.balanced_fallback_reason = ("all_rule_scores_unavailable" if not evaluation.available.any() else
@@ -280,7 +294,7 @@ class V3Model:
             if not event["local_gate_authorized"]:
                 self.yield_events.append(event)
                 return event
-            self.state.stocks = transition_drawdown(self.state.stocks, action[None], max(0, self.successor_capability - self.capability), self._rng("live_transition").random(()))
+            self.state.stocks = self._transition_drawdown(self.state.stocks, action[None], max(0, self.successor_capability - self.capability), self._rng("live_transition").random(()))
             self.capability = self.successor_capability
             self.successor_capability = min(5., self.capability * 1.5)
             self.transition_count += 1
@@ -304,6 +318,8 @@ class V3Model:
                       "lineage": 0., "side_values_status": "absorbed_no_reproducing_class",
                       "allocation_evaluated": False, "unavailable_rule_count": 0, "unavailable_rules": {},
                       "balanced_fallback": False, "balanced_fallback_reason": None,
+                      "survival_first_scores_unavailable": False, "selection_reason": None,
+                      "minimum_bound_unavailable_count": 0,
                       "yield_unavailable_plan_count": 0, "yield_held_no_admissible_plan": False,
                       "fixture_tables": self.tables.fixture, "extinction_absorbing": True}
             self.diagnostics.append(record)
@@ -331,6 +347,9 @@ class V3Model:
                   "allocation_evaluated": True, "unavailable_rule_count": int((~evaluated.available).sum()),
                   "unavailable_rules": {r.rule_id: reasons[i] for i, r in enumerate(self.rules) if not evaluated.available[i]},
                   "balanced_fallback": self.balanced_fallback, "balanced_fallback_reason": self.balanced_fallback_reason,
+                  "survival_first_scores_unavailable": self.survival_first_scores_unavailable,
+                  "selection_reason": "survival_first_scores_unavailable" if self.survival_first_scores_unavailable else None,
+                  "minimum_bound_unavailable_count": self.minimum_bound_unavailable_count,
                   "yield_unavailable_plan_count": event["unavailable_plan_count"] if event else 0,
                   "yield_held_no_admissible_plan": event["yield_held_no_admissible_plan"] if event else False,
                   "allocation_scoring_context": "incumbent_pre_review" if event and event["transition_count"] else "current_chain",
@@ -355,6 +374,12 @@ class V3Model:
             self.override_records.append({"time": self.time, "reason": self.balanced_fallback_reason,
                                           "reproduction_floor_overridden": False, "action": "balanced",
                                           "unavailable_rule_count": record["unavailable_rule_count"]})
+        if self.survival_first_scores_unavailable:
+            self.override_records.append({"time": self.time, "reason": "survival_first_scores_unavailable",
+                                          "reproduction_floor_overridden": False, "action": self.rules[chosen].rule_id,
+                                          "unavailable_rule_count": record["unavailable_rule_count"],
+                                          "minimum_bound_unavailable_count": self.minimum_bound_unavailable_count,
+                                          "selected_log_risk_bound": float(risks[chosen])})
         self.diagnostics.append(record)
         self.time += 1
         return record

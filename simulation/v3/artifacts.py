@@ -83,6 +83,12 @@ def source_manifest():
     compatibility = ROOT / "calibration_compatibility_A1.json"
     if compatibility.exists():
         files.append(compatibility)
+    table_compatibility = ROOT / "table_compatibility_A2.json"
+    if table_compatibility.exists():
+        files.append(table_compatibility)
+    repair_compatibility = ROOT / "table_compatibility_A3.json"
+    if repair_compatibility.exists():
+        files.append(repair_compatibility)
     return {p.relative_to(SIMULATION).as_posix(): file_hash(p) for p in sorted(files)}
 
 
@@ -188,8 +194,10 @@ def verify_registration(pin, repository=None):
         if hashlib.sha256(committed).hexdigest() != pin["sha256"] or file_hash(repo / path) != pin["sha256"]:
             raise RuntimeError("pre-registration hash is stale")
         tracked = git("diff", "HEAD", "--", "simulation").strip()
-        untracked = git("ls-files", "--others", "--exclude-standard", "simulation/v3/*.py",
-                        "simulation/v3/calibration_compatibility_A1.json").strip()
+        # Match every file contributing to code_identity, including future
+        # non-Python provenance files. Ignored untracked files also fail.
+        identities = ["simulation/" + name for name in source_manifest()]
+        untracked = git("ls-files", "--others", "--", *identities).strip()
         if tracked or untracked:
             raise RuntimeError("registered source must be committed and clean")
     except subprocess.CalledProcessError as exc:

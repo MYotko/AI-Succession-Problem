@@ -168,3 +168,7 @@ def test_expired_batch_budget_cannot_be_reset_on_resume(tmp_path):
     atomic_json(root / "budget.json", {"deadline_epoch": time.time() - 1})
     with pytest.raises(RuntimeError, match="expired"):
         runner.launch(path, root, local_settings())
+
+
+# Artifacts stay inside the authorized tree even with default pytest options.
+from test_v3_paths import tmp_path

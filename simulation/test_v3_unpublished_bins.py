@@ -121,14 +121,18 @@ def test_no_available_plan_holds_yield_and_records_reason(monkeypatch):
 
 
 def test_runner_aggregates_each_step_counts(tmp_path, monkeypatch):
-    m = sparse_tables(model(), tmp_path, absent=(0, 1, 2))
-    monkeypatch.setattr("v3.integration.V3Model", lambda **kwargs: m)
+    from v3.recording import RecordedV3Model, unpack_evidence
+    m = sparse_tables(RecordedV3Model(200, rules=execution_policy_class()[:3], rollout_steps=1,
+                                    successor_capability=None), tmp_path, absent=(0, 1, 2))
+    monkeypatch.setattr("v3.recording.RecordedV3Model", lambda **kwargs: m)
     job = stable_job("rerun", {"steps": 3}, "validation", 0)
     result = execute(job)
     counts = result["continuation_availability"]
     assert counts["allocation_steps"] == 3 and counts["rule_exclusions_total"] == 9
     assert counts["balanced_fallback_steps"] == counts["steps_with_rule_exclusions"] == 3
     assert set(counts["rule_exclusions_by_rule"].values()) == {3}
+    unpack_evidence(result)
+    assert all("gate_evidence" in step for step in result["diagnostics"])
     canonical(result)
 
 
@@ -165,3 +169,7 @@ def test_archived_coverage_is_a_source_bound_not_an_endpoint_rate():
 def test_endpoint_audit_cannot_run_registered():
     with pytest.raises(ValueError, match="validation only"):
         execute(stable_job("continuation_audit", {}, "v3_rerun", 0), registered=True)
+
+
+# Artifacts stay inside the authorized tree even with default pytest options.
+from test_v3_paths import tmp_path

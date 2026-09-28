@@ -180,3 +180,7 @@ def test_frozen_full_grids_sensitivity_subset_and_disjoint_seeds():
     assert not ({j["seed"] for j in calibration} & {j["seed"] for j in reruns})
     assert min(j["seed"] for j in reruns) > 2**32
     assert table_design()["sensitivity_jobs"] == 18
+
+
+# Artifacts stay inside the authorized tree even with default pytest options.
+from test_v3_paths import tmp_path

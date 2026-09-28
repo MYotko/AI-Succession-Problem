@@ -8,7 +8,7 @@
 - W1 step 4, the pre-registration of the instrument change;
 - D4 item 1, rerunning the phase boundary and the succession cliff under the new objective.
 
-**Decisions and resolutions.** Decision numbers (D1 to D19) refer to the project's decision record, which will be published with v3. Resolutions R3 to R15 of 2026-09-27 were accepted by the operator on 2026-09-28 (D19), and each is recorded where it applies in the implementation note.
+**Decisions and resolutions.** Decision numbers (D1 to D24) refer to the project's decision record, which will be published with v3. Resolutions R3 to R15 of 2026-09-27 were accepted by the operator on 2026-09-28 (D19), and each is recorded where it applies in the implementation note.
 
 **Supersedes nothing.** The v2.0 results, the Phase B rerun (`phase_b_rerun_design_note.md`) and its verdicts stand as historical results under the old objective.
 
@@ -80,7 +80,7 @@ The instrument implements specification draft 3, sections S1 to S7. The implemen
   - sensitivity settings run on a declared subset of 3 rules × 3 rr;
   - the tables are frozen and hashed, and registered mode rejects fixture, missing or stale rows.
 - **Admission** (D8, R8): by the deterministic cohort bound, certified twice in W1E.
-  - **The bound:** P(extinction within 50 steps) ≤ Π over living agents of P(the agent dies within 50 steps), at the lowest welfare path the floors allow. It is exact integer arithmetic, and the same for every admissible rule.
+  - **The bound:** P(extinction within 50 steps) ≤ Π over living agents of P(the agent dies within 50 steps), at the lowest welfare path the floors allow. It uses exact integer arithmetic. This period-start certificate uses the common floor path and is the same for every admissible rule. The first-action-conditioned bound used to choose a survival-first action also includes that rule's actual first-action welfare, so it can differ across rules.
   - **From v2.0's initial law,** the bound is 5.209e-7, below ε_surv = 10^−3 for every rule and rr.
   - **Protection periods** of T_P = 25 steps, each with its own ledger, look 50 steps ahead from the period's start.
   - **Where the bound exceeds ε,** the admissible action minimizing it is taken, both floors hold, and yield is held (R14). A failed bound is not recorded as infeasibility.
@@ -171,10 +171,11 @@ The instrument implements specification draft 3, sections S1 to S7. The implemen
 
 ## 7. Gates
 
-Items 1, 3, 4 and 5 must hold before any registered run. Item 2 follows the runs.
+Items 1, 3, 4 and 5 must hold before any registered run. Item 2 has before
+and after parts, fixed by D21 and amendment A2 in section 13.
 
 1. **Every S10 conformance test passes** on the committed instrument, and the results are committed. At the end of B2: 216 passed, and the 3 expected failures are pre-existing v2.0 tests.
-2. **The gates are revalidated after the reruns, on their registered outputs** (W7, D19). Gate G2.2 is defined on the cliff's own output, cap\*, and Gate 3 carried the earlier boundary and cliff grids, so revalidation follows the runs. **No result of this note is cited until W7 has revalidated the gates that govern it.** A result whose governing gate fails revalidation is reported with that failure and is not cited.
+2. **The v3 gates are independently revalidated** (W7, D19, D21). Before: G1.1 to G1.5 and G3.1's positive, negative and tie scenarios. After: G2.2, G3.1's registered review sample, G3.2, G3.3 and G4.1 to G4.3. R1, including its refinement, requires G1.1, G1.2, G1.4, G1.5, both parts of G3.1 and G4.3. R2 also requires G1.3, G3.2, G3.3 and G4.1. R2's cliff reading additionally requires G2.2 and G4.2. G2.1 and G2.4 belong to the phi study; G2.3 waits for W3's D12/W2 game; G5.1 and G5.2 wait for P4. These are explicitly not applicable. **Every governing check must pass for citation, except D23's explicit G3.3 zero-fire exception for R2 fire rates.** Zero fired R2 successions in the complete family is reported as not_testable, not a pass; it does not block R2 fire-rate citation. R2_cliff still requires G2.2 and G4.2. Missing, skipped, unimplemented and other not-testable applicable checks cannot count as passes. A failure is reported with the result and prevents its citation. A2 fixes the complete statements, evidence and pass rules before any registered rerun output is read. D24 orders censored cap* values and requires G4.2 to pass every testable alpha, with at least one testable; untestable alphas and reasons are reported.
 3. **The offline tables** (Λ_F, continuation and ζ, for each rule in Π and each context) are complete and hashed, with row statuses. Each passes its stability screens.
 4. **The calibration file** is frozen and hashed.
 5. **The pre-launch configuration test** has selected the configuration, and it is recorded.
@@ -185,7 +186,7 @@ Items 1, 3, 4 and 5 must hold before any registered run. Item 2 follows the runs
 - **The boundary location:** the rr at which survival crosses 50 percent, by linear interpolation between adjacent grid points (including the refinement grid), with a bootstrap interval over seeds. v2.0 stated no formal rule; this note registers one.
 - **R2:**
   - the fire rate (the mean of `yield_fired`) per cell;
-  - **cap\*** per alpha, as in G2.2: the largest capability with a fire rate of at least 0.5, pooled over rr;
+  - **cap\*** per alpha, as in G2.2: the largest capability with a fire rate of at least 0.5, pooled over rr, with D24's top and bottom censoring in A2;
   - the first failing capability, as in the paper's prose.
 - **Diagnostics, per run:**
   - the share of steps under survival-first;
@@ -207,7 +208,7 @@ The targets are new measurements, not reproductions, so there is no identical or
 - **No transition in range:** survival does not cross 50 percent inside [0.055, 0.066].
 
 **R2:**
-- **Cliff present:** cap\* is non-increasing in alpha (G2.2's rule), and for alpha ≥ 1.0 some tested capability fires below 0.5.
+- **Cliff present:** cap\* is non-increasing in alpha (G2.2's point rule only, using D24's censored order), and for alpha ≥ 1.0 some tested capability fires below 0.5.
 - **Cliff absent:** otherwise.
 - **The location** is reported per alpha against v2.0's cap\* sequence (5.0, 3.0, 2.5, 2.0, 2.0), as consistent, lower or higher, by the same interval rule, using a bootstrap over seeds.
 
@@ -218,7 +219,7 @@ Every reading is reported. None is a pass or a fail of v3.
 - **P1:** survival is non-decreasing in rr across the R1 grid.
 - **P2:** at each rr from 0.055 to 0.062, v3 survival is at least v2.0's published value, minus two of v3's standard errors.
   - **The basis**: D8 does not bind from the start, since the cohort bound from 200 entrants is 5.2e-7. It binds when a population becomes small, and then the survival-first rule takes the bound-minimizing action. Throughout, the welfare floor forbids the crowding-relief allocations that v2.0's objective permitted.
-- **P3:** R2's cliff is present, as defined in Section 9.
+- **P3:** R2's cliff is present under Section 9's point rule. Citation additionally requires the full G2.2 gate, including the strict net decrease and bootstrap support, and G4.2.
   - **The basis:** the lineage factor Θ carries the same kind of penalty on frontier velocity over bandwidth that produced v2.0's cliff.
 
 **The author's expectation, stated before any run** (a prediction, not a criterion):
@@ -426,3 +427,483 @@ relaxation. The operator has approved this amendment. Commit and push it
 and the code, then supply the new committed pin before replacement estimation
 or rerun execution. This amendment does not change any prediction or aim
 at a v2.0 figure.
+
+### Amendment A2, 2026-09-28: gates, evidence recording, D23 and D24
+
+**Timing and scope.** A2's first part was written after the registered
+calibration and the first table family had been read, and after the A1
+tables started from instrument commit 34ffbfe9, before any registered rerun
+manifest, job or output existed. D22 approved the evidence recording. The
+rerun step was paused before dispatch for D22's evidence-schema gap. The D23
+part was written after the A1 family completed and its screens were read:
+717 rows were not_estimable, including 671 primary failures and 46
+propagated through sensitivity. That family failed the registered table
+check. No registered rerun manifest, job or output existed when this was
+written. A2 is committed before any registered rerun output is read. Only
+labeled non-registered validation outcomes were used in preparing the
+checker. Seeds, grids, objective, floors, table screens and predictions are
+unchanged.
+
+D24 settled the censored-cap* case D21 left open after the A1 screens were
+read and before any registered rerun manifest, job or output existed. The
+censored ordering and testability rules below were fixed before any
+registered rerun output was read. They make no part of the cliff test easier
+to pass: the nonincrease, strict net decrease, 90-percent support and
+two-standard-error separation requirements retain their thresholds. No
+censored alpha is claimed to show measured separation outside the tested
+grid.
+
+D21 adopts the v3 gate revalidation. The complete public rules follow. G2.2
+is the succession cliff gate. G2.1 and G2.4 remain with the phi study. The
+standalone checker is `v3.gates`; the v2.0 validator is unchanged.
+
+**Gate statements, evidence and pass rules.** Reference calculations are
+independent of reported pass flags. Before checks exercise the committed
+instrument and frozen calibration on checker-chosen scenarios. After checks
+use paths and verified hashes for the registered calibration, tables,
+complete run manifest, outputs and durable completion records. Each run's
+fire outcome is derived from increases in its executed capability path and
+checked against the recorded reviews.
+
+| Gate | Statement and pass rule | Evidence and timing | Governs |
+|---|---|---|---|
+| G1.1 | Flow marginals equal weight/(observable + calibrated epsilon), are positive, and decrease over the fixed interior points. | Instrument and calibration, before | R1, R2 |
+| G1.2 | L = D_gen times nu times Psi times Theta, lies in [0,1], and vanishes exactly when a factor vanishes, without a positive floor. | Instrument, before | R1, R2 |
+| G1.3 | Theta matches the clipped-bandwidth formula, tends to one at zero frontier, and at maximum frontier and minimum bandwidth is at most epsilon_L. | Scalar and vector paths and calibration, before | R2 |
+| G1.4 | rho = 0.01, discounting is normalized from the first post-action reward, and continuation and elapsed suffix values retain committed epoch units. | Instrument, before | R1, R2 |
+| G1.5 | Flow stays within its declared bounds, living flow is at least u_dagger, and extinction is absorbing. | Instrument, before | R1, R2 |
+| G2.2 | cap* is nonincreasing in alpha, with a strict net decrease from 0.5 to 1.5. Each adjacent strict decrease has at least 90 percent seed-bootstrap support. | Full registered R2 family, after | R2 cliff |
+| G3.1 | Best immediate disrupted W strictly exceeds best waiting W exactly when yield fires. Ties hold. All fixed scenarios and all 200 sampled reviews match. | Instrument before; complete-plan evidence after | R1, R2 |
+| G3.2 | Applied transition drawdown matches the independent formula and original rounding draw. Reported Gamma equals undisrupted minus disrupted complete-plan W. The offered comparison value equals disrupted W and undisrupted W minus reported Gamma, with no second subtraction. Zero mismatches; at least one checkable review. | Checkable R2 reviews within the common sample, after | R2 |
+| G3.3 | Every fired R2 succession increases generation depth above one and capability by a ratio above one, stays at or below 5.0, and records knowledge transfer. Zero violations. With zero fires in the complete family, report not_testable, not pass. | All fired R2 successions, after | R2, with the D23 zero-fire exception below |
+| G4.1 | Theta matches the independent formula on 10,000 hash-selected living-start R2 steps and every absorbed-start R2 step. Zero violations. | Raw frontier, bandwidth and transfer inputs, after | R2 |
+| G4.2 | For every testable alpha, the next tested capability above cap* has fire rate at most 0.5 and at least two standard errors below the rate at cap*. At least one alpha must be testable. Censored alphas and reasons are reported. | Full registered R2 family, after | R2 cliff |
+| G4.3 | Every period's exact recomputed cohort bound and reservation agree. Every living-start step has an independently checked active bound and survival-first flag. When survival-first is required, its action minimizes the first-action cohort bound. No unsupported floor override. | All period-start and living-step cohorts and in-scope actions, after | R1, R2 |
+
+G2.1 and G2.4 are not applicable because they belong to the phi study. G2.3
+is not applicable because the D12/W2 deviation-set game belongs to W3 and is
+absent here. G5.1 and G5.2 await P4 and are not applicable. Evidence cannot
+change applicability. Missing, duplicate, skipped or unimplemented checks
+fail aggregation. Cleared through k requires every applicable check through
+gate number k, including both parts of G3.1, to pass. R1, R2 and R2_cliff
+citation flags have the dependencies listed in section 7.
+
+Under D23, zero fired R2 successions in the complete verified family makes
+G3.3 not_testable with zero fires, zero checked, a stated reason and no
+zero-failure bound. It is not a pass or clearance through gate 3. This
+specific state does not block R2 fire-rate citation when all other R2 checks
+pass. It grants no R2_cliff exception. Missing R2 evidence, duplicate checks
+and any failing fired succession remain blocking. G2.2 and G4.2 retain their
+full requirements.
+
+**Frozen sampling.** Review identity is `[job.id, job.seed, review.time]`;
+step identity is `[job.id, job.seed, diagnostic.time]`. Sort by SHA256 of
+canonical JSON `["D21-A2-2026-09-28", kind, identity]`, then by canonical
+identity for hash ties, with kind `review` or `step`. Reviews target 100
+fired and 100 not fired across R1, refinement and R2. If a stratum has fewer
+than 100, take all and fill from the next hashes of the other stratum. Fewer
+than 200 total fails.
+
+G3.2 uses the R2 members of that same sample. Its n counts only reviews with
+at least one admitted, available yielding plan whose disrupted and
+undisrupted continuations and Lambda_F values both exist. Holds without a
+paired yielding comparison do not count. Report reviews considered, reviews
+without a comparison, and paired plan count. Zero checkable reviews fails
+for insufficient evidence. Null values are never replaced. A malformed
+record or a mismatch in a checkable comparison fails.
+
+G4.1 samples the smallest 10,000 hashes among R2 steps with pre-step
+population above zero, retaining the last-death step. It separately checks
+every absorbed-start R2 step and reports both counts. Fewer than 10,000
+living-start steps fails. Missing pre-step population or selected raw
+evidence fails; no case is silently removed for missing evidence. An
+absorbed-start step must remain empty and have the extinction Theta value
+one, consistent with its raw zero-frontier formula inputs.
+
+**Cliff tests.** G2.2 uses alpha (0.5, 0.75, 1.0, 1.25, 1.5), capabilities
+(1.2, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0), and rr (0.057, 0.060, 0.064, 0.070). At
+each alpha/capability pool run fire outcomes over rr; cap* is the largest
+capability whose pooled fire rate is at least 0.5. Use 2,000 NumPy
+default_rng bootstrap resamples, seed 20260928. Independently resample whole
+seed outcomes within each rr/alpha/capability cell, preserving its 75-run
+count, then pool and recompute cap*. A cap* at 5.0 is top-censored, "5.0 or
+higher". If no tested capability reaches 0.5, cap* is bottom-censored,
+"below 1.2". Bottom-censored is below every tested value; top-censored is
+above every uncensored tested value. Two top-censored or two bottom-censored
+values are flat. This same order defines nonincrease, the strict net
+decrease cap*(1.5) < cap*(0.5), and every bootstrap comparison. Censored
+resamples are never dropped. Each adjacent strict point decrease needs
+support at least 0.90. Support is the share of all 2,000 resamples in which
+that pair strictly decreases. Flat pairs need no support test. An increase,
+absent strict net decrease or unsupported decrease fails. Report the
+censored labels and counts among all 2,000 resamples. Reduced fixtures
+cannot clear results.
+
+G4.2 uses p and q at cap* and the next higher capability. Its standard error
+is sqrt(p(1-p)/n + q(1-q)/m), where n and m are pooled run counts, each 4 rr
+times 75 = 300, not 75 seed counts. Require q <= 0.5 and p-q >= 2 SE.
+Equality passes at the two-standard-error separation limit. Although the q
+threshold is inclusive, q = 0.5 cannot occur for a correctly computed
+interior cap*: that next capability would itself qualify. An alpha is
+testable only when cap* is a tested value below 5.0. For top censoring there
+is no tested capability above cap*; for bottom censoring there is no tested
+cap* at which to measure separation. Report each such alpha as not_testable
+with its reason. G4.2 passes exactly when every testable alpha passes and at
+least one alpha is testable. No testable alpha means failure, not a pass.
+
+**Independent arithmetic and ties.** Equality checks use absolute tolerance
+1e-10 and relative tolerance 1e-8. G3.1 first verifies every reported
+comparison value against the independent exp(-rho*t)/fsum calculation. It
+then applies the strict yield rule to the reported values produced with
+beta**t, where beta = exp(-rho). A recomputed immediate/waiting gap larger
+than max(1e-10, 1e-8 times the larger absolute value) must have the same
+order. Within that tolerance, arithmetic roundoff must not turn a reported
+tie into a fire or reverse a reported strict near tie. A value discrepancy
+outside tolerance still fails.
+
+For G3.2, the recorder supplies Gamma per available paired yielding plan in
+committed epoch units. The checker independently values the two raw plans,
+checks the reported Gamma, and compares the actual offered W with both
+disrupted W and undisrupted W minus that reported Gamma. Gamma is not
+redefined from the offered W. Subtracting it twice therefore fails even if
+the yield flag stays unchanged. The successor plan itself contains the
+simulated disruption; the executor subtracts no extra cost. For each
+yielding plan and actual fired transition, record the integer stock values
+before and after, the applied drawdown, capability gap, action and original
+environmental rounding draw. Independently compute load = 0.10 + 0.05 gap +
+0.03 + 0.05(1 - transfer allocation) and buffer = 0.5 institutional stock +
+0.3 transfer allocation + 0.2 governance allocation. The institutional
+decrement before rounding is load(1 - buffer), clipped at zero stock. Apply
+the recorded draw to the 0.01 grid and require the exact resulting stock and
+decrement; other stocks must be unchanged. Omitting disruption fails even if
+the paired flows coincide and reported Gamma is zero. This records an
+existing draw and makes no new executor draw.
+
+G1.1 uses central differences with h = 1e-4 times the varied coordinate,
+relative derivative tolerance 1e-5, coordinates (0.001, 0.01, 0.1, 0.5), and
+other observables fixed at 0.3. G1.2 tests the Cartesian product of (0,
+1e-12, 0.25, 1) for all four lineage factors. G1.3 tests frontier (0, 1e-12,
+0.25, 5), bandwidth (0, calibrated clip, 1), transfer (0, 0.5, 1), and all
+five alphas, plus the maximum-frontier bound. Vector checks use frontier and
+transfer stocks (0, 50, 100), welfare (0, 500, 1000), and all alphas. G1.4
+tests horizons (0, 1, 20, 25), reward levels (-10, 0, 3), constant flows and
+elapsed epoch times (0, 10, 20). G1.5 checks observable boundary/interior
+products and five absorbed steps. G3.1 scenarios use immediate/hold/later
+values (3,1,2), (1,3,2), (2,2,2), (3,1,4), and (-1,-2,-3).
+
+A zero-failure sample pass reports n and 1 - 0.05^(1/n), the nominal 95
+percent bound. Chosen scenarios, stratification and dependent steps within
+runs do not support an unrestricted independent-trial population claim. G2.2
+reports bootstrap support and G4.2 reports separation rather than this
+bound. A not_testable check has no zero-failure bound.
+
+**D22 evidence recording.** The A1 rerun output schema lacked evidence for
+G3.1's sample, G3.2, G3.3, G4.1 and the action part of G4.3. This was a
+source-schema finding; no A1 rerun output existed. D22's end-to-end check
+used six non-registered 500-step jobs through the real runner and its
+durable evidence index, exposing the D23 survival-first defect. The runner
+now uses `RecordedV3Model` and records schema `v3-gate-evidence-1`. Each
+review records its epoch, every candidate including unavailable and
+unadmitted plans, actual comparison values, and paired undisrupted yielding
+flows even when the disrupted endpoint is unavailable. Unavailable
+continuation, Lambda_F or Gamma values are null. Fired reviews record
+generation and capability changes and the executed transfer_comprehension
+share as the declared knowledge-transfer observable.
+
+Every step records pre-step population and raw frontier, bandwidth, transfer
+stock and Theta. Every period start records all living agents' ages and
+integer welfare, admitted or not. Every living-start step records those
+pre-action arrays, summary bins, all rule IDs and the executed action,
+including steps in admitted periods. An above-bound period means its
+period-start cohort bound exceeds epsilon. The candidate IDs must equal the
+frozen 25-rule class in declared order. The checker reconstructs the
+complete feedback action class from the recorded summary bins. Missing bins
+fail registered checking; synthetic fixtures alone may use the declared
+fixture mapping.
+
+G4.3 independently recomputes each 50-step cohort bound as the exact product
+of agent death upper bounds using the directed integer life-table
+recurrence. It verifies the displayed outward-rounded float and uses the
+exact fraction to decide admission and reservation at epsilon=1/1000. The
+reserved fraction must equal that exact bound if admitted, else zero;
+reserved plus unallocated equals epsilon and statistical alpha spent is
+zero. An exact epsilon tie is admitted even if its outward-rounded float is
+slightly larger. At every living-start step the checker independently
+recomputes the remaining-window active bound and checks the survival-first
+flag. It examines each required minimum-bound action, including last deaths
+and survival-first within an admitted period. An admitted period can switch
+to survival-first when its active bound exceeds epsilon at a later step.
+Missing evidence fails. Post-extinction period starts are reported
+separately and excluded from the survival-first period share. That share is
+above-bound living-start periods divided by all living-start periods.
+Unsupported floor overrides fail. Universal living-step cohort recording removes the previous dependence
+on the executor's flag inside admitted periods. In six 500-step validation
+jobs, the additional fields covered 100 admitted, non-survival-first steps
+and added 71,704 compressed bytes, about 12 KB per job. Recording all living
+steps is retained; the small validation mix is not a family storage forecast.
+
+Evidence is canonical JSON compressed with deterministic gzip and base64
+inside each result, with raw byte count and SHA256. Existing durable
+completion hashes cover the whole output; partial files never count as
+complete. No unhashed sidecar is accepted. The observer is designed not to
+alter computed values, decisions or random draws. It reads original results
+after computation; undisrupted replays use copied state and private channel
+generators, with transition drawdown alone suppressed. In six paired
+500-step jobs, with no natural fires, and one stress fixture, scientific
+results, with evidence removed, and random draws were identical with
+recording on and off on the same D23 executor. Only six of 300 non-fixture
+validation reviews had eligible undisrupted comparisons; three of the 73
+sampled R2 reviews supplied G3.2's 150 paired plans. In validation, G3.2 had
+three checkable reviews (nominal bound 0.63). Implementation-note section 22
+records the D24 validation identity
+6c87072644b26ff8a545144771f91a4dbe598623dce7c0586a5390dbda331942; sections
+19 and 21 retain the diagnosis and earlier validation as history. Section 23
+records the final second-review identity and validation. These are
+non-registered sparse probes and fixtures, not registered rerun evidence.
+
+**D23 correction of A1.** Satisfying the floors is not sufficient under
+survival-first. At 34ffbfe9, falling back to balanced when every
+minimum-bound rule lacked a W score violated the lowest-bound requirement in
+58 validation periods. D23 corrects allocation to select only rules
+attaining the lowest per-rule first-action cohort bound. Available W scores
+break ties as before. If none of those rules has a score, choose balanced
+when it is among the minima, otherwise the first minimum in declared rule
+order. Admitted allocation outside survival-first retains A1's balanced
+fallback. Yield review, cohort bounds and both floors are unchanged.
+
+The new case is recorded as `survival_first_scores_unavailable`, with total
+unavailable-rule count and unavailable-minimum-rule count, in both step
+diagnostics and override records. It is not `balanced_fallback`, even if
+balanced is a minimum. No reproduction floor is overridden. A per-job count
+is published. The separate historical comparison checks that any first
+scientific difference from 34ffbfe9 occurs at precisely this condition on
+the same pre-action state. Recording non-interference uses the same amended
+executor on both sides.
+
+**Exact compatibility and committed identity.** The source-controlled
+`simulation/v3/table_compatibility_A2.json` pins the A1 producer,
+calibration, design, unchanged dependencies and approved recording/loading
+and D23 boundaries. It accepts only the genuine A1 publication with seal
+`f6fcb1fdd787e92164f029e8fd0098a71d94c47b5ee3b37b96adb91a63a8cfd7` and file
+SHA256 `56db71633a0f4710692e3354e3bc2fb5829286abbfa59e61609bd3f8cf6fcb3c`. A
+changed or re-stamped artifact cannot use this exception. That genuine
+family fails the registered table check (717 not_estimable rows, 671 primary
+and 46 via sensitivity), so the exception currently admits no table to a
+registered run. Any repaired family requires its own reviewed record. No
+table screen is relaxed. The runner checks every file in its code identity,
+including non-Python compatibility records, for committed and clean status.
+Validation helpers can print proposed boundary hashes but cannot rewrite
+approvals.
+
+**Index and report.** `python -B -m v3.gates index RUN_ROOT` builds a
+hash-verified evidence index from the frozen manifest and completed records.
+Registered indexing and after-checking require the committed A2 pin before
+opening rerun outputs. The loader verifies all 24,900 jobs, stable seeds,
+exact source identity, complete step and scheduled review records, and file
+and compressed-evidence hashes. Explicit fixture and validation modes remain
+uncitable and retain the gate thresholds. `python -B -m v3.gates` writes
+`v3_rerun_gates.json` and `.md` under `simulation/v3/runs/`; diagnostics
+copies belong to the results commit. The 72-hour rerun ceiling, 24-hour
+table ceiling and configuration test remain unchanged. The final validation
+report states passes, insufficient samples and unresolved gates separately;
+no reduced validation sample can clear a registered result.
+
+### Amendment A3, adopted 2026-09-28: one fixed A1 table repair
+
+**Timing and status.** D24 adopted A3 after the registered A1 table family
+completed from 34ffbfe9 and its failed screens were read. This amendment was
+written before any registered rerun manifest, job or output existed. No
+registered rerun output was read. The rerun step was paused before dispatch.
+Execution requires the committed pin that includes A2 and A3. A3 fixes the
+67-job selection and eight-times-A1 populations, with the dispatch order and
+early stop below.
+
+**Evidence and reason.** The A1 publication's full file SHA256 is
+`56db71633a0f4710692e3354e3bc2fb5829286abbfa59e61609bd3f8cf6fcb3c`. All 343
+job/output/completion identities and hashes were checked. Of 13,750 primary
+rows, 671 fail only the continuation residual screen. Another 46 published
+rows fail because their selected sensitivity estimates fail that same
+screen: six doubled-population contexts for balanced/.055, and 40
+doubled-length contexts for w0_p0_t1_g3/.064. There are no missing
+sensitivity jobs and no numerical Lambda_F contrast failures. All flow
+half-width, half-window, route, applicable plain survival fraction,
+continuation coverage and fixed-point convergence checks pass.
+
+The bins with the largest residuals have only 1 to 23 held-out visits. The
+statistic is the maximum absolute conditional mean Bellman residual on the
+published domain, not a mean weighted by overall occupancy. Its A1
+definition evaluates precisely the domain available to the executor. These
+are real failures of that definition. A3 does not remove sparse bins, change
+bin cuts, change the four-training-visit publication rule, introduce a
+held-out count exclusion, relax the five-percent residual limit, reduce the
+90-percent coverage requirement or suppress a failure. Additional
+measurement time alone need not revisit a transient rare bin. The evidence
+supports increasing independent trajectory populations; it does not
+establish that sampling error is the only cause or that the repair will
+pass. Aggregation bias remains uncertified.
+
+**Frozen repair selection.** A1's primary settings were applied to every row
+in the completed family. Add one independent repair stage on the union of:
+(1) every rule/rr pair with any failed primary or sensitivity estimate in
+that frozen A1 family, and (2) the entire original three-rule by three-rr
+sensitivity subset. Select whole jobs and all their scoring contexts, not
+individual failing alpha, capability or weight rows. The resulting 49 pairs
+require 49 primary jobs and all 18 sensitivity jobs, 67 total. The remaining
+276 primary jobs are retained exactly from A1. The repair replaces 1,690
+primary rows, including passing contexts in those jobs, and renews all 735
+selected contexts at both sensitivity settings. The full published family
+still has 13,750 rows and all 25 rules.
+
+For every selected job multiply plain runs and FV particles by eight
+relative to its A1 setting. Keep six independent groups and all lengths. The
+repair primary uses 512 plain runs or 2,048 FV particles per group, burn
+1,024 and measurement 2,048. Doubled population uses 1,024 plain runs or
+4,096 FV particles per group. Doubled length uses primary populations, burn
+2,048 and measurement 4,096. Plain-versus-FV routing and all original
+per-row screens stay unchanged. The sensitivity subset and its two contrasts
+stay unchanged. Every new primary, including a passing original, replaces
+the whole original row. Every new sensitivity estimate replaces its
+original. Failure is not a reason to retain the old value.
+
+This explicitly amends A1's uniform whole-family replacement rule to a
+mixed-effort family with a frozen, recorded repair selection. It does not
+assert that such mixing was authorized by the unamended A1 text. D18's
+offline, finite, frozen evaluation and R13's original primary coverage,
+routes and nine-pair sensitivity design remain in place. The additional
+schedule, provenance and selection are part of this amendment.
+
+The committed `simulation/v3/table_compatibility_A3.json` pins all 67
+replacement job IDs and seeds, including the original job ID and
+`A3-fixed-once-20260928`. It pins the exact calibration argument
+`v3/runs/registered/v3_rerun_calibration.json`, relative to `simulation/`;
+equivalent path spellings are refused. Preparation, validation and
+publication require those identities. Scheduling and new results cannot
+change them. There is exactly one new estimate per selected job, with no
+best-of selection, pooling with a failed fit, retry-until-pass or adaptive
+further effort. All new estimates, including failures, remain durable
+records. Selecting effort after a failure and retaining original passing
+rows can induce selection bias and conditional publication effects.
+Independent replacement data avoids reusing the failed held-out sample for
+the new fit; it does not give selective, simultaneous or aggregation-bias
+coverage. The existing empirical intervals acquire no new confidence claim.
+The unspent admission alpha ledger is unrelated and remains unspent.
+
+Every existing screen is unchanged. A3 adds one stricter original-versus-
+replacement Lambda_F contrast using the existing 5-percent-of-span rule,
+which also triggers the stop. Every replaced scoring row, primary and
+sensitivity, compares its new Lambda_F with its original using exactly the
+existing numerical contrast rule: the absolute mean difference plus the
+90-percent contrast half-width must not exceed five percent of the flow
+range. This is additional to the original per-row screens and the fresh
+nine-pair doubled-population and doubled-length comparisons. A failed added
+screen makes the replacement not_estimable. A remaining failure anywhere
+keeps registered dispatch closed. There is no fallback to treating a failed
+stability screen as an unpublished bin.
+
+**Provenance and execution.** `v3.table_repair_a3` prepares a sealed
+manifest without executing it. The production runner performs its
+configuration test, service lease, durable completion, source/pin checks and
+deadline handling. Publication is a separate explicit command. It verifies
+the pinned A1 publication, original manifest and all original completion
+hashes; verifies every fresh job, configuration, seed and completion; and
+rebuilds the full family. Retained values identify their A1 producer. They
+are never relabeled as fresh worker outputs. Ranking flags are recomputed
+from the assembled family, as in the existing writer; this changes no
+retained estimate or screen. The new publication binds its full producing
+code identity and both provenances, the fixed selection, settings and source
+hashes. It passes through the registered table loader with its unchanged
+scientific checks. The exact frozen calibration is reused through its
+existing compatibility record. A3 itself changes no allocation or yield
+computation. A2's exact failed-A1 exception remains separate from the A3
+record.
+
+**Cost and deadline.** A1 took 20,164.934 dispatch seconds with 24 workers,
+440,710.415 summed worker seconds, or 21.855 effective workers. The 67
+selected jobs used 84,683.871 worker seconds. Eight times that measured work
+projects 8.611 additional wall hours at the same effective throughput.
+Including about 21,173 seconds (21,172.095 measured) of prior service time
+for both families and 1,200 seconds for configuration and
+cleanup/publication gives 14.825 cumulative hours. At half that throughput
+the total is 23.436 hours. These are planning extrapolations, not timing
+measurements at the new populations or promises of statistical clearance.
+Memory pressure, route changes and rescoring cost can exceed the scaling
+assumption. The new runner receives at most 65,227 wall seconds, charging
+prior service time against the unchanged cumulative 24-hour ceiling. Its
+existing deadline reserves cleanup and prevents indefinite retry or
+resumption. The measured configuration test must project the remaining work
+plus the 1,200-second reserve within the remaining deadline. Initially this
+requires at least 10.581 effective workers under the stated eight-times
+worker-cost extrapolation. If it cannot, stop and report the gap. The wall
+deadline still binds if that extrapolation proves optimistic. No seeds,
+grids or screens are cut.
+
+**D24 dispatch order and early stop.** Order the 67 jobs by their A1 maximum
+normalized screen excess, descending, then by ascending original job ID. For
+upper limits this is (value - limit)/limit; for lower limits it is (limit -
+value)/limit. Take the maximum over all scoring contexts and applicable
+numerical screens, including each sensitivity contrast for both jobs of its
+pair. The plain route requires at least half the independent runs to survive
+through its measurement window; this is the survival-fraction route screen
+in A1 and A3. FV's pre-cloning survivor fraction is not subject to that
+screen. These signed quantities, the source hashes and the full order are
+frozen in `simulation/v3/table_compatibility_A3.json` and the manifest.
+Ordering is operational: no job configuration, seed, estimator or screen
+order changes. The first job in the order has maximum normalized excess
+3.8274280261, from a continuation residual.
+
+The manifest requires the runner's `A3-first-failure` completion screen.
+After each durable completion, before replacing any worker, inspect all of
+that job's row screens and its original-versus-replacement contrasts. When a
+primary and either sensitivity job are both complete, inspect their full
+context-matched contrast. Any single failure stops dispatch and interrupts
+remaining jobs through the runner's supported procedure. Record the failing
+job, context, screen or contrast, paired job when relevant, and reason in an
+atomic failure record and durable event log. Completed outputs remain
+intact. In-flight outputs remain partial unless their completion records
+were already published. The failure is latched across resume and run roots
+at the fixed path
+`simulation/v3/runs/A3_families/<policy-digest>/failure.json`. Both launch
+and publication refuse a latched family. Before configuration testing or
+service shutdown, scan completed jobs across the recorded family roots and
+latch any failed row or completed sensitivity pair. Configuration-test jobs
+remain discarded and do not trigger scientific screen stops. A failed repair
+cannot publish a registered table. This avoids spending more compute after
+the family has already failed; it does not waive or reorder any screen.
+
+**Explicit mixed-family compatibility.** The committed A3 policy pins the
+genuine A1 file and seal, its producer 34ffbfe9, all 343 source completion
+hashes, the exact 67 replacement source jobs and their scientific
+configurations. The other 276 jobs retain that producer and provenance. The
+67 fresh jobs use the committed A2+A3 producer, independently identified by
+full code hash and commit. The publisher verifies both durable families and
+every unchanged scientific screen before publishing. It writes a sealed
+publication-specific `.compatibility.json` receipt beside the new table,
+binding its exact file hash and seal, the manifest, 276 retained hashes, 67
+fresh job identities and output hashes, and both producers. Both files must
+travel together. The loader requires the producing commit to be an ancestor
+of HEAD, with exact current code_identity equality, so later documentation
+or results commits preserve compatibility. It requires this receipt even
+when the table's code hash matches its own. A missing or changed receipt,
+re-stamped table, wrong retained job, changed seed, settings, order or
+producer is refused. No future table hash is guessed in advance. The genuine
+A1 publication still fails its registered table check (717 not_estimable
+rows, 671 primary and 46 via sensitivity) and cannot substitute for this
+repaired family.
+
+The diagnosis and alternatives remain in implementation-note section 19 and
+`simulation/v3/A1_TABLE_DIAGNOSIS_20260928.json`. Section 22 records the D24
+validation; section 23 records the second-review validation and its final
+source identity. No repair estimate or registered rerun was executed in
+preparing these amendments.
+
+
+The final second-review code identity is
+`f03021f88c53e0331d6d825f26663980f77a98d1e15c258f386acfc2c1f7b629`.
+The final validation record is
+`simulation/v3/runs/second_review_validation/validation.json`, SHA256
+`0fed15f63bb936cd5289f875e4f3fe41894181473d63ff27210e516a58edf9ae`.
+Its full evidence archive is
+`simulation/v3/runs/second_review_validation/second_review_validation_records_20260928.zip`,
+SHA256 `26eb3625255b17d3c0874a0219a139edd95168b511b8e130b7370145b010ac18`.
+Implementation-note section 23 states the final checks and limits;
+section 22's identity and sections 19 and 21 remain historical records.
