@@ -978,6 +978,61 @@ missing scientific certificate has been converted into a passing fixture.
 
 ## 13. Current morning-review list
 
+### 2026-09-28: approved amendment A1, prepared for commit
+
+The operator committed the instrument and pre-registration after B2.
+The current worktree baseline is 96f2c481. The returned registered table
+family failed its screens and the rerun launch refused before dispatch.
+Section 15 records this diagnosis and the proposed remedy. The numerical
+audit is `simulation/v3/table_screen_audit_20260928.json`.
+
+* The failure is substantive, not missing sensitivity work: 343/343 jobs
+  completed. Primary screening rejected 5,604 rows across 217 of 325
+  rule/kernel pairs. Sensitivity screening raised the published total to
+  5,670. All 25 rules and all 13 rr values have at least one primary failure.
+* Retain every original failure. Propose four times the primary time
+  lengths and population counts, with the same rule class, context grids,
+  nine-pair subset and numerical thresholds. Time-only probes still left
+  four of 30 continuation failures; larger-population probes left four
+  of six under the original validation domain. Regenerate the whole family.
+* The operator approved the explicit continuation-domain correction in
+  section 15 and A1. The old screen validated auxiliary bins omitted from the
+  published table and overstated coverage. Validate the exported domain,
+  retain the old statistics as diagnostics, and keep every threshold and
+  failure in a covered published bin. This is not a claim of full-scale
+  convergence or a passing replacement family.
+* Preserve the exact completed calibration. The proposed compatibility
+  record binds its artifact/value hashes and unchanged generating code;
+  it does not refit values or authorize other stale calibrations.
+* Review the fixed non-registered diagnostic subset and price in section
+  15: 3.05 X2 hours at the measured throughput, or 15.14 in the stated
+  route-migration scenario, against 24 hours. These are planning estimates.
+  Rerun dispatch remains blocked until the entire replacement passes.
+* Registered calibration and failed table output were read. No registered
+  rerun output existed or was read. A1 is prepared in the pre-registration's
+  section 13, approved by the operator and not committed. A new committed
+  pin is required before replacement estimation.
+
+The operator subsequently approved the unpublished-bin rule. Section 16
+records its implementation, endpoint measurements and current test report.
+It supersedes the earlier statement that a missing online bin aborts the
+run: a missing value now excludes only its candidate from comparison.
+The strict table gate, calibration compatibility proof and screens remain.
+
+**Earlier A1 diagnosis report:** diagnosis, auditable per-context excesses, proposed
+settings/code, regression tests and the dated amendment are prepared.
+Final repository and v2 conformance checks: 226 passed, three existing v2
+expected failures, in 66.54 seconds. Ten new amendment tests pass. Local
+diagnostic batches completed 12 jobs, used at most eight workers and took
+1,670.805 seconds including their configuration tests. Tests and audits
+remained within the 45-minute local compute allowance. No registered
+replacement or rerun was launched, and nothing was committed or sent over
+the network. The unchanged frozen calibration is reusable only through
+the exact reviewed compatibility record. Passing the full replacement
+family remains required, with sparse published bins an unresolved risk.
+
+### Historical B2 review list, 2026-09-27
+
 1. R14, 2026-09-27 accepts the listed B1 deviations. They remain limitations,
    with no new request for reconfirmation in this session.
 2. Review the declared primary settings, nine-pair sensitivity subset,
@@ -1046,3 +1101,392 @@ estimation and production-artifact validation. WE remains explicitly
 unimplemented. No registered calibration, full table family or X2 job was
 run here. Local computation stayed below one hour with at most three
 worker processes. No network, commit, push, rebase or branch change occurred.
+
+## 15. Registered table diagnosis and proposed A1, 2026-09-28
+
+### Evidence and counts
+
+The read-only returned records are under
+`v3_instrument_inputs/registered/registered/`. The sequence log records a
+registered calibration completion, 343 completed table jobs, then a rerun
+refusal in `validate_spec` through `ProductionTables.require_production`.
+There is no rerun output directory in the returned records; the operator
+also states no rerun job ran or output exists. This work reads calibration
+and table data only, not registered rerun outcomes.
+
+The frozen calibration hash is
+`bf0f7c3f10310558d567b6b3f7c24f6f99f2fe6eb71fd830cccfd8e2aa0bd6d6`.
+The failed published table hash is
+`deef0f6a85c93bc281820424d51f370fa580871ae2e460d6535e5a4a390689fa`.
+`diagnose_tables.py` verifies both envelopes, all table row hashes, the
+manifest's exact job/key set, and every one of the 343 completion/output
+hashes, seeds, configurations and source identities. It distinguishes
+original per-job primary status from the status after sensitivity assembly.
+Every rule, rr, alpha, fixed capability, kappa, limit, observed value and
+excess is retained in the derived audit JSON. No source input is modified.
+
+| Family | Rows | Own-screen failures | Half-window drift | Continuation residual | Failed rule/kernel pairs |
+|---|---:|---:|---:|---:|---:|
+| Primary | 13,750 | 5,604 | 3,105 | 3,099 | 217 |
+| Doubled population | 735 | 187 | 50 | 137 | 5 |
+| Doubled length | 735 | 0 | 0 | 0 | 0 |
+
+The primary failure sets overlap in 600 rows. The doubled-population
+failure sets do not overlap. There are no failed half-width or route
+screens, no failed applicable plain survival fraction, no continuation
+coverage failure, no empty fitted table and no Bellman iteration failure.
+There are no missing sensitivity jobs or contexts, and no FV ensemble
+collapse. Primary routes were 198 plain and 127 FV; sensitivities were
+six plain/three FV for doubled population and five plain/four FV for
+doubled length. FV's recorded pre-cloning survival fraction is not tested
+against the plain route's one-half requirement.
+
+Of 735 selected primary scoring rows, 204 failed sensitivity eligibility.
+There were 187 rows whose doubled-population counterpart was itself
+`not_estimable`, and 42 failed doubled-length contrast intervals, with
+25 overlapping rows. All 735 doubled-population numerical contrasts pass
+when computed, including the 187 that assembly skipped because their
+counterpart failed another screen. Of the 204 sensitivity failures, 138
+already failed primary screening. The other 66 make the published total
+5,670 failed and 8,080 estimated. Bypassing the sensitivity check would
+therefore still leave thousands of failed primary rows.
+
+| Rule | rr | Contexts | Primary failures | Bad doubled-population counterparts | Failed length contrasts | Sensitivity failures |
+|---|---:|---:|---:|---:|---:|---:|
+| balanced | .055 | 20 | 14 | 14 | 6 | 14 |
+| balanced | .064 | 150 | 150 | 0 | 17 | 17 |
+| balanced | .070 | 75 | 0 | 0 | 0 | 0 |
+| w0_p0_t1_g3 | .055 | 20 | 16 | 20 | 9 | 20 |
+| w0_p0_t1_g3 | .064 | 150 | 0 | 0 | 0 | 0 |
+| w0_p0_t1_g3 | .070 | 75 | 0 | 62 | 0 | 62 |
+| w3_p5_t1_g3 | .055 | 20 | 20 | 16 | 10 | 16 |
+| w3_p5_t1_g3 | .064 | 150 | 150 | 75 | 0 | 75 |
+| w3_p5_t1_g3 | .070 | 75 | 0 | 0 | 0 | 0 |
+
+The machine-readable audit enumerates contexts rather than treating each
+physical rule/kernel pair as one statistical row. A sensitivity count of
+zero does not imply that its primary row passed, as balanced/.064 shows.
+
+### Worst cases and causes
+
+At kappa=8 the five-percent flow-range limit is 4.906412774; at kappa=.75
+it is 2.527107714. The largest absolute primary half-window drift is
+8.826456408, exceeding 4.906412774 by 3.920043634, for w3_p1_t1_g3,
+rr=.056, alpha=.5, capability=1, kappa=8. The largest proportional drift
+is the same rule/rr at alpha=1, capability=1, kappa=.75: 5.947570451
+against 2.527107714, excess 3.420462737, or 2.35 times the limit.
+
+The worst absolute continuation residual is balanced/.064, alpha=.5,
+capability=1, kappa=8: 59.207292632 against 4.906412774, excess
+54.300879859. The worst proportional residual is balanced/.064,
+alpha=.5, capability=1, kappa=.75: 38.028818725 against 2.527107714,
+excess 35.501711011, or 15.05 times the limit. Overall held-out transition
+coverage remained at least 0.985432943, so good aggregate coverage did
+not establish accurate conditional values in every bin.
+
+The worst doubled-length contrast is w3_p5_t1_g3/.055 at alpha=1,
+capability=1, kappa=.75. The difference is -2.760193138 and the 90 percent
+half-width 1.062871144. Its absolute endpoint is 3.823064282 against
+2.527107714, excess 1.295956568. The worst doubled-population residual
+is w0_p0_t1_g3/.070 at alpha=1.5, capability=1.8, kappa=8:
+6.034063243 against 4.906412774, excess 1.127650469.
+
+These are not floating-point threshold ties. The primary settings are
+too short to satisfy the declared family of screens. Burn 256 and measure
+512 still include appreciable transient change, while the primary
+half-widths are all below threshold (the largest proportional half-width
+is 0.6211 of its limit). Doubling particles alone leaves drift and
+continuation failures; doubling time removes own-screen failures in all
+735 sampled sensitivity contexts. Nonzero length contrasts are further
+evidence that the shorter tail estimate was not stable. This is evidence
+about the declared subset, not proof of convergence for every rule.
+
+The B1 plan in section 7 named plain burn 2,000 and measure 8,000 with six
+independent runs. R13 replaced its route assumptions, and B2 used six
+groups of 16 plain runs with burn 256/measure 512. More runs do not remove
+transient bias. The B2 lengths were not validated on calibrated full-scale
+data before publication; the registered gate correctly exposed this gap.
+The maximum conditional Bellman residual remains sensitive to sparse
+held-out bins. The old output did not record which bin attained the
+maximum, so its exact cause cannot be reconstructed from aggregate
+residuals alone. New probes record the five largest residual bins and
+their training/held-out counts. They expose a validation-domain mismatch,
+described below, as well as failures in genuinely published bins.
+
+### Fixed local probes and the continuation-domain correction
+
+The first probe manifest was frozen before its ten jobs. It used four
+times the original lengths, six groups, 16 plain runs and 64 FV particles.
+It tested balanced/.064, w0_p0_t1_g3/.070 and w3_p5_t1_g3/.055 at primary,
+doubled-population and doubled-length settings, plus w3_p1_t1_g3/.056
+primary. Each used three common scoring probes: (alpha, capability, kappa)
+=(.5,1,8), (1.5,1.8,8), (1,1,.75). These are diagnostic probes; some
+combinations are outside that rr's registered cell grid. They do not
+replace the frozen registered sensitivity subset or enter results.
+All 18 numerical sensitivity contrasts and all drift, half-width and
+route screens passed. Four of 30 scoring rows still failed continuation:
+balanced primary and doubled population at kappa=.75, and w3_p5 doubled
+length at (.5,1,8) and (1,1,.75). The balanced primary residual was
+2.726976131 against 2.527107714 in published bin [0,0,3,3,3,2], with
+40 training and 13 held-out visits. Time-only effort was insufficient.
+
+The second manifest fixed two primary jobs, balanced/.064 and
+w3_p5_t1_g3/.055, at the proposed 64 runs/256 particles and longer
+lengths. It used the same three scoring probes. Under the original
+validation domain, four of six scoring rows failed continuation. For
+w3_p5 all three failed; the largest residual was 17.514834036 against
+4.906412774. Its source bin [0,0,1,0,1,1] had one training visit and one
+held-out visit and was not published. Balanced's two kappa=8 rows passed;
+its kappa=.75 row failed at 2.760795338 against 2.527107714, excess
+0.233687624. That source bin [0,1,3,2,3,2] was published with five training
+and two held-out visits. The earlier balanced bin now had 148 training
+and 54 held-out visits and smaller error. These findings retain a real
+sparse published-bin concern even after increasing effort.
+
+The first batch used at most eight workers, selected by actual-workload
+configuration tests, and completed table dispatch in 693.479 seconds.
+The second selected two workers and completed in 947.546 seconds. Its
+individual jobs took 755.952 and 946.816 worker-seconds. Both verified one
+OpenBLAS thread per worker. Their manifests, launch records, complete
+outputs and derived summaries are under `simulation/v3/amendment_probe*`
+and `table_screen_probe*_20260928.json`. They are non-registered,
+validation-tagged runs. Neither run claims to validate the final corrected
+domain, which was implemented after these probes. No output is relabeled.
+
+**A1 definition correction for operator review:** the table writer exports
+C only on B_pub = {b: training_visits(b) >= 4}, plus the exact extinct
+value. Internal fitted values on other bins are auxiliary values and the
+loader will refuse them. For the exported artifact, the residual
+r = (1-beta)u + beta C(b_next) - C(b) is defined only when b is in B_pub
+and b_next is in B_pub or is extinct. The old validation used all bins
+seen during training, including unpublished bins, for both coverage and
+the residual maximum. This is not validation of the exported function.
+It can both overstate coverage and reject a value absent from that table.
+
+`continuation.fit_transitions` now uses that training-defined publication
+domain for both statistics. Coverage still divides by all held-out
+transitions, so missing sources or nonextinct endpoints lower coverage.
+The 90 percent floor, maximum absolute conditional mean residual,
+five-percent flow-range limit, four-visit publication rule and whole-group
+split remain unchanged. No published source is filtered by its residual
+or held-out sample count. The former all-training-bin statistics and top
+bins remain in `legacy_all_training_bins`. Both source and successor
+omission counts are reported. The broad flow-domain error enclosure and
+missing-bin refusal remain. This empirical covered-domain statistic is
+not a uniform Bellman residual and does not certify aggregation bias.
+
+Mechanical counterexamples test the distinction. An unpublished source
+previously reported as fully covered now lowers coverage to 5/6 and
+fails the unchanged floor. A published source with an actual held-out
+Bellman discrepancy still reports residual 10 against threshold 0.5.
+A missing nonextinct successor lowers coverage, while extinction uses
+its exact continuation. No threshold has been weakened to obtain a pass.
+High aggregate coverage still cannot waive a published-bin failure.
+
+### Minimal proposed correction and price
+
+A1 changes estimation effort, diagnostics and the validation domain above. Proposed primary burn
+1,024 and measure 2,048 provide four times the original lengths. Six
+groups remain, with 64 plain runs and 256 FV particles per group, four
+times their original counts to improve conditional-bin sample support. The nine
+declared sensitivity pairs remain fixed. They receive twice the populations
+or twice these longer lengths as before. This leaves time beyond the
+successful old doubled-length setting without changing the objective,
+state summary, grid, floors, admission, plans or numerical tolerances. The trajectory
+length is shorter than the B1 10,000-step plain schedule, with more
+independent trajectories. More particles are not claimed to cure time bias.
+
+The first family cost 15,996.816 summed worker-seconds and 680.054 seconds
+of table dispatch, at a selected 28 workers. Its measured effective
+parallelism was 23.523. The full service interval was 773.771 seconds,
+leaving 93.716 seconds for configuration and other overhead. Sixteen times
+the work plus that overhead gives 10,974.586 seconds, or 3.049 hours.
+Longer horizons can move plain rows to FV. Charging the whole family a
+further factor of five, the 1,920-versus-384 population-step count
+when adding FV to a plain job at unchanged occupancy, gives 54,498.062
+seconds, or 15.138 hours. These are explicit planning scenarios, not measured
+replacement runtimes or rigorous bounds on population and I/O effects.
+All remain below the unchanged 86,400-second ceiling; no seed/grid cut is
+needed for the proposal. Rerun the mandatory configuration test and keep
+the runner deadline. The failed attempt used less than one percent of its
+table dispatch allowance.
+
+The full table family must be regenerated under the approved A1 pin, not
+patched by replacing only failed rows. The original family remains frozen
+as failed evidence. Calibration stays byte-identical at bf0f7c3f, with
+its full hash above. The compatibility record compares that exact artifact,
+its values and original code hash, 43 unchanged source dependencies, and
+the unchanged `run_seed`/`freeze` function source. Any mismatch rejects
+reuse. New table data retain the full new source identity and the old
+calibration hash. Source dependency comparison normalizes CRLF to LF,
+which Python's parser and Git checkouts treat equivalently, with no other
+normalization. The 43 normalized dependency hashes were compared with
+the committed baseline, not merely the edited worktree. This addresses
+the old all-module source check without
+silently recalibrating after registered table output has been inspected.
+The compatibility JSON is included in `source_manifest` and the committed
+source check. It cannot be silently changed outside the new code identity.
+
+The larger probes do not establish a passing replacement family. They
+identify the mismatch but do not eliminate the published-bin failure.
+The final domain correction has reduced-instance regression validation,
+not a new full-scale probe within this local budget. Additional uncertainty
+is explicit: longer sampling may reveal further rare published bins, and
+the strict maximum statistic need not improve monotonically with effort.
+This is a concrete bounded candidate amendment, not a promise of passing
+the gate. Operator approval covers one complete replacement family, with
+all failures reported and no automatic tuning or outcome-based omissions.
+
+The operator approved the amendment and code and must now commit them,
+then supply the new pin. No replacement registered family or rerun is launched here.
+If the full replacement still fails, report its rows and keep the gate
+closed; do not automatically tune lengths, discard a row or relax a screen.
+
+## 16. A1 completion: unpublished endpoints, 2026-09-28
+
+The operator approved A1 and added a specific online availability rule.
+The 90 percent continuation coverage screen does not make missing online
+endpoints impossible. A missing value now excludes a candidate; it does
+not terminate an otherwise valid run and never supplies an invented value.
+
+### Implementation and diagnostics
+
+`ProductionTables.lookup_available` returns a per-rule availability mask
+and reason alongside its arrays. A missing or `not_estimable` rule/context
+row and an unpublished living endpoint have no valid score. Internal NaN
+markers denote absent arithmetic and cannot enter selection or serialized
+output. Direct strict `lookup` still raises for callers requiring a value.
+Malformed data, stale source/rule identities and unsupported weights are
+not caught and converted into missing-bin fallbacks. Registered loading
+still refuses an incomplete or failed table family. An extinct endpoint
+uses exact u_dagger and zero continuation error; this does not invent a
+missing Lambda_F row. Calibration dependencies, including `tables.py`,
+remain unchanged, so the approved compatibility record still applies.
+
+`V3Model._choose` intersects availability with the existing S5/R7 and
+survival-first filters. If that comparison is empty, it chooses the
+balanced action, preserving both floors. The reason distinguishes
+`all_rule_scores_unavailable` from `no_scoreable_rule_passes_admission`.
+The latter covers an otherwise available rule excluded by the existing
+admission/risk filter, without relaxing that filter to force a comparison.
+The fallback does not impute W. Missing objective components are null in
+durable diagnostics; valid available components keep their computed values.
+Each allocation record has `allocation_evaluated`,
+`unavailable_rule_count`, `unavailable_rules`, `balanced_fallback` and
+`balanced_fallback_reason`. The precedence audit records the fallback and
+that the reproduction floor was not overridden. These fields describe
+allocation before any separate yield review. A valid successor plan can
+still determine the action executed after that review.
+
+`review_yield` omits each unavailable complete plan before constructing
+its value and before comparison. Existing admission evidence remains
+required. It holds yield when no plan is admissible, without calling a
+comparison on an empty list. Each review records `plan_count`,
+`unavailable_plan_count`, `admissible_plan_count` and
+`yield_held_no_admissible_plan`. The step records the unavailable-plan
+count and held flag. `production_runner.execute` publishes
+`continuation_availability`: allocation-step denominator, rule-exclusion
+total, steps with exclusions, maximum rules excluded, per-rule counts,
+balanced-fallback steps, unavailable-plan total and reviews held for no
+admissible plan. Absorbed steps count neither an allocation nor a fallback.
+
+### Endpoint evidence and its limits
+
+The archived outputs contain published bins and coverage aggregates, not
+raw trajectory states. Aggregate coverage is not an endpoint miss rate.
+`unpublished_archived_bounds_20260928.json` therefore reports source-bin
+bounds for all 325 original primary rule/rr pairs, with source hashes.
+For N held-out transitions, let C be the old covered count and P the sum
+of held-out counts in exported entries. Then (C-P)/N <= fraction of
+unpublished source bins <= (N-P)/N. The gap includes missing successors.
+These bounds do not account for the online exact-extinction exception and
+are not an estimate of rollout exclusions. The largest upper bound is
+1.477051 percent for w2_p1_t1_g3/.066; its lower bound is 0.020345 percent.
+The largest lower bound is 0.1953125 percent for w0_p5_t1_g3/.070, whose
+upper bound is 0.638835 percent. Publication domains agree across scoring
+contexts within every audited rule/rr pair.
+
+To measure endpoints, the frozen non-registered manifest
+`unpublished_endpoint_manifest_20260928.json` selected 15 archived jobs:
+the nine original sensitivity-pair primary jobs, the four time-only
+primary probes, and both full-A1 primary probes. `unpublished_bins.replay`
+replays the original plain seed and population count for 519 steps,
+without estimating W or fitting any table. Every replay's surviving-run
+count matches the archived plain prefix at every step. This checks that
+truncating the allocated trajectory length did not change the RNG path.
+The last two independent groups supply endpoints at t+20 for starts
+t=0,...,499. Already extinct starts are omitted; extinct endpoints have
+exact continuation and are not counted as missing. The original fixed
+rule controls each path. For FV table rows these are unconditioned plain
+paths checked against FV-published bins, not cloned paths presented as
+unbroken 20-step rollouts. Source row status is ignored only for this
+domain diagnostic; it does not make the failed tables admissible.
+
+| Table settings | Rule | rr | Missing endpoints / living-start opportunities | Percent |
+|---|---|---:|---:|---:|
+| A1, four times length and population | balanced | .064 | 8 / 63,807 | 0.012538 |
+| A1, four times length and population | w3_p5_t1_g3 | .055 | 13 / 55,501 | 0.023423 |
+| Four times length only | balanced | .064 | 3 / 15,960 | 0.018797 |
+| Four times length only | w0_p0_t1_g3 | .070 | 21 / 16,000 | 0.131250 |
+| Four times length only | w3_p1_t1_g3 | .056 | 0 / 14,517 | 0 |
+| Four times length only | w3_p5_t1_g3 | .055 | 2 / 13,761 | 0.014534 |
+| Original | balanced | .055 | 16 / 13,204 | 0.121175 |
+| Original | balanced | .064 | 17 / 15,752 | 0.107923 |
+| Original | balanced | .070 | 13 / 16,000 | 0.081250 |
+| Original | w0_p0_t1_g3 | .055 | 8 / 13,833 | 0.057833 |
+| Original | w0_p0_t1_g3 | .064 | 30 / 16,000 | 0.187500 |
+| Original | w0_p0_t1_g3 | .070 | 19 / 16,000 | 0.118750 |
+| Original | w3_p5_t1_g3 | .055 | 1 / 13,209 | 0.007571 |
+| Original | w3_p5_t1_g3 | .064 | 6 / 15,936 | 0.037651 |
+| Original | w3_p5_t1_g3 | .070 | 4 / 16,000 | 0.025000 |
+
+The A1 rows each used 128 held-out plain paths. At least one endpoint was
+missing on 5/128 balanced paths and 3/128 w3_p5 paths. Among living
+endpoints only, the rates were 8/63,749 = 0.012549 percent and
+13/53,733 = 0.024194 percent. Balanced's eight misses occurred within the
+first 100 starts; w3_p5's 13 occurred during starts 300 through 499. The
+report includes 100-step blocks and the first 20 starts. Whole paths,
+and especially their overlapping windows, must not be treated as tens
+of thousands of independent Bernoulli trials. Different setting families
+use different archived seeds, so the table is not a paired causal test
+of increasing effort. Scoring contexts share the same publication domain;
+availability on these paths does not depend on alpha, capability or kappa.
+
+**Fallback frequency:** individual exclusions are rare in the two measured
+A1 fixed-rule cases. These data do not establish frequent balanced
+fallback, but they also cannot certify it will be rare in registered
+adaptive runs. Only two of the 325 A1 rule/rr pairs have probe tables, and
+their own-rule state laws are not the common live state law of an adaptive
+25-rule comparison. Excluding at least one candidate over a run and
+excluding every eligible candidate at one step are different events.
+Multiplying marginal miss rates across rules would assume unsupported
+independence and a shared state law. The actual all-rule fallback rate
+remains unmeasured and will be reported from registered output, with no
+change to settings based on those outcomes.
+
+The derived report is `unpublished_endpoint_report_20260928.json`; complete
+outputs and durable completion/launch records are in
+`unpublished_endpoint_replay_20260928/`. The actual-workload configuration
+test selected four workers from two, four and eight, with one verified
+OpenBLAS thread per worker. All 15 jobs completed in 62.802 seconds of
+dispatch, 86.449 seconds including configuration. No registered job ran,
+no registered rerun output was read, and no service command or network
+operation was used. This work stayed within 30 minutes and 12 workers.
+
+### Completion report for review and commit
+
+The unpublished-bin allocation rule, balanced fallback, complete-plan
+exclusions and durable counts are implemented. Twelve new tests cover
+missing rows and bins, all-rule and admission-filter fallbacks, exact
+extinction, unavailable yield plans, output totals, endpoint arithmetic
+and diagnostic-only execution. The full repository suite plus v2
+conformance passed: 238 passed, three existing v2 expected failures, in
+68.24 seconds on the final run. No threshold, seed/grid size, objective, floor or calibration
+value changed. No commit was made. The original pre-registration text
+before its A1 addition remains byte-identical.
+
+The complete commit file list is `simulation/v3/A1_COMMIT_FILES_20260928.md`.
+It includes the earlier A1 changes and this completion, and excludes
+temporary test files, runtime lock files and the pre-existing pilot zip.
+The full replacement table family still must be generated under the new
+committed pin and pass every screen before registered rerun dispatch.

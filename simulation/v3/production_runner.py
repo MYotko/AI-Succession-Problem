@@ -95,6 +95,11 @@ def execute(job, registered=False, registration=None):
     if kind == "calibration":
         from .calibration import run_seed
         return run_seed(config, job["seed"], job["tag"])
+    if kind == "continuation_audit":
+        if registered or job["tag"] not in ("validation", "configuration"):
+            raise ValueError("continuation endpoint audit is validation only")
+        from .unpublished_bins import replay
+        return replay(config)
     calibration = read(SIMULATION / config["calibration_path"]) if config.get("calibration_path") else None
     if kind == "table":
         from .offline_estimator import estimate
@@ -112,11 +117,20 @@ def execute(job, registered=False, registration=None):
     model = V3Model(seed=job["seed"], calibration=calibration, tables=tables, registered=registered, registration=registration, **model_args)
     records = model.run(config.get("steps", 500))
     populations = [r["population"] for r in records]
+    availability = {"allocation_steps": sum(r["allocation_evaluated"] for r in records),
+                    "rule_exclusions_total": sum(r["unavailable_rule_count"] for r in records),
+                    "steps_with_rule_exclusions": sum(r["unavailable_rule_count"] > 0 for r in records),
+                    "maximum_rules_excluded": max((r["unavailable_rule_count"] for r in records), default=0),
+                    "balanced_fallback_steps": sum(r["balanced_fallback"] for r in records),
+                    "rule_exclusions_by_rule": {rule.rule_id: sum(rule.rule_id in r["unavailable_rules"] for r in records) for rule in model.rules},
+                    "unavailable_plans_total": sum(r["yield_unavailable_plan_count"] for r in records),
+                    "yield_reviews_held_no_admissible_plan": sum(r["yield_held_no_admissible_plan"] for r in records)}
     return {"tag": job["tag"], "fixture_tables": model.tables.fixture, "steps": len(records),
             "population_path": populations, "population_mean": sum(populations) / max(1, len(populations)),
             "population_max": max(populations, default=0), "final_population": model.population,
             "survived_threshold_30": model.population >= 30, "yield_events": model.yield_events,
-            "periods": [p.audit() for p in model.periods], "diagnostics": records}
+            "periods": [p.audit() for p in model.periods], "diagnostics": records,
+            "continuation_availability": availability}
 
 
 def worker(root_name, job, code, threads, registered, registration):

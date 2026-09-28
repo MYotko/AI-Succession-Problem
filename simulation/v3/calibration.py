@@ -112,8 +112,12 @@ def freeze(records, target=None, *, registered=False):
 
 def validate_calibration(document, *, registered=False):
     payload = unseal(document)
-    if payload.get("schema") != "v3-calibration-1" or payload.get("code_hash") != code_identity():
+    if payload.get("schema") != "v3-calibration-1":
         raise ValueError("stale calibration")
+    if payload.get("code_hash") != code_identity():
+        from .calibration_compatibility import compatible
+        if not compatible(document):
+            raise ValueError("stale calibration")
     if registered and (payload["fixture"] or payload["tag"] != "v3_calibration" or payload["trajectories"] != 50 or payload["steps"] != 500):
         raise ValueError("registered execution rejects fixture calibration")
     v = payload["values"]

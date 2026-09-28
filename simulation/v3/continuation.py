@@ -46,13 +46,33 @@ def fit_transitions(before_bins, after_bins, rewards, extinct, groups, lower, up
     next_value[known] = value[following[known]]
     next_value[dead] = lower
     target = (1 - beta) * rr + beta * next_value
-    covered = heldout.ravel() & (current >= 0) & ~unknown_next
+    legacy_covered = heldout.ravel() & (current >= 0) & ~unknown_next
+    # C is published only on this training-defined domain. Auxiliary values
+    # for discarded bins are not available to the online loader. Neither an
+    # unpublished source nor a missing nonextinct endpoint is covered.
+    published = counts >= min_visits
+    current_published = np.zeros(len(rr), dtype=bool)
+    next_published = np.zeros(len(rr), dtype=bool)
+    current_published[current >= 0] = published[current[current >= 0]]
+    next_published[known] = published[following[known]]
+    covered = heldout.ravel() & current_published & (dead | next_published)
     residuals = target[covered] - value[current[covered]]
     count_heldout = int(heldout.sum())
     # Conditional empirical mean residual per covered held-out bin.
     hc = np.bincount(current[covered], minlength=len(value))
     hs = np.bincount(current[covered], weights=residuals, minlength=len(value))
     maximum = float(np.max(abs(hs[hc > 0] / hc[hc > 0]), initial=0))
+    residual_bins = [{"bin": observed[i].tolist(), "mean_residual": float(hs[i] / hc[i]),
+                      "training_visits": int(counts[i]), "heldout_visits": int(hc[i]),
+                      "published": bool(counts[i] >= min_visits)} for i in np.flatnonzero(hc > 0)]
+    residual_bins.sort(key=lambda entry: abs(entry["mean_residual"]), reverse=True)
+    legacy_residuals = target[legacy_covered] - value[current[legacy_covered]]
+    legacy_counts = np.bincount(current[legacy_covered], minlength=len(value))
+    legacy_sums = np.bincount(current[legacy_covered], weights=legacy_residuals, minlength=len(value))
+    legacy_bins = [{"bin": observed[i].tolist(), "mean_residual": float(legacy_sums[i] / legacy_counts[i]),
+                    "training_visits": int(counts[i]), "heldout_visits": int(legacy_counts[i]),
+                    "published": bool(published[i])} for i in np.flatnonzero(legacy_counts > 0)]
+    legacy_bins.sort(key=lambda entry: abs(entry["mean_residual"]), reverse=True)
     entries = []
     for i, key in enumerate(observed):
         if counts[i] >= min_visits:
@@ -61,6 +81,15 @@ def fit_transitions(before_bins, after_bins, rewards, extinct, groups, lower, up
     return {"entries": entries, "heldout_transitions": count_heldout,
             "heldout_coverage": float(covered.sum() / max(1, count_heldout)),
             "bellman_residual_empirical": maximum,
+            "largest_residual_bins": residual_bins[:5],
+            "validation_domain": "published source and published successor or extinction; training visits >= min_visits",
+            "minimum_training_visits": int(min_visits),
+            "unpublished_source_heldout": int((heldout.ravel() & ~current_published).sum()),
+            "unpublished_successor_heldout": int((heldout.ravel() & ~dead & ~next_published).sum()),
+            "legacy_all_training_bins": {
+                "heldout_coverage": float(legacy_covered.sum() / max(1, count_heldout)),
+                "bellman_residual_empirical": abs(legacy_bins[0]["mean_residual"]) if legacy_bins else 0.,
+                "largest_residual_bins": legacy_bins[:5]},
             "bellman_rmse": float(np.sqrt(np.mean(residuals**2))) if len(residuals) else None,
             "iterations": iteration + 1, "missing_next_training_transitions": int((keep & unknown_next).sum()),
             "training_fixed_point_converged": iteration < 2499,

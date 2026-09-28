@@ -1,0 +1,6 @@
+{"active":0,"configuration":false,"epoch":1790588796.9349573,"event":"mode_requested","mode":"normal","selection":{"best_jobs_per_hour":1414.77042726281,"jobs_per_hour":1414.77042726281,"threads":1,"workers":2}}
+{"active":0,"epoch":1790588796.9388266,"event":"mode_effective","mode":"normal","worker_limit":2}
+{"active":1,"epoch":1790588796.9554384,"event":"dispatch","job":"table_ed078ceb5c2875ad1e058b38","mode":"normal","pid":21452,"seed":655348606184457504867632121552256236612,"slots":1}
+{"active":2,"epoch":1790588796.9830937,"event":"dispatch","job":"table_55fe0d89c4c6f88ef0a33217","mode":"normal","pid":32656,"seed":454585864551206873824707213505456147882,"slots":2}
+{"epoch":1790589553.5897632,"event":"complete","job":"table_55fe0d89c4c6f88ef0a33217","pid":32656}
+{"epoch":1790589744.3989809,"event":"complete","job":"table_ed078ceb5c2875ad1e058b38","pid":21452}

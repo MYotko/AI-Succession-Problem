@@ -79,6 +79,10 @@ def unseal(document):
 def source_manifest():
     # All root Python dependencies are bundled unchanged. Tests are excluded.
     files = list(ROOT.glob("*.py")) + [p for p in SIMULATION.glob("*.py") if not p.name.startswith("test_")]
+    # This reviewed exception is executable provenance, not a generated result.
+    compatibility = ROOT / "calibration_compatibility_A1.json"
+    if compatibility.exists():
+        files.append(compatibility)
     return {p.relative_to(SIMULATION).as_posix(): file_hash(p) for p in sorted(files)}
 
 
@@ -184,7 +188,8 @@ def verify_registration(pin, repository=None):
         if hashlib.sha256(committed).hexdigest() != pin["sha256"] or file_hash(repo / path) != pin["sha256"]:
             raise RuntimeError("pre-registration hash is stale")
         tracked = git("diff", "HEAD", "--", "simulation").strip()
-        untracked = git("ls-files", "--others", "--exclude-standard", "simulation/v3/*.py").strip()
+        untracked = git("ls-files", "--others", "--exclude-standard", "simulation/v3/*.py",
+                        "simulation/v3/calibration_compatibility_A1.json").strip()
         if tracked or untracked:
             raise RuntimeError("registered source must be committed and clean")
     except subprocess.CalledProcessError as exc:

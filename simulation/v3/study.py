@@ -90,6 +90,7 @@ def table_design():
     from .offline_estimator import PRIMARY, SENSITIVITY_RULES, SENSITIVITY_RR
     from .policies import execution_policy_class
     return {"resolution": "R13, 2026-09-27", "primary": PRIMARY,
+            "amendment": "A1 proposed, 2026-09-28; commit and pin required before registered execution",
             "sensitivity_rule_ids": list(SENSITIVITY_RULES), "sensitivity_rr": list(SENSITIVITY_RR),
             "sensitivity_settings": ["double_population", "double_length"],
             "rule_ids": [r.rule_id for r in execution_policy_class()], "rule_class_hash": digest([r.__dict__ for r in execution_policy_class()]),
@@ -129,6 +130,7 @@ def assemble_tables(outputs, calibration, target, *, registered=False):
     statuses = []
     for key, row in primary.items():
         rr = rates[key]
+        row["primary_status"], row["primary_reason"] = row["status"], row.get("reason")
         selected = row["rule_id"] in SENSITIVITY_RULES and rr in SENSITIVITY_RR
         passed = True
         contrasts = []
@@ -137,15 +139,21 @@ def assemble_tables(outputs, calibration, target, *, registered=False):
             passed = set(others) == {"double_population", "double_length"}
             for name, other in others.items():
                 a, b = row.get("lambda_f"), other.get("lambda_f")
-                if not a or not b or a["mean"] is None or b["mean"] is None or other["status"] != "estimated":
+                if not a or not b or a["mean"] is None or b["mean"] is None:
                     passed = False
+                    contrasts.append({"setting": name, "passed": False, "other_status": other["status"],
+                                      "reason": "contrast unavailable", "other_screens": other.get("screens", {})})
                     continue
                 av, bv = np.asarray(a["replicates"]), np.asarray(b["replicates"])
                 half = 2.015 * math.sqrt(float(av.var(ddof=1) / len(av) + bv.var(ddof=1) / len(bv)))
                 difference = b["mean"] - a["mean"]
                 ok = abs(difference) + half <= .05 * row["flow_range"]
-                passed &= ok
-                contrasts.append({"setting": name, "difference": difference, "interval90": [difference - half, difference + half], "passed": bool(ok)})
+                eligible = other["status"] == "estimated"
+                passed &= ok and eligible
+                contrasts.append({"setting": name, "difference": difference, "interval90": [difference - half, difference + half],
+                                  "passed": bool(ok and eligible), "numerical_contrast_passed": bool(ok),
+                                  "other_status": other["status"], "other_screens": other.get("screens", {}),
+                                  "threshold": .05 * row["flow_range"], "excess": abs(difference) + half - .05 * row["flow_range"]})
             statuses.append(bool(passed))
         row["sensitivity"] = {"selected": selected, "passed": bool(passed) if selected else None, "contrasts": contrasts}
         if selected and not passed:

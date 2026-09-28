@@ -40,6 +40,10 @@ class Evaluation:
     terminal: object
     flows: np.ndarray
 
+    @property
+    def available(self):
+        return getattr(self.lookup, "available", np.ones(len(self.scores), dtype=bool))
+
 
 class V3Model:
     """Wrap the legacy initial law while owning a separate v3 executor."""
@@ -131,7 +135,8 @@ class V3Model:
         self.epoch_history.append({"epoch": self.epoch.epoch_id, "state": "prepared", "deadline": self.epoch.deadline})
 
     def _lookup(self, state, rules, capability):
-        result = self.tables.lookup(rules, state.summary_bins(self.capacity), kernel_hash=self.kernel_hash,
+        lookup = getattr(self.tables, "lookup_available", self.tables.lookup)
+        result = lookup(rules, state.summary_bins(self.capacity), kernel_hash=self.kernel_hash,
                                   capability=capability, alpha=self.alpha,
                                   weights=(self.parameters.lambda_n, self.parameters.mu, self.parameters.kappa), extinct=state.population == 0,
                                   initial_population=self.initial_population)
@@ -199,6 +204,12 @@ class V3Model:
         # mask is retained in diagnostics and cannot turn failure into a proof.
         if survival_first:
             mask &= risks == risks.min()
+        mask &= evaluation.available
+        self.balanced_fallback = not bool(mask.any())
+        self.balanced_fallback_reason = ("all_rule_scores_unavailable" if not evaluation.available.any() else
+                                        "no_scoreable_rule_passes_admission") if self.balanced_fallback else None
+        if self.balanced_fallback:
+            return 0, survival_first, [], risks
         scores = np.where(mask, evaluation.scores, -np.inf)
         best = int(np.argmax(scores))
         eligible = np.flatnonzero(mask)
@@ -221,6 +232,8 @@ class V3Model:
                                        seed_channel="yield_common")
             # All actions and actual drawdowns preserve the same floor proof.
             for index, rule in enumerate(self.rules):
+                if not evaluation.available[index]:
+                    continue
                 name = f"yield-{when}-{rule.rule_id}"
                 lookup = evaluation.lookup
                 plan = CompletePlan(name, self.epoch.epoch_id, self.epoch.preference_id, self.epoch.information_law_id,
@@ -232,6 +245,8 @@ class V3Model:
                 mapping[name] = (index, evaluation.actions[index])
         hold_eval = self.evaluate(horizon=duration, seed_channel="yield_common")
         for index, rule in enumerate(self.rules):
+            if not hold_eval.available[index]:
+                continue
             name = f"hold-{rule.rule_id}"
             lookup = hold_eval.lookup
             plans.append(CompletePlan(name, self.epoch.epoch_id, self.epoch.preference_id, self.epoch.information_law_id,
@@ -241,12 +256,15 @@ class V3Model:
                                       max(0., 1 - self.active_certificate.upper)))
         # No certificate: preserve welfare and reproduction and hold. The
         # failed bound alone does not authorize an irreversible action.
-        if plans_admitted:
+        if plans_admitted and plans:
             decision = compare_plans(plans, self.epoch, self.time)
         else:
             decision = None
         event = {"time": self.time, "deadline": self.epoch.deadline, "review_times": reviews,
-                 "plan_count": len(plans), "committed_units": True, "s5_filtered": True,
+                 "plan_count": (len(reviews) + 1) * len(self.rules), "committed_units": True, "s5_filtered": True,
+                 "unavailable_plan_count": (len(reviews) + 1) * len(self.rules) - len(plans),
+                 "admissible_plan_count": len(plans) if plans_admitted else 0,
+                 "yield_held_no_admissible_plan": not plans_admitted or not plans,
                  "admitted": plans_admitted, "decision": None if decision is None else decision.__dict__,
                  "fixture_tables": self.tables.fixture, "common_random_numbers": True,
                  "plan_class": "current_incumbent_rule_then_stationary_successor_or_stationary_hold",
@@ -284,6 +302,9 @@ class V3Model:
                       "D_rho": self.flow, "Lambda_F": None, "W": None,
                       "Lambda_b": None, "LS": 0., "h_n": 0., "h_e": self.parameters.h_e_min,
                       "lineage": 0., "side_values_status": "absorbed_no_reproducing_class",
+                      "allocation_evaluated": False, "unavailable_rule_count": 0, "unavailable_rules": {},
+                      "balanced_fallback": False, "balanced_fallback_reason": None,
+                      "yield_unavailable_plan_count": 0, "yield_held_no_admissible_plan": False,
                       "fixture_tables": self.tables.fixture, "extinction_absorbing": True}
             self.diagnostics.append(record)
             self.time += 1
@@ -299,11 +320,19 @@ class V3Model:
         stats = advance(self.state, action, self._rng("live_environment"), self.reproduction_rate, self.capacity, self.protocol, crowding=self.crowding)
         values, measures = measurements_and_flow(self.state, action, self.parameters, self.alpha, self.capability, n_ref=self.n_ref)
         self.flow, self.chosen_rule_index = float(values[0]), chosen
+        reasons = getattr(evaluated.lookup, "unavailable_reasons", (None,) * len(self.rules))
+        def component(array):
+            return float(array[chosen]) if evaluated.available[chosen] else None
         record = {"time": self.time, "population_before": before, "population": self.population,
                   "chosen_rule": self.rules[chosen].rule_id, "flow": self.flow,
-                  "D_rho": float(evaluated.d_rho[chosen]), "Lambda_F": float(evaluated.lambda_f[chosen]),
-                  "W": float(evaluated.scores[chosen]), "Lambda_b": evaluated.lookup.lambda_b[chosen],
-                  "W_error_enclosure": float(evaluated.errors[chosen]),
+                  "D_rho": component(evaluated.d_rho), "Lambda_F": component(evaluated.lambda_f),
+                  "W": component(evaluated.scores), "Lambda_b": evaluated.lookup.lambda_b[chosen],
+                  "W_error_enclosure": component(evaluated.errors),
+                  "allocation_evaluated": True, "unavailable_rule_count": int((~evaluated.available).sum()),
+                  "unavailable_rules": {r.rule_id: reasons[i] for i, r in enumerate(self.rules) if not evaluated.available[i]},
+                  "balanced_fallback": self.balanced_fallback, "balanced_fallback_reason": self.balanced_fallback_reason,
+                  "yield_unavailable_plan_count": event["unavailable_plan_count"] if event else 0,
+                  "yield_held_no_admissible_plan": event["yield_held_no_admissible_plan"] if event else False,
                   "allocation_scoring_context": "incumbent_pre_review" if event and event["transition_count"] else "current_chain",
                   "yield_plan_value": (event["decision"]["immediate_value"] if event and event["transition_count"] else None),
                   "LS": evaluated.lookup.lifetime_surplus[chosen], "side_values_status": "B2_not_estimable_from_fixture" if self.tables.fixture else "table_field_status",
@@ -322,6 +351,10 @@ class V3Model:
             self.override_records.append({"time": self.time, "reason": "cohort_bound_failed_not_infeasibility",
                                           "reproduction_floor_overridden": False, "action": self.rules[chosen].rule_id,
                                           "upper_bound": self.active_certificate.upper})
+        if self.balanced_fallback:
+            self.override_records.append({"time": self.time, "reason": self.balanced_fallback_reason,
+                                          "reproduction_floor_overridden": False, "action": "balanced",
+                                          "unavailable_rule_count": record["unavailable_rule_count"]})
         self.diagnostics.append(record)
         self.time += 1
         return record

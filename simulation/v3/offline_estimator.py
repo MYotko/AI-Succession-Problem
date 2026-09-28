@@ -14,7 +14,9 @@ from .policies import execution_policy_class
 from .continuation import fit_transitions
 from .cohort import initial_law_bound
 
-PRIMARY = {"groups": 6, "runs_per_group": 16, "particles": 64, "burn": 256, "measure": 512}
+# Proposed A1, 2026-09-28: time bias and sparse continuation bins both
+# failed. Thresholds and the predeclared sensitivity subset are unchanged.
+PRIMARY = {"groups": 6, "runs_per_group": 64, "particles": 256, "burn": 1024, "measure": 2048}
 SENSITIVITY_RULES = ("balanced", "w0_p0_t1_g3", "w3_p5_t1_g3")
 SENSITIVITY_RR = (.055, .064, .070)
 

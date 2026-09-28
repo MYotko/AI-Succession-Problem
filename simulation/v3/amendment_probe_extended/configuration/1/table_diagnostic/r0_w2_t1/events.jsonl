@@ -1,0 +1,6 @@
+{"active":0,"configuration":true,"epoch":1790588791.7914078,"event":"mode_requested","mode":"normal","selection":{"threads":1,"workers":2}}
+{"active":0,"epoch":1790588791.795603,"event":"mode_effective","mode":"normal","worker_limit":2}
+{"active":1,"epoch":1790588791.806697,"event":"dispatch","job":"table_951add6e938cfd9fc65deacc","mode":"normal","pid":36244,"seed":538476829184497861397154565833509239616,"slots":1}
+{"active":2,"epoch":1790588791.8340876,"event":"dispatch","job":"table_f0e8a525b19e7d7656c6393c","mode":"normal","pid":31148,"seed":660505048364495418020163915344995413216,"slots":2}
+{"epoch":1790588796.6605573,"event":"complete","job":"table_951add6e938cfd9fc65deacc","pid":36244}
+{"epoch":1790588796.8015223,"event":"complete","job":"table_f0e8a525b19e7d7656c6393c","pid":31148}
