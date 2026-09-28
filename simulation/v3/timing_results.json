@@ -1,0 +1,62 @@
+{
+  "registered": false,
+  "scope": "component proxy, not integrated v3",
+  "machine": "YotkoTest",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.3",
+  "numpy": "2.4.4",
+  "process_cpus": 16,
+  "affinity_cpu_count": 16,
+  "operator_budget": 16,
+  "mode": "work",
+  "worker_processes": 0,
+  "configured_threads": 1,
+  "verified_threads": [
+    {
+      "library": "libscipy_openblas64_-63c857e738469261263c764a36be9436.dll",
+      "symbol": "scipy_openblas_get_num_threads64_",
+      "effective": 1
+    }
+  ],
+  "seconds": {
+    "v2_300x20": [
+      0.09575990005396307,
+      0.14020959998015314,
+      0.13129699998535216
+    ],
+    "v3_components_289x20": [
+      1.3942410999443382,
+      1.9166388999437913,
+      1.793396700057201
+    ]
+  },
+  "median_seconds": {
+    "v2_300x20": 0.13129699998535216,
+    "v3_components_289x20": 1.793396700057201
+  },
+  "ratio": 13.6590836063069,
+  "total_wall_seconds": 7.058089799946174,
+  "probe_sha256": "6e81c6f61966e6df0faab6fc8466590c2240095692808f2ca1e2e2337e1ccab8",
+  "source_sha256": {
+    "v3\\__init__.py": "2ddec33008f2acdc423de0cda6d81528351ca1164c09fce1c36c4cdc5e273aba",
+    "v3\\admission.py": "29a4ed07a69afd7cb239875180aa05c692783f9665bd23566fdf783db42cf7fc",
+    "v3\\measurements.py": "fbda03325f83fdd64b6ecc8adf2a72497e497793a4b759cfc2fe43913c897e04",
+    "v3\\objective.py": "a288b195047efedf7097a141333bfb8aaf35c204014d791f4d89046f01e55e31",
+    "v3\\plans.py": "0faf974a96ef1fe7c271966ad5bfb7e93d6f8ccbe5e6a1cca25f7e5433d04118",
+    "v3\\policies.py": "038e2e4d235eef3569368e739bfa9d87ef1aebbbb8b115d1d3e718cec82d33b9",
+    "v3\\spectral.py": "d4397d60f77518a88a8173f53c9cf6b7203f20b1c4baf93f157b696bc44ea8f4",
+    "v3\\support.py": "16eaae24fd7f0089722fd0dc77ac87825b1d1ba5832953b2492618794cdd0bec",
+    "v3\\timing_probe.py": "6e81c6f61966e6df0faab6fc8466590c2240095692808f2ca1e2e2337e1ccab8"
+  },
+  "checksums": {
+    "v2_300x20": 132.10441382579506,
+    "v3_components_289x20": -40.79502996460911
+  },
+  "omitted": [
+    "agent-level finite v3 transition kernel",
+    "admission/ledger evaluation",
+    "offline estimator",
+    "complete-plan search",
+    "validated continuation"
+  ]
+}

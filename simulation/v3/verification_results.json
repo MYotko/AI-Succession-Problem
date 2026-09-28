@@ -1,0 +1,42 @@
+{
+  "stage": "B1",
+  "baseline": "7fa966822da4f4f35a41a26e6a2b95dcd41a700d",
+  "branch": "v3-instrument",
+  "passed": 183,
+  "expected_failures": {
+    "B2": 3,
+    "existing_v2": 3
+  },
+  "pytest_seconds": 44.56,
+  "tracked_diff_empty": true,
+  "timed_source_hashes_match": true,
+  "network_used": false,
+  "committed": false,
+  "worker_processes": 0,
+  "source_and_test_sha256": {
+    "simulation/test_v3_admission.py": "c84eff1e4091e432b95d5e230f3cbb171048d692786d30cfed0aefa7b48f63e4",
+    "simulation/test_v3_cohort.py": "2161daa7dd85218597631af80029fff80baeaf7a9ba34e3df7a4e7b6bcc7d8fc",
+    "simulation/test_v3_integration.py": "e3193e0bf24f457e831ec04be9bebbfa4b33c2860d6501fec8be916e92d3006e",
+    "simulation/test_v3_legacy_scope.py": "b86237f8aff261108e8bc4e6a90bbebfc400f85ccb54e9f4e9a41b9624766e50",
+    "simulation/test_v3_measurements.py": "656ab5806a57732058fd8fa6a6ae005eab8174f8223519d87059e3bedf0d1242",
+    "simulation/test_v3_plans.py": "fb4c3d3528db7ff435daaa7df610bf3d3d0c20792e454933d7689e4d5c4bf4a7",
+    "simulation/test_v3_spectral.py": "f401d32e64f388a2cb828b9630794f043d7e154cc0c33b100f04106c841475ae",
+    "simulation/v3/__init__.py": "b6d90f34ac4c05efe0522f21c864b6b938dad59b4b9594cb4ded28063cea8f74",
+    "simulation/v3/admission.py": "e596c964a47469fed2f169b764b3f90da6d2b9fcef1b2c41fdb7ea136fcf2f7f",
+    "simulation/v3/cohort.py": "4869edef33e99319d73cff4fa51a4dcbb4d285cc43e247e5b63c222a35a414a1",
+    "simulation/v3/conformance.py": "322d2e4614c835ffd7158bc41a35dece582eb4ea437a554d81343f2e3a350e3e",
+    "simulation/v3/engine.py": "e10ae8bde4765fe748df8056d281e6dfa8813edf452050db8765bc411977e7cf",
+    "simulation/v3/guards.py": "b3be0c72c8c99689d8bdd2489e1996a9ed14e086f5e7ecca02b0e0d0f743f4f9",
+    "simulation/v3/integrated_timing.py": "4a79d902c210335c81c054f4b8f468a9dc4949e953175e165c4eecbd6cd4df4c",
+    "simulation/v3/integration.py": "6f3213a08f72fdbd938138ea1dda8b406d2e3adebf1087b3b17357e200e2fbbb",
+    "simulation/v3/measurements.py": "fbda03325f83fdd64b6ecc8adf2a72497e497793a4b759cfc2fe43913c897e04",
+    "simulation/v3/objective.py": "a288b195047efedf7097a141333bfb8aaf35c204014d791f4d89046f01e55e31",
+    "simulation/v3/plans.py": "04d079a3bd2f9074d1fe6e05927f5b2c1ecd0a66f8008dac83e1386dbd8beebd",
+    "simulation/v3/policies.py": "6f1a62650b6ad7036ec2adb874b999b6cfcb28907580519a362765102d6ab862",
+    "simulation/v3/spectral.py": "d4397d60f77518a88a8173f53c9cf6b7203f20b1c4baf93f157b696bc44ea8f4",
+    "simulation/v3/stocks.py": "8e05f35a35f9f2fd0ff28101a6d5681184087eff32066a576ac86a71764280c3",
+    "simulation/v3/support.py": "16eaae24fd7f0089722fd0dc77ac87825b1d1ba5832953b2492618794cdd0bec",
+    "simulation/v3/tables.py": "51921e56f71bd97d7dc83ecaadcdc7ded4a2a98c156b596e1370313e5b243011",
+    "simulation/v3/timing_probe.py": "6e81c6f61966e6df0faab6fc8466590c2240095692808f2ca1e2e2337e1ccab8"
+  }
+}
