@@ -262,3 +262,167 @@ It refuses registered mode without the committed hash of this note, and without 
 - Any change to this note after commit is a dated amendment, committed and pushed before the output it affects is read.
 - Each amendment states whether any registered output had been read when it was written.
 - Nothing is adjusted toward a v2.0 figure.
+
+### Amendment A1, 2026-09-28: table effort, validation domain and unavailable scores
+
+**Status: approved by the operator, including the unpublished-bin rule,
+2026-09-28. Effective for registered execution from the commit that adds it.**
+At writing, the registered calibration and the first registered table
+family had been read to diagnose a pre-dispatch refusal. No registered
+rerun job had run, no registered rerun output existed, and no registered
+rerun output had been read. This statement is supported by the returned
+execution log and the operator's directive. Calibration and table output
+are registered output; they are not being described as unread.
+
+The first table family, from the instrument at 6448a720 and this design
+at 96f2c481, remains a failed estimation attempt. Its published SHA256 is
+`deef0f6a85c93bc281820424d51f370fa580871ae2e460d6535e5a4a390689fa`.
+All 343 jobs completed, but 5,604 of 13,750 primary rows failed their own
+screens. Sensitivity screening added 66 distinct failed rows, for 5,670
+published `not_estimable` rows. The nine sensitivity pairs were complete.
+The original family is retained unchanged and is not reclassified as
+passing under this amendment.
+
+The numerical thresholds are unchanged. The primary failures comprise
+3,105 half-window drift failures and 3,099 continuation residual failures,
+with overlap. All primary half-width, route, survival-fraction, continuation
+coverage and solver screens passed. Among sensitivity rows, 187
+doubled-population rows failed their own screens; all 735 doubled-length
+rows passed. Forty-two primary-versus-doubled-length contrast intervals
+failed. This supports increasing time before increasing particles.
+
+Fixed non-registered probes at four times the original lengths removed
+all tested drift and numerical-contrast failures, but four of 30 tested
+rows still failed the unchanged continuation residual screen. These are
+retained failures, not a successful validation of time-only changes.
+The diagnostic output identifies sparse conditional bins, including a
+published balanced-rule bin with 40 training and 13 held-out visits.
+Two additional fixed probes at four times both length and population
+still failed four of six scoring rows under the original validation
+domain. A w3_p5_t1_g3/.055 residual of 17.514834 came from a bin with one
+training visit and one held-out visit that is not in the exported table.
+A balanced/.064 residual of 2.760795 against 2.527108 came from a published
+bin with five training visits and two held-out visits. These findings do
+not demonstrate that more effort alone solves continuation validation.
+
+**Approved definition correction:** let B_pub be the bins with at
+least four training visits, the existing publication criterion. The
+exported continuation C is defined only on B_pub, plus exact extinction.
+The residual (1-beta)u + beta C(b_next) - C(b) is evaluable from that
+artifact only when b is in B_pub and b_next is in B_pub or is extinct.
+Previously validation also used internal fitted values from bins omitted
+by the writer and rejected by the online loader. It thus validated a
+different function and overstated artifact coverage. Use the published
+domain for both residuals and coverage. Keep the denominator as all
+held-out transitions, the 90 percent coverage floor, the maximum absolute
+conditional mean residual, and its five-percent flow-range limit. The
+domain is determined from training counts before inspecting held-out
+rewards. No low-count published bin is excluded, and no held-out minimum
+count is introduced. Preserve the old all-training-bin residual and
+coverage as labeled diagnostics. Missing online bins supply no value.
+This does not assert a uniform Bellman bound or certify aggregation bias.
+
+A reduced test shows why this is a domain correction: an unpublished
+source bin previously counted as covered now lowers coverage from 1 to
+5/6, which fails the same floor. A second test retains a published bin's
+residual of 10 against a 0.5 limit. This amendment does not waive real
+published-bin failures. The full replacement family under the corrected
+domain has not been run and is not certified to pass.
+
+**Approved unpublished-bin rule, 2026-09-28:** in each allocation
+comparison, a rule whose rollout endpoint is outside its published
+continuation domain has no valid score and is omitted. The same applies
+to a missing Lambda_F row, although the registered table gate must
+prevent a missing row at launch. An extinct endpoint retains its exact
+extinction continuation; it does not need an estimated continuation bin.
+There is never a midpoint, neighbor or other substituted value. Existing
+admission and survival-first filters continue to apply. If the comparison
+has no eligible rule with an available score, use the balanced rule,
+which satisfies the welfare and pointwise reproduction floors. Record
+whether all scores were unavailable or availability and admission jointly
+emptied the comparison. This fallback is an action, not an imputed W.
+
+Each step records `unavailable_rule_count`, the excluded rule identifiers
+and reasons, and `balanced_fallback` with its reason. Unavailable objective
+components are null in output. Rerun outputs aggregate the number of
+rule exclusions, steps with an exclusion, exclusions by rule, the maximum
+excluded at a step, and balanced-fallback steps, with the number of
+allocation steps as denominator. Absorbed steps do not evaluate allocation
+and count neither an exclusion nor a fallback. Allocation diagnostics
+refer to the comparison before any yield review at that step.
+
+Yield plans use the same availability principle separately. A complete
+plan with an unavailable continuation or Lambda_F value is omitted before
+comparison. It cannot become admissible through an invented value. If no
+plan is admissible, hold yield. Reviews record total candidate plans,
+unavailable plans, admissible plans and whether yield was held for lack
+of an admissible plan. The per-step diagnostics and rerun totals include
+these counts. The registered table gate and all numerical screens remain
+binding; these online exclusions do not admit a failed table family.
+
+Endpoint-frequency diagnostics replay fixed-rule paths from archived
+estimator seeds and compare their 20-step endpoints with the published
+domains. They are non-registered estimator diagnostics, not adaptive
+rerun outcomes. Per-rule marginal frequencies cannot determine the
+joint all-rules-unavailable probability. The implementation note reports
+their settings, denominators and limits; registered outputs will report
+the actual balanced-fallback frequency. No registered rerun output existed
+or was read when this addition was written.
+
+For the replacement family, the primary setting becomes six groups,
+64 plain runs per group, 256 FV particles per group, burn-in 1,024 steps
+and 2,048 measurement steps. Time and populations are each four times
+the original settings. The population increase supports conditional-bin
+continuation estimation; it is not a substitute for burn-in. The frozen
+nine-pair subset is unchanged. Its doubled-population setting uses 128
+plain runs and 512 FV particles
+per group, with primary lengths. Its doubled-length setting uses burn-in
+2,048 and 4,096 measurement steps, with primary populations. The plain
+route still requires at least half the runs to survive the measurement
+window; otherwise use FV. WE remains unavailable and an unestimable row
+remains a failure. Every rule and context receives the primary setting.
+No row, rule, rr, scoring context, seed count or rerun grid is dropped.
+
+All 343 table jobs are regenerated as a new family, including the 325
+primary jobs and 18 sensitivity jobs. Updated settings and code give new
+job and artifact identities under the existing deterministic seed rule.
+Do not mix completed rows from the first attempt into the replacement.
+Selection still acts on W point estimates, and the floors, admission,
+complete-plan yield comparison and objective are unchanged. Continuation
+validation uses the domain correction above and adds the worst residual
+bins and their sample counts to its diagnostics. Rejection thresholds do
+not change; the old family's recorded failures are not relabeled.
+
+The calibration remains frozen at SHA256
+`bf0f7c3f10310558d567b6b3f7c24f6f99f2fe6eb71fd830cccfd8e2aa0bd6d6`.
+No value is recalculated or refit. An explicit compatibility record binds
+that exact artifact, its original source identity, its value hash and the
+unchanged calibration-generating functions and dependencies. Dependency
+comparison normalizes Git's CRLF/LF conversion and no other bytes. It permits
+this calibration across estimator-only source changes, while refusing a
+different artifact or a changed scientific dependency. New table rows
+bind the new full source identity and the unchanged calibration hash.
+The compatibility record itself is part of that source identity and must
+be committed before registered execution.
+
+At the measured 28-worker throughput, sixteen times the original table
+work projects 10,975 seconds including the observed 94-second fixed
+overhead, about 3.05 X2 hours. A work-unit scenario charging every job
+five times more for migration from plain to plain-plus-FV projects
+15.14 hours, leaving about 8.86 hours below the ceiling. These are measured-cost
+extrapolations, not hard runtime bounds or evidence that all screens will
+pass. They leave room under the unchanged 24-hour ceiling. The mandatory
+configuration test is rerun for the replacement workload, and the runner
+still enforces its deadline. The 680-second figure covered table dispatch;
+the original service interval was 774 seconds.
+
+The implementation note and `v3/table_screen_audit_20260928.json` record
+the full rule/rr/scoring-context diagnosis, numerical excesses and fixed
+non-registered diagnostic probes. Such probes are estimator validation,
+not registered rerun outcomes. The replacement family must pass every
+screen as specified above before any rerun dispatch. A remaining failure is reported
+and keeps the gate closed; there is no retry-until-pass rule or automatic
+relaxation. The operator has approved this amendment. Commit and push it
+and the code, then supply the new committed pin before replacement estimation
+or rerun execution. This amendment does not change any prediction or aim
+at a v2.0 figure.
