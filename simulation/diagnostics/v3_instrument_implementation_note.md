@@ -3493,4 +3493,18 @@ tests). The failed run root stays on the X2 as a record; the relaunch uses a new
 root and a re-prepared plan, with 47.5 wall hours so the cumulative 48-hour
 ceiling holds across both launches.
 
+**Second registered launch and the memory anchor, 2026-09-29.** The launch at
+289bcd9d passed its configuration test and ran, but the FV phases were held to
+10 and 5 workers by a per-task estimate of 9.5 GB taken from the planning code.
+A non-registered probe ran the heaviest FV primary task (150 rows, 13,650
+published cells) with the A4 code on a planning seed (tag `planning_A4_memprobe`)
+beside the run. It peaked at 5.56 GB in 4,266 seconds. With the operator's
+approval the anchor became 6.7 GB, the measured peak plus 20 percent: the FV
+primary cap rises to about 14 and the FV high-memory cap to about 7, and the
+projected run falls from about 42 to about 32 hours. The second run was stopped
+through the runner's interruption procedure after 163 of 923 jobs (fit and part
+of plain validation). Its root stays on the X2 as a record, and the relaunch uses
+a new root and a re-prepared plan with 44 wall hours, so the cumulative 48-hour
+ceiling holds across all three launches. No other code changed.
+
 No commit, registered run, network or X2 action was performed.

@@ -320,10 +320,14 @@ def load_probe_seeds(a3_probe_root):
 # Memory estimate and phase assignment
 # ---------------------------------------------------------------------------
 
-# Arithmetic per-task memory, anchored on the measured planning peak: an FV
-# primary task (32 groups x 256 particles x 3,072 steps) peaked near 9.5 GB.
-# Memory scales with population x length (the (length, count, features) arrays).
-ANCHOR_GB = 9.5
+# Arithmetic per-task memory, anchored on a measured A4 peak: the heaviest FV
+# primary task (32 groups x 256 particles x 3,072 steps; 150 rows, 13,650
+# published cells), run with this code on a planning seed on 2026-09-29, peaked
+# at 5.56 GB. The anchor adds a 20% margin. (The first anchor, 9.5 GB, came from
+# the planning code and held the FV phases to 10 and 5 workers.) Memory scales
+# with population x length (the (length, count, features) arrays); the fixed
+# overhead does not, so scaling up from the anchor is conservative.
+ANCHOR_GB = 6.7
 ANCHOR_CELLS = 32 * 256 * (1024 + 2048)
 
 

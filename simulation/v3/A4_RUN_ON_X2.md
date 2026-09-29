@@ -57,9 +57,9 @@ runner's own job seed is unused. One numerical thread per worker.
 
 The configuration test measures each phase's memory cap first, with nothing
 running, and a capped phase tests only the listed worker counts at or below its
-cap, plus the cap itself: at about 118 GB available, 4 for FV doubled-population,
-8 and 9 for FV primary, 8, 12, 16 and 19 for the plain phases, and every listed
-count for census. Each round runs two tasks per tested worker. The whole test is
+cap, plus the cap itself: at about 121 GB available, 7 for FV doubled-population,
+8, 12 and 14 for FV primary, and every listed count for the plain phases and
+census. Each round runs two tasks per tested worker. The whole test is
 expected to take about 10 minutes, with a 30-minute ceiling. The X2 is dedicated
 to this project, so launch in normal mode.
 
@@ -70,9 +70,12 @@ per-phase memory cap. `--workers 28` is only a ceiling. Each phase's cap is
 fixed once at phase start as `floor(0.8 x MemAvailable / per-task estimate)`
 (it is not recomputed from live MemAvailable, which already excludes running
 tasks); a task is not started while MemAvailable is below 1.2x its estimate. At
-about 118 GB available the estimates and caps are: FV doubled-population/
-doubled-length 19 GB -> 4 workers; FV primary 9.5 GB -> 9; plain fit/validate up
-to 4.75 GB -> 19; census about 0.2 GB -> the mode cap. Do not raise `--workers`
+about 121 GB available the estimates and caps are: FV doubled-population/
+doubled-length 13.4 GB -> 7 workers; FV primary 6.7 GB -> 14; plain fit/validate
+up to 3.35 GB -> above the CPU optimum, so the configuration test's choice
+governs; census about 0.1 GB -> the mode cap. The estimates are anchored on a
+measured peak: the heaviest FV primary task peaked at 5.56 GB (2026-09-29), plus
+a 20% margin. Do not raise `--workers`
 expecting more; the memory cap governs. A completed task's peak RSS can only
 raise its phase estimate (never lower it), which only lowers the cap for the
 rest of that phase.
