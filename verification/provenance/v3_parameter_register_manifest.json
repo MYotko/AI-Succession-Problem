@@ -1,0 +1,239 @@
+{
+  "generator": "build_v3_parameter_register.py",
+  "scope_criterion": "import closure of the registered rerun / offline-table entry points (v3.production_runner and the modules it reaches, over both 'from .X import' and 'from . import X' forms)",
+  "scope_modules": [
+    "admission",
+    "artifacts",
+    "calibration",
+    "calibration_compatibility",
+    "cohort",
+    "context",
+    "continuation",
+    "continuation_validation",
+    "engine",
+    "gates",
+    "guards",
+    "integration",
+    "measurements",
+    "objective",
+    "offline_estimator",
+    "pilot",
+    "plans",
+    "policies",
+    "production_runner",
+    "production_tables",
+    "recording",
+    "recording_validation",
+    "service",
+    "spectral",
+    "stocks",
+    "study",
+    "table_compatibility",
+    "table_compatibility_a3",
+    "table_repair_a3",
+    "table_validation_a4",
+    "tables",
+    "unpublished_bins"
+  ],
+  "offpath_modules_excluded": [
+    "__init__",
+    "a1_screen_diagnosis",
+    "conformance",
+    "d23_validation",
+    "diagnose_tables",
+    "integrated_timing",
+    "support",
+    "timing_probe"
+  ],
+  "hash_normalization": "CRLF to LF before SHA-256",
+  "files": [
+    {
+      "path": "simulation/v3/admission.py",
+      "sha256": "e596c964a47469fed2f169b764b3f90da6d2b9fcef1b2c41fdb7ea136fcf2f7f",
+      "numeric_literals": 50
+    },
+    {
+      "path": "simulation/v3/artifacts.py",
+      "sha256": "b96acd93ee243e10de052c84c151cb010b0943472d1eab8254058a5a6273c993",
+      "numeric_literals": 25
+    },
+    {
+      "path": "simulation/v3/calibration.py",
+      "sha256": "a59f8510f503e2ce95fa7a115a009129ce2df7c733a45009bac0ddd9eff3e6c7",
+      "numeric_literals": 107
+    },
+    {
+      "path": "simulation/v3/calibration_compatibility.py",
+      "sha256": "78b1e718e37b9e6500f9dcb81c7945bc0bd25d737c78126b278cb3301c68b426",
+      "numeric_literals": 0
+    },
+    {
+      "path": "simulation/v3/cohort.py",
+      "sha256": "4869edef33e99319d73cff4fa51a4dcbb4d285cc43e247e5b63c222a35a414a1",
+      "numeric_literals": 72
+    },
+    {
+      "path": "simulation/v3/context.py",
+      "sha256": "3fc7386267f1c51475fc8e23b550ddf02346b5cf3b3e233c35f0cbe5a8ab103b",
+      "numeric_literals": 76
+    },
+    {
+      "path": "simulation/v3/continuation.py",
+      "sha256": "9f3004bb2e067408a23d1694c7891fc56e8b720581b64525cfa884d8e0282645",
+      "numeric_literals": 43
+    },
+    {
+      "path": "simulation/v3/continuation_validation.py",
+      "sha256": "bd9435b47fff098e6f1c39909ccfbb02da38ee0906bd8e005471f26fe1b2c826",
+      "numeric_literals": 171
+    },
+    {
+      "path": "simulation/v3/engine.py",
+      "sha256": "e2bbe9b420f886ae61338eb1a3ef8f2111d82fe2acd1c0ae4c20b7d8e5adbb18",
+      "numeric_literals": 195
+    },
+    {
+      "path": "simulation/v3/gates.py",
+      "sha256": "ca49fa3af25fecc0dd70d7a02e5391bc3d4542000e016143b40f708d85f13ef9",
+      "numeric_literals": 463
+    },
+    {
+      "path": "simulation/v3/guards.py",
+      "sha256": "d17ef966d2843eb54855ed87440824ffe026baf254ee19acd0899b0f3694addf",
+      "numeric_literals": 6
+    },
+    {
+      "path": "simulation/v3/integration.py",
+      "sha256": "7eebc42f6b270cf8cdfca9d1fe67885f43cc8522ae73b0c3abb7dd3bde8c546c",
+      "numeric_literals": 122
+    },
+    {
+      "path": "simulation/v3/measurements.py",
+      "sha256": "fbda03325f83fdd64b6ecc8adf2a72497e497793a4b759cfc2fe43913c897e04",
+      "numeric_literals": 88
+    },
+    {
+      "path": "simulation/v3/objective.py",
+      "sha256": "a288b195047efedf7097a141333bfb8aaf35c204014d791f4d89046f01e55e31",
+      "numeric_literals": 34
+    },
+    {
+      "path": "simulation/v3/offline_estimator.py",
+      "sha256": "5a9eaa5079e9e7feda1f7b28a6a5f6f32f270937b62d7cc02ec8482b7e710453",
+      "numeric_literals": 151
+    },
+    {
+      "path": "simulation/v3/pilot.py",
+      "sha256": "fff45c5a9b538d7fed90f0937cc1c871e51fde5fc088d3446b36275a26b8fc5f",
+      "numeric_literals": 90
+    },
+    {
+      "path": "simulation/v3/plans.py",
+      "sha256": "04d079a3bd2f9074d1fe6e05927f5b2c1ecd0a66f8008dac83e1386dbd8beebd",
+      "numeric_literals": 9
+    },
+    {
+      "path": "simulation/v3/policies.py",
+      "sha256": "6f1a62650b6ad7036ec2adb874b999b6cfcb28907580519a362765102d6ab862",
+      "numeric_literals": 57
+    },
+    {
+      "path": "simulation/v3/production_runner.py",
+      "sha256": "f38eae4ac85166ca017cb3b4d82f60b8e1ed8f693528236b1f3430dda1c6a01f",
+      "numeric_literals": 150
+    },
+    {
+      "path": "simulation/v3/production_tables.py",
+      "sha256": "c42ca1878b20d799da3f7da236b86d3948413036ad4fa3ff77e2021ed43f6132",
+      "numeric_literals": 16
+    },
+    {
+      "path": "simulation/v3/recording.py",
+      "sha256": "b47e0f386aabe9865f402944abc4553fefe13d50f7307c4195f17e474d6fbdfe",
+      "numeric_literals": 36
+    },
+    {
+      "path": "simulation/v3/recording_validation.py",
+      "sha256": "a6cbbbc0a12b98d74fea5eb208c5ab3ba806845d9e75bbf442d22865f37be54c",
+      "numeric_literals": 47
+    },
+    {
+      "path": "simulation/v3/service.py",
+      "sha256": "e56e52745374a200c1bface50aa8ba2545aaa4da1ca6eed4a1bc5462ef6e7a24",
+      "numeric_literals": 2
+    },
+    {
+      "path": "simulation/v3/spectral.py",
+      "sha256": "d4397d60f77518a88a8173f53c9cf6b7203f20b1c4baf93f157b696bc44ea8f4",
+      "numeric_literals": 39
+    },
+    {
+      "path": "simulation/v3/stocks.py",
+      "sha256": "8e05f35a35f9f2fd0ff28101a6d5681184087eff32066a576ac86a71764280c3",
+      "numeric_literals": 47
+    },
+    {
+      "path": "simulation/v3/study.py",
+      "sha256": "139c63b00204d21acd0d8fb1c606dc2941f173331de84e9c1d2e8257b990ca87",
+      "numeric_literals": 73
+    },
+    {
+      "path": "simulation/v3/table_compatibility.py",
+      "sha256": "16f6970df3c542776555d2fec17d2056582b333eff175a1c6dec93855c3c6c89",
+      "numeric_literals": 0
+    },
+    {
+      "path": "simulation/v3/table_compatibility_a3.py",
+      "sha256": "f2345359438578995cb1cb79f8590e6f8acffe2eff309f90d5f837df161b8b13",
+      "numeric_literals": 7
+    },
+    {
+      "path": "simulation/v3/table_repair_a3.py",
+      "sha256": "6fa1659e1fe6b5ea134ddc2dc0906bac8b684a97b8332fd38452bbfbb1ea260b",
+      "numeric_literals": 9
+    },
+    {
+      "path": "simulation/v3/table_validation_a4.py",
+      "sha256": "4d2351ee2941476df8c8c25d52ca5e63ec3b55661ccdd69955d662161cceb683",
+      "numeric_literals": 130
+    },
+    {
+      "path": "simulation/v3/tables.py",
+      "sha256": "706ba35a732820dd1c74b5fe95d1ac3e944853c0738494c20bd4ad1ab38d188d",
+      "numeric_literals": 62
+    },
+    {
+      "path": "simulation/v3/unpublished_bins.py",
+      "sha256": "b73b4d4370006855f8e87466deaf6efb2ea8bedb7f07b653b5e16f471d862c75",
+      "numeric_literals": 52
+    }
+  ],
+  "external_config": {
+    "path": "simulation/v3/runs/registered/v3_rerun_calibration.json",
+    "sha256": "fd86358a39e3b643fb9adc4e81a2372915ca50a1866e9b0e330a874b41746e01"
+  },
+  "scoped_numeric_literals": 2429,
+  "claimed_by_register": 321,
+  "covered_by_excluded": 2108,
+  "register_rows_total": 111,
+  "register_rows_external": 10,
+  "excluded_buckets": 164,
+  "evidence_quotes_verified_verbatim": 149,
+  "counts_by_class": {
+    "measured": 0,
+    "calibrated": 7,
+    "derived": 14,
+    "arbitrary": 90
+  },
+  "counts_by_role": {
+    "decision": 15,
+    "dynamics": 37,
+    "estimation": 18,
+    "gate": 15,
+    "objective": 13,
+    "run-setting": 13
+  },
+  "sensitivity_candidates": 41,
+  "needs_operator_decision": 5,
+  "coverage_complete": true
+}
