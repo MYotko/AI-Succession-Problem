@@ -43,7 +43,8 @@ per-phase memory estimate. It launches nothing.
 ## Launch through the production runner
 
 ```text
-python -B -m v3.production_runner launch v3/runs/registered/A4_plan.json v3/runs/registered/A4_run --profile x2 --workers 28 --threads 1 --cpu-budget 32 --mode work
+export PATH=$HOME/.local/bin:$PATH   # llm lives here; a non-interactive shell lacks it
+python -B -m v3.production_runner launch v3/runs/registered/A4_plan.json v3/runs/registered/A4_run --profile x2 --workers 31 --threads 1 --cpu-budget 32 --mode normal
 ```
 
 The runner acquires the service lease, runs `llm down`, runs the measured
@@ -53,6 +54,14 @@ validate plain, validate FV primary, validate FV doubled-population (a separate
 phase because its tasks need about 19 GB; the six doubled-length FV jobs run
 here too), then census. The A4 stream seeds travel in each job's config; the
 runner's own job seed is unused. One numerical thread per worker.
+
+The configuration test measures each phase's memory cap first, with nothing
+running, and a capped phase tests only the listed worker counts at or below its
+cap, plus the cap itself: at about 118 GB available, 4 for FV doubled-population,
+8 and 9 for FV primary, 8, 12, 16 and 19 for the plain phases, and every listed
+count for census. Each round runs two tasks per tested worker. The whole test is
+expected to take about 10 minutes, with a 30-minute ceiling. The X2 is dedicated
+to this project, so launch in normal mode.
 
 **Worker count.** Dispatch runs the smaller of `--workers`, the live
 `--max-workers` control, the mode cap (normal `budget - 1` = 31, work

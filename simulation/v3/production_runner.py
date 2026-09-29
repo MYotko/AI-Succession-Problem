@@ -525,17 +525,36 @@ def a4_projection(spec, configuration, effective_workers, run_root, code, from_i
     return {"total_seconds": total, "remaining_budget_seconds": remaining, "phases": detail, "fits": total <= remaining}
 
 
-def configuration_test(root, phase, profile, settings, deadline, launch_number):
-    candidates = profile["workers_x2"] if settings["profile"] == "x2" else profile["workers_local"]
-    if settings["profile"] == "x2" and not {8, 12, 16, 24, 32}.issubset(candidates):
+def configuration_candidates(candidates, memory_cap=None):
+    """Worker counts to test. A worker count above a phase's memory cap can never
+    be dispatched, so an A4 memory-capped phase tests the listed counts up to its
+    cap, plus the cap itself (operator, 2026-09-29). Uncapped phases are unchanged."""
+    if memory_cap is None or memory_cap >= max(candidates):
+        return list(candidates)
+    cap = max(1, int(memory_cap))
+    return sorted({w for w in candidates if w <= cap} | {cap})
+
+
+def configuration_job_count(profile, workers, x2):
+    """Jobs per configuration round: the profile's fixed count, or, when the
+    profile sets ``jobs_per_worker``, that many per tested worker (two waves)."""
+    if profile.get("jobs_per_worker"):
+        return max(workers, profile["jobs_per_worker"] * workers)
+    return profile["jobs_x2"] if x2 else profile["jobs_local"]
+
+
+def configuration_test(root, phase, profile, settings, deadline, launch_number, memory_cap=None):
+    listed = profile["workers_x2"] if settings["profile"] == "x2" else profile["workers_local"]
+    if settings["profile"] == "x2" and not {8, 12, 16, 24, 32}.issubset(listed):
         raise ValueError("missing required X2 configuration candidates")
+    candidates = configuration_candidates(listed, memory_cap)
     if settings["threads"] == 2 and not profile.get("material_multithreaded_numerics"):
         raise ValueError("two threads require profiling evidence")
     pairs = [(w, t) for t in profile.get("threads", [1]) for w in candidates if w <= settings["caps"]["configuration"] and w * t <= settings["cpu_budget"] and t <= settings["threads"]]
     measurements = []
     for round_index in range(profile.get("rounds", 2)):
         for w, t in pairs if round_index % 2 == 0 else reversed(pairs):
-            count = profile["jobs_x2"] if settings["profile"] == "x2" else profile["jobs_local"]
+            count = configuration_job_count(profile, w, settings["profile"] == "x2")
             if count < w:
                 raise ValueError("configuration work must occupy every tested worker")
             configs = profile.get("configs", [profile["config"]])
@@ -681,9 +700,17 @@ def launch(spec_path, root, settings, service_record=None):
         history.append(record)
         atomic_json(root / "launches.json", history)
         config_deadline = min(deadline, time.time() + spec.get("configuration_seconds", 900))
+        is_a4 = spec.get("schema") == "v3-A4-validation-1"
+        # Memory caps come first, measured before any task runs, so a capped
+        # phase's configuration test never tries a worker count it cannot use.
+        mem_caps = {p: memory_worker_cap(spec.get("memory_estimate_gb", {}).get(p)) for p in spec["phases"]} if is_a4 else {}
+        if is_a4:
+            record["memory_caps"] = mem_caps
+            atomic_json(root / "launches.json", history)
         try:
             for phase, profile in spec["configuration"].items():
-                data = configuration_test(root, phase, profile, settings, config_deadline, len(history))
+                data = configuration_test(root, phase, profile, settings, config_deadline, len(history),
+                                          memory_cap=mem_caps.get(phase) if is_a4 else None)
                 record["configuration"][phase] = data
                 atomic_json(root / "launches.json", history)
         except BaseException as exc:
@@ -693,8 +720,6 @@ def launch(spec_path, root, settings, service_record=None):
                 atomic_json(root / "cost_projection.json", {"status": "incomplete", "reason": "configuration test incomplete; scientific dispatch refused"})
             raise
         outcomes = {}
-        is_a4 = spec.get("schema") == "v3-A4-validation-1"
-        mem_caps = {p: memory_worker_cap(spec.get("memory_estimate_gb", {}).get(p)) for p in spec["phases"]} if is_a4 else {}
         effective_workers = {}
         if is_a4:
             mode_cap = settings["caps"][settings["mode"]]

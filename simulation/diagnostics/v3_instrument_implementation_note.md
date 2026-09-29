@@ -3477,4 +3477,20 @@ from that original cap, never above the current one. The same peaks now settle a
 resume test relaunches a finished run; an interrupted launch and its resume were
 exercised in the smoke through the runner.
 
+**First registered launch, 2026-09-29.** The run at 35035b0b refused scientific
+dispatch without starting any job. A first attempt failed because `llm` was not
+on the PATH of a non-interactive shell. The relaunch then exhausted the
+900-second configuration budget: every phase tested 8 to 32 workers with 32
+tasks per round, and the 19 GB phase alone took about 13 minutes before stopping
+at 16 workers, a count its memory cap of 4 could never use. Fix, approved by
+the operator on 2026-09-29: `configuration_candidates` limits a memory-capped A4 phase to the listed
+counts at or below its cap, plus the cap; `configuration_job_count` runs two tasks
+per tested worker; memory caps are measured before the configuration test; the
+A4 configuration ceiling is 1,800 seconds. Uncapped phases and the other runners
+are unchanged. The A2 boundary hash of `production_runner.py` was re-pinned;
+`verified_record` and `verify_instrument` pass, and the full suite passes (329
+tests). The failed run root stays on the X2 as a record; the relaunch uses a new
+root and a re-prepared plan, with 47.5 wall hours so the cumulative 48-hour
+ceiling holds across both launches.
+
 No commit, registered run, network or X2 action was performed.

@@ -410,7 +410,7 @@ def prepare(source_root, calibration_path, registration=None, wall_hours=48, a3_
                  "tag": "v3_tables", "code_hash": code_identity(), "source_root": str(source_root.resolve()),
                  "source_file_sha256": source_file_sha256, "source_manifest_sha256": digest(manifest),
                  "source_code_hash": source_code, "calibration_path": calibration_path,
-                 "wall_seconds": wall_hours * 3600, "cleanup_reserve_seconds": 1200, "configuration_seconds": 900,
+                 "wall_seconds": wall_hours * 3600, "cleanup_reserve_seconds": 1200, "configuration_seconds": 1800,
                  "phases": list(PHASES), "M": counts["M"], "M_FV": counts["M_FV"],
                  "groups": cv.GROUPS, "alpha": cv.ALPHA, "min_visits": cv.MIN_VISITS,
                  "validate_replicates": list(cv.VALIDATE_REPLICATES), "fv_validate_replicate": cv.FV_VALIDATE_REPLICATE,
@@ -468,7 +468,7 @@ def _configuration_profiles(source_root, source_code, manifest, plan_hash, setti
         cfg = reps.get(key) or reps["census_cfg"]  # fall back to census if a route is absent
         profiles[phase] = {"kind": kind, "config": cfg, "configs": [cfg], "jobs_local": 4, "jobs_x2": 32,
                            "workers_local": [2, 4], "workers_x2": [8, 12, 16, 24, 32], "threads": [1], "rounds": 1,
-                           "shortened_length_only": True}
+                           "jobs_per_worker": 2, "shortened_length_only": True}
     return profiles
 
 

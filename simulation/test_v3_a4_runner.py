@@ -80,6 +80,26 @@ def test_successive_peaks_do_not_compound():
     assert pr.next_memory_cap(None, None, 9.5, 12.0) is None
 
 
+def test_configuration_candidates_respect_memory_caps():
+    # First registered launch (2026-09-29) timed out testing the 19 GB phase at
+    # 8 to 32 workers when only 4 can ever run. Capped phases test counts up to
+    # their cap, plus the cap; uncapped phases keep every listed count.
+    listed = [8, 12, 16, 24, 32]
+    assert pr.configuration_candidates(listed, None) == listed
+    assert pr.configuration_candidates(listed, 630) == listed        # census: cap above every candidate
+    assert pr.configuration_candidates(listed, 19) == [8, 12, 16, 19]
+    assert pr.configuration_candidates(listed, 9) == [8, 9]
+    assert pr.configuration_candidates(listed, 4) == [4]
+    assert pr.configuration_candidates(listed, 0) == [1]
+
+
+def test_configuration_job_count_two_waves():
+    assert pr.configuration_job_count({"jobs_per_worker": 2, "jobs_x2": 32}, 4, True) == 8
+    assert pr.configuration_job_count({"jobs_per_worker": 2, "jobs_x2": 32}, 19, True) == 38
+    assert pr.configuration_job_count({"jobs_x2": 32, "jobs_local": 4}, 8, True) == 32
+    assert pr.configuration_job_count({"jobs_x2": 32, "jobs_local": 4}, 2, False) == 4
+
+
 def test_worker_records_peak_rss():
     # The durable output carries peak_rss_bytes, which dispatch reads to raise
     # a phase estimate.
