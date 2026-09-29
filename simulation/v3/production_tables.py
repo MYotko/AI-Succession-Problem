@@ -101,7 +101,10 @@ class ProductionTables:
             sensitivity = sum(row.get("sensitivity", {}).get("selected", False) and row["sensitivity"].get("passed") is False for row in self.rows.values())
             raise RuntimeError(f"table sensitivity screens are incomplete or failed: {sensitivity} selected rows failed; {rejected} total not_estimable rows")
         for row in self.rows.values():
-            if row["status"] != "estimated" or not row.get("continuation", {}).get("entries"):
+            # A4: a plain row certified through C0 alone has no fine entries but
+            # a published C0, which is valid support.
+            has_support = bool(row.get("continuation", {}).get("entries")) or (row.get("route") == "plain" and row.get("c0") is not None)
+            if row["status"] != "estimated" or not has_support:
                 raise RuntimeError("registered execution rejects missing or not_estimable table rows")
 
     def lookup_available(self, rules, bins, **context):
@@ -123,6 +126,13 @@ class ProductionTables:
             if row is not None and row["rule_hash"] != digest(rule.__dict__):
                 raise ValueError("stale rule identity")
             entry = self.continuations.get(key, {}).get(tuple(map(int, summary)))
+            # A4: for a plain row with a published C0, every population-category-0
+            # key resolves to that single stored C0, whether or not an entry
+            # exists. Nothing else in the lookup changes: FV rows, extinct
+            # endpoints and every other key are as before.
+            if (not dead[index] and row is not None and row.get("route") == "plain"
+                    and int(summary[0]) == 0 and row.get("c0") is not None):
+                entry = row["c0"]
             reason = ("missing_or_not_estimable_row" if row is None or row["status"] != "estimated" else
                       "unpublished_continuation_bin" if entry is None and not dead[index] else None)
             if reason is not None:

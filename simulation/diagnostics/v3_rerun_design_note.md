@@ -907,3 +907,223 @@ Its full evidence archive is
 SHA256 `26eb3625255b17d3c0874a0219a139edd95168b511b8e130b7370145b010ac18`.
 Implementation-note section 23 states the final checks and limits;
 section 22's identity and sections 19 and 21 remain historical records.
+
+### Amendment A4, adopted 2026-09-29: validated continuation support
+
+**Timing and status.** The operator approved A4 on 2026-09-29 (D30), after
+blind double certification of its design by two independent reviewers from
+different model families. It is effective for registered execution from the
+commit that adds it.
+
+It was written after the registered A1 table family and its failed screens
+had been read, as for A3. It was also written after non-registered planning
+studies had read A1 job configurations and fitted values, and had simulated
+those jobs on fresh planning seeds. No planning figure enters any registered
+result.
+
+No registered rerun manifest, job or output existed, and none was read.
+
+A3 was adopted but never executed. A non-registered probe of its eight
+hardest jobs, at eight times A1's populations, still failed two of them. One
+failed 14 of 15 rows, with its worst row at 5.751 against a limit of 4.906.
+A4 supersedes A3. The A3 repair stage will not run, and
+`simulation/v3/table_compatibility_A3.json` is not used.
+
+**Evidence and reason.** A1's continuation residual statistic is the
+maximum, over published bins, of a point estimate of the mean Bellman
+residual. Each estimate comes from two held-out groups: 128 plain
+trajectories, or two Fleming-Viot (FV) groups. In sparsely visited bins that
+maximum is dominated by sampling noise, and more effort did not reliably
+clear it.
+
+In a non-registered planning study of 24 A1 jobs, each given 32 fresh
+independent groups, no bin showed a violation under any interval method
+tried. No plain bin's point estimate exceeded the limit. Only 33 of 35,320
+FV bins did, and those held a negligible share of visits.
+
+A second planning study found a defect in the committed fit. The plain trace
+keeps recording a path after extinction, so `fit_transitions` counts extinct
+states as sources in population-category-0 bins, where the registered engine
+never uses a continuation value. On living sources, A1's population-0 values
+showed mean residuals up to 6.7 times the limit. A4 corrects this for the
+plain route. FV sources are resampled living particles, so FV fits are
+unaffected.
+
+A4 replaces the point-estimate maximum with interval tests on fresh data,
+and publishes only the cells that pass them.
+
+**The rule.** In every row, primary and sensitivity, the condition
+`bellman_residual_empirical <= 0.05 span` is replaced by two conditions: the
+row's validated support is nonempty, and the row passes the availability
+floor below.
+
+Every other screen and threshold is unchanged: flow half-width, half-window
+drift, the route screen, held-out coverage, fixed-point convergence, the
+sensitivity contrasts, and the Bonferroni allocation over 13,750 primary
+rows.
+
+A row's published continuation entries become its validated support. Every
+other cell is unpublished, so its scores are unavailable under A1's
+unpublished-bin rule. The tolerance stays `tau = 0.05 W`, where W is the
+row's flow range.
+
+For a transition from a living source state in cell b, the residual is `(1 -
+beta) f + beta V(next) - C(b)`:
+- `beta = exp(-0.01)`, and f is the row's scored flow.
+- `V(next)` is the published value of the next state's cell, or the
+  extinction flow `lower` if the next state is extinct.
+- Any other transition is not covered.
+
+**Validation data.** Seeds are SHA-256 digests of a stream tag, the A1 job
+seed and a replicate index, truncated to 60 bits. The tags are `v3_R_fit`,
+`v3_R_validate` and `v3_R_census`. The run asserts that these seeds are
+pairwise distinct, and distinct from every A1, probe and planning seed. A
+collision halts it.
+
+Each plain table gets one fitting replicate and three validation replicates.
+Each FV table gets one validation replicate. Every replicate has 32 groups
+and otherwise the job's own A1 settings. A primary plain replicate therefore
+has 64 runs per group, 2,048 independent trajectories, and a primary FV
+replicate has 256 particles per group. Sensitivity jobs keep their doubled
+population or doubled length.
+
+Nothing from the validation replicates enters a fitted value, a width or a
+family count.
+
+**Plain tier, certified.** In each plain row, all population-category-0 bins
+form one cell. Its value C0 is the Bellman fixed point on the fitting
+replicate's covered living-source transitions:
+
+`C0 = sum[(1 - beta) f + beta V(next)] / N`
+
+`V(next)` is C0 inside the cell, the A1 value in a published cell, and
+`lower` at extinction. Transitions into unpublished cells are excluded. The
+unique solution is `C0 = a / (N - beta T)`, where T counts transitions that
+stay in the cell. C0 is published only with at least four fitting visits,
+the committed minimum. Every other plain cell keeps its A1 value.
+
+The unit is a validation trajectory with at least one covered living-source
+visit to the cell. `m_i` is that trajectory's mean residual in the cell. The
+tested quantity is `theta_b = E[m_i | N_i >= 1]`.
+
+The width `w = (1 - beta) W + beta (vmax - lower)` is computed from the
+fitted table before the validation replicates exist. Here `vmax` is the
+row's largest published value, including C0. It bounds every `m_i`, provided
+every flow and every published value lies in `[lower, upper]`. That is
+checked, and any failure halts the run.
+
+The test is Maurer and Pontil's empirical Bernstein bound, two-sided:
+
+`rho = sqrt(2 V_n ln(4M/alpha) / n) + 7 w ln(4M/alpha) / (3 (n - 1))`
+
+- `V_n` is the unbiased sample variance of the `m_i`, and n is the number of
+  units.
+- **Certified:** `[mbar - rho, mbar + rho]` lies within `[-tau, tau]`.
+- **Violation:** the interval is disjoint from `[-tau, tau]`.
+- **Unresolved:** anything else, or `n < 2`.
+
+M is fixed before any new data exist: for every plain row, primary and
+sensitivity, the A1 published cells with population category above 0, plus
+one. `alpha = 0.05`.
+
+A certified cell is published only if its visit-weighted point estimate `sum
+S / sum N`, from the same validation data, is also within `[-tau, tau]`.
+Neighboring cells are retested against C0 in the same run.
+
+The statement is: with probability at least 0.95, every published plain cell
+has `|theta_b| <= tau`, simultaneously. It concerns the plain route only.
+
+**FV tier, asymptotic and not certified.** The units are the 32 groups,
+because particles within a group are dependent through resampling. Over
+groups with `N_g >= 1`:
+- **Estimate:** `mu = sum S_g / sum N_g`.
+- **Variance (delta method):** `sum (S_g - mu N_g)^2 / (n (n - 1) Nbar^2)`,
+  with `Nbar = sum N_g / n`.
+- **Interval:** `mu` plus or minus `t` times the standard deviation, where
+  `t` is the Student t quantile with `n - 1` degrees of freedom at `1 -
+  alpha / (2 M_FV)`. `M_FV` is the number of A1 published FV cells.
+
+A cell passes only if this interval lies within `[-tau, tau]`, and so does
+the Fieller interval at the same quantile. Cells with fewer than 16
+contributing groups, or an unbounded Fieller set, are unresolved.
+
+FV rows carry the label "asymptotic, not certified" in every result that
+uses them, and in the claims register.
+
+**Availability floor.** For each table, the census follows the committed
+law, `v3.unpublished_bins.endpoint_counts`: held-out plain paths from the
+archived initial law, and 20-step endpoints over 500 start steps, on the
+census seed. It is measured among living endpoints only, and it adds the
+fraction among low-population living endpoints, those whose endpoint has
+population category 0.
+
+A row with no living endpoints in its census has nothing to look up. It
+passes, and is reported as not assessed. Otherwise, a row passes if at most
+2 percent of its living endpoints fall outside its validated support, and at
+most 5 percent of its low-population living endpoints do when it has at
+least 50 of them. Below 50, the low-population fraction is reported but not
+assessed.
+
+A row that fails is not_estimable. The registered loader rejects any family
+with a not_estimable row, so registered dispatch stays closed and the
+failure is reported.
+
+Unavailable scores inside a rerun follow the committed rules in
+`v3.integration`: the rule is left out of that comparison, with the balanced
+fallback when no scoreable rule remains. The floor bounds how often that
+happens.
+
+**Publication.** A4 publishes a new table family.
+- Retained A1 values keep their A1 producer identity.
+- C0 is stored once per plain row. Its error is the committed bounded-domain
+  enclosure, `max(C0 - lower, upper - C0)`.
+- The table lookup resolves any population-category-0 key of that row to C0,
+  and the registered loader accepts a plain row whose validated support is
+  C0 alone. These are the only changes to the loader and lookup. For FV
+  rows, and for every other key, the lookup is unchanged.
+- The production runner gains the A4 fitting, validation and census job
+  kinds, and runs them in phases. Its other job kinds are unchanged.
+- A4 re-pins the approved boundary hashes of `v3/production_runner.py` and
+  `v3/production_tables.py` in `simulation/v3/table_compatibility_A2.json`.
+  The record keeps the previous hashes in an `a4` note, and the loader still
+  refuses any unapproved change.
+- The A1 publication and the failed A1 family stay on record, unchanged.
+
+The publisher verifies the pinned A1 publication, every fitting, validation
+and census completion, and every unchanged screen. It then writes a sealed
+compatibility receipt binding the new table's hash, both producers, the
+seeds, M and `M_FV`, as A3 specified for its family.
+
+**What A4 does not establish.** The certificate bounds `theta_b`, the
+per-trajectory mean. The visit-weighted mean is only checked, not certified.
+Aggregation bias within a cell remains uncovered.
+
+The validation law, living paths under the table's own fixed rule and
+kernel, can differ from the states a rerun's allocations visit. The census
+law is the committed proxy for that difference. FV cells have no
+certificate.
+
+**Execution and cost.**
+- **Stages:** the plain fitting stage, then validation (plain and FV), then
+  the census, then publication.
+- **Compute (planning estimates, not measurements):** about 79 core-hours
+  for the plain tables (about 5 hours on 16 workers), and about 257
+  core-hours for the FV tables (about 26 hours at the roughly 10 workers
+  that 9.5 GB per task allows).
+- **Runner:** the production runner's configuration test, durable completion
+  records, resume, and mode control apply. The model server is down for the
+  whole run.
+- **Ceiling:** a cumulative 48-hour wall ceiling. If the configuration test
+  projects past it, the run stops and reports the gap.
+
+The run halts on:
+- a flow or value outside `[lower, upper]`;
+- a seed collision;
+- an A1 source-hash mismatch;
+- nondeterminism in a re-executed sample task.
+
+**Reporting.** For each tier, the report gives the counts of certified,
+unresolved and violating cells, and their shares of visits. It also gives
+the plain cells that fail the visit-weighted safeguard, every violation as a
+finding, and each row's floor results. It reports no survival, extinction or
+fire rate.

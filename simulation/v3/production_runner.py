@@ -23,6 +23,79 @@ def event(root, kind, **fields):
         os.fsync(stream.fileno())
 
 
+def mem_available_bytes():
+    """Available physical memory, cross-platform, or None if unknown."""
+    if os.name == "nt":
+        class MEMORYSTATUSEX(ctypes.Structure):
+            _fields_ = [("dwLength", ctypes.c_ulong), ("dwMemoryLoad", ctypes.c_ulong),
+                        ("ullTotalPhys", ctypes.c_ulonglong), ("ullAvailPhys", ctypes.c_ulonglong),
+                        ("ullTotalPageFile", ctypes.c_ulonglong), ("ullAvailPageFile", ctypes.c_ulonglong),
+                        ("ullTotalVirtual", ctypes.c_ulonglong), ("ullAvailVirtual", ctypes.c_ulonglong),
+                        ("ullAvailExtendedVirtual", ctypes.c_ulonglong)]
+        status = MEMORYSTATUSEX()
+        status.dwLength = ctypes.sizeof(MEMORYSTATUSEX)
+        if not ctypes.WinDLL("kernel32", use_last_error=True).GlobalMemoryStatusEx(ctypes.byref(status)):
+            return None
+        return int(status.ullAvailPhys)
+    try:
+        with open("/proc/meminfo") as stream:
+            for line in stream:
+                if line.startswith("MemAvailable:"):
+                    return int(line.split()[1]) * 1024
+    except OSError:
+        pass
+    return None
+
+
+def peak_rss_bytes():
+    """Peak resident set size of this process, cross-platform, or None."""
+    if os.name == "nt":
+        class PROCESS_MEMORY_COUNTERS(ctypes.Structure):
+            _fields_ = [("cb", ctypes.c_ulong), ("PageFaultCount", ctypes.c_ulong),
+                        ("PeakWorkingSetSize", ctypes.c_size_t), ("WorkingSetSize", ctypes.c_size_t),
+                        ("QuotaPeakPagedPoolUsage", ctypes.c_size_t), ("QuotaPagedPoolUsage", ctypes.c_size_t),
+                        ("QuotaPeakNonPagedPoolUsage", ctypes.c_size_t), ("QuotaNonPagedPoolUsage", ctypes.c_size_t),
+                        ("PagefileUsage", ctypes.c_size_t), ("PeakPagefileUsage", ctypes.c_size_t)]
+        counters = PROCESS_MEMORY_COUNTERS()
+        counters.cb = ctypes.sizeof(PROCESS_MEMORY_COUNTERS)
+        handle = ctypes.WinDLL("kernel32", use_last_error=True).GetCurrentProcess()
+        if not ctypes.WinDLL("psapi", use_last_error=True).GetProcessMemoryInfo(handle, ctypes.byref(counters), counters.cb):
+            return None
+        return int(counters.PeakWorkingSetSize)
+    try:
+        import resource
+        return int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss) * 1024  # ru_maxrss is KB on Linux
+    except Exception:
+        return None
+
+
+def lowered_cap(cap, initial_estimate, new_estimate):
+    """Lower a fixed worker cap by the estimate ratio when a measured peak raises
+    the estimate. Never raises the cap."""
+    if cap is None or not initial_estimate or not new_estimate:
+        return cap
+    return min(cap, max(1, int(cap * initial_estimate / new_estimate)))
+
+
+def next_memory_cap(original_cap, current_cap, initial_estimate, new_estimate):
+    """The phase's memory cap after a measured peak raises its estimate.
+
+    Always derived from the phase's ORIGINAL memory cap, never from an already
+    lowered or combined CPU/memory cap, so successive peaks do not compound.
+    The result never exceeds the current cap."""
+    if current_cap is None:
+        return None
+    return min(current_cap, lowered_cap(original_cap, initial_estimate, new_estimate))
+
+
+def memory_worker_cap(estimate_gb, headroom=0.8):
+    """floor(headroom * MemAvailable / estimate), or None when unknown."""
+    available = mem_available_bytes()
+    if not estimate_gb or estimate_gb <= 0 or available is None:
+        return None
+    return max(1, int(headroom * available / (estimate_gb * 1e9)))
+
+
 def caps(profile, budget):
     if budget < 1 or profile not in ("local", "x2"):
         raise ValueError("invalid CPU budget/profile")
@@ -85,8 +158,14 @@ def completed(root, job, code):
     return value
 
 
-def execute(job, registered=False, registration=None):
+def execute(job, registered=False, registration=None, root=None):
     kind, config = job["kind"], job["config"]
+    if kind in ("a4_fit", "a4_validate", "a4_census"):
+        # A4 validated continuation stages. The A4 stream seed travels in the
+        # config; the runner's own job seed is unused. root locates the sibling
+        # fit phase for a plain validate job.
+        from .table_validation_a4 import run_stage_job
+        return run_stage_job(job, root)
     if kind == "fixture":
         if registered or job["tag"] != "validation":
             raise ValueError("runner fixtures are validation only")
@@ -147,9 +226,10 @@ def worker(root_name, job, code, threads, registered, registration):
             info = runtime(threads)
             started = time.time()
             before = time.perf_counter()
-            result = execute(job, registered, registration)
+            result = execute(job, registered, registration, root=root)
             output = {"job": job, "code_hash": code, "runtime": info, "result": result,
-                      "seconds": time.perf_counter() - before, "started_epoch": started, "finished_epoch": time.time()}
+                      "seconds": time.perf_counter() - before, "started_epoch": started, "finished_epoch": time.time(),
+                      "peak_rss_bytes": peak_rss_bytes()}
             path = root / "outputs" / (job["id"] + ".json")
             atomic_json(path, output)
             atomic_json(root / "records" / (job["id"] + ".json"),
@@ -160,12 +240,24 @@ def worker(root_name, job, code, threads, registered, registration):
         raise
 
 
-def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=None, control_root=None, registered=False, registration=None, completion_screen=None):
+def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=None, control_root=None, registered=False, registration=None, completion_screen=None, memory_cap=None, memory_estimate_gb=None):
     root = scoped(root)
     root.mkdir(parents=True, exist_ok=True)
     control_root = control_root or root
     done = {j["id"] for j in jobs if completed(root, j, code) is not None}
     pending = [j for j in jobs if j["id"] not in done]
+    # The memory cap is fixed once, at phase start, from the estimate the caller
+    # (launch) computed against MemAvailable before any of this phase's tasks
+    # ran. It is NOT recomputed from live MemAvailable, which already excludes
+    # running tasks and would double-count them. It only falls when a measured
+    # peak raises the estimate, by the same ratio. Live pressure is left to the
+    # 1.2x guard. memory_hold events are rate-limited.
+    memory_estimate = [memory_estimate_gb]
+    initial_estimate = memory_estimate_gb
+    memory_cap_state = [memory_cap]
+    if memory_cap is not None:
+        event(root, "memory_cap", cap=memory_cap, estimate_gb=memory_estimate_gb)
+    last_memory_hold = [0.0]
     old = read(root / "active.json") if (root / "active.json").exists() else {}
     if old.get("pids") and (old.get("machine") != platform.node() or any(process_alive(p) for p in old["pids"])):
         raise RuntimeError("recorded workers may still exist; refusing unsafe resume")
@@ -189,7 +281,9 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
     def stop(reason):
         for process, job, _ in active.values():
             if process.is_alive():
-                event(root, "restart_required", job=job["id"], original_seed=job["seed"], reason=reason)
+                a4 = job["kind"].startswith("a4_")
+                event(root, "restart_required", job=job["id"], runner_seed_unused=a4,
+                      **({} if a4 else {"original_seed": job["seed"]}), reason=reason)
                 process.terminate()
         stop_end = time.monotonic() + 10
         for process, _, _ in active.values():
@@ -244,16 +338,25 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                 if not process.is_alive():
                     process.join()
                     del active[key]
-                    if completed(root, job, code) is None:
+                    output = completed(root, job, code)
+                    if output is None:
                         attempts[key] = attempts.get(key, 0) + 1
                         atomic_json(attempts_path, attempts)
-                        event(root, "restart", job=key, attempt=attempts[key], seed=job["seed"])
+                        event(root, "restart", job=key, attempt=attempts[key], runner_seed_unused=job["kind"].startswith("a4_"),
+                              **({} if job["kind"].startswith("a4_") else {"seed": job["seed"]}))
                         if attempts[key] >= 3:
                             raise RuntimeError("job failed three times; inspect durable failure")
                         pending.insert(0, job)
                     else:
                         done.add(key)
                         event(root, "complete", job=key, pid=process.pid)
+                        # Raise the memory estimate if a completed task's peak RSS
+                        # exceeded it; this only lowers the derived worker cap.
+                        peak = output.get("peak_rss_bytes")
+                        if peak and memory_estimate[0] and peak > memory_estimate[0] * 1e9:
+                            memory_estimate[0] = peak / 1e9
+                            memory_cap_state[0] = next_memory_cap(memory_cap, memory_cap_state[0], initial_estimate, memory_estimate[0])
+                            event(root, "memory_estimate_raised", estimate_gb=round(memory_estimate[0], 2), cap=memory_cap_state[0], job=key)
                         if check(job):
                             reason = "screen_failure"
                             stop(reason)
@@ -262,11 +365,27 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
             if reason == "screen_failure":
                 break
             effective_limit = min(cap, selected["workers"])
+            if memory_cap_state[0] is not None:
+                effective_limit = min(effective_limit, max(1, memory_cap_state[0]))
             if len(active) <= effective_limit and mode_effective != mode:
                 mode_effective = mode
                 event(root, "mode_effective", mode=mode, active=len(active), worker_limit=effective_limit)
             slots = sum(t for _, _, t in active.values())
             while pending and not control.get("stop_dispatch") and len(active) < effective_limit and slots + selected["threads"] <= settings["cpu_budget"]:
+                # Live memory guard: do not start a task while MemAvailable is
+                # below 1.2 times its estimate. Halt if it holds with nothing
+                # active (no task will ever free enough memory). Rate-limit the
+                # event to at most once per minute.
+                if memory_estimate[0]:
+                    available = mem_available_bytes()
+                    if available is not None and available < 1.2 * memory_estimate[0] * 1e9:
+                        if not active:
+                            raise RuntimeError("memory guard: MemAvailable %.1f GB below 1.2x estimate %.1f GB with no active task"
+                                               % (available / 1e9, memory_estimate[0]))
+                        if time.monotonic() - last_memory_hold[0] >= 60:
+                            event(root, "memory_hold", estimate_gb=memory_estimate[0], available_gb=round(available / 1e9, 1), active=len(active))
+                            last_memory_hold[0] = time.monotonic()
+                        break
                 job = pending.pop(0)
                 if attempts.get(job["id"], 0) >= 3:
                     raise RuntimeError("job has exhausted retries")
@@ -275,7 +394,12 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                 active[job["id"]] = (process, job, selected["threads"])
                 slots += selected["threads"]
                 maximum = max(maximum, len(active))
-                event(root, "dispatch", job=job["id"], seed=job["seed"], pid=process.pid, active=len(active), slots=slots, mode=mode)
+                # A4 stages ignore the runner's job seed (the stream seed travels
+                # in the config); label it so the event is not misread.
+                is_a4 = job["kind"].startswith("a4_")
+                event(root, "dispatch", job=job["id"], runner_seed_unused=is_a4,
+                      **({} if is_a4 else {"seed": job["seed"]}),
+                      pid=process.pid, active=len(active), slots=slots, mode=mode)
                 publish()
             status = publish()
             if time.monotonic() - previous_report >= 30:
@@ -298,6 +422,107 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
             for sig, handler in handlers.items():
                 signal.signal(sig, handler)
     return {**status, "wall_seconds": time.perf_counter() - start}
+
+
+def nondeterminism_check(phase_root, jobs, registered=False, registration=None):
+    """Re-execute one completed task in a fresh spawned worker and compare its
+    result hash. The task is chosen by a recorded seeded draw among the phase's
+    shortest tasks (by count x length), so the recheck fits the deadline. A
+    mismatch halts; the result is recorded durably. The recompute uses the same
+    spawned worker path (with configure_threads) as the original, since
+    bit-identity holds within that path but not across process-launch modes.
+    A4 stage results carry no wall time, so the digest is deterministic."""
+    phase_root = scoped(phase_root)
+    code = code_identity()
+    done = [j for j in jobs if completed(phase_root, j, code) is not None]
+    if not done:
+        result = {"checked": None, "reason": "no completed task"}
+        atomic_json(phase_root / "nondeterminism_check.json", result)
+        return result
+
+    def cost(job):
+        # Genuinely short task = smallest population x length, from the job's
+        # actual (registered) A1 settings, with any smoke override applied.
+        c = job["config"]
+        s = (c.get("a1_job") or {}).get("config", {}).get("settings") or {}
+        per_group = s.get("particles" if c.get("route") == "fv" else "runs_per_group", 1)
+        length = 519 if c.get("stage") == "census" else s.get("burn", 0) + s.get("measure", 0)
+        ov = c.get("settings_override") or {}
+        if ov:
+            length = ov.get("census_measure", length) if c.get("stage") == "census" else ov.get("burn", 0) + ov.get("measure", 0)
+        return per_group * length
+    ranked = sorted(done, key=lambda j: (cost(j), j["id"]))
+    shortest = [j for j in ranked if cost(j) == cost(ranked[0])] or ranked
+    draw = int(digest(["A4-nondeterminism", phase_root.name, sorted(j["id"] for j in shortest)]), 16)
+    job = shortest[draw % len(shortest)]
+    # A sibling of the phase dirs, so a plain validate recompute still finds its
+    # fit phase at temp.parent/"fit".
+    temp = phase_root.parent / ("_nd_" + phase_root.name)
+    process = mp.get_context("spawn").Process(target=worker, args=(str(temp), job, code, 1, registered, registration))
+    process.start()
+    process.join()
+    fresh = completed(temp, job, code)
+    original = completed(phase_root, job, code)
+    if fresh is None or digest(fresh["result"]) != digest(original["result"]):
+        atomic_json(phase_root / "nondeterminism_failure.json", {"epoch": time.time(), "job": job["id"], "recomputed": fresh is not None})
+        raise RuntimeError("A4 nondeterminism: re-executed task %s differs" % job["id"])
+    result = {"checked": job["id"], "candidates": len(shortest), "matched": True}
+    atomic_json(phase_root / "nondeterminism_check.json", result)
+    return result
+
+
+def a4_projection(spec, configuration, effective_workers, run_root, code, from_index, now, deadline):
+    """Project wall time for the REMAINING work from ``from_index`` onward.
+
+    Counts only jobs without a valid completed() record, skips finished phases,
+    and scales each job by its own population x length (not the phase maximum)
+    from the per-cell config rate. For validate_plain the config task is
+    self-contained (fit + validate), so the fit config time is subtracted. The
+    worker count per phase is min(mode cap, chosen workers, memory cap), passed
+    in ``effective_workers``. One nondeterminism recheck (the shortest remaining
+    task) is added per remaining phase. The cleanup reserve is NOT added: the
+    budget deadline already subtracts it. ``fits`` is whether the total fits the
+    remaining budget."""
+    GROUPS = 32
+
+    def median(name):
+        s = sorted(x for m in configuration.get(name, []) for x in m.get("job_seconds", []))
+        return s[len(s) // 2] if s else 0.0
+
+    def cells(route, per_group, length):
+        return GROUPS * per_group * length
+
+    total, detail = 0.0, {}
+    for phase in spec["phases"][from_index:]:
+        jobs = [j for j in spec["jobs"] if j["config"]["phase"] == phase]
+        pending = [j for j in jobs if completed(run_root / phase, j, code) is None] if run_root is not None else jobs
+        if not pending:
+            detail[phase] = {"remaining": 0, "wall_seconds": 0.0}
+            continue
+        task_short = median(phase)
+        if phase == "validate_plain":
+            task_short = max(0.0, task_short - median("fit"))
+        cfg = spec["configuration"][phase]["config"]
+        override = cfg.get("settings_override", {})
+        rep = cfg["a1_job"]["config"]["settings"]
+        rep_per_group = rep["particles"] if cfg["route"] == "fv" else rep["runs_per_group"]
+        short_len = override.get("census_measure", 44) if phase == "census" else override.get("burn", 8) + override.get("measure", 24)
+        config_cells = cells(cfg["route"], rep_per_group, short_len)
+        rate = task_short / config_cells if config_cells else 0.0
+        workers = max(1, effective_workers.get(phase, 1))
+        per_job = []
+        for j in pending:
+            s = j["config"]["a1_job"]["config"]["settings"]
+            route = j["config"]["route"]
+            per_group = s["particles"] if route == "fv" else s["runs_per_group"]
+            full_len = 519 if phase == "census" else s["burn"] + s["measure"]
+            per_job.append(rate * cells(route, per_group, full_len))
+        wall = sum(per_job) / workers + (min(per_job) if per_job else 0.0)  # throughput + one recheck
+        detail[phase] = {"remaining": len(pending), "workers": workers, "task_short_seconds": task_short,
+                         "per_cell_rate": rate, "wall_seconds": wall}
+        total += wall
+    remaining = deadline - now
+    return {"total_seconds": total, "remaining_budget_seconds": remaining, "phases": detail, "fits": total <= remaining}
 
 
 def configuration_test(root, phase, profile, settings, deadline, launch_number):
@@ -364,6 +589,15 @@ def validate_spec(spec, settings):
         from .production_tables import ProductionTables
         calibrated, loaded = {}, set()
         for job in spec["jobs"]:
+            if job["kind"] in ("a4_fit", "a4_validate", "a4_census"):
+                # A4 stages carry their calibration through the referenced A1 job.
+                cal_path = job["config"]["a1_job"]["config"].get("calibration_path")
+                if not cal_path:
+                    raise RuntimeError("registered A4 jobs need frozen calibration")
+                if cal_path not in calibrated:
+                    calibrated[cal_path] = read(SIMULATION / cal_path)
+                    validate_calibration(calibrated[cal_path], registered=True)
+                continue
             if job["kind"] in ("table", "rerun"):
                 config = job["config"]
                 if not config.get("calibration_path"):
@@ -459,10 +693,35 @@ def launch(spec_path, root, settings, service_record=None):
                 atomic_json(root / "cost_projection.json", {"status": "incomplete", "reason": "configuration test incomplete; scientific dispatch refused"})
             raise
         outcomes = {}
-        for phase in spec["phases"]:
+        is_a4 = spec.get("schema") == "v3-A4-validation-1"
+        mem_caps = {p: memory_worker_cap(spec.get("memory_estimate_gb", {}).get(p)) for p in spec["phases"]} if is_a4 else {}
+        effective_workers = {}
+        if is_a4:
+            mode_cap = settings["caps"][settings["mode"]]
+            for phase in spec["phases"]:
+                try:
+                    chosen = choose(record["configuration"][phase], min(mode_cap, settings["workers"]), settings["cpu_budget"], settings["threads"])["workers"]
+                except Exception:
+                    chosen = mode_cap
+                effective_workers[phase] = max(1, min(mode_cap, settings["workers"], chosen, mem_caps.get(phase) or mode_cap))
+        for index, phase in enumerate(spec["phases"]):
             jobs = [j for j in spec["jobs"] if j["config"].get("phase", j["kind"]) == phase]
+            memory_estimate = None
+            if is_a4:
+                memory_estimate = spec.get("memory_estimate_gb", {}).get(phase)
+                # Project the REMAINING work (resume-aware); stop before this phase
+                # if it will not fit the remaining wall budget.
+                projection = a4_projection(spec, record["configuration"], effective_workers, root, code_identity(), index, time.time(), deadline)
+                record.setdefault("projections", []).append({"before_phase": phase, **projection})
+                atomic_json(root / "launches.json", history)
+                if not projection["fits"]:
+                    record.update(complete=False, finished_epoch=time.time(), stopped="projection_exceeds_budget")
+                    atomic_json(root / "launches.json", history)
+                    return {"complete": False, "reason": "projection_exceeds_budget", "projection": projection, "outcomes": outcomes}
             result = dispatch(root / phase, jobs, code_identity(), settings, deadline, measurements=record["configuration"][phase],
-                              control_root=root, registered=spec["registered"], registration=spec.get("registration"), completion_screen=screen)
+                              control_root=root, registered=spec["registered"], registration=spec.get("registration"),
+                              completion_screen=screen, memory_cap=mem_caps.get(phase) if is_a4 else None,
+                              memory_estimate_gb=memory_estimate)
             outcomes[phase] = result
             record["outcomes"] = outcomes
             atomic_json(root / "launches.json", history)
@@ -473,6 +732,9 @@ def launch(spec_path, root, settings, service_record=None):
                     from .pilot import project_costs
                     atomic_json(root / "cost_projection.json", project_costs(spec, root, outcomes, record["configuration"]))
                 return {"complete": False, "outcomes": outcomes}
+            if is_a4 and jobs:
+                check = nondeterminism_check(root / phase, jobs, spec["registered"], spec.get("registration"))
+                atomic_json(root / phase / "nondeterminism_check.json", check)
         publication = spec.get("publication")
         if publication:
             outputs = [completed(root / j["config"].get("phase", j["kind"]), j, code_identity()) for j in spec["jobs"]]

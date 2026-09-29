@@ -3159,3 +3159,322 @@ recording comparisons matched, and G4.3 reported zero violations. Review
 the fixed family latch path and literal calibration argument in the launch
 note. No commit, repair estimate, registered rerun, network or X2 action
 was performed.
+
+## 24. A4 validated continuation support, 2026-09-29
+
+Adopted by D30 after blind double certification. A4 replaces A1's
+point-estimate continuation residual screen with interval tests on fresh
+validation data, and publishes only the cells that pass. A3 is superseded
+and does not run. This section records the implementation; A4 in the design
+note is the specification.
+
+**New code.** `v3/continuation_validation.py` holds the pure, tested
+numerics. `v3/table_validation_a4.py` holds the stages, assembly and
+publication. The one edit outside new modules is the lookup change in
+`v3/production_tables.py`.
+
+**Seeds.** Three streams, `v3_R_fit`, `v3_R_validate` and `v3_R_census`,
+each a SHA-256 of the tag, the A1 job seed and the replicate index,
+truncated to 60 bits, matching the committed planning derivations. The fit
+stream uses replicate 0, plain validation uses replicates 1 to 3, the FV
+validation replicate is index 1, and the census uses index 0.
+`assert_seeds_distinct` derives the three streams and halts on any collision
+with each other, the A1 job seed, the D26 probe seeds, and the
+`planning_P1`, `planning_P1_census` and `planning_P3` seeds. The A1 and
+probe seeds exceed 2^128 while the streams are below 2^60, so those
+collisions cannot occur by magnitude; the check is retained as A4 requires.
+
+**Plain tier.** `refit_c0` solves the merged population-0 cell's Bellman
+fixed point on the fitting replicate's covered living-source transitions by
+the closed form `C0 = a / (N - beta T)`, excluding transitions into
+unpublished cells and taking `lower` at extinction. C0 is published only
+with at least four fitting visits. `row_width` computes the a priori width
+`w = (1 - beta) W + beta (vmax - lower)` from the fitted table, and range
+checks halt if any flow or published value leaves `[lower, upper]`.
+`empirical_bernstein` applies the two-sided Maurer and Pontil bound and
+classifies each cell certified, violation or unresolved; a certified cell is
+published only if the visit-weighted point estimate also lies within
+`[-tau, tau]`. `tau = 0.05 W`. M is the A1 published plain cells with
+population category above zero plus one per plain row, computed from the
+pinned A1 publication before any new data.
+
+**FV tier.** Units are the 32 groups. `delta_method_interval` gives the
+ratio interval; `fieller_interval` gives the Fieller set, counting an
+unbounded set (Nbar^2 <= (t^2/n) s_NN) unresolved. The Student t quantile at
+`1 - alpha/(2 M_FV)` is computed scipy-free by inverting the regularized
+incomplete beta (Lentz continued fraction); it reproduces t_30 at 0.975 =
+2.0423 and approaches z at large degrees of freedom. A cell passes only if
+both intervals lie within `[-tau, tau]`, with at least 16 contributing
+groups. FV rows carry the label "asymptotic, not certified". M_FV is the A1
+published FV cells.
+
+**Census.** `census_endpoints` replays a plain trace under the committed law
+on the census seed, and `census_fractions` reports the fraction of living
+endpoints, and of low-population living endpoints, outside a row's validated
+support, reusing the `endpoint_counts` masking with the added low-population
+split. `census_floor` passes a row at at most 2 percent of living endpoints
+and, with at least 50 low-population living endpoints, at most 5 percent of
+those. A failing row is not_estimable, so the registered loader rejects the
+family.
+
+**Publication and lookup.** `publish` assembles a new `v3-tables-1` family:
+retained A1 rows keep their A1 producer identity, each plain row stores C0
+once with the bounded-domain error `max(C0 - lower, upper - C0)`, plain
+continuation entries are pruned to the validated non-population-0 cells, row
+status follows the census floor, and a sealed `.compatibility.json` receipt
+binds the new hash, both producers, the seeds, M and M_FV. It passes
+`require_production`. The lookup change resolves a population-category-0 key
+of a plain row with a published C0 to C0; FV rows, extinct endpoints and
+every other key are unchanged.
+
+**Runner integration and its scope note.** A4 requires the stages to run as
+jobs through the production runner. The write scope named only new modules
+and the one `production_tables` lookup change, not `production_runner.py`,
+whose `execute` dispatches by job kind. Rather than add A4 kinds to
+`execute` (outside the write scope), `table_validation_a4` runs the stages
+through a durable orchestrator built from the runner's own primitives:
+per-job atomic completion records with resume by skipping completed outputs,
+cross-process leases, one numerical thread per worker, and a wall deadline.
+`prepare` builds a sealed plan following `table_repair_a3`. This is the one
+place A4 was read against the write scope; see the executor report.
+
+**A2/A3 compatibility boundary.** `v3/production_tables.py` is pinned in
+`table_compatibility_A2.json`'s `approved_boundary_sha256`. The A4 lookup
+change alters that file, so the A2/A3 exception can no longer verify the
+genuine A1 publication under the changed code, and four pre-existing
+compatibility tests fail on that dependency check. A4 tables load through
+their own producer identity, so A4 execution is unaffected. Re-pinning or
+retiring the A2/A3 exception is an operator decision outside A4's write
+scope.
+
+**Tests.** `test_v3_a4_functions.py` (25 cases) checks the formulas against
+hand-computed values, the refit on a known fixed point, living-source
+masking, the width bound on random data, empirical Bernstein coverage, the t
+quantiles, Fieller versus the delta method, seed distinctness and the
+collision halt, and the out-of-range halt.
+`test_v3_a4_publication.py` (5 cases) checks loading through
+`require_production`, the C0 lookup resolution and that the lookup is
+unchanged elsewhere, durable resume, and seed determinism. All 30 pass in
+under a second. The workstation smoke ran all four stages end to end on two
+plain and one FV A1 job at tiny settings (4 groups, burn 16, measure 64, 32
+runs or particles) in about 70 seconds; with so short a burn-in no
+population-0 states arise, so C0 is exercised by the unit tests rather than
+the smoke.
+
+No commit, registered run, network or X2 action was performed.
+
+## 25. A4 review fixes and runner integration, 2026-09-29
+
+The A4 implementation was reviewed. The math module was sound; the fixes below
+were made before a registered run. The reviewer also changed A4 itself: every
+replicate keeps its job's own A1 settings (so sensitivity jobs keep their
+doubled population or length), and a row with no living census endpoints passes,
+reported as not assessed.
+
+1. **Row status rebuilt for every A1 row.** `assemble_family` now rebuilds each
+   row's status from A1's own screens (route, flow half-width, half-window
+   drift, held-out coverage at least 0.9, fixed-point convergence) plus A4's two
+   conditions (nonempty validated support, availability floor). A1 rows that
+   failed only the continuation residual are rescued when they pass. The A1
+   screen values are kept in the row's `a4` record.
+2. **Sensitivity rows assembled separately.** Primary and sensitivity rows are
+   collected by setting, as `study.assemble_tables` does, and the sensitivity
+   contrasts and `sensitivity_status` are recomputed with the committed rules
+   and the A4 statuses. A doubled-length row no longer overwrites its primary.
+3. **M and M_FV from every A1 job output row**, primary and sensitivity,
+   whatever the status, pinned in the plan and verified at publish. On the
+   pinned A1 family: M = 149,200, M_FV = 797,225 (3,165 plain and 12,055 FV
+   rows).
+4. **Registered stage runner.** `production_runner.execute` dispatches the
+   `a4_fit`, `a4_validate` and `a4_census` kinds to `table_validation_a4.run_stage_job`,
+   run in five phases (fit, validate plain, validate FV primary, validate FV
+   doubled-population, census) with the runner's configuration test, live mode
+   control, durable completion records, resume and 48-hour deadline. The A4
+   stream seeds travel in each job's config; the runner's own job seed is
+   unused. After each phase the runner re-executes one completed task in a fresh
+   spawned worker and compares result hashes; a mismatch halts.
+   `prepare` checks seed distinctness across all jobs, including the D26 probe
+   seeds from the a3_probe records.
+5. **Identity checks.** Every stage output binds its A1 job ID, stream seed,
+   code identity and plan hash; resume and publish refuse any mismatch. Publish
+   verifies the pinned A1 publication, the registration pin and the calibration
+   hash, and refuses a frozen target. The receipt binds the seeds, every stage
+   output hash, M, M_FV and the plan hash.
+6. **Census follows the committed law.** `census_stage` uses the job's A1
+   settings (6 groups), burn 0, measure 519, the census seed, the plain route
+   and held-out groups only, and stores per-cell living-endpoint counts by fine
+   code, not raw endpoints. Only fractions and assessed flags reach the family.
+7. **FV living-source mask** uses the conditioned (resampled) state of the
+   previous step, so a clone of a dead particle counts as a living source. For
+   plain, conditioned equals features.
+8. **Smaller items:** the empty-support early return now carries
+   `support_values`; an FV collapse is recorded and reported; FV A1 values are
+   range-checked; and a plain row certified through C0 alone passes
+   `require_production`.
+9. **Lookup:** for a plain row with a published C0, every population-category-0
+   key resolves to C0, whether or not an entry exists.
+10. **Compatibility boundary.** The A4 edits changed `production_tables.py` and
+    `production_runner.py`, both pinned in `table_compatibility_A2.json`'s
+    approved boundary. The record was re-pinned to their A4 hashes, with an
+    `a4` note recording the extension and the previous hashes. `verified_record`
+    and `gates.verify_instrument` pass; the loader still refuses any unapproved
+    change. The A2-dependencies test was strengthened to assert the
+    re-established A4 boundary; the other four named tests pass unchanged under
+    it.
+11. **Zero living endpoints:** the floor passes, reported as not assessed.
+12. **Blinding:** the family, logs and reports carry only fractions and assessed
+    flags; living and low-population endpoint counts stay in the census stage
+    records.
+
+**Observation.** In one smoke run under heavy concurrent numpy load, a census
+stage output differed from a clean recompute (same total living endpoints, a few
+bins reassigned). Under a controlled CPU burn, and across sequential spawned
+workers, the stage is bit-identical. The stages are reproducible within the
+spawned-worker path; the nondeterminism check recomputes there. Whether the
+simulation can drift under heavy concurrent numpy contention is worth the
+reviewer's attention, because the X2 run is highly concurrent and the check is
+mandatory.
+
+No commit, registered run, network or X2 action was performed.
+
+## 26. A4 runner fixes, review round 2, 2026-09-29
+
+Round 2 found defects in the runner integration and publishing. A4 itself
+changed twice: every replicate keeps its job's own A1 settings (sensitivity
+jobs keep their doubled population or length), and a row with no living census
+endpoints passes, reported as not assessed.
+
+1. **Memory safety.** `estimate_memory_gb` gives a per-task estimate by
+   arithmetic, anchored on the FV primary planning peak of 9.5 GB and scaling
+   with population times length: FV primary 9.5 GB, FV doubled-population and
+   doubled-length 19 GB, plain fit/validate up to 4.75 GB, census about 0.1 GB.
+   Each phase's configuration test now times tasks of that phase's own kind,
+   shortened in length only (a self-contained validate config task fits C0
+   inline, so it needs no fit sibling). `dispatch` enforces a per-phase worker
+   cap of `floor(0.8 x MemAvailable / estimate)` alongside the mode caps, and a
+   live guard refuses to start a task while MemAvailable is below 1.2 times its
+   estimate. `MemAvailable` is read cross-platform. The six doubled-length FV
+   jobs moved into the high-memory phase with the doubled-population jobs.
+2. **Registered publish guards.** `registered_publish_guard` requires the
+   registered flag and a registration pin and rejects any settings override, so
+   a smoke plan cannot publish registered. Publish verifies every stage output
+   through the runner's durable `completed()` record (binding the whole job, so
+   config, settings and seed) plus the A4 identity fields, and recomputes and
+   checks `plan_hash`, which now digests the full job skeleton, the overrides
+   and the registration.
+3. **48-hour projection.** After each phase's configuration test the runner
+   projects all remaining work (task time scaled to full length, the per-phase
+   worker cap, one nondeterminism recheck per phase, and a 1,200 s cleanup
+   reserve) and stops before a phase whose projection exceeds the remaining
+   budget, recording every projection.
+4. **Probe seeds.** `prepare` refuses a missing or empty probe root; the run
+   note gives the corrected path and the expected count (855).
+5. **End-to-end tests.** A synthetic family exercises assembly of a sensitivity
+   pair, a rescued continuation-only A1 failure, a floor failure with living
+   endpoints, and a zero-endpoint row; refusal tests cover a registered publish
+   of a smoke plan and a stage-output identity mismatch. The smoke runs all five
+   phases through the runner. The real-A1 stub assembly now uses census outputs
+   with living endpoints inside the support so the floor is assessed and passes.
+6. **Smaller items.** Rescued rows clear A1's `reason`/`primary_reason`, kept as
+   `a1_reason`/`a1_primary_reason`. The receipt binds every stream seed
+   explicitly. The nondeterminism check picks its task by a recorded seeded draw
+   among the phase's shortest tasks and records the result durably. FV collapse
+   reports the collapsed-group count and transitions lost per job. Calibrations
+   are keyed by content hash, not path. Dispatch events label the runner's job
+   seed unused for A4 jobs. An O(n^2) stage-output glob was replaced by a single
+   index.
+
+The A2 approved boundary was re-pinned to the new `production_runner.py` hash.
+
+No commit, registered run, network or X2 action was performed.
+
+## 27. A4 projection, resume and reporting, review round 3, 2026-09-29
+
+Round 3 confirmed the memory estimates and caps, the per-phase configuration
+tests, the high-memory phase, the publish guards and `plan_hash`, and the A2
+re-pin. It fixed two projection blockers and the items below.
+
+1. **Resume.** `a4_projection` counts only jobs without a valid `completed()`
+   record and skips finished phases (it takes the run root and code). `launch`
+   projects only the remaining work against the remaining budget, so an
+   interrupted run resumes.
+2. **Projection bias.** Each job is scaled by its own population times length
+   from a per-cell rate, not by the phase maximum. The `validate_plain`
+   configuration task is self-contained (fit plus validate), so the fit
+   configuration time is subtracted. The worker count per phase is `min(mode
+   cap, chosen workers, memory cap)`, so census no longer projects at hundreds
+   of workers. The cleanup reserve is counted once (the deadline already
+   subtracts it). On the real plan, with planning task costs of about 900 s per
+   plain task and 3,500 s per FV primary task (double for the high-memory
+   tasks), the projection is about 37.5 hours (fit 1.3, validate_plain 3.4,
+   validate_fv_primary 25.6, validate_fv_double_population 6.7, census 0.6;
+   phase job counts 79, 237, 252, 12, 343), within the 48-hour budget.
+3. **Memory guard.** `memory_hold` is rate-limited to once per minute; the guard
+   halts with a clear reason if it holds while no task is active. Each completed
+   task's peak RSS is recorded; a phase peak above its estimate raises the
+   estimate for later dispatch, which only lowers the worker cap.
+4. **Reporting.** Per-cell results are kept in the family (`a4.cell_tests`), and
+   a `report` command writes A4's Reporting paragraph: per-tier counts and visit
+   shares, plain safeguard failures, every violation, each row's floor result,
+   and FV collapse effects, with no survival, extinction or fire rate.
+5. **Tests.** A true end-to-end runs prepare, `launch` of all phases, `publish()`
+   and `require_production`, plus a dispatch interrupt and resume; the
+   projection-stop and resume-aware counting have unit tests; the smoke-refusal
+   calls `publish()` itself (the registration check runs first).
+6. **Smaller.** The nondeterminism cost function uses each job's registered
+   settings; `restart` and `restart_required` no longer log the unused runner
+   seed; `a1_primary_reason` is filled from the A1 row.
+7. **Run note.** Corrected worker/mode text (the smaller of `--workers` and
+   `--max-workers` and the caps), exact staging paths, the `report` command, and
+   what to do on a projection stop, a refused resume and a memory-guard halt.
+
+A fixture (smoke) run records the actual source hash rather than the canonical
+A1 hash, so a synthetic small family runs end to end; a registered run still
+pins the canonical A1 file. The A2 boundary was re-pinned to the new
+`production_runner.py` hash.
+
+No commit, registered run, network or X2 action was performed.
+
+## 28. A4 memory cap and final items, review round 4, 2026-09-29
+
+Round 4 confirmed the projection (37.4 hours reproduced), resume, guard, report,
+publish refusal, and the A2 re-pin. It fixed one blocker and three items.
+
+1. **Memory cap double-count (blocker).** Dispatch had recomputed
+   `floor(0.8 x MemAvailable / estimate)` every loop from live MemAvailable,
+   which already excludes running tasks, so the FV caps decayed toward 5 and 2
+   to 3 instead of 9 and 4 and the run overran. Each phase's cap is now fixed
+   once at phase start (the value `launch` computes and passes), recorded in a
+   `memory_cap` event, and only lowered by `lowered_cap` when a measured peak
+   raises the phase estimate. Live pressure is left to the 1.2x guard.
+   Projection and dispatch use the same per-phase caps.
+2. **Suite tests.** `test_v3_a4_runner.py` covers a launch across all phases
+   with a resume, the cap held fixed while MemAvailable drops (the round-4
+   regression, via fixture jobs and a mocked MemAvailable), the cap lowering
+   arithmetic, the peak-RSS recording, the guard halt with no active task, and a
+   projection stop.
+3. **Report and family size.** The per-cell results moved out of the family
+   into a `.cell_results.json` sidecar, bound by hash (`cell_results_sha256`) in
+   the compatibility receipt, so the family every rerun job loads stays small.
+   `report` reads the sidecar (verifying its hash) and covers the sensitivity
+   rows as well as the primary rows.
+4. **Run note.** The projection-stop guidance now says to stop and report, with
+   no fresh-root/larger-`--wall-hours` suggestion; the caps are stated for about
+   118 GB available (plain 19, FV primary 9, FV doubled 4, census the mode cap).
+
+The A2 boundary was re-pinned to the final `production_runner.py` and
+`production_tables.py` hashes; `verify_instrument` passes.
+
+**Reviewer fix after the round 5 review.** Successive measured peaks compounded
+the memory cap: each raised estimate was applied to the already-lowered cap, and
+dispatch received the combined CPU and memory cap rather than the phase's memory
+cap. FV primary peaks of 9.6 to 10.1 GB would have taken its cap from 9 to 3. The
+launch now passes the phase's own memory cap, and `next_memory_cap` always lowers
+from that original cap, never above the current one. The same peaks now settle at
+8. `test_successive_peaks_do_not_compound` covers this. The A2 boundary hash of
+`production_runner.py` was re-pinned to the fixed file; `verified_record` and
+`verify_instrument` pass, and the full suite passes (327 tests). The suite's
+resume test relaunches a finished run; an interrupted launch and its resume were
+exercised in the smoke through the runner.
+
+No commit, registered run, network or X2 action was performed.

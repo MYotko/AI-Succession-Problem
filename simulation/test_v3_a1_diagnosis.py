@@ -146,7 +146,18 @@ def test_sparse_residual_remains_binding_with_high_coverage():
 
 def test_existing_a2_compatibility_dependencies_still_match():
     from v3.table_compatibility import verified_record
-    assert verified_record()['producer_commit'].startswith('34ffbfe9')
+    from v3.calibration_compatibility import dependency_hash
+    from v3.artifacts import SIMULATION
+    record = verified_record()
+    assert record['producer_commit'].startswith('34ffbfe9')
+    # A4 re-established the boundary: production_tables.py and production_runner.py
+    # were re-pinned to their A4 hashes, and the a4 note records the extension.
+    # verified_record already raises on any unapproved dependency change, so its
+    # success proves every pinned boundary and unchanged dependency still matches.
+    assert 'a4' in record
+    boundary = record['approved_boundary_sha256']
+    for name in ('v3/production_tables.py', 'v3/production_runner.py'):
+        assert dependency_hash(SIMULATION / name) == boundary[name]
 
 
 def test_exposure_refuses_registered_manifest_before_reading_outputs(tmp_path):
