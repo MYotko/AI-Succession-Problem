@@ -1320,3 +1320,108 @@ The run halts on:
 - every violation with its exposure.
 
 It reports no survival, extinction or fire rate.
+
+### Amendment A6, 2026-09-29: the W11 sensitivity and convergence runs, completed
+
+**Timing and status.** The operator chose option O2 on 2026-09-29 (D32), and approved the A6 design (D33) after blind double certification by two independent reviewers from different model families. This text is registered by the commit that adds it. A6 is effective for registered execution from the later commit that adds its implementation (see Order and code identity).
+
+It was written while the registered A4 run was in progress. That run's progress counts, launch records and memory use had been read, and aggregate worker-second timings from its completion records. None of its stage outputs had been read. No A4 publication, rerun manifest, rerun job or rerun output existed, and none was read. No figure from any v3 rerun informs any choice below.
+
+**Evidence and reason.** Section 6 registers five sensitivity and convergence arms. A readiness review found three gaps:
+1. **No job builder.** Nothing builds the arms' jobs.
+2. **Missing tables.** The crowding arm and the σ0² arm need table families of their own, because the tables' kernel identity includes the crowding variant and the novelty protocol, which holds σ0². No such families are registered or budgeted.
+3. **No reading.** Section 8 lists no sensitivity quantity, so under its last line every sensitivity result would be exploratory.
+
+A6 closes the three gaps.
+
+**One change to section 6,** authorized by the operator under O2: **the σ0² arm is narrowed from R1's nine rr to five.** They are the five nearest v2.0's registered inflection, 0.063 (section 9): 0.059, 0.060, 0.062, 0.064 and 0.066. The tie at distance 0.003 includes both 0.060 and 0.066. A σ0² variant whose boundary falls below 0.059 reads "undetermined".
+
+Every other arm, grid, weight, horizon and seed count in section 6 is unchanged. D18's "a quarter of the seeds" for the crowding variant is read as a quarter of R1's 400 per cell, which gives 100, the count the other arms use.
+
+**The arms and their tables.**
+
+| Arm | Cells | Seeds per cell | Tables |
+|---|---|---|---|
+| Weight corners, κ ∈ {0.75, 8} × θ ∈ {0.25, 0.75} | R1's 9 rr at alpha 1.0 and capability 1.5, plus R2's 5 alpha × 7 capabilities at rr 0.064 (44 cells) | 100 | nominal A4 family |
+| Horizon, 1,000 steps | R1's 9 rr at alpha 1.0 | 200 | nominal |
+| Crowding, the reproductive-age variant | the weight-corner cells | 100 | crowding family |
+| σ0² ×10 and σ0² ×0.1 | the five rr above, at alpha 1.0 | 100 | one σ0² family each |
+
+**Unvaried weights** are at the center, κ = 8 and θ = 0.5.
+
+**The nominal family already scores κ = 0.75 on the weight-corner contexts.**
+
+**The variant table families.** Each is built with the committed table-job settings and A1's screens.
+- **Its scoring contexts are exactly its arm's cells at κ = 8.** It adds no other context, so an unused row cannot fail the family.
+- **The crowding family:** R1's 9 rr × 25 rules. The frozen table-sensitivity subset at 0.055 and 0.064 adds 12 jobs, for 237 in all.
+- **Each σ0² family:** the 5 rr × 25 rules. The subset at 0.064 adds 6 jobs, for 131 in all.
+- **Completeness** is checked against the family's own contexts.
+
+**The σ0² calibrations.**
+- σ0² is set to 10 and 0.1 times its frozen value.
+- ε_N is re-derived by the committed protocol from the 50 registered calibration records, identified by their digests in `input_hashes`. ε_N is the only calibrated value that depends on σ0².
+- The fixed center, N_ref, ε_E, ε_L and c_E stay frozen.
+- The derivation must reproduce the frozen calibration exactly when σ0² is unchanged. That is checked, and any mismatch halts.
+- Each variant calibration is sealed with its own hash before any variant table job runs.
+
+**Validation of the variant families.** Each family is validated by amendment A4 in full:
+- its own M and M_FV, counted from its own outputs before its validation data exist;
+- the plain tier certified;
+- the Fleming-Viot tier "asymptotic, not certified";
+- the census under the family's own kernel;
+- the availability floor.
+
+No A5 labels are made.
+
+**If a family cannot load,** because a row is not_estimable or the floor fails, its arm is reported as not run, with the reason. Any repair is a new amendment. No arm is rescued after any R1 or R2 output has been read.
+
+**Seeds.**
+- **Variant tables:** each job's seed follows from its own job identity, which includes its kernel and calibration. A4's stream seeds follow from those.
+- **Runs:** seeds are derived from each run's cell and index under the tag `v3_rerun`, and the cell identity includes κ, θ, the step count and the variant.
+- **Before any simulation,** one global check asserts that every new seed is distinct from every A1, A4, A5, rerun, probe and planning seed, and from every other new seed.
+
+**The reading, registered now.**
+- **Quantities:** section 8's, on each arm's cells.
+  - **R1-grid arms:** survival at each rr, and the boundary location.
+  - **R2-grid arms:** cap\* per alpha at rr 0.064, with D24's censoring.
+- **The comparator:** the same quantity from the main reruns on the same cells. That is R1 at alpha 1.0 on the arm's rr, without the refinement grid, and R2 at rr 0.064 only.
+- **The horizon arm** measures survival at 1,000 steps. Its comparator measures it at 500.
+- **The headline family** has 33 comparisons: the boundary location in 8 arms (the 4 corners, the horizon, crowding and the 2 σ0² variants), and cap\* at each of 5 alphas in 5 arms (the 4 corners and crowding).
+- **The interval:** for each headline comparison, a percentile bootstrap interval on the difference, arm minus nominal.
+  - The two sides are resampled independently, by seed within cell.
+  - At least 50,000 resamples are drawn.
+  - The level is 1 − 0.05/33, so the family-wise error is at most 0.05.
+- **Materiality margins:**
+  - for the boundary location, 0.002 in rr;
+  - for cap\*, one step of the capability grid (1.2, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0). The difference is measured in grid steps.
+- **Verdicts:**
+  - **Moves materially,** lower or higher: the interval lies wholly beyond the margin on one side.
+  - **Robust:** the interval lies wholly within the margin. For cap\*, that means zero steps only.
+  - **Inconclusive:** anything else.
+  - **Undetermined:** the quantity is undefined in the arm or in its comparator.
+- **What follows from each verdict:**
+  - **Moves materially:** every claim resting on that headline result carries the arm's name as a sensitivity, in the claims register and wherever it is cited, until shown otherwise.
+  - **Inconclusive or undetermined:** reported with the claim, as "sensitivity to [arm] not resolved at the registered seeds".
+  - **Robust:** reported.
+- **Descriptive only:** the survival difference at each rr, with a per-comparison 95 percent interval, and the half-seed and full-seed estimates for seed convergence. These carry no verdict.
+
+**Order and code identity.** The rerun loader accepts the nominal A4 family only at the exact code identity that published it (A5, Sequencing).
+- **The weight-corner and horizon arms** run from the rerun checkout, at the rerun commit's code identity. A6's builder writes their job list as a sealed manifest, which is data. The runner there checks each job's identity and the rerun pin.
+- **The crowding and σ0² arms** run at A6's implementation identity. Their calibrations and families are sealed and published at that identity.
+- **A6's implementation adds new modules only.** It changes no existing file that enters the code identity, so every arm runs the engine code the reruns run. It asserts that every such file is byte-identical to the rerun commit's.
+- **Commits:**
+  - this text before the rerun pin;
+  - the implementation after the rerun commit, like A5's code.
+- **Scheduling:** the variant families may run during the reruns on a machine established as bit-identical to the X2 (D32), otherwise after them. The runs follow once their tables are in place.
+
+**Ceiling.** 72 X2 wall hours for the three variant families and every sensitivity run together. It replaces section 6's 48-hour sensitivity ceiling, and D18's 24-hour table ceiling for these families.
+- **The planning estimate** is about 70 hours: about 28 for the crowding tables, about 15 for each σ0² family, and about 12 for the runs.
+- **The measured projection** before each registered launch governs. If it exceeds the ceiling, the operator decides before any registered run, between a budget amendment and a uniform seed reduction across the arms' cells.
+
+**What A6 does not establish.**
+- Robustness beyond the registered arms and ranges. The W11 item 3 global screen over the parameter register's constants stays unregistered.
+- Anything about the crowding variant as a model (section 11).
+- Certification of variant Fleming-Viot cells beyond A4's asymptotic tier.
+- Evidence of robustness from an "inconclusive" verdict.
+
+**The design and certification records** are in `simulation/v3/A6_design/`.
