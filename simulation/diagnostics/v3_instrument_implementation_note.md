@@ -3508,3 +3508,228 @@ a new root and a re-prepared plan with 44 wall hours, so the cumulative 48-hour
 ceiling holds across all three launches. No other code changed.
 
 No commit, registered run, network or X2 action was performed.
+
+## 30. A6 sensitivity and convergence runs, 2026-09-30
+
+A6 implements the W11 sensitivity and convergence arms from amendment A6 in the
+design note. New modules only, under `simulation/v3/`, named `*_a6*.py`; no
+existing file that enters the code identity changed. The reruns' engine, runner,
+loader, calibration and table code stay byte-identical, and A6 asserts it.
+
+### The modules
+
+- **`sensitivity_a6.py`.** The rerun-path invariance check
+  (`rerun_path_invariance`, `assert_rerun_path_invariant`): every file in
+  `artifacts.source_manifest()` except the new `*_a6*.py` modules is compared,
+  after LF normalization, to a given commit's version via `git show`.
+  `rerun_code_identity(commit)` computes the identity a rerun-checkout runner
+  sees at that commit (the A6 modules excluded, since they do not exist there).
+  The arm job builders (`build_weight_corner_jobs`, `build_horizon_jobs`,
+  `build_crowding_jobs`, `build_sigma_jobs`) assert the run counts 17,600, 1,800,
+  4,400 and 1,000. Every cell's config carries kappa, theta, the step count, an
+  R1/R2 comparator-grid marker and the variant, so its `stable_job` seed differs
+  from the 24,900 main reruns and from every other arm. The weight-corner grid is
+  44 distinct cells: the R1 and R2 cells at (0.064, alpha 1.0, cap 1.5) are
+  separated by their grid marker, whose reading and comparator differ.
+  `forbidden_seeds` derives the collision set with the committed functions: every
+  A1 job seed; A4's `derive_seeds` for both routes; A5's
+  `stream_seed("v3_R_fvplain", ...)` over the primary FV A1 jobs; the D26 probe
+  seeds via `load_probe_seeds`; the planning P1, P1-census, P3 and P4 seeds
+  (P4 as `_truncated_sha("planning_P4", seed, r)`, r in 0..3); and the 24,900
+  rerun seeds taken from the sealed rerun manifest (required registered).
+  `assert_seeds_clear` halts on any collision, and a registered run requires a
+  probe root yielding non-empty probe seeds. `nominal_run_spec`, `crowding_run_spec`
+  and each `sigma_run_spec` build the registered specs in `study.registered_spec`'s
+  shape: the weight-corner and horizon arms run in the rerun checkout against the
+  nominal tables, with the spec's `code_hash` stamped to the rerun commit's
+  identity; the crowding and each sigma arm run at A6's identity against their
+  variant families, one spec per arm. Each spec's `wall_seconds` is the budget's
+  slack-aware ceiling.
+
+- **`calibration_a6.py`.** Loads the 50 registered calibration records, verifies
+  their digests against the frozen calibration's `input_hashes`, and orders them
+  by the committed `study.calibration_jobs` seed order (floating-point summation
+  is not associative, so the order must match the registered freeze for a
+  bit-identical self-check). `_derive` mirrors `calibration.freeze` arithmetic
+  with sigma0^2 overridable, without the current-code-identity check on the
+  records. `self_check` re-derives with sigma0^2 unchanged and halts unless every
+  value reproduces the frozen calibration exactly; it does. `build_variant` seals
+  the sigma0^2 x10 and x0.1 variants at A6's code identity, re-deriving epsilon_N
+  and asserting every sigma-independent value (center, V_ref_total, N_ref,
+  epsilon_E, epsilon_L, c_E) is left equal to the frozen calibration. Each variant
+  passes `validate_calibration(..., registered=True)` and names its variant and
+  parent hash.
+
+- **`tables_a6.py`.** `build_jobs` builds each family's table jobs with the
+  committed `offline_estimator.settings_for` and the frozen sensitivity subset,
+  mirroring `study.table_jobs`, and asserts 237 (crowding) and 131 (each sigma).
+  `family_scoring` is exactly the arm's kappa = 8 contexts: R1's alpha 1.0 x
+  capabilities from 1.5, plus, for the crowding family at rr 0.064, R2's alpha x
+  capability contexts. It adds no kappa = 0.75 row and no unused alpha, so an
+  unused row cannot sink a family. `assemble` mirrors `study.assemble_tables`,
+  with the registered completeness check against the family's own contexts and
+  kernels. `estimation_spec` builds the registered spec that runs the family's
+  table jobs (publication None: the runner's built-in table publication is
+  hard-coded to the nominal completeness, so A6 assembles separately).
+  `prepare_validation` mirrors `table_validation_a4.prepare` but pins the family's
+  own assembled-tables file hash in place of A4's hard-coded A1 hash, counts the
+  family's own M and M_FV, and binds the A6 registration into `plan_hash` with the
+  jobs rebuilt under it. `publish_validation` reuses A4's assembly, stage verification and
+  plan-hash recomputation, publishes the family, a receipt and a sidecar as A4
+  does, and (registered) loads it through `ProductionTables(..., registered=True)`
+  at A6's identity. The crowding family uses the frozen calibration (sigma0^2
+  unchanged); it loads at A6's identity through the reviewed A1 compatibility
+  record.
+
+- **`reading_a6.py`.** Section 8's quantities: survival (final population at least
+  30 at the run's last step), the boundary by linear interpolation of the first
+  upward 50 percent crossing, and cap* per alpha with D24 censoring. The cap* rule
+  and censoring (None reads "below 1.2", 5.0 reads "5.0 or higher", in the same
+  censored order) mirror `gates.cliff_checks` (`gates.py:479-497`); `CAPABILITIES`,
+  `ALPHAS` and the 0.5 threshold are imported from `gates` so the grid and rule
+  stay single-sourced. `compare_boundary` and `compare_capstar` compute the
+  percentile bootstrap interval on the difference (arm minus nominal), resampling
+  seeds within cell independently on each side, at least 50,000 resamples, at
+  level 1 - 0.05/33. The margins (0.002 rr; one capability grid step) and the four
+  verdicts (moves materially, robust, inconclusive, undetermined) follow A6. A
+  sigma0^2 boundary below 0.059 reads undetermined. Descriptive outputs give
+  per-rr survival differences with 95 percent intervals and half- and full-seed
+  convergence. The tool operates on in-memory arrays only and never reads a
+  registered rerun output; it is tested on synthetic data with known answers.
+
+### Tests, smoke and self-check
+
+`test_v3_a6_calibration.py`, `test_v3_a6_tables.py`, `test_v3_a6_sensitivity.py`,
+`test_v3_a6_reading.py` and `test_v3_a6_budget.py` (about 55 tests) cover: the
+invariance check passing and failing; the calibration self-check on the real 50
+records and each variant's epsilon_N; the family job counts and contexts (no
+kappa = 0.75, no stray alpha) and sensitivity-subset counts; registered assembly
+(complete and incomplete) and a registered-level load; A4 publication of a tiny
+variant family loading through `ProductionTables`; `validate_spec` on the
+estimation, nominal, per-arm variant and A4 validation specs; the manifest run
+counts; the global seed check, the collision halt, the A5 FV-plain seeds and the
+seed registry; the honest planned total within the A7 ceiling, the refusal past it,
+the X2-equivalent charging and the WSL no-false-refusal, the floored ceiling and the
+append-only consumption; and the reading verdicts (moves higher and lower, robust,
+inconclusive, and every undetermined case), the boundary edge, the conservative
+undefined placement, the Bonferroni percentile positions, and cap* censoring. The
+workstation smoke ran a
+tiny crowding family through estimation, assembly, A4-style validation and
+publication in fixture mode, and one job from each arm kind through the runner's
+own execute() with fixture tables. **The calibration self-check reproduced the
+frozen calibration's values exactly.**
+
+`A6_RUN_ON_X2.md` gives the X2 recipe: the variant calibrations, the three
+families' estimation, validation and publication, where each manifest runs (the
+rerun checkout or A6's own checkout), the configuration tests, `llm down`/`llm
+up`, the no-overlap check, the reading, and exactly what to send back.
+
+### Review-fix additions
+
+- **`budget_a6.py`, the A6 ceiling (A7, 90 X2-equivalent hours) with honest
+  estimates and slack-aware ceilings.** The ceiling was raised from 72 to 90
+  X2-equivalent wall hours by amendment A7 (operator decision D34);
+  `budget_a6.PROGRAM_CEILING_HOURS` is the single source. `build_ledger` gives each
+  component an honest planning estimate in X2-equivalent hours from the committed
+  measurements with one realism factor, costing the high-memory doubled-population
+  FV validation at 6,200 s on its memory-capped worker count and including each
+  launch's own configuration and cleanup reserve. The planned total is about 82
+  hours, now within the 90-hour ceiling; it is recorded (`planned_total_hours`,
+  `exceeds_ceiling`) and shown at the top of the runbook, and `project` refuses (with
+  a message that A6 requires the operator to choose a budget amendment or a uniform
+  seed reduction) only if a launch would carry the total past the ceiling. The
+  budget is in X2-equivalent hours: a launch on another bit-identical machine is
+  projected and charged in X2-equivalent hours (wall times the machine's relative
+  throughput, 0.37 for WSL at its 12-worker cap), and its runner ceiling is the
+  X2-equivalent allowance converted back to that machine's wall hours. Consumption
+  is an append-only JSONL log, separate from the ledger; `append_consumption` writes
+  the entry before any check that might raise, `load` replays it, and `write_ledger`
+  refuses to build over an existing ledger. The runner ceiling
+  (`runner_ceiling_hours`, floored to whole seconds) is the ceiling less the
+  consumed time and every later component's estimate; every spec and plan takes its
+  wall from it, never A4's 48-hour default. Each run spec is built only after the
+  earlier launches are recorded (`assert_up_to_date`). Validation plans keep the
+  `v3-A4-validation-1` schema, so the runner's own in-launch `a4_projection` also
+  applies. After a hard stop the runner cannot extend a deadline, so a stopped
+  component restarts in a new run root on the same seeds, its completed jobs kept
+  only as a record, and the budget charges the hours spent plus a fresh estimate.
+- **One A6 seed registry.** `build_seed_registry`, run at the first A6 step,
+  computes every A6 seed from the configurations (each variant table job seed, each
+  variant A4 stream seed over both routes as A4 derives them, and every run seed in
+  every arm), checks them all against the full forbidden set and each other, and
+  seals the registry. Every later step passes it and `assert_registry_seeds` refuses
+  unless its own seeds equal (for streams, are a subset of) the registry entry.
+- **WSL configuration tests.** Every A6 profile sets `jobs_per_worker` = 2, so the
+  runner's configuration test occupies every tested worker at 8 and 12
+  (`production_runner.py:557-559`), on the WSL workstation as well as the X2.
+- **Reading guards.** `compare_boundary` and `compare_capstar` (strict, the
+  registered default) require, with explicit raises rather than bare asserts (which
+  `-O` strips), a registered grid (R1's nine rr, the sigma0^2 five, the full
+  capability grid) and at least 50,000 resamples; a missing capability fails.
+  Survival of exactly 0.5 at the lowest rr is a crossing at that rr, not below range,
+  in both the point rule and the vectorized bootstrap `_boundaries`. Undefined
+  resamples within the tail allowance are placed at minus infinity for the lower
+  percentile and plus infinity for the upper, so they can only widen the interval.
+- **One global seed check.** `forbidden_seeds` reads each primary A1 job's real
+  route from its output (every config route is "auto") before adding the A5
+  `v3_R_fvplain` seeds, and takes the 24,900 rerun seeds from the sealed rerun
+  manifest, which it asserts holds 24,900 jobs and which is required in registered
+  mode. `assert_global_seed_distinctness` (via `global_seed_check`) runs before the
+  first A6 simulation and at every later step (variant estimation, validation,
+  runs), covering the variant table job seeds and the variant A4 stream seeds
+  against the full forbidden set and every other new seed.
+- **Registered variant validation.** `prepare_validation` binds the A6
+  registration into `plan_hash` with the jobs rebuilt under it; a registered plan
+  refuses without its family and without a rerun commit; registered estimation
+  specs, validation plans and publish reject any settings override and apply the
+  registered-publish guard; `publish_validation` verifies the plan's own bound
+  registration; and assembly checks each job's settings against `settings_for`.
+- **The boundary verdict keeps every resample.** A no-crossing resample is placed
+  at plus or minus infinity by the direction of survival, as gates.py does for
+  cap*, and none is dropped. A comparison is undetermined when either point
+  boundary is undefined, or when the share of undefined resamples exceeds the
+  Bonferroni tail 0.05/(2 x 33); otherwise an infinite interval end classifies as
+  moves (wholly beyond) or inconclusive. Cell selection filters both sides by
+  category, arm, kappa, theta, steps, capability and variant, so R2 records never
+  pool into R1 cells, and asserts the registered seed count per cell (100 or 200
+  per arm cell, 400 per R1 comparator, 75 per R2); an empty cell fails and never
+  reads robust. Seed convergence requires per-seed indices. Percentiles are order
+  statistics (`inverted_cdf`); cap* is robust only at exactly zero steps.
+- **Independent arms.** Each variant arm has its own run spec (`crowding_run_spec`
+  and `sigma_run_spec` per variant), so a failed family reports only its own arm
+  as not run.
+- **Invariance at every step,** with `rerun_commit` required in registered mode:
+  `seal_variants`, `estimation_spec`, `prepare_validation`, `nominal_run_spec`,
+  `crowding_run_spec` and `sigma_run_spec`. It detects files removed since or added
+  since the commit, and normalizes only CRLF to LF. **Sequencing and commits:** the
+  A6 design-note text is committed separately, before the rerun pin; A6's
+  implementation commit descends from the rerun commit and precedes A5's (A5 edits
+  `production_runner.py` and `table_compatibility_A2.json`); A6 always runs from
+  its own checkout at its own commit. The nominal arms run in the rerun checkout in
+  their own separate run root.
+- **WSL.** The unchanged runner's `--profile x2` refuses any host not named
+  `yotko-evo-x2`. With A6's own configuration profiles listing `workers_local` 8
+  and 12 and `jobs_per_worker` = 2, a registered A6 family or run can run on the
+  bit-identical WSL workstation under `--profile local` at up to 12 workers,
+  without the service wrapper (WSL has no `llm`); the X2 `--profile x2` path is
+  primary. The runner is not changed.
+
+### The implementation commit
+
+The A6 implementation commit should contain exactly these files, and nothing else:
+
+- `simulation/v3/budget_a6.py`, `simulation/v3/calibration_a6.py`,
+  `simulation/v3/reading_a6.py`, `simulation/v3/sensitivity_a6.py`,
+  `simulation/v3/tables_a6.py`;
+- `simulation/test_v3_a6_budget.py`, `simulation/test_v3_a6_calibration.py`,
+  `simulation/test_v3_a6_reading.py`, `simulation/test_v3_a6_sensitivity.py`,
+  `simulation/test_v3_a6_tables.py`;
+- `simulation/v3/A6_RUN_ON_X2.md`;
+- this section 30 of `simulation/diagnostics/v3_instrument_implementation_note.md`;
+- and, if not already committed with the A6 design text, `simulation/v3/A6_design/`.
+
+It must not include the runner lease `simulation/v3/service.lock`, the pytest
+scratch tree `simulation/v3/_pytest_v3/`, or the A6 scratch folder
+`simulation/v3/_a6_scratch/`; those are working artifacts, not source.
+
+No commit, registered run, network or X2 action was performed.
