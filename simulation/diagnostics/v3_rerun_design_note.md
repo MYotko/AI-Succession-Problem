@@ -1425,3 +1425,16 @@ No A5 labels are made.
 - Evidence of robustness from an "inconclusive" verdict.
 
 **The design and certification records** are in `simulation/v3/A6_design/`.
+
+### Amendment A7, 2026-09-30: the A6 budget ceiling
+
+**Timing and status.** The operator approved this change on 2026-09-30 (D34). It was written while the registered A4 run was in progress. That run's progress counts, launch records, memory use and aggregate worker-second timings had been read, but none of its stage outputs. No A4 publication, rerun manifest, rerun job or rerun output existed, and none was read. No A6 job had run.
+
+**The change.** A6's ceiling of 72 X2 wall hours becomes **90 X2-equivalent wall hours**, for the three variant table families and every sensitivity run together. An X2-equivalent hour is one hour of the X2 at its measured 16-worker plateau. Work on another machine established as bit-identical to the X2 (D32) counts at that machine's measured relative throughput. Everything else in A6 is unchanged, including the rule that the measured projection before each registered launch governs, and that the operator decides between a budget amendment and a uniform seed reduction if a launch would exceed the ceiling.
+
+**Reason.** A6's implementation costs every component from committed measurements. The high-memory Fleming-Viot validation takes its measured 6,200 seconds per task at its memory-capped worker count, and each launch's configuration test and cleanup reserve are included. The planned total is then 82.2 X2-equivalent hours:
+- 18.9 for table estimation;
+- 50.0 for validation;
+- 13.3 for the runs.
+
+A6's planning figure of about 70 hours had costed that validation at half its measured time, and left out the launch overheads. A uniform seed reduction shortens only the runs, so it cannot close the gap. The new ceiling leaves about 10 percent above the plan, because a launch that reaches its ceiling must restart on a new run root.
