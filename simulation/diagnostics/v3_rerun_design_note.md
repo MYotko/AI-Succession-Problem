@@ -1127,3 +1127,196 @@ unresolved and violating cells, and their shares of visits. It also gives
 the plain cells that fail the visit-weighted safeguard, every violation as a
 finding, and each row's floor results. It reports no survival, extinction or
 fire rate.
+
+### Amendment A5, 2026-09-29: plain-law certification labels for FV tables
+
+**Timing and status.** The operator approved the A5 design on 2026-09-29
+(D31), after blind double certification by two independent reviewers from
+different model families. This text is registered by the commit that adds
+it. A5 is effective for registered execution from the later commit that adds
+its implementation (see Sequencing).
+
+It was written while the registered A4 run was in progress. That run's
+progress counts, launch records and memory use had been read, but none of
+its stage outputs. No A4 publication, rerun manifest, rerun job or rerun
+output existed, and none was read.
+
+It was also written after a non-registered planning study, P4, had simulated
+independent plain trajectories for 15 FV-route A1 jobs on fresh planning
+seeds, and tested them against those jobs' A1 values. No planning figure
+enters any registered result.
+
+**Evidence and reason.** A4 validates FV rows with an asymptotic test over
+32 groups, labeled "asymptotic, not certified". A certificate under the FV
+conditioned law would need uniform-in-time mixing constants for the
+conditioned process, which cannot be computed for this model.
+
+Given a source state, the residual's conditional law is the same on both
+routes:
+- the scored flow and the cell's value are fixed by the state;
+- the one-step advance kernel is the same map on both routes, because A4's
+  FV trace records the transition before resampling.
+
+The routes differ only in how often they visit each state inside a cell. So
+the published FV values can be tested on independent plain trajectories,
+which the certified plain-tier test handles. In P4, that test certified about
+half of the FV cells, holding over 98.5 percent of plain-law visits in every
+planning row.
+
+**The rule.** A5 is label-only. It never changes a published support, value
+or row status, so the reruns behave identically whether or not A5 has run.
+
+**Tested set.** A5 tests every cell in the validated support of every
+primary FV row with status `estimated` in the sealed A4 publication. These
+are exactly the FV cells the reruns can look up. Sensitivity rows are not
+published to the reruns, and are not tested.
+
+For each tested row-cell b, the tested quantity is `theta_b^plain = E[m_i |
+N_i >= 1]`. Here `m_i` is the mean living-source residual of an independent
+plain trajectory in cell b, against the A4 published value. For FV rows,
+those are the A1 values. The law is independent plain trajectories from the
+table's archived initial law, under its fixed rule and kernel.
+
+**Validation data.**
+- **Tables:** the 252 primary FV-route A1 jobs of the A4 plan.
+- **Replicates:** three per table, on the plain route, each with 32 groups
+  and otherwise the job's own A1 settings: 2,048 independent trajectories
+  per replicate, 6,144 per table.
+- **Seeds:** A4's `stream_seed` with the tag `v3_R_fvplain`, the A1 job seed
+  and the replicate index 1 to 3.
+
+Before any simulation, the run builds one global set of forbidden seeds:
+- every A1 job seed;
+- every seed in the A4 plan, for every job and both routes;
+- the D26 probe seeds;
+- the planning seeds P1, P1-census, P3 and P4 (replicates 0 to 3), for every
+  job.
+
+It halts if any A5 seed is in that set, or if A5's 756 seeds are not
+pairwise distinct.
+
+**Residual and width.** As in A4:
+- The residual is `(1 - beta) f + beta V(next) - C(b)`.
+- A transition is covered only when:
+  - its source is alive;
+  - its source cell is in the tested set;
+  - its next state is extinct or in the same row's A4 support.
+- `V(next)` is the A4 published value, or `lower` at extinction. A
+  transition into a cell the A4 family does not publish is not covered, as
+  in the reruns' lookup.
+- The cells are the FV row's own fine cells, with no population-0 merge.
+- The living-source mask is required, because a plain trace keeps recording
+  after extinction.
+
+The width is `w_row = (1 - beta) W + beta (vmax - lower)`, with vmax the
+row's largest A4 published value. It is computed from the A4 family before
+any A5 data exist, and it bounds every `m_i`, provided every flow and
+every published value lies in `[lower, upper]`. That is checked, and any
+failure halts the run.
+
+**Test and family.** The test is A4's plain-tier test unchanged: Maurer and
+Pontil's two-sided empirical Bernstein bound at `delta = alpha / M`, with
+`alpha = 0.05`, then the visit-weighted safeguard.
+- **Certified:** the interval lies within `[-tau, tau]`, and `sum S / sum N`
+  from the same data does too.
+- **Violation:** the interval is disjoint from `[-tau, tau]`.
+- **Unresolved:** anything else, or `n < 2`. Unresolved cells stay in M.
+
+The number of trajectories visiting a cell is random. But the total is fixed
+by the plan, the trajectories are independent, and selection by `N_i >= 1`
+is a per-trajectory event, so coverage holds.
+
+M is the number of tested row-cells, counted from the sealed A4 publication
+before any A5 data exist. A cell in several rows counts once per row. This
+is a separate family from A4's plain and FV tiers.
+
+The statement is: with probability at least 0.95, every A5-certified cell
+has `|theta_b^plain| <= tau`, simultaneously.
+
+**Labels.** A certified cell is labeled "certified under the plain law",
+always with that qualifier and never shortened to "certified". Every other
+tested cell keeps "asymptotic, not certified". The labels live in a sealed
+label record. The A4 family is not rewritten.
+
+**Violations, fixed now.** A4 drops a failing cell from the support. A5
+cannot, because it changes nothing the reruns load, so a violating cell stays
+in use. Its false-violation rate is controlled at 0.05 within A5's family,
+so a violation is a finding. The handling is fixed here, before any A5 data
+or rerun outcome exists:
+1. **The label record** lists each violation: its cell, row, interval and
+   exposure. The exposure is the share of that row's living census endpoints
+   that fall in the cell, from A4's census stage outputs.
+2. **Every result whose configuration looks up a row with a violation**
+   carries a disclosure, wherever it appears, naming the row, the number of
+   violated cells and their total exposure.
+3. **In the claims register,** every claim resting on such a result is
+   recorded as conditional on the violation, never as proven.
+4. **Removing a violated cell** changes the support and so the reruns. It
+   needs its own pre-registered amendment and its own reruns. The operator
+   decides whether to commission one, and the record of that decision states
+   whether any rerun outcome was known when it was made.
+
+**Sequencing.** The rerun loader accepts the A4 family only at the exact
+code identity that published it, and a registered launch requires the
+working design note to match its pin. A5's implementation changes the code
+identity. So:
+- **This text changes no code identity.** It is committed before the reruns'
+  registration pin is made, so that pin and the reruns' gate index include
+  it.
+- **The implementation is committed** only after the commit from which the
+  reruns run is fixed. The reruns run from their own checkout at that
+  commit.
+- **A5 runs from its own checkout** at the implementation commit, after the
+  reruns by default. Its order relative to the reruns affects no decision,
+  because the handling above is fixed.
+- **A5 reads the A4 family directly.** It verifies the family's file hash
+  and seal, its receipt and its cell-results sidecar against the committed
+  identity record, `simulation/v3/runs/registered/A4_family_identity.json`,
+  which the commit fixing the reruns adds. It also verifies the A4 plan
+  against the receipt. It does not load the family through the production
+  loader.
+
+**Runner.** The production runner gains one A5 job kind, and its other job
+kinds are unchanged. A5 re-pins the approved boundary hash of
+`v3/production_runner.py` in `simulation/v3/table_compatibility_A2.json`.
+The record keeps the previous hash in an `a5` note, as A4 did.
+
+The configuration test, durable completion records, resume, mode control,
+memory caps and the per-phase nondeterminism check apply. The model server
+is down for the run.
+
+**What A5 does not establish.**
+- **Certification under the FV conditioned law.** The two laws weight a
+  cell's states differently. The cells the conditioned regime mainly reaches
+  stay asymptotic.
+- **The visit-weighted residual.** The 0.95 statement bounds the
+  per-trajectory mean. The visit-weighted mean is only checked, as in A4.
+- **Aggregation bias** within a cell, and residuals on transitions into
+  cells the row does not publish.
+- **An exact match to the reruns' allocation law.** The rerun policies
+  differ from the table's fixed rule. The census law is the committed proxy.
+- **A joint 0.95.** A4's plain statement, A4's FV statement and A5's
+  statement each hold at 0.95 on their own. They do not combine into one
+  joint 0.95 statement.
+
+**Execution and cost.**
+- **Compute (a planning estimate from P4 timings, not a measurement):**
+  756 tasks at about 950 seconds, about 200 core-hours. That is about 12.5
+  hours on 16 workers, at about 1.9 GB per task.
+- **Ceiling:** a cumulative 24-hour wall ceiling. If the configuration test
+  projects past it, the run stops and reports the gap.
+
+The run halts on:
+- a flow or value outside `[lower, upper]`;
+- a seed collision;
+- an A1 source-hash mismatch;
+- an A4 family, receipt or sidecar hash mismatch;
+- nondeterminism in a re-executed sample task.
+
+**Reporting.** The report gives, per row and in total:
+- the counts of certified, unresolved and violating cells;
+- the share of plain-law visits in certified cells;
+- the share of living census endpoints in certified cells;
+- every violation with its exposure.
+
+It reports no survival, extinction or fire rate.
