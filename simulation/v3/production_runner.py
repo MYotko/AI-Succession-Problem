@@ -166,6 +166,11 @@ def execute(job, registered=False, registration=None, root=None):
         # fit phase for a plain validate job.
         from .table_validation_a4 import run_stage_job
         return run_stage_job(job, root)
+    if kind == "a5_fvplain":
+        # A5 plain-law certification labels. The A5 stream seed travels in the
+        # config; the runner's own job seed is unused. A5 needs no sibling phase.
+        from .table_labels_a5 import run_stage_job
+        return run_stage_job(job, root)
     if kind == "fixture":
         if registered or job["tag"] != "validation":
             raise ValueError("runner fixtures are validation only")
@@ -281,7 +286,7 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
     def stop(reason):
         for process, job, _ in active.values():
             if process.is_alive():
-                a4 = job["kind"].startswith("a4_")
+                a4 = job["kind"].startswith(("a4_", "a5_"))
                 event(root, "restart_required", job=job["id"], runner_seed_unused=a4,
                       **({} if a4 else {"original_seed": job["seed"]}), reason=reason)
                 process.terminate()
@@ -342,8 +347,8 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                     if output is None:
                         attempts[key] = attempts.get(key, 0) + 1
                         atomic_json(attempts_path, attempts)
-                        event(root, "restart", job=key, attempt=attempts[key], runner_seed_unused=job["kind"].startswith("a4_"),
-                              **({} if job["kind"].startswith("a4_") else {"seed": job["seed"]}))
+                        event(root, "restart", job=key, attempt=attempts[key], runner_seed_unused=job["kind"].startswith(("a4_", "a5_")),
+                              **({} if job["kind"].startswith(("a4_", "a5_")) else {"seed": job["seed"]}))
                         if attempts[key] >= 3:
                             raise RuntimeError("job failed three times; inspect durable failure")
                         pending.insert(0, job)
@@ -394,9 +399,9 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                 active[job["id"]] = (process, job, selected["threads"])
                 slots += selected["threads"]
                 maximum = max(maximum, len(active))
-                # A4 stages ignore the runner's job seed (the stream seed travels
-                # in the config); label it so the event is not misread.
-                is_a4 = job["kind"].startswith("a4_")
+                # A4 and A5 stages ignore the runner's job seed (the stream seed
+                # travels in the config); label it so the event is not misread.
+                is_a4 = job["kind"].startswith(("a4_", "a5_"))
                 event(root, "dispatch", job=job["id"], runner_seed_unused=is_a4,
                       **({} if is_a4 else {"seed": job["seed"]}),
                       pid=process.pid, active=len(active), slots=slots, mode=mode)
@@ -608,8 +613,9 @@ def validate_spec(spec, settings):
         from .production_tables import ProductionTables
         calibrated, loaded = {}, set()
         for job in spec["jobs"]:
-            if job["kind"] in ("a4_fit", "a4_validate", "a4_census"):
-                # A4 stages carry their calibration through the referenced A1 job.
+            if job["kind"] in ("a4_fit", "a4_validate", "a4_census", "a5_fvplain"):
+                # A4 and A5 stages carry their calibration through the referenced
+                # A1 job.
                 cal_path = job["config"]["a1_job"]["config"].get("calibration_path")
                 if not cal_path:
                     raise RuntimeError("registered A4 jobs need frozen calibration")
@@ -700,7 +706,9 @@ def launch(spec_path, root, settings, service_record=None):
         history.append(record)
         atomic_json(root / "launches.json", history)
         config_deadline = min(deadline, time.time() + spec.get("configuration_seconds", 900))
-        is_a4 = spec.get("schema") == "v3-A4-validation-1"
+        # A4 validation and A5 labels are both staged plans with per-phase memory
+        # caps, resume-aware projection and a per-phase nondeterminism recheck.
+        is_a4 = spec.get("schema") in ("v3-A4-validation-1", "v3-A5-labels-1")
         # Memory caps come first, measured before any task runs, so a capped
         # phase's configuration test never tries a worker count it cannot use.
         mem_caps = {p: memory_worker_cap(spec.get("memory_estimate_gb", {}).get(p)) for p in spec["phases"]} if is_a4 else {}

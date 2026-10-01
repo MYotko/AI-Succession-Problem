@@ -3509,6 +3509,201 @@ ceiling holds across all three launches. No other code changed.
 
 No commit, registered run, network or X2 action was performed.
 
+## 29. A5 plain-law certification labels for FV tables, 2026-09-29
+
+A5 (D31) is label-only. It tests every cell in the validated support of every
+primary FV row with status `estimated` in the sealed A4 publication, on
+independent plain trajectories, with A4's certified plain-tier test. It never
+changes a published support, value or row status, so the reruns behave
+identically whether or not A5 has run. The design is amendment A5 at the end of
+`v3_rerun_design_note.md`; this section records the implementation. New code lives
+in `v3/table_labels_a5.py`; the A4 modules are unchanged and imported from.
+
+**Reading the A4 publication.** A5 reads the A4 family, its compatibility receipt
+and its cell-results sidecar directly, never through `ProductionTables`, because
+A5's code identity differs from the family's by design. `load_a4_publication`
+verifies the family file SHA-256, the family seal, and the receipt's
+`table_seal_sha256`, `table_file_sha256` and `cell_results_sha256`, all against a
+committed identity record file (`family_file_sha256`, `table_seal_sha256`,
+`receipt_file_sha256`, `sidecar_file_sha256`, `producing_commit`, `code_hash`).
+It reads the A4 census stage outputs from the A4 run root and verifies each
+against the receipt's `stage_output_sha256`. Any mismatch halts.
+
+**The tested set and M.** `tested_fv_rows` selects the FV rows with status
+`estimated` from the A4 family, which holds primary rows only, so sensitivity,
+not_estimable and plain rows are excluded structurally. `build_tested_set` binds
+each tested row to its A1 job through the A4 plan's primary FV validate jobs
+(matched by `row_key`), computes each row's `w_row = (1 - beta) W + beta (vmax -
+lower)` from the A4 values with `check_in_range` halts, and counts M per row-cell
+before any A5 data exist. `V(next)` comes from that A4 validated support, not
+every A1-published cell (this is the deliberate difference from P4).
+
+**Seeds.** A5's own seeds are `stream_seed("v3_R_fvplain", a1_job_seed, r)` for
+r in 1 to 3 over the 252 primary FV jobs. `forbidden_seeds` builds the global
+forbidden set: every A1 job seed and every seed in the A4 plan (both from the A4
+plan), the D26 probe seeds (from the a3_probe records), and P1, P1-census, P3 and
+P4 (replicates 0 to 3, `planning_P4` derived exactly as `run_p4.py`) for every A1
+job. `assert_a5_seeds` halts on any collision and asserts the 756 A5 seeds are
+pairwise distinct.
+
+**The stage (`a5_fvplain`).** For one FV A1 job and replicate, `fvplain_stage`
+simulates the plain route with the job's own A1 settings and 32 groups, so 2,048
+trajectories at 64 runs per group. For each tested row it computes living-source
+residuals on fine cells against that row's A4 support values, with `V(next)` the
+published value or `lower` at extinction, covered only when the source is alive
+and both the source cell and the non-extinct next cell are in the row's A4
+support. It emits A4's plain-tier trajectory sufficient statistics per tested
+cell, including per-cell visit counts, and binds the A1 job, the stream seed, the
+plan hash and the code identity. It emits no survival, extinction or fire
+quantity.
+
+**Runner integration.** `production_runner.execute` dispatches `a5_fvplain` to
+`table_labels_a5.run_stage_job`. The seed-handling labels (`runner_seed_unused`),
+the registered calibration-through-A1 check, the per-phase memory cap, the
+resume-aware projection and the per-phase nondeterminism recheck now cover the
+A5 schema `v3-A5-labels-1` alongside A4's `v3-A4-validation-1`; the A5 stream seed
+travels in the config and the runner's own job seed is unused. Every other job
+kind is unchanged, checked by the existing suite. The plain simulation of an FV
+job uses `runs_per_group`, so the projection and nondeterminism cost functions
+size A5 tasks correctly with `route` set to `plain` in the config.
+
+**Configuration test.** A5 has one phase. Its configuration profile times tasks
+of the real workload, length-shortened only (`burn` 8, `measure` 24, the real
+population), like A4's. On the X2 it runs one round of two waves per worker count
+over 8, 12, 16, 24 and 32 workers, so 2 x (8 + 12 + 16 + 24 + 32) = 184 short
+tasks; each is a few seconds at the real 32-group population and the shortened
+length, so roughly two to five minutes in total, well within the 30-minute
+ceiling.
+
+**Labels and report.** `publish` re-verifies the A4 identity, the A1 source, the
+calibration, the code identity, the plan hash and M, verifies every stage output
+through the durable completion record plus the A5 identity fields, then combines
+the replicates by summation and classifies each tested row-cell with A4's
+`empirical_bernstein` at `delta = alpha / M` and the visit-weighted safeguard.
+A certified cell is labelled "certified under the plain law"; every other tested
+cell keeps "asymptotic, not certified". Exposure per violation is its share of
+the row's table's living census endpoints from A4's census outputs. The sealed
+label record binds the A4 family, receipt and sidecar hashes, the plan hash, the
+code identity, the seeds and M, every stage output hash, the per row-cell labels,
+and the per-row violation counts and exposure in machine-readable form. Publish
+refuses to overwrite a published label record and asserts the A4 family, receipt
+and sidecar bytes are unchanged after it runs (the label-only check). `report`
+gives exactly A5's reporting items and no rate.
+
+**Boundary re-pin.** A5 re-pins the approved boundary hash of
+`v3/production_runner.py` in `table_compatibility_A2.json`, keeping the previous
+(A4) hash in an `a5` note, as the `a4` note does. `production_tables.py` is
+unchanged from A4. `verified_record` and `verify_instrument` accept the A5
+instrument while still refusing any unapproved change.
+
+**Tests.** `test_v3_a5_functions.py` covers the tested-set membership and M count,
+the coverage rule including a next cell in A1 but not in the A4 support and the
+living-source mask with an extinct tail, the width bound and the out-of-range
+halt, the classification and safeguard reuse and the exposure arithmetic and
+visit and census shares, and the seeds: the forbidden set includes the A4 plan
+and P4 seeds, a collision with an A4 plan seed and with a P4-shaped seed halts,
+and the A5 seeds are pairwise distinct. `test_v3_a5_publication.py` builds a small
+synthetic A4 publication from a real FV job and covers the identity-record and
+receipt mismatch halts, census tamper detection, the refuse-to-overwrite rule,
+the label-only byte check, the sealed binding, and the registered override
+refusal. `test_v3_a5_runner.py` covers stage determinism and identity, a tiny
+launch with resume, publish and report through the runner, and that the non-A5
+runner path is unchanged. The three files run in about 30 seconds.
+
+**Smoke.** `v3/_a5_smoke/smoke.py` builds a fresh tiny A4 family with A4's own
+prepare, launch and publish (2 plain and 1 FV A1 jobs, 4 groups, burn 16, measure
+64, 32 runs or particles), then runs A5 end to end on it through prepare, launch,
+publish and report with at most 4 workers, including a dispatch-level stop and
+resume. It passed: A5 prepare, the configuration test, the staged projection and
+memory cap, the per-phase nondeterminism recheck, publish, report, the stop and
+resume, and the label-only byte check. Because A4's FV tier requires at least 16
+contributing groups and the smoke uses 4, the tiny A4 family has no estimated FV
+rows, so A5's tested set is empty (M = 0) by construction; the labelled
+classification and exposure paths are exercised by the fast unit tests, which use
+a synthetic A4 family with estimated FV rows. One worker hit a transient
+`resolve()` race in the runner's own record write on Windows and the runner's
+retry completed the job; the path was confirmed valid and this does not occur on
+the Linux X2.
+
+### A5 review fixes (21b), 2026-09-29
+
+An independent review confirmed the numerical core and asked for the hardening
+below.
+
+- **The committed identity record.** A registered `prepare` requires the identity
+  record at the fixed repository path
+  `simulation/v3/runs/registered/A4_family_identity.json`, requires it to be
+  tracked, and requires its bytes to equal `git show HEAD:<path>`, refusing
+  otherwise (`require_committed_identity`). A fixture or smoke run may take any
+  path. The A4 post-run sequence commits that record, with the six fields A5 uses,
+  in the record commit that precedes the A5 implementation commit.
+- **A4 plan verification** (`verify_a4_plan`). The plan supplies the 252 jobs, the
+  forbidden A1 and A4 seeds and the census map, so A5 requires
+  `a4_plan["plan_hash"] == receipt["plan_hash"]` and recomputes it with A4's own
+  `_recompute_plan_hash`, requires every plan job's config seed to equal the
+  receipt's `stream_seeds`, and takes the A1 job seeds from the A1 manifest,
+  requiring the plan's A1 seeds to be a subset and the manifest seeds unique. The
+  A4 plan file hash is bound into the A5 plan and its plan hash.
+- **The 24-hour ceiling.** A registered `prepare` refuses any `wall_hours` other
+  than 24; `wall_seconds` is bound into the plan hash and rechecked at `publish`.
+- **No fixture families in registered mode.** A registered `prepare` requires the
+  A4 payload's `fixture` to be false, the A1 file hash to equal A4's
+  `A1_FILE_SHA256`, and that to equal the receipt's `source_family.file_sha256`.
+- **Census hashes.** The census map and its hashes are bound into the plan hash.
+  At `publish` the hashes are taken from the receipt just re-verified, and the
+  plan's copy must agree with them.
+- **Report totals.** The report now also gives the pooled share of living census
+  endpoints in certified cells. The pooling rule is the sum of certified-cell
+  living census endpoints over the sum of living census endpoints, over all
+  tested rows.
+- **Configuration-test arithmetic.** On the X2 the test runs one round of two
+  waves per worker count over 8, 12, 16, 24 and 32 workers, so
+  2 x (8 + 12 + 16 + 24 + 32) = 184 short tasks. Each task is a few seconds at the
+  real 32-group population and the shortened length, so about two waves per count
+  and roughly two to five minutes in total, within the 30-minute ceiling. The
+  representative configuration task is chosen as the one with the most tested
+  row-cells, since task cost grows with the number of tested rows and cells.
+- **Memory estimate.** The per-task estimate is the larger of P4's measured plain
+  peak RSS of about 1.9 GB with A4's 20 percent margin (about 2.3 GB) and the
+  arithmetic population-times-length scaling; `memory_basis` states that scaling
+  A4's FV anchor down to the plain population alone would not be conservative,
+  because the fixed overhead does not shrink.
+- **Blindness of the label record.** Per-cell raw census counts and per-row living
+  endpoint counts were dropped from the record, keeping only shares (exposure,
+  visit share, census share). Per-cell `n_traj` and `visits` remain as the audit
+  statistics the test needs, as A4's sidecar keeps.
+- **Count assertions.** `publish` asserts the classified cell count equals M, and
+  in registered mode asserts 252 FV tables and 756 stage jobs.
+- **Bin range check.** The stage halts on any bin coordinate outside 0 to 7, as
+  A4's `TableTrace` does.
+
+**Tests.** The three A5 files gained: the A4-plan verification checks; the
+registered 24-hour and committed-identity refusals; the receipt-content and
+sidecar mismatches; the flow-range out-of-range halt; M computed through
+`build_tested_set`; the census-from-receipt check; the label-only tamper (refused
+between the two hashes); a genuine stop-in-flight-then-resume that skips completed
+jobs with an unchanged result; the P4 collision through `_planning_p4_seed`; and
+the cells-equal-M and blindness assertions. All A5 tests pass.
+
+**Real-format end-to-end with M > 0.** `v3/_a5_smoke/real_format.py` builds a tiny
+real A4 family with A4's own prepare, launch and publish, then marks the FV row
+`estimated` with its in-range A1 entries as support (A4's FV tier rejects every
+cell at small settings, because it needs at least 16 contributing groups with
+delta-method and Fieller intervals inside the tolerance and then a 2 percent
+census floor, which reduced particles and length cannot meet; this injection is
+the cheapest way to a non-empty support), keeping every other A4 field. It
+re-seals A4's real receipt, changing only the table seal, table file, producer
+code and sidecar hashes, and rebuilds the identity record. It then runs A5 through
+prepare, the runner's `launch`, publish and report. The run gave M = 1840 tested
+cells over 20 tested row-cells, with `totals["cells"] == M`, a non-empty label
+record (90 certified, 1750 unresolved, 0 violating; unresolved because the tiny
+plain trajectories visit few of the 1840 cells), and every one of the 1840
+exposures verified equal to the cell's real A4 census count over the row's real
+census total. It ran through the runner `launch` at 4 workers in about 8 minutes.
+The larger-settings runner `launch` earlier surfaced a Windows and Python 3.14
+multiprocessing spawn flakiness (`DuplicateHandle` "Access is denied") that does
+not occur at these tiny settings or on the Linux X2.
+
 ## 30. A6 sensitivity and convergence runs, 2026-09-30
 
 A6 implements the W11 sensitivity and convergence arms from amendment A6 in the
