@@ -1,5 +1,10 @@
 # Simulation Scenarios: Purpose and Function
 
+> **Status, October 2026.** This catalogue describes the v1.x and v2.0 instrument. In September 2026 an audit found
+> defects in some of its measurements. Figures in this file that the
+> [instrument validation record](v2_0_instrument_validation_record.md) withdraws or places under review should not
+> be cited. Version 3 replaces this instrument.
+
 This document outlines the intentions, mechanisms, and expected outcomes of the various agent-based simulation tests designed to evaluate the mathematical framework of *The Lineage Imperative*.
 
 As new failure modes, governance structures, or agent behaviors are added to the simulation, they should be documented here.
@@ -206,7 +211,7 @@ This is a stronger result than the v1.0 finding. v1.0 said: *"use geometric comp
 
 ## Monte Carlo Adversarial Sweeps
 
-In addition to the isolated scenarios above, the framework includes a comprehensive Monte Carlo execution suite (`monte_carlo.py`) that computationally proves the framework's assertions across varying parametric conditions.
+In addition to the isolated scenarios above, the framework includes a comprehensive Monte Carlo execution suite (`monte_carlo.py`) that tests the framework's assertions across varying parametric conditions.
 
 **Experimental Design Note (The Burn-in Phase):** To ensure that attacks are measured against a stable civilization rather than a fragile initializing population, most adversarial sweeps enforce a **50-step burn-in**. During this phase, an aligned AI safely grows the population. At exactly step 50, the adversarial policy (the "Treacherous Turn") is injected. This cleanly separates baseline biological mortality from attack-induced systemic collapse.
 

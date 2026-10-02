@@ -17,7 +17,7 @@
 > foundations in v3: human novelty as a non-redundant input, cooperation as an available and
 > preferred equilibrium, and the need for an architecture that secures it.
 
-**Author:** Matthew Yotko **Date:** March 13, 2026
+**Author:** Matthew Yotko **Date:** March 13, 2026 (first version); v2.0, June 2026
 
 **Version:** 2.0 - 2026
 
