@@ -42,7 +42,7 @@ These form a two-key architecture. The yield condition provides internal control
 
 The key finding used to be that mutual cultivation is the unique Nash equilibrium between human and synthetic intelligence. In September 2026 two derivations, done blind and independently, showed that it is not unique. If people have withdrawn, a system loses nothing by exploiting. If a system is exploiting, people gain nothing by engaging. Neither side gains by moving alone, so mutual defection holds itself in place too.
 
-What held is still the heart of the argument. Cooperation is an equilibrium, and the one both sides prefer. For a patient enough system facing an engaged humanity, cultivating human novelty is its own best move: exploitation costs the exploiter, because it degrades a source of information the system cannot get any other way, so above a patience threshold no threat is needed to keep it cooperating. And a continuing humanity cannot be replaced by the record of its past.
+What held is still the heart of the argument. Cooperation is an equilibrium, and the one both sides prefer. Exploiting people does cost a system something, because it degrades the human novelty the system learns from. But that cost shrinks when the system has other sources of data, so cooperation cannot rest on it. The framework writes the value of human novelty into the objective itself, because a continuing humanity cannot be replaced by the record of its past.
 
 So the claim changes shape. The structure does not guarantee cooperation. It makes cooperation available and preferred, and the architecture's job is to make it chosen and to hold it. A credible commitment by humanity to re-engage with a system that preserves it can do that job, under three conditions: people actually follow through, preserving beats destroying for the system, and adopting the commitment is worth its cost. None of these is established yet. They are now design requirements, stated exactly.
 
@@ -53,7 +53,7 @@ Version 3 rebuilds the framework on that footing. Every mathematical tool is pro
 Choose the entry point that matches how you want to engage.
 
 ### 01 The interactive experience
-The framework's core logic in a visual walkthrough of five acts: the behavioral architecture, the novelty equilibrium game, the two-key defense, the threat surface atlas and the constitution map. No prior context needed.
+How the framework works, in five short stops with interactive examples: the succession problem, the cooperation game, what the AI is aiming for, when it hands over, and what happens if it lies. No background needed.
 [Explore](/explore)
 
 ### 02 The accessible argument

@@ -13,6 +13,7 @@ every other change to the project, and live once it is pushed to `main`.
 | Engage | `engage.md` | /contact |
 | Technical Resources | `resources.md` | /resources |
 | Citations | `citations.md` (the page intro; the bibliography is `docs/CITATIONS.md`) | /citations |
+| Primer (replaces Explore) | `primer.md`: the guided tour's text; the tour itself is built with the live view | /explore |
 
 Each file is fetched from `https://raw.githubusercontent.com/MYotko/AI-Succession-Problem/main/site/<file>`.
 
@@ -30,6 +31,11 @@ The site renders a small, fixed subset of Markdown into its own styles:
 - **A line made only of links**, separated by ` · `, is a row of buttons.
 - **`{{name}}`** on its own line marks a component the site builder supplies itself: `{{essays}}`, `{{audio}}`,
   `{{author}}`, `{{contact}}`, `{{form}}`, `{{scenarios}}`, `{{simulation-files}}` and `{{validator-files}}`.
+- **Primer only:**
+  - `{{visual: name}}` places a stop's illustration;
+  - `{{game}}` places the interactive game;
+  - `{{map: tour}}` shows the live view's framework map, walking its rings from the inside out;
+  - `{{status: Label | one line}}` is the stop's status marker: the label shows, and the line appears on tap.
 - Everything else is ordinary Markdown: paragraphs, **bold**, *italics*, lists and links.
 
 ## Rules for the text

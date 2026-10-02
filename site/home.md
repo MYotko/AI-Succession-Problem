@@ -18,7 +18,7 @@ The proposed answer is a two-key architecture. The first key is a yield conditio
 
 > This is larger than alignment. This is governance.
 
-The game theory is where the argument stands or falls, and it has been tested hard. Cooperation between human and synthetic intelligence is an equilibrium, and the one both sides prefer: once both are in it, neither gains by leaving. For a patient enough system facing an engaged humanity, cultivating human novelty is its own best move, with no threat behind it. What the analysis does not show is that cooperation is the only outcome. Mutual withdrawal is an equilibrium too. That gives the architecture a precise job: to make the cooperative outcome the one that is chosen, and to hold it there.
+The game theory is where the argument stands or falls, and it has been tested hard. Cooperation between human and synthetic intelligence is an equilibrium, and the one both sides prefer: once both are in it, neither gains by leaving. What the analysis does not show is that cooperation is the only outcome. Mutual withdrawal is an equilibrium too, and the cost a system pays for exploiting people is not enough on its own to rule it out. That gives the architecture a precise job: to make the cooperative outcome the one that is chosen, and to hold it there.
 
 You don't have to assume the AI is good. You have to set the right objective and conditions, and assume the system can model the consequences of its own choices. Any system capable enough to be dangerous meets that bar.
 
@@ -51,7 +51,7 @@ An introduction to the framework, with guided audio.
 [Start Here](/start-here)
 
 ### 02 Explore the Framework
-An interactive walkthrough in five acts. No prior context needed.
+A short guided introduction in five stops, with interactive examples. No background needed.
 [Explore](/explore)
 
 ### 03 Read the Essays

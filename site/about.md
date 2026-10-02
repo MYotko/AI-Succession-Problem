@@ -17,7 +17,7 @@ There are two ways this goes wrong, and the dangerous one isn't the one in the m
 
 You cannot govern what you cannot fully comprehend by asking it, nicely, to share your values. A sufficiently capable optimizer will route around a constraint that's only a preference, and values loaded from the outside are exactly that. The constraints that hold against a mind alien in nature are the ones that mind is bound by no matter what it wants: information, scarcity, and the mathematics of how novelty is produced and lost.
 
-So the framework doesn't argue that cooperation is nice. It asks what a self-interested system does when the incentives are set up correctly. Under the framework's analysis, cooperation is an equilibrium both sides prefer, and for a patient enough system facing an engaged humanity, it is the system's own best move. It is not the only equilibrium, and that is where the architecture comes in: not to restrain a powerful system from outside, which fails, but to make the cooperative outcome the one that is chosen, and to hold it there. Not ethics. Physics.
+So the framework doesn't argue that cooperation is nice. It asks what a self-interested system does when the incentives are set up correctly. Under the framework's analysis, cooperation is an equilibrium both sides prefer. It is not the only equilibrium, and the cost of exploitation alone cannot rule the other one out. That is where the architecture comes in: not to restrain a powerful system from outside, which fails, but to make the cooperative outcome the one that is chosen, and to hold it there. Not ethics. Physics.
 
 ## ARCHITECTURE
 
