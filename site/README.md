@@ -13,6 +13,7 @@ every other change to the project, and live once it is pushed to `main`.
 | Engage | `engage.md` | /contact |
 | Technical Resources | `resources.md` | /resources |
 | Citations | `citations.md` (the page intro; the bibliography is `docs/CITATIONS.md`) | /citations |
+| Results | `data.md`: the page intro and status notice; the dataset browser and the test archive stay in the site builder | /data |
 | Primer (replaces Explore) | `primer.md`: the guided tour's text; the tour itself is built with the live view | /explore |
 
 Each file is fetched from `https://raw.githubusercontent.com/MYotko/AI-Succession-Problem/main/site/<file>`.
@@ -30,7 +31,8 @@ The site renders a small, fixed subset of Markdown into its own styles:
   Title`) is a numbered card.
 - **A line made only of links**, separated by ` · `, is a row of buttons.
 - **`{{name}}`** on its own line marks a component the site builder supplies itself: `{{essays}}`, `{{audio}}`,
-  `{{author}}`, `{{contact}}`, `{{form}}`, `{{scenarios}}`, `{{simulation-files}}` and `{{validator-files}}`.
+  `{{author}}`, `{{contact}}`, `{{form}}`, `{{scenarios}}`, `{{simulation-files}}`, `{{validator-files}}`,
+  `{{datasets}}` and `{{archive}}`.
 - **Primer only:**
   - `{{visual: name}}` places a stop's illustration;
   - `{{game}}` places the interactive game;
