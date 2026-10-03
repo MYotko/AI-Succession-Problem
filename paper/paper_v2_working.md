@@ -12,7 +12,7 @@
 > - The drift-containment status stated here is superseded. It is uncharacterized, neither
 >   shown contained nor shown uncontained.
 >
-> A summary is in the [instrument validation record](../docs/v2_0_instrument_validation_record.md), and the full analyses will be
+> A summary is in the [instrument validation record](https://github.com/MYotko/AI-Succession-Problem/blob/main/docs/v2_0_instrument_validation_record.md), and the full analyses will be
 > published with v3. The core of the framework is being rebuilt on formally certified
 > foundations in v3: human novelty as a non-redundant input, cooperation as an available and
 > preferred equilibrium, and the need for an architecture that secures it.

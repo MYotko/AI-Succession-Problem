@@ -117,12 +117,15 @@ at 80 percent power would have needed roughly n=350 per cell.
 **byte-identical as whole files**, with exactly one enumerated exception:
 
 ```
-line 5:  paper   **Version:** 2.0 (working revision) - 2026
+line 22: paper   **Version:** 2.0 (working revision) - 2026
          mirror  **Version:** 2.0 - 2026
 ```
 
 That line is a deliberate label distinguishing the working revision from the
-assembled document. Any other difference is a defect.
+assembled document. Any other difference is a defect. (It was line 5 until the
+status notice of 2026-09-25 moved it. The notice links the validation record by
+its full GitHub address, so both surfaces carry the same bytes; a relative link
+would differ between the two folders.)
 
 This whole-file rule **supersedes region-scoped mirror checks**, which are no
 longer sufficient. Region checks are what allowed Appendix C to diverge silently:
