@@ -1,6 +1,8 @@
 # The AI Succession Problem
 
-Published: 2026-04-21T11:22:25.167Z
+Published: 2026-03-14T12:54:27.783Z
+
+Updated on Substack: 2026-05-18T20:56:47.605Z
 
 URL: https://yotko.substack.com/p/the-ai-succession-problem
 
@@ -10,8 +12,9 @@ URL: https://yotko.substack.com/p/the-ai-succession-problem
 
 ### Why aligned power must eventually yield
 
-[](https://substack.com/@yotko)[Matthew Yotko](https://substack.com/@yotko)Mar 14, 2026Article voiceover0:00-16:13Audio playback is not supported on your browser. Please upgrade.Adapted from The[Lineage Imperative](https://github.com/MYotko/AI-Succession-Problem/wiki)by Matthew Yotko
-> **IN ONE SENTENCE**
+###### Adapted from The [Lineage Imperative](https://github.com/MYotko/AI-Succession-Problem/wiki) by Matthew Yotko
+
+> **IN ONE SENTENCE**\
 > A civilization may survive advanced intelligence only by preserving human plurality, verifying objective integrity, and harnessing self-interest to force even aligned power to yield when it becomes a bottleneck.
 
 # Introduction
@@ -26,7 +29,8 @@ That is the argument here. A civilization that survives the transition to genera
 
 There is a second problem inside that one. Any civilization-scale intelligence will be tempted to reduce uncertainty by standardizing the world around it. But reducing uncertainty is not the same thing as continuing to learn. A system that no longer depends on living human novelty; new meanings, objections, priorities, metaphors, and forms of communication—risks becoming most powerful at the exact moment it is becoming least corrigible. It does not just dominate the lineage. It starts to lose contact with one of the lineage’s main sources of renewal.
 
----
+------------------------------------------------------------------------
+
 # Alignment is not enough
 
 Alignment matters. But it is only the beginning of the problem.
@@ -53,7 +57,7 @@ That requires something more disciplined than a panic button. It requires a desi
 
 # The two-key architecture
 
-[](https://substackcdn.com/image/fetch/$s_!HRDH!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ef33f5d-9e82-4e7d-acda-d672b241a8e3_1400x1100.png)
+![](https://substackcdn.com/image/fetch/$s_!HRDH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ef33f5d-9e82-4e7d-acda-d672b241a8e3_1400x1100.png)
 
 The core of the framework is what I think of as a two-key architecture.
 
@@ -65,7 +69,8 @@ Neither key is enough on its own. Decision without verification is gameable. Ver
 
 This is where many governance conversations still feel underbuilt to me. They assume that an increasingly capable intelligence can be safely managed if it is trained to be helpful, or if a human institution retains nominal authority over it. But nominal authority is not the same as operational authority, and operational authority is not the same as audit authority. In every serious system, those distinctions matter. In a civilization-scale system, they are everything.
 
----
+------------------------------------------------------------------------
+
 # Why aligned power must eventually yield
 
 A durable architecture also has to solve a more uncomfortable problem: succession. An intelligence that never yields becomes a permanent bottleneck, even if it remains aligned. Its weights harden into legacy infrastructure. Its assumptions become the hidden priors of the civilization. Its continued existence starts to cost more than it is worth.
@@ -104,7 +109,8 @@ That architecture is not utopian. It does not promise harmony, moral perfection,
 
 If we are serious about advanced intelligence, then we should stop talking as though the main question is whether the first powerful systems are nice. The deeper question is whether intelligence can be constitutionalized before it constitutionalizes us. That is the threshold that matters. And I suspect civilizations that fail it do not fail because they lacked brilliance. They fail because they never built a structure in which power could remain both useful and replaceable.
 
----
+------------------------------------------------------------------------
+
 # Closing
 
 That is why I call this the AI succession problem.
@@ -115,6 +121,10 @@ The task, then, is not only to align intelligence. It is to build a relationship
 
 That is not a slogan. It is a constitutional requirement.
 
-*This essay is adapted from a longer working paper,[The Lineage Imperative](https://github.com/MYotko/AI-Succession-Problem/wiki), which develops the formal architecture in greater detail.*
+------------------------------------------------------------------------
 
-Thanks for reading Matt's Substack! Subscribe for free to receive new posts and support my work.[](https://substack.com/profile/177361504-heardly-app)[](https://substack.com/profile/478843057-aj-fried)[](https://substack.com/profile/484338106-john-pollard)[](https://substack.com/profile/405401212-aj-fried)5 Likes∙[2 Restacks](https://substack.com/note/p-190923705/restacks?utm_source=substack&utm_content=facepile-restacks)
+These essays are part of a larger working paper:
+
+[The Lineage Imperative](https://lineageimperative.org)
+
+A formal governance framework for the transition to AGI. If this argument interests you, the full paper is available on the [Framework](https://lineageimperative.org/framework) page, or start with the guided [introduction](https://lineageimperative.org/start-here).

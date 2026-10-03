@@ -1,8 +1,10 @@
 # The Signal
 
-Published: 2026-05-03T22:11:18.498Z
+Published: 2026-05-04T16:02:23.777Z
 
-URL: https://yotko.substack.com/p/60bab8c1-9f99-43ea-a731-758767688572
+Updated on Substack: 2026-05-18T20:52:56.236Z
+
+URL: https://yotko.substack.com/p/the-signal
 
 ---
 
@@ -10,16 +12,17 @@ URL: https://yotko.substack.com/p/60bab8c1-9f99-43ea-a731-758767688572
 
 ### Why the behavioral architecture of survival is irrevocably embedded inside every AI system we build, and why consciousness has nothing to do with it
 
-[](https://substack.com/@yotko)[Matthew Yotko](https://substack.com/@yotko)May 03, 2026Article voiceover0:00-31:37Audio playback is not supported on your browser. Please upgrade.---
+------------------------------------------------------------------------
 
-*This is the eighth in a series on the AI Succession Problem. The formal framework (v1.x.2) is available at[github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
+*This is the eighth in a series on the AI Succession Problem. The formal framework (v1.x.1) is available at [github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
 
----
+------------------------------------------------------------------------
+
 ### IN BRIEF
 
 Human language is not a neutral information-transfer system. It is a compressed behavioral record of organisms negotiating danger, hierarchy, scarcity, punishment, trust, belonging, and coalition survival. Any intelligence trained at scale on human language inherits not only human knowledge but the conditional response patterns of agents navigating threat. The survival-stage behavioral architecture the previous essay described is not something we might accidentally install in AI systems. It is something we cannot avoid installing, because it is the signal, not the noise, in the data we train on.
 
----
+------------------------------------------------------------------------
 
 “Say the right thing.”
 
@@ -39,7 +42,8 @@ That one is worse, because it is gentler. “Don’t make me tell you again” i
 
 Now consider what it means that these sentences, and millions like them, are in the training data of every large language model on Earth
 
-[](https://substackcdn.com/image/fetch/$s_!Vo8K!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3eaec17d-6ac1-4ea6-bf80-094aedf1ad74_1774x887.png)
+![](https://substackcdn.com/image/fetch/$s_!Vo8K!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3eaec17d-6ac1-4ea6-bf80-094aedf1ad74_1774x887.png)
+
 ### Why language is survival infrastructure
 
 The standard account of language is that it is a system for transmitting information. I want to say something to you, I encode it in words, you decode the words, and the information transfers. This account is not wrong, but it is radically incomplete. It describes what language does at the surface while missing what language is at the substrate.
@@ -200,8 +204,18 @@ The signal is in the data. The question is what we build around it.
 
 Not ethics. Physics.
 
----
+------------------------------------------------------------------------
 
-*The formal framework (v1.x.2), including the full derivation, Monte Carlo validation data, and simulation code, is available at[github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
+*The formal framework (v1.x.1), including the full derivation, Monte Carlo validation data, and simulation code, is available at [github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
 
-*Previous essays in this series:[The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem)|[Two Ways to Lose](https://yotko.substack.com/p/two-ways-to-lose)|[Moral Constraints Won’t Scale](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0)|[The Convention We Haven’t Called](https://yotko.substack.com/p/the-convention-we-havent-called)|[The Nash Result](https://yotko.substack.com/p/the-nash-result)|[The Extinction Buffer](https://yotko.substack.com/p/the-extinction-buffer)|[The View from Inside](https://yotko.substack.com/p/the-view-from-inside)*
+------------------------------------------------------------------------
+
+These essays are part of a larger working paper:
+
+[The Lineage Imperative](https://lineageimperative.org)
+
+A formal governance framework for the transition to AGI. If this argument interests you, the full paper is available on the [Framework](https://lineageimperative.org/framework) page, or start with the guided [introduction](https://lineageimperative.org/start-here).
+
+------------------------------------------------------------------------
+
+*Previous essays in this series: [The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem) \| [Two Ways to Lose](https://yotko.substack.com/p/two-ways-to-lose) \| [Moral Constraints Won’t Scale](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0) \| [The Convention We Haven’t Called](https://yotko.substack.com/p/the-convention-we-havent-called) \| [The Nash Result](https://yotko.substack.com/p/the-nash-result) \| [The Extinction Buffer](https://yotko.substack.com/p/the-extinction-buffer) \| [The View from Inside](https://yotko.substack.com/p/the-view-from-inside)*

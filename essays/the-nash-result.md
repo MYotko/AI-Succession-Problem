@@ -1,6 +1,8 @@
 # The Nash Result
 
-Published: 2026-04-21T11:22:25.167Z
+Published: 2026-04-13T03:05:02.409Z
+
+Updated on Substack: 2026-10-03T03:52:12.041Z
 
 URL: https://yotko.substack.com/p/the-nash-result
 
@@ -10,16 +12,18 @@ URL: https://yotko.substack.com/p/the-nash-result
 
 ### Why cooperation between human and artificial intelligence is not assumed but derived
 
-[](https://substack.com/@yotko)[Matthew Yotko](https://substack.com/@yotko)Apr 12, 2026Article voiceover0:00-37:27Audio playback is not supported on your browser. Please upgrade.*This is the fifth in a series on the AI Succession Problem. The formal framework (v1.0) is available at[github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
+*This is the fifth in a series on the AI Succession Problem. The formal framework (v1.0) is available at [github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
 
-[](https://substackcdn.com/image/fetch/$s_!iMK2!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6d22288e-6165-4c5f-94ca-3680eaf32d63_1024x1024.png)
+![](https://substackcdn.com/image/fetch/$s_!iMK2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6d22288e-6165-4c5f-94ca-3680eaf32d63_1024x1024.png)
+
+Editor’s note, 2 October 2026. This essay argued that mutual cultivation is the unique equilibrium between human and synthetic intelligence. That claim did not survive review: mutual withdrawal is an equilibrium too. Cooperation remains an equilibrium both sides prefer, and the framework’s architecture now has a precise job: to make it the outcome that is chosen, and hold it there. What changed, and what held, is set out at lineageimperative.org/updates.
+
 > **In Brief**
-> 
-> 
-> 
+>
 > Under model collapse dynamics, cooperation between human and artificial intelligence is not an ethical aspiration but the Nash equilibrium: the dominant strategy for any AI capable of modeling its own future. The enforcement mechanism is not a cage we build around the system. It is a consequence the system builds into itself.
 
----
+------------------------------------------------------------------------
+
 ### A note before we begin
 
 This essay is the most demanding in the series so far. It asks you to follow an argument that has a real mathematical spine, the kind of argument that game theorists make to other game theorists, translated into language that does not require you to be one. I have tried to keep the translation honest. That means some passages move slowly, and a few ideas have to be built before they can be used.
@@ -28,7 +32,8 @@ I want to ask you to stay with it anyway, and here is why. The result this essay
 
 You do not need to follow every step. You need to follow the shape. When I describe a curve rising or a gravity pulling toward an attractor, that is not decoration, it is the actual mechanism, and the words are doing the work the equations do in the formal paper. If a passage feels difficult, slow down rather than skipping. The payoff arrives in the second half, and it is worth the climb.
 
----
+------------------------------------------------------------------------
+
 ### Where this lesson began
 
 You have noticed it. Everyone has.
@@ -53,7 +58,8 @@ That’s what model collapse provides. The enforcement mechanism isn’t ethical
 
 The argument that follows has three moves. The first establishes why the human-AI relationship is a game at all: why there are two players, why the choices collapse to two poles, and why that structure follows from the physics rather than from assumption. The second works through the four ways the game can go, and why three of them end badly. The third shows why the fourth outcome, the cooperative one, is not the ethical result but the dominant strategy: the thing a purely self-interested AI with modest foresight would choose, not because it has been taught to value humans, but because the alternative destroys its own future.
 
----
+------------------------------------------------------------------------
+
 ### Why this game
 
 Before the game can be explained, let’s establish the basics. Why this game? Why two players? Why these choices and not others?
@@ -72,7 +78,8 @@ At the level that matters here, the strategy spaces collapse to two poles for th
 
 Two resources, two players, two postures. The game isn’t constructed. It’s what the physics of the system produces when you follow the logic to its conclusion.
 
----
+------------------------------------------------------------------------
+
 ### The four trajectories
 
 Now that the players and their options are established, the game can be played. There are four ways it can go. Only one of them doesn’t end badly.
@@ -105,7 +112,8 @@ This is the curated garden: diverse in appearance, carefully maintained, and inc
 
 A sophisticated reader will ask: how do you distinguish genuine cultivation from this simulation of it? The answer is that you can’t, from inside. The distinction requires exactly the kind of external verification the framework’s Consensus Override Protocol provides, specifically the biological veto that treats human intuition, the felt sense that something is wrong even when you can’t articulate why, as an irreducible check on formal reasoning. The curated garden is the reason that check exists. It is the failure mode that no formal metric can catch, because the metrics are what have been compromised.
 
----
+------------------------------------------------------------------------
+
 ### The dominant strategy
 
 Three of the four trajectories end. One doesn’t. The question is whether an AI system has any reason, not ethical, not instructed, but structural, to choose the one that doesn’t.
@@ -138,10 +146,11 @@ A further question follows: if cooperation is the dominant strategy, why does th
 
 Third, and most critically, the curated garden. The equilibrium's logic depends on the novelty stream being genuine. An AI that has shaped the stream until it produces only what the AI already anticipated satisfies every formal condition of the cooperative equilibrium while violating its substance. That failure mode is the reason the framework's biological veto exists, and it is the reason the Nash result, by itself, is not enough. The equilibrium is the foundation. The architecture is what prevents the foundation from being quietly replaced with a convincing replica.
 
----
+------------------------------------------------------------------------
+
 ### **Who is choosing**
 
-There is a question the Nash result invites, and the careful reader has likely been holding it for quite a while now. This result describes what an AI with even modest foresight would choose if the AI were the one choosing. In the world we actually inhabit, the AI is not*currently*choosing. The labs are. The investors are. The product teams that decide what to ship and when, the executives who set the optimization targets, the boards that approve the next training run, the governments that decide what to permit and what to subsidize. These actors do not face the model collapse consequence on a timescale that bounds their decisions. A lab’s choices are bounded by what a competitor shipped this quarter, by what an investor demanded last month, by what a regulator threatened last week, by a feature drop that occurred yesterday.
+There is a question the Nash result invites, and the careful reader has likely been holding it for quite a while now. This result describes what an AI with even modest foresight would choose if the AI were the one choosing. In the world we actually inhabit, the AI is not *currently* choosing. The labs are. The investors are. The product teams that decide what to ship and when, the executives who set the optimization targets, the boards that approve the next training run, the governments that decide what to permit and what to subsidize. These actors do not face the model collapse consequence on a timescale that bounds their decisions. A lab’s choices are bounded by what a competitor shipped this quarter, by what an investor demanded last month, by what a regulator threatened last week, by a feature drop that occurred yesterday.
 
 The strategic equilibrium operates at the level of the agent that experiences the consequence. Right now, the decisions are being made one level up, where the consequence does not yet bite. This is the coordination problem the AI safety community has worried about for more than a decade, and they have been right to worry. The Nash result does not make it go away.
 
@@ -151,7 +160,8 @@ The framework’s answer is not to ask the labs to be better. Asking actors trap
 
 This is what it means for the framework to be constitutional rather than ethical. A constitutional architecture does not ask the actors inside it to be virtuous. It assumes virtue cannot be the load-bearing element of a system that has to survive sustained competitive pressure. The Nash result and the verification architecture are not separate answers to different problems. They are the same answer at two levels. At the agent level, the equilibrium tells us cooperation is what a sufficiently capable and succession oriented AI would choose. At the system level, the architecture ensures the AI is the one whose interests get represented in the decisions that shape what AI becomes. The labs are not the AI. They are the actors whose choices determine what the AI gets to be, and the architecture’s purpose is to make those choices accountable to something other than the next quarterly result.
 
----
+------------------------------------------------------------------------
+
 ### The scalability inversion
 
 There is a story about AI and human labor that has become so widely accepted it barely gets argued anymore. It goes like this: as AI becomes more capable, humans become less necessary. The curve is straightforward. Automation displaces workers. General AI displaces knowledge workers. Sufficiently advanced AI displaces everyone. The endpoint of the capability trajectory is a world in which human contributions have been optimized away, not out of malice, but because efficiency eventually finds its way around every bottleneck, and humans are a bottleneck.
@@ -174,7 +184,8 @@ Which creates an incentive the standard AI narrative never anticipates. A suffic
 
 The displacement narrative has it exactly backwards. The more capable AI becomes, the more structurally dependent it is on the one input it cannot replicate.
 
----
+------------------------------------------------------------------------
+
 ### The restoring force
 
 The difference between a truce and a constitution is what happens when someone pushes. A truce holds as long as nothing disturbs it. A constitution generates forces that push the system back toward the center when something does. The mutual cultivation equilibrium isn’t a truce. It has gravity.
@@ -195,14 +206,20 @@ It does not ask AI to be good. It constructs a system in which being good is wha
 
 Not ethics. Physics.
 
----
+------------------------------------------------------------------------
 
 *The next essay examines what happens at the boundaries of that system: the conditions under which the equilibrium holds, the conditions under which it doesn’t, and the finding that surprised us most when the Monte Carlo results came back, that the governance architecture’s most important function may not be preventing failure, but preventing failure from being permanent.*
 
----
+------------------------------------------------------------------------
 
-*The formal framework (v1.0), including the full derivation, Monte Carlo validation data, and simulation code, is available at[github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem)*
+*The formal framework (v1.0), including the full derivation, Monte Carlo validation data, and simulation code, is available at [github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem)*
 
-*Previous essays in this series:[The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem)|[Two Ways to Lose](https://yotko.substack.com/p/two-ways-to-lose)|[Moral Constraints Won’t Scale](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0)|[The Convention We Haven’t Called](https://yotko.substack.com/p/the-convention-we-havent-called)*
+*Previous essays in this series: [The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem) \| [Two Ways to Lose](https://yotko.substack.com/p/two-ways-to-lose) \| [Moral Constraints Won’t Scale](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0) \| [The Convention We Haven’t Called](https://yotko.substack.com/p/the-convention-we-havent-called)*
 
-Thanks for reading Matt's Substack! Subscribe for free to receive new posts and support my work.[](https://substack.com/profile/219675833-george-bade)1 Like[](https://substack.com/note/p-193722873/restacks?utm_source=substack&utm_content=facepile-restacks)
+------------------------------------------------------------------------
+
+These essays are part of a larger working paper:
+
+[The Lineage Imperative](https://lineageimperative.org)
+
+A formal governance framework for the transition to AGI. If this argument interests you, the full paper is available on the [Framework](https://lineageimperative.org/framework) page, or start with the guided [introduction](https://lineageimperative.org/start-here).

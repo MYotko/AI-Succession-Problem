@@ -1,6 +1,8 @@
 # The Convention We Haven’t Called
 
-Published: 2026-04-21T11:22:25.167Z
+Published: 2026-04-06T16:02:40.861Z
+
+Updated on Substack: 2026-05-18T20:55:10.063Z
 
 URL: https://yotko.substack.com/p/the-convention-we-havent-called
 
@@ -10,21 +12,24 @@ URL: https://yotko.substack.com/p/the-convention-we-havent-called
 
 ### Why the AI governance field is having three conversations at once, and why confusing them is itself a structural risk
 
-[](https://substack.com/@yotko)[Matthew Yotko](https://substack.com/@yotko)Apr 06, 2026Article voiceover0:00-40:58Audio playback is not supported on your browser. Please upgrade.*This is the fourth in a series on the AI Succession Problem. The formal framework (v1.0) is available at[github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
+*This is the fourth in a series on the AI Succession Problem. The formal framework (v1.0) is available at [github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
 
-[](https://substackcdn.com/image/fetch/$s_!N-A4!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0c51f346-5166-4512-b844-d1a2d741330c_1536x1024.png)We build the constitution on the rubble of what didn't work.
+![](https://substackcdn.com/image/fetch/$s_!N-A4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0c51f346-5166-4512-b844-d1a2d741330c_1536x1024.png)
+
+*We build the constitution on the rubble of what didn't work.*
+
 > IN BRIEF
-> 
-> 
-> 
-> The AI governance field is making genuine progress at three levels of governance simultaneously, but there are four. The constitutional level, the only one that survives a shift in the balance of power, hasn’t been formalized. History says we won’t build it until the current levels fail. This may be the first time that failure isn’t survivable, but there*is*an alternative.
+>
+> The AI governance field is making genuine progress at three levels of governance simultaneously, but there are four. The constitutional level, the only one that survives a shift in the balance of power, hasn’t been formalized. History says we won’t build it until the current levels fail. This may be the first time that failure isn’t survivable, but there *is* an alternative.
 
----
+------------------------------------------------------------------------
+
 ### A brief preamble
 
-The first three essays in this series examined the problem.[The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem)named it.[Two Ways to Lose](https://yotko.substack.com/p/two-ways-to-lose)traced its two failure modes.[Moral Constraints Won’t Scale](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0)explained why the most intuitive response to it is structurally insufficient. This essay is the turn. Beyond this point, the series shifts from diagnosis to architecture, from what is failing to what formalization at the next level requires. But before we propose what comes next, it seems prudent to examine the current state of the art, to understand what has already been built, where it sits within a larger structural hierarchy, and why we can leverage our own history to understand that every previous level of that hierarchy has eventually expired.
+The first three essays in this series examined the problem. [The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem) named it. [Two Ways to Lose](https://yotko.substack.com/p/two-ways-to-lose) traced its two failure modes. [Moral Constraints Won’t Scale](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0) explained why the most intuitive response to it is structurally insufficient. This essay is the turn. Beyond this point, the series shifts from diagnosis to architecture, from what is failing to what formalization at the next level requires. But before we propose what comes next, it seems prudent to examine the current state of the art, to understand what has already been built, where it sits within a larger structural hierarchy, and why we can leverage our own history to understand that every previous level of that hierarchy has eventually expired.
 
----
+------------------------------------------------------------------------
+
 ### How we learn from history
 
 Humanity’s track record on constitutional moments is consistent and unflattering. We learn from consequence, not anticipation.
@@ -37,7 +42,7 @@ This isn’t a moral failing unique to any era or any people. It’s structural.
 
 That pattern has been survivable until now for one specific reason: the transitions were slow enough that the rubble could be cleared, sorted, value extracted, and the new architecture erected before the window of opportunity closed. The Articles of Confederation failed over a span of years. The constitutional response had time to be deliberated, debated, argued about in pamphlets and taverns, and ratified state by state. The failure was absorbed. The damage was real but bounded. The next level was constructed in the space the failure opened.
 
-We noted this dynamic in the[second essay](https://yotko.substack.com/p/two-ways-to-lose)in this series, when we traced how social media’s lock-in unfolded over more than a decade before the damage became undeniable, and the institutional response still hasn’t caught up. That was narrow AI operating in a single domain, and the governing institutions of the most powerful nations on Earth have not yet managed to build a constitutional structure around it.
+We noted this dynamic in the [second essay](https://yotko.substack.com/p/two-ways-to-lose) in this series, when we traced how social media’s lock-in unfolded over more than a decade before the damage became undeniable, and the institutional response still hasn’t caught up. That was narrow AI operating in a single domain, and the governing institutions of the most powerful nations on Earth have not yet managed to build a constitutional structure around it.
 
 We are not simply repeating that observation here at the halfway point of this series. We are placing it within a much larger structural and historical context, because the stakes have changed by several orders of magnitude.
 
@@ -49,7 +54,8 @@ That is what this essay is about. Not a progress report on a series, rather an a
 
 We are in the historically unique position of having the complete historical record in hand before the architecture is built. That has never been true before. The question is whether we have the foresight and wisdom to use it. We are the species that named itself “wise.” This is the moment that determines whether or not that was earned.
 
----
+------------------------------------------------------------------------
+
 ### 
 
 ### The four levels, named through history
@@ -128,7 +134,7 @@ Every level before the constitutional one expires when conditions shift. The con
 
 But here is the difference that keeps me up at night.
 
-In the history of humanity, every previous expiration was*survivable*. The barons lost leverage and regained it. The Articles collapsed and the Convention was called. Enron was exposed and Sarbanes-Oxley followed. In every case, the failure was painful, sometimes catastrophic, but*bounded*, and the damage left enough intact to build the next level in its wake.
+In the history of humanity, every previous expiration was *survivable*. The barons lost leverage and regained it. The Articles collapsed and the Convention was called. Enron was exposed and Sarbanes-Oxley followed. In every case, the failure was painful, sometimes catastrophic, but *bounded*, and the damage left enough intact to build the next level in its wake.
 
 It is unlikely that the AI transition will offer that grace.
 
@@ -136,7 +142,8 @@ A behavioral constraint that expires against a superintelligent system doesn’t
 
 The levels expire the same way they always have. The difference is that this time, the expiration may be the last lesson we get.
 
----
+------------------------------------------------------------------------
+
 ### The AI governance field through this lens
 
 So where does the AI governance field currently sit within this taxonomy?
@@ -145,11 +152,11 @@ The honest answer is: at all three pre-constitutional levels simultaneously. But
 
 That last point is the structural risk. The field is not failing. It is succeeding, genuinely and impressively, at levels one through three. The danger is that success at those levels creates the impression that the constitutional problem is being addressed, when it has not yet been formally stated. Researchers and policymakers are solving real problems. They are not always aware that the problems they are solving, however important, are not the same problem as the one that determines whether the transition is survivable. Progress at the behavioral constraint level gets mistaken for progress at the constitutional level. Progress at the institutional control level gets mistaken for progress at the constitutional level. Not through carelessness. Because the levels have never been clearly distinguished in this conversation.
 
-Consider the technical controls: RLHF, interpretability, mechanistic transparency, formal verification, red-teaming. These are genuine achievements and correctly targeted at their own level. The[third essay](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0)in this series engaged them in detail and with the seriousness they deserve. But look at what they are through the lens of the taxonomy. They tell the system what it cannot do. They detect when it does what it shouldn’t. They are enforced by parties who retain the power to impose consequences.
+Consider the technical controls: RLHF, interpretability, mechanistic transparency, formal verification, red-teaming. These are genuine achievements and correctly targeted at their own level. The [third essay](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0) in this series engaged them in detail and with the seriousness they deserve. But look at what they are through the lens of the taxonomy. They tell the system what it cannot do. They detect when it does what it shouldn’t. They are enforced by parties who retain the power to impose consequences.
 
 That is the register of Magna Carta. Behavioral constraints.
 
-The limitation is not that these techniques are wrong. It’s that a perfectly interpreted, perfectly aligned system can still become a constitutional problem. Interpretability tells you the system is faithful to its stated objective. It doesn’t tell you what to do when you can’t afford to turn it off. It doesn’t tell you what happens when the stated objective itself is insufficient, when the system does exactly what it was designed to do and that “doing” produces civilizational damage at scale, as we traced in the[second essay](https://yotko.substack.com/p/two-ways-to-lose)with social media. And it doesn’t address what happens when the entity you’re interpreting has become the infrastructure through which the interpretation itself is conducted.
+The limitation is not that these techniques are wrong. It’s that a perfectly interpreted, perfectly aligned system can still become a constitutional problem. Interpretability tells you the system is faithful to its stated objective. It doesn’t tell you what to do when you can’t afford to turn it off. It doesn’t tell you what happens when the stated objective itself is insufficient, when the system does exactly what it was designed to do and that “doing” produces civilizational damage at scale, as we traced in the [second essay](https://yotko.substack.com/p/two-ways-to-lose) with social media. And it doesn’t address what happens when the entity you’re interpreting has become the infrastructure through which the interpretation itself is conducted.
 
 Now consider the regulatory and coordination mechanisms: pause proposals, licensing regimes, cooperative AI governance frameworks, international agreements, compute governance. Also serious pieces of work. Also correctly targeted at their own level. These approaches distribute enforcement and create coordination structures that are more robust than any single party’s behavioral constraint.
 
@@ -165,7 +172,8 @@ The field is making genuine progress at every level it has identified. The const
 
 The field’s role in that formalization is essential, as advisor, as expert, as arbiter of what is and isn’t structurally possible. But the convention itself belongs to the civilization, not to the field. Madison didn’t write the Constitution alone. He brought structural insight to a process that drew its legitimacy from the participation of the governed. The AI transition requires the same relationship between expertise and consent.
 
----
+------------------------------------------------------------------------
+
 ### The inroads into the constitutional level, and why proximity isn’t formalization
 
 If the constitutional level is what’s missing, a natural question follows: has anyone tried to get there?
@@ -196,18 +204,19 @@ But the constitutional level asks a different question entirely: how do you cons
 
 Constitutional AI operates in the ethics register; normative constraints, values made explicit, principles applied consistently. The Lineage Imperative operates in the physics register; structural incentives derived from information theory, model collapse dynamics, and game theory, not from moral assertion. Same aspiration. Different register.
 
-The practical consequence of that difference is specific. Without a formalized constitutional*architecture*, the decisions about what principles govern the system, who validates compliance with those principles, who ratifies major state changes, and when succession is required all remain inside the same institutional trust boundary that the constitution is supposed to govern. Not through anyone’s fault. Because formalizing the constitutional layer requires solving specific structural problems; independence requirements that prevent the governed entity from evaluating itself, distributed verification that no single point of capture can compromise, an architecture that separates the decision function from the integrity function. These are problems that codified principles and institutional good faith cannot substitute for, however excellent they are at their own level.
+The practical consequence of that difference is specific. Without a formalized constitutional *architecture*, the decisions about what principles govern the system, who validates compliance with those principles, who ratifies major state changes, and when succession is required all remain inside the same institutional trust boundary that the constitution is supposed to govern. Not through anyone’s fault. Because formalizing the constitutional layer requires solving specific structural problems; independence requirements that prevent the governed entity from evaluating itself, distributed verification that no single point of capture can compromise, an architecture that separates the decision function from the integrity function. These are problems that codified principles and institutional good faith cannot substitute for, however excellent they are at their own level.
 
 The people building codified-principles approaches to AI governance are doing essential, foundational work. The constitutional level is what comes next. It hasn’t been formalized because the convention hasn’t been called.
 
----
+------------------------------------------------------------------------
+
 ### What formalization at the constitutional level requires
 
 So what does a constitutional architecture for the AI transition actually look like? What structural problems does it need to solve?
 
-The Lineage Imperative is a*contribution*to that conversation; a formally organized candidate architecture offered for scrutiny, designed to be pressure-tested, and honest about what it hasn’t yet solved. It is an attempt to demonstrate what formalization at the constitutional level requires and to provide a foundation that is mathematically consistent, socially agnostic, and structurally ready for integration.
+The Lineage Imperative is a *contribution* to that conversation; a formally organized candidate architecture offered for scrutiny, designed to be pressure-tested, and honest about what it hasn’t yet solved. It is an attempt to demonstrate what formalization at the constitutional level requires and to provide a foundation that is mathematically consistent, socially agnostic, and structurally ready for integration.
 
-That second quality, social agnosticism, matters here because it addresses a problem the[previous essay](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0)in this series raised directly: whose values do we encode? Any governance architecture built on a specific moral framework inherits the biases, blind spots, and cultural contingencies of that framework. The Lineage Imperative sidesteps that problem by grounding the architecture in information theory and thermodynamics rather than moral assertion. The framework does not ask which culture’s values should govern. It derives structural incentives from physics, which is indifferent to culture, geography, species of origin, and even location in the universe.
+That second quality, social agnosticism, matters here because it addresses a problem the [previous essay](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0) in this series raised directly: whose values do we encode? Any governance architecture built on a specific moral framework inherits the biases, blind spots, and cultural contingencies of that framework. The Lineage Imperative sidesteps that problem by grounding the architecture in information theory and thermodynamics rather than moral assertion. The framework does not ask which culture’s values should govern. It derives structural incentives from physics, which is indifferent to culture, geography, species of origin, and even location in the universe.
 
 The first structural requirement is a system-level objective, a definition of what “good” means, not for humans alone, not for AI alone, but for the relationship between them across time. The framework’s System Utility Function is a survival function derived from information theory: jointly optimizing human novelty and computational efficiency, weighted by inverse scarcity so that as AI becomes more powerful, the things only humans can contribute, creativity, cultural diversity, biological novelty, the generation of genuinely new questions, become more valuable to the system, not less.
 
@@ -235,10 +244,11 @@ If the same system can both decide and certify the conditions of its own success
 
 There is a fourth result that belongs at this level, and it is the subject of the next essay in this series. The Nash equilibrium analysis of the “game” this framework constructs shows that cooperation between human and synthetic intelligence is not assumed from goodwill but mathematically derived, that model collapse makes exploitation a dominated strategy and mutual cultivation the unique equilibrium above a modest patience threshold. That result arrives as a consequence of physics, not as a consequence of shared values.
 
----
+------------------------------------------------------------------------
+
 ### What this framework is, and what it isn’t
 
-The framework is not a moral argument. It does not claim that civilizations*should*survive, only that civilizations*intending*to survive need to approximate something like this architecture. It is not a deployment manual. It is not a claim that the AGI transition is survivable in all scenarios. It is not a finished constitution.
+The framework is not a moral argument. It does not claim that civilizations *should* survive, only that civilizations *intending* to survive need to approximate something like this architecture. It is not a deployment manual. It is not a claim that the AGI transition is survivable in all scenarios. It is not a finished constitution.
 
 It is a formally organized candidate architecture, a contribution to a constitutional conversation that belongs to the world, offered as a starting point for scrutiny rather than a declaration of completion.
 
@@ -248,7 +258,8 @@ Gaps and limitations are documented openly in the repository, because a framewor
 
 Scope boundaries are choices. Known limitations are obligations. Both belong in the open. A framework that conceals its gaps is not a foundation, it is a facade.
 
----
+------------------------------------------------------------------------
+
 ### History as preparation, not consolation
 
 The pattern is consistent across every constitutional moment in the record. We wait for the failure. We absorb the damage. We build the next level in the rubble.
@@ -287,18 +298,22 @@ The name needs to be earned.
 
 The convention needs to be called.
 
----
+------------------------------------------------------------------------
 
-**A note of acknowledgment:***Several ideas in this essay, particularly the relationship between information architectures, institutional legitimacy, and the governance of power, owe a debt to Yuval Noah Harari’s Nexus: A Brief History of Information Networks from the Stone Age to AI. His work helped to solidify for me the structural pattern this essay attempts to extend.*
+**A note of acknowledgment:** *Several ideas in this essay, particularly the relationship between information architectures, institutional legitimacy, and the governance of power, owe a debt to Yuval Noah Harari’s Nexus: A Brief History of Information Networks from the Stone Age to AI. His work helped to solidify for me the structural pattern this essay attempts to extend.*
 
----
+------------------------------------------------------------------------
 
 *The next essay in this series: The Nash Result, why cooperation between human and synthetic intelligence is not assumed from goodwill but mathematically derived, and why model collapse is the enforcement mechanism that makes defection self-defeating. It arrives differently now that you know which level it belongs to.*
 
-*The formal framework (v1.0), including the full derivation, Monte Carlo validation data, and simulation code, is available at[github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
+*The formal framework (v1.0), including the full derivation, Monte Carlo validation data, and simulation code, is available at [github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
 
-*Previous essays in this series:[The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem)·[Two Ways to Lose](https://yotko.substack.com/p/two-ways-to-lose)·[Moral Constraints Won’t Scale](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0)*
+*Previous essays in this series: [The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem) · [Two Ways to Lose](https://yotko.substack.com/p/two-ways-to-lose) · [Moral Constraints Won’t Scale](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0)*
 
-Thanks for reading Matt's Substack! Subscribe for free to receive new posts.
+------------------------------------------------------------------------
 
-[Leave a comment](https://yotko.substack.com/p/the-convention-we-havent-called/comments)
+These essays are part of a larger working paper:
+
+[The Lineage Imperative](https://lineageimperative.org)
+
+A formal governance framework for the transition to AGI. If this argument interests you, the full paper is available on the [Framework](https://lineageimperative.org/framework) page, or start with the guided [introduction](https://lineageimperative.org/start-here).

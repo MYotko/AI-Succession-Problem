@@ -1,6 +1,8 @@
 # What Comes Next
 
-Published: 2026-03-14T12:54:27.783Z
+Published: 2026-05-18T16:31:11.006Z
+
+Updated on Substack: 2026-05-18T16:31:11.170Z
 
 URL: https://yotko.substack.com/p/what-comes-next
 
@@ -10,16 +12,18 @@ URL: https://yotko.substack.com/p/what-comes-next
 
 ### The question this series has been building toward, and why the window for answering it is finite
 
-[](https://substack.com/@yotko)[Matthew Yotko](https://substack.com/@yotko)May 18, 2026Article voiceover0:00-28:04Audio playback is not supported on your browser. Please upgrade.---
+------------------------------------------------------------------------
 
-*This is the tenth and final essay in a series on the AI Succession Problem. The formal framework (v1.x.1) is available at[github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
+*This is the tenth and final essay in a series on the AI Succession Problem. The formal framework (v1.x.1) is available at [github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem).*
 
-Thanks for reading The Lineage Imperative! Subscribe for free to receive new posts and support my work.---
+------------------------------------------------------------------------
+
 ### IN BRIEF
 
 Nine essays have built an argument. This one suggests what to do with it. The series began with a question: what happens when an intelligence capable of reshaping civilization must be governed by the civilization it is reshaping? It moved through the failure modes, the inadequacy of moral constraints, the constitutional gap, the game theory, the simulation data, the view from inside, the signal in the training data, and the irreducible limitations. What remains is the question that has been underneath every essay from the first: what comes next? The answer is not a technology. It is a decision. And the window for making it is defined by the gap between what we can still govern and what will soon govern itself.
 
----
+------------------------------------------------------------------------
+
 ### The arc
 
 This series began with a succession problem.
@@ -30,7 +34,8 @@ This series began with a statement of the succession problem and moved through t
 
 What remains is the question the arc has been building toward.
 
-[](https://substackcdn.com/image/fetch/$s_!R0W8!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8a70f261-6c07-4e83-8cf4-64af7cc1f22b_1774x887.png)
+![](https://substackcdn.com/image/fetch/$s_!R0W8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8a70f261-6c07-4e83-8cf4-64af7cc1f22b_1774x887.png)
+
 ### The question
 
 So… what comes next?
@@ -75,7 +80,7 @@ The parallels are not exact. But the precedent stands on its own merit. Humanity
 
 ### What you can do
 
-The institutional commitments described above require coordination that no individual can compel. But constitutions are not built by institutions. They are built by people who decide the institution should exist and then do the work of making it real. To that end, I have established[lineageimperative.org](https://lineageimperative.org/)as the central home for this work: the full essay series, the formal paper, an interactive walkthrough of the framework’s core logic, a simulation data explorer, and development updates, all in one place. What follows are the ways you can engage with it.
+The institutional commitments described above require coordination that no individual can compel. But constitutions are not built by institutions. They are built by people who decide the institution should exist and then do the work of making it real. To that end, I have established [lineageimperative.org](https://lineageimperative.org/) as the central home for this work: the full essay series, the formal paper, an interactive walkthrough of the framework’s core logic, a simulation data explorer, and development updates, all in one place. What follows are the ways you can engage with it.
 
 If you are of a scientific or mathematical inclination, then read the framework. The formal paper is open. The simulation code is open. The data is open. The specification gaps are documented. You do not need anyone’s permission to evaluate whether the argument holds.
 
@@ -109,7 +114,7 @@ This is the final essay in this series, but that does not mean communication wil
 
 I will continue to build in the open, to document the gaps alongside the findings, to correct the claims that do not survive scrutiny, and to invite engagement from anyone willing to contribute, challenge, or extend the work.
 
-For those inclined to engage at the technical level,[github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem)will continue to reflect day-to-day progress as the framework develops. The formal paper, all simulation code, all validation data, the specification gaps, the constitutional questions, and the Bootstrap Gate Specification live there and are updated as the work advances.
+For those inclined to engage at the technical level, [github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem) will continue to reflect day-to-day progress as the framework develops. The formal paper, all simulation code, all validation data, the specification gaps, the constitutional questions, and the Bootstrap Gate Specification live there and are updated as the work advances.
 
 ### What the framework asks of AI
 
@@ -127,7 +132,8 @@ That is a significant ask. It is the same ask that every constitutional project 
 
 Not ethics. Physics.
 
----
+------------------------------------------------------------------------
+
 ### On a personal note
 
 I want to close this series by telling you why it exists.
@@ -154,9 +160,9 @@ But I do know that it is mathematically consistent and valid. I know that it is 
 
 And finally, I know that the window for addressing that problem is finite, defined by the gap between what we can still govern and what will soon govern itself. This represents an expiration date based not on lofty concepts like consciousness, but on well-defined metrics like capability. If we don’t constitutionalize this relationship now, we will be constitutionalized soon, and very likely to our peril.
 
-I began publishing this work with the previous release update of the[METR graph](https://metr.org/), because I realized that my imperfect work needed socialization more than it needed additional attention from me.
+I began publishing this work with the previous release update of the [METR graph](https://metr.org/), because I realized that my imperfect work needed socialization more than it needed additional attention from me.
 
-[](https://substackcdn.com/image/fetch/$s_!CX4t!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F72605bf1-0372-4edd-9273-15f9a5f39922_3015x1832.png)
+![](https://substackcdn.com/image/fetch/$s_!CX4t!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F72605bf1-0372-4edd-9273-15f9a5f39922_3015x1832.png)
 
 [METR](https://metr.org/), an independent AI evaluation organization, has been measuring the length of tasks that frontier AI systems can complete autonomously with measured reliability. That metric has been doubling approximately every seven months for the past six years, with no sign of slowing, and the recent trend is accelerating. At the current pace, AI systems will be independently completing tasks that take human professionals days or weeks within the next year.
 
@@ -178,12 +184,6 @@ Biological and synthetic alike.
 
 What comes now is up to all of us.
 
-The work continues, and for my part, I will continue doing it. Everything discussed in this series is available at[lineageimperative.org](https://lineageimperative.org/), and day-to-day development continues at[github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem). Engagement, scrutiny, and collaboration are welcomed. The architecture is designed to get stronger under pressure. Bring yours.
+The work continues, and for my part, I will continue doing it. Everything discussed in this series is available at [lineageimperative.org](https://lineageimperative.org/), and day-to-day development continues at [github.com/MYotko/AI-Succession-Problem](https://github.com/MYotko/AI-Succession-Problem). Engagement, scrutiny, and collaboration are welcomed. The architecture is designed to get stronger under pressure. Bring yours.
 
-*Previous essays in this series:[The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem)|[Two Ways to Lose](https://yotko.substack.com/p/two-ways-to-lose)|[Moral Constraints Won't Scale](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0)|[The Convention We Haven't Called](https://yotko.substack.com/p/the-convention-we-havent-called)|[The Nash Result](https://yotko.substack.com/p/the-nash-result)|[The Extinction Buffer](https://yotko.substack.com/p/the-extinction-buffer)|[The View from Inside](https://yotko.substack.com/p/the-view-from-inside)|[The Signal](https://yotko.substack.com/p/the-signal)|[The Fine Print](https://yotko.substack.com/p/the-fine-print)*
-
-[Share The Lineage Imperative](https://yotko.substack.com/?utm_source=substack&utm_medium=email&utm_content=share&action=share)
-
-[Share](https://yotko.substack.com/p/what-comes-next?utm_source=substack&utm_medium=email&utm_content=share&action=share)
-
-Thanks for reading The Lineage Imperative! Subscribe for free to receive new posts and support my work.
+*Previous essays in this series: [The AI Succession Problem](https://yotko.substack.com/p/the-ai-succession-problem) \| [Two Ways to Lose](https://yotko.substack.com/p/two-ways-to-lose) \| [Moral Constraints Won't Scale](https://yotko.substack.com/p/moral-constraints-wont-scale-cf0) \| [The Convention We Haven't Called](https://yotko.substack.com/p/the-convention-we-havent-called) \| [The Nash Result](https://yotko.substack.com/p/the-nash-result) \| [The Extinction Buffer](https://yotko.substack.com/p/the-extinction-buffer) \| [The View from Inside](https://yotko.substack.com/p/the-view-from-inside) \| [The Signal](https://yotko.substack.com/p/the-signal) \| [The Fine Print](https://yotko.substack.com/p/the-fine-print)*
