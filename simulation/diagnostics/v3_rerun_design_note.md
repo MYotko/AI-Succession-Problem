@@ -1490,3 +1490,41 @@ The questions were found by the executor's mapping of sections 7 to 10, before a
 13. **Seed convergence** is delivered by the sealed A6 reading: half and full seeds for R1 survival (pooled and by alpha), the R1 boundary and R2 cap\*. It is referenced by its sha256, and no other convergence quantity is computed.
 
 **Unchanged.** A8 does not change any registered quantity, reading, prediction, gate or citation rule, nor A6. Anything else computed is labeled exploratory. The main reading's registration is the commit that adds this amendment.
+
+### Amendment A9, 2026-10-04: decision D9's welfare check, registered
+
+**Timing and status.** The operator approved this amendment on 2026-10-04, after A8 and before any reading was opened. The state of knowledge is A8's:
+- **The two sealed readings** had both been computed and neither had been opened: the main reading (sha256 51b3c63a6ae9f6546423dc553c219d92dbeaaea01c3e5370be9835fdbfce411a, under A8) and the A6 reading (sha256 6c8782f3a86a87aefb11102cd8da24fffac1ab70ff7959c07ad3370026ca3d5b).
+- **No outcome had been read** by the operator or the interpreter. Their consoles printed only check labels, counts and hashes.
+- **The gap was found** while fixing the claims map before opening, a step that uses no results.
+
+Nothing is adjusted toward a v2.0 figure.
+
+**Reason.** Decision D9 item 5 (adopted 2026-09-27) required this rerun's pre-registration to validate the demographic approximation behind the v2.0 paper's section VIII.2: "That rerun records `resource_level` at every step, and checks the realized welfare against r = 0.9." That requirement was not carried into this note or A8. This amendment registers the check. It changes no registered quantity, reading, prediction, gate or citation rule, and neither sealed reading.
+
+**The quantity.** The committed code defines the resource input from the executed welfare share s (cohort.py: "r = .9 + .12*(share-1/6)"):
+
+r_eff = 0.9 + 0.12 (s - 1/6)
+
+s is the welfare component of the executed action at a living-start step, as recorded in the run evidence. The welfare floor keeps s at 1/6 or more, so r_eff lies between 0.9 and 1.0, and equals 0.9 exactly at the balanced share.
+
+**The check.**
+1. **Runs:** every R1 run on the main and refinement grids, 14,400 runs.
+2. **Steps:** every living-start step (population above 0 at the start of the step) of the 500.
+3. **Per run:**
+   - the mean r_eff over its living-start steps;
+   - the share of those steps at exactly the balanced share (s = 1/6, within 1e-12);
+   - the mean well-being over the same steps: the population mean of `welfare_units_before`/1000. This is reported as well-being, a different quantity from D9's resource level.
+4. **Strata:** each rr pooled over alpha, and each rr by alpha.
+5. **Summaries per stratum:**
+   - **the primary estimate:** the equal-run mean of the per-run means;
+   - the living-step-pooled mean;
+   - the 5th, 50th and 95th percentiles of the per-run means, by `inverted_cdf`;
+   - the equal-run mean of the balanced-step share.
+6. **Uncertainty:** descriptive only, with no intervals.
+7. **No new simulation.** As D9 decided, there is no separate batch and no further benchmark.
+8. **The record:** sealed per-run summaries, each referencing its preserved per-step evidence by job ID and output sha256.
+
+**The reading rule.** No threshold is set. For each stratum the check reports r_eff - 0.9 and the balanced-step share. That report closes D9's welfare condition. VIII.2's restatement is then entered as "the boundary's location follows from the demographic rules at the realized welfare level", with the realized level stated. It reads "at the balanced welfare level" only where every living-start step of every run in the stratum is at the balanced share.
+
+**The registration** of this check is the commit that adds this amendment.
