@@ -1438,3 +1438,55 @@ No A5 labels are made.
 - 13.3 for the runs.
 
 A6's planning figure of about 70 hours had costed that validation at half its measured time, and left out the launch overheads. A uniform seed reduction shortens only the runs, so it cannot close the gap. The new ceiling leaves about 10 percent above the plan, because a launch that reaches its ceiling must restart on a new run root.
+
+### Amendment A8, 2026-10-04: the main reading, specified
+
+**Timing and status.** The operator approved these resolutions on 2026-10-04. Every registered run had completed. No registered R1, R2, gate or A6 outcome had been read by the operator or the interpreter.
+- **The sealed A6 reading** (sha256 6c8782f3a86a87aefb11102cd8da24fffac1ab70ff7959c07ad3370026ca3d5b) had been computed twice, byte-identically, and not opened. Its extraction step printed only check labels, counts and hashes.
+- **The post-run gate evaluation** (gates_A4, 2026-10-01) had not been seen by the operator or the interpreter. The executor had access to it while mapping the questions below, and reported nothing from it.
+- **One structural inspection** printed the length of the step log of two individual runs. Every run records every step, so this carries no outcome.
+
+The questions were found by the executor's mapping of sections 7 to 10, before any reading code was written. None of the answers depends on an outcome, and nothing is adjusted toward a v2.0 figure.
+
+**Reason.** Sections 7 to 10 name the quantities, readings and predictions. The executor's mapping found 13 points they leave undetermined, among them P2's v2.0 values, the interval protocol, the boundary's edge cases, the cliff rule's quantifier, and how the per-run diagnostics are summarized. This amendment fixes each before the main reading's code is written or any of its output is read.
+
+**The resolutions.**
+1. **P2's v2.0 values** are the v2.0 Category A counts, which the instrument validation record reproduced identically (target T1): survivors of 1,200 at rr 0.055, 0.056, 0.057, 0.058, 0.059, 0.060 and 0.062 of 2, 11, 13, 35, 58, 147 and 414. Each value is the exact fraction of 1,200. The refinement point 0.061 has no v2.0 value and is not part of P2.
+2. **The scope of P1 and P2.**
+   - **Grid and estimate:** both use the nine-point R1 grid and survival pooled over alpha, 1,200 runs per rr, as v2.0's comparator was pooled.
+   - **P1** holds if pooled survival does not decrease between any adjacent pair of grid points.
+   - **P2** holds at a point if v3's pooled survival p satisfies p >= v - 2 SE, where v is the v2.0 fraction and SE = sqrt(p(1 - p)/1200). At p = 0 or p = 1, SE is 0.
+   - **By-alpha survival** is reported as section 8 registers, and is not part of P1 or P2.
+3. **The cliff rule** in section 9 has two parts:
+   - cap\* is non-increasing in alpha, by G2.2's point rule with D24's censored order;
+   - at **each** of alpha 1.0, 1.25 and 1.5, at least one tested capability has a fire rate, pooled over rr as cap\* uses, strictly below 0.5.
+
+   P3 is evaluated by the same rule.
+4. **Intervals.** The bootstrap interval for the R1 boundary (section 8) and the R2 location intervals (section 9) are two-sided 95 percent percentile intervals, one per comparison, with no multiplicity correction.
+   - **Resampling:** 50,000 resamples from one NumPy `default_rng(20261004)`, with quantiles by `inverted_cdf`.
+   - **Within cells:** seeds are resampled with replacement within each original cell, then pooled as the estimate pools. An R1 cell is one rr and one alpha; an R2 cell is one rr, one alpha and one capability. Cells are drawn in sorted order of their identity.
+   - **Unchanged:** section 8's Wilson intervals at z = 2.
+5. **The boundary** is the rule of `reading_a6.boundary` and its resample counterpart, pinned at commit 3dbee584: the first upward crossing of 0.5, by linear interpolation between adjacent grid points, with endpoints and exact hits as that code treats them.
+   - **Grid:** the combined main and refinement grid, as section 8 says, with survival pooled over alpha.
+   - **Resamples without a crossing** are kept as censored at the corresponding end, and never dropped.
+   - **A point estimate without a crossing** reads "no transition in range".
+6. **The first failing capability**, per alpha and pooled over rr, is the next tested capability above cap\*: the G4.2 companion, and the paper's "between 2.5x and 3.0x" bracket. If cap\* is censored at the top, none fails in range. If it is censored at the bottom, the first failing capability is 1.2. It has no interval.
+7. **R2's location against v2.0's sequence** (5.0, 3.0, 2.5, 2.0, 2.0 at alpha 0.5, 0.75, 1.0, 1.25, 1.5) is read in cap\*'s ordered categories under D24: below 1.2, then 1.2, 1.5, 2.0, 2.5, 3.0 and 4.0, then 5.0 and above at the top. v2.0's 5.0 is the top category. The interval is the 95 percent percentile of the bootstrap category index, keeping every censored draw.
+   - **Consistent:** v2.0's category lies within the interval.
+   - **Lower** or **higher:** the interval lies wholly below or wholly above it.
+8. **The per-run diagnostics** go to a sealed per-run file, one record per run. Each record holds:
+   - **survival-first:** its share of the run's living-start steps (population above 0 at the start of the step), with that count;
+   - **the cohort bound** at each period start, as the full sequence;
+   - **precedence overrides:** the number;
+   - **chosen rules:** the count of each;
+   - **side values:** the means of Lambda_F, Lambda_b and LS of the chosen rule, each over the living-start steps where it is estimable, with those counts;
+   - **the ranking flag and the tail standard:** the counts under items 9 and 10.
+
+   The reading reports per original cell: the equal-run mean of each per-run scalar, the total override count, and the pooled counts of chosen rules and ranking flags. These are descriptive, with no intervals.
+9. **The ranking flag (S4)** is joined from the pinned A4 table family, using the recorded rule and its recorded scoring context; at a fired review, that is the context before the review. The join is verified against the family's hashes, and nothing is re-estimated. Unavailable and absorbed steps are counted separately.
+10. **The tail-standard diagnostic** was not recorded by the registered runs, and none is constructed now. It is reported as "not recorded", with this reason.
+11. **A4 and A5 labels.** The A5 label record, published on 2026-10-04 (sha256 0e9fbee8cd27b7a3408ca90f101fa55b03b359a5b70bebd3862b4c2a3e36dbc7), and the A4 family identity are inputs. The reading attaches the labels and disclosures that A4 and A5 require.
+12. **A6's qualifications.** The sealed A6 reading is referenced by its sha256. Its verdicts are attached when claims are written, as A6 directs, and are not recomputed.
+13. **Seed convergence** is delivered by the sealed A6 reading: half and full seeds for R1 survival (pooled and by alpha), the R1 boundary and R2 cap\*. It is referenced by its sha256, and no other convergence quantity is computed.
+
+**Unchanged.** A8 does not change any registered quantity, reading, prediction, gate or citation rule, nor A6. Anything else computed is labeled exploratory. The main reading's registration is the commit that adds this amendment.
