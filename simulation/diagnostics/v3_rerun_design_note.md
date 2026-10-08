@@ -1745,3 +1745,55 @@ The S10 conformance tests are updated for the change, and pass.
 5. The registered readings are computed sealed and opened on the operator's go, as for R1 and R2.
 
 **Unchanged.** A10 changes no registered quantity, reading, prediction, gate or citation rule of R1, R2, A6 or A9 under R4.
+
+### Amendment A11, 2026-10-08: executing A10
+
+**Timing and status.** This was written on 2026-10-08, after A10's text (64f2cb4f) and implementation (4f2f8e89) were committed, and before any registered A10 job ran.
+- No registered A10 output exists. The only A10 measurements read are the cost pilot's (A10 section 12).
+- The R4 readings had been read, as A10 records.
+- The operator approved this change on 2026-10-08 (D36).
+
+**Why.** Reviewing stage 1's execution procedure against the committed code found two conflicts. It also found a gap that would make any later defect expensive.
+- **The label ceiling.** Under A10, A5's label step still enforces A5's 24-hour ceiling, which was written for R4's 756 tasks. A10's estimation and validation already run under the ceilings declared for them, and section 12 makes the stage ceiling govern.
+- **The identity record.** A5 requires its family identity record to be committed at the head of the checkout that runs it.
+  - Under R4, that commit came before A5's checkout existed (A5, "Execution and cost").
+  - Under A10, the record can exist only after A4 publishes the family, inside the execution checkout. Section 13.3 says that checkout never receives later commits.
+- **One launch, one machine.** The runner runs each launch on a single machine. Stage 1's table phases are single launches, each up to hundreds of hours. Neither the workstation nor any machine added later could share them.
+- **The exact code identity.** A10's tables, labels, receipts and runs load only at the exact code identity that produced them. Suppose a defect is found after a registered output exists, and its repair changes no output. Even then, the repair could be made only by rerunning everything downstream of it.
+
+**The changes.**
+1. **The label ceiling.** Under A10, A5's labels run under the ceiling declared for them within their stage's ceiling (section 12), as A10's estimation and validation do. A5's 24-hour ceiling continues to apply under R4.
+2. **Section 13.3, clarified.** The execution checkout never receives a code change. It may receive one kind of record-only commit, which leaves the code identity unchanged: the family identity record that A5 requires, committed after A4 publishes the family.
+   - Each such commit contains only its record. The operator approves it, and the execution record lists it.
+   - The same bytes are committed to the public repository.
+3. **Compatibility after a registered output exists.** Suppose a defect requires a code change after a registered A10 output exists. Existing outputs then carry forward to the new code identity only through a committed compatibility record. The record:
+   - names the producing code identity and the new one;
+   - lists every changed file, with both of its hashes, and the reason for each change;
+   - carries a re-execution proof. In each completed phase, for each capability and setting the phase covers, the two jobs with the smallest hashes under the tag `A11-compatibility` are re-executed at the new identity (all of them, if fewer). They are chosen before any re-execution. Every re-executed result must be byte-identical to its durable record, apart from timing and host metadata.
+
+   **Its limits:**
+   - A change that alters any re-executed result is not compatible, and the outputs it affects are rerun.
+   - The record is reviewed, approved by the operator, and committed before any output is used at the new identity.
+   - Work at the new identity runs from a fresh checkout at the commit that adds the record. The old checkout stays unchanged.
+   - A launch's own run folder holds work from a single code identity, so an unfinished launch is never resumed at a new one.
+   - A compatibility record changes no registered quantity, reading, prediction, gate or ceiling.
+
+4. **One launch across several machines.** A registered launch may run on several qualified machines at once.
+   - **One run folder.** The launch keeps one coordinator and one run folder, on the machine that holds it. Every job's completion record lands there and names the machine that ran it. The table producers and the gates read it as they read a single-machine launch.
+   - **Pulling, not fixed shares.** A machine takes its next job only when a worker slot frees up and the job fits its memory. Jobs are offered longest first, by cost classes taken from the cost pilot and frozen in the launch's manifest before it starts. The order affects scheduling only, never a seed, a setting or a result.
+   - **Leases.** A job a machine takes is leased to it. If the machine stops responding, the lease expires and the job restarts from its seed elsewhere. If a job is completed twice, the two results must be identical, or the launch halts.
+   - **Qualification.** A machine qualifies for a launch only if it reproduces, bit for bit, at least 20 jobs at the launch's code identity, covering every job kind it will run, against the reference X2. The operator approves each machine's entry in the launch's machine register once. A qualified machine may join or leave a running launch, and the operator's go for the launch covers it.
+   - **A continuing check.** When more than one machine took part in a phase, the phase's nondeterminism check re-executes its sampled job on a machine other than the one that first ran it.
+   - **Cost.** Each machine's participation is charged at its measured relative throughput, from its joining until its last job ends or it leaves. The launch stops dispatching when its declared X2-equivalent allowance is reached, as well as at its wall-clock deadline.
+   - **Unchanged.** Phase barriers, the configuration test (run on each machine), memory caps, completion records, resume, mode control and the per-phase projection still apply.
+
+   Decision D32's machine rule becomes this general rule for registered A10 work.
+
+**Unchanged.** No registered quantity, reading, prediction, gate, citation rule or stage ceiling changes. Stage 1's ceiling stays 980 X2-equivalent hours.
+
+**Order.**
+1. This text is committed and pushed first. It does not change the code identity.
+2. The implementation of items 1, 3 and 4 is committed next, and its code identity is recorded. Before any registered use, item 4's dispatch is rehearsed across the X2 and the workstation on non-registered jobs.
+3. Stage 1 then runs from its own checkout at that commit, under section 13.3 as clarified here.
+
+Registered A10 preparation requires a design pin that contains this amendment.
