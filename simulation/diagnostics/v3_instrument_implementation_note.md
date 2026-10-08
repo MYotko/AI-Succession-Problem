@@ -4077,3 +4077,423 @@ certifier and S10 checks; the full suite's individual failures; and actual
 parallel-worker determinism and interrupted-resume checks. LF-normalized source
 identity is recorded separately from byte SHA256 file inventories. No legacy
 compatibility record, registered calibration, or registration pin was changed.
+
+## 32. A11, executing A10
+
+Built and reviewed on 2026-10-08, before registered A10 execution. A11 changes
+execution and artifact admission, not dynamics, measurement, evaluation,
+table numerics, seeds, reading rules, gates, or scientific quantities. The
+reviewed LF-normalized code identity is
+`dd1b1a882649c9b4d3643d9a9351195c39925a383d87f3a3584d7087aaa5a832`.
+This note is outside the source manifest. The execution procedure is
+[A10_RUN_ON_X2.md](../v3/A10_RUN_ON_X2.md); its A11 design-note and code commits
+remain explicit release parameters.
+
+### Label ceiling, registration, and the identity-record commit
+
+For a registered A10 instrument, `table_labels_a5.prepare` requires an explicit,
+positive, finite `wall_hours`. The plan seals `declared_wall_hours` and
+`wall_seconds`; publication checks the plan's own ceiling. Earlier A10 plans
+can supply their already sealed `wall_seconds`. The CLI preserves this
+distinction. Registered R4 preparation and publication retain exactly 24 hours,
+including the default and legacy call shapes. Stage 1 declares 257.66 hours
+for nominal labels. No label measurement or publication screen changes.
+
+`artifacts.verify_registration` now requires the pinned committed design note
+to contain both Amendment A10 and Amendment A11 for an A10 instrument. Its
+ancestry, pin-hash, committed-source and cleanliness checks remain. Registration
+tests use fixture notes; this implementation does not create a registered pin.
+
+Item 2 permits the family identity record required by A5 to be committed after
+A4 publication, inside the execution checkout. Runbook section 7 creates
+`simulation/v3/runs/a10_stage1/nominal/family_identity.json`, containing the
+family file hash, table seal, receipt and sidecar file hashes, producing commit,
+and code identity. It verifies the publication before requesting the operator's
+go for that exact file and hash. The commit contains only this record; there
+is no fetch, pull, or code change. A5 requires its bytes to equal
+`git show HEAD:<path>`. The procedure then rechecks registration and the
+unchanged code identity, and records the approval, record hash and new HEAD.
+The same file bytes are committed to the public repository under a separate
+go, with that commit recorded before A5 preparation. The two commit IDs may
+differ. Neither record-only commit changes the code identity. These are
+runbook instructions, not commits performed during the build.
+
+### Compatibility of completed A10 artifacts
+
+`compatibility_a10.build_record` is a non-registered tool. Its inputs are
+completed specs and roots at producer identity X, plus a reasons file carrying
+X's source manifest and a reason for every changed manifest file. It checks
+the roots, specs and durable completions before freezing the populations and
+sample. In each phase, capability and setting stratum, it selects the two
+smallest `digest(["A11-compatibility", phase, job_id])` values, or all jobs if
+fewer than two. Job ID breaks a hash tie. The selection is sealed before any
+re-execution. Spawned workers call the ordinary `production_runner.execute`
+path at the running identity Y, with non-registered proof scope.
+
+The comparison is canonical JSON of the full job plus result, normalized
+through the durable JSON domain before sorting. At the result root only, it
+excludes `seconds`, `trajectory_seconds`, `rescore_seconds`,
+`scoring_seconds_by_k_star`, and `code_hash`. That last field is producer
+provenance, separately checked against X and Y. Envelope runtime, timing,
+host, process and lease metadata is outside the job-plus-result comparison.
+No nested scientific field, time, step, history, seed, or configuration is
+removed. The same comparison is used for qualification and duplicate results.
+
+The sealed record contains both identities and full source manifests, every
+changed file's before/after hashes and reason, the declared populations,
+per-job job/source/proof hashes and pass flags, and `operator_approval`.
+A mismatch fails the record; that attempt is final and cannot be approved.
+An isolated proof may read its declared old family, but that allowance grants
+no registered admission or right to resume a root.
+
+`accepted_identities()` returns the current identity plus producers admitted
+by valid records at the fixed pattern
+`simulation/v3/runs/registered/A11_compatibility_*.json`. The exact filename
+uses the first 24 hex digits of `digest([X, Y])`. A valid record is tracked,
+byte-identical to HEAD, sealed, passed, and explicitly approved with operator
+and date. Its target identity must equal the running identity, its complete
+after-manifest must equal the current source manifest, and its changed-file
+list, reasons, sample and proof hashes must verify. An invalid record grants
+nothing. The runbook's contingency uses a fresh checkout for the repair and
+proof, review and operator approval, then a record commit before use at the
+new identity. The old execution checkout remains unchanged.
+
+The A10 producer-identity checks changed at these sites:
+
+| Site | Completed-artifact admission |
+|---|---|
+| `production_tables.ProductionTables.__init__` | Accept an approved family producer; the isolated non-registered proof read remains separate. |
+| `production_tables.ProductionTables.require_a10` | Check table payload, A10 provenance and receipt, embedded A4 receipt and A5 label producers against the accepted set. |
+| `study.assemble_tables`, A10 branch | Accept approved estimation-output producers while retaining the exact job set and calibration checks. |
+| `tables_a10.verify_estimation_source` | Check table payload, family provenance, estimation manifest and source-family producers. `tables_a10.prepare_validation`, A4 `prepare` and its publication source check, and A5 registered `prepare` use this helper. |
+| `tables_a10.finalize_receipt` | Check family/provenance, A4 receipt, A5 labels and an existing A10 receipt; return an existing valid receipt unchanged. |
+| `table_validation_a4.publish` and `_verify_stage_outputs` | Admit an approved completed plan; verify its durable outputs against that plan's original producer. |
+| `table_labels_a5.load_a4_publication` | Admit an approved A10 family and A4 receipt. The sidecar has no producer field; its committed hash, receipt link and table seal remain exact. |
+| `table_labels_a5.publish` and `_verify_stage_outputs` | Admit an approved completed label plan; verify its outputs against the original plan producer. |
+| `gates.load_runs` | Admit an approved completed A10 evidence producer, with the checker's expected identity still current. |
+| `gates.build_index` | Index an approved completed A10 root and retain its producing identity in the index. |
+
+The following checks deliberately remain strict:
+
+- The runner's frozen spec, worker source, root identity, resume, configuration
+  work, completion records and new-output identity require one exact identity.
+  An unfinished root is never resumed at a different identity.
+- All R4 paths, legacy A1/A2/A3 approvals and legacy A6 producer checks retain
+  their existing rules. An A1 or A4 family cannot become an A10 family through
+  this path.
+- Artifact cross-links remain exact: outputs match their plan's producer;
+  source envelopes match their declared source producer; A5 family and receipt
+  match the committed identity record; gate spec, outputs and completion
+  records match their root producer. Seals, file hashes, constants, calibration,
+  row/support coverage, labels and publication screens still verify.
+- The frozen parent and declared A6 variant calibration identities, and the
+  non-registered cost pilot's source identities, remain exact.
+- Compatibility target identity, complete after-manifest, filename, seal,
+  comparison convention, proofs, approval and HEAD bytes remain exact.
+  Registration retains its ancestry, pin and source checks.
+
+The A2 approval record's `a10` entry records the affected A11 exact source
+re-pins and retains the R4 scope and proofs. A11 did not change an A1-pinned
+file. Compatibility admission does not weaken either approval record.
+
+### One launch across qualified machines
+
+`multihost_a11` coordinates one root. Worker hosts use fixed join, claim,
+heartbeat, complete, release and leave requests, with input and configuration
+acknowledgements, through the same locked transaction handler. A separate
+coordinator lifetime lock prevents two monitors. Hosts write only unpublished
+scratch outputs; the coordinator alone publishes completions into the root.
+Loopback tests use separate host directories and the same handler.
+
+The operational machine register lives under the launch root, outside Git.
+It is append-only, with sealed, chained entries naming `platform.node()`,
+qualification evidence hash, measured relative throughput, memory, environment
+fingerprint, and the operator's approval and timestamp. The fingerprint records
+Python, numpy, numpy CPU baseline/dispatch targets and features, the conda
+package-list hash for the actual prefix, and configured and verified thread
+limits. Join refuses an unapproved host, changed fingerprint, wrong code
+identity, or mismatched implementation-commit source.
+
+`qualification_a11` freezes deterministic short jobs covering every kind a
+candidate will run, with at least 20 distinct jobs at the launch identity.
+Completed registered reference outputs are used where available; otherwise
+both machines run identical non-registered fixture jobs. The sealed comparison
+uses the X2 reference and candidate proof hashes. X2's throughput reference is
+1; another host's ratio is measured from that common workload. Qualification
+and configuration outputs never count as scientific completions. The local
+build tested this procedure with fixtures, not real X2/WSL measurements.
+
+Each joined host runs its own configuration test and pulls only when a chosen
+worker slot is free and the job fits its current memory headroom. The frozen
+cost classes derive from the sealed P2 projection's per-stratum mean worker
+seconds. Dispatch is longest first, with job ID breaking ties. Class selection
+uses declared jobs and costs, never outcomes; job IDs, seeds and settings do
+not change. Memory uses the per-phase estimates, with P2 fallback for reruns;
+observed peaks can raise an estimate. Both the approved host memory and current
+headroom constrain claims, including every job in a batch.
+
+Before a phase's work, `snapshot_a11` inventories and transfers hash-verified,
+read-only inputs. These include calibration and frozen parent, published
+tables and receipt/label siblings, probe exclusions, A1 source manifests and
+completed outputs, and the preceding fit completion for A4 plain validation.
+A5 also carries its tested rows in the job. A scoped input view maps the
+original absolute references and relative checkout paths to verified copies;
+the job envelope is unchanged. Partial or corrupt transfers never become
+mapped inputs. Fresh host checkouts use the same implementation commit.
+
+Leases bind job, host, session, expiry and heartbeat. Expiry returns the exact
+job to the queue to restart from its seed. The coordinator checks the returned
+job, producing identity, registered host, issued lease and transfer hash. It
+writes the output first, then its completion record, then the operational
+completion event. An output without its record never counts. An identical
+late duplicate is an incidental cross-check; a different canonical result
+latches a durable nondeterminism failure and halts the launch. A coordinator
+restart verifies durable completions and voids outstanding leases. Verified
+late outputs from issued leases remain admissible or are compared as
+duplicates, subject to the original hard wall ceiling. A remote that loses
+coordinator contact for longer than a lease stops its workers and never
+publishes locally.
+
+Phase barriers wait for completions, active duplicates and the recorded
+nondeterminism check. That check always runs; if more than one host took part,
+its sampled job must be re-executed by another host, and both hosts are
+recorded. A4/A5 phase projections retain the existing per-cell, fit-subtraction
+and reserve arithmetic, using measured configurations of present, non-draining
+hosts. With no host, or while required configurations are pending, the
+coordinator waits. Once those configurations exist, a projection that does not
+fit latches `projection_exceeds_budget`, records the incomplete attempt in
+`launches.json`, closes every session's charging at that moment, and ends the
+coordinator. The identical command can resume before the original deadline
+and re-evaluate the hosts then present; an added host can make it fit. Resume
+does not extend the deadline or alter the projection arithmetic.
+
+Each spec declares `x2_equivalent_hours` alongside `wall_seconds`. Charging
+integrates each host's participation interval at its approved measured
+throughput, from join through its last work or leave, including synchronization
+and configuration. Completion receipt supplies a conservative observed end
+time; late work cannot overlap the same host's next join. Per-host intervals
+and worker-seconds are recorded separately. Dispatch stops at the allowance
+less the cleanup reserve or the wall dispatch deadline. No first completion
+beyond the hard wall ceiling counts. The program's stage 1 total remains
+980 X2-equivalent hours.
+
+`dispatch_store_a11` keeps a hash-verified, indexed manifest and a SQLite
+operational journal. Repeated requests use the verified manifest index;
+a changed manifest fingerprint causes re-verification. FULL-synchronous WAL
+transactions append sealed, chained delta events and update derived indexes
+atomically. Completions and leases no longer require rewriting the full state
+per request. Maintenance checkpoints the physical WAL every 30 seconds;
+logical audit events remain append-only. Resume verifies the journal chain
+and rebuilds completions from validated output/record pairs, including a crash
+between record publication and the operational commit. Status files refresh
+at most once every two seconds during ordinary work, with immediate terminal
+updates. `pull_state.json` is a diagnostic checkpoint, not the operational
+authority; `read_state()` returns a consistent diagnostic snapshot.
+
+Claims request up to the host's free slots, bounded by memory after each
+provisional lease. A durable request ID makes a lost batch reply retry
+idempotent. One heartbeat renews all leases in a session. Every request still
+takes the root lock and checks the running code identity. Hot requests use
+indexed job, lease, completion and count lookups; initialization, explicit
+inspection and resume may scan the root.
+
+Remote workers initiate SSH toward the coordinator and retain one framed
+stdio command, `v3.multihost_a11 rpc ROOT --stream`. The coordinator's own
+worker explicitly selects `host_a11 --local`, which starts that command as a
+direct child with the RPC `--local` guard. Both transports share framing,
+batching, request IDs, process reuse and leases. Under the root lock, each
+local request checks the current host against the coordinator machine recorded
+in the latest `launches.json` entry, including any supplied request host.
+A missing record or mismatch refuses local use. No transport is inferred
+from a profile or host name. The X2 needs no SSH login to itself; WSL and other
+remote hosts still need SSH. No service, port or Python package is added.
+
+Per-host `control` supports mode and worker caps, drain, immediate interruption
+and clearing a stop. Work mode on the workstation permits at most 12 workers,
+subject to its configuration and memory caps, with one numerical thread per
+worker. Draining prevents new leases while active work finishes; a host can
+leave and later rejoin, and a newly qualified host can join mid-phase. Controls
+survive resumption. The X2 worker's service supervisor owns `llm down` and
+`llm up`; WSL never manages that service. The existing watchdog follows the
+coordinator, whose progress JSON includes per-host counts and metadata.
+
+The ordinary single-host launch path retains its output format and behavior.
+Pull-mode completion records add host and lease fields to the existing root
+format. Assembly, A4 and A5 publication, `finalize_receipt`, `gates.load_runs`
+and `build_index` continue to consume one root. Registration, Context preflight,
+launch history, cleanup reserve, memory and mode caps, phase checks, screens,
+and exact per-root identity remain in force. R4 and legacy registered schemas
+refuse pull freezing, pull launch and remote join. A11 compatibility still
+admits only completed artifacts, never resumption at a new identity.
+
+### Stage 1 run specs
+
+`tables_a10.stage1_run_specs(calibration_path, tables_path, registration,
+ceilings)` and its CLI build five sealed registered specs on the nominal
+family. Every component needs an explicit positive finite ceiling. The spec
+records both its wall limit and its allocated X2-equivalent hours. Configuration
+jobs have short endpoints, while scientific jobs retain their declared lengths.
+Profiles test X2 worker counts 8, 12, 16, 24 and 32 and local counts 2, 4, 8 and
+12, with two configuration jobs per worker, within the active mode caps.
+
+| Component | Jobs | Stage 1 allowance, X2-equivalent hours |
+|---|---:|---:|
+| `main`: R1-prime, refinement grid and R2-prime together | 24,900 | 50.49 |
+| `k1p5` | 4,400 | 10.94 |
+| `k2p3` | 4,400 | 10.93 |
+| `weight_corner` | 17,600 | 44.34 |
+| `horizon` | 1,800 | 10.27 |
+
+The 53,100 jobs and seeds are disjoint. `main` satisfies the gate loader's
+count, IDs, categories and pairing requirements as one spec. Tests compare
+the complete sets against `paired_runs`, `arm_runs`, and the nominal A6
+weight-corner and horizon builders; no stage 2 job is included. With estimation
+69.50, validation 525.87 and labels 257.66, the allocations sum to exactly
+980 hours. The main ceiling is 17.42 + 10.43 + 22.64 = 50.49 hours, replacing
+three separate launches.
+
+### Verification and measured coordinator cost
+
+At the reviewed identity, the executor's final local suite ran with
+`--ignore-glob="simulation/v3/_*"`: 738 passed, 10 failed and 3 existing v2.0
+expected failures. All 51 dispatcher tests and all 9 R4 identity/call-shape
+tests passed. The separate dispatcher run passed 51 tests in 126.52 seconds.
+On 2026-10-08 the interpreter reported 746 passed, two known failures and
+3 expected v2.0 failures in its environment. The eight-count difference is
+the unchanged tests requiring temporary directories outside the worktree,
+which the executor's write boundary forbids. The two remaining failures are
+`test_v3_a6_sensitivity::test_validate_spec_accepts_estimation_nominal_and_variant_specs`,
+the pre-A10 output-scope defect, and
+`test_v3_a6_sensitivity::test_nominal_spec_code_hash_is_rerun_identity`, the
+unchanged HEAD-source check while A11 source remains uncommitted. These
+figures are verification records, not a new suite run for this documentation.
+
+The initial A11 pass also recorded 35 A11 tests and 105 A10 instrument,
+calibration and pilot tests passing. Compatibility tests cover a valid
+approved committed record and refusal of failed proofs, missing approval,
+uncommitted or modified records, mismatched after-hashes and wrong target
+identities. `test_stage1_exact_complete_disjoint_job_sets` exercises the full
+main gate loader with synthetic absorbed records and checks all five sets.
+
+Named dispatcher cases are retained in `test_v3_multihost_a11.py` and
+`test_v3_multihost_review.py`:
+
+| Case | Test |
+|---|---|
+| Two/three hosts, different speeds, joining, draining and leaving | `test_hosts_join_mid_phase_drain_leave_and_cross_host_check` |
+| Killed worker, no partial record, lease requeued | `test_killed_worker_process_leaves_no_partial_record_and_lease_requeues` |
+| Network loss stops real host processes | `test_network_drop_stops_real_host_processes_and_requeues_without_completion` |
+| Coordinator killed and resumed, controls retained | `test_killed_coordinator_process_resume_and_persisted_host_mode` |
+| Lease expiry and identical late duplicate | `test_expired_killed_host_restarts_exact_job_and_late_identical_duplicate` |
+| Differing duplicate remains a durable halt across resume | `test_differing_late_duplicate_latches_durable_halt_across_resume` |
+| Unregistered host, fingerprint, code and commit mismatch | `test_join_refusals` |
+| Qualification mismatch or incomplete coverage | `test_qualification_refusals` |
+| Insufficient memory, ordering, caps and X2 budget stop | `test_memory_order_caps_budget_and_unchanged_jobs` |
+| Corrupt transfer and partial output | `test_corrupt_transfer_and_partial_output_are_never_completed` |
+| Read-only input copies and original paths | `test_input_transfer_hashes_paths_and_read_only_view` |
+| Projection stop closes charging; added host makes resume fit | `test_projection_stop_closes_charging_and_resume_with_added_host_fits` |
+| No-host/configuration waits and draining-host exclusion | `test_no_hosts_or_unconfigured_hosts_wait_but_draining_host_does_not_block_stop` |
+| Projection stop ends coordinator and records incomplete attempt | `test_coordinator_exits_and_records_projection_stop` |
+| Batch slot/memory caps and one heartbeat for all leases | `test_batched_claims_respect_free_slots_memory_and_one_heartbeat_renews_all` |
+| Lost batch reply creates no extra leases | `test_lost_batched_claim_reply_retries_without_extra_leases` |
+| Crash after completion record but before journal commit | `test_crash_between_completion_record_and_operational_commit_recovers` |
+| Corrupt journal refuses resume | `test_journal_corruption_refused_on_resume` |
+| Indexed requests, delta log and bounded status writes | `test_hot_requests_use_index_and_delta_log_status_is_bounded` |
+| SSH/local framing and retained child process | `test_stdio_stream_reuses_process_without_network` |
+| Local host-name and missing-record guard | `test_local_transport_refuses_missing_or_different_coordinator_machine` |
+| Local join, configuration, batch retry, completion and charging | `test_local_transport_uses_normal_join_configuration_batch_leases_and_charging` |
+| Explicit transport selection | `test_transport_selection_is_explicit_and_unambiguous` |
+| Ordinary runner and loopback canonical equivalence | `test_single_machine_and_multihost_canonical_results_and_record_shape` |
+| R4/legacy refusal at freeze, launch and remote join | `test_registered_r4_and_legacy_refuse_freeze_launch_and_remote` |
+| One-root toy publication through A4, A5 and receipt | `test_single_root_toy_pipeline_inputs_a4_a5_publication_and_receipt` |
+
+The executor's R4 proof compares paired states, evaluation prefixes with
+transitions and a full 500-step recorded fixture against fe98280c. The
+interpreter independently compared ten artifacts from three new seeds, all
+25 rules, successors 1.2, 2.0 and 3.0, 40 live steps, yield events and a
+120-step recorded run on 2026-10-07; it reported byte identity. The permanent
+`test_declared_r4_matches_frozen_scientific_artifact_hashes` checks committed
+fe98280c hashes without Git or untracked inputs at test time. Its smaller
+fixture uses three population/seed pairs, rule indices 0, 12 and 24,
+successors 1.5 and 3.0, transition prefixes, 40 live steps and a 120-step
+recorded run. The earlier A11 proof took 11.55 seconds locally; later suite
+runs retain the same expected hashes and passing call-shape checks.
+
+The coordinator benchmark used 25,000 declared jobs, 8,000 completion-cache
+entries and historical leases, and 60 active leases across six synthetic
+hosts. It ran no scientific workers. Before the scaling fix, 30 requests
+took 26.03 seconds, or 1.15 requests/second, in fresh interpreter groups of
+three. After the fix at ff21e4bd, an isolated run of 1,800 requests through
+one retained command took 68.33 seconds, or 26.34 requests/second. It measured
+individual claims, so the rate does not depend on claiming several jobs in
+one request. These are workstation loopback RPC measurements, not X2,
+real SSH-network or real WSL throughput measurements. The local transport
+addition at dd1b1a88 was tested for framing and reuse; it was not separately
+benchmarked at this scale.
+
+All times below are milliseconds. Request latency includes the full identity
+check and lock acquisition. The recorded lock region includes serialized
+request processing and durable save, excludes lock acquisition wait, and does
+not separately instrument final pool bookkeeping or operating-system unlock.
+
+| Build | Request | Mean latency | p95 latency | Mean lock | p95 lock | Maximum lock |
+|---|---|---:|---:|---:|---:|---:|
+| Before | claim | 687.40 | 712.03 | 668.62 | 687.62 | 719.36 |
+| Before | complete | 658.83 | 676.38 | 641.66 | 659.02 | 659.12 |
+| Before | heartbeat | 627.52 | 635.82 | 610.33 | 619.39 | 633.88 |
+| After | claim | 30.86 | 33.56 | 7.50 | 8.91 | 24.20 |
+| After | complete | 50.74 | 54.70 | 27.31 | 30.07 | 46.91 |
+| After | heartbeat | 31.03 | 35.99 | 7.85 | 9.55 | 26.26 |
+
+The isolated sample exceeded the 20 requests/second target and kept the
+recorded lock region below 50 ms. This is a measured result, not a hard
+latency guarantee on another machine. Raw timings and test logs remain in
+the build reports.
+
+The initial local toy pipeline completed six estimates, 21 validation jobs
+and three label jobs through A5 and the A10 receipt at a declared 1.25-hour
+label ceiling, using two work-mode workers and one numerical thread. A
+fabricated-identity compatibility replay passed 20 sampled jobs, including
+A4's plain-validation sibling-fit input. The subsequent loopback pipeline
+passed single-root A4/A5 publication and receipt finalization across hosts.
+The equivalence case ran six identical two-step A10 jobs through the ordinary
+runner and two loopback hosts; canonical job/result bytes matched. Completion
+records add only host and lease keys, while timing and the hash of the
+host-bearing output naturally differ. These tests establish fixture behavior,
+not registered outcomes or real-machine qualification.
+
+### Independent comparison and remaining execution work
+
+A separate executor built a second implementation of item 4 blind from the
+same base and amendment text. The interpreter compared the two and chose
+this design because it retains the existing launch's guarantees: preflight
+and registration, strict identity, launch history, cleanup reserve, A4
+projection and the always-run nondeterminism check. The comparison found the
+projection-stall defect and coordinator scaling risk, both since fixed.
+Two tests were ported from the other build's cases: ordinary single-machine
+versus loopback canonical equivalence, and R4/legacy refusal. This paragraph
+records the supplied comparison, not a further assessment of the other build.
+
+Before registered use, the runbook requires a non-registered rehearsal on the
+real X2 coordinator and WSL remote: qualification, join, a killed remote,
+coordinator restart, drain and toy pipeline publication. X2 uses explicit
+local transport; WSL initiates SSH with no key material in the repository.
+Real qualification throughput, SSH behavior, selected worker configurations,
+service restoration and board integration remain to be demonstrated there.
+The operator's SQLite 3.52.0 check on both phaseb environments is a supplied
+environment fact, not an execution measurement from this build.
+
+Each launch enforces its own allowance, but the 980-hour program still needs
+the runbook's manual reservation and consumption ledger across launches,
+failed attempts and configuration work. Whole-component-only workstation
+sharing is no longer required. Each registered launch still needs the
+operator's go; a qualified approved host can then join that launch.
+
+The reading remains a later, separately authorized sealed collection step.
+It needs all five complete roots, specs, hashes and completion records, exact
+job counts and pairing, the nominal table/receipt/label identities, design
+pin, constants and calibration identities, and `v3-gate-evidence-2` support.
+It also needs the registered A8/A9/A10 reading rules, predictions and after
+gates, plus separately authorized R4 comparison identities. The single
+24,900-job main root feeds `gates.build_index` directly. No reading, registered
+result, real-machine rehearsal, or Git write was performed for this note.

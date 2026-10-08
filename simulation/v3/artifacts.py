@@ -1,5 +1,6 @@
 """Canonical artifacts, scoped writes and cross-platform process leases."""
 from contextlib import contextmanager
+from contextvars import ContextVar
 import ctypes
 import hashlib
 import json
@@ -11,6 +12,29 @@ import time
 
 ROOT = Path(__file__).resolve().parent
 SIMULATION = ROOT.parent
+_INPUT_VIEW = ContextVar('a11_input_view', default=None)
+
+
+def input_path(path):
+    """Resolve a frozen worker input; inactive for all ordinary execution."""
+    view = _INPUT_VIEW.get()
+    if view is None:
+        return path
+    resolved = str(Path(path).resolve())
+    if resolved in view['paths']:
+        return Path(view['paths'][resolved])
+    if any(Path(resolved).is_relative_to(Path(p)) for p in view['protected']):
+        raise ValueError('A11 input was not in the verified snapshot: ' + resolved)
+    return path
+
+
+@contextmanager
+def input_view(view):
+    token = _INPUT_VIEW.set(view)
+    try:
+        yield
+    finally:
+        _INPUT_VIEW.reset(token)
 
 
 def canonical(value):
@@ -22,7 +46,7 @@ def digest(value):
 
 
 def file_hash(path):
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+    return hashlib.sha256(Path(input_path(path)).read_bytes()).hexdigest()
 
 
 def scoped(path):
@@ -59,7 +83,7 @@ def atomic_json(path, value):
 def read(path):
     for attempt in range(8):
         try:
-            return json.loads(Path(path).read_text(encoding="utf-8"))
+            return json.loads(Path(input_path(path)).read_text(encoding="utf-8"))
         except PermissionError:
             if attempt == 7:
                 raise
@@ -205,6 +229,8 @@ def verify_registration(pin, repository=None, *, instrument=None):
         from .instrument import declaration
         if declaration(instrument).a10 and b"Amendment A10" not in committed:
             raise RuntimeError("registered A10 requires a design pin containing Amendment A10")
+        if declaration(instrument).a10 and b"Amendment A11" not in committed:
+            raise RuntimeError("registered A10 requires a design pin containing Amendment A11")
         if hashlib.sha256(committed).hexdigest() != pin["sha256"] or file_hash(repo / path) != pin["sha256"]:
             raise RuntimeError("pre-registration hash is stale")
         tracked = git("diff", "HEAD", "--", "simulation").strip()

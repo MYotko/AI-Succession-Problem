@@ -125,6 +125,7 @@ def estimation_spec(family, calibration_path, *, registration=None, wall_hours=N
             "a10_family": family, "jobs": jobs, "phases": ["table"], "configuration": {"table": profile},
             "memory_estimate_gb": {"table": max(.25, memory)},
             "wall_seconds": (wall_hours if wall_hours is not None else 1.) * 3600,
+            "x2_equivalent_hours": wall_hours if wall_hours is not None else 1.,
             "configuration_seconds": 900, "cleanup_reserve_seconds": 300,
             "publication": None, "source_family": {"code_hash": code_identity()}}
 
@@ -168,12 +169,17 @@ def assemble(outputs, calibration, target, family, *, registered=False, jobs=Non
 
 
 def verify_estimation_source(root, calibration_path, *, registered):
+    from .compatibility_a10 import accepted_identities
+    accepted = accepted_identities()
     root = Path(root)
     manifest = unseal(read(root / "tables_A1_manifest.json"))
     doc = read(root / "v3_rerun_tables_A1.json")
     payload = unseal(doc)
     info = payload["manifest"].get("a10")
-    if not info or info["constants_sha256"] != CONSTANTS_SHA256 or payload["code_hash"] != code_identity():
+    if (not info or info["constants_sha256"] != CONSTANTS_SHA256 or payload["code_hash"] not in accepted
+            or info.get("producer_code_hash") not in accepted
+            or (manifest.get("code_hash") or manifest.get("source_family", {}).get("code_hash")) not in accepted
+            or manifest.get("source_family", {}).get("code_hash", manifest.get("code_hash")) not in accepted):
         raise ValueError("A10 source has a different producer or constants")
     jobs = manifest["jobs"]
     if digest(jobs) != info["job_manifest_sha256"]:
@@ -235,13 +241,67 @@ def a6_runs(paths):
     return correct_runs(old)
 
 
+def stage1_run_specs(calibration_path, tables_path, registration, ceilings):
+    """Five complete A10 stage-1 manifests; ceilings are explicit wall hours.
+
+    Job builders and their seeds are unchanged. Only configuration-test jobs
+    have short endpoints. The main manifest is the full gate-checker family.
+    """
+    import math
+    from decimal import Decimal, ROUND_FLOOR
+    from .artifacts import verify_registration
+    from .pilot import profile
+    from .sensitivity_a6 import build_weight_corner_jobs, build_horizon_jobs
+    names = {"main", "k1p5", "k2p3", "weight_corner", "horizon"}
+    if set(ceilings) != names:
+        raise ValueError("stage 1 needs exactly five explicit ceilings")
+    for value in ceilings.values():
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value <= 0:
+            raise ValueError("stage 1 ceilings must be positive and finite")
+        if not math.isfinite(value * 3600) or value * 3600 < 1:
+            raise ValueError("stage 1 ceiling must fit a positive wall-second budget")
+    verify_registration(registration, instrument=NOMINAL)
+    groups = {"main": paired_runs(calibration_path, tables_path)}
+    arms = arm_runs(calibration_path, tables_path, "UNUSED_STAGE_2_SQRT_TABLE")
+    for name, k in (("k1p5", 1.5), ("k2p3", 2.3)):
+        groups[name] = [j for j in arms if j["config"]["model"]["instrument"] == Instrument("A10", k, "linear").declaration()]
+    groups["weight_corner"] = correct_runs(build_weight_corner_jobs(calibration_path, tables_path))
+    groups["horizon"] = correct_runs(build_horizon_jobs(calibration_path, tables_path))
+    counts = {"main": 24900, "k1p5": 4400, "k2p3": 4400, "weight_corner": 17600, "horizon": 1800}
+    all_jobs = [j for jobs in groups.values() for j in jobs]
+    if len({j["id"] for j in all_jobs}) != 53100 or len({j["seed"] for j in all_jobs}) != 53100:
+        raise ValueError("stage 1 job or seed overlap")
+    result = {}
+    code = code_identity()
+    for name, jobs in groups.items():
+        if len(jobs) != counts[name]:
+            raise ValueError("stage 1 job family is incomplete")
+        phase, = {j["config"]["phase"] for j in jobs}
+        cfg = deepcopy(max(jobs, key=lambda j: (j["config"]["model"]["successor_capability"],
+                                              j["config"]["model"]["alpha"]))["config"])
+        cfg.pop("a10_seed_source", None)
+        cfg["steps"] = 5
+        prof = profile("rerun", cfg)
+        prof.update(workers_x2=[8, 12, 16, 24, 32], workers_local=[2, 4, 8, 12], jobs_per_worker=2)
+        result[name] = {"schema": "v3-registered-1", "registered": True, "registered_a10": True,
+                        "tag": "v3_rerun", "registration": registration, "code_hash": code,
+                        "instrument": cfg["model"]["instrument"],
+                        "wall_seconds": int((Decimal(str(ceilings[name])) * 3600).to_integral_value(rounding=ROUND_FLOOR)),
+                        "x2_equivalent_hours": ceilings[name],
+                        "configuration_seconds": 900, "cleanup_reserve_seconds": 300,
+                        "phases": [phase], "configuration": {phase: prof}, "jobs": jobs, "publication": None}
+    return result
+
+
 def finalize_receipt(family_path, labels_path):
     """Bind the existing A4 publication and A5 labels without rewriting either."""
     family_path = Path(family_path)
+    from .compatibility_a10 import accepted_identities
+    accepted = accepted_identities()
     table = read(family_path)
     payload = unseal(table)
     p = payload["manifest"].get("a10")
-    if not p or p["producer_code_hash"] != code_identity() or payload["code_hash"] != code_identity():
+    if not p or p["producer_code_hash"] not in accepted or payload["code_hash"] not in accepted:
         raise ValueError("not this A10 producer's family")
     a4_path = family_path.with_suffix(".compatibility.json")
     a4 = unseal(read(a4_path))
@@ -250,14 +310,49 @@ def finalize_receipt(family_path, labels_path):
     if (a4["table_seal_sha256"] != table["sha256"] or a4["table_file_sha256"] != file_hash(family_path)
             or labels["a4_family"]["table_seal_sha256"] != table["sha256"]
             or labels["a4_family"]["family_file_sha256"] != file_hash(family_path)
-            or labels["code_hash"] != code_identity()):
+            or a4.get("producer_code_hash") not in accepted or labels["code_hash"] not in accepted):
         raise ValueError("A10 validation or label provenance mismatch")
     receipt = seal({"schema": "v3-A10-table-receipt-1", "table_sha256": table["sha256"],
                     "producer_code_hash": code_identity(), "constants_sha256": CONSTANTS_SHA256,
                     "validation_receipt_sha256": file_hash(a4_path), "labels_sha256": file_hash(labels_path),
                     "validation_receipt": read(a4_path), "labels": labels_doc})
     target = family_path.with_suffix(".a10_receipt.json")
-    if target.exists() and read(target) != receipt:
-        raise RuntimeError("A10 producer receipt is frozen")
+    if target.exists():
+        existing = read(target)
+        prior = unseal(existing)
+        expected = dict(receipt["payload"], producer_code_hash=prior.get("producer_code_hash"))
+        if prior.get("producer_code_hash") not in accepted or prior != expected:
+            raise RuntimeError("A10 producer receipt is frozen")
+        return existing
     atomic_json(target, receipt)
     return receipt
+
+
+def main():
+    import argparse
+    from .artifacts import scoped
+    parser = argparse.ArgumentParser(description=__doc__)
+    commands = parser.add_subparsers(dest="command", required=True)
+    p = commands.add_parser("stage1-runs")
+    p.add_argument("--calibration", required=True)
+    p.add_argument("--tables", required=True)
+    p.add_argument("--pin", required=True)
+    p.add_argument("--ceilings", required=True, help="JSON mapping the five component names to wall hours")
+    p.add_argument("--output-dir", required=True)
+    args = parser.parse_args()
+    specs = stage1_run_specs(args.calibration, args.tables, read(args.pin), read(args.ceilings))
+    root = scoped(args.output_dir)
+    for name, spec in specs.items():
+        path = root / (name + ".json")
+        document = seal(spec)
+        if path.exists() and read(path) != document:
+            raise RuntimeError("stage 1 manifest is frozen: " + str(path))
+    for name, spec in specs.items():
+        path = root / (name + ".json")
+        atomic_json(path, seal(spec))
+        print({"component": name, "jobs": len(spec["jobs"]), "wall_seconds": spec["wall_seconds"],
+               "spec_sha256": file_hash(path)})
+
+
+if __name__ == "__main__":
+    main()

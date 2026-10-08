@@ -54,6 +54,9 @@ def write_tables(path, rows, manifest, *, fixture=False):
 
 class ProductionTables:
     def __init__(self, path_or_document, *, calibration_hash, registered=False, expected_manifest_hash=None, receipt=None):
+        from .artifacts import input_path
+        if isinstance(path_or_document, (str, Path)):
+            path_or_document = input_path(path_or_document)
         document = read(path_or_document) if isinstance(path_or_document, (str, Path)) else path_or_document
         self.document_hash = document.get("sha256")
         if receipt is None and isinstance(path_or_document, (str, Path)):
@@ -72,7 +75,11 @@ class ProductionTables:
         if not registered and p.get("fixture") is True:
             from .recording_validation import validation_probe_compatible
             validation_fixture = validation_probe_compatible(document, source_file_hash)
-        if p.get("schema") != "v3-tables-1" or p["code_hash"] != code_identity() and not validation_fixture and not compatible(document, source_file_hash):
+        a10_source_ok = False
+        if p.get("manifest", {}).get("a10"):
+            from .compatibility_a10 import read_identities
+            a10_source_ok = p["code_hash"] in read_identities(registered=registered)
+        if p.get("schema") != "v3-tables-1" or p["code_hash"] != code_identity() and not a10_source_ok and not validation_fixture and not compatible(document, source_file_hash):
             raise ValueError("stale table source identity")
         if p["manifest_hash"] != digest(p["manifest"]) or expected_manifest_hash is not None and p["manifest_hash"] != expected_manifest_hash:
             raise ValueError("table manifest hash mismatch")
@@ -123,12 +130,14 @@ class ProductionTables:
 
     def require_a10(self, instrument):
         from .instrument import CONSTANTS_SHA256
+        from .compatibility_a10 import accepted_identities
+        accepted = accepted_identities()
         self.require_production()
         manifest = self.payload["manifest"]
         provenance = manifest.get("a10")
-        if (self.payload["code_hash"] != code_identity() or not provenance
+        if (self.payload["code_hash"] not in accepted or not provenance
                 or provenance.get("constants_sha256") != CONSTANTS_SHA256
-                or provenance.get("producer_code_hash") != code_identity()
+                or provenance.get("producer_code_hash") not in accepted
                 or instrument.declaration() not in provenance.get("instruments", [])):
             raise ValueError("registered A10 refuses another table producer or instrument")
         if self.a10_receipt is None:
@@ -136,7 +145,7 @@ class ProductionTables:
         receipt = unseal(self.a10_receipt)
         if (receipt.get("schema") != "v3-A10-table-receipt-1"
                 or receipt.get("table_sha256") != self.document_hash
-                or receipt.get("producer_code_hash") != code_identity()
+                or receipt.get("producer_code_hash") not in accepted
                 or receipt.get("constants_sha256") != CONSTANTS_SHA256
                 or not receipt.get("validation_receipt_sha256") or not receipt.get("labels_sha256")):
             raise ValueError("A10 producer receipt mismatch or missing validation/labels")
@@ -149,11 +158,11 @@ class ProductionTables:
             unseal(embedded)
         validation, labels = unseal(receipt["validation_receipt"]), unseal(receipt["labels"])
         if (validation.get("table_seal_sha256") != self.document_hash
-                or validation.get("producer_code_hash") != code_identity()
+                or validation.get("producer_code_hash") not in accepted
                 or validation.get("schema") != "v3-A4-receipt-1"
                 or labels.get("schema") != "v3-A5-label-1"
                 or labels.get("a4_family", {}).get("table_seal_sha256") != self.document_hash
-                or labels.get("code_hash") != code_identity()):
+                or labels.get("code_hash") not in accepted):
             raise ValueError("A10 receipt evidence belongs to another table")
         expected = {key for key, row in self.rows.items() if row.get("route") == "fv" and row["status"] == "estimated"}
         if {r["row_key"] for r in labels.get("rows", [])} != expected:

@@ -16,6 +16,7 @@ unchanged from ``continuation_validation``; anything new lives here. It computes
 no survival, extinction or fire rate, and none leaves any output, log or report.
 """
 import dataclasses
+import math
 from pathlib import Path
 
 import numpy as np
@@ -38,6 +39,15 @@ ASYMPTOTIC_LABEL = "asymptotic, not certified"
 # to the repository root, and the fixed 24-hour ceiling.
 REGISTERED_IDENTITY_PATH = "simulation/v3/runs/registered/A4_family_identity.json"
 REGISTERED_WALL_HOURS = 24
+_UNDECLARED_WALL = object()
+
+
+def _declared_a10_wall(value):
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value <= 0:
+        raise ValueError("registered A10 labels require explicit positive finite wall_hours")
+    if not math.isfinite(value * 3600):
+        raise ValueError("registered A10 label ceiling overflows wall_seconds")
+    return value
 # P4 measured about 1.9 GB peak RSS for full-size plain tasks on FV kernels; A4's
 # 20% margin gives the anchor. Scaling A4's FV anchor down to the plain population
 # alone is not conservative, because the fixed overhead does not shrink, so the
@@ -176,6 +186,12 @@ def load_a4_publication(family_path, identity_record):
     sidecar_file_sha256 = file_hash(sidecar_path)
     _require(sidecar_file_sha256 == identity_record["sidecar_file_sha256"], "A4 sidecar file hash mismatch")
     sidecar = unseal(read(sidecar_path))
+    if payload.get("manifest", {}).get("a10"):
+        from .compatibility_a10 import accepted_identities
+        accepted = accepted_identities()
+        _require(payload["code_hash"] in accepted and receipt["producer_code_hash"] in accepted,
+                 "A10 A5 source producer is not accepted")
+        _require(sidecar.get("table_seal_sha256") == family_doc["sha256"], "A10 sidecar table mismatch")
 
     hashes = {"family_file_sha256": family_file_sha256, "table_seal_sha256": family_doc["sha256"],
               "receipt_file_sha256": receipt_file_sha256, "sidecar_file_sha256": sidecar_file_sha256,
@@ -381,7 +397,7 @@ def _a5_job(config):
 
 
 def prepare(a4_family_path, a4_run_root, a4_plan_path, a1_source_root, calibration_path,
-            identity_record_path, registration=None, wall_hours=24, a3_probe_root=None,
+            identity_record_path, registration=None, wall_hours=_UNDECLARED_WALL, a3_probe_root=None,
             settings_override=None, instrument=None):
     """A sealed A5 plan: the 252 x 3 plain-trajectory jobs, the pinned tested set
     with per-row widths, M, every input hash and the registration pin.
@@ -393,8 +409,13 @@ def prepare(a4_family_path, a4_run_root, a4_plan_path, a1_source_root, calibrati
     a1_source_root = Path(a1_source_root)
     from .instrument import declaration
     declared = declaration(instrument)
+    if declared.a10 and registration is not None:
+        _declared_a10_wall(wall_hours)
+    elif wall_hours is _UNDECLARED_WALL:
+        wall_hours = REGISTERED_WALL_HOURS
     if registration is not None:
-        _require(wall_hours == REGISTERED_WALL_HOURS, "registered A5 uses the 24-hour ceiling")
+        if not declared.a10:
+            _require(wall_hours == REGISTERED_WALL_HOURS, "registered A5 uses the 24-hour ceiling")
         if declared.a10:
             require_committed_identity(identity_record_path, a10=True)
         else:
@@ -517,7 +538,8 @@ def prepare(a4_family_path, a4_run_root, a4_plan_path, a1_source_root, calibrati
     plan_core.update(jobs=jobs, registration=registration)
     if a10:
         from .tables_a10 import family_instrument
-        plan_core.update(instrument=family_instrument(a10["family"]).declaration(), registered_a10=bool(registration))
+        plan_core.update(instrument=family_instrument(a10["family"]).declaration(), registered_a10=bool(registration),
+                         declared_wall_hours=wall_hours, x2_equivalent_hours=wall_hours)
     return plan_core
 
 
@@ -561,6 +583,10 @@ def _verify_stage_outputs(plan, run_root):
     from .production_runner import completed
     run_root = Path(run_root)
     code = code_identity()
+    if plan.get("instrument", {}).get("mapping") == "A10":
+        from .compatibility_a10 import accepted_identities
+        _require(plan["code_hash"] in accepted_identities(), "A10 label stage producer is not accepted")
+        code = plan["code_hash"]
     hashes, stream_seeds = {}, {}
     for job in plan["jobs"]:
         phase_root = run_root / job["config"]["phase"]
@@ -709,10 +735,20 @@ def publish(plan, a5_run_root, a4_run_root, a1_source_root, calibration, target,
         _require(not plan.get("settings_override") and not any(j["config"].get("settings_override") for j in plan.get("jobs", [])),
                  "registered publish rejects a settings override")
         verify_registration(plan["registration"], **({"instrument": instrument} if instrument.a10 else {}))
-    _require(plan["code_hash"] == code_identity(), "A5 producer source changed since prepare")
+    accepted = {code_identity()}
+    if instrument.a10:
+        from .compatibility_a10 import accepted_identities
+        accepted = accepted_identities()
+    _require(plan["code_hash"] in accepted, "A5 producer source changed since prepare")
     _require(_recompute_plan_hash(plan) == plan["plan_hash"], "plan hash does not match its job list")
     if registered:
-        _require(plan["wall_seconds"] == REGISTERED_WALL_HOURS * 3600, "registered A5 uses the 24-hour ceiling")
+        if instrument.a10:
+            # Pre-A11 plans already sealed their own wall_seconds. They remain
+            # readable only through the same A11 producer-compatibility gate.
+            ceiling = _declared_a10_wall(plan.get("declared_wall_hours", plan["wall_seconds"] / 3600))
+            _require(plan["wall_seconds"] == ceiling * 3600, "A10 label plan ceiling mismatch")
+        else:
+            _require(plan["wall_seconds"] == REGISTERED_WALL_HOURS * 3600, "registered A5 uses the 24-hour ceiling")
         if not instrument.a10:
             _require(plan["fv_tables"] == 252, "registered A5 expects 252 primary FV tables")
             _require(len(plan["jobs"]) == 252 * len(A5_REPLICATES), "registered A5 expects 756 stage jobs")
@@ -825,7 +861,7 @@ def main():
     p.add_argument("a4_family"); p.add_argument("a4_run_root"); p.add_argument("a4_plan")
     p.add_argument("a1_source_root"); p.add_argument("calibration_path")
     p.add_argument("identity_record"); p.add_argument("output")
-    p.add_argument("--pin"); p.add_argument("--wall-hours", type=int, default=24); p.add_argument("--a3-probe-root")
+    p.add_argument("--pin"); p.add_argument("--wall-hours"); p.add_argument("--a3-probe-root")
     p.add_argument("--instrument-json")
     p = sub.add_parser("publish")
     p.add_argument("plan"); p.add_argument("a5_run_root"); p.add_argument("a4_run_root")
@@ -835,8 +871,13 @@ def main():
     if args.command == "prepare":
         from .instrument import declaration
         instrument = declaration(read(args.instrument_json) if args.instrument_json else None)
+        try:
+            wall_hours = ((float(args.wall_hours) if instrument.a10 else int(args.wall_hours))
+                          if args.wall_hours is not None else (_UNDECLARED_WALL if instrument.a10 else 24))
+        except ValueError:
+            parser.error("--wall-hours must be a number for A10, or an integer for R4")
         plan = prepare(args.a4_family, args.a4_run_root, args.a4_plan, args.a1_source_root, args.calibration_path,
-                       args.identity_record, read(args.pin) if args.pin else None, args.wall_hours, args.a3_probe_root,
+                       args.identity_record, read(args.pin) if args.pin else None, wall_hours, args.a3_probe_root,
                        **({"instrument": instrument} if instrument.a10 else {}))
         out = args.output if str(Path(args.output).resolve()).startswith(str(ROOT)) else SIMULATION / args.output
         atomic_json(out, seal(plan))

@@ -107,6 +107,10 @@ def assemble_tables(outputs, calibration, target, *, registered=False, a10_jobs=
     from .offline_estimator import SENSITIVITY_RULES, SENSITIVITY_RR
     primary, sensitivities, rates = {}, {}, {}
     current_code = code_identity()
+    accepted_codes = {current_code}
+    if a10_jobs is not None:
+        from .compatibility_a10 import accepted_identities
+        accepted_codes = accepted_identities()
     if a10_jobs is not None:
         expected_jobs = {j["id"]: j for j in a10_jobs}
         if len(outputs) != len(expected_jobs) or {o["job"]["id"] for o in outputs} != set(expected_jobs):
@@ -114,7 +118,7 @@ def assemble_tables(outputs, calibration, target, *, registered=False, a10_jobs=
         if any(o["job"] != expected_jobs[o["job"]["id"]] for o in outputs):
             raise ValueError("A10 estimation job differs from declared family")
     for output in outputs:
-        if output["code_hash"] != current_code or output["result"]["calibration_hash"] != calibration["sha256"]:
+        if output["code_hash"] not in accepted_codes or output["result"]["calibration_hash"] != calibration["sha256"]:
             raise ValueError("stale table output or calibration")
         if registered and (output["job"]["tag"] != "v3_tables" or output["result"]["fixture_calibration"]):
             raise ValueError("registered assembly rejects pilot or fixture estimates")

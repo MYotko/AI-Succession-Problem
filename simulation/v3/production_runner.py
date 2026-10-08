@@ -143,11 +143,12 @@ def process_alive(pid):
 
 
 def completed(root, job, code):
-    record_path = root / "records" / (job["id"] + ".json")
+    from .artifacts import input_path
+    record_path = input_path(root / "records" / (job["id"] + ".json"))
     if not record_path.exists():
         return None
     record = read(record_path)
-    output = root / "outputs" / (job["id"] + ".json")
+    output = input_path(root / "outputs" / (job["id"] + ".json"))
     if record.get("job") != job or record.get("code_hash") != code or record.get("status") != "complete" or not output.exists() or file_hash(output) != record["output_hash"]:
         raise RuntimeError("completion record or output identity mismatch")
     value = read(output)
@@ -241,7 +242,11 @@ def execute(job, registered=False, registration=None, root=None):
             "continuation_availability": availability})
 
 
-def worker(root_name, job, code, threads, registered, registration, completion_deadline=None):
+def worker(root_name, job, code, threads, registered, registration, completion_deadline=None, input_snapshot=None):
+    if input_snapshot is not None:
+        from .artifacts import input_view
+        with input_view(input_snapshot):
+            return worker(root_name, job, code, threads, registered, registration, completion_deadline)
     root = Path(root_name)
     configure_threads(threads)
     try:
@@ -271,7 +276,7 @@ def worker(root_name, job, code, threads, registered, registration, completion_d
         raise
 
 
-def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=None, control_root=None, registered=False, registration=None, completion_screen=None, memory_cap=None, memory_estimate_gb=None, pooled_jobs=None):
+def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=None, control_root=None, registered=False, registration=None, completion_screen=None, memory_cap=None, memory_estimate_gb=None, pooled_jobs=None, input_snapshot=None):
     root = scoped(root)
     root.mkdir(parents=True, exist_ok=True)
     control_root = control_root or root
@@ -476,7 +481,9 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                 if attempts.get(job["id"], 0) >= 3:
                     raise RuntimeError("job has exhausted retries")
                 args = (str(root), job, code, selected["threads"], registered, registration)
-                process = context.Process(target=worker, args=args + ((deadline,) if pooled_jobs is not None else ()))
+                tail = ((deadline if pooled_jobs is not None else None, input_snapshot) if input_snapshot is not None
+                        else ((deadline,) if pooled_jobs is not None else ()))
+                process = context.Process(target=worker, args=args + tail)
                 process.start()
                 active[job["id"]] = (process, job, selected["threads"])
                 slots += selected["threads"]
@@ -633,7 +640,7 @@ def configuration_job_count(profile, workers, x2):
     return profile["jobs_x2"] if x2 else profile["jobs_local"]
 
 
-def configuration_test(root, phase, profile, settings, deadline, launch_number, memory_cap=None):
+def configuration_test(root, phase, profile, settings, deadline, launch_number, memory_cap=None, input_snapshot=None):
     listed = profile["workers_x2"] if settings["profile"] == "x2" else profile["workers_local"]
     if settings["profile"] == "x2" and not {8, 12, 16, 24, 32}.issubset(listed):
         raise ValueError("missing required X2 configuration candidates")
@@ -652,6 +659,8 @@ def configuration_test(root, phase, profile, settings, deadline, launch_number, 
             jobs = [stable_job(profile["kind"], configs[i % len(configs)], "configuration", round_index * count + i) for i in range(count)]
             target = root / "configuration" / str(launch_number) / phase / f"r{round_index}_w{w}_t{t}"
             extra = {"pooled_jobs": {j["id"]: pooled[j["config"]["phase"]] for j in jobs}} if pooled is not None else {}
+            if input_snapshot is not None:
+                extra['input_snapshot'] = input_snapshot
             result = dispatch(target, jobs, code_identity(), settings, deadline, fixed={"workers": w, "threads": t}, control_root=root, **extra)
             values = [completed(target, j, code_identity()) for j in jobs]
             measurement = {"workers": w, "threads": t, "completed": result["completed"], "wall_seconds": result["wall_seconds"],
@@ -886,6 +895,9 @@ def preflight_completion(spec, root):
 
 def launch(spec_path, root, settings, service_record=None):
     spec = unseal(read(spec_path))
+    if 'pull_dispatch' in spec:
+        from .multihost_a11 import coordinate
+        return coordinate(spec_path, root, settings)
     settings = {**settings, "caps": caps(settings["profile"], settings["cpu_budget"])}
     try:
         context_preflight = validate_spec(spec, settings)
@@ -1052,12 +1064,15 @@ def main():
     p = commands.add_parser("control")
     p.add_argument("root"); p.add_argument("--mode", choices=("normal", "work"))
     p.add_argument("--max-workers", type=int); p.add_argument("--stop", choices=("drain", "now", "clear"))
+    p.add_argument('--host', help='A11 pull host; mode and caps apply only to this host')
     p = commands.add_parser("status"); p.add_argument("root")
     args = parser.parse_args()
     if args.command == "launch":
         settings = {k: getattr(args, k) for k in ("profile", "workers", "threads", "cpu_budget", "mode")}
         configure_threads(args.threads)
-        if args.profile == "x2":
+        if 'pull_dispatch' in unseal(read(args.spec)):
+            result = launch(args.spec, args.root, settings)
+        elif args.profile == "x2":
             from .service import run_with_service
             result = run_with_service(args.spec, args.root, settings)
         else:
@@ -1065,6 +1080,12 @@ def main():
         print(result)
     elif args.command == "control":
         root = scoped(args.root)
+        if (root / 'pull_state.json').exists():
+            from .multihost_a11 import control
+            print(control(root, args.host, mode=args.mode, max_workers=args.max_workers, stop=args.stop))
+            return
+        if args.host:
+            raise ValueError('legacy launches refuse remote host controls')
         value = read(root / "control.json")
         if args.mode:
             value["mode"] = args.mode
@@ -1079,6 +1100,10 @@ def main():
         print(value)
     else:
         root = scoped(args.root)
+        if (root / 'pull_state.json').exists():
+            from .multihost_a11 import rpc
+            print(rpc(root, {'op': 'inspect'})['status'])
+            return
         print({"control": read(root / "control.json"), "phases": {p.parent.name: read(p) for p in root.glob("*/status.json")}})
 
 

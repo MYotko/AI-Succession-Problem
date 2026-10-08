@@ -115,7 +115,8 @@ def load_calibration(path, *, registered=False, instrument=None):
     import hashlib
     import json
     from pathlib import Path
-    raw = Path(path).read_bytes()
+    from .artifacts import input_path
+    raw = Path(input_path(path)).read_bytes()
     document = json.loads(raw)
     from .instrument import declaration
     extra = {"instrument": instrument, "source_sha256": hashlib.sha256(raw).hexdigest()} if declaration(instrument).a10 else {}

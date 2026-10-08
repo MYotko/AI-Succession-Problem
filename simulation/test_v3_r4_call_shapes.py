@@ -24,7 +24,8 @@ def test_a5_identity_call_supplies_a10_only_for_a10(monkeypatch,instrument):
     monkeypatch.setattr(table_labels_a5,'require_committed_identity',check)
     with pytest.raises(ReachedIdentity):
         table_labels_a5.prepare('family','run','plan','source','cal','identity',
-                               registration={'fixture':'pin'},instrument=instrument)
+                               registration={'fixture':'pin'},instrument=instrument,
+                               **({'wall_hours': 257.66} if instrument and instrument['mapping']=='A10' else {}))
     assert calls==['identity']
 
 

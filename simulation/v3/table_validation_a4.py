@@ -454,7 +454,8 @@ def prepare(source_root, calibration_path, registration=None, wall_hours=48, a3_
     plan_core.update(jobs=jobs, registration=registration,
                      probe_seed_count=len(probe_seeds), stream_seed_count=len(all_stream))
     if instrument.a10:
-        plan_core.update(instrument=instrument.declaration(), registered_a10=bool(registration))
+        plan_core.update(instrument=instrument.declaration(), registered_a10=bool(registration),
+                         x2_equivalent_hours=wall_hours)
     return plan_core
 
 
@@ -750,7 +751,11 @@ def publish(plan, run_root, source_root, calibration, target, *, registered=True
     a1_manifest = unseal(read(source_root / "tables_A1_manifest.json"))
     if digest(a1_manifest) != plan["source_manifest_sha256"]:
         raise ValueError("A1 manifest changed")
-    if plan["code_hash"] != code_identity():
+    accepted = {code_identity()}
+    if instrument.a10:
+        from .compatibility_a10 import accepted_identities
+        accepted = accepted_identities()
+    if plan["code_hash"] not in accepted:
         raise ValueError("A4 producer source changed since prepare")
     if _recompute_plan_hash(plan) != plan["plan_hash"]:
         raise ValueError("plan hash does not match its job list, overrides and registration")
@@ -823,6 +828,11 @@ def _verify_stage_outputs(plan, run_root):
     from .production_runner import completed
     run_root = Path(run_root)
     code = code_identity()
+    if plan.get("instrument", {}).get("mapping") == "A10":
+        from .compatibility_a10 import accepted_identities
+        if plan["code_hash"] not in accepted_identities():
+            raise ValueError("A10 validation stage producer is not accepted")
+        code = plan["code_hash"]
     hashes, stream_seeds = {}, {}
     for job in plan["jobs"]:
         phase_root = run_root / job["config"]["phase"]

@@ -846,7 +846,14 @@ def load_runs(manifest_path, manifest_sha256, *, fixtures=False, validation=Fals
     if bool(manifest.get("fixture")) != fixtures:
         raise ValueError("fixture provenance mismatch")
     if not fixtures:
-        if manifest["instrument_code_hash"] != expected_code_hash:
+        accepted = {expected_code_hash}
+        if inst.a10 and not validation:
+            from .compatibility_a10 import accepted_identities
+            from .artifacts import code_identity
+            if expected_code_hash != code_identity():
+                raise ValueError("A10 checker expected identity differs from running code")
+            accepted = accepted_identities()
+        if manifest["instrument_code_hash"] not in accepted:
             raise ValueError("evidence source is not the committed instrument")
         if manifest["calibration"]["sha256"] != calibration_sha256:
             raise ValueError("evidence uses a different calibration")
@@ -958,7 +965,11 @@ def build_index(root, target, *, validation=False, pin=None, instrument=None):
             verify_a2(pin)
     spec_path = root / "manifest.json"
     spec = unseal(read(spec_path))
-    if spec["registered"] == validation or spec["code_hash"] != code_identity():
+    accepted = {code_identity()}
+    if inst.a10 and not validation:
+        from .compatibility_a10 import accepted_identities
+        accepted = accepted_identities()
+    if spec["registered"] == validation or spec["code_hash"] not in accepted:
         raise ValueError("index mode/source mismatch")
     def ref(path):
         return {"path": str(path.resolve()), "sha256": file_hash(path)}
