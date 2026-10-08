@@ -99,7 +99,7 @@ def table_design():
             "full_scale_tail_standard": "diagnostic only", "scoring_contexts": scoring_contexts()}
 
 
-def assemble_tables(outputs, calibration, target, *, registered=False):
+def assemble_tables(outputs, calibration, target, *, registered=False, a10_jobs=None, a10_family=None):
     """Apply the frozen nine-pair sensitivity family before table publication."""
     import math
     import numpy as np
@@ -107,6 +107,12 @@ def assemble_tables(outputs, calibration, target, *, registered=False):
     from .offline_estimator import SENSITIVITY_RULES, SENSITIVITY_RR
     primary, sensitivities, rates = {}, {}, {}
     current_code = code_identity()
+    if a10_jobs is not None:
+        expected_jobs = {j["id"]: j for j in a10_jobs}
+        if len(outputs) != len(expected_jobs) or {o["job"]["id"] for o in outputs} != set(expected_jobs):
+            raise ValueError("incomplete A10 estimation jobs")
+        if any(o["job"] != expected_jobs[o["job"]["id"]] for o in outputs):
+            raise ValueError("A10 estimation job differs from declared family")
     for output in outputs:
         if output["code_hash"] != current_code or output["result"]["calibration_hash"] != calibration["sha256"]:
             raise ValueError("stale table output or calibration")
@@ -164,7 +170,12 @@ def assemble_tables(outputs, calibration, target, *, registered=False):
                 "sensitivity_status": "passed" if statuses and all(statuses) else "incomplete_or_failed",
                 "complete_family": registered,
                 "input_output_hashes": [digest(o) for o in outputs]}
-    if registered:
+    if a10_jobs is not None:
+        from .tables_a10 import provenance, expected_keys
+        manifest["a10"] = provenance(a10_family, a10_jobs)
+        if set(primary) != expected_keys(a10_jobs, calibration):
+            raise ValueError("A10 per-capability scoring family is incomplete")
+    if registered and a10_jobs is None:
         from .context import Context
         from .policies import execution_policy_class
         expected = set()

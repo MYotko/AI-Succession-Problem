@@ -94,8 +94,9 @@ def test_zero_fire_exception_is_narrow_and_never_a_clearance():
 
 
 def test_executor_diff_is_limited_to_selection_step_recording_and_pure_hook():
+    # Audit D23's own committed change, not later instrument amendments.
     before = subprocess.check_output(['git', '-C', str(SIMULATION.parent), 'show', '34ffbfe9:simulation/v3/integration.py']).decode()
-    after = (SIMULATION / 'v3/integration.py').read_text()
+    after = subprocess.check_output(['git', '-C', str(SIMULATION.parent), 'show', 'e9736898:simulation/v3/integration.py']).decode()
     def without_changed_methods(text):
         tree = ast.parse(text)
         cls = next(n for n in tree.body if isinstance(n, ast.ClassDef) and n.name == 'V3Model')

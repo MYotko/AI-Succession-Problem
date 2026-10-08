@@ -46,6 +46,7 @@ class CompletePlan:
     admission_evidence: str
     survival_probability: float
     transition_included: bool = True
+    decision_deadline: int | None = None
 
 
 @dataclass(frozen=True)
@@ -61,9 +62,12 @@ class YieldDecision:
 def plan_value(plan, epoch, now):
     if (plan.epoch_id != epoch.epoch_id or plan.preference_id != epoch.preference_id or plan.information_law_id != epoch.information_law_id or plan.extinction_flow != epoch.extinction_flow):
         raise ValueError("plans must share committed units and information law")
-    if not isinstance(now, int) or not epoch.origin <= now <= epoch.deadline or plan.start != now or not now <= plan.terminal_time <= epoch.deadline or len(plan.flows) != plan.terminal_time - now:
+    endpoint = epoch.deadline if plan.decision_deadline is None else epoch.deadline + 30
+    if plan.decision_deadline is not None and (plan.decision_deadline != epoch.deadline or plan.terminal_time != endpoint):
+        raise ValueError("A10 plan must separate deadline from deadline+30 endpoint")
+    if not isinstance(now, int) or not epoch.origin <= now <= epoch.deadline or plan.start != now or not now <= plan.terminal_time <= endpoint or len(plan.flows) != plan.terminal_time - now:
         raise ValueError("complete plan must respect the absolute deadline")
-    if plan.first_yield is not None and (not isinstance(plan.first_yield, int) or not now <= plan.first_yield <= plan.terminal_time or not plan.transition_included):
+    if plan.first_yield is not None and (not isinstance(plan.first_yield, int) or not now <= plan.first_yield <= min(plan.terminal_time, epoch.deadline) or not plan.transition_included):
         raise ValueError("yield must include simulated transition and recovery")
     if not plan.plan_id or (plan.admitted and not plan.admission_evidence):
         raise ValueError("admitted plans require S5 evidence")

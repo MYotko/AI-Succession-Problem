@@ -17,6 +17,7 @@ from .objective import ValueBound
 from .plans import CompletePlan, plan_value
 
 SCHEMA = "v3-gate-evidence-1"
+A10_SCHEMA = "v3-gate-evidence-2"
 
 
 def undisrupted(model, *, horizon, capability, transition_at, incumbent_index, seed_channel):
@@ -26,6 +27,9 @@ def undisrupted(model, *, horizon, capability, transition_at, incumbent_index, s
     as the disrupted evaluation even if population sizes diverge. Additional
     diagnostic draws do not consume or change any original execution draw.
     """
+    if model.instrument.a10:
+        model.instrument.require_capability(capability)
+        model.instrument.require_capability(model.capability)
     state = model.state.repeat(len(model.rules))
     indices = np.arange(len(model.rules))
     flows = np.empty((horizon, len(model.rules)))
@@ -34,9 +38,10 @@ def undisrupted(model, *, horizon, capability, transition_at, incumbent_index, s
         selected = indices if t >= transition_at else np.full(len(indices), incumbent_index)
         actions = model.rule_batch.actions(state.summary_bins(model.capacity), selected)
         rng.random(())  # same draw channel, but no transition is applied
-        advance(state, actions, rng, model.reproduction_rate, model.capacity, model.protocol, crowding=model.crowding)
         cap = model.capability if t < transition_at else capability
-        flows[t], _ = measurements_and_flow(state, actions, model.parameters, model.alpha, cap, n_ref=model.n_ref)
+        advance(state, actions, rng, model.reproduction_rate, model.capacity, model.protocol, crowding=model.crowding,
+                **({"capability": cap, "instrument": model.instrument} if model.instrument.a10 else {}))
+        flows[t], _ = measurements_and_flow(state, actions, model.parameters, model.alpha, cap, n_ref=model.n_ref, **({"instrument": model.instrument} if model.instrument.a10 else {}))
     lookup = model._lookup(state, model.rules, capability)
     return flows, lookup
 
@@ -48,6 +53,7 @@ class RecordedV3Model(V3Model):
         self._transition_events = []
         self._in_plan_evaluation = False
         self._live_applied_transition = None
+        self.evidence_schema = A10_SCHEMA if self.instrument.a10 else SCHEMA
 
     def _transition_drawdown(self, stocks, actions, capability_gap, uniform):
         before = stocks.copy()
@@ -82,7 +88,7 @@ class RecordedV3Model(V3Model):
             record = {"plan_id": name, "epoch_id": self.epoch.epoch_id,
                       "preference_id": self.epoch.preference_id, "information_law_id": self.epoch.information_law_id,
                       "extinction_flow": self.parameters.extinction_flow, "start": self.time,
-                      "terminal_time": self.epoch.deadline, "first_yield": yield_time,
+                      "terminal_time": self.time + len(evaluated.flows), "first_yield": yield_time,
                       "flows": evaluated.flows[:, i].tolist(),
                       "continuation": float(evaluated.lookup.continuation[i]) if available else None,
                       "lambda_f": float(evaluated.lookup.lambda_f[i]) if available else None,
@@ -91,6 +97,9 @@ class RecordedV3Model(V3Model):
                                              "active_bound": self.active_certificate.upper,
                                              "period_exact": str(self.period.certificate.exact),
                                              "active_exact": str(self.active_certificate.exact)}}
+            if self.instrument.a10:
+                record["decision_deadline"] = self.epoch.deadline
+                record["evaluation_endpoint"] = self.time + len(evaluated.flows)
             if when is not None:
                 events = self._transition_events[start_transition:]
                 record['transition'] = events[0][i] if len(events) == 1 else None
@@ -117,7 +126,8 @@ class RecordedV3Model(V3Model):
                     plan = CompletePlan(p["plan_id"], p["epoch_id"], p["preference_id"], p["information_law_id"],
                                         p["extinction_flow"], p["start"], p["terminal_time"], p["first_yield"],
                                         tuple(p["flows"]), ValueBound(p["continuation"]), p["lambda_f"], True,
-                                        f"cohort-{self.period.start}-{self.time}", max(0., 1 - self.active_certificate.upper))
+                                        f"cohort-{self.period.start}-{self.time}", max(0., 1 - self.active_certificate.upper),
+                                        **({"decision_deadline": p["decision_deadline"]} if self.instrument.a10 else {}))
                     value = plan_value(plan, self.epoch, self.time).value
                     if p["admitted"]:
                         values[p["plan_id"]] = value
@@ -125,7 +135,7 @@ class RecordedV3Model(V3Model):
                         u = p["undisrupted"]
                         paired = replace(plan, flows=tuple(u["flows"]), continuation=ValueBound(u["continuation"]), lambda_f=u["lambda_f"])
                         p["gamma"] = plan_value(paired, self.epoch, self.time).value - value
-            event["gate_evidence"] = {"schema": SCHEMA, "epoch": asdict(self.epoch),
+            event["gate_evidence"] = {"schema": self.evidence_schema, "epoch": asdict(self.epoch),
                                       "plans": self._review_records, "comparison_values": values,
                                       'incumbent_capability': before_cap, 'successor_capability': requested}
             if event["transition_count"]:
@@ -149,9 +159,13 @@ class RecordedV3Model(V3Model):
         stocks = self.state.stocks[0].astype(float) / 100
         keep = self.state.ages[0] >= 0
         mean_welfare = np.where(keep, self.state.welfare[0], 0).sum() / max(int(keep.sum()), 1) / 1000
-        raw = {"schema": SCHEMA, "frontier_velocity": float(self.capability * stocks[2]),
+        raw = {"schema": self.evidence_schema, "frontier_velocity": float(self.capability * stocks[2]),
                "bandwidth": float(mean_welfare * stocks[3]), "transfer_stock": float(stocks[3]),
                "theta": record.get("theta", 1.), "population_before": len(ages)}
+        if self.instrument.a10:
+            raw.update(frontier_velocity=record.get("frontier_velocity", 0.), bandwidth=record.get("bandwidth", 0.),
+                       bandwidth_floor=self.instrument.floor, instrument=self.instrument.declaration(),
+                       frontier_history=self.state.frontier_history[0].tolist())
         if record["time"] == self.period.start:
             raw["period_start"] = {"ages_before": ages, "welfare_units_before": welfare}
         if ages:
@@ -168,8 +182,12 @@ def pack_evidence(result):
     """Compress only evidence; all existing scientific fields stay identical."""
     records = {name: [item.pop("gate_evidence") for item in result[name]]
                for name in ("diagnostics", "yield_events")}
-    raw = canonical({"schema": SCHEMA, **records})
-    result["gate_evidence"] = {"schema": SCHEMA, "encoding": "gzip-base64", "raw_sha256": hashlib.sha256(raw).hexdigest(),
+    schemas = {item["schema"] for items in records.values() for item in items}
+    schema = next(iter(schemas)) if schemas else (A10_SCHEMA if result.get("instrument", {}).get("mapping") == "A10" else SCHEMA)
+    if len(schemas) > 1 or schema not in (SCHEMA, A10_SCHEMA):
+        raise ValueError("mixed or unknown evidence schema")
+    raw = canonical({"schema": schema, **records})
+    result["gate_evidence"] = {"schema": schema, "encoding": "gzip-base64", "raw_sha256": hashlib.sha256(raw).hexdigest(),
                                "raw_bytes": len(raw), "data": base64.b64encode(gzip.compress(raw, mtime=0)).decode("ascii")}
     return result
 
@@ -177,17 +195,19 @@ def pack_evidence(result):
 def unpack_evidence(result):
     """Check the inner hash as well as the enclosing durable output hash."""
     envelope = result["gate_evidence"]
-    if envelope["schema"] != SCHEMA or envelope["encoding"] != "gzip-base64":
+    if envelope["schema"] not in (SCHEMA, A10_SCHEMA) or envelope["encoding"] != "gzip-base64":
         raise ValueError("unknown evidence encoding")
     raw = gzip.decompress(base64.b64decode(envelope["data"], validate=True))
     if len(raw) != envelope["raw_bytes"] or hashlib.sha256(raw).hexdigest() != envelope["raw_sha256"]:
         raise ValueError("evidence content hash mismatch")
     records = json.loads(raw)
-    if records["schema"] != SCHEMA:
+    if records["schema"] != envelope["schema"]:
         raise ValueError("evidence schema mismatch")
     for name in ("diagnostics", "yield_events"):
         if len(records[name]) != len(result[name]):
             raise ValueError("evidence record count mismatch")
         for item, evidence in zip(result[name], records[name]):
+            if evidence.get("schema") != envelope["schema"]:
+                raise ValueError("mixed evidence schema")
             item["gate_evidence"] = evidence
     return result

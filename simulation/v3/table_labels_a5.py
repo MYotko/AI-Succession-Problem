@@ -101,20 +101,21 @@ def _require(condition, message):
         raise ValueError(message)
 
 
-def require_committed_identity(path):
+def require_committed_identity(path, *, a10=False):
     """A registered run's identity record is the committed one at the fixed
     repository path, tracked, with bytes equal to ``git show HEAD:<path>``."""
     import subprocess
     repo = SIMULATION.parent
     resolved = Path(path).resolve()
-    expected = (repo / REGISTERED_IDENTITY_PATH).resolve()
+    identity_path = resolved.relative_to(repo).as_posix() if a10 and resolved.is_relative_to(repo) else REGISTERED_IDENTITY_PATH
+    expected = (repo / identity_path).resolve()
     _require(resolved == expected, "registered A5 requires the committed identity record at %s" % REGISTERED_IDENTITY_PATH)
 
     def git(*args):
         return subprocess.run(["git", "-C", str(repo), *args], check=True, capture_output=True).stdout
     try:
-        git("ls-files", "--error-unmatch", REGISTERED_IDENTITY_PATH)
-        committed = git("show", "HEAD:" + REGISTERED_IDENTITY_PATH)
+        git("ls-files", "--error-unmatch", identity_path)
+        committed = git("show", "HEAD:" + identity_path)
     except subprocess.CalledProcessError as exc:
         raise ValueError("A4 family identity record is not tracked or committed at HEAD") from exc
     if committed != resolved.read_bytes():
@@ -335,12 +336,18 @@ def fvplain_stage(a1_output, tested_rows, lower, upper, seed, override=None):
     alive = trace["features"][..., 0] > 0
     dead = (~alive).ravel()
     source_alive = np.concatenate((np.ones((1, count), dtype=bool), alive[:-1])).ravel()
+    if context.instrument.a10:
+        # Keep startup transitions out of the A10 continuation domain.
+        source_alive &= np.repeat(np.arange(length) >= 30, count)
 
     rows_out = []
     for tested in tested_rows:
         scoring = tested["scoring"]
         value_by_code = {int(c): float(v) for c, v in tested["support"]}
         ctx = dataclasses.replace(context, parameters=dataclasses.replace(context.parameters, kappa=scoring.get("kappa", 8.0)))
+        if ctx.instrument.a10:
+            from .instrument import Instrument
+            ctx = dataclasses.replace(ctx, instrument=Instrument("A10", scoring["k_star"], ctx.instrument.g))
         flows = score_features(trace["features"], ctx, scoring["alpha"], scoring["capability"]).ravel()
         cv.check_in_range(flows, lower, upper, "flow")
         residual, covered, srcidx, codes = cv.living_source_residuals(
@@ -375,7 +382,7 @@ def _a5_job(config):
 
 def prepare(a4_family_path, a4_run_root, a4_plan_path, a1_source_root, calibration_path,
             identity_record_path, registration=None, wall_hours=24, a3_probe_root=None,
-            settings_override=None):
+            settings_override=None, instrument=None):
     """A sealed A5 plan: the 252 x 3 plain-trajectory jobs, the pinned tested set
     with per-row widths, M, every input hash and the registration pin.
 
@@ -384,11 +391,22 @@ def prepare(a4_family_path, a4_run_root, a4_plan_path, a1_source_root, calibrati
     outputs against the receipt, checks the A1 source, and asserts the global
     seed guard."""
     a1_source_root = Path(a1_source_root)
+    from .instrument import declaration
+    declared = declaration(instrument)
     if registration is not None:
         _require(wall_hours == REGISTERED_WALL_HOURS, "registered A5 uses the 24-hour ceiling")
-        require_committed_identity(identity_record_path)
+        if declared.a10:
+            require_committed_identity(identity_record_path, a10=True)
+        else:
+            require_committed_identity(identity_record_path)
     identity_record = read(identity_record_path)
     payload, receipt, sidecar, a4_hashes = load_a4_publication(a4_family_path, identity_record)
+    a10 = payload.get("manifest", {}).get("a10")
+    if a10:
+        from .tables_a10 import family_instrument
+        _require(declared == family_instrument(a10["family"]), "A10 labels require their declared family instrument")
+    else:
+        _require(not declared.a10, "A10 labels refuse an R4 family")
     a4_plan = unseal(read(a4_plan_path))
     a4_plan_file_sha256 = file_hash(a4_plan_path)
     a1_manifest = unseal(read(a1_source_root / "tables_A1_manifest.json"))
@@ -408,7 +426,11 @@ def prepare(a4_family_path, a4_run_root, a4_plan_path, a1_source_root, calibrati
     if registration is not None:
         from .table_validation_a4 import A1_FILE_SHA256
         _require(payload.get("fixture") is False, "registered A5 rejects a fixture A4 family")
-        _require(actual_a1 == A1_FILE_SHA256, "A1 source is not the canonical A1 publication")
+        if a10:
+            from .tables_a10 import verify_estimation_source
+            verify_estimation_source(a1_source_root, calibration_path, registered=True)
+        else:
+            _require(actual_a1 == A1_FILE_SHA256, "A1 source is not the canonical A1 publication")
         _require(actual_a1 == expected_a1, "A1 source publication differs from the A4 receipt")
 
     census_map, census_hashes = census_job_map(a4_plan, receipt)
@@ -433,7 +455,7 @@ def prepare(a4_family_path, a4_run_root, a4_plan_path, a1_source_root, calibrati
     a5_seeds = assert_a5_seeds(fv_job_seeds, forbidden)
     _require(len(a5_seeds) == len(fv_jobs) * len(A5_REPLICATES),
              "expected %d A5 seeds, built %d" % (len(fv_jobs) * len(A5_REPLICATES), len(a5_seeds)))
-    if registration is not None:
+    if registration is not None and not a10:
         _require(len(fv_jobs) == 252, "registered A5 expects 252 primary FV tables")
         _require(len(a5_seeds) == 252 * len(A5_REPLICATES), "registered A5 expects 756 A5 seeds")
 
@@ -487,8 +509,15 @@ def prepare(a4_family_path, a4_run_root, a4_plan_path, a1_source_root, calibrati
     if len({j["id"] for j in jobs}) != len(jobs):
         raise ValueError("duplicate A5 job identifier")
 
-    plan_core["configuration"] = {PHASE: _configuration_profile(skeletons)}
+    plan_core["configuration"] = {PHASE: _configuration_profile(skeletons)} if skeletons else {}
+    if not skeletons and a10:
+        plan_core["phases"] = []
+    elif not skeletons:
+        _require(False, "A5 plan has no jobs")
     plan_core.update(jobs=jobs, registration=registration)
+    if a10:
+        from .tables_a10 import family_instrument
+        plan_core.update(instrument=family_instrument(a10["family"]).declaration(), registered_a10=bool(registration))
     return plan_core
 
 
@@ -672,19 +701,27 @@ def publish(plan, a5_run_root, a4_run_root, a1_source_root, calibration, target,
     """Assemble and write the sealed A5 label record. Refuses to overwrite a
     published record, and asserts the A4 family bytes are unchanged."""
     from .calibration import validate_calibration
+    from .instrument import declaration
+    instrument = declaration(plan.get("instrument"))
     if registered:
         _require(plan.get("registered") and plan.get("registration"),
                  "registered publish requires a registered plan and a registration pin")
         _require(not plan.get("settings_override") and not any(j["config"].get("settings_override") for j in plan.get("jobs", [])),
                  "registered publish rejects a settings override")
-        verify_registration(plan["registration"])
+        verify_registration(plan["registration"], **({"instrument": instrument} if instrument.a10 else {}))
     _require(plan["code_hash"] == code_identity(), "A5 producer source changed since prepare")
     _require(_recompute_plan_hash(plan) == plan["plan_hash"], "plan hash does not match its job list")
     if registered:
         _require(plan["wall_seconds"] == REGISTERED_WALL_HOURS * 3600, "registered A5 uses the 24-hour ceiling")
-        _require(plan["fv_tables"] == 252, "registered A5 expects 252 primary FV tables")
-        _require(len(plan["jobs"]) == 252 * len(A5_REPLICATES), "registered A5 expects 756 stage jobs")
-    validate_calibration(calibration, registered=registered)
+        if not instrument.a10:
+            _require(plan["fv_tables"] == 252, "registered A5 expects 252 primary FV tables")
+            _require(len(plan["jobs"]) == 252 * len(A5_REPLICATES), "registered A5 expects 756 stage jobs")
+        else:
+            source_plan = unseal(read(plan["a4_plan_path"]))
+            expected_fv = {j["config"]["a1_job"]["id"] for j in fv_primary_jobs(source_plan)}
+            actual = {(j["config"]["a1_job"]["id"], j["config"]["replicate"]) for j in plan["jobs"]}
+            _require(actual == {(j, r) for j in expected_fv for r in A5_REPLICATES}, "incomplete A10 A5 family")
+    validate_calibration(calibration, registered=registered, **({"instrument": instrument} if instrument.a10 else {}))
 
     # Re-read and re-verify the A4 publication against the pinned identity, and
     # capture the bytes for the label-only check.
@@ -789,14 +826,18 @@ def main():
     p.add_argument("a1_source_root"); p.add_argument("calibration_path")
     p.add_argument("identity_record"); p.add_argument("output")
     p.add_argument("--pin"); p.add_argument("--wall-hours", type=int, default=24); p.add_argument("--a3-probe-root")
+    p.add_argument("--instrument-json")
     p = sub.add_parser("publish")
     p.add_argument("plan"); p.add_argument("a5_run_root"); p.add_argument("a4_run_root")
     p.add_argument("a1_source_root"); p.add_argument("calibration"); p.add_argument("target")
     p = sub.add_parser("report"); p.add_argument("record"); p.add_argument("output")
     args = parser.parse_args()
     if args.command == "prepare":
+        from .instrument import declaration
+        instrument = declaration(read(args.instrument_json) if args.instrument_json else None)
         plan = prepare(args.a4_family, args.a4_run_root, args.a4_plan, args.a1_source_root, args.calibration_path,
-                       args.identity_record, read(args.pin) if args.pin else None, args.wall_hours, args.a3_probe_root)
+                       args.identity_record, read(args.pin) if args.pin else None, args.wall_hours, args.a3_probe_root,
+                       **({"instrument": instrument} if instrument.a10 else {}))
         out = args.output if str(Path(args.output).resolve()).startswith(str(ROOT)) else SIMULATION / args.output
         atomic_json(out, seal(plan))
         print({"phase": PHASE, "jobs": len(plan["jobs"]), "M": plan["M"], "fv_tables": plan["fv_tables"], "launched": False})

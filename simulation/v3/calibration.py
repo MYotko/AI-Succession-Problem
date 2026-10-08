@@ -110,11 +110,75 @@ def freeze(records, target=None, *, registered=False):
     return document
 
 
-def validate_calibration(document, *, registered=False):
+def load_calibration(path, *, registered=False, instrument=None):
+    """Validate file identity before discarding its serialized bytes."""
+    import hashlib
+    import json
+    from pathlib import Path
+    raw = Path(path).read_bytes()
+    document = json.loads(raw)
+    from .instrument import declaration
+    extra = {"instrument": instrument, "source_sha256": hashlib.sha256(raw).hexdigest()} if declaration(instrument).a10 else {}
+    validate_calibration(document, registered=registered, **extra)
+    return document
+
+
+def _validate_a10_variant(document, payload, source_sha256=None):
+    """Only the two pinned A6 records may differ from the frozen A10 parent."""
+    import hashlib
+    from .artifacts import ROOT, read, canonical
+    from .instrument import CALIBRATION_SHA256, validate_constants
+    record = validate_constants()["a6_calibrations"]
+    approved = record["variants"].get(payload.get("a6_variant"))
+    if approved is None:
+        raise ValueError("A10 requires the unchanged calibration or an exactly pinned A6 variant")
+    # In-memory documents have the A6 producer's canonical LF serialization.
+    # File callers additionally supply the hash of the bytes actually read.
+    canonical_sha256 = hashlib.sha256(canonical(document) + b"\n").hexdigest()
+    if (document["sha256"] != approved["payload_sha256"]
+            or canonical_sha256 != approved["byte_sha256"]
+            or source_sha256 is not None and source_sha256 != approved["byte_sha256"]):
+        raise ValueError("A10 A6 calibration exact identity mismatch")
+    parent_doc = read(ROOT / "runs/registered/v3_rerun_calibration.json")
+    parent = unseal(parent_doc)
+    if (parent_doc["sha256"] != CALIBRATION_SHA256 or record["parent_payload_sha256"] != CALIBRATION_SHA256
+            or payload.get("a6_parent_sha256") != CALIBRATION_SHA256):
+        raise ValueError("A10 A6 calibration parent identity mismatch")
+    additions = {"a6_variant", "a6_sigma_factor", "a6_parent_sha256", "a6_note"}
+    provenance = {"code_hash", "reliable_positive_lower_levels", "block_lower_levels"}
+    if (set(payload) != set(parent) | additions
+            or any(payload[k] != v for k, v in parent.items() if k not in provenance | {"values"})
+            or payload["code_hash"] != approved["producer_code_hash"]
+            or payload["a6_sigma_factor"] != approved["sigma_factor"]
+            or payload["a6_note"] != record["variant_note"]):
+        raise ValueError("A10 A6 calibration changed frozen parent provenance")
+    expected = dict(parent["values"], sigma_squared=parent["values"]["sigma_squared"] * approved["sigma_factor"],
+                    epsilon_n=payload["values"].get("epsilon_n"))
+    if payload["values"] != expected or expected["epsilon_n"] == parent["values"]["epsilon_n"]:
+        raise ValueError("A10 A6 calibration changed a frozen parent quantity")
+    levels, blocks = payload["reliable_positive_lower_levels"], payload["block_lower_levels"]
+    if (len(levels) != 3 or levels[1:] != parent["reliable_positive_lower_levels"][1:]
+            or len(blocks) != len(parent["block_lower_levels"])
+            or any(len(row) != 3 or row[1:] != old[1:] or not math.isfinite(row[0])
+                   for row, old in zip(blocks, parent["block_lower_levels"]))):
+        raise ValueError("A10 A6 calibration changed non-novelty calibration diagnostics")
+    positive = [row[0] for row in blocks if row[0] > 0]
+    if not positive or levels[0] != min(positive) or expected["epsilon_n"] != .01 * levels[0]:
+        raise ValueError("A10 A6 epsilon_N does not match its declared calibration diagnostics")
+
+
+def validate_calibration(document, *, registered=False, instrument=None, source_sha256=None):
     payload = unseal(document)
     if payload.get("schema") != "v3-calibration-1":
         raise ValueError("stale calibration")
-    if payload.get("code_hash") != code_identity():
+    from .instrument import declaration, CALIBRATION_SHA256, EPSILON_L
+    instrument = declaration(instrument)
+    a10_frozen = instrument.a10 and document["sha256"] == CALIBRATION_SHA256
+    if instrument.a10 and not a10_frozen:
+        _validate_a10_variant(document, payload, source_sha256)
+    if instrument.a10 and payload["values"]["epsilon_l"] != EPSILON_L:
+        raise ValueError("A10 epsilon_L must remain unchanged")
+    if not instrument.a10 and payload.get("code_hash") != code_identity():
         from .calibration_compatibility import compatible
         if not compatible(document):
             raise ValueError("stale calibration")

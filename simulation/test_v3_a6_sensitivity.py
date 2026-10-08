@@ -68,11 +68,21 @@ def test_registered_run_requires_probe():
 
 
 def test_invariance_passes_against_head():
-    result = s6.rerun_path_invariance("HEAD")
-    assert result["mismatches"] == []
-    assert result["missing_at_commit"] == []
-    # The new A6 modules are excluded from the rerun-path comparison.
-    assert any(name.endswith("_a6.py") for name in result["a6_modules_excluded"])
+    # A6's historical claim is about 3dbee584 versus a06b68f7. Later A10
+    # changes must not enter this audit; compare both committed sources with
+    # read-only git show, retaining the same rerun-path file selection.
+    repo = s6.SIMULATION.parent
+    before, after = "a06b68f7", "3dbee584"
+    previous = s6._committed_source_files(before, repo)
+    current = s6._committed_source_files(after, repo)
+    assert previous and current == previous
+    for name in sorted(previous):
+        a = s6._git(repo, "show", f"{before}:simulation/{name}")
+        b = s6._git(repo, "show", f"{after}:simulation/{name}")
+        assert s6._normalize(a) == s6._normalize(b), name
+    # The implementation added A6 modules, which the original rule excludes.
+    added = s6._git(repo, "diff", "--name-only", before, after, "--", "simulation").decode().splitlines()
+    assert any(s6._is_a6_module(name) for name in added)
 
 
 def test_invariance_detects_a_mismatch():

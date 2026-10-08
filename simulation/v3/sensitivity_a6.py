@@ -73,7 +73,7 @@ def _committed_source_files(commit, repo):
     out = _git(repo, "ls-tree", "-r", "--name-only", commit, "--", "simulation")
     files = set()
     allowed_json = {"v3/calibration_compatibility_A1.json", "v3/table_compatibility_A2.json",
-                    "v3/table_compatibility_A3.json"}
+                    "v3/table_compatibility_A3.json", "v3/a10_constants.json"}
     for line in out.decode("utf-8").splitlines():
         if not line.startswith("simulation/"):
             continue

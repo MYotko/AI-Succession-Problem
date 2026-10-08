@@ -9,12 +9,16 @@ from .engine import RuleBatch
 from .policies import policy_class, Summary
 
 
-def floor_audit():
+def floor_audit(instrument=None, capability=1.):
+    from .instrument import declaration
+    instrument = declaration(instrument)
+    benefit = float(instrument.benefit(capability)) if instrument.a10 else 1.
     age = np.arange(1, 101)[:, None]
     welfare = np.arange(1001)[None, :]
     mortality = mortality_numerator(age, welfare)
     floor = floor_welfare(age, welfare)
-    reference_fertile = (age > 18) & (age < 50) & (floor >= 500)
+    reference = np.floor(np.clip(welfare + max(40, 38 + 2 * benefit) - age, 0, 1000))
+    reference_fertile = (age > 18) & (age < 50) & (reference >= 500)
     summaries = np.array([[0, 0, 0, 0, 0, 0], [5, 3, 3, 3, 3, 3]])
     rules = policy_class()
     rb = RuleBatch(rules)
@@ -23,7 +27,7 @@ def floor_audit():
         welfare_shares.extend(rb.actions(np.repeat(summary[None], len(rules), axis=0))[:, 1])
     welfare_violations = reproduction_violations = 0
     for share in sorted(set(welfare_shares)):
-        candidate = np.clip(welfare + math.floor(max(40, 38 + 12 * share)) - age, 0, 1000)
+        candidate = np.clip(welfare + math.floor(max(40, 38 + 12 * benefit * share)) - age, 0, 1000)
         welfare_violations += int((candidate < floor).sum())
         births = (age > 18) & (age < 50) & (candidate >= 500)
         reproduction_violations += int((reference_fertile & ~births).sum())

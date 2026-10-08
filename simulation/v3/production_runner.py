@@ -160,6 +160,11 @@ def completed(root, job, code):
 
 def execute(job, registered=False, registration=None, root=None):
     kind, config = job["kind"], job["config"]
+    if kind == "a10_cost":
+        if registered:
+            raise ValueError("A10 cost pilot cannot run registered")
+        from .pilot_a10 import execute_cost
+        return execute_cost(job)
     if kind in ("a4_fit", "a4_validate", "a4_census"):
         # A4 validated continuation stages. The A4 stream seed travels in the
         # config; the runner's own job seed is unused. root locates the sibling
@@ -184,7 +189,14 @@ def execute(job, registered=False, registration=None, root=None):
             raise ValueError("continuation endpoint audit is validation only")
         from .unpublished_bins import replay
         return replay(config)
-    calibration = read(SIMULATION / config["calibration_path"]) if config.get("calibration_path") else None
+    calibration = None
+    if config.get("calibration_path"):
+        declared = config.get("kernel", config.get("model", {})).get("instrument", {})
+        if declared.get("mapping") == "A10":
+            from .calibration import load_calibration
+            calibration = load_calibration(SIMULATION / config["calibration_path"], instrument=declared, registered=registered)
+        else:
+            calibration = read(SIMULATION / config["calibration_path"])
     if kind == "table":
         from .offline_estimator import estimate
         return estimate(config, job["seed"], calibration)
@@ -210,7 +222,17 @@ def execute(job, registered=False, registration=None, root=None):
                     "rule_exclusions_by_rule": {rule.rule_id: sum(rule.rule_id in r["unavailable_rules"] for r in records) for rule in model.rules},
                     "unavailable_plans_total": sum(r["yield_unavailable_plan_count"] for r in records),
                     "yield_reviews_held_no_admissible_plan": sum(r["yield_held_no_admissible_plan"] for r in records)}
-    return pack_evidence({"tag": job["tag"], "fixture_tables": model.tables.fixture, "steps": len(records),
+    extra = {}
+    if model.instrument.a10:
+        living = [r for r in records if r.get("population_before", 0) > 0]
+        count = len(living)
+        extra = {"instrument": model.instrument.declaration(), "a10_diagnostics": {
+            "living_start_steps": count,
+            "mean_theta": sum(r["theta"] for r in living) / count if count else None,
+            "theta_one_share": sum(r["theta"] == 1. for r in living) / count if count else None,
+            "bandwidth_floor_share": sum(r["bandwidth_at_floor"] for r in living) / count if count else None,
+            "transition_count": model.transition_count, "final_capability": model.capability}}
+    return pack_evidence({"tag": job["tag"], "fixture_tables": model.tables.fixture, "steps": len(records), **extra,
             "population_path": populations, "population_mean": sum(populations) / max(1, len(populations)),
             "population_max": max(populations, default=0), "final_population": model.population,
             "survived_threshold_30": model.population >= 30, "yield_events": model.yield_events,
@@ -219,7 +241,7 @@ def execute(job, registered=False, registration=None, root=None):
             "continuation_availability": availability})
 
 
-def worker(root_name, job, code, threads, registered, registration):
+def worker(root_name, job, code, threads, registered, registration, completion_deadline=None):
     root = Path(root_name)
     configure_threads(threads)
     try:
@@ -235,8 +257,12 @@ def worker(root_name, job, code, threads, registered, registration):
             output = {"job": job, "code_hash": code, "runtime": info, "result": result,
                       "seconds": time.perf_counter() - before, "started_epoch": started, "finished_epoch": time.time(),
                       "peak_rss_bytes": peak_rss_bytes()}
+            if completion_deadline is not None and time.time() >= completion_deadline:
+                return
             path = root / "outputs" / (job["id"] + ".json")
             atomic_json(path, output)
+            if completion_deadline is not None and time.time() >= completion_deadline:
+                return  # An output without a completion record is never counted.
             atomic_json(root / "records" / (job["id"] + ".json"),
                         {"job": job, "code_hash": code, "status": "complete", "output_hash": file_hash(path), "completed_epoch": time.time(),
                          "worker_seconds": time.perf_counter() - before})
@@ -245,12 +271,34 @@ def worker(root_name, job, code, threads, registered, registration):
         raise
 
 
-def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=None, control_root=None, registered=False, registration=None, completion_screen=None, memory_cap=None, memory_estimate_gb=None):
+def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=None, control_root=None, registered=False, registration=None, completion_screen=None, memory_cap=None, memory_estimate_gb=None, pooled_jobs=None):
     root = scoped(root)
     root.mkdir(parents=True, exist_ok=True)
     control_root = control_root or root
     done = {j["id"] for j in jobs if completed(root, j, code) is not None}
     pending = [j for j in jobs if j["id"] not in done]
+    pool_budget, pool_estimates = None, {}
+    if pooled_jobs is not None:
+        if registered or any(j["kind"] not in ("a10_cost", "fixture") for j in jobs):
+            raise ValueError("pooled dispatch is only for non-registered A10 cost jobs or validation fixtures")
+        import math
+        for job in jobs:
+            e = pooled_jobs[job["id"]]
+            if any(not math.isfinite(e[k]) or e[k] <= 0 for k in ("memory_gb", "estimated_seconds")):
+                raise ValueError("positive finite individual memory and time estimates required")
+            pool_estimates[e["memory_class"]] = max(pool_estimates.get(e["memory_class"], 0.), e["memory_gb"])
+        available = mem_available_bytes()
+        if available is None:
+            raise RuntimeError("pooled memory guard requires MemAvailable")
+        pool_budget = .8 * available / 1e9
+        event(root, "pooled_memory_budget", budget_gb=pool_budget, headroom=.8, worker_ceiling=16)
+        # Retain observed peaks across an interrupted resume.
+        prior = read(root / "pool_memory.json") if (root / "pool_memory.json").exists() else {}
+        for key in pool_estimates:
+            pool_estimates[key] = max(pool_estimates[key], prior.get(key, 0.))
+    def job_memory(job):
+        e = pooled_jobs[job["id"]]
+        return max(e["memory_gb"], pool_estimates[e["memory_class"]])
     # The memory cap is fixed once, at phase start, from the estimate the caller
     # (launch) computed against MemAvailable before any of this phase's tasks
     # ran. It is NOT recomputed from live MemAvailable, which already excludes
@@ -276,11 +324,20 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
     monotonic_end = time.monotonic() + max(0, deadline - time.time())
     previous_report = 0.
     mode_effective = None
+    if pooled_jobs is not None and not pending:
+        control = read(control_root / "control.json")
+        last_mode = control["mode"]
+        limit = min(16, settings["caps"][last_mode], settings["workers"], control.get("max_workers", settings["workers"]))
+        last_selection = fixed or choose(measurements, limit, settings["cpu_budget"], settings["threads"])
     def publish():
         atomic_json(root / "active.json", {"machine": platform.node(), "pids": [p.pid for p, _, _ in active.values()]})
         status = {"total": len(jobs), "completed": len(done), "running": len(active),
                   "pending": len(jobs) - len(done) - len(active), "maximum_active": maximum,
                   "reason": reason, "deadline_epoch": deadline, "mode": last_mode, "selection": last_selection}
+        if pooled_jobs is not None:
+            status.update(memory_budget_gb=pool_budget, memory_estimates_gb=pool_estimates,
+                          not_completed_ids=[j["id"] for j in jobs if j["id"] not in done])
+            atomic_json(root / "job_status.json", {j["id"]: "complete" if j["id"] in done else "not completed" for j in jobs})
         atomic_json(root / "status.json", status)
         return status
     def stop(reason):
@@ -325,6 +382,8 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                 raise ValueError("invalid live mode")
             cap = settings["caps"][mode]
             maximum_request = min(settings["workers"], control.get("max_workers", settings["workers"]))
+            if pooled_jobs is not None:
+                maximum_request = min(maximum_request, 16)
             if maximum_request < 1:
                 raise ValueError("worker limit must be positive")
             selected = fixed or choose(measurements, min(cap, maximum_request), settings["cpu_budget"], settings["threads"])
@@ -358,6 +417,11 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                         # Raise the memory estimate if a completed task's peak RSS
                         # exceeded it; this only lowers the derived worker cap.
                         peak = output.get("peak_rss_bytes")
+                        if pooled_jobs is not None and peak and peak / 1e9 > job_memory(job):
+                            key = pooled_jobs[job["id"]]["memory_class"]
+                            pool_estimates[key] = peak / 1e9
+                            atomic_json(root / "pool_memory.json", pool_estimates)
+                            event(root, "pooled_memory_estimate_raised", memory_class=key, estimate_gb=peak / 1e9, job=job["id"])
                         if peak and memory_estimate[0] and peak > memory_estimate[0] * 1e9:
                             memory_estimate[0] = peak / 1e9
                             memory_cap_state[0] = next_memory_cap(memory_cap, memory_cap_state[0], initial_estimate, memory_estimate[0])
@@ -370,6 +434,8 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
             if reason == "screen_failure":
                 break
             effective_limit = min(cap, selected["workers"])
+            if pooled_jobs is not None:
+                effective_limit = min(effective_limit, 16)
             if memory_cap_state[0] is not None:
                 effective_limit = min(effective_limit, max(1, memory_cap_state[0]))
             if len(active) <= effective_limit and mode_effective != mode:
@@ -377,6 +443,21 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                 event(root, "mode_effective", mode=mode, active=len(active), worker_limit=effective_limit)
             slots = sum(t for _, _, t in active.values())
             while pending and not control.get("stop_dispatch") and len(active) < effective_limit and slots + selected["threads"] <= settings["cpu_budget"]:
+                if pooled_jobs is not None:
+                    pending.sort(key=lambda j: (-pooled_jobs[j["id"]]["estimated_seconds"], j["id"]))
+                    reserved = sum(job_memory(j) for _, j, _ in active.values())
+                    available = mem_available_bytes()
+                    index = next((i for i, j in enumerate(pending)
+                                  if reserved + job_memory(j) <= pool_budget
+                                  and (available is not None and available >= 1.2 * job_memory(j) * 1e9)), None)
+                    if index is None:
+                        if not active:
+                            raise RuntimeError("pooled memory guard: no pending job fits available memory")
+                        if time.monotonic() - last_memory_hold[0] >= 60:
+                            event(root, "pooled_memory_hold", reserved_gb=reserved, budget_gb=pool_budget, active=len(active))
+                            last_memory_hold[0] = time.monotonic()
+                        break
+                    pending.insert(0, pending.pop(index))
                 # Live memory guard: do not start a task while MemAvailable is
                 # below 1.2 times its estimate. Halt if it holds with nothing
                 # active (no task will ever free enough memory). Rate-limit the
@@ -394,7 +475,8 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                 job = pending.pop(0)
                 if attempts.get(job["id"], 0) >= 3:
                     raise RuntimeError("job has exhausted retries")
-                process = context.Process(target=worker, args=(str(root), job, code, selected["threads"], registered, registration))
+                args = (str(root), job, code, selected["threads"], registered, registration)
+                process = context.Process(target=worker, args=args + ((deadline,) if pooled_jobs is not None else ()))
                 process.start()
                 active[job["id"]] = (process, job, selected["threads"])
                 slots += selected["threads"]
@@ -404,7 +486,10 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                 is_a4 = job["kind"].startswith(("a4_", "a5_"))
                 event(root, "dispatch", job=job["id"], runner_seed_unused=is_a4,
                       **({} if is_a4 else {"seed": job["seed"]}),
-                      pid=process.pid, active=len(active), slots=slots, mode=mode)
+                      pid=process.pid, active=len(active), slots=slots, mode=mode,
+                      **({"memory_estimate_gb": job_memory(job), "memory_budget_gb": pool_budget,
+                          "reserved_memory_gb": sum(job_memory(j) for _, j, _ in active.values()),
+                          "estimated_seconds": pooled_jobs[job["id"]]["estimated_seconds"]} if pooled_jobs is not None else {}))
                 publish()
             status = publish()
             if time.monotonic() - previous_report >= 30:
@@ -552,7 +637,8 @@ def configuration_test(root, phase, profile, settings, deadline, launch_number, 
     listed = profile["workers_x2"] if settings["profile"] == "x2" else profile["workers_local"]
     if settings["profile"] == "x2" and not {8, 12, 16, 24, 32}.issubset(listed):
         raise ValueError("missing required X2 configuration candidates")
-    candidates = configuration_candidates(listed, memory_cap)
+    pooled = profile.get("pooled_estimates_by_stratum")
+    candidates = configuration_candidates(listed, min(16, settings["caps"]["configuration"]) if pooled is not None else memory_cap)
     if settings["threads"] == 2 and not profile.get("material_multithreaded_numerics"):
         raise ValueError("two threads require profiling evidence")
     pairs = [(w, t) for t in profile.get("threads", [1]) for w in candidates if w <= settings["caps"]["configuration"] and w * t <= settings["cpu_budget"] and t <= settings["threads"]]
@@ -565,11 +651,15 @@ def configuration_test(root, phase, profile, settings, deadline, launch_number, 
             configs = profile.get("configs", [profile["config"]])
             jobs = [stable_job(profile["kind"], configs[i % len(configs)], "configuration", round_index * count + i) for i in range(count)]
             target = root / "configuration" / str(launch_number) / phase / f"r{round_index}_w{w}_t{t}"
-            result = dispatch(target, jobs, code_identity(), settings, deadline, fixed={"workers": w, "threads": t}, control_root=root)
+            extra = {"pooled_jobs": {j["id"]: pooled[j["config"]["phase"]] for j in jobs}} if pooled is not None else {}
+            result = dispatch(target, jobs, code_identity(), settings, deadline, fixed={"workers": w, "threads": t}, control_root=root, **extra)
             values = [completed(target, j, code_identity()) for j in jobs]
             measurement = {"workers": w, "threads": t, "completed": result["completed"], "wall_seconds": result["wall_seconds"],
                            "valid": result["completed"] == len(jobs), "round": round_index,
                            "job_seconds": [v.get("worker_seconds", v["seconds"]) for v in values if v is not None]}
+            if pooled is not None:
+                measurement.update(memory_budget_gb=result["memory_budget_gb"],
+                                   memory_estimates_gb=result["memory_estimates_gb"], maximum_active=result["maximum_active"])
             measurements.append(measurement)
             atomic_json(root / "configuration" / str(launch_number) / (phase + ".json"), measurements)
             if not measurement["valid"]:
@@ -577,7 +667,98 @@ def configuration_test(root, phase, profile, settings, deadline, launch_number, 
     return measurements
 
 
+class ContextPreflightError(ValueError):
+    """All context failures from a simulation-free launch preflight."""
+    def __init__(self, report):
+        self.report = report
+        failures = [r for r in report["contexts"] if r["status"] == "failed"]
+        super().__init__("A10 context preflight failed (%d contexts):\n%s" % (len(failures), "\n".join(
+            "%s calibration=%s kernel=%s: %s" % (", ".join(r["uses"]), r["calibration_path"], r["kernel"], r["error"])
+            for r in failures)))
+
+
+def preflight_contexts(spec):
+    """Build each distinct A10 context, including configuration jobs, without a trajectory."""
+    from .context import Context
+    from .calibration import load_calibration
+    from .instrument import declaration
+    requests = {}
+    required = (spec.get("registered_a10") or spec.get("instrument", {}).get("mapping") == "A10"
+                or spec.get("schema") == "v3-A10-cost-pilot-1")
+
+    def collect(kind, config, use):
+        toy = kind == "a10_cost" and config.get("toy", False)
+        if kind == "a10_cost":
+            wrapped = config["source_job"]
+            kind, config = wrapped["kind"], wrapped["config"]
+        if "a1_job" in config:
+            config = config["a1_job"]["config"]
+        if "kernel" in config:
+            kernel = dict(config["kernel"])
+            if toy:
+                kernel.update(n_agents=16, carrying_capacity=160)
+        elif "model" in config:
+            kernel = dict(config["model"])
+            if toy:
+                kernel.update(n_agents=8, carrying_capacity=80)
+        else:
+            return
+        inst = kernel.get("instrument")
+        if not required and (inst is None or inst.get("mapping") == "R4"):
+            return
+        path = str((SIMULATION / config["calibration_path"]).resolve()) if config.get("calibration_path") else None
+        key = digest({"calibration_path": path, "kernel": kernel, "instrument": inst})
+        entry = requests.setdefault(key, {"key": key, "calibration_path": path, "kernel": kernel,
+                                         "instrument": inst, "uses": [], "families": []})
+        entry["uses"].append(use)
+        if config.get("a10_family") and config["a10_family"] not in entry["families"]:
+            entry["families"].append(config["a10_family"])
+
+    for job in spec.get("jobs", []):
+        collect(job["kind"], job["config"], "sample:" + job["id"])
+    for phase, profile in spec.get("configuration", {}).items():
+        for i, config in enumerate(profile.get("configs", [profile.get("config", {})])):
+            collect(profile["kind"], config, "configuration:%s:%d" % (phase, i))
+    contexts, loaded = [], {}
+    for entry in requests.values():
+        row = dict(entry)
+        try:
+            instrument = declaration(entry["instrument"])
+            if required and not instrument.a10:
+                raise ValueError("A10 launch context lacks an A10 instrument declaration")
+            if entry["kernel"].get("successor_capability") is not None and instrument.a10:
+                instrument.require_capability(entry["kernel"]["successor_capability"])
+            path = entry["calibration_path"]
+            if spec.get("registered") and path is None:
+                raise ValueError("registered A10 context requires a calibration path")
+            cal_key = (path, digest(instrument.declaration()))
+            if cal_key not in loaded:
+                try:
+                    loaded[cal_key] = load_calibration(path, instrument=instrument, registered=spec.get("registered", False)) if path else None
+                except Exception as exc:
+                    loaded[cal_key] = exc
+            if isinstance(loaded[cal_key], Exception):
+                raise loaded[cal_key]
+            context = Context.build(entry["kernel"], loaded[cal_key])
+            row.update(status="passed", calibration_sha256=context.calibration_hash)
+        except Exception as exc:
+            row.update(status="failed", error="%s: %s" % (type(exc).__name__, exc))
+        contexts.append(row)
+    failures = sum(r["status"] == "failed" for r in contexts)
+    report = {"schema": "v3-A10-context-preflight-1", "simulation": False, "checked": len(contexts),
+              "failed": failures, "status": "failed" if failures else "passed", "contexts": contexts}
+    if failures:
+        raise ContextPreflightError(report)
+    return report
+
+
 def validate_spec(spec, settings):
+    from .instrument import declaration
+    from .pilot_a10 import reduced_pilot, POOLED_PHASE
+    pooled = reduced_pilot(spec)
+    instrument = declaration(spec.get("instrument"))
+    if spec.get("registered_a10") and not instrument.a10:
+        raise ValueError("registered A10 manifest refuses R4")
     if spec["code_hash"] != code_identity():
         raise RuntimeError("frozen specification source hash mismatch")
     if 'repair' in spec:
@@ -592,12 +773,32 @@ def validate_spec(spec, settings):
     if settings["cpu_budget"] > available_cpus():
         raise ValueError("CPU budget exceeds process availability")
     phases = spec.get("phases", sorted({j["config"].get("phase", j["kind"]) for j in spec["jobs"]}))
-    if len(set(phases)) != len(phases) or any(j["config"].get("phase", j["kind"]) not in phases for j in spec["jobs"]):
+    job_phases = spec["strata"] if pooled else phases
+    if len(set(phases)) != len(phases) or any(j["config"].get("phase", j["kind"]) not in job_phases for j in spec["jobs"]):
         raise ValueError("jobs must be assigned to exactly one phase")
     if "configuration" in spec and set(spec["configuration"]) != set(phases):
         raise ValueError("each phase needs its configuration test")
-    if spec.get("tag") == "pilot" and (spec["registered"] or spec["wall_seconds"] > 10800):
-        raise ValueError("pilot must be non-registered and at most three hours")
+    if pooled:
+        if (spec.get("registered") or spec.get("registered_a10") or spec.get("tag") != "pilot"
+                or spec.get("results_eligible") is not False or phases != [POOLED_PHASE]
+                or spec.get("publication") or set(spec["pooled_job_estimates"]) != {j["id"] for j in spec["jobs"]}
+                or any(j["kind"] != "a10_cost" or j["tag"] != "pilot" or j["config"].get("configuration_test") for j in spec["jobs"])):
+            raise ValueError("reduced A10 pilot requires only non-registered cost samples in one pooled queue")
+        profile = spec["configuration"][POOLED_PHASE]
+        expected = {j["config"]["phase"]: spec["pooled_job_estimates"][j["id"]] for j in spec["jobs"]}
+        if (profile.get("kind") != "a10_cost" or profile.get("pooled_estimates_by_stratum") != expected
+                or settings["threads"] != 1 or any(j["config"]["toy"] != spec["toy"] for j in spec["jobs"])):
+            raise ValueError("reduced A10 requires its individual memory estimates, one thread, and declared toy status")
+        if not spec["toy"]:
+            from .offline_estimator import settings_for
+            for job in spec["jobs"]:
+                source = job["config"]["source_job"]["config"]
+                if job["config"]["cost_kind"] != "run" and source["settings"] != settings_for(source["setting_name"]):
+                    raise ValueError("P2 table jobs require full declared settings")
+    elif any("pooled_estimates_by_stratum" in p for p in spec.get("configuration", {}).values()):
+        raise ValueError("pooled configuration is reserved for the reduced A10 cost pilot")
+    if spec.get("tag") == "pilot" and (spec["registered"] or not 0 < spec["wall_seconds"] <= (43200 if pooled else 10800)):
+        raise ValueError("pilot must be non-registered and at most twelve hours for reduced A10, otherwise three hours")
     if len({j["id"] for j in spec["jobs"]}) != len(spec["jobs"]):
         raise ValueError("duplicate job identifiers")
     if len({j["seed"] for j in spec["jobs"]}) != len(spec["jobs"]):
@@ -605,10 +806,17 @@ def validate_spec(spec, settings):
     for job in spec["jobs"]:
         if stable_job(job["kind"], job["config"], job["tag"], job["index"]) != job:
             raise ValueError("job or scheduling-independent seed was changed")
+        if spec.get("registered_a10"):
+            jc = job["config"]
+            source = jc.get("a1_job", {}).get("config", jc)
+            ji = source.get("model", source.get("kernel", {})).get("instrument")
+            if not declaration(ji).a10:
+                raise ValueError("registered A10 job lacks its instrument declaration")
         if spec["registered"] and job["tag"] not in ("v3_rerun", "v3_tables", "v3_calibration"):
             raise ValueError("registered batch contains pilot or validation jobs")
+    preflight = preflight_contexts(spec)
     if spec["registered"]:
-        verify_registration(spec.get("registration"))
+        verify_registration(spec.get("registration"), **({"instrument": instrument} if instrument.a10 else {}))
         from .calibration import validate_calibration
         from .production_tables import ProductionTables
         calibrated, loaded = {}, set()
@@ -621,7 +829,7 @@ def validate_spec(spec, settings):
                     raise RuntimeError("registered A4 jobs need frozen calibration")
                 if cal_path not in calibrated:
                     calibrated[cal_path] = read(SIMULATION / cal_path)
-                    validate_calibration(calibrated[cal_path], registered=True)
+                    validate_calibration(calibrated[cal_path], registered=True, **({"instrument": instrument} if instrument.a10 else {}))
                 continue
             if job["kind"] in ("table", "rerun"):
                 config = job["config"]
@@ -630,15 +838,18 @@ def validate_spec(spec, settings):
                 cal_path = config["calibration_path"]
                 if cal_path not in calibrated:
                     calibrated[cal_path] = read(SIMULATION / cal_path)
-                    validate_calibration(calibrated[cal_path], registered=True)
+                    validate_calibration(calibrated[cal_path], registered=True, **({"instrument": instrument} if instrument.a10 else {}))
                 calibration = calibrated[cal_path]
                 if job["kind"] == "rerun":
                     if not config.get("tables_path"):
                         raise RuntimeError("registered reruns reject fixture tables")
                     identity = (config["tables_path"], calibration["sha256"])
                     if identity not in loaded:
-                        ProductionTables(SIMULATION / identity[0], calibration_hash=identity[1], registered=True)
+                        table = ProductionTables(SIMULATION / identity[0], calibration_hash=identity[1], registered=True)
+                        if instrument.a10:
+                            table.require_a10(declaration(config["model"].get("instrument")))
                         loaded.add(identity)
+    return preflight
 
 
 def preflight_completion(spec, root):
@@ -676,10 +887,16 @@ def preflight_completion(spec, root):
 def launch(spec_path, root, settings, service_record=None):
     spec = unseal(read(spec_path))
     settings = {**settings, "caps": caps(settings["profile"], settings["cpu_budget"])}
-    validate_spec(spec, settings)
+    try:
+        context_preflight = validate_spec(spec, settings)
+    except ContextPreflightError as exc:
+        atomic_json(scoped(root) / "context_preflight.json", exc.report)
+        raise
     screen = preflight_completion(spec, root)
     root = scoped(root)
     root.mkdir(parents=True, exist_ok=True)
+    if context_preflight and context_preflight["checked"]:
+        atomic_json(root / "context_preflight.json", context_preflight)
     if settings["profile"] == "x2":
         if not service_record or service_record.get("down_exit_code") != 0:
             raise RuntimeError("X2 launch requires the active service lease wrapper")
@@ -709,16 +926,20 @@ def launch(spec_path, root, settings, service_record=None):
         # A4 validation and A5 labels are both staged plans with per-phase memory
         # caps, resume-aware projection and a per-phase nondeterminism recheck.
         is_a4 = spec.get("schema") in ("v3-A4-validation-1", "v3-A5-labels-1")
+        is_a10_pilot = spec.get("schema") == "v3-A10-cost-pilot-1"
+        from .pilot_a10 import reduced_pilot
+        pooled = reduced_pilot(spec)
+        memory_managed = is_a4 or is_a10_pilot or spec.get("schema") == "v3-A10-estimation-1"
         # Memory caps come first, measured before any task runs, so a capped
         # phase's configuration test never tries a worker count it cannot use.
-        mem_caps = {p: memory_worker_cap(spec.get("memory_estimate_gb", {}).get(p)) for p in spec["phases"]} if is_a4 else {}
-        if is_a4:
+        mem_caps = {p: memory_worker_cap(spec.get("memory_estimate_gb", {}).get(p)) for p in spec["phases"]} if memory_managed else {}
+        if memory_managed:
             record["memory_caps"] = mem_caps
             atomic_json(root / "launches.json", history)
         try:
             for phase, profile in spec["configuration"].items():
                 data = configuration_test(root, phase, profile, settings, config_deadline, len(history),
-                                          memory_cap=mem_caps.get(phase) if is_a4 else None)
+                                          memory_cap=mem_caps.get(phase) if memory_managed else None)
                 record["configuration"][phase] = data
                 atomic_json(root / "launches.json", history)
         except BaseException as exc:
@@ -726,6 +947,8 @@ def launch(spec_path, root, settings, service_record=None):
             atomic_json(root / "launches.json", history)
             if spec.get("tag") == "pilot":
                 atomic_json(root / "cost_projection.json", {"status": "incomplete", "reason": "configuration test incomplete; scientific dispatch refused"})
+            if pooled:
+                atomic_json(root / "pooled" / "job_status.json", {j["id"]: "complete" if completed(root / "pooled", j, code_identity()) else "not completed" for j in spec["jobs"]})
             raise
         outcomes = {}
         effective_workers = {}
@@ -738,8 +961,8 @@ def launch(spec_path, root, settings, service_record=None):
                     chosen = mode_cap
                 effective_workers[phase] = max(1, min(mode_cap, settings["workers"], chosen, mem_caps.get(phase) or mode_cap))
         for index, phase in enumerate(spec["phases"]):
-            jobs = [j for j in spec["jobs"] if j["config"].get("phase", j["kind"]) == phase]
-            memory_estimate = None
+            jobs = spec["jobs"] if pooled else [j for j in spec["jobs"] if j["config"].get("phase", j["kind"]) == phase]
+            memory_estimate = spec.get("memory_estimate_gb", {}).get(phase) if memory_managed else None
             if is_a4:
                 memory_estimate = spec.get("memory_estimate_gb", {}).get(phase)
                 # Project the REMAINING work (resume-aware); stop before this phase
@@ -753,8 +976,9 @@ def launch(spec_path, root, settings, service_record=None):
                     return {"complete": False, "reason": "projection_exceeds_budget", "projection": projection, "outcomes": outcomes}
             result = dispatch(root / phase, jobs, code_identity(), settings, deadline, measurements=record["configuration"][phase],
                               control_root=root, registered=spec["registered"], registration=spec.get("registration"),
-                              completion_screen=screen, memory_cap=mem_caps.get(phase) if is_a4 else None,
-                              memory_estimate_gb=memory_estimate)
+                              completion_screen=screen, memory_cap=mem_caps.get(phase) if memory_managed else None,
+                              memory_estimate_gb=memory_estimate,
+                              **({"pooled_jobs": spec["pooled_job_estimates"]} if pooled else {}))
             outcomes[phase] = result
             record["outcomes"] = outcomes
             atomic_json(root / "launches.json", history)
@@ -762,8 +986,12 @@ def launch(spec_path, root, settings, service_record=None):
                 record.update(complete=False, finished_epoch=time.time())
                 atomic_json(root / 'launches.json', history)
                 if spec.get("tag") == "pilot":
-                    from .pilot import project_costs
-                    atomic_json(root / "cost_projection.json", project_costs(spec, root, outcomes, record["configuration"]))
+                    if is_a10_pilot:
+                        atomic_json(root / "cost_projection.json", {"non_registered": True, "cost_only": True,
+                                    "status": "incomplete", "reason": "sample interrupted; no projection"})
+                    else:
+                        from .pilot import project_costs
+                        atomic_json(root / "cost_projection.json", project_costs(spec, root, outcomes, record["configuration"]))
                 return {"complete": False, "outcomes": outcomes}
             if is_a4 and jobs:
                 check = nondeterminism_check(root / phase, jobs, spec["registered"], spec.get("registration"))
@@ -783,8 +1011,13 @@ def launch(spec_path, root, settings, service_record=None):
         record["finished_epoch"] = time.time()
         atomic_json(root / "launches.json", history)
         if spec.get("tag") == "pilot":
-            from .pilot import project_costs
-            atomic_json(root / "cost_projection.json", project_costs(spec, root, outcomes, record["configuration"]))
+            if is_a10_pilot:
+                from .pilot_a10 import project
+                projection = project(spec, root, record["configuration"], {k: v["selection"] for k, v in outcomes.items()})
+            else:
+                from .pilot import project_costs
+                projection = project_costs(spec, root, outcomes, record["configuration"])
+            atomic_json(root / "cost_projection.json", projection)
         return {"complete": True, "outcomes": outcomes}
 
 

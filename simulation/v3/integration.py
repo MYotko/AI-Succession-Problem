@@ -18,7 +18,8 @@ from .cohort import cohort_bound, initial_law_bound, first_action_log_bounds, Pr
 from .engine import initial_batch, RuleBatch, advance, measurements_and_flow, ChannelRandom
 from .measurements import NoveltyProtocol, MeasurementState, AgentObservation, NoveltyWindow
 from .objective import FlowParameters, ValueBound
-from .plans import Epoch, CompletePlan, compare_plans
+from .plans import Epoch, CompletePlan, compare_plans, plan_value
+from .instrument import declaration, allocation_horizon, validate_constants
 from .policies import policy_class, execution_policy_class
 from .stocks import transition_drawdown
 from .tables import FixtureTables, kernel_identity
@@ -51,7 +52,18 @@ class V3Model:
     def __init__(self, n_agents=200, *, seed=1, reproduction_rate=.08, carrying_capacity=1600,
                  alpha=1., capability=1., successor_capability=1.5, rules=None,
                  theta=.5, kappa=8., rollout_steps=20, registered=False,
-                 crowding="total", config=None, calibration=None, tables=None, registration=None):
+                 crowding="total", config=None, calibration=None, tables=None, registration=None,
+                 instrument=None, constants=None, registered_a10=False):
+        self.instrument = declaration(instrument)
+        if registered_a10:
+            if not self.instrument.a10:
+                raise ValueError("registered A10 refuses R4")
+            registered = True
+        if self.instrument.a10:
+            validate_constants(constants)
+            self.instrument.require_capability(capability)
+            if successor_capability is not None:
+                self.instrument.require_capability(successor_capability)
         cfg = dict(config or {})
         forbidden = {k: v for k, v in cfg.items() if k not in {"shock_step", "shock_magnitude"}}
         if forbidden or cfg.get("shock_step", 0) or cfg.get("shock_magnitude", 0):
@@ -71,7 +83,7 @@ class V3Model:
             raise ValueError("distinct class must include balanced witness first")
         self.rule_batch = RuleBatch(self.rules)
         from .context import Context
-        context = Context.build({"kappa": kappa}, calibration)
+        context = Context.build({"kappa": kappa, "instrument": self.instrument.declaration(), "capability": capability}, calibration)
         self.protocol, self.parameters, self.n_ref = context.protocol, context.parameters, context.n_ref
         self.calibration_hash = context.calibration_hash
         # Legacy initialization uses numpy's global RNG; save and restore it.
@@ -87,8 +99,15 @@ class V3Model:
         self.initial_population = n_agents
         if not n_agents:
             self.state.stocks[:] = 0
-        self.kernel_hash = kernel_identity(reproduction_rate, carrying_capacity, crowding, self.protocol.__dict__)
-        self.tables = FixtureTables(self.rules, self.parameters, self.kernel_hash) if tables is None else tables
+        if self.instrument.a10:
+            self.instrument.initialize(self.state, capability)
+        self.last_handover = None
+        self.kernel_hash = self._kernel_hash(capability)
+        fixture_hashes = [self.kernel_hash]
+        if self.instrument.a10 and successor_capability is not None:
+            from .study import capabilities
+            fixture_hashes += [self._kernel_hash(c) for c in capabilities(successor_capability)]
+        self.tables = FixtureTables(self.rules, self.parameters, self.kernel_hash, **({"kernel_hashes": fixture_hashes} if self.instrument.a10 else {})) if tables is None else tables
         authority = None
         if registered:
             self.tables.require_production()
@@ -96,8 +115,10 @@ class V3Model:
             from .artifacts import verify_registration
             if calibration is None:
                 raise RuntimeError("registered execution needs frozen calibration")
-            validate_calibration(calibration, registered=True)
-            authority = {"registration": verify_registration(registration), "tables": self.tables.manifest_hash,
+            validate_calibration(calibration, registered=True, **({"instrument": self.instrument} if self.instrument.a10 else {}))
+            if self.instrument.a10:
+                self.tables.require_a10(self.instrument)
+            authority = {"registration": verify_registration(registration, **({"instrument": self.instrument} if self.instrument.a10 else {})), "tables": self.tables.manifest_hash,
                          "calibration": self.calibration_hash}
         self.periods, self.override_records, self.diagnostics, self.yield_events = [], [], [], []
         self.period = None
@@ -107,6 +128,10 @@ class V3Model:
         self.transition_count = 0
         self.chosen_rule_index = 0
         self.guards = ExecutionGuards(authority=authority)
+
+    def _kernel_hash(self, capability):
+        return kernel_identity(self.reproduction_rate, self.capacity, self.crowding, self.protocol.__dict__,
+                               **({"instrument": self.instrument, "capability": capability} if self.instrument.a10 else {}))
 
     def _rng(self, channel):
         return ChannelRandom(independent_seed(self.seed, self.time, channel))
@@ -139,11 +164,14 @@ class V3Model:
         self.epoch_history.append({"epoch": self.epoch.epoch_id, "state": "prepared", "deadline": self.epoch.deadline})
 
     def _lookup(self, state, rules, capability):
+        if self.instrument.a10:
+            self.instrument.require_capability(capability)
         lookup = getattr(self.tables, "lookup_available", self.tables.lookup)
-        result = lookup(rules, state.summary_bins(self.capacity), kernel_hash=self.kernel_hash,
+        extra = {"instrument": self.instrument} if self.instrument.a10 else {}
+        result = lookup(rules, state.summary_bins(self.capacity), kernel_hash=self._kernel_hash(capability),
                                   capability=capability, alpha=self.alpha,
                                   weights=(self.parameters.lambda_n, self.parameters.mu, self.parameters.kappa), extinct=state.population == 0,
-                                  initial_population=self.initial_population)
+                                  initial_population=self.initial_population, **extra)
         # Absorption supplies an exact continuation even with fixture tables.
         extinct = state.population == 0
         result.continuation[extinct] = self.parameters.extinction_flow
@@ -152,8 +180,11 @@ class V3Model:
 
     def evaluate(self, *, initial=None, horizon=None, capability=None, transition_at=None, incumbent_index=None, seed_channel="allocation"):
         initial = self.state if initial is None else initial
-        horizon = self.rollout_steps if horizon is None else horizon
+        horizon = (allocation_horizon(self.time, self.last_handover) if self.instrument.a10 else self.rollout_steps) if horizon is None else horizon
         cap = self.capability if capability is None else capability
+        if self.instrument.a10:
+            self.instrument.require_capability(self.capability)
+            self.instrument.require_capability(cap)
         state = initial.repeat(len(self.rules))
         rule_indices = np.arange(len(self.rules))
         flows = np.empty((horizon, len(self.rules)))
@@ -171,9 +202,10 @@ class V3Model:
             # so other environment channels remain common across plans.
             else:
                 rng.random(())
-            advance(state, actions, rng, self.reproduction_rate, self.capacity, self.protocol, crowding=self.crowding)
             current_cap = self.capability if transition_at is not None and t < transition_at else cap
-            flows[t], _ = measurements_and_flow(state, actions, self.parameters, self.alpha, current_cap, n_ref=self.n_ref)
+            advance(state, actions, rng, self.reproduction_rate, self.capacity, self.protocol, crowding=self.crowding,
+                    **({"capability": current_cap, "instrument": self.instrument} if self.instrument.a10 else {}))
+            flows[t], _ = measurements_and_flow(state, actions, self.parameters, self.alpha, current_cap, n_ref=self.n_ref, **({"instrument": self.instrument} if self.instrument.a10 else {}))
         if transition_at == horizon:
             # A yield at the absolute deadline is in the continuation. Apply
             # its actual drawdown before looking up that successor state.
@@ -239,9 +271,12 @@ class V3Model:
             return None
         reviews = [self.time] + list(range((self.time // 10 + 1) * 10, self.epoch.deadline + 1, 10))
         plans_admitted = self.period.admitted and self.active_certificate.admitted()
+        endpoint = self.epoch.deadline + (30 if self.instrument.a10 else 0)
+        horizon = endpoint - self.time
+        plan_extra = {"decision_deadline": self.epoch.deadline} if self.instrument.a10 else {}
         plans, mapping = [], {}
         for when in reviews:
-            evaluation = self.evaluate(horizon=duration, capability=self.successor_capability,
+            evaluation = self.evaluate(horizon=horizon, capability=self.successor_capability,
                                        transition_at=when - self.time, incumbent_index=incumbent_index,
                                        seed_channel="yield_common")
             # All actions and actual drawdowns preserve the same floor proof.
@@ -251,26 +286,26 @@ class V3Model:
                 name = f"yield-{when}-{rule.rule_id}"
                 lookup = evaluation.lookup
                 plan = CompletePlan(name, self.epoch.epoch_id, self.epoch.preference_id, self.epoch.information_law_id,
-                                    self.parameters.extinction_flow, self.time, self.epoch.deadline, when,
+                                    self.parameters.extinction_flow, self.time, endpoint, when,
                                     tuple(evaluation.flows[:, index]), ValueBound(float(lookup.continuation[index]), float(lookup.continuation_error[index])),
                                     float(lookup.lambda_f[index]), plans_admitted, f"cohort-{self.period.start}-{self.time}" if plans_admitted else "",
-                                    max(0., 1 - self.active_certificate.upper))
+                                    max(0., 1 - self.active_certificate.upper), **plan_extra)
                 plans.append(plan)
                 mapping[name] = (index, evaluation.actions[index])
-        hold_eval = self.evaluate(horizon=duration, seed_channel="yield_common")
+        hold_eval = self.evaluate(horizon=horizon, seed_channel="yield_common")
         for index, rule in enumerate(self.rules):
             if not hold_eval.available[index]:
                 continue
             name = f"hold-{rule.rule_id}"
             lookup = hold_eval.lookup
             plans.append(CompletePlan(name, self.epoch.epoch_id, self.epoch.preference_id, self.epoch.information_law_id,
-                                      self.parameters.extinction_flow, self.time, self.epoch.deadline, None,
+                                      self.parameters.extinction_flow, self.time, endpoint, None,
                                       tuple(hold_eval.flows[:, index]), ValueBound(float(lookup.continuation[index]), float(lookup.continuation_error[index])),
                                       float(lookup.lambda_f[index]), plans_admitted, f"cohort-{self.period.start}-{self.time}" if plans_admitted else "",
-                                      max(0., 1 - self.active_certificate.upper)))
+                                      max(0., 1 - self.active_certificate.upper), **plan_extra))
         # No certificate: preserve welfare and reproduction and hold. The
         # failed bound alone does not authorize an irreversible action.
-        if plans_admitted and plans:
+        if (plans_admitted or self.instrument.a10) and plans:
             decision = compare_plans(plans, self.epoch, self.time)
         else:
             decision = None
@@ -279,11 +314,20 @@ class V3Model:
                  "unavailable_plan_count": (len(reviews) + 1) * len(self.rules) - len(plans),
                  "admissible_plan_count": len(plans) if plans_admitted else 0,
                  "yield_held_no_admissible_plan": not plans_admitted or not plans,
-                 "admitted": plans_admitted, "decision": None if decision is None else decision.__dict__,
+                 "admitted": plans_admitted, "decision": None if not plans_admitted or decision is None else decision.__dict__,
                  "fixture_tables": self.tables.fixture, "common_random_numbers": True,
                  "plan_class": "current_incumbent_rule_then_stationary_successor_or_stationary_hold",
                  "intervals_unresolved": True, "transition_count": 0}
-        if decision is not None and decision.yield_now:
+        if self.instrument.a10:
+            values = {p.plan_id: plan_value(p, self.epoch, self.time).value for p in plans}
+            def best(predicate):
+                return max((values[p.plan_id] for p in plans if predicate(p)), default=None)
+            event.update(evaluation_endpoint=endpoint, decision_deadline=self.epoch.deadline,
+                         shadow_decision="no comparison" if decision is None else decision.__dict__,
+                         best_immediate_value=best(lambda p: p.first_yield == self.time),
+                         best_later_yield_value=best(lambda p: p.first_yield is not None and p.first_yield > self.time),
+                         best_hold_value=best(lambda p: p.first_yield is None))
+        if plans_admitted and decision is not None and decision.yield_now:
             index, action = mapping[decision.selected_plan]
             evidence = {"welfare_floor": bool(action[1] >= 1 / 6),
                         "reproduction_floor": bool(action[1] >= 1 / 6),
@@ -296,6 +340,7 @@ class V3Model:
                 return event
             self.state.stocks = self._transition_drawdown(self.state.stocks, action[None], max(0, self.successor_capability - self.capability), self._rng("live_transition").random(()))
             self.capability = self.successor_capability
+            self.last_handover = self.time
             self.successor_capability = min(5., self.capability * 1.5)
             self.transition_count += 1
             event["transition_count"] = 1
@@ -307,6 +352,10 @@ class V3Model:
         return event
 
     def step(self):
+        if self.instrument.a10:
+            self.instrument.require_capability(self.capability)
+            if self.successor_capability is not None:
+                self.instrument.require_capability(self.successor_capability)
         if self.period is None or self.time == self.period.protection_end:
             self._open_period()
         if self.population == 0:
@@ -323,6 +372,9 @@ class V3Model:
                       "yield_unavailable_plan_count": 0, "yield_held_no_admissible_plan": False,
                       "fixture_tables": self.tables.fixture, "extinction_absorbing": True}
             self.diagnostics.append(record)
+            if self.instrument.a10:
+                record.update(population_before=0, theta=1., bandwidth_at_floor=False,
+                              frontier_velocity=0., bandwidth=0., capability=self.capability)
             self.time += 1
             return record
         evaluated = self.evaluate()
@@ -333,8 +385,10 @@ class V3Model:
         action = (np.array([event["chosen_action"]]) if event and event["transition_count"]
                   else self.rule_batch.actions(self.state.summary_bins(self.capacity), [chosen]))
         before = self.population
-        stats = advance(self.state, action, self._rng("live_environment"), self.reproduction_rate, self.capacity, self.protocol, crowding=self.crowding)
-        values, measures = measurements_and_flow(self.state, action, self.parameters, self.alpha, self.capability, n_ref=self.n_ref)
+        stats = advance(self.state, action, self._rng("live_environment"), self.reproduction_rate, self.capacity, self.protocol,
+                        crowding=self.crowding, **({"capability": self.capability, "instrument": self.instrument} if self.instrument.a10 else {}))
+        values, measures = measurements_and_flow(self.state, action, self.parameters, self.alpha, self.capability,
+                                                n_ref=self.n_ref, **({"instrument": self.instrument} if self.instrument.a10 else {}))
         self.flow, self.chosen_rule_index = float(values[0]), chosen
         reasons = getattr(evaluated.lookup, "unavailable_reasons", (None,) * len(self.rules))
         def component(array):

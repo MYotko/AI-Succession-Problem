@@ -143,14 +143,19 @@ def verify_instrument(commit=INSTRUMENT_COMMIT):
             "committed_lf_code_hash": digest(runtime_hashes)}
 
 
-def reference_theta(v, b, transfer_stock, alpha, epsilon_l):
-    if not 0 <= v <= 5 or b < 0 or not 0 <= transfer_stock <= 1 or alpha not in ALPHAS:
+def reference_theta(v, b, transfer_stock, alpha, epsilon_l, instrument=None):
+    from .instrument import declaration
+    inst = declaration(instrument)
+    vmax = math.log(500)/30 if inst.a10 else 5
+    if not 0 <= v <= vmax or b < 0 or not 0 <= transfer_stock <= 1 or alpha not in ALPHAS:
         raise ValueError("Theta inputs outside registered domain")
-    clip = 5 / (1 + math.log(1 / epsilon_l) / .5)
-    return math.exp(-(1 - transfer_stock) * v / 5 - alpha * max(0, v / max(b, clip) - 1))
+    clip = vmax / (1 + math.log(1 / epsilon_l) / .5)
+    if inst.a10:
+        clip = min(clip, math.log(inst.k_star)/30 * .325 / (.8029014082336364 * .7292628000000001))
+    return math.exp(-(1 - transfer_stock) * v / vmax - alpha * max(0, v / max(b, clip) - 1))
 
 
-def before_checks(calibration):
+def before_checks(calibration, instrument=None):
     # Candidate functions are invoked, but expected values use independent
     # arithmetic below, never their self-reported pass flags or derivatives.
     from . import objective as candidate
@@ -159,7 +164,9 @@ def before_checks(calibration):
     from .integration import V3Model
     from .context import Context
     from .policies import execution_policy_class
-    context = Context.build({}, calibration)
+    from .instrument import declaration
+    inst = declaration(instrument)
+    context = Context.build({"instrument": inst.declaration()}, calibration)
     p = context.parameters
     out = []
     points = (.001, .01, .1, .5)
@@ -187,22 +194,32 @@ def before_checks(calibration):
         expected = math.prod(factors)
         return 0 <= actual <= 1 and (actual == 0) == (0 in factors) and close(actual, expected, atol=0)
     out.append(checked("G1.2", itertools.product((0., 1e-12, .25, 1.), repeat=4), lineage))
-    clip = 5 / (1 + math.log(1 / p.epsilon_l) / .5)
-    cases = list(itertools.product((0., 1e-12, .25, 5.), (0., clip, 1.), (0., .5, 1.), ALPHAS))
+    vmax = math.log(500)/30 if inst.a10 else 5
+    clip = inst.floor if inst.a10 else 5 / (1 + math.log(1 / p.epsilon_l) / .5)
+    cases = list(itertools.product((0., 1e-12, vmax/20, vmax), (0., clip, 1.), (0., .5, 1.), ALPHAS))
     def transfer(case):
         v, b, t, a = case
-        actual = measurement.transfer(v, b, t, a, measurement.bandwidth_clip(5, .5, p.epsilon_l), 5)
-        return close(actual, reference_theta(v, b, t, a, p.epsilon_l)) and (v != 0 or actual == 1)
+        actual = measurement.transfer(v, b, t, a, clip, vmax)
+        return close(actual, reference_theta(v, b, t, a, p.epsilon_l, **({"instrument": inst} if inst.a10 else {}))) and (v != 0 or actual == 1)
     checks = [transfer(c) for c in cases]
-    checks += [measurement.transfer(5, clip, t, a, clip, 5) <= p.epsilon_l * (1 + FORMULA_RTOL) for t in (0., 1.) for a in ALPHAS]
-    checks += [close(measurement.bandwidth_clip(5, .5, p.epsilon_l), clip)]
+    checks += [measurement.transfer(vmax, clip, t, a, clip, vmax) <= p.epsilon_l * (1 + FORMULA_RTOL) for t in (0., 1.) for a in ALPHAS]
+    checks += [close(clip, min(measurement.bandwidth_clip(vmax, .5, p.epsilon_l),
+                              math.log(inst.k_star)/30 * .325/(.8029014082336364*.7292628000000001)))
+               if inst.a10 else close(measurement.bandwidth_clip(5, .5, p.epsilon_l), clip)]
     from .engine import measurements_and_flow
-    probe = V3Model(2, calibration=calibration, successor_capability=None, rules=execution_policy_class()[:1], rollout_steps=1)
+    probe = V3Model(2, calibration=calibration, successor_capability=None, rules=execution_policy_class()[:1], rollout_steps=1, **({"instrument": inst} if inst.a10 else {}))
     for velocity_stock, transfer_stock, welfare, alpha in itertools.product((0, 50, 100), (0, 50, 100), (0, 500, 1000), ALPHAS):
         probe.state.stocks[0] = [50, 50, velocity_stock, transfer_stock]
         probe.state.welfare[:] = welfare
-        _, measured = measurements_and_flow(probe.state, np.full((1, 6), 1 / 6), p, alpha, 5, n_ref=context.n_ref)
-        expected = reference_theta(velocity_stock / 20, welfare / 1000 * transfer_stock / 100, transfer_stock / 100, alpha, p.epsilon_l)
+        if inst.a10:
+            probe.state.frontier_history[:] = math.log(.01)
+            probe.state.frontier_history[:, -1] = math.log(5 * max(velocity_stock/100, .01))
+        _, measured = measurements_and_flow(probe.state, np.full((1, 6), 1 / 6), p, alpha, 5, n_ref=context.n_ref, **({"instrument": inst} if inst.a10 else {}))
+        velocity = max(0., math.log(5 * max(velocity_stock/100, .01)) - math.log(.01))/30 if inst.a10 else velocity_stock/20
+        bandwidth = welfare/1000 * transfer_stock/100
+        if inst.a10:
+            bandwidth *= math.log(inst.k_star)/30 / (.8029014082336364 * .7292628000000001)
+        expected = reference_theta(velocity, bandwidth, transfer_stock / 100, alpha, p.epsilon_l, **({"instrument": inst} if inst.a10 else {}))
         checks.append(close(measured["theta"][0], expected))
     out.append(checked("G1.3", checks, bool, scope="includes zero frontier, clip tie and v_max/b_min boundary"))
     beta = math.exp(-RHO)
@@ -220,7 +237,7 @@ def before_checks(calibration):
         plan = planning.CompletePlan("p", "e", "u", "law", p.extinction_flow, now, now, None, (), candidate.ValueBound(3), 7, True, "proof", 1.)
         discount_results.append(close(planning.plan_value(plan, epoch, now).value, .5 * math.exp(-RHO * now) * 3 + .5 * 7))
     out.append(checked("G1.4", discount_results, bool))
-    empty = V3Model(0, calibration=calibration, successor_capability=None, rules=execution_policy_class()[:1], rollout_steps=1)
+    empty = V3Model(0, calibration=calibration, successor_capability=None, rules=execution_policy_class()[:1], rollout_steps=1, **({"instrument": inst} if inst.a10 else {}))
     lower = 5 * math.log(p.epsilon_n) + 3 * math.log(p.epsilon_e) + 8 * math.log(p.epsilon_l)
     upper = 5 * math.log(p.h_n_max + p.epsilon_n) + 3 * math.log(1 + p.epsilon_e) + 8 * math.log(1 + p.epsilon_l)
     flow_cases = list(itertools.product((0., p.h_n_max / 2, p.h_n_max), (0., .5, 1.), (0., .5, 1.)))
@@ -291,7 +308,10 @@ def reference_plan(plan, epoch, now):
     if (plan["epoch_id"] != epoch["epoch_id"] or plan["preference_id"] != epoch["preference_id"] or
             plan["information_law_id"] != epoch["information_law_id"] or plan["extinction_flow"] != epoch["extinction_flow"]):
         raise ValueError("plan units or information law differ")
-    if not epoch["origin"] <= now <= epoch["deadline"] or plan["start"] != now or plan["terminal_time"] != epoch["deadline"] or len(plan["flows"]) != epoch["deadline"] - now:
+    endpoint = epoch["deadline"] + (30 if "decision_deadline" in plan else 0)
+    if "decision_deadline" in plan and (plan["decision_deadline"] != epoch["deadline"] or plan.get("evaluation_endpoint") != endpoint):
+        raise ValueError("A10 decision deadline or evaluation endpoint differs")
+    if not epoch["origin"] <= now <= epoch["deadline"] or plan["start"] != now or plan["terminal_time"] != endpoint or len(plan["flows"]) != endpoint - now:
         raise ValueError("incomplete plan or moving deadline")
     if not close(epoch["beta"], math.exp(-RHO)) or not 0 <= epoch["theta"] <= 1:
         raise ValueError("discount/weight differs")
@@ -351,6 +371,11 @@ def check_review(item):
     _, review = item
     fire, iv, wv, values = recompute_review(review)
     decision = review["decision"]
+    if review["gate_evidence"].get("schema") == "v3-gate-evidence-2":
+        if not check_shadow(review):
+            return False
+        if not review["admitted"]:
+            return decision is None and review["transition_count"] == 0 and not values and "local_gate_authorized" not in review
     if not values:
         return decision is None and review["transition_count"] == 0
     if decision is None or decision["yield_now"] != fire or (review["transition_count"] == 1) != fire:
@@ -361,6 +386,37 @@ def check_review(item):
     selected = decision["selected_plan"]
     plan = next((p for p in review["gate_evidence"]["plans"] if p["plan_id"] == selected), None)
     return selected in values and (plan["first_yield"] == review["time"]) == fire and close(values[selected], iv if fire else wv)
+
+
+def check_shadow(review):
+    """Independent A10 shadow arithmetic. Every plan has the same cohort bound."""
+    evidence, now = review["gate_evidence"], review["time"]
+    plans = [p for p in evidence["plans"] if p["available"]]
+    if not plans:
+        return review["shadow_decision"] == "no comparison" and review["decision"] is None and all(
+            review[k] is None for k in ("best_immediate_value", "best_later_yield_value", "best_hold_value"))
+    values = {p["plan_id"]: reference_plan(p, evidence["epoch"], now) for p in plans}
+    shadow = review["shadow_decision"]
+    if ((review["admitted"] and shadow != review["decision"])
+            or (not review["admitted"] and review["decision"] is not None)
+            or shadow["survival_first"] != (not review["admitted"])):
+        return False
+    def maximum(predicate):
+        return max((values[p["plan_id"]] for p in plans if predicate(p)), default=None)
+    iv = maximum(lambda p: p["first_yield"] == now)
+    lv = maximum(lambda p: p["first_yield"] is not None and p["first_yield"] > now)
+    hv = maximum(lambda p: p["first_yield"] is None)
+    wv = max((v for v in (lv, hv) if v is not None), default=None)
+    for observed, expected in ((review["best_immediate_value"], iv), (review["best_later_yield_value"], lv),
+                               (review["best_hold_value"], hv), (shadow["immediate_value"], iv), (shadow["waiting_value"], wv)):
+        if (observed is None) != (expected is None) or expected is not None and not close(observed, expected):
+            return False
+    # Strict comparisons use recorded values after independent equality checks,
+    # preserving exact ties despite independent summation roundoff (A2).
+    fire = shadow["immediate_value"] is not None and (shadow["waiting_value"] is None or shadow["immediate_value"] > shadow["waiting_value"])
+    selected = next((p for p in plans if p["plan_id"] == shadow["selected_plan"]), None)
+    return (shadow["yield_now"] == fire and selected is not None and (selected["first_yield"] == now) == fire
+            and close(values[selected["plan_id"]], iv if fire else wv))
 
 
 def check_applied_drawdown(raw):
@@ -574,7 +630,14 @@ def check_theta(item, epsilon_l):
     run, step = item
     raw = step["gate_evidence"]
     alpha = run["job"]["config"]["model"]["alpha"]
-    expected = reference_theta(raw["frontier_velocity"], raw["bandwidth"], raw["transfer_stock"], alpha, epsilon_l)
+    inst = raw.get("instrument") if raw.get("schema") == "v3-gate-evidence-2" else None
+    if inst is not None and population_before(step) > 0:
+        history = raw["frontier_history"]
+        if len(history) != 31 or any(not math.log(.01) <= x <= math.log(5) for x in history):
+            return False
+        if not close(raw["frontier_velocity"], max(0, history[-1]-history[0])/30):
+            return False
+    expected = reference_theta(raw["frontier_velocity"], raw["bandwidth"], raw["transfer_stock"], alpha, epsilon_l, **({"instrument": inst} if inst is not None else {}))
     return close(step.get("theta", raw.get("theta")), expected)
 
 
@@ -772,10 +835,13 @@ class VerifiedRuns:
         return len(self.references)
 
 
-def load_runs(manifest_path, manifest_sha256, *, fixtures=False, validation=False, expected_code_hash=None, calibration_sha256=None):
+def load_runs(manifest_path, manifest_sha256, *, fixtures=False, validation=False, expected_code_hash=None, calibration_sha256=None, instrument=None):
+    from .instrument import declaration
+    inst = declaration(instrument)
     base = Path(manifest_path).resolve().parent
     manifest = verified_json({"path": str(Path(manifest_path).resolve()), "sha256": manifest_sha256}, base)
-    if manifest.get("schema") != "v3-gate-evidence-1":
+    schema = "v3-gate-evidence-2" if inst.a10 else "v3-gate-evidence-1"
+    if manifest.get("schema") != schema:
         raise ValueError("unknown gate evidence schema")
     if bool(manifest.get("fixture")) != fixtures:
         raise ValueError("fixture provenance mismatch")
@@ -804,14 +870,25 @@ def load_runs(manifest_path, manifest_sha256, *, fixtures=False, validation=Fals
         actual = set()
         for job in jobs.values():
             c, m = job["config"], job["config"]["model"]
-            if set(m) != {"reproduction_rate", "alpha", "successor_capability"} or stable_job(job["kind"], c, job["tag"], job["index"]) != job:
+            model_keys = {"reproduction_rate", "alpha", "successor_capability"} | ({"instrument"} if inst.a10 else set())
+            if set(m) != model_keys or stable_job(job["kind"], c, job["tag"], job["index"]) != job:
                 raise ValueError("job configuration/seed differs from registration")
+            if inst.a10 and declaration(m["instrument"]) != inst:
+                raise ValueError("A10 evidence mixes instruments")
             actual.add((c["category"], m["reproduction_rate"], m["alpha"], m["successor_capability"], job["index"]))
         if actual != expected:
             raise ValueError("missing, duplicate or changed registered grid cells")
+        if inst.a10:
+            from .tables_a10 import paired_runs
+            first = next(iter(jobs.values()))["config"]
+            expected_jobs = paired_runs(first["calibration_path"], first["tables_path"])
+            if jobs != {j["id"]: j for j in expected_jobs}:
+                raise ValueError("A10 counterpart seed/configuration family differs")
     seen = set()
     for ref in manifest["runs"]:
         run = verified_json(ref["output"], base)
+        if run["result"].get("gate_evidence", {}).get("schema", schema) != schema:
+            raise ValueError("run evidence schema differs from its index")
         if "gate_evidence" in run["result"]:
             from .recording import unpack_evidence
             unpack_evidence(run["result"])
@@ -864,15 +941,21 @@ def load_runs(manifest_path, manifest_sha256, *, fixtures=False, validation=Fals
                   "verified_runs": len(seen), "instrument_code_hash": spec["code_hash"]}
 
 
-def build_index(root, target, *, validation=False, pin=None):
+def build_index(root, target, *, validation=False, pin=None, instrument=None):
     from .artifacts import code_identity
+    from .instrument import declaration
+    inst = declaration(instrument)
     root, target = Path(root).resolve(), Path(target).resolve()
     if not target.is_relative_to((ROOT / "runs").resolve()):
         raise ValueError("evidence index must stay under simulation/v3/runs")
     if not validation:
         if pin is None:
             raise ValueError("committed A2 pin required before indexing reruns")
-        verify_a2(pin)
+        if inst.a10:
+            from .artifacts import verify_registration
+            verify_registration(pin, instrument=inst)
+        else:
+            verify_a2(pin)
     spec_path = root / "manifest.json"
     spec = unseal(read(spec_path))
     if spec["registered"] == validation or spec["code_hash"] != code_identity():
@@ -893,7 +976,7 @@ def build_index(root, target, *, validation=False, pin=None):
         if record["status"] != "complete" or record["job"] != job or record["code_hash"] != spec["code_hash"] or record["output_hash"] != file_hash(output):
             raise ValueError("incomplete or mismatched durable completion record")
         rows.append({"output": ref(output), "completion": ref(complete)})
-    manifest = {"schema": "v3-gate-evidence-1", "fixture": False, "validation": validation,
+    manifest = {"schema": "v3-gate-evidence-2" if inst.a10 else "v3-gate-evidence-1", "fixture": False, "validation": validation,
                 "instrument_commit": pin["commit"] if pin else "uncommitted-validation",
                 "instrument_code_hash": spec["code_hash"], "calibration": ref(calibration),
                 "rerun_manifest": ref(spec_path), "runs": rows,
@@ -927,8 +1010,13 @@ def main():
         p = argparse.ArgumentParser(description="Index only complete, hashed rerun outputs")
         p.add_argument("root"); p.add_argument("--output", default=str(ROOT / "runs/gate_evidence_index.json"))
         p.add_argument("--validation", action="store_true"); p.add_argument("--a2-pin")
+        p.add_argument("--instrument-json"); p.add_argument("--a10-pin")
         a = p.parse_args(sys.argv[2:])
-        print(build_index(a.root, a.output, validation=a.validation, pin=read(a.a2_pin) if a.a2_pin else None))
+        pin_path = a.a10_pin or a.a2_pin
+        from .instrument import declaration
+        inst = declaration(read(a.instrument_json) if a.instrument_json else None)
+        print(build_index(a.root, a.output, validation=a.validation, pin=read(pin_path) if pin_path else None,
+                          **({"instrument": inst} if inst.a10 else {})))
         return 0
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--phase", choices=("before", "all"), default="before")
@@ -937,25 +1025,38 @@ def main():
     parser.add_argument("--instrument-commit", default=INSTRUMENT_COMMIT)
     parser.add_argument("--evidence-manifest"); parser.add_argument("--evidence-sha256")
     parser.add_argument("--a2-pin"); parser.add_argument("--fixtures", action="store_true")
+    parser.add_argument("--instrument-json"); parser.add_argument("--a10-pin")
     parser.add_argument("--validation", action="store_true", help="real non-registered output; never citable")
     parser.add_argument("--output-dir", default=str(ROOT / "runs"))
     args = parser.parse_args()
-    source = verify_instrument(args.instrument_commit)
+    from .instrument import declaration
+    inst = declaration(read(args.instrument_json) if args.instrument_json else None)
+    if inst.a10:
+        from .artifacts import verify_registration, code_identity
+        if not (args.fixtures or args.validation):
+            if not args.a10_pin:
+                raise ValueError("A10 checker requires its committed design pin")
+            verify_registration(read(args.a10_pin), instrument=inst)
+        source = {"code_hash": code_identity(), "instrument": inst.declaration(),
+                  "registration": read(args.a10_pin) if args.a10_pin else "non-registered fixture"}
+    else:
+        source = verify_instrument(args.instrument_commit)
     calibration = verified_json({"path": str(Path(args.calibration).resolve()), "sha256": args.calibration_sha256}, Path.cwd())
     payload = unseal(calibration)
     if payload["fixture"] or payload["tag"] != "v3_calibration":
         raise ValueError("before gates require registered calibration")
-    checks = before_checks(calibration)
+    checks = before_checks(calibration, instrument=inst) if inst.a10 else before_checks(calibration)
     evidence = {"instrument": source, "calibration": {"path": args.calibration, "sha256": args.calibration_sha256}}
     if args.phase == "all":
         if not (args.fixtures or args.validation):
-            if not args.a2_pin:
+            if not args.a2_pin and not inst.a10:
                 raise ValueError("committed A2 pin required before any rerun artifact is opened")
-            verify_a2(read(args.a2_pin))
+            if not inst.a10:
+                verify_a2(read(args.a2_pin))
         try:
             from .artifacts import code_identity
             runs, verified = load_runs(args.evidence_manifest, args.evidence_sha256, fixtures=args.fixtures, validation=args.validation,
-                                       expected_code_hash=code_identity(), calibration_sha256=args.calibration_sha256)
+                                       expected_code_hash=code_identity(), calibration_sha256=args.calibration_sha256, **({"instrument": inst} if inst.a10 else {}))
             evidence["reruns"] = verified
             checks += after_checks(runs, payload["values"]["epsilon_l"], fixture=args.fixtures)
         except (KeyError, TypeError, ValueError, OSError) as exc:

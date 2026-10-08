@@ -11,6 +11,7 @@ from .cohort import mortality_numerator, MORTALITY_DENOMINATOR
 from .measurements import NoveltyProtocol, bandwidth_clip
 from .policies import POPULATION_CUTS, WELFARE_CUTS, STOCK_CUTS
 from .stocks import stock_step, MICROSTEPS
+from .instrument import R4
 
 
 class ChannelRandom:
@@ -55,6 +56,7 @@ class PopulationBatch:
     window: np.ndarray  # row, step (newest first), sample, coordinate
     counts: np.ndarray
     h_n: np.ndarray
+    frontier_history: np.ndarray | None = None
 
     @property
     def population(self):
@@ -65,7 +67,8 @@ class PopulationBatch:
         return PopulationBatch(self.ages[rows].copy(), self.welfare[rows].copy(),
                                self.traits[rows].copy(), self.bank,
                                self.stocks[rows].copy(), self.window[rows].copy(),
-                               self.counts[rows].copy(), self.h_n[rows].copy())
+                               self.counts[rows].copy(), self.h_n[rows].copy(),
+                               **({"frontier_history": self.frontier_history[rows].copy()} if self.frontier_history is not None else {}))
 
     def repeat(self, count):
         if len(self.ages) != 1:
@@ -112,13 +115,18 @@ class RuleBatch:
         return actions
 
 
-def advance(batch, actions, rng, reproduction_rate, capacity, protocol, *, crowding="total", independent=False):
+def advance(batch, actions, rng, reproduction_rate, capacity, protocol, *, crowding="total", independent=False,
+            capability=1., instrument=R4):
     """P5 order: age, welfare, births, deaths; then stocks and measurements.
 
     Births by dying parents count. Births are not immigration: an empty
     chain has no parents and remains empty. Stock changes cannot kill.
     All environmental draws are independent by channel, shared across rows.
     """
+    if instrument.a10:
+        instrument.require_capability(capability)
+        if batch.frontier_history is None:
+            raise ValueError("A10 advance requires initialized pace history")
     actions = np.asarray(actions, float)
     if actions.shape != (len(batch.ages), 6) or not np.isfinite(actions).all() or np.any(actions < 0) or not np.allclose(actions.sum(axis=1), 1) or np.any(actions[:, 1] < 1 / 6):
         raise ValueError("invalid allocation or welfare floor violation")
@@ -130,6 +138,8 @@ def advance(batch, actions, rng, reproduction_rate, capacity, protocol, *, crowd
     count = alive.sum(axis=1)
     ages = np.where(alive, batch.ages + 1, 0)
     increment = np.maximum(40, 38 + 12 * actions[:, 1])[:, None]
+    if instrument.a10:
+        increment = np.maximum(40, 38 + 12 * instrument.benefit(capability) * actions[:, 1])[:, None]
     proposed = np.clip(batch.welfare + increment - ages, 0, 1000)
     lower = np.floor(proposed)
     welfare = (lower + (rng.random(draw_shape) < proposed - lower)).astype(np.int16)
@@ -186,6 +196,8 @@ def advance(batch, actions, rng, reproduction_rate, capacity, protocol, *, crowd
     updated_stocks = stock_step(batch.stocks, actions, draws)
     batch.stocks[count > 0] = updated_stocks[count > 0]
     update_novelty(batch, rng, protocol, independent=independent)
+    if instrument.a10:
+        instrument.append(batch, capability)
     return {"births": births, "deaths": count - survivors, "population": new_count}
 
 
@@ -259,7 +271,7 @@ def diversity(batch):
     return np.where(n < 2, 0, np.clip(result, 0, 1))
 
 
-def measurements_and_flow(batch, actions, parameters, alpha, capability, *, n_ref=200, v_max=5):
+def measurements_and_flow(batch, actions, parameters, alpha, capability, *, n_ref=200, v_max=5, instrument=R4):
     n = batch.population
     welfare = np.where(batch.ages >= 0, batch.welfare, 0).sum(axis=1) / np.maximum(n, 1) / 1000
     stocks = batch.stocks / 100
@@ -267,12 +279,21 @@ def measurements_and_flow(batch, actions, parameters, alpha, capability, *, n_re
     bandwidth = welfare * stocks[:, 3]
     clip = bandwidth_clip(v_max, .5, parameters.epsilon_l)
     theta = np.exp(-(1 - stocks[:, 3]) * frontier / v_max - alpha * np.maximum(0, frontier / np.maximum(bandwidth, clip) - 1))
+    if instrument.a10:
+        instrument.require_capability(capability)
+        frontier = instrument.velocity(batch)
+        theta, bandwidth, ratio = instrument.response(frontier, welfare, stocks[:, 3], alpha)
+        clip = instrument.floor
     d_gen = diversity(batch)
     lineage = d_gen * np.minimum(n / n_ref, 1) * stocks[:, 0] * theta
     h_e = -np.expm1(-2.5 * actions[:, 0])
+    if instrument.a10:
+        h_e = -np.expm1(-2.5 * instrument.benefit(capability) * actions[:, 0])
     components = np.column_stack((np.log(batch.h_n + parameters.epsilon_n), np.log(h_e + parameters.epsilon_e), np.log(lineage + parameters.epsilon_l)))
     values = components @ np.array([parameters.lambda_n, parameters.mu, parameters.kappa])
     values[n == 0] = parameters.extinction_flow
+    extra = ({"frontier_velocity": frontier, "bandwidth": bandwidth, "bandwidth_at_floor": bandwidth <= clip,
+              "velocity_bandwidth_ratio": ratio} if instrument.a10 else {})
     return values, {"h_n": batch.h_n.copy(), "h_e": h_e, "lineage": lineage, "diversity": d_gen,
                     "psi": stocks[:, 0], "theta": theta, "bandwidth_below_clip": (bandwidth < clip) & (n > 0),
-                    "log_components": components}
+                    "log_components": components, **extra}

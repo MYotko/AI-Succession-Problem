@@ -50,7 +50,7 @@ def simulate(context, rule, settings, seed, route):
     state = context.population(count, rng)
     batch = RuleBatch([rule])
     indices = np.zeros(count, dtype=int)
-    features = np.empty((length, count, 8))
+    features = np.empty((length, count, 9 if context.instrument.a10 else 8))
     conditioned = np.empty_like(features)
     before = np.empty((length, count, 6), dtype=np.int8)
     after = np.empty_like(before)
@@ -62,10 +62,12 @@ def simulate(context, rule, settings, seed, route):
         before[step] = bins
         actions = batch.actions(bins, indices)
         advance(state, actions, rng, context.config.get("reproduction_rate", .08), context.config.get("carrying_capacity", 1600),
-                context.protocol, crowding=context.config.get("crowding", "total"), independent=True)
+                context.protocol, crowding=context.config.get("crowding", "total"), independent=True,
+                **({"capability": context.config.get("capability", 1.), "instrument": context.instrument} if context.instrument.a10 else {}))
         after[step] = state.summary_bins(context.config.get("carrying_capacity", 1600))
-        features[step] = observable_features(state, actions)
-        viable = reproductive_support(state)
+        features[step] = observable_features(state, actions, **({"capability": context.config.get("capability", 1.), "instrument": context.instrument} if context.instrument.a10 else {}))
+        viable = (reproductive_support(state, context.config.get("capability", 1.), context.instrument)
+                  if context.instrument.a10 else reproductive_support(state))
         support[step] = viable
         copy_indices = np.arange(count)
         if route == "fv":
@@ -114,6 +116,9 @@ def _plain_mean(flow, keep):
 
 def summarize(trace, context, setting, alpha, capability):
     start = setting["burn"]
+    if context.instrument.a10 and len(trace["features"]) <= 30:
+        return {"status": "not_estimable", "reason": "no full-history continuation transitions", "lambda_f": None,
+                "zeta": {"status": "unresolved", "upper": 1.}, "continuation": None}
     if trace["collapsed"] or len(trace["features"]) <= start:
         return {"status": "not_estimable", "reason": "FV ensemble collapsed; WE unavailable", "lambda_f": None,
                 "zeta": {"status": "unresolved", "upper": 1.}, "continuation": None}
@@ -148,8 +153,11 @@ def summarize(trace, context, setting, alpha, capability):
     span = p.upper_bound - p.extinction_flow
     drift_ok = None not in halves and abs(halves[1] - halves[0]) <= .05 * span
     stable = summary["mean"] is not None and summary["half_width"] <= .05 * span and drift_ok and route_ok
-    empirical = fit_transitions(trace["before"], trace["after"], flows, trace["features"][..., 0] == 0, group,
+    fit_start = 30 if context.instrument.a10 else 0
+    empirical = fit_transitions(trace["before"][fit_start:], trace["after"][fit_start:], flows[fit_start:], trace["features"][fit_start:, ..., 0] == 0, group,
                                 p.extinction_flow, p.upper_bound)
+    if context.instrument.a10:
+        empirical["first_source_step"] = fit_start
     continuation_ok = empirical["heldout_coverage"] >= .9 and empirical["bellman_residual_empirical"] <= .05 * span and bool(empirical["entries"]) and empirical["training_fixed_point_converged"]
     if trace["route"] == "fv":
         rates = trace["deaths"][start:].mean(axis=0) / trace["per_group"]
@@ -190,9 +198,20 @@ def estimate(config, seed, calibration=None):
     trace = plain if route == "plain" else simulate(context, rule, setting, seed ^ 0x5A17B03D, "fv")
     trajectories_finished = time.perf_counter()
     contexts = config.get("scoring", [{"alpha": 1., "capability": 1., "kappa": 8.}])
+    if context.instrument.a10:
+        from .instrument import declaration
+        for scoring in contexts:
+            declared = declaration({k: scoring[k] for k in ("mapping", "k_star", "g")})
+            if declared.g != context.instrument.g or round(scoring["capability"], 12) != round(context.config.get("capability", 1.), 12):
+                raise ValueError("A10 scoring must match the physical capability and g")
     rows = []
+    scoring_seconds = {}
     for scoring in contexts:
+        scoring_started = time.perf_counter()
         ctx = replace(context, parameters=replace(context.parameters, kappa=scoring.get("kappa", 8.)))
+        if context.instrument.a10:
+            from .instrument import Instrument
+            ctx = replace(ctx, instrument=Instrument("A10", scoring.get("k_star", context.instrument.k_star), context.instrument.g))
         summary = summarize(trace, ctx, setting, scoring["alpha"], scoring["capability"])
         raw = score_features(plain["features"], ctx, scoring["alpha"], scoring["capability"])
         alive = plain["features"][..., 0] > 0
@@ -211,7 +230,11 @@ def estimate(config, seed, calibration=None):
                        initial_law_admission={"bound": initial_law_bound(context.config.get("n_agents", 200)).upper,
                                               "horizon": 50, "alpha_spent": 0})
         rows.append(summary)
-    return {"rows": rows, "route": route, "requested_route": requested, "settings": setting,
+        if context.instrument.a10:
+            arm = str(scoring["k_star"])
+            scoring_seconds[arm] = scoring_seconds.get(arm, 0.) + time.perf_counter() - scoring_started
+    extra = {"scoring_seconds_by_k_star": scoring_seconds} if context.instrument.a10 else {}
+    return {"rows": rows, "route": route, "requested_route": requested, "settings": setting, **extra,
             "plain_survivor_counts": plain["survivor_counts"], "conditioned_survivor_counts": trace["survivor_counts"],
             "ensemble_collapses": trace["collapsed"], "independent_environment": True,
             "continuation_uses_pre_resampling_transitions": True, "kernel": context.config,

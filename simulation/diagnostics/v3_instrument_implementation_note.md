@@ -3928,3 +3928,152 @@ scratch tree `simulation/v3/_pytest_v3/`, or the A6 scratch folder
 `simulation/v3/_a6_scratch/`; those are working artifacts, not source.
 
 No commit, registered run, network or X2 action was performed.
+
+## 31. A10, the pace velocity and capability's benefit
+
+Built on 2026-10-07 under the operator's stage A authorization. This section
+describes the implementation of the supplied A10 amendment and design record.
+It does not register a table, run, reading, pin, or scientific result. The
+amendment's committed design-note pin remains an explicit launch parameter.
+
+### Declaration and constants
+
+`instrument.Instrument` declares `R4`, or `A10` with `k_star` in
+`{1.5, 1.8, 2.3}` and `g` in `{linear, sqrt}`. Existing callers retain the R4
+default. Registered A10 execution requires the A10 declaration, the exact
+constants seal, its own table producer and receipt, and a registration note
+containing `Amendment A10`. Existing ancestry, source-cleanliness, and pin-hash
+checks remain in force.
+
+The separate `a10_constants.json` record has seal
+`ecdd379c286c6a55acb8c6e462fa10da93583764d48bf978a44887469cb2343a`.
+Its byte-identical companion `runs/registered/v3_a10_constants.json` is beside
+the unchanged calibration. It declares tau 30, technology minimum 0.01,
+capability domain [1,5], both benefit forms, nominal k-star and both arms,
+v-max `log(500)/30`, unchanged epsilon-L, and the floor rule and values:
+
+| k-star | b-min |
+|---|---|
+| 1.5 | 0.007501866189951998 |
+| 1.8 | 0.01087515749236195 |
+| 2.3 | 0.014666388971338522 |
+
+The record embeds the supplied regeneration record, whose byte SHA256 is
+`fc7364f228318b21f44fd85b13d1ecd003a4d82368dc85fe5c42532f71c3cfb1`.
+It records w-ref 0.8029014082336364 and tr-ref 0.7292628000000001.
+The values are confirmed as records of the regeneration; exact historical
+equality is not established. `exact_historical_replay` remains false.
+
+### State, rewards, and decisions
+
+Each population row stores 31 log-frontier values, oldest first, initially
+padded with its step-zero frontier. The frontier is capability times
+`max(technology, 0.01)`. Every advance appends the new observation. Velocity is
+the positive part of the difference between the last and first observations,
+divided by 30 even before step 30. Row copies, rollouts, FV clones, and full
+state serialization preserve all 31 values. The production runner continues
+to restart an interrupted in-flight job from its original seed; a step log is
+not a checkpoint.
+
+Rewards use the post-action convention. Action at s produces state and reward
+s+1. The successor supplies capability for that transition, while the saved
+frontier at s remains the incumbent's observation. A single handover jump can
+therefore affect rewards s+1 through s+30 and exits at s+31. After an executed
+handover s, allocation at time t uses `max(20, s+30-t)` for
+`0 <= t-s <= 30`, and otherwise 20. The lengths at s and s+30 are 30 and 20.
+
+The response uses the declared pace bandwidth and transfer attenuation.
+Each plan uses its own capability in both C1, `1-exp(-2.5*g(c)*x_compute)`,
+and C2, `max(40, 38+12*g(c)*share)`. Capability checks cover live transitions,
+rollouts, measurement, counterfactuals, and tables. The unchanged cohort floor
+remains a valid conservative path because every C2 increment is at least 40.
+
+`CompletePlan.terminal_time` is the evaluation endpoint. A10 additionally
+records `decision_deadline`, which bounds handovers. Every plan in one review
+ends at H=deadline+30 using common random numbers, followed by its own table
+continuation. Epoch-origin units are retained: the continuation coefficient
+is `theta*beta**(H-origin)`. Admission's window, review grain, plan class,
+strict ties, and single accounting of Gamma are unchanged.
+
+Every nonempty available plan set receives a pure shadow comparison,
+including an unadmitted review. The recorder saves its selection and the best
+immediate, later, and hold values. Empty availability records `no comparison`.
+Admission still gates every action and guard call. A10 evidence uses
+`v3-gate-evidence-2`; the old reader refuses it. R4 retains version 1. Living-start
+step diagnostics include mean Theta, the Theta-equals-one share, and the
+bandwidth-floor share, including a final-death step. Runs also record transition
+count and final capability. The independent gate checker accepts the new
+schema only with an explicit A10 declaration.
+
+### Tables and labels
+
+`tables_a10` enumerates every registered chain capability from
+`study.capabilities`. Physical kernel identity includes mapping, capability,
+and g. Alpha, objective weights, and k-star remain scoring-only. Both k-star
+arms are scored in the nominal estimation pass on the declared arm contexts.
+This adds scoring and fit work without another physical trajectory or a
+retained feature archive. One scoring array is processed at a time. The
+square-root family has its own simulations and only its declared contexts.
+
+A10 trajectories keep pace history from initialization. Features add pace as
+a ninth column. Continuation fitting, including A4's plain C0 fit, uses source
+steps 30 and later. An early collapsed trajectory supplies zero eligible
+transitions. FV cloning copies its parent's history without resetting the
+trajectory clock. A4 censuses and A5 labels still use their original full
+measurement windows; their purpose is validation and exposure, not fitting.
+
+The fertility support envelope substitutes `38+12*g(c)` for 50. Its integer
+support path uses the ceiling of that increment because randomized rounding
+can round up. This is an upper support bound, not a change to the actual C2
+update. Capability 1 retains the previous support and physical law for both g
+forms. The build's `FERTILITY_SUPPORT.json` compares the excluded age/welfare
+grid for every chain capability.
+
+Each family has its own source identity, exact job manifest, per-capability
+rows, A4 validation receipt, and A5 labels. `finalize_receipt` binds the table,
+receipt, and labels; registered A10 loading verifies their seals and requires
+each FV row's own scoring context and complete cell labels. No screen or
+threshold is relaxed. Failed toy rows remain failed. Legacy A1/A2 compatibility
+records are unchanged and require an operator decision about retirement or
+re-pinning after review.
+
+The preparation sequence is `tables_a10.estimation_spec`, the existing runner,
+`tables_a10.assemble`, `tables_a10.prepare_validation`, the A4 producer,
+`table_labels_a5.prepare(..., instrument=family_instrument(family))`, the A5
+producer, and `tables_a10.finalize_receipt`. Registered preparation requires
+the full family, actual registration pin, committed A5 identity record,
+original probe-seed exclusion record, and declared wall ceilings. Toy overrides
+are rejected for registered preparation. The non-registered fixture pipeline
+exercises both validation routes and label publication without changing any
+status or support to obtain a pass.
+
+### Cost pilot and build evidence
+
+From `simulation`, `python -m v3.pilot_a10 build --paths PATHS.json --output
+SPEC.json --toy` creates a sealed non-registered cost manifest. PATHS maps
+`nominal`, `sqrt`, `crowding`, `sigma_squared_x10`, and `sigma_squared_x0.1`
+to their calibration/table path pairs. Omit `--toy` only for a separately
+authorized actual-workload pilot. Launch uses `production_runner` with explicit
+work mode, worker count, and one numerical thread. This build ran only toy jobs.
+
+Sampling selects the smallest declared hashes of actual jobs within each
+family, capability, setting, and phase. Source jobs and population hashes are
+retained. Configuration jobs and sampled cost jobs use separate non-registered
+seeds. The worker returns timing and workload identity only. It does not export
+or report pilot outcomes. Estimation, both A4 routes, A5 labels, R1/refinement/R2,
+square-root runs, k-star scoring, and all A6 components are represented.
+
+Projection uses measured effective workers, the existing 1.35 realism factor,
+launch reserves, and the A6 90-hour ceiling. It reports each capability's table
+costs and each run component. Route scenarios take the larger of plain
+validation and FV validation plus labels. K-star scoring is shown separately
+as a subset of nominal estimation and counted once in totals. X2 hours require
+actual X2 measurements or a declared measured relative throughput. Toy timings
+never generate X2 ceilings or study projections.
+
+The build reports contain raw R4 paired-state, evaluation-prefix, and complete
+500-step fixture byte comparisons against unchanged fe98280c source; executable
+certifier and S10 checks; the full suite's individual failures; and actual
+parallel-worker determinism and interrupted-resume checks. LF-normalized source
+identity is recorded separately from byte SHA256 file inventories. No legacy
+compatibility record, registered calibration, or registration pin was changed.

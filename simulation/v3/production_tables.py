@@ -16,12 +16,20 @@ class AvailableLookup(Lookup):
 
 def row_key(row):
     scoring = row["scoring"]
+    extra = {}
+    if scoring.get("mapping") == "A10":
+        from .instrument import Instrument
+        inst = Instrument("A10", scoring["k_star"], scoring["g"])
+        inst.require_capability(scoring["capability"])
+        extra = {"instrument": inst.declaration()}
+    elif scoring.get("mapping", "R4") != "R4":
+        raise ValueError("undeclared table mapping")
     return digest({"rule": row["rule_id"], "kernel": row["kernel_hash"], "calibration": row["calibration_hash"],
                    "initial_population": row.get("initial_population", 200),
                    # The declared rational capability grid has fewer than
                    # twelve decimal places. Canonicalize binary products
                    # such as 1.2 * 1.5 before identifying a frozen context.
-                   "alpha": float(scoring["alpha"]), "capability": round(float(scoring["capability"]), 12), "kappa": float(scoring.get("kappa", 8))})
+                   "alpha": float(scoring["alpha"]), "capability": round(float(scoring["capability"]), 12), "kappa": float(scoring.get("kappa", 8)), **extra})
 
 
 def write_tables(path, rows, manifest, *, fixture=False):
@@ -45,8 +53,14 @@ def write_tables(path, rows, manifest, *, fixture=False):
 
 
 class ProductionTables:
-    def __init__(self, path_or_document, *, calibration_hash, registered=False, expected_manifest_hash=None):
+    def __init__(self, path_or_document, *, calibration_hash, registered=False, expected_manifest_hash=None, receipt=None):
         document = read(path_or_document) if isinstance(path_or_document, (str, Path)) else path_or_document
+        self.document_hash = document.get("sha256")
+        if receipt is None and isinstance(path_or_document, (str, Path)):
+            receipt_path = Path(path_or_document).with_suffix(".a10_receipt.json")
+            if receipt_path.exists():
+                receipt = read(receipt_path)
+        self.a10_receipt = receipt
         self.payload = unseal(document)
         p = self.payload
         if 'repair' in p.get('manifest', {}):
@@ -107,20 +121,72 @@ class ProductionTables:
             if row["status"] != "estimated" or not has_support:
                 raise RuntimeError("registered execution rejects missing or not_estimable table rows")
 
+    def require_a10(self, instrument):
+        from .instrument import CONSTANTS_SHA256
+        self.require_production()
+        manifest = self.payload["manifest"]
+        provenance = manifest.get("a10")
+        if (self.payload["code_hash"] != code_identity() or not provenance
+                or provenance.get("constants_sha256") != CONSTANTS_SHA256
+                or provenance.get("producer_code_hash") != code_identity()
+                or instrument.declaration() not in provenance.get("instruments", [])):
+            raise ValueError("registered A10 refuses another table producer or instrument")
+        if self.a10_receipt is None:
+            raise ValueError("registered A10 requires its producer receipt")
+        receipt = unseal(self.a10_receipt)
+        if (receipt.get("schema") != "v3-A10-table-receipt-1"
+                or receipt.get("table_sha256") != self.document_hash
+                or receipt.get("producer_code_hash") != code_identity()
+                or receipt.get("constants_sha256") != CONSTANTS_SHA256
+                or not receipt.get("validation_receipt_sha256") or not receipt.get("labels_sha256")):
+            raise ValueError("A10 producer receipt mismatch or missing validation/labels")
+        from .artifacts import canonical
+        import hashlib
+        for field, digest_field in (("validation_receipt", "validation_receipt_sha256"), ("labels", "labels_sha256")):
+            embedded = receipt.get(field)
+            if not embedded or hashlib.sha256(canonical(embedded) + b"\n").hexdigest() != receipt[digest_field]:
+                raise ValueError("A10 receipt embedded evidence hash mismatch")
+            unseal(embedded)
+        validation, labels = unseal(receipt["validation_receipt"]), unseal(receipt["labels"])
+        if (validation.get("table_seal_sha256") != self.document_hash
+                or validation.get("producer_code_hash") != code_identity()
+                or validation.get("schema") != "v3-A4-receipt-1"
+                or labels.get("schema") != "v3-A5-label-1"
+                or labels.get("a4_family", {}).get("table_seal_sha256") != self.document_hash
+                or labels.get("code_hash") != code_identity()):
+            raise ValueError("A10 receipt evidence belongs to another table")
+        expected = {key for key, row in self.rows.items() if row.get("route") == "fv" and row["status"] == "estimated"}
+        if {r["row_key"] for r in labels.get("rows", [])} != expected:
+            raise ValueError("A10 per-capability A5 labels are incomplete")
+        from .continuation_validation import fine_codes
+        from .table_labels_a5 import label_for
+        for label in labels.get("rows", []):
+            row = self.rows[label["row_key"]]
+            cells = label.get("cells", [])
+            expected_cells = {int(c) for c in fine_codes([e["bin"] for e in row["continuation"]["entries"]])}
+            if (label.get("scoring") != row["scoring"] or {c["cell"] for c in cells} != expected_cells
+                    or len(cells) != len(expected_cells)
+                    or any(c["status"] not in ("certified", "unresolved", "violation") or c["label"] != label_for(c["status"]) for c in cells)):
+                raise ValueError("A10 A5 labels do not cover the row's own validated cells")
+
     def lookup_available(self, rules, bins, **context):
         """Return explicit missing-score masks for allocation and plan comparisons."""
         return self.lookup(rules, bins, allow_unavailable=True, **context)
 
     def lookup(self, rules, bins, *, kernel_hash, capability, alpha, weights, extinct=None, initial_population=200,
-               allow_unavailable=False):
+               allow_unavailable=False, instrument=None):
         if tuple(weights[:2]) != (5, 3):
             raise ValueError("unfrozen objective weights")
         dead = np.zeros(len(rules), bool) if extinct is None else np.asarray(extinct, bool)
+        if instrument is not None:
+            instrument.require_capability(capability)
         c, ce, lf, le, lb, ls, available, reasons = [], [], [], [], [], [], [], []
         for index, (rule, summary) in enumerate(zip(rules, bins)):
             stub = {"rule_id": rule.rule_id, "kernel_hash": kernel_hash, "calibration_hash": self.calibration_hash,
                     "initial_population": initial_population,
                     "scoring": {"alpha": alpha, "capability": capability, "kappa": weights[2]}}
+            if instrument is not None and instrument.a10:
+                stub["scoring"].update(instrument.declaration())
             key = row_key(stub)
             row = self.rows.get(key)
             if row is not None and row["rule_hash"] != digest(rule.__dict__):

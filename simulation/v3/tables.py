@@ -11,12 +11,18 @@ def canonical_hash(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()).hexdigest()
 
 
-def kernel_identity(reproduction_rate, capacity, crowding="total", protocol=None):
+def kernel_identity(reproduction_rate, capacity, crowding="total", protocol=None, *, instrument=None, capability=1.):
     """Alpha, capability and objective weights do not enter engine.advance."""
+    from .instrument import declaration
+    instrument = declaration(instrument)
+    extra = {}
+    if instrument.a10:
+        instrument.require_capability(capability)
+        extra = {"mapping": "A10", "capability": round(float(capability), 12), "g": instrument.g}
     return canonical_hash({"version": "v3-b1-1", "rr": reproduction_rate, "K": capacity,
                            "crowding": crowding, "stock_grid": .01,
                            "welfare_grid": .001, "stock_microsteps": 16,
-                           "stock_neighbor_noise": .005, "novelty_protocol": protocol, "shock": None})
+                           "stock_neighbor_noise": .005, "novelty_protocol": protocol, "shock": None, **extra})
 
 
 @dataclass(frozen=True)
@@ -39,9 +45,10 @@ class FixtureTables:
     """
     fixture = True
 
-    def __init__(self, rules, parameters, kernel_hash):
+    def __init__(self, rules, parameters, kernel_hash, *, kernel_hashes=None):
         self.rule_ids = tuple(r.rule_id for r in rules)
         self.kernel_hash = kernel_hash
+        self.kernel_hashes = set(kernel_hashes or [kernel_hash])
         self.continuations = {}
         self.default = (parameters.extinction_flow + parameters.upper_bound) / 2
         self.range_error = (parameters.upper_bound - parameters.extinction_flow) / 2
@@ -49,8 +56,10 @@ class FixtureTables:
         self.manifest_hash = canonical_hash({"fixture": True, "rules": self.rule_ids, "kernel": kernel_hash,
                                              "default": self.default, "error": self.range_error})
 
-    def lookup(self, rules, bins, *, kernel_hash, capability, alpha, weights, extinct=None, initial_population=200):
-        if kernel_hash != self.kernel_hash or not 0 < capability <= 5 or alpha < 0 or len(weights) != 3:
+    def lookup(self, rules, bins, *, kernel_hash, capability, alpha, weights, extinct=None, initial_population=200, instrument=None):
+        if instrument is not None:
+            instrument.require_capability(capability)
+        if kernel_hash not in self.kernel_hashes or not 0 < capability <= 5 or alpha < 0 or len(weights) != 3:
             raise ValueError("incompatible table context")
         names = [r.rule_id for r in rules]
         if any(name not in self.tail_values for name in names):

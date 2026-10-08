@@ -54,13 +54,19 @@ class TableTrace:
         self.settings = settings
         self.seed = seed
         trace = simulate(self.context, _rule(result["rows"][0]["rule_id"]), settings, seed, self.route)
+        source_initial = np.ones((1, len(trace["groups"])), dtype=bool)
+        # A10 continuation fitting and validation start with a full history.
+        if self.context.instrument.a10:
+            source_initial = trace["conditioned"][29:30, :, 0] > 0
+            for field in ("features", "conditioned", "before", "after", "support", "deaths"):
+                trace[field] = trace[field][30:]
         self.features = trace["features"]
         conditioned = trace["conditioned"]
         length, self.count = trace["before"].shape[:2]
         self.length = length
         self.collapsed = trace["collapsed"]
         self.collapsed_groups = len({c["group"] for c in trace["collapsed"]})
-        self.requested_length = settings["burn"] + settings["measure"]
+        self.requested_length = max(0, settings["burn"] + settings["measure"] - (30 if self.context.instrument.a10 else 0))
         self.truncated = length < self.requested_length
         self.truncated_steps = self.requested_length - length
         self.traj = np.broadcast_to(np.arange(self.count)[None, :], (length, self.count)).ravel()
@@ -68,7 +74,7 @@ class TableTrace:
         self.n_groups = settings["groups"]
         self.before = trace["before"].reshape(-1, 6)
         self.after = trace["after"].reshape(-1, 6)
-        if self.before.min() < 0 or self.before.max() > 7 or self.after.min() < 0 or self.after.max() > 7:
+        if self.before.size and (self.before.min() < 0 or self.before.max() > 7 or self.after.min() < 0 or self.after.max() > 7):
             raise cv.OutOfRange("bin coordinates out of range")
         # The next-state (post-advance, pre-resampling) population gives the
         # extinct-next indicator; the living-source mask uses the conditioned
@@ -77,13 +83,16 @@ class TableTrace:
         alive_next = self.features[..., 0] > 0
         self.dead = (~alive_next).ravel()
         cond_alive = conditioned[..., 0] > 0
-        self.source_alive = np.concatenate((np.ones((1, self.count), dtype=bool), cond_alive[:-1])).ravel()
+        self.source_alive = np.concatenate((source_initial, cond_alive[:-1])).ravel()
         self.lower = self.context.parameters.extinction_flow
         self.upper = self.context.parameters.upper_bound
 
     def flows(self, scoring):
         ctx = dataclasses.replace(self.context,
                                   parameters=dataclasses.replace(self.context.parameters, kappa=scoring.get("kappa", 8.0)))
+        if ctx.instrument.a10:
+            from .instrument import Instrument
+            ctx = dataclasses.replace(ctx, instrument=Instrument("A10", scoring.get("k_star", ctx.instrument.k_star), ctx.instrument.g))
         return self._score_features(self.features, ctx, scoring["alpha"], scoring["capability"]).ravel()
 
 
@@ -138,7 +147,7 @@ def validate_stage(a1_output, fit_result, replicate, seed, override=None):
     for i, row in enumerate(a1_output["result"]["rows"]):
         flows = tr.flows(row["scoring"])
         cv.check_in_range(flows, tr.lower, tr.upper, "flow")
-        flow_min, flow_max = float(flows.min()), float(flows.max())
+        flow_min, flow_max = (float(flows.min()), float(flows.max())) if flows.size else (tr.lower, tr.upper)
         entries = _entries(row)
         if route == "plain":
             values = a1_published_plain(entries)
@@ -355,7 +364,8 @@ def _a4_job(config, phase):
     return stable_job("a4_" + config["stage"], {**config, "phase": phase}, "v3_tables", 0)
 
 
-def prepare(source_root, calibration_path, registration=None, wall_hours=48, a3_probe_root=None, settings_override=None):
+def prepare(source_root, calibration_path, registration=None, wall_hours=48, a3_probe_root=None, settings_override=None,
+            instrument=None):
     """A sealed A4 plan with the five phased job lists, pinned M, M_FV and
     per-phase memory estimates.
 
@@ -364,12 +374,17 @@ def prepare(source_root, calibration_path, registration=None, wall_hours=48, a3_
     probe seeds. ``plan_hash`` binds the source identity, M, M_FV, the code, the
     settings override, the registration and the full job skeleton."""
     source_root = Path(source_root)
+    from .instrument import declaration
+    instrument = declaration(instrument)
+    if instrument.a10:
+        from .tables_a10 import verify_estimation_source
+        verify_estimation_source(source_root, calibration_path, registered=registration is not None)
     actual_a1 = file_hash(source_root / "v3_rerun_tables_A1.json")
-    if registration is not None and actual_a1 != A1_FILE_SHA256:
+    if registration is not None and not instrument.a10 and actual_a1 != A1_FILE_SHA256:
         raise ValueError("A1 source publication changed")
     # Registered runs pin the canonical A1 file; a fixture (smoke) run records the
     # actual source hash so a synthetic small family can run end to end.
-    source_file_sha256 = A1_FILE_SHA256 if registration is not None else actual_a1
+    source_file_sha256 = A1_FILE_SHA256 if registration is not None and not instrument.a10 else actual_a1
     manifest = unseal(read(source_root / "tables_A1_manifest.json"))
     source_code = _source_code_hash(source_root)
     counts = counts_from_job_outputs(source_root, source_code)
@@ -438,6 +453,8 @@ def prepare(source_root, calibration_path, registration=None, wall_hours=48, a3_
     plan_core["configuration"] = _configuration_profiles(source_root, source_code, manifest, plan_hash, settings_override)
     plan_core.update(jobs=jobs, registration=registration,
                      probe_seed_count=len(probe_seeds), stream_seed_count=len(all_stream))
+    if instrument.a10:
+        plan_core.update(instrument=instrument.declaration(), registered_a10=bool(registration))
     return plan_core
 
 
@@ -453,6 +470,7 @@ def _configuration_profiles(source_root, source_code, manifest, plan_hash, setti
         setting = job["config"].get("setting_name", "primary")
         base = {"a1_source_root": str(Path(source_root).resolve()), "a1_job": job,
                 "a1_source_code_hash": source_code, "plan_hash": plan_hash, "settings_override": short}
+        reps.setdefault("census_cfg", {**base, "stage": "census", "route": "plain", "seed": cv.census_seed(job["seed"])})
         reps.setdefault("fit" if route == "plain" else None, None)
         if route == "plain":
             reps.setdefault("fit_cfg", {**base, "stage": "fit", "route": "plain", "seed": cv.fit_seed(job["seed"])})
@@ -716,12 +734,17 @@ def publish(plan, run_root, source_root, calibration, target, *, registered=True
     from .study import table_design
     # Registration intent is checked first, before touching any source file, so
     # a smoke plan can never be published registered.
+    from .instrument import declaration
+    instrument = declaration(plan.get("instrument"))
+    if instrument.a10:
+        from .tables_a10 import verify_estimation_source
+        verify_estimation_source(source_root, plan["calibration_path"], registered=registered)
     if registered:
         registered_publish_guard(plan)
         from .artifacts import verify_registration
-        verify_registration(plan["registration"])
+        verify_registration(plan["registration"], **({"instrument": instrument} if instrument.a10 else {}))
     source_root, run_root = Path(source_root), Path(run_root)
-    expected_a1 = A1_FILE_SHA256 if registered else plan["source_file_sha256"]
+    expected_a1 = A1_FILE_SHA256 if registered and not instrument.a10 else plan["source_file_sha256"]
     if file_hash(source_root / "v3_rerun_tables_A1.json") != expected_a1:
         raise ValueError("A1 publication changed")
     a1_manifest = unseal(read(source_root / "tables_A1_manifest.json"))
@@ -732,7 +755,7 @@ def publish(plan, run_root, source_root, calibration, target, *, registered=True
     if _recompute_plan_hash(plan) != plan["plan_hash"]:
         raise ValueError("plan hash does not match its job list, overrides and registration")
     from .calibration import validate_calibration
-    validate_calibration(calibration, registered=registered)
+    validate_calibration(calibration, registered=registered, **({"instrument": instrument} if instrument.a10 else {}))
     source_code = plan["source_code_hash"]
     counts = counts_from_job_outputs(source_root, source_code)
     if (counts["M"], counts["M_FV"]) != (plan["M"], plan["M_FV"]):
@@ -754,6 +777,9 @@ def publish(plan, run_root, source_root, calibration, target, *, registered=True
                 "sensitivity_status": sensitivity_status,
                 "source_family": {"file_sha256": plan["source_file_sha256"], "code_hash": source_code}}
     candidate = scoped(run_root) / "candidate_unpublished_tables.json"
+    if instrument.a10:
+        source_payload = unseal(read(source_root / "v3_rerun_tables_A1.json"))
+        manifest["a10"] = source_payload["manifest"]["a10"]
     document = write_tables(candidate, list(rows.values()), manifest, fixture=not registered)
     # Per-cell results (primary and sensitivity) live in a sidecar, not the
     # family; the receipt binds the sidecar by hash.

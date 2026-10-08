@@ -160,6 +160,8 @@ def living_source_residuals(src_codes, nxt_codes, source_alive, dead, flows, val
     vals = np.array([value_by_code[int(c)] for c in codes.tolist()], dtype=float)
     src = _lookup(src_codes, codes)
     nxt = _lookup(nxt_codes, codes)
+    if not len(codes):
+        return np.zeros(len(flows)), np.zeros(len(flows), dtype=bool), src, codes
     covered = source_alive & (src >= 0) & (dead | (nxt >= 0))
     next_value = np.where(dead, lower, vals[np.maximum(nxt, 0)])
     residual = (1 - BETA) * flows + BETA * next_value - vals[np.maximum(src, 0)]

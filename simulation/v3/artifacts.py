@@ -89,7 +89,10 @@ def source_manifest():
     repair_compatibility = ROOT / "table_compatibility_A3.json"
     if repair_compatibility.exists():
         files.append(repair_compatibility)
-    return {p.relative_to(SIMULATION).as_posix(): file_hash(p) for p in sorted(files)}
+    constants = ROOT / "a10_constants.json"
+    if constants.exists():
+        files.append(constants)
+    return {p.relative_to(SIMULATION).as_posix(): hashlib.sha256(p.read_bytes().replace(b"\r\n", b"\n")).hexdigest() for p in sorted(files)}
 
 
 def code_identity():
@@ -101,9 +104,17 @@ def stable_job(kind, config, tag, index):
         raise ValueError("unknown experiment tag")
     base = {"kind": kind, "config": config, "tag": tag, "index": index}
     key = digest(base)
+    seed_key = key
+    source = config.get("a10_seed_source")
+    if source is not None:
+        from .instrument import declaration
+        if (kind != "rerun" or not declaration(config.get("model", {}).get("instrument")).a10
+                or "a10_seed_source" in source or "instrument" in source.get("model", {})):
+            raise ValueError("invalid A10 paired seed source")
+        seed_key = digest({"kind": kind, "config": source, "tag": tag, "index": index})
     # A disjoint high-bit namespace avoids overlap with legacy 32-bit seeds.
     # The wrapper expands this entropy for the legacy initializer.
-    return {**base, "id": f"{kind}_{key[:24]}", "seed": (1 << 128) | int(key[:32], 16), "seed_identity": key}
+    return {**base, "id": f"{kind}_{key[:24]}", "seed": (1 << 128) | int(seed_key[:32], 16), "seed_identity": seed_key}
 
 
 def configure_threads(count):
@@ -178,7 +189,7 @@ def lease(path):
         stream.close()
 
 
-def verify_registration(pin, repository=None):
+def verify_registration(pin, repository=None, *, instrument=None):
     """Read-only Git verification. A supplied hash alone is insufficient."""
     if not pin or set(pin) != {"commit", "path", "sha256"}:
         raise RuntimeError("registered mode needs a pinned, committed pre-registration hash")
@@ -191,6 +202,9 @@ def verify_registration(pin, repository=None):
     try:
         git("merge-base", "--is-ancestor", pin["commit"], "HEAD")
         committed = git("show", f"{pin['commit']}:{path.as_posix()}")
+        from .instrument import declaration
+        if declaration(instrument).a10 and b"Amendment A10" not in committed:
+            raise RuntimeError("registered A10 requires a design pin containing Amendment A10")
         if hashlib.sha256(committed).hexdigest() != pin["sha256"] or file_hash(repo / path) != pin["sha256"]:
             raise RuntimeError("pre-registration hash is stale")
         tracked = git("diff", "HEAD", "--", "simulation").strip()
