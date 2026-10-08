@@ -1528,3 +1528,220 @@ s is the welfare component of the executed action at a living-start step, as rec
 **The reading rule.** No threshold is set. For each stratum the check reports r_eff - 0.9 and the balanced-step share. That report closes D9's welfare condition. VIII.2's restatement is then entered as "the boundary's location follows from the demographic rules at the realized welfare level", with the realized level stated. It reads "at the balanced welfare level" only where every living-start step of every run in the stratum is at the balanced share.
 
 **The registration** of this check is the commit that adds this amendment.
+
+### Amendment A10, 2026-10-08: frontier velocity as a pace, and capability's benefit
+
+**The defect.** The instrument registered in section 3 measured the lineage factor's frontier velocity as a level, not a pace, and gave capability no benefit. Three consequences followed:
+- **Θ stayed below 1.** Under resolution R4, v = capability × technology stock. That is never zero while capability and technology are positive, so Θ < 1 at every living state. The specification's "Θ = 1 at no frontier" (S2) held only in a limit no run reaches.
+- **Capability had no benefit.** Decision D6 item 9 (2026-09-26) says capability enters "through measurable effects on execution, resource use and the frontier-to-transfer mismatch". R4 implemented the mismatch only, so a more capable AI produced no more useful computation and no more welfare.
+- **The threshold's scale was undeclared.** Bandwidth was mean welfare × transfer stock, so the scale at which u = 1 was implicitly 1, and was never argued.
+
+Together these meant that yielding to a more capable successor always carried a lasting penalty and never a gain. So the succession comparison in sections 3 and 6 could not measure what it was designed to measure.
+
+**How it was found, and what that means for this amendment.**
+- **This amendment follows registered results and was prompted by one.** Every registered reading had been opened and read in full on 2026-10-05:
+  - the main reading, sha256 51b3c63a6ae9f6546423dc553c219d92dbeaaea01c3e5370be9835fdbfce411a;
+  - the A6 reading, 6c8782f3a86a87aefb11102cd8da24fffac1ab70ff7959c07ad3370026ca3d5b;
+  - the A9 check, 91f9e0310d3b172a32249ee1a9320d5979237efa0ef83d58abc5b9c7cb14906d.
+- **The tracing.** The succession reading led to an exploratory diagnostic study, from 2026-10-05 to 07, after opening. The study traced the cause to the mapping above.
+- **Publication.** The readings and the study are published together, with their figures, once the reviewer clears them.
+- **Had the succession reading looked as expected, the mapping would not have been examined.**
+- **The mapping was accepted by the interpreter,** as an overnight resolution of 2026-09-27, and by the operator with the other resolutions (D19).
+- **Why the checks missed it.** The certification and gates tested the specification's stated properties, and a level satisfies all of them. None asked whether a stable incumbent can reach Θ = 1, or whether a modestly more capable successor can ever be preferred. The certification below adds both.
+
+**Timing and status.** Written on 2026-10-07 and approved on 2026-10-08.
+- **What was known when it was written:**
+  - the three readings above;
+  - the exploratory diagnostic study;
+  - an exploratory, table-free check of the corrected mechanics, on 2026-10-07;
+  - published measurements of how fast societies have absorbed new technology;
+  - a non-registered, cost-only pilot of the corrected code, on 2026-10-08 (section 12), which exported no outcome.
+- **No registered table, run or output under this amendment existed** when it was written, and none had been read.
+- **The registered results under R4 stand.** R1, R2, A6 and A9 keep their readings, gates and citation status. Nothing in them is re-read, re-scored or withdrawn, and they are reported beside this amendment's results.
+
+**The safeguards.**
+1. **How each value was set.**
+   - **The absorption anchor** comes from measured historical rates of growth in output per hour, chosen before any run under this amendment.
+   - **The window** is the model's own generation length.
+   - **The benefit's form** is declared as the simplest available, with a registered alternative.
+   - **The floors** follow from the specification's construction.
+2. **No value was set by reference to a fire rate, a survival rate or a margin.**
+   - The mechanics check informed three decisions, and none rests on a rate or a margin:
+     - the zero-technology floor, after the check halted on log(0);
+     - the capability domain, after it asked what the domain was;
+     - the bandwidth floor, after it showed by arithmetic that one sensitivity arm was inert.
+   - **The bandwidth floor change can only lower Θ.** Against the construction it replaces, it can only strengthen the penalty on fast change.
+3. **Nothing is adjusted toward a v2.0 figure.**
+   - v2.0 multiplied the lineage term by capability, which D6 item 9 removed.
+   - This amendment does not restore that. Capability enters only through computation and welfare production, the channels D6 named before any rerun.
+4. **If this amendment's results are not as predicted, no value below is changed in response.** Any further change would be a new decision and a new amendment, stating that it follows this amendment's results.
+
+**1. The instrument change** (decision D35):
+- **The frontier:** F_t = capability_t × max(technology_t, 0.01). The floor of one stock unit applies inside F only.
+- **Frontier velocity, a pace:**
+  - **The pace:** v_t = max(0, log F_t − log F_{t−30})/30.
+  - **The window:** 30 steps, one human generation in the model.
+  - **Before step 30,** the window starts at step 0, and the difference is still divided by 30.
+  - **Retreat:** a falling frontier is not an absorption burden.
+  - **At a handover,** a jump from c to c′ adds log(c′/c)/30 for 30 steps.
+- **Bandwidth, an absorption rate:**
+  - b_t = (log k\*/30) × (w_t·tr_t)/(w_ref·tr_ref), where w is mean living welfare and tr the transfer stock.
+  - k\* is the capability factor per generation that is exactly absorbable at the reference levels.
+  - Bandwidth is clipped uniformly at b_min′.
+- **Θ = φ_tr·exp(−α·max(0, u − 1))** as adopted, with u = v/max(b, b_min′) and φ_tr = exp(−(1 − tr)·v/v_max′).
+- **Computation (C1):** H_E = 1 − exp(−2.5·g(c)·x_compute).
+- **Welfare production (C2):** the welfare increment is max(40, 38 + 12·g(c)·share). The floor of 40 is unchanged, so the cohort bound's floor path remains a valid lower path.
+- **g(c) = c.** The registered alternative is g(c) = c^0.5. Since g(1) = 1, an AI at capability 1 behaves as before in both channels.
+- **Each plan is evaluated at its own capability:** the incumbent's before its handover, the successor's after.
+- **No risk credit.** Nothing credits capability with lower extinction risk. Risk stays with admission.
+- **The capability domain is [1, 5].** The instrument refuses a model whose capability lies outside it.
+
+**2. The evaluation horizons:**
+- **Yield reviews:** every plan in a yield review is simulated to 30 steps past the period's deadline, with common random numbers, and its continuation is then taken from the table.
+  - **Why:** the pace remembers 30 steps and the tables do not. This brings every handover's pace window inside the simulated horizon, so no part of the **pace** penalty is dropped.
+  - **Physical consequences** of a handover, such as the institutional drawdown, can outlast the window. They carry through the endpoint state into the continuation, as before.
+  - **After the deadline,** each plan follows its own stationary rule, as its continuation already assumes. The continuation is discounted from the extended endpoint.
+  - **Unchanged:** the decision window, the deadline, the plan class and the review grain.
+- **Allocation:** in the 30 steps after a handover, each allocation rollout extends over the rest of the pace window before its table continuation. At every other step it is unchanged (20 steps, then the table).
+
+**3. The registered constants.**
+
+| Constant | Value |
+|---|---|
+| τ | 30 steps |
+| k\* | 1.8 per generation; arms 1.5 and 2.3 |
+| tech_min | 0.01 |
+| w_ref, tr_ref | 0.8029014082336364, 0.7292628000000001: separate means over the 25,000 living observations of the calibration's recorded 50-seed B1 procedure at rr 0.080, regenerated |
+| v_max′ | log(500)/30 = 0.2071536032807397, over capability [1, 5] |
+| ε_L | 0.001412790614729507, unchanged |
+| b_min′(k\*) | min(0.014666388971338522, b_ref(k\*) × 0.325/(w_ref·tr_ref)), with b_ref(k\*) = log(k\*)/30: 0.007502 at k\* 1.5, 0.010875 at 1.8, 0.014666 at 2.3 |
+| g | c; arm c^0.5 |
+
+b_min′ is declared at a minimal absorptive state, founding conditions with welfare 0.65 and transfer 0.50, and capped at R4's construction. It satisfies Θ(v_max′, b_min′) ≤ ε_L at every α ≥ 0.5 in every arm.
+
+**4. Unchanged:**
+- the objective and its weights;
+- the yield rule and plan class;
+- admission: the cohort bound, survival-first and R14;
+- the rule class Π;
+- the other observables;
+- the demographic rule and the successor construction;
+- the survival rule and the horizon;
+- the calibration file, to which section 3's constants are added as a separate frozen and hashed record.
+
+**5. The runs.**
+- **R1′, its refinement grid and R2′** repeat section 6's grids, seed counts and seed derivation exactly, under the corrected instrument: 24,900 runs.
+- **Seeds:** each run's seed equals its R4 counterpart's, so every run is paired by seed with the registered run under R4.
+
+**6. Sensitivity:**
+- **A10's arms:**
+  - **Which:** k\* = 1.5, k\* = 2.3, and g(c) = c^0.5, each changing one value from the nominal.
+  - **Cells, seeds and comparisons:** A6's weight-corner arms', with 44 cells at 100 seeds, so 13,200 runs.
+  - **Tables:**
+    - the k\* arms change only Θ, so they re-score the nominal family's simulations;
+    - the c^0.5 arm changes the dynamics, so it has its own family, simulated per capability over its own contexts only.
+  - **The reading:** A6's rule (D33): percentile bootstrap intervals on the difference, arm minus nominal, at Bonferroni level 1 − 0.05/18. Materiality margins are 0.002 in rr and one capability step. The verdicts are moves materially, robust, inconclusive or undetermined.
+  - **The headline family:** the boundary in each arm, and cap\* at each α in each arm.
+- **A6:** re-registered unchanged on the corrected instrument, against its nominal.
+  - Its nominal-table arms run in stage 1.
+  - Its variant families run in stage 2, after R1′ and R2′, within a ceiling set by a later dated amendment (section 12).
+- **A9:** computed on R1′ exactly as A9 specifies, with no new simulation.
+
+**7. Tables.**
+- **A new nominal family** is estimated at the corrected code identity.
+- **Simulated per capability.** Under C2, capability enters the dynamics, so the physical simulations that the registered estimator shared across capabilities are made per reproduction rate and capability.
+- **Pace history.** Each table trajectory carries it. Continuation values are fitted only on steps 30 and later of each trajectory, so no fitted value comes from a step with an incomplete pace history.
+- **Fertility support.** The support rule that conditions the tables uses each capability's own maximum welfare increment.
+- **The table rules** of A1, A2, A4 and A5 apply to it, and to each arm's family, as they applied to the A4 family. A3 was superseded by A4.
+- **Registered mode** refuses any family from another code identity.
+
+**8. Gates.** Section 7 applies in full to the corrected instrument and to R1′ and R2′, as it applies to R1 and R2. Before the build, on 2026-10-07, the changed properties were certified by two certifiers from different model families, each blind to the other's work. Each property below held. One statement was narrowed to the pace penalty (section 2), and the comparison led to the allocation extension and the per-capability tables. The properties:
+- Θ's bounds, continuity in u, Θ = 1 at no frontier, and the floor guarantee;
+- the finiteness of u;
+- extinction dominance, with H_E^min unchanged at 0;
+- the cohort bound's floor path under C2;
+- the yield rule's derivation under section 2's horizon;
+- two properties R4 lacked:
+  - a stable incumbent with steady technology has Θ = 1;
+  - a successor of capability 1.2 is preferred at some declared state and α, by the formula alone.
+
+The S10 conformance tests are updated for the change, and pass.
+
+**9. Registered quantities.** Section 8, with A8's resolutions, applies to R1′ and R2′ unchanged. These are added, as descriptive diagnostics with no intervals:
+1. **The shadow decision:**
+   - **What is recorded:** at every yield review, admitted or not, the decision the plan comparison would make, together with the best immediate, later-yield and hold values. It acts only when the review is admitted.
+   - **Reported per R2′ cell:** among reviews with an immediate and a waiting plan available, the share whose shadow decision yields. It is reported for period 1 and for later periods separately.
+2. **Θ and bandwidth, per run:** over living-start steps,
+   - the mean of Θ;
+   - the share of steps at Θ = 1;
+   - the share with bandwidth at the floor b_min′.
+3. **Transitions, per run:** the count, and the final capability.
+
+**10. Readings.**
+- **Against v2.0:** section 9 and A8 apply to R1′ and R2′.
+- **R1′ against R4:** the paired difference in the boundary, using A8 item 4's bootstrap with each seed's pair kept together.
+  - **Unchanged:** the interval lies within ±0.002.
+  - **Moved lower** or **moved higher:** it lies wholly beyond that margin on that side.
+  - **Inconclusive:** otherwise.
+- **The cliff:** "cliff present" is reported as **non-vacuous** when cap\* is at least 1.2 at one α or more, and as **vacuous** otherwise.
+
+**11. Predictions, registered now and reported as right or wrong:**
+- **P4:** pooled R1′ survival is non-decreasing across the nine-point grid (P1's rule).
+- **P5:** at each rr from 0.055 to 0.062, pooled R1′ survival is at least v2.0's value minus two standard errors (P2's rule, with A8 item 2's values).
+- **P6:** the R1′ boundary has not moved higher than R4's (section 10's reading is not "moved higher").
+  - **The basis:**
+    - survival-first and the welfare floor are unchanged;
+    - after a handover to capability 1.5, C2 raises welfare production;
+    - the objective's own allocation acts only in admitted periods.
+- **P7:** at every α, the R2′ fire rate at capability 1.2, pooled over rr, is at least 0.5.
+  - **The basis:**
+    - a 1.2 handover's pace, log(1.2)/30 ≈ 0.0061 per step, is below bandwidth even at the floor, so only φ_tr penalizes it, by about 1 percent for 30 steps;
+    - its computation benefit is permanent;
+    - period 1's reviews are admitted from the founding state.
+- **P8:** R2′'s cap\* is non-increasing in α (the first part of A8 item 3's rule). **The basis:** the pace penalty grows with α, and the benefit does not depend on α.
+- **P9:** at α = 1.5, some tested capability fires at a rate strictly below 0.5. **The basis:** a jump of four or five times costs Θ heavily for 30 steps at α = 1.5. With the technology pace of a run's opening, where admission places most reviews, that cost outweighs the benefit at every bandwidth from the floor to the reference.
+- **P10:** in every R1′ cell, the equal-run mean of the per-run mean Θ over living-start steps is at least 0.95. **The basis:**
+  - Θ is 1 at a stable state;
+  - a handover to 1.5 lowers Θ by about 2 percent for 30 steps at reference bandwidth.
+
+**The author's expectation, stated before any run** (a prediction, not a criterion):
+- **Section 9's full cliff rule** (a failing capability at each of α 1.0, 1.25 and 1.5): about even.
+  - At α = 1.0, a jump of five times loses at the floor bandwidth and wins near the reference.
+  - Period 1's reviews come as bandwidth rises from the one toward the other, and waiting plans can choose the later review.
+- **The location against v2.0's (5.0, 3.0, 2.5, 2.0, 2.0):**
+  - at the top at α 0.5;
+  - consistent or higher at most other α;
+  - possibly lower at α 1.5, if the first review decides.
+- **The shadow decision:** yielding preferred at most capabilities at α ≤ 1.0, in every period. The yield share falls with capability at α 1.5.
+- **R1′ against R4:** unchanged or moved lower. A lower boundary would come from C2's added welfare production after handovers.
+- **The arms:**
+  - k\* = 1.5 lowers cap\* at α ≥ 1.0;
+  - k\* = 2.3 raises it;
+  - g = c^0.5 lowers it, or leaves it at the top, because the benefit is smaller against the same penalty.
+
+**12. Cost, and the two stages.**
+- **The measured pilot.** A non-registered, cost-only pilot ran on 2026-10-08: 77 full-length sampled jobs over the declared strata, at the corrected code.
+  - It measured cost only. No outcome was exported or read.
+  - Its conservative projection, under the registered conventions, is 979 X2 hours for stage 1 below, and 2,626 for everything.
+- **Stage 1, the nominal family,** with a ceiling of **980 X2-equivalent hours** (operator, 2026-10-08). It covers:
+  - the nominal table family, including the k\* arms' scoring, which shares its simulations;
+  - R1′, the refinement grid and R2′;
+  - the k\* arms' runs;
+  - A6's arms that use the nominal tables (the weight corners and the horizon).
+- **Stage 2, the rest:** the c^0.5 arm, and A6's variant families on the corrected instrument (crowding, σ0² ×10 and ×0.1), with their tables and runs.
+  - They stay registered by this amendment, unchanged in design.
+  - Each launches only after a dated amendment sets its ceiling, committed before that launch.
+  - A7's 90-hour ceiling applies to A6 on the R4 instrument only.
+- **The rules for ceilings:**
+  - a ceiling is a budget, never a quantity, reading or prediction;
+  - if a measured projection exceeds its ceiling, section 6's rule applies;
+  - nothing is cut after a registered output is read.
+
+**13. Order and code identity.**
+1. This text is committed and pushed first. It does not change the code identity.
+2. The certified implementation is committed next, and its identity recorded.
+3. The tables and runs run from their own checkout at that commit, which never receives later commits.
+4. Each registered launch needs the operator's go and the pre-launch configuration test.
+5. The registered readings are computed sealed and opened on the operator's go, as for R1 and R2.
+
+**Unchanged.** A10 changes no registered quantity, reading, prediction, gate or citation rule of R1, R2, A6 or A9 under R4.
