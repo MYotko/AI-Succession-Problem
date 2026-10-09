@@ -23,7 +23,7 @@ code commit. It is a release placeholder, not a value to infer from a moving bra
 | --- | --- |
 | Public repository | `https://github.com/MYotko/AI-Succession-Problem.git` |
 | Implementation commit | `<CODE_COMMIT>` |
-| Code identity, LF-normalized | `dd1b1a882649c9b4d3643d9a9351195c39925a383d87f3a3584d7087aaa5a832` |
+| Code identity, LF-normalized | `c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810` |
 | Design-note commit | `411cbdbdb6a8a5fd32b2bbbc01289fb3e198bed5` |
 | Design-note path | `simulation/diagnostics/v3_rerun_design_note.md` |
 | Design-note SHA256, committed bytes | `1fe04079a8474ee9a0043dd0d5d661c805f5a468f1421e5ef4735f6af539a05e` |
@@ -74,7 +74,7 @@ export LABEL_RUN="$A10_ROOT/nominal/labels_run"
 export LABELS="$A10_ROOT/nominal/v3_rerun_labels_A10.json"
 export PROBE="$A10_ROOT/inputs/a3_probe"
 export COST="$A10_ROOT/inputs/a10_pilot_P2_projection_2026-10-08.json"
-export EXPECTED_CODE=dd1b1a882649c9b4d3643d9a9351195c39925a383d87f3a3584d7087aaa5a832
+export EXPECTED_CODE=c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810
 export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
 export NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
 mkdir -p "$A10_ROOT/inputs" "$A10_ROOT/specs" "$A10_ROOT/checks"
@@ -393,8 +393,9 @@ PY
   local runner_pid=$!
   printf '%s\n' "$runner_pid" > "$root/supervisor.pid"
   nohup "$HOME/status-board/run_watchdog.sh" "$runner_pid" \
-    "$A10CO/simulation/$root" "$total" "$board" 7200 \
+    "$A10CO/simulation/$root" "$total" "$HOME/status-board/$board" 7200 \
     </dev/null >"$root/watchdog.log" 2>&1 &
+  printf '%s\n' "$!" > "$root/watchdog.pid"
   # Wait for this attempt's machine record before starting the guarded local RPC.
   "$PYTHON" -B - "$root" "$runner_pid" "$previous_launches" <<'PY'
 import os, platform, sys, time
@@ -467,10 +468,27 @@ upper bound, not a choice of 31 workers. The configuration candidates include
 8, 12, 16, 24 and 32; 32 can be tested under the configuration cap but cannot
 win a 31-worker production cap. Memory can lower the tested and active counts.
 The runner prefers the smaller measured configuration within 5 percent.
+The X2 profile requires a worker cap of at least 8. A smaller `--workers`
+or persisted `--max-workers` is refused before configuration. Host caps and
+modes persist across departures and rejoins; a larger worker command alone
+does not replace them. An approved host's persisted controls can be corrected
+while it is departed or before its first join:
+
+```bash
+"$PYTHON" -B -m v3.production_runner control "$RUN_ROOT" \
+  --host yotko-evo-x2 --mode normal --max-workers 8 --stop clear
+```
+
+Use the cap approved for the workload, at least 8 on X2. This example repairs
+the four-worker lockout found in rehearsal. It does not choose eight workers
+for stage 1; the configuration test still makes that choice within the cap.
 Inspect only selection, completed-work throughput and verified thread limits
 in the runtime/configuration metadata. One numerical thread per worker.
 
 The watchdog line in `launch_x2` is the board command for every launch below.
+Its OUT argument is absolute, under `$HOME/status-board/`, because the watchdog
+otherwise resolves it relative to its working directory. Pass only the JSON
+basename as the helper's fourth argument.
 `TOTAL` is the frozen job count, not the count of table rows or tested cells.
 Check the board JSON has `done`, `total`, `started_epoch`, `updated_epoch` and
 `complete` only when the launch record is complete; failed or stalled must
@@ -502,6 +520,39 @@ there is no complete scientific checkpoint. Never delete `budget.json`, change
 the manifest under a root, clear completion records, or reset an expired
 deadline. An incompatible-resume, seed, source, Context, memory, screen,
 nondeterminism or projection failure is a finding for the operator.
+
+Global stops record `operator_stop_drain` or `operator_stop_now`, with
+`stopped_epoch`, in `launches.json` and the operational journal. Clearing the
+control for a new attempt does not erase a finished attempt's stop history.
+`production_runner status` and the root and phase status files expose
+`waiting_for` with `reason`, `phase` and `since_epoch`. A cross-host recheck
+wait names the excluded original host. Other reasons identify missing eligible
+hosts, configuration, input acknowledgements or memory. These diagnostics do
+not waive the phase barrier or make an idle worker leave automatically.
+
+After a coordinator kill, its old watchdog records failure and exits because
+it watched the dead PID. The board continues to show that earlier failure
+until a new watchdog is attached to the restarted coordinator, using the same
+absolute OUT file. Repeating `launch_x2` after the resume go performs this
+attachment. If restarting the coordinator command directly, immediately attach
+the watchdog to its new PID:
+
+```bash
+# Use the same root, frozen total and board basename as the original launch.
+export BOARD_NAME='<THE_SAME_BOARD_BASENAME>.json'
+export TOTAL='<THE_SAME_JOB_COUNT>'
+export NEW_COORDINATOR_PID='<PID_OF_THE_RESTARTED_COORDINATOR>'
+nohup "$HOME/status-board/run_watchdog.sh" "$NEW_COORDINATOR_PID" \
+  "$A10CO/simulation/$RUN_ROOT" "$TOTAL" "$HOME/status-board/$BOARD_NAME" 7200 \
+  </dev/null >>"$RUN_ROOT/watchdog.log" 2>&1 &
+```
+
+Workers stop after coordinator session loss. Restart each worker supervisor
+with its original host command after the new coordinator is ready; do not
+assume an old idle process will rejoin. Check `host_exit.json`, the new session
+IDs and per-host status. On X2, verify service restoration before starting a
+replacement service-supervised worker. Outstanding late completions still
+follow the unchanged lease and duplicate rules.
 
 A `projection_exceeds_budget` stop is incomplete and is recorded in
 `launches.json`. It closes all host charging intervals at the stop timestamp.
@@ -751,7 +802,7 @@ The runner uses the five phases in the plan: fit, plain validation, primary FV
 validation, larger-memory FV validation, and census. Configuration tests run
 before scientific dispatch, and each phase is preceded by a projection of all
 remaining work. Every nonempty phase gets the recorded nondeterminism recheck.
-The watchdog uses total `$VAL_N` and `a10_stage1_validation.json`.
+The watchdog uses total `$VAL_N` and `$HOME/status-board/a10_stage1_validation.json`.
 
 The publisher rechecks input hashes, seeds, M, M_FV, the code and every durable
 stage output. Expected publication: 19,500 primary rows, zero `not_estimable`,
@@ -904,7 +955,7 @@ the forbidden seeds, code identity, and frozen settings. The producer writes
 labels for every tested cell and preserves the table, receipt and sidecar.
 Keep the sealed label artifact and hash; do not run `table_labels_a5 report`.
 
-The watchdog total is `$LABEL_N`, output `a10_stage1_labels.json`. On a
+The watchdog total is `$LABEL_N`, output `$HOME/status-board/a10_stage1_labels.json`. On a
 projection stop, interruption, or any identity failure, use section 4. Do not
 split or reset the sealed plan to escape its declared ceiling. Preserve its
 completed records and original deadline under section 4.
@@ -1131,7 +1182,7 @@ join mid-phase. On X2, use its exact `platform.node()` string for controls:
 "$PYTHON" -B -m v3.production_runner control "$RUN_ROOT" --host '<WSL_HOST>' --mode work --max-workers 12
 "$PYTHON" -B -m v3.production_runner control "$RUN_ROOT" --host '<WSL_HOST>' --stop drain
 # Wait for host running=0 and an ended session. The host leaves automatically.
-# Rejoin later with the same worker command; clear the persisted drain:
+# These controls also work while the approved host is departed, before rejoin:
 "$PYTHON" -B -m v3.production_runner control "$RUN_ROOT" --host '<WSL_HOST>' --stop clear
 ```
 
@@ -1151,6 +1202,13 @@ that local loopback tests have qualified the real machines. Do not read outcomes
 Retain the exact plan, qualification, register, fault/restart timestamps, board
 statuses, publication hashes and final receipt. No fixture artifact enters
 stage 1. Each command below runs in the fresh A10 checkout at `<CODE_COMMIT>`.
+
+The interpreter reports that the real X2/WSL rehearsal at ad675011, identity
+dd1b1a88, passed qualification bit identity, toy publication and receipt, killed
+remote recovery, coordinator restart with eight voided leases and retained
+completions, drain, and an X2-to-WSL recheck. The corrections below address its
+operational findings. Retain that evidence and verify the corrected release;
+do not reuse an old-identity root with new code.
 
 On X2, create the toy estimation plan. Its jobs keep A10 formulas and full toy
 settings; no registered manifest is shortened:
@@ -1184,41 +1242,65 @@ export SPEC="$REH/source/tables_A1_manifest.json" RUN_ROOT="$REH/source/tables_A
 
 Perform section 4a's qualification, comparison and explicit host approvals with
 `QUAL=$REH/qualification/estimate`. The X2 and WSL each re-execute at least 20
-short jobs. Start the non-registered coordinator directly (do not call the
-registered-only `check_spec` or `launch_x2` helper):
+short jobs. Define this helper for the non-registered coordinator and each
+restart. It attaches a new watchdog to the new PID with an absolute OUT file
+and waits for the new launch record. Do not call the registered-only
+`check_spec` or `launch_x2` helper for a rehearsal:
 
 ```bash
-setsid nohup "$PYTHON" -B -m v3.production_runner launch "$SPEC" "$RUN_ROOT" \
-  --profile x2 --workers 31 --threads 1 --cpu-budget 32 --mode normal \
-  </dev/null >>"$RUN_ROOT/coordinator.log" 2>&1 &
-printf '%s\n' "$!" > "$RUN_ROOT/supervisor.pid"
+rehearsal_coordinator() {
+  local previous_launches total runner_pid
+  previous_launches=$("$PYTHON" -B - "$SPEC" "$RUN_ROOT" <<'PY'
+import sys
+from pathlib import Path
+from v3.artifacts import read, unseal
+assert unseal(read(sys.argv[1]))['registered'] is False
+path=Path(sys.argv[2])/'launches.json'
+print(len(read(path)) if path.exists() else 0)
+PY
+  )
+  total=$("$PYTHON" -B - "$SPEC" <<'PY'
+import sys
+from v3.artifacts import read, unseal
+print(len(unseal(read(sys.argv[1]))['jobs']))
+PY
+  )
+  setsid nohup "$PYTHON" -B -m v3.production_runner launch "$SPEC" "$RUN_ROOT" \
+    --profile x2 --workers 8 --threads 1 --cpu-budget 32 --mode normal \
+    </dev/null >>"$RUN_ROOT/coordinator.log" 2>&1 &
+  runner_pid=$!
+  printf '%s\n' "$runner_pid" > "$RUN_ROOT/supervisor.pid"
+  nohup "$HOME/status-board/run_watchdog.sh" "$runner_pid" \
+    "$A10CO/simulation/$RUN_ROOT" "$total" "$HOME/status-board/$BOARD_NAME" 7200 \
+    </dev/null >>"$RUN_ROOT/watchdog.log" 2>&1 &
+  printf '%s\n' "$!" > "$RUN_ROOT/watchdog.pid"
+  "$PYTHON" -B - "$RUN_ROOT" "$runner_pid" "$previous_launches" <<'PY'
+import os, platform, sys, time
+from pathlib import Path
+from v3.artifacts import read
+path=Path(sys.argv[1])/'launches.json'
+while True:
+    os.kill(int(sys.argv[2]),0)
+    history=read(path) if path.exists() else []
+    if len(history)>int(sys.argv[3]):
+        assert history[-1]['machine']==platform.node()
+        assert history[-1]['code_hash']==os.environ['EXPECTED_CODE']
+        assert not history[-1].get('finished_epoch')
+        break
+    time.sleep(1)
+PY
+}
+export BOARD_NAME=a11_rehearsal_estimate.json
+rehearsal_coordinator
 ```
 
 Start X2's worker with section 4's `v3.host_a11` command, and WSL with section
 12's command, substituting the rehearsal root and separate rehearsal scratch.
-Attach the existing watchdog to the coordinator as in section 4. While a WSL
-lease is active, kill only its own detached process group from WSL:
-
-```bash
-# WSL only, after verifying this PID belongs to this rehearsal host supervisor.
-pid=$(cat "$SCRATCH/supervisor.pid")
-ps -o pid,pgid,args -p "$pid"
-kill -KILL -- "-$pid"
-```
-
-Wait one declared lease (120 seconds), then verify `lease_expired` and that X2
-restarts that same job ID/seed with a new lease. There must be no completion
-record for a partial remote file. Restart WSL with the same host command.
-If the toy work finished before the fault, create a new **non-registered**
-rehearsal root and repeat; never delete a root's completed records.
-
-Kill only the rehearsal coordinator PID on X2 and restart the identical
-coordinator command/root before its original deadline. Rejoin both hosts;
-verify generation increments, old leases are `void_on_resume`, and completed
-hashes/counts persist. Drain WSL with the per-host command, observe no new
-leases, let its jobs finish and observe its ended session. Clear its persisted
-drain after rejoin if it is needed for the cross-host phase recheck. The check
-must name different original/recheck hosts when both worked in that phase.
+The small toy jobs took about 0.2 seconds in the interpreter's rehearsal and
+are too fast for reliable fault injection. Complete their publication pipeline
+first. Use the separate longer drill below for killed-remote, restart and
+drain cases. Each phase uses a distinct board basename, retained across that
+phase's restarts.
 
 Complete the toy table pipeline, using the same single-root publication calls:
 
@@ -1298,6 +1380,158 @@ print({'non_registered':True,'family_sha256':file_hash(r/'family.json'),
 PY
 ```
 
+For fault injection, build three fresh non-registered roots under a separate
+drill folder. Every job has 24,000 measured steps, about a minute on X2 by the
+interpreter's planning estimate. Record actual times; this is not a new cost
+projection. The 24 physical contexts are declared pairs in the square-root
+family: five shared capabilities at each of 0.060, 0.062, 0.064 and 0.066,
+plus four additional declared capabilities at 0.064. The builder emits 42
+jobs because the sensitivity settings at 0.064 are also declared. Every
+drill job retains the full 24,000-step measurement length.
+
+```bash
+export DRILL="$REH/drill"
+mkdir -p "$DRILL"
+"$PYTHON" -B - <<'PY'
+import os
+from pathlib import Path
+from v3.artifacts import atomic_json, seal, stable_job, read
+from v3.tables_a10 import build_jobs, contexts, estimation_spec
+from v3.multihost_a11 import freeze
+r=Path(os.environ['DRILL']); cal='v3/runs/registered/v3_rerun_calibration.json'
+physical=[(rr,c) for rr in (.060,.062,.064,.066) for c in (1.,1.5,2.25,3.375,5.)]
+physical += [(.064,c) for c in (1.2,1.8,2.,2.5)]
+assert len(set(physical))==24
+assert set(physical) <= {(rr,c) for rr,alpha,c in contexts('sqrt')}
+settings=dict(groups=3,runs_per_group=2,particles=2,burn=30,measure=24000)
+jobs=build_jobs('sqrt',cal,settings_override=settings,
+    kernel_override=dict(n_agents=64,carrying_capacity=640),rule_ids=['balanced'],
+    physical_contexts=physical)
+jobs=[stable_job(j['kind'],dict(j['config'],route='plain' if j['config']['kernel']['capability']==1. else 'fv'),
+                j['tag'],j['index']) for j in jobs]
+assert len(jobs)==42 and all(j['config']['settings']['measure']==24000 for j in jobs)
+spec=freeze(estimation_spec('sqrt',cal,jobs=jobs,wall_hours=2),read(os.environ['COST']),
+            code_commit=os.environ['CODE_COMMIT'])
+for case in ('killed_remote','coordinator_restart','drain'):
+    target=r/case/'spec.json'
+    assert not target.exists() or read(target)==seal(spec)
+    atomic_json(target,seal(spec))
+print({'non_registered':True,'physical_contexts':24,'jobs_per_case':42,
+       'measured_steps_per_job':24000,'cases':3})
+PY
+```
+
+Run each case in its own root, completing it and restoring the X2 service
+before the next case. Set `CASE` to `killed_remote`, then
+`coordinator_restart`, then `drain`. For each case, prepare, qualify and approve
+both hosts using section 4a with the case's `QUAL` path. The short qualification
+and configuration jobs are separate from the 24,000-step drill jobs.
+
+```bash
+export CASE=killed_remote
+export SPEC="$DRILL/$CASE/spec.json" RUN_ROOT="$DRILL/$CASE/root"
+export QUAL="$DRILL/$CASE/qualification"
+export BOARD_NAME="a11_drill_${CASE}.json"
+"$PYTHON" -B -m v3.multihost_a11 prepare "$SPEC" "$RUN_ROOT"
+# Complete section 4a's qualification and explicit approvals for this root.
+rehearsal_coordinator
+export SCRATCH="$RUN_ROOT/host_x2"
+mkdir -p "$SCRATCH"
+setsid nohup "$PYTHON" -B -m v3.host_a11 --local --root "$RUN_ROOT" \
+  --scratch "$SCRATCH" --profile x2 --workers 8 --cpu-budget 32 --mode normal \
+  </dev/null >>"$SCRATCH/worker.log" 2>&1 &
+printf '%s\n' "$!" > "$SCRATCH/supervisor.pid"
+```
+
+On WSL, use the same case name and this four-worker command. This is a remote
+SSH host; `--profile local` does not select the local transport.
+
+```bash
+cd "$HOME/v3_a10/simulation"
+export PATH="$HOME/miniforge3/envs/phaseb/bin:$HOME/.local/bin:$PATH"
+export PYTHON="$HOME/miniforge3/envs/phaseb/bin/python3.13"
+export CASE=killed_remote
+export RUN_ROOT="v3/runs/a11_rehearsal/drill/$CASE/root"
+export SCRATCH="v3/runs/a11_rehearsal/host_wsl/drill/$CASE"
+mkdir -p "$SCRATCH"
+setsid nohup "$PYTHON" -B -m v3.host_a11 \
+  --coordinator yotko@100.96.61.55 --checkout /home/yotko/v3_a10 \
+  --root "$RUN_ROOT" --scratch "$SCRATCH" --profile local \
+  --workers 4 --cpu-budget 16 --mode work </dev/null >>"$SCRATCH/worker.log" 2>&1 &
+printf '%s\n' "$!" > "$SCRATCH/supervisor.pid"
+```
+
+For `killed_remote`, wait until both hosts have taken work and WSL has an
+active lease. On WSL verify that this process group belongs to this case,
+then kill it:
+
+```bash
+pid=$(cat "$SCRATCH/supervisor.pid")
+ps -o pid,pgid,args -p "$pid"
+kill -KILL -- "-$pid"
+```
+
+After its declared 120-second lease expires, check `lease_expired`, and that
+X2 receives the same job ID and seed under a new lease. A partial remote file
+must have no completion record. Restart the WSL worker with the identical
+command. Require all 42 completions and the cross-host recheck before closing
+this case. If the intended fault window is missed, create another fresh
+non-registered root; never delete completions or extend a frozen deadline.
+
+For `coordinator_restart`, use the separate case root and start both hosts
+as above. Record the epoch, completed output hashes and active leases, then
+kill only that case's coordinator on X2:
+
+```bash
+pid=$(cat "$RUN_ROOT/supervisor.pid")
+ps -o pid,pgid,args -p "$pid"
+kill -KILL "$pid"
+# Observe the old watchdog's failure and exit before replacing it.
+ps -o pid,pgid,args -p "$(cat "$RUN_ROOT/watchdog.pid")" || true
+# Same SPEC, RUN_ROOT and BOARD_NAME; before the original deadline:
+rehearsal_coordinator
+```
+
+The helper writes a new coordinator PID and attaches a new watchdog to it,
+using the same `$HOME/status-board/a11_drill_coordinator_restart.json` OUT
+file. The board shows the old failure until that attachment produces an
+update. Restart both worker supervisors after they have stopped on session
+loss; an old worker does not automatically rejoin. Verify the epoch increments,
+old leases are `void_on_resume`, completed hashes/counts persist, and any
+valid late completions are accepted or compared. X2 remains capped at 8 and
+WSL at 4. Record their replacement session IDs and service restoration.
+
+For `drain`, use its fresh root and start the same two hosts. While WSL has
+active work, on X2 run:
+
+```bash
+"$PYTHON" -B -m v3.production_runner control "$RUN_ROOT" --host '<WSL_HOST>' --stop drain
+"$PYTHON" -B -m v3.production_runner status "$RUN_ROOT"
+# Verify no new WSL leases, its in-flight completions, and session end_reason=left.
+```
+
+Draining the last non-original host before the phase recheck deliberately
+leaves the phase waiting. All 42 jobs may be complete while the original host
+cannot perform its own cross-host recheck. Check the root and phase
+`waiting_for` reason, phase and `since_epoch`; the wait persists without
+silently completing or relaxing the check. Clear the departed host's persisted
+drain and restart its worker:
+
+```bash
+"$PYTHON" -B -m v3.production_runner control "$RUN_ROOT" \
+  --host '<WSL_HOST>' --mode work --max-workers 4 --stop clear
+# On WSL restart the same four-worker host command for CASE=drain.
+```
+
+The wait must clear when the required host is ready, and the recorded check
+must name different original and recheck hosts with `matched: true`. If the
+original sampled job ran on WSL, arrange the symmetric case instead of
+assuming X2 was original. Do not force the sampled job or alter its seed.
+For each drill require `launches.json[-1].complete`, 42 durable completion
+records, a matched phase check, no nondeterminism failure, and restored X2
+service. Retain the manifests, qualification, register, journal, statuses,
+stop/restart timestamps, output hash inventories and checks; read no outcomes.
+
 Have the interpreter review the retained fault records, board behavior and
 publication checks. The operator records approval in the sealed operational
 `$A10_ROOT/checks/A11_rehearsal_approved.json`, naming the rehearsal roots,
@@ -1332,6 +1566,17 @@ record={'schema':'v3-A11-rehearsal-approval-1','passed':True,'non_registered':Tr
     'code_hash':code_identity(),'reviewer':review['reviewer'],
     'operator_approval':{'operator':operator,'when':when},
     'rehearsal_root':str(r.resolve()),'files':{p:file_hash(r/p) for p in paths}}
+for case in ('killed_remote','coordinator_restart','drain'):
+    spec=r/'drill'/case/'spec.json'; root=r/'drill'/case/'root'
+    from v3.production_runner import completed
+    jobs=unseal(read(spec))['jobs']
+    assert len(jobs)==42 and all(completed(root/'table',j,code_identity()) is not None for j in jobs)
+    assert read(root/'launches.json')[-1]['complete']
+    assert read(root/'table/nondeterminism_check.json')['matched']
+    assert not (root/'nondeterminism_failure.json').exists()
+    record.setdefault('drills',{})[case]={'spec_sha256':file_hash(spec),
+        'launches_sha256':file_hash(root/'launches.json'),
+        'check_sha256':file_hash(root/'table/nondeterminism_check.json')}
 target=Path(os.environ['A10_ROOT'])/'checks/A11_rehearsal_approved.json'
 assert not target.exists() or read(target)==seal(record)
 atomic_json(target,seal(record))
@@ -1537,10 +1782,13 @@ all verify. R4 compatibility and runner resume checks are unchanged.
    980-hour program ledger. Keep section 3's manual reservations and consumption
    records. Estimation and reruns still need the operator's budget projection
    check; they do not have A4's automatic remaining-work projection gate.
-2. **Machine validation and collection:** local loopback tests do not establish
-   X2/WSL bit identity or SSH/watchdog behavior. Section 12a must pass on the real
-   machines. Each component now has one root, so no remote-result merge is
-   needed. The later sealed reader still collects five component roots.
+2. **Machine validation and collection:** the interpreter's ad675011 rehearsal
+   established X2/WSL bit identity and the reported recovery/publication cases
+   at dd1b1a88. It also found the cap, stop, wait and watchdog issues corrected
+   here. Section 12a must verify the corrected release on the real machines;
+   local tests cannot replace that check. Each component has one root, so no
+   remote-result merge is needed. The later sealed reader still collects five
+   component roots.
 3. **Publication precondition:** the producers accept the extra completion
    fields unchanged. Their existing interfaces do not independently enforce a
    coordinator halt record; `check_done` and the explicit no-failure checks are
@@ -1555,7 +1803,7 @@ in the comparison. Envelope host, PID and runtime metadata are outside
 `{job, result}`. The proof record declares these exclusions explicitly.
 
 This Markdown file is outside `source_manifest()`. The A11 implementation and
-exact-hash re-pins change the code identity to `dd1b1a882649c9b4d3643d9a9351195c39925a383d87f3a3584d7087aaa5a832`.
+exact-hash re-pins change the code identity to `c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810`.
 R4 scientific behavior and the legacy 24-hour label contract remain unchanged.
 The source identity must match committed release bytes before launch.
 

@@ -4497,3 +4497,36 @@ It also needs the registered A8/A9/A10 reading rules, predictions and after
 gates, plus separately authorized R4 comparison identities. The single
 24,900-job main root feeds `gates.build_index` directly. No reading, registered
 result, real-machine rehearsal, or Git write was performed for this note.
+
+
+### Rehearsal on the X2 and WSL, and its fixes
+
+The interpreter ran the non-registered rehearsal at `ad675011` (identity
+`dd1b1a88`), with the X2 as coordinator and local worker and WSL as an SSH
+worker. Qualification passed in every folder, with WSL bit-identical to the
+X2 reference. The toy pipeline passed estimation, A4 publication, A5
+publication at a declared 1.25-hour ceiling, and receipt finalization.
+
+The drill folder used about one-minute jobs. A WSL host was killed while
+holding four leases; they expired and were re-leased to the X2 with no
+partial completion record. Killing and restarting the coordinator moved the
+epoch from 1 to 2, voided eight leases on resume, and preserved completions.
+Draining WSL prevented new leases while its jobs finished. The cross-host
+recheck matched, with the X2 as original host and WSL as recheck host.
+
+The rehearsal findings were fixed at identity `c19b54f5`:
+
+- F1: a departed host's persisted cap could prevent rejoining. `control --host`
+  now changes that cap after departure, and control and join refuse caps below
+  the profile's minimum configuration candidate.
+- F4: operator stops now record their reason and epoch in launch history and
+  the journal.
+- F5: blocked barriers now have a `waiting_for` explanation in root and phase
+  status, including a wait for an eligible cross-host recheck host.
+- F2, F3 and F6: the runbook now states the X2 minimum cap of eight, uses
+  absolute watchdog OUT paths, and requires a new watchdog attached to the
+  new coordinator PID after restart.
+
+A short re-rehearsal at the new identity is required before registered use.
+The rehearsal approval must name the code identity used; the successful
+`dd1b1a88` rehearsal does not approve the fixes at `c19b54f5`.

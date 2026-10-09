@@ -221,8 +221,9 @@ class Coordinator:
     def save(self, force=False):
         # Only touched rows enter the durable chained log. Status is a bounded
         # rate diagnostic snapshot, never dispatch's source of truth.
+        self.refresh_waiting()
         terminal = [self.state['halt'], self.state['complete'], self.state.get('stop_reason'),
-                    self.phase, self.state['epoch']]
+                    self.phase, self.state['epoch'], self.state.get('operator_stop'), self.state.get('waiting_for')]
         previous = self.store.get('status')
         due = force or previous['epoch'] is None or self.now - previous['epoch'] >= 2 or terminal != previous['terminal']
         self.store.commit()
@@ -236,7 +237,8 @@ class Coordinator:
                     'running': running, 'pending': total - done, 'hosts': status['hosts'],
                     'started_epoch': self.state['started'], 'updated_epoch': self.now,
                     'complete': done == total and (not total or self.state['checks'].get(phase, {}).get('matched', False)) and not self.state['halt'],
-                    'reason': self.state['halt'] or self.state.get('stop_reason') or ('complete' if self.state['complete'] else 'pull')})
+                    'waiting_for': status['waiting_for'] if phase == self.phase else None,
+                    'reason': self.state['halt'] or status['reason'] or ('complete' if self.state['complete'] else 'pull')})
             if force or terminal != previous['terminal']:
                 atomic_json(self.root / 'pull_state.json', seal(dict(self.store.small_state(),
                     operational_store='dispatch.sqlite', checkpoint_only=True)))
@@ -276,6 +278,7 @@ class Coordinator:
                 'coordinator': self.state.get('monitor_required', False) and self.now - self.state.get('monitor_epoch', 0) >= self.ttl}
 
     def status(self):
+        self.refresh_waiting()
         hosts = {}
         for sid, s in self.state['sessions'].items():
             row = hosts.setdefault(s['host'], {'completed': 0, 'running': 0, 'sessions': [], 'worker_seconds': 0})
@@ -287,10 +290,71 @@ class Coordinator:
         for l in self.active():
             hosts[l['host']]['running'] += 1
         return {'phase': self.phase, 'complete': self.state['complete'], 'halt': self.state['halt'],
-                'completed': len(self.done), 'pending': len(self.jobs) - len(self.done), 'hosts': hosts, 'reason': self.state.get('stop_reason'),
+                'completed': len(self.done), 'pending': len(self.jobs) - len(self.done), 'hosts': hosts,
+                'reason': self.stop_reason(), 'waiting_for': self.state.get('waiting_for'),
+                'host_controls': self.state.get('host_controls', {}),
                 'x2_equivalent_hours': self.charged_seconds() / 3600, 'stops': self.stops(), 'epoch': self.now,
                 'hard_stop': self.state['control']['interrupt_now'] or self.stops()['coordinator'] or (self.state['started'] is not None and
                     self.now >= self.state['started'] + self.spec['wall_seconds'])}
+
+    def stop_reason(self):
+        return self.state.get('stop_reason') or (self.state.get('operator_stop') or {}).get('reason')
+
+    def refresh_waiting(self):
+        """Diagnostic only: explain a blocked phase without changing eligibility.
+
+        Visit present hosts and indexed queue heads, never the full job set.
+        Keep the first timestamp until the phase or reason actually changes.
+        """
+        reason = self.waiting_reason()
+        old = self.state.get('waiting_for')
+        if reason is None:
+            self.state['waiting_for'] = None
+        elif not old or old['phase'] != self.phase or old['reason'] != reason:
+            self.state['waiting_for'] = dict(reason=reason, phase=self.phase, since_epoch=self.now)
+
+    def waiting_reason(self):
+        phase = self.phase
+        if phase is None or self.state['complete'] or any(self.stops().values()):
+            return None
+        if any(l['phase'] == phase for l in self.active()):
+            return None  # Active work/checks can still advance the barrier.
+        total, done = self.store.counts(phase)
+        if not total or (total == done and self.state['checks'].get(phase, {}).get('matched')):
+            return None
+        present = [s for s in self.state['sessions'].values() if s['end'] is None and not s['control']['drain']]
+        sample, original = None, None
+        if done == total:
+            sample = self.jobs[self.state['sample_jobs'][phase]]
+            if len(self.phase_hosts(phase)) > 1:
+                original = self.done[sample['id']]['host']
+            kinds = {sample['kind']}
+        else:
+            kinds = {r[0] for r in self.store.db.execute('SELECT kind FROM queues WHERE phase=? AND n>0', (phase,))}
+        eligible = [s for s in present if s['host'] != original and kinds.intersection(self.member(s['host'])['kinds'])]
+        if not eligible:
+            if original is not None:
+                return 'cross_host_recheck: needs a host other than ' + original + '; join or clear drain on a qualified host'
+            return 'no_eligible_host: join or clear drain on an approved host qualified for phase ' + phase
+        if self.spec['schema'] in ('v3-A4-validation-1', 'v3-A5-labels-1') and not self.projection_ready():
+            return 'configuration_not_ready: present hosts must finish their required configuration tests or be drained'
+        chosen = [s for s in eligible if phase in s['chosen']]
+        if not chosen:
+            return 'configuration_not_ready: no eligible host has a measured configuration for phase ' + phase
+        ready = [s for s in chosen if s['ready'].get(phase)]
+        if not ready:
+            return 'inputs_not_ready: eligible hosts must verify and acknowledge the input snapshot for phase ' + phase
+        observed = self.state.get('observed_memory_gb', {})
+        for s in ready:
+            entry = self.member(s['host'])
+            memory = .8 * min(entry['memory_gb'], s.get('memory_available_gb', entry['memory_gb']))
+            if sample is not None:
+                key, cost = self.store.cost(sample)
+                if max(cost['memory_gb'], observed.get(key, 0)) <= memory:
+                    return None
+            elif self.store.candidate(phase, entry['kinds'], memory, observed) is not None:
+                return None
+        return 'no_eligible_host: pending work or recheck does not fit the ready hosts\' memory; free memory or join a qualified host'
 
     def start(self):
         from .production_runner import completed
@@ -337,6 +401,39 @@ class Coordinator:
             raise ValueError('unapproved host identity')
         return row
 
+    def control_settings(self, host):
+        """Use the last launch profile, or the approved qualification profile."""
+        sessions = [s for s in self.state['sessions'].values() if s['host'] == host]
+        if sessions:
+            return max(sessions, key=lambda s: s['joined'])['settings']
+        entry = self.member(host)
+        evidence = unseal(read(self.root / 'qualifications' / (entry['qualification_sha256'] + '.json')))
+        settings = evidence['candidate'].get('settings')
+        # Early fixture evidence has no launch settings. The existing machine
+        # rule still reserves the X2 profile for its named host. Join validates
+        # the actual CPU budget and settings before any session is created.
+        return settings or dict(profile='x2' if host.lower() == 'yotko-evo-x2' else 'local',
+                                cpu_budget=32 if host.lower() == 'yotko-evo-x2' else 16)
+
+    def require_configuration_cap(self, host, settings, control):
+        from .production_runner import caps
+        entry = self.member(host)
+        profile = settings['profile']
+        key = 'workers_x2' if profile == 'x2' else 'workers_local'
+        minimum = max([8 if profile == 'x2' else 1] + [min(p[key]) for p in self.spec['configuration'].values()
+                      if p['kind'] in entry['kinds']])
+        mode = control.get('mode', settings.get('mode', 'work'))
+        if mode not in ('normal', 'work'):
+            raise ValueError('invalid mode')
+        limit = caps(profile, settings['cpu_budget'])[mode]
+        requested = control.get('max_workers', settings.get('workers', limit))
+        if isinstance(requested, bool) or not isinstance(requested, int):
+            raise ValueError('positive integer worker cap required')
+        if min(requested, limit) < minimum:
+            raise ValueError(f'{host}: {profile} profile requires a worker cap of at least {minimum}; '
+                f'use production_runner control ROOT --host {host} --max-workers {minimum} before rejoining, '
+                f'and host_a11 --workers {minimum} (or higher) with a CPU budget/mode supporting that cap')
+
     def session(self, request):
         s = self.state['sessions'].get(request.get('session'))
         self.member(request['host'])
@@ -353,7 +450,10 @@ class Coordinator:
             raise ValueError('host fingerprint or code identity mismatch')
         settings = r['settings']
         limits = caps(settings['profile'], settings['cpu_budget'])
-        if settings['threads'] != 1 or settings['mode'] not in ('normal', 'work') or not 1 <= settings['workers'] <= limits[settings['mode']]:
+        if settings['threads'] != 1 or settings['mode'] not in ('normal', 'work'):
+            raise ValueError('invalid host caps')
+        self.require_configuration_cap(r['host'], settings, dict(mode=settings['mode'], max_workers=settings['workers']))
+        if settings['workers'] > limits[settings['mode']]:
             raise ValueError('invalid host caps')
         if settings['profile'] == 'x2' and r['host'].lower() != 'yotko-evo-x2':
             raise ValueError('X2 profile needs the X2 host')
@@ -361,9 +461,11 @@ class Coordinator:
             raise ValueError('X2 worker needs its active service supervisor')
         if any(s['host'] == r['host'] and s['end'] is None for s in self.state['sessions'].values()):
             raise ValueError('host is already joined')
+        control = dict(mode=settings['mode'], max_workers=settings['workers'], drain=False)
+        control.update(self.state.get('host_controls', {}).get(r['host'], {}))
+        self.require_configuration_cap(r['host'], settings, control)
         sid = uuid.uuid4().hex
-        control = self.state.setdefault('host_controls', {}).setdefault(r['host'],
-            {'mode': settings['mode'], 'max_workers': settings['workers'], 'drain': False})
+        self.state.setdefault('host_controls', {})[r['host']] = dict(control)
         self.state['sessions'][sid] = {'host': r['host'], 'joined': self.now, 'end': None, 'heartbeat': self.now,
             'relative_throughput': entry['relative_throughput'], 'worker_seconds': 0.,
             'settings': dict(settings, caps=limits), 'control': dict(control),
@@ -528,6 +630,7 @@ class Coordinator:
     def claim(self, r):
         from .production_runner import choose
         s = self.session(r)
+        s['memory_available_gb'] = float(r['memory_available_gb'])
         self.advance()
         if self.state['complete'] or any(self.stops().values()) or s['control']['drain']:
             return {'job': None, 'status': self.status()}
@@ -746,31 +849,43 @@ def rpc(root, request, *, now=None, local_only=False):
 def control(root, host=None, *, mode=None, max_workers=None, stop=None):
     with transaction(root):
         c = Coordinator(root)
+        if stop is not None and stop not in ('drain', 'now', 'clear'):
+            raise ValueError('invalid stop control')
         if host is None:
-            if mode or max_workers:
+            if mode is not None or max_workers is not None:
                 raise ValueError('pull mode and worker controls require --host')
             if stop is not None:
                 c.state['control'].update(stop_dispatch=stop != 'clear', interrupt_now=stop == 'now')
+                c.state['operator_stop'] = None if stop == 'clear' else dict(reason='operator_stop_' + stop, epoch=c.now)
         else:
             c.member(host)
             sessions = [s for s in c.state['sessions'].values() if s['host'] == host and s['end'] is None]
-            if not sessions:
-                raise ValueError('host is not joined')
+            value = dict(c.state.get('host_controls', {}).get(host, {}))
+            if mode is not None:
+                value['mode'] = mode
+            if max_workers is not None:
+                value['max_workers'] = max_workers
+            if stop is not None:
+                value.update(drain=stop != 'clear', interrupt_now=stop == 'now')
+            settings = c.control_settings(host)
+            c.require_configuration_cap(host, settings, value)
+            if max_workers is not None:
+                from .production_runner import caps
+                value['max_workers'] = min(max_workers, caps(settings['profile'], settings['cpu_budget'])[
+                    value.get('mode', settings.get('mode', 'work'))])
+            # Keep controls even before a first join or after departure. The
+            # chosen profile and CPU/mode limits still bound actual dispatch.
+            c.state.setdefault('host_controls', {})[host] = value
             for s in sessions:
-                if mode:
-                    if mode not in ('normal', 'work'):
-                        raise ValueError('invalid mode')
-                    s['control']['mode'] = mode
-                if max_workers is not None:
-                    if max_workers < 1:
-                        raise ValueError('positive worker cap required')
-                    s['control']['max_workers'] = min(max_workers, s['settings']['caps'][s['control']['mode']])
-                if stop:
-                    s['control']['drain'] = stop != 'clear'
-                    s['control']['interrupt_now'] = stop == 'now'
-                c.state.setdefault('host_controls', {})[host] = dict(s['control'])
+                s['control'].update(value)
         append(c.root, 'protocol_events', {'event': 'control', 'host': host, 'mode': mode, 'max_workers': max_workers, 'stop': stop, 'epoch': c.now})
         c.save(force=True)
+        if host is None and stop is not None and (c.root / 'launches.json').exists():
+            history = read(c.root / 'launches.json')
+            if history and not history[-1].get('finished_epoch'):
+                record = c.state.get('operator_stop')
+                history[-1].update(stopped=c.stop_reason(), stopped_epoch=record['epoch'] if record else None)
+                atomic_json(c.root / 'launches.json', history)
         return c.status()
 
 
@@ -811,7 +926,14 @@ def coordinate(spec_path, root, settings):
             with transaction(root):
                 c = Coordinator(root)
                 c.save()
-                history[-1].update(complete=c.state['complete'] and not c.state['halt'], finished_epoch=c.now, status=c.status(), reason=c.state.get('stop_reason'), stopped=c.state.get('stop_reason'))
+                # Controls may have updated this attempt while the monitor ran.
+                # Reload under the lock instead of overwriting their stop epoch.
+                history = read(Path(root) / 'launches.json')
+                operator_stop = c.state.get('operator_stop') or {}
+                history[-1].update(complete=c.state['complete'] and not c.state['halt'], finished_epoch=c.now,
+                    status=c.status(), reason=c.stop_reason(), stopped=c.stop_reason())
+                if operator_stop:
+                    history[-1]['stopped_epoch'] = operator_stop['epoch']
                 atomic_json(Path(root) / 'launches.json', history)
         return status
 
