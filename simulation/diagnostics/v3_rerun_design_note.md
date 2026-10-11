@@ -1960,3 +1960,64 @@ Registered A10 preparation requires a design pin that contains this amendment.
 **Order.**
 - This text is committed and pushed. It does not change the code identity.
 - The stage 1 reading's registration is the commit that adds this amendment. The reading is computed sealed after stage 1's runs complete, and opened on the operator's go.
+
+### Amendment A12, part 2, 2026-10-11: execution fixes, and their adoption mid-stage
+
+**Timing and status.**
+- **When it was written:** on 2026-10-10 and 11, while the A10 nominal validation was running at code identity `c19b54f5`.
+- **What existed:** the A10 nominal estimation was complete. No validation, label or run output had been read by the operator or the interpreter.
+- **What informed it:** progress counts, configuration measurements, phase timings and cost. Nothing else.
+- **The changes,** E1 to E3 below, change scheduling only, and alter no simulation result.
+- **The implementation:** built and tested before this text was committed, in a review worktree, with the full test suite and an independent rerun of its new tests. It is committed after this text, as the order below sets out.
+
+**What was found.**
+1. **Local hosts' worker candidates.** The A4 and A5 configuration profiles, which A10's validation and labels inherit, list local candidates `[2, 4]`. The X2 has `[8, 12, 16, 24, 32]`, and A10's estimation and runs have `[2, 4, 8, 12]`.
+   - **The effect:** the workstation's WSL host and the old box can run at most 4 workers in validation and labels. In the estimation's configuration measurements, more workers gave them about 40 and 12 percent more throughput.
+   - **Why it is a defect:** it falls short of the operator's standing execution requirement (`AGENTS.md`, 2026-09-27) that the pre-launch configuration test cover worker counts up to each host's mode cap. That makes it a defect in execution, under A11 item 3.
+2. **The cross-host check's host.** A phase's nondeterminism check went to whichever eligible host claimed it first. At the end of the validation's fit phase, that was the slowest host, and the other hosts waited at the barrier for about 15 minutes.
+3. **The X2 profile and the hostname.** The X2 profile is tied to the current X2's hostname. A second X2 could join only with the local profile, which in validation and labels limits it to 4 workers.
+
+**The changes,** at a new code identity:
+- **E1:** A10's validation and labels give local hosts the candidates `[2, 4, 8, 12]`, as A10's estimation and runs do. R4's profiles are unchanged.
+- **E2:** a phase's check goes to the eligible host, other than the original, with the highest registered relative throughput. That host gets a bounded preference window, after which any eligible host may take the check. Unchanged:
+  - which job is sampled;
+  - the original-host exclusion;
+  - the comparison;
+  - every record of the check.
+- **E3:** a host's profile comes from its approved register entry and launch arguments, not its hostname. The model-service stand-down becomes a per-host setting, with the current X2's default unchanged. The reference machine for accounting stays the current X2.
+
+**Extending A11 item 3.**
+- **The extension:** A11 item 3 admits defect repairs. It is extended to execution-only changes: changes to scheduling, dispatch, configuration candidates or host profiles that alter no simulation result. They come under the same compatibility record and the same byte-identical re-execution proof.
+- **What it is for:** E2 and E3 need it. E1 qualifies under item 3 as a defect repair in any case.
+- **What a failure means:** a proof that fails ends the attempt, and the affected work stays at its producing identity.
+
+**What the change touches.**
+- **Exact-hash pins:** the A2 compatibility record pins `v3/production_runner.py` and `v3/service.py` by exact hash. Their new hashes are entered with these reasons:
+  - production_runner.py: E1's candidate handling and E3's hostname-free profile check;
+  - service.py: E3's per-host model service.
+
+  No other pinned file changes.
+- **Sealed specs:** new launch specs record the changed configuration field, `workers_local`. No plan hash, seed, job set or cost class changes.
+
+**Order** (A11 item 3 and runbook section 14):
+1. This text is committed and pushed. It does not change the code identity.
+2. **The validation launch finishes at `c19b54f5`.**
+   - The family is published there (runbook section 6), and the family identity record gets its record-only commit there (section 7).
+   - No unfinished launch is resumed at the new identity.
+3. **The code commit:** E1 to E3 and the two re-pins are committed on main, and the new code identity is recorded.
+4. **A non-registered rehearsal at the new identity** checks:
+   - E1's local candidates;
+   - E2's check assignment and its fallback;
+   - E3's X2 profile with the service off, on a host not named as the X2.
+5. **The compatibility proof:**
+   - It runs from a fresh checkout at the new commit.
+   - It covers the completed estimation and validation roots: two jobs per phase, capability and setting, chosen by A11's rule before any re-execution, all byte-identical.
+   - The interpreter reviews it, and the operator approves it. It is committed, and the same bytes are committed publicly.
+   - Its cost is charged to the stage 1 operations ledger.
+6. **Labels and the five run launches** run from a fresh execution checkout at the record's commit, with new roots. Each needs its own qualification, register approvals, pre-launch configuration test and the operator's go.
+
+**Unchanged.**
+- No registered quantity, reading, prediction, gate, citation rule, ceiling or allocation changes.
+- Stage 1's 980 X2-equivalent hours stand.
+- A12 part 2 changes nothing in the outputs it carries forward.
+- If the proof fails, labels and the runs proceed at `c19b54f5`.
