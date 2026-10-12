@@ -2021,3 +2021,18 @@ Registered A10 preparation requires a design pin that contains this amendment.
 - Stage 1's 980 X2-equivalent hours stand.
 - A12 part 2 changes nothing in the outputs it carries forward.
 - If the proof fails, labels and the runs proceed at `c19b54f5`.
+
+**Clarified, 2026-10-12: identifiers at the new identity.**
+- **The sentence it clarifies:** "No plan hash, seed, job set or cost class changes", under "What the change touches". It describes E1's change to a sealed spec at a fixed code identity, where it holds.
+- **What changes with the identity, and why:** adoption moves the labels and the five runs to a new code identity, with new roots, through A11 item 3. Some identifiers include the producing code identity, the design pin or absolute input paths. That is by design, because it is how a root is bound to the code that produced it. Moving to a new identity changes them:
+  - the A5 label plan's hash, and with it each label job's identifier and the envelope seed derived from that identifier, which the simulation does not use;
+  - the code identity and design pin fields of every new spec.
+- **What the adoption does not change:** each is checked before launch.
+  - **Every job's scientific inputs, and the seed its simulation uses.**
+  - **The five run families:** 53,100 jobs, with unchanged identifiers and seeds. Neither includes the code identity. The new specs' job lists must be identical to the lists built at `c19b54f5`.
+  - **The labels:** 756 label jobs, each with its unchanged table, replicate and seed.
+  - **The cost classes.**
+- **The pins:**
+  - **The new launches:** labels and the five runs pin the commit that carries this clarification as their design registration.
+  - **The completed estimation and validation:** they keep their original pin.
+  - **The stage 1 reading:** it stays registered at `93474e00`.
