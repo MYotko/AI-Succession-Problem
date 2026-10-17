@@ -4710,3 +4710,166 @@ directory for tests and the toy builder only. The new code commit and repeat
 of the operator-approved rehearsal are still required. This local test run
 does not replace that rehearsal or the subsequent 434-job A11 proof. Full
 test counts, the transport audit and limitations are in `_a13_build/REPORT.md`.
+
+
+## 35. Memory-aware two-host A11 proof, 2026-10-17
+
+Executor tooling under A11 item 3 and the A12 execution-only clarification.
+The approved design text is unchanged. The previous identity was
+`50a5038ec2b1a65261a36b1cb16133a7d0d6a42e765b0e35612c901eeae9441e`; the new LF-normalized identity is
+`abf0d7d5b81902f3038df5464099911419f5c32026be1c9b3fa836f2806e416e`. The operator commits after review. No A2 re-pin is needed:
+only `compatibility_a10.py`, `snapshot_a11.py` and the new
+`compatibility_shards_a11.py` change the source identity, and none is A2-pinned.
+
+The selection functions, canonical comparison and operator approval function
+are byte-identical to 25b5f052. The original comparison hashes and record schema
+fields remain. Source collection is shared by single-host and sharded proofs.
+The single-host builder now admits jobs by registered class/phase memory and
+longest registered cost first, with a requested count bounded by its mode cap.
+
+The scheduler reserves the sum of active estimates within 80 percent of measured
+available memory, bounded on a shard by qualified memory. It also checks current
+available memory before each submission. Completed peak RSS raises its class
+estimate by 1.2. An executor-supplied observed floor, 15.0294970368 GB for this
+prep, carries the observed full-job cross-check. No job, seed or setting changes.
+
+The original host freezes one exclusive attempt after validating current-code
+qualification evidence against X2-1 for every assigned kind. Deterministic LPT
+assignment balances registered cost by measured relative throughput and memory
+slots. Each shard binds the same commit and identity, its host and fingerprint,
+and executes once after its memory-capped configuration tests. A started marker
+and sealed result enforce finality, including interrupted or failed work. There
+is one frozen checkout-relative attempt path on each host, so relocating a copy
+cannot obtain a fresh shard marker. There
+are no retry leases, which is why the ordinary pull dispatcher was not reused.
+
+The snapshot dependency enumerator is shared with ordinary A11 execution; its
+ordinary write/read scope remains unchanged. Proof bundles may read dependencies
+from the stopped producing checkout and copy only those dependencies into local
+read-only, hash-verified blobs. Absolute aliases and checkout-relative calibration
+aliases preserve original job bytes on both hosts. Configuration and proof input
+inventories are separate. A real A4 toy test hides the original A1 and fit roots
+and reproduces the same comparison hash from the copied inputs alone.
+
+Combine runs on the original host and checks the exact frozen partition, attempt,
+commit, code identity, fingerprint, qualification coverage and per-job original
+comparison hashes. Missing, duplicate, foreign, incomplete or failed shards seal
+a failed final record. A successful record retains selection order and the
+unchanged approval path. The local tests compare single-host and two-host records
+after removing execution and runtime metadata.
+
+Runbook 17.3 provides qualification, hash transfers, per-host supervised service
+windows, configuration and shard execution, combine and both-host ledger charging.
+Its new-identity qualification and proof commands are written only, not run here.
+The copied prep supports a conditional equal-rate, six-worker-per-host projection:
+class rates give 52.66 wall hours / 105.33 X2-equivalent hours
+including 0.5 hours overhead on each host; uniformly scaled aggregate measured
+rates give 16.99 wall hours / 33.98 X2-equivalent hours.
+Those are planning inferences, not measured two-host runtimes. New qualification
+supplies the actual relative rate; `project` computes the actual class assignment
+without reading outputs before freezing. Full test evidence, assumptions and
+limitations are recorded in `_a13_build/REPORT.md` and `TWOHOST_PROJECTION.json`.
+
+Local Windows testing also reproduced the older intermittent scope refusal in
+unchanged `artifacts.scoped`/`atomic_json`. During an 800-write synthetic probe
+with concurrent directory creation, two `Path.resolve` calls retained the
+extended Windows path prefix while ROOT used an ordinary drive prefix. The
+containment comparison therefore returned false. The trace preserves the exact
+paths and return values in `TWOHOST_SCOPE_PROBE.json`. This is a pre-existing
+guard/Windows path-normalization interaction, outside this build's code changes;
+the guard and standard library were not changed. The original qualification
+failure did not capture its Win32 error sequence, so attributing that individual
+failure to the reproduced mechanism remains an inference.
+
+
+## 36. Two-host proof review fixes, 2026-10-17
+
+The LF-normalized code identity for this revision is
+`45fd59f4478535ec924fd9ca54a6d1869839e60c9ef81379df0065dcd8e7560f`.
+
+This section supersedes section 35's attempt, worker lifetime, preflight and
+combine details. The selection, comparison bytes, before/after hashes, existing
+record fields and operator approval function are unchanged. This is executor
+tooling; the approved design text and scientific computations are unchanged.
+
+A fixed reservation under `runs/registered/.a11_attempts`, named by the full
+old/new identity-pair digest, is exclusively created before any proof execution.
+It binds the complete frozen attempt hash and its checkout-relative path.
+Both `freeze` and legacy `build` refuse a previously reserved pair regardless
+of output. Shard `run`, stage and combine verify that same reservation. The
+runbook transfers its hash-verified bytes to the sole X2-2 execution checkout.
+A new output or checkout is not authorization for another attempt.
+
+Every scheduled job uses a fresh spawned process (`max_tasks_per_child=1`),
+matching the production runner's process lifetime and per-job peak RSS model.
+Reservations use the existing 80 percent available-memory rule, registered
+class/phase estimates and the observed full-job floor. A memory release or
+idle live-memory dip is polled for at most 180 seconds, at one-second intervals.
+No job is submitted before its reservation and current headroom permit it.
+
+Shard preflight checks identity, fingerprint, input hashes, all required paths
+under the read-only view (including plain validation's sibling fit), memory fit
+and configuration tests before `started.json`. It rechecks identity and memory
+after configuration. Failed setup writes `preflight.json`, leaves no start or
+result record, and may be retried in the same root. After the one-use marker,
+a failed or interrupted proof is final. Legacy single-host build also verifies
+inputs and runs memory-safe configuration before reserving its attempt.
+
+Qualification requires the bundle plan hash in each host entry and at least
+20 matching distinct proofs per assigned job kind, using the existing A11
+validator and X2-1 reference. A total of 20 spread across kinds is insufficient.
+
+Combine binds the exact supplied paths and raw hashes of every `result.json`
+and `started.json` in the received directories. It verifies start records as
+well as the existing partition, identity, fingerprint and comparison checks.
+A process lease prevents concurrent final writes. Before a final record exists,
+an infrastructure interruption permits combine to repeat only over unchanged
+bound files and produces the same deterministic record. Changed or added files
+are refused; any final success or failure record stays final.
+
+Runbook 17.3 checks code, command, inputs, hostname, service commands and lease
+before stopping a model service. X2-2 is `yotko-evo-x2-2`. It stops
+`llm-flashnext` directly with `systemctl --user stop llm-flashnext` and restores
+with `~/bakeoff/guppi_flashnext.sh on`; the helper's `off` action starts gpt-oss
+and is not used. The runbook also includes the reservation transfer, start
+record return, preflight retry bounds, combine recovery and canonical record
+copy after explicit operator approval. All host commands remain written only.
+
+The new identity, A2 hash audit, synthetic regression results and full-suite
+limitations are recorded in `_a13_build/REPORT.md`. No A2-pinned file changes
+are required. No registered proof, remote access or commit was performed here.
+
+
+## 37. Two-host proof review fixes, round 2, 2026-10-17
+
+The LF-normalized code identity for this revision is `5ae3d3cd7345f6adf84cf5512c7a88ccfe8de67f8322930edcab17cc3f748037`.
+This section supersedes section 36's combine input handling and post-marker
+memory wait. The selection, comparison bytes, before/after hashes, record
+validation and operator approval are unchanged.
+
+Combine derives the expected result and start paths from the frozen attempt.
+Optional shard arguments only cross-check that exact set. Missing, duplicate,
+extra, unreadable or unsealed files refuse before a combine lock, binding or
+final record is written, leaving transfer errors correctable. The structural
+check repeats under the lease before binding. Content checks still seal a
+final failure for identity, commit, host, fingerprint, partition, comparison
+hash or pass/fail mismatches. Interrupted combine still requires the same
+bound raw file hashes and produces the same deterministic record on retry.
+
+Memory release and pre-marker configuration waits remain bounded at 180
+seconds, since failed preflight remains retryable. After the one-use start
+marker, an idle live-memory wait permits 1,800 seconds (30 minutes), polling
+once per second without submitting a job until its memory reservation fits.
+This applies to both sharded proof execution and the legacy single-host build.
+
+Runbook 17.3 derives combine paths without shard arguments, distinguishes
+transfer correction from final content failure, states that the reservation
+is checkout-local and forbids another execution checkout for the same identity
+pair. At review the interpreter compares each host entry's qualification plan
+hash with the bundle's. X2-2's helper `off` remains excluded because it stops
+Flash-Next and then starts gpt-oss; direct stop and helper `on` restoration remain.
+
+Synthetic tests cover repairable transfer/argument failures, unchanged retry
+bindings, final content failures, both memory bounds and configuration's shorter
+bound. Test counts and the A2 pin audit are in `_a13_build/REPORT.md`. No
+registered proof, other-machine access or commit was performed here.

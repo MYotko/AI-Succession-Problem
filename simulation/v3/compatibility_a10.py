@@ -3,14 +3,13 @@
 Records never change runner/resume identities. Proofs use non-registered
 execute calls in spawned workers; their only outputs are comparison hashes.
 """
-from concurrent.futures import ProcessPoolExecutor
 from contextvars import ContextVar
 from datetime import date
 import hashlib
 import json
-import multiprocessing as mp
 from pathlib import Path
 import subprocess
+import time
 
 from .artifacts import (ROOT, SIMULATION, atomic_json, available_cpus, canonical,
                         code_identity, configure_threads, digest, file_hash, read,
@@ -143,30 +142,27 @@ def _stratum(job):
 
 def _execute_proof(item):
     configure_threads(1)
-    from .production_runner import execute
+    from .production_runner import execute, peak_rss_bytes
+    from .artifacts import input_view
     token = _proof_producer.set(item["producing_code_hash"])
     try:
         info = runtime(1)
-        result = execute(item["job"], registered=False, registration=None, root=Path(item["phase_root"]))
+        start = time.perf_counter()
+        with input_view(item.get('input_view')):
+            result = execute(item["job"], registered=False, registration=None, root=Path(item["phase_root"]))
         _require(result.get("code_hash", code_identity()) == code_identity(), "re-execution result has wrong producer metadata")
-        return {"after_sha256": hashlib.sha256(comparison_bytes(item["job"], result)).hexdigest(), "runtime": info}
+        return {"after_sha256": hashlib.sha256(comparison_bytes(item["job"], result)).hexdigest(), "runtime": info,
+                "_peak_rss_bytes": peak_rss_bytes(), "_worker_seconds": time.perf_counter() - start}
     except Exception as exc:
         return {"after_sha256": None, "error": type(exc).__name__ + ": " + str(exc)}
     finally:
         _proof_producer.reset(token)
 
 
-def build_record(sources, reasons_path, target, *, workers=None):
-    """Freeze a sample, execute it once, and seal even a failed proof.
-
-    sources is a list of {spec, root}; reasons holds producing_source_manifest
-    (exported from X) and reasons (one string per changed manifest path).
-    Both source manifests hash to their declared identities. No Git writes.
-    """
+def collect_record(sources, reasons_path):
+    """Read the original populations and comparisons without executing a job."""
     from .instrument import declaration
     from .production_runner import completed
-    target = scoped(target)
-    _require(not target.exists(), "compatibility attempt is final; target already exists")
     reason_doc = read(reasons_path)
     before = reason_doc["producing_source_manifest"]
     old, new = digest(before), code_identity()
@@ -176,7 +172,7 @@ def build_record(sources, reasons_path, target, *, workers=None):
     _require(old != new and changes, "compatibility needs two different source identities")
     _require(set(reasons) == set(changes) and all(isinstance(v, str) and v.strip() for v in reasons.values()),
              "every changed file needs its reason")
-    grouped, selected_jobs, inputs = {}, {}, []
+    grouped, selected_jobs, inputs, profiles = {}, {}, [], {}
     for source in sources:
         root, spec_path = Path(source["root"]).resolve(), Path(source["spec"]).resolve()
         spec = unseal(read(spec_path))
@@ -198,36 +194,67 @@ def build_record(sources, reasons_path, target, *, workers=None):
             selected_jobs[job["id"]] = {"job": job, "phase_root": str(phase_root), "producing_code_hash": old,
                                         "before_sha256": hashlib.sha256(comparison_bytes(job, output["result"])).hexdigest(),
                                         "output_file_sha256": file_hash(phase_root / "outputs" / (job["id"] + ".json"))}
+            from .compatibility_shards_a11 import resource_estimate
+            selected_jobs[job['id']]['resources'] = resource_estimate(spec, job)
+            phase = job['config'].get('phase', job['kind'])
+            profile_key = digest([str(spec_path), phase])
+            selected_jobs[job['id']]['profile_key'] = profile_key
+            if phase in spec.get('configuration', {}):
+                profiles[profile_key] = dict(profile=spec['configuration'][phase], phase=phase,
+                    phase_root=str(phase_root), producing_code_hash=old)
         inputs.append({"spec": str(spec_path), "root": str(root), "spec_sha256": file_hash(spec_path)})
     populations = [{"phase": p, "capability": c, "setting": s, "job_ids": sorted(ids)}
                    for (p, c, s), ids in sorted(grouped.items())]
     sample = _selected(populations)
     _require(sample, "empty compatibility sample")
-    cap = min(12, max(1, min(16, available_cpus()) - 4))
-    workers = cap if workers is None else workers
-    _require(isinstance(workers, int) and 1 <= workers <= cap, "compatibility worker count exceeds work-mode cap")
     record = {"schema": SCHEMA, "non_registered": True, "producing_code_hash": old, "new_code_hash": new,
               "producing_source_manifest": before, "new_source_manifest": after, "changed_files": changes,
               "reasons": reasons, "inputs": inputs, "populations": populations,
               "selection_rule": 'two smallest digest(["A11-compatibility", phase, job_id]) per capability/setting',
               "comparison": COMPARISON,
               "operator_approval": None, "passed": False, "proofs": [],
-              "execution": {"mode": "work", "workers": min(workers, len(sample)), "threads": 1}}
+              "execution": {"mode": "work", "workers": 1, "threads": 1}}
+    return record, {jid: selected_jobs[jid] for jid in sample}, profiles
+
+
+def proof_row(original, fresh):
+    return {"job_id": original['job']['id'], "job_sha256": digest(original["job"]),
+            "source_output_sha256": original["output_file_sha256"],
+            "before_sha256": original["before_sha256"],
+            **{k: v for k, v in fresh.items() if not k.startswith('_')},
+            "passed": original["before_sha256"] == fresh["after_sha256"]}
+
+
+def build_record(sources, reasons_path, target, *, workers=None, memory_floor_gb=0.):
+    """Freeze a sample, execute it once with memory admission, seal failures."""
+    from copy import deepcopy
+    from .compatibility_shards_a11 import (run_items, write_once, reservation_path,
+                                         reserve_attempt, check_reservation, single_preflight)
+    target = scoped(target)
+    attempt = target.with_suffix('.attempt.json')
+    _require(not target.exists() and not attempt.exists(), 'compatibility attempt is final; selection already exists')
+    record, selected_jobs, profiles = collect_record(sources, reasons_path)
+    _require(not reservation_path(record).exists(), 'identity pair already reserved; compatibility attempt is final')
+    sample = _selected(record['populations'])
+    cap = min(12, max(1, min(16, available_cpus()) - 4))
+    workers = cap if workers is None else workers
+    _require(type(workers) is int and workers >= 1, 'compatibility worker count must be positive')
+    workers = min(workers, cap, len(sample))
+    view, configuration, floor, budget, workers = single_preflight(record, selected_jobs, profiles, target, workers, memory_floor_gb)
+    record['execution'].update(workers=workers, memory_budget_gb=budget, memory_floor_gb=floor, configuration=configuration)
     # The declared population and selection are durable before any execution.
-    attempt = target.with_suffix(".attempt.json")
-    _require(not attempt.exists(), "compatibility attempt is final; selection already exists")
-    atomic_json(attempt, seal({**record, "selected_job_ids": sample}))
+    payload = deepcopy({**record, 'selected_job_ids': sample, 'target_path': target.relative_to(SIMULATION).as_posix()})
+    reserve_attempt(record, payload, attempt)
+    write_once(attempt, seal(payload))
+    check_reservation(record, payload, attempt)
     configure_threads(1)
     try:
-        with ProcessPoolExecutor(max_workers=min(workers, len(sample)), mp_context=mp.get_context("spawn")) as pool:
-            results = pool.map(_execute_proof, [selected_jobs[jid] for jid in sample])
-            for jid, fresh in zip(sample, results):
-                original = selected_jobs[jid]
-                record["proofs"].append({"job_id": jid, "job_sha256": digest(original["job"]),
-                                          "source_output_sha256": original["output_file_sha256"],
-                                          "before_sha256": original["before_sha256"], **fresh,
-                                          "passed": original["before_sha256"] == fresh["after_sha256"]})
-        _require(code_identity() == new and source_manifest() == after, "source changed during compatibility proof")
+        results, trace = run_items([dict(i, input_view=view) for i in selected_jobs.values()], workers, budget, memory_floor_gb=floor)
+        record['execution']['admission'] = trace
+        record['proofs'] = [proof_row(selected_jobs[jid], results[jid]) for jid in sample]
+        _require(code_identity() == record['new_code_hash'] and source_manifest() == record['new_source_manifest'],
+                 "source changed during compatibility proof")
+        check_reservation(record, payload, attempt)
     except BaseException as exc:
         record["error"] = type(exc).__name__ + ": " + str(exc)
         atomic_json(target, seal(record))
@@ -256,11 +283,12 @@ def main():
     p = sub.add_parser("build")
     p.add_argument("--sources", required=True); p.add_argument("--reasons", required=True)
     p.add_argument("--output", required=True); p.add_argument("--workers", type=int)
+    p.add_argument('--memory-floor-gb', type=float, default=0.)
     p = sub.add_parser("approve")
     p.add_argument("record"); p.add_argument("--operator", required=True); p.add_argument("--date", required=True)
     args = parser.parse_args()
     if args.command == "build":
-        record = build_record(read(args.sources), args.reasons, args.output, workers=args.workers)
+        record = build_record(read(args.sources), args.reasons, args.output, workers=args.workers, memory_floor_gb=args.memory_floor_gb)
         print({"passed": record["passed"], "jobs": len(record["proofs"]), "record_sha256": file_hash(args.output)})
         return 0 if record["passed"] else 1
     record = approve_record(args.record, args.operator, args.date)

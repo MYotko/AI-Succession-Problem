@@ -2735,7 +2735,7 @@ an infrastructure interruption resumes the same plan and root.
 The code commit contains E1 to E3 plus A13's phase, admission, recording,
 historical verification, tests, A2 re-pins and these documents. The executor
 does not commit it. The interpreter reviews `_a13_build/REVIEW.diff` against
-`48815a65`, including the unchanged fit, validate, census and estimation
+`25b5f052` for this proof-tool revision, including the unchanged fit, validate, census and estimation
 functions and the inert no-admitted-row path. The operator separately
 approves the concrete code commit on main.
 
@@ -2744,7 +2744,7 @@ only after those fixes and their A2 re-pins are committed. A later code
 change changes the identity and requires the proof at that changed commit.
 
 The expected LF-normalized identity is
-`50a5038ec2b1a65261a36b1cb16133a7d0d6a42e765b0e35612c901eeae9441e`.
+`5ae3d3cd7345f6adf84cf5512c7a88ccfe8de67f8322930edcab17cc3f748037`.
 The old identity is
 `c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810`.
 The independently reproduced E1 to E3 port identity was
@@ -2759,7 +2759,7 @@ checkout, and run from its `simulation` directory:
 ```bash
 export PYTHONINTMAXSTRDIGITS=0 PYTHONDONTWRITEBYTECODE=1
 export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
-export EXPECTED_CODE=50a5038ec2b1a65261a36b1cb16133a7d0d6a42e765b0e35612c901eeae9441e
+export EXPECTED_CODE=5ae3d3cd7345f6adf84cf5512c7a88ccfe8de67f8322930edcab17cc3f748037
 export OLD_CODE=c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810
 export REH=v3/runs/a13_rehearsal
 mkdir -p "$REH/checks"
@@ -3014,17 +3014,366 @@ print(dict(counts))
 PY
 ```
 
-Project this selected proof's cost from its registered classes and obtain
-approval against stage 1 headroom before running it. Run its pre-launch
-configuration test. Use section 14's supervised `llm down`/restore wrapper
-for the existing `compatibility_a10 build` command, with 12 one-thread
-workers or the lower measured cap. Verify all 434 proofs match and the
-selection exactly equals `selection_check.json`. The interpreter reviews
-the source diff and proof; the operator approves it and its record commit.
-Commit identical record bytes publicly using section 16.5's single-file
-procedure, with the title describing A13 plus A12 execution changes. A failed
-proof has no fallback. The new phase is authorized by A13, not certified by
-the A11 proof of the old computations.
+The proof now uses `v3.compatibility_shards_a11`, an executor-only tool.
+Frozen shards are preferable here to pull dispatch: a proof permits one final
+attempt, whereas pull dispatch retries leases. The selection, job bytes,
+comparison and approval remain those of `compatibility_a10`. After its one-use start marker, an incomplete, interrupted or mismatching
+shard spends the attempt. Before that marker, a reported setup failure leaves
+the same shard retryable. Never create another attempt or combine a subset.
+A fixed reservation under `v3/runs/registered/.a11_attempts/`, named by the
+full old/new identity-pair digest, reserves one attempt regardless of output.
+The reservation lives in this checkout; never use a second execution checkout on either host for the same identity pair.
+Do not create a second execution checkout on either host or copy a shard to
+obtain fresh start markers. The attempt's checkout-relative path is frozen: relocating a copy to obtain
+fresh shard markers is refused on either host. Single-host use is available by
+supplying only X2-1 in `hosts.json`. The legacy `compatibility_a10 build` also
+remains available with memory admission and `--memory-floor-gb`.
+
+All commands below are prospective operator execution commands. Use fresh
+checkouts on both X2s at the same full `A13_CODE_COMMIT`, with the identity in
+17.1. Re-run 17.1's committed-byte and design-pin checks on each. Keep the old
+roots stopped and unchanged. Rebuild and review `reasons.json` from the actual
+old/new source-manifest difference, including this proof tool and snapshot
+changes. The old prep reasons are insufficient at the new identity.
+
+On each host, set its local `REPAIRCO` to that fresh checkout. For transfers,
+set `X2_1_SSH` and `X2_2_SSH` to the operator's approved SSH aliases, and
+`X2_1_CO` and `X2_2_CO` to the respective absolute checkout paths. These four
+deployment values are recorded in the executor log; they are not job inputs.
+Use the established transfer-capable key, not the optional RPC-only key.
+
+```bash
+cd "$REPAIRCO/simulation"
+export PROOF=v3/runs/a11_proof
+export A13_CODE_COMMIT
+export PYTHON="$HOME/miniforge3/envs/phaseb/bin/python3.13"
+export PATH="$HOME/miniforge3/envs/phaseb/bin:$HOME/.local/bin:$PATH"
+export PYTHONINTMAXSTRDIGITS=0 PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+mkdir -p "$PROOF/qualification" "$PROOF/service"
+```
+
+Put this supervisor in `$PROOF/supervise.py` on X2-1 and include it in both
+transfers below. It owns the local service lease, signals the whole child
+process group, waits for workers, and restores the service on every ordinary
+exit and catchable interruption. X2-1 uses `llm down/up`. X2-2 uses GUPPI's
+`systemctl --user stop llm-flashnext` to free memory and restores with
+`~/bakeoff/guppi_flashnext.sh on`. Do not use the helper's `off` action: it
+starts gpt-oss and would consume the memory being released. Verify the helper,
+unit and health check locally before the approved service window. A power loss or SIGKILL cannot run
+cleanup; the operator must restore the service before doing anything else.
+
+```python
+import os, platform, shutil, signal, subprocess, sys, time
+from pathlib import Path
+sys.path.insert(0, str(Path.cwd()))
+from v3.artifacts import ROOT, atomic_json, lease, scoped, read, unseal, code_identity, file_hash
+from v3.compatibility_shards_a11 import verify_code, load_attempt, host_directory
+from v3.service import command
+
+mode, directory, *argv = sys.argv[1:]
+assert mode in ('llm', 'guppi') and argv
+assert platform.system() == 'Linux'
+assert platform.node() == ('yotko-evo-x2' if mode == 'llm' else 'yotko-evo-x2-2')
+# All fail-safe checks precede the first service stop.
+verify_code(os.environ['A13_CODE_COMMIT'])
+assert Path(argv[0]).is_file() and argv[1:3] == ['-B', '-m'] and argv[4] == 'run'
+if argv[3] == 'v3.compatibility_shards_a11':
+    attempt = load_attempt(argv[5])  # Includes the identity-pair reservation.
+    assert argv[6:] == ['--host', platform.node()]
+    shard = host_directory(argv[5], platform.node())
+    assert not (shard/'started.json').exists() and not (shard/'result.json').exists()
+    bundles = [(snapshot, shard/(kind+'_files')) for kind, snapshot in attempt['snapshots'][platform.node()].items()]
+elif argv[3] == 'v3.qualification_a11':
+    plan = unseal(read(argv[5])); assert plan['code_hash'] == code_identity()
+    assert plan['non_registered'] and not scoped(argv[6]).exists()
+    bundles = [(plan['inputs'], Path(argv[5]).parent/plan['bundle_directory'])]
+else:
+    raise ValueError('unexpected supervised command')
+for snapshot, bundle in bundles:
+    for row in unseal(snapshot)['files']:
+        assert file_hash(bundle/row['path']) == row['sha256']
+helper = Path.home() / 'bakeoff/guppi_flashnext.sh'
+if mode == 'guppi':
+    assert helper.is_file() and os.access(helper, os.X_OK) and shutil.which('systemctl')
+    assert subprocess.run(['systemctl', '--user', 'show', 'llm-flashnext', '--property=LoadState', '--value'],
+                          check=True, capture_output=True, text=True).stdout.strip() == 'loaded'
+else:
+    assert shutil.which('llm')
+root = scoped(directory); root.mkdir(parents=True, exist_ok=True)
+assert not (root/'service.json').exists(), 'use a new service log directory for a preflight retry'
+record = dict(host=platform.node(), service=mode, started_epoch=time.time())
+process = None
+def interrupted(number, frame):
+    raise KeyboardInterrupt('proof supervisor interrupted')
+for sig in (signal.SIGINT, signal.SIGTERM):
+    signal.signal(sig, interrupted)
+def service(action):
+    if mode == 'llm':
+        return command(root, action)
+    helper = Path.home() / 'bakeoff/guppi_flashnext.sh'
+    with (root / (action + '.log')).open('a') as log:
+        argv = ['systemctl', '--user', 'stop', 'llm-flashnext'] if action == 'down' else [str(helper), 'on']
+        return subprocess.run(argv, stdout=log, stderr=subprocess.STDOUT, timeout=180).returncode
+with lease(ROOT / 'service.lock'):
+    try:
+        record['down_exit_code'] = service('down')
+        atomic_json(root / 'service.json', record)
+        assert record['down_exit_code'] == 0
+        process = subprocess.Popen(argv, start_new_session=True)
+        record['child_exit_code'] = process.wait()
+        assert record['child_exit_code'] == 0, 'qualification or proof failed'
+    finally:
+        for sig in (signal.SIGINT, signal.SIGTERM):
+            signal.signal(sig, signal.SIG_IGN)
+        if process is not None and process.poll() is None:
+            os.killpg(process.pid, signal.SIGINT)
+            process.wait()  # No service restoration while workers remain.
+        try:
+            record['up_exit_code'] = service('up')
+        finally:
+            record['finished_epoch'] = time.time()
+            atomic_json(root / 'service.json', record)
+        assert record['up_exit_code'] == 0, 'operator must restore the model service'
+```
+
+First build the qualification bundle on X2-1. It uses only the source plans'
+short configuration profiles, deterministic non-registered streams and the
+same A11 comparison. There are at least 20 distinct jobs **per kind**. The
+bundle binds current code and covers table, A4 fit, validate and census; the
+command reads no registered reference result. It copies precisely the input
+dependencies of those short jobs, with hashes and absolute-path aliases.
+
+```bash
+"$PYTHON" -B -m v3.compatibility_shards_a11 qualification \
+  --sources "$PROOF/sources.json" --output "$PROOF/qualification/plan.json"
+tar -czf "$PROOF/qualification_bundle.tgz" "$PROOF/qualification/plan.json" \
+  "$PROOF/qualification/plan_files" "$PROOF/supervise.py"
+sha256sum "$PROOF/qualification_bundle.tgz" > "$PROOF/qualification_bundle.sha256"
+scp "$PROOF/qualification_bundle.tgz" "$PROOF/qualification_bundle.sha256" \
+  "$X2_2_SSH:$X2_2_CO/simulation/$PROOF/"
+# On X2-2, from its simulation directory:
+sha256sum -c "$PROOF/qualification_bundle.sha256"
+tar -xzf "$PROOF/qualification_bundle.tgz"
+```
+
+Run the following two commands on X2-1, sequentially, with its approved
+service window. Twelve requested workers are bounded by the X2 work-mode cap
+and the qualification's full-job memory estimates. The phaseb environment
+stays frozen. `--model-service none` prevents an inner service cycle because
+the outer supervisor owns it.
+
+```bash
+"$PYTHON" -B "$PROOF/supervise.py" llm "$PROOF/service/reference" \
+  "$PYTHON" -B -m v3.qualification_a11 run "$PROOF/qualification/plan.json" \
+  "$PROOF/qualification/reference.json" --profile x2 --workers 12 --cpu-budget 32 --mode work --model-service none
+"$PYTHON" -B "$PROOF/supervise.py" llm "$PROOF/service/x2_1_qualification" \
+  "$PYTHON" -B -m v3.qualification_a11 run "$PROOF/qualification/plan.json" \
+  "$PROOF/qualification/x2_1.json" --profile x2 --workers 12 --cpu-budget 32 --mode work --model-service none
+llm status
+```
+
+Run the candidate on X2-2, then copy only its sealed result and service
+record back by hash. Neither a qualification nor a proof is resumed after
+an interrupted execution.
+
+```bash
+"$PYTHON" -B "$PROOF/supervise.py" guppi "$PROOF/service/x2_2_qualification" \
+  "$PYTHON" -B -m v3.qualification_a11 run "$PROOF/qualification/plan.json" \
+  "$PROOF/qualification/x2_2.json" --profile x2 --workers 12 --cpu-budget 32 --mode work --model-service none
+sha256sum "$PROOF/qualification/x2_2.json" "$PROOF/service/x2_2_qualification/service.json" \
+  > "$PROOF/qualification/x2_2.sha256"
+tar -czf "$PROOF/x2_2_qualification.tgz" "$PROOF/qualification/x2_2.json" \
+  "$PROOF/qualification/x2_2.sha256" "$PROOF/service/x2_2_qualification/service.json"
+sha256sum "$PROOF/x2_2_qualification.tgz" > "$PROOF/x2_2_qualification.sha256"
+scp "$PROOF/x2_2_qualification.tgz" "$PROOF/x2_2_qualification.sha256" \
+  "$X2_1_SSH:$X2_1_CO/simulation/$PROOF/"
+# On X2-1:
+sha256sum -c "$PROOF/x2_2_qualification.sha256"
+tar -xzf "$PROOF/x2_2_qualification.tgz"
+sha256sum -c "$PROOF/qualification/x2_2.sha256"
+for candidate in x2_1 x2_2; do
+  "$PYTHON" -B -m v3.qualification_a11 compare "$PROOF/qualification/plan.json" \
+    "$PROOF/qualification/reference.json" "$PROOF/qualification/$candidate.json" \
+    "$PROOF/qualification/${candidate}_evidence.json"
+done
+"$PYTHON" -B - <<'PY'
+import os
+from pathlib import Path
+from v3.artifacts import read, atomic_json, code_identity
+from v3.qualification_a11 import validate_evidence
+p=Path(os.environ['PROOF']); hosts={}
+for name, file in [('yotko-evo-x2','x2_1'),('yotko-evo-x2-2','x2_2')]:
+    path=p/'qualification'/(file+'_evidence.json')
+    e=validate_evidence(read(path),code_identity())
+    assert e['candidate']['host']==name
+    required={'table','a4_fit','a4_validate','a4_census'}
+    assert required <= set(e['kinds'])
+    assert all(sum(r['kind']==kind and r['passed'] for r in e['proofs'])>=20 for kind in required)
+    assert e['reference']['host']=='yotko-evo-x2'
+    hosts[name]=dict(qualification=str(path),qualification_plan_sha256=e['plan']['sha256'],
+                     settings=e['candidate']['settings'],
+                     memory_floor_gb=15.0294970368)
+atomic_json(p/'hosts.json',hosts)
+PY
+"$PYTHON" -B -m v3.compatibility_shards_a11 project --sources "$PROOF/sources.json" \
+  --hosts "$PROOF/hosts.json" --output "$PROOF/projection_at_new_identity.json"
+```
+
+At review, the interpreter compares each host entry's `qualification_plan_sha256` with the bundle's plan hash.
+Review both qualification evidence hashes and the measured host rates before
+freezing. The operator approves these exact host entries and the projection
+against stage 1 headroom. `project` reads sealed specs only and reports totals
+and rates, never outcomes or capability slices. It assumes the subsequent
+configuration test selects its stated conservative worker counts; a smaller
+chosen count extends the wall estimate. The full-job floor above is the prep's
+maximum observed RSS times 1.2. It supplements each registered class and phase
+estimate. At 127.1 GB available, the 80 percent budget is 101.68 GB and six
+15.0295 GB jobs fit. The runtime also checks current available memory.
+
+Freeze once on X2-1, after that approval. The attempt includes the deterministic
+cost/rate shard assignment, qualifications, source hashes and two inventories
+per host, one for proof inputs and one for configuration inputs. Staging reads
+the old inputs without modifying them. No selected proof job executes here.
+
+```bash
+"$PYTHON" -B -m v3.compatibility_shards_a11 freeze --sources "$PROOF/sources.json" \
+  --reasons "$PROOF/reasons.json" --hosts "$PROOF/hosts.json" \
+  --commit "$A13_CODE_COMMIT" --output "$PROOF/proof.json"
+"$PYTHON" -B - <<'PY'
+import os
+from pathlib import Path
+from v3.artifacts import read,unseal
+p=Path(os.environ['PROOF'])
+a=unseal(read(p/'proof.attempt.json')); expected=read(p/'selection_check.json')
+assert a['selected_job_ids']==expected['selected_job_ids'] and len(a['selected_job_ids'])==434
+assert a['record']['populations']==expected['populations']
+PY
+for host in yotko-evo-x2 yotko-evo-x2-2; do
+  "$PYTHON" -B -m v3.compatibility_shards_a11 stage "$PROOF/proof.attempt.json" --host "$host"
+done
+RESERVATION=$(
+  "$PYTHON" -B -c 'import os; from pathlib import Path; from v3.artifacts import read,unseal,SIMULATION; from v3.compatibility_shards_a11 import reservation_path; p=unseal(read(Path(os.environ["PROOF"])/"proof.attempt.json")); print(reservation_path(p["record"]).relative_to(SIMULATION).as_posix())'
+)
+tar -czf "$PROOF/shard_x2_2.tgz" "$PROOF/proof.attempt.json" "$RESERVATION" \
+  "$PROOF/proof.attempt_shards/yotko-evo-x2-2" "$PROOF/supervise.py"
+sha256sum "$PROOF/shard_x2_2.tgz" > "$PROOF/shard_x2_2.sha256"
+scp "$PROOF/shard_x2_2.tgz" "$PROOF/shard_x2_2.sha256" "$X2_2_SSH:$X2_2_CO/simulation/$PROOF/"
+# On X2-2:
+sha256sum -c "$PROOF/shard_x2_2.sha256"
+tar -xzf "$PROOF/shard_x2_2.tgz"
+```
+
+Run each following command on its named host after the operator's proof go.
+For a detached launch, put the command in a local script and launch with
+`setsid nohup`; keep its PID and log as in section 14. Do not launch a second
+copy. `run` first verifies commit, identity, fingerprint and every copied input
+hash, makes read-only snapshots, checks each dependency through its input view
+(including plain validation's sibling fit), and waits up to 180 seconds for the
+largest full-job estimate to fit. It runs that host's configuration tests,
+rechecks memory and identity, and only then writes `started.json` and executes
+its selected jobs once. A live memory dip while no job is active also waits
+up to 1,800 seconds (30 minutes) after the start marker before failing; pre-marker
+configuration waits remain bounded at 180 seconds. `preflight.json` records setup refusal; if no
+`started.json` or `result.json` exists, retry the same shard in the same checkout
+and root, using a fresh service-log directory. Never remove a start marker. The tests cover the host's work-mode cap
+subject to full-job memory admission and include the cap itself. Chosen counts,
+admission traces, elapsed intervals and hashes are in the sealed shard result.
+The tests reach the memory-safe mode cap even when the subsequent proof's
+requested worker limit is smaller; selection for the proof obeys that limit.
+
+```bash
+# X2-1:
+"$PYTHON" -B "$PROOF/supervise.py" llm "$PROOF/service/x2_1_proof" \
+  "$PYTHON" -B -m v3.compatibility_shards_a11 run "$PROOF/proof.attempt.json" --host yotko-evo-x2
+llm status
+# X2-2:
+"$PYTHON" -B "$PROOF/supervise.py" guppi "$PROOF/service/x2_2_proof" \
+  "$PYTHON" -B -m v3.compatibility_shards_a11 run "$PROOF/proof.attempt.json" --host yotko-evo-x2-2
+```
+
+Verify GUPPI's restored `llm-flashnext` health and both supervisors' zero
+restore codes. Copy X2-2's result, start marker and service interval back, then
+combine on X2-1. Combine derives each result and start path from the frozen
+attempt. Before any combine write it requires every expected file, no extra
+result/start files or sibling JSON copies, and readable, valid seals. A missing
+transfer, stray file or wrong optional path cross-check refuses without a
+binding or final record; correct the transfer and retry the same combine.
+After structure passes, combine binds the exact paths and raw hashes. An
+infrastructure interruption before a final record can be retried with those
+unchanged files. Changed bound files are refused. Identity, commit, host,
+fingerprint, partition, per-job hash and pass/fail mismatches remain final.
+Once `proof.json` exists, success or failure is final. A missing transfer is
+repairable; a missing shard execution is never permission to repeat it.
+
+```bash
+# X2-2:
+tar -czf "$PROOF/x2_2_result.tgz" "$PROOF/proof.attempt_shards/yotko-evo-x2-2/result.json" \
+  "$PROOF/proof.attempt_shards/yotko-evo-x2-2/started.json" \
+  "$PROOF/service/x2_2_proof/service.json"
+sha256sum "$PROOF/x2_2_result.tgz" > "$PROOF/x2_2_result.sha256"
+scp "$PROOF/x2_2_result.tgz" "$PROOF/x2_2_result.sha256" "$X2_1_SSH:$X2_1_CO/simulation/$PROOF/"
+# X2-1:
+sha256sum -c "$PROOF/x2_2_result.sha256"
+tar -xzf "$PROOF/x2_2_result.tgz"
+"$PYTHON" -B -m v3.compatibility_shards_a11 combine "$PROOF/proof.attempt.json"
+"$PYTHON" -B - <<'PY'
+import os
+from pathlib import Path
+from v3.artifacts import read,unseal,atomic_json
+p=Path(os.environ['PROOF']); attempt=unseal(read(p/'proof.attempt.json'))
+record=unseal(read(p/'proof.json'))
+assert record['passed'] and len(record['proofs'])==434
+assert [r['job_id'] for r in record['proofs']]==attempt['selected_job_ids']
+assert all(r['passed'] and r['before_sha256']==r['after_sha256'] for r in record['proofs'])
+rates={h:e['relative_throughput'] for h,e in attempt['hosts'].items()}
+sessions=[]
+for path in sorted((p/'service').glob('*/service.json')):
+    r=read(path); assert r['up_exit_code']==0
+    hours=(r['finished_epoch']-r['started_epoch'])*rates[r['host']]/3600
+    sessions.append(dict(path=str(path),host=r['host'],x2_equivalent_hours=hours))
+assert {r['host'] for r in sessions}==set(rates)
+atomic_json(p/'ledger_charge.json',dict(sessions=sessions,
+    x2_equivalent_hours=sum(r['x2_equivalent_hours'] for r in sessions),
+    scope='both hosts: qualification, configuration, proof and service overhead; add separately measured staging/combine overhead'))
+PY
+```
+
+Charge both hosts' measured participation, including failed work, plus the
+separately recorded staging/combine overhead. The ledger step also applies
+when combine refuses: compute charges from the attempt and service records
+without the success assertions. Do not charge `shard.x2_equivalent_hours`
+again; that subset of time is already inside the supervisor intervals.
+
+The interpreter reviews the complete source diff, host qualifications, shard
+records and the single A11 record. The operator approves it and its record
+commit. After explicit operator approval of the successful record, use the
+approval command and copy the approved bytes to the canonical path on X2-1:
+
+```bash
+"$PYTHON" -B -m v3.compatibility_a10 approve "$PROOF/proof.json" \
+  --operator "$OPERATOR_NAME" --date "$APPROVAL_DATE"
+"$PYTHON" -B - <<'PY'
+import os
+from pathlib import Path
+from v3.artifacts import read,unseal,file_hash
+from v3.compatibility_a10 import RECORD_DIRECTORY,record_name
+p=Path(os.environ['PROOF'])/'proof.json'; r=unseal(read(p))
+assert r['passed'] and r['operator_approval']['approved']
+target=RECORD_DIRECTORY/record_name(r['producing_code_hash'],r['new_code_hash'])
+with target.open('xb') as stream: stream.write(p.read_bytes())
+assert file_hash(target)==file_hash(p)
+print(target)
+PY
+```
+
+Use section 16.5's single-file record commit procedure, with the title
+describing the final A13/A12 and proof-tool changes. These are operator-only
+commands; this build performs no approval, copy into registered records, or commit.
+A failed proof has no fallback. The new phase is authorized by A13, not
+certified by the A11 proof of the old computations.
+
 
 Create the extension execution checkout at that public record commit and
 new roots. On every host verify committed source hashes, the A11 record,

@@ -789,7 +789,9 @@ def test_a13_real_host_scientific_halt_through_rpc_certifies_nothing(tmp_path, m
     transport = A13HostTransport(root, route)
     with pytest.raises(RuntimeError, match='remote worker failed'):
         host_loop_attempt(path, root, settings, tmp_path / 'failed_host', transport)
-    assert {'a13_checkpoint', 'a13_halt', 'release', 'leave'} <= set(transport.ops)
+    assert {'a13_checkpoint', 'a13_halt', 'release'} <= set(transport.ops)
+    # A halt can mark contact lost before host cleanup, which then skips leave.
+    assert 'leave' in transport.ops or a.read(tmp_path / 'failed_host' / 'host_exit.json')['contact_lost'] is True
     assert checkpoint_hashes(root)
     assert multi.read_state(root)['halt'] == 'A13 scientific halt'
     assert a.unseal(a.read(ext.round_record_path(plan)))['halt']

@@ -12,6 +12,12 @@ from v3 import compatibility_a10 as compat
 from v3 import tables_a10 as tables
 
 
+@pytest.fixture(autouse=True)
+def isolated_compatibility_reservations(tmp_path, monkeypatch):
+    # Synthetic identities recur across tests; never reserve a real proof pair.
+    monkeypatch.setattr(compat, 'RECORD_DIRECTORY', tmp_path / 'registered_records')
+
+
 def record_fixture(tmp_path, monkeypatch):
     after = a.source_manifest()
     before = dict(after)

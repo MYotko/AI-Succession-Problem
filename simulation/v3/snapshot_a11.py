@@ -3,10 +3,10 @@ import base64
 import hashlib
 import os
 from pathlib import Path
-from .artifacts import SIMULATION, ROOT, scoped, seal, unseal, digest, file_hash, atomic_json
+from .artifacts import SIMULATION, ROOT, scoped, seal, unseal, digest, file_hash, atomic_json, input_path
 
 
-def inventory(jobs, phase_root, extra_inputs=()):
+def dependencies(jobs, phase_root, extra_inputs=()):
     """Enumerate execute() reads, including plain A4's preceding fit output.
 
     A5 embeds its tested rows in the job. Reruns read the published family and
@@ -17,8 +17,8 @@ def inventory(jobs, phase_root, extra_inputs=()):
 
     def add(path):
         path = Path(path).resolve()
-        if not path.is_relative_to(ROOT) or not path.is_file():
-            raise ValueError('missing or out-of-scope A11 input: ' + str(path))
+        if not Path(input_path(path)).is_file():
+            raise ValueError('missing A11 input: ' + str(path))
         paths.add(path)
 
     for job in jobs:
@@ -32,7 +32,11 @@ def inventory(jobs, phase_root, extra_inputs=()):
             add(table)
             for suffix in ('.a10_receipt.json', '.compatibility.json', '.cell_results.json'):
                 sibling = table.with_suffix(suffix)
-                if sibling.exists():
+                try:
+                    exists = Path(input_path(sibling)).exists()
+                except ValueError:
+                    exists = False  # Optional sibling absent from the frozen view.
+                if exists:
                     add(sibling)
         if job['kind'] in ('a4_fit', 'a4_validate', 'a4_census', 'a5_fvplain', 'a13_validate_plain_ext'):
             source = Path(c['a1_source_root'])
@@ -57,8 +61,15 @@ def inventory(jobs, phase_root, extra_inputs=()):
                     add(child)
         else:
             add(path)
+    return sorted(paths)
+
+
+def inventory(jobs, phase_root, extra_inputs=()):
+    paths = dependencies(jobs, phase_root, extra_inputs)
+    if any(not p.is_relative_to(ROOT) for p in paths):
+        raise ValueError('out-of-scope A11 input')
     files = [{'path': p.relative_to(SIMULATION).as_posix(), 'sha256': file_hash(p), 'bytes': p.stat().st_size}
-             for p in sorted(paths)]
+             for p in paths]
     return seal({'schema': 'v3-A11-inputs-1', 'simulation': str(SIMULATION), 'files': files})
 
 
@@ -107,7 +118,12 @@ def receive(document, directory, reader):
             target.chmod(0o444)
         if file_hash(target) != row['sha256']:
             raise ValueError('existing snapshot differs')
-        for alias in (Path(payload['simulation']) / relative, SIMULATION / relative, target):
+        aliases = [Path(p) for p in row.get('aliases', [])]
+        if any(not p.is_absolute() for p in aliases):
+            raise ValueError('snapshot aliases must be absolute input paths')
+        aliases += [SIMULATION / p.relative_to(Path(payload['simulation'])) for p in list(aliases)
+                    if p.is_relative_to(Path(payload['simulation']))]
+        for alias in (Path(payload['simulation']) / relative, SIMULATION / relative, target, *aliases):
             paths[str(alias.resolve())] = str(target)
     # Protect only declared input locations. Configuration scratch and code
     # files remain local; unlisted sibling inputs cannot be read accidentally.
