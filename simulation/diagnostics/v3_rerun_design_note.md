@@ -2036,3 +2036,279 @@ Registered A10 preparation requires a design pin that contains this amendment.
   - **The new launches:** labels and the five runs pin the commit that carries this clarification as their design registration.
   - **The completed estimation and validation:** they keep their original pin.
   - **The stage 1 reading:** it stays registered at `93474e00`.
+
+### Amendment A13, 2026-10-16: a targeted validation extension for the A10 nominal family, a bounded admission rule, and the revised order of A12 part 2
+
+**Timing, and what was known.**
+
+- **When it was written:** 2026-10-16.
+  - The A10 nominal validation completed at code identity `c19b54f5` (9,204 jobs; `check_done` passed; 260.04 X2-equivalent hours).
+  - The section 6 publication then refused its candidate.
+  - Both parts of this amendment followed that refusal.
+- **What was known, from the publication diagnosis** (the executor's report of 2026-10-16):
+  - 19,450 primary rows were estimated and 50 `not_estimable`.
+  - All 50 carry "A4 availability floor failed". They are on the plain route, in 10 of 2,835 source jobs, and each fails the low-population component.
+  - Each row's merged population-0 cell (C0) is `unresolved`, and no cell has a `violation`.
+  - For each, the data-independent term of the empirical-Bernstein radius exceeds τ.
+  - All 50 C0 visit-weighted safeguards passed. That implies each C0 cell's visit-weighted residual estimate lies within τ. It says nothing directly about the Bernstein trajectory mean or the fitted C0 value. It is outcome information, and it is disclosed here.
+- **What was not known:**
+  - **Values:** neither the operator nor the interpreter read any table value, continuation value, flow, survival or other scientific quantity.
+  - **Cell detail** is executor-only.
+  - **The executor's knowledge:** it holds the original visit counts. Every executor-side choice below is therefore fixed mechanically, and R_max depends on cost classes alone.
+- **Prospectiveness:**
+  - **Part 1** is prospective for its fresh observations, conditional on a decision to extend that was itself informed by an outcome.
+  - **Part 2** is retrospective for the nominal family and prospective for later families.
+- **Certification and adoption:** two certifiers from different model families reviewed the text blind to each other, over four rounds. Every required repair is incorporated. The operator approved the final text on 2026-10-16.
+- **Code citations** refer to `simulation/v3/` at commit `d73acfb1`.
+- **The original result stands as reported:**
+  - The refusal is preserved and reported.
+  - Success under this amendment is never described as success of the original registration.
+  - Nominal-family results are labeled as produced under A13, an amendment informed by an outcome.
+
+**Assumptions.**
+
+1. **Independent streams:** the pseudo-random streams behave as independent ideal generators. The seed construction in item 3 establishes that the integers are disjoint; independence rests on this assumption.
+2. **Registered horizons and initial law:** each trajectory runs its full registered horizon, burn plus measure (`offline_estimator.py:48`, `:60`), from the archived initial law (`context.py:55`).
+3. **The distribution of visiting trajectories:**
+   - **Trajectories:** they are independent across the pair (replicate number, batch index), and identically distributed under the archived initial law.
+   - **Visits:** whether a trajectory visits C0 is a function of that trajectory alone.
+   - **The stop:** it reads only visit counts.
+   - **Hence:** the marks (S_i, N_i) of the first N\* visiting trajectories, taken in that order, are independent and identically distributed under the law conditional on a visit. Both certification halves proved this in the first round.
+
+**Part 1: a targeted extension of plain validation.**
+
+1. **Eligibility.** A row is eligible only if it is a **primary** row of the refused candidate and all of these hold:
+   - it is on the plain route;
+   - its status is `not_estimable`, with the reason "A4 availability floor failed";
+   - it passed its base screens;
+   - `validated_support_size > 0`;
+   - `sensitivity.passed` is not `False`. It is `None` for rows not selected for sensitivity (`table_validation_a4.py:683` to `:699`).
+   - its floor flags are `living_ok = True`, `low_assessed = True` and `low_ok = False`;
+   - its C0 classification is `unresolved`;
+   - no cell has a `violation`;
+   - its C0 fit is published;
+   - the arithmetic condition holds:
+     - **The condition:** 7wL / (3(n_orig − 1)) > τ.
+     - **The count:** n_orig is C0's original `n_traj` over replicates 1 to 3 (`table_validation_a4.py:532` to `:533`, `:558` to `:565`).
+     - **Small counts:** n_orig < 2 satisfies the condition, because the code then gives no radius (`continuation_validation.py:288`).
+     - **The other quantities:** w, τ, M and α are the row's own.
+
+   The executor evaluates eligibility from the sealed fit records and the original validation records, and records it as one boolean per row. The eligible set and its source jobs are recorded by identifier only. E is the set's size.
+2. **The sample size N\*.**
+   - **The formula:** with c = 7wL / (3τ), N\* = 1 + ⌈2c⌉, computed with the code's own expression in `continuation_validation.empirical_bernstein`. A final check confirms that the deterministic term at N\* is at most τ/2.
+   - **The constants:**
+     - L = log(4M/α), with α = 0.05;
+     - τ = 0.05 × the row's flow range;
+     - w is the row's a priori width, from the A1 values and the fitted C0 through vmax;
+     - M is the family-wide count pinned in the plan (`table_validation_a4.py:433`): every primary and sensitivity plain row's above-zero published A1 cells, plus one C0 allocation per row, whether or not C0 is published (`:289` to `:302`; `continuation_validation.py:504` to `:512`).
+
+     All were fixed before validation, and none depends on a validation or extension outcome.
+   - **Why τ/2:** it splits the tolerance equally between the deterministic term and the data-dependent term.
+     - **The exact relation:** N\* − 1 = ⌈2c⌉. Compare n_min − 1 = ⌈c⌉, where n_min = 1 + ⌈c⌉ is the smallest count at which certification is possible at all, attained in the zero-mean, zero-variance case (`continuation_validation.py:293`, `:295`).
+     - **What the fraction affects:** power and cost, never the false-certification rate.
+   - **The consequence:** eligibility gives c > n_orig − 1, so N\* ≥ 2·n_orig. Extrapolating from each row's original visit rate (three replicates), an eligible row would need at least six extension replicates. This is an extrapolation, not an expectation: the future visit probability is unknown.
+   - **Executor-only:** N\* and each row's reach depend on vmax.
+3. **The extension's data.**
+   - **Its own phase:** a new phase, `validate_plain_ext`, runs for the eligible rows' source jobs only.
+     - Its outputs never enter the validate index (`_index_phase`, `_combine_plain`), which would pool them into every row of those jobs (`table_validation_a4.py:558` to `:564`, `:598` to `:603`).
+     - It reads the fit and A1 outputs and the eligible set. The eligible set derives from the original data, and the conditional bound in item 9 covers that.
+     - It never reads the original validation statistics.
+   - **Replicates:** each has the registered size, 2,048 trajectories in 32 groups of 64, at the registered horizons.
+   - **Seeds:** ext_seed(s, r) = 2^60 + `_truncated_sha("v3_R_validate_ext", s, "/", r)`, for A1 job seed s and extension replicate r.
+     - **Unambiguous input:** the fixed tag and the separator give a distinct hashed string for each pair (s, r).
+     - **Collisions:** a collision of the hash itself is excluded by the runtime check below.
+     - **Disjoint ranges:** the range [2^60, 2^61) lies outside every `_truncated_sha` seed, which is below 2^60 (`continuation_validation.py:55` to `:60`). It also lies outside every `stable_job` and qualification seed, which lie in [2^128, 2^129) (`artifacts.py:141`; `qualification_a11.py:75`).
+   - **The seed check, before any extension simulation:**
+     - the full seed manifest for replicates 4 to 3 + R_max is frozen;
+     - its seeds must be pairwise distinct;
+     - none may equal any registered, planning, probe, rehearsal or qualification seed;
+     - any collision halts the run.
+   - **Reserved for later:** the range is recorded as reserved, and later forbidden sets include these seeds, including A5, stage 2 and D4. Configuration tests never use extension seeds.
+4. **The stop.**
+   - **Order:** trajectories are taken in order of (replicate number, batch index), with replicates evaluated in order, never in completion order.
+   - **Visits:** the stop reads per-row visit counts only. A visit means at least one covered living-source transition from C0 (`continuation_validation.py:165`, `:254` to `:257`).
+   - **Per source job:** a job stops after the first replicate in which every one of its eligible rows has at least N\* visiting trajectories, or at R_max replicates, whichever comes first. No row is truncated because another row finished.
+   - **Records:** per-trajectory (S_i, N_i) are recorded in order for each eligible C0 cell. The existing statistics lose that order (`continuation_validation.py:258`).
+5. **R_max.**
+   - **The rule:** R_max is the largest integer R ≤ 16 such that the extension's simulation cost is at most 15 X2-equivalent hours, at R replicates for each source job, priced from the jobs' registered cost classes.
+   - **When it is fixed:** mechanically, before launch, never from visit counts.
+   - **Overhead:** qualification, the configuration test and dispatch are outside the cap and charged separately to the stage 1 ledger.
+   - **No launch below 6:** if R_max < 6, the extension does not launch and its rows go to Part 2. This is a declared policy floor, matching item 2's extrapolated six replicates. It does not claim that a row could not reach N\*.
+   - **Impossible rows:** any row with N\* > 2,048·R_max is flagged before launch as deterministically impossible.
+6. **The test.**
+   - **What it runs on:** for each eligible row, the registered two-sided empirical-Bernstein test is applied to exactly the first N\* visiting trajectories of the extension data alone. It uses the same w, τ, M and α, with the visit-weighted safeguard on the same trajectories.
+   - **What it never uses:** the original replicates are never pooled in, and the original `unresolved` result is not reused as evidence. That result is preserved in the audit record.
+   - **Outcomes:**
+     - a row whose C0 certifies, and whose safeguard passes, gains C0 support;
+     - a row that does not reach N\* within R_max stays `not_estimable`;
+     - so does a row whose re-test is `unresolved` or `violation`.
+7. **A halted extension.**
+   - **A scientific halt,** under the runner's halt rules, certifies nothing. It spends the one round, and its rows go to Part 2.
+   - **An infrastructure interruption** resumes under the runner's supported procedure. Completed replicates are kept, and an in-flight replicate restarts from its original seed.
+8. **Re-assembly.**
+   - **For an eligible row:**
+     - only the C0 decision is replaced;
+     - its other cells come from the original outputs only;
+     - its validated support is recomputed;
+     - the registered floor is re-applied to the unchanged census. Adding C0 changes the floor fractions in one direction only (`continuation_validation.py:561` to `:570`).
+   - **Everything else is carried forward exactly:** every ineligible row, the sensitivity processing and the sensitivity siblings. The run halts unless every ineligible row, and its sidecar entry, is byte-identical to the refused candidate's.
+   - **Marking:** rows certified by the extension carry a row-level marker.
+9. **The error accounting.**
+   - **Definitions:**
+     - H is the pinned A1 family together with the sealed validation plan, all fixed before any validation data.
+     - D₀ is H plus the original validation and census data.
+     - P is the number of primary plain rows in the sealed plan. It is fixed by the plan, because `prepare` binds each job's route from the A1 output (`table_validation_a4.py:412` to `:423`, `:440` to `:442`). It is not fixed by the design, because the route is chosen during A1 estimation (`tables_a10.py:84`; `offline_estimator.py:195` to `:197`).
+   - **The original tests:** P(any original false certification | H) ≤ α. That includes the E unresolved C0 tests, whose allocation is spent, not refunded.
+   - **The extension:** P(any extension false certification | D₀) ≤ E(D₀)·α/M.
+   - **The family, given the fitted family:** P(any false certification | H) ≤ α(1 + P/M). Since E ≤ P ≤ M, this never exceeds 2α.
+   - **Unconditionally over fitting:** the bound is 2α = 0.10.
+   - **What is reported:**
+     - for this family, the certificate's "at least 0.95" becomes "at least 1 − α(1 + P/M), given the fitted family";
+     - P and M are recorded side by side;
+     - the conditional additional figure α·E/M is reported beside them.
+   - **Scope:** the statement covers plain validation. FV validation is unchanged (`table_validation_a4.py:652`). This is an exception to "Unchanged".
+10. **One round only.** There is no second extension round for this family.
+
+**Part 2: a bounded admission rule for residual rows.**
+
+11. **What unavailability does.** A `not_estimable` row makes its rule unavailable in its lookup context. Its effect differs across the three branches (`integration.py`):
+    - **Ordinary allocation:** an unavailable rule leaves the comparison. The balanced fallback applies only when no admissible scoreable rule remains (`:253` to `:258`).
+    - **Survival-first:** if no minimum-risk rule is scoreable, the first minimum-risk rule is taken, with no balanced fallback (`:243` to `:252`).
+    - **Yield review:** unavailable plans are dropped, and the review holds if none remain (`:283` to `:317`).
+
+    **No behavioral bound is claimed.** No row cap bounds the effect on adaptive runs.
+12. **The rule.** A family may be admitted for registered use with residual `not_estimable` rows only if all of the following hold.
+    - **(a) The cap:**
+      - at most **0.1 percent of the family's own primary rows, rounded down**, never a fixed count: for the A10 nominal family, 19 of 19,500;
+      - no allowance for a family with fewer than 1,000 primary rows;
+      - **at most one admitted row per lookup context**, where the context is the canonical row key without the rule's identity (`production_tables.py:17` to `:32`);
+      - **none for the balanced witness rule** (`rules[0]`, `integration.py:82`, `:257` to `:258`).
+
+      The per-context limit and the balanced exclusion are administrative limits on how many comparison sets an admission touches. They are policy choices, with no power or bias guarantee. For the nominal family, 31 extension certifications are necessary for admission, but not sufficient, because the per-context limit can bind.
+    - **(b) The rows:** each admitted row:
+      - failed only through the availability floor, after Part 1;
+      - has `validated_support_size > 0`;
+      - has no `violation` in any cell, including the extension's re-test;
+      - passed its base screens;
+      - has `sensitivity.passed` not `False`.
+    - **(c) Binding:**
+      - **The manifest:** the admitted set is bound in the family manifest by identifier and hash.
+      - **The loader:**
+        - checks that binding;
+        - re-checks the cap, the per-context limit and the balanced exclusion;
+        - keeps its existing sensitivity and support checks (`production_tables.py:120` to `:123`, `:127` to `:129`);
+        - rejects any `not_estimable` row outside the set.
+      - **Status:** admitted rows remain `not_estimable` and unavailable, and are never relabeled `estimated`.
+      - **This is new code:** the present loader rejects every residual row (`production_tables.py:115` to `:129`).
+    - **(d) Recording:** every registered run records, per run and per branch, the evaluated decisions. Absorbed padding steps are excluded (`allocation_evaluated: False`, `integration.py:368`).
+      - **The decision incidence:**
+        - **Numerator:** evaluated decisions in which, for the reason `missing_or_not_estimable_row`, any of these happened:
+          - at least one rule or plan was excluded;
+          - the review held;
+          - on the survival-first branch, the selected rule's score was unavailable. A unique minimum-risk rule with no score is selected before the availability filter (`integration.py:246`, `:252`, `:253`), so it may exclude nothing and still be affected.
+        - **Denominator:** that branch's evaluated decisions. These are allocation decisions with `allocation_evaluated` true, survival-first selections, and evaluated yield reviews.
+      - **Separately:**
+        - the count of excluded rules or plans;
+        - balanced fallbacks, by reason;
+        - survival-first selections with an unavailable score.
+      - **This is new recording code:** the present counters (`production_runner.py:217` to `:225`) do not give these rates.
+    - **(e) Reporting:**
+      - **Incidence:** the stage reading reports the decision incidence for every registered quantity, from predefined contributing runs, as pooled numerators and denominators plus per-run rates. A zero denominator is marked unassessed.
+      - **The flag:** any quantity with **any nonzero** incidence on any branch is flagged as affected by table unavailability.
+      - **Flagged quantities** are reported with the flag, under the reading's existing rules. They are never dropped or re-estimated.
+      - **Unflagged quantities** are never described as certified unaffected.
+13. **Scope:**
+    - the rows of the A10 nominal family that remain `not_estimable` after Part 1's single round, or after a halted or unlaunched extension;
+    - every table family whose validation launch had not started when this amendment was committed, such as stage 2's variant families and D4's reruns.
+
+    It never applies to other already-validated families, and it never gives a later family an unspecified extension round.
+
+    **Disclosure:** for the nominal family, Part 2 relaxes a registered admission rule after its outcome, and was written knowing E = 50. For later families it is prospective.
+
+**The order of steps.**
+
+This replaces A12 part 2's steps 2 to 6. It supersedes A12's clarification of 2026-10-12 where the two conflict: the amended family's bytes and provenance change, while the job configurations, identifiers and seeds below stay the same. A12's sentence "If the proof fails, labels and the runs proceed at `c19b54f5`" is void, because no admissible family exists there. A no-launch, a failed proof or a failed admission halts all downstream work, and the limit is reported.
+
+1. **The text:**
+   - This amendment, re-certified on its changed items and approved by the operator, is committed and pushed. That commit is **the A13 commit**.
+   - It does not change the code identity.
+   - Every later launch pins the A13 commit, and requires the design note in its execution checkout to be byte-identical to the note at that commit.
+2. **The code commit.** Everything below is committed together on main.
+   - **What it contains:**
+     - A13 Part 1: the phase, eligibility, N\*, the seed manifest check and re-assembly;
+     - Part 2: the admission binding, the loader checks and the incidence recording;
+     - **historical pin verification:** carried-forward plans, and the publication of their stages, are verified by ancestry and committed hash, not against the working-tree note (`artifacts.py:227` to `:235`; `table_validation_a4.py:745` to `:746`). Verification of current launches stays strict, against the A13 pin;
+     - A12 part 2's E1 to E3.
+   - **The additive rule:**
+     - No existing fit, validate, census or estimation function is edited.
+     - Changes to the controller, the run summary and the loader are additive, and inert on a family with no admitted rows.
+     - This is confirmed by diff review and by step 3's equivalence check.
+   - **Records:** the A2 re-pins name every changed pinned file and its reason, and the new code identity is recorded.
+   - **The authority:** A13 extends A11 item 3's compatibility path to this commit. Item 3's proof admits the unchanged computations, and A13 alone admits the new phase, assembly, admission rule and recording.
+3. **A non-registered rehearsal** at the new identity, on rehearsal seeds outside the reserved range:
+   - A12's E1 to E3 checks;
+   - the extension phase's dispatch on a small non-registered plan;
+   - qualification;
+   - **run-side equivalence:**
+     - **The runs:** sampled run jobs, run at `c19b54f5` and at the new identity, agree byte for byte on every field of the `result` payload that already existed. The output envelope's code hash, runtime, timings and peak memory are excluded: they are not required to agree (`production_runner.py:262` to `:264`).
+     - **The loader** behaves identically on a family with no admitted rows.
+     - **A mismatch** halts the sequence before step 4.
+   - **the label step's receipt check:** A5's preparation runs against a rehearsal receipt of the amended form (step 7).
+
+   Its overhead is charged to the stage 1 ledger.
+4. **The A11 compatibility proof.**
+   - **What it covers:** the completed estimation and validation roots, carried forward byte-identically, from a fresh checkout at the new commit.
+   - **The selection:** 434 jobs (90 estimation, 344 validation), selected by A11's rule. The executor verifies that count against the frozen strata.
+   - **Before it runs:**
+     - its cost is projected and approved, and charged to the stage 1 ledger;
+     - a configuration test is run;
+     - on an X2, the model server is stood down (`llm down`), supervised, and restored on every exit.
+   - **Review and approval:** the interpreter reviews it and the operator approves it. It is committed, and the same bytes are committed publicly.
+   - **If the proof fails,** the sequence halts.
+5. **The extension's records,** in its fresh execution checkout at the proof record's commit, before launch:
+   - the eligible set, by identifier;
+   - E, P, M and R_max;
+   - the impossible-row flags;
+   - the frozen seed manifest and its check.
+
+   N\* and per-row reach stay executor-only. If R_max < 6, the extension does not launch and Part 2 applies.
+6. **The extension launch.**
+   - **Its terms:** registered, with its own plan, cost cap (Part 1, item 5), register approvals and operator go.
+   - **The checkout:** that execution checkout, with a new root.
+   - **Before it runs:** qualification, the pre-launch configuration test, and `llm down` on the X2, supervised and restored on every exit.
+   - **Its pin:** the A13 commit.
+   - **A halt:** item 7 applies.
+7. **Family publication.**
+   - **Where:** at the exact configured target path, `v3/runs/a10_stage1/nominal/v3_rerun_tables_A10.json`. That path has never been written, so all 53,100 run job identifiers and seeds stay unchanged (`tables_a10.py:211` to `:213`, `:225` to `:230`, `:264` to `:272`; `artifacts.py:129` to `:141`).
+   - **The guard:** the existing no-overwrite guard applies (`table_validation_a4.py:803` to `:806`).
+   - **Part 2 first:** if any row still fails Part 1, Part 2's conditions are checked and recorded before publication. If they are not met, the family is not published, and downstream work halts.
+   - **The identity record:** made at the new identity, with section 7's exact-file and hash approval and the public identity-record commits.
+   - **The receipt:**
+     - **What it binds:** both plans, both sets of stage hashes and both sets of seeds.
+     - **Unchanged fields:** the original plan's `plan_hash` and per-job `stream_seeds`, so that A5's check (`table_labels_a5.py:135` to `:146`) reads the receipt as before.
+     - **Added fields:** the extension's plan hash, stage hashes and seeds.
+8. **Labels and the five run launches.**
+   - **How each runs:**
+     - from a fresh execution checkout, with new roots;
+     - after its own qualification, register approvals, pre-launch configuration test and operator go;
+     - with `llm down` on each X2, supervised and restored on every exit;
+     - pinned to the A13 commit.
+   - **Job lists:** they are built fresh and verified against reference lists built at `c19b54f5`. If no reference lists exist, they are built first, in a fresh `d73acfb1` checkout with the same path strings.
+   - **What stays the same:**
+     - the 53,100 run jobs' configurations, identifiers and seeds;
+     - the 756 label jobs' tables, replicates and seeds;
+     - the cost classes.
+   - **What changes:**
+     - the table family's bytes and provenance, which this amendment amends;
+     - the A5 label plan's hash, with its job identifiers and envelope seeds (as in A12's clarification);
+     - the code identity and the pins.
+
+**Unchanged.**
+
+- **No registered rule changes**, whether quantity, prediction, gate, citation rule or reading rule, except for three things:
+  - Part 2(e)'s added incidence report and flag;
+  - the family error statement in Part 1, item 9;
+  - the amended family itself.
+- **Also unchanged:** the census, α, τ, the floor's 2 and 5 percent caps, the minimum of 50, and the Bernstein test.
+- **The ceiling:** stage 1's 980 X2-equivalent hours stand. The extension, the rehearsal and the proof are charged to the stage 1 ledger. About 689.68 hours remain after estimation and validation, against 384.63 reserved for labels and runs.
+- **The stage 1 reading** stays registered at `93474e00`.
