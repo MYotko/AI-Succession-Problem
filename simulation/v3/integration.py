@@ -108,6 +108,10 @@ class V3Model:
             from .study import capabilities
             fixture_hashes += [self._kernel_hash(c) for c in capabilities(successor_capability)]
         self.tables = FixtureTables(self.rules, self.parameters, self.kernel_hash, **({"kernel_hashes": fixture_hashes} if self.instrument.a10 else {})) if tables is None else tables
+        from .admission_a13 import enabled
+        self._a13_enabled = enabled(self.tables)
+        if self._a13_enabled:
+            self.a13_decisions = []
         authority = None
         if registered:
             self.tables.require_production()
@@ -236,12 +240,15 @@ class V3Model:
 
     def _choose(self, evaluation):
         mask, risks, survival_first = self._eligible(evaluation.actions)
+        a13_mask = mask.copy() if self._a13_enabled else None
         self.survival_first_scores_unavailable = False
         self.minimum_bound_unavailable_count = 0
         # Under survival-first choose the minimum bound strictly; R7's wider
         # mask is retained in diagnostics and cannot turn failure into a proof.
         if survival_first:
             mask &= risks == risks.min()
+            if self._a13_enabled:
+                a13_mask = mask.copy()
             self.minimum_bound_unavailable_count = int((mask & ~evaluation.available).sum())
             if not (mask & evaluation.available).any():
                 # D23: missing W scores cannot displace the minimum-risk
@@ -249,18 +256,27 @@ class V3Model:
                 self.survival_first_scores_unavailable = True
                 self.balanced_fallback = False
                 self.balanced_fallback_reason = None
+                self._record_a13_allocation(evaluation, a13_mask, True, int(np.flatnonzero(mask)[0]))
                 return int(np.flatnonzero(mask)[0]), True, [], risks
         mask &= evaluation.available
         self.balanced_fallback = not bool(mask.any())
         self.balanced_fallback_reason = ("all_rule_scores_unavailable" if not evaluation.available.any() else
                                         "no_scoreable_rule_passes_admission") if self.balanced_fallback else None
         if self.balanced_fallback:
+            self._record_a13_allocation(evaluation, a13_mask, survival_first, 0)
             return 0, survival_first, [], risks
         scores = np.where(mask, evaluation.scores, -np.inf)
         best = int(np.argmax(scores))
         eligible = np.flatnonzero(mask)
         unresolved = [self.rules[i].rule_id for i in eligible if i != best and abs(evaluation.scores[i] - evaluation.scores[best]) <= evaluation.errors[i] + evaluation.errors[best]]
+        self._record_a13_allocation(evaluation, a13_mask, survival_first, best)
         return best, survival_first, unresolved, risks
+
+    def _record_a13_allocation(self, evaluation, eligible, survival_first, chosen):
+        if self._a13_enabled:
+            from .admission_a13 import allocation_decision
+            self.a13_decisions.append(allocation_decision(evaluation, eligible, survival_first, chosen,
+                                                          self.balanced_fallback_reason))
 
     def review_yield(self, incumbent_index):
         if self.successor_capability is None or self.time % 10:
@@ -275,6 +291,7 @@ class V3Model:
         horizon = endpoint - self.time
         plan_extra = {"decision_deadline": self.epoch.deadline} if self.instrument.a10 else {}
         plans, mapping = [], {}
+        a13_excluded = {}
         for when in reviews:
             evaluation = self.evaluate(horizon=horizon, capability=self.successor_capability,
                                        transition_at=when - self.time, incumbent_index=incumbent_index,
@@ -282,6 +299,9 @@ class V3Model:
             # All actions and actual drawdowns preserve the same floor proof.
             for index, rule in enumerate(self.rules):
                 if not evaluation.available[index]:
+                    if self._a13_enabled:
+                        reason = evaluation.lookup.unavailable_reasons[index]
+                        a13_excluded[reason] = a13_excluded.get(reason, 0) + 1
                     continue
                 name = f"yield-{when}-{rule.rule_id}"
                 lookup = evaluation.lookup
@@ -295,6 +315,9 @@ class V3Model:
         hold_eval = self.evaluate(horizon=horizon, seed_channel="yield_common")
         for index, rule in enumerate(self.rules):
             if not hold_eval.available[index]:
+                if self._a13_enabled:
+                    reason = hold_eval.lookup.unavailable_reasons[index]
+                    a13_excluded[reason] = a13_excluded.get(reason, 0) + 1
                 continue
             name = f"hold-{rule.rule_id}"
             lookup = hold_eval.lookup
@@ -318,6 +341,9 @@ class V3Model:
                  "fixture_tables": self.tables.fixture, "common_random_numbers": True,
                  "plan_class": "current_incumbent_rule_then_stationary_successor_or_stationary_hold",
                  "intervals_unresolved": True, "transition_count": 0}
+        if self._a13_enabled:
+            from .admission_a13 import yield_decision
+            self.a13_decisions.append(yield_decision(a13_excluded))
         if self.instrument.a10:
             values = {p.plan_id: plan_value(p, self.epoch, self.time).value for p in plans}
             def best(predicate):

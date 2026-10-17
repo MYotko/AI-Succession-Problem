@@ -121,11 +121,16 @@ class ProductionTables:
             rejected = sum(row["status"] != "estimated" for row in self.rows.values())
             sensitivity = sum(row.get("sensitivity", {}).get("selected", False) and row["sensitivity"].get("passed") is False for row in self.rows.values())
             raise RuntimeError(f"table sensitivity screens are incomplete or failed: {sensitivity} selected rows failed; {rejected} total not_estimable rows")
-        for row in self.rows.values():
+        admission = self.payload['manifest'].get('a13_admission')
+        admitted = set()
+        if admission is not None:
+            from .admission_a13 import verify
+            admitted = verify(self.rows, admission)
+        for key, row in self.rows.items():
             # A4: a plain row certified through C0 alone has no fine entries but
             # a published C0, which is valid support.
             has_support = bool(row.get("continuation", {}).get("entries")) or (row.get("route") == "plain" and row.get("c0") is not None)
-            if row["status"] != "estimated" or not has_support:
+            if (row["status"] != "estimated" and key not in admitted) or not has_support:
                 raise RuntimeError("registered execution rejects missing or not_estimable table rows")
 
     def require_a10(self, instrument):

@@ -170,7 +170,7 @@ def test_a10_registration_requires_both_amendments(tmp_path, monkeypatch):
     text += b'### Amendment A11, fixture\n'
     path.write_bytes(text)
     pin['sha256'] = hashlib.sha256(text).hexdigest()
-    assert a.verify_registration(pin, tmp_path, instrument=tables.NOMINAL) == pin
+    assert a.verify_registration(pin, tmp_path, instrument=tables.NOMINAL, historical=True) == pin
 
 
 def test_registered_publish_uses_its_own_ceiling(tmp_path, monkeypatch):
@@ -184,7 +184,8 @@ def test_registered_publish_uses_its_own_ceiling(tmp_path, monkeypatch):
     monkeypatch.setattr(calibration, 'validate_calibration', reached)
     a4_path = tmp_path / 'a4.json'
     a.atomic_json(a4_path, a.seal({'jobs': []}))
-    plan = dict(registered=True, registration={'fixture': True}, instrument=tables.NOMINAL.declaration(),
+    plan = dict(registered=True, registration={'commit': a.A13_COMMIT,
+                'path': 'simulation/diagnostics/v3_rerun_design_note.md', 'sha256': '0' * 64}, instrument=tables.NOMINAL.declaration(),
                 code_hash=a.code_identity(), plan_hash='fixture', wall_seconds=257.66 * 3600,
                 declared_wall_hours=257.66, jobs=[], a4_plan_path=str(a4_path))
     with pytest.raises(PassedCeiling):
@@ -383,6 +384,16 @@ def test_toy_pipeline_through_a5_with_non24_hour_ceiling(tmp_path):
     probe = tmp_path / 'probe'
     a.atomic_json(probe / 'seeds.json', {'non_registered': True, 'seed': 76347036432783642})
     plan = tables.prepare_validation(source, cal_path, probe_root=probe, settings_override=dict(toy, census_measure=38))
+    legacy_profiles = a4._configuration_profiles(source, code,
+        a.unseal(a.read(source / 'tables_A1_manifest.json')), plan['plan_hash'], dict(toy, census_measure=38))
+    for phase, profile in plan['configuration'].items():
+        assert profile['workers_local'] == [2, 4, 8, 12]
+        assert profile['workers_x2'] == [8, 12, 16, 24, 32]
+        assert legacy_profiles[phase]['workers_local'] == [2, 4]
+        assert dict(profile, workers_local=[2, 4]) == legacy_profiles[phase]
+    original_plan = a4.prepare(source, cal_path, None, 1., probe, dict(toy, census_measure=38),
+                              instrument=tables.family_instrument('sqrt'))
+    assert dict(plan, configuration=original_plan['configuration']) == original_plan
     plan_path, run = tmp_path / 'a4_plan.json', tmp_path / 'a4'
     a.atomic_json(plan_path, a.seal(plan))
     for phase in plan['phases']:
@@ -401,6 +412,16 @@ def test_toy_pipeline_through_a5_with_non24_hour_ceiling(tmp_path):
                             wall_hours=1.25, a3_probe_root=probe, settings_override=toy,
                             instrument=tables.family_instrument('sqrt'))
     assert labels_plan['wall_seconds'] == 4500 and labels_plan['declared_wall_hours'] == 1.25
+    for profile in labels_plan['configuration'].values():
+        assert profile['workers_local'] == [2, 4, 8, 12]
+        assert profile['workers_x2'] == [8, 12, 16, 24, 32]
+        skeletons = [{k: v for k, v in j['config'].items() if k not in ('phase', 'plan_hash')}
+                     for j in labels_plan['jobs']]
+        legacy_profile = a5._configuration_profile(skeletons)
+        assert legacy_profile['workers_local'] == [2, 4]
+        assert dict(profile, workers_local=[2, 4]) == legacy_profile
+    assert a4._recompute_plan_hash(plan) == plan['plan_hash']
+    assert a5._recompute_plan_hash(labels_plan) == labels_plan['plan_hash']
     labels_root, labels_path = tmp_path / 'a5', tmp_path / 'labels.json'
     for phase in labels_plan['phases']:
         dispatch(labels_root / phase, [j for j in labels_plan['jobs'] if j['config']['phase'] == phase])

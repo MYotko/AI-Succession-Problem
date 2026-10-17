@@ -1811,3 +1811,1370 @@ The runbook was checked locally against the A11 interfaces and supplied cost rec
 command, registered simulation, table-value inspection, network action or Git
 write was performed during its preparation. The interpreter must still verify
 the machine-specific inputs and watchdog on X2.
+
+> A13 adoption notice, 2026-10-16: section 16 below is retained verbatim.
+> Section 17 supersedes its old pins, planned identity, original publication
+> path through adoption, and fallback. Follow section 17 for the current order.
+
+## 16. A12 part 2: adopting the execution fixes mid-stage
+
+This section implements option (b) in Amendment A12 part 2, committed as
+`669daf23d18c2c0452d9d10c724b8c312eea50d6` on 2026-10-11. It supersedes
+sections 8 to 11 only for the successful adoption branch below. Sections 1 to
+14 remain the procedure at the producing identity and the fallback. Nothing
+here authorizes a launch. Each record commit, qualification approval and
+registered launch still needs its own operator go.
+
+**Operator answers, 2026-10-12.** The clarification is committed as
+`cc74ddd7c23fb02e95753f9e42cf49622d906200`. The unchanged-plan-hash,
+seed, job-set and cost-class statement holds at a fixed identity. Adoption
+changes the A5 label plan hash, label job identifiers and unused envelope
+seeds, and the new specs' code identity and design pin fields. Scientific
+inputs and simulation seeds remain unchanged, as do the 53,100 run jobs
+with their identifiers and seeds, the 756 label jobs with their tables,
+replicates and simulation seeds, and the cost classes. Check these before
+launch; no old job or plan is rewritten.
+
+Labels and the five new run launches pin `cc74ddd7` with committed note
+SHA256 `dc1055002323d9afd20125533fe61c2ef7f2970042c43d9cc60b975620c40404`.
+Completed estimation and validation retain their original pin. The stage 1
+reading remains registered at `93474e00`. Section 16.3 retains the exact-byte
+pin check and refuses any mismatch, including a later edit to the note.
+
+The author performed no remote action, registered-output read, source edit
+or Git write for this section. The local design-note file ends at A10; the
+binding A12 text and clarification were read from locally available Git
+objects. The full `cc74ddd7` commit ID and note SHA256 above were verified
+directly from those committed bytes.
+
+### 16.0. Required Python integer-text setting from adoption onward
+
+**Operator decision, 2026-10-14:** run every stage 1 Python process from
+A12 part 2 adoption onward, on every host, with `PYTHONINTMAXSTRDIGITS=0`.
+"I agree, it's a pay now or pay later situation." Apply this subsection
+before the adoption's first Python command, including when reusing commands
+from earlier sections; it supersedes section 4a's statement that no environment
+change is needed. It remains applicable to subsequent stage 1 work if the
+operator selects the section 16.8 fallback.
+
+**Scope.** This includes code-commit verification and tests (in particular
+recorder or audit paths), the non-registered rehearsal, the A11 item 3
+compatibility proof, the labels launch, all five run launches, qualification
+and configuration-test runs, after-run gates, the separately authorized sealed
+reading, and every reader or tool that parses recorder output. Set it for
+coordinators, service supervisors, host supervisors, spawned workers and RPC
+processes as well as interactive Python commands. This requirement does not
+authorize any launch, reading or other step that still needs the operator's go.
+
+It does **not** apply retroactively to the running validation: leave that
+launch and its processes untouched and finish section 16.1 at their existing
+identity. Code inspection confirms that `production_runner.execute` routes
+table jobs to `offline_estimator.estimate` and A4 fit, validation and census
+jobs to `table_validation_a4.run_stage_job`; its `TableTrace` uses
+`offline_estimator.simulate`. Those paths do not convert certificates to
+decimal text or invoke `RecordedV3Model` or the period audit. The affected
+conversions are `str(certificate.exact)` for period and active admission
+evidence in `recording.py`, and `str(reserved)` / `str(unallocated)` in
+`cohort.ProtectionPeriod.audit`; `gates.recompute_review` parses the admission
+strings with `Fraction`, so readers need the setting too.
+
+**Set it at each process boundary.**
+
+- **X2-1:** the shell launch wrappers in sections 4 and 14 supply the Python
+  service/host supervisor's environment; its children inherit that environment.
+  Add this exact line in the launch wrapper, before the preflight and before
+  starting any Python supervisor, coordinator or worker:
+
+  ```bash
+  export PYTHONINTMAXSTRDIGITS=0
+  ```
+
+  If the actual launcher is a systemd user unit, the supervisor instead gets
+  its environment from that unit, not from the terminal issuing `systemctl`.
+  Add this exact line under `[Service]` in that unit or its drop-in:
+
+  ```ini
+  Environment=PYTHONINTMAXSTRDIGITS=0
+  ```
+
+  Reload the user manager with `systemctl --user daemon-reload` after a unit
+  change, and restart the affected launcher at the adoption boundary. An
+  export in an unrelated login shell does not configure a systemd service.
+- **WS-1 in WSL, BX-1, and X2-2 when it joins:** add
+  `export PYTHONINTMAXSTRDIGITS=0` in the host's Linux shell or launch wrapper
+  before its qualification command and `"$PYTHON" -B -m v3.host_a11` command.
+  On WS-1 this must be inside WSL. Repeat in each fresh shell or detached
+  launcher; `nohup`/`setsid` and spawned workers inherit the launch environment.
+  SSH does not forward this setting: configure it on the destination as well.
+  In particular, `host_a11.SSH` starts a fresh coordinator-side RPC Python;
+  set the export in that account's noninteractive SSH shell startup (before
+  any interactive-only return), or in the configured restricted-command
+  wrapper before its existing fixed RPC command. Keep RPC stdout free of
+  preflight text. Do not edit `host_a11.py` to supply the variable.
+- **Readers and gates on any host:** use the same export in the shell/wrapper
+  that starts the reader, gate or sealed-reading Python. For a native Windows
+  PowerShell process use `$env:PYTHONINTMAXSTRDIGITS = '0'` before invoking its
+  selected Python. An export on the producing host does not configure a reader
+  elsewhere.
+
+Existing Python processes must be restarted to pick up the setting; changing
+their parent's environment is insufficient. Apply this to adoption and later
+processes, preserving completed jobs and the existing interruption/resumption
+procedure; do not restart the running pre-adoption validation for this change.
+
+**Preflight on every host, for every launch, before its go.** With the exact
+Python executable and environment that will run the jobs, require a printed
+limit of `0` and a zero exit status from this one-line check:
+
+```bash
+"$PYTHON" -B -c 'import sys; n = sys.get_int_max_str_digits(); print(sys.executable, n); sys.exit(n != 0)'
+```
+
+This verifies `sys.get_int_max_str_digits() == 0`; merely displaying the
+environment variable is insufficient. Run it inside the actual launch wrapper
+or, for systemd, a preflight-only invocation with the same unit environment,
+interpreter and working directory, before starting work. Check the destination
+SSH/RPC environment separately, and repeat for qualification, rehearsal, proof,
+tests, readers/gates and sealed-reading invocations in their actual environments.
+Record host, time, launch/invocation, executable, environment source, printed
+value and exit status in the launch notes or existing execution metadata under
+the authorized operational root. No code change or new sealed-spec field is
+needed; do not proceed to the go with a missing or nonzero check.
+
+**Rationale.** Exact cohort fractions have the form
+`Fraction(product(2**32 - s_i), 2**(32*n))`, about 9.633 denominator digits per
+living agent before reduction, so Python's default 4,300-digit conversion limit
+can be exceeded from 447 living agents onward.
+The operator's outcome-blind X2-2 probe of 630 runs across all five stage 1
+run-launch configurations found a stage 1 peak of 2,809 digits and zero expected
+failures among 53,100 jobs, but population-doubled runs exceeded the limit about
+8% of the time (D4 needs the setting); evidence is
+`C:\Users\matty\Dev\Lineage v3\digit_probe_2026-10-14\codex_report.md` and,
+on X2-2, `~/digit_probe/results/analysis.md`.
+Disabling this conversion limit is free insurance for stage 1: it changes no
+code identity, simulation result or successful job's canonical result bytes;
+a job that would fail only at this conversion can complete instead.
+
+**Unchanged by this setting:** pins, plan hashes, seeds, job sets, cost classes
+and the A11 item 3 compatibility path, including its proof and approvals.
+The separate A12 adoption identity/plan changes already described above still
+apply; this environment requirement adds none. It needs no amendment to the
+design note or pre-registration, no source edit and no identity re-pin.
+
+### 16.1. Finish and publish at c19b54f5
+
+Stay in the running X2 checkout. Keep its existing section 1 variables, pin,
+specs, root paths and code. Do not pull it. Wait for validation and its workers
+to finish, including the final cross-host check and service restoration.
+
+```bash
+export OLDCO="$HOME/v3_a10"
+export OLD_CODE=c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810
+cd "$OLDCO/simulation"
+test "$("$PYTHON" -B -c 'from v3.artifacts import code_identity; print(code_identity())')" = "$OLD_CODE"
+# Use the already defined check_done from section 4, in this checkout.
+check_done "$EST_SPEC" "$EST_RUN"
+check_done "$VAL_SPEC" "$VAL_RUN"
+"$PYTHON" -B -m v3.table_validation_a4 publish \
+  "$VAL_SPEC" "$VAL_RUN" "$SOURCE" "$CAL" "$TABLE"
+sha256sum "$TABLE" "${TABLE%.json}.compatibility.json" "${TABLE%.json}.cell_results.json"
+```
+
+Require section 6's 19,500 primary rows, publication screens, hashes and
+complete-root checks. Do not run an outcome report. Execute section 7 exactly
+here, creating and committing only
+`simulation/v3/runs/a10_stage1/nominal/family_identity.json`, then committing
+the same bytes publicly. The record commit changes HEAD, not `OLD_CODE`.
+Record both commit IDs and the common record hash. Do not start section 8
+here unless the adoption fails and the operator selects the specified fallback.
+
+Export the completed-source handoff, still under the old code:
+
+```bash
+export HANDOFF=v3/runs/a12_handoff
+mkdir -p "$HANDOFF"
+"$PYTHON" -B - <<'PY'
+import os, subprocess
+from pathlib import Path
+from v3.artifacts import atomic_json, source_manifest, code_identity, read, file_hash, digest
+r=Path(os.environ['HANDOFF'])
+assert code_identity()==os.environ['OLD_CODE']
+sources=[dict(spec=str(Path(os.environ[s]).resolve()),root=str(Path(os.environ[t]).resolve()))
+         for s,t in [('EST_SPEC','EST_RUN'),('VAL_SPEC','VAL_RUN')]]
+assert all(read(Path(s['root'])/'launches.json')[-1].get('complete') is True for s in sources)
+atomic_json(r/'sources.json',sources)
+atomic_json(r/'producing_source_manifest.json',source_manifest())
+from v3.tables_a10 import paired_runs,arm_runs,correct_runs
+from v3.sensitivity_a6 import build_weight_corner_jobs,build_horizon_jobs
+cal='v3/runs/registered/v3_rerun_calibration.json'
+table='v3/runs/a10_stage1/nominal/v3_rerun_tables_A10.json'
+arms=arm_runs(cal,table,'UNUSED_STAGE_2_SQRT_TABLE')
+groups={'main':paired_runs(cal,table),
+        'k1p5':[j for j in arms if j['config']['model']['instrument']['g']=='linear' and j['config']['model']['instrument']['k_star']==1.5],
+        'k2p3':[j for j in arms if j['config']['model']['instrument']['g']=='linear' and j['config']['model']['instrument']['k_star']==2.3],
+        'weight_corner':correct_runs(build_weight_corner_jobs(cal,table)),
+        'horizon':correct_runs(build_horizon_jobs(cal,table))}
+atomic_json(r/'run_job_inventory.json',{name:dict(count=len(jobs),jobs_sha256=digest(jobs)) for name,jobs in groups.items()})
+atomic_json(r/'handoff.json',dict(code_hash=code_identity(),
+    identity_commit=subprocess.check_output(['git','rev-parse','HEAD']).decode().strip(),
+    identity_sha256=file_hash(os.environ['IDENTITY']),
+    sources_sha256=file_hash(r/'sources.json'),
+    source_manifest_sha256=file_hash(r/'producing_source_manifest.json')))
+print(read(r/'handoff.json'))
+PY
+```
+
+These are operational exports, not new scientific records. Preserve the
+completed roots, plans, calibration, probe records, source publication and
+all receipt siblings byte for byte. No unfinished root may move to new code.
+
+### 16.2. The planned code commit and its identity
+
+The operator approves this exact file list relative to the public repository,
+against the c19b54f5 implementation already on main:
+
+```text
+simulation/v3/tables_a10.py
+simulation/v3/table_labels_a5.py
+simulation/v3/multihost_a11.py
+simulation/v3/host_a11.py
+simulation/v3/qualification_a11.py
+simulation/v3/production_runner.py
+simulation/v3/service.py
+simulation/test_v3_a12_execution.py
+simulation/test_v3_a11.py
+simulation/test_v3_multihost_a11.py
+simulation/test_v3_multihost_rehearsal.py
+simulation/v3/table_compatibility_A2.json
+simulation/v3/A10_RUN_ON_X2.md
+simulation/diagnostics/v3_instrument_implementation_note.md
+```
+
+Commit text, with no additional attribution:
+
+```text
+Implement A12 part 2 execution fixes and the stage 1 adoption procedure
+
+Give A10 validation and labels local worker candidates 2, 4, 8 and 12.
+Prefer the fastest eligible cross-host recheck host for five seconds, then
+allow any eligible host. Declare host profiles and model-service handling
+independently of hostname, preserving the current X2 default.
+
+Re-pin production_runner.py and service.py under A12 part 2, committed in
+669daf23. Preserve R4 profiles, scientific work, seed-selection functions,
+cost classes and exact per-root resume identities. Add execution tests and
+document the rehearsal and approved compatibility proof before adoption.
+```
+
+The reviewed fixes alone have identity
+`3d44e320cd7225bb3d2ea2b0ac7ec5b43fef41592bd12477cd135b5cfabc56bd`.
+The A2 re-pins below are part of the planned commit, not yet applied by this
+documentation task. With their exact bytes, the planned identity is
+`7c3ee3365882b5d304662950ea7df2d9e37af461ede1095834c68cdc8b68f217`.
+Changing the metadata text or JSON serialization changes that identity too.
+
+In the operator's integration checkout, apply this bounded record edit after
+reviewing the seven source files and four tests. This is preparation for the
+operator's commit, not a command for a running checkout:
+
+```bash
+cd "$MAINCO/simulation"
+"$PYTHON" -B - <<'PY'
+import hashlib, json
+from pathlib import Path
+from v3.artifacts import source_manifest, code_identity
+assert code_identity()=='3d44e320cd7225bb3d2ea2b0ac7ec5b43fef41592bd12477cd135b5cfabc56bd'
+p=Path('v3/table_compatibility_A2.json'); record=json.loads(p.read_bytes())
+manifest=source_manifest()
+reasons={
+ 'v3/production_runner.py': "A12 part 2: E1's candidate handling and E3's hostname-free profile check.",
+ 'v3/service.py': "A12 part 2: E3's per-host model service."}
+assert record['approved_boundary_sha256']['v3/production_runner.py']=='c7d3682422ac0d200f7aede0a6e158835d1dc5e38226d783f6f6a541c5d56947'
+assert record['approved_boundary_sha256']['v3/service.py']=='e56e52745374a200c1bface50aa8ba2545aaa4da1ca6eed4a1bc5462ef6e7a24'
+record['a10']['a12_part2_revision']={
+ 'amendment':'A12 part 2, execution fixes and adoption mid-stage',
+ 'date':'2026-10-11',
+ 'authorization_commit':'669daf23d18c2c0452d9d10c724b8c312eea50d6',
+ 'previous_approved_sha256':{p:record['approved_boundary_sha256'][p] for p in reasons},
+ 'reasons':reasons,
+ 'scope':'Scheduling and per-host service only. No scientific mechanism, seed-selection function, table, label, gate or reading changes. A10 completed artifacts require the approved, passed, committed A11 compatibility proof. Per-root resume identities stay strict. R4 scientific byte-identity proofs and exact legacy checks remain in force. No A1 or A4 family is read as A10.'}
+record['approved_boundary_sha256'].update({p:manifest[p] for p in reasons})
+data=(json.dumps(record,sort_keys=True,separators=(',',':'))+'\n').encode()
+assert hashlib.sha256(data).hexdigest()=='2c21f1bfa40c5cdf96897ab6e67c6d4ce2bb0aafe523675dc24c9820645866a8'
+p.write_bytes(data)
+assert code_identity()=='7c3ee3365882b5d304662950ea7df2d9e37af461ede1095834c68cdc8b68f217'
+PY
+```
+
+The new LF-normalized pins are
+`7ab76512c67f7e32b677147c3dc79f3d8e8ec43dfdfa483bdf9f49b628753e9b`
+for `production_runner.py` and
+`623db8ef5e49116ae7ea56646de754a0102c6f242716b1de55bc9ba96d1c254b`
+for `service.py`. No A1 pin or other pinned dependency changes. Preserve the
+existing A10/R4 proof statements and historical entries. Tests and the two
+Markdown files are outside `source_manifest()`; this JSON is inside it.
+The operator commits and publishes the approved list, then records the full
+`A12_CODE_COMMIT`. No commit or push is performed by this runbook's author.
+
+### 16.3. Fresh repair checkout and registration checks
+
+Only after validation publication and the family record commit, use a fresh
+checkout. Never pull `~/v3_a10` or change its code. Set these in the X2 shell:
+
+```bash
+export A12_CODE_COMMIT='<FULL_APPROVED_CODE_COMMIT>'
+export EXPECTED_CODE=7c3ee3365882b5d304662950ea7df2d9e37af461ede1095834c68cdc8b68f217
+export REPAIRCO="$HOME/v3_a12"
+test ! -e "$REPAIRCO"
+git -c core.autocrlf=false clone --no-checkout \
+  https://github.com/MYotko/AI-Succession-Problem.git "$REPAIRCO"
+git -C "$REPAIRCO" -c core.autocrlf=false checkout --detach "$A12_CODE_COMMIT"
+export PATH="$HOME/miniforge3/envs/phaseb/bin:$HOME/.local/bin:$PATH"
+export PYTHON="$HOME/miniforge3/envs/phaseb/bin/python3.13"
+export A10CO="$REPAIRCO" CODE_COMMIT="$A12_CODE_COMMIT"
+export A10_ROOT=v3/runs/a12_stage1
+export CAL=v3/runs/registered/v3_rerun_calibration.json
+export PIN="$A10_ROOT/A10_pin.json"
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
+cd "$A10CO/simulation"
+mkdir -p "$A10_ROOT/checks" "$A10_ROOT/inputs"
+"$PYTHON" -B - <<'PY'
+import hashlib, os, subprocess
+from v3.artifacts import source_manifest, code_identity, digest
+def git(*args): return subprocess.check_output(['git',*args])
+assert git('rev-parse','HEAD').decode().strip()==os.environ['CODE_COMMIT']
+git('merge-base','--is-ancestor','669daf23d18c2c0452d9d10c724b8c312eea50d6','HEAD')
+assert not git('diff','HEAD','--','simulation').strip()
+manifest=source_manifest()
+committed={p:hashlib.sha256(git('show','HEAD:simulation/'+p).replace(b'\r\n',b'\n')).hexdigest() for p in manifest}
+assert committed==manifest and digest(committed)==code_identity()==os.environ['EXPECTED_CODE']
+print({'code_identity':code_identity(),'committed_source':'verified'})
+PY
+```
+
+Repeat section 1's Python, numpy, calibration and constants checks here.
+For labels and the five new run launches, use the operator-approved
+clarification commit and its exact committed note SHA256 below. Do not infer
+a pin from HEAD or substitute the re-pin authorization commit `669daf23`.
+
+```bash
+export ADOPTION_DESIGN_COMMIT='cc74ddd7c23fb02e95753f9e42cf49622d906200'
+export ADOPTION_DESIGN_SHA256='dc1055002323d9afd20125533fe61c2ef7f2970042c43d9cc60b975620c40404'
+"$PYTHON" -B - <<'PY'
+import os, hashlib, subprocess
+from pathlib import Path
+from v3.artifacts import verify_registration, atomic_json, read
+from v3.tables_a10 import family_instrument
+pin=dict(commit=os.environ['ADOPTION_DESIGN_COMMIT'],
+ path='simulation/diagnostics/v3_rerun_design_note.md',sha256=os.environ['ADOPTION_DESIGN_SHA256'])
+assert hashlib.sha256(subprocess.check_output(['git','show',pin['commit']+':'+pin['path']])).hexdigest()==pin['sha256']
+verify_registration(pin,instrument=family_instrument('nominal'))
+target=Path(os.environ['PIN']); assert not target.exists() or read(target)==pin
+atomic_json(target,pin)
+PY
+```
+
+A pin mismatch is a stop, including a later edit to that same design-note
+file. In particular, a pin to the reading registration `93474e00` does not
+match the note after part 2 was appended. The later reading retains its
+separate registration at `93474e00dea0c8d88bfed64e096b2f4e21656a7f`.
+
+WSL and the box use fresh `~/v3_a12` checkouts at the same full code commit,
+with the same committed-byte checks, phaseb environment and relative paths.
+Do not touch their active c19b54f5 checkouts. Stage the section 2 exclusion
+bundle and P2 cost record by the existing hashes, and set `COST` and `PROBE`
+to those copies. The family identity record must already be tracked on main
+at the original section 7 path with exactly the old record bytes. Stop if it
+is absent; do not synthesize it from an output at the new identity.
+
+### 16.4. Non-registered rehearsal on the workstation and box
+
+Use new roots under `v3/runs/a12_rehearsal`, never a registered root. Budget
+at most three wall hours for this rehearsal session, including qualification;
+stop and preserve it if it cannot finish. Charge actual machine intervals to
+the operations ledger. This is a toy exercise, not a new cost projection.
+
+While the X2 is occupied, the workstation and box may run the deterministic
+local checks below only after their own active workers have been drained and
+their capacity is released by the operator. Otherwise wait. The real transport
+rehearsal below runs after validation, because qualification still requires
+the original X2 as its measured reference. Do not spoof that hostname or use
+old-identity qualification evidence to avoid that requirement.
+
+In each new workstation/box checkout, with its frozen Python and one numerical
+thread, run these selected existing tests. Their loopback fixtures deliberately
+control the clock and host speeds; they are not real-machine throughput claims.
+
+```bash
+cd "$HOME/v3_a12/simulation"
+mkdir -p v3/runs/a12_rehearsal/checks
+"$PYTHON" -B -m pytest -q test_v3_a12_execution.py \
+  --junitxml=v3/runs/a12_rehearsal/checks/execution.xml
+"$PYTHON" -B -m pytest -q test_v3_a11.py -k pipeline \
+  --junitxml=v3/runs/a12_rehearsal/checks/pipeline.xml
+```
+
+Require 20 A12 cases passed and a selected, passed pipeline test, not zero
+collected tests. E2 cases are
+`test_fastest_eligible_non_original_host_gets_unchanged_check` (both original
+host cases) and `test_recheck_preference_expires_without_reset_and_fallback_finishes`.
+They check the fastest non-original host, exclusion of the original fastest
+host, the five-second journaled window, and fallback without changing the
+sample or comparison. Memory, readiness, drain and mismatch refusals also run.
+
+After X2 is free, run section 12a's small full pipeline with these substitutions:
+
+```bash
+export REH=v3/runs/a12_rehearsal/pipeline
+export EXPECTED_CODE=7c3ee3365882b5d304662950ea7df2d9e37af461ede1095834c68cdc8b68f217
+export CODE_COMMIT="$A12_CODE_COMMIT" A10CO="$HOME/v3_a12"
+export BOARD_NAME=a12_rehearsal_pipeline.json
+```
+
+Use section 12a's declared contexts `(.064,1.)` and `(.064,1.5)`, population
+64, capacity 640, three groups, two runs/particles, burn 30 and measure 120.
+Keep its two-hour estimation/validation ceilings and 1.25-hour label ceiling.
+Do not run its 24,000-step fault drills again for this change. Qualify and
+approve X2, WSL and the box per phase. For this pipeline, both non-X2 hosts
+use `--profile local --model-service none --mode work`; permit 12 workers on
+WSL and up to 12 within the box's measured CPU budget. X2 uses eight workers
+and its default `llm` service. Each host still chooses its configuration.
+
+After preparing each of the validation and label plans, check every profile:
+
+```bash
+export PLAN="$REH/validation.json"  # Repeat with $REH/labels_plan.json when built.
+"$PYTHON" -B - <<'PY'
+import os
+from v3.artifacts import read,unseal
+p=unseal(read(os.environ['PLAN']))
+assert p['registered'] is False and p['configuration']
+for phase,profile in p['configuration'].items():
+    assert profile['workers_local']==[2,4,8,12]
+    assert profile['workers_x2']==[8,12,16,24,32]
+    print({'phase':phase,'local_candidates':profile['workers_local'],'x2_candidates':profile['workers_x2']})
+PY
+```
+
+Check session configuration measurements test all feasible candidates within
+each host's declared cap and measured memory. A chosen count below 12 is not
+a failure. Confirm the real cross-host checks match and the final A4/A5
+publication and A10 receipt pass. Never display fitted values or outcomes.
+
+For E3, create a separate short estimation drill with the same two declared
+contexts and settings under `REH=v3/runs/a12_rehearsal/x2_none`; use the first
+builder block in section 12a and its preparation/qualification sequence.
+The original X2 remains coordinator and reference, with an ordinary local
+worker. The box is the candidate, under its actual hostname. Require Linux
+and a CPU budget whose work cap permits eight workers. If the box lacks that
+capacity, use WSL for this profile case; do not fake resources or names.
+This profile test does not claim that the box has X2 hardware or throughput.
+
+On the candidate, use a fresh qualification output for this distinct root:
+
+```bash
+export REH=v3/runs/a12_rehearsal/x2_none
+export QUAL="$REH/qualification/estimate"
+export CANDIDATE_CPUS='<APPROVED_AVAILABLE_CPU_BUDGET_AT_LEAST_12>'
+test "$(hostname)" != yotko-evo-x2
+# Pull this root's new plan.json and plan_files from X2 as in section 4a.
+"$PYTHON" -B -m v3.qualification_a11 run "$QUAL/plan.json" "$QUAL/box_x2_none.json" \
+  --profile x2 --model-service none --workers 8 --cpu-budget "$CANDIDATE_CPUS" --mode work
+scp "$QUAL/box_x2_none.json" "yotko@100.96.61.55:v3_a12/simulation/$QUAL/box_x2_none.json"
+```
+
+On X2 compare it against this plan's new X2 reference, obtain the operator's
+approval, and append that evidence to this root's register:
+
+```bash
+"$PYTHON" -B -m v3.qualification_a11 compare "$QUAL/plan.json" "$QUAL/reference.json" \
+  "$QUAL/box_x2_none.json" "$QUAL/box_x2_none_evidence.json"
+"$PYTHON" -B -m v3.multihost_a11 approve "$REH/source/tables_A1" \
+  "$QUAL/box_x2_none_evidence.json" --operator '<OPERATOR>' --when '<APPROVAL_UTC>'
+```
+
+Start the non-registered coordinator with section 12a's helper, attaching the
+watchdog to `"$HOME/status-board/a12_rehearsal_x2_none.json"`. On the candidate:
+
+```bash
+export RUN_ROOT="$REH/source/tables_A1"
+"$PYTHON" -B -m v3.host_a11 --coordinator yotko@100.96.61.55 \
+  --checkout /home/yotko/v3_a12 --root "$RUN_ROOT" \
+  --scratch "$REH/host_box_x2_none" --profile x2 --model-service none \
+  --workers 8 --cpu-budget "$CANDIDATE_CPUS" --mode work
+"$PYTHON" -B - <<'PY'
+import os
+from pathlib import Path
+from v3.artifacts import read
+s=read(Path(os.environ['REH'])/'host_box_x2_none/service.json')
+assert s['model_service']=='none' and s['actions_skipped'] is True
+assert s['down_exit_code'] is None and s['up_exit_code'] is None
+print({'service':'none','actions_skipped':True})
+PY
+```
+
+On X2, inspect only operational state via
+`v3.dispatch_store_a11.read_state(Path(RUN_ROOT))`: the candidate's session
+must record profile `x2`, service `none`, configuration at eight workers,
+at least one completed job and an ended charging interval. Do not accept a
+candidate that joined too late to perform work. Reconcile the separate
+service records: the original X2 still restores `llm`, the candidate attempts
+no service action. Retain qualification hashes, config records, matching
+checks, test XML, publication hashes and receipt. The interpreter reviews
+these together. The E2 preference and fallback checks in this rehearsal are
+the controlled loopback cases on both real machines; the live pipeline checks
+the transport, configurations, cross-host matching and publication. Do not
+describe the controlled clock as a measured network fallback latency.
+
+The interpreter writes a plain `review.json` under
+`v3/runs/a12_rehearsal`, with `passed`, `code_hash`, `reviewer`, and a `cases`
+mapping. Require `qualification`, `E1_validation`, `E1_labels`,
+`E2_preferred`, `E2_fallback`, `E3_x2_none`, `publication` and `watchdog`,
+each with `passed: true`. Its `evidence_sha256` maps paths relative to that
+rehearsal directory to the actual files reviewed, including test XML from
+both hosts. Copy remote operational evidence there by hash. Failed cases
+stop adoption; do not manufacture an approval from an earlier identity.
+After the operator approves that review, use this A12-specific approval block
+instead of section 12a's old fault-drill approval block:
+
+```bash
+export REHEARSAL_OPERATOR='<APPROVING_OPERATOR>'
+export REHEARSAL_APPROVAL_UTC='<APPROVAL_UTC>'
+"$PYTHON" -B - <<'PY'
+import os
+from pathlib import Path
+from v3.artifacts import read,seal,atomic_json,code_identity,file_hash
+r=Path('v3/runs/a12_rehearsal'); review=read(r/'review.json')
+required={'qualification','E1_validation','E1_labels','E2_preferred','E2_fallback',
+          'E3_x2_none','publication','watchdog'}
+assert review['passed'] and review['code_hash']==code_identity() and review['reviewer']
+assert required<=set(review['cases']) and all(review['cases'][k]['passed'] for k in required)
+files=review['evidence_sha256']; assert files
+for name,expected in files.items():
+    path=(r/name).resolve(); assert path.is_relative_to(r.resolve())
+    assert file_hash(path)==expected
+operator=os.environ['REHEARSAL_OPERATOR']; when=os.environ['REHEARSAL_APPROVAL_UTC']
+assert operator and when and '<' not in operator+when
+record=dict(schema='v3-A11-rehearsal-approval-1',passed=True,non_registered=True,
+    code_hash=code_identity(),reviewer=review['reviewer'],
+    operator_approval=dict(operator=operator,when=when),rehearsal_root=str(r.resolve()),
+    files={**files,'review.json':file_hash(r/'review.json')},cases=review['cases'])
+target=Path(os.environ['A10_ROOT'])/'checks/A11_rehearsal_approved.json'
+assert not target.exists() or read(target)==seal(record)
+atomic_json(target,seal(record))
+print({'passed':True,'approval_sha256':file_hash(target)})
+PY
+```
+
+### 16.5. Prove compatibility, review, approve and commit the record
+
+Run the proof in `~/v3_a12` on X2 only after the old validation is complete,
+the rehearsal passes and the operator grants its service window. This avoids
+reinterpreting absolute source paths on another machine. It also makes the
+ledger charge unambiguous: elapsed X2 service/proof time at relative rate 1,
+including startup, cleanup and review-related operational work. Use section
+14's service supervisor and its work-mode maximum of 12 one-thread workers.
+Do not launch a registered worker at the same time. Reserve this cost from
+actual remaining stage 1 headroom, not a ninth allocation or an enlarged
+ceiling. If headroom is insufficient, stop for the operator. Record actual
+time even when a proof fails.
+
+```bash
+cd "$REPAIRCO/simulation"
+mkdir -p v3/runs/a11_proof
+cp "$OLDCO/simulation/v3/runs/a12_handoff/sources.json" v3/runs/a11_proof/sources.json
+cp "$OLDCO/simulation/v3/runs/a12_handoff/producing_source_manifest.json" \
+  v3/runs/a11_proof/producing_source_manifest.json
+cmp "$OLDCO/simulation/v3/runs/a12_handoff/sources.json" v3/runs/a11_proof/sources.json
+"$PYTHON" -B - <<'PY'
+from v3.artifacts import read,atomic_json,source_manifest,digest,code_identity
+from v3.compatibility_a10 import changed_files
+before=read('v3/runs/a11_proof/producing_source_manifest.json')
+assert digest(before)=='c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810'
+assert code_identity()=='7c3ee3365882b5d304662950ea7df2d9e37af461ede1095834c68cdc8b68f217'
+reasons={
+ 'v3/tables_a10.py':'E1: A10 validation local candidates [2,4,8,12]; unchanged legacy profiles and scientific jobs.',
+ 'v3/table_labels_a5.py':'E1: A10 label local candidates [2,4,8,12] after the unchanged job construction.',
+ 'v3/multihost_a11.py':'E2: bounded fastest-eligible recheck preference; E3: approved profile and service, independent of hostname.',
+ 'v3/host_a11.py':'E2: current memory reporting; E3: explicit per-host model service and hostname-independent X2 profile.',
+ 'v3/qualification_a11.py':'E3: record candidate profile and service; original X2 reference unchanged.',
+ 'v3/production_runner.py':"A12 part 2: E1's candidate handling and E3's hostname-free profile check.",
+ 'v3/service.py':"A12 part 2: E3's per-host model service.",
+ 'v3/table_compatibility_A2.json':'A12 part 2 authorizes exactly the production_runner.py and service.py re-pins; preserve all other checks.'}
+assert set(changed_files(before,source_manifest()))==set(reasons)
+atomic_json('v3/runs/a11_proof/reasons.json',dict(producing_source_manifest=before,reasons=reasons))
+print({'changed_manifest_files':len(reasons),'source_launches':len(read('v3/runs/a11_proof/sources.json'))})
+PY
+```
+
+Expected: eight changed manifest files and two completed source launches.
+Test files and notes are not manifest files and do not belong in `reasons`.
+Now execute the X2 service-supervisor block in section 14 exactly. Its paths
+above are deliberate: it runs `compatibility_a10 build --sources
+v3/runs/a11_proof/sources.json --reasons v3/runs/a11_proof/reasons.json
+--output v3/runs/a11_proof/proof.json --workers 12`. Do not also run the bare
+workstation command. The original specs, their jobs and `config.seed` stay
+unchanged. The builder reads the old outputs internally and reports hashes.
+
+Require a sealed attempt with the complete population, followed by a passed
+proof of the two hash-selected jobs per phase/capability/setting, or all if
+fewer. It covers both estimation and every nonempty validation phase. A
+failed comparison ends the attempt; it cannot be approved, resampled or
+retried to get a passing record. The interpreter reviews the exact source
+diff, reasons, selection, per-job proof hashes and restored-service record.
+Only then may the operator approve:
+
+```bash
+"$PYTHON" -B - <<'PY'
+from v3.artifacts import read,unseal
+p=unseal(read('v3/runs/a11_proof/proof.json'))
+assert p['passed'] and all(x['passed'] for x in p['proofs'])
+assert p['operator_approval'] is None
+print({'passed':True,'proof_jobs':len(p['proofs']),'strata':len(p['populations']),
+       'phases':sorted({x['phase'] for x in p['populations']})})
+PY
+# Separate operator go for this proof and its reviewed reasons.
+"$PYTHON" -B -m v3.compatibility_a10 approve v3/runs/a11_proof/proof.json \
+  --operator '<OPERATOR>' --date '<APPROVAL_DATE>'
+```
+
+Execute section 14's `record_name` copy, single-file commit and verification
+block in this repair checkout. It commits only
+`simulation/v3/runs/registered/A11_compatibility_<DIGEST_OF_X_AND_Y>.json`,
+where the tool computes the exact basename. Export its path as `COMPAT_PATH`
+and its byte SHA256 as `COMPAT_SHA256`. Set Git identity in this checkout only
+as in section 7. No fetch or pull. Require `validate_record` to return the
+full c19b54f5 identity, `accepted_identities()` to contain it and Y, and Y to
+remain unchanged.
+
+Copy that exact file to the operator's main checkout at the same relative
+path. As in section 7, compare bytes by SHA256, obtain a separate go, stage
+only `COMPAT_PATH`, check the staged path list, and commit with:
+
+```text
+Record approved A12 part 2 compatibility of completed A10 estimation and validation
+```
+
+```bash
+# In the repair checkout, after its single-file commit and verification:
+export COMPAT_SHA256=$(sha256sum "$REPAIRCO/$COMPAT_PATH" | cut -d' ' -f1)
+printf '%s\n%s\n' "$COMPAT_PATH" "$COMPAT_SHA256"
+# In the operator's public main checkout, set both values to that output.
+export MAINCO='<OPERATOR_MAIN_CHECKOUT>'
+export COMPAT_PATH='<EXACT_RELATIVE_PATH_REPORTED_ABOVE>'
+export COMPAT_SHA256='<EXACT_BYTE_SHA256_REPORTED_ABOVE>'
+mkdir -p "$MAINCO/$(dirname "$COMPAT_PATH")"
+scp "yotko@100.96.61.55:v3_a12/$COMPAT_PATH" "$MAINCO/$COMPAT_PATH"
+test "$(sha256sum "$MAINCO/$COMPAT_PATH" | cut -d' ' -f1)" = "$COMPAT_SHA256"
+# Separate operator go for these bytes and this single-file public commit.
+git -C "$MAINCO" add -f -- "$COMPAT_PATH"
+test "$(git -C "$MAINCO" diff --cached --name-only)" = "$COMPAT_PATH"
+git -C "$MAINCO" commit -m 'Record approved A12 part 2 compatibility of completed A10 estimation and validation'
+test "$(git -C "$MAINCO" show "HEAD:$COMPAT_PATH" | sha256sum | cut -d' ' -f1)" = "$COMPAT_SHA256"
+git -C "$MAINCO" rev-parse HEAD
+```
+
+The repair and public commits may differ, but their record bytes must match.
+Record the full public commit as `A12_RECORD_COMMIT`. Neither record-only
+commit changes Y. Preserve both proof files and the review; never commit the
+old scientific outputs. Create the execution checkout from the public commit:
+
+```bash
+export A12_RECORD_COMMIT='<FULL_PUBLIC_COMPATIBILITY_RECORD_COMMIT>'
+export EXECUTIONCO="$HOME/v3_a12_execution"
+test ! -e "$EXECUTIONCO"
+git -c core.autocrlf=false clone --no-checkout \
+  https://github.com/MYotko/AI-Succession-Problem.git "$EXECUTIONCO"
+git -C "$EXECUTIONCO" -c core.autocrlf=false checkout --detach "$A12_RECORD_COMMIT"
+export A10CO="$EXECUTIONCO" CODE_COMMIT="$A12_RECORD_COMMIT"
+cd "$A10CO/simulation"
+# Repeat 16.3's committed-source check and the resolved registration check here.
+"$PYTHON" -B - <<'PY'
+import os, subprocess
+from pathlib import Path
+from v3.artifacts import code_identity,file_hash
+from v3.compatibility_a10 import validate_record,accepted_identities
+path=Path(os.environ['COMPAT_PATH'].removeprefix('simulation/'))
+assert subprocess.check_output(['git','show','HEAD:simulation/'+path.as_posix()])==path.read_bytes()
+assert file_hash(path)==os.environ['COMPAT_SHA256']
+assert validate_record(path)==os.environ['OLD_CODE']
+assert {os.environ['OLD_CODE'],os.environ['EXPECTED_CODE']} <= accepted_identities()
+assert code_identity()==os.environ['EXPECTED_CODE']
+print({'compatibility':'verified','code_identity':code_identity()})
+PY
+```
+
+WSL and the box now also use fresh `~/v3_a12_execution` checkouts at
+`A12_RECORD_COMMIT`. The frozen pull-dispatch `code_commit` must be this
+commit on every host, even though its code identity equals the rehearsal
+commit's. Verify the compatibility record and committed source there too.
+Do not point their workers at the repair or old stage 1 checkout.
+
+### 16.6. Stage immutable inputs, then labels and the receipt at Y
+
+Copy the completed nominal source tree and validation tree into the execution
+checkout at their same paths relative to `simulation/`. Copy the original
+validation spec, published family and its two siblings, exclusion records
+and P2 cost record too. Use a hash inventory, not outcome inspection. The
+family identity is already committed at the old section 7 path. It must match
+the copied family and its siblings. Do not change any embedded job path, seal,
+seed, receipt or producer field in these copies. Keep the originals untouched.
+The proof can use old absolute paths read-only; new label preparation uses
+these in-scope copies so the input snapshot can package them for workers.
+
+Only copy stopped roots after `check_done`; do not copy a live SQLite WAL.
+Before copying, measure the full source file sizes in the old checkout and
+require that much free space on the destination filesystem, plus the larger
+of 20 percent or 1 GiB. Count the whole copy even if some destination files
+already exist. The check below prints byte counts and stops before any copy
+if space is insufficient.
+
+```bash
+cd "$A10CO/simulation"
+export OLD_TREE=v3/runs/a10_stage1
+"$PYTHON" -B - <<'PY'
+import hashlib,os,shutil
+from pathlib import Path
+from v3.artifacts import atomic_json
+old=Path(os.environ['OLDCO'])/'simulation'; new=Path.cwd()
+base=Path(os.environ['OLD_TREE'])
+names=[base/'nominal/source',base/'nominal/validation_run',base/'nominal/validation_plan.json',
+       base/'nominal/v3_rerun_tables_A10.json',base/'nominal/v3_rerun_tables_A10.compatibility.json',
+       base/'nominal/v3_rerun_tables_A10.cell_results.json',base/'inputs']
+copy_bytes=0
+for name in names:
+    source=old/name
+    assert source.exists(),name
+    files=(p for p in source.rglob('*') if p.is_file()) if source.is_dir() else [source]
+    copy_bytes+=sum(p.stat().st_size for p in files)
+margin_bytes=max(1024**3,(copy_bytes+4)//5)
+required_bytes=copy_bytes+margin_bytes
+free_bytes=shutil.disk_usage(new).free
+print({'copy_bytes':copy_bytes,'margin_bytes':margin_bytes,
+       'required_bytes':required_bytes,'free_bytes':free_bytes})
+if free_bytes<required_bytes:
+    raise SystemExit('STOP: insufficient free disk space for the copied trees plus margin')
+inventory={}
+for name in names:
+    source=old/name
+    assert source.exists(),name
+    files=sorted(p for p in source.rglob('*') if p.is_file()) if source.is_dir() else [source]
+    for p in files:
+        rel=p.relative_to(old); target=new/rel; data=p.read_bytes()
+        expected=hashlib.sha256(data).hexdigest()
+        if not target.exists():
+            target.parent.mkdir(parents=True,exist_ok=True); shutil.copyfile(p,target)
+        assert hashlib.sha256(target.read_bytes()).hexdigest()==expected
+        target.chmod(0o444); inventory[rel.as_posix()]=expected
+atomic_json(Path(os.environ['A10_ROOT'])/'checks/carried_inputs.json',inventory)
+print({'copied_files':len(inventory),'hashes':'verified'})
+PY
+export SOURCE="$OLD_TREE/nominal/source"
+export VAL_SPEC="$OLD_TREE/nominal/validation_plan.json"
+export VAL_RUN="$OLD_TREE/nominal/validation_run"
+export IDENTITY="$OLD_TREE/nominal/family_identity.json"
+export TABLE="$OLD_TREE/nominal/v3_rerun_tables_A10.json"
+export PROBE="$OLD_TREE/inputs/a3_probe"
+export COST="$OLD_TREE/inputs/a10_pilot_P2_projection_2026-10-08.json"
+export LABEL_SPEC="$A10_ROOT/nominal/labels_plan.json"
+export LABEL_RUN="$A10_ROOT/nominal/labels_run"
+export LABELS="$A10_ROOT/nominal/v3_rerun_labels_A10.json"
+test ! -e "$LABEL_SPEC" && test ! -e "$LABEL_RUN"
+```
+
+Do not call Y's strict `check_done` on an X root, or launch a copied X root.
+Copy the resolved pin and the approved new-identity rehearsal record into
+`$A10_ROOT`, verifying their hashes. Keep one manual program ledger across
+both checkouts. The compatibility proof and rehearsal consume its existing
+headroom; they do not reset the 980-hour counter.
+
+Run section 8's Python prepare block with these variables and the unchanged
+257.66-hour ceiling. Before
+`check_spec`, require every nonempty label configuration profile to have
+local `[2,4,8,12]` and X2 `[8,12,16,24,32]`, as in 16.4. This is a new plan
+and new root. Do not patch or resume an old label plan. `load_a4_publication`
+accepts the c19b54f5 family and receipt through the committed compatibility
+record; their exact hashes still bind to the original committed family
+identity. No A1 or R4 family is admitted as A10.
+
+Run `check_spec "$LABEL_SPEC" "$LABEL_RUN"`, then section 4a anew for this
+root and current commit: X2 reference, each host's candidate evidence,
+interpreter verification, operator register approvals. WSL and the box use
+their approved profile, service and caps; existing-X2 behavior stays the
+default. Obtain the registered launch go only after reviewing the frozen
+manifest, source pin, qualification, projected cost and ledger reservation.
+The per-host configuration tests run on join; no worker count is assumed.
+
+```bash
+export LABEL_N=$("$PYTHON" -B -c 'import sys; from v3.artifacts import read,unseal; print(len(unseal(read(sys.argv[1]))["jobs"]))' "$LABEL_SPEC")
+# Separate operator go, after fresh qualification and register approvals.
+launch_x2 "$LABEL_SPEC" "$LABEL_RUN" "$LABEL_N" a12_stage1_labels.json
+# Wait for launch and workers to finish, then:
+check_done "$LABEL_SPEC" "$LABEL_RUN"
+"$PYTHON" -B -m v3.table_labels_a5 publish \
+  "$LABEL_SPEC" "$LABEL_RUN" "$VAL_RUN" "$SOURCE" "$CAL" "$LABELS"
+sha256sum "$LABELS"
+```
+
+Remote workers use section 12's SSH command with coordinator checkout
+`/home/yotko/v3_a12_execution`, this new root and separate scratch. X2 uses
+the section 4 local transport. The board is
+`"$HOME/status-board/a12_stage1_labels.json"`. On restart use the same root,
+manifest, identity and deadline, a new watchdog PID, and restarted workers.
+
+Run section 9's receipt and three-instrument checks in this checkout. The
+new `.a10_receipt.json` is created next to the copied table here; the old
+checkout is never written. It binds the accepted c19b54f5 table/A4 receipt
+and Y's labels. Require 19,500 rows, all three k-star instruments, all label
+and support screens, and the published file hashes. A mixed unapproved
+producer, failed label screen or modified source hash is a stop.
+
+### 16.7. Five new run launches and unchanged reading authority
+
+Run section 10's builder and before-gate checks in the execution checkout,
+with `$A10_ROOT=v3/runs/a12_stage1`, the copied nominal table and new receipt,
+and the resolved design pin. Require these unchanged counts and allowances:
+
+| Component | Jobs | Wall hours and X2-equivalent allowance |
+| --- | ---: | ---: |
+| main | 24,900 | 50.49 |
+| k1p5 | 4,400 | 10.94 |
+| k2p3 | 4,400 | 10.93 |
+| weight_corner | 17,600 | 44.34 |
+| horizon | 1,800 | 10.27 |
+
+The builder writes all five new sealed specs. Check the 53,100 disjoint jobs,
+pairing, seed checks, full 500/1,000-step lengths and frozen P2 cost classes
+as in section 10. There are no stage 2 jobs. Each launch receives new
+qualification, register approvals, configuration measurements and its own
+operator go. Execute section 11 one line at a time with these variables and
+board basenames `a12_stage1_main.json`, `a12_stage1_k1p5.json`,
+`a12_stage1_k2p3.json`, `a12_stage1_weight_corner.json` and
+`a12_stage1_horizon.json`. The helper places each under `"$HOME/status-board"`.
+Reconcile the program ledger before every go and after every completion.
+
+Keep `CAL=v3/runs/registered/v3_rerun_calibration.json` and
+`TABLE=v3/runs/a10_stage1/nominal/v3_rerun_tables_A10.json` exactly as above
+when calling the builder. These are the original relative input paths inside
+the fresh checkout; only the spec/output roots use `a12_stage1`. Table and
+calibration path strings enter arm job/seed construction, so substituting an
+absolute path or a new relative table filename would change the experiment.
+Compare the new job lists with a read-only invocation of the old builders at
+the same two input strings; identity and registration are envelope metadata
+for these run specs. Do not run a simulation for this comparison.
+
+```bash
+"$PYTHON" -B - <<'PY'
+import os
+from pathlib import Path
+from v3.artifacts import read,unseal,digest
+before=read(Path(os.environ['OLDCO'])/'simulation/v3/runs/a12_handoff/run_job_inventory.json')
+for name,expected in before.items():
+    spec=unseal(read(Path(os.environ['A10_ROOT'])/'specs'/(name+'.json')))
+    assert dict(count=len(spec['jobs']),jobs_sha256=digest(spec['jobs']))==expected
+print({'identical_run_job_sets':sorted(before),'jobs':53100})
+PY
+```
+
+The new-launch design pin at `cc74ddd7`, checked in 16.3,
+stays fixed across labels and all five specs. The old roots retain their
+old pin and identity. The later sealed stage 1 reading stays registered at
+`93474e00dea0c8d88bfed64e096b2f4e21656a7f`; this execution amendment does not
+move that reading registration, change its rules or authorize its opening.
+Retain both identities, compatibility proof and approval, all five roots,
+the nominal family and receipts, and the original reading inputs for that
+separate collection. Inspect only counts, hashes, execution status and
+required pass/fail screens here.
+
+### 16.8. Stops, fallback and closeout
+
+- A failed compatibility proof ends this attempt. Preserve the failed proof,
+  selection and service/ledger records. Labels and the five run launches
+  proceed at c19b54f5 under sections 8 to 11, after the operator's individual
+  launch approvals. Return to the untouched `~/v3_a10`, its original variables,
+  design pin and family record commit. Do not copy a Y plan back into it.
+- A failed rehearsal case stops adoption before the proof or new registered
+  launch. Present its exact evidence to the interpreter and operator. Do not
+  waive the case, treat tests as qualification, or switch branches silently.
+- A design-pin, committed-source, compatibility-record, family-record, input
+  hash or frozen-commit mismatch is a refusal. Preserve it and ask the operator;
+  do not repair an active checkout, re-seal old records or edit the manifest.
+- An interrupted unfinished launch resumes only in its own code identity,
+  root and original deadline. Compatibility carries completed roots only.
+- A projection or ledger overrun stops new work. Part 2 changes no allocation
+  or ceiling. Restore model services, close charging intervals, preserve the
+  journal and attach a new watchdog only when a resumed coordinator exists.
+
+Record the operator's answers, code/record commits, document hashes, rehearsal
+approval, proof result and ledger costs in the execution log. The code re-pins
+remain an operator-reviewed commit step; this section itself changes no
+source-manifest file or scientific mechanism.
+
+## 17. A13 adoption after the nominal publication refusal, 2026-10-16
+
+This section supersedes section 16 wherever they conflict. Section 16 is
+carried forward verbatim as an operational reference, including its 16.0
+integer-text setting. Its old pins, planned identity, successful publication
+at c19b54f5, and fallback are obsolete. Do not execute 16.1, 16.2 or 16.8 as
+an adoption path. The original refusal stands. There is no admissible nominal
+family at c19b54f5, and a failed proof or failed admission halts downstream
+work. No label or run launch precedes A13 publication.
+
+These are written instructions only. The build did not run this rehearsal,
+access another machine, execute registered work, or commit anything. Each
+operator go below applies to its exact reviewed artifact, not to this entire
+section. Use section 16.0's `PYTHONINTMAXSTRDIGITS=0` on every Python boundary,
+one numerical thread, the existing status board/watchdog, and a fresh root
+for every new launch. Actual overhead is charged to the unchanged 980
+X2-hour stage 1 ledger. A scientific extension halt spends its single round;
+an infrastructure interruption resumes the same plan and root.
+
+### 17.1. Code review and the operator's code commit
+
+The code commit contains E1 to E3 plus A13's phase, admission, recording,
+historical verification, tests, A2 re-pins and these documents. The executor
+does not commit it. The interpreter reviews `_a13_build/REVIEW.diff` against
+`48815a65`, including the unchanged fit, validate, census and estimation
+functions and the inert no-admitted-row path. The operator separately
+approves the concrete code commit on main.
+
+The review fixes are part of that same code commit. Run the 434-job proof
+only after those fixes and their A2 re-pins are committed. A later code
+change changes the identity and requires the proof at that changed commit.
+
+The expected LF-normalized identity is
+`bad5772e9aa8b037f6723c23eae42da77fb9ac5e643294ae8c04cd02869dad4f`.
+The old identity is
+`c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810`.
+The independently reproduced E1 to E3 port identity was
+`3d44e320cd7225bb3d2ea2b0ac7ec5b43fef41592bd12477cd135b5cfabc56bd`.
+The A13 pin is `48815a655c9f4096ea8ceef35ee277ee0352c7d3`.
+Do not substitute the code or proof commit for that design pin.
+
+After the operator's code commit, create fresh rehearsal checkouts at that
+commit. Set `A13_CODE_COMMIT` to its full ID and `REPAIRCO` to the new
+checkout, and run from its `simulation` directory:
+
+```bash
+export PYTHONINTMAXSTRDIGITS=0 PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+export EXPECTED_CODE=bad5772e9aa8b037f6723c23eae42da77fb9ac5e643294ae8c04cd02869dad4f
+export OLD_CODE=c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810
+export REH=v3/runs/a13_rehearsal
+mkdir -p "$REH/checks"
+"$PYTHON" -B - <<'PY'
+import os, subprocess, hashlib
+from pathlib import Path
+from v3.artifacts import code_identity, source_manifest, atomic_json, verify_registration
+assert subprocess.check_output(['git','rev-parse','HEAD']).decode().strip()==os.environ['A13_CODE_COMMIT']
+assert code_identity()==os.environ['EXPECTED_CODE']
+for name, h in source_manifest().items():
+    raw=subprocess.check_output(['git','show','HEAD:simulation/'+name])
+    assert hashlib.sha256(raw.replace(b'\r\n',b'\n')).hexdigest()==h
+commit='48815a655c9f4096ea8ceef35ee277ee0352c7d3'
+path='simulation/diagnostics/v3_rerun_design_note.md'
+raw=subprocess.check_output(['git','show',commit+':'+path])
+assert Path('../'+path).read_bytes()==raw
+pin=dict(commit=commit,path=path,sha256=hashlib.sha256(raw).hexdigest())
+verify_registration(pin,instrument={'mapping':'A10','k_star':1.8,'g':'linear'})
+atomic_json(Path(os.environ['REH'])/'pin.json',pin)
+print({'code_identity':code_identity(),'pin':commit})
+PY
+```
+
+### 17.2. Order step 3: non-registered rehearsal, written only
+
+Limit the complete session to three wall hours, charge every host interval,
+and preserve an incomplete or failed attempt. The machine-specific windows
+and capacity need the operator's go. All rehearsal simulation seeds must be
+outside `[2**60, 2**61)`. Never exercise the registered extension seeds in a
+configuration test or rehearsal.
+
+First run E1 to E3's controlled checks, the toy extension publication/A5
+receipt check, and the additive loader/controller cases on each available
+rehearsal host. These tests use synthetic records and toy trajectories.
+
+```bash
+"$PYTHON" -B -m pytest -q test_v3_a12_execution.py \
+  --junitxml="$REH/checks/execution.xml"
+"$PYTHON" -B -m pytest -q test_v3_a13.py \
+  --junitxml="$REH/checks/extension.xml"
+"$PYTHON" -B -m pytest -q test_v3_a11.py -k pipeline \
+  --junitxml="$REH/checks/pipeline.xml"
+```
+
+Require actual selected tests and zero unexpected failures. In particular,
+`test_toy_end_to_end_publication_a5_receipt_and_resume` prepares A5 against
+the amended receipt and checks preservation of the original `plan_hash`
+and `stream_seeds`. The zero-admission loader test checks identical rows
+with and without an empty A13 binding. The actual branch tests check
+selection equality and incidence, including unscored unique minimum risk.
+
+Build a separate tiny extension dispatch plan. Its old-stage records are
+synthetic; the extension itself uses the real trace engine. The stored
+trajectory values are executor-only and are not inspected or reported.
+
+```bash
+"$PYTHON" -B - <<'PY'
+import os
+from pathlib import Path
+from test_v3_a13 import toy_original
+from v3.artifacts import atomic_json, seal, unseal, read, scoped
+from v3.validation_extension_a13 import prepare, RESERVED
+from v3.multihost_a11 import freeze
+r=scoped(Path(os.environ['REH'])/'dispatch'); assert not r.exists(); r.mkdir(parents=True)
+original,root,candidate,projection,inventory,*_=toy_original(r/'inputs')
+p=prepare(original,root,candidate,projection,inventory,r/'extension.json',
+          wall_hours=2,overhead_hours=1,rehearsal=True)
+assert not p['registered'] and p['non_registered_rehearsal']
+assert all(not RESERVED[0]<=x['seed']<RESERVED[1] for x in p['seed_manifest'])
+assert all(c['seed']>=2**128 for q in p['configuration'].values() for c in q['configs'])
+atomic_json(r/'pull.json',seal(freeze(p,read(projection),code_commit=os.environ['A13_CODE_COMMIT'])))
+print({'jobs':len(p['jobs']),'non_registered':True,'reserved_seeds_used':False})
+PY
+"$PYTHON" -B -m v3.multihost_a11 prepare "$REH/dispatch/pull.json" "$REH/dispatch/root"
+"$PYTHON" -B -m v3.qualification_a11 build "$REH/dispatch/pull.json" \
+  "$REH/dispatch/root" "$REH/dispatch/qualification/plan.json"
+"$PYTHON" -B -m v3.qualification_a11 run "$REH/dispatch/qualification/plan.json" \
+  "$REH/dispatch/qualification/reference.json" --profile x2 --model-service llm \
+  --workers 8 --cpu-budget "$X2_CPUS" --mode work
+```
+
+Use section 4a's hash-verified bundle transfer and section 16.4's candidate
+qualification and comparison commands, replacing `v3_a12` with the new
+checkout and `REH` with `v3/runs/a13_rehearsal/dispatch`. The original X2 is
+the reference. Qualify the actual non-original Linux host with `--profile
+x2 --model-service none --workers 8 --cpu-budget "$CANDIDATE_CPUS"`.
+Require at least 20 distinct extension qualification jobs and approved
+evidence for this exact code identity and kind. Never fake resources,
+hostnames or service actions. Append the approvals to `dispatch/root`.
+
+Start the coordinator through section 12a's watchdog wrapper with
+`SPEC=$REH/dispatch/pull.json` and `RUN_ROOT=$REH/dispatch/root`; its command is:
+
+```bash
+"$PYTHON" -B -m v3.production_runner launch "$REH/dispatch/pull.json" \
+  "$REH/dispatch/root" --profile local --model-service none \
+  --workers 1 --threads 1 --cpu-budget 1 --mode work
+```
+
+Start the approved candidate first, so it claims the tiny plan's source job.
+Then start X2's worker through its service supervisor, using `--profile x2
+--model-service llm`, for the independent check. The candidate command is:
+
+```bash
+"$PYTHON" -B -m v3.host_a11 --coordinator "$COORDINATOR_SSH" \
+  --checkout "$REPAIRCO" --root "$REH/dispatch/root" \
+  --scratch "$REH/dispatch/host_candidate" --profile x2 --model-service none \
+  --workers 8 --cpu-budget "$CANDIDATE_CPUS" --mode work
+```
+
+Require the candidate to perform work, configuration selection to obey its
+measured CPU/memory budget, matched nondeterminism checks, completed ordered
+replicate checkpoints, and an ended charging interval. Drain after a complete
+replicate, resume the same root, and verify its checkpoint hashes persist;
+an in-flight replicate repeats its original seed. Require the original X2's
+restored-service record and the candidate's `actions_skipped: true` record.
+Do not require this tiny natural extension to certify: dispatch mechanics
+and the separate synthetic publication/receipt test are separate checks.
+Do not retry a scientific mismatch. The E2 preference and timeout cases
+remain the controlled-clock tests; do not call them measured network latency.
+
+**Run-side equivalence against c19b54f5.** Create a separate fresh baseline
+checkout at `d73acfb1`. Do not apply the new A2 record there. Both checkouts
+must use the same frozen Python/numpy, one thread and integer-text setting.
+The following script selects two jobs from each of the five run families
+by a fixed hash, then freezes identical short non-registered versions with
+fixture tables. The toy size and horizon are explicit; this is not the A11
+registered-job proof. Save this exact script as `run_equivalence.py` in the
+rehearsal evidence directory and copy it byte-identically to each checkout's
+`simulation` directory outside the source identity (under `v3/runs/...`).
+
+```python
+import os, sys
+from pathlib import Path
+from copy import deepcopy
+sys.path.insert(0, str(Path.cwd()))
+from v3.artifacts import canonical, digest, stable_job, code_identity, atomic_json
+from v3.tables_a10 import paired_runs, arm_runs, correct_runs
+from v3.sensitivity_a6 import build_weight_corner_jobs, build_horizon_jobs
+from v3.production_runner import execute
+from v3.production_tables import ProductionTables, row_key
+from v3.policies import execution_policy_class
+from v3.artifacts import seal
+assert code_identity()==os.environ['THIS_CODE']
+cal='v3/runs/registered/v3_rerun_calibration.json'
+table='v3/runs/a10_stage1/nominal/v3_rerun_tables_A10.json'
+arms=arm_runs(cal,table,'UNUSED_STAGE_2_SQRT_TABLE')
+groups={'main':paired_runs(cal,table),
+        'weight_corner':correct_runs(build_weight_corner_jobs(cal,table)),
+        'horizon':correct_runs(build_horizon_jobs(cal,table))}
+for name,k in [('k1p5',1.5),('k2p3',2.3)]:
+    groups[name]=[j for j in arms if j['config']['model']['instrument']==dict(mapping='A10',k_star=k,g='linear')]
+out=[]
+for name,jobs in sorted(groups.items()):
+    for index,j in enumerate(sorted(jobs,key=lambda j:digest(['A13-run-rehearsal',j['id']]))[:2]):
+        c=deepcopy(j['config']); c.pop('a10_seed_source',None)
+        c.update(steps=31,tables_path=None)
+        c['model'].update(n_agents=24,carrying_capacity=240,rollout_steps=2)
+        toy=stable_job('rerun',c,'validation',index)
+        assert not 2**60<=toy['seed']<2**61
+        result=execute(toy,registered=False)
+        assert 'a13_decision_incidence' not in result
+        out.append(dict(family=name,source_job_id=j['id'],job=toy,result=result))
+# Independent real-loader check on the same synthetic family, with no admission.
+rows={}
+for i,rule in enumerate(execution_policy_class()[:3]):
+    r=dict(rule_id=rule.rule_id,rule_hash=digest(rule.__dict__),kernel_hash='toy',calibration_hash='toy',
+           scoring=dict(alpha=1.,capability=1.,kappa=8.),status='estimated',flow_range=10.,
+           lambda_f=dict(mean=0.),continuation=dict(entries=[dict(bin=[1,0,0,0,0,0],value=0.,error=10.)]))
+    rows[row_key(r)]=r
+manifest=dict(tag='v3_tables',calibration_hash='toy',complete_family=True,sensitivity_status='passed',required_row_keys=sorted(rows))
+doc=seal(dict(schema='v3-tables-1',code_hash=code_identity(),fixture=False,manifest=manifest,
+              manifest_hash=digest(manifest),rows={k:seal(r) for k,r in rows.items()}))
+loaded=ProductionTables(doc,calibration_hash='toy',registered=True)
+support={k:[dict(bin=list(b),entry=e) for b,e in sorted(v.items())] for k,v in loaded.continuations.items()}
+atomic_json(os.environ['OUT'],dict(runs=out,loader_rows=loaded.rows,loader_support=support))
+```
+
+Execute it once in each checkout. `OUT` is inside that checkout and is a
+rehearsal file, never a registered path. The script reads no registered table.
+
+```bash
+# In the baseline simulation directory:
+export THIS_CODE="$OLD_CODE" OUT=v3/runs/a13_rehearsal/old_results.json
+"$PYTHON" -B v3/runs/a13_rehearsal/run_equivalence.py
+# In the new simulation directory:
+export THIS_CODE="$EXPECTED_CODE" OUT=v3/runs/a13_rehearsal/new_results.json
+"$PYTHON" -B v3/runs/a13_rehearsal/run_equivalence.py
+# Copy old_results.json by verified SHA256 into the new rehearsal directory.
+"$PYTHON" -B - <<'PY'
+import os
+from pathlib import Path
+from v3.artifacts import read,canonical,atomic_json,file_hash
+r=Path(os.environ['REH'])
+old,new=read(r/'old_results.json'),read(r/'new_results.json')
+assert len(old['runs'])==len(new['runs'])==10
+for x,y in zip(old['runs'],new['runs']):
+    assert x['job']==y['job'] and x['source_job_id']==y['source_job_id']
+    assert canonical(x['result'])==canonical(y['result'])
+assert canonical(old['loader_rows'])==canonical(new['loader_rows'])
+assert canonical(old['loader_support'])==canonical(new['loader_support'])
+atomic_json(r/'result_equivalence.json',dict(passed=True,jobs=10,
+    comparison='all result fields; no result-level exclusions',
+    old_sha256=file_hash(r/'old_results.json'),new_sha256=file_hash(r/'new_results.json')))
+PY
+```
+
+The comparison excludes only the output envelope by not collecting it. It
+does not use A11's `comparison_bytes`, which excludes some result-root
+metadata. Every existing `result` field must match byte for byte. Any
+mismatch halts before the proof. The interpreter's rehearsal review must
+add `extension_dispatch`, `extension_resume`, `result_equivalence`,
+`loader_equivalence` and `amended_A5_receipt` to section 16.4's case list.
+Approve the exact review and evidence hashes separately before step 4.
+
+### 17.3. The A11 proof and its record commit
+
+Use section 16.5 with `REPAIRCO` at `A13_CODE_COMMIT`, the identity from 17.1,
+and both stopped original roots. Preserve their original manifests, jobs,
+pins and bytes. Export the old source manifest at c19b54f5. The reasons
+file must cover every difference from that manifest, including the two new
+A13 modules and the A2 JSON; use the implementation note's item map and
+the actual diff. Do not reuse section 16.5's eight-file reason dictionary.
+
+Before execution, compute the selection from the sealed original specs,
+without opening their scientific outputs, using A11's exact functions:
+
+```bash
+"$PYTHON" -B - <<'PY'
+from collections import defaultdict,Counter
+from v3.artifacts import read,unseal,atomic_json
+from v3.compatibility_a10 import _stratum,_selected
+groups=defaultdict(list); jobs={}
+for source in read('v3/runs/a11_proof/sources.json'):
+    for j in unseal(read(source['spec']))['jobs']:
+        assert j['id'] not in jobs
+        jobs[j['id']]=j; groups[_stratum(j)].append(j['id'])
+pop=[dict(phase=p,capability=c,setting=s,job_ids=sorted(ids)) for (p,c,s),ids in sorted(groups.items())]
+selected=_selected(pop)
+counts=Counter('estimation' if jobs[j]['kind']=='table' else 'validation' for j in selected)
+assert len(selected)==434 and dict(counts)==dict(estimation=90,validation=344)
+atomic_json('v3/runs/a11_proof/selection_check.json',dict(counts=dict(counts),selected_job_ids=selected,populations=pop))
+print(dict(counts))
+PY
+```
+
+Project this selected proof's cost from its registered classes and obtain
+approval against stage 1 headroom before running it. Run its pre-launch
+configuration test. Use section 14's supervised `llm down`/restore wrapper
+for the existing `compatibility_a10 build` command, with 12 one-thread
+workers or the lower measured cap. Verify all 434 proofs match and the
+selection exactly equals `selection_check.json`. The interpreter reviews
+the source diff and proof; the operator approves it and its record commit.
+Commit identical record bytes publicly using section 16.5's single-file
+procedure, with the title describing A13 plus A12 execution changes. A failed
+proof has no fallback. The new phase is authorized by A13, not certified by
+the A11 proof of the old computations.
+
+Create the extension execution checkout at that public record commit and
+new roots. On every host verify committed source hashes, the A11 record,
+accepted old/new identities, and the strict design pin from 17.1. Use the
+record commit as pull dispatch's `code_commit`. Historical A1/A4 plans keep
+their original pins; verify ancestry and committed hashes, never compare
+their old note to the current working note. Copy only stopped source roots
+after `check_done`, with section 16.6's free-disk check before copying and
+without a live SQLite WAL.
+
+### 17.4. Freeze extension records, then launch its one round
+
+In the fresh execution checkout, set these executor-only paths to the
+unchanged source files: `ORIGINAL_PLAN`, `ORIGINAL_ROOT`, `REFUSED_CANDIDATE`,
+`PROJECTION`, and `GLOBAL_SEED_INVENTORY`. Do not print their contents.
+The inventory is a sealed mapping with the five complete integer lists
+`registered`, `planning`, `probe`, `rehearsal`, `qualification`. Include
+every rehearsal and qualification seed just used. The source projection
+must have file SHA256
+`78a1d3ac253048c7e077b0e4eb12dd3150fa178cf3e63a24c6f0d87f02a8ad8d`
+and payload seal
+`5ca5225967cf08ad5636f98f12d57fa6ccd753a7ae126bff0edcc09f0af3d8a3`.
+
+```bash
+export EXT=v3/runs/a13_extension
+mkdir -p "$EXT"
+"$PYTHON" -B -m v3.validation_extension_a13 prepare \
+  "$ORIGINAL_PLAN" "$ORIGINAL_ROOT" "$REFUSED_CANDIDATE" "$PROJECTION" \
+  "$GLOBAL_SEED_INVENTORY" "$EXT/plan.json" --registration "$PIN_FILE" \
+  --wall-hours "$APPROVED_EXTENSION_WALL_HOURS" --overhead-hours "$APPROVED_OVERHEAD_X2_HOURS"
+```
+
+The builder verifies the projection's payload seal against the original
+sealed plan before pricing anything. A mismatch is a finding and halts.
+Preparation requires exactly one mode: `--registration` for the actual
+extension, or `--rehearsal` for synthetic rehearsal. Omitting both is refused.
+It derives eligibility from the original sealed records, pins M, freezes
+the full replicate 4 through 3+R_max manifest and checks global collisions.
+It prices each distinct eligible source once at B_j/3, fixes R_max at the
+largest integer up to 16 under 15 projected X2-hours, and records impossible
+rows before launch. Report only R_max and the total projected cost from
+pricing. Keep per-stratum prices, widths, N*, original visits and reach
+executor-only. The `.public.json` companion supplies the allowed identifier
+lists, booleans, E/P/M/error statements, flags and seed check for review.
+
+If R_max is below 6, do not prepare a dispatch or launch workers. Go directly
+to Part 2's publication/admission check below. Otherwise freeze the scheduling
+extension against the same projection, then qualify, approve the register,
+run the configuration test and obtain the extension's separate operator go:
+
+```bash
+"$PYTHON" -B -m v3.multihost_a11 freeze "$EXT/plan.json" "$PROJECTION" \
+  "$EXT/pull.json" --code-commit "$A13_RECORD_COMMIT"
+"$PYTHON" -B -m v3.multihost_a11 prepare "$EXT/pull.json" "$EXT/root"
+"$PYTHON" -B -m v3.qualification_a11 build "$EXT/pull.json" "$EXT/root" "$EXT/qualification/plan.json"
+```
+
+Use section 17.2's qualification, comparison, register approval, coordinator
+and host commands with these EXT paths. The plan is registered here; the
+qualification/configuration copies are non-registered and use their own
+high-range seeds. Record all newly generated qualification seeds in the
+pre-launch global audit and require none to intersect the frozen extension
+manifest. Each X2 uses supervised `llm down` and restores on every exit.
+Actual charging stays the existing measured host-interval method; overhead
+is separately charged and is not part of the 15-hour simulation projection.
+Use the existing watchdog, status board and ledger.
+
+Registered preparation reserves the sealed family record at
+`v3/runs/a10_stage1/nominal/v3_rerun_tables_A10.a13_round.json`,
+independent of `$EXT` or the plan filename. A different plan hash or a second
+preparation output is refused, even before launch. The first launch binds
+the final frozen plan digest and `$EXT/root` in that same record. The pull
+plan keeps the family anchor when saved as `$EXT/pull.json`.
+Preserve both the family record and the root's `a13_round.json` reference.
+Resumption, including from a copied plan file, must use the recorded root.
+A scientific halt is latched in the family record too; another preparation
+or a new root cannot clear it or authorize another realization. Rehearsal
+plans retain output-relative `.round.json` records and unreserved seeds.
+
+The executor processes replicates sequentially and stops each source only
+when every eligible row has N* visitors or R_max is exhausted. It persists
+ordered (S_i,N_i) records after each full replicate and transfers them to
+the coordinator. No partial trajectory counts as a completed replicate.
+After infrastructure interruption, retain completed checkpoints and restart
+only the in-flight replicate at its original seed. A scientific halt
+certifies nothing, preserves its halt latch and spends the round. Do not
+delete a halt record, make another plan, increase R_max or start round two.
+
+### 17.5. Admission, publication, labels and runs
+
+Use `PLAN=$EXT/pull.json` after a launch, or `$EXT/plan.json` for no launch.
+The executor runs the first-N* test from extension data alone, replaces only
+eligible C0 decisions, re-applies the original census floor, and checks
+ineligible row and sidecar bytes. It checks Part 2 before writing:
+
+Publication requires the plan hash in the registered family's anchor.
+Certification also requires the recorded root, its matching `identity.json`,
+the last launch marked complete, and a passed
+`validate_plain_ext/nondeterminism_check.json`. A multi-host launch also
+requires the completed pull-dispatch check. Missing completion or check
+evidence means resume the same infrastructure attempt. A latched scientific
+halt bypasses all extension results, certifies no row and checks every
+eligible row under Part 2. It cannot be relaunched.
+
+```bash
+"$PYTHON" -B -m v3.validation_extension_a13 publish "$PLAN" "$EXT/root" \
+  v3/runs/a10_stage1/nominal/v3_rerun_tables_A10.json
+```
+
+The exact target and no-overwrite guard are mandatory.
+
+Before section 7's identity approval, the interpreter checks that the published
+receipt's `extension_plan_hash` equals the plan hash in the extension's
+`.public.json` record approved before launch (17.4). The family-level round
+record is a file in this checkout: a fresh checkout or a deleted record would not
+see it, so this check is what binds the published family to the one approved plan.
+A mismatch is a finding: no identity approval, no labels and no runs.
+
+Admission failure
+means no publication and no labels/runs. Retain the original refusal and
+the sealed `v3/runs/a10_stage1/nominal/v3_rerun_tables_A10.a13_round.admission.json`
+check, which records only counts, identifiers and the outcome. New A13-pinned A4 families use their run root's
+`a13_admission_check.json`. A failed Part 2 check is recorded before refusal.
+The amended receipt must retain the original plan_hash and every original
+per-job stream_seed byte-for-byte in canonical JSON, and add the extension
+plan, stage hashes and complete frozen seed manifest. Do not include the
+realized per-source seed subset or stopping replicate in the receipt. Record P and
+M together with E, alpha(1+P/M) and alpha*E/M; label the nominal family as
+produced under an outcome-informed A13 amendment. Residual admitted rows
+stay not_estimable, unavailable, and bound by identifier and hash.
+
+Then use section 7's exact-file/hash identity approval and separate public
+identity-record commit at the new identity. Fresh label and run checkouts
+start at the appropriate public record commit. Keep the table path string
+above and every original calibration path string unchanged. Rebuild all
+756 label jobs and all 53,100 run jobs, comparing to the reference inventories
+from c19b54f5. If references do not exist, build them in a fresh d73acfb1
+checkout before comparing, using the same path strings. Compare label
+tables, replicates and simulation seeds; its plan hash, job identifiers and
+unused envelope seeds may change. Compare each run configuration, identifier
+and seed exactly, plus the cost classes. Use section 16.7's inventory checks
+with the A13 design pin and the new identity, not its old pin literals.
+
+A5 preparation uses the original plan and amended receipt, with all extension
+seeds in its forbidden set. After labels, finalize the A10 receipt as in
+section 9. Each label/run launch has its own qualification, register
+approvals, configuration test, operator go, new root and X2 service recovery.
+Keep the five run allocations and the stage 1 ceiling unchanged. No original
+root resumes at the new identity.
+
+Historical verification applies only to plans registered before the current
+48815a65 pin. Publication of the new A5 label plan retains strict current-pin
+and working-note checks. A13 decision incidence is a separate run-summary
+record; existing result fields, including yield events, retain their bytes.
+
+For the reading at `93474e00`, predefine contributing runs per quantity,
+pool the recorded numerators and denominators by branch and retain per-run
+rates. Zero denominator is unassessed. Flag any quantity with any nonzero
+missing-row incidence. Do not drop or re-estimate flagged quantities, and
+do not call an unflagged quantity certified unaffected. The mixed-producer
+reader fixture check in the A12 review remains required before reading.

@@ -6,13 +6,17 @@ import sys
 import time
 import pytest
 from test_v3_paths import tmp_path
-from test_v3_multihost_a11 import (SETTINGS, FINGERPRINT, initialize, spec_fixture,
+from test_v3_multihost_a11 import (SETTINGS, FINGERPRINT, initialize as initialize_hosts, spec_fixture,
                                   join, ready, claim, finish)
 from v3 import artifacts as a, multihost_a11 as m, production_runner as runner
 
 
 X2 = 'yotko-evo-x2'
 X2_SETTINGS = dict(profile='x2', workers=8, threads=1, cpu_budget=32, mode='normal')
+
+
+def initialize(*args, **kwargs):
+    return initialize_hosts(*args, host_settings={X2: X2_SETTINGS}, **kwargs)
 
 
 def join_x2(root, **overrides):

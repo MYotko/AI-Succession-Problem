@@ -146,7 +146,7 @@ def verify_commit(commit):
             raise ValueError('implementation commit differs from running source: ' + name)
 
 
-def execute_scratch(target, job, code, phase_root, view, registered, registration, host, token):
+def execute_scratch(target, job, code, phase_root, view, registered, registration, host, token, a13_checkpoints=None, a13_recheck=False):
     """Spawn target: ordinary execute path, one output blob, no completion record."""
     from .production_runner import execute, peak_rss_bytes
     configure_threads(1)
@@ -157,11 +157,20 @@ def execute_scratch(target, job, code, phase_root, view, registered, registratio
         info = runtime(1)
         before, epoch = time.perf_counter(), time.time()
         with input_view(view):
-            result = execute(job, registered, registration, root=Path(phase_root))
+            if job['kind'] == 'a13_validate_plain_ext':
+                from .validation_extension_a13 import checkpoint_context
+                with checkpoint_context(target.with_suffix('.a13'), a13_checkpoints or [], recheck=a13_recheck):
+                    result = execute(job, registered, registration, root=Path(phase_root))
+            else:
+                result = execute(job, registered, registration, root=Path(phase_root))
         atomic_json(target, {'job': job, 'code_hash': code, 'runtime': info, 'result': result,
             'seconds': time.perf_counter() - before, 'started_epoch': epoch, 'finished_epoch': time.time(),
             'peak_rss_bytes': peak_rss_bytes(), 'host': host, 'lease': token})
-    except BaseException:
+    except BaseException as exc:
+        from .validation_extension_a13 import ScientificHalt
+        from .continuation_validation import OutOfRange
+        if job['kind'] == 'a13_validate_plain_ext' and isinstance(exc, (ScientificHalt, OutOfRange)):
+            atomic_json(target.with_suffix('.scientific_halt.json'), {'scientific_halt': True})
         atomic_json(target.with_suffix('.failure.json'), {'job_id': job['id'], 'traceback': traceback.format_exc(),
                     'target': str(target), 'resolved_target': str(target.resolve()), 'scope_root': str(ROOT)})
         raise
@@ -178,6 +187,11 @@ class Client:
 
     def call(self, op, **fields):
         started = time.monotonic()
+        if op in ('heartbeat', 'ready'):
+            from .production_runner import mem_available_bytes
+            available = mem_available_bytes()
+            if available is not None:
+                fields['memory_available_gb'] = available / 1e9
         request = {'op':op,'host':self.host,'session':self.session,**fields}
         if op == 'claim':
             request['request_id'] = uuid.uuid4().hex
@@ -279,10 +293,18 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
             raise RuntimeError('no qualified phase fits this host; no scientific jobs taken')
         while not client.lost.is_set():
             for token, (process, target, claim) in list(active.items()):
+                if claim['job']['kind'] == 'a13_validate_plain_ext' and claim['purpose'] == 'work':
+                    sent = claim.setdefault('_a13_sent', set())
+                    for checkpoint in sorted(target.with_suffix('.a13').glob('*.json')):
+                        if checkpoint.name not in sent:
+                            client.call('a13_checkpoint', lease=token, checkpoint=read(checkpoint))
+                            sent.add(checkpoint.name)
                 if process.is_alive():
                     continue
                 process.join()
                 if process.exitcode or not target.exists():
+                    if target.with_suffix('.scientific_halt.json').exists():
+                        client.call('a13_halt', lease=token)
                     client.call('release', lease=token, reason='worker failed')
                     raise RuntimeError('remote worker failed: ' + claim['job']['id'])
                 raw = target.read_bytes()
@@ -333,7 +355,8 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
                     token = claim['lease']
                     target = scratch / 'unpublished' / (token + '.json')
                     process = context.Process(target=execute_scratch, args=(str(target), claim['job'], spec['code_hash'],
-                        claim['phase_root'], views[claim['job']['config']['phase']], spec['registered'], spec.get('registration'), host, token))
+                        claim['phase_root'], views[claim['job']['config']['phase']], spec['registered'], spec.get('registration'), host, token,
+                        claim.get('a13_checkpoints'), claim['purpose'] == 'check'))
                     process.start()
                     active[token] = (process, target, claim)
                 if reply['claims']:
@@ -376,15 +399,21 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
 
 
 @contextmanager
-def host_service(scratch, profile):
-    if profile != 'x2':
-        yield None
+def host_service(scratch, profile, model_service=None):
+    from .service import command, model_service as selected_service, without_service
+    settings = dict(profile=profile)
+    if model_service is not None:
+        settings['model_service'] = model_service
+    selected = selected_service(settings)
+    if profile == 'x2' and platform.system() != 'Linux':
+        raise ValueError('X2 worker profile requires Linux')
+    if selected == 'none':
+        with without_service(scratch) as record:
+            yield record
         return
-    if platform.node().lower() != 'yotko-evo-x2' or platform.system() != 'Linux':
-        raise ValueError('only the X2 worker may manage its model server')
-    from .service import command
     with lease(ROOT / 'service.lock'):
-        record = {'host': platform.node(), 'started_epoch': time.time(), 'down_exit_code': None, 'up_exit_code': None}
+        record = {'host': platform.node(), 'model_service': selected,
+                  'started_epoch': time.time(), 'down_exit_code': None, 'up_exit_code': None}
         def interrupt(number, frame):
             raise KeyboardInterrupt('worker supervisor interrupted')
         previous = {s: signal.signal(s, interrupt) for s in (signal.SIGINT, signal.SIGTERM)}
@@ -416,6 +445,7 @@ def main():
     p.add_argument('--checkout')
     p.add_argument('--root', required=True); p.add_argument('--scratch', required=True)
     p.add_argument('--profile', choices=('local', 'x2'), required=True)
+    p.add_argument('--model-service', choices=('llm', 'none'), help='default llm for X2, none for local')
     p.add_argument('--workers', type=int, required=True); p.add_argument('--cpu-budget', type=int, required=True)
     p.add_argument('--mode', choices=('normal', 'work'), default='work')
     args = p.parse_args()
@@ -426,7 +456,11 @@ def main():
     configure_threads(1)
     scratch = scoped(args.scratch); scratch.mkdir(parents=True, exist_ok=True)
     settings = {'profile': args.profile, 'workers': args.workers, 'cpu_budget': args.cpu_budget, 'threads': 1, 'mode': args.mode}
-    with lease(scratch / 'host.lock'), host_service(scratch, args.profile) as service:
+    from .service import model_service
+    if args.model_service is not None:
+        settings['model_service'] = args.model_service
+    settings['model_service'] = model_service(settings)
+    with lease(scratch / 'host.lock'), host_service(scratch, args.profile, settings['model_service']) as service:
         selected = Local(args.root) if args.local else SSH(args.coordinator, args.checkout, args.root)
         try:
             print(run_host(selected, scratch, settings, service=service))

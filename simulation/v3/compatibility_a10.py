@@ -181,6 +181,9 @@ def build_record(sources, reasons_path, target, *, workers=None):
         root, spec_path = Path(source["root"]).resolve(), Path(source["spec"]).resolve()
         spec = unseal(read(spec_path))
         _require(spec["code_hash"] == old and declaration(spec.get("instrument")).a10, "source is not the producing A10 identity")
+        if spec.get('registered'):
+            from .artifacts import verify_registration
+            verify_registration(spec['registration'], instrument=spec['instrument'], historical=True)
         _require(read(root / "identity.json") == {"code_hash": old, "spec_hash": digest(spec)}, "source root identity mismatch")
         _require(unseal(read(root / "manifest.json")) == spec, "source root manifest mismatch")
         _require(read(root / "launches.json")[-1].get("complete") is True, "compatibility needs a completed launch")

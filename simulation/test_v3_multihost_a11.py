@@ -19,13 +19,13 @@ FINGERPRINT = dict(python='fixture', numpy='fixture', numpy_cpu_baseline=['SSE']
     threads_verified=[dict(library='fixture', effective=1)])
 
 
-def evidence(host, code, kinds=('fixture',), speed=1., memory=40.):
+def evidence(host, code, kinds=('fixture',), speed=1., memory=40., settings=None):
     jobs = [a.stable_job(kind, {'phase': 'fixture'}, 'validation', i) for kind in kinds for i in range(20)]
     plan = a.seal(dict(schema=q.SCHEMA + '-plan', non_registered=True, jobs=jobs, kinds=list(kinds), code_hash=code))
     proofs = [dict(job_id=j['id'], kind=j['kind'], job_sha256=a.digest(j), canonical_sha256=a.digest([j, 'result'])) for j in jobs]
     ref = dict(schema=q.SCHEMA + '-run', non_registered=True, host='yotko-evo-x2', code_hash=code, plan_sha256=plan['sha256'], proofs=proofs, passed=True,
                elapsed_seconds=20., memory_gb=memory, fingerprint=FINGERPRINT, kinds=list(kinds))
-    candidate = dict(ref, host=host, elapsed_seconds=20. / speed)
+    candidate = dict(ref, host=host, elapsed_seconds=20. / speed, settings=dict(settings or SETTINGS))
     return q.compare(plan, a.seal(ref), a.seal(candidate))
 
 
@@ -41,14 +41,15 @@ def spec_fixture(count=8, phases=('toy',), *, seconds=.01):
         extra_inputs=[], job_classes={j['id']: str(i) for i, j in enumerate(jobs)}, cost_classes=classes))
 
 
-def initialize(tmp_path, spec=None, hosts=('alpha', 'beta'), start=None):
+def initialize(tmp_path, spec=None, hosts=('alpha', 'beta'), start=None, host_settings=None):
     spec = spec or spec_fixture()
     path, root = tmp_path / 'spec.json', tmp_path / 'coordinator'
     a.atomic_json(path, a.seal(spec))
     m.prepare(path, root, SETTINGS)
     for index, host in enumerate(hosts):
         m.approve_host(root, evidence(host, spec['code_hash'], tuple(sorted({j['kind'] for j in spec['jobs']})),
-                                     speed=1. / (index + 1)), 'operator', '2026-10-08T12:00:00Z')
+                                     speed=1. / (index + 1), settings=(host_settings or {}).get(host)),
+                       'operator', '2026-10-08T12:00:00Z')
     with m.transaction(root):
         c = m.Coordinator(root, start)
         c.start(); c.save()

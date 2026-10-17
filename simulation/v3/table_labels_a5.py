@@ -93,7 +93,7 @@ def assert_a5_seeds(fv_job_seeds, forbidden):
     for seed in fv_job_seeds:
         for r in A5_REPLICATES:
             value = fvplain_seed(seed, r)
-            if value in forbidden:
+            if value in forbidden or (1 << 60) <= value < (1 << 61):
                 raise cv.SeedCollision("A5 seed collides with a forbidden seed: %r" % ((seed, r), ))
             a5[(int(seed), r)] = value
     values = list(a5.values())
@@ -429,6 +429,8 @@ def prepare(a4_family_path, a4_run_root, a4_plan_path, a1_source_root, calibrati
     else:
         _require(not declared.a10, "A10 labels refuse an R4 family")
     a4_plan = unseal(read(a4_plan_path))
+    if registration is not None and declared.a10:
+        verify_registration(a4_plan['registration'], instrument=declared, historical=True)
     a4_plan_file_sha256 = file_hash(a4_plan_path)
     a1_manifest = unseal(read(a1_source_root / "tables_A1_manifest.json"))
 
@@ -470,6 +472,7 @@ def prepare(a4_family_path, a4_run_root, a4_plan_path, a1_source_root, calibrati
     if not probe_seeds:
         raise ValueError("A5 prepare requires a non-empty D26 probe root; none found under %r" % a3_probe_root)
     forbidden = forbidden_seeds(a1_job_seeds, a4_stream_seeds, probe_seeds)
+    forbidden.update(r['seed'] for r in receipt.get('extension_seed_manifest', []))
 
     fv_jobs = [j["config"]["a1_job"] for j in fv_primary_jobs(a4_plan)]
     fv_job_seeds = [j["seed"] for j in fv_jobs]
@@ -537,6 +540,9 @@ def prepare(a4_family_path, a4_run_root, a4_plan_path, a1_source_root, calibrati
         _require(False, "A5 plan has no jobs")
     plan_core.update(jobs=jobs, registration=registration)
     if a10:
+        # A10 scheduling override, after the unchanged R4 profile and job build.
+        for profile in plan_core["configuration"].values():
+            profile["workers_local"] = [2, 4, 8, 12]
         from .tables_a10 import family_instrument
         plan_core.update(instrument=family_instrument(a10["family"]).declaration(), registered_a10=bool(registration),
                          declared_wall_hours=wall_hours, x2_equivalent_hours=wall_hours)
@@ -734,7 +740,9 @@ def publish(plan, a5_run_root, a4_run_root, a1_source_root, calibration, target,
                  "registered publish requires a registered plan and a registration pin")
         _require(not plan.get("settings_override") and not any(j["config"].get("settings_override") for j in plan.get("jobs", [])),
                  "registered publish rejects a settings override")
-        verify_registration(plan["registration"], **({"instrument": instrument} if instrument.a10 else {}))
+        from .artifacts import A13_COMMIT
+        verify_registration(plan["registration"], **({"instrument": instrument,
+            "historical": plan['registration']['commit'] not in (A13_COMMIT, A13_COMMIT[:8])} if instrument.a10 else {}))
     accepted = {code_identity()}
     if instrument.a10:
         from .compatibility_a10 import accepted_identities

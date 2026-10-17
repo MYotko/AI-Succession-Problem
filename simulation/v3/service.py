@@ -1,9 +1,38 @@
-"""X2-only service supervisor, invoked explicitly by the operator's launch."""
+"""Per-host model-service supervisor, invoked by the operator's launch."""
+from contextlib import contextmanager
 import platform
 import signal
 import subprocess
 import time
 from .artifacts import ROOT, atomic_json, read, unseal, scoped, lease
+
+
+def model_service(settings):
+    value = settings.get("model_service", "llm" if settings["profile"] == "x2" else "none")
+    if value not in ("llm", "none") or (settings["profile"] != "x2" and value != "none"):
+        raise ValueError("model service must be llm or none; llm requires the X2 profile")
+    return value
+
+
+def require_service_record(settings, record):
+    selected = model_service(settings)
+    if selected == "none":
+        if not record or record.get("model_service") != "none" or record.get("actions_skipped") is not True:
+            raise RuntimeError("host needs an explicit no-service supervisor record")
+    elif not record or record.get("model_service", "llm") != "llm" or record.get("down_exit_code") != 0:
+        raise RuntimeError("X2 launch requires the active service lease wrapper")
+
+
+@contextmanager
+def without_service(root):
+    record = {"host": platform.node(), "model_service": "none", "actions_skipped": True,
+              "started_epoch": time.time(), "down_exit_code": None, "up_exit_code": None}
+    atomic_json(root / "service.json", record)
+    try:
+        yield record
+    finally:
+        record["finished_epoch"] = time.time()
+        atomic_json(root / "service.json", record)
 
 
 def command(root, action):
@@ -13,8 +42,9 @@ def command(root, action):
 
 def run_with_service(spec_path, output_root, settings):
     from .production_runner import validate_spec, launch, caps, preflight_completion
-    if platform.node().lower() != "yotko-evo-x2" or platform.system() != "Linux":
-        raise RuntimeError("service management is permitted only on X2")
+    if settings["profile"] != "x2" or platform.system() != "Linux":
+        raise RuntimeError("X2 service supervisor requires the X2 profile on Linux")
+    selected = model_service(settings)
     spec = unseal(read(spec_path))
     validate_spec(spec, {**settings, "caps": caps(settings["profile"], settings["cpu_budget"])})
     preflight_completion(spec, output_root)
@@ -34,7 +64,11 @@ def run_with_service(spec_path, output_root, settings):
         record_path = root / "service.json"
         if record_path.exists():
             atomic_json(root / ("service_previous_" + str(time.time_ns()) + ".json"), read(record_path))
-        record = {"host": platform.node(), "started_epoch": time.time(), "down_exit_code": None, "up_exit_code": None}
+        if selected == "none":
+            with without_service(root) as record:
+                return launch(spec_path, root, settings, service_record=record)
+        record = {"host": platform.node(), "model_service": selected,
+                  "started_epoch": time.time(), "down_exit_code": None, "up_exit_code": None}
         atomic_json(record_path, record)
         def interrupt(number, frame):
             raise KeyboardInterrupt("service supervisor interrupted")

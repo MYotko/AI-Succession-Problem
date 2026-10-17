@@ -742,8 +742,9 @@ def publish(plan, run_root, source_root, calibration, target, *, registered=True
         verify_estimation_source(source_root, plan["calibration_path"], registered=registered)
     if registered:
         registered_publish_guard(plan)
-        from .artifacts import verify_registration
-        verify_registration(plan["registration"], **({"instrument": instrument} if instrument.a10 else {}))
+        from .artifacts import verify_registration, A13_COMMIT
+        verify_registration(plan["registration"], **({"instrument": instrument,
+            "historical": plan['registration']['commit'] not in (A13_COMMIT, A13_COMMIT[:8])} if instrument.a10 else {}))
     source_root, run_root = Path(source_root), Path(run_root)
     expected_a1 = A1_FILE_SHA256 if registered and not instrument.a10 else plan["source_file_sha256"]
     if file_hash(source_root / "v3_rerun_tables_A1.json") != expected_a1:
@@ -785,6 +786,15 @@ def publish(plan, run_root, source_root, calibration, target, *, registered=True
     if instrument.a10:
         source_payload = unseal(read(source_root / "v3_rerun_tables_A1.json"))
         manifest["a10"] = source_payload["manifest"]["a10"]
+    # A13 is prospective only for launches pinned to its clarification.
+    from .artifacts import A13_COMMIT
+    if registered and plan.get('registration', {}).get('commit') in (A13_COMMIT, A13_COMMIT[:8]):
+        from .admission_a13 import checked_binding
+        from .offline_estimator import add_ranking_flags
+        from .production_tables import row_key
+        ranked = {row_key(r): r for r in add_ranking_flags(list(rows.values()))}
+        manifest['a13_admission'] = checked_binding(ranked, details, 'validation_launched_under_A13',
+            scoped(run_root) / 'a13_admission_check.json', plan['plan_hash'])
     document = write_tables(candidate, list(rows.values()), manifest, fixture=not registered)
     # Per-cell results (primary and sensitivity) live in a sidecar, not the
     # family; the receipt binds the sidecar by hash.
@@ -868,12 +878,21 @@ def report(family_path, output_path):
              "visits": 0.0, "certified_visits": 0.0, "safeguard_failures": 0}
     fv = {"passed": 0, "unresolved": 0, "violation": 0, "cells": 0, "visits": 0.0, "passed_visits": 0.0}
     violations, safeguard_failures, floor_results, collapses = [], [], [], []
+    extension = []
     rows_seen = {"primary": 0, "double_population": 0, "double_length": 0}
     for entry in details:
         route = entry["route"]
         rows_seen[entry.get("setting", "primary")] = rows_seen.get(entry.get("setting", "primary"), 0) + 1
         ctx = {"row": entry["row"], "setting": entry.get("setting")}
         for cell in entry.get("cell_tests", []):
+            if cell.get('a13_extension'):
+                extension.append({**ctx, 'cell': cell['cell'], 'eb': cell['eb'],
+                                  'visit_weighted_ok': cell['visit_weighted_ok']})
+                if cell['eb'] == 'violation':
+                    violations.append({**ctx, 'tier': 'a13_extension', 'cell': cell['cell']})
+                if cell['eb'] == 'certified' and not cell['visit_weighted_ok']:
+                    safeguard_failures.append({**ctx, 'tier': 'a13_extension', 'cell': cell['cell']})
+                continue
             visits = cell.get("visits", 0.0) or 0.0
             if route == "plain":
                 plain["cells"] += 1
@@ -906,6 +925,8 @@ def report(family_path, output_path):
               "safeguard_failures": safeguard_failures, "violations": violations,
               "floor_results": floor_results, "fv_collapses": collapses,
               "note": "continuation validation only; no survival, extinction or fire rate"}
+    if extension:
+        result['a13_extension'] = extension
     atomic_json(scoped(output_path) if str(Path(output_path).resolve()).startswith(str(ROOT)) else SIMULATION / output_path, result)
     return {"rows_covered": rows_seen, "plain_cells": plain["cells"], "fv_cells": fv["cells"],
             "violations": len(violations), "safeguard_failures": len(safeguard_failures), "collapses": len(collapses)}

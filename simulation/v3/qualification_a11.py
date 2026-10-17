@@ -48,7 +48,7 @@ def build(spec_path, source_root, output, kinds=None):
             return s.get('particles', 1) * (s.get('burn', 0) + s.get('measure', c.get('steps', 1)))
         candidates.sort(key=lambda j: (cost(j), digest(['A11-qualification', j['id']]), j['id']))
         done = []
-        if spec.get('registered'):
+        if spec.get('registered') and kind != 'a13_validate_plain_ext':
             for j in candidates:
                 value = completed(Path(source_root) / j['config']['phase'], j, spec['code_hash'])
                 if value is not None:
@@ -71,7 +71,7 @@ def build(spec_path, source_root, output, kinds=None):
             cfg = deepcopy(configs[index % len(configs)])
             # A4/A5 consume config.seed, rather than the outer seed. These are
             # disjoint, explicitly non-registered fixture streams on both hosts.
-            if kind.startswith(('a4_', 'a5_')):
+            if kind.startswith(('a4_', 'a5_', 'a13_')):
                 cfg['seed'] = (1 << 128) | int(digest(['A11-qualification-stream', kind, cfg, index])[:32], 16)
             job = stable_job(kind, cfg, 'validation', index)
             jobs.append(job)
@@ -232,6 +232,7 @@ def main():
     s.add_argument('--kind', action='append')
     s = sub.add_parser('run'); s.add_argument('plan'); s.add_argument('output')
     s.add_argument('--profile', choices=('x2', 'local'), required=True)
+    s.add_argument('--model-service', choices=('llm', 'none'), help='default llm for X2, none for local')
     s.add_argument('--workers', type=int, required=True); s.add_argument('--cpu-budget', type=int, required=True)
     s.add_argument('--mode', choices=('work', 'normal'), default='work')
     s = sub.add_parser('compare'); s.add_argument('plan'); s.add_argument('reference'); s.add_argument('candidate'); s.add_argument('output')
@@ -250,7 +251,11 @@ def main():
         root = scoped(args.output).parent; root.mkdir(parents=True, exist_ok=True)
         settings = {k: getattr(args, k) for k in ('profile', 'workers', 'cpu_budget', 'mode')}
         settings['threads'] = 1
-        with host_service(root, args.profile):
+        from .service import model_service
+        if args.model_service is not None:
+            settings['model_service'] = args.model_service
+        settings['model_service'] = model_service(settings)
+        with host_service(root, args.profile, settings['model_service']):
             result = run(args.plan, args.output, settings)
         print({'passed': result['passed'], 'jobs': len(result['proofs']), 'sha256': file_hash(args.output)})
 

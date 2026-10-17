@@ -136,8 +136,12 @@ def prepare_validation(source_root, calibration_path, *, registration=None, wall
     info = verify_estimation_source(source_root, calibration_path, registered=registration is not None)
     if registration is not None and (wall_hours is None or settings_override):
         raise ValueError("registered A10 validation needs its operator-set ceiling and frozen settings")
-    return prepare(source_root, calibration_path, registration, wall_hours or 1., probe_root,
+    plan = prepare(source_root, calibration_path, registration, wall_hours or 1., probe_root,
                    settings_override, instrument=family_instrument(info["family"]))
+    # A10 scheduling override only. Preserve A4's R4 profile builder and jobs.
+    for profile in plan["configuration"].values():
+        profile["workers_local"] = [2, 4, 8, 12]
+    return plan
 
 
 def expected_keys(jobs, calibration):

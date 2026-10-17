@@ -34,7 +34,7 @@ def inventory(jobs, phase_root, extra_inputs=()):
                 sibling = table.with_suffix(suffix)
                 if sibling.exists():
                     add(sibling)
-        if job['kind'] in ('a4_fit', 'a4_validate', 'a4_census', 'a5_fvplain'):
+        if job['kind'] in ('a4_fit', 'a4_validate', 'a4_census', 'a5_fvplain', 'a13_validate_plain_ext'):
             source = Path(c['a1_source_root'])
             a1 = c['a1_job']
             add(SIMULATION / a1['config']['calibration_path'])

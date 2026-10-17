@@ -20,7 +20,8 @@ from .artifacts import (SIMULATION, atomic_json, canonical, code_identity, diges
                         file_hash, lease, read, scoped, seal, stable_job, unseal)
 
 SCHEMA = 'v3-A11-pull-1'
-ALLOWED_KINDS = {'table', 'rerun', 'a4_fit', 'a4_validate', 'a4_census', 'a5_fvplain'}
+ALLOWED_KINDS = {'table', 'rerun', 'a4_fit', 'a4_validate', 'a4_census', 'a5_fvplain', 'a13_validate_plain_ext'}
+RECHECK_PREFERENCE_SECONDS = 5.  # Several normal one-second claim polls, bounded if a host disappears.
 
 
 def positive(value):
@@ -67,6 +68,9 @@ def freeze(spec, projection_document, *, code_commit, extra_inputs=(), lease_sec
         if memory is None:
             memory = max(costs[k]['memory_estimate_gb'] for k in keys)
         value = {'source_strata': keys, 'worker_seconds': max(means), 'memory_gb': memory}
+        if job['kind'] == 'a13_validate_plain_ext':
+            # Ordering weight only; the approved R_max price is sealed separately.
+            value['worker_seconds'] *= job['config']['R_max'] / 3
         key = digest(value)
         classes[key] = value
         assignments[job['id']] = key
@@ -152,9 +156,14 @@ def register_entries(root):
 
 def approve_host(root, evidence_document, operator, when):
     from .qualification_a11 import validate_evidence
+    from .service import model_service
     with transaction(root):
         spec = unseal(read(Path(root) / 'manifest.json'))
         e = validate_evidence(evidence_document, spec['code_hash'])
+        settings = e['candidate'].get('settings', {})
+        if settings.get('profile') not in ('local', 'x2') or not positive(settings.get('cpu_budget')):
+            raise ValueError('qualification must declare the candidate profile and CPU budget')
+        service = model_service(settings)
         if not operator.strip() or not when.strip():
             raise ValueError('operator and approval timestamp required')
         if e['candidate']['host'] in register_entries(root):
@@ -166,6 +175,7 @@ def approve_host(root, evidence_document, operator, when):
         return append(root, 'machine_register', {'host': e['candidate']['host'],
             'code_hash': e['code_hash'], 'qualification_sha256': evidence_document['sha256'],
             'relative_throughput': e['relative_throughput'], 'memory_gb': e['candidate']['memory_gb'],
+            'profile': settings['profile'], 'model_service': service,
             'fingerprint': e['candidate']['fingerprint'], 'kinds': e['kinds'],
             'operator_approval': {'operator': operator, 'when': when}})
 
@@ -177,6 +187,9 @@ def prepare(spec_path, root, settings):
     settings = dict(settings, caps=caps(settings['profile'], settings['cpu_budget']))
     preflight = validate_spec(spec, settings)
     root = scoped(root)
+    if spec.get('schema') == 'v3-A13-extension-1':
+        from .validation_extension_a13 import begin_round
+        begin_round(spec, spec_path, root)
     with transaction(root):
         identity = {'spec_hash': digest(spec), 'code_hash': code_identity()}
         if (root / 'identity.json').exists() and read(root / 'identity.json') != identity:
@@ -204,6 +217,8 @@ class Coordinator:
         self.register = register_entries(self.root)
         self.jobs = self.store.jobs
         self.done = self.store.done
+        if (self.root / 'a13_scientific_halt.json').exists():
+            self.state['halt'] = 'A13 scientific halt'
         failure = self.root / 'nondeterminism_failure.json'
         if failure.exists():
             self.state['halt'] = 'nondeterminism'
@@ -219,6 +234,9 @@ class Coordinator:
         return self.spec['phases'][i] if i < len(self.spec['phases']) else None
 
     def save(self, force=False):
+        if self.spec['schema'] == 'v3-A13-extension-1' and self.state['halt']:
+            from .validation_extension_a13 import latch_round_halt
+            latch_round_halt(self.root, self.state['halt'])
         # Only touched rows enter the durable chained log. Status is a bounded
         # rate diagnostic snapshot, never dispatch's source of truth.
         self.refresh_waiting()
@@ -408,12 +426,7 @@ class Coordinator:
             return max(sessions, key=lambda s: s['joined'])['settings']
         entry = self.member(host)
         evidence = unseal(read(self.root / 'qualifications' / (entry['qualification_sha256'] + '.json')))
-        settings = evidence['candidate'].get('settings')
-        # Early fixture evidence has no launch settings. The existing machine
-        # rule still reserves the X2 profile for its named host. Join validates
-        # the actual CPU budget and settings before any session is created.
-        return settings or dict(profile='x2' if host.lower() == 'yotko-evo-x2' else 'local',
-                                cpu_budget=32 if host.lower() == 'yotko-evo-x2' else 16)
+        return evidence['candidate']['settings']
 
     def require_configuration_cap(self, host, settings, control):
         from .production_runner import caps
@@ -443,22 +456,23 @@ class Coordinator:
 
     def join(self, r):
         from .production_runner import caps
+        from .service import model_service, require_service_record
         entry = self.member(r['host'])
         if self.state['started'] is None or self.state['complete'] or self.state['halt'] or self.state.get('stop_reason'):
             raise ValueError('coordinator is not accepting joins')
         if r['fingerprint'] != entry['fingerprint'] or r['code_hash'] != self.code or r['code_commit'] != self.spec['pull_dispatch']['code_commit']:
             raise ValueError('host fingerprint or code identity mismatch')
         settings = r['settings']
+        if settings['profile'] != entry['profile'] or model_service(settings) != entry['model_service']:
+            raise ValueError('host profile or model service differs from its approved register entry')
         limits = caps(settings['profile'], settings['cpu_budget'])
         if settings['threads'] != 1 or settings['mode'] not in ('normal', 'work'):
             raise ValueError('invalid host caps')
         self.require_configuration_cap(r['host'], settings, dict(mode=settings['mode'], max_workers=settings['workers']))
         if settings['workers'] > limits[settings['mode']]:
             raise ValueError('invalid host caps')
-        if settings['profile'] == 'x2' and r['host'].lower() != 'yotko-evo-x2':
-            raise ValueError('X2 profile needs the X2 host')
-        if settings['profile'] == 'x2' and (r.get('service') or {}).get('down_exit_code') != 0:
-            raise ValueError('X2 worker needs its active service supervisor')
+        if settings['profile'] == 'x2':
+            require_service_record(settings, r.get('service'))
         if any(s['host'] == r['host'] and s['end'] is None for s in self.state['sessions'].values()):
             raise ValueError('host is already joined')
         control = dict(mode=settings['mode'], max_workers=settings['workers'], drain=False)
@@ -468,7 +482,7 @@ class Coordinator:
         self.state.setdefault('host_controls', {})[r['host']] = dict(control)
         self.state['sessions'][sid] = {'host': r['host'], 'joined': self.now, 'end': None, 'heartbeat': self.now,
             'relative_throughput': entry['relative_throughput'], 'worker_seconds': 0.,
-            'settings': dict(settings, caps=limits), 'control': dict(control),
+            'settings': dict(settings, caps=limits, model_service=entry['model_service']), 'control': dict(control),
             'configuration': {}, 'chosen': {}, 'ready': {}, 'service': r.get('service')}
         return {'session': sid, 'spec': self.store.full_spec(), 'phase_roots': {p: str(self.root / p) for p in self.spec['phases']},
                 'lease_seconds': self.ttl, 'qualified_kinds': entry['kinds']}
@@ -579,6 +593,36 @@ class Coordinator:
         self.store.sync()
         return {r[0] for r in self.store.db.execute('SELECT host FROM participants WHERE phase=?',(phase,))}
 
+    def preferred_recheck(self, sample, original):
+        """Operational preference only; sampling, comparison and records stay fixed."""
+        from .production_runner import choose
+        phase = self.phase
+        key, cost = self.store.cost(sample)
+        needed = max(cost['memory_gb'], self.state.get('observed_memory_gb', {}).get(key, 0))
+        eligible = []
+        for sid, s in self.state['sessions'].items():
+            if s['end'] is not None or s['control']['drain'] or s['host'] == original or phase not in s['chosen']:
+                continue
+            entry = self.member(s['host'])
+            if sample['kind'] not in entry['kinds'] or not s['ready'].get(phase):
+                continue
+            active = self.active(sid)
+            cap = min(s['settings']['caps'][s['control']['mode']], s['control']['max_workers'])
+            selected = choose(s['configuration'][phase], cap, s['settings']['cpu_budget'], 1)
+            memory = min(s.get('memory_available_gb', 0) * .8,
+                         entry['memory_gb'] * .8 - sum(l['memory_gb'] for l in active))
+            if len(active) < selected['workers'] and needed <= memory:
+                eligible.append(s['host'])
+        if not eligible:
+            return None
+        preferred = min(eligible, key=lambda h: (-self.member(h)['relative_throughput'], h))
+        # Persist one window for the phase. Host changes, retries and restarts
+        # cannot reset it and keep another eligible host waiting indefinitely.
+        window = self.state.setdefault('recheck_preferences', {}).setdefault(phase,
+            dict(job_id=sample['id'], began_epoch=self.now, expires_epoch=self.now + RECHECK_PREFERENCE_SECONDS))
+        window['preferred_host'] = preferred
+        return preferred if self.now < window['expires_epoch'] else None
+
     def advance(self):
         while self.phase is not None:
             total, done = self.store.counts(self.phase)
@@ -661,6 +705,10 @@ class Coordinator:
             key, cost = self.store.cost(sample)
             if (sample['id'] not in leased and (len(participants) == 1 or original != r['host'])
                     and sample['kind'] in entry['kinds'] and max(cost['memory_gb'], observed.get(key,0)) <= memory):
+                if len(participants) > 1:
+                    preferred = self.preferred_recheck(sample, original)
+                    if preferred is not None and preferred != r['host']:
+                        return {'job': None, 'waiting': 'preferred cross-host recheck host: ' + preferred}
                 job, purpose = sample, 'check'
         if job is None:
             return {'job': None, 'waiting': 'jobs, cross-host check or memory'}
@@ -669,7 +717,11 @@ class Coordinator:
         self.state['leases'][token] = {'host': r['host'], 'session': r['session'], 'job_id': job['id'], 'phase': phase,
             'start': self.now, 'expires': self.now + self.ttl, 'heartbeat': self.now, 'status': 'active',
             'purpose': purpose, 'memory_gb': max(cost['memory_gb'], observed.get(key,0))}
-        return {'job': job, 'lease': token, 'expires': self.now + self.ttl, 'phase_root': str(self.root / phase), 'purpose': purpose}
+        claim = {'job': job, 'lease': token, 'expires': self.now + self.ttl, 'phase_root': str(self.root / phase), 'purpose': purpose}
+        if job['kind'] == 'a13_validate_plain_ext':
+            from .validation_extension_a13 import durable_checkpoints
+            claim['a13_checkpoints'] = durable_checkpoints(self.root, job) if purpose == 'work' else []
+        return claim
 
     def claim_many(self, r):
         k = r.get('max_jobs', 1)
@@ -717,6 +769,9 @@ class Coordinator:
             atomic_json(self.root / 'nondeterminism_failure.json', seal(failure))
             self.state['halt'] = 'nondeterminism'
             self.state['complete'] = False
+            if job['kind'] == 'a13_validate_plain_ext':
+                from .validation_extension_a13 import latch_round_halt
+                latch_round_halt(self.root, 'nondeterminism')
             history_path = self.root / 'launches.json'
             if history_path.exists():
                 history = read(history_path)
@@ -767,6 +822,19 @@ class Coordinator:
 
     def request(self, r):
         op = r['op']
+        if op == 'a13_checkpoint':
+            from .validation_extension_a13 import accept_checkpoint
+            return accept_checkpoint(self, r)
+        if op == 'a13_halt':
+            self.session(r)
+            l = self.state['leases'].get(r['lease'])
+            if not l or l['host'] != r['host'] or self.jobs[l['job_id']]['kind'] != 'a13_validate_plain_ext':
+                raise ValueError('invalid A13 halt lease')
+            self.state['halt'] = 'A13 scientific halt'
+            atomic_json(self.root / 'a13_scientific_halt.json', seal({'reason': self.state['halt'], 'job_id': l['job_id']}))
+            from .validation_extension_a13 import latch_round_halt
+            latch_round_halt(self.root, self.state['halt'])
+            return {'halt': self.state['halt']}
         if op == 'inspect':
             return {'status': self.status(), 'spec': self.store.full_spec()}
         if op == 'join':
@@ -777,6 +845,11 @@ class Coordinator:
             self.member(r['host'])
             return {'job': None, 'claims': [], 'phase': None, 'control': {'drain': True}, 'status': self.status()}
         s = self.session(r)
+        if op in ('heartbeat', 'ready') and 'memory_available_gb' in r:
+            memory = float(r['memory_available_gb'])
+            if not math.isfinite(memory) or memory < 0:
+                raise ValueError('invalid reported memory headroom')
+            s['memory_available_gb'] = memory
         if op == 'heartbeat':
             s['heartbeat'] = self.now
             if not self.stops()['coordinator']:

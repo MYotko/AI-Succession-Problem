@@ -4530,3 +4530,136 @@ The rehearsal findings were fixed at identity `c19b54f5`:
 A short re-rehearsal at the new identity is required before registered use.
 The rehearsal approval must name the code identity used; the successful
 `dd1b1a88` rehearsal does not approve the fixes at `c19b54f5`.
+
+## 33. A13 implementation and the A12 E1 to E3 port, 2026-10-16
+
+Implemented for review, without a commit or registered execution. The design
+authority is `48815a655c9f4096ea8ceef35ee277ee0352c7d3`, including the dated
+pricing clarification that resolves F1. The build uses code and synthetic
+fixtures only. It makes no claim about real eligibility, R_max, extension
+power, admission, or the results of the later A11 proof or rehearsal.
+
+The old identity is
+`c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810`.
+The E1 to E3 port reproduced
+`3d44e320cd7225bb3d2ea2b0ac7ec5b43fef41592bd12477cd135b5cfabc56bd`
+before A13 edits, including after the fast-forward to 48815a65.
+The new LF-normalized identity, including the A2 re-pins, is
+`bad5772e9aa8b037f6723c23eae42da77fb9ac5e643294ae8c04cd02869dad4f`.
+Markdown and tests are outside that identity; the compatibility JSON is inside.
+
+**Verified implementation map.** Paths below are under `simulation/v3`.
+
+| Approved item | Code and effect |
+| --- | --- |
+| Part 1.1 | `validation_extension_a13.py:81` evaluates every eligibility gate from original rows, fit and original validation counts. `prepare:321` records a boolean for every primary and sensitivity row and binds the refused candidate, original plan and sidecar. |
+| Part 1.2 | `validation_extension_a13.py:70` obtains the deterministic numerator from the existing empirical-Bernstein function at n=2, computes 1+ceil(2c), and checks tau/2. The plan carries the original M; `validate_plan:448` rechecks it before launch. |
+| Part 1.3 | `validation_extension_a13.py:40` implements the separated extension seed namespace; `:51` freezes all source/replicate seeds and checks collisions. `extension_stage:151` reads A1/fit only and writes ordered per-trajectory pairs. It never uses the original validation index or combination functions. Configuration and rehearsal use high-range non-extension seeds. |
+| Part 1.4 | `validation_extension_a13.py:177` stops on visiting-trajectory counts for all rows of a source. `run_stage_job:241` runs full replicates in order and retains completed checkpoints. |
+| Part 1.5 and clarification | `validation_extension_a13.py:112` verifies the original projection seal before arithmetic, verifies the registered file/payload hashes, prices each distinct source once at B_j/3 and fixes R_max under the 15-hour projection. `prepare:321` records the six-replicate launch floor and N*>2048R_max flags. Prices remain in executor-only plan data. `public_record:579` reports only R_max and aggregate projected cost from pricing. |
+| Part 1.6 | `validation_extension_a13.py:136` selects exactly the first N* visiting trajectories from extension records and applies the unchanged Bernstein function and visit-weighted safeguard with pinned w, tau, M and alpha. |
+| Part 1.7 | `validation_extension_a13.py:207` validates durable checkpoints; `:216` transfers them under the coordinator lease. The host/runner latch scientific failures. `publish:639` treats a scientific halt as certifying nothing; incomplete infrastructure work must resume. |
+| Part 1.8 | `validation_extension_a13.py:603` replaces only eligible C0 decisions, recomputes support and reapplies the unchanged census floor. `:591` checks canonical byte identity for every ineligible row and sidecar entry, including sensitivity siblings. Certified rows have `a13.certified_by_extension`. |
+| Part 1.9 | `validation_extension_a13.py:579` records P, M, E, alpha, alpha(1+P/M) and alpha*E/M in public family records and receipt metadata. It preserves the original refusal and labels the amendment as informed by an outcome. |
+| Part 1.10 | Plans carry round=1. `validation_extension_a13.py:494` binds the frozen plan digest and root in the reserved family-level round record. The halt latch lives there too. A copied plan or a new root cannot authorize another realization. `:548` requires matching launch identity, last-launch completion and a passed nondeterminism or pull-dispatch check before certification. |
+| Part 2.11 | Existing selection behavior is unchanged. Observation hooks at `integration.py:241` and `:281` surround actual allocation and yield decisions. |
+| Part 2.12(a-c) | `admission_a13.py:15` binds row IDs, hashes and cell classifications, excluding executor-only visit counts. `:35` enforces floor(N/1000), one per context, balanced exclusion, screens, nonempty support, sensitivity and absence of any violation. `production_tables.py:113` retains the previous family sensitivity/support checks and rejects residual rows outside the binding. Admitted rows remain unavailable. |
+| Part 2.12(d-e) | `admission_a13.py:101` counts decision incidence, including survival-first early selection of an unavailable unique minimum. `:122` aggregates per-run/per-branch counts and reasons; `:142` pools predefined contributing runs and flags any nonzero incidence. Absorbed padding never invokes the observer. `production_runner.py:242` adds run incidence only when the family has admitted rows. |
+| Part 2.13 | `table_validation_a4.py:789` adds prospective admission only for the new pin. The extension builder limits registered retrospective use to the nominal A10 family; other already-validated families receive no new admission path. |
+| Order 2 | `artifacts.py:219` verifies historical pins by ancestry and committed hash. Current A10 launches require exact pin 48815a65, its exact working note bytes and committed clean source. Carried-forward plans and publication under their historical pins use historical verification. Publications under the current 48815a65 pin, including the new A5 plan, retain strict working-note verification. compatibility_a10.py:186 checks both registered source plans before reading proof outputs. |
+| Order 5 and 7 | `validation_extension_a13.py:321` writes the frozen executor plan and permitted public record. `publish:639` enforces the exact configured path, checks admission before writing, and preserves original receipt plan_hash and stream_seeds while adding extension hashes and seeds. A5 includes the extension manifest in its forbidden seeds. |
+
+The port preserves E1's A10 local configuration candidates `[2,4,8,12]`,
+E2's bounded preference for the fastest eligible non-original recheck host,
+and E3's approved per-host profile/service declaration. X2 still requires
+Linux and actual resource caps. The original X2 remains the qualification
+and accounting reference. `service.py` is LF-only and retains the port hash
+`623db8ef5e49116ae7ea56646de754a0102c6f242716b1de55bc9ba96d1c254b`.
+
+The A2 record names five changed pinned files and preserves their previous
+hashes: artifacts (historical/current pin split), integration (observation
+only), production_runner (A12 execution and A13 dispatch/recording),
+production_tables (A13 admission), and service (E3). Every unchanged pinned
+dependency remains exact. This record does not itself authorize reading
+the old family at the new identity. The separately reviewed, approved and
+committed A11 proof is still required.
+
+**Validation scope.** `simulation/test_v3_a13.py` covers eligibility edges,
+radius arithmetic, pricing seals/caps, seeds/collisions, ordered stopping,
+first-visiting tests, safeguards, checkpoint resume and scientific halt,
+ineligible byte identity, admission limits, actual controller branches,
+historical pins and the additive no-admission path. The synthetic end-to-end
+test executes through publication and A5 preparation. The full suite and
+its environment/blindness limitations are itemized in `_a13_build/REPORT.md`.
+No real registered output was used to make a test pass.
+
+**Next operations, not performed here.** Runbook section 16 is carried over
+verbatim; section 17 supersedes its obsolete pin, identity, publication
+ordering and fallback. The sequence is code commit, non-registered rehearsal
+(including every pre-existing `result` field against c19b54f5), the 434-job
+A11 proof (90 estimation and 344 validation), proof-record commits, a fresh
+execution checkout, extension records and its launch, Part 2 admission and
+publication at the exact configured path, family-identity approval, then
+labels and the five run launches. Each launch keeps its own approvals,
+configuration test, service supervision and budget. The reading remains
+registered at 93474e00. The rehearsal commands are written only.
+
+
+### Review fixes, 2026-10-16
+
+Verified fixes B1, B2, M1 to M3 and L1 to L3 are included before the code
+commit and the 434-job proof. Preparation and plan validation require exactly
+one of registered or rehearsal. The executor independently rejects reserved
+extension streams in a non-registered execution. Configuration tests use only
+their explicit unreserved seed.
+
+The registered round record is anchored next to the nominal family target,
+independent of the prepare-time plan path or a pull plan's filename. Both local and multi-host
+launch paths bind the root before dispatch. Scientific and nondeterminism
+halts persist in that record. Publication after a halt never reads extension
+trajectory results and sends every eligible row to Part 2, including when
+the failed launch lacks completion or check evidence. Only an unhalted,
+complete, checked launch can certify an extension result.
+
+`admission_a13.py:77` records sealed Part 2 checks, including refusals, before
+publication. The record contains counts and identifiers only. Receipts keep
+the complete frozen seed manifest and stage hashes, without the realized
+per-source seed subset that would expose stopping replicates. A4 reports
+list extension entries separately from the original plain-tier visit totals.
+
+Yield decisions append only to the private incidence list and the separate
+run summary. Every pre-existing result field, including yield events, remains
+byte-identical with observation enabled. Current-pin A4 and A5 publications
+retain strict verification; historical verification is selected only for
+older registration commits.
+
+Tests independently challenge producer admission and loader limits, pin the
+closed-form N* and its minimality, guard the original assembler/index/combine
+ASTs, and hash the whole unchanged continuation-validation and estimator
+files. A synthetic 3,000-row registered-mode publication with one residual
+row passes the production loader, A10 receipt checks and a run step with the
+admitted row unavailable and its incidence recorded. This test substitutes
+only original-input verification and the clean committed-pin check; it does
+not run a registered trajectory or inspect a real candidate. Both completed
+and scientifically halted round paths are covered. Final test counts and
+remaining environment limitations are recorded in `_a13_build/REPORT.md`.
+
+### Review fixes, round 2, 2026-10-16
+
+Registered preparation reserves the single family record
+`v3/runs/a10_stage1/nominal/v3_rerun_tables_A10.a13_round.json` before writing
+the plan. A different plan hash or another preparation output is refused.
+The same interrupted preparation can finish writing its missing plan at the
+original path before any launch. Both launch paths bind the root and final
+frozen digest to this reservation. Publication verifies this fixed anchor
+and its plan hash, including when the launch floor prevents a launch.
+Certification also requires the recorded root and the existing completion
+and nondeterminism checks. A second plan cannot replace a spent round.
+
+Rehearsals keep output-relative records. Synthetic tests cover second
+preparations before launch, after local/pull launch, and after a halt;
+publication of a second plan with forged completion evidence or another
+anchor; and rehearsals after a registered halt. No registered trajectories
+were executed. This fix changes only the new extension module among code
+identity inputs; no additional A2 re-pin is required. The final identity and
+test results are recorded in the build report and runbook.

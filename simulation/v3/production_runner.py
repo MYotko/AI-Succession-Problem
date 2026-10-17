@@ -172,6 +172,19 @@ def execute(job, registered=False, registration=None, root=None):
         # fit phase for a plain validate job.
         from .table_validation_a4 import run_stage_job
         return run_stage_job(job, root)
+    if kind == 'a13_validate_plain_ext':
+        from .validation_extension_a13 import run_stage_job, RESERVED
+        configuration = job['tag'] in ('configuration', 'validation') and config.get('configuration_test')
+        if not registered:
+            if not (config.get('non_registered_rehearsal') or configuration):
+                raise ValueError('non-registered extension requires rehearsal or configuration test')
+            # A configuration test uses only its explicit seed. A rehearsal uses
+            # the entire frozen manifest, which must be outside the reservation.
+            seeds = [config.get('seed')] if configuration else (
+                list(config.get('stream_seeds', [])) + [r['seed'] for r in config.get('full_seed_manifest', [])])
+            if not seeds or any(s is None or RESERVED[0] <= int(s) < RESERVED[1] for s in seeds):
+                raise ValueError('non-registered extension uses A13 reserved seed range')
+        return run_stage_job(job, root)
     if kind == "a5_fvplain":
         # A5 plain-law certification labels. The A5 stream seed travels in the
         # config; the runner's own job seed is unused. A5 needs no sibling phase.
@@ -224,10 +237,13 @@ def execute(job, registered=False, registration=None, root=None):
                     "unavailable_plans_total": sum(r["yield_unavailable_plan_count"] for r in records),
                     "yield_reviews_held_no_admissible_plan": sum(r["yield_held_no_admissible_plan"] for r in records)}
     extra = {}
+    if getattr(model, '_a13_enabled', False):
+        from .admission_a13 import summarize
+        extra['a13_decision_incidence'] = summarize(model.a13_decisions)
     if model.instrument.a10:
         living = [r for r in records if r.get("population_before", 0) > 0]
         count = len(living)
-        extra = {"instrument": model.instrument.declaration(), "a10_diagnostics": {
+        extra = {**extra, "instrument": model.instrument.declaration(), "a10_diagnostics": {
             "living_start_steps": count,
             "mean_theta": sum(r["theta"] for r in living) / count if count else None,
             "theta_one_share": sum(r["theta"] == 1. for r in living) / count if count else None,
@@ -271,7 +287,14 @@ def worker(root_name, job, code, threads, registered, registration, completion_d
             atomic_json(root / "records" / (job["id"] + ".json"),
                         {"job": job, "code_hash": code, "status": "complete", "output_hash": file_hash(path), "completed_epoch": time.time(),
                          "worker_seconds": time.perf_counter() - before})
-    except BaseException:
+    except BaseException as exc:
+        if job['kind'] == 'a13_validate_plain_ext' and job['tag'] == 'v3_tables':
+            from .validation_extension_a13 import ScientificHalt
+            from .continuation_validation import OutOfRange
+            if isinstance(exc, (ScientificHalt, OutOfRange)):
+                atomic_json(root.parent / 'a13_scientific_halt.json', seal({'reason': 'A13 scientific halt', 'job_id': job['id']}))
+                from .validation_extension_a13 import latch_round_halt
+                latch_round_halt(root.parent, 'A13 scientific halt')
         atomic_json(root / "failures" / (job["id"] + ".json"), {"job": job, "traceback": traceback.format_exc()})
         raise
 
@@ -562,6 +585,9 @@ def nondeterminism_check(phase_root, jobs, registered=False, registration=None):
     original = completed(phase_root, job, code)
     if fresh is None or digest(fresh["result"]) != digest(original["result"]):
         atomic_json(phase_root / "nondeterminism_failure.json", {"epoch": time.time(), "job": job["id"], "recomputed": fresh is not None})
+        if job['kind'] == 'a13_validate_plain_ext':
+            from .validation_extension_a13 import latch_round_halt
+            latch_round_halt(phase_root.parent, 'nondeterminism')
         raise RuntimeError("A4 nondeterminism: re-executed task %s differs" % job["id"])
     result = {"checked": job["id"], "candidates": len(shortest), "matched": True}
     atomic_json(phase_root / "nondeterminism_check.json", result)
@@ -768,6 +794,9 @@ def validate_spec(spec, settings):
     instrument = declaration(spec.get("instrument"))
     if spec.get("registered_a10") and not instrument.a10:
         raise ValueError("registered A10 manifest refuses R4")
+    if spec.get('schema') == 'v3-A13-extension-1':
+        from .validation_extension_a13 import validate_plan
+        validate_plan(spec, launching=True)
     if spec["code_hash"] != code_identity():
         raise RuntimeError("frozen specification source hash mismatch")
     if 'repair' in spec:
@@ -775,8 +804,10 @@ def validate_spec(spec, settings):
         validate_plan(spec)
     elif spec.get('completion_screen'):
         raise ValueError('completion screen is reserved for the frozen A3 manifest')
-    if settings["profile"] == "x2" and (platform.node().lower() != "yotko-evo-x2" or platform.system() != "Linux"):
-        raise RuntimeError("X2 profile must run on the declared X2 machine")
+    from .service import model_service
+    model_service(settings)
+    if settings["profile"] == "x2" and platform.system() != "Linux":
+        raise RuntimeError("X2 profile requires Linux")
     if not 1 <= settings["workers"] <= settings["caps"]["configuration"] or settings["threads"] not in (1, 2):
         raise ValueError("invalid launch worker/thread count")
     if settings["cpu_budget"] > available_cpus():
@@ -813,6 +844,10 @@ def validate_spec(spec, settings):
     if len({j["seed"] for j in spec["jobs"]}) != len(spec["jobs"]):
         raise ValueError("seed collision in frozen manifest")
     for job in spec["jobs"]:
+        if job['kind'] != 'a13_validate_plain_ext':
+            from .validation_extension_a13 import RESERVED
+            if any(RESERVED[0] <= int(s) < RESERVED[1] for s in (job['seed'], job['config'].get('seed', job['seed']))):
+                raise ValueError('non-extension job uses A13 reserved seed range')
         if stable_job(job["kind"], job["config"], job["tag"], job["index"]) != job:
             raise ValueError("job or scheduling-independent seed was changed")
         if spec.get("registered_a10"):
@@ -830,7 +865,7 @@ def validate_spec(spec, settings):
         from .production_tables import ProductionTables
         calibrated, loaded = {}, set()
         for job in spec["jobs"]:
-            if job["kind"] in ("a4_fit", "a4_validate", "a4_census", "a5_fvplain"):
+            if job["kind"] in ("a4_fit", "a4_validate", "a4_census", "a5_fvplain", "a13_validate_plain_ext"):
                 # A4 and A5 stages carry their calibration through the referenced
                 # A1 job.
                 cal_path = job["config"]["a1_job"]["config"].get("calibration_path")
@@ -907,12 +942,17 @@ def launch(spec_path, root, settings, service_record=None):
     screen = preflight_completion(spec, root)
     root = scoped(root)
     root.mkdir(parents=True, exist_ok=True)
+    if spec.get('schema') == 'v3-A13-extension-1':
+        from .validation_extension_a13 import begin_round
+        begin_round(spec, spec_path, root)
     if context_preflight and context_preflight["checked"]:
         atomic_json(root / "context_preflight.json", context_preflight)
     if settings["profile"] == "x2":
-        if not service_record or service_record.get("down_exit_code") != 0:
-            raise RuntimeError("X2 launch requires the active service lease wrapper")
+        from .service import require_service_record
+        require_service_record(settings, service_record)
     with lease(root / "runner.lock"):
+        if (root / 'a13_scientific_halt.json').exists():
+            raise RuntimeError('A13 scientific halt is final; round spent')
         if any(root.glob('*/screen_failure.json')):
             raise RuntimeError('A3 screen failure is latched; no resumption or configuration dispatch')
         identity = {"spec_hash": digest(spec), "code_hash": code_identity()}
@@ -941,7 +981,7 @@ def launch(spec_path, root, settings, service_record=None):
         is_a10_pilot = spec.get("schema") == "v3-A10-cost-pilot-1"
         from .pilot_a10 import reduced_pilot
         pooled = reduced_pilot(spec)
-        memory_managed = is_a4 or is_a10_pilot or spec.get("schema") == "v3-A10-estimation-1"
+        memory_managed = is_a4 or is_a10_pilot or spec.get("schema") in ("v3-A10-estimation-1", "v3-A13-extension-1")
         # Memory caps come first, measured before any task runs, so a capped
         # phase's configuration test never tries a worker count it cannot use.
         mem_caps = {p: memory_worker_cap(spec.get("memory_estimate_gb", {}).get(p)) for p in spec["phases"]} if memory_managed else {}
@@ -1005,7 +1045,7 @@ def launch(spec_path, root, settings, service_record=None):
                         from .pilot import project_costs
                         atomic_json(root / "cost_projection.json", project_costs(spec, root, outcomes, record["configuration"]))
                 return {"complete": False, "outcomes": outcomes}
-            if is_a4 and jobs:
+            if (is_a4 or spec.get("schema") == "v3-A13-extension-1") and jobs:
                 check = nondeterminism_check(root / phase, jobs, spec["registered"], spec.get("registration"))
                 atomic_json(root / phase / "nondeterminism_check.json", check)
         publication = spec.get("publication")
@@ -1057,6 +1097,7 @@ def main():
     p = commands.add_parser("launch")
     p.add_argument("spec"); p.add_argument("root")
     p.add_argument("--profile", choices=("local", "x2"), required=True)
+    p.add_argument("--model-service", choices=("llm", "none"), help="per-host service; default llm for X2, none for local")
     p.add_argument("--workers", type=int, required=True)
     p.add_argument("--threads", type=int, choices=(1, 2), required=True)
     p.add_argument("--cpu-budget", type=int, required=True)
@@ -1069,6 +1110,10 @@ def main():
     args = parser.parse_args()
     if args.command == "launch":
         settings = {k: getattr(args, k) for k in ("profile", "workers", "threads", "cpu_budget", "mode")}
+        if args.model_service is not None:
+            settings['model_service'] = args.model_service
+        from .service import model_service
+        model_service(settings)
         configure_threads(args.threads)
         if 'pull_dispatch' in unseal(read(args.spec)):
             result = launch(args.spec, args.root, settings)
