@@ -2744,7 +2744,7 @@ only after those fixes and their A2 re-pins are committed. A later code
 change changes the identity and requires the proof at that changed commit.
 
 The expected LF-normalized identity is
-`bad5772e9aa8b037f6723c23eae42da77fb9ac5e643294ae8c04cd02869dad4f`.
+`50a5038ec2b1a65261a36b1cb16133a7d0d6a42e765b0e35612c901eeae9441e`.
 The old identity is
 `c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810`.
 The independently reproduced E1 to E3 port identity was
@@ -2759,7 +2759,7 @@ checkout, and run from its `simulation` directory:
 ```bash
 export PYTHONINTMAXSTRDIGITS=0 PYTHONDONTWRITEBYTECODE=1
 export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
-export EXPECTED_CODE=bad5772e9aa8b037f6723c23eae42da77fb9ac5e643294ae8c04cd02869dad4f
+export EXPECTED_CODE=50a5038ec2b1a65261a36b1cb16133a7d0d6a42e765b0e35612c901eeae9441e
 export OLD_CODE=c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810
 export REH=v3/runs/a13_rehearsal
 mkdir -p "$REH/checks"
@@ -2795,12 +2795,20 @@ First run E1 to E3's controlled checks, the toy extension publication/A5
 receipt check, and the additive loader/controller cases on each available
 rehearsal host. These tests use synthetic records and toy trajectories.
 
+If pytest is absent from the frozen phaseb environment, provide reviewed
+pure-Python pytest and its dependencies in a separate directory, such as
+`$REH/tools/pytest_site`, and verify the copied bundle's hashes. Keep phaseb
+unchanged and keep using its `$PYTHON`. Set `TEST_PYTHONPATH` to that directory
+plus any existing `PYTHONPATH`; if pytest is already available, use the
+existing `PYTHONPATH` (or an empty string). Apply it only to the three tests
+and the toy builder below, which imports `test_v3_a13`, as in the rehearsal.
+
 ```bash
-"$PYTHON" -B -m pytest -q test_v3_a12_execution.py \
+PYTHONPATH="$TEST_PYTHONPATH" "$PYTHON" -B -m pytest -q test_v3_a12_execution.py \
   --junitxml="$REH/checks/execution.xml"
-"$PYTHON" -B -m pytest -q test_v3_a13.py \
+PYTHONPATH="$TEST_PYTHONPATH" "$PYTHON" -B -m pytest -q test_v3_a13.py \
   --junitxml="$REH/checks/extension.xml"
-"$PYTHON" -B -m pytest -q test_v3_a11.py -k pipeline \
+PYTHONPATH="$TEST_PYTHONPATH" "$PYTHON" -B -m pytest -q test_v3_a11.py -k pipeline \
   --junitxml="$REH/checks/pipeline.xml"
 ```
 
@@ -2816,7 +2824,7 @@ synthetic; the extension itself uses the real trace engine. The stored
 trajectory values are executor-only and are not inspected or reported.
 
 ```bash
-"$PYTHON" -B - <<'PY'
+PYTHONPATH="$TEST_PYTHONPATH" "$PYTHON" -B - <<'PY'
 import os
 from pathlib import Path
 from test_v3_a13 import toy_original

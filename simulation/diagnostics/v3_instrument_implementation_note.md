@@ -4663,3 +4663,50 @@ anchor; and rehearsals after a registered halt. No registered trajectories
 were executed. This fix changes only the new extension module among code
 identity inputs; no additional A2 re-pin is required. The final identity and
 test results are recorded in the build report and runbook.
+
+## 34. A13 rehearsal RPC repair, 2026-10-17
+
+The non-registered rehearsal at code commit `53a7c192` exposed a build
+defect: `multihost_a11.rpc()` rejected `a13_checkpoint` and `a13_halt` before
+the coordinator's existing handlers could receive them. The allowlist at
+`simulation/v3/multihost_a11.py:900` now admits both operations. No handler,
+scientific computation, seed rule, registered quantity or scope guard changed.
+This repair is uncommitted pending review and operator approval.
+
+The previous identity is
+`bad5772e9aa8b037f6723c23eae42da77fb9ac5e643294ae8c04cd02869dad4f`.
+The new LF-normalized identity is
+`50a5038ec2b1a65261a36b1cb16133a7d0d6a42e765b0e35612c901eeae9441e`.
+Only `multihost_a11.py` changed among identity inputs. It is not an A2-pinned
+file, and every existing A2 pin remains exact; no re-pin is needed.
+
+Verified transport audit: `host_a11.py:67` frames operations as JSON on
+stdin; SSH (`:89`) and local stdio (`:103`) enter the same coordinator CLI
+and RPC dispatcher. The local path additionally checks the recorded machine.
+The host's fourteen operations all occur in the RPC allowlist and coordinator
+dispatcher, including checkpoint and halt delivery. The A13 job kind already
+passes the multi-host and qualification kind filters, the runner dispatch,
+the SQLite job-kind queue and the snapshot inventory. The optional restricted
+SSH command in runbook section 4a fixes the RPC executable and root; operation
+names remain inside JSON, so no additional shell command is required.
+No remote connection or deployed-wrapper inspection was performed here.
+
+`simulation/test_v3_a13.py:758` runs the actual coordinator monitor and host
+loop with spawned A13 toy workers over loopback and local stdio. A first
+checkpoint is persisted at the coordinator before the test requests drain.
+The in-flight job finishes, the launch drains, and the same root resumes for
+its nondeterminism check. All persisted checkpoint hashes and the round record
+remain identical. `:785` injects a scientific exception after one real replica
+in a spawned worker; the ordinary executor writes its halt marker, and the
+host sends the halt through RPC. The family latch persists, no job completes,
+and publication tests no extension trajectories and refuses Part 2 admission
+for the tiny family. `:807` checks every host operation against the RPC
+allowlist and fixed SSH command framing. Test qualification identities are
+synthetic; no registered trajectories execute.
+
+Runbook 17.1 now pins the new identity. Section 17.2 provides pytest and its
+pure-Python dependencies outside frozen phaseb through a separate PYTHONPATH
+directory for tests and the toy builder only. The new code commit and repeat
+of the operator-approved rehearsal are still required. This local test run
+does not replace that rehearsal or the subsequent 434-job A11 proof. Full
+test counts, the transport audit and limitations are in `_a13_build/REPORT.md`.

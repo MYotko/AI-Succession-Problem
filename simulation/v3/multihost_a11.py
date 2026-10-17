@@ -897,7 +897,8 @@ class Coordinator:
 
 
 def rpc(root, request, *, now=None, local_only=False):
-    if request.get('op') not in {'join', 'claim', 'heartbeat', 'complete', 'release', 'leave', 'inspect', 'inputs', 'fetch', 'configure', 'configured', 'ready'}:
+    if request.get('op') not in {'join', 'claim', 'heartbeat', 'complete', 'release', 'leave', 'inspect', 'inputs', 'fetch', 'configure', 'configured', 'ready',
+                               'a13_checkpoint', 'a13_halt'}:
         raise ValueError('unknown coordinator command')
     # Source hashing reads only immutable checkout files. Do it before taking
     # the root lock; every request still compares the full running identity.

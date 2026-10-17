@@ -14,6 +14,7 @@ from v3 import admission_a13 as admit
 from v3 import continuation_validation as cv
 from v3.production_tables import ProductionTables, row_key
 from v3.policies import execution_policy_class
+from v3.host_a11 import Loopback as _Loopback
 
 
 def row_fixture(rule=None, context=0):
@@ -657,6 +658,184 @@ def test_real_toy_extension_trace_and_host_checkpoint_transport(tmp_path):
     host_a11.execute_scratch(str(resumed), job, a.code_identity(), str(root / ext.PHASE), view,
                              False, None, 'other-synthetic-host', 'other-lease', replicas)
     assert a.canonical(a.read(resumed)['result']) == a.canonical(result)
+
+
+class A13HostTransport(_Loopback):
+    """Record real RPC traffic; local stdio retains fixture host qualification."""
+    def __init__(self, root, route, *, drain=False):
+        from v3.host_a11 import Local
+        super().__init__(root)
+        self.local = Local(root) if route == 'local' else None
+        self.ops, self.claims, self.first_hashes = [], [], {}
+        self.drain = drain
+
+    def call(self, request):
+        from v3 import multihost_a11 as multi
+        result = self.local.call(request) if self.local else super().call(request)
+        self.ops.append(request['op'])
+        if request['op'] == 'claim':
+            self.claims.extend(result['claims'])
+        if request['op'] == 'a13_checkpoint' and self.drain:
+            self.drain = False
+            self.first_hashes = checkpoint_hashes(self.root)
+            assert self.first_hashes
+            multi.control(self.root, stop='drain')
+        return result
+
+    def close(self):
+        if self.local:
+            self.local.close()
+
+
+def checkpoint_hashes(root):
+    return {p.relative_to(root).as_posix(): a.file_hash(p)
+            for p in (root / ext.PHASE / 'a13_checkpoints').glob('*/*.json')}
+
+
+def a13_scientific_halt_worker(*args):
+    """Spawned real executor, with a scientific failure after one real replica."""
+    from v3.host_a11 import execute_scratch
+    original_stage = ext.extension_stage
+    calls = 0
+    def fail_second_replica(*args, **kwargs):
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            raise ext.ScientificHalt('synthetic host scientific halt')
+        return original_stage(*args, **kwargs)
+    ext.extension_stage = fail_second_replica
+    execute_scratch(*args)
+
+
+def prepare_host_extension(tmp_path):
+    from v3 import multihost_a11 as multi, host_a11 as host
+    from test_v3_multihost_a11 import evidence
+    original, run, candidate, projection, inventory, *_ = toy_original(tmp_path)
+    path, root = tmp_path / 'host_plan.json', tmp_path / 'coordinator'
+    plan = ext.prepare(original, run, candidate, projection, inventory, path, rehearsal=True)
+    for profile in plan['configuration'].values():
+        profile.update(workers_local=[1], jobs_local=1, jobs_per_worker=1, rounds=1)
+    plan = multi.freeze(plan, a.read(projection), code_commit='fixture', lease_seconds=6)
+    a.atomic_json(path, a.seal(plan))
+    settings = dict(profile='local', workers=1, threads=1, cpu_budget=2, mode='work')
+    multi.prepare(path, root, settings)
+    multi.approve_host(root, evidence(host.platform.node(), plan['code_hash'], (ext.KIND,), settings=settings),
+                       'synthetic operator', '2026-10-17')
+    return plan, path, root, settings
+
+
+def host_loop_attempt(path, root, settings, scratch, transport):
+    """Run the real coordinator monitor and host loop, including spawned workers."""
+    from concurrent.futures import ThreadPoolExecutor
+    import time
+    from v3 import multihost_a11 as multi, host_a11 as host
+    from test_v3_multihost_a11 import FINGERPRINT
+    epoch = multi.read_state(root)['epoch']
+    with ThreadPoolExecutor(max_workers=1) as pool:
+        future = pool.submit(multi.coordinate, path, root, settings)
+        try:
+            until = time.monotonic() + 30
+            while True:
+                # Respect the initialization transaction before reading SQLite.
+                with multi.transaction(root):
+                    started = multi.read_state(root)['epoch'] > epoch and (root / 'launches.json').exists()
+                if started:
+                    break
+                if future.done():
+                    future.result()
+                assert time.monotonic() < until, 'coordinator did not start'
+                time.sleep(.05)
+            result = host.run_host(transport, scratch, settings, host=host.platform.node(),
+                                   environment=FINGERPRINT, max_seconds=120)
+            return result, future.result(timeout=30)
+        finally:
+            if not future.done():
+                multi.control(root, stop='now')
+                future.result(timeout=30)
+
+
+@pytest.mark.parametrize('route', ['loopback', 'local'])
+def test_a13_real_host_rpc_checkpoint_drain_and_resume(tmp_path, route):
+    from v3 import multihost_a11 as multi, production_runner as runner
+    plan, path, root, settings = prepare_host_extension(tmp_path)
+    first = A13HostTransport(root, route, drain=True)
+    result, status = host_loop_attempt(path, root, settings, tmp_path / 'first_host', first)
+    assert result['stopped'] and not status['complete'] and not status['halt']
+    assert first.first_hashes and 'a13_checkpoint' in first.ops
+    hashes = checkpoint_hashes(root)
+    assert all(hashes[p] == value for p, value in first.first_hashes.items())
+    assert all(ext.durable_checkpoints(root, job) for job in plan['jobs'])
+    assert all(runner.completed(root / ext.PHASE, job, plan['code_hash']) for job in plan['jobs'])
+    before = a.unseal(a.read(ext.round_record_path(plan)))
+    multi.control(root, stop='clear')
+    second = A13HostTransport(root, route)
+    result, status = host_loop_attempt(path, root, settings, tmp_path / 'resumed_host', second)
+    assert result['stopped'] and status['complete'] and not status['halt']
+    assert checkpoint_hashes(root) == hashes
+    assert a.unseal(a.read(ext.round_record_path(plan))) == before
+    assert [c['purpose'] for c in second.claims] == ['check']
+    assert a.read(root / ext.PHASE / 'nondeterminism_check.json')['matched']
+    assert [r['complete'] for r in a.read(root / 'launches.json')] == [False, True]
+    assert not ext.publication_round(plan, root)
+    assert set(first.ops + second.ops) >= {'inspect', 'join', 'inputs', 'fetch', 'configure', 'configured',
+                                         'heartbeat', 'ready', 'claim', 'a13_checkpoint', 'complete', 'leave'}
+
+
+@pytest.mark.parametrize('route', ['loopback', 'local'])
+def test_a13_real_host_scientific_halt_through_rpc_certifies_nothing(tmp_path, monkeypatch, route):
+    from v3 import host_a11 as host, multihost_a11 as multi, production_runner as runner
+    plan, path, root, settings = prepare_host_extension(tmp_path)
+    monkeypatch.setattr(host, 'execute_scratch', a13_scientific_halt_worker)
+    transport = A13HostTransport(root, route)
+    with pytest.raises(RuntimeError, match='remote worker failed'):
+        host_loop_attempt(path, root, settings, tmp_path / 'failed_host', transport)
+    assert {'a13_checkpoint', 'a13_halt', 'release', 'leave'} <= set(transport.ops)
+    assert checkpoint_hashes(root)
+    assert multi.read_state(root)['halt'] == 'A13 scientific halt'
+    assert a.unseal(a.read(ext.round_record_path(plan)))['halt']
+    assert all(runner.completed(root / ext.PHASE, job, plan['code_hash']) is None for job in plan['jobs'])
+    assert ext.publication_round(plan, root) is True
+    monkeypatch.setattr(ext, 'extension_test', lambda *args: pytest.fail('halted trajectory was tested'))
+    target = tmp_path / 'must_not_publish.json'
+    with pytest.raises(ValueError, match='cap'):
+        ext.publish(plan, root, target, registered=False)
+    assert not target.exists()
+    with pytest.raises(ValueError, match='round spent'):
+        multi.prepare(path, root, settings)
+
+
+def test_host_operations_all_cross_rpc_allowlist_and_ssh_has_no_operation_filter(monkeypatch, tmp_path):
+    import ast
+    import inspect
+    from v3 import host_a11 as host, multihost_a11 as multi
+    # Every literal host operation, including Client.call and direct transport calls.
+    tree = ast.parse(inspect.getsource(host))
+    invoked = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute) and node.func.attr == 'call' and node.args:
+            argument = node.args[0]
+            if isinstance(argument, ast.Constant) and isinstance(argument.value, str):
+                invoked.add(argument.value)
+            elif isinstance(argument, ast.Dict):
+                invoked.update(v.value for k, v in zip(argument.keys, argument.values)
+                               if isinstance(k, ast.Constant) and k.value == 'op' and isinstance(v, ast.Constant))
+    accepted = set(ast.literal_eval(ast.parse(inspect.getsource(multi.rpc)).body[0].body[0].test.comparators[0]))
+    assert invoked == accepted
+    dispatched = []
+    class StubCoordinator:
+        def __init__(self, *args): pass
+        def request(self, request): dispatched.append(request['op']); return request
+        def save(self): pass
+    monkeypatch.setattr(multi, 'Coordinator', StubCoordinator)
+    for op in sorted(invoked):
+        assert multi.rpc(tmp_path, {'op': op}) == {'op': op}
+    assert set(dispatched) == invoked
+    with pytest.raises(ValueError, match='unknown coordinator command'):
+        multi.rpc(tmp_path, {'op': 'arbitrary_shell'})
+    ssh = host.SSH('synthetic-host', '/synthetic/checkout', '/synthetic/root')
+    assert isinstance(ssh, host.Stdio) and ssh.argv[-1] == ssh.command
+    assert 'v3.multihost_a11 rpc /synthetic/root --stream' in ssh.command
+    assert 'a13_checkpoint' not in ssh.command and 'a13_halt' not in ssh.command
 
 
 def test_compatibility_checks_carried_registered_plan_pin_before_outputs(tmp_path, monkeypatch):
