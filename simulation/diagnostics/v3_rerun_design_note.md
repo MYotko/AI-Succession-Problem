@@ -2312,3 +2312,22 @@ This replaces A12 part 2's steps 2 to 6. It supersedes A12's clarification of 20
 - **Also unchanged:** the census, α, τ, the floor's 2 and 5 percent caps, the minimum of 50, and the Bernstein test.
 - **The ceiling:** stage 1's 980 X2-equivalent hours stand. The extension, the rehearsal and the proof are charged to the stage 1 ledger. About 689.68 hours remain after estimation and validation, against 384.63 reserved for labels and runs.
 - **The stage 1 reading** stays registered at `93474e00`.
+
+**Clarified, 2026-10-16: pricing R_max.**
+
+- **Code citations** refer to `simulation/v3/` at commit `d73acfb1`, as in A13.
+- **The sentence it clarifies:** Part 1, item 5's "priced from the jobs' registered cost classes".
+  - **Why it needs a rule:** the registered cost classes are scheduling weights for a whole plain-validation bundle: one fit, three validation replicates and one census (`pilot_a10.py:222`; `multihost_a11.py:31` to `:50`). They are not prices for one replicate, and nothing in item 5 converts them.
+  - **How it was found:** by the executor at the start of the code build, before any A13 code or extension data existed. The finding is F1.
+- **The source:** the registered A10 cost projection, file `a10_pilot_P2_projection_2026-10-08.json`.
+  - **Its identity:** file SHA-256 `78a1d3ac253048c7e077b0e4eb12dd3150fa178cf3e63a24c6f0d87f02a8ad8d`, payload seal `5ca5225967cf08ad5636f98f12d57fa6ccd753a7ae126bff0edcc09f0af3d8a3`.
+  - **The check before R_max is computed:** the executor confirms that the payload seal equals the projection seal bound in the sealed validation plan (`multihost_a11.py:73`). A mismatch is a finding.
+- **The price:** for source job j, one extension replicate costs B_j / 3 X2-equivalent hours.
+  - **B_j:** the projection's conservative per-job figure for j's plain-validation stratum, `{family}.{capability}.{setting}.validate_plain` (`multihost_a11.py:39`, `:49`). It is that stratum's `x2_hours_max` divided by its `jobs`.
+  - **Its parts:** `x2_hours_max` already applies the projection's measured, memory-constrained effective workers, its realism factor and its relative throughput (`pilot_a10.py:400`, `:418` to `:425`).
+- **R_max:** the largest integer R ≤ 16 such that R · Σ_j B_j / 3 ≤ 15, summed once over each distinct source job of the eligible rows.
+- **Why one third:** it is a conservative allocation convention. It attributes the whole bundle, fit and census included, to the three validation replicates, although the extension repeats neither the fit nor the census. It is a pricing rule, not a guarantee about the time any run will take. The maximum, rather than the mean, matches how the registered ceilings were set.
+- **What it never uses:** any measured duration of any validation job, any visit count, or any outcome.
+- **Reporting:** the executor reports R_max and the total projected cost R_max · Σ_j B_j / 3. Per-stratum prices stay executor-only, under the cost-reporting rule.
+- **Metering is unchanged:** actual consumption is metered as for any launch (`multihost_a11.py:266` to `:268`), and charged to the stage 1 ledger.
+- **The pin:** later launches pin the commit carrying this clarification, with the design note byte-identical to it there, in place of `8336a1f6`.
