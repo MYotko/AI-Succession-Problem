@@ -97,14 +97,11 @@ def build(spec_path, source_root, output, kinds=None):
         'references': references, 'bundle_directory': bundle.name,
         'selection': 'shortest registered outputs then A11-qualification hash; otherwise deterministically ordered short profiles',
         'comparison': 'A11 canonical job plus result'}
-    estimates = {}
-    for phase in spec['phases']:
-        values = [spec.get('memory_estimate_gb', {}).get(phase, .25)]
-        pull = spec.get('pull_dispatch')
-        if pull:
-            values += [pull['cost_classes'][pull['job_classes'][j['id']]]['memory_gb'] for j in spec['jobs'] if j['config']['phase'] == phase]
-        estimates[phase] = max(values)
-    plan['memory_estimate_gb'] = {j['id']: estimates[j['config']['phase']] for j in jobs}
+    from . import worker_control as wc
+    resources = wc.configuration_resources(jobs, spec['jobs'], wc.resources(spec), spec=spec)
+    plan['memory_estimate_gb'] = {j['id']: wc.reservation(resources[j['id']], {}) for j in jobs}
+    plan['memory_estimate_known'] = {j['id']: resources[j['id']]['memory_known'] for j in jobs}
+    plan['memory_classes'] = {j['id']: resources[j['id']]['memory_class'] for j in jobs}
     atomic_json(target, seal(plan))
     return plan
 
@@ -117,7 +114,7 @@ def _run_one(args):
     result = read(target)
     return {'job_id': job['id'], 'kind': job['kind'], 'job_sha256': digest(job),
             'canonical_sha256': hashlib.sha256(comparison_bytes(job, result['result'])).hexdigest(),
-            'output_sha256': file_hash(target), 'worker_seconds': result['seconds']}
+            'output_sha256': file_hash(target), 'worker_seconds': result['seconds'], 'peak_rss_bytes': result.get('peak_rss_bytes')}
 
 
 def run(plan_path, output, settings, *, environment=None, host=None):
@@ -131,18 +128,18 @@ def run(plan_path, output, settings, *, environment=None, host=None):
     if target.exists():
         raise ValueError('qualification run is frozen')
     root = target.parent / (target.stem + '_scratch')
-    settings = dict(settings, caps=caps(settings['profile'], settings['cpu_budget']))
+    from . import worker_control as wc
+    settings = wc.settings(settings)
     configure_threads(1)
     memory = mem_available_bytes()
     if memory is None:
         raise ValueError('qualification needs measured memory')
-    worker_limit = min(settings['workers'], settings['caps'][settings['mode']])
-    if not 1 <= settings['workers'] <= settings['caps'][settings['mode']] or settings['threads'] != 1 or settings['cpu_budget'] > available_cpus():
-        raise ValueError('qualification worker caps')
-    memory_cap = int(memory * .8 / 1e9 / max(plan['memory_estimate_gb'].values()))
-    if memory_cap < 1:
+    worker_limit = wc.selection(settings)['workers']
+    resources = wc.resources(plan)
+    wc.require_memory_authority(settings, None, resources, {})
+    memory_budget = settings.get('memory_headroom', .8) * memory / 1e9
+    if any(r['memory_gb'] > memory_budget for r in resources.values()):
         raise ValueError('qualification job does not fit measured memory')
-    worker_limit = min(worker_limit, memory_cap)
     bundle = Path(plan_path).parent / plan['bundle_directory']
     def reader(name, offset):
         with (bundle / name).open('rb') as stream:
@@ -157,12 +154,33 @@ def run(plan_path, output, settings, *, environment=None, host=None):
     # reproducible parallel workload, including the selected worker count.
     tasks = [(str(root / 'unpublished' / (j['id'] + '.json')), j, plan['code_hash'], plan['phase_roots'][j['id']], view, host)
              for j in plan['jobs']]
-    with ProcessPoolExecutor(max_workers=min(worker_limit, len(tasks)), mp_context=mp.get_context('spawn')) as pool:
-        proofs = list(pool.map(_run_one, tasks))
+    from concurrent.futures import wait, FIRST_COMPLETED
+    pending, active, results, peaks, admission = list(tasks), {}, {}, {}, []
+    with ProcessPoolExecutor(max_workers=min(worker_limit, len(tasks)), mp_context=mp.get_context('spawn'), max_tasks_per_child=1) as pool:
+        while pending or active:
+            occupied = sum(wc.reservation(resources[t[1]['id']], peaks) for t in active.values())
+            while pending and len(active) < worker_limit:
+                available = mem_available_bytes()
+                free = min(memory_budget - occupied, settings['memory_headroom'] * available / 1e9) if available else 0.
+                index = next((i for i,t in enumerate(pending) if wc.reservation(resources[t[1]['id']], peaks) <= free), None)
+                if index is None: break
+                task = pending.pop(index)
+                occupied += wc.reservation(resources[task[1]['id']], peaks)
+                active[pool.submit(_run_one, task)] = task
+                admission.append(dict(running=len(active), reserved_gb=occupied, budget_gb=memory_budget))
+            if not active:
+                raise ValueError('qualification memory unavailable; no proof work admitted')
+            completed, _ = wait(active, return_when=FIRST_COMPLETED)
+            for future in completed:
+                task = active.pop(future); result = future.result()
+                results[task[1]['id']] = result
+                wc.observe(peaks, resources[task[1]['id']], result.get('peak_rss_bytes'))
+    proofs = [results[j['id']] for j in plan['jobs']]
     elapsed = time.perf_counter() - before
     result = {'schema': SCHEMA + '-run', 'non_registered': True, 'plan_sha256': digest(plan), 'code_hash': code_identity(),
         'host': host, 'fingerprint': environment, 'memory_gb': memory / 1e9, 'elapsed_seconds': elapsed,
-        'settings': settings, 'workers': min(worker_limit, len(tasks)), 'memory_cap': memory_cap,
+        'settings': settings, 'workers': min(worker_limit, len(tasks)), 'memory_cap': worker_limit,
+        'memory_budget_gb': memory_budget, 'admission': admission,
         'proofs': proofs, 'kinds': plan['kinds'],
         'passed': all(plan['references'].get(p['job_id'], p['canonical_sha256']) == p['canonical_sha256'] for p in proofs)}
     atomic_json(target, seal(result))
@@ -225,6 +243,21 @@ def validate_evidence(document, code):
     return e
 
 
+
+def scheduling_rate(evidence):
+    """Per-job speed only; keep the existing elapsed participation rate intact."""
+    from .worker_control import positive
+    left, right = evidence['reference'], evidence['candidate']
+    if left['host'] == right['host']: return 1.
+    maps = [{p['job_id']: p.get('worker_seconds') for p in run['proofs']} for run in (left, right)]
+    if set(maps[0]) == set(maps[1]) and maps[0] and all(positive(x) for row in maps for x in row.values()):
+        return sum(maps[0].values()) / sum(maps[1].values())
+    # Older evidence without per-job timings can only compare equal concurrency.
+    workers = [r.get('workers', r.get('settings', {}).get('workers')) for r in (left, right)]
+    if not all(positive(n) for n in workers) or workers[0] != workers[1]:
+        raise ValueError('scheduling needs per-job timing or equal qualification worker counts')
+    return evidence['relative_throughput']
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     sub = p.add_subparsers(dest='command', required=True)
@@ -235,6 +268,8 @@ def main():
     s.add_argument('--model-service', choices=('llm', 'none'), help='default llm for X2, none for local')
     s.add_argument('--workers', type=int, required=True); s.add_argument('--cpu-budget', type=int, required=True)
     s.add_argument('--mode', choices=('work', 'normal'), default='work')
+    from . import worker_control as wc
+    wc.options(s)
     s = sub.add_parser('compare'); s.add_argument('plan'); s.add_argument('reference'); s.add_argument('candidate'); s.add_argument('output')
     args = p.parse_args()
     if args.command == 'build':
@@ -251,6 +286,8 @@ def main():
         root = scoped(args.output).parent; root.mkdir(parents=True, exist_ok=True)
         settings = {k: getattr(args, k) for k in ('profile', 'workers', 'cpu_budget', 'mode')}
         settings['threads'] = 1
+        settings.update(wc.arguments(args))
+        settings = wc.settings(settings)
         from .service import model_service
         if args.model_service is not None:
             settings['model_service'] = args.model_service

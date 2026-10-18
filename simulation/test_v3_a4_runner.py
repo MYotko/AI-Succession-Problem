@@ -8,6 +8,7 @@ from pathlib import Path
 import tempfile
 
 import pytest
+from test_v3_paths import tmp_path  # Unique scoped scratch; preserve other executions' fixtures.
 
 from v3 import production_runner as pr
 from v3.artifacts import ROOT, code_identity, atomic_json, stable_job, read, seal
@@ -24,10 +25,9 @@ def _control(root):
     atomic_json(root / "control.json", {"mode": "normal", "max_workers": 8, "stop_dispatch": False, "interrupt_now": False})
 
 
-def test_dispatch_holds_memory_cap_when_memavailable_drops(monkeypatch):
-    # Live MemAvailable already excludes running tasks; the cap must NOT be
-    # recomputed from it (the round-4 bug). With a fixed cap of 6, max active
-    # must reach 6, not the ~3 a live recompute at 4 GB would give.
+def test_dispatch_uses_fixed_budget_and_class_reservations(monkeypatch):
+    # Admission uses 80% of the initial 4 GB budget and current headroom.
+    # The former uniform worker cap is no longer an admission authority.
     monkeypatch.setattr(pr, "mem_available_bytes", lambda: 4_000_000_000)
     jobs = [stable_job("fixture", {"seconds": 0.5}, "validation", i) for i in range(8)]
     with tempfile.TemporaryDirectory(dir=ROOT, prefix="_a4_cap_") as d:
@@ -37,7 +37,7 @@ def test_dispatch_holds_memory_cap_when_memavailable_drops(monkeypatch):
                              fixed={"workers": 8, "threads": 1}, control_root=root,
                              memory_cap=6, memory_estimate_gb=1.0)
         assert result["completed"] == 8
-        assert result["maximum_active"] == 6  # fixed cap honored, not shrunk to 3
+        assert result["maximum_active"] == 3  # Three 1 GB reservations fit 3.2 GB.
 
 
 def test_dispatch_guard_halts_with_no_active_task(monkeypatch):
@@ -107,10 +107,12 @@ def test_worker_records_peak_rss():
     with tempfile.TemporaryDirectory(dir=ROOT, prefix="_a4_rss_") as d:
         root = Path(d)
         _control(root)
+        atomic_json(root / "control.json", dict(read(root / "control.json"), max_workers=4))
         pr.dispatch(root / "p", [job], code_identity(), _settings(4), time.time() + 60,
                     fixed={"workers": 1, "threads": 1}, control_root=root)
         out = read(root / "p" / "outputs" / (job["id"] + ".json"))
         assert "peak_rss_bytes" in out
+        assert read(root / "p" / "records" / (job["id"] + ".json"))["peak_rss_bytes"] == out["peak_rss_bytes"]
 
 
 def test_projection_stop_before_phase():

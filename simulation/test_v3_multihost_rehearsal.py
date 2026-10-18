@@ -41,9 +41,10 @@ def test_departed_x2_cap_can_be_repaired_before_rejoin(tmp_path):
         c = m.Coordinator(root)
         c.state['host_controls'][X2]['max_workers'] = 4
         c.save()
-    with pytest.raises(ValueError, match='--max-workers 8 before rejoining'):
-        join_x2(root)
-    assert len(m.read_state(root)['sessions']) == 1
+    resumed = join_x2(root)
+    assert m.read_state(root)['sessions'][resumed['session']]['control']['max_workers'] == 4
+    m.rpc(root, dict(op='leave', host=X2, session=resumed['session']))
+    assert len(m.read_state(root)['sessions']) == 2
     m.control(root, X2, max_workers=8)
     assert journal_states(root)[-1]['host_controls'][X2]['max_workers'] == 8
     second = join_x2(root)
@@ -64,7 +65,9 @@ def test_approved_never_joined_host_controls_persist_through_restart_and_join(tm
         c = m.Coordinator(root); c.start(); c.save()
     joined = join_x2(root, workers=12)
     state = m.read_state(root)
-    assert state['sessions'][joined['session']]['control'] == dict(mode='work', max_workers=8, drain=True, interrupt_now=False)
+    control=state['sessions'][joined['session']]['control']
+    assert {k:control[k] for k in ('mode','max_workers','drain','interrupt_now')} == dict(mode='work', max_workers=8, drain=True, interrupt_now=False)
+    assert control['worker_override'] and control['history'][-1]['epoch'] and control['history'][-1]['operator']
     assert not m.rpc(root, dict(op='claim', host=X2, session=joined['session'], memory_available_gb=40))['job']
     m.rpc(root, dict(op='leave', host=X2, session=joined['session']))
     m.control(root, X2, stop='clear')
@@ -75,23 +78,28 @@ def test_approved_never_joined_host_controls_persist_through_restart_and_join(tm
 
 @pytest.mark.parametrize('operation', ['join', 'control'])
 @pytest.mark.parametrize('cap', [0, 1, 4])
-def test_x2_refuses_cap_below_required_candidate_with_recovery_command(tmp_path, operation, cap):
+def test_x2_small_initial_targets_and_live_pause_are_allowed(tmp_path, operation, cap):
     _, root, _ = initialize(tmp_path, hosts=(X2,))
-    with pytest.raises(ValueError, match='requires a worker cap of at least 8.*--max-workers 8.*--workers 8'):
-        join_x2(root, workers=cap) if operation == 'join' else m.control(root, X2, max_workers=cap)
-    state = m.read_state(root)
-    assert not state['sessions'] and not state.get('host_controls')
+    if operation == 'join' and cap == 0:
+        with pytest.raises(ValueError, match='CPU budget'): join_x2(root, workers=cap)
+        assert not m.read_state(root)['sessions']
+    elif operation == 'join':
+        joined=join_x2(root, workers=cap)
+        assert m.read_state(root)['sessions'][joined['session']]['control']['max_workers']==cap
+    else:
+        m.control(root, X2, max_workers=cap, reason='intentional small target')
+        value=m.read_state(root)['host_controls'][X2]
+        assert value['max_workers']==cap and value['worker_override']
 
 
-def test_control_rejects_unapproved_host_and_checks_each_profile_minimum(tmp_path):
+def test_control_rejects_unapproved_host_and_accepts_below_profile_minimum(tmp_path):
     spec = spec_fixture(); spec['configuration']['toy']['workers_local'] = [4, 8, 12]
     _, root, _ = initialize(tmp_path, spec)
     with pytest.raises(ValueError, match='unregistered host'):
         m.control(root, 'unknown', max_workers=8)
-    with pytest.raises(ValueError, match='at least 4'):
-        m.control(root, 'alpha', max_workers=2)
-    with pytest.raises(ValueError, match='at least 4'):
-        join(root, 'alpha')
+    m.control(root, 'alpha', max_workers=2)
+    joined=join(root, 'alpha')
+    assert m.read_state(root)['sessions'][joined['session']]['control']['max_workers']==2
     m.control(root, 'alpha', max_workers=4)
     assert m.read_state(root)['host_controls']['alpha']['max_workers'] == 4
 

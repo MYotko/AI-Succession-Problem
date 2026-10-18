@@ -4873,3 +4873,157 @@ Synthetic tests cover repairable transfer/argument failures, unchanged retry
 bindings, final content failures, both memory bounds and configuration's shorter
 bound. Test counts and the A2 pin audit are in `_a13_build/REPORT.md`. No
 registered proof, other-machine access or commit was performed here.
+
+
+## 38. Operator worker control and per-class memory, 2026-10-18
+
+This executor revision replaces the unapproved proof at identity `5ae3d3cd`.
+The initial review build's LF-normalized identity was `7f0e1f411396e7288a476448acf566b1899ad0b8bc82bf3006ec94854f18321b`; section 39 supersedes it. Test evidence is recorded in `_a13_build/REPORT.md`. It requires
+a new code commit, rehearsal, qualification and proof for the new old/current
+identity pair. Existing proof files on X2-1 are untouched.
+
+`worker_control.py` centralizes worker selection, reasoned initial overrides,
+persistent live targets and output-blind load sheets. An explicit reason records
+the operator and epoch, permits an initial target above the normal/work or
+configuration choice, and never exceeds workers times threads <= CPU budget.
+Memory headroom defaults to 0.8 and can be raised to at most 0.95 with a reason.
+Every admitted job reserves max(its registered class estimate, its own class's
+measured peak RSS times 1.2), within both the host budget and current available
+memory. A class peak never becomes a floor for unrelated classes. Production,
+pull configuration and scientific dispatch, qualification and both proof modes
+share these rules. Older single-host phase maxima are replaced operationally by
+the same arithmetic formula applied to each declared job. Frozen job and plan
+bytes stay unchanged. Configuration measurements carry their class peaks forward. Uniform profiles
+test only counts their own class can fill; mixed profiles pack per job. The
+reduced pilot retains its default ceiling of 16, with explicit overrides
+subject to CPU and memory admission.
+Fresh proof and qualification processes preserve per-job peak accounting.
+
+Production and pull completion records now carry peak RSS, which is executor
+metadata. The proof derives per-class peaks and timing rates from the original
+completion records. Older completions expose RSS on the envelope already loaded for the required
+comparison. Only its top-level executor metadata supplies memory, never its
+scientific result fields. If both locations lack RSS, registered estimates
+remain the fallback. Historical phase-derived class values use the same
+per-job planning formula; the sealed source plan stays unchanged. The
+proof's pre-existing comparison still reads durable results internally, with
+unchanged selection, comparison bytes, before/after hashes and approval.
+
+Live controls raise dispatch capacity or lower it by draining existing jobs.
+They persist with timestamp, operator and reason across ordinary resume and
+host rejoin. Pull launches have an overall target and separate host targets.
+Zero pauses dispatch. A new explicitly reasoned initial override supersedes a
+persisted target; an ordinary resume preserves it. Immediate production stops
+use the existing interruption/resume path and list in-flight restart IDs.
+Proof controls change scheduling only; they do not permit restarting a spent
+attempt, alter its frozen partition or weaken any combine/record checks.
+
+Load sheets show anonymous memory classes, each reservation and measured peak,
+planned workers and binding cap, projected CPU/memory use and aggregate wall
+hours at class and measured rates. Missing measured timing stays unavailable.
+The pull forecast assigns each job once for its totals; actual pull dispatch
+remains dynamic. The proof load sheet uses its frozen assignment and accepts
+the same explicit runtime overrides. Costs remain totals and rates only.
+
+Runbook 17 requires a load sheet before every go, supplies initial and live
+control commands, uses fresh identity-specific proof paths and preserves the
+supervised X2-1 and GUPPI service restoration procedure. The A2 production
+runner re-pin covers only executor admission, control and metadata changes.
+Scientific execution functions, job settings and seeds, result bytes, A11
+selection/comparison, record validation, approval and finality are unchanged.
+
+## 39. Worker-control review corrections, 2026-10-18
+
+This revision superseded section 38's control precedence and missing-peak
+fallback. Its reviewed identity was `9edd0a5a8501a829054c95e873ae1540ea74e315acc759ecb1ba598ba5b61f91`; section 40 supersedes its mode policy. Complete test counts are in
+`_a13_build/REPORT.md`; runbook 17.1 pins this replacement executable identity.
+The new code still requires the operator's commit, rehearsal, qualification
+and a new A11 proof. No previous proof is reused.
+
+Initial overrides compare workers, headroom, reason and operator, excluding
+the timestamp. Repeating them on a single-host resume, pull host rejoin or
+explicit overall pull resume preserves later live controls. A changed
+override replaces the target and records the operator and time. The policy
+setting `MODE_CHANGE_CLAMPS_TARGET` makes a later mode change clamp the target
+to min(current target, new mode cap), with a recorded effective target. A
+later live raise above that cap requires a reason. Lowering continues to drain
+running work without killing it.
+
+A pull launch defaults to the sum of its host targets. The coordinator's
+host-style workers flag cannot silently cap two hosts at one host's count.
+An aggregate ceiling is explicit through `--overall-workers` or an overall
+live control. Historical configuration profiles resolve missing phase/class
+information from the sealed phase estimate or their declared jobs; no job
+configuration is rewritten. Synthetic coverage includes a legacy A4 launch
+and resume, A13 extension and A5 profiles, and all five stage-1 run families.
+The pull coordinator validates reported RSS classes against its indexed
+cost-class store. Required profiles for an empty historical phase may have
+their own executor-only class; that class is checked against the declared
+profile and its peak never becomes an unrelated scientific reservation.
+Synthetic RPC tests inject positive RSS, including on platforms where the
+local peak-RSS probe returns no value, and refuse foreign or invalid classes.
+
+Legacy classes without RSS retain their sealed estimate. Where a class peak
+exists, the operational reservation uses its own planning estimate and peak
+times 1.2. Above-mode targets require a sealed estimate or measured peak for
+every class; a provisional 0.25 GB cannot authorize them. Qualification
+bundles preserve whether their memory estimate is authoritative. All paths
+continue to enforce per-class packing and current available memory.
+Ordinary declared configuration trials retain their own configuration cap;
+the above-mode memory-authority rule applies to actual operator overrides.
+Scientific dispatch remains subject to that rule. This preserves the older
+B2 ordinary launch/resume path without weakening a reasoned override's checks.
+
+Proof status writes are informational, about once per second with at most
+two attempts. Their I/O errors cannot spend the attempt. Configuration's
+control update holds the same lease as operator commands. Scheduling uses
+per-job qualification seconds separately from concurrency. Legacy evidence
+without per-job timing needs equal effective worker counts. The existing
+qualification comparison, participation rate and ledger accounting remain
+unchanged. Scientific execution, seeds, settings, comparison bytes, selection,
+attempt reservation, finality and approval are unchanged.
+
+The interpreter's multi-host failure log identifies the child failure as the
+existing Windows `scoped()` refusal during a synthetic output write. The
+parent's generic remote-worker error hid that traceback. Host error reporting
+now includes an available failure traceback without changing execution or
+success records. The write-scope guard remains unchanged.
+
+
+## 40. Worker-control mode restoration, 2026-10-18
+
+This revision fixes round 2's R1 and supersedes section 39's mode policy.
+The LF-normalized identity is `2a88b5c60504017cf2a8bccdf0679a2c97158a4e81ea47a5d4d58b5dd5bbc07f`. The operator's policy choice is
+pending; the default remains mode caps on top of the target. The single
+setting is `MODE_CAPS_TARGET = True`. Setting it false allows an explicit
+override to beat mode. Ordinary requests remain mode-capped in either case.
+
+A mode-only command records the new mode without changing the saved target
+or whether that target was explicit. Each scientific evaluation applies
+min(target, mode cap) under the default policy. Work drains to the smaller
+allowance; normal restores the higher allowance. The measured configuration
+choice still applies unless the operator set an explicit target. Repeated
+initial override flags continue to preserve later live controls. Ordinary
+fixed configuration trials retain their declared configuration cap and
+memory admission, so they can measure the candidate worker counts.
+
+Above-mode control commands require memory authority before writing the
+control or event. Single-host commands read the sealed manifest and executor
+RSS/configuration metadata, never scientific results. Pull commands use the
+frozen classes and coordinator peaks. Proof-shard commands use the frozen
+assignment resources and preflight peaks. The legacy single-host proof
+records the same executor authority before reservation in its workers
+directory. A refused command leaves the target and attempt unchanged.
+Initial overrides retain the authority check. An unsupported stale control
+is mode-capped in the dispatch loop instead of crashing a launch or spending
+a proof. Per-class memory admission always applies.
+
+Synthetic tests cover work-to-normal restoration with and without explicit
+targets in running single-host dispatch and in each pull host, measured
+choice, resume/rejoin, both orders of mode and target commands, the alternative
+policy, command refusals without writes, measured authorization, and stale
+control clamping in a proof scheduler. Test results and the runner's dated
+A2 re-pin are in `_a13_build/REPORT.md`. No scientific function, seed, job
+configuration, selection, comparison, reservation, finality or approval
+semantics changed. A new operator commit, rehearsal, qualification and proof
+remain required; none is executed by this build.

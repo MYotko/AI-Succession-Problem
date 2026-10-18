@@ -16,11 +16,11 @@ ORIGINAL = 'yotko-evo-x2'
 SECOND = 'x2-two'
 
 
-def source_fixture(root, mismatch=False):
+def source_fixture(root, mismatch=False, seconds=.003):
     before = a.source_manifest()
     before['v3/artifacts.py'] = '0' * 64
     old = a.digest(before)
-    jobs = [a.stable_job('fixture', dict(phase='toy', seconds=.003, kernel={'capability': cap}), 'validation', i)
+    jobs = [a.stable_job('fixture', dict(phase='toy', seconds=seconds, kernel={'capability': cap}), 'validation', i)
             for cap in (1., 2., 3., 4.) for i in range(3)]
     profile = dict(kind='fixture', config={'phase': 'toy', 'seconds': .003}, workers_local=[2],
                    workers_x2=[8, 12, 16, 24, 32], threads=[1], rounds=1, jobs_per_worker=1)
@@ -291,7 +291,14 @@ def test_memory_admission_and_longest_first_real_pool(tmp_path, monkeypatch):
                   producing_code_hash='0' * 64,
                   resources=dict(worker_seconds=i + 1., memory_gb=3., memory_class=str(i))) for i in range(8)]
     before = a.canonical(items)
-    fresh, trace = s.run_items(items, 12, 6.)
+    peaks = {}
+    fresh, trace = s.run_items(items, 12, 6., class_peaks=peaks)
+    for item in items:
+        peak = fresh[item["job"]["id"]]["_peak_rss_bytes"]
+        if peak is None:
+            assert item["resources"]["memory_class"] not in peaks
+        else:
+            assert peaks[item["resources"]["memory_class"]] == pytest.approx(1.2 * peak / 1e9)
     assert len(fresh) == 8 and a.canonical(items) == before
     assert trace[0]['job_id'] == items[-1]['job']['id']
     assert max(t['running'] for t in trace) == 2
@@ -304,13 +311,14 @@ def test_budget_rule_cap_and_unknown_memory(monkeypatch):
     monkeypatch.setattr(r, 'mem_available_bytes', lambda: 100_000_000_000)
     monkeypatch.setattr(r, 'available_cpus', lambda: 32)
     assert s.memory_budget() == 80. and s.memory_budget(80.) == 64.
-    assert s.worker_cap(dict(SETTINGS, workers=100)) == 12
-    assert s.worker_cap(dict(SETTINGS, profile='x2', workers=100, cpu_budget=32)) == 28
+    with pytest.raises(ValueError, match='CPU budget'): s.worker_cap(dict(SETTINGS, workers=100))
+    with pytest.raises(ValueError, match='reason'): s.worker_cap(dict(SETTINGS, profile='x2', workers=32, cpu_budget=32))
+    assert s.worker_cap(dict(SETTINGS, profile='x2', workers=32, cpu_budget=32, override_reason='operator test')) == 28
     monkeypatch.setattr(r, 'mem_available_bytes', lambda: None)
     with pytest.raises(ValueError, match='measured'): s.memory_budget()
 
 
-def test_configuration_uses_full_job_memory_and_tests_the_cap(tmp_path, environment, monkeypatch):
+def test_configuration_uses_own_class_memory_and_tests_the_cap(tmp_path, environment, monkeypatch):
     path, p, _, _ = prepared(tmp_path, two=False)
     entry = p['hosts'][ORIGINAL]
     entry['settings'] = dict(SETTINGS, workers=2)
@@ -320,12 +328,13 @@ def test_configuration_uses_full_job_memory_and_tests_the_cap(tmp_path, environm
     counts = []
     def run(tasks, workers, budget, **kwargs):
         counts.append(workers)
-        assert workers * kwargs['memory_floor_gb'] <= budget
+        assert 'memory_floor_gb' not in kwargs
+        assert all(t['resources']['memory_gb'] == .25 for t in tasks)
         assert kwargs['idle_wait_seconds'] == 180.
         return ({t['job']['id']: dict(after_sha256='a' * 64, _worker_seconds=.1, _peak_rss_bytes=1000) for t in tasks}, [])
     monkeypatch.setattr(s, 'run_items', run)
     configured = s.configure_host(p, ORIGINAL, tmp_path / 'configuration', 6., None)
-    assert counts == [2, 3]  # Memory cap 3 is tested even though absent from the listed counts.
+    assert counts == [2, 4, 8, 12]  # A stale worst-job floor cannot cap small jobs.
     assert all(c['chosen']['workers'] <= 2 for c in configured.values())
 
 
@@ -498,7 +507,7 @@ def test_preconditions_are_retryable_and_precede_start(tmp_path, environment, mo
 def test_single_host_precondition_failure_does_not_reserve_pair(tmp_path, environment, monkeypatch):
     sources, reasons = source_fixture(tmp_path)
     record, _, _ = c.collect_record(sources, reasons)
-    def fail(*args): raise ValueError('not enough memory before reservation')
+    def fail(*args, **kwargs): raise ValueError('not enough memory before reservation')
     with monkeypatch.context() as m:
         m.setattr(s, 'single_preflight', fail)
         with pytest.raises(ValueError, match='before reservation'):
@@ -632,3 +641,43 @@ def test_combine_binding_interruption_is_recoverable(tmp_path, environment, monk
     assert marker.exists() is after_binding
     assert not Path(p['target']).exists()
     assert s.combine(path, paths)['passed']
+
+
+def test_proof_load_sheet_override_and_original_completion_class_peaks(tmp_path, environment):
+    sources,reasons=source_fixture(tmp_path)
+    spec=a.unseal(a.read(sources[0]['spec']))
+    for i,job in enumerate(spec['jobs']):
+        path=Path(sources[0]['root'])/'toy/records'/(job['id']+'.json')
+        a.atomic_json(path,dict(a.read(path),peak_rss_bytes=(i+1)*100_000_000,worker_seconds=2.))
+    target=tmp_path/'proof.json'
+    plan=s.freeze(sources,reasons,target,hosts(False),'f'*40)
+    for item in plan['items'].values():
+        resource=item['resources']
+        index=spec['jobs'].index(item['job'])
+        assert resource['memory_gb']==pytest.approx(max(.25,1.2*(index+1)/10))
+        assert resource['registered_memory_gb']==.25
+    path=target.with_suffix('.attempt.json')
+    with pytest.raises(ValueError,match='reason'): s.attempt_load_sheet(path,ORIGINAL,workers=16)
+    sheet=s.attempt_load_sheet(path,ORIGINAL,workers=16,override_reason='operator forecast')[ORIGINAL]
+    assert sheet['planned_workers']==12 and sheet['measured_wall_hours'] is not None
+    assert sheet['binding_cap']=='mode/operator target'
+
+
+
+def test_original_completion_envelope_peak_is_executor_metadata(tmp_path, environment):
+    sources,reasons=source_fixture(tmp_path)
+    before,items,_=c.collect_record(sources,reasons)
+    for item in items.values():
+        job=item['job'];phase=Path(item['phase_root'])
+        path=phase/'outputs'/(job['id']+'.json')
+        output=a.read(path)
+        a.atomic_json(path,dict(output,peak_rss_bytes=1_000_000_000))
+        record=phase/'records'/(job['id']+'.json')
+        a.atomic_json(record,dict(a.read(record),output_hash=a.file_hash(path)))
+    after,measured,_=c.collect_record(sources,reasons)
+    assert before['populations']==after['populations']
+    assert c._selected(before['populations'])==c._selected(after['populations'])
+    for jid,item in measured.items():
+        assert item['before_sha256']==items[jid]['before_sha256']
+        assert item['resources']['measured_memory_gb']==1.2
+        assert item['resources']['memory_gb']==1.2

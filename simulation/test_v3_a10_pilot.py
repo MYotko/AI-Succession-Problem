@@ -174,14 +174,21 @@ def test_pool_worker_ceiling_and_peak_memory_reductions(tmp_path,monkeypatch):
     large={**settings(),'workers':32,'cpu_budget':32,'caps':runner.caps('x2',32)}
     result=runner.dispatch(tmp_path,jobs,code_identity(),large,time.time()+45,fixed={'workers':32,'threads':1},pooled_jobs=costs)
     assert result['maximum_active']==16 and result['completed']==20
+    from v3 import worker_control as wc
+    monkeypatch.setattr(runner,'available_cpus',lambda:32)
+    intentional=wc.settings(dict(large,profile='x2',override_reason='operator CPU limit'))
+    override_root=tmp_path/'intentional';wc.initial_control(override_root,intentional)
+    result=runner.dispatch(override_root,jobs,code_identity(),intentional,time.time()+45,fixed={'workers':32,'threads':1},pooled_jobs=costs)
+    assert result['maximum_active']==20 and result['completed']==20
+
     root=tmp_path/'peaks';control(root)
     monkeypatch.setattr(runner,'mem_available_bytes',lambda:5_000_000_000)
     monkeypatch.setattr(runner,'peak_rss_bytes',lambda:3_000_000_000)
     result=runner.dispatch(root,jobs[:5],code_identity(),settings(2),time.time()+45,measurements=choices(),pooled_jobs=costs)
     dispatched=[json.loads(s) for s in (root/'events.jsonl').read_text().splitlines() if json.loads(s)['event']=='dispatch']
     assert [e['active'] for e in dispatched[:2]]==[1,2]
-    assert all(e['active']==1 and e['memory_estimate_gb']==3. for e in dispatched[2:])
-    assert read(root/'pool_memory.json')=={'fixture':3.}
+    assert all(e['active']==1 and e['memory_estimate_gb']==pytest.approx(3.6) for e in dispatched[2:])
+    assert read(root/'pool_memory.json')=={'fixture':pytest.approx(3.6)}
 
 
 def test_pooled_deadline_resume_and_worker_count_determinism(tmp_path,monkeypatch):

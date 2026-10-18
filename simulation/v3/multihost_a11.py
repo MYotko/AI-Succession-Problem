@@ -19,6 +19,8 @@ from .dispatch_store_a11 import Store, OPEN_STORES, read_state, warm_connection
 from .artifacts import (SIMULATION, atomic_json, canonical, code_identity, digest,
                         file_hash, lease, read, scoped, seal, stable_job, unseal)
 
+from . import worker_control as wc
+
 SCHEMA = 'v3-A11-pull-1'
 ALLOWED_KINDS = {'table', 'rerun', 'a4_fit', 'a4_validate', 'a4_census', 'a5_fvplain', 'a13_validate_plain_ext'}
 RECHECK_PREFERENCE_SECONDS = 5.  # Several normal one-second claim polls, bounded if a host disappears.
@@ -64,9 +66,7 @@ def freeze(spec, projection_document, *, code_commit, extra_inputs=(), lease_sec
     for job in result['jobs']:
         keys = cost_keys(job)
         means = [costs[k]['mean_worker_seconds'] for k in keys]
-        memory = result.get('memory_estimate_gb', {}).get(job['config']['phase'])
-        if memory is None:
-            memory = max(costs[k]['memory_estimate_gb'] for k in keys)
+        memory = max(costs[k]['memory_estimate_gb'] for k in keys)
         value = {'source_strata': keys, 'worker_seconds': max(means), 'memory_gb': memory}
         if job['kind'] == 'a13_validate_plain_ext':
             # Ordering weight only; the approved R_max price is sealed separately.
@@ -76,7 +76,7 @@ def freeze(spec, projection_document, *, code_commit, extra_inputs=(), lease_sec
         assignments[job['id']] = key
     result['pull_dispatch'] = {'schema': SCHEMA, 'projection_sha256': projection_document['sha256'],
         'code_commit': code_commit, 'lease_seconds': lease_seconds, 'cost_classes': classes,
-        'job_classes': assignments, 'extra_inputs': list(extra_inputs),
+        'job_classes': assignments, 'extra_inputs': list(extra_inputs), 'memory_basis': 'registered-stratum',
         'order': 'descending frozen bundle mean worker seconds, then job id',
         'census_class': 'maximum of plain and FV bundle means; no result consulted'}
     validate_extension(result)
@@ -155,7 +155,7 @@ def register_entries(root):
 
 
 def approve_host(root, evidence_document, operator, when):
-    from .qualification_a11 import validate_evidence
+    from .qualification_a11 import validate_evidence, scheduling_rate
     from .service import model_service
     with transaction(root):
         spec = unseal(read(Path(root) / 'manifest.json'))
@@ -174,7 +174,7 @@ def approve_host(root, evidence_document, operator, when):
         atomic_json(target, evidence_document)
         return append(root, 'machine_register', {'host': e['candidate']['host'],
             'code_hash': e['code_hash'], 'qualification_sha256': evidence_document['sha256'],
-            'relative_throughput': e['relative_throughput'], 'memory_gb': e['candidate']['memory_gb'],
+            'relative_throughput': e['relative_throughput'], 'per_job_relative_throughput': scheduling_rate(e), 'memory_gb': e['candidate']['memory_gb'],
             'profile': settings['profile'], 'model_service': service,
             'fingerprint': e['candidate']['fingerprint'], 'kinds': e['kinds'],
             'operator_approval': {'operator': operator, 'when': when}})
@@ -184,7 +184,7 @@ def prepare(spec_path, root, settings):
     from .production_runner import caps, validate_spec
     spec = unseal(read(spec_path))
     validate_extension(spec)
-    settings = dict(settings, caps=caps(settings['profile'], settings['cpu_budget']))
+    settings = wc.settings(settings)
     preflight = validate_spec(spec, settings)
     root = scoped(root)
     if spec.get('schema') == 'v3-A13-extension-1':
@@ -200,7 +200,18 @@ def prepare(spec_path, root, settings):
         if not (root / 'pull_state.json').exists():
             atomic_json(root / 'pull_state.json', seal({'epoch': 0, 'started': None, 'phase_index': 0,
                 'sessions': {}, 'leases': {}, 'checks': {}, 'halt': None, 'complete': False,
-                'control': {'stop_dispatch': False, 'interrupt_now': False}, 'projections': {}, 'completions': {}}))
+                'control': {'stop_dispatch': False, 'interrupt_now': False},
+                'projections': {}, 'completions': {}}))
+        if settings.get('overall_workers') is not None:
+            target = settings['overall_workers']
+            if type(target) is not int or target < 0: raise ValueError('nonnegative overall worker target required')
+            c = Coordinator(root)
+            override = dict(workers=target, memory_headroom=settings.get('memory_headroom', .8),
+                reason=settings.get('override_reason'), operator=settings.get('operator') or wc.getpass.getuser(), epoch=time.time())
+            if wc.override_content(c.state['control'].get('initial_overall_override')) != wc.override_content(override):
+                c.state['control'].update(max_workers=target, initial_overall_override=override)
+                append(root, 'protocol_events', dict(event='initial_overall_target', **override))
+                c.save(force=True)
     return spec
 
 
@@ -311,6 +322,9 @@ class Coordinator:
                 'completed': len(self.done), 'pending': len(self.jobs) - len(self.done), 'hosts': hosts,
                 'reason': self.stop_reason(), 'waiting_for': self.state.get('waiting_for'),
                 'host_controls': self.state.get('host_controls', {}),
+                'overall_worker_target': self.state['control'].get('max_workers', sum(
+                    wc.selection(s['settings'], s['control'])['workers'] for s in self.state['sessions'].values() if s['end'] is None)),
+                'overall_target_source': 'explicit' if 'max_workers' in self.state['control'] else 'sum_of_host_targets',
                 'x2_equivalent_hours': self.charged_seconds() / 3600, 'stops': self.stops(), 'epoch': self.now,
                 'hard_stop': self.state['control']['interrupt_now'] or self.stops()['coordinator'] or (self.state['started'] is not None and
                     self.now >= self.state['started'] + self.spec['wall_seconds'])}
@@ -365,7 +379,7 @@ class Coordinator:
         observed = self.state.get('observed_memory_gb', {})
         for s in ready:
             entry = self.member(s['host'])
-            memory = .8 * min(entry['memory_gb'], s.get('memory_available_gb', entry['memory_gb']))
+            memory = s['settings'].get('memory_headroom', .8) * min(entry['memory_gb'], s.get('memory_available_gb', entry['memory_gb']))
             if sample is not None:
                 key, cost = self.store.cost(sample)
                 if max(cost['memory_gb'], observed.get(key, 0)) <= memory:
@@ -430,22 +444,9 @@ class Coordinator:
 
     def require_configuration_cap(self, host, settings, control):
         from .production_runner import caps
-        entry = self.member(host)
-        profile = settings['profile']
-        key = 'workers_x2' if profile == 'x2' else 'workers_local'
-        minimum = max([8 if profile == 'x2' else 1] + [min(p[key]) for p in self.spec['configuration'].values()
-                      if p['kind'] in entry['kinds']])
-        mode = control.get('mode', settings.get('mode', 'work'))
-        if mode not in ('normal', 'work'):
-            raise ValueError('invalid mode')
-        limit = caps(profile, settings['cpu_budget'])[mode]
-        requested = control.get('max_workers', settings.get('workers', limit))
-        if isinstance(requested, bool) or not isinstance(requested, int):
-            raise ValueError('positive integer worker cap required')
-        if min(requested, limit) < minimum:
-            raise ValueError(f'{host}: {profile} profile requires a worker cap of at least {minimum}; '
-                f'use production_runner control ROOT --host {host} --max-workers {minimum} before rejoining, '
-                f'and host_a11 --workers {minimum} (or higher) with a CPU budget/mode supporting that cap')
+        self.member(host)
+        wc.selection(settings, control)
+        wc.require_memory_authority(settings, control, wc.resources(self.store.full_spec()), self.state.get('observed_memory_gb', {}))
 
     def session(self, request):
         s = self.state['sessions'].get(request.get('session'))
@@ -462,21 +463,20 @@ class Coordinator:
             raise ValueError('coordinator is not accepting joins')
         if r['fingerprint'] != entry['fingerprint'] or r['code_hash'] != self.code or r['code_commit'] != self.spec['pull_dispatch']['code_commit']:
             raise ValueError('host fingerprint or code identity mismatch')
-        settings = r['settings']
+        settings = wc.settings(r['settings'], local=False)
         if settings['profile'] != entry['profile'] or model_service(settings) != entry['model_service']:
             raise ValueError('host profile or model service differs from its approved register entry')
         limits = caps(settings['profile'], settings['cpu_budget'])
         if settings['threads'] != 1 or settings['mode'] not in ('normal', 'work'):
             raise ValueError('invalid host caps')
         self.require_configuration_cap(r['host'], settings, dict(mode=settings['mode'], max_workers=settings['workers']))
-        if settings['workers'] > limits[settings['mode']]:
-            raise ValueError('invalid host caps')
         if settings['profile'] == 'x2':
             require_service_record(settings, r.get('service'))
         if any(s['host'] == r['host'] and s['end'] is None for s in self.state['sessions'].values()):
             raise ValueError('host is already joined')
         control = dict(mode=settings['mode'], max_workers=settings['workers'], drain=False)
         control.update(self.state.get('host_controls', {}).get(r['host'], {}))
+        control = wc.apply_initial_override(control, settings)
         self.require_configuration_cap(r['host'], settings, control)
         sid = uuid.uuid4().hex
         self.state.setdefault('host_controls', {})[r['host']] = dict(control)
@@ -485,7 +485,7 @@ class Coordinator:
             'settings': dict(settings, caps=limits, model_service=entry['model_service']), 'control': dict(control),
             'configuration': {}, 'chosen': {}, 'ready': {}, 'service': r.get('service')}
         return {'session': sid, 'spec': self.store.full_spec(), 'phase_roots': {p: str(self.root / p) for p in self.spec['phases']},
-                'lease_seconds': self.ttl, 'qualified_kinds': entry['kinds']}
+                'lease_seconds': self.ttl, 'qualified_kinds': entry['kinds'], 'control': control}
 
     def snapshot(self, phase, configuration=False):
         from .snapshot_a11 import inventory
@@ -516,8 +516,27 @@ class Coordinator:
         if not measurements or any(not m.get('valid') or not positive(m['wall_seconds']) or not m.get('job_seconds') for m in measurements):
             raise ValueError('configuration test incomplete')
         settings = s['settings']
-        cap = min(settings['caps'][s['control']['mode']], s['control']['max_workers'])
-        selected = choose(measurements, cap, settings['cpu_budget'], 1)
+        selected = wc.selection(settings, s['control'], measurements)
+        observed = self.state.setdefault('observed_memory_gb', {})
+        declared_classes = {row[0] for row in self.store.db.execute('SELECT DISTINCT cls FROM queues')}
+        reported_classes = {key for measurement in measurements for key in measurement.get('class_peaks_gb', {})}
+        configuration_classes = set()
+        if reported_classes - declared_classes:
+            # An empty historical phase may still have a required short profile.
+            # Validate its executor-only class without assigning its peak to an
+            # unrelated scientific class or editing the sealed plan.
+            full = self.store.full_spec()
+            profile = full['configuration'][phase]
+            prototypes = [stable_job(profile['kind'], cfg, 'configuration', i)
+                          for i, cfg in enumerate(profile.get('configs', [profile['config']]))]
+            configuration_classes = {v['memory_class'] for v in wc.configuration_resources(
+                prototypes, full['jobs'], wc.resources(full), phase=phase, spec=full).values()}
+        for measurement in measurements:
+            for key, peak in measurement.get('class_peaks_gb', {}).items():
+                if key not in declared_classes | configuration_classes or not positive(peak):
+                    raise ValueError('invalid configuration memory class peak')
+                if key in declared_classes:
+                    observed[key] = max(observed.get(key, 0.), peak)
         s['configuration'][phase] = measurements
         s['chosen'][phase] = selected
         s['last_work_end'] = self.now
@@ -542,7 +561,7 @@ class Coordinator:
         deadline = self.state['started'] + self.spec['wall_seconds'] - self.spec.get('cleanup_reserve_seconds', 180)
         per_host = []
         for s in present:
-            workers = {p: min(s['chosen'][p]['workers'], s['settings']['caps'][s['control']['mode']], s['control']['max_workers'])
+            workers = {p: wc.selection(s['settings'], s['control'], s['configuration'][p])['workers']
                        for p in s['chosen']}
             per_host.append(a4_projection(dict(self.spec, jobs=list(self.jobs.values())), s['configuration'], workers, self.root, self.code,
                                           self.state['phase_index'], self.now, deadline))
@@ -607,15 +626,14 @@ class Coordinator:
             if sample['kind'] not in entry['kinds'] or not s['ready'].get(phase):
                 continue
             active = self.active(sid)
-            cap = min(s['settings']['caps'][s['control']['mode']], s['control']['max_workers'])
-            selected = choose(s['configuration'][phase], cap, s['settings']['cpu_budget'], 1)
-            memory = min(s.get('memory_available_gb', 0) * .8,
-                         entry['memory_gb'] * .8 - sum(l['memory_gb'] for l in active))
+            selected = wc.selection(s['settings'], s['control'], s['configuration'][phase])
+            memory = min(s.get('memory_available_gb', 0) * s['settings'].get('memory_headroom', .8),
+                         entry['memory_gb'] * s['settings'].get('memory_headroom', .8) - self.reserved_memory(active))
             if len(active) < selected['workers'] and needed <= memory:
                 eligible.append(s['host'])
         if not eligible:
             return None
-        preferred = min(eligible, key=lambda h: (-self.member(h)['relative_throughput'], h))
+        preferred = min(eligible, key=lambda h: (-self.member(h).get('per_job_relative_throughput', self.member(h)['relative_throughput']), h))
         # Persist one window for the phase. Host changes, retries and restarts
         # cannot reset it and keep another eligible host waiting indefinitely.
         window = self.state.setdefault('recheck_preferences', {}).setdefault(phase,
@@ -671,6 +689,10 @@ class Coordinator:
             atomic_json(history_path, history)
         return False
 
+    def reserved_memory(self, leases):
+        observed = self.state.get('observed_memory_gb', {})
+        return sum(max(l['memory_gb'], observed.get(self.store.cost(self.jobs[l['job_id']])[0], 0.)) for l in leases)
+
     def claim(self, r):
         from .production_runner import choose
         s = self.session(r)
@@ -685,14 +707,15 @@ class Coordinator:
         if projection is not True:
             return {'job': None, 'waiting': 'host configurations' if projection is None else None, 'status': self.status()}
         occupied = self.active(r['session'])
-        limit = min(s['settings']['caps'][s['control']['mode']], s['control']['max_workers'])
-        selected = choose(s['configuration'][phase], limit, s['settings']['cpu_budget'], 1)
+        selected = wc.selection(s['settings'], s['control'], s['configuration'][phase])
         cap = selected['workers']
+        if len(self.active()) >= self.state['control'].get('max_workers', float('inf')):
+            return {'job': None, 'waiting': 'overall worker target'}
         if len(occupied) >= cap:
             return {'job': None, 'waiting': 'worker cap'}
         entry = self.member(r['host'])
-        memory = min(float(r['memory_available_gb']) * .8,
-                     entry['memory_gb'] * .8 - sum(l['memory_gb'] for l in occupied))
+        memory = min(float(r['memory_available_gb']) * s['settings'].get('memory_headroom', .8),
+                     entry['memory_gb'] * s['settings'].get('memory_headroom', .8) - self.reserved_memory(occupied))
         observed = self.state.get('observed_memory_gb', {})
         job = self.store.candidate(phase, entry['kinds'], memory, observed)
         purpose = 'work'
@@ -736,7 +759,7 @@ class Coordinator:
             claims.append(last)
             # The .8 headroom applies once to the reported free memory. Each
             # provisional lease then consumes its full estimate within the batch.
-            remaining -= self.state['leases'][last['lease']]['memory_gb'] / .8
+            remaining -= self.state['leases'][last['lease']]['memory_gb'] / self.session(r)['settings'].get('memory_headroom', .8)
         return {'claims': claims, 'status': self.status(), 'waiting': (last or {}).get('waiting')}
 
     def complete(self, r):
@@ -788,7 +811,8 @@ class Coordinator:
             atomic_json(output, value)
             atomic_json(self.root / l['phase'] / 'records' / (job['id'] + '.json'),
                 {'job': job, 'code_hash': self.code, 'status': 'complete', 'output_hash': file_hash(output),
-                 'completed_epoch': self.now, 'worker_seconds': value['seconds'], 'host': r['host'], 'lease': r['lease']})
+                 'completed_epoch': self.now, 'worker_seconds': value['seconds'], 'peak_rss_bytes': value.get('peak_rss_bytes'),
+                 'host': r['host'], 'lease': r['lease']})
             self.done[job['id']] = {'host': r['host'], 'phase': l['phase']}
         elif l['status'] != 'completed':
             append(self.root, 'incidental_cross_checks', {'job_id': job['id'], 'original_host': original['host'],
@@ -920,14 +944,17 @@ def rpc(root, request, *, now=None, local_only=False):
             c.save()
 
 
-def control(root, host=None, *, mode=None, max_workers=None, stop=None):
+def control(root, host=None, *, mode=None, max_workers=None, stop=None, reason=None):
     with transaction(root):
         c = Coordinator(root)
         if stop is not None and stop not in ('drain', 'now', 'clear'):
             raise ValueError('invalid stop control')
         if host is None:
-            if mode is not None or max_workers is not None:
-                raise ValueError('pull mode and worker controls require --host')
+            if mode is not None:
+                raise ValueError('pull mode controls require --host')
+            if max_workers is not None:
+                if type(max_workers) is not int or max_workers < 0: raise ValueError('nonnegative overall worker target required')
+                c.state['control']['max_workers'] = max_workers
             if stop is not None:
                 c.state['control'].update(stop_dispatch=stop != 'clear', interrupt_now=stop == 'now')
                 c.state['operator_stop'] = None if stop == 'clear' else dict(reason='operator_stop_' + stop, epoch=c.now)
@@ -935,24 +962,20 @@ def control(root, host=None, *, mode=None, max_workers=None, stop=None):
             c.member(host)
             sessions = [s for s in c.state['sessions'].values() if s['host'] == host and s['end'] is None]
             value = dict(c.state.get('host_controls', {}).get(host, {}))
-            if mode is not None:
-                value['mode'] = mode
+            settings = c.control_settings(host)
+            value = wc.change(value, settings, workers=max_workers, mode=mode, reason=reason)
             if max_workers is not None:
-                value['max_workers'] = max_workers
+                wc.require_memory_authority(settings, value, wc.resources(c.store.full_spec()),
+                    c.state.get('observed_memory_gb', {}), dict(workers=max_workers))
             if stop is not None:
                 value.update(drain=stop != 'clear', interrupt_now=stop == 'now')
-            settings = c.control_settings(host)
-            c.require_configuration_cap(host, settings, value)
-            if max_workers is not None:
-                from .production_runner import caps
-                value['max_workers'] = min(max_workers, caps(settings['profile'], settings['cpu_budget'])[
-                    value.get('mode', settings.get('mode', 'work'))])
             # Keep controls even before a first join or after departure. The
             # chosen profile and CPU/mode limits still bound actual dispatch.
             c.state.setdefault('host_controls', {})[host] = value
             for s in sessions:
                 s['control'].update(value)
-        append(c.root, 'protocol_events', {'event': 'control', 'host': host, 'mode': mode, 'max_workers': max_workers, 'stop': stop, 'epoch': c.now})
+        append(c.root, 'protocol_events', {'event': 'control', 'host': host, 'mode': mode, 'max_workers': max_workers, 'stop': stop, 'reason': reason, 'operator': wc.getpass.getuser(), 'epoch': c.now,
+            'restart_job_ids': [l['job_id'] for l in c.active() if host is None or l['host'] == host] if stop == 'now' else []})
         c.save(force=True)
         if host is None and stop is not None and (c.root / 'launches.json').exists():
             history = read(c.root / 'launches.json')
@@ -960,7 +983,9 @@ def control(root, host=None, *, mode=None, max_workers=None, stop=None):
                 record = c.state.get('operator_stop')
                 history[-1].update(stopped=c.stop_reason(), stopped_epoch=record['epoch'] if record else None)
                 atomic_json(c.root / 'launches.json', history)
-        return c.status()
+        result = c.status()
+        result['restart_job_ids'] = [l['job_id'] for l in c.active() if host is None or l['host'] == host] if stop == 'now' else []
+        return result
 
 
 def coordinate(spec_path, root, settings):

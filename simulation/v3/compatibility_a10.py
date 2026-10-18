@@ -173,6 +173,7 @@ def collect_record(sources, reasons_path):
     _require(set(reasons) == set(changes) and all(isinstance(v, str) and v.strip() for v in reasons.values()),
              "every changed file needs its reason")
     grouped, selected_jobs, inputs, profiles = {}, {}, [], {}
+    class_peaks, class_seconds = {}, {}
     for source in sources:
         root, spec_path = Path(source["root"]).resolve(), Path(source["spec"]).resolve()
         spec = unseal(read(spec_path))
@@ -195,7 +196,19 @@ def collect_record(sources, reasons_path):
                                         "before_sha256": hashlib.sha256(comparison_bytes(job, output["result"])).hexdigest(),
                                         "output_file_sha256": file_hash(phase_root / "outputs" / (job["id"] + ".json"))}
             from .compatibility_shards_a11 import resource_estimate
-            selected_jobs[job['id']]['resources'] = resource_estimate(spec, job)
+            resource = resource_estimate(spec, job)
+            selected_jobs[job['id']]['resources'] = resource
+            from .worker_control import observe
+            completion_path = phase_root / 'records' / (job['id'] + '.json')
+            completion = read(completion_path)
+            # completed() already loaded this envelope for the mandatory proof
+            # comparison. Legacy RSS is top-level executor metadata, never a
+            # scientific result field. New records duplicate it for blind tools.
+            for peak in (completion.get('peak_rss_bytes'), output.get('peak_rss_bytes')):
+                observe(class_peaks, resource, peak)
+            from .worker_control import positive
+            if positive(completion.get('worker_seconds')):
+                class_seconds.setdefault(resource['memory_class'], []).append(completion['worker_seconds'])
             phase = job['config'].get('phase', job['kind'])
             profile_key = digest([str(spec_path), phase])
             selected_jobs[job['id']]['profile_key'] = profile_key
@@ -205,6 +218,15 @@ def collect_record(sources, reasons_path):
         inputs.append({"spec": str(spec_path), "root": str(root), "spec_sha256": file_hash(spec_path)})
     populations = [{"phase": p, "capability": c, "setting": s, "job_ids": sorted(ids)}
                    for (p, c, s), ids in sorted(grouped.items())]
+    for item in selected_jobs.values():
+        r = item['resources']
+        timings = class_seconds.get(r['memory_class'], [])
+        r['measured_worker_seconds'] = sum(timings) / len(timings) if timings else None
+        if class_peaks.get(r['memory_class']):
+            r['memory_gb'] = r.get('planning_memory_gb', r['memory_gb'])
+        r['registered_memory_gb'] = r['memory_gb']
+        r['measured_memory_gb'] = class_peaks.get(r['memory_class'], 0.)
+        r['memory_gb'] = max(r['memory_gb'], r['measured_memory_gb'])
     sample = _selected(populations)
     _require(sample, "empty compatibility sample")
     record = {"schema": SCHEMA, "non_registered": True, "producing_code_hash": old, "new_code_hash": new,
@@ -225,7 +247,7 @@ def proof_row(original, fresh):
             "passed": original["before_sha256"] == fresh["after_sha256"]}
 
 
-def build_record(sources, reasons_path, target, *, workers=None, memory_floor_gb=0.):
+def build_record(sources, reasons_path, target, *, workers=None, memory_floor_gb=0., override_reason=None, operator=None, memory_headroom=.8):
     """Freeze a sample, execute it once with memory admission, seal failures."""
     from copy import deepcopy
     from .compatibility_shards_a11 import (run_items, write_once, reservation_path,
@@ -236,12 +258,27 @@ def build_record(sources, reasons_path, target, *, workers=None, memory_floor_gb
     record, selected_jobs, profiles = collect_record(sources, reasons_path)
     _require(not reservation_path(record).exists(), 'identity pair already reserved; compatibility attempt is final')
     sample = _selected(record['populations'])
-    cap = min(12, max(1, min(16, available_cpus()) - 4))
+    from . import worker_control as wc
+    cpu_budget = available_cpus()
+    cap = min(12, max(1, cpu_budget - 4))
     workers = cap if workers is None else workers
-    _require(type(workers) is int and workers >= 1, 'compatibility worker count must be positive')
-    workers = min(workers, cap, len(sample))
-    view, configuration, floor, budget, workers = single_preflight(record, selected_jobs, profiles, target, workers, memory_floor_gb)
-    record['execution'].update(workers=workers, memory_budget_gb=budget, memory_floor_gb=floor, configuration=configuration)
+    settings = wc.settings(dict(profile='local', workers=workers, cpu_budget=cpu_budget, threads=1, mode='work',
+        override_reason=override_reason, operator=operator, memory_headroom=memory_headroom))
+    workers = min(wc.selection(settings)['workers'], len(sample))
+    control_root = target.with_suffix('.workers')
+    wc.initial_control(control_root, settings)
+    atomic_json(control_root / 'settings.json', settings)
+    atomic_json(control_root / 'memory_authority.json', dict(
+        estimates={j: i['resources'] for j, i in selected_jobs.items()},
+        peaks={i['resources']['memory_class']: i['resources'].get('measured_memory_gb', 0.) for i in selected_jobs.values()}))
+    atomic_json(control_root / 'identity.json', dict(code_hash=code_identity(), target=str(target)))
+    view, configuration, floor, budget, workers = single_preflight(record, selected_jobs, profiles, target, workers, 0., settings=settings)
+    authority = read(control_root / 'memory_authority.json')
+    for cfg in configuration.values():
+        for key, peak in cfg.get('class_peaks_gb', {}).items():
+            authority['peaks'][key] = max(authority['peaks'].get(key, 0.), peak)
+    atomic_json(control_root / 'memory_authority.json', authority)
+    record['execution'].update(workers=workers, memory_budget_gb=budget, memory_floor_gb=0., configuration=configuration, settings=settings)
     # The declared population and selection are durable before any execution.
     payload = deepcopy({**record, 'selected_job_ids': sample, 'target_path': target.relative_to(SIMULATION).as_posix()})
     reserve_attempt(record, payload, attempt)
@@ -249,8 +286,10 @@ def build_record(sources, reasons_path, target, *, workers=None, memory_floor_gb
     check_reservation(record, payload, attempt)
     configure_threads(1)
     try:
-        results, trace = run_items([dict(i, input_view=view) for i in selected_jobs.values()], workers, budget, memory_floor_gb=floor)
+        results, trace = run_items([dict(i, input_view=view) for i in selected_jobs.values()], workers, budget,
+            control_path=control_root / 'control.json', host_settings=settings, headroom=settings['memory_headroom'])
         record['execution']['admission'] = trace
+        record['execution']['worker_control'] = read(control_root / 'control.json')
         record['proofs'] = [proof_row(selected_jobs[jid], results[jid]) for jid in sample]
         _require(code_identity() == record['new_code_hash'] and source_manifest() == record['new_source_manifest'],
                  "source changed during compatibility proof")
@@ -284,13 +323,28 @@ def main():
     p.add_argument("--sources", required=True); p.add_argument("--reasons", required=True)
     p.add_argument("--output", required=True); p.add_argument("--workers", type=int)
     p.add_argument('--memory-floor-gb', type=float, default=0.)
+    from . import worker_control as wc
+    wc.options(p)
+    p = sub.add_parser("control"); p.add_argument("record"); p.add_argument("--workers", type=int, required=True); p.add_argument("--reason")
     p = sub.add_parser("approve")
     p.add_argument("record"); p.add_argument("--operator", required=True); p.add_argument("--date", required=True)
     args = parser.parse_args()
     if args.command == "build":
-        record = build_record(read(args.sources), args.reasons, args.output, workers=args.workers, memory_floor_gb=args.memory_floor_gb)
+        record = build_record(read(args.sources), args.reasons, args.output, workers=args.workers, memory_floor_gb=args.memory_floor_gb, **wc.arguments(args))
         print({"passed": record["passed"], "jobs": len(record["proofs"]), "record_sha256": file_hash(args.output)})
         return 0 if record["passed"] else 1
+    if args.command == 'control':
+        from .compatibility_shards_a11 import check_reservation
+        target = scoped(args.record)
+        _require(not target.exists(), 'compatibility attempt is final')
+        attempt = target.with_suffix('.attempt.json')
+        root = target.with_suffix('.workers')
+        _require(read(root / 'identity.json') == dict(code_hash=code_identity(), target=str(target)), 'proof control identity mismatch')
+        if attempt.exists():
+            payload = unseal(read(attempt))
+            check_reservation(payload, payload, attempt)
+        print(wc.control(root, read(root / 'settings.json'), workers=args.workers, reason=args.reason))
+        return 0
     record = approve_record(args.record, args.operator, args.date)
     print({"approved_record_sha256": file_hash(args.record), "registered_filename": record_name(record["producing_code_hash"], record["new_code_hash"])})
     return 0

@@ -22,10 +22,11 @@ FINGERPRINT = dict(python='fixture', numpy='fixture', numpy_cpu_baseline=['SSE']
 def evidence(host, code, kinds=('fixture',), speed=1., memory=40., settings=None):
     jobs = [a.stable_job(kind, {'phase': 'fixture'}, 'validation', i) for kind in kinds for i in range(20)]
     plan = a.seal(dict(schema=q.SCHEMA + '-plan', non_registered=True, jobs=jobs, kinds=list(kinds), code_hash=code))
-    proofs = [dict(job_id=j['id'], kind=j['kind'], job_sha256=a.digest(j), canonical_sha256=a.digest([j, 'result'])) for j in jobs]
+    proofs = [dict(job_id=j['id'], kind=j['kind'], job_sha256=a.digest(j), canonical_sha256=a.digest([j, 'result']), worker_seconds=1.) for j in jobs]
     ref = dict(schema=q.SCHEMA + '-run', non_registered=True, host='yotko-evo-x2', code_hash=code, plan_sha256=plan['sha256'], proofs=proofs, passed=True,
-               elapsed_seconds=20., memory_gb=memory, fingerprint=FINGERPRINT, kinds=list(kinds))
-    candidate = dict(ref, host=host, elapsed_seconds=20. / speed, settings=dict(settings or SETTINGS))
+               elapsed_seconds=20., memory_gb=memory, fingerprint=FINGERPRINT, kinds=list(kinds), settings=dict(SETTINGS), workers=SETTINGS['workers'])
+    candidate = dict(ref, host=host, elapsed_seconds=20. / speed, settings=dict(settings or SETTINGS),
+                     workers=(settings or SETTINGS)['workers'], proofs=[dict(p, worker_seconds=1. / speed) for p in proofs])
     return q.compare(plan, a.seal(ref), a.seal(candidate))
 
 

@@ -2730,12 +2730,144 @@ for every new launch. Actual overhead is charged to the unchanged 980
 X2-hour stage 1 ledger. A scientific extension halt spends its single round;
 an infrastructure interruption resumes the same plan and root.
 
+### 17.0. Worker control, 2026-10-18
+
+The operator rejected approval of the completed proof at identity `5ae3d3cd`.
+Keep that proof and all of its files untouched. This code requires a new
+rehearsal, qualification and proof at its new identity, in new execution roots
+and under the new identity-pair reservation. Do not approve or reuse the old
+proof as evidence for this change.
+
+Before **every go**, run and review a load sheet on each participating host.
+Use the exact planned worker count, CPU budget, reason and headroom in both
+the sheet and the subsequent launch. The sheet reads plans, attempts and
+completion timing metadata only. It reports anonymous class reservations,
+CPU/memory utilization, and total wall estimates at registered and measured
+rates. A missing measured rate is shown as unavailable, not inferred from an
+outcome. Configuration may reduce an ordinary target; an explicit reasoned
+target bypasses that measured choice. With the current default policy, every
+scientific dispatch still applies the mode cap to the saved target, as well
+as the CPU and memory budgets.
+The reduced pilot retains its default 16-worker ceiling; an explicit override
+or live target may raise it within those budgets.
+For a production plan, `--root ROOT` adds measured timing rates and class peaks
+from executor completion records only. A pull load sheet with `--hosts HOSTS`
+forecasts a partition in which each job is counted once; the live pull scheduler
+still assigns work dynamically. Re-run the sheet after a material target change.
+
+A job reserves its own registered memory-class estimate, raised only by that
+class's measured peak times 1.2. There is no global worst-job floor. Older
+single-host A10/A4/A5 plans retain the sealed phase estimate until their class
+has a measured peak. Then the reservation is the larger of that class's own
+planning formula and its peak times 1.2. The sealed plan is never rewritten.
+Historical completions supply RSS from their executor record or legacy
+completion-envelope metadata; scientific result fields never size memory. If
+neither contains RSS, use the registered estimate. New completions also copy
+RSS into the executor record. Per-class peaks remain
+executor-side. A11 item 4's memory caps still apply under every override.
+Default memory headroom is 0.8; an explicit reason permits a value up to 0.95.
+
+These are operator commands, written only. Substitute the approved values.
+For an ordinary launch or qualification plan, on the host that will execute:
+
+```bash
+"$PYTHON" -B -m v3.production_runner load-sheet "$PLAN" --profile x2 \
+  --workers 24 --threads 1 --cpu-budget 32 --mode work \
+  --override-reason 'Matty: intentional worker target after reviewing the load sheet' \
+  --operator Matty --memory-headroom 0.8
+```
+
+For a fresh launch, use those same override flags on `production_runner launch`, `host_a11`, or
+`qualification_a11 run`. Their existing `--workers` becomes an explicit target
+when `--override-reason` is supplied. Without a reason, a request above the
+mode cap is refused. The operator name, timestamp, reason and headroom are
+recorded with the launch. Configuration tests also use per-class admission.
+Repeating identical workers, headroom, reason and operator on resume or rejoin
+preserves the live target. Timestamps do not make an override new. Changing
+any of those four fields replaces the target and records the change.
+For a resume, inspect status and the persisted control first. An explicit
+load-sheet worker count is a forecast of that count: use the current live
+target for the resume forecast, then repeat the original launch flags to
+preserve it. Use a live control when intentionally replacing that target.
+
+For pull launches, the coordinator's `--workers 24` is not an aggregate cap.
+With `--workers 24` on each X2 the default overall target is 48. Set an explicit
+overall ceiling with launch `--overall-workers 40`, or with `control ROOT
+--workers 40` without `--host`. Repeating the same initial overall override on
+resume preserves a later live aggregate change.
+
+Above-mode targets are refused if any job class lacks both a sealed estimate
+and a measured peak. The five stage-1 run manifests have no sealed memory
+estimates: begin within the mode cap to measure their classes, then review
+the load sheet with `--root ROOT` before a reasoned raise. A nominal fallback
+of 0.25 GB never authorizes an above-mode target. Extension and A5 profiles
+derive their reservations from their sealed phase estimates or declared jobs,
+including historical profiles whose configuration omits `phase`.
+Ordinary declared configuration trials retain their configuration cap and
+per-class memory admission; they are not operator overrides of the scientific
+mode target. An actual above-mode operator override still requires sealed or
+measured memory authority, including during configuration. A live mode control
+does not rewrite the saved target or replace the measured configuration choice.
+
+Live controls survive resume and record operator, time, target and reason:
+
+```bash
+# Single host:
+"$PYTHON" -B -m v3.production_runner control "$RUN_ROOT" --workers 24 --reason 'Matty: raise target'
+# Explicit aggregate ceiling for two pull hosts (default is their summed targets):
+"$PYTHON" -B -m v3.production_runner control "$RUN_ROOT" --workers 48 --reason 'Matty: two hosts at twenty-four'
+# A particular pull host, independent of the aggregate target:
+"$PYTHON" -B -m v3.production_runner control "$RUN_ROOT" --host yotko-evo-x2-2 --workers 20 --reason 'Matty: add workers'
+"$PYTHON" -B -m v3.production_runner control "$RUN_ROOT" --host yotko-evo-x2-2 --workers 6 --reason 'Matty: lower target'
+```
+
+A lower target never kills running jobs. Zero pauses new dispatch. Raising it
+admits more jobs as CPU and per-class memory permit. `--mode normal|work`
+keeps the saved target and applies min(target, mode cap) when selecting slots.
+Work drains to the lower effective count without killing; normal restores the
+higher allowance. Unless an explicit target was set, the configuration test's
+measured choice still applies under either cap. The single policy setting is
+`MODE_CAPS_TARGET = True`; the operator's precedence decision is pending, so
+keep this default. Setting it false would let an explicit override beat mode,
+while ordinary targets remain capped. Above-mode targets require `--reason`
+and memory authority even while capped. Control commands refuse missing
+authority before recording the change. A stale unsupported control is capped
+in the running loop instead of crashing or spending a proof. The CPU budget
+and per-class memory admission always bind.
+For pull mode changes use `--host H`. `--immediate` uses the existing
+interrupt/resume mechanism and reports the in-flight job IDs that restart.
+Use `--stop clear` before resuming an interrupted ordinary launch.
+
+For a frozen proof attempt, run the load sheet before each shard's go:
+
+```bash
+"$PYTHON" -B -m v3.compatibility_shards_a11 load-sheet "$PROOF/proof.attempt.json" \
+  --host yotko-evo-x2 --workers 24 --override-reason 'Matty: intentional proof target' --operator Matty --memory-headroom 0.8
+# Add these flags to the supervised shard run in 17.3:
+# --workers 24 --override-reason 'Matty: intentional proof target' --operator Matty --memory-headroom 0.8
+"$PYTHON" -B -m v3.compatibility_shards_a11 control "$PROOF/proof.attempt.json" \
+  --host yotko-evo-x2 --workers 28 --reason 'Matty: raise proof target'
+"$PYTHON" -B -m v3.compatibility_shards_a11 control "$PROOF/proof.attempt.json" \
+  --host yotko-evo-x2 --workers 6 --reason 'Matty: lower proof target'
+```
+
+Issue each proof control in that host's existing checkout and shard root.
+Targets are scheduling metadata only. They do not change the frozen assignment,
+selection, job settings, seeds, comparison or attempt hash. Proof interruption
+after the start marker still spends the attempt; there is no immediate-stop
+retry for a proof. Target zero pauses dispatch without spending the attempt.
+The legacy single-host proof also accepts the override flags; control it with
+`compatibility_a10 control RECORD --workers N --reason TEXT`.
+Proof status is informational, refreshed about once a second with two bounded
+write attempts. Its I/O errors cannot fail the proof. Configuration completion
+updates the target under the control lock, preserving concurrent live changes.
+
 ### 17.1. Code review and the operator's code commit
 
 The code commit contains E1 to E3 plus A13's phase, admission, recording,
 historical verification, tests, A2 re-pins and these documents. The executor
 does not commit it. The interpreter reviews `_a13_build/REVIEW.diff` against
-`25b5f052` for this proof-tool revision, including the unchanged fit, validate, census and estimation
+`fcfcb898` for this worker-control revision, including the unchanged fit, validate, census and estimation
 functions and the inert no-admitted-row path. The operator separately
 approves the concrete code commit on main.
 
@@ -2744,7 +2876,7 @@ only after those fixes and their A2 re-pins are committed. A later code
 change changes the identity and requires the proof at that changed commit.
 
 The expected LF-normalized identity is
-`5ae3d3cd7345f6adf84cf5512c7a88ccfe8de67f8322930edcab17cc3f748037`.
+`2a88b5c60504017cf2a8bccdf0679a2c97158a4e81ea47a5d4d58b5dd5bbc07f`.
 The old identity is
 `c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810`.
 The independently reproduced E1 to E3 port identity was
@@ -2759,7 +2891,7 @@ checkout, and run from its `simulation` directory:
 ```bash
 export PYTHONINTMAXSTRDIGITS=0 PYTHONDONTWRITEBYTECODE=1
 export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
-export EXPECTED_CODE=5ae3d3cd7345f6adf84cf5512c7a88ccfe8de67f8322930edcab17cc3f748037
+export EXPECTED_CODE=2a88b5c60504017cf2a8bccdf0679a2c97158a4e81ea47a5d4d58b5dd5bbc07f
 export OLD_CODE=c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810
 export REH=v3/runs/a13_rehearsal
 mkdir -p "$REH/checks"
@@ -2985,12 +3117,43 @@ Approve the exact review and evidence hashes separately before step 4.
 
 ### 17.3. The A11 proof and its record commit
 
-Use section 16.5 with `REPAIRCO` at `A13_CODE_COMMIT`, the identity from 17.1,
-and both stopped original roots. Preserve their original manifests, jobs,
-pins and bytes. Export the old source manifest at c19b54f5. The reasons
-file must cover every difference from that manifest, including the two new
-A13 modules and the A2 JSON; use the implementation note's item map and
-the actual diff. Do not reuse section 16.5's eight-file reason dictionary.
+This revision replaces the unapproved proof at identity `5ae3d3cd`. Leave that
+proof and its files untouched. Use the newly committed code identity from
+17.1, after a new 17.2 rehearsal. Do not run section 16.5's old proof commands
+or reuse its output paths. The original completed source roots, manifests,
+jobs, registration pins and bytes remain unchanged.
+
+On X2-1 prepare a new identity-specific executor directory. The handoff files
+below contain source locations and code hashes. Prepare `reviewed_reasons.json`
+there from the actual old/current source diff, with one substantive reason per
+changed source-manifest path; the implementation note's sections through 38
+explain the changes. Do not reuse the old eight-file dictionary. The interpreter
+reviews the reasons before freeze.
+
+```bash
+cd "$REPAIRCO/simulation"
+export PROOF="v3/runs/a11_worker_control_${EXPECTED_CODE:0:8}"
+test ! -e "$PROOF"
+mkdir -p "$PROOF"
+cp "$OLDCO/simulation/v3/runs/a12_handoff/sources.json" "$PROOF/sources.json"
+cp "$OLDCO/simulation/v3/runs/a12_handoff/producing_source_manifest.json" "$PROOF/producing_source_manifest.json"
+cmp "$OLDCO/simulation/v3/runs/a12_handoff/sources.json" "$PROOF/sources.json"
+# After the interpreter supplies the reviewed per-file reasons:
+"$PYTHON" -B - <<'PY'
+import os
+from pathlib import Path
+from v3.artifacts import read,atomic_json,source_manifest,digest,code_identity
+from v3.compatibility_a10 import changed_files
+p=Path(os.environ['PROOF']); before=read(p/'producing_source_manifest.json')
+assert digest(before)=='c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810'
+assert code_identity()==os.environ['EXPECTED_CODE']
+reasons=read(p/'reviewed_reasons.json')
+assert set(reasons)==set(changed_files(before,source_manifest()))
+assert all(isinstance(v,str) and v.strip() for v in reasons.values())
+atomic_json(p/'reasons.json',dict(producing_source_manifest=before,reasons=reasons))
+print({'changed_manifest_files':len(reasons),'source_launches':len(read(p/'sources.json'))})
+PY
+```
 
 Before execution, compute the selection from the sealed original specs,
 without opening their scientific outputs, using A11's exact functions:
@@ -2998,10 +3161,12 @@ without opening their scientific outputs, using A11's exact functions:
 ```bash
 "$PYTHON" -B - <<'PY'
 from collections import defaultdict,Counter
+import os
+from pathlib import Path
 from v3.artifacts import read,unseal,atomic_json
 from v3.compatibility_a10 import _stratum,_selected
-groups=defaultdict(list); jobs={}
-for source in read('v3/runs/a11_proof/sources.json'):
+p=Path(os.environ['PROOF']); groups=defaultdict(list); jobs={}
+for source in read(p/'sources.json'):
     for j in unseal(read(source['spec']))['jobs']:
         assert j['id'] not in jobs
         jobs[j['id']]=j; groups[_stratum(j)].append(j['id'])
@@ -3009,7 +3174,7 @@ pop=[dict(phase=p,capability=c,setting=s,job_ids=sorted(ids)) for (p,c,s),ids in
 selected=_selected(pop)
 counts=Counter('estimation' if jobs[j]['kind']=='table' else 'validation' for j in selected)
 assert len(selected)==434 and dict(counts)==dict(estimation=90,validation=344)
-atomic_json('v3/runs/a11_proof/selection_check.json',dict(counts=dict(counts),selected_job_ids=selected,populations=pop))
+atomic_json(p/'selection_check.json',dict(counts=dict(counts),selected_job_ids=selected,populations=pop))
 print(dict(counts))
 PY
 ```
@@ -3027,7 +3192,7 @@ Do not create a second execution checkout on either host or copy a shard to
 obtain fresh start markers. The attempt's checkout-relative path is frozen: relocating a copy to obtain
 fresh shard markers is refused on either host. Single-host use is available by
 supplying only X2-1 in `hosts.json`. The legacy `compatibility_a10 build` also
-remains available with memory admission and `--memory-floor-gb`.
+remains available with per-class memory admission. The legacy `--memory-floor-gb` parameter is deprecated and has no effect.
 
 All commands below are prospective operator execution commands. Use fresh
 checkouts on both X2s at the same full `A13_CODE_COMMIT`, with the identity in
@@ -3044,7 +3209,7 @@ Use the established transfer-capable key, not the optional RPC-only key.
 
 ```bash
 cd "$REPAIRCO/simulation"
-export PROOF=v3/runs/a11_proof
+export PROOF="v3/runs/a11_worker_control_${EXPECTED_CODE:0:8}"
 export A13_CODE_COMMIT
 export PYTHON="$HOME/miniforge3/envs/phaseb/bin/python3.13"
 export PATH="$HOME/miniforge3/envs/phaseb/bin:$HOME/.local/bin:$PATH"
@@ -3081,13 +3246,35 @@ verify_code(os.environ['A13_CODE_COMMIT'])
 assert Path(argv[0]).is_file() and argv[1:3] == ['-B', '-m'] and argv[4] == 'run'
 if argv[3] == 'v3.compatibility_shards_a11':
     attempt = load_attempt(argv[5])  # Includes the identity-pair reservation.
-    assert argv[6:] == ['--host', platform.node()]
+    import argparse
+    from v3.worker_control import options, settings as worker_settings
+    flags = argparse.ArgumentParser()
+    flags.add_argument('--host', required=True); flags.add_argument('--workers', type=int)
+    options(flags); flags.set_defaults(memory_headroom=None)
+    override = flags.parse_args(argv[6:]); assert override.host == platform.node()
+    planned = dict(attempt['hosts'][platform.node()]['settings'])
+    if override.workers is not None:
+        assert override.override_reason
+        planned['workers'] = override.workers
+    if override.override_reason:
+        planned.update(override_reason=override.override_reason, operator=override.operator)
+        planned.pop('operator_override', None)
+    if override.memory_headroom is not None: planned['memory_headroom'] = override.memory_headroom
+    worker_settings(planned)
     shard = host_directory(argv[5], platform.node())
     assert not (shard/'started.json').exists() and not (shard/'result.json').exists()
     bundles = [(snapshot, shard/(kind+'_files')) for kind, snapshot in attempt['snapshots'][platform.node()].items()]
 elif argv[3] == 'v3.qualification_a11':
     plan = unseal(read(argv[5])); assert plan['code_hash'] == code_identity()
     assert plan['non_registered'] and not scoped(argv[6]).exists()
+    import argparse
+    from v3.worker_control import options, settings as worker_settings
+    flags=argparse.ArgumentParser()
+    flags.add_argument('--profile',choices=('local','x2'),required=True)
+    flags.add_argument('--workers',type=int,required=True); flags.add_argument('--cpu-budget',type=int,required=True)
+    flags.add_argument('--mode',choices=('normal','work'),default='work'); flags.add_argument('--model-service',choices=('none',),required=True)
+    options(flags); chosen=vars(flags.parse_args(argv[7:])); chosen['threads']=1
+    worker_settings(chosen)
     bundles = [(plan['inputs'], Path(argv[5]).parent/plan['bundle_directory'])]
 else:
     raise ValueError('unexpected supervised command')
@@ -3159,18 +3346,26 @@ tar -xzf "$PROOF/qualification_bundle.tgz"
 ```
 
 Run the following two commands on X2-1, sequentially, with its approved
-service window. Twelve requested workers are bounded by the X2 work-mode cap
-and the qualification's full-job memory estimates. The phaseb environment
+service window. Review the load sheet first. Set `WORKERS` intentionally on each host (24
+below is an example); the reasoned target bypasses the measured configuration
+choice, while the mode cap, CPU budget and per-class memory admission still apply. The phaseb environment
 stays frozen. `--model-service none` prevents an inner service cycle because
 the outer supervisor owns it.
 
 ```bash
+export WORKERS=24
+export OVERRIDE_REASON='Matty: intentional worker target after load-sheet review'
+"$PYTHON" -B -m v3.production_runner load-sheet "$PROOF/qualification/plan.json" \
+  --profile x2 --workers "$WORKERS" --cpu-budget 32 --threads 1 --mode work \
+  --override-reason "$OVERRIDE_REASON" --operator Matty --memory-headroom 0.8
 "$PYTHON" -B "$PROOF/supervise.py" llm "$PROOF/service/reference" \
   "$PYTHON" -B -m v3.qualification_a11 run "$PROOF/qualification/plan.json" \
-  "$PROOF/qualification/reference.json" --profile x2 --workers 12 --cpu-budget 32 --mode work --model-service none
+  "$PROOF/qualification/reference.json" --profile x2 --workers "$WORKERS" --cpu-budget 32 --mode work --model-service none \
+  --override-reason "$OVERRIDE_REASON" --operator Matty --memory-headroom 0.8
 "$PYTHON" -B "$PROOF/supervise.py" llm "$PROOF/service/x2_1_qualification" \
   "$PYTHON" -B -m v3.qualification_a11 run "$PROOF/qualification/plan.json" \
-  "$PROOF/qualification/x2_1.json" --profile x2 --workers 12 --cpu-budget 32 --mode work --model-service none
+  "$PROOF/qualification/x2_1.json" --profile x2 --workers "$WORKERS" --cpu-budget 32 --mode work --model-service none \
+  --override-reason "$OVERRIDE_REASON" --operator Matty --memory-headroom 0.8
 llm status
 ```
 
@@ -3179,9 +3374,15 @@ record back by hash. Neither a qualification nor a proof is resumed after
 an interrupted execution.
 
 ```bash
+export WORKERS=24
+export OVERRIDE_REASON='Matty: intentional worker target after load-sheet review'
+"$PYTHON" -B -m v3.production_runner load-sheet "$PROOF/qualification/plan.json" \
+  --profile x2 --workers "$WORKERS" --cpu-budget 32 --threads 1 --mode work \
+  --override-reason "$OVERRIDE_REASON" --operator Matty --memory-headroom 0.8
 "$PYTHON" -B "$PROOF/supervise.py" guppi "$PROOF/service/x2_2_qualification" \
   "$PYTHON" -B -m v3.qualification_a11 run "$PROOF/qualification/plan.json" \
-  "$PROOF/qualification/x2_2.json" --profile x2 --workers 12 --cpu-budget 32 --mode work --model-service none
+  "$PROOF/qualification/x2_2.json" --profile x2 --workers "$WORKERS" --cpu-budget 32 --mode work --model-service none \
+  --override-reason "$OVERRIDE_REASON" --operator Matty --memory-headroom 0.8
 sha256sum "$PROOF/qualification/x2_2.json" "$PROOF/service/x2_2_qualification/service.json" \
   > "$PROOF/qualification/x2_2.sha256"
 tar -czf "$PROOF/x2_2_qualification.tgz" "$PROOF/qualification/x2_2.json" \
@@ -3214,7 +3415,7 @@ for name, file in [('yotko-evo-x2','x2_1'),('yotko-evo-x2-2','x2_2')]:
     assert e['reference']['host']=='yotko-evo-x2'
     hosts[name]=dict(qualification=str(path),qualification_plan_sha256=e['plan']['sha256'],
                      settings=e['candidate']['settings'],
-                     memory_floor_gb=15.0294970368)
+                     memory_floor_gb=0.)
 atomic_json(p/'hosts.json',hosts)
 PY
 "$PYTHON" -B -m v3.compatibility_shards_a11 project --sources "$PROOF/sources.json" \
@@ -3227,15 +3428,22 @@ freezing. The operator approves these exact host entries and the projection
 against stage 1 headroom. `project` reads sealed specs only and reports totals
 and rates, never outcomes or capability slices. It assumes the subsequent
 configuration test selects its stated conservative worker counts; a smaller
-chosen count extends the wall estimate. The full-job floor above is the prep's
-maximum observed RSS times 1.2. It supplements each registered class and phase
-estimate. At 127.1 GB available, the 80 percent budget is 101.68 GB and six
-15.0295 GB jobs fit. The runtime also checks current available memory.
-
-Freeze once on X2-1, after that approval. The attempt includes the deterministic
-cost/rate shard assignment, qualifications, source hashes and two inventories
-per host, one for proof inputs and one for configuration inputs. Staging reads
-the old inputs without modifying them. No selected proof job executes here.
+chosen count extends the wall estimate unless a reasoned override is supplied.
+Scheduling uses the ratio of summed per-job worker seconds for the same
+qualification jobs. It does not multiply an elapsed concurrency gain by the
+worker count again. Older evidence without per-job times is accepted for
+scheduling only when its effective worker counts match. The existing
+elapsed-time participation rate and ledger charge remain unchanged.
+The proof derives each class's measured peak from original completion timing
+records and legacy completion-envelope metadata already loaded for the required
+comparison, using the registered class estimate only when RSS is absent from
+both. Historical phase-derived class estimates use the sealed value until a
+class peak exists, then use the existing per-job planning formula with that
+peak's 1.2 margin; the old sealed plan is never edited.
+Each job reserves the larger of its own registered estimate and that class's
+peak times 1.2. The runtime also checks current available memory. A global
+maximum is never multiplied by every running job. Review the load sheet before
+both supervised shard launches and record every override's reason.
 
 ```bash
 "$PYTHON" -B -m v3.compatibility_shards_a11 freeze --sources "$PROOF/sources.json" \
@@ -3277,20 +3485,30 @@ its selected jobs once. A live memory dip while no job is active also waits
 up to 1,800 seconds (30 minutes) after the start marker before failing; pre-marker
 configuration waits remain bounded at 180 seconds. `preflight.json` records setup refusal; if no
 `started.json` or `result.json` exists, retry the same shard in the same checkout
-and root, using a fresh service-log directory. Never remove a start marker. The tests cover the host's work-mode cap
-subject to full-job memory admission and include the cap itself. Chosen counts,
+and root, using a fresh service-log directory. Never remove a start marker.
+The tests cover the usable mode or explicit worker target, subject to each
+class's memory admission. A uniform profile tests only counts its own class can
+fill; mixed profiles pack their individual reservations. Chosen counts,
 admission traces, elapsed intervals and hashes are in the sealed shard result.
-The tests reach the memory-safe mode cap even when the subsequent proof's
-requested worker limit is smaller; selection for the proof obeys that limit.
+Configuration candidates use the same per-class admission. A live lower target
+reduces dispatch during configuration too. Every live target is persisted with
+its actor, timestamp and optional reason. Zero pauses without spending a proof
+by interruption; an idle memory wait is reset while the target is zero.
 
 ```bash
 # X2-1:
+"$PYTHON" -B -m v3.compatibility_shards_a11 load-sheet "$PROOF/proof.attempt.json" --host yotko-evo-x2 \
+  --workers "$WORKERS" --override-reason "$OVERRIDE_REASON" --operator Matty --memory-headroom 0.8
 "$PYTHON" -B "$PROOF/supervise.py" llm "$PROOF/service/x2_1_proof" \
-  "$PYTHON" -B -m v3.compatibility_shards_a11 run "$PROOF/proof.attempt.json" --host yotko-evo-x2
+  "$PYTHON" -B -m v3.compatibility_shards_a11 run "$PROOF/proof.attempt.json" --host yotko-evo-x2 \
+  --workers "$WORKERS" --override-reason "$OVERRIDE_REASON" --operator Matty --memory-headroom 0.8
 llm status
 # X2-2:
+"$PYTHON" -B -m v3.compatibility_shards_a11 load-sheet "$PROOF/proof.attempt.json" --host yotko-evo-x2-2 \
+  --workers "$WORKERS" --override-reason "$OVERRIDE_REASON" --operator Matty --memory-headroom 0.8
 "$PYTHON" -B "$PROOF/supervise.py" guppi "$PROOF/service/x2_2_proof" \
-  "$PYTHON" -B -m v3.compatibility_shards_a11 run "$PROOF/proof.attempt.json" --host yotko-evo-x2-2
+  "$PYTHON" -B -m v3.compatibility_shards_a11 run "$PROOF/proof.attempt.json" --host yotko-evo-x2-2 \
+  --workers "$WORKERS" --override-reason "$OVERRIDE_REASON" --operator Matty --memory-headroom 0.8
 ```
 
 Verify GUPPI's restored `llm-flashnext` health and both supervisors' zero

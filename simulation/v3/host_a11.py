@@ -213,6 +213,9 @@ class Client:
                 self.latest = self.call('heartbeat')
                 control = self.latest.get('control', {})
                 status = self.latest.get('status', {})
+                path = scratch / 'control.json'
+                current = read(path) if path.exists() else {}
+                atomic_json(path, current | control | dict(stop_dispatch=bool(control.get('drain') or any(status.get('stops', {}).values()))))
                 if control.get('interrupt_now') or status.get('halt') or status.get('hard_stop'):
                     self.lost.set()
             except Rejected as exc:
@@ -245,7 +248,8 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
         raise ValueError('host identity injection is loopback only')
     host = host or platform.node()
     environment = environment or fingerprint()
-    settings = dict(settings, caps=caps(settings['profile'], settings['cpu_budget']))
+    from . import worker_control as wc
+    settings = wc.settings(settings)
     if settings['cpu_budget'] > available_cpus() or settings['threads'] != 1:
         raise ValueError('worker CPU or thread budget invalid')
     spec = transport.call({'op': 'inspect'})['spec']
@@ -255,14 +259,14 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
         'code_commit': spec['pull_dispatch']['code_commit'], 'settings': settings, 'service': service})
     client = Client(transport, host, joined['session'], joined['lease_seconds'])
     heartbeat = threading.Thread(target=client.watch, args=(scratch,), daemon=True)
+    atomic_json(scratch / 'control.json', dict(mode=settings['mode'], max_workers=settings['workers'],
+        stop_dispatch=False, interrupt_now=False) | joined.get('control', {}))
     heartbeat.start()
     active, views, measurements_by_phase = {}, {}, {}
     context = mp.get_context('spawn')
     started = time.monotonic()
     error = None
     try:
-        atomic_json(scratch / 'control.json', {'mode': settings['mode'], 'max_workers': settings['workers'],
-                                              'stop_dispatch': False, 'interrupt_now': False})
         atomic_json(scratch / 'host_session.json', {'host': host, 'session': joined['session'], 'code_hash': code_identity(), 'settings': settings})
         # Run all phase profiles on join, just as the existing runner does.
         # Inputs for configuration plain validation are self-contained.
@@ -276,16 +280,8 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
                 atomic_json(scratch / 'configuration_skipped' / (phase + '.json'), {'reason': 'plain projection requires measured fit configuration'})
                 continue
             view = synchronize(client, scratch, phase, True)
-            estimates = [spec['pull_dispatch']['cost_classes'][spec['pull_dispatch']['job_classes'][j['id']]]['memory_gb']
-                         for j in spec['jobs'] if j['config']['phase'] == phase]
-            estimates.append(max(.01, spec.get('memory_estimate_gb', {}).get(phase, .01)))
-            available = mem_available_bytes()
-            if available is None or available * .8 / 1e9 < max(estimates):
-                atomic_json(scratch / 'configuration_skipped' / (phase + '.json'), {'reason': 'phase configuration does not fit measured memory'})
-                continue
-            cap = max(1, int(available * .8 / 1e9 / max(estimates)))
             measurements = configuration_test(scratch, phase, profile, settings, deadline, joined['session'],
-                                               memory_cap=cap, input_snapshot=view)
+                                               input_snapshot=view, job_resources=wc.resources(spec), source_jobs=spec['jobs'], memory_spec=spec)
             client.call('configure', phase=phase, measurements=measurements, input_sha256=view['snapshot_sha256'])
             measurements_by_phase[phase] = measurements
         client.call('configured')
@@ -306,7 +302,9 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
                     if target.with_suffix('.scientific_halt.json').exists():
                         client.call('a13_halt', lease=token)
                     client.call('release', lease=token, reason='worker failed')
-                    raise RuntimeError('remote worker failed: ' + claim['job']['id'])
+                    failure_path = target.with_suffix('.failure.json')
+                    detail = read(failure_path).get('traceback', '') if failure_path.exists() else 'no child failure record'
+                    raise RuntimeError('remote worker failed: ' + claim['job']['id'] + '\n' + detail)
                 raw = target.read_bytes()
                 reply = client.call('complete', lease=token, sha256=hashlib.sha256(raw).hexdigest(), data=base64.b64encode(raw).decode('ascii'))
                 del active[token]
@@ -338,8 +336,7 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
                 if phase not in views:
                     views[phase] = synchronize(client, scratch, phase)
                     client.call('ready', phase=phase, input_sha256=views[phase]['snapshot_sha256'])
-                limit = min(settings['caps'][control.get('mode', settings['mode'])], control.get('max_workers', settings['workers']))
-                selected = choose(measurements_by_phase[phase], limit, settings['cpu_budget'], 1)
+                selected = wc.selection(settings, control, measurements_by_phase[phase])
                 if len(active) >= selected['workers']:
                     time.sleep(.1)
                     continue  # Pull only when a measured worker slot is free.
@@ -438,6 +435,7 @@ def host_service(scratch, profile, model_service=None):
 
 
 def main():
+    from . import worker_control as wc
     p = argparse.ArgumentParser(description=__doc__)
     transport = p.add_mutually_exclusive_group(required=True)
     transport.add_argument('--coordinator')
@@ -448,6 +446,7 @@ def main():
     p.add_argument('--model-service', choices=('llm', 'none'), help='default llm for X2, none for local')
     p.add_argument('--workers', type=int, required=True); p.add_argument('--cpu-budget', type=int, required=True)
     p.add_argument('--mode', choices=('normal', 'work'), default='work')
+    wc.options(p)
     args = p.parse_args()
     if args.local and args.checkout is not None:
         p.error('--local uses the current checkout; omit --checkout')
@@ -455,7 +454,8 @@ def main():
         p.error('--checkout is required with --coordinator')
     configure_threads(1)
     scratch = scoped(args.scratch); scratch.mkdir(parents=True, exist_ok=True)
-    settings = {'profile': args.profile, 'workers': args.workers, 'cpu_budget': args.cpu_budget, 'threads': 1, 'mode': args.mode}
+    settings = {'profile': args.profile, 'workers': args.workers, 'cpu_budget': args.cpu_budget, 'threads': 1, 'mode': args.mode, **wc.arguments(args)}
+    settings = wc.settings(settings)
     from .service import model_service
     if args.model_service is not None:
         settings['model_service'] = args.model_service

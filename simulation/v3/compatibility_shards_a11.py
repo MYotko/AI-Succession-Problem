@@ -24,6 +24,8 @@ from .artifacts import (ROOT, SIMULATION, atomic_json, canonical, code_identity,
                         source_manifest, stable_job, unseal)
 from .compatibility_a10 import _require, _selected, _stratum, collect_record, proof_row, _execute_proof
 
+from . import worker_control as wc
+
 SCHEMA = 'v3-A11-proof-shards-1'
 MEMORY_WAIT_SECONDS = 180.
 PROOF_MEMORY_WAIT_SECONDS = 1800.
@@ -70,7 +72,7 @@ def write_once(path, document):
         raise ValueError('compatibility attempt is final; selection or shard already exists') from exc
 
 
-def memory_budget(limit_gb=None):
+def memory_budget(limit_gb=None, headroom=.8):
     # production_runner.memory_worker_cap and multihost_a11.Coordinator.claim:
     # 80% of available memory, bounded by the host's qualified memory.
     from .production_runner import mem_available_bytes
@@ -78,17 +80,18 @@ def memory_budget(limit_gb=None):
     _require(available is not None and available > 0, 'proof needs measured available memory')
     if limit_gb is not None:
         _require(positive(limit_gb), 'invalid qualified memory')
-    return .8 * min(available / 1e9, limit_gb if limit_gb is not None else math.inf)
+    _require(positive(headroom) and headroom <= .95, "invalid memory headroom")
+    return headroom * min(available / 1e9, limit_gb if limit_gb is not None else math.inf)
 
 
-def wait_for_memory(required, limit_gb=None, *, timeout=MEMORY_WAIT_SECONDS):
+def wait_for_memory(required, limit_gb=None, *, timeout=MEMORY_WAIT_SECONDS, headroom=.8):
     """Bound the idle wait separately for repeatable setup and final proof work."""
     _require(positive(required), 'invalid required memory')
     _require(positive(timeout), 'invalid memory wait bound')
-    _require(limit_gb is None or required <= .8 * limit_gb, 'proof job exceeds qualified memory budget')
+    _require(limit_gb is None or required <= headroom * limit_gb, 'proof job exceeds qualified memory budget')
     deadline = time.monotonic() + timeout
     while True:
-        budget = memory_budget(limit_gb)
+        budget = memory_budget(limit_gb, headroom)
         if budget >= required:
             return budget
         remaining = deadline - time.monotonic()
@@ -102,29 +105,38 @@ def resource_estimate(spec, job):
     if pull:
         key = pull['job_classes'][job['id']]
         cls = pull['cost_classes'][key]
-        seconds, memory = cls['worker_seconds'], cls['memory_gb']
+        resource = wc.resources(spec, [job])[job['id']]
+        seconds, memory = cls['worker_seconds'], wc.reservation(resource, {})
         _require(positive(seconds) and positive(memory), 'invalid registered cost class')
     else:
         _require(not spec.get('registered'), 'registered proof needs its registered cost classes')
-        key, seconds, memory = phase, 1., .25
-    memory = max(memory, spec.get('memory_estimate_gb', {}).get(phase, memory))
+        resource = wc.resources(spec, [job])[job['id']]
+        key, seconds, memory = resource['memory_class'], 1., wc.reservation(resource, {})
     _require(positive(memory), 'invalid phase memory estimate')
-    return dict(worker_seconds=seconds, memory_gb=memory,
-                memory_class=digest([spec['code_hash'], pull.get('projection_sha256') if pull else None, key]))
+    return dict(worker_seconds=seconds, memory_gb=memory, planning_memory_gb=resource['memory_gb'],
+                memory_known=resource['memory_known'], memory_class=digest([spec['code_hash'], pull.get('projection_sha256') if pull else None, key]))
 
 
 def worker_cap(settings):
-    from .production_runner import caps, available_cpus
     _require(settings['threads'] == 1 and settings['mode'] == 'work', 'proof requires one thread and work mode')
-    _require(type(settings['workers']) is int and settings['workers'] > 0, 'invalid requested workers')
-    _require(0 < settings['cpu_budget'] <= available_cpus(), 'CPU budget exceeds this host')
-    return min(settings['workers'], caps(settings['profile'], settings['cpu_budget'])['work'])
+    return wc.selection(wc.settings(settings, local=False))['workers']
 
 
-def run_items(items, workers, budget, *, memory_floor_gb=0., idle_wait_seconds=PROOF_MEMORY_WAIT_SECONDS):
+
+def informational_status(path, value):
+    """Status is not proof evidence. At most two attempts, never spend a round."""
+    for attempt in range(2):
+        try:
+            atomic_json(path, value)
+            return True
+        except OSError:
+            if attempt == 0: time.sleep(.01)
+    return False
+
+def run_items(items, workers, budget, *, memory_floor_gb=0., idle_wait_seconds=PROOF_MEMORY_WAIT_SECONDS, control_path=None, host_settings=None, class_peaks=None, headroom=.8, fixed_workers=None):
     """Longest fitting job first, one submission per job, no worker retries.
 
-    Registered estimates plus the observed full-job floor are reservations.
+    Registered estimates plus each class's own measured peak are reservations.
     Completed peak RSS raises its class estimate by the runner's 1.2 margin.
     The current MemAvailable check also protects against unrelated allocations.
     """
@@ -137,15 +149,30 @@ def run_items(items, workers, budget, *, memory_floor_gb=0., idle_wait_seconds=P
     for item in pending:
         r = item['resources']
         _require(positive(r['memory_gb']) and positive(r['worker_seconds']), 'invalid scheduling estimate')
-        estimates[r['memory_class']] = max(estimates.get(r['memory_class'], 0), r['memory_gb'], memory_floor_gb)
+        estimates[r['memory_class']] = max(estimates.get(r['memory_class'], 0), r['memory_gb'], (class_peaks or {}).get(r['memory_class'], 0.))
     _require(all(m <= budget for m in estimates.values()), 'proof job exceeds host memory budget')
-    active, results, trace = {}, {}, []
+    active, results, trace, idle_since = {}, {}, [], None
+    next_status = 0.
+    authority_peaks = {i['resources']['memory_class']: i['resources'].get('measured_memory_gb', 0.) for i in items}
+    for key, value in (class_peaks or {}).items():
+        authority_peaks[key] = max(authority_peaks.get(key, 0.), value)
     configure_threads(1)
-    with ProcessPoolExecutor(max_workers=workers, mp_context=mp.get_context('spawn'), max_tasks_per_child=1) as pool:
+    pool_limit = host_settings['cpu_budget'] if host_settings else workers
+    with ProcessPoolExecutor(max_workers=pool_limit, mp_context=mp.get_context('spawn'), max_tasks_per_child=1) as pool:
         while pending or active:
+            if control_path is not None:
+                control = read(control_path)
+                selected = wc.selection(host_settings, control, fixed=dict(workers=fixed_workers, threads=1) if fixed_workers else None)
+                workers = wc.memory_safe_selection(host_settings, control,
+                    {i['job']['id']: i['resources'] for i in items}, authority_peaks, selected,
+                    configuration_trial=fixed_workers is not None and all(i['job']['tag'] == 'configuration' for i in items))['workers']
+                if time.monotonic() >= next_status:
+                    informational_status(Path(control_path).with_name('scheduling.json'), dict(target=workers, running=len(active),
+                        pending=len(pending), active_job_ids=[i['job']['id'] for i, _ in active.values()]))
+                    next_status = time.monotonic() + 1.
             occupied = sum(max(m, estimates[i['resources']['memory_class']]) for i, m in active.values())
             while len(active) < workers and pending:
-                free = min(budget - occupied, memory_budget())
+                free = min(budget - occupied, memory_budget(None, headroom))
                 index = next((i for i, item in enumerate(pending)
                               if estimates[item['resources']['memory_class']] <= free), None)
                 if index is None:
@@ -157,13 +184,21 @@ def run_items(items, workers, budget, *, memory_floor_gb=0., idle_wait_seconds=P
                 trace.append(dict(job_id=item['job']['id'], reserved_gb=needed,
                                   running_gb=occupied, running=len(active), budget_gb=budget))
             if not active and pending:
+                if workers == 0:
+                    idle_since = None
+                    time.sleep(.1)
+                    continue
                 required = min(estimates[i['resources']['memory_class']] for i in pending)
                 _require(required <= budget, 'observed proof memory exceeds frozen budget; attempt spent')
-                wait_for_memory(required, timeout=idle_wait_seconds)
+                if idle_since is None: idle_since = time.monotonic()
+                _require(time.monotonic() - idle_since < idle_wait_seconds,
+                         f'memory not released within {idle_wait_seconds:g} seconds')
+                time.sleep(1.)
                 continue
+            idle_since = None
             if not active:
                 break
-            finished, _ = wait(active, return_when=FIRST_COMPLETED)
+            finished, _ = wait(active, timeout=.1, return_when=FIRST_COMPLETED)
             for future in finished:
                 item, _ = active.pop(future)
                 result = future.result()
@@ -172,26 +207,30 @@ def run_items(items, workers, budget, *, memory_floor_gb=0., idle_wait_seconds=P
                 if peak:
                     key = item['resources']['memory_class']
                     estimates[key] = max(estimates[key], 1.2 * peak / 1e9)
+                    authority_peaks[key] = max(authority_peaks.get(key, 0.), 1.2 * peak / 1e9)
+                    if class_peaks is not None: class_peaks[key] = max(class_peaks.get(key, 0.), 1.2 * peak / 1e9)
     return results, trace
 
 
 def assign(items, hosts):
     """Deterministic LPT to least projected finish, cost / measured host rate.
 
-    The conservative slots use each host's largest admitted estimate. Runtime
-    admission may fit additional smaller jobs; neither changes this partition.
+    Packing uses each class reservation, never the largest job as a floor.
+    Runtime controls affect dispatch only and never change this partition.
     """
-    loads = {h: 0. for h in hosts}
-    slots, shards = {}, {h: [] for h in hosts}
-    for h, entry in hosts.items():
-        maximum = max(max(i['resources']['memory_gb'], entry['memory_floor_gb']) for i in items.values())
-        slots[h] = min(entry['worker_cap'], int(.8 * entry['memory_gb'] / maximum))
-        _require(slots[h] >= 1 and positive(entry['relative_throughput']), 'host cannot admit a proof job')
+    shards = {h: [] for h in hosts}
     for jid in sorted(items, key=lambda j: (-items[j]['resources']['worker_seconds'], j)):
-        cost = items[jid]['resources']['worker_seconds']
-        h = min(hosts, key=lambda h: ((loads[h] + cost) / (slots[h] * hosts[h]['relative_throughput']), h))
+        projections = {}
+        for h, entry in hosts.items():
+            rows = [dict(key=j, seconds=items[j]['resources']['worker_seconds'], memory=items[j]['resources']['memory_gb'])
+                    for j in shards[h] + [jid]]
+            wall, _ = wc.packed_wall(rows, entry['worker_cap'],
+                entry['settings'].get('memory_headroom', .8) * entry['memory_gb'] if 'settings' in entry else .8 * entry['memory_gb'],
+                entry.get('per_job_relative_throughput', entry['relative_throughput']))
+            projections[h] = wall if wall is not None else math.inf
+        h = min(hosts, key=lambda name: (projections[name], name))
+        _require(math.isfinite(projections[h]), 'host cannot admit a proof job')
         shards[h].append(jid)
-        loads[h] += cost
     _require(all(shards.values()), 'empty proof shard')
     return shards
 
@@ -280,30 +319,32 @@ def qualification_bundle(sources, output):
     for source in sources:
         spec = unseal(read(source['spec']))
         for phase, profile in spec['configuration'].items():
-            memory = max([spec.get('memory_estimate_gb', {}).get(phase, .25)] +
-                         [resource_estimate(spec, j)['memory_gb'] for j in spec['jobs']
-                          if j['config'].get('phase', j['kind']) == phase])
             for cfg in profile.get('configs', [profile['config']]):
-                by_kind.setdefault(profile['kind'], []).append((dict(cfg, phase=phase), source['root'], memory))
-    jobs, items, roots, estimates = [], [], {}, {}
+                prototype = stable_job(profile['kind'], dict(cfg, phase=phase), 'configuration', 0)
+                resource = wc.configuration_resources([prototype], spec['jobs'], wc.resources(spec), phase=phase, spec=spec)[prototype['id']]
+                by_kind.setdefault(profile['kind'], []).append((dict(cfg, phase=phase), source['root'], resource))
+    jobs, items, roots, estimates, memory_classes, memory_known = [], [], {}, {}, {}, {}
     for kind in sorted(by_kind):
         configs = sorted(by_kind[kind], key=lambda c: digest(['A11-qualification-short', c[0]]))
         for index in range(max(20, len(configs))):
-            cfg, root, memory = configs[index % len(configs)]
+            cfg, root, resource = configs[index % len(configs)]
             cfg = deepcopy(cfg)
             if kind.startswith(('a4_', 'a5_', 'a13_')):
                 cfg['seed'] = (1 << 128) | int(digest(['A11-qualification-stream', kind, cfg, index])[:32], 16)
             job = stable_job(kind, cfg, 'validation', index)
             jobs.append(job)
             roots[job['id']] = str(Path(root).resolve() / cfg['phase'])
-            estimates[job['id']] = memory
+            estimates[job['id']] = wc.reservation(resource, {})
+            memory_known[job['id']] = resource['memory_known']
+            memory_classes[job['id']] = resource['memory_class']
             items.append(dict(job=job, phase_root=roots[job['id']]))
     _require(jobs, 'no qualification profiles')
     snapshot = portable_inventory(items)
     bundle = output.parent / (output.stem + '_files')
     plan = dict(schema=QSCHEMA + '-plan', non_registered=True, code_hash=code_identity(), jobs=jobs,
                 kinds=sorted(by_kind), phase_roots=roots, inputs=snapshot, references={},
-                bundle_directory=bundle.name, memory_estimate_gb=estimates,
+                bundle_directory=bundle.name, memory_estimate_gb=estimates, memory_classes=memory_classes,
+                memory_estimate_known=memory_known,
                 selection='A11 deterministic short configuration profiles, at least 20 per kind',
                 comparison='A11 canonical job plus result')
     stage_inputs(snapshot, bundle)
@@ -312,7 +353,7 @@ def qualification_bundle(sources, output):
 
 
 def validate_hosts(hosts, code, items, original):
-    from .qualification_a11 import validate_evidence
+    from .qualification_a11 import validate_evidence, scheduling_rate
     from .production_runner import caps
     _require(hosts and original in hosts, 'missing original proof host')
     for name, entry in hosts.items():
@@ -327,8 +368,9 @@ def validate_hosts(hosts, code, items, original):
         _require(settings == evidence['candidate']['settings'], 'qualification settings mismatch')
         _require(settings['threads'] == 1 and settings['mode'] == 'work'
                  and type(settings['workers']) is int and settings['workers'] > 0, 'invalid proof settings')
-        entry['worker_cap'] = min(settings['workers'], caps(settings['profile'], settings['cpu_budget'])['work'])
+        entry['worker_cap'] = worker_cap(settings)
         entry['relative_throughput'] = evidence['relative_throughput']
+        entry['per_job_relative_throughput'] = scheduling_rate(evidence)
         entry['memory_gb'] = evidence['candidate']['memory_gb']
         entry['fingerprint'] = evidence['candidate']['fingerprint']
         floor = entry.setdefault('memory_floor_gb', 0.)
@@ -406,22 +448,23 @@ def configure_host(p, host, root, budget, view):
     for key in sorted({p['items'][j]['profile_key'] for j in p['assignments'][host]}):
         info = p['profiles'][key]
         profile = info['profile']
-        memory = max(entry['memory_floor_gb'], max(i['resources']['memory_gb'] for i in p['items'].values() if i['profile_key'] == key))
+        sources = [i['job'] for i in p['items'].values() if i['profile_key'] == key]
+        resources = {i['job']['id']: dict(i['resources'], estimated_seconds=i['resources']['worker_seconds']) for i in p['items'].values()}
         requested = worker_cap(settings)
-        cap = min(caps(settings['profile'], settings['cpu_budget'])[settings['mode']], int(budget / memory))
+        cap = settings['cpu_budget'] if settings.get('operator_override') else caps(settings['profile'], settings['cpu_budget'])[settings['mode']]
+        own_cap = wc.profile_memory_limit(profile, sources, resources, budget, phase=info.get('phase'))
+        if own_cap is not None: cap = min(cap, own_cap)
         _require(cap >= 1, 'configuration job exceeds memory budget')
         listed = profile['workers_x2' if settings['profile'] == 'x2' else 'workers_local']
         if settings['profile'] == 'x2':
             _require({8, 12, 16, 24, 32} <= set(listed), 'missing required X2 configuration candidates')
         # Cover the usable mode cap, including it when absent from the profile.
         candidates = sorted(set(configuration_candidates(listed, cap)) | {cap, min(requested, cap)})
-        measurements, observed = [], memory
+        measurements, peaks = [], {}
         for round_index in range(profile.get('rounds', 2)):
             for count in candidates if round_index % 2 == 0 else reversed(candidates):
                 if count > cap:
                     continue
-                count = min(count, int(budget / observed))
-                _require(count >= 1, 'observed configuration memory exceeds host budget')
                 number = configuration_job_count(profile, count, settings['profile'] == 'x2')
                 _require(number >= count, 'configuration work must occupy every tested worker')
                 configs = profile.get('configs', [profile['config']])
@@ -430,19 +473,21 @@ def configure_host(p, host, root, budget, view):
                     # fixture is the runner's explicitly non-scientific test kind.
                     tag = 'validation' if profile['kind'] == 'fixture' else 'configuration'
                     job = stable_job(profile['kind'], configs[index % len(configs)], tag, round_index * number + index)
+                    resource = wc.configuration_resources([job], sources, resources, phase=info.get('phase'))[job['id']]
                     tasks.append(dict(job=job, phase_root=info['phase_root'], producing_code_hash=info['producing_code_hash'],
-                                      input_view=view, resources=dict(worker_seconds=1., memory_gb=memory, memory_class=key)))
+                                      input_view=view, resources=dict(resource, worker_seconds=1.)))
                 before = time.perf_counter()
-                results, trace = run_items(tasks, count, budget, memory_floor_gb=observed,
-                                           idle_wait_seconds=MEMORY_WAIT_SECONDS)
-                observed = max(observed, *(1.2 * (r.get('_peak_rss_bytes') or 0) / 1e9 for r in results.values()))
+                control_path = root / 'control.json'
+                results, trace = run_items(tasks, count, budget, class_peaks=peaks, headroom=settings.get('memory_headroom', .8),
+                    control_path=control_path if control_path.exists() else None, host_settings=settings, fixed_workers=count,
+                    idle_wait_seconds=MEMORY_WAIT_SECONDS)
                 valid = all(r['after_sha256'] is not None for r in results.values())
-                measurements.append(dict(workers=count, threads=1, completed=len(results), valid=valid, round=round_index,
+                measurements.append(dict(workers=max((t['running'] for t in trace), default=count), requested_workers=count, threads=1, completed=len(results), valid=valid, round=round_index,
                     wall_seconds=time.perf_counter() - before, job_seconds=[r.get('_worker_seconds', 0) for r in results.values()], admission=trace))
                 atomic_json(root / 'configuration' / (key + '.json'), seal(measurements))
                 _require(valid, 'configuration test failed before proof start; shard remains retryable')
-        configured[key] = dict(measurements=measurements, observed_memory_gb=observed,
-                               chosen=choose(measurements, min(requested, cap), settings['cpu_budget'], 1))
+        configured[key] = dict(measurements=measurements, class_peaks_gb=peaks,
+                               chosen=wc.selection(settings, measurements=measurements))
     return configured
 
 
@@ -453,15 +498,18 @@ def preflight(p, host, root):
              for kind, snapshot in p['snapshots'][host].items()}
     check_input_paths(items, views['proof'])
     check_input_paths(configuration_items(items, p['profiles']), views['configuration'])
-    required = max(entry['memory_floor_gb'], *(i['resources']['memory_gb'] for i in items))
-    budget = wait_for_memory(required, entry.get('memory_gb'))
+    control_path = root / 'control.json'
+    wc.require_memory_authority(entry['settings'], read(control_path) if control_path.exists() else None,
+        {i['job']['id']: i['resources'] for i in items},
+        {i['resources']['memory_class']: i['resources'].get('measured_memory_gb', 0.) for i in items})
+    required = max(i['resources']['memory_gb'] for i in items)
+    budget = wait_for_memory(required, entry.get('memory_gb'), headroom=entry['settings'].get('memory_headroom', .8))
     configuration = configure_host(p, host, root, budget, views['configuration'])
-    floor = max(entry['memory_floor_gb'], *(c['observed_memory_gb'] for c in configuration.values()))
-    budget = min(budget, wait_for_memory(max(required, floor), entry.get('memory_gb')))
-    return views, configuration, floor, budget
+    budget = min(budget, wait_for_memory(required, entry.get('memory_gb'), headroom=entry['settings'].get('memory_headroom', .8)))
+    return views, configuration, 0., budget
 
 
-def single_preflight(record, items, profiles, target, workers, floor):
+def single_preflight(record, items, profiles, target, workers, floor, settings=None):
     """The legacy one-host API has the same preconditions before reservation."""
     from .production_runner import available_cpus
     profiles = deepcopy(profiles)
@@ -471,13 +519,13 @@ def single_preflight(record, items, profiles, target, workers, floor):
             profiles[item['profile_key']] = dict(phase_root=item['phase_root'],
                 producing_code_hash=item['producing_code_hash'], profile=dict(kind='fixture',
                     config=dict(seconds=.001), workers_local=[1, 2], rounds=1, jobs_per_worker=1))
-    settings = dict(profile='local', workers=workers, cpu_budget=min(16, available_cpus()), threads=1, mode='work')
+    settings = settings or dict(profile='local', workers=workers, cpu_budget=min(16, available_cpus()), threads=1, mode='work')
     name = platform.node()
     p = dict(items=items, profiles=profiles, assignments={name: list(items)},
              hosts={name: dict(settings=settings, memory_floor_gb=floor)}, snapshots={name: dict(
                  proof=portable_inventory(list(items.values())),
                  configuration=portable_inventory(configuration_items(list(items.values()), profiles)))})
-    root = target.with_suffix('.preflight')
+    root = target.with_suffix('.workers')
     for kind, snapshot in p['snapshots'][name].items():
         stage_inputs(snapshot, root / (kind + '_files'))
     views, configuration, floor, budget = preflight(p, name, root)
@@ -487,23 +535,38 @@ def single_preflight(record, items, profiles, target, workers, floor):
     return views['proof'], configuration, floor, budget, workers
 
 
-def run_shard(path, host):
+def run_shard(path, host, *, workers=None, override_reason=None, operator=None, memory_headroom=None):
     from .host_a11 import fingerprint
     p = load_attempt(path)
     _require(host in p['hosts'] and platform.node() == host, 'shard must run on its recorded host')
     entry = p['hosts'][host]
+    execution = deepcopy(p)
+    runtime_settings = dict(entry['settings'])
+    if workers is not None and not override_reason:
+        raise ValueError('initial proof worker override requires --override-reason')
+    if workers is not None: runtime_settings['workers'] = workers
+    if override_reason is not None:
+        runtime_settings.update(override_reason=override_reason, operator=operator)
+        runtime_settings.pop('operator_override', None)
+    if memory_headroom is not None: runtime_settings['memory_headroom'] = memory_headroom
+    runtime_settings = wc.settings(runtime_settings)
+    execution['hosts'][host]['settings'] = runtime_settings
     root = host_directory(path, host)
+    control_path = root / 'control.json'
     result_path = root / 'result.json'
     _require(not result_path.exists() and not (root / 'started.json').exists(), 'shard attempt is final')
+    wc.initial_control(root, runtime_settings)
     before = dict(attempt_sha256=digest(p), host=host, passed=False, memory_wait_seconds=MEMORY_WAIT_SECONDS)
     try:
         environment = fingerprint()
         _require(environment == entry['fingerprint'], 'qualified host fingerprint changed')
-        cap = worker_cap(entry['settings'])
-        views, configuration, floor, budget = preflight(p, host, root)
+        cap = worker_cap(runtime_settings)
+        views, configuration, floor, budget = preflight(execution, host, root)
         # Recheck the binding and code after repeatable configuration work.
         load_attempt(path)
         _require(fingerprint() == environment, 'qualified host fingerprint changed during preflight')
+        workers = cap if runtime_settings.get('operator_override') else min(cap, *(c['chosen']['workers'] for c in configuration.values()))
+        wc.configuration_target(root, workers)
         before.update(passed=True, memory_budget_gb=budget, configuration=configuration)
     except BaseException as exc:
         before['error'] = type(exc).__name__ + ': ' + str(exc)
@@ -515,14 +578,17 @@ def run_shard(path, host):
                                                preflight_sha256=digest(before))))
     result = dict(schema=SCHEMA + '-result', attempt_sha256=digest(p), host=host, fingerprint=environment,
                   code_commit=p['code_commit'], code_hash=p['new_code_hash'], job_ids=p['assignments'][host],
-                  started_epoch=started, memory_budget_gb=budget, passed=False, proofs=[])
+                  started_epoch=started, memory_budget_gb=budget, settings=runtime_settings, passed=False, proofs=[])
     try:
         result['configuration'] = configuration
         # One process pool shares the most conservative measured count across
         # mixed phases. LPT still uses each original job's registered class.
-        workers = min(cap, *(c['chosen']['workers'] for c in configuration.values()))
         tasks = [dict(p['items'][j], input_view=views['proof']) for j in p['assignments'][host]]
-        fresh, trace = run_items(tasks, workers, budget, memory_floor_gb=floor)
+        peaks = {}
+        for cfg in configuration.values():
+            for key, value in cfg.get('class_peaks_gb', {}).items(): peaks[key] = max(peaks.get(key, 0.), value)
+        fresh, trace = run_items(tasks, workers, budget, control_path=control_path, host_settings=runtime_settings,
+                                 class_peaks=peaks, headroom=runtime_settings.get('memory_headroom', .8))
         result.update(workers=workers, admission=trace,
                       proofs=[proof_row(p['items'][j], fresh[j]) for j in p['assignments'][host]])
         _require(source_manifest() == p['record']['new_source_manifest'], 'source changed during shard')
@@ -532,6 +598,7 @@ def run_shard(path, host):
         result['error'] = type(exc).__name__ + ': ' + str(exc)
         raise
     finally:
+        result['worker_control'] = read(control_path)
         result['finished_epoch'] = time.time()
         result['x2_equivalent_hours'] = (result['finished_epoch'] - started) * entry['relative_throughput'] / 3600
         atomic_json(result_path, seal(result))
@@ -554,7 +621,7 @@ def combine_inputs(path, p, shard_paths=None):
     found = {f for f in root.rglob('*.json') if f.name in ('result.json', 'started.json')}
     # Also refuse stray JSON copies beside the records, while permitting the
     # documented preflight record and configuration/input subdirectories.
-    found.update(f for f in root.glob('*/*.json') if f.name != 'preflight.json')
+    found.update(f for f in root.glob('*/*.json') if f.name not in ('preflight.json', 'control.json', 'scheduling.json'))
     _require(found == required and all(f.is_file() for f in required),
              'missing, duplicate or extra shard result/start files')
     files, documents = {}, {}
@@ -652,23 +719,63 @@ def project(sources, hosts):
     items = {j: items[j] for j in _selected(populations)}
     hosts = deepcopy(hosts)
     assignments = validate_hosts(hosts, code_identity(), items, platform.node())
-    import heapq
     times, slots = {}, {}
     for name, ids in assignments.items():
         h = hosts[name]
-        memory = max(max(i['resources']['memory_gb'], h['memory_floor_gb']) for i in items.values())
-        slots[name] = min(h['worker_cap'], int(.8 * h['memory_gb'] / memory))
-        free = [0.] * slots[name]
-        for jid in ids:  # assign() has already ordered each shard by registered cost.
-            start = heapq.heappop(free)
-            heapq.heappush(free, start + items[jid]['resources']['worker_seconds'] / h['relative_throughput'])
-        times[name] = max(free)
+        slots[name] = h['worker_cap']
+        rows = [dict(key=j, seconds=items[j]['resources']['worker_seconds'], memory=items[j]['resources']['memory_gb']) for j in ids]
+        times[name], _ = wc.packed_wall(rows, slots[name], h['settings'].get('memory_headroom', .8) * h['memory_gb'], h.get('per_job_relative_throughput', h['relative_throughput']))
+        _require(times[name] is not None, 'host cannot admit a proof job')
     return dict(selected_jobs=len(items), selection_sha256=digest(list(items)), assignment_sha256=digest(assignments),
                 registered_worker_hours=sum(i['resources']['worker_seconds'] for i in items.values()) / 3600,
                 wall_hours=max(times.values()) / 3600,
                 x2_equivalent_hours=sum(times[h] * hosts[h]['relative_throughput'] for h in times) / 3600,
                 relative_throughputs={h: e['relative_throughput'] for h, e in hosts.items()},
                 conditional_worker_counts=slots, condition='configuration test selects these counts; overhead excluded')
+
+
+def control_attempt(path, host, workers, reason=None):
+    p = load_attempt(path)
+    _require(host in p['hosts'], 'foreign shard host')
+    root = host_directory(path, host)
+    _require(not (root / 'result.json').exists(), 'shard attempt is final')
+    runtime_settings = dict(p['hosts'][host]['settings'])
+    items = [p['items'][j] for j in p['assignments'][host]]
+    estimates = {i['job']['id']: i['resources'] for i in items}
+    peaks = {i['resources']['memory_class']: i['resources'].get('measured_memory_gb', 0.) for i in items}
+    if (root / 'preflight.json').exists():
+        for cfg in unseal(read(root / 'preflight.json')).get('configuration', {}).values():
+            for key, value in cfg.get('class_peaks_gb', {}).items():
+                peaks[key] = max(peaks.get(key, 0.), value)
+    return wc.control(root, runtime_settings, workers=workers, reason=reason, estimates=estimates, peaks=peaks)
+
+
+def attempt_load_sheet(path, host=None, *, workers=None, override_reason=None, operator=None, memory_headroom=None):
+    p = load_attempt(path)
+    names = [host] if host else sorted(p['hosts'])
+    result = {}
+    for name in names:
+        _require(name in p['hosts'], 'foreign shard host')
+        entry = p['hosts'][name]
+        planned = dict(entry['settings'])
+        if workers is not None:
+            if not override_reason: raise ValueError('initial proof worker override requires --override-reason')
+            planned['workers'] = workers
+        if override_reason:
+            planned.update(override_reason=override_reason, operator=operator)
+            planned.pop('operator_override', None)
+        if memory_headroom is not None: planned['memory_headroom'] = memory_headroom
+        planned = wc.settings(planned, local=False)
+        items = [p['items'][j] for j in p['assignments'][name]]
+        estimates = {i['job']['id']: dict(memory_class=i['resources']['memory_class'], memory_known=i['resources'].get('memory_known', True),
+            memory_gb=i['resources'].get('registered_memory_gb', i['resources']['memory_gb']),
+            estimated_seconds=i['resources']['worker_seconds'], measured_seconds=i['resources'].get('measured_worker_seconds')) for i in items}
+        peaks = {i['resources']['memory_class']: i['resources'].get('measured_memory_gb', 0.) for i in items}
+        control_path = host_directory(path, name) / 'control.json'
+        result[name] = wc.load_sheet([i['job'] for i in items], estimates, planned, entry['memory_gb'],
+            peaks=peaks, measured_rate=entry.get('per_job_relative_throughput', entry['relative_throughput']),
+            control_value=read(control_path) if control_path.exists() and workers is None and not override_reason else None)
+    return result
 
 
 def main():
@@ -681,6 +788,12 @@ def main():
     f.add_argument('--output', required=True)
     for command in ('stage', 'run'):
         s = sub.add_parser(command); s.add_argument('attempt'); s.add_argument('--host', required=True)
+        if command == 'run':
+            s.add_argument('--workers', type=int); wc.options(s); s.set_defaults(memory_headroom=None)
+    s = sub.add_parser('control'); s.add_argument('attempt'); s.add_argument('--host', required=True)
+    s.add_argument('--workers', type=int, required=True); s.add_argument('--reason')
+    s = sub.add_parser('load-sheet'); s.add_argument('attempt'); s.add_argument('--host')
+    s.add_argument('--workers', type=int); wc.options(s); s.set_defaults(memory_headroom=None)
     c = sub.add_parser('combine'); c.add_argument('attempt')
     c.add_argument('--shard', action='append', help='optional exact cross-check of frozen result paths')
     args = parser.parse_args()
@@ -700,8 +813,12 @@ def main():
             print(dict(selected=len(result['selected_job_ids']), attempt_sha256=digest(result)))
     elif args.command == 'stage':
         print(str(stage(args.attempt, args.host)))
+    elif args.command == 'control':
+        print(control_attempt(args.attempt, args.host, args.workers, args.reason))
+    elif args.command == 'load-sheet':
+        print(attempt_load_sheet(args.attempt, args.host, workers=args.workers, **wc.arguments(args)))
     elif args.command == 'run':
-        result = run_shard(args.attempt, args.host)
+        result = run_shard(args.attempt, args.host, workers=args.workers, **wc.arguments(args))
         print(dict(passed=result['passed'], jobs=len(result['proofs']), x2_equivalent_hours=result['x2_equivalent_hours']))
         return 0 if result['passed'] else 1
     else:
