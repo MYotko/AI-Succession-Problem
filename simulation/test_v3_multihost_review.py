@@ -300,9 +300,11 @@ def test_single_machine_and_multihost_canonical_results_and_record_shape(tmp_pat
         record=a.read(single/'toy/records'/(job['id']+'.json'))
         remote=a.read(root/'toy/records'/(job['id']+'.json'))
         assert set(remote)==set(record)|{'host','lease'}
+        assert record['oom_score_adj']['requested']==remote['oom_score_adj']['requested']==1000
+        assert record['oom_score_adj']['pid'] > 0 and remote['oom_score_adj']['pid'] > 0
         # Timestamps, elapsed time and the host-bearing output's hash naturally
         # differ. Every remaining existing field must match exactly.
-        for key in set(record)-{'completed_epoch','worker_seconds','output_hash'}:
+        for key in set(record)-{'completed_epoch','worker_seconds','output_hash','oom_score_adj'}:
             assert record[key]==remote[key]
 
 

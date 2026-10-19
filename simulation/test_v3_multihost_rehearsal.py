@@ -22,7 +22,7 @@ def initialize(*args, **kwargs):
 def join_x2(root, **overrides):
     return m.rpc(root, dict(op='join', host=X2, fingerprint=FINGERPRINT,
         code_hash=a.code_identity(), code_commit='fixture', settings=dict(X2_SETTINGS, **overrides),
-        service=dict(down_exit_code=0)))
+        service=dict(down_exit_code=0), swap=dict(total_bytes=32*1024**3,free_bytes=32*1024**3)))
 
 
 def journal_states(root):

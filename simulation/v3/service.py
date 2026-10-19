@@ -5,6 +5,7 @@ import signal
 import subprocess
 import time
 from .artifacts import ROOT, atomic_json, read, unseal, scoped, lease
+from .worker_safety import best_effort, metadata_json
 
 
 def model_service(settings):
@@ -27,17 +28,23 @@ def require_service_record(settings, record):
 def without_service(root):
     record = {"host": platform.node(), "model_service": "none", "actions_skipped": True,
               "started_epoch": time.time(), "down_exit_code": None, "up_exit_code": None}
-    atomic_json(root / "service.json", record)
+    metadata_json(root / "service.json", record)
     try:
         yield record
     finally:
         record["finished_epoch"] = time.time()
-        atomic_json(root / "service.json", record)
+        metadata_json(root / "service.json", record)
 
 
 def command(root, action):
-    with (root / ("llm_" + action + ".log")).open("a", encoding="utf-8") as stream:
-        return subprocess.run(["llm", action], stdout=stream, stderr=subprocess.STDOUT, timeout=180, check=False).returncode
+    result = subprocess.run(["llm", action], stdout=subprocess.PIPE,
+                            stderr=subprocess.STDOUT, timeout=180, check=False)
+    path = root / ("llm_" + action + ".log")
+    def write():
+        with scoped(path).open("ab") as stream:
+            stream.write(result.stdout or b'')
+    best_effort(path, write)
+    return result.returncode
 
 
 def run_with_service(spec_path, output_root, settings):
@@ -63,13 +70,14 @@ def run_with_service(spec_path, output_root, settings):
             raise RuntimeError("batch deadline expired before service change")
         record_path = root / "service.json"
         if record_path.exists():
-            atomic_json(root / ("service_previous_" + str(time.time_ns()) + ".json"), read(record_path))
+            previous_path = root / ("service_previous_" + str(time.time_ns()) + ".json")
+            best_effort(previous_path, lambda: atomic_json(previous_path, read(record_path)))
         if selected == "none":
             with without_service(root) as record:
                 return launch(spec_path, root, settings, service_record=record)
         record = {"host": platform.node(), "model_service": selected,
                   "started_epoch": time.time(), "down_exit_code": None, "up_exit_code": None}
-        atomic_json(record_path, record)
+        metadata_json(record_path, record)
         def interrupt(number, frame):
             raise KeyboardInterrupt("service supervisor interrupted")
         previous = {sig: signal.signal(sig, interrupt) for sig in (signal.SIGINT, signal.SIGTERM)}
@@ -77,7 +85,7 @@ def run_with_service(spec_path, output_root, settings):
         try:
             record["down_exit_code"] = command(root, "down")
             record["down_completed_epoch"] = time.time()
-            atomic_json(record_path, record)
+            metadata_json(record_path, record)
             if record["down_exit_code"]:
                 raise RuntimeError("llm down failed")
             result = launch(spec_path, root, settings, service_record=record)
@@ -95,7 +103,7 @@ def run_with_service(spec_path, output_root, settings):
                 record["up_exception"] = repr(exc)
                 error = exc
             record["finished_epoch"] = time.time()
-            atomic_json(record_path, record)
+            metadata_json(record_path, record)
             for sig, handler in previous.items():
                 signal.signal(sig, handler)
         if error is not None:

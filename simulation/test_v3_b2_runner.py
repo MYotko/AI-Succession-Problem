@@ -24,7 +24,7 @@ def measured(workers=(1, 2)):
 
 
 def test_configuration_choice_caps_and_two_thread_slot_budget():
-    assert runner.caps("x2", 32) == {"normal": 31, "work": 28, "configuration": 32}
+    assert runner.caps("x2", 32) == {"normal": 31, "work": 31, "configuration": 32}
     assert runner.caps("local", 16)["work"] == 12
     choices = measured((8, 12, 16, 24, 32))
     assert runner.choose(choices, 31, 32)["workers"] == 24

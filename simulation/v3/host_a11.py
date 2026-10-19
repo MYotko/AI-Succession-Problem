@@ -20,6 +20,7 @@ import traceback
 import uuid
 from .artifacts import (ROOT, SIMULATION, atomic_json, canonical, code_identity, configure_threads,
                         digest, input_view, lease, read, runtime, scoped, source_manifest, unseal)
+from .worker_safety import metadata_json
 
 
 class Rejected(RuntimeError):
@@ -151,6 +152,9 @@ def execute_scratch(target, job, code, phase_root, view, registered, registratio
     from .production_runner import execute, peak_rss_bytes
     configure_threads(1)
     target = scoped(target)
+    from .worker_safety import prefer_worker_oom
+    oom = prefer_worker_oom()
+    metadata_json(target.with_suffix('.oom.json'), oom)
     try:
         if code_identity() != code:
             raise ValueError('worker source changed')
@@ -165,13 +169,13 @@ def execute_scratch(target, job, code, phase_root, view, registered, registratio
                 result = execute(job, registered, registration, root=Path(phase_root))
         atomic_json(target, {'job': job, 'code_hash': code, 'runtime': info, 'result': result,
             'seconds': time.perf_counter() - before, 'started_epoch': epoch, 'finished_epoch': time.time(),
-            'peak_rss_bytes': peak_rss_bytes(), 'host': host, 'lease': token})
+            'peak_rss_bytes': peak_rss_bytes(), 'oom_score_adj': oom, 'host': host, 'lease': token})
     except BaseException as exc:
         from .validation_extension_a13 import ScientificHalt
         from .continuation_validation import OutOfRange
         if job['kind'] == 'a13_validate_plain_ext' and isinstance(exc, (ScientificHalt, OutOfRange)):
             atomic_json(target.with_suffix('.scientific_halt.json'), {'scientific_halt': True})
-        atomic_json(target.with_suffix('.failure.json'), {'job_id': job['id'], 'traceback': traceback.format_exc(),
+        metadata_json(target.with_suffix('.failure.json'), {'job_id': job['id'], 'traceback': traceback.format_exc(),
                     'target': str(target), 'resolved_target': str(target.resolve()), 'scope_root': str(ROOT)})
         raise
 
@@ -252,11 +256,13 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
     settings = wc.settings(settings)
     if settings['cpu_budget'] > available_cpus() or settings['threads'] != 1:
         raise ValueError('worker CPU or thread budget invalid')
+    from .worker_safety import swap_preflight, killed_signal
+    swap = swap_preflight(settings, scratch / 'swap_preflight.json')
     spec = transport.call({'op': 'inspect'})['spec']
     if not isinstance(transport, Loopback):
         verify_commit(spec['pull_dispatch']['code_commit'])
     joined = transport.call({'op': 'join', 'host': host, 'fingerprint': environment, 'code_hash': code_identity(),
-        'code_commit': spec['pull_dispatch']['code_commit'], 'settings': settings, 'service': service})
+        'code_commit': spec['pull_dispatch']['code_commit'], 'settings': settings, 'service': service, 'swap': swap})
     client = Client(transport, host, joined['session'], joined['lease_seconds'])
     heartbeat = threading.Thread(target=client.watch, args=(scratch,), daemon=True)
     atomic_json(scratch / 'control.json', dict(mode=settings['mode'], max_workers=settings['workers'],
@@ -267,17 +273,17 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
     started = time.monotonic()
     error = None
     try:
-        atomic_json(scratch / 'host_session.json', {'host': host, 'session': joined['session'], 'code_hash': code_identity(), 'settings': settings})
+        metadata_json(scratch / 'host_session.json', {'host': host, 'session': joined['session'], 'code_hash': code_identity(), 'settings': settings})
         # Run all phase profiles on join, just as the existing runner does.
         # Inputs for configuration plain validation are self-contained.
         deadline = min(time.time() + spec.get('configuration_seconds', 900),
                        time.time() + (max_seconds or spec['wall_seconds']))
         for phase, profile in spec['configuration'].items():
             if profile['kind'] not in joined['qualified_kinds']:
-                atomic_json(scratch / 'configuration_skipped' / (phase + '.json'), {'reason': 'job kind not qualified'})
+                metadata_json(scratch / 'configuration_skipped' / (phase + '.json'), {'reason': 'job kind not qualified'})
                 continue
             if phase == 'validate_plain' and 'fit' not in measurements_by_phase:
-                atomic_json(scratch / 'configuration_skipped' / (phase + '.json'), {'reason': 'plain projection requires measured fit configuration'})
+                metadata_json(scratch / 'configuration_skipped' / (phase + '.json'), {'reason': 'plain projection requires measured fit configuration'})
                 continue
             view = synchronize(client, scratch, phase, True)
             measurements = configuration_test(scratch, phase, profile, settings, deadline, joined['session'],
@@ -298,7 +304,12 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
                 if process.is_alive():
                     continue
                 process.join()
-                if process.exitcode or not target.exists():
+                if not target.exists() and killed_signal(process.exitcode):
+                    reply = client.call('release', lease=token, reason='worker signal kill', signal=killed_signal(process.exitcode))
+                    del active[token]
+                    if reply.get('halt'): raise RuntimeError('worker exhausted three signal reruns')
+                    continue  # A fresh claim performs both memory guards again.
+                if (process.exitcode and not killed_signal(process.exitcode)) or not target.exists():
                     if target.with_suffix('.scientific_halt.json').exists():
                         client.call('a13_halt', lease=token)
                     client.call('release', lease=token, reason='worker failed')
@@ -336,15 +347,16 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
                 if phase not in views:
                     views[phase] = synchronize(client, scratch, phase)
                     client.call('ready', phase=phase, input_sha256=views[phase]['snapshot_sha256'])
-                selected = wc.selection(settings, control, measurements_by_phase[phase])
-                if len(active) >= selected['workers']:
+                slots = wc.profile_slots(settings, control, phase,
+                    [claim['job']['config']['phase'] for _, _, claim in active.values()], measurements_by_phase[phase])
+                if not slots:
                     time.sleep(.1)
                     continue  # Pull only when a measured worker slot is free.
                 available = mem_available_bytes()
                 if available is None:
                     raise RuntimeError('cannot measure host memory headroom')
                 reply = client.call('claim', memory_available_gb=available / 1e9,
-                                    max_jobs=min(32, selected['workers'] - len(active)))
+                                    max_jobs=min(32, slots))
                 if 'status' in reply:
                     client.latest['status'] = reply['status']
                     client.latest['phase'] = reply['status']['phase']
@@ -388,7 +400,7 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
             pass  # Coordinator expiry is authoritative; no local completion.
         if hasattr(transport, 'close'):
             transport.close()
-        atomic_json(scratch / 'host_exit.json', {'host': host, 'epoch': time.time(), 'error': repr(error) if error else None,
+        metadata_json(scratch / 'host_exit.json', {'host': host, 'epoch': time.time(), 'error': repr(error) if error else None,
                                                'unpublished_inflight': list(active), 'contact_lost': client.lost.is_set()})
     if error:
         raise error
@@ -416,7 +428,7 @@ def host_service(scratch, profile, model_service=None):
         previous = {s: signal.signal(s, interrupt) for s in (signal.SIGINT, signal.SIGTERM)}
         try:
             record['down_exit_code'] = command(scratch, 'down')
-            atomic_json(scratch / 'service.json', record)
+            metadata_json(scratch / 'service.json', record)
             if record['down_exit_code']:
                 raise RuntimeError('llm down failed')
             yield record
@@ -426,7 +438,7 @@ def host_service(scratch, profile, model_service=None):
             try:
                 record['up_exit_code'] = command(scratch, 'up')
                 record['finished_epoch'] = time.time()
-                atomic_json(scratch / 'service.json', record)
+                metadata_json(scratch / 'service.json', record)
                 if record['up_exit_code']:
                     raise RuntimeError('llm up failed; operator must restore it')
             finally:
@@ -445,9 +457,10 @@ def main():
     p.add_argument('--profile', choices=('local', 'x2'), required=True)
     p.add_argument('--model-service', choices=('llm', 'none'), help='default llm for X2, none for local')
     p.add_argument('--workers', type=int, required=True); p.add_argument('--cpu-budget', type=int, required=True)
-    p.add_argument('--mode', choices=('normal', 'work'), default='work')
+    p.add_argument('--mode', choices=('normal', 'work'))
     wc.options(p)
     args = p.parse_args()
+    args.mode = args.mode or ('normal' if args.profile == 'x2' else 'work')
     if args.local and args.checkout is not None:
         p.error('--local uses the current checkout; omit --checkout')
     if not args.local and not args.checkout:

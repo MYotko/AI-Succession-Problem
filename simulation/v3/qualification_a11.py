@@ -15,6 +15,7 @@ import shutil
 import time
 from .artifacts import (SIMULATION, atomic_json, canonical, code_identity, configure_threads, digest,
                         file_hash, read, scoped, seal, stable_job, unseal)
+from .worker_safety import persist_restarts
 
 SCHEMA = 'v3-A11-qualification-1'
 
@@ -99,6 +100,7 @@ def build(spec_path, source_root, output, kinds=None):
         'comparison': 'A11 canonical job plus result'}
     from . import worker_control as wc
     resources = wc.configuration_resources(jobs, spec['jobs'], wc.resources(spec), spec=spec)
+    resources.update(wc.trial_resources([j for j in jobs if j['id'] not in references]))
     plan['memory_estimate_gb'] = {j['id']: wc.reservation(resources[j['id']], {}) for j in jobs}
     plan['memory_estimate_known'] = {j['id']: resources[j['id']]['memory_known'] for j in jobs}
     plan['memory_classes'] = {j['id']: resources[j['id']]['memory_class'] for j in jobs}
@@ -110,8 +112,13 @@ def _run_one(args):
     from .host_a11 import execute_scratch
     from .compatibility_a10 import comparison_bytes
     target, job, code, phase_root, view, host = args
-    execute_scratch(target, job, code, phase_root, view, False, None, host, 'qualification')
+    # A signal can arrive after the durable result but before this hash returns.
+    # Recover that result on resubmission; never execute the returned job twice.
+    if not Path(target).exists():
+        execute_scratch(target, job, code, phase_root, view, False, None, host, 'qualification')
     result = read(target)
+    if result['job'] != job or result['code_hash'] != code or result['host'] != host:
+        raise ValueError('qualification returned result identity mismatch')
     return {'job_id': job['id'], 'kind': job['kind'], 'job_sha256': digest(job),
             'canonical_sha256': hashlib.sha256(comparison_bytes(job, result['result'])).hexdigest(),
             'output_sha256': file_hash(target), 'worker_seconds': result['seconds'], 'peak_rss_bytes': result.get('peak_rss_bytes')}
@@ -130,6 +137,8 @@ def run(plan_path, output, settings, *, environment=None, host=None):
     root = target.parent / (target.stem + '_scratch')
     from . import worker_control as wc
     settings = wc.settings(settings)
+    from .worker_safety import swap_preflight
+    swap = swap_preflight(settings, root / 'worker_metadata' / 'swap_preflight.json')
     configure_threads(1)
     memory = mem_available_bytes()
     if memory is None:
@@ -138,7 +147,7 @@ def run(plan_path, output, settings, *, environment=None, host=None):
     resources = wc.resources(plan)
     wc.require_memory_authority(settings, None, resources, {})
     memory_budget = settings.get('memory_headroom', .8) * memory / 1e9
-    if any(r['memory_gb'] > memory_budget for r in resources.values()):
+    if wc.top_weighted(wc.reservation(r, {}) for r in resources.values()) > memory_budget:
         raise ValueError('qualification job does not fit measured memory')
     bundle = Path(plan_path).parent / plan['bundle_directory']
     def reader(name, offset):
@@ -156,23 +165,36 @@ def run(plan_path, output, settings, *, environment=None, host=None):
              for j in plan['jobs']]
     from concurrent.futures import wait, FIRST_COMPLETED
     pending, active, results, peaks, admission = list(tasks), {}, {}, {}, []
-    with ProcessPoolExecutor(max_workers=min(worker_limit, len(tasks)), mp_context=mp.get_context('spawn'), max_tasks_per_child=1) as pool:
+    from .worker_safety import IsolatedPools, KilledWorker, restart, require_retry_budget
+    restarts_path = root / 'worker_metadata' / 'restarts.json'
+    restarts = read(restarts_path) if restarts_path.exists() else []
+    with IsolatedPools(root / 'worker_metadata' / 'returns') as pool:
         while pending or active:
-            occupied = sum(wc.reservation(resources[t[1]['id']], peaks) for t in active.values())
+            charges, weight = wc.admission_charges({t[1]['id']: resources[t[1]['id']] for t in pending + list(active.values())}, peaks)
+            occupied = sum(charges[t[1]['id']] for t in active.values())
             while pending and len(active) < worker_limit:
                 available = mem_available_bytes()
                 free = min(memory_budget - occupied, settings['memory_headroom'] * available / 1e9) if available else 0.
-                index = next((i for i,t in enumerate(pending) if wc.reservation(resources[t[1]['id']], peaks) <= free), None)
+                index = next((i for i,t in enumerate(pending) if charges[t[1]['id']] <= free), None)
                 if index is None: break
                 task = pending.pop(index)
-                occupied += wc.reservation(resources[task[1]['id']], peaks)
+                if not Path(task[0]).exists(): require_retry_budget(restarts, task[1]['id'])
+                occupied += charges[task[1]['id']]
                 active[pool.submit(_run_one, task)] = task
-                admission.append(dict(running=len(active), reserved_gb=occupied, budget_gb=memory_budget))
+                admission.append(dict(running=len(active), reserved_gb=occupied, budget_gb=memory_budget, top_weighted_gb=weight))
             if not active:
                 raise ValueError('qualification memory unavailable; no proof work admitted')
             completed, _ = wait(active, return_when=FIRST_COMPLETED)
             for future in completed:
-                task = active.pop(future); result = future.result()
+                task = active.pop(future)
+                try:
+                    result = pool.result(future)
+                except KilledWorker as exc:
+                    event = restart(restarts, task[1]['id'], exc.signal)
+                    persist_restarts(restarts_path, restarts)
+                    if not event['allowed']: raise RuntimeError('worker exhausted three signal reruns')
+                    pending.append(task)
+                    continue
                 results[task[1]['id']] = result
                 wc.observe(peaks, resources[task[1]['id']], result.get('peak_rss_bytes'))
     proofs = [results[j['id']] for j in plan['jobs']]
@@ -180,7 +202,7 @@ def run(plan_path, output, settings, *, environment=None, host=None):
     result = {'schema': SCHEMA + '-run', 'non_registered': True, 'plan_sha256': digest(plan), 'code_hash': code_identity(),
         'host': host, 'fingerprint': environment, 'memory_gb': memory / 1e9, 'elapsed_seconds': elapsed,
         'settings': settings, 'workers': min(worker_limit, len(tasks)), 'memory_cap': worker_limit,
-        'memory_budget_gb': memory_budget, 'admission': admission,
+        'memory_budget_gb': memory_budget, 'admission': admission, 'swap': swap, 'restarts': restarts,
         'proofs': proofs, 'kinds': plan['kinds'],
         'passed': all(plan['references'].get(p['job_id'], p['canonical_sha256']) == p['canonical_sha256'] for p in proofs)}
     atomic_json(target, seal(result))
@@ -267,7 +289,7 @@ def main():
     s.add_argument('--profile', choices=('x2', 'local'), required=True)
     s.add_argument('--model-service', choices=('llm', 'none'), help='default llm for X2, none for local')
     s.add_argument('--workers', type=int, required=True); s.add_argument('--cpu-budget', type=int, required=True)
-    s.add_argument('--mode', choices=('work', 'normal'), default='work')
+    s.add_argument('--mode', choices=('work', 'normal'))
     from . import worker_control as wc
     wc.options(s)
     s = sub.add_parser('compare'); s.add_argument('plan'); s.add_argument('reference'); s.add_argument('candidate'); s.add_argument('output')
@@ -285,6 +307,7 @@ def main():
         from .host_a11 import host_service
         root = scoped(args.output).parent; root.mkdir(parents=True, exist_ok=True)
         settings = {k: getattr(args, k) for k in ('profile', 'workers', 'cpu_budget', 'mode')}
+        settings['mode'] = settings['mode'] or ('normal' if settings['profile'] == 'x2' else 'work')
         settings['threads'] = 1
         settings.update(wc.arguments(args))
         settings = wc.settings(settings)

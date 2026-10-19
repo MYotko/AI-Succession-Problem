@@ -24,6 +24,22 @@
     "amendment": "A10",
     "date": "2026-10-08",
     "decided": "2026-10-07",
+    "item10_admission_revision": {
+      "date": "2026-10-18",
+      "previous_approved_sha256": {
+        "v3/production_runner.py": "02e8f77b8448ee3fa978a3034d948d788b21b0c5cce877a36459fd4454c3a714",
+        "v3/service.py": "623db8ef5e49116ae7ea56646de754a0102c6f242716b1de55bc9ba96d1c254b"
+      },
+      "scope": "Item 10 scheduling only: top-quarter memory admission, signal-killed worker retries, worker-only OOM priority, swap preflight and equal X2 mode caps. Scientific execute/completed functions and registered quantities are unchanged.",
+      "review_round_1": "Separate short-trial RSS and usable X2 configuration candidates; per-profile active counts under a host target; registered memory-authority refusal before launch. Scientific execute/completed, settings, seeds and results unchanged.",
+      "review_round_2": {
+        "date": "2026-10-19",
+        "reasons": {
+          "v3/production_runner.py": "Informational worker/scheduler writes are best-effort; correctness restart counts pause and retry until durable. Scientific execute/completed, outputs, completion and checkpoint writes remain strict and unchanged.",
+          "v3/service.py": "Informational service metadata/log failures cannot fail execution or prevent service restoration; command exit status, lease and budget checks remain strict. Commands execute once."
+        }
+      }
+    },
     "r4_call_shape_revision": {
       "date": "2026-10-08",
       "previous_approved_sha256": {
@@ -134,10 +150,10 @@
   "approved_boundary_sha256": {
     "v3/artifacts.py": "68c3020569c03c42a1abd982ef53af31836c27de9d195a48b81885353b2b3447",
     "v3/integration.py": "8d22354a7fa3d2d71036f686f5eff16a79c857e4c9212ad1cb8b15ed40e31e26",
-    "v3/production_runner.py": "02e8f77b8448ee3fa978a3034d948d788b21b0c5cce877a36459fd4454c3a714",
+    "v3/production_runner.py": "e9fe15b9b7b7629a47f1bfb4d51e1e8299e74d0da38033ed2c1311186e7499df",
     "v3/production_tables.py": "bba106893ca0849aa28eea8455621f43553ca607051c7ef572b47c7ba5637b66",
     "v3/recording.py": "38891bedc60eda486952a6c33323f926b89ac0d358b7760afad514fc2f1771f8",
-    "v3/service.py": "623db8ef5e49116ae7ea56646de754a0102c6f242716b1de55bc9ba96d1c254b",
+    "v3/service.py": "3e90a9514962d4f4bf0cafb868d493f4ee54e80f178a7bdc391a1761621862b9",
     "v3/table_compatibility.py": "16f6970df3c542776555d2fec17d2056582b333eff175a1c6dec93855c3c6c89"
   },
   "calibration_sha256": "bf0f7c3f10310558d567b6b3f7c24f6f99f2fe6eb71fd830cccfd8e2aa0bd6d6",

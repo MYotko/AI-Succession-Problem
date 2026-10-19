@@ -68,20 +68,23 @@ def test_changed_substantive_override_replaces_target_even_with_normalized_setti
 
 
 @pytest.mark.parametrize('explicit', [False, True])
-def test_modes_preserve_target_and_restore_measured_choice(tmp_path, explicit):
-    s = wc.settings(dict(profile='x2', workers=15, threads=1, cpu_budget=16, mode='normal',
+@pytest.mark.parametrize('profile', ['local', 'x2'])
+def test_modes_preserve_target_and_restore_measured_choice(tmp_path, explicit, profile):
+    s = wc.settings(dict(profile=profile, workers=7, threads=1, cpu_budget=8, mode='normal',
                          **({'override_reason':'explicit target'} if explicit else {})))
-    measured = [dict(workers=w, threads=1, valid=True, completed=w, wall_seconds=1.) for w in (1,10,14)]
+    measured = [dict(workers=w, threads=1, valid=True, completed=w, wall_seconds=1.) for w in (1,3,6)]
     value = wc.initial_control(tmp_path, s)
     original = deepcopy(value)
-    assert wc.selection(s, value, measured)['workers'] == (15 if explicit else 14)
-    for mode, expected in [('work',12 if explicit else 10), ('normal',15 if explicit else 14)]:
+    normal = 7 if explicit else 6
+    work = normal if profile == 'x2' else (4 if explicit else 3)
+    assert wc.selection(s, value, measured)['workers'] == normal
+    for mode, expected in [('work',work), ('normal',normal)]:
         value = wc.control(tmp_path, s, mode=mode)
-        assert value['max_workers'] == 15
+        assert value['max_workers'] == 7
         assert value.get('target_set') == original.get('target_set')
         assert wc.selection(s, value, measured)['workers'] == expected
     assert wc.initial_control(tmp_path, wc.settings(s)) == value
-    assert value['history'][-1]['target'] == 15
+    assert value['history'][-1]['target'] == 7
     assert value['history'][-1]['mode_caps_target']
 
 
@@ -298,13 +301,15 @@ def test_pull_empty_phase_accepts_only_its_declared_configuration_peak(tmp_path)
     _, root, _ = initialize(tmp_path, spec)
     identity = join(root, 'alpha', configure=False)
     snapshot = m.rpc(root, dict(op='inputs', phase='empty', configuration=True, **identity))
+    prototype = a.stable_job(spec['configuration']['empty']['kind'], spec['configuration']['empty']['config'], 'configuration', 0)
+    trial_class = wc.trial_resources([prototype])[prototype['id']]['memory_class']
     measurement = dict(workers=2, threads=1, completed=2, wall_seconds=1., valid=True, round=0,
-                       job_seconds=[.5,.5], class_peaks_gb={'empty': 2.4})
+                       job_seconds=[.5,.5], class_peaks_gb={trial_class: 2.4})
     request = dict(op='configure', phase='empty', input_sha256=snapshot['sha256'], measurements=[measurement], **identity)
     assert m.rpc(root, request)['workers'] == 2
     state = m.read_state(root)
     assert not state['observed_memory_gb']  # Configuration-only peak is not a scientific reservation.
-    assert state['sessions'][identity['session']]['configuration']['empty'][0]['class_peaks_gb'] == {'empty': 2.4}
+    assert state['sessions'][identity['session']]['configuration']['empty'][0]['class_peaks_gb'] == {trial_class: 2.4}
     # The coordinator's compact spec omits cost_classes; use its indexed store.
     toy_snapshot = m.rpc(root, dict(op='inputs', phase='toy', configuration=True, **identity))
     toy_request = dict(request, phase='toy', input_sha256=toy_snapshot['sha256'],

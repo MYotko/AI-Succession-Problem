@@ -247,7 +247,7 @@ def proof_row(original, fresh):
             "passed": original["before_sha256"] == fresh["after_sha256"]}
 
 
-def build_record(sources, reasons_path, target, *, workers=None, memory_floor_gb=0., override_reason=None, operator=None, memory_headroom=.8):
+def build_record(sources, reasons_path, target, *, workers=None, memory_floor_gb=0., override_reason=None, operator=None, memory_headroom=.8, profile="local", mode=None, cpu_budget=None):
     """Freeze a sample, execute it once with memory admission, seal failures."""
     from copy import deepcopy
     from .compatibility_shards_a11 import (run_items, write_once, reservation_path,
@@ -259,10 +259,12 @@ def build_record(sources, reasons_path, target, *, workers=None, memory_floor_gb
     _require(not reservation_path(record).exists(), 'identity pair already reserved; compatibility attempt is final')
     sample = _selected(record['populations'])
     from . import worker_control as wc
-    cpu_budget = available_cpus()
-    cap = min(12, max(1, cpu_budget - 4))
+    from .production_runner import caps
+    cpu_budget = available_cpus() if cpu_budget is None else cpu_budget
+    mode = mode or ("normal" if profile == "x2" else "work")
+    cap = caps(profile, cpu_budget)[mode]
     workers = cap if workers is None else workers
-    settings = wc.settings(dict(profile='local', workers=workers, cpu_budget=cpu_budget, threads=1, mode='work',
+    settings = wc.settings(dict(profile=profile, workers=workers, cpu_budget=cpu_budget, threads=1, mode=mode,
         override_reason=override_reason, operator=operator, memory_headroom=memory_headroom))
     workers = min(wc.selection(settings)['workers'], len(sample))
     control_root = target.with_suffix('.workers')
@@ -287,7 +289,8 @@ def build_record(sources, reasons_path, target, *, workers=None, memory_floor_gb
     configure_threads(1)
     try:
         results, trace = run_items([dict(i, input_view=view) for i in selected_jobs.values()], workers, budget,
-            control_path=control_root / 'control.json', host_settings=settings, headroom=settings['memory_headroom'])
+            control_path=control_root / 'control.json', host_settings=settings, headroom=settings['memory_headroom'],
+            class_peaks=authority['peaks'], measurements_by_profile=configuration)
         record['execution']['admission'] = trace
         record['execution']['worker_control'] = read(control_root / 'control.json')
         record['proofs'] = [proof_row(selected_jobs[jid], results[jid]) for jid in sample]
@@ -322,6 +325,8 @@ def main():
     p = sub.add_parser("build")
     p.add_argument("--sources", required=True); p.add_argument("--reasons", required=True)
     p.add_argument("--output", required=True); p.add_argument("--workers", type=int)
+    p.add_argument("--profile", choices=("local", "x2"), default="local")
+    p.add_argument("--mode", choices=("normal", "work")); p.add_argument("--cpu-budget", type=int)
     p.add_argument('--memory-floor-gb', type=float, default=0.)
     from . import worker_control as wc
     wc.options(p)
@@ -330,7 +335,7 @@ def main():
     p.add_argument("record"); p.add_argument("--operator", required=True); p.add_argument("--date", required=True)
     args = parser.parse_args()
     if args.command == "build":
-        record = build_record(read(args.sources), args.reasons, args.output, workers=args.workers, memory_floor_gb=args.memory_floor_gb, **wc.arguments(args))
+        record = build_record(read(args.sources), args.reasons, args.output, workers=args.workers, memory_floor_gb=args.memory_floor_gb, profile=args.profile, mode=args.mode, cpu_budget=args.cpu_budget, **wc.arguments(args))
         print({"passed": record["passed"], "jobs": len(record["proofs"]), "record_sha256": file_hash(args.output)})
         return 0 if record["passed"] else 1
     if args.command == 'control':

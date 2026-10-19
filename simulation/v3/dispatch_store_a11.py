@@ -304,7 +304,15 @@ class Store:
         self.sync()
         return self.db.execute('SELECT total,done FROM phase_counts WHERE phase=?',(phase,)).fetchone()
 
-    def candidate(self,phase,kinds,memory,observed):
+    def unfinished_reservations(self, kinds, observed):
+        self.sync()
+        # Eligible pending work across all phases. Other hosts' leased jobs
+        # are excluded; the caller adds its own active leases exactly once.
+        return [(max(memory, observed.get(cls, 0.)), count)
+                for kind, cls, memory, count in self.db.execute('SELECT kind,cls,memory,n FROM queues WHERE n>0')
+                if kind in kinds]
+
+    def candidate(self,phase,kinds,memory,observed,weight=float('inf')):
         self.sync()
         # Number of cost strata, not jobs. Each eligible queue's head is one
         # indexed seek; no completed or historical lease scan is performed.
@@ -312,7 +320,7 @@ class Store:
         for kind,cls,cost,minimum in self.db.execute('SELECT kind,cls,cost,memory FROM queues WHERE phase=? AND n>0 ORDER BY cost DESC,cls',(phase,)):
             if best is not None and cost < best[0]:
                 break
-            if kind not in kinds or max(minimum,observed.get(cls,0)) > memory:
+            if kind not in kinds or min(max(minimum,observed.get(cls,0)), weight) > memory:
                 continue
             row=self.db.execute('SELECT id FROM pending WHERE phase=? AND kind=? AND cls=? ORDER BY id LIMIT 1',(phase,kind,cls)).fetchone()
             if row is not None and (best is None or (-cost,row[0]) < (-best[0],best[1])):

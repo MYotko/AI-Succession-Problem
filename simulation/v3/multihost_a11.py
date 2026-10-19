@@ -20,6 +20,7 @@ from .artifacts import (SIMULATION, atomic_json, canonical, code_identity, diges
                         file_hash, lease, read, scoped, seal, stable_job, unseal)
 
 from . import worker_control as wc
+from .worker_safety import best_effort, metadata_json
 
 SCHEMA = 'v3-A11-pull-1'
 ALLOWED_KINDS = {'table', 'rerun', 'a4_fit', 'a4_validate', 'a4_census', 'a5_fvplain', 'a13_validate_plain_ext'}
@@ -131,6 +132,14 @@ def transaction(root):
 
 
 def append(root, directory, payload):
+    if directory == 'protocol_events':
+        # The SQLite transaction owns leases, controls and retry bounds.
+        # This side journal is diagnostic, unlike the evidence journals.
+        return best_effort(Path(root) / directory, lambda: _append(root, directory, payload))
+    return _append(root, directory, payload)
+
+
+def _append(root, directory, payload):
     """Immutable sequence of individually sealed entries, fsynced by writer."""
     folder = scoped(root) / directory
     entries = sorted(folder.glob('*.json'))
@@ -184,6 +193,7 @@ def prepare(spec_path, root, settings):
     from .production_runner import caps, validate_spec
     spec = unseal(read(spec_path))
     validate_extension(spec)
+    wc.require_registered_memory(spec.get('registered'), wc.resources(spec), {})
     settings = wc.settings(settings)
     preflight = validate_spec(spec, settings)
     root = scoped(root)
@@ -258,17 +268,19 @@ class Coordinator:
         self.store.commit()
         if due:
             status = self.status()
-            atomic_json(self.root / 'status.json', status)
+            metadata_json(self.root / 'status.json', status)
             for phase in self.spec['phases']:
                 total, done = self.store.counts(phase)
                 running = sum(l['phase'] == phase for l in self.active())
-                atomic_json(self.root / phase / 'status.json', {'phase': phase, 'total': total, 'completed': done,
+                metadata_json(self.root / phase / 'status.json', {'phase': phase, 'total': total, 'completed': done,
                     'running': running, 'pending': total - done, 'hosts': status['hosts'],
                     'started_epoch': self.state['started'], 'updated_epoch': self.now,
                     'complete': done == total and (not total or self.state['checks'].get(phase, {}).get('matched', False)) and not self.state['halt'],
                     'waiting_for': status['waiting_for'] if phase == self.phase else None,
                     'reason': self.state['halt'] or status['reason'] or ('complete' if self.state['complete'] else 'pull')})
             if force or terminal != previous['terminal']:
+                # A13 publication can read this fallback if the store is absent.
+                # Keep this correctness snapshot strict, unlike display status.
                 atomic_json(self.root / 'pull_state.json', seal(dict(self.store.small_state(),
                     operational_store='dispatch.sqlite', checkpoint_only=True)))
             self.store.set('status',dict(epoch=self.now,terminal=terminal))
@@ -378,13 +390,15 @@ class Coordinator:
             return 'inputs_not_ready: eligible hosts must verify and acknowledge the input snapshot for phase ' + phase
         observed = self.state.get('observed_memory_gb', {})
         for s in ready:
+            sid = next(key for key, value in self.state['sessions'].items() if value is s)
+            weight = self.admission_weight(sid, sample)
             entry = self.member(s['host'])
             memory = s['settings'].get('memory_headroom', .8) * min(entry['memory_gb'], s.get('memory_available_gb', entry['memory_gb']))
             if sample is not None:
                 key, cost = self.store.cost(sample)
-                if max(cost['memory_gb'], observed.get(key, 0)) <= memory:
+                if min(max(cost['memory_gb'], observed.get(key, 0)), weight) <= memory:
                     return None
-            elif self.store.candidate(phase, entry['kinds'], memory, observed) is not None:
+            elif self.store.candidate(phase, entry['kinds'], memory, observed, weight) is not None:
                 return None
         return 'no_eligible_host: pending work or recheck does not fit the ready hosts\' memory; free memory or join a qualified host'
 
@@ -447,6 +461,7 @@ class Coordinator:
         self.member(host)
         wc.selection(settings, control)
         wc.require_memory_authority(settings, control, wc.resources(self.store.full_spec()), self.state.get('observed_memory_gb', {}))
+        wc.require_registered_memory(self.spec.get('registered'), wc.resources(self.store.full_spec()), self.state.get('observed_memory_gb', {}))
 
     def session(self, request):
         s = self.state['sessions'].get(request.get('session'))
@@ -472,6 +487,9 @@ class Coordinator:
         self.require_configuration_cap(r['host'], settings, dict(mode=settings['mode'], max_workers=settings['workers']))
         if settings['profile'] == 'x2':
             require_service_record(settings, r.get('service'))
+            from .worker_safety import MIN_X2_SWAP_FREE_BYTES
+            if not isinstance((r.get('swap') or {}).get('free_bytes'), (int, float)) or r['swap']['free_bytes'] < MIN_X2_SWAP_FREE_BYTES:
+                raise ValueError('X2 host requires at least 16 GB swap free')
         if any(s['host'] == r['host'] and s['end'] is None for s in self.state['sessions'].values()):
             raise ValueError('host is already joined')
         control = dict(mode=settings['mode'], max_workers=settings['workers'], drain=False)
@@ -483,7 +501,7 @@ class Coordinator:
         self.state['sessions'][sid] = {'host': r['host'], 'joined': self.now, 'end': None, 'heartbeat': self.now,
             'relative_throughput': entry['relative_throughput'], 'worker_seconds': 0.,
             'settings': dict(settings, caps=limits, model_service=entry['model_service']), 'control': dict(control),
-            'configuration': {}, 'chosen': {}, 'ready': {}, 'service': r.get('service')}
+            'configuration': {}, 'chosen': {}, 'ready': {}, 'service': r.get('service'), 'swap': r.get('swap')}
         return {'session': sid, 'spec': self.store.full_spec(), 'phase_roots': {p: str(self.root / p) for p in self.spec['phases']},
                 'lease_seconds': self.ttl, 'qualified_kinds': entry['kinds'], 'control': control}
 
@@ -529,8 +547,7 @@ class Coordinator:
             profile = full['configuration'][phase]
             prototypes = [stable_job(profile['kind'], cfg, 'configuration', i)
                           for i, cfg in enumerate(profile.get('configs', [profile['config']]))]
-            configuration_classes = {v['memory_class'] for v in wc.configuration_resources(
-                prototypes, full['jobs'], wc.resources(full), phase=phase, spec=full).values()}
+            configuration_classes = {v['memory_class'] for v in wc.trial_resources(prototypes).values()}
         for measurement in measurements:
             for key, peak in measurement.get('class_peaks_gb', {}).items():
                 if key not in declared_classes | configuration_classes or not positive(peak):
@@ -627,9 +644,11 @@ class Coordinator:
                 continue
             active = self.active(sid)
             selected = wc.selection(s['settings'], s['control'], s['configuration'][phase])
+            weight = self.admission_weight(sid, sample)
             memory = min(s.get('memory_available_gb', 0) * s['settings'].get('memory_headroom', .8),
-                         entry['memory_gb'] * s['settings'].get('memory_headroom', .8) - self.reserved_memory(active))
-            if len(active) < selected['workers'] and needed <= memory:
+                         entry['memory_gb'] * s['settings'].get('memory_headroom', .8) - self.reserved_memory(active, weight))
+            if wc.profile_slots(s['settings'], s['control'], phase, [l['phase'] for l in active],
+                                s['configuration'][phase]) and min(needed, weight) <= memory:
                 eligible.append(s['host'])
         if not eligible:
             return None
@@ -689,9 +708,23 @@ class Coordinator:
             atomic_json(history_path, history)
         return False
 
-    def reserved_memory(self, leases):
+    def admission_weight(self, session, recheck=None):
         observed = self.state.get('observed_memory_gb', {})
-        return sum(max(l['memory_gb'], observed.get(self.store.cost(self.jobs[l['job_id']])[0], 0.)) for l in leases)
+        kinds = self.member(self.state['sessions'][session]['host'])['kinds']
+        values = self.store.unfinished_reservations(kinds, observed)
+        active = self.active(session)
+        if recheck is not None and all(l['job_id'] != recheck['id'] for l in active):
+            key, cost = self.store.cost(recheck)
+            values.append((max(cost['memory_gb'], observed.get(key, 0.)), 1))
+        for lease in active:
+            key, cost = self.store.cost(self.jobs[lease['job_id']])
+            values.append((max(cost['memory_gb'], observed.get(key, 0.)), 1))
+        return wc.top_weighted_counts(values) if values else float('inf')
+
+    def reserved_memory(self, leases, weight=float('inf')):
+        observed = self.state.get('observed_memory_gb', {})
+        return sum(min(max(self.store.cost(self.jobs[l['job_id']])[1]['memory_gb'],
+                           observed.get(self.store.cost(self.jobs[l['job_id']])[0], 0.)), weight) for l in leases)
 
     def claim(self, r):
         from .production_runner import choose
@@ -711,13 +744,14 @@ class Coordinator:
         cap = selected['workers']
         if len(self.active()) >= self.state['control'].get('max_workers', float('inf')):
             return {'job': None, 'waiting': 'overall worker target'}
-        if len(occupied) >= cap:
+        if not wc.profile_slots(s['settings'], s['control'], phase, [l['phase'] for l in occupied], s['configuration'][phase]):
             return {'job': None, 'waiting': 'worker cap'}
         entry = self.member(r['host'])
+        weight = self.admission_weight(r['session'])
         memory = min(float(r['memory_available_gb']) * s['settings'].get('memory_headroom', .8),
-                     entry['memory_gb'] * s['settings'].get('memory_headroom', .8) - self.reserved_memory(occupied))
+                     entry['memory_gb'] * s['settings'].get('memory_headroom', .8) - self.reserved_memory(occupied, weight))
         observed = self.state.get('observed_memory_gb', {})
-        job = self.store.candidate(phase, entry['kinds'], memory, observed)
+        job = self.store.candidate(phase, entry['kinds'], memory, observed, weight)
         purpose = 'work'
         total, done = self.store.counts(phase)
         if job is None and total == done and not self.state['checks'].get(phase, {}).get('matched'):
@@ -726,8 +760,11 @@ class Coordinator:
             original = self.done[sample['id']]['host']
             leased = {l['job_id'] for l in self.active()}
             key, cost = self.store.cost(sample)
+            weight = self.admission_weight(r['session'], sample)
+            memory = min(float(r['memory_available_gb']) * s['settings'].get('memory_headroom', .8),
+                         entry['memory_gb'] * s['settings'].get('memory_headroom', .8) - self.reserved_memory(occupied, weight))
             if (sample['id'] not in leased and (len(participants) == 1 or original != r['host'])
-                    and sample['kind'] in entry['kinds'] and max(cost['memory_gb'], observed.get(key,0)) <= memory):
+                    and sample['kind'] in entry['kinds'] and min(max(cost['memory_gb'], observed.get(key,0)), weight) <= memory):
                 if len(participants) > 1:
                     preferred = self.preferred_recheck(sample, original)
                     if preferred is not None and preferred != r['host']:
@@ -739,7 +776,8 @@ class Coordinator:
         key, cost = self.store.cost(job)
         self.state['leases'][token] = {'host': r['host'], 'session': r['session'], 'job_id': job['id'], 'phase': phase,
             'start': self.now, 'expires': self.now + self.ttl, 'heartbeat': self.now, 'status': 'active',
-            'purpose': purpose, 'memory_gb': max(cost['memory_gb'], observed.get(key,0))}
+            'purpose': purpose, 'memory_gb': min(max(cost['memory_gb'], observed.get(key,0)), weight),
+            'top_weighted_gb': weight if weight != float('inf') else max(cost['memory_gb'], observed.get(key,0))}
         claim = {'job': job, 'lease': token, 'expires': self.now + self.ttl, 'phase_root': str(self.root / phase), 'purpose': purpose}
         if job['kind'] == 'a13_validate_plain_ext':
             from .validation_extension_a13 import durable_checkpoints
@@ -812,7 +850,8 @@ class Coordinator:
             atomic_json(self.root / l['phase'] / 'records' / (job['id'] + '.json'),
                 {'job': job, 'code_hash': self.code, 'status': 'complete', 'output_hash': file_hash(output),
                  'completed_epoch': self.now, 'worker_seconds': value['seconds'], 'peak_rss_bytes': value.get('peak_rss_bytes'),
-                 'host': r['host'], 'lease': r['lease']})
+                 'host': r['host'], 'lease': r['lease'],
+                 **({'oom_score_adj': value['oom_score_adj']} if 'oom_score_adj' in value else {})})
             self.done[job['id']] = {'host': r['host'], 'phase': l['phase']}
         elif l['status'] != 'completed':
             append(self.root, 'incidental_cross_checks', {'job_id': job['id'], 'original_host': original['host'],
@@ -904,6 +943,16 @@ class Coordinator:
                 raise ValueError('wrong lease release')
             if l['status'] == 'active':
                 l['status'] = 'released'
+                if r.get('reason') == 'worker signal kill':
+                    from .worker_safety import restart
+                    signal = r.get('signal')
+                    if type(signal) is not int or not 0 < signal < 64: raise ValueError('invalid worker signal')
+                    events = self.state.setdefault('worker_restarts', [])
+                    event = restart(events, l['job_id'], signal)
+                    append(self.root, 'protocol_events', dict(event='signal_restart', **event))
+                    if not event['allowed']:
+                        self.state['halt'] = 'worker exhausted three signal reruns'
+                        atomic_json(self.root / 'execution_failure.json', seal(dict(job_id=l['job_id'], epoch=self.now, reason=self.state['halt'])))
                 if r.get('reason') == 'worker failed':
                     failures = self.state.setdefault('failed_attempts', {})
                     failures[l['job_id']] = failures.get(l['job_id'], 0) + 1
@@ -911,7 +960,7 @@ class Coordinator:
                         self.state['halt'] = 'job failed three times'
                         atomic_json(self.root / 'execution_failure.json', seal({'job_id': l['job_id'], 'epoch': self.now, 'reason': self.state['halt']}))
             append(self.root, 'protocol_events', {'event': 'release', 'host': r['host'], 'lease': r['lease'], 'reason': r.get('reason'), 'epoch': self.now})
-            return {'released': True}
+            return {'released': True, 'halt': self.state['halt']}
         if op == 'leave':
             if self.active(r['session']):
                 raise ValueError('drain first; host still has leases')

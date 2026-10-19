@@ -190,9 +190,10 @@ def test_memory_order_caps_budget_and_unchanged_jobs(tmp_path):
     _, root, spec = initialize(tmp_path, spec, start=t)
     identity = join(root, 'alpha', t); ready(root, identity, 'toy', t)
     first = claim(root, identity, t, memory=10)
-    assert first['job'] == spec['jobs'][6]  # the 15 GB job is never offered
+    assert first['job'] == spec['jobs'][7]  # W=(15+1)/2 fits the 8 GB live allowance.
+    assert m.read_state(root)['leases'][first['lease']]['memory_gb'] == 8.
     second = claim(root, identity, t)
-    assert second['job'] == spec['jobs'][7]
+    assert second['job'] == spec['jobs'][6]
     assert claim(root, identity, t)['job'] is None  # two-worker cap
     finish(root, identity, first, t); finish(root, identity, second, t)
     for when in range(20, 3600, 20):

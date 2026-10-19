@@ -258,6 +258,31 @@ def reservation(resource, peaks):
     return max(resource['memory_gb'], peak)
 
 
+def top_weighted(values):
+    """Mean of the heaviest ceil(n/4) unfinished jobs, not distinct classes."""
+    return top_weighted_counts((v, 1) for v in values)
+
+
+def top_weighted_counts(groups):
+    groups = sorted(groups, reverse=True)
+    if any(not positive(v) or type(n) is not int or n < 1 for v,n in groups):
+        raise ValueError('invalid memory reservation')
+    total = sum(n for _,n in groups)
+    if not total: return 0.
+    count = left = max(1, (total + 3) // 4)
+    terms = []
+    for value, number in groups:
+        take = min(left, number); terms.append(take * value); left -= take
+        if not left: break
+    return math.fsum(terms) / count
+
+
+def admission_charges(estimates, peaks):
+    reservations = {key: reservation(value, peaks) for key, value in estimates.items()}
+    weight = top_weighted(reservations.values())
+    return {key: min(value, weight) for key, value in reservations.items()}, weight
+
+
 def require_memory_authority(s, control, estimates, peaks, selected=None, *, configuration_trial=False):
     from .production_runner import caps
     mode = (control or {}).get('mode', s.get('mode', 'normal'))
@@ -271,6 +296,32 @@ def require_memory_authority(s, control, estimates, peaks, selected=None, *, con
     if count > caps(s['profile'], s['cpu_budget'])[mode]:
         if any(not r.get('memory_known', True) and not positive(peaks.get(r['memory_class'])) for r in estimates.values()):
             raise ValueError('above-mode worker target requires a sealed memory estimate or measured peak for every class')
+
+
+def require_registered_memory(registered, estimates, peaks):
+    if registered and any(not r.get('memory_known', True) and not positive(peaks.get(r['memory_class']))
+                          for r in estimates.values()):
+        raise ValueError('registered launch requires a sealed memory estimate or measured peak for every class; freeze for pull dispatch first')
+
+
+def profile_slots(s, control, profile, active_profiles, measurements=None):
+    """The host target and this profile's measured choice are independent gates."""
+    active_profiles = list(active_profiles)
+    host_limit = selection(s, control)['workers']
+    own_limit = selection(s, control, measurements)['workers']
+    return max(0, min(host_limit - len(active_profiles), own_limit - active_profiles.count(profile)))
+
+
+def trial_resources(jobs):
+    """Short configuration work has its own RSS history, never a full-job floor.
+
+    The first trial starts with the nonregistered 0.25 GB bootstrap estimate;
+    subsequent admissions use its measured peak times 1.2 and both live guards.
+    Config identity (without seed/worker count) isolates different short trials.
+    """
+    return {j['id']: dict(memory_class='trial:' + digest([j['kind'], {k:v for k,v in j['config'].items() if k != 'seed'}]),
+        memory_gb=.25, estimated_seconds=1., memory_known=False, cost_known=False)
+        for j in jobs}
 
 
 def memory_safe_selection(s, control, estimates, peaks, selected, *, configuration_trial=False):
@@ -327,26 +378,6 @@ def configuration_resources(jobs, sources, estimates, *, phase=None, spec=None):
     return result
 
 
-def profile_memory_limit(profile, sources, estimates, budget, pooled=None, *, phase=None, spec=None):
-    """A uniform profile may use its own class cap; a mixed profile must pack.
-
-    This is never the largest reservation applied to unrelated classes.
-    """
-    from .artifacts import stable_job
-    jobs = [stable_job(profile['kind'], c, 'configuration', i)
-            for i, c in enumerate(profile.get('configs', [profile['config']]))]
-    if pooled is not None:
-        members = [pooled[j['config']['phase']] for j in jobs]
-    elif estimates is not None:
-        matched = configuration_resources(jobs, sources, estimates, phase=phase, spec=spec)
-        members = list(matched.values())
-    else:
-        return None
-    sizes = {reservation(r, {}) for r in members}
-    if len(sizes) != 1: return None
-    return int(budget / sizes.pop())
-
-
 def observe(peaks, resource, peak_bytes):
     if positive(peak_bytes):
         key = resource['memory_class']
@@ -386,40 +417,80 @@ def completion_measurements(root, jobs, estimates):
     return result, peaks
 
 
-def packed_wall(items, workers, budget, speed=1.):
-    """Deterministic scheduling projection, using each reservation separately."""
+def packing_projection(items, workers, budget, speed=1., *, item10=True, profile_limits=None):
+    """Scheduling-only LPT simulation; recompute charges after every completion."""
     import heapq
+    from collections import Counter
     pending = sorted(items, key=lambda r: (-r['seconds'], r['key']))
-    active, now, occupied, maximum = [], 0., 0., 0.
-    if workers < 1 or any(i['memory'] > budget for i in pending):
-        return None, 0.
-    sequence = 0
+    active, now, maximum, concurrency, sequence = [], 0., 0., 0, 0
+    initial_concurrency = None
+    active_profiles = Counter()
+    area, tail_started, tail_area, final_dispatch = 0., None, 0., 0.
+    counts = Counter(i['memory'] for i in pending)
+    initial = top_weighted_counts(counts.items())
     while pending or active:
+        weight = top_weighted_counts(counts.items()) if item10 else math.inf
+        charge = lambda memory: min(memory, weight)
+        occupied = math.fsum(charge(i[2]) for i in active)
+        maximum = max(maximum, occupied)
         while pending and len(active) < workers:
-            index = next((k for k, item in enumerate(pending) if item['memory'] + occupied <= budget + 1e-12), None)
+            index = next((k for k, item in enumerate(pending)
+                          if charge(item['memory']) + occupied <= budget + 1e-12
+                          and active_profiles[item.get('profile')] < (profile_limits or {}).get(item.get('profile'), workers)), None)
             if index is None: break
             item = pending.pop(index); sequence += 1
-            occupied += item['memory']; maximum = max(maximum, occupied)
-            heapq.heappush(active, (now + item['seconds'] / speed, sequence, item['memory']))
-        now, _, memory = heapq.heappop(active)
-        occupied -= memory
-    return now, maximum
+            occupied += charge(item['memory']); maximum = max(maximum, occupied)
+            profile = item.get('profile')
+            active_profiles[profile] += 1
+            heapq.heappush(active, (now + item['seconds'] / speed, sequence, item['memory'], profile))
+            final_dispatch = now
+            concurrency = max(concurrency, len(active))
+        if initial_concurrency is None: initial_concurrency = len(active)
+        if not active:
+            return dict(wall_seconds=None, maximum_memory_gb=maximum, concurrent_workers=concurrency, start_weight_gb=initial, initial_concurrent_workers=initial_concurrency)
+        if not pending and tail_started is None: tail_started = now
+        next_time = active[0][0]
+        area += (next_time - now) * len(active)
+        if tail_started is not None: tail_area += (next_time - now) * len(active)
+        now, _, memory, profile = heapq.heappop(active)
+        active_profiles[profile] -= 1
+        counts[memory] -= 1
+        if not counts[memory]: del counts[memory]
+        while active and active[0][0] == now:
+            _, _, memory, profile = heapq.heappop(active)
+            active_profiles[profile] -= 1
+            counts[memory] -= 1
+            if not counts[memory]: del counts[memory]
+    tail = now - (tail_started if tail_started is not None else now)
+    return dict(wall_seconds=now, maximum_memory_gb=maximum, concurrent_workers=concurrency,
+                mean_concurrent_workers=area / now if now else 0., start_weight_gb=initial,
+                initial_concurrent_workers=initial_concurrency or 0, final_dispatch_seconds=final_dispatch,
+                tail_seconds=tail, tail_mean_workers=tail_area / tail if tail else 0.)
 
 
-def load_sheet(jobs, estimates, host_settings, available_gb, *, peaks=None, measured_rate=1., control_value=None, measurements=None, default_cap=None):
+def packed_wall(items, workers, budget, speed=1.):
+    result = packing_projection(items, workers, budget, speed)
+    return result['wall_seconds'], result['maximum_memory_gb']
+
+
+def load_sheet(jobs, estimates, host_settings, available_gb, *, peaks=None, measured_rate=1., control_value=None, measurements=None, default_cap=None, job_profiles=None, measurements_by_profile=None):
     """Output-blind totals/rates, with anonymous class memory rows only."""
     peaks = peaks or {}
     s = settings(host_settings, local=False)
-    target = selection(s, control_value, measurements, default_cap=default_cap)['workers']
+    target = selection(s, control_value, default_cap=default_cap)['workers']
+    job_profiles = job_profiles or {j['id']: j['config'].get('phase', j['kind']) for j in jobs}
+    profile_measurements = measurements_by_profile or {p: measurements for p in set(job_profiles.values())}
+    profile_limits = {p: selection(s, control_value, profile_measurements.get(p))['workers'] for p in set(job_profiles.values())}
     require_memory_authority(s, control_value, estimates, peaks)
     budget = available_gb * s['memory_headroom']
     items = [dict(key=j['id'], seconds=estimates[j['id']]['estimated_seconds'],
-                  memory=reservation(estimates[j['id']], peaks)) for j in jobs]
-    wall, maximum = packed_wall(items, target, budget, measured_rate)
+                  profile=job_profiles[j['id']], memory=reservation(estimates[j['id']], peaks)) for j in jobs]
+    projection = packing_projection(items, target, budget, measured_rate, profile_limits=profile_limits)
+    wall, maximum = projection['wall_seconds'], projection['maximum_memory_gb']
     measured_items = [dict(item, seconds=estimates[j['id']].get('measured_seconds')) for item,j in zip(items,jobs)]
     measured_wall = None
     if all(positive(item['seconds']) for item in measured_items):
-        measured_wall, _ = packed_wall(measured_items, target, budget, measured_rate)
+        measured_wall = packing_projection(measured_items, target, budget, measured_rate, profile_limits=profile_limits)['wall_seconds']
     seconds = sum(i['seconds'] for i in items)
     cost_known = all(r.get('cost_known', True) for r in estimates.values())
     explicit = (control_value or {}).get('worker_override', bool(s.get('operator_override')))
@@ -427,34 +498,63 @@ def load_sheet(jobs, estimates, host_settings, available_gb, *, peaks=None, meas
     classes = {r['memory_class']: dict(class_id=digest(r['memory_class']), registered_gb=r['memory_gb'],
                measured_peak_gb=peaks.get(r['memory_class'], 0.) / 1.2,
                reservation_gb=reservation(r, peaks), workers_if_all_this_class=min(target, int(budget / reservation(r, peaks)))) for r in estimates.values()}
-    return dict(planned_workers=target, cpu_budget=s['cpu_budget'], threads=s['threads'],
+    rules = {}
+    for name, item10 in (('per_class', False), ('item10', True)):
+        projected = packing_projection(items, target, budget, measured_rate, item10=item10, profile_limits=profile_limits)
+        projected['planned_workers'] = target
+        wall_seconds = projected.pop('wall_seconds')
+        projected.update(class_wall_hours=wall_seconds / 3600 if wall_seconds is not None and cost_known else None,
+                         average_concurrent_workers=seconds / (measured_rate * wall_seconds) if wall_seconds and cost_known else None,
+                         projected_cpu_fraction=seconds * s['threads'] / (measured_rate * wall_seconds * s['cpu_budget']) if wall_seconds else None,
+                         projected_memory_fraction=projected['maximum_memory_gb'] / available_gb,
+                         measured_wall_hours=None)
+        if all(positive(i['seconds']) for i in measured_items):
+            measured = packing_projection(measured_items, target, budget, measured_rate, item10=item10, profile_limits=profile_limits)['wall_seconds']
+            projected['measured_wall_hours'] = measured / 3600 if measured is not None else None
+        rules[name] = projected
+    memory_known = all(r.get('memory_known', True) or positive(peaks.get(r['memory_class'])) for r in estimates.values())
+    if not memory_known:
+        for row in rules.values():
+            for key in ('start_weight_gb','maximum_memory_gb','concurrent_workers','initial_concurrent_workers','average_concurrent_workers','class_wall_hours',
+                        'measured_wall_hours','projected_cpu_fraction','projected_memory_fraction',
+                        'mean_concurrent_workers','final_dispatch_seconds','tail_seconds','tail_mean_workers'):
+                row[key] = None
+    explicit = explicit or (control_value or {}).get('target_set', False)
+    known_profiles = explicit or all(profile_measurements.get(p) for p in profile_limits)
+    return dict(memory_authority_complete=memory_known, rules=rules, planned_workers=target, cpu_budget=s['cpu_budget'], threads=s['threads'],
+                profile_limits={digest(p): n for p,n in profile_limits.items()},
+                configuration_choices_known=bool(known_profiles),
+                projection_condition='Recorded profile choices and host target; live MemAvailable must allow each projected admission' if known_profiles else
+                    'Conditional on each configuration profile selecting the host target; live MemAvailable must allow each projected admission',
                 binding_cap=('mode/operator target' if MODE_CAPS_TARGET else 'operator/CPU') if explicit else 'mode/live target' if (control_value or {}).get('target_set') else 'configuration/mode/request/default ceiling' if default_cap is not None else 'configuration/mode/request' if measurements else 'mode/request (configuration pending)',
                 memory_budget_gb=budget, available_memory_gb=available_gb, memory_headroom=s['memory_headroom'],
                 cpu_worker_cap=s['cpu_budget']//s['threads'], mode_cap=s['caps'][mode], classes=list(classes.values()),
-                projected_cpu_fraction=seconds * s['threads'] / (measured_rate * wall * s['cpu_budget']) if wall else None,
-                projected_peak_memory_fraction=maximum / available_gb,
-                class_wall_hours=wall / 3600 if wall is not None and cost_known else None,
-                measured_wall_hours=measured_wall / 3600 if measured_wall is not None else None,
+                projected_cpu_fraction=seconds * s['threads'] / (measured_rate * wall * s['cpu_budget']) if wall and memory_known else None,
+                projected_peak_memory_fraction=maximum / available_gb if memory_known else None,
+                class_wall_hours=wall / 3600 if wall is not None and cost_known and memory_known else None,
+                measured_wall_hours=measured_wall / 3600 if measured_wall is not None and memory_known else None,
                 relative_measured_rate=measured_rate, total_worker_hours=seconds / 3600 if cost_known else None)
 
 
 def distributed_load_sheet(jobs, estimates, hosts):
     """Forecast an LPT partition, not a dispatch assignment or scientific input."""
     groups = {name: [] for name in hosts}
+    loads = {name: 0. for name in hosts}
+    settings_by_host = {name: settings(entry['settings'], local=False) for name,entry in hosts.items()}
+    # Linear greedy throughput assignment for the forecast. The live pull
+    # dispatcher has no frozen shares; each forecast shard is then packed with
+    # both memory rules, including their completion-driven weight changes.
     for job in sorted(jobs, key=lambda j: (-estimates[j['id']]['estimated_seconds'], j['id'])):
         finish = {}
         for name, entry in hosts.items():
-            if entry.get('kinds') and job['kind'] not in entry['kinds']:
+            target = selection(settings_by_host[name])['workers']
+            if not target or entry.get('kinds') and job['kind'] not in entry['kinds']:
                 finish[name] = math.inf
                 continue
-            s = settings(entry['settings'], local=False)
-            rows = [dict(key=j['id'], seconds=estimates[j['id']]['estimated_seconds'],
-                         memory=reservation(estimates[j['id']], entry.get('peaks', {}))) for j in groups[name] + [job]]
-            wall, _ = packed_wall(rows, selection(s)['workers'], entry['memory_gb'] * s['memory_headroom'], entry['rate'])
-            finish[name] = wall if wall is not None else math.inf
+            finish[name] = loads[name] + estimates[job['id']]['estimated_seconds'] / (target * entry['rate'])
         name = min(finish, key=lambda n: (finish[n], n))
         if not math.isfinite(finish[name]): raise ValueError('load sheet: no host can admit a job')
-        groups[name].append(job)
+        groups[name].append(job); loads[name] = finish[name]
     return {name: dict(load_sheet(group, {j['id']: estimates[j['id']] for j in group}, hosts[name]['settings'],
         hosts[name]['memory_gb'], peaks=hosts[name].get('peaks'), measured_rate=hosts[name]['rate']),
         forecast_jobs=len(group), forecast_only=True) for name, group in groups.items()}

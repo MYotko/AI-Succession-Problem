@@ -173,7 +173,9 @@ def test_pool_worker_ceiling_and_peak_memory_reductions(tmp_path,monkeypatch):
     costs={j['id']:{'memory_gb':1.,'estimated_seconds':20-i,'memory_class':'fixture'} for i,j in enumerate(jobs)}
     large={**settings(),'workers':32,'cpu_budget':32,'caps':runner.caps('x2',32)}
     result=runner.dispatch(tmp_path,jobs,code_identity(),large,time.time()+45,fixed={'workers':32,'threads':1},pooled_jobs=costs)
-    assert result['maximum_active']==16 and result['completed']==20
+    # Item 10 removes the old uniform 16-worker pilot ceiling. All twenty
+    # small jobs fit the X2 CPU and per-job admission limits.
+    assert result['maximum_active']==20 and result['completed']==20
     from v3 import worker_control as wc
     monkeypatch.setattr(runner,'available_cpus',lambda:32)
     intentional=wc.settings(dict(large,profile='x2',override_reason='operator CPU limit'))
@@ -246,7 +248,7 @@ def test_reduced_prelaunch_rejects_shortening_and_inconsistent_configuration(spe
         runner.validate_spec(spec,launch_settings)
 
 
-def test_single_configuration_pool_respects_sixteen_worker_limit(tmp_path,spec,monkeypatch):
+def test_single_configuration_pool_tests_full_x2_cap(tmp_path,spec,monkeypatch):
     seen=[]
     def dispatch(root,jobs,code,settings,deadline,**kwargs):
         seen.append((jobs,kwargs))
@@ -256,7 +258,7 @@ def test_single_configuration_pool_respects_sixteen_worker_limit(tmp_path,spec,m
     profile=spec['configuration']['pooled']
     x2={**settings(),'profile':'x2','cpu_budget':32,'workers':16,'caps':runner.caps('x2',32)}
     result=runner.configuration_test(tmp_path,'pooled',profile,x2,time.time()+30,1)
-    assert [r['workers'] for r in result]==[8,12,16]
+    assert [r['workers'] for r in result]==[8,12,16,24,31]
     assert all(j['tag']=='configuration' and j['config']['configuration_test'] for jobs,_ in seen for j in jobs)
     assert all(set(k['pooled_jobs'])=={j['id'] for j in jobs} for jobs,k in seen)
     assert all(len({j['config']['cost_kind'] for j in jobs})>1 for jobs,_ in seen)

@@ -313,7 +313,7 @@ def test_budget_rule_cap_and_unknown_memory(monkeypatch):
     assert s.memory_budget() == 80. and s.memory_budget(80.) == 64.
     with pytest.raises(ValueError, match='CPU budget'): s.worker_cap(dict(SETTINGS, workers=100))
     with pytest.raises(ValueError, match='reason'): s.worker_cap(dict(SETTINGS, profile='x2', workers=32, cpu_budget=32))
-    assert s.worker_cap(dict(SETTINGS, profile='x2', workers=32, cpu_budget=32, override_reason='operator test')) == 28
+    assert s.worker_cap(dict(SETTINGS, profile='x2', workers=32, cpu_budget=32, override_reason='operator test')) == 31
     monkeypatch.setattr(r, 'mem_available_bytes', lambda: None)
     with pytest.raises(ValueError, match='measured'): s.memory_budget()
 
@@ -552,7 +552,8 @@ def test_proof_idle_timeout_spends_no_memory_before_thirty_minutes(tmp_path, mon
     monkeypatch.setattr(s.time, 'monotonic', lambda: clock[0])
     monkeypatch.setattr(s.time, 'sleep', lambda seconds: clock.__setitem__(0, clock[0] + seconds))
     monkeypatch.setattr(s, 'memory_budget', lambda *args: .1)
-    monkeypatch.setattr(s.ProcessPoolExecutor, 'submit', lambda *args: pytest.fail('job admitted without memory'))
+    from v3.worker_safety import IsolatedPools
+    monkeypatch.setattr(IsolatedPools, 'submit', lambda *args: pytest.fail('job admitted without memory'))
     item = dict(job=a.stable_job('fixture', {}, 'validation', 1), phase_root=str(tmp_path), producing_code_hash='0' * 64,
                 resources=dict(worker_seconds=1., memory_gb=.3, memory_class='fixture'))
     with pytest.raises(ValueError, match='1800 seconds'):

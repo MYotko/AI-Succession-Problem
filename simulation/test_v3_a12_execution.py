@@ -109,10 +109,16 @@ def test_second_x2_joins_configures_and_runs_without_llm(tmp_path, monkeypatch):
     spec['jobs'] = [a.stable_job('rerun', cfg, 'validation', i) for i in range(10)]
     spec['pull_dispatch']['job_classes'] = {j['id']: str(i) for i, j in enumerate(spec['jobs'])}
     spec['configuration']['toy'].update(kind='rerun', config=cfg)
+    # Keep this real-process service/transport fixture at eight trial jobs.
+    # The CPU-cap candidate tests independently cover 31 with small trial RSS.
+    spec['configuration']['toy'].pop('jobs_per_worker')
+    spec['configuration']['toy']['jobs_x2'] = 8
     _, root, spec = initialize(tmp_path, spec, hosts=(SECOND,), host_settings={SECOND: X2_NONE})
     monkeypatch.setattr(h.platform, 'node', lambda: SECOND)
     monkeypatch.setattr(h.platform, 'system', lambda: 'Linux')
     monkeypatch.setattr(runner, 'available_cpus', lambda: 32)
+    from v3 import worker_safety
+    monkeypatch.setattr(worker_safety, 'swap_status', lambda: dict(total_bytes=32*1024**3, free_bytes=32*1024**3))
     # The actual toy worker pool is eight, within the workstation's 12 cap.
     monkeypatch.setattr(runner, 'mem_available_bytes', lambda: 10_000_000_000)
     monkeypatch.setattr(service, 'command', lambda *args: pytest.fail('no llm command is permitted'))

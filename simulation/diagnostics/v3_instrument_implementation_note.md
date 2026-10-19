@@ -5027,3 +5027,127 @@ A2 re-pin are in `_a13_build/REPORT.md`. No scientific function, seed, job
 configuration, selection, comparison, reservation, finality or approval
 semantics changed. A new operator commit, rehearsal, qualification and proof
 remain required; none is executed by this build.
+
+## 41. Item 10 admission and X2 mode caps, 2026-10-18
+
+This scheduling revision implements the operator's item 10 rule and supersedes
+the per-class admission charge in sections 38 to 40. Its LF-normalized identity is `5df9866f1a59ab9c6c67660c18fbee694a64f97d5eebb65a41c8deaf2d650d1c`; complete
+verification results are recorded in `_a13_build/REPORT.md`. The stopped proof
+at identity 2a88b5c6 is spent. A new operator commit, rehearsal, qualification
+and proof are required; this build does not access either X2 or reuse that proof.
+
+Each class retains its registered estimate or its own measured peak times 1.2,
+whichever is larger. Over the host's unfinished jobs, W is the mean reservation
+of the heaviest ceil(n/4) jobs. A job charges min(its reservation, W). Charges
+and W are recomputed after completion and observed peak updates. Running charges
+plus the candidate must fit the host budget, and the candidate must fit headroom
+times live available memory. Single-host phases include unfinished later phases;
+pull hosts include eligible unleased jobs plus their own active leases. The proof
+uses its frozen assignment. Configuration and qualification use the same rule.
+No single worst-case floor is charged to unrelated classes.
+
+Only spawned simulation children attempt to set Linux oom_score_adj to 1000.
+The PID, timestamp, success or error are executor metadata. X2 preflight records
+swap total and free and refuses below 16 GB free. The supervisors retain their
+existing OOM priorities. Windows tests exercise native child termination; Linux
+SIGKILL and procfs behavior must also pass the written rehearsal on each X2.
+
+A worker killed by a signal before returning a result may restart the same job,
+seed and configuration at most three times, with durable restart events. Proof
+and qualification use an isolated single-job spawn executor per admission, so
+one BrokenProcessPool cannot terminate unrelated jobs. Return journals recover
+results lost during transport; durable qualification and runner outputs are
+recovered without another execution. Non-signal failures retain their handling.
+A returned mismatch and retry exhaustion remain final proof failures. A11 item 3
+still compares every returned result with its original durable record. Operator
+interruption of a proof supervisor after its marker remains final.
+
+X2 normal and work both use n minus one workers. The local profile is unchanged.
+MODE_CAPS_TARGET remains True, and live targets and history retain their existing
+resume semantics. Proof and qualification accept normal mode. Configuration
+trials include the usable launch cap, subject to memory
+and any explicit operator target; measured fastest throughput still chooses the
+ordinary launch configuration, preferring smaller within five percent. The old
+reduced-pilot ceiling of sixteen is removed. Numerical thread limits, phase
+barriers, deadlines, qualification, service supervision and explicit overall
+pull targets remain in force.
+Fixed-size configuration profiles cap candidate concurrency at their existing
+job count; extending the candidate list never enlarges their sealed population.
+
+Load sheets show per-class and item 10 projections side by side. A read-only
+historical-attempt option projects sealed executor resources without opening
+scientific outputs or writing into the old root. Missing memory authority or
+per-job rates produce unavailable fields. The local 434-job preparation
+reconstruction and remaining-stage job-list limitations are labeled explicitly
+in the report; reconstructed and aggregate-rate scenarios are not measurements.
+The design note, scientific functions, selection, seeds, comparison, approval
+and attempt reservation semantics remain unchanged.
+
+## 42. Item 10 review fixes, round 1, 2026-10-18
+
+Short configuration trials now keep their own memory classes and RSS histories.
+Their first non-registered admission uses a 0.25 GB bootstrap, and later
+admissions use the larger of that estimate and their own measured peak times
+1.2. Both item 10 guards apply. The full scientific job's reservation no longer
+caps a uniform profile's candidate counts or charges its short trials. Candidate
+counts reach the usable CPU cap, 31 on either X2 mode, without enlarging any
+fixed-size sealed trial population. Trial peaks never replace scientific peaks.
+New short-profile qualification bundles use these trial classes as well;
+qualification jobs selected from durable references retain their full-job classes.
+
+The proof's host target bounds total active jobs. Each profile's measured choice
+bounds only that profile's active jobs, so a heavy job does not wait for unrelated
+profiles to drain. Pull claims and host-side slot requests apply the same separate
+gates. Single-host phase dispatch has only one profile active at a time; its
+measured choice remains effective. Explicit worker targets, live controls, mode
+precedence and memory admission retain their existing semantics.
+
+Load-sheet simulation applies the profile limits and host target together with
+completion-driven item 10 admission. It reports initial, mean and maximum workers
+and the final drain. Missing configuration measurements are labeled as a
+conditional target-choice forecast, not an observed choice. Live-memory dips,
+startup and transport overhead remain excluded from the forecast. Proof load
+sheets use recorded preflight choices when available.
+
+Every registered launch now requires a sealed memory estimate or measured peak
+for every class before dispatch, including launches within the mode cap. The
+existing family-halt preflight retains first refusal, before this new check. The
+refusal directs the operator to freeze for pull dispatch. Remaining stage-1
+extension, A5 label and all five run-family specs must be frozen from the
+registered projection before their pre-go load sheets. Non-registered fixtures
+may keep the nominal bootstrap. Synthetic tests check these launch paths,
+configuration candidates, independent profile counts, packing and projected
+timelines. The report records counts, limitations and the new A2 runner pin.
+Scientific results, seeds, settings, selection, comparison and finality are
+unchanged. No rehearsal, proof, registered job or remote access is performed.
+
+## 43. Item 10 review fixes, round 2, 2026-10-19
+
+Worker OOM sidecars and informational executor writes now use two bounded
+attempts. An OSError or ValueError records the path, error class, error and time
+on stderr, then execution continues. This covers runner, proof, qualification
+and pull-host workers; scheduling/status snapshots; recoverable class-memory
+summaries; configuration measurement copies; diagnostic events and failure
+reports; and service metadata/logs. Service commands execute once even when
+their log cannot be written. The supervisor still checks their exit status and
+restores the service. Swap measurement and its refusal remain effective even
+when its informational record cannot be saved. The scoped write guard is unchanged.
+
+Restart counts are correctness records, not disposable diagnostics. Runner,
+proof and qualification retry-journal writes pause resubmission until durable,
+retrying once a second without a timeout. Failures are reported on stderr on
+the first attempt and every 30 attempts thereafter. This preserves the rerun
+bound across resume without turning transient metadata storage failure into a
+failed proof. Interrupting an already-started proof retains its finality. Pull
+retry counts remain in strict coordinator transactions; the protocol-event
+side journal is best-effort.
+
+Scientific output, completion and checkpoint writes remain strict. So do
+return journals (which distinguish a returned result from an absent result),
+active-worker resume guards, persisted controls, budget and identity records,
+pull-state fallback snapshots used by A13 publication,
+proof start/preflight/result records, qualification evidence, and all records
+used by comparison, publication or approval. Informational failures do not
+alter a seed, setting, result, selection, comparison or attempt outcome. Tests
+inject both kinds of failure and retain a final failed proof for a correctness
+write failure. The build report gives test counts, identity and A2 re-pins.

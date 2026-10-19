@@ -245,7 +245,7 @@ def test_distributed_load_sheet_counts_each_job_once_and_remote_cpu(monkeypatch)
     sheets = wc.distributed_load_sheet(jobs, estimates, hosts)
     assert sum(s['forecast_jobs'] for s in sheets.values()) == 9
     assert sum(s['total_worker_hours'] for s in sheets.values()) == 90/3600
-    assert all(s['planned_workers']==28 and s['projected_peak_memory_fraction']<=.8 for s in sheets.values())
+    assert all(s['planned_workers']==31 and s['projected_peak_memory_fraction']<=.8 for s in sheets.values())
     assert all(s['measured_wall_hours'] is not None for s in sheets.values())
 
 

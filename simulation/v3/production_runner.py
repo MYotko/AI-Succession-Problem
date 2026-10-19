@@ -11,16 +11,20 @@ import time
 import traceback
 from .artifacts import (ROOT, SIMULATION, atomic_json, read, digest, seal, unseal, file_hash,
                         code_identity, stable_job, configure_threads, runtime, available_cpus, scoped, lease, verify_registration)
+from .worker_safety import best_effort, metadata_json, persist_restarts
 
 
 def event(root, kind, **fields):
-    path = scoped(root) / "events.jsonl"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    from .artifacts import canonical
-    with path.open("ab") as stream:
-        stream.write(canonical({"epoch": time.time(), "event": kind, **fields}) + b"\n")
-        stream.flush()
-        os.fsync(stream.fileno())
+    path = Path(root) / "events.jsonl"
+    def write():
+        target = scoped(path)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        from .artifacts import canonical
+        with target.open("ab") as stream:
+            stream.write(canonical({"epoch": time.time(), "event": kind, **fields}) + b"\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+    best_effort(path, write)
 
 
 def mem_available_bytes():
@@ -102,7 +106,7 @@ def caps(profile, budget):
     if profile == "x2":
         if budget > 32:
             raise ValueError("X2 CPU budget is at most 32")
-        return {"normal": max(1, budget - 1), "work": max(1, budget - 4), "configuration": budget}
+        return {"normal": max(1, budget - 1), "work": max(1, budget - 1), "configuration": budget}
     return {"normal": min(12, max(1, budget - 1)), "work": min(12, max(1, budget - 4)), "configuration": min(12, budget)}
 
 
@@ -264,6 +268,9 @@ def worker(root_name, job, code, threads, registered, registration, completion_d
         with input_view(input_snapshot):
             return worker(root_name, job, code, threads, registered, registration, completion_deadline)
     root = Path(root_name)
+    from .worker_safety import prefer_worker_oom
+    oom = prefer_worker_oom()
+    metadata_json(root / "worker_metadata" / (job["id"] + ".json"), {"oom_score_adj": oom})
     configure_threads(threads)
     try:
         with lease(root / "leases" / (job["id"] + ".lock")):
@@ -286,7 +293,7 @@ def worker(root_name, job, code, threads, registered, registration, completion_d
                 return  # An output without a completion record is never counted.
             atomic_json(root / "records" / (job["id"] + ".json"),
                         {"job": job, "code_hash": code, "status": "complete", "output_hash": file_hash(path), "completed_epoch": time.time(),
-                         "worker_seconds": time.perf_counter() - before, "peak_rss_bytes": output["peak_rss_bytes"]})
+                         "worker_seconds": time.perf_counter() - before, "peak_rss_bytes": output["peak_rss_bytes"], "oom_score_adj": oom})
     except BaseException as exc:
         if job['kind'] == 'a13_validate_plain_ext' and job['tag'] == 'v3_tables':
             from .validation_extension_a13 import ScientificHalt
@@ -295,11 +302,11 @@ def worker(root_name, job, code, threads, registered, registration, completion_d
                 atomic_json(root.parent / 'a13_scientific_halt.json', seal({'reason': 'A13 scientific halt', 'job_id': job['id']}))
                 from .validation_extension_a13 import latch_round_halt
                 latch_round_halt(root.parent, 'A13 scientific halt')
-        atomic_json(root / "failures" / (job["id"] + ".json"), {"job": job, "traceback": traceback.format_exc()})
+        metadata_json(root / "failures" / (job["id"] + ".json"), {"job": job, "traceback": traceback.format_exc()})
         raise
 
 
-def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=None, control_root=None, registered=False, registration=None, completion_screen=None, memory_cap=None, memory_estimate_gb=None, pooled_jobs=None, input_snapshot=None, job_resources=None, measured_peaks=None):
+def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=None, control_root=None, registered=False, registration=None, completion_screen=None, memory_cap=None, memory_estimate_gb=None, pooled_jobs=None, input_snapshot=None, job_resources=None, measured_peaks=None, remaining_resources=None):
     root = scoped(root)
     root.mkdir(parents=True, exist_ok=True)
     control_root = control_root or root
@@ -322,8 +329,10 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
     if memory_path.exists():
         for key, peak in read(memory_path).items():
             pool_estimates[key] = max(pool_estimates.get(key, 0.), peak)
+    wc.require_registered_memory(registered, {j['id']: resources[j['id']] for j in jobs}, pool_estimates)
+    charges, weight, charge_revision = {}, 0., None
     def job_memory(job):
-        return wc.reservation(resources[job['id']], pool_estimates)
+        return charges[job['id']]
     event(root, 'memory_budget', budget_gb=pool_budget, headroom=fraction)
     last_memory_hold = [0.0]
     old = read(root / "active.json") if (root / "active.json").exists() else {}
@@ -332,6 +341,9 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
     active, maximum, reason, last_mode, last_selection = {}, 0, "complete", None, None
     attempts_path = root / "attempts.json"
     attempts = read(attempts_path) if attempts_path.exists() else {}
+    from .worker_safety import killed_signal, restart, require_retry_budget
+    restarts_path = root / "worker_restarts.json"
+    restarts = read(restarts_path) if restarts_path.exists() else []
     context = mp.get_context("spawn")
     signals = []
     handlers = {sig: signal.signal(sig, lambda number, frame: signals.append(number)) for sig in (signal.SIGINT, signal.SIGTERM)}
@@ -342,7 +354,7 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
     if pooled_jobs is not None and not pending:
         control = read(control_root / "control.json")
         last_mode = control["mode"]
-        last_selection = wc.selection(settings, control, measurements, fixed, default_cap=16 if pooled_jobs is not None else None)
+        last_selection = wc.selection(settings, control, measurements, fixed, default_cap=None)
     def publish():
         atomic_json(root / "active.json", {"machine": platform.node(), "pids": [p.pid for p, _, _ in active.values()]})
         status = {"total": len(jobs), "completed": len(done), "running": len(active),
@@ -351,8 +363,8 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
         if pooled_jobs is not None:
             status.update(memory_budget_gb=pool_budget, memory_estimates_gb=pool_estimates,
                           not_completed_ids=[j["id"] for j in jobs if j["id"] not in done])
-            atomic_json(root / "job_status.json", {j["id"]: "complete" if j["id"] in done else "not completed" for j in jobs})
-        atomic_json(root / "status.json", status)
+            metadata_json(root / "job_status.json", {j["id"]: "complete" if j["id"] in done else "not completed" for j in jobs})
+        metadata_json(root / "status.json", status)
         return status
     def stop(reason):
         for process, job, _ in active.values():
@@ -394,7 +406,7 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
             mode = control["mode"]
             if mode not in ("normal", "work"):
                 raise ValueError("invalid live mode")
-            selected = wc.selection(settings, control, measurements, fixed, default_cap=16 if pooled_jobs is not None else None)
+            selected = wc.selection(settings, control, measurements, fixed, default_cap=None)
             selected = wc.memory_safe_selection(settings, control, resources, pool_estimates, selected,
                 configuration_trial=fixed is not None and all(j['tag'] == 'configuration' for j in jobs))
             if mode != last_mode or selected != last_selection:
@@ -411,9 +423,26 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                     process.join()
                     del active[key]
                     output = completed(root, job, code)
-                    if output is None:
+                    if output is None and killed_signal(process.exitcode):
+                        path = root / 'outputs' / (key + '.json')
+                        if path.exists():
+                            returned = read(path)
+                            if returned['job'] != job or returned['code_hash'] != code:
+                                raise RuntimeError('returned output identity mismatch')
+                            atomic_json(root / 'records' / (key + '.json'), dict(job=job, code_hash=code,
+                                status='complete', output_hash=file_hash(path), completed_epoch=time.time(),
+                                worker_seconds=returned['seconds'], peak_rss_bytes=returned.get('peak_rss_bytes'),
+                                recovered_return_after_signal=killed_signal(process.exitcode)))
+                            output = completed(root, job, code)
+                    if output is None and killed_signal(process.exitcode):
+                        entry = restart(restarts, key, killed_signal(process.exitcode))
+                        persist_restarts(restarts_path, restarts)
+                        event(root, 'signal_restart', **entry)
+                        if not entry['allowed']: raise RuntimeError('worker exhausted three signal reruns')
+                        pending.insert(0, job)
+                    elif output is None:
                         attempts[key] = attempts.get(key, 0) + 1
-                        atomic_json(attempts_path, attempts)
+                        persist_restarts(attempts_path, attempts)
                         event(root, "restart", job=key, attempt=attempts[key], runner_seed_unused=job["kind"].startswith(("a4_", "a5_")),
                               **({} if job["kind"].startswith(("a4_", "a5_")) else {"seed": job["seed"]}))
                         if attempts[key] >= 3:
@@ -423,9 +452,9 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                         done.add(key)
                         event(root, "complete", job=key, pid=process.pid)
                         wc.observe(pool_estimates, resources[job['id']], output.get('peak_rss_bytes'))
-                        atomic_json(memory_path, pool_estimates)
+                        metadata_json(memory_path, pool_estimates)
                         if pooled_jobs is not None:
-                            atomic_json(root / 'pool_memory.json', pool_estimates)
+                            metadata_json(root / 'pool_memory.json', pool_estimates)
                         if check(job):
                             reason = "screen_failure"
                             stop(reason)
@@ -433,6 +462,9 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                             break
             if reason == "screen_failure":
                 break
+            if charge_revision != len(done):
+                charges, weight = wc.admission_charges({**(remaining_resources or {}), **{j['id']: resources[j['id']] for j in pending + [j for _, j, _ in active.values()]}}, pool_estimates)
+                charge_revision = len(done)
             effective_limit = selected['workers']
             if len(active) <= effective_limit and mode_effective != mode:
                 mode_effective = mode
@@ -453,6 +485,7 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                     break
                 pending.insert(0, pending.pop(index))
                 job = pending.pop(0)
+                require_retry_budget(restarts, job['id'])
                 if attempts.get(job["id"], 0) >= 3:
                     raise RuntimeError("job has exhausted retries")
                 args = (str(root), job, code, selected["threads"], registered, registration)
@@ -470,7 +503,7 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                       **({} if is_a4 else {"seed": job["seed"]}),
                       pid=process.pid, active=len(active), slots=slots, mode=mode,
                       **({"memory_estimate_gb": job_memory(job), "memory_budget_gb": pool_budget,
-                          "reserved_memory_gb": sum(job_memory(j) for _, j, _ in active.values()),
+                          "reserved_memory_gb": sum(job_memory(j) for _, j, _ in active.values()), "top_weighted_gb": weight,
                           "estimated_seconds": resources[job["id"]]["estimated_seconds"]}))
                 publish()
             status = publish()
@@ -531,6 +564,9 @@ def nondeterminism_check(phase_root, jobs, registered=False, registration=None):
     manifest = phase_root.parent / 'manifest.json'
     plan = unseal(read(manifest)) if manifest.exists() else dict(jobs=jobs)
     resources = wc.resources(plan)
+    completed_ids = {j['id'] for j in done}
+    remaining = {j['id']: resources[j['id']] for j in plan['jobs']
+                 if j['id'] not in completed_ids and completed(phase_root.parent / j['config'].get('phase', j['kind']), j, code) is None}
     peaks = wc.completion_peaks(phase_root, jobs, resources)
     if (phase_root / 'memory_reservations.json').exists():
         for key, value in read(phase_root / 'memory_reservations.json').items(): peaks[key] = max(peaks.get(key, 0.), value)
@@ -548,14 +584,20 @@ def nondeterminism_check(phase_root, jobs, registered=False, registration=None):
         time.sleep(.1)
     available = mem_available_bytes()
     fraction = run_settings.get('memory_headroom', .8) if run_settings else .8
-    if available is None or wc.reservation(resources[job['id']], peaks) > fraction * available / 1e9:
+    charges, _ = wc.admission_charges({**remaining, job['id']: resources[job['id']]}, peaks)
+    if available is None or charges[job['id']] > fraction * available / 1e9:
         raise RuntimeError('nondeterminism job does not fit measured memory')
     # A sibling of the phase dirs, so a plain validate recompute still finds its
     # fit phase at temp.parent/"fit".
     temp = phase_root.parent / ("_nd_" + phase_root.name)
-    process = mp.get_context("spawn").Process(target=worker, args=(str(temp), job, code, 1, registered, registration))
-    process.start()
-    process.join()
+    # The ordinary scheduler also handles signal deaths during a recheck.
+    check_settings = dict(profile='local', cpu_budget=1, workers=1, threads=1, mode='normal', memory_headroom=fraction)
+    atomic_json(temp / 'control.json', dict(mode='normal', max_workers=1))
+    budget_path = phase_root.parent / 'budget.json'
+    if registered and not budget_path.exists(): raise RuntimeError('registered check requires its launch deadline')
+    check_deadline = read(budget_path)['deadline_epoch'] if budget_path.exists() else time.time() + 24 * 3600
+    dispatch(temp, [job], code, check_settings, check_deadline,
+             registered=registered, registration=registration, job_resources=resources, measured_peaks=peaks, remaining_resources=remaining)
     fresh = completed(temp, job, code)
     original = completed(phase_root, job, code)
     if fresh is None or digest(fresh["result"]) != digest(original["result"]):
@@ -647,17 +689,14 @@ def configuration_test(root, phase, profile, settings, deadline, launch_number, 
     if settings["profile"] == "x2" and not {8, 12, 16, 24, 32}.issubset(listed):
         raise ValueError("missing required X2 configuration candidates")
     pooled = profile.get("pooled_estimates_by_stratum")
-    cap = settings['cpu_budget'] if settings.get('operator_override') else settings['caps']['configuration']
-    if pooled is not None and not settings.get('operator_override'): cap = min(cap, 16)
-    if memory_cap is not None: cap = min(cap, memory_cap)
+    cap = (settings['caps'][settings['mode']] if settings['profile'] == 'x2' else
+           settings['cpu_budget'] if settings.get('operator_override') else settings['caps']['configuration'])
     available = mem_available_bytes()
     if available is None: raise RuntimeError('configuration requires measured memory')
-    own_cap = wc.profile_memory_limit(profile, source_jobs, job_resources,
-        settings.get('memory_headroom', .8) * available / 1e9, pooled, phase=phase, spec=memory_spec)
-    if own_cap is not None:
-        if own_cap < 1: raise RuntimeError('configuration class does not fit measured memory')
-        cap = min(cap, own_cap)
-    candidates = configuration_candidates(listed, cap)
+    # A fixed-size sealed profile cannot occupy more workers than its jobs.
+    # Keep that job population unchanged when extending the candidate list.
+    cap = min(cap, configuration_job_count(profile, cap, settings['profile'] == 'x2'))
+    candidates = sorted(set(configuration_candidates(listed, cap)) | {cap, min(cap, settings['caps'][settings['mode']])})
     if settings.get('operator_override'):
         candidates = sorted(set(candidates) | {min(settings['workers'], cap)})
     if settings["threads"] == 2 and not profile.get("material_multithreaded_numerics"):
@@ -675,8 +714,7 @@ def configuration_test(root, phase, profile, settings, deadline, launch_number, 
             extra = {"pooled_jobs": {j["id"]: pooled[j["config"]["phase"]] for j in jobs}} if pooled is not None else {}
             if input_snapshot is not None:
                 extra['input_snapshot'] = input_snapshot
-            if job_resources is not None:
-                extra['job_resources'] = wc.configuration_resources(jobs, source_jobs, job_resources, phase=phase, spec=memory_spec)
+            extra['job_resources'] = wc.trial_resources(jobs)
             result = dispatch(target, jobs, code_identity(), settings, deadline, fixed={"workers": w, "threads": t}, control_root=root, measured_peaks=class_peaks, **extra)
             if (target / "memory_reservations.json").exists():
                 class_peaks.update(read(target / "memory_reservations.json"))
@@ -688,7 +726,7 @@ def configuration_test(root, phase, profile, settings, deadline, launch_number, 
                 measurement.update(memory_budget_gb=result["memory_budget_gb"],
                                    memory_estimates_gb=result["memory_estimates_gb"], maximum_active=result["maximum_active"])
             measurements.append(measurement)
-            atomic_json(root / "configuration" / str(launch_number) / (phase + ".json"), measurements)
+            metadata_json(root / "configuration" / str(launch_number) / (phase + ".json"), measurements)
             if not measurement["valid"]:
                 raise RuntimeError("configuration test incomplete; scientific dispatch refused")
     return measurements
@@ -927,6 +965,9 @@ def launch(spec_path, root, settings, service_record=None):
         return coordinate(spec_path, root, settings)
     from . import worker_control as wc
     screen = preflight_completion(spec, root)
+    resources = wc.resources(spec)
+    _, prior_peaks = wc.completion_measurements(scoped(root), spec['jobs'], resources)
+    wc.require_registered_memory(spec.get('registered'), resources, prior_peaks)
     settings = wc.settings(settings)
     try:
         context_preflight = validate_spec(spec, settings)
@@ -935,6 +976,8 @@ def launch(spec_path, root, settings, service_record=None):
         raise
     root = scoped(root)
     root.mkdir(parents=True, exist_ok=True)
+    from .worker_safety import swap_preflight
+    swap_preflight(settings, root / "swap_preflight.json")
     if spec.get('schema') == 'v3-A13-extension-1':
         from .validation_extension_a13 import begin_round
         begin_round(spec, spec_path, root)
@@ -994,7 +1037,7 @@ def launch(spec_path, root, settings, service_record=None):
             if spec.get("tag") == "pilot":
                 atomic_json(root / "cost_projection.json", {"status": "incomplete", "reason": "configuration test incomplete; scientific dispatch refused"})
             if pooled:
-                atomic_json(root / "pooled" / "job_status.json", {j["id"]: "complete" if completed(root / "pooled", j, code_identity()) else "not completed" for j in spec["jobs"]})
+                metadata_json(root / "pooled" / "job_status.json", {j["id"]: "complete" if completed(root / "pooled", j, code_identity()) else "not completed" for j in spec["jobs"]})
             raise
         outcomes = {}
         effective_workers = {}
@@ -1024,6 +1067,9 @@ def launch(spec_path, root, settings, service_record=None):
                               control_root=root, registered=spec["registered"], registration=spec.get("registration"),
                               completion_screen=screen, memory_cap=mem_caps.get(phase) if memory_managed else None,
                               memory_estimate_gb=memory_estimate, job_resources=resources,
+                              remaining_resources={j['id']: resources[j['id']] for j in spec['jobs']
+                                if j['config'].get('phase', j['kind']) in spec['phases'][index+1:]
+                                and completed(root / j['config'].get('phase', j['kind']), j, code_identity()) is None},
                               measured_peaks={key: max(m.get("class_peaks_gb", {}).get(key, 0.) for data in record["configuration"].values() for m in data)
                                 for data in record["configuration"].values() for m in data for key in m.get("class_peaks_gb", {})},
                               **({"pooled_jobs": spec["pooled_job_estimates"]} if pooled else {}))
@@ -1071,7 +1117,7 @@ def launch(spec_path, root, settings, service_record=None):
 
 def conformance():
     from tempfile import TemporaryDirectory
-    assert caps("x2", 32) == {"normal": 31, "work": 28, "configuration": 32}
+    assert caps("x2", 32) == {"normal": 31, "work": 31, "configuration": 32}
     data = [{"workers": 8, "threads": 1, "valid": True, "completed": 10, "wall_seconds": 10},
             {"workers": 12, "threads": 1, "valid": True, "completed": 10, "wall_seconds": 9.8}]
     assert choose(data, 31, 32)["workers"] == 8
@@ -1109,7 +1155,7 @@ def main():
     p = commands.add_parser('load-sheet'); p.add_argument('plan')
     p.add_argument('--profile', choices=('local','x2'), required=True); p.add_argument('--workers', type=int, required=True)
     p.add_argument('--cpu-budget', type=int, required=True); p.add_argument('--threads', type=int, default=1)
-    p.add_argument('--mode', choices=('normal','work'), default='work'); wc.options(p)
+    p.add_argument('--mode', choices=('normal','work'), default='normal'); wc.options(p)
     p.add_argument('--hosts', help='qualified host entries for a per-host load sheet')
     p.add_argument('--root', help='optional prior executor completion metadata for measured rates and class peaks')
     p = commands.add_parser("status"); p.add_argument("root")
@@ -1156,7 +1202,11 @@ def main():
         settings.update(wc.arguments(args))
         available = mem_available_bytes()
         estimates, peaks = wc.resources(spec), {}
+        profile_measurements = {}
         if args.root: estimates, peaks = wc.completion_measurements(scoped(args.root), spec['jobs'], estimates)
+        if args.root and (scoped(args.root) / 'launches.json').exists():
+            history = read(scoped(args.root) / 'launches.json')
+            if history: profile_measurements = history[-1].get('configuration', {})
         if available is None: raise ValueError('load sheet needs measured memory')
         if args.hosts:
             from .qualification_a11 import validate_evidence, scheduling_rate
@@ -1168,7 +1218,7 @@ def main():
             print(wc.distributed_load_sheet(spec['jobs'], estimates, hosts))
         else:
             print({platform.node(): wc.load_sheet(spec['jobs'], estimates, settings, available / 1e9, peaks=peaks,
-                default_cap=16 if reduced_pilot(spec) else None)})
+                measurements_by_profile=profile_measurements, default_cap=None)})
     else:
         root = scoped(args.root)
         if (root / 'pull_state.json').exists():
