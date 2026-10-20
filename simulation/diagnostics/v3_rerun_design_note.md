@@ -2331,3 +2331,315 @@ This replaces A12 part 2's steps 2 to 6. It supersedes A12's clarification of 20
 - **Reporting:** the executor reports R_max and the total projected cost R_max · Σ_j B_j / 3. Per-stratum prices stay executor-only, under the cost-reporting rule.
 - **Metering is unchanged:** actual consumption is metered as for any launch (`multihost_a11.py:266` to `:268`), and charged to the stage 1 ledger.
 - **The pin:** later launches pin the commit carrying this clarification, with the design note byte-identical to it there, in place of `8336a1f6`.
+
+### Amendment A14, 2026-10-20: a second and final extension round for the A10 nominal family
+
+**Timing, and what was known.**
+
+- **When it was written:** 2026-10-20, after the A13 round's publication was refused.
+  - **The A13 round:** launched 2026-10-19T19:32:53Z on X2-1, single-host, from `plan.json` (plan hash `e30c465ff93d476ef70e1f5573179ad0b616cb724881d1bab73ae05a9af25a62`), at code identity `5df9866f…`, checkout commit `55817036`. It completed at 2026-10-20T01:20:32Z with its same-host nondeterminism check matched and no halt.
+  - **Its publication:** at 2026-10-20T11:36Z, A13 Part 2 refused it. No family, receipt or sidecar was written.
+  - **The sealed admission record:** `v3/runs/a10_stage1/nominal/v3_rerun_tables_A10.a13_round.admission.json`, SHA-256 `87f8b2453e04b178a4f2dcd40c07ae41b9ab06a350a70d5b57e834aa8e5c6dd7`. It records outcome `refused`, cap 19 and residual count 20. The refusal exception, in the publication log, names the cap.
+- **What was known** (the executor's publication report and read-only feasibility assessment of 2026-10-20, which give counts and costs only):
+  - **The counts:** E = 50 rows were eligible. 30 reached N\*, and all 30 certified and passed the floor. 20 remain `not_estimable`.
+  - **The 20 residual rows:**
+    - All 20 ran the round's full 16 replicates without reaching N\*.
+    - None was tested: `extension_test` returns `unresolved`, reason "N* not reached", before any test is computed (`validation_extension_a13.py:140` to `:142`).
+    - None has a violation. They lie in 4 of the 10 source jobs and span 10 lookup contexts.
+  - **Two Part 2 conditions fail:**
+    - the cap, with 20 residual rows against 19 (`admission_a13.py:47` to `:48`);
+    - the one-row-per-context limit, with 5 contexts holding more than one residual row (15 rows in all) (`:57` to `:58`).
+
+    `verify` checks the cap first, so the exception names only the cap. Meeting the context limit needs at least 10 of the 15 shared-context rows to certify. No residual row is a balanced-witness row, and none fails item 12(b).
+  - **Foreseeability (inferred, from a model):**
+    - **The formal records could not show it:** no row was flagged impossible before launch.
+    - **The visit counts could:** a model on the original three-replicate visit counts, which `prepare` reads for eligibility, predicts the same 20 rows, with P(more than 19 residual rows) ≈ 0.996.
+    - **The binding limit:** A13 item 5's bound R ≤ 16, not its 15 X2-hour price cap, which alone would have allowed R = 29. Under the model, a first round of about 24 replicates would probably have met every condition.
+
+    The operator and interpreter assess this as a design error in A13 item 5, and in the pre-launch reviews that accepted it: A13's text certifications, the review of the A13 code build, and the interpreter's pre-launch review. The code-build reviewer confirms that its review checked code against item 5 as written and did not question the bound; the rest is the interpreter's attestation.
+  - **The assessment's projection** for a second round on fresh data alone (a budget estimate):
+    - **Baseline:** P(every Part 2 condition) ≈ 0.97 at R = 23 and ≈ 1.0 at R ≥ 24. This is a plug-in forecast, taking round 1's 30 certified of 30 and 0 violations of 30 as a certification rate of 1 and a violation rate of 0. It is not an assurance.
+    - **Sensitivity:** about 0.86 at a certification rate of 0.9 and about 0.56 at 0.8. A 0.03 violation rate alone gives about 0.63, and a single violation in any residual row refuses admission.
+    - **The plausible range from 30 observations:** certification as low as about 0.90, and violation as high as about 0.10. Group-level overdispersion relative to the independent, stationary-trajectory model could widen the transition by a few replicates (a guess).
+    - **The expected outcome:** about 5 rows stay unreached at every R from 24 to about 96. They lie in 5 distinct contexts, so they would be admitted as residual rows. Success is expected to mean admission with about five residual `not_estimable` rows, not full estimation.
+- **What was not known:**
+  - **Values:** neither the operator nor the interpreter read any table value, C0 value, continuation value, flow, survival or other scientific quantity.
+  - **Executor-only:** N\*, reach, visit counts, widths and per-row prices.
+  - **Row identifiers:** they appear in approved public provenance records (the plan companions and the sealed admission record) and in executor-side records. The reports disclose counts only.
+- **Prospectiveness:** this round is prospective for its fresh observations. Both the decision to run it and its replicate bound were informed by the A13 round's outcome.
+- **Certification and adoption:**
+  - **Five rounds:** two certifiers from different model families reviewed each draft blind to each other on 2026-10-20.
+    - **Drafts 1 to 4:** both certified each with required repairs.
+    - **Draft 5:** both certified it for both snapshot variants, with the snapshot-path repair bundled (S) and without it (N). One one-word repair, confirmed at adoption, is applied.
+    - Every required repair is incorporated.
+  - **Adoption:** the operator approved the text and chose variant S on 2026-10-20 (13:45Z: "Approved, go with S"). Variant N's text is deleted.
+    - **One certified sentence carried over:** the definition of a single-host "frozen dispatch specification", certified as part of variant N, is kept in step 6 for the default single-host launch.
+  - **The operator's choice:** made on 2026-10-20 ("Go with A14 as described, R 32").
+- **Code citations** refer to `simulation/v3/` at commit `55817036` (code identity `5df9866f…`).
+- **The earlier results stand as reported:**
+  - The original refusal and the A13 round's refusal are both preserved and reported.
+  - Success under this amendment is never described as success of the original registration, or of the A13 round.
+  - Nominal-family results are labeled as produced under A13 and A14, amendments informed by outcomes.
+
+**What this amendment supersedes, for the A10 nominal family only.**
+
+- **A13 item 10** ("There is no second extension round for this family") is superseded by items 1 to 12 here.
+- **A13 item 13's first scope bullet** reads "the rows of the A10 nominal family that remain `not_estimable` after A14's round". A no-launch from step 5 on, or a halt of A14's round, falls under item 12 here, which ends stage 1.
+- **A13 items 4 and 5** apply to this round with R_max₂ and the floor of 24 (item 5 here).
+- **Runbook 17.4's prohibition** on another plan, a larger R_max or a second round is superseded by the runbook section added in step 2.
+
+No other A13 item changes, and none changes for any other family.
+
+**Assumptions.**
+
+A13's assumptions 1 to 3 extend to this round.
+- **The new streams:** conditional on the fitted family and the earlier history, they have the same independent trajectory law. They come from item 4's seed range, disjoint from every earlier range. Integer disjointness is not itself proof of stream independence; that rests on A13's assumption 1.
+- **The stop** reads visit indicators 1{N_i > 0} only.
+- **Eligibility** reads D₀, the A13 round's statuses and its visit indicators. The eligibility predicate never uses an S_i or the magnitude of a positive N_i, and nothing from this round. Integrity validation may inspect the sealed records' structure and validity, for example finiteness; a malformed record is a finding, never a reason to exclude a row.
+- **Hence:** the marks of each eligible row's first N\* visiting trajectories in this round's data are independent and identically distributed under the law conditional on a visit.
+
+**The round.**
+
+1. **The A13 round's records.**
+   - **Copy and verify:** before eligibility, the executor copies the following by hash into this round's execution checkout and verifies them:
+     - the original refused candidate and its sidecar, and the original validation plan and receipt;
+     - the A13 `plan.json` (plan hash above) and its `.public.json`;
+     - the family round record `v3/runs/a10_stage1/nominal/v3_rerun_tables_A10.a13_round.json`;
+     - the sealed admission record (SHA-256 above);
+     - from the A13 root: `identity.json`, `launches.json`, `validate_plain_ext/nondeterminism_check.json`, the nondeterminism re-execution record `_nd_validate_plain_ext/records/<checked job>.json`, and the ten completion records and outputs;
+     - the original census and validation completion records and outputs that item 6's forecast reads.
+
+     Every file's SHA-256 is recorded in this round's plan.
+   - **The checks,** by a read-only verifier on the hash-verified copies. Recorded absolute paths are mapped to the copies through a frozen, immutable source-to-copy mapping:
+     - the checks of A13's `publication_round`, implemented read-only. The helper itself is not called: it can latch a halt into the A13 record (`validation_extension_a13.py:535`, `:548`), and it compares recorded absolute paths;
+     - each output is read through `completed` at code identity `5df9866f…` and `validate_replicates`;
+     - each result's plan and source identities, and that it either reached the registered stop or exhausted R_max = 16 (`:668`);
+     - historical plans are verified by ancestry and committed note hash, and their producer identities through the committed compatibility records.
+
+     A13's `validate_plan`, `publication_round` and `publish` are not called; `validate_plan` and `publish` require the running identity (`validation_extension_a13.py:448` to `:449`, `:644`). Nothing is re-pinned, rewritten or latched, on a failure path either.
+   - **Each A13-eligible row's A13-round result** is recomputed deterministically with A13's unchanged `extension_test` on the recorded first N\* visiting trajectories. It gets no other statistic.
+     - The recomputed residual set must equal the admission record's residual rows; a difference is a finding.
+     - Eligibility uses only the recomputed reason "N* not reached", never the admission record's list.
+     - The classifications and their provenance are bound in executor-side records before launch.
+2. **Eligibility.** A row is eligible only if all of these hold:
+   - it was eligible for the A13 round (A13 item 1);
+   - its recomputed A13-round result is `unresolved`, with reason "N* not reached", so it was never tested;
+   - no cell has a `violation`.
+
+   Rows tested in the A13 round are not eligible, and keep that round's decision. Eligibility is recorded as one boolean per row, and the eligible set and its source jobs by identifier only. E₂ is the set's size, expected to be 20.
+3. **The constants:** each row's w, τ, M, α and N\* are recomputed with A13 item 2's expressions and must equal the A13 plan's values; a mismatch is a finding. N\* is unchanged.
+4. **The data.**
+   - **Its own phase:** a new phase, `validate_plain_ext2`, with its own job kind, `a14_validate_plain_ext2`, runs for the eligible rows' source jobs only.
+     - It reuses A13's unchanged `extension_stage`.
+     - Its outputs never enter the validate index or the A13 round's phase.
+     - The phase reads the fit and A1 outputs and the eligible set. It never reads the original validation statistics or any A13-round trajectory; item 1 reads those, at preparation only.
+   - **Replicates:** each has the registered size, 2,048 trajectories in 32 groups of 64, at the registered horizons. They are numbered 20 to 19 + R_max₂, continuing after the A13 round's 4 to 19.
+   - **Seeds:** ext2_seed(s, r) = 2^61 + `_truncated_sha("v3_R_validate_ext2", s, "/", r)`, for A1 job seed s and replicate r. They lie in [2^61, 2^61 + 2^60).
+     - **Disjoint ranges:** the reserved range [2^61, 2^62) lies outside:
+       - the A13 round's [2^60, 2^61);
+       - every `_truncated_sha` seed, below 2^60 (`continuation_validation.py:55` to `:60`);
+       - the `stable_job` and qualification seeds, in [2^128, 2^129) (`artifacts.py:141`; `qualification_a11.py:76`).
+     - **No shared input strings:** the hashed strings cannot coincide with the A13 round's. The separator forces an equal r, and 4 to 19 and 20 to 51 are disjoint.
+   - **The seed check, before any simulation:**
+     - the full manifest for replicates 20 to 19 + R_max₂ is frozen;
+     - its seeds must be pairwise distinct;
+     - none may equal any seed in the global inventory, including the A13 plan's `seed_manifest` and `forbidden_seeds` and the A13 round's qualification and configuration seeds, each named as an input;
+     - any collision halts the run.
+
+     The range is recorded as reserved. The runner's reserved-range guards, this round's seed check and A5's seed check all cover it.
+5. **The stop and R_max₂.**
+   - **The stop:** as A13 item 4 (`stop_reached`, `validation_extension_a13.py:177` to `:179`), with R_max₂ in place of R_max.
+   - **The prices:** A13's `price_extension` supplies the per-source prices, with its projection identity checks (A13's clarification of 2026-10-16). R_max₂ is computed from them, because `price_extension` itself caps R at 16 (`:131`).
+   - **The rule:** R_max₂ is the largest integer R ≤ 32 such that R · Σ_j B_j / 3 ≤ 15, summed once over each distinct source job of the eligible rows. Conditional on the frozen eligible source set, it uses cost classes alone.
+   - **The expected value:** 32, at a projected 7.37 X2-hours. The assessment's charge projection is about 11.5 X2-equivalent hours on one X2. Both are budget estimates.
+   - **No launch below 24:** if R_max₂ < 24, the round does not launch. This is a declared policy floor matching the assessment's projection, and with this eligible set it is inert (inferred).
+   - **Impossible rows:** any row with N\* > 2,048 · R_max₂ is flagged before launch, as in A13.
+   - **The meaning of both:** like A13's, they affect power and cost only, never the false-certification rate (A13 item 2).
+6. **A predicted admission probability, before the launch go.** The executor computes P(every Part 2 condition after this round), together with its value at a certification rate of 0.9.
+   - **The inputs:**
+     - the original and A13-round visit indicators and trajectory totals;
+     - each row's N\*;
+     - the original census cell counts and continuation support, or verified floor-with-C0 flags computed from them;
+     - the rows' lookup contexts and screen flags;
+     - the frozen R_max₂;
+     - the A13 round's certification and violation counts.
+
+     No observation from this round is an input.
+   - **The method:**
+     - **The scripts:** the three listed in the assessment's `FEASIBILITY_SHA256SUMS` (`feasibility.py` `b2abd1e3fb0ae0e90193f12171eb7633cf4180163ca0bea57e37e8df6667b5e7`, `feas_sens.py` `e99671d2c43a150d4d31286e379392e5801a3983effa9a22f13e707a72be3fd7`, `feas_extra_full.py` `3fb75616f072123d62a7a60e74366c03261a36267c0b6ecf8fa8b74434051a4a`), run unchanged.
+     - **Where it runs:** on X2-1, in a read-only, hash-verified source view of `55817036`, isolated from this round's execution checkout. Step 2 changes modules the scripts import, so the new checkout cannot serve.
+       - **Inputs:** the verified inventory of item 1 and the source-to-copy mapping supply every path and environment value the scripts read. Every input they need is in that inventory.
+       - **Protection:** the original roots and records are mounted or opened read-only. An unmapped path is a finding, never a silent read of an original file.
+     - **The import check:** before running, the executor confirms and records:
+       - **Repository modules:** every repository-owned module actually imported, transitive imports included, comes from the verified source view and matches its git blob at `55817036`.
+       - **Everything else:** standard-library and third-party imports come from the recorded, frozen Python environment, with its Python and numpy versions recorded against the A13 round's environment.
+       - **No A14 source:** no A14 module, and no source in the execution checkout, is reachable through import resolution. The unchanged scripts insert their working directory into `sys.path` (`feasibility.py:10`), and the wrapper accounts for that.
+     - **The model:**
+       - each row's visit probability is a posterior mean with a uniform prior, pooling its A13-round and original trajectories;
+       - its visiting count is beta-binomial, by a normal approximation with continuity correction;
+       - rows are drawn independently given their reach probabilities. Cross-row independence is an assumption of this forecast only, not of the error bound;
+       - 4,000 Monte Carlo draws.
+     - **The two numbers:** the `p_all_part2` values from the unchanged `round2` calculation in `feasibility.py` at R = R_max₂, case A:
+       - first, with the recomputed empirical certification and violation rates;
+       - second, with certification rate 0.9 and violation rate 0.
+     - **Settings for both:** the script's own seeding for case A, `random.Random(7 · R_max₂)`, 4,000 draws, and its three-decimal rounding.
+     - **Before computing:** the executor confirms that case A's eligible set equals this round's frozen eligible set; otherwise it reports a finding. They coincide here only because no A13-eligible row reached N\* and was left `unresolved` by the test.
+     - **What else is in the scripts:** their other curves and scenarios are assessment evidence, not alternatives for this report.
+     - **A wrapper:** a read-only wrapper may invoke the unchanged function at R_max₂, with its hash frozen before the go.
+   - **Its standing:** informational, reported as two operational numbers with the load sheet. It decides nothing mechanically; the operator's go does.
+7. **The test:** as A13 item 6, applied to exactly the first N\* visiting trajectories of this round's data alone, with the same w, τ, M and α and the visit-weighted safeguard. A13-round trajectories are never pooled in.
+8. **A halted round:** as A13 item 7. A scientific halt certifies nothing, spends this round and latches in this round's family record. An infrastructure interruption resumes under the supported procedure, from original seeds.
+9. **Re-assembly.**
+   - **The start:** the refused candidate.
+   - **The replacements:** for each A13-eligible row, the C0 decision of the round that tested it, applied as A13 item 8 describes:
+     - the A13 round's recomputed decision, for the rows it tested;
+     - this round's decision, for every row eligible here, whatever the outcome: certified, `unresolved`, `violation`, or N\* not reached.
+
+     Every classification, its safeguard outcome and its re-test record are preserved in the sidecar and in the admission evidence `verify` reads. C0 gains support only when its test certifies and its safeguard passes. Validated support is recomputed, and the registered floor is re-applied to the unchanged census.
+   - **Everything else** is carried forward exactly: every row outside the A13-eligible set, the sensitivity processing and the sensitivity siblings. The run halts unless each of those rows, and its sidecar entry, is byte-identical to the refused candidate's.
+   - **Marking:** every A13-eligible row carries the A13 row marker, which records its re-test status where `verify` reads it, and the round that tested it (1, 2 or none).
+10. **The error accounting:** A13 item 9's statement holds unchanged.
+    - **The argument:** for each A13-eligible row j, let q_j be its probability of reaching N\* in the A13 round, given D₀.
+      - Its A13 test, which happens only on that event, falsely certifies with probability at most q_j·α/M. The stop and the first-N\* selection read visit indicators only, so they do not select the marks.
+      - Let H₁ contain the earlier history and the launch decision. Conditional on H₁, row j's second-round false-certification probability is at most α/M if it is eligible and the round launches, and zero otherwise. Eligibility implies that it did not reach N\* in the A13 round. Averaging over H₁ given D₀, its second-round contribution is therefore at most (1 − q_j)·α/M.
+      - The two events are disjoint, so each row contributes at most α/M. A no-launch, an unreached N\*, the safeguard and the floor can only reduce certification.
+      - Summing over the E = 50 rows gives E·α/M, with no independence needed between rows.
+    - **The bounds:** A13's argument then gives α(1 + P/M) given the fitted family, and 2α unconditionally.
+    - **What it is not:** the bound is not a posterior guarantee conditional on the A13 refusal or on final publication.
+    - **When it fails:** a second statistical certification opportunity, using a different extension sample, for an already-tested row (deterministic recomputation and the compatibility replay are not such opportunities); pooling across rounds; seed overlap; N\*, w, τ or the allocation chosen from new marks; certifying from a halted round; seeds redrawn on resume; or the stream assumptions failing.
+    - **What is reported:** E, E₂, the number of tests performed in each round, P and M, side by side, with α·E/M.
+11. **The reservation and records.**
+    - **The reservation:** registered preparation exclusively reserves `v3/runs/a10_stage1/nominal/v3_rerun_tables_A10.a14_round.json`, independently of the preparation output path.
+      - **When it is created:** before any of preparation's checks. It initially binds the family and the approved A13 plan, and records any terminal preparation failure. The completed A14 plan hash is bound once it exists.
+      - **What it grants:** nothing yet. It gives no launch authorization, and the A13-record checks of item 1 stay mandatory.
+      - **A refusal:** it is refused unless the verified A13 round record shows its plan and root bound with halt `null`, and the A13 admission record shows outcome `refused`.
+      - **An interruption:** an infrastructure interruption resumes the same preparation.
+    - **What it binds:** the original family, the approved A13 plan and this round's plan.
+    - **The first launch** binds the final frozen specification and root. A different plan or root, or a latched scientific halt, cannot obtain another realization. Rehearsals use separate output-relative reservations.
+    - **This round's Part 2 record** is at `…A10.a14_round.admission.json`, written only if absent.
+    - **No A14 code path writes either A13 record.**
+12. **Final.** There is no third round for this family.
+    - **From entry into step 5's registered preparation,** including a failure before the completed plan or reservation can be written, the consequences below follow if this round:
+      - does not launch for any reason other than an infrastructure interruption resumed under the supported procedure. That includes item 5's floor, a finding during preparation, a seed collision, or the operator declining the go. A delay for scheduling or machine availability is not a decline; the operator records any decline as one;
+      - halts under item 8;
+      - or ends with any Part 2 condition failing.
+
+      Its consequences:
+      - the A10 nominal family is not published;
+      - the labels and the five runs do not proceed;
+      - A10 stage 1 ends;
+      - the original refusal, the A13 round's refusal and this round's outcome are all reported;
+      - stage 1's reservation for labels and runs returns to the unreserved ledger.
+    - **Before step 5,** a rejected code review, a rehearsal mismatch or a failed compatibility proof is not this round's outcome: no A14 plan, reservation, seed manifest or probability exists yet for the registered round.
+      - **A failed proof** is a compatibility failure to be investigated. The failed identity-pair attempt stays final.
+      - **A corrected identity** may follow under A11, with a new rehearsal, new proofs and their approvals, before step 5, but only when the failure is traced to the new identity. One way to trace it is replaying the failing jobs at `5df9866f…`.
+      - **If the producing identity cannot reproduce** the outputs either, that is a finding about those records. This covers the A13 round's outputs, and the original outputs of the 434-job proof. They cannot be carried forward, and the consequences above follow.
+      - **A failure traced to neither identity:** the sequence stays halted, and the operator chooses between a further investigated identity and ending stage 1. No registered-round A14 data exist, so the choice is free of registered A14 observations (the historical outcomes are already disclosed above), and the operator records it.
+
+**Part 2** applies as A13 items 11 to 13 after this round, with item 13 as superseded above: the cap of 19, the one-row-per-context limit, the balanced-witness exclusion, item 12(b), binding, recording and reporting. The admission scope is a new scope accepted by `binding` and `verify` for this round, with A13's conditions unchanged.
+
+**The order of steps.**
+
+1. **The text:**
+   - This amendment, certified blind by two certifiers from different model families and approved by the operator, is committed and pushed. That commit is **the A14 commit**.
+   - It does not change the code identity.
+   - Every later launch pins the A14 commit, with the design note in its execution checkout byte-identical to the note there.
+2. **The code commit,** on main.
+   - **What it adds:**
+     - **The round:** a module for its preparation, historical-input verification (item 1), eligibility, constants check, manifest and seed check, pricing, stop, test, checkpoint and replicate handling, reservation (item 11), halt latch, re-assembly, publication and public summary.
+     - **The new job kind,** each as a new branch beside A13's:
+       - its dispatch in the runner and the coordinator;
+       - its checkpoint and halt operations;
+       - its scientific-halt and nondeterminism latches into this round's family record;
+       - snapshot and qualification handling, with non-reserved short-test streams;
+       - configuration and resource classification.
+     - **The reserved range:** the guards extend to [2^61, 2^62).
+     - **The current-pin change:**
+       - Current A10 launches and publications verify strictly against the A14 commit, whose note must contain the A13 clarification and this amendment.
+       - Plans pinned to the A13 commit or earlier, including the A13 round's plan, verify historically.
+       - New validation launches pinned to the A14 commit keep A13 Part 2's binding for later families.
+       - The files: `artifacts.py` and the selection sites in `table_validation_a4.py` and `table_labels_a5.py`.
+     - **The receipt fields (step 7),** and A5's forbidden set over both rounds' manifests.
+     - **A compatibility-replay adapter for step 4's A13-phase proof:**
+       - **What it does:** re-simulates every replicate of each selected job from its seed, in an empty scratch root. Recorded A13 checkpoints are read for comparison only, never loaded as completed work. The present path would load them and return the recorded data, which matches itself (`validation_extension_a13.py:258` to `:272`; `compatibility_a10.py:143` to `:158`).
+       - **Its limits:** it writes nothing outside scratch, and nothing it does can latch or write a family record. Nothing is computed from replay outputs beyond the byte comparison.
+       - **The seed guard:** it is the only exception to the reserved-seed guard (`production_runner.py:182` to `:190`), limited to the A13 plan's own jobs and seeds.
+       - **What it leaves alone:** it does not reopen the spent round, or change any A13 function.
+     - **A runbook section** for this round, superseding 17.4's prohibition.
+     - **The snapshot-path repair,** bundled as an execution fix:
+       - **What it is:** an execution-only repair for explicitly inventoried inputs in historical checkouts.
+       - **How it works:** it stages hash-verified, read-only copies inside the authorized write scope, and preserves original input paths through verified aliases. It rewrites no job configuration, identifier, seed or scientific byte, and rejects changed or undeclared inputs.
+       - **Where it must work:** through transfer, qualification staging and the worker's verified input view (`snapshot_a11.py:67`, `:90`; `qualification_a11.py:86`).
+       - **The check:** inputs already inside the checkout are staged exactly as before; the rehearsal confirms this.
+   - **The additive rule:**
+     - No function in `validation_extension_a13.py`, and no existing fit, validate, census or estimation function, is edited.
+     - The shared runner, coordinator, snapshot, qualification, admission, A4 and A5 files gain parallel branches only, with the stated exceptions.
+     - The A13 kind's behavior, including its R ≤ 16 bound, is unchanged.
+     - Everything is inert for any family without an A14 round, with the stated exceptions.
+     - **The exceptions:** the current-pin change, and the snapshot-path repair. Each is an explicit exception to parallel-branch-only changes and to operational inertness. Scientific behavior and existing result fields stay unchanged outside A14.
+   - **Records:** the A2 re-pins name every changed pinned file and its reason, and the new code identity is recorded.
+   - **The authority:** A11 item 3's proof admits the unchanged computations. A14 alone admits the new phase, its seeds, the second reservation, the two-round re-assembly, the replay adapter, and the snapshot-path repair.
+   - **Review and approval:** the interpreter reviews the diff against `55817036`, including the unchanged A13 module and the inert paths. The operator approves the concrete code commit.
+3. **A non-registered rehearsal** at the new identity, on rehearsal seeds outside every reserved range:
+   - **a two-round fixture:**
+     - this round's preparation from a rehearsal A13 round;
+     - publication over both rounds;
+     - a forced round-2 violation that reaches Part 2 and is refused;
+     - a latched halt;
+   - **the round's dispatch** on a small non-registered plan, and qualification;
+   - **run-side equivalence:** sampled run jobs at code identity `5df9866f…` and at the new identity agree byte for byte on every existing `result` field (the exclusions are as in A13 step 3), and the loader behaves identically on a family with no admitted rows;
+   - **A5's preparation** against a rehearsal receipt of the step 7 form, forbidding both manifests;
+   - **the replay adapter,** on rehearsal jobs. It must reproduce a clean replicate byte for byte, and report a mismatch when a recorded checkpoint and its recorded output are perturbed together. An adapter that wrongly loads checkpoints would then reproduce the perturbation and fail the drill;
+   - **the real transport:** the new kind's checkpoint and halt operations pass through the real host loop and `rpc()`, including resume;
+   - **item 6's tooling:** the wrapper, the import check and the path mapping, on rehearsal inputs, so that a tooling defect appears before the stage-ending boundary;
+   - **the snapshot-path repair:** qualification, transfer and two-host execution using an input outside the checkout, with inputs already inside the checkout staged exactly as before.
+
+   A mismatch halts the sequence. The rehearsal's overhead is charged to the stage 1 ledger.
+4. **The A11 compatibility proofs** at the new identity.
+   - **The original outputs:** the 434-job selection for the original estimation and validation outputs, as A13 step 4.
+   - **The A13 phase:** additionally, A11 item 3's selection applied to the completed A13 extension phase, binding its producing identity `5df9866f…` to the new identity, through the replay adapter. The executor records the additional count from the frozen strata before execution.
+   - **Before they run:** the projected cost of both is approved; a configuration test is run; `llm down`, supervised and restored.
+   - **After they run:** the interpreter's review, the operator's approval, and committed records, before any of the outputs is used.
+
+   If either fails, the sequence halts, and item 12's before-step-5 clause governs what follows.
+5. **The round's records,** in a fresh execution checkout at the proof records' commit, before launch:
+   - item 1's verified inventory;
+   - the eligible set, by identifier;
+   - E₂ and R_max₂, and the projected cost;
+   - the impossible-row flags;
+   - item 6's two probabilities;
+   - the frozen seed manifest and its check.
+
+   These go into the round's `.public.json`, which is reviewed and approved before the launch go.
+6. **The launch:** registered, with its own plan, cost cap (item 5), register approvals and operator go.
+   - **The checkout:** that execution checkout, with a new root.
+   - **Dispatch:**
+     - **The default:** single-host, since one X2 is cheaper for this round. Pull dispatch is permitted only as rehearsed.
+     - **For a single-host launch from `plan.json`:** "frozen dispatch specification" means the sealed single-host `plan.json`, with its sealed resource estimates, and the load sheet is built from that exact specification. The runbook supersedes its pull-freeze requirement for this launch only.
+   - **Before it runs:** qualification, the frozen dispatch specification and its load sheet, the pre-launch configuration test, and `llm down`, supervised and restored.
+   - **Its pin:** the A14 commit.
+7. **Family publication,** at the same never-written target path, `v3/runs/a10_stage1/nominal/v3_rerun_tables_A10.json`, under the no-overwrite guard.
+   - **What it requires:** this round's anchor, a matching root identity, a complete last launch, a passed nondeterminism check (and the multi-host check if applicable), and no A14 halt. Part 2 is checked and recorded first.
+   - **The receipt:**
+     - **Unchanged:** the original `plan_hash` and per-job `stream_seeds`.
+     - **`a13_round` and `a14_round` objects,** each holding its plan hash, `.public.json` hash, stage-output hashes, complete frozen seed manifest and admission-record hash.
+     - **`extension_seed_manifest`:** the union of both complete manifests, so that A5's existing reader forbids both (`table_labels_a5.py:475`).
+     - **`refusals`:** the original refusal and the A13 round's admission record.
+     - **Neither round** contributes a realized seed subset or stopping replicate.
+   - **The plan-hash checks:** before runbook section 7's identity approval, the interpreter checks the receipt's A13 and A14 plan hashes against their approved `.public.json` records.
+   - **Then:** runbook section 7's exact-file and hash identity approval, and its public identity-record commit.
+8. **Labels and the five run launches:** as A13 step 8, pinned to the A14 commit.
+   - **Unchanged:** the original path strings, and the label and run inventory comparisons.
+   - **Each launch:** its own frozen dispatch specification, load sheet, approvals and go.
+
+**Unchanged.**
+
+- **No registered rule changes**, whether quantity, prediction, gate, citation rule, reading rule or admission threshold, except:
+  - those listed under "What this amendment supersedes";
+  - the amended family;
+  - the receipt's added fields.
+- **Also unchanged:** A13's Part 2 conditions, its error statement, the census, α, τ, the floor, the Bernstein test and N\*.
+- **The ceiling:** stage 1's 980 X2-equivalent hours stand.
+  - **The ledger before this amendment:** about 355.3 charged, 384.63 reserved for labels and runs, and about 240.1 unreserved.
+  - **This amendment's charges:** the rehearsal, both proofs and the round, to the stage 1 ledger.
+- **The stage 1 reading** stays registered at `93474e00`.
