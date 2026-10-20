@@ -23,7 +23,7 @@ from . import worker_control as wc
 from .worker_safety import best_effort, metadata_json
 
 SCHEMA = 'v3-A11-pull-1'
-ALLOWED_KINDS = {'table', 'rerun', 'a4_fit', 'a4_validate', 'a4_census', 'a5_fvplain', 'a13_validate_plain_ext'}
+ALLOWED_KINDS = {'table', 'rerun', 'a4_fit', 'a4_validate', 'a4_census', 'a5_fvplain', 'a13_validate_plain_ext', 'a14_validate_plain_ext2'}
 RECHECK_PREFERENCE_SECONDS = 5.  # Several normal one-second claim polls, bounded if a host disappears.
 
 
@@ -54,10 +54,12 @@ def cost_keys(job):
     return [prefix + kind for kind in kinds]
 
 
-def freeze(spec, projection_document, *, code_commit, extra_inputs=(), lease_seconds=120):
+def freeze(spec, projection_document, *, code_commit, extra_inputs=(), lease_seconds=120, historical_roots=None):
     """Non-registered builder: add a sealed scheduling extension, no job edits."""
     if spec.get('instrument',{}).get('mapping') != 'A10' or (spec.get('registered') and not spec.get('registered_a10')):
         raise ValueError('R4 and legacy registered schemas refuse remote hosts')
+    if spec.get('registered') and any(j['kind'] == 'a14_validate_plain_ext2' for j in spec['jobs']):
+        raise ValueError('registered A14 requires single-host dispatch')
     projection = unseal(projection_document)
     result = deepcopy(spec)
     if 'pull_dispatch' in result:
@@ -72,6 +74,8 @@ def freeze(spec, projection_document, *, code_commit, extra_inputs=(), lease_sec
         if job['kind'] == 'a13_validate_plain_ext':
             # Ordering weight only; the approved R_max price is sealed separately.
             value['worker_seconds'] *= job['config']['R_max'] / 3
+        if job['kind'] == 'a14_validate_plain_ext2':
+            value['worker_seconds'] *= job['config']['R_max'] / 3
         key = digest(value)
         classes[key] = value
         assignments[job['id']] = key
@@ -80,11 +84,19 @@ def freeze(spec, projection_document, *, code_commit, extra_inputs=(), lease_sec
         'job_classes': assignments, 'extra_inputs': list(extra_inputs), 'memory_basis': 'registered-stratum',
         'order': 'descending frozen bundle mean worker seconds, then job id',
         'census_class': 'maximum of plain and FV bundle means; no result consulted'}
+    from .snapshot_a11 import historical_roots as declared_roots, normalize_historical_roots
+    roots = declared_roots(spec) if historical_roots is None else normalize_historical_roots(historical_roots)
+    if roots:
+        result['pull_dispatch'].update(historical_roots=roots, historical_roots_sha256=digest(roots))
     validate_extension(result)
     return result
 
 
 def validate_extension(spec):
+    if spec.get('registered') and any(j['kind'] == 'a14_validate_plain_ext2' for j in spec['jobs']):
+        raise ValueError('registered A14 requires single-host dispatch')
+    from .snapshot_a11 import historical_roots
+    historical_roots(spec)
     p = spec.get('pull_dispatch', {})
     if p.get('schema') != SCHEMA or spec.get('instrument', {}).get('mapping') != 'A10':
         raise ValueError('remote hosts require an explicit A11 pull A10 manifest')
@@ -200,6 +212,9 @@ def prepare(spec_path, root, settings):
     if spec.get('schema') == 'v3-A13-extension-1':
         from .validation_extension_a13 import begin_round
         begin_round(spec, spec_path, root)
+    if spec.get('schema') == 'v3-A14-extension-1':
+        from .validation_extension_a14 import begin_round
+        begin_round(spec, spec_path, root)
     with transaction(root):
         identity = {'spec_hash': digest(spec), 'code_hash': code_identity()}
         if (root / 'identity.json').exists() and read(root / 'identity.json') != identity:
@@ -240,6 +255,8 @@ class Coordinator:
         self.done = self.store.done
         if (self.root / 'a13_scientific_halt.json').exists():
             self.state['halt'] = 'A13 scientific halt'
+        if (self.root / 'a14_scientific_halt.json').exists():
+            self.state['halt'] = 'A14 scientific halt'
         failure = self.root / 'nondeterminism_failure.json'
         if failure.exists():
             self.state['halt'] = 'nondeterminism'
@@ -255,6 +272,9 @@ class Coordinator:
         return self.spec['phases'][i] if i < len(self.spec['phases']) else None
 
     def save(self, force=False):
+        if self.spec['schema'] == 'v3-A14-extension-1' and self.state['halt']:
+            from .validation_extension_a14 import latch_round_halt
+            latch_round_halt(self.root, self.state['halt'])
         if self.spec['schema'] == 'v3-A13-extension-1' and self.state['halt']:
             from .validation_extension_a13 import latch_round_halt
             latch_round_halt(self.root, self.state['halt'])
@@ -506,7 +526,7 @@ class Coordinator:
                 'lease_seconds': self.ttl, 'qualified_kinds': entry['kinds'], 'control': control}
 
     def snapshot(self, phase, configuration=False):
-        from .snapshot_a11 import inventory
+        from .snapshot_a11 import inventory, historical_roots
         if phase not in self.spec['phases']:
             raise ValueError('unknown phase')
         name = ('configuration_' if configuration else 'phase_') + phase
@@ -519,7 +539,8 @@ class Coordinator:
                 if phase != self.phase:
                     raise ValueError('phase inputs unavailable before its barrier')
                 jobs = self.jobs.phase(phase)
-            atomic_json(path, inventory(jobs, self.root / phase, self.spec['pull_dispatch']['extra_inputs']))
+            atomic_json(path, inventory(jobs, self.root / phase, self.spec['pull_dispatch']['extra_inputs'],
+                                      historical_roots=historical_roots(self.spec)))
         return read(path)
 
     def configure(self, r):
@@ -782,6 +803,9 @@ class Coordinator:
         if job['kind'] == 'a13_validate_plain_ext':
             from .validation_extension_a13 import durable_checkpoints
             claim['a13_checkpoints'] = durable_checkpoints(self.root, job) if purpose == 'work' else []
+        if job['kind'] == 'a14_validate_plain_ext2':
+            from .validation_extension_a14 import durable_checkpoints
+            claim['a14_checkpoints'] = durable_checkpoints(self.root, job) if purpose == 'work' else []
         return claim
 
     def claim_many(self, r):
@@ -832,6 +856,9 @@ class Coordinator:
             self.state['complete'] = False
             if job['kind'] == 'a13_validate_plain_ext':
                 from .validation_extension_a13 import latch_round_halt
+                latch_round_halt(self.root, 'nondeterminism')
+            if job['kind'] == 'a14_validate_plain_ext2':
+                from .validation_extension_a14 import latch_round_halt
                 latch_round_halt(self.root, 'nondeterminism')
             history_path = self.root / 'launches.json'
             if history_path.exists():
@@ -885,6 +912,20 @@ class Coordinator:
 
     def request(self, r):
         op = r['op']
+        if op == 'a14_checkpoint':
+            from .validation_extension_a14 import accept_checkpoint
+            return accept_checkpoint(self, r)
+        if op == 'a14_halt':
+            self.session(r)
+            l = self.state['leases'].get(r['lease'])
+            if (not l or l['host'] != r['host'] or l['session'] != r['session']
+                    or self.jobs[l['job_id']]['kind'] != 'a14_validate_plain_ext2'):
+                raise ValueError('invalid A14 halt lease')
+            self.state['halt'] = 'A14 scientific halt'
+            atomic_json(self.root / 'a14_scientific_halt.json', seal({'reason': self.state['halt'], 'job_id': l['job_id']}))
+            from .validation_extension_a14 import latch_round_halt
+            latch_round_halt(self.root, self.state['halt'])
+            return {'halt': self.state['halt']}
         if op == 'a13_checkpoint':
             from .validation_extension_a13 import accept_checkpoint
             return accept_checkpoint(self, r)
@@ -971,7 +1012,7 @@ class Coordinator:
 
 def rpc(root, request, *, now=None, local_only=False):
     if request.get('op') not in {'join', 'claim', 'heartbeat', 'complete', 'release', 'leave', 'inspect', 'inputs', 'fetch', 'configure', 'configured', 'ready',
-                               'a13_checkpoint', 'a13_halt'}:
+                               'a13_checkpoint', 'a13_halt', 'a14_checkpoint', 'a14_halt'}:
         raise ValueError('unknown coordinator command')
     # Source hashing reads only immutable checkout files. Do it before taking
     # the root lock; every request still compares the full running identity.
@@ -1092,6 +1133,7 @@ def main():
     s = commands.add_parser('freeze'); s.add_argument('spec'); s.add_argument('projection'); s.add_argument('output')
     s.add_argument('--code-commit', required=True); s.add_argument('--extra-input', action='append', default=[])
     s.add_argument('--lease-seconds', type=float, default=120)
+    s.add_argument('--historical-root', action='append', default=None)
     s = commands.add_parser('rpc'); s.add_argument('root'); s.add_argument('--stream', action='store_true')
     s.add_argument('--local', action='store_true', help='require the recorded coordinator machine on every request')
     s = commands.add_parser('prepare'); s.add_argument('spec'); s.add_argument('root')
@@ -1100,7 +1142,7 @@ def main():
     args = p.parse_args()
     if args.command == 'freeze':
         document = seal(freeze(unseal(read(args.spec)), read(args.projection), code_commit=args.code_commit,
-                               extra_inputs=args.extra_input, lease_seconds=args.lease_seconds))
+                               extra_inputs=args.extra_input, lease_seconds=args.lease_seconds, historical_roots=args.historical_root))
         if Path(args.output).exists() and read(args.output) != document:
             raise ValueError('frozen pull spec already exists')
         atomic_json(args.output, document)

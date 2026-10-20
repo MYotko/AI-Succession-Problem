@@ -129,6 +129,22 @@
     },
     "scope": "A13 extends A11 item 3 only through its separately approved and committed compatibility proof. This re-pin does not admit old producers by itself. No existing fit, validation, census or estimation function changes. Controller and run recording are inert without admitted rows."
   },
+  "a14": {
+    "approved_sha256": {
+      "v3/artifacts.py": "cb52619032884924bf920503e513533a492917e98bb2bf8303f9abb1e6a760a8",
+      "v3/production_runner.py": "0d3f5f3c02b070a3a92bfd8055f1e75df6688505bb1908aa5b903b2df5bd7303"
+    },
+    "date": "2026-10-20",
+    "design_commit": "17f17ef9cee4b18d70f043a1e097359cd6642693",
+    "previous_approved_sha256": {
+      "v3/artifacts.py": "68c3020569c03c42a1abd982ef53af31836c27de9d195a48b81885353b2b3447",
+      "v3/production_runner.py": "e9fe15b9b7b7629a47f1bfb4d51e1e8299e74d0da38033ed2c1311186e7499df"
+    },
+    "reasons": {
+      "v3/artifacts.py": "A14 current launch pin 17f17ef9; historical ancestry and committed-note checks remain strict.",
+      "v3/production_runner.py": "Parallel A14 phase dispatch, input view, reservation, checkpoints and halt handling; reserved range guard and the A14-authorized isolated A13 compatibility replay. Existing scientific functions and ordinary result payloads unchanged."
+    }
+  },
   "a4": {
     "amendment": "A4 adopted by D30",
     "date": "2026-09-29",
@@ -148,9 +164,9 @@
   },
   "amendment": "A2, 2026-09-28",
   "approved_boundary_sha256": {
-    "v3/artifacts.py": "68c3020569c03c42a1abd982ef53af31836c27de9d195a48b81885353b2b3447",
+    "v3/artifacts.py": "cb52619032884924bf920503e513533a492917e98bb2bf8303f9abb1e6a760a8",
     "v3/integration.py": "8d22354a7fa3d2d71036f686f5eff16a79c857e4c9212ad1cb8b15ed40e31e26",
-    "v3/production_runner.py": "e9fe15b9b7b7629a47f1bfb4d51e1e8299e74d0da38033ed2c1311186e7499df",
+    "v3/production_runner.py": "0d3f5f3c02b070a3a92bfd8055f1e75df6688505bb1908aa5b903b2df5bd7303",
     "v3/production_tables.py": "bba106893ca0849aa28eea8455621f43553ca607051c7ef572b47c7ba5637b66",
     "v3/recording.py": "38891bedc60eda486952a6c33323f926b89ac0d358b7760afad514fc2f1771f8",
     "v3/service.py": "3e90a9514962d4f4bf0cafb868d493f4ee54e80f178a7bdc391a1761621862b9",

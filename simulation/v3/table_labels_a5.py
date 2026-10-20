@@ -93,7 +93,7 @@ def assert_a5_seeds(fv_job_seeds, forbidden):
     for seed in fv_job_seeds:
         for r in A5_REPLICATES:
             value = fvplain_seed(seed, r)
-            if value in forbidden or (1 << 60) <= value < (1 << 61):
+            if value in forbidden or (1 << 60) <= value < (1 << 62):
                 raise cv.SeedCollision("A5 seed collides with a forbidden seed: %r" % ((seed, r), ))
             a5[(int(seed), r)] = value
     values = list(a5.values())
@@ -740,9 +740,9 @@ def publish(plan, a5_run_root, a4_run_root, a1_source_root, calibration, target,
                  "registered publish requires a registered plan and a registration pin")
         _require(not plan.get("settings_override") and not any(j["config"].get("settings_override") for j in plan.get("jobs", [])),
                  "registered publish rejects a settings override")
-        from .artifacts import A13_COMMIT
+        from .artifacts import A14_COMMIT
         verify_registration(plan["registration"], **({"instrument": instrument,
-            "historical": plan['registration']['commit'] not in (A13_COMMIT, A13_COMMIT[:8])} if instrument.a10 else {}))
+            "historical": plan['registration']['commit'] not in (A14_COMMIT, A14_COMMIT[:8])} if instrument.a10 else {}))
     accepted = {code_identity()}
     if instrument.a10:
         from .compatibility_a10 import accepted_identities

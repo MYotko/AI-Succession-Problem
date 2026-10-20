@@ -437,12 +437,12 @@ def test_item3_guard_every_boundary(cap):
 
 def test_item8_registration_requires_a10_without_relaxing_pin(tmp_path, monkeypatch):
     import subprocess
-    from v3.artifacts import verify_registration, A13_COMMIT
-    text=b"Amendment A10\nAmendment A11\nClarified, 2026-10-16: pricing R_max\nfixture only\n"
+    from v3.artifacts import verify_registration, A14_COMMIT
+    text=b"Amendment A10\nAmendment A11\nClarified, 2026-10-16: pricing R_max\n### Amendment A14\nfixture only\n"
     path=tmp_path/'simulation/diagnostics/v3_rerun_design_note.md'
     path.parent.mkdir(parents=True)
     path.write_bytes(text)
-    pin={"commit":A13_COMMIT,"path":path.relative_to(tmp_path).as_posix(),"sha256":hashlib.sha256(text).hexdigest()}
+    pin={"commit":A14_COMMIT,"path":path.relative_to(tmp_path).as_posix(),"sha256":hashlib.sha256(text).hexdigest()}
     calls=[]
     def git(command,**kwargs):
         calls.append(command)

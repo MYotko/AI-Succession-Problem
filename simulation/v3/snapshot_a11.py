@@ -23,6 +23,12 @@ def dependencies(jobs, phase_root, extra_inputs=()):
 
     for job in jobs:
         c = job['config']
+        if job['kind'] == 'a14_validate_plain_ext2':
+            for row in c['a14_inputs']:
+                add(row['copy'])
+                if file_hash(row['copy']) != row['sha256']:
+                    raise ValueError('A14 historical worker input changed')
+            continue
         if c.get('calibration_path'):
             add(SIMULATION / c['calibration_path'])
             # A6 variant validation reads its frozen parent as well.
@@ -64,21 +70,74 @@ def dependencies(jobs, phase_root, extra_inputs=()):
     return sorted(paths)
 
 
-def inventory(jobs, phase_root, extra_inputs=()):
+
+def normalize_historical_roots(roots):
+    if not isinstance(roots, (list, tuple)) or any(not isinstance(p, str) or not Path(p).is_absolute() for p in roots):
+        raise ValueError('historical_roots must be an explicit list of absolute roots')
+    result = sorted({str(Path(p).resolve()) for p in roots})
+    if len(result) != len(roots) or any(Path(p).parent == Path(p) for p in result):
+        raise ValueError('historical_roots must be distinct bounded directories')
+    return result
+
+
+def historical_roots(spec):
+    declaration = spec.get('pull_dispatch', spec)
+    roots = normalize_historical_roots(declaration.get('historical_roots', []))
+    if roots or 'historical_roots_sha256' in declaration:
+        if declaration.get('historical_roots_sha256') != digest(roots):
+            raise ValueError('historical_roots hash differs from frozen specification')
+    return roots
+
+
+def verify_historical_scope(payload):
+    roots = normalize_historical_roots(payload.get('historical_roots', []))
+    if roots or 'historical_roots_sha256' in payload:
+        if payload.get('historical_roots_sha256') != digest(roots):
+            raise ValueError('historical snapshot roots hash differs')
+    checkout = Path(payload.get('checkout_root', Path(payload['simulation']) / 'v3')).resolve()
+    for row in payload['files']:
+        for name in ([row['source']] if 'source' in row else []) + row.get('aliases', []):
+            p = Path(name)
+            if not p.is_absolute() or (not p.resolve().is_relative_to(checkout)
+                    and not any(p.resolve().is_relative_to(Path(root)) for root in roots)):
+                raise ValueError('snapshot input outside declared historical roots')
+    return roots
+
+
+def inventory(jobs, phase_root, extra_inputs=(), *, historical_roots=()):
+    roots = normalize_historical_roots(historical_roots)
     paths = dependencies(jobs, phase_root, extra_inputs)
-    if any(not p.is_relative_to(ROOT) for p in paths):
-        raise ValueError('out-of-scope A11 input')
-    files = [{'path': p.relative_to(SIMULATION).as_posix(), 'sha256': file_hash(p), 'bytes': p.stat().st_size}
-             for p in paths]
-    return seal({'schema': 'v3-A11-inputs-1', 'simulation': str(SIMULATION), 'files': files})
+    a14_aliases = {str(Path(row['copy']).resolve()): [str(Path(p).resolve()) for p in [row['source'], *row.get('aliases', [])]]
+                   for j in jobs if j['kind'] == 'a14_validate_plain_ext2' for row in j['config']['a14_inputs']}
+    files = []
+    for p in paths:
+        if p.is_relative_to(ROOT):
+            # Preserve the pre-A14 inventory and destination bytes exactly.
+            row = dict(path=p.relative_to(SIMULATION).as_posix(), sha256=file_hash(p), bytes=Path(input_path(p)).stat().st_size)
+        else:
+            if not any(p.is_relative_to(Path(root)) for root in roots):
+                raise ValueError('input outside declared historical roots')
+            row = dict(path='v3/historical_inputs/' + digest(str(p)) + '/' + p.name,
+                       source=str(p), aliases=[str(p)], sha256=file_hash(p), bytes=Path(input_path(p)).stat().st_size)
+        if str(p) in a14_aliases:
+            row['aliases'] = list(dict.fromkeys(row.get('aliases', []) + a14_aliases[str(p)]))
+        files.append(row)
+    if len({r['path'] for r in files}) != len(files):
+        raise ValueError('historical snapshot destination collision')
+    payload = {'schema': 'v3-A11-inputs-1', 'simulation': str(SIMULATION), 'files': files}
+    if roots:
+        payload.update(historical_roots=roots, historical_roots_sha256=digest(roots), checkout_root=str(ROOT))
+    verify_historical_scope(payload)
+    return seal(payload)
 
 
 def fetch(document, name, offset=0, size=4 * 1024 * 1024):
     payload = unseal(document)
+    verify_historical_scope(payload)
     row = next((r for r in payload['files'] if r['path'] == name), None)
     if row is None or not isinstance(offset, int) or offset < 0 or not 1 <= size <= 4 * 1024 * 1024:
         raise ValueError('invalid input transfer')
-    path = Path(payload['simulation']) / row['path']
+    path = Path(input_path(row.get('source', Path(payload['simulation']) / row['path'])))
     if file_hash(path) != row['sha256']:
         raise ValueError('frozen input changed')
     with path.open('rb') as stream:
@@ -90,6 +149,7 @@ def fetch(document, name, offset=0, size=4 * 1024 * 1024):
 def receive(document, directory, reader):
     """reader(name, offset) may use SSH or loopback. Partial files never map."""
     payload = unseal(document)
+    roots = verify_historical_scope(payload)
     directory = scoped(directory) / document['sha256']
     paths = {}
     for row in payload['files']:
@@ -124,10 +184,13 @@ def receive(document, directory, reader):
         aliases += [SIMULATION / p.relative_to(Path(payload['simulation'])) for p in list(aliases)
                     if p.is_relative_to(Path(payload['simulation']))]
         for alias in (Path(payload['simulation']) / relative, SIMULATION / relative, target, *aliases):
-            paths[str(alias.resolve())] = str(target)
+            key = str(alias.resolve())
+            if key in paths and paths[key] != str(target):
+                raise ValueError('ambiguous historical input alias')
+            paths[key] = str(target)
     # Protect only declared input locations. Configuration scratch and code
     # files remain local; unlisted sibling inputs cannot be read accidentally.
-    protected = sorted({str(Path(p).parent) for p in paths if not Path(p).is_relative_to(directory)})
+    protected = sorted(set(roots) | {str(Path(p).parent) for p in paths if not Path(p).is_relative_to(directory)})
     view = {'paths': paths, 'protected': protected, 'snapshot_sha256': document['sha256']}
     atomic_json(directory / 'verified.json', seal(view))
     return view

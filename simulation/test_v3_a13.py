@@ -254,7 +254,7 @@ def test_historical_pins_use_committed_bytes_not_working_note(tmp_path, monkeypa
         return subprocess.CompletedProcess(cmd, 0, stdout=text if 'show' in cmd else b'')
     monkeypatch.setattr(a.subprocess, 'run', git)
     assert a.verify_registration(pin, tmp_path, instrument={'mapping': 'A10', 'k_star': 1.8, 'g': 'linear'}, historical=True) == pin
-    with pytest.raises(RuntimeError, match='48815a65'):
+    with pytest.raises(RuntimeError, match='17f17ef9'):
         a.verify_registration(pin, tmp_path, instrument={'mapping': 'A10', 'k_star': 1.8, 'g': 'linear'})
     with pytest.raises(RuntimeError, match='stale'):
         a.verify_registration(dict(pin, sha256='bad'), tmp_path, historical=True)
@@ -265,9 +265,9 @@ def test_historical_pins_use_committed_bytes_not_working_note(tmp_path, monkeypa
 
 
 def test_current_pin_is_exact_and_clean(tmp_path, monkeypatch):
-    text = b'Amendment A10\nAmendment A11\nClarified, 2026-10-16: pricing R_max\n'
+    text = b'Amendment A10\nAmendment A11\nClarified, 2026-10-16: pricing R_max\n### Amendment A14\n'
     path = tmp_path / 'simulation/diagnostics/v3_rerun_design_note.md'; path.parent.mkdir(parents=True); path.write_bytes(text)
-    pin = dict(commit=a.A13_COMMIT, path=path.relative_to(tmp_path).as_posix(), sha256=hashlib.sha256(text).hexdigest())
+    pin = dict(commit=a.A14_COMMIT, path=path.relative_to(tmp_path).as_posix(), sha256=hashlib.sha256(text).hexdigest())
     monkeypatch.setattr(a.subprocess, 'run', lambda cmd, **kw: subprocess.CompletedProcess(cmd, 0, stdout=text if 'show' in cmd else b''))
     assert a.verify_registration(pin, tmp_path, instrument={'mapping': 'A10', 'k_star': 1.8, 'g': 'linear'}) == pin
     path.write_bytes(text + b'changed')
@@ -1057,7 +1057,7 @@ def test_publish_requires_recorded_complete_checked_round(tmp_path, defect, matc
 
 
 @pytest.mark.parametrize('stage', ['a4', 'a5'])
-@pytest.mark.parametrize('commit', [a.A13_COMMIT, a.A13_COMMIT[:8], 'historical'])
+@pytest.mark.parametrize('commit', [a.A14_COMMIT, a.A14_COMMIT[:8], a.A13_COMMIT, a.A13_COMMIT[:8], 'historical'])
 def test_publication_current_pins_stay_strict(tmp_path, monkeypatch, stage, commit):
     from v3 import table_labels_a5 as a5, table_validation_a4 as a4, tables_a10
     calls = []
@@ -1072,7 +1072,7 @@ def test_publication_current_pins_stay_strict(tmp_path, monkeypatch, stage, comm
     with pytest.raises(RuntimeError, match='pin checked'):
         if stage == 'a4': a4.publish(plan, tmp_path, tmp_path, {}, tmp_path / 'never.json')
         else: a5.publish(plan, tmp_path, tmp_path, tmp_path, {}, tmp_path / 'never.json')
-    assert calls[0]['historical'] == (commit == 'historical')
+    assert calls[0]['historical'] == (commit not in (a.A14_COMMIT, a.A14_COMMIT[:8]))
 
 
 @pytest.mark.parametrize('halted', [False, True])

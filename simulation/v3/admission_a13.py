@@ -14,7 +14,7 @@ def context_key(row):
 
 def binding(rows, details, scope):
     """Bind every residual primary row and its tests; never change its status."""
-    if scope not in ('A10_nominal_after_A13', 'validation_launched_under_A13'):
+    if scope not in ('A10_nominal_after_A13', 'validation_launched_under_A13', 'A10_nominal_after_A14'):
         raise ValueError('A13 admission scope is not authorized')
     primary = {d['row']: d for d in details if d['setting'] == 'primary'}
     residual = {key: row for key, row in rows.items() if row['status'] == 'not_estimable'}
@@ -36,7 +36,7 @@ def verify(rows, admission):
     """Independent loader check, including the unchanged sensitivity/support gates."""
     from .policies import execution_policy_class
     if (admission.get('schema') != SCHEMA or admission.get('scope') not in
-            ('A10_nominal_after_A13', 'validation_launched_under_A13')):
+            ('A10_nominal_after_A13', 'validation_launched_under_A13', 'A10_nominal_after_A14')):
         raise ValueError('invalid A13 admission binding or scope')
     entries = admission['rows']
     if admission.get('primary_rows') != len(rows) or admission.get('admitted_set_sha256') != digest(entries):

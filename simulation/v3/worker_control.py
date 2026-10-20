@@ -227,7 +227,7 @@ def arithmetic_class(spec, job):
     No output is used to infer an auto route. Table planning keeps its existing
     FV bound; continuation jobs declare their own route in the sealed config.
     """
-    if spec.get('schema') not in ('v3-A10-estimation-1', 'v3-A4-validation-1', 'v3-A5-labels-1', 'v3-A13-extension-1'):
+    if spec.get('schema') not in ('v3-A10-estimation-1', 'v3-A4-validation-1', 'v3-A5-labels-1', 'v3-A13-extension-1', 'v3-A14-extension-1'):
         return None
     from .table_validation_a4 import estimate_memory_gb, CENSUS_MEASURE
     from .continuation_validation import GROUPS
@@ -360,7 +360,8 @@ def configuration_resources(jobs, sources, estimates, *, phase=None, spec=None):
         if 'schema' not in declared:
             declared['schema'] = ('v3-A4-validation-1' if job['kind'].startswith('a4_') else
                                   'v3-A5-labels-1' if job['kind'].startswith('a5_') else
-                                  'v3-A13-extension-1' if job['kind'].startswith('a13_') else '')
+                                  'v3-A13-extension-1' if job['kind'].startswith('a13_') else
+                                  'v3-A14-extension-1' if job['kind'].startswith('a14_') else '')
         effective_phase = job['config'].get('phase', phase or job['kind'])
         phase_values = [estimates[j['id']] for j in sources or []
                         if j['config'].get('phase', j['kind']) == effective_phase]

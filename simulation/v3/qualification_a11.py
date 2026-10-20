@@ -29,7 +29,7 @@ def build(spec_path, source_root, output, kinds=None):
     """
     from .production_runner import completed
     from .multihost_a11 import ALLOWED_KINDS
-    from .snapshot_a11 import inventory
+    from .snapshot_a11 import inventory, historical_roots
     from .compatibility_a10 import comparison_bytes
     spec = unseal(read(spec_path))
     if spec['code_hash'] != code_identity() or spec.get('instrument', {}).get('mapping') != 'A10':
@@ -49,7 +49,7 @@ def build(spec_path, source_root, output, kinds=None):
             return s.get('particles', 1) * (s.get('burn', 0) + s.get('measure', c.get('steps', 1)))
         candidates.sort(key=lambda j: (cost(j), digest(['A11-qualification', j['id']]), j['id']))
         done = []
-        if spec.get('registered') and kind != 'a13_validate_plain_ext':
+        if spec.get('registered') and kind not in ('a13_validate_plain_ext', 'a14_validate_plain_ext2'):
             for j in candidates:
                 value = completed(Path(source_root) / j['config']['phase'], j, spec['code_hash'])
                 if value is not None:
@@ -72,7 +72,7 @@ def build(spec_path, source_root, output, kinds=None):
             cfg = deepcopy(configs[index % len(configs)])
             # A4/A5 consume config.seed, rather than the outer seed. These are
             # disjoint, explicitly non-registered fixture streams on both hosts.
-            if kind.startswith(('a4_', 'a5_', 'a13_')):
+            if kind.startswith(('a4_', 'a5_', 'a13_', 'a14_')):
                 cfg['seed'] = (1 << 128) | int(digest(['A11-qualification-stream', kind, cfg, index])[:32], 16)
             job = stable_job(kind, cfg, 'validation', index)
             jobs.append(job)
@@ -83,16 +83,23 @@ def build(spec_path, source_root, output, kinds=None):
     files = {}
     simulation = str(SIMULATION)
     for job in jobs:
-        snapshot = unseal(inventory([job], phase_roots[job['id']], spec.get('pull_dispatch', {}).get('extra_inputs', [])))
+        snapshot = unseal(inventory([job], phase_roots[job['id']], spec.get('pull_dispatch', {}).get('extra_inputs', []),
+                                    historical_roots=historical_roots(spec)))
         for row in snapshot['files']:
             files[row['path']] = row
-    snapshot = seal({'schema': 'v3-A11-inputs-1', 'simulation': simulation, 'files': [files[k] for k in sorted(files)]})
+    snapshot = seal(dict(snapshot, files=[files[k] for k in sorted(files)]))
     bundle = target.parent / (target.stem + '_files')
     for row in snapshot['payload']['files']:
         path = scoped(bundle / row['path']); path.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(SIMULATION / row['path'], path)
+        from .artifacts import input_path
+        source = input_path(row.get('source', SIMULATION / row['path']))
+        if file_hash(source) != row['sha256']:
+            raise ValueError('qualification input changed before copy')
+        shutil.copyfile(source, path)
         if file_hash(path) != row['sha256']:
             raise ValueError('qualification input changed during copy')
+        if 'source' in row or 'aliases' in row:
+            path.chmod(0o444)
     plan = {'schema': SCHEMA + '-plan', 'non_registered': True, 'code_hash': code_identity(),
         'jobs': jobs, 'kinds': kinds, 'phase_roots': phase_roots, 'inputs': snapshot,
         'references': references, 'bundle_directory': bundle.name,

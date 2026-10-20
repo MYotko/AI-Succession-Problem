@@ -5151,3 +5151,110 @@ used by comparison, publication or approval. Informational failures do not
 alter a seed, setting, result, selection, comparison or attempt outcome. Tests
 inject both kinds of failure and retain a final failed proof for a correctness
 write failure. The build report gives test counts, identity and A2 re-pins.
+
+### A14 implementation, 2026-10-20
+
+Invocation validation precedes entry into registered preparation, reads no evidence, and creates no record when it fails.
+
+The second round has its own module, phase, job kind, checkpoint context,
+family reservation and halt latch. Preparation reserves before checking the
+historical evidence. The read-only verifier uses a sealed source-to-copy
+mapping, verifies the original publication and the clean A13 round, and
+recomputes the old classifications before comparing the residual identifiers
+with the sealed refusal. It never invokes A13's lifecycle functions.
+
+A14 reuses the unchanged A13 numerical stage, sample-size expression, test
+and visit-count stop. Replicate ordinals start at 20; the new seed range,
+global inventory, price ceiling and policy floor are checked separately.
+The phase receives only its declared A1/calibration copies and sealed fit.
+Reassembly applies the decision of the round that tested each A13-eligible
+row, including violations and unresolved decisions, and preserves the
+outside-set rows and sensitivity sidecars byte for byte. Part 2's thresholds
+and loader checks are unchanged; its new scope is explicitly authorized.
+
+Shared execution files contain A14 branches for launch, dispatch, resource
+classification, qualification, checkpoint transfer and both halt paths.
+Current A10 pins move to A14, while historical verification keeps ancestry
+and committed hashes. A14-pinned validation families retain A13 admission.
+The snapshot repair accepts explicitly inventoried historical input paths,
+transfers verified read-only copies, and preserves original paths with
+aliases. In-checkout staging keeps its previous inventory layout.
+
+The compatibility adapter is the narrow A13 reserved-seed exception. It
+replays each recorded replicate from its seed in an empty scratch root.
+Recorded checkpoints serve only as comparisons; the adapter derives no
+new statistic or classification from replay outputs and writes no family
+record. The isolated forecast runs the three hash-pinned scripts unchanged
+against a read-only `55817036` source view and mapped rehearsal or historical
+copies, with repository import hashes and frozen-environment versions
+recorded. It checks case A against the frozen eligible set.
+
+The receipt retains the original plan hash and stream seeds, adds both
+round bindings and the union manifest, and preserves both earlier refusals.
+The A13 module and existing fit, validation, census and estimation numerics
+remain unchanged. The explicit shared-path exceptions are the pin change
+and snapshot repair. The compatibility adapter is A14's separate authorized
+proof branch. The build report records the final identity, re-pins and
+verification results.
+
+The A14 implementation identity is
+`174ab6600e0bc3514ee4b0f553a85b5e426aea4203621125debfa3cd12fd5afd`.
+The A2 boundary re-pins `artifacts.py` for the current A14 pin and
+`production_runner.py` for the new phase and isolated replay branch.
+Admission refusal records retain the error-accounting counts as well as
+identifiers. Snapshot transfer rejects conflicting aliases.
+Historical verification independently checks the A13 job skeleton, seed
+check and projection binding, and the original A10 source declaration,
+manifest, scoring-row inventory and registered publication guard. The
+forecast checks repository-owned import resolution and transitive imports
+against the frozen view, and refuses reachable A14 modules.
+
+Verification: all 34 A14 cases passed in the clean final run. The full
+1,133-case run recorded 952 passed, 142 failed, 36 setup errors and 3 xfailed:
+168 protected reads were refused, eight tests required an outside-worktree
+TEMP, one check required the new files in committed HEAD, and one A14 fixture
+collision was corrected and rechecked. The read barrier and `scoped()` remain
+strict. The per-test inventory is in the excluded build evidence.
+
+
+A14 review fix 2 separates invocation checks from evidence checks: the
+preliminary record is entry into registered preparation. Operator-input,
+committed-source and environment failures create no record; historical
+verification, eligibility, constants, construction and collisions remain
+terminal after entry. The forecast records declared, actual and A13 versions
+and match flags; it does not gate on matching A13. Explicit child findings
+use exit 78; other nonzero exits are resumable infrastructure failures.
+The read-only `preentry` command checks staged history and constructs pricing
+and seeds in memory, writes only a separate operational report, and never
+computes a probability. The roles-based inventory builder supplies the
+hash-verified copies before that check. Explicit operator decline is limited
+to `prepared`, or separately to a stuck `preparing` anchor, never `launched`.
+Registered A14 is single-host; rehearsal pull paths remain available.
+Historical snapshot roots and their hashes bound external inputs and aliases
+for all supported kinds, including labels, while internal staging is unchanged.
+Proof qualification, single-host preflight and shard snapshots carry explicitly
+declared historical roots too; selection, comparisons and finality are unchanged.
+Synthetic registered-branch and cap-passing violation cases cover these paths.
+
+Fix 2 verification: all 99 A14 tests passed, including the registered-branch
+fixtures, pre-entry audit and proof snapshot scope. TEMP remained inside
+the worktree and the read barrier stayed enabled. The interpreter owns
+the full-suite run after this fix.
+
+
+A14 review fix 3 routes pre-entry failures through item 12's before-step-5
+clause: a defect traced to the new identity requires a new identity and its
+own rehearsal, proofs and approvals. Copying or staging faults permit only
+rebuilding copies and their inventory from unchanged, hash-matching originals.
+Historical-record findings and seed collisions end A10 stage 1, as after entry.
+An untraced failure keeps the sequence halted pending the operator's recorded
+choice, free of registered A14 observations, between a further investigated
+identity and ending stage 1.
+The pre-entry audit also checks EXT layout, source/script hashes, isolated
+import paths and case A eligibility. Its child verifies hashes and imports
+but skips every assessment script body and computes no probability.
+Preparation failure preserves the first halt, including an operator decline;
+later failures are appended separately with their reasons and timestamps.
+
+Fix 3 verification: 105 A14 tests passed. TEMP remained inside the worktree
+and the read barrier stayed enabled; no full-suite run was performed.

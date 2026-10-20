@@ -178,6 +178,10 @@ def execute(job, registered=False, registration=None, root=None):
         return run_stage_job(job, root)
     if kind == 'a13_validate_plain_ext':
         from .validation_extension_a13 import run_stage_job, RESERVED
+        from .replay_a14 import authorized_replay
+        if authorized_replay(job, root):
+            from .replay_a14 import execute_replay
+            return execute_replay(job, root)
         configuration = job['tag'] in ('configuration', 'validation') and config.get('configuration_test')
         if not registered:
             if not (config.get('non_registered_rehearsal') or configuration):
@@ -188,6 +192,17 @@ def execute(job, registered=False, registration=None, root=None):
                 list(config.get('stream_seeds', [])) + [r['seed'] for r in config.get('full_seed_manifest', [])])
             if not seeds or any(s is None or RESERVED[0] <= int(s) < RESERVED[1] for s in seeds):
                 raise ValueError('non-registered extension uses A13 reserved seed range')
+        return run_stage_job(job, root)
+    if kind == 'a14_validate_plain_ext2':
+        from .validation_extension_a14 import run_stage_job, reserved
+        configuration = job['tag'] in ('configuration', 'validation') and config.get('configuration_test')
+        if not registered:
+            if not (config.get('non_registered_rehearsal') or configuration):
+                raise ValueError('non-registered A14 requires rehearsal or configuration test')
+            seeds = [config.get('seed')] if configuration else (
+                list(config.get('stream_seeds', [])) + [r['seed'] for r in config.get('full_seed_manifest', [])])
+            if not seeds or any(s is None or reserved(int(s)) for s in seeds):
+                raise ValueError('non-registered A14 uses reserved seeds')
         return run_stage_job(job, root)
     if kind == "a5_fvplain":
         # A5 plain-law certification labels. The A5 stream seed travels in the
@@ -295,6 +310,12 @@ def worker(root_name, job, code, threads, registered, registration, completion_d
                         {"job": job, "code_hash": code, "status": "complete", "output_hash": file_hash(path), "completed_epoch": time.time(),
                          "worker_seconds": time.perf_counter() - before, "peak_rss_bytes": output["peak_rss_bytes"], "oom_score_adj": oom})
     except BaseException as exc:
+        if job['kind'] == 'a14_validate_plain_ext2' and job['tag'] == 'v3_tables':
+            from .validation_extension_a14 import ScientificHalt, latch_round_halt
+            from .continuation_validation import OutOfRange
+            if isinstance(exc, (ScientificHalt, OutOfRange)):
+                atomic_json(root.parent / 'a14_scientific_halt.json', seal({'reason': 'A14 scientific halt', 'job_id': job['id']}))
+                latch_round_halt(root.parent, 'A14 scientific halt')
         if job['kind'] == 'a13_validate_plain_ext' and job['tag'] == 'v3_tables':
             from .validation_extension_a13 import ScientificHalt
             from .continuation_validation import OutOfRange
@@ -605,6 +626,9 @@ def nondeterminism_check(phase_root, jobs, registered=False, registration=None):
         if job['kind'] == 'a13_validate_plain_ext':
             from .validation_extension_a13 import latch_round_halt
             latch_round_halt(phase_root.parent, 'nondeterminism')
+        if job['kind'] == 'a14_validate_plain_ext2':
+            from .validation_extension_a14 import latch_round_halt
+            latch_round_halt(phase_root.parent, 'nondeterminism')
         raise RuntimeError("A4 nondeterminism: re-executed task %s differs" % job["id"])
     result = {"checked": job["id"], "candidates": len(shortest), "matched": True}
     atomic_json(phase_root / "nondeterminism_check.json", result)
@@ -818,6 +842,15 @@ def preflight_contexts(spec):
 
 
 def validate_spec(spec, settings):
+    if spec.get('schema') == 'v3-A14-extension-1':
+        from .validation_extension_a14 import _launch_view, execution_inputs
+        if not _launch_view.get():
+            token = _launch_view.set(True)
+            try:
+                with execution_inputs(spec['jobs']):
+                    return validate_spec(spec, settings)
+            finally:
+                _launch_view.reset(token)
     from .instrument import declaration
     from .pilot_a10 import reduced_pilot, POOLED_PHASE
     pooled = reduced_pilot(spec)
@@ -826,6 +859,9 @@ def validate_spec(spec, settings):
         raise ValueError("registered A10 manifest refuses R4")
     if spec.get('schema') == 'v3-A13-extension-1':
         from .validation_extension_a13 import validate_plan
+        validate_plan(spec, launching=True)
+    if spec.get('schema') == 'v3-A14-extension-1':
+        from .validation_extension_a14 import validate_plan
         validate_plan(spec, launching=True)
     if spec["code_hash"] != code_identity():
         raise RuntimeError("frozen specification source hash mismatch")
@@ -874,6 +910,11 @@ def validate_spec(spec, settings):
     if len({j["seed"] for j in spec["jobs"]}) != len(spec["jobs"]):
         raise ValueError("seed collision in frozen manifest")
     for job in spec["jobs"]:
+        if job['kind'] != 'a14_validate_plain_ext2':
+            from .validation_extension_a14 import RESERVED as A14_RESERVED
+            if any(A14_RESERVED[0] <= int(s) < A14_RESERVED[1]
+                   for s in (job['seed'], job['config'].get('seed', job['seed']))):
+                raise ValueError('non-A14 job uses A14 reserved seed range')
         if job['kind'] != 'a13_validate_plain_ext':
             from .validation_extension_a13 import RESERVED
             if any(RESERVED[0] <= int(s) < RESERVED[1] for s in (job['seed'], job['config'].get('seed', job['seed']))):
@@ -895,7 +936,7 @@ def validate_spec(spec, settings):
         from .production_tables import ProductionTables
         calibrated, loaded = {}, set()
         for job in spec["jobs"]:
-            if job["kind"] in ("a4_fit", "a4_validate", "a4_census", "a5_fvplain", "a13_validate_plain_ext"):
+            if job["kind"] in ("a4_fit", "a4_validate", "a4_census", "a5_fvplain", "a13_validate_plain_ext", "a14_validate_plain_ext2"):
                 # A4 and A5 stages carry their calibration through the referenced
                 # A1 job.
                 cal_path = job["config"]["a1_job"]["config"].get("calibration_path")
@@ -981,12 +1022,17 @@ def launch(spec_path, root, settings, service_record=None):
     if spec.get('schema') == 'v3-A13-extension-1':
         from .validation_extension_a13 import begin_round
         begin_round(spec, spec_path, root)
+    if spec.get('schema') == 'v3-A14-extension-1':
+        from .validation_extension_a14 import begin_round
+        begin_round(spec, spec_path, root)
     if context_preflight and context_preflight["checked"]:
         atomic_json(root / "context_preflight.json", context_preflight)
     if settings["profile"] == "x2":
         from .service import require_service_record
         require_service_record(settings, service_record)
     with lease(root / "runner.lock"):
+        if (root / 'a14_scientific_halt.json').exists():
+            raise RuntimeError('A14 scientific halt is final; round spent')
         if (root / 'a13_scientific_halt.json').exists():
             raise RuntimeError('A13 scientific halt is final; round spent')
         if any(root.glob('*/screen_failure.json')):
@@ -1016,7 +1062,7 @@ def launch(spec_path, root, settings, service_record=None):
         is_a10_pilot = spec.get("schema") == "v3-A10-cost-pilot-1"
         from .pilot_a10 import reduced_pilot
         pooled = reduced_pilot(spec)
-        memory_managed = is_a4 or is_a10_pilot or spec.get("schema") in ("v3-A10-estimation-1", "v3-A13-extension-1")
+        memory_managed = is_a4 or is_a10_pilot or spec.get("schema") in ("v3-A10-estimation-1", "v3-A13-extension-1", "v3-A14-extension-1")
         # Each configuration and scientific job reserves its own memory class.
         mem_caps = {}
         resources = wc.resources(spec)
@@ -1087,7 +1133,7 @@ def launch(spec_path, root, settings, service_record=None):
                         from .pilot import project_costs
                         atomic_json(root / "cost_projection.json", project_costs(spec, root, outcomes, record["configuration"]))
                 return {"complete": False, "outcomes": outcomes}
-            if (is_a4 or spec.get("schema") == "v3-A13-extension-1") and jobs:
+            if (is_a4 or spec.get("schema") in ("v3-A13-extension-1", "v3-A14-extension-1")) and jobs:
                 check = nondeterminism_check(root / phase, jobs, spec["registered"], spec.get("registration"))
                 atomic_json(root / phase / "nondeterminism_check.json", check)
         publication = spec.get("publication")

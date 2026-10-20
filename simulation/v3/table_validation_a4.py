@@ -742,9 +742,9 @@ def publish(plan, run_root, source_root, calibration, target, *, registered=True
         verify_estimation_source(source_root, plan["calibration_path"], registered=registered)
     if registered:
         registered_publish_guard(plan)
-        from .artifacts import verify_registration, A13_COMMIT
+        from .artifacts import verify_registration, A14_COMMIT
         verify_registration(plan["registration"], **({"instrument": instrument,
-            "historical": plan['registration']['commit'] not in (A13_COMMIT, A13_COMMIT[:8])} if instrument.a10 else {}))
+            "historical": plan['registration']['commit'] not in (A14_COMMIT, A14_COMMIT[:8])} if instrument.a10 else {}))
     source_root, run_root = Path(source_root), Path(run_root)
     expected_a1 = A1_FILE_SHA256 if registered and not instrument.a10 else plan["source_file_sha256"]
     if file_hash(source_root / "v3_rerun_tables_A1.json") != expected_a1:
@@ -787,8 +787,8 @@ def publish(plan, run_root, source_root, calibration, target, *, registered=True
         source_payload = unseal(read(source_root / "v3_rerun_tables_A1.json"))
         manifest["a10"] = source_payload["manifest"]["a10"]
     # A13 is prospective only for launches pinned to its clarification.
-    from .artifacts import A13_COMMIT
-    if registered and plan.get('registration', {}).get('commit') in (A13_COMMIT, A13_COMMIT[:8]):
+    from .artifacts import A13_COMMIT, A14_COMMIT
+    if registered and plan.get('registration', {}).get('commit') in (A13_COMMIT, A13_COMMIT[:8], A14_COMMIT, A14_COMMIT[:8]):
         from .admission_a13 import checked_binding
         from .offline_estimator import add_ranking_flags
         from .production_tables import row_key

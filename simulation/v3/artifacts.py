@@ -214,6 +214,7 @@ def lease(path):
 
 
 A13_COMMIT = "48815a655c9f4096ea8ceef35ee277ee0352c7d3"
+A14_COMMIT = "17f17ef9cee4b18d70f043a1e097359cd6642693"
 
 
 def verify_registration(pin, repository=None, *, instrument=None, historical=False):
@@ -235,10 +236,11 @@ def verify_registration(pin, repository=None, *, instrument=None, historical=Fal
         if declaration(instrument).a10 and b"Amendment A11" not in committed:
             raise RuntimeError("registered A10 requires a design pin containing Amendment A11")
         if not historical and declaration(instrument).a10:
-            if (pin['commit'] not in (A13_COMMIT, A13_COMMIT[:8])
+            if (pin['commit'] not in (A14_COMMIT, A14_COMMIT[:8])
                     or path.as_posix() != 'simulation/diagnostics/v3_rerun_design_note.md'
-                    or b'Clarified, 2026-10-16: pricing R_max' not in committed):
-                raise RuntimeError('current A10 launches require the A13 clarification pin 48815a65')
+                    or b'Clarified, 2026-10-16: pricing R_max' not in committed
+                    or b'### Amendment A14' not in committed):
+                raise RuntimeError('current A10 launches require the A14 pin 17f17ef9')
         if hashlib.sha256(committed).hexdigest() != pin["sha256"] or (not historical and file_hash(repo / path) != pin["sha256"]):
             raise RuntimeError("pre-registration hash is stale")
         if historical:

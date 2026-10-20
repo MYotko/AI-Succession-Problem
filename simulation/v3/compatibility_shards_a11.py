@@ -250,24 +250,44 @@ def assign(items, hosts):
     return shards
 
 
-def portable_inventory(items):
+def source_historical_roots(sources):
+    """Explicit input roots, frozen into the proof/qualification snapshots."""
+    from .snapshot_a11 import historical_roots, normalize_historical_roots
+    roots = set()
+    for source in sources:
+        roots.update(historical_roots(unseal(read(source['spec']))))
+        roots.update(normalize_historical_roots(source.get('historical_roots', [])))
+    return sorted(roots)
+
+
+def portable_inventory(items, *, historical_roots=()):
     """Same execute dependencies as snapshot_a11, including old-checkout reads.
 
     Blob paths are local and safe; absolute aliases preserve original job bytes.
     No source output is copied unless execute needs it (e.g. A4's A1 and fit).
     """
-    from .snapshot_a11 import dependencies
+    from .snapshot_a11 import dependencies, normalize_historical_roots, verify_historical_scope
+    roots = normalize_historical_roots(historical_roots)
     files = {}
     for item in items:
         for path in dependencies([item['job']], item['phase_root']):
+            _require(path.is_relative_to(ROOT) or any(path.is_relative_to(Path(r)) for r in roots),
+                     'proof input outside declared historical roots')
             key = digest(str(path))
             files[key] = dict(path='v3/proof_inputs/' + key + '/' + path.name,
                               source=str(path), aliases=[str(path)], sha256=file_hash(path), bytes=path.stat().st_size)
-    return seal(dict(schema='v3-A11-inputs-1', simulation=str(SIMULATION), files=[files[k] for k in sorted(files)]))
+    payload = dict(schema='v3-A11-inputs-1', simulation=str(SIMULATION), files=[files[k] for k in sorted(files)])
+    if roots:
+        payload.update(historical_roots=roots, historical_roots_sha256=digest(roots), checkout_root=str(ROOT))
+    verify_historical_scope(payload)
+    return seal(payload)
 
 
 def stage_inputs(document, bundle):
-    for row in unseal(document)['files']:
+    from .snapshot_a11 import verify_historical_scope
+    payload = unseal(document)
+    verify_historical_scope(payload)
+    for row in payload['files']:
         path = scoped(Path(bundle) / row['path'])
         path.parent.mkdir(parents=True, exist_ok=True)
         if not path.exists():
@@ -354,7 +374,7 @@ def qualification_bundle(sources, output):
             memory_classes[job['id']] = resource['memory_class']
             items.append(dict(job=job, phase_root=roots[job['id']]))
     _require(jobs, 'no qualification profiles')
-    snapshot = portable_inventory(items)
+    snapshot = portable_inventory(items, historical_roots=source_historical_roots(sources))
     bundle = output.parent / (output.stem + '_files')
     plan = dict(schema=QSCHEMA + '-plan', non_registered=True, code_hash=code_identity(), jobs=jobs,
                 kinds=sorted(by_kind), phase_roots=roots, inputs=snapshot, references={},
@@ -412,9 +432,11 @@ def freeze(sources, reasons, target, hosts, commit):
     assignments = validate_hosts(hosts, record['new_code_hash'], items, original)
     _require(all(i['profile_key'] in profiles for i in items.values()), 'missing pre-launch configuration profile')
     snapshots = {}
+    roots = source_historical_roots(sources)
     for name, ids in assignments.items():
         configs = configuration_items([items[j] for j in ids], profiles)
-        snapshots[name] = dict(proof=portable_inventory([items[j] for j in ids]), configuration=portable_inventory(configs))
+        snapshots[name] = dict(proof=portable_inventory([items[j] for j in ids], historical_roots=roots),
+                               configuration=portable_inventory(configs, historical_roots=roots))
     payload = dict(schema=SCHEMA, record=record, items=items, profiles=profiles, selected_job_ids=_selected(record['populations']),
                    assignments=assignments, hosts=hosts, original_host=original, code_commit=commit,
                    new_code_hash=record['new_code_hash'], target=str(target), snapshots=snapshots,
@@ -530,7 +552,7 @@ def preflight(p, host, root):
     return views, configuration, 0., budget
 
 
-def single_preflight(record, items, profiles, target, workers, floor, settings=None):
+def single_preflight(record, items, profiles, target, workers, floor, settings=None, historical_roots=()):
     """The legacy one-host API has the same preconditions before reservation."""
     from .production_runner import available_cpus
     profiles = deepcopy(profiles)
@@ -544,8 +566,9 @@ def single_preflight(record, items, profiles, target, workers, floor, settings=N
     name = platform.node()
     p = dict(items=items, profiles=profiles, assignments={name: list(items)},
              hosts={name: dict(settings=settings, memory_floor_gb=floor)}, snapshots={name: dict(
-                 proof=portable_inventory(list(items.values())),
-                 configuration=portable_inventory(configuration_items(list(items.values()), profiles)))})
+                 proof=portable_inventory(list(items.values()), historical_roots=historical_roots),
+                 configuration=portable_inventory(configuration_items(list(items.values()), profiles),
+                                                  historical_roots=historical_roots))})
     root = target.with_suffix('.workers')
     for kind, snapshot in p['snapshots'][name].items():
         stage_inputs(snapshot, root / (kind + '_files'))

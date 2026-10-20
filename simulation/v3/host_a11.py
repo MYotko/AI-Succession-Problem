@@ -147,7 +147,7 @@ def verify_commit(commit):
             raise ValueError('implementation commit differs from running source: ' + name)
 
 
-def execute_scratch(target, job, code, phase_root, view, registered, registration, host, token, a13_checkpoints=None, a13_recheck=False):
+def execute_scratch(target, job, code, phase_root, view, registered, registration, host, token, a13_checkpoints=None, a13_recheck=False, a14_checkpoints=None):
     """Spawn target: ordinary execute path, one output blob, no completion record."""
     from .production_runner import execute, peak_rss_bytes
     configure_threads(1)
@@ -165,6 +165,10 @@ def execute_scratch(target, job, code, phase_root, view, registered, registratio
                 from .validation_extension_a13 import checkpoint_context
                 with checkpoint_context(target.with_suffix('.a13'), a13_checkpoints or [], recheck=a13_recheck):
                     result = execute(job, registered, registration, root=Path(phase_root))
+            elif job['kind'] == 'a14_validate_plain_ext2':
+                from .validation_extension_a14 import checkpoint_context
+                with checkpoint_context(target.with_suffix('.a14'), a14_checkpoints or [], recheck=a13_recheck):
+                    result = execute(job, registered, registration, root=Path(phase_root))
             else:
                 result = execute(job, registered, registration, root=Path(phase_root))
         atomic_json(target, {'job': job, 'code_hash': code, 'runtime': info, 'result': result,
@@ -175,6 +179,8 @@ def execute_scratch(target, job, code, phase_root, view, registered, registratio
         from .continuation_validation import OutOfRange
         if job['kind'] == 'a13_validate_plain_ext' and isinstance(exc, (ScientificHalt, OutOfRange)):
             atomic_json(target.with_suffix('.scientific_halt.json'), {'scientific_halt': True})
+        if job['kind'] == 'a14_validate_plain_ext2' and isinstance(exc, (ScientificHalt, OutOfRange)):
+            atomic_json(target.with_suffix('.scientific_halt.json'), {'scientific_halt': True, 'round': 2})
         metadata_json(target.with_suffix('.failure.json'), {'job_id': job['id'], 'traceback': traceback.format_exc(),
                     'target': str(target), 'resolved_target': str(target.resolve()), 'scope_root': str(ROOT)})
         raise
@@ -295,6 +301,12 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
             raise RuntimeError('no qualified phase fits this host; no scientific jobs taken')
         while not client.lost.is_set():
             for token, (process, target, claim) in list(active.items()):
+                if claim['job']['kind'] == 'a14_validate_plain_ext2' and claim['purpose'] == 'work':
+                    sent = claim.setdefault('_a14_sent', set())
+                    for checkpoint in sorted(target.with_suffix('.a14').glob('*.json')):
+                        if checkpoint.name not in sent:
+                            client.call('a14_checkpoint', lease=token, checkpoint=read(checkpoint))
+                            sent.add(checkpoint.name)
                 if claim['job']['kind'] == 'a13_validate_plain_ext' and claim['purpose'] == 'work':
                     sent = claim.setdefault('_a13_sent', set())
                     for checkpoint in sorted(target.with_suffix('.a13').glob('*.json')):
@@ -311,7 +323,10 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
                     continue  # A fresh claim performs both memory guards again.
                 if (process.exitcode and not killed_signal(process.exitcode)) or not target.exists():
                     if target.with_suffix('.scientific_halt.json').exists():
-                        client.call('a13_halt', lease=token)
+                        if claim['job']['kind'] == 'a14_validate_plain_ext2':
+                            client.call('a14_halt', lease=token)
+                        else:
+                            client.call('a13_halt', lease=token)
                     client.call('release', lease=token, reason='worker failed')
                     failure_path = target.with_suffix('.failure.json')
                     detail = read(failure_path).get('traceback', '') if failure_path.exists() else 'no child failure record'
@@ -365,7 +380,7 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
                     target = scratch / 'unpublished' / (token + '.json')
                     process = context.Process(target=execute_scratch, args=(str(target), claim['job'], spec['code_hash'],
                         claim['phase_root'], views[claim['job']['config']['phase']], spec['registered'], spec.get('registration'), host, token,
-                        claim.get('a13_checkpoints'), claim['purpose'] == 'check'))
+                        claim.get('a13_checkpoints'), claim['purpose'] == 'check', claim.get('a14_checkpoints')))
                     process.start()
                     active[token] = (process, target, claim)
                 if reply['claims']:

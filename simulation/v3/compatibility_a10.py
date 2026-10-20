@@ -149,7 +149,11 @@ def _execute_proof(item):
         info = runtime(1)
         start = time.perf_counter()
         with input_view(item.get('input_view')):
-            result = execute(item["job"], registered=False, registration=None, root=Path(item["phase_root"]))
+            if item['job']['kind'] == 'a13_validate_plain_ext' and item.get('a13_replay'):
+                from .replay_a14 import replay
+                result = replay(item)
+            else:
+                result = execute(item["job"], registered=False, registration=None, root=Path(item["phase_root"]))
         _require(result.get("code_hash", code_identity()) == code_identity(), "re-execution result has wrong producer metadata")
         return {"after_sha256": hashlib.sha256(comparison_bytes(item["job"], result)).hexdigest(), "runtime": info,
                 "_peak_rss_bytes": peak_rss_bytes(), "_worker_seconds": time.perf_counter() - start}
@@ -195,8 +199,28 @@ def collect_record(sources, reasons_path):
             selected_jobs[job["id"]] = {"job": job, "phase_root": str(phase_root), "producing_code_hash": old,
                                         "before_sha256": hashlib.sha256(comparison_bytes(job, output["result"])).hexdigest(),
                                         "output_file_sha256": file_hash(phase_root / "outputs" / (job["id"] + ".json"))}
+            if job['kind'] == 'a13_validate_plain_ext':
+                from .replay_a14 import binding
+                checkpoints = [read(phase_root / 'a13_checkpoints' / job['id'] / f'{r["replicate"]:02d}.json')
+                               for r in output['result']['replicates']]
+                selected_jobs[job['id']]['a13_replay'] = binding(spec, job, output['result'], checkpoints)
             from .compatibility_shards_a11 import resource_estimate
-            resource = resource_estimate(spec, job)
+            if job['kind'] == 'a13_validate_plain_ext' and spec['registered'] and 'pull_dispatch' not in spec:
+                # The A14 adapter also carries the original sealed scheduling
+                # class into the proof. The single-host A13 plan has no pull
+                # extension; its original validation plan supplies that class.
+                _require(file_hash(spec['original_plan_path']) == spec['original_plan_file_sha256'],
+                         'A13 replay original plan changed')
+                original = unseal(read(spec['original_plan_path']))
+                from .table_validation_a4 import _recompute_plan_hash
+                _require(_recompute_plan_hash(original) == original['plan_hash']
+                         and original['plan_hash'] == spec['original_plan_hash'], 'A13 replay original plan binding differs')
+                source = next(j for j in original['jobs'] if j['config']['phase'] == 'validate_plain'
+                              and j['config']['a1_job']['id'] == job['config']['a1_job']['id'])
+                resource = resource_estimate(original, source)
+                resource['worker_seconds'] *= job['config']['R_max'] / 3
+            else:
+                resource = resource_estimate(spec, job)
             selected_jobs[job['id']]['resources'] = resource
             from .worker_control import observe
             completion_path = phase_root / 'records' / (job['id'] + '.json')
@@ -251,7 +275,7 @@ def build_record(sources, reasons_path, target, *, workers=None, memory_floor_gb
     """Freeze a sample, execute it once with memory admission, seal failures."""
     from copy import deepcopy
     from .compatibility_shards_a11 import (run_items, write_once, reservation_path,
-                                         reserve_attempt, check_reservation, single_preflight)
+                                         reserve_attempt, check_reservation, single_preflight, source_historical_roots)
     target = scoped(target)
     attempt = target.with_suffix('.attempt.json')
     _require(not target.exists() and not attempt.exists(), 'compatibility attempt is final; selection already exists')
@@ -274,7 +298,10 @@ def build_record(sources, reasons_path, target, *, workers=None, memory_floor_gb
         estimates={j: i['resources'] for j, i in selected_jobs.items()},
         peaks={i['resources']['memory_class']: i['resources'].get('measured_memory_gb', 0.) for i in selected_jobs.values()}))
     atomic_json(control_root / 'identity.json', dict(code_hash=code_identity(), target=str(target)))
-    view, configuration, floor, budget, workers = single_preflight(record, selected_jobs, profiles, target, workers, 0., settings=settings)
+    roots = source_historical_roots(sources)
+    snapshot_options = {'historical_roots': roots} if roots else {}
+    view, configuration, floor, budget, workers = single_preflight(record, selected_jobs, profiles, target, workers, 0.,
+        settings=settings, **snapshot_options)
     authority = read(control_root / 'memory_authority.json')
     for cfg in configuration.values():
         for key, peak in cfg.get('class_peaks_gb', {}).items():

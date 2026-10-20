@@ -3847,3 +3847,286 @@ rates. Zero denominator is unassessed. Flag any quantity with any nonzero
 missing-row incidence. Do not drop or re-estimate flagged quantities, and
 do not call an unflagged quantity certified unaffected. The mixed-producer
 reader fixture check in the A12 review remains required before reading.
+
+## 18. A14, second and final extension
+
+Invocation validation precedes entry into registered preparation, reads no evidence, and creates no record when it fails.
+
+This section supersedes 17.4's prohibition for the A14 round alone. The A13
+anchor and admission refusal remain unchanged. Current launches and
+publications pin `17f17ef9cee4b18d70f043a1e097359cd6642693`; earlier plans,
+including A13's, use ancestry and committed-note verification. The current
+execution checkout's note must match the A14 commit byte for byte.
+
+The implementation identity is
+`174ab6600e0bc3514ee4b0f553a85b5e426aea4203621125debfa3cd12fd5afd`.
+Recompute it after the operator commits the reviewed code. Review the diff
+against `55817036`, including the unchanged A13 module and numerical modules.
+Do not carry a successful proof at an earlier identity into this identity.
+Nothing below authorizes a registered launch during the code build.
+
+### 18.1 Review, rehearsal and compatibility
+
+Before registered preparation, run the synthetic A14 tests at the code commit:
+
+```bash
+cd "$CHECKOUT/simulation"
+export A14_FEASIBILITY_SCRIPTS="$FEASIBILITY_SCRIPTS"
+"$PYTHON" -B -m pytest test_v3_a14.py
+```
+
+`FEASIBILITY_SCRIPTS` must contain the three unchanged, hash-pinned assessment
+scripts. The forecast rehearsal must run, with no missing-script skip.
+
+The X2 rehearsal must repeat the two-round publication fixture, force a
+round-2 violation through admission, exercise an unreached row and a latched
+halt, and prepare A5 labels against the union-manifest receipt. Exercise both
+checkpoint and halt RPCs through the real transport, drain and resume in the
+same root, and check persisted checkpoint hashes. Exercise qualification,
+transfer and two-host execution with an explicitly inventoried input outside
+the execution checkout. Confirm unchanged staging for in-checkout inputs.
+
+Run sampled run jobs at `5df9866f` and the new identity, comparing every
+existing `result` field with the exclusions in 17.1. Include yield reviews
+and the loader on a family with no admitted rows. Rehearse the isolated
+forecast wrapper. Replay clean A13 fixture replicates, then perturb a recorded
+checkpoint and its output together: the adapter must refuse the comparison.
+Rehearsal seeds stay outside both reserved extension ranges.
+
+Use 17.3's attempt, qualification, configuration, memory, worker control,
+service restoration and ledger procedure for the compatibility proofs.
+Include the original 434-job selection and A11's additional A13-phase
+selection. Freeze and report the additional count and total projected charge
+before execution. `compatibility_a10.collect_record` attaches the A14 replay
+binding to selected A13 jobs; ordinary execution cannot use that exception.
+The adapter re-simulates the recorded replicate sequence in an empty scratch
+root, compares each checkpoint, and returns only the ordinary compatibility
+comparison. It never calls the A13 lifecycle helpers or resumes its root.
+For the sealed single-host A13 source plan, the adapter obtains scheduling
+classes from the hash-bound original validation plan.
+
+Each proof source entry declares its absolute `historical_roots` when its
+inputs are outside the execution checkout. The proof qualification, single-host
+preflight and shard freeze carry the union of those declarations and any roots
+already in the frozen source spec into their hashed snapshots. Undeclared roots
+are refused before staging; use the same source declarations for qualification
+and the proof. In-checkout inputs retain their previous inventory bytes.
+
+The interpreter reviews the proofs, the operator approves them, and their
+records are committed before historical outputs enter registered preparation.
+A failed identity-pair proof remains final. Before preparation, a corrected
+identity may follow only under A14 item 12. Reproduction failure at the
+producing identity ends stage 1; an unattributed failure remains halted for
+the operator's recorded, outcome-free decision.
+
+### 18.2 Historical copies and forecast source view
+
+Build the sealed history inventory; do not hand-build its file list. Declare
+all required roles in a sealed roles document: `a13_plan`, `a13_public`,
+`a13_root`, `a13_round`, `a13_admission`, `original_plan`, `original_root`,
+`candidate`, `original_receipt`, `original_sidecar`, `a1_root`, and
+`calibration`. Also declare `compatibility_records`, the absolute
+`historical_roots` list (including the A13 execution checkout), and any
+explicit source-to-logical-path `aliases`. Missing roles or required files
+refuse the build. The builder discovers the job inputs from the plans and
+manifests, hashes them, stages read-only copies and writes the inventory:
+
+```bash
+"$PYTHON" -B -m v3.history_a14 inventory --roles "$HISTORY_ROLES" \
+  --checkout "$A13_CHECKOUT" --copies "$HISTORY_COPIES" --output "$HISTORY"
+```
+
+Use fresh non-registered inventory and copy locations under `simulation/v3`.
+The inventory has schema `v3-A14-history-1`.
+Its `files` list contains `source`, `copy`, `sha256` and `bytes` for each file.
+An explicit `aliases` list may preserve logical input paths, including the
+execution checkout's calibration path, while `source` names the historical
+file actually copied. Aliases and hashes are frozen with the inventory.
+Its `directories` maps original source, validation-root and A13-root paths to
+separate copy trees preserving relative paths. Those trees contain exactly
+their inventoried files. `roles` names `a13_plan`, `a13_public` and `a13_root`.
+Record `a13_plan_hash` and list the committed compatibility-record paths in
+`compatibility_records`. The builder stages the copies before pre-entry;
+preparation subsequently rechecks those exact copies after reservation.
+Every copy is hash-verified and read-only; original roots remain read-only. Keep historical input
+directories separate from new scratch roots. The verifier itself writes
+nothing, including on failure.
+
+Include every item in A14 item 1, the A1 manifests, A1 completions and
+outputs, calibration and original fit inputs needed to reconstruct the
+refused publication, and the committed compatibility records. Include the
+nondeterminism re-execution completion record. Every required logical path
+must map to a copy. No unmapped historical path is silently read.
+
+Stage the old source view before the forecast. This command copies source
+blobs only; it does not open historical scientific outputs:
+
+```bash
+"$PYTHON" -B -m v3.forecast_a14 stage-source "$FORECAST_SOURCE"
+```
+
+`FORECAST_SOURCE` must be a fresh directory inside `simulation/v3`. Its
+source and manifest are read-only and verified against `55817036`.
+Supply a sealed forecast configuration containing `registered`,
+`source_view`, `scripts`, `python_executable`, `python` and `numpy`.
+`scripts` names the directory containing the three unchanged assessment
+scripts. Before entry, the configured interpreter must exist and report its
+declared Python and numpy versions. The forecast records declared and actual
+versions against the A13 runtime and records their match boolean; a difference
+from A13 is informational and does not refuse preparation.
+Normally the frozen environment's own site-packages suffice. A separately
+recorded `package_paths` list may name frozen site-packages directories; it
+cannot expose the execution checkout or an A14 package.
+
+The wrapper launches an isolated interpreter with bytecode writes disabled.
+Repository imports, including transitive imports, are checked against the
+old source view; other imports stay in the recorded environment. Data reads
+use the inventory mapping. Case A must equal the frozen eligible set before
+the scripts calculate probabilities. Only the two specified `round2`
+probabilities enter the public report, together with import/environment
+verification and script/wrapper hashes.
+
+### 18.2a Read-only pre-entry check
+
+Before step 5, run the repeatable pre-entry check on the staged copies:
+
+```bash
+"$PYTHON" -B -m v3.validation_extension_a14 preentry \
+  --history "$HISTORY" --projection "$PROJECTION" \
+  --seed-inventory "$GLOBAL_SEEDS" --forecast-config "$FORECAST_CONFIG" \
+  --registration "$A14_PIN" --output "$A14_PLAN" --report "$PREENTRY_REPORT"
+```
+
+`PREENTRY_REPORT` is a fresh operational report inside this checkout and
+outside every registered location, input tree, anchor and plan. It reports
+pass/fail for the invocation, historical verification, eligibility/residual
+set, constants, pricing/floor, seed construction/collisions, forecast layout
+and import paths, and case A eligible-set equality, with E2,
+R_max and total projected cost on success. Dependent checks not reached are
+marked failed/not_run. The manifest exists in memory only: this command
+creates no plan, reservation or seed record and never runs the forecast or
+computes a probability. Its isolated layout/import check verifies the source
+view, script hashes and import paths without executing any assessment script.
+Use a fresh report path for each repeat.
+
+A pre-entry failure falls under item 12's before-step-5 clause.
+
+- A failure traced to the new identity may be corrected only by a new identity,
+  with its own rehearsal, proofs and approvals.
+- A copying or staging fault may be corrected only by rebuilding the copies
+  and inventory from unchanged, hash-matching originals. Nothing else changes.
+- A finding about the historical records ends A10 stage 1. That includes a
+  residual-set or constants mismatch not traced to code, or a failed
+  historical-record check. A seed collision also ends stage 1, exactly as
+  it would after entry.
+- A failure traced to none of these leaves the sequence halted. The operator
+  records a choice, free of any registered A14 observation, between a further
+  investigated identity and ending stage 1.
+
+### 18.3 Registered preparation is the finality boundary
+
+Entry into registered preparation is the writing of the preliminary family
+record, after invocation validation. Operator-input, committed-source and
+environment checks run before that record and create nothing on failure;
+historical-evidence and round-construction checks run after it and remain
+terminal. No launch is authorized by that record. Any terminal
+preparation refusal, the policy floor, a collision, a scientific halt, a
+declined go or a failed Part 2 ends stage 1 under item 12. Scheduling delay is
+not a decline. An infrastructure interruption resumes the same preparation
+with `--resume-preparation`; it does not permit another plan or root.
+Forecast child exit 78 denotes an explicit finding and is terminal; every
+other nonzero exit, including a kill or MemoryError, is infrastructure and
+leaves the same preparation resumable.
+
+The sealed global seed inventory has the existing `registered`, `planning`,
+`probe`, `rehearsal` and `qualification` lists, plus explicitly identified
+`a13_qualification_seeds` and `a13_configuration_seeds`. Preparation also
+unions the old plan's complete `seed_manifest` and `forbidden_seeds`.
+
+```bash
+"$PYTHON" -B -m v3.validation_extension_a14 prepare \
+  --history "$HISTORY" --projection "$PROJECTION" \
+  --seed-inventory "$GLOBAL_SEEDS" --forecast-config "$FORECAST_CONFIG" \
+  --registration "$A14_PIN" --output "$A14_PLAN" \
+  --wall-hours "$WALL_HOURS" --overhead-hours "$OVERHEAD_HOURS"
+```
+
+Review and approve the resulting `.public.json` before the go. It binds the
+historical inventory, eligibility identifiers, error-accounting counts,
+replicate bound, total projected charge, impossible-row flags, complete seed
+manifest/check and the two forecast probabilities. Prices and row-level
+trajectory statistics stay executor-only.
+
+The range `[2^61, 2^62)` is reserved. Replicates run from 20, with the
+registered trajectories and horizons. The bound is priced independently up
+to 32 using A13's checked per-source prices; below 24 there is no launch.
+The statistical test sees this round's first visiting trajectories alone.
+
+An operator decline is explicit:
+
+```bash
+"$PYTHON" -B -m v3.validation_extension_a14 decline \
+  --plan "$A14_PLAN" --operator "$OPERATOR" --reason "$OPERATOR_DATED_REASON"
+```
+
+The plan form is valid only in state `prepared`. For an infrastructure hold
+still in `preparing`, record an explicit terminal operator decline with
+`decline --anchor "$A14_ANCHOR" --operator "$OPERATOR" --reason
+"$OPERATOR_DATED_REASON"`. Neither form can decline a launched round.
+
+### 18.4 Launch and publish
+
+Use a fresh execution checkout at the proof-record commit. Single-host is
+required for registered A14; registered pull freeze and launch are refused.
+For this round only, its sealed `plan.json`, including sealed resource
+estimates, is the frozen dispatch specification. Build its load sheet from
+that exact file before the go. Pull dispatch remains available for
+non-registered rehearsals, including `a14_checkpoint` and `a14_halt` through
+both RPC transports. The optional SSH wrapper must permit the ordinary
+coordinator `rpc` command, as in section 16.
+
+Run qualification with non-reserved short streams, the pre-launch
+configuration test, and the supervised service-down/restoration procedure.
+Retain the item 10 swap, memory admission, worker-control and restart
+requirements. Record register approvals and the operator go. Charge all
+overhead and execution to the unchanged stage 1 ceiling. Launch through
+`production_runner launch` with 17.4's arguments, substituting this plan,
+fresh root, A14 pin, approved allowances and selected worker settings.
+
+The first launch binds the final specification and root in
+`v3_rerun_tables_A10.a14_round.json`. Resumption preserves them. A halt is
+final and certifies nothing. Publication requires the bound root, matching
+identity, complete last launch, passed nondeterminism check and, for pull
+dispatch, its completed cross-host check. Part 2 is recorded first in the
+write-if-absent `.a14_round.admission.json`.
+
+```bash
+"$PYTHON" -B -m v3.validation_extension_a14 publish \
+  --plan "$A14_PLAN" --root "$A14_ROOT" \
+  --target v3/runs/a10_stage1/nominal/v3_rerun_tables_A10.json
+```
+
+The receipt preserves original `plan_hash` and per-job `stream_seeds`, adds
+`a13_round` and `a14_round` bindings, and carries the union of both complete
+manifests in `extension_seed_manifest`. It includes both earlier refusals
+and no realized seed subset. Before section 7's exact-file/hash identity
+approval, compare both round plan hashes with their pre-launch approved
+`.public.json` records, then commit the public identity record.
+
+Only after successful admission and publication proceed to A5 and the five
+run families. Their original path strings and inventory comparisons stay
+fixed. Pin them to A14, forbid both manifests in A5, and retain each
+launch's frozen specification, load sheet, approvals and go. A terminal A14
+outcome ends stage 1 and releases the labels/runs reservation. There is no
+third round.
+
+
+Historical snapshot roots are explicit and bounded for every supported job
+kind, including A5 labels. When freezing a pull specification, provide each
+historical checkout with `--historical-root /absolute/checkout`; the normalized
+`historical_roots` list and its hash are frozen in the scheduling extension.
+A14 single-host qualification takes the same declaration from its sealed
+plan/history inventory. Inventory, transfer and qualification reject external
+inputs or aliases outside those roots. In-checkout staging is unchanged.
+For example, freeze labels with the existing arguments plus
+`--historical-root "$SOURCE_CHECKOUT" --historical-root "$A13_CHECKOUT"`.
