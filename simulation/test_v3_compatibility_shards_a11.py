@@ -4,6 +4,7 @@ from copy import deepcopy
 import ast
 import hashlib
 import subprocess
+import time
 from pathlib import Path
 
 import pytest
@@ -519,11 +520,26 @@ def test_single_host_precondition_failure_does_not_reserve_pair(tmp_path, enviro
         s.freeze(sources, reasons, tmp_path / 'another.json', hosts(), 'f' * 40)
 
 
+def local_clock(monkeypatch):
+    clock = [0.]
+    class Clock:
+        def monotonic(self):
+            return clock[0]
+
+        def sleep(self, seconds):
+            clock[0] += seconds
+
+        def __getattr__(self, name):
+            return getattr(time, name)
+
+    # Keep pool and worker deadlines on the real clock.
+    monkeypatch.setattr(s, 'time', Clock())
+    return clock
+
+
 @pytest.mark.parametrize('bound', [180., 1800.])
 def test_memory_release_wait_is_bounded(monkeypatch, bound):
-    clock = [0.]
-    monkeypatch.setattr(s.time, 'monotonic', lambda: clock[0])
-    monkeypatch.setattr(s.time, 'sleep', lambda seconds: clock.__setitem__(0, clock[0] + seconds))
+    clock = local_clock(monkeypatch)
     monkeypatch.setattr(s, 'memory_budget', lambda *args: .1 if clock[0] < 2 else 4.)
     assert s.wait_for_memory(3.) == 4. and clock[0] == 2.
     clock[0] = 0.
@@ -536,9 +552,7 @@ def test_memory_release_wait_is_bounded(monkeypatch, bound):
 
 
 def test_live_memory_dip_waits_without_starting_a_job(tmp_path, monkeypatch):
-    clock = [0.]
-    monkeypatch.setattr(s.time, 'monotonic', lambda: clock[0])
-    monkeypatch.setattr(s.time, 'sleep', lambda seconds: clock.__setitem__(0, clock[0] + seconds))
+    clock = local_clock(monkeypatch)
     monkeypatch.setattr(s, 'memory_budget', lambda *args: .1 if clock[0] < 181 else 1.)
     item = dict(job=a.stable_job('fixture', {}, 'validation', 1), phase_root=str(tmp_path), producing_code_hash='0' * 64,
                 resources=dict(worker_seconds=1., memory_gb=.3, memory_class='fixture'))
@@ -548,9 +562,7 @@ def test_live_memory_dip_waits_without_starting_a_job(tmp_path, monkeypatch):
 
 
 def test_proof_idle_timeout_spends_no_memory_before_thirty_minutes(tmp_path, monkeypatch):
-    clock = [0.]
-    monkeypatch.setattr(s.time, 'monotonic', lambda: clock[0])
-    monkeypatch.setattr(s.time, 'sleep', lambda seconds: clock.__setitem__(0, clock[0] + seconds))
+    clock = local_clock(monkeypatch)
     monkeypatch.setattr(s, 'memory_budget', lambda *args: .1)
     from v3.worker_safety import IsolatedPools
     monkeypatch.setattr(IsolatedPools, 'submit', lambda *args: pytest.fail('job admitted without memory'))
