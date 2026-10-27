@@ -28,7 +28,7 @@ The paper, the code and the data are public on GitHub. Explore them, challenge t
 
 In September 2026 the framework was put under deliberate pressure: an outside critique, two blind and independent derivations of its game theory, and a line-by-line audit of its mathematics. Several load-bearing claims did not survive, among them the claim that cooperation is the unique equilibrium. The v2.0 paper now carries a status notice, and its formal results should not be cited.
 
-Version 3 is a rebuild on certified foundations. Every mathematical tool is proven, twice and independently, before it is used. The objective is redefined. A claims register labels every claim proven, argued, conjectured or withdrawn. The simulation reruns were pre-registered before they ran, and their results stay sealed until they have been reviewed. You can watch the work as it happens.
+Version 3 is a rebuild on certified foundations. Every mathematical tool is proven, twice and independently, before it is used. The objective is redefined. A claims register labels every claim proven, argued, conjectured or withdrawn. The simulation reruns were pre-registered before they ran. Reading their results in October exposed a defect in the simulation itself, and the correction was registered before any run under it. Both sets of results stay unpublished until they have been reviewed, and will be published side by side. You can watch the work as it happens.
 
 [What held, and what changed](/updates) · [See it live](/live)
 

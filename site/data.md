@@ -11,7 +11,7 @@ These files are a record, not current findings. In September 2026 an audit found
 
 Dataset names describe each scenario as it was designed, not what it showed. "Drift Contained", for example, names a scenario in which a defense against slow drift was switched on. Whether drift can be contained is currently uncharacterized: neither shown contained nor shown uncontained.
 
-The version 3 simulation is a rebuild, registered before it ran. Its results stay sealed until they have been reviewed, and will be published with their evidence.
+The version 3 simulation is a rebuild, registered before it ran. Its first results were read on 5 October and are under outside review. Tracing one of them found a defect in the simulation, corrected by a registered amendment whose own runs are now being read. Both sets of results stay unpublished until they have been reviewed, and will be published side by side, with their evidence.
 
 [The validation record](https://github.com/MYotko/AI-Succession-Problem/blob/main/docs/v2_0_instrument_validation_record.md) · [Watch the work live](/live)
 
