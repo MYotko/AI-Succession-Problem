@@ -1,0 +1,312 @@
+{
+  "schema": "lineage-a17-sealed-host-entry-v1",
+  "payload": {
+    "schema": "lineage-a17-host-payload-v1",
+    "record_date": "2026-10-30",
+    "unit_name": "X2-1",
+    "host_class": "X2",
+    "record_status": "initial adoption metadata; qualifications pending; not dispatch admission",
+    "scope": "A17 initial register; option C campaign remains X2-1 only",
+    "cpu": {
+      "available_cpu_budget": 32,
+      "logical_cpus_observed": 32,
+      "physical_cores_observed": 16,
+      "sockets_observed": 1,
+      "threads_per_core_observed": 2,
+      "model_observed": "AMD RYZEN AI MAX+ 395 w/ Radeon 8060S",
+      "architecture": "x86_64",
+      "feature_summary_reported": "AVX-512 f, bw, cd, dq, vl, ifma, vbmi, vbmi2, vnni, bitalg, vpopcntdq, bf16, vp2intersect; NumPy X86_V2 baseline and X86_V3, X86_V4, AVX512_ICL dispatch",
+      "complete_feature_flags": {
+        "value": null,
+        "reason": "The selected public fingerprint has no complete CPU flags vector; obtain and bind it before qualification/launch."
+      },
+      "evidence": [
+        "fingerprint_log",
+        "preparation_report"
+      ]
+    },
+    "memory": {
+      "installed_nominal_gb_approx": 123,
+      "nominal_basis": "Operator-provided approximate class description; the kernel measurement below is in bytes, not an exact installed-DIMM inventory.",
+      "installed_physical_bytes": {
+        "value": null,
+        "reason": "No installed-DIMM byte inventory was supplied; Linux MemTotal is recorded separately."
+      },
+      "kernel_memtotal_bytes": 132569903104,
+      "memavailable_with_model_up_bytes_observed": 55053275136,
+      "observation_window_utc": [
+        "2026-10-30T12:25:05Z",
+        "2026-10-30T12:25:42Z"
+      ],
+      "current_join_memavailable_bytes": {
+        "value": null,
+        "reason": "No launch join is being performed; refresh live MemAvailable in the approved service state."
+      },
+      "evidence": [
+        "fingerprint_log",
+        "preparation_report"
+      ]
+    },
+    "operating_rules": {
+      "mode": "normal",
+      "worker_ceiling": 31,
+      "worker_ceiling_rule": "max(1, n minus 1), further bounded by runnable work, measured configuration, live memory and operator cap",
+      "numerical_threads_per_worker": 1,
+      "workers_times_threads_ceiling": 32,
+      "effective_threads_observed": {
+        "value": 1,
+        "library": "libscipy_openblas64_-32a4b2a6.so",
+        "distinct_historical_source_views_checked": 3,
+        "evidence": "fingerprint_log",
+        "scope": "preparation worker observations only; reverify in each launch identity"
+      },
+      "selected_launch_workers": {
+        "value": null,
+        "reason": "The future launch configuration has not been measured or approved; 31 is a ceiling, not a selected configuration."
+      },
+      "approved_load_sheet": {
+        "value": null,
+        "reason": "No per-launch load sheet is approved; class capacities require live memory and qualified class reservations."
+      }
+    },
+    "environment": {
+      "capture_window_utc": [
+        "2026-10-30T12:25:05Z",
+        "2026-10-30T12:25:42Z"
+      ],
+      "system": "Linux",
+      "machine_architecture": "x86_64",
+      "kernel_release": "7.0.0-42-generic",
+      "kernel_version_as_captured": "#42~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Mon Oct 19 14:43:01 UTC 2",
+      "platform": "Linux-7.0.0-42-generic-x86_64-with-glibc2.39",
+      "boot_id": "abb631ac-a2e0-4de0-ac50-495f8a063e3c",
+      "runtime_packages": {
+        "libc6": "2.39-0ubuntu8.9",
+        "libc-bin": "2.39-0ubuntu8.9",
+        "libgcc-s1": "14.2.0-4ubuntu2~24.04.1",
+        "libstdc++6": "14.2.0-4ubuntu2~24.04.1",
+        "libgomp1": "14.2.0-4ubuntu2~24.04.1"
+      },
+      "package_holds": [],
+      "package_holds_observed_none_since": "2026-10-29",
+      "package_holds_reconfirmed": "2026-10-30",
+      "phaseb_explicit_package_list_sha256": "039a116d09ecad032d50330b7ae2495ebbb3c9d83f736d8c63c66a230ebc9f01",
+      "python": "3.13.12",
+      "numpy": "2.4.4",
+      "scipy": {
+        "value": null,
+        "reason": "Fingerprint records null and the preparation report states scipy is not installed."
+      },
+      "distribution_count": 38,
+      "distribution_list_sha256": "e3e911a5f2aa03f8a80275d750a36badcfbf7e795bffb0a13defbdd58a83be93",
+      "int_max_str_digits": 0,
+      "multiprocessing_start_method": {
+        "value": null,
+        "reason": "The captured setting is null/unset; no concrete start method is asserted by this public record."
+      },
+      "numerical_libraries": [
+        {
+          "library": "libgcc_s.so.1",
+          "scope": "phaseb runtime",
+          "sha256": "25dd0774b7b2774e922a56971a2aef67f79b73373b77a06e7c7fa540f90541bc"
+        },
+        {
+          "library": "libstdc++.so.6.0.34",
+          "scope": "phaseb runtime",
+          "sha256": "38e5308c07cbb5f4858fda88461b336ddffc44caa227ee22bd2e0d8a09e51374"
+        },
+        {
+          "library": "libc.so.6",
+          "scope": "system runtime",
+          "sha256": "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf"
+        },
+        {
+          "library": "libm.so.6",
+          "scope": "system runtime",
+          "sha256": "fce00b6f25f459cf4ae0b7fae4257909a1a8a86f9149e7c029a5d617baf1ccd0"
+        },
+        {
+          "library": "libpthread.so.0",
+          "scope": "system runtime",
+          "sha256": "90491a21ce44efcf3bd4b65ec82501c091d7ebe7f8d9b341dd01d721001d9ecd"
+        },
+        {
+          "library": "libgfortran-040039e1-0352e75f.so.5.0.0",
+          "scope": "numerical-library basename as captured",
+          "sha256": "c6090048eccc763522c12ef016f81da6b627cb3a044f55cf0479a839c41c0980"
+        },
+        {
+          "library": "libquadmath-96973f99-934c22de.so.0.0.0",
+          "scope": "numerical-library basename as captured",
+          "sha256": "6ed5137f412781ad7863439fb543613f620b43c32b63292a0029246162f5bbc6"
+        },
+        {
+          "library": "libscipy_openblas64_-32a4b2a6.so",
+          "scope": "numerical-library basename as captured",
+          "sha256": "05c9f9eb89ee68a4b9d673184fa91c99587e736392c0c2d49180a8aa5303d080"
+        }
+      ],
+      "private_runtime_locations": {
+        "value": null,
+        "reason": "Private node, executable path and absolute library locations are retained only in the hashed operational fingerprint, not the public register."
+      },
+      "evidence": [
+        "host_fingerprint",
+        "fingerprint_log",
+        "phaseb_explicit_package_list",
+        "maintenance_after"
+      ],
+      "qualification_claim": "Matching environment metadata is not a bit-identity pass."
+    },
+    "power": {
+      "mode": "Performance",
+      "verification_date": "2026-10-30",
+      "measured_all_core_package_power_w_range": [
+        115,
+        120
+      ],
+      "method": "32-process all-core burst; package power observation reported in the interference benchmark",
+      "evidence": "power_measurement",
+      "live_launch_confirmation": {
+        "value": null,
+        "reason": "The approved launch state and rate segment must re-confirm power mode; no join is performed here."
+      }
+    },
+    "resident_services": [
+      {
+        "service_name": "llm-server",
+        "model": "gpt-oss-120b",
+        "owner": "Lineage",
+        "lineage_may_stand_down": true,
+        "authority_basis": "Operator-provided ownership and control statement for this register; standing Lineage service rule.",
+        "resident_memory_gb_approx_when_loaded": 70,
+        "memory_evidence": "power_measurement",
+        "last_reported_state": "up and healthy after preparation cleanup on 2026-10-30; not a current health probe",
+        "state_evidence": "preparation_report",
+        "control_setting": "llm",
+        "permitted_actions": [
+          "llm down",
+          "llm up with supervised restoration"
+        ],
+        "control_selection_rule": "Derive from this committed entry; never from an X2 hardware-profile default.",
+        "launch_activity_envelope": {
+          "value": null,
+          "reason": "A named launch/pass service-state envelope and duration are not yet frozen; capture before work."
+        }
+      }
+    ],
+    "other_material_resident_services": {
+      "value": null,
+      "reason": "Maintenance lists other active support units but supplies no materiality, memory or owner inventory; inventory material services at join."
+    },
+    "administrative_hold": {
+      "status": "none",
+      "since": "2026-10-29",
+      "basis": "Operator-provided initial-register status; independent of package holds and pending qualification.",
+      "does_not_imply_dispatch_admission": true
+    },
+    "requalification_checkout": {
+      "commit": "50a3d096c9b04863938624b41727dde1e269a187",
+      "code_identity": "57141a5731dfe3dbf334e4c9374559afe873c12e5c6c354b5869e0ffbdff777e",
+      "role": "preparation checkout, not a released final stage 2 successor",
+      "evidence": "preparation_report"
+    },
+    "qualification_records": {
+      "post_update_fixed_code": {
+        "status": "pending",
+        "accepted": false,
+        "acceptance_replay_started": false,
+        "sealed_sample_digest": "f75842f460d1c657e287820d1d906fa6da21c74ab6a2cc32aa0808acc3c078b4",
+        "sealed_sample_items": 1049,
+        "seal_basis": "reported preparation freeze; not an acceptance record",
+        "acceptance_record": {
+          "value": null,
+          "reason": "No acceptance replay or accepted pass exists in the supplied preparation record."
+        },
+        "preparation_blockers": "Preparation report requires harness authority and memory-admission repairs and a refreeze before acceptance replay. The recorded seal is preparation history and is not claimed launch-ready.",
+        "evidence": "preparation_report"
+      },
+      "launch_identity": {
+        "value": null,
+        "reason": "No launch-identity qualification record has been approved; the final successor and its own proofs remain required."
+      }
+    },
+    "approved_workload_kinds": [],
+    "rates": {
+      "reference_rate_by_designation": 1.0,
+      "designation_is_measured_rate": false,
+      "measured_participation_rate": {
+        "value": null,
+        "reason": "No approved actual-state join measurement is bound; reference designation is not measured participation evidence."
+      },
+      "measured_per_class_rates": {
+        "value": null,
+        "reason": "Per-class join rates are not yet measured and approved for a launch identity."
+      },
+      "approved_rate_segments": []
+    },
+    "per_class_capacities": {
+      "value": null,
+      "reason": "No approved workload kinds or live-memory launch load sheet yet; compute only after the per-class reservations and current MemAvailable are bound."
+    },
+    "private_transport_mapping": {
+      "value": null,
+      "reason": "No private endpoint mapping is supplied for public staging; resolve privately without changing public unit identity."
+    },
+    "dispatch_admissible": false,
+    "admission_reason": "Initial register inclusion is not acceptance, approval of a workload kind, a rate measurement or a launch go.",
+    "evidence": {
+      "preparation_report": {
+        "record": "X2-1 requalification preparation report, 2026-10-30",
+        "sha256": "85a4885184ca62005505b05d03911859143ee629263ba5a57ff4e203d84f3744",
+        "use": "preparation status, sample seal/count, checkout identity, capture timing and operational findings only"
+      },
+      "host_fingerprint": {
+        "record": "X2-1 requalification fingerprint, host_fingerprint.json, 2026-10-30",
+        "sha256": "f9b9cbddd7411e29ad5734f15a455e982803834dbc241c7e4d966d2290c759c7",
+        "use": "selected public environment fields and library hashes; private node/executable/library locations omitted"
+      },
+      "fingerprint_log": {
+        "record": "X2-1 preparation step6_fingerprint.log, 2026-10-30",
+        "sha256": "cfa1951482cecc1f226f759a0a689dc2a0da51bdf5defc924da5609e111475b2",
+        "use": "CPU, memory and effective single-thread observations"
+      },
+      "phaseb_explicit_package_list": {
+        "record": "X2-1 preparation phaseb_explicit_md5.txt, 2026-10-30",
+        "sha256": "039a116d09ecad032d50330b7ae2495ebbb3c9d83f736d8c63c66a230ebc9f01",
+        "use": "explicit phaseb package-list byte hash"
+      },
+      "source_inventory": {
+        "record": "X2-1 requalification sources.json, 2026-10-30",
+        "sha256": "ec2e9f8b4b23dd04f408577dfa4193e2e4b5c277dc5b671eb190ace0c85b55f6",
+        "lf_normalized_sha256": "bd6b9486b53946d8c3ebc6bae6daa79e8750d7e7a9c8b9873faefa8b504923f7",
+        "use": "hashed only; producer-source inventory provenance, not scientific outcomes"
+      },
+      "maintenance_after": {
+        "record": "X2-1 maintenance x2_1_after.txt, 2026-10-29T15:31:14Z",
+        "sha256": "026667ad71ca615b6c5a489e2a2271fdccd179c587780fe4366be5e398895f12",
+        "use": "kernel, five runtime package versions, removed package holds and phaseb package-list hash only"
+      },
+      "power_measurement": {
+        "record": "X2 interference benchmark RESULTS.md, 2026-10-30",
+        "sha256": "c888a475ef03065783989a390fdcf360c5a39e9c3f4ceaab8537a8cb805f2d25",
+        "use": "measured Performance package power, model identity and approximate residency memory"
+      },
+      "operator_option_c": {
+        "record": "DECISIONS_2026-10-30.md",
+        "sha256": "e96673c11320476c5b0b0dbbc0bf03695e0207777ba2c5e94b15487abdd2f553",
+        "use": "X2-1-only Performance campaign, X2-2 not requalified"
+      }
+    }
+  },
+  "seal": {
+    "algorithm": "sha256",
+    "serialization": "UTF-8 JSON, sorted keys, separators comma and colon without whitespace, ensure_ascii=true, no NaN, no trailing newline; hash the payload object only",
+    "payload_sha256": "59f1fd7417e669b1a2d2c7d5202424299cce96a82042aca7df98340e73658192"
+  },
+  "operator_approval": {
+    "reference": "Lineage v3 records, stage2_plan_2026-10-29/DECISIONS_2026-10-30.md item 5: the operator's go of 2026-10-30 ('go on 2 and all commits'), binding payload digest 59f1fd7417e669b1a2d2c7d5202424299cce96a82042aca7df98340e73658192",
+    "reason": "Approved as the initial metadata entry at A17's adoption. The payload is unchanged from the staged envelope and its seal was re-verified at commit.",
+    "scope": "initial metadata entry only; does not accept a pending qualification or authorize dispatch"
+  }
+}
