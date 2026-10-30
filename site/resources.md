@@ -13,7 +13,7 @@ The simulation suite below is the v1.x and v2.0 instrument. In September 2026 an
 ## SIMULATION SUITE
 
 ### Agent-based validation of the mathematical framework
-An agent-based Python simulation that tests the framework across more than 32 scenarios, from cooperative baselines to adversarial attacks on the consensus override protocol: yield-condition spoofing, measurement tampering, institutional lag and more. Attack-vector coverage is ongoing, and the remaining gaps are tracked in SPECIFICATION_GAPS.md.
+An agent-based Python simulation that tests the framework across 32 scenarios, from cooperative baselines to adversarial attacks on the consensus override protocol: yield-condition spoofing, measurement tampering, institutional lag and more. Attack-vector coverage is ongoing, and the remaining gaps are tracked in SPECIFICATION_GAPS.md.
 [simulation/](https://github.com/MYotko/AI-Succession-Problem/tree/main/simulation)
 
 {{simulation-files}}
@@ -51,6 +51,6 @@ The full catalogue of the simulation scenarios: the intent, mechanism and expect
 The v3 rebuild, published as each part is fixed.
 
 - **[v3_objective_specification.md](https://github.com/MYotko/AI-Succession-Problem/blob/main/docs/v3_objective_specification.md).** The objective the v3 paper and instrument are built on.
-- **[v3_rerun_design_note.md](https://github.com/MYotko/AI-Succession-Problem/blob/main/simulation/diagnostics/v3_rerun_design_note.md).** The pre-registration of the v3 reruns, with its amendments A1 to A7, fixed before the runs it governs.
+- **[v3_rerun_design_note.md](https://github.com/MYotko/AI-Succession-Problem/blob/main/simulation/diagnostics/v3_rerun_design_note.md).** The pre-registration of the v3 reruns, fixed before the runs it governs, with its dated amendments A1 to A14.
 - **[v3_parameter_register_summary.md](https://github.com/MYotko/AI-Succession-Problem/blob/main/verification/provenance/v3_parameter_register_summary.md).** Every parameter in the v3 instrument, with its source.
 - **[Live](/live).** The framework and the work running on it, updated every 10 minutes.

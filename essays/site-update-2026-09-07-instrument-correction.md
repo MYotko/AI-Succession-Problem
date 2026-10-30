@@ -2,6 +2,39 @@
 
 **Draft for lineageimperative.org. Date: 2026-09-07.**
 
+> **Correction, 2026-10-29.** This update is kept as published on 7 September. Records written after it correct the
+> statements below. The source for each is the technical record named above, `docs/v2_0_instrument_validation_record.md`.
+>
+> - **"Seven of the ten adversarial scenarios"** (What still stands). Eight of the ten. A correction to the record on the
+>   same day moved Biological Veto Capture into the group that cannot be contaminated, and this update was not changed to
+>   match. Record: the correction of 2026-09-07 at the top of the record, and Section 3, "Scope across the ten live vectors".
+> - **"roughly twice that floor"** (In brief, and A second published figure). This compares a per-vote floor with a mean of
+>   per-run ratios. Measured like for like at the one sampled cell, the ratio is about 1.55. Record: Section 8 item 2, and
+>   Section 11, "Out of scope for direct edit".
+> - **"About half of what was reported as residual capture may be the panel"** (A second published figure). At the one cell
+>   measured, about 64 percent of the measured capture is present with no capture in the model. Record: Section 8 item 2.
+> - **"roughly 12 percent of valid successions still blocked"** (A second published figure). The published 0.1197 is not a
+>   fraction of successions. Each blocked vote creates one further opportunity, so the reported quantity is the mean of a
+>   discrete ladder of values. Record: Section 6b, D6.
+> - **"The floor gets measured first"**, and commitment 2. The floor was measured on 8 September. Record: Section 8 item 2,
+>   complete on 2026-09-08.
+> - **"the three design decisions still open"** (In brief), and commitment 1. All three were made and recorded on
+>   8 September. Record: Section 8 item 1, and the update of 2026-09-08.
+> - **"neither exists yet"** (The smaller finding). The repairs to the simulation landed on 8 September, and the dual
+>   attack-success metric, with its paired comparison against unattacked runs, on 13 September. Slow drift remains
+>   uncharacterized. Record: the updates of 2026-09-08 and 2026-09-13.
+> - **"The game-theoretic result at the center of the architecture ... nothing here touches it"** (What still stands). The
+>   defects in this update do not touch it. On 25 September the claim that its central equilibrium is unique was found
+>   false: mutual defection is also an equilibrium. Record: the update of 2026-09-25.
+> - **"It is not on any machine we can currently reach"** (A separate problem). On 24 September the generating code was
+>   recovered, as a compiled copy, from files taken off the machine that could not be checked. Record: Section 8 item 4.
+> - **"they are not currently verifiable"** (A separate problem). By 26 September the recovered code had reproduced the
+>   Phase B results exactly. The phi results were not tested and remain not currently verifiable. Record: Section 8 item 4,
+>   and Section 9.
+> - **"Because the original code no longer exists"** (commitment 4). The record did not say the code was lost. It said the
+>   code was never committed, and that one machine could not be searched. The code was later recovered, and the rerun was
+>   checked against the original figures. Record: Section 7, and Section 8 item 4.
+
 *Updated the same day it went up. While specifying the repair work for everything
 below, a second published figure turned out to have a problem of its own, and the
 reason originally given here for questioning it was wrong. Both are now described

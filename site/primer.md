@@ -60,7 +60,7 @@ The framework builds the same logic into the AI. Its rule of succession, the **y
 
 Two safeguards make the rule hard to cheat. A handover cannot be undone, so it is decided under a firm commitment and reviewed on a fixed schedule, not whenever the incumbent likes. And the incumbent does not get to name the cost of replacing itself, since exaggerating that cost is the easiest way to stay in power. The cost is checked independently.
 
-{{status: Proven, and now being tested | For an AI pursuing this goal, handing over is proven to be its best move exactly when the successor's gain beats the cost of switching. Simulations testing whether the rule fires when it should have run, and their results stay sealed until they are reviewed.}}
+{{status: Proven, and now being tested | For an AI pursuing this goal, handing over is proven to be its best move exactly when the successor's gain beats the cost of switching. Simulations testing whether the rule fires when it should have run. Their results were read in October 2026 and stay unpublished until they are reviewed.}}
 
 ## STOP 5 · WHAT IF IT LIES?
 
@@ -84,7 +84,7 @@ This is a working proposal, built in the open, and meant to be argued with.
 
 In 2026 it was put under deliberate pressure: outside critique, independent re-derivation of its mathematics, and a line-by-line audit. Some of its early claims did not survive, and the corrections are published. What you have just read is the framework as it stands after them.
 
-Every claim now carries a label: proven, argued or open. The next round of simulations was registered before it ran, so the analysis could not be fitted to the results, and the results stay sealed until they have been reviewed.
+Every claim now carries a label: proven, argued or open. The next round of simulations was registered before it ran, so the analysis could not be fitted to the results. Its results were read in October 2026 and stay unpublished until they have been reviewed.
 
 The map shows how that works. Each claim at the center has to pass outward through every ring: the rules fixed in advance, the code that implements them, the evidence, the checks every result must pass, and independent review.
 

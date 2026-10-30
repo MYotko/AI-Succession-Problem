@@ -2,6 +2,20 @@
 
 **Draft for lineageimperative.org. Date: 2026-10-27.**
 
+> **Correction, 2026-10-29.** This update is kept as published on 27 October. Records correct the statements below.
+>
+> - **"registered as an amendment before any run under it"** (Summary), **"registered on 8 October, before any run under
+>   it"** (In brief) and **"before any table, run or output under it existed"** (The correction). Amendment A10 records that
+>   no registered table, run or output existed when it was written. An exploratory check of the corrected mechanics ran on
+>   7 October, and a cost-only pilot of 77 jobs ran the corrected code on 8 October. Neither was registered, and the pilot
+>   exported no outcome. Record: `simulation/diagnostics/v3_rerun_design_note.md`, Amendment A10, "Timing and status" and item 12.
+> - **"before any stage 1 output existed"** (The sealed reading). When amendment A12 was written, stage 1's table estimation
+>   was complete and assembled. No stage 1 run had started, and no output had been read. Record: `simulation/diagnostics/v3_rerun_design_note.md`, Amendment A12
+>   part 1, "Timing and status".
+> - **"its sealed reading is under way now"** (Summary), **"Its sealed reading is running now"** (In brief) and **"The sealed
+>   reading, now running"**. The reading has completed. Its outputs were sealed on 29 October at 01:21 UTC, and their hashes were published
+>   before it was opened later that day. Record: `docs/v3_hash_commitments.md`, Section 2.
+
 *Summary: The registered version 3 reruns were read on 5 October. One reading did not look the way the design
 said it should, and tracing it found a defect in the simulation itself: it measured the pace of change as a level,
 and gave capability no benefit, so handing over to a more capable successor could only ever cost something. The

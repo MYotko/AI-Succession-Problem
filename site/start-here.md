@@ -46,7 +46,7 @@ What held is still the heart of the argument. Cooperation is an equilibrium, and
 
 So the claim changes shape. The structure does not guarantee cooperation. It makes cooperation available and preferred, and the architecture's job is to make it chosen and to hold it. A credible commitment by humanity to re-engage with a system that preserves it can do that job, under three conditions: people actually follow through, preserving beats destroying for the system, and adopting the commitment is worth its cost. None of these is established yet. They are now design requirements, stated exactly.
 
-Version 3 rebuilds the framework on that footing. Every mathematical tool is proven twice, independently, before it is used. The simulation reruns were pre-registered before they ran, and their results stay sealed until they have been reviewed.
+Version 3 rebuilds the framework on that footing. Every mathematical tool is proven twice, independently, before it is used. The simulation reruns were pre-registered before they ran. Their results were read on 5 October 2026 and stay unpublished until they have been reviewed.
 
 ## WHERE TO GO FROM HERE
 
@@ -57,7 +57,7 @@ How the framework works, in five short stops with interactive examples: the succ
 [Explore](/explore)
 
 ### 02 The accessible argument
-Start with Essay 1, The AI Succession Problem, and read the series in order. Ten essays, each on one part of the framework in plain language. The series builds, but each essay stands on its own. The essays predate September 2026, so they describe the equilibrium as unique; the September update explains what changed.
+Start with Essay 1, The AI Succession Problem, and read the series in order. The first ten essays each cover one part of the framework in plain language. The series builds, but each essay stands on its own. Essays published before September 2026 predate the correction, so where they discuss the equilibrium they describe it as unique; the September update explains what changed.
 [Read the essays](/essays)
 
 ### 03 The formal architecture

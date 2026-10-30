@@ -2615,7 +2615,10 @@ radius invites the reader to assume the worst.
 
 **Unaffected by any defect above:**
 
-- The Nash equilibrium result. Analytic, not simulated.
+- The Nash equilibrium result. Analytic, not simulated. *(corrected 2026-09-25: its
+  uniqueness claim is false. Mutual defection is also a Markov perfect equilibrium at
+  every discount factor, and cooperation remains an equilibrium both parties prefer. See
+  the update of 2026-09-25 at the head of this record.)*
 - Domain Masking's analytic closure. See Section 6.
 - The eight adversarial vectors that cannot be contaminated by construction. See
   Section 3. One of the eight carries a separate qualification, below.

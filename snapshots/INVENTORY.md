@@ -1,7 +1,7 @@
 # Project Knowledge Snapshots Inventory
 
-Last regeneration: 2026-10-12T01:15:41Z
-Git commit at regeneration: 669daf23
+Last regeneration: 2026-10-29T22:08:15Z
+Git commit at regeneration: c217cc7d
 Branch: main
 
 ## Quick reference for Claude sessions
@@ -23,27 +23,27 @@ If you need specific content, ask the operator to upload the relevant category s
 
 ### docs
 - File: snapshots/docs_snapshot.md
-- Last generated: 2026-09-27T16:57:31Z
-- Files included: 13
-- Snapshot size: 567203 bytes
+- Last generated: 2026-10-29T22:08:15Z
+- Files included: 15
+- Snapshot size: 605759 bytes
 
 ### framework_papers
 - File: snapshots/framework_papers_snapshot.md
-- Last generated: 2026-09-27T16:57:31Z
+- Last generated: 2026-10-29T22:08:15Z
 - Files included: 3
-- Snapshot size: 476167 bytes
+- Snapshot size: 488167 bytes
 
 ### paper_drafts
 - File: snapshots/paper_drafts_snapshot.md
-- Last generated: 2026-09-27T16:57:31Z
+- Last generated: 2026-10-29T22:08:15Z
 - Files included: 8
-- Snapshot size: 344076 bytes
+- Snapshot size: 349988 bytes
 
 ### essays
 - File: snapshots/essays_snapshot.md
-- Last generated: 2026-10-12T01:15:41Z
+- Last generated: 2026-10-29T22:08:15Z
 - Files included: unknown
-- Snapshot size: 530755 bytes
+- Snapshot size: 547727 bytes
 
 ### diagnostics
 - File: snapshots/diagnostics_snapshot.md

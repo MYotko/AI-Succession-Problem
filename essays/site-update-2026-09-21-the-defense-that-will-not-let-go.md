@@ -2,6 +2,14 @@
 
 **Draft for lineageimperative.org. Date: 2026-09-21.**
 
+> **Correction, 2026-10-29.** This update is kept as published on 21 September. One statement in it is corrected.
+>
+> - **"ruled void by a validity standard written before the result was known"** (the paragraph on held-out attacks). The
+>   validity gate was written after that attack's results had been read, and then applied to it. Record:
+>   `simulation/diagnostics/defense_heldout_design_note.md`, Section 11 (Amendment 2), whose status line says it was
+>   "committed after the stage A outputs were read"; commit a6a072c7, after the run at 988827d1 and its record at f31a3a57.
+>   The later ruling, on the attack against the ledger's forgetting, stands as written.
+
 *Summary: A defense that stops the drift attacks it was built for, and never lets go. Two
 attempts to give it a way back both worked, and both lost containment doing it. Work
 continues!*

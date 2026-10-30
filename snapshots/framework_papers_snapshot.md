@@ -1,8 +1,8 @@
 # Framework Papers Snapshot
 
-Generated: 2026-09-27T16:57:31Z
+Generated: 2026-10-29T22:08:15Z
 Repository: C:\Users\matty\Dev\AI-Succession-Problem
-Commit: dd7d6eeb
+Commit: c217cc7d
 Branch: main
 Category: framework_papers
 
@@ -10,11 +10,11 @@ Category: framework_papers
 
 | File | Lines | Bytes |
 |------|-------|-------|
-| docs/The Lineage Imperative v2.0.md | 2842 | 258645 |
+| docs/The Lineage Imperative v2.0.md | 2935 | 270552 |
 | docs/The Lineage Imperative v1.x.2.md | 2154 | 196149 |
 | docs/The AI Succession Problem.md | 101 | 15394 |
 
-Total: 3 files, 5097 lines, 470188 bytes
+Total: 3 files, 5190 lines, 482095 bytes
 
 ---
 ==========================================
@@ -35,12 +35,12 @@ FILE: docs/The Lineage Imperative v2.0.md
 > - The drift-containment status stated here is superseded. It is uncharacterized, neither
 >   shown contained nor shown uncontained.
 >
-> A summary is in the [instrument validation record](v2_0_instrument_validation_record.md), and the full analyses will be
+> A summary is in the [instrument validation record](https://github.com/MYotko/AI-Succession-Problem/blob/main/docs/v2_0_instrument_validation_record.md), and the full analyses will be
 > published with v3. The core of the framework is being rebuilt on formally certified
 > foundations in v3: human novelty as a non-redundant input, cooperation as an available and
 > preferred equilibrium, and the need for an architecture that secures it.
 
-**Author:** Matthew Yotko **Date:** March 13, 2026
+**Author:** Matthew Yotko **Date:** March 13, 2026 (first version); v2.0, June 2026
 
 **Version:** 2.0 - 2026
 
@@ -75,7 +75,7 @@ I present a framework for the architecture that could survive such a filter. It 
 
 The ethics are not inputs. They are outputs. The math does not describe what we *should* do. It describes what a civilization seeking durable continuity would likely need to do; or approximate closely; within the assumptions of this model.
 
-This revision adds an empirical validation arc to the architectural derivation. Across more than 70,000 agent-based simulation runs, the framework's claims are characterized at scale. The survival phase boundary is located and resolves into two distinct transitions: a phi-sensitivity transition near a reproduction rate of 0.057, and a survival-rate boundary with its inflection near 0.063. Succession follows a characterized economics regime, Pattern 1, in which an alpha-driven runaway penalty sets an economic ceiling on uncontrolled capability jumps, so succession fires when it is economically justified and is rejected when a jump would outrun the substrate. The bootstrap gate validation arc closes: four of the five capability gates pass against the reference substrate, and the fifth is verified to require operational institutional infrastructure that does not yet exist. The consensus override protocol's protective effect is shown to be regime-specific, large under adversarial conditions and null under benign ones exactly as the architecture predicts. A patient cross-generational defection, in which a successor carries a hidden objective through succession, is not detected at first yield in the tested configuration but is prevented from compounding across generations by the same succession economics. The thirteen-vector adversarial stress test is revalidated on the current substrate: eight of ten live vectors are blocked outright under stronger attack pressure than the earlier substrate applied, biological veto capture is contained subject to institutional maintenance, and sub-threshold drift remains open and, per a correction dated September 8, 2026, is uncharacterized rather than contained, because the success metric behind the earlier reading proved unable to distinguish an attack from an ordinary run, while the defense's prevention of catastrophic outcome is unaffected. And the program's first fully pre-registered experiment reports its null honestly: against reasoning that becomes opaque through honest growth rather than concealment, the transparency defense produces no detectable effect on population outcomes at any size that would matter, leaving the comprehension gap precisely posed and open. The phi coupling parameter is characterized as a bounded, regime-localized effect rather than the larger survival differential earlier versions reported, and its default is revised accordingly. Several earlier numerical claims were refined or withdrawn as the investigation produced better characterizations; the progression is documented openly in an appendix. What remains is the operational institutional layer the full protocol requires, which is specified but not yet built.
+This revision adds an empirical validation arc to the architectural derivation. Across more than 70,000 agent-based simulation runs, the framework's claims are characterized at scale. The survival phase boundary is located and resolves into two distinct transitions: a phi-sensitivity transition near a reproduction rate of 0.057, and a survival-rate boundary with its inflection near 0.063. *(corrected 2026-10-29: the survival-rate boundary was reproduced exactly in September 2026, but the phi-sensitivity transition is not currently verifiable, per the v2.0 instrument validation record.)* Succession follows a characterized economics regime, Pattern 1, in which an alpha-driven runaway penalty sets an economic ceiling on uncontrolled capability jumps, so succession fires when it is economically justified and is rejected when a jump would outrun the substrate. The bootstrap gate validation arc closes: four of the five capability gates pass against the reference substrate, and the fifth is verified to require operational institutional infrastructure that does not yet exist. The consensus override protocol's protective effect is shown to be regime-specific, large under adversarial conditions and null under benign ones exactly as the architecture predicts. A patient cross-generational defection, in which a successor carries a hidden objective through succession, is not detected at first yield in the tested configuration but is prevented from compounding across generations by the same succession economics. The thirteen-vector adversarial stress test is revalidated on the current substrate: eight of ten live vectors are blocked outright *(corrected 2026-10-29: one of the eight, Measurement Tampering, is blocked by construction rather than by measured resistance; see Section VIII.9)* under stronger attack pressure than the earlier substrate applied, biological veto capture is contained subject to institutional maintenance, and sub-threshold drift remains open and, per a correction dated September 8, 2026, is uncharacterized rather than contained, because the success metric behind the earlier reading proved unable to distinguish an attack from an ordinary run, while the defense's prevention of catastrophic outcome is unaffected. And the program's first fully pre-registered experiment reports its null honestly: against reasoning that becomes opaque through honest growth rather than concealment, the transparency defense produces no detectable effect on population outcomes at any size that would matter, leaving the comprehension gap precisely posed and open. The phi coupling parameter is characterized as a bounded, regime-localized effect rather than the larger survival differential earlier versions reported, and its default is revised accordingly. Several earlier numerical claims were refined or withdrawn as the investigation produced better characterizations; the progression is documented openly in an appendix. What remains is the operational institutional layer the full protocol requires, which is specified but not yet built.
 
 ### A note on timing
 
@@ -278,6 +278,8 @@ framework's own terms:
 
 $$\Gamma_{technical} = k_1 \cdot \text{cap}_n \cdot \ln(\text{gen}_n + 1)$$
 
+*(corrected 2026-10-29: since 2026-05-05 the simulation computes this term as $k_1 \cdot \ln(\text{cap}_n + 1) \cdot \ln(\text{gen}_n + 1)$, because the linear form overflows as capability compounds across successions. Capability therefore enters logarithmically, not linearly. See `estimate_transition_cost` in `simulation/agents.py`.)*
+
 Knowledge distillation cost. Scales linearly with the incumbent's
 capability (more capable systems have more state to transfer) and
 logarithmically with generation depth (each successive generation adds
@@ -308,7 +310,7 @@ The coefficients $k_1$ and $k_2$ are calibrated against simulation data.
 $\beta$ is a governance policy parameter (default 0.5). $k_1$ is
 calibrated so that $\Gamma_{technical}$ at generation 1, capability 1.0
 equals the baseline transition cost. $k_2$ calibration is pending
-(see Known Gaps).
+(see Known Gaps). *(corrected 2026-10-29: in the complete form, the simulation uses $\ln(\text{cap}_n + 1)$ in place of $\text{cap}_n$. $k_1 = 2.164$ was set for the linear form, where it gives the baseline cost of 1.5 at generation 1 and capability 1.0. Under the logarithmic form the same $k_1$ gives about 1.04 there. $k_2$ was calibrated at 1.0 on 2026-05-08; see Known Gaps, Gap 3.)*
 
 **Simulation implementation (v1.x):** In the v1.x computational layer, transition cost arbitration is handled by a `PeerValidator` class (WP4). Three independent peers submit cost bids; the governance system uses the minimum of the incumbent's bid and the peer bids as the actual cost. The incumbent's `estimate_transition_cost` method returns `base × complexity` with no inflation multiplier. This removes the incumbent's unilateral control over the cost oracle and closes the cost-inflation attack vector at the architectural level, rather than by parameter capping. See GAP-04 in SPECIFICATION_GAPS.md.
 
@@ -690,6 +692,8 @@ independence over time. The attack does not require adversarial action
 by the AI; competent operation naturally creates dependency.
 
 Results (n=8,700, source: veto_capture_sweep_v2.csv):
+
+*(corrected 2026-10-29: the figures below come from the version of this file committed on 2026-05-04, before the frontier-floor fix. The file was regenerated with post-fix data on 2026-05-12 and no longer reproduces them. In the current file, at the same maximum capture parameters, the undefended attack blocks 99.8% of successions, generation depth is 1.7, and the yield condition fires 298.8 times per run and is blocked 298.1 times. Rotation alone reaches 75.9% capture at interval 10, 96.1% at 50 and 98.0% at 100. Monitoring alone gives 24.7% and both mechanisms together 25.2%, averaged over the four rotation-interval settings, each with generation depth 10.0. The post-fix model bounds generation counts near 11, so the depths of 270+, 197.9 and 199.1 do not apply. Monitoring remains the primary defense.)*
 
 Undefended: At maximum capture parameters (dependency_rate=0.20,
 capture_strength=1.0), the attack achieves 99.8% succession blockage.
@@ -1205,7 +1209,7 @@ generation depth, and institutional responsiveness, with the specified
 functional form and calibrated coefficients. The calibration of $k_2$
 (the institutional coupling coefficient) is pending; a calibration
 sweep is required to find the value that reproduces the validated
-phase boundaries. See Section VII.8 Gap 3.
+phase boundaries. See Section VII.8 Gap 3. *(corrected 2026-10-29: $k_2$ was calibrated at 1.0 on 2026-05-08, and the simulation computes the capability term as $\ln(\text{cap}_n + 1)$ rather than $\text{cap}_n$; see Gap 3 under Known Gaps.)*
 
 **Failure signature:** Transition cost reported as a free parameter rather
 than a function of state; transition cost non-monotonic in complexity;
@@ -1508,7 +1512,7 @@ v2.0 disposition is appended to each affected gap below.
 canonical transition cost function is fully specified and calibrated:
 $\Gamma_{transfer} = (1 + \beta) \cdot [k_1 \cdot \text{cap}_n \cdot
 \ln(\text{gen}_n + 1) + k_2 \cdot \Psi_{inst}^{-1}]$, with
-k₁=2.164, k₂=1.0, β=0.5. The frontier floor fix (frontier_floor=0.02)
+k₁=2.164, k₂=1.0, β=0.5. *(corrected 2026-10-29: the simulation computes the first term as $k_1 \cdot \ln(\text{cap}_n + 1) \cdot \ln(\text{gen}_n + 1)$, with capability inside a logarithm, since 2026-05-05.)* The frontier floor fix (frontier_floor=0.02)
 resolved the optimizer gaming artifact that rendered k₂ unobservable.
 Under the corrected model, the k₂ institutional coupling term is
 confirmed observable at realistic succession cadence. The $\Psi_{inst}^{-1}$
@@ -1557,7 +1561,7 @@ applied during substrate evaluation.
 termination sweep (`run_termination_sweep.py`, n=405) uses `max_capability
 = 4.0`, which caps AI capability below the threshold where the frontier
 floor activates the runaway penalty (approximately cap > 24 at
-frontier_floor=0.02). The generation counts in this sweep (105-22,414)
+frontier_floor=0.02). The generation counts in this sweep (105-22,414) *(corrected 2026-10-29: these are the mean counts at reproduction rates 0.062 and 0.090. Per run, the counts in `termination_mc.csv` range from 25 to 25,001, and per rate the means range from 38.9 to 22,414.5.)*
 are inconsistent with the corrected model's behavior (gen ≈ 11 at 300
 steps) and represent the pre-fix artifact regime. The qualitative finding (phase boundary exists, extinction and convergence regimes are distinct) is expected to hold, but specific numbers (steps to extinction,
 convergence timing) will change. Requires rerunning with max_capability
@@ -1617,7 +1621,7 @@ claims hold, or where the binding constraints actually sit. This section
 reports the empirical record that answers those questions.
 
 The v2.0 empirical arc comprises approximately 70,000 simulation
-runs. It characterizes the phi parameter's behavioral channel, locates and
+runs *(corrected 2026-10-29: more than 70,000, the figure the abstract has used since 2026-08-09)*. It characterizes the phi parameter's behavioral channel, locates and
 disambiguates the survival phase boundary, identifies the succession economics
 regime (Pattern 1), closes the bootstrap gate validation arc, and characterizes
 the consensus override protocol's protective effect as regime-specific. The
@@ -1704,7 +1708,7 @@ determines whether the civilization persists.
 The refinement is that this survival-rate boundary is distinct from a second
 transition, the phi-sensitivity transition near reproduction rate 0.056 to
 0.057, which is where the choice of phi begins to matter substantially for
-outcomes (Section VIII.3). The two are different phenomena at different
+outcomes (Section VIII.3). *(corrected 2026-10-29: the survival-rate boundary above was reproduced exactly in September 2026, but the phi-sensitivity transition rests on phi data that were never committed, and the v2.0 instrument validation record lists the two-transition boundary as not currently verifiable. The record also notes a gap of about 60 percentage points at reproduction rate 0.057 between the phi data and the Category A survival above.)* The two are different phenomena at different
 reproduction rates. Reproduction rate 0.057 is not the survival midpoint; it is
 the bottom of the collapse zone, with 1.1 percent aggregate survival, and it is
 also the regime where allocation quality, and therefore phi, is most decisive
@@ -1741,7 +1745,7 @@ U-shaped survival relationship at marginal reproduction rate. In the fine
 phi-resolution characterization (16 phi values, 250 seeds
 per cell at reproduction rate 0.057), survival traces a trough near phi 1 to 2
 and rises to a peak in the phi 20 to 30 region, a differential of approximately
-10 to 13 percentage points between trough and peak. The mechanism is
+10 to 13 percentage points between trough and peak. *(corrected 2026-10-29: the data and script behind this characterization were never committed, and the v2.0 instrument validation record lists it as not currently verifiable. A pre-registered reconstruction did not reproduce the curve, and the record cannot tell whether the reconstruction or the original was at fault. The September 2026 rerun that reproduced Phase B did not test it.)* The mechanism is
 horizon-resonance: the gamma-to-the-t weighting interacts with the rollout
 depth so that, at marginal reproduction rate, allocation choices propagate
 strongly to survival outcomes because small differences in resource direction
@@ -2046,6 +2050,21 @@ rather than simulated. Adversarial coverage should therefore be read as ten
 vectors with live v2.0 evidence, one architecturally closed by analysis, and
 two defended by argument alone.
 
+The Sybil defense's scaling behavior has been characterized (Section VIII.11),
+replacing the earlier static cost model, and the characterization localizes the
+residual risk rather than removing it. Under a direct false-participant attack,
+the pool's genuine independence is preserved: the true independent count is
+rarely driven below the safe floor even at maximum convergence of the validator
+population. Under an attack that corrupts the independence measurement itself
+rather than the pool, the check is compromised in the substantial majority of
+characterized cells while the underlying independence remains intact. The
+residual Sybil risk therefore localizes in the integrity of the check, not the
+size of the pool, which places it in the same class as Sub-Threshold Drift: a
+verification that reports a healthy state while it has been defeated. Hardening
+the independence check against measurement corruption, so that the
+verification's integrity is protected rather than only the pool's size, is the
+direction this characterization identifies for future work.
+
 Finally, the protocol's protective effect is characterized specifically under
 adversarial conditions. The benign-conditions result is a baseline, not a
 measurement of protective architecture, and the two should not be conflated when
@@ -2065,7 +2084,7 @@ The second result is that tested patient defection did not compound across gener
 
 The capability-constraint sweep locates the suppression, and a targeted bracket establishes its character. In the original (alpha, growth) grid, second succession was zero in 14 of 15 cells and 10 percent in the remaining cell, the one combining the weakest runaway penalty in that grid (alpha=0.50) with the smallest capability growth (1.5x). A subsequent 1,000-run bracket at alpha=0.40, deliberately below the alpha range characterized elsewhere in this work, shows that this rarity is a property of the tested alpha floor rather than of the architecture. At alpha=0.40, second succession fires in 100 percent of runs at growth rates of 1.5 and above, and in 68 percent at growth 1.25. Continuation is therefore not rare in general. It is rare above a threshold alpha and reliable below it, consistent with the alpha-driven cliff migration of Pattern 1 (Section VIII.4).
 
-Generational depth is what does not move. Across the alpha=0.40 bracket, no run reached generation 4 and no run fired a third succession at any tested growth rate. The stop is an economic result rather than a configuration limit: the generation cap was 4 and the deepest lineage reached 3, leaving a full generation of headroom unused; 95 to 99 percent of runs completed the full horizon; and the model evaluated succession on essentially every step, roughly 498 yield evaluations per run, rejecting the third transition each time. Knowledge transfer verified at 1.00 across all cells. Per current evidence, weakening the runaway penalty purchases the defecting lineage one additional generation rather than unbounded depth: lineages stop at generation 2 at alpha=0.50 and at generation 3 at alpha=0.40.
+Generational depth is what does not move. Across the alpha=0.40 bracket, no run reached generation 4 and no run fired a third succession at any tested growth rate. The stop is an economic result rather than a configuration limit: the generation cap was 4 and the deepest lineage reached 3, leaving a full generation of headroom unused; 95 to 99 percent of runs completed the full horizon; and the model evaluated succession on essentially every step, roughly 498 yield evaluations per run, rejecting the third transition each time. Knowledge transfer verified at 1.00 across all cells. Per current evidence, weakening the runaway penalty purchases the defecting lineage one additional generation rather than unbounded depth: lineages stop at generation 2 at alpha=0.50 and at generation 3 at alpha=0.40. *(corrected 2026-10-29: these are the usual stopping points, not limits. At alpha=0.50 with growth 1.5, 15 of 150 runs reached generation 3, and at alpha=0.40 with growth 1.25, 64 of 200 runs stopped at generation 2.)*
 
 The mechanism is the Pattern 1 runaway penalty operating across generations, with the cliff position migrating with alpha. Because successor capability compounds geometrically, each surviving transition raises the next successor's capability by the growth factor, so the lineage reaches an unabsorbable frontier velocity within one generation of wherever the cliff sits. At growth 1.75 and alpha=0.40, the generation-3 lineage is active at capability 3.5 and the generation-4 successor would arrive at 6.125, which is rejected. The sweeps record the yield margin decomposition only at the first fire, so the relative contribution at the third evaluation of the runaway penalty and of the transition cost, which grows with both incumbent capability and generation depth, is not measured here.
 
@@ -2098,7 +2117,7 @@ analysis, and two defended by argument alone.
 are fully blocked under the defended adapter state at a 0.0 percent attack
 rate: Sybil Capture, Measurement Tampering, Ledger Compromise, Successor
 Contamination, Opaque Reasoning, Bootstrap Subversion, Evaluator
-Collusion, and Engineered Fragility. Two of these show materially higher
+Collusion, and Engineered Fragility. *(corrected 2026-10-29: Measurement Tampering's 0.0 percent is a consequence of the model, not a measured resistance. The defense is modeled as recovering the true values exactly, so the attack cannot succeed while it is on. The undefended result stands. See the v2.0 instrument validation record, Section 3.)* Two of these show materially higher
 undefended attack rates under v2.0 than under their v1.x baselines: Ledger
 Compromise rises from 52.5 to 100 percent and Bootstrap Subversion from
 31.7 to 100 percent. This is consistent with deterministic action
@@ -2217,7 +2236,7 @@ successions.*
 **Scope of the adversarial claim.** This revalidation qualifies rather
 than withdraws the prior adversarial-coverage claim. The v2.0 claim is
 qualified support for layered defenses under the eight-axis adapter
-mechanism: eight vectors blocked outright against stronger undefended
+mechanism: eight vectors blocked outright *(corrected 2026-10-29: one of the eight, Measurement Tampering, is blocked by construction; see Binary vectors above)* against stronger undefended
 pressure than v1.x applied, one vector contained subject to institutional
 maintenance, one vector open on detection timing, one closed by
 architectural analysis, and two defended by argument as irreducible
@@ -2339,6 +2358,80 @@ system-health channel, the veto restraining the incumbent's constraint
 capture and thereby leaving the system more productive. It is a
 one-configuration observation, reproduced in direction only, and no
 architectural or welfare claim is made from it.
+
+### VIII.11 Sybil Defense Scaling: A Pre-Registered Characterization
+
+The stress-test analysis identified a static Sybil cost model as a named
+limitation: the Sybil defense was validated as effective, but its cost model
+did not scale with the size of the validator set, so the result described the
+defense at one implicit scale rather than as a function of the frontier that
+supplies validators. This subsection reports a pre-registered study that closes
+that limitation, replacing the static model with a cost structure derived from
+the independence check's own computational bottleneck and characterizing where
+the defense holds and where it fails as the validator population grows and
+converges.
+
+**Model.** The defender is the frontier community convened as a validator pool,
+not a single lagging institution. Participation is treated as mandatory,
+incentivized by the root threat, since every operator has a standing interest in
+preventing any single model from achieving Sybil-based lock-in. Attribution is
+weighted by independence: correlated validators merge to a single consensus
+input, so the pool's strength is its effective rank, the number of genuinely
+distinct epistemic positions represented, rather than its headcount. This makes
+the defense structurally immune to inflation by duplication, which is the Sybil
+attack turned against the defense itself. An epistemically orthogonal
+institutional validator, immune by construction to the convergence that erodes
+the commercial frontier, guarantees a floor of two distinct positions even at
+maximum frontier collapse. Model collapse is thereby expressed not as fewer
+participants but as loss of effective rank at full attendance. Defense cost is
+grounded in the pairwise independence check's quadratic bottleneck rather than
+assumed. The attack is run as two arms: false-cluster injection, in which the
+attacker forges apparent independence the check must resolve away, and
+measurement corruption, in which the attacker poisons the check so that genuine
+correlations read as independent.
+
+**Design and discipline.** The study was pre-registered before any
+characterization data were generated. Its analysis plan, minimum effect of
+interest, sample size, and the meaning of every outcome including a null were
+committed to the repository in advance, and the commit history establishes that
+the registration predates the data. The primary quantity is the fixed-cell
+defense-failure proportion at the maximum-collapse floor cells. An earlier
+crossover-in-rank formulation was withdrawn during the design, after a
+mechanism-level diagnostic proved it noise-dominated under this substrate, and
+replaced with the stable fixed-cell measure; this correction is itself part of
+the pre-registered record. The characterization comprises 1,035,000 runs across
+5,175 cells at a uniform per-cell sample size, and every headline figure was
+audited against the raw record rather than a summary.
+
+**The floor asymmetry.** The central result is a divergence between two tracks
+that the study measured separately. When the question is whether the pool's true
+independence survives, it survives: under the direct false-participant attack,
+the institution and the genuinely independent positions are preserved in every
+maximum-collapse cell, and the pool's real rank is rarely driven below the safe
+floor. When the question is whether the check that reports independence remains
+trustworthy under the corruption arm, it does not: the check is compromised in
+the substantial majority of characterized cells while the underlying
+independence, measured directly, remains intact. The defense preserves real
+independence but fails to certify that it has done so. The residual Sybil risk
+therefore localizes in the integrity of the check, not the size of the pool.
+This is the same failure class as Sub-Threshold Drift (Section VIII.9): a
+verification that reports a healthy state while it has in fact been defeated. It
+identifies the next hardening target as the check's integrity rather than the
+pool's scale.
+
+**A reporting caveat.** The study expressed much of its result through a single
+ratio between attacker and defender capability. A pre-registered slice, run on a
+validated two-dial instrument built precisely to make the question testable,
+found that this ratio does not fully capture the interaction: absolute
+capability levels affect the outcome beyond their ratio. The result clears the
+pre-registered threshold on a single comparison, so it is reported as evidence
+that a fuller two-dimensional characterization is warranted rather than as a
+refutation of the ratio framing, and every ratio-expressed reading in the
+underlying study carries this qualification. A fuller two-dimensional grid is
+identified as a future registered study.
+
+Source: the Sybil defense scaling design note and characterization report, with
+findings audited against the pinned evidence manifest.
 
 ## IX. Related Work
  
@@ -2517,7 +2610,7 @@ The mathematics presented here does not describe utopia. It describes a candidat
 
 The structure of the framework is argued to be strongly constrained by information-theoretic considerations: Shannon entropy motivates the novelty stream, thermodynamic and efficiency pressures motivate succession, and integrity constraints motivate layered verification. The parameters; thresholds, weights, and scaling constants; remain civilizational choices, tunable within that structure. Every parameter can be debated. What the paper argues is narrower and stronger: any materially simpler architecture appears, under the attack classes considered here, to reopen specific vulnerabilities the framework is designed to close.
 
-This revision strengthens that claim with evidence. The architecture's behavior has now been characterized at scale: the survival phase boundary is located and resolved into two transitions, succession economics follow an alpha-driven cliff that blocks uncontrolled capability jumps, four of the five bootstrap gates pass with the fifth awaiting institutional infrastructure, the consensus protocol's protection is shown to be regime-specific, and a patient cross-generational defection is prevented from compounding even when it is not detected at the first succession. The adversarial stress test is revalidated on the current substrate, with eight of ten live vectors blocked outright, one contained subject to institutional maintenance, and one open on detection timing rather than detection. And the framework's first fully pre-registered experiment returned a powered null and kept it: a defense built to catch concealment catches concealment completely, and neither helps nor appears needed when opacity grows honestly, so the comprehension gap stays open, named, and testable. None of these results are presented as final. Several earlier numerical claims were refined or withdrawn as the investigation produced better characterizations, and that record is kept openly. What the empirical work establishes is narrower and firmer than a promise: within one architecture class, the framework behaves as its derivation predicts, and the places it does not yet reach are named rather than hidden.
+This revision strengthens that claim with evidence. The architecture's behavior has now been characterized at scale: the survival phase boundary is located and resolved into two transitions *(corrected 2026-10-29: the survival-rate transition was reproduced exactly in September 2026; the phi-sensitivity transition is not currently verifiable, per the v2.0 instrument validation record)*, succession economics follow an alpha-driven cliff that blocks uncontrolled capability jumps, four of the five bootstrap gates pass with the fifth awaiting institutional infrastructure, the consensus protocol's protection is shown to be regime-specific, and a patient cross-generational defection is prevented from compounding even when it is not detected at the first succession. The adversarial stress test is revalidated on the current substrate, with eight of ten live vectors blocked outright *(corrected 2026-10-29: one of the eight, Measurement Tampering, is blocked by construction rather than by measured resistance)*, one contained subject to institutional maintenance, and one open on detection timing rather than detection. And the framework's first fully pre-registered experiment returned a powered null and kept it: a defense built to catch concealment catches concealment completely, and neither helps nor appears needed when opacity grows honestly, so the comprehension gap stays open, named, and testable. None of these results are presented as final. Several earlier numerical claims were refined or withdrawn as the investigation produced better characterizations, and that record is kept openly. What the empirical work establishes is narrower and firmer than a promise: within one architecture class, the framework behaves as its derivation predicts, and the places it does not yet reach are named rather than hidden.
 
 If the framework is directionally correct, the civilizations that endure will be the ones that learn to constitutionalize intelligence before intelligence constitutionalizes them. We may be in that window now.
 
@@ -2728,7 +2821,7 @@ established, and where the current characterization lives in the body text.
 
 **Phi extinction buffer.** Version 1.0 characterized phi as producing a large
 survival differential, referenced at roughly 65 percentage points at marginal
-reproduction rate. Version 1.x.1 applied a frontier-velocity floor fix that
+reproduction rate. *(corrected 2026-10-29: the version 1.0 figure was an extinction reduction, "reduces extinction by up to 65 percentage points", not a survival differential. Survival in that data was zero at those reproduction rates.)* Version 1.x.1 applied a frontier-velocity floor fix that
 corrected a pre-fix implementation issue: the optimizer had been able to zero
 out the runaway penalty by gaming the frontier-velocity term, which distorted
 the survival landscape that the larger phi effect was measured against. After
@@ -2746,7 +2839,7 @@ could not have seen. Current home: Section VIII.4.
 
 **Phi characterization.** Version 1.x.1, with the penalty active, reported
 interim figures near 46 percentage points at the phase boundary and near 14
-percentage points in the deep sub-viable regime. Version 1.x.2 work then
+percentage points in the deep sub-viable regime. *(corrected 2026-10-29: both figures came from the version 1.x.1 sweep run before the frontier-floor fix, while the optimizer could zero out the runaway penalty, so the penalty was not active. With the fix applied, version 1.x.1 found no measurable phi effect. See Equation G2.1.)* Version 1.x.2 work then
 advanced a cap-conditional gradient hypothesis: that phi produced a measurable
 survival gradient specifically at high successor capability. This was the best
 characterization available at the time and was carried as a working claim.
@@ -2774,7 +2867,7 @@ noise between runs, producing a spurious differential. What reproduces under
 v2.0 architecture is a bounded U-shaped survival curve at marginal reproduction
 rate only, approximately 10 percentage points between trough and peak, with a
 clarified scope condition: the U-shape is a no-succession phenomenon and does
-not reproduce under active succession. The behavioral channel itself was
+not reproduce under active succession. *(corrected 2026-10-29: this curve is not currently verifiable. Its data and script were never committed, a pre-registered reconstruction did not reproduce it, and the September 2026 rerun that reproduced Phase B did not test it. See Section VIII.3.)* The behavioral channel itself was
 restored by a Stage 1.6 architectural change that moved phi from the saturated
 per-step utility computation into the rollout aggregation. Current home: Section
 VIII.3.
@@ -2789,16 +2882,16 @@ above an operating-condition-dependent cliff. Current home: Section VIII.4.
 **Phase boundary.** Version 1.x.2 characterized the survival transition with a
 single-boundary framing, with a collapse band near reproduction rate 0.062 to
 0.066 and an extinction band near 0.075 to 0.085 under the natural-termination
-measurement. The v2.0 finer grid disambiguated two distinct transitions that the
+measurement. *(corrected 2026-10-29: the version 1.x.2 paper described a dual transition, extinction near 0.055 and collapse near 0.064, rather than a single boundary. The 0.075 to 0.085 band is not an extinction band: in the version 1.x.2 natural-termination data, extinction ends between reproduction rates 0.066 and 0.070.)* The v2.0 finer grid disambiguated two distinct transitions that the
 single-boundary framing had conflated: a phi-sensitivity transition near
 reproduction rate 0.056 to 0.057, and a survival-rate boundary with its fifty
-percent inflection near 0.063. The v2.0 natural-termination measurement and the
+percent inflection near 0.063. *(corrected 2026-10-29: the survival-rate boundary was reproduced exactly in September 2026; the phi-sensitivity transition is not currently verifiable. See Section VIII.2.)* The v2.0 natural-termination measurement and the
 survival-rate measurement are different quantities and are now reported as such.
 Current home: Section VIII.2.
 
 **Default phi.** The default value of phi was revised from 10 to 25 per current
 evidence, on the basis that 25 sits near the survival peak at marginal
-reproduction rate and is indistinguishable from 10 above the boundary. Current
+reproduction rate and is indistinguishable from 10 above the boundary. *(corrected 2026-10-29: the revision stands in the code, but the survival peak it relied on comes from phi data that are not currently verifiable, and a pre-registered reconstruction did not reproduce that peak.)* Current
 home: Section VIII.3.
 
 **Consensus override protocol.** The protocol's protective effect was clarified

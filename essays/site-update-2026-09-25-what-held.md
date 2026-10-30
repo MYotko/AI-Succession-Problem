@@ -2,6 +2,15 @@
 
 **Draft for lineageimperative.org. Date: 2026-09-25.**
 
+> **Correction, 2026-10-29.** This update is kept as published on 25 September. The update of 2 October corrected one
+> statement in it, and this note records that correction here.
+>
+> - **"it holds with no threat behind it"** (In brief) and **"Model collapse is a cost the exploiter imposes on itself, so
+>   above a patience threshold no threat is needed"** (What held). This was stronger than the result. Exploiting people does
+>   cost a system something, but the cost shrinks when the system has other sources of data, so it cannot carry cooperation
+>   on its own. Record: `essays/site-update-2026-10-02-in-the-open.md`, "A correction to the 25 September update"; the
+>   update of 2026-09-25 in `docs/v2_0_instrument_validation_record.md` states that the collapse penalty is conditional.
+
 *Summary: The framework asked to be broken, and this month it was, by me and by others, in
 specific places. Its core held. The rebuild, v3, starts now, on proven foundations.*
 

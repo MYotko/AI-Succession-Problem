@@ -22,8 +22,8 @@
 **A Formal Governance Framework for Post-AGI Succession, Legitimacy, and Civilizational Continuity**
 
 **Author:** Matthew Yotko
-**Date:** May 2026
-**Status:** Version 1.x.2
+**Date:** March 13, 2026 (first version); v2.0, June 2026
+**Status:** Version 2.0, under major revision (see the status notice above)
 
 ---
 
@@ -39,26 +39,27 @@ The framework is argued to constitute a minimum two-key architecture: neither th
 
 ## Current Status (v2.0 empirical arc)
 
-The published paper is v1.x.2. The simulation has since advanced to a **v2.0 architecture** (Stage 1.8 working_factor interface and formal yield-condition logic), and its empirical characterization arc is substantively complete. Current state, per current evidence:
+The published paper is v2.0, under major revision (see the status notice above). Its simulation uses the **v2.0 architecture** (Stage 1.8 working_factor interface and formal yield-condition logic), and its empirical characterization arc is substantively complete. Current state, per current evidence:
 
 - **Defaults:** phi revised from 10 to 25; formal yield logic active (succession fires when successor utility minus incumbent utility exceeds the canonical transition cost).
 - **Survival landscape:** the v2.0 survival-rate phase boundary is the rr=0.060 to 0.066 transition (50% inflection near rr=0.063); a distinct phi-sensitivity transition sits near rr=0.057.
 - **Succession economics (Pattern 1):** succession is sustainable below an alpha-driven runaway-penalty cliff; multi-generational continuity is confirmed.
-- **Gate validation:** Gates 1, 2, 3, and 4 PASSED; Gate 5 verified NOT_APPLICABLE (requires operational COP infrastructure). The bootstrap gate validation arc is closed.
+- **Gate validation:** Gates 1, 2, 3, and 4 PASSED; Gate 5 verified NOT_APPLICABLE (requires operational COP infrastructure). The v2.0 gate validation arc is closed. Gate 2's G2.3 pass is an arithmetic pass only: it recomputes an existence threshold and cannot test uniqueness (instrument validation record, update of September 25, 2026). The v3 gates are revalidated independently.
 - **COP:** the v1.x.2 adversarial-conditions protective claim is preserved; a benign-conditions probe (Monte Carlo Phase B Category C) confirmed the complementary prediction that the cost audit is inert with no attack to defend against.
 
-The full findings are in `docs/lineage_phi_program_reference.md` **Part IX** (phi investigation) and **Part X** (Monte Carlo Phase B). A v2.0 paper update is pending.
+The full findings are in `docs/lineage_phi_program_reference.md` **Part IX** (phi investigation) and **Part X** (Monte Carlo Phase B). The v2.0 paper reports them in Section VIII.
 
 ## Agent-Based Simulation
 
-This repository contains a full Agent-Based Model (ABM) written in Python that computationally stress-tests the 24 adversarial attack scenarios and framework defenses defined in the paper. 
+This repository contains a full Agent-Based Model (ABM) written in Python that computationally stress-tests the 26 paired adversarial attack scenarios and framework defenses defined in the paper. 
 
 * For setup and execution instructions, please see the **Simulation Runbook**.
 * For a full breakdown of the test scenarios, see **Simulation Scenarios**.
 
 ## Documents
 
-- 📄 **[The Lineage Imperative v1.x.2](docs/The%20Lineage%20Imperative%20v1.x.2.md)** - Current version. Incorporates the frontier velocity floor fix (corrects optimizer gaming of the runaway penalty), the canonical transition cost function with calibrated k1=2.164 and k2=1.0, biological veto capture validation (11/13 attack vectors), and revised phi and alpha findings under the corrected model. Includes complete version history through v1.x.2.
+- 📄 **[The Lineage Imperative v2.0](docs/The%20Lineage%20Imperative%20v2.0.md)** - Current version, under major revision. Read its status notice first.
+- 📄 **[The Lineage Imperative v1.x.2](docs/The%20Lineage%20Imperative%20v1.x.2.md)** - Previous version. Incorporates the frontier velocity floor fix (corrects optimizer gaming of the runaway penalty), the canonical transition cost function with calibrated k1=2.164 and k2=1.0, biological veto capture validation (11/13 attack vectors; SPECIFICATION_GAPS.md GAP-05 later corrected this count to 10 with live simulation evidence and 1 closed by analysis), and revised phi and alpha findings under the corrected model. Includes complete version history through v1.x.2.
 
 ## Articles
 

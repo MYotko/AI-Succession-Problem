@@ -2,6 +2,17 @@
 
 **Draft for lineageimperative.org. Date: 2026-10-02.**
 
+> **Correction, 2026-10-29.** This update is kept as published on 2 October. Records written after it correct the
+> statements below.
+>
+> - **"Results stay sealed until reviewed"** (In brief), **"Their results are sealed until they have been reviewed"** (Where
+>   version 3 stands) and **"results stay sealed until they have been reviewed"** (Watch it live). The registered readings
+>   were opened and read in full on 5 October. They stay unpublished until review clears them. Record: `simulation/diagnostics/v3_rerun_design_note.md`, Amendment A10,
+>   "How it was found".
+> - **"proven, proven under stated conditions, argued, or still open"** (A new place to start). The stops carry these labels:
+>   Argued; Proven, with conditions; Rebuilt and published; Proven, and now being tested; and Partly proven, partly open.
+>   Record: `site/primer.md`.
+
 *Summary: The version 3 rebuild is well under way: its foundations are certified, its objective is published, and
 its registered runs are nearly done. You can now watch that work live. There is a new introduction for newcomers,
 the site's pages say what the framework now claims and no more, and one line in the last update overstated a
