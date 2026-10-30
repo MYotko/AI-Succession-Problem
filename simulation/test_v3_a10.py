@@ -438,6 +438,9 @@ def test_item3_guard_every_boundary(cap):
 def test_item8_registration_requires_a10_without_relaxing_pin(tmp_path, monkeypatch):
     import subprocess
     from v3.artifacts import verify_registration, A14_COMMIT
+    # The unset successor state: the A14 pin is the current one.
+    monkeypatch.setattr('v3.artifacts.STAGE2_COMMIT', None)
+    monkeypatch.setattr('v3.artifacts.STAGE2_AMENDMENT_MARKER', None)
     text=b"Amendment A10\nAmendment A11\nClarified, 2026-10-16: pricing R_max\n### Amendment A14\nfixture only\n"
     path=tmp_path/'simulation/diagnostics/v3_rerun_design_note.md'
     path.parent.mkdir(parents=True)

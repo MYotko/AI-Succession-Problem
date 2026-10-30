@@ -247,6 +247,9 @@ def test_incidence_all_branches_and_unscored_unique_minimum():
 
 
 def test_historical_pins_use_committed_bytes_not_working_note(tmp_path, monkeypatch):
+    # The unset successor state: every current check is the A14 check.
+    monkeypatch.setattr(a, 'STAGE2_COMMIT', None)
+    monkeypatch.setattr(a, 'STAGE2_AMENDMENT_MARKER', None)
     text = b'Amendment A10\nAmendment A11\n'
     pin = dict(commit='old', path='note.md', sha256=hashlib.sha256(text).hexdigest())
     (tmp_path / 'note.md').write_bytes(b'different')
@@ -265,6 +268,9 @@ def test_historical_pins_use_committed_bytes_not_working_note(tmp_path, monkeypa
 
 
 def test_current_pin_is_exact_and_clean(tmp_path, monkeypatch):
+    # The unset successor state: every current check is the A14 check.
+    monkeypatch.setattr(a, 'STAGE2_COMMIT', None)
+    monkeypatch.setattr(a, 'STAGE2_AMENDMENT_MARKER', None)
     text = b'Amendment A10\nAmendment A11\nClarified, 2026-10-16: pricing R_max\n### Amendment A14\n'
     path = tmp_path / 'simulation/diagnostics/v3_rerun_design_note.md'; path.parent.mkdir(parents=True); path.write_bytes(text)
     pin = dict(commit=a.A14_COMMIT, path=path.relative_to(tmp_path).as_posix(), sha256=hashlib.sha256(text).hexdigest())
@@ -1060,6 +1066,9 @@ def test_publish_requires_recorded_complete_checked_round(tmp_path, defect, matc
 @pytest.mark.parametrize('commit', [a.A14_COMMIT, a.A14_COMMIT[:8], a.A13_COMMIT, a.A13_COMMIT[:8], 'historical'])
 def test_publication_current_pins_stay_strict(tmp_path, monkeypatch, stage, commit):
     from v3 import table_labels_a5 as a5, table_validation_a4 as a4, tables_a10
+    # The unset successor state: the A14 pin is the current one.
+    monkeypatch.setattr(a, 'STAGE2_COMMIT', None)
+    monkeypatch.setattr(a, 'STAGE2_AMENDMENT_MARKER', None)
     calls = []
     def verify(*args, **kwargs):
         calls.append(kwargs)

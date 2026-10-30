@@ -164,7 +164,7 @@
   },
   "amendment": "A2, 2026-09-28",
   "approved_boundary_sha256": {
-    "v3/artifacts.py": "cb52619032884924bf920503e513533a492917e98bb2bf8303f9abb1e6a760a8",
+    "v3/artifacts.py": "e328cbdf9a5cf9d9fc630c7571d5dc79de7a6b418b5cebc510e552421ff1e048",
     "v3/integration.py": "8d22354a7fa3d2d71036f686f5eff16a79c857e4c9212ad1cb8b15ed40e31e26",
     "v3/production_runner.py": "0d3f5f3c02b070a3a92bfd8055f1e75df6688505bb1908aa5b903b2df5bd7303",
     "v3/production_tables.py": "bba106893ca0849aa28eea8455621f43553ca607051c7ef572b47c7ba5637b66",
@@ -185,6 +185,21 @@
   "second_review": {
     "date": "2026-09-28",
     "scope": "Observation hook around unchanged transition formula; all living cohorts recorded; A3 preflight before service work. No numerical mechanism changes."
+  },
+  "stage2_phase1": {
+    "amendment": "A16, 2026-10-29: the stage 2 successor identity, phase 1",
+    "approved_sha256": {
+      "v3/artifacts.py": "e328cbdf9a5cf9d9fc630c7571d5dc79de7a6b418b5cebc510e552421ff1e048"
+    },
+    "date": "2026-10-29",
+    "design_commit": "ae71028ecc1bcd4a8049eb1fc933cdb725e5fa33",
+    "previous_approved_sha256": {
+      "v3/artifacts.py": "cb52619032884924bf920503e513533a492917e98bb2bf8303f9abb1e6a760a8"
+    },
+    "reasons": {
+      "v3/artifacts.py": "Stage 2 successor pin: the single named constant STAGE2_COMMIT, set to the A16 commit ae71028ecc1bcd4a8049eb1fc933cdb725e5fa33, its amendment marker STAGE2_AMENDMENT_MARKER, set to the A16 heading, and the same strict exact-note checks as the A14 pin plus that marker; shared helpers current_a10_commit, is_current_a10_pin and a13_binding_pins select the current pin at the three sites together (verify_registration, table_validation_a4.publish, table_labels_a5.publish) so the A13 Part 2 binding cannot drop silently. Current A10 launches and publications now verify strictly against the A16 pin; A14 and earlier pins verify historically, as before."
+    },
+    "scope": "Execution provenance only: pin selection for current A10 launches and publications. No scientific function, job, seed, result, selection or comparison changes. This re-pin does not admit any producer; carried-forward outputs still need their own A11 compatibility record at the new identity."
   },
   "status": "This exact genuine A1 family fails the registered sensitivity screens. This compatibility exception currently admits no table to a registered run. Any repaired family requires its own reviewed record.",
   "table_design_sha256": "342edbc8974463897c09838d5bb07f68fe1525713645df15d56dc200e9ddb1d1",

@@ -740,9 +740,9 @@ def publish(plan, a5_run_root, a4_run_root, a1_source_root, calibration, target,
                  "registered publish requires a registered plan and a registration pin")
         _require(not plan.get("settings_override") and not any(j["config"].get("settings_override") for j in plan.get("jobs", [])),
                  "registered publish rejects a settings override")
-        from .artifacts import A14_COMMIT
+        from .artifacts import is_current_a10_pin
         verify_registration(plan["registration"], **({"instrument": instrument,
-            "historical": plan['registration']['commit'] not in (A14_COMMIT, A14_COMMIT[:8])} if instrument.a10 else {}))
+            "historical": not is_current_a10_pin(plan['registration']['commit'])} if instrument.a10 else {}))
     accepted = {code_identity()}
     if instrument.a10:
         from .compatibility_a10 import accepted_identities

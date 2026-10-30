@@ -215,6 +215,50 @@ def lease(path):
 
 A13_COMMIT = "48815a655c9f4096ea8ceef35ee277ee0352c7d3"
 A14_COMMIT = "17f17ef9cee4b18d70f043a1e097359cd6642693"
+# The stage 2 successor pin: the full hash of the commit that carries the adopted
+# stage 2 registration text (A10 section 12's dated ceiling amendment A15, and
+# A16, adopted with it). It was None until that commit existed and is set once,
+# at commit time, to that commit's hash. Set, current A10 launches and
+# publications verify strictly against it, and A14 and earlier pins verify
+# historically through the callers' selection (table_validation_a4.publish,
+# table_labels_a5.publish). Unset (None), current A10 verification requires the
+# A14 pin exactly as before. The three selection sites below share these helpers
+# so the A13 Part 2 binding cannot drop silently (audit A finding 2).
+STAGE2_COMMIT = "ae71028ecc1bcd4a8049eb1fc933cdb725e5fa33"
+# The heading of the adopted stage 2 amendment, as bytes, set at commit time
+# together with STAGE2_COMMIT. The committed note at the successor pin must
+# contain it, as A14's note had to contain A14 (design note line 2558).
+STAGE2_AMENDMENT_MARKER = b"### Amendment A16, 2026-10-29: prospective validation extensions for A10 stage 2"
+# Text the committed note at the current pin must contain. The successor note is
+# a superset of A14's, so A14's markers stay required.
+STAGE2_NOTE_MARKERS = (b'Clarified, 2026-10-16: pricing R_max', b'### Amendment A14')
+
+
+def current_a10_commit():
+    """The commit current A10 launches must pin: the successor once set, else A14."""
+    return STAGE2_COMMIT or A14_COMMIT
+
+
+def current_a10_note_markers():
+    """The text the committed note at the current pin must contain."""
+    if not STAGE2_COMMIT:
+        return STAGE2_NOTE_MARKERS
+    if not isinstance(STAGE2_AMENDMENT_MARKER, bytes) or not STAGE2_AMENDMENT_MARKER.strip():
+        raise RuntimeError('STAGE2_COMMIT is set without its amendment marker')
+    return STAGE2_NOTE_MARKERS + (STAGE2_AMENDMENT_MARKER,)
+
+
+def is_current_a10_pin(commit):
+    """Whether a plan's pin is the current A10 pin (full or eight-character form)."""
+    current = current_a10_commit()
+    return commit in (current, current[:8])
+
+
+def a13_binding_pins():
+    """The pins under which a registered A4 publication applies A13 Part 2's
+    admission binding: A13, A14 and the stage 2 successor once it is set."""
+    commits = [A13_COMMIT, A14_COMMIT] + ([STAGE2_COMMIT] if STAGE2_COMMIT else [])
+    return tuple(form for commit in commits for form in (commit, commit[:8]))
 
 
 def verify_registration(pin, repository=None, *, instrument=None, historical=False):
@@ -236,11 +280,12 @@ def verify_registration(pin, repository=None, *, instrument=None, historical=Fal
         if declaration(instrument).a10 and b"Amendment A11" not in committed:
             raise RuntimeError("registered A10 requires a design pin containing Amendment A11")
         if not historical and declaration(instrument).a10:
-            if (pin['commit'] not in (A14_COMMIT, A14_COMMIT[:8])
+            current = current_a10_commit()
+            if (not is_current_a10_pin(pin['commit'])
                     or path.as_posix() != 'simulation/diagnostics/v3_rerun_design_note.md'
-                    or b'Clarified, 2026-10-16: pricing R_max' not in committed
-                    or b'### Amendment A14' not in committed):
-                raise RuntimeError('current A10 launches require the A14 pin 17f17ef9')
+                    or any(marker not in committed for marker in current_a10_note_markers())):
+                raise RuntimeError('current A10 launches require the %s pin %s'
+                                   % ('stage 2' if STAGE2_COMMIT else 'A14', current[:8]))
         if hashlib.sha256(committed).hexdigest() != pin["sha256"] or (not historical and file_hash(repo / path) != pin["sha256"]):
             raise RuntimeError("pre-registration hash is stale")
         if historical:
