@@ -459,9 +459,15 @@ def test_real_repository_historical_verification_of_the_a16_pin():
     committed = subprocess.run(['git', 'show', A16_COMMIT + ':' + NOTE_PATH], cwd=repo, capture_output=True, check=True).stdout
     pin = dict(commit=A16_COMMIT, path=NOTE_PATH, sha256=hashlib.sha256(committed).hexdigest())
     assert a.verify_registration(pin, repo, instrument=A10, historical=True) == pin
-    dirty = subprocess.run(['git', 'status', '--porcelain', '--', 'simulation'], cwd=repo, capture_output=True, text=True,
-                           check=True).stdout.strip()
-    if dirty:
+    # The registered source rule, as verify_registration applies it: tracked
+    # changes under simulation, or untracked files at manifest paths. Untracked
+    # scratch outside the manifest (_pytest_v3, service.lock) is clean.
+    tracked = subprocess.run(['git', 'diff', 'HEAD', '--', 'simulation'], cwd=repo, capture_output=True, text=True,
+                             check=True).stdout.strip()
+    identities = ['simulation/' + name for name in a.source_manifest()]
+    untracked = subprocess.run(['git', 'ls-files', '--others', '--', *identities], cwd=repo, capture_output=True,
+                               text=True, check=True).stdout.strip()
+    if tracked or untracked:
         with pytest.raises(RuntimeError, match='committed and clean'):
             a.verify_registration(pin, repo, instrument=A10)
     else:

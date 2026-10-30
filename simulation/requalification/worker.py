@@ -296,6 +296,43 @@ def _replay_extension(item, job, archived, artifacts):
     return result, checkpoints
 
 
+# Why each kind does or does not need the registration as authority. Only the
+# run kind reaches the succession gate: V3Model builds ExecutionGuards with the
+# registration as authority, and authorize("succession", ...) refuses every
+# succession on production tables without it (guards.py, integration.py). The
+# table estimator, the A4 fit, validate and census stages, the A5 label stage and
+# the extension stages simulate trajectories without that gate and take no
+# registration; the registered flag only adds validation there.
+AUTHORITY_REASONS = {
+    "rerun": "the succession gate needs the registration as authority on production tables",
+    "table": "offline_estimator.estimate takes no authority; no succession gate",
+    "a4_fit": "table_validation_a4.run_stage_job takes no authority; no succession gate",
+    "a4_validate": "table_validation_a4.run_stage_job takes no authority; no succession gate",
+    "a4_census": "table_validation_a4.run_stage_job takes no authority; no succession gate",
+    "a5_fvplain": "table_labels_a5.run_stage_job takes no authority; no succession gate",
+    "fixture": "runner fixture; no authority",
+}
+
+
+def authority_for(item):
+    """The registered flag and registration pin a replayed item executes with.
+    A run job from a registered spec replays registered, with the frozen
+    source record's registration pin (verified historically at freeze) as its
+    authority, so the producer's succession gate behaves as it did in the
+    archived execution; it is refused without that pin. Every other kind
+    replays non-registered: none of them reaches the succession gate."""
+    kind = item["job"]["kind"]
+    if kind != "rerun":
+        return False, None
+    registration = item.get("registration")
+    if not item.get("registered"):
+        require(registration is None, "a non-registered run item carries a registration pin")
+        return False, None
+    require(isinstance(registration, dict) and set(registration) == {"commit", "path", "sha256"},
+            "a registered run item needs the frozen source record's registration pin as its authority")
+    return True, dict(registration)
+
+
 def replay_item(item, *, scratch, keep_scratch=False):
     """Replay one frozen item and return its comparison record. Writes only under
     ``scratch`` (which must be empty, inside the checkout's simulation/v3)."""
@@ -345,7 +382,10 @@ def replay_item(item, *, scratch, keep_scratch=False):
             record["checkpoints"] = checkpoints
         else:
             phase_dir = scratch / job["config"].get("phase", kind)
-            fresh = execute(job, registered=False, registration=None, root=phase_dir)
+            registered, registration = authority_for(item)
+            record["authority"] = {"registered": registered, "registration": registration,
+                                   "reason": AUTHORITY_REASONS.get(kind, "no succession gate on this kind")}
+            fresh = execute(job, registered=registered, registration=registration, root=phase_dir)
         record["worker_seconds"] = time.perf_counter() - execution_start
         require(fresh.get("code_hash", code) == code, "fresh result carries another producer identity")
         record["after_sha256"] = hashlib.sha256(comparison_bytes(job, fresh)).hexdigest()

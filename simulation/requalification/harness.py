@@ -217,6 +217,14 @@ def job_inputs(job, phase_root, original_simulation):
             sibling = table.with_suffix(suffix).as_posix()
             if (original / sibling).is_file():
                 relative(sibling)
+        # A registered run loads its A10 family through require_a10, which
+        # accepts the receipt's producer identities only through the committed
+        # A11 compatibility records; they are read through the input view, so
+        # they are declared here rather than left to an operator's extra_inputs.
+        records = original / "v3" / "runs" / "registered"
+        if records.is_dir():
+            for record in sorted(records.glob("A11_compatibility_*.json")):
+                relative("v3/runs/registered/" + record.name)
     if job["kind"] in ("a4_fit", "a4_validate", "a4_census", "a5_fvplain", "a13_validate_plain_ext"):
         source = Path(c["a1_source_root"])
         a1 = c["a1_job"]
@@ -397,7 +405,10 @@ def freeze_sample(sources, output, *, require_complete=True, python=None):
             item = {"item_id": digest([name, jid])[:24], "source": name, "group": group, "kind": job["kind"],
                     "job": job, "producing_code_hash": code, "checkout": str(checkout), "phase_root": str(phase_root),
                     "archived_record_sha256": file_sha256(phase_root / "records" / (jid + ".json")),
-                    "archived_output_sha256": record["output_hash"], "inputs": inputs, "protected": protected}
+                    "archived_output_sha256": record["output_hash"], "inputs": inputs, "protected": protected,
+                    # The authority a run item replays with: the spec's registered
+                    # flag and its registration pin, verified historically above.
+                    "registered": bool(spec.get("registered")), "registration": pin_record.get("pin")}
             if binding is not None:
                 item["plan_binding"] = binding
             items.append(item)
@@ -667,64 +678,139 @@ def reservation_bytes(item, reservations_gb):
     raise RequalificationError("no memory reservation for job kind " + item["kind"])
 
 
-def admit(item, reservations_gb, headroom_bytes, pending, *, wait_seconds=600., poll_seconds=1., collect=None):
-    """Wait until MemAvailable, less the reservations of every running item
-    (which may not have allocated yet), covers the headroom plus this item's
-    reservation. Before each check ``collect`` records every finished future so
-    its reservation is released. Refuses, rather than waiting forever, when
-    nothing is running that could free memory, or when the wait exceeds
-    ``wait_seconds``. ``pending`` maps futures to their items."""
-    needed = headroom_bytes + reservation_bytes(item, reservations_gb)
+def running_reservation(pending, reservations_gb):
+    """Reservations of futures still running; a future that finished since the
+    last collection no longer holds memory."""
+    if not isinstance(pending, dict):
+        return 0
+    return sum(reservation_bytes(p, reservations_gb) for f, p in pending.items()
+               if not (hasattr(f, "done") and f.done()))
+
+
+def admit_any(candidates, reservations_gb, headroom_bytes, pending, *, wait_seconds=None, poll_seconds=1., collect=None,
+              in_order=False, is_halted=None):
+    """Admit the first candidate whose reservation fits: MemAvailable, less the
+    reservations of every running item (which may not have allocated yet), must
+    cover the headroom plus the candidate's reservation. With ``in_order`` only
+    the first candidate is considered. Before each check ``collect`` records
+    every finished future so its reservation is released.
+
+    While anything is running the wait is unbounded by default, because a
+    running job can free memory; ``wait_seconds`` caps it when given. A
+    refusal is raised only when nothing is running that could free memory, or
+    when the cap is reached after one final collection and re-check. Returns
+    ``(item, admission)``, or ``None`` when ``is_halted`` reports a halt during
+    the wait."""
+    require(candidates, "no candidate to admit")
+    considered = candidates[:1] if in_order else list(candidates)
     waited = 0.
 
-    def running_reservation():
-        """Reservations of futures still running; a future that finished since
-        the last collection no longer holds memory."""
-        if not isinstance(pending, dict):
-            return 0
-        return sum(reservation_bytes(p, reservations_gb) for f, p in pending.items()
-                   if not (hasattr(f, "done") and f.done()))
-
     def check():
+        try:
+            return _check()
+        except RequalificationError as exc:
+            # A refusal raised by ``require`` (unreadable MemAvailable) or by
+            # ``reservation_bytes`` carries its wait like the explicit refusals.
+            exc.waited_seconds = waited
+            raise
+
+    def _check():
         available = mem_available_bytes()
         require(available is not None, "memory admission requires a readable MemAvailable")
-        reserved = running_reservation()
-        if available - reserved >= needed:
-            return {"available_bytes": available, "pending_reserved_bytes": reserved, "needed_bytes": needed,
-                    "waited_seconds": waited}
+        reserved = running_reservation(pending, reservations_gb)
+        for item in considered:
+            try:
+                needed = headroom_bytes + reservation_bytes(item, reservations_gb)
+            except RequalificationError as exc:
+                # The refusal is this item's: no reservation for its kind.
+                exc.item = item
+                raise
+            if available - reserved >= needed:
+                return item, {"available_bytes": available, "pending_reserved_bytes": reserved, "needed_bytes": needed,
+                              "waited_seconds": waited, "outcome": "admitted"}
         return None
+
+    def running_futures():
+        if isinstance(pending, dict):
+            return [f for f in pending if not (hasattr(f, "done") and f.done())]
+        return list(pending or [])
+
+    def halted():
+        return is_halted is not None and is_halted() is not None
+
+    def halted_record():
+        return None, {"waited_seconds": waited, "outcome": "halted", "error": "a failure collected during the wait halted dispatch"}
+
+    def refusal(message):
+        error = RequalificationError(message)
+        error.waited_seconds = waited
+        error.item = min(considered, key=lambda i: reservation_bytes(i, reservations_gb))
+        return error
 
     while True:
         if collect is not None:
             collect()
+        if halted():
+            return halted_record()
+        # The running set is taken before the check, so a job that finishes
+        # between the two cannot turn a wait into a refusal.
+        running = running_futures()
         admitted = check()
         if admitted is not None:
             return admitted
-        require(pending, "memory admission refused: %d bytes available, %d needed, nothing pending to free memory"
-                % (mem_available_bytes() or 0, needed))
-        if waited >= wait_seconds:
-            # One final collection and re-check before refusing: a job that
-            # finished during the last wait releases its reservation.
+        if not running:
+            # Nothing was running at the check: one more collection and
+            # re-check, then the refusal is right, since nothing can free memory.
+            # A failure collected here halts dispatch instead.
             if collect is not None:
                 collect()
+            if halted():
+                return halted_record()
             admitted = check()
             if admitted is not None:
                 return admitted
-            raise RequalificationError("memory admission timed out after %.0f seconds" % waited)
+            raise refusal("memory admission refused: %d bytes available, %d needed for the smallest candidate, nothing "
+                          "running to free memory" % (mem_available_bytes() or 0, headroom_bytes + min(
+                              reservation_bytes(i, reservations_gb) for i in considered)))
+        if wait_seconds is not None and waited >= wait_seconds:
+            # One final collection and re-check before refusing: a job that
+            # finished during the last wait releases its reservation. A failure
+            # collected here halts dispatch instead of admitting.
+            if collect is not None:
+                collect()
+            if halted():
+                return halted_record()
+            admitted = check()
+            if admitted is not None:
+                return admitted
+            raise refusal("memory admission timed out after %.0f seconds" % waited)
         time.sleep(poll_seconds)
         waited += poll_seconds
 
 
+def admit(item, reservations_gb, headroom_bytes, pending, *, wait_seconds=None, poll_seconds=1., collect=None):
+    """Admission for one item (see ``admit_any``). Returns the admission record."""
+    admitted, record = admit_any([item], reservations_gb, headroom_bytes, pending, wait_seconds=wait_seconds,
+                                 poll_seconds=poll_seconds, collect=collect, in_order=True)
+    return record
+
+
 def replay(sample_path, output_dir, *, workers=1, python=None, keep_scratch=False, resume=False,
-           reservations_gb=None, headroom_gb=None, admission_wait_seconds=600.):
+           reservations_gb=None, headroom_gb=None, admission_wait_seconds=None, in_order=False):
     """Replay every frozen item; stop dispatching at the first mismatch, error or
     non-zero worker exit; seal the acceptance record. Passing requires every
     item to pass with a zero exit code and no environment mismatch.
 
     Items run one producer checkout at a time, in the sample's order, with a
     barrier between checkouts. ``workers`` is capped at min(31, cpu_count - 1).
-    Before each dispatch MemAvailable must cover ``headroom_gb`` (default a fifth
-    of total memory) plus the item's reservation by kind.
+    Within a checkout the first item whose reservation fits is dispatched
+    (``in_order`` restricts that to the next item in sample order); the
+    per-item results and the acceptance's item list do not depend on dispatch
+    order, which the ``admissions`` list records. Before each dispatch
+    MemAvailable must cover ``headroom_gb`` (default a fifth of total memory)
+    plus the item's reservation by kind; while anything is running the wait is
+    unbounded unless ``admission_wait_seconds`` caps it, and a refusal comes
+    only when nothing running could free memory. Every wait is recorded.
 
     Without ``resume``, the output directory must hold no prior per-item
     result. With ``resume``, passed records at the same sample and harness whose
@@ -769,7 +855,7 @@ def replay(sample_path, output_dir, *, workers=1, python=None, keep_scratch=Fals
     try:
         return _replay_locked(sample_path, output_dir, document, sample, hashes, state, workers=workers, python=python,
                               keep_scratch=keep_scratch, resume=resume, reservations_gb=reservations_gb,
-                              headroom_gb=headroom_gb, admission_wait_seconds=admission_wait_seconds)
+                              headroom_gb=headroom_gb, admission_wait_seconds=admission_wait_seconds, in_order=in_order)
     finally:
         if not state["dispatch_entered"] or state["drained"]:
             try:
@@ -781,7 +867,7 @@ def replay(sample_path, output_dir, *, workers=1, python=None, keep_scratch=Fals
 
 
 def _replay_locked(sample_path, output_dir, document, sample, hashes, state, *, workers, python, keep_scratch, resume,
-                   reservations_gb, headroom_gb, admission_wait_seconds):
+                   reservations_gb, headroom_gb, admission_wait_seconds, in_order=False):
 
     acceptance_path = output_dir / "acceptance.json"
     cap = worker_cap()
@@ -855,17 +941,36 @@ def _replay_locked(sample_path, output_dir, document, sample, hashes, state, *, 
     admissions = []
     pending = {}
 
-    def admit_item(item):
-        """Admission for one item; a refusal is recorded and returns None. A
-        failure collected during the wait keeps precedence as the first failure."""
+    def admit_item(candidates):
+        """Admission over the remaining candidates of a checkout. Every wait is
+        recorded in ``admissions`` with its duration and outcome: admitted,
+        halted (a failure collected during the wait; nothing more is
+        dispatched) or refused (recorded against the item the exception names:
+        the one without a reservation, else the smallest candidate, the one
+        the message describes; a refusal that names no item, an unreadable
+        MemAvailable, is charged to the first remaining candidate; dispatch
+        halts). A failure collected
+        during the wait keeps precedence as the first failure. Returns
+        ``(item, admission)`` or None when nothing may be dispatched."""
         nonlocal halted
         try:
-            return admit(item, reservations_gb, headroom_bytes, pending, wait_seconds=admission_wait_seconds, collect=collect)
+            item, admission = admit_any(candidates, reservations_gb, headroom_bytes, pending, wait_seconds=admission_wait_seconds,
+                                        collect=collect, in_order=in_order, is_halted=lambda: halted)
         except RequalificationError as exc:
+            # The exception names its item (the one without a reservation, or
+            # the smallest candidate); nothing here may raise, or the refusal
+            # would go unrecorded.
+            item = getattr(exc, "item", None) or candidates[0]
             if halted is None:
                 halted = {"item_id": item["item_id"], "job_id": item["job"]["id"], "error": str(exc)}
             records[item["item_id"]] = {"item_id": item["item_id"], "job_id": item["job"]["id"], "passed": False, "error": str(exc)}
+            admissions.append({"item_id": item["item_id"], "job_id": item["job"]["id"], "outcome": "refused",
+                               "waited_seconds": getattr(exc, "waited_seconds", 0.), "error": str(exc)})
             return None
+        if item is None:
+            admissions.append(dict(admission, item_id=None, job_id=None))
+            return None
+        return item, admission
 
     def collect():
         """Record every finished future, so its reservation is released and a
@@ -906,7 +1011,9 @@ def _replay_locked(sample_path, output_dir, document, sample, hashes, state, *, 
     complete = all(i["item_id"] in records for i in sample["items"])
     return _acceptance(sample_path, output_dir, document, sample, hashes, ordered, complete, len(records), workers, cap,
                        python, reservations_gb, headroom_bytes, total, admissions, order, attempt_environment,
-                       expected_host, started, resumed, restarts, halted, dispatch_error)
+                       expected_host, started, resumed, restarts, halted, dispatch_error,
+                       {"admission_wait_seconds": admission_wait_seconds,
+                        "dispatch_order": "sample order" if in_order else "first admissible within the checkout"})
 
 
 def _dispatch(order, groups, workers, pending, collect, admit_item, records, admissions, document, output_dir, hashes,
@@ -927,21 +1034,22 @@ def _dispatch_pool(order, groups, workers, pending, collect, admit_item, records
         for checkout in order:
             if is_halted() is not None:
                 break
-            queue, index = groups[checkout], 0
+            remaining = list(groups[checkout])
             pending.clear()
-            while index < len(queue) or pending:
-                while index < len(queue) and len(pending) < workers and is_halted() is None:
-                    item = queue[index]
-                    admitted = admit_item(item)
-                    if admitted is None:
-                        index += 1
-                        break  # refused; the refusal is recorded and dispatch stops
-                    if is_halted() is not None:
-                        break  # a job collected during the wait failed; nothing more is dispatched
-                    admissions.append(dict(admitted, item_id=item["item_id"]))
+            while remaining or pending:
+                while remaining and len(pending) < workers and is_halted() is None:
+                    admitted = admit_item(remaining)
+                    if admitted is None or is_halted() is not None:
+                        # Refused, or a failure was collected during the wait
+                        # (including admission's final collection): nothing
+                        # more is dispatched, under every policy.
+                        remaining.clear()
+                        break
+                    item, admission = admitted
+                    remaining.remove(item)
+                    admissions.append(dict(admission, item_id=item["item_id"], job_id=item["job"]["id"]))
                     pending[pool.submit(guarded_run_item, item, document["sha256"], output_dir, hashes, python=python,
                                         keep_scratch=keep_scratch, expected_host=expected_host)] = item
-                    index += 1
                 if not pending:
                     if is_halted() is not None:
                         break
@@ -953,7 +1061,7 @@ def _dispatch_pool(order, groups, workers, pending, collect, admit_item, records
 
 def _acceptance(sample_path, output_dir, document, sample, hashes, ordered, complete, executed, workers, cap, python,
                 reservations_gb, headroom_bytes, total, admissions, order, attempt_environment, expected_host,
-                started, resumed, restarts, halted, dispatch_error):
+                started, resumed, restarts, halted, dispatch_error, policy=None):
     acceptance_path = output_dir / "acceptance.json"
     # The full source manifest is recorded once per checkout; every item keeps
     # its identity and the manifest's digest. Every record, resumed or executed
@@ -977,9 +1085,18 @@ def _acceptance(sample_path, output_dir, document, sample, hashes, ordered, comp
                 environment_mismatches.append({"item_id": record["item_id"], "kind": "checkout",
                                                "record": checkout_fingerprint_of(record)})
     exit_codes_ok = all(r.get("exit_code") == 0 for r in ordered)
+    # Every wait, whatever its outcome, is summarized: successful admissions,
+    # refusals and waits ended by a halt all carry a duration and an outcome.
+    # ``count`` is the number of positive waits; an immediate admission is a
+    # recorded admission with no wait.
+    waits = [a.get("waited_seconds", 0.) for a in admissions]
+    outcomes = {name: sum(1 for a in admissions if a.get("outcome") == name) for name in ("admitted", "refused", "halted")}
+    admission_waits = {"count": sum(1 for v in waits if v > 0), "total_seconds": sum(waits),
+                       "max_seconds": max(waits, default=0.), "by_outcome": outcomes,
+                       "refused_seconds": sum(a.get("waited_seconds", 0.) for a in admissions if a.get("outcome") == "refused")}
     acceptance = {"schema": ACCEPTANCE_SCHEMA, "sample_sha256": document["sha256"], "sample_path": str(sample_path),
                   "harness_sha256": hashes, "comparison": COMPARISON, "exclusions": sorted(TIMING_EXCLUSIONS),
-                  "dispatch_error": dispatch_error,
+                  "dispatch_error": dispatch_error, "admission_waits": admission_waits, "admission_policy": policy or {},
                   "workers": workers, "worker_cap": cap, "threads_per_worker": 1, "python": python or sys.executable,
                   "reservations_gb": reservations_gb, "headroom_bytes": headroom_bytes, "memory_total_bytes": total,
                   "admissions": admissions, "checkout_order": order, "attempt_environment": attempt_environment,
@@ -1009,6 +1126,9 @@ def main(argv=None):
     p.add_argument("--resume", action="store_true", help="continue an interrupted attempt at the same sample")
     p.add_argument("--reservations", help="JSON mapping job kinds to reservation GB, overriding the plan's classes")
     p.add_argument("--headroom-gb", type=float)
+    p.add_argument("--admission-wait-seconds", type=float, default=None,
+                   help="cap on the memory-admission wait while jobs are running; unbounded by default")
+    p.add_argument("--in-order", action="store_true", help="dispatch in sample order instead of first admissible")
     args = parser.parse_args(argv)
     if args.command == "freeze":
         document = freeze_sample(read_json(args.sources), args.output, python=args.python)
@@ -1017,7 +1137,8 @@ def main(argv=None):
     acceptance = replay(args.sample, args.output_dir, workers=args.workers, python=args.python,
                         keep_scratch=args.keep_scratch, resume=args.resume,
                         reservations_gb=read_json(args.reservations) if args.reservations else None,
-                        headroom_gb=args.headroom_gb)
+                        headroom_gb=args.headroom_gb, admission_wait_seconds=args.admission_wait_seconds,
+                        in_order=args.in_order)
     print({"passed": acceptance["passed"], "executed": acceptance["executed"], "items": acceptance["item_count"],
            "first_failure": acceptance["first_failure"]})
     return 0 if acceptance["passed"] else 1

@@ -630,6 +630,282 @@ def test_truncated_worker_file_and_any_exception_leave_a_failed_record(tmp_path,
     assert json.loads(harness.result_path_for(items[0], tmp_path / 'late').read_text()) == {"passed": True, "kept": True}
 
 
+def test_run_items_replay_registered_with_the_frozen_pin_as_authority(in_process, tmp_path, monkeypatch):
+    """Round 5 fix 1: a run job from a registered spec executes registered, with
+    the frozen source record's registration pin as its authority, so the
+    producer's succession gate behaves as in the archived execution. Every
+    other kind replays non-registered. The fixture tables' ``fixture or
+    authority`` rule is why fixtures never showed this."""
+    from v3 import production_runner
+    pin = committed_note_pin()
+    jobs = fixture_jobs(1)
+    run = a.stable_job('rerun', dict(phase='rerun', category='R1', steps=5, model=dict(reproduction_rate=.064, alpha=1.,
+                       successor_capability=1.5, instrument=tables.NOMINAL.declaration())), 'v3_rerun', 0)
+    spec = dict(schema='toy', code_hash=a.code_identity(), registered=True, registration=pin,
+                instrument=tables.NOMINAL.declaration(), jobs=jobs + [run])
+    root = tmp_path / 'reg'
+    durable(root / 'fixture', jobs[0], runner.execute(jobs[0], root=root / 'fixture'))
+    archived = dict(fixture_tables=False, steps=5, final_population=7, code_hash=a.code_identity())
+    durable(root / 'rerun', run, archived)
+    launch_root(root, spec)
+    spec_path = tmp_path / 'reg_spec.json'
+    a.atomic_json(spec_path, a.seal(spec))
+    src = dict(name='reg', group='runs', selection='all', producing_code_hash=a.code_identity(),
+               checkout=str(a.SIMULATION.parent), original_simulation=str(a.SIMULATION), spec=str(spec_path), root=str(root))
+    sample = harness.unseal(harness.freeze_sample([src], tmp_path / 'sample.json'))
+    items = {i['kind']: i for i in sample['items']}
+    assert items['rerun']['registered'] is True and items['rerun']['registration'] == pin
+    calls = []
+    def fake_execute(job, registered=False, registration=None, root=None):
+        calls.append(dict(kind=job['kind'], registered=registered, registration=registration, root=str(root)))
+        return archived if job['kind'] == 'rerun' else dict(seed=job['seed'], fixture=True)
+    monkeypatch.setattr(production_runner, 'execute', fake_execute)
+    record = worker.replay_item(items['rerun'], scratch=tmp_path / 'scratch' / 'run')
+    assert record['passed'] and record['authority'] == {'registered': True, 'registration': pin,
+                                                         'reason': worker.AUTHORITY_REASONS['rerun']}
+    assert calls[-1]['registered'] is True and calls[-1]['registration'] == pin
+    assert calls[-1]['root'].startswith(str((tmp_path / 'scratch' / 'run').resolve()))
+    record = worker.replay_item(items['fixture'], scratch=tmp_path / 'scratch' / 'fx')
+    assert record['passed'] and calls[-1]['registered'] is False and calls[-1]['registration'] is None
+    assert record['authority']['registered'] is False
+    # A registered run item without its pin is refused; a non-registered one
+    # carrying a pin is refused too.
+    with pytest.raises(worker.RequalificationError, match='registration pin as its authority'):
+        worker.replay_item(dict(items['rerun'], registration=None), scratch=tmp_path / 'scratch' / 'nopin')
+    with pytest.raises(worker.RequalificationError, match='non-registered run item carries'):
+        worker.replay_item(dict(items['rerun'], registered=False), scratch=tmp_path / 'scratch' / 'unreg')
+    # Kind by kind, the authority statement is recorded for every replayed kind.
+    assert set(worker.AUTHORITY_REASONS) >= {'rerun', 'table', 'a4_fit', 'a4_validate', 'a4_census', 'a5_fvplain'}
+
+
+def test_admission_waits_while_a_long_item_holds_memory(tmp_path, monkeypatch):
+    """Round 5 fix 2: while an item is running the wait is unbounded by default,
+    so a long job holding the memory never refuses the next item; the wait is
+    recorded; a cap, when given, still refuses."""
+    jobs = fixture_jobs(2)
+    src = source(tmp_path, 'long', jobs, selection='all')
+    sample_path = tmp_path / 'sample.json'
+    document = harness.freeze_sample([src], sample_path)
+    items = harness.unseal(document)['items']
+    sys.set_int_max_str_digits(0)  # as the attempt sets it before fingerprinting
+    fingerprint = {k: worker.host_fingerprint().get(k) for k in harness.HOST_KEYS}
+    import time as real_time
+    real_sleep = real_time.sleep
+    def long_run_item(item, sample_sha256, output_dir, *args, **kw):
+        real_sleep(1.5 if item['item_id'] == items[0]['item_id'] else .05)
+        return dict(item_id=item['item_id'], job_id=item['job']['id'], passed=True, exit_code=0, checkout=item['checkout'],
+                    runtime=dict(fingerprint, code_identity='x', source_manifest={'f': 'h'}))
+    monkeypatch.setattr(harness, 'run_item', long_run_item)
+    reservation = harness.reservation_bytes(items[0], harness.DEFAULT_RESERVATIONS_GB)
+    monkeypatch.setattr(harness, 'mem_available_bytes', lambda: int(1.5 * reservation))
+    # Polls are counted as one second each but sleep briefly, so the waiting
+    # item records a wait of about thirty polling seconds while the 1.5 s
+    # holder runs: enough to show the wait is unbounded by default and
+    # recorded, not a wait beyond the old 600 s limit.
+    monkeypatch.setattr(harness.time, 'sleep', lambda seconds: real_sleep(min(seconds, .05)))
+    acceptance = harness.replay(sample_path, tmp_path / 'unbounded', workers=2, headroom_gb=0.)
+    assert acceptance['passed'] and acceptance['executed'] == 2
+    assert acceptance['admission_waits']['count'] == 1 and acceptance['admission_waits']['max_seconds'] >= 1.
+    assert acceptance['admission_policy'] == {'admission_wait_seconds': None,
+                                               'dispatch_order': 'first admissible within the checkout'}
+    assert [w['job_id'] for w in acceptance['admissions']] == [i['job']['id'] for i in items]
+    capped = harness.replay(sample_path, tmp_path / 'capped', workers=2, headroom_gb=0., admission_wait_seconds=.2)
+    assert not capped['passed'] and 'timed out' in capped['first_failure']['error']
+    assert capped['admission_policy']['admission_wait_seconds'] == .2
+    # The refused wait is recorded with its duration and outcome, and summarized.
+    refused = [w for w in capped['admissions'] if w['outcome'] == 'refused']
+    assert len(refused) == 1 and refused[0]['waited_seconds'] >= .2 and 'timed out' in refused[0]['error']
+    assert capped['admission_waits']['by_outcome'] == {'admitted': 1, 'refused': 1, 'halted': 0}
+    assert capped['admission_waits']['count'] == 1 and capped['admission_waits']['refused_seconds'] >= .2
+    assert capped['admission_waits']['total_seconds'] >= .2
+    ordered = harness.replay(sample_path, tmp_path / 'inorder', workers=2, headroom_gb=0., in_order=True)
+    assert ordered['passed'] and ordered['admission_policy']['dispatch_order'] == 'sample order'
+
+
+@pytest.mark.parametrize('cap', [None, 120.])
+def test_no_item_is_submitted_after_a_failure_collected_during_the_wait(tmp_path, monkeypatch, cap):
+    """Round 6 finding 1, end to end: a failure collected while the next item
+    waits for memory halts dispatch; the waiting item is never submitted, under
+    the unbounded policy and under a cap, and the wait is recorded as halted.
+    The holder runs .6 s real at .05 s per counted polling second, about a
+    dozen counted seconds, so the cap of 120 is not reached and the halt ends
+    the wait. The branch collections themselves are exercised in
+    test_admit_any_returns_halted_from_the_branch_collections."""
+    jobs = fixture_jobs(3)
+    src = source(tmp_path, 'halt', jobs, selection='all')
+    sample_path = tmp_path / 'sample.json'
+    document = harness.freeze_sample([src], sample_path)
+    items = harness.unseal(document)['items']
+    sys.set_int_max_str_digits(0)
+    fingerprint = {k: worker.host_fingerprint().get(k) for k in harness.HOST_KEYS}
+    import time as real_time
+    real_sleep = real_time.sleep
+    submitted = []
+    def failing_holder(item, sample_sha256, output_dir, *args, **kw):
+        submitted.append(item['item_id'])
+        real_sleep(.6)
+        return dict(item_id=item['item_id'], job_id=item['job']['id'], passed=False, exit_code=1, checkout=item['checkout'],
+                    error='injected failure while others waited',
+                    runtime=dict(fingerprint, code_identity='x', source_manifest={'f': 'h'}))
+    monkeypatch.setattr(harness, 'run_item', failing_holder)
+    reservation = harness.reservation_bytes(items[0], harness.DEFAULT_RESERVATIONS_GB)
+    # Only one item fits at a time, so the second waits while the first runs and fails.
+    monkeypatch.setattr(harness, 'mem_available_bytes', lambda: int(1.5 * reservation))
+    monkeypatch.setattr(harness.time, 'sleep', lambda seconds: real_sleep(min(seconds, .05)))
+    acceptance = harness.replay(sample_path, tmp_path / ('cap_%s' % cap), workers=2, headroom_gb=0., admission_wait_seconds=cap)
+    assert not acceptance['passed'] and acceptance['first_failure']['item_id'] == items[0]['item_id']
+    assert submitted == [items[0]['item_id']]
+    assert [r['passed'] for r in acceptance['items']] == [False, False, False]
+    assert all(r['error'].startswith('not executed') for r in acceptance['items'][1:])
+    halted = [w for w in acceptance['admissions'] if w['outcome'] == 'halted']
+    assert len(halted) == 1 and halted[0]['waited_seconds'] > 0 and halted[0]['item_id'] is None
+    assert acceptance['admission_waits']['by_outcome'] == {'admitted': 1, 'refused': 0, 'halted': 1}
+    assert acceptance['admission_waits']['count'] == 1
+
+
+def test_admit_any_returns_halted_from_the_branch_collections(monkeypatch):
+    """Round 6 finding 1, the two collections the r5 review named: the one in
+    the nothing-running branch and the one at the cap. When that collection
+    sets the halt, admit_any returns the halted record even though the same
+    collection freed enough memory for the candidate, so nothing is admitted
+    after a halt. A refusal raised inside the check carries its wait too."""
+    from concurrent.futures import Future
+    item = dict(item_id='i', kind='fixture', job=dict(id='x', config={}))
+    reservation = harness.reservation_bytes(item, harness.DEFAULT_RESERVATIONS_GB)
+    monkeypatch.setattr(harness.time, 'sleep', lambda seconds: None)
+
+    def scenario(pending, wait_seconds):
+        state = dict(halted=None, available=int(.5 * reservation), collects=0)
+        monkeypatch.setattr(harness, 'mem_available_bytes', lambda: state['available'])
+        def collect():
+            state['collects'] += 1
+            if state['collects'] == 2:  # the branch collection, after the top-of-loop one
+                for future in pending:
+                    if not future.done():
+                        future.set_result({})
+                state['halted'] = dict(item_id='h', error='injected')
+                state['available'] = 2 * reservation
+        result = harness.admit_any([item], harness.DEFAULT_RESERVATIONS_GB, 0, pending, wait_seconds=wait_seconds,
+                                   poll_seconds=1., collect=collect, is_halted=lambda: state['halted'])
+        assert state['collects'] == 2
+        return result
+
+    # Nothing running at the check: the branch collection halts.
+    finished = Future()
+    finished.set_result({})
+    admitted, record = scenario({finished: item}, None)
+    assert admitted is None and record['outcome'] == 'halted' and record['waited_seconds'] == 0.
+    # The cap reached on the first iteration: the final collection halts.
+    running = Future()
+    admitted, record = scenario({running: item}, 0.)
+    assert admitted is None and record['outcome'] == 'halted' and running.done()
+    # Without a halt, the same collections admit.
+    for pending, cap in (({Future(): item}, 0.),):
+        state = dict(collects=0, available=int(.5 * reservation))
+        monkeypatch.setattr(harness, 'mem_available_bytes', lambda: state['available'])
+        def freeing():
+            state['collects'] += 1
+            if state['collects'] == 2:
+                state['available'] = 2 * reservation
+        admitted, record = harness.admit_any([item], harness.DEFAULT_RESERVATIONS_GB, 0, pending, wait_seconds=cap,
+                                             collect=freeing, is_halted=lambda: None)
+        assert admitted is item and record['outcome'] == 'admitted'
+    # A refusal raised inside the check, after one poll, carries the wait.
+    readings = iter([int(.5 * reservation), None])
+    monkeypatch.setattr(harness, 'mem_available_bytes', lambda: next(readings))
+    with pytest.raises(worker.RequalificationError, match='readable MemAvailable') as caught:
+        harness.admit_any([item], harness.DEFAULT_RESERVATIONS_GB, 0, {Future(): item}, poll_seconds=1., is_halted=lambda: None)
+    assert caught.value.waited_seconds == 1.
+
+
+def test_missing_reservation_is_recorded_as_that_items_refusal(tmp_path, monkeypatch):
+    """Round 7 finding 4: an item of a kind with no memory reservation is
+    refused as that item, with the reason and its wait, and the attempt fails
+    without submitting it; the handler computes nothing that can raise, so the
+    refusal is never replaced by a generic dispatch error."""
+    from concurrent.futures import Future
+    known = dict(item_id='k', kind='fixture', job=dict(id='k', config={}))
+    unknown = dict(item_id='u', kind='unknown_kind', job=dict(id='u', config={}))
+    reservation = harness.reservation_bytes(known, harness.DEFAULT_RESERVATIONS_GB)
+    # The check names the item whose reservation is missing, at the first
+    # check, before any poll: the known item does not fit, the unknown one
+    # has no reservation.
+    monkeypatch.setattr(harness.time, 'sleep', lambda seconds: None)
+    monkeypatch.setattr(harness, 'mem_available_bytes', lambda: int(.5 * reservation))
+    with pytest.raises(worker.RequalificationError, match='no memory reservation for job kind unknown_kind') as caught:
+        harness.admit_any([known, unknown], harness.DEFAULT_RESERVATIONS_GB, 0, {Future(): known}, poll_seconds=1.,
+                          is_halted=lambda: None)
+    assert caught.value.item is unknown and caught.value.waited_seconds == 0.
+    # An explicit refusal names the smallest candidate.
+    monkeypatch.setattr(harness, 'mem_available_bytes', lambda: 0)
+    with pytest.raises(worker.RequalificationError, match='nothing running') as caught:
+        harness.admit_any([known], harness.DEFAULT_RESERVATIONS_GB, 0, {}, is_halted=lambda: None)
+    assert caught.value.item is known
+    # End to end: fixture items with the fixture reservation removed.
+    jobs = fixture_jobs(2)
+    src = source(tmp_path, 'nores', jobs, selection='all')
+    sample_path = tmp_path / 'sample.json'
+    document = harness.freeze_sample([src], sample_path)
+    items = harness.unseal(document)['items']
+    monkeypatch.setattr(harness, 'DEFAULT_RESERVATIONS_GB', {})
+    monkeypatch.setattr(harness, 'run_item', lambda *a, **kw: pytest.fail('an item without a reservation was submitted'))
+    monkeypatch.setattr(harness, 'mem_available_bytes', lambda: 10 * reservation)
+    acceptance = harness.replay(sample_path, tmp_path / 'attempt', workers=2, headroom_gb=0.)
+    assert not acceptance['passed'] and acceptance['dispatch_error'] is None
+    refused = [w for w in acceptance['admissions'] if w['outcome'] == 'refused']
+    assert len(refused) == 1 and refused[0]['item_id'] == items[0]['item_id'] and refused[0]['job_id'] == items[0]['job']['id']
+    assert refused[0]['error'] == 'no memory reservation for job kind fixture' and refused[0]['waited_seconds'] == 0.
+    assert acceptance['first_failure']['item_id'] == items[0]['item_id']
+    assert acceptance['first_failure']['error'] == 'no memory reservation for job kind fixture'
+    by_id = {r['item_id']: r for r in acceptance['items']}
+    assert by_id[items[0]['item_id']]['error'] == 'no memory reservation for job kind fixture'
+    assert by_id[items[1]['item_id']]['error'].startswith('not executed')
+    assert acceptance['admission_waits']['by_outcome'] == {'admitted': 0, 'refused': 1, 'halted': 0}
+
+
+def test_first_admissible_dispatch_leaves_results_and_acceptance_order_unchanged(tmp_path, monkeypatch):
+    """A small item behind a large one is dispatched first when only it fits;
+    the acceptance's item list stays in sample order and every per-item
+    result is identical to in-order dispatch."""
+    jobs = fixture_jobs(3)
+    src = source(tmp_path, 'order', jobs, selection='all')
+    sample_path = tmp_path / 'sample.json'
+    document = harness.freeze_sample([src], sample_path)
+    items = harness.unseal(document)['items']
+    big = items[0]['item_id']
+    real_reservation = harness.reservation_bytes
+    monkeypatch.setattr(harness, 'reservation_bytes', lambda item, r: int((8.0 if item['item_id'] == big else 1.0) * harness.GB))
+    # Memory as the checks see it: first only a small item fits (1.5 GB), then
+    # with the first small item running nothing more fits, then plenty.
+    sequence = iter([int(1.5 * harness.GB), int(1.5 * harness.GB)])
+    monkeypatch.setattr(harness, 'mem_available_bytes', lambda: next(sequence, int(20 * harness.GB)))
+    sys.set_int_max_str_digits(0)  # as the attempt sets it before fingerprinting
+    fingerprint = {k: worker.host_fingerprint().get(k) for k in harness.HOST_KEYS}
+    def quick(item, sample_sha256, output_dir, *args, **kw):
+        import time as t
+        t.sleep(.1)
+        return dict(item_id=item['item_id'], job_id=item['job']['id'], passed=True, exit_code=0, checkout=item['checkout'],
+                    before_sha256=item['item_id'], after_sha256=item['item_id'],
+                    runtime=dict(fingerprint, code_identity='x', source_manifest={'f': 'h'}))
+    monkeypatch.setattr(harness, 'run_item', quick)
+    first = harness.replay(sample_path, tmp_path / 'first', workers=2, headroom_gb=0.)
+    # Out of sample order: the first small item, then the big one, then the
+    # other small one.
+    assert [w['item_id'] for w in first['admissions']] == [items[1]['item_id'], big, items[2]['item_id']]
+    assert first['admissions'][1]['waited_seconds'] > 0
+    monkeypatch.setattr(harness, 'reservation_bytes', real_reservation)
+    monkeypatch.setattr(harness, 'mem_available_bytes', lambda: 10 ** 12)
+    # The comparison run dispatches in sample order by the flag, not merely
+    # because memory is abundant.
+    in_order = harness.replay(sample_path, tmp_path / 'inorder', workers=2, headroom_gb=0., in_order=True)
+    assert [w['item_id'] for w in in_order['admissions']] == [i['item_id'] for i in items]
+    assert first['passed'] and in_order['passed']
+    assert [r['item_id'] for r in first['items']] == [r['item_id'] for r in in_order['items']] == [i['item_id'] for i in items]
+    keys = ('item_id', 'job_id', 'passed', 'exit_code', 'before_sha256', 'after_sha256')
+    assert [{k: r[k] for k in keys} for r in first['items']] == [{k: r[k] for k in keys} for r in in_order['items']]
+    assert first['admission_policy']['dispatch_order'] == 'first admissible within the checkout'
+
+
 def test_admission_proceeds_once_a_completed_job_is_collected(tmp_path, monkeypatch):
     """Fix 4 of round 2: a finished job's reservation is released before the
     next admission check, so the next item admits instead of timing out."""
@@ -638,6 +914,7 @@ def test_admission_proceeds_once_a_completed_job_is_collected(tmp_path, monkeypa
     sample_path = tmp_path / 'sample.json'
     document = harness.freeze_sample([src], sample_path)
     items = harness.unseal(document)['items']
+    sys.set_int_max_str_digits(0)  # as the attempt sets it before fingerprinting
     fingerprint = {k: worker.host_fingerprint().get(k) for k in harness.HOST_KEYS}
     def fake_run_item(item, sample_sha256, output_dir, *args, **kw):
         import time as t
@@ -719,6 +996,7 @@ def test_worker_cap_group_barrier_and_memory_admission(tmp_path, monkeypatch):
     two = dict(sample, items=items)
     two_path = tmp_path / 'two.json'
     a.atomic_json(two_path, harness.seal(two))
+    sys.set_int_max_str_digits(0)  # as the attempt sets it before fingerprinting
     fingerprint = {k: worker.host_fingerprint().get(k) for k in harness.HOST_KEYS}
     events = []
     def fake_run_item(item, sample_sha256, output_dir, *args, **kw):
