@@ -2,10 +2,10 @@
   "schema": "lineage-a17-sealed-host-entry-v1",
   "payload": {
     "schema": "lineage-a17-host-payload-v1",
-    "record_date": "2026-10-30",
+    "record_date": "2026-10-31",
     "unit_name": "X2-1",
     "host_class": "X2",
-    "record_status": "initial adoption metadata; qualifications pending; not dispatch admission",
+    "record_status": "post-update fixed-code requalification accepted on the acceptance replay of 2026-10-30/31 (operator approval bound in operator_approval); launch-identity qualification pending; not dispatch admission",
     "scope": "A17 initial register; option C campaign remains X2-1 only",
     "cpu": {
       "available_cpu_budget": 32,
@@ -181,8 +181,8 @@
         "authority_basis": "Operator-provided ownership and control statement for this register; standing Lineage service rule.",
         "resident_memory_gb_approx_when_loaded": 70,
         "memory_evidence": "power_measurement",
-        "last_reported_state": "up and healthy after preparation cleanup on 2026-10-30; not a current health probe",
-        "state_evidence": "preparation_report",
+        "last_reported_state": "restored and healthy at 2026-10-31T23:48:06Z after the acceptance replay (supervised restoration in the run log); not a current health probe",
+        "state_evidence": "run_log",
         "control_setting": "llm",
         "permitted_actions": [
           "llm down",
@@ -206,25 +206,146 @@
       "does_not_imply_dispatch_admission": true
     },
     "requalification_checkout": {
-      "commit": "50a3d096c9b04863938624b41727dde1e269a187",
+      "commit": "2ced87ba957fd7bd8aed61fa0e1ab6c95035be9a",
       "code_identity": "57141a5731dfe3dbf334e4c9374559afe873c12e5c6c354b5869e0ffbdff777e",
-      "role": "preparation checkout, not a released final stage 2 successor",
-      "evidence": "preparation_report"
+      "role": "harness checkout for the acceptance replay; differs from the preparation checkout 50a3d096c9b04863938624b41727dde1e269a187 in the harness and its tests only, with the identity unchanged; not a released final stage 2 successor",
+      "evidence": "refreeze_report"
     },
     "qualification_records": {
       "post_update_fixed_code": {
-        "status": "pending",
-        "accepted": false,
-        "acceptance_replay_started": false,
-        "sealed_sample_digest": "f75842f460d1c657e287820d1d906fa6da21c74ab6a2cc32aa0808acc3c078b4",
+        "status": "accepted",
+        "accepted": true,
+        "acceptance_replay_started": true,
+        "plan": "REQUALIFICATION_PLAN.public_v2.md section 6, criteria 1 to 5",
+        "sealed_sample_digest": "e3601ee4d09257d6de8cd25d65378ac324d882beb1c2eadef2d4e6217ab239bb",
         "sealed_sample_items": 1049,
-        "seal_basis": "reported preparation freeze; not an acceptance record",
-        "acceptance_record": {
-          "value": null,
-          "reason": "No acceptance replay or accepted pass exists in the supplied preparation record."
+        "seal_basis": "refreeze on the fixed harness at 2ced87ba, 2026-10-30, from the byte-identical sources.json; the same 1,049 items, order and groups as the preparation freeze",
+        "preparation_seal_retained": {
+          "digest": "f75842f460d1c657e287820d1d906fa6da21c74ab6a2cc32aa0808acc3c078b4",
+          "role": "preparation provenance only, never executed for acceptance"
         },
-        "preparation_blockers": "Preparation report requires harness authority and memory-admission repairs and a refreeze before acceptance replay. The recorded seal is preparation history and is not claimed launch-ready.",
-        "evidence": "preparation_report"
+        "acceptance_record": {
+          "schema": "v3-requalification-acceptance-1",
+          "payload_sha256": "b3b2113d3b46938c7e32057163ef632c20cb8bb6a86fce4497d4c1390a401e10",
+          "file_sha256": "3f5cd0e1eb728aebd19ed5d15663627ac22d0cd113cf876eaad7cfa6de3fc8ef",
+          "location": "operational archive, requalification_2026-10-30/evidence/x2-1/attempt_1/acceptance.json (private); the file on X2-1 is the original",
+          "started_utc": "2026-10-30T17:35:39Z",
+          "finished_utc": "2026-10-31T23:47:21Z",
+          "executed": 1049,
+          "item_count": 1049,
+          "passed_items": 1049,
+          "exit_codes_zero": true,
+          "environment_mismatches": 0,
+          "restarts": 0,
+          "resumed": 0,
+          "first_failure": null,
+          "checkpoint_comparisons": {
+            "items": 9,
+            "checkpoints": 155,
+            "passed": 155
+          },
+          "comparison": "canonical job plus result bytes, excluded result root fields rescore_seconds, scoring_seconds_by_k_star, seconds, trajectory_seconds; archived output file hash verified against the frozen sample before each comparison"
+        },
+        "harness": {
+          "commit": "2ced87ba957fd7bd8aed61fa0e1ab6c95035be9a",
+          "sha256": {
+            "__init__.py": "e334c964ac0b8889c2deece42ab9f0cf1eac85b20dd8e4babb655c15f0523637",
+            "harness.py": "328d7a974607df79ce92a4c518dc015b84ed5ad3f1ce2ef89e6b3e6ae46aee2b",
+            "worker.py": "9866557093b07c406dfc1f0b217e052d1ba2d583db5c1baea58cd46226d55387"
+          },
+          "fixture_tests": "32 passed on 2ced87ba (refreeze report step 3)"
+        },
+        "producing_identities": {
+          "c19b54f5bde7180c78a5eba4721c33527c47b84c4d93d2fae757fd3e31452810": 434,
+          "5df9866f1a59ab9c6c67660c18fbee694a64f97d5eebb65a41c8deaf2d650d1c": 5,
+          "174ab6600e0bc3514ee4b0f553a85b5e426aea4203621125debfa3cd12fd5afd": 610
+        },
+        "replay_configuration": {
+          "workers": 24,
+          "worker_cap": 31,
+          "threads_per_worker_configured": 1,
+          "threads_verified": {
+            "effective": 1,
+            "library": "libscipy_openblas64_-32a4b2a6.so",
+            "items": 1049
+          },
+          "headroom_bytes": 17179869184,
+          "headroom_reason": "operator 2026-10-30: stage 1 registered runs on this host ran at a 6 GB reserve with no OOM or swap event",
+          "reservations_sha256": "916eedcbb91f77eed3a73db54b2a64629feadc0ef31b8ea2ba1989fb96975346",
+          "admission": "first admissible within the checkout, unbounded wait, barrier between checkouts",
+          "admission_outcomes": {
+            "admitted": 1049,
+            "halted": 0,
+            "refused": 0,
+            "waited": 198,
+            "max_wait_seconds": 5338.0,
+            "total_wait_seconds": 65125.0
+          },
+          "boot_id": "abb631ac-a2e0-4de0-ac50-495f8a063e3c",
+          "power_mode": "performance (powerprofilesctl and governor, run log)"
+        },
+        "service_state": {
+          "llm-server": "stopped 2026-10-30T17:35:33Z, verified down before the harness started; restarted 2026-10-31T23:47:21Z, /health ok 2026-10-31T23:48:06Z",
+          "guppi-thermal-feed": "active throughout, untouched"
+        },
+        "cost": {
+          "window_utc": [
+            "2026-10-30T17:35:33Z",
+            "2026-10-31T23:48:06Z"
+          ],
+          "window_hours": 30.21,
+          "rate": 1.0,
+          "charged_hours": 30.2,
+          "previously_charged_hours": 1.1,
+          "total_charged_hours": 31.3,
+          "ceiling_hours": 64,
+          "remaining_hours": 32.7,
+          "replay_budget_estimate_hours": [
+            47.3,
+            47.5
+          ]
+        },
+        "timing_against_archived": {
+          "overall_ratio": 0.949,
+          "worker_hours_measured": 293.0,
+          "worker_hours_archived": 308.7,
+          "per_class_ratio_range": [
+            0.67,
+            1.29
+          ],
+          "slower_classes": {
+            "a5_fvplain": 1.29,
+            "a14_validate_plain_ext2": 1.23,
+            "a4_validate.plain.primary": 1.21,
+            "a4_fit.double_length": 1.17,
+            "a4_fit.double_population": 1.16,
+            "a4_fit.primary": 1.13
+          },
+          "rerun": 0.9,
+          "note": "timing is not a pass criterion; the stage 2 estimate is repriced from these before the launch"
+        },
+        "memory": {
+          "items_above_reservation": 0,
+          "largest_peak_gb": 11.69,
+          "largest_peak_class": "a4_validate.fv.double_length",
+          "largest_peak_reservation_gb": 15.03
+        },
+        "interpreter_review": {
+          "record": "ACCEPTANCE_REVIEW.md, requalification_2026-10-30, 2026-10-31",
+          "sha256": "d31681942c222c7adb4360e373058e5ae86a9ffbbcaa1296e7abfe7f58e097d1",
+          "verdict": "pass; criteria 1 to 4 satisfied and the interpreter half of criterion 5"
+        },
+        "operator_approval": {
+          "value": null,
+          "reason": "the operator's explicit approval of X2-1's post-update qualification (criterion 5) is pending; bound in the envelope's operator_approval when given"
+        },
+        "evidence": [
+          "acceptance_record",
+          "run_log",
+          "refreeze_report",
+          "interpreter_review"
+        ],
+        "scope": "environment requalification of the original producing identities only; grants no output compatibility, launch-identity qualification, workload kind, rate or dispatch admission"
       },
       "launch_identity": {
         "value": null,
@@ -296,17 +417,44 @@
         "record": "DECISIONS_2026-10-30.md",
         "sha256": "e96673c11320476c5b0b0dbbc0bf03695e0207777ba2c5e94b15487abdd2f553",
         "use": "X2-1-only Performance campaign, X2-2 not requalified"
+      },
+      "acceptance_record": {
+        "record": "X2-1 requalification acceptance record acceptance.json, attempt 1, 2026-10-31",
+        "sha256": "3f5cd0e1eb728aebd19ed5d15663627ac22d0cd113cf876eaad7cfa6de3fc8ef",
+        "payload_sha256": "b3b2113d3b46938c7e32057163ef632c20cb8bb6a86fce4497d4c1390a401e10",
+        "use": "pass verdict, counts, hashes, configuration, environment and timing metadata only; no scientific values"
+      },
+      "run_log": {
+        "record": "X2-1 attempt_1_run.log, 2026-10-30/31",
+        "sha256": "440a97d620c767d660fbc2bfb7d0be97ade0906724201e929d810d4bdbec44d1",
+        "use": "service stand-down and restoration times, power mode, sample and reservation hashes, exit code"
+      },
+      "refreeze_report": {
+        "record": "X2-1 requalification refreeze report, 2026-10-30",
+        "sha256": "2f563527dc933a77d87eec7df90d61d7d282954e46532ae06f79fea862cc0354",
+        "use": "sample v2 seal, harness checkout, fixture tests, configuration test, load sheet and the proposed command"
+      },
+      "interpreter_review": {
+        "record": "ACCEPTANCE_REVIEW.md, 2026-10-31",
+        "sha256": "d31681942c222c7adb4360e373058e5ae86a9ffbbcaa1296e7abfe7f58e097d1",
+        "use": "criteria 1 to 5 review, findings, charge"
       }
+    },
+    "revision": {
+      "number": 2,
+      "supersedes_payload_sha256": "59f1fd7417e669b1a2d2c7d5202424299cce96a82042aca7df98340e73658192",
+      "supersedes_commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
+      "reason": "records the accepted post-update fixed-code requalification of 2026-10-31; metadata otherwise as revision 1"
     }
   },
   "seal": {
     "algorithm": "sha256",
     "serialization": "UTF-8 JSON, sorted keys, separators comma and colon without whitespace, ensure_ascii=true, no NaN, no trailing newline; hash the payload object only",
-    "payload_sha256": "59f1fd7417e669b1a2d2c7d5202424299cce96a82042aca7df98340e73658192"
+    "payload_sha256": "92d9443b313c79a48d242b7300f30dfffc4fc80c2cd8231d6354f2f8fd993fb2"
   },
   "operator_approval": {
-    "reference": "Lineage v3 records, stage2_plan_2026-10-29/DECISIONS_2026-10-30.md item 5: the operator's go of 2026-10-30 ('go on 2 and all commits'), binding payload digest 59f1fd7417e669b1a2d2c7d5202424299cce96a82042aca7df98340e73658192",
-    "reason": "Approved as the initial metadata entry at A17's adoption. The payload is unchanged from the staged envelope and its seal was re-verified at commit.",
-    "scope": "initial metadata entry only; does not accept a pending qualification or authorize dispatch"
+    "reference": "Lineage v3 records, requalification_2026-10-30/DECISIONS_2026-10-31.md (SHA-256 64cfb5b6cfb067e8f9c20e666744dff05d0612852cf505dd16c72c1a8799dbb6): the operator's approval of 2026-10-31 ('All approved') of X2-1's post-update fixed-code qualification on the acceptance record payload seal b3b2113d3b46938c7e32057163ef632c20cb8bb6a86fce4497d4c1390a401e10 and the frozen sample seal e3601ee4d09257d6de8cd25d65378ac324d882beb1c2eadef2d4e6217ab239bb, and of this register revision, binding payload digest 92d9443b313c79a48d242b7300f30dfffc4fc80c2cd8231d6354f2f8fd993fb2",
+    "reason": "Approved on the interpreter review ACCEPTANCE_REVIEW.md (SHA-256 d31681942c222c7adb4360e373058e5ae86a9ffbbcaa1296e7abfe7f58e097d1). The payload is unchanged from the staged revision 2 envelope and its seal was re-verified at commit. The payload's own qualification_records.post_update_fixed_code.operator_approval field records the state at seal time (pending) and points here.",
+    "scope": "revision 2: the accepted post-update fixed-code qualification only; not a stage 2 launch, workload kind, rate, dispatch or launch-identity approval"
   }
 }
