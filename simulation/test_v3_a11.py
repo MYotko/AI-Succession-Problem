@@ -399,7 +399,10 @@ def test_toy_pipeline_through_a5_with_non24_hour_ceiling(tmp_path):
         assert dict(profile, workers_local=[2, 4]) == legacy_profiles[phase]
     original_plan = a4.prepare(source, cal_path, None, 1., probe, dict(toy, census_measure=38),
                               instrument=tables.family_instrument('sqrt'))
-    assert dict(plan, configuration=original_plan['configuration']) == original_plan
+    # A stage 2 family's plan adds the family-path clause fields (A16 items 1
+    # and 4), outside the plan hash; everything else is A4's plan unchanged.
+    assert dict(plan, configuration=original_plan['configuration']) == dict(original_plan, a10_family='sqrt', a10_stage=2)
+    assert a4._recompute_plan_hash(plan) == original_plan['plan_hash']
     plan_path, run = tmp_path / 'a4_plan.json', tmp_path / 'a4'
     a.atomic_json(plan_path, a.seal(plan))
     for phase in plan['phases']:

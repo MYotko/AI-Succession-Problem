@@ -1208,13 +1208,26 @@ def test_a4_failed_part2_is_sealed_before_publication(tmp_path, monkeypatch):
     monkeypatch.setattr(a, 'verify_registration', lambda *args, **kw: None)
     monkeypatch.setattr(cal, 'validate_calibration', lambda document, **kw: a.unseal(document))
     target = tmp_path / 'refused.json'
-    before = candidate.read_bytes()
+    # The toy fixture published this run root non-registered; the registered
+    # attempt below is the first publication of this run root under its pin.
+    for suffix in ('.json', '.cell_results.json', '.compatibility.json'):
+        candidate.with_suffix(suffix).unlink()
     with pytest.raises(ValueError, match='cap exceeded'):
         a4.publish(plan, run, source, a.read(a.SIMULATION / cal_path), target, registered=True)
     record = a.unseal(a.read(run / 'a13_admission_check.json'))
     assert record['outcome'] == 'refused' and record['residual_count'] > record['cap']
     assert all(k not in str(record) for k in ('n_traj', 'visits', 'width', 'cell_tests', 'n_star'))
-    assert not target.exists() and candidate.read_bytes() == before
+    # A16's coordinated-change clause: the refused candidate, its cell results
+    # and its compatibility receipt are preserved in the run root; the target is
+    # never touched, and the refused manifest carries no admission binding.
+    assert not target.exists()
+    refused = a.unseal(a.read(candidate))
+    assert 'a13_admission' not in refused['manifest'] and refused['fixture'] is False
+    sidecar = a.unseal(a.read(candidate.with_suffix('.cell_results.json')))
+    receipt = a.unseal(a.read(candidate.with_suffix('.compatibility.json')))
+    assert sidecar['table_seal_sha256'] == receipt['table_seal_sha256'] == a.read(candidate)['sha256']
+    assert receipt['table_file_sha256'] == a.file_hash(candidate) and receipt['plan_hash'] == plan['plan_hash']
+    assert ext.original_inputs(original, run, candidate, registered=False)[0]['plan_hash'] == plan['plan_hash']
 
 
 def test_report_separates_extension_cells_and_preserves_ordinary_report(tmp_path):

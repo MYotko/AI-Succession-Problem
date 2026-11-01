@@ -429,6 +429,17 @@ def _require_registry(seed_registry):
         raise ValueError("a registered A6 run spec requires the sealed A6 seed registry")
 
 
+def _require_r4_paths(*paths):
+    """A6's R4 run-spec builders carry the R4 instrument and A7's 90-hour
+    ceiling, which A10 section 12 confines to A6 under R4. An A10 stage table
+    path refuses them: the stage 2 arms on the corrected instrument come from
+    tables_a10.stage2_run_specs under A15's ceilings (audit A finding 8)."""
+    for path in paths:
+        if "a10_stage" in str(path).replace("\\", "/"):
+            raise ValueError("A6 R4 run spec builders refuse A10 stage table paths; stage 2 arms use "
+                             "tables_a10.stage2_run_specs under A15's ceilings")
+
+
 def nominal_run_spec(rerun_commit, registration, *, a1_source_root, probe_root, rerun_manifest, repo=None,
                      ledger=None, seed_registry=None, machine="x2", prior_components=(),
                      calibration_path=NOMINAL_CALIBRATION_PATH, tables_path=NOMINAL_TABLES_PATH):
@@ -438,6 +449,7 @@ def nominal_run_spec(rerun_commit, registration, *, a1_source_root, probe_root, 
     registry first, requires the consumption log to be up to date with every
     earlier launch, and takes its wall ceiling from the budget on ``machine``."""
     _require_registry(seed_registry)
+    _require_r4_paths(tables_path)
     assert_rerun_path_invariant(rerun_commit, repo)
     jobs = build_weight_corner_jobs(calibration_path, tables_path) + build_horizon_jobs(calibration_path, tables_path)
     probe = _probe_or_empty(probe_root)
@@ -460,8 +472,9 @@ def crowding_run_spec(rerun_commit, registration, *, crowding_paths, a1_source_r
     separate spec, so a failed crowding family reports only the crowding arm as
     not run (A6)."""
     _require_registry(seed_registry)
-    assert_rerun_path_invariant(rerun_commit, repo)
     crowding_cal, crowding_tables = crowding_paths
+    _require_r4_paths(crowding_tables, tables_path)
+    assert_rerun_path_invariant(rerun_commit, repo)
     jobs = build_crowding_jobs(crowding_cal, crowding_tables)
     probe = _probe_or_empty(probe_root)
     forbidden = forbidden_seeds(a1_source_root, probe_root, rerun_manifest=rerun_manifest, registered=True,
@@ -484,6 +497,7 @@ def sigma_run_spec(rerun_commit, registration, variant, variant_paths, *, a1_sou
     if variant not in SIGMA_VARIANTS:
         raise ValueError("unknown sigma0^2 variant %r" % variant)
     _require_registry(seed_registry)
+    _require_r4_paths(variant_paths[1], tables_path)
     assert_rerun_path_invariant(rerun_commit, repo)
     jobs = build_sigma_jobs({variant: variant_paths})
     jobs = [j for j in jobs if j["config"]["a6_variant"] == variant]

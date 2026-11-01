@@ -93,7 +93,10 @@ def assert_a5_seeds(fv_job_seeds, forbidden):
     for seed in fv_job_seeds:
         for r in A5_REPLICATES:
             value = fvplain_seed(seed, r)
-            if value in forbidden or (1 << 60) <= value < (1 << 62):
+            # The extension reserves: A13's [2^60, 2^61), A14's [2^61, 2^62) and
+            # A16's eight blocks [2^62, 12 x 2^60) (A16 item 3: later phases,
+            # including A5, forbid the entire reserve).
+            if value in forbidden or (1 << 60) <= value < (12 << 60):
                 raise cv.SeedCollision("A5 seed collides with a forbidden seed: %r" % ((seed, r), ))
             a5[(int(seed), r)] = value
     values = list(a5.values())

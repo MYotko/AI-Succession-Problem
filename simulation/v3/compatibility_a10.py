@@ -23,6 +23,9 @@ _TIMING = {"seconds", "trajectory_seconds", "rescore_seconds", "scoring_seconds_
 _PROCESS = {"code_hash"}  # Producer provenance, separately checked against X/Y.
 COMPARISON = {"canonical": "job plus result", "excluded_result_root_fields": sorted(_TIMING | _PROCESS),
               "producer_metadata": "envelope and optional result.code_hash verified separately against X and Y"}
+# The A14 and A16 extension kinds replay through replay_a16's empty-scratch
+# adapters; A13's keeps replay_a14's. Normal execution would load checkpoints.
+EXTENSION_REPLAY_KINDS = ('a14_validate_plain_ext2', 'a16_validate_plain_r1', 'a16_validate_plain_r2')
 
 
 def record_name(producing, new):
@@ -152,6 +155,9 @@ def _execute_proof(item):
             if item['job']['kind'] == 'a13_validate_plain_ext' and item.get('a13_replay'):
                 from .replay_a14 import replay
                 result = replay(item)
+            elif item['job']['kind'] in EXTENSION_REPLAY_KINDS and item.get('extension_replay'):
+                from .replay_a16 import replay
+                result = replay(item)
             else:
                 result = execute(item["job"], registered=False, registration=None, root=Path(item["phase_root"]))
         _require(result.get("code_hash", code_identity()) == code_identity(), "re-execution result has wrong producer metadata")
@@ -204,17 +210,28 @@ def collect_record(sources, reasons_path):
                 checkpoints = [read(phase_root / 'a13_checkpoints' / job['id'] / f'{r["replicate"]:02d}.json')
                                for r in output['result']['replicates']]
                 selected_jobs[job['id']]['a13_replay'] = binding(spec, job, output['result'], checkpoints)
+            if job['kind'] in EXTENSION_REPLAY_KINDS:
+                from .replay_a16 import binding as extension_binding, checkpoint_directory
+                checkpoints = [read(phase_root / checkpoint_directory(job['kind']) / job['id'] / f'{r["replicate"]:02d}.json')
+                               for r in output['result']['replicates']]
+                selected_jobs[job['id']]['extension_replay'] = extension_binding(spec, job, output['result'], checkpoints)
             from .compatibility_shards_a11 import resource_estimate
-            if job['kind'] == 'a13_validate_plain_ext' and spec['registered'] and 'pull_dispatch' not in spec:
-                # The A14 adapter also carries the original sealed scheduling
-                # class into the proof. The single-host A13 plan has no pull
+            extension = job['kind'] == 'a13_validate_plain_ext' or job['kind'] in EXTENSION_REPLAY_KINDS
+            if extension and spec['registered'] and 'pull_dispatch' not in spec:
+                # The replay adapters also carry the original sealed scheduling
+                # class into the proof. A single-host extension plan has no pull
                 # extension; its original validation plan supplies that class.
-                _require(file_hash(spec['original_plan_path']) == spec['original_plan_file_sha256'],
-                         'A13 replay original plan changed')
-                original = unseal(read(spec['original_plan_path']))
                 from .table_validation_a4 import _recompute_plan_hash
-                _require(_recompute_plan_hash(original) == original['plan_hash']
-                         and original['plan_hash'] == spec['original_plan_hash'], 'A13 replay original plan binding differs')
+                if job['kind'] == 'a13_validate_plain_ext':
+                    _require(file_hash(spec['original_plan_path']) == spec['original_plan_file_sha256'],
+                             'A13 replay original plan changed')
+                    original = unseal(read(spec['original_plan_path']))
+                    _require(_recompute_plan_hash(original) == original['plan_hash']
+                             and original['plan_hash'] == spec['original_plan_hash'], 'A13 replay original plan binding differs')
+                else:
+                    from .replay_a16 import original_validation_plan
+                    original = original_validation_plan(spec)
+                    _require(_recompute_plan_hash(original) == original['plan_hash'], 'extension replay original plan binding differs')
                 source = next(j for j in original['jobs'] if j['config']['phase'] == 'validate_plain'
                               and j['config']['a1_job']['id'] == job['config']['a1_job']['id'])
                 resource = resource_estimate(original, source)

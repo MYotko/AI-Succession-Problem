@@ -17,6 +17,11 @@ from .budget_a6 import REALISM, RESERVE_SECONDS, PROGRAM_CEILING_HOURS
 SAMPLE_TAG = "A10-cost-pilot-2026-10-07"
 TOY_SETTINGS = {"groups": 3, "runs_per_group": 2, "particles": 2, "burn": 30, "measure": 8}
 POOLED_PHASE = "pooled"
+# A7's 90 X2-equivalent hours apply to A6 on the R4 instrument only (A10 section
+# 12). The comparison below is a historical reference, never stage 2 budget
+# authority: A15 supplies the stage 2 ceilings (audit A finding 8).
+A7_CEILING_SCOPE = ("A7's 90 X2-equivalent-hour ceiling applies to A6 on the R4 instrument only (A10 section 12); "
+                    "this comparison is not stage 2 budget authority, which amendment A15 supplies")
 
 
 def reduced_pilot(spec):
@@ -315,10 +320,11 @@ def project(spec, root, configurations, selections, *, relative_to_x2=None):
             "status": "toy_execution_only" if spec["toy"] else "X2_projection" if can_project else "local_costs_only",
             "actual_x2": actual_x2, "relative_to_x2": relative, "realism": REALISM, "per_phase_capability": details,
             "launch_reserves_x2_hours": reserves, "total_x2_hours_conservative": workload + reserves if can_project else None,
-            "a6_ceiling_x2_hours": PROGRAM_CEILING_HOURS,
+            "a7_r4_a6_ceiling_x2_hours": PROGRAM_CEILING_HOURS,
+            "a7_r4_a6_ceiling_scope": A7_CEILING_SCOPE,
             "components_x2_hours_before_reserves": components,
             "a6_x2_hours_conservative": a6_total,
-            "a6_within_ceiling": a6_total <= PROGRAM_CEILING_HOURS if a6_total is not None else None,
+            "a6_within_a7_r4_ceiling": a6_total <= PROGRAM_CEILING_HOURS if a6_total is not None else None,
             "k_star_scoring_accounting": "per-arm estimates are subsets of nominal estimation, counted once in totals",
             "limits": ["fixture continuation tables measure run cost only", "route maxima are scenarios, not guarantees",
                        "short configuration work is excluded from samples", "toy timings cannot set registered ceilings"]}
@@ -481,8 +487,9 @@ def project_reduced(spec, root, configurations, selections, *, relative_to_x2=No
             "estimated_parts_x2_hours": full - measured_only if can_project else None,
             "per_family": families, "components_x2_hours_before_reserves": all_components,
             "components_without_estimated_parts_x2_hours_before_reserves": measured_components,
-            "a6_ceiling_x2_hours": PROGRAM_CEILING_HOURS, "a6_x2_hours_conservative": a6,
-            "a6_within_ceiling": a6 <= PROGRAM_CEILING_HOURS if can_project else None,
+            "a7_r4_a6_ceiling_x2_hours": PROGRAM_CEILING_HOURS, "a7_r4_a6_ceiling_scope": A7_CEILING_SCOPE,
+            "a6_x2_hours_conservative": a6,
+            "a6_within_a7_r4_ceiling": a6 <= PROGRAM_CEILING_HOURS if can_project else None,
             "k_star_scoring_accounting": "per-arm estimates are subsets of nominal estimation, counted once in totals",
             "limits": ["fixture continuation tables measure run cost only", "route maxima are scenarios, not guarantees",
                        "without-estimated totals retain all launch reserves", "toy timings cannot set registered ceilings",

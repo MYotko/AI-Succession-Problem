@@ -729,6 +729,35 @@ def registered_publish_guard(plan):
         raise RuntimeError("registered publish rejects a settings override")
 
 
+def stage2_publication_guard(plan, target_path, source_family=None):
+    """The family-path clause (A16 items 1 and 4): a registered plan of a stage
+    2 family publishes only to STAGE2_PATHS[family]'s fixed target from its
+    frozen calibration string. The check keys on the stage 2 plan fields
+    (``a10_stage`` 2, ``a10_family``) that no nominal or stage 1 plan carries, so
+    historical publication is unchanged; ``source_family``, the hash-bound
+    family of the verified A1 source, also enters the check when it is a stage 2
+    family, so stripping the plan fields cannot bypass it. Returns the family,
+    or None when the plan is not a stage 2 plan."""
+    from .tables_a10 import STAGE2_FAMILIES, STAGE2_PATHS
+    declared = plan.get("a10_stage") == 2 or plan.get("a10_family") in STAGE2_FAMILIES
+    if source_family in STAGE2_FAMILIES:
+        if plan.get("a10_family") != source_family or plan.get("a10_stage") != 2:
+            raise ValueError("stage 2 source family %s requires a plan naming that family and stage 2" % source_family)
+        declared = True
+    if not declared:
+        return None
+    family = plan.get("a10_family")
+    if family not in STAGE2_FAMILIES or plan.get("a10_stage") != 2:
+        raise ValueError("stage 2 validation plan names no stage 2 family and stage")
+    calibration_path, tables_path = STAGE2_PATHS[family]
+    if plan.get("calibration_path") != calibration_path:
+        raise ValueError("stage 2 family calibration string differs from the family-path clause")
+    # scoped() compares without the Windows extended-length prefix, as the writer does.
+    if scoped(target_path) != scoped(SIMULATION / tables_path):
+        raise ValueError("stage 2 family publication target differs from the family-path clause")
+    return family
+
+
 def publish(plan, run_root, source_root, calibration, target, *, registered=True):
     """Assemble and write the A4 family, with a sealed compatibility receipt."""
     from .production_tables import write_tables, ProductionTables
@@ -737,11 +766,20 @@ def publish(plan, run_root, source_root, calibration, target, *, registered=True
     # a smoke plan can never be published registered.
     from .instrument import declaration
     instrument = declaration(plan.get("instrument"))
+    target_path = scoped(target) if str(Path(target).resolve()).startswith(str(ROOT)) else SIMULATION / target
+    if registered:
+        # The family-path clause refuses a misplaced stage 2 publication before
+        # any read of the sources and before any write.
+        stage2_publication_guard(plan, target_path)
+    info = None
     if instrument.a10:
         from .tables_a10 import verify_estimation_source
-        verify_estimation_source(source_root, plan["calibration_path"], registered=registered)
+        info = verify_estimation_source(source_root, plan["calibration_path"], registered=registered)
     if registered:
         registered_publish_guard(plan)
+        if instrument.a10:
+            # The same clause against the hash-bound source family, still before any write.
+            stage2_publication_guard(plan, target_path, (info or {}).get("family"))
         from .artifacts import verify_registration, is_current_a10_pin
         verify_registration(plan["registration"], **({"instrument": instrument,
             "historical": not is_current_a10_pin(plan['registration']['commit'])} if instrument.a10 else {}))
@@ -787,15 +825,24 @@ def publish(plan, run_root, source_root, calibration, target, *, registered=True
         source_payload = unseal(read(source_root / "v3_rerun_tables_A1.json"))
         manifest["a10"] = source_payload["manifest"]["a10"]
     # A13 is prospective only for launches pinned to its clarification: A13,
-    # A14 and the stage 2 successor pin, selected by the one shared helper.
+    # A14, A16 and the stage 2 successor pin, selected by the one shared helper.
     from .artifacts import a13_binding_pins
+    refusal = None
     if registered and plan.get('registration', {}).get('commit') in a13_binding_pins():
         from .admission_a13 import checked_binding
         from .offline_estimator import add_ranking_flags
         from .production_tables import row_key
         ranked = {row_key(r): r for r in add_ranking_flags(list(rows.values()))}
-        manifest['a13_admission'] = checked_binding(ranked, details, 'validation_launched_under_A13',
-            scoped(run_root) / 'a13_admission_check.json', plan['plan_hash'])
+        try:
+            manifest['a13_admission'] = checked_binding(ranked, details, 'validation_launched_under_A13',
+                scoped(run_root) / 'a13_admission_check.json', plan['plan_hash'])
+        except (ValueError, KeyError) as exc:
+            # A16's coordinated-change clause: the refused candidate, its cell
+            # results and its compatibility receipt are written into run_root
+            # before the Part 2 refusal is re-raised, so the original refused
+            # candidate and all outputs are preserved for A16 item 1. The final
+            # target is never touched on this path.
+            refusal = exc
     document = write_tables(candidate, list(rows.values()), manifest, fixture=not registered)
     # Per-cell results (primary and sensitivity) live in a sidecar, not the
     # family; the receipt binds the sidecar by hash.
@@ -809,9 +856,10 @@ def publish(plan, run_root, source_root, calibration, target, *, registered=True
                "plan_hash": plan["plan_hash"], "stream_tags": plan["stream_tags"], "stage_output_sha256": stage_hashes,
                "stream_seeds": stream_seeds, "cell_results_sha256": file_hash(candidate.with_suffix(".cell_results.json"))}
     atomic_json(candidate.with_suffix(".compatibility.json"), seal(receipt))
+    if refusal is not None:
+        raise refusal
     if registered:
         ProductionTables(candidate, calibration_hash=calibration["sha256"], registered=True)
-    target_path = scoped(target) if str(Path(target).resolve()).startswith(str(ROOT)) else SIMULATION / target
     # Frozen-target check: refuse to overwrite existing published bytes.
     if target_path.exists() and read(target_path) != document:
         raise RuntimeError("A4 table target is frozen; publish a new path")

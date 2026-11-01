@@ -577,9 +577,21 @@ def test_proof_idle_timeout_spends_no_memory_before_thirty_minutes(tmp_path, mon
 def test_twenty_per_assigned_kind_and_bundle_hash_required(tmp_path, environment, bad_hash):
     sources, reasons = source_fixture(tmp_path)
     entries = hosts()
-    e = a.unseal(evidence(SECOND, a.code_identity(), kinds=('fixture', 'table')))
+    full = evidence(SECOND, a.code_identity(), kinds=('fixture', 'table'))
+    if bad_hash:
+        # Complete per-kind evidence with a wrong bundle plan hash refuses on the hash.
+        entries[SECOND]['qualification'] = full
+        entries[SECOND]['qualification_plan_sha256'] = '0' * 64
+        q.validate_evidence(full, a.code_identity())
+        with pytest.raises(ValueError, match='plan hash'):
+            s.freeze(sources, reasons, tmp_path / 'proof.json', entries, 'f' * 40)
+        return
+    e = a.unseal(full)
     plan = a.unseal(e['plan'])
-    # Nineteen fixture plus twenty table proofs pass the old total-count rule.
+    # Nineteen fixture plus twenty table proofs passed the old pooled total-count
+    # rule. Under A17 section 2(b) (phase 2 of the successor) the validator itself
+    # requires at least 20 distinct jobs per kind, so this historical evidence now
+    # fails before the proof's own per-assigned-kind check.
     plan['jobs'] = [j for j in plan['jobs'] if j != next(j for j in plan['jobs'] if j['kind'] == 'fixture')]
     document = a.seal(plan)
     ids = {j['id'] for j in plan['jobs']}
@@ -587,9 +599,11 @@ def test_twenty_per_assigned_kind_and_bundle_hash_required(tmp_path, environment
         run['plan_sha256'] = document['sha256']
         run['proofs'] = [r for r in run['proofs'] if r['job_id'] in ids]
     entries[SECOND]['qualification'] = q.compare(document, a.seal(e['reference']), a.seal(e['candidate']))
-    entries[SECOND]['qualification_plan_sha256'] = '0' * 64 if bad_hash else document['sha256']
-    q.validate_evidence(entries[SECOND]['qualification'], a.code_identity())
-    with pytest.raises(ValueError, match='plan hash' if bad_hash else 'per assigned kind'):
+    entries[SECOND]['qualification_plan_sha256'] = document['sha256']
+    assert len(a.unseal(entries[SECOND]['qualification'])['proofs']) == 39
+    with pytest.raises(ValueError, match='per kind'):
+        q.validate_evidence(entries[SECOND]['qualification'], a.code_identity())
+    with pytest.raises(ValueError, match='per kind'):
         s.freeze(sources, reasons, tmp_path / 'proof.json', entries, 'f' * 40)
 
 

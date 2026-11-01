@@ -562,9 +562,16 @@ def test_a14_pin_keeps_later_validation_admission(tmp_path, monkeypatch):
     monkeypatch.setattr(tables_a10, 'verify_estimation_source', lambda *args, **kw: None)
     monkeypatch.setattr(a, 'verify_registration', lambda *args, **kw: None)
     monkeypatch.setattr(calibration, 'validate_calibration', lambda doc, **kw: a.unseal(doc))
+    # The fixture published this run root non-registered; the registered attempt
+    # is the run root's first publication under its pin, and under A16's
+    # coordinated-change clause the refusal preserves the refused candidate.
+    for suffix in ('.json', '.cell_results.json', '.compatibility.json'):
+        Path(candidate).with_suffix(suffix).unlink()
     with pytest.raises(ValueError, match='cap exceeded'):
         a4.publish(plan, root, source, a.read(a.SIMULATION / cal_path), tmp_path / 'not_published.json', registered=True)
     assert a.unseal(a.read(root / 'a13_admission_check.json'))['outcome'] == 'refused'
+    assert not (tmp_path / 'not_published.json').exists()
+    assert 'a13_admission' not in a.unseal(a.read(candidate))['manifest']
 
 
 def test_frozen_forecast_on_rehearsal_copies(tmp_path, monkeypatch):

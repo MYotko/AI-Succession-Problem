@@ -179,7 +179,16 @@ def test_review_output_scope_matches_base():
     base = subprocess.check_output(['git', '-C', str(SIMULATION.parent), 'show',
                                     'fe98280c:simulation/v3/artifacts.py']).decode('utf-8')
     original = next(n for n in ast.parse(base).body if isinstance(n, ast.FunctionDef) and n.name == 'scoped')
-    assert ast.dump(ast.parse(inspect.getsource(scoped)).body[0]) == ast.dump(original)
+    current = ast.parse(inspect.getsource(scoped)).body[0]
+    # Phase 2 of the stage 2 successor added one Windows-only branch (the
+    # containment race fix, INTERPRETER_NOTES_phase1). Outside that branch the
+    # function is the reviewed base, so POSIX behaviour is unchanged.
+    windows_only = [node for node in current.body if isinstance(node, ast.If) and isinstance(node.test, ast.Compare)
+                    and isinstance(node.test.left, ast.Attribute) and node.test.left.attr == 'name'
+                    and getattr(node.test.comparators[0], 'value', None) == 'nt']
+    assert len(windows_only) == 1
+    current.body = [node for node in current.body if node not in windows_only]
+    assert ast.dump(current) == ast.dump(original)
     assert scoped(ROOT / 'fixture.json') == ROOT / 'fixture.json'
     for outside in (SIMULATION, SIMULATION.parent / 'review_fixture', ROOT / '..'):
         with pytest.raises(ValueError, match='output outside simulation/v3'):

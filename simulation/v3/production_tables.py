@@ -83,6 +83,11 @@ class ProductionTables:
             raise ValueError("stale table source identity")
         if p["manifest_hash"] != digest(p["manifest"]) or expected_manifest_hash is not None and p["manifest_hash"] != expected_manifest_hash:
             raise ValueError("table manifest hash mismatch")
+        # A16 item 8: a hypothetical A16 admission provenance (the forecast's and
+        # the no-launch check's bindings) is never loadable, in either mode.
+        admission = p["manifest"].get("a13_admission")
+        if isinstance(admission, dict) and isinstance(admission.get("a16"), dict) and "hypothetical" in admission["a16"]:
+            raise ValueError("hypothetical A16 admission provenance is never loadable")
         if p["manifest"]["calibration_hash"] != calibration_hash:
             raise ValueError("table/calibration mismatch")
         if set(p["rows"]) != set(p["manifest"]["required_row_keys"]):
@@ -126,6 +131,10 @@ class ProductionTables:
         if admission is not None:
             from .admission_a13 import verify
             admitted = verify(self.rows, admission)
+            # A16 item 8: the bound family provenance must name this family.
+            a16 = admission.get('a16')
+            if a16 is not None and a16.get('family') != self.payload['manifest'].get('a10', {}).get('family'):
+                raise RuntimeError('A16 admission provenance names another family')
         for key, row in self.rows.items():
             # A4: a plain row certified through C0 alone has no fine entries but
             # a published C0, which is valid support.
@@ -148,6 +157,13 @@ class ProductionTables:
         if self.a10_receipt is None:
             raise ValueError("registered A10 requires its producer receipt")
         receipt = unseal(self.a10_receipt)
+        # The receipt policy is keyed by the validated family identity alone
+        # (A16, labels interpretation): the three A6 variant families carry an
+        # authenticated no-label receipt; nominal and sqrt keep the strict A5
+        # checks below. Missing labels never select the exempt branch.
+        from .tables_a10 import NO_LABEL_FAMILIES
+        if provenance.get("family") in NO_LABEL_FAMILIES:
+            return self._require_no_label_receipt(receipt, accepted, provenance["family"])
         if (receipt.get("schema") != "v3-A10-table-receipt-1"
                 or receipt.get("table_sha256") != self.document_hash
                 or receipt.get("producer_code_hash") not in accepted
@@ -182,6 +198,39 @@ class ProductionTables:
                     or len(cells) != len(expected_cells)
                     or any(c["status"] not in ("certified", "unresolved", "violation") or c["label"] != label_for(c["status"]) for c in cells)):
                 raise ValueError("A10 A5 labels do not cover the row's own validated cells")
+
+    def _require_no_label_receipt(self, receipt, accepted, family):
+        """The authenticated no-label receipt of an A6 variant family: it binds
+        the family, the table and validation seals, the accepted producer, the
+        constants and the adopted interpretation's authority. It carries no
+        labels field and no labels hash, and it changes no lookup: an estimated
+        FV row keeps A4's asymptotic label and its validated values."""
+        from .instrument import CONSTANTS_SHA256
+        from .tables_a10 import NO_LABEL_RECEIPT_SCHEMA, NO_LABEL_AUTHORITY
+        from .artifacts import canonical
+        import hashlib
+        if (receipt.get("schema") != NO_LABEL_RECEIPT_SCHEMA
+                or receipt.get("family") != family
+                or receipt.get("table_sha256") != self.document_hash
+                or receipt.get("producer_code_hash") not in accepted
+                or receipt.get("constants_sha256") != CONSTANTS_SHA256
+                or receipt.get("labels_policy") != NO_LABEL_AUTHORITY
+                or "labels" in receipt or "labels_sha256" in receipt
+                or not receipt.get("validation_receipt_sha256")):
+            raise ValueError("A10 no-label receipt mismatch for family %s" % family)
+        embedded = receipt.get("validation_receipt")
+        if not embedded or hashlib.sha256(canonical(embedded) + b"\n").hexdigest() != receipt["validation_receipt_sha256"]:
+            raise ValueError("A10 receipt embedded evidence hash mismatch")
+        validation = unseal(embedded)
+        if (validation.get("table_seal_sha256") != self.document_hash
+                or validation.get("producer_code_hash") not in accepted
+                or validation.get("schema") != "v3-A4-receipt-1"
+                or validation.get("calibration_sha256") != self.calibration_hash
+                or receipt.get("calibration_sha256") != self.calibration_hash):
+            raise ValueError("A10 receipt evidence belongs to another table")
+        for row in self.rows.values():
+            if row.get("route") == "fv" and row["status"] == "estimated" and row.get("fv_label") != "asymptotic, not certified":
+                raise ValueError("A6 variant FV row lacks its asymptotic label")
 
     def lookup_available(self, rules, bins, **context):
         """Return explicit missing-score masks for allocation and plan comparisons."""

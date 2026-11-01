@@ -18,6 +18,11 @@ from .artifacts import (SIMULATION, atomic_json, canonical, code_identity, confi
 from .worker_safety import persist_restarts
 
 SCHEMA = 'v3-A11-qualification-1'
+# The A16 kinds, qualified by short non-reserved streams like A13's and A14's.
+A16_KINDS = frozenset({'a16_validate_plain_r1', 'a16_validate_plain_r2'})
+# Extension kinds never reuse a registered completion as a reference: their
+# completed outputs are multi-replicate runs with checkpoints.
+EXTENSION_KINDS = frozenset({'a13_validate_plain_ext', 'a14_validate_plain_ext2'}) | A16_KINDS
 
 
 def build(spec_path, source_root, output, kinds=None):
@@ -36,7 +41,9 @@ def build(spec_path, source_root, output, kinds=None):
         raise ValueError('qualification needs the current A10 launch identity')
     available = {j['kind'] for j in spec['jobs']}
     kinds = sorted(kinds or available)
-    if not set(kinds) <= available or not set(kinds) <= ALLOWED_KINDS:
+    # The A16 kinds qualify through direct single-host launches (A16 item 6);
+    # they are not pull kinds at this identity (A17 section 6 item 2).
+    if not set(kinds) <= available or not set(kinds) <= ALLOWED_KINDS | A16_KINDS:
         raise ValueError('unsupported qualification kind')
     target = scoped(output)
     if target.exists():
@@ -49,7 +56,7 @@ def build(spec_path, source_root, output, kinds=None):
             return s.get('particles', 1) * (s.get('burn', 0) + s.get('measure', c.get('steps', 1)))
         candidates.sort(key=lambda j: (cost(j), digest(['A11-qualification', j['id']]), j['id']))
         done = []
-        if spec.get('registered') and kind not in ('a13_validate_plain_ext', 'a14_validate_plain_ext2'):
+        if spec.get('registered') and kind not in EXTENSION_KINDS:
             for j in candidates:
                 value = completed(Path(source_root) / j['config']['phase'], j, spec['code_hash'])
                 if value is not None:
@@ -72,14 +79,16 @@ def build(spec_path, source_root, output, kinds=None):
             cfg = deepcopy(configs[index % len(configs)])
             # A4/A5 consume config.seed, rather than the outer seed. These are
             # disjoint, explicitly non-registered fixture streams on both hosts.
-            if kind.startswith(('a4_', 'a5_', 'a13_', 'a14_')):
+            if kind.startswith(('a4_', 'a5_', 'a13_', 'a14_', 'a16_')):
                 cfg['seed'] = (1 << 128) | int(digest(['A11-qualification-stream', kind, cfg, index])[:32], 16)
             job = stable_job(kind, cfg, 'validation', index)
             jobs.append(job)
             phase_roots[job['id']] = str(Path(source_root).resolve() / cfg['phase'])
-    if len(jobs) < 20:
-        # Never manufacture independence by duplicating a registered result.
-        raise ValueError('fewer than 20 distinct reference jobs; qualify after more outputs or before registration with fixture profiles')
+    # At least 20 distinct jobs per kind (A17 section 2(b) and 6 item 2), never
+    # 20 pooled across kinds. Never manufacture independence by duplicating a
+    # registered result.
+    if any(len({j['id'] for j in jobs if j['kind'] == kind}) < 20 for kind in kinds):
+        raise ValueError('fewer than 20 distinct reference jobs per kind; qualify after more outputs or before registration with fixture profiles')
     files = {}
     simulation = str(SIMULATION)
     for job in jobs:
@@ -241,13 +250,26 @@ def compare(plan_document, reference_document, candidate_document):
     return seal(result)
 
 
-def validate_evidence(document, code):
+def validate_evidence(document, code, kinds=None):
+    """``kinds``, when given, names every kind the candidate will run; each must
+    be represented by at least 20 distinct jobs (A17 section 2(b))."""
     from .multihost_a11 import positive
     e = unseal(document)
     if e['schema'] != SCHEMA or not e['non_registered'] or not e['passed'] or e['code_hash'] != code:
         raise ValueError('failed or wrong-identity qualification')
     if len(e['proofs']) < 20 or len({p['job_id'] for p in e['proofs']}) != len(e['proofs']):
         raise ValueError('qualification requires at least 20 distinct jobs')
+    # A17 section 2(b) and section 6 item 2: at least 20 distinct jobs for every
+    # kind the candidate will run, not 20 pooled across kinds.
+    per_kind = {}
+    for p in e['proofs']:
+        per_kind.setdefault(p['kind'], set()).add(p['job_id'])
+    if any(len(ids) < 20 for ids in per_kind.values()):
+        raise ValueError('qualification requires at least 20 distinct jobs per kind')
+    if kinds is not None:
+        missing = sorted(k for k in set(kinds) if len(per_kind.get(k, ())) < 20)
+        if missing:
+            raise ValueError('qualification lacks 20 distinct jobs for kind(s) the candidate will run: ' + ', '.join(missing))
     plan = unseal(e['plan'])
     if plan.get('schema') != SCHEMA + '-plan' or plan.get('non_registered') is not True or plan.get('code_hash') != code:
         raise ValueError('qualification selection is not a sealed current plan')

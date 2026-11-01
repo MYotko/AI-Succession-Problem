@@ -315,7 +315,10 @@ def test_projection_arithmetic_labels_family_totals_and_nominal_endpoints(spec,t
     assert result['total_without_estimated_parts_x2_hours']==pytest.approx(expected_measured+expected_runs+reserve)
     assert sum(f['with_estimated_parts_x2_hours'] for f in result['per_family'].values())==pytest.approx(result['total_x2_hours_conservative'])
     assert result['per_family']['nominal']['with_estimated_parts_x2_hours']>result['per_family']['nominal']['without_estimated_parts_x2_hours']
-    assert result['a6_ceiling_x2_hours']==90 and result['a6_within_ceiling']
+    # The A7/R4 ceiling comparison is scoped as a historical reference (A10
+    # section 12; audit A finding 8), never stage 2 budget authority.
+    assert result['a7_r4_a6_ceiling_x2_hours']==90 and result['a6_within_a7_r4_ceiling']
+    assert 'A15' in result['a7_r4_a6_ceiling_scope'] and 'a6_within_ceiling' not in result and 'a6_ceiling_x2_hours' not in result
 
 
 def test_projection_uses_measured_throughput_and_individual_memory(spec,tmp_path,monkeypatch):
@@ -335,7 +338,7 @@ def test_toy_or_unmeasured_local_costs_cannot_set_x2_ceiling(spec,tmp_path,monke
     spec['toy']=toy
     config,selected,_=synthetic_outputs(spec,monkeypatch,machine=machine)
     result=pilot.project(spec,tmp_path,config,selected)
-    assert result['total_x2_hours_conservative'] is None and result['a6_within_ceiling'] is None
+    assert result['total_x2_hours_conservative'] is None and result['a6_within_a7_r4_ceiling'] is None
 
 
 @pytest.mark.parametrize('problem',['missing','short','configuration','outcome'])

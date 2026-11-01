@@ -141,6 +141,11 @@ def prepare_validation(source_root, calibration_path, *, registration=None, wall
     # A10 scheduling override only. Preserve A4's R4 profile builder and jobs.
     for profile in plan["configuration"].values():
         profile["workers_local"] = [2, 4, 8, 12]
+    if info["family"] in STAGE2_FAMILIES:
+        # The family-path clause (A16 items 1 and 4): a stage 2 plan names its
+        # family and stage, so a registered publish can hold it to STAGE2_PATHS.
+        # Nominal and stage 1 plans carry neither field. Outside plan_hash.
+        plan.update(a10_family=info["family"], a10_stage=2)
     return plan
 
 
@@ -309,6 +314,34 @@ def stage1_run_specs(calibration_path, tables_path, registration, ceilings):
 STAGE2_FAMILIES = ("sqrt", "crowding", "sigma_squared_x10", "sigma_squared_x0.1")
 STAGE2_RUN_COUNTS = {"sqrt": 4400, "crowding": 4400, "sigma_squared_x10": 500, "sigma_squared_x0.1": 500}
 STAGE2_REGISTRY_SCHEMA = "v3-A10-stage2-seed-registry-1"
+# The family-path clause (A16, items 1 and 2): the four final publication
+# targets and the frozen calibration strings, literal POSIX strings relative to
+# simulation/, plus the nominal comparator's unchanged calibration and table
+# identity (A13 step 7). They enter every stage 2 run seed (audit A finding 7),
+# so the registered spec builder asserts these exact strings (item 3).
+STAGE2_PATHS = {
+    "nominal": ("v3/runs/registered/v3_rerun_calibration.json", "v3/runs/a10_stage1/nominal/v3_rerun_tables_A10.json"),
+    "sqrt": ("v3/runs/registered/v3_rerun_calibration.json", "v3/runs/a10_stage2/sqrt/v3_rerun_tables_A10.json"),
+    "crowding": ("v3/runs/registered/v3_rerun_calibration.json", "v3/runs/a10_stage2/crowding/v3_rerun_tables_A10.json"),
+    "sigma_squared_x10": ("v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_calibration.json",
+                          "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_tables_A10.json"),
+    "sigma_squared_x0.1": ("v3/runs/a10_stage2/sigma_squared_x0.1/v3_rerun_calibration.json",
+                           "v3/runs/a10_stage2/sigma_squared_x0.1/v3_rerun_tables_A10.json"),
+}
+# The labels policy per stage 2 family (A16, labels interpretation; option (ii)
+# of LABELS_A6_VARIANTS.md): sqrt keeps the strict A5 requirement; the three A6
+# variant families make no A5 labels and carry an authenticated no-label receipt.
+NO_LABEL_FAMILIES = ("crowding", "sigma_squared_x10", "sigma_squared_x0.1")
+STAGE2_LABELS_POLICY = {"sqrt": "a5_labels_required", "crowding": "no_a5_labels_a16",
+                        "sigma_squared_x10": "no_a5_labels_a16", "sigma_squared_x0.1": "no_a5_labels_a16"}
+NO_LABEL_RECEIPT_SCHEMA = "v3-A10-table-receipt-nolabel-1"
+NO_LABEL_AUTHORITY = {
+    "policy": "no_a5_labels_a16",
+    "authority": ("A16, labels interpretation, prospective decision of 2026-10-29: A6 line 1374 (no A5 labels are made for the "
+                  "variant families), A10 section 12 (A6's variant families re-registered unchanged), operator option (ii) of "
+                  "LABELS_A6_VARIANTS.md"),
+    "fv_rows": "asymptotic, not certified (A4 and A6); the same continuation, flow, errors and support in the same lookup",
+    "families": list(NO_LABEL_FAMILIES)}
 
 
 def _stage2_paths(paths):
@@ -606,6 +639,10 @@ def stage2_run_specs(paths, registration, ceilings, seed_registry):
     from .pilot import profile
     from .sensitivity_a6 import assert_registry_seeds, assert_global_seed_distinctness
     paths = _stage2_paths(paths)
+    # The family-path clause (A16 item 3): the registered builder asserts the
+    # exact frozen strings; a registry built for other strings cannot serve.
+    if paths != _stage2_paths(STAGE2_PATHS):
+        raise ValueError("stage 2 run specs require the canonical family paths of A16's family-path clause")
     if set(ceilings) != set(STAGE2_FAMILIES):
         raise ValueError("stage 2 needs exactly four explicit ceilings")
     for value in ceilings.values():
@@ -643,6 +680,8 @@ def stage2_run_specs(paths, registration, ceilings, seed_registry):
         result[name] = {"schema": "v3-registered-1", "registered": True, "registered_a10": True,
                         "tag": "v3_rerun", "registration": registration, "code_hash": code,
                         "instrument": cfg["model"]["instrument"], "a10_stage": 2, "a10_family": name,
+                        "a10_labels_policy": STAGE2_LABELS_POLICY[name],
+                        "a10_family_paths": {"calibration_path": paths[name][0], "tables_path": paths[name][1]},
                         "wall_seconds": int((Decimal(str(ceilings[name])) * 3600).to_integral_value(rounding=ROUND_FLOOR)),
                         "x2_equivalent_hours": ceilings[name],
                         "configuration_seconds": 900, "cleanup_reserve_seconds": 300,
@@ -661,6 +700,8 @@ def finalize_receipt(family_path, labels_path):
     p = payload["manifest"].get("a10")
     if not p or p["producer_code_hash"] not in accepted or payload["code_hash"] not in accepted:
         raise ValueError("not this A10 producer's family")
+    if p.get("family") in NO_LABEL_FAMILIES:
+        raise ValueError("family %s makes no A5 labels (A6, A16); use finalize_no_label_receipt" % p["family"])
     a4_path = family_path.with_suffix(".compatibility.json")
     a4 = unseal(read(a4_path))
     labels_doc = read(labels_path)
@@ -674,6 +715,46 @@ def finalize_receipt(family_path, labels_path):
                     "producer_code_hash": code_identity(), "constants_sha256": CONSTANTS_SHA256,
                     "validation_receipt_sha256": file_hash(a4_path), "labels_sha256": file_hash(labels_path),
                     "validation_receipt": read(a4_path), "labels": labels_doc})
+    target = family_path.with_suffix(".a10_receipt.json")
+    if target.exists():
+        existing = read(target)
+        prior = unseal(existing)
+        expected = dict(receipt["payload"], producer_code_hash=prior.get("producer_code_hash"))
+        if prior.get("producer_code_hash") not in accepted or prior != expected:
+            raise RuntimeError("A10 producer receipt is frozen")
+        return existing
+    atomic_json(target, receipt)
+    return receipt
+
+
+def finalize_no_label_receipt(family_path):
+    """The authenticated no-label receipt of an A6 variant family (A16, labels
+    interpretation; option (ii)). Keyed only by the validated family identity:
+    it binds the family, the table and validation seals, the accepted producer,
+    the constants and the adopted authority. It invents no empty A5 seal and no
+    labels hash, and it changes no numerical lookup."""
+    family_path = Path(family_path)
+    from .compatibility_a10 import accepted_identities
+    accepted = accepted_identities()
+    table = read(family_path)
+    payload = unseal(table)
+    p = payload["manifest"].get("a10")
+    if not p or p["producer_code_hash"] not in accepted or payload["code_hash"] not in accepted:
+        raise ValueError("not this A10 producer's family")
+    family = p.get("family")
+    if family not in NO_LABEL_FAMILIES:
+        raise ValueError("the no-label receipt is keyed by the validated family identity: %s keeps A5" % family)
+    a4_path = family_path.with_suffix(".compatibility.json")
+    a4 = unseal(read(a4_path))
+    if (a4.get("schema") != "v3-A4-receipt-1" or a4["table_seal_sha256"] != table["sha256"]
+            or a4["table_file_sha256"] != file_hash(family_path) or a4.get("producer_code_hash") not in accepted
+            or a4.get("calibration_sha256") != payload["manifest"]["calibration_hash"]):
+        raise ValueError("A10 validation provenance mismatch")
+    receipt = seal({"schema": NO_LABEL_RECEIPT_SCHEMA, "family": family, "table_sha256": table["sha256"],
+                    "producer_code_hash": code_identity(), "constants_sha256": CONSTANTS_SHA256,
+                    "calibration_sha256": a4["calibration_sha256"],
+                    "validation_receipt_sha256": file_hash(a4_path), "validation_receipt": read(a4_path),
+                    "labels_policy": NO_LABEL_AUTHORITY})
     target = family_path.with_suffix(".a10_receipt.json")
     if target.exists():
         existing = read(target)

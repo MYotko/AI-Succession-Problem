@@ -307,7 +307,8 @@ def arm_and_comparator_cells(arm_records, nominal_records, quantity, *, grid=R1_
 # ---------------------------------------------------------------------------
 
 def compare_boundary(arm_cells, nominal_cells, *, grid, resamples=DEFAULT_RESAMPLES, seed=20260929,
-                     sigma_variant=False, alpha=BONFERRONI_ALPHA, strict=True):
+                     sigma_variant=False, alpha=BONFERRONI_ALPHA, strict=True,
+                     undefined_resample_tail=UNDEFINED_RESAMPLE_TAIL):
     """A boundary comparison, arm minus nominal, by independent seed bootstrap.
 
     ``arm_cells`` and ``nominal_cells`` map each rr in the registered ``grid`` to a
@@ -319,9 +320,16 @@ def compare_boundary(arm_cells, nominal_cells, *, grid, resamples=DEFAULT_RESAMP
     an undefined resample within the tail allowance is placed at minus infinity for
     the lower percentile and plus infinity for the upper, so it can only widen the
     interval. Undetermined when either point boundary is undefined, or when the
-    undefined-resample share exceeds the Bonferroni tail 0.05/(2 x 33)."""
+    undefined-resample share exceeds the family's Bonferroni tail
+    ``undefined_resample_tail``: (1 - level)/2 by A12 part 1 item 7, which is A6's
+    0.05/(2 x 33) by default and A10's 0.05/(2 x 18) for its arms. The threshold
+    changes only which share reads undetermined; the interval arithmetic, the
+    boundary rule, the margins and the resampling order are the pinned ones."""
     grid = tuple(sorted(grid))
     # Explicit raises, not bare asserts: -O strips asserts.
+    if (isinstance(undefined_resample_tail, bool) or not isinstance(undefined_resample_tail, (int, float))
+            or not 0 <= undefined_resample_tail < 1):
+        raise ValueError("the undefined-resample tail must be a probability in [0, 1)")
     if strict:
         if grid not in (tuple(sorted(R1_GRID)), tuple(sorted(SIGMA_GRID))):
             raise ValueError("boundary reading requires a registered rr grid (R1's nine rr or the sigma0^2 five)")
@@ -338,7 +346,8 @@ def compare_boundary(arm_cells, nominal_cells, *, grid, resamples=DEFAULT_RESAMP
     nom_point = _boundary_of_rates(rrs, nom_rates)
     result = {"kind": "boundary", "arm_boundary": arm_point, "nominal_boundary": nom_point,
               "arm_survival": dict(zip(rrs, arm_rates)), "nominal_survival": dict(zip(rrs, nom_rates)),
-              "level": 1 - alpha, "bonferroni_alpha": alpha, "resamples": resamples}
+              "level": 1 - alpha, "bonferroni_alpha": alpha, "resamples": resamples,
+              "undefined_resample_tail": undefined_resample_tail}
     # Undetermined when either point estimate is undefined (no crossing in range).
     if not math.isfinite(arm_point) or not math.isfinite(nom_point):
         result.update(verdict="undetermined", reason=_undefined_point_reason(arm_point, nom_point, sigma_variant),
@@ -353,10 +362,10 @@ def compare_boundary(arm_cells, nominal_cells, *, grid, resamples=DEFAULT_RESAMP
     result["undefined_resample_fraction"] = undefined_fraction
     # Undetermined when too many resamples are undefined (both sides infinite in
     # the same direction). Every resample is kept, none dropped silently.
-    if undefined_fraction > UNDEFINED_RESAMPLE_TAIL:
+    if undefined_fraction > undefined_resample_tail:
         result.update(verdict="undetermined", interval=None, difference=arm_point - nom_point,
                       reason="undefined-resample share %.4f exceeds the Bonferroni tail %.5f"
-                             % (undefined_fraction, UNDEFINED_RESAMPLE_TAIL))
+                             % (undefined_fraction, undefined_resample_tail))
         return result
     # Keep every resample. The undefined ones (within the tail allowance) go at
     # minus infinity for the lower percentile and plus infinity for the upper, so

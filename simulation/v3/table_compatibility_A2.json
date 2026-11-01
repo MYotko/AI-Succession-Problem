@@ -164,10 +164,10 @@
   },
   "amendment": "A2, 2026-09-28",
   "approved_boundary_sha256": {
-    "v3/artifacts.py": "e328cbdf9a5cf9d9fc630c7571d5dc79de7a6b418b5cebc510e552421ff1e048",
+    "v3/artifacts.py": "f8baaa17bd0e755a804406e9980bb7c5358c8ff1bdc9c3a8aeabe646eb24bfb6",
     "v3/integration.py": "8d22354a7fa3d2d71036f686f5eff16a79c857e4c9212ad1cb8b15ed40e31e26",
-    "v3/production_runner.py": "0d3f5f3c02b070a3a92bfd8055f1e75df6688505bb1908aa5b903b2df5bd7303",
-    "v3/production_tables.py": "bba106893ca0849aa28eea8455621f43553ca607051c7ef572b47c7ba5637b66",
+    "v3/production_runner.py": "f6cb114643a6c3df4f2efec011eacf23db56f609c7782110b534235ad0fd84ce",
+    "v3/production_tables.py": "50467aace062485f636780a26e383d863dbf55b57e203cec2c8f592b31bef6d6",
     "v3/recording.py": "38891bedc60eda486952a6c33323f926b89ac0d358b7760afad514fc2f1771f8",
     "v3/service.py": "3e90a9514962d4f4bf0cafb868d493f4ee54e80f178a7bdc391a1761621862b9",
     "v3/table_compatibility.py": "16f6970df3c542776555d2fec17d2056582b333eff175a1c6dec93855c3c6c89"
@@ -200,6 +200,27 @@
       "v3/artifacts.py": "Stage 2 successor pin: the single named constant STAGE2_COMMIT, set to the A16 commit ae71028ecc1bcd4a8049eb1fc933cdb725e5fa33, its amendment marker STAGE2_AMENDMENT_MARKER, set to the A16 heading, and the same strict exact-note checks as the A14 pin plus that marker; shared helpers current_a10_commit, is_current_a10_pin and a13_binding_pins select the current pin at the three sites together (verify_registration, table_validation_a4.publish, table_labels_a5.publish) so the A13 Part 2 binding cannot drop silently. Current A10 launches and publications now verify strictly against the A16 pin; A14 and earlier pins verify historically, as before."
     },
     "scope": "Execution provenance only: pin selection for current A10 launches and publications. No scientific function, job, seed, result, selection or comparison changes. This re-pin does not admit any producer; carried-forward outputs still need their own A11 compatibility record at the new identity."
+  },
+  "stage2_phase2": {
+    "amendment": "A16 and A17, 2026-10-29 and 2026-10-30: the stage 2 successor identity, phase 2 (A17 section 6 items 2 and 3)",
+    "approved_sha256": {
+      "v3/artifacts.py": "f8baaa17bd0e755a804406e9980bb7c5358c8ff1bdc9c3a8aeabe646eb24bfb6",
+      "v3/production_runner.py": "f6cb114643a6c3df4f2efec011eacf23db56f609c7782110b534235ad0fd84ce",
+      "v3/production_tables.py": "50467aace062485f636780a26e383d863dbf55b57e203cec2c8f592b31bef6d6"
+    },
+    "date": "2026-11-01",
+    "design_commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
+    "previous_approved_sha256": {
+      "v3/artifacts.py": "e328cbdf9a5cf9d9fc630c7571d5dc79de7a6b418b5cebc510e552421ff1e048",
+      "v3/production_runner.py": "0d3f5f3c02b070a3a92bfd8055f1e75df6688505bb1908aa5b903b2df5bd7303",
+      "v3/production_tables.py": "bba106893ca0849aa28eea8455621f43553ca607051c7ef572b47c7ba5637b66"
+    },
+    "reasons": {
+      "v3/artifacts.py": "The current A10 pin moves from the A16 adoption commit ae71028e to the A17 adoption commit 3b8d8261c47b436a95fe831bd7192ede08460d1e (A17 section 6 item 3); ae71028e stays bound in a13_binding_pins in both forms; the exact-note markers add A16's and A17's headings to A14's. The Windows-only containment race in scoped() is closed by comparing without the extended-length prefix; the POSIX path is unchanged.",
+      "v3/production_runner.py": "Parallel A16 branches only: dispatch of the two A16 kinds with the rehearsal/configuration rule and every reserve refused for non-registered work, the explicit empty-scratch replay adapters for the A14 and A16 kinds (compatibility proofs only), the worker's and the recheck's scientific-halt latches, A16 plan validation and round binding at launch, the A16 schema in the memory-managed and recheck sets, and the reserved-range guard for the A16 reserve [2^62, 12 x 2^60). Fix round 1 (2026-11-01): the load-sheet host loop moves into qualified_hosts, which validates every host's qualification against every kind the launch spec runs (A17 section 2(b)). Existing scientific functions and ordinary result payloads unchanged.",
+      "v3/production_tables.py": "A16 item 8: the loader cross-checks a bound A16 admission's family against the manifest's family. The labels interpretation (A16, 2026-10-29; option (ii) of LABELS_A6_VARIANTS.md): the three A6 variant families are accepted only with an authenticated no-label receipt keyed by the validated family identity; nominal and sqrt keep the strict A5 receipt checks. Fix round 2 (2026-11-01): the loader refuses an a13_admission whose A16 provenance carries a hypothetical marker at load, in both modes, before any further check (A16 item 8). No numerical lookup change."
+    },
+    "scope": "Execution provenance only: the current pin, the A16 single-host dispatch and replay branches, the admission family cross-check and the receipt acceptance policy. No scientific function, job, seed, result, selection, lookup or comparison changes; A13's and A14's modules are byte-identical. This re-pin does not admit any producer; carried-forward outputs still need their own A11 compatibility record at the new identity."
   },
   "status": "This exact genuine A1 family fails the registered sensitivity screens. This compatibility exception currently admits no table to a registered run. Any repaired family requires its own reviewed record.",
   "table_design_sha256": "342edbc8974463897c09838d5bb07f68fe1525713645df15d56dc200e9ddb1d1",

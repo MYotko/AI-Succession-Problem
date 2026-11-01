@@ -51,6 +51,15 @@ def file_hash(path):
 
 def scoped(path):
     result = Path(path).resolve()
+    if os.name == "nt":
+        # ntpath.realpath keeps the extended-length prefix on a path that does
+        # not exist yet when a sibling process creates its parent between the
+        # resolver's two _getfinalpathname calls (winerror 3, then 2). The
+        # prefix carries no path information; the containment check compares
+        # without it. POSIX has no prefix and does not enter this branch.
+        text = os.fspath(result)
+        if text.startswith("\\\\?\\"):
+            result = Path("\\\\" + text[8:] if text.startswith("\\\\?\\UNC\\") else text[4:])
     if not result.is_relative_to(ROOT):
         raise ValueError("output outside simulation/v3")
     return result
@@ -215,23 +224,33 @@ def lease(path):
 
 A13_COMMIT = "48815a655c9f4096ea8ceef35ee277ee0352c7d3"
 A14_COMMIT = "17f17ef9cee4b18d70f043a1e097359cd6642693"
+# The A16 adoption commit (A15 and A16, 2026-10-29). It was the current stage 2
+# pin from the phase 1 commit (50a3d096) until A17's adoption moved the current
+# pin (A17 section 6 item 3). A current A10 plan could have been pinned to it, so
+# it stays bound in a13_binding_pins() and verifies historically.
+A16_COMMIT = "ae71028ecc1bcd4a8049eb1fc933cdb725e5fa33"
+A16_AMENDMENT_MARKER = b"### Amendment A16, 2026-10-29: prospective validation extensions for A10 stage 2"
 # The stage 2 successor pin: the full hash of the commit that carries the adopted
-# stage 2 registration text (A10 section 12's dated ceiling amendment A15, and
-# A16, adopted with it). It was None until that commit existed and is set once,
-# at commit time, to that commit's hash. Set, current A10 launches and
-# publications verify strictly against it, and A14 and earlier pins verify
-# historically through the callers' selection (table_validation_a4.publish,
-# table_labels_a5.publish). Unset (None), current A10 verification requires the
-# A14 pin exactly as before. The three selection sites below share these helpers
-# so the A13 Part 2 binding cannot drop silently (audit A finding 2).
-STAGE2_COMMIT = "ae71028ecc1bcd4a8049eb1fc933cdb725e5fa33"
-# The heading of the adopted stage 2 amendment, as bytes, set at commit time
+# A17 host register text, whose note is the adopted stage 2 registration (A15,
+# A16 and A17; the register commit 74460801 changed no note bytes). Set, current
+# A10 launches and publications verify strictly against it, and the A16, A14 and
+# earlier pins verify historically through the callers' selection
+# (table_validation_a4.publish, table_labels_a5.publish). Unset (None), current
+# A10 verification requires the A14 pin exactly as before. The three selection
+# sites below share these helpers so the A13 Part 2 binding cannot drop silently
+# (audit A finding 2; A17 section 6 item 3).
+STAGE2_COMMIT = "3b8d8261c47b436a95fe831bd7192ede08460d1e"
+# The heading of the adopted amendment at the current pin, as bytes, set
 # together with STAGE2_COMMIT. The committed note at the successor pin must
 # contain it, as A14's note had to contain A14 (design note line 2558).
-STAGE2_AMENDMENT_MARKER = b"### Amendment A16, 2026-10-29: prospective validation extensions for A10 stage 2"
+STAGE2_AMENDMENT_MARKER = b"### Amendment A17, 2026-10-30: a host register for stage 2 compute"
 # Text the committed note at the current pin must contain. The successor note is
 # a superset of A14's, so A14's markers stay required.
 STAGE2_NOTE_MARKERS = (b'Clarified, 2026-10-16: pricing R_max', b'### Amendment A14')
+# The headings of the earlier stage 2 amendments every later current pin must
+# retain (A16: "the strict checks must retain the A13 clarification and A14 text
+# as historical registration and include this amendment").
+STAGE2_PRIOR_MARKERS = (A16_AMENDMENT_MARKER,)
 
 
 def current_a10_commit():
@@ -245,7 +264,7 @@ def current_a10_note_markers():
         return STAGE2_NOTE_MARKERS
     if not isinstance(STAGE2_AMENDMENT_MARKER, bytes) or not STAGE2_AMENDMENT_MARKER.strip():
         raise RuntimeError('STAGE2_COMMIT is set without its amendment marker')
-    return STAGE2_NOTE_MARKERS + (STAGE2_AMENDMENT_MARKER,)
+    return STAGE2_NOTE_MARKERS + STAGE2_PRIOR_MARKERS + (STAGE2_AMENDMENT_MARKER,)
 
 
 def is_current_a10_pin(commit):
@@ -256,9 +275,10 @@ def is_current_a10_pin(commit):
 
 def a13_binding_pins():
     """The pins under which a registered A4 publication applies A13 Part 2's
-    admission binding: A13, A14 and the stage 2 successor once it is set."""
-    commits = [A13_COMMIT, A14_COMMIT] + ([STAGE2_COMMIT] if STAGE2_COMMIT else [])
-    return tuple(form for commit in commits for form in (commit, commit[:8]))
+    admission binding: A13, A14, A16 and the stage 2 successor once it is set.
+    Every commit at which a current A10 plan could have been pinned stays bound."""
+    commits = [A13_COMMIT, A14_COMMIT, A16_COMMIT] + ([STAGE2_COMMIT] if STAGE2_COMMIT else [])
+    return tuple(form for commit in dict.fromkeys(commits) for form in (commit, commit[:8]))
 
 
 def verify_registration(pin, repository=None, *, instrument=None, historical=False):

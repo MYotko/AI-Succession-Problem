@@ -380,7 +380,18 @@ SUCCESSOR = 'f' * 40
 
 A16_COMMIT = "ae71028ecc1bcd4a8049eb1fc933cdb725e5fa33"
 A16_MARKER = b"### Amendment A16, 2026-10-29: prospective validation extensions for A10 stage 2"
+# The A17 adoption commit: the current stage 2 pin since phase 2 (A17 section 6
+# item 3). The register commit 74460801 changed no note bytes.
+A17_COMMIT = "3b8d8261c47b436a95fe831bd7192ede08460d1e"
+A17_MARKER = b"### Amendment A17, 2026-10-30: a host register for stage 2 compute"
+A14_MARKERS = (b'Clarified, 2026-10-16: pricing R_max', b'### Amendment A14')
 NOTE_PATH = 'simulation/diagnostics/v3_rerun_design_note.md'
+# Every commit at which a current A10 plan could have been pinned, in both forms.
+BINDING_PINS = {form for commit in (a.A13_COMMIT, a.A14_COMMIT, A16_COMMIT, A17_COMMIT) for form in (commit, commit[:8])}
+
+
+def _marker_for(successor):
+    return {None: None, A16_COMMIT: A16_MARKER, A17_COMMIT: A17_MARKER}.get(successor, MARKER if successor else None)
 
 
 @pytest.fixture
@@ -390,55 +401,70 @@ def unset(monkeypatch):
     monkeypatch.setattr(a, 'STAGE2_AMENDMENT_MARKER', None)
 
 
-def test_successor_constants_are_set_to_the_adopted_a16_commit():
-    assert a.STAGE2_COMMIT == A16_COMMIT and a.STAGE2_AMENDMENT_MARKER == A16_MARKER
-    assert a.current_a10_commit() == A16_COMMIT
-    assert a.current_a10_note_markers() == (b'Clarified, 2026-10-16: pricing R_max', b'### Amendment A14', A16_MARKER)
-    assert a.is_current_a10_pin(A16_COMMIT) and a.is_current_a10_pin(A16_COMMIT[:8])
-    assert not a.is_current_a10_pin(a.A14_COMMIT) and not a.is_current_a10_pin(a.A13_COMMIT)
-    assert set(a.a13_binding_pins()) == {a.A13_COMMIT, a.A13_COMMIT[:8], a.A14_COMMIT, a.A14_COMMIT[:8], A16_COMMIT, A16_COMMIT[:8]}
-    # The rebased tree's committed note at the A16 commit carries every marker
-    # and is byte-identical to the working-tree note.
+def test_successor_constants_are_set_to_the_adopted_a17_commit():
+    assert a.STAGE2_COMMIT == A17_COMMIT and a.STAGE2_AMENDMENT_MARKER == A17_MARKER
+    assert a.A16_COMMIT == A16_COMMIT and a.A16_AMENDMENT_MARKER == A16_MARKER
+    assert a.STAGE2_PRIOR_MARKERS == (A16_MARKER,)
+    assert a.current_a10_commit() == A17_COMMIT
+    assert a.current_a10_note_markers() == A14_MARKERS + (A16_MARKER, A17_MARKER)
+    assert a.is_current_a10_pin(A17_COMMIT) and a.is_current_a10_pin(A17_COMMIT[:8])
+    assert not any(a.is_current_a10_pin(c) for c in (A16_COMMIT, A16_COMMIT[:8], a.A14_COMMIT, a.A13_COMMIT))
+    # A17 section 6 item 3: ae71028e stays in the binding list, in both forms.
+    assert set(a.a13_binding_pins()) == BINDING_PINS
+    assert len(a.a13_binding_pins()) == len(BINDING_PINS)
+    # The tree's committed note at the A17 commit carries every marker and is
+    # byte-identical to the working-tree note and to the note at the register commit.
     repo = a.SIMULATION.parent
-    committed = subprocess.run(['git', 'show', A16_COMMIT + ':' + NOTE_PATH], cwd=repo, capture_output=True, check=True).stdout
+    committed = subprocess.run(['git', 'show', A17_COMMIT + ':' + NOTE_PATH], cwd=repo, capture_output=True, check=True).stdout
     assert all(marker in committed for marker in a.current_a10_note_markers())
     assert hashlib.sha256(committed).hexdigest() == a.file_hash(repo / NOTE_PATH)
-    assert subprocess.run(['git', 'merge-base', '--is-ancestor', A16_COMMIT, 'HEAD'], cwd=repo).returncode == 0
+    register = subprocess.run(['git', 'show', '74460801:' + NOTE_PATH], cwd=repo, capture_output=True, check=True).stdout
+    assert register == committed
+    assert subprocess.run(['git', 'merge-base', '--is-ancestor', A17_COMMIT, 'HEAD'], cwd=repo).returncode == 0
+    # The A16 note lacks A17's heading, so it can no longer pass the strict check.
+    a16_note = subprocess.run(['git', 'show', A16_COMMIT + ':' + NOTE_PATH], cwd=repo, capture_output=True, check=True).stdout
+    assert A16_MARKER in a16_note and A17_MARKER not in a16_note
 
 
-def test_set_state_strict_verification_against_the_rebased_tree(tmp_path, monkeypatch):
-    """A current A10 plan pinned to the A16 commit passes strict verification
-    only with the committed note's real bytes (A14's two markers and the A16
-    heading present) and a byte-identical working note; a stale note, a
-    note lacking a marker, the A14 pin and any other commit are refused."""
+def test_set_state_strict_verification_against_the_committed_tree(tmp_path, monkeypatch):
+    """A current A10 plan pinned to the A17 commit passes strict verification
+    only with the committed note's real bytes (A14's two markers, the A16
+    heading and the A17 heading present) and a byte-identical working note; a
+    stale note, a note lacking a marker, the A16 pin, the A14 pin and any other
+    commit are refused as current. The A16 and A14 pins verify historically."""
     repo = a.SIMULATION.parent
-    committed = subprocess.run(['git', 'show', A16_COMMIT + ':' + NOTE_PATH], cwd=repo, capture_output=True, check=True).stdout
+    committed = subprocess.run(['git', 'show', A17_COMMIT + ':' + NOTE_PATH], cwd=repo, capture_output=True, check=True).stdout
     path = _note(tmp_path, committed)
-    pin = dict(commit=A16_COMMIT, path=path.relative_to(tmp_path).as_posix(), sha256=hashlib.sha256(committed).hexdigest())
+    pin = dict(commit=A17_COMMIT, path=path.relative_to(tmp_path).as_posix(), sha256=hashlib.sha256(committed).hexdigest())
     # The committed bytes are the real ones; git's ancestry, diff and
     # untracked queries are stubbed, since this build is itself uncommitted.
     monkeypatch.setattr(a.subprocess, 'run', _git_stub(committed))
     assert a.verify_registration(pin, tmp_path, instrument=A10) == pin
-    assert a.verify_registration(dict(pin, commit=A16_COMMIT[:8]), tmp_path, instrument=A10)['commit'] == A16_COMMIT[:8]
+    assert a.verify_registration(dict(pin, commit=A17_COMMIT[:8]), tmp_path, instrument=A10)['commit'] == A17_COMMIT[:8]
     path.write_bytes(committed + b'local edit\n')
     with pytest.raises(RuntimeError, match='stale'):
         a.verify_registration(pin, tmp_path, instrument=A10)
     path.write_bytes(committed)
-    lacking = committed.replace(A16_MARKER, b'### Amendment A16, something else')
-    assert lacking != committed
-    monkeypatch.setattr(a.subprocess, 'run', _git_stub(lacking))
-    path.write_bytes(lacking)
-    with pytest.raises(RuntimeError, match='stage 2 pin ' + A16_COMMIT[:8]):
-        a.verify_registration(dict(pin, sha256=hashlib.sha256(lacking).hexdigest()), tmp_path, instrument=A10)
+    for marker in (A17_MARKER, A16_MARKER):
+        lacking = committed.replace(marker, marker[:16] + b', something else')
+        assert lacking != committed
+        monkeypatch.setattr(a.subprocess, 'run', _git_stub(lacking))
+        path.write_bytes(lacking)
+        with pytest.raises(RuntimeError, match='stage 2 pin ' + A17_COMMIT[:8]):
+            a.verify_registration(dict(pin, sha256=hashlib.sha256(lacking).hexdigest()), tmp_path, instrument=A10)
     path.write_bytes(committed)
     monkeypatch.setattr(a.subprocess, 'run', _git_stub(committed))
-    with pytest.raises(RuntimeError, match='stage 2 pin ' + A16_COMMIT[:8]):
-        a.verify_registration(dict(pin, commit=a.A14_COMMIT), tmp_path, instrument=A10)
-    with pytest.raises(RuntimeError, match='stage 2 pin ' + A16_COMMIT[:8]):
-        a.verify_registration(dict(pin, commit='c217cc7d' + 'f' * 32), tmp_path, instrument=A10)
+    for other in (A16_COMMIT, A16_COMMIT[:8], a.A14_COMMIT, 'c217cc7d' + 'f' * 32):
+        with pytest.raises(RuntimeError, match='stage 2 pin ' + A17_COMMIT[:8]):
+            a.verify_registration(dict(pin, commit=other), tmp_path, instrument=A10)
     with pytest.raises(RuntimeError, match='stage 2 pin'):
         a.verify_registration(dict(pin, path='simulation/diagnostics/other.md'), tmp_path, instrument=A10)
-    # The A14 pin still verifies historically, by ancestry and committed bytes.
+    # The A16 pin verifies historically with its own real committed note, and
+    # the A14 pin with A14's, by ancestry and committed bytes.
+    a16_note = subprocess.run(['git', 'show', A16_COMMIT + ':' + NOTE_PATH], cwd=repo, capture_output=True, check=True).stdout
+    monkeypatch.setattr(a.subprocess, 'run', _git_stub(a16_note))
+    old = dict(commit=A16_COMMIT, path=pin['path'], sha256=hashlib.sha256(a16_note).hexdigest())
+    assert a.verify_registration(old, tmp_path, instrument=A10, historical=True) == old
     a14_note = b'Amendment A10\nAmendment A11\nClarified, 2026-10-16: pricing R_max\n### Amendment A14\n'
     monkeypatch.setattr(a.subprocess, 'run', _git_stub(a14_note))
     old = dict(commit=a.A14_COMMIT, path=pin['path'], sha256=hashlib.sha256(a14_note).hexdigest())
@@ -449,15 +475,15 @@ def test_set_state_strict_verification_against_the_rebased_tree(tmp_path, monkey
     assert a.verify_registration(r4, tmp_path) == r4
 
 
-def test_real_repository_historical_verification_of_the_a16_pin():
-    """Against the real repository: the A16 pin verifies historically (ancestry
+def test_real_repository_historical_verification_of_the_a17_pin():
+    """Against the real repository: the A17 pin verifies historically (ancestry
     and committed bytes); strict verification passes only on a committed and
     clean tree (the registered source rule), so it is refused while this build
-    is uncommitted and passes once it is committed; the A14 pin is refused as
-    current either way."""
+    is uncommitted and passes once it is committed; the A16 pin verifies
+    historically and is refused as current either way, as is the A14 pin."""
     repo = a.SIMULATION.parent
-    committed = subprocess.run(['git', 'show', A16_COMMIT + ':' + NOTE_PATH], cwd=repo, capture_output=True, check=True).stdout
-    pin = dict(commit=A16_COMMIT, path=NOTE_PATH, sha256=hashlib.sha256(committed).hexdigest())
+    committed = subprocess.run(['git', 'show', A17_COMMIT + ':' + NOTE_PATH], cwd=repo, capture_output=True, check=True).stdout
+    pin = dict(commit=A17_COMMIT, path=NOTE_PATH, sha256=hashlib.sha256(committed).hexdigest())
     assert a.verify_registration(pin, repo, instrument=A10, historical=True) == pin
     # The registered source rule, as verify_registration applies it: tracked
     # changes under simulation, or untracked files at manifest paths. Untracked
@@ -472,17 +498,22 @@ def test_real_repository_historical_verification_of_the_a16_pin():
             a.verify_registration(pin, repo, instrument=A10)
     else:
         assert a.verify_registration(pin, repo, instrument=A10) == pin
-    with pytest.raises(RuntimeError, match='stage 2 pin'):
-        a.verify_registration(dict(pin, commit=a.A14_COMMIT), repo, instrument=A10)
+    a16_note = subprocess.run(['git', 'show', A16_COMMIT + ':' + NOTE_PATH], cwd=repo, capture_output=True, check=True).stdout
+    a16 = dict(commit=A16_COMMIT, path=NOTE_PATH, sha256=hashlib.sha256(a16_note).hexdigest())
+    assert a.verify_registration(a16, repo, instrument=A10, historical=True) == a16
+    for other in (A16_COMMIT, a.A14_COMMIT):
+        with pytest.raises(RuntimeError, match='stage 2 pin'):
+            a.verify_registration(dict(pin, commit=other), repo, instrument=A10)
 
 
 def test_successor_constant_unset_state_keeps_a14_current(unset):
     assert a.STAGE2_COMMIT is None and a.STAGE2_AMENDMENT_MARKER is None
     assert a.current_a10_commit() == a.A14_COMMIT
-    assert a.current_a10_note_markers() == a.STAGE2_NOTE_MARKERS == (b'Clarified, 2026-10-16: pricing R_max', b'### Amendment A14')
+    assert a.current_a10_note_markers() == a.STAGE2_NOTE_MARKERS == A14_MARKERS
     assert a.is_current_a10_pin(a.A14_COMMIT) and a.is_current_a10_pin(a.A14_COMMIT[:8])
     assert not a.is_current_a10_pin(a.A13_COMMIT) and not a.is_current_a10_pin(SUCCESSOR)
-    assert set(a.a13_binding_pins()) == {a.A13_COMMIT, a.A13_COMMIT[:8], a.A14_COMMIT, a.A14_COMMIT[:8]}
+    # A16 was a current pin once, so it stays bound even with the successor unset.
+    assert set(a.a13_binding_pins()) == {a.A13_COMMIT, a.A13_COMMIT[:8], a.A14_COMMIT, a.A14_COMMIT[:8], A16_COMMIT, A16_COMMIT[:8]}
 
 
 def test_a14_pin_verifies_exactly_as_before_while_unset(unset, tmp_path, monkeypatch):
@@ -505,9 +536,11 @@ def test_successor_pin_is_strict_once_set_and_a14_becomes_historical(tmp_path, m
     monkeypatch.setattr(a, 'STAGE2_COMMIT', SUCCESSOR)
     monkeypatch.setattr(a, 'STAGE2_AMENDMENT_MARKER', None)
     assert a.current_a10_commit() == SUCCESSOR and a.is_current_a10_pin(SUCCESSOR[:8])
-    assert not a.is_current_a10_pin(a.A14_COMMIT)
-    assert set(a.a13_binding_pins()) == {a.A13_COMMIT, a.A13_COMMIT[:8], a.A14_COMMIT, a.A14_COMMIT[:8], SUCCESSOR, SUCCESSOR[:8]}
-    text = A14_TEXT + MARKER + b'\n'
+    assert not a.is_current_a10_pin(a.A14_COMMIT) and not a.is_current_a10_pin(A16_COMMIT)
+    assert set(a.a13_binding_pins()) == {a.A13_COMMIT, a.A13_COMMIT[:8], a.A14_COMMIT, a.A14_COMMIT[:8],
+                                         A16_COMMIT, A16_COMMIT[:8], SUCCESSOR, SUCCESSOR[:8]}
+    # A later successor's note is a superset: A14's text, A16's heading and its own.
+    text = A14_TEXT + A16_MARKER + b'\n' + MARKER + b'\n'
     path = _note(tmp_path, text)
     pin = dict(commit=SUCCESSOR, path=path.relative_to(tmp_path).as_posix(), sha256=hashlib.sha256(text).hexdigest())
     monkeypatch.setattr(a.subprocess, 'run', _git_stub(text))
@@ -515,14 +548,15 @@ def test_successor_pin_is_strict_once_set_and_a14_becomes_historical(tmp_path, m
     with pytest.raises(RuntimeError, match='without its amendment marker'):
         a.verify_registration(pin, tmp_path, instrument=A10)
     monkeypatch.setattr(a, 'STAGE2_AMENDMENT_MARKER', MARKER)
-    assert a.current_a10_note_markers() == a.STAGE2_NOTE_MARKERS + (MARKER,)
+    assert a.current_a10_note_markers() == a.STAGE2_NOTE_MARKERS + a.STAGE2_PRIOR_MARKERS + (MARKER,)
     assert a.verify_registration(pin, tmp_path, instrument=A10) == pin
-    # A committed note at the successor commit that lacks the amendment is refused.
-    lacking = A14_TEXT + b'### Amendment A15, something else\n'
-    monkeypatch.setattr(a.subprocess, 'run', _git_stub(lacking))
-    path.write_bytes(lacking)
-    with pytest.raises(RuntimeError, match='stage 2 pin'):
-        a.verify_registration(dict(pin, sha256=hashlib.sha256(lacking).hexdigest()), tmp_path, instrument=A10)
+    # A committed note at the successor commit that lacks the amendment, or that
+    # lacks the retained A16 heading, is refused.
+    for lacking in (A14_TEXT + A16_MARKER + b'\n### Amendment A15, something else\n', A14_TEXT + MARKER + b'\n'):
+        monkeypatch.setattr(a.subprocess, 'run', _git_stub(lacking))
+        path.write_bytes(lacking)
+        with pytest.raises(RuntimeError, match='stage 2 pin'):
+            a.verify_registration(dict(pin, sha256=hashlib.sha256(lacking).hexdigest()), tmp_path, instrument=A10)
     path.write_bytes(text)
     monkeypatch.setattr(a.subprocess, 'run', _git_stub(text))
     # The A14 pin is no longer current: strict verification refuses it, and the
@@ -552,13 +586,13 @@ def test_successor_pin_is_strict_once_set_and_a14_becomes_historical(tmp_path, m
 
 
 @pytest.mark.parametrize('stage', ['a4', 'a5'])
-@pytest.mark.parametrize('successor', [None, SUCCESSOR, A16_COMMIT])
+@pytest.mark.parametrize('successor', [None, SUCCESSOR, A16_COMMIT, A17_COMMIT])
 @pytest.mark.parametrize('commit', [a.A14_COMMIT, a.A14_COMMIT[:8], a.A13_COMMIT, SUCCESSOR, SUCCESSOR[:8], A16_COMMIT,
-                                    A16_COMMIT[:8], 'historical'])
+                                    A16_COMMIT[:8], A17_COMMIT, A17_COMMIT[:8], 'historical'])
 def test_publication_selects_the_current_pin_through_the_shared_helper(tmp_path, monkeypatch, stage, successor, commit):
     from v3 import table_labels_a5 as a5, table_validation_a4 as a4, tables_a10
     monkeypatch.setattr(a, 'STAGE2_COMMIT', successor)
-    monkeypatch.setattr(a, 'STAGE2_AMENDMENT_MARKER', (A16_MARKER if successor == A16_COMMIT else MARKER) if successor else None)
+    monkeypatch.setattr(a, 'STAGE2_AMENDMENT_MARKER', _marker_for(successor))
     calls = []
     def verify(*args, **kwargs):
         calls.append(kwargs)
@@ -575,16 +609,20 @@ def test_publication_selects_the_current_pin_through_the_shared_helper(tmp_path,
     assert calls[0]['historical'] == (commit not in (current, current[:8]))
 
 
-@pytest.mark.parametrize('successor', [None, SUCCESSOR, A16_COMMIT])
-@pytest.mark.parametrize('commit', [a.A14_COMMIT, a.A13_COMMIT[:8], SUCCESSOR, A16_COMMIT, A16_COMMIT[:8], 'historical'])
+@pytest.mark.parametrize('successor', [None, SUCCESSOR, A16_COMMIT, A17_COMMIT])
+@pytest.mark.parametrize('commit', [a.A14_COMMIT, a.A13_COMMIT[:8], SUCCESSOR, A16_COMMIT, A16_COMMIT[:8], A17_COMMIT,
+                                    A17_COMMIT[:8], 'historical'])
 def test_a4_part2_binding_follows_the_pin_helper(tmp_path, monkeypatch, successor, commit):
     """The A13 Part 2 binding site is reached for exactly the pins the shared
     helper names; a successor pin accepted by artifacts.py cannot skip it. With
-    the real A16 value the binding applies for the A16 pin and for A13 and A14."""
+    the real A17 value the binding applies for the A17 pin and for A13, A14 and
+    A16; the A16 forms stay bound whatever the successor is."""
     from v3 import table_validation_a4 as a4, tables_a10, admission_a13 as admit
     monkeypatch.setattr(a, 'STAGE2_COMMIT', successor)
-    monkeypatch.setattr(a, 'STAGE2_AMENDMENT_MARKER', (A16_MARKER if successor == A16_COMMIT else MARKER) if successor else None)
+    monkeypatch.setattr(a, 'STAGE2_AMENDMENT_MARKER', _marker_for(successor))
     expected = commit in a.a13_binding_pins()
+    assert expected == (commit in {a.A13_COMMIT[:8], a.A14_COMMIT, A16_COMMIT, A16_COMMIT[:8]}
+                        or (successor is not None and commit in (successor, successor[:8])))
     monkeypatch.setattr(a, 'verify_registration', lambda *args, **kw: None)
     monkeypatch.setattr(tables_a10, 'verify_estimation_source', lambda *args, **kw: None)
     monkeypatch.setattr(a4, 'registered_publish_guard', lambda p: None)
@@ -622,9 +660,9 @@ def test_a4_part2_binding_follows_the_pin_helper(tmp_path, monkeypatch, successo
 
 
 @pytest.mark.parametrize('stage', ['a4', 'a5'])
-def test_publication_with_the_set_constants_treats_a14_as_historical_and_a16_as_current(tmp_path, monkeypatch, stage):
-    """No monkeypatch of the constants: the A14 pin now verifies historically
-    through both publish sites and the A16 pin strictly."""
+def test_publication_with_the_set_constants_treats_a16_as_historical_and_a17_as_current(tmp_path, monkeypatch, stage):
+    """No monkeypatch of the constants: the A16, A14 and A13 pins now verify
+    historically through both publish sites and the A17 pin strictly."""
     from v3 import table_labels_a5 as a5, table_validation_a4 as a4, tables_a10
     calls = []
     def verify(*args, **kwargs):
@@ -633,7 +671,8 @@ def test_publication_with_the_set_constants_treats_a14_as_historical_and_a16_as_
     monkeypatch.setattr(a, 'verify_registration', verify)
     monkeypatch.setattr(a5, 'verify_registration', verify)
     monkeypatch.setattr(tables_a10, 'verify_estimation_source', lambda *args, **kw: None)
-    for commit, historical in ((a.A14_COMMIT, True), (a.A13_COMMIT, True), (A16_COMMIT, False), (A16_COMMIT[:8], False)):
+    for commit, historical in ((a.A14_COMMIT, True), (a.A13_COMMIT, True), (A16_COMMIT, True), (A16_COMMIT[:8], True),
+                               (A17_COMMIT, False), (A17_COMMIT[:8], False)):
         calls.clear()
         plan = dict(registered=True, registration={'commit': commit}, instrument=tables_a10.NOMINAL,
                     calibration_path='unused', jobs=[])

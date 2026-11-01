@@ -5,6 +5,8 @@ import os
 from pathlib import Path
 from .artifacts import SIMULATION, ROOT, scoped, seal, unseal, digest, file_hash, atomic_json, input_path
 
+A16_KINDS = ('a16_validate_plain_r1', 'a16_validate_plain_r2')
+
 
 def dependencies(jobs, phase_root, extra_inputs=()):
     """Enumerate execute() reads, including plain A4's preceding fit output.
@@ -28,6 +30,14 @@ def dependencies(jobs, phase_root, extra_inputs=()):
                 add(row['copy'])
                 if file_hash(row['copy']) != row['sha256']:
                     raise ValueError('A14 historical worker input changed')
+            continue
+        if job['kind'] in A16_KINDS:
+            # A16 workers read only their explicitly inventoried, hash-verified
+            # copies (fit/A1 inputs and the calibration), never an undeclared path.
+            for row in c['a16_inputs']:
+                add(row['copy'])
+                if file_hash(row['copy']) != row['sha256']:
+                    raise ValueError('A16 historical worker input changed')
             continue
         if c.get('calibration_path'):
             add(SIMULATION / c['calibration_path'])
@@ -108,7 +118,8 @@ def inventory(jobs, phase_root, extra_inputs=(), *, historical_roots=()):
     roots = normalize_historical_roots(historical_roots)
     paths = dependencies(jobs, phase_root, extra_inputs)
     a14_aliases = {str(Path(row['copy']).resolve()): [str(Path(p).resolve()) for p in [row['source'], *row.get('aliases', [])]]
-                   for j in jobs if j['kind'] == 'a14_validate_plain_ext2' for row in j['config']['a14_inputs']}
+                   for j in jobs for row in (j['config']['a14_inputs'] if j['kind'] == 'a14_validate_plain_ext2' else
+                                             j['config']['a16_inputs'] if j['kind'] in A16_KINDS else [])}
     files = []
     for p in paths:
         if p.is_relative_to(ROOT):
