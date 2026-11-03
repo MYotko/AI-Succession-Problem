@@ -209,13 +209,15 @@ def test_a_declared_historical_root_accepts_no_write():
 
 
 def test_the_write_helpers_resolve_through_the_guard():
-    """write_scoped names the writers reached on the proof path, and bounds the
-    rest by the declaration's scope rather than by an inventory.
+    """The named helpers refuse a declared root, and the source check is only a hint.
 
-    Both halves are checked here because the first version of this repair
-    stated a writer inventory twice and was wrong twice: it missed
-    stage_inputs in a module it had already inspected, and it claimed the two
-    frozen stagers were symmetric when A14 takes no view-root argument at all.
+    A blind review on a different model showed what reading the source is worth
+    here: replacing a resolution with `if False: write_scoped(path)` followed
+    by a bare resolve passes the text check while leaving the function
+    unguarded. So the text check stays, as a cheap signal that someone removed
+    a guard, and the behavioural assertions in
+    test_a_declared_historical_root_accepts_no_write are the evidence. Neither
+    establishes anything about writers elsewhere in the tree.
     """
     import inspect
     import re as _re
@@ -291,24 +293,29 @@ def _called_name(node, names):
 
 
 def test_the_scoped_call_sites_are_a_frozen_inventory():
-    """Pin every call site that resolves a path through scoped or write_scoped.
+    """Record the resolver call sites as the tree stands, and trip on a change.
 
-    This is deliberately not a claim that no writer can reach a declared
-    historical root. Three successive versions of that claim were each refuted
-    by blind review: the first said resolution alone made a root read-only; the
-    second named an exhaustive residual and missed stage_inputs; the third said
-    a test enforced the declaration's scope, and the test fell to an import
-    alias, an attribute-form context set, an unlisted writer and a one-level
-    indirect call. Proving that nothing writes inside a dynamic scope needs
-    whole-program reachability, so no test here can establish it.
+    A regression tripwire on the text, not a proof about behaviour, and that
+    distinction is the whole history of this repair. Four claims that a check
+    of this kind prevented a write under a declared historical root were each
+    refuted by blind review: resolution alone, then a named writer list, then a
+    parsed scope, then this inventory. A reviewer on a different model named
+    the pattern rather than the instance, that each version turned a syntactic
+    observation into a semantic guarantee.
 
-    What this pins is the set of things that could become writers. About 126
-    calls across 88 module-and-function pairs resolve through scoped, and many
-    of them write: production_runner.write, table_validation_a4.publish,
-    budget_a6.append_consumption, service.command. A new one cannot appear
-    without failing this test, which forces whoever adds it to say whether it
-    writes and whether it needs the guard. The same control pattern as the A2
-    boundary pin: a frozen inventory and a required review on change.
+    What it does: fails when a literal, aliased or attribute-form resolver call
+    is added, removed, or changes count. What it does not: it passes a getattr,
+    a container subscript, an annotated rebinding and a cross-module
+    re-export, all four demonstrated against it, and none is fixed here,
+    because patching the shapes a reviewer happens to name is what produced
+    the previous three versions. It records nothing about which sites write,
+    and resolving through scoped() is not evidence either way:
+    table_validation_a4.publish resolves and then writes through atomic_json,
+    so it is guarded.
+
+    Its worth is that the recorded set was verified exact by an independent
+    traversal of the production modules, so a diff against it is a real signal
+    in the ordinary case, which is the only case it speaks to.
     """
     inventory = json.loads((a.SIMULATION / 'scoped_call_sites.json').read_text(encoding='utf-8'))
     found = {}
@@ -337,9 +344,9 @@ def test_the_scoped_call_sites_are_a_frozen_inventory():
     assert not moved, 'resolver counts changed; update the inventory: %s' % moved
     assert sum(found.values()) == inventory['total_calls'], (sum(found.values()), inventory['total_calls'])
 
-    # The declaration's scope is a reviewed property of one call path, recorded
-    # here as the fact it is and not as an enforced invariant: this says where
-    # the declaration is used today, so a reader knows what was reviewed.
+    # Where the declaration is used today, so a reader knows what was reviewed.
+    # Not a guard, and not described as one: a blind review passed an aliased
+    # caller and an attribute-form _HISTORICAL_VIEW.set straight through this.
     sites = []
     for path in _production_sources():
         tree = ast.parse(path.read_text(encoding='utf-8', errors='replace'), filename=str(path))
