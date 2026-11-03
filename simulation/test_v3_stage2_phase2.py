@@ -6,6 +6,7 @@ Fixtures only. No registered output is read; the only registered input is the
 committed nominal calibration, and every simulated stream is a rehearsal stream
 in [2^128, 2^129) outside every reserve. No fixture reserves or mutates a
 registered family anchor."""
+import ast
 from copy import deepcopy
 import hashlib
 import math
@@ -236,16 +237,73 @@ def test_the_named_write_helpers_resolve_through_the_guard():
     # write_once is named as needing no guard, on exclusive creation alone.
     assert _re.search(r"open\(\s*['\"]xb['\"]", inspect.getsource(shards.write_once))
 
-    # The bound the docstring rests on: one production caller of the declaration.
-    callers = [p.name for p in sorted(a.ROOT.glob('*.py'))
-               if 'historical_view(' in p.read_text(encoding='utf-8', errors='replace')
-               and p.name != 'artifacts.py']
-    assert callers == ['replay_a16.py'], callers
-
     # The residual, as stated: A16 confines to its view root, A14 has none.
     from v3 import history_a14, history_a16
     assert 'view_root' in inspect.signature(history_a16.stage_history).parameters
     assert 'view_root' not in inspect.signature(history_a14.stage_history).parameters
+
+
+def _production_sources():
+    """Every non-test module in the source manifest's two directories."""
+    return sorted(set(a.ROOT.glob('*.py')) |
+                  {p for p in a.SIMULATION.glob('*.py') if not p.name.startswith('test_')})
+
+
+def _declares(expr):
+    """Whether an expression is a call of historical_view, by name or attribute."""
+    if not isinstance(expr, ast.Call):
+        return False
+    return (isinstance(expr.func, ast.Name) and expr.func.id == 'historical_view') or \
+           (isinstance(expr.func, ast.Attribute) and expr.func.attr == 'historical_view')
+
+
+def test_the_declaration_scope_is_enforced_not_asserted():
+    """The bound write_scoped rests on, parsed rather than grepped.
+
+    The first version of this checked that the set of root-level filenames
+    containing the substring 'historical_view(' was exactly ['replay_a16.py'].
+    A blind review showed by mutation that it passed with a second caller in
+    the same module, an aliased caller elsewhere, a direct _HISTORICAL_VIEW.set
+    elsewhere, and an unguarded writer inserted inside the existing context. It
+    was a filename check wearing an invariant's clothes. Each of those four is
+    a separate assertion here.
+    """
+    WRITES = {'open', 'mkdir', 'chmod', 'replace', 'rename', 'unlink', 'rmdir', 'touch',
+              'write_text', 'write_bytes', 'copyfile', 'copy', 'copy2', 'move', 'fsync',
+              'atomic_json', 'write_once', 'metadata_json', 'persist_restarts', 'append_consumption',
+              'stage_history', 'stage_inputs', 'receive', 'lease'}
+    sites, setters, mentions = [], [], []
+    for path in _production_sources():
+        tree = ast.parse(path.read_text(encoding='utf-8', errors='replace'), filename=str(path))
+        functions = [n for n in ast.walk(tree) if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))]
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Name) and node.id == '_HISTORICAL_VIEW':
+                setters.append(path.name)
+            if (isinstance(node, ast.Name) and node.id == 'historical_view') or \
+               (isinstance(node, ast.Attribute) and node.attr == 'historical_view'):
+                mentions.append(path.name)
+            if isinstance(node, ast.With) and any(_declares(item.context_expr) for item in node.items):
+                owner = [f.name for f in functions if node in ast.walk(f)]
+                sites.append((path.name, owner[0] if owner else '<module>', node))
+
+    # One declaration site, in the one function the claim names.
+    assert [(f, g) for f, g, _ in sites] == [('replay_a16.py', 'original_validation_plan')], \
+        [(f, g) for f, g, _ in sites]
+
+    # The context variable is set nowhere but where it is defined.
+    assert sorted(set(setters)) == ['artifacts.py'], sorted(set(setters))
+
+    # Every mention of the name is that one call plus its definition, so no
+    # alias of it exists to be called from somewhere else.
+    others = sorted(n for n in mentions if n != 'artifacts.py')
+    assert others == ['replay_a16.py'] and others.count('replay_a16.py') == len(sites), (others, len(sites))
+
+    # Nothing writes inside the declaration's body.
+    for filename, owner, node in sites:
+        for inner in ast.walk(ast.Module(body=node.body, type_ignores=[])):
+            if isinstance(inner, ast.Call):
+                name = getattr(inner.func, 'id', None) or getattr(inner.func, 'attr', None)
+                assert name not in WRITES, '%s in %s.%s writes inside the declaration' % (name, filename, owner)
 
 
 def test_a14_and_a16_histories_load_at_the_successor_identity(tmp_path):

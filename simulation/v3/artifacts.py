@@ -153,9 +153,16 @@ def write_scoped(path):
     its only production caller is replay_a16.original_validation_plan, which
     wraps one read of a producing identity's original validation plan. Nothing
     writes inside that call, so no unguarded writer is reachable while a
-    declaration is active. test_the_named_write_helpers_resolve_through_the_guard
-    enforces that one-caller bound rather than leaving it to a reader, and a
-    caller that widens the scope takes on the duty of covering what it adds.
+    declaration is active.
+
+    test_the_declaration_scope_is_enforced_not_asserted enforces that bound by
+    parsing the tree rather than searching it: one declaration site, in that
+    one function; _HISTORICAL_VIEW set nowhere but here; no alias of the
+    declaration anywhere; and no write inside its body. It is mutation-tested,
+    because the first version of that check compared filenames against a
+    literal substring and passed with a second caller added. A caller that
+    widens the scope will fail it, and takes on the duty of covering what it
+    adds.
 
     The residual that cannot be closed: history_a14.stage_history and
     history_a16.stage_history write and chmod through scoped() and are frozen
