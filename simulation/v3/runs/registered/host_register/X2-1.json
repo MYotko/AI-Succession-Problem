@@ -2,10 +2,10 @@
   "schema": "lineage-a17-sealed-host-entry-v1",
   "payload": {
     "schema": "lineage-a17-host-payload-v1",
-    "record_date": "2026-10-31",
+    "record_date": "2026-11-02",
     "unit_name": "X2-1",
     "host_class": "X2",
-    "record_status": "post-update fixed-code requalification accepted on the acceptance replay of 2026-10-30/31 (operator approval bound in operator_approval); launch-identity qualification pending; not dispatch admission",
+    "record_status": "post-update fixed-code requalification accepted on the acceptance replay of 2026-10-30/31 (operator approval bound in operator_approval); worker-load sheet for the A11 compatibility proofs approved 2026-11-02; launch-identity qualification still pending, and A17 section 6 item 5 places it after those proofs; not dispatch admission",
     "scope": "A17 initial register; option C campaign remains X2-1 only",
     "cpu": {
       "available_cpu_budget": 32,
@@ -61,12 +61,72 @@
         "scope": "preparation worker observations only; reverify in each launch identity"
       },
       "selected_launch_workers": {
-        "value": null,
-        "reason": "The future launch configuration has not been measured or approved; 31 is a ceiling, not a selected configuration."
+        "value": "per build, by that build's own configuration test within the 31-worker ceiling",
+        "basis": "configure_host measures 8, 12, 16, 24 and 31 workers over two rounds in reversed order and chooses with production_runner.choose(). 31 rather than 32 because caps(x2, 32) gives 31 in both normal and work mode, the operator's n-1 stability reserve; AGENTS.md requires 32 to be listed among the candidates and the code asserts that before capping it. A single pre-chosen count would apply one answer to three different workloads, so none is recorded here (operator, 2026-11-02)."
       },
       "approved_load_sheet": {
-        "value": null,
-        "reason": "No per-launch load sheet is approved; class capacities require live memory and qualified class reservations."
+        "value": {
+          "document": "Lineage v3 records, historical_view_2026-11-02/LOAD_SHEET_a11_proofs_2026-11-02.md",
+          "sha256": "481c85773c7cb7be5b6b8433e51d3ea335816a64908440003d600b6d2ed3758d",
+          "scope": "the three A11 compatibility proofs at code identity aded81e3386169152f442263bf615f00f1f8fa6aaa67f04e633d7412e3cea39a, commit e1bb47ca1a7a6f3e7707f67bf1e91c62d4c2b2a1, on this host in normal mode",
+          "worker_ceiling": 31,
+          "numerical_threads_per_worker": 1,
+          "memory_headroom": 0.8,
+          "measured_class_reservations_gb": {
+            "a4_census": {
+              "min": 0.52,
+              "median": 0.52,
+              "max": 0.52,
+              "jobs_observed": 90
+            },
+            "a13_validate_plain_ext": {
+              "min": 1.88,
+              "median": 1.88,
+              "max": 1.88,
+              "jobs_observed": 5
+            },
+            "table": {
+              "min": 1.83,
+              "median": 3.57,
+              "max": 3.6,
+              "jobs_observed": 90
+            },
+            "a4_fit": {
+              "min": 1.99,
+              "median": 3.82,
+              "max": 3.89,
+              "jobs_observed": 90
+            },
+            "a4_validate": {
+              "min": 1.99,
+              "median": 3.86,
+              "max": 10.33,
+              "jobs_observed": 164
+            }
+          },
+          "unmeasured_classes": {
+            "classes": [
+              "a5_fvplain",
+              "rerun",
+              "a14_validate_plain_ext2"
+            ],
+            "basis": "no proof-side reservation exists for these; the sheet carries a deliberately unnarrowed 7 to 31 projected concurrency for a14_labels_runs, and single_preflight computes the real reservations and refuses a job that exceeds the qualified budget before any proof job starts"
+          },
+          "binding_cap_observed": {
+            "a13_extension": "runnable job count, 5 concurrent",
+            "original_tables": "memory, 27 concurrent with running 100.4 GB against a 100.4 GB budget",
+            "a14_labels_runs": "not yet run"
+          },
+          "eta_hours": {
+            "a13_extension": 2.89,
+            "original_tables": 15.45,
+            "a14_labels_runs": 14.5,
+            "batch": 30.0,
+            "kind": "measured for the first two, budget estimate for the third and the batch; budget estimates run high here and none of these is a deadline (operator, 2026-11-02)"
+          },
+          "approved": "operator, 2026-11-02, in session; recorded in DECISIONS_2026-11-02.md",
+          "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval"
+        }
       }
     },
     "environment": {
@@ -441,20 +501,19 @@
       }
     },
     "revision": {
-      "number": 2,
-      "supersedes_payload_sha256": "59f1fd7417e669b1a2d2c7d5202424299cce96a82042aca7df98340e73658192",
-      "supersedes_commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
-      "reason": "records the accepted post-update fixed-code requalification of 2026-10-31; metadata otherwise as revision 1"
+      "number": 3,
+      "supersedes_payload_sha256": "92d9443b313c79a48d242b7300f30dfffc4fc80c2cd8231d6354f2f8fd993fb2",
+      "supersedes_commit": "74460801",
+      "reason": "records the operator's approved worker-load sheet of 2026-11-02 for the three A11 compatibility proofs at identity aded81e3, and the per-build worker selection it states; metadata otherwise as revision 2. No qualification, admission or approved-kind change."
     }
   },
   "seal": {
     "algorithm": "sha256",
     "serialization": "UTF-8 JSON, sorted keys, separators comma and colon without whitespace, ensure_ascii=true, no NaN, no trailing newline; hash the payload object only",
-    "payload_sha256": "92d9443b313c79a48d242b7300f30dfffc4fc80c2cd8231d6354f2f8fd993fb2"
+    "payload_sha256": "dec4217dc562836db6edc876b1f1bfb4333acbd1f922b2540fbd128be0ca9895"
   },
   "operator_approval": {
-    "reference": "Lineage v3 records, requalification_2026-10-30/DECISIONS_2026-10-31.md (SHA-256 64cfb5b6cfb067e8f9c20e666744dff05d0612852cf505dd16c72c1a8799dbb6): the operator's approval of 2026-10-31 ('All approved') of X2-1's post-update fixed-code qualification on the acceptance record payload seal b3b2113d3b46938c7e32057163ef632c20cb8bb6a86fce4497d4c1390a401e10 and the frozen sample seal e3601ee4d09257d6de8cd25d65378ac324d882beb1c2eadef2d4e6217ab239bb, and of this register revision, binding payload digest 92d9443b313c79a48d242b7300f30dfffc4fc80c2cd8231d6354f2f8fd993fb2",
-    "reason": "Approved on the interpreter review ACCEPTANCE_REVIEW.md (SHA-256 d31681942c222c7adb4360e373058e5ae86a9ffbbcaa1296e7abfe7f58e097d1). The payload is unchanged from the staged revision 2 envelope and its seal was re-verified at commit. The payload's own qualification_records.post_update_fixed_code.operator_approval field records the state at seal time (pending) and points here.",
-    "scope": "revision 2: the accepted post-update fixed-code qualification only; not a stage 2 launch, workload kind, rate, dispatch or launch-identity approval"
+    "reference": "Lineage v3 records, historical_view_2026-11-02/DECISIONS_2026-11-02.md (SHA-256 2e315941ef7783b16dbc4626edfa21ab56ee0d12a34b18dc8197cb6ff0d534e3), section 6: the operator's approval of 2026-11-02 (\"approved, update the register\") of the worker-load sheet LOAD_SHEET_a11_proofs_2026-11-02.md (SHA-256 481c85773c7cb7be5b6b8433e51d3ea335816a64908440003d600b6d2ed3758d) for the three A11 compatibility proofs at code identity aded81e3386169152f442263bf615f00f1f8fa6aaa67f04e633d7412e3cea39a, and of this register revision, binding payload digest dec4217dc562836db6edc876b1f1bfb4333acbd1f922b2540fbd128be0ca9895. The prior approval of 2026-10-31 covering the post-update fixed-code qualification, on acceptance payload seal b3b2113d3b46938c7e32057163ef632c20cb8bb6a86fce4497d4c1390a401e10 and frozen sample seal e3601ee4d09257d6de8cd25d65378ac324d882beb1c2eadef2d4e6217ab239bb, stands unchanged and is recorded in requalification_2026-10-30/DECISIONS_2026-10-31.md (SHA-256 64cfb5b6cfb067e8f9c20e666744dff05d0612852cf505dd16c72c1a8799dbb6).",
+    "reason": "A resource approval. It approves the measured per-class reservations, the per-build worker selection and the planning ETA, and it approves no authority: not a launch go, not dispatch admission, not the approval of the three records' reasons documents. The load sheet states its own one unnarrowed figure, the projected concurrency for a14_labels_runs, and the operator approved it with that gap stated rather than filled."
   }
 }
