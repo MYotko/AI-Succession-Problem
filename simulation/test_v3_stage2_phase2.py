@@ -206,6 +206,48 @@ def test_a_declared_historical_root_accepts_no_write():
         _discard(external)
 
 
+def test_the_named_write_helpers_resolve_through_the_guard():
+    """write_scoped names the writers reached on the proof path, and bounds the
+    rest by the declaration's scope rather than by an inventory.
+
+    Both halves are checked here because the first version of this repair
+    stated a writer inventory twice and was wrong twice: it missed
+    stage_inputs in a module it had already inspected, and it claimed the two
+    frozen stagers were symmetric when A14 takes no view-root argument at all.
+    """
+    import inspect
+    import re as _re
+    from v3 import budget_a6, service, snapshot_a11
+    from v3 import compatibility_shards_a11 as shards
+
+    for func, name in ((a.atomic_json, 'atomic_json'), (a.lease, 'lease'),
+                       (snapshot_a11.receive, 'snapshot_a11.receive'),
+                       (shards.stage_inputs, 'compatibility_shards_a11.stage_inputs')):
+        source = inspect.getsource(func)
+        assert 'write_scoped(' in source, name + ' does not resolve through the guard'
+        assert not _re.search(r'(?<!write_)\bscoped\(', source), name + ' still resolves a write through scoped()'
+
+    # Named in write_scoped as writers that are NOT guarded, because they are
+    # off the proof path. If one ever gains the guard, the docstring is stale.
+    for func, name in ((budget_a6.append_consumption, 'budget_a6.append_consumption'),
+                       (service.command, 'service.command')):
+        assert 'write_scoped(' not in inspect.getsource(func), name + ' is guarded now; update write_scoped'
+
+    # write_once is named as needing no guard, on exclusive creation alone.
+    assert _re.search(r"open\(\s*['\"]xb['\"]", inspect.getsource(shards.write_once))
+
+    # The bound the docstring rests on: one production caller of the declaration.
+    callers = [p.name for p in sorted(a.ROOT.glob('*.py'))
+               if 'historical_view(' in p.read_text(encoding='utf-8', errors='replace')
+               and p.name != 'artifacts.py']
+    assert callers == ['replay_a16.py'], callers
+
+    # The residual, as stated: A16 confines to its view root, A14 has none.
+    from v3 import history_a14, history_a16
+    assert 'view_root' in inspect.signature(history_a16.stage_history).parameters
+    assert 'view_root' not in inspect.signature(history_a14.stage_history).parameters
+
+
 def test_a14_and_a16_histories_load_at_the_successor_identity(tmp_path):
     """The exact refusal that stopped the A14 producer's compatibility record:
     its sealed history names copy destinations inside its own checkout, and a

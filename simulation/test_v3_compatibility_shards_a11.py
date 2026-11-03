@@ -537,8 +537,18 @@ def test_preflight_clears_a_planned_record_without_spending_it(tmp_path, environ
     # record can never be produced at this identity, so a batch that plans
     # three of them is not going to get three.
     target.unlink()
-    with pytest.raises(ValueError, match='already spent for a record that does not exist'):
+    with pytest.raises(ValueError, match='already spent with no completed record'):
         c.preflight_record(sources, reasons, target)
+    # An existence check is not enough, which the first version of this got
+    # wrong: an empty file, a directory or a half-written record at the target
+    # would have reported already_built and waved the spent attempt through.
+    for stand_in in (lambda: target.write_bytes(b''),
+                     lambda: target.write_bytes(b'{"not": "a record"}\n'),
+                     lambda: target.mkdir()):
+        stand_in()
+        with pytest.raises(ValueError, match='already spent with no completed record'):
+            c.preflight_record(sources, reasons, target)
+        target.rmdir() if target.is_dir() else target.unlink()
 
 
 def test_single_host_precondition_failure_does_not_reserve_pair(tmp_path, environment, monkeypatch):

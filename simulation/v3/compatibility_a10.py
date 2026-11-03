@@ -342,14 +342,26 @@ def preflight_record(sources, reasons_path, target):
     inputs = unseal(portable_inventory(items, **options))
     configured = [i for i in items if i["profile_key"] in profiles]
     configuration = unseal(portable_inventory(configuration_items(configured, profiles), **options))
-    built = target.exists()
+    # Not target.exists(): an empty file, a directory or a half-written record
+    # satisfies that, and the first version of this check accepted all three, so
+    # a terminal record would have been reported as merely already built. Weaker
+    # than validate_record on purpose, which also demands the record be
+    # committed and operator-approved; a batch resuming straight after a build
+    # has neither yet.
+    try:
+        finished = unseal(read(target))
+    except Exception:
+        finished = None
+    built = (isinstance(finished, dict) and finished.get("schema") == SCHEMA and finished.get("passed") is True
+             and finished.get("producing_code_hash") == old and finished.get("new_code_hash") == new)
     spent = sorted(p.name for p in (target.with_suffix(".attempt.json"), reservation_path(record)) if p.exists())
-    # 17.3's proof finality: a spent attempt or reservation with no finished
+    # 17.3's proof finality: a spent attempt or reservation with no completed
     # record cannot be built again at this identity, so a batch that plans to
     # produce it must refuse here rather than at this record's turn, with its
-    # siblings' hours already spent. A finished record is not spent, it is
+    # siblings' hours already spent. A completed record is not spent, it is
     # done, and a resumed batch verifies and skips it.
-    _require(built or not spent, "attempt or reservation already spent for a record that does not exist: " + ", ".join(spent))
+    _require(built or not spent,
+             "attempt or reservation already spent with no completed record at %s: %s" % (target.name, ", ".join(spent)))
     return {"record": target.name, "registered_name": registered, "producing_code_hash": old, "new_code_hash": new,
             "strata": len(record["populations"]), "jobs": sum(len(g["job_ids"]) for g in record["populations"]),
             "sample": len(selected_jobs), "changed_files": len(record["changed_files"]),

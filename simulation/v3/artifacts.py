@@ -54,8 +54,9 @@ def historical_view(roots):
     it is an existing directory or an existing file with no write bit set, so a
     missing or writable copy still refuses. Resolution is not permission to
     write: it serves the frozen verifiers' stat and read, and every write
-    helper that takes a caller-supplied path goes through write_scoped(), which
-    refuses a declared root outright. See write_scoped for the one residual.
+    helper reached on the proof path goes through write_scoped(), which refuses
+    a declared root outright. See write_scoped for what that does and does not
+    promise, and for the residual it cannot close.
 
     The copies stay bound by the inventory's own per-file size and hash, and
     both History verifiers independently require each copy to be read-only.
@@ -135,22 +136,35 @@ def write_scoped(path):
     scoped() resolves an existing immutable copy under a declared historical
     root so the frozen A14 and A16 History verifiers can stat and read a
     producing identity's sealed copies from another checkout. Every write
-    helper that takes a caller-supplied path resolves through here instead, so
-    a declared root refuses creation, replacement and locking even though it
-    resolves. The guarantee is in-process and holds for atomic_json, lease and
-    snapshot_a11.receive, and through atomic_json for worker_safety's
-    metadata_json and persist_restarts.
+    helper reached on the proof path resolves through here instead, so a
+    declared root refuses creation, replacement and locking even though it
+    resolves: atomic_json, lease, snapshot_a11.receive and
+    compatibility_shards_a11.stage_inputs, and through atomic_json
+    worker_safety's metadata_json and persist_restarts.
+    compatibility_shards_a11.write_once needs no guard, creating exclusively,
+    so it cannot replace a copy that exists.
 
-    compatibility_shards_a11.write_once needs no guard and does not have one.
-    It creates exclusively, so it cannot replace an existing copy, and a path
-    that does not exist is not an immutable copy, so scoped() refuses it on
-    containment before a declaration is consulted.
+    What this does not promise is an inventory of every writer in the tree.
+    Such a list goes stale the moment someone adds one, and the first version
+    of this repair made that mistake twice. Other writers do resolve a write
+    through scoped() without this guard, budget_a6.append_consumption and
+    service.command among them. The bound that holds instead is the
+    declaration's scope: _HISTORICAL_VIEW is set only by historical_view(), and
+    its only production caller is replay_a16.original_validation_plan, which
+    wraps one read of a producing identity's original validation plan. Nothing
+    writes inside that call, so no unguarded writer is reachable while a
+    declaration is active. test_the_named_write_helpers_resolve_through_the_guard
+    enforces that one-caller bound rather than leaving it to a reader, and a
+    caller that widens the scope takes on the duty of covering what it adds.
 
-    The residual: history_a14.stage_history and history_a16.stage_history are
-    frozen modules that write and chmod through scoped(). Each stages only into
-    the view root it is given and refuses a destination outside it, and a proof
-    constructs History rather than staging, so neither is reachable on the
-    proof path. Neither can be guarded without breaking its frozen-module pin.
+    The residual that cannot be closed: history_a14.stage_history and
+    history_a16.stage_history write and chmod through scoped() and are frozen
+    under their suite pins. They are not symmetric. A16 confines every
+    destination to the view root it is given and refuses anything outside it;
+    A14 takes no view-root argument at all and checks destinations only against
+    source paths, original directories and protected anchors. A proof
+    constructs History rather than staging, so neither is called on the proof
+    path.
     """
     result = scoped(path)
     if _declared_historical(result):

@@ -20,7 +20,7 @@ import time
 
 from .artifacts import (ROOT, SIMULATION, atomic_json, canonical, code_identity,
                         configure_threads, digest, file_hash, read, scoped, seal,
-                        source_manifest, stable_job, unseal)
+                        source_manifest, stable_job, unseal, write_scoped)
 from .compatibility_a10 import _require, _selected, _stratum, collect_record, proof_row, _execute_proof
 
 from . import worker_control as wc
@@ -288,7 +288,7 @@ def stage_inputs(document, bundle):
     payload = unseal(document)
     verify_historical_scope(payload)
     for row in payload['files']:
-        path = scoped(Path(bundle) / row['path'])
+        path = write_scoped(Path(bundle) / row['path'])
         path.parent.mkdir(parents=True, exist_ok=True)
         if not path.exists():
             _require(file_hash(row['source']) == row['sha256'], 'source input changed')
