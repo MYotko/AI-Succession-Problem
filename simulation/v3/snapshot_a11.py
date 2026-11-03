@@ -3,7 +3,7 @@ import base64
 import hashlib
 import os
 from pathlib import Path
-from .artifacts import SIMULATION, ROOT, scoped, seal, unseal, digest, file_hash, atomic_json, input_path
+from .artifacts import SIMULATION, ROOT, scoped, seal, unseal, digest, file_hash, atomic_json, input_path, write_scoped
 
 A16_KINDS = ('a16_validate_plain_r1', 'a16_validate_plain_r2')
 
@@ -99,6 +99,29 @@ def historical_roots(spec):
     return roots
 
 
+def historical_root_provenance(sources):
+    """Which declared roots carry a sealed hash behind them, and which do not.
+
+    A root reached through a source specification is bound: the spec is sealed,
+    its historical_roots_sha256 must match, and the spec's own digest must match
+    the source root's identity.json. A root supplied by the sources document is
+    normalized and nothing more, because that document is plain operator input
+    and is not part of the identity chain. Both are returned so a record can
+    keep them apart, which the first version of the A11 historical-view repair
+    claimed was true of every root and was not.
+
+    Widening the set widens only where a read may resolve. It admits no
+    unverified bytes: every history copy is size- and hash-checked by the
+    History verifier, and every proof input by the portable inventory.
+    """
+    from .artifacts import read, unseal
+    bound, supplied = set(), set()
+    for source in sources:
+        bound.update(historical_roots(unseal(read(source['spec']))))
+        supplied.update(normalize_historical_roots(source.get('historical_roots', [])))
+    return {'specification': sorted(bound), 'sources_document': sorted(supplied - bound)}
+
+
 def verify_historical_scope(payload):
     roots = normalize_historical_roots(payload.get('historical_roots', []))
     if roots or 'historical_roots_sha256' in payload:
@@ -161,13 +184,13 @@ def receive(document, directory, reader):
     """reader(name, offset) may use SSH or loopback. Partial files never map."""
     payload = unseal(document)
     roots = verify_historical_scope(payload)
-    directory = scoped(directory) / document['sha256']
+    directory = write_scoped(directory) / document['sha256']
     paths = {}
     for row in payload['files']:
         relative = Path(row['path'])
         if relative.is_absolute() or '..' in relative.parts or relative.parts[0] != 'v3':
             raise ValueError('unsafe input path')
-        target = scoped(directory / relative)
+        target = write_scoped(directory / relative)
         target.parent.mkdir(parents=True, exist_ok=True)
         if not target.exists():
             partial = target.with_name(target.name + '.partial')

@@ -173,6 +173,15 @@ def collect_record(sources, reasons_path):
     """Read the original populations and comparisons without executing a job."""
     from .instrument import declaration
     from .production_runner import completed
+    from .snapshot_a11 import historical_root_provenance
+    # The sources' declared historical roots. A producing identity that carries
+    # a sealed history staged its copies inside its own checkout, so its
+    # original validation plan is read through this declaration, which resolves
+    # existing immutable copies and accepts no write. The roots reached through
+    # a sealed source specification are hash-bound; those supplied by the
+    # sources document are not, and the record keeps the two apart.
+    provenance = historical_root_provenance(sources)
+    history_view = sorted(set(provenance['specification']) | set(provenance['sources_document']))
     reason_doc = read(reasons_path)
     before = reason_doc["producing_source_manifest"]
     old, new = digest(before), code_identity()
@@ -230,7 +239,7 @@ def collect_record(sources, reasons_path):
                              and original['plan_hash'] == spec['original_plan_hash'], 'A13 replay original plan binding differs')
                 else:
                     from .replay_a16 import original_validation_plan
-                    original = original_validation_plan(spec)
+                    original = original_validation_plan(spec, history_view)
                     _require(_recompute_plan_hash(original) == original['plan_hash'], 'extension replay original plan binding differs')
                 source = next(j for j in original['jobs'] if j['config']['phase'] == 'validate_plain'
                               and j['config']['a1_job']['id'] == job['config']['a1_job']['id'])
@@ -276,7 +285,8 @@ def collect_record(sources, reasons_path):
               "selection_rule": 'two smallest digest(["A11-compatibility", phase, job_id]) per capability/setting',
               "comparison": COMPARISON,
               "operator_approval": None, "passed": False, "proofs": [],
-              "execution": {"mode": "work", "workers": 1, "threads": 1}}
+              "execution": {"mode": "work", "workers": 1, "threads": 1, "historical_view": history_view,
+                            "historical_view_provenance": provenance}}
     return record, {jid: selected_jobs[jid] for jid in sample}, profiles
 
 
@@ -286,6 +296,67 @@ def proof_row(original, fresh):
             "before_sha256": original["before_sha256"],
             **{k: v for k, v in fresh.items() if not k.startswith('_')},
             "passed": original["before_sha256"] == fresh["after_sha256"]}
+
+
+def preflight_record(sources, reasons_path, target):
+    """The assembly refusals a build raises before any compute, writing nothing.
+
+    A build's first act is to assemble the record: the sources and their
+    registration, the reasons against the live diff, each producing identity's
+    bindings and sealed history, the sample, and the inputs every selected job
+    will read. None of that depends on compute, but a build only reaches it
+    when it is launched, so when records are built one after another a blocking
+    condition in the last one surfaces after the earlier ones have already run
+    and must be rebuilt. This runs the same assembly for a planned record and
+    executes no job, creates no attempt and spends no reservation, so a batch
+    can clear every record it intends to build before the first proof starts.
+
+    It is not a launch gate and does not cover every refusal a build can raise.
+    Host admission, the settings and CPU check, live memory and qualified class
+    reservations, snapshot reception, effective thread verification, the
+    configuration test itself and a dispatch's source-pin verification all come
+    later and can still refuse. A record that clears here is cleared of the
+    blocking conditions in its own assembly, nothing more.
+    """
+    from .compatibility_shards_a11 import configuration_items, portable_inventory, reservation_path
+    from .snapshot_a11 import historical_root_provenance
+    target = scoped(target)
+    record, selected_jobs, profiles = collect_record(sources, reasons_path)
+    old, new = record["producing_code_hash"], record["new_code_hash"]
+    registered = record_name(old, new)
+    # A build may write to a staged path and be copied to its registered name
+    # after approval, as 17.3's template does. A build that writes straight
+    # into the registered directory must already carry that name, since
+    # validate_record refuses any other.
+    if target.parent == RECORD_DIRECTORY.resolve():
+        _require(target.name == registered, "a planned record in the registered directory is not named record_name(producing, new)")
+    provenance = historical_root_provenance(sources)
+    roots = sorted(set(provenance["specification"]) | set(provenance["sources_document"]))
+    options = {"historical_roots": roots} if roots else {}
+    items = list(selected_jobs.values())
+    # The same configuration-profile precondition single_preflight applies, and
+    # the same dependency enumeration, which is where a worker input missing
+    # from a fresh checkout or outside the declared roots refuses.
+    missing = [i for i in items if i["profile_key"] not in profiles]
+    _require(all(i["job"]["kind"] == "fixture" for i in missing), "missing pre-launch configuration profile")
+    inputs = unseal(portable_inventory(items, **options))
+    configured = [i for i in items if i["profile_key"] in profiles]
+    configuration = unseal(portable_inventory(configuration_items(configured, profiles), **options))
+    built = target.exists()
+    spent = sorted(p.name for p in (target.with_suffix(".attempt.json"), reservation_path(record)) if p.exists())
+    # 17.3's proof finality: a spent attempt or reservation with no finished
+    # record cannot be built again at this identity, so a batch that plans to
+    # produce it must refuse here rather than at this record's turn, with its
+    # siblings' hours already spent. A finished record is not spent, it is
+    # done, and a resumed batch verifies and skips it.
+    _require(built or not spent, "attempt or reservation already spent for a record that does not exist: " + ", ".join(spent))
+    return {"record": target.name, "registered_name": registered, "producing_code_hash": old, "new_code_hash": new,
+            "strata": len(record["populations"]), "jobs": sum(len(g["job_ids"]) for g in record["populations"]),
+            "sample": len(selected_jobs), "changed_files": len(record["changed_files"]),
+            "historical_view": roots, "historical_view_provenance": provenance,
+            "proof_inputs": len(inputs["files"]),
+            "configuration_inputs": len(configuration["files"]),
+            "already_built": built, "already_spent": spent}
 
 
 def build_record(sources, reasons_path, target, *, workers=None, memory_floor_gb=0., override_reason=None, operator=None, memory_headroom=.8, profile="local", mode=None, cpu_budget=None):
@@ -374,6 +445,8 @@ def main():
     p.add_argument('--memory-floor-gb', type=float, default=0.)
     from . import worker_control as wc
     wc.options(p)
+    p = sub.add_parser("preflight")
+    p.add_argument("--sources", required=True); p.add_argument("--reasons", required=True); p.add_argument("--output", required=True)
     p = sub.add_parser("control"); p.add_argument("record"); p.add_argument("--workers", type=int, required=True); p.add_argument("--reason")
     p = sub.add_parser("approve")
     p.add_argument("record"); p.add_argument("--operator", required=True); p.add_argument("--date", required=True)
@@ -382,6 +455,9 @@ def main():
         record = build_record(read(args.sources), args.reasons, args.output, workers=args.workers, memory_floor_gb=args.memory_floor_gb, profile=args.profile, mode=args.mode, cpu_budget=args.cpu_budget, **wc.arguments(args))
         print({"passed": record["passed"], "jobs": len(record["proofs"]), "record_sha256": file_hash(args.output)})
         return 0 if record["passed"] else 1
+    if args.command == 'preflight':
+        print(json.dumps(preflight_record(read(args.sources), args.reasons, args.output), sort_keys=True))
+        return 0
     if args.command == 'control':
         from .compatibility_shards_a11 import check_reservation
         target = scoped(args.record)

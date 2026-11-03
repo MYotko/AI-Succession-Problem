@@ -103,6 +103,158 @@ def test_scoped_unchanged_on_ordinary_paths(tmp_path):
 
 
 # ---------------------------------------------------------------------------
+# Part 2b: a producing identity's sealed history, read at the successor
+# identity (artifacts.historical_view, replay_a16.original_validation_plan)
+# ---------------------------------------------------------------------------
+
+def _external_tree():
+    """A directory outside this checkout, standing in for a producing checkout.
+
+    The suite's tmp_path is inside simulation/v3 on purpose, so a staged
+    history there is already in scope; the refusal under test only appears
+    when the copies are somewhere scoped() cannot reach.
+    """
+    import tempfile
+    return Path(tempfile.mkdtemp(prefix='a11_producer_')).resolve()
+
+
+def _discard(tree):
+    import shutil
+    for path in tree.rglob('*'):
+        if path.is_file():
+            path.chmod(0o644)
+    shutil.rmtree(tree, ignore_errors=True)
+
+
+def test_historical_view_resolves_only_existing_immutable_copies(tmp_path):
+    external = _external_tree()
+    try:
+        copies = external / 'copies'
+        copies.mkdir()
+        frozen, writable = copies / 'frozen.json', copies / 'writable.json'
+        for path in (frozen, writable):
+            path.write_bytes(a.canonical(a.seal({'toy': path.name})) + b'\n')
+        frozen.chmod(0o444)
+        for path in (frozen, writable, copies, copies / 'absent.json'):
+            with pytest.raises(ValueError, match='outside simulation/v3'):
+                a.scoped(path)
+        with a.historical_view([external]):
+            # An immutable copy and its directory resolve; nothing else does,
+            # so no write can land under the declaration.
+            assert a.scoped(frozen) == frozen and a.scoped(copies) == copies
+            assert a.read(frozen) == a.seal({'toy': 'frozen.json'})
+            for path in (writable, copies / 'absent.json', copies / 'new' / 'copy.json'):
+                with pytest.raises(ValueError, match='outside simulation/v3'):
+                    a.scoped(path)
+        # The declaration is scoped to the context and never implicit.
+        with pytest.raises(ValueError, match='outside simulation/v3'):
+            a.scoped(frozen)
+        with a.historical_view([]):
+            with pytest.raises(ValueError, match='outside simulation/v3'):
+                a.scoped(frozen)
+        for bad, message in ((['relative/root'], 'must be absolute'), ([external / 'absent'], 'bounded existing directory'),
+                             ([frozen], 'bounded existing directory'), ([Path(external.anchor)], 'bounded existing directory'),
+                             ([a.ROOT], 'overlaps this checkout'), ([tmp_path], 'overlaps this checkout'),
+                             ([a.SIMULATION.parent], 'overlaps this checkout')):
+            with pytest.raises(ValueError, match=message):
+                with a.historical_view(bad):
+                    pass
+    finally:
+        _discard(external)
+
+
+def test_a_declared_historical_root_accepts_no_write():
+    """Resolution is not permission to write, which the first repair claimed
+    and did not deliver.
+
+    scoped() returning an immutable copy left the ordinary write helpers able
+    to replace it: a 0444 mode does not stop os.replace from rewriting the
+    directory entry when the parent directory permits it. Every write helper
+    that takes a caller-supplied path now resolves through write_scoped, and a
+    target that does not exist yet is refused earlier, on containment.
+    """
+    from v3.compatibility_shards_a11 import write_once
+    external = _external_tree()
+    try:
+        victim = external / 'sealed_copy.json'
+        victim.write_bytes(a.canonical({'original': True}) + b'\n')
+        victim.chmod(0o444)
+        before = victim.read_bytes()
+        with a.historical_view([external]):
+            assert a.scoped(victim) == victim      # the verifier's read still works
+            for write in (lambda: a.atomic_json(victim, {'replaced': True}),
+                          lambda: a.write_scoped(victim),
+                          lambda: a.lease(victim).__enter__()):
+                with pytest.raises(ValueError, match='write under a declared historical root'):
+                    write()
+            # write_once carries no guard and needs none: it creates
+            # exclusively, so it cannot replace a copy that exists, and it
+            # reports that as its own finality refusal.
+            with pytest.raises(ValueError, match='attempt is final'):
+                write_once(victim, {'replaced': True})
+            # A new path under the declaration is not an immutable copy, so it
+            # never reaches the declaration check; either way it refuses.
+            for absent in (external / 'new.json', external / 'sub' / 'deep.json'):
+                for write in (lambda: a.atomic_json(absent, {'created': True}),
+                              lambda: write_once(absent, {'created': True}),
+                              lambda: a.lease(absent).__enter__()):
+                    with pytest.raises(ValueError, match='outside simulation/v3'):
+                        write()
+        assert victim.read_bytes() == before
+        assert [p.name for p in external.rglob('*')] == ['sealed_copy.json']
+    finally:
+        _discard(external)
+
+
+def test_a14_and_a16_histories_load_at_the_successor_identity(tmp_path):
+    """The exact refusal that stopped the A14 producer's compatibility record:
+    its sealed history names copy destinations inside its own checkout, and a
+    proof runs in the successor identity's checkout. Both inventories load
+    under the proof's declared historical roots, through their own unchanged
+    verifier, and refuse without the declaration."""
+    from v3 import history_a14 as h14
+    external = _external_tree()
+    try:
+        origin, copies = external / 'simulation' / 'v3' / 'origin', external / 'simulation' / 'v3' / 'copies'
+        origin.mkdir(parents=True)
+        plans = {'original_plan.json': a.seal(dict(plan_hash='toy-original', jobs=[])),
+                 'a13_plan.json': a.seal(dict(original_plan_path=str(origin / 'original_plan.json')))}
+        for name, document in plans.items():
+            (origin / name).write_bytes(a.canonical(document) + b'\n')
+        copies.mkdir(parents=True)
+        files = []
+        for name in sorted(plans):
+            (copies / name).write_bytes((origin / name).read_bytes())
+            (copies / name).chmod(0o444)
+            files.append(dict(source=str(origin / name), copy=str(copies / name),
+                              sha256=a.file_hash(origin / name), bytes=(origin / name).stat().st_size))
+        common = dict(files=files, directories={str(origin): str(copies)})
+        document14 = a.seal(dict(common, schema='v3-A14-history-1',
+                                 roles={'a13_plan': str(origin / 'a13_plan.json'), 'a13_public': str(origin / 'a13_plan.json'),
+                                        'a13_root': str(origin)}))
+        document16 = a.seal(dict(common, schema=h16.SCHEMA, family='sqrt', round=1,
+                                 roles={name: str(origin / 'original_plan.json') for name in h16.ROUND1_ROLES}))
+        for module, document in ((h14, document14), (h16, document16)):
+            with pytest.raises(ValueError, match='outside simulation/v3'):
+                module.History(document)
+            with a.historical_view([external]):
+                history = module.History(document)
+                assert history.read(origin / 'original_plan.json') == plans['original_plan.json']
+                assert history.directory(origin) == copies
+        # The proof's own entry point, both schemas, with the binding it makes.
+        for spec in (dict(history=document14, original_plan_hash='toy-original'),
+                     dict(schema='v3-A16-extension-1', history=document16, original_plan_hash='toy-original',
+                          original_plan_path=str(origin / 'original_plan.json'))):
+            with pytest.raises(ValueError, match='outside simulation/v3'):
+                r16.original_validation_plan(spec)
+            assert r16.original_validation_plan(spec, [external]) == dict(plan_hash='toy-original', jobs=[])
+            with pytest.raises(ValueError, match='replay original plan binding differs'):
+                r16.original_validation_plan(dict(spec, original_plan_hash='other'), [external])
+    finally:
+        _discard(external)
+
+
+# ---------------------------------------------------------------------------
 # Part 2c: the per-kind qualification validator (A17 sections 2(b) and 6 item 2)
 # ---------------------------------------------------------------------------
 

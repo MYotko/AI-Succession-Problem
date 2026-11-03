@@ -181,13 +181,18 @@ def test_review_output_scope_matches_base():
     original = next(n for n in ast.parse(base).body if isinstance(n, ast.FunctionDef) and n.name == 'scoped')
     current = ast.parse(inspect.getsource(scoped)).body[0]
     # Phase 2 of the stage 2 successor added one Windows-only branch (the
-    # containment race fix, INTERPRETER_NOTES_phase1). Outside that branch the
-    # function is the reviewed base, so POSIX behaviour is unchanged.
+    # containment race fix, INTERPRETER_NOTES_phase1), and the A11 historical
+    # view added one early return for a declared, existing, read-only
+    # historical copy outside this checkout. Outside those two branches the
+    # function is the reviewed base, statement for statement, so the
+    # containment rule and POSIX behaviour are unchanged.
     windows_only = [node for node in current.body if isinstance(node, ast.If) and isinstance(node.test, ast.Compare)
                     and isinstance(node.test.left, ast.Attribute) and node.test.left.attr == 'name'
                     and getattr(node.test.comparators[0], 'value', None) == 'nt']
-    assert len(windows_only) == 1
-    current.body = [node for node in current.body if node not in windows_only]
+    historical = [node for node in current.body if isinstance(node, ast.If) and isinstance(node.test, ast.Call)
+                  and getattr(node.test.func, 'id', None) == '_immutable_historical']
+    assert len(windows_only) == 1 and len(historical) == 1
+    current.body = [node for node in current.body if node not in windows_only + historical]
     assert ast.dump(current) == ast.dump(original)
     assert scoped(ROOT / 'fixture.json') == ROOT / 'fixture.json'
     for outside in (SIMULATION, SIMULATION.parent / 'review_fixture', ROOT / '..'):

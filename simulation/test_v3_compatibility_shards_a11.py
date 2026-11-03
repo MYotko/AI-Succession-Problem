@@ -505,6 +505,42 @@ def test_preconditions_are_retryable_and_precede_start(tmp_path, environment, mo
     assert s.run_shard(path, ORIGINAL)['passed']
 
 
+def test_preflight_clears_a_planned_record_without_spending_it(tmp_path, environment):
+    """Everything a build settles before it executes anything, on its own, so a
+    batch can clear every record it plans to build before the first proof runs.
+    On 2026-11-02 the third of three planned records refused on its assembly
+    after the first two had run for 18 hours, and the fix changed the identity."""
+    sources, reasons = source_fixture(tmp_path)
+    record, selected, profiles = c.collect_record(sources, reasons)
+    target = c.RECORD_DIRECTORY / c.record_name(record['producing_code_hash'], record['new_code_hash'])
+    result = c.preflight_record(sources, reasons, target)
+    assert result['record'] == result['registered_name'] == target.name and result['sample'] == len(selected) == 8
+    assert result['strata'] == len(record['populations']) and result['jobs'] == 12
+    assert result['changed_files'] == len(record['changed_files']) == 1 and result['already_spent'] == []
+    # No attempt, no reservation, no record: the build that follows is still
+    # the first and only attempt on this identity pair.
+    assert not target.exists() and not target.with_suffix('.attempt.json').exists()
+    assert not s.reservation_path(record).exists()
+    with pytest.raises(ValueError, match='is not named record_name'):
+        c.preflight_record(sources, reasons, c.RECORD_DIRECTORY / 'A11_compatibility_wrong.json')
+    # A staged target outside the registered directory is the 17.3 template's
+    # own flow, so it clears and still reports the name the record must take.
+    staged = c.preflight_record(sources, reasons, tmp_path / 'proof.json')
+    assert staged['record'] == 'proof.json' and staged['registered_name'] == target.name
+    assert c.build_record(sources, reasons, target, workers=2)['passed']
+    done = c.preflight_record(sources, reasons, target)
+    assert done['already_built'] and done['already_spent'] == sorted(
+        [target.with_suffix('.attempt.json').name, s.reservation_path(record).name])
+    # A finished record is done, not spent, so a resumed batch verifies and
+    # skips it. A spent attempt with no finished record is terminal under
+    # 17.3, and the batch has to learn that before it runs the siblings: this
+    # record can never be produced at this identity, so a batch that plans
+    # three of them is not going to get three.
+    target.unlink()
+    with pytest.raises(ValueError, match='already spent for a record that does not exist'):
+        c.preflight_record(sources, reasons, target)
+
+
 def test_single_host_precondition_failure_does_not_reserve_pair(tmp_path, environment, monkeypatch):
     sources, reasons = source_fixture(tmp_path)
     record, _, _ = c.collect_record(sources, reasons)

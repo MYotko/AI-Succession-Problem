@@ -164,7 +164,7 @@
   },
   "amendment": "A2, 2026-09-28",
   "approved_boundary_sha256": {
-    "v3/artifacts.py": "f8baaa17bd0e755a804406e9980bb7c5358c8ff1bdc9c3a8aeabe646eb24bfb6",
+    "v3/artifacts.py": "1b43bd01893b42707cf3f85f2b4a4ff2078c2fa93da31570cd8af31ad2175465",
     "v3/integration.py": "8d22354a7fa3d2d71036f686f5eff16a79c857e4c9212ad1cb8b15ed40e31e26",
     "v3/production_runner.py": "f6cb114643a6c3df4f2efec011eacf23db56f609c7782110b534235ad0fd84ce",
     "v3/production_tables.py": "50467aace062485f636780a26e383d863dbf55b57e203cec2c8f592b31bef6d6",
@@ -288,5 +288,22 @@
     "v3/unpublished_bins.py": "b73b4d4370006855f8e87466deaf6efb2ea8bedb7f07b653b5e16f471d862c75",
     "visualization.py": "7fc4ca1430c7d54e14f98d8db58c94879c17de720ef2e382ba1b11f3fb351e1d",
     "working_factor.py": "16b542ed0f322bbf87036e31e8eff82e05e6d774c75bb8c29c6947a374f33e44"
+  },
+  "a11_historical_view": {
+    "amendment": "A18, 2026-11-02: a producing identity's sealed A14 or A16 history loads at the successor identity, on the compatibility proof path only",
+    "date": "2026-11-02",
+    "design_amendment": "A18",
+    "design_document": "simulation/diagnostics/a18/A18_HISTORICAL_VIEW.md",
+    "design_document_sha256": "8c0a3ed62559a7cb8c6d41e2f17cf1c4528db427ff497f362240449264b6832c",
+    "design_commit_note": "A18 is committed as its own document rather than folded into the design note, because the suite requires the working-tree note to be byte-identical to the note at the pinned A17 commit, so amending it in place would move the current A10 pin. A18 is adopted by this same commit, so no earlier design commit bears it; the adoption commit is recorded in the external adoption record. No code reads these fields.",
+    "reasons": {
+      "v3/artifacts.py": "historical_view declares existing historical copy trees outside this checkout, and scoped() returns a path under a declared root only when it is an existing directory or an existing file with no write bit set, so a missing or writable copy still refuses. Resolution is not permission to write: atomic_json, lease and snapshot_a11.receive resolve through write_scoped, which refuses a declared root outright, and worker_safety's metadata_json and persist_restarts write through atomic_json. compatibility_shards_a11.write_once needs no guard, because it creates exclusively and cannot replace an existing copy. The residual is history_a14.stage_history and history_a16.stage_history, frozen under their suite pins, which write through scoped; each stages only into the view root it is given, and a proof constructs History rather than staging, so neither is on the proof path. A sealed history inventory freezes each copy destination inside the checkout that staged it, so without this a producing identity carrying a history could not be proven at a successor identity at all. The authority is amendment A18, not A14 as the first version of this repair claimed: A14 stages inside the authorized write scope, and a blind review found the same-species reading unestablished and the first version's read-only claim false. With nothing declared the branch cannot be taken and the containment statement is the reviewed base: test_review_output_scope_matches_base carves this branch and the Windows-only branch out of scoped() and compares the rest statement for statement. The history verifiers are unchanged and each still requires every copy to be read-only and hash-exact. No table value, row status, coverage or sensitivity check is touched."
+    },
+    "previous_approved_sha256": {
+      "v3/artifacts.py": "f8baaa17bd0e755a804406e9980bb7c5358c8ff1bdc9c3a8aeabe646eb24bfb6"
+    },
+    "approved_sha256": {
+      "v3/artifacts.py": "1b43bd01893b42707cf3f85f2b4a4ff2078c2fa93da31570cd8af31ad2175465"
+    }
   }
 }

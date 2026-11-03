@@ -7,12 +7,14 @@ import json
 import os
 from pathlib import Path
 import platform
+import stat
 import subprocess
 import time
 
 ROOT = Path(__file__).resolve().parent
 SIMULATION = ROOT.parent
 _INPUT_VIEW = ContextVar('a11_input_view', default=None)
+_HISTORICAL_VIEW = ContextVar('a11_historical_view', default=())
 
 
 def input_path(path):
@@ -35,6 +37,60 @@ def input_view(view):
         yield
     finally:
         _INPUT_VIEW.reset(token)
+
+
+@contextmanager
+def historical_view(roots):
+    """Declare existing read-only historical copy trees outside this checkout.
+
+    A sealed history inventory freezes each copy destination as an absolute
+    path inside the checkout that staged it. An A11 compatibility proof runs at
+    the successor identity, so in a different checkout, and loading a producing
+    identity's history there asks scoped() to resolve those frozen paths.
+    scoped() guards writes and refuses them, so a producer that carries a
+    history could not be proven at all.
+
+    Inside this context a path under a declared root resolves if, and only if,
+    it is an existing directory or an existing file with no write bit set, so a
+    missing or writable copy still refuses. Resolution is not permission to
+    write: it serves the frozen verifiers' stat and read, and every write
+    helper that takes a caller-supplied path goes through write_scoped(), which
+    refuses a declared root outright. See write_scoped for the one residual.
+
+    The copies stay bound by the inventory's own per-file size and hash, and
+    both History verifiers independently require each copy to be read-only.
+    Outside this context, and with no root declared, containment is unchanged.
+    """
+    declared = []
+    for value in roots:
+        root = Path(value)
+        if not root.is_absolute():
+            raise ValueError("declared historical root must be absolute")
+        root = root.resolve()
+        if root.parent == root or not root.is_dir():
+            raise ValueError("declared historical root must be a bounded existing directory")
+        if root.is_relative_to(ROOT) or ROOT.is_relative_to(root):
+            raise ValueError("declared historical root overlaps this checkout")
+        declared.append(root)
+    token = _HISTORICAL_VIEW.set(tuple(sorted(set(declared))))
+    try:
+        yield
+    finally:
+        _HISTORICAL_VIEW.reset(token)
+
+
+def _declared_historical(result):
+    """Whether a resolved path lies under a root declared through historical_view."""
+    return any(result.is_relative_to(root) for root in _HISTORICAL_VIEW.get())
+
+
+def _immutable_historical(result):
+    """An existing directory, or an existing read-only file, under a declared root."""
+    if not _declared_historical(result):
+        return False
+    if result.is_dir():
+        return True
+    return result.is_file() and not result.stat().st_mode & (stat.S_IWUSR | stat.S_IWGRP | stat.S_IWOTH)
 
 
 def canonical(value):
@@ -60,13 +116,50 @@ def scoped(path):
         text = os.fspath(result)
         if text.startswith("\\\\?\\"):
             result = Path("\\\\" + text[8:] if text.startswith("\\\\?\\UNC\\") else text[4:])
+    if _immutable_historical(result):
+        # An A11 proof only: an existing immutable copy, or its directory,
+        # under a root declared through historical_view. Resolving one is not
+        # permission to write it; write_scoped() refuses a declared root, and
+        # writers resolve through that. With nothing declared this branch
+        # cannot be taken, and the containment statement below is the
+        # reviewed base.
+        return result
     if not result.is_relative_to(ROOT):
         raise ValueError("output outside simulation/v3")
     return result
 
 
+def write_scoped(path):
+    """scoped(), for a caller-supplied write target.
+
+    scoped() resolves an existing immutable copy under a declared historical
+    root so the frozen A14 and A16 History verifiers can stat and read a
+    producing identity's sealed copies from another checkout. Every write
+    helper that takes a caller-supplied path resolves through here instead, so
+    a declared root refuses creation, replacement and locking even though it
+    resolves. The guarantee is in-process and holds for atomic_json, lease and
+    snapshot_a11.receive, and through atomic_json for worker_safety's
+    metadata_json and persist_restarts.
+
+    compatibility_shards_a11.write_once needs no guard and does not have one.
+    It creates exclusively, so it cannot replace an existing copy, and a path
+    that does not exist is not an immutable copy, so scoped() refuses it on
+    containment before a declaration is consulted.
+
+    The residual: history_a14.stage_history and history_a16.stage_history are
+    frozen modules that write and chmod through scoped(). Each stages only into
+    the view root it is given and refuses a destination outside it, and a proof
+    constructs History rather than staging, so neither is reachable on the
+    proof path. Neither can be guarded without breaking its frozen-module pin.
+    """
+    result = scoped(path)
+    if _declared_historical(result):
+        raise ValueError("write under a declared historical root")
+    return result
+
+
 def atomic_json(path, value):
-    path = scoped(path)
+    path = write_scoped(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + f".{os.getpid()}.partial")
     with temporary.open("wb") as stream:
@@ -190,7 +283,7 @@ def runtime(threads):
 
 @contextmanager
 def lease(path):
-    path = scoped(path)
+    path = write_scoped(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     stream = path.open("a+b")
     acquired = False

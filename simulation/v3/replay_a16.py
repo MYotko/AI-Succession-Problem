@@ -17,7 +17,8 @@ from copy import deepcopy
 from pathlib import Path
 import tempfile
 
-from .artifacts import ROOT, canonical, code_identity, digest, read, scoped, seal, stable_job, unseal
+from .artifacts import (ROOT, canonical, code_identity, digest, historical_view, read, scoped,
+                        seal, stable_job, unseal)
 
 _replay = ContextVar('a16_scratch_replay', default=None)
 
@@ -100,18 +101,32 @@ def replay(item):
         _replay.reset(token)
 
 
-def original_validation_plan(spec):
+def original_validation_plan(spec, history_view=()):
     """The sealed original A4 validation plan a registered single-host A14 or A16
-    plan descends from, for the proof's scheduling class (A13's R_max / 3 rule)."""
-    if spec.get('schema') == 'v3-A16-extension-1':
-        from .history_a16 import History
+    plan descends from, for the proof's scheduling class (A13's R_max / 3 rule).
+
+    ``history_view`` carries the proof sources' declared historical roots, so
+    that a producing identity whose sealed history staged its copies inside its
+    own checkout loads read-only here, at the successor identity. Both
+    inventories are read through their own unchanged verifier, which hashes
+    every copy and requires it immutable. An empty declaration leaves
+    containment exactly as it is, which is what every non-proof caller passes.
+    """
+    with historical_view(history_view):
+        if spec.get('schema') == 'v3-A16-extension-1':
+            from .history_a16 import History
+            h = History(spec['history'])
+            path = Path(spec['original_plan_path'])
+            original = unseal(h.read(path))
+            if spec['original_plan_hash'] != original['plan_hash']:
+                raise ValueError('A16 replay original plan binding differs')
+            return original
+        from .history_a14 import History
         h = History(spec['history'])
-        path = Path(spec['original_plan_path'])
-        original = unseal(h.read(path))
+        old = unseal(h.read(h.role('a13_plan')))
+        original = unseal(h.read(old['original_plan_path']))
+        # The same binding the A13 and A16 branches make: the plan the proof
+        # takes its scheduling class from is the one the frozen spec names.
         if spec['original_plan_hash'] != original['plan_hash']:
-            raise ValueError('A16 replay original plan binding differs')
+            raise ValueError('A14 replay original plan binding differs')
         return original
-    from .history_a14 import History
-    h = History(spec['history'])
-    old = unseal(h.read(h.role('a13_plan')))
-    return unseal(h.read(old['original_plan_path']))

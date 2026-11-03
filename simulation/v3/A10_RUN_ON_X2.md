@@ -1649,16 +1649,42 @@ be operator-gated and supervised with `llm down` and `llm up`.
    inventories or keep their old absolute paths accessible read-only. Specs
    and jobs are never rewritten to point somewhere else. Export Y's manifest,
    diff the manifests, and supply a reason for every changed manifest file.
-3. Run the proof builder below. It freezes each full population before running
+3. Preflight every record the batch intends to build, with `compatibility_a10
+   preflight --sources S --reasons R --output O`, and build nothing until all of
+   them clear. It performs the whole assembly a build does before it executes
+   anything (the sources and their registration, the reasons against the live
+   source diff, each producing identity's bindings and sealed history, the
+   sample, the configuration profiles and every selected job's declared
+   inputs), writes nothing, creates no attempt and spends no reservation. A
+   record whose assembly refuses costs nothing if it refuses first and costs
+   every sibling build twice if it refuses after they have run, which is what a
+   refusal on 2026-11-02 cost. A spent attempt or reservation with no finished
+   record is terminal under 17.3, and the preflight refuses the batch on it
+   rather than reporting it; a finished record is not spent but done, and a
+   resumed batch verifies and skips it.
+
+   It is not a launch gate and does not cover every refusal a build can raise.
+   Host admission, the settings and CPU check, live memory and qualified class
+   reservations, snapshot reception, effective thread verification, the
+   configuration test itself and a dispatch's source-pin verification all come
+   later. Check the host register separately and before the batch: an A11 proof
+   needs dispatch admission at the launch identity, an approved load sheet and
+   an approved workload kind (operator, 2026-11-02).
+
+   The preflight catches refusals, not decisions: also list the code paths each
+   planned record exercises that no other record does, read them, and settle
+   any change they need before the first build, because a code change made
+   afterwards changes the identity and invalidates every record already built.
+4. Run the proof builder below. It freezes each full population before running
    the two smallest `digest(["A11-compatibility", phase, job_id])` jobs per
    phase/capability/setting, or all if fewer. It uses the runner's execute path,
    spawned work-mode workers and one numerical thread. The record stores only
    comparison hashes, statuses and execution metadata, not scientific values.
    A failure is final and cannot be approved or retried as the same attempt.
-4. The interpreter reviews the record and source diff. The operator supplies
+5. The interpreter reviews the record and source diff. The operator supplies
    approval only for a passed proof. Commit the approved record at the fixed
    path below in the repair checkout, with no code changes in that commit.
-5. Commit the same record bytes to the public repository. Use a fresh execution
+6. Commit the same record bytes to the public repository. Use a fresh execution
    checkout at the commit adding the approved record, then verify it before any
    old output is used. The old X checkout stays unchanged. New launches use new
    roots at Y and a design pin containing A10 and A11.
@@ -3911,6 +3937,24 @@ preflight and shard freeze carry the union of those declarations and any roots
 already in the frozen source spec into their hashed snapshots. Undeclared roots
 are refused before staging; use the same source declarations for qualification
 and the proof. In-checkout inputs retain their previous inventory bytes.
+
+A producing identity that carries a sealed A14 or A16 history needs the same
+declaration for the history itself. The inventory freezes each copy destination
+as an absolute path inside the checkout that staged it, and a proof runs at the
+successor identity, in a different checkout, so `collect_record` reads that
+history under the union of the sources' declared roots
+(`artifacts.historical_view`, authorized by amendment A18): an existing
+immutable copy resolves, and a missing or writable copy refuses. Resolving one
+is not permission to write it. Every write helper that takes a caller-supplied
+path resolves through `artifacts.write_scoped`, which refuses a declared root
+outright, and the residual is the two frozen `stage_history` functions, which a
+proof never calls. Both history verifiers are unchanged and still require every
+copy to be read-only and hash-exact. A root reached through a sealed source
+specification is hash-bound; a root supplied by the plain sources document is
+not, and the record keeps the two apart in `execution.historical_view_provenance`.
+Declare the producer's own `<checkout>/simulation/v3` on the entry whose jobs
+descend from it, as record 3 of the stage 2 successor proofs does for
+`v3_a14_exec`.
 
 The interpreter reviews the proofs, the operator approves them, and their
 records are committed before historical outputs enter registered preparation.
