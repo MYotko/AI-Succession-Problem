@@ -9,6 +9,7 @@ registered family anchor."""
 import ast
 from copy import deepcopy
 import hashlib
+import json
 import math
 import os
 from pathlib import Path
@@ -207,7 +208,7 @@ def test_a_declared_historical_root_accepts_no_write():
         _discard(external)
 
 
-def test_the_named_write_helpers_resolve_through_the_guard():
+def test_the_write_helpers_resolve_through_the_guard():
     """write_scoped names the writers reached on the proof path, and bounds the
     rest by the declaration's scope rather than by an inventory.
 
@@ -257,53 +258,97 @@ def _declares(expr):
            (isinstance(expr.func, ast.Attribute) and expr.func.attr == 'historical_view')
 
 
-def test_the_declaration_scope_is_enforced_not_asserted():
-    """The bound write_scoped rests on, parsed rather than grepped.
+def _bound_names(tree, originals):
+    """Every local name bound to one of `originals`, including aliases.
 
-    The first version of this checked that the set of root-level filenames
-    containing the substring 'historical_view(' was exactly ['replay_a16.py'].
-    A blind review showed by mutation that it passed with a second caller in
-    the same module, an aliased caller elsewhere, a direct _HISTORICAL_VIEW.set
-    elsewhere, and an unguarded writer inserted inside the existing context. It
-    was a filename check wearing an invariant's clothes. Each of those four is
-    a separate assertion here.
+    A blind review defeated an earlier check with `from .artifacts import x as y`,
+    because an import alias is an ast.alias node and not an ast.Name. Both that
+    form and `y = x` are collected here, so an aliased resolver is still a
+    resolver.
     """
-    WRITES = {'open', 'mkdir', 'chmod', 'replace', 'rename', 'unlink', 'rmdir', 'touch',
-              'write_text', 'write_bytes', 'copyfile', 'copy', 'copy2', 'move', 'fsync',
-              'atomic_json', 'write_once', 'metadata_json', 'persist_restarts', 'append_consumption',
-              'stage_history', 'stage_inputs', 'receive', 'lease'}
-    sites, setters, mentions = [], [], []
+    names = set(originals)
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.Import, ast.ImportFrom)):
+            for alias in node.names:
+                if alias.name.rsplit('.', 1)[-1] in originals:
+                    names.add(alias.asname or alias.name.rsplit('.', 1)[-1])
+        if isinstance(node, ast.Assign) and isinstance(node.value, ast.Name) and node.value.id in names:
+            names.update(t.id for t in node.targets if isinstance(t, ast.Name))
+        if isinstance(node, ast.Assign) and isinstance(node.value, ast.Attribute) and node.value.attr in originals:
+            names.update(t.id for t in node.targets if isinstance(t, ast.Name))
+    return names
+
+
+def _called_name(node, names):
+    """The resolver this call invokes, by bound name or by attribute, or None."""
+    if not isinstance(node, ast.Call):
+        return None
+    if isinstance(node.func, ast.Name) and node.func.id in names:
+        return node.func.id
+    if isinstance(node.func, ast.Attribute) and node.func.attr in ('scoped', 'write_scoped'):
+        return node.func.attr
+    return None
+
+
+def test_the_scoped_call_sites_are_a_frozen_inventory():
+    """Pin every call site that resolves a path through scoped or write_scoped.
+
+    This is deliberately not a claim that no writer can reach a declared
+    historical root. Three successive versions of that claim were each refuted
+    by blind review: the first said resolution alone made a root read-only; the
+    second named an exhaustive residual and missed stage_inputs; the third said
+    a test enforced the declaration's scope, and the test fell to an import
+    alias, an attribute-form context set, an unlisted writer and a one-level
+    indirect call. Proving that nothing writes inside a dynamic scope needs
+    whole-program reachability, so no test here can establish it.
+
+    What this pins is the set of things that could become writers. About 126
+    calls across 88 module-and-function pairs resolve through scoped, and many
+    of them write: production_runner.write, table_validation_a4.publish,
+    budget_a6.append_consumption, service.command. A new one cannot appear
+    without failing this test, which forces whoever adds it to say whether it
+    writes and whether it needs the guard. The same control pattern as the A2
+    boundary pin: a frozen inventory and a required review on change.
+    """
+    inventory = json.loads((a.SIMULATION / 'scoped_call_sites.json').read_text(encoding='utf-8'))
+    found = {}
+    for path in _production_sources():
+        tree = ast.parse(path.read_text(encoding='utf-8', errors='replace'), filename=str(path))
+        functions = [n for n in ast.walk(tree) if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))]
+        bound = _bound_names(tree, ('scoped', 'write_scoped'))
+        for node in ast.walk(tree):
+            name = _called_name(node, bound)
+            if name is None:
+                continue
+            # An alias is recorded under the resolver it is bound to, so
+            # renaming a call site cannot hide it from the inventory.
+            resolver = 'write_scoped' if 'write_scoped' in name else 'scoped'
+            if name not in ('scoped', 'write_scoped'):
+                resolver = 'scoped' if name in _bound_names(tree, ('scoped',)) else 'write_scoped'
+            owner = [f.name for f in functions if node in ast.walk(f)]
+            key = '%s::%s::%s' % (path.name, owner[-1] if owner else '<module>', resolver)
+            found[key] = found.get(key, 0) + 1
+
+    added = sorted(set(found) - set(inventory['sites']))
+    removed = sorted(set(inventory['sites']) - set(found))
+    moved = sorted(k for k in set(found) & set(inventory['sites']) if found[k] != inventory['sites'][k])
+    assert not added, 'new path resolvers; classify each as read or write and update the inventory: %s' % added
+    assert not removed, 'resolvers gone; update the inventory: %s' % removed
+    assert not moved, 'resolver counts changed; update the inventory: %s' % moved
+    assert sum(found.values()) == inventory['total_calls'], (sum(found.values()), inventory['total_calls'])
+
+    # The declaration's scope is a reviewed property of one call path, recorded
+    # here as the fact it is and not as an enforced invariant: this says where
+    # the declaration is used today, so a reader knows what was reviewed.
+    sites = []
     for path in _production_sources():
         tree = ast.parse(path.read_text(encoding='utf-8', errors='replace'), filename=str(path))
         functions = [n for n in ast.walk(tree) if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))]
         for node in ast.walk(tree):
-            if isinstance(node, ast.Name) and node.id == '_HISTORICAL_VIEW':
-                setters.append(path.name)
-            if (isinstance(node, ast.Name) and node.id == 'historical_view') or \
-               (isinstance(node, ast.Attribute) and node.attr == 'historical_view'):
-                mentions.append(path.name)
             if isinstance(node, ast.With) and any(_declares(item.context_expr) for item in node.items):
                 owner = [f.name for f in functions if node in ast.walk(f)]
-                sites.append((path.name, owner[0] if owner else '<module>', node))
-
-    # One declaration site, in the one function the claim names.
-    assert [(f, g) for f, g, _ in sites] == [('replay_a16.py', 'original_validation_plan')], \
-        [(f, g) for f, g, _ in sites]
-
-    # The context variable is set nowhere but where it is defined.
-    assert sorted(set(setters)) == ['artifacts.py'], sorted(set(setters))
-
-    # Every mention of the name is that one call plus its definition, so no
-    # alias of it exists to be called from somewhere else.
-    others = sorted(n for n in mentions if n != 'artifacts.py')
-    assert others == ['replay_a16.py'] and others.count('replay_a16.py') == len(sites), (others, len(sites))
-
-    # Nothing writes inside the declaration's body.
-    for filename, owner, node in sites:
-        for inner in ast.walk(ast.Module(body=node.body, type_ignores=[])):
-            if isinstance(inner, ast.Call):
-                name = getattr(inner.func, 'id', None) or getattr(inner.func, 'attr', None)
-                assert name not in WRITES, '%s in %s.%s writes inside the declaration' % (name, filename, owner)
+                sites.append((path.name, owner[-1] if owner else '<module>'))
+    assert sites == [('replay_a16.py', 'original_validation_plan')], sites
 
 
 def test_a14_and_a16_histories_load_at_the_successor_identity(tmp_path):

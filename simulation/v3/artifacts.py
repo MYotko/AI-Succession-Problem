@@ -144,25 +144,34 @@ def write_scoped(path):
     compatibility_shards_a11.write_once needs no guard, creating exclusively,
     so it cannot replace a copy that exists.
 
-    What this does not promise is an inventory of every writer in the tree.
-    Such a list goes stale the moment someone adds one, and the first version
-    of this repair made that mistake twice. Other writers do resolve a write
-    through scoped() without this guard, budget_a6.append_consumption and
-    service.command among them. The bound that holds instead is the
-    declaration's scope: _HISTORICAL_VIEW is set only by historical_view(), and
-    its only production caller is replay_a16.original_validation_plan, which
-    wraps one read of a producing identity's original validation plan. Nothing
-    writes inside that call, so no unguarded writer is reachable while a
-    declaration is active.
+    This is not a guarantee that nothing in the tree can write under a declared
+    root, and three successive versions of this docstring claimed something of
+    that shape before each was refuted. About 126 call sites across the source
+    manifest resolve a path through scoped(), and many of them write:
+    production_runner.write appends to events.jsonl, table_validation_a4
+    publishes, budget_a6.append_consumption appends, service.command appends.
+    None of them is guarded, and guarding them all would be a tree-wide change
+    touching several A2 boundary files.
 
-    test_the_declaration_scope_is_enforced_not_asserted enforces that bound by
-    parsing the tree rather than searching it: one declaration site, in that
-    one function; _HISTORICAL_VIEW set nowhere but here; no alias of the
-    declaration anywhere; and no write inside its body. It is mutation-tested,
-    because the first version of that check compared filenames against a
-    literal substring and passed with a second caller added. A caller that
-    widens the scope will fail it, and takes on the duty of covering what it
-    adds.
+    What is true, and all that is claimed: while a declaration is active, the
+    only code running is one read. _HISTORICAL_VIEW is set only by
+    historical_view(), whose only production caller is
+    replay_a16.original_validation_plan, which wraps the recovery of a
+    producing identity's original validation plan. That call path was reviewed
+    and writes nothing. This is a reviewed property of one call path, not an
+    invariant, and no test can soundly make it one: proving that nothing writes
+    inside a dynamic scope needs whole-program reachability, and a blind review
+    defeated two attempts, the second with a one-level indirect call.
+
+    What is enforced instead is narrower and sound.
+    test_the_write_helpers_resolve_through_the_guard checks that the four
+    helpers above route through this function and that write_once still creates
+    exclusively. test_the_scoped_call_sites_are_a_frozen_inventory pins the
+    exact set of scoped() and write_scoped() call sites, by module and
+    function, so a new resolver cannot appear without failing a test and
+    forcing someone to classify it. Neither says a declared root is
+    unwritable. The first says the proof path's writers are guarded; the second
+    says the set of things that could become writers has not changed.
 
     The residual that cannot be closed: history_a14.stage_history and
     history_a16.stage_history write and chmod through scoped() and are frozen
