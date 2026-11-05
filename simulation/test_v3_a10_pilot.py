@@ -201,10 +201,15 @@ def test_pooled_deadline_resume_and_worker_count_determinism(tmp_path,monkeypatc
     code=code_identity()
     runner.dispatch(tmp_path,jobs[:1],code,settings(2),time.time()+30,measurements=choices(),pooled_jobs=costs)
     path=tmp_path/'outputs'/(jobs[0]['id']+'.json'); preserved=file_hash(path)
+    before=len((tmp_path/'events.jsonl').read_text().splitlines())
     interrupted=runner.dispatch(tmp_path,jobs,code,settings(2),time.time()+.1,measurements=choices(),pooled_jobs=costs)
-    assert interrupted['reason']=='deadline' and interrupted['completed']==1
-    assert len(interrupted['not_completed_ids'])==3
-    assert list(read(tmp_path/'job_status.json').values()).count('not completed')==3
+    # A19 (T1): the deadline drains. Jobs this call dispatched before it
+    # complete and are counted; the rest stay not completed and resume exactly.
+    dispatched={json.loads(s)['job'] for s in (tmp_path/'events.jsonl').read_text().splitlines()[before:] if json.loads(s)['event']=='dispatch'}
+    assert interrupted['reason']=='deadline' and interrupted['completed']==1+len(dispatched)<4
+    assert len(interrupted['not_completed_ids'])==3-len(dispatched)
+    assert list(read(tmp_path/'job_status.json').values()).count('not completed')==3-len(dispatched)
+    assert 'restart_required' not in (tmp_path/'events.jsonl').read_text()
     resumed=runner.dispatch(tmp_path,list(reversed(jobs)),code,settings(3),time.time()+30,measurements=choices(),pooled_jobs=costs)
     assert resumed['completed']==4 and file_hash(path)==preserved
     repeated=runner.dispatch(tmp_path,jobs,code,settings(2),time.time()+30,measurements=choices(),pooled_jobs=costs)
@@ -214,10 +219,12 @@ def test_pooled_deadline_resume_and_worker_count_determinism(tmp_path,monkeypatc
     assert [runner.completed(tmp_path,j,code)['result'] for j in jobs]==[runner.completed(other,j,code)['result'] for j in jobs]
 
 
-def test_late_worker_has_no_completion_record(tmp_path):
+def test_late_worker_still_records_its_completion(tmp_path):
+    # A19 (T2): a finished result is never discarded because of time. The
+    # completion_deadline argument is accepted for call-shape compatibility only.
     job=stable_job('fixture',{'seconds':0},'validation',0)
     runner.worker(str(tmp_path),job,code_identity(),1,False,None,time.time()-1)
-    assert runner.completed(tmp_path,job,code_identity()) is None
+    assert runner.completed(tmp_path,job,code_identity())['result']==dict(seed=job['seed'],fixture=True)
 
 
 def test_pool_keeps_live_mode_drain_and_resume(tmp_path,monkeypatch):

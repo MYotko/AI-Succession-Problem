@@ -271,7 +271,8 @@ Each A10 spec now declares both `wall_seconds` and `x2_equivalent_hours`.
 The latter is the corresponding allocation in the table, including main at
 50.49. Pull dispatch stops at the allowance less the existing cleanup reserve,
 or the wall dispatch deadline, whichever arrives first. In-flight jobs drain
-within the hard wall deadline. Reserve overruns remain charged and reported.
+to completion; since amendment A19 a drain may run past the wall deadline, and
+the overrun is charged and reported, as reserve overruns are.
 The runner still has no cross-root 980-hour program ledger.
 `budget_a6.build_ledger()` and its ceiling functions hard-code the R4 A6
 90-hour program and component names; do not use them for stage 1. Use a separate
@@ -555,7 +556,9 @@ replacement service-supervised worker. Outstanding late completions still
 follow the unchanged lease and duplicate rules.
 
 A `projection_exceeds_budget` stop is incomplete and is recorded in
-`launches.json`. It closes all host charging intervals at the stop timestamp.
+`launches.json`. Since amendment A19 it can occur only before the launch's
+first scientific lease; after that a projection that does not fit is recorded
+as advisory and stops nothing. It closes all host charging intervals at the stop timestamp.
 Do not leave idle hosts waiting until the wall deadline. After an operator
 resume go, run the identical coordinator command before the original deadline,
 then rejoin the qualified hosts. Arrange for any added host to join while the

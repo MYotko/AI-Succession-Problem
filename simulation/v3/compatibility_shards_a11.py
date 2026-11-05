@@ -28,8 +28,11 @@ from .worker_safety import metadata_json, persist_restarts
 
 SCHEMA = 'v3-A11-proof-shards-1'
 MEMORY_WAIT_SECONDS = 180.
+# A19 (R1): no longer a bound. It stays only as run_items' default for the
+# unused idle_wait_seconds argument, which existing callers still pass.
 PROOF_MEMORY_WAIT_SECONDS = 1800.
 MEMORY_POLL_SECONDS = 1.
+MEMORY_WAIT_REPORT_SECONDS = 60.  # At most one stdout line per minute while waiting.
 
 
 def reservation_path(record):
@@ -84,19 +87,48 @@ def memory_budget(limit_gb=None, headroom=.8):
     return headroom * min(available / 1e9, limit_gb if limit_gb is not None else math.inf)
 
 
-def wait_for_memory(required, limit_gb=None, *, timeout=MEMORY_WAIT_SECONDS, headroom=.8):
-    """Bound the idle wait separately for repeatable setup and final proof work."""
+def memory_wait_report(status_path, waiting, last_report, base=None):
+    """A19 (R1): report a memory wait in the scheduling status, and on stdout
+    at most once a minute. Returns the monotonic time of the last stdout line."""
+    if status_path is not None:
+        informational_status(Path(status_path), dict(base or {}, **waiting))
+    now = time.monotonic()
+    if last_report is None or now - last_report >= MEMORY_WAIT_REPORT_SECONDS:
+        print({'a11_memory_wait': waiting}, flush=True)
+        return now
+    return last_report
+
+
+def wait_for_memory(required, limit_gb=None, *, timeout=MEMORY_WAIT_SECONDS, headroom=.8, status_path=None):
+    """Wait until the host's memory budget covers ``required``.
+
+    With a positive ``timeout`` it refuses after that many seconds: a refusal
+    to start, for callers that have reserved nothing. A19 (R1): with
+    ``timeout=None`` it never stops because of time; it reports the wait (in
+    ``status_path`` when given, and on stdout once a minute) and returns as
+    soon as the memory fits. A job that can never fit the qualified memory is
+    still refused at once; that is not a time limit.
+    """
     _require(positive(required), 'invalid required memory')
-    _require(positive(timeout), 'invalid memory wait bound')
+    _require(timeout is None or positive(timeout), 'invalid memory wait bound')
     _require(limit_gb is None or required <= headroom * limit_gb, 'proof job exceeds qualified memory budget')
-    deadline = time.monotonic() + timeout
+    started = time.monotonic()
+    since_epoch, last_report = None, None
     while True:
         budget = memory_budget(limit_gb, headroom)
         if budget >= required:
             return budget
-        remaining = deadline - time.monotonic()
-        _require(remaining > 0, f'available memory did not recover within {timeout:g} seconds')
-        time.sleep(min(MEMORY_POLL_SECONDS, remaining))
+        if timeout is not None:
+            remaining = started + timeout - time.monotonic()
+            _require(remaining > 0, f'available memory did not recover within {timeout:g} seconds')
+            time.sleep(min(MEMORY_POLL_SECONDS, remaining))
+            continue
+        if since_epoch is None:
+            since_epoch = time.time()
+        last_report = memory_wait_report(status_path, dict(
+            waiting_for='memory', stage='preflight', waiting_since_epoch=since_epoch,
+            waited_seconds=time.monotonic() - started, required_gb=required, available_gb=budget), last_report)
+        time.sleep(MEMORY_POLL_SECONDS)
 
 
 def resource_estimate(spec, job):
@@ -133,6 +165,13 @@ def run_items(items, workers, budget, *, memory_floor_gb=0., idle_wait_seconds=P
     Registered estimates plus each class's own measured peak are reservations.
     Completed peak RSS raises its class estimate by the runner's 1.2 margin.
     The current MemAvailable check also protects against unrelated allocations.
+
+    A19 (R1): when nothing is running and the smallest pending job does not fit
+    the live memory, this waits without a time limit and reports the wait (the
+    scheduling status, and stdout once a minute), then dispatches as soon as
+    the job fits. ``idle_wait_seconds`` is unused; it stays in the signature
+    because callers still pass it. A job that exceeds the frozen budget is
+    still refused, since it can never fit.
     """
     _require(positive(budget) and type(workers) is int and workers > 0, 'invalid proof resources')
     _require(type(memory_floor_gb) in (int, float) and math.isfinite(memory_floor_gb) and memory_floor_gb >= 0,
@@ -146,6 +185,7 @@ def run_items(items, workers, budget, *, memory_floor_gb=0., idle_wait_seconds=P
         estimates[r['memory_class']] = max(estimates.get(r['memory_class'], 0), r['memory_gb'], (class_peaks or {}).get(r['memory_class'], 0.))
     _require(wc.top_weighted(estimates[i['resources']['memory_class']] for i in pending) <= budget, 'proof job exceeds host memory budget')
     active, results, trace, idle_since = {}, {}, [], None
+    waiting, idle_epoch, last_report = None, None, None
     next_status = 0.
     authority_peaks = {i['resources']['memory_class']: i['resources'].get('measured_memory_gb', 0.) for i in items}
     for key, value in (class_peaks or {}).items():
@@ -183,23 +223,31 @@ def run_items(items, workers, budget, *, memory_floor_gb=0., idle_wait_seconds=P
                 occupied += needed
                 trace.append(dict(job_id=item['job']['id'], reserved_gb=needed,
                                   running_gb=occupied, running=len(active), budget_gb=budget, top_weighted_gb=weight))
-            if control_path is not None and time.monotonic() >= next_status:
-                informational_status(Path(control_path).with_name('scheduling.json'), dict(target=workers, running=len(active),
-                    pending=len(pending), active_job_ids=[i['job']['id'] for i, _ in active.values()]))
+            if active or not pending:
+                idle_since, waiting = None, None
+            status_path = Path(control_path).with_name('scheduling.json') if control_path is not None else None
+            status = dict(target=workers, running=len(active), pending=len(pending),
+                          active_job_ids=[i['job']['id'] for i, _ in active.values()])
+            if status_path is not None and time.monotonic() >= next_status:
+                informational_status(status_path, dict(status, **(waiting or {})))
                 next_status = time.monotonic() + 1.
             if not active and pending:
                 if workers == 0:
-                    idle_since = None
+                    idle_since, waiting = None, None
                     time.sleep(.1)
                     continue
                 required = min(charge(i) for i in pending)
                 _require(required <= budget, 'observed proof memory exceeds frozen budget; attempt spent')
-                if idle_since is None: idle_since = time.monotonic()
-                _require(time.monotonic() - idle_since < idle_wait_seconds,
-                         f'memory not released within {idle_wait_seconds:g} seconds')
+                if idle_since is None:
+                    idle_since, idle_epoch = time.monotonic(), time.time()
+                # A19 (R1): wait for memory without a time limit, and report it.
+                waiting = dict(waiting_for='memory', waiting_since_epoch=idle_epoch,
+                               waited_seconds=time.monotonic() - idle_since, required_gb=required,
+                               available_gb=memory_budget(None, headroom), budget_gb=budget)
+                last_report = memory_wait_report(status_path, waiting, last_report, status)
                 time.sleep(1.)
                 continue
-            idle_since = None
+            idle_since, waiting = None, None
             if not active:
                 break
             finished, _ = wait(active, timeout=.1, return_when=FIRST_COMPLETED)
@@ -528,8 +576,14 @@ def configure_host(p, host, root, budget, view):
     return configured
 
 
-def preflight(p, host, root):
+def preflight(p, host, root, *, reserved=False):
+    """A shard's preconditions. ``reserved`` is True when the attempt and its
+    reservation already exist (run_shard, after freeze). A19 (R1): there the
+    memory waits never stop because of time; they wait and report. Before any
+    reservation (single_preflight, inside build_record) they keep their
+    MEMORY_WAIT_SECONDS refusal, a refusal to start."""
     entry = p['hosts'][host]
+    wait = dict(timeout=None, status_path=root / 'scheduling.json') if reserved else {}
     from .worker_safety import swap_preflight
     swap_preflight(entry['settings'], root / 'worker_metadata' / 'swap_preflight.json')
     items = [p['items'][j] for j in p['assignments'][host]]
@@ -542,13 +596,13 @@ def preflight(p, host, root):
         {i['job']['id']: i['resources'] for i in items},
         {i['resources']['memory_class']: i['resources'].get('measured_memory_gb', 0.) for i in items})
     required = wc.top_weighted(i['resources']['memory_gb'] for i in items)
-    budget = wait_for_memory(required, entry.get('memory_gb'), headroom=entry['settings'].get('memory_headroom', .8))
+    budget = wait_for_memory(required, entry.get('memory_gb'), headroom=entry['settings'].get('memory_headroom', .8), **wait)
     configuration = configure_host(p, host, root, budget, views['configuration'])
     peaks = {}
     for cfg in configuration.values():
         for key, value in cfg.get('class_peaks_gb', {}).items(): peaks[key] = max(peaks.get(key, 0.), value)
     required = wc.top_weighted(max(i['resources']['memory_gb'], peaks.get(i['resources']['memory_class'], 0.)) for i in items)
-    budget = min(budget, wait_for_memory(required, entry.get('memory_gb'), headroom=entry['settings'].get('memory_headroom', .8)))
+    budget = min(budget, wait_for_memory(required, entry.get('memory_gb'), headroom=entry['settings'].get('memory_headroom', .8), **wait))
     return views, configuration, 0., budget
 
 
@@ -600,12 +654,15 @@ def run_shard(path, host, *, workers=None, override_reason=None, operator=None, 
     result_path = root / 'result.json'
     _require(not result_path.exists() and not (root / 'started.json').exists(), 'shard attempt is final')
     wc.initial_control(root, runtime_settings)
-    before = dict(attempt_sha256=digest(p), host=host, passed=False, memory_wait_seconds=MEMORY_WAIT_SECONDS)
+    # A19 (R1): the attempt is reserved, so this shard's preflight memory waits
+    # have no time limit (they wait and report); the record says so.
+    before = dict(attempt_sha256=digest(p), host=host, passed=False, memory_wait_seconds=None,
+                  memory_wait='no time limit: waits and reports in scheduling.json')
     try:
         environment = fingerprint()
         _require(environment == entry['fingerprint'], 'qualified host fingerprint changed')
         cap = worker_cap(runtime_settings)
-        views, configuration, floor, budget = preflight(execution, host, root)
+        views, configuration, floor, budget = preflight(execution, host, root, reserved=True)
         # Recheck the binding and code after repeatable configuration work.
         load_attempt(path)
         _require(fingerprint() == environment, 'qualified host fingerprint changed during preflight')
@@ -686,6 +743,58 @@ def combine(path, shard_paths=None):
         return _combine(path, p, shard_paths)
 
 
+def shard_execution(p, documents, path):
+    """A19 (R3): the mode, worker count and thread count each host actually ran,
+    from its shard result, never collect_record's placeholder.
+
+    Per host: ``mode`` and ``threads`` from the shard's runtime settings
+    (run_shard cannot change either from the frozen attempt, so the attempt's
+    frozen settings are the stated fallback, labelled as such), ``workers``
+    from the shard result only (an operator override can change it at run
+    time), and the final live control's mode. A value no source carries is
+    null and named in ``not_recorded``. The top-level fields are derived only
+    where they are unambiguous: one mode or one thread count when every host
+    reports the same one, and the total worker count when every host reports
+    its own; otherwise null, with the reason in ``top_level``.
+    """
+    hosts, missing = {}, []
+    for host in sorted(p['hosts']):
+        shard = documents.get(str(host_directory(path, host) / 'result.json')) or {}
+        ran = shard.get('settings') if isinstance(shard.get('settings'), dict) else {}
+        frozen = p['hosts'][host].get('settings') or {}
+        row, sources = {}, {}
+        for field in ('mode', 'threads'):
+            if ran.get(field) is not None:
+                row[field], sources[field] = ran[field], 'shard result settings'
+            elif frozen.get(field) is not None:
+                row[field], sources[field] = frozen[field], 'frozen attempt settings'
+            else:
+                row[field] = None
+        row['workers'] = shard.get('workers')
+        if row['workers'] is not None:
+            sources['workers'] = 'shard result'
+        control = shard.get('worker_control') if isinstance(shard.get('worker_control'), dict) else {}
+        row['final_control_mode'] = control.get('mode')
+        absent = sorted(k for k in ('mode', 'threads', 'workers', 'final_control_mode') if row[k] is None)
+        row.update(sources=sources, not_recorded=absent)
+        missing += [host + '.' + k for k in absent]
+        hosts[host] = row
+    top, reasons = {}, {}
+    for field in ('mode', 'threads'):
+        values = {row[field] for row in hosts.values()}
+        if None in values:
+            top[field], reasons[field] = None, 'not recorded for every host'
+        elif len(values) == 1:
+            top[field], reasons[field] = values.pop(), 'every host ran the same'
+        else:
+            top[field], reasons[field] = None, 'hosts differ; see hosts'
+    if all(row['workers'] is not None for row in hosts.values()):
+        top['workers'], reasons['workers'] = sum(row['workers'] for row in hosts.values()), 'sum of host worker counts'
+    else:
+        top['workers'], reasons['workers'] = None, 'not recorded for every host'
+    return dict(top, hosts=hosts, top_level=reasons, not_recorded=missing)
+
+
 def _combine(path, p, shard_paths):
     target = scoped(p['target'])
     _require(not target.exists(), 'compatibility attempt is final; target already exists')
@@ -700,7 +809,12 @@ def _combine(path, p, shard_paths):
         atomic_json(marker, seal(binding))
     record = deepcopy(p['record'])
     record['execution'].update(code_commit=p['code_commit'], attempt_sha256=digest(p), shards=[], combine_inputs=inputs)
+    # A19 (R3): collect_record's work/1/1 placeholder never reaches a combined
+    # record, including a failed one; what each host ran replaces it.
+    record['execution'].update(mode=None, workers=None, threads=None,
+                               top_level=dict(mode='not recorded', workers='not recorded', threads='not recorded'))
     try:
+        record['execution'].update(shard_execution(p, documents, path))
         shards = [documents[name] for name in inputs['shard_paths']]
         proofs = {}
         for host in sorted(p['hosts']):
@@ -732,6 +846,8 @@ def _combine(path, p, shard_paths):
                 fingerprint=shard['fingerprint'], started_epoch=shard['started_epoch'], finished_epoch=shard['finished_epoch'],
                 x2_equivalent_hours=shard['x2_equivalent_hours']))
         record['proofs'] = [proofs[j] for j in p['selected_job_ids']]
+        # Unchanged: a passed shard must carry its worker count (a KeyError
+        # here fails the combine, as before). The value equals the derived total.
         record['execution']['workers'] = sum(shard['workers'] for shard in shards)
         record['passed'] = True
     except (ValueError, KeyError, TypeError) as exc:

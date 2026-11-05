@@ -48,21 +48,32 @@ def test_real_configuration_work_is_separate_from_results(tmp_path):
     assert not (tmp_path / "outputs").exists()
 
 
-def test_deadline_restart_and_exact_completed_output_resumption(tmp_path):
+def test_deadline_drain_and_exact_completed_output_resumption(tmp_path):
+    # A19 (T1): the deadline is a dispatch stop. Whatever was dispatched before
+    # it finishes and is recorded; nothing is killed, so no restart_required.
     control(tmp_path)
     jobs = [stable_job("fixture", {"seconds": .2}, "validation", i) for i in range(3)]
     code = code_identity()
     first = runner.dispatch(tmp_path, jobs[:1], code, local_settings(), time.time() + 15, measurements=measured())
     assert first["completed"] == 1
     preserved = file_hash(tmp_path / "outputs" / (jobs[0]["id"] + ".json"))
-    interrupted = runner.dispatch(tmp_path, jobs, code, local_settings(), time.time() + .1, measurements=measured())
-    assert interrupted["reason"] == "deadline" and interrupted["completed"] == 1
+    before = len((tmp_path / "events.jsonl").read_text().splitlines())
+    # One measured worker: at most one job starts before the 0.1 s stop, so at
+    # least one stays pending for the resumption below.
+    interrupted = runner.dispatch(tmp_path, jobs, code, local_settings(), time.time() + .1, measurements=measured((1,)))
+    events = [__import__("json").loads(line) for line in (tmp_path / "events.jsonl").read_text().splitlines()[before:]]
+    dispatched = {e["job"] for e in events if e["event"] == "dispatch"}
+    assert interrupted["reason"] == "deadline" and interrupted["completed"] == 1 + len(dispatched) < 3
+    assert interrupted["pending"] == 2 - len(dispatched) and interrupted["running"] == 0
+    assert all(runner.completed(tmp_path, j, code) is not None for j in jobs if j["id"] in dispatched)
+    assert all(runner.completed(tmp_path, j, code) is None for j in jobs[1:] if j["id"] not in dispatched)
+    assert any(e["event"] == "deadline_drain" for e in events)
     assert not read(tmp_path / "active.json")["pids"]
     resumed = runner.dispatch(tmp_path, list(reversed(jobs)), code, local_settings(), time.time() + 15, measurements=measured())
     assert resumed["completed"] == 3 and resumed["maximum_active"] <= 2
     assert file_hash(tmp_path / "outputs" / (jobs[0]["id"] + ".json")) == preserved
     assert all(runner.completed(tmp_path, j, code)["result"]["seed"] == j["seed"] for j in jobs)
-    assert "restart_required" in (tmp_path / "events.jsonl").read_text()
+    assert "restart_required" not in (tmp_path / "events.jsonl").read_text()
     damaged = tmp_path / "outputs" / (jobs[1]["id"] + ".json")
     atomic_json(damaged, {"partial": True})
     with pytest.raises(RuntimeError, match="identity"):

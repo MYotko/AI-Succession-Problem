@@ -19,6 +19,8 @@ SCHEMA = "v3-A11-compatibility-1"
 RECORD_DIRECTORY = ROOT / "runs/registered"
 RECORD_PATTERN = "A11_compatibility_*.json"
 _proof_producer = ContextVar("a11_nonregistered_proof_producer", default=None)
+# A19: the guard authority a registered rerun carried, bound to one proof job.
+_proof_authority = ContextVar("a11_nonregistered_proof_authority", default=None)
 _TIMING = {"seconds", "trajectory_seconds", "rescore_seconds", "scoring_seconds_by_k_star"}
 _PROCESS = {"code_hash"}  # Producer provenance, separately checked against X/Y.
 COMPARISON = {"canonical": "job plus result", "excluded_result_root_fields": sorted(_TIMING | _PROCESS),
@@ -124,6 +126,26 @@ def read_identities(*, registered):
     return values
 
 
+def proof_authority(job):
+    """A19: inside a proof only, the succession-guard authority the job's
+    producing run held, so its gates decide as they did there.
+
+    A registered rerun builds its guards with an authority from its verified
+    registration, and ExecutionGuards.authorize admits a succession on
+    production tables only with one. A proof re-executes non-registered, so
+    without this every succession such a rerun attempts is refused and its
+    output cannot equal the original. The authority comes from the producing
+    spec's registration, verified historically when the record is assembled,
+    and is bound to one job id. It is never set outside _execute_proof, never
+    set for a non-registered source, whose run had none, and it publishes or
+    resumes nothing.
+    """
+    authority = _proof_authority.get()
+    if _proof_producer.get() is None or authority is None or authority.get("job_id") != job["id"]:
+        return None
+    return authority
+
+
 def comparison_bytes(job, result):
     # Exclude named execution metadata at the result root only. In particular,
     # scientific time/step/history fields and all nested results remain intact.
@@ -147,24 +169,30 @@ def _execute_proof(item):
     configure_threads(1)
     from .production_runner import execute, peak_rss_bytes
     from .artifacts import input_view
+    # A19 (P2): each context variable is set inside its own try/finally, so a
+    # failure between the two sets still resets the first.
     token = _proof_producer.set(item["producing_code_hash"])
     try:
-        info = runtime(1)
-        start = time.perf_counter()
-        with input_view(item.get('input_view')):
-            if item['job']['kind'] == 'a13_validate_plain_ext' and item.get('a13_replay'):
-                from .replay_a14 import replay
-                result = replay(item)
-            elif item['job']['kind'] in EXTENSION_REPLAY_KINDS and item.get('extension_replay'):
-                from .replay_a16 import replay
-                result = replay(item)
-            else:
-                result = execute(item["job"], registered=False, registration=None, root=Path(item["phase_root"]))
-        _require(result.get("code_hash", code_identity()) == code_identity(), "re-execution result has wrong producer metadata")
-        return {"after_sha256": hashlib.sha256(comparison_bytes(item["job"], result)).hexdigest(), "runtime": info,
-                "_peak_rss_bytes": peak_rss_bytes(), "_worker_seconds": time.perf_counter() - start}
-    except Exception as exc:
-        return {"after_sha256": None, "error": type(exc).__name__ + ": " + str(exc)}
+        granted = _proof_authority.set(item.get("proof_authority"))
+        try:
+            info = runtime(1)
+            start = time.perf_counter()
+            with input_view(item.get('input_view')):
+                if item['job']['kind'] == 'a13_validate_plain_ext' and item.get('a13_replay'):
+                    from .replay_a14 import replay
+                    result = replay(item)
+                elif item['job']['kind'] in EXTENSION_REPLAY_KINDS and item.get('extension_replay'):
+                    from .replay_a16 import replay
+                    result = replay(item)
+                else:
+                    result = execute(item["job"], registered=False, registration=None, root=Path(item["phase_root"]))
+            _require(result.get("code_hash", code_identity()) == code_identity(), "re-execution result has wrong producer metadata")
+            return {"after_sha256": hashlib.sha256(comparison_bytes(item["job"], result)).hexdigest(), "runtime": info,
+                    "_peak_rss_bytes": peak_rss_bytes(), "_worker_seconds": time.perf_counter() - start}
+        except Exception as exc:
+            return {"after_sha256": None, "error": type(exc).__name__ + ": " + str(exc)}
+        finally:
+            _proof_authority.reset(granted)
     finally:
         _proof_producer.reset(token)
 
@@ -197,12 +225,19 @@ def collect_record(sources, reasons_path):
         root, spec_path = Path(source["root"]).resolve(), Path(source["spec"]).resolve()
         spec = unseal(read(spec_path))
         _require(spec["code_hash"] == old and declaration(spec.get("instrument")).a10, "source is not the producing A10 identity")
+        registration = None
         if spec.get('registered'):
             from .artifacts import verify_registration
-            verify_registration(spec['registration'], instrument=spec['instrument'], historical=True)
+            registration = verify_registration(spec['registration'], instrument=spec['instrument'], historical=True)
         _require(read(root / "identity.json") == {"code_hash": old, "spec_hash": digest(spec)}, "source root identity mismatch")
         _require(unseal(read(root / "manifest.json")) == spec, "source root manifest mismatch")
         _require(read(root / "launches.json")[-1].get("complete") is True, "compatibility needs a completed launch")
+        # A19 (P1): per-spec values computed once, before the job loop. The
+        # spec hash is reused by every proof_authority and by inputs; the
+        # original validation plan of a registered single-host extension spec
+        # (and its binding checks) is read once and reused for every job.
+        spec_sha256 = file_hash(spec_path)
+        original_plans = {}  # Keyed by the branch that reads it: A13's file, or the A14/A16 history.
         for job in spec["jobs"]:
             _require(job["id"] not in selected_jobs, "duplicate source job")
             phase_root = root / job["config"].get("phase", job["kind"])
@@ -214,6 +249,12 @@ def collect_record(sources, reasons_path):
             selected_jobs[job["id"]] = {"job": job, "phase_root": str(phase_root), "producing_code_hash": old,
                                         "before_sha256": hashlib.sha256(comparison_bytes(job, output["result"])).hexdigest(),
                                         "output_file_sha256": file_hash(phase_root / "outputs" / (job["id"] + ".json"))}
+            if job['kind'] == 'rerun' and registration is not None:
+                # A19: the registered run's guards held an authority; the proof
+                # carries the historically verified registration in its place.
+                selected_jobs[job['id']]['proof_authority'] = {
+                    "a19_proof": True, "job_id": job["id"], "registration": registration,
+                    "spec_sha256": spec_sha256}
             if job['kind'] == 'a13_validate_plain_ext':
                 from .replay_a14 import binding
                 checkpoints = [read(phase_root / 'a13_checkpoints' / job['id'] / f'{r["replicate"]:02d}.json')
@@ -231,16 +272,22 @@ def collect_record(sources, reasons_path):
                 # class into the proof. A single-host extension plan has no pull
                 # extension; its original validation plan supplies that class.
                 from .table_validation_a4 import _recompute_plan_hash
-                if job['kind'] == 'a13_validate_plain_ext':
-                    _require(file_hash(spec['original_plan_path']) == spec['original_plan_file_sha256'],
-                             'A13 replay original plan changed')
-                    original = unseal(read(spec['original_plan_path']))
-                    _require(_recompute_plan_hash(original) == original['plan_hash']
-                             and original['plan_hash'] == spec['original_plan_hash'], 'A13 replay original plan binding differs')
-                else:
-                    from .replay_a16 import original_validation_plan
-                    original = original_validation_plan(spec, history_view)
-                    _require(_recompute_plan_hash(original) == original['plan_hash'], 'extension replay original plan binding differs')
+                branch = job['kind'] == 'a13_validate_plain_ext'
+                if branch not in original_plans:
+                    if branch:
+                        _require(file_hash(spec['original_plan_path']) == spec['original_plan_file_sha256'],
+                                 'A13 replay original plan changed')
+                        original_plans[branch] = unseal(read(spec['original_plan_path']))
+                        _require(_recompute_plan_hash(original_plans[branch]) == original_plans[branch]['plan_hash']
+                                 and original_plans[branch]['plan_hash'] == spec['original_plan_hash'], 'A13 replay original plan binding differs')
+                    else:
+                        from .replay_a16 import original_validation_plan
+                        original_plans[branch] = original_validation_plan(spec, history_view)
+                        _require(_recompute_plan_hash(original_plans[branch]) == original_plans[branch]['plan_hash'],
+                                 'extension replay original plan binding differs')
+                # Read-only below: resource_estimate returns a new dict and
+                # never mutates the plan, so one object serves every job.
+                original = original_plans[branch]
                 source = next(j for j in original['jobs'] if j['config']['phase'] == 'validate_plain'
                               and j['config']['a1_job']['id'] == job['config']['a1_job']['id'])
                 resource = resource_estimate(original, source)
@@ -265,7 +312,7 @@ def collect_record(sources, reasons_path):
             if phase in spec.get('configuration', {}):
                 profiles[profile_key] = dict(profile=spec['configuration'][phase], phase=phase,
                     phase_root=str(phase_root), producing_code_hash=old)
-        inputs.append({"spec": str(spec_path), "root": str(root), "spec_sha256": file_hash(spec_path)})
+        inputs.append({"spec": str(spec_path), "root": str(root), "spec_sha256": spec_sha256})
     populations = [{"phase": p, "capability": c, "setting": s, "job_ids": sorted(ids)}
                    for (p, c, s), ids in sorted(grouped.items())]
     for item in selected_jobs.values():
@@ -407,7 +454,11 @@ def build_record(sources, reasons_path, target, *, workers=None, memory_floor_gb
         for key, peak in cfg.get('class_peaks_gb', {}).items():
             authority['peaks'][key] = max(authority['peaks'].get(key, 0.), peak)
     atomic_json(control_root / 'memory_authority.json', authority)
-    record['execution'].update(workers=workers, memory_budget_gb=budget, memory_floor_gb=0., configuration=configuration, settings=settings)
+    # A19 (P3): the record carries the build's actual operating mode, worker
+    # count and thread count, from the same settings and control the build
+    # uses (collect_record's placeholder said work/1/1 regardless).
+    record['execution'].update(mode=settings['mode'], workers=workers, threads=settings['threads'],
+                               memory_budget_gb=budget, memory_floor_gb=0., configuration=configuration, settings=settings)
     # The declared population and selection are durable before any execution.
     payload = deepcopy({**record, 'selected_job_ids': sample, 'target_path': target.relative_to(SIMULATION).as_posix()})
     reserve_attempt(record, payload, attempt)

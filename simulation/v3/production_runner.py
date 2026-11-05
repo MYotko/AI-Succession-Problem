@@ -264,6 +264,16 @@ def execute(job, registered=False, registration=None, root=None):
             raise ValueError("tables require a matching calibration")
         tables = ProductionTables(SIMULATION / config["tables_path"], calibration_hash=calibration["sha256"], registered=registered)
     model = V3Model(seed=job["seed"], calibration=calibration, tables=tables, registered=registered, registration=registration, **model_args)
+    if not registered:
+        # A19: inside an A11 proof only, a rerun whose producing run was
+        # registered carries that run's guard authority, so its succession gates
+        # decide as they did there. The guards are built last in the model's
+        # construction and have decided nothing yet. Outside a proof there is no
+        # authority to carry and nothing changes.
+        from .compatibility_a10 import proof_authority
+        authority = proof_authority(job)
+        if authority is not None:
+            model.guards.authority = authority
     records = model.run(config.get("steps", 500))
     populations = [r["population"] for r in records]
     availability = {"allocation_steps": sum(r["allocation_evaluated"] for r in records),
@@ -298,6 +308,10 @@ def execute(job, registered=False, registration=None, root=None):
 
 
 def worker(root_name, job, code, threads, registered, registration, completion_deadline=None, input_snapshot=None):
+    # A19 (T2): completion_deadline is accepted for call-shape compatibility and
+    # ignored. A job that finishes always writes its output and then its
+    # completion record; a clock never discards finished work. The dispatch
+    # stop is the scheduler's (dispatch drains instead of killing).
     if input_snapshot is not None:
         from .artifacts import input_view
         with input_view(input_snapshot):
@@ -320,12 +334,8 @@ def worker(root_name, job, code, threads, registered, registration, completion_d
             output = {"job": job, "code_hash": code, "runtime": info, "result": result,
                       "seconds": time.perf_counter() - before, "started_epoch": started, "finished_epoch": time.time(),
                       "peak_rss_bytes": peak_rss_bytes()}
-            if completion_deadline is not None and time.time() >= completion_deadline:
-                return
             path = root / "outputs" / (job["id"] + ".json")
             atomic_json(path, output)
-            if completion_deadline is not None and time.time() >= completion_deadline:
-                return  # An output without a completion record is never counted.
             atomic_json(root / "records" / (job["id"] + ".json"),
                         {"job": job, "code_hash": code, "status": "complete", "output_hash": file_hash(path), "completed_epoch": time.time(),
                          "worker_seconds": time.perf_counter() - before, "peak_rss_bytes": output["peak_rss_bytes"], "oom_score_adj": oom})
@@ -353,7 +363,12 @@ def worker(root_name, job, code, threads, registered, registration, completion_d
         raise
 
 
-def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=None, control_root=None, registered=False, registration=None, completion_screen=None, memory_cap=None, memory_estimate_gb=None, pooled_jobs=None, input_snapshot=None, job_resources=None, measured_peaks=None, remaining_resources=None):
+def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=None, control_root=None, registered=False, registration=None, completion_screen=None, memory_cap=None, memory_estimate_gb=None, pooled_jobs=None, input_snapshot=None, job_resources=None, measured_peaks=None, remaining_resources=None, interrupt_control=None):
+    # A19 (F2): ``interrupt_control``, when given, is another control file whose
+    # interrupt_now stops this dispatch exactly as its own control's does. The
+    # nondeterminism recheck passes its launch's control.json, so the
+    # operator's immediate stop reaches the recheck worker. Nothing else of
+    # that file (mode, targets, stop_dispatch) applies here.
     root = scoped(root)
     root.mkdir(parents=True, exist_ok=True)
     control_root = control_root or root
@@ -398,6 +413,27 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
     monotonic_end = time.monotonic() + max(0, deadline - time.time())
     previous_report = 0.
     mode_effective = None
+    # A19 (T1): the deadline is a dispatch stop, not a kill. When it is reached
+    # this records the drain's start; nothing new starts, and every job already
+    # running finishes and is recorded exactly as any other completion.
+    deadline_drain = None
+
+    def deadline_passed():
+        return time.time() >= deadline or time.monotonic() >= monotonic_end
+
+    def begin_drain():
+        # A19 (T1, F3): one place starts the drain, from the outer check or
+        # from the fill loop before a start, so no job starts after the stop.
+        nonlocal deadline_drain
+        deadline_drain = {"epoch": time.time(), "deadline_epoch": deadline, "active": list(active),
+                          "pending": len(pending), "completed_before": len(done)}
+        event(root, "deadline_drain", deadline_epoch=deadline, active=list(active), pending=len(pending))
+
+    def external_interrupt():
+        if interrupt_control is None or not Path(interrupt_control).exists():
+            return False
+        return bool(read(interrupt_control).get("interrupt_now"))
+
     if pooled_jobs is not None and not pending:
         control = read(control_root / "control.json")
         last_mode = control["mode"]
@@ -406,7 +442,8 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
         atomic_json(root / "active.json", {"machine": platform.node(), "pids": [p.pid for p, _, _ in active.values()]})
         status = {"total": len(jobs), "completed": len(done), "running": len(active),
                   "pending": len(jobs) - len(done) - len(active), "maximum_active": maximum,
-                  "reason": reason, "deadline_epoch": deadline, "mode": last_mode, "selection": last_selection, "active_job_ids": list(active)}
+                  "reason": reason, "deadline_epoch": deadline, "mode": last_mode, "selection": last_selection, "active_job_ids": list(active),
+                  "deadline_drain": deadline_drain}
         if pooled_jobs is not None:
             status.update(memory_budget_gb=pool_budget, memory_estimates_gb=pool_estimates,
                           not_completed_ids=[j["id"] for j in jobs if j["id"] not in done])
@@ -460,11 +497,19 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                 last_mode, last_selection = mode, selected
                 mode_effective = None
                 event(root, "mode_requested", mode=mode, selection=selected, active=len(active), configuration=bool(fixed))
-            if time.time() >= deadline or time.monotonic() >= monotonic_end or signals or control.get("interrupt_now"):
-                reason = "deadline" if time.time() >= deadline or time.monotonic() >= monotonic_end else "interrupted"
+            if signals or control.get("interrupt_now") or external_interrupt():
+                # The operator's supported interruption: immediate, also during
+                # a deadline drain. Live workers stop and restart_required is
+                # recorded for each.
+                reason = "interrupted"
                 stop(reason)
                 active.clear()
                 break
+            if deadline_drain is None and deadline_passed():
+                # A19 (T1): the dispatch stop (A11, A17: the declared wall
+                # allowance stops dispatch). Pending jobs stay pending and
+                # unstarted; running jobs finish and are recorded below.
+                begin_drain()
             for key, (process, job, threads) in list(active.items()):
                 if not process.is_alive():
                     process.join()
@@ -517,7 +562,7 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                 mode_effective = mode
                 event(root, "mode_effective", mode=mode, active=len(active), worker_limit=effective_limit)
             slots = sum(t for _, _, t in active.values())
-            while pending and not control.get("stop_dispatch") and len(active) < effective_limit and slots + selected["threads"] <= settings["cpu_budget"]:
+            while pending and deadline_drain is None and not control.get("stop_dispatch") and len(active) < effective_limit and slots + selected["threads"] <= settings["cpu_budget"]:
                 pending.sort(key=lambda j: (-resources[j['id']]['estimated_seconds'], j['id']))
                 reserved = sum(job_memory(j) for _, j, _ in active.values())
                 available = mem_available_bytes()
@@ -538,6 +583,14 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
                 args = (str(root), job, code, selected["threads"], registered, registration)
                 tail = ((deadline if pooled_jobs is not None else None, input_snapshot) if input_snapshot is not None
                         else ((deadline,) if pooled_jobs is not None else ()))
+                if deadline_passed():
+                    # A19 (F3): starts, memory reads and admission take time, so
+                    # the stop can pass inside one fill cycle. Both clocks are
+                    # checked immediately before each start; past the stop the
+                    # job goes back to pending unstarted and the drain begins.
+                    pending.insert(0, job)
+                    begin_drain()
+                    break
                 process = context.Process(target=worker, args=args + tail)
                 process.start()
                 active[job["id"]] = (process, job, selected["threads"])
@@ -557,6 +610,18 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
             if time.monotonic() - previous_report >= 30:
                 print({"phase": root.name, **status}, flush=True)
                 previous_report = time.monotonic()
+            if deadline_drain is not None and not active:
+                # A19 (T1): the drain ends once no job is active. The overrun
+                # past the deadline is the time the running jobs needed. It is
+                # also kept in the status, so the launch record's outcome has it.
+                reason = "deadline"
+                ended = time.time()
+                deadline_drain.update(ended_epoch=ended, overrun_seconds=ended - deadline,
+                                      completed_during_drain=len(done) - deadline_drain["completed_before"],
+                                      ended_by="no job active")
+                event(root, "deadline_drain_end", deadline_epoch=deadline, overrun_seconds=ended - deadline,
+                      completed_during_drain=deadline_drain["completed_during_drain"], pending=len(pending))
+                break
             if control.get("stop_dispatch") and not active:
                 reason = "drained"
                 break
@@ -569,6 +634,14 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
             stop("runner exit")
             active.clear()
             done = {j["id"] for j in jobs if completed(root, j, code) is not None}
+            if deadline_drain is not None and "ended_epoch" not in deadline_drain:
+                # A19 (F4): an interruption, a scientific stop or a failure
+                # ended the drain early; the record still says when and why.
+                ended = time.time()
+                deadline_drain.update(ended_epoch=ended, overrun_seconds=ended - deadline,
+                                      completed_during_drain=len(done) - deadline_drain["completed_before"], ended_by=reason)
+                event(root, "deadline_drain_end", deadline_epoch=deadline, overrun_seconds=ended - deadline,
+                      completed_during_drain=deadline_drain["completed_during_drain"], ended_by=reason)
             status = publish()
         finally:
             for sig, handler in handlers.items():
@@ -576,14 +649,18 @@ def dispatch(root, jobs, code, settings, deadline, *, measurements=None, fixed=N
     return {**status, "wall_seconds": time.perf_counter() - start}
 
 
-def nondeterminism_check(phase_root, jobs, registered=False, registration=None):
+def nondeterminism_check(phase_root, jobs, registered=False, registration=None, *, dispatched=None):
     """Re-execute one completed task in a fresh spawned worker and compare its
     result hash. The task is chosen by a recorded seeded draw among the phase's
     shortest tasks (by count x length), so the recheck fits the deadline. A
     mismatch halts; the result is recorded durably. The recompute uses the same
     spawned worker path (with configure_threads) as the original, since
     bit-identity holds within that path but not across process-launch modes.
-    A4 stage results carry no wall time, so the digest is deterministic."""
+    A4 stage results carry no wall time, so the digest is deterministic.
+
+    ``dispatched``, when a list, receives the candidate's id if this call
+    started its worker (A19 T3: the launch counts that as a scientific
+    dispatch). It changes nothing that is written."""
     phase_root = scoped(phase_root)
     code = code_identity()
     done = [j for j in jobs if completed(phase_root, j, code) is not None]
@@ -618,17 +695,60 @@ def nondeterminism_check(phase_root, jobs, registered=False, registration=None):
     if (phase_root / 'memory_reservations.json').exists():
         for key, value in read(phase_root / 'memory_reservations.json').items(): peaks[key] = max(peaks.get(key, 0.), value)
     launches = phase_root.parent / 'launches.json'
-    run_settings = read(launches)[-1]['settings'] if launches.exists() else None
+    history = read(launches) if launches.exists() else []
+    run_settings = history[-1]['settings'] if history else None
     control_path = phase_root.parent / 'control.json'
-    while run_settings and control_path.exists():
-        control = read(control_path)
-        if control.get('stop_dispatch') or control.get('interrupt_now'):
-            raise RuntimeError('nondeterminism dispatch stopped by operator; resume still requires the check')
-        if wc.selection(run_settings, control)['workers'] > 0: break
-        budget_path = phase_root.parent / 'budget.json'
-        if budget_path.exists() and time.time() >= read(budget_path)['deadline_epoch']:
-            raise RuntimeError('deadline while nondeterminism dispatch paused')
-        time.sleep(.1)
+
+    def not_run(reason, **detail):
+        # A19 (T5, R2): the recheck could not run to a comparison, so nothing
+        # is known about determinism. This is a distinct outcome: no failure is
+        # written, no halt is latched, and no reader can take it for a passed
+        # check (it never writes nondeterminism_check.json and carries no
+        # "matched" key). The caller ends its launch incomplete with this
+        # reason: "deadline" (the dispatch stop), "interrupted" (a signal or
+        # the launch's interrupt_now, during the pause before the recheck or
+        # while it runs) or
+        # "drained" (the launch's stop_dispatch before the recheck started).
+        # For "deadline" the frozen deadline refuses any resumption in this
+        # root, so the phase stays unchecked. For the other two a later launch
+        # before the deadline runs the recheck again (after the operator
+        # clears the stop flag, which initial_control preserves). This record
+        # names the launch that wrote it; only nondeterminism_check.json ever
+        # states a result.
+        result = {"not_run": True, "reason": reason, "candidate": job["id"], "candidates": len(shortest),
+                  "epoch": time.time(), "launch_number": len(history),
+                  "launch_epoch": history[-1].get("epoch") if history else None, **detail}
+        atomic_json(phase_root / "nondeterminism_check_not_run.json", result)
+        return result
+
+    waited, caught, previous = False, [], {}
+    if run_settings and control_path.exists():
+        # A19 (G3): SIGINT and SIGTERM during the pause are the operator's
+        # interruption, handled as dispatch handles them: recorded, then the
+        # previous handlers come back.
+        previous = {sig: signal.signal(sig, lambda number, frame: caught.append(number)) for sig in (signal.SIGINT, signal.SIGTERM)}
+    try:
+        while run_settings and control_path.exists():
+            if caught:
+                return not_run('interrupted', paused=waited, dispatched=False, signal=int(caught[0]))
+            control = read(control_path)
+            if control.get('interrupt_now') or control.get('stop_dispatch'):
+                # A19 (F2): the launch's own stop reached the recheck before it
+                # started. Not a failure and not a latch: the launch ends
+                # incomplete, "interrupted" for interrupt_now and "drained" for
+                # stop_dispatch, and a later launch runs the recheck.
+                return not_run('interrupted' if control.get('interrupt_now') else 'drained', paused=waited, dispatched=False)
+            if wc.selection(run_settings, control)['workers'] > 0: break
+            budget_path = phase_root.parent / 'budget.json'
+            if budget_path.exists() and time.time() >= read(budget_path)['deadline_epoch']:
+                return not_run('deadline', paused=True, dispatched=False)
+            waited = True
+            time.sleep(.1)
+        if caught:
+            return not_run('interrupted', paused=waited, dispatched=False, signal=int(caught[0]))
+    finally:
+        for sig, handler in previous.items():
+            signal.signal(sig, handler)
     available = mem_available_bytes()
     fraction = run_settings.get('memory_headroom', .8) if run_settings else .8
     charges, _ = wc.admission_charges({**remaining, job['id']: resources[job['id']]}, peaks)
@@ -643,10 +763,27 @@ def nondeterminism_check(phase_root, jobs, registered=False, registration=None):
     budget_path = phase_root.parent / 'budget.json'
     if registered and not budget_path.exists(): raise RuntimeError('registered check requires its launch deadline')
     check_deadline = read(budget_path)['deadline_epoch'] if budget_path.exists() else time.time() + 24 * 3600
-    dispatch(temp, [job], code, check_settings, check_deadline,
-             registered=registered, registration=registration, job_resources=resources, measured_peaks=peaks, remaining_resources=remaining)
+    if time.time() >= check_deadline:
+        return not_run('deadline', paused=False, dispatched=False)
+    status = dispatch(temp, [job], code, check_settings, check_deadline,
+                      registered=registered, registration=registration, job_resources=resources, measured_peaks=peaks, remaining_resources=remaining,
+                      interrupt_control=control_path if control_path.exists() else None)
+    if dispatched is not None and status["maximum_active"] > 0:
+        dispatched.append(job["id"])
     fresh = completed(temp, job, code)
     original = completed(phase_root, job, code)
+    if fresh is None and status["reason"] in ("deadline", "interrupted"):
+        # A19 (T5): the dispatch stop ended the recheck's dispatch without a
+        # fresh result. Under T1 a recheck that started drains to completion,
+        # so this is a recheck the stop reached before it started, or one whose
+        # worker failed during the drain (a drain starts no retry).
+        # A19 (R2, F2): "interrupted" is the operator's supported interruption
+        # of the recheck, by a signal or by the launch's interrupt_now, which
+        # dispatch reads through interrupt_control; dispatch recorded
+        # restart_required. Neither is evidence of nondeterminism: no
+        # comparison was made.
+        return not_run(status["reason"], paused=False, dispatched=status["maximum_active"] > 0,
+                       attempts=read(temp / "attempts.json") if (temp / "attempts.json").exists() else {})
     if fresh is None or digest(fresh["result"]) != digest(original["result"]):
         atomic_json(phase_root / "nondeterminism_failure.json", {"epoch": time.time(), "job": job["id"], "recomputed": fresh is not None})
         if job['kind'] == 'a13_validate_plain_ext':
@@ -1106,7 +1243,18 @@ def launch(spec_path, root, settings, service_record=None):
         record = {"epoch": time.time(), "machine": platform.node(), "settings": settings, "configuration": {}, "service": service_record}
         history.append(record)
         atomic_json(root / "launches.json", history)
-        config_deadline = min(deadline, time.time() + spec.get("configuration_seconds", 900))
+        # A19 (T4): configuration trials dispatch against the launch's own
+        # deadline, the registered dispatch stop. configuration_seconds is the
+        # operator's planning target for the whole configuration test ("about
+        # 15 minutes"); the elapsed time is recorded against it, and it never
+        # aborts a trial or the launch. A trial cut short by the dispatch stop
+        # is still invalid, which refuses scientific dispatch (a refusal to start).
+        configuration_planning = {"planning_seconds": spec.get("configuration_seconds", 900), "started_epoch": time.time()}
+        record["configuration_planning"] = configuration_planning
+        def close_configuration_planning():
+            elapsed = time.time() - configuration_planning["started_epoch"]
+            configuration_planning.update(finished_epoch=time.time(), elapsed_seconds=elapsed,
+                                          within_planning_target=elapsed <= configuration_planning["planning_seconds"])
         # A4 validation and A5 labels are both staged plans with per-phase memory
         # caps, resume-aware projection and a per-phase nondeterminism recheck.
         is_a4 = spec.get("schema") in ("v3-A4-validation-1", "v3-A5-labels-1")
@@ -1125,12 +1273,15 @@ def launch(spec_path, root, settings, service_record=None):
             atomic_json(root / "launches.json", history)
         try:
             for phase, profile in spec["configuration"].items():
-                data = configuration_test(root, phase, profile, settings, config_deadline, len(history),
+                data = configuration_test(root, phase, profile, settings, deadline, len(history),
                                           job_resources=resources, source_jobs=spec["jobs"], memory_spec=spec)
                 record["configuration"][phase] = data
                 atomic_json(root / "launches.json", history)
+            close_configuration_planning()
+            atomic_json(root / "launches.json", history)
         except BaseException as exc:
             record["configuration_failure"] = repr(exc)
+            close_configuration_planning()
             atomic_json(root / "launches.json", history)
             if spec.get("tag") == "pilot":
                 atomic_json(root / "cost_projection.json", {"status": "incomplete", "reason": "configuration test incomplete; scientific dispatch refused"})
@@ -1139,6 +1290,15 @@ def launch(spec_path, root, settings, service_record=None):
             raise
         outcomes = {}
         effective_workers = {}
+        # A19 (T3): whether this launch record has started any scientific job.
+        # A scientific job is a job of the sealed manifest (spec["jobs"]) whose
+        # worker this launch started: in its phase dispatch, or as the
+        # nondeterminism recheck's re-execution of a completed manifest job.
+        # Configuration trials are generated jobs outside the manifest and are
+        # not scientific jobs. A job this launch found already complete was not
+        # dispatched by it. A resumed launch is a new launch record and starts
+        # with this False, so its first projection may refuse again.
+        dispatched_scientific = False
         if is_a4:
             mode_cap = settings["caps"][settings["mode"]]
             for phase in spec["phases"]:
@@ -1155,9 +1315,20 @@ def launch(spec_path, root, settings, service_record=None):
                 # Project the REMAINING work (resume-aware); stop before this phase
                 # if it will not fit the remaining wall budget.
                 projection = a4_projection(spec, record["configuration"], effective_workers, root, code_identity(), index, time.time(), deadline)
-                record.setdefault("projections", []).append({"before_phase": phase, **projection})
+                entry = {"before_phase": phase, **projection, "scientific_dispatched": dispatched_scientific,
+                         "disposition": "fits" if projection["fits"] else "advisory" if dispatched_scientific else "refused"}
+                record.setdefault("projections", []).append(entry)
                 atomic_json(root / "launches.json", history)
-                if not projection["fits"]:
+                if not projection["fits"] and dispatched_scientific:
+                    # A19 (T3): after this launch has dispatched a scientific
+                    # job, a projection is advisory. It is recorded with the
+                    # projected total and remaining budget and never stops
+                    # anything; the launch runs until it completes or reaches
+                    # its dispatch stop.
+                    event(root, "projection_exceeds_budget", advisory=True, before_phase=phase,
+                          total_seconds=projection["total_seconds"], remaining_budget_seconds=projection["remaining_budget_seconds"])
+                elif not projection["fits"]:
+                    # Before any scientific dispatch this is a refusal to start.
                     record.update(complete=False, finished_epoch=time.time(), stopped="projection_exceeds_budget")
                     atomic_json(root / "launches.json", history)
                     return {"complete": False, "reason": "projection_exceeds_budget", "projection": projection, "outcomes": outcomes}
@@ -1173,9 +1344,12 @@ def launch(spec_path, root, settings, service_record=None):
                               **({"pooled_jobs": spec["pooled_job_estimates"]} if pooled else {}))
             outcomes[phase] = result
             record["outcomes"] = outcomes
+            if result.get("maximum_active", 0) > 0 and not dispatched_scientific:
+                dispatched_scientific = True
+                record["first_scientific_dispatch"] = {"phase": phase, "epoch": time.time(), "by": "phase dispatch"}
             atomic_json(root / "launches.json", history)
             if result["completed"] != len(jobs) or result['reason'] == 'screen_failure':
-                record.update(complete=False, finished_epoch=time.time())
+                record.update(complete=False, finished_epoch=time.time(), stopped=result['reason'])
                 atomic_json(root / 'launches.json', history)
                 if spec.get("tag") == "pilot":
                     if is_a10_pilot:
@@ -1184,9 +1358,28 @@ def launch(spec_path, root, settings, service_record=None):
                     else:
                         from .pilot import project_costs
                         atomic_json(root / "cost_projection.json", project_costs(spec, root, outcomes, record["configuration"]))
-                return {"complete": False, "outcomes": outcomes}
+                return {"complete": False, "reason": result['reason'], "outcomes": outcomes}
             if (is_a4 or spec.get("schema") in ("v3-A13-extension-1", "v3-A14-extension-1", "v3-A16-extension-1")) and jobs:
-                check = nondeterminism_check(root / phase, jobs, spec["registered"], spec.get("registration"))
+                rechecked = []
+                check = nondeterminism_check(root / phase, jobs, spec["registered"], spec.get("registration"), dispatched=rechecked)
+                if rechecked and not dispatched_scientific:
+                    dispatched_scientific = True
+                    record["first_scientific_dispatch"] = {"phase": phase, "epoch": time.time(), "by": "nondeterminism recheck",
+                                                           "job": rechecked[0]}
+                    atomic_json(root / "launches.json", history)
+                if check.get("not_run"):
+                    # A19 (T5, R2): the recheck did not run to a comparison,
+                    # because the dispatch stop was reached (reason deadline)
+                    # or the operator interrupted it (reason interrupted). The
+                    # launch ends incomplete with that reason; nothing is
+                    # written as a check result or as a failure, and no halt
+                    # is latched. After an interruption, a later launch before
+                    # the deadline runs the recheck again.
+                    record.update(complete=False, finished_epoch=time.time(), stopped=check["reason"],
+                                  nondeterminism_check_not_run={"phase": phase, **check})
+                    atomic_json(root / "launches.json", history)
+                    return {"complete": False, "reason": check["reason"], "outcomes": outcomes,
+                            "nondeterminism_check_not_run": {"phase": phase, **check}}
                 atomic_json(root / phase / "nondeterminism_check.json", check)
         publication = spec.get("publication")
         if publication:

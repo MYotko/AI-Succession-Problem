@@ -330,15 +330,26 @@ def test_input_transfer_hashes_paths_and_read_only_view(tmp_path):
         receive(doc, tmp_path / 'bad_host/snapshots', corrupt)
 
 
-def test_wall_ceiling_no_late_first_completion_and_bad_duplicate_after_completion_halts(tmp_path):
+def test_wall_ceiling_stops_claims_but_records_a_late_first_completion_and_bad_duplicate_halts(tmp_path):
+    # A19 (T6): the wall allowance is a dispatch stop with drain. A job leased
+    # before it and finished after the ceiling is recorded; no new claim is
+    # given; a differing duplicate after completion still halts.
     t = time.time()
-    spec = spec_fixture(1)
+    spec = spec_fixture(2)
     _, root, spec = initialize(tmp_path, spec, start=t)
     alpha = join(root, 'alpha', t); ready(root, alpha, 'toy', t)
     leased = claim(root, alpha, t)
-    reply = finish(root, alpha, leased, t + spec['wall_seconds'])
-    assert reply == {'accepted': False, 'reason': 'wall ceiling'}
-    assert runner.completed(root / 'toy', leased['job'], spec['code_hash']) is None
+    ceiling = t + spec['wall_seconds']
+    for when in range(20, int(spec['wall_seconds']) + 20, 20):
+        m.rpc(root, dict(op='heartbeat', **alpha), now=t + when)
+    status = m.rpc(root, dict(op='heartbeat', **alpha), now=ceiling)['status']
+    assert status['stops']['wall'] and not status['hard_stop']
+    assert claim(root, alpha, ceiling)['job'] is None
+    reply = finish(root, alpha, leased, ceiling)
+    assert reply['accepted'] is True and reply['duplicate'] is False
+    assert runner.completed(root / 'toy', leased['job'], spec['code_hash']) is not None
+    assert finish(root, alpha, leased, ceiling + 1, different=True)['halt'] == 'nondeterminism'
+    assert a.unseal(a.read(root / 'nondeterminism_failure.json'))['original_host'] == 'alpha'
 
 
 def test_resume_charges_late_work_without_overlapping_same_host_rejoin(tmp_path):

@@ -164,9 +164,9 @@
   },
   "amendment": "A2, 2026-09-28",
   "approved_boundary_sha256": {
-    "v3/artifacts.py": "3b3d467495bc1865a6f8639c348e8b399b436e370caa223449e9648c3b6abba2",
+    "v3/artifacts.py": "c470d876a69357a6874f8f50cb157842e93ab648e2a9b80d3cf9417ac8f192d9",
     "v3/integration.py": "8d22354a7fa3d2d71036f686f5eff16a79c857e4c9212ad1cb8b15ed40e31e26",
-    "v3/production_runner.py": "f6cb114643a6c3df4f2efec011eacf23db56f609c7782110b534235ad0fd84ce",
+    "v3/production_runner.py": "dfe00bc1460c78a418a2e2e5280bf1fecb9c9a2c13794302c9e039b0a4cd8e6f",
     "v3/production_tables.py": "50467aace062485f636780a26e383d863dbf55b57e203cec2c8f592b31bef6d6",
     "v3/recording.py": "38891bedc60eda486952a6c33323f926b89ac0d358b7760afad514fc2f1771f8",
     "v3/service.py": "3e90a9514962d4f4bf0cafb868d493f4ee54e80f178a7bdc391a1761621862b9",
@@ -305,6 +305,25 @@
     },
     "approved_sha256": {
       "v3/artifacts.py": "3b3d467495bc1865a6f8639c348e8b399b436e370caa223449e9648c3b6abba2"
+    }
+  },
+  "a19_proof_authority": {
+    "amendment": "A19, 2026-11-04: inside an A11 compatibility proof only, a rerun from a registered source carries the guard authority its producing run held; configure_threads sets the live thread limit; and a launch's deadline stops dispatch without stopping or discarding running work",
+    "date": "2026-11-04",
+    "design_amendment": "A19",
+    "design_document": "simulation/diagnostics/a19/A19_PROOF_AUTHORITY.md",
+    "design_document_sha256": "717f6e60bdcfb074a74e8862956862545a63ec2e777a6c281b41f1d584688c26",
+    "reasons": {
+      "v3/production_runner.py": "In the rerun branch only, when not registered, the model's guards take the authority compatibility_a10.proof_authority returns for this job, which exists only inside an A11 proof, only for a rerun from a registered source and only for the job it was bound to, so a proof's succession gates decide as the registered run's did. Outside a proof it returns nothing and the branch is unchanged. At a launch's deadline, dispatch now starts no further job and lets every running job finish and be recorded, recording the drain and its overrun, where it used to terminate and kill them; the launch ends incomplete unless the drain finished every remaining job and check. The operator's interruption, a signal or interrupt_now, still stops workers at once, and reaches the nondeterminism recheck whether it is paused or running. worker no longer discards a result that finished after its completion deadline. A per-phase projection refuses only before the launch's first scientific dispatch and is recorded as advisory after it. Configuration trials dispatch against the launch deadline, with configuration_seconds recorded as a planning figure. A nondeterminism recheck that the dispatch stop or an operator stop kept from running to a comparison is recorded as not run, with no failure file and no halt latch; a recheck that runs is compared and a mismatch halts as before. The scientific execution of every job, table loading, lookups, row statuses and result payloads are unchanged; what changes is scheduling at the deadline and what the launch records.",
+      "v3/artifacts.py": "configure_threads also sets the live OpenBLAS limit through the library's own setter when numpy is already imported, because the environment variables it sets are read only at library initialization. It never imports numpy, so a fresh worker still configures before the library starts, and runtime() verifies the effective limit as before. No digest, seal, canonical JSON, seed, job identity, scope or registration function changes."
+    },
+    "previous_approved_sha256": {
+      "v3/production_runner.py": "f6cb114643a6c3df4f2efec011eacf23db56f609c7782110b534235ad0fd84ce",
+      "v3/artifacts.py": "3b3d467495bc1865a6f8639c348e8b399b436e370caa223449e9648c3b6abba2"
+    },
+    "approved_sha256": {
+      "v3/production_runner.py": "dfe00bc1460c78a418a2e2e5280bf1fecb9c9a2c13794302c9e039b0a4cd8e6f",
+      "v3/artifacts.py": "c470d876a69357a6874f8f50cb157842e93ab648e2a9b80d3cf9417ac8f192d9"
     }
   }
 }

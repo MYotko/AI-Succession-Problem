@@ -9,6 +9,7 @@ from pathlib import Path
 import platform
 import stat
 import subprocess
+import sys
 import time
 
 ROOT = Path(__file__).resolve().parent
@@ -277,6 +278,31 @@ def configure_threads(count):
     for name in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS"):
         os.environ[name] = str(count)
     os.environ["PYTHONDONTWRITEBYTECODE"] = "1"
+    # OpenBLAS reads those variables once, when it initializes. If numpy is
+    # already imported its pool is up at the startup size and the variables do
+    # nothing, so set the live limit too. This never imports numpy, so a fresh
+    # worker still configures before the library starts; runtime() verifies.
+    if "numpy" in sys.modules:
+        _set_openblas_threads(count)
+
+
+def _openblas_libraries():
+    import numpy as np
+    for library in (Path(np.__file__).resolve().parent.parent / "numpy.libs").glob("*openblas*"):
+        try:
+            yield library, ctypes.CDLL(str(library))
+        except OSError:
+            continue
+
+
+def _set_openblas_threads(count):
+    for _, dll in _openblas_libraries():
+        for symbol in ("scipy_openblas_set_num_threads64_", "scipy_openblas_set_num_threads", "openblas_set_num_threads64_", "openblas_set_num_threads"):
+            setter = getattr(dll, symbol, None)
+            if setter is not None:
+                setter.restype = None
+                setter(ctypes.c_int(count))
+                break
 
 
 def available_cpus():

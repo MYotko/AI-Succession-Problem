@@ -89,6 +89,53 @@ def test_coordinator_exits_and_records_projection_stop(tmp_path,monkeypatch):
     assert state['sessions'][identity['session']]['end']==history[-1]['status']['hosts']['alpha']['sessions'][0]['end']
 
 
+def test_projection_after_dispatch_is_advisory_until_the_next_launch(tmp_path):
+    # A19 (T3): a projection computed after this launch has dispatched a
+    # scientific job never stops anything; it is recorded as advisory. A
+    # resumed launch is a new launch, so its first projection may refuse again.
+    now = time.time()
+    spec = projection_spec(); spec['wall_seconds'] = 300
+    _, root, _ = initialize(tmp_path, spec, start=now)
+    a.atomic_json(root/'launches.json', [dict(complete=False)])
+    alpha = join(root, 'alpha', now); ready(root, alpha, 'fit', now)
+    leased = claim(root, alpha, now)
+    assert leased['job'] and m.read_state(root)['first_dispatch']['job_id'] == leased['job']['id']
+    # A slow re-measurement makes the remaining work exceed the budget.
+    def slow(identity, when):
+        snapshot = m.rpc(root, dict(op='inputs', phase='fit', configuration=True, **identity), now=when)
+        m.rpc(root, dict(op='configure', phase='fit', input_sha256=snapshot['sha256'], measurements=[
+            dict(workers=2, threads=1, completed=2, wall_seconds=400., valid=True, round=0, job_seconds=[200., 200.])], **identity), now=when)
+    slow(alpha, now)
+    result = claim(root, alpha, now + 1)  # A granted lease: the advisory projection stopped nothing.
+    assert result['job'] and m.rpc(root, {'op': 'inspect'}, now=now + 1)['status']['reason'] is None
+    state = m.read_state(root)
+    assert not state.get('stop_reason') and all(s['end'] is None for s in state['sessions'].values())
+    advisory = [p for p in state['projections'].values() if p.get('advisory')]
+    assert len(advisory) == 1 and advisory[0]['fits'] is False and advisory[0]['total_seconds'] > advisory[0]['remaining_budget_seconds']
+    journal = [a.unseal(a.read(p)) for p in sorted((root/'protocol_events').glob('*.json'))]
+    recorded = [e for e in journal if e.get('event') == 'projection_exceeds_budget']
+    assert len(recorded) == 1 and recorded[0]['advisory'] is True and recorded[0]['total_seconds'] == advisory[0]['total_seconds']
+    # Alpha's two measured slots are both leased: it waits on its worker cap,
+    # not on a stop. The advisory is recorded once and never stops anything.
+    assert claim(root, alpha, now + 2)['waiting'] == 'worker cap'
+    assert m.rpc(root, {'op': 'inspect'}, now=now + 2)['status']['reason'] is None
+    assert len([e for e in [a.unseal(a.read(p)) for p in sorted((root/'protocol_events').glob('*.json'))]
+                if e.get('event') == 'projection_exceeds_budget']) == 1
+    assert a.read(root/'launches.json')[-1].get('reason') is None
+    # A new coordinator generation: the first projection is pre-dispatch again.
+    with m.transaction(root):
+        c = m.Coordinator(root, now + 3); c.start(); c.save()
+    alpha = join(root, 'alpha', now + 3); slow(alpha, now + 3); ready(root, alpha, 'fit', now + 3)
+    assert m.read_state(root)['first_dispatch']['generation'] != m.read_state(root)['epoch']
+    refused = claim(root, alpha, now + 3)
+    assert refused['job'] is None and refused['status']['reason'] == 'projection_exceeds_budget'
+    assert a.read(root/'launches.json')[-1]['reason'] == 'projection_exceeds_budget'
+    # A19 (F4): each phase_projections row alone shows its disposition.
+    rows = [a.unseal(a.read(p)) for p in sorted((root/'phase_projections').glob('*.json'))]
+    assert [(r['disposition'], r['scientific_dispatched'], r['fits']) for r in rows] == [
+        ('fits', False, True), ('advisory', True, False), ('refused', False, False)]
+
+
 def test_batched_claims_respect_free_slots_memory_and_one_heartbeat_renews_all(tmp_path):
     now=time.time();spec=spec_fixture(8)
     spec['pull_dispatch']['cost_classes']['7']['memory_gb']=15

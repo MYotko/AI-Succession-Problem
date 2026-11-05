@@ -352,6 +352,49 @@ def test_projection_matches_frozen_assignment_without_output_reads(tmp_path, env
     assert projected['wall_hours'] > 0 and projected['x2_equivalent_hours'] > projected['wall_hours']
 
 
+def test_combined_record_carries_what_each_host_ran_not_the_placeholder(tmp_path, environment, monkeypatch):
+    # A19 (R3): the sharded record's mode, workers and threads come from the
+    # shard results; collect_record's work/1/1 placeholder never survives.
+    path, p, _, _ = prepared(tmp_path)
+    results = run_all(path, p, monkeypatch)
+    shards = {a.unseal(a.read(r))['host']: a.unseal(a.read(r)) for r in results}
+    combined = s.combine(path, results)
+    execution = combined['execution']
+    assert set(execution['hosts']) == set(p['hosts']) == set(shards)
+    for name, row in execution['hosts'].items():
+        shard = shards[name]
+        assert (row['mode'], row['threads'], row['workers']) == (shard['settings']['mode'], shard['settings']['threads'], shard['workers'])
+        assert row['final_control_mode'] == shard['worker_control']['mode'] and row['not_recorded'] == []
+        assert row['sources'] == dict(mode='shard result settings', threads='shard result settings', workers='shard result')
+    assert execution['workers'] == sum(sh['workers'] for sh in shards.values()) != 1
+    assert (execution['mode'], execution['threads']) == (SETTINGS['mode'], 1) and execution['not_recorded'] == []
+    assert execution['top_level'] == dict(mode='every host ran the same', threads='every host ran the same',
+                                          workers='sum of host worker counts')
+    assert a.unseal(a.read(p['target']))['execution'] == execution
+    # The binding and marker are unchanged: the same frozen inputs only.
+    marker = a.unseal(a.read(Path(p['target']).with_suffix('.combine.json')))
+    assert marker == dict(attempt_sha256=a.digest(p), **s.combine_inputs(path, p)[0])
+
+
+def test_shard_execution_derives_top_level_fields_only_where_unambiguous(tmp_path):
+    root = tmp_path / 'attempt.attempt.json'
+    p = dict(hosts={'alpha': dict(settings=dict(mode='normal', threads=1)), 'beta': dict(settings={})})
+    result = lambda host: str(s.host_directory(root, host) / 'result.json')
+    mixed = s.shard_execution(p, {result('alpha'): dict(settings=dict(mode='normal', threads=1), workers=31,
+                                                        worker_control=dict(mode='work')),
+                                  result('beta'): dict(settings=dict(mode='work', threads=1), workers=31,
+                                                       worker_control=dict(mode='work'))}, root)
+    assert (mixed['mode'], mixed['threads'], mixed['workers']) == (None, 1, 62)
+    assert mixed['top_level']['mode'] == 'hosts differ; see hosts' and mixed['hosts']['alpha']['final_control_mode'] == 'work'
+    sparse = s.shard_execution(p, {result('alpha'): dict(worker_control={})}, root)
+    assert sparse['hosts']['alpha']['mode'] == 'normal' and sparse['hosts']['alpha']['sources']['mode'] == 'frozen attempt settings'
+    assert sparse['hosts']['beta'] == dict(mode=None, threads=None, workers=None, final_control_mode=None, sources={},
+                                           not_recorded=['final_control_mode', 'mode', 'threads', 'workers'])
+    assert (sparse['mode'], sparse['threads'], sparse['workers']) == (None, None, None)
+    assert set(sparse['top_level'].values()) == {'not recorded for every host'}
+    assert 'beta.workers' in sparse['not_recorded'] and 'alpha.workers' in sparse['not_recorded']
+
+
 def test_shard_failure_and_interruption_spend_attempt(tmp_path, environment, monkeypatch):
     path, p, _, _ = prepared(tmp_path, two=False)
     s.stage(path, ORIGINAL)
@@ -607,16 +650,83 @@ def test_live_memory_dip_waits_without_starting_a_job(tmp_path, monkeypatch):
     assert s.MEMORY_WAIT_SECONDS == 180. and s.PROOF_MEMORY_WAIT_SECONDS == 1800.
 
 
-def test_proof_idle_timeout_spends_no_memory_before_thirty_minutes(tmp_path, monkeypatch):
-    clock = local_clock(monkeypatch)
-    monkeypatch.setattr(s, 'memory_budget', lambda *args: .1)
+def test_proof_idle_memory_wait_outlasts_the_old_bound_reports_and_dispatches_when_memory_fits(tmp_path, monkeypatch, capsys):
+    # A19 (R1): the proof's idle memory wait used to raise at 1800 s and spend
+    # the attempt. It now waits without a time limit, admits nothing until the
+    # job fits, reports the wait, and dispatches as soon as memory fits.
+    from v3 import worker_control as wc
     from v3.worker_safety import IsolatedPools
-    monkeypatch.setattr(IsolatedPools, 'submit', lambda *args: pytest.fail('job admitted without memory'))
+    clock = local_clock(monkeypatch)
+    release = s.PROOF_MEMORY_WAIT_SECONDS + 700.  # 2500 s of fake time, past the old bound.
+    monkeypatch.setattr(s, 'memory_budget', lambda *args: .1 if clock[0] < release else 1.)
+    submitted, statuses = [], []
+    original = IsolatedPools.submit
+
+    def submit(self, *args):
+        submitted.append(clock[0])
+        return original(self, *args)
+
+    monkeypatch.setattr(IsolatedPools, 'submit', submit)
+    monkeypatch.setattr(s, 'informational_status', lambda path, value: statuses.append((Path(path).name, dict(value))))
+    settings = wc.settings(dict(profile='local', workers=1, threads=1, cpu_budget=4, mode='work'))
+    wc.initial_control(tmp_path, settings)
     item = dict(job=a.stable_job('fixture', {}, 'validation', 1), phase_root=str(tmp_path), producing_code_hash='0' * 64,
                 resources=dict(worker_seconds=1., memory_gb=.3, memory_class='fixture'))
-    with pytest.raises(ValueError, match='1800 seconds'):
-        s.run_items([item], 1, 1.)
-    assert clock[0] == 1800.
+    results, trace = s.run_items([item], 1, 1., control_path=tmp_path / 'control.json', host_settings=settings)
+    assert submitted == [release] and len(trace) == 1 and results[item['job']['id']]['after_sha256']
+    waiting = [v for name, v in statuses if name == 'scheduling.json' and v.get('waiting_for') == 'memory']
+    assert waiting and all(v['running'] == 0 and v['pending'] == 1 for v in waiting)
+    assert {(v['required_gb'], v['available_gb'], v['budget_gb']) for v in waiting} == {(.3, .1, 1.)}
+    assert len({v['waiting_since_epoch'] for v in waiting}) == 1
+    assert max(v['waited_seconds'] for v in waiting) >= s.PROOF_MEMORY_WAIT_SECONDS
+    assert statuses[-1] == ('scheduling.json', dict(target=1, running=0, pending=0, active_job_ids=[]))
+    lines = [line for line in capsys.readouterr().out.splitlines() if 'a11_memory_wait' in line]
+    assert 40 <= len(lines) <= 43  # About one a minute over 2500 s, never one a second.
+
+
+def test_unbounded_wait_for_memory_reports_and_returns_when_memory_fits(tmp_path, monkeypatch, capsys):
+    clock = local_clock(monkeypatch)
+    monkeypatch.setattr(s, 'memory_budget', lambda *args: .1 if clock[0] < 2000. else 4.)
+    statuses = []
+    monkeypatch.setattr(s, 'informational_status', lambda path, value: statuses.append((Path(path), dict(value))))
+    assert s.wait_for_memory(3., timeout=None, status_path=tmp_path / 'scheduling.json') == 4. and clock[0] == 2000.
+    assert statuses and all(path == tmp_path / 'scheduling.json' and v['waiting_for'] == 'memory'
+                            and v['required_gb'] == 3. and v['available_gb'] == .1 for path, v in statuses)
+    assert 33 <= len([l for l in capsys.readouterr().out.splitlines() if 'a11_memory_wait' in l]) <= 35
+    with pytest.raises(ValueError, match='qualified'):  # Can never fit: refused at once.
+        s.wait_for_memory(9., 10., timeout=None)
+
+
+def test_shard_preflight_waits_without_a_bound_and_the_unreserved_preflight_keeps_its_refusal(tmp_path, environment, monkeypatch):
+    # After freeze() the attempt and its reservation exist, so run_shard's
+    # preflight waits for memory without a time limit. Before any reservation
+    # (single_preflight, inside build_record) the 180 s refusal to start stays.
+    path, p, _, _ = prepared(tmp_path, two=False)
+    s.stage(path, ORIGINAL)
+    calls = []
+    real_preflight = s.preflight
+
+    def stop(*args, **kwargs):
+        calls.append(kwargs)
+        raise ValueError('synthetic stop after the preflight call')
+
+    monkeypatch.setattr(s, 'preflight', stop)
+    with pytest.raises(ValueError, match='synthetic stop'):
+        s.run_shard(path, ORIGINAL)
+    assert calls == [dict(reserved=True)]
+    monkeypatch.setattr(s, 'preflight', real_preflight)
+    seen = []
+    monkeypatch.setattr(s, 'receive_inputs', lambda *args: {})
+    monkeypatch.setattr(s, 'check_input_paths', lambda *args: None)
+    monkeypatch.setattr(s, 'configuration_items', lambda *args: [])
+    monkeypatch.setattr(s, 'configure_host', lambda *args: {})
+    monkeypatch.setattr(s, 'wait_for_memory', lambda value, *args, **kwargs: seen.append(kwargs) or 80.)
+    root = tmp_path / 'host_root'
+    s.preflight(p, ORIGINAL, root, reserved=True)
+    s.preflight(p, ORIGINAL, root)
+    reserved, unreserved = seen[:2], seen[2:]
+    assert all(k['timeout'] is None and k['status_path'] == root / 'scheduling.json' for k in reserved)
+    assert all('timeout' not in k and 'status_path' not in k for k in unreserved) and len(unreserved) == 2
 
 
 @pytest.mark.parametrize('bad_hash', [False, True])

@@ -280,6 +280,7 @@ class Coordinator:
             latch_round_halt(self.root, self.state['halt'])
         # Only touched rows enter the durable chained log. Status is a bounded
         # rate diagnostic snapshot, never dispatch's source of truth.
+        self.track_drain()
         self.refresh_waiting()
         terminal = [self.state['halt'], self.state['complete'], self.state.get('stop_reason'),
                     self.phase, self.state['epoch'], self.state.get('operator_stop'), self.state.get('waiting_for')]
@@ -350,6 +351,8 @@ class Coordinator:
             hosts.setdefault(host, {'completed': 0, 'running': 0, 'sessions': [], 'worker_seconds': 0})['completed'] = count
         for l in self.active():
             hosts[l['host']]['running'] += 1
+        started = self.state['started']
+        reserve = self.spec.get('cleanup_reserve_seconds', 180)
         return {'phase': self.phase, 'complete': self.state['complete'], 'halt': self.state['halt'],
                 'completed': len(self.done), 'pending': len(self.jobs) - len(self.done), 'hosts': hosts,
                 'reason': self.stop_reason(), 'waiting_for': self.state.get('waiting_for'),
@@ -358,11 +361,112 @@ class Coordinator:
                     wc.selection(s['settings'], s['control'])['workers'] for s in self.state['sessions'].values() if s['end'] is None)),
                 'overall_target_source': 'explicit' if 'max_workers' in self.state['control'] else 'sum_of_host_targets',
                 'x2_equivalent_hours': self.charged_seconds() / 3600, 'stops': self.stops(), 'epoch': self.now,
-                'hard_stop': self.state['control']['interrupt_now'] or self.stops()['coordinator'] or (self.state['started'] is not None and
-                    self.now >= self.state['started'] + self.spec['wall_seconds'])}
+                # A19 (T4): the launch's own deadline, so a host dispatches its
+                # configuration trials against the registered dispatch stop.
+                'started_epoch': started,
+                'deadline_epoch': None if started is None else started + self.spec['wall_seconds'] - reserve,
+                # A19 (T6): a hard stop is the operator's interruption or a dead
+                # coordinator (a liveness guard), never the clock. The wall and
+                # charged allowances are dispatch stops in stops(): no new
+                # claims, running children finish and are recorded.
+                'hard_stop': self.state['control']['interrupt_now'] or self.stops()['coordinator'],
+                'deadline_drain': self.current_drain()}
 
     def stop_reason(self):
-        return self.state.get('stop_reason') or (self.state.get('operator_stop') or {}).get('reason')
+        # A19 (F4): an explicit stop first (a projection refusal, an operator
+        # stop); otherwise the clock stop that is stopping claims, so a wall or
+        # charged-allowance stop is never recorded as reason None.
+        return (self.state.get('stop_reason') or (self.state.get('operator_stop') or {}).get('reason')
+                or self.clock_stop())
+
+    def clock_stop(self):
+        """A19 (F4): "deadline" when the wall allowance stops claims,
+        "charged_allowance" when the charged X2-equivalent allowance does; the
+        one observed first, when the drain record holds it. None once the
+        launch is complete or halted: the clock did not end it (A19 G1)."""
+        if self.state['complete'] or self.state['halt']:
+            return None
+        drain = self.current_drain()
+        if drain is not None:
+            return drain['stop']
+        stops = self.stops()
+        return 'deadline' if stops['wall'] else 'charged_allowance' if stops['x2'] else None
+
+    def current_drain(self):
+        drain = self.state.get('deadline_drain')
+        return drain if drain is not None and drain.get('generation') == self.state['epoch'] else None
+
+    def open_sessions(self):
+        return [sid for sid, s in self.state['sessions'].items() if s['end'] is None]
+
+    def terminal(self):
+        """A halt, a completion or an explicit (projection) stop: the monitor
+        finishes at once."""
+        return bool(self.state['halt'] or self.state['complete'] or self.state.get('stop_reason'))
+
+    def drained(self):
+        """No lease active and no session open: nothing of this launch runs."""
+        return not self.active() and not self.open_sessions()
+
+    def track_drain(self):
+        """A19 (F4, G1): the multi-host drain record, kept in the state.
+
+        At the first observation of a clock stop in this coordinator generation
+        it records which stop, when, the dispatch deadline, the charged hours,
+        the active lease job ids and the pending count (manifest jobs neither
+        done nor leased). It ends when the monitor would finish: no lease
+        active and no session open, or a halt, a completion or an explicit
+        stop. Configuration trials hold sessions, not leases, so a drain lasts
+        until the last configuring host has gone. The end records ended_epoch,
+        the overrun (past the deadline for a wall stop, past the first
+        observation for a charged stop), the charged hours at that point, the
+        completions during the drain and what ended it. No drain record opens
+        once the launch is complete, halted or explicitly stopped (a projection
+        refusal or an operator stop): no clock drain occurs then.
+        """
+        if self.state['started'] is None:
+            return
+        drain = self.current_drain()
+        if drain is None:
+            if self.terminal() or self.state.get('operator_stop'):
+                return
+            stops = self.stops()
+            stop = 'deadline' if stops['wall'] else 'charged_allowance' if stops['x2'] else None
+            if stop is None:
+                return
+            active = self.active()
+            reserve = self.spec.get('cleanup_reserve_seconds', 180)
+            drain = dict(stop=stop, generation=self.state['epoch'], epoch=self.now,
+                         deadline_epoch=self.state['started'] + self.spec['wall_seconds'] - reserve,
+                         x2_equivalent_hours=self.charged_seconds() / 3600,
+                         x2_equivalent_allowance_hours=self.spec['x2_equivalent_hours'],
+                         active_job_ids=sorted(l['job_id'] for l in active),
+                         # A recheck lease runs a job already done; it is not pending work.
+                         pending=len(self.jobs) - len(self.done) - len({l['job_id'] for l in active if l['job_id'] not in self.done}),
+                         completed_before=len(self.done))
+            self.state['deadline_drain'] = drain
+            append(self.root, 'protocol_events', dict(event='deadline_drain', **drain))
+        if 'ended_epoch' not in drain and (self.terminal() or self.drained()):
+            ended_by = ('halt' if self.state['halt'] else 'complete' if self.state['complete']
+                        else self.state['stop_reason'] if self.state.get('stop_reason')
+                        else 'interrupt_now' if self.state['control']['interrupt_now'] else 'no lease active and no session open')
+            reference = drain['deadline_epoch'] if drain['stop'] == 'deadline' else drain['epoch']
+            drain.update(ended_epoch=self.now, overrun_seconds=self.now - reference, ended_by=ended_by,
+                         completed_during_drain=len(self.done) - drain['completed_before'],
+                         x2_equivalent_hours_at_end=self.charged_seconds() / 3600)
+            append(self.root, 'protocol_events', dict(event='deadline_drain_end', generation=drain['generation'],
+                ended_epoch=self.now, overrun_seconds=drain['overrun_seconds'], ended_by=ended_by,
+                completed_during_drain=drain['completed_during_drain']))
+
+    def monitor_finished(self):
+        """A19 (F1): the monitor stays while any session is open, not only while
+        leases are active. Configuration trials hold no lease, and a monitor
+        that retired under them let its epoch go stale, which the hosts read as
+        coordinator loss and answered by killing their trial children. A host
+        that vanishes still ends: its heartbeat expires and expire() closes its
+        session, so it cannot hold the monitor for longer than the lease time."""
+        stopped = any(self.stops().values())
+        return self.terminal() or (stopped and self.drained())
 
     def refresh_waiting(self):
         """Diagnostic only: explain a blocked phase without changing eligibility.
@@ -496,6 +600,15 @@ class Coordinator:
         entry = self.member(r['host'])
         if self.state['started'] is None or self.state['complete'] or self.state['halt'] or self.state.get('stop_reason'):
             raise ValueError('coordinator is not accepting joins')
+        if self.clock_stop() is not None and self.drained():
+            # A19 (G2): a refusal to start. The clock stop is in effect and the
+            # drain is over (no lease active, no session open), so the monitor
+            # has finished or will at its next pass: a host joining now could
+            # take no claim, and its configuration would outlive the
+            # coordinator. A join while a lease or a session remains is
+            # admitted as before, and takes no new claim.
+            raise ValueError('coordinator is not accepting joins: the %s stop is in effect and its drain is over '
+                             '(no lease active, no session open)' % self.clock_stop())
         if r['fingerprint'] != entry['fingerprint'] or r['code_hash'] != self.code or r['code_commit'] != self.spec['pull_dispatch']['code_commit']:
             raise ValueError('host fingerprint or code identity mismatch')
         settings = wc.settings(r['settings'], local=False)
@@ -578,6 +691,10 @@ class Coordinator:
         s['configuration'][phase] = measurements
         s['chosen'][phase] = selected
         s['last_work_end'] = self.now
+        if r.get('elapsed_seconds') is not None:
+            # A19 (T4): the host's configuration time against its planning target.
+            s.setdefault('configuration_planning', {})[phase] = dict(
+                elapsed_seconds=r['elapsed_seconds'], planning_seconds=r.get('planning_seconds'))
         # Configuration is excluded from results but included in operational
         # worker-seconds. Retry of an identical acknowledgement is idempotent.
         s.setdefault('configuration_worker_seconds', {})[phase] = sum(sum(m['job_seconds']) for m in measurements)
@@ -595,6 +712,7 @@ class Coordinator:
             return False
         key = digest([self.phase, [(s['host'], s['configuration'], s['control']) for s in present]])
         if key in self.state['projections']:
+            self.last_projection = self.state['projections'][key]
             return self.state['projections'][key]['fits']
         deadline = self.state['started'] + self.spec['wall_seconds'] - self.spec.get('cleanup_reserve_seconds', 180)
         per_host = []
@@ -629,8 +747,21 @@ class Coordinator:
             total += wall
         result = {'phases': phases, 'total_seconds': total, 'remaining_budget_seconds': deadline - self.now, 'fits': total <= deadline - self.now}
         self.state['projections'][key] = result
-        append(self.root, 'phase_projections', {'epoch': self.now, **result})
+        self.last_projection = result
+        dispatched = self.dispatched_this_launch()
+        # A19 (F4): the row alone says whether this projection fitted, was
+        # advisory (after this launch's first scientific lease) or refused.
+        append(self.root, 'phase_projections', {'epoch': self.now, **result, 'scientific_dispatched': dispatched,
+            'disposition': 'fits' if result['fits'] else 'advisory' if dispatched else 'refused'})
         return result['fits']
+
+    def dispatched_this_launch(self):
+        """A19 (T3): whether this coordinator generation (the current launch
+        record; start() opens a new one) has leased any scientific job. A
+        scientific job is a job of the sealed manifest; configuration trials run
+        on hosts without a lease and are not scientific jobs."""
+        first = self.state.get('first_dispatch')
+        return bool(first) and first.get('generation') == self.state['epoch']
 
     def sampled_check(self, jobs, phase=None):
         def cost(job):
@@ -715,8 +846,31 @@ class Coordinator:
             return True
         if not self.projection_ready():
             return None
+        self.last_projection = None
         if self.projection():
             return True
+        if self.dispatched_this_launch():
+            # A19 (T3): after this launch has dispatched a scientific job the
+            # projection is advisory. It is recorded (phase_projections, the
+            # state's projection cache, and one advisory protocol event per
+            # projection) and never stops anything; the launch runs until it
+            # completes or reaches its dispatch stop.
+            entry = self.last_projection
+            if entry is not None and not entry.get('advisory'):
+                entry['advisory'] = True
+                append(self.root, 'protocol_events', dict(event='projection_exceeds_budget', advisory=True, epoch=self.now,
+                    phase=self.phase, total_seconds=entry['total_seconds'], remaining_budget_seconds=entry['remaining_budget_seconds']))
+            elif entry is None:
+                # No estimate could be formed (projection() returned False
+                # before computing one). Recorded once per launch and phase.
+                key = '%d:%s' % (self.state['epoch'], self.phase)
+                seen = self.state.setdefault('advisory_projection_without_estimate', {})
+                if key not in seen:
+                    seen[key] = dict(epoch=self.now, phase=self.phase, generation=self.state['epoch'])
+                    append(self.root, 'protocol_events', dict(event='projection_exceeds_budget', advisory=True, epoch=self.now,
+                        phase=self.phase, total_seconds=None, remaining_budget_seconds=None))
+            return True
+        # Before any scientific dispatch in this launch: a refusal to start.
         reason = 'projection_exceeds_budget'
         self.state['stop_reason'] = reason
         for sid in self.state['sessions']:
@@ -795,6 +949,9 @@ class Coordinator:
             return {'job': None, 'waiting': 'jobs, cross-host check or memory'}
         token = uuid.uuid4().hex
         key, cost = self.store.cost(job)
+        if not self.dispatched_this_launch():
+            # A19 (T3): the first scientific lease of this coordinator generation.
+            self.state['first_dispatch'] = dict(generation=self.state['epoch'], epoch=self.now, job_id=job['id'], purpose=purpose)
         self.state['leases'][token] = {'host': r['host'], 'session': r['session'], 'job_id': job['id'], 'phase': phase,
             'start': self.now, 'expires': self.now + self.ttl, 'heartbeat': self.now, 'status': 'active',
             'purpose': purpose, 'memory_gb': min(max(cost['memory_gb'], observed.get(key,0)), weight),
@@ -866,11 +1023,9 @@ class Coordinator:
                 history[-1].update(complete=False, nondeterminism_halt_epoch=self.now)
                 atomic_json(history_path, history)
             return {'accepted': False, 'halt': 'nondeterminism'}
-        # Once the wall ceiling has passed, a first completion is never counted.
-        # Late duplicates are still compared, including after a coordinator resume.
-        if original is None and self.now >= self.state['started'] + self.spec['wall_seconds']:
-            l['status'] = 'past_wall_ceiling'
-            return {'accepted': False, 'reason': 'wall ceiling'}
+        # A19 (T6): a finished result is never discarded because of time. The
+        # wall allowance stopped claims (stops()['wall']); a job leased before
+        # that and finished after the ceiling is recorded like any other.
         if original is None:
             output = self.root / l['phase'] / 'outputs' / (job['id'] + '.json')
             atomic_json(output, value)
@@ -911,6 +1066,9 @@ class Coordinator:
                 'status': self.status(), 'control': self.state['sessions'][l['session']]['control']}
 
     def request(self, r):
+        # A19 (F4): observe a clock stop before answering, so this reply's
+        # status already carries the drain record (save() observes it too).
+        self.track_drain()
         op = r['op']
         if op == 'a14_checkpoint':
             from .validation_extension_a14 import accept_checkpoint
@@ -1101,10 +1259,11 @@ def coordinate(spec_path, root, settings):
                         c.check_projection()
                     c.save()
                     status = c.status()
-                    stopped = any(c.stops().values())
-                    if c.state['halt'] or c.state['complete'] or c.state.get('stop_reason') or (stopped and not c.active()):
-                        break
-                    if c.now >= c.state['started'] + c.spec['wall_seconds']:
+                    # A19 (T6, F1): the wall and charged allowances are dispatch
+                    # stops; the monitor stays until the last active lease has
+                    # ended and every session has ended, so running children,
+                    # including unleased configuration trials, finish.
+                    if c.monitor_finished():
                         break
                 if time.monotonic() - last_checkpoint >= 30:
                     from .dispatch_store_a11 import checkpoint
@@ -1120,7 +1279,7 @@ def coordinate(spec_path, root, settings):
                 history = read(Path(root) / 'launches.json')
                 operator_stop = c.state.get('operator_stop') or {}
                 history[-1].update(complete=c.state['complete'] and not c.state['halt'], finished_epoch=c.now,
-                    status=c.status(), reason=c.stop_reason(), stopped=c.stop_reason())
+                    status=c.status(), reason=c.stop_reason(), stopped=c.stop_reason(), deadline_drain=c.current_drain())
                 if operator_stop:
                     history[-1]['stopped_epoch'] = operator_stop['epoch']
                 atomic_json(Path(root) / 'launches.json', history)

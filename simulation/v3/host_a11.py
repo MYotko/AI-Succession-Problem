@@ -264,7 +264,8 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
         raise ValueError('worker CPU or thread budget invalid')
     from .worker_safety import swap_preflight, killed_signal
     swap = swap_preflight(settings, scratch / 'swap_preflight.json')
-    spec = transport.call({'op': 'inspect'})['spec']
+    inspected = transport.call({'op': 'inspect'})
+    spec = inspected['spec']
     if not isinstance(transport, Loopback):
         verify_commit(spec['pull_dispatch']['code_commit'])
     joined = transport.call({'op': 'join', 'host': host, 'fingerprint': environment, 'code_hash': code_identity(),
@@ -282,20 +283,53 @@ def run_host(transport, scratch, settings, *, host=None, environment=None, servi
         metadata_json(scratch / 'host_session.json', {'host': host, 'session': joined['session'], 'code_hash': code_identity(), 'settings': settings})
         # Run all phase profiles on join, just as the existing runner does.
         # Inputs for configuration plain validation are self-contained.
-        deadline = min(time.time() + spec.get('configuration_seconds', 900),
-                       time.time() + (max_seconds or spec['wall_seconds']))
-        for phase, profile in spec['configuration'].items():
-            if profile['kind'] not in joined['qualified_kinds']:
-                metadata_json(scratch / 'configuration_skipped' / (phase + '.json'), {'reason': 'job kind not qualified'})
-                continue
-            if phase == 'validate_plain' and 'fit' not in measurements_by_phase:
-                metadata_json(scratch / 'configuration_skipped' / (phase + '.json'), {'reason': 'plain projection requires measured fit configuration'})
-                continue
-            view = synchronize(client, scratch, phase, True)
-            measurements = configuration_test(scratch, phase, profile, settings, deadline, joined['session'],
-                                               input_snapshot=view, job_resources=wc.resources(spec), source_jobs=spec['jobs'], memory_spec=spec)
-            client.call('configure', phase=phase, measurements=measurements, input_sha256=view['snapshot_sha256'])
-            measurements_by_phase[phase] = measurements
+        # A19 (T4): configuration trials dispatch against the launch's own
+        # deadline, the coordinator's dispatch stop, never against
+        # configuration_seconds, which is the operator's planning target and is
+        # recorded against the elapsed time. max_seconds is a loopback test
+        # bound on the host's own run and keeps its effect on the trials.
+        launch_deadline = (inspected.get('status') or {}).get('deadline_epoch')
+        if launch_deadline is None:
+            # Inspected before the coordinator started; join() admitted this
+            # host, so the launch has started and its deadline exists now.
+            launch_deadline = transport.call({'op': 'inspect'})['status'].get('deadline_epoch')
+        if launch_deadline is None:
+            raise RuntimeError('coordinator reports no launch deadline; no configuration trial started')
+        deadline = launch_deadline
+        if max_seconds is not None:
+            deadline = min(deadline, time.time() + max_seconds)
+        planning_seconds = spec.get('configuration_seconds', 900)
+        configuration_planning = {'planning_seconds': planning_seconds, 'deadline_epoch': deadline,
+                                  'started_epoch': time.time(), 'phases': {}, 'failure': None}
+        try:
+            for phase, profile in spec['configuration'].items():
+                if profile['kind'] not in joined['qualified_kinds']:
+                    metadata_json(scratch / 'configuration_skipped' / (phase + '.json'), {'reason': 'job kind not qualified'})
+                    continue
+                if phase == 'validate_plain' and 'fit' not in measurements_by_phase:
+                    metadata_json(scratch / 'configuration_skipped' / (phase + '.json'), {'reason': 'plain projection requires measured fit configuration'})
+                    continue
+                view = synchronize(client, scratch, phase, True)
+                phase_started = time.time()
+                configuration_planning['current_phase'] = phase
+                measurements = configuration_test(scratch, phase, profile, settings, deadline, joined['session'],
+                                                   input_snapshot=view, job_resources=wc.resources(spec), source_jobs=spec['jobs'], memory_spec=spec)
+                elapsed = time.time() - phase_started
+                configuration_planning['phases'][phase] = elapsed
+                configuration_planning.pop('current_phase', None)
+                client.call('configure', phase=phase, measurements=measurements, input_sha256=view['snapshot_sha256'],
+                            elapsed_seconds=elapsed, planning_seconds=planning_seconds)
+                measurements_by_phase[phase] = measurements
+        except BaseException as exc:
+            configuration_planning['failure'] = repr(exc)
+            raise
+        finally:
+            # A19 (F4): written on every path, so a configuration that fails or
+            # is cut short still records its elapsed time and why it ended.
+            total = time.time() - configuration_planning['started_epoch']
+            configuration_planning.update(finished_epoch=time.time(), elapsed_seconds=total,
+                                          within_planning_target=total <= planning_seconds)
+            metadata_json(scratch / 'configuration_planning.json', configuration_planning)
         client.call('configured')
         if not measurements_by_phase:
             raise RuntimeError('no qualified phase fits this host; no scientific jobs taken')
