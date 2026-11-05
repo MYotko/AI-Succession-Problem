@@ -2,10 +2,10 @@
   "schema": "lineage-a17-sealed-host-entry-v1",
   "payload": {
     "schema": "lineage-a17-host-payload-v1",
-    "record_date": "2026-11-02",
+    "record_date": "2026-11-04",
     "unit_name": "X2-1",
     "host_class": "X2",
-    "record_status": "post-update fixed-code requalification accepted on the acceptance replay of 2026-10-30/31 (operator approval bound in operator_approval); worker-load sheet version 3 for the A11 compatibility proofs approved 2026-11-02 at code identity 95f5d91c; launch-identity qualification still pending, and A17 section 6 item 5 places it after those proofs; not dispatch admission",
+    "record_status": "post-update fixed-code requalification accepted on the acceptance replay of 2026-10-30/31 (operator approval bound in operator_approval); worker-load sheet version 4 for the A11 compatibility proofs approved 2026-11-04 at code identity 93a453b2; launch-identity qualification still pending, and A17 section 6 item 5 places it after those proofs; not dispatch admission",
     "scope": "A17 initial register; option C campaign remains X2-1 only",
     "cpu": {
       "available_cpu_budget": 32,
@@ -67,8 +67,8 @@
       "approved_load_sheet": {
         "value": {
           "document": "Lineage v3 records, historical_view_2026-11-02/LOAD_SHEET_a11_proofs_2026-11-02.md",
-          "sha256": "70929c5b02ace45659f807062169455a940552b55928ce33fdea15d3755f56a0",
-          "scope": "the three A11 compatibility proofs at code identity 95f5d91c7d984effc7b5983c9ad9640d861e3a7365f55333484f12f8d36accad, commit 55b7b4a6, on this host in normal mode",
+          "sha256": "efe1aaa6fa75635925b93f63ffda1dcc11e348ad9e6be7a3cecb7f3408708168",
+          "scope": "the three A11 compatibility proofs at code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit 888e9e62, on this host in normal mode",
           "worker_ceiling": 31,
           "numerical_threads_per_worker": 1,
           "memory_headroom": 0.8,
@@ -124,9 +124,9 @@
             "batch": 30.0,
             "kind": "measured for the first two, budget estimate for the third and the batch; budget estimates run high here and none of these is a deadline (operator, 2026-11-02)"
           },
-          "approved": "operator, 2026-11-02, in session: version 1 on the sheet itself, then versions 2 and 3 on the identity moves, the last as a direction to proceed; recorded in DECISIONS_2026-11-02.md sections 6, 7 and 8",
+          "approved": "operator, 2026-11-02, in session: version 1 on the sheet itself, then versions 2 and 3 on the identity moves, the last as a direction to proceed; recorded in DECISIONS_2026-11-02.md sections 6, 7 and 8. Version 4 operator, 2026-11-04, in session, with amendment A19 (\"go on all four\") and with its draft 3 (\"All approved, including the optionals\"); recorded in a19_2026-11-04/DECISIONS_2026-11-04.md",
           "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval",
-          "version": "version 3. Versions 1 (481c85773c7cb7be5b6b8433e51d3ea335816a64908440003d600b6d2ed3758d) and 2 (3eecf36f78d323437081c52a9f5abad6144fa64b895d4e84beccb4e0148e9c44) are preserved beside it; version 1 is the artifact the operator first approved. Each later version changes the identity binding and nothing else. The identity moved three times because successive blind reviews of the repair's description required further commits; the operator ended that sequence on 2026-11-02, having observed that seven rounds produced one finding that was a factual error about the code and none that touched the comparison bytes, the job selection, the seeds, the inputs or the identity. Every measured figure is unchanged across all three versions, because each comes from the producing jobs, the two builds already run, or a live host reading."
+          "version": "version 4. Versions 1 (481c85773c7cb7be5b6b8433e51d3ea335816a64908440003d600b6d2ed3758d), 2 (3eecf36f78d323437081c52a9f5abad6144fa64b895d4e84beccb4e0148e9c44) and 3 (70929c5b02ace45659f807062169455a940552b55928ce33fdea15d3755f56a0) are preserved beside it; version 1 is the artifact the operator first approved. Each later version changes the identity binding and nothing else. The identity moved three times on 2026-11-02 because successive blind reviews of the repair's description required further commits, until the operator ended that sequence, and once on 2026-11-04 for amendment A19, which changes how an A11 proof executes a registered rerun. Every measured figure is unchanged across all four versions, because each comes from the producing jobs, the builds already run, or a live host reading."
         }
       }
     },
@@ -502,19 +502,19 @@
       }
     },
     "revision": {
-      "number": 5,
-      "supersedes_payload_sha256": "b071dead02c524f8e94158d6f09501b4568e9f8b95383968c6e931a55fa967e8",
-      "supersedes_commit": "5e9a5f35",
-      "reason": "re-scopes the approved worker-load sheet from identity 669ebd84 to 95f5d91c, commit 55b7b4a6, on the operator's direction of 2026-11-02 to proceed. Sheet version 2 to version 3, identity binding only; no figure changes. Metadata otherwise as revision 4. No qualification, admission or approved-kind change."
+      "number": 6,
+      "supersedes_payload_sha256": "eed30dfbba7233a4e0c9b9405293cd069660771f9260c706fb36243107e84307",
+      "supersedes_commit": "54bd47e4",
+      "reason": "re-scopes the approved worker-load sheet from identity 95f5d91c to 93a453b2, commit 888e9e62, with amendment A19 on the operator's go of 2026-11-04. Sheet version 3 to version 4, identity binding only; no figure changes. Metadata otherwise as revision 5. No qualification, admission or approved-kind change."
     }
   },
   "seal": {
     "algorithm": "sha256",
     "serialization": "UTF-8 JSON, sorted keys, separators comma and colon without whitespace, ensure_ascii=true, no NaN, no trailing newline; hash the payload object only",
-    "payload_sha256": "eed30dfbba7233a4e0c9b9405293cd069660771f9260c706fb36243107e84307"
+    "payload_sha256": "4a325232ddb256721758b2fb810945e4c581fdcb865037b798933f88f22d6f26"
   },
   "operator_approval": {
-    "reference": "Lineage v3 records, historical_view_2026-11-02/DECISIONS_2026-11-02.md, sections 6, 7 and 8: the operator's approval of 2026-11-02 of the worker-load sheet for the three A11 compatibility proofs, version 1 (\"approved, update the register\"), version 2 on the first identity move (\"go on revision 4\"), and version 3 with the direction to proceed (\"Update what needs to be updated so that the run can proceed, and launch it\"). Version 3 is SHA-256 70929c5b02ace45659f807062169455a940552b55928ce33fdea15d3755f56a0 at code identity 95f5d91c7d984effc7b5983c9ad9640d861e3a7365f55333484f12f8d36accad. This register revision binds payload digest eed30dfbba7233a4e0c9b9405293cd069660771f9260c706fb36243107e84307. The prior approval of 2026-10-31 covering the post-update fixed-code qualification, on acceptance payload seal b3b2113d3b46938c7e32057163ef632c20cb8bb6a86fce4497d4c1390a401e10 and frozen sample seal e3601ee4d09257d6de8cd25d65378ac324d882beb1c2eadef2d4e6217ab239bb, stands unchanged and is recorded in requalification_2026-10-30/DECISIONS_2026-10-31.md (SHA-256 64cfb5b6cfb067e8f9c20e666744dff05d0612852cf505dd16c72c1a8799dbb6).",
-    "reason": "A resource approval, re-scoped onto the identity that will run, and a direction to proceed. The operator overrode a hold the interpreter was maintaining on the reasons documents, on the ground that the outstanding findings concerned the strength of tests and the wording of claims about them, not the proof. It approves the same measured per-class reservations, the same per-build worker selection and the same planning ETA. It is not a dispatch admission and not an approval of a launch-identity qualification, neither of which these proofs require."
+    "reference": "Lineage v3 records, historical_view_2026-11-02/DECISIONS_2026-11-02.md, sections 6, 7 and 8, for versions 1 to 3 of the worker-load sheet for the three A11 compatibility proofs; and a19_2026-11-04/DECISIONS_2026-11-04.md for version 4: the operator's go of 2026-11-04 on adopting amendment A19, its commit, this register revision and the rebuild (\"go on all four\"), renewed for draft 3 of A19, its commit, this revision and the rebuild (\"All approved, including the optionals\"). Version 4 is SHA-256 efe1aaa6fa75635925b93f63ffda1dcc11e348ad9e6be7a3cecb7f3408708168 at code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da. This register revision binds payload digest 4a325232ddb256721758b2fb810945e4c581fdcb865037b798933f88f22d6f26. The prior approval of 2026-10-31 covering the post-update fixed-code qualification, on acceptance payload seal b3b2113d3b46938c7e32057163ef632c20cb8bb6a86fce4497d4c1390a401e10 and frozen sample seal e3601ee4d09257d6de8cd25d65378ac324d882beb1c2eadef2d4e6217ab239bb, stands unchanged and is recorded in requalification_2026-10-30/DECISIONS_2026-10-31.md (SHA-256 64cfb5b6cfb067e8f9c20e666744dff05d0612852cf505dd16c72c1a8799dbb6).",
+    "reason": "A resource approval, re-scoped onto the identity that will run. It approves the same measured per-class reservations, the same per-build worker selection and the same planning ETA as versions 1 to 3. It is not a dispatch admission and not an approval of a launch-identity qualification, neither of which these proofs require."
   }
 }
