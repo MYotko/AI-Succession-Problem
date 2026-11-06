@@ -1,0 +1,59 @@
+{
+ "checked_utc": "2026-11-06T14:26:51Z",
+ "registry_sha256": "faa4273a9f2b4b058bec87d59902d69038a05a3687bf59c9e794a170d56ac671",
+ "new_seeds": 39725,
+ "a13_global_seed_inventory": {
+  "categories": {
+   "planning": 37596,
+   "probe": 855,
+   "qualification": 1236,
+   "registered": 106069,
+   "rehearsal": 1888
+  },
+  "union": 146807,
+  "collisions_with_new_stage2_seeds": 0,
+  "not_in_sealed_history": 73014
+ },
+ "a14_global_seed_inventory": {
+  "categories": {
+   "a13_configuration_seeds": 72,
+   "a13_qualification_seeds": 0,
+   "planning": 37596,
+   "probe": 855,
+   "qualification": 1755,
+   "registered": 106069,
+   "rehearsal": 2299
+  },
+  "union": 147650,
+  "collisions_with_new_stage2_seeds": 0,
+  "not_in_sealed_history": 73014
+ },
+ "a13_plan_forbidden": {
+  "count": 146807,
+  "collisions_with_new_stage2_seeds": 0,
+  "not_in_sealed_history": 73014
+ },
+ "a14_plan_forbidden": {
+  "count": 147650,
+  "collisions_with_new_stage2_seeds": 0,
+  "not_in_sealed_history": 73014
+ },
+ "a13_sources_file": {
+  "sha256": "7aa642627e6fbf24f0657dbe87874d65ffc43ee1c3b89adc9e55d37c562862db",
+  "shape": {
+   "distinct_total": 146807,
+   "in_extension_range_total": 0,
+   "inventory_file_sha256": "b118e88b8527665768370e05be69b25bde9e2b814019a8486c66409f4e0bcf93",
+   "inventory_seal": "6d76c52c039998eb1b6f365cada2c67602fbde5a63848e65c0c5494db51dc71d",
+   "overlaps": 10,
+   "sources": 117,
+   "summary": 5
+  }
+ },
+ "leftover_registered_range": {
+  "min_bits": 129,
+  "max_bits": 129,
+  "in_2^128_2^129": 38971,
+  "below_2^60": 0
+ }
+}

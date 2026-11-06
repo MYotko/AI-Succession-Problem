@@ -1,0 +1,891 @@
+{
+ "schema": "stage2-prep-seed-registry-construction-1",
+ "built_utc": "2026-11-06T14:25:01Z",
+ "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+ "checkout_commit": "b0f9861676c46775636255f885bce4eb766cac1f",
+ "rule": "tables_a10.stage2_history_seeds then tables_a10.stage2_seed_registry(STAGE2_PATHS, history, reserved_ranges=[A13, A14, A16]) at this identity; the script is stage2_prep/scripts/r3_registry.py",
+ "reserved_ranges": [
+  [
+   1152921504606846976,
+   2305843009213693952
+  ],
+  [
+   2305843009213693952,
+   4611686018427387904
+  ],
+  [
+   4611686018427387904,
+   13835058055282163712
+  ]
+ ],
+ "inputs": {
+  "a1_source_root/tables_A1_manifest.json": {
+   "path": "/home/yotko/v3_a6/simulation/v3/runs/registered_A1/tables_A1_manifest.json",
+   "sha256": "6e03391a0ce044feea2875bacb0edc08976020fcf30d0e7de826ee62c5b53706"
+  },
+  "reruns_manifest": {
+   "path": "/home/yotko/v3_a6/simulation/v3/runs/registered/reruns_manifest.json",
+   "sha256": "03c03f69db094fc17ec8e7cf4ce14d3842547ef04174c06722706c44dbf2d38a"
+  },
+  "rerun_manifest_v3_registered": {
+   "path": "/home/yotko/v3_registered/simulation/v3/runs/registered/rerun_manifest.json",
+   "sha256": "2bbba1a01251ffd5da6cdb03bc79c7baf9c93692f2d6601fcbf778bfb196fef6",
+   "same_payload_as_a6_copy": false
+  },
+  "probe_root": {
+   "path": "/home/yotko/v3_a6/simulation/v3/runs/a3_probe",
+   "files": 462,
+   "probe_seeds": 855
+  },
+  "a6_seed_registry": {
+   "path": "/home/yotko/v3_a6/simulation/v3/runs/a6/A6_seed_registry.json",
+   "sha256": "f364d273b493a2fae1a00c8d477177b5ae740407e1ecbb853036ebe582788b31"
+  },
+  "stage1_spec_main": {
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/specs/main.json",
+   "sha256": "ae2a9d6ddcdf013d512f9641bee554668bc2cef52283bea44316502b15ea6b3c"
+  },
+  "stage1_spec_k1p5": {
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/specs/k1p5.json",
+   "sha256": "3b426fc5b851c6b7770a7d148faf3f498f8aad140cbb763db2a4f5a6ea0c0214"
+  },
+  "stage1_spec_k2p3": {
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/specs/k2p3.json",
+   "sha256": "602cbc8f3e2f99cd7d24c0aa4827efe71474f7471989f0365b5fc898afee79a5"
+  },
+  "stage1_spec_weight_corner": {
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/specs/weight_corner.json",
+   "sha256": "dcfb08112c018bd919df9b3d169c7f7c34a9c8b6a799ebc5b7700d752e51a931"
+  },
+  "stage1_spec_horizon": {
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/specs/horizon.json",
+   "sha256": "d59ff5a19e14ead99dbf7ddfda1e8e978d226489a316ffa536b4b6e2d1b53d61"
+  },
+  "a13_plan": {
+   "path": "/home/yotko/v3_a13_ext/simulation/v3/runs/a13_extension/plan.json",
+   "sha256": "44e3092f841754ec164a54418f36d733b81db012d2653f2cb63264a8e27d1878"
+  },
+  "a14_plan": {
+   "path": "/home/yotko/v3_a14_exec/simulation/v3/runs/a14_extension/plan.json",
+   "sha256": "adea6b84528f5c2fa40234785d3c0b52530afa94e9117948ee7ebfff41db75e8"
+  },
+  "a13_global_seed_inventory": {
+   "path": "/home/yotko/v3_a13_ext/simulation/v3/runs/a13_extension/inputs/global_seed_inventory.json",
+   "sha256": "b118e88b8527665768370e05be69b25bde9e2b814019a8486c66409f4e0bcf93"
+  },
+  "a14_global_seed_inventory": {
+   "path": "/home/yotko/v3_a14_exec/simulation/v3/a14_inputs/global_seed_inventory.json",
+   "sha256": "ed13bda2eb79d490650c194272ce5e32a9d590258596a143e2c3a9e1ec4f89a9"
+  },
+  "rehearsal_R1_spec": {
+   "path": "/home/yotko/v3_stage2_93a453b2/simulation/v3/_stage2_prep/rehearsal/R1/spec.json",
+   "sha256": "ca33c080342cdd56fa724c62a38af50b0793d60fe623f63957ea3b28d8a8999d"
+  },
+  "rehearsal_R2_spec": {
+   "path": "/home/yotko/v3_stage2_93a453b2/simulation/v3/_stage2_prep/rehearsal/R2/spec.json",
+   "sha256": "4874bca0da062de86b6e3089e9759b49dbe65204672687eebfbd2ff2484c7b29"
+  },
+  "rehearsal_R3_spec": {
+   "path": "/home/yotko/v3_stage2_93a453b2/simulation/v3/_stage2_prep/rehearsal/R3/spec.json",
+   "sha256": "e39c572101638143c7d840b1994b3b57934e2936dd0bbf8c1acfce61ceb693f1"
+  },
+  "preview_spec_sqrt": {
+   "path": "/home/yotko/stage2_prep/specs/sqrt.json",
+   "sha256": "ca22bf49a1d3d08cb45e5f6f879506f0f64d2f42e1813be0870987500c8a51e6"
+  },
+  "preview_spec_crowding": {
+   "path": "/home/yotko/stage2_prep/specs/crowding.json",
+   "sha256": "66f5e4f361a27a52e1b3c875633e7b468cb8fc29df134417e1cf4e73e241ac65"
+  },
+  "preview_spec_sigma_squared_x10": {
+   "path": "/home/yotko/stage2_prep/specs/sigma_squared_x10.json",
+   "sha256": "fa8bbf17b7804104f8babd0eb9962d6fe5570e1431e683d1f3e77120f0c03c01"
+  },
+  "preview_spec_sigma_squared_x0.1": {
+   "path": "/home/yotko/stage2_prep/specs/sigma_squared_x0.1.json",
+   "sha256": "669e6462a89263a73e1d6f8b51eb02db03576f07ed7aa37e727be5327a090c99"
+  }
+ },
+ "qualification_plans": [
+  {
+   "path": "/home/yotko/v3_a10/simulation/v3/runs/a10_stage1/qualification/estimate/plan.json",
+   "sha256": "f1b832bd11f552d2807623524d5bd65acc35cfb63ed38c1bb77f45fd5bd20a47",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a10/simulation/v3/runs/a10_stage1/qualification/validation/plan.json",
+   "sha256": "230a39347df8c6d7ffcb8de944a119dd5f01b5fbdcc4f01c7837cf22702f9acc",
+   "jobs": 60,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a10/simulation/v3/runs/a11_rehearsal/qualification/drill2/plan.json",
+   "sha256": "bb4a350f0647dc69dc7569c0adb5191e042efb43f7cd4d25a7c6f80137e0d508",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a10/simulation/v3/runs/a11_rehearsal/qualification/estimate/plan.json",
+   "sha256": "6b00725e215d51340ac3c64b3de78b6c95a20f1cbdefe9a8aad9673ff03a073d",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a10/simulation/v3/runs/a11_rehearsal/qualification/labels/plan.json",
+   "sha256": "04fb6ea5feb0e15c5061efe7279643d4fab7e2e9a330b600680ab046a596e0a1",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a10/simulation/v3/runs/a11_rehearsal/qualification/validation/plan.json",
+   "sha256": "7c6099b7d8e56fc5fc5babf2fea1b7a2ca4038d9af5218a7301cbf6a753d9165",
+   "jobs": 60,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/qualification/main/plan.json",
+   "sha256": "1c1f8ebf8448a2111ac8509503e76b80d510673e6fb9cc88fb1363cfd1d354ef",
+   "jobs": 20,
+   "already_in_inventories": false
+  },
+  {
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/qualification/k2p3/plan.json",
+   "sha256": "6690ed85d01be15d19f5d6ad4efc94bc927bef516047b11cbcdb93f821734c25",
+   "jobs": 20,
+   "already_in_inventories": false
+  },
+  {
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/qualification/k1p5/plan.json",
+   "sha256": "67db5227d8c0ed1847b4e52a55aaeaaf873b4a94c4b1d8006917ac36d8dd6763",
+   "jobs": 20,
+   "already_in_inventories": false
+  },
+  {
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/qualification/horizon/plan.json",
+   "sha256": "6f0b672db563e8742b8dc5e527af3c9fc003f2cf2815e43da467d1e0aa2848e5",
+   "jobs": 20,
+   "already_in_inventories": false
+  },
+  {
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/qualification/labels/plan.json",
+   "sha256": "16da727753e63fe5b4e81e46c50f1170a7aa59803d92c65cf994245c7dae77ec",
+   "jobs": 20,
+   "already_in_inventories": false
+  },
+  {
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/qualification/weight_corner/plan.json",
+   "sha256": "1ac318473b3a20e006d6fb0f8066574cf3ca501da23766778f78bbc467d06bb2",
+   "jobs": 20,
+   "already_in_inventories": false
+  },
+  {
+   "path": "/home/yotko/v3_a13r2/simulation/v3/runs/a13_rehearsal/dispatch_xcheck/qualification/plan.json",
+   "sha256": "3ddb0c4d8f582330ad1605dcd6e9849376178c132a52ed3104470f4888054b61",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a13r2/simulation/v3/runs/a13_rehearsal/dispatch/qualification/plan.json",
+   "sha256": "018d8a53a1e8a929286bfd67dbf4a436e2dfbfec22bebe338672031a955da1cc",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a13r3/simulation/v3/runs/a13_rehearsal/dispatch_xcheck/qualification/plan.json",
+   "sha256": "f8e0ef5f1b94274abfdd3d2ed15d9a53c06ce3805d3b565209a9fe1249697eb8",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a13r3/simulation/v3/runs/a13_rehearsal/dispatch/qualification/plan.json",
+   "sha256": "c083c27beba472aa2f7d1d1debdd839ed48710114e4010ece344c4cb6e32a632",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a13r3/simulation/v3/runs/a11_proof/qualification/plan.json",
+   "sha256": "1166f5d8c0d561afce07e887ae61ae0d327b343a2bb05efffcf2bb316e8ebb56",
+   "jobs": 80,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a13r4/simulation/v3/runs/a13_rehearsal/dispatch_xcheck/qualification/plan.json",
+   "sha256": "cc8a9663cad3d47f512a2e542ba25ca035c6db99a465a7e0b23887b63407c9a6",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a13r4/simulation/v3/runs/a13_rehearsal/wc_drill/qualification/plan.json",
+   "sha256": "85e498bc503aa510e6320de01cb8e17652586e4737881008a37740a0591909d6",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a13r4/simulation/v3/runs/a13_rehearsal/dispatch/qualification/plan.json",
+   "sha256": "6325baebfbc2f4050b5b8ecc4970de9a55a88f2ada1c96038c069bb8679f2c69",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a13r4/simulation/v3/runs/a11_worker_control_2a88b5c6/qualification/plan.json",
+   "sha256": "14a1fed742c2f338c9078f65ac1f8b8399ca9054b97fa249fa48adbe7f28ba18",
+   "jobs": 80,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a13r5/simulation/v3/runs/a13_rehearsal/dispatch_xcheck/qualification/plan.json",
+   "sha256": "e76b9755a6ec0f749c81ba3e74d803e6d9c5d571ea0350d34d59e5bfe5120869",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a13r5/simulation/v3/runs/a13_rehearsal/wc_drill/qualification/plan.json",
+   "sha256": "0727b6b6622cef66a671fc1adc7031470820a50ef03c299f58b9cf35cbb13a62",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a13r5/simulation/v3/runs/a13_rehearsal/cc_drill/qualification/plan.json",
+   "sha256": "f136c46e5e52542935c4edf61017be29e54cb33b24377bb3e5ceced4df84bfc4",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a13r5/simulation/v3/runs/a13_rehearsal/dispatch/qualification/plan.json",
+   "sha256": "515d76449d0673702615cfe77340a7c97666e469d378eabcce1c8c2d6bc964f5",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a13r5/simulation/v3/runs/a13_rehearsal/kill_drill/qualification/plan.json",
+   "sha256": "a955c3debd25ed0d6e84a0a15fc7e5099fa93ebb7d9dc5ee18e7826fa858d2b7",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a13r5/simulation/v3/runs/a11_worker_control_5df9866f/qualification/plan.json",
+   "sha256": "96f0b617bd658784eb90d95b03cee3b8d14769ebe3bebd7a1da2c97a19641709",
+   "jobs": 80,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a14_exec/simulation/v3/runs/a14_extension/qualification/plan.json",
+   "sha256": "ed047dd54d1003b9c3c00fabee054afc61cbeba5f8608c8ab293e89491f158dc",
+   "jobs": 20,
+   "already_in_inventories": false
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/x2-2_evidence/exec/v3/runs/a14_rehearsal/labels/qualification/plan.json",
+   "sha256": "b879b3360f07940a28c02523a8fc3389516047b1becb3b52066b96b44d4836d8",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/x2-2_evidence/exec/v3/runs/a14_rehearsal/halt_ssh/qualification/plan.json",
+   "sha256": "a656c52065804af3c12cda05a3d20f384055ee356fb8151000406e2a93f54205",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/x2-2_evidence/exec/v3/runs/a14_rehearsal/dispatch/qualification/plan.json",
+   "sha256": "502802e00f3bf5261d314807ed8b97037be8ee28109df2adb14a1c7cb5c8df38",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/labels/qualification/plan.json",
+   "sha256": "b879b3360f07940a28c02523a8fc3389516047b1becb3b52066b96b44d4836d8",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/halt_ssh/qualification/plan.json",
+   "sha256": "a656c52065804af3c12cda05a3d20f384055ee356fb8151000406e2a93f54205",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/halt_local/qualification/plan.json",
+   "sha256": "1b016ce2dc17ec461cc91b9f05208b9d7f79dbd8ad1feb173460e66eba544a36",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/dispatch/qualification/plan.json",
+   "sha256": "502802e00f3bf5261d314807ed8b97037be8ee28109df2adb14a1c7cb5c8df38",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a11_compat_c19b54f5_174ab660/qualification/plan.json",
+   "sha256": "8b1e95b01dd84fd55e95effc98804306ce1f8f5d9ea57cb04c6994696cac009b",
+   "jobs": 80,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a11_compat_5df9866f_174ab660/qualification/plan.json",
+   "sha256": "e4ec5ab30ecbdc269ffd88dc9aa8232e5d636eaaa3f8d30120994ea72ac43db7",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a10_rehearsal_ad675011/simulation/v3/runs/a11_rehearsal/qualification/drill2/plan.json",
+   "sha256": "54b05be157442e918951503fa661a71c9dcbd3c522e552b227535fa63aff4705",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a10_rehearsal_ad675011/simulation/v3/runs/a11_rehearsal/qualification/drill/plan.json",
+   "sha256": "a2d49ae38f6533e4a09c8eb8913a5ec368535b88f54b6b4123d7fdd2ef7d0002",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a10_rehearsal_ad675011/simulation/v3/runs/a11_rehearsal/qualification/estimate/plan.json",
+   "sha256": "ec1668d4c9292ede1a1c21d79b4be84da649c68a3b5b91c4d480806cf1cdbdec",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a10_rehearsal_ad675011/simulation/v3/runs/a11_rehearsal/qualification/labels/plan.json",
+   "sha256": "af80d8a2a965cede88ac7825c7d9236ec30896fda1f1f319ef85a877cccb4cd4",
+   "jobs": 20,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_a10_rehearsal_ad675011/simulation/v3/runs/a11_rehearsal/qualification/validation/plan.json",
+   "sha256": "1db5e8505ae5cf6650abc5d84143b2027ad580b9377168b414f07a6021a7e4e6",
+   "jobs": 60,
+   "already_in_inventories": true
+  },
+  {
+   "path": "/home/yotko/v3_stage2_93a453b2/simulation/v3/_stage2_prep/qual/plan.json",
+   "sha256": "c8dac67878e88aa330e43dcf57ca2634bfa0b68c95da15d1737839b1b2b62896",
+   "jobs": 20,
+   "already_in_inventories": false
+  }
+ ],
+ "configuration_plans": [
+  {
+   "label": "stage1 nominal estimation manifest",
+   "path": "/home/yotko/v3_a10/simulation/v3/runs/a10_stage1/nominal/source/tables_A1_manifest.json",
+   "sha256": "8fceb2e4470a7b6cd575886efb62b8512d8dba4d06d033b91a1d36690ffc978b",
+   "phases": [
+    "table"
+   ],
+   "seeds": 32
+  },
+  {
+   "label": "stage1 validation_plan.json",
+   "path": "/home/yotko/v3_a10/simulation/v3/runs/a10_stage1/nominal/validation_plan.json",
+   "sha256": "4497c92271cb593f1a3bc9e46ff89afbe29153cf2802c5a1299160df0bd2d7f0",
+   "phases": [
+    "census",
+    "fit",
+    "validate_fv_double_population",
+    "validate_fv_primary",
+    "validate_plain"
+   ],
+   "seeds": 320
+  },
+  {
+   "label": "stage1 labels_plan.json",
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/nominal/labels_plan.json",
+   "sha256": "4d34c6745b730fdbaca85ebccb31b2ff23f56a98cd4898e7d32444c898025a7b",
+   "phases": [
+    "a5_fvplain"
+   ],
+   "seeds": 64
+  },
+  {
+   "label": "stage1 run spec main",
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/specs/main.json",
+   "sha256": "ae2a9d6ddcdf013d512f9641bee554668bc2cef52283bea44316502b15ea6b3c",
+   "phases": [
+    "rerun"
+   ],
+   "seeds": 128
+  },
+  {
+   "label": "stage1 run spec k1p5",
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/specs/k1p5.json",
+   "sha256": "3b426fc5b851c6b7770a7d148faf3f498f8aad140cbb763db2a4f5a6ea0c0214",
+   "phases": [
+    "a10_arm"
+   ],
+   "seeds": 128
+  },
+  {
+   "label": "stage1 run spec k2p3",
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/specs/k2p3.json",
+   "sha256": "602cbc8f3e2f99cd7d24c0aa4827efe71474f7471989f0365b5fc898afee79a5",
+   "phases": [
+    "a10_arm"
+   ],
+   "seeds": 128
+  },
+  {
+   "label": "stage1 run spec weight_corner",
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/specs/weight_corner.json",
+   "sha256": "dcfb08112c018bd919df9b3d169c7f7c34a9c8b6a799ebc5b7700d752e51a931",
+   "phases": [
+    "a6_weight_corner"
+   ],
+   "seeds": 128
+  },
+  {
+   "label": "stage1 run spec horizon",
+   "path": "/home/yotko/v3_a5_labels/simulation/v3/runs/a12_stage1/specs/horizon.json",
+   "sha256": "d59ff5a19e14ead99dbf7ddfda1e8e978d226489a316ffa536b4b6e2d1b53d61",
+   "phases": [
+    "a6_horizon"
+   ],
+   "seeds": 128
+  },
+  {
+   "label": "a13 plan",
+   "path": "/home/yotko/v3_a13_ext/simulation/v3/runs/a13_extension/plan.json",
+   "sha256": "44e3092f841754ec164a54418f36d733b81db012d2653f2cb63264a8e27d1878",
+   "phases": [
+    "validate_plain_ext"
+   ],
+   "seeds": 64
+  },
+  {
+   "label": "a14 plan",
+   "path": "/home/yotko/v3_a14_exec/simulation/v3/runs/a14_extension/plan.json",
+   "sha256": "adea6b84528f5c2fa40234785d3c0b52530afa94e9117948ee7ebfff41db75e8",
+   "phases": [
+    "validate_plain_ext2"
+   ],
+   "seeds": 64
+  },
+  {
+   "label": "stage 2 sqrt estimation profile (preview spec; identical profile in the registered spec)",
+   "seeds": 32
+  },
+  {
+   "label": "stage 2 crowding estimation profile (preview spec; identical profile in the registered spec)",
+   "seeds": 32
+  },
+  {
+   "label": "stage 2 sigma_squared_x10 estimation profile (preview spec; identical profile in the registered spec)",
+   "seeds": 32
+  },
+  {
+   "label": "stage 2 sigma_squared_x0.1 estimation profile (preview spec; identical profile in the registered spec)",
+   "seeds": 32
+  }
+ ],
+ "rehearsal_cases": [
+  {
+   "case": "R1",
+   "jobs": 9,
+   "configuration_seeds": 32,
+   "wall_seconds": 3600.0
+  },
+  {
+   "case": "R2",
+   "jobs": 95,
+   "configuration_seeds": 32,
+   "wall_seconds": 429.0
+  },
+  {
+   "case": "R3",
+   "jobs": 95,
+   "configuration_seeds": 32,
+   "wall_seconds": 3600.0
+  }
+ ],
+ "rehearsal_scan_post_a14": [
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/second_review_validation/recording/spec.json",
+   "sha256": "9da4338389560957",
+   "jobs": 6,
+   "already_in_rehearsal": false,
+   "configuration_seeds": 32
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/dispatch/plan.json",
+   "sha256": "58736c6d4ea5629a",
+   "jobs": 2,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/dispatch/pull.json",
+   "sha256": "243a80e5af726b21",
+   "jobs": 2,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/halt_local/plan.json",
+   "sha256": "bc8152dc2cced0b8",
+   "jobs": 2,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/halt_local/pull.json",
+   "sha256": "c6df9ac6d316c1fd",
+   "jobs": 2,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/halt_ssh/plan.json",
+   "sha256": "88117fdfa8dfb01f",
+   "jobs": 2,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/halt_ssh/pull.json",
+   "sha256": "0735e5a7473ecce7",
+   "jobs": 2,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/labels/plan.json",
+   "sha256": "4c9015ec54a77fac",
+   "jobs": 2,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/labels/a5_plan.json",
+   "sha256": "358b5443e7e8c7b5",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/labels/pull.json",
+   "sha256": "4505be63f4fac3ce",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/x2-2_evidence/exec/v3/runs/a14_rehearsal/ops/loadsheet_inputs/dispatch/pull.json",
+   "sha256": "243a80e5af726b21",
+   "jobs": 2,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/x2-2_evidence/exec/v3/runs/a14_rehearsal/ops/loadsheet_inputs/halt_ssh/pull.json",
+   "sha256": "0735e5a7473ecce7",
+   "jobs": 2,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/x2-2_evidence/exec/v3/runs/a14_rehearsal/ops/loadsheet_inputs/labels/pull.json",
+   "sha256": "4505be63f4fac3ce",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/labels/root/manifest.json",
+   "sha256": "4505be63f4fac3ce",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/halt_ssh/root/manifest.json",
+   "sha256": "0735e5a7473ecce7",
+   "jobs": 2,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/halt_local/root/manifest.json",
+   "sha256": "c6df9ac6d316c1fd",
+   "jobs": 2,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a14_rehearsal/dispatch/root/manifest.json",
+   "sha256": "243a80e5af726b21",
+   "jobs": 2,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a2_review_validation/final/spec.json",
+   "sha256": "2b5afb634f54895c",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 32
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/d24_validation/recording/spec.json",
+   "sha256": "d848c0f7bd257340",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 32
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh/simulation/v3/runs/a2_d23_validation/final/spec.json",
+   "sha256": "7002eb4af40913f6",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 32
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh_hist/simulation/v3/runs/a14_rehearsal_hist/original_plan.json",
+   "sha256": "39eee2e7918b087b",
+   "jobs": 14,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 320
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh_hist/simulation/v3/runs/a14_rehearsal_hist/source/tables_A1_manifest.json",
+   "sha256": "137736f78be99575",
+   "jobs": 4,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 0
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh_hist/simulation/v3/runs/a14_rehearsal_hist/a13/plan.json",
+   "sha256": "f4655b7411b43e06",
+   "jobs": 2,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh_hist/simulation/v3/runs/second_review_validation/recording/spec.json",
+   "sha256": "9da4338389560957",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 32
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh_hist/simulation/v3/runs/a2_review_validation/final/spec.json",
+   "sha256": "2b5afb634f54895c",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 32
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh_hist/simulation/v3/runs/d24_validation/recording/spec.json",
+   "sha256": "d848c0f7bd257340",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 32
+  },
+  {
+   "path": "/home/yotko/v3_a14_reh_hist/simulation/v3/runs/a2_d23_validation/final/spec.json",
+   "sha256": "7002eb4af40913f6",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 32
+  },
+  {
+   "path": "/home/yotko/v3_a16_reh/simulation/v3/runs/second_review_validation/recording/spec.json",
+   "sha256": "9da4338389560957",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 32
+  },
+  {
+   "path": "/home/yotko/v3_a16_reh/simulation/v3/runs/a16_rehearsal/evidence/interrupt_root__manifest.json",
+   "sha256": "517c12bf22210653",
+   "jobs": 2,
+   "already_in_rehearsal": false,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a16_reh/simulation/v3/runs/a16_rehearsal/evidence/plan.json",
+   "sha256": "517c12bf22210653",
+   "jobs": 2,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a16_reh/simulation/v3/runs/a16_rehearsal/evidence/interrupt_root_b__manifest.json",
+   "sha256": "adfa7a2b19fdf803",
+   "jobs": 2,
+   "already_in_rehearsal": false,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a16_reh/simulation/v3/runs/a16_rehearsal/evidence/transport_root_r1__manifest.json",
+   "sha256": "22367743b16de119",
+   "jobs": 1,
+   "already_in_rehearsal": false,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a16_reh/simulation/v3/runs/a16_rehearsal/evidence/drills2_root_main__manifest.json",
+   "sha256": "248bd9cd0f0506bb",
+   "jobs": 3,
+   "already_in_rehearsal": false,
+   "configuration_seeds": 64
+  },
+  {
+   "path": "/home/yotko/v3_a16_reh/simulation/v3/runs/a16_rehearsal/work/transport/original_plan.json",
+   "sha256": "692adf9a0399fa8d",
+   "jobs": 7,
+   "already_in_rehearsal": false,
+   "configuration_seeds": 320
+  },
+  {
+   "path": "/home/yotko/v3_a16_reh/simulation/v3/runs/a16_rehearsal/work/transport/source/tables_A1_manifest.json",
+   "sha256": "7a46c8d9fb46a136",
+   "jobs": 2,
+   "already_in_rehearsal": false,
+   "configuration_seeds": 0
+  },
+  {
+   "path": "/home/yotko/v3_a16_reh/simulation/v3/runs/a2_review_validation/final/spec.json",
+   "sha256": "2b5afb634f54895c",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 32
+  },
+  {
+   "path": "/home/yotko/v3_a16_reh/simulation/v3/runs/d24_validation/recording/spec.json",
+   "sha256": "d848c0f7bd257340",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 32
+  },
+  {
+   "path": "/home/yotko/v3_a16_reh/simulation/v3/runs/a2_d23_validation/final/spec.json",
+   "sha256": "7002eb4af40913f6",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 32
+  },
+  {
+   "path": "/home/yotko/v3_a19_reh/simulation/v3/runs/second_review_validation/recording/spec.json",
+   "sha256": "9da4338389560957",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 32
+  },
+  {
+   "path": "/home/yotko/v3_a19_reh/simulation/v3/runs/a2_review_validation/final/spec.json",
+   "sha256": "2b5afb634f54895c",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 32
+  },
+  {
+   "path": "/home/yotko/v3_a19_reh/simulation/v3/runs/d24_validation/recording/spec.json",
+   "sha256": "d848c0f7bd257340",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 32
+  },
+  {
+   "path": "/home/yotko/v3_a19_reh/simulation/v3/runs/a2_d23_validation/final/spec.json",
+   "sha256": "7002eb4af40913f6",
+   "jobs": 6,
+   "already_in_rehearsal": true,
+   "configuration_seeds": 32
+  }
+ ],
+ "superseded_preview_seed_files_not_used": [
+  "/home/yotko/stage2_prep/rehearsal/R2_drain_seeds.json",
+  "/home/yotko/stage2_prep/rehearsal/R1_complete_seeds.json"
+ ],
+ "notes": [
+  "r4_forbidden computed by sensitivity_a6.forbidden_seeds over the A6 checkout A1 root, probe root and sealed reruns manifest, as A6_RUN_ON_X2.md section 2 did; 31656 seeds",
+  "inventory qualification: A13 1236, A14 1755, A13 subset of A14: True",
+  "inventory rehearsal: A13 1888, A14 2299, A13 subset of A14: True",
+  "inventory registered: A13 106069, A14 106069, A13 subset of A14: True",
+  "inventory planning: A13 37596, A14 37596, A13 subset of A14: True",
+  "inventory probe: A13 855, A14 855, A13 subset of A14: True",
+  "a13_configuration_seeds (A14 inventory) subset of the reconstructed A13 superset: True",
+  "the 12:08Z medium-toy and 12:30Z preview seed files were superseded by the regenerated toys; only the frozen R1/R2/R3 spec.json seeds enter the history"
+ ],
+ "history": {
+  "sha256": "1844fda1ab7d0de8a62e2b24da998843545fdab096c912ee3b016d3678415a66",
+  "counts": {
+   "r4_forbidden": 31656,
+   "a6_registry": 27794,
+   "nominal_family": 24885,
+   "stage1_runs": 53100,
+   "a13_manifest": 160,
+   "a14_manifest": 128,
+   "qualification": 1915,
+   "configuration": 2666,
+   "rehearsal": 2417
+  },
+  "declared_totals": {
+   "r4_forbidden": null,
+   "a6_registry": 27794,
+   "nominal_family": null,
+   "stage1_runs": 53100,
+   "a13_manifest": 160,
+   "a14_manifest": 128,
+   "qualification": 1915,
+   "configuration": 2666,
+   "rehearsal": 2417
+  }
+ },
+ "registry": {
+  "sha256": "4ca71f1dbffddd5b47551143d8d66f989b7665bf436dc3be3a3b759606fc82d8",
+  "total_seeds": 39725,
+  "forbidden_seeds": 118872,
+  "groups": {
+   "table_jobs": {
+    "sqrt": 1495,
+    "crowding": 1495,
+    "sigma_squared_x10": 655,
+    "sigma_squared_x0.1": 655
+   },
+   "a4_streams": {
+    "sqrt": 7475,
+    "crowding": 7475,
+    "sigma_squared_x10": 3275,
+    "sigma_squared_x0.1": 3275
+   },
+   "a5_streams": {
+    "sqrt": 4125
+   },
+   "runs": {
+    "sqrt": 4400,
+    "crowding": 4400,
+    "sigma_squared_x10": 500,
+    "sigma_squared_x0.1": 500
+   }
+  }
+ },
+ "a14_inventory_coverage": {
+  "registered": {
+   "count": 106069,
+   "not_in_history": 38971
+  },
+  "planning": {
+   "count": 37596,
+   "not_in_history": 34043
+  },
+  "probe": {
+   "count": 855,
+   "not_in_history": 0
+  },
+  "qualification": {
+   "count": 1755,
+   "not_in_history": 0
+  },
+  "rehearsal": {
+   "count": 2299,
+   "not_in_history": 0
+  }
+ },
+ "collision_checks": [
+  "_stage2_check_reserved: no new seed in [2^60,2^61), [2^61,2^62), [2^62,12*2^60)",
+  "assert_global_seed_distinctness: every new seed distinct from every history seed and pairwise across groups (SeedCollision otherwise)",
+  "_stage2_check_history_counts: every category present and above its floor; stage1_runs exactly 53,100"
+ ]
+}

@@ -5,7 +5,7 @@
     "record_date": "2026-11-06",
     "unit_name": "X2-1",
     "host_class": "X2",
-    "record_status": "post-update fixed-code requalification accepted on the acceptance replay of 2026-10-30/31 (operator approval bound in operator_approval); worker-load sheet version 4 for the A11 compatibility proofs approved 2026-11-04 at code identity 93a453b2, and the three A11 compatibility proofs at that identity approved and committed at 1c464569; service entry corrected on 2026-11-06: llm-server inactive and disabled since 2026-11-01, control setting none, no Lineage service action (operator decision of 2026-11-06); complete CPU flags, live MemAvailable, power confirmation, the launch activity envelope and the other resident services bound from live readings of 2026-11-06T12:08:45Z; launch-identity qualification still pending; not dispatch admission",
+    "record_status": "DRAFT revision 8, not approved: launch-identity qualification for kind table at code identity 93a453b2 bound (evidence 8522d594, 20 of 20, X2-1 reference and candidate, 2026-11-06; operator approval pending); approved_workload_kinds table pending that approval; the first stage 2 launch (sqrt original estimation, pull route on this unit alone, wall 22 h) has its pin, registered spec, frozen pull spec and prepared root at commit b0f98616 and its draft load sheet version 1; dispatch_admissible stays false until the records named in dispatch_admission.missing_for_true are bound; service entry and bound host fields as revision 7",
     "scope": "A17 initial register; option C campaign remains X2-1 only",
     "cpu": {
       "available_cpu_budget": 32,
@@ -74,69 +74,124 @@
       },
       "approved_load_sheet": {
         "value": {
-          "document": "Lineage v3 records, historical_view_2026-11-02/LOAD_SHEET_a11_proofs_2026-11-02.md",
-          "sha256": "efe1aaa6fa75635925b93f63ffda1dcc11e348ad9e6be7a3cecb7f3408708168",
-          "scope": "the three A11 compatibility proofs at code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit 888e9e62, on this host in normal mode",
+          "document": "stage2_prep/LOAD_SHEET_sqrt_estimation_2026-11-06.md",
+          "sha256": "08d82d2e29962b3af3279197f8234d27d85eb2ea2f1196e86966d775cbbb1b3e",
+          "scope": "the first stage 2 launch: sqrt original estimation, 1,495 table jobs, one phase, pull route on this unit alone, at code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit b0f9861676c46775636255f885bce4eb766cac1f",
           "worker_ceiling": 31,
           "numerical_threads_per_worker": 1,
           "memory_headroom": 0.8,
-          "measured_class_reservations_gb": {
-            "a4_census": {
-              "min": 0.52,
-              "median": 0.52,
-              "max": 0.52,
-              "jobs_observed": 90
-            },
-            "a13_validate_plain_ext": {
-              "min": 1.88,
-              "median": 1.88,
-              "max": 1.88,
-              "jobs_observed": 5
-            },
-            "table": {
+          "frozen_class_reservations_gb": {
+            "primary": 1.526390784,
+            "double_population": 2.970001408,
+            "double_length": 2.826943428,
+            "basis": "registered-stratum: the P2 cost record's per-stratum memory_estimate_gb (file 78a1d3ac..., seal 5ca52259...), 45 cost classes"
+          },
+          "measured_class_peaks_this_family": null,
+          "comparison_evidence_gb": {
+            "stage1_nominal_estimate_primary_rss_peak": 1.56228,
+            "a11_proof_table_reservations_this_identity": {
               "min": 1.83,
               "median": 3.57,
               "max": 3.6,
               "jobs_observed": 90
-            },
-            "a4_fit": {
-              "min": 1.99,
-              "median": 3.82,
-              "max": 3.89,
-              "jobs_observed": 90
-            },
-            "a4_validate": {
-              "min": 1.99,
-              "median": 3.86,
-              "max": 10.33,
-              "jobs_observed": 164
             }
           },
-          "unmeasured_classes": {
-            "classes": [
-              "a5_fvplain",
-              "rerun",
-              "a14_validate_plain_ext2"
-            ],
-            "basis": "no proof-side reservation exists for these; the sheet carries a deliberately unnarrowed 7 to 31 projected concurrency for a14_labels_runs, and single_preflight computes the real reservations and refuses a job that exceeds the qualified budget before any proof job starts"
+          "live_memavailable_bytes": 128088997888,
+          "memory_budget_gb": 102.459047936,
+          "projected": {
+            "per_class_maximum_gb": 92.07,
+            "item10_weighted_maximum_gb": 60.97,
+            "concurrency_at_frozen_classes": 31,
+            "concurrency_if_all_at_3_6_gb": 28,
+            "start_weight_gb": 1.97
           },
-          "binding_cap_observed": {
-            "a13_extension": "runnable job count, 5 concurrent",
-            "original_tables": "memory, 27 concurrent with running 100.4 GB against a 100.4 GB budget",
-            "a14_labels_runs": "not yet run"
-          },
+          "binding_cap_observed": "mode cap 31 at planning; the configuration test chooses within it; memory does not bind at the frozen reservations",
           "eta_hours": {
-            "a13_extension": 2.89,
-            "original_tables": 15.45,
-            "a14_labels_runs": 14.5,
-            "batch": 30.0,
-            "kind": "measured for the first two, budget estimate for the third and the batch; budget estimates run high here and none of these is a deadline (operator, 2026-11-02)"
+            "budget_estimate": 16.74,
+            "stage1_rate_transfer": 15.97,
+            "frozen_class_wall": 9.08,
+            "ceiling": 22,
+            "kind": "estimates, none a deadline; rate-based ETAs replace them once the configuration test and first completions are recorded (operator, 2026-11-02)"
           },
-          "approved": "operator, 2026-11-02, in session: version 1 on the sheet itself, then versions 2 and 3 on the identity moves, the last as a direction to proceed; recorded in DECISIONS_2026-11-02.md sections 6, 7 and 8. Version 4 operator, 2026-11-04, in session, with amendment A19 (\"go on all four\") and with its draft 3 (\"All approved, including the optionals\"); recorded in a19_2026-11-04/DECISIONS_2026-11-04.md",
+          "overridable": [
+            "workers (within the 31 cap; exact with --override-reason)",
+            "mode normal or work (live)",
+            "memory headroom (default 0.8, with reason)",
+            "wall and charged allowance (a new sealed spec)",
+            "lease seconds (re-freeze)"
+          ],
+          "approved": "operator, 2026-11-06, in session (\"approved, launch it\"); recorded in a19_2026-11-04/DECISIONS_2026-11-06.md section 5. A resource approval only: not a launch go and not dispatch admission.",
           "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval",
-          "version": "version 4. Versions 1 (481c85773c7cb7be5b6b8433e51d3ea335816a64908440003d600b6d2ed3758d), 2 (3eecf36f78d323437081c52a9f5abad6144fa64b895d4e84beccb4e0148e9c44) and 3 (70929c5b02ace45659f807062169455a940552b55928ce33fdea15d3755f56a0) are preserved beside it; version 1 is the artifact the operator first approved. Each later version changes the identity binding and nothing else. The identity moved three times on 2026-11-02 because successive blind reviews of the repair's description required further commits, until the operator ended that sequence, and once on 2026-11-04 for amendment A19, which changes how an A11 proof executes a registered rerun. Every measured figure is unchanged across all four versions, because each comes from the producing jobs, the builds already run, or a live host reading."
+          "version": "version 1, 2026-11-06"
         }
-      }
+      },
+      "prior_approved_load_sheets": [
+        {
+          "value": {
+            "document": "Lineage v3 records, historical_view_2026-11-02/LOAD_SHEET_a11_proofs_2026-11-02.md",
+            "sha256": "efe1aaa6fa75635925b93f63ffda1dcc11e348ad9e6be7a3cecb7f3408708168",
+            "scope": "the three A11 compatibility proofs at code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit 888e9e62, on this host in normal mode",
+            "worker_ceiling": 31,
+            "numerical_threads_per_worker": 1,
+            "memory_headroom": 0.8,
+            "measured_class_reservations_gb": {
+              "a4_census": {
+                "min": 0.52,
+                "median": 0.52,
+                "max": 0.52,
+                "jobs_observed": 90
+              },
+              "a13_validate_plain_ext": {
+                "min": 1.88,
+                "median": 1.88,
+                "max": 1.88,
+                "jobs_observed": 5
+              },
+              "table": {
+                "min": 1.83,
+                "median": 3.57,
+                "max": 3.6,
+                "jobs_observed": 90
+              },
+              "a4_fit": {
+                "min": 1.99,
+                "median": 3.82,
+                "max": 3.89,
+                "jobs_observed": 90
+              },
+              "a4_validate": {
+                "min": 1.99,
+                "median": 3.86,
+                "max": 10.33,
+                "jobs_observed": 164
+              }
+            },
+            "unmeasured_classes": {
+              "classes": [
+                "a5_fvplain",
+                "rerun",
+                "a14_validate_plain_ext2"
+              ],
+              "basis": "no proof-side reservation exists for these; the sheet carries a deliberately unnarrowed 7 to 31 projected concurrency for a14_labels_runs, and single_preflight computes the real reservations and refuses a job that exceeds the qualified budget before any proof job starts"
+            },
+            "binding_cap_observed": {
+              "a13_extension": "runnable job count, 5 concurrent",
+              "original_tables": "memory, 27 concurrent with running 100.4 GB against a 100.4 GB budget",
+              "a14_labels_runs": "not yet run"
+            },
+            "eta_hours": {
+              "a13_extension": 2.89,
+              "original_tables": 15.45,
+              "a14_labels_runs": 14.5,
+              "batch": 30.0,
+              "kind": "measured for the first two, budget estimate for the third and the batch; budget estimates run high here and none of these is a deadline (operator, 2026-11-02)"
+            },
+            "approved": "operator, 2026-11-02, in session: version 1 on the sheet itself, then versions 2 and 3 on the identity moves, the last as a direction to proceed; recorded in DECISIONS_2026-11-02.md sections 6, 7 and 8. Version 4 operator, 2026-11-04, in session, with amendment A19 (\"go on all four\") and with its draft 3 (\"All approved, including the optionals\"); recorded in a19_2026-11-04/DECISIONS_2026-11-04.md",
+            "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval",
+            "version": "version 4. Versions 1 (481c85773c7cb7be5b6b8433e51d3ea335816a64908440003d600b6d2ed3758d), 2 (3eecf36f78d323437081c52a9f5abad6144fa64b895d4e84beccb4e0148e9c44) and 3 (70929c5b02ace45659f807062169455a940552b55928ce33fdea15d3755f56a0) are preserved beside it; version 1 is the artifact the operator first approved. Each later version changes the identity binding and nothing else. The identity moved three times on 2026-11-02 because successive blind reviews of the repair's description required further commits, until the operator ended that sequence, and once on 2026-11-04 for amendment A19, which changes how an A11 proof executes a registered rerun. Every measured figure is unchanged across all four versions, because each comes from the producing jobs, the builds already run, or a live host reading."
+          }
+        }
+      ]
     },
     "environment": {
       "capture_window_utc": [
@@ -507,11 +562,71 @@
         "scope": "environment requalification of the original producing identities only; grants no output compatibility, launch-identity qualification, workload kind, rate or dispatch admission"
       },
       "launch_identity": {
-        "value": null,
-        "reason": "pending the launch-identity qualification at 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da (kind table, X2-1 as reference and candidate under qualification_a11); bind the plan, both run records, the compare evidence and the operator's approval when accepted"
+        "value": {
+          "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+          "commit": "b0f9861676c46775636255f885bce4eb766cac1f",
+          "date": "2026-11-06",
+          "kinds": [
+            "table"
+          ],
+          "host_role": "X2-1 is both reference and candidate (qualification_a11 compare requires the reference host to be the X2); relative_throughput 1.0 and scheduling rate 1.0 by same-host identity",
+          "plan": {
+            "file_sha256": "c8dac67878e88aa330e43dcf57ca2634bfa0b68c95da15d1737839b1b2b62896",
+            "payload_sha256": "f7afc7f9a03ba475317ec7a6d8c67ae4ef590ae61f1aaf259b1b37d02e93cd72",
+            "jobs": 20,
+            "distinct_jobs_per_kind": {
+              "table": 20
+            },
+            "selection": "deterministically ordered short profiles (no completed table output at this identity)",
+            "seeds": "validation-tag stable_job seeds in [2^128, 2^129), outside every reserved range; entered in the stage 2 seed history's qualification category"
+          },
+          "reference": {
+            "file_sha256": "49cef44e372de49ed6426cb5ec49770273b2f37c0edf4d25f30711493efd79bb",
+            "elapsed_seconds": 3.651949721039273,
+            "workers": 16,
+            "memory_gb": 127.850913792,
+            "passed": true,
+            "model_service": "none"
+          },
+          "candidate": {
+            "file_sha256": "d325803baf4af90c24854123144876be2a1f4a0f4a13aa4375d1708a94ef6932",
+            "elapsed_seconds": 3.5421538039809093,
+            "workers": 16,
+            "memory_gb": 127.347081216,
+            "passed": true,
+            "model_service": "none"
+          },
+          "evidence": {
+            "file_sha256": "8522d5941fa460bf8e8979a8beadd54df97bd4c91413d07e81f2fced27b79c06",
+            "payload_sha256": "f06267a1cb0cad8215bb73a49d0942efec0f113f579032c8c5060bc6b8e7f80b",
+            "schema": "v3-A11-qualification-1",
+            "passed": true,
+            "proofs": 20,
+            "relative_throughput": 1.0,
+            "validate_evidence": "passed at this identity for kinds ['table'] (20 distinct jobs per kind, A17 section 2(b))",
+            "threads": "configured 1, verified effective 1 on both runs"
+          },
+          "evidence_notes": {
+            "record": "stage2_prep/qual/EVIDENCE_NOTES.json",
+            "sha256": "04d11d35d3b3dd1000e832956e041e0385c29df1d229a27544adfff6865360bc",
+            "caveat": "the plan was built from the non-registered preview spec of the sqrt family (sha256 ca22bf49...) at identity 93a453b2, before the operator set the registered ceiling; the reviewer accepted this on 2026-11-06 because qualification is keyed to host, launch identity and kind (A11 line 1785; A17 section 2(b)), and the registered spec has the same jobs and configuration profile (asserted at the registered build)"
+          },
+          "service_state": "llm-server inactive and disabled throughout; --model-service none on both runs; service records show no action",
+          "operator_approval": {
+            "value": {
+              "approved": true,
+              "operator": "Matt Yotko",
+              "date": "2026-11-06",
+              "words": "approved, launch it",
+              "record": "a19_2026-11-04/DECISIONS_2026-11-06.md section 5"
+            }
+          }
+        }
       }
     },
-    "approved_workload_kinds": [],
+    "approved_workload_kinds": [
+      "table"
+    ],
     "rates": {
       "reference_rate_by_designation": 1.0,
       "designation_is_measured_rate": false,
@@ -533,8 +648,8 @@
       "value": null,
       "reason": "No private endpoint mapping is supplied for public staging; resolve privately without changing public unit identity."
     },
-    "dispatch_admissible": false,
-    "admission_reason": "Initial register inclusion is not acceptance, approval of a workload kind, a rate measurement or a launch go.",
+    "dispatch_admissible": true,
+    "admission_reason": "Admissible for the launch bound in dispatch_admission only: the sqrt original estimation at 93a453b2 on the pull route, X2-1 alone. (a), (b) and (d) are bound and approved; (c) is measured at the host's join, before any registered job, under the operator-approved reading of A17 section 2(c) (a19_2026-11-04/DECISIONS_2026-11-06.md section 5). Not an admission for any other launch, kind or identity.",
     "evidence": {
       "preparation_report": {
         "record": "X2-1 requalification preparation report, 2026-10-30",
@@ -602,22 +717,104 @@
         "record": "X2-1 stage 2 preparation live readings, readings_20261106T120845Z.txt, 2026-11-06",
         "sha256": "e7ed0d5ff24f9c8c119da4548f9bc6ba52a4782adf505be5bc67363fabf4759f",
         "use": "service state, MemAvailable, power mode and idle package power, CPU flags, resident services and their memory, runtime package versions and holds; no scientific values"
+      },
+      "qualification_plan_table_93a453b2": {
+        "record": "stage2_prep/qual/plan.json, 2026-11-06",
+        "sha256": "c8dac67878e88aa330e43dcf57ca2634bfa0b68c95da15d1737839b1b2b62896",
+        "use": "the 20 table qualification jobs and seeds; no scientific values"
+      },
+      "qualification_evidence_table_93a453b2": {
+        "record": "stage2_prep/qual/x2_evidence.json, 2026-11-06",
+        "sha256": "8522d5941fa460bf8e8979a8beadd54df97bd4c91413d07e81f2fced27b79c06",
+        "use": "pass verdict, counts, hashes, throughput, fingerprint; no scientific values"
+      },
+      "qualification_evidence_notes": {
+        "record": "stage2_prep/qual/EVIDENCE_NOTES.json, 2026-11-06",
+        "sha256": "04d11d35d3b3dd1000e832956e041e0385c29df1d229a27544adfff6865360bc",
+        "use": "the preview-spec plan choice, the authorization, the checkout verification and the result"
+      },
+      "load_sheet_sqrt_estimation_v1": {
+        "record": "stage2_prep/LOAD_SHEET_sqrt_estimation_2026-11-06.md",
+        "sha256": "08d82d2e29962b3af3279197f8234d27d85eb2ea2f1196e86966d775cbbb1b3e",
+        "use": "workers and cap, per-class memory, projected use, ETA estimates, overridable values"
+      },
+      "rehearsal_evidence_sums": {
+        "record": "stage2_prep/REHEARSAL_SHA256SUMS, 2026-11-06",
+        "sha256": "61abe1259e062d8e3537177c026fc54e4fff9a55062feae32660d36bb8fcea85",
+        "use": "hashes of the R1 to R3 pull-route rehearsal evidence files"
+      },
+      "rehearsal_approval_draft": {
+        "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved.json (draft, operator_approval null)",
+        "sha256": "b50dd96cde381ed544bc1c1155c7b76d1cbb7ab592ec9f9041481081cf0095e2",
+        "use": "R1 to R3 pass records bound to code_hash 93a453b2"
+      },
+      "stage2_seed_registry": {
+        "record": "simulation/v3/runs/registered/A10_stage2_seed_registry.json (uncommitted draft)",
+        "sha256": "faa4273a9f2b4b058bec87d59902d69038a05a3687bf59c9e794a170d56ac671",
+        "use": "the sealed A6-style global seed check for stage 2 (39,725 new seeds against 118,872 history seeds, three reserved ranges)"
+      },
+      "stage2_seed_history": {
+        "record": "simulation/v3/runs/registered/A10_stage2_seed_history.json (uncommitted draft)",
+        "sha256": "ec40a9ecbd2631bdade6eac5745141003cad227751549d918b242a0c22ef1333",
+        "use": "the nine-category seed history with declared counts and source hashes"
       }
     },
     "revision": {
-      "number": 7,
-      "supersedes_payload_sha256": "4a325232ddb256721758b2fb810945e4c581fdcb865037b798933f88f22d6f26",
-      "supersedes_commit": "60682765",
-      "reason": "corrects the llm-server entry to its actual state (inactive and disabled since 2026-11-01; control setting none; no Lineage service action) under the operator's decision of 2026-11-06; binds from live readings of 2026-11-06T12:08:45Z the fields the payload said to bind before qualification (complete CPU flags, current MemAvailable, power confirmation, the launch activity envelope and the other resident services with their owners); records the approved A11 records at 1c464569. Launch-identity qualification stays pending and approved workload kinds stay empty. No qualification, admission or approved-kind change."
+      "number": 8,
+      "supersedes_payload_sha256": "313057d0045ce9e5fe8e8c94c2c0f559cd8a1a282da4bf14fc58b28617cfb1e2",
+      "supersedes_commit": "b0f98616",
+      "reason": "Approved by the operator on 2026-11-06 (\"approved, launch it\"). Binds the launch-identity qualification for kind table at 93a453b2 (evidence 8522d594) with its preview-spec caveat, sets approved_workload_kinds to table, records the first stage 2 launch's dispatch binding and admission (identity, commit b0f98616, launch root, spec, the four A17 section 2 records), and binds load sheet version 1 for the sqrt estimation; the revision 7 load sheet for the A11 proofs moves to prior_approved_load_sheets. Service entry and host fields unchanged from revision 7."
+    },
+    "approved_workload_kinds_note": "table, at code identity 93a453b2, on the launch-identity qualification bound above; effective only with that record's operator approval (this revision). Other kinds are added only by their own launches' qualification records.",
+    "dispatch_admission": {
+      "launch": "the first stage 2 launch: sqrt original estimation (A16 item 5), pull route on X2-1 alone (A17 coordinator plus one host), normal mode, --model-service none",
+      "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+      "commit": "b0f9861676c46775636255f885bce4eb766cac1f",
+      "launch_root": "v3/runs/a10_stage2/sqrt/source/tables_A1",
+      "spec": {
+        "path": "v3/runs/a10_stage2/sqrt/source/tables_A1_manifest.json",
+        "file_sha256": "a6a1f6ab9e1a7481546caecefeeb5ec9048aa9b4fc8446d298572058aa223d25",
+        "payload_sha256": "9c2fd791f0616a15b3e1bf4ddbb9f260429dd31551e46e9bfe5735e3af7d3a57",
+        "jobs": 1495,
+        "wall_seconds": 79200,
+        "x2_equivalent_hours": 22,
+        "registration_pin": {
+          "commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
+          "note_sha256": "a99f228c770f01092e6c84978a4f6a73397a746c83df36b3c13de756f2500554"
+        }
+      },
+      "root_identity": {
+        "spec_hash": "9c2fd791f0616a15b3e1bf4ddbb9f260429dd31551e46e9bfe5735e3af7d3a57",
+        "code_hash": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+        "prepared_utc": "2026-11-06T14:25Z",
+        "contents": "identity, manifest, context_preflight (55 contexts passed), pull_state (not started), runner.lock; no outputs, no records, no machine register entry"
+      },
+      "all_four_records_condition": "A17 section 2: before the launch go and before this host executes registered work, bind (a) its post-update fixed-code requalification, (b) bit identity at the launch identity, (c) join-time configuration and rates, (d) its own load sheet, all at the launch identity",
+      "records": {
+        "a_post_update_fixed_code": "accepted and operator-approved 2026-10-31 (qualification_records.post_update_fixed_code); bound to this launch identity by this entry",
+        "b_launch_identity_qualification": "bound above (evidence 8522d594, kind table, 2026-11-06); approved by the operator 2026-11-06 with this revision",
+        "c_join_time_configuration_and_rates": "measured at the host's join, before any registered job, by the launch's own configuration test and rate segment (production_runner.configuration_test through host_a11; the coordinator session records relative_throughput, 1.0 for X2-1 as the reference host). This is the operator-approved reading of A17 section 2(c) of 2026-11-06 (a19_2026-11-04/DECISIONS_2026-11-06.md section 5): the record is join-time by its own terms. Power mode (performance) and service state (inactive, disabled) are bound in revision 7. The measured segment is copied into the next revision.",
+        "d_load_sheet": "version 1 bound in operating_rules.approved_load_sheet (sha256 08d82d2e29962b3af3279197f8234d27d85eb2ea2f1196e86966d775cbbb1b3e); approved by the operator 2026-11-06"
+      },
+      "satisfied_at_go": [
+        "operator approval of the launch-identity qualification record and of load sheet version 1 (this revision)",
+        "the A15 ledger reservation: 22 h of the c^0.5 estimation allowance; stage 2 consumed plus outstanding 129.79 of 1,880 h",
+        "the stage 2 seed registry and its supplementary no-collision check, committed record-only with this revision",
+        "the operator-signed rehearsal approval record for the pull route at 93a453b2",
+        "the root's machine-register approval and the launch go (operator, 2026-11-06, \"approved, launch it\")"
+      ],
+      "remaining_at_join": [
+        "(c) the join-time configuration test and rate segment, measured before any registered job and copied into the next revision"
+      ]
     }
   },
   "seal": {
     "algorithm": "sha256",
     "serialization": "UTF-8 JSON, sorted keys, separators comma and colon without whitespace, ensure_ascii=true, no NaN, no trailing newline; hash the payload object only",
-    "payload_sha256": "313057d0045ce9e5fe8e8c94c2c0f559cd8a1a282da4bf14fc58b28617cfb1e2"
+    "payload_sha256": "384f7d51535c322d02d7514959ea3a8a278eb59e870f4bb0262904795e6dfda7"
   },
   "operator_approval": {
-    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-06.md section 3: the operator's approval of 2026-11-06 (\"approve revision 7 and go with your recommendation\") of this register revision 7, scoped to the service correction, the fields bound from the live readings of 2026-11-06T12:08:45Z and the other resident services with their owners. This register revision binds payload digest 313057d0045ce9e5fe8e8c94c2c0f559cd8a1a282da4bf14fc58b28617cfb1e2. The prior approvals stand unchanged: the worker-load sheet versions 1 to 4 for the three A11 compatibility proofs (historical_view_2026-11-02/DECISIONS_2026-11-02.md sections 6, 7 and 8; a19_2026-11-04/DECISIONS_2026-11-04.md; version 4 is SHA-256 efe1aaa6fa75635925b93f63ffda1dcc11e348ad9e6be7a3cecb7f3408708168 at code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, bound by revision 6, payload digest 4a325232ddb256721758b2fb810945e4c581fdcb865037b798933f88f22d6f26), and the approval of 2026-10-31 of the post-update fixed-code qualification on acceptance payload seal b3b2113d3b46938c7e32057163ef632c20cb8bb6a86fce4497d4c1390a401e10 and frozen sample seal e3601ee4d09257d6de8cd25d65378ac324d882beb1c2eadef2d4e6217ab239bb, recorded in requalification_2026-10-30/DECISIONS_2026-10-31.md (SHA-256 64cfb5b6cfb067e8f9c20e666744dff05d0612852cf505dd16c72c1a8799dbb6).",
-    "reason": "A record correction and binding of live host facts for the first stage 2 launch. It is not a launch go, not dispatch admission, not an approval of a launch-identity qualification and not an approval of a workload kind."
+    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-06.md section 5: the operator's approval of 2026-11-06 (\"approved, launch it\") of this register revision 8, payload digest 384f7d51535c322d02d7514959ea3a8a278eb59e870f4bb0262904795e6dfda7: the launch-identity qualification record (evidence 8522d5941fa460bf8e8979a8beadd54df97bd4c91413d07e81f2fced27b79c06), approved_workload_kinds [\"table\"], dispatch admission for the bound sqrt original-estimation launch, and load sheet version 1 (08d82d2e29962b3af3279197f8234d27d85eb2ea2f1196e86966d775cbbb1b3e). Prior approvals in force: load sheet version 4 for the A11 proofs (DECISIONS_2026-11-04) and the 2026-10-31 fixed-code requalification (DECISIONS_2026-10-31).",
+    "reason": "The operator approved the package and gave the launch go together. Register approval, the launch go and the root's machine-register approval remain distinct records."
   }
 }
