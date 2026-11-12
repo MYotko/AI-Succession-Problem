@@ -2,10 +2,10 @@
   "schema": "lineage-a17-sealed-host-entry-v1",
   "payload": {
     "schema": "lineage-a17-host-payload-v1",
-    "record_date": "2026-11-11",
+    "record_date": "2026-11-12",
     "unit_name": "X2-1",
     "host_class": "X2",
-    "record_status": "Revision 11, approved by the operator, Matt Yotko, 2026-11-11 (\"go ahead\"); recorded in a19_2026-11-04/DECISIONS_2026-11-11.md section 1. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594) and a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a); approved_workload_kinds lists all four. The sqrt original estimation (revision 9) and the sqrt original validation (this revision) completed; their join-time configuration and rate segments are bound in rates.approved_rate_segments. dispatch_admissible false: no launch is bound. Service entry and bound host fields as revision 7.",
+    "record_status": "Revision 12, approved by the operator, Matt Yotko, 2026-11-12 (\"Go ahead\"); recorded in a19_2026-11-04/DECISIONS_2026-11-12.md section 1. dispatch_admissible true for the sqrt A5 labels launch only. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594), a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a), and a5_fvplain (this revision, evidence 25f905dc). Load sheet version 3 bound for the sqrt A5 labels. The sqrt estimation and validation join segments (revisions 9 and 11) are unchanged. Service entry and bound host fields as revision 7.",
     "scope": "A17 initial register; option C campaign remains X2-1 only",
     "cpu": {
       "available_cpu_budget": 32,
@@ -74,64 +74,52 @@
       },
       "approved_load_sheet": {
         "value": {
-          "document": "stage2_prep/LOAD_SHEET_v2_sqrt_validation_2026-11-07.md",
-          "sha256": "7bb0e0a2466f2073043472f7a79a738239386e1b333f5afdcf43d7aad8df8e8f",
-          "version": "version 2, 2026-11-07",
-          "scope": "the sqrt original validation: 4,277 A4 jobs in five phases (fit 429, validate_plain 1,287, validate_fv_primary 975, validate_fv_double_population 91, census 1,495), pull route on this unit alone, code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit 7032168b27396c6cb03ae8807d5a3844d70779de",
+          "document": "stage2_labels_2026-11-11/LOAD_SHEET_v3_sqrt_labels_2026-11-11.md (X2-1 stage2_prep/labels)",
+          "sha256": "807e1fda408f3fc9670f4e20757a91a1b9c26b0e5b1d97fe24e7c9fc30b91b96",
+          "data": {
+            "document": "LOAD_SHEET_v3_data.json",
+            "sha256": "e15d64d9cc7fbe3c28ff312f57fcac9f3a44695ec53b2387e8204bc645fcbfda"
+          },
+          "version": "version 3, 2026-11-12 UTC",
+          "scope": "the sqrt A5 labels: 2,925 a5_fvplain jobs in one phase (975 FV tables x 3 replicates), pull route on this unit alone, code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit 9f3cf240d8b8290310369d63f9d6f3e7976fc4a0",
           "worker_ceiling": 31,
           "numerical_threads_per_worker": 1,
           "memory_headroom": 0.8,
-          "frozen_class_reservations_gb": {
-            "fit_and_validate_plain": [
-              1.886,
-              3.771,
-              3.773
-            ],
-            "validate_fv_primary": [
-              7.54
-            ],
-            "validate_fv_double_population": [
-              15.077,
-              15.079
-            ],
-            "census": [
-              7.54,
-              15.077,
-              15.079
-            ],
-            "basis": "registered-stratum: the P2 cost record's per-stratum memory_estimate_gb (file 78a1d3ac..., seal 5ca52259...), 119 cost classes; census carries the larger route bundle's memory and weight (scheduling classes)"
+          "memory_gb_per_worker": {
+            "plan_sealed_estimate": 2.28,
+            "frozen_cost_class_max": 1.998,
+            "planning_allowance": 4.56,
+            "sheet_bound": 4.56,
+            "short_job_measured": 0.466,
+            "full_job_measured": null
           },
-          "plan_memory_estimate_gb": {
-            "fit": 3.35,
-            "validate_plain": 3.35,
-            "validate_fv_primary": 6.7,
-            "validate_fv_double_population": 13.4,
-            "census": 0.106
+          "workers": {
+            "at_sheet_bound_memory": 21,
+            "runner_planned": 31,
+            "note": "the sheet's 21 is a planning cap from the 4.56 GB allowance; the runner admits by its sealed 2.0 GB class and 1.2 x observed peaks inside the 31 cap, and its join-time configuration test chooses the count"
           },
-          "concurrency_under_guppi_envelope": {
-            "fit": 26,
-            "validate_plain": 26,
-            "validate_fv_primary": 13,
-            "validate_fv_double_population": 6,
-            "census": "6 to 13"
-          },
-          "live_memavailable_gb": 127.28,
-          "memory_budget_gb": 101.82,
+          "live_memavailable_gb": 124.99,
+          "memory_budget_gb": 99.99,
           "guppi_envelope_gb": 103,
           "class_wall_hours": {
-            "sheet_item10": 252.0,
-            "sheet_per_class": 287.0,
-            "per_phase_serial_sum": 449.1,
-            "note": "the census phase's 284 h share is an ordering-weight artifact of the frozen bundle pricing, not a time estimate"
+            "frozen_worker_hours": 1590.44,
+            "at_31_workers_runner_sheet": 51.54,
+            "at_21_workers": 75.74,
+            "note": "P2 ordering classes, not timings of this launch; the coordinator's refusal projection does not use them (see projection)"
+          },
+          "projection": {
+            "method": "multihost_a11.projection via production_runner.a4_projection: the join-time configuration trials' pooled median job time, scaled by cells; every job is plain, 64 runs per group, 1,024 + 2,048 steps, 96 trial-job equivalents",
+            "fits_70h_at_16_workers_if_pooled_median_below_seconds": 14.3,
+            "qualification_mean_seconds_at_16": 8.46,
+            "kind": "interpreter's pre-launch computation, an estimate; a refusal before the first scientific lease costs only the configuration test"
           },
           "eta_hours": {
-            "budget_estimate_plan_method_actual_split": 250.69,
-            "memory_qualified_capacities": 152.45,
-            "plan_all_fv_reference": 312.15,
-            "ceiling": 400,
-            "kind": "estimates, none a deadline; rate-based ETAs replace them once each phase's configuration test and first completions are recorded"
+            "budget_estimate_plan_method": 37.39,
+            "projection_at_16_workers_8.4s": 41.2,
+            "ceiling": 70,
+            "kind": "estimates, none a deadline; rate-based ETAs replace them once the configuration test and first completions are recorded"
           },
-          "approved": "operator, 2026-11-07, in session (\"approved, launch it\"); recorded in a19_2026-11-04/DECISIONS_2026-11-07.md section 3. A resource approval only: not a launch go and not dispatch admission. The census reservation artifact (section 2) is accepted.",
+          "approved": "operator, 2026-11-12, in session (\"Go ahead\"); recorded in a19_2026-11-04/DECISIONS_2026-11-12.md section 1. A resource approval only: not a launch go and not dispatch admission. The sheet's 21-worker figure is accepted as a planning cap, not a runner limit.",
           "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval"
         }
       },
@@ -252,6 +240,69 @@
             "approved": "operator, 2026-11-06, in session (\"approved, launch it\"); recorded in a19_2026-11-04/DECISIONS_2026-11-06.md section 5. A resource approval only: not a launch go and not dispatch admission.",
             "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval",
             "version": "version 1, 2026-11-06"
+          }
+        },
+        {
+          "value": {
+            "document": "stage2_prep/LOAD_SHEET_v2_sqrt_validation_2026-11-07.md",
+            "sha256": "7bb0e0a2466f2073043472f7a79a738239386e1b333f5afdcf43d7aad8df8e8f",
+            "version": "version 2, 2026-11-07",
+            "scope": "the sqrt original validation: 4,277 A4 jobs in five phases (fit 429, validate_plain 1,287, validate_fv_primary 975, validate_fv_double_population 91, census 1,495), pull route on this unit alone, code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit 7032168b27396c6cb03ae8807d5a3844d70779de",
+            "worker_ceiling": 31,
+            "numerical_threads_per_worker": 1,
+            "memory_headroom": 0.8,
+            "frozen_class_reservations_gb": {
+              "fit_and_validate_plain": [
+                1.886,
+                3.771,
+                3.773
+              ],
+              "validate_fv_primary": [
+                7.54
+              ],
+              "validate_fv_double_population": [
+                15.077,
+                15.079
+              ],
+              "census": [
+                7.54,
+                15.077,
+                15.079
+              ],
+              "basis": "registered-stratum: the P2 cost record's per-stratum memory_estimate_gb (file 78a1d3ac..., seal 5ca52259...), 119 cost classes; census carries the larger route bundle's memory and weight (scheduling classes)"
+            },
+            "plan_memory_estimate_gb": {
+              "fit": 3.35,
+              "validate_plain": 3.35,
+              "validate_fv_primary": 6.7,
+              "validate_fv_double_population": 13.4,
+              "census": 0.106
+            },
+            "concurrency_under_guppi_envelope": {
+              "fit": 26,
+              "validate_plain": 26,
+              "validate_fv_primary": 13,
+              "validate_fv_double_population": 6,
+              "census": "6 to 13"
+            },
+            "live_memavailable_gb": 127.28,
+            "memory_budget_gb": 101.82,
+            "guppi_envelope_gb": 103,
+            "class_wall_hours": {
+              "sheet_item10": 252.0,
+              "sheet_per_class": 287.0,
+              "per_phase_serial_sum": 449.1,
+              "note": "the census phase's 284 h share is an ordering-weight artifact of the frozen bundle pricing, not a time estimate"
+            },
+            "eta_hours": {
+              "budget_estimate_plan_method_actual_split": 250.69,
+              "memory_qualified_capacities": 152.45,
+              "plan_all_fv_reference": 312.15,
+              "ceiling": 400,
+              "kind": "estimates, none a deadline; rate-based ETAs replace them once each phase's configuration test and first completions are recorded"
+            },
+            "approved": "operator, 2026-11-07, in session (\"approved, launch it\"); recorded in a19_2026-11-04/DECISIONS_2026-11-07.md section 3. A resource approval only: not a launch go and not dispatch admission. The census reservation artifact (section 2) is accepted.",
+            "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval"
           }
         }
       ]
@@ -763,13 +814,85 @@
             }
           }
         }
+      },
+      "launch_identity_a5_kinds": {
+        "value": {
+          "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+          "commit": "9f3cf240d8b8290310369d63f9d6f3e7976fc4a0",
+          "date": "2026-11-12 UTC (2026-11-11 Eastern)",
+          "kinds": [
+            "a5_fvplain"
+          ],
+          "host_role": "X2-1 is both reference and candidate; relative_throughput 1.0 and scheduling rate 1.0 by same-host identity",
+          "plan": {
+            "file_sha256": "790ebdb307900b44f38096f715223bd944a40ec92f03f9e4e8f77a61b8fa515d",
+            "payload_sha256": "f593aa1f3cf15f3a7e98f868b2dcba094350e59d98a097bd2640bb816bc2571a",
+            "jobs": 20,
+            "distinct_jobs_per_kind": {
+              "a5_fvplain": 20
+            },
+            "distinct_configs_ignoring_seed": 1,
+            "built_from": "the frozen registered sqrt labels plan (file b8f9deee..., seal 60eed2eb...); with no completed a5_fvplain output at this identity the builder used the phase's configuration profile (shortened length burn 8, measure 24, real population of 64 runs per group); the 20 jobs share that one configuration and differ in stream seed, which meets the code's 20-distinct-jobs rule",
+            "seeds": "non-registered fixture stream seeds in [2^128, 2^129), outside every reserved range, none in the registry, history, addendum 1 or the labels spec; entered in seed history addendum 2 (qualification category)",
+            "custody": "the plan and x2_evidence.json embed one registered job's tested rows from the published table, so they stay on X2-1 under stage2_prep/qual_a5 and are bound here by hash only"
+          },
+          "reference": {
+            "file_sha256": "ed1e927fa17a42a1d2a6f0682de9f81a8ca46a2bac91ebf902e092e8b2712dbd",
+            "elapsed_seconds": 15.389588227961212,
+            "workers": 16,
+            "passed": true,
+            "model_service": "none"
+          },
+          "candidate": {
+            "file_sha256": "e3a68222cf5d50feddaa99dd4803644b07fbe8b1d08f311d445e38dd54e777a7",
+            "elapsed_seconds": 15.391268498031422,
+            "workers": 16,
+            "passed": true,
+            "model_service": "none"
+          },
+          "evidence": {
+            "file_sha256": "25f905dc1eccafe874eec582e8d5afa032624196f42666dbce21ecd3117629ce",
+            "payload_sha256": "6d04f64051e520b938a4f5fdee4d16dd666976b0c8b675e98c066b72258b7df3",
+            "schema": "v3-A11-qualification-1",
+            "passed": true,
+            "proofs": 20,
+            "relative_throughput": 1.0,
+            "validate_evidence": "passed at this identity for kind a5_fvplain (20 distinct jobs, A17 section 2(b))",
+            "threads": "configured 1, verified effective 1 on both runs",
+            "peak_rss_gb_by_kind": {
+              "a5_fvplain": 0.466
+            },
+            "peak_rss_note": "shortened jobs (32 steps) at the real population: a configuration-style measurement, not a full-job peak",
+            "worker_seconds_by_kind_candidate": {
+              "a5_fvplain": 169.1
+            },
+            "worker_seconds_per_job_candidate": {
+              "mean": 8.46,
+              "max": 9.35
+            }
+          },
+          "evidence_notes": {
+            "record": "stage2_prep/qual_a5/EVIDENCE_NOTES.json"
+          },
+          "service_state": "llm-server inactive and disabled throughout; --model-service none on both runs",
+          "operator_approval": {
+            "value": {
+              "approved": true,
+              "operator": "Matt Yotko",
+              "date": "2026-11-12",
+              "words": "Go ahead",
+              "record": "a19_2026-11-04/DECISIONS_2026-11-12.md section 1"
+            }
+          }
+        }
       }
     },
     "approved_workload_kinds": [
       "table",
       "a4_fit",
       "a4_validate",
-      "a4_census"
+      "a4_census",
+      "a5_fvplain"
     ],
     "rates": {
       "reference_rate_by_designation": 1.0,
@@ -1390,8 +1513,8 @@
       "value": null,
       "reason": "No private endpoint mapping is supplied for public staging; resolve privately without changing public unit identity."
     },
-    "dispatch_admissible": false,
-    "admission_reason": "Not admissible: no launch is bound. The revision 10 admission was for the sqrt original validation only, and that launch completed at 2026-11-12T03:23Z, 22:23 EST on 2026-11-11.",
+    "dispatch_admissible": true,
+    "admission_reason": "Admissible for the launch bound in dispatch_admission only: the sqrt A5 labels at 93a453b2 on the pull route, X2-1 alone, wall 70 h. (a), (b) and (d) are bound and approved; (c) is measured at the host's join, before any registered job, under the operator-approved reading of A17 section 2(c) of 2026-11-06. Not an admission for any other launch, kind or identity.",
     "evidence": {
       "preparation_report": {
         "record": "X2-1 requalification preparation report, 2026-10-30",
@@ -1535,18 +1658,119 @@
         "sha256": "779de370cc75746fff324dc98e2170da29d516792d24aa29475641f236af3f33",
         "payload_sha256": "cacfd2c9f771e8c7fd6eae2e058aed561fc5e2e0b8d434212271b44a391a40c0",
         "use": "the round 5 qualification, rehearsal and configuration seeds of 2026-11-07, checked against the registry, the history, the validation spec, the reserved ranges and the A13 and A14 inventories; the registry and history files are unchanged"
+      },
+      "qualification_plan_a5_93a453b2": {
+        "record": "stage2_prep/qual_a5/plan.json, 2026-11-12 UTC (on X2-1; embeds tested rows)",
+        "sha256": "790ebdb307900b44f38096f715223bd944a40ec92f03f9e4e8f77a61b8fa515d",
+        "use": "the 20 qualification jobs and seeds"
+      },
+      "qualification_evidence_a5_93a453b2": {
+        "record": "stage2_prep/qual_a5/x2_evidence.json, 2026-11-12 UTC (on X2-1; embeds tested rows)",
+        "sha256": "25f905dc1eccafe874eec582e8d5afa032624196f42666dbce21ecd3117629ce",
+        "use": "pass verdict, counts, hashes, throughput, fingerprint"
+      },
+      "load_sheet_sqrt_labels_v3": {
+        "record": "stage2_prep/labels/LOAD_SHEET_v3_sqrt_labels_2026-11-11.md",
+        "sha256": "807e1fda408f3fc9670f4e20757a91a1b9c26b0e5b1d97fe24e7c9fc30b91b96",
+        "data_sha256": "e15d64d9cc7fbe3c28ff312f57fcac9f3a44695ec53b2387e8204bc645fcbfda",
+        "use": "workers and caps, memory bounds, class wall hours, budget estimate, ceiling"
+      },
+      "labels_plan_sqrt": {
+        "record": "v3/runs/a10_stage2/sqrt/labels_plan.json (frozen pull spec)",
+        "sha256": "b8f9deee7cb32c624810ce5413d2b25c5a2aaf298fde98d572a470254979dc0a",
+        "use": "the launch's sealed manifest; job counts, phases, M and fv_tables only"
+      },
+      "labels_seed_check": {
+        "record": "stage2_prep/labels/SEED_CHECK.json, 2026-11-12 UTC",
+        "sha256": "a6dd9fac959333f3f8d77bac4a3e4f3c580703757ed02b9cee05183fe5a83c48",
+        "use": "registry membership and no-collision results for the 2,925 stream seeds"
+      },
+      "rehearsal_approval_labels": {
+        "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved_labels.json",
+        "sha256": "ca1eaf615c341acead01220c86f6b0b1dc8506bf31884b5c68a1d23637f65199",
+        "draft_sha256": "c6d3a1dcfe8fe37b3c50bf155e4df84832dd0429c26cc4adbd4c5c2e0e4ea5c9",
+        "use": "toy labels pull-route rehearsal results bound to code_hash 93a453b2"
+      },
+      "stage2_seed_history_addendum_2": {
+        "record": "v3/runs/registered/A10_stage2_seed_history_addendum_2.json",
+        "sha256": "5c2dd8bf0667568fd6a8934e87894b8484064cb262acd5d32b61c4f7840ee947",
+        "seal": "32d6de35b080ada13e9eed95ff519b00a532bad3755fa5ec5e126b36bd4fdc68",
+        "use": "the 105 seeds round L introduced (qualification 40, rehearsal 3, configuration 62); 4 toy seeds already in the history are listed apart"
       }
     },
     "revision": {
-      "number": 11,
-      "supersedes_payload_sha256": "962dff59e0f6e47bce71d86894f071f66490a037cfc9c630456b1e107fdb82d1",
-      "supersedes_commit": "18ec7c28",
-      "reason": "Approved by the operator on 2026-11-11 (\"go ahead\"). Binds the join-time configuration and rate segment of the sqrt original validation (A17 section 2(c), the operator-approved join-time reading; five per-phase configuration tests at the join, all before the first registered job), records that launch's outcome (4,277 of 4,277, no drain, 109.98 X2-equivalent hours), and closes its admission (dispatch_admissible false; no launch bound). Corrects the per_class_capacities reason, which still said no workload kinds or load sheet were approved. Qualification records, approved_workload_kinds, load sheets, service entry and host fields unchanged."
+      "number": 12,
+      "supersedes_payload_sha256": "8fa109842ddc274df9cc3a5a3993845597a1b47b5eb58572f3a31261350113de",
+      "supersedes_commit": "4279bba0",
+      "reason": "Approved by the operator on 2026-11-12 (\"Go ahead\"). Binds the a5_fvplain launch-identity qualification (evidence 25f905dc, 20 of 20), adds a5_fvplain to approved_workload_kinds, binds load sheet version 3, records seed history addendum 2, and admits the sqrt A5 labels launch (spec b8f9deee, seal 60eed2eb, root labels_run, 2,925 jobs, wall 70 h). Revisions 9 and 11 (the estimation and validation segments and closed admissions), the service entry and the host fields are unchanged."
     },
-    "approved_workload_kinds_note": "table at code identity 93a453b2 on the launch-identity qualification approved in revision 8 (evidence 8522d594); a4_fit, a4_validate and a4_census at the same identity on the launch-identity qualification approved in revision 10 (evidence d829ff1a). Other kinds are added only by their own launches' qualification records.",
+    "approved_workload_kinds_note": "table at code identity 93a453b2 on the launch-identity qualification approved in revision 8 (evidence 8522d594); a4_fit, a4_validate and a4_census at the same identity on the qualification approved in revision 10 (evidence d829ff1a); a5_fvplain at the same identity on the qualification approved in revision 12 (evidence 25f905dc). Other kinds are added only by their own launches' qualification records.",
     "dispatch_admission": {
-      "launch": null,
-      "reason": "No launch is bound. The revision 10 admission covered only the sqrt original validation, which completed at 2026-11-12T03:23Z, 22:23 EST on 2026-11-11 (prior_dispatch_admissions). A further launch on this unit needs its own dispatch binding, load sheet and go in a later revision."
+      "launch": "the sqrt A5 labels (A16 item 5, A5 under the strict labels policy for sqrt), pull route on X2-1 alone, normal mode, --model-service none",
+      "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+      "commit": "9f3cf240d8b8290310369d63f9d6f3e7976fc4a0",
+      "spec": {
+        "path": "v3/runs/a10_stage2/sqrt/labels_plan.json",
+        "file_sha256": "b8f9deee7cb32c624810ce5413d2b25c5a2aaf298fde98d572a470254979dc0a",
+        "payload_sha256": "60eed2eb459729c4300f9e34aa8a2ab7fac3c03acda6daef82c701a63ffb29ed",
+        "plan_hash": "e81d4fce8e126956a05c7e1582ed42a40a535e94206c7ee29cd600725df654c4",
+        "jobs": 2925,
+        "fv_tables": 975,
+        "replicates": 3,
+        "M": 41675,
+        "probe_seed_count": 855,
+        "wall_seconds": 252000,
+        "declared_wall_hours": 70,
+        "x2_equivalent_hours": 70,
+        "registration_pin": {
+          "commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
+          "note_sha256": "a99f228c770f01092e6c84978a4f6a73397a746c83df36b3c13de756f2500554"
+        },
+        "a4_family": {
+          "path": "v3/runs/a10_stage2/sqrt/v3_rerun_tables_A10.json",
+          "file_sha256": "c375a300e17fc4618747861b0f533d80e73e0a5d3b8f860f7c514494cfd53c3e",
+          "table_seal_sha256": "943c009831e315204bfe38c7e9c1b8e96d17eec82ae0ac93c5d38bcac1812cd4",
+          "identity_record": {
+            "path": "simulation/v3/runs/a10_stage2/sqrt/family_identity.json",
+            "file_sha256": "ecf7e731ecb4bcf06e2c9378e5622d408b9ee3409f31e20e43f23c150b9937cc",
+            "commit": "9f3cf240"
+          }
+        }
+      },
+      "launch_root": "v3/runs/a10_stage2/sqrt/labels_run",
+      "root_identity": {
+        "spec_hash": "60eed2eb459729c4300f9e34aa8a2ab7fac3c03acda6daef82c701a63ffb29ed",
+        "code_hash": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+        "prepared_utc": "2026-11-12T04:21Z",
+        "identity_file_sha256": "20c75e40085768a03a54f2f14d7320014428d086a340298fb88011cd74b25d20",
+        "contents": "identity, manifest (bytes equal to the spec), context_preflight (55 contexts passed), pull_state (not started), runner.lock; no outputs, no machine register entry"
+      },
+      "seed_check": "all 2,925 stream seeds in the committed registry's a5_streams sqrt entry (4,125; faa4273a), none in the seed history (ec40a9ec) or addendum 1 (779de370), no reserved-range hit (A13, A14, A16, A5), zero collisions against the A13 and A14 global inventories and plan forbidden sets, pairwise distinct (stage2_prep/labels/SEED_CHECK.json, sha256 a6dd9fac959333f3f8d77bac4a3e4f3c580703757ed02b9cee05183fe5a83c48)",
+      "all_four_records_condition": "A17 section 2: bind (a) post-update fixed-code requalification, (b) bit identity at the launch identity for every kind the host will run, (c) join-time configuration and rates, (d) its own load sheet",
+      "records": {
+        "a_post_update_fixed_code": "accepted and operator-approved 2026-10-31 (qualification_records.post_update_fixed_code)",
+        "b_launch_identity_qualification": "bound in qualification_records.launch_identity_a5_kinds for a5_fvplain (evidence 25f905dc); approved by the operator with this revision",
+        "c_join_time_configuration_and_rates": "at join: the launch records the phase's configuration test and its rate segment at the host's join (A17 section 2(c)); rate 1.0 against the X2-1 reference by same-host identity",
+        "d_load_sheet": "version 3 bound in operating_rules.approved_load_sheet (sha256 807e1fda408f3fc9670f4e20757a91a1b9c26b0e5b1d97fe24e7c9fc30b91b96); approved by the operator with this revision"
+      },
+      "dress_rehearsal": {
+        "passed": true,
+        "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved_labels.json, signed in the operator's name at the go",
+        "record_sha256": "ca1eaf615c341acead01220c86f6b0b1dc8506bf31884b5c68a1d23637f65199",
+        "draft_record_sha256": "c6d3a1dcfe8fe37b3c50bf155e4df84832dd0429c26cc4adbd4c5c2e0e4ea5c9",
+        "check_sha256": "d7efce5a8a8d795d14e2441e4edbbafcac72e63af22dd1ac95aba828ea4cab57",
+        "note": "toy labels on the pull route at 93a453b2, 2026-11-12 UTC: toy A4 publication from round 5's V1, toy identity, 3 a5_fvplain jobs, configuration test (31 chosen), recheck matched, toy labels publish and finalize_receipt with 16 of 16 receipt checks; 21 of 21 criteria. Limitation: the toy FV table had no tested rows (M = 0), so label classification ran on an empty tested set; classification on a non-empty set is covered by the unit suite, not by this rehearsal"
+      },
+      "satisfied_at_go": [
+        "operator approval of the a5_fvplain qualification record and of load sheet version 3 (this revision)",
+        "the A15 ledger reservation: 70 h of the c^0.5 labels allowance",
+        "seed history addendum 2 for the round L qualification, rehearsal and configuration seeds, committed record-only with this revision",
+        "the operator-signed rehearsal approval record for the labels pull route at 93a453b2",
+        "the root's machine-register approval and the launch go"
+      ],
+      "remaining_at_join": [
+        "(c) the join-time configuration test and rate segment, measured before any registered job and copied into the next revision"
+      ]
     },
     "prior_dispatch_admissions": [
       {
@@ -1688,10 +1912,10 @@
   "seal": {
     "algorithm": "sha256",
     "serialization": "UTF-8 JSON, sorted keys, separators comma and colon without whitespace, ensure_ascii=true, no NaN, no trailing newline; hash the payload object only",
-    "payload_sha256": "8fa109842ddc274df9cc3a5a3993845597a1b47b5eb58572f3a31261350113de"
+    "payload_sha256": "163e694dd266ebbc22aaaa65dd8f5735fb6f3793d88b23fde7c796761d9f1d0d"
   },
   "operator_approval": {
-    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-11.md section 1: the operator's approval of 2026-11-11 (\"go ahead\") of this register revision 11, payload digest 8fa109842ddc274df9cc3a5a3993845597a1b47b5eb58572f3a31261350113de: the sqrt original validation's join-time configuration and rate segment (A17 section 2(c)), the launch outcome, the closed admission and the per_class_capacities correction. Prior approvals in force: revisions 8 to 10 (DECISIONS_2026-11-06 section 5, DECISIONS_2026-11-07 sections 1 and 3) and the 2026-10-31 fixed-code requalification.",
-    "reason": "A record revision: no launch, admission or resource change."
+    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-12.md section 1: the operator's approval of 2026-11-12 (\"Go ahead\") of this register revision 12, payload digest 163e694dd266ebbc22aaaa65dd8f5735fb6f3793d88b23fde7c796761d9f1d0d: the a5_fvplain qualification record (evidence 25f905dc1eccafe874eec582e8d5afa032624196f42666dbce21ecd3117629ce), approved_workload_kinds, load sheet version 3 (807e1fda408f3fc9670f4e20757a91a1b9c26b0e5b1d97fe24e7c9fc30b91b96) and dispatch admission for the bound sqrt A5 labels launch. Prior approvals in force: revisions 8 to 11 and the 2026-10-31 fixed-code requalification.",
+    "reason": "Register approval, the launch go, the rehearsal approval and the root's machine-register approval remain distinct records."
   }
 }
