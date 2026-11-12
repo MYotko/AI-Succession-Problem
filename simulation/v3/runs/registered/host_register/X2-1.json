@@ -2,10 +2,10 @@
   "schema": "lineage-a17-sealed-host-entry-v1",
   "payload": {
     "schema": "lineage-a17-host-payload-v1",
-    "record_date": "2026-11-07",
+    "record_date": "2026-11-11",
     "unit_name": "X2-1",
     "host_class": "X2",
-    "record_status": "Revision 10, approved by the operator, Matt Yotko, 2026-11-07 (\"approved, launch it\"); recorded in a19_2026-11-04/DECISIONS_2026-11-07.md section 3. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594) and a4_fit, a4_validate and a4_census (this revision, evidence d829ff1a); approved_workload_kinds lists all four. Load sheet version 2 bound for the sqrt original validation. dispatch_admissible true for that launch only. The sqrt estimation's join segment and outcome (revision 9) are unchanged. Service entry and bound host fields as revision 7.",
+    "record_status": "Revision 11, approved by the operator, Matt Yotko, 2026-11-11 (\"go ahead\"); recorded in a19_2026-11-04/DECISIONS_2026-11-11.md section 1. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594) and a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a); approved_workload_kinds lists all four. The sqrt original estimation (revision 9) and the sqrt original validation (this revision) completed; their join-time configuration and rate segments are bound in rates.approved_rate_segments. dispatch_admissible false: no launch is bound. Service entry and bound host fields as revision 7.",
     "scope": "A17 initial register; option C campaign remains X2-1 only",
     "cpu": {
       "available_cpu_budget": 32,
@@ -776,7 +776,7 @@
       "designation_is_measured_rate": false,
       "measured_participation_rate": {
         "value": null,
-        "reason": "X2-1 is the reference host; its rate is 1.0 by designation. The sqrt estimation join segment (approved_rate_segments) records the configuration test and the sustained rate; a relative participation rate is measured only against another host."
+        "reason": "X2-1 is the reference host; its rate is 1.0 by designation. The sqrt estimation and sqrt validation join segments (approved_rate_segments) record the configuration tests and the sustained rates; a relative participation rate is measured only against another host."
       },
       "measured_per_class_rates": {
         "value": null,
@@ -907,19 +907,491 @@
             "check_done.log (stage2_prep/launch)": "3a352fccb4977d4071bcee25f0187a08cab4cdea955314e712a398c9968b1797",
             "copies": "Lineage v3 records, stage2_launch_2026-11-06/completion_2026-11-07"
           }
+        },
+        {
+          "status": "approved by the operator, Matt Yotko, 2026-11-11 (\"go ahead\"); recorded in a19_2026-11-04/DECISIONS_2026-11-11.md section 1",
+          "record": "A17 section 2(c), join-time configuration and rates, under the operator-approved join-time reading of 2026-11-06 (a19_2026-11-04/DECISIONS_2026-11-06.md section 5)",
+          "launch": "sqrt original validation (A16 item 5, A4 five phases), pull route, X2-1 alone, normal mode, --model-service none",
+          "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+          "spec_payload_sha256": "48fde2687b489fbecdae1f54cb6db898cc6709fda63d243563c27f685dd63678",
+          "launch_root": "v3/runs/a10_stage2/sqrt/validation_run",
+          "execution_checkout_commit": "18ec7c28b87c936d09747fa1d4d83fa608d756bc",
+          "session": "ecedaac44f524f7185d9626bcb390ac5",
+          "joined_epoch": 1794057938.7064567,
+          "joined_utc": "2026-11-07T13:25:38.70Z",
+          "configuration": {
+            "per_phase": {
+              "fit": {
+                "trial_class": "trial:e0280d2ff5b73d08b28698637e28552eb6014d3d7a5d3d93f8e154f0f99e1873",
+                "trial_peak_gb": 0.559,
+                "elapsed_seconds": 125.031,
+                "planning_seconds": 1800,
+                "worker_seconds": 2332.7,
+                "record_written_utc": "2026-11-07T13:28:21.12Z",
+                "trials": [
+                  {
+                    "workers": 8,
+                    "requested_workers": 8,
+                    "threads": 1,
+                    "completed": 16,
+                    "valid": true,
+                    "wall_seconds": 17.9645,
+                    "jobs_per_hour": 3206.3
+                  },
+                  {
+                    "workers": 12,
+                    "requested_workers": 12,
+                    "threads": 1,
+                    "completed": 24,
+                    "valid": true,
+                    "wall_seconds": 17.4532,
+                    "jobs_per_hour": 4950.4
+                  },
+                  {
+                    "workers": 16,
+                    "requested_workers": 16,
+                    "threads": 1,
+                    "completed": 32,
+                    "valid": true,
+                    "wall_seconds": 19.3319,
+                    "jobs_per_hour": 5959.1
+                  },
+                  {
+                    "workers": 24,
+                    "requested_workers": 24,
+                    "threads": 1,
+                    "completed": 48,
+                    "valid": true,
+                    "wall_seconds": 30.273,
+                    "jobs_per_hour": 5708.1
+                  },
+                  {
+                    "workers": 31,
+                    "requested_workers": 31,
+                    "threads": 1,
+                    "completed": 62,
+                    "valid": true,
+                    "wall_seconds": 39.4219,
+                    "jobs_per_hour": 5661.8
+                  }
+                ],
+                "chosen": {
+                  "workers": 16,
+                  "threads": 1,
+                  "jobs_per_hour": 5959.1
+                },
+                "choice_rule": "highest measured throughput"
+              },
+              "validate_plain": {
+                "trial_class": "trial:514b111fe72fb403e81ec3cc6c3f08bdf24ca31b21aa2bd87a433e6ee1331c87",
+                "trial_peak_gb": 0.576,
+                "elapsed_seconds": 243.655,
+                "planning_seconds": 1800,
+                "worker_seconds": 4764.3,
+                "record_written_utc": "2026-11-07T14:02:55.29Z",
+                "trials": [
+                  {
+                    "workers": 8,
+                    "requested_workers": 8,
+                    "threads": 1,
+                    "completed": 16,
+                    "valid": true,
+                    "wall_seconds": 35.0349,
+                    "jobs_per_hour": 1644.1
+                  },
+                  {
+                    "workers": 12,
+                    "requested_workers": 12,
+                    "threads": 1,
+                    "completed": 24,
+                    "valid": true,
+                    "wall_seconds": 33.6725,
+                    "jobs_per_hour": 2565.9
+                  },
+                  {
+                    "workers": 16,
+                    "requested_workers": 16,
+                    "threads": 1,
+                    "completed": 32,
+                    "valid": true,
+                    "wall_seconds": 37.5186,
+                    "jobs_per_hour": 3070.5
+                  },
+                  {
+                    "workers": 24,
+                    "requested_workers": 24,
+                    "threads": 1,
+                    "completed": 48,
+                    "valid": true,
+                    "wall_seconds": 58.9279,
+                    "jobs_per_hour": 2932.4
+                  },
+                  {
+                    "workers": 31,
+                    "requested_workers": 31,
+                    "threads": 1,
+                    "completed": 62,
+                    "valid": true,
+                    "wall_seconds": 77.8766,
+                    "jobs_per_hour": 2866.1
+                  }
+                ],
+                "chosen": {
+                  "workers": 16,
+                  "threads": 1,
+                  "jobs_per_hour": 3070.5
+                },
+                "choice_rule": "highest measured throughput"
+              },
+              "validate_fv_primary": {
+                "trial_class": "trial:9445294006523095c3bd2559d71eea42ce11b99b7cc05338bfbe424a6adc9aa9",
+                "trial_peak_gb": 1.97,
+                "elapsed_seconds": 606.06,
+                "planning_seconds": 1800,
+                "worker_seconds": 12161.0,
+                "record_written_utc": "2026-11-07T13:58:51.26Z",
+                "trials": [
+                  {
+                    "workers": 8,
+                    "requested_workers": 8,
+                    "threads": 1,
+                    "completed": 16,
+                    "valid": true,
+                    "wall_seconds": 89.4369,
+                    "jobs_per_hour": 644.0
+                  },
+                  {
+                    "workers": 12,
+                    "requested_workers": 12,
+                    "threads": 1,
+                    "completed": 24,
+                    "valid": true,
+                    "wall_seconds": 85.0826,
+                    "jobs_per_hour": 1015.5
+                  },
+                  {
+                    "workers": 16,
+                    "requested_workers": 16,
+                    "threads": 1,
+                    "completed": 32,
+                    "valid": true,
+                    "wall_seconds": 93.3961,
+                    "jobs_per_hour": 1233.5
+                  },
+                  {
+                    "workers": 24,
+                    "requested_workers": 24,
+                    "threads": 1,
+                    "completed": 48,
+                    "valid": true,
+                    "wall_seconds": 146.3848,
+                    "jobs_per_hour": 1180.5
+                  },
+                  {
+                    "workers": 31,
+                    "requested_workers": 31,
+                    "threads": 1,
+                    "completed": 62,
+                    "valid": true,
+                    "wall_seconds": 191.1341,
+                    "jobs_per_hour": 1167.8
+                  }
+                ],
+                "chosen": {
+                  "workers": 16,
+                  "threads": 1,
+                  "jobs_per_hour": 1233.5
+                },
+                "choice_rule": "highest measured throughput"
+              },
+              "validate_fv_double_population": {
+                "trial_class": "trial:0d29d6ef94fa3cab2e824a1ef5a137c3426e391d37fc1b23d355d2039a970113",
+                "trial_peak_gb": 3.833,
+                "elapsed_seconds": 1220.002,
+                "planning_seconds": 1800,
+                "worker_seconds": 21449.2,
+                "record_written_utc": "2026-11-07T13:48:44.74Z",
+                "trials": [
+                  {
+                    "workers": 8,
+                    "requested_workers": 8,
+                    "threads": 1,
+                    "completed": 16,
+                    "valid": true,
+                    "wall_seconds": 180.4785,
+                    "jobs_per_hour": 319.2
+                  },
+                  {
+                    "workers": 12,
+                    "requested_workers": 12,
+                    "threads": 1,
+                    "completed": 24,
+                    "valid": true,
+                    "wall_seconds": 168.9741,
+                    "jobs_per_hour": 511.3
+                  },
+                  {
+                    "workers": 16,
+                    "requested_workers": 16,
+                    "threads": 1,
+                    "completed": 32,
+                    "valid": true,
+                    "wall_seconds": 188.2465,
+                    "jobs_per_hour": 612.0
+                  },
+                  {
+                    "workers": 24,
+                    "requested_workers": 24,
+                    "threads": 1,
+                    "completed": 48,
+                    "valid": true,
+                    "wall_seconds": 293.9751,
+                    "jobs_per_hour": 587.8
+                  },
+                  {
+                    "workers": 25,
+                    "requested_workers": 31,
+                    "threads": 1,
+                    "completed": 62,
+                    "valid": true,
+                    "wall_seconds": 387.7019,
+                    "jobs_per_hour": 575.7
+                  }
+                ],
+                "chosen": {
+                  "workers": 16,
+                  "threads": 1,
+                  "jobs_per_hour": 612.0
+                },
+                "choice_rule": "highest measured throughput"
+              },
+              "census": {
+                "trial_class": "trial:74d5028fddaf7a2294fa6577e2069772f248cdccb9a5539c42cf55240cab91e5",
+                "trial_peak_gb": 0.177,
+                "elapsed_seconds": 30.315,
+                "planning_seconds": 1800,
+                "worker_seconds": 354.1,
+                "record_written_utc": "2026-11-07T13:26:12.66Z",
+                "trials": [
+                  {
+                    "workers": 8,
+                    "requested_workers": 8,
+                    "threads": 1,
+                    "completed": 16,
+                    "valid": true,
+                    "wall_seconds": 4.2341,
+                    "jobs_per_hour": 13603.9
+                  },
+                  {
+                    "workers": 12,
+                    "requested_workers": 12,
+                    "threads": 1,
+                    "completed": 24,
+                    "valid": true,
+                    "wall_seconds": 4.4349,
+                    "jobs_per_hour": 19482.0
+                  },
+                  {
+                    "workers": 16,
+                    "requested_workers": 16,
+                    "threads": 1,
+                    "completed": 32,
+                    "valid": true,
+                    "wall_seconds": 5.1078,
+                    "jobs_per_hour": 22553.9
+                  },
+                  {
+                    "workers": 24,
+                    "requested_workers": 24,
+                    "threads": 1,
+                    "completed": 48,
+                    "valid": true,
+                    "wall_seconds": 7.0525,
+                    "jobs_per_hour": 24501.9
+                  },
+                  {
+                    "workers": 31,
+                    "requested_workers": 31,
+                    "threads": 1,
+                    "completed": 62,
+                    "valid": true,
+                    "wall_seconds": 8.8933,
+                    "jobs_per_hour": 25097.7
+                  }
+                ],
+                "chosen": {
+                  "workers": 24,
+                  "threads": 1,
+                  "jobs_per_hour": 24501.9
+                },
+                "choice_rule": "24 workers measured 2.4 percent below the best (31 workers, 25097.7 jobs per hour), within the 5 percent preference for the smaller configuration"
+              }
+            },
+            "started_epoch": 1794057939.1112385,
+            "finished_epoch": 1794060175.378471,
+            "started_utc": "2026-11-07T13:25:39.11Z",
+            "finished_utc": "2026-11-07T14:02:55.37Z",
+            "elapsed_seconds": 2236.3,
+            "planning_seconds": 1800,
+            "within_planning_target": false,
+            "planning_note": "the five tests took 2236.3 s against the 1,800 s planning target; a planning target, not a limit (AGENTS.md, pre-launch configuration test), and nothing was cut short",
+            "caveat": "each trial runs short jobs of its phase's kind (fit 5.3 to 19.3 s, validate_plain 11.0 to 38.1 s, validate_fv_primary 29.5 to 96.0 s, validate_fv_double_population 51.6 to 166.8 s, census 1.3 to 2.9 s), so the test measures short-burst scaling and trial memory, not sustained contention or the full jobs' peaks; the sustained figures below are the run itself",
+            "entered_results": false
+          },
+          "first_registered_job_started_epoch": 1794060186.511,
+          "first_registered_job_started_utc": "2026-11-07T14:03:06.51Z",
+          "ordering": "all five configuration tests ran at the host's join and finished at 2026-11-07T14:02:55.37Z (configuration_planning.json). No registered job ran before the segment: host_a11 runs every configuration test and reports 'configured' before its job loop takes any scientific work, and the earliest start implied by a completion record (completed_epoch minus worker_seconds, a fit job) is 2026-11-07T14:03:06.51Z, 11.1 s later. An implied start can lag the true start by the publication delay, so the code order is the binding evidence and the records agree with it.",
+          "relative_throughput": 1.0,
+          "rate_basis": "X2-1 is the reference host, rate 1.0 by designation; it was the only host, so no relative rate was measured",
+          "sustained": {
+            "completed_jobs": 4277,
+            "nondeterminism_rechecks": 5,
+            "wall_hours": 109.966,
+            "jobs_per_hour": 38.89,
+            "worker_hours": 1378.89,
+            "mean_concurrency": 12.54,
+            "charged_x2_equivalent_hours": 109.9655,
+            "note": "worker_hours sums the 4,277 completion records' worker_seconds; it excludes the five rechecks and the configuration trials. The session's own worker-second total is 4968388."
+          },
+          "measured_by_phase": {
+            "fit": {
+              "route": "plain",
+              "jobs": 429,
+              "chosen_workers": 16,
+              "window_utc": [
+                "2026-11-07T14:03:06.51Z",
+                "2026-11-07T20:08:15.70Z"
+              ],
+              "wall_hours": 6.086,
+              "jobs_per_hour": 70.49,
+              "worker_hours": 96.29,
+              "mean_concurrency": 15.82,
+              "peak_rss_gb_max": 2.825,
+              "peak_rss_gb_median": 1.406,
+              "frozen_reservation_gb_max": 3.773,
+              "seconds_median": 750,
+              "seconds_mean": 808,
+              "seconds_max": 1625
+            },
+            "validate_plain": {
+              "route": "plain",
+              "jobs": 1287,
+              "chosen_workers": 16,
+              "window_utc": [
+                "2026-11-07T20:14:18.77Z",
+                "2026-11-08T14:24:53.35Z"
+              ],
+              "wall_hours": 18.176,
+              "jobs_per_hour": 70.81,
+              "worker_hours": 289.91,
+              "mean_concurrency": 15.95,
+              "peak_rss_gb_max": 3.216,
+              "peak_rss_gb_median": 1.609,
+              "frozen_reservation_gb_max": 3.773,
+              "seconds_median": 751,
+              "seconds_mean": 811,
+              "seconds_max": 1644
+            },
+            "validate_fv_primary": {
+              "route": "fv",
+              "jobs": 975,
+              "chosen_workers": 16,
+              "window_utc": [
+                "2026-11-08T14:30:49.02Z",
+                "2026-11-11T06:02:48.38Z"
+              ],
+              "wall_hours": 63.533,
+              "jobs_per_hour": 15.35,
+              "worker_hours": 821.95,
+              "mean_concurrency": 12.94,
+              "peak_rss_gb_max": 6.323,
+              "peak_rss_gb_median": 5.69,
+              "frozen_reservation_gb_max": 7.54,
+              "seconds_median": 2988,
+              "seconds_mean": 3035,
+              "seconds_max": 3697
+            },
+            "validate_fv_double_population": {
+              "route": "fv",
+              "jobs": 91,
+              "chosen_workers": 16,
+              "window_utc": [
+                "2026-11-11T06:27:48.05Z",
+                "2026-11-12T02:13:40.25Z"
+              ],
+              "wall_hours": 19.764,
+              "jobs_per_hour": 4.6,
+              "worker_hours": 164.27,
+              "mean_concurrency": 8.31,
+              "peak_rss_gb_max": 12.524,
+              "peak_rss_gb_median": 12.439,
+              "frozen_reservation_gb_max": 15.079,
+              "seconds_median": 6595,
+              "seconds_mean": 6499,
+              "seconds_max": 7949
+            },
+            "census": {
+              "route": "plain",
+              "jobs": 1495,
+              "chosen_workers": 24,
+              "window_utc": [
+                "2026-11-12T02:51:14.47Z",
+                "2026-11-12T03:23:25.58Z"
+              ],
+              "wall_hours": 0.536,
+              "jobs_per_hour": 2786.99,
+              "worker_hours": 6.47,
+              "mean_concurrency": 12.05,
+              "peak_rss_gb_max": 0.258,
+              "peak_rss_gb_median": 0.159,
+              "frozen_reservation_gb_max": 15.079,
+              "seconds_median": 15,
+              "seconds_mean": 16,
+              "seconds_max": 42
+            }
+          },
+          "measured_note": "Every phase's largest observed peak is below its load sheet version 2 frozen reservation. Mean concurrency was below the chosen worker count in FV primary (12.94 of 16), FV double population (8.31 of 16) and census (12.05 of 24). Inferred, not separately recorded: memory admission against the per-job reservations held FV primary and FV double population there (load sheet version 2 projected 13 for FV primary), and census jobs of about 15 s also limit concurrency through dispatch. The configuration trials' memory understates the full jobs' peaks (FV double population trials 3.83 GB, full jobs 12.52 GB at most). The gaps between the last job of one phase and the first job of the next were 6.1, 5.9, 25.0, 37.6 minutes, in phase order; they hold the runner's phase-change work and are not broken down here. Observations for later load sheets, not a capacity binding.",
+          "sources": {
+            "launches.json": "4fa126bdbdbbb7798ca18c879092413403d958eba3236171513f0e2f84e1c23b",
+            "status.json": "2e47ba2b654b420b60f1f0a42974ff0630b5a553fa02c28e7be97945d3469e1c",
+            "identity.json": "f4bd47db12e66b6c738d7a49ba8ca1ef384309a3e9add93ffa1eaaa70b66a9ec",
+            "host_x2/host_session.json": "77f33d019c3af6d40f38058f9787ae669874ebb9941d7d0371523603780f8a16",
+            "host_x2/configuration_planning.json": "6273b1b6fe0a753b95069fca37fb83569fab2008590569766e5dc8ca74929cd0",
+            "host_x2/host_exit.json": "c5f9dbec3779d00e151d8ab58b15e33c7cd3af33d699fee0e6972bbf0a21fde7",
+            "host_x2/service.json": "00d65a77425e4412307734cb87013fdc9fe5a6e0e9d83d832fb9d1f2b6b61ea6",
+            "host_x2/swap_preflight.json": "293eeab5ab10b1734f95aaa388d169cf6bf102a553aa33335fdf108013dc760f",
+            "host_x2/configuration/ecedaac44f524f7185d9626bcb390ac5/<phase>.json": {
+              "fit": "ba2743d164e991fba246cce2483cf794d3f881b8d5ef3a2882d7f1d4e39d2b23",
+              "validate_plain": "7f35e39fcb21b30a51804a597704ff92a7694d9c49edeae2e04777e52f0447fe",
+              "validate_fv_primary": "5ab86d6adfeb8a9d260f373aab59d3543d2de470246a161fcd38ed6b9ad1867a",
+              "validate_fv_double_population": "01e7847bb8d9ccd78aae1ae1ec24b44d68676758c095e6646113ee9c372d3b4b",
+              "census": "8ca952f39f177d7166141726294235f22d3c3598dbb23cd3638d5b4043501ec0"
+            },
+            "<phase>/nondeterminism_check.json": {
+              "fit": "62dafff2a666daaa4fffd8b109afc259a802a8aa05954c6e8ef175c5b1062225",
+              "validate_plain": "a28342bf5dbc82132691a8a77077a2d3bf80867d9f84c203cf5b73fe85c46c40",
+              "validate_fv_primary": "f28ae39c8473ae0dc56ce7bddad08b5bf6c32d4ce1da8699b4408a5c8daa53c5",
+              "validate_fv_double_population": "0e1ac0f1d45d5e6bdc3fc047ad860e005bc22e7f5ddb351e8157d9489ad9f8e7",
+              "census": "30f3697fd8354f2a3306762c42a477f037470a4cb50e40e799894078574bc9b4"
+            },
+            "verified_output_hashes.json": "0e2de3acb5bac5a3441d92959c5ec95c120919e5b8448df2949a9afcd05e1e54",
+            "check_done_validation.log (stage2_prep/check_done_validation.out)": "cb3979220e3a0507aa4d49315e22a3b516dca1eefea00fed2dff90c5c0bc4b9f",
+            "validation_segment_stats.json (completion records' metadata only: times, worker_seconds, peak_rss_bytes, route)": "95712e544f34ac861f91b4b318f834bc00fc1a3dd7602633786024d099d71664",
+            "copies": "Lineage v3 records, stage2_validation_2026-11-07/completion_2026-11-12"
+          }
         }
       ]
     },
     "per_class_capacities": {
       "value": null,
-      "reason": "No approved workload kinds or live-memory launch load sheet yet; compute only after the per-class reservations and current MemAvailable are bound."
+      "reason": "Not bound at register level. Each launch's capacities are carried by its own approved load sheet (version 1 for the sqrt estimation, version 2 for the sqrt validation); the measured peaks are in approved_rate_segments. A register-level capacity would need its own measured and approved record."
     },
     "private_transport_mapping": {
       "value": null,
       "reason": "No private endpoint mapping is supplied for public staging; resolve privately without changing public unit identity."
     },
-    "dispatch_admissible": true,
-    "admission_reason": "Admissible for the launch bound in dispatch_admission only: the sqrt original validation at 93a453b2 on the pull route, X2-1 alone, wall 400 h. (a), (b) and (d) are bound and approved; (c) is measured at the host's join, before any registered job, under the operator-approved reading of A17 section 2(c) of 2026-11-06. Not an admission for any other launch, kind or identity.",
+    "dispatch_admissible": false,
+    "admission_reason": "Not admissible: no launch is bound. The revision 10 admission was for the sqrt original validation only, and that launch completed at 2026-11-12T03:23Z, 22:23 EST on 2026-11-11.",
     "evidence": {
       "preparation_report": {
         "record": "X2-1 requalification preparation report, 2026-10-30",
@@ -1066,69 +1538,15 @@
       }
     },
     "revision": {
-      "number": 10,
-      "supersedes_payload_sha256": "7822f38d34fb8dae139e24a6e838212ef1d3ddaba891099e63699bd7af388072",
-      "supersedes_commit": "6388ea5e",
-      "reason": "Approved by the operator on 2026-11-07 (\"approved, launch it\"). Binds the a4-kind launch-identity qualification (evidence d829ff1a), adds a4_fit, a4_validate and a4_census to approved_workload_kinds, binds load sheet version 2, records the seed history addendum, and admits the sqrt original validation launch (spec 681830a8, seal 48fde268, root validation_run, wall 400 h). Also restates in the payload the 2026-10-31 approval of the post-update requalification, and corrects three evidence descriptions carried from revisions 7 and 8 that still described the signed estimation rehearsal record and the committed seed registry and history as drafts. The estimation's join segment, the service entry and the host fields are unchanged."
+      "number": 11,
+      "supersedes_payload_sha256": "962dff59e0f6e47bce71d86894f071f66490a037cfc9c630456b1e107fdb82d1",
+      "supersedes_commit": "18ec7c28",
+      "reason": "Approved by the operator on 2026-11-11 (\"go ahead\"). Binds the join-time configuration and rate segment of the sqrt original validation (A17 section 2(c), the operator-approved join-time reading; five per-phase configuration tests at the join, all before the first registered job), records that launch's outcome (4,277 of 4,277, no drain, 109.98 X2-equivalent hours), and closes its admission (dispatch_admissible false; no launch bound). Corrects the per_class_capacities reason, which still said no workload kinds or load sheet were approved. Qualification records, approved_workload_kinds, load sheets, service entry and host fields unchanged."
     },
     "approved_workload_kinds_note": "table at code identity 93a453b2 on the launch-identity qualification approved in revision 8 (evidence 8522d594); a4_fit, a4_validate and a4_census at the same identity on the launch-identity qualification approved in revision 10 (evidence d829ff1a). Other kinds are added only by their own launches' qualification records.",
     "dispatch_admission": {
-      "launch": "the sqrt original validation (A16 item 5, A4 five phases), pull route on X2-1 alone, normal mode, --model-service none",
-      "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
-      "commit": "7032168b27396c6cb03ae8807d5a3844d70779de",
-      "spec": {
-        "path": "v3/runs/a10_stage2/sqrt/validation_plan.json",
-        "file_sha256": "681830a811f9bee5f6a49b55f0a56a812316b9e8d21e3987c3ad2247aa6844af",
-        "payload_sha256": "48fde2687b489fbecdae1f54cb6db898cc6709fda63d243563c27f685dd63678",
-        "plan_hash": "874e126021415d6b68fb2d513e4dc379b1f7588815ec29c5379fd1f6cb0ba9c5",
-        "jobs": 4277,
-        "wall_seconds": 1440000,
-        "x2_equivalent_hours": 400,
-        "M": 37501,
-        "M_FV": 67537,
-        "probe_seed_count": 855,
-        "registration_pin": {
-          "commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
-          "note_sha256": "a99f228c770f01092e6c84978a4f6a73397a746c83df36b3c13de756f2500554"
-        },
-        "source_family": {
-          "path": "v3/runs/a10_stage2/sqrt/source/v3_rerun_tables_A1.json",
-          "file_sha256": "2f496ce0695e6370d3a305e344596f641eed730e5cae76873ace9587837fdf1d",
-          "payload_sha256": "2c6a39132e67f0d221e4cd47d5685f721f64fee0a5821512df2ed69afd13b5fa"
-        }
-      },
-      "launch_root": "v3/runs/a10_stage2/sqrt/validation_run",
-      "root_identity": {
-        "spec_hash": "48fde2687b489fbecdae1f54cb6db898cc6709fda63d243563c27f685dd63678",
-        "code_hash": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
-        "prepared_utc": "2026-11-07T12:52Z",
-        "contents": "identity, manifest, context_preflight (55 contexts passed), pull_state (not started), runner.lock; no outputs, no machine register entry"
-      },
-      "seed_check": "every stream seed of the 4,277 jobs is in the committed registry's a4_streams sqrt entry (faa4273a), none in the seed history (ec40a9ec), no reserved-range hit, zero collisions against the A13 and A14 global inventories and plan forbidden sets (stage2_prep/validation/SEED_CHECK.json)",
-      "all_four_records_condition": "A17 section 2: bind (a) post-update fixed-code requalification, (b) bit identity at the launch identity for every kind the host will run, (c) join-time configuration and rates, (d) its own load sheet",
-      "records": {
-        "a_post_update_fixed_code": "accepted and operator-approved 2026-10-31 (qualification_records.post_update_fixed_code)",
-        "b_launch_identity_qualification": "bound in qualification_records.launch_identity_a4_kinds for a4_fit, a4_validate and a4_census (evidence d829ff1a); approved by the operator 2026-11-07 with this revision; the table record of revision 8 is not needed by this launch",
-        "c_join_time_configuration_and_rates": "at join: the launch records each phase's configuration test and its rate segment at the host's join (A17 section 2(c)); rate 1.0 against the X2-1 reference by same-host identity",
-        "d_load_sheet": "version 2 bound in operating_rules.approved_load_sheet (sha256 7bb0e0a2466f2073043472f7a79a738239386e1b333f5afdcf43d7aad8df8e8f); approved by the operator 2026-11-07"
-      },
-      "dress_rehearsal": {
-        "passed": true,
-        "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved_validation.json, signed in the operator's name at the go",
-        "record_sha256": "c0bbf37412699f72ec0683a0f2c44cbd062c72c3190cc813d6dad3d61167b66d",
-        "check_sha256": "b98577832f03c7f86e1c02340245020099af3bfc8b358d4fc5a045b36699aa2c",
-        "note": "V0 toy estimation (6 jobs) and V1 toy validation (21 jobs, five phases, five rechecks) completed on the pull route at 93a453b2 on 2026-11-07; reviewed by the interpreter; signed at the go"
-      },
-      "satisfied_at_go": [
-        "operator approval of the a4-kind launch-identity qualification record and of load sheet version 2 (this revision)",
-        "the A15 ledger reservation: 400 h of the c^0.5 validation allowance; stage 2 consumed plus outstanding 523.96 of 1,880 h",
-        "the seed history addendum for the round 5 qualification and rehearsal seeds, committed record-only with this revision",
-        "the operator-signed rehearsal approval record for the validation pull route at 93a453b2",
-        "the root's machine-register approval and the launch go (operator, 2026-11-07, \"approved, launch it\")"
-      ],
-      "remaining_at_join": [
-        "(c) the join-time configuration tests and rate segment for each phase, measured before any registered job and copied into the next revision"
-      ]
+      "launch": null,
+      "reason": "No launch is bound. The revision 10 admission covered only the sqrt original validation, which completed at 2026-11-12T03:23Z, 22:23 EST on 2026-11-11 (prior_dispatch_admissions). A further launch on this unit needs its own dispatch binding, load sheet and go in a later revision."
     },
     "prior_dispatch_admissions": [
       {
@@ -1185,16 +1603,95 @@
           "service": "model_service none, actions skipped; llm-server inactive and disabled before and after; guppi-thermal-feed untouched",
           "remaining_at_join_satisfied_by": "rates.approved_rate_segments, the sqrt original estimation segment (this revision)"
         }
+      },
+      {
+        "launch": "the sqrt original validation (A16 item 5, A4 five phases), pull route on X2-1 alone, normal mode, --model-service none",
+        "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+        "commit": "7032168b27396c6cb03ae8807d5a3844d70779de",
+        "spec": {
+          "path": "v3/runs/a10_stage2/sqrt/validation_plan.json",
+          "file_sha256": "681830a811f9bee5f6a49b55f0a56a812316b9e8d21e3987c3ad2247aa6844af",
+          "payload_sha256": "48fde2687b489fbecdae1f54cb6db898cc6709fda63d243563c27f685dd63678",
+          "plan_hash": "874e126021415d6b68fb2d513e4dc379b1f7588815ec29c5379fd1f6cb0ba9c5",
+          "jobs": 4277,
+          "wall_seconds": 1440000,
+          "x2_equivalent_hours": 400,
+          "M": 37501,
+          "M_FV": 67537,
+          "probe_seed_count": 855,
+          "registration_pin": {
+            "commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
+            "note_sha256": "a99f228c770f01092e6c84978a4f6a73397a746c83df36b3c13de756f2500554"
+          },
+          "source_family": {
+            "path": "v3/runs/a10_stage2/sqrt/source/v3_rerun_tables_A1.json",
+            "file_sha256": "2f496ce0695e6370d3a305e344596f641eed730e5cae76873ace9587837fdf1d",
+            "payload_sha256": "2c6a39132e67f0d221e4cd47d5685f721f64fee0a5821512df2ed69afd13b5fa"
+          }
+        },
+        "launch_root": "v3/runs/a10_stage2/sqrt/validation_run",
+        "root_identity": {
+          "spec_hash": "48fde2687b489fbecdae1f54cb6db898cc6709fda63d243563c27f685dd63678",
+          "code_hash": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+          "prepared_utc": "2026-11-07T12:52Z",
+          "contents": "identity, manifest, context_preflight (55 contexts passed), pull_state (not started), runner.lock; no outputs, no machine register entry"
+        },
+        "seed_check": "every stream seed of the 4,277 jobs is in the committed registry's a4_streams sqrt entry (faa4273a), none in the seed history (ec40a9ec), no reserved-range hit, zero collisions against the A13 and A14 global inventories and plan forbidden sets (stage2_prep/validation/SEED_CHECK.json)",
+        "all_four_records_condition": "A17 section 2: bind (a) post-update fixed-code requalification, (b) bit identity at the launch identity for every kind the host will run, (c) join-time configuration and rates, (d) its own load sheet",
+        "records": {
+          "a_post_update_fixed_code": "accepted and operator-approved 2026-10-31 (qualification_records.post_update_fixed_code)",
+          "b_launch_identity_qualification": "bound in qualification_records.launch_identity_a4_kinds for a4_fit, a4_validate and a4_census (evidence d829ff1a); approved by the operator 2026-11-07 with this revision; the table record of revision 8 is not needed by this launch",
+          "c_join_time_configuration_and_rates": "at join: the launch records each phase's configuration test and its rate segment at the host's join (A17 section 2(c)); rate 1.0 against the X2-1 reference by same-host identity",
+          "d_load_sheet": "version 2 bound in operating_rules.approved_load_sheet (sha256 7bb0e0a2466f2073043472f7a79a738239386e1b333f5afdcf43d7aad8df8e8f); approved by the operator 2026-11-07"
+        },
+        "dress_rehearsal": {
+          "passed": true,
+          "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved_validation.json, signed in the operator's name at the go",
+          "record_sha256": "c0bbf37412699f72ec0683a0f2c44cbd062c72c3190cc813d6dad3d61167b66d",
+          "check_sha256": "b98577832f03c7f86e1c02340245020099af3bfc8b358d4fc5a045b36699aa2c",
+          "note": "V0 toy estimation (6 jobs) and V1 toy validation (21 jobs, five phases, five rechecks) completed on the pull route at 93a453b2 on 2026-11-07; reviewed by the interpreter; signed at the go"
+        },
+        "satisfied_at_go": [
+          "operator approval of the a4-kind launch-identity qualification record and of load sheet version 2 (this revision)",
+          "the A15 ledger reservation: 400 h of the c^0.5 validation allowance; stage 2 consumed plus outstanding 523.96 of 1,880 h",
+          "the seed history addendum for the round 5 qualification and rehearsal seeds, committed record-only with this revision",
+          "the operator-signed rehearsal approval record for the validation pull route at 93a453b2",
+          "the root's machine-register approval and the launch go (operator, 2026-11-07, \"approved, launch it\")"
+        ],
+        "remaining_at_join": [
+          "(c) the join-time configuration tests and rate segment for each phase, measured before any registered job and copied into the next revision"
+        ],
+        "outcome": {
+          "complete": true,
+          "completed_jobs": 4277,
+          "completed_by_phase": {
+            "validate_fv_primary": 975,
+            "census": 1495,
+            "validate_fv_double_population": 91,
+            "fit": 429,
+            "validate_plain": 1287
+          },
+          "deadline_drain": null,
+          "reason": null,
+          "launched_utc": "2026-11-07T13:25:36.71Z",
+          "finished_utc": "2026-11-12T03:23:35.05Z",
+          "finished_epoch": 1794453815.0539787,
+          "charged_x2_equivalent_hours": 109.98,
+          "ledger": "a10_stage2_operations_ledger.md, reconciliation of 2026-11-12",
+          "completion_check": "check_done_validation.py passed with no problems; all five phase rechecks matched; verified_output_hashes.json 0e2de3acb5bac5a3441d92959c5ec95c120919e5b8448df2949a9afcd05e1e54; outputs digest f876b64257b43a607fe2fc5fa5ccb904b782d23004b8b9ab87637196784727e2",
+          "service": "model_service none, actions skipped; llm-server inactive and disabled before and after; guppi-thermal-feed untouched (the same process throughout)",
+          "remaining_at_join_satisfied_by": "rates.approved_rate_segments, the sqrt original validation segment (this revision)"
+        }
       }
     ]
   },
   "seal": {
     "algorithm": "sha256",
     "serialization": "UTF-8 JSON, sorted keys, separators comma and colon without whitespace, ensure_ascii=true, no NaN, no trailing newline; hash the payload object only",
-    "payload_sha256": "962dff59e0f6e47bce71d86894f071f66490a037cfc9c630456b1e107fdb82d1"
+    "payload_sha256": "8fa109842ddc274df9cc3a5a3993845597a1b47b5eb58572f3a31261350113de"
   },
   "operator_approval": {
-    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-07.md section 3: the operator's approval of 2026-11-07 (\"approved, launch it\") of this register revision 10, payload digest 962dff59e0f6e47bce71d86894f071f66490a037cfc9c630456b1e107fdb82d1: the a4-kind launch-identity qualification record (evidence d829ff1a40d98708614528bb237a35ffd4f5d7a2e65073661324c645bb022078), approved_workload_kinds, load sheet version 2 (7bb0e0a2466f2073043472f7a79a738239386e1b333f5afdcf43d7aad8df8e8f) and dispatch admission for the bound sqrt original validation launch. Prior approvals in force: revisions 8 and 9 (DECISIONS_2026-11-06 section 5, DECISIONS_2026-11-07 section 1) and the 2026-10-31 fixed-code requalification.",
-    "reason": "The operator approved the package and gave the launch go together. Register approval, the launch go, the rehearsal approval and the root's machine-register approval remain distinct records."
+    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-11.md section 1: the operator's approval of 2026-11-11 (\"go ahead\") of this register revision 11, payload digest 8fa109842ddc274df9cc3a5a3993845597a1b47b5eb58572f3a31261350113de: the sqrt original validation's join-time configuration and rate segment (A17 section 2(c)), the launch outcome, the closed admission and the per_class_capacities correction. Prior approvals in force: revisions 8 to 10 (DECISIONS_2026-11-06 section 5, DECISIONS_2026-11-07 sections 1 and 3) and the 2026-10-31 fixed-code requalification.",
+    "reason": "A record revision: no launch, admission or resource change."
   }
 }
