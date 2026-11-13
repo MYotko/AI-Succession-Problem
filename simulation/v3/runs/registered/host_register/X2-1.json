@@ -5,7 +5,7 @@
     "record_date": "2026-11-13",
     "unit_name": "X2-1",
     "host_class": "X2",
-    "record_status": "Revision 14, approved by the operator, Matt Yotko, 2026-11-13 (\"approve 30f15a42\"); recorded in a19_2026-11-04/DECISIONS_2026-11-13.md section 5. dispatch_admissible true for the sqrt runs launch only. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594), a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a), a5_fvplain (revision 12, evidence 25f905dc), and rerun (this revision, evidence 8d919541). Load sheet version 4 bound for the sqrt runs. The sqrt estimation, validation and labels join segments (revisions 9, 11 and 13) are unchanged. Service entry and bound host fields as revision 7.",
+    "record_status": "Revision 15, approved by the operator, Matt Yotko, 2026-11-13 (\"Approved, go ahead with 1 to 5\"); recorded in a19_2026-11-04/DECISIONS_2026-11-13.md section 6. dispatch_admissible true for the sqrt runs launch on the new root only. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594), a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a), a5_fvplain (revision 12, evidence 25f905dc) and rerun (revision 14, evidence 8d919541). Load sheet version 4 bound for the sqrt runs. The sqrt runs admission moves to root v3/runs/a10_stage2/runs/sqrt (this revision); the first attempt on v3/runs/a10_stage2/sqrt/runs_run failed at the host's join and is recorded in dispatch_admission.prior_attempts. The sqrt estimation, validation and labels join segments (revisions 9, 11 and 13) are unchanged. Service entry and bound host fields as revision 7.",
     "scope": "A17 initial register; option C campaign remains X2-1 only",
     "cpu": {
       "available_cpu_budget": 32,
@@ -1779,7 +1779,7 @@
       "reason": "No private endpoint mapping is supplied for public staging; resolve privately without changing public unit identity."
     },
     "dispatch_admissible": true,
-    "admission_reason": "Admissible for the launch bound in dispatch_admission only: the sqrt runs at 93a453b2 on the pull route, X2-1 alone, wall 8 h. (a), (b) and (d) are bound and approved; (c) is measured at the host's join, before any registered job, under the operator-approved reading of A17 section 2(c) of 2026-11-06. Not an admission for any other launch, arm, kind or identity.",
+    "admission_reason": "Admissible for the launch bound in dispatch_admission only: the sqrt runs at 93a453b2 on the pull route, X2-1 alone, root v3/runs/a10_stage2/runs/sqrt (moved by this revision from v3/runs/a10_stage2/sqrt/runs_run, whose attempt failed at the host's join), wall 8 h. (a), (b) and (d) are bound and approved; (c) is measured at the host's join, before any registered job, under the operator-approved reading of A17 section 2(c) of 2026-11-06. Not an admission for any other launch, arm, kind, root or identity.",
     "evidence": {
       "preparation_report": {
         "record": "X2-1 requalification preparation report, 2026-10-30",
@@ -2009,13 +2009,49 @@
         "sha256": "9838d57dd389b22712e8a1cdeaa1cd859ffbc86ac105e295fa0b5a860ba1ae66",
         "seal": "0b796baa76be22c882606e0f9ac0644f22302e96e7852a887b5e171bfc1b3e4d",
         "use": "the 174 seeds round R introduced (qualification 44, rehearsal 6, configuration 124); none reused"
+      },
+      "runs_attempt_1_failure_report": {
+        "record": "Lineage v3 records, stage2_runs_2026-11-13/launch_2026-11-13/REPORT.md",
+        "sha256": "8e6a91d704e218e1f9022690357ad92605ec7e674d321effdaa8d073ddddd811",
+        "use": "the failed first attempt: frames and classes, state, no job run"
+      },
+      "runs_recovery_report": {
+        "record": "Lineage v3 records, stage2_runs_2026-11-13/recovery_2026-11-13/REPORT.md",
+        "sha256": "aab2377cf4f8daf0f57f9609e9650b6423455e87900d78f8df0718cf852044a3",
+        "use": "the new root, the protection check and the regression test"
+      },
+      "runs_root_protection_check": {
+        "record": "stage2_prep/runs_recovery/PROTECTION_CHECK.json",
+        "sha256": "33285a2670b8c30a1457166062906ceaae1b1e720f217fad6003e6dbfcdb93c5",
+        "use": "the new root lies outside the protected folders"
+      },
+      "runs_attempt_1_drain_record": {
+        "record": "stage2_prep/runs_recovery/STEP1_DRAIN_RECORD.json",
+        "sha256": "6529f5b3605e0d8d010ab36166accc79fa0036a2bcbfc60f60bbbe27360f56fb",
+        "use": "the drain stop's rc, the closed launch record and the failed root's launches, host-exit and machine-register hashes"
+      },
+      "snapshot_views_protected": {
+        "record": "stage2_prep/runs_recovery/SNAPSHOT_VIEWS_PROTECTED.json",
+        "sha256": "1459bc74c8dc9f2f339f270a3f3340735b8301d9bad67632b85fe06cca24430b",
+        "use": "the protected folders of the labels launch's two views and the failed runs view (metadata only)"
+      },
+      "runs_regression_test_check": {
+        "record": "v3/_stage2_prep/rehearsal_r2/CHECK.json",
+        "sha256": "b40e48ebf072336cfacc59a5595cd43e85e32e596e11c46e973b8064bdf68bce",
+        "use": "case A refused, case B completed"
+      },
+      "stage2_seed_history_addendum_4": {
+        "record": "v3/runs/registered/A10_stage2_seed_history_addendum_4.json",
+        "sha256": "9be80025f92ee09ff2e0e0c6f432fbac2323402943f9c9a823b3c61d6907f0f3",
+        "seal": "f9e229561edf8e2e0d94b43cedbda4cff311a5b23a6eff953b4e7a33ec121e46",
+        "use": "the 130 seeds the regression test introduced (rehearsal 6, configuration 124); none reused"
       }
     },
     "revision": {
-      "number": 14,
-      "supersedes_payload_sha256": "665785a53eb15bc764b8b97b7293bbf9b12e56c3b76dc31401e499ad9a0b8bbb",
-      "supersedes_commit": "bf5cf5b0",
-      "reason": "Approved by the operator on 2026-11-13 (\"approve 30f15a42\"). Binds the rerun launch-identity qualification (evidence 8d919541, 44 of 44 at full length, one job per cell), adds rerun to approved_workload_kinds, binds load sheet version 4, records seed history addendum 3, and admits the sqrt runs launch (spec runs_plan.json 0110cd0b, seal e0561cbb, root runs_run, 4,400 jobs, wall 8 h). Revisions 9, 11 and 13 (the estimation, validation and labels segments and closed admissions), the service entry and the host fields are unchanged."
+      "number": 15,
+      "supersedes_payload_sha256": "76d52666803313ffb716d1f30ddeaef9f2c3f39f8ebf6528d3021c30df87b7f2",
+      "supersedes_commit": "2df91384",
+      "reason": "Approved by the operator on 2026-11-13 (\"Approved, go ahead with 1 to 5\"). Moves the sqrt runs admission from v3/runs/a10_stage2/sqrt/runs_run to v3/runs/a10_stage2/runs/sqrt after the first attempt failed at the host's join: the root lay inside the family folder that the input snapshot protects. Records that attempt (no job run; drain-stopped; 0.28 X2-equivalent hours charged), the new root's identity and its protection check, the toy regression test (case A refused, case B completed) and seed history addendum 4. The spec, code identity, qualification, load sheet, seeds and wall are unchanged."
     },
     "approved_workload_kinds_note": "table at code identity 93a453b2 on the launch-identity qualification approved in revision 8 (evidence 8522d594); a4_fit, a4_validate and a4_census at the same identity on the qualification approved in revision 10 (evidence d829ff1a); a5_fvplain at the same identity on the qualification approved in revision 12 (evidence 25f905dc); rerun at the same identity on the qualification approved in revision 14 (evidence 8d919541). Other kinds are added only by their own launches' qualification records.",
     "dispatch_admission": {
@@ -2104,13 +2140,15 @@
         },
         "note": "the registered builder (tables_a10 stage2-runs) writes all four arms together, 9,800 jobs, each arm's seeds equal to its registry entry; built and sealed on the operator's approval of 2026-11-13 (DECISIONS_2026-11-13 section 3). Only the sqrt arm is admitted here; each other arm launches only after its own family publishes, with its own go"
       },
-      "launch_root": "v3/runs/a10_stage2/sqrt/runs_run",
+      "launch_root": "v3/runs/a10_stage2/runs/sqrt",
       "root_identity": {
         "spec_hash": "e0561cbb83049e14d9d750830537349626392191c8e5693a9a9f5e50ee501839",
         "code_hash": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
-        "prepared_utc": "2026-11-13T20:02Z",
+        "prepared_utc": "2026-11-13T21:44:12Z",
         "identity_file_sha256": "f1d17da571e671b13fb9f2bf4f17abf0f1a9cc97cae4f8c61142ecebe878deec",
-        "contents": "identity, manifest (bytes equal to the spec), context_preflight (43 contexts passed), pull_state (not started), runner.lock; no outputs, no machine register entry"
+        "contents": "identity (byte-identical to the failed root's), manifest (bytes equal to the spec), context_preflight (43 contexts passed; file 4bdefd09, equal to the failed root's), pull_state (7a76ec78; not started), runner.lock; no outputs, no machine register entry",
+        "outside_protected_folders": "the failed attempt's snapshot view protected v3/runs/a10_stage2/sqrt and v3/runs/registered; the new root and its configuration, record and output paths lie under neither, by Path.is_relative_to and by the real artifacts.input_path under that view (PROTECTION_CHECK.json, sha256 33285a2670b8c30a1457166062906ceaae1b1e720f217fad6003e6dbfcdb93c5). The relaunch builds its own view from the same input files, so its protected list should be the same (inferred)",
+        "summary_sha256": "5e028809de7c68ff1db135b54100ed10ad2838a20f96a5b7b01a86c520df4089"
       },
       "seed_check": "all 4,400 seeds in the committed registry's runs sqrt entry (4,400; faa4273a) and set-equal to it, none in the seed history (ec40a9ec) or addenda 1 (779de370) and 2 (5c2dd8bf), none in another registry group, no reserved-range hit (A13, A14, A16, registry), zero collisions against the A13 and A14 global inventories and plan forbidden sets, pairwise distinct (stage2_prep/runs/SEED_CHECK.json, sha256 2c70da40a0fc6203d59517d1d2b8737a4fab4ec7c10c5c35d07c5c508eafd0bb)",
       "before_gates": {
@@ -2127,9 +2165,9 @@
       "all_four_records_condition": "A17 section 2: bind (a) post-update fixed-code requalification, (b) bit identity at the launch identity for every kind the host will run, (c) join-time configuration and rates, (d) its own load sheet",
       "records": {
         "a_post_update_fixed_code": "accepted and operator-approved 2026-10-31 (qualification_records.post_update_fixed_code)",
-        "b_launch_identity_qualification": "bound in qualification_records.launch_identity_rerun_kind for rerun (evidence 8d919541); approved by the operator with this revision",
+        "b_launch_identity_qualification": "bound in qualification_records.launch_identity_rerun_kind for rerun (evidence 8d919541); approved by the operator with revision 14",
         "c_join_time_configuration_and_rates": "at join: the launch records the phase's configuration test and its rate segment at the host's join (A17 section 2(c)); rate 1.0 against the X2-1 reference by same-host identity",
-        "d_load_sheet": "version 4 bound in operating_rules.approved_load_sheet (sha256 d550fe79010b179eb089d4b0a49f95a44dfa1e700e4f01f1b4f3bb82148688bf); approved by the operator with this revision"
+        "d_load_sheet": "version 4 bound in operating_rules.approved_load_sheet (sha256 d550fe79010b179eb089d4b0a49f95a44dfa1e700e4f01f1b4f3bb82148688bf); approved by the operator with revision 14"
       },
       "dress_rehearsal": {
         "passed": true,
@@ -2142,18 +2180,58 @@
           "sha256": "600aa14f6bdfb9ab6909ade19a7cb267b485a77387d20bb288ccaaf8673467da",
           "second_check": "second-checked by the interpreter 2026-11-13; no repair needed"
         },
-        "note": "toy runs on the pull route at 93a453b2, 2026-11-13 UTC: six 20-step rerun jobs on round L's toy sqrt family, configuration test (16 chosen), recheck matched, check_done_runs.py passed; 23 of 23 criteria. Limitation: the toy jobs carry n_agents 64 and carrying_capacity 640 to match the toy family's contexts, and the toy family holds one rule, so the rehearsal exercises the route and the completion check, not a real run's table lookup. The qualification ran every one of the 44 cells at full length on the registered family, so it exercised that lookup (inferred: lookups are not recorded per job)"
+        "note": "toy runs on the pull route at 93a453b2, 2026-11-13 UTC: six 20-step rerun jobs on round L's toy sqrt family, configuration test (16 chosen), recheck matched, check_done_runs.py passed; 23 of 23 criteria. Limitation: the toy jobs carry n_agents 64 and carrying_capacity 640 to match the toy family's contexts, and the toy family holds one rule, so the rehearsal exercises the route and the completion check, not a real run's table lookup. The qualification ran every one of the 44 cells at full length on the registered family, so it exercised that lookup (inferred: lookups are not recorded per job)",
+        "regression_test": {
+          "purpose": "show through the real coordinator and host_a11 --local that a root inside a table's folder is refused at the join and a root beside it passes (DECISIONS_2026-11-13 section 6, step 3)",
+          "toy_spec_sha256": "50e837a163d3de2443d9f194d1e3b17cc6162848ecd00557b3a53751e9dba493",
+          "toy_family_folder": "v3/_stage2_prep/rehearsal_r2/famdir (byte copies of round L's toy family)",
+          "case_a": {
+            "root": "v3/_stage2_prep/rehearsal_r2/famdir/root_inside",
+            "outcome": "host left at the join after 0.33 s; the set of v3 frames equals the failed launch's exactly (artifacts.py:30 via production_runner completed; production_runner.py:541 via configuration_test); drain-stopped, launch record closed operator_stop_drain",
+            "record_sha256": "96e3e40abcb7d10104771a4e074dcd5ee56cc2652b5821a27c0c9b22c79a0b1b",
+            "stop_record_sha256": "874396bb75fa3ebaced06c152b68398cdde814f8686ee7b18b2253bc6550cfbe"
+          },
+          "case_b": {
+            "root": "v3/_stage2_prep/rehearsal_r2/root_beside",
+            "outcome": "complete: 6 of 6 jobs, configuration test valid (24 chosen), recheck matched, no tracebacks, check_done_runs.py passed (6 verified)"
+          },
+          "check_sha256": "b40e48ebf072336cfacc59a5595cd43e85e32e596e11c46e973b8064bdf68bce",
+          "check_disposition": "CHECK.json records B.all_pass and regression_test_passed false. Its one false criterion, failed_root_listing_unchanged, concerns the -shm mtime of the abandoned failed root, moved by a read-only state read (the executor's inference); it is not about the code under test. The interpreter's disposition, recorded in DECISIONS_2026-11-13 (interpreter dispositions in the recovery): the test passed, with every toy criterion true"
+        }
       },
       "satisfied_at_go": [
-        "operator approval of the rerun qualification record and of load sheet version 4 (this revision)",
+        "operator approval of the rerun qualification record and of load sheet version 4 (revision 14)",
         "the A15 ledger reservation: 8 h of the c^0.5 runs allowance",
-        "seed history addendum 3 for the round R qualification, rehearsal and configuration seeds, committed record-only with this revision",
+        "seed history addendum 3 for the round R qualification, rehearsal and configuration seeds, committed record-only with revision 14",
         "the operator-signed rehearsal approval record for the run pull route at 93a453b2",
-        "the root's machine-register approval and the launch go"
+        "the new root's machine-register approval and the relaunch go",
+        "the toy regression test of the input-protection layout: case A refused at the join as the failed launch was, case B completed (this revision)",
+        "seed history addendum 4 for the regression test's seeds, committed record-only with this revision"
       ],
       "remaining_at_join": [
         "(c) the join-time configuration test and rate segment, measured before any registered job and copied into the next revision"
-      ]
+      ],
+      "prior_attempts": [
+        {
+          "root": "v3/runs/a10_stage2/sqrt/runs_run",
+          "launched_utc": "2026-11-13T21:28:22Z",
+          "launch_epoch": 1794605302.6954565,
+          "finished_utc": "2026-11-13T21:39:52Z",
+          "finished_epoch": 1794605992.3178024,
+          "outcome": "the one host left 0.95 s after joining (session 21:28:24.26Z to 21:28:25.21Z, end_reason left): every worker of the first configuration trial r0_w8_t1 raised ValueError at artifacts.py:30 (input_path), and the host raised RuntimeError at production_runner.py:541 via configuration_test. No job was leased; no record, no output. Launch record closed by the supported drain stop (production_runner control --stop drain, the operator's approval, DECISIONS_2026-11-13 section 6), reason operator_stop_drain, complete false",
+          "cause": "snapshot_a11.py:227 protects the parent folder of every job input outside the snapshot; a run's inputs include the family files in v3/runs/a10_stage2/sqrt/, so that folder was protected, and artifacts.py:29 refuses any unlisted path under it. The root, and with it the host scratch and the record folders, lay inside it. The labels root in the same folder was unaffected: the labels launch's two snapshot views protected v3/runs/a10_stage2/sqrt/source and below, v3/runs/a10_stage2/inputs/exclusions/a3_probe and below, and v3/runs/registered, never v3/runs/a10_stage2/sqrt itself, while the failed runs view protected v3/runs/a10_stage2/sqrt and v3/runs/registered (read from the views, SNAPSHOT_VIEWS_PROTECTED.json). The preparation plan chose the root path; the round R rehearsal and qualification kept their roots outside their table folders, so neither could show it (inferred)",
+          "launches_json_sha256": "c3dc36d54761aa1f59a374858ab00d8ae3bea4b7637c156c74dc23d3bfd1ea1a",
+          "machine_register_entry_sha256": "7d47be1178ddfcf48237f2a660083fd92b3e8837fb4d615634220cc66ec8969c",
+          "host_exit_sha256": "740c1d7aa352c562e739548d23bb5e58a55c39adaf0971293175dfc845c15502",
+          "session_charge_x2_equivalent_hours": 0.00026,
+          "ledger_charge_x2_equivalent_hours": 0.28,
+          "ledger_note": "the launch executor's whole session to the drain end, charged conservatively (a10_stage2_operations_ledger.md, attempt 1 of the sqrt runs); the 8 h reservation stays held for the relaunch",
+          "custody": "the root is kept as it stood, not deleted. In the recovery round the executor's read-only state read moved the mtime of its dispatch.sqlite-shm (the executor's inference; sizes and every other entry unchanged), a write outside that brief's scope, disposed of as immaterial in DECISIONS_2026-11-13 (interpreter dispositions in the recovery)",
+          "report_sha256": "8e6a91d704e218e1f9022690357ad92605ec7e674d321effdaa8d073ddddd811",
+          "step1_record_sha256": "6529f5b3605e0d8d010ab36166accc79fa0036a2bcbfc60f60bbbe27360f56fb"
+        }
+      ],
+      "relaunch_note": "revision 15 moves the root only. The spec, code identity, qualification, load sheet, seeds and the 8 h wall are unchanged; the relaunch draws the same seeds as the failed attempt would have, since job seeds do not depend on the root path"
     },
     "prior_dispatch_admissions": [
       {
@@ -2379,10 +2457,10 @@
   "seal": {
     "algorithm": "sha256",
     "serialization": "UTF-8 JSON, sorted keys, separators comma and colon without whitespace, ensure_ascii=true, no NaN, no trailing newline; hash the payload object only",
-    "payload_sha256": "76d52666803313ffb716d1f30ddeaef9f2c3f39f8ebf6528d3021c30df87b7f2"
+    "payload_sha256": "f400a5160524cb3076cedde99c17c74f4ea73f946f771fc733ec73cb31d3ff9b"
   },
   "operator_approval": {
-    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-13.md section 5: the operator's approval of 2026-11-13 (\"approve 30f15a42\") of this register revision 14 (approved as draft payload 30f15a428099e1e506c4938a9be3e1437bb30f62068ab71331c6ce1fe67f228f), payload digest 76d52666803313ffb716d1f30ddeaef9f2c3f39f8ebf6528d3021c30df87b7f2: the rerun qualification record (evidence 8d9195419a40833d4c6ff695ac56f47441b29f97b5b561fdcf9be26b72dec13f), approved_workload_kinds, load sheet version 4 (d550fe79010b179eb089d4b0a49f95a44dfa1e700e4f01f1b4f3bb82148688bf) and dispatch admission for the bound sqrt runs launch. Prior approvals in force: revisions 8 to 13 and the 2026-10-31 fixed-code requalification.",
-    "reason": "Register approval, the launch go, the rehearsal approval and the root's machine-register approval remain distinct records."
+    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-13.md section 6: the operator's approval of 2026-11-13 (\"Approved, go ahead with 1 to 5\") of the recovery steps 1 to 5, which include this register revision 15, given before a draft existed; the draft that passed the second and final checks is payload 29ee4082beff6d4ae1d44406258d06c9565291fafa4d880c6d7a1442369c2061; payload digest f400a5160524cb3076cedde99c17c74f4ea73f946f771fc733ec73cb31d3ff9b: the sqrt runs admission moved to v3/runs/a10_stage2/runs/sqrt, the failed first attempt recorded, the regression test and seed history addendum 4. Prior approvals in force: revisions 8 to 14 and the 2026-10-31 fixed-code requalification.",
+    "reason": "Register approval, the relaunch go and the new root's machine-register approval remain distinct records."
   }
 }
