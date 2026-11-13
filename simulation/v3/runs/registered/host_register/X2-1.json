@@ -2,10 +2,10 @@
   "schema": "lineage-a17-sealed-host-entry-v1",
   "payload": {
     "schema": "lineage-a17-host-payload-v1",
-    "record_date": "2026-11-12",
+    "record_date": "2026-11-13",
     "unit_name": "X2-1",
     "host_class": "X2",
-    "record_status": "Revision 12, approved by the operator, Matt Yotko, 2026-11-12 (\"Go ahead\"); recorded in a19_2026-11-04/DECISIONS_2026-11-12.md section 1. dispatch_admissible true for the sqrt A5 labels launch only. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594), a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a), and a5_fvplain (this revision, evidence 25f905dc). Load sheet version 3 bound for the sqrt A5 labels. The sqrt estimation and validation join segments (revisions 9 and 11) are unchanged. Service entry and bound host fields as revision 7.",
+    "record_status": "Revision 13, approved by the operator, Matt Yotko, 2026-11-13 (\"approve 2bc6af0a\"); recorded in a19_2026-11-04/DECISIONS_2026-11-13.md section 2. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594), a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a), and a5_fvplain (revision 12, evidence 25f905dc); approved_workload_kinds lists all five. The sqrt original estimation (revision 9), the sqrt original validation (revision 11) and the sqrt A5 labels (this revision) completed; their join-time configuration and rate segments are bound in rates.approved_rate_segments. dispatch_admissible false: no launch is bound. Service entry and bound host fields as revision 7.",
     "scope": "A17 initial register; option C campaign remains X2-1 only",
     "cpu": {
       "available_cpu_budget": 32,
@@ -899,7 +899,7 @@
       "designation_is_measured_rate": false,
       "measured_participation_rate": {
         "value": null,
-        "reason": "X2-1 is the reference host; its rate is 1.0 by designation. The sqrt estimation and sqrt validation join segments (approved_rate_segments) record the configuration tests and the sustained rates; a relative participation rate is measured only against another host."
+        "reason": "X2-1 is the reference host; its rate is 1.0 by designation. The sqrt estimation, sqrt validation and sqrt A5 labels join segments (approved_rate_segments) record the configuration tests and the sustained rates; a relative participation rate is measured only against another host."
       },
       "measured_per_class_rates": {
         "value": null,
@@ -1502,19 +1502,164 @@
             "validation_segment_stats.json (completion records' metadata only: times, worker_seconds, peak_rss_bytes, route)": "95712e544f34ac861f91b4b318f834bc00fc1a3dd7602633786024d099d71664",
             "copies": "Lineage v3 records, stage2_validation_2026-11-07/completion_2026-11-12"
           }
+        },
+        {
+          "status": "approved by the operator, Matt Yotko, 2026-11-13 (\"approve 2bc6af0a\"); recorded in a19_2026-11-04/DECISIONS_2026-11-13.md section 2",
+          "record": "A17 section 2(c), join-time configuration and rates, under the operator-approved join-time reading of 2026-11-06 (a19_2026-11-04/DECISIONS_2026-11-06.md section 5)",
+          "launch": "sqrt A5 labels (A16 item 5, A5 under the strict labels policy for sqrt, kind a5_fvplain), pull route, X2-1 alone, normal mode, --model-service none",
+          "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+          "spec_payload_sha256": "60eed2eb459729c4300f9e34aa8a2ab7fac3c03acda6daef82c701a63ffb29ed",
+          "launch_root": "v3/runs/a10_stage2/sqrt/labels_run",
+          "execution_checkout_commit": "d16cb198bdf70df3729c6d5ad04e631194a6bab1",
+          "session": "e2472f7755844afdb57eb091f3fb0457",
+          "joined_epoch": 1794487235.3810108,
+          "joined_utc": "2026-11-12T12:40:35.38Z",
+          "configuration": {
+            "per_phase": {
+              "a5_fvplain": {
+                "trial_class": "trial:b91beeb7467e65e691831256f7e7467bc62e13a5266693c201b9d80a2bdb6079",
+                "trial_peak_gb": 0.554,
+                "elapsed_seconds": 124.639,
+                "planning_seconds": 1800,
+                "worker_seconds": 2323.2,
+                "record_written_utc": "2026-11-12T12:42:44.83Z",
+                "trials": [
+                  {
+                    "workers": 8,
+                    "requested_workers": 8,
+                    "threads": 1,
+                    "completed": 16,
+                    "valid": true,
+                    "wall_seconds": 17.7613,
+                    "jobs_per_hour": 3243.0
+                  },
+                  {
+                    "workers": 12,
+                    "requested_workers": 12,
+                    "threads": 1,
+                    "completed": 24,
+                    "valid": true,
+                    "wall_seconds": 17.5331,
+                    "jobs_per_hour": 4927.8
+                  },
+                  {
+                    "workers": 16,
+                    "requested_workers": 16,
+                    "threads": 1,
+                    "completed": 32,
+                    "valid": true,
+                    "wall_seconds": 19.3757,
+                    "jobs_per_hour": 5945.6
+                  },
+                  {
+                    "workers": 24,
+                    "requested_workers": 24,
+                    "threads": 1,
+                    "completed": 48,
+                    "valid": true,
+                    "wall_seconds": 29.8827,
+                    "jobs_per_hour": 5782.6
+                  },
+                  {
+                    "workers": 31,
+                    "requested_workers": 31,
+                    "threads": 1,
+                    "completed": 62,
+                    "valid": true,
+                    "wall_seconds": 39.32,
+                    "jobs_per_hour": 5676.5
+                  }
+                ],
+                "chosen": {
+                  "workers": 16,
+                  "threads": 1,
+                  "jobs_per_hour": 5945.6
+                },
+                "choice_rule": "highest measured throughput"
+              }
+            },
+            "started_epoch": 1794487236.2803912,
+            "finished_epoch": 1794487364.9985936,
+            "started_utc": "2026-11-12T12:40:36.28Z",
+            "finished_utc": "2026-11-12T12:42:44.99Z",
+            "elapsed_seconds": 128.7,
+            "planning_seconds": 1800,
+            "within_planning_target": true,
+            "planning_note": "the test took 128.7 s against the 1,800 s planning target; a planning target, not a limit (AGENTS.md, pre-launch configuration test), and nothing was cut short",
+            "caveat": "each trial runs short jobs of the kind (a5_fvplain 5.4 to 19.0 s), so the test measures short-burst scaling and trial memory, not sustained contention or the full jobs' peaks; the sustained figures below are the run itself",
+            "entered_results": false
+          },
+          "first_registered_job_started_epoch": 1794487392.084,
+          "first_registered_job_started_utc": "2026-11-12T12:43:12.08Z",
+          "ordering": "the configuration test ran at the host's join and finished at 2026-11-12T12:42:44.99Z (configuration_planning.json). No registered job ran before the segment: host_a11 runs every configuration test and reports 'configured' before its job loop takes any scientific work, and the earliest start implied by a completion record (completed_epoch minus worker_seconds) is 2026-11-12T12:43:12.08Z, 27.1 s later. An implied start can lag the true start by the publication delay, so the code order is the binding evidence and the records agree with it.",
+          "relative_throughput": 1.0,
+          "rate_basis": "X2-1 is the reference host, rate 1.0 by designation; it was the only host, so no relative rate was measured",
+          "sustained": {
+            "completed_jobs": 2925,
+            "nondeterminism_rechecks": 1,
+            "wall_hours": 28.869,
+            "jobs_per_hour": 101.32,
+            "worker_hours": 459.02,
+            "mean_concurrency": 15.9,
+            "charged_x2_equivalent_hours": 28.8683,
+            "note": "worker_hours sums the 2,925 completion records' worker_seconds; it excludes the recheck and the configuration trials. The session's own worker-second total is 1652710."
+          },
+          "measured_by_phase": {
+            "a5_fvplain": {
+              "route": "plain",
+              "jobs": 2925,
+              "chosen_workers": 16,
+              "window_utc": [
+                "2026-11-12T12:43:12.08Z",
+                "2026-11-13T17:28:35.49Z"
+              ],
+              "wall_hours": 28.757,
+              "jobs_per_hour": 101.72,
+              "worker_hours": 459.02,
+              "mean_concurrency": 15.96,
+              "peak_rss_gb_max": 1.968,
+              "peak_rss_gb_median": 1.781,
+              "frozen_reservation_gb_max": 1.998,
+              "seconds_median": 543,
+              "seconds_mean": 565,
+              "seconds_max": 805
+            }
+          },
+          "measured_note": "The largest observed peak, 1.968 GB, is below the load sheet version 3 frozen reservation of 1.998 GB (98.5 percent of it). Mean concurrency was 15.96 of the 16 chosen workers. Load sheet version 3 bound 21 at its 4.56 GB planning figure, a planning cap rather than a runner limit; the runner planned 31, conditional on the configuration choice (approved_load_sheet.workers). The configuration trials' memory understates the full jobs' peaks (trials 0.554 GB, full jobs 1.968 GB at most). Observations for later load sheets, not a capacity binding.",
+          "sources": {
+            "launches.json": "210e68f17667f8c733ea9659da91c4365b1f295cd4d972c74b29c878054a7b01",
+            "status.json": "89df5e5707a386f99014dc1b66f45beeff71ea2d5bcf0751ff65b6e875941c60",
+            "identity.json": "20c75e40085768a03a54f2f14d7320014428d086a340298fb88011cd74b25d20",
+            "budget.json": "8a6ac6f9b1bc81fa06c49890ad12230d0f84ac4e7f98b240d20d48540e66a733",
+            "host_x2/host_session.json": "7480bd46516f3361f73dc393fa97ce81fbda6297bd31286a293c6b4d5967993e",
+            "host_x2/configuration_planning.json": "a1de2d0272538f3eda8e9f50e3a484402f7026ab70f705daa3657d81e786ae0c",
+            "host_x2/host_exit.json": "857f41e5110aebd26d803443585deb916f4d17bf0d3392fe2cbc3b3f0c07c432",
+            "host_x2/service.json": "69d140a83db2b981e9d76b0ee69e75a6cfedb79b71608d392a400fd36e4c2daf",
+            "host_x2/swap_preflight.json": "1fd2c00ab9be4a83baecd53a84bc67c0bf285943a66d4141f82cd2753f6b1494",
+            "host_x2/configuration/e2472f7755844afdb57eb091f3fb0457/a5_fvplain.json": "b77c4cd496dd0f43bdb0ba59fb0272664928024863814d4ca4fd64285a588704",
+            "a5_fvplain/nondeterminism_check.json": "1ba5a9e9ee5e60c37b3e2822771ca805c8990723995eff0497232f0c791165b8",
+            "verified_output_hashes.json": "e93eec598ef844f73e6f090f20a7d4045148fd7b0c3a0db3ff52a43669d59954",
+            "check_done_labels.log (stage2_prep/labels/check_done_labels_2026-11-13.out)": "4ad3e48ee5ae02b54a12bec94e19e27a7dc21c3684701b8c11f0349627ad4995",
+            "check_done_labels.py (stage2_prep/scripts)": "4f5e72b047a0b92f74b656d9308c16c55d3555ed829aea0843f9e4e50e2efbf3",
+            "labels_segment_stats.json (completion records' metadata only: times, worker_seconds, peak_rss_bytes, route)": "f326e30b718e5f87a29a603a5c04c8bd498c892591c67f6ade5b77737c715d95",
+            "seg_stats_labels.py (the generator)": "91c35af74b1298d6cb5963cf4a540a35fe168911567104aa4ac88c598b9fce00",
+            "state_at_go.txt (stage2_prep/launch_labels)": "e07d917551360dd165db40482227304bfa8b7cf3e3afea0322cc1bd91706c5fc",
+            "state_after_run.txt (stage2_prep/labels_publish)": "7995079b48f058608d0a71b2b5224fdb938195b4374579a6203ce3895ae4d7dd",
+            "copies": "Lineage v3 records, stage2_labels_2026-11-11/completion_2026-11-13"
+          }
         }
       ]
     },
     "per_class_capacities": {
       "value": null,
-      "reason": "Not bound at register level. Each launch's capacities are carried by its own approved load sheet (version 1 for the sqrt estimation, version 2 for the sqrt validation); the measured peaks are in approved_rate_segments. A register-level capacity would need its own measured and approved record."
+      "reason": "Not bound at register level. Each launch's capacities are carried by its own approved load sheet (version 1 for the sqrt estimation, version 2 for the sqrt validation, version 3 for the sqrt A5 labels); the measured peaks are in approved_rate_segments. A register-level capacity would need its own measured and approved record."
     },
     "private_transport_mapping": {
       "value": null,
       "reason": "No private endpoint mapping is supplied for public staging; resolve privately without changing public unit identity."
     },
-    "dispatch_admissible": true,
-    "admission_reason": "Admissible for the launch bound in dispatch_admission only: the sqrt A5 labels at 93a453b2 on the pull route, X2-1 alone, wall 70 h. (a), (b) and (d) are bound and approved; (c) is measured at the host's join, before any registered job, under the operator-approved reading of A17 section 2(c) of 2026-11-06. Not an admission for any other launch, kind or identity.",
+    "dispatch_admissible": false,
+    "admission_reason": "Not admissible: no launch is bound. The revision 12 admission was for the sqrt A5 labels only, and that launch completed at 2026-11-13T17:32Z, 12:32 EST on 2026-11-13.",
     "evidence": {
       "preparation_report": {
         "record": "X2-1 requalification preparation report, 2026-10-30",
@@ -1699,78 +1844,15 @@
       }
     },
     "revision": {
-      "number": 12,
-      "supersedes_payload_sha256": "8fa109842ddc274df9cc3a5a3993845597a1b47b5eb58572f3a31261350113de",
-      "supersedes_commit": "4279bba0",
-      "reason": "Approved by the operator on 2026-11-12 (\"Go ahead\"). Binds the a5_fvplain launch-identity qualification (evidence 25f905dc, 20 of 20), adds a5_fvplain to approved_workload_kinds, binds load sheet version 3, records seed history addendum 2, and admits the sqrt A5 labels launch (spec b8f9deee, seal 60eed2eb, root labels_run, 2,925 jobs, wall 70 h). Revisions 9 and 11 (the estimation and validation segments and closed admissions), the service entry and the host fields are unchanged."
+      "number": 13,
+      "supersedes_payload_sha256": "163e694dd266ebbc22aaaa65dd8f5735fb6f3793d88b23fde7c796761d9f1d0d",
+      "supersedes_commit": "d16cb198",
+      "reason": "Approved by the operator on 2026-11-13 (\"approve 2bc6af0a\"). Binds the join-time configuration and rate segment of the sqrt A5 labels (A17 section 2(c), the operator-approved join-time reading; the a5_fvplain configuration test at the join, before the first registered job), records that launch's outcome (2,925 of 2,925, no drain, 28.88 X2-equivalent hours), and closes its admission (dispatch_admissible false; no launch bound). Corrects the per_class_capacities reason, which did not name load sheet version 3. Qualification records, approved_workload_kinds, load sheets, service entry and host fields unchanged."
     },
     "approved_workload_kinds_note": "table at code identity 93a453b2 on the launch-identity qualification approved in revision 8 (evidence 8522d594); a4_fit, a4_validate and a4_census at the same identity on the qualification approved in revision 10 (evidence d829ff1a); a5_fvplain at the same identity on the qualification approved in revision 12 (evidence 25f905dc). Other kinds are added only by their own launches' qualification records.",
     "dispatch_admission": {
-      "launch": "the sqrt A5 labels (A16 item 5, A5 under the strict labels policy for sqrt), pull route on X2-1 alone, normal mode, --model-service none",
-      "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
-      "commit": "9f3cf240d8b8290310369d63f9d6f3e7976fc4a0",
-      "spec": {
-        "path": "v3/runs/a10_stage2/sqrt/labels_plan.json",
-        "file_sha256": "b8f9deee7cb32c624810ce5413d2b25c5a2aaf298fde98d572a470254979dc0a",
-        "payload_sha256": "60eed2eb459729c4300f9e34aa8a2ab7fac3c03acda6daef82c701a63ffb29ed",
-        "plan_hash": "e81d4fce8e126956a05c7e1582ed42a40a535e94206c7ee29cd600725df654c4",
-        "jobs": 2925,
-        "fv_tables": 975,
-        "replicates": 3,
-        "M": 41675,
-        "probe_seed_count": 855,
-        "wall_seconds": 252000,
-        "declared_wall_hours": 70,
-        "x2_equivalent_hours": 70,
-        "registration_pin": {
-          "commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
-          "note_sha256": "a99f228c770f01092e6c84978a4f6a73397a746c83df36b3c13de756f2500554"
-        },
-        "a4_family": {
-          "path": "v3/runs/a10_stage2/sqrt/v3_rerun_tables_A10.json",
-          "file_sha256": "c375a300e17fc4618747861b0f533d80e73e0a5d3b8f860f7c514494cfd53c3e",
-          "table_seal_sha256": "943c009831e315204bfe38c7e9c1b8e96d17eec82ae0ac93c5d38bcac1812cd4",
-          "identity_record": {
-            "path": "simulation/v3/runs/a10_stage2/sqrt/family_identity.json",
-            "file_sha256": "ecf7e731ecb4bcf06e2c9378e5622d408b9ee3409f31e20e43f23c150b9937cc",
-            "commit": "9f3cf240"
-          }
-        }
-      },
-      "launch_root": "v3/runs/a10_stage2/sqrt/labels_run",
-      "root_identity": {
-        "spec_hash": "60eed2eb459729c4300f9e34aa8a2ab7fac3c03acda6daef82c701a63ffb29ed",
-        "code_hash": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
-        "prepared_utc": "2026-11-12T04:21Z",
-        "identity_file_sha256": "20c75e40085768a03a54f2f14d7320014428d086a340298fb88011cd74b25d20",
-        "contents": "identity, manifest (bytes equal to the spec), context_preflight (55 contexts passed), pull_state (not started), runner.lock; no outputs, no machine register entry"
-      },
-      "seed_check": "all 2,925 stream seeds in the committed registry's a5_streams sqrt entry (4,125; faa4273a), none in the seed history (ec40a9ec) or addendum 1 (779de370), no reserved-range hit (A13, A14, A16, A5), zero collisions against the A13 and A14 global inventories and plan forbidden sets, pairwise distinct (stage2_prep/labels/SEED_CHECK.json, sha256 a6dd9fac959333f3f8d77bac4a3e4f3c580703757ed02b9cee05183fe5a83c48)",
-      "all_four_records_condition": "A17 section 2: bind (a) post-update fixed-code requalification, (b) bit identity at the launch identity for every kind the host will run, (c) join-time configuration and rates, (d) its own load sheet",
-      "records": {
-        "a_post_update_fixed_code": "accepted and operator-approved 2026-10-31 (qualification_records.post_update_fixed_code)",
-        "b_launch_identity_qualification": "bound in qualification_records.launch_identity_a5_kinds for a5_fvplain (evidence 25f905dc); approved by the operator with this revision",
-        "c_join_time_configuration_and_rates": "at join: the launch records the phase's configuration test and its rate segment at the host's join (A17 section 2(c)); rate 1.0 against the X2-1 reference by same-host identity",
-        "d_load_sheet": "version 3 bound in operating_rules.approved_load_sheet (sha256 807e1fda408f3fc9670f4e20757a91a1b9c26b0e5b1d97fe24e7c9fc30b91b96); approved by the operator with this revision"
-      },
-      "dress_rehearsal": {
-        "passed": true,
-        "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved_labels.json, signed in the operator's name at the go",
-        "record_sha256": "ca1eaf615c341acead01220c86f6b0b1dc8506bf31884b5c68a1d23637f65199",
-        "draft_record_sha256": "c6d3a1dcfe8fe37b3c50bf155e4df84832dd0429c26cc4adbd4c5c2e0e4ea5c9",
-        "check_sha256": "d7efce5a8a8d795d14e2441e4edbbafcac72e63af22dd1ac95aba828ea4cab57",
-        "note": "toy labels on the pull route at 93a453b2, 2026-11-12 UTC: toy A4 publication from round 5's V1, toy identity, 3 a5_fvplain jobs, configuration test (31 chosen), recheck matched, toy labels publish and finalize_receipt with 16 of 16 receipt checks; 21 of 21 criteria. Limitation: the toy FV table had no tested rows (M = 0), so label classification ran on an empty tested set; classification on a non-empty set is covered by the unit suite, not by this rehearsal"
-      },
-      "satisfied_at_go": [
-        "operator approval of the a5_fvplain qualification record and of load sheet version 3 (this revision)",
-        "the A15 ledger reservation: 70 h of the c^0.5 labels allowance",
-        "seed history addendum 2 for the round L qualification, rehearsal and configuration seeds, committed record-only with this revision",
-        "the operator-signed rehearsal approval record for the labels pull route at 93a453b2",
-        "the root's machine-register approval and the launch go"
-      ],
-      "remaining_at_join": [
-        "(c) the join-time configuration test and rate segment, measured before any registered job and copied into the next revision"
-      ]
+      "launch": null,
+      "reason": "No launch is bound. The revision 12 admission covered only the sqrt A5 labels, which completed at 2026-11-13T17:32Z, 12:32 EST on 2026-11-13 (prior_dispatch_admissions). A further launch on this unit needs its own dispatch binding, load sheet and go in a later revision."
     },
     "prior_dispatch_admissions": [
       {
@@ -1906,16 +1988,100 @@
           "service": "model_service none, actions skipped; llm-server inactive and disabled before and after; guppi-thermal-feed untouched (the same process throughout)",
           "remaining_at_join_satisfied_by": "rates.approved_rate_segments, the sqrt original validation segment (this revision)"
         }
+      },
+      {
+        "launch": "the sqrt A5 labels (A16 item 5, A5 under the strict labels policy for sqrt), pull route on X2-1 alone, normal mode, --model-service none",
+        "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+        "commit": "9f3cf240d8b8290310369d63f9d6f3e7976fc4a0",
+        "spec": {
+          "path": "v3/runs/a10_stage2/sqrt/labels_plan.json",
+          "file_sha256": "b8f9deee7cb32c624810ce5413d2b25c5a2aaf298fde98d572a470254979dc0a",
+          "payload_sha256": "60eed2eb459729c4300f9e34aa8a2ab7fac3c03acda6daef82c701a63ffb29ed",
+          "plan_hash": "e81d4fce8e126956a05c7e1582ed42a40a535e94206c7ee29cd600725df654c4",
+          "jobs": 2925,
+          "fv_tables": 975,
+          "replicates": 3,
+          "M": 41675,
+          "probe_seed_count": 855,
+          "wall_seconds": 252000,
+          "declared_wall_hours": 70,
+          "x2_equivalent_hours": 70,
+          "registration_pin": {
+            "commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
+            "note_sha256": "a99f228c770f01092e6c84978a4f6a73397a746c83df36b3c13de756f2500554"
+          },
+          "a4_family": {
+            "path": "v3/runs/a10_stage2/sqrt/v3_rerun_tables_A10.json",
+            "file_sha256": "c375a300e17fc4618747861b0f533d80e73e0a5d3b8f860f7c514494cfd53c3e",
+            "table_seal_sha256": "943c009831e315204bfe38c7e9c1b8e96d17eec82ae0ac93c5d38bcac1812cd4",
+            "identity_record": {
+              "path": "simulation/v3/runs/a10_stage2/sqrt/family_identity.json",
+              "file_sha256": "ecf7e731ecb4bcf06e2c9378e5622d408b9ee3409f31e20e43f23c150b9937cc",
+              "commit": "9f3cf240"
+            }
+          }
+        },
+        "launch_root": "v3/runs/a10_stage2/sqrt/labels_run",
+        "root_identity": {
+          "spec_hash": "60eed2eb459729c4300f9e34aa8a2ab7fac3c03acda6daef82c701a63ffb29ed",
+          "code_hash": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+          "prepared_utc": "2026-11-12T04:21Z",
+          "identity_file_sha256": "20c75e40085768a03a54f2f14d7320014428d086a340298fb88011cd74b25d20",
+          "contents": "identity, manifest (bytes equal to the spec), context_preflight (55 contexts passed), pull_state (not started), runner.lock; no outputs, no machine register entry"
+        },
+        "seed_check": "all 2,925 stream seeds in the committed registry's a5_streams sqrt entry (4,125; faa4273a), none in the seed history (ec40a9ec) or addendum 1 (779de370), no reserved-range hit (A13, A14, A16, A5), zero collisions against the A13 and A14 global inventories and plan forbidden sets, pairwise distinct (stage2_prep/labels/SEED_CHECK.json, sha256 a6dd9fac959333f3f8d77bac4a3e4f3c580703757ed02b9cee05183fe5a83c48)",
+        "all_four_records_condition": "A17 section 2: bind (a) post-update fixed-code requalification, (b) bit identity at the launch identity for every kind the host will run, (c) join-time configuration and rates, (d) its own load sheet",
+        "records": {
+          "a_post_update_fixed_code": "accepted and operator-approved 2026-10-31 (qualification_records.post_update_fixed_code)",
+          "b_launch_identity_qualification": "bound in qualification_records.launch_identity_a5_kinds for a5_fvplain (evidence 25f905dc); approved by the operator with this revision",
+          "c_join_time_configuration_and_rates": "at join: the launch records the phase's configuration test and its rate segment at the host's join (A17 section 2(c)); rate 1.0 against the X2-1 reference by same-host identity",
+          "d_load_sheet": "version 3 bound in operating_rules.approved_load_sheet (sha256 807e1fda408f3fc9670f4e20757a91a1b9c26b0e5b1d97fe24e7c9fc30b91b96); approved by the operator with this revision"
+        },
+        "dress_rehearsal": {
+          "passed": true,
+          "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved_labels.json, signed in the operator's name at the go",
+          "record_sha256": "ca1eaf615c341acead01220c86f6b0b1dc8506bf31884b5c68a1d23637f65199",
+          "draft_record_sha256": "c6d3a1dcfe8fe37b3c50bf155e4df84832dd0429c26cc4adbd4c5c2e0e4ea5c9",
+          "check_sha256": "d7efce5a8a8d795d14e2441e4edbbafcac72e63af22dd1ac95aba828ea4cab57",
+          "note": "toy labels on the pull route at 93a453b2, 2026-11-12 UTC: toy A4 publication from round 5's V1, toy identity, 3 a5_fvplain jobs, configuration test (31 chosen), recheck matched, toy labels publish and finalize_receipt with 16 of 16 receipt checks; 21 of 21 criteria. Limitation: the toy FV table had no tested rows (M = 0), so label classification ran on an empty tested set; classification on a non-empty set is covered by the unit suite, not by this rehearsal"
+        },
+        "satisfied_at_go": [
+          "operator approval of the a5_fvplain qualification record and of load sheet version 3 (this revision)",
+          "the A15 ledger reservation: 70 h of the c^0.5 labels allowance",
+          "seed history addendum 2 for the round L qualification, rehearsal and configuration seeds, committed record-only with this revision",
+          "the operator-signed rehearsal approval record for the labels pull route at 93a453b2",
+          "the root's machine-register approval and the launch go"
+        ],
+        "remaining_at_join": [
+          "(c) the join-time configuration test and rate segment, measured before any registered job and copied into the next revision"
+        ],
+        "outcome": {
+          "complete": true,
+          "completed_jobs": 2925,
+          "completed_by_phase": {
+            "a5_fvplain": 2925
+          },
+          "deadline_drain": null,
+          "reason": null,
+          "launched_utc": "2026-11-12T12:40:33.63Z",
+          "finished_utc": "2026-11-13T17:32:42.01Z",
+          "finished_epoch": 1794591162.013075,
+          "charged_x2_equivalent_hours": 28.88,
+          "ledger": "a10_stage2_operations_ledger.md, reconciliation of 2026-11-13",
+          "completion_check": "check_done_labels.py (sha256 4f5e72b0, second-checked by the interpreter before use) passed with no problems; the phase recheck matched; verified_output_hashes.json e93eec598ef844f73e6f090f20a7d4045148fd7b0c3a0db3ff52a43669d59954; outputs digest 05dceefbff1033522d0ebd89166692f107c3fd9677dbd1e6442357485b07c427",
+          "service": "model_service none, actions skipped (host_x2/service.json). llm-server inactive and disabled at the go (state_at_go.txt, 2026-11-12T12:40:25Z) and after the run (state_after_run.txt, 2026-11-13T18:03:14Z). guppi-thermal-feed active at both, untouched, the same process (PID 1634426, started 2026-10-30) on the same boot, so it was not restarted during the run.",
+          "remaining_at_join_satisfied_by": "rates.approved_rate_segments, the sqrt A5 labels segment (this revision)"
+        }
       }
     ]
   },
   "seal": {
     "algorithm": "sha256",
     "serialization": "UTF-8 JSON, sorted keys, separators comma and colon without whitespace, ensure_ascii=true, no NaN, no trailing newline; hash the payload object only",
-    "payload_sha256": "163e694dd266ebbc22aaaa65dd8f5735fb6f3793d88b23fde7c796761d9f1d0d"
+    "payload_sha256": "665785a53eb15bc764b8b97b7293bbf9b12e56c3b76dc31401e499ad9a0b8bbb"
   },
   "operator_approval": {
-    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-12.md section 1: the operator's approval of 2026-11-12 (\"Go ahead\") of this register revision 12, payload digest 163e694dd266ebbc22aaaa65dd8f5735fb6f3793d88b23fde7c796761d9f1d0d: the a5_fvplain qualification record (evidence 25f905dc1eccafe874eec582e8d5afa032624196f42666dbce21ecd3117629ce), approved_workload_kinds, load sheet version 3 (807e1fda408f3fc9670f4e20757a91a1b9c26b0e5b1d97fe24e7c9fc30b91b96) and dispatch admission for the bound sqrt A5 labels launch. Prior approvals in force: revisions 8 to 11 and the 2026-10-31 fixed-code requalification.",
-    "reason": "Register approval, the launch go, the rehearsal approval and the root's machine-register approval remain distinct records."
+    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-13.md section 2: the operator's approval of 2026-11-13 (\"approve 2bc6af0a\") of this register revision 13 (approved as draft payload 2bc6af0adb88757b89311a6ed55dccfaed6555fe35848a51edce70d6d23e1353), payload digest 665785a53eb15bc764b8b97b7293bbf9b12e56c3b76dc31401e499ad9a0b8bbb: the sqrt A5 labels' join-time configuration and rate segment (A17 section 2(c)), the launch outcome, the closed admission and the per_class_capacities correction. Prior approvals in force: revisions 8 to 12 (DECISIONS_2026-11-06 section 5, DECISIONS_2026-11-07 sections 1 and 3, DECISIONS_2026-11-11 section 1, DECISIONS_2026-11-12 section 1) and the 2026-10-31 fixed-code requalification.",
+    "reason": "A record revision: no launch, admission or resource change."
   }
 }
