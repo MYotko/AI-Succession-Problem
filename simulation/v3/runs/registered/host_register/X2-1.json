@@ -2,10 +2,10 @@
   "schema": "lineage-a17-sealed-host-entry-v1",
   "payload": {
     "schema": "lineage-a17-host-payload-v1",
-    "record_date": "2026-11-13",
+    "record_date": "2026-11-14",
     "unit_name": "X2-1",
     "host_class": "X2",
-    "record_status": "Revision 16, approved by the operator, Matt Yotko, 2026-11-13 (\"approve 47951a73\"); recorded in a19_2026-11-04/DECISIONS_2026-11-13.md section 7. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594), a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a), a5_fvplain (revision 12, evidence 25f905dc) and rerun (revision 14, evidence 8d919541); approved_workload_kinds lists all six. The sqrt original estimation (revision 9), the sqrt original validation (revision 11), the sqrt A5 labels (revision 13) and the sqrt runs (this revision; the first attempt, failed at the join, is in its prior_attempts) completed; their join-time configuration and rate segments are bound in rates.approved_rate_segments. dispatch_admissible false: no launch is bound. Service entry and bound host fields as revision 7.",
+    "record_status": "Revision 17, approved by the operator, Matt Yotko, 2026-11-14 (\"approve 20da243a, reserve 22, go\"); recorded in a19_2026-11-04/DECISIONS_2026-11-14.md section 1. dispatch_admissible true for the crowding estimation launch only. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594; its crowding kernel path by the supplement of this revision, evidence 9781b893), a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a), a5_fvplain (revision 12, evidence 25f905dc) and rerun (revision 14, evidence 8d919541). Load sheet version 5 revision 3 bound for the crowding estimation. The sqrt estimation, validation, labels and runs join segments (revisions 9, 11, 13 and 16) are unchanged. Service entry and bound host fields as revision 7.",
     "scope": "A17 initial register; option C campaign remains X2-1 only",
     "cpu": {
       "available_cpu_budget": 32,
@@ -70,52 +70,91 @@
       },
       "selected_launch_workers": {
         "value": "per build, by that build's own configuration test within the 31-worker ceiling",
-        "basis": "configure_host measures 8, 12, 16, 24 and 31 workers over two rounds in reversed order and chooses with production_runner.choose(). 31 rather than 32 because caps(x2, 32) gives 31 in both normal and work mode, the operator's n-1 stability reserve; AGENTS.md requires 32 to be listed among the candidates and the code asserts that before capping it. A single pre-chosen count would apply one answer to three different workloads, so none is recorded here (operator, 2026-11-02)."
+        "basis": "configure_host measures 8, 12, 16, 24 and 31 workers over the rounds the spec's configuration profile sets (one for the estimation profiles, two for the run profile, the second in reversed order; corrected in revision 17) and chooses with production_runner.choose(). 31 rather than 32 because caps(x2, 32) gives 31 in both normal and work mode, the operator's n-1 stability reserve; AGENTS.md requires 32 to be listed among the candidates and the code asserts that before capping it. A single pre-chosen count would apply one answer to three different workloads, so none is recorded here (operator, 2026-11-02)."
       },
       "approved_load_sheet": {
         "value": {
-          "document": "stage2_runs_2026-11-13/LOAD_SHEET_v4_sqrt_runs_2026-11-13.md (X2-1 stage2_prep/runs)",
-          "sha256": "d550fe79010b179eb089d4b0a49f95a44dfa1e700e4f01f1b4f3bb82148688bf",
+          "document": "stage2_crowding_2026-11-13/launch_package/LOAD_SHEET_v5r3_crowding_estimation.md (version 5 revision 3, the interpreter's correction of the Part D executor's revision 2 in part_d/)",
+          "sha256": "80b13b4f465466fefe91d60d653b657d25cd0f71064eed95915eba694010c721",
           "data": {
-            "document": "LOAD_SHEET_v4_data.json",
-            "sha256": "60c86340e3d9e7bd021d0134c2d9ad8b0dedeb9819965ac59d07ab65eadd9da0"
+            "document": "LOAD_SHEET_v5r3_data.json",
+            "sha256": "468d319aa2a9978560d025434dc7c587e43e003736e0138709b20d59defe495d"
           },
-          "version": "version 4, 2026-11-13 UTC",
-          "scope": "the sqrt runs: 4,400 rerun jobs in one phase (a10_arm, 500 steps; 44 cells x 100 seeds), pull route on this unit alone, code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit d16cb198bdf70df3729c6d5ad04e631194a6bab1",
+          "version": "version 5 revision 3, 2026-11-14 UTC",
+          "scope": "the crowding original estimation: 1,495 table jobs in one phase (primary 1,375, double population 60, double length 60), pull route on this unit alone, code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit a2b930e0dec74b3bf1d927699279031429da6519",
           "worker_ceiling": 31,
           "numerical_threads_per_worker": 1,
           "memory_headroom": 0.8,
+          "routes": "every table job runs the plain route first and adds the FV route (five times the chain-steps and trace arrays) only when under half the plain chains remain viable (offline_estimator.estimate lines 195 to 198); a job's peak is set by setting and route (inferred, second check of Part D)",
           "memory_gb_per_worker": {
-            "frozen_cost_class": 2.0,
-            "registered_reservation": 2.0,
-            "planning_allowance": 4.0,
-            "stage1_measured_peak": 1.043,
-            "full_job_measured_this_identity": 0.326
+            "frozen_classes": {
+              "primary": 1.526,
+              "double_population": 2.97,
+              "double_length": 2.827
+            },
+            "sqrt_measured_full_job_maxima": {
+              "primary": 1.528,
+              "double_population": 2.974,
+              "double_length": 2.998
+            },
+            "part_d_crowding_measured": {
+              "primary_plain": 0.431,
+              "double_population_plain": 0.731,
+              "double_length_fv": 2.99
+            },
+            "note": "Part D, one context per setting, beside the sqrt twins: the primary and double population crowding jobs are inferred to have taken plain where their sqrt twins took FV, and the double length pair FV on both sides (it matched to 0.07 percent); the route sits in sealed outputs and is read from the peaks and times. No crowding FV double population job was measured"
           },
-          "workers": {
-            "at_registered_reservation": 31,
-            "at_planning_allowance": 24,
-            "runner_planned": 31,
-            "note": "the runner admits by its sealed 2.0 GB class and 1.2 x observed peaks inside the 31 cap; at the 4.0 GB planning allowance the 0.8 budget (99.80 GB) holds 24, which also fits the 103 GB GUPPI envelope. The plan allows 31 at the registered 2.0 GB reservation once a measurement shows it adequate (STAGE2_PLAN.public_v2.md lines 266 to 269); the full-job peak of 0.326 GB measured at this identity in the qualification is that measurement. The join-time configuration test chooses the count"
+          "admission": "the pull coordinator charges each lease min(max(class, observed), weight), weight the mean of the heaviest quarter of unfinished jobs: 1.967 GB at the open, so the opening 31 double population dispatches reserve 61.0 GB and are all admitted before any crowding peak is observed; the worker count at the open is the only control on real use",
+          "opening_wave_real_use_gb": {
+            "workers": [
+              31,
+              30,
+              27,
+              24
+            ],
+            "all_plain_at_0.731": [
+              22.7,
+              21.9,
+              19.7,
+              17.5
+            ],
+            "all_fv_at_sqrt_max_2.974": [
+              92.2,
+              89.2,
+              80.3,
+              71.4
+            ],
+            "all_fv_at_1.2x_sqrt_max_3.569": [
+              110.6,
+              107.1,
+              96.4,
+              85.7
+            ]
           },
-          "live_memavailable_gb": 124.75,
-          "memory_budget_gb": 99.8,
-          "guppi_envelope_gb": 103,
-          "class_wall_hours": {
-            "frozen_worker_hours": 58.87,
-            "at_31_workers_runner_sheet": 1.9,
-            "note": "P2 ordering classes, not timings of this launch"
-          },
-          "projection": "none: run specs (schema v3-registered-1) face no pre-dispatch projection gate (multihost_a11.py lines 706 and 845 apply it only to validation and labels). Two clock stops apply (multihost_a11.py stops(), lines 333 to 340): the wall stop at the coordinator's start plus wall_seconds, configuration time included, and the charged-allowance stop at x2_equivalent_hours of session charge; both fire cleanup_reserve_seconds (300 s) early. On X2-1 alone at rate 1.0 the wall stop binds first (inferred). At a stop, dispatch stops and running jobs finish (A19)",
+          "accepted_case": "the operator accepted the all-FV opening at sqrt-size peaks, 92.2 GB at 31 workers, inside the 99.61 GB budget (0.8 x MemAvailable 124.51 GB) and the 110 GB GUPPI envelope, without a further measurement (DECISIONS_2026-11-13 section 12). Summed peaks reach 110 GB at 31 only if crowding FV peaks run about 19 percent above sqrt's",
+          "live_memavailable_gb": 124.51,
+          "memory_budget_gb": 99.61,
+          "guppi_envelope_gb": 110,
+          "projection": "none: estimation specs (schema v3-A10-estimation-1) face no pre-dispatch projection gate (multihost_a11.py projection and check_projection apply it only to v3-A4-validation-1 and v3-A5-labels-1). Two clock stops apply (stops()): the wall stop at the coordinator's start plus wall_seconds, configuration time included, and the charged-allowance stop at x2_equivalent_hours of session charge; both fire cleanup_reserve_seconds (300 s) early. At a stop, dispatch stops and running jobs finish (A19)",
           "eta_hours": {
-            "budget_estimate_plan_method_31": 5.06,
-            "budget_estimate_plan_method_24": 6.44,
-            "inferred_from_stage1_k_star_arms": 4.1,
-            "inferred_from_qualification_at_16": 2.75,
-            "ceiling": 8,
-            "kind": "estimates, none a deadline. The 4.1 h is inferred from stage 1's k* arms of the same shape (about 2.05 h on each of two X2s, ledger). The 2.75 h is inferred from Part B's 36 worker-seconds per job at 16 workers (4,400 x 36 / 16, before overhead); stage 1 measured 99 worker-seconds per job at 31 workers, and this round did not measure 31. Rate-based ETAs replace these once the configuration test and first completions are recorded"
+            "at_31_all_plain_end": 3.0,
+            "at_31_fv_like_end": 17.8,
+            "fv_like_slow_bound": {
+              "31": 17.8,
+              "30": 18.4,
+              "27": 20.4,
+              "24": 23.0
+            },
+            "fv_like_fast_bound_24": 19.1,
+            "budget_estimate_plan_method": 16.74,
+            "sqrt_measured_same_layout_31_workers": 16.015,
+            "ceiling_less_reserve": 21.92,
+            "kind": "ranges by route, inferred from Part D's single-context ratios (0.186, 0.237, 1.110); none a deadline. Rate-based ETAs replace these once the configuration test and first completions are recorded"
           },
-          "approved": "operator, 2026-11-13, in session (\"approve 30f15a42\"); recorded in a19_2026-11-04/DECISIONS_2026-11-13.md section 5. A resource approval only: not a launch go and not dispatch admission.",
+          "worker_setting": "the operator's choice (DECISIONS_2026-11-13 section 12): the host starts with --workers 31 and no override, so the join's configuration test chooses among 8, 12, 16, 24 and 31 under the standard rule; a choice below 24 goes to the operator at once. The rate-based ETA is cost-weighted by frozen class, read about 2 h after the first dispatch and again after about 100 primaries; if it passes about 19 h, the interpreter asks the operator to raise the count to 31 live (production_runner control ROOT --host yotko-evo-x2 --workers 31), a separate approval at the time. The host worker raise is unit-tested (loopback) and traced in the code, never used on X2-1",
+          "eta_not_an_upper_bound": "17.8 h applies the one FV-to-FV pair ratio (1.11) to every job; a weighted ratio of 1.369 puts 31 workers at the ceiling; crowding taking FV where sqrt took plain lies outside the range",
+          "thermal_reference": "Tctl 95.4 and 95.1 C early in the sqrt estimation at 31 workers; at most 96.1 C over the first 4 h of the labels run at 16 workers; at most 98.6 C over the sqrt runs at 24 workers; at most 98.0 C in Part D at six workers or fewer. No throttle point is recorded. An observation, not a limit",
+          "approved": "operator, 2026-11-14, in session (\"approve 20da243a, reserve 22, go\"); recorded in a19_2026-11-04/DECISIONS_2026-11-14.md section 1. A resource approval only: not a launch go and not dispatch admission.",
           "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval"
         }
       },
@@ -349,6 +388,53 @@
               "kind": "estimates, none a deadline; rate-based ETAs replace them once the configuration test and first completions are recorded"
             },
             "approved": "operator, 2026-11-12, in session (\"Go ahead\"); recorded in a19_2026-11-04/DECISIONS_2026-11-12.md section 1. A resource approval only: not a launch go and not dispatch admission. The sheet's 21-worker figure is accepted as a planning cap, not a runner limit.",
+            "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval"
+          }
+        },
+        {
+          "value": {
+            "document": "stage2_runs_2026-11-13/LOAD_SHEET_v4_sqrt_runs_2026-11-13.md (X2-1 stage2_prep/runs)",
+            "sha256": "d550fe79010b179eb089d4b0a49f95a44dfa1e700e4f01f1b4f3bb82148688bf",
+            "data": {
+              "document": "LOAD_SHEET_v4_data.json",
+              "sha256": "60c86340e3d9e7bd021d0134c2d9ad8b0dedeb9819965ac59d07ab65eadd9da0"
+            },
+            "version": "version 4, 2026-11-13 UTC",
+            "scope": "the sqrt runs: 4,400 rerun jobs in one phase (a10_arm, 500 steps; 44 cells x 100 seeds), pull route on this unit alone, code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit d16cb198bdf70df3729c6d5ad04e631194a6bab1",
+            "worker_ceiling": 31,
+            "numerical_threads_per_worker": 1,
+            "memory_headroom": 0.8,
+            "memory_gb_per_worker": {
+              "frozen_cost_class": 2.0,
+              "registered_reservation": 2.0,
+              "planning_allowance": 4.0,
+              "stage1_measured_peak": 1.043,
+              "full_job_measured_this_identity": 0.326
+            },
+            "workers": {
+              "at_registered_reservation": 31,
+              "at_planning_allowance": 24,
+              "runner_planned": 31,
+              "note": "the runner admits by its sealed 2.0 GB class and 1.2 x observed peaks inside the 31 cap; at the 4.0 GB planning allowance the 0.8 budget (99.80 GB) holds 24, which also fits the 103 GB GUPPI envelope. The plan allows 31 at the registered 2.0 GB reservation once a measurement shows it adequate (STAGE2_PLAN.public_v2.md lines 266 to 269); the full-job peak of 0.326 GB measured at this identity in the qualification is that measurement. The join-time configuration test chooses the count"
+            },
+            "live_memavailable_gb": 124.75,
+            "memory_budget_gb": 99.8,
+            "guppi_envelope_gb": 103,
+            "class_wall_hours": {
+              "frozen_worker_hours": 58.87,
+              "at_31_workers_runner_sheet": 1.9,
+              "note": "P2 ordering classes, not timings of this launch"
+            },
+            "projection": "none: run specs (schema v3-registered-1) face no pre-dispatch projection gate (multihost_a11.py lines 706 and 845 apply it only to validation and labels). Two clock stops apply (multihost_a11.py stops(), lines 333 to 340): the wall stop at the coordinator's start plus wall_seconds, configuration time included, and the charged-allowance stop at x2_equivalent_hours of session charge; both fire cleanup_reserve_seconds (300 s) early. On X2-1 alone at rate 1.0 the wall stop binds first (inferred). At a stop, dispatch stops and running jobs finish (A19)",
+            "eta_hours": {
+              "budget_estimate_plan_method_31": 5.06,
+              "budget_estimate_plan_method_24": 6.44,
+              "inferred_from_stage1_k_star_arms": 4.1,
+              "inferred_from_qualification_at_16": 2.75,
+              "ceiling": 8,
+              "kind": "estimates, none a deadline. The 4.1 h is inferred from stage 1's k* arms of the same shape (about 2.05 h on each of two X2s, ledger). The 2.75 h is inferred from Part B's 36 worker-seconds per job at 16 workers (4,400 x 36 / 16, before overhead); stage 1 measured 99 worker-seconds per job at 31 workers, and this round did not measure 31. Rate-based ETAs replace these once the configuration test and first completions are recorded"
+            },
+            "approved": "operator, 2026-11-13, in session (\"approve 30f15a42\"); recorded in a19_2026-11-04/DECISIONS_2026-11-13.md section 5. A resource approval only: not a launch go and not dispatch admission.",
             "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval"
           }
         }
@@ -1001,6 +1087,72 @@
               "date": "2026-11-13",
               "words": "approve 30f15a42",
               "record": "a19_2026-11-04/DECISIONS_2026-11-13.md section 5"
+            }
+          }
+        }
+      },
+      "launch_identity_table_crowding_supplement": {
+        "value": {
+          "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+          "commit": "a2b930e0dec74b3bf1d927699279031429da6519",
+          "date": "2026-11-14 UTC",
+          "kinds": [
+            "table"
+          ],
+          "supplements": "qualification_records.launch_identity (kind table, evidence 8522d594, revision 8), whose 20 jobs were sqrt jobs",
+          "purpose": "the crowding kernel (kernel.crowding = reproductive, tables_a10.py:77) switches a distinct model path that no qualification or rehearsal at this identity had run. Under A11 and A17 section 2(b) qualification is keyed to host, launch identity and kind, so kind table was already qualified; this record tests the crowding path directly rather than relying on that keying",
+          "host_role": "X2-1 is both reference and candidate; relative_throughput 1.0 and scheduling rate 1.0 by same-host identity",
+          "plan": {
+            "file_sha256": "da72de50cc3166f7caf130f62d477837b04896d7818c87be45ca8cdfd23bd6a4",
+            "payload_sha256": "ac7417bbdf2d12326e7e5d4b333f22b227ec16c39d5682a8727126d867c09dbf",
+            "jobs": 20,
+            "distinct_jobs_per_kind": {
+              "table": 20
+            },
+            "built_from": "the non-registered crowding preview spec (estimation_spec('crowding', CAL), 66f5e4f3) by qualification_a11 build --kind table: 20 jobs of the single short configuration profile config (rr 0.064, capability 1.0, rule balanced, primary, burn 30, measure 8, full-size kernel with crowding reproductive), differing by index and seed; the same shape as evidence 8522d594. One context only. Round C's toy rehearsal ran the crowding kernel at three capabilities, all nine jobs at one toy size (its settings override makes the setting names share one size); Part D ran three full-size crowding jobs, one per setting (binding.full_size_measurement)",
+            "seeds": "validation-tag stable_job seeds in [2^128, 2^129), outside every reserved range; entered in seed history addendum 5 (qualification category)"
+          },
+          "reference": {
+            "file_sha256": "8aaac1f7f13c06314c51814075f48b7533fdb2fffbb80b04eb8046bd1214c90b",
+            "elapsed_seconds": 3.69,
+            "workers": 16,
+            "passed": true,
+            "model_service": "none"
+          },
+          "candidate": {
+            "file_sha256": "649c8a9eb04fbabbe4adf2d8136534b9968fe3d2f00f8936b0d3e05e5f4e0c02",
+            "elapsed_seconds": 3.71,
+            "workers": 16,
+            "passed": true,
+            "model_service": "none"
+          },
+          "evidence": {
+            "file_sha256": "9781b893e698ddb27057de72ef12d3d5c0023d6c426491d222df11919211ee1b",
+            "payload_sha256": "69b65278495adbf2f18df518cb1e3be74c7667a9ff6ed991cf1f24f194179777",
+            "schema": "v3-A11-qualification-1",
+            "passed": true,
+            "proofs": 20,
+            "relative_throughput": 1.0,
+            "validate_evidence": "passed at this identity for kind table (20 distinct jobs, A17 section 2(b))",
+            "trial_peak_rss_gb": 0.123,
+            "worker_seconds_per_job_mean": {
+              "reference": 1.637,
+              "candidate": 1.635
+            },
+            "note": "short-profile jobs: the peak and worker seconds measure the configuration profile, not a full estimation job (sqrt full jobs peaked at 1.53 to 3.00 GB)"
+          },
+          "evidence_notes": {
+            "record": "v3/_stage2_prep/qual_crowding/EVIDENCE_NOTES.json (stage2_prep/crowding_e/qual links to it)",
+            "sha256": "b2a0d8aa37904c3d3a20d872768efa15bdbd24066a4259c282af5cbf8610dccc"
+          },
+          "service_state": "llm-server inactive and disabled throughout; --model-service none on both runs",
+          "operator_approval": {
+            "value": {
+              "approved": true,
+              "operator": "Matt Yotko",
+              "date": "2026-11-14",
+              "words": "approve 20da243a, reserve 22, go",
+              "record": "a19_2026-11-04/DECISIONS_2026-11-14.md section 1"
             }
           }
         }
@@ -1969,14 +2121,14 @@
     },
     "per_class_capacities": {
       "value": null,
-      "reason": "Not bound at register level. Each launch's capacities are carried by its own approved load sheet (version 1 for the sqrt estimation, version 2 for the sqrt validation, version 3 for the sqrt A5 labels, version 4 for the sqrt runs); the measured peaks are in approved_rate_segments and the qualification records. A register-level capacity would need its own measured and approved record."
+      "reason": "Not bound at register level. Each launch's capacities are carried by its own approved load sheet (version 1 for the sqrt estimation, version 2 for the sqrt validation, version 3 for the sqrt A5 labels, version 4 for the sqrt runs, version 5 for the crowding estimation); the measured peaks are in approved_rate_segments and the qualification records. A register-level capacity would need its own measured and approved record."
     },
     "private_transport_mapping": {
       "value": null,
       "reason": "No private endpoint mapping is supplied for public staging; resolve privately without changing public unit identity."
     },
-    "dispatch_admissible": false,
-    "admission_reason": "Not admissible: no launch is bound. The revision 15 admission was for the sqrt runs only, and that launch completed at 2026-11-14T01:19Z, 20:19 EST on 2026-11-13.",
+    "dispatch_admissible": true,
+    "admission_reason": "Admissible for the launch bound in dispatch_admission only: the crowding original estimation at 93a453b2 on the pull route, X2-1 alone, root v3/runs/a10_stage2/crowding/source/tables_A1, wall 22 h. (a), (b) and (d) are bound and approved; (c) is measured at the host's join, before any registered job, under the operator-approved reading of A17 section 2(c) of 2026-11-06. Not an admission for any other launch, family, kind, root or identity.",
     "evidence": {
       "preparation_report": {
         "record": "X2-1 requalification preparation report, 2026-10-30",
@@ -2242,18 +2394,182 @@
         "sha256": "9be80025f92ee09ff2e0e0c6f432fbac2323402943f9c9a823b3c61d6907f0f3",
         "seal": "f9e229561edf8e2e0d94b43cedbda4cff311a5b23a6eff953b4e7a33ec121e46",
         "use": "the 130 seeds the regression test introduced (rehearsal 6, configuration 124); none reused"
+      },
+      "qualification_plan_table_crowding_93a453b2": {
+        "record": "v3/_stage2_prep/qual_crowding/plan.json, 2026-11-14 UTC (on X2-1)",
+        "sha256": "da72de50cc3166f7caf130f62d477837b04896d7818c87be45ca8cdfd23bd6a4",
+        "use": "the 20 crowding qualification jobs and seeds"
+      },
+      "qualification_evidence_table_crowding_93a453b2": {
+        "record": "v3/_stage2_prep/qual_crowding/x2_evidence.json, 2026-11-14 UTC (on X2-1)",
+        "sha256": "9781b893e698ddb27057de72ef12d3d5c0023d6c426491d222df11919211ee1b",
+        "use": "pass verdict, counts, hashes, throughput, fingerprint"
+      },
+      "load_sheet_crowding_estimation_v5r3": {
+        "record": "stage2_crowding_2026-11-13/launch_package/LOAD_SHEET_v5r3_crowding_estimation.md",
+        "sha256": "80b13b4f465466fefe91d60d653b657d25cd0f71064eed95915eba694010c721",
+        "data_sha256": "468d319aa2a9978560d025434dc7c587e43e003736e0138709b20d59defe495d",
+        "use": "workers, memory admission and real use by route, run time by route, worker setting, ceiling"
+      },
+      "estimation_spec_crowding": {
+        "record": "v3/runs/a10_stage2/crowding/source/tables_A1_manifest.json (frozen pull spec)",
+        "sha256": "6368ec592ffd40480d4c6652f7354238be279846dfba25a0a15148935d1bf703",
+        "use": "the launch's sealed manifest; job counts, phase and ceiling only"
+      },
+      "estimation_spec_inventory_crowding": {
+        "record": "stage2_prep/crowding_e/EST_SPEC_INVENTORY.json",
+        "sha256": "88123e30311b479487cc655ed0a6548de305ed83fffb459f05bd52b3065854dd",
+        "use": "the inventory checks and the comparison with the sqrt registered spec"
+      },
+      "check_spec_summary_crowding": {
+        "record": "stage2_prep/crowding_e/CHECK_SPEC_SUMMARY.json",
+        "sha256": "f3be62891aa2eb1767af3c3dd585147bf1c20000304212d3c6272ecaf6d178b4",
+        "use": "freeze, validate_extension, context preflight and root preparation"
+      },
+      "estimation_seed_check_crowding": {
+        "record": "stage2_prep/crowding_e/SEED_CHECK.json, 2026-11-14 UTC",
+        "sha256": "cf0d04edbc0c3cd28b4243d048e587df3204d0198550592c60efe81b86474f5f",
+        "use": "registry equality and no-collision results for the 1,495 seeds"
+      },
+      "root_placement_crowding": {
+        "record": "stage2_prep/crowding_e/ROOT_PLACEMENT.json",
+        "sha256": "2bd6af9d9dd2d925d51855395156e8656e1932c8c26fd5240e0c352519f367bd",
+        "use": "the root against the input snapshot's protected folders, checked before the root existed"
+      },
+      "rehearsal_crowding_supplement": {
+        "record": "stage2_prep/crowding_e/REHEARSAL_C_CHECK.json",
+        "sha256": "8485f883c27d9cca2501795fdb54eb6ddd9a01bcc5926882576dd27214da4716",
+        "use": "the crowding toy pull-route rehearsal, a supplement to the signed estimation rehearsal record (95b0d761)"
+      },
+      "full_size_measurement_crowding": {
+        "record": "stage2_crowding_2026-11-13/part_d/MEASUREMENTS.json",
+        "sha256": "29a8544aba09196e6934d3e49181bd925356850adfe790b79a32a21094b181e1",
+        "use": "Part D peak RSS and worker seconds, crowding against sqrt, one context per setting"
+      },
+      "stage2_seed_history_addendum_5": {
+        "record": "v3/runs/registered/A10_stage2_seed_history_addendum_5.json",
+        "sha256": "2a5a46ab68128f6ee51d28fbd951e30b230d3b4ccb07a06eb1b3117d0a98321c",
+        "seal": "48d4da14dd47663e537fa08e1d9b543e1bed0117f8ae6634592fb3217cc40f75",
+        "use": "the 66 seeds round C and Part D introduced (qualification 20, rehearsal 9, configuration 31, measurement 6); none reused"
       }
     },
     "revision": {
-      "number": 16,
-      "supersedes_payload_sha256": "f400a5160524cb3076cedde99c17c74f4ea73f946f771fc733ec73cb31d3ff9b",
-      "supersedes_commit": "59be13b6",
-      "reason": "Approved by the operator on 2026-11-13 (\"approve 47951a73\"). Binds the join-time configuration and rate segment of the sqrt runs (A17 section 2(c), the operator-approved join-time reading; the a10_arm configuration test at the join, before the first registered job), records that launch's outcome (4,400 of 4,400, no drain, 3.26 X2-equivalent hours charged) and closes its admission (dispatch_admissible false; no launch bound). Qualification records, approved_workload_kinds, load sheets, service entry and host fields unchanged."
+      "number": 17,
+      "supersedes_payload_sha256": "59e7162f9c9113f67a05a1c43b77c7631e17acda5e5aa11283ea8ec6f58e7852",
+      "supersedes_commit": "a2b930e0",
+      "reason": "Approved by the operator on 2026-11-14 (\"approve 20da243a, reserve 22, go\"). Binds the crowding table qualification (evidence 9781b893, 20 of 20) as a supplement to the revision 8 table-kind record, binds load sheet version 5 revision 3 with the Part D full-size measurement, records seed history addendum 5, and admits the crowding original estimation (spec crowding/source/tables_A1_manifest.json 6368ec59, seal 058e660a, root crowding/source/tables_A1, 1,495 table jobs, wall 22 h), with the signed estimation rehearsal record of 2026-11-06 and round C's crowding rehearsal check as its rehearsal basis. approved_workload_kinds, the earlier join segments and closed admissions, the service entry and the host fields are unchanged."
     },
-    "approved_workload_kinds_note": "table at code identity 93a453b2 on the launch-identity qualification approved in revision 8 (evidence 8522d594); a4_fit, a4_validate and a4_census at the same identity on the qualification approved in revision 10 (evidence d829ff1a); a5_fvplain at the same identity on the qualification approved in revision 12 (evidence 25f905dc); rerun at the same identity on the qualification approved in revision 14 (evidence 8d919541). Other kinds are added only by their own launches' qualification records.",
+    "approved_workload_kinds_note": "table at code identity 93a453b2 on the launch-identity qualification approved in revision 8 (evidence 8522d594), with its crowding kernel path further qualified by the supplement approved in revision 17 (evidence 9781b893); a4_fit, a4_validate and a4_census at the same identity on the qualification approved in revision 10 (evidence d829ff1a); a5_fvplain at the same identity on the qualification approved in revision 12 (evidence 25f905dc); rerun at the same identity on the qualification approved in revision 14 (evidence 8d919541). Other kinds are added only by their own launches' qualification records.",
     "dispatch_admission": {
-      "launch": null,
-      "reason": "No launch is bound. The revision 15 admission covered only the sqrt runs on root v3/runs/a10_stage2/runs/sqrt, which completed at 2026-11-14T01:19Z, 20:19 EST on 2026-11-13 (prior_dispatch_admissions, with the failed first attempt in its prior_attempts). A further launch on this unit, including any other run arm, needs its own dispatch binding, load sheet and go in a later revision."
+      "launch": "the crowding original estimation (approvals item 21, C-E; STAGE2_PLAN line 91), pull route on X2-1 alone (A17 coordinator plus one host), normal mode, --model-service none",
+      "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+      "commit": "a2b930e0dec74b3bf1d927699279031429da6519",
+      "spec": {
+        "path": "v3/runs/a10_stage2/crowding/source/tables_A1_manifest.json",
+        "file_sha256": "6368ec592ffd40480d4c6652f7354238be279846dfba25a0a15148935d1bf703",
+        "payload_sha256": "058e660a6140c5652fd283157412650436432215a186d544fdc7141527b07c78",
+        "schema": "v3-A10-estimation-1",
+        "jobs": 1495,
+        "kind": "table",
+        "phase": "table",
+        "settings": {
+          "primary": 1375,
+          "double_population": 60,
+          "double_length": 60
+        },
+        "physical_contexts": 55,
+        "wall_seconds": 79200,
+        "x2_equivalent_hours": 22,
+        "configuration_seconds": 900,
+        "cleanup_reserve_seconds": 300,
+        "a10_family": "crowding",
+        "instrument": {
+          "g": "linear",
+          "k_star": 1.8,
+          "mapping": "A10"
+        },
+        "kernel": {
+          "crowding": "reproductive"
+        },
+        "registration_pin": {
+          "commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
+          "note_sha256": "a99f228c770f01092e6c84978a4f6a73397a746c83df36b3c13de756f2500554"
+        },
+        "calibration": {
+          "path": "v3/runs/registered/v3_rerun_calibration.json",
+          "file_sha256": "fd86358a39e3b643fb9adc4e81a2372915ca50a1866e9b0e330a874b41746e01"
+        },
+        "unfrozen": {
+          "file_sha256": "a9b4eaee3dd2af021c5ac6391ee75c6509e10950e9fd1b617f345baec28fdeaf",
+          "payload_sha256": "1beaa7cc2e489ff31aeb87f9588749c9c5f80645194443216b95e77e249756b6",
+          "relation": "the frozen spec minus pull_dispatch equals it (asserted in check_spec)"
+        },
+        "jobs_digest": "48aa9e040342d03ab6894f44f912f6b96b2b517c61ad6dcb6c02b96a97f85b1d",
+        "pull_dispatch": {
+          "cost_classes": 45,
+          "memory_basis": "registered-stratum",
+          "code_commit": "a2b930e0dec74b3bf1d927699279031429da6519",
+          "lease_seconds": 120,
+          "extra_inputs": [
+            "v3/runs/a10_stage2/inputs/exclusions/a3_probe"
+          ],
+          "projection_sha256": "5ca5225967cf08ad5636f98f12d57fa6ccd753a7ae126bff0edcc09f0af3d8a3",
+          "order": "descending frozen bundle mean worker seconds, then job id"
+        },
+        "differs_from_sqrt_estimation": "jobs pair one to one with the sqrt registered spec's by (rr, capability, rule, setting); each differs only in a10_family, kernel.crowding, the instrument g, the scoring g, and therefore id, seed and seed_identity; the configuration profile differs by the same config leaves; the other 14 top-level fields are equal, including memory_estimate_gb, wall and registration (EST_SPEC_INVENTORY.json)"
+      },
+      "launch_root": "v3/runs/a10_stage2/crowding/source/tables_A1",
+      "root_identity": {
+        "spec_hash": "058e660a6140c5652fd283157412650436432215a186d544fdc7141527b07c78",
+        "code_hash": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+        "prepared_utc": "2026-11-14T03:29Z",
+        "identity_file_sha256": "9f57a0a7c467f9f75669fd1c85aa3ead4ab9a434d063b4801511a79c51312d7a",
+        "contents": "identity, manifest (bytes equal to the frozen spec), context_preflight (55 contexts passed; 9da571eb), pull_state (not started; 7a76ec78), runner.lock; no outputs, no records, no machine register entry, no launch record; unchanged after Parts B and C",
+        "placement": "outside every folder the launch's input snapshot protects: the derivation from the code (both inventories, configuration and phase, with the spec's extra inputs) gives 72 protected folders, v3/runs/registered and 71 at or under v3/runs/a10_stage2/inputs/exclusions/a3_probe; the root and its host scratch, record, output, input-manifest and launch-record paths lie under none by Path.is_relative_to and are not refused by artifacts.input_path under that view; a control root inside the probe folder is refused. Round C's toy rehearsal, laid out like this root, ran the real route and its host's protected list equalled the derivation for the toy (ROOT_PLACEMENT.json, sha256 2bd6af9d9dd2d925d51855395156e8656e1932c8c26fd5240e0c352519f367bd)"
+      },
+      "full_size_measurement": {
+        "record": "stage2_crowding_2026-11-13/part_d/MEASUREMENTS.json (Part D, 2026-11-14 UTC)",
+        "sha256": "29a8544aba09196e6934d3e49181bd925356850adfe790b79a32a21094b181e1",
+        "pick_sha256": "dcee279f4cea015f04c10ce25c5a0acd309ef03b281985f7e443d9fd002c2827",
+        "plan_sha256": "73f3202e46fd59c3c2bccae38417e69cbdc24420e3cdcc0bb1ac86cd1474123c",
+        "result": "three full-size crowding table jobs beside their sqrt twins, six workers, qualification_a11 run (host_a11.execute_scratch, the function the pull host uses): peak RSS crowding against sqrt 0.431 against 1.524 GB (primary), 0.731 against 2.965 (double population), 2.990 against 2.988 (double length); worker seconds 95 against 510, 234 against 988, 958 against 863. The first two crowding jobs are inferred to have taken plain where sqrt took FV (second check; the route itself sits in sealed outputs); outputs unopened on X2-1",
+        "second_check": "sound and comparable, no sealing breach; the ratios are route outcomes, not scale factors (DECISIONS_2026-11-13 section 12)"
+      },
+      "seed_check": "all 1,495 seeds set-equal to the committed registry's table_jobs crowding entry (1,495; faa4273a) in its order, pairwise distinct, none in another registry group, the seed history (ec40a9ec) or addenda 1 to 4, no reserved-range hit (A13, A14, A16, registry), zero collisions against the A13 and A14 global inventories and plan forbidden sets (stage2_prep/crowding_e/SEED_CHECK.json, sha256 cf0d04edbc0c3cd28b4243d048e587df3204d0198550592c60efe81b86474f5f)",
+      "all_four_records_condition": "A17 section 2: bind (a) post-update fixed-code requalification, (b) bit identity at the launch identity for every kind the host will run, (c) join-time configuration and rates, (d) its own load sheet",
+      "records": {
+        "a_post_update_fixed_code": "accepted and operator-approved 2026-10-31 (qualification_records.post_update_fixed_code)",
+        "b_launch_identity_qualification": "kind table bound and approved in revision 8 (evidence 8522d594); its crowding kernel path qualified by qualification_records.launch_identity_table_crowding_supplement (evidence 9781b893); approved by the operator with this revision",
+        "c_join_time_configuration_and_rates": "at join: the launch records the phase's configuration test and its rate segment at the host's join (A17 section 2(c)); rate 1.0 against the X2-1 reference by same-host identity",
+        "d_load_sheet": "version 5 revision 3 bound in operating_rules.approved_load_sheet (sha256 80b13b4f465466fefe91d60d653b657d25cd0f71064eed95915eba694010c721); approved by the operator with this revision"
+      },
+      "dress_rehearsal": {
+        "passed": true,
+        "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved.json, the estimation pull-route rehearsal at 93a453b2 signed in the operator's name at the sqrt estimation go of 2026-11-06 (sqrt toys; R1 complete with the per-phase recheck, R2 wall-deadline drain, R3 charged-allowance drain, each with a refused late join)",
+        "record_sha256": "95b0d7617c4e92cb66bcf9cf8c236f8084118f49c3dd54b1a7a7bc1a18cd836d",
+        "crowding_supplement": {
+          "record": "stage2_prep/crowding_e/REHEARSAL_C_CHECK.json (round C, non-registered)",
+          "sha256": "8485f883c27d9cca2501795fdb54eb6ddd9a01bcc5926882576dd27214da4716",
+          "criteria_passed": "33 of 33, of which four re-read what preparation built and one passes with the only input view that exists; the load-bearing criteria are the host's protected-folder list equal to the Part A derivation for the toy, the recheck, the toy completion check and the configuration test (five valid trials) (second check of round C, S3)",
+          "note": "nine toy crowding table jobs (rr 0.064, capabilities 1.0, 1.5 and 2.25; the settings override gives all nine one toy size, so the double sizes were not exercised by the toy; 64 agents, carrying capacity 640) through the coordinator and host_a11 --local --model-service none, on a toy root inside a toy family folder's source/ laid out like this launch's root; configuration test (five trials valid), recheck matched, check_done_none.py (adapted only for the job count) passed. The drains were not repeated: the crowding flag is read only on the model path, and the coordinator, host, store, runner, worker control and safety, snapshot and service modules do not name it (round C report)"
+        },
+        "full_size_cover": "Part D (binding.full_size_measurement) is the only full-size crowding execution of all three settings; it ran through qualification_a11 run with the same host_a11.execute_scratch the pull host uses. No full-size crowding job has run through the coordinator and host; the registered launch's first dispatches are the first",
+        "precedent": "the sqrt validation, labels and runs each got a new signed rehearsal record; this is the first reuse of an existing one",
+        "basis": "the operator approved with this revision the existing signed record plus the crowding supplement in place of a new signed record",
+        "completion_check": {
+          "script": "stage2_prep/scripts/check_done_none.py",
+          "note": "the estimation completion check used for sqrt (check_done.log, revision 9); its job count is 1,495 for crowding too"
+        }
+      },
+      "satisfied_at_go": [
+        "operator approval of the crowding table qualification supplement, load sheet version 5 revision 3 and the rehearsal basis (this revision)",
+        "the A15 ledger reservation: 22 h of the crowding estimation allowance",
+        "seed history addendum 5 for the round C qualification, rehearsal and configuration seeds and the Part D measurement seeds, committed record-only with this revision",
+        "the root's machine-register approval and the launch go"
+      ],
+      "remaining_at_join": [
+        "(c) the join-time configuration test and rate segment, measured before any registered job and copied into the next revision"
+      ]
     },
     "prior_dispatch_admissions": [
       {
@@ -2678,10 +2994,10 @@
   "seal": {
     "algorithm": "sha256",
     "serialization": "UTF-8 JSON, sorted keys, separators comma and colon without whitespace, ensure_ascii=true, no NaN, no trailing newline; hash the payload object only",
-    "payload_sha256": "59e7162f9c9113f67a05a1c43b77c7631e17acda5e5aa11283ea8ec6f58e7852"
+    "payload_sha256": "358c22c0b474a9eda94417c6f2c3d577536864640bd04f60e8302a5d5eb762a9"
   },
   "operator_approval": {
-    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-13.md section 7: the operator's approval of 2026-11-13 (\"approve 47951a73\") of this register revision 16 (approved as draft payload 47951a73711a4737f0d1541ff51b26f969715a692bb93f76540081c8ccfe3938), payload digest 59e7162f9c9113f67a05a1c43b77c7631e17acda5e5aa11283ea8ec6f58e7852: the sqrt runs' join-time configuration and rate segment (A17 section 2(c)), the launch outcome and the closed admission. Prior approvals in force: revisions 8 to 15 and the 2026-10-31 fixed-code requalification.",
-    "reason": "A record revision: no launch, admission or resource change."
+    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-14.md section 1: the operator's approval of 2026-11-14 (\"approve 20da243a, reserve 22, go\") of this register revision 17 (approved as draft payload 20da243ac70c17934084c02f221d2cb559833b9a9121b501159b637c293d3ee5), payload digest 358c22c0b474a9eda94417c6f2c3d577536864640bd04f60e8302a5d5eb762a9: the crowding table qualification supplement (evidence 9781b893e698ddb27057de72ef12d3d5c0023d6c426491d222df11919211ee1b), load sheet version 5 revision 3 (80b13b4f465466fefe91d60d653b657d25cd0f71064eed95915eba694010c721), the rehearsal basis and dispatch admission for the bound crowding estimation launch. Prior approvals in force: revisions 8 to 16 and the 2026-10-31 fixed-code requalification.",
+    "reason": "Register approval, the launch go and the root's machine-register approval remain distinct records."
   }
 }
