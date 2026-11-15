@@ -5,7 +5,7 @@
     "record_date": "2026-11-14",
     "unit_name": "X2-1",
     "host_class": "X2",
-    "record_status": "Revision 18, approved by the operator, Matt Yotko, 2026-11-14 (\"approve de5310e9, assembly go\"); recorded in a19_2026-11-04/DECISIONS_2026-11-14.md section 3. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594; its crowding kernel path by the revision 17 supplement, evidence 9781b893), a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a), a5_fvplain (revision 12, evidence 25f905dc) and rerun (revision 14, evidence 8d919541); approved_workload_kinds lists all six. The sqrt original estimation (revision 9), the sqrt original validation (revision 11), the sqrt A5 labels (revision 13), the sqrt runs (revision 16) and the crowding original estimation (this revision) completed; their join-time configuration and rate segments are bound in rates.approved_rate_segments. dispatch_admissible false: no launch is bound. Service entry and bound host fields as revision 7.",
+    "record_status": "Revision 19, approved by the operator, Matt Yotko, 2026-11-14 (\"approve 95afebca, reserve 400, go.\"); recorded in a19_2026-11-04/DECISIONS_2026-11-14.md section 7. dispatch_admissible true for the crowding validation launch only. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594; its crowding kernel path by the supplement of revision 17, evidence 9781b893), a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a; their crowding kernel path by the supplement of revision 19, evidence a76196f3), a5_fvplain (revision 12, evidence 25f905dc) and rerun (revision 14, evidence 8d919541). Load sheet version 6 revision 2 bound for the crowding validation. The sqrt estimation, validation, labels and runs and the crowding estimation join segments (revisions 9, 11, 13, 16 and 18) are unchanged. Service entry and bound host fields as revision 7.",
     "scope": "A17 initial register; option C campaign remains X2-1 only",
     "cpu": {
       "available_cpu_budget": 32,
@@ -74,87 +74,106 @@
       },
       "approved_load_sheet": {
         "value": {
-          "document": "stage2_crowding_2026-11-13/launch_package/LOAD_SHEET_v5r3_crowding_estimation.md (version 5 revision 3, the interpreter's correction of the Part D executor's revision 2 in part_d/)",
-          "sha256": "80b13b4f465466fefe91d60d653b657d25cd0f71064eed95915eba694010c721",
+          "document": "stage2_crowding_val_2026-11-14/launch_package/LOAD_SHEET_v6r2_crowding_validation.md (version 6 revision 2, the interpreter's correction of the round CV executor's version 6, built by write_load_sheet_v6r2.py)",
+          "sha256": "0883980f6a612c37ebd561e6427c5073463242163f51f231b21612067fc9dffb",
           "data": {
-            "document": "LOAD_SHEET_v5r3_data.json",
-            "sha256": "468d319aa2a9978560d025434dc7c587e43e003736e0138709b20d59defe495d"
+            "document": "stage2_crowding_val_2026-11-14/LOAD_SHEET_v6_data.json (the executor's version 6 data; revision 2's new figures are in the admission model output)",
+            "sha256": "febd458dd805f15255761d5db7f18015b6f194cedcf58bef5b7738732d6866bc",
+            "admission_model": {
+              "script": "launch_package/lsr2_model.py",
+              "sha256": "4eb2b87e2d02a4051a2bc6a6a0cb65848957ba9cc79248dcb9549972fee14fea",
+              "output": "launch_package/lsr2_model.txt",
+              "output_sha256": "3813ab3dc63d68274a49ade98164456d81811c549406835534726ab088596371"
+            }
           },
-          "version": "version 5 revision 3, 2026-11-14 UTC",
-          "scope": "the crowding original estimation: 1,495 table jobs in one phase (primary 1,375, double population 60, double length 60), pull route on this unit alone, code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit a2b930e0dec74b3bf1d927699279031429da6519",
+          "superseded_version_6": {
+            "document": "stage2_crowding_val_2026-11-14/LOAD_SHEET_v6_crowding_validation.md",
+            "sha256": "f1d7a38ca8818bc6c888545e7eb709c2d85d7ec2fe6f6c07387ac0219e7e9f84",
+            "why": "it left the admission weight term out of its concurrency and real-use figures (second check of round CV, finding 1)"
+          },
+          "version": "version 6 revision 2, 2026-11-15 UTC",
+          "scope": "the crowding original validation: 4,781 A4 jobs in five phases (fit 597, validate_plain 1,791, validate_fv_primary 834, validate_fv_double_population 64, census 1,495), pull route on this unit alone, code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit be553384245592975336786c4a15f2dfc86f8f5c",
           "worker_ceiling": 31,
           "numerical_threads_per_worker": 1,
           "memory_headroom": 0.8,
-          "routes": "every table job runs the plain route first and adds the FV route (five times the chain-steps and trace arrays) only when under half the plain chains remain viable (offline_estimator.estimate lines 195 to 198); a job's peak is set by setting and route (inferred, second check of Part D)",
           "memory_gb_per_worker": {
             "frozen_classes": {
-              "primary": 1.526,
-              "double_population": 2.97,
-              "double_length": 2.827
+              "fit_and_validate_plain": [
+                1.886,
+                3.771,
+                3.773
+              ],
+              "validate_fv_primary": 7.54,
+              "validate_fv_double_population": [
+                15.077,
+                15.079
+              ],
+              "census": [
+                7.54,
+                15.077,
+                15.079
+              ]
             },
-            "sqrt_measured_full_job_maxima": {
-              "primary": 1.528,
-              "double_population": 2.974,
-              "double_length": 2.998
+            "sqrt_validation_measured_maxima": {
+              "fit": 2.825,
+              "validate_plain": 3.216,
+              "validate_fv_primary": 6.323,
+              "validate_fv_double_population": 12.524,
+              "census": 0.258
             },
-            "part_d_crowding_measured": {
-              "primary_plain": 0.431,
-              "double_population_plain": 0.731,
-              "double_length_fv": 2.99
-            },
-            "note": "Part D, one context per setting, beside the sqrt twins: the primary and double population crowding jobs are inferred to have taken plain where their sqrt twins took FV, and the double length pair FV on both sides (it matched to 0.07 percent); the route sits in sealed outputs and is read from the peaks and times. No crowding FV double population job was measured"
+            "crowding_estimation_against_sqrt": "per-setting maxima equal within 1 percent (primary 1.528 against 1.528, double population 2.984 against 2.974, double length 2.998 against 2.998 GB; revisions 18 and 9), so the sqrt validation peaks are the working reference (inferred)"
           },
-          "admission": "the pull coordinator charges each lease min(max(class, observed), weight), weight the mean of the heaviest quarter of unfinished jobs: 1.967 GB at the open, so the opening 31 double population dispatches reserve 61.0 GB and are all admitted before any crowding peak is observed; the worker count at the open is the only control on real use",
-          "opening_wave_real_use_gb": {
-            "workers": [
-              31,
-              30,
-              27,
-              24
-            ],
-            "all_plain_at_0.731": [
-              22.7,
-              21.9,
-              19.7,
-              17.5
-            ],
-            "all_fv_at_sqrt_max_2.974": [
-              92.2,
-              89.2,
-              80.3,
-              71.4
-            ],
-            "all_fv_at_1.2x_sqrt_max_3.569": [
-              110.6,
-              107.1,
-              96.4,
-              85.7
-            ]
+          "admission": "the pull coordinator charges each lease min(max(class, observed), weight), observed 1.2 x the class's measured peak, weight the mean of the largest quarter of the host's unfinished reservations across the remaining phases with its own active leases counted once (multihost_a11.py 886 to 960, dispatch_store_a11.py 307 to 313). Where the weight is below a phase's class the charge is the weight, so the reservations do not bound real use",
+          "registered_memory_gb": {
+            "value": 124.964,
+            "evidence": "d829ff1a40d98708614528bb237a35ffd4f5d7a2e65073661324c645bb022078",
+            "budget_at_0.8": 99.97,
+            "why": "the operator approved the launch's machine register from the revision 10 A4-kind evidence (DECISIONS_2026-11-14 section 6); the crowding supplement's 120.38 GB would give 96.30"
           },
-          "accepted_case": "the operator accepted the all-FV opening at sqrt-size peaks, 92.2 GB at 31 workers, inside the 99.61 GB budget (0.8 x MemAvailable 124.51 GB) and the 110 GB GUPPI envelope, without a further measurement (DECISIONS_2026-11-13 section 12). Summed peaks reach 110 GB at 31 only if crowding FV peaks run about 19 percent above sqrt's",
-          "live_memavailable_gb": 124.51,
-          "memory_budget_gb": 99.61,
-          "guppi_envelope_gb": 110,
-          "projection": "none: estimation specs (schema v3-A10-estimation-1) face no pre-dispatch projection gate (multihost_a11.py projection and check_projection apply it only to v3-A4-validation-1 and v3-A5-labels-1). Two clock stops apply (stops()): the wall stop at the coordinator's start plus wall_seconds, configuration time included, and the charged-allowance stop at x2_equivalent_hours of session charge; both fire cleanup_reserve_seconds (300 s) early. At a stop, dispatch stops and running jobs finish (A19)",
+          "concurrency_at_open": {
+            "fit": 16,
+            "validate_plain": 16,
+            "validate_fv_primary": 13,
+            "validate_fv_double_population": 8,
+            "census": 8,
+            "basis": "computed by lsr2_model.py from the frozen spec with the configuration tests choosing sqrt's 16, 16, 16, 16 and 24; fit and validate_plain bound by that choice, validate_fv_primary by memory (9.855 GB weight, 7.540 charge; 13 also after peaks are observed at 7.588), validate_fv_double_population and census by the overall target of 8 (memory alone admits 9 at an 11.096 GB weight, and 10 then 13 in census)"
+          },
+          "real_use_at_sqrt_largest_peaks_gb": {
+            "fit": 45.2,
+            "validate_plain": 51.5,
+            "validate_fv_primary": 82.2,
+            "validate_fv_double_population": 100.2,
+            "census": 2.1,
+            "without_the_cap": {
+              "validate_fv_double_population": 112.7
+            },
+            "kind": "computed conservative bound: every running job at the phase's largest measured sqrt peak at once"
+          },
+          "fv_double_population_cap": {
+            "decision": "DECISIONS_2026-11-14 section 6 (\"Cap at 8\"). The decision record says host worker target; the package uses the coordinator's overall worker target, which on one host has the same effect on leases and leaves the configuration choices alone, and the trigger at most 8 FV primary jobs unfinished, at which point none is waiting to be dispatched. The substitution is stated in the launch package's ask and noted in the decision record",
+            "mechanism": "fvd_cap_watch.py, started on X2-1 before the launch and polling each minute: when the coordinator is in phase index 2 and at most 8 of the 834 FV primary jobs are unfinished (826 or more records in validate_fv_primary/records), it runs production_runner control ROOT --workers 8, the overall worker target (multihost_a11.py line 920, enforced on every lease including the phase recheck). The control's transaction lock waits up to 30 s and then raises (multihost_a11.py 122 to 133), so the watcher retries the idempotent control with a growing pause until pull_state.json reads a control.max_workers at or below 8, the pass test, then exits. It reads the target before every attempt, so it never raises a lower target the operator set. If it first sees phase index 3 or later with the target unset, it logs LATE with the running count from each phase's status.json and sets the target at once. It exits also when the launch is complete or its last launch record is finished. It never stops, restarts or drains anything",
+            "liveness": "the watcher rewrites a one-line state file (fvd_cap_watch.log.state) every poll and once more at exit with the reason, and survives an error in a poll. It runs under fvd_cap_watch_loop.sh (sha256 8018643ef4b9b3b028a561ce733331aabb1f69509e5fd2109b85507fa8ce037f), which restarts it 60 s after a crash and ends on its intended exits (0) or a failed start precondition (2). The memory watch records its process and the state line's age in every sample. A scheduled interpreter check every 6 hours during the launch reads the state line and the log, and the interpreter checks again when FV primary passes about 700 records, restarting the loop if it has stopped (safe at any time)",
+            "script_sha256": "306df6a4dc298aee1b9f85dc0bf4a1351dc65e8a06be855d5be03fe15dc01227",
+            "tests": "test_fvd_cap_watch.py: 16 branch tests against fake roots with a stub control, 16 of 16 passed (output sha256 7e06a9f192f43e135fc86745efd17d987b3ce1e923baedaa88afa7771fe32c99), covering the threshold, waiting, late with a running count, complete, wrong manifest, test-apply refusal, phase 1, already set, a control failing twice then retried, a malformed state survived, an unrelated event after the control, a finished launch, a running launch, a lower operator target kept, the exit state line, and a target lowered while retrying. test_fvd_cap_watch_loop.sh: the loop wrapper's 4 tests, 4 of 4 (output sha256 4446ebd10aac9dca4e4f784546401d9bd2ab385286dca7a802b0a45bfa6a4f09). Three dry runs on X2-1 with the real control on copies of round CV's finished toy V1 root, at phase index 5: 01:18:02Z and 01:45:39Z ran earlier versions (control_dry_run.out 7d3e760b, control_dry_run2.out 8d3aa891); 02:01:29Z ran the watcher 306df6a4 bound here through its loop wrapper (control_dry_run3.out 2e2e215b): CAP_APPLIED, read back 8, the loop ended on exit 0, the registered root's pull_state (7a76ec78) and the toy original unchanged. No dry run exercised the trigger in a live phase 2; that path rests on the branch tests and the code",
+            "margin": "8 x 12.524 = 100.2 GB crosses the 110 GB term only if crowding's FV double-population peaks run about 9.8 percent above sqrt's largest",
+            "not_covered": "the five configuration tests run at the host's join, before the cap; their trials are unleased, and the FV double-population trial's real use is bounded near 80 GB by the trial admission rule (the package second check's estimate from sqrt's trial figures, inferred)",
+            "cost_hours_inferred": 1.9,
+            "guppi_envelope_gb": 110,
+            "if_late": "a ninth job already admitted runs to completion; the interpreter reports it to the operator"
+          },
+          "projection": "validation specs face the coordinator's pre-dispatch projection (multihost_a11.py check_projection), which may refuse only before the first scientific dispatch and is advisory after it (A19). The second check's reimplementation reproduces sqrt's recorded opening projection (171.37 h) and gives about 166 h for crowding against the 399.0 h available at sqrt's configuration-trial rates; it refuses only if the trials run about 2.4 times slower (inferred)",
           "eta_hours": {
-            "at_31_all_plain_end": 3.0,
-            "at_31_fv_like_end": 17.8,
-            "fv_like_slow_bound": {
-              "31": 17.8,
-              "30": 18.4,
-              "27": 20.4,
-              "24": 23.0
-            },
-            "fv_like_fast_bound_24": 19.1,
-            "budget_estimate_plan_method": 16.74,
-            "sqrt_measured_same_layout_31_workers": 16.015,
-            "ceiling_less_reserve": 21.92,
-            "kind": "ranges by route, inferred from Part D's single-context ratios (0.186, 0.237, 1.110); none a deadline. Rate-based ETAs replace these once the configuration test and first completions are recorded"
+            "projection_from_sqrt_measured_rates": 104.42,
+            "with_the_cap": 105.2,
+            "budget_estimate_plan_method": 221.18,
+            "budget_estimate_memory_qualified": 141.79,
+            "sqrt_measured": 109.97,
+            "ceiling": 400,
+            "kind": "estimates, none a deadline; the projection assumes crowding job times per phase equal sqrt's. Count-based rate ETAs replace these once each phase's first completions are recorded"
           },
-          "worker_setting": "the operator's choice (DECISIONS_2026-11-13 section 12): the host starts with --workers 31 and no override, so the join's configuration test chooses among 8, 12, 16, 24 and 31 under the standard rule; a choice below 24 goes to the operator at once. The rate-based ETA is cost-weighted by frozen class, read about 2 h after the first dispatch and again after about 100 primaries; if it passes about 19 h, the interpreter asks the operator to raise the count to 31 live (production_runner control ROOT --host yotko-evo-x2 --workers 31), a separate approval at the time. The host worker raise is unit-tested (loopback) and traced in the code, never used on X2-1",
-          "eta_not_an_upper_bound": "17.8 h applies the one FV-to-FV pair ratio (1.11) to every job; a weighted ratio of 1.369 puts 31 workers at the ceiling; crowding taking FV where sqrt took plain lies outside the range",
-          "thermal_reference": "Tctl 95.4 and 95.1 C early in the sqrt estimation at 31 workers; at most 96.1 C over the first 4 h of the labels run at 16 workers; at most 98.6 C over the sqrt runs at 24 workers; at most 98.0 C in Part D at six workers or fewer. No throttle point is recorded. An observation, not a limit",
-          "approved": "operator, 2026-11-14, in session (\"approve 20da243a, reserve 22, go\"); recorded in a19_2026-11-04/DECISIONS_2026-11-14.md section 1. A resource approval only: not a launch go and not dispatch admission.",
+          "thermal_reference": "the crowding estimation at 24 workers: Tctl at most 100.1 C, median 95.75 C, 883 of 4,938 samples at or above 98 C, no fault (revision 18). The sqrt validation left three readings in its first 65 minutes (66.2, 93.2 and 95.0 C at 16 workers) and none after. Validation runs 8 to 16 workers by phase, so it is expected to run cooler (inferred). An observation, not a limit",
+          "census_reservation_artifact": "freeze prices census with both route strata; the census charge is the weight (9.958, then 7.540 GB) against a real need under 0.3 GB; accepted as for sqrt (round 5 finding 1)",
+          "approved": "operator, 2026-11-14, in session (\"approve 95afebca, reserve 400, go.\"); recorded in a19_2026-11-04/DECISIONS_2026-11-14.md section 7. A resource approval only: not a launch go and not dispatch admission.",
           "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval"
         }
       },
@@ -435,6 +454,92 @@
               "kind": "estimates, none a deadline. The 4.1 h is inferred from stage 1's k* arms of the same shape (about 2.05 h on each of two X2s, ledger). The 2.75 h is inferred from Part B's 36 worker-seconds per job at 16 workers (4,400 x 36 / 16, before overhead); stage 1 measured 99 worker-seconds per job at 31 workers, and this round did not measure 31. Rate-based ETAs replace these once the configuration test and first completions are recorded"
             },
             "approved": "operator, 2026-11-13, in session (\"approve 30f15a42\"); recorded in a19_2026-11-04/DECISIONS_2026-11-13.md section 5. A resource approval only: not a launch go and not dispatch admission.",
+            "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval"
+          }
+        },
+        {
+          "value": {
+            "document": "stage2_crowding_2026-11-13/launch_package/LOAD_SHEET_v5r3_crowding_estimation.md (version 5 revision 3, the interpreter's correction of the Part D executor's revision 2 in part_d/)",
+            "sha256": "80b13b4f465466fefe91d60d653b657d25cd0f71064eed95915eba694010c721",
+            "data": {
+              "document": "LOAD_SHEET_v5r3_data.json",
+              "sha256": "468d319aa2a9978560d025434dc7c587e43e003736e0138709b20d59defe495d"
+            },
+            "version": "version 5 revision 3, 2026-11-14 UTC",
+            "scope": "the crowding original estimation: 1,495 table jobs in one phase (primary 1,375, double population 60, double length 60), pull route on this unit alone, code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit a2b930e0dec74b3bf1d927699279031429da6519",
+            "worker_ceiling": 31,
+            "numerical_threads_per_worker": 1,
+            "memory_headroom": 0.8,
+            "routes": "every table job runs the plain route first and adds the FV route (five times the chain-steps and trace arrays) only when under half the plain chains remain viable (offline_estimator.estimate lines 195 to 198); a job's peak is set by setting and route (inferred, second check of Part D)",
+            "memory_gb_per_worker": {
+              "frozen_classes": {
+                "primary": 1.526,
+                "double_population": 2.97,
+                "double_length": 2.827
+              },
+              "sqrt_measured_full_job_maxima": {
+                "primary": 1.528,
+                "double_population": 2.974,
+                "double_length": 2.998
+              },
+              "part_d_crowding_measured": {
+                "primary_plain": 0.431,
+                "double_population_plain": 0.731,
+                "double_length_fv": 2.99
+              },
+              "note": "Part D, one context per setting, beside the sqrt twins: the primary and double population crowding jobs are inferred to have taken plain where their sqrt twins took FV, and the double length pair FV on both sides (it matched to 0.07 percent); the route sits in sealed outputs and is read from the peaks and times. No crowding FV double population job was measured"
+            },
+            "admission": "the pull coordinator charges each lease min(max(class, observed), weight), weight the mean of the heaviest quarter of unfinished jobs: 1.967 GB at the open, so the opening 31 double population dispatches reserve 61.0 GB and are all admitted before any crowding peak is observed; the worker count at the open is the only control on real use",
+            "opening_wave_real_use_gb": {
+              "workers": [
+                31,
+                30,
+                27,
+                24
+              ],
+              "all_plain_at_0.731": [
+                22.7,
+                21.9,
+                19.7,
+                17.5
+              ],
+              "all_fv_at_sqrt_max_2.974": [
+                92.2,
+                89.2,
+                80.3,
+                71.4
+              ],
+              "all_fv_at_1.2x_sqrt_max_3.569": [
+                110.6,
+                107.1,
+                96.4,
+                85.7
+              ]
+            },
+            "accepted_case": "the operator accepted the all-FV opening at sqrt-size peaks, 92.2 GB at 31 workers, inside the 99.61 GB budget (0.8 x MemAvailable 124.51 GB) and the 110 GB GUPPI envelope, without a further measurement (DECISIONS_2026-11-13 section 12). Summed peaks reach 110 GB at 31 only if crowding FV peaks run about 19 percent above sqrt's",
+            "live_memavailable_gb": 124.51,
+            "memory_budget_gb": 99.61,
+            "guppi_envelope_gb": 110,
+            "projection": "none: estimation specs (schema v3-A10-estimation-1) face no pre-dispatch projection gate (multihost_a11.py projection and check_projection apply it only to v3-A4-validation-1 and v3-A5-labels-1). Two clock stops apply (stops()): the wall stop at the coordinator's start plus wall_seconds, configuration time included, and the charged-allowance stop at x2_equivalent_hours of session charge; both fire cleanup_reserve_seconds (300 s) early. At a stop, dispatch stops and running jobs finish (A19)",
+            "eta_hours": {
+              "at_31_all_plain_end": 3.0,
+              "at_31_fv_like_end": 17.8,
+              "fv_like_slow_bound": {
+                "31": 17.8,
+                "30": 18.4,
+                "27": 20.4,
+                "24": 23.0
+              },
+              "fv_like_fast_bound_24": 19.1,
+              "budget_estimate_plan_method": 16.74,
+              "sqrt_measured_same_layout_31_workers": 16.015,
+              "ceiling_less_reserve": 21.92,
+              "kind": "ranges by route, inferred from Part D's single-context ratios (0.186, 0.237, 1.110); none a deadline. Rate-based ETAs replace these once the configuration test and first completions are recorded"
+            },
+            "worker_setting": "the operator's choice (DECISIONS_2026-11-13 section 12): the host starts with --workers 31 and no override, so the join's configuration test chooses among 8, 12, 16, 24 and 31 under the standard rule; a choice below 24 goes to the operator at once. The rate-based ETA is cost-weighted by frozen class, read about 2 h after the first dispatch and again after about 100 primaries; if it passes about 19 h, the interpreter asks the operator to raise the count to 31 live (production_runner control ROOT --host yotko-evo-x2 --workers 31), a separate approval at the time. The host worker raise is unit-tested (loopback) and traced in the code, never used on X2-1",
+            "eta_not_an_upper_bound": "17.8 h applies the one FV-to-FV pair ratio (1.11) to every job; a weighted ratio of 1.369 puts 31 workers at the ceiling; crowding taking FV where sqrt took plain lies outside the range",
+            "thermal_reference": "Tctl 95.4 and 95.1 C early in the sqrt estimation at 31 workers; at most 96.1 C over the first 4 h of the labels run at 16 workers; at most 98.6 C over the sqrt runs at 24 workers; at most 98.0 C in Part D at six workers or fewer. No throttle point is recorded. An observation, not a limit",
+            "approved": "operator, 2026-11-14, in session (\"approve 20da243a, reserve 22, go\"); recorded in a19_2026-11-04/DECISIONS_2026-11-14.md section 1. A resource approval only: not a launch go and not dispatch admission.",
             "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval"
           }
         }
@@ -1153,6 +1258,83 @@
               "date": "2026-11-14",
               "words": "approve 20da243a, reserve 22, go",
               "record": "a19_2026-11-04/DECISIONS_2026-11-14.md section 1"
+            }
+          }
+        }
+      },
+      "launch_identity_a4_kinds_crowding_supplement": {
+        "value": {
+          "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+          "commit": "be553384245592975336786c4a15f2dfc86f8f5c",
+          "date": "2026-11-15 UTC",
+          "kinds": [
+            "a4_census",
+            "a4_fit",
+            "a4_validate"
+          ],
+          "supplements": "qualification_records.launch_identity_a4_kinds (evidence d829ff1a, revision 10), whose 60 jobs were built from the sqrt validation spec",
+          "purpose": "the crowding kernel (kernel.crowding = reproductive) switches a distinct model path that no A4-kind qualification or validation rehearsal at this identity had run. Under A11 and A17 section 2(b) qualification is keyed to host, launch identity and kind, so the three A4 kinds were already qualified; this record tests the crowding path in those kinds directly, as the table-kind crowding supplement of revision 17 did for the estimation",
+          "host_role": "X2-1 is both reference and candidate; relative_throughput 1.0 and scheduling rate 1.0 by same-host identity",
+          "plan": {
+            "file_sha256": "ec7122d219403b2cf4898f5b17debc46b1796a79ff2ad0e835e9e302a235882a",
+            "payload_sha256": "1ef1241fc59cb844f4ec7f52565713182e67e2637161453c5dae72d49ef2c457",
+            "jobs": 60,
+            "distinct_jobs_per_kind": {
+              "a4_fit": 20,
+              "a4_validate": 20,
+              "a4_census": 20
+            },
+            "built_from": "the frozen registered crowding validation spec (168c638d) by qualification_a11 build, on the short configuration profiles (burn 8, measure 24, census 44): a4_fit 20 and a4_census 20 on the fit and census profiles (plain, primary); a4_validate 7 on the validate_plain profile (self-contained, fitting inline), 7 on validate_fv_primary and 6 on validate_fv_double_population. No double-length FV job: under a short profile the burn and measure lengths are replaced, so a double-length job has the shape of a primary one (second check of round CV, item 5). Every kernel carries crowding reproductive",
+            "seeds": "validation-tag stream and stable_job seeds in [2^128, 2^129), outside every reserved range; entered in seed history addendum 6 (qualification category). The 7 self-contained plain a4_validate jobs fit inline under the registered fit stream seed of their one source job (table_validation_a4.py line 271), as round 5's did; disclosed in addendum 6"
+          },
+          "reference": {
+            "file_sha256": "29da7fe339aac70b54146921aa727725a9c796a5a6abaee2cff7cd868b55b437",
+            "elapsed_seconds": 106.66,
+            "workers": 16,
+            "passed": true,
+            "model_service": "none"
+          },
+          "candidate": {
+            "file_sha256": "b58db88e4971d14553c7de53ec04971361cd6c14127b86d69582e69a3a5fccfc",
+            "elapsed_seconds": 104.85,
+            "workers": 16,
+            "passed": true,
+            "model_service": "none"
+          },
+          "evidence": {
+            "file_sha256": "a76196f3c3c06dbcbfa4578cd763ea5746c7429535630846c95a026bdaeaf4f5",
+            "payload_sha256": "7ba88c1021766a790e59d672e44f910e18fc629a2b5a4da4989ad49f11ded062",
+            "schema": "v3-A11-qualification-1",
+            "passed": true,
+            "proofs": 60,
+            "bit_identical": 60,
+            "relative_throughput": 1.0,
+            "validate_evidence": "passed at this identity for kinds a4_fit, a4_validate and a4_census (20 distinct jobs each, A17 section 2(b))",
+            "candidate_memory_gb": 120.379592704,
+            "trial_peak_rss_gb_by_kind": {
+              "a4_census": 0.119,
+              "a4_fit": 0.481,
+              "a4_validate": 3.288
+            },
+            "worker_seconds_by_kind_candidate": {
+              "a4_fit": 185.0,
+              "a4_validate": 920.8,
+              "a4_census": 40.9
+            },
+            "note": "short-profile jobs: the peaks and worker seconds measure the configuration profiles, not full validation jobs (the sqrt validation's full jobs peaked at 2.83 to 12.52 GB by phase). This evidence is not the one the launch's machine register is approved from (dispatch_admission.machine_register_approval)"
+          },
+          "evidence_notes": {
+            "record": "v3/_stage2_prep/qual_a4_crowding/EVIDENCE_NOTES.json (stage2_prep/crowding_v/qual links to it)",
+            "sha256": "a82c89e258270a86996b9a26fcf8355c1ccbd7964a7849264923a1e9cc0de767"
+          },
+          "service_state": "llm-server inactive and disabled throughout; --model-service none on both runs",
+          "operator_approval": {
+            "value": {
+              "approved": true,
+              "operator": "Matt Yotko",
+              "date": "2026-11-14",
+              "words": "approve 95afebca, reserve 400, go.",
+              "record": "a19_2026-11-04/DECISIONS_2026-11-14.md section 7"
             }
           }
         }
@@ -2320,14 +2502,14 @@
     },
     "per_class_capacities": {
       "value": null,
-      "reason": "Not bound at register level. Each launch's capacities are carried by its own approved load sheet (version 1 for the sqrt estimation, version 2 for the sqrt validation, version 3 for the sqrt A5 labels, version 4 for the sqrt runs, version 5 for the crowding estimation); the measured peaks are in approved_rate_segments and the qualification records. A register-level capacity would need its own measured and approved record."
+      "reason": "Not bound at register level. Each launch's capacities are carried by its own approved load sheet (version 1 for the sqrt estimation, version 2 for the sqrt validation, version 3 for the sqrt A5 labels, version 4 for the sqrt runs, version 5 for the crowding estimation, version 6 revision 2 for the crowding validation); the measured peaks are in approved_rate_segments and the qualification records. A register-level capacity would need its own measured and approved record."
     },
     "private_transport_mapping": {
       "value": null,
       "reason": "No private endpoint mapping is supplied for public staging; resolve privately without changing public unit identity."
     },
-    "dispatch_admissible": false,
-    "admission_reason": "Not admissible: no launch is bound. The revision 17 admission was for the crowding original estimation only, and that launch completed at 2026-11-14T19:08Z, 14:08 EST.",
+    "dispatch_admissible": true,
+    "admission_reason": "Admissible for the launch bound in dispatch_admission only: the crowding original validation at 93a453b2 on the pull route, X2-1 alone, root v3/runs/a10_stage2/crowding/validation_run, wall 400 h, machine register from evidence d829ff1a, the FV double-population phase held at 8 by the overall worker target. (a), (b) and (d) are bound and approved; (c) is measured at the host's join, all five phases' configuration tests before any registered job, under the operator-approved reading of A17 section 2(c) of 2026-11-06. Not an admission for any other launch, family, kind, root or identity.",
     "evidence": {
       "preparation_report": {
         "record": "X2-1 requalification preparation report, 2026-10-30",
@@ -2464,7 +2646,9 @@
       "rehearsal_approval_validation": {
         "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved_validation.json, reviewed unsigned at this sha256; signed in the operator's name at the go (operator, 2026-11-07, in session (\"approved, launch it\"); recorded in a19_2026-11-04/DECISIONS_2026-11-07.md section 3); the signed copy's hash is recorded with the launch's join segment",
         "sha256": "c0bbf37412699f72ec0683a0f2c44cbd062c72c3190cc813d6dad3d61167b66d",
-        "use": "V0 and V1 toy pull-route rehearsal results bound to code_hash 93a453b2"
+        "use": "V0 and V1 toy pull-route rehearsal results bound to code_hash 93a453b2",
+        "signed_sha256": "efb62fd137670e660eaa111e151f757453509117f006f7dcc307c9ba308c23e4",
+        "signed_note": "the signed copy's hash, recorded in revision 19 (omitted in revision 11)"
       },
       "stage2_seed_history_addendum_1": {
         "record": "simulation/v3/runs/registered/A10_stage2_seed_history_addendum_1.json (committed record-only with this revision)",
@@ -2650,18 +2834,257 @@
         "sha256": "2a5a46ab68128f6ee51d28fbd951e30b230d3b4ccb07a06eb1b3117d0a98321c",
         "seal": "48d4da14dd47663e537fa08e1d9b543e1bed0117f8ae6634592fb3217cc40f75",
         "use": "the 66 seeds round C and Part D introduced (qualification 20, rehearsal 9, configuration 31, measurement 6); none reused"
+      },
+      "qualification_plan_a4_crowding_93a453b2": {
+        "record": "v3/_stage2_prep/qual_a4_crowding/plan.json, 2026-11-15 UTC (on X2-1)",
+        "sha256": "ec7122d219403b2cf4898f5b17debc46b1796a79ff2ad0e835e9e302a235882a",
+        "use": "the 60 crowding A4 qualification jobs and seeds"
+      },
+      "qualification_evidence_a4_crowding_93a453b2": {
+        "record": "v3/_stage2_prep/qual_a4_crowding/x2_evidence.json, 2026-11-15 UTC (on X2-1)",
+        "sha256": "a76196f3c3c06dbcbfa4578cd763ea5746c7429535630846c95a026bdaeaf4f5",
+        "use": "pass verdict, counts, hashes, throughput, fingerprint, candidate memory"
+      },
+      "load_sheet_crowding_validation_v6r2": {
+        "record": "stage2_crowding_val_2026-11-14/launch_package/LOAD_SHEET_v6r2_crowding_validation.md",
+        "sha256": "0883980f6a612c37ebd561e6427c5073463242163f51f231b21612067fc9dffb",
+        "model_output_sha256": "3813ab3dc63d68274a49ade98164456d81811c549406835534726ab088596371",
+        "use": "workers, memory admission with the weight term, real use, the FV double-population cap, run time, thermal reference"
+      },
+      "validation_spec_crowding": {
+        "record": "v3/runs/a10_stage2/crowding/validation_plan.json (frozen pull spec)",
+        "sha256": "168c638d6265e664c47201d6721897725ef4e5f8d79bb7ce676de1407faae3f1",
+        "use": "the launch's sealed manifest; job counts, phases and ceiling only"
+      },
+      "validation_plan_summary_crowding": {
+        "record": "stage2_prep/crowding_v/PLAN_SUMMARY.json",
+        "sha256": "668c25e5c1ffda29bbca85d0a3885f2bd38eff4aa445e4046c5d918d95d50c2a",
+        "use": "the inventory checks, the operational counts and the comparison with the sqrt registered plan"
+      },
+      "check_spec_summary_crowding_validation": {
+        "record": "stage2_prep/crowding_v/CHECK_SPEC_SUMMARY.json",
+        "sha256": "99c6cc8ad7b6370a554e8c41285c26ae655180a4c15720977b70fd4308817a7f",
+        "use": "freeze, validate_extension, validate_spec, context preflight and root preparation"
+      },
+      "validation_seed_check_crowding": {
+        "record": "stage2_prep/crowding_v/SEED_CHECK.json, 2026-11-15 UTC",
+        "sha256": "c455a3101c8c3ff87a8fe6caf5032fab875b0bab75d20cb677ab4be63f8c6ff4",
+        "use": "registry membership and no-collision results for the 4,781 stream and outer seeds"
+      },
+      "root_placement_crowding_validation": {
+        "record": "stage2_prep/crowding_v/ROOT_PLACEMENT.json",
+        "sha256": "bbb63bfb26ed638f1df1f3da26a2b68ed9f5724595f7bee8add0625a40f04ddd",
+        "use": "the root against the input snapshot's protected folders, by phase, checked before the root existed"
+      },
+      "rehearsal_crowding_validation_supplement": {
+        "record": "stage2_prep/crowding_v/REHEARSAL_CV_CHECK.json",
+        "sha256": "dee83b220241f5bcb39e72cb1cd952391f9211248f1ad74dab73340ba004479b",
+        "use": "the crowding five-phase toy pull-route rehearsal, a supplement to the signed validation rehearsal record (efb62fd1)"
+      },
+      "thermal_reference_crowding_validation": {
+        "record": "stage2_prep/crowding_v/THERMAL_REFERENCE.json",
+        "sha256": "b2b230508258f3a2bb0a7f2e3ec070a7926f10107ba5d19621e4bba384a2e81a",
+        "use": "what X2-1 kept of the sqrt validation's Tctl, and the poll logs of later launches"
+      },
+      "fv_double_population_cap_watcher": {
+        "record": "stage2_crowding_val_2026-11-14/launch_package/fvd_cap_watch.py",
+        "sha256": "306df6a4dc298aee1b9f85dc0bf4a1351dc65e8a06be855d5be03fe15dc01227",
+        "loop_wrapper": {
+          "record": "launch_package/fvd_cap_watch_loop.sh",
+          "sha256": "8018643ef4b9b3b028a561ce733331aabb1f69509e5fd2109b85507fa8ce037f"
+        },
+        "tests_sha256": "3b98c683504ef02cd405c42350c6ab7f60d93e94749268e0847129063d08f53b",
+        "tests_output_sha256": "7e06a9f192f43e135fc86745efd17d987b3ce1e923baedaa88afa7771fe32c99",
+        "loop_tests_sha256": "ddde63eb33cf51bbe2c6bbf0eeb675f646d16f3336d39feffbe0e62d6bbcfceb",
+        "loop_tests_output_sha256": "4446ebd10aac9dca4e4f784546401d9bd2ab385286dca7a802b0a45bfa6a4f09",
+        "dry_run_output_sha256": "2e2e215bdb1b4e2637e3b812fe11fabc767f72edfbfdb1650c37b177bfcf57f3",
+        "dry_run_script_sha256": "2c6147587645bb0d90f60ae850639720726129cd25818fe7e4ca38bf0ef942d8",
+        "earlier_version_dry_run_outputs_sha256": [
+          "7d3e760b2a8f33d1491f638bc8e6b0ae1136dbc2a50858168c238d6cf0a873e0",
+          "8d3aa891b1e071ab8ef5d43ee903bb4829ae4ed1aab6390e8bef44a44b242978"
+        ],
+        "use": "the decided cap of 8 for the FV double-population phase and census"
+      },
+      "second_check_launch_package_crowding_validation": {
+        "record": "stage2_crowding_val_2026-11-14/launch_package/second_check/REPORT.md",
+        "sha256": "1459f7f70f693154f1864f36f4d64b63240ce0f5c088d4f22face2550a497160",
+        "use": "the independent second check of this package; its findings are disposed of in INTERPRETER_REPAIR_PACKAGE.md"
+      },
+      "final_check_launch_package_crowding_validation": {
+        "record": "stage2_crowding_val_2026-11-14/launch_package/final_check/REPORT.md",
+        "sha256": "f293cfec59d8f08c7abd37bff4c3e1120081b0cb87a6a996b242387f63f65a8a",
+        "use": "the final check of the package's repair round; its findings are disposed of in INTERPRETER_REPAIR_PACKAGE.md, second round"
+      },
+      "completion_check_crowding_validation": {
+        "record": "stage2_crowding_val_2026-11-14/launch_package/check_done_validation_crowding.py",
+        "sha256": "c4928285e4bd9e0f5b0d10eba24ba7b808971eb4f722565b31c52f04b52f92c6",
+        "use": "the completion check after the run"
+      },
+      "second_check_round_cv": {
+        "record": "stage2_crowding_val_2026-11-14/second_check/REPORT.md",
+        "sha256": "ef3e03e5be039a7c0d31fa7299cf0dfc659c092a7419ddda91077ca421604319",
+        "use": "the independent second check of round CV, its findings and the join-placement re-derivation"
+      },
+      "stage2_seed_history_addendum_6": {
+        "record": "v3/runs/registered/A10_stage2_seed_history_addendum_6.json",
+        "sha256": "e1ec70aa1bdcc72367c42c499b9d240e0202f034b4eebbae372ab6267686eeed",
+        "seal": "8ac1f8aba74f263b87b8a30bed3f1202637dce5613c159a82ddc14ea031fad7e",
+        "use": "the 509 seeds round CV introduced (qualification 120, rehearsal 48, configuration 341); one toy probe seed reused, listed apart"
       }
     },
     "revision": {
-      "number": 18,
-      "supersedes_payload_sha256": "358c22c0b474a9eda94417c6f2c3d577536864640bd04f60e8302a5d5eb762a9",
-      "supersedes_commit": "78a29f56",
-      "reason": "Approved by the operator on 2026-11-14 (\"approve de5310e9, assembly go\"). Binds the join-time configuration and rate segment of the crowding original estimation (A17 section 2(c), the operator-approved join-time reading; the table configuration test at the join, before the first registered job), records that launch's outcome (1,495 of 1,495, no drain, no live control, 14.12 X2-equivalent hours charged) and closes its admission (dispatch_admissible false; no launch bound). One wording correction in the qualification records: the crowding supplement's plan text named its Part D binding by a path that moved with the revision 17 admission, now prior_dispatch_admissions[4].full_size_measurement. Qualification evidence, approved_workload_kinds, load sheets, service entry and host fields otherwise unchanged."
+      "number": 19,
+      "supersedes_payload_sha256": "dbea56fac184d3c8f60d1f41909872c421c6fcd91b23209bb30b0695bcfd8230",
+      "supersedes_commit": "be553384",
+      "reason": "Approved by the operator on 2026-11-14 (\"approve 95afebca, reserve 400, go.\"). Binds the crowding A4-kind qualification (evidence a76196f3, 60 of 60) as a supplement to the revision 10 A4-kind record, binds load sheet version 6 revision 2 with the FV double-population cap of DECISIONS_2026-11-14 section 6, records seed history addendum 6, and admits the crowding original validation (spec crowding/validation_plan.json 168c638d, seal d9ecf757, root crowding/validation_run, 4,781 A4 jobs in five phases, wall 400 h, machine register from evidence d829ff1a), with the signed validation rehearsal record of 2026-11-07 and round CV's crowding rehearsal check as its rehearsal basis. It also records the signed validation rehearsal record's hash (efb62fd1) in the sqrt validation's prior admission and evidence entry, which revision 11 omitted. approved_workload_kinds, the earlier join segments and closed admissions, the service entry and the host fields are unchanged."
     },
-    "approved_workload_kinds_note": "table at code identity 93a453b2 on the launch-identity qualification approved in revision 8 (evidence 8522d594), with its crowding kernel path further qualified by the supplement approved in revision 17 (evidence 9781b893); a4_fit, a4_validate and a4_census at the same identity on the qualification approved in revision 10 (evidence d829ff1a); a5_fvplain at the same identity on the qualification approved in revision 12 (evidence 25f905dc); rerun at the same identity on the qualification approved in revision 14 (evidence 8d919541). Other kinds are added only by their own launches' qualification records.",
+    "approved_workload_kinds_note": "table at code identity 93a453b2 on the launch-identity qualification approved in revision 8 (evidence 8522d594), with its crowding kernel path further qualified by the supplement approved in revision 17 (evidence 9781b893); a4_fit, a4_validate and a4_census at the same identity on the qualification approved in revision 10 (evidence d829ff1a), with their crowding kernel path further qualified by the supplement approved in revision 19 (evidence a76196f3); a5_fvplain at the same identity on the qualification approved in revision 12 (evidence 25f905dc); rerun at the same identity on the qualification approved in revision 14 (evidence 8d919541). Other kinds are added only by their own launches' qualification records.",
     "dispatch_admission": {
-      "launch": null,
-      "reason": "No launch is bound. The revision 17 admission covered only the crowding original estimation on root v3/runs/a10_stage2/crowding/source/tables_A1, which completed at 2026-11-14T19:08Z, 14:08 EST (prior_dispatch_admissions). A further launch on this unit, including the crowding assembly's later steps that need a dispatch, needs its own dispatch binding, load sheet and go in a later revision."
+      "launch": "the crowding original validation (approvals item 22, C-V; STAGE2_PLAN line 91), A4 five phases, pull route on X2-1 alone (A17 coordinator plus one host), normal mode, --model-service none",
+      "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+      "commit": "be553384245592975336786c4a15f2dfc86f8f5c",
+      "spec": {
+        "path": "v3/runs/a10_stage2/crowding/validation_plan.json",
+        "file_sha256": "168c638d6265e664c47201d6721897725ef4e5f8d79bb7ce676de1407faae3f1",
+        "payload_sha256": "d9ecf757ea77b5fb88384980762d9d4dec1168396f36d5d5cd3365b5cff974c6",
+        "plan_hash": "18a4b8c03a3274f29ceaf257c17e1aacbe60de2a3b1e55f6921c83b5ef7f76f2",
+        "schema": "v3-A4-validation-1",
+        "jobs": 4781,
+        "phases": {
+          "fit": 597,
+          "validate_plain": 1791,
+          "validate_fv_primary": 834,
+          "validate_fv_double_population": 64,
+          "census": 1495
+        },
+        "P": 597,
+        "F": 898,
+        "Fp": 834,
+        "Fd": 64,
+        "by_setting": {
+          "plain": {
+            "primary": 541,
+            "double_population": 30,
+            "double_length": 26
+          },
+          "fv": {
+            "primary": 834,
+            "double_population": 30,
+            "double_length": 34
+          }
+        },
+        "M": 55466,
+        "M_FV": 45042,
+        "probe_seed_count": 855,
+        "wall_seconds": 1440000,
+        "x2_equivalent_hours": 400,
+        "configuration_seconds": 1800,
+        "cleanup_reserve_seconds": 1200,
+        "a10_family": "crowding",
+        "a10_stage": 2,
+        "kernel": {
+          "crowding": "reproductive"
+        },
+        "registration_pin": {
+          "commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
+          "note_sha256": "a99f228c770f01092e6c84978a4f6a73397a746c83df36b3c13de756f2500554"
+        },
+        "calibration": {
+          "path": "v3/runs/registered/v3_rerun_calibration.json",
+          "file_sha256": "fd86358a39e3b643fb9adc4e81a2372915ca50a1866e9b0e330a874b41746e01"
+        },
+        "source_family": {
+          "path": "v3/runs/a10_stage2/crowding/source/v3_rerun_tables_A1.json",
+          "file_sha256": "b3bd40157df666d7597d1bd83f5397bf054fd9ebd7f555be4ddc0948fc76a4bc",
+          "payload_sha256": "cdc3d2a3b092aff5dfebd615f4624820eb15f52748eb10768006c98874eb18d4",
+          "note": "the assembled crowding estimation (2026-11-14, 2,875 rows); sealed, read only in-process by prepare_validation"
+        },
+        "unfrozen": {
+          "file_sha256": "dd3e1423ce1a482d8f16fb6d9a7beefbe1ad4f6777dd6926a9b28f436c75e713",
+          "payload_sha256": "5e17cf0b04fdfd14b4b435d0296dd10df31fb92f40b2a6203c3672646c678e81",
+          "relation": "the frozen spec minus pull_dispatch equals it (asserted in check_spec)"
+        },
+        "jobs_digest": "90b0756b482628afeba9811aedb87216807e57336eb4b69bb93b77ea662dd6a3",
+        "pull_dispatch": {
+          "cost_classes": 133,
+          "memory_basis": "registered-stratum",
+          "code_commit": "be553384245592975336786c4a15f2dfc86f8f5c",
+          "lease_seconds": 120,
+          "extra_inputs": [
+            "v3/runs/a10_stage2/inputs/exclusions/a3_probe"
+          ],
+          "projection_sha256": "5ca5225967cf08ad5636f98f12d57fa6ccd753a7ae126bff0edcc09f0af3d8a3",
+          "order": "descending frozen bundle mean worker seconds, then job id"
+        },
+        "operational_counts": "the phase counts, P, F, Fp, Fd, M, M_FV and the by-setting route counts are reported as operational metadata under DECISIONS_2026-11-07 section 2; values, estimates and screen outcomes stay sealed",
+        "differs_from_sqrt_validation": "the top-level key sets are equal; the differing fields are jobs, a10_family, instrument (A10 linear against sqrt), configuration, M, M_FV, stream_seed_count, plan_hash and the three source bindings; inside pull_dispatch only code_commit, cost_classes and job_classes differ; each job gains one leaf, a1_job.config.kernel.crowding. memory_estimate_gb, the phases, the ceilings, the reserves and the probe seed count are equal (round CV report and second check, item 2)"
+      },
+      "launch_root": "v3/runs/a10_stage2/crowding/validation_run",
+      "root_identity": {
+        "spec_hash": "d9ecf757ea77b5fb88384980762d9d4dec1168396f36d5d5cd3365b5cff974c6",
+        "code_hash": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+        "prepared_utc": "2026-11-15T00:23Z",
+        "identity_file_sha256": "c6da3ab943098ec7e849602b206948471e1e8db65b6b4bc1380ec361d70fa8c7",
+        "contents": "identity, manifest (bytes equal to the frozen spec), context_preflight (55 contexts passed; 9af1c353), pull_state (not started; 7a76ec78), runner.lock; no outputs, no records, no machine register entry, no launch record; unchanged after Parts B and C and after the interpreter's checks (read 2026-11-15T00:45Z and 01:18Z)",
+        "placement": "outside every folder the launch's input snapshot protects: derived with snapshot_a11.dependencies per phase and configuration profile before the root existed (3,455 input files; 77 protected folders in validate_plain, 75 elsewhere), and re-derived independently by the second check. The only protected folders inside the root are fit/outputs and fit/records, in validate_plain only, where the plain validate jobs read their fit siblings; protection refuses reads through input_path in workers only, and no write in any phase lands under a protected folder. The family folder crowding/ is not protected. Round CV's toy V1, laid out like this root, joined and its host's protected list equalled the derivation (ROOT_PLACEMENT.json, sha256 bbb63bfb26ed638f1df1f3da26a2b68ed9f5724595f7bee8add0625a40f04ddd)"
+      },
+      "seed_check": "all 4,781 stream seeds are in the committed registry's a4_streams crowding entry (7,475 listed; faa4273a) and pairwise distinct; no stream or outer seed is in another registry group (a4_streams sqrt included), the seed history (ec40a9ec), addenda 1 to 5, a reserved range, the A13 or A14 inventories or plan-forbidden sets, the sqrt validation plan or the crowding estimation spec (stage2_prep/crowding_v/SEED_CHECK.json, sha256 c455a3101c8c3ff87a8fe6caf5032fab875b0bab75d20cb677ab4be63f8c6ff4)",
+      "machine_register_approval": {
+        "evidence": "d829ff1a40d98708614528bb237a35ffd4f5d7a2e65073661324c645bb022078",
+        "evidence_seal": "a1e483fc62e03cee8e9ce1bc5fb24e0dfb829062bb47ddf461eca4bba49e451d",
+        "path": "v3/_stage2_prep/qual_a4/x2_evidence.json",
+        "candidate_memory_gb": 124.964,
+        "expected_entry": {
+          "qualification_sha256": "a1e483fc62e03cee8e9ce1bc5fb24e0dfb829062bb47ddf461eca4bba49e451d",
+          "kinds": [
+            "a4_census",
+            "a4_fit",
+            "a4_validate"
+          ],
+          "memory_gb": 124.964,
+          "note": "approve_host writes the evidence document's seal, not its file hash, as qualification_sha256 (multihost_a11.py 193 to 198)"
+        },
+        "reason": "the operator's choice (DECISIONS_2026-11-14 section 6): approve the root's machine register from the revision 10 A4-kind evidence, as the sqrt validation did, and hold the FV double-population phase at 8 by the overall worker target (operating_rules.approved_load_sheet.value.fv_double_population_cap)",
+        "command": "python3.13 -B -m v3.multihost_a11 approve v3/runs/a10_stage2/crowding/validation_run v3/_stage2_prep/qual_a4/x2_evidence.json --operator 'Matt Yotko' --when <the go's UTC time>"
+      },
+      "fv_double_population_cap": "the overall worker target set to 8 by the interpreter's watcher (fvd_cap_watch.py, sha256 306df6a4dc298aee1b9f85dc0bf4a1351dc65e8a06be855d5be03fe15dc01227) once at most 8 FV primary jobs are unfinished, held through census; pre-approved with revision 19 (DECISIONS_2026-11-14 section 6)",
+      "all_four_records_condition": "A17 section 2: bind (a) post-update fixed-code requalification, (b) bit identity at the launch identity for every kind the host will run, (c) join-time configuration and rates, (d) its own load sheet",
+      "records": {
+        "a_post_update_fixed_code": "accepted and operator-approved 2026-10-31 (qualification_records.post_update_fixed_code)",
+        "b_launch_identity_qualification": "kinds a4_fit, a4_validate and a4_census bound and approved in revision 10 (evidence d829ff1a); their crowding kernel path qualified by qualification_records.launch_identity_a4_kinds_crowding_supplement (evidence a76196f3); approved by the operator with revision 19",
+        "c_join_time_configuration_and_rates": "at join: the host runs all five phases' configuration tests at its join, before the first registered dispatch (host_a11.run_host), and the launch records them and its rate segment (A17 section 2(c)); rate 1.0 against the X2-1 reference by same-host identity",
+        "d_load_sheet": "version 6 revision 2 bound in operating_rules.approved_load_sheet (sha256 0883980f6a612c37ebd561e6427c5073463242163f51f231b21612067fc9dffb); approved by the operator with revision 19"
+      },
+      "dress_rehearsal": {
+        "passed": true,
+        "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved_validation.json, the validation pull-route rehearsal at 93a453b2 (V0 toy estimation, V1 toy validation of five phases with five rechecks; sqrt toys), signed in the operator's name at the sqrt validation go of 2026-11-07",
+        "record_sha256": "efb62fd137670e660eaa111e151f757453509117f006f7dcc307c9ba308c23e4",
+        "unsigned_record_sha256": "c0bbf37412699f72ec0683a0f2c44cbd062c72c3190cc813d6dad3d61167b66d",
+        "check_sha256": "b98577832f03c7f86e1c02340245020099af3bfc8b358d4fc5a045b36699aa2c",
+        "crowding_supplement": {
+          "record": "stage2_prep/crowding_v/REHEARSAL_CV_CHECK.json (round CV, non-registered)",
+          "sha256": "dee83b220241f5bcb39e72cb1cd952391f9211248f1ad74dab73340ba004479b",
+          "criteria_passed": "V0 31 of 31 and V1 44 of 44",
+          "note": "V0: six toy crowding table jobs (three forced plain, three forced FV, three settings) and a non-registered assembly; V1: 21 toy A4 jobs (fit 3, validate_plain 9, validate_fv_primary 1, validate_fv_double_population 2, census 6) through the coordinator and host_a11 --local --model-service none, with five valid configuration tests, five barriers and five matched rechecks, on a toy family folder laid out like this launch (toy table and V0 root in source/, the toy plan and V1 root beside it, the toy probe outside); the host's protected folders equalled the derivation in every phase and the V1 root lay under none. The drains were not repeated: no dispatch, host, coordinator, worker-control or A4 plan module names the crowding flag; it is read only in engine.advance (round CV report)"
+        },
+        "full_size_cover": "no full-size crowding validation job has run; the crowding estimation ran all 1,495 full-size crowding table jobs through the coordinator and host (revision 18). The registered launch's first dispatches in each phase are the first full-size crowding A4 jobs; a deterministic fault reached only at full length would first show there (second check of round CV, item 5, a guess)",
+        "precedent": "the crowding estimation reused the signed estimation rehearsal record with a crowding supplement (revision 17); this is the second such reuse, and the first for the validation route",
+        "basis": "the operator approved with revision 19 the existing signed record plus the crowding supplement in place of a new signed record",
+        "completion_check": {
+          "script": "stage2_prep/crowding_val_launch/check_done_validation_crowding.py",
+          "sha256": "c4928285e4bd9e0f5b0d10eba24ba7b808971eb4f722565b31c52f04b52f92c6",
+          "note": "the sqrt validation's check_done_validation.py (281d072a, revision 11) with one change: the expected job count 4,781 in place of 4,277"
+        }
+      },
+      "satisfied_at_go": [
+        "operator approval of the crowding A4-kind qualification supplement, load sheet version 6 revision 2 with the FV double-population cap, and the rehearsal basis (revision 19)",
+        "the A15 ledger reservation: 400 h of the crowding validation allowance",
+        "seed history addendum 6 for the round CV qualification, rehearsal and configuration seeds, committed record-only with revision 19",
+        "the root's machine-register approval from evidence d829ff1a and the launch go, with the cap watcher started before the coordinator"
+      ],
+      "remaining_at_join": [
+        "(c) the five phases' configuration tests and the rate segment, measured at the host's join before any registered job and copied into revision 20"
+      ]
     },
     "prior_dispatch_admissions": [
       {
@@ -2764,7 +3187,9 @@
           "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved_validation.json, signed in the operator's name at the go",
           "record_sha256": "c0bbf37412699f72ec0683a0f2c44cbd062c72c3190cc813d6dad3d61167b66d",
           "check_sha256": "b98577832f03c7f86e1c02340245020099af3bfc8b358d4fc5a045b36699aa2c",
-          "note": "V0 toy estimation (6 jobs) and V1 toy validation (21 jobs, five phases, five rechecks) completed on the pull route at 93a453b2 on 2026-11-07; reviewed by the interpreter; signed at the go"
+          "note": "V0 toy estimation (6 jobs) and V1 toy validation (21 jobs, five phases, five rechecks) completed on the pull route at 93a453b2 on 2026-11-07; reviewed by the interpreter; signed at the go",
+          "signed_record_sha256": "efb62fd137670e660eaa111e151f757453509117f006f7dcc307c9ba308c23e4",
+          "signed_record_note": "recorded in revision 19: revision 10 bound the unsigned record (c0bbf374) and said the signed copy's hash would be recorded with the join segment; revision 11 omitted it. The signed copy on X2-1 (efb62fd1, written 2026-11-07T13:25:31Z) differs from the unsigned one only in operator_approval, reviewer.record and the seal (the interpreter's comparison, 2026-11-15)"
         },
         "satisfied_at_go": [
           "operator approval of the a4-kind launch-identity qualification record and of load sheet version 2 (this revision)",
@@ -3221,10 +3646,10 @@
   "seal": {
     "algorithm": "sha256",
     "serialization": "UTF-8 JSON, sorted keys, separators comma and colon without whitespace, ensure_ascii=true, no NaN, no trailing newline; hash the payload object only",
-    "payload_sha256": "dbea56fac184d3c8f60d1f41909872c421c6fcd91b23209bb30b0695bcfd8230"
+    "payload_sha256": "5af17fdb2cff9aa5955f8fb34765d5f2fd3ed23caadbd21075fc9a81de7542d0"
   },
   "operator_approval": {
-    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-14.md section 3: the operator's approval of 2026-11-14 (\"approve de5310e9, assembly go\") of this register revision 18 (approved as draft payload de5310e9f4339e45d3959a9df95094aa03d6ddb90c1644ef76bc102d3fae2619), payload digest dbea56fac184d3c8f60d1f41909872c421c6fcd91b23209bb30b0695bcfd8230: the crowding original estimation's join-time configuration and rate segment (A17 section 2(c)), the launch outcome and the closed admission. Prior approvals in force: revisions 8 to 17 and the 2026-10-31 fixed-code requalification.",
-    "reason": "A record revision: no launch, admission or resource change."
+    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-14.md section 7: the operator's approval of 2026-11-14 (\"approve 95afebca, reserve 400, go.\") of this register revision 19 (approved as draft payload 95afebca475a285bc72ab7e450fcd625ae15af1d27498f855fc01101514ed957), payload digest 5af17fdb2cff9aa5955f8fb34765d5f2fd3ed23caadbd21075fc9a81de7542d0: the crowding A4-kind qualification supplement (evidence a76196f3c3c06dbcbfa4578cd763ea5746c7429535630846c95a026bdaeaf4f5), load sheet version 6 revision 2 (0883980f6a612c37ebd561e6427c5073463242163f51f231b21612067fc9dffb) with the FV double-population cap, the rehearsal basis and dispatch admission for the bound crowding validation launch. Prior approvals in force: revisions 8 to 18 and the 2026-10-31 fixed-code requalification.",
+    "reason": "Register approval, the launch go and the root's machine-register approval remain distinct records."
   }
 }
