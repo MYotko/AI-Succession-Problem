@@ -34,6 +34,17 @@ data/attack_vector_revalidation_v2/** -text
 # predate that and are pinned as produced.
 simulation/diagnostics/drift_char_* -text
 
+# The stage 2 sealed readers, their tools, and the reader specification set with
+# its freeze record. FREEZE_RECORD.json pins the sha256 of every one of these
+# files as frozen. The specification texts carry CRLF, and reader A's identity
+# hashes raw bytes, so any conversion would break a pin. Store them verbatim, for
+# the same reason as the two pinned lines above.
+simulation/reading_stage2_a/** -text
+simulation/reading_stage2_b/** -text
+simulation/reading_stage2_tools_a/** -text
+simulation/reading_stage2_tools_b/** -text
+simulation/diagnostics/a16/stage2_reader/** -text
+
 # Binary assets, never converted.
 *.pdf binary
 *.png binary
