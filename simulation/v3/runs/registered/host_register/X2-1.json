@@ -2,10 +2,10 @@
   "schema": "lineage-a17-sealed-host-entry-v1",
   "payload": {
     "schema": "lineage-a17-host-payload-v1",
-    "record_date": "2026-11-23",
+    "record_date": "2026-11-26",
     "unit_name": "X2-1",
     "host_class": "X2",
-    "record_status": "Revision 25, approved by the operator, Matt Yotko, 2026-11-23 (\"go on all through the launch\"); recorded in a19_2026-11-04/DECISIONS_2026-11-22.md section 22. dispatch_admissible true for the sigma0^2 x10 validation launch only. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594; its crowding kernel path by the supplement of revision 17, evidence 9781b893; its variant calibration path for sigma0^2 x10 by the supplement of revision 23, evidence 0e32c388), a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a; their crowding kernel path by the supplement of revision 19, evidence a76196f3; their variant calibration path for sigma0^2 x10 by the supplement of revision 25, evidence e8abb4fa), a5_fvplain (revision 12, evidence 25f905dc) and rerun (revision 14, evidence 8d919541; its crowding kernel path by the supplement of revision 21, evidence 04d4bc7f). Load sheet version 9 revision 2 bound for the sigma0^2 x10 validation. The sqrt estimation, validation, labels and runs, the crowding estimation, validation and runs and the sigma0^2 x10 estimation join segments (revisions 9, 11, 13, 16, 18, 20, 22 and 24) are unchanged. Service entry and bound host fields as revision 7.",
+    "record_status": "Revision 26, approved by the operator, Matt Yotko, 2026-11-26 (\"approve 378c1d0c\"); recorded in a19_2026-11-04/DECISIONS_2026-11-26.md section 2. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594; its crowding kernel path by the supplement of revision 17, evidence 9781b893; its variant calibration path for sigma0^2 x10 by the supplement of revision 23, evidence 0e32c388), a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a; their crowding kernel path by the supplement of revision 19, evidence a76196f3; their variant calibration path for sigma0^2 x10 by the supplement of revision 25, evidence e8abb4fa), a5_fvplain (revision 12, evidence 25f905dc) and rerun (revision 14, evidence 8d919541; its crowding kernel path by the supplement of revision 21, evidence 04d4bc7f). approved_workload_kinds lists all six. The sqrt original estimation (revision 9), the sqrt original validation (revision 11), the sqrt A5 labels (revision 13), the sqrt runs (revision 16), the crowding original estimation (revision 18), the crowding original validation (revision 20), the crowding runs (revision 22), the sigma0^2 x10 original estimation (revision 24) and the sigma0^2 x10 original validation (revision 26) completed; their join-time configuration and rate segments are bound in rates.approved_rate_segments. Load sheet version 9 revision 2 remains bound. dispatch_admissible false: no launch is bound. Service entry and bound host fields as revision 7.",
     "scope": "A17 initial register; option C campaign remains X2-1 only",
     "cpu": {
       "available_cpu_budget": 32,
@@ -1829,7 +1829,7 @@
               "a4_fit": 183.1,
               "a4_validate": 942.1
             },
-            "note": "short-profile jobs: the peaks and worker seconds measure the configuration profiles, not full validation jobs (the crowding validation's full jobs peaked at 2.94 to 12.52 GB by model phase). This evidence is not the one the launch's machine register is approved from (dispatch_admission.machine_register_approval): its recorded 118.04 GB is the MemAvailable it met when it ran, the lowest of the three A4-kind evidences"
+            "note": "short-profile jobs: the peaks and worker seconds measure the configuration profiles, not full validation jobs (the crowding validation's full jobs peaked at 2.94 to 12.52 GB by model phase). This evidence is not the one the launch's machine register is approved from (prior_dispatch_admissions[8].machine_register_approval, the revision 25 admission): its recorded 118.04 GB is the MemAvailable it met when it ran, the lowest of the three A4-kind evidences"
           },
           "evidence_notes": {
             "record": "stage2_x10_val_2026-11-23/QUAL_A4_X10_EVIDENCE_NOTES.json, a copy of v3/_stage2_prep/qual_a4_x10/EVIDENCE_NOTES.json (the evidence itself stays on X2-1 at v3/_stage2_prep/qual_a4_x10/x2_evidence.json, mode 700, bound by hash). The notes hold one sealed key; they are bound by hash and read here through an allowlist",
@@ -1861,7 +1861,7 @@
       "designation_is_measured_rate": false,
       "measured_participation_rate": {
         "value": null,
-        "reason": "X2-1 is the reference host; its rate is 1.0 by designation. The sqrt estimation, sqrt validation, sqrt A5 labels, sqrt runs, crowding estimation, crowding validation, crowding runs and sigma0^2 x10 estimation join segments (approved_rate_segments) record the configuration tests and the sustained rates; a relative participation rate is measured only against another host."
+        "reason": "X2-1 is the reference host; its rate is 1.0 by designation. The sqrt estimation, sqrt validation, sqrt A5 labels, sqrt runs, crowding estimation, crowding validation, crowding runs, sigma0^2 x10 estimation and sigma0^2 x10 validation join segments (approved_rate_segments) record the configuration tests and the sustained rates; a relative participation rate is measured only against another host."
       },
       "measured_per_class_rates": {
         "value": null,
@@ -4121,6 +4121,656 @@
             "a10_stage2_operations_ledger.md (Lineage v3 records; the reconciliation entry the outcome cites, read and asserted when revision 24 was built)": "not hashed: the ledger is appended to after this entry",
             "copies": "Lineage v3 records, stage2_x10_2026-11-21/completion_2026-11-22 (x2_SHA256SUMS.txt holds the X2-1 hashes of the 32 staged copies, every one matched)"
           }
+        },
+        {
+          "status": "approved by the operator, Matt Yotko, 2026-11-26 (\"approve 378c1d0c\"); recorded in a19_2026-11-04/DECISIONS_2026-11-26.md section 2",
+          "record": "A17 section 2(c), join-time configuration and rates, under the operator-approved join-time reading of 2026-11-06 (a19_2026-11-04/DECISIONS_2026-11-06.md section 5)",
+          "launch": "sigma0^2 x10 original validation (approvals item 29, X10-V; STAGE2_PLAN.public_v2.md lines 59 and 291; A4 five phases, 2,132 jobs), pull route, X2-1 alone, normal mode, --model-service none",
+          "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+          "spec_payload_sha256": "d4e0bdad62ada22cfe24ac3278fc717c84588dce75a276351d8a88039f8174e1",
+          "launch_root": "v3/runs/a10_stage2/sigma_squared_x10_validation/validation_run",
+          "execution_checkout_commit": "9968fb413a453ad97b6f20468bf621db4f3eee94",
+          "session": "5aa3b3cc0d5d46a083e5c6216405e5d8",
+          "joined_epoch": 1795494522.567412,
+          "joined_utc": "2026-11-24T04:28:42.56Z",
+          "configuration": {
+            "per_phase": {
+              "fit": {
+                "trial_class": "trial:7e495fd4465c7d3b6725af495f19b7f987c8c331162da27ad44fcb0c5d9d1e5f",
+                "trial_reservation_gb": 0.562,
+                "trial_measured_peak_gb": 0.468,
+                "elapsed_seconds": 125.506,
+                "planning_seconds": 1800,
+                "worker_seconds": 2347.8,
+                "record_written_utc": "2026-11-24T04:31:29.48Z",
+                "trials": [
+                  {
+                    "workers": 8,
+                    "requested_workers": 8,
+                    "threads": 1,
+                    "completed": 16,
+                    "valid": true,
+                    "wall_seconds": 18.0872,
+                    "jobs_per_hour": 3184.6
+                  },
+                  {
+                    "workers": 12,
+                    "requested_workers": 12,
+                    "threads": 1,
+                    "completed": 24,
+                    "valid": true,
+                    "wall_seconds": 17.2648,
+                    "jobs_per_hour": 5004.4
+                  },
+                  {
+                    "workers": 16,
+                    "requested_workers": 16,
+                    "threads": 1,
+                    "completed": 32,
+                    "valid": true,
+                    "wall_seconds": 19.4942,
+                    "jobs_per_hour": 5909.4
+                  },
+                  {
+                    "workers": 24,
+                    "requested_workers": 24,
+                    "threads": 1,
+                    "completed": 48,
+                    "valid": true,
+                    "wall_seconds": 30.418,
+                    "jobs_per_hour": 5680.8
+                  },
+                  {
+                    "workers": 31,
+                    "requested_workers": 31,
+                    "threads": 1,
+                    "completed": 62,
+                    "valid": true,
+                    "wall_seconds": 39.6426,
+                    "jobs_per_hour": 5630.3
+                  }
+                ],
+                "chosen": {
+                  "workers": 16,
+                  "threads": 1,
+                  "jobs_per_hour": 5909.4
+                },
+                "choice_rule": "highest measured throughput (16 workers, 5909.4 jobs per hour; completed jobs over wall time, one round per candidate). No smaller candidate came within 5 percent (the next smaller, 12 workers, measured 15.3 percent below), so the preference for the smaller configuration did not change the choice; the larger 24 (3.9 percent below) and 31 (4.7 percent below) came within 5 percent of it, and the rule takes the smallest such (production_runner.choose, lines 113 to 126)"
+              },
+              "validate_plain": {
+                "trial_class": "trial:6eb8afe8122d5cf8442c6495cae31730c0423a86d8acc4dbd81744eb13329504",
+                "trial_reservation_gb": 0.564,
+                "trial_measured_peak_gb": 0.47,
+                "elapsed_seconds": 244.915,
+                "planning_seconds": 1800,
+                "worker_seconds": 4802.1,
+                "record_written_utc": "2026-11-24T05:07:03.99Z",
+                "trials": [
+                  {
+                    "workers": 8,
+                    "requested_workers": 8,
+                    "threads": 1,
+                    "completed": 16,
+                    "valid": true,
+                    "wall_seconds": 35.0511,
+                    "jobs_per_hour": 1643.3
+                  },
+                  {
+                    "workers": 12,
+                    "requested_workers": 12,
+                    "threads": 1,
+                    "completed": 24,
+                    "valid": true,
+                    "wall_seconds": 33.895,
+                    "jobs_per_hour": 2549.0
+                  },
+                  {
+                    "workers": 16,
+                    "requested_workers": 16,
+                    "threads": 1,
+                    "completed": 32,
+                    "valid": true,
+                    "wall_seconds": 38.2082,
+                    "jobs_per_hour": 3015.1
+                  },
+                  {
+                    "workers": 24,
+                    "requested_workers": 24,
+                    "threads": 1,
+                    "completed": 48,
+                    "valid": true,
+                    "wall_seconds": 59.3385,
+                    "jobs_per_hour": 2912.1
+                  },
+                  {
+                    "workers": 31,
+                    "requested_workers": 31,
+                    "threads": 1,
+                    "completed": 62,
+                    "valid": true,
+                    "wall_seconds": 77.8215,
+                    "jobs_per_hour": 2868.1
+                  }
+                ],
+                "chosen": {
+                  "workers": 16,
+                  "threads": 1,
+                  "jobs_per_hour": 3015.1
+                },
+                "choice_rule": "highest measured throughput (16 workers, 3015.1 jobs per hour; completed jobs over wall time, one round per candidate). No smaller candidate came within 5 percent (the next smaller, 12 workers, measured 15.5 percent below), so the preference for the smaller configuration did not change the choice; the larger 24 (3.4 percent below) and 31 (4.9 percent below) came within 5 percent of it, and the rule takes the smallest such (production_runner.choose, lines 113 to 126)"
+              },
+              "validate_fv_primary": {
+                "trial_class": "trial:fadcd921e3b895cd7be217c4522a5dad9ac31601666ef59737c5fe9a822a289a",
+                "trial_reservation_gb": 2.062,
+                "trial_measured_peak_gb": 1.718,
+                "elapsed_seconds": 615.038,
+                "planning_seconds": 1800,
+                "worker_seconds": 12352.2,
+                "record_written_utc": "2026-11-24T05:02:58.76Z",
+                "trials": [
+                  {
+                    "workers": 8,
+                    "requested_workers": 8,
+                    "threads": 1,
+                    "completed": 16,
+                    "valid": true,
+                    "wall_seconds": 90.103,
+                    "jobs_per_hour": 639.3
+                  },
+                  {
+                    "workers": 12,
+                    "requested_workers": 12,
+                    "threads": 1,
+                    "completed": 24,
+                    "valid": true,
+                    "wall_seconds": 87.0728,
+                    "jobs_per_hour": 992.3
+                  },
+                  {
+                    "workers": 16,
+                    "requested_workers": 16,
+                    "threads": 1,
+                    "completed": 32,
+                    "valid": true,
+                    "wall_seconds": 95.2042,
+                    "jobs_per_hour": 1210.0
+                  },
+                  {
+                    "workers": 24,
+                    "requested_workers": 24,
+                    "threads": 1,
+                    "completed": 48,
+                    "valid": true,
+                    "wall_seconds": 147.4642,
+                    "jobs_per_hour": 1171.8
+                  },
+                  {
+                    "workers": 31,
+                    "requested_workers": 31,
+                    "threads": 1,
+                    "completed": 62,
+                    "valid": true,
+                    "wall_seconds": 194.566,
+                    "jobs_per_hour": 1147.2
+                  }
+                ],
+                "chosen": {
+                  "workers": 16,
+                  "threads": 1,
+                  "jobs_per_hour": 1210.0
+                },
+                "choice_rule": "highest measured throughput (16 workers, 1210.0 jobs per hour; completed jobs over wall time, one round per candidate). No smaller candidate came within 5 percent (the next smaller, 12 workers, measured 18.0 percent below), so the preference for the smaller configuration did not change the choice; the larger 24 (3.2 percent below) came within 5 percent of it, and the rule takes the smallest such (production_runner.choose, lines 113 to 126)"
+              },
+              "validate_fv_double_population": {
+                "trial_class": "trial:0e0563f5761dbc75604669b8731f8180b08a4750aef1578a8af2989b3242492e",
+                "trial_reservation_gb": 3.864,
+                "trial_measured_peak_gb": 3.22,
+                "elapsed_seconds": 1270.587,
+                "planning_seconds": 1800,
+                "worker_seconds": 21933.0,
+                "record_written_utc": "2026-11-24T04:52:43.41Z",
+                "trials": [
+                  {
+                    "workers": 8,
+                    "requested_workers": 8,
+                    "threads": 1,
+                    "completed": 16,
+                    "valid": true,
+                    "wall_seconds": 187.396,
+                    "jobs_per_hour": 307.4
+                  },
+                  {
+                    "workers": 12,
+                    "requested_workers": 12,
+                    "threads": 1,
+                    "completed": 24,
+                    "valid": true,
+                    "wall_seconds": 177.8202,
+                    "jobs_per_hour": 485.9
+                  },
+                  {
+                    "workers": 16,
+                    "requested_workers": 16,
+                    "threads": 1,
+                    "completed": 32,
+                    "valid": true,
+                    "wall_seconds": 198.0179,
+                    "jobs_per_hour": 581.8
+                  },
+                  {
+                    "workers": 24,
+                    "requested_workers": 24,
+                    "threads": 1,
+                    "completed": 48,
+                    "valid": true,
+                    "wall_seconds": 309.2987,
+                    "jobs_per_hour": 558.7
+                  },
+                  {
+                    "workers": 23,
+                    "requested_workers": 31,
+                    "threads": 1,
+                    "completed": 62,
+                    "valid": true,
+                    "wall_seconds": 397.4051,
+                    "jobs_per_hour": 561.6
+                  }
+                ],
+                "chosen": {
+                  "workers": 16,
+                  "threads": 1,
+                  "jobs_per_hour": 581.8
+                },
+                "choice_rule": "highest measured throughput (16 workers, 581.8 jobs per hour; completed jobs over wall time, one round per candidate). No smaller candidate came within 5 percent (the next smaller, 12 workers, measured 16.5 percent below), so the preference for the smaller configuration did not change the choice; the larger 23 (3.5 percent below) and 24 (4.0 percent below) came within 5 percent of it, and the rule takes the smallest such (production_runner.choose, lines 113 to 126)",
+                "trial_note": "the 31-worker candidate ran at most 23 workers at once (requested_workers 31, workers 23: production_runner.py line 912 records the trial's maximum_active as workers); it is recorded as measured, pooled under 23 by production_runner.choose, and was not the choice. Measured: the trial's memory admission held it at 23. production_runner.dispatch fixes the trial's budget at 0.8 x MemAvailable when the trial starts and admits a job only while the reservations held plus its own fit that budget (lines 382 to 386 and 568 to 570); it logs the budget once and, while a job waits on it, a hold at most once a minute (lines 398 and 574 to 575; all read when revision 26 was drafted). The trial's event log (host_x2/configuration/5aa3b3cc0d5d46a083e5c6216405e5d8/validate_fv_double_population/r0_w31_t1/events.jsonl, sha256 9da6031d1b11f5803077a30df6895688d9243eca88cd85a968ec55c2e3eb2aa7; its memory_budget and memory_hold lines only, copied in trial_fvd_w31_memory_events.jsonl) records the budget at 2026-11-24T04:46:05.80Z: 92.30 GB, 0.8 x a MemAvailable of 115.38 GB. It then records six holds from 2026-11-24T04:46:07.82Z to 04:51:07.89Z, 60 s apart, each with 23 jobs active reserving 88.87 GB, which is 23 x the trial record's 3.864 GB reservation (1.2 x the 3.220 GB measured trial peak). A 24th job would have needed 92.73 GB against the 92.30 GB budget"
+              },
+              "census": {
+                "trial_class": "trial:c1d2762d63153c02a32f786d06a02b00ab2ad675e7b0be116e9c7b6b7cddfdcf",
+                "trial_reservation_gb": 0.147,
+                "trial_measured_peak_gb": 0.122,
+                "elapsed_seconds": 31.526,
+                "planning_seconds": 1800,
+                "worker_seconds": 380.0,
+                "record_written_utc": "2026-11-24T04:29:17.29Z",
+                "trials": [
+                  {
+                    "workers": 8,
+                    "requested_workers": 8,
+                    "threads": 1,
+                    "completed": 16,
+                    "valid": true,
+                    "wall_seconds": 4.3962,
+                    "jobs_per_hour": 13102.1
+                  },
+                  {
+                    "workers": 12,
+                    "requested_workers": 12,
+                    "threads": 1,
+                    "completed": 24,
+                    "valid": true,
+                    "wall_seconds": 4.5145,
+                    "jobs_per_hour": 19138.3
+                  },
+                  {
+                    "workers": 16,
+                    "requested_workers": 16,
+                    "threads": 1,
+                    "completed": 32,
+                    "valid": true,
+                    "wall_seconds": 5.2569,
+                    "jobs_per_hour": 21913.9
+                  },
+                  {
+                    "workers": 24,
+                    "requested_workers": 24,
+                    "threads": 1,
+                    "completed": 48,
+                    "valid": true,
+                    "wall_seconds": 7.309,
+                    "jobs_per_hour": 23642.1
+                  },
+                  {
+                    "workers": 31,
+                    "requested_workers": 31,
+                    "threads": 1,
+                    "completed": 62,
+                    "valid": true,
+                    "wall_seconds": 9.4484,
+                    "jobs_per_hour": 23623.0
+                  }
+                ],
+                "chosen": {
+                  "workers": 24,
+                  "threads": 1,
+                  "jobs_per_hour": 23642.1
+                },
+                "choice_rule": "highest measured throughput (24 workers, 23642.1 jobs per hour; completed jobs over wall time, one round per candidate). No smaller candidate came within 5 percent (the next smaller, 16 workers, measured 7.3 percent below), so the preference for the smaller configuration did not change the choice; the larger 31 (0.1 percent below) came within 5 percent of it, and the rule takes the smallest such (production_runner.choose, lines 113 to 126)"
+              }
+            },
+            "started_epoch": 1795494522.7291603,
+            "finished_epoch": 1795496824.0389948,
+            "started_utc": "2026-11-24T04:28:42.72Z",
+            "finished_utc": "2026-11-24T05:07:04.03Z",
+            "elapsed_seconds": 2301.3,
+            "planning_seconds": 1800,
+            "within_planning_target": false,
+            "candidates": "8, 12, 16, 24 and 31 workers per phase, one round, two short jobs per worker, one thread; the profiles list 32, which runs as 31, the launch's worker cap (requested_workers 31; load sheet version 9 revision 2, sections 1 and 10)",
+            "test_order": "the trial records were written in the order census, fit, validate_fv_double_population, validate_fv_primary, validate_plain (record_written_utc)",
+            "planning_note": "the five tests took 2301.3 s from start to finish against the 1800 s planning figure. within_planning_target is false because host_a11 compares the total with that figure (host_a11.py lines 329 to 331); each phase's own test was inside it (the longest, validate_fv_double_population, 1270.6 s). The crowding validation's five tests took 2261.0 s from start to finish (its segment, configuration.elapsed_seconds). A planning target, not a limit (AGENTS.md, pre-launch configuration test), and nothing was cut short",
+            "trial_memory_note": "trial_reservation_gb is the trial record's class_peaks_gb, which worker_control.observe writes as 1.2 x the measured peak (worker_control.py lines 384 to 387; production_runner.py lines 909 to 912 copy it into the trial record); trial_measured_peak_gb divides it back, as the segments of revisions 20, 22 and 24 record it",
+            "caveat": "each trial runs short jobs of its phase's kind (fit 5.4 to 19.1 s, validate_plain 11.4 to 38.2 s, validate_fv_primary 28.3 to 98.3 s, validate_fv_double_population 61.5 to 168.7 s, census 1.4 to 2.8 s), so the test measures short-burst scaling and trial memory, not sustained contention or the full jobs' peaks; the sustained figures below are the run itself",
+            "memory_during_tests": "the memory watch saw at most 31 worker processes, 53.2 GB of host process tree RSS and a lowest MemAvailable of 66.4 GB during the configuration window (227 samples), inside the 110 GB GUPPI agreement term",
+            "entered_results": false
+          },
+          "pre_dispatch_projection": "the coordinator's projection before the first scientific dispatch (phase_projections/00000000.json, 2026-11-24T05:07:04.38Z, scientific_dispatched false) read 74.89 h for the five phases against 159.03 h of budget remaining: disposition fits, so nothing refused. Load sheet version 9 revision 2 (section 8) had inferred about 73 to 77 h against about 159 h. The four later projections, one at each phase open, also read fits",
+          "worker_control": "one live control: the FV double-population cap of DECISIONS_2026-11-22 section 22 item 3, bound in revision 25 (prior_dispatch_admissions[8].fv_double_population_cap, the revision 25 admission, and load sheet version 9 revision 2 (856be038), section 12). The interpreter's watcher (fvd_cap_watch.py, sha256 c3a97b78efcae91fbc06fadbe10056484d00676484ba616dedcf76b6bfcaae55, under fvd_cap_watch_loop.sh, d55073277302ef28a2c980ac3b7e6843cfb0f400f3405ad4885e2e0b926d5f5e, started at 2026-11-24T04:28:18Z before the root's machine-register approval) ran production_runner control ROOT --workers 8 at 2026-11-25T22:07:23Z, on its first attempt, with 8 of the 365 FV primary jobs unfinished (all 8 running, none waiting), read back pull_state control.max_workers 8 and control event 00000001.json among the last 20 protocol events, logged CAP_APPLIED and exited; the loop ended. The control is protocol event 1 (sequence 1, event control, max_workers 8, host, mode and stop null, payload seal e3f512ab59829dd1949c12fd54e5ab9132986bb905e60ab5509ccadc01e913fe), which sets the coordinator's overall worker target: status.json overall_target_source explicit, overall_worker_target 8 at the launch's end, so the target held through census. The completion records agree: 357 of the 365 FV primary records were complete at the control's epoch, and every FV double-population and census job started after it (validation_segment_stats_x10.json). The host controls stayed at the launch request (max_workers 31, drain false, mode normal; host_x2/control.json shows no stop or interrupt) and no coordinator stop fired (status.json stops all false). No other control was used. The memory watch read the watcher alive in all 14,821 samples before the cap, its state line at most 60 s old, and recorded one change of the overall target, from none to 8, at 2026-11-25T22:07:26Z, the first sample after the control; the six-hourly checks found the same and none found a stop condition (session crons e1104a68, then 5a816bb5, and the interpreter's read-only background waits, logged in OVERNIGHT_LOG.md (Lineage v3 records, overnight_2026-10-29), entries of 2026-11-24 and 2026-11-25; the 17:09 EST 2026-11-25 entry records the cap's application and read-back).",
+          "first_registered_job_started_epoch": 1795496832.223,
+          "first_registered_job_started_utc": "2026-11-24T05:07:12.22Z",
+          "first_dispatch": {
+            "epoch": 1795496831.975891,
+            "utc": "2026-11-24T05:07:11.97Z",
+            "job_id": "a4_fit_316fee8f09b1121b6b05887a",
+            "purpose": "work",
+            "source": "pull_state.json first_dispatch (A19 T3, the first scientific lease of the coordinator generation)"
+          },
+          "ordering": "all five configuration tests ran at the host's join and finished at 2026-11-24T05:07:04.03Z (configuration_planning.json); the pre-dispatch projection followed at 2026-11-24T05:07:04.38Z. The coordinator recorded its first scientific lease (purpose work, a fit job) at 2026-11-24T05:07:11.97Z, 7.937 s after the tests finished (pull_state.json first_dispatch); host_a11 runs every configuration test and reports 'configured' before its job loop takes any scientific work. The earliest start implied by a completion record (completed_epoch minus worker_seconds, a fit job) is 2026-11-24T05:07:12.22Z, 8.2 s after the configuration finished, and agrees.",
+          "relative_throughput": 1.0,
+          "rate_basis": "X2-1 is the reference host, rate 1.0 by designation; it was the only host, so no relative rate was measured",
+          "sustained": {
+            "completed_jobs": 2132,
+            "nondeterminism_rechecks": 5,
+            "wall_hours": 47.916,
+            "jobs_per_hour": 44.49,
+            "worker_hours": 613.21,
+            "mean_concurrency": 12.8,
+            "charged_x2_equivalent_hours": 47.9152,
+            "note": "wall_hours is the launch wall, launch epoch to finished_epoch. worker_hours sums the 2,132 completion records' worker_seconds; it excludes the five rechecks and the configuration trials. The session's own worker-second total is 2212979. charged_x2_equivalent_hours here is the coordinator's charge; the ledger charges 47.94 h (prior_dispatch_admissions[8].outcome.charge_basis)."
+          },
+          "measured_by_phase": {
+            "fit": {
+              "route": "plain",
+              "jobs": 274,
+              "chosen_workers": 16,
+              "max_worker_processes": 16,
+              "max_open_record_intervals": 16,
+              "load_sheet_concurrency_at_open": 16,
+              "window_utc": [
+                "2026-11-24T05:07:12.22Z",
+                "2026-11-24T09:04:54.28Z"
+              ],
+              "wall_hours": 3.962,
+              "jobs_per_hour": 69.16,
+              "worker_hours": 62.56,
+              "mean_concurrency": 15.79,
+              "peak_rss_gb_max": 2.77,
+              "peak_rss_gb_median": 1.4,
+              "frozen_class_gb_max": 3.773,
+              "seconds_median": 780.9,
+              "seconds_mean": 822.0,
+              "seconds_max": 1760.5,
+              "seconds_min": 646.9,
+              "summed_worker_rss_max_gb": 34.0,
+              "memavailable_min_gb": 83.9,
+              "tctl_median_c": 96.375,
+              "crowding_validation": {
+                "peak_rss_gb_max": 2.936,
+                "seconds_median": 925.3,
+                "jobs_per_hour": 56.24,
+                "mean_concurrency": 15.88,
+                "summed_worker_rss_max_gb": 36.9
+              },
+              "load_sheet_projected_wall_hours": 4.87
+            },
+            "validate_plain": {
+              "route": "plain",
+              "jobs": 822,
+              "chosen_workers": 16,
+              "max_worker_processes": 16,
+              "max_open_record_intervals": 16,
+              "load_sheet_concurrency_at_open": 16,
+              "window_utc": [
+                "2026-11-24T09:11:18.66Z",
+                "2026-11-24T21:01:14.86Z"
+              ],
+              "wall_hours": 11.832,
+              "jobs_per_hour": 69.47,
+              "worker_hours": 188.19,
+              "mean_concurrency": 15.9,
+              "peak_rss_gb_max": 2.919,
+              "peak_rss_gb_median": 1.454,
+              "frozen_class_gb_max": 3.773,
+              "seconds_median": 781.0,
+              "seconds_mean": 824.2,
+              "seconds_max": 1759.2,
+              "seconds_min": 570.6,
+              "summed_worker_rss_max_gb": 38.3,
+              "memavailable_min_gb": 80.6,
+              "tctl_median_c": 96.875,
+              "crowding_validation": {
+                "peak_rss_gb_max": 3.218,
+                "seconds_median": 929.9,
+                "jobs_per_hour": 56.23,
+                "mean_concurrency": 15.93,
+                "summed_worker_rss_max_gb": 39.6
+              },
+              "load_sheet_projected_wall_hours": 14.62
+            },
+            "validate_fv_primary": {
+              "route": "fv",
+              "jobs": 365,
+              "chosen_workers": 16,
+              "max_worker_processes": 13,
+              "max_open_record_intervals": 13,
+              "load_sheet_concurrency_at_open": 13,
+              "window_utc": [
+                "2026-11-24T21:08:17.79Z",
+                "2026-11-25T22:31:42.68Z"
+              ],
+              "wall_hours": 25.39,
+              "jobs_per_hour": 14.38,
+              "worker_hours": 326.3,
+              "mean_concurrency": 12.85,
+              "peak_rss_gb_max": 5.749,
+              "peak_rss_gb_median": 5.666,
+              "frozen_class_gb_max": 7.54,
+              "seconds_median": 3226.4,
+              "seconds_mean": 3218.3,
+              "seconds_max": 3685.1,
+              "seconds_min": 2656.5,
+              "summed_worker_rss_max_gb": 55.6,
+              "memavailable_min_gb": 63.6,
+              "tctl_median_c": 93.125,
+              "crowding_validation": {
+                "peak_rss_gb_max": 6.315,
+                "seconds_median": 3105.5,
+                "jobs_per_hour": 14.76,
+                "mean_concurrency": 12.91,
+                "summed_worker_rss_max_gb": 56.1
+              },
+              "load_sheet_projected_wall_hours": 24.73
+            },
+            "validate_fv_double_population": {
+              "route": "fv",
+              "jobs": 16,
+              "chosen_workers": 16,
+              "max_worker_processes": 8,
+              "max_open_record_intervals": 8,
+              "load_sheet_concurrency_at_open": 8,
+              "window_utc": [
+                "2026-11-25T22:56:32.67Z",
+                "2026-11-26T03:06:46.20Z"
+              ],
+              "wall_hours": 4.17,
+              "jobs_per_hour": 3.84,
+              "worker_hours": 33.12,
+              "mean_concurrency": 7.94,
+              "peak_rss_gb_max": 11.306,
+              "peak_rss_gb_median": 11.207,
+              "frozen_class_gb_max": 15.079,
+              "seconds_median": 7455.0,
+              "seconds_mean": 7452.4,
+              "seconds_max": 7733.9,
+              "seconds_min": 7018.3,
+              "summed_worker_rss_max_gb": 73.0,
+              "memavailable_min_gb": 46.8,
+              "tctl_median_c": 87.625,
+              "crowding_validation": {
+                "peak_rss_gb_max": 12.522,
+                "seconds_median": 7513.0,
+                "jobs_per_hour": 3.97,
+                "mean_concurrency": 7.85,
+                "summed_worker_rss_max_gb": 70.7
+              },
+              "load_sheet_projected_wall_hours": 4.03
+            },
+            "census": {
+              "route": "plain",
+              "jobs": 655,
+              "chosen_workers": 24,
+              "max_worker_processes": 8,
+              "max_open_record_intervals": 8,
+              "load_sheet_concurrency_at_open": 8,
+              "window_utc": [
+                "2026-11-26T03:59:40.03Z",
+                "2026-11-26T04:23:28.37Z"
+              ],
+              "wall_hours": 0.397,
+              "jobs_per_hour": 1650.86,
+              "worker_hours": 3.03,
+              "mean_concurrency": 7.64,
+              "peak_rss_gb_max": 0.252,
+              "peak_rss_gb_median": 0.142,
+              "frozen_class_gb_max": 15.079,
+              "seconds_median": 15.8,
+              "seconds_mean": 16.7,
+              "seconds_max": 42.1,
+              "seconds_min": 12.1,
+              "summed_worker_rss_max_gb": 1.5,
+              "memavailable_min_gb": 118.5,
+              "tctl_median_c": 98.875,
+              "crowding_validation": {
+                "peak_rss_gb_max": 0.293,
+                "seconds_median": 16.4,
+                "jobs_per_hour": 1507.0,
+                "mean_concurrency": 7.68,
+                "summed_worker_rss_max_gb": 1.6
+              },
+              "load_sheet_projected_wall_hours": 0.43
+            }
+          },
+          "measured_note": "Concurrency came out as load sheet version 9 revision 2 (section 4, the column as decided) set it under evidence d829ff1a with the cap: fit 16, validate_plain 16, validate_fv_primary 13, validate_fv_double_population 8 and census 8. The memory watch's most worker processes after the configuration tests and the completion records' most intervals open at once agree in every phase (max_worker_processes, max_open_record_intervals). The memory watch's figures by phase (max_worker_processes, summed_worker_rss_max_gb, memavailable_min_gb, tctl_median_c) are taken by the coordinator's phase index after the configuration tests, so each includes the recheck after its phase. In fit and validate_plain the configuration choice (16) bound: mean concurrency 15.79 and 15.90. In validate_fv_primary concurrency held at 13 (mean 12.85). Inferred from the admission rule (section 4) and that count, since no record logs a memory wait: each lease is charged min(max(class, observed), weight). The frozen class is 7.540 GB for all 365 FV primary jobs; the observed term (1.2 x the class's largest recorded peak) reached at most 6.899 GB across the phase's 5 cost classes (pull_state.json observed_memory_gb), below the class; and the weight was 8.878 GB at the open and 9.579 GB with 8 FV primary jobs unfinished (worker_control.top_weighted_counts' rule on the sealed spec's classes, computed on X2-1; validation_segment_stats_x10.json), above the class throughout (inferred from the rule: the weight is the mean of the heaviest quarter of the unfinished reservations, and a finishing FV primary job removes one of its lightest, so it never falls in this phase). So every FV primary lease was charged the class. Against 0.8 x the registered 124.964 GB (99.97 GB), 13 leases fit (98.01 GB) and 14 do not (105.55 GB). The other term, 0.8 x MemAvailable, did not bind: the lowest sampled MemAvailable in the phase was 63.6 GB, so the term stayed above 50.9 GB, more than the 22.6 GB that three more leases would have needed. In validate_fv_double_population and census the cap held concurrency at 8 (means 7.94 and 7.64), against configuration choices of 16 and 24; without it the sheet computed 10 at the double-population open and 11 at census's under d829ff1a (section 4). Each phase's largest recorded peak is below its frozen class and below the crowding validation's: fit 2.770 against 2.936 GB, validate_plain 2.919 against 3.218, validate_fv_primary 5.749 against 6.315, validate_fv_double_population 11.306 against 12.522, census 0.252 against 0.293, from 5.7 to 14.0 percent lower. The sheet had taken crowding's peaks as the reference and said they might read a few percent high here (section 3, inferred). The memory watch samples every 10 s, so its figures can miss a brief coincidence of peaks. Its summed worker RSS was at most 73.0 GB in validate_fv_double_population at 8 workers, above the crowding validation's 70.7 GB at 8 although each job's peak was lower; inferred: here the 16 jobs ran as two waves of 8 (each job 7,018 to 7,734 s in a 4.17 h window), and section 5 of the sheet notes that a wave that starts together can coincide its peaks more than a steady phase. The bound that holds by arithmetic is the recorded peaks': 8 jobs at the phase's largest recorded peak (11.306 GB), all at once, is 90.45 GB, under the sheet's 100.2 GB at crowding's largest peak (section 12) and inside the 110 GB GUPPI agreement term. The host process tree read at most 73.1 GB over the whole run, the configuration tests included; MemAvailable was lowest at 46.8 GB (45,675,764 kB, 2026-11-26T00:55:54Z, validate_fv_double_population, 8 worker processes, summed worker RSS 73.0 GB). Swap free never fell below its value at the go (31,484,372 kB, with about 2.1 GB of swap already in use before the launch; state_at_go.txt) and rose by at most 376 kB. The phases ran one after another with no overlap; the gaps between the last job of one phase and the first of the next were 6.4, 7.0, 24.8, 52.9 minutes, in phase order (the crowding validation's were 6.3, 7.1, 21.4, 53.0). Measured: each of the first four phases' incidental cross-check records (one per phase recheck) falls in the gap after its phase, at most 14.8 s before the next phase's first start, and the next phase projection follows it within 1 s. Between each phase's last completion and its cross-check record every memory-watch sample shows exactly one worker process: 37, 42, 148 and 314 samples in the four gaps, counting a sample only when its whole second lies inside the interval, and 1 in the 9.0 s census interval. After a cross-check record and before the next phase's first record start the samples show no worker process, except one sample: the one at 2026-11-24T21:08:17Z shows 4, 0.79 s before the first validate_fv_primary record's start (inferred: that phase's opening workers; a record's start is its completion less the job's own seconds, so it lags the lease). The session's worker-second total less the 2,132 records' sum is 5,435.4 s, within 3.4 s of the 5,438.8 s that the five intervals from each phase's last completion to its cross-check record add up to. Inferred: the one process is the phase's nondeterminism recheck, run alone, so each gap holds its phase's recheck. Against the sheet's projection (50.78 h, section 7, inferred from the crowding validation's per-phase rates at these job counts, the cap included), the launch wall was 47.92 h, 2.86 h under. By phase, measured wall less projected: fit -0.91 h, validate_plain -2.79, validate_fv_primary +0.66, validate_fv_double_population +0.14, census -0.03; the time outside the five phase windows (the configuration tests at the join, the gaps and the tail) was 2.16 h, against the sheet's 2.10 h. Within a phase the wall is the jobs times the mean job time over the mean concurrency, and the projection took crowding's rate by phase, which is crowding's mean job time over its mean concurrency, so those two terms carry the differences. Mean job time against crowding's: fit 0.809 times, validate_plain 0.808, validate_fv_primary 1.022, validate_fv_double_population 1.047, census 0.913 (medians 0.844, 0.840, 1.039, 0.992 and 0.963); mean concurrency fit 15.79 against 15.88, validate_plain 15.90 against 15.93, validate_fv_primary 12.85 against 12.91, validate_fv_double_population 7.94 against 7.85, census 7.64 against 7.68. Why the job times differ is not separated here. Observations for later load sheets and rate readings, not a capacity binding.",
+          "thermal_note": "Tctl (k10temp) read 99.375 C at most (first at 2026-11-26T04:16:03Z, in census) and 93.875 C at the median over 17,066 memory-watch samples while the coordinator ran (2026-11-24T04:28:49Z to 2026-11-26T04:23:35Z); 6,029 samples were at or above 95 C, 167 at or above 98 C and 44 at or above 99 C. Median by the coordinator's phase index, after the configuration tests: fit 96.375 C, validate_plain 96.875 C, validate_fv_primary 93.125 C, validate_fv_double_population 87.625 C, census 98.875 C; census, at 8 workers, ran the hottest. For reference, load sheet version 9 revision 2 (section 9) recorded the crowding validation at a median 91.9 C and at most 98.1 C over 42,081 samples, 9,971 at or above 95 C and 16 at or above 98 C. The unit's hwmon exposes no critical temperature (stage2_runs_2026-11-13/relaunch_2026-11-13/REPORT.md, item 1 (line 136): hwmon3 exposes no critical value), so no throttle point is recorded. The host exit record carries no error, all 2,132 records are complete and the completion check passed; these carry the claim that the run ended clean. A scan of coordinator.log, host.log and watchdog.log after the run found no line matching the case-insensitive pattern traceback|error|rejected|exception|refus, with no exclusions (rev26_reads.sh; counts in rev26_reads.txt), but those logs hold little: coordinator.log 1 line (the final status), host.log 90 lines (89 configuration-trial status lines and the stop line), watchdog.log empty. The records cannot separate thermal throttling from contention, so throttling is not excluded. An observation for later load sheets, not a capacity binding.",
+          "sources": {
+            "launches.json": "6e109219b224bff6dbdb24ed9aa95cdc3dae5c87c9449ea6b0931f060b8cdbb0",
+            "status.json": "807347df6ac5b389f0134e434d2ee80cf7cd6aef705717bf9b152ee0f43fdff4",
+            "identity.json": "cc9365880c3c9be610727b95840c9c93380662498f9dd51da7e71bcc86bfdd27",
+            "budget.json": "aa7d28857e1e10071ecaa72397ed4cfaccf20b83d70bccad087b72637ace136e",
+            "pull_state.json": "5feb7e489d830f11ebe8e69c96cc057e199cbc5060b459894491f5014ce8f7b9",
+            "machine_register/00000000.json": "c33408c5e696d3a5ea4fe56cd2eaa644dd334e7f4eeb1aa65afb70f00c0aaa7b",
+            "host_x2/host_session.json": "684a5cc2270c818debd32a2ba63d4a144d6da388d26254ef50f17335b1170351",
+            "host_x2/configuration_planning.json": "af2e8f5ab2cc41a249723762c5e8d2dfa55748cfdda74b828e1075a12c239e14",
+            "host_x2/host_exit.json": "43c79f6b50a5470f2e73b9d5d360cc4b09d939f7c995a2c357e40426b6049542",
+            "host_x2/service.json": "aa8d16a2c0a6cdfad6edceed19d4297d6bc310e58c89b823b28ec1b28cfed512",
+            "host_x2/swap_preflight.json": "2a4b3495e963ce9af5e78c7c84dbeb4a5fff549164dca929f7a75a6a3e11ab4a",
+            "host_x2/control.json": "d54ed0720c8e9351f84e5e195b5fd332b3e37fbe771a9b1c5d029b83ab25579d",
+            "host_x2/configuration/5aa3b3cc0d5d46a083e5c6216405e5d8/<phase>.json (the trial records; copies in rev26)": {
+              "fit": "ea0e98e7bce77a56be49459fb76b926edd6be7cf3dfe773d75993818dc1a13a6",
+              "validate_plain": "8877291febc417ff0b5a6d8a3a1b0bcb00a568bf15810132eeea819bdebbc8f7",
+              "validate_fv_primary": "0ca72203b7c9b50742cb2c6ad3432680848fa69ef80bf4d0767d86de38df838f",
+              "validate_fv_double_population": "e9d667f2ae9f6789daad7b136e96da62b87f9e230febe3a9140271b17ada0007",
+              "census": "0b2d1d8cba669ce5842de00e4abf8b95fa47e2386041d0af1307eddf8a6c5647"
+            },
+            "host_x2/snapshots/<view>/verified.json (copies in rev26)": {
+              "1963eb3ad1215ae30c5da7ffe94b9851a69f75e90adeb43e8abec262cb10c15c": "ec4d5d7178b306965810edd1b8d0e6fd40e66f06bbb509e80e62ddc3adede14c",
+              "1b9bedc7910455b2ec6fc31652f73335ea4787d07b2130e3ee5512c57cfd8396": "61d977561e4721399993e9bf6ef39fb42a27d9ad9b07a278bc36c20f52d60786",
+              "37ce1a7aa76dd5c7c8ac49d1ed966ddb80c31c86da0c7196660f8d319540e1fd": "bb7dd2536ca69544fb2a70661cb7190ea4974fc20cce9c63f5b37adfb13a2880",
+              "491f403e24d9829317d5eb962b9579be954a3f9174bbf4b0436a30f8737a8c10": "897357391dc75817b989dbdd3ce0bf158b18df67898d2cdb7f6e6cdd22ce18af",
+              "8b3f54e2684d499409053a286873b8b2ca17a44409f0afcbf302795aaa029056": "acece0d95c651a9d1f1dba720298c6f87e864c0eedc168c3466b98e8e5703661",
+              "93cc3e1e07c8f65cd83ea4003f990b7376ac75bf3308269e3bba53f07d37b3ff": "3f28ce2548206f2255f94c275cae2b89d65789d068c8ff5ea63997ed999f09ef",
+              "a4966709795ba9efae8e15ad31f3a3256d0dcc8fad5bac0338aa9759adf55dc1": "1ed8a5d0e3e8d2177532840d9f7ba2a8c606b474d62296433023a81744aa1e88",
+              "c16729dcbaaad2edb2b0b60c1594259a1056f9961970b546f888e59c7aab5a52": "105a3f0496850fd85598adad5fbecc2d181a8e312db71a9041ed162796e4aeae"
+            },
+            "<phase>/nondeterminism_check.json": {
+              "fit": "e99cfa1c0224fcf189c6f5d31c003d7e6dc7a233c1bd98086e7a68b3592001f5",
+              "validate_plain": "1fbbe415db56ea51ca9bc9f6f02716c8a4ddbb4c6c6335e6ab1acd7e245acfb1",
+              "validate_fv_primary": "3dd7482542694ad3c695f0688dc5763aea0ff7c03791578d1165d0929159b46b",
+              "validate_fv_double_population": "76f22efb40632276eadb4a1530540741310a1b71e79582a28c2f208f7827bbbd",
+              "census": "fe98e913e7b512d0701771dc548240268807f90809cc3f9a3b87a0653c9688a6"
+            },
+            "<phase>/status.json": {
+              "fit": "3a9f446964739ed5d013b6001a5a2601046b14b94f7c190371e30886ea4dcb85",
+              "validate_plain": "d50a9be49f8780e073ab2b0d6defab8fa479ebc29685c030951d491b7487c129",
+              "validate_fv_primary": "db0093d919d34aae074ab9911edb35a6743b8a9bd6fc588c279831f283d2abef",
+              "validate_fv_double_population": "7de79188d5a45866990708ab0368c30e419c5bdfdb9187ebc307c50cbd171f52",
+              "census": "4625ec8da792ffd1dbf6837828afff05c56d029ab466e77d4f9dc4992528b1ea"
+            },
+            "input_manifests/configuration_<phase>.json": {
+              "fit": "a467c661cf8bf6f52ed7840e81973f20be6a00f90828518fe5072ab0149b46c3",
+              "validate_plain": "a467c661cf8bf6f52ed7840e81973f20be6a00f90828518fe5072ab0149b46c3",
+              "validate_fv_primary": "e47ecf15e003b3400701af0a6d52d639ff79bc26a488626f2ef6e5b453aa33f1",
+              "validate_fv_double_population": "60f13dc4678a559d88b99d248b683782ef34bfe0b5ba645dd619ec72f0d7aa21",
+              "census": "e47ecf15e003b3400701af0a6d52d639ff79bc26a488626f2ef6e5b453aa33f1"
+            },
+            "incidental_cross_checks/<n>.json": {
+              "00000000": "1c31c37cba362ee9b14e56da72dab5154f58835c1c247439540f795cdfee43c3",
+              "00000001": "6b51a130edb761edeac093f6859eccc44c5be581fbe0f9826243ec071905ab4b",
+              "00000002": "8d4b0e8f993e37a5651fd256bdb8837e2937bd50a059eb63cdda2efdfb7f7624",
+              "00000003": "09f5f7924be3a9c7d3c2d63fe2c0448b1e5710009dc638945353fb45c187942e",
+              "00000004": "5377729cb13dc032a581d7e429f341dc11eae333874993fc6c604af1567bd0d8"
+            },
+            "protocol_events/<n>.json": {
+              "00000000": "ad7e595218715caa96585ee26bcc57c275bc2372d277e66f74aec0f0dab45d2d",
+              "00000001": "d66ca79a8070aeced4faf717aa280c5ee33f0206f322422e10e335d76a1fc715"
+            },
+            "phase_projections/<n>.json": {
+              "00000000": "526a4ab0792f91e3efffd7c954fe2a10353bcad4ef1bd1f65aedf3a9423f77d0",
+              "00000001": "fcb1b7ff4782302df0ce1a462804d87bc29dfaf4304d0183662dd282f2683b37",
+              "00000002": "a59c19e6b83302aac481205caf346bb1fa024db5170e053d39985d071dc8faba",
+              "00000003": "bd79caa383ad63d93794385d4a1f6263097d11d4555cbc9c226d8c0c674ee027",
+              "00000004": "808749248a1d5f3d36c3e60e3d59cead24ab331c0b4b7f47d40010e0771483bb"
+            },
+            "verified_output_hashes.json": "38b496c0ba9964fa4e43e4db4ae43e392a1058a92abe559e4d84566560bac32f",
+            "coordinator.log": "30e6da022a11efc4881ef4982115beb3659980a9fcd436de3ade8b54928489fa",
+            "host.log": "8c0c9bba4b2fffc62a46b5854b9802d0849e0013226dfc04a8a9e64040052088",
+            "watchdog.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "check_done_validation_x10.out and .err (stage2_prep/x10_val_launch; the completion check's output, and its empty error file, whose mtime marks the check's start)": {
+              "out": "aa66c070bf47850393ba0adcaf4b28b88f25fd82f82fec1ee0abbb8403bb7240",
+              "err": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "check_done_validation_x10.py (stage2_prep/x10_val_launch; bound in revision 25)": "5431f650f7b6c735317378cbfacbd3a08fc93bce28a7eb4bae95fca87dfc0870",
+            "validation_segment_stats_x10.json (X2-1 stage2_prep/x10_val_launch/rev26; per-phase aggregates of the completion records' allowlisted metadata, and of the sealed spec in process)": "0c5aec098bd2955edc305912df7ff0dcb3a0b4b694d8e5258b9b9b012c3c8297",
+            "seg_stats_x10_validation.py (the generator, run on X2-1 from stdin)": "689c32f0c329be5577c6448520dc1e642ee4d8a1fb569b20a88015ba481c5468",
+            "memwatch.log (stage2_prep/x10_val_launch; the launch's read-only memory watch, 10-second samples)": "ddc4738c0e32192ddd964f46464f84135d688ce0457f4082bdbba91d81029a8f",
+            "fvd_cap_watch.log, fvd_cap_watch.log.state and fvd_cap_watch.out (stage2_prep/x10_val_launch; the cap watcher's log, final state line and empty stdout)": {
+              "log": "1104a5ee8082668866c4edffae324d00f7a11e22b6642d18fda40f75e264506a",
+              "state": "a686a6a382a8c39ed51ce8c1f3989703b064fb69218350e9ea73bc708215fb63",
+              "out": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "fvd_cap_watch.py and fvd_cap_watch_loop.sh (stage2_prep/x10_val_launch; bound in revision 25)": {
+              "watcher": "c3a97b78efcae91fbc06fadbe10056484d00676484ba616dedcf76b6bfcaae55",
+              "loop": "d55073277302ef28a2c980ac3b7e6843cfb0f400f3405ad4885e2e0b926d5f5e"
+            },
+            "rev26_reads.txt (X2-1 stage2_prep/x10_val_launch/rev26; log scan counts, snapshot views, listings, mtimes, service and boot facts, X2-1 hashes of the copies)": "7ca08ccb7d4343bbdb4c24aff03b01c5c0b82984281be9ab7ec27e9ea6be952c",
+            "rev26_reads.sh (the reads' commands and pattern, run on X2-1 from stdin)": "d780adefc39c8fb74d97af04af8ca10ae31098bb31e306786ae5ca38e5b90e17",
+            "x2_SHA256SUMS_rev26.txt (the X2-1 hashes of the rev26 copies, every one matched)": "0f17e3a9e85e7c12fd7c845a0dbb6a902912666024487a3527ae4a9187c285d1",
+            "host_x2/configuration/5aa3b3cc0d5d46a083e5c6216405e5d8/validate_fv_double_population/r0_w31_t1/events.jsonl (X2-1; the 31-worker trial's event log, hashed whole on X2-1, not copied)": "9da6031d1b11f5803077a30df6895688d9243eca88cd85a968ec55c2e3eb2aa7",
+            "trial_fvd_w31_memory_events.jsonl (rev26; that log's one memory_budget and six memory_hold lines, byte for byte, no other line)": "c8f450b4db5f60d798a834050684a71fbb0f67cd32c110e25cfa0cb8b12a4da4",
+            "trial_fvd_w31_memory_events_read.txt and trial_fvd_w31_memory_events.sh (the read on X2-1, its allowlist and counts by event kind)": {
+              "read": "1b006fc030af3e378dd4ee5bf5ecb2e2515bc6c845f985ebfba204e4c7bfced7",
+              "sh": "a0f2c6b438ba29943ac641943931b532a2dc929fa781e1832ea52671cbe9093b"
+            },
+            "state_at_go.txt, xv_launch_prelaunch.log, xv_launch_watchers.log, xv_launch_approve.log and xv_launch_launch.log (stage2_prep/x10_val_launch; the gates' first stamp, for the charge)": {
+              "state_at_go": "f9e0d39ddb55891166335fb4c8f5d304bed8a83573a7f230cad92327ec0ec47d",
+              "prelaunch": "58a1893e4efb521283ca09670576f55f1ecb008f115fdec15607ce760532be20",
+              "watchers": "c1ab85908b869b391f7e80eed99357267ce568d167f5bcb0433a60c85305e0ba",
+              "approve": "e939fd3d99f90b17234467af7884132e4ba4e16267b9bf8b4b6c941b59d82b28",
+              "launch": "50e11059d9db1fbf064e9dbe731f761eab22a32793b99ae7907bdfb06f64fc96"
+            },
+            "v3/runs/a10_stage2/sigma_squared_x10_validation/validation_plan.json (the sealed spec; frozen classes, weights and per-phase routes aggregated from it on X2-1, never copied)": "5baf13c5feeeea6f5db3116e65c42f80683af165e59b49b0d5d630b09505610a",
+            "LOAD_SHEET_v9r2_x10_validation.md (launch_package; sections 1, 2, 3, 4, 5, 7, 8, 9, 10 and 12)": "856be03835250834a843b0b8c6bad3ab4baea588d8ade1de30cec502384e766a",
+            "a10_stage2_operations_ledger.md (Lineage v3 records; the reconciliation entry the outcome cites, read and asserted when revision 26 was built)": "not hashed: the ledger is appended to after this entry",
+            "copies": "Lineage v3 records, stage2_x10_val_2026-11-23/completion_2026-11-26 (x2: 62 metadata copies, x2_SHA256SUMS.txt; rev26: 14 further copies matched to their X2-1 originals in rev26_reads.txt, and the trial's memory lines with their read, all 16 in x2_SHA256SUMS_rev26.txt)"
+          }
         }
       ]
     },
@@ -4132,8 +4782,8 @@
       "value": null,
       "reason": "No private endpoint mapping is supplied for public staging; resolve privately without changing public unit identity."
     },
-    "dispatch_admissible": true,
-    "admission_reason": "Admissible for the launch bound in dispatch_admission only: the sigma0^2 x10 original validation at 93a453b2 on the pull route, X2-1 alone, root v3/runs/a10_stage2/sigma_squared_x10_validation/validation_run, wall 160 h, machine register from evidence d829ff1a, the FV double-population phase held at 8 by the overall worker target. (a), (b) and (d) are bound and approved; (c) is measured at the host's join, all five phases' configuration tests before any registered job, under the operator-approved reading of A17 section 2(c) of 2026-11-06. Not an admission for any other launch, family, kind, root or identity.",
+    "dispatch_admissible": false,
+    "admission_reason": "Not admissible: no launch is bound. The revision 25 admission was for the sigma0^2 x10 original validation only, and that launch completed at 2026-11-26T04:23:38Z, 23:23 EST on 2026-11-25.",
     "evidence": {
       "preparation_report": {
         "record": "X2-1 requalification preparation report, 2026-10-30",
@@ -4856,238 +5506,15 @@
       }
     },
     "revision": {
-      "number": 25,
-      "supersedes_payload_sha256": "fe513b87546cab8e4a9c4524ac7d1f7a06c5d897ff8a65d7c170267f99d00aa3",
-      "supersedes_commit": "b14620b0",
-      "reason": "Approved by the operator on 2026-11-23 (\"go on all through the launch\"). Binds the sigma0^2 x10 A4-kind qualification (evidence e8abb4fa, 60 of 60) as a supplement to the revision 10 A4-kind record, binds load sheet version 9 revision 2 with the FV double-population cap of DECISIONS_2026-11-22 section 22, records seed history addendum 9, and admits the sigma0^2 x10 original validation only (spec sigma_squared_x10_validation/validation_plan.json 5baf13c5, seal d4e0bdad, root sigma_squared_x10_validation/validation_run, 2,132 A4 jobs in five phases, wall 160 h, machine register from evidence d829ff1a), with the signed validation rehearsal record of 2026-11-07 and the round CV and round X10V rehearsal checks as its rehearsal basis. approved_workload_kinds, the earlier join segments and closed admissions, the service entry and the host fields are unchanged."
+      "number": 26,
+      "supersedes_payload_sha256": "c79858921ea8aa448eda23a43e8e55bf59cbd1eb269ae7cf66af9eae8140696e",
+      "supersedes_commit": "9968fb41",
+      "reason": "Approved by the operator on 2026-11-26 (\"approve 378c1d0c\"). Binds the join-time configuration and rate segment of the sigma0^2 x10 original validation (A17 section 2(c), the operator-approved join-time reading; five per-phase configuration tests at the join, all before the first registered job), records that launch's outcome (2,132 of 2,132, no drain, one live control: the FV double-population cap of 8 as bound in revision 25, 47.94 X2-equivalent hours charged) and closes its admission (dispatch_admissible false; no launch bound). Two pointer corrections: the sigma0^2 x10 A4-kind supplement's evidence note named the machine register approval by a path that moved with the revision 25 admission, now prior_dispatch_admissions[8].machine_register_approval; and one pointer inside that admission to its own dress_rehearsal now names it under prior_dispatch_admissions[8]. Qualification evidence, approved_workload_kinds, load sheets, service entry and host fields otherwise unchanged."
     },
     "approved_workload_kinds_note": "table at code identity 93a453b2 on the launch-identity qualification approved in revision 8 (evidence 8522d594), with its crowding kernel path further qualified by the supplement approved in revision 17 (evidence 9781b893), and its variant calibration path for sigma0^2 x10 by the supplement approved in revision 23 (evidence 0e32c388); a4_fit, a4_validate and a4_census at the same identity on the qualification approved in revision 10 (evidence d829ff1a), with their crowding kernel path further qualified by the supplement approved in revision 19 (evidence a76196f3), and their variant calibration path for sigma0^2 x10 by the supplement approved in revision 25 (evidence e8abb4fa); a5_fvplain at the same identity on the qualification approved in revision 12 (evidence 25f905dc); rerun at the same identity on the qualification approved in revision 14 (evidence 8d919541), with its crowding kernel path further qualified by the supplement approved in revision 21 (evidence 04d4bc7f). Other kinds are added only by their own launches' qualification records.",
     "dispatch_admission": {
-      "launch": "the sigma0^2 x10 original validation (approvals item 29, X10-V; STAGE2_PLAN.public_v2.md lines 59 and 291), A4 five phases, pull route on X2-1 alone (A17 coordinator plus one host), normal mode, --model-service none",
-      "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
-      "commit": "b14620b05f29cc1e4548f2ece6cc9553943ec777",
-      "checkout": {
-        "spec_commit": "b14620b05f29cc1e4548f2ece6cc9553943ec777",
-        "reader_freeze": "f2585724f54e4c284adec5237725f21179b29960",
-        "note": "the frozen spec's pull_dispatch.code_commit is b14620b0, round X10V's checkout. The revision 25 commit sits on f2585724, the record-only reader freeze, so the checkout move spans two commits. f2585724 changes .gitattributes (five -text lines for the reader folders) and adds 45 files in five simulation subfolders; none is in the code identity's scope (simulation/*.py, simulation/v3/*.py and four json files; artifacts.py 234 to 250). Measured on WS-1 at f2585724: code_identity() is 93a453b2. host_a11.verify_commit compares the source-manifest files only (host_a11.py 140 to 147). The identity is measured again on X2-1 after the move (move_co_rev25.sh)"
-      },
-      "spec": {
-        "path": "v3/runs/a10_stage2/sigma_squared_x10_validation/validation_plan.json",
-        "file_sha256": "5baf13c5feeeea6f5db3116e65c42f80683af165e59b49b0d5d630b09505610a",
-        "payload_sha256": "d4e0bdad62ada22cfe24ac3278fc717c84588dce75a276351d8a88039f8174e1",
-        "plan_hash": "46c5e6bbcd249c46ff37b46ae87da014593fdc639ea4fc4deeabaf9da42fea66",
-        "schema": "v3-A4-validation-1",
-        "jobs": 2132,
-        "phases": {
-          "fit": 274,
-          "validate_plain": 822,
-          "validate_fv_primary": 365,
-          "validate_fv_double_population": 16,
-          "census": 655
-        },
-        "P": 274,
-        "F": 381,
-        "Fp": 365,
-        "Fd": 16,
-        "by_setting": {
-          "plain": {
-            "primary": 260,
-            "double_population": 8,
-            "double_length": 6
-          },
-          "fv": {
-            "primary": 365,
-            "double_population": 7,
-            "double_length": 9
-          }
-        },
-        "M": 6127,
-        "M_FV": 13177,
-        "probe_seed_count": 855,
-        "wall_seconds": 576000,
-        "x2_equivalent_hours": 160,
-        "configuration_seconds": 1800,
-        "cleanup_reserve_seconds": 1200,
-        "a10_family": "sigma_squared_x10",
-        "a10_stage": 2,
-        "instrument": {
-          "g": "linear",
-          "k_star": 1.8,
-          "mapping": "A10"
-        },
-        "kernel": "nominal: no job kernel and no configuration-profile kernel carries a crowding key",
-        "registration_pin": {
-          "commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
-          "note_sha256": "a99f228c770f01092e6c84978a4f6a73397a746c83df36b3c13de756f2500554"
-        },
-        "ceiling": "160 X2-equivalent hours, the A15 maximum for the sigma0^2 x10 validation, confirmed by the operator on 2026-11-23 (DECISIONS_2026-11-22 section 20) and sealed into the spec in round X10V Part A; it changes only by a dated amendment and a new spec",
-        "calibration": {
-          "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_calibration.json",
-          "file_sha256": "aecef21ab61e0c7078b7fcf40fee540f9891a0ac3e32e995699cbfbd8264dbce",
-          "payload_sha256": "256380ab7c65465766f0407c6f8468dd35dbfaced08c3db72388b1e0882abca9",
-          "parent": {
-            "path": "v3/runs/registered/v3_rerun_calibration.json",
-            "file_sha256": "fd86358a39e3b643fb9adc4e81a2372915ca50a1866e9b0e330a874b41746e01"
-          },
-          "note": "the plan's calibration_path, every job's A1 job and all five configuration profiles name this file, which equals STAGE2_PATHS['sigma_squared_x10'][0]; stage2_publication_guard holds the plan to it (round X10V report, the family-path clause)"
-        },
-        "source_family": {
-          "path": "v3/runs/a10_stage2/sigma_squared_x10_source/v3_rerun_tables_A1.json",
-          "file_sha256": "509dfbc8356edd0216254c93a4ea0a2284d56c223203ee67dcef19ec44cdf750",
-          "payload_sha256": "e32b6dc4afee35e499e709d3928fc237715c49ea675cff4b4bd6d0392e7efcd3",
-          "estimation_spec": {
-            "path": "v3/runs/a10_stage2/sigma_squared_x10_source/tables_A1_manifest.json",
-            "file_sha256": "9efeffc151a5e74cf671264338d30e4d5ca17d58ad1ad8ad8be59696439a546e",
-            "payload_sha256": "43e26fc425d955e22a2b99844485a1494137249967560408b82ee428c55dff59"
-          },
-          "note": "the assembled sigma0^2 x10 estimation (2026-11-23); sealed, read only in-process by prepare_validation"
-        },
-        "unfrozen": {
-          "file_sha256": "0ad5079fc1613938ec002d53144a614384f029c04993fe2947a232982fa5ac61",
-          "payload_sha256": "8db21b23caa9512ac77f635de825c4814b5ba27630482fd8ede197bcfc395af6",
-          "relation": "the frozen spec minus pull_dispatch equals it (asserted in check_spec)"
-        },
-        "jobs_digest": "44cada9c1aaf4883658f43690851a55039c4617da947f5917ba5179e65653d57",
-        "pull_dispatch": {
-          "cost_classes": 42,
-          "memory_basis": "registered-stratum",
-          "code_commit": "b14620b05f29cc1e4548f2ece6cc9553943ec777",
-          "lease_seconds": 120,
-          "extra_inputs": [
-            "v3/runs/a10_stage2/inputs/exclusions/a3_probe"
-          ],
-          "projection_sha256": "5ca5225967cf08ad5636f98f12d57fa6ccd753a7ae126bff0edcc09f0af3d8a3",
-          "order": "descending frozen bundle mean worker seconds, then job id",
-          "frozen_memory_gb_by_phase": {
-            "fit": {
-              "1.886": 260,
-              "3.771": 6,
-              "3.773": 8
-            },
-            "validate_plain": {
-              "1.886": 780,
-              "3.771": 18,
-              "3.773": 24
-            },
-            "validate_fv_primary": {
-              "7.540": 365
-            },
-            "validate_fv_double_population": {
-              "15.077": 9,
-              "15.079": 7
-            },
-            "census": {
-              "7.540": 625,
-              "15.077": 15,
-              "15.079": 15
-            }
-          },
-          "class_worker_hours": 2159.85,
-          "note": "the frozen classes are P2 ordering classes, not timings. The cost-class table itself is sealed and is not copied here"
-        },
-        "operational_counts": "the phase counts, P, F, Fp, Fd, M, M_FV and the by-setting route counts are reported as operational metadata under DECISIONS_2026-11-07 section 2; values, estimates and screen outcomes stay sealed. Nothing finer is reportable: a per-source route, a route beside a capability, and any count by capability, setting and kind are sealed until the reading go (DECISIONS_2026-11-22 section 21)",
-        "differs_from_crowding_validation": "the top-level key sets are equal. The fields that differ are jobs, a10_family, calibration_path, configuration, M, M_FV, stream_seed_count, plan_hash and the three source bindings, all expected, and wall_seconds and x2_equivalent_hours, the ceiling (400 h there, 160 h here). In kind, each job loses one leaf, a1_job.config.kernel.crowding, and gains none. instrument, the phases, the reserves, the probe seed count and memory_estimate_gb are equal (round X10V report)"
-      },
-      "launch_root": "v3/runs/a10_stage2/sigma_squared_x10_validation/validation_run",
-      "root_identity": {
-        "spec_hash": "d4e0bdad62ada22cfe24ac3278fc717c84588dce75a276351d8a88039f8174e1",
-        "code_hash": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
-        "prepared_utc": "2026-11-24T01:56Z",
-        "identity_file_sha256": "cc9365880c3c9be610727b95840c9c93380662498f9dd51da7e71bcc86bfdd27",
-        "contents": "identity, manifest (bytes equal to the frozen spec), context_preflight (25 contexts passed; 27b40f7f), pull_state (7a76ec78; epoch 0, not started), runner.lock; no outputs, no records, no machine register entry, no launch record; the folder holds only the spec and the root. Byte-identical after Parts B and C and at the executor's audit, and read again by the interpreter at 2026-11-24T02:12Z",
-        "placement": "as round X10V recorded it: outside every folder the launch's input snapshot protects. The sigma layout differs from crowding's: the variant calibration and the estimation table and spec are job inputs, so the whole of v3/runs/a10_stage2/sigma_squared_x10 and of sigma_squared_x10_source is protected, and a root laid out like crowding's (inside the family folder) would make every configuration-trial worker raise at the join. The root is therefore in a third sibling folder, sigma_squared_x10_validation. Derived with snapshot_a11.dependencies per phase on the in-memory plan before the spec or the root existed: 1,776 input files (462 under the probe) and 78 protected folders in the union (76 per phase, 78 in validate_plain). The root, the spec file and 16 host and coordinator paths under the root lie under none in any phase, by Path.is_relative_to and by the real artifacts.input_path under an input view. The only protected folders inside the root are fit/outputs and fit/records, in validate_plain only, where the plain validate jobs read their fit siblings. Controls refused: a root inside sigma_squared_x10 (crowding's layout), inside sigma_squared_x10_source, and inside the probe folder. Re-derived against the frozen spec's input list with the same files and folders in every phase, and by the round's second check with its own code",
-        "placement_later_steps": "eleven tests on the actual paths, all passing, each with file and line in the record: no code line names a validation plan or run path, the A13 Part 2 publication takes the run root as an argument, the A16 round entry reads the original plan path as recorded data, and the folder is in no other family's registered directory and holds no A16 anchor. They are code readings backed by tests on the paths; none exercises the later step itself. Carried to the reading work (R6): the sigma0^2 x10 reading-input inventory must record the admission check at sigma_squared_x10_validation/validation_run, not in the family folder. Carried to the publication package (R7): the guard's target test is a tautology, so the publication step's target argument must be checked against STAGE2_PATHS",
-        "placement_exercised": "round X10V's toy V1 root, laid out like this one (seven relative paths equal to the real ones), joined and completed, and its host's protected list equalled the derivation for the toy in every phase. The negative control, the same toy spec bytes with only the root moved inside the toy calibration folder, failed at the join as required (dispatch_admission.dress_rehearsal)",
-        "placement_record": "stage2_x10_val_2026-11-23/ROOT_PLACEMENT.json, sha256 e01c8401bde360feb9600d3c87da17c170d4bcdc3e56910fca654a23e702dc6c"
-      },
-      "seed_check": "all 2,132 stream seeds are in the committed registry's a4_streams sigma_squared_x10 entry (3,275 listed; 1,143 unused by this split; faa4273a) and pairwise distinct; no stream or outer seed is in another registry group, the seed history (ec40a9ec), addenda 1 to 8 or their reuse lists, a reserved range, the A13 or A14 inventories or plan-forbidden sets, the sqrt or crowding validation plans, the three estimation specs or the three earlier qualification plans (72 groups; stage2_x10_val_2026-11-23/SEED_CHECK.json, sha256 56ce646bd73fe69a678c70160d3774be9c407bcb873e30a2cdba206d9c1c68f8). One informational field reads false, as in round CV: the stream seeds are not in [2^128, 2^129); they are A4 stream-function seeds and the registry is the authority for them. Re-derived by the round's second check on X2-1 with its own code",
-      "machine_register_approval": {
-        "evidence": "d829ff1a40d98708614528bb237a35ffd4f5d7a2e65073661324c645bb022078",
-        "evidence_seal": "a1e483fc62e03cee8e9ce1bc5fb24e0dfb829062bb47ddf461eca4bba49e451d",
-        "path": "v3/_stage2_prep/qual_a4/x2_evidence.json",
-        "candidate_memory_gb": 124.964,
-        "expected_entry": {
-          "qualification_sha256": "a1e483fc62e03cee8e9ce1bc5fb24e0dfb829062bb47ddf461eca4bba49e451d",
-          "kinds": [
-            "a4_census",
-            "a4_fit",
-            "a4_validate"
-          ],
-          "memory_gb": 124.964,
-          "note": "approve_host writes the evidence document's seal, not its file hash, as qualification_sha256 (multihost_a11.py 193 to 198)"
-        },
-        "reason": "the operator's choice (DECISIONS_2026-11-22 section 22 item 2): approve the root's machine register from the revision 10 A4-kind evidence, as the crowding validation's was (DECISIONS_2026-11-14 section 6), with round X10V's e8abb4fa bound as the sigma0^2 x10 A4-kind supplement, and hold the FV double-population phase at 8 by the overall worker target (operating_rules.approved_load_sheet.value.fv_double_population_cap)",
-        "not_used": {
-          "a76196f3": "the crowding supplement, 120.38 GB",
-          "e8abb4fa": "the sigma0^2 x10 supplement, 118.04 GB"
-        },
-        "command": "python3.13 -B -m v3.multihost_a11 approve v3/runs/a10_stage2/sigma_squared_x10_validation/validation_run v3/_stage2_prep/qual_a4/x2_evidence.json --operator 'Matt Yotko' --when <the go's UTC time>",
-        "command_note": "the registered root has no machine register entry yet; if approve refuses d829ff1a the launch stops, with no fallback to another evidence"
-      },
-      "fv_double_population_cap": {
-        "as_built": "the overall worker target set to 8 by the interpreter's watcher once at most 8 FV primary jobs are unfinished, held through census; pre-approved with revision 25",
-        "trigger": "the coordinator in phase index 2 (validate_fv_primary) with at most 8 of the 365 FV primary jobs unfinished (357 or more records in validate_fv_primary/records)",
-        "decision": "DECISIONS_2026-11-22 section 22 item 3: the overall worker target set to 8 once at most 8 FV primary jobs are unfinished, held through census, by the sigma0^2 x10 watcher. The operator's go of 2026-11-23 21:58 EST (\"go on all through the launch\") covers it on the interpreter's stated recommendation. It is needed under every evidence: without it the FV double-population phase opens at 10 under d829ff1a and a76196f3, and at 9 rising to 10 from 12 unfinished under e8abb4fa",
-        "watcher_sha256": "c3a97b78efcae91fbc06fadbe10056484d00676484ba616dedcf76b6bfcaae55",
-        "loop_sha256": "d55073277302ef28a2c980ac3b7e6843cfb0f400f3405ad4885e2e0b926d5f5e",
-        "tests_sha256": "156daa154e251468a2839b80ebcd0457d5b5fefcc7ce1ecbb00936bdda499661",
-        "tests_output_sha256": "88aa41c42424496aac89d596bef4e8ece78e8d1ef1b2979c26cf3b985e9f9810",
-        "loop_tests_sha256": "76bbddd66fa523950f7ff7cda93632b6ff52a85974fbda03110a3a3584ee0ffd",
-        "loop_tests_output_sha256": "4446ebd10aac9dca4e4f784546401d9bd2ab385286dca7a802b0a45bfa6a4f09",
-        "fixture_sha256": "1b9e0b9188c77a2d0e634f8677333c65fb3ce3c13d5b16e9eafd00484bf8f13b",
-        "dry_run_script_sha256": "c5d2809404dd4216999f39be36d5b928da4bfefb9f3068300fe18e88894c9ace",
-        "started": "before the root's machine-register approval, under its loop wrapper, with the memory watch"
-      },
-      "all_four_records_condition": "A17 section 2: bind (a) post-update fixed-code requalification, (b) bit identity at the launch identity for every kind the host will run, (c) join-time configuration and rates, (d) its own load sheet",
-      "records": {
-        "a_post_update_fixed_code": "accepted and operator-approved 2026-10-31 (qualification_records.post_update_fixed_code)",
-        "b_launch_identity_qualification": "kinds a4_fit, a4_validate and a4_census bound and approved in revision 10 (evidence d829ff1a); their variant calibration path for sigma0^2 x10 qualified by qualification_records.launch_identity_a4_kinds_sigma_squared_x10_supplement (evidence e8abb4fa); approved by the operator with revision 25",
-        "c_join_time_configuration_and_rates": "at join: the host runs all five phases' configuration tests at its join, before the first registered dispatch (host_a11.run_host), and the launch records them and its rate segment (A17 section 2(c)); rate 1.0 against the X2-1 reference by same-host identity",
-        "d_load_sheet": "version 9 revision 2 bound in operating_rules.approved_load_sheet (sha256 856be03835250834a843b0b8c6bad3ab4baea588d8ade1de30cec502384e766a); approved by the operator with revision 25"
-      },
-      "dress_rehearsal": {
-        "passed": true,
-        "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved_validation.json, the validation pull-route rehearsal at 93a453b2 (V0 toy estimation, V1 toy validation of five phases with five rechecks; sqrt toys), signed in the operator's name at the sqrt validation go of 2026-11-07",
-        "record_sha256": "efb62fd137670e660eaa111e151f757453509117f006f7dcc307c9ba308c23e4",
-        "unsigned_record_sha256": "c0bbf37412699f72ec0683a0f2c44cbd062c72c3190cc813d6dad3d61167b66d",
-        "check_sha256": "b98577832f03c7f86e1c02340245020099af3bfc8b358d4fc5a045b36699aa2c",
-        "crowding_supplement": {
-          "record": "stage2_prep/crowding_v/REHEARSAL_CV_CHECK.json (round CV, non-registered)",
-          "sha256": "dee83b220241f5bcb39e72cb1cd952391f9211248f1ad74dab73340ba004479b",
-          "criteria_passed": "V0 31 of 31 and V1 44 of 44",
-          "bound_in": "revision 19, for the crowding validation; carried here as the first supplement"
-        },
-        "x10_supplement": {
-          "record": "stage2_x10_val_2026-11-23/REHEARSAL_X10V_CHECK.json (round X10V Part C, non-registered; on X2-1 stage2_prep/x10_v/REHEARSAL_X10V_CHECK.json)",
-          "sha256": "2ce82c9db36f9e13a039eeac9214d259a72cf090c509a88d662e939d62d173d1",
-          "criteria_passed": "V0 36 of 36 and V1 50 of 50. Several criteria re-read what preparation built (the toy spec non-registered, every toy job on the toy variant copy, the layout, the bound extra inputs, the toy calibration's bytes). The load-bearing ones compare independent things: the run's protected folders against the Part A style derivation in every phase, the five rechecks, the five valid configuration tests on the toy variant, the two completion checks and the negative control",
-          "register_entries_made_by_the_executor": "the three toy-root machine register entries (V0 41174d54 from the round X10 table evidence, V1 87ee5f6c from the Part B evidence, negative control f937a35f) were made by the executor with approve, under the operator string \"round X10V executor (toy rehearsal root entry, not an operator approval)\". None is an operator approval. All three are confined to v3/_stage2_prep/rehearsal_x10v, the tracked host register is unchanged (3caae2c0) and the registered root has no machine register",
-          "negative_control": {
-            "failed_at_the_join_as_required": true,
-            "what": "the same toy validation spec bytes with the root at rehearsal_x10v/sigma_squared_x10/validation_run, inside the toy calibration folder, which the run's protected list held. check_spec passed on it, as it did for the failed sqrt runs root of 2026-11-13",
-            "result": "the host left 3.7 s after joining: session end reason left, nothing chosen, no phase configured; exception class RuntimeError in host_exit.json and configuration_planning.json; the host log holds 24 ValueError and 1 RuntimeError (class names counted, no text read); one trial folder started (census, r0_w8_t1), 0 trial records, 0 trial outputs, 0 job records, 0 outputs, 0 leases. The executor then stopped the waiting toy coordinator with production_runner control ROOT --stop drain. All 10 control criteria true"
-          },
-          "note": "V0: six toy sigma0^2 x10 table jobs (three forced plain, three forced FV), every job on a byte copy of the placed variant calibration (aecef21a) on which the validator passed, and a non-registered assembly. V1: 21 toy A4 jobs (fit 3, validate_plain 9, validate_fv_primary 1, validate_fv_double_population 2, census 6) through the coordinator and host_a11 --local --model-service none, with five valid configuration tests (910 trial records, 310 distinct jobs), five barriers and five matched rechecks, on a toy layout mirroring this launch's (the toy calibration folder, the toy source folder, the toy plan and V1 root in a third folder, the toy probe outside all three); the run's protected folders equalled the derivation in every phase and the V1 root lay under none. The toy V1 chose 24 workers in four phases and 31 in validate_plain, a toy choice. The drains were not repeated: no dispatch, host, dispatch-store, worker-control, worker-safety or service module names a calibration, so the variant does not touch the drain path (read from the code)"
-        },
-        "full_size_cover": "no full-size sigma0^2 x10 validation job has run. Gate 2 is closed on short profiles and toys only: the three A4 kinds ran on the variant calibration at short length and matched bit for bit, and the five phases ran on a toy copy of it. The sigma0^2 x10 estimation ran all 655 full-size table jobs on the variant through the coordinator and host (revision 24). The registered launch's first dispatches in each phase are the first full-size sigma0^2 x10 A4 jobs",
-        "precedent": "the crowding estimation (revision 17), validation (revision 19) and runs (revision 21) and the sigma0^2 x10 estimation (revision 23) each reused their route's signed rehearsal record with a supplement; this is the fifth such reuse and the second for the validation route",
-        "basis": "the operator approved with revision 25 the existing signed record plus the two supplements in place of a new signed record (DECISIONS_2026-11-22 section 22 item 5)",
-        "completion_check": {
-          "script": "stage2_x10_val_2026-11-23/launch_package/check_done_validation_x10.py (on X2-1 stage2_prep/x10_val_launch/check_done_validation_x10.py)",
-          "sha256": "5431f650f7b6c735317378cbfacbd3a08fc93bce28a7eb4bae95fca87dfc0870",
-          "usage": "check_done_validation_x10.py SPEC ROOT, from the checkout's simulation folder after the coordinator has exited",
-          "note": "the crowding validation's check_done_validation_crowding.py (c4928285, revision 19) with one change: the expected job count 2,132 in place of 4,781. The count and the docstring paragraph are its only crowding-specific lines"
-        }
-      },
-      "satisfied_at_go": [
-        "operator approval of the sigma0^2 x10 A4-kind qualification supplement, load sheet version 9 revision 2 with the FV double-population cap, and the rehearsal basis (revision 25)",
-        "the A15 ledger reservation: 160 h of the sigma0^2 x10 validation allowance",
-        "seed history addendum 9 for the round X10V qualification, rehearsal and configuration seeds, committed record-only with revision 25",
-        "the X2-1 checkout move to the revision 25 commit across the reader freeze, the watcher's dry run, the root's machine-register approval from evidence d829ff1a and the launch go, with the cap watcher started before the coordinator"
-      ],
-      "remaining_at_join": [
-        "(c) the five phases' configuration tests and the rate segment, measured at the host's join before any registered job and copied into revision 26"
-      ]
+      "launch": null,
+      "reason": "No launch is bound. The revision 25 admission covered only the sigma0^2 x10 original validation on root v3/runs/a10_stage2/sigma_squared_x10_validation/validation_run, which completed at 2026-11-26T04:23:38Z, 23:23 EST on 2026-11-25 (prior_dispatch_admissions). A further launch on this unit, including the sigma0^2 x10 admission and publication (approvals item 30) if it needs a dispatch, needs its own dispatch binding, load sheet and go in a later revision."
     },
     "prior_dispatch_admissions": [
       {
@@ -6325,16 +6752,273 @@
           "after_run_listing": "protocol_events holds one record (sequence 0, coordinator_start) and incidental_cross_checks one, for the phase recheck. host_x2/unpublished holds 1,312 host scratch files, a .json and a .oom.json for each of 656 lease tokens (655 jobs and the recheck), not opened (rev24_reads.txt)",
           "pointer_repair": "revision 24 rewrote three pointers inside this admission, which named its own fields placed_calibration, dress_rehearsal and full_size_measurement by the live admission's path, to the same fields under prior_dispatch_admissions[7], where the admission now sits; no other text of the admission changed"
         }
+      },
+      {
+        "launch": "the sigma0^2 x10 original validation (approvals item 29, X10-V; STAGE2_PLAN.public_v2.md lines 59 and 291), A4 five phases, pull route on X2-1 alone (A17 coordinator plus one host), normal mode, --model-service none",
+        "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+        "commit": "b14620b05f29cc1e4548f2ece6cc9553943ec777",
+        "checkout": {
+          "spec_commit": "b14620b05f29cc1e4548f2ece6cc9553943ec777",
+          "reader_freeze": "f2585724f54e4c284adec5237725f21179b29960",
+          "note": "the frozen spec's pull_dispatch.code_commit is b14620b0, round X10V's checkout. The revision 25 commit sits on f2585724, the record-only reader freeze, so the checkout move spans two commits. f2585724 changes .gitattributes (five -text lines for the reader folders) and adds 45 files in five simulation subfolders; none is in the code identity's scope (simulation/*.py, simulation/v3/*.py and four json files; artifacts.py 234 to 250). Measured on WS-1 at f2585724: code_identity() is 93a453b2. host_a11.verify_commit compares the source-manifest files only (host_a11.py 140 to 147). The identity is measured again on X2-1 after the move (move_co_rev25.sh)"
+        },
+        "spec": {
+          "path": "v3/runs/a10_stage2/sigma_squared_x10_validation/validation_plan.json",
+          "file_sha256": "5baf13c5feeeea6f5db3116e65c42f80683af165e59b49b0d5d630b09505610a",
+          "payload_sha256": "d4e0bdad62ada22cfe24ac3278fc717c84588dce75a276351d8a88039f8174e1",
+          "plan_hash": "46c5e6bbcd249c46ff37b46ae87da014593fdc639ea4fc4deeabaf9da42fea66",
+          "schema": "v3-A4-validation-1",
+          "jobs": 2132,
+          "phases": {
+            "fit": 274,
+            "validate_plain": 822,
+            "validate_fv_primary": 365,
+            "validate_fv_double_population": 16,
+            "census": 655
+          },
+          "P": 274,
+          "F": 381,
+          "Fp": 365,
+          "Fd": 16,
+          "by_setting": {
+            "plain": {
+              "primary": 260,
+              "double_population": 8,
+              "double_length": 6
+            },
+            "fv": {
+              "primary": 365,
+              "double_population": 7,
+              "double_length": 9
+            }
+          },
+          "M": 6127,
+          "M_FV": 13177,
+          "probe_seed_count": 855,
+          "wall_seconds": 576000,
+          "x2_equivalent_hours": 160,
+          "configuration_seconds": 1800,
+          "cleanup_reserve_seconds": 1200,
+          "a10_family": "sigma_squared_x10",
+          "a10_stage": 2,
+          "instrument": {
+            "g": "linear",
+            "k_star": 1.8,
+            "mapping": "A10"
+          },
+          "kernel": "nominal: no job kernel and no configuration-profile kernel carries a crowding key",
+          "registration_pin": {
+            "commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
+            "note_sha256": "a99f228c770f01092e6c84978a4f6a73397a746c83df36b3c13de756f2500554"
+          },
+          "ceiling": "160 X2-equivalent hours, the A15 maximum for the sigma0^2 x10 validation, confirmed by the operator on 2026-11-23 (DECISIONS_2026-11-22 section 20) and sealed into the spec in round X10V Part A; it changes only by a dated amendment and a new spec",
+          "calibration": {
+            "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_calibration.json",
+            "file_sha256": "aecef21ab61e0c7078b7fcf40fee540f9891a0ac3e32e995699cbfbd8264dbce",
+            "payload_sha256": "256380ab7c65465766f0407c6f8468dd35dbfaced08c3db72388b1e0882abca9",
+            "parent": {
+              "path": "v3/runs/registered/v3_rerun_calibration.json",
+              "file_sha256": "fd86358a39e3b643fb9adc4e81a2372915ca50a1866e9b0e330a874b41746e01"
+            },
+            "note": "the plan's calibration_path, every job's A1 job and all five configuration profiles name this file, which equals STAGE2_PATHS['sigma_squared_x10'][0]; stage2_publication_guard holds the plan to it (round X10V report, the family-path clause)"
+          },
+          "source_family": {
+            "path": "v3/runs/a10_stage2/sigma_squared_x10_source/v3_rerun_tables_A1.json",
+            "file_sha256": "509dfbc8356edd0216254c93a4ea0a2284d56c223203ee67dcef19ec44cdf750",
+            "payload_sha256": "e32b6dc4afee35e499e709d3928fc237715c49ea675cff4b4bd6d0392e7efcd3",
+            "estimation_spec": {
+              "path": "v3/runs/a10_stage2/sigma_squared_x10_source/tables_A1_manifest.json",
+              "file_sha256": "9efeffc151a5e74cf671264338d30e4d5ca17d58ad1ad8ad8be59696439a546e",
+              "payload_sha256": "43e26fc425d955e22a2b99844485a1494137249967560408b82ee428c55dff59"
+            },
+            "note": "the assembled sigma0^2 x10 estimation (2026-11-23); sealed, read only in-process by prepare_validation"
+          },
+          "unfrozen": {
+            "file_sha256": "0ad5079fc1613938ec002d53144a614384f029c04993fe2947a232982fa5ac61",
+            "payload_sha256": "8db21b23caa9512ac77f635de825c4814b5ba27630482fd8ede197bcfc395af6",
+            "relation": "the frozen spec minus pull_dispatch equals it (asserted in check_spec)"
+          },
+          "jobs_digest": "44cada9c1aaf4883658f43690851a55039c4617da947f5917ba5179e65653d57",
+          "pull_dispatch": {
+            "cost_classes": 42,
+            "memory_basis": "registered-stratum",
+            "code_commit": "b14620b05f29cc1e4548f2ece6cc9553943ec777",
+            "lease_seconds": 120,
+            "extra_inputs": [
+              "v3/runs/a10_stage2/inputs/exclusions/a3_probe"
+            ],
+            "projection_sha256": "5ca5225967cf08ad5636f98f12d57fa6ccd753a7ae126bff0edcc09f0af3d8a3",
+            "order": "descending frozen bundle mean worker seconds, then job id",
+            "frozen_memory_gb_by_phase": {
+              "fit": {
+                "1.886": 260,
+                "3.771": 6,
+                "3.773": 8
+              },
+              "validate_plain": {
+                "1.886": 780,
+                "3.771": 18,
+                "3.773": 24
+              },
+              "validate_fv_primary": {
+                "7.540": 365
+              },
+              "validate_fv_double_population": {
+                "15.077": 9,
+                "15.079": 7
+              },
+              "census": {
+                "7.540": 625,
+                "15.077": 15,
+                "15.079": 15
+              }
+            },
+            "class_worker_hours": 2159.85,
+            "note": "the frozen classes are P2 ordering classes, not timings. The cost-class table itself is sealed and is not copied here"
+          },
+          "operational_counts": "the phase counts, P, F, Fp, Fd, M, M_FV and the by-setting route counts are reported as operational metadata under DECISIONS_2026-11-07 section 2; values, estimates and screen outcomes stay sealed. Nothing finer is reportable: a per-source route, a route beside a capability, and any count by capability, setting and kind are sealed until the reading go (DECISIONS_2026-11-22 section 21)",
+          "differs_from_crowding_validation": "the top-level key sets are equal. The fields that differ are jobs, a10_family, calibration_path, configuration, M, M_FV, stream_seed_count, plan_hash and the three source bindings, all expected, and wall_seconds and x2_equivalent_hours, the ceiling (400 h there, 160 h here). In kind, each job loses one leaf, a1_job.config.kernel.crowding, and gains none. instrument, the phases, the reserves, the probe seed count and memory_estimate_gb are equal (round X10V report)"
+        },
+        "launch_root": "v3/runs/a10_stage2/sigma_squared_x10_validation/validation_run",
+        "root_identity": {
+          "spec_hash": "d4e0bdad62ada22cfe24ac3278fc717c84588dce75a276351d8a88039f8174e1",
+          "code_hash": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+          "prepared_utc": "2026-11-24T01:56Z",
+          "identity_file_sha256": "cc9365880c3c9be610727b95840c9c93380662498f9dd51da7e71bcc86bfdd27",
+          "contents": "identity, manifest (bytes equal to the frozen spec), context_preflight (25 contexts passed; 27b40f7f), pull_state (7a76ec78; epoch 0, not started), runner.lock; no outputs, no records, no machine register entry, no launch record; the folder holds only the spec and the root. Byte-identical after Parts B and C and at the executor's audit, and read again by the interpreter at 2026-11-24T02:12Z",
+          "placement": "as round X10V recorded it: outside every folder the launch's input snapshot protects. The sigma layout differs from crowding's: the variant calibration and the estimation table and spec are job inputs, so the whole of v3/runs/a10_stage2/sigma_squared_x10 and of sigma_squared_x10_source is protected, and a root laid out like crowding's (inside the family folder) would make every configuration-trial worker raise at the join. The root is therefore in a third sibling folder, sigma_squared_x10_validation. Derived with snapshot_a11.dependencies per phase on the in-memory plan before the spec or the root existed: 1,776 input files (462 under the probe) and 78 protected folders in the union (76 per phase, 78 in validate_plain). The root, the spec file and 16 host and coordinator paths under the root lie under none in any phase, by Path.is_relative_to and by the real artifacts.input_path under an input view. The only protected folders inside the root are fit/outputs and fit/records, in validate_plain only, where the plain validate jobs read their fit siblings. Controls refused: a root inside sigma_squared_x10 (crowding's layout), inside sigma_squared_x10_source, and inside the probe folder. Re-derived against the frozen spec's input list with the same files and folders in every phase, and by the round's second check with its own code",
+          "placement_later_steps": "eleven tests on the actual paths, all passing, each with file and line in the record: no code line names a validation plan or run path, the A13 Part 2 publication takes the run root as an argument, the A16 round entry reads the original plan path as recorded data, and the folder is in no other family's registered directory and holds no A16 anchor. They are code readings backed by tests on the paths; none exercises the later step itself. Carried to the reading work (R6): the sigma0^2 x10 reading-input inventory must record the admission check at sigma_squared_x10_validation/validation_run, not in the family folder. Carried to the publication package (R7): the guard's target test is a tautology, so the publication step's target argument must be checked against STAGE2_PATHS",
+          "placement_exercised": "round X10V's toy V1 root, laid out like this one (seven relative paths equal to the real ones), joined and completed, and its host's protected list equalled the derivation for the toy in every phase. The negative control, the same toy spec bytes with only the root moved inside the toy calibration folder, failed at the join as required (prior_dispatch_admissions[8].dress_rehearsal)",
+          "placement_record": "stage2_x10_val_2026-11-23/ROOT_PLACEMENT.json, sha256 e01c8401bde360feb9600d3c87da17c170d4bcdc3e56910fca654a23e702dc6c"
+        },
+        "seed_check": "all 2,132 stream seeds are in the committed registry's a4_streams sigma_squared_x10 entry (3,275 listed; 1,143 unused by this split; faa4273a) and pairwise distinct; no stream or outer seed is in another registry group, the seed history (ec40a9ec), addenda 1 to 8 or their reuse lists, a reserved range, the A13 or A14 inventories or plan-forbidden sets, the sqrt or crowding validation plans, the three estimation specs or the three earlier qualification plans (72 groups; stage2_x10_val_2026-11-23/SEED_CHECK.json, sha256 56ce646bd73fe69a678c70160d3774be9c407bcb873e30a2cdba206d9c1c68f8). One informational field reads false, as in round CV: the stream seeds are not in [2^128, 2^129); they are A4 stream-function seeds and the registry is the authority for them. Re-derived by the round's second check on X2-1 with its own code",
+        "machine_register_approval": {
+          "evidence": "d829ff1a40d98708614528bb237a35ffd4f5d7a2e65073661324c645bb022078",
+          "evidence_seal": "a1e483fc62e03cee8e9ce1bc5fb24e0dfb829062bb47ddf461eca4bba49e451d",
+          "path": "v3/_stage2_prep/qual_a4/x2_evidence.json",
+          "candidate_memory_gb": 124.964,
+          "expected_entry": {
+            "qualification_sha256": "a1e483fc62e03cee8e9ce1bc5fb24e0dfb829062bb47ddf461eca4bba49e451d",
+            "kinds": [
+              "a4_census",
+              "a4_fit",
+              "a4_validate"
+            ],
+            "memory_gb": 124.964,
+            "note": "approve_host writes the evidence document's seal, not its file hash, as qualification_sha256 (multihost_a11.py 193 to 198)"
+          },
+          "reason": "the operator's choice (DECISIONS_2026-11-22 section 22 item 2): approve the root's machine register from the revision 10 A4-kind evidence, as the crowding validation's was (DECISIONS_2026-11-14 section 6), with round X10V's e8abb4fa bound as the sigma0^2 x10 A4-kind supplement, and hold the FV double-population phase at 8 by the overall worker target (operating_rules.approved_load_sheet.value.fv_double_population_cap)",
+          "not_used": {
+            "a76196f3": "the crowding supplement, 120.38 GB",
+            "e8abb4fa": "the sigma0^2 x10 supplement, 118.04 GB"
+          },
+          "command": "python3.13 -B -m v3.multihost_a11 approve v3/runs/a10_stage2/sigma_squared_x10_validation/validation_run v3/_stage2_prep/qual_a4/x2_evidence.json --operator 'Matt Yotko' --when <the go's UTC time>",
+          "command_note": "the registered root has no machine register entry yet; if approve refuses d829ff1a the launch stops, with no fallback to another evidence"
+        },
+        "fv_double_population_cap": {
+          "as_built": "the overall worker target set to 8 by the interpreter's watcher once at most 8 FV primary jobs are unfinished, held through census; pre-approved with revision 25",
+          "trigger": "the coordinator in phase index 2 (validate_fv_primary) with at most 8 of the 365 FV primary jobs unfinished (357 or more records in validate_fv_primary/records)",
+          "decision": "DECISIONS_2026-11-22 section 22 item 3: the overall worker target set to 8 once at most 8 FV primary jobs are unfinished, held through census, by the sigma0^2 x10 watcher. The operator's go of 2026-11-23 21:58 EST (\"go on all through the launch\") covers it on the interpreter's stated recommendation. It is needed under every evidence: without it the FV double-population phase opens at 10 under d829ff1a and a76196f3, and at 9 rising to 10 from 12 unfinished under e8abb4fa",
+          "watcher_sha256": "c3a97b78efcae91fbc06fadbe10056484d00676484ba616dedcf76b6bfcaae55",
+          "loop_sha256": "d55073277302ef28a2c980ac3b7e6843cfb0f400f3405ad4885e2e0b926d5f5e",
+          "tests_sha256": "156daa154e251468a2839b80ebcd0457d5b5fefcc7ce1ecbb00936bdda499661",
+          "tests_output_sha256": "88aa41c42424496aac89d596bef4e8ece78e8d1ef1b2979c26cf3b985e9f9810",
+          "loop_tests_sha256": "76bbddd66fa523950f7ff7cda93632b6ff52a85974fbda03110a3a3584ee0ffd",
+          "loop_tests_output_sha256": "4446ebd10aac9dca4e4f784546401d9bd2ab385286dca7a802b0a45bfa6a4f09",
+          "fixture_sha256": "1b9e0b9188c77a2d0e634f8677333c65fb3ce3c13d5b16e9eafd00484bf8f13b",
+          "dry_run_script_sha256": "c5d2809404dd4216999f39be36d5b928da4bfefb9f3068300fe18e88894c9ace",
+          "started": "before the root's machine-register approval, under its loop wrapper, with the memory watch"
+        },
+        "all_four_records_condition": "A17 section 2: bind (a) post-update fixed-code requalification, (b) bit identity at the launch identity for every kind the host will run, (c) join-time configuration and rates, (d) its own load sheet",
+        "records": {
+          "a_post_update_fixed_code": "accepted and operator-approved 2026-10-31 (qualification_records.post_update_fixed_code)",
+          "b_launch_identity_qualification": "kinds a4_fit, a4_validate and a4_census bound and approved in revision 10 (evidence d829ff1a); their variant calibration path for sigma0^2 x10 qualified by qualification_records.launch_identity_a4_kinds_sigma_squared_x10_supplement (evidence e8abb4fa); approved by the operator with revision 25",
+          "c_join_time_configuration_and_rates": "at join: the host runs all five phases' configuration tests at its join, before the first registered dispatch (host_a11.run_host), and the launch records them and its rate segment (A17 section 2(c)); rate 1.0 against the X2-1 reference by same-host identity",
+          "d_load_sheet": "version 9 revision 2 bound in operating_rules.approved_load_sheet (sha256 856be03835250834a843b0b8c6bad3ab4baea588d8ade1de30cec502384e766a); approved by the operator with revision 25"
+        },
+        "dress_rehearsal": {
+          "passed": true,
+          "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved_validation.json, the validation pull-route rehearsal at 93a453b2 (V0 toy estimation, V1 toy validation of five phases with five rechecks; sqrt toys), signed in the operator's name at the sqrt validation go of 2026-11-07",
+          "record_sha256": "efb62fd137670e660eaa111e151f757453509117f006f7dcc307c9ba308c23e4",
+          "unsigned_record_sha256": "c0bbf37412699f72ec0683a0f2c44cbd062c72c3190cc813d6dad3d61167b66d",
+          "check_sha256": "b98577832f03c7f86e1c02340245020099af3bfc8b358d4fc5a045b36699aa2c",
+          "crowding_supplement": {
+            "record": "stage2_prep/crowding_v/REHEARSAL_CV_CHECK.json (round CV, non-registered)",
+            "sha256": "dee83b220241f5bcb39e72cb1cd952391f9211248f1ad74dab73340ba004479b",
+            "criteria_passed": "V0 31 of 31 and V1 44 of 44",
+            "bound_in": "revision 19, for the crowding validation; carried here as the first supplement"
+          },
+          "x10_supplement": {
+            "record": "stage2_x10_val_2026-11-23/REHEARSAL_X10V_CHECK.json (round X10V Part C, non-registered; on X2-1 stage2_prep/x10_v/REHEARSAL_X10V_CHECK.json)",
+            "sha256": "2ce82c9db36f9e13a039eeac9214d259a72cf090c509a88d662e939d62d173d1",
+            "criteria_passed": "V0 36 of 36 and V1 50 of 50. Several criteria re-read what preparation built (the toy spec non-registered, every toy job on the toy variant copy, the layout, the bound extra inputs, the toy calibration's bytes). The load-bearing ones compare independent things: the run's protected folders against the Part A style derivation in every phase, the five rechecks, the five valid configuration tests on the toy variant, the two completion checks and the negative control",
+            "register_entries_made_by_the_executor": "the three toy-root machine register entries (V0 41174d54 from the round X10 table evidence, V1 87ee5f6c from the Part B evidence, negative control f937a35f) were made by the executor with approve, under the operator string \"round X10V executor (toy rehearsal root entry, not an operator approval)\". None is an operator approval. All three are confined to v3/_stage2_prep/rehearsal_x10v, the tracked host register is unchanged (3caae2c0) and the registered root has no machine register",
+            "negative_control": {
+              "failed_at_the_join_as_required": true,
+              "what": "the same toy validation spec bytes with the root at rehearsal_x10v/sigma_squared_x10/validation_run, inside the toy calibration folder, which the run's protected list held. check_spec passed on it, as it did for the failed sqrt runs root of 2026-11-13",
+              "result": "the host left 3.7 s after joining: session end reason left, nothing chosen, no phase configured; exception class RuntimeError in host_exit.json and configuration_planning.json; the host log holds 24 ValueError and 1 RuntimeError (class names counted, no text read); one trial folder started (census, r0_w8_t1), 0 trial records, 0 trial outputs, 0 job records, 0 outputs, 0 leases. The executor then stopped the waiting toy coordinator with production_runner control ROOT --stop drain. All 10 control criteria true"
+            },
+            "note": "V0: six toy sigma0^2 x10 table jobs (three forced plain, three forced FV), every job on a byte copy of the placed variant calibration (aecef21a) on which the validator passed, and a non-registered assembly. V1: 21 toy A4 jobs (fit 3, validate_plain 9, validate_fv_primary 1, validate_fv_double_population 2, census 6) through the coordinator and host_a11 --local --model-service none, with five valid configuration tests (910 trial records, 310 distinct jobs), five barriers and five matched rechecks, on a toy layout mirroring this launch's (the toy calibration folder, the toy source folder, the toy plan and V1 root in a third folder, the toy probe outside all three); the run's protected folders equalled the derivation in every phase and the V1 root lay under none. The toy V1 chose 24 workers in four phases and 31 in validate_plain, a toy choice. The drains were not repeated: no dispatch, host, dispatch-store, worker-control, worker-safety or service module names a calibration, so the variant does not touch the drain path (read from the code)"
+          },
+          "full_size_cover": "no full-size sigma0^2 x10 validation job has run. Gate 2 is closed on short profiles and toys only: the three A4 kinds ran on the variant calibration at short length and matched bit for bit, and the five phases ran on a toy copy of it. The sigma0^2 x10 estimation ran all 655 full-size table jobs on the variant through the coordinator and host (revision 24). The registered launch's first dispatches in each phase are the first full-size sigma0^2 x10 A4 jobs",
+          "precedent": "the crowding estimation (revision 17), validation (revision 19) and runs (revision 21) and the sigma0^2 x10 estimation (revision 23) each reused their route's signed rehearsal record with a supplement; this is the fifth such reuse and the second for the validation route",
+          "basis": "the operator approved with revision 25 the existing signed record plus the two supplements in place of a new signed record (DECISIONS_2026-11-22 section 22 item 5)",
+          "completion_check": {
+            "script": "stage2_x10_val_2026-11-23/launch_package/check_done_validation_x10.py (on X2-1 stage2_prep/x10_val_launch/check_done_validation_x10.py)",
+            "sha256": "5431f650f7b6c735317378cbfacbd3a08fc93bce28a7eb4bae95fca87dfc0870",
+            "usage": "check_done_validation_x10.py SPEC ROOT, from the checkout's simulation folder after the coordinator has exited",
+            "note": "the crowding validation's check_done_validation_crowding.py (c4928285, revision 19) with one change: the expected job count 2,132 in place of 4,781. The count and the docstring paragraph are its only crowding-specific lines"
+          }
+        },
+        "satisfied_at_go": [
+          "operator approval of the sigma0^2 x10 A4-kind qualification supplement, load sheet version 9 revision 2 with the FV double-population cap, and the rehearsal basis (revision 25)",
+          "the A15 ledger reservation: 160 h of the sigma0^2 x10 validation allowance",
+          "seed history addendum 9 for the round X10V qualification, rehearsal and configuration seeds, committed record-only with revision 25",
+          "the X2-1 checkout move to the revision 25 commit across the reader freeze, the watcher's dry run, the root's machine-register approval from evidence d829ff1a and the launch go, with the cap watcher started before the coordinator"
+        ],
+        "remaining_at_join": [
+          "(c) the five phases' configuration tests and the rate segment, measured at the host's join before any registered job and copied into revision 26"
+        ],
+        "outcome": {
+          "complete": true,
+          "completed_jobs": 2132,
+          "completed_by_phase": {
+            "fit": 274,
+            "validate_plain": 822,
+            "validate_fv_primary": 365,
+            "validate_fv_double_population": 16,
+            "census": 655
+          },
+          "deadline_drain": null,
+          "reason": null,
+          "launched_utc": "2026-11-24T04:28:41.36Z",
+          "finished_utc": "2026-11-26T04:23:38.24Z",
+          "finished_epoch": 1795667018.2437944,
+          "workers": "the configuration tests' choices (fit, validate_plain, validate_fv_primary and validate_fv_double_population 16, census 24, one thread); validate_fv_primary ran at most 13, held there by memory admission (inferred from the rule and the count), and the FV double-population cap held validate_fv_double_population and census at 8 (rates.approved_rate_segments, the sigma0^2 x10 validation segment, worker_control and measured_note)",
+          "fv_double_population_cap": "applied as bound: overall worker target 8 at 2026-11-25T22:07:23Z with 8 of 365 FV primary jobs unfinished, read back, protocol event 00000001 (payload seal e3f512ab59829dd1949c12fd54e5ab9132986bb905e60ab5509ccadc01e913fe); held through census (status.json overall_worker_target 8)",
+          "pre_dispatch_projection": "74.89 h against 159.03 h remaining, disposition fits (phase_projections/00000000.json); the four later projections also fit",
+          "charged_x2_equivalent_hours": 47.94,
+          "session_charge_x2_equivalent_hours": 47.9152,
+          "charge_basis": "the launch wall (172,496.88 s, launch epoch to finished_epoch, 47.916 h) plus 36 s of gates before the launch epoch (xv_launch_prelaunch.log's first stamp, 2026-11-24T04:28:05Z, to the launch epoch), 6 s of completion check (2026-11-26T04:30:38Z to 04:30:44Z, from the mtime of the empty check_done_validation_x10.err, inferred to be when the shell opened it at the check's start, to that of check_done_validation_x10.out) and about 30 s of evidence-copy sessions (the ledger's figure, not re-measured here), rounded up to the next 0.01 h. On the basis revision 20 used for the crowding validation, the sqrt validation's (the launch wall, the gates and the check), the charge would be 47.93 h; the ledger's evidence-copy term is the 0.01 h difference. The later read-only reads (rev26_reads.txt) are not charged",
+          "ledger": "a10_stage2_operations_ledger.md, reconciliation: sigma0^2 x10 validation, 2026-11-25. The sigma0^2 x10 validation component has used 48.10 of 160: round X10V 0.16, this run 47.94; stage 2 at 459.55 of 1,880, nothing outstanding",
+          "completion_check": "check_done_validation_x10.py (sha256 5431f650f7b6c735317378cbfacbd3a08fc93bce28a7eb4bae95fca87dfc0870, bound in revision 25) passed with no problems, 2026-11-26T04:30:38Z to 04:30:44Z: 2,132 outputs hashed, verified_output_hashes.json 38b496c0ba9964fa4e43e4db4ae43e392a1058a92abe559e4d84566560bac32f, outputs digest 57eac2491ebf2732130ad3c57c1a6e7ffbc9b5aac739857eb065d288a8381b0e; all five phase rechecks matched (X2-1 against X2-1), each with one matching incidental cross-check record for the same job; host exit with no error and nothing in flight",
+          "service": "model_service none, actions skipped (host_x2/service.json). llm-server inactive and disabled at the go (state_at_go.txt) and after the run (rev26_reads.txt), and inactive in all 17,070 memory-watch samples (memwatch.log). guppi-thermal-feed active at both, untouched, the same process (PID 1634426, started 2026-10-30) on the same boot, so it was not restarted during the run.",
+          "input_protection": "the launch's five ready input snapshot views (one per phase, the session's ready map) protect 76 folders each, and 78 in validate_plain's, where fit's records and outputs under this root are inputs: the counts and composition of revision 25's derivation (root_identity.placement). Three further views on the root have the 76-folder form. The root lies under no protected folder. This confirms the third-sibling-folder placement on the real launch",
+          "remaining_at_join_satisfied_by": "rates.approved_rate_segments, the sigma0^2 x10 validation segment (revision 26)",
+          "after_run_listing": "protocol_events holds two records (sequence 0, coordinator_start; sequence 1, the cap's control), incidental_cross_checks five, one for each phase recheck, and phase_projections five. host_x2/unpublished holds 4,274 host scratch files, a .json and a .oom.json for each of 2,137 lease tokens (2,132 jobs and the five rechecks), counted by name and not opened. The root has no top-level host_exit.json; the host's exit record is host_x2/host_exit.json, which the completion check reads (rev26_reads.txt)",
+          "after_run_state": "X2-1 at 2026-11-26T10:55:17Z (rev26_reads.txt): no runner, coordinator, host, cap watcher, memory watch or board watchdog process; the checkout at HEAD 9968fb41 with no modified tracked file; the boot unchanged since the go",
+          "pointer_repair": "revision 26 rewrote one pointer inside this admission, root_identity.placement_exercised, which named its own field dress_rehearsal by the live admission's path, to prior_dispatch_admissions[8].dress_rehearsal, where the admission now sits; no other text of the admission changed"
+        }
       }
     ]
   },
   "seal": {
     "algorithm": "sha256",
     "serialization": "UTF-8 JSON, sorted keys, separators comma and colon without whitespace, ensure_ascii=true, no NaN, no trailing newline; hash the payload object only",
-    "payload_sha256": "c79858921ea8aa448eda23a43e8e55bf59cbd1eb269ae7cf66af9eae8140696e"
+    "payload_sha256": "982ddcf0fa05b27a5d295e567a52e1109291657bafb8b73eb5147e947fa2bc8e"
   },
   "operator_approval": {
-    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-22.md section 22: the operator's approval of 2026-11-23 (\"go on all through the launch\") of this register revision 25 (approved as draft payload 98aec34f66e3f6feceafa69306d3a8bad520e72d631562819c7523a0ac48e673), payload digest c79858921ea8aa448eda23a43e8e55bf59cbd1eb269ae7cf66af9eae8140696e: the sigma0^2 x10 A4-kind qualification supplement (evidence e8abb4fa11490f8ffb499a7a3aa10917c17284ac567d2bdb7da66cdbf6219c90), load sheet version 9 revision 2 (856be03835250834a843b0b8c6bad3ab4baea588d8ade1de30cec502384e766a) with the FV double-population cap, the rehearsal basis and dispatch admission for the bound sigma0^2 x10 validation launch. Prior approvals in force: revisions 8 to 24 and the 2026-10-31 fixed-code requalification.",
-    "reason": "Register approval, the ledger reservation, the checkout move, the launch go and the root's machine-register approval remain distinct records."
+    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-26.md section 2: the operator's approval of 2026-11-26 (\"approve 378c1d0c\") of this register revision 26 (approved as draft payload 378c1d0cc84f6d52d4340f0266782f0d3d98a157f7a1cc8e74b622729260b2f6), payload digest 982ddcf0fa05b27a5d295e567a52e1109291657bafb8b73eb5147e947fa2bc8e: the sigma0^2 x10 validation's join-time configuration and rate segment (A17 section 2(c)), the launch outcome with the FV double-population cap, and the closed admission. Prior approvals in force: revisions 8 to 25 and the 2026-10-31 fixed-code requalification.",
+    "reason": "A record revision: it closes the completed launch's admission and admits nothing; no launch or resource change."
   }
 }
