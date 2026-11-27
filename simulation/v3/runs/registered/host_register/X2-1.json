@@ -2,10 +2,10 @@
   "schema": "lineage-a17-sealed-host-entry-v1",
   "payload": {
     "schema": "lineage-a17-host-payload-v1",
-    "record_date": "2026-11-26",
+    "record_date": "2026-11-27",
     "unit_name": "X2-1",
     "host_class": "X2",
-    "record_status": "Revision 26, approved by the operator, Matt Yotko, 2026-11-26 (\"approve 378c1d0c\"); recorded in a19_2026-11-04/DECISIONS_2026-11-26.md section 2. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594; its crowding kernel path by the supplement of revision 17, evidence 9781b893; its variant calibration path for sigma0^2 x10 by the supplement of revision 23, evidence 0e32c388), a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a; their crowding kernel path by the supplement of revision 19, evidence a76196f3; their variant calibration path for sigma0^2 x10 by the supplement of revision 25, evidence e8abb4fa), a5_fvplain (revision 12, evidence 25f905dc) and rerun (revision 14, evidence 8d919541; its crowding kernel path by the supplement of revision 21, evidence 04d4bc7f). approved_workload_kinds lists all six. The sqrt original estimation (revision 9), the sqrt original validation (revision 11), the sqrt A5 labels (revision 13), the sqrt runs (revision 16), the crowding original estimation (revision 18), the crowding original validation (revision 20), the crowding runs (revision 22), the sigma0^2 x10 original estimation (revision 24) and the sigma0^2 x10 original validation (revision 26) completed; their join-time configuration and rate segments are bound in rates.approved_rate_segments. Load sheet version 9 revision 2 remains bound. dispatch_admissible false: no launch is bound. Service entry and bound host fields as revision 7.",
+    "record_status": "Revision 27, approved by the operator, Matt Yotko, 2026-11-27 (\"approve 839f7b9a, reserve 2, go\"); recorded in a19_2026-11-04/DECISIONS_2026-11-27.md section 1. dispatch_admissible true for the sigma0^2 x10 runs launch only. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594; its crowding kernel path by the supplement of revision 17, evidence 9781b893; its variant calibration path for sigma0^2 x10 by the supplement of revision 23, evidence 0e32c388), a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a; their crowding kernel path by the supplement of revision 19, evidence a76196f3; their variant calibration path for sigma0^2 x10 by the supplement of revision 25, evidence e8abb4fa), a5_fvplain (revision 12, evidence 25f905dc) and rerun (revision 14, evidence 8d919541; its crowding kernel path by the supplement of revision 21, evidence 04d4bc7f; its total crowding mode and variant calibration path for sigma0^2 x10 by the supplement of revision 27, evidence 60ed572d). approved_workload_kinds lists all six. Load sheet version 10 bound for the sigma0^2 x10 runs. The sqrt original estimation (revision 9), the sqrt original validation (revision 11), the sqrt A5 labels (revision 13), the sqrt runs (revision 16), the crowding original estimation (revision 18), the crowding original validation (revision 20), the crowding runs (revision 22), the sigma0^2 x10 original estimation (revision 24) and the sigma0^2 x10 original validation (revision 26) completed; their join-time configuration and rate segments are bound in rates.approved_rate_segments. Service entry and bound host fields as revision 7.",
     "scope": "A17 initial register; option C campaign remains X2-1 only",
     "cpu": {
       "available_cpu_budget": 32,
@@ -74,132 +74,44 @@
       },
       "approved_load_sheet": {
         "value": {
-          "document": "stage2_x10_val_2026-11-23/launch_package/LOAD_SHEET_v9r2_x10_validation.md (version 9 revision 2: the round X10V executor's version 9, 2a5efc05, with INTERPRETER_REPAIR_ROUND_X10V.md R3, R4, R5 and R9 applied and the choices of DECISIONS_2026-11-22 section 22 recorded; no new measurement; built by write_load_sheet_v9r2.py)",
-          "sha256": "856be03835250834a843b0b8c6bad3ab4baea588d8ade1de30cec502384e766a",
+          "document": "stage2_x10_runs_2026-11-26/LOAD_SHEET_v10_x10_runs.md (round X10R, written with Part B's figures)",
+          "sha256": "3dd62196dde3944b03cbf91eda5163ada7d0b63a12f1c74821432d74cd6cd3a6",
           "data": {
-            "document": "stage2_x10_val_2026-11-23/launch_package/LOAD_SHEET_v9r2_data.json",
-            "sha256": "ac927086157d3f7f0996bb8f9f6dd159adb5d0d0b511e514f20dcb3c7692b6a5",
-            "writer_sha256": "ef387db12ac71e04d63310bd372d30b2f455a0b994ba6373a9a01ebb57c12219"
+            "document": "stage2_x10_runs_2026-11-26/LOAD_SHEET_v10_data.json",
+            "sha256": "60c46b89452142e3865fbd49c70695afb253784c74b19e2673e1fc1e24bdde26"
           },
-          "version": "version 9 revision 2, 2026-11-24 UTC",
-          "revises": {
-            "document": "stage2_x10_val_2026-11-23/LOAD_SHEET_v9_x10_validation.md",
-            "sha256": "2a5efc055491033c2ae4377a543a52aa7ae44fb22a5dcb37b8ad0bb72eca833e",
-            "data_sha256": "03c35daf470e876899c3508b5dcbfe53476f98bd7f0588ae679f403cf351edc2",
-            "why": "version 9 took 0.8 x MemAvailable as a bound on a phase's opening batch and derived opening concurrencies from it (R3), said a tenth FV double-population job fits once 10 jobs are left (R4), and predates the operator's choice of evidence and cap"
-          },
-          "scope": "the sigma0^2 x10 original validation: 2,132 A4 jobs in five phases (fit 274, validate_plain 822, validate_fv_primary 365, validate_fv_double_population 16, census 655), pull route on this unit alone, code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit b14620b05f29cc1e4548f2ece6cc9553943ec777",
+          "version": "version 10, 2026-11-27 UTC",
+          "scope": "the sigma0^2 x10 runs: 500 rerun jobs in one phase (a6_sigma_squared_x10, 500 steps, crowding total, the family's variant calibration), pull route on this unit alone, code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit 52e11a03c9390cf222c0aac04ce6bb4e64952c09",
           "worker_ceiling": 31,
           "numerical_threads_per_worker": 1,
           "memory_headroom": 0.8,
           "memory_gb_per_worker": {
-            "frozen_classes": {
-              "fit_and_validate_plain": [
-                1.886,
-                3.771,
-                3.773
-              ],
-              "validate_fv_primary": 7.54,
-              "validate_fv_double_population": [
-                15.077,
-                15.079
-              ],
-              "census": [
-                7.54,
-                15.077,
-                15.079
-              ]
-            },
-            "crowding_validation_measured_maxima": {
-              "fit": 2.936,
-              "validate_plain": 3.218,
-              "validate_fv_primary": 6.315,
-              "validate_fv_double_population": 12.522,
-              "census": 0.293
-            },
-            "basis": "no full sigma0^2 x10 validation job has run. The crowding validation's measured peaks are the working reference, inferred: the sigma0^2 x10 estimation's per-setting maxima were 0.968 to 0.982 of sqrt's and 0.966 to 0.982 of crowding's (1.500, 2.883 and 2.901 GB; revisions 24, 9 and 18), so the crowding validation peaks may read a few percent high here"
+            "frozen_class": 2.0,
+            "plan_reservation": 2.0,
+            "plan_allowance": 4.0,
+            "measured": {
+              "sqrt_qualification_peak": 0.326,
+              "sqrt_launch_peak": 0.342,
+              "crowding_qualification_peak": 0.3,
+              "crowding_launch_peak": 0.33,
+              "sigma_squared_x10_qualification_peak": 0.216
+            }
           },
-          "admission": "the pull coordinator charges each lease min(max(class, observed), weight), observed 1.2 x the class's largest recorded peak, weight the mean of the heaviest quarter of the host's unfinished reservations across the remaining phases with its own active leases counted once (multihost_a11.py 886 to 960, dispatch_store_a11.py 307 to 313, worker_control.top_weighted_counts). Where the weight is below a phase's class the charge is the weight, so the reservations do not bound real use",
-          "admission_rule_r3": "the opening concurrency of a phase is set by three things: the registered term, 0.8 x the approving evidence's recorded memory less the charges of the leases the host already holds, which counts held leases; the configuration test's chosen workers for the phase (profile_slots, multihost_a11.py 922); and the overall worker target (control.max_workers, multihost_a11.py 920). The 0.8 x MemAvailable term limits one claim batch and is read afresh on the next claim (host_a11.py 404 to 421, multihost_a11.py 973 to 981), so it is not a co-bound at a phase open; it binds in steady state only, once running jobs have allocated (INTERPRETER_REPAIR_ROUND_X10V.md R3; read from the code, not exercised)",
-          "registered_memory_gb": {
-            "value": 124.964,
-            "evidence": "d829ff1a40d98708614528bb237a35ffd4f5d7a2e65073661324c645bb022078",
-            "budget_at_0.8": 99.97,
-            "why": "the operator approved the launch's machine register from the revision 10 A4-kind evidence (DECISIONS_2026-11-22 section 22 item 2), as the crowding validation's was (DECISIONS_2026-11-14 section 6); the crowding supplement's 120.38 GB would give 96.30 and the sigma0^2 x10 supplement's 118.04 GB would give 94.43"
-          },
-          "concurrency_at_open": {
-            "fit": 16,
-            "validate_plain": 16,
-            "validate_fv_primary": 13,
-            "validate_fv_double_population": 8,
-            "census": 8,
-            "basis": "computed by write_load_sheet_v9r2.py from the frozen class counts by phase, with the configuration tests assumed to choose what they chose on the crowding validation (16, 16, 16, 16 and 24) and no MemAvailable term; equal to version 9's figures by evidence. fit and validate_plain are set by that choice, validate_fv_primary by the registered term (8.878 GB weight, 7.540 charge), validate_fv_double_population and census by the overall target of 8 (memory alone admits 10 at a 9.604 GB weight, and 11 in census at 8.919 GB). By evidence d829ff1a / a76196f3 / e8abb4fa without the target: 16 / 16 / 16, 16 / 16 / 16, 13 / 12 / 12, 10 / 10 / 9 and 11 / 10 / 10"
-          },
-          "real_use_at_crowding_largest_peaks_gb": {
-            "fit": 47.0,
-            "validate_plain": 51.5,
-            "validate_fv_primary": 82.1,
-            "validate_fv_double_population": 100.2,
-            "census": 2.3,
-            "without_the_cap": {
-              "validate_fv_double_population": 125.2
-            },
-            "kind": "computed upper readings: every running job at the phase's largest measured crowding peak at once; inferred for sigma0^2 x10"
-          },
-          "fv_double_population_cap": {
-            "decision": "DECISIONS_2026-11-22 section 22 item 3: the overall worker target set to 8 once at most 8 FV primary jobs are unfinished, held through census, by the sigma0^2 x10 watcher. The operator's go of 2026-11-23 21:58 EST (\"go on all through the launch\") covers it on the interpreter's stated recommendation. It is needed under every evidence: without it the FV double-population phase opens at 10 under d829ff1a and a76196f3, and at 9 rising to 10 from 12 unfinished under e8abb4fa",
-            "mechanism": "fvd_cap_watch.py, started on X2-1 before the launch and polling each minute: when it sees the coordinator in phase index 2 (validate_fv_primary) with at most 8 of the 365 FV primary jobs unfinished (357 or more records in validate_fv_primary/records), it runs production_runner control ROOT --workers 8, the overall worker target (multihost_a11.py line 920, enforced on every lease including the phase recheck). At that point no FV primary job is waiting to be dispatched, so the cap costs that phase nothing. The control's transaction lock waits up to 30 s and then raises (multihost_a11.py 122 to 133), so the watcher retries the idempotent control with a growing pause until pull_state.json reads a control.max_workers at or below 8, the pass test, then exits. It reads the target before every attempt, so it never raises a lower target the operator set. If it first sees phase index 3 or later with the target unset, it logs LATE with the running count from each phase's status.json and sets the target at once. It exits also when the launch is complete or its last launch record is finished. It never stops, restarts or drains anything",
-            "trigger": "the coordinator in phase index 2 (validate_fv_primary) with at most 8 of the 365 FV primary jobs unfinished (357 or more records in validate_fv_primary/records)",
-            "built_for_this_spec": "INTERPRETER_REPAIR_ROUND_X10V.md R1: REGISTERED_SPEC is this launch's frozen spec file hash 5baf13c5feeeea6f5db3116e65c42f80683af165e59b49b0d5d630b09505610a (which --test-apply is refused on) and the --fvp-jobs default is 365, the frozen spec's FV primary count. The logic is the crowding validation's watcher (306df6a4, revision 19), unchanged: the diff is the docstring, that constant and that default",
-            "liveness": "the watcher rewrites a one-line state file (fvd_cap_watch.log.state) every poll and once more at exit with the reason, and survives an error in a poll. It runs under fvd_cap_watch_loop.sh (sha256 d55073277302ef28a2c980ac3b7e6843cfb0f400f3405ad4885e2e0b926d5f5e), which restarts it 60 s after a crash and ends on its intended exits (0) or a failed start precondition (2). The memory watch records its process and the state line's age in every sample. A restart is safe at any time",
-            "script_sha256": "c3a97b78efcae91fbc06fadbe10056484d00676484ba616dedcf76b6bfcaae55",
-            "loop_sha256": "d55073277302ef28a2c980ac3b7e6843cfb0f400f3405ad4885e2e0b926d5f5e",
-            "tests": "test_fvd_cap_watch.py (sha256 156daa154e251468a2839b80ebcd0457d5b5fefcc7ce1ecbb00936bdda499661): 19 branch tests against fake roots with a stub control, 19 of 19 passed on WS-1 (output sha256 88aa41c42424496aac89d596bef4e8ece78e8d1ef1b2979c26cf3b985e9f9810): the crowding watcher's 16, rebuilt at 357, 361 and 365 records, and three added for R1. t17: the --fvp-jobs default equals the frozen spec's FV primary count, read from a fixture (frozen_spec_fixture.json, 1b9e0b91), in the source and in behaviour. t18: REGISTERED_SPEC equals the frozen spec's sha256. t19: the --test-apply refusal fires on the registered spec hash and nothing is applied. The frozen spec file is not on WS-1, so t19 stands the registered hash in for the manifest's; t06, the crowding suite's refusal test, is refused one step earlier, at the manifest check, and is named so. test_fvd_cap_watch_loop.sh (sha256 76bbddd66fa523950f7ff7cda93632b6ff52a85974fbda03110a3a3584ee0ffd): the loop wrapper's 4 tests, 4 of 4 (output sha256 4446ebd10aac9dca4e4f784546401d9bd2ab385286dca7a802b0a45bfa6a4f09)",
-            "dry_run": {
-              "script": "stage2_x10_val_2026-11-23/launch_package/control_dry_run_x10.sh",
-              "sha256": "c5d2809404dd4216999f39be36d5b928da4bfefb9f3068300fe18e88894c9ace",
-              "what": "the real control through the loop wrapper, in --test-apply mode and then in watch mode, on a copy of round X10V's finished toy V1 root (v3/_stage2_prep/rehearsal_x10v/sigma_squared_x10_validation/validation_run, manifest 24e57968) at v3/_stage2_prep/control_test_x10v, with the toy original and the registered root's pull_state (7a76ec78) and five entries checked unchanged",
-              "status": "not yet run when revision 25 was built: it runs on X2-1 at the revision 25 checkout, after the checkout move, so its result cannot be in the record it follows. DECISIONS_2026-11-22 section 22 makes a dry run that does not apply and read back its target a stop-and-ask. It exercises the control at phase index 5, not the trigger in a live phase 2; that path rests on the branch tests and the code"
-            },
-            "margin": "8 x 12.522 = 100.2 GB crosses the 110 GB term only if sigma0^2 x10 FV double-population peaks run about 9.8 percent above the crowding validation's largest; that peak is inferred for sigma0^2 x10",
-            "not_covered": "the five configuration tests run at the host's join, before the cap, and their trials are unleased; on the crowding validation the FV double-population trial peaked at about 3.20 GB RSS per job",
-            "operating_rule": "the watcher stops once it sees a target at or below 8 and treats the cap as in place. If the overall target is set to 8 or lower before the FV double-population phase and later raised above 8, the watcher loop must be restarted straight after the raise, or that phase opens uncapped",
-            "cost_hours_inferred": [
-              0.2,
-              1.1
-            ],
-            "guppi_envelope_gb": 110,
-            "if_late": "a job already admitted runs to completion; the interpreter reports it to the operator"
-          },
-          "projection": "validation specs face the coordinator's pre-dispatch projection (multihost_a11.py check_projection), which may refuse only before the first scientific dispatch and is advisory after it (A19). For sigma0^2 x10 it is about 73 to 77 h against about 159 h, inferred: the crowding validation's recorded per-phase walls scaled by job count give 72.67 h, and adding back each phase's fixed single-job term, which does not shrink with the count (multihost_a11.py 745), gives about 77 h. A refusal would need configuration-trial rates about 2.1 times slower. The crowding validation's own first projection, 170.14 h against 399.04 h, is a recorded figure, not a measured one. A refusal is a stop-and-ask under DECISIONS_2026-11-22 section 22",
+          "admission": "the pull coordinator charges each lease min(max(class, 1.2 x observed peak), weight); with one 2.0 GB class the charge is 2.0 GB per lease: 62 GB at 31 workers, 48 GB at 24, against a budget of 96.20 GB (0.8 x 120.25 GB MemAvailable at the sheet), which admits 48 workers at that charge, so memory does not bind (load sheet version 10, memory section). The 4.0 GB plan allowance at 31 workers (124 GB) fits neither the budget nor the 110 GB envelope; it is a planning figure, not what the runner charges",
+          "guppi_envelope_gb": 110,
+          "workers": "the join's configuration test chooses within 31 from the sealed candidates 8, 12, 16, 24 and 32 (the sqrt runs and the crowding runs each chose 24; round X10R's toy chose 16, a toy choice); the runner's own sheet plans 31 with its binding cap 'mode/request (configuration pending)'. There is no measured basis at 31 workers for a run launch",
           "eta_hours": {
-            "projection_from_crowding_measured_rates": 50.78,
-            "the_cap_is_already_in_that_projection": true,
-            "without_the_cap": [
-              49.7,
-              50.6
-            ],
-            "estimation_time_ratios_x10_over_crowding_by_setting": {
-              "primary": 1.296,
-              "double_population": 1.262,
-              "double_length": 1.402
-            },
-            "working_upper_figure": 65,
-            "budget_estimate_plan_method": 88.72,
-            "ceiling": 160,
-            "ceiling_over_plan_method": 1.8,
-            "crowding_validation_measured": 118.18,
-            "kind": "estimates, none a deadline. 50.78 h assumes sigma0^2 x10 job times per phase equal the crowding validation's. The estimation-time ratios (1.296, 1.262 and 1.402 by setting) are confounded by 31 against 24 workers and are not applied, but they point to slower jobs; about 65 h is a working upper figure, a guess. 88.72 h by the plan's own method is the margin bound. Count-based rate ETAs replace these once each phase's first completions are recorded"
+            "inferred_from_the_crowding_launch_rate_at_24": 0.41,
+            "phase_only_from_the_crowding_launch_rate_at_24": 0.375,
+            "inferred_from_part_B_scaled_by_the_crowding_launch_factor_at_24": 0.36,
+            "budget_estimate_plan_method_at_31": 0.87,
+            "budget_estimate_plan_method_at_24": 1.03,
+            "ceiling": 2,
+            "kind": "estimates, none a deadline. The 0.41 h figure takes the crowding runs' measured 1,332.42 jobs per hour at 24 workers for the phase (0.375 h) and adds the configuration test and the close; it is the safer figure. The 0.36 h figure scales Part B's sigma0^2 x10 worker-seconds (34.42 against round CR's 38.75 for crowding at 16 workers, ratio 0.888) by the crowding launch's per-job time at 24 workers; Part B's second wave ran 4 jobs under a lighter load, so that ratio flatters sigma0^2 x10. The launch is short enough that it may finish before a first hourly rate exists; a rate ETA from the launch's own records replaces these once it exists"
           },
-          "charge": {
-            "round_charge_hours": 0.16,
-            "component_remainder_hours": 159.84,
-            "reservation_hours": 160,
-            "note": "the 160 h reservation is the sealed wall; it exceeds the component's remaining 159.84 h by round X10V's 0.16 h charge, the same overlap earlier launch reservations recorded (DECISIONS_2026-11-22 section 22 item 6)"
-          },
-          "thermal_reference": "the crowding validation's hottest phase was fit: Tctl at a median 96.2 C and at most 98.1 C at 16 workers, 16 of 42,081 samples at or above 98 C over the whole launch; validate_plain 95.0 C median, FV primary 91.4 C, FV double population 84.5 C, census 92.8 C. The sigma0^2 x10 estimation at 31 workers read a median 96.0 C and at most 99.1 C (revision 24). An observation, not a limit (THERMAL_REFERENCE.json)",
-          "census_reservation_artifact": "freeze prices census with both route strata; the census charge is the weight (8.919, then 7.540 GB) against a real need under 0.3 GB; accepted as for sqrt and crowding (round 5 finding 1)",
-          "approved": "operator, 2026-11-23, in session (\"go on all through the launch\"); recorded in a19_2026-11-04/DECISIONS_2026-11-22.md section 22. A resource approval only: not a launch go and not dispatch admission.",
+          "projection": "run specs (v3-registered-1) face no pre-dispatch projection; multihost_a11.py line 507 applies it to the v3-A4-validation-1 and v3-A5-labels-1 schemas only. The only time limit is the 2 h dispatch deadline, 6,900 s after the coordinator starts (the 7,200 s wall less the 300 s cleanup reserve), at which dispatch stops and running jobs finish and are recorded (A19). A time budget never fails the run",
+          "thermal_reference": "the crowding runs at 24 workers held Tctl at a median 98.1 C and at most 98.4 C over the 394 samples with records in progress, all at or above 98 C and none at or above 99 C, no fault (poll log 30244725; THERMAL_REFERENCE.json). The sigma0^2 x10 runs are expected to run the same for about a ninth as long (inferred). An observation, not a limit",
+          "approved": "operator, 2026-11-27, in session (\"approve 839f7b9a, reserve 2, go\"); recorded in a19_2026-11-04/DECISIONS_2026-11-27.md section 1. A resource approval only: not a launch go and not dispatch admission.",
           "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval"
         }
       },
@@ -799,6 +711,137 @@
             "stage_1_times": "the stage 1 A6 sigma0^2 x10 table records (131, identity bd656b8f) carry worker_seconds and no peak_rss_bytes; their times are WS-1 figures at 12 workers (machine YotkoTest, profile local), not X2-1 figures, and enter no projection (INTERPRETER_REPAIR.md R4)",
             "thermal_reference": "the crowding estimation at 24 workers held Tctl at a median 95.8 C and at most 100.1 C over 4,938 samples with workers running, 883 at or above 98 C and 121 at or above 99 C; no throttle point is recorded in that log (THERMAL_REFERENCE.json). Part D at three workers: at most 98.0 C in 10 s samples, median 77.5 C while jobs ran. Whether sigma0^2 x10 at 24 or 31 workers runs at the crowding launch's temperature is inferred. An observation, not a limit",
             "approved": "operator, 2026-11-22, in session (\"approve a81a32ae, reserve 9, go (b)\"); recorded in a19_2026-11-04/DECISIONS_2026-11-22.md section 3. A resource approval only: not a launch go and not dispatch admission.",
+            "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval"
+          }
+        },
+        {
+          "value": {
+            "document": "stage2_x10_val_2026-11-23/launch_package/LOAD_SHEET_v9r2_x10_validation.md (version 9 revision 2: the round X10V executor's version 9, 2a5efc05, with INTERPRETER_REPAIR_ROUND_X10V.md R3, R4, R5 and R9 applied and the choices of DECISIONS_2026-11-22 section 22 recorded; no new measurement; built by write_load_sheet_v9r2.py)",
+            "sha256": "856be03835250834a843b0b8c6bad3ab4baea588d8ade1de30cec502384e766a",
+            "data": {
+              "document": "stage2_x10_val_2026-11-23/launch_package/LOAD_SHEET_v9r2_data.json",
+              "sha256": "ac927086157d3f7f0996bb8f9f6dd159adb5d0d0b511e514f20dcb3c7692b6a5",
+              "writer_sha256": "ef387db12ac71e04d63310bd372d30b2f455a0b994ba6373a9a01ebb57c12219"
+            },
+            "version": "version 9 revision 2, 2026-11-24 UTC",
+            "revises": {
+              "document": "stage2_x10_val_2026-11-23/LOAD_SHEET_v9_x10_validation.md",
+              "sha256": "2a5efc055491033c2ae4377a543a52aa7ae44fb22a5dcb37b8ad0bb72eca833e",
+              "data_sha256": "03c35daf470e876899c3508b5dcbfe53476f98bd7f0588ae679f403cf351edc2",
+              "why": "version 9 took 0.8 x MemAvailable as a bound on a phase's opening batch and derived opening concurrencies from it (R3), said a tenth FV double-population job fits once 10 jobs are left (R4), and predates the operator's choice of evidence and cap"
+            },
+            "scope": "the sigma0^2 x10 original validation: 2,132 A4 jobs in five phases (fit 274, validate_plain 822, validate_fv_primary 365, validate_fv_double_population 16, census 655), pull route on this unit alone, code identity 93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da, commit b14620b05f29cc1e4548f2ece6cc9553943ec777",
+            "worker_ceiling": 31,
+            "numerical_threads_per_worker": 1,
+            "memory_headroom": 0.8,
+            "memory_gb_per_worker": {
+              "frozen_classes": {
+                "fit_and_validate_plain": [
+                  1.886,
+                  3.771,
+                  3.773
+                ],
+                "validate_fv_primary": 7.54,
+                "validate_fv_double_population": [
+                  15.077,
+                  15.079
+                ],
+                "census": [
+                  7.54,
+                  15.077,
+                  15.079
+                ]
+              },
+              "crowding_validation_measured_maxima": {
+                "fit": 2.936,
+                "validate_plain": 3.218,
+                "validate_fv_primary": 6.315,
+                "validate_fv_double_population": 12.522,
+                "census": 0.293
+              },
+              "basis": "no full sigma0^2 x10 validation job has run. The crowding validation's measured peaks are the working reference, inferred: the sigma0^2 x10 estimation's per-setting maxima were 0.968 to 0.982 of sqrt's and 0.966 to 0.982 of crowding's (1.500, 2.883 and 2.901 GB; revisions 24, 9 and 18), so the crowding validation peaks may read a few percent high here"
+            },
+            "admission": "the pull coordinator charges each lease min(max(class, observed), weight), observed 1.2 x the class's largest recorded peak, weight the mean of the heaviest quarter of the host's unfinished reservations across the remaining phases with its own active leases counted once (multihost_a11.py 886 to 960, dispatch_store_a11.py 307 to 313, worker_control.top_weighted_counts). Where the weight is below a phase's class the charge is the weight, so the reservations do not bound real use",
+            "admission_rule_r3": "the opening concurrency of a phase is set by three things: the registered term, 0.8 x the approving evidence's recorded memory less the charges of the leases the host already holds, which counts held leases; the configuration test's chosen workers for the phase (profile_slots, multihost_a11.py 922); and the overall worker target (control.max_workers, multihost_a11.py 920). The 0.8 x MemAvailable term limits one claim batch and is read afresh on the next claim (host_a11.py 404 to 421, multihost_a11.py 973 to 981), so it is not a co-bound at a phase open; it binds in steady state only, once running jobs have allocated (INTERPRETER_REPAIR_ROUND_X10V.md R3; read from the code, not exercised)",
+            "registered_memory_gb": {
+              "value": 124.964,
+              "evidence": "d829ff1a40d98708614528bb237a35ffd4f5d7a2e65073661324c645bb022078",
+              "budget_at_0.8": 99.97,
+              "why": "the operator approved the launch's machine register from the revision 10 A4-kind evidence (DECISIONS_2026-11-22 section 22 item 2), as the crowding validation's was (DECISIONS_2026-11-14 section 6); the crowding supplement's 120.38 GB would give 96.30 and the sigma0^2 x10 supplement's 118.04 GB would give 94.43"
+            },
+            "concurrency_at_open": {
+              "fit": 16,
+              "validate_plain": 16,
+              "validate_fv_primary": 13,
+              "validate_fv_double_population": 8,
+              "census": 8,
+              "basis": "computed by write_load_sheet_v9r2.py from the frozen class counts by phase, with the configuration tests assumed to choose what they chose on the crowding validation (16, 16, 16, 16 and 24) and no MemAvailable term; equal to version 9's figures by evidence. fit and validate_plain are set by that choice, validate_fv_primary by the registered term (8.878 GB weight, 7.540 charge), validate_fv_double_population and census by the overall target of 8 (memory alone admits 10 at a 9.604 GB weight, and 11 in census at 8.919 GB). By evidence d829ff1a / a76196f3 / e8abb4fa without the target: 16 / 16 / 16, 16 / 16 / 16, 13 / 12 / 12, 10 / 10 / 9 and 11 / 10 / 10"
+            },
+            "real_use_at_crowding_largest_peaks_gb": {
+              "fit": 47.0,
+              "validate_plain": 51.5,
+              "validate_fv_primary": 82.1,
+              "validate_fv_double_population": 100.2,
+              "census": 2.3,
+              "without_the_cap": {
+                "validate_fv_double_population": 125.2
+              },
+              "kind": "computed upper readings: every running job at the phase's largest measured crowding peak at once; inferred for sigma0^2 x10"
+            },
+            "fv_double_population_cap": {
+              "decision": "DECISIONS_2026-11-22 section 22 item 3: the overall worker target set to 8 once at most 8 FV primary jobs are unfinished, held through census, by the sigma0^2 x10 watcher. The operator's go of 2026-11-23 21:58 EST (\"go on all through the launch\") covers it on the interpreter's stated recommendation. It is needed under every evidence: without it the FV double-population phase opens at 10 under d829ff1a and a76196f3, and at 9 rising to 10 from 12 unfinished under e8abb4fa",
+              "mechanism": "fvd_cap_watch.py, started on X2-1 before the launch and polling each minute: when it sees the coordinator in phase index 2 (validate_fv_primary) with at most 8 of the 365 FV primary jobs unfinished (357 or more records in validate_fv_primary/records), it runs production_runner control ROOT --workers 8, the overall worker target (multihost_a11.py line 920, enforced on every lease including the phase recheck). At that point no FV primary job is waiting to be dispatched, so the cap costs that phase nothing. The control's transaction lock waits up to 30 s and then raises (multihost_a11.py 122 to 133), so the watcher retries the idempotent control with a growing pause until pull_state.json reads a control.max_workers at or below 8, the pass test, then exits. It reads the target before every attempt, so it never raises a lower target the operator set. If it first sees phase index 3 or later with the target unset, it logs LATE with the running count from each phase's status.json and sets the target at once. It exits also when the launch is complete or its last launch record is finished. It never stops, restarts or drains anything",
+              "trigger": "the coordinator in phase index 2 (validate_fv_primary) with at most 8 of the 365 FV primary jobs unfinished (357 or more records in validate_fv_primary/records)",
+              "built_for_this_spec": "INTERPRETER_REPAIR_ROUND_X10V.md R1: REGISTERED_SPEC is this launch's frozen spec file hash 5baf13c5feeeea6f5db3116e65c42f80683af165e59b49b0d5d630b09505610a (which --test-apply is refused on) and the --fvp-jobs default is 365, the frozen spec's FV primary count. The logic is the crowding validation's watcher (306df6a4, revision 19), unchanged: the diff is the docstring, that constant and that default",
+              "liveness": "the watcher rewrites a one-line state file (fvd_cap_watch.log.state) every poll and once more at exit with the reason, and survives an error in a poll. It runs under fvd_cap_watch_loop.sh (sha256 d55073277302ef28a2c980ac3b7e6843cfb0f400f3405ad4885e2e0b926d5f5e), which restarts it 60 s after a crash and ends on its intended exits (0) or a failed start precondition (2). The memory watch records its process and the state line's age in every sample. A restart is safe at any time",
+              "script_sha256": "c3a97b78efcae91fbc06fadbe10056484d00676484ba616dedcf76b6bfcaae55",
+              "loop_sha256": "d55073277302ef28a2c980ac3b7e6843cfb0f400f3405ad4885e2e0b926d5f5e",
+              "tests": "test_fvd_cap_watch.py (sha256 156daa154e251468a2839b80ebcd0457d5b5fefcc7ce1ecbb00936bdda499661): 19 branch tests against fake roots with a stub control, 19 of 19 passed on WS-1 (output sha256 88aa41c42424496aac89d596bef4e8ece78e8d1ef1b2979c26cf3b985e9f9810): the crowding watcher's 16, rebuilt at 357, 361 and 365 records, and three added for R1. t17: the --fvp-jobs default equals the frozen spec's FV primary count, read from a fixture (frozen_spec_fixture.json, 1b9e0b91), in the source and in behaviour. t18: REGISTERED_SPEC equals the frozen spec's sha256. t19: the --test-apply refusal fires on the registered spec hash and nothing is applied. The frozen spec file is not on WS-1, so t19 stands the registered hash in for the manifest's; t06, the crowding suite's refusal test, is refused one step earlier, at the manifest check, and is named so. test_fvd_cap_watch_loop.sh (sha256 76bbddd66fa523950f7ff7cda93632b6ff52a85974fbda03110a3a3584ee0ffd): the loop wrapper's 4 tests, 4 of 4 (output sha256 4446ebd10aac9dca4e4f784546401d9bd2ab385286dca7a802b0a45bfa6a4f09)",
+              "dry_run": {
+                "script": "stage2_x10_val_2026-11-23/launch_package/control_dry_run_x10.sh",
+                "sha256": "c5d2809404dd4216999f39be36d5b928da4bfefb9f3068300fe18e88894c9ace",
+                "what": "the real control through the loop wrapper, in --test-apply mode and then in watch mode, on a copy of round X10V's finished toy V1 root (v3/_stage2_prep/rehearsal_x10v/sigma_squared_x10_validation/validation_run, manifest 24e57968) at v3/_stage2_prep/control_test_x10v, with the toy original and the registered root's pull_state (7a76ec78) and five entries checked unchanged",
+                "status": "not yet run when revision 25 was built: it runs on X2-1 at the revision 25 checkout, after the checkout move, so its result cannot be in the record it follows. DECISIONS_2026-11-22 section 22 makes a dry run that does not apply and read back its target a stop-and-ask. It exercises the control at phase index 5, not the trigger in a live phase 2; that path rests on the branch tests and the code"
+              },
+              "margin": "8 x 12.522 = 100.2 GB crosses the 110 GB term only if sigma0^2 x10 FV double-population peaks run about 9.8 percent above the crowding validation's largest; that peak is inferred for sigma0^2 x10",
+              "not_covered": "the five configuration tests run at the host's join, before the cap, and their trials are unleased; on the crowding validation the FV double-population trial peaked at about 3.20 GB RSS per job",
+              "operating_rule": "the watcher stops once it sees a target at or below 8 and treats the cap as in place. If the overall target is set to 8 or lower before the FV double-population phase and later raised above 8, the watcher loop must be restarted straight after the raise, or that phase opens uncapped",
+              "cost_hours_inferred": [
+                0.2,
+                1.1
+              ],
+              "guppi_envelope_gb": 110,
+              "if_late": "a job already admitted runs to completion; the interpreter reports it to the operator"
+            },
+            "projection": "validation specs face the coordinator's pre-dispatch projection (multihost_a11.py check_projection), which may refuse only before the first scientific dispatch and is advisory after it (A19). For sigma0^2 x10 it is about 73 to 77 h against about 159 h, inferred: the crowding validation's recorded per-phase walls scaled by job count give 72.67 h, and adding back each phase's fixed single-job term, which does not shrink with the count (multihost_a11.py 745), gives about 77 h. A refusal would need configuration-trial rates about 2.1 times slower. The crowding validation's own first projection, 170.14 h against 399.04 h, is a recorded figure, not a measured one. A refusal is a stop-and-ask under DECISIONS_2026-11-22 section 22",
+            "eta_hours": {
+              "projection_from_crowding_measured_rates": 50.78,
+              "the_cap_is_already_in_that_projection": true,
+              "without_the_cap": [
+                49.7,
+                50.6
+              ],
+              "estimation_time_ratios_x10_over_crowding_by_setting": {
+                "primary": 1.296,
+                "double_population": 1.262,
+                "double_length": 1.402
+              },
+              "working_upper_figure": 65,
+              "budget_estimate_plan_method": 88.72,
+              "ceiling": 160,
+              "ceiling_over_plan_method": 1.8,
+              "crowding_validation_measured": 118.18,
+              "kind": "estimates, none a deadline. 50.78 h assumes sigma0^2 x10 job times per phase equal the crowding validation's. The estimation-time ratios (1.296, 1.262 and 1.402 by setting) are confounded by 31 against 24 workers and are not applied, but they point to slower jobs; about 65 h is a working upper figure, a guess. 88.72 h by the plan's own method is the margin bound. Count-based rate ETAs replace these once each phase's first completions are recorded"
+            },
+            "charge": {
+              "round_charge_hours": 0.16,
+              "component_remainder_hours": 159.84,
+              "reservation_hours": 160,
+              "note": "the 160 h reservation is the sealed wall; it exceeds the component's remaining 159.84 h by round X10V's 0.16 h charge, the same overlap earlier launch reservations recorded (DECISIONS_2026-11-22 section 22 item 6)"
+            },
+            "thermal_reference": "the crowding validation's hottest phase was fit: Tctl at a median 96.2 C and at most 98.1 C at 16 workers, 16 of 42,081 samples at or above 98 C over the whole launch; validate_plain 95.0 C median, FV primary 91.4 C, FV double population 84.5 C, census 92.8 C. The sigma0^2 x10 estimation at 31 workers read a median 96.0 C and at most 99.1 C (revision 24). An observation, not a limit (THERMAL_REFERENCE.json)",
+            "census_reservation_artifact": "freeze prices census with both route strata; the census charge is the weight (8.919, then 7.540 GB) against a real need under 0.3 GB; accepted as for sqrt and crowding (round 5 finding 1)",
+            "approved": "operator, 2026-11-23, in session (\"go on all through the launch\"); recorded in a19_2026-11-04/DECISIONS_2026-11-22.md section 22. A resource approval only: not a launch go and not dispatch admission.",
             "scope_limit": "a resource approval only: not a launch go, not dispatch admission, not reasons approval"
           }
         }
@@ -1843,6 +1886,98 @@
               "date": "2026-11-23",
               "words": "go on all through the launch",
               "record": "a19_2026-11-04/DECISIONS_2026-11-22.md section 22"
+            }
+          }
+        }
+      },
+      "launch_identity_rerun_kind_sigma_squared_x10_supplement": {
+        "value": {
+          "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+          "commit": "52e11a03c9390cf222c0aac04ce6bb4e64952c09",
+          "date": "2026-11-27 UTC",
+          "kinds": [
+            "rerun"
+          ],
+          "supplements": "qualification_records.launch_identity_rerun_kind (evidence 8d919541, revision 14), whose 44 jobs were built from the sqrt run spec; its crowding supplement (evidence 04d4bc7f, revision 21) ran 44 crowding jobs with the kernel's reproductive crowding mode. Both sets read the shared parent calibration",
+          "purpose": "the sigma0^2 x10 runs set the kernel's crowding mode to total (alpha 1, kappa 8, theta 0.5, phase a6_sigma_squared_x10) and read the family's own pinned variant calibration alias (aecef21a, seal 256380ab), which a rerun job loads through load_calibration (production_runner.py 246 to 265). Neither had run in the rerun kind at this identity: the sqrt jobs ran with no crowding mode, the crowding jobs ran the reproductive mode, both at the nominal calibration, and the variant alias had run in the table kind (revision 23) and the A4 kinds (revision 25) only. Under A11 and A17 section 2(b) qualification is keyed to host, launch identity and kind, so the rerun kind was already qualified; this record tests the total crowding mode and the variant calibration path in that kind directly, as the crowding supplement of revision 21 tested the reproductive mode. The launch ends with a nondeterminism recheck, and a failed record is final, so a nondeterminism peculiar to this kernel or calibration had to be found before the launch",
+          "host_role": "X2-1 is both reference and candidate; relative_throughput 1.0 and scheduling rate 1.0 by same-host identity",
+          "plan": {
+            "file_sha256": "af3da3707d7c15262d965ddc065d1dec7696cabf2eed576f22e803bd9e498753",
+            "payload_sha256": "338d37189857b29a17f52f9455cb2dbc47b82a0f78dcf1c217dd3681e2d6cb86",
+            "jobs": 20,
+            "cells": 5,
+            "jobs_per_cell": 4,
+            "built_from": "the frozen registered sigma0^2 x10 run spec (d5addb1e): four jobs per cell (5 cells), each the cell's exact 500-step config rebuilt with stable_job('rerun', config, 'validation', i) for i in 0 to 3, as rounds R and CR built theirs with one job per cell; every job phase a6_sigma_squared_x10 with crowding total, tables_path the registered sigma0^2 x10 family and calibration_path the variant alias. Six input files in the bundle: the alias, its frozen parent, the table and its three siblings",
+            "seeds": "20 non-registered fixture seeds, absent from the registry, the seed history, addenda 1 to 9, the four run specs, the frozen sigma0^2 x10 run spec, the round R and round CR qualification plans, the A13 and A14 inventories and every reserved range (the executor's check on X2-1); entered in seed history addendum 10 (qualification category)",
+            "why_four_per_cell": "one job per cell is the precedent, but with 5 cells that is 5 jobs; 20 matches the size of the sigma0^2 x10 table supplement (the operator's approval of the round, DECISIONS_2026-11-26 section 8)"
+          },
+          "reference": {
+            "file_sha256": "01658d40a07943fb8078ebf303ea8693e4e253d5a6ea07d0b9f547a3082f66f8",
+            "elapsed_seconds": 66.36,
+            "workers": 16,
+            "passed": true,
+            "model_service": "none"
+          },
+          "candidate": {
+            "file_sha256": "8e14d0eb15fe332396ec1d183719b071040757d20cd1834d7a08f72ce7809fa9",
+            "elapsed_seconds": 67.4,
+            "workers": 16,
+            "passed": true,
+            "model_service": "none"
+          },
+          "evidence": {
+            "file_sha256": "60ed572df72c5013f5b9fc814eefb8adf6cccd47ef952ae098fd35609140051e",
+            "payload_sha256": "f5ab3d9804a5bdc0fcaeb06f962de1df877223a36025896836e58b74c7b9a570",
+            "schema": "v3-A11-qualification-1",
+            "passed": true,
+            "proofs": 20,
+            "bit_identical": 20,
+            "distinct_canonical_hashes": 20,
+            "relative_throughput": 1.0,
+            "validate_evidence": "passed at this identity for kind rerun (20 distinct jobs, A17 section 2(b))",
+            "threads": "configured 1, verified effective 1",
+            "candidate_memory_gb": 120.44244992,
+            "restarts": 0,
+            "peak_rss_gb_by_kind": {
+              "rerun": 0.216
+            },
+            "worker_seconds_per_job_mean": {
+              "reference": 34.25,
+              "candidate": 34.59
+            },
+            "worker_seconds_per_job_range": {
+              "reference": [
+                27.39,
+                37.25
+              ],
+              "candidate": [
+                28.4,
+                38.59
+              ]
+            },
+            "per_cell_timing": "none recorded: a per-cell job time could stand in for a result, so the notes hold the overall mean and range only",
+            "against_crowding_and_sqrt": "round CR's crowding passes ran 38.68 and 38.83 worker-seconds per job at 16 workers with a 0.300 GB peak, and round R's sqrt passes 36.04 and 36.28 with 0.326 GB. These 20 jobs ran a full wave of 16 and a lighter wave of 4, so the mean reads a little low beside those 44-job passes. The 0.216 GB peak is about a third below the other two; the cause is not established",
+            "note": "the launch's machine register is approved from this evidence (the revision 27 admission's machine_register_approval), as the crowding runs' was from the crowding rerun supplement (revision 21)"
+          },
+          "not_covered": {
+            "what": "the qualification runs execute non-registered: qualification_a11._run_one calls host_a11.execute_scratch with registered False (qualification_a11.py line 134; read from the code by the executor and again on WS-1 for revision 27). So no qualification job called require_a10 or read the no-label receipt in the run path",
+            "what_each_job_did_do": "each of the 40 executions loaded the variant alias through load_calibration, which takes the pinned-variant branch of the validator, and loaded the registered family table at the alias seal",
+            "measured_instead": "the registered load with the receipt and require_a10 at the alias seal was measured three times in round X10R Part A: directly; inside an input view carrying the derived protected list; and in validate_spec's context preflight (5 contexts checked, 0 failed)",
+            "remaining": "the full registered worker path under a real received snapshot first runs at the join's configuration trials, before any registered job. The crowding runs had the same gap and completed (inferred to carry over; not measured for sigma0^2 x10)",
+            "source": "stage2_x10_runs_2026-11-26/INTERPRETER_VERIFICATION.md point 1 (sha256 4d4b69cee5c065323645e80be77a894066352802f6a5825793b0520108f496d0), which corrects the preparation draft's sentence on this"
+          },
+          "evidence_notes": {
+            "record": "stage2_x10_runs_2026-11-26/QUAL_RERUN_X10_EVIDENCE_NOTES.json, a copy of v3/_stage2_prep/qual_rerun_x10/EVIDENCE_NOTES.json (the evidence itself stays on X2-1 at v3/_stage2_prep/qual_rerun_x10/x2_evidence.json, mode 700, bound by hash)",
+            "sha256": "6292ef2642333f31c69b0196c27534686176238cfa0145f4ceb852e10700ad9d"
+          },
+          "service_state": "llm-server inactive and disabled at the round's preconditions; --model-service none on both runs",
+          "operator_approval": {
+            "value": {
+              "approved": true,
+              "operator": "Matt Yotko",
+              "date": "2026-11-27",
+              "words": "approve 839f7b9a, reserve 2, go",
+              "record": "a19_2026-11-04/DECISIONS_2026-11-27.md section 1"
             }
           }
         }
@@ -4776,14 +4911,14 @@
     },
     "per_class_capacities": {
       "value": null,
-      "reason": "Not bound at register level. Each launch's capacities are carried by its own approved load sheet (version 1 for the sqrt estimation, version 2 for the sqrt validation, version 3 for the sqrt A5 labels, version 4 for the sqrt runs, version 5 for the crowding estimation, version 6 revision 2 for the crowding validation, version 7 for the crowding runs, version 8 revision 2 for the sigma0^2 x10 estimation, version 9 revision 2 for the sigma0^2 x10 validation); the measured peaks are in approved_rate_segments and the qualification records. A register-level capacity would need its own measured and approved record."
+      "reason": "Not bound at register level. Each launch's capacities are carried by its own approved load sheet (version 1 for the sqrt estimation, version 2 for the sqrt validation, version 3 for the sqrt A5 labels, version 4 for the sqrt runs, version 5 for the crowding estimation, version 6 revision 2 for the crowding validation, version 7 for the crowding runs, version 8 revision 2 for the sigma0^2 x10 estimation, version 9 revision 2 for the sigma0^2 x10 validation, version 10 for the sigma0^2 x10 runs); the measured peaks are in approved_rate_segments and the qualification records. A register-level capacity would need its own measured and approved record."
     },
     "private_transport_mapping": {
       "value": null,
       "reason": "No private endpoint mapping is supplied for public staging; resolve privately without changing public unit identity."
     },
-    "dispatch_admissible": false,
-    "admission_reason": "Not admissible: no launch is bound. The revision 25 admission was for the sigma0^2 x10 original validation only, and that launch completed at 2026-11-26T04:23:38Z, 23:23 EST on 2026-11-25.",
+    "dispatch_admissible": true,
+    "admission_reason": "Admissible for the launch bound in dispatch_admission only: the sigma0^2 x10 runs at 93a453b2 on the pull route, X2-1 alone, root v3/runs/a10_stage2/runs/sigma_squared_x10, wall 2 h, machine register from evidence 60ed572d. (a), (b) and (d) are bound and approved; (c) is measured at the host's join, the phase's configuration test before any registered job, under the operator-approved reading of A17 section 2(c) of 2026-11-06. Not an admission for any other launch, family, kind, root or identity.",
     "evidence": {
       "preparation_report": {
         "record": "X2-1 requalification preparation report, 2026-10-30",
@@ -5503,18 +5638,306 @@
         "sha256": "46cc83dca7b4a7bbf6f94f1956b552c00333c6b2e6af1962305bd3a4c9009c88",
         "seal": "6354b809c637041b9d67d0ef89b99d7e0083c43a62b651e3ee1ac151b203f703",
         "use": "the 509 seeds round X10V introduced (qualification 120, rehearsal 48, configuration 341); one toy probe seed reused, listed apart; the inline fit-seed reuse disclosed. Built on WS-1; its A13 and A14 inventory results are carried from the executor's X2-1 check"
+      },
+      "qualification_plan_rerun_x10_93a453b2": {
+        "record": "v3/_stage2_prep/qual_rerun_x10/plan.json, 2026-11-27 UTC (on X2-1)",
+        "sha256": "af3da3707d7c15262d965ddc065d1dec7696cabf2eed576f22e803bd9e498753",
+        "use": "the 20 sigma0^2 x10 rerun qualification jobs and seeds"
+      },
+      "qualification_evidence_rerun_x10_93a453b2": {
+        "record": "v3/_stage2_prep/qual_rerun_x10/x2_evidence.json, 2026-11-27 UTC (on X2-1)",
+        "sha256": "60ed572df72c5013f5b9fc814eefb8adf6cccd47ef952ae098fd35609140051e",
+        "use": "pass verdict, counts, hashes, throughput, fingerprint, candidate memory; the root's machine-register approval"
+      },
+      "load_sheet_x10_runs_v10": {
+        "record": "stage2_x10_runs_2026-11-26/LOAD_SHEET_v10_x10_runs.md",
+        "sha256": "3dd62196dde3944b03cbf91eda5163ada7d0b63a12f1c74821432d74cd6cd3a6",
+        "data_sha256": "60c46b89452142e3865fbd49c70695afb253784c74b19e2673e1fc1e24bdde26",
+        "use": "workers, memory admission, run time, thermal reference"
+      },
+      "run_spec_x10_frozen": {
+        "record": "v3/runs/a10_stage2/sigma_squared_x10/runs_plan.json (frozen pull spec)",
+        "sha256": "d5addb1ec79d2ce3a68abfdc11f59069fd783dcab39f0bdd1a76ac7ef5df093c",
+        "use": "the launch's sealed manifest; job counts, phase and ceiling only"
+      },
+      "run_spec_inventory_x10": {
+        "record": "stage2_prep/x10_r/RUN_SPEC_INVENTORY.json",
+        "sha256": "b12766cd94c8e66688c99a38bc2aad5165c7d256191c65688a59063870356e68",
+        "use": "the inventory checks of the built sigma0^2 x10 run spec"
+      },
+      "check_spec_summary_x10_runs": {
+        "record": "stage2_prep/x10_r/CHECK_SPEC_SUMMARY.json",
+        "sha256": "df6d2140706f6adf1b79278f05a653204d4c33764fec26010dce289e5a7e1a64",
+        "use": "freeze, validation, context preflight and root preparation; read through an allowlist"
+      },
+      "run_seed_check_x10": {
+        "record": "stage2_prep/x10_r/SEED_CHECK.json, 2026-11-27 UTC",
+        "sha256": "30af696e41dac9406c82ee47b3b1118bb0f0f44e59e706f513f45e1c4b702c4d",
+        "use": "registry membership and no-collision results for the 500 run seeds"
+      },
+      "root_placement_x10_runs": {
+        "record": "stage2_prep/x10_r/ROOT_PLACEMENT.json",
+        "sha256": "89a672738443c197e2605ea6483118429dfbb27c3ca22518a554c9b301379d6d",
+        "use": "the root against the input snapshot's protected folders, checked before the root existed"
+      },
+      "before_gates_x10_runs": {
+        "record": "stage2_prep/x10_r/BEFORE_GATES_SUMMARY.json",
+        "sha256": "c4537d6772b7497d85f5d0cdb9b47dfe9c3d3de3e55cb9d43dc5a87021d0259d",
+        "use": "the before gates for the sigma0^2 x10 instrument and alias"
+      },
+      "rehearsal_x10_runs_supplement": {
+        "record": "stage2_prep/x10_r/REHEARSAL_X10R_CHECK.json",
+        "sha256": "e7bdc7c71e70eaf50ffeef11c354451b4a8c5d6d0e822fefb42b3dbf8ac25ec7",
+        "use": "the sigma0^2 x10 toy run pull-route rehearsal, a supplement to the signed runs rehearsal record (adeabeac)"
+      },
+      "thermal_reference_x10_runs": {
+        "record": "stage2_prep/x10_r/THERMAL_REFERENCE.json",
+        "sha256": "b8868e84f2beb66946f3095011240e3eb88fbfe82b946accaf76dc670de6e640",
+        "use": "the crowding runs' Tctl from their poll log"
+      },
+      "completion_check_x10_runs": {
+        "record": "stage2_x10_runs_2026-11-26/check_done_runs_x10.py",
+        "sha256": "8d2332b89d69581d2a830a33528b42574f423ff7a8a08301e1118fdb07f0af5f",
+        "use": "the completion check after the run"
+      },
+      "tooling_grep_x10_runs": {
+        "record": "stage2_prep/x10_r/TOOLING_GREP.txt",
+        "sha256": "0f12d7d7a2d7e6ee2930ef20347752408a993d072297effa1c20fe9e61543713",
+        "use": "the phase-name grep of the launch tooling; the launch scripts xrun_*.sh apply its findings"
+      },
+      "round_x10r_report": {
+        "record": "stage2_x10_runs_2026-11-26/REPORT.md",
+        "sha256": "4b77010b3157567decf92014e5a14164f0838407b17dce073d9c830b6c6bf56a",
+        "use": "round X10R's executor report"
+      },
+      "round_x10r_interpreter_verification": {
+        "record": "stage2_x10_runs_2026-11-26/INTERPRETER_VERIFICATION.md",
+        "sha256": "4d4b69cee5c065323645e80be77a894066352802f6a5825793b0520108f496d0",
+        "use": "the interpreter's verification of round X10R, its dispositions and the second check of the completion script"
+      },
+      "round_x10r_sums": {
+        "record": "stage2_x10_runs_2026-11-26/X2_SHA256SUMS.txt",
+        "sha256": "4308f1380852eaee0f89823f9db6effeea2c8ea8b5177a3e5f26fb9d817f72aa",
+        "use": "the executor's sums, taken on X2-1"
+      },
+      "stage2_seed_history_addendum_10": {
+        "record": "v3/runs/registered/A10_stage2_seed_history_addendum_10.json",
+        "sha256": "1a865e94ca8e2c3d135350321b5330c64f766bde8b1b299d4c8dbc66421400ea",
+        "seal": "04110c24e664b25d0770c96faed11e0f26b68af314334443823767c356a84edb",
+        "use": "the 150 seeds round X10R introduced (qualification 20, rehearsal 6, configuration 124); none reused. Built on WS-1; its A13 and A14 inventory results are the executor's X2-1 check, re-derived read-only on X2-1 by the launch package's second check (0 collisions in the four sets)"
+      },
+      "family_identity_sigma_squared_x10": {
+        "record": "simulation/v3/runs/a10_stage2/sigma_squared_x10/family_identity.json, committed record-only as 52e11a03",
+        "sha256": "52a967adf21d3c0e20d84f6c854fc8c05832bb55b7ff0183a0158e287095e48f",
+        "use": "the sigma0^2 x10 family identity record (A16 family-path clause item 5), listed in the sigma0^2 x10 runs admission as A11 asks"
       }
     },
     "revision": {
-      "number": 26,
-      "supersedes_payload_sha256": "c79858921ea8aa448eda23a43e8e55bf59cbd1eb269ae7cf66af9eae8140696e",
-      "supersedes_commit": "9968fb41",
-      "reason": "Approved by the operator on 2026-11-26 (\"approve 378c1d0c\"). Binds the join-time configuration and rate segment of the sigma0^2 x10 original validation (A17 section 2(c), the operator-approved join-time reading; five per-phase configuration tests at the join, all before the first registered job), records that launch's outcome (2,132 of 2,132, no drain, one live control: the FV double-population cap of 8 as bound in revision 25, 47.94 X2-equivalent hours charged) and closes its admission (dispatch_admissible false; no launch bound). Two pointer corrections: the sigma0^2 x10 A4-kind supplement's evidence note named the machine register approval by a path that moved with the revision 25 admission, now prior_dispatch_admissions[8].machine_register_approval; and one pointer inside that admission to its own dress_rehearsal now names it under prior_dispatch_admissions[8]. Qualification evidence, approved_workload_kinds, load sheets, service entry and host fields otherwise unchanged."
+      "number": 27,
+      "supersedes_payload_sha256": "982ddcf0fa05b27a5d295e567a52e1109291657bafb8b73eb5147e947fa2bc8e",
+      "supersedes_commit": "a547650c",
+      "reason": "Approved by the operator on 2026-11-27 (\"approve 839f7b9a, reserve 2, go\"). Binds the sigma0^2 x10 rerun qualification (evidence 60ed572d, 20 of 20) as a supplement to the revision 14 rerun record, binds load sheet version 10, records seed history addendum 10, and admits the sigma0^2 x10 runs (spec sigma_squared_x10/runs_plan.json d5addb1e, seal 175d644c, root runs/sigma_squared_x10, 500 rerun jobs in phase a6_sigma_squared_x10, wall 2 h, machine register from evidence 60ed572d), with the signed runs rehearsal record of 2026-11-13, round CR's crowding rehearsal check and round X10R's sigma0^2 x10 rehearsal check as its rehearsal basis. It lists the sigma0^2 x10 family identity record (52a967ad, commit 52e11a03) in the admission's family entry. Two pointer corrections, the repair of revision 26's final check nit 1: prior_dispatch_admissions[5].machine_register_approval.reason and prior_dispatch_admissions[8].machine_register_approval.reason each named the FV double-population cap by the live load-sheet slot, which holds load sheet version 10 from revision 27 on; each now names its own sheet by version and hash (version 6 revision 2, 0883980f, section 11; version 9 revision 2, 856be038, section 12) and its own admission's fv_double_population_cap field. No other text of a prior admission changed. approved_workload_kinds, the earlier join segments, the service entry and the host fields are unchanged."
     },
-    "approved_workload_kinds_note": "table at code identity 93a453b2 on the launch-identity qualification approved in revision 8 (evidence 8522d594), with its crowding kernel path further qualified by the supplement approved in revision 17 (evidence 9781b893), and its variant calibration path for sigma0^2 x10 by the supplement approved in revision 23 (evidence 0e32c388); a4_fit, a4_validate and a4_census at the same identity on the qualification approved in revision 10 (evidence d829ff1a), with their crowding kernel path further qualified by the supplement approved in revision 19 (evidence a76196f3), and their variant calibration path for sigma0^2 x10 by the supplement approved in revision 25 (evidence e8abb4fa); a5_fvplain at the same identity on the qualification approved in revision 12 (evidence 25f905dc); rerun at the same identity on the qualification approved in revision 14 (evidence 8d919541), with its crowding kernel path further qualified by the supplement approved in revision 21 (evidence 04d4bc7f). Other kinds are added only by their own launches' qualification records.",
+    "approved_workload_kinds_note": "table at code identity 93a453b2 on the launch-identity qualification approved in revision 8 (evidence 8522d594), with its crowding kernel path further qualified by the supplement approved in revision 17 (evidence 9781b893), and its variant calibration path for sigma0^2 x10 by the supplement approved in revision 23 (evidence 0e32c388); a4_fit, a4_validate and a4_census at the same identity on the qualification approved in revision 10 (evidence d829ff1a), with their crowding kernel path further qualified by the supplement approved in revision 19 (evidence a76196f3), and their variant calibration path for sigma0^2 x10 by the supplement approved in revision 25 (evidence e8abb4fa); a5_fvplain at the same identity on the qualification approved in revision 12 (evidence 25f905dc); rerun at the same identity on the qualification approved in revision 14 (evidence 8d919541), with its crowding kernel path further qualified by the supplement approved in revision 21 (evidence 04d4bc7f), and its total crowding mode and variant calibration path for sigma0^2 x10 by the supplement approved in revision 27 (evidence 60ed572d). Other kinds are added only by their own launches' qualification records.",
     "dispatch_admission": {
-      "launch": null,
-      "reason": "No launch is bound. The revision 25 admission covered only the sigma0^2 x10 original validation on root v3/runs/a10_stage2/sigma_squared_x10_validation/validation_run, which completed at 2026-11-26T04:23:38Z, 23:23 EST on 2026-11-25 (prior_dispatch_admissions). A further launch on this unit, including the sigma0^2 x10 admission and publication (approvals item 30) if it needs a dispatch, needs its own dispatch binding, load sheet and go in a later revision."
+      "launch": "the sigma0^2 x10 runs (approvals item 34, X10-R; STAGE2_PLAN.public_v2.md line 292, after the sigma0^2 x10 family's publication, no-label receipt and identity record), pull route on X2-1 alone (A17 coordinator plus one host), normal mode, --model-service none",
+      "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+      "commit": "52e11a03c9390cf222c0aac04ce6bb4e64952c09",
+      "checkout": {
+        "spec_commit": "52e11a03c9390cf222c0aac04ce6bb4e64952c09",
+        "note": "the frozen spec's pull_dispatch.code_commit is 52e11a03, round X10R's checkout: revision 26's commit a547650c plus the record-only sigma0^2 x10 family identity record. The revision 27 commit sits directly on 52e11a03 and changes two record files, the host register and seed history addendum 10; neither is in the code identity's scope. The identity is measured again on X2-1 after the move (move_co_rev27.sh)"
+      },
+      "spec": {
+        "path": "v3/runs/a10_stage2/sigma_squared_x10/runs_plan.json",
+        "file_sha256": "d5addb1ec79d2ce3a68abfdc11f59069fd783dcab39f0bdd1a76ac7ef5df093c",
+        "payload_sha256": "175d644c8dc3dd69bc4ebf309d223a47871bf23898baa5a2c1714dd912e8a633",
+        "schema": "v3-registered-1",
+        "jobs": 500,
+        "kind": "rerun",
+        "phase": "a6_sigma_squared_x10",
+        "steps": 500,
+        "cells": 5,
+        "seeds_per_cell": 100,
+        "by_grid": {
+          "R1": {
+            "cells": 5,
+            "jobs": 500,
+            "reproduction_rates": [
+              0.059,
+              0.06,
+              0.062,
+              0.064,
+              0.066
+            ],
+            "note": "the five cells differ in the reproduction rate only; the other cell fields are in RUN_SPEC_INVENTORY.json (cell_list)"
+          }
+        },
+        "kernel": {
+          "crowding": "total",
+          "alpha": 1.0,
+          "kappa": 8.0,
+          "theta": 0.5
+        },
+        "wall_seconds": 7200,
+        "x2_equivalent_hours": 2,
+        "configuration_seconds": 900,
+        "cleanup_reserve_seconds": 300,
+        "instrument": {
+          "g": "linear",
+          "k_star": 1.8,
+          "mapping": "A10"
+        },
+        "a10_family": "sigma_squared_x10",
+        "a10_stage": 2,
+        "a10_labels_policy": "no_a5_labels_a16",
+        "registration_pin": {
+          "commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
+          "note_sha256": "a99f228c770f01092e6c84978a4f6a73397a746c83df36b3c13de756f2500554"
+        },
+        "seed_registry_sha256": "4ca71f1dbffddd5b47551143d8d66f989b7665bf436dc3be3a3b759606fc82d8",
+        "jobs_digest": "4b029a35666b5a132ab94fc373e0f197281a7ef8dffd0bdae57162e85e4ee451",
+        "builder_spec": {
+          "path": "v3/runs/a10_stage2/run_specs/sigma_squared_x10.json",
+          "file_sha256": "245704ad5dfeea5b8c587de4ca4bb5199070e133a973420e088392f233fa7cbd",
+          "payload_sha256": "642a3f31af36cccf0d1745f941fe3b2b9cba6eb2985200a7d4c9fb5a0c0d5533",
+          "relation": "built and sealed with the four stage 2 run manifests on 2026-11-13 (DECISIONS_2026-11-13 section 3); runs_plan.json began as its byte copy; the frozen spec minus pull_dispatch equals it (asserted); the builder file is unchanged. Its jobs equal correct_runs(build_sigma_jobs(...)) job for job and in the same order"
+        },
+        "pull_dispatch": {
+          "cost_classes": 1,
+          "stratum": "runs.a6_sigma_squared_x10.linear.1.8",
+          "class_worker_seconds": 52.34,
+          "class_memory_gb": 2.0,
+          "memory_basis": "registered-stratum",
+          "code_commit": "52e11a03c9390cf222c0aac04ce6bb4e64952c09",
+          "lease_seconds": 120,
+          "extra_inputs": [],
+          "projection_sha256": "5ca5225967cf08ad5636f98f12d57fa6ccd753a7ae126bff0edcc09f0af3d8a3",
+          "note": "the frozen class is a P2 ordering class and memory estimate, not a timing. freeze() reads no calibration; the variant alias enters at validate_spec and passed there"
+        },
+        "family": {
+          "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_tables_A10.json",
+          "file_sha256": "483f04f4fba2c3eb3dcadb8122f0c2da5ea6c488a136d4152a283f4143e60cbf",
+          "table_seal_sha256": "717ef0dae3f1a8b65494276b189edde57428d96e6d429d987c05ce10c320444a",
+          "a10_receipt": {
+            "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_tables_A10.a10_receipt.json",
+            "file_sha256": "60753832734682f590fd68586f0a7780c4680bc260274fda68ec4ea80a479f3a",
+            "seal": "9673c4371ef4907c0b91dd335a81674274d3731a8206255c63c8ede3a4771ad7",
+            "kind": "the authenticated no-label receipt (A16, labels policy no_a5_labels_a16), written 2026-11-27 UTC (DECISIONS_2026-11-26 section 5)"
+          },
+          "compatibility": {
+            "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_tables_A10.compatibility.json",
+            "file_sha256": "0c7a6a1928512a4b350994a7e5ed5de4fcbbf11316e82a31f57a6df951d11ff9"
+          },
+          "cell_results": {
+            "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_tables_A10.cell_results.json",
+            "file_sha256": "affd219e9998673c75a3c1e5d96d951f5a4bf97ac118021c1034c7630e9b2a81"
+          },
+          "identity_record": {
+            "path": "simulation/v3/runs/a10_stage2/sigma_squared_x10/family_identity.json",
+            "file_sha256": "52a967adf21d3c0e20d84f6c854fc8c05832bb55b7ff0183a0158e287095e48f",
+            "commit": "52e11a03",
+            "note": "listed here as A11 asks (\"the execution record lists it\"): committed record-only under A16 family-path clause item 5 (DECISIONS_2026-11-26 section 6, under DECISIONS_2026-11-20 section 3's rule for all four families). It is not a job input: it is outside the launch's six-file input closure, and a worker's input view refuses it (ROOT_PLACEMENT.json)"
+          },
+          "labels": null,
+          "calibration": {
+            "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_calibration.json",
+            "file_sha256": "aecef21ab61e0c7078b7fcf40fee540f9891a0ac3e32e995699cbfbd8264dbce",
+            "payload_sha256": "256380ab7c65465766f0407c6f8468dd35dbfaced08c3db72388b1e0882abca9",
+            "parent": {
+              "path": "v3/runs/registered/v3_rerun_calibration.json",
+              "file_sha256": "fd86358a39e3b643fb9adc4e81a2372915ca50a1866e9b0e330a874b41746e01"
+            },
+            "note": "the family's own pinned variant alias, which every job's calibration_path names; the table binds its seal, so the table loads at the alias seal and refuses the nominal parent's. The validator reads the frozen parent from its fixed path, so the snapshot ships both. The alias is untracked on X2-1 by design; the parent is tracked"
+          }
+        }
+      },
+      "launch_root": "v3/runs/a10_stage2/runs/sigma_squared_x10",
+      "root_identity": {
+        "spec_hash": "175d644c8dc3dd69bc4ebf309d223a47871bf23898baa5a2c1714dd912e8a633",
+        "code_hash": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+        "prepared_utc": "2026-11-27T03:30Z",
+        "identity_file_sha256": "b08a805c778d20108f6faeac7f0fee8793920828baf7d940040e372b26e43ef2",
+        "contents": "identity, manifest (bytes equal to the frozen spec), context_preflight (5 contexts passed; 89b6fb6d), pull_state (7a76ec78; not started), runner.lock; no outputs, no records, no machine register entry, no launch record; unchanged after Parts B and C and at the interpreter's read (2026-11-27T03:41Z)",
+        "placement": "outside every folder the launch's input snapshot protects: derived with snapshot_a11.dependencies and the parent rule of receive (line 227) before the root existed. The protected folders are v3/runs/a10_stage2/sigma_squared_x10 and v3/runs/registered, from six input files (the variant alias, the table and its three siblings, and the frozen parent calibration); the root and the 15 other paths the coordinator and host write under it (16 entries in all) lie under neither, by Path.is_relative_to and by the real artifacts.input_path under a view carrying the derived list. Control roots inside the family folder, and in the failed sqrt form sigma_squared_x10/runs_run, are refused by the same test. The spec's own folder is the protected family folder, as crowding's was; protection acts through input_path in workers only, and the coordinator reads the spec with no view. One difference from crowding: the family folder also holds the calibration alias, so two kinds of input sit beside the spec. The registered load (the alias through the variant validator, the table with its receipt, require_a10) passed inside a view carrying the derived list. Round X10R's toy root, laid out like this one, joined, and its host's protected list equalled the prediction and mirrored the registered derivation (ROOT_PLACEMENT.json, sha256 89a672738443c197e2605ea6483118429dfbb27c3ca22518a554c9b301379d6d)"
+      },
+      "seed_check": "all 500 seeds in the committed registry's runs sigma_squared_x10 entry (500; faa4273a) and set-equal to it, pairwise distinct; none in the 62 other record groups (775,606 seeds on record across all 63): the other registry groups, the seed history (ec40a9ec), addenda 1 to 9, the A13 and A14 global inventories and plan forbidden sets; none in a reserved range (A13, A14, A16, A5, the registry's three) (stage2_prep/x10_r/SEED_CHECK.json, sha256 30af696e41dac9406c82ee47b3b1118bb0f0f44e59e706f513f45e1c4b702c4d)",
+      "before_gates": {
+        "instrument": {
+          "g": "linear",
+          "k_star": 1.8,
+          "mapping": "A10"
+        },
+        "outcome": "passed: G1.1 to G1.5 and G3.1.scenarios; 7 after gates not_run, 5 not_applicable; no --fixtures or --validation",
+        "calibration": "run with the family alias and its file hash (aecef21a); gates.py verifies the calibration by file hash and did not ask for the parent",
+        "summary_sha256": "c4537d6772b7497d85f5d0cdb9b47dfe9c3d3de3e55cb9d43dc5a87021d0259d",
+        "report_sha256": "ab66c2ecae3e315aa22a12624dc91b7f8185a730e848378ec632e08673784838",
+        "output_dir": "v3/runs/a10_stage2/checks/before_sigma_squared_x10_runs"
+      },
+      "machine_register_approval": {
+        "evidence": "60ed572df72c5013f5b9fc814eefb8adf6cccd47ef952ae098fd35609140051e",
+        "evidence_seal": "f5ab3d9804a5bdc0fcaeb06f962de1df877223a36025896836e58b74c7b9a570",
+        "path": "v3/_stage2_prep/qual_rerun_x10/x2_evidence.json",
+        "candidate_memory_gb": 120.44244992,
+        "expected_entry": {
+          "qualification_sha256": "f5ab3d9804a5bdc0fcaeb06f962de1df877223a36025896836e58b74c7b9a570",
+          "kinds": [
+            "rerun"
+          ],
+          "memory_gb": 120.44244992,
+          "note": "approve_host writes the evidence document's seal, not its file hash, as qualification_sha256 (multihost_a11.py 193 to 198)",
+          "memory_gb_derivation": "the evidence's candidate memory_gb, the MemAvailable the candidate run met, as revision 21 took the crowding evidence's 121.997. Read here from the evidence notes' result.memory_gb, which round X10R's Part B script copies from the evidence's candidate.memory_gb (x10r_partB.sh; asserted by the builder). The evidence file itself stays on X2-1 and was not opened for revision 27"
+        },
+        "reason": "the sigma0^2 x10 rerun supplement is the qualification of the kind, kernel and calibration this launch runs, as the crowding runs' root was approved from the crowding rerun supplement (revision 21). Memory does not bind: at 120.442 GB the 0.8 budget is 96.4 GB against 62 GB at 31 workers",
+        "command": "python3.13 -B -m v3.multihost_a11 approve v3/runs/a10_stage2/runs/sigma_squared_x10 v3/_stage2_prep/qual_rerun_x10/x2_evidence.json --operator 'Matt Yotko' --when <the go's UTC time>",
+        "command_note": "the registered root has no machine register entry yet; if approve refuses 60ed572d the launch stops, with no fallback to another evidence"
+      },
+      "all_four_records_condition": "A17 section 2: bind (a) post-update fixed-code requalification, (b) bit identity at the launch identity for every kind the host will run, (c) join-time configuration and rates, (d) its own load sheet",
+      "records": {
+        "a_post_update_fixed_code": "accepted and operator-approved 2026-10-31 (qualification_records.post_update_fixed_code)",
+        "b_launch_identity_qualification": "kind rerun bound and approved in revision 14 (evidence 8d919541); its total crowding mode and variant calibration path for sigma0^2 x10 qualified by qualification_records.launch_identity_rerun_kind_sigma_squared_x10_supplement (evidence 60ed572d); approved by the operator with revision 27",
+        "c_join_time_configuration_and_rates": "at join: the launch records the phase's configuration test and its rate segment at the host's join (A17 section 2(c)); rate 1.0 against the X2-1 reference by same-host identity",
+        "d_load_sheet": "version 10 bound in operating_rules.approved_load_sheet (sha256 3dd62196dde3944b03cbf91eda5163ada7d0b63a12f1c74821432d74cd6cd3a6); approved by the operator with revision 27"
+      },
+      "dress_rehearsal": {
+        "passed": true,
+        "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved_runs.json, the run pull-route rehearsal at 93a453b2 (six toy sqrt rerun jobs, configuration test, recheck, completion check), signed in the operator's name at the sqrt runs go of 2026-11-13",
+        "record_sha256": "adeabeac77a0d0e6cd659821e90d12bc65264d453fefce88188eae8a1b1f09be",
+        "crowding_supplement": {
+          "record": "stage2_prep/crowding_r/REHEARSAL_CR_CHECK.json (round CR, non-registered)",
+          "sha256": "36ed46751833af5c55d899417fb23ecdc80b237a1faf1d845d375971213d332c",
+          "criteria_passed": "32 of 32",
+          "bound_in": "revision 21, for the crowding runs; carried here as the first supplement"
+        },
+        "x10_supplement": {
+          "record": "stage2_x10_runs_2026-11-26/REHEARSAL_X10R_CHECK.json (round X10R Part C, non-registered; on X2-1 stage2_prep/x10_r/REHEARSAL_X10R_CHECK.json)",
+          "sha256": "e7bdc7c71e70eaf50ffeef11c354451b4a8c5d6d0e822fefb42b3dbf8ac25ec7",
+          "criteria_passed": "35 of 35",
+          "note": "six 20-step toy rerun jobs in phase a6_sigma_squared_x10 with crowding total at 64 agents, on a byte copy of round X10V's toy sigma0^2 x10 table (1969ea00) and a byte copy of the pinned variant alias (aecef21a) under the real calibration file name, through the coordinator and host_a11 --local --model-service none, with the configuration test (10 valid trials, 16 chosen, a toy choice), the recheck (matched) and check_done_runs_x10.py (passed; the unchanged check_done_runs_crowding.py refused the root, as designed), on a toy layout mirroring this launch (the toy table and the alias copy in a toy family folder, the toy root at runs/sigma_squared_x10 beside it, all three relative paths equal to the real ones); the host's protected list equalled the prediction. The toy loaded the alias through the variant path: every record and trial names the toy copy, the host's snapshot maps the copy and the frozen parent at their pinned hashes, and the toy table binds the variant seal. The drains were not repeated: no dispatch, host, coordinator, worker-control, safety, snapshot, service or qualification module names the crowding flag, and the drain functions name no calibration",
+          "register_entry_made_by_the_executor": "the toy root's one machine register entry (ccfd154b) was made by the executor with approve, from the Part B evidence, under the operator string \"round X10R executor (toy rehearsal root entry, not an operator approval)\". The operator string names the executor: it is a toy-root entry and not an operator approval. It is the only approve round X10R made, it is confined to v3/_stage2_prep/rehearsal_x10r, and the registered root has no machine register",
+          "limitation": "both rows of the toy table are not_estimable (measured, from the row identifiers and the status field), so the toy exercised dispatch, snapshot, layout, the variant calibration load and completion, but only the not-estimable lookup. The estimated-row lookup under this kernel and calibration is covered by Part B's 40 full-length executions on the registered family (inferred: lookups are not recorded per job), as for crowding",
+          "snapshot_difference": "the toy snapshot shipped 3 files (the toy table, the alias copy and the frozen parent) where the registered one ships 6: the toy family folder has no receipt, compatibility or cell-results sibling, because a non-registered rerun job needs none. So the three siblings' place in a received snapshot is not rehearsed by the toy; the six-file closure was derived and loaded under a view in Part A"
+        },
+        "registered_path_cover": "no registered sigma0^2 x10 rerun job has run. The qualification and the toy both ran non-registered; the registered load with the receipt and require_a10 was measured in Part A, not in a worker. The registered launch's configuration trials at the join are the first run of the full registered worker path under a received snapshot (qualification_records.launch_identity_rerun_kind_sigma_squared_x10_supplement, not_covered)",
+        "precedent": "the crowding estimation (revision 17), validation (revision 19) and runs (revision 21) and the sigma0^2 x10 estimation (revision 23) and validation (revision 25) each reused their route's signed rehearsal record with a supplement; this is the sixth such reuse and the second for the run route",
+        "basis": "the operator approved with revision 27 the existing signed record plus the two supplements in place of a new signed record",
+        "completion_check": {
+          "script": "stage2_prep/scripts/check_done_runs_x10.py",
+          "sha256": "8d2332b89d69581d2a830a33528b42574f423ff7a8a08301e1118fdb07f0af5f",
+          "diff_sha256": "f3cc96b6722128291740dfda9e5dc7c4ed01a15aea353f3ce1f671ee32e3f0bc",
+          "usage": "check_done_runs_x10.py SPEC ROOT --expected-jobs 500",
+          "second_check": "the interpreter's second check (stage2_x10_runs_2026-11-26/INTERPRETER_VERIFICATION.md, sha256 4d4b69cee5c065323645e80be77a894066352802f6a5825793b0520108f496d0): passed, before any registered use",
+          "note": "a copy of check_done_runs_crowding.py (37512cc5, revision 21) with the phase constant set to a6_sigma_squared_x10, its one phase-naming message changed, and four docstring edits (8 lines removed, 8 added). It reads no calibration and no family name"
+        }
+      },
+      "satisfied_at_go": [
+        "operator approval of the sigma0^2 x10 rerun qualification supplement, load sheet version 10 and the rehearsal basis (revision 27)",
+        "the A15 ledger reservation: 2 h of the sigma0^2 x10 runs allowance",
+        "seed history addendum 10 for the round X10R qualification, rehearsal and configuration seeds, committed record-only with revision 27",
+        "the X2-1 checkout move to the revision 27 commit, the root's machine-register approval from evidence 60ed572d and the launch go"
+      ],
+      "remaining_at_join": [
+        "(c) the phase's configuration test and the rate segment, measured at the host's join before any registered job and copied into revision 28"
+      ]
     },
     "prior_dispatch_admissions": [
       {
@@ -6176,7 +6599,7 @@
             "memory_gb": 124.964,
             "note": "approve_host writes the evidence document's seal, not its file hash, as qualification_sha256 (multihost_a11.py 193 to 198)"
           },
-          "reason": "the operator's choice (DECISIONS_2026-11-14 section 6): approve the root's machine register from the revision 10 A4-kind evidence, as the sqrt validation did, and hold the FV double-population phase at 8 by the overall worker target (operating_rules.approved_load_sheet.value.fv_double_population_cap)",
+          "reason": "the operator's choice (DECISIONS_2026-11-14 section 6): approve the root's machine register from the revision 10 A4-kind evidence, as the sqrt validation did, and hold the FV double-population phase at 8 by the overall worker target (load sheet version 6 revision 2 (0883980f), section 11; prior_dispatch_admissions[5].fv_double_population_cap)",
           "command": "python3.13 -B -m v3.multihost_a11 approve v3/runs/a10_stage2/crowding/validation_run v3/_stage2_prep/qual_a4/x2_evidence.json --operator 'Matt Yotko' --when <the go's UTC time>"
         },
         "fv_double_population_cap": "the overall worker target set to 8 by the interpreter's watcher (fvd_cap_watch.py, sha256 306df6a4dc298aee1b9f85dc0bf4a1351dc65e8a06be855d5be03fe15dc01227) once at most 8 FV primary jobs are unfinished, held through census; pre-approved with revision 19 (DECISIONS_2026-11-14 section 6)",
@@ -6907,7 +7330,7 @@
             "memory_gb": 124.964,
             "note": "approve_host writes the evidence document's seal, not its file hash, as qualification_sha256 (multihost_a11.py 193 to 198)"
           },
-          "reason": "the operator's choice (DECISIONS_2026-11-22 section 22 item 2): approve the root's machine register from the revision 10 A4-kind evidence, as the crowding validation's was (DECISIONS_2026-11-14 section 6), with round X10V's e8abb4fa bound as the sigma0^2 x10 A4-kind supplement, and hold the FV double-population phase at 8 by the overall worker target (operating_rules.approved_load_sheet.value.fv_double_population_cap)",
+          "reason": "the operator's choice (DECISIONS_2026-11-22 section 22 item 2): approve the root's machine register from the revision 10 A4-kind evidence, as the crowding validation's was (DECISIONS_2026-11-14 section 6), with round X10V's e8abb4fa bound as the sigma0^2 x10 A4-kind supplement, and hold the FV double-population phase at 8 by the overall worker target (load sheet version 9 revision 2 (856be038), section 12; prior_dispatch_admissions[8].fv_double_population_cap)",
           "not_used": {
             "a76196f3": "the crowding supplement, 120.38 GB",
             "e8abb4fa": "the sigma0^2 x10 supplement, 118.04 GB"
@@ -7015,10 +7438,10 @@
   "seal": {
     "algorithm": "sha256",
     "serialization": "UTF-8 JSON, sorted keys, separators comma and colon without whitespace, ensure_ascii=true, no NaN, no trailing newline; hash the payload object only",
-    "payload_sha256": "982ddcf0fa05b27a5d295e567a52e1109291657bafb8b73eb5147e947fa2bc8e"
+    "payload_sha256": "97dde283eaecddd394c2362711fc2c3a6e9b89069a0a5efd314f885411aa3e1f"
   },
   "operator_approval": {
-    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-26.md section 2: the operator's approval of 2026-11-26 (\"approve 378c1d0c\") of this register revision 26 (approved as draft payload 378c1d0cc84f6d52d4340f0266782f0d3d98a157f7a1cc8e74b622729260b2f6), payload digest 982ddcf0fa05b27a5d295e567a52e1109291657bafb8b73eb5147e947fa2bc8e: the sigma0^2 x10 validation's join-time configuration and rate segment (A17 section 2(c)), the launch outcome with the FV double-population cap, and the closed admission. Prior approvals in force: revisions 8 to 25 and the 2026-10-31 fixed-code requalification.",
-    "reason": "A record revision: it closes the completed launch's admission and admits nothing; no launch or resource change."
+    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-27.md section 1: the operator's approval of 2026-11-27 (\"approve 839f7b9a, reserve 2, go\") of this register revision 27 (approved as draft payload 839f7b9a9029d2694ec18cdd52a787d008c45a5570fc81122e28ba12462632fc), payload digest 97dde283eaecddd394c2362711fc2c3a6e9b89069a0a5efd314f885411aa3e1f: the sigma0^2 x10 rerun qualification supplement (evidence 60ed572df72c5013f5b9fc814eefb8adf6cccd47ef952ae098fd35609140051e), load sheet version 10 (3dd62196dde3944b03cbf91eda5163ada7d0b63a12f1c74821432d74cd6cd3a6), the rehearsal basis and dispatch admission for the bound sigma0^2 x10 runs launch. Prior approvals in force: revisions 8 to 26 and the 2026-10-31 fixed-code requalification.",
+    "reason": "Register approval, the ledger reservation, the checkout move, the launch go and the root's machine-register approval remain distinct records."
   }
 }
