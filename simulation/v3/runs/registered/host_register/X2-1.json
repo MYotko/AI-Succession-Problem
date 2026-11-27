@@ -5,7 +5,7 @@
     "record_date": "2026-11-27",
     "unit_name": "X2-1",
     "host_class": "X2",
-    "record_status": "Revision 27, approved by the operator, Matt Yotko, 2026-11-27 (\"approve 839f7b9a, reserve 2, go\"); recorded in a19_2026-11-04/DECISIONS_2026-11-27.md section 1. dispatch_admissible true for the sigma0^2 x10 runs launch only. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594; its crowding kernel path by the supplement of revision 17, evidence 9781b893; its variant calibration path for sigma0^2 x10 by the supplement of revision 23, evidence 0e32c388), a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a; their crowding kernel path by the supplement of revision 19, evidence a76196f3; their variant calibration path for sigma0^2 x10 by the supplement of revision 25, evidence e8abb4fa), a5_fvplain (revision 12, evidence 25f905dc) and rerun (revision 14, evidence 8d919541; its crowding kernel path by the supplement of revision 21, evidence 04d4bc7f; its total crowding mode and variant calibration path for sigma0^2 x10 by the supplement of revision 27, evidence 60ed572d). approved_workload_kinds lists all six. Load sheet version 10 bound for the sigma0^2 x10 runs. The sqrt original estimation (revision 9), the sqrt original validation (revision 11), the sqrt A5 labels (revision 13), the sqrt runs (revision 16), the crowding original estimation (revision 18), the crowding original validation (revision 20), the crowding runs (revision 22), the sigma0^2 x10 original estimation (revision 24) and the sigma0^2 x10 original validation (revision 26) completed; their join-time configuration and rate segments are bound in rates.approved_rate_segments. Service entry and bound host fields as revision 7.",
+    "record_status": "Revision 28, approved by the operator, Matt Yotko, 2026-11-27 (\"approve 4f4db5d8\"); recorded in a19_2026-11-04/DECISIONS_2026-11-27.md section 2. Post-update fixed-code requalification accepted (2026-10-30/31). Launch-identity qualification at 93a453b2: table (revision 8, evidence 8522d594; its crowding kernel path by the supplement of revision 17, evidence 9781b893; its variant calibration path for sigma0^2 x10 by the supplement of revision 23, evidence 0e32c388), a4_fit, a4_validate and a4_census (revision 10, evidence d829ff1a; their crowding kernel path by the supplement of revision 19, evidence a76196f3; their variant calibration path for sigma0^2 x10 by the supplement of revision 25, evidence e8abb4fa), a5_fvplain (revision 12, evidence 25f905dc) and rerun (revision 14, evidence 8d919541; its crowding kernel path by the supplement of revision 21, evidence 04d4bc7f; its total crowding mode and variant calibration path for sigma0^2 x10 by the supplement of revision 27, evidence 60ed572d). approved_workload_kinds lists all six. The sqrt original estimation (revision 9), the sqrt original validation (revision 11), the sqrt A5 labels (revision 13), the sqrt runs (revision 16), the crowding original estimation (revision 18), the crowding original validation (revision 20), the crowding runs (revision 22), the sigma0^2 x10 original estimation (revision 24), the sigma0^2 x10 original validation (revision 26) and the sigma0^2 x10 runs (revision 28) completed; their join-time configuration and rate segments are bound in rates.approved_rate_segments. Load sheet version 10 remains bound. dispatch_admissible false: no launch is bound. Service entry and bound host fields as revision 7.",
     "scope": "A17 initial register; option C campaign remains X2-1 only",
     "cpu": {
       "available_cpu_budget": 32,
@@ -1957,7 +1957,7 @@
             },
             "per_cell_timing": "none recorded: a per-cell job time could stand in for a result, so the notes hold the overall mean and range only",
             "against_crowding_and_sqrt": "round CR's crowding passes ran 38.68 and 38.83 worker-seconds per job at 16 workers with a 0.300 GB peak, and round R's sqrt passes 36.04 and 36.28 with 0.326 GB. These 20 jobs ran a full wave of 16 and a lighter wave of 4, so the mean reads a little low beside those 44-job passes. The 0.216 GB peak is about a third below the other two; the cause is not established",
-            "note": "the launch's machine register is approved from this evidence (the revision 27 admission's machine_register_approval), as the crowding runs' was from the crowding rerun supplement (revision 21)"
+            "note": "the launch's machine register is approved from this evidence (prior_dispatch_admissions[9].machine_register_approval, the revision 27 admission), as the crowding runs' was from the crowding rerun supplement (revision 21)"
           },
           "not_covered": {
             "what": "the qualification runs execute non-registered: qualification_a11._run_one calls host_a11.execute_scratch with registered False (qualification_a11.py line 134; read from the code by the executor and again on WS-1 for revision 27). So no qualification job called require_a10 or read the no-label receipt in the run path",
@@ -1996,7 +1996,7 @@
       "designation_is_measured_rate": false,
       "measured_participation_rate": {
         "value": null,
-        "reason": "X2-1 is the reference host; its rate is 1.0 by designation. The sqrt estimation, sqrt validation, sqrt A5 labels, sqrt runs, crowding estimation, crowding validation, crowding runs, sigma0^2 x10 estimation and sigma0^2 x10 validation join segments (approved_rate_segments) record the configuration tests and the sustained rates; a relative participation rate is measured only against another host."
+        "reason": "X2-1 is the reference host; its rate is 1.0 by designation. The sqrt estimation, sqrt validation, sqrt A5 labels, sqrt runs, crowding estimation, crowding validation, crowding runs, sigma0^2 x10 estimation, sigma0^2 x10 validation and sigma0^2 x10 runs join segments (approved_rate_segments) record the configuration tests and the sustained rates; a relative participation rate is measured only against another host."
       },
       "measured_per_class_rates": {
         "value": null,
@@ -4906,6 +4906,278 @@
             "a10_stage2_operations_ledger.md (Lineage v3 records; the reconciliation entry the outcome cites, read and asserted when revision 26 was built)": "not hashed: the ledger is appended to after this entry",
             "copies": "Lineage v3 records, stage2_x10_val_2026-11-23/completion_2026-11-26 (x2: 62 metadata copies, x2_SHA256SUMS.txt; rev26: 14 further copies matched to their X2-1 originals in rev26_reads.txt, and the trial's memory lines with their read, all 16 in x2_SHA256SUMS_rev26.txt)"
           }
+        },
+        {
+          "status": "approved by the operator, Matt Yotko, 2026-11-27 (\"approve 4f4db5d8\"); recorded in a19_2026-11-04/DECISIONS_2026-11-27.md section 2",
+          "record": "A17 section 2(c), join-time configuration and rates, under the operator-approved join-time reading of 2026-11-06 (a19_2026-11-04/DECISIONS_2026-11-06.md section 5)",
+          "launch": "sigma0^2 x10 runs (approvals item 34, X10-R; STAGE2_PLAN.public_v2.md line 292; kind rerun, phase a6_sigma_squared_x10, 500 steps, crowding total, the family's variant calibration, 500 jobs), pull route, X2-1 alone, normal mode, --model-service none",
+          "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+          "spec_payload_sha256": "175d644c8dc3dd69bc4ebf309d223a47871bf23898baa5a2c1714dd912e8a633",
+          "launch_root": "v3/runs/a10_stage2/runs/sigma_squared_x10",
+          "execution_checkout_commit": "98c3ccd9930831a45655c9ca6164ab5ddf7a69b2",
+          "session": "e3460f8289834f7483dd84cad18f6583",
+          "joined_epoch": 1795779661.4606185,
+          "joined_utc": "2026-11-27T11:41:01.46Z",
+          "configuration": {
+            "per_phase": {
+              "a6_sigma_squared_x10": {
+                "trial_class": "trial:63bda77383274703c735147d4483216878f248af94796c0d7ab576d1c8c6ae9f",
+                "trial_reservation_gb": 0.137,
+                "trial_measured_peak_gb": 0.114,
+                "trial_memory_note": "trial_reservation_gb is the trial record's class_peaks_gb, which worker_control.observe writes as 1.2 x the measured peak (worker_control.py lines 384 to 387; production_runner.py lines 909 to 912 copy it into the trial record; both read at the execution checkout); trial_measured_peak_gb divides it back, as in the crowding runs segment (revision 22)",
+                "elapsed_seconds": 36.905,
+                "planning_seconds": 900,
+                "worker_seconds": 611.6,
+                "record_written_utc": "2026-11-27T11:41:38.53Z",
+                "candidates": "the spec's candidates 8, 12, 16, 24 and 32 (load sheet version 10, section 4), two rounds, 2 jobs per worker, 5-step jobs; 32 ran as 31, the launch's worker cap (requested_workers 31)",
+                "trials": [
+                  {
+                    "workers": 8,
+                    "requested_workers": 8,
+                    "threads": 1,
+                    "completed": 16,
+                    "valid": true,
+                    "wall_seconds": 2.6791,
+                    "jobs_per_hour": 21499.6
+                  },
+                  {
+                    "workers": 8,
+                    "requested_workers": 8,
+                    "threads": 1,
+                    "completed": 16,
+                    "valid": true,
+                    "wall_seconds": 2.7205,
+                    "jobs_per_hour": 21172.3
+                  },
+                  {
+                    "workers": 12,
+                    "requested_workers": 12,
+                    "threads": 1,
+                    "completed": 24,
+                    "valid": true,
+                    "wall_seconds": 2.7519,
+                    "jobs_per_hour": 31396.8
+                  },
+                  {
+                    "workers": 12,
+                    "requested_workers": 12,
+                    "threads": 1,
+                    "completed": 24,
+                    "valid": true,
+                    "wall_seconds": 2.7533,
+                    "jobs_per_hour": 31380.5
+                  },
+                  {
+                    "workers": 16,
+                    "requested_workers": 16,
+                    "threads": 1,
+                    "completed": 32,
+                    "valid": true,
+                    "wall_seconds": 2.8667,
+                    "jobs_per_hour": 40186.2
+                  },
+                  {
+                    "workers": 16,
+                    "requested_workers": 16,
+                    "threads": 1,
+                    "completed": 32,
+                    "valid": true,
+                    "wall_seconds": 2.9053,
+                    "jobs_per_hour": 39651.3
+                  },
+                  {
+                    "workers": 24,
+                    "requested_workers": 24,
+                    "threads": 1,
+                    "completed": 48,
+                    "valid": true,
+                    "wall_seconds": 4.1487,
+                    "jobs_per_hour": 41652.1
+                  },
+                  {
+                    "workers": 24,
+                    "requested_workers": 24,
+                    "threads": 1,
+                    "completed": 48,
+                    "valid": true,
+                    "wall_seconds": 4.2828,
+                    "jobs_per_hour": 40347.5
+                  },
+                  {
+                    "workers": 31,
+                    "requested_workers": 31,
+                    "threads": 1,
+                    "completed": 62,
+                    "valid": true,
+                    "wall_seconds": 5.2712,
+                    "jobs_per_hour": 42343.2
+                  },
+                  {
+                    "workers": 31,
+                    "requested_workers": 31,
+                    "threads": 1,
+                    "completed": 62,
+                    "valid": true,
+                    "wall_seconds": 5.3076,
+                    "jobs_per_hour": 42053.2
+                  }
+                ],
+                "pooled_jobs_per_hour": {
+                  "8": 21334.7,
+                  "12": 31388.7,
+                  "16": 39916.9,
+                  "24": 40989.4,
+                  "31": 42197.7
+                },
+                "chosen": {
+                  "workers": 24,
+                  "threads": 1,
+                  "jobs_per_hour": 40989.4
+                },
+                "choice_rule": "24 workers measured 2.9 percent below the best (31 workers, 42197.7 jobs per hour against 40989.4 for 24, each configuration's two rounds pooled: completed jobs over summed wall time; equivalently 31 was 2.9 percent above 24), within the 5 percent preference for the smaller configuration"
+              }
+            },
+            "started_epoch": 1795779661.5141437,
+            "finished_epoch": 1795779698.551966,
+            "started_utc": "2026-11-27T11:41:01.51Z",
+            "finished_utc": "2026-11-27T11:41:38.55Z",
+            "elapsed_seconds": 37.0,
+            "planning_seconds": 900,
+            "within_planning_target": true,
+            "planning_note": "the test took 37.0 s against the 900 s planning target; a planning target, not a limit (AGENTS.md, pre-launch configuration test), and nothing was cut short. The crowding runs' test took 56.3 s and the sqrt runs' 58.4 s (their segments, configuration.elapsed_seconds)",
+            "caveat": "each trial runs short jobs of the kind (a6_sigma_squared_x10 1.1 to 2.4 s), so the test measures short-burst scaling and trial memory, not sustained contention or the full jobs' peaks; the sustained figures below are the run itself",
+            "entered_results": false
+          },
+          "first_registered_job_started_epoch": 1795779698.884,
+          "first_registered_job_started_utc": "2026-11-27T11:41:38.88Z",
+          "first_dispatch": {
+            "epoch": 1795779698.6494985,
+            "utc": "2026-11-27T11:41:38.64Z",
+            "job_id": "rerun_001258b55be45f1337697730",
+            "purpose": "work",
+            "source": "pull_state.json first_dispatch (A19 T3, the first scientific lease of the coordinator generation)"
+          },
+          "ordering": "the configuration test ran at the host's join and finished at 2026-11-27T11:41:38.55Z (configuration_planning.json). The coordinator recorded its first scientific lease (purpose work) at 2026-11-27T11:41:38.64Z, 0.098 s later (pull_state.json first_dispatch); host_a11 runs every configuration test and reports 'configured' before its job loop takes any scientific work. The earliest start implied by a completion record (completed_epoch minus worker_seconds) is 2026-11-27T11:41:38.88Z, 0.3 s after the configuration finished, and agrees.",
+          "relative_throughput": 1.0,
+          "rate_basis": "X2-1 is the reference host, rate 1.0 by designation; it was the only host, so no relative rate was measured",
+          "sustained": {
+            "completed_jobs": 500,
+            "nondeterminism_rechecks": 1,
+            "wall_hours": 0.358,
+            "jobs_per_hour": 1396.84,
+            "worker_hours": 7.96,
+            "mean_concurrency": 22.23,
+            "charged_x2_equivalent_hours": 0.3575,
+            "note": "wall_hours is the launch wall, launch epoch to finished_epoch. worker_hours sums the 500 completion records' worker_seconds; it excludes the recheck and the configuration trials. The session's own worker-second total is 28678. charged_x2_equivalent_hours here is the coordinator's charge; the ledger charges 0.43 h (prior_dispatch_admissions[9].outcome.charge_basis)."
+          },
+          "measured_by_phase": {
+            "a6_sigma_squared_x10": {
+              "jobs": 500,
+              "chosen_workers": 24,
+              "window_utc": [
+                "2026-11-27T11:41:38.88Z",
+                "2026-11-27T12:01:58.47Z"
+              ],
+              "wall_hours": 0.339,
+              "jobs_per_hour": 1475.9,
+              "worker_hours": 7.96,
+              "mean_concurrency": 23.49,
+              "peak_rss_gb_max": 0.238,
+              "peak_rss_gb_median": 0.199,
+              "frozen_class_gb": 2.0,
+              "seconds_median": 57.3,
+              "seconds_mean": 57.3,
+              "seconds_max": 80.9,
+              "seconds_min": 35.3,
+              "crowding_runs": {
+                "chosen_workers": 24,
+                "jobs_per_hour": 1332.42,
+                "peak_rss_gb_max": 0.33,
+                "seconds_median": 64.4,
+                "seconds_mean": 64.3
+              },
+              "sqrt_runs": {
+                "chosen_workers": 24,
+                "jobs_per_hour": 1451.25,
+                "peak_rss_gb_max": 0.342,
+                "seconds_median": 59.0,
+                "seconds_mean": 59.0
+              }
+            }
+          },
+          "measured_note": "Concurrency: mean 23.49 of the 24 chosen workers over the job window. Memory did not bind, as load sheet version 10 (section 1) computed: every lease is charged min(max(class, observed), weight); the one frozen class is 2.0 GB and the observed term (1.2 x the largest recorded peak) reached 0.286 GB (pull_state.json observed_memory_gb), so each lease was charged 2.0 GB, 48 GB at 24 workers, against 0.8 x the registered 120.442 GB (96.35 GB). The largest recorded peak, 0.238 GB, is 11.9 percent of the class; it is 10 percent above the sigma0^2 x10 rerun qualification's 0.216 GB (16 workers, load sheet section 1) and below the crowding runs' 0.330 GB and the sqrt runs' 0.342 GB. The session's memory_available_gb (the field the crowding runs segment's measured_note describes) read 117.79 GB in the first health check (health_1.log, 2026-11-27T11:41:44Z, about 5 s after the first dispatch) and 117.63 GB in the second (health_2.log, 11:43:35Z). Both are whole numbers of kB, as a MemAvailable reading is; the crowding runs' first figure was a batch-decremented one (that segment's measured_note), and why this launch's was not is not examined here. The first health check records 24 active leases, the first started at the first dispatch, holding 48.0 GB, and read MemAvailable directly as 117.8 GB. Every 30-second poller sample while the coordinator ran read at least 117.5 GB (114,750,956 kB, lowest at 2026-11-27T11:48:31Z), and swap free stayed at its value at the go (31,502,256 kB) in every sample. Time: load sheet version 10 (section 3, inferred) gave two projections at 24 workers. From the crowding runs' measured rate: 0.38 h for the phase and about 0.41 h for the launch. From the qualification's worker-seconds scaled by the crowding launch (ratio 0.888 at 16 workers): about 57.1 s per job, 1,513 jobs per hour, 0.33 h for the phase and about 0.36 h for the launch. Measured: median 57.3 s per job (0.89 times the crowding runs' 64.4 s and 0.97 times the sqrt runs' 59.0 s, each at the same 24 workers), 1,476 jobs per hour over the job window, 0.339 h for the phase window and 0.358 h for the launch, 0.052 h under the first projection and 0.002 h under the second. The phase window was 0.009 h over the second projection's 0.33 h (0.339 h measured, at about 1,476 jobs per hour against the projection's about 1,513), and the launch came in under it because the rest of the launch wall, the configuration test and the close, took about 0.019 h against the 0.03 h assumed. The plan's method gave 1.03 h at 24 workers (section 2). Observations for later load sheets and rate readings, not a capacity binding.",
+          "thermal_note": "Tctl (k10temp) read 98.500 C at most (first at 2026-11-27T11:55:31Z) over the 43 poller samples while the coordinator ran (2026-11-27T11:41:00Z to 2026-11-27T12:02:02Z), which include the configuration test and the ramp. Over the 39 samples with 1 to 499 records done (2026-11-27T11:42:31Z to 2026-11-27T12:01:32Z) it read 98.125 C at the median and from 92.250 to 98.500 C; 32 of them were at or above 98 C and 0 at or above 99 C. For reference, the crowding runs at the same 24 workers read 98.375 C at most and 98.125 C at the median over the 394 samples with 1 to 4,399 records done (THERMAL_REFERENCE.json, round X10R, from that launch's poll log). The unit's hwmon exposes no critical temperature (stage2_runs_2026-11-13/relaunch_2026-11-13/REPORT.md, item 1 (line 136): hwmon3 exposes no critical value), so no throttle point is recorded. The host exit record carries no error, all 500 records are complete and the completion check passed; these carry the claim that the run ended clean. A scan of coordinator.log, host.log and watchdog.log after the run found no line matching the case-insensitive pattern traceback|error|rejected|exception|refus, with no exclusions (after_run_x10.sh, counts in log_scan_after_run.txt; again in rev28_reads.txt), but those logs hold little: coordinator.log 1 line (the final status), host.log 11 lines (10 configuration-trial status lines and the stop line), watchdog.log empty. Full jobs took a mean of 57.3 worker-seconds at 24 workers, against a mean of 34.42 at 16 workers in the sigma0^2 x10 rerun qualification (20 jobs, four per cell, run twice: pass means 34.25 and 34.59, round X10R REPORT.md), whose passes ran a full wave of 16 and a lighter wave of 4 (load sheet section 3); the records cannot separate thermal throttling from contention at the higher worker count, so throttling is not excluded. An observation for later load sheets, not a capacity binding.",
+          "sources": {
+            "launches.json": "551a8149f04f7618df05a525bd0a2db47a8974b67e72eb635f61432549122fce",
+            "status.json": "ea546f31dd35fa325a7f763854f8809107a63dba8a331efa9822fb9356161765",
+            "identity.json": "b08a805c778d20108f6faeac7f0fee8793920828baf7d940040e372b26e43ef2",
+            "budget.json": "56a97f1b9bcb4b465c7247a9bfd7f83f34bfc51d1dc245b05f952ee3aff18b31",
+            "pull_state.json": "570011d9be6e574d4d3066b52501e7e3745cac268b20cb1ea581f0a39dabdcc9",
+            "machine_register/00000000.json": "27c5cd9aa7da88bfaedaa148950d82473e52e645541f51c12e6b22ed35e85078",
+            "host_x2/host_session.json": "b5294396d249bb315099beb95a963b83eb8c3cc1dd2323f55690a3842f85605c",
+            "host_x2/configuration_planning.json": "ecacc59db58d772fd3d663b05fd397b3be474e52918f82d76e8d5f0088fbcbf5",
+            "host_x2/host_exit.json": "7ae3ad16d42a873afa9b4106df7af9113d6b99f067fbaff36e2d1748c0accbf7",
+            "host_x2/service.json": "cc167ff43ee6e0d0f7683d2a66cbfa4fea6f8210ea113dd7ed9cdb5b7f4d8a76",
+            "host_x2/swap_preflight.json": "becac0108e70eda396cce1ef2ab29987ebbcdfe91029fbfb3fbe1c411e77075f",
+            "host_x2/control.json": "d54ed0720c8e9351f84e5e195b5fd332b3e37fbe771a9b1c5d029b83ab25579d",
+            "host_x2/configuration/e3460f8289834f7483dd84cad18f6583/a6_sigma_squared_x10.json": "b4121e75061ed592fc64870db31d7fc393c875674f924ebd215b4f081db2752e",
+            "host_x2/snapshots/9b4a0470e748c103b95e87293725d148138a92669c2b14fd6b6405d10e81f8a2/verified.json": "8dcc19838f6076d1a28cee74a3809789edc9c7953068b8166a3859a466eac03d",
+            "a6_sigma_squared_x10/nondeterminism_check.json": "629c7366b8e2bbbd4333b324080374142858bf31130b5b375dd08a9c66104f9f",
+            "a6_sigma_squared_x10/status.json": "092c37321b0e9d6a2130e9bb25cc50047eff4196e8cd8334951139da622c52ec",
+            "input_manifests/configuration_a6_sigma_squared_x10.json": "8c23bb6c9575e1ec41707265ed59ae810e1b022e9403cc45358b745de908b5ee",
+            "input_manifests/phase_a6_sigma_squared_x10.json": "8c23bb6c9575e1ec41707265ed59ae810e1b022e9403cc45358b745de908b5ee",
+            "incidental_cross_checks/00000000.json": "ec94b2de6778b18a165351891078eead7f17ea8241aa067c290f3daf0cb9d24f",
+            "protocol_events/00000000.json": "232cc0da2fe8dd4b19905556c0666ab12b61046d811f58cc040e508dd3434c33",
+            "verified_output_hashes.json (bound by its file hash only)": "cd7a88eb92a8f46600b6fe7dd8066853d5a936f26890f982555fa7872082143e",
+            "coordinator.log": "0458a3409f1011e1b11b2083c8489a7aee73db0d1f72ea2b5f8d86cb2a7687ab",
+            "host.log": "905963ff56e2882bd9494748c7080bdc2f87cabc0ef04864cd49dbd30a198e46",
+            "watchdog.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "check_done_runs_x10.log (stage2_prep/x10_runs_launch; the completion check's output)": "884acbb156a4268941a12db2383ca1dbc21b6fc2a57146653174035cf2f29707",
+            "check_done_runs_x10.py (stage2_prep/scripts; bound in revision 27)": "8d2332b89d69581d2a830a33528b42574f423ff7a8a08301e1118fdb07f0af5f",
+            "runs_segment_stats.json (completion records' metadata only: times, worker_seconds, peak_rss_bytes, the job's design category)": "e00db17df3d5e76e9d0fe271e4b951a93528838784297583e30dbdcc62a9adf1",
+            "seg_stats_runs_x10.py (the generator)": "61de972aa12a8e2dce74eb554186c4ee2f521db8dff6a4d2ee6dafcee20e6175",
+            "poll.log (stage2_prep/x10_runs_launch; the read-only poller's 30-second samples)": "7c7e853f80a8ec8e37c22f4111124ff202a7a430b9265200d5ad66448668bb18",
+            "log_scan_after_run.txt (stage2_prep/x10_runs_launch; counts and hashes of the three run logs)": "e871ee37a15e77c9e3efe99a4c519d18cdd91ec96fc02f27cb0ea95474d3b980",
+            "state_after_run.txt (stage2_prep/x10_runs_launch)": "a40a467b5167f32b29d15d17ae5f09f59a7e19b2105a47cd4feef15913590628",
+            "after_run_x10.sh and check_done_x10_run.sh (completion_2026-11-27; the interpreter's after-run script, with the log scan pattern and the evidence staging, and its completion check wrapper)": {
+              "after_run": "71ec07155fa3ae965b916b6c0160eb69028b19e9ccd5def78291c4acb06023ec",
+              "check_done": "7f1452ac18e2db70de8e3542df5c3987861ef5fdbc9a86285fb60077cda35014"
+            },
+            "x2_SHA256SUMS.txt (completion_2026-11-27/x2; the X2-1 hashes of the 31 staged copies, every one matched)": "2f7f27730b1e26db2b9a70ff5cc6302dd2c2ba3aa739fc00f8d07e6f9f238ada",
+            "rev28_reads.txt and rev28_reads.sh (stage2_prep/x10_runs_launch; listings, counts, log line counts, service and boot facts, and the X2-1 hashes of the originals, read-only)": {
+              "txt": "ad0e82ac299d5e5fc0b43bfe5c2f117563dadb7cb38e69aa6f3a01fe56a91685",
+              "sh": "401cc1bc4f5d22e8228b809235b32f2221f25505e5de91635a846e3fc34178a8"
+            },
+            "state_at_go.txt (stage2_prep/x10_runs_launch)": "74c10580a4b38a38df0e632c32045b3676ed659059ef9ea9786fb8d0d7d229f7",
+            "health_1.log and health_2.log (launch_2026-11-27; the launch executor's health checks)": {
+              "health_1": "fd845c5608d12d643a2ba5dc390565e54744900da4456efb6c8a7061f805183c",
+              "health_2": "8b3a5a8589f4875664b23655675a18544e4f47ba39da3ecd7d3441086c76a3d4"
+            },
+            "xrun_prelaunch.log, xrun_launch.log and xrun_final.log (launch_2026-11-27; the gates' first stamp, the state_at_go hash, the launch record and the machine register entry's hash)": {
+              "prelaunch": "33d75bd8a94fe12297cf2c44359cd88c2d3f972f7cbe50e7a40eff257bc40310",
+              "launch": "9d751544f96d0c618ec2d6acf5306e8214fd0367ee078450bf95ac5b09ba3aeb",
+              "final": "3c38ab26d77b6fd2945ea2a26e3c210f0cfa57c67a82258717efc96991d9b7be"
+            },
+            "REPORT.md, SHA256SUMS.txt and dispatch_utc.txt (launch_2026-11-27; the launch executor's report, its X2-1 sums and its dispatch time, for the charge)": {
+              "report": "0a47745f43a5d6706bc19ffcb64e580e9f4f99b78f1b902f92145eb26d9f3f8b",
+              "sums": "aec83ddb7ed0763aab73c70501ce1991949ac68cca92856920cb12a2c1db6cad",
+              "dispatch_utc": "5a48e43c74c647a0b7daf9e7987e42f9120f34ff850e54bb9aaede2f9f59c590"
+            },
+            "v3/runs/a10_stage2/sigma_squared_x10/runs_plan.json (the sealed spec; not copied or read for revision 28: its hash on X2-1 at the later read, and that of the root's manifest.json)": "d5addb1ec79d2ce3a68abfdc11f59069fd783dcab39f0bdd1a76ac7ef5df093c",
+            "LOAD_SHEET_v10_x10_runs.md and LOAD_SHEET_v10_data.json (round X10R; sections 1 to 4, quoted; the data read through an allowlist)": {
+              "sheet": "3dd62196dde3944b03cbf91eda5163ada7d0b63a12f1c74821432d74cd6cd3a6",
+              "data": "60c46b89452142e3865fbd49c70695afb253784c74b19e2673e1fc1e24bdde26"
+            },
+            "CHECK_SPEC_SUMMARY.json (round X10R; the frozen spec's identity and its one class, read through an allowlist)": "df6d2140706f6adf1b79278f05a653204d4c33764fec26010dce289e5a7e1a64",
+            "THERMAL_REFERENCE.json (round X10R; the crowding runs' Tctl reference)": "b8868e84f2beb66946f3095011240e3eb88fbfe82b946accaf76dc670de6e640",
+            "REPORT.md and INTERPRETER_VERIFICATION.md (round X10R, stage2_x10_runs_2026-11-26; the qualification's per-pass worker-second means, and the registered worker path's first run)": {
+              "report": "4b77010b3157567decf92014e5a14164f0838407b17dce073d9c830b6c6bf56a",
+              "interpreter_verification": "4d4b69cee5c065323645e80be77a894066352802f6a5825793b0520108f496d0"
+            },
+            "stage2_runs_2026-11-13/relaunch_2026-11-13/REPORT.md (line 136, the hwmon reading)": "c091f4a5ed2add44bd17504722bd2fd016ddc637044907417ea2cea94ca2e479",
+            "a10_stage2_operations_ledger.md and a19_2026-11-04/DECISIONS_2026-11-27.md (Lineage v3 records; the reconciliation entry the outcome cites and the completion check's times, read and asserted when revision 28 was built)": "not hashed: both are appended to after these entries",
+            "copies": "Lineage v3 records, stage2_x10_runs_2026-11-26: completion_2026-11-27/x2 (31 staged copies), completion_2026-11-27/rev28 (the later read) and launch_2026-11-27 (the launch executor's six logs)"
+          }
         }
       ]
     },
@@ -4917,8 +5189,8 @@
       "value": null,
       "reason": "No private endpoint mapping is supplied for public staging; resolve privately without changing public unit identity."
     },
-    "dispatch_admissible": true,
-    "admission_reason": "Admissible for the launch bound in dispatch_admission only: the sigma0^2 x10 runs at 93a453b2 on the pull route, X2-1 alone, root v3/runs/a10_stage2/runs/sigma_squared_x10, wall 2 h, machine register from evidence 60ed572d. (a), (b) and (d) are bound and approved; (c) is measured at the host's join, the phase's configuration test before any registered job, under the operator-approved reading of A17 section 2(c) of 2026-11-06. Not an admission for any other launch, family, kind, root or identity.",
+    "dispatch_admissible": false,
+    "admission_reason": "Not admissible: no launch is bound. The revision 27 admission was for the sigma0^2 x10 runs only, and that launch completed at 2026-11-27T12:02:29Z, 07:02 EST on 2026-11-27.",
     "evidence": {
       "preparation_report": {
         "record": "X2-1 requalification preparation report, 2026-10-30",
@@ -5733,211 +6005,15 @@
       }
     },
     "revision": {
-      "number": 27,
-      "supersedes_payload_sha256": "982ddcf0fa05b27a5d295e567a52e1109291657bafb8b73eb5147e947fa2bc8e",
-      "supersedes_commit": "a547650c",
-      "reason": "Approved by the operator on 2026-11-27 (\"approve 839f7b9a, reserve 2, go\"). Binds the sigma0^2 x10 rerun qualification (evidence 60ed572d, 20 of 20) as a supplement to the revision 14 rerun record, binds load sheet version 10, records seed history addendum 10, and admits the sigma0^2 x10 runs (spec sigma_squared_x10/runs_plan.json d5addb1e, seal 175d644c, root runs/sigma_squared_x10, 500 rerun jobs in phase a6_sigma_squared_x10, wall 2 h, machine register from evidence 60ed572d), with the signed runs rehearsal record of 2026-11-13, round CR's crowding rehearsal check and round X10R's sigma0^2 x10 rehearsal check as its rehearsal basis. It lists the sigma0^2 x10 family identity record (52a967ad, commit 52e11a03) in the admission's family entry. Two pointer corrections, the repair of revision 26's final check nit 1: prior_dispatch_admissions[5].machine_register_approval.reason and prior_dispatch_admissions[8].machine_register_approval.reason each named the FV double-population cap by the live load-sheet slot, which holds load sheet version 10 from revision 27 on; each now names its own sheet by version and hash (version 6 revision 2, 0883980f, section 11; version 9 revision 2, 856be038, section 12) and its own admission's fv_double_population_cap field. No other text of a prior admission changed. approved_workload_kinds, the earlier join segments, the service entry and the host fields are unchanged."
+      "number": 28,
+      "supersedes_payload_sha256": "97dde283eaecddd394c2362711fc2c3a6e9b89069a0a5efd314f885411aa3e1f",
+      "supersedes_commit": "98c3ccd9",
+      "reason": "Approved by the operator on 2026-11-27 (\"approve 4f4db5d8\"). Binds the join-time configuration and rate segment of the sigma0^2 x10 runs (A17 section 2(c), the operator-approved join-time reading; the a6_sigma_squared_x10 configuration test at the join, before the first registered job), records that launch's outcome (500 of 500, no drain, no live control, 0.43 X2-equivalent hours charged) and closes its admission (dispatch_admissible false; no launch bound). One pointer made explicit in the qualification records: the sigma0^2 x10 rerun supplement's evidence note named the machine register approval as a field of the revision 27 admission, which moved; it now reads prior_dispatch_admissions[9].machine_register_approval. No text of the moved admission changed. Qualification evidence, approved_workload_kinds, load sheets, service entry and host fields otherwise unchanged."
     },
     "approved_workload_kinds_note": "table at code identity 93a453b2 on the launch-identity qualification approved in revision 8 (evidence 8522d594), with its crowding kernel path further qualified by the supplement approved in revision 17 (evidence 9781b893), and its variant calibration path for sigma0^2 x10 by the supplement approved in revision 23 (evidence 0e32c388); a4_fit, a4_validate and a4_census at the same identity on the qualification approved in revision 10 (evidence d829ff1a), with their crowding kernel path further qualified by the supplement approved in revision 19 (evidence a76196f3), and their variant calibration path for sigma0^2 x10 by the supplement approved in revision 25 (evidence e8abb4fa); a5_fvplain at the same identity on the qualification approved in revision 12 (evidence 25f905dc); rerun at the same identity on the qualification approved in revision 14 (evidence 8d919541), with its crowding kernel path further qualified by the supplement approved in revision 21 (evidence 04d4bc7f), and its total crowding mode and variant calibration path for sigma0^2 x10 by the supplement approved in revision 27 (evidence 60ed572d). Other kinds are added only by their own launches' qualification records.",
     "dispatch_admission": {
-      "launch": "the sigma0^2 x10 runs (approvals item 34, X10-R; STAGE2_PLAN.public_v2.md line 292, after the sigma0^2 x10 family's publication, no-label receipt and identity record), pull route on X2-1 alone (A17 coordinator plus one host), normal mode, --model-service none",
-      "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
-      "commit": "52e11a03c9390cf222c0aac04ce6bb4e64952c09",
-      "checkout": {
-        "spec_commit": "52e11a03c9390cf222c0aac04ce6bb4e64952c09",
-        "note": "the frozen spec's pull_dispatch.code_commit is 52e11a03, round X10R's checkout: revision 26's commit a547650c plus the record-only sigma0^2 x10 family identity record. The revision 27 commit sits directly on 52e11a03 and changes two record files, the host register and seed history addendum 10; neither is in the code identity's scope. The identity is measured again on X2-1 after the move (move_co_rev27.sh)"
-      },
-      "spec": {
-        "path": "v3/runs/a10_stage2/sigma_squared_x10/runs_plan.json",
-        "file_sha256": "d5addb1ec79d2ce3a68abfdc11f59069fd783dcab39f0bdd1a76ac7ef5df093c",
-        "payload_sha256": "175d644c8dc3dd69bc4ebf309d223a47871bf23898baa5a2c1714dd912e8a633",
-        "schema": "v3-registered-1",
-        "jobs": 500,
-        "kind": "rerun",
-        "phase": "a6_sigma_squared_x10",
-        "steps": 500,
-        "cells": 5,
-        "seeds_per_cell": 100,
-        "by_grid": {
-          "R1": {
-            "cells": 5,
-            "jobs": 500,
-            "reproduction_rates": [
-              0.059,
-              0.06,
-              0.062,
-              0.064,
-              0.066
-            ],
-            "note": "the five cells differ in the reproduction rate only; the other cell fields are in RUN_SPEC_INVENTORY.json (cell_list)"
-          }
-        },
-        "kernel": {
-          "crowding": "total",
-          "alpha": 1.0,
-          "kappa": 8.0,
-          "theta": 0.5
-        },
-        "wall_seconds": 7200,
-        "x2_equivalent_hours": 2,
-        "configuration_seconds": 900,
-        "cleanup_reserve_seconds": 300,
-        "instrument": {
-          "g": "linear",
-          "k_star": 1.8,
-          "mapping": "A10"
-        },
-        "a10_family": "sigma_squared_x10",
-        "a10_stage": 2,
-        "a10_labels_policy": "no_a5_labels_a16",
-        "registration_pin": {
-          "commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
-          "note_sha256": "a99f228c770f01092e6c84978a4f6a73397a746c83df36b3c13de756f2500554"
-        },
-        "seed_registry_sha256": "4ca71f1dbffddd5b47551143d8d66f989b7665bf436dc3be3a3b759606fc82d8",
-        "jobs_digest": "4b029a35666b5a132ab94fc373e0f197281a7ef8dffd0bdae57162e85e4ee451",
-        "builder_spec": {
-          "path": "v3/runs/a10_stage2/run_specs/sigma_squared_x10.json",
-          "file_sha256": "245704ad5dfeea5b8c587de4ca4bb5199070e133a973420e088392f233fa7cbd",
-          "payload_sha256": "642a3f31af36cccf0d1745f941fe3b2b9cba6eb2985200a7d4c9fb5a0c0d5533",
-          "relation": "built and sealed with the four stage 2 run manifests on 2026-11-13 (DECISIONS_2026-11-13 section 3); runs_plan.json began as its byte copy; the frozen spec minus pull_dispatch equals it (asserted); the builder file is unchanged. Its jobs equal correct_runs(build_sigma_jobs(...)) job for job and in the same order"
-        },
-        "pull_dispatch": {
-          "cost_classes": 1,
-          "stratum": "runs.a6_sigma_squared_x10.linear.1.8",
-          "class_worker_seconds": 52.34,
-          "class_memory_gb": 2.0,
-          "memory_basis": "registered-stratum",
-          "code_commit": "52e11a03c9390cf222c0aac04ce6bb4e64952c09",
-          "lease_seconds": 120,
-          "extra_inputs": [],
-          "projection_sha256": "5ca5225967cf08ad5636f98f12d57fa6ccd753a7ae126bff0edcc09f0af3d8a3",
-          "note": "the frozen class is a P2 ordering class and memory estimate, not a timing. freeze() reads no calibration; the variant alias enters at validate_spec and passed there"
-        },
-        "family": {
-          "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_tables_A10.json",
-          "file_sha256": "483f04f4fba2c3eb3dcadb8122f0c2da5ea6c488a136d4152a283f4143e60cbf",
-          "table_seal_sha256": "717ef0dae3f1a8b65494276b189edde57428d96e6d429d987c05ce10c320444a",
-          "a10_receipt": {
-            "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_tables_A10.a10_receipt.json",
-            "file_sha256": "60753832734682f590fd68586f0a7780c4680bc260274fda68ec4ea80a479f3a",
-            "seal": "9673c4371ef4907c0b91dd335a81674274d3731a8206255c63c8ede3a4771ad7",
-            "kind": "the authenticated no-label receipt (A16, labels policy no_a5_labels_a16), written 2026-11-27 UTC (DECISIONS_2026-11-26 section 5)"
-          },
-          "compatibility": {
-            "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_tables_A10.compatibility.json",
-            "file_sha256": "0c7a6a1928512a4b350994a7e5ed5de4fcbbf11316e82a31f57a6df951d11ff9"
-          },
-          "cell_results": {
-            "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_tables_A10.cell_results.json",
-            "file_sha256": "affd219e9998673c75a3c1e5d96d951f5a4bf97ac118021c1034c7630e9b2a81"
-          },
-          "identity_record": {
-            "path": "simulation/v3/runs/a10_stage2/sigma_squared_x10/family_identity.json",
-            "file_sha256": "52a967adf21d3c0e20d84f6c854fc8c05832bb55b7ff0183a0158e287095e48f",
-            "commit": "52e11a03",
-            "note": "listed here as A11 asks (\"the execution record lists it\"): committed record-only under A16 family-path clause item 5 (DECISIONS_2026-11-26 section 6, under DECISIONS_2026-11-20 section 3's rule for all four families). It is not a job input: it is outside the launch's six-file input closure, and a worker's input view refuses it (ROOT_PLACEMENT.json)"
-          },
-          "labels": null,
-          "calibration": {
-            "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_calibration.json",
-            "file_sha256": "aecef21ab61e0c7078b7fcf40fee540f9891a0ac3e32e995699cbfbd8264dbce",
-            "payload_sha256": "256380ab7c65465766f0407c6f8468dd35dbfaced08c3db72388b1e0882abca9",
-            "parent": {
-              "path": "v3/runs/registered/v3_rerun_calibration.json",
-              "file_sha256": "fd86358a39e3b643fb9adc4e81a2372915ca50a1866e9b0e330a874b41746e01"
-            },
-            "note": "the family's own pinned variant alias, which every job's calibration_path names; the table binds its seal, so the table loads at the alias seal and refuses the nominal parent's. The validator reads the frozen parent from its fixed path, so the snapshot ships both. The alias is untracked on X2-1 by design; the parent is tracked"
-          }
-        }
-      },
-      "launch_root": "v3/runs/a10_stage2/runs/sigma_squared_x10",
-      "root_identity": {
-        "spec_hash": "175d644c8dc3dd69bc4ebf309d223a47871bf23898baa5a2c1714dd912e8a633",
-        "code_hash": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
-        "prepared_utc": "2026-11-27T03:30Z",
-        "identity_file_sha256": "b08a805c778d20108f6faeac7f0fee8793920828baf7d940040e372b26e43ef2",
-        "contents": "identity, manifest (bytes equal to the frozen spec), context_preflight (5 contexts passed; 89b6fb6d), pull_state (7a76ec78; not started), runner.lock; no outputs, no records, no machine register entry, no launch record; unchanged after Parts B and C and at the interpreter's read (2026-11-27T03:41Z)",
-        "placement": "outside every folder the launch's input snapshot protects: derived with snapshot_a11.dependencies and the parent rule of receive (line 227) before the root existed. The protected folders are v3/runs/a10_stage2/sigma_squared_x10 and v3/runs/registered, from six input files (the variant alias, the table and its three siblings, and the frozen parent calibration); the root and the 15 other paths the coordinator and host write under it (16 entries in all) lie under neither, by Path.is_relative_to and by the real artifacts.input_path under a view carrying the derived list. Control roots inside the family folder, and in the failed sqrt form sigma_squared_x10/runs_run, are refused by the same test. The spec's own folder is the protected family folder, as crowding's was; protection acts through input_path in workers only, and the coordinator reads the spec with no view. One difference from crowding: the family folder also holds the calibration alias, so two kinds of input sit beside the spec. The registered load (the alias through the variant validator, the table with its receipt, require_a10) passed inside a view carrying the derived list. Round X10R's toy root, laid out like this one, joined, and its host's protected list equalled the prediction and mirrored the registered derivation (ROOT_PLACEMENT.json, sha256 89a672738443c197e2605ea6483118429dfbb27c3ca22518a554c9b301379d6d)"
-      },
-      "seed_check": "all 500 seeds in the committed registry's runs sigma_squared_x10 entry (500; faa4273a) and set-equal to it, pairwise distinct; none in the 62 other record groups (775,606 seeds on record across all 63): the other registry groups, the seed history (ec40a9ec), addenda 1 to 9, the A13 and A14 global inventories and plan forbidden sets; none in a reserved range (A13, A14, A16, A5, the registry's three) (stage2_prep/x10_r/SEED_CHECK.json, sha256 30af696e41dac9406c82ee47b3b1118bb0f0f44e59e706f513f45e1c4b702c4d)",
-      "before_gates": {
-        "instrument": {
-          "g": "linear",
-          "k_star": 1.8,
-          "mapping": "A10"
-        },
-        "outcome": "passed: G1.1 to G1.5 and G3.1.scenarios; 7 after gates not_run, 5 not_applicable; no --fixtures or --validation",
-        "calibration": "run with the family alias and its file hash (aecef21a); gates.py verifies the calibration by file hash and did not ask for the parent",
-        "summary_sha256": "c4537d6772b7497d85f5d0cdb9b47dfe9c3d3de3e55cb9d43dc5a87021d0259d",
-        "report_sha256": "ab66c2ecae3e315aa22a12624dc91b7f8185a730e848378ec632e08673784838",
-        "output_dir": "v3/runs/a10_stage2/checks/before_sigma_squared_x10_runs"
-      },
-      "machine_register_approval": {
-        "evidence": "60ed572df72c5013f5b9fc814eefb8adf6cccd47ef952ae098fd35609140051e",
-        "evidence_seal": "f5ab3d9804a5bdc0fcaeb06f962de1df877223a36025896836e58b74c7b9a570",
-        "path": "v3/_stage2_prep/qual_rerun_x10/x2_evidence.json",
-        "candidate_memory_gb": 120.44244992,
-        "expected_entry": {
-          "qualification_sha256": "f5ab3d9804a5bdc0fcaeb06f962de1df877223a36025896836e58b74c7b9a570",
-          "kinds": [
-            "rerun"
-          ],
-          "memory_gb": 120.44244992,
-          "note": "approve_host writes the evidence document's seal, not its file hash, as qualification_sha256 (multihost_a11.py 193 to 198)",
-          "memory_gb_derivation": "the evidence's candidate memory_gb, the MemAvailable the candidate run met, as revision 21 took the crowding evidence's 121.997. Read here from the evidence notes' result.memory_gb, which round X10R's Part B script copies from the evidence's candidate.memory_gb (x10r_partB.sh; asserted by the builder). The evidence file itself stays on X2-1 and was not opened for revision 27"
-        },
-        "reason": "the sigma0^2 x10 rerun supplement is the qualification of the kind, kernel and calibration this launch runs, as the crowding runs' root was approved from the crowding rerun supplement (revision 21). Memory does not bind: at 120.442 GB the 0.8 budget is 96.4 GB against 62 GB at 31 workers",
-        "command": "python3.13 -B -m v3.multihost_a11 approve v3/runs/a10_stage2/runs/sigma_squared_x10 v3/_stage2_prep/qual_rerun_x10/x2_evidence.json --operator 'Matt Yotko' --when <the go's UTC time>",
-        "command_note": "the registered root has no machine register entry yet; if approve refuses 60ed572d the launch stops, with no fallback to another evidence"
-      },
-      "all_four_records_condition": "A17 section 2: bind (a) post-update fixed-code requalification, (b) bit identity at the launch identity for every kind the host will run, (c) join-time configuration and rates, (d) its own load sheet",
-      "records": {
-        "a_post_update_fixed_code": "accepted and operator-approved 2026-10-31 (qualification_records.post_update_fixed_code)",
-        "b_launch_identity_qualification": "kind rerun bound and approved in revision 14 (evidence 8d919541); its total crowding mode and variant calibration path for sigma0^2 x10 qualified by qualification_records.launch_identity_rerun_kind_sigma_squared_x10_supplement (evidence 60ed572d); approved by the operator with revision 27",
-        "c_join_time_configuration_and_rates": "at join: the launch records the phase's configuration test and its rate segment at the host's join (A17 section 2(c)); rate 1.0 against the X2-1 reference by same-host identity",
-        "d_load_sheet": "version 10 bound in operating_rules.approved_load_sheet (sha256 3dd62196dde3944b03cbf91eda5163ada7d0b63a12f1c74821432d74cd6cd3a6); approved by the operator with revision 27"
-      },
-      "dress_rehearsal": {
-        "passed": true,
-        "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved_runs.json, the run pull-route rehearsal at 93a453b2 (six toy sqrt rerun jobs, configuration test, recheck, completion check), signed in the operator's name at the sqrt runs go of 2026-11-13",
-        "record_sha256": "adeabeac77a0d0e6cd659821e90d12bc65264d453fefce88188eae8a1b1f09be",
-        "crowding_supplement": {
-          "record": "stage2_prep/crowding_r/REHEARSAL_CR_CHECK.json (round CR, non-registered)",
-          "sha256": "36ed46751833af5c55d899417fb23ecdc80b237a1faf1d845d375971213d332c",
-          "criteria_passed": "32 of 32",
-          "bound_in": "revision 21, for the crowding runs; carried here as the first supplement"
-        },
-        "x10_supplement": {
-          "record": "stage2_x10_runs_2026-11-26/REHEARSAL_X10R_CHECK.json (round X10R Part C, non-registered; on X2-1 stage2_prep/x10_r/REHEARSAL_X10R_CHECK.json)",
-          "sha256": "e7bdc7c71e70eaf50ffeef11c354451b4a8c5d6d0e822fefb42b3dbf8ac25ec7",
-          "criteria_passed": "35 of 35",
-          "note": "six 20-step toy rerun jobs in phase a6_sigma_squared_x10 with crowding total at 64 agents, on a byte copy of round X10V's toy sigma0^2 x10 table (1969ea00) and a byte copy of the pinned variant alias (aecef21a) under the real calibration file name, through the coordinator and host_a11 --local --model-service none, with the configuration test (10 valid trials, 16 chosen, a toy choice), the recheck (matched) and check_done_runs_x10.py (passed; the unchanged check_done_runs_crowding.py refused the root, as designed), on a toy layout mirroring this launch (the toy table and the alias copy in a toy family folder, the toy root at runs/sigma_squared_x10 beside it, all three relative paths equal to the real ones); the host's protected list equalled the prediction. The toy loaded the alias through the variant path: every record and trial names the toy copy, the host's snapshot maps the copy and the frozen parent at their pinned hashes, and the toy table binds the variant seal. The drains were not repeated: no dispatch, host, coordinator, worker-control, safety, snapshot, service or qualification module names the crowding flag, and the drain functions name no calibration",
-          "register_entry_made_by_the_executor": "the toy root's one machine register entry (ccfd154b) was made by the executor with approve, from the Part B evidence, under the operator string \"round X10R executor (toy rehearsal root entry, not an operator approval)\". The operator string names the executor: it is a toy-root entry and not an operator approval. It is the only approve round X10R made, it is confined to v3/_stage2_prep/rehearsal_x10r, and the registered root has no machine register",
-          "limitation": "both rows of the toy table are not_estimable (measured, from the row identifiers and the status field), so the toy exercised dispatch, snapshot, layout, the variant calibration load and completion, but only the not-estimable lookup. The estimated-row lookup under this kernel and calibration is covered by Part B's 40 full-length executions on the registered family (inferred: lookups are not recorded per job), as for crowding",
-          "snapshot_difference": "the toy snapshot shipped 3 files (the toy table, the alias copy and the frozen parent) where the registered one ships 6: the toy family folder has no receipt, compatibility or cell-results sibling, because a non-registered rerun job needs none. So the three siblings' place in a received snapshot is not rehearsed by the toy; the six-file closure was derived and loaded under a view in Part A"
-        },
-        "registered_path_cover": "no registered sigma0^2 x10 rerun job has run. The qualification and the toy both ran non-registered; the registered load with the receipt and require_a10 was measured in Part A, not in a worker. The registered launch's configuration trials at the join are the first run of the full registered worker path under a received snapshot (qualification_records.launch_identity_rerun_kind_sigma_squared_x10_supplement, not_covered)",
-        "precedent": "the crowding estimation (revision 17), validation (revision 19) and runs (revision 21) and the sigma0^2 x10 estimation (revision 23) and validation (revision 25) each reused their route's signed rehearsal record with a supplement; this is the sixth such reuse and the second for the run route",
-        "basis": "the operator approved with revision 27 the existing signed record plus the two supplements in place of a new signed record",
-        "completion_check": {
-          "script": "stage2_prep/scripts/check_done_runs_x10.py",
-          "sha256": "8d2332b89d69581d2a830a33528b42574f423ff7a8a08301e1118fdb07f0af5f",
-          "diff_sha256": "f3cc96b6722128291740dfda9e5dc7c4ed01a15aea353f3ce1f671ee32e3f0bc",
-          "usage": "check_done_runs_x10.py SPEC ROOT --expected-jobs 500",
-          "second_check": "the interpreter's second check (stage2_x10_runs_2026-11-26/INTERPRETER_VERIFICATION.md, sha256 4d4b69cee5c065323645e80be77a894066352802f6a5825793b0520108f496d0): passed, before any registered use",
-          "note": "a copy of check_done_runs_crowding.py (37512cc5, revision 21) with the phase constant set to a6_sigma_squared_x10, its one phase-naming message changed, and four docstring edits (8 lines removed, 8 added). It reads no calibration and no family name"
-        }
-      },
-      "satisfied_at_go": [
-        "operator approval of the sigma0^2 x10 rerun qualification supplement, load sheet version 10 and the rehearsal basis (revision 27)",
-        "the A15 ledger reservation: 2 h of the sigma0^2 x10 runs allowance",
-        "seed history addendum 10 for the round X10R qualification, rehearsal and configuration seeds, committed record-only with revision 27",
-        "the X2-1 checkout move to the revision 27 commit, the root's machine-register approval from evidence 60ed572d and the launch go"
-      ],
-      "remaining_at_join": [
-        "(c) the phase's configuration test and the rate segment, measured at the host's join before any registered job and copied into revision 28"
-      ]
+      "launch": null,
+      "reason": "No launch is bound. The revision 27 admission covered only the sigma0^2 x10 runs on root v3/runs/a10_stage2/runs/sigma_squared_x10, which completed at 2026-11-27T12:02:29Z, 07:02 EST on 2026-11-27 (prior_dispatch_admissions[9]). A further launch on this unit needs its own dispatch binding, load sheet and go in a later revision."
     },
     "prior_dispatch_admissions": [
       {
@@ -7432,16 +7508,241 @@
           "after_run_state": "X2-1 at 2026-11-26T10:55:17Z (rev26_reads.txt): no runner, coordinator, host, cap watcher, memory watch or board watchdog process; the checkout at HEAD 9968fb41 with no modified tracked file; the boot unchanged since the go",
           "pointer_repair": "revision 26 rewrote one pointer inside this admission, root_identity.placement_exercised, which named its own field dress_rehearsal by the live admission's path, to prior_dispatch_admissions[8].dress_rehearsal, where the admission now sits; no other text of the admission changed"
         }
+      },
+      {
+        "launch": "the sigma0^2 x10 runs (approvals item 34, X10-R; STAGE2_PLAN.public_v2.md line 292, after the sigma0^2 x10 family's publication, no-label receipt and identity record), pull route on X2-1 alone (A17 coordinator plus one host), normal mode, --model-service none",
+        "code_identity": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+        "commit": "52e11a03c9390cf222c0aac04ce6bb4e64952c09",
+        "checkout": {
+          "spec_commit": "52e11a03c9390cf222c0aac04ce6bb4e64952c09",
+          "note": "the frozen spec's pull_dispatch.code_commit is 52e11a03, round X10R's checkout: revision 26's commit a547650c plus the record-only sigma0^2 x10 family identity record. The revision 27 commit sits directly on 52e11a03 and changes two record files, the host register and seed history addendum 10; neither is in the code identity's scope. The identity is measured again on X2-1 after the move (move_co_rev27.sh)"
+        },
+        "spec": {
+          "path": "v3/runs/a10_stage2/sigma_squared_x10/runs_plan.json",
+          "file_sha256": "d5addb1ec79d2ce3a68abfdc11f59069fd783dcab39f0bdd1a76ac7ef5df093c",
+          "payload_sha256": "175d644c8dc3dd69bc4ebf309d223a47871bf23898baa5a2c1714dd912e8a633",
+          "schema": "v3-registered-1",
+          "jobs": 500,
+          "kind": "rerun",
+          "phase": "a6_sigma_squared_x10",
+          "steps": 500,
+          "cells": 5,
+          "seeds_per_cell": 100,
+          "by_grid": {
+            "R1": {
+              "cells": 5,
+              "jobs": 500,
+              "reproduction_rates": [
+                0.059,
+                0.06,
+                0.062,
+                0.064,
+                0.066
+              ],
+              "note": "the five cells differ in the reproduction rate only; the other cell fields are in RUN_SPEC_INVENTORY.json (cell_list)"
+            }
+          },
+          "kernel": {
+            "crowding": "total",
+            "alpha": 1.0,
+            "kappa": 8.0,
+            "theta": 0.5
+          },
+          "wall_seconds": 7200,
+          "x2_equivalent_hours": 2,
+          "configuration_seconds": 900,
+          "cleanup_reserve_seconds": 300,
+          "instrument": {
+            "g": "linear",
+            "k_star": 1.8,
+            "mapping": "A10"
+          },
+          "a10_family": "sigma_squared_x10",
+          "a10_stage": 2,
+          "a10_labels_policy": "no_a5_labels_a16",
+          "registration_pin": {
+            "commit": "3b8d8261c47b436a95fe831bd7192ede08460d1e",
+            "note_sha256": "a99f228c770f01092e6c84978a4f6a73397a746c83df36b3c13de756f2500554"
+          },
+          "seed_registry_sha256": "4ca71f1dbffddd5b47551143d8d66f989b7665bf436dc3be3a3b759606fc82d8",
+          "jobs_digest": "4b029a35666b5a132ab94fc373e0f197281a7ef8dffd0bdae57162e85e4ee451",
+          "builder_spec": {
+            "path": "v3/runs/a10_stage2/run_specs/sigma_squared_x10.json",
+            "file_sha256": "245704ad5dfeea5b8c587de4ca4bb5199070e133a973420e088392f233fa7cbd",
+            "payload_sha256": "642a3f31af36cccf0d1745f941fe3b2b9cba6eb2985200a7d4c9fb5a0c0d5533",
+            "relation": "built and sealed with the four stage 2 run manifests on 2026-11-13 (DECISIONS_2026-11-13 section 3); runs_plan.json began as its byte copy; the frozen spec minus pull_dispatch equals it (asserted); the builder file is unchanged. Its jobs equal correct_runs(build_sigma_jobs(...)) job for job and in the same order"
+          },
+          "pull_dispatch": {
+            "cost_classes": 1,
+            "stratum": "runs.a6_sigma_squared_x10.linear.1.8",
+            "class_worker_seconds": 52.34,
+            "class_memory_gb": 2.0,
+            "memory_basis": "registered-stratum",
+            "code_commit": "52e11a03c9390cf222c0aac04ce6bb4e64952c09",
+            "lease_seconds": 120,
+            "extra_inputs": [],
+            "projection_sha256": "5ca5225967cf08ad5636f98f12d57fa6ccd753a7ae126bff0edcc09f0af3d8a3",
+            "note": "the frozen class is a P2 ordering class and memory estimate, not a timing. freeze() reads no calibration; the variant alias enters at validate_spec and passed there"
+          },
+          "family": {
+            "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_tables_A10.json",
+            "file_sha256": "483f04f4fba2c3eb3dcadb8122f0c2da5ea6c488a136d4152a283f4143e60cbf",
+            "table_seal_sha256": "717ef0dae3f1a8b65494276b189edde57428d96e6d429d987c05ce10c320444a",
+            "a10_receipt": {
+              "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_tables_A10.a10_receipt.json",
+              "file_sha256": "60753832734682f590fd68586f0a7780c4680bc260274fda68ec4ea80a479f3a",
+              "seal": "9673c4371ef4907c0b91dd335a81674274d3731a8206255c63c8ede3a4771ad7",
+              "kind": "the authenticated no-label receipt (A16, labels policy no_a5_labels_a16), written 2026-11-27 UTC (DECISIONS_2026-11-26 section 5)"
+            },
+            "compatibility": {
+              "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_tables_A10.compatibility.json",
+              "file_sha256": "0c7a6a1928512a4b350994a7e5ed5de4fcbbf11316e82a31f57a6df951d11ff9"
+            },
+            "cell_results": {
+              "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_tables_A10.cell_results.json",
+              "file_sha256": "affd219e9998673c75a3c1e5d96d951f5a4bf97ac118021c1034c7630e9b2a81"
+            },
+            "identity_record": {
+              "path": "simulation/v3/runs/a10_stage2/sigma_squared_x10/family_identity.json",
+              "file_sha256": "52a967adf21d3c0e20d84f6c854fc8c05832bb55b7ff0183a0158e287095e48f",
+              "commit": "52e11a03",
+              "note": "listed here as A11 asks (\"the execution record lists it\"): committed record-only under A16 family-path clause item 5 (DECISIONS_2026-11-26 section 6, under DECISIONS_2026-11-20 section 3's rule for all four families). It is not a job input: it is outside the launch's six-file input closure, and a worker's input view refuses it (ROOT_PLACEMENT.json)"
+            },
+            "labels": null,
+            "calibration": {
+              "path": "v3/runs/a10_stage2/sigma_squared_x10/v3_rerun_calibration.json",
+              "file_sha256": "aecef21ab61e0c7078b7fcf40fee540f9891a0ac3e32e995699cbfbd8264dbce",
+              "payload_sha256": "256380ab7c65465766f0407c6f8468dd35dbfaced08c3db72388b1e0882abca9",
+              "parent": {
+                "path": "v3/runs/registered/v3_rerun_calibration.json",
+                "file_sha256": "fd86358a39e3b643fb9adc4e81a2372915ca50a1866e9b0e330a874b41746e01"
+              },
+              "note": "the family's own pinned variant alias, which every job's calibration_path names; the table binds its seal, so the table loads at the alias seal and refuses the nominal parent's. The validator reads the frozen parent from its fixed path, so the snapshot ships both. The alias is untracked on X2-1 by design; the parent is tracked"
+            }
+          }
+        },
+        "launch_root": "v3/runs/a10_stage2/runs/sigma_squared_x10",
+        "root_identity": {
+          "spec_hash": "175d644c8dc3dd69bc4ebf309d223a47871bf23898baa5a2c1714dd912e8a633",
+          "code_hash": "93a453b27c82a9cb16ed0d04b1029168014b73c1f3d97f5b884e1b6d52f161da",
+          "prepared_utc": "2026-11-27T03:30Z",
+          "identity_file_sha256": "b08a805c778d20108f6faeac7f0fee8793920828baf7d940040e372b26e43ef2",
+          "contents": "identity, manifest (bytes equal to the frozen spec), context_preflight (5 contexts passed; 89b6fb6d), pull_state (7a76ec78; not started), runner.lock; no outputs, no records, no machine register entry, no launch record; unchanged after Parts B and C and at the interpreter's read (2026-11-27T03:41Z)",
+          "placement": "outside every folder the launch's input snapshot protects: derived with snapshot_a11.dependencies and the parent rule of receive (line 227) before the root existed. The protected folders are v3/runs/a10_stage2/sigma_squared_x10 and v3/runs/registered, from six input files (the variant alias, the table and its three siblings, and the frozen parent calibration); the root and the 15 other paths the coordinator and host write under it (16 entries in all) lie under neither, by Path.is_relative_to and by the real artifacts.input_path under a view carrying the derived list. Control roots inside the family folder, and in the failed sqrt form sigma_squared_x10/runs_run, are refused by the same test. The spec's own folder is the protected family folder, as crowding's was; protection acts through input_path in workers only, and the coordinator reads the spec with no view. One difference from crowding: the family folder also holds the calibration alias, so two kinds of input sit beside the spec. The registered load (the alias through the variant validator, the table with its receipt, require_a10) passed inside a view carrying the derived list. Round X10R's toy root, laid out like this one, joined, and its host's protected list equalled the prediction and mirrored the registered derivation (ROOT_PLACEMENT.json, sha256 89a672738443c197e2605ea6483118429dfbb27c3ca22518a554c9b301379d6d)"
+        },
+        "seed_check": "all 500 seeds in the committed registry's runs sigma_squared_x10 entry (500; faa4273a) and set-equal to it, pairwise distinct; none in the 62 other record groups (775,606 seeds on record across all 63): the other registry groups, the seed history (ec40a9ec), addenda 1 to 9, the A13 and A14 global inventories and plan forbidden sets; none in a reserved range (A13, A14, A16, A5, the registry's three) (stage2_prep/x10_r/SEED_CHECK.json, sha256 30af696e41dac9406c82ee47b3b1118bb0f0f44e59e706f513f45e1c4b702c4d)",
+        "before_gates": {
+          "instrument": {
+            "g": "linear",
+            "k_star": 1.8,
+            "mapping": "A10"
+          },
+          "outcome": "passed: G1.1 to G1.5 and G3.1.scenarios; 7 after gates not_run, 5 not_applicable; no --fixtures or --validation",
+          "calibration": "run with the family alias and its file hash (aecef21a); gates.py verifies the calibration by file hash and did not ask for the parent",
+          "summary_sha256": "c4537d6772b7497d85f5d0cdb9b47dfe9c3d3de3e55cb9d43dc5a87021d0259d",
+          "report_sha256": "ab66c2ecae3e315aa22a12624dc91b7f8185a730e848378ec632e08673784838",
+          "output_dir": "v3/runs/a10_stage2/checks/before_sigma_squared_x10_runs"
+        },
+        "machine_register_approval": {
+          "evidence": "60ed572df72c5013f5b9fc814eefb8adf6cccd47ef952ae098fd35609140051e",
+          "evidence_seal": "f5ab3d9804a5bdc0fcaeb06f962de1df877223a36025896836e58b74c7b9a570",
+          "path": "v3/_stage2_prep/qual_rerun_x10/x2_evidence.json",
+          "candidate_memory_gb": 120.44244992,
+          "expected_entry": {
+            "qualification_sha256": "f5ab3d9804a5bdc0fcaeb06f962de1df877223a36025896836e58b74c7b9a570",
+            "kinds": [
+              "rerun"
+            ],
+            "memory_gb": 120.44244992,
+            "note": "approve_host writes the evidence document's seal, not its file hash, as qualification_sha256 (multihost_a11.py 193 to 198)",
+            "memory_gb_derivation": "the evidence's candidate memory_gb, the MemAvailable the candidate run met, as revision 21 took the crowding evidence's 121.997. Read here from the evidence notes' result.memory_gb, which round X10R's Part B script copies from the evidence's candidate.memory_gb (x10r_partB.sh; asserted by the builder). The evidence file itself stays on X2-1 and was not opened for revision 27"
+          },
+          "reason": "the sigma0^2 x10 rerun supplement is the qualification of the kind, kernel and calibration this launch runs, as the crowding runs' root was approved from the crowding rerun supplement (revision 21). Memory does not bind: at 120.442 GB the 0.8 budget is 96.4 GB against 62 GB at 31 workers",
+          "command": "python3.13 -B -m v3.multihost_a11 approve v3/runs/a10_stage2/runs/sigma_squared_x10 v3/_stage2_prep/qual_rerun_x10/x2_evidence.json --operator 'Matt Yotko' --when <the go's UTC time>",
+          "command_note": "the registered root has no machine register entry yet; if approve refuses 60ed572d the launch stops, with no fallback to another evidence"
+        },
+        "all_four_records_condition": "A17 section 2: bind (a) post-update fixed-code requalification, (b) bit identity at the launch identity for every kind the host will run, (c) join-time configuration and rates, (d) its own load sheet",
+        "records": {
+          "a_post_update_fixed_code": "accepted and operator-approved 2026-10-31 (qualification_records.post_update_fixed_code)",
+          "b_launch_identity_qualification": "kind rerun bound and approved in revision 14 (evidence 8d919541); its total crowding mode and variant calibration path for sigma0^2 x10 qualified by qualification_records.launch_identity_rerun_kind_sigma_squared_x10_supplement (evidence 60ed572d); approved by the operator with revision 27",
+          "c_join_time_configuration_and_rates": "at join: the launch records the phase's configuration test and its rate segment at the host's join (A17 section 2(c)); rate 1.0 against the X2-1 reference by same-host identity",
+          "d_load_sheet": "version 10 bound in operating_rules.approved_load_sheet (sha256 3dd62196dde3944b03cbf91eda5163ada7d0b63a12f1c74821432d74cd6cd3a6); approved by the operator with revision 27"
+        },
+        "dress_rehearsal": {
+          "passed": true,
+          "record": "v3/runs/a10_stage2/checks/A11_rehearsal_approved_runs.json, the run pull-route rehearsal at 93a453b2 (six toy sqrt rerun jobs, configuration test, recheck, completion check), signed in the operator's name at the sqrt runs go of 2026-11-13",
+          "record_sha256": "adeabeac77a0d0e6cd659821e90d12bc65264d453fefce88188eae8a1b1f09be",
+          "crowding_supplement": {
+            "record": "stage2_prep/crowding_r/REHEARSAL_CR_CHECK.json (round CR, non-registered)",
+            "sha256": "36ed46751833af5c55d899417fb23ecdc80b237a1faf1d845d375971213d332c",
+            "criteria_passed": "32 of 32",
+            "bound_in": "revision 21, for the crowding runs; carried here as the first supplement"
+          },
+          "x10_supplement": {
+            "record": "stage2_x10_runs_2026-11-26/REHEARSAL_X10R_CHECK.json (round X10R Part C, non-registered; on X2-1 stage2_prep/x10_r/REHEARSAL_X10R_CHECK.json)",
+            "sha256": "e7bdc7c71e70eaf50ffeef11c354451b4a8c5d6d0e822fefb42b3dbf8ac25ec7",
+            "criteria_passed": "35 of 35",
+            "note": "six 20-step toy rerun jobs in phase a6_sigma_squared_x10 with crowding total at 64 agents, on a byte copy of round X10V's toy sigma0^2 x10 table (1969ea00) and a byte copy of the pinned variant alias (aecef21a) under the real calibration file name, through the coordinator and host_a11 --local --model-service none, with the configuration test (10 valid trials, 16 chosen, a toy choice), the recheck (matched) and check_done_runs_x10.py (passed; the unchanged check_done_runs_crowding.py refused the root, as designed), on a toy layout mirroring this launch (the toy table and the alias copy in a toy family folder, the toy root at runs/sigma_squared_x10 beside it, all three relative paths equal to the real ones); the host's protected list equalled the prediction. The toy loaded the alias through the variant path: every record and trial names the toy copy, the host's snapshot maps the copy and the frozen parent at their pinned hashes, and the toy table binds the variant seal. The drains were not repeated: no dispatch, host, coordinator, worker-control, safety, snapshot, service or qualification module names the crowding flag, and the drain functions name no calibration",
+            "register_entry_made_by_the_executor": "the toy root's one machine register entry (ccfd154b) was made by the executor with approve, from the Part B evidence, under the operator string \"round X10R executor (toy rehearsal root entry, not an operator approval)\". The operator string names the executor: it is a toy-root entry and not an operator approval. It is the only approve round X10R made, it is confined to v3/_stage2_prep/rehearsal_x10r, and the registered root has no machine register",
+            "limitation": "both rows of the toy table are not_estimable (measured, from the row identifiers and the status field), so the toy exercised dispatch, snapshot, layout, the variant calibration load and completion, but only the not-estimable lookup. The estimated-row lookup under this kernel and calibration is covered by Part B's 40 full-length executions on the registered family (inferred: lookups are not recorded per job), as for crowding",
+            "snapshot_difference": "the toy snapshot shipped 3 files (the toy table, the alias copy and the frozen parent) where the registered one ships 6: the toy family folder has no receipt, compatibility or cell-results sibling, because a non-registered rerun job needs none. So the three siblings' place in a received snapshot is not rehearsed by the toy; the six-file closure was derived and loaded under a view in Part A"
+          },
+          "registered_path_cover": "no registered sigma0^2 x10 rerun job has run. The qualification and the toy both ran non-registered; the registered load with the receipt and require_a10 was measured in Part A, not in a worker. The registered launch's configuration trials at the join are the first run of the full registered worker path under a received snapshot (qualification_records.launch_identity_rerun_kind_sigma_squared_x10_supplement, not_covered)",
+          "precedent": "the crowding estimation (revision 17), validation (revision 19) and runs (revision 21) and the sigma0^2 x10 estimation (revision 23) and validation (revision 25) each reused their route's signed rehearsal record with a supplement; this is the sixth such reuse and the second for the run route",
+          "basis": "the operator approved with revision 27 the existing signed record plus the two supplements in place of a new signed record",
+          "completion_check": {
+            "script": "stage2_prep/scripts/check_done_runs_x10.py",
+            "sha256": "8d2332b89d69581d2a830a33528b42574f423ff7a8a08301e1118fdb07f0af5f",
+            "diff_sha256": "f3cc96b6722128291740dfda9e5dc7c4ed01a15aea353f3ce1f671ee32e3f0bc",
+            "usage": "check_done_runs_x10.py SPEC ROOT --expected-jobs 500",
+            "second_check": "the interpreter's second check (stage2_x10_runs_2026-11-26/INTERPRETER_VERIFICATION.md, sha256 4d4b69cee5c065323645e80be77a894066352802f6a5825793b0520108f496d0): passed, before any registered use",
+            "note": "a copy of check_done_runs_crowding.py (37512cc5, revision 21) with the phase constant set to a6_sigma_squared_x10, its one phase-naming message changed, and four docstring edits (8 lines removed, 8 added). It reads no calibration and no family name"
+          }
+        },
+        "satisfied_at_go": [
+          "operator approval of the sigma0^2 x10 rerun qualification supplement, load sheet version 10 and the rehearsal basis (revision 27)",
+          "the A15 ledger reservation: 2 h of the sigma0^2 x10 runs allowance",
+          "seed history addendum 10 for the round X10R qualification, rehearsal and configuration seeds, committed record-only with revision 27",
+          "the X2-1 checkout move to the revision 27 commit, the root's machine-register approval from evidence 60ed572d and the launch go"
+        ],
+        "remaining_at_join": [
+          "(c) the phase's configuration test and the rate segment, measured at the host's join before any registered job and copied into revision 28"
+        ],
+        "outcome": {
+          "complete": true,
+          "completed_jobs": 500,
+          "completed_by_phase": {
+            "a6_sigma_squared_x10": 500
+          },
+          "deadline_drain": null,
+          "reason": null,
+          "launched_utc": "2026-11-27T11:41:00.71Z",
+          "finished_utc": "2026-11-27T12:02:29.33Z",
+          "finished_epoch": 1795780949.3399577,
+          "workers": "24 workers at 1 thread, the configuration test's choice under the 5 percent preference for the smaller configuration; no live control was used (rates.approved_rate_segments[9], the sigma0^2 x10 runs segment)",
+          "machine_register_entry": "approved at the go, 2026-11-27T11:40:49Z, from evidence 60ed572d, as bound: machine_register/00000000.json, file 27c5cd9aa7da88bfaedaa148950d82473e52e645541f51c12e6b22ed35e85078, seal 0ef90492f05197331d75543e4108dec5ba9968c6b38ebbecc53fdb386542c899, kinds rerun, qualification_sha256 f5ab3d9804a5bdc0fcaeb06f962de1df877223a36025896836e58b74c7b9a570, memory_gb 120.44244992, model service none; the root's only entry",
+          "charged_x2_equivalent_hours": 0.43,
+          "session_charge_x2_equivalent_hours": 0.3575,
+          "charge_basis": "the ledger's basis: machine wall time from the launch executor's dispatch (11:39:57Z, dispatch_utc.txt) to the end of the interpreter's evidence copy (12:04:06Z), 1,449 s, plus about 68 s of the launch package checks' X2-1 sessions, about 9 s for the checkout move session and about 1 s for the pre-dispatch read, 1,527 s in all, rounded up to the next 0.01 h. The evidence copy's end and the three small terms are the ledger's figures, not re-measured here. The launch wall alone is 0.358 h; the labels method (the launch wall plus 13.7 s of gates, xrun_prelaunch.log's first stamp to the launch epoch, and 4 s of completion check, 2026-11-27T12:03:24Z by the interpreter's record in DECISIONS_2026-11-27 section 1 to the log's X2-1 write at 2026-11-27T12:03:28Z) gives 0.37 h, rounded up. The later read-only read (rev28_reads.txt, 2026-11-27T12:11:37Z) is not in the charge",
+          "ledger": "a10_stage2_operations_ledger.md, reconciliation: sigma0^2 x10 runs, 2026-11-27. The sigma0^2 x10 runs component has used 0.52 of 2: round X10R 0.09, this run 0.43; stage 2 at 460.19 of 1,880, nothing outstanding",
+          "completion_check": "check_done_runs_x10.py (sha256 8d2332b89d69581d2a830a33528b42574f423ff7a8a08301e1118fdb07f0af5f, bound in revision 27) passed with no problems: 500 outputs hashed, verified_output_hashes.json cd7a88eb92a8f46600b6fe7dd8066853d5a936f26890f982555fa7872082143e, outputs digest b2b8599a5dcb0054f68b8c2c7927df6f04bdace592225fcec11ab1ec3e8b66bf; the phase recheck matched (X2-1 against X2-1), with one matching incidental cross-check record for the same job; one launch, one session, no drain overrun; host exit with no error and nothing in flight",
+          "service": "model_service none, actions skipped (host_x2/service.json). llm-server inactive and disabled at the go (state_at_go.txt), after the run (state_after_run.txt) and at the later read (rev28_reads.txt), and inactive in all 44 poller samples (poll.log). guppi-thermal-feed active at each, untouched, the same process (PID 1634426, started 2026-10-30) on the same boot, so it was not restarted during the run.",
+          "input_protection": "the launch's one ready input snapshot view (host_x2/snapshots/9b4a0470.../verified.json) protects exactly v3/runs/a10_stage2/sigma_squared_x10 and v3/runs/registered, the list revision 27 derived (root_identity.placement); the root lies under neither. Its input manifest lists exactly the six files revision 27 bound (the table and its three siblings, the variant calibration alias and the frozen parent calibration), each at its bound hash. This confirms the placement on the real launch",
+          "registered_worker_path": "measured: the join's ten configuration trials were all valid, and all 500 registered jobs and the recheck completed; the root holds one snapshot view (9b4a0470), and the configuration and phase input manifests are the same bytes. Revision 27 recorded the registered worker path under a received snapshot as not yet run for sigma0^2 x10 (qualification_records.launch_identity_rerun_kind_sigma_squared_x10_supplement, not_covered.remaining); this launch is its first run, and it completed (inferred that every trial and job ran under that view: no completion record was opened for it)",
+          "remaining_at_join_satisfied_by": "rates.approved_rate_segments[9], the sigma0^2 x10 runs segment (revision 28)",
+          "after_run_listing": "protocol_events holds one record (sequence 0, coordinator_start) and incidental_cross_checks one, for the phase recheck. host_x2/unpublished holds 1,002 host scratch files, a .json and a .oom.json for each of 501 lease tokens (500 jobs and the recheck), counted by name and not opened. The root has no top-level host_exit.json; the host's exit record is host_x2/host_exit.json (rev28_reads.txt)",
+          "after_run_state": "X2-1 at 2026-11-27T12:11:37Z (rev28_reads.txt): no runner, coordinator, host, watchdog or poller process; the checkout at HEAD 98c3ccd9 with no modified tracked file; the boot unchanged since the go; the 34 copies used for revision 28 equal to their X2-1 originals"
+        }
       }
     ]
   },
   "seal": {
     "algorithm": "sha256",
     "serialization": "UTF-8 JSON, sorted keys, separators comma and colon without whitespace, ensure_ascii=true, no NaN, no trailing newline; hash the payload object only",
-    "payload_sha256": "97dde283eaecddd394c2362711fc2c3a6e9b89069a0a5efd314f885411aa3e1f"
+    "payload_sha256": "505af394a2c226eeddabffad95d7fcfebb058f09a97871cdc0bcda3e0feaf9b7"
   },
   "operator_approval": {
-    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-27.md section 1: the operator's approval of 2026-11-27 (\"approve 839f7b9a, reserve 2, go\") of this register revision 27 (approved as draft payload 839f7b9a9029d2694ec18cdd52a787d008c45a5570fc81122e28ba12462632fc), payload digest 97dde283eaecddd394c2362711fc2c3a6e9b89069a0a5efd314f885411aa3e1f: the sigma0^2 x10 rerun qualification supplement (evidence 60ed572df72c5013f5b9fc814eefb8adf6cccd47ef952ae098fd35609140051e), load sheet version 10 (3dd62196dde3944b03cbf91eda5163ada7d0b63a12f1c74821432d74cd6cd3a6), the rehearsal basis and dispatch admission for the bound sigma0^2 x10 runs launch. Prior approvals in force: revisions 8 to 26 and the 2026-10-31 fixed-code requalification.",
-    "reason": "Register approval, the ledger reservation, the checkout move, the launch go and the root's machine-register approval remain distinct records."
+    "reference": "Lineage v3 records, a19_2026-11-04/DECISIONS_2026-11-27.md section 2: the operator's approval of 2026-11-27 (\"approve 4f4db5d8\") of this register revision 28 (approved as draft payload 4f4db5d897c705eb743cbb6ca11f058692511b8bd5a3bae54d26aea6cb69ca7b), payload digest 505af394a2c226eeddabffad95d7fcfebb058f09a97871cdc0bcda3e0feaf9b7: the sigma0^2 x10 runs' join-time configuration and rate segment (A17 section 2(c)), the launch outcome and the closed admission. Prior approvals in force: revisions 8 to 27 and the 2026-10-31 fixed-code requalification.",
+    "reason": "A record revision: it closes the completed launch's admission and admits nothing; no launch or resource change."
   }
 }
